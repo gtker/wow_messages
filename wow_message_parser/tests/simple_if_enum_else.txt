@@ -1,0 +1,250 @@
+use std::convert::{TryFrom, TryInto};
+use crate::world::v1::v12::{SimpleEnum, SimpleEnumError};
+use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+
+#[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:109`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm):
+/// ```text
+/// struct SimpleIfEnumElse {
+///     SimpleEnum enum;
+///     if (enum == ZERO) {
+///         u8 basic;
+///     } else {
+///         u16 other;
+///     }
+/// }
+/// ```
+pub struct SimpleIfEnumElse {
+    pub enum: SimpleIfEnumElseSimpleEnum,
+}
+
+impl ReadableAndWritable for SimpleIfEnumElse {
+    type Error = SimpleIfEnumElseError;
+
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // enum: SimpleEnum
+        let enum = SimpleEnum::read(r)?;
+
+        let enum_if = match enum {
+            SimpleEnum::ZERO => {
+                // basic: u8
+                let basic = crate::util::read_u8_le(r)?;
+
+                SimpleIfEnumElseSimpleEnum::ZERO {
+                    basic,
+                }
+            }
+            SimpleEnum::ONE => {
+                // other: u16
+                let other = crate::util::read_u16_le(r)?;
+
+                SimpleIfEnumElseSimpleEnum::ONE {
+                    other,
+                }
+            }
+            SimpleEnum::TWO => {
+                // other: u16
+                let other = crate::util::read_u16_le(r)?;
+
+                SimpleIfEnumElseSimpleEnum::TWO {
+                    other,
+                }
+            }
+        };
+
+        Ok(Self {
+            enum: enum_if,
+        })
+    }
+
+    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // enum: SimpleEnum
+        self.enum.write(w)?;
+
+        match &self.enum {
+            SimpleIfEnumElseSimpleEnum::ZERO {
+                basic,
+            } => {
+                // basic: u8
+                w.write_all(&basic.to_le_bytes())?;
+
+            }
+            SimpleIfEnumElseSimpleEnum::ONE {
+                other,
+            } => {
+                // other: u16
+                w.write_all(&other.to_le_bytes())?;
+
+            }
+            SimpleIfEnumElseSimpleEnum::TWO {
+                other,
+            } => {
+                // other: u16
+                w.write_all(&other.to_le_bytes())?;
+
+            }
+        }
+
+        Ok(())
+    }
+
+}
+
+impl VariableSized for SimpleIfEnumElse {
+    fn size(&self) -> usize {
+        self.enum.size() // enum: SimpleEnum and subfields
+    }
+}
+
+impl MaximumPossibleSized for SimpleIfEnumElse {
+    fn maximum_possible_size() -> usize {
+        SimpleEnum::maximum_possible_size() // enum: SimpleEnum
+    }
+}
+
+#[derive(Debug)]
+pub enum SimpleIfEnumElseError {
+    Io(std::io::Error),
+    SimpleEnum(SimpleEnumError),
+}
+
+impl std::error::Error for SimpleIfEnumElseError {}
+impl std::fmt::Display for SimpleIfEnumElseError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Io(i) => i.fmt(f),
+            Self::SimpleEnum(i) => i.fmt(f),
+        }
+    }
+}
+
+impl From<std::io::Error> for SimpleIfEnumElseError {
+    fn from(e : std::io::Error) -> Self {
+        Self::Io(e)
+    }
+}
+
+impl From<SimpleEnumError> for SimpleIfEnumElseError {
+    fn from(e: SimpleEnumError) -> Self {
+        Self::SimpleEnum(e)
+    }
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum SimpleIfEnumElseSimpleEnum {
+    ZERO {
+        basic: u8,
+    },
+    ONE {
+        other: u16,
+    },
+    TWO {
+        other: u16,
+    },
+}
+
+impl From<&SimpleEnum> for SimpleIfEnumElseSimpleEnum {
+    fn from(e: &SimpleEnum) -> Self {
+        match &e {
+            SimpleEnum::ZERO => Self::ZERO {
+                basic: Default::default(),
+            },
+            SimpleEnum::ONE => Self::ONE {
+                other: Default::default(),
+            },
+            SimpleEnum::TWO => Self::TWO {
+                other: Default::default(),
+            },
+        }
+    }
+}
+
+impl From<&SimpleIfEnumElseSimpleEnum> for SimpleEnum {
+    fn from(v: &SimpleIfEnumElseSimpleEnum) -> Self {
+        match &v {
+            SimpleIfEnumElseSimpleEnum::ZERO { .. } => Self::ZERO,
+            SimpleIfEnumElseSimpleEnum::ONE { .. } => Self::ONE,
+            SimpleIfEnumElseSimpleEnum::TWO { .. } => Self::TWO,
+        }
+    }
+}
+
+impl Default for SimpleIfEnumElseSimpleEnum {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::ZERO {
+            basic: Default::default(),
+        }
+    }
+}
+
+impl SimpleIfEnumElseSimpleEnum {
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.write(w)?;
+        Ok(())
+    }
+
+    pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.write_u16_le(w)
+    }
+
+    pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.write_u16_be(w)
+    }
+
+    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.write_u32_le(w)
+    }
+
+    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.write_u32_be(w)
+    }
+
+    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.write_u64_le(w)
+    }
+
+    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.write_u64_be(w)
+    }
+
+}
+
+impl VariableSized for SimpleIfEnumElseSimpleEnum {
+    fn size(&self) -> usize {
+        match self {
+            Self::ZERO  {
+                basic,
+            } => {
+                1
+                + 1 // basic: u8
+            }
+            Self::ONE  {
+                other,
+            } => {
+                1
+                + 2 // other: u16
+            }
+            Self::TWO  {
+                other,
+            } => {
+                1
+                + 2 // other: u16
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for SimpleIfEnumElseSimpleEnum {
+    fn maximum_possible_size() -> usize {
+        65536 // maximum possible u16 size. TODO value.
+    }
+}
+

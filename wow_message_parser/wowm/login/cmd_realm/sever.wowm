@@ -1,0 +1,101 @@
+
+enum RealmType : u32 {
+    PLAYER_VS_ENVIRONMENT = 0;
+    PLAYER_VS_PLAYER = 1;
+    ROLEPLAYING = 6;
+    ROLEPLAYING_PLAYER_VS_PLAYER = 8;
+} {
+    login_logon_versions = "2 3";
+}
+
+flag RealmFlag : u8 {
+    NONE = 0x00;
+    INVALID = 0x01;
+    OFFLINE = 0x02;
+    FORCE_BLUE_RECOMMENDED = 0x20;
+    FORCE_GREEN_RECOMMENDED = 0x40;
+    FORCE_RED_FULL = 0x80;
+} {
+    login_logon_versions = "2 3";
+}
+
+flag RealmFlag : u8 {
+    NONE = 0x00;
+    INVALID = 0x01;
+    OFFLINE = 0x02;
+    SPECIFY_BUILD = 0x04;
+    FORCE_BLUE_RECOMMENDED = 0x20;
+    FORCE_GREEN_RECOMMENDED = 0x40;
+    FORCE_RED_FULL = 0x80;
+} {
+    login_logon_versions = "8";
+}
+
+enum Population : u32 {
+    GREEN_RECOMMENDED = 0x43480000;
+    RED_FULL = 0x43c80000;
+    BLUE_RECOMMENDED = 0x44160000;
+    OTHER = self.value;
+} {
+    login_logon_versions = "2 3 8";
+}
+
+enum RealmCategory : u8 {
+    DEFAULT = 0x0;
+    ONE = 0x1;
+    TWO = 0x2;
+    THREE = 0x3;
+    FIVE = 0x5;
+} {
+    login_logon_versions = "2 3 8";
+}
+
+struct Realm {
+    RealmType realm_type;
+    RealmFlag flag;
+    CString name;
+    CString address;
+    Population population;
+    u8 number_of_characters_on_realm;
+    RealmCategory category;
+    u8 realm_id;
+} {
+    login_logon_versions = "2 3";
+}
+
+slogin CMD_REALM_LIST_Server = 0x10 {
+    u16 size = self.size;
+    u32 header_padding = 0;
+    u8 number_of_realms;
+    Realm[number_of_realms] realms;
+    u16 footer_padding = 0;
+} {
+    login_logon_versions = "2 3";
+}
+
+struct Realm {
+    u8 realm_type;
+    u8 locked;
+    RealmFlag flag;
+    CString name;
+    CString address;
+    Population population;
+    u8 number_of_characters_on_realm;
+    RealmCategory category;
+    u8 realm_id;
+    if (flag & SPECIFY_BUILD) {
+        Version version;
+    }
+} {
+    login_logon_versions = "8";
+}
+
+slogin CMD_REALM_LIST_Server = 0x10 {
+    u16 size = self.size;
+    u32 header_padding = 0;
+    u16 number_of_realms;
+    Realm[number_of_realms] realms;
+    u16 footer_padding = 0;
+} {
+    login_logon_versions = "8";
+}

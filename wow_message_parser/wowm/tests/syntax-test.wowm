@@ -1,0 +1,123 @@
+#tag_all test "true";
+
+
+enum Boolean : u8 {
+    NO = 0;
+    YES = 1;
+} {
+    versions = "1.12 1";
+}
+
+flag FlagTest : u8 {
+    NO = 0;
+    YES = 1;
+}
+
+struct IfTestE {
+    u8 test;
+    Boolean a;
+    if (a == YES) {
+        u8 basic;
+    }
+    u16 test2;
+} {
+    versions = "1.12 1";
+}
+
+
+struct SingleIfBooleanTest {
+    u8 test;
+    Boolean a = YES;
+    if (a == YES) {
+        u8 basic;
+    }
+} {
+    versions = "1.12 1";
+}
+
+struct NestedIfBooleanTest {
+    Boolean a;
+    if (a == YES) {
+        Boolean b;
+        if (b == YES) {
+            u8 basic;
+        }
+    }
+} {
+    versions = "1.12";
+}
+
+struct SingleIfFlagTest {
+    FlagTest a;
+    if (a & YES) {
+        u8 basic;
+    }
+} {
+    versions = "1.12";
+}
+
+struct NestedIfFlagTest {
+    FlagTest a;
+    if (a & YES) {
+        FlagTest b;
+        if (b & YES) {
+            u8 basic;
+        }
+    }
+} {
+    versions = "1.12";
+}
+
+struct BooleanDoubleIf {
+    Boolean a;
+    if (a == YES || a == NO) {
+        u8 basic;
+    }
+}
+
+struct NestedBooleanDoubleIf {
+    Boolean a;
+    if (a == YES || a == NO) {
+        Boolean c;
+        if (c == YES || c == NO) {
+            u8 basic;
+        }
+    }
+}
+
+struct IfElse {
+    Boolean a;
+    if (a == YES) {
+        u8 basic1;
+    } else {
+        u8 basic2;
+    }
+}
+
+struct NestedIfElse {
+    Boolean a;
+    if (a == YES) {
+        u8 basic1;
+    } else {
+        Boolean b;
+        if (b == YES) {
+            u8 basic2;
+        } else {
+            u8 basic3;
+        }
+    }
+}
+
+struct NestedIfElse2 {
+    Boolean a;
+    if (a == YES) {
+        Boolean b;
+        if (b == YES) {
+            u8 basic1;
+        } else {
+            u8 basic2;
+        }
+    } else {
+        u8 basic3;
+    }
+}

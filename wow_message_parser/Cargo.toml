@@ -1,0 +1,10 @@
+[package]
+name = "wow_message_parser"
+version = "0.0.0"
+edition = "2018"
+
+[dependencies]
+pest = "2.0"
+pest_derive = "2.0"
+walkdir = "2.3.2"
+heck = "0.3.3"

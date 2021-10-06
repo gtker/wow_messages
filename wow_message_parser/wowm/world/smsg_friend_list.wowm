@@ -1,0 +1,17 @@
+#tag_all versions "1.12";
+
+struct Friend {
+    u64 guid;
+    FriendStatus status;
+    if (status != OFFLINE) {
+        Area area;
+        u32 level;
+        (u32)Class class;
+    }
+}
+
+smsg SMSG_FRIEND_LIST = 0x0067 {
+    u8 amount_of_friends;
+    Friend[amount_of_friends] friends;
+}
+

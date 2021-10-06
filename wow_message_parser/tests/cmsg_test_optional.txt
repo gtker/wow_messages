@@ -1,0 +1,156 @@
+use std::convert::{TryFrom, TryInto};
+use crate::world::helper::{WorldClientMessageWrite, WorldMessageBody};
+use wow_srp::header_crypto::Encrypter;
+use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+
+#[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:288`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm):
+/// ```text
+/// cmsg CMSG_TEST_OPTIONAL = 0x1137 {
+///     CString c_string;
+///     u8 b_u8;
+///     OPTIONAL-STATEMENT-DOCC: unimplemented
+/// }
+/// ```
+pub struct CMSG_TEST_OPTIONAL {
+    pub c_string: String,
+    pub b_u8: u8,
+    pub server: Option<CMSG_TEST_OPTIONAL_server>,
+}
+
+impl WorldClientMessageWrite for CMSG_TEST_OPTIONAL {
+    const OPCODE: u32 = 0x1137;
+
+    fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // size: u16_be, and opcode: u32
+        crate::util::write_u16_be(w, (self.size() + 4) as u16)?;
+        crate::util::write_u32_le(w, <Self as WorldClientMessageWrite>::OPCODE)?;
+
+        self.write_body(w)?;
+        Ok(())
+    }
+
+    fn write_encrypted_client<W: std::io::Write, E: Encrypter>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error> {
+        // size: u16_be, and opcode: u32
+        e.write_encrypted_client_header(w, (self.size() + 4) as u16, <Self as WorldClientMessageWrite>::OPCODE)?;
+
+        self.write_body(w)?;
+        Ok(())
+    }
+}
+impl WorldMessageBody for CMSG_TEST_OPTIONAL {
+    type Error = CMSG_TEST_OPTIONALError;
+
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // c_string: CString
+        let c_string = crate::util::read_c_string_to_vec(r)?;
+        let c_string = String::from_utf8(c_string)?;
+
+        // b_u8: u8
+        let b_u8 = crate::util::read_u8_le(r)?;
+
+        // optional server
+        let current_size = {
+            0 // If no fields are present, TODO remove when not needed
+            + c_string.len() + 1 // c_string: CString and Null Terminator
+            + 1 // b_u8: u8
+        };
+        let server = if current_size < body_size as usize {
+            // optional_u8: u8
+            let optional_u8 = crate::util::read_u8_le(r)?;
+
+            Some(CMSG_TEST_OPTIONAL_server {
+                optional_u8,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            c_string,
+            b_u8,
+            server,
+        })
+    }
+
+    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // c_string: CString
+        w.write_all(self.c_string.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // b_u8: u8
+        w.write_all(&self.b_u8.to_le_bytes())?;
+
+        // optional server
+        if let Some(v) = &self.server {
+            // optional_u8: u8
+            w.write_all(&v.optional_u8.to_le_bytes())?;
+
+        }
+
+        Ok(())
+    }
+}
+
+impl VariableSized for CMSG_TEST_OPTIONAL {
+    fn size(&self) -> usize {
+        self.c_string.len() + 1 // c_string: CString and Null Terminator
+        + 1 // b_u8: u8
+        + {
+            if let Some(v) = &self.server {
+                v.size()
+            } else {
+                0
+            }
+        } // optional server
+    }
+}
+
+impl MaximumPossibleSized for CMSG_TEST_OPTIONAL {
+    fn maximum_possible_size() -> usize {
+        256 // c_string: CString
+        + 1 // b_u8: u8
+        + 65536 // optional server
+    }
+}
+
+#[derive(Debug)]
+pub enum CMSG_TEST_OPTIONALError {
+    Io(std::io::Error),
+    String(std::string::FromUtf8Error),
+}
+
+impl std::error::Error for CMSG_TEST_OPTIONALError {}
+impl std::fmt::Display for CMSG_TEST_OPTIONALError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Io(i) => i.fmt(f),
+            Self::String(i) => i.fmt(f),
+        }
+    }
+}
+
+impl From<std::io::Error> for CMSG_TEST_OPTIONALError {
+    fn from(e : std::io::Error) -> Self {
+        Self::Io(e)
+    }
+}
+
+impl From<std::string::FromUtf8Error> for CMSG_TEST_OPTIONALError {
+    fn from(e: std::string::FromUtf8Error) -> Self {
+        Self::String(e)
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Default)]
+pub struct CMSG_TEST_OPTIONAL_server {
+    pub optional_u8: u8,
+}
+
+impl CMSG_TEST_OPTIONAL_server {
+    pub fn size(&self) -> usize {
+        1 // optional_u8: u8
+    }
+}
+

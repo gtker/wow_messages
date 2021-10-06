@@ -1,0 +1,150 @@
+use std::convert::{TryFrom, TryInto};
+use crate::world::v1::v12::{SimpleFlag};
+use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+
+#[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:101`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm):
+/// ```text
+/// struct SimpleIfFlag {
+///     SimpleFlag flag;
+///     if (flag & ZERO) {
+///         u8 basic;
+///     }
+/// }
+/// ```
+pub struct SimpleIfFlag {
+    pub flag: SimpleIfFlagSimpleFlag,
+}
+
+impl ReadableAndWritable for SimpleIfFlag {
+    type Error = std::io::Error;
+
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // flag: SimpleFlag
+        let flag = SimpleFlag::read(r)?;
+
+        let flag_ZERO = if flag.is_ZERO() {
+            // basic: u8
+            let basic = crate::util::read_u8_le(r)?;
+
+            Some(SimpleIfFlagSimpleFlagZERO {
+                basic,
+            })
+        } else {
+            None
+        };
+
+        let flag = SimpleIfFlagSimpleFlag {
+            inner: flag.as_u8(),
+            zero: flag_ZERO,
+        };
+
+        Ok(Self {
+            flag,
+        })
+    }
+
+    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // flag: SimpleFlag
+        self.flag.write(w)?;
+
+        if let Some(s) = &self.flag.zero {
+            s.write(w)?;
+        }
+
+        Ok(())
+    }
+
+}
+
+impl VariableSized for SimpleIfFlag {
+    fn size(&self) -> usize {
+        self.flag.size() // flag: SimpleFlag and subfields
+    }
+}
+
+impl MaximumPossibleSized for SimpleIfFlag {
+    fn maximum_possible_size() -> usize {
+        SimpleFlag::maximum_possible_size() // flag: SimpleFlag
+    }
+}
+
+#[derive(Default, Debug, PartialEq, Clone)]
+pub struct SimpleIfFlagSimpleFlag {
+    inner: u8,
+    zero: Option<SimpleIfFlagSimpleFlagZERO>,
+}
+
+impl From<&SimpleIfFlagSimpleFlag> for SimpleFlag {
+    fn from(e: &SimpleIfFlagSimpleFlag) -> Self {
+        Self::new(e.inner)
+    }
+}
+
+impl SimpleIfFlagSimpleFlag {
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleFlag = self.into();
+        a.write(w)?;
+        Ok(())
+    }
+
+    pub const fn new_ONE() -> Self {
+        Self {
+            inner: SimpleFlag::ONE,
+            zero: None,
+        }
+    }
+
+    pub const fn new_TWO() -> Self {
+        Self {
+            inner: SimpleFlag::TWO,
+            zero: None,
+        }
+    }
+
+}
+impl VariableSized for SimpleIfFlagSimpleFlag {
+    fn size(&self) -> usize {
+        1 // inner: SimpleFlag (u8)
+        + {
+            if let Some(s) = &self.zero {
+                s.size()
+            } else {
+                0
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for SimpleIfFlagSimpleFlag {
+    fn maximum_possible_size() -> usize {
+        1 // inner: SimpleFlag (u8)
+        + SimpleIfFlagSimpleFlagZERO::maximum_possible_size() // ZERO enumerator
+    }
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub struct SimpleIfFlagSimpleFlagZERO {
+    pub basic: u8,
+}
+
+impl VariableSized for SimpleIfFlagSimpleFlagZERO {
+    fn size(&self) -> usize {
+        1 // basic: u8
+    }
+}
+
+impl MaximumPossibleSized for SimpleIfFlagSimpleFlagZERO {
+    fn maximum_possible_size() -> usize {
+        1 // basic: u8
+    }
+}
+
+impl SimpleIfFlagSimpleFlagZERO {
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.basic.to_le_bytes())?;
+
+        Ok(())
+    }
+}
+

@@ -1,0 +1,135 @@
+#tag_all versions "1.12";
+enum Map : u32 {
+    EASTERN_KINGDOMS = 0 {
+        display = "Eastern Kingdoms";
+    }
+    KALIMDOR = 1 {
+        display = "Kalimdor";
+    }
+    TESTING = 13 {
+        display = "Testing";
+    }
+    SCOTT_TEST = 25 {
+        display = "Scott Test";
+    }
+    CASH_TEST = 29 {
+        display = "CashTest";
+    }
+    ALTERAC_VALLEY = 30 {
+        display = "Alterac Valley";
+    }
+    SHADOWFANG_KEEP = 33 {
+        display = "Shadowfang Keep";
+    }
+    STORMWIND_STOCKADE = 34 {
+        display = "Stormwind Stockade";
+    }
+    STORMWIND_PRISON = 35 {
+        display = "Stormwind Prison";
+    }
+    DEADMINES = 36 {
+        display = "Deadmines";
+    }
+    AZSHARA_CRATER = 37 {
+        display = "Azshara Crater";
+    }
+    COLLINS_TEST = 42 {
+        display = "Collin's Test";
+    }
+    WAILING_CAVERNS = 43 {
+        display = "Wailing Caverns";
+    }
+    MONASTERY = 44 {
+        display = "Monastery";
+    }
+    RAZORFEN_KRAUL = 47 {
+        display = "Razorfen Kraul";
+    }
+    BLACKFATHOM_DEEPS = 48 {
+        display = "Blackfathom Deeps";
+    }
+    ULDAMAN = 70 {
+        display = "Uldaman";
+    }
+    GNOMERAGON = 90 {
+        display = "Gnomeragon";
+    }
+    SUNKEN_TEMPLE = 109 {
+        display = "SunkenTemple";
+    }
+    RAZORFEN_DOWNS = 129 {
+        display = "Razorfen Downs";
+    }
+    EMERALD_DREAM = 169 {
+        display = "Emerald Dream";
+    }
+    SCARLET_MONASTERY = 189 {
+        display = "Scarlet Monastery";
+    }
+    ZUL_FARRAK = 209 {
+        display = "Zul'Farrak";
+    }
+    BLACKROCK_SPIRE = 229 {
+        display = "Blackrock Spire";
+    }
+    BLACKROCK_DEPTHS = 230 {
+        display = "Blackrock Depths";
+    }
+    ONYXIAS_LAIR = 249 {
+        display = "Onyxia's Lair";
+    }
+    CAVERNS_OF_TIME = 269 {
+        display = "Caverns of Time";
+    }
+    SCHOLOMANCE = 289 {
+        display = "Scholomance";
+    }
+    ZUL_GURUB = 309 {
+        display = "Zul'Gurub";
+    }
+    STRATHOLME = 329 {
+        display = "Stratholme";
+    }
+    MAURADON = 349 {
+        display = "Mauradon";
+    }
+    DEEPRUN_TRAM = 369 {
+        display = "Deeprun Tram";
+    }
+    RAGEFIRE_CHASM = 389 {
+        display = "Ragefire Chasm";
+    }
+    MOLTEN_CORE = 409 {
+        display = "Molten Core";
+    }
+    DIRE_MAUL = 429 {
+        display = "Dire Maul";
+    }
+    ALLIANCE_PVP_BARRACKS = 449 {
+        display = "Alliance PVP Barracks";
+    }
+    HORDE_PVP_BARRACKS = 450 {
+        display = "Horde PVP Barracks";
+    }
+    DEVELOPMENT_LAND = 451 {
+        display = "Development Land";
+    }
+    BLACKWING_LAIR = 469 {
+        display = "Blackwing Lair";
+    }
+    WARSONG_GULCH = 489 {
+        display = "Warsong Gulch";
+    }
+    RUINS_OF_AHN_QIRAJ = 509 {
+        display = "Ruins of Ahn'Qiraj";
+    }
+    ARATHI_BASIN = 529 {
+        display = "Arathi Basin";
+    }
+    AHN_QIRAJ_TEMPLE = 531 {
+        display = "Ahn'Qiraj Temple";
+    }
+    NAXXRAMAS = 533 {
+        display = "Naxxramas";
+    }
+}

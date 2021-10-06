@@ -1,0 +1,699 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_MESSAGECHAT = 0x0095 {
+    (u32)ChatType chat_type;   
+    Language language;
+    if (chat_type == SAY 
+     || chat_type == EMOTE 
+     || chat_type == YELL 
+     || chat_type == PARTY 
+     || chat_type == GUILD 
+     || chat_type == OFFICER 
+     || chat_type == RAID 
+     || chat_type == RAID_LEADER 
+     || chat_type == RAID_WARNING 
+     || chat_type == BATTLEGROUND 
+     || chat_type == BATTLEGROUND_LEADER
+     || chat_type == AFK
+     || chat_type == DND) {
+        CString message;
+    } else if (chat_type == WHISPER) {
+        CString target_player;
+        CString whisper_message;
+    } else if (chat_type == CHANNEL) {
+        CString channel;
+        CString channel_message;
+    }
+}
+
+smsg SMSG_MESSAGECHAT = 0x0096 {
+    ChatType chat_type;
+    Language language;
+    if (chat_type == MONSTER_WHISPER
+     || chat_type == RAID_BOSS_EMOTE
+     || chat_type == MONSTER_EMOTE) {
+        /* CString with len? */
+        u32 name_length;
+        CString monster_name;
+        Guid monster_guid;
+    }
+    else if (chat_type == SAY
+          || chat_type == PARTY
+          || chat_type == YELL) {
+        Guid sender_guid1 {
+            comment = "cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same";
+        }
+        Guid sender_guid2 {
+            comment = "cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same";
+        }
+    }
+    else if (chat_type == MONSTER_SAY
+          || chat_type == MONSTER_YELL) {
+        Guid sender_guid3;
+        u32 sender_name_length;
+        CString sender_name;
+        Guid target_guid;
+    }
+    else if (chat_type == CHANNEL) {
+        CString channel_name;
+        u32 player_rank;
+        Guid player_guid;
+    }
+    else {
+        Guid sender_guid4;
+    }
+
+    /* CString len */
+    u32 message_length;
+    CString message;
+    PlayerChatTag tag;
+}
+
+enum PlayerChatTag : u8 {
+    NONE = 0;
+    AFK = 1;
+    DND = 2;
+    GM = 3;
+}
+
+smsg SMSG_TRADE_STATUS = 0x0120 {
+    TradeStatus status;
+    if (status == BEGIN_TRADE) {
+        u64 unknown1 {
+            comment = "Set to 0 in vmangos.";
+        }
+    }
+    else if (status == CLOSE_WINDOW) {
+        (u32)InventoryResult inventory_result;
+        /* TODO: Add bool? */
+        Bool target_error {
+            comment = "used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED";
+        }
+        u32 item_limit_category_id {
+            comment = "ItemLimitCategory.dbc entry";
+        }
+    }
+    else if (status == ONLY_CONJURED || status == NOT_ON_TAPLIST) {
+        u8 slot {
+            comment = "Trade slot -1 here clears CGTradeInfo::m_tradeMoney";
+        }
+    }
+}
+
+enum MailType : u8 {
+    NORMAL = 0;
+    AUCTION = 2;
+    CREATURE = 3 {
+        comment = "client send CMSG_CREATURE_QUERY on this mailmessagetype";
+    }
+    GAMEOBJECT = 4 {
+        comment = "client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype";
+    }
+    ITEM = 5 {
+        comment = "client send CMSG_ITEM_QUERY on this mailmessagetype";
+    }
+}
+
+struct Mail {
+    u32 message_id;
+    MailType message_type;
+    if (message_type == NORMAL) {
+        Guid sender;
+    } else if (message_type == CREATURE
+            || message_type == GAMEOBJECT)
+    {
+        u32 sender_id;
+    }
+    else if (message_type == AUCTION)
+    {
+        u32 auction_id;
+    }
+    CString subject;
+    u32 item_text_id;
+    u32 unknown1 {
+        comment = "cmangos/vmangos/mangoszero: set to 0";
+    }
+    u32 stationery {
+        comment = "cmangos/vmangos/mangoszero: stationery (Stationery.dbc)";
+    }
+    u32 item_id;
+    u32 item_enchant_id;
+    u32 item_random_property_id;
+    u32 item_suffix_factor;
+    u8 item_stack_size;
+    u32 item_spell_charges;
+    u32 max_durability;
+    u32 durability;
+    u32 money;
+    u32 cash_on_delivery_amount;
+    u32 checked_timestamp {
+        comment = "cmangos/vmangos/mangoszero: All have a comment with 'flags' but send the timestamp from the item.";
+    }
+    f32 expiration_time;
+    u32 mail_template_id {
+        comment = "cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)";
+    }
+}
+
+smsg SMSG_MAIL_LIST_RESULT = 0x023B {
+    u8 amount_of_mails;
+    Mail[amount_of_mails] mails;
+}
+
+
+enum AuraType : u32 {
+    NONE = 0;
+    BIND_SIGHT = 1;
+    MOD_POSSESS = 2;
+    PERIODIC_DAMAGE = 3 {
+        comment = "vmangos: The aura should do periodic damage, the function that handles this is Aura::HandlePeriodicDamage, the amount is usually decided by the Unit::SpellDamageBonusDone or Unit::MeleeDamageBonusDone which increases/decreases the Modifier::m_amount";
+    }
+    DUMMY = 4 {
+        comment = "vmangos: Used by Aura::HandleAuraDummy";
+    }
+    MOD_CONFUSE = 5 {
+        comment = "vmangos: Used by Aura::HandleModConfuse, will either confuse or unconfuse the target depending on whether the apply flag is set";
+    }
+    MOD_CHARM = 6;
+    MOD_FEAR = 7;
+    PERIODIC_HEAL = 8 {
+        comment = "vmangos: The aura will do periodic heals of a target, handled by Aura::HandlePeriodicHeal, uses Unit::SpellHealingBonusDone to calculate whether to increase or decrease Modifier::m_amount";
+    }
+    MOD_ATTACKSPEED = 9 {
+        comment = "vmangos: Changes the attackspeed, the Modifier::m_amount decides how much we change in percent, ie, if the m_amount is 50 the attackspeed will increase by 50%";
+    }
+    MOD_THREAT = 10 {
+        comment = "vmangos: Modifies the threat that the Aura does in percent, the Modifier::m_miscvalue decides which of the SpellSchools it should affect threat for.  \see SpellSchoolMask";
+    }
+    MOD_TAUNT = 11 {
+        comment = "vmangos: Just applies a taunt which will change the threat a mob has Taken care of in Aura::HandleModThreat";
+    }
+    MOD_STUN = 12 {
+        comment = "vmangos: Stuns targets in different ways, taken care of in Aura::HandleAuraModStun";
+    }
+    MOD_DAMAGE_DONE = 13 {
+        comment = "vmangos: Changes the damage done by a weapon in any hand, the Modifier::m_miscvalue will tell what school the damage is from, it's used as a bitmask \see SpellSchoolMask";
+    }
+    MOD_DAMAGE_TAKEN = 14 {
+        comment = "vmangos: Not handled by the Aura class but instead this is implemented in Unit::MeleeDamageBonusTaken and Unit::SpellBaseDamageBonusTaken";
+    }
+    DAMAGE_SHIELD = 15 {
+        comment = "vmangos: Not handled by the Aura class, implemented in Unit::DealMeleeDamage";
+    }
+    MOD_STEALTH = 16 {
+        comment = "vmangos: Taken care of in Aura::HandleModStealth, take note that this is not the same thing as invisibility";
+    }
+    MOD_STEALTH_DETECT = 17 {
+        comment = "vmangos: Not handled by the Aura class, implemented in Unit::isVisibleForOrDetect which does a lot of checks to determine whether the person is visible or not, the SPELL_AURA_MOD_STEALTH seems to determine how in/visible ie a rogue is.";
+    }
+    MOD_INVISIBILITY = 18 {
+        comment = "vmangos: Handled by Aura::HandleInvisibility, the Modifier::m_miscvalue in the struct seems to decide what kind of invisibility it is with a bitflag. the miscvalue decides which bit is set, ie: 3 would make the 3rd bit be set.";
+    }
+    MOD_INVISIBILITY_DETECTION = 19 {
+        comment = "vmangos: Adds one of the kinds of detections to the possible detections.  As in SPEALL_AURA_MOD_INVISIBILITY the Modifier::m_miscvalue seems to decide what kind of invisibility the Unit should be able to detect.";
+    }
+    OBS_MOD_HEALTH = 20 {
+        comment = "20,21 unofficial";
+    }
+    OBS_MOD_MANA = 21;
+    MOD_RESISTANCE = 22 {
+        comment = "vmangos: Handled by Aura::HandleAuraModResistance, changes the resistance for a unit the field Modifier::m_miscvalue decides which kind of resistance that should be changed, for possible values see SpellSchools.  \see SpellSchools";
+    }
+    PERIODIC_TRIGGER_SPELL = 23 {
+        comment = "vmangos: Currently just sets Aura::m_isPeriodic to apply and has a special case for Curse of the Plaguebringer.";
+    }
+    PERIODIC_ENERGIZE = 24 {
+        comment = "vmangos: Just sets Aura::m_isPeriodic to apply";
+    }
+    MOD_PACIFY = 25 {
+        comment = "vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: http://classic.wowhead.com/spell=6462";
+    }
+    MOD_ROOT = 26 {
+        comment = "vmangos: Roots or unroots the target";
+    }
+    MOD_SILENCE = 27 {
+        comment = "vmangos: Silences the target and stops and spell casts that should be stopped, they have the flag SpellPreventionType::SPELL_PREVENTION_TYPE_SILENCE";
+    }
+    REFLECT_SPELLS = 28;
+    MOD_STAT = 29;
+    MOD_SKILL = 30;
+    MOD_INCREASE_SPEED = 31;
+    MOD_INCREASE_MOUNTED_SPEED = 32;
+    MOD_DECREASE_SPEED = 33;
+    MOD_INCREASE_HEALTH = 34;
+    MOD_INCREASE_ENERGY = 35;
+    MOD_SHAPESHIFT = 36;
+    EFFECT_IMMUNITY = 37;
+    STATE_IMMUNITY = 38;
+    SCHOOL_IMMUNITY = 39;
+    DAMAGE_IMMUNITY = 40;
+    DISPEL_IMMUNITY = 41;
+    PROC_TRIGGER_SPELL = 42;
+    PROC_TRIGGER_DAMAGE = 43;
+    TRACK_CREATURES = 44;
+    TRACK_RESOURCES = 45;
+    UNKNOWN46 = 46 {
+        comment = "Ignore all Gear test spells";
+    }
+    MOD_PARRY_PERCENT = 47;
+    UNKNOWN48 = 48 {
+        comment = "One periodic spell";
+    }
+    MOD_DODGE_PERCENT = 49;
+    MOD_BLOCK_SKILL = 50;
+    MOD_BLOCK_PERCENT = 51;
+    MOD_CRIT_PERCENT = 52;
+    PERIODIC_LEECH = 53;
+    MOD_HIT_CHANCE = 54;
+    MOD_SPELL_HIT_CHANCE = 55;
+    TRANSFORM = 56;
+    MOD_SPELL_CRIT_CHANCE = 57;
+    MOD_INCREASE_SWIM_SPEED = 58;
+    MOD_DAMAGE_DONE_CREATURE = 59;
+    MOD_PACIFY_SILENCE = 60;
+    MOD_SCALE = 61;
+    PERIODIC_HEALTH_FUNNEL = 62;
+    PERIODIC_MANA_FUNNEL = 63;
+    PERIODIC_MANA_LEECH = 64;
+    MOD_CASTING_SPEED_NOT_STACK = 65;
+    FEIGN_DEATH = 66;
+    MOD_DISARM = 67;
+    MOD_STALKED = 68;
+    SCHOOL_ABSORB = 69;
+    EXTRA_ATTACKS = 70;
+    MOD_SPELL_CRIT_CHANCE_SCHOOL = 71;
+    MOD_POWER_COST_SCHOOL_PCT = 72;
+    MOD_POWER_COST_SCHOOL = 73;
+    REFLECT_SPELLS_SCHOOL = 74;
+    MOD_LANGUAGE = 75;
+    FAR_SIGHT = 76;
+    MECHANIC_IMMUNITY = 77;
+    MOUNTED = 78;
+    MOD_DAMAGE_PERCENT_DONE = 79;
+    MOD_PERCENT_STAT = 80;
+    SPLIT_DAMAGE_PCT = 81;
+    WATER_BREATHING = 82;
+    MOD_BASE_RESISTANCE = 83;
+    MOD_REGEN = 84;
+    MOD_POWER_REGEN = 85;
+    CHANNEL_DEATH_ITEM = 86;
+    MOD_DAMAGE_PERCENT_TAKEN = 87;
+    MOD_HEALTH_REGEN_PERCENT = 88;
+    PERIODIC_DAMAGE_PERCENT = 89;
+    MOD_RESIST_CHANCE = 90;
+    MOD_DETECT_RANGE = 91;
+    PREVENTS_FLEEING = 92;
+    MOD_UNATTACKABLE = 93;
+    INTERRUPT_REGEN = 94;
+    GHOST = 95;
+    SPELL_MAGNET = 96;
+    MANA_SHIELD = 97;
+    MOD_SKILL_TALENT = 98;
+    MOD_ATTACK_POWER = 99;
+    AURAS_VISIBLE = 100;
+    MOD_RESISTANCE_PCT = 101;
+    MOD_MELEE_ATTACK_POWER_VERSUS = 102;
+    MOD_TOTAL_THREAT = 103;
+    WATER_WALK = 104;
+    FEATHER_FALL = 105;
+    HOVER = 106;
+    ADD_FLAT_MODIFIER = 107;
+    ADD_PCT_MODIFIER = 108;
+    ADD_TARGET_TRIGGER = 109;
+    MOD_POWER_REGEN_PERCENT = 110;
+    ADD_CASTER_HIT_TRIGGER = 111;
+    OVERRIDE_CLASS_SCRIPTS = 112;
+    MOD_RANGED_DAMAGE_TAKEN = 113;
+    MOD_RANGED_DAMAGE_TAKEN_PCT = 114;
+    MOD_HEALING = 115;
+    MOD_REGEN_DURING_COMBAT = 116;
+    MOD_MECHANIC_RESISTANCE = 117;
+    MOD_HEALING_PCT = 118;
+    SHARE_PET_TRACKING = 119;
+    UNTRACKABLE = 120;
+    EMPATHY = 121;
+    MOD_OFFHAND_DAMAGE_PCT = 122;
+    MOD_TARGET_RESISTANCE = 123;
+    MOD_RANGED_ATTACK_POWER = 124;
+    MOD_MELEE_DAMAGE_TAKEN = 125;
+    MOD_MELEE_DAMAGE_TAKEN_PCT = 126;
+    RANGED_ATTACK_POWER_ATTACKER_BONUS = 127;
+    MOD_POSSESS_PET = 128;
+    MOD_SPEED_ALWAYS = 129;
+    MOD_MOUNTED_SPEED_ALWAYS = 130;
+    MOD_RANGED_ATTACK_POWER_VERSUS = 131;
+    MOD_INCREASE_ENERGY_PERCENT = 132;
+    MOD_INCREASE_HEALTH_PERCENT = 133;
+    MOD_MANA_REGEN_INTERRUPT = 134;
+    MOD_HEALING_DONE = 135;
+    MOD_HEALING_DONE_PERCENT = 136;
+    MOD_TOTAL_STAT_PERCENTAGE = 137;
+    MOD_MELEE_HASTE = 138;
+    FORCE_REACTION = 139;
+    MOD_RANGED_HASTE = 140;
+    MOD_RANGED_AMMO_HASTE = 141;
+    MOD_BASE_RESISTANCE_PCT = 142;
+    MOD_RESISTANCE_EXCLUSIVE = 143;
+    SAFE_FALL = 144;
+    CHARISMA = 145;
+    PERSUADED = 146;
+    MECHANIC_IMMUNITY_MASK = 147;
+    RETAIN_COMBO_POINTS = 148;
+    RESIST_PUSHBACK  = 149 {
+        comment = "Resist Pushback";
+    }
+    MOD_SHIELD_BLOCKVALUE_PCT = 150;
+    TRACK_STEALTHED  = 151 {
+        comment = "Track Stealthed";
+    }
+    MOD_DETECTED_RANGE = 152 {
+        comment = "Mod Detected Range";
+    }
+    SPLIT_DAMAGE_FLAT = 153 {
+        comment = "Split Damage Flat";
+    }
+    MOD_STEALTH_LEVEL = 154 {
+        comment = "Stealth Level Modifier";
+    }
+    MOD_WATER_BREATHING = 155 {
+        comment = "Mod Water Breathing";
+    }
+    MOD_REPUTATION_GAIN = 156 {
+        comment = "Mod Reputation Gain";
+    }
+    PET_DAMAGE_MULTI = 157 {
+        comment = "Mod Pet Damage";
+    }
+    MOD_SHIELD_BLOCKVALUE = 158;
+    NO_PVP_CREDIT = 159;
+    MOD_AOE_AVOIDANCE = 160;
+    MOD_HEALTH_REGEN_IN_COMBAT = 161;
+    POWER_BURN_MANA = 162;
+    MOD_CRIT_DAMAGE_BONUS = 163;
+    UNKNOWN164 = 164;
+    MELEE_ATTACK_POWER_ATTACKER_BONUS = 165;
+    MOD_ATTACK_POWER_PCT = 166;
+    MOD_RANGED_ATTACK_POWER_PCT = 167;
+    MOD_DAMAGE_DONE_VERSUS = 168;
+    MOD_CRIT_PERCENT_VERSUS = 169;
+    DETECT_AMORE = 170;
+    MOD_SPEED_NOT_STACK = 171;
+    MOD_MOUNTED_SPEED_NOT_STACK = 172;
+    ALLOW_CHAMPION_SPELLS = 173;
+    MOD_SPELL_DAMAGE_OF_STAT_PERCENT = 174 {
+        comment = "in 1.12.1 only dependent spirit case";
+    }
+    MOD_SPELL_HEALING_OF_STAT_PERCENT = 175;
+    SPIRIT_OF_REDEMPTION = 176;
+    AOE_CHARM = 177;
+    MOD_DEBUFF_RESISTANCE = 178;
+    MOD_ATTACKER_SPELL_CRIT_CHANCE = 179;
+    MOD_FLAT_SPELL_DAMAGE_VERSUS = 180;
+    MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS = 181 {
+        comment = "unused - possible flat spell crit damage versus";
+    }
+    MOD_RESISTANCE_OF_STAT_PERCENT = 182;
+    MOD_CRITICAL_THREAT = 183;
+    MOD_ATTACKER_MELEE_HIT_CHANCE = 184;
+    MOD_ATTACKER_RANGED_HIT_CHANCE = 185;
+    MOD_ATTACKER_SPELL_HIT_CHANCE = 186;
+    MOD_ATTACKER_MELEE_CRIT_CHANCE = 187;
+    MOD_ATTACKER_RANGED_CRIT_CHANCE = 188;
+    MOD_RATING = 189;
+    MOD_FACTION_REPUTATION_GAIN = 190;
+    USE_NORMAL_MOVEMENT_SPEED = 191;
+}
+
+struct AuraLog {
+    AuraType aura_type;
+    if (aura_type == PERIODIC_DAMAGE
+     || aura_type == PERIODIC_DAMAGE_PERCENT)
+    {
+        u32 damage1;
+        /* TODO Enum? */
+        SpellSchool school;
+        u32 absorbed;
+        u32 resisted {
+            comment = "vmangos: Sent as int32";
+        }
+    } else if (aura_type == PERIODIC_HEAL
+            || aura_type == OBS_MOD_HEALTH)
+    {
+        u32 damage2;
+    } else if (aura_type == OBS_MOD_MANA
+            || aura_type == PERIODIC_ENERGIZE)
+    {
+        u32 misc_value1 {
+            comment = "vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have";
+        }
+        u32 damage3;
+    } else if (aura_type == PERIODIC_MANA_LEECH)
+    {
+        u32 misc_value2 {
+            comment = "vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have";
+        }
+        u32 damage;
+        f32 gain_multiplier;
+    }
+}
+
+
+
+smsg SMSG_PERIODICAURALOG = 0x024E {
+    PackedGuid target;
+    PackedGuid caster;
+    Spell spell;
+    u32 amount_of_auras;
+    AuraLog[amount_of_auras] auras;
+}
+
+
+enum AuctionCommandAction : u32 {
+    STARTED = 0 {
+        comment = "ERR_AUCTION_STARTED";
+    }
+    REMOVED = 1 {
+        comment = "ERR_AUCTION_REMOVED";
+    }
+    BID_PLACED = 2 {
+        comment = "ERR_AUCTION_BID_PLACED";
+    }
+}
+
+enum AuctionCommandResult : u32 {
+    OK = 0 {
+        comment = "depends on enum AuctionAction";
+    }
+    ERR_INVENTORY = 1 {
+        comment = "depends on enum InventoryChangeResult";
+    }
+    ERR_DATABASE = 2 {
+        comment = "ERR_AUCTION_DATABASE_ERROR (default)";
+    }
+    ERR_NOT_ENOUGH_MONEY = 3 {
+        comment = "ERR_NOT_ENOUGH_MONEY";
+    }
+    ERR_ITEM_NOT_FOUND = 4 {
+        comment = "ERR_ITEM_NOT_FOUND";
+    }
+    ERR_HIGHER_BID = 5 {
+        comment = "ERR_AUCTION_HIGHER_BID";
+    }
+    ERR_BID_INCREMENT = 7 {
+        comment = "ERR_AUCTION_BID_INCREMENT";
+    }
+    ERR_BID_OWN = 10 {
+        comment = "ERR_AUCTION_BID_OWN";
+    }
+    ERR_RESTRICTED_ACCOUNT = 13 {
+        comment = "ERR_RESTRICTED_ACCOUNT";
+    }
+}
+
+
+enum SpellEffect : u32 {
+    NONE = 0;
+    INSTAKILL = 1;
+    SCHOOL_DAMAGE = 2;
+    DUMMY = 3;
+    PORTAL_TELEPORT = 4;
+    TELEPORT_UNITS = 5;
+    APPLY_AURA = 6;
+    ENVIRONMENTAL_DAMAGE = 7;
+    POWER_DRAIN = 8;
+    HEALTH_LEECH = 9;
+    HEAL = 10;
+    BIND = 11;
+    PORTAL = 12;
+    RITUAL_BASE = 13;
+    RITUAL_SPECIALIZE = 14;
+    RITUAL_ACTIVATE_PORTAL = 15;
+    QUEST_COMPLETE = 16;
+    WEAPON_DAMAGE_NOSCHOOL = 17;
+    RESURRECT = 18;
+    ADD_EXTRA_ATTACKS = 19;
+    DODGE = 20;
+    EVADE = 21;
+    PARRY = 22;
+    BLOCK = 23;
+    CREATE_ITEM = 24;
+    WEAPON = 25;
+    DEFENSE = 26;
+    PERSISTENT_AREA_AURA = 27;
+    SUMMON = 28;
+    LEAP = 29;
+    ENERGIZE = 30;
+    WEAPON_PERCENT_DAMAGE = 31;
+    TRIGGER_MISSILE = 32;
+    OPEN_LOCK = 33;
+    SUMMON_CHANGE_ITEM = 34;
+    APPLY_AREA_AURA_PARTY = 35;
+    LEARN_SPELL = 36;
+    SPELL_DEFENSE = 37;
+    DISPEL = 38;
+    LANGUAGE = 39;
+    DUAL_WIELD = 40;
+    SUMMON_WILD = 41;
+    SUMMON_GUARDIAN = 42;
+    TELEPORT_UNITS_FACE_CASTER= 43;
+    SKILL_STEP = 44;
+    ADD_HONOR = 45;
+    SPAWN = 46;
+    TRADE_SKILL = 47;
+    STEALTH = 48;
+    DETECT = 49;
+    TRANS_DOOR = 50;
+    FORCE_CRITICAL_HIT = 51;
+    GUARANTEE_HIT = 52;
+    ENCHANT_ITEM = 53;
+    ENCHANT_ITEM_TEMPORARY = 54;
+    TAMECREATURE = 55;
+    SUMMON_PET = 56;
+    LEARN_PET_SPELL = 57;
+    WEAPON_DAMAGE = 58;
+    OPEN_LOCK_ITEM = 59;
+    PROFICIENCY = 60;
+    SEND_EVENT = 61;
+    POWER_BURN = 62;
+    THREAT = 63;
+    TRIGGER_SPELL = 64;
+    HEALTH_FUNNEL = 65;
+    POWER_FUNNEL = 66;
+    HEAL_MAX_HEALTH = 67;
+    INTERRUPT_CAST = 68;
+    DISTRACT = 69;
+    PULL = 70;
+    PICKPOCKET = 71;
+    ADD_FARSIGHT = 72;
+    SUMMON_POSSESSED = 73;
+    SUMMON_TOTEM = 74;
+    HEAL_MECHANICAL = 75;
+    SUMMON_OBJECT_WILD = 76;
+    SCRIPT_EFFECT = 77;
+    ATTACK = 78;
+    SANCTUARY = 79;
+    ADD_COMBO_POINTS = 80;
+    CREATE_HOUSE = 81;
+    BIND_SIGHT = 82;
+    DUEL = 83;
+    STUCK = 84;
+    SUMMON_PLAYER = 85;
+    ACTIVATE_OBJECT = 86;
+    SUMMON_TOTEM_SLOT1 = 87;
+    SUMMON_TOTEM_SLOT2 = 88;
+    SUMMON_TOTEM_SLOT3 = 89;
+    SUMMON_TOTEM_SLOT4 = 90;
+    THREAT_ALL = 91;
+    ENCHANT_HELD_ITEM = 92;
+    SUMMON_PHANTASM = 93;
+    SELF_RESURRECT = 94;
+    SKINNING = 95;
+    CHARGE = 96;
+    SUMMON_CRITTER = 97;
+    KNOCK_BACK = 98;
+    DISENCHANT = 99;
+    INEBRIATE = 100;
+    FEED_PET = 101;
+    DISMISS_PET = 102;
+    REPUTATION = 103;
+    SUMMON_OBJECT_SLOT1 = 104;
+    SUMMON_OBJECT_SLOT2 = 105;
+    SUMMON_OBJECT_SLOT3 = 106;
+    SUMMON_OBJECT_SLOT4 = 107;
+    DISPEL_MECHANIC = 108;
+    SUMMON_DEAD_PET = 109;
+    DESTROY_ALL_TOTEMS = 110;
+    DURABILITY_DAMAGE = 111;
+    SUMMON_DEMON = 112;
+    RESURRECT_NEW = 113;
+    ATTACK_ME = 114;
+    DURABILITY_DAMAGE_PCT = 115;
+    SKIN_PLAYER_CORPSE = 116;
+    SPIRIT_HEAL = 117;
+    SKILL = 118;
+    APPLY_AREA_AURA_PET = 119;
+    TELEPORT_GRAVEYARD = 120;
+    NORMALIZED_WEAPON_DMG = 121;
+    UNKNOWN122 = 122;
+    SEND_TAXI = 123;
+    PLAYER_PULL = 124;
+    MODIFY_THREAT_PERCENT = 125;
+    UNKNOWN126 = 126;
+    UNKNOWN127 = 127;
+}
+
+struct SpellLog {
+    SpellEffect effect;
+    u32 amount_of_logs = 1 {
+        comment = "vmangos/cmangos/mangoszero: Can be variable but all use constant 1";
+    }
+    if (effect == POWER_DRAIN) {
+        Guid target1;
+        u32 unknown1;
+        u32 unknown2;
+        f32 unknown3;
+    } else if (effect == ADD_EXTRA_ATTACKS) {
+        Guid target2;
+        u32 unknown4;
+    } else if (effect == INTERRUPT_CAST) {
+        Guid target3;
+        Spell interrupted_spell;
+    } else if (effect == DURABILITY_DAMAGE) {
+        Guid target4;
+        u32 unknown5;
+        u32 unknown6;
+    } else if (effect == CREATE_ITEM) {
+        u32 spell_effect_item_type;
+    } else if (effect == FEED_PET) {
+        u32 item_target_entry;
+    } else if (effect == RESURRECT
+            || effect == DISPEL
+            || effect == THREAT
+            || effect == DISTRACT
+            || effect == SANCTUARY
+            || effect == THREAT_ALL
+            || effect == DISPEL_MECHANIC
+            || effect == RESURRECT_NEW
+            || effect == ATTACK_ME
+            || effect == SKIN_PLAYER_CORPSE
+            || effect == MODIFY_THREAT_PERCENT
+            || effect == UNKNOWN126
+            || effect == DISMISS_PET
+            || effect == OPEN_LOCK
+            || effect == OPEN_LOCK_ITEM
+            || effect == INSTAKILL)
+    {
+        Guid target5;
+    }
+}
+
+smsg SMSG_SPELLLOGEXECUTE = 0x024C {
+    PackedGuid caster;
+    Spell spell;
+    u32 amount_of_effects;
+    SpellLog[amount_of_effects] logs;
+}
+
+
+
+

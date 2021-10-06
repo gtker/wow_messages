@@ -1,0 +1,117 @@
+use std::convert::{TryFrom, TryInto};
+use crate::world::v1::v12::{InstanceResetFailedReason, InstanceResetFailedReasonError};
+use crate::world::v1::v12::{Map, MapError};
+use crate::world::helper::{WorldServerMessageWrite, WorldMessageBody};
+use wow_srp::header_crypto::Encrypter;
+use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+
+#[derive(Debug, PartialEq, Clone, Default)]
+#[derive(Copy)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new4.wowm:499`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new4.wowm):
+/// ```text
+/// smsg SMSG_INSTANCE_RESET_FAILED = 0x31F {
+///     InstanceResetFailedReason reason;
+///     Map map;
+/// }
+/// ```
+pub struct SMSG_INSTANCE_RESET_FAILED {
+    pub reason: InstanceResetFailedReason,
+    pub map: Map,
+}
+
+impl WorldServerMessageWrite for SMSG_INSTANCE_RESET_FAILED {
+    const OPCODE: u16 = 0x31f;
+
+    fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // size: u16_be, and opcode: u16
+        crate::util::write_u16_be(w, (Self::size() + 2) as u16)?;
+        crate::util::write_u16_le(w, <Self as WorldServerMessageWrite>::OPCODE)?;
+
+        self.write_body(w)?;
+        Ok(())
+    }
+
+    fn write_encrypted_server<W: std::io::Write, E: Encrypter>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error> {
+        // size: u16_be, and opcode: u16
+        e.write_encrypted_server_header(w, (Self::size() + 2) as u16, <Self as WorldServerMessageWrite>::OPCODE)?;
+
+        self.write_body(w)?;
+        Ok(())
+    }
+}
+impl WorldMessageBody for SMSG_INSTANCE_RESET_FAILED {
+    type Error = SMSG_INSTANCE_RESET_FAILEDError;
+
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // reason: InstanceResetFailedReason
+        let reason = InstanceResetFailedReason::read(r)?;
+
+        // map: Map
+        let map = Map::read(r)?;
+
+        Ok(Self {
+            reason,
+            map,
+        })
+    }
+
+    fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // reason: InstanceResetFailedReason
+        self.reason.write(w)?;
+
+        // map: Map
+        self.map.write(w)?;
+
+        Ok(())
+    }
+}
+
+impl ConstantSized for SMSG_INSTANCE_RESET_FAILED {
+    fn size() -> usize {
+        Self::maximum_possible_size()
+    }
+}
+
+impl MaximumPossibleSized for SMSG_INSTANCE_RESET_FAILED {
+    fn maximum_possible_size() -> usize {
+        InstanceResetFailedReason::size() // reason: InstanceResetFailedReason
+        + Map::size() // map: Map
+    }
+}
+
+#[derive(Debug)]
+pub enum SMSG_INSTANCE_RESET_FAILEDError {
+    Io(std::io::Error),
+    InstanceResetFailedReason(InstanceResetFailedReasonError),
+    Map(MapError),
+}
+
+impl std::error::Error for SMSG_INSTANCE_RESET_FAILEDError {}
+impl std::fmt::Display for SMSG_INSTANCE_RESET_FAILEDError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Io(i) => i.fmt(f),
+            Self::InstanceResetFailedReason(i) => i.fmt(f),
+            Self::Map(i) => i.fmt(f),
+        }
+    }
+}
+
+impl From<std::io::Error> for SMSG_INSTANCE_RESET_FAILEDError {
+    fn from(e : std::io::Error) -> Self {
+        Self::Io(e)
+    }
+}
+
+impl From<InstanceResetFailedReasonError> for SMSG_INSTANCE_RESET_FAILEDError {
+    fn from(e: InstanceResetFailedReasonError) -> Self {
+        Self::InstanceResetFailedReason(e)
+    }
+}
+
+impl From<MapError> for SMSG_INSTANCE_RESET_FAILEDError {
+    fn from(e: MapError) -> Self {
+        Self::Map(e)
+    }
+}
+

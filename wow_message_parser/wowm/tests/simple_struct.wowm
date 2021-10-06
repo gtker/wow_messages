@@ -1,0 +1,42 @@
+#tag_all test "true";
+
+struct ConstantSize {
+    u8 basic;
+    u16 basic2;
+    u32 basic3;
+    u64 basic4;
+}
+
+struct VariableSize {
+    u8 basic;
+    u16 basic2;
+    u32 basic3;
+    u64 basic4;
+    CString c_string;
+}
+
+struct EveryType {
+    u8 basic;
+    u16 basic2;
+    u32 basic3;
+    u64 basic4;
+    u16_be basic5;
+    u32_be basic6;
+    u64_be basic7;
+    String[40] static_real_string;
+    String[basic] variable_real_string;
+    CString c_string;
+    u8[30] static_basic;
+    u8[basic] variable_basic;
+    Boolean complex;
+    Boolean[30] static_complex;
+    Boolean[basic] variable_complex;
+    ConstantSize constant_size;
+    ConstantSize[32] constant_size_constant_array;
+    ConstantSize[basic] constant_size_variable_array;
+    VariableSize variable_size;
+    VariableSize[32] variable_size_static_array;
+    VariableSize[basic] variable_size_variable_array;
+    u64_be padding1 = 0;
+    Boolean complex_padding = YES;
+}

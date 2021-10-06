@@ -1,0 +1,143 @@
+use std::convert::{TryFrom, TryInto};
+use crate::world::helper::Guid;
+use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+
+#[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:205`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm):
+/// ```text
+/// struct PackedGuidAndGuid {
+///     PackedGuid packed;
+///     Guid guid;
+///     PackedGuid[10] static_packed;
+///     Guid[10] static_guid;
+///     u8 basic1;
+///     u8 basic2;
+///     PackedGuid[basic1] variable_packed;
+///     Guid[basic2] variable_guid;
+/// }
+/// ```
+pub struct PackedGuidAndGuid {
+    pub packed: Guid,
+    pub guid: Guid,
+    pub static_packed: [Guid; 10],
+    pub static_guid: [Guid; 10],
+    pub variable_packed: Vec<Guid>,
+    pub variable_guid: Vec<Guid>,
+}
+
+impl ReadableAndWritable for PackedGuidAndGuid {
+    type Error = std::io::Error;
+
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // packed: PackedGuid
+        let packed = Guid::read_packed(r)?;
+
+        // guid: Guid
+        let guid = Guid::read(r)?;
+
+        // static_packed: PackedGuid[10]
+        let mut static_packed = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            static_packed[i] = Guid::read_packed(r)?;
+        }
+        let static_packed = static_packed.try_into().unwrap();
+
+        // static_guid: Guid[10]
+        let mut static_guid = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            static_guid[i] = Guid::read(r)?;
+        }
+        let static_guid = static_guid.try_into().unwrap();
+
+        // basic1: u8
+        let basic1 = crate::util::read_u8_le(r)?;
+
+        // basic2: u8
+        let basic2 = crate::util::read_u8_le(r)?;
+
+        // variable_packed: PackedGuid[basic1]
+        let mut variable_packed = Vec::with_capacity(basic1 as usize);
+        for i in 0..basic1 {
+            variable_packed.push(Guid::read_packed(r)?;
+        }
+
+        // variable_guid: Guid[basic2]
+        let mut variable_guid = Vec::with_capacity(basic2 as usize);
+        for i in 0..basic2 {
+            variable_guid.push(Guid::read(r)?);
+        }
+
+        Ok(Self {
+            packed,
+            guid,
+            static_packed,
+            static_guid,
+            variable_packed,
+            variable_guid,
+        })
+    }
+
+    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // packed: PackedGuid
+        self.packed.write_packed(w)?;
+
+        // guid: Guid
+        self.guid.write(w)?;
+
+        // static_packed: PackedGuid[10]
+        for i in self.static_packed.iter() {
+            i.write_packed(w)?;
+        }
+
+        // static_guid: Guid[10]
+        for i in self.static_guid.iter() {
+            i.write(w)?;
+        }
+
+        // basic1: u8
+        w.write_all(&(self.variable_packed.len() as u8).to_le_bytes())?;
+
+        // basic2: u8
+        w.write_all(&(self.variable_guid.len() as u8).to_le_bytes())?;
+
+        // variable_packed: PackedGuid[basic1]
+        for i in self.variable_packed.iter() {
+            i.write_packed(w)?;
+        }
+
+        // variable_guid: Guid[basic2]
+        for i in self.variable_guid.iter() {
+            i.write(w)?;
+        }
+
+        Ok(())
+    }
+
+}
+
+impl VariableSized for PackedGuidAndGuid {
+    fn size(&self) -> usize {
+        self.packed.size() // packed: PackedGuid
+        + 8 // guid: Guid
+        + self.static_packed.iter().fold(0, |acc, x| acc + x.size()) // static_packed: PackedGuid[10]
+        + 8 // static_guid: Guid[10]
+        + 1 // basic1: u8
+        + 1 // basic2: u8
+        + self.variable_packed.iter().fold(0, |acc, x| acc + x.size()) // variable_packed: PackedGuid[basic1]
+        + 8 // variable_guid: Guid[basic2]
+    }
+}
+
+impl MaximumPossibleSized for PackedGuidAndGuid {
+    fn maximum_possible_size() -> usize {
+        9 // packed: PackedGuid
+        + 8 // guid: Guid
+        + 10 * 9 // static_packed: PackedGuid[10]
+        + 10 * 8 // static_guid: Guid[10]
+        + 1 // basic1: u8
+        + 1 // basic2: u8
+        + 255 * 9 // variable_packed: PackedGuid[basic1]
+        + 255 * 8 // variable_guid: Guid[basic2]
+    }
+}
+

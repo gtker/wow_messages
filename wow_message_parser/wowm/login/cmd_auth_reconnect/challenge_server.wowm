@@ -1,0 +1,20 @@
+
+slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
+    LoginResult result;
+    if (result == SUCCESS) {
+        u8[16] challenge_data;
+        u8[16] checksum_salt;
+    }
+} {
+    login_logon_versions = "2";
+}
+
+slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
+    LoginResult result;
+    if (result == SUCCESS) {
+        u8[16] challenge_data;
+        u8[16] checksum_salt;
+    }
+} {
+    login_logon_versions = "8";
+}

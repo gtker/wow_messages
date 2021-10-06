@@ -1,0 +1,60 @@
+use std::convert::{TryFrom, TryInto};
+use crate::world::helper::AuraMask;
+use crate::world::helper::UpdateMask;
+use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+
+#[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:222`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm):
+/// ```text
+/// struct CustomMasks {
+///     UpdateMask update_mask;
+///     AuraMask aura_mask;
+/// }
+/// ```
+pub struct CustomMasks {
+    pub update_mask: UpdateMask,
+    pub aura_mask: AuraMask,
+}
+
+impl ReadableAndWritable for CustomMasks {
+    type Error = std::io::Error;
+
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // update_mask: UpdateMask
+        let update_mask = UpdateMask::read(r)?;
+
+        // aura_mask: AuraMask
+        let aura_mask = AuraMask::read(r)?;
+
+        Ok(Self {
+            update_mask,
+            aura_mask,
+        })
+    }
+
+    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // update_mask: UpdateMask
+        self.update_mask.write(w)?;
+
+        // aura_mask: AuraMask
+        self.aura_mask.write(w)?;
+
+        Ok(())
+    }
+
+}
+
+impl VariableSized for CustomMasks {
+    fn size(&self) -> usize {
+        self.update_mask.size() // update_mask: UpdateMask
+        + self.aura_mask.size() // aura_mask: AuraMask
+    }
+}
+
+impl MaximumPossibleSized for CustomMasks {
+    fn maximum_possible_size() -> usize {
+        65536 // update_mask: UpdateMask
+        + 65536 // aura_mask: AuraMask
+    }
+}
+

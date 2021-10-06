@@ -1,0 +1,289 @@
+#tag_all versions "1.12";
+
+enum Power : u8 {
+    MANA = 0 {
+        comment = "The most common one, mobs usually have this or rage";
+    }
+    RAGE = 1 {
+        comment = "This is what warriors use to cast their spells";
+    }
+    FOCUS = 2 {
+        comment = "Used by hunters after Cataclysm (4.x)";
+    }
+    ENERGY = 3 {
+        comment = "Used by rouges to do their spells";
+    }
+    HAPPINESS = 4 {
+        comment = "Hunter's pet's happiness affect their damage";
+    }
+    MAX_POWERS = 5;
+    ALL = 127 {
+        comment = "default for class? - need check for TBC";
+    }
+    /* Correct?
+    HEALTH = 0xFFFFFFFE {
+        comment = "Health, everyone has this (-2 as signed value)";
+    } */
+}
+
+flag GroupUpdateFlags : u32 {
+    FLAG_NONE = 0x00000000 {
+        comment = "nothing";
+    }
+    FLAG_STATUS = 0x00000001 {
+        comment = "uint8, enum GroupMemberOnlineStatus";
+    }
+    FLAG_CUR_HP = 0x00000002 {
+        comment = "uint16";
+    }
+    FLAG_MAX_HP = 0x00000004 {
+        comment = "uint16";
+    }
+    FLAG_POWER_TYPE = 0x00000008 {
+        comment = "uint8, enum Powers";
+    }
+    FLAG_CUR_POWER = 0x00000010 {
+        comment = "uint16";
+    }
+    FLAG_MAX_POWER = 0x00000020 {
+        comment = "uint16";
+    }
+    FLAG_LEVEL = 0x00000040 {
+        comment = "uint16";
+    }
+    FLAG_ZONE = 0x00000080 {
+        comment = "uint16";
+    }
+    FLAG_POSITION = 0x00000100 {
+        comment = "uint16, uint16";
+    }
+    FLAG_AURAS = 0x00000200 {
+        comment = "uint32 mask, for each bit set uint16 spellid";
+    }
+    FLAG_AURAS_2 = 0x00000400 {
+        comment = "uint16 above mask continuation, giving max total of 48 auras possible";
+    }
+    FLAG_PET_GUID = 0x00000800 {
+        comment = "uint64 pet guid";
+    }
+    FLAG_PET_NAME = 0x00001000 {
+        comment = "pet name, NULL terminated string";
+    }
+    FLAG_PET_MODEL_ID = 0x00002000 {
+        comment = "uint16, model id";
+    }
+    FLAG_PET_CUR_HP = 0x00004000 {
+        comment = "uint16 pet cur health";
+    }
+    FLAG_PET_MAX_HP = 0x00008000 {
+        comment = "uint16 pet max health";
+    }
+    FLAG_PET_POWER_TYPE = 0x00010000 {
+        comment = "uint8 pet power type";
+    }
+    FLAG_PET_CUR_POWER = 0x00020000 {
+        comment = "uint16 pet cur power";
+    }
+    FLAG_PET_MAX_POWER = 0x00040000 {
+        comment = "uint16 pet max power";
+    }
+    FLAG_PET_AURAS = 0x00080000 {
+        comment = "uint32 mask, for each bit set uint16 spellid, pet auras...";
+    }
+    FLAG_PET_AURAS_2 = 0x00100000 {
+        comment = "uint16 above mask continuation, giving max total of 48 auras possible";
+    }
+    MODE_OFFLINE = 0x10000000;
+}
+
+flag GroupMemberOnlineStatus : u8 {
+    OFFLINE = 0x0000;
+    ONLINE = 0x0001 {
+        comment = "Lua_UnitIsConnected";
+    }
+    PVP = 0x0002 {
+        comment = "Lua_UnitIsPVP";
+    }
+    DEAD = 0x0004 {
+        comment = "Lua_UnitIsDead";
+    }
+    GHOST = 0x0008 {
+        comment = "Lua_UnitIsGhost";
+    }
+    PVP_FFA = 0x0010 {
+        comment = "Lua_UnitIsPVPFreeForAll";
+    }
+    UNK3 = 0x0020 {
+        comment = "used in calls from Lua_GetPlayerMapPosition/Lua_GetBattlefieldFlagPosition";
+    }
+    AFK = 0x0040 {
+        comment = "Lua_UnitIsAFK";
+    }
+    DND = 0x0080 {
+        comment = "Lua_UnitIsDND";
+    }
+}
+
+smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
+    PackedGuid guid;
+    GroupUpdateFlags mask;
+    if (mask & FLAG_STATUS) {
+        GroupMemberOnlineStatus status;       
+    }
+    if (mask & FLAG_CUR_HP) {
+        u16 current_health;
+    }
+    if (mask & FLAG_MAX_HP) {
+        u16 max_health;
+    }
+    if (mask & FLAG_POWER_TYPE) {
+        Power power; 
+    }
+    if (mask & FLAG_CUR_POWER) {
+        u16 current_power;
+    }
+    if (mask & FLAG_MAX_POWER) {
+        u16 max_power;
+    }
+    if (mask & FLAG_LEVEL) {
+        u16 level;
+    }
+    if (mask & FLAG_ZONE) {
+        Area area;
+    }
+    if (mask & FLAG_POSITION) {
+        u16 position_x {
+            comment = "cmangos: float cast to u16";
+        }
+        u16 position_y {
+            comment = "cmangos: float cast to u16";
+        }
+    }
+    if (mask & FLAG_AURAS) {
+        AuraMask auras {
+            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
+        }
+    }
+    if (mask & FLAG_PET_NAME) {
+        CString pet_name;
+    }
+    if (mask & FLAG_PET_MODEL_ID) {
+        u16 pet_display_id;
+    }
+    if (mask & FLAG_PET_CUR_HP) {
+        u16 pet_current_health;
+    }
+    if (mask & FLAG_PET_MAX_HP) {
+        u16 pet_max_health;
+    }
+    if (mask & FLAG_PET_POWER_TYPE) {
+        Power pet_power_type;
+    }
+    if (mask & FLAG_PET_CUR_POWER) {
+        u16 pet_current_power;
+    }
+    if (mask & FLAG_PET_MAX_POWER) {
+        u16 pet_max_power;
+    }
+    if (mask & FLAG_PET_AURAS) {
+        AuraMask pet_auras;
+    }
+}
+
+
+enum PartyMemberStatus : u32 {
+    OFFLINE = 0x0000;
+    ONLINE = 0x0001 {
+        comment = "Lua_UnitIsConnected";
+    }
+    PVP = 0x0002 {
+        comment = "Lua_UnitIsPVP";
+    }
+    DEAD = 0x0004 {
+        comment = "Lua_UnitIsDead";
+    }
+    GHOST = 0x0008 {
+        comment = "Lua_UnitIsGhost";
+    }
+    PVP_FFA = 0x0010 {
+        comment = "Lua_UnitIsPVPFreeForAll";
+    }
+    ZONE_OUT = 0x0020 {
+        comment = "Lua_GetPlayerMapPosition";
+    }
+    AFK = 0x0040 {
+        comment = "Lua_UnitIsAFK";
+    }
+    DND = 0x0080 {
+        comment = "Lua_UnitIsDND";
+    }
+}
+
+
+smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
+    PackedGuid player;
+    GroupUpdateFlags mask;
+    if (mask & FLAG_STATUS) {
+        GroupMemberOnlineStatus status;       
+    }
+    if (mask & FLAG_CUR_HP) {
+        u16 current_health;
+    }
+    if (mask & FLAG_MAX_HP) {
+        u16 max_health;
+    }
+    if (mask & FLAG_POWER_TYPE) {
+        Power power; 
+    }
+    if (mask & FLAG_CUR_POWER) {
+        u16 current_power;
+    }
+    if (mask & FLAG_MAX_POWER) {
+        u16 max_power;
+    }
+    if (mask & FLAG_LEVEL) {
+        u16 level;
+    }
+    if (mask & FLAG_ZONE) {
+        Area area;
+    }
+    if (mask & FLAG_POSITION) {
+        u16 position_x {
+            comment = "cmangos: float cast to u16";
+        }
+        u16 position_y {
+            comment = "cmangos: float cast to u16";
+        }
+    }
+    if (mask & FLAG_AURAS) {
+        AuraMask auras {
+            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
+        }
+    }
+    if (mask & FLAG_PET_NAME) {
+        CString pet_name;
+    }
+    if (mask & FLAG_PET_MODEL_ID) {
+        u16 pet_display_id;
+    }
+    if (mask & FLAG_PET_CUR_HP) {
+        u16 pet_current_health;
+    }
+    if (mask & FLAG_PET_MAX_HP) {
+        u16 pet_max_health;
+    }
+    if (mask & FLAG_PET_POWER_TYPE) {
+        Power pet_power_type;
+    }
+    if (mask & FLAG_PET_CUR_POWER) {
+        u16 pet_current_power;
+    }
+    if (mask & FLAG_PET_MAX_POWER) {
+        u16 pet_max_power;
+    }
+    if (mask & FLAG_PET_AURAS) {
+        AuraMask pet_auras;
+    }
+}
+
+

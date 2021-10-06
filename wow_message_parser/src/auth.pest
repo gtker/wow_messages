@@ -1,0 +1,95 @@
+WHITESPACE = _{ " " | "\t" | NEWLINE }
+COMMENT = _{ "/*" ~ (!"*/" ~ ANY)* ~ "*/" }
+
+command = { ("#" ~ identifier) ~ identifier ~ QUOTATION_MARK ~ text ~ (QUOTATION_MARK ~ ";") }
+commands = { command* }
+
+allowed_text_values = { ("." | "," | "'" | "\\" | "_" | "-" | "#" | "[" | "]" | "|" | "*" | "%" | ":" | "$" | "(" | ")" | "?" | "/" | "!" | "+" | ">" | "<" | "&" | "=") }
+
+identifier = @{ ( ALPHABETIC | "_" | ASCII_DIGIT )+ }
+text = { (LETTER | NUMBER | allowed_text_values )* }
+basic_type = { ( "u8_be" | "u16_be" | "u32_be" | "u64_be" | "u8" | "u16" | "u32" | "u64" | "f32_be" | "f32" | "f64_be" | "f64" | "CString" ) }
+array_type = { ( basic_type | identifier ) ~ "[" ~ ( identifier | value | "-" ) ~ "]" }
+value = @{ ( "0x" ~ HEX_DIGIT+
+            | "self.value"
+            | "self.size"
+            | "0b" ~ ASCII_BIN_DIGIT+
+            | (ASCII_DIGIT+ ~ "." ~ ASCII_DIGIT+)
+            | ASCII_DIGIT+
+            | (QUOTATION_MARK ~ text ~ QUOTATION_MARK )
+            | identifier ) }
+array = { "[" ~ raw_values ~ "]" }
+
+identifier_and_value = { identifier ~ "=" ~ value }
+
+basic_definer_item = { identifier_and_value ~ ";" }
+
+definer_keyword = { ( "enum" | "flag" ) }
+
+complex_key_value_pair = { identifier ~ "=" ~ QUOTATION_MARK ~ text ~ (QUOTATION_MARK ~ ";") }
+complex_definer_item = { identifier_and_value ~ "{" ~
+                             complex_key_value_pair+ ~
+                            "}"}
+definer_members = { (basic_definer_item | complex_definer_item)+ }
+definer = { definer_keyword ~ identifier ~ ":" ~ basic_type ~ "{"
+                ~ definer_members ~
+                "}" ~ object_key_values* }
+
+else_if_statement = {"else" ~ "if" ~ "(" ~ if_statement_conditional ~
+                                ("||" ~ if_statement_conditional)* ~ ")" ~ "{" ~
+                                container_members ~
+                                "}"}
+else_statement = { "else" ~ "{" ~ container_member+ ~ "}" }
+if_statement_value = { (value | identifier) }
+if_statement_operator = { "==" | "&" | "!=" }
+if_statement_conditional = { identifier ~ if_statement_operator ~ if_statement_value }
+if_statement = { "if" ~ "(" ~ if_statement_conditional ~ ( "||" ~ if_statement_conditional )* ~ ")" ~ "{" ~
+                container_members ~
+                "}" ~
+                else_if_statement* ~
+                else_statement? }
+
+upcasted_type  = { "(" ~ basic_type ~ ")" }
+container_type = { ( array_type | basic_type | upcasted_type? ~ identifier ) }
+container_identifier_and_type = { container_type ~ identifier }
+container_identifier_type_and_value = { container_identifier_and_type ~ ("=" ~ value)* }
+basic_container_item = { container_identifier_type_and_value ~ ";" }
+complex_container_item = { container_identifier_type_and_value ~ "{" ~
+                            complex_key_value_pair+ ~
+                            "}"}
+object_key_values = { ("{" ~ complex_key_value_pair+ ~ "}") }
+
+optional_statement = { "optional" ~ identifier ~ "{" ~
+                       container_members ~
+                       "}" ~ object_key_values? }
+
+container_members = { container_member* }
+container_member = { ( if_statement
+                    | basic_container_item
+                    | complex_container_item
+                    | optional_statement ) }
+
+container_keyword = { ("struct" | "clogin" | "slogin" | "smsg" | "cmsg" | "msg")}
+
+container = { container_keyword ~ identifier ~ ("=" ~ value)? ~ "{" ~
+                        container_members ~
+                        "}" ~ object_key_values? }
+
+test_items = {(basic_test_item | complex_test_item)*}
+multiple_values = { (value ~ ("|" ~ value)*) }
+sub_object = { "{" ~ basic_test_item* ~ "}" }
+array_of_sub_objects = { "[" ~ (sub_object ~ ","?)* ~ "]" }
+basic_test_item = { identifier ~ "=" ~ ( array | multiple_values | sub_object | array_of_sub_objects ) ~ ";" }
+complex_test_item = { identifier ~ "=" ~ ( array | multiple_values | sub_object | array_of_sub_objects ) ~ object_key_values }
+raw_values = { (value ~ ","?)+ }
+
+test = {"test" ~ identifier ~ "{" ~
+        test_items ~
+        "}" ~ "[" ~
+        raw_values
+        ~ "]" ~
+        object_key_values? }
+
+statements = { (definer | container | test)+ }
+
+file = { SOI ~ commands ~ statements ~ EOI }

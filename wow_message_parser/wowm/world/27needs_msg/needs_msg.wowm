@@ -1,0 +1,146 @@
+#tag_all versions "1.12";
+
+msg MSG_MOVE_TELEPORT_ACK = 0x00C7 {
+    Guid guid;
+    u32 movement_counter;
+    u32 time_in_msecs;
+}
+
+msg MSG_MOVE_WORLDPORT_ACK = 0x00DC {}
+
+msg MSG_TABARDVENDOR_ACTIVATE = 0x01F2 {
+    Guid guid;
+}
+
+
+enum QuestPartyMessage : u8 {
+    SHARING_QUEST = 0 {
+        comment = "ERR_QUEST_PUSH_SUCCESS_S";
+    }
+    CANT_TAKE_QUEST = 1 {
+        comment = "ERR_QUEST_PUSH_INVALID_S";
+    }
+    ACCEPT_QUEST = 2 {
+        comment = "ERR_QUEST_PUSH_ACCEPTED_S";
+    }
+    DECLINE_QUEST = 3 {
+        comment = "ERR_QUEST_PUSH_DECLINED_S";
+    }
+    TOO_FAR = 4 {
+        comment = "removed in 3.x";
+    }
+    BUSY = 5 {
+        comment = "ERR_QUEST_PUSH_BUSY_S";
+    }
+    LOG_FULL = 6 {
+        comment = "ERR_QUEST_PUSH_LOG_FULL_S";
+    }
+    HAVE_QUEST = 7 {
+        comment = "ERR_QUEST_PUSH_ONQUEST_S";
+    }
+    FINISH_QUEST = 8 {
+        comment = "ERR_QUEST_PUSH_ALREADY_DONE_S";
+    }
+} {
+    comment = "cmangos has one instance of this be u32, but both vmangos/mangoszero are u8";
+}
+
+msg MSG_QUEST_PUSH_RESULT = 0x0276 {
+    Guid guid;
+    QuestPartyMessage message;
+}
+
+msg MSG_PETITION_RENAME = 0x02C1 {
+    Guid petition_guid;
+    CString new_name;
+}
+
+msg MSG_PETITION_DECLINE = 0x01C2 {
+    Guid petition;
+}
+
+msg MSG_MOVE_START_FORWARD = 0x00B5 {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_START_BACKWARD = 0x00B6 {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_STOP = 0x00B7 {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_START_STRAFE_LEFT = 0x00B8 {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_START_STRAFE_RIGHT = 0x00B9 {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_STOP_STRAFE = 0x00BA {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_JUMP = 0x00BB {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_START_TURN_LEFT = 0x00BC {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_START_TURN_RIGHT = 0x00BD {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_STOP_TURN = 0x00BE {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_START_PITCH_UP = 0x00BF {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_START_PITCH_DOWN = 0x00C0 {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_STOP_PITCH = 0x00C1 {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_SET_RUN_MODE = 0x00C2 {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_SET_WALK_MODE = 0x00C3 {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_FALL_LAND = 0x00C9 {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_START_SWIM = 0x00CA {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_STOP_SWIM = 0x00CB {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_SET_FACING = 0x00DA {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_SET_PITCH = 0x00DB {
+    MovementInfo info;
+}
+
+msg MSG_MOVE_HEARTBEAT = 0x00EE {
+    MovementInfo info;
+}
+
+

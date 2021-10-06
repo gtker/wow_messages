@@ -1,0 +1,127 @@
+use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
+
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:12`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm):
+/// ```text
+/// flag SimpleFlag : u8 {
+///     ZERO = 0;
+///     ONE = 1;
+///     TWO = 2;
+/// }
+/// ```
+#[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
+pub struct SimpleFlag {
+    inner: u8,
+}
+
+impl SimpleFlag {
+    pub const fn new(inner: u8) -> Self {
+        Self { inner }
+    }
+
+}
+
+impl ReadableAndWritable for SimpleFlag {
+    type Error = std::io::Error;
+
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        let inner = crate::util::read_u8_le(r)?;
+        Ok(Self { inner })
+    }
+
+    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.inner.to_le_bytes())?;
+        Ok(())
+    }
+
+}
+
+impl SimpleFlag {
+    pub const ZERO: u8 = 0x00;
+    pub const ONE: u8 = 0x01;
+    pub const TWO: u8 = 0x02;
+
+    pub const fn empty() -> Self {
+        Self { inner: 0 }
+    }
+
+    pub const fn all() -> Self {
+        Self {
+            inner: Self::ZERO
+                | Self::ONE
+                | Self::TWO
+        }
+    }
+
+    pub const fn is_ZERO(&self) -> bool {
+        // Underlying value is 0
+        self.inner == Self::ZERO
+    }
+
+    pub const fn new_ZERO() -> Self {
+        Self { inner: Self::ZERO }
+    }
+
+    pub fn set_ZERO(&mut self) -> Self {
+        self.inner |= Self::ZERO;
+        *self
+    }
+
+    pub fn clear_ZERO(&mut self) -> Self {
+        self.inner &= Self::ZERO.reverse_bits();
+        *self
+    }
+
+    pub const fn is_ONE(&self) -> bool {
+        (self.inner & Self::ONE) != 0
+    }
+
+    pub const fn new_ONE() -> Self {
+        Self { inner: Self::ONE }
+    }
+
+    pub fn set_ONE(&mut self) -> Self {
+        self.inner |= Self::ONE;
+        *self
+    }
+
+    pub fn clear_ONE(&mut self) -> Self {
+        self.inner &= Self::ONE.reverse_bits();
+        *self
+    }
+
+    pub const fn is_TWO(&self) -> bool {
+        (self.inner & Self::TWO) != 0
+    }
+
+    pub const fn new_TWO() -> Self {
+        Self { inner: Self::TWO }
+    }
+
+    pub fn set_TWO(&mut self) -> Self {
+        self.inner |= Self::TWO;
+        *self
+    }
+
+    pub fn clear_TWO(&mut self) -> Self {
+        self.inner &= Self::TWO.reverse_bits();
+        *self
+    }
+
+    pub const fn as_u8(&self) -> u8 {
+        self.inner
+    }
+
+}
+
+impl ConstantSized for SimpleFlag {
+    fn size() -> usize {
+        Self::maximum_possible_size()
+    }
+}
+
+impl MaximumPossibleSized for SimpleFlag {
+    fn maximum_possible_size() -> usize {
+        1
+    }
+}
+

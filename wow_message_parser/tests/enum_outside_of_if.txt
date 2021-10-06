@@ -1,0 +1,375 @@
+use std::convert::{TryFrom, TryInto};
+use crate::world::v1::v12::{NestedEnum, NestedEnumError};
+use crate::world::v1::v12::{TEnum, TEnumError};
+use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+
+#[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:270`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm):
+/// ```text
+/// struct EnumOutsideOfIf {
+///     TEnum t;
+///     NestedEnum n;
+///     if (t == ZERO) {
+///         if (n == NESTED) {
+///             u8 nested;
+///         }
+///     }
+/// }
+/// ```
+pub struct EnumOutsideOfIf {
+    pub t: EnumOutsideOfIfTEnum,
+    pub n: EnumOutsideOfIfNestedEnum,
+}
+
+impl ReadableAndWritable for EnumOutsideOfIf {
+    type Error = EnumOutsideOfIfError;
+
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // t: TEnum
+        let t = TEnum::read(r)?;
+
+        // n: NestedEnum
+        let n = NestedEnum::read(r)?;
+
+        let t_if = match t {
+            TEnum::ZERO => {
+                let n_if = match n {
+                    NestedEnum::NESTED => {
+                        // nested: u8
+                        let nested = crate::util::read_u8_le(r)?;
+
+                        EnumOutsideOfIfNestedEnum::NESTED {
+                            nested,
+                        }
+                    }
+                    NestedEnum::NOT_NESTED => EnumOutsideOfIfNestedEnum::NOT_NESTED,
+                };
+
+                EnumOutsideOfIfTEnum::ZERO {
+                    n: n_if,
+                }
+            }
+            TEnum::ONE => EnumOutsideOfIfTEnum::ONE,
+            TEnum::TWO => EnumOutsideOfIfTEnum::TWO,
+            TEnum::THREE => EnumOutsideOfIfTEnum::THREE,
+            TEnum::FOUR => EnumOutsideOfIfTEnum::FOUR,
+            TEnum::FIVE => EnumOutsideOfIfTEnum::FIVE,
+            TEnum::SIX => EnumOutsideOfIfTEnum::SIX,
+            TEnum::REST => EnumOutsideOfIfTEnum::REST,
+        };
+
+        Ok(Self {
+            t: t_if,
+            n: n_if,
+        })
+    }
+
+    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // t: TEnum
+        self.t.write(w)?;
+
+        // n: NestedEnum
+        self.n.write(w)?;
+
+        match &self.t {
+            EnumOutsideOfIfTEnum::ZERO {
+            } => {
+                match &self.n {
+                    EnumOutsideOfIfNestedEnum::NESTED {
+                        nested,
+                    } => {
+                        // nested: u8
+                        w.write_all(&nested.to_le_bytes())?;
+
+                    }
+                    EnumOutsideOfIfNestedEnum::NOT_NESTED => {}
+                }
+
+            }
+            EnumOutsideOfIfTEnum::ONE => {}
+            EnumOutsideOfIfTEnum::TWO => {}
+            EnumOutsideOfIfTEnum::THREE => {}
+            EnumOutsideOfIfTEnum::FOUR => {}
+            EnumOutsideOfIfTEnum::FIVE => {}
+            EnumOutsideOfIfTEnum::SIX => {}
+            EnumOutsideOfIfTEnum::REST => {}
+        }
+
+        Ok(())
+    }
+
+}
+
+impl VariableSized for EnumOutsideOfIf {
+    fn size(&self) -> usize {
+        self.t.size() // t: TEnum and subfields
+        + self.n.size() // n: NestedEnum and subfields
+    }
+}
+
+impl MaximumPossibleSized for EnumOutsideOfIf {
+    fn maximum_possible_size() -> usize {
+        TEnum::maximum_possible_size() // t: TEnum
+        + NestedEnum::maximum_possible_size() // n: NestedEnum
+    }
+}
+
+#[derive(Debug)]
+pub enum EnumOutsideOfIfError {
+    Io(std::io::Error),
+    NestedEnum(NestedEnumError),
+    TEnum(TEnumError),
+}
+
+impl std::error::Error for EnumOutsideOfIfError {}
+impl std::fmt::Display for EnumOutsideOfIfError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Io(i) => i.fmt(f),
+            Self::NestedEnum(i) => i.fmt(f),
+            Self::TEnum(i) => i.fmt(f),
+        }
+    }
+}
+
+impl From<std::io::Error> for EnumOutsideOfIfError {
+    fn from(e : std::io::Error) -> Self {
+        Self::Io(e)
+    }
+}
+
+impl From<NestedEnumError> for EnumOutsideOfIfError {
+    fn from(e: NestedEnumError) -> Self {
+        Self::NestedEnum(e)
+    }
+}
+
+impl From<TEnumError> for EnumOutsideOfIfError {
+    fn from(e: TEnumError) -> Self {
+        Self::TEnum(e)
+    }
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum EnumOutsideOfIfTEnum {
+    ZERO,
+    ONE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    REST,
+}
+
+impl From<&TEnum> for EnumOutsideOfIfTEnum {
+    fn from(e: &TEnum) -> Self {
+        match &e {
+            TEnum::ZERO => Self::ZERO,
+            TEnum::ONE => Self::ONE,
+            TEnum::TWO => Self::TWO,
+            TEnum::THREE => Self::THREE,
+            TEnum::FOUR => Self::FOUR,
+            TEnum::FIVE => Self::FIVE,
+            TEnum::SIX => Self::SIX,
+            TEnum::REST => Self::REST,
+        }
+    }
+}
+
+impl From<&EnumOutsideOfIfTEnum> for TEnum {
+    fn from(v: &EnumOutsideOfIfTEnum) -> Self {
+        match &v {
+            EnumOutsideOfIfTEnum::ZERO => Self::ZERO,
+            EnumOutsideOfIfTEnum::ONE => Self::ONE,
+            EnumOutsideOfIfTEnum::TWO => Self::TWO,
+            EnumOutsideOfIfTEnum::THREE => Self::THREE,
+            EnumOutsideOfIfTEnum::FOUR => Self::FOUR,
+            EnumOutsideOfIfTEnum::FIVE => Self::FIVE,
+            EnumOutsideOfIfTEnum::SIX => Self::SIX,
+            EnumOutsideOfIfTEnum::REST => Self::REST,
+        }
+    }
+}
+
+impl Default for EnumOutsideOfIfTEnum {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::ZERO
+    }
+}
+
+impl EnumOutsideOfIfTEnum {
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: TEnum = self.into();
+        a.write(w)?;
+        Ok(())
+    }
+
+    pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: TEnum = self.into();
+        a.write_u16_le(w)
+    }
+
+    pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: TEnum = self.into();
+        a.write_u16_be(w)
+    }
+
+    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: TEnum = self.into();
+        a.write_u32_le(w)
+    }
+
+    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: TEnum = self.into();
+        a.write_u32_be(w)
+    }
+
+    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: TEnum = self.into();
+        a.write_u64_le(w)
+    }
+
+    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: TEnum = self.into();
+        a.write_u64_be(w)
+    }
+
+}
+
+impl VariableSized for EnumOutsideOfIfTEnum {
+    fn size(&self) -> usize {
+        match self {
+            Self::ZERO =>  {
+                1
+            }
+            Self::ONE =>  {
+                1
+            }
+            Self::TWO =>  {
+                1
+            }
+            Self::THREE =>  {
+                1
+            }
+            Self::FOUR =>  {
+                1
+            }
+            Self::FIVE =>  {
+                1
+            }
+            Self::SIX =>  {
+                1
+            }
+            Self::REST =>  {
+                1
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for EnumOutsideOfIfTEnum {
+    fn maximum_possible_size() -> usize {
+        65536 // maximum possible u16 size. TODO value.
+    }
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum EnumOutsideOfIfNestedEnum {
+    NESTED {
+        nested: u8,
+    },
+    NOT_NESTED,
+}
+
+impl From<&NestedEnum> for EnumOutsideOfIfNestedEnum {
+    fn from(e: &NestedEnum) -> Self {
+        match &e {
+            NestedEnum::NESTED => Self::NESTED {
+                nested: Default::default(),
+            },
+            NestedEnum::NOT_NESTED => Self::NOT_NESTED,
+        }
+    }
+}
+
+impl From<&EnumOutsideOfIfNestedEnum> for NestedEnum {
+    fn from(v: &EnumOutsideOfIfNestedEnum) -> Self {
+        match &v {
+            EnumOutsideOfIfNestedEnum::NESTED { .. } => Self::NESTED,
+            EnumOutsideOfIfNestedEnum::NOT_NESTED => Self::NOT_NESTED,
+        }
+    }
+}
+
+impl Default for EnumOutsideOfIfNestedEnum {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::NESTED {
+            nested: Default::default(),
+        }
+    }
+}
+
+impl EnumOutsideOfIfNestedEnum {
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: NestedEnum = self.into();
+        a.write(w)?;
+        Ok(())
+    }
+
+    pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: NestedEnum = self.into();
+        a.write_u16_le(w)
+    }
+
+    pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: NestedEnum = self.into();
+        a.write_u16_be(w)
+    }
+
+    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: NestedEnum = self.into();
+        a.write_u32_le(w)
+    }
+
+    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: NestedEnum = self.into();
+        a.write_u32_be(w)
+    }
+
+    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: NestedEnum = self.into();
+        a.write_u64_le(w)
+    }
+
+    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: NestedEnum = self.into();
+        a.write_u64_be(w)
+    }
+
+}
+
+impl VariableSized for EnumOutsideOfIfNestedEnum {
+    fn size(&self) -> usize {
+        match self {
+            Self::NESTED  {
+                nested,
+            } => {
+                1
+                + 1 // nested: u8
+            }
+            Self::NOT_NESTED =>  {
+                1
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for EnumOutsideOfIfNestedEnum {
+    fn maximum_possible_size() -> usize {
+        65536 // maximum possible u16 size. TODO value.
+    }
+}
+

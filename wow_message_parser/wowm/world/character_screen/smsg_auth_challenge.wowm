@@ -1,0 +1,5 @@
+#tag_all versions "1.2 1.12";
+
+smsg SMSG_AUTH_CHALLENGE = 0x1EC {
+    u32 server_seed;
+}

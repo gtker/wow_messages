@@ -1,0 +1,1128 @@
+#tag_all versions "1.12";
+
+enum PetTalkReason : u32 {
+    SPECIAL_SPELL = 0;
+    ATTACK = 1;
+}
+
+smsg SMSG_PET_ACTION_SOUND = 0x0324 {
+    Guid guid;
+    PetTalkReason reason;
+}
+
+smsg SMSG_PET_DISMISS_SOUND = 0x0325 {
+    u32 sound_id;
+    f32 position_x;
+    f32 position_y;
+    f32 position_z;
+}
+
+enum GmTicketStatusResponse : u32 {
+    UPDATED = 1;
+    CLOSED = 2;
+    SURVEY = 3;
+}
+
+smsg SMSG_GM_TICKET_STATUS_UPDATE = 0x0328 {
+    GmTicketStatusResponse response;
+}
+
+struct GmSurveyQuestion {
+    u32 question_id {
+        comment = "cmangos: questions found in GMSurveyQuestions.dbc";
+    }
+    u8 answer {
+        comment = "Rating: hardcoded limit of 0-5 in pre-Wrath, ranges defined in GMSurveyAnswers.dbc Wrath+";
+    }
+}
+
+cmsg CMSG_GMSURVEY_SUBMIT = 0x032A {
+    /* Enum for survey id */
+    u32 survey_id {
+        comment = "cmangos: Survey ID: found in GMSurveySurveys.dbc";
+    }
+    GmSurveyQuestion[10] questions;
+    CString answer_comment {
+        comment = "cmangos: Answer comment: Unused in stock UI, can be only set by calling Lua function"; 
+        comment = "cmangos: Answer comment max sizes in bytes: Vanilla - 8106:8110, TBC - 11459:11463, Wrath - 582:586";
+    }
+}
+
+smsg SMSG_UPDATE_INSTANCE_OWNERSHIP = 0x032B {
+    u32 has_been_saved {
+        comment = "cmangos/vmangos/mangoszero: true or false means, whether you have current raid instances";
+    }
+}
+
+smsg SMSG_SPELLINSTAKILLLOG = 0x032F {
+    Guid target_guid;
+    Spell spell;
+}
+
+smsg SMSG_SPELL_UPDATE_CHAIN_TARGETS = 0x0330 {
+    Guid caster;
+    Spell spell;
+    u32 amount_of_targets;
+    Guid[amount_of_targets] targets;
+}
+
+smsg SMSG_EXPECTED_SPAM_RECORDS = 0x0332 {
+    u32 amount_of_records;
+    CString[amount_of_records] records;
+}
+
+smsg SMSG_DEFENSE_MESSAGE = 0x033B {
+    Map map;
+    /* TODO CString with length? */
+    u32 message_length;
+    CString message;
+}
+
+
+cmsg CMSG_WHO = 0x62 {
+    u32 minimum_level;
+    u32 maximum_level;
+    CString player_name;
+    CString guild_name;
+    u32 race_mask;
+    u32 class_mask;
+    u32 amount_of_zones {
+        maximum_value = "10";
+    }
+    u32[amount_of_zones] zones;
+    u32 amount_of_strings {
+        maximum_value = "4";
+    }
+    CString[amount_of_strings] search_strings;
+}
+
+
+struct QuestItemReward {
+    Item item;
+    u32 item_count;
+}
+
+struct QuestObjective {
+    u32 creature_id {
+        comment = "cmangos: client expected gameobject template id in form (id|0x80000000)";
+    }
+    u32 kill_count;
+    u32 required_item_id;
+    u32 required_item_count;
+}
+
+smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
+    u32 quest_id;
+    u32 quest_method {
+        comment = "Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details)";
+    }
+    u32 quest_level;
+    u32 zone_or_sort;
+    u32 quest_type;
+    u32 reputation_objective_faction {
+        comment = "cmangos: shown in quest log as part of quest objective";
+    }
+    u32 reputation_objective_value {
+        comment = "cmangos: shown in quest log as part of quest objective";
+    }
+    u32 required_opposite_faction {
+        comment = "cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0";
+    }
+    u32 required_opposite_reputation_value {
+        comment = "cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0";
+    }
+    u32 next_quest_in_chain;
+    u32 money_reward;
+    u32 max_level_money_reward {
+        comment = "cmangos: used in XP calculation at client";
+    }
+    u32 reward_spell {
+        comment = "cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0)";
+    }
+    u32 source_item_id;
+    u32 quest_flags;
+    QuestItemReward[4] rewards;
+    QuestItemReward[6] choice_rewards;
+    u32 point_map_id;
+    f32 position_x;
+    f32 position_y;
+    u32 point_opt;
+    CString title;
+    CString objective_text;
+    CString details;
+    CString end_text;
+    QuestObjective[4] objectives;
+    CString[4] objective_texts;
+}
+
+
+enum PvpRank : u8 {
+    NO_RANK = 0;
+    PARIAH = 1;
+    OUTLAW = 2;
+    EXILED = 3;
+    DISHONORED = 4;
+    RANK1 = 5;
+    RANK2 = 6;
+    RANK3 = 7;
+    RANK4 = 8;
+    RANK5 = 9;
+    RANK6 = 10;
+    RANK7 = 11;
+    RANK8 = 12;
+    RANK9 = 13;
+    RANK10 = 14;
+    RANK11 = 15;
+    RANK12 = 16;
+    RANK13 = 17;
+    RANK14 = 18;
+    FACTION_LEADER = 19;
+}
+
+
+smsg SMSG_PVP_CREDIT = 0x028C {
+    u32 honor_points;
+    Guid victim;
+    (u32)PvpRank rank;
+}
+
+cmsg CMSG_SET_AMMO = 0x0268 {
+    u32 item;
+}
+
+smsg SMSG_CORPSE_RECLAIM_DELAY = 0x0269 {
+    u32 delay_in_seconds;
+}
+
+cmsg CMSG_STABLE_SWAP_PET = 0x0275 {
+    Guid npc;
+    u32 pet_slot;
+}
+
+smsg SMSG_PLAY_MUSIC = 0x0277 {
+    u32 sound_id;
+}
+
+
+enum BgTypeId : u32 {
+    NOT_ELIGIBLE = 0 {
+        comment = "Your group has joined a battleground queue, but you are not eligible";
+    }
+    QUEUED_FOR_AV = 1 {
+        comment = "Your group has joined the queue for AV";
+    }
+    QUEUED_FOR_WSG = 2 {
+        comment = "Your group has joined the queue for WS";
+    }
+    QUEUED_FOR_AB = 3 {
+        comment = "Your group has joined the queue for AB";
+    }
+    REMOVE_FROM_QUEUE = 0xFFFFFFFE {
+        comment = "send bg command result to show nice message";
+    }
+}
+
+smsg SMSG_GROUP_JOINED_BATTLEGROUND = 0x02E8 {
+    BgTypeId id;
+}
+
+
+/* TODO: RIGHT ? */
+enum SpellSchool : u8 {
+    NORMAL = 0 {
+        comment = "Physical, Armor";
+    }
+    HOLY = 1;
+    FIRE = 2;
+    NATURE = 3;
+    FROST = 4;
+    SHADOW = 5;
+    ARCANE = 6;
+}
+
+smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
+    Guid victim_guid;
+    Guid caster_guid;
+    u32 damage;
+    /* TODO: RIGHT ? */
+    (u32)SpellSchool school;
+}
+
+smsg SMSG_RESISTLOG = 0x01D6 {
+    /* TODO: Nothing except a comment for this */
+    u64 guid1;
+    u64 guid2;
+    u32 unknown1;
+    f32 unknown2;
+    f32 unknown3;
+    u32 unknown4;
+    u32 unknown5;
+} {
+    comment = "Structure as comment on https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525";
+}
+
+
+struct PetitionShowlist {
+    u32 index;
+    u32 charter_entry = 5863 {
+        comment = "cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863).";
+    }
+    u32 charter_display_id = 16161 {
+        comment = "cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161).";
+    }
+    u32 guild_charter_cost {
+        comment = "cmangos/vmangos/mangoszero: statically set to 1000 (10 silver).";
+    }
+    u32 unknown1 {
+        comment = "cmangos/vmangos/mangoszero: statically set to 1";
+    }
+    u32 unknown2 {
+        comment = "cmangos/vmangos/mangoszero: statically set to 9";
+        comment = "cmangos/vmangos/mangoszero: required signs?";
+    }
+}
+
+smsg SMSG_PETITION_SHOWLIST = 0x01BC {
+    Guid npc;
+    u8 amount_of_petitions;
+    PetitionShowlist[amount_of_petitions] petitions;
+}
+
+cmsg CMSG_SET_FACTION_ATWAR = 0x0125 {
+    /* TODO: Reputation list id and u8 flag */
+    u32 reputation_list_id;
+    u8 flags;
+}
+
+enum MonsterMoveType : u8 {
+    NORMAL = 0;
+    STOP = 1;
+    FACING_SPOT = 2;
+    FACING_TARGET = 3;
+    FACING_ANGLE = 4;
+}
+
+smsg SMSG_MONSTER_MOVE = 0x00DD {
+    PackedGuid guid;
+    f32 position_x;
+    f32 position_y;
+    f32 position_z;
+    u32 spline_id;
+    MonsterMoveType move_type;
+    /* TODO Might have more things? */
+}
+
+struct TradeSlot {
+    u8 trade_slot_number {
+        comment = "cmangos/vmangos/mangoszero: sets to index of array";
+    }
+    u32 item_id;
+    u32 display_id;
+    u32 stack_count;
+    u32 is_wrapped;
+    Guid gift_wrapper;
+    u32 enchantment;
+    Guid item_creator;
+    u32 spell_charges;
+    u32 item_suffix_factor;
+    u32 item_random_properties_id;
+    u32 lock_id;
+    u32 max_durability;
+    u32 durability;
+}
+
+smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
+    Bool self_player {
+        comment = "cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)";
+    }
+    u32 trade_slot_count1 {
+        /* TODO: Maybe an enum for maximum values? */
+        comment = "cmangos/vmangos/mangoszero: sets to 7";
+        comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases";
+    }
+    u32 trade_slot_count2 {
+        /* TODO: Maybe an enum for maximum values? */
+        comment = "cmangos/vmangos/mangoszero: sets to 7";
+        comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases";
+    }
+    u32 money_in_trade;
+    Spell spell_on_lowest_slot;
+    TradeSlot[7] trade_slots {
+        comment = "vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.";
+    }
+}
+
+
+struct InitialSpell {
+    u16 spell_id {
+        comment = "cmangos/mangoszero: only send 'first' part of spell";
+    }
+    u16 unknown1 {
+        comment = "cmangos/mangoszero: sets to 0";
+        comment = "cmangos/mangoszero: it's not slot id";
+    }
+}
+
+struct CooldownSpell {
+    u16 spell_id;
+    u16 item_id {
+        comment = "cmangos/mangoszero: cast item id";
+    }
+    u16 spell_category;
+    u32 cooldown_in_msecs;
+    u32 category_cooldown_in_msecs;
+}
+
+smsg SMSG_INITIAL_SPELLS = 0x012A {
+    u8 unknown1 {
+        comment = "cmangos/mangoszero: sets to 0";
+    }
+    u16 spell_count;
+    InitialSpell[spell_count] initial_spells;
+    u16 cooldown_count;
+    CooldownSpell[cooldown_count] cooldowns;
+}
+
+
+flag CastFlags : u16 {
+    NONE = 0x00000000;
+    HIDDEN_COMBATLOG = 0x00000001 {
+        comment = "mangoszero/cmangos/vmangos: hide in combat log?";
+    }
+    UNKNOWN2 = 0x00000002;
+    UNKNOWN3 = 0x00000004;
+    UNKNOWN4 = 0x00000008;
+    UNKNOWN5 = 0x00000010;
+    AMMO = 0x00000020 {
+        comment = "cmangos/vmangos/mangoszero: Projectiles visual";
+    }
+    UNKNOWN7 = 0x00000040 {
+        comment = "cmangos/vmangos/mangoszero: !0x41 mask used to call CGTradeSkillInfo::DoRecast";
+    }
+    UNKNOWN8 = 0x00000080;
+    UNKNOWN9 = 0x00000100;
+}
+
+smsg SMSG_SPELL_START = 0x0131 {
+    PackedGuid cast_item {
+        comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
+    }
+    PackedGuid caster;
+    Spell spell;
+    CastFlags flags;
+    u32 timer;
+    SpellCastTargets targets;
+    if (flags & AMMO) {
+        u32 ammo_display_id;
+        u32 ammo_inventory_type;
+    }
+}
+
+smsg SMSG_SPELL_GO = 0x0132 {
+    PackedGuid cast_item {
+        comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
+    }
+    PackedGuid caster;
+    Spell spell;
+    CastFlags flags;
+
+    u8 amount_of_hits;
+    Guid[amount_of_hits] hits;
+
+    u8 amount_of_misses;
+    SpellMiss[amount_of_misses] misses;
+    
+    SpellCastTargets targets;
+    if (flags & AMMO) {
+        u32 ammo_display_id;
+        u32 ammo_inventory_type;
+    }
+}
+
+
+enum NewItemSource : u32 {
+    LOOTED = 0;
+    FROM_NPC = 1;
+}
+
+enum NewItemCreationType : u32 {
+    RECEIVED = 0;
+    CREATED = 1;
+}
+
+enum NewItemChatAlert : u32 {
+    DO_NOT_SHOW = 0;
+    SHOW = 1;
+}
+
+smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
+    Guid guid;
+    NewItemSource source;
+    NewItemCreationType creation_type;
+    NewItemChatAlert alert_chat;
+    u8 bag_slot;
+    u32 item_slot {
+        comment = "mangoszero: item slot, but when added to stack: 0xFFFFFFFF";
+    }
+    u32 item_id;
+    u32 item_suffix_factor {
+        comment = "mangoszero: SuffixFactor";
+    }
+    u32 item_random_property_id {
+        comment = "mangoszero: random item property id";
+    }
+    u32 item_count;
+}
+
+
+struct PetSpellCooldown {
+    u16 spell_id;
+    u16 spell_category {
+        comment = "mangoszero: sets to 0";
+    }
+    u32 cooldown_in_msecs;
+    u32 category_cooldown_in_msecs;
+}
+
+smsg SMSG_PET_SPELLS = 0x0179 {
+    Guid pet;
+    u32 unknown1 {
+        comment = "mangoszero: set to 0";
+    }
+    PetReactState react;
+    PetCommandState command;
+    u16 unknown2 {
+        comment = "mangoszero: set to 0";
+    }
+    u32[10] action_bars;
+    u8 amount_of_spells;
+    u32[amount_of_spells] spells;
+    u8 amount_of_cooldowns;
+    PetSpellCooldown[amount_of_cooldowns] cooldowns;
+}
+
+
+struct GossipItem {
+    u32 id {
+        comment = "vmangos: sets to loop index";
+    }
+    u8 item_icon;
+    Bool coded {
+        comment = "vmangos: makes pop up box password";
+    }
+}
+
+struct QuestItem {
+    u32 quest_id;
+    u32 quest_icon;
+    u32 level;
+    CString title {
+        comment = "vmangos/cmangos/mangoszero: max 0x200";
+    }
+}
+
+smsg SMSG_GOSSIP_MESSAGE = 0x017D {
+    Guid guid;
+    u32 title_text_id;
+    u32 amount_of_gossip_items {
+        valid_range = "0 15";
+    }
+    GossipItem[amount_of_gossip_items] gossips;
+    u32 amount_of_quests {
+        valid_range = "0 20";
+    }
+    QuestItem[amount_of_quests] quests;
+}
+
+struct NpcTextUpdateEmote {
+    u32 delay;
+    u32 emote;
+}
+
+struct NpcTextUpdate {
+    f32 probability;
+    CString[2] texts;
+    Language language;
+    NpcTextUpdateEmote[3] emotes;
+}
+
+smsg SMSG_NPC_TEXT_UPDATE = 0x0180 {
+    u32 text_id;
+    f32 probability;
+    NpcTextUpdate[8] texts;
+}
+
+smsg SMSG_QUESTGIVER_QUEST_LIST = 0x0185 {
+    Guid npc;
+    CString title;
+    u32 emote_delay {
+        comment = "mangoszero: player emote";
+    }
+    u32 emote {
+        comment = "mangoszero: NPC emote";
+    }
+    u8 amount_of_entries {
+        valid_range = "0 32";
+    }
+    QuestItem[amount_of_entries] quest_items;
+}
+
+struct QuestDetailsEmote {
+    u32 emote;
+    u32 emote_delay_in_msecs;
+}
+
+smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
+    Guid guid;
+    u32 quest_id;
+    CString title;
+    CString details;
+    CString objectives;
+    u32 auto_finish {
+        comment = "cmangos/vmangos/mangoszero: sets to 1 for true and 0 for false";
+    }
+    u32 amount_of_choice_item_rewards;
+    QuestItemReward[amount_of_choice_item_rewards] choice_item_rewards;
+    u32 amount_of_item_rewards;
+    QuestItemReward[amount_of_item_rewards] item_rewards;
+    u32 money_reward;
+    Spell reward_spell;
+    u32 amount_of_emotes;
+    QuestDetailsEmote[amount_of_emotes] emotes;
+}
+
+
+struct QuestItemRequirement {
+    Item item;
+    u32 item_count;
+    u32 item_display_id;
+}
+
+enum QuestCompletable : u32 {
+    NOT_COMPLETABLE = 0;
+    COMPLETEABLE = 3;
+}
+
+smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
+    Guid npc;
+    u32 quest_id;
+    CString title;
+    CString request_items_text;
+    u32 emote_delay;
+    u32 emote;
+    u32 auto_finish;
+    u32 required_money;
+    u32 amount_of_required_items;
+    QuestItemRequirement[amount_of_required_items] required_items;
+    u32 unknown1 {
+        comment = "cmangos/vmangos/mangoszero: All set to 0x02";
+    }
+    QuestCompletable completable {
+        comment = "cmangos/vmangos/mangoszero: Called flags1.";
+    }
+    u32 flags2 {
+        comment = "cmangos/vmangos/mangoszero: set to 0x04";
+    }
+    u32 flags3 {
+        comment = "cmangos/vmangos/mangoszero: set to 0x08";
+    }
+} {
+    comment = "mangoszero/vmangos: Quests that don't require items use the RequestItemsText field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.";
+}
+
+
+smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
+    Guid npc;
+    u32 quest_id;
+    CString title;
+    CString offer_reward_text;
+    u32 enable_next {
+        comment = "vmangos/mangoszero/cmangos: Auto Finish";
+    }
+    u32 amount_of_emotes {
+        valid_range = "0 4";
+    }
+    NpcTextUpdateEmote[amount_of_emotes] emotes;
+    u32 amount_of_choice_item_rewards;
+    QuestItemReward[amount_of_choice_item_rewards] choice_item_rewards;
+    u32 amount_of_item_rewards;
+    QuestItemReward[amount_of_item_rewards] item_rewards;
+    u32 money_reward;
+    Spell reward_spell;
+    Spell reward_spell_cast {
+        comment = "mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though.";
+    }
+}
+
+
+smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
+    u32 quest_id;
+    u32 unknown {
+        comment = "cmangos/vmangos/mangoszero: set to 0x03";
+    }
+    u32 experience_reward;
+    u32 money_reward;
+    u32 amount_of_item_rewards {
+        valid_range = "0 5";
+    }
+    QuestItemReward[amount_of_item_rewards] item_rewards;
+}
+
+
+struct ListInventoryItem {
+    u32 item_stack_count;
+    u32 item_id;
+    u32 item_display_id;
+    u32 max_items {
+        comment = "cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case";
+    }
+    u32 price;
+    u32 max_durability;
+    u32 durability;
+}
+
+smsg SMSG_LIST_INVENTORY = 0x019F {
+    Guid vendor;
+    u8 amount_of_items {
+        comment = "cmangos: 0 displays Vendor has no inventory";
+    }
+    ListInventoryItem[amount_of_items] items;
+}
+
+enum SellItemResult : u8 {
+    CANT_FIND_ITEM = 1;
+    CANT_SELL_ITEM = 2 {
+        comment = "cmangos/vmangos/mangoszero: merchant doesn't like that item";
+    }
+    CANT_FIND_VENDOR = 3 {
+        comment = "cmangos/vmangos/mangoszero: merchant doesn't like you";
+    }
+    YOU_DONT_OWN_THAT_ITEM = 4 {
+        comment = "cmangos/vmangos/mangoszero: you don't own that item";
+    }
+    UNK = 5 {
+        comment = "cmangos/vmangos/mangoszero: nothing appears...";
+    }
+    ONLY_EMPTY_BAG = 6 {
+        comment = "cmangos/vmangos/mangoszero: can only do with empty bags";
+    }
+}
+
+smsg SMSG_SELL_ITEM = 0x01A1 {
+    Guid guid;
+    Guid item;
+    SellItemResult result;
+}
+
+
+enum TrainerSpellState : u8 {
+    GREEN = 0;
+    RED = 1;
+    GRAY = 2;
+}
+
+struct TrainerSpell {
+    u32 spell {
+        comment = "cmangos: learned spell (or cast-spell in profession case)";
+    }
+    TrainerSpellState state;
+    u32 spell_cost;
+    u32 talent_point_cost {
+        comment = "cmangos: spells don't cost talent points";
+        comment = "cmangos: set to 0";
+    }
+    u32 first_rank {
+        comment = "cmangos: must be equal prev. field to have learn button in enabled state";
+        comment = "cmangos: 1 for true 0 for false";
+    }
+    u8 required_level;
+    u32 required_skill;
+    u32 required_skill_value;
+    u32 spell_chain_required;
+    u32 spell_chain_previous;
+    u32 unknown1 {
+        comment = "cmangos/vmangos/mangoszero: all set 0";
+    }
+}
+
+smsg SMSG_TRAINER_LIST = 0x01B1 {
+    Guid guid;
+    /* TODO Enum? */
+    u32 trainer_type;
+    u32 amount_of_spells;
+    TrainerSpell[amount_of_spells] spells;
+    CString greeting;
+}
+
+
+cmsg CMSG_PETITION_BUY = 0x01BD {
+    Guid npc;
+    u32 skip1;
+    u64 skip2;
+    CString name;
+    u32 skip3;
+    u32 skip4;
+    u32 skip5;
+    u32 skip6;
+    u32 skip7;
+    u32 skip8;
+    u32 skip9;
+    u32 skip10;
+    u32 skip11;
+    u32 skip12;
+    u16 skip13;
+    u8 skip14;
+    u32 index {
+        comment = "cmangos/vmangos/mangoszero: Named but never used";
+    }
+    u32 skip15;
+} {
+    comment = "cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused";
+}
+
+
+smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
+    Guid petition_guid;
+    Guid charter_owner;
+    CString guild_name;
+    CString body_text {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 unknown_flags {
+        comment = "cmangos/vmangos/mangoszero: Set to 1, only info is comment from vmangos";
+    }
+    u32 minimum_signatures {
+        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
+    }
+    u32 maximum_signatures {
+        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
+    }
+    u32 deadline {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 issue_date {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 allowed_guild_id {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 allowed_classes {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 allowed_races {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u16 allowed_genders {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 allowed_minimum_level {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 allowed_maximum_level {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    /* TODO Figure out if CStrings work? */
+    u32 todo_amount_of_signers {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 number_of_choices {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+}
+
+
+cmsg CMSG_BUG = 0x01CA {
+    u32 suggestion {
+        comment = "cmangos/vmangos/mangoszero: If 0 received bug report, else received suggestion";
+    }
+    u32 content_length;
+    /* TODO CString with len? */
+    CString content;
+    u32 type_length;
+    /* TODO CString with len? */
+    CString bug_type;
+}
+
+smsg SMSG_LEVELUP_INFO = 0x01D4 {
+    u32 new_level;
+    u32 health;
+    u32 mana;
+    u32 rage;
+    u32 focus;
+    u32 energy;
+    u32 happiness;
+    u32 strength;
+    u32 agility;
+    u32 stamina;
+    u32 intellect;
+    u32 spirit;
+}
+
+
+/* Used for CMSG_GMTICKET_CREATE */
+enum GmTicketType : u8 {
+    STUCK = 1;
+    BEHAVIOR_HARASSMENT = 2;
+    GUILD = 3;
+    ITEM = 4;
+    ENVIRONMENTAL = 5;
+    NONQUEST_CREEP = 6;
+    QUEST_QUESTNPC = 7;
+    TECHNICAL = 8;
+    ACCOUNT_BILLING = 9;
+    CHARACTER = 10;
+} {
+    comment = "vmangos: From GMTicketCategory.dbc";
+}
+
+
+enum GmTicketStatus : u32 {
+    DBERROR = 0x00;
+    HASTEXT = 0x06;
+    DEFAULT = 0x0A;
+}
+
+enum GmTicketEscalationStatus : u8 {
+    GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED = 0 {
+        comment = "ticket is not currently assigned to a gm";
+    }
+    GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED = 1 {
+        comment = "ticket is assigned to a normal gm";
+    }
+    GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED = 2 {
+        comment = "ticket is in the escalation queue";
+    }
+}
+
+smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
+    GmTicketStatus status;
+    if (status == HASTEXT) {
+        CString text {
+            comment = "cmangos: Ticket text: data, should never exceed 1999 bytes";
+        }
+        GmTicketType ticket_type;
+        f32 days_since_ticket_creation;
+        f32 days_since_oldest_ticket_creation;
+        f32 days_since_last_updated;
+        GmTicketEscalationStatus escalation_status;
+        Bool read_by_gm;
+    }
+}
+
+cmsg CMSG_SEND_MAIL = 0x0238 {
+    Guid mailbox;
+    CString receiver;
+    CString subject;
+    CString body;
+    u32 unknown1 {
+        comment = "cmangos: stationery?";
+    }
+    u32 unknown2 {
+        comment = "cmangos: 0x00000000";
+    }
+    Guid item;
+    u32 money;
+    u32 cash_on_delivery_amount;
+    u32 unknown3 {
+        comment = "cmangos: const 0";
+    }
+    u32 unknown4 {
+        comment = "cmangos: const 0";
+    }
+}
+
+smsg SMSG_BATTLEFIELD_LIST = 0x023D {
+    Guid battlemaster;
+    Map map;
+    u8 unknown1;
+    u32 unknown2 {
+        comment = "vmangos: number of bg instances, this is also present on the number_of_battlegrounds field";
+    }
+    u8 unknown3;
+    u32 number_of_battlegrounds {
+        comment = "vmangos: number of bg instances, this is also present on the unknown2 field";
+    }
+    u32[number_of_battlegrounds] battlegrounds;
+}
+
+smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
+    PackedGuid target;
+    PackedGuid attacker;
+    Spell spell;
+    u32 damage;
+    SpellSchool school;
+    u32 absorbed_damage;
+    u32 resisted {
+        comment = "cmangos/mangoszero/vmangos: sent as int32";
+    }
+    u8 periodic_log {
+        comment = "cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name";
+    }
+    u8 unused;
+    u32 blocked;
+    /* TODO Hit info? */
+    u32 hit_info;
+    u8 extend_flag {
+        comment = "cmangos has some that might be correct https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497";
+    }
+}
+
+
+struct AuctionListItem {
+    u32 id;
+    u32 item_entry;
+    u32 item_enchantment;
+    u32 item_random_property_id;
+    u32 item_suffix_factor;
+    u32 item_count;
+    u32 item_charges;
+    Guid item_owner;
+    u32 start_bid;
+    u32 minimum_bid;
+    u32 buyout_amount;
+    u32 time_left_in_msecs;
+    Guid highest_bidder;
+    u32 highest_bid;
+}
+
+smsg SMSG_AUCTION_LIST_RESULT = 0x025C {
+    u32 count;
+    AuctionListItem[count] auctions;
+    u32 total_amount_of_auctions;
+}
+
+smsg SMSG_AUCTION_OWNER_LIST_RESULT = 0x025D {
+    u32 count;
+    AuctionListItem[count] auctions;
+    u32 total_amount_of_auctions;
+}
+
+
+smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x025E {
+    u32 auction_house_id;
+    u32 auction_id;
+    Guid bidder;
+    u32 won {
+        comment = "cmangos: if 0, client shows ERR_AUCTION_WON_S, else ERR_AUCTION_OUTBID_S";
+    }
+    u32 out_bid;
+    u32 item_template;
+    u32 item_random_property_id;
+}
+
+smsg SMSG_AUCTION_OWNER_NOTIFICATION = 0x025F {
+    u32 auction_id;
+    u32 bid {
+        comment = "vmangos/cmangos/mangoszero: if 0, client shows ERR_AUCTION_EXPIRED_S, else ERR_AUCTION_SOLD_S (works only when guid==0)";
+    }
+    u32 auction_out_bid;
+    Guid bidder;
+    u32 item_entry;
+    u32 item_random_property_id;
+} {
+    comment = "vmangos/cmangos/mangoszero: this [message] causes on client to display: 'Your auction sold'";
+}
+
+
+cmsg CMSG_AUCTION_LIST_BIDDER_ITEMS = 0x0264 {
+    Guid auctioneer;
+    u32 start_from_page;
+    u32 amount_of_outbidded_items;
+    u32[amount_of_outbidded_items] outbid_item_ids;
+}
+
+smsg SMSG_AUCTION_BIDDER_LIST_RESULT = 0x0265 {
+    u32 count;
+    AuctionListItem[count] auctions;
+    u32 total_amount_of_auctions;
+}
+
+smsg SMSG_SET_FLAT_SPELL_MODIFIER = 0x0266 {
+    /* TODO What does this mean? */
+    u8 eff;
+    u8 op;
+    u32 value;
+}
+
+smsg SMSG_SET_PCT_SPELL_MODIFIER = 0x0267 {
+    /* TODO What does this mean? */
+    u8 eff;
+    u8 op;
+    u32 value;
+}
+
+
+smsg SMSG_SPELLDISPELLOG = 0x027B {
+    Guid victim;
+    Guid caster;
+    u32 amount_of_spells;
+    /* TODO Make Spell type */
+    u32[amount_of_spells] spells;
+}
+
+
+struct WorldState {
+    u32 state;
+    u32 value;
+}
+
+smsg SMSG_INIT_WORLD_STATES = 0x02C2 {
+    Map map;
+    Area area;
+    u16 amount_of_states;
+    WorldState[amount_of_states] states;
+}
+
+smsg SMSG_UPDATE_WORLD_STATE = 0x02C3 {
+    WorldState state;
+}
+
+struct RaidInfo {
+    Map map;
+    u32 reset_time;
+    u32 instance_id;
+}
+
+smsg SMSG_RAID_INSTANCE_INFO = 0x02CC {
+    u32 amount_of_raid_infos;
+    RaidInfo[amount_of_raid_infos] raid_infos;
+}
+
+
+cmsg CMSG_BATTLEMASTER_JOIN = 0x02EE {
+    Guid guid;
+    Map map;
+    u32 instance_id;
+    Bool join_as_group;
+}
+
+
+smsg SMSG_LOOT_MASTER_LIST = 0x02A4 {
+    u8 amount_of_players;
+    Guid[amount_of_players] guids;
+}
+
+struct ForcedReaction {
+    u32 faction_id {
+        comment = "vmangos: faction_id (Faction.dbc)";
+    }
+    u32 reputation_rank {
+        comment = "vmangos: reputation rank";
+    }
+}
+
+smsg SMSG_SET_FORCED_REACTIONS = 0x02A5 {
+    u32 amount_of_reactions;
+    ForcedReaction[amount_of_reactions] reactions;
+}
+
+smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
+    PackedGuid transport;
+    f32 position_x;
+    f32 position_y;
+    f32 position_z;
+    u32 spline_id;
+    MonsterMoveType move_type;
+    /* TODO Might have more things? */
+}
+

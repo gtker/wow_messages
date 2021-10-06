@@ -1,0 +1,255 @@
+use std::convert::{TryFrom, TryInto};
+use crate::world::v1::v12::{UpdateFlag};
+use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+
+#[derive(Debug, PartialEq, Clone, Default)]
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:305`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm):
+/// ```text
+/// struct FlagIfElseIf {
+///     UpdateFlag flags;
+///     if (flags & ONE_IF) {
+///         u8 b_if;
+///         ELSE-IF-STATEMENT-DOCC: unimplemented
+///     }
+///     if (flags & EIGHT_IF) {
+///         u8 last_if;
+///     }
+/// }
+/// ```
+pub struct FlagIfElseIf {
+    pub flags: FlagIfElseIfUpdateFlag,
+}
+
+impl ReadableAndWritable for FlagIfElseIf {
+    type Error = std::io::Error;
+
+    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // flags: UpdateFlag
+        let flags = UpdateFlag::read(r)?;
+
+        let flags_ONE_IF = if flags.is_ONE_IF() {
+            // b_if: u8
+            let b_if = crate::util::read_u8_le(r)?;
+
+            Some(FlagIfElseIfUpdateFlag_ONE_IF::ONE_IF {
+                b_if,
+            })
+        }
+        else if flags.is_TWO_ELSEIF() {
+            // elseif1: u8
+            let elseif1 = crate::util::read_u8_le(r)?;
+
+            Some(FlagIfElseIfUpdateFlag_ONE_IF::TWO_ELSEIF {
+                elseif1,
+            })
+        }
+        else if flags.is_FOUR_ELSEIF() {
+            // elseif2: u8
+            let elseif2 = crate::util::read_u8_le(r)?;
+
+            Some(FlagIfElseIfUpdateFlag_ONE_IF::FOUR_ELSEIF {
+                elseif2,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_EIGHT_IF = if flags.is_EIGHT_IF() {
+            // last_if: u8
+            let last_if = crate::util::read_u8_le(r)?;
+
+            Some(FlagIfElseIfUpdateFlagEIGHT_IF {
+                last_if,
+            })
+        } else {
+            None
+        };
+
+        let flags = FlagIfElseIfUpdateFlag {
+            inner: flags.as_u8(),
+            one_if: flags_ONE_IF,
+            eight_if: flags_EIGHT_IF,
+        };
+
+        Ok(Self {
+            flags,
+        })
+    }
+
+    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // flags: UpdateFlag
+        self.flags.write(w)?;
+
+        if let Some(s) = &self.flags.one_if {
+            s.write(w)?;
+        }
+
+        if let Some(s) = &self.flags.eight_if {
+            s.write(w)?;
+        }
+
+        Ok(())
+    }
+
+}
+
+impl VariableSized for FlagIfElseIf {
+    fn size(&self) -> usize {
+        self.flags.size() // flags: UpdateFlag and subfields
+    }
+}
+
+impl MaximumPossibleSized for FlagIfElseIf {
+    fn maximum_possible_size() -> usize {
+        UpdateFlag::maximum_possible_size() // flags: UpdateFlag
+    }
+}
+
+#[derive(Default, Debug, PartialEq, Clone)]
+pub struct FlagIfElseIfUpdateFlag {
+    inner: u8,
+    one_if: Option<FlagIfElseIfUpdateFlagONE_IF>,
+    eight_if: Option<FlagIfElseIfUpdateFlagEIGHT_IF>,
+}
+
+impl From<&FlagIfElseIfUpdateFlag> for UpdateFlag {
+    fn from(e: &FlagIfElseIfUpdateFlag) -> Self {
+        Self::new(e.inner)
+    }
+}
+
+impl FlagIfElseIfUpdateFlag {
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: UpdateFlag = self.into();
+        a.write(w)?;
+        Ok(())
+    }
+
+    pub const fn new_NONE() -> Self {
+        Self {
+            inner: UpdateFlag::NONE,
+            one_if: None,
+            eight_if: None,
+        }
+    }
+
+}
+impl VariableSized for FlagIfElseIfUpdateFlag {
+    fn size(&self) -> usize {
+        1 // inner: UpdateFlag (u8)
+        + {
+            if let Some(s) = &self.one_if {
+                s.size()
+            } else {
+                0
+            }
+        }
+        + {
+            if let Some(s) = &self.eight_if {
+                s.size()
+            } else {
+                0
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for FlagIfElseIfUpdateFlag {
+    fn maximum_possible_size() -> usize {
+        1 // inner: UpdateFlag (u8)
+        + FlagIfElseIfUpdateFlagONE_IF::maximum_possible_size() // ONE_IF enumerator
+        + FlagIfElseIfUpdateFlagEIGHT_IF::maximum_possible_size() // EIGHT_IF enumerator
+    }
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum FlagIfElseIfUpdateFlagONE_IF {
+    ONE_IF {
+        b_if: u8,
+    },
+    TWO_ELSEIF {
+        elseif1: u8,
+    },
+    FOUR_ELSEIF {
+        elseif2: u8,
+    },
+}
+
+impl VariableSized for FlagIfElseIfUpdateFlagONE_IF {
+    fn size(&self) -> usize {
+        match self {
+            Self::ONE_IF => {
+                1 // b_if: u8
+            }
+            Self::TWO_ELSEIF => {
+                1 // elseif1: u8
+            }
+            Self::FOUR_ELSEIF => {
+                1 // elseif2: u8
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for FlagIfElseIfUpdateFlagONE_IF {
+    fn maximum_possible_size() -> usize {
+        65536 // TODO Flag elseif
+    }
+}
+
+impl FlagIfElseIfUpdateFlagONE_IF {
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        match &self {
+            Self::ONE_IF {
+                b_if,
+            } => {
+                // b_if: u8
+                w.write_all(&b_if.to_le_bytes())?;
+
+            }
+            Self::TWO_ELSEIF {
+                elseif1,
+            } => {
+                // elseif1: u8
+                w.write_all(&elseif1.to_le_bytes())?;
+
+            }
+            Self::FOUR_ELSEIF {
+                elseif2,
+            } => {
+                // elseif2: u8
+                w.write_all(&elseif2.to_le_bytes())?;
+
+            }
+        }
+
+        Ok(())
+    }
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub struct FlagIfElseIfUpdateFlagEIGHT_IF {
+    pub last_if: u8,
+}
+
+impl VariableSized for FlagIfElseIfUpdateFlagEIGHT_IF {
+    fn size(&self) -> usize {
+        1 // last_if: u8
+    }
+}
+
+impl MaximumPossibleSized for FlagIfElseIfUpdateFlagEIGHT_IF {
+    fn maximum_possible_size() -> usize {
+        1 // last_if: u8
+    }
+}
+
+impl FlagIfElseIfUpdateFlagEIGHT_IF {
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.last_if.to_le_bytes())?;
+
+        Ok(())
+    }
+}
+

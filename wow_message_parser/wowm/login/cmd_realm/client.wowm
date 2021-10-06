@@ -1,0 +1,5 @@
+#tag_all login_logon_versions "2 3 8";
+
+clogin CMD_REALM_LIST_Client = 0x10 {
+    u32 padding = 0;
+}

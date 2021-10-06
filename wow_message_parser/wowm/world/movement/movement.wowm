@@ -1,0 +1,104 @@
+#tag_all versions "1.12";
+
+
+cmsg CMSG_MOVE_FALL_RESET = 0x02CA {
+    MovementInfo info;
+}
+
+cmsg CMSG_FORCE_RUN_SPEED_CHANGE_ACK = 0x00E3 {
+    Guid guid;
+    u32 counter;
+    MovementInfo movement_info;
+    f32 new_speed;
+}
+
+cmsg CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK = 0x00E5 {
+    Guid guid;
+    u32 counter;
+    MovementInfo movement_info;
+    f32 new_speed;
+}
+
+cmsg CMSG_FORCE_SWIM_SPEED_CHANGE_ACK = 0x00E7 {
+    Guid guid;
+    u32 counter;
+    MovementInfo movement_info;
+    f32 new_speed;
+}
+
+cmsg CMSG_FORCE_WALK_SPEED_CHANGE_ACK = 0x02DB {
+    Guid guid;
+    u32 counter;
+    MovementInfo movement_info;
+    f32 new_speed;
+}
+
+cmsg CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK = 0x02DD {
+    Guid guid;
+    u32 counter;
+    MovementInfo movement_info;
+    f32 new_speed;
+}
+
+cmsg CMSG_FORCE_TURN_RATE_CHANGE_ACK = 0x02DF {
+    Guid guid;
+    u32 counter;
+    MovementInfo movement_info;
+    f32 new_speed;
+}
+
+cmsg CMSG_FORCE_MOVE_ROOT_ACK = 0x00E9 {
+    Guid guid;
+    u32 movement_counter;
+    MovementInfo movement_info;
+}
+
+cmsg CMSG_FORCE_MOVE_UNROOT_ACK = 0x00EB {
+    Guid guid;
+    u32 movement_counter;
+    MovementInfo movement_info;
+}
+
+
+cmsg CMSG_MOVE_KNOCK_BACK_ACK = 0x00F0 {
+    Guid guid;
+    u32 counter;
+    MovementInfo movement_info;
+}
+
+
+cmsg CMSG_MOVE_HOVER_ACK = 0x00F6 {
+    Guid guid;
+    u32 counter;
+    MovementInfo movement_info;
+    u32 is_applied;
+}
+
+
+cmsg CMSG_MOVE_SPLINE_DONE = 0x02C9 {
+    MovementInfo movement_info;
+    u32 movement_counter;
+    u32 unknown1;
+}
+
+
+cmsg CMSG_MOVE_FEATHER_FALL_ACK = 0x02CF {
+    Guid guid;
+    u32 movement_counter;
+    MovementInfo movement_info;
+    u32 apply;
+}
+
+cmsg CMSG_MOVE_WATER_WALK_ACK = 0x02D0 {
+    Guid guid;
+    u32 movement_counter;
+    MovementInfo movement_info;
+    u32 apply;
+}
+
+
+cmsg CMSG_MOVE_NOT_ACTIVE_MOVER = 0x02D1 {
+    Guid old_mover;
+    MovementInfo movement_info;
+}
+

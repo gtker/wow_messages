@@ -1,0 +1,362 @@
+#tag_all test "true";
+#tag_all versions "1.12";
+
+/* 1 Any enum */
+enum SimpleEnum : u8 {
+    ZERO = 0;
+    ONE = 1;
+    TWO = 2;
+}
+
+/* 2 Any flag */
+flag SimpleFlag : u8 {
+    ZERO = 0;
+    ONE = 1;
+    TWO = 2;
+}
+
+/* 3 Any struct with only basic types */
+struct StructWithAllBuiltInTypes {
+    u8 basic8;
+    u16 basic16;
+    u32 basic32;
+    u64 basic64;
+    u16_be basic16_be;
+    u32_be basic32_be;
+    u64_be basic64_be;
+    f32 decimal32;
+    f32_be decimal32_be;
+    f64 decimal64;
+    f64_be decimal64_be;
+    CString simple_cstring;
+    String[basic8] simple_string;
+}
+
+/* 4 Any clogin with only basic types */
+clogin SimpleClogin = 0x00 {
+    u8 basic;
+}
+
+/* 5 Any slogin with only basic types */
+slogin SimpleSlogin = 0x00 {
+    u8 basic;
+}
+
+/* 6 Any smsg with only basic types */
+smsg SimpleSmsg = 0x00 {
+    u8 basic;
+}
+
+/* 7 Any cmsg with only basic types */
+cmsg SimpleCmsg = 0x01 {
+    u8 basic;
+}
+
+/* 8 Any msg with only basic types */
+msg SimpleMsg = 0x02 {
+    u8 basic;
+}
+
+/* 9 Any container with complex types */
+msg MessageWithComplexTypes = 0x03 {
+    SimpleEnum simple_enum;
+    SimpleFlag simple_flag;
+    StructWithAllBuiltInTypes simple_struct;
+}
+
+/* 10 Any container without if statements */
+struct Arrays {
+    u8 index;
+    u8[20] basic_fixed_array;
+    u16[16] simple_2byte_fixed_array;
+    u16_be[16] simple_2byte_be_fixed_array;
+    u16[index] simple_2byte_variable_array;
+    u32_be[16] simple_4byte_be_fixed_array;
+    u32[index] simple_4byte_variable_array;
+    u64_be[16] simple_8byte_be_fixed_array;
+    u64[index] simple_8byte_variable_array;
+    StructWithAllBuiltInTypes[10] complex_fixed_array;
+    StructWithAllBuiltInTypes[index] complex_variable_array;
+    CString[10] fixed_cstring_array;
+    CString[index] variable_cstring_array;
+}
+
+/* 11 Any container with a single enum if statement without else */
+struct SimpleIfEnum {
+    SimpleEnum enum;
+    if (enum == ZERO) {
+        u8 basic;
+    }
+}
+
+/* 12 Any container with a single enum if statement with multiple variants and no else */
+struct DoubleVariantEnum {
+    SimpleEnum enum;
+    if (enum == ZERO || enum == ONE) {
+        u8 basic;
+    }
+}
+
+/* 13 Any container with a single flag if statement without else */
+struct SimpleIfFlag {
+    SimpleFlag flag;
+    if (flag & ZERO) {
+        u8 basic;
+    }
+}
+
+/* 12 Any container with a single enum if statement with else */
+struct SimpleIfEnumElse {
+    SimpleEnum enum;
+    if (enum == ZERO) {
+        u8 basic;
+    } else {
+        u16 other;
+    }
+}
+
+/* 12 Any container with a single enum if statement with multiple variants with else */
+struct SimpleIfEnumIfElse {
+    SimpleEnum enum;
+    if (enum == ZERO || enum == ONE) {
+        u8 basic;
+    } else {
+        u16 other;
+    }
+}
+
+/* 13 Any container with a single enum not if statement without else */
+struct SimpleIfEnumNot {
+    SimpleEnum enum;
+    if (enum != ZERO) {
+        u8 others;
+    }
+}
+
+/* 14 Any container with a single enum not if statement with else */
+struct SimpleIfNotEnumElse {
+    SimpleEnum enum;
+    if (enum != ZERO) {
+        u8 others;
+    } else {
+        u16 zero;
+    }
+}
+
+/* 15 Any container with a single enum if statement with else if and no else */
+struct SimpleElseIf {
+    SimpleEnum enum;
+    if (enum == ZERO) {
+        u8 basic1;
+    }
+    else if (enum == ONE) {
+        u8 basic2;
+    }
+}
+
+/* 15 Any container with a single enum if statement with else if and no else */
+struct SimpleElseIfMultiple {
+    SimpleEnum enum;
+    if (enum == ZERO || enum == ONE) {
+        u8 basic1;
+    }
+    else if (enum == TWO) {
+        u8 basic2;
+    }
+}
+
+/* 16 Any container with a single enum if statement with else if and else */
+struct SimpleElseIfElse {
+    SimpleEnum enum;
+    if (enum == ZERO) {
+        u8 basic1;
+    }
+    else if (enum == ONE) {
+        u8 basic2;
+    } else {
+        u8 basic3;
+    }
+}
+
+/* 17 */
+struct DoubleIfEnum {
+    SimpleEnum enum;
+    if (enum == ZERO) {
+        u8 basic;
+    }
+    if (enum == ONE) {
+        u8 other;
+    }
+}
+
+/* 18 */
+struct DoubleIfEnumInbetween {
+    SimpleEnum enum;
+    if (enum == ZERO) {
+        u8 basic;
+    }
+    u16 between;
+    if (enum == ONE) {
+        u8 other;
+    }
+}
+
+/* 19 */
+struct PackedGuidAndGuid {
+    PackedGuid packed;
+    Guid guid;
+    PackedGuid[10] static_packed;
+    Guid[10] static_guid;
+    u8 basic1;
+    u8 basic2;
+    PackedGuid[basic1] variable_packed;
+    Guid[basic2] variable_guid;
+}
+
+/* 20 */
+struct Optional {
+    u8 basic;
+}
+
+/* 21 */
+struct CustomMasks {
+    UpdateMask update_mask;
+    AuraMask aura_mask;
+}
+
+enum TEnum : u8 {
+    ZERO = 0;
+    ONE = 1;
+    TWO = 2;
+    THREE = 3;
+    FOUR = 4;
+    FIVE = 5;
+    SIX = 6;
+    REST = 7;
+}
+
+/* 22 */
+struct IfEdgeCases {
+    TEnum t;
+    if (t == ZERO || t == ONE || t == TWO) {
+        u8 basic1;
+    } else if (t == THREE || t == FOUR) {
+        u8 basic3;
+    } else if (t == FIVE || t == SIX) {
+        u8 basic5;
+    } else {
+        u8 rest;
+    }
+}
+
+enum NestedEnum : u8 {
+    NESTED = 0;
+    NOT_NESTED = 1;
+}
+
+/* 23 */
+struct NestedNotIf {
+    TEnum t;
+    if (t != ZERO) {
+        u8 not_zero;
+        NestedEnum e;
+        if (e == NESTED) {
+            u8 one;
+        }
+    }
+}
+
+/* 24 */
+struct EnumOutsideOfIf {
+    TEnum t;
+    NestedEnum n;
+    if (t == ZERO) {
+        if (n == NESTED) {
+            u8 nested;
+        }
+    }
+}
+
+/* 25 */
+cmsg CMSG_TEST_ENDLESS_U8 = 0x1337 {
+    CString c_string;
+    u8 b_u8;
+    u8[-] endless;
+}
+
+/* 26 */
+cmsg CMSG_TEST_OPTIONAL = 0x1137 {
+    CString c_string;
+    u8 b_u8;
+    optional server {
+        u8 optional_u8;
+    }
+}
+
+flag UpdateFlag : u8 {
+    NONE = 0;
+    ONE_IF = 1;
+    TWO_ELSEIF = 2;
+    FOUR_ELSEIF = 4;
+    EIGHT_IF = 8;
+}
+
+/* 27 */
+struct FlagIfElseIf {
+    UpdateFlag flags;
+    if (flags & ONE_IF) {
+        u8 b_if;
+    }
+    else if (flags & TWO_ELSEIF) {
+        u8 elseif1;
+    }
+    else if (flags & FOUR_ELSEIF) {
+        u8 elseif2;
+    }
+    if (flags & EIGHT_IF) {
+        u8 last_if;
+    }
+}
+
+/* 28 */
+struct EnumIfElseIfNested {
+    SimpleEnum e;
+    NestedEnum n;
+    if (e == ZERO) {
+        u8 zero;
+    }
+    else {
+        if (n == NESTED) {
+            u8 nested;
+        }
+    }
+}
+
+/* 29 */
+struct EnumIfIfNested {
+    SimpleEnum e;
+    NestedEnum n;
+    if (e == ZERO) {
+        if (n == NESTED) {
+            u8 nested;
+        }
+    }
+    else if (e == ONE) {
+        u8 one;
+    }
+    else {
+        u8 basic_else;
+    }
+}
+
+/* 30 */
+struct EnumNotIfIfNested {
+    SimpleEnum e;
+    NestedEnum n;
+    if (e != ZERO) {
+        if (n == NESTED) {
+            u8 nested;
+        }
+    }
+}
+

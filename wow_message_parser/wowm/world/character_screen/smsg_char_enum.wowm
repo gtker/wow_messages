@@ -1,0 +1,113 @@
+#tag_all versions "1.12";
+
+flag CharacterFlags : u32 {
+    NONE = 0x00;
+    LOCKED_FOR_TRANSFER = 0x04;
+    HIDE_HELM = 0x400;
+    HIDE_CLOAK = 0x800;
+    GHOST = 0x2000;
+    RENAME = 0x4000;
+}
+
+struct CharacterGear {
+    u32 equipment_display_id;
+    InventoryType inventory_type;
+}
+
+enum InventoryType : u8 {
+    NON_EQUIP = 0;
+    HEAD = 1;
+    NECK_OR_RELIC = 2;
+    SHOULDERS = 3;
+    BODY = 4;
+    CHEST = 5;
+    WAIST = 6;
+    LEGS = 7;
+    FEET = 8;
+    WRISTS = 9;
+    HANDS = 10;
+    FINGER = 11;
+    TRINKET = 12;
+    WEAPON = 13;
+    SHIELD = 14;
+    RANGED = 15;
+    CLOAK = 16;
+    TWO_HANDED_WEAPON = 17;
+    BAG = 18;
+    TABARD = 19;
+    ROBE = 20;
+    WEAPON_MAIN_HAND = 21;
+    WEAPON_OFF_HAND = 22;
+    HOLDABLE = 23;
+    AMMO = 24;
+    THROWN = 25;
+    RANGED_RIGHT = 26;
+    QUIVER = 27;
+}
+
+enum Class : u8 {
+    WARRIOR = 1;
+    PALADIN = 2;
+    HUNTER = 3;
+    ROGUE = 4;
+    PRIEST = 5;
+    SHAMAN = 7;
+    MAGE = 8;
+    WARLOCK = 9;
+    DRUID = 11;
+}
+
+
+enum Race : u8 {
+    HUMAN = 1;
+    ORC = 2;
+    DWARF = 3;
+    NIGHTELF = 4;
+    UNDEAD = 5;
+    TAUREN = 6;
+    GNOME = 7;
+    TROLL = 8;
+    GOBLIN = 9;
+}
+
+enum Gender : u8 {
+    MALE = 0;
+    FEMALE = 1;
+    /* Apparently used by some pets */
+    NONE = 2;
+}
+
+struct Character {
+    u64 guid;
+    CString name;
+    Race race;
+    Class class;
+    Gender gender;
+    u8 skin;
+    u8 face;
+    u8 hairstyle;
+    u8 haircolor;
+    u8 facialhair;
+    u8 level;
+    Area area;
+    Map map;
+    f32 position_x;
+    f32 position_y;
+    f32 position_z;
+    u32 guild_id;
+    CharacterFlags flags;
+    u8 first_login;
+    u32 pet_display_id;
+    u32 pet_level;
+    u32 pet_familiy;
+    CharacterGear[19] equipment;
+    u32 first_bag_display_id = 0;
+    u8 first_bag_inventory_id = 0;
+}
+
+smsg SMSG_CHAR_ENUM = 0x03B {
+    u8 amount_of_characters {
+        maximum_allowed = "10";
+    }
+    Character[amount_of_characters] characters;
+}

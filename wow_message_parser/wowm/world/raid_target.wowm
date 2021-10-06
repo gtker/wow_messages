@@ -1,0 +1,42 @@
+#tag_all versions "1.12";
+
+
+enum RaidTargetUpdateType : u8 {
+    PARTIAL = 0;
+    FULL = 1;
+}
+
+enum RaidTargetIndex : u8 {
+    UNKNOWN0 = 0;
+    UNKNOWN1 = 1;
+    UNKNOWN2 = 2;
+    UNKNOWN3 = 3;
+    UNKNOWN4 = 4;
+    UNKNOWN5 = 5;
+    UNKNOWN6 = 6;
+    UNKNOWN7 = 7;
+    UNKNOWN8 = 8;
+    REQUEST_ICONS = 0xFF;
+}
+
+struct RaidTargetUpdate {
+    RaidTargetIndex index;
+    Guid guid;
+}
+
+smsg MSG_RAID_TARGET_UPDATE_Server = 0x0321 {
+    RaidTargetUpdateType update_type;
+    if (update_type == FULL) {
+        RaidTargetUpdate[8] raid_targets;
+    } else if (update_type == PARTIAL) {
+        RaidTargetUpdate raid_target;
+    }
+}
+
+cmsg MSG_RAID_TARGET_UPDATE_Client = 0x0321 {
+    RaidTargetIndex index;
+    if (index != REQUEST_ICONS) {
+        Guid target;
+    }
+}
+

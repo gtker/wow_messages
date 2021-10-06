@@ -1,0 +1,507 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PLAY_OBJECT_SOUND = 0x0278 {
+    u32 sound_id;
+    u64 guid;
+} {
+    comment = "vmangos: Nostalrius: ignored by client if unit is not loaded";
+}
+
+cmsg CMSG_REQUEST_PET_INFO = 0x0279 {}
+
+enum FarSightOperation : u8 {
+    REMOVE = 0;
+    ADD = 1;
+}
+
+cmsg CMSG_FAR_SIGHT = 0x027A {
+    FarSightOperation operation;
+}
+
+cmsg CMSG_GROUP_CHANGE_SUB_GROUP = 0x027E {
+    CString name;
+    u8 group_number;
+}
+
+cmsg CMSG_REQUEST_PARTY_MEMBER_STATS = 0x027F {
+    u64 guid;
+}
+
+cmsg CMSG_GROUP_SWAP_SUB_GROUP = 0x0280 {
+    CString name;
+    CString swap_with_name;
+}
+
+cmsg CMSG_AUTOSTORE_BANK_ITEM = 0x0282 {
+    u8 bag_index;
+    u8 slot_index;
+}
+
+cmsg CMSG_AUTOBANK_ITEM = 0x0283 {
+    u8 bag_index;
+    u8 slot_index;
+}
+
+smsg SMSG_RECEIVED_MAIL = 0x0285 {
+    u32 unknown1 {
+        comment = "cmangos/vmangos sends 0 as u32, mangoszero sends 0 as f32";
+    }
+} {
+    comment = "cmangos/vmangos/mangoszero: deliver undelivered mail";
+}
+
+enum RaidGroupError : u32 {
+    REQUIRED = 1;
+    FULL = 2;
+}
+
+smsg SMSG_RAID_GROUP_ONLY = 0x0286 {
+    u32 homebind_timer;
+    RaidGroupError error;
+} {
+    comment = "used when player leaves raid group inside instance";
+}
+
+smsg SMSG_AUCTION_REMOVED_NOTIFICATION = 0x028D {
+    u32 item_id;
+    u32 item_template;
+    u32 random_property_id;
+}
+
+cmsg CMSG_GROUP_RAID_CONVERT = 0x028E {}
+
+cmsg CMSG_GROUP_ASSISTANT_LEADER = 0x028F {
+    u64 guid;
+    /* mangos treats as bool */
+    u8 set_assistant;
+}
+
+enum BuybackSlot : u32 {
+    SLOT1 = 69;
+    SLOT2 = 70;
+    SLOT3 = 71;
+    SLOT4 = 72;
+    SLOT5 = 73;
+    SLOT6 = 74;
+    SLOT7 = 75;
+    SLOT8 = 76;
+    SLOT9 = 77;
+    SLOT10 = 78;
+    SLOT11 = 79;
+    SLOT12 = 80;
+    SLOT13 = 81;
+}
+
+cmsg CMSG_BUYBACK_ITEM = 0x0290 {
+    u64 guid;
+    BuybackSlot slot;
+}
+
+enum ServerMessageType : u32 {
+    SHUTDOWN_TIME = 1;
+    RESTART_TIME = 2;
+    CUSTOM = 3;
+    SHUTDOWN_CANCELLED = 4;
+    RESTART_CANCELLED = 5;
+}
+
+smsg SMSG_SERVER_MESSAGE = 0x0291 {
+    ServerMessageType message_type;
+    CString message;
+}
+
+cmsg CMSG_MEETINGSTONE_JOIN = 0x0292 {
+    u64 guid;
+}
+
+cmsg CMSG_MEETINGSTONE_LEAVE = 0x0293 {}
+
+enum MeetingStoneStatus : u8 {
+    LEAVE_QUEUE = 0;
+    JOINED_QUEUE = 1;
+    PARTY_MEMBER_LEFT_LFG = 2;
+    PARTY_MEMBER_REMOVED_PARTY_REMOVED = 3;
+    LOOKING_FOR_NEW_PARTY_IN_QUEUE = 4;
+    NONE = 5;
+}
+
+smsg SMSG_MEETINGSTONE_SETQUEUE = 0x0295 {
+    Area area;
+    MeetingStoneStatus status;
+}
+
+cmsg CMSG_MEETINGSTONE_INFO = 0x0296 {}
+
+smsg SMSG_MEETINGSTONE_COMPLETE = 0x0297 {}
+
+smsg SMSG_MEETINGSTONE_IN_PROGRESS = 0x0298 {}
+
+smsg SMSG_MEETINGSTONE_MEMBER_ADDED = 0x0299 {
+    u64 guid;
+}
+
+cmsg CMSG_CANCEL_GROWTH_AURA = 0x029B {}
+
+smsg SMSG_CANCEL_AUTO_REPEAT = 0x029C {}
+
+smsg SMSG_STANDSTATE_UPDATE = 0x029D {
+    UnitStandState state;
+}
+
+smsg SMSG_LOOT_ALL_PASSED = 0x029E {
+    u64 looted_target_guid;
+    u32 loot_slot;
+    /* TODO Item id enum? */
+    u32 item_id;
+    u32 item_random_property_id;
+    u32 item_random_suffix_id {
+        comment = "vmangos/mangoszero: not used ?";
+    }
+}
+
+enum RollVote : u8 {
+    PASS = 0;
+    NEED = 1;
+    GREED = 2;
+}
+
+smsg SMSG_LOOT_ROLL_WON = 0x029F {
+    u64 looted_target_guid;
+    u32 loot_slot;
+    /* TODO item_id enum */
+    u32 item_id;
+    u32 item_random_suffix {
+        comment = "vmangos/mangoszero: not used ?";
+    }
+    u32 item_random_property_id;
+    u64 winning_player_guid;
+    u8 winning_roll {
+        comment = "rollnumber related to SMSG_LOOT_ROLL";
+    }
+    RollVote vote {
+        comment = "Rolltype related to SMSG_LOOT_ROLL";
+    }
+}
+
+cmsg CMSG_LOOT_ROLL = 0x02A0 {
+    u64 item_guid;
+    u32 item_slot;
+    RollVote vote;
+}
+
+smsg SMSG_LOOT_START_ROLL = 0x02A1 {
+    u64 creature_guid;
+    u32 loot_slot;
+    u32 item_id;
+    u32 item_random_suffix {
+        comment = "vmangos/mangoszero: not used ?";
+    }
+    u32 item_random_property_id;
+    /* TODO Time units */
+    u32 countdown_time;
+}
+
+smsg SMSG_LOOT_ROLL = 0x02A2 {
+    u64 creature_guid;
+    u32 loot_slot;
+    u64 item_guid;
+    u32 item_id;
+    u32 item_random_suffix {
+        comment = "vmangos/mangoszero: not used ?";
+    }
+    u32 item_random_property_id;
+    /* TODO exact meaning? */
+    u8 roll_number {
+        comment = "vmangos/cmangos/mangoszero: 0: Need for: [item name] > 127: you passed on: [item name]      Roll number";
+    }
+    RollVote vote;
+
+}
+
+cmsg CMSG_LOOT_MASTER_GIVE = 0x02A3 {
+    u64 loot_guid;
+    u8 slot_id;
+    u64 target_player_guid;
+}
+
+smsg SMSG_SPELL_FAILED_OTHER = 0x02A6 {
+    u64 caster_guid;
+    /* TODO not spell id but spell info id? */
+    u32 spell_id;
+}
+
+smsg SMSG_GAMEOBJECT_RESET_STATE = 0x02A7 {
+    u64 guid;
+}
+
+cmsg CMSG_REPAIR_ITEM = 0x02A8 {
+    u64 npc_guid;
+    u64 item_guid;
+}
+
+smsg SMSG_CHAT_PLAYER_NOT_FOUND = 0x02A9 {
+    CString name;
+}
+
+smsg SMSG_SUMMON_REQUEST = 0x02AB {
+    u64 summoner_guid;
+    /* TODO zone or area? */
+    u32 zone_id;
+    u32 auto_decline_time_in_msecs;
+}
+
+cmsg CMSG_SUMMON_RESPONSE = 0x02AC {
+    u64 summoner_guid;
+}
+
+smsg SMSG_PET_BROKEN = 0x02AF {}
+
+cmsg CMSG_SELF_RES = 0x02B3 {}
+
+smsg SMSG_FEIGN_DEATH_RESISTED = 0x02B4 {}
+
+smsg SMSG_DUEL_COUNTDOWN = 0x02B7 {
+    u32 time_in_seconds;
+}
+
+smsg SMSG_AREA_TRIGGER_MESSAGE = 0x02B8 {
+    /* TODO CString with length? */
+    u32 length;
+    CString message;
+}
+
+cmsg CMSG_TOGGLE_HELM = 0x02B9 {}
+
+cmsg CMSG_TOGGLE_CLOAK = 0x02BA {}
+
+enum MeetingStoneFailure : u8 {
+    MEETINGSTONE_FAIL_PARTYLEADER = 1;
+    MEETINGSTONE_FAIL_FULL_GROUP = 2;
+    MEETINGSTONE_FAIL_RAID_GROUP = 3;
+}
+
+smsg SMSG_MEETINGSTONE_JOINFAILED = 0x02BB {
+    MeetingStoneFailure reason;
+}
+
+smsg SMSG_PLAYER_SKINNED = 0x02BC {}
+
+smsg SMSG_DURABILITY_DAMAGE_DEATH = 0x02BD {}
+
+cmsg CMSG_SET_ACTIONBAR_TOGGLES = 0x02BF {
+    /* TODO enum for this */
+    u8 action_bar;
+}
+
+cmsg CMSG_ITEM_NAME_QUERY = 0x02C4 {
+    /* TODO Enum? */
+    u32 item_id;
+    u64 guid;
+}
+
+smsg SMSG_ITEM_NAME_QUERY_RESPONSE = 0x02C5 {
+    /* TODO Enum? */
+    u32 item_id;
+    CString item_name;
+}
+
+enum PetFeedback : u8 {
+    PET_DEAD = 1;
+    NOTHING_TO_EAT = 2;
+    CANT_ATTACK_TARGET = 3;
+    NO_PATH_TO = 4;
+}
+
+smsg SMSG_PET_ACTION_FEEDBACK = 0x02C6 {
+    PetFeedback feedback;
+}
+
+smsg SMSG_INSTANCE_SAVE_CREATED = 0x02CB {
+    u32 unknown {
+        comment = "cmangos/vmangos/mangoszero set to 0";
+    }
+}
+
+cmsg CMSG_REQUEST_RAID_INFO = 0x02CD {}
+
+cmsg CMSG_MOVE_TIME_SKIPPED = 0x02CE {
+    u64 guid;
+    u32 lag;
+}
+
+smsg SMSG_PLAY_SOUND = 0x02D2 {
+    /* TODO Enum? */
+    u32 sound_id;
+}
+
+cmsg CMSG_BATTLEFIELD_STATUS = 0x02D3 {}
+
+enum BattlefieldPortAction : u8 {
+    LEAVE_QUEUE = 0;
+    ENTER_BATTLE = 1;
+}
+
+cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {
+    Map map;
+    BattlefieldPortAction action;
+}
+
+cmsg CMSG_BATTLEMASTER_HELLO = 0x02D7 {
+    u64 guid;
+}
+
+cmsg CMSG_LEAVE_BATTLEFIELD = 0x02E1 {
+    u8 unknown1;
+    u8 battle_ground_type_id {
+        comment = "cmangos/vmangos/mangoszero: BattleGroundTypeId-1 ? - Classic Only";
+    }
+    u16 unknown2;
+}
+
+cmsg CMSG_AREA_SPIRIT_HEALER_QUERY = 0x02E2 {
+    u64 guid;
+}
+
+cmsg CMSG_AREA_SPIRIT_HEALER_QUEUE = 0x02E3 {
+    u64 guid;
+}
+
+smsg SMSG_AREA_SPIRIT_HEALER_TIME = 0x02E4 {
+    u64 guid;
+    u32 next_resurrect_time;
+}
+
+cmsg CMSG_PET_STOP_ATTACK = 0x02EA {
+    u64 pet_guid;
+}
+
+smsg SMSG_BINDER_CONFIRM = 0x02EB {
+    u64 guid;
+}
+
+smsg SMSG_BATTLEGROUND_PLAYER_JOINED = 0x02EC {
+    u64 player_guid;
+}
+
+smsg SMSG_BATTLEGROUND_PLAYER_LEFT = 0x02ED {
+    u64 guid;
+}
+
+cmsg CMSG_PET_UNLEARN = 0x02F0 {
+    u64 pet_guid;
+}
+
+smsg SMSG_PET_UNLEARN_CONFIRM = 0x02F1 {
+    u64 pet_guid;
+    u32 talent_reset_cost;
+}
+
+cmsg CMSG_PET_SPELL_AUTOCAST = 0x02F3 {
+    u64 guid;
+    u32 spell_id;
+    /* TODO bool */
+    u8 enabled;
+}
+
+enum WeatherType : u32 {
+    FINE = 0;
+    RAIN = 1;
+    SNOW = 2;
+    STORM = 3;
+}
+
+enum WeatherChangeType : u8 {
+    SMOOTH = 0;
+    INSTANT = 1;
+}
+
+smsg SMSG_WEATHER = 0x02F4 {
+    WeatherType weather_type;
+    f32 grade;
+    /* TODO weather sound id enum? */
+    u32 sound_id;
+    WeatherChangeType change;
+}
+
+enum RaidInstanceMessage : u32 {
+    WARNING_HOURS     = 1 {
+        comment = "WARNING! %s is scheduled to reset in %d hour(s).";
+    }
+    WARNING_MIN       = 2 {
+        comment = "WARNING! %s is scheduled to reset in %d minute(s)!";
+    }
+    WARNING_MIN_SOON  = 3 {
+        comment = "WARNING! %s is scheduled to reset in %d minute(s). Please exit the zone or you will be returned to your bind location!";
+    }
+    WELCOME           = 4 {
+        comment = "Welcome to %s. This raid instance is scheduled to reset in %s.";
+    }
+}
+
+smsg SMSG_RAID_INSTANCE_MESSAGE = 0x02FA {
+    RaidInstanceMessage message_type;
+    Map map;
+    /* TODO unit? */
+    u32 time_left;
+}
+
+cmsg CMSG_GUILD_INFO_TEXT = 0x02FC {
+    CString guild_info;
+}
+
+smsg SMSG_CHAT_RESTRICTED = 0x02FD {}
+
+cmsg CMSG_ACTIVATETAXIEXPRESS = 0x0312 {
+    u64 guid;
+    u32 total_cost;
+    u32 node_count;
+}
+
+cmsg CMSG_SET_FACTION_INACTIVE = 0x0317 {
+    /* TODO rep id */
+    u32 reputation_list_id;
+    /* active or inactive? */
+    u8 inactive;
+}
+
+cmsg CMSG_SET_WATCHED_FACTION = 0x0318 {
+    /* TODO rep id */
+    u32 reputation_id;
+}
+
+smsg SMSG_SPLINE_MOVE_ROOT = 0x031A {
+    u64 guid;
+}
+
+smsg SMSG_INVALIDATE_PLAYER = 0x031C {
+    u64 guid;
+}
+
+cmsg CMSG_RESET_INSTANCES = 0x031D {}
+
+smsg SMSG_INSTANCE_RESET = 0x031E {
+    Map map;
+}
+
+enum InstanceResetFailedReason : u8 {
+    GENERAL = 0 {
+        comment = "at least one player is in the instance";
+    }
+    OFFLINE = 1 {
+        comment = "at least one player is offline";
+    }
+    ZONING = 2 {
+        comment = "at least one player try to enter the instance (being teleported in)";
+    }
+    SILENTLY = 3;
+}
+
+smsg SMSG_INSTANCE_RESET_FAILED = 0x031F {
+    InstanceResetFailedReason reason;
+    Map map;
+}
+
+smsg SMSG_UPDATE_LAST_INSTANCE = 0x0320 {
+    Map map;
+}
+
