@@ -344,6 +344,7 @@ mod test {
     use super::CMD_AUTH_LOGON_PROOF_ServerLoginResult;
     use crate::logon::version_2::opcodes::ServerOpcodeMessage;
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 12.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Server0() {
         let raw: Vec<u8> = vec![ 0x01, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,

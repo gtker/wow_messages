@@ -128,6 +128,7 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
+    // Generated from `wow_message_parser/wowm/world/add_messages.wowm` line 139.
     #[test]
     fn SMSG_PET_NAME_QUERY_RESPONSE0() {
         let raw: Vec<u8> = vec![ 0x00, 0x11, 0x53, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,

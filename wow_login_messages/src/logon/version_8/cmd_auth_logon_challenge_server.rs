@@ -749,6 +749,7 @@ mod test {
     use super::CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult;
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 236.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Server0() {
         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68,
@@ -806,6 +807,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 289.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Server1() {
         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68,
@@ -868,6 +870,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 349.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Server2() {
         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68,
@@ -927,6 +930,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 404.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Server3() {
         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68,
@@ -991,6 +995,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 467.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Server4() {
         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x05, ];
@@ -1016,6 +1021,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 477.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Server5() {
         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68,
@@ -1082,6 +1088,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 544.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Server6() {
         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x05, ];

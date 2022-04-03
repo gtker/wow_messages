@@ -152,6 +152,7 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
     use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
+    // Generated from `wow_message_parser/wowm/world/add_messages.wowm` line 12.
     #[test]
     fn CMSG_WORLD_TELEPORT0() {
         let raw: Vec<u8> = vec![ 0x00, 0x20, 0x08, 0x00, 0x00, 0x00, 0xEF, 0xBE,

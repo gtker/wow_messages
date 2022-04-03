@@ -118,6 +118,7 @@ mod test {
     use crate::logon::version_2::TelemetryKey;
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 21.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client0() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -182,6 +183,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 76.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client1() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -235,6 +237,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 116.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client2() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,

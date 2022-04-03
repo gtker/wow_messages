@@ -91,6 +91,7 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
+    // Generated from `wow_message_parser/wowm/world/add_messages.wowm` line 266.
     #[test]
     fn SMSG_IGNORE_LIST0() {
         let raw: Vec<u8> = vec![ 0x00, 0x0B, 0x6B, 0x00, 0x01, 0xEF, 0xBE, 0xAD,
@@ -119,6 +120,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/world/add_messages.wowm` line 276.
     #[test]
     fn SMSG_IGNORE_LIST1() {
         let raw: Vec<u8> = vec![ 0x00, 0x13, 0x6B, 0x00, 0x02, 0xEF, 0xBE, 0xAD,

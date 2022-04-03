@@ -605,6 +605,7 @@ mod test {
     use super::CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult;
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 90.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Server0() {
         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68,
@@ -662,6 +663,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 150.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Server1() {
         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68,

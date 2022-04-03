@@ -36,7 +36,7 @@ pub const WORLD_SERVER_HEADER_TRAIT_NAME: &str = "WorldServerMessageWrite";
 
 impl Writer {
     const INDENTATION: &'static str = "    ";
-    const METADATA: bool = false;
+    const METADATA: bool = true;
 
     pub fn new(import_path: &str) -> Self {
         Self {

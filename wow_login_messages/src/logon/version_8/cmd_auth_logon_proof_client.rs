@@ -420,6 +420,7 @@ mod test {
     use super::CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR;
     use crate::logon::version_8::opcodes::ClientOpcodeMessage;
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 341.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client0() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -491,6 +492,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 398.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client1() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -552,6 +554,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 440.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client2() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -601,6 +604,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 466.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client3() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -659,6 +663,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 500.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client4() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -724,6 +729,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 544.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client5() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,

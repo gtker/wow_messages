@@ -217,6 +217,7 @@ mod test {
     use crate::logon::all::Version;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 56.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Client0() {
         let raw: Vec<u8> = vec![ 0x00, 0x03, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,

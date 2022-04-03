@@ -126,6 +126,7 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
+    // Generated from `wow_message_parser/wowm/world/add_messages.wowm` line 102.
     #[test]
     fn SMSG_LOGOUT_RESPONSE0() {
         let raw: Vec<u8> = vec![ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00,
