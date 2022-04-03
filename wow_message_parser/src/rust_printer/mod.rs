@@ -454,7 +454,7 @@ impl Writer {
 
     pub fn docc_wowm(&mut self, f: impl Fn(&mut Self), repo: impl AsRef<str>, fileinfo: &FileInfo) {
         self.docc(format!(
-            "Auto generated from the original `wowm` in file [`{name}:{line}`]({github_repo}/tree/main/{name}):",
+            "Auto generated from the original `wowm` in file [`{name}:{line}`]({github_repo}/tree/main/{name}#L{line}):",
             name = fileinfo.name(),
             line = fileinfo.start_line(),
             github_repo = repo.as_ref(),

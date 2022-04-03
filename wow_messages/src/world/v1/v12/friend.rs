@@ -5,7 +5,7 @@ use crate::world::v1::v12::{FriendStatus, FriendStatusError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/smsg_friend_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/smsg_friend_list.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/smsg_friend_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/smsg_friend_list.wowm#L3):
 /// ```text
 /// struct Friend {
 ///     u64 guid;

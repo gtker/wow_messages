@@ -6,7 +6,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new2.wowm:397`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new2.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new2.wowm:397`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new2.wowm#L397):
 /// ```text
 /// smsg SMSG_BUY_BANK_SLOT_RESULT = 0x1BA {
 ///     BuyBankSlotResult result;

@@ -6,7 +6,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new2.wowm:192`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new2.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new2.wowm:192`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new2.wowm#L192):
 /// ```text
 /// smsg SMSG_QUESTGIVER_QUEST_FAILED = 0x192 {
 ///     u32 quest_id;

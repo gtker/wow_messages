@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new3.wowm:53`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new3.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new3.wowm:53`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new3.wowm#L53):
 /// ```text
 /// cmsg CMSG_AUCTION_REMOVE_ITEM = 0x257 {
 ///     u64 auctioneer_guid;

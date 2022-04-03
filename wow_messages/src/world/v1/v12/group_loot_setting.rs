@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/add_messages.wowm:329`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/add_messages.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/add_messages.wowm:329`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/add_messages.wowm#L329):
 /// ```text
 /// enum GroupLootSetting : u8 {
 ///     FREE_FOR_ALL = 0;

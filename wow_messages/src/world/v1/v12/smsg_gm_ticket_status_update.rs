@@ -6,7 +6,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new5.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new5.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new5.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new5.wowm#L26):
 /// ```text
 /// smsg SMSG_GM_TICKET_STATUS_UPDATE = 0x328 {
 ///     GmTicketStatusResponse response;

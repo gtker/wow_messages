@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/add_messages.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/add_messages.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/add_messages.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/add_messages.wowm#L30):
 /// ```text
 /// smsg SMSG_NEW_WORLD = 0x3E {
 ///     f32 position_x;

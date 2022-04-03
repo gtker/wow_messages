@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/add_messages.wowm:1144`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/add_messages.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/add_messages.wowm:1144`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/add_messages.wowm#L1144):
 /// ```text
 /// cmsg CMSG_SET_TRADE_ITEM = 0x11D {
 ///     u8 trade_slot;

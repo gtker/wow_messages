@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new.wowm:54`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new.wowm:54`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new.wowm#L54):
 /// ```text
 /// smsg SMSG_ACTION_BUTTONS = 0x129 {
 ///     u32[120] data;

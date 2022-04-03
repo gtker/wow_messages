@@ -5,7 +5,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/needs_packed_guid.wowm:119`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/needs_packed_guid.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/needs_packed_guid.wowm:119`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/needs_packed_guid.wowm#L119):
 /// ```text
 /// smsg SMSG_MOVE_LAND_WALK = 0xDF {
 ///     PackedGuid guid;

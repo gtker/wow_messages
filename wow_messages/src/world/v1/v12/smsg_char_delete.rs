@@ -6,7 +6,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/character_msgs.wowm:50`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/character_msgs.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/character_msgs.wowm:50`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/character_msgs.wowm#L50):
 /// ```text
 /// smsg SMSG_CHAR_DELETE = 0x3C {
 ///     WorldResult result;

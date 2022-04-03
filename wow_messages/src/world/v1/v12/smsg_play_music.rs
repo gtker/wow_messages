@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new5.wowm:202`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new5.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new5.wowm:202`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new5.wowm#L202):
 /// ```text
 /// smsg SMSG_PLAY_MUSIC = 0x277 {
 ///     u32 sound_id;

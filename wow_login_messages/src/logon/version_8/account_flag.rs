@@ -1,6 +1,6 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_sever.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_sever.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_sever.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_sever.wowm#L26):
 /// ```text
 /// flag AccountFlag : u32 {
 ///     GM = 0x000001;

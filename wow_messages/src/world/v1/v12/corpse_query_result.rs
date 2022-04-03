@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/add_messages.wowm:1314`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/add_messages.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/add_messages.wowm:1314`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/add_messages.wowm#L1314):
 /// ```text
 /// enum CorpseQueryResult : u8 {
 ///     NOT_FOUND = 0;

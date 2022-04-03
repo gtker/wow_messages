@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new4.wowm:100`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new4.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new4.wowm:100`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new4.wowm#L100):
 /// ```text
 /// enum ServerMessageType : u32 {
 ///     SHUTDOWN_TIME = 1;

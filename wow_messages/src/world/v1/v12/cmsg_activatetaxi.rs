@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new2.wowm:311`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new2.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new2.wowm:311`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new2.wowm#L311):
 /// ```text
 /// cmsg CMSG_ACTIVATETAXI = 0x1AD {
 ///     u64 guid;

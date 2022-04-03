@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:51`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm):
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:51`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L51):
 /// ```text
 /// cmsg SimpleCmsg = 0x1 {
 ///     u8 basic;

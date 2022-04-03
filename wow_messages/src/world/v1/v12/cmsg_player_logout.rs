@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/add_messages.wowm:69`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/add_messages.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/add_messages.wowm:69`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/add_messages.wowm#L69):
 /// ```text
 /// cmsg CMSG_PLAYER_LOGOUT = 0x4A {
 /// }

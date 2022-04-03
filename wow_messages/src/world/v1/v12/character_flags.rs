@@ -1,6 +1,6 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm#L3):
 /// ```text
 /// flag CharacterFlags : u32 {
 ///     NONE = 0x00;

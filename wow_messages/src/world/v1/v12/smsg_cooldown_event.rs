@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new.wowm:223`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new.wowm:223`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new.wowm#L223):
 /// ```text
 /// smsg SMSG_COOLDOWN_EVENT = 0x135 {
 ///     u32 spell_id;

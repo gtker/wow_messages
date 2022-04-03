@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new4.wowm:339`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new4.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new4.wowm:339`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new4.wowm#L339):
 /// ```text
 /// enum BattlefieldPortAction : u8 {
 ///     LEAVE_QUEUE = 0;

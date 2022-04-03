@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new5.wowm:1040`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new5.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new5.wowm:1040`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new5.wowm#L1040):
 /// ```text
 /// smsg SMSG_SET_FLAT_SPELL_MODIFIER = 0x266 {
 ///     u8 eff;

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new5.wowm:207`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new5.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new5.wowm:207`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new5.wowm#L207):
 /// ```text
 /// enum BgTypeId : u32 {
 ///     NOT_ELIGIBLE = 0;

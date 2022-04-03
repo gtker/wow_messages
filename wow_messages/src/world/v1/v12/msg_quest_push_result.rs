@@ -7,7 +7,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/27needs_msg/needs_msg.wowm:48`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/27needs_msg/needs_msg.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/27needs_msg/needs_msg.wowm:48`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/27needs_msg/needs_msg.wowm#L48):
 /// ```text
 /// msg MSG_QUEST_PUSH_RESULT = 0x276 {
 ///     Guid guid;

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/needs_else_if_else.wowm:514`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/needs_else_if_else.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/needs_else_if_else.wowm:514`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/needs_else_if_else.wowm#L514):
 /// ```text
 /// enum SpellEffect : u32 {
 ///     NONE = 0;

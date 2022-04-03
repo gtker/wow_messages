@@ -1,6 +1,6 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:12`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm):
+/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:12`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L12):
 /// ```text
 /// flag SimpleFlag : u8 {
 ///     ZERO = 0;

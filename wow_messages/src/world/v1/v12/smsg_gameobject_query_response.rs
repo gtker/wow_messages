@@ -4,7 +4,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/9needs_optional/needs_optional.wowm:131`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/9needs_optional/needs_optional.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/9needs_optional/needs_optional.wowm:131`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/9needs_optional/needs_optional.wowm#L131):
 /// ```text
 /// smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x5F {
 ///     u32 entry_id;

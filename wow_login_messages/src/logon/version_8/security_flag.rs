@@ -1,6 +1,6 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/common.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/common.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/common.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/common.wowm#L8):
 /// ```text
 /// flag SecurityFlag : u8 {
 ///     NONE = 0x00;

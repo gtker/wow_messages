@@ -4,7 +4,7 @@ use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/sever.wowm:93`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/sever.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/sever.wowm:93`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/sever.wowm#L93):
 /// ```text
 /// slogin CMD_REALM_LIST_Server = 0x10 {
 ///     u16 size = self.size;

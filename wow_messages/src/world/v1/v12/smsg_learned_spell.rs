@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new.wowm:58`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new.wowm):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new.wowm:58`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new.wowm#L58):
 /// ```text
 /// smsg SMSG_LEARNED_SPELL = 0x12B {
 ///     u32 spell_id;
