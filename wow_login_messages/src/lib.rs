@@ -14,7 +14,14 @@
 //! Notice that the same game version _may_ use different protocol versions for login/reconnecting.
 //! See the
 //! [table on the WoWDev wiki](https://wowdev.wiki/CMD_AUTH_LOGON_CHALLENGE_Client#Protocol_Versions)
-//! for further information.
+//! or the table below for further information.
+//!
+//! | Game Version | Login | Reconnect |
+//! | ------------ | ----- | --------- |
+//! | `1.1.2.4125` | 2     | 2         |
+//! | `1.12.1.5875`| 3     | 2         |
+//! | `2.4.3.8606` | 8     | 8         |
+//! | `3.3.5.12340`| 8     | 8         |
 //!
 //! The [`helper`] module contains utility functions for common operations.
 //!
