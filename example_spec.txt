@@ -1,5 +1,0 @@
-WOW MESSAGE DESCRIPTION FORMAT 0.1.0
-opcode u8 - 0x00 for CMD_AUTH_LOGON_CHALLENGE\n 0x02 for CMD_AUTH_RECONNECT_CHALLENGE
-protocol_version u8 - Exact purpose unknown. See table in #Protocol Versions.
-size u16 LE Length of the package minus the size.
-game_name u8[4] BE Always null terminated 'WoW\0' string.
