@@ -18,15 +18,5 @@
 # Creating a library
 - [Decide on API]()
 
-# Rust Crate
-- [Samples](./rust/samples.md)
-- [IfElse](./rust/if_else.md)
-- [Optional](./rust/optional.md)
-- [IfElseIf](./rust/if_else_if.md)
-
-# Python
-- [Samples](./python/python.md)
-
 # Docs
 - [SMSG_AUTH_SESSION](docs/smsg_auth_sessions.md)
-- [Layout](docs/layout.md)

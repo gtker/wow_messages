@@ -234,9 +234,3 @@ Any object with a world version (`versions` [tag](tags.md)).
 
 Any object with a login version (`logon_login_versions` [tag](tags.md)).
 
-
-### `RECONNECT_VERSION`
-
-Any object with a login version (`logon_reconnect_versions` [tag](tags.md)).
-
-
