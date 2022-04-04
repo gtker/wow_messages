@@ -1,103 +1,40 @@
-# Todo
+# Getting World shippable
 
-## Bugs
+* Correct codegen
+  * Else Ifs:
+    - if a ==, else { if b ==  }
+    - if a == { if b == }
+    - if a != { if a == }
+  * Flag else ifs:
+    - {if else if else if}
+    - {if else if else if}, {if}, {if}, {if}
+* Working AuraMask
+  * Tests
+* Working UpdateMask
+  * Tests
 
-* Duplicate LoginResults because of versions
+# Direct upgrades to Login
 
-## Must
-
-* Make derived flags usable with members
-* JSON intermediate form
-* Integer equals?
-* UpdateMask
-  - Tests
-* Else Ifs:
-  - if a ==, else { if b ==  }
-  - if a == { if b == }
-  - if a != { if a == }
-* Flag else ifs:
-  - {if else if else if}
-  - {if else if else if}, {if}, {if}, {if}
-
-## Nice to have
-
-* cfg options for wow_srp
-* New() function for all/write_as with references
-* Add ref to types in declarations?
-* More tests/definitions
-* Flatten errors for structs
-* Detect `self` enums and do not generate TryFrom error
-* Add derives for all types
-  * Add Eq and Hash for structs?
-* MaximumPossibleSize for derived enums
-* MSRV test
-* Error on invalid flag enumerator used
-
-## Optimizations
+* async-std support
+* Tests for all login messages
+* Workable Intermediate Representation for Login
 * Single Read/Write call in read/write
   * Read/write const arrays?
-  
-## Errors
 
-* IfEdgeCases should error on missing SIX (Enumerator used in else if || doesn't exist)
-* ElseIf for flags
-* Using == for flags and vice versa
+# Low Priority
 
-## TODO
-
-* INT_EQUALS: Use arbitrary integer values in if statements
-
-## Design
-
-### Enums/Flags
-
-* Name
-* IntegerType
-  * Name
-  * Size
-* Casted IntegerTypes
-  * Name
-  * Size
-* Enumerators
-    * Name
-    * Value
-      * Value
-      * Original str
-    * Tags
-* [Optional] Self Value **Not for Flags**
-  * Name
-  * Tags
-* Tags
-
-### Structs/Messages
-
-* Name
-* Is Constant sized + Size
-* Maximum possible size
-* Object Type (Struct/Clogin/Slogin/Msg/Cmsg/Smsg)
-* Statements
-  * Member
-    * Name
-    * Type
-      * Is constant sized + size
-      * Maximum possible size
-    * [Optional] Used as size in
-      * Name
-    * [Optional] Constant Value
-      * Value
-      * Original str
-    * Tags
-  * Statement
-* Tags
-
-
-* Type
-  * Int (IntegerType)
-  * Float (FloatType)
-  * CString
-  * String
-    * Length
-  * Array (Array)
-  * Enumerator (all)
-  * Flag (all)
-  * Struct (all)
+* MaximumPossibleSize for derived enums
+* Make derived flags usable with members
+* Workable Intermediate Representation for World
+* cfg options for wow_srp
+* More tests/definitions
+* Add derives for all types
+  * Add Eq and Hash for structs?
+* MSRV test
+  * Login
+  * World
+* Error on invalid flag enumerator used
+* Error out on using == for flags and vice versa
+* Wowm optional, elseif in doc comments (`DOCC` message output currently)
+* Function to Write objects (eg strings) by reference
+* Tokio support
