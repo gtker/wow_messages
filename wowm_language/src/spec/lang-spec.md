@@ -41,7 +41,7 @@ The `CString` type is an array of valid UTF-8 `u8`s terminated by a null (0) byt
 | `String[len]` | UTF-8 string type of exactly length `len`. | - |
 | `PackedGuid` | GUID sent in the "packed" format. See [PackedGuid](packed-guid.md). | - |
 | `UpdateMask` | Update values sent in a relatively complex format. See [UpdateMask](update-mask.md). | - |
-| `AuraMask` | Update values sent in a relatively complex format. See [UpdateMask](aura-mask.md). | - |
+| `AuraMask` | Update values sent in a relatively complex format. See [AuraMask](aura-mask.md). | - |
 
 ### Arrays
 
