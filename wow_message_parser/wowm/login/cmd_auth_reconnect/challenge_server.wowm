@@ -9,6 +9,28 @@ slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
     login_logon_versions = "2";
 }
 
+test CMD_AUTH_RECONNECT_CHALLENGE_Server {
+    result = SUCCESS;
+    challenge_data = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    checksum_salt = [0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0 ];
+} [
+    0x02, /* Opcode */
+    0x00, /* result: SUCCESS (0) */
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, /* challenge_data */
+    0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0 /* checksum_salt */
+] {
+    login_logon_versions = "2";
+}
+
+test CMD_AUTH_RECONNECT_CHALLENGE_Server {
+    result = FAIL_BANNED;
+} [
+    0x02, /* Opcode */
+    0x03, /* result: FAIL_BANNED (3) */
+] {
+    login_logon_versions = "2";
+}
+
 slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
     LoginResult result;
     if (result == SUCCESS) {
@@ -16,5 +38,27 @@ slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
         u8[16] checksum_salt;
     }
 } {
+    login_logon_versions = "8";
+}
+
+test CMD_AUTH_RECONNECT_CHALLENGE_Server {
+    result = SUCCESS;
+    challenge_data = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    checksum_salt = [0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0 ];
+} [
+    0x02, /* Opcode */
+    0x00, /* result: SUCCESS (0) */
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, /* challenge_data */
+    0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0 /* checksum_salt */
+] {
+    login_logon_versions = "8";
+}
+
+test CMD_AUTH_RECONNECT_CHALLENGE_Server {
+    result = FAIL_BANNED;
+} [
+    0x02, /* Opcode */
+    0x03, /* result: FAIL_BANNED (3) */
+] {
     login_logon_versions = "8";
 }

@@ -4,7 +4,7 @@ use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm#L12):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm:34`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm#L34):
 /// ```text
 /// slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x2 {
 ///     LoginResult result;
@@ -345,3 +345,74 @@ impl MaximumPossibleSized for CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use crate::ReadableAndWritable;
+    use std::io::Cursor;
+    use super::CMD_AUTH_RECONNECT_CHALLENGE_Server;
+    use crate::VariableSized;
+    use crate::logon::version_8::LoginResult;
+    use super::CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult;
+    use crate::logon::version_8::opcodes::ServerOpcodeMessage;
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 44.
+    #[test]
+    fn CMD_AUTH_RECONNECT_CHALLENGE_Server0() {
+        let raw: Vec<u8> = vec![ 0x02, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
+             0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0xFF, 0xFE,
+             0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2,
+             0xF1, 0xF0, ];
+
+        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Server {
+            result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS {
+                challenge_data: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                     0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
+                checksum_salt: [ 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8,
+                     0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1, 0xF0, ],
+            },
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 57.
+    #[test]
+    fn CMD_AUTH_RECONNECT_CHALLENGE_Server1() {
+        let raw: Vec<u8> = vec![ 0x02, 0x03, ];
+
+        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Server {
+            result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_BANNED,
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+}

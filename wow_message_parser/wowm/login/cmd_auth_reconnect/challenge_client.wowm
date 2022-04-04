@@ -31,7 +31,7 @@ test CMD_AUTH_RECONNECT_CHALLENGE_Client {
     account_name = "A";
 } [
     2, /* Opcode: CMD_AUTH_RECONNECT_CHALLENGE */
-    2, /* Protocol Version: 3 */
+    2, /* Protocol Version: 2 */
     31, 0, /* Packet Size: 31 */
     87, 111, 87, 0, /* Game Name: "WoW\0" */
     1, 12, 1, /* Version: 1.12.1 */
@@ -45,3 +45,33 @@ test CMD_AUTH_RECONNECT_CHALLENGE_Client {
     65 /* Username: "A"  */
 ]
 
+test CMD_AUTH_RECONNECT_CHALLENGE_Client {
+    protocol_version = 2;
+    game_name = "\0WoW";
+    version = {
+        major = 1;
+        minor = 12;
+        patch = 1;
+        build = 5875;
+    };
+    platform = X86;
+    os =  WINDOWS;
+    locale = EN_GB;
+    utc_timezone_offset = 60;
+    client_ip_address = 0x7F000001;
+    account_name = "ABCDEFGHIJKLMNOP";
+} [
+    2, /* Opcode: CMD_AUTH_RECONNECT_CHALLENGE */
+    2, /* Protocol Version: 2 */
+    46, 0, /* Packet Size: 47 */
+    87, 111, 87, 0, /* Game Name: "WoW\0" */
+    1, 12, 1, /* Version: 1.12.1 */
+    243, 22, /* Build: 5875 */
+    54, 56, 120, 0, /* Platform: "\0x86" (literal bytes are "68x\0") */
+    110, 105, 87, 0, /* Os: "\0Win" (literal bytes are "niW\0") */
+    66, 71, 110, 101, /* Locale: "enGB" (literal bytes are "BGne") */
+    60, 0, 0, 0, /* Timezone Bias: 60 (UTC+1) */
+    127, 0, 0, 1, /* Client IP: 127.0.0.1 */
+    16, /* Username length: 1 */
+    65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80 /* Username: "ABCDEFGHIJKLMNOP"  */
+]
