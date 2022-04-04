@@ -1,6 +1,6 @@
 # PackedGuid
 
-**NOT VALID FOR ALL VERSIONS. ONLY KNOWN VALID FOR 1.12**
+**NOT VALID FOR ALL VERSIONS. ONLY KNOWN VALID FOR VANILLA, TBC AND WRATH**
 
 Some messages omit zero bytes from the GUID and instead send a byte mask as the first value.
 The byte mask is then iterated through and every set bit indicates that a byte of the GUID has been sent.
