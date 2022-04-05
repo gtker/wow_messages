@@ -62,12 +62,6 @@ smsg SMSG_RAID_GROUP_ONLY = 0x0286 {
     comment = "used when player leaves raid group inside instance";
 }
 
-smsg SMSG_AUCTION_REMOVED_NOTIFICATION = 0x028D {
-    u32 item_id;
-    u32 item_template;
-    u32 random_property_id;
-}
-
 cmsg CMSG_GROUP_RAID_CONVERT = 0x028E {}
 
 cmsg CMSG_GROUP_ASSISTANT_LEADER = 0x028F {

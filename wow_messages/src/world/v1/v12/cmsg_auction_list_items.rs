@@ -4,7 +4,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new3.wowm:58`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new3.wowm#L58):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_items.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_items.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUCTION_LIST_ITEMS = 0x258 {
 ///     u64 auctioneer_guid;

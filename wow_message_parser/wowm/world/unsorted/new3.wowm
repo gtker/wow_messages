@@ -41,46 +41,6 @@ smsg SMSG_ZONE_UNDER_ATTACK = 0x0254 {
     u32 zone_id;
 }
 
-cmsg CMSG_AUCTION_SELL_ITEM = 0x0256 {
-    u64 auctioneer_guid;
-    u64 object_guid;
-    u32 stack_size;
-    u32 starting_bid;
-    u32 buyout;
-    u32 auction_duration_in_minutes;
-}
-
-cmsg CMSG_AUCTION_REMOVE_ITEM = 0x0257 {
-    u64 auctioneer_guid;
-    u32 auction_id;
-}
-
-cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
-    u64 auctioneer_guid;
-    u32 list_start_item;
-    CString searched_name;
-    u8 minimum_level;
-    u8 maximum_level;
-    /* TODO: Maybe more enums? */
-    u32 auction_slot_id;
-    u32 auction_main_category;
-    u32 auction_sub_category;
-    u32 auction_quality;
-    u8 usable;
-}
-
-cmsg CMSG_AUCTION_LIST_OWNER_ITEMS = 0x0259 {
-    u64 auctioneer_guid;
-    u32 list_from;
-}
-
-cmsg CMSG_AUCTION_PLACE_BID = 0x025A {
-    u64 auctioneer_guid;
-    u32 auction_id;
-    u32 price;
-}
-
-
 enum LogFormat : u8 {
     DEFAULT = 0;
     DEBUG = 1;

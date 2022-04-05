@@ -1,0 +1,15 @@
+#tag_all versions "1.12";
+
+smsg SMSG_AUCTION_OWNER_NOTIFICATION = 0x025F {
+    u32 auction_id;
+    u32 bid {
+        comment = "vmangos/cmangos/mangoszero: if 0, client shows ERR_AUCTION_EXPIRED_S, else ERR_AUCTION_SOLD_S (works only when guid==0)";
+    }
+    u32 auction_out_bid;
+    Guid bidder;
+    u32 item_entry;
+    u32 item_random_property_id;
+} {
+    comment = "vmangos/cmangos/mangoszero: this [message] causes on client to display: 'Your auction sold'";
+}
+

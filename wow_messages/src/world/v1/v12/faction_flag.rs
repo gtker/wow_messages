@@ -1,6 +1,6 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/add_messages.wowm:1457`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/add_messages.wowm#L1457):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/add_messages.wowm:1444`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/add_messages.wowm#L1444):
 /// ```text
 /// flag FactionFlag : u8 {
 ///     VISIBLE = 0x01;

@@ -1379,19 +1379,6 @@ smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
     u8 rank_progress_bar;
 }
 
-
-cmsg MSG_AUCTION_HELLO_Client = 0x0255 {
-    Guid auctioneer;
-}
-
-
-smsg MSG_AUCTION_HELLO_Server = 0x0255 {
-    Guid auctioneer;
-    u32 auction_house_id;
-}
-
-
-
 enum BattlegroundEndStatus : u8 {
     NOT_ENDED = 0;
     ENDED = 1;

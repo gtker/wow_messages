@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_AUCTION_LIST_OWNER_ITEMS = 0x0259 {
+    u64 auctioneer_guid;
+    u32 list_from;
+}
+
