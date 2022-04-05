@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+msg MSG_TABARDVENDOR_ACTIVATE = 0x01F2 {
+    Guid guid;
+}
+

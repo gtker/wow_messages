@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+msg MSG_PETITION_DECLINE = 0x01C2 {
+    Guid petition;
+}
+

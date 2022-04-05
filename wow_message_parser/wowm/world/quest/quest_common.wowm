@@ -1,0 +1,55 @@
+#tag_all versions "1.12";
+
+enum QuestFailedReason : u32 {
+    DONT_HAVE_REQ = 0 {
+        comment = "this is default case";
+    }
+    QUEST_FAILED_LOW_LEVEL = 1 {
+        comment = "You are not high enough level for that quest.";
+    }
+    QUEST_FAILED_REQS = 2 {
+        comment = "You don't meet the requirements for that quest.";
+    }
+    QUEST_FAILED_INVENTORY_FULL = 4 {
+        comment = "Inventory is full. (Also 50. From SMSG_QUESTGIVER_QUEST_FAILED)";
+    }
+    QUEST_FAILED_WRONG_RACE = 6 {
+        comment = "That quest is not available to your race.";
+    }
+    QUEST_ONLY_ONE_TIMED = 12 {
+        comment = "You can only be on one timed quest at a time.";
+    }
+    QUEST_ALREADY_ON = 13 {
+        comment = "You are already on that quest.";
+    }
+    QUEST_FAILED_DUPLICATE_ITEM = 17 {
+        comment = "Duplicate item found. (From SMSG_QUESTGIVER_QUEST_FAILED)";
+    }
+    QUEST_FAILED_MISSING_ITEMS = 20 {
+        comment = "You don't have the required items with you. Check storage.";
+    }
+    QUEST_FAILED_NOT_ENOUGH_MONEY = 22 {
+        comment = "You don't have enough money for that quest.";
+    }
+}
+
+enum QuestGiverStatus : u8 {
+    NONE = 0;
+    UNAVAILABLE = 1;
+    CHAT = 2;
+    INCOMPLETE = 3;
+    REWARD_REP = 4;
+    AVAILABLE = 5;
+    REWARD_OLD = 6 {
+        comment = "red dot on minimap";
+    }
+    REWARD2 = 7 {
+        comment = "yellow dot on minimap";
+    }
+}
+
+struct QuestItemReward {
+    Item item;
+    u32 item_count;
+}
+

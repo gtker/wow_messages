@@ -1,11 +1,5 @@
 #tag_all versions "1.12";
 
-
-msg MSG_TABARDVENDOR_ACTIVATE = 0x01F2 {
-    Guid guid;
-}
-
-
 enum QuestPartyMessage : u8 {
     SHARING_QUEST = 0 {
         comment = "ERR_QUEST_PUSH_SUCCESS_S";
@@ -41,15 +35,6 @@ enum QuestPartyMessage : u8 {
 msg MSG_QUEST_PUSH_RESULT = 0x0276 {
     Guid guid;
     QuestPartyMessage message;
-}
-
-msg MSG_PETITION_RENAME = 0x02C1 {
-    Guid petition_guid;
-    CString new_name;
-}
-
-msg MSG_PETITION_DECLINE = 0x01C2 {
-    Guid petition;
 }
 
 

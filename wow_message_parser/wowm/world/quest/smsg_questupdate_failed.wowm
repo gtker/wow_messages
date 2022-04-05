@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_QUESTUPDATE_FAILED = 0x0196 {
+    u32 quest_id;
+}
+

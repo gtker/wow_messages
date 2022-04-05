@@ -1,0 +1,40 @@
+#tag_all versions "1.12";
+
+struct QuestItemRequirement {
+    Item item;
+    u32 item_count;
+    u32 item_display_id;
+}
+
+enum QuestCompletable : u32 {
+    NOT_COMPLETABLE = 0;
+    COMPLETEABLE = 3;
+}
+
+smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
+    Guid npc;
+    u32 quest_id;
+    CString title;
+    CString request_items_text;
+    u32 emote_delay;
+    u32 emote;
+    u32 auto_finish;
+    u32 required_money;
+    u32 amount_of_required_items;
+    QuestItemRequirement[amount_of_required_items] required_items;
+    u32 unknown1 {
+        comment = "cmangos/vmangos/mangoszero: All set to 0x02";
+    }
+    QuestCompletable completable {
+        comment = "cmangos/vmangos/mangoszero: Called flags1.";
+    }
+    u32 flags2 {
+        comment = "cmangos/vmangos/mangoszero: set to 0x04";
+    }
+    u32 flags3 {
+        comment = "cmangos/vmangos/mangoszero: set to 0x08";
+    }
+} {
+    comment = "mangoszero/vmangos: Quests that don't require items use the RequestItemsText field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.";
+}
+

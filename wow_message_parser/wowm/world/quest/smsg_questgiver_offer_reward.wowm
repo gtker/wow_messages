@@ -1,0 +1,25 @@
+#tag_all versions "1.12";
+
+smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
+    Guid npc;
+    u32 quest_id;
+    CString title;
+    CString offer_reward_text;
+    u32 enable_next {
+        comment = "vmangos/mangoszero/cmangos: Auto Finish";
+    }
+    u32 amount_of_emotes {
+        valid_range = "0 4";
+    }
+    NpcTextUpdateEmote[amount_of_emotes] emotes;
+    u32 amount_of_choice_item_rewards;
+    QuestItemReward[amount_of_choice_item_rewards] choice_item_rewards;
+    u32 amount_of_item_rewards;
+    QuestItemReward[amount_of_item_rewards] item_rewards;
+    u32 money_reward;
+    Spell reward_spell;
+    Spell reward_spell_cast {
+        comment = "mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though.";
+    }
+}
+

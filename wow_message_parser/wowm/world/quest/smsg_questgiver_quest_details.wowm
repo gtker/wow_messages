@@ -1,0 +1,25 @@
+#tag_all versions "1.12";
+
+struct QuestDetailsEmote {
+    u32 emote;
+    u32 emote_delay_in_msecs;
+}
+
+smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
+    Guid guid;
+    u32 quest_id;
+    CString title;
+    CString details;
+    CString objectives;
+    u32 auto_finish {
+        comment = "cmangos/vmangos/mangoszero: sets to 1 for true and 0 for false";
+    }
+    u32 amount_of_choice_item_rewards;
+    QuestItemReward[amount_of_choice_item_rewards] choice_item_rewards;
+    u32 amount_of_item_rewards;
+    QuestItemReward[amount_of_item_rewards] item_rewards;
+    u32 money_reward;
+    Spell reward_spell;
+    u32 amount_of_emotes;
+    QuestDetailsEmote[amount_of_emotes] emotes;
+}

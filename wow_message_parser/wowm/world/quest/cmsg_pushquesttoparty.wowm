@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_PUSHQUESTTOPARTY = 0x019D {
+    u32 quest_id;
+}
+

@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_QUESTGIVER_QUEST_INVALID = 0x018F {
+    QuestFailedReason msg;
+}
+

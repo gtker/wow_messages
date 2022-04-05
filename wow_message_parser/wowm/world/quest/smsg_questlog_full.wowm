@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_QUESTLOG_FULL = 0x0195 {}
+

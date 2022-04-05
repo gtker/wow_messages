@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_QUESTUPDATE_FAILEDTIMER = 0x0197 {
+    u32 quest_id;
+}
+

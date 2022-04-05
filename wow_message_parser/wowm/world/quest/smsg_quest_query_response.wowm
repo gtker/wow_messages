@@ -1,5 +1,14 @@
 #tag_all versions "1.12";
 
+struct QuestObjective {
+    u32 creature_id {
+        comment = "cmangos: client expected gameobject template id in form (id|0x80000000)";
+    }
+    u32 kill_count;
+    u32 required_item_id;
+    u32 required_item_count;
+}
+
 smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     u32 quest_id;
     u32 quest_method {

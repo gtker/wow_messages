@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_QUESTGIVER_CHOOSE_REWARD = 0x018E {
+    u64 guid;
+    u32 quest_id;
+    u32 reward;
+}
+
