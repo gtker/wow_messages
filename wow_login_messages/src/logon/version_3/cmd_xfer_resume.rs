@@ -4,7 +4,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L14):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L26):
 /// ```text
 /// clogin CMD_XFER_RESUME = 0x33 {
 ///     u64 offset;
@@ -53,3 +53,39 @@ impl MaximumPossibleSized for CMD_XFER_RESUME {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use crate::ReadableAndWritable;
+    use std::io::Cursor;
+    use super::CMD_XFER_RESUME;
+    use crate::ConstantSized;
+    use crate::logon::version_3::opcodes::ClientOpcodeMessage;
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 30.
+    #[test]
+    fn CMD_XFER_RESUME0() {
+        let raw: Vec<u8> = vec![ 0x33, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, 0x00,
+             0x00, ];
+
+        let expected = CMD_XFER_RESUME {
+            offset: 0xDEAD,
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_XFER_RESUME(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_RESUME, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.offset, expected.offset);
+
+        assert_eq!(CMD_XFER_RESUME::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+}

@@ -2,7 +2,15 @@
 
 clogin CMD_XFER_ACCEPT = 0x32 {}
 
+test CMD_XFER_ACCEPT {} [
+    0x32, /* opcode */
+]
+
 clogin CMD_XFER_CANCEL = 0x34 {}
+
+test CMD_XFER_CANCEL {} [
+    0x34, /* opcode */
+]
 
 slogin CMD_XFER_DATA = 0x31 {
     u16 size;
@@ -11,6 +19,17 @@ slogin CMD_XFER_DATA = 0x31 {
 
 slogin CMD_XFER_INITIATE = 0x30 {}
 
+test CMD_XFER_INITIATE {} [
+    0x30, /* opcode */
+]
+
 clogin CMD_XFER_RESUME = 0x33 {
     u64 offset;
 }
+
+test CMD_XFER_RESUME {
+    offset = 0xDEAD;
+} [
+    0x33, /* opcode */
+    0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* offset: 0xDEAD */
+]

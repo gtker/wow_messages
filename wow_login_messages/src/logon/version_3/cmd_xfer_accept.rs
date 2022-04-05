@@ -44,3 +44,36 @@ impl MaximumPossibleSized for CMD_XFER_ACCEPT {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use crate::ReadableAndWritable;
+    use std::io::Cursor;
+    use super::CMD_XFER_ACCEPT;
+    use crate::ConstantSized;
+    use crate::logon::version_3::opcodes::ClientOpcodeMessage;
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 5.
+    #[test]
+    fn CMD_XFER_ACCEPT0() {
+        let raw: Vec<u8> = vec![ 0x32, ];
+
+        let expected = CMD_XFER_ACCEPT {
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_XFER_ACCEPT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_ACCEPT, got {opcode:#?}", opcode = opcode),
+        };
+
+
+        assert_eq!(CMD_XFER_ACCEPT::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+}

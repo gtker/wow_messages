@@ -4,7 +4,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L5):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L9):
 /// ```text
 /// clogin CMD_XFER_CANCEL = 0x34 {
 /// }
@@ -44,3 +44,36 @@ impl MaximumPossibleSized for CMD_XFER_CANCEL {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use crate::ReadableAndWritable;
+    use std::io::Cursor;
+    use super::CMD_XFER_CANCEL;
+    use crate::ConstantSized;
+    use crate::logon::version_3::opcodes::ClientOpcodeMessage;
+
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 11.
+    #[test]
+    fn CMD_XFER_CANCEL0() {
+        let raw: Vec<u8> = vec![ 0x34, ];
+
+        let expected = CMD_XFER_CANCEL {
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_XFER_CANCEL(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}", opcode = opcode),
+        };
+
+
+        assert_eq!(CMD_XFER_CANCEL::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+}
