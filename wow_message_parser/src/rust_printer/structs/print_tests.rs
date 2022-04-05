@@ -25,7 +25,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             false => s.wln("use crate::VariableSized;"),
             true => s.wln("use crate::ConstantSized;"),
         }
-        for name in e.get_types_needing_import() {
+        for name in e.get_types_needing_import_recursively(o) {
             let tags = o.get_tags_of_object(name, e.tags());
             s.wln(format!(
                 "use {import_path}::{ty};",
@@ -252,55 +252,64 @@ fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Contai
             s.wln_no_indent(format!(r#"String::from("{}"),"#, value,));
         }
         TestValue::Flag(flags) => {
-            s.wln_no_indent(format!("{ty} {{", ty = m.ty().rust_str()));
-            s.inc_indent();
+            if !e.nested_types().new_enums().is_empty() {
+                s.wln_no_indent(format!("{ty} {{", ty = m.ty().rust_str()));
+                s.inc_indent();
 
-            s.w("inner: 0");
-            for f in flags {
-                s.w_no_indent(format!(
-                    " | {original_ty}::{value}",
-                    original_ty = m.ty().rust_str(),
-                    value = f,
-                ))
-            }
-            s.wln_no_indent(",");
-
-            for f in e
-                .nested_types()
-                .new_enums()
-                .iter()
-                .find(|a| a.variable_name() == m.name())
-                .unwrap()
-                .fields()
-            {
-                if f.is_simple() {
-                    continue;
+                s.w("inner: 0");
+                for f in flags {
+                    s.w_no_indent(format!(
+                        " | {original_ty}::{value}",
+                        original_ty = m.ty().rust_str(),
+                        value = f,
+                    ))
                 }
+                s.wln_no_indent(",");
 
-                s.w(format!(
-                    "{variable_name}: ",
-                    variable_name = f.name().to_lowercase(),
-                ));
-
-                if let Some(flag) = flags.iter().find(|a| a.as_str() == f.name()) {
-                    s.wln_no_indent(format!(
-                        "Some({}{}{} {{",
-                        e.name(),
-                        m.ty().rust_str(),
-                        f.name()
-                    ));
-                    s.inc_indent();
-                    let subvars = m.get_subfields_for_enumerator(flag.as_str());
-                    for sf in &subvars {
-                        print_value(s, sf, t, e, o);
+                for f in e
+                    .nested_types()
+                    .new_enums()
+                    .iter()
+                    .find(|a| a.variable_name() == m.name())
+                    .unwrap()
+                    .fields()
+                {
+                    if f.is_simple() {
+                        continue;
                     }
-                    s.closing_curly_with("),");
-                } else {
-                    s.wln_no_indent("None,");
-                }
-            }
 
-            s.closing_curly_with(",");
+                    s.w(format!(
+                        "{variable_name}: ",
+                        variable_name = f.name().to_lowercase(),
+                    ));
+
+                    if let Some(flag) = flags.iter().find(|a| a.as_str() == f.name()) {
+                        s.wln_no_indent(format!(
+                            "Some({}{}{} {{",
+                            e.name(),
+                            m.ty().rust_str(),
+                            f.name()
+                        ));
+                        s.inc_indent();
+                        let subvars = m.get_subfields_for_enumerator(flag.as_str());
+                        for sf in &subvars {
+                            print_value(s, sf, t, e, o);
+                        }
+                        s.closing_curly_with("),");
+                    } else {
+                        s.wln_no_indent("None,");
+                    }
+                }
+
+                s.closing_curly_with(",");
+            } else {
+                s.wln_no_indent(format!("{ty}::empty()", ty = m.ty().rust_str()));
+                s.inc_indent();
+                for f in flags {
+                    s.w_no_indent(format!(".set_{value}()", value = f,))
+                }
+                s.wln_no_indent(",");
+            }
         }
         TestValue::SubObject { ty_name, members } => {
             s.wln_no_indent(format!("{} {{", ty_name));

@@ -490,8 +490,6 @@ impl Container {
     }
 
     pub fn get_types_needing_errors(&self) -> Vec<&str> {
-        
-
         self.get_types_needing_import()
     }
 
@@ -651,6 +649,34 @@ impl Container {
         }
 
         false
+    }
+
+    pub fn get_types_needing_import_recursively<'a>(&'a self, o: &'a Objects) -> Vec<&'a str> {
+        let mut v = Vec::new();
+        for m in self.fields() {
+            add_complex_types(m, &mut v);
+        }
+        v.sort_unstable();
+        v.dedup();
+
+        let mut v2 = Vec::new();
+        for t in &v {
+            match o.get_object_type_of(t, self.tags()) {
+                ObjectType::Struct | ObjectType::CLogin | ObjectType::SLogin => {
+                    let mut types = o
+                        .get_container(t, self.tags())
+                        .get_types_needing_import_recursively(o);
+                    v2.append(&mut types);
+                }
+                ObjectType::Enum | ObjectType::Flag => {}
+            }
+        }
+        v.append(&mut v2);
+
+        v.sort_unstable();
+        v.dedup();
+
+        v
     }
 
     pub fn get_types_needing_import(&self) -> Vec<&str> {
@@ -959,15 +985,7 @@ fn add_complex_types<'a>(m: &'a StructMember, v: &mut Vec<&'a str>) {
             _ => {}
         },
         StructMember::IfStatement(statement) => {
-            for member in &statement.members {
-                add_complex_types(member, v);
-            }
-            for statement in statement.else_ifs() {
-                for member in &statement.members {
-                    add_complex_types(member, v);
-                }
-            }
-            for member in &statement.else_statement_members {
+            for member in statement.all_members() {
                 add_complex_types(member, v);
             }
         }

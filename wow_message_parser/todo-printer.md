@@ -12,8 +12,6 @@
   * Tests
 * Working UpdateMask
   * Tests
-* Test: Handling of flags
-    * For `CMD_REALM_LIST_Server`
 
 # Direct upgrades to Login
 
