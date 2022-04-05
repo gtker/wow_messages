@@ -107,7 +107,8 @@ struct Character {
 
 smsg SMSG_CHAR_ENUM = 0x03B {
     u8 amount_of_characters {
-        maximum_allowed = "10";
+        valid_range = "0 10";
+        comment = "Client can not handle values larger than 10";
     }
     Character[amount_of_characters] characters;
 }
