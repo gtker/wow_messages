@@ -1,6 +1,6 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/remaining.wowm:700`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/remaining.wowm#L700):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/remaining.wowm:114`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/remaining.wowm#L114):
 /// ```text
 /// flag GroupMemberOnlineStatus : u8 {
 ///     OFFLINE = 0x0000;
@@ -9,7 +9,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 ///     DEAD = 0x0004;
 ///     GHOST = 0x0008;
 ///     PVP_FFA = 0x0010;
-///     UNK3 = 0x0020;
+///     ZONE_OUT = 0x0020;
 ///     AFK = 0x0040;
 ///     DND = 0x0080;
 /// }
@@ -48,7 +48,7 @@ impl GroupMemberOnlineStatus {
     pub const DEAD: u8 = 0x04;
     pub const GHOST: u8 = 0x08;
     pub const PVP_FFA: u8 = 0x10;
-    pub const UNK3: u8 = 0x20;
+    pub const ZONE_OUT: u8 = 0x20;
     pub const AFK: u8 = 0x40;
     pub const DND: u8 = 0x80;
 
@@ -64,7 +64,7 @@ impl GroupMemberOnlineStatus {
                 | Self::DEAD
                 | Self::GHOST
                 | Self::PVP_FFA
-                | Self::UNK3
+                | Self::ZONE_OUT
                 | Self::AFK
                 | Self::DND
         }
@@ -179,21 +179,21 @@ impl GroupMemberOnlineStatus {
         *self
     }
 
-    pub const fn is_UNK3(&self) -> bool {
-        (self.inner & Self::UNK3) != 0
+    pub const fn is_ZONE_OUT(&self) -> bool {
+        (self.inner & Self::ZONE_OUT) != 0
     }
 
-    pub const fn new_UNK3() -> Self {
-        Self { inner: Self::UNK3 }
+    pub const fn new_ZONE_OUT() -> Self {
+        Self { inner: Self::ZONE_OUT }
     }
 
-    pub fn set_UNK3(&mut self) -> Self {
-        self.inner |= Self::UNK3;
+    pub fn set_ZONE_OUT(&mut self) -> Self {
+        self.inner |= Self::ZONE_OUT;
         *self
     }
 
-    pub fn clear_UNK3(&mut self) -> Self {
-        self.inner &= Self::UNK3.reverse_bits();
+    pub fn clear_ZONE_OUT(&mut self) -> Self {
+        self.inner &= Self::ZONE_OUT.reverse_bits();
         *self
     }
 

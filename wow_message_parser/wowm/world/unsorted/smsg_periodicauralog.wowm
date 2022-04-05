@@ -1,5 +1,301 @@
 #tag_all versions "1.12";
 
+enum AuraType : u32 {
+    NONE = 0;
+    BIND_SIGHT = 1;
+    MOD_POSSESS = 2;
+    PERIODIC_DAMAGE = 3 {
+        comment = "vmangos: The aura should do periodic damage, the function that handles this is Aura::HandlePeriodicDamage, the amount is usually decided by the Unit::SpellDamageBonusDone or Unit::MeleeDamageBonusDone which increases/decreases the Modifier::m_amount";
+    }
+    DUMMY = 4 {
+        comment = "vmangos: Used by Aura::HandleAuraDummy";
+    }
+    MOD_CONFUSE = 5 {
+        comment = "vmangos: Used by Aura::HandleModConfuse, will either confuse or unconfuse the target depending on whether the apply flag is set";
+    }
+    MOD_CHARM = 6;
+    MOD_FEAR = 7;
+    PERIODIC_HEAL = 8 {
+        comment = "vmangos: The aura will do periodic heals of a target, handled by Aura::HandlePeriodicHeal, uses Unit::SpellHealingBonusDone to calculate whether to increase or decrease Modifier::m_amount";
+    }
+    MOD_ATTACKSPEED = 9 {
+        comment = "vmangos: Changes the attackspeed, the Modifier::m_amount decides how much we change in percent, ie, if the m_amount is 50 the attackspeed will increase by 50%";
+    }
+    MOD_THREAT = 10 {
+        comment = "vmangos: Modifies the threat that the Aura does in percent, the Modifier::m_miscvalue decides which of the SpellSchools it should affect threat for.  \see SpellSchoolMask";
+    }
+    MOD_TAUNT = 11 {
+        comment = "vmangos: Just applies a taunt which will change the threat a mob has Taken care of in Aura::HandleModThreat";
+    }
+    MOD_STUN = 12 {
+        comment = "vmangos: Stuns targets in different ways, taken care of in Aura::HandleAuraModStun";
+    }
+    MOD_DAMAGE_DONE = 13 {
+        comment = "vmangos: Changes the damage done by a weapon in any hand, the Modifier::m_miscvalue will tell what school the damage is from, it's used as a bitmask \see SpellSchoolMask";
+    }
+    MOD_DAMAGE_TAKEN = 14 {
+        comment = "vmangos: Not handled by the Aura class but instead this is implemented in Unit::MeleeDamageBonusTaken and Unit::SpellBaseDamageBonusTaken";
+    }
+    DAMAGE_SHIELD = 15 {
+        comment = "vmangos: Not handled by the Aura class, implemented in Unit::DealMeleeDamage";
+    }
+    MOD_STEALTH = 16 {
+        comment = "vmangos: Taken care of in Aura::HandleModStealth, take note that this is not the same thing as invisibility";
+    }
+    MOD_STEALTH_DETECT = 17 {
+        comment = "vmangos: Not handled by the Aura class, implemented in Unit::isVisibleForOrDetect which does a lot of checks to determine whether the person is visible or not, the SPELL_AURA_MOD_STEALTH seems to determine how in/visible ie a rogue is.";
+    }
+    MOD_INVISIBILITY = 18 {
+        comment = "vmangos: Handled by Aura::HandleInvisibility, the Modifier::m_miscvalue in the struct seems to decide what kind of invisibility it is with a bitflag. the miscvalue decides which bit is set, ie: 3 would make the 3rd bit be set.";
+    }
+    MOD_INVISIBILITY_DETECTION = 19 {
+        comment = "vmangos: Adds one of the kinds of detections to the possible detections.  As in SPEALL_AURA_MOD_INVISIBILITY the Modifier::m_miscvalue seems to decide what kind of invisibility the Unit should be able to detect.";
+    }
+    OBS_MOD_HEALTH = 20 {
+        comment = "20,21 unofficial";
+    }
+    OBS_MOD_MANA = 21;
+    MOD_RESISTANCE = 22 {
+        comment = "vmangos: Handled by Aura::HandleAuraModResistance, changes the resistance for a unit the field Modifier::m_miscvalue decides which kind of resistance that should be changed, for possible values see SpellSchools.  \see SpellSchools";
+    }
+    PERIODIC_TRIGGER_SPELL = 23 {
+        comment = "vmangos: Currently just sets Aura::m_isPeriodic to apply and has a special case for Curse of the Plaguebringer.";
+    }
+    PERIODIC_ENERGIZE = 24 {
+        comment = "vmangos: Just sets Aura::m_isPeriodic to apply";
+    }
+    MOD_PACIFY = 25 {
+        comment = "vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: http://classic.wowhead.com/spell=6462";
+    }
+    MOD_ROOT = 26 {
+        comment = "vmangos: Roots or unroots the target";
+    }
+    MOD_SILENCE = 27 {
+        comment = "vmangos: Silences the target and stops and spell casts that should be stopped, they have the flag SpellPreventionType::SPELL_PREVENTION_TYPE_SILENCE";
+    }
+    REFLECT_SPELLS = 28;
+    MOD_STAT = 29;
+    MOD_SKILL = 30;
+    MOD_INCREASE_SPEED = 31;
+    MOD_INCREASE_MOUNTED_SPEED = 32;
+    MOD_DECREASE_SPEED = 33;
+    MOD_INCREASE_HEALTH = 34;
+    MOD_INCREASE_ENERGY = 35;
+    MOD_SHAPESHIFT = 36;
+    EFFECT_IMMUNITY = 37;
+    STATE_IMMUNITY = 38;
+    SCHOOL_IMMUNITY = 39;
+    DAMAGE_IMMUNITY = 40;
+    DISPEL_IMMUNITY = 41;
+    PROC_TRIGGER_SPELL = 42;
+    PROC_TRIGGER_DAMAGE = 43;
+    TRACK_CREATURES = 44;
+    TRACK_RESOURCES = 45;
+    UNKNOWN46 = 46 {
+        comment = "Ignore all Gear test spells";
+    }
+    MOD_PARRY_PERCENT = 47;
+    UNKNOWN48 = 48 {
+        comment = "One periodic spell";
+    }
+    MOD_DODGE_PERCENT = 49;
+    MOD_BLOCK_SKILL = 50;
+    MOD_BLOCK_PERCENT = 51;
+    MOD_CRIT_PERCENT = 52;
+    PERIODIC_LEECH = 53;
+    MOD_HIT_CHANCE = 54;
+    MOD_SPELL_HIT_CHANCE = 55;
+    TRANSFORM = 56;
+    MOD_SPELL_CRIT_CHANCE = 57;
+    MOD_INCREASE_SWIM_SPEED = 58;
+    MOD_DAMAGE_DONE_CREATURE = 59;
+    MOD_PACIFY_SILENCE = 60;
+    MOD_SCALE = 61;
+    PERIODIC_HEALTH_FUNNEL = 62;
+    PERIODIC_MANA_FUNNEL = 63;
+    PERIODIC_MANA_LEECH = 64;
+    MOD_CASTING_SPEED_NOT_STACK = 65;
+    FEIGN_DEATH = 66;
+    MOD_DISARM = 67;
+    MOD_STALKED = 68;
+    SCHOOL_ABSORB = 69;
+    EXTRA_ATTACKS = 70;
+    MOD_SPELL_CRIT_CHANCE_SCHOOL = 71;
+    MOD_POWER_COST_SCHOOL_PCT = 72;
+    MOD_POWER_COST_SCHOOL = 73;
+    REFLECT_SPELLS_SCHOOL = 74;
+    MOD_LANGUAGE = 75;
+    FAR_SIGHT = 76;
+    MECHANIC_IMMUNITY = 77;
+    MOUNTED = 78;
+    MOD_DAMAGE_PERCENT_DONE = 79;
+    MOD_PERCENT_STAT = 80;
+    SPLIT_DAMAGE_PCT = 81;
+    WATER_BREATHING = 82;
+    MOD_BASE_RESISTANCE = 83;
+    MOD_REGEN = 84;
+    MOD_POWER_REGEN = 85;
+    CHANNEL_DEATH_ITEM = 86;
+    MOD_DAMAGE_PERCENT_TAKEN = 87;
+    MOD_HEALTH_REGEN_PERCENT = 88;
+    PERIODIC_DAMAGE_PERCENT = 89;
+    MOD_RESIST_CHANCE = 90;
+    MOD_DETECT_RANGE = 91;
+    PREVENTS_FLEEING = 92;
+    MOD_UNATTACKABLE = 93;
+    INTERRUPT_REGEN = 94;
+    GHOST = 95;
+    SPELL_MAGNET = 96;
+    MANA_SHIELD = 97;
+    MOD_SKILL_TALENT = 98;
+    MOD_ATTACK_POWER = 99;
+    AURAS_VISIBLE = 100;
+    MOD_RESISTANCE_PCT = 101;
+    MOD_MELEE_ATTACK_POWER_VERSUS = 102;
+    MOD_TOTAL_THREAT = 103;
+    WATER_WALK = 104;
+    FEATHER_FALL = 105;
+    HOVER = 106;
+    ADD_FLAT_MODIFIER = 107;
+    ADD_PCT_MODIFIER = 108;
+    ADD_TARGET_TRIGGER = 109;
+    MOD_POWER_REGEN_PERCENT = 110;
+    ADD_CASTER_HIT_TRIGGER = 111;
+    OVERRIDE_CLASS_SCRIPTS = 112;
+    MOD_RANGED_DAMAGE_TAKEN = 113;
+    MOD_RANGED_DAMAGE_TAKEN_PCT = 114;
+    MOD_HEALING = 115;
+    MOD_REGEN_DURING_COMBAT = 116;
+    MOD_MECHANIC_RESISTANCE = 117;
+    MOD_HEALING_PCT = 118;
+    SHARE_PET_TRACKING = 119;
+    UNTRACKABLE = 120;
+    EMPATHY = 121;
+    MOD_OFFHAND_DAMAGE_PCT = 122;
+    MOD_TARGET_RESISTANCE = 123;
+    MOD_RANGED_ATTACK_POWER = 124;
+    MOD_MELEE_DAMAGE_TAKEN = 125;
+    MOD_MELEE_DAMAGE_TAKEN_PCT = 126;
+    RANGED_ATTACK_POWER_ATTACKER_BONUS = 127;
+    MOD_POSSESS_PET = 128;
+    MOD_SPEED_ALWAYS = 129;
+    MOD_MOUNTED_SPEED_ALWAYS = 130;
+    MOD_RANGED_ATTACK_POWER_VERSUS = 131;
+    MOD_INCREASE_ENERGY_PERCENT = 132;
+    MOD_INCREASE_HEALTH_PERCENT = 133;
+    MOD_MANA_REGEN_INTERRUPT = 134;
+    MOD_HEALING_DONE = 135;
+    MOD_HEALING_DONE_PERCENT = 136;
+    MOD_TOTAL_STAT_PERCENTAGE = 137;
+    MOD_MELEE_HASTE = 138;
+    FORCE_REACTION = 139;
+    MOD_RANGED_HASTE = 140;
+    MOD_RANGED_AMMO_HASTE = 141;
+    MOD_BASE_RESISTANCE_PCT = 142;
+    MOD_RESISTANCE_EXCLUSIVE = 143;
+    SAFE_FALL = 144;
+    CHARISMA = 145;
+    PERSUADED = 146;
+    MECHANIC_IMMUNITY_MASK = 147;
+    RETAIN_COMBO_POINTS = 148;
+    RESIST_PUSHBACK  = 149 {
+        comment = "Resist Pushback";
+    }
+    MOD_SHIELD_BLOCKVALUE_PCT = 150;
+    TRACK_STEALTHED  = 151 {
+        comment = "Track Stealthed";
+    }
+    MOD_DETECTED_RANGE = 152 {
+        comment = "Mod Detected Range";
+    }
+    SPLIT_DAMAGE_FLAT = 153 {
+        comment = "Split Damage Flat";
+    }
+    MOD_STEALTH_LEVEL = 154 {
+        comment = "Stealth Level Modifier";
+    }
+    MOD_WATER_BREATHING = 155 {
+        comment = "Mod Water Breathing";
+    }
+    MOD_REPUTATION_GAIN = 156 {
+        comment = "Mod Reputation Gain";
+    }
+    PET_DAMAGE_MULTI = 157 {
+        comment = "Mod Pet Damage";
+    }
+    MOD_SHIELD_BLOCKVALUE = 158;
+    NO_PVP_CREDIT = 159;
+    MOD_AOE_AVOIDANCE = 160;
+    MOD_HEALTH_REGEN_IN_COMBAT = 161;
+    POWER_BURN_MANA = 162;
+    MOD_CRIT_DAMAGE_BONUS = 163;
+    UNKNOWN164 = 164;
+    MELEE_ATTACK_POWER_ATTACKER_BONUS = 165;
+    MOD_ATTACK_POWER_PCT = 166;
+    MOD_RANGED_ATTACK_POWER_PCT = 167;
+    MOD_DAMAGE_DONE_VERSUS = 168;
+    MOD_CRIT_PERCENT_VERSUS = 169;
+    DETECT_AMORE = 170;
+    MOD_SPEED_NOT_STACK = 171;
+    MOD_MOUNTED_SPEED_NOT_STACK = 172;
+    ALLOW_CHAMPION_SPELLS = 173;
+    MOD_SPELL_DAMAGE_OF_STAT_PERCENT = 174 {
+        comment = "in 1.12.1 only dependent spirit case";
+    }
+    MOD_SPELL_HEALING_OF_STAT_PERCENT = 175;
+    SPIRIT_OF_REDEMPTION = 176;
+    AOE_CHARM = 177;
+    MOD_DEBUFF_RESISTANCE = 178;
+    MOD_ATTACKER_SPELL_CRIT_CHANCE = 179;
+    MOD_FLAT_SPELL_DAMAGE_VERSUS = 180;
+    MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS = 181 {
+        comment = "unused - possible flat spell crit damage versus";
+    }
+    MOD_RESISTANCE_OF_STAT_PERCENT = 182;
+    MOD_CRITICAL_THREAT = 183;
+    MOD_ATTACKER_MELEE_HIT_CHANCE = 184;
+    MOD_ATTACKER_RANGED_HIT_CHANCE = 185;
+    MOD_ATTACKER_SPELL_HIT_CHANCE = 186;
+    MOD_ATTACKER_MELEE_CRIT_CHANCE = 187;
+    MOD_ATTACKER_RANGED_CRIT_CHANCE = 188;
+    MOD_RATING = 189;
+    MOD_FACTION_REPUTATION_GAIN = 190;
+    USE_NORMAL_MOVEMENT_SPEED = 191;
+}
+
+struct AuraLog {
+    AuraType aura_type;
+    if (aura_type == PERIODIC_DAMAGE
+     || aura_type == PERIODIC_DAMAGE_PERCENT)
+    {
+        u32 damage1;
+        /* TODO Enum? */
+        SpellSchool school;
+        u32 absorbed;
+        u32 resisted {
+            comment = "vmangos: Sent as int32";
+        }
+    } else if (aura_type == PERIODIC_HEAL
+            || aura_type == OBS_MOD_HEALTH)
+    {
+        u32 damage2;
+    } else if (aura_type == OBS_MOD_MANA
+            || aura_type == PERIODIC_ENERGIZE)
+    {
+        u32 misc_value1 {
+            comment = "vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have";
+        }
+        u32 damage3;
+    } else if (aura_type == PERIODIC_MANA_LEECH)
+    {
+        u32 misc_value2 {
+            comment = "vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have";
+        }
+        u32 damage;
+        f32 gain_multiplier;
+    }
+}
+
 smsg SMSG_PERIODICAURALOG = 0x024E {
     PackedGuid target;
     PackedGuid caster;

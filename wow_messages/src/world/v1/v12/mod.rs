@@ -805,8 +805,6 @@ pub use npc_text_update::*;
 mod npc_text_update_emote;
 pub use npc_text_update_emote::*;
 pub mod opcodes;
-mod party_member_status;
-pub use party_member_status::*;
 mod party_operation;
 pub use party_operation::*;
 mod party_result;

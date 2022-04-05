@@ -1,5 +1,24 @@
 #tag_all versions "1.12";
 
+enum GuildEmblemResult : u32 {
+    SUCCESS = 0 {
+        comment = "Guild Emblem saved.";
+    }
+    INVALID_TABARD_COLORS = 1;
+    NO_GUILD = 2 {
+        comment = "vmangos: You are not part of a guild!";
+    }
+    NOT_GUILD_MASTER = 3 {
+        comment = "vmangos: Only guild leaders can create emblems.";
+    }
+    NOT_ENOUGH_MONEY = 4 {
+        comment = "vmangos: You can't afford to do that.";
+    }
+    NO_MESSAGE = 5 {
+        comment = "mangoszero: [This version] fails silently.";
+    }
+}
+
 smsg MSG_SAVE_GUILD_EMBLEM_Server = 0x01F1 {
     GuildEmblemResult result;
 }

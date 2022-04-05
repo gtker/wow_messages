@@ -1,5 +1,19 @@
 #tag_all versions "1.12";
 
+enum MailType : u8 {
+    NORMAL = 0;
+    AUCTION = 2;
+    CREATURE = 3 {
+        comment = "client send CMSG_CREATURE_QUERY on this mailmessagetype";
+    }
+    GAMEOBJECT = 4 {
+        comment = "client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype";
+    }
+    ITEM = 5 {
+        comment = "client send CMSG_ITEM_QUERY on this mailmessagetype";
+    }
+}
+
 struct Mail {
     u32 message_id;
     MailType message_type;

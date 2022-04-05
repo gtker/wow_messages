@@ -1,5 +1,11 @@
 #tag_all versions "1.12";
 
+struct ChannelMember {
+    u64 guid;
+    /* TODO: unknown flags */
+    u8 member_flags;
+}
+
 smsg SMSG_CHANNEL_LIST = 0x009B {
     CString channel_name;
     /* TODO: unknown flags */

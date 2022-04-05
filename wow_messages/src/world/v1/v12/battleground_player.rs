@@ -4,7 +4,7 @@ use crate::world::v1::v12::{PvpRank, PvpRankError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/remaining.wowm:546`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/remaining.wowm#L546):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/msg_pvp_log_data_server.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/msg_pvp_log_data_server.wowm#L14):
 /// ```text
 /// struct BattlegroundPlayer {
 ///     Guid player;

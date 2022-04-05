@@ -1,5 +1,10 @@
 #tag_all versions "1.12";
 
+enum CorpseQueryResult : u8 {
+    NOT_FOUND = 0;
+    FOUND = 1;
+}
+
 smsg MSG_CORPSE_QUERY_Server = 0x0216 {
     CorpseQueryResult result;
     if (result == FOUND) {

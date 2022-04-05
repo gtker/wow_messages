@@ -1,5 +1,451 @@
 #tag_all versions "1.12";
 
+enum SimpleSpellCastResult : u8 {
+    SUCCESS = 0;
+    FAILURE = 2;
+}
+
+enum CastFailureReason : u8 {
+    AFFECTING_COMBAT = 0x00 {
+        comment = "You are in combat";
+    }
+    ALREADY_AT_FULL_HEALTH = 0x01 {
+        comment = "You are already at full Health.";
+    }
+    ALREADY_AT_FULL_POWER = 0x02 {
+        comment = "You are already at full %s.";
+    }
+    ALREADY_BEING_TAMED = 0x03 {
+        comment = "That creature is already being tamed";
+    }
+    ALREADY_HAVE_CHARM = 0x04 {
+        comment = "You already control a charmed creature";
+    }
+    ALREADY_HAVE_SUMMON = 0x05 {
+        comment = "You already control a summoned creature";
+    }
+    ALREADY_OPEN = 0x06 {
+        comment = "Already open";
+    }
+    AURA_BOUNCED = 0x07 {
+        comment = "A more powerful spell is already active";
+    }
+    AUTOTRACK_INTERRUPTED = 0x08 {
+        comment = "Message is hidden/unused";
+    }
+    BAD_IMPLICIT_TARGETS = 0x09 {
+        comment = "You have no target.";
+    }
+    BAD_TARGETS = 0x0a {
+        comment = "Invalid target";
+    }
+    CANT_BE_CHARMED = 0x0b {
+        comment = "Target can't be charmed";
+    }
+    CANT_BE_DISENCHANTED = 0x0c {
+        comment = "Item cannot be disenchanted";
+    }
+    CANT_BE_PROSPECTED = 0x0d {
+        comment = "There are no gems in this";
+    }
+    CANT_CAST_ON_TAPPED = 0x0e {
+        comment = "Target is tapped";
+    }
+    CANT_DUEL_WHILE_INVISIBLE = 0x0f {
+        comment = "You can't start a duel while invisible";
+    }
+    CANT_DUEL_WHILE_STEALTHED = 0x10 {
+        comment = "You can't start a duel while stealthed";
+    }
+    CANT_STEALTH = 0x11 {
+        comment = "You are too close to enemies";
+    }
+    CASTER_AURASTATE = 0x12 {
+        comment = "You can't do that yet";
+    }
+    CASTER_DEAD = 0x13 {
+        comment = "You are dead";
+    }
+    CHARMED = 0x14 {
+        comment = "Can't do that while charmed";
+    }
+    CHEST_IN_USE = 0x15 {
+        comment = "That is already being used";
+    }
+    CONFUSED = 0x16 {
+        comment = "Can't do that while confused";
+    }
+    DONT_REPORT = 0x17 {
+        comment = "Message is hidden/unused";
+    }
+    EQUIPPED_ITEM = 0x18 {
+        comment = "Must have the proper item equipped";
+    }
+    EQUIPPED_ITEM_CLASS = 0x19 {
+        comment = "Must have a %s equipped";
+    }
+    EQUIPPED_ITEM_CLASS_MAINHAND = 0x1a {
+        comment = "Must have a %s equipped in the main hand";
+    }
+    EQUIPPED_ITEM_CLASS_OFFHAND = 0x1b {
+        comment = "Must have a %s equipped in the offhand";
+    }
+    ERROR = 0x1c {
+        comment = "Internal error";
+    }
+    FIZZLE = 0x1d {
+        comment = "Fizzled";
+    }
+    FLEEING = 0x1e {
+        comment = "Can't do that while fleeing";
+    }
+    FOOD_LOWLEVEL = 0x1f {
+        comment = "That food's level is not high enough for your pet";
+    }
+    HIGHLEVEL = 0x20 {
+        comment = "Target is too high level";
+    }
+    HUNGER_SATIATED = 0x21 {
+        comment = "Message is hidden/unused";
+    }
+    IMMUNE = 0x22 {
+        comment = "Immune";
+    }
+    INTERRUPTED = 0x23 {
+        comment = "Interrupted";
+    }
+    INTERRUPTED_COMBAT = 0x24 {
+        comment = "Interrupted";
+    }
+    ITEM_ALREADY_ENCHANTED = 0x25 {
+        comment = "Item is already enchanted";
+    }
+    ITEM_GONE = 0x26 {
+        comment = "Item is gone";
+    }
+    ITEM_NOT_FOUND = 0x27 {
+        comment = "Tried to enchant an item that didn't exist";
+    }
+    ITEM_NOT_READY = 0x28 {
+        comment = "Item is not ready yet.";
+    }
+    LEVEL_REQUIREMENT = 0x29 {
+        comment = "You are not high enough level";
+    }
+    LINE_OF_SIGHT = 0x2a {
+        comment = "Target not in line of sight";
+    }
+    LOWLEVEL = 0x2b {
+        comment = "Target is too low level";
+    }
+    LOW_CASTLEVEL = 0x2c {
+        comment = "Skill not high enough";
+    }
+    MAINHAND_EMPTY = 0x2d {
+        comment = "Your weapon hand is empty";
+    }
+    MOVING = 0x2e {
+        comment = "Can't do that while moving";
+    }
+    NEED_AMMO = 0x2f {
+        comment = "Ammo needs to be in the paper doll ammo slot before it can be fired";
+    }
+    NEED_AMMO_POUCH = 0x30 {
+        comment = "Requires: %s";
+    }
+    NEED_EXOTIC_AMMO = 0x31 {
+        comment = "Requires exotic ammo: %s";
+    }
+    NOPATH = 0x32 {
+        comment = "No path available";
+    }
+    NOT_BEHIND = 0x33 {
+        comment = "You must be behind your target";
+    }
+    NOT_FISHABLE = 0x34 {
+        comment = "Your cast didn't land in fishable water";
+    }
+    NOT_HERE = 0x35 {
+        comment = "You can't use that here";
+    }
+    NOT_INFRONT = 0x36 {
+        comment = "You must be in front of your target";
+    }
+    NOT_IN_CONTROL = 0x37 {
+        comment = "You are not in control of your actions";
+    }
+    NOT_KNOWN = 0x38 {
+        comment = "Spell not learned";
+    }
+    NOT_MOUNTED = 0x39 {
+        comment = "You are mounted";
+    }
+    NOT_ON_TAXI = 0x3a {
+        comment = "You are in flight";
+    }
+    NOT_ON_TRANSPORT = 0x3b {
+        comment = "You are on a transport";
+    }
+    NOT_READY = 0x3c {
+        comment = "Spell is not ready yet.";
+    }
+    NOT_SHAPESHIFT = 0x3d {
+        comment = "You are in shapeshift form";
+    }
+    NOT_STANDING = 0x3e {
+        comment = "You must be standing to do that";
+    }
+    NOT_TRADEABLE = 0x3f {
+        comment = "You can only use this on an object you own";
+    }
+    NOT_TRADING = 0x40 {
+        comment = "Tried to enchant a trade item, but not trading";
+    }
+    NOT_UNSHEATHED = 0x41 {
+        comment = "You have to be unsheathed to do that!";
+    }
+    NOT_WHILE_GHOST = 0x42 {
+        comment = "Can't cast as ghost";
+    }
+    NO_AMMO = 0x43 {
+        comment = "Out of ammo";
+    }
+    NO_CHARGES_REMAIN = 0x44 {
+        comment = "No charges remain";
+    }
+    NO_CHAMPION = 0x45 {
+        comment = "You haven't selected a champion";
+    }
+    NO_COMBO_POINTS = 0x46 {
+        comment = "That ability requires combo points";
+    }
+    NO_DUELING = 0x47 {
+        comment = "Dueling isn't allowed here";
+    }
+    NO_ENDURANCE = 0x48 {
+        comment = "Not enough endurance";
+    }
+    NO_FISH = 0x49 {
+        comment = "There aren't any fish here";
+    }
+    NO_ITEMS_WHILE_SHAPESHIFTED = 0x4a {
+        comment = "Can't use items while shapeshifted";
+    }
+    NO_MOUNTS_ALLOWED = 0x4b {
+        comment = "You can't mount here";
+    }
+    NO_PET = 0x4c {
+        comment = "You do not have a pet";
+    }
+    NO_POWER = 0x4d {
+        comment = "Dynamic pre-defined messages, no args: Not enough mana, Not enough rage, etc";
+    }
+    NOTHING_TO_DISPEL = 0x4e {
+        comment = "Nothing to dispel";
+    }
+    NOTHING_TO_STEAL = 0x4f {
+        comment = "Nothing to steal";
+    }
+    ONLY_ABOVEWATER = 0x50 {
+        comment = "Cannot use while swimming";
+    }
+    ONLY_DAYTIME = 0x51 {
+        comment = "Can only use during the day";
+    }
+    ONLY_INDOORS = 0x52 {
+        comment = "Can only use indoors";
+    }
+    ONLY_MOUNTED = 0x53 {
+        comment = "Can only use while mounted";
+    }
+    ONLY_NIGHTTIME = 0x54 {
+        comment = "Can only use during the night";
+    }
+    ONLY_OUTDOORS = 0x55 {
+        comment = "Can only use outside";
+    }
+    ONLY_SHAPESHIFT = 0x56 {
+        comment = "Must be in %s";
+    }
+    ONLY_STEALTHED = 0x57 {
+        comment = "You must be in stealth mode";
+    }
+    ONLY_UNDERWATER = 0x58 {
+        comment = "Can only use while swimming";
+    }
+    OUT_OF_RANGE = 0x59 {
+        comment = "Out of range.";
+    }
+    PACIFIED = 0x5a {
+        comment = "Can't use that ability while pacified";
+    }
+    POSSESSED = 0x5b {
+        comment = "You are possessed";
+    }
+    REAGENTS = 0x5c {
+        comment = "Message is hidden/unused, supposedly implemented client-side only";
+    }
+    REQUIRES_AREA = 0x5d {
+        comment = "You need to be in %s";
+    }
+    REQUIRES_SPELL_FOCUS = 0x5e {
+        comment = "Requires %s";
+    }
+    ROOTED = 0x5f {
+        comment = "You are unable to move";
+    }
+    SILENCED = 0x60 {
+        comment = "Can't do that while silenced";
+    }
+    SPELL_IN_PROGRESS = 0x61 {
+        comment = "Another action is in progress";
+    }
+    SPELL_LEARNED = 0x62 {
+        comment = "You have already learned the spell";
+    }
+    SPELL_UNAVAILABLE = 0x63 {
+        comment = "The spell is not available to you";
+    }
+    STUNNED = 0x64 {
+        comment = "Can't do that while stunned";
+    }
+    TARGETS_DEAD = 0x65 {
+        comment = "Your target is dead";
+    }
+    TARGET_AFFECTING_COMBAT = 0x66 {
+        comment = "Target is in combat";
+    }
+    TARGET_AURASTATE = 0x67 {
+        comment = "You can't do that yet";
+    }
+    TARGET_DUELING = 0x68 {
+        comment = "Target is currently dueling";
+    }
+    TARGET_ENEMY = 0x69 {
+        comment = "Target is hostile";
+    }
+    TARGET_ENRAGED = 0x6a {
+        comment = "Target is too enraged to be charmed";
+    }
+    TARGET_FRIENDLY = 0x6b {
+        comment = "Target is friendly";
+    }
+    TARGET_IN_COMBAT = 0x6c {
+        comment = "The target can't be in combat";
+    }
+    TARGET_IS_PLAYER = 0x6d {
+        comment = "Can't target players";
+    }
+    TARGET_NOT_DEAD = 0x6e {
+        comment = "Target is alive";
+    }
+    TARGET_NOT_IN_PARTY = 0x6f {
+        comment = "Target is not in your party";
+    }
+    TARGET_NOT_LOOTED = 0x70 {
+        comment = "Creature must be looted first";
+    }
+    TARGET_NOT_PLAYER = 0x71 {
+        comment = "Target is not a player";
+    }
+    TARGET_NO_POCKETS = 0x72 {
+        comment = "No pockets to pick";
+    }
+    TARGET_NO_WEAPONS = 0x73 {
+        comment = "Target has no weapons equipped";
+    }
+    TARGET_UNSKINNABLE = 0x74 {
+        comment = "Creature is not skinnable";
+    }
+    THIRST_SATIATED = 0x75 {
+        comment = "Message is hidden/unused";
+    }
+    TOO_CLOSE = 0x76 {
+        comment = "Target too close";
+    }
+    TOO_MANY_OF_ITEM = 0x77 {
+        comment = "You have too many of that item already";
+    }
+    TOTEMS = 0x78 {
+        comment = "Message is hidden/unused, supposedly implemented client-side only";
+    }
+    TRAINING_POINTS = 0x79 {
+        comment = "Not enough training points";
+    }
+    TRY_AGAIN = 0x7a {
+        comment = "Failed attempt";
+    }
+    UNIT_NOT_BEHIND = 0x7b {
+        comment = "Target needs to be behind you";
+    }
+    UNIT_NOT_INFRONT = 0x7c {
+        comment = "Target needs to be in front of you";
+    }
+    WRONG_PET_FOOD = 0x7d {
+        comment = "Your pet doesn't like that food";
+    }
+    NOT_WHILE_FATIGUED = 0x7e {
+        comment = "Can't cast while fatigued";
+    }
+    TARGET_NOT_IN_INSTANCE = 0x7f {
+        comment = "Target must be in this instance";
+    }
+    NOT_WHILE_TRADING = 0x80 {
+        comment = "Can't cast while trading";
+    }
+    TARGET_NOT_IN_RAID = 0x81 {
+        comment = "Target is not in your party or raid group";
+    }
+    DISENCHANT_WHILE_LOOTING = 0x82 {
+        comment = "Cannot disenchant while looting";
+    }
+    PROSPECT_WHILE_LOOTING = 0x83 {
+        comment = "Cannot prospect while looting";
+    }
+    PROSPECT_NEED_MORE = 0x84 {
+        comment = "Message is hidden/unused, supposedly implemented client-side only";
+    }
+    TARGET_FREEFORALL = 0x85 {
+        comment = "Target is currently in free-for-all PvP combat";
+    }
+    NO_EDIBLE_CORPSES = 0x86 {
+        comment = "There are no nearby corpses to eat";
+    }
+    ONLY_BATTLEGROUNDS = 0x87 {
+        comment = "Can only use in battlegrounds";
+    }
+    TARGET_NOT_GHOST = 0x88 {
+        comment = "Target is not a ghost";
+    }
+    TOO_MANY_SKILLS = 0x89 {
+        comment = "Your pet can't learn any more skills";
+    }
+    TRANSFORM_UNUSABLE = 0x8a {
+        comment = "You can't use the new item";
+    }
+    WRONG_WEATHER = 0x8b {
+        comment = "The weather isn't right for that";
+    }
+    DAMAGE_IMMUNE = 0x8c {
+        comment = "You can't do that while you are immune";
+    }
+    PREVENTED_BY_MECHANIC = 0x8d {
+        comment = "Can't do that while %s";
+    }
+    PLAY_TIME = 0x8e {
+        comment = "Maximum play time exceeded";
+    }
+    REPUTATION = 0x8f {
+        comment = "Your reputation isn't high enough";
+    }
+    MIN_SKILL = 0x90 {
+        comment = "Your skill is not high enough.  Requires %s (%d).";
+    }
+    UNKNOWN = 0x91 {
+        comment = "Generic out of bounds response:  Unknown reason";
+    }
+}
+
 smsg SMSG_CAST_RESULT = 0x0130 {
     Spell spell;
     SimpleSpellCastResult result;

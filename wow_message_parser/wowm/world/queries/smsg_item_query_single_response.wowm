@@ -1,5 +1,10 @@
 #tag_all versions "1.12";
 
+struct ItemStat {
+    u32 item_stat_type;
+    u32 item_stat_value;
+}
+
 smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
     Item item;
     /* TODO: INT_EQUALS */

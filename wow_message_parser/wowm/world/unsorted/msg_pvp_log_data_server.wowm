@@ -1,5 +1,31 @@
 #tag_all versions "1.12";
 
+enum BattlegroundEndStatus : u8 {
+    NOT_ENDED = 0;
+    ENDED = 1;
+}
+
+enum BattlegroundWinner : u8 {
+    HORDE = 0;
+    ALLIANCE = 1;
+    NONE = 2;
+}
+
+struct BattlegroundPlayer {
+    Guid player;
+    (u32)PvpRank rank;
+    u32 killing_blows;
+    u32 honorable_kills;
+    u32 deaths;
+    u32 bonus_honor;
+    u32 amount_of_extra_fields;
+    u32[amount_of_extra_fields] fields {
+        comment = "This depends on the BG in question. AV expects 7: Graveyards Assaulted, Graveyards Defended, Towers Assaulted, Towers Defended, Secondary Objectives, LieutenantCount, SecondaryNpc";
+        comment = "WSG expects 2: Flag captures and flag returns";
+        comment = "AB expects 2: Bases assaulted and bases defended";
+    }
+}
+
 smsg MSG_PVP_LOG_DATA_Server = 0x02E0 {
     BattlegroundEndStatus status;
     if (status == ENDED) {

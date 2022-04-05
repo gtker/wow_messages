@@ -4,7 +4,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/remaining.wowm:562`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/remaining.wowm#L562):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/msg_battleground_player_positions_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/msg_battleground_player_positions_server.wowm#L3):
 /// ```text
 /// struct BattlegroundPlayerPosition {
 ///     Guid player;
