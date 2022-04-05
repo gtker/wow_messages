@@ -11,6 +11,15 @@ slogin CMD_XFER_DATA = 0x31 {
     u8[size] data;
 }
 
+test CMD_XFER_DATA {
+    size = 1;
+    data = [ 0xFF ];
+} [
+    0x31, /* opcode */
+    0x01, 0x00, /* size */
+    0xFF, /* data */
+]
+
 clogin CMD_XFER_ACCEPT = 0x32 {}
 
 test CMD_XFER_ACCEPT {} [
