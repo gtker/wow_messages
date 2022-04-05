@@ -3,7 +3,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/5needs_endless_array/cmsg_auth_session.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/5needs_endless_array/cmsg_auth_session.wowm#L15):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/cmsg_auth_session.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/cmsg_auth_session.wowm#L15):
 /// ```text
 /// struct SpellCooldownStatus {
 ///     u32 spell_id;

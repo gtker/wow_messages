@@ -1,6 +1,6 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/2needs_aura_mask/needs_aura_mask.wowm:99`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/2needs_aura_mask/needs_aura_mask.wowm#L99):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/needs_aura_mask.wowm:99`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/needs_aura_mask.wowm#L99):
 /// ```text
 /// flag GroupMemberOnlineStatus : u8 {
 ///     OFFLINE = 0x0000;

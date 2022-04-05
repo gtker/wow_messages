@@ -3,7 +3,7 @@ use crate::world::helper::Guid;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/9needs_optional/needs_optional.wowm:81`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/9needs_optional/needs_optional.wowm#L81):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/needs_optional.wowm:81`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/needs_optional.wowm#L81):
 /// ```text
 /// struct GroupListMember {
 ///     CString name;

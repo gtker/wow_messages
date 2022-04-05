@@ -5,7 +5,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/5needs_endless_array/cmsg_auth_session.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/5needs_endless_array/cmsg_auth_session.wowm#L31):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/cmsg_auth_session.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/cmsg_auth_session.wowm#L31):
 /// ```text
 /// smsg SMSG_SHOWTAXINODES = 0x1A9 {
 ///     u32 unknown1;

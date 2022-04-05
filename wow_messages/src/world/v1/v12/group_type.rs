@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/9needs_optional/needs_optional.wowm:76`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/9needs_optional/needs_optional.wowm#L76):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/needs_optional.wowm:76`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/needs_optional.wowm#L76):
 /// ```text
 /// enum GroupType : u8 {
 ///     NORMAL = 0;
