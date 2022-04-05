@@ -12,7 +12,10 @@
   * Tests
 * Working UpdateMask
   * Tests
-* Test handling of flags
+* Test: Handling of flags
+    * For `CMD_REALM_LIST_Server`
+* Test: Handling of zero length arrays
+    * For `CMD_XFER_DATA`
 
 # Direct upgrades to Login
 
@@ -27,7 +30,7 @@
 * MaximumPossibleSize for derived enums
 * Make derived flags usable with members
 * Workable Intermediate Representation for World
-* cfg options for wow_srp
+* cfg options for `wow_srp`
 * More tests/definitions
 * Add derives for all types
   * Add Eq and Hash for structs?
