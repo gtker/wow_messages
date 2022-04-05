@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:654`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L654):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:636`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L636):
 /// ```text
 /// enum GmTicketStatus : u32 {
 ///     DBERROR = 0x00;

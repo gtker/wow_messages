@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:544`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L544):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:526`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L526):
 /// ```text
 /// enum TrainerSpellState : u8 {
 ///     GREEN = 0;

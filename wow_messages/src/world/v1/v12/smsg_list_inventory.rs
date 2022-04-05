@@ -6,7 +6,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:510`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L510):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:492`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L492):
 /// ```text
 /// smsg SMSG_LIST_INVENTORY = 0x19F {
 ///     Guid vendor;

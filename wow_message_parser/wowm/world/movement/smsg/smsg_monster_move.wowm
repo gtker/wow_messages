@@ -1,0 +1,20 @@
+#tag_all versions "1.12";
+
+enum MonsterMoveType : u8 {
+    NORMAL = 0;
+    STOP = 1;
+    FACING_SPOT = 2;
+    FACING_TARGET = 3;
+    FACING_ANGLE = 4;
+}
+
+smsg SMSG_MONSTER_MOVE = 0x00DD {
+    PackedGuid guid;
+    f32 position_x;
+    f32 position_y;
+    f32 position_z;
+    u32 spline_id;
+    MonsterMoveType move_type;
+    /* TODO Might have more things? */
+}
+

@@ -6,7 +6,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:701`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L701):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:683`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L683):
 /// ```text
 /// smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x250 {
 ///     PackedGuid target;

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:238`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L238):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm#L3):
 /// ```text
 /// enum MonsterMoveType : u8 {
 ///     NORMAL = 0;

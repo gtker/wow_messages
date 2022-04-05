@@ -7,7 +7,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:775`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L775):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:757`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L757):
 /// ```text
 /// cmsg CMSG_BATTLEMASTER_JOIN = 0x2EE {
 ///     Guid guid;

@@ -6,7 +6,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:759`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L759):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:741`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L741):
 /// ```text
 /// smsg SMSG_UPDATE_WORLD_STATE = 0x2C3 {
 ///     WorldState state;

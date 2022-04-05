@@ -235,24 +235,6 @@ cmsg CMSG_SET_FACTION_ATWAR = 0x0125 {
     u8 flags;
 }
 
-enum MonsterMoveType : u8 {
-    NORMAL = 0;
-    STOP = 1;
-    FACING_SPOT = 2;
-    FACING_TARGET = 3;
-    FACING_ANGLE = 4;
-}
-
-smsg SMSG_MONSTER_MOVE = 0x00DD {
-    PackedGuid guid;
-    f32 position_x;
-    f32 position_y;
-    f32 position_z;
-    u32 spline_id;
-    MonsterMoveType move_type;
-    /* TODO Might have more things? */
-}
-
 struct TradeSlot {
     u8 trade_slot_number {
         comment = "cmangos/vmangos/mangoszero: sets to index of array";

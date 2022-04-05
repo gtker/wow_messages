@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:638`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L638):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:620`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L620):
 /// ```text
 /// enum GmTicketType : u8 {
 ///     STUCK = 1;

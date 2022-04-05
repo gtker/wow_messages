@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:621`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L621):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new5.wowm:603`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new5.wowm#L603):
 /// ```text
 /// smsg SMSG_LEVELUP_INFO = 0x1D4 {
 ///     u32 new_level;
