@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+msg MSG_MOVE_SET_RUN_MODE = 0x00C2 {
+    MovementInfo info;
+}
+

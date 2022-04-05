@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+msg MSG_MOVE_START_TURN_LEFT = 0x00BC {
+    MovementInfo info;
+}
+

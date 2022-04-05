@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+msg MSG_MOVE_JUMP = 0x00BB {
+    MovementInfo info;
+}
+

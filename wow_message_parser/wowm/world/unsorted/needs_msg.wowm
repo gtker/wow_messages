@@ -1,0 +1,55 @@
+#tag_all versions "1.12";
+
+
+msg MSG_TABARDVENDOR_ACTIVATE = 0x01F2 {
+    Guid guid;
+}
+
+
+enum QuestPartyMessage : u8 {
+    SHARING_QUEST = 0 {
+        comment = "ERR_QUEST_PUSH_SUCCESS_S";
+    }
+    CANT_TAKE_QUEST = 1 {
+        comment = "ERR_QUEST_PUSH_INVALID_S";
+    }
+    ACCEPT_QUEST = 2 {
+        comment = "ERR_QUEST_PUSH_ACCEPTED_S";
+    }
+    DECLINE_QUEST = 3 {
+        comment = "ERR_QUEST_PUSH_DECLINED_S";
+    }
+    TOO_FAR = 4 {
+        comment = "removed in 3.x";
+    }
+    BUSY = 5 {
+        comment = "ERR_QUEST_PUSH_BUSY_S";
+    }
+    LOG_FULL = 6 {
+        comment = "ERR_QUEST_PUSH_LOG_FULL_S";
+    }
+    HAVE_QUEST = 7 {
+        comment = "ERR_QUEST_PUSH_ONQUEST_S";
+    }
+    FINISH_QUEST = 8 {
+        comment = "ERR_QUEST_PUSH_ALREADY_DONE_S";
+    }
+} {
+    comment = "cmangos has one instance of this be u32, but both vmangos/mangoszero are u8";
+}
+
+msg MSG_QUEST_PUSH_RESULT = 0x0276 {
+    Guid guid;
+    QuestPartyMessage message;
+}
+
+msg MSG_PETITION_RENAME = 0x02C1 {
+    Guid petition_guid;
+    CString new_name;
+}
+
+msg MSG_PETITION_DECLINE = 0x01C2 {
+    Guid petition;
+}
+
+

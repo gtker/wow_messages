@@ -5,7 +5,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/27needs_msg/needs_msg.wowm:110`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/27needs_msg/needs_msg.wowm#L110):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_stop_pitch.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_stop_pitch.wowm#L3):
 /// ```text
 /// msg MSG_MOVE_STOP_PITCH = 0xC1 {
 ///     MovementInfo info;

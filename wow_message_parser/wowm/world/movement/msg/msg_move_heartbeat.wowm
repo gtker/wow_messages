@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+msg MSG_MOVE_HEARTBEAT = 0x00EE {
+    MovementInfo info;
+}
+

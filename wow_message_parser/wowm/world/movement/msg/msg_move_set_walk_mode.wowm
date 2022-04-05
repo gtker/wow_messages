@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+msg MSG_MOVE_SET_WALK_MODE = 0x00C3 {
+    MovementInfo info;
+}
+

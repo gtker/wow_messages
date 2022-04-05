@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/27needs_msg/needs_msg.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/27needs_msg/needs_msg.wowm#L16):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/needs_msg.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/needs_msg.wowm#L9):
 /// ```text
 /// enum QuestPartyMessage : u8 {
 ///     SHARING_QUEST = 0;

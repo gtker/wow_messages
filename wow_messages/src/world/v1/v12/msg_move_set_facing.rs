@@ -5,7 +5,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/27needs_msg/needs_msg.wowm:134`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/27needs_msg/needs_msg.wowm#L134):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_set_facing.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_set_facing.wowm#L3):
 /// ```text
 /// msg MSG_MOVE_SET_FACING = 0xDA {
 ///     MovementInfo info;

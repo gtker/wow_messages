@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+msg MSG_MOVE_STOP = 0x00B7 {
+    MovementInfo info;
+}
+
