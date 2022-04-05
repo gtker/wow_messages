@@ -1,0 +1,12 @@
+#tag_all versions "1.12";
+
+smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
+    Guid target_guid;
+    Guid caster_guid;
+    Item item;
+    Spell spell;
+    u8 unknown1;
+} {
+    comment = "cmangos and vmangos/mangoszero disagree about packed and extra u8";
+}
+

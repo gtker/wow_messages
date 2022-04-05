@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PAUSE_MIRROR_TIMER = 0x01DA {
+    TimerType timer;
+    u8 is_frozen;
+} {
+    comment = "According to cmangos: 'Default UI handler for this is bugged, args dont match. Gotta do a full update with SMSG_START_MIRROR_TIMER to avoid lua errors.";
+}
+

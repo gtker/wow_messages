@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_TOGGLE_PVP = 0x0253 {
+    optional set {
+        Bool enable_pvp;
+    }
+} {
+    comment = "vmangos: this opcode can be used in two ways: Either set explicit new status or toggle old status";
+}
+

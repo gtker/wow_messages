@@ -474,10 +474,6 @@ smsg SMSG_TRIGGER_CINEMATIC = 0x00FA {
     CinematicSequenceId cinematic_sequence_id;
 }
 
-cmsg CMSG_NEXT_CINEMATIC_CAMERA = 0x00FB {} {
-    description = "Sent by client when cinematic beings.";
-}
-
 cmsg CMSG_COMPLETE_CINEMATIC = 0x00FC {}
 
 cmsg CMSG_TUTORIAL_FLAG = 0x00FE {
@@ -866,16 +862,6 @@ smsg SMSG_TAXINODE_STATUS = 0x01AB {
 }
 
 
-smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
-    Guid target_guid;
-    Guid caster_guid;
-    Item item;
-    Spell spell;
-    u8 unknown1;
-} {
-    comment = "cmangos and vmangos/mangoszero disagree about packed and extra u8";
-}
-
 cmsg CMSG_REQUEST_ACCOUNT_DATA = 0x020A {}
 
 
@@ -977,14 +963,6 @@ cmsg MSG_TALENT_WIPE_CONFIRM_Client = 0x02AA {
     Guid wiping_npc;
 }
 
-smsg MSG_TALENT_WIPE_CONFIRM_Server = 0x02AA {
-    Guid wiping_npc;
-    u32 cost_in_copper;
-} {
-    comment = "cmangos/vmangos/mangoszero returns guid 0 and unknown 0 when talents can not be reset";
-    comment = "cmangos/vmangos/mangoszero casts spell 14876 when resetting";
-}
-
 cmsg MSG_INSPECT_HONOR_STATS_Client = 0x02D6 {
     Guid guid;
 }
@@ -1056,19 +1034,6 @@ cmsg MSG_PVP_LOG_DATA_Client = 0x02E0 {}
 
 
 cmsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Client = 0x02E9 {}
-
-smsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Server = 0x02E9 {
-    u32 amount_of_carriers = 0 {
-        comment = "vmangos/cmangos/mangoszero: All force to zero";
-    }
-    u32 amount_of_flag_carriers {
-        valid_range = "0 2";
-    }
-    BattlegroundPlayerPosition[amount_of_flag_carriers] flag_carriers;
-} {
-    comment = "vmangos/cmangos/mangoszero: Seems to be older versions used to be 'amount_of_carriers' followed by array. All versions now just set first to 0 and have second be 0/1/2.";
-    comment = "vmangos/cmangos/mangoszero: For AB and AV always set to all zero.";
-}
 
 struct BattlegroundPlayerPosition {
     Guid player;
@@ -1475,7 +1440,6 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     else {
         Guid sender_guid4;
     }
-
     /* CString len */
     u32 message_length;
     CString message;
@@ -2596,14 +2560,6 @@ cmsg CMSG_GOSSIP_SELECT_OPTION = 0x017C {
 }
 
 
-cmsg CMSG_TOGGLE_PVP = 0x0253 {
-    optional set {
-        Bool enable_pvp;
-    }
-} {
-    comment = "vmangos: this opcode can be used in two ways: Either set explicit new status or toggle old status";
-}
-
 enum GroupType : u8 {
     NORMAL = 0;
     RAID = 1;
@@ -3104,16 +3060,6 @@ smsg SMSG_ATTACKSWING_CANT_ATTACK = 0x0149 {}
 
 smsg SMSG_CANCEL_COMBAT = 0x014E {}
 
-smsg SMSG_BINDPOINTUPDATE = 0x0155 {
-    f32 position_x;
-    f32 position_y;
-    f32 position_z;
-    Map map;
-    Area area;
-} {
-    description = "Set new hearthstone location.";
-}
-
 smsg SMSG_PLAYERBOUND = 0x0158 {
     u64 guid;
     Area area;
@@ -3177,11 +3123,6 @@ smsg SMSG_LOOT_RELEASE_RESPONSE = 0x0161 {
     }
 }
 
-smsg SMSG_LOOT_REMOVED = 0x0162 {
-    u8 slot;
-} {
-    description = "Notify a looting player that an item has been taken.";
-}
 
 smsg SMSG_LOOT_MONEY_NOTIFY = 0x0163 {
     u32 amount;
@@ -3616,13 +3557,6 @@ smsg SMSG_START_MIRROR_TIMER = 0x01D9 {
     u32 spell_id;
 }
 
-smsg SMSG_PAUSE_MIRROR_TIMER = 0x01DA {
-    TimerType timer;
-    u8 is_frozen;
-} {
-    comment = "According to cmangos: 'Default UI handler for this is bugged, args dont match. Gotta do a full update with SMSG_START_MIRROR_TIMER to avoid lua errors.";
-}
-
 smsg SMSG_STOP_MIRROR_TIMER = 0x01DB {
     TimerType timer;
 }
@@ -3989,13 +3923,6 @@ smsg SMSG_STABLE_RESULT = 0x0273 {
 
 
 
-smsg SMSG_PLAY_OBJECT_SOUND = 0x0278 {
-    u32 sound_id;
-    u64 guid;
-} {
-    comment = "vmangos: Nostalrius: ignored by client if unit is not loaded";
-}
-
 cmsg CMSG_REQUEST_PET_INFO = 0x0279 {}
 
 enum FarSightOperation : u8 {
@@ -4034,13 +3961,6 @@ cmsg CMSG_AUTOBANK_ITEM = 0x0283 {
 enum RaidGroupError : u32 {
     REQUIRED = 1;
     FULL = 2;
-}
-
-smsg SMSG_RAID_GROUP_ONLY = 0x0286 {
-    u32 homebind_timer;
-    RaidGroupError error;
-} {
-    comment = "used when player leaves raid group inside instance";
 }
 
 cmsg CMSG_GROUP_RAID_CONVERT = 0x028E {}
@@ -4190,7 +4110,6 @@ smsg SMSG_LOOT_ROLL = 0x02A2 {
         comment = "vmangos/cmangos/mangoszero: 0: Need for: [item name] > 127: you passed on: [item name]      Roll number";
     }
     RollVote vote;
-
 }
 
 cmsg CMSG_LOOT_MASTER_GIVE = 0x02A3 {
@@ -4645,20 +4564,6 @@ smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
     (u32)SpellSchool school;
 }
 
-smsg SMSG_RESISTLOG = 0x01D6 {
-    /* TODO: Nothing except a comment for this */
-    u64 guid1;
-    u64 guid2;
-    u32 unknown1;
-    f32 unknown2;
-    f32 unknown3;
-    u32 unknown4;
-    u32 unknown5;
-} {
-    comment = "Structure as comment on https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525";
-}
-
-
 struct PetitionShowlist {
     u32 index;
     u32 charter_entry = 5863 {
@@ -5018,31 +4923,6 @@ smsg SMSG_TRAINER_LIST = 0x01B1 {
     CString greeting;
 }
 
-
-cmsg CMSG_PETITION_BUY = 0x01BD {
-    Guid npc;
-    u32 skip1;
-    u64 skip2;
-    CString name;
-    u32 skip3;
-    u32 skip4;
-    u32 skip5;
-    u32 skip6;
-    u32 skip7;
-    u32 skip8;
-    u32 skip9;
-    u32 skip10;
-    u32 skip11;
-    u32 skip12;
-    u16 skip13;
-    u8 skip14;
-    u32 index {
-        comment = "cmangos/vmangos/mangoszero: Named but never used";
-    }
-    u32 skip15;
-} {
-    comment = "cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused";
-}
 
 cmsg CMSG_BUG = 0x01CA {
     u32 suggestion {
