@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_MOVE_WATER_WALK = 0x00DE {
+    PackedGuid guid;
+    u32 counter;
+}
+

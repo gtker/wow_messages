@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_FORCE_MOVE_ROOT = 0x00E8 {
+    Guid guid;
+    u32 counter;
+}
+

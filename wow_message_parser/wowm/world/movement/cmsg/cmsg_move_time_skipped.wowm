@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_MOVE_TIME_SKIPPED = 0x02CE {
+    u64 guid;
+    u32 lag;
+}
+

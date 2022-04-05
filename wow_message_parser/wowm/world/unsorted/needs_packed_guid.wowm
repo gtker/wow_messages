@@ -109,19 +109,6 @@ cmsg CMSG_CAST_SPELL = 0x012E {
     SpellCastTargets targets;
 }
 
-
-
-smsg SMSG_MOVE_WATER_WALK = 0x00DE {
-    PackedGuid guid;
-    u32 counter;
-}
-
-smsg SMSG_MOVE_LAND_WALK = 0x00DF {
-    PackedGuid guid;
-    u32 counter;
-}
-
-
 smsg SMSG_SPELLHEALLOG = 0x0150 {
     PackedGuid victim_guid;
     PackedGuid caster_guid;

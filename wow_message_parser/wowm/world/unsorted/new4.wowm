@@ -324,11 +324,6 @@ smsg SMSG_INSTANCE_SAVE_CREATED = 0x02CB {
 
 cmsg CMSG_REQUEST_RAID_INFO = 0x02CD {}
 
-cmsg CMSG_MOVE_TIME_SKIPPED = 0x02CE {
-    u64 guid;
-    u32 lag;
-}
-
 smsg SMSG_PLAY_SOUND = 0x02D2 {
     /* TODO Enum? */
     u32 sound_id;
@@ -467,10 +462,6 @@ cmsg CMSG_SET_FACTION_INACTIVE = 0x0317 {
 cmsg CMSG_SET_WATCHED_FACTION = 0x0318 {
     /* TODO rep id */
     u32 reputation_id;
-}
-
-smsg SMSG_SPLINE_MOVE_ROOT = 0x031A {
-    u64 guid;
 }
 
 smsg SMSG_INVALIDATE_PLAYER = 0x031C {

@@ -1186,27 +1186,6 @@ smsg SMSG_SET_FACTION_VISIBLE = 0x0123 {
     u32 reputation_list_id;
 }
 
-cmsg CMSG_MOVE_SET_RAW_POSITION = 0x00E1 {
-    f32 position_x;
-    f32 position_y;
-    f32 position_z;
-    f32 orientation;
-} {
-    comment = "vmangos/mangoszero: write in client console: setrawpos x y z o. For now, it is implemented like worldport but on the same map. Consider using MSG_MOVE_SET_RAW_POSITION_ACK.";
-}
-
-
-
-smsg SMSG_FORCE_MOVE_ROOT = 0x00E8 {
-    Guid guid;
-    u32 counter;
-}
-
-smsg SMSG_FORCE_MOVE_UNROOT = 0x00EA {
-    Guid guid;
-    u32 counter;
-}
-
 
 smsg SMSG_DUEL_COMPLETE = 0x016A {
     Bool ended_without_interruption;
