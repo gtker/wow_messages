@@ -1,5 +1,13 @@
 #tag_all versions "1.12";
 
+enum FriendStatus : u8 {
+    OFFLINE = 0;
+    ONLINE = 1;
+    AFK = 2;
+    UNKNOWN3 = 3;
+    DND = 4;
+}
+
 struct Friend {
     u64 guid;
     FriendStatus status;

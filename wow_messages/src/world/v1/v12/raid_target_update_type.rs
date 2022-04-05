@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/raid_target.wowm:4`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/raid_target.wowm#L4):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/raid_target.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/raid_target.wowm#L3):
 /// ```text
 /// enum RaidTargetUpdateType : u8 {
 ///     PARTIAL = 0;

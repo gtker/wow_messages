@@ -1,0 +1,31 @@
+#tag_all versions "1.12";
+
+enum LogoutResult : u32 {
+    SUCCESS = 0;
+    FAILURE_IN_COMBAT = 1;
+    FAILURE_FROZEN_BY_GM = 2 {
+        comment = "vmangos checks for aura 9454. Has FIXME - Need the correct value.";
+    }
+    FAILURE_JUMPING_OR_FALLING = 3;
+}
+
+enum LogoutSpeed : u8 {
+    DELAYED = 0;
+    INSTANT = 1;
+}
+
+smsg SMSG_LOGOUT_RESPONSE = 0x4C {
+    LogoutResult reason;
+    LogoutSpeed speed;
+}
+
+test SMSG_LOGOUT_RESPONSE {
+    reason = SUCCESS;
+    speed = INSTANT;
+} [
+     0x00, 0x07, /* size */
+     0x4C, 0x00, /* opcode */
+     0x00, 0x00, 0x00, 0x00, /* reason: SUCCESS */
+     0x01, /* speed = INSTANT */
+]
+

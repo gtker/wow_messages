@@ -1,6 +1,5 @@
 #tag_all versions "1.12";
 
-
 enum RaidTargetUpdateType : u8 {
     PARTIAL = 0;
     FULL = 1;

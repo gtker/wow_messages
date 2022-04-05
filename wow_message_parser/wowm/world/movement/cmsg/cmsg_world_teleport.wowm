@@ -1,0 +1,29 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_WORLD_TELEPORT = 0x08 {
+    u64 time_in_msec;
+    Map map;
+    f32 position_x;
+    f32 position_y;
+    f32 position_z;
+    f32 orientation;
+}
+
+test CMSG_WORLD_TELEPORT {
+    time_in_msec = 0xFACADEDEADBEEF;
+    map = KALIMDOR;
+    position_x = 1.0;
+    position_y = 2.0;
+    position_z = 3.0;
+    orientation = 4.0;
+} [
+    0x00, 0x20, /* Size: 32 */
+    0x08, 0x00, 0x00, 0x00, /* Opcode */
+    0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, /* Time in msec */
+    0x01, 0x00, 0x00, 0x00, /* Map: Kalimdor */
+    0x00, 0x00, 0x80, 0x3F, /* position_x: 1.0 */
+    0x00, 0x00, 0x00, 0x40, /* position_y: 2.0 */
+    0x00, 0x00, 0x40, 0x40, /* position_z: 3.0 */
+    0x00, 0x00, 0x80, 0x40, /* orientation: 4.0 */
+]
+

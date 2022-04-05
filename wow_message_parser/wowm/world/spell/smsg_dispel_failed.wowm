@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg SMSG_DISPEL_FAILED = 0x0262 {
+    u64 caster_guid;
+    u64 target_guid;
+    Spell[-] spells;
+}
+

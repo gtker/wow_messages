@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_GROUP_DECLINE = 0x74 {
+    CString name;
+}
+

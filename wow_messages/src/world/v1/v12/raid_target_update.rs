@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/raid_target.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/raid_target.wowm#L22):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/raid_target.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/raid_target.wowm#L21):
 /// ```text
 /// struct RaidTargetUpdate {
 ///     RaidTargetIndex index;

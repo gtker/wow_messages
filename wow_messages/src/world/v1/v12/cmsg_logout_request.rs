@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/add_messages.wowm:65`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/add_messages.wowm#L65):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm#L3):
 /// ```text
 /// cmsg CMSG_LOGOUT_REQUEST = 0x4B {
 /// }
@@ -67,7 +67,7 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
     use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/unsorted/add_messages.wowm` line 67.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 5.
     #[test]
     fn CMSG_LOGOUT_REQUEST0() {
         let raw: Vec<u8> = vec![ 0x00, 0x04, 0x4B, 0x00, 0x00, 0x00, ];

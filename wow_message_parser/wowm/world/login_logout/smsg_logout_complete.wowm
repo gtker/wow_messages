@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_LOGOUT_COMPLETE = 0x4D { }
+

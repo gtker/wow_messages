@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_PLAYER_LOGOUT = 0x4A { }
+
+test CMSG_PLAYER_LOGOUT { } [
+    0x00, 0x04, /* size */
+    0x4A, 0x00, 0x00, 0x00,
+]
+

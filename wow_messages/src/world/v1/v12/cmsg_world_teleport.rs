@@ -6,7 +6,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/add_messages.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/add_messages.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm#L3):
 /// ```text
 /// cmsg CMSG_WORLD_TELEPORT = 0x8 {
 ///     u64 time_in_msec;
@@ -152,7 +152,7 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
     use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/unsorted/add_messages.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 12.
     #[test]
     fn CMSG_WORLD_TELEPORT0() {
         let raw: Vec<u8> = vec![ 0x00, 0x20, 0x08, 0x00, 0x00, 0x00, 0xEF, 0xBE,
