@@ -6,7 +6,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/movement.wowm:100`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/movement.wowm#L100):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg_move_not_active_mover.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg_move_not_active_mover.wowm#L3):
 /// ```text
 /// cmsg CMSG_MOVE_NOT_ACTIVE_MOVER = 0x2D1 {
 ///     Guid old_mover;

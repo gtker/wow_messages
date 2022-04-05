@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_MOVE_FALL_RESET = 0x02CA {
+    MovementInfo info;
+}
+
