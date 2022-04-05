@@ -4,9 +4,46 @@ slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
     login_logon_versions = "2";
 }
 
+test CMD_AUTH_RECONNECT_PROOF_Server {
+    result = SUCCESS;
+} [
+    0x03, /* Opcode */
+    0x00, /* result: SUCCESS (0) */
+] {
+    login_logon_versions = "2";
+}
+
+test CMD_AUTH_RECONNECT_PROOF_Server {
+    result = SUCCESS_SURVEY;
+} [
+    0x03, /* Opcode */
+    0x0E, /* result: SUCCESS_SURVEY (14) */
+] {
+    login_logon_versions = "2";
+}
+
 slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
     LoginResult result;
     u16 padding = 0;
 } {
     login_logon_versions = "8";
+}
+
+test CMD_AUTH_RECONNECT_PROOF_Server {
+    result = SUCCESS;
+} [
+    0x03, /* Opcode */
+    0x00, /* result: SUCCESS (0) */
+    0x00, 0x00, /* padding: 0 */
+] {
+    login_logon_versions = "8";
+}
+
+test CMD_AUTH_RECONNECT_PROOF_Server {
+    result = SUCCESS_SURVEY;
+} [
+    0x03, /* Opcode */
+    0x0E, /* result: SUCCESS_SURVEY (14) */
+] {
+    login_logon_versions = "2";
 }

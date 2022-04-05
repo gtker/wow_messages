@@ -82,3 +82,91 @@ impl From<LoginResultError> for CMD_AUTH_RECONNECT_PROOF_ServerError {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use crate::ReadableAndWritable;
+    use std::io::Cursor;
+    use super::CMD_AUTH_RECONNECT_PROOF_Server;
+    use crate::ConstantSized;
+    use crate::logon::version_2::LoginResult;
+    use crate::logon::version_2::opcodes::ServerOpcodeMessage;
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 7.
+    #[test]
+    fn CMD_AUTH_RECONNECT_PROOF_Server0() {
+        let raw: Vec<u8> = vec![ 0x03, 0x00, ];
+
+        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
+            result: LoginResult::SUCCESS,
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 16.
+    #[test]
+    fn CMD_AUTH_RECONNECT_PROOF_Server1() {
+        let raw: Vec<u8> = vec![ 0x03, 0x0E, ];
+
+        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
+            result: LoginResult::SUCCESS_SURVEY,
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 42.
+    #[test]
+    fn CMD_AUTH_RECONNECT_PROOF_Server2() {
+        let raw: Vec<u8> = vec![ 0x03, 0x0E, ];
+
+        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
+            result: LoginResult::SUCCESS_SURVEY,
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+}
