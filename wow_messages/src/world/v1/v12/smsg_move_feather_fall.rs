@@ -5,7 +5,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/movement.wowm:108`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/movement.wowm#L108):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_move_feather_fall.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_move_feather_fall.wowm#L3):
 /// ```text
 /// smsg SMSG_MOVE_FEATHER_FALL = 0xF2 {
 ///     PackedGuid guid;

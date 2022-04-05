@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPLINE_MOVE_SET_WALK_MODE = 0x030E {
+    PackedGuid guid;
+}
+

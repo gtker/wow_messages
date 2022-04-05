@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_MOVE_UNSET_HOVER = 0x00F5 {
+    PackedGuid guid;
+    u32 counter;
+}
+

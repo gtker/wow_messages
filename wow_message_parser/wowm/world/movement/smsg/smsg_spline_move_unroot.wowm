@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPLINE_MOVE_UNROOT = 0x0304 {
+    PackedGuid guid;
+}
+

@@ -5,7 +5,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/movement.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/movement.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm#L3):
 /// ```text
 /// smsg SMSG_FORCE_RUN_SPEED_CHANGE = 0xE2 {
 ///     PackedGuid guid;

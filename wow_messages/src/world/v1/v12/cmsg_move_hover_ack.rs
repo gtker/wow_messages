@@ -6,7 +6,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg_move_hover_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg_move_hover_ack.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_hover_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_hover_ack.wowm#L3):
 /// ```text
 /// cmsg CMSG_MOVE_HOVER_ACK = 0xF6 {
 ///     Guid guid;

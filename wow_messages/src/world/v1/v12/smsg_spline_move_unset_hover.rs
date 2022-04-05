@@ -5,7 +5,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/movement.wowm:146`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/movement.wowm#L146):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_spline_move_unset_hover.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_spline_move_unset_hover.wowm#L3):
 /// ```text
 /// smsg SMSG_SPLINE_MOVE_UNSET_HOVER = 0x308 {
 ///     PackedGuid guid;

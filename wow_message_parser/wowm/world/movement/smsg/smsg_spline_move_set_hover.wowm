@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPLINE_MOVE_SET_HOVER = 0x0307 {
+    PackedGuid guid;
+}
+

@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPLINE_SET_TURN_RATE = 0x0303 {
+    PackedGuid guid;
+    f32 speed;
+}
+

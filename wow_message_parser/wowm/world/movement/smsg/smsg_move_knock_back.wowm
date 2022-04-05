@@ -1,0 +1,22 @@
+#tag_all versions "1.12";
+
+smsg SMSG_MOVE_KNOCK_BACK = 0x00EF {
+    PackedGuid guid;
+    u32 movement_counter {
+        comment = "mangoszero: Sequence";
+        comment = "mangoszero sets to 0";
+    }
+    f32 v_cos {
+        comment = "cmangos/mangoszero/vmangos: x direction";
+    }
+    f32 v_sin {
+        comment = "cmangos/mangoszero/vmangos: y direction";
+    }
+    f32 horizontal_speed {
+        comment = "cmangos/mangoszero/vmangos: Horizontal speed";
+    }
+    f32 vertical_speed {
+        comment = "cmangos/mangoszero/vmangos: Z Movement speed (vertical)";
+    }
+}
+

@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPLINE_MOVE_START_SWIM = 0x030B {
+    PackedGuid guid;
+}
+
