@@ -1,0 +1,47 @@
+#tag_all versions "1.12";
+
+smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
+    u64 guid;
+    CString character_name;
+    CString realm_name;
+    (u32)Race race;
+    (u32)Gender gender;
+    (u32)Class class;
+}
+
+test SMSG_NAME_QUERY_RESPONSE {
+    guid = 0xDEADBEEF;
+    character_name = "Asdf";
+    realm_name = "";
+    race = HUMAN;
+    gender = MALE;
+    class = WARRIOR;
+} [
+    0x00, 0x1C, /* size */
+    0x51, 0x00, /* opcode */
+    0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, /* guid: 0xDEADBEEF */
+    0x41, 0x73, 0x64, 0x66, 0x00, /* character_name: "Asdf" */
+    0x00, /* realm_name: "" */
+    0x01, 0x00, 0x00, 0x00, /* race: HUMAN */
+    0x00, 0x00, 0x00, 0x00, /* gender: MALE */
+    0x01, 0x00, 0x00, 0x00, /* class: WARRIOR */
+]
+
+test SMSG_NAME_QUERY_RESPONSE {
+    guid = 0xDEADBEEF;
+    character_name = "Asdf";
+    realm_name = "A";
+    race = HUMAN;
+    gender = MALE;
+    class = WARRIOR;
+} [
+    0x00, 0x1D, /* size */
+    0x51, 0x00, /* opcode */
+    0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, /* guid: 0xDEADBEEF */
+    0x41, 0x73, 0x64, 0x66, 0x00, /* character_name: "Asdf" */
+    0x41, 0x00, /* realm_name: "A" */
+    0x01, 0x00, 0x00, 0x00, /* race: HUMAN */
+    0x00, 0x00, 0x00, 0x00, /* gender: MALE */
+    0x01, 0x00, 0x00, 0x00, /* class: WARRIOR */
+]
+

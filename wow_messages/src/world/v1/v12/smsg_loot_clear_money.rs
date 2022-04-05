@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new.wowm:383`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new.wowm#L383):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new.wowm:383`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new.wowm#L383):
 /// ```text
 /// smsg SMSG_LOOT_CLEAR_MONEY = 0x165 {
 /// }

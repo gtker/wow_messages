@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new.wowm:410`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new.wowm#L410):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new.wowm:410`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new.wowm#L410):
 /// ```text
 /// cmsg CMSG_DUEL_CANCELLED = 0x16D {
 ///     u64 guid;

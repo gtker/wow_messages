@@ -7,7 +7,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new.wowm:300`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new.wowm#L300):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new.wowm:300`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new.wowm#L300):
 /// ```text
 /// smsg SMSG_BINDPOINTUPDATE = 0x155 {
 ///     f32 position_x;

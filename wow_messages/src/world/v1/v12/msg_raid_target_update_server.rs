@@ -6,7 +6,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid_target.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid_target.wowm#L27):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/raid_target.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/raid_target.wowm#L27):
 /// ```text
 /// smsg MSG_RAID_TARGET_UPDATE_Server = 0x321 {
 ///     RaidTargetUpdateType update_type;

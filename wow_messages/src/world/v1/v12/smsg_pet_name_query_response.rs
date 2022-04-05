@@ -4,7 +4,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/add_messages.wowm:133`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/add_messages.wowm#L133):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/add_messages.wowm:133`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/add_messages.wowm#L133):
 /// ```text
 /// smsg SMSG_PET_NAME_QUERY_RESPONSE = 0x53 {
 ///     u32 pet_number;
@@ -128,7 +128,7 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/add_messages.wowm` line 139.
+    // Generated from `wow_message_parser/wowm/world/unsorted/add_messages.wowm` line 139.
     #[test]
     fn SMSG_PET_NAME_QUERY_RESPONSE0() {
         let raw: Vec<u8> = vec![ 0x00, 0x11, 0x53, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/smsg_battlefield_status.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/smsg_battlefield_status.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/smsg_battlefield_status.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/smsg_battlefield_status.wowm#L3):
 /// ```text
 /// enum StatusId : u8 {
 ///     NONE = 0;

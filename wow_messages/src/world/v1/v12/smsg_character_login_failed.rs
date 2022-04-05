@@ -6,7 +6,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/character_msgs.wowm:62`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/character_msgs.wowm#L62):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm#L3):
 /// ```text
 /// smsg SMSG_CHARACTER_LOGIN_FAILED = 0x41 {
 ///     WorldResult result;

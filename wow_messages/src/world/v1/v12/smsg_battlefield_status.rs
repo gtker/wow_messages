@@ -6,7 +6,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/smsg_battlefield_status.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/smsg_battlefield_status.wowm#L21):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/smsg_battlefield_status.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/smsg_battlefield_status.wowm#L21):
 /// ```text
 /// smsg SMSG_BATTLEFIELD_STATUS = 0x2D4 {
 ///     u32 queue_slot;

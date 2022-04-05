@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/27needs_msg/needs_msg.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/27needs_msg/needs_msg.wowm#L9):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/27needs_msg/needs_msg.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/27needs_msg/needs_msg.wowm#L9):
 /// ```text
 /// msg MSG_MOVE_WORLDPORT_ACK = 0xDC {
 /// }

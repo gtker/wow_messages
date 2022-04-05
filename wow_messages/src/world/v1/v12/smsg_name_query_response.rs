@@ -7,7 +7,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/character_msgs.wowm:74`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/character_msgs.wowm#L74):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm#L3):
 /// ```text
 /// smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
 ///     u64 guid;
@@ -194,7 +194,7 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/character_msgs.wowm` line 83.
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 12.
     #[test]
     fn SMSG_NAME_QUERY_RESPONSE0() {
         let raw: Vec<u8> = vec![ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
@@ -232,7 +232,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/character_msgs.wowm` line 102.
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 30.
     #[test]
     fn SMSG_NAME_QUERY_RESPONSE1() {
         let raw: Vec<u8> = vec![ 0x00, 0x1D, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,

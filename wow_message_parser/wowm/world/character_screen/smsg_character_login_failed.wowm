@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_CHARACTER_LOGIN_FAILED = 0x41 {
+    WorldResult result;
+}
+

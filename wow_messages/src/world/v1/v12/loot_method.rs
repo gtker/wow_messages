@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/new.wowm:342`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/new.wowm#L342):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new.wowm:342`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new.wowm#L342):
 /// ```text
 /// enum LootMethod : u8 {
 ///     CORPSE = 1;

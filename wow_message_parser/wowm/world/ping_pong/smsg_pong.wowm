@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PONG = 0x1DD {
+    u32 sequence_id;
+}
+

@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_CHAR_DELETE = 0x3C {
+    WorldResult result;
+}
+

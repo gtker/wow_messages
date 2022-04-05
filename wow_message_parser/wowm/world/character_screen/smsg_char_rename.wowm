@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+smsg SMSG_CHAR_RENAME = 0x2C8 {
+    WorldResult result;
+    if (result == RESPONSE_SUCCESS) {
+        u64 guid;
+        CString name;
+    }
+}
+

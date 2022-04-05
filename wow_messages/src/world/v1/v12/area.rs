@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/area.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/area.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/area.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/area.wowm#L3):
 /// ```text
 /// enum Area : u32 {
 ///     DUN_MOROGH = 1;
