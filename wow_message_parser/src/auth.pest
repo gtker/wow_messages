@@ -18,7 +18,7 @@ value = @{ ( "0x" ~ HEX_DIGIT+
             | ASCII_DIGIT+
             | (QUOTATION_MARK ~ text ~ QUOTATION_MARK )
             | identifier ) }
-array = { "[" ~ raw_values ~ "]" }
+array = { "[" ~ raw_values* ~ "]" }
 
 identifier_and_value = { identifier ~ "=" ~ value }
 

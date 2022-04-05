@@ -20,6 +20,14 @@ test CMD_XFER_DATA {
     0xFF, /* data */
 ]
 
+test CMD_XFER_DATA {
+    size = 1;
+    data = [ ];
+} [
+    0x31, /* opcode */
+    0x00, 0x00, /* size */
+]
+
 clogin CMD_XFER_ACCEPT = 0x32 {}
 
 test CMD_XFER_ACCEPT {} [

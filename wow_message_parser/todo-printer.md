@@ -14,8 +14,6 @@
   * Tests
 * Test: Handling of flags
     * For `CMD_REALM_LIST_Server`
-* Test: Handling of zero length arrays
-    * For `CMD_XFER_DATA`
 
 # Direct upgrades to Login
 
