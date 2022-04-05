@@ -45,19 +45,6 @@ enum InventoryType : u8 {
     QUIVER = 27;
 }
 
-enum Class : u8 {
-    WARRIOR = 1;
-    PALADIN = 2;
-    HUNTER = 3;
-    ROGUE = 4;
-    PRIEST = 5;
-    SHAMAN = 7;
-    MAGE = 8;
-    WARLOCK = 9;
-    DRUID = 11;
-}
-
-
 enum Race : u8 {
     HUMAN = 1;
     ORC = 2;

@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+enum Gender : u8 {
+    MALE = 0;
+    FEMALE = 1;
+    /* Apparently used by some pets */
+    NONE = 2;
+}
+
