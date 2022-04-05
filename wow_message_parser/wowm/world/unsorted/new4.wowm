@@ -42,14 +42,6 @@ cmsg CMSG_AUTOBANK_ITEM = 0x0283 {
     u8 slot_index;
 }
 
-smsg SMSG_RECEIVED_MAIL = 0x0285 {
-    u32 unknown1 {
-        comment = "cmangos/vmangos sends 0 as u32, mangoszero sends 0 as f32";
-    }
-} {
-    comment = "cmangos/vmangos/mangoszero: deliver undelivered mail";
-}
-
 enum RaidGroupError : u32 {
     REQUIRED = 1;
     FULL = 2;

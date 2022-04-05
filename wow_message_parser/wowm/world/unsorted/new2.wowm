@@ -601,10 +601,6 @@ enum MailResult : u32 {
     comment = "mangoszero: in SMSG_SEND_MAIL_RESULT, 7-13 and 16+: 'Mail database error'";
 }
 
-cmsg CMSG_GET_MAIL_LIST = 0x023A {
-    u64 mailbox_guid;
-}
-
 
 cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
     Map map;
@@ -612,39 +608,6 @@ cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
 
 cmsg CMSG_BATTLEFIELD_JOIN = 0x023E {
     Map map;
-}
-
-cmsg CMSG_MAIL_TAKE_MONEY = 0x0245 {
-    u64 mailbox_guid;
-    u32 mail_id;
-}
-
-cmsg CMSG_MAIL_TAKE_ITEM = 0x0246 {
-    u64 mailbox_guid;
-    u32 mail_id;
-}
-
-cmsg CMSG_MAIL_MARK_AS_READ = 0x0247 {
-    u64 mailbox_guid;
-    u32 mail_id;
-}
-
-cmsg CMSG_MAIL_RETURN_TO_SENDER = 0x0248 {
-    u64 mailbox_id;
-    u32 mail_id;
-}
-
-cmsg CMSG_MAIL_DELETE = 0x0249 {
-    u64 mailbox_id;
-    u32 mail_id;
-}
-
-cmsg CMSG_MAIL_CREATE_TEXT_ITEM = 0x024A {
-    u64 mailbox_guid;
-    u32 mail_id;
-    u32 mail_template_id {
-        comment = "mangoszero/cmangos/vmangos: mailTemplateId, non need, Mail store own 100% correct value anyway";
-    }
 }
 
 

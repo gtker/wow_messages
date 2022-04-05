@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_MAIL_CREATE_TEXT_ITEM = 0x024A {
+    u64 mailbox_guid;
+    u32 mail_id;
+    u32 mail_template_id {
+        comment = "mangoszero/cmangos/vmangos: mailTemplateId, non need, Mail store own 100% correct value anyway";
+    }
+}
+

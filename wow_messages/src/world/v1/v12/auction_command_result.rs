@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/needs_else_if_else.wowm:483`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/needs_else_if_else.wowm#L483):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/needs_else_if_else.wowm:437`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/needs_else_if_else.wowm#L437):
 /// ```text
 /// enum AuctionCommandResult : u32 {
 ///     OK = 0;

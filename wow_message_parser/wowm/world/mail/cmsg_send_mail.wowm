@@ -1,0 +1,24 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_SEND_MAIL = 0x0238 {
+    Guid mailbox;
+    CString receiver;
+    CString subject;
+    CString body;
+    u32 unknown1 {
+        comment = "cmangos: stationery?";
+    }
+    u32 unknown2 {
+        comment = "cmangos: 0x00000000";
+    }
+    Guid item;
+    u32 money;
+    u32 cash_on_delivery_amount;
+    u32 unknown3 {
+        comment = "cmangos: const 0";
+    }
+    u32 unknown4 {
+        comment = "cmangos: const 0";
+    }
+}
+
