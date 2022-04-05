@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg MSG_QUERY_NEXT_MAIL_TIME_Client = 0x0284 {
+} {
+    comment = "mangoszero/vmangos: No idea when this is called.";
+}
+

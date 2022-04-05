@@ -111,50 +111,6 @@ struct QuestObjective {
     u32 required_item_count;
 }
 
-smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
-    u32 quest_id;
-    u32 quest_method {
-        comment = "Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details)";
-    }
-    u32 quest_level;
-    u32 zone_or_sort;
-    u32 quest_type;
-    u32 reputation_objective_faction {
-        comment = "cmangos: shown in quest log as part of quest objective";
-    }
-    u32 reputation_objective_value {
-        comment = "cmangos: shown in quest log as part of quest objective";
-    }
-    u32 required_opposite_faction {
-        comment = "cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0";
-    }
-    u32 required_opposite_reputation_value {
-        comment = "cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0";
-    }
-    u32 next_quest_in_chain;
-    u32 money_reward;
-    u32 max_level_money_reward {
-        comment = "cmangos: used in XP calculation at client";
-    }
-    u32 reward_spell {
-        comment = "cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0)";
-    }
-    u32 source_item_id;
-    u32 quest_flags;
-    QuestItemReward[4] rewards;
-    QuestItemReward[6] choice_rewards;
-    u32 point_map_id;
-    f32 position_x;
-    f32 position_y;
-    u32 point_opt;
-    CString title;
-    CString objective_text;
-    CString details;
-    CString end_text;
-    QuestObjective[4] objectives;
-    CString[4] objective_texts;
-}
-
 
 enum PvpRank : u8 {
     NO_RANK = 0;
@@ -779,57 +735,6 @@ cmsg CMSG_PETITION_BUY = 0x01BD {
 } {
     comment = "cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused";
 }
-
-
-smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
-    Guid petition_guid;
-    Guid charter_owner;
-    CString guild_name;
-    CString body_text {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 unknown_flags {
-        comment = "cmangos/vmangos/mangoszero: Set to 1, only info is comment from vmangos";
-    }
-    u32 minimum_signatures {
-        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
-    }
-    u32 maximum_signatures {
-        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
-    }
-    u32 deadline {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 issue_date {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 allowed_guild_id {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 allowed_classes {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 allowed_races {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u16 allowed_genders {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 allowed_minimum_level {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 allowed_maximum_level {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    /* TODO Figure out if CStrings work? */
-    u32 todo_amount_of_signers {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-    u32 number_of_choices {
-        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
-    }
-}
-
 
 cmsg CMSG_BUG = 0x01CA {
     u32 suggestion {

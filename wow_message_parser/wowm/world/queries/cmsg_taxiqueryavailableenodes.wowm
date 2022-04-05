@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_TAXIQUERYAVAILABLENODES = 0x01AC {
+    u64 guid;
+}
+

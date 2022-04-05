@@ -1,0 +1,46 @@
+#tag_all versions "1.12";
+
+smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
+    u32 quest_id;
+    u32 quest_method {
+        comment = "Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details)";
+    }
+    u32 quest_level;
+    u32 zone_or_sort;
+    u32 quest_type;
+    u32 reputation_objective_faction {
+        comment = "cmangos: shown in quest log as part of quest objective";
+    }
+    u32 reputation_objective_value {
+        comment = "cmangos: shown in quest log as part of quest objective";
+    }
+    u32 required_opposite_faction {
+        comment = "cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0";
+    }
+    u32 required_opposite_reputation_value {
+        comment = "cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0";
+    }
+    u32 next_quest_in_chain;
+    u32 money_reward;
+    u32 max_level_money_reward {
+        comment = "cmangos: used in XP calculation at client";
+    }
+    u32 reward_spell {
+        comment = "cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0)";
+    }
+    u32 source_item_id;
+    u32 quest_flags;
+    QuestItemReward[4] rewards;
+    QuestItemReward[6] choice_rewards;
+    u32 point_map_id;
+    f32 position_x;
+    f32 position_y;
+    u32 point_opt;
+    CString title;
+    CString objective_text;
+    CString details;
+    CString end_text;
+    QuestObjective[4] objectives;
+    CString[4] objective_texts;
+}
+

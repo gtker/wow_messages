@@ -84,15 +84,6 @@ cmsg CMSG_GOSSIP_HELLO = 0x017B {
 
 smsg SMSG_GOSSIP_COMPLETE = 0x017E {}
 
-cmsg CMSG_NPC_TEXT_QUERY = 0x017F {
-    u32 text_id;
-    u64 guid;
-}
-
-
-cmsg CMSG_QUESTGIVER_STATUS_QUERY = 0x0182 {
-    u64 guid;
-}
 
 enum QuestGiverStatus : u8 {
     NONE = 0;
@@ -118,11 +109,6 @@ cmsg CMSG_QUESTGIVER_HELLO = 0x0184 {
     u64 guid;
 }
 
-
-cmsg CMSG_QUESTGIVER_QUERY_QUEST = 0x0186 {
-    u64 guid;
-    u32 quest_id;
-}
 
 cmsg CMSG_QUESTGIVER_QUEST_AUTOLAUNCH = 0x0187 {}
 
@@ -304,10 +290,6 @@ smsg SMSG_BUY_FAILED = 0x01A5 {
 }
 
 
-cmsg CMSG_TAXIQUERYAVAILABLENODES = 0x01AC {
-    u64 guid;
-}
-
 cmsg CMSG_ACTIVATETAXI = 0x01AD {
     u64 guid;
     u32[2] nodes;
@@ -456,11 +438,6 @@ smsg SMSG_TURN_IN_PETITION_RESULTS = 0x01C5 {
     PetitionTurnInResult result;
 }
 
-cmsg CMSG_PETITION_QUERY = 0x01C6 {
-    u32 guild_guid;
-    u64 petition_guid;
-}
-
 smsg SMSG_FISH_NOT_HOOKED = 0x01C8 {}
 
 smsg SMSG_FISH_ESCAPED = 0x01C9 {}
@@ -476,13 +453,6 @@ smsg SMSG_PLAYED_TIME = 0x01CD {
     /* TODO: What unit is this? */
     u32 total_played_time;
     u32 level_played_time;
-}
-
-cmsg CMSG_QUERY_TIME = 0x01CE {}
-
-smsg SMSG_QUERY_TIME_RESPONSE = 0x01CF {
-    /* TODO: What unit is this? */
-    u32 time;
 }
 
 enum ExperienceAwardType : u8 {
@@ -794,23 +764,6 @@ cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
 
 cmsg CMSG_BATTLEFIELD_JOIN = 0x023E {
     Map map;
-}
-
-cmsg CMSG_ITEM_TEXT_QUERY = 0x0243 {
-    u32 item_text_id;
-    u32 mail_id {
-        comment = "vmangos/cmangos/mangoszero: this value can be item id in bag, but it is also mail id";
-    }
-    u32 unknown1 {
-        comment = "vmangos/cmangos/mangoszero: maybe something like state - 0x70000000";
-    }
-}
-
-smsg SMSG_ITEM_TEXT_QUERY_RESPONSE = 0x0244 {
-    u32 item_text_id;
-    CString text {
-        comment = "mangoszero: CString TODO: max length 8000";
-    }
 }
 
 cmsg CMSG_MAIL_TAKE_MONEY = 0x0245 {

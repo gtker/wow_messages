@@ -55,17 +55,6 @@ smsg SMSG_LOGIN_SETTIMESPEED = 0x0042 {
     }
 }
 
-smsg SMSG_GUILD_QUERY_RESPONSE = 0x55 {
-    u32 id;
-    CString name;
-    CString[10] rank_names;
-    u32 emblem_style;
-    u32 emblem_color;
-    u32 border_style;
-    u32 border_color;
-    u32 background_color;
-}
-
 cmsg CMSG_PLAYER_LOGOUT = 0x4A { }
 
 test CMSG_PLAYER_LOGOUT { } [
@@ -114,72 +103,6 @@ smsg SMSG_LOGOUT_COMPLETE = 0x4D { }
 cmsg CMSG_LOGOUT_CANCEL = 0x4E { }
 
 smsg SMSG_LOGOUT_CANCEL_ACK = 0x4F { }
-
-cmsg CMSG_PET_NAME_QUERY = 0x52 {
-    u32 pet_number;
-    u64 guid;
-}
-
-test CMSG_PET_NAME_QUERY {
-    pet_number = 0xDEADBEEF;
-    guid = 0xFACADEDEADBEEF;
-} [
-    0x00, 0x10, /* size */
-    0x52, 0x00, 0x00, 0x00, /* opcode */
-    0xEF, 0xBE, 0xAD, 0xDE, /* pet_number */
-    0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, /* guid */
-]
-
-smsg SMSG_PET_NAME_QUERY_RESPONSE = 0x53 {
-    u32 pet_number;
-    CString name;
-    u32 pet_name_timestamp;
-}
-
-test SMSG_PET_NAME_QUERY_RESPONSE {
-    pet_number = 0xDEADBEEF;
-    name = "ABCDEF";
-    pet_name_timestamp = 0xFACADE;
-} [
-    0x00, 0x11, /* size */
-    0x53, 0x00, /* opcode */
-    0xEF, 0xBE, 0xAD, 0xDE, /* pet_number */
-    0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x00 /* name */
-    0xDE, 0xCA, 0xFA, 0x00, /* pet_name_timestamp */
-]
-
-cmsg CMSG_GUILD_QUERY = 0x54 {
-    u32 guild_id;   
-}
-
-cmsg CMSG_ITEM_QUERY_SINGLE = 0x56 {
-    u32 item;
-    u64 guid;
-}
-
-cmsg CMSG_PAGE_TEXT_QUERY = 0x5A {
-    u32 page_id;
-}
-
-smsg SMSG_PAGE_TEXT_QUERY_RESPONSE = 0x5B {
-    u32 page_id;
-    CString text;
-    u32 next_page_id;
-}
-
-cmsg CMSG_QUEST_QUERY = 0x5C {
-    u32 quest_id;
-}
-
-cmsg CMSG_GAMEOBJECT_QUERY = 0x5E {
-    u32 entry_id;
-    u64 guid;
-}
-
-cmsg CMSG_CREATURE_QUERY = 0x60 {
-    u32 creature;
-    u64 guid;
-}
 
 struct WhoPlayer {
     CString name;
@@ -1210,10 +1133,6 @@ smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
 
 cmsg CMSG_REQUEST_ACCOUNT_DATA = 0x020A {}
 
-cmsg CMSG_TAXINODE_STATUS_QUERY = 0x01AA {
-    u64 guid;
-}
-
 
 smsg MSG_MINIMAP_PING_Server = 0x01D5 {
     Guid guid;
@@ -1295,19 +1214,6 @@ enum CorpseQueryResult : u8 {
     FOUND = 1;
 }
 
-smsg MSG_CORPSE_QUERY_Server = 0x0216 {
-    CorpseQueryResult result;
-    if (result == FOUND) {
-        Map map;
-        f32 position_x;
-        f32 position_y;
-        f32 position_z;
-        Map corpse_map;
-    }
-}
-
-cmsg MSG_CORPSE_QUERY_Client = 0x0216 {}
-
 
 cmsg MSG_RANDOM_ROLL_Client = 0x01FB {
     u32 minimum;
@@ -1332,22 +1238,6 @@ smsg MSG_TALENT_WIPE_CONFIRM_Server = 0x02AA {
 } {
     comment = "cmangos/vmangos/mangoszero returns guid 0 and unknown 0 when talents can not be reset";
     comment = "cmangos/vmangos/mangoszero casts spell 14876 when resetting";
-}
-
-cmsg MSG_QUERY_NEXT_MAIL_TIME_Client = 0x0284 {
-} {
-    comment = "mangoszero/vmangos: No idea when this is called.";
-}
-
-smsg MSG_QUERY_NEXT_MAIL_TIME_Server = 0x0284 {
-    /* TODO: Figure out if Cmangos is correct in this */
-    f32 unread_mails {
-        comment = "mangoszero sets 0 if has unread mail, -86400.0f (0xC7A8C000) if not";
-        comment = "vmangos sets 0 if has unread mail, -1.0f if not";
-        comment = "cmangos has the behavior of mangoszero except when there are unread mails. This is TODO.";
-    }
-} {
-    comment = "mangoszero/vmangos: No idea when this is called.";
 }
 
 cmsg MSG_INSPECT_HONOR_STATS_Client = 0x02D6 {

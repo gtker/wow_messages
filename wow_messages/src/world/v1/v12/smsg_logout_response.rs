@@ -7,7 +7,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/add_messages.wowm:97`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/add_messages.wowm#L97):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/add_messages.wowm:86`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/add_messages.wowm#L86):
 /// ```text
 /// smsg SMSG_LOGOUT_RESPONSE = 0x4C {
 ///     LogoutResult reason;
@@ -126,7 +126,7 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/unsorted/add_messages.wowm` line 102.
+    // Generated from `wow_message_parser/wowm/world/unsorted/add_messages.wowm` line 91.
     #[test]
     fn SMSG_LOGOUT_RESPONSE0() {
         let raw: Vec<u8> = vec![ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00,

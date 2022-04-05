@@ -1,0 +1,51 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
+    Guid petition_guid;
+    Guid charter_owner;
+    CString guild_name;
+    CString body_text {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 unknown_flags {
+        comment = "cmangos/vmangos/mangoszero: Set to 1, only info is comment from vmangos";
+    }
+    u32 minimum_signatures {
+        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
+    }
+    u32 maximum_signatures {
+        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
+    }
+    u32 deadline {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 issue_date {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 allowed_guild_id {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 allowed_classes {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 allowed_races {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u16 allowed_genders {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 allowed_minimum_level {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 allowed_maximum_level {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    /* TODO Figure out if CStrings work? */
+    u32 todo_amount_of_signers {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 number_of_choices {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+}
+

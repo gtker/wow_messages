@@ -4,7 +4,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/add_messages.wowm:261`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/add_messages.wowm#L261):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/add_messages.wowm:184`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/add_messages.wowm#L184):
 /// ```text
 /// smsg SMSG_IGNORE_LIST = 0x6B {
 ///     u8 amount_of_ignored;
@@ -91,7 +91,7 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/unsorted/add_messages.wowm` line 266.
+    // Generated from `wow_message_parser/wowm/world/unsorted/add_messages.wowm` line 189.
     #[test]
     fn SMSG_IGNORE_LIST0() {
         let raw: Vec<u8> = vec![ 0x00, 0x0B, 0x6B, 0x00, 0x01, 0xEF, 0xBE, 0xAD,
@@ -120,7 +120,7 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    // Generated from `wow_message_parser/wowm/world/unsorted/add_messages.wowm` line 276.
+    // Generated from `wow_message_parser/wowm/world/unsorted/add_messages.wowm` line 199.
     #[test]
     fn SMSG_IGNORE_LIST1() {
         let raw: Vec<u8> = vec![ 0x00, 0x13, 0x6B, 0x00, 0x02, 0xEF, 0xBE, 0xAD,

@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg SMSG_ITEM_NAME_QUERY_RESPONSE = 0x02C5 {
+    /* TODO Enum? */
+    u32 item_id;
+    CString item_name;
+}
+

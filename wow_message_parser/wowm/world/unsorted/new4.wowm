@@ -287,18 +287,6 @@ cmsg CMSG_SET_ACTIONBAR_TOGGLES = 0x02BF {
     u8 action_bar;
 }
 
-cmsg CMSG_ITEM_NAME_QUERY = 0x02C4 {
-    /* TODO Enum? */
-    u32 item_id;
-    u64 guid;
-}
-
-smsg SMSG_ITEM_NAME_QUERY_RESPONSE = 0x02C5 {
-    /* TODO Enum? */
-    u32 item_id;
-    CString item_name;
-}
-
 enum PetFeedback : u8 {
     PET_DEAD = 1;
     NOTHING_TO_EAT = 2;
@@ -345,10 +333,6 @@ cmsg CMSG_LEAVE_BATTLEFIELD = 0x02E1 {
         comment = "cmangos/vmangos/mangoszero: BattleGroundTypeId-1 ? - Classic Only";
     }
     u16 unknown2;
-}
-
-cmsg CMSG_AREA_SPIRIT_HEALER_QUERY = 0x02E2 {
-    u64 guid;
 }
 
 cmsg CMSG_AREA_SPIRIT_HEALER_QUEUE = 0x02E3 {

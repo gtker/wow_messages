@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_PETITION_QUERY = 0x01C6 {
+    u32 guild_guid;
+    u64 petition_guid;
+}
+

@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+cmsg MSG_CORPSE_QUERY_Client = 0x0216 {}
+

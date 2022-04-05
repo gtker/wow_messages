@@ -1,0 +1,20 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PET_NAME_QUERY_RESPONSE = 0x53 {
+    u32 pet_number;
+    CString name;
+    u32 pet_name_timestamp;
+}
+
+test SMSG_PET_NAME_QUERY_RESPONSE {
+    pet_number = 0xDEADBEEF;
+    name = "ABCDEF";
+    pet_name_timestamp = 0xFACADE;
+} [
+    0x00, 0x11, /* size */
+    0x53, 0x00, /* opcode */
+    0xEF, 0xBE, 0xAD, 0xDE, /* pet_number */
+    0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x00 /* name */
+    0xDE, 0xCA, 0xFA, 0x00, /* pet_name_timestamp */
+]
+
