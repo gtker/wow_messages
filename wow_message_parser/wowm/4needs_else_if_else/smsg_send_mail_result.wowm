@@ -1,0 +1,21 @@
+#tag_all versions "1.12";
+
+/* MailAction already in */
+smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
+    u32 mail_id;
+    MailAction action;
+    MailResult result;
+    if (result == ERR_EQUIP_ERROR) {
+        u32 equip_error;
+    }
+    /* TODO: requires elseif for different thing */
+    else {
+        if (action == ITEM_TAKEN) {
+            u32 item_guid {
+                comment = "cmangos/vmangos: item guid low?";
+            }
+            u32 item_count;
+        }
+    }
+}
+

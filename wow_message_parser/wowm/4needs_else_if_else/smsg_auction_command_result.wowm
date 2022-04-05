@@ -1,0 +1,19 @@
+#tag_all versions "1.12";
+
+smsg SMSG_AUCTION_COMMAND_RESULT = 0x025B {
+    u32 auction_id;
+    AuctionCommandAction action;
+    AuctionCommandResult result;
+    if (result == OK) {
+        if (action == BID_PLACED) {
+            u32 auction_outbid1;
+        }
+    } else if (result == ERR_INVENTORY) {
+        InventoryResult inventory_result;
+    } else if (result == ERR_HIGHER_BID) {
+        Guid higher_bidder;
+        u32 new_bid;
+        u32 auction_outbid2;
+    }
+}
+
