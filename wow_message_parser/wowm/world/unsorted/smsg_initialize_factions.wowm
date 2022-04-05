@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+smsg SMSG_INITIALIZE_FACTIONS = 0x0122 {
+    u32 amount_of_factions {
+        comment = "vmangos/cmangos/mangoszero: sets to 0x00000040 (64)";
+    }
+    FactionInitializer[amount_of_factions] factions;
+}
+

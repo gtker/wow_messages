@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_PET_ABANDON = 0x0176 {
+    u64 pet_guid;
+}
+

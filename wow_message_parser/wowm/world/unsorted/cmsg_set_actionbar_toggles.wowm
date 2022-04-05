@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_SET_ACTIONBAR_TOGGLES = 0x02BF {
+    /* TODO enum for this */
+    u8 action_bar;
+}
+

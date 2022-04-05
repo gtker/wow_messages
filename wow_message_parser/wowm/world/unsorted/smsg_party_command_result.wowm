@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PARTY_COMMAND_RESULT = 0x007F {
+    (u32)PartyOperation operation;
+    CString member {
+        maximum_length = "48";
+    }
+    (u32)PartyResult result;
+}
+

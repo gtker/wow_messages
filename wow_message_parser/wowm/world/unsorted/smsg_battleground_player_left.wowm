@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_BATTLEGROUND_PLAYER_LEFT = 0x02ED {
+    u64 guid;
+}
+

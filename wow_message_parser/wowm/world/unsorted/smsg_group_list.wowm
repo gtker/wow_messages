@@ -1,0 +1,20 @@
+#tag_all versions "1.12";
+
+smsg SMSG_GROUP_LIST = 0x007D {
+    GroupType group_type;   
+    u8 own_flags {
+        comment = "mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))";
+    }
+    u32 amount_of_members;
+    GroupListMember[amount_of_members] members;
+    Guid leader;
+    /* TODO: INT_EQUALS */
+    optional group_not_empty {
+        GroupLootSetting loot_setting;
+        Guid master_loot {
+            comment = "Zero if loot_setting is not MASTER_LOOT";
+        }
+        ItemQuality loot_threshold;
+    }
+}
+

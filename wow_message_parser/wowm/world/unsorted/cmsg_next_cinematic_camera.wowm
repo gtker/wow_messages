@@ -1,5 +1,7 @@
 #tag_all versions "1.12";
 
+#tag_all versions "1.12";
+
 cmsg CMSG_NEXT_CINEMATIC_CAMERA = 0x00FB {} {
     description = "Sent by client when cinematic beings.";
 }

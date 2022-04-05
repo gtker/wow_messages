@@ -1,0 +1,14 @@
+#tag_all versions "1.12";
+
+smsg MSG_PVP_LOG_DATA_Server = 0x02E0 {
+    BattlegroundEndStatus status;
+    if (status == ENDED) {
+        BattlegroundWinner winner;
+    }
+    u32 amount_of_players {
+        valid_range = "0 80";
+        comment = "vmangos: Client has a hard limit to 80. If we go beyond (but it should not happen ?!), WoW Error (happening !)";
+    }
+    BattlegroundPlayer[amount_of_players] players;
+}
+

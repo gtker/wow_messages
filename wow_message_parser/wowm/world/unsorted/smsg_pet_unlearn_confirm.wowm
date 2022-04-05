@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PET_UNLEARN_CONFIRM = 0x02F1 {
+    u64 pet_guid;
+    u32 talent_reset_cost;
+}
+

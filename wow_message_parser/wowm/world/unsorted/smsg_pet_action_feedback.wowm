@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PET_ACTION_FEEDBACK = 0x02C6 {
+    PetFeedback feedback;
+}
+

@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_PETITION_SHOW_SIGNATURES = 0x01BE {
+    u64 item_guid;
+}
+

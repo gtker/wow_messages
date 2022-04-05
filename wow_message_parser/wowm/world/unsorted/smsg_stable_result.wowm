@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_STABLE_RESULT = 0x0273 {
+    StableResult result;
+}
+

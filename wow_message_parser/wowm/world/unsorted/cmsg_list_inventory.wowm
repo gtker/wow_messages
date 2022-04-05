@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_LIST_INVENTORY = 0x019E {
+    u64 guid;
+}
+

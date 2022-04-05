@@ -1,5 +1,7 @@
 #tag_all versions "1.12";
 
+#tag_all versions "1.12";
+
 smsg SMSG_LOOT_REMOVED = 0x0162 {
     u8 slot;
 } {

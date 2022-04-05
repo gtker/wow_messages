@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+/* TODO: Seems to be used for a whole host of things, might be able to narrow it down? */
+smsg SMSG_GUILD_COMMAND_RESULT = 0x0093 {
+    (u32)GuildCommand command;
+    CString string;
+    (u32)GuildCommandResult result;
+}
+

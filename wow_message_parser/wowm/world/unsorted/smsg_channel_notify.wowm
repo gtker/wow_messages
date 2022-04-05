@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_CHANNEL_NOTIFY = 0x0099 {
+    ChatNotify notify_type;
+    CString channel_name;
+}
+

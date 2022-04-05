@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg MSG_SAVE_GUILD_EMBLEM_Server = 0x01F1 {
+    GuildEmblemResult result;
+}
+

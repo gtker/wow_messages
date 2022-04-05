@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_INITIATE_TRADE = 0x0116 {
+    u64 guid;
+}
+

@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_PET_ACTION = 0x0175 {
+    u64 pet_guid;
+    /* data? */
+    u32 data;
+    u64 target_guid;
+}
+

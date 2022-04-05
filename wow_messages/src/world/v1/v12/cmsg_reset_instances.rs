@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/remaining.wowm:4349`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/remaining.wowm#L4349):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/cmsg_reset_instances.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/cmsg_reset_instances.wowm#L3):
 /// ```text
 /// cmsg CMSG_RESET_INSTANCES = 0x31D {
 /// }

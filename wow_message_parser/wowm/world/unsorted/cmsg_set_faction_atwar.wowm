@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_SET_FACTION_ATWAR = 0x0125 {
+    /* TODO: Reputation list id and u8 flag */
+    u32 reputation_list_id;
+    u8 flags;
+}
+

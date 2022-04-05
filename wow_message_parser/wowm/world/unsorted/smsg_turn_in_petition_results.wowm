@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_TURN_IN_PETITION_RESULTS = 0x01C5 {
+    PetitionTurnInResult result;
+}
+

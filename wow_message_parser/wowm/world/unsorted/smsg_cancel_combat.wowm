@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_CANCEL_COMBAT = 0x014E {}
+

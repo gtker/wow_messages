@@ -1,0 +1,68 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
+    PackedGuid guid;
+    GroupUpdateFlags mask;
+    if (mask & FLAG_STATUS) {
+        GroupMemberOnlineStatus status;       
+    }
+    if (mask & FLAG_CUR_HP) {
+        u16 current_health;
+    }
+    if (mask & FLAG_MAX_HP) {
+        u16 max_health;
+    }
+    if (mask & FLAG_POWER_TYPE) {
+        Power power; 
+    }
+    if (mask & FLAG_CUR_POWER) {
+        u16 current_power;
+    }
+    if (mask & FLAG_MAX_POWER) {
+        u16 max_power;
+    }
+    if (mask & FLAG_LEVEL) {
+        u16 level;
+    }
+    if (mask & FLAG_ZONE) {
+        Area area;
+    }
+    if (mask & FLAG_POSITION) {
+        u16 position_x {
+            comment = "cmangos: float cast to u16";
+        }
+        u16 position_y {
+            comment = "cmangos: float cast to u16";
+        }
+    }
+    if (mask & FLAG_AURAS) {
+        AuraMask auras {
+            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
+        }
+    }
+    if (mask & FLAG_PET_NAME) {
+        CString pet_name;
+    }
+    if (mask & FLAG_PET_MODEL_ID) {
+        u16 pet_display_id;
+    }
+    if (mask & FLAG_PET_CUR_HP) {
+        u16 pet_current_health;
+    }
+    if (mask & FLAG_PET_MAX_HP) {
+        u16 pet_max_health;
+    }
+    if (mask & FLAG_PET_POWER_TYPE) {
+        Power pet_power_type;
+    }
+    if (mask & FLAG_PET_CUR_POWER) {
+        u16 pet_current_power;
+    }
+    if (mask & FLAG_PET_MAX_POWER) {
+        u16 pet_max_power;
+    }
+    if (mask & FLAG_PET_AURAS) {
+        AuraMask pet_auras;
+    }
+}
+

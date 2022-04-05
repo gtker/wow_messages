@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/remaining.wowm:3421`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/remaining.wowm#L3421):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/cmsg_buy_bank_slot.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/cmsg_buy_bank_slot.wowm#L3):
 /// ```text
 /// cmsg CMSG_BUY_BANK_SLOT = 0x1B9 {
 ///     u64 guid;

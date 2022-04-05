@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_UNLEARN_SKILL = 0x0202 {
+    /* TODO: Same as spell_id? */
+    u32 skill_id;
+}
+

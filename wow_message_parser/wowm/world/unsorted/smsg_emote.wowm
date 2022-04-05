@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_EMOTE = 0x0103 {
+    Emote emote;
+    u64 guid;
+}
+

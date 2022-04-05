@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_GMTICKET_UPDATETEXT = 0x0207 {
+    CString message;
+}
+

@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+cmsg MSG_PVP_LOG_DATA_Client = 0x02E0 {}
+

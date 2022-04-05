@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_FISH_ESCAPED = 0x01C9 {}
+

@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PET_BROKEN = 0x02AF {}
+

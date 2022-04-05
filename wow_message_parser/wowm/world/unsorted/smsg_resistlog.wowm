@@ -1,5 +1,7 @@
 #tag_all versions "1.12";
 
+#tag_all versions "1.12";
+
 smsg SMSG_RESISTLOG = 0x01D6 {
     /* TODO: Nothing except a comment for this */
     u64 guid1;

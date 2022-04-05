@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg SMSG_BUY_FAILED = 0x01A5 {
+    u64 guid;
+    u32 item_id;
+    BuyResult result;
+}
+

@@ -1,5 +1,7 @@
 #tag_all versions "1.12";
 
+#tag_all versions "1.12";
+
 smsg SMSG_PLAY_OBJECT_SOUND = 0x0278 {
     u32 sound_id;
     u64 guid;

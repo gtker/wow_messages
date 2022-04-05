@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+smsg SMSG_ENVIRONMENTALDAMAGELOG = 0x01FC {
+    u64 guid;
+    EnvironmentalDamageType damage_type;
+    u32 damage;
+    u32 absorb;
+    u32 resist;
+}
+

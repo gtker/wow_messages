@@ -1,0 +1,20 @@
+#tag_all versions "1.12";
+
+smsg SMSG_LOOT_ROLL_WON = 0x029F {
+    u64 looted_target_guid;
+    u32 loot_slot;
+    /* TODO item_id enum */
+    u32 item_id;
+    u32 item_random_suffix {
+        comment = "vmangos/mangoszero: not used ?";
+    }
+    u32 item_random_property_id;
+    u64 winning_player_guid;
+    u8 winning_roll {
+        comment = "rollnumber related to SMSG_LOOT_ROLL";
+    }
+    RollVote vote {
+        comment = "Rolltype related to SMSG_LOOT_ROLL";
+    }
+}
+

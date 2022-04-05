@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_GMTICKET_CREATE = 0x0206 {
+    GmTicketResponse response;
+}
+

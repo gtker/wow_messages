@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PET_TAME_FAILURE = 0x0173 {
+    PetTameFailureReason reason;
+}
+

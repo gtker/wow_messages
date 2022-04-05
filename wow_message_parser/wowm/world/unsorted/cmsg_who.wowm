@@ -1,0 +1,19 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_WHO = 0x62 {
+    u32 minimum_level;
+    u32 maximum_level;
+    CString player_name;
+    CString guild_name;
+    u32 race_mask;
+    u32 class_mask;
+    u32 amount_of_zones {
+        maximum_value = "10";
+    }
+    u32[amount_of_zones] zones;
+    u32 amount_of_strings {
+        maximum_value = "4";
+    }
+    CString[amount_of_strings] search_strings;
+}
+

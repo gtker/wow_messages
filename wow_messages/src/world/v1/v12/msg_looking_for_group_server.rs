@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/remaining.wowm:914`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/remaining.wowm#L914):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/msg_looking_for_group_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/msg_looking_for_group_server.wowm#L3):
 /// ```text
 /// smsg MSG_LOOKING_FOR_GROUP_Server = 0x1FF {
 ///     u32 unknown1;

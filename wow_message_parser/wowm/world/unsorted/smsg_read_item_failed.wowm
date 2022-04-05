@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_READ_ITEM_FAILED = 0x00AF {
+    u64 guid;
+}
+

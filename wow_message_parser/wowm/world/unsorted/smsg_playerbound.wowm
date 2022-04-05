@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PLAYERBOUND = 0x0158 {
+    u64 guid;
+    Area area;
+}
+

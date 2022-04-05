@@ -18,10 +18,6 @@ enum ItemQuality : u8 {
     ARTIFACT = 6;
 }
 
-cmsg CMSG_GROUP_DISBAND = 0x007B { }
-
-smsg SMSG_GROUP_DESTROYED = 0x007C {}
-
 enum PartyOperation : u8 {
     INVITE = 0;
     LEAVE = 2;
@@ -39,75 +35,6 @@ enum PartyResult : u8 {
     IGNORING_YOU = 8;
 }
 
-smsg SMSG_PARTY_COMMAND_RESULT = 0x007F {
-    (u32)PartyOperation operation;
-    CString member {
-        maximum_length = "48";
-    }
-    (u32)PartyResult result;
-}
-
-cmsg CMSG_GUILD_CREATE = 0x0081 {
-    CString guild_name;
-}
-
-cmsg CMSG_GUILD_INVITE = 0x0082 {
-    CString invited_player;
-}
-
-smsg SMSG_GUILD_INVITE = 0x0083 {
-    CString player_name;
-    CString guild_name;
-}
-
-cmsg CMSG_GUILD_ACCEPT = 0x0084 {}
-
-cmsg CMSG_GUILD_DECLINE = 0x0085 {}
-
-cmsg CMSG_GUILD_INFO = 0x0087 {}
-
-smsg SMSG_GUILD_INFO = 0x0088 {
-    CString guild_name;
-    u32 created_day;
-    u32 created_month;
-    u32 created_year;
-    u32 amount_of_characters_in_guild;
-    u32 amount_of_accounts_in_guild;
-}
-
-cmsg CMSG_GUILD_ROSTER = 0x0089 {}
-
-smsg SMSG_GUILD_ROSTER = 0x008A {
-    /* Complex 
-        https://github1s.com/vmangos/core/blob/HEAD/src/game/Guild/Guild.cpp#L754
-        https://github1s.com/cmangos/mangos-classic/blob/HEAD/src/game/Guilds/Guild.cpp#L717
-    */
-}
-
-cmsg CMSG_GUILD_PROMOTE = 0x008B {
-    CString player_name;
-}
-
-cmsg CMSG_GUILD_DEMOTE = 0x008C {
-    CString player_name;
-}
-
-cmsg CMSG_GUILD_LEAVE = 0x008D {}
-
-cmsg CMSG_GUILD_REMOVE = 0x008E {
-    CString player_name;
-}
-
-cmsg CMSG_GUILD_DISBAND = 0x008F {}
-
-cmsg CMSG_GUILD_LEADER = 0x0090 {
-    CString new_guild_leader_name;
-}
-
-cmsg CMSG_GUILD_MOTD = 0x0091 {
-    CString message_of_the_day;
-}
-
 enum GuildEvent : u8 {
     PROMOTION = 0;
     DEMOTION = 1;
@@ -123,13 +50,6 @@ enum GuildEvent : u8 {
     ROSTER_UPDATE = 11;
     SIGNED_ON = 12;
     SIGNED_OFF = 13;
-}
-
-/* TODO: Technically correct, but events require a specific amount of strings */
-smsg SMSG_GUILD_EVENT = 0x0092 {
-    GuildEvent event;
-    u8 amount_of_events;
-    CString[amount_of_events] event_descriptions;
 }
 
 enum GuildCommand : u8 {
@@ -162,13 +82,6 @@ enum GuildCommandResult : u8 {
     GUILD_NOT_ALLIED            = 0x0C;
     GUILD_RANK_TOO_HIGH_S       = 0x0D;
     GUILD_RANK_TOO_LOW_S        = 0x0E;
-}
-
-/* TODO: Seems to be used for a whole host of things, might be able to narrow it down? */
-smsg SMSG_GUILD_COMMAND_RESULT = 0x0093 {
-    (u32)GuildCommand command;
-    CString string;
-    (u32)GuildCommandResult result;
 }
 
 enum ChatType : u8 {
@@ -225,15 +138,6 @@ enum Language : u32 {
     TROLL          = 14;
     GUTTERSPEAK    = 33;
     ADDON          = 0xFFFFFFFF;
-}
-
-cmsg CMSG_JOIN_CHANNEL = 0x0097 {
-    CString channel_name;
-    CString channel_password;
-}
-
-cmsg CMSG_LEAVE_CHANNEL = 0x0098 {
-    CString channel_name;
 }
 
 enum ChatNotify : u8 {
@@ -333,129 +237,10 @@ enum ChatNotify : u8 {
     }
 }
 
-smsg SMSG_CHANNEL_NOTIFY = 0x0099 {
-    ChatNotify notify_type;
-    CString channel_name;
-}
-
-cmsg CMSG_CHANNEL_LIST = 0x009A {
-    CString channel_name;
-}
-
 struct ChannelMember {
     u64 guid;
     /* TODO: unknown flags */
     u8 member_flags;
-}
-
-smsg SMSG_CHANNEL_LIST = 0x009B {
-    CString channel_name;
-    /* TODO: unknown flags */
-    u8 channel_flags;
-    u32 amount_of_members;
-    ChannelMember[amount_of_members] members;
-}
-
-cmsg CMSG_CHANNEL_PASSWORD = 0x009C {
-    CString channel_name;
-    CString channel_password;
-}
-
-cmsg CMSG_CHANNEL_SET_OWNER = 0x009D {
-    CString channel_name;
-    CString new_owner;
-}
-
-cmsg CMSG_CHANNEL_OWNER = 0x009E {
-    CString channel_name;
-}
-
-cmsg CMSG_CHANNEL_MODERATOR = 0x009F {
-    CString channel_name;
-    CString player_name;
-}
-
-cmsg CMSG_CHANNEL_UNMODERATOR = 0x00A0 {
-    CString channel_name;
-    CString player_name;
-}
-
-cmsg CMSG_CHANNEL_MUTE = 0x00A1 {
-    CString channel_name;
-    CString player_name;
-}
-
-cmsg CMSG_CHANNEL_UNMUTE = 0x00A2 {
-    CString channel_name;
-    CString player_name;
-}
-
-cmsg CMSG_CHANNEL_INVITE = 0x00A3 {
-    CString channel_name;
-    CString player_name;
-}
-
-cmsg CMSG_CHANNEL_KICK = 0x00A4 {
-    CString channel_name;
-    CString player_name;
-}
-
-cmsg CMSG_CHANNEL_BAN = 0x00A5 {
-    CString channel_name;
-    CString player_name;
-}
-
-cmsg CMSG_CHANNEL_UNBAN = 0x00A6 {
-    CString channel_name;
-    CString player_name;
-}
-
-cmsg CMSG_CHANNEL_ANNOUNCEMENTS = 0x00A7 {
-    CString channel_name;
-}
-
-cmsg CMSG_CHANNEL_MODERATE = 0x00A8 {
-    CString channel_name;
-}
-
-smsg SMSG_DESTROY_OBJECT = 0x00AA {
-    u64 guid;
-}
-
-cmsg CMSG_OPEN_ITEM = 0x00AC {
-    u8 bag_index;
-    u8 slot;
-}
-
-cmsg CMSG_READ_ITEM = 0x00AD {
-    u8 bag_index;
-    u8 slot;
-}
-
-smsg SMSG_READ_ITEM_OK = 0x00AE {
-    u64 guid;
-}
-
-smsg SMSG_READ_ITEM_FAILED = 0x00AF {
-    u64 guid;
-}
-
-smsg SMSG_ITEM_COOLDOWN = 0x00B0 {
-    u64 guid;
-    u32 spell_id;
-}
-
-cmsg CMSG_GAMEOBJ_USE = 0x00B1 {
-    u64 guid;
-}
-
-smsg SMSG_GAMEOBJECT_CUSTOM_ANIM = 0x00B3 {
-    u64 guid;
-    u32 animation_id;
-}
-
-cmsg CMSG_AREATRIGGER = 0x00B4 {
-    u32 trigger_id;
 }
 
 enum CinematicSequenceId : u32 {
@@ -470,21 +255,6 @@ enum CinematicSequenceId : u32 {
     GOBLIN = 0;
 }
 
-smsg SMSG_TRIGGER_CINEMATIC = 0x00FA {
-    CinematicSequenceId cinematic_sequence_id;
-}
-
-cmsg CMSG_COMPLETE_CINEMATIC = 0x00FC {}
-
-cmsg CMSG_TUTORIAL_FLAG = 0x00FE {
-    /* TODO: Flag as u32 */
-    u32 tutorial_flag;
-}
-
-cmsg CMSG_TUTORIAL_CLEAR = 0x00FF {}
-
-cmsg CMSG_TUTORIAL_RESET = 0x0100 {}
-
 enum UnitStandState : u8 {
     STAND = 0;
     SIT = 1;
@@ -498,10 +268,6 @@ enum UnitStandState : u8 {
     CUSTOM = 9 {
         comment = "Used for Cthun according to cmangos.";
     }
-}
-
-cmsg CMSG_STANDSTATECHANGE = 0x0101 {
-    (u32)UnitStandState animation_state;
 }
 
 enum Emote : u32 {
@@ -624,74 +390,6 @@ enum Emote : u32 {
     STATE_EAT_NO_SHEATHE = 423;
 }
 
-cmsg CMSG_EMOTE = 0x0102 {
-    Emote emote;
-}
-
-smsg SMSG_EMOTE = 0x0103 {
-    Emote emote;
-    u64 guid;
-}
-
-cmsg CMSG_TEXT_EMOTE = 0x0104 {
-    /* TODO: text_emote could be an enum */
-    u32 text_emote;
-    Emote emote;
-    u64 guid;
-}
-
-smsg SMSG_TEXT_EMOTE = 0x0105 {
-    u64 guid;
-    /* TODO: text_emote could be an enum */
-    u32 text_emote;
-    Emote emote;
-    u32 name_length;
-    /* Name length for CString??? */
-    CString name;
-}
-
-cmsg CMSG_AUTOSTORE_LOOT_ITEM = 0x0108 {
-    u8 item_slot;
-}
-
-cmsg CMSG_AUTOEQUIP_ITEM = 0x010A {
-    u8 source_bag;
-    u8 source_slot;
-}
-
-cmsg CMSG_AUTOSTORE_BAG_ITEM = 0x010B {
-    u8 source_bag;
-    u8 source_slot;
-    u8 destination_bag;
-}
-
-cmsg CMSG_SWAP_ITEM = 0x010C {
-    u8 destination_bag;
-    u8 destionation_slot;
-    u8 source_bag;
-    u8 source_slot;
-}
-
-cmsg CMSG_SWAP_INV_ITEM = 0x010D {
-    u8 source_slot;
-    u8 destination_slot;
-}
-
-cmsg CMSG_SPLIT_ITEM = 0x010E {
-    u8 source_bag;
-    u8 source_slot;
-    u8 destination_bag;
-    u8 destination_slot;
-    u8 amount {
-        minimum_legal_value = "1";
-    }
-}
-
-cmsg CMSG_AUTOEQUIP_ITEM_SLOT = 0x010F {
-    u64 guid;
-    u8 destination_slot;
-}
-
 enum InventoryResult : u8 {
     OK = 0;
     CANT_EQUIP_LEVEL_I = 1;
@@ -764,61 +462,6 @@ enum InventoryResult : u8 {
     comment = "Any values greater than maximum enum value show as 'bag full'";
 }
 
-cmsg CMSG_DESTROYITEM = 0x0111 {
-    u8 bag;
-    u8 slot;
-    u8 amount;
-    u8 unknown1;
-    u8 unknown2;
-    u8 unknown3;
-}
-
-smsg SMSG_OPEN_CONTAINER = 0x0113 {
-    u64 guid;
-}
-
-cmsg CMSG_INSPECT = 0x0114 {
-    u64 guid;
-}
-
-smsg SMSG_INSPECT = 0x0115 {
-    u64 guid;
-}
-
-cmsg CMSG_INITIATE_TRADE = 0x0116 {
-    u64 guid;
-}
-
-cmsg CMSG_BEGIN_TRADE = 0x0117 {}
-
-cmsg CMSG_BUSY_TRADE = 0x0118 {}
-
-cmsg CMSG_IGNORE_TRADE = 0x0119 {}
-
-cmsg CMSG_ACCEPT_TRADE = 0x011A {
-    u32 unknown1 {
-        comment = "Skipped in vmangos and set to 1 for bots";
-    }
-}
-
-cmsg CMSG_UNACCEPT_TRADE = 0x011B {}
-
-cmsg CMSG_CANCEL_TRADE = 0x011C {}
-
-cmsg CMSG_SET_TRADE_ITEM = 0x011D {
-    u8 trade_slot;
-    u8 bag;
-    u8 slot;
-}
-
-cmsg CMSG_CLEAR_TRADE_ITEM = 0x011E {
-    u8 trade_slot;
-}
-
-cmsg CMSG_SET_TRADE_GOLD = 0x011F {
-    u32 gold;
-}
-
 enum TradeStatus : u32 {
     BUSY = 0;
     BEGIN_TRADE = 1;
@@ -846,35 +489,9 @@ enum TradeStatus : u32 {
     NOT_ON_TAPLIST = 23;
 }
 
-smsg SMSG_SET_FACTION_VISIBLE = 0x0123 {
-    u32 reputation_list_id;
-}
 
 
-smsg SMSG_DUEL_COMPLETE = 0x016A {
-    Bool ended_without_interruption;
-}
 
-
-smsg SMSG_TAXINODE_STATUS = 0x01AB {
-    u64 guid;
-    Bool taxi_mask_node_known;
-}
-
-
-cmsg CMSG_REQUEST_ACCOUNT_DATA = 0x020A {}
-
-
-smsg MSG_MINIMAP_PING_Server = 0x01D5 {
-    Guid guid;
-    f32 position_x;
-    f32 position_y;
-}
-
-cmsg MSG_MINIMAP_PING_Client = 0x01D5 {
-    f32 position_x;
-    f32 position_y;
-}
 
 enum GuildEmblemResult : u32 {
     SUCCESS = 0 {
@@ -895,27 +512,6 @@ enum GuildEmblemResult : u32 {
     }
 }
 
-cmsg MSG_SAVE_GUILD_EMBLEM_Client = 0x01F1 {
-    Guid vendor;
-    u32 emblem_style;
-    u32 emblem_color;
-    u32 border_style;
-    u32 border_color;
-    u32 background_color;
-}
-
-smsg MSG_SAVE_GUILD_EMBLEM_Server = 0x01F1 {
-    GuildEmblemResult result;
-}
-
-
-cmsg MSG_LOOKING_FOR_GROUP_Client = 0x01FF {}
-
-smsg MSG_LOOKING_FOR_GROUP_Server = 0x01FF {
-    u32 unknown1 {
-        comment = "vmangos sets to 0. cmangos/mangoszero don't implement";
-    }
-}
 
 
 struct StabledPet {
@@ -929,68 +525,12 @@ struct StabledPet {
     }
 }
 
-smsg MSG_LIST_STABLED_PETS_Server = 0x026F {
-    Guid npc;
-    u8 amount_of_pets;
-    u8 stable_slots;
-    StabledPet[amount_of_pets] pets;
-}
-
-cmsg MSG_LIST_STABLED_PETS_Client = 0x026F {
-    Guid npc;
-}
-
 enum CorpseQueryResult : u8 {
     NOT_FOUND = 0;
     FOUND = 1;
 }
 
 
-cmsg MSG_RANDOM_ROLL_Client = 0x01FB {
-    u32 minimum;
-    u32 maximum;
-}
-
-smsg MSG_RANDOM_ROLL_Server = 0x01FB {
-    u32 minimum;
-    u32 maximum;
-    u32 actual_roll;
-    Guid guid;
-}
-
-
-cmsg MSG_TALENT_WIPE_CONFIRM_Client = 0x02AA {
-    Guid wiping_npc;
-}
-
-cmsg MSG_INSPECT_HONOR_STATS_Client = 0x02D6 {
-    Guid guid;
-}
-
-smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
-    Guid guid;
-    PvpRank highest_rank;
-    u32 today_honorable_and_dishonorable;
-    u16 yesterday_honorable;
-    u16 unknown1 {
-        comment = "vmangos: Unknown (deprecated, yesterday dishonourable?)";
-    }
-    u16 last_week_honorable;
-    u16 unknown2 {
-        comment = "vmangos: Unknown (deprecated, last week dishonourable?)";
-    }
-    u16 this_week_honorable;
-    u16 unknown3 {
-        comment = "vmangos: Unknown (deprecated, this week dishonourable?)";
-    }
-    u32 lifetime_honorable;
-    u32 lifetime_dishonorable;
-    u32 yesterday_honor;
-    u32 last_week_honor;
-    u32 this_week_honor;
-    (u32)PvpRank last_week_standing;
-    u8 rank_progress_bar;
-}
 
 enum BattlegroundEndStatus : u8 {
     NOT_ENDED = 0;
@@ -1018,22 +558,6 @@ struct BattlegroundPlayer {
     }
 }
 
-smsg MSG_PVP_LOG_DATA_Server = 0x02E0 {
-    BattlegroundEndStatus status;
-    if (status == ENDED) {
-        BattlegroundWinner winner;
-    }
-    u32 amount_of_players {
-        valid_range = "0 80";
-        comment = "vmangos: Client has a hard limit to 80. If we go beyond (but it should not happen ?!), WoW Error (happening !)";
-    }
-    BattlegroundPlayer[amount_of_players] players;
-}
-
-cmsg MSG_PVP_LOG_DATA_Client = 0x02E0 {}
-
-
-cmsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Client = 0x02E9 {}
 
 struct BattlegroundPlayerPosition {
     Guid player;
@@ -1071,23 +595,10 @@ struct FactionInitializer {
     u32 standing;
 }
 
-smsg SMSG_INITIALIZE_FACTIONS = 0x0122 {
-    u32 amount_of_factions {
-        comment = "vmangos/cmangos/mangoszero: sets to 0x00000040 (64)";
-    }
-    FactionInitializer[amount_of_factions] factions;
-}
-
 struct Faction {
     u32 reputation_list_id;
     /* TODO Units? */
     u32 standing;
-}
-
-smsg SMSG_SET_FACTION_STANDING = 0x0124 {
-    /* TODO How many factions in FactionList? */
-    u32 amount_of_factions;
-    Faction[amount_of_factions] factions;
 }
 
 enum Power : u8 {
@@ -1214,72 +725,6 @@ flag GroupMemberOnlineStatus : u8 {
     }
 }
 
-smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
-    PackedGuid guid;
-    GroupUpdateFlags mask;
-    if (mask & FLAG_STATUS) {
-        GroupMemberOnlineStatus status;       
-    }
-    if (mask & FLAG_CUR_HP) {
-        u16 current_health;
-    }
-    if (mask & FLAG_MAX_HP) {
-        u16 max_health;
-    }
-    if (mask & FLAG_POWER_TYPE) {
-        Power power; 
-    }
-    if (mask & FLAG_CUR_POWER) {
-        u16 current_power;
-    }
-    if (mask & FLAG_MAX_POWER) {
-        u16 max_power;
-    }
-    if (mask & FLAG_LEVEL) {
-        u16 level;
-    }
-    if (mask & FLAG_ZONE) {
-        Area area;
-    }
-    if (mask & FLAG_POSITION) {
-        u16 position_x {
-            comment = "cmangos: float cast to u16";
-        }
-        u16 position_y {
-            comment = "cmangos: float cast to u16";
-        }
-    }
-    if (mask & FLAG_AURAS) {
-        AuraMask auras {
-            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
-        }
-    }
-    if (mask & FLAG_PET_NAME) {
-        CString pet_name;
-    }
-    if (mask & FLAG_PET_MODEL_ID) {
-        u16 pet_display_id;
-    }
-    if (mask & FLAG_PET_CUR_HP) {
-        u16 pet_current_health;
-    }
-    if (mask & FLAG_PET_MAX_HP) {
-        u16 pet_max_health;
-    }
-    if (mask & FLAG_PET_POWER_TYPE) {
-        Power pet_power_type;
-    }
-    if (mask & FLAG_PET_CUR_POWER) {
-        u16 pet_current_power;
-    }
-    if (mask & FLAG_PET_MAX_POWER) {
-        u16 pet_max_power;
-    }
-    if (mask & FLAG_PET_AURAS) {
-        AuraMask pet_auras;
-    }
-}
-
 
 enum PartyMemberStatus : u32 {
     OFFLINE = 0x0000;
@@ -1310,171 +755,13 @@ enum PartyMemberStatus : u32 {
 }
 
 
-smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
-    PackedGuid player;
-    GroupUpdateFlags mask;
-    if (mask & FLAG_STATUS) {
-        GroupMemberOnlineStatus status;       
-    }
-    if (mask & FLAG_CUR_HP) {
-        u16 current_health;
-    }
-    if (mask & FLAG_MAX_HP) {
-        u16 max_health;
-    }
-    if (mask & FLAG_POWER_TYPE) {
-        Power power; 
-    }
-    if (mask & FLAG_CUR_POWER) {
-        u16 current_power;
-    }
-    if (mask & FLAG_MAX_POWER) {
-        u16 max_power;
-    }
-    if (mask & FLAG_LEVEL) {
-        u16 level;
-    }
-    if (mask & FLAG_ZONE) {
-        Area area;
-    }
-    if (mask & FLAG_POSITION) {
-        u16 position_x {
-            comment = "cmangos: float cast to u16";
-        }
-        u16 position_y {
-            comment = "cmangos: float cast to u16";
-        }
-    }
-    if (mask & FLAG_AURAS) {
-        AuraMask auras {
-            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
-        }
-    }
-    if (mask & FLAG_PET_NAME) {
-        CString pet_name;
-    }
-    if (mask & FLAG_PET_MODEL_ID) {
-        u16 pet_display_id;
-    }
-    if (mask & FLAG_PET_CUR_HP) {
-        u16 pet_current_health;
-    }
-    if (mask & FLAG_PET_MAX_HP) {
-        u16 pet_max_health;
-    }
-    if (mask & FLAG_PET_POWER_TYPE) {
-        Power pet_power_type;
-    }
-    if (mask & FLAG_PET_CUR_POWER) {
-        u16 pet_current_power;
-    }
-    if (mask & FLAG_PET_MAX_POWER) {
-        u16 pet_max_power;
-    }
-    if (mask & FLAG_PET_AURAS) {
-        AuraMask pet_auras;
-    }
-}
 
-
-
-cmsg CMSG_MESSAGECHAT = 0x0095 {
-    (u32)ChatType chat_type;   
-    Language language;
-    if (chat_type == SAY 
-     || chat_type == EMOTE 
-     || chat_type == YELL 
-     || chat_type == PARTY 
-     || chat_type == GUILD 
-     || chat_type == OFFICER 
-     || chat_type == RAID 
-     || chat_type == RAID_LEADER 
-     || chat_type == RAID_WARNING 
-     || chat_type == BATTLEGROUND 
-     || chat_type == BATTLEGROUND_LEADER
-     || chat_type == AFK
-     || chat_type == DND) {
-        CString message;
-    } else if (chat_type == WHISPER) {
-        CString target_player;
-        CString whisper_message;
-    } else if (chat_type == CHANNEL) {
-        CString channel;
-        CString channel_message;
-    }
-}
-
-smsg SMSG_MESSAGECHAT = 0x0096 {
-    ChatType chat_type;
-    Language language;
-    if (chat_type == MONSTER_WHISPER
-     || chat_type == RAID_BOSS_EMOTE
-     || chat_type == MONSTER_EMOTE) {
-        /* CString with len? */
-        u32 name_length;
-        CString monster_name;
-        Guid monster_guid;
-    }
-    else if (chat_type == SAY
-          || chat_type == PARTY
-          || chat_type == YELL) {
-        Guid sender_guid1 {
-            comment = "cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same";
-        }
-        Guid sender_guid2 {
-            comment = "cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same";
-        }
-    }
-    else if (chat_type == MONSTER_SAY
-          || chat_type == MONSTER_YELL) {
-        Guid sender_guid3;
-        u32 sender_name_length;
-        CString sender_name;
-        Guid target_guid;
-    }
-    else if (chat_type == CHANNEL) {
-        CString channel_name;
-        u32 player_rank;
-        Guid player_guid;
-    }
-    else {
-        Guid sender_guid4;
-    }
-    /* CString len */
-    u32 message_length;
-    CString message;
-    PlayerChatTag tag;
-}
 
 enum PlayerChatTag : u8 {
     NONE = 0;
     AFK = 1;
     DND = 2;
     GM = 3;
-}
-
-smsg SMSG_TRADE_STATUS = 0x0120 {
-    TradeStatus status;
-    if (status == BEGIN_TRADE) {
-        u64 unknown1 {
-            comment = "Set to 0 in vmangos.";
-        }
-    }
-    else if (status == CLOSE_WINDOW) {
-        (u32)InventoryResult inventory_result;
-        /* TODO: Add bool? */
-        Bool target_error {
-            comment = "used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED";
-        }
-        u32 item_limit_category_id {
-            comment = "ItemLimitCategory.dbc entry";
-        }
-    }
-    else if (status == ONLY_CONJURED || status == NOT_ON_TAPLIST) {
-        u8 slot {
-            comment = "Trade slot -1 here clears CGTradeInfo::m_tradeMoney";
-        }
-    }
 }
 
 enum MailType : u8 {
@@ -1790,14 +1077,6 @@ struct AuraLog {
 
 
 
-smsg SMSG_PERIODICAURALOG = 0x024E {
-    PackedGuid target;
-    PackedGuid caster;
-    Spell spell;
-    u32 amount_of_auras;
-    AuraLog[amount_of_auras] auras;
-}
-
 
 enum AuctionCommandAction : u32 {
     STARTED = 0 {
@@ -2016,13 +1295,6 @@ struct SpellLog {
     {
         Guid target5;
     }
-}
-
-smsg SMSG_SPELLLOGEXECUTE = 0x024C {
-    PackedGuid caster;
-    Spell spell;
-    u32 amount_of_effects;
-    SpellLog[amount_of_effects] logs;
 }
 
 
@@ -2476,44 +1748,6 @@ enum CastFailureReason : u8 {
     }
 }
 
-smsg SMSG_CAST_RESULT = 0x0130 {
-    Spell spell;
-    SimpleSpellCastResult result;
-    if (result != FAILURE) {
-        CastFailureReason reason;       
-        if (reason == REQUIRES_SPELL_FOCUS) {
-            u32 required_spell_focus;
-        } else if (reason == REQUIRES_AREA) {
-            Area area;
-        } else if (reason == EQUIPPED_ITEM_CLASS) {
-            u32 equipped_item_class;
-            u32 equipped_item_subclass_mask;
-            u32 equipped_item_inventory_type_mask;
-        }
-    }
-}
-
-
-cmsg MSG_RAID_READY_CHECK_Client = 0x0322 {
-    optional answer {
-        u8 state;
-    }
-}
-
-smsg MSG_RAID_READY_CHECK_Server = 0x0322 {
-    optional state_check {
-        Guid guid;
-        u8 state;
-    }
-}
-
-smsg SMSG_TRANSFER_PENDING = 0x003F {
-    Map map;
-    optional has_transport {
-        u32 transport;
-        Map transport_map;
-    }
-}
 
 struct ItemStat {
     u32 item_stat_type;
@@ -2539,26 +1773,6 @@ struct ItemSpells {
     u32 spell_category_cooldown;
 }
 
-cmsg CMSG_PET_SET_ACTION = 0x0174 {
-    Guid guid;
-    u32 position1;
-    u32 data1;
-    optional extra {
-        u32 position2;
-        u32 data2;
-    }
-}
-
-cmsg CMSG_GOSSIP_SELECT_OPTION = 0x017C {
-    Guid guid;
-    u32 gossip_list_id;
-    optional unknown {
-        CString code {
-            comment = "vmangos: if (_player->PlayerTalkClass->GossipOptionCoded(gossipListId))";
-        }
-    }
-}
-
 
 enum GroupType : u8 {
     NORMAL = 0;
@@ -2569,24 +1783,6 @@ struct GroupListMember {
     CString name;
     Guid guid;
     Bool is_online;
-}
-
-smsg SMSG_GROUP_LIST = 0x007D {
-    GroupType group_type;   
-    u8 own_flags {
-        comment = "mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))";
-    }
-    u32 amount_of_members;
-    GroupListMember[amount_of_members] members;
-    Guid leader;
-    /* TODO: INT_EQUALS */
-    optional group_not_empty {
-        GroupLootSetting loot_setting;
-        Guid master_loot {
-            comment = "Zero if loot_setting is not MASTER_LOOT";
-        }
-        ItemQuality loot_threshold;
-    }
 }
 
 
@@ -2688,34 +1884,6 @@ struct SpellCastTargets {
     }
 }
 
-cmsg CMSG_USE_ITEM = 0x00AB {
-    u8 bag_index;
-    u8 bag_slot;
-    u8 spell_index;
-    SpellCastTargets targets;
-}
-
-cmsg CMSG_CAST_SPELL = 0x012E {
-    Spell spell;
-    SpellCastTargets targets;
-}
-
-smsg SMSG_SPELLHEALLOG = 0x0150 {
-    PackedGuid victim_guid;
-    PackedGuid caster_guid;
-    u32 spell_id;
-    u32 damage;
-    Bool critical; /* TODO: Add bool */
-}
-
-smsg SMSG_ATTACKSTOP = 0x0144 {
-    PackedGuid player;
-    PackedGuid enemy;
-    u32 unknown1 {
-        comment = "cmangos/vmangos/mangoszero: set to 0 with comment: unk, can be 1 also";
-    }
-}
-
 enum PowerType : u32 {
     MANA = 0 {
         comment = "UNIT_FIELD_POWER1";
@@ -2738,28 +1906,7 @@ enum PowerType : u32 {
 }
 
 
-smsg SMSG_SPELLENERGIZELOG = 0x0151 {
-    PackedGuid victim_guid;
-    PackedGuid caster_guid;
-    Spell spell;
-    PowerType power;
-    u32 damage;
-}
 
-smsg SMSG_CLIENT_CONTROL_UPDATE = 0x0159 {
-    PackedGuid guid;
-    u8 allow_movement;
-}
-
-
-
-smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
-    /* TODO Possible enum? */
-    u32 hit_info;
-    PackedGuid attacker;
-    PackedGuid target;
-    u32 total_damage;
-}
 
 
 
@@ -2800,35 +1947,6 @@ enum ItemClass : u8 {
     KEY = 13;
     RESERVED_4 = 14;
     MISC = 15;
-}
-
-smsg SMSG_SET_PROFICIENCY = 0x0127 {
-    ItemClass class;
-    u32 item_sub_class_mask;
-}
-
-cmsg CMSG_SET_ACTION_BUTTON = 0x0128 {
-    u8 button;
-    u32 action_type {
-        comment = "Most significant byte determines types, rest is action.";
-    }
-}
-
-smsg SMSG_ACTION_BUTTONS = 0x0129 {
-    u32[120] data;
-}
-
-smsg SMSG_LEARNED_SPELL = 0x012B {
-    u32 spell_id;
-}
-
-smsg SMSG_SUPERCEDED_SPELL = 0x012C {
-    u16 new_spell_id;
-    u16 old_spell_id;
-}
-
-cmsg CMSG_CANCEL_CAST = 0x012F {
-    u32 spell_id;
 }
 
 enum SpellCastResult : u8 {
@@ -2977,38 +2095,6 @@ enum SpellCastResult : u8 {
     UNKNOWN = 0x91;
 }
 
-smsg SMSG_SPELL_FAILURE = 0x0133 {
-    u64 guid;
-    u32 spell_id;
-    SpellCastResult result;
-}
-
-smsg SMSG_COOLDOWN_EVENT = 0x0135 {
-    u32 spell_id;
-    u64 guid;
-}
-
-cmsg CMSG_CANCEL_AURA = 0x0136 {
-    u32 spell_id;
-}
-
-
-smsg SMSG_UPDATE_AURA_DURATION = 0x0137 {
-    u8 aura_slot;
-    u32 aura_duration;
-}
-
-smsg SMSG_PET_CAST_FAILED = 0x0138 {
-    u32 spell_id;
-    u8 unknown1 {
-        comment = "vmangos sets to 2 and cmangos sets to 0.";
-    }
-    SpellCastResult result;
-}
-
-cmsg CMSG_CANCEL_CHANNELLING = 0x013B {
-    u32 spell_id;
-}
 
 enum AiReaction : u32 {
     ALERT = 0 {
@@ -3028,69 +2114,6 @@ enum AiReaction : u32 {
     }
 }
 
-smsg SMSG_AI_REACTION = 0x013C {
-    u64 guid;
-    AiReaction reaction;
-}
-
-cmsg CMSG_SET_TARGET_OBSOLETE = 0x013E {
-    u64 guid;
-}
-
-cmsg CMSG_ATTACKSWING = 0x0141 {
-    u64 guid;
-}
-
-cmsg CMSG_ATTACKSTOP = 0x0142 {}
-
-smsg SMSG_ATTACKSTART = 0x0143 {
-    u64 attacker_guid;
-    u64 victim_guid;
-}
-
-smsg SMSG_ATTACKSWING_NOTINRANGE = 0x0145 {}
-
-smsg SMSG_ATTACKSWING_BADFACING = 0x0146 {}
-
-smsg SMSG_ATTACKSWING_NOTSTANDING = 0x0147 {}
-
-smsg SMSG_ATTACKSWING_DEADTARGET = 0x0148 {}
-
-smsg SMSG_ATTACKSWING_CANT_ATTACK = 0x0149 {}
-
-smsg SMSG_CANCEL_COMBAT = 0x014E {}
-
-smsg SMSG_PLAYERBOUND = 0x0158 {
-    u64 guid;
-    Area area;
-}
-
-cmsg CMSG_REPOP_REQUEST = 0x015A {}
-
-cmsg CMSG_RESURRECT_RESPONSE = 0x015C {
-    u64 guid;
-    u8 status;
-}
-
-
-smsg SMSG_RESURRECT_REQUEST = 0x015B {
-    u64 guid;
-    u32 name_length;
-    /* CString with length? */
-    CString name;
-    u8 caster_is_spirit_healer;
-    u8 respect_resurrection_timer;
-}
-
-cmsg CMSG_LOOT = 0x015D {
-    u64 guid;
-}
-
-cmsg CMSG_LOOT_MONEY = 0x015E {}
-
-cmsg CMSG_LOOT_RELEASE = 0x015F {
-    u64 guid;
-}
 
 enum LootMethod : u8 {
     CORPSE                 = 1;
@@ -3111,52 +2134,11 @@ enum LootMethod : u8 {
     }
 }
 
-smsg SMSG_LOOT_RESPONSE = 0x0160 {
-    u64 guid;
-    LootMethod loot_method;
-}
-
-smsg SMSG_LOOT_RELEASE_RESPONSE = 0x0161 {
-    u64 guid;
-    u8 unknown1 {
-        comment = "Set to 1 on mangoszero/vmangos/cmangos";
-    }
-}
-
-
-smsg SMSG_LOOT_MONEY_NOTIFY = 0x0163 {
-    u32 amount;
-}
-
-smsg SMSG_LOOT_CLEAR_MONEY = 0x0165 {}
-
-smsg SMSG_DUEL_REQUESTED = 0x0167 {
-    u64 initiator_guid;
-    u64 target_guid;
-}
-
-smsg SMSG_DUEL_OUTOFBOUNDS = 0x0168 {}
-
-smsg SMSG_DUEL_INBOUNDS = 0x0169 {}
 
 
 enum DuelWinnerReason : u8 {
     WON = 0;
     FLED = 1;
-}
-
-smsg SMSG_DUEL_WINNER = 0x016B {
-    DuelWinnerReason reason;
-    CString opponent_name;
-    CString initiator_name;
-}
-
-cmsg CMSG_DUEL_ACCEPTED = 0x016C {
-    u64 guid;
-}
-
-cmsg CMSG_DUEL_CANCELLED = 0x016D {
-    u64 guid;
 }
 
 enum MountResult : u32 {
@@ -3195,21 +2177,7 @@ enum MountResult : u32 {
     }
 }
 
-smsg SMSG_MOUNTRESULT = 0x016E {
-    MountResult result;
-}
 
-smsg SMSG_DISMOUNTRESULT = 0x016F {
-    MountResult result;
-}
-
-
-
-cmsg CMSG_MOUNTSPECIAL_ANIM = 0x0171 {}
-
-smsg SMSG_MOUNTSPECIAL_ANIM = 0x0172 {
-    u64 guid;
-}
 
 enum PetTameFailureReason : u8 {
     INVALIDCREATURE = 1;
@@ -3232,28 +2200,6 @@ enum PetTameFailureReason : u8 {
     UNKNOWNERROR = 12;
 }
 
-smsg SMSG_PET_TAME_FAILURE = 0x0173 {
-    PetTameFailureReason reason;
-}
-
-
-cmsg CMSG_PET_ACTION = 0x0175 {
-    u64 pet_guid;
-    /* data? */
-    u32 data;
-    u64 target_guid;
-}
-
-cmsg CMSG_PET_ABANDON = 0x0176 {
-    u64 pet_guid;
-}
-
-cmsg CMSG_PET_RENAME = 0x0177 {
-    u64 pet_guid;
-    CString name;
-}
-
-smsg SMSG_PET_NAME_INVALID = 0x0178 {}
 
 
 enum PetReactState : u8 {
@@ -3269,59 +2215,6 @@ enum PetCommandState : u8 {
     DISMISS = 3;
 }
 
-smsg SMSG_PET_MODE = 0x017A {
-    u64 guid;
-    PetReactState react_state;
-    PetCommandState command_state;
-    u8 unknown1 {
-        comment = "vmangos sets to 0.";
-    }
-    /* TODO u8 bool */
-    u8 pet_enabled {
-        comment = "vmangos sets 0 for not enabled and 0x8 for enabled.";
-    }
-}
-
-cmsg CMSG_GOSSIP_HELLO = 0x017B {
-    u64 guid;
-}
-
-smsg SMSG_GOSSIP_COMPLETE = 0x017E {}
-
-cmsg CMSG_LIST_INVENTORY = 0x019E {
-    u64 guid;
-}
-
-cmsg CMSG_SELL_ITEM = 0x01A0 {
-    u64 vendor_guid;
-    u64 item_guid;
-    u8 amount;
-}
-
-
-cmsg CMSG_BUY_ITEM = 0x01A2 {
-    u64 vendor_guid;
-    u32 item_id;
-    u8 amount;
-    u8 unknown1 {
-        comment = "cmangos says this is hardcoded to 1 in the TBC client.";
-    }
-}
-
-cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
-    u64 vendor_guid;
-    u32 item_id;
-    u64 bag_guid;
-    u8 bag_slot;
-    u8 amount;
-}
-
-smsg SMSG_BUY_ITEM = 0x01A4 {
-    u64 guid;
-    u32 vendor_slot;
-    u32 amount_for_sale;
-    u32 amount_bought;
-}
 
 
 enum BuyResult : u8 {
@@ -3336,17 +2229,6 @@ enum BuyResult : u8 {
     REPUTATION_REQUIRE = 12;
 }
 
-smsg SMSG_BUY_FAILED = 0x01A5 {
-    u64 guid;
-    u32 item_id;
-    BuyResult result;
-}
-
-
-cmsg CMSG_ACTIVATETAXI = 0x01AD {
-    u64 guid;
-    u32[2] nodes;
-}
 
 enum ActivateTaxiReply : u32 {
     OK = 0;
@@ -3364,26 +2246,6 @@ enum ActivateTaxiReply : u32 {
     NOTSTANDING = 12;
 }
 
-smsg SMSG_ACTIVATETAXIREPLY = 0x01AE {
-    ActivateTaxiReply reply;
-}
-
-smsg SMSG_NEW_TAXI_PATH = 0x01AF {}
-
-cmsg CMSG_TRAINER_LIST = 0x01B0 {
-    u64 guid;
-}
-
-
-cmsg CMSG_TRAINER_BUY_SPELL = 0x01B2 {
-    u64 guid;
-    u32 spell_id;
-}
-
-smsg SMSG_TRAINER_BUY_SUCCEEDED = 0x01B3 {
-    u64 guid;
-    u32 spell_id;
-}
 
 enum TrainingFailureReason : u32
 {
@@ -3400,28 +2262,6 @@ enum TrainingFailureReason : u32
     comment = "These errors are only printed in client console.";
 }
 
-smsg SMSG_TRAINER_BUY_FAILED = 0x01B4 {
-    u64 guid;
-    u32 spell_id;
-    TrainingFailureReason error;
-}
-
-cmsg CMSG_BINDER_ACTIVATE = 0x01B5 {
-    u64 guid;
-}
-
-cmsg CMSG_BANKER_ACTIVATE = 0x01B7 {
-    u64 guid;
-}
-
-smsg SMSG_SHOW_BANK = 0x01B8 {
-    u64 guid;
-}
-
-cmsg CMSG_BUY_BANK_SLOT = 0x01B9 {
-    u64 guid;
-}
-
 enum BuyBankSlotResult : u32 {
     FAILED_TOO_MANY = 0;
     INSUFFICIENT_FUNDS = 1;
@@ -3429,30 +2269,6 @@ enum BuyBankSlotResult : u32 {
     OK = 3;
 }
 
-smsg SMSG_BUY_BANK_SLOT_RESULT = 0x01BA {
-    BuyBankSlotResult result;
-}
-
-cmsg CMSG_PETITION_SHOWLIST = 0x01BB {
-    u64 guid;
-}
-
-
-cmsg CMSG_PETITION_SHOW_SIGNATURES = 0x01BE {
-    u64 item_guid;
-}
-
-smsg SMSG_PETITION_SHOW_SIGNATURES = 0x01BF {
-    u64 item_guid;
-    u64 owner_guid;
-    u64 petition_guid;
-    u8 amount_of_signatures;
-}
-
-cmsg CMSG_PETITION_SIGN = 0x01C0 {
-    u64 petition_guid;
-    u8 unknown1;
-}
 
 enum PetitionResult : u32 {
     OK = 0;
@@ -3461,21 +2277,6 @@ enum PetitionResult : u32 {
     CANT_SIGN_OWN = 3;
     NEED_MORE = 4;
     NOT_SERVER = 5;
-}
-
-smsg SMSG_PETITION_SIGN_RESULTS = 0x01C1 {
-    u64 petition_guid;
-    u64 owner_guid;
-    PetitionResult result;
-}
-
-cmsg CMSG_OFFER_PETITION = 0x01C3 {
-    u64 petition_guid;
-    u64 target_guid;
-}
-
-cmsg CMSG_TURN_IN_PETITION = 0x01C4 {
-    u64 petition_guid;
 }
 
 enum PetitionTurnInResult : u32 {
@@ -3487,55 +2288,12 @@ enum PetitionTurnInResult : u32 {
     NOT_SERVER = 5;
 }
 
-smsg SMSG_TURN_IN_PETITION_RESULTS = 0x01C5 {
-    PetitionTurnInResult result;
-}
-
-smsg SMSG_FISH_NOT_HOOKED = 0x01C8 {}
-
-smsg SMSG_FISH_ESCAPED = 0x01C9 {}
-
-
-smsg SMSG_NOTIFICATION = 0x01CB {
-    CString notification;
-}
-
-cmsg CMSG_PLAYED_TIME = 0x01CC {}
-
-smsg SMSG_PLAYED_TIME = 0x01CD {
-    /* TODO: What unit is this? */
-    u32 total_played_time;
-    u32 level_played_time;
-}
 
 enum ExperienceAwardType : u8 {
     KILL = 0;
     NON_KILL = 1;
 }
 
-smsg SMSG_LOG_XPGAIN = 0x01D0 {
-    u64 target_guid;
-    u32 total_exp;
-    ExperienceAwardType exp_type; 
-    if (exp_type == NON_KILL) {
-        u32 experience_without_rested;
-        f32 exp_group_bonus {
-            comment = "mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output";
-        }
-    }
-}
-
-
-cmsg CMSG_RECLAIM_CORPSE = 0x01D2 {
-    u64 guid;
-}
-
-cmsg CMSG_WRAP_ITEM = 0x01D3 {
-    u8 gift_bag_index;
-    u8 gift_slot;
-    u8 item_bag_index;
-    u8 item_slot;
-}
 
 
 enum TimerType : u32 {
@@ -3547,29 +2305,6 @@ enum TimerType : u32 {
     }
 }
 
-smsg SMSG_START_MIRROR_TIMER = 0x01D9 {
-    TimerType timer;
-    u32 time_remaining;
-    u32 duration;
-    u32 scale;
-    /* TODO: bool */
-    u8 is_frozen;
-    u32 spell_id;
-}
-
-smsg SMSG_STOP_MIRROR_TIMER = 0x01DB {
-    TimerType timer;
-}
-
-smsg SMSG_CLEAR_COOLDOWN = 0x01DE {
-    u32 spell_id;
-    u64 target_guid;
-}
-
-smsg SMSG_GAMEOBJECT_PAGETEXT = 0x01DF {
-    u64 guid;
-}
-
 enum SheathState : u8 {
     UNARMED = 0;
     MELEE = 1;
@@ -3578,64 +2313,7 @@ enum SheathState : u8 {
     comment = "According to cmangos: byte value (UNIT_FIELD_BYTES_2,0)";
 }
 
-cmsg CMSG_SETSHEATHED = 0x01E0 {
-    (u32)SheathState sheathed;
-}
 
-smsg SMSG_SPELL_DELAYED = 0x01E2 {
-    u64 guid;
-    u32 delay_time;
-}
-
-smsg SMSG_ITEM_TIME_UPDATE = 0x01EA {
-    u64 guid;
-    u32 duration;
-}
-
-smsg SMSG_ITEM_ENCHANT_TIME_UPDATE = 0x01EB {
-    u64 item_guid;
-    u32 slot {
-        comment = "Possibly used with EnchantmentSlot enum.";
-    }
-    u32 duration;
-    u64 player_guid;
-}
-
-cmsg CMSG_PET_CAST_SPELL = 0x01F0 {
-    u64 guid;
-    u32 spell_id;
-}
-
-
-smsg SMSG_PLAY_SPELL_VISUAL = 0x01F3 {
-    u64 guid;
-    u32 spell_art_kit {
-        comment = "mangoszero: index from SpellVisualKit.dbc. Used with 0xB3 when buying spells.";
-    }
-}
-
-cmsg CMSG_ZONEUPDATE = 0x01F4 {
-    /* TODO: Zone or Area? */
-    u32 zone_id;
-}
-
-smsg SMSG_PARTYKILLLOG = 0x01F5 {
-    u64 player_with_killing_blow;
-    u64 victim;
-}
-
-
-smsg SMSG_PLAY_SPELL_IMPACT = 0x01F7 {
-    u64 guid;
-    u32 spell_visual_kit {
-        comment = "mangoszero: index from SpellVisualKit.dbc. Used for visual effect on player with 0x016A";
-    }
-}
-
-smsg SMSG_EXPLORATION_EXPERIENCE = 0x01F8 {
-    Area area;
-    u32 experience;
-}
 
 enum EnvironmentalDamageType : u32 {
     EXHAUSTED = 0;
@@ -3646,24 +2324,6 @@ enum EnvironmentalDamageType : u32 {
     FIRE = 5;
 }
 
-smsg SMSG_ENVIRONMENTALDAMAGELOG = 0x01FC {
-    u64 guid;
-    EnvironmentalDamageType damage_type;
-    u32 damage;
-    u32 absorb;
-    u32 resist;
-}
-
-
-cmsg CMSG_UNLEARN_SKILL = 0x0202 {
-    /* TODO: Same as spell_id? */
-    u32 skill_id;
-}
-
-smsg SMSG_REMOVED_SPELL = 0x0203 {
-    /* TODO: cmangos + vmangos cast this to u16, but reserve 4 bytes */
-    u16 spell_id;
-}
 
 
 enum GmTicketResponse : u32 {
@@ -3676,100 +2336,7 @@ enum GmTicketResponse : u32 {
     TICKET_DELETED = 9;
 }
 
-smsg SMSG_GMTICKET_CREATE = 0x0206 {
-    GmTicketResponse response;
-}
 
-cmsg CMSG_GMTICKET_UPDATETEXT = 0x0207 {
-    CString message;
-}
-
-smsg SMSG_GMTICKET_UPDATETEXT = 0x0208 {
-    GmTicketResponse response;
-}
-
-smsg SMSG_ACCOUNT_DATA_TIMES = 0x0209 {
-    u32[32] data {
-        comment = "cmangos/vmangos/mangoszero sets to all zeros";
-    }
-}
-
-
-cmsg CMSG_GMTICKET_GETTICKET = 0x0211 {}
-
-smsg SMSG_GAMEOBJECT_SPAWN_ANIM = 0x0214 {
-    u64 guid;
-}
-
-smsg SMSG_GAMEOBJECT_DESPAWN_ANIM = 0x0215 {
-    u64 guid;
-}
-
-
-cmsg CMSG_GMTICKET_DELETETICKET = 0x0217 {}
-
-smsg SMSG_GMTICKET_DELETETICKET = 0x0218 {
-    GmTicketResponse response;
-}
-
-smsg SMSG_CHAT_WRONG_FACTION = 0x0219 {}
-
-cmsg CMSG_GMTICKET_SYSTEMSTATUS = 0x021A {}
-
-smsg SMSG_GMTICKET_SYSTEMSTATUS = 0x021B {
-    u32 will_accept_tickets {
-        comment = "mangoszero/cmangos/vmangos all only send 1 for true and 0 for false. vmangos: Note: This only disables the ticket UI at client side and is not fully reliable are we sure this is a uint32? Should ask Zor";
-    }
-}
-
-cmsg CMSG_SPIRIT_HEALER_ACTIVATE = 0x021C {
-    u64 guid;
-}
-
-smsg SMSG_SET_REST_START = 0x021E {
-    u32 unknown1 {
-        comment = "cmangos/mangoszero: unknown, may be rest state time or experience";
-    }
-}
-
-smsg SMSG_SPIRIT_HEALER_CONFIRM = 0x0222 {
-    u64 guid;
-}
-
-smsg SMSG_GOSSIP_POI = 0x0224 {
-    u32 flags;
-    f32 position_x;
-    f32 position_y;
-    u32 icon;
-    u32 data;
-    CString location_name;
-}
-
-cmsg CMSG_CHAT_IGNORED = 0x0225 {
-    u64 guid;
-}
-
-cmsg CMSG_GUILD_RANK = 0x0231 {
-    u32 rank_id;
-    u32 rights;
-    CString rank_name;
-}
-
-cmsg CMSG_GUILD_ADD_RANK = 0x0232 {
-    CString rank_name;
-}
-
-cmsg CMSG_GUILD_DEL_RANK = 0x0233 {}
-
-cmsg CMSG_GUILD_SET_PUBLIC_NOTE = 0x0234 {
-    CString player_name;
-    CString note;
-}
-
-cmsg CMSG_GUILD_SET_OFFICER_NOTE = 0x0235 {
-    CString player_name;
-    CString note;
-}
 
 
 enum MailAction : u32 {
@@ -3800,14 +2367,6 @@ enum MailResult : u32 {
 }
 
 
-cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
-    Map map;
-}
-
-cmsg CMSG_BATTLEFIELD_JOIN = 0x023E {
-    Map map;
-}
-
 
 
 
@@ -3833,70 +2392,13 @@ struct SpellMiss {
     SpellMissInfo miss_info;
 }
 
-smsg SMSG_SPELLLOGMISS = 0x024B {
-    u32 spell_id;
-    u64 caster_guid;
-    u8 unknown1 {
-        comment = "cmangos/mangoszero: can be 0 or 1";
-    }
-    u32 amount_of_targets;
-    SpellMiss[amount_of_targets] targets;
-}
-
-cmsg CMSG_LEARN_TALENT = 0x0251 {
-    /* TODO: TalentId enum? */
-    u32 talent_id;
-    u32 requested_rank;
-}
-
-smsg SMSG_ZONE_UNDER_ATTACK = 0x0254 {
-    /* Zone or area? */
-    u32 zone_id;
-}
-
 enum LogFormat : u8 {
     DEFAULT = 0;
     DEBUG = 1;
 }
 
-smsg SMSG_PROCRESIST = 0x0260 {
-    u64 guid;
-    u64 target_guid;
-    u32 spell_id;
-    LogFormat log_format;
-}
 
 
-smsg SMSG_SPELLORDAMAGE_IMMUNE = 0x0263 {
-    u64 caster_guid;
-    u64 target_guid;
-    u32 spell_id;
-    u8 unknown1 {
-        comment = "vmangos/cmangos sets to 0";
-    }
-}
-
-
-cmsg CMSG_PET_CANCEL_AURA = 0x026B {
-    u64 guid;
-    u32 spell_id;
-}
-
-cmsg CMSG_CANCEL_AUTO_REPEAT_SPELL = 0x026D {}
-
-
-cmsg CMSG_STABLE_PET = 0x0270 {
-    u64 npc_guid;
-}
-
-cmsg CMSG_UNSTABLE_PET = 0x0271 {
-    u64 npc_guid;
-    u32 pet_number;
-}
-
-cmsg CMSG_BUY_STABLE_SLOT = 0x0272 {
-    u64 npc_guid;
-}
 
 enum StableResult : u8 {
     ERR_MONEY = 0x01 {
@@ -3916,59 +2418,17 @@ enum StableResult : u8 {
     }
 }
 
-smsg SMSG_STABLE_RESULT = 0x0273 {
-    StableResult result;
-}
 
 
-
-
-cmsg CMSG_REQUEST_PET_INFO = 0x0279 {}
 
 enum FarSightOperation : u8 {
     REMOVE = 0;
     ADD = 1;
 }
 
-cmsg CMSG_FAR_SIGHT = 0x027A {
-    FarSightOperation operation;
-}
-
-cmsg CMSG_GROUP_CHANGE_SUB_GROUP = 0x027E {
-    CString name;
-    u8 group_number;
-}
-
-cmsg CMSG_REQUEST_PARTY_MEMBER_STATS = 0x027F {
-    u64 guid;
-}
-
-cmsg CMSG_GROUP_SWAP_SUB_GROUP = 0x0280 {
-    CString name;
-    CString swap_with_name;
-}
-
-cmsg CMSG_AUTOSTORE_BANK_ITEM = 0x0282 {
-    u8 bag_index;
-    u8 slot_index;
-}
-
-cmsg CMSG_AUTOBANK_ITEM = 0x0283 {
-    u8 bag_index;
-    u8 slot_index;
-}
-
 enum RaidGroupError : u32 {
     REQUIRED = 1;
     FULL = 2;
-}
-
-cmsg CMSG_GROUP_RAID_CONVERT = 0x028E {}
-
-cmsg CMSG_GROUP_ASSISTANT_LEADER = 0x028F {
-    u64 guid;
-    /* mangos treats as bool */
-    u8 set_assistant;
 }
 
 enum BuybackSlot : u32 {
@@ -3987,11 +2447,6 @@ enum BuybackSlot : u32 {
     SLOT13 = 81;
 }
 
-cmsg CMSG_BUYBACK_ITEM = 0x0290 {
-    u64 guid;
-    BuybackSlot slot;
-}
-
 enum ServerMessageType : u32 {
     SHUTDOWN_TIME = 1;
     RESTART_TIME = 2;
@@ -3999,17 +2454,6 @@ enum ServerMessageType : u32 {
     SHUTDOWN_CANCELLED = 4;
     RESTART_CANCELLED = 5;
 }
-
-smsg SMSG_SERVER_MESSAGE = 0x0291 {
-    ServerMessageType message_type;
-    CString message;
-}
-
-cmsg CMSG_MEETINGSTONE_JOIN = 0x0292 {
-    u64 guid;
-}
-
-cmsg CMSG_MEETINGSTONE_LEAVE = 0x0293 {}
 
 enum MeetingStoneStatus : u8 {
     LEAVE_QUEUE = 0;
@@ -4020,171 +2464,16 @@ enum MeetingStoneStatus : u8 {
     NONE = 5;
 }
 
-smsg SMSG_MEETINGSTONE_SETQUEUE = 0x0295 {
-    Area area;
-    MeetingStoneStatus status;
-}
-
-cmsg CMSG_MEETINGSTONE_INFO = 0x0296 {}
-
-smsg SMSG_MEETINGSTONE_COMPLETE = 0x0297 {}
-
-smsg SMSG_MEETINGSTONE_IN_PROGRESS = 0x0298 {}
-
-smsg SMSG_MEETINGSTONE_MEMBER_ADDED = 0x0299 {
-    u64 guid;
-}
-
-cmsg CMSG_CANCEL_GROWTH_AURA = 0x029B {}
-
-smsg SMSG_CANCEL_AUTO_REPEAT = 0x029C {}
-
-smsg SMSG_STANDSTATE_UPDATE = 0x029D {
-    UnitStandState state;
-}
-
-smsg SMSG_LOOT_ALL_PASSED = 0x029E {
-    u64 looted_target_guid;
-    u32 loot_slot;
-    /* TODO Item id enum? */
-    u32 item_id;
-    u32 item_random_property_id;
-    u32 item_random_suffix_id {
-        comment = "vmangos/mangoszero: not used ?";
-    }
-}
-
 enum RollVote : u8 {
     PASS = 0;
     NEED = 1;
     GREED = 2;
 }
 
-smsg SMSG_LOOT_ROLL_WON = 0x029F {
-    u64 looted_target_guid;
-    u32 loot_slot;
-    /* TODO item_id enum */
-    u32 item_id;
-    u32 item_random_suffix {
-        comment = "vmangos/mangoszero: not used ?";
-    }
-    u32 item_random_property_id;
-    u64 winning_player_guid;
-    u8 winning_roll {
-        comment = "rollnumber related to SMSG_LOOT_ROLL";
-    }
-    RollVote vote {
-        comment = "Rolltype related to SMSG_LOOT_ROLL";
-    }
-}
-
-cmsg CMSG_LOOT_ROLL = 0x02A0 {
-    u64 item_guid;
-    u32 item_slot;
-    RollVote vote;
-}
-
-smsg SMSG_LOOT_START_ROLL = 0x02A1 {
-    u64 creature_guid;
-    u32 loot_slot;
-    u32 item_id;
-    u32 item_random_suffix {
-        comment = "vmangos/mangoszero: not used ?";
-    }
-    u32 item_random_property_id;
-    /* TODO Time units */
-    u32 countdown_time;
-}
-
-smsg SMSG_LOOT_ROLL = 0x02A2 {
-    u64 creature_guid;
-    u32 loot_slot;
-    u64 item_guid;
-    u32 item_id;
-    u32 item_random_suffix {
-        comment = "vmangos/mangoszero: not used ?";
-    }
-    u32 item_random_property_id;
-    /* TODO exact meaning? */
-    u8 roll_number {
-        comment = "vmangos/cmangos/mangoszero: 0: Need for: [item name] > 127: you passed on: [item name]      Roll number";
-    }
-    RollVote vote;
-}
-
-cmsg CMSG_LOOT_MASTER_GIVE = 0x02A3 {
-    u64 loot_guid;
-    u8 slot_id;
-    u64 target_player_guid;
-}
-
-smsg SMSG_SPELL_FAILED_OTHER = 0x02A6 {
-    u64 caster_guid;
-    /* TODO not spell id but spell info id? */
-    u32 spell_id;
-}
-
-smsg SMSG_GAMEOBJECT_RESET_STATE = 0x02A7 {
-    u64 guid;
-}
-
-cmsg CMSG_REPAIR_ITEM = 0x02A8 {
-    u64 npc_guid;
-    u64 item_guid;
-}
-
-smsg SMSG_CHAT_PLAYER_NOT_FOUND = 0x02A9 {
-    CString name;
-}
-
-smsg SMSG_SUMMON_REQUEST = 0x02AB {
-    u64 summoner_guid;
-    /* TODO zone or area? */
-    u32 zone_id;
-    u32 auto_decline_time_in_msecs;
-}
-
-cmsg CMSG_SUMMON_RESPONSE = 0x02AC {
-    u64 summoner_guid;
-}
-
-smsg SMSG_PET_BROKEN = 0x02AF {}
-
-cmsg CMSG_SELF_RES = 0x02B3 {}
-
-smsg SMSG_FEIGN_DEATH_RESISTED = 0x02B4 {}
-
-smsg SMSG_DUEL_COUNTDOWN = 0x02B7 {
-    u32 time_in_seconds;
-}
-
-smsg SMSG_AREA_TRIGGER_MESSAGE = 0x02B8 {
-    /* TODO CString with length? */
-    u32 length;
-    CString message;
-}
-
-cmsg CMSG_TOGGLE_HELM = 0x02B9 {}
-
-cmsg CMSG_TOGGLE_CLOAK = 0x02BA {}
-
 enum MeetingStoneFailure : u8 {
     MEETINGSTONE_FAIL_PARTYLEADER = 1;
     MEETINGSTONE_FAIL_FULL_GROUP = 2;
     MEETINGSTONE_FAIL_RAID_GROUP = 3;
-}
-
-smsg SMSG_MEETINGSTONE_JOINFAILED = 0x02BB {
-    MeetingStoneFailure reason;
-}
-
-smsg SMSG_PLAYER_SKINNED = 0x02BC {}
-
-smsg SMSG_DURABILITY_DAMAGE_DEATH = 0x02BD {}
-
-cmsg CMSG_SET_ACTIONBAR_TOGGLES = 0x02BF {
-    /* TODO enum for this */
-    u8 action_bar;
 }
 
 enum PetFeedback : u8 {
@@ -4194,86 +2483,9 @@ enum PetFeedback : u8 {
     NO_PATH_TO = 4;
 }
 
-smsg SMSG_PET_ACTION_FEEDBACK = 0x02C6 {
-    PetFeedback feedback;
-}
-
-smsg SMSG_INSTANCE_SAVE_CREATED = 0x02CB {
-    u32 unknown {
-        comment = "cmangos/vmangos/mangoszero set to 0";
-    }
-}
-
-cmsg CMSG_REQUEST_RAID_INFO = 0x02CD {}
-
-smsg SMSG_PLAY_SOUND = 0x02D2 {
-    /* TODO Enum? */
-    u32 sound_id;
-}
-
-cmsg CMSG_BATTLEFIELD_STATUS = 0x02D3 {}
-
 enum BattlefieldPortAction : u8 {
     LEAVE_QUEUE = 0;
     ENTER_BATTLE = 1;
-}
-
-cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {
-    Map map;
-    BattlefieldPortAction action;
-}
-
-cmsg CMSG_BATTLEMASTER_HELLO = 0x02D7 {
-    u64 guid;
-}
-
-cmsg CMSG_LEAVE_BATTLEFIELD = 0x02E1 {
-    u8 unknown1;
-    u8 battle_ground_type_id {
-        comment = "cmangos/vmangos/mangoszero: BattleGroundTypeId-1 ? - Classic Only";
-    }
-    u16 unknown2;
-}
-
-cmsg CMSG_AREA_SPIRIT_HEALER_QUEUE = 0x02E3 {
-    u64 guid;
-}
-
-smsg SMSG_AREA_SPIRIT_HEALER_TIME = 0x02E4 {
-    u64 guid;
-    u32 next_resurrect_time;
-}
-
-cmsg CMSG_PET_STOP_ATTACK = 0x02EA {
-    u64 pet_guid;
-}
-
-smsg SMSG_BINDER_CONFIRM = 0x02EB {
-    u64 guid;
-}
-
-smsg SMSG_BATTLEGROUND_PLAYER_JOINED = 0x02EC {
-    u64 player_guid;
-}
-
-smsg SMSG_BATTLEGROUND_PLAYER_LEFT = 0x02ED {
-    u64 guid;
-}
-
-cmsg CMSG_PET_UNLEARN = 0x02F0 {
-    u64 pet_guid;
-}
-
-smsg SMSG_PET_UNLEARN_CONFIRM = 0x02F1 {
-    u64 pet_guid;
-    u32 talent_reset_cost;
-}
-
-cmsg CMSG_PET_SPELL_AUTOCAST = 0x02F3 {
-    u64 guid;
-    u32 spell_id;
-    /* TODO bool */
-    u8 enabled;
 }
 
 enum WeatherType : u32 {
@@ -4286,14 +2498,6 @@ enum WeatherType : u32 {
 enum WeatherChangeType : u8 {
     SMOOTH = 0;
     INSTANT = 1;
-}
-
-smsg SMSG_WEATHER = 0x02F4 {
-    WeatherType weather_type;
-    f32 grade;
-    /* TODO weather sound id enum? */
-    u32 sound_id;
-    WeatherChangeType change;
 }
 
 enum RaidInstanceMessage : u32 {
@@ -4311,47 +2515,6 @@ enum RaidInstanceMessage : u32 {
     }
 }
 
-smsg SMSG_RAID_INSTANCE_MESSAGE = 0x02FA {
-    RaidInstanceMessage message_type;
-    Map map;
-    /* TODO unit? */
-    u32 time_left;
-}
-
-cmsg CMSG_GUILD_INFO_TEXT = 0x02FC {
-    CString guild_info;
-}
-
-smsg SMSG_CHAT_RESTRICTED = 0x02FD {}
-
-cmsg CMSG_ACTIVATETAXIEXPRESS = 0x0312 {
-    u64 guid;
-    u32 total_cost;
-    u32 node_count;
-}
-
-cmsg CMSG_SET_FACTION_INACTIVE = 0x0317 {
-    /* TODO rep id */
-    u32 reputation_list_id;
-    /* active or inactive? */
-    u8 inactive;
-}
-
-cmsg CMSG_SET_WATCHED_FACTION = 0x0318 {
-    /* TODO rep id */
-    u32 reputation_id;
-}
-
-smsg SMSG_INVALIDATE_PLAYER = 0x031C {
-    u64 guid;
-}
-
-cmsg CMSG_RESET_INSTANCES = 0x031D {}
-
-smsg SMSG_INSTANCE_RESET = 0x031E {
-    Map map;
-}
-
 enum InstanceResetFailedReason : u8 {
     GENERAL = 0 {
         comment = "at least one player is in the instance";
@@ -4365,41 +2528,16 @@ enum InstanceResetFailedReason : u8 {
     SILENTLY = 3;
 }
 
-smsg SMSG_INSTANCE_RESET_FAILED = 0x031F {
-    InstanceResetFailedReason reason;
-    Map map;
-}
-
-smsg SMSG_UPDATE_LAST_INSTANCE = 0x0320 {
-    Map map;
-}
-
 
 enum PetTalkReason : u32 {
     SPECIAL_SPELL = 0;
     ATTACK = 1;
 }
 
-smsg SMSG_PET_ACTION_SOUND = 0x0324 {
-    Guid guid;
-    PetTalkReason reason;
-}
-
-smsg SMSG_PET_DISMISS_SOUND = 0x0325 {
-    u32 sound_id;
-    f32 position_x;
-    f32 position_y;
-    f32 position_z;
-}
-
 enum GmTicketStatusResponse : u32 {
     UPDATED = 1;
     CLOSED = 2;
     SURVEY = 3;
-}
-
-smsg SMSG_GM_TICKET_STATUS_UPDATE = 0x0328 {
-    GmTicketStatusResponse response;
 }
 
 struct GmSurveyQuestion {
@@ -4411,65 +2549,7 @@ struct GmSurveyQuestion {
     }
 }
 
-cmsg CMSG_GMSURVEY_SUBMIT = 0x032A {
-    /* Enum for survey id */
-    u32 survey_id {
-        comment = "cmangos: Survey ID: found in GMSurveySurveys.dbc";
-    }
-    GmSurveyQuestion[10] questions;
-    CString answer_comment {
-        comment = "cmangos: Answer comment: Unused in stock UI, can be only set by calling Lua function"; 
-        comment = "cmangos: Answer comment max sizes in bytes: Vanilla - 8106:8110, TBC - 11459:11463, Wrath - 582:586";
-    }
-}
 
-smsg SMSG_UPDATE_INSTANCE_OWNERSHIP = 0x032B {
-    u32 has_been_saved {
-        comment = "cmangos/vmangos/mangoszero: true or false means, whether you have current raid instances";
-    }
-}
-
-smsg SMSG_SPELLINSTAKILLLOG = 0x032F {
-    Guid target_guid;
-    Spell spell;
-}
-
-smsg SMSG_SPELL_UPDATE_CHAIN_TARGETS = 0x0330 {
-    Guid caster;
-    Spell spell;
-    u32 amount_of_targets;
-    Guid[amount_of_targets] targets;
-}
-
-smsg SMSG_EXPECTED_SPAM_RECORDS = 0x0332 {
-    u32 amount_of_records;
-    CString[amount_of_records] records;
-}
-
-smsg SMSG_DEFENSE_MESSAGE = 0x033B {
-    Map map;
-    /* TODO CString with length? */
-    u32 message_length;
-    CString message;
-}
-
-
-cmsg CMSG_WHO = 0x62 {
-    u32 minimum_level;
-    u32 maximum_level;
-    CString player_name;
-    CString guild_name;
-    u32 race_mask;
-    u32 class_mask;
-    u32 amount_of_zones {
-        maximum_value = "10";
-    }
-    u32[amount_of_zones] zones;
-    u32 amount_of_strings {
-        maximum_value = "4";
-    }
-    CString[amount_of_strings] search_strings;
-}
 
 
 enum PvpRank : u8 {
@@ -4496,29 +2576,6 @@ enum PvpRank : u8 {
 }
 
 
-smsg SMSG_PVP_CREDIT = 0x028C {
-    u32 honor_points;
-    Guid victim;
-    (u32)PvpRank rank;
-}
-
-cmsg CMSG_SET_AMMO = 0x0268 {
-    u32 item;
-}
-
-smsg SMSG_CORPSE_RECLAIM_DELAY = 0x0269 {
-    u32 delay_in_seconds;
-}
-
-cmsg CMSG_STABLE_SWAP_PET = 0x0275 {
-    Guid npc;
-    u32 pet_slot;
-}
-
-smsg SMSG_PLAY_MUSIC = 0x0277 {
-    u32 sound_id;
-}
-
 
 enum BgTypeId : u32 {
     NOT_ELIGIBLE = 0 {
@@ -4538,10 +2595,6 @@ enum BgTypeId : u32 {
     }
 }
 
-smsg SMSG_GROUP_JOINED_BATTLEGROUND = 0x02E8 {
-    BgTypeId id;
-}
-
 
 /* TODO: RIGHT ? */
 enum SpellSchool : u8 {
@@ -4554,14 +2607,6 @@ enum SpellSchool : u8 {
     FROST = 4;
     SHADOW = 5;
     ARCANE = 6;
-}
-
-smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
-    Guid victim_guid;
-    Guid caster_guid;
-    u32 damage;
-    /* TODO: RIGHT ? */
-    (u32)SpellSchool school;
 }
 
 struct PetitionShowlist {
@@ -4584,18 +2629,6 @@ struct PetitionShowlist {
     }
 }
 
-smsg SMSG_PETITION_SHOWLIST = 0x01BC {
-    Guid npc;
-    u8 amount_of_petitions;
-    PetitionShowlist[amount_of_petitions] petitions;
-}
-
-cmsg CMSG_SET_FACTION_ATWAR = 0x0125 {
-    /* TODO: Reputation list id and u8 flag */
-    u32 reputation_list_id;
-    u8 flags;
-}
-
 struct TradeSlot {
     u8 trade_slot_number {
         comment = "cmangos/vmangos/mangoszero: sets to index of array";
@@ -4613,27 +2646,6 @@ struct TradeSlot {
     u32 lock_id;
     u32 max_durability;
     u32 durability;
-}
-
-smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
-    Bool self_player {
-        comment = "cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)";
-    }
-    u32 trade_slot_count1 {
-        /* TODO: Maybe an enum for maximum values? */
-        comment = "cmangos/vmangos/mangoszero: sets to 7";
-        comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases";
-    }
-    u32 trade_slot_count2 {
-        /* TODO: Maybe an enum for maximum values? */
-        comment = "cmangos/vmangos/mangoszero: sets to 7";
-        comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases";
-    }
-    u32 money_in_trade;
-    Spell spell_on_lowest_slot;
-    TradeSlot[7] trade_slots {
-        comment = "vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.";
-    }
 }
 
 
@@ -4657,16 +2669,6 @@ struct CooldownSpell {
     u32 category_cooldown_in_msecs;
 }
 
-smsg SMSG_INITIAL_SPELLS = 0x012A {
-    u8 unknown1 {
-        comment = "cmangos/mangoszero: sets to 0";
-    }
-    u16 spell_count;
-    InitialSpell[spell_count] initial_spells;
-    u16 cooldown_count;
-    CooldownSpell[cooldown_count] cooldowns;
-}
-
 
 flag CastFlags : u16 {
     NONE = 0x00000000;
@@ -4687,43 +2689,6 @@ flag CastFlags : u16 {
     UNKNOWN9 = 0x00000100;
 }
 
-smsg SMSG_SPELL_START = 0x0131 {
-    PackedGuid cast_item {
-        comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
-    }
-    PackedGuid caster;
-    Spell spell;
-    CastFlags flags;
-    u32 timer;
-    SpellCastTargets targets;
-    if (flags & AMMO) {
-        u32 ammo_display_id;
-        u32 ammo_inventory_type;
-    }
-}
-
-smsg SMSG_SPELL_GO = 0x0132 {
-    PackedGuid cast_item {
-        comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
-    }
-    PackedGuid caster;
-    Spell spell;
-    CastFlags flags;
-
-    u8 amount_of_hits;
-    Guid[amount_of_hits] hits;
-
-    u8 amount_of_misses;
-    SpellMiss[amount_of_misses] misses;
-    
-    SpellCastTargets targets;
-    if (flags & AMMO) {
-        u32 ammo_display_id;
-        u32 ammo_inventory_type;
-    }
-}
-
-
 enum NewItemSource : u32 {
     LOOTED = 0;
     FROM_NPC = 1;
@@ -4739,25 +2704,6 @@ enum NewItemChatAlert : u32 {
     SHOW = 1;
 }
 
-smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
-    Guid guid;
-    NewItemSource source;
-    NewItemCreationType creation_type;
-    NewItemChatAlert alert_chat;
-    u8 bag_slot;
-    u32 item_slot {
-        comment = "mangoszero: item slot, but when added to stack: 0xFFFFFFFF";
-    }
-    u32 item_id;
-    u32 item_suffix_factor {
-        comment = "mangoszero: SuffixFactor";
-    }
-    u32 item_random_property_id {
-        comment = "mangoszero: random item property id";
-    }
-    u32 item_count;
-}
-
 
 struct PetSpellCooldown {
     u16 spell_id;
@@ -4766,23 +2712,6 @@ struct PetSpellCooldown {
     }
     u32 cooldown_in_msecs;
     u32 category_cooldown_in_msecs;
-}
-
-smsg SMSG_PET_SPELLS = 0x0179 {
-    Guid pet;
-    u32 unknown1 {
-        comment = "mangoszero: set to 0";
-    }
-    PetReactState react;
-    PetCommandState command;
-    u16 unknown2 {
-        comment = "mangoszero: set to 0";
-    }
-    u32[10] action_bars;
-    u8 amount_of_spells;
-    u32[amount_of_spells] spells;
-    u8 amount_of_cooldowns;
-    PetSpellCooldown[amount_of_cooldowns] cooldowns;
 }
 
 
@@ -4805,19 +2734,6 @@ struct QuestItem {
     }
 }
 
-smsg SMSG_GOSSIP_MESSAGE = 0x017D {
-    Guid guid;
-    u32 title_text_id;
-    u32 amount_of_gossip_items {
-        valid_range = "0 15";
-    }
-    GossipItem[amount_of_gossip_items] gossips;
-    u32 amount_of_quests {
-        valid_range = "0 20";
-    }
-    QuestItem[amount_of_quests] quests;
-}
-
 struct NpcTextUpdateEmote {
     u32 delay;
     u32 emote;
@@ -4828,12 +2744,6 @@ struct NpcTextUpdate {
     CString[2] texts;
     Language language;
     NpcTextUpdateEmote[3] emotes;
-}
-
-smsg SMSG_NPC_TEXT_UPDATE = 0x0180 {
-    u32 text_id;
-    f32 probability;
-    NpcTextUpdate[8] texts;
 }
 
 
@@ -4848,14 +2758,6 @@ struct ListInventoryItem {
     u32 price;
     u32 max_durability;
     u32 durability;
-}
-
-smsg SMSG_LIST_INVENTORY = 0x019F {
-    Guid vendor;
-    u8 amount_of_items {
-        comment = "cmangos: 0 displays Vendor has no inventory";
-    }
-    ListInventoryItem[amount_of_items] items;
 }
 
 enum SellItemResult : u8 {
@@ -4875,12 +2777,6 @@ enum SellItemResult : u8 {
     ONLY_EMPTY_BAG = 6 {
         comment = "cmangos/vmangos/mangoszero: can only do with empty bags";
     }
-}
-
-smsg SMSG_SELL_ITEM = 0x01A1 {
-    Guid guid;
-    Guid item;
-    SellItemResult result;
 }
 
 
@@ -4914,42 +2810,6 @@ struct TrainerSpell {
     }
 }
 
-smsg SMSG_TRAINER_LIST = 0x01B1 {
-    Guid guid;
-    /* TODO Enum? */
-    u32 trainer_type;
-    u32 amount_of_spells;
-    TrainerSpell[amount_of_spells] spells;
-    CString greeting;
-}
-
-
-cmsg CMSG_BUG = 0x01CA {
-    u32 suggestion {
-        comment = "cmangos/vmangos/mangoszero: If 0 received bug report, else received suggestion";
-    }
-    u32 content_length;
-    /* TODO CString with len? */
-    CString content;
-    u32 type_length;
-    /* TODO CString with len? */
-    CString bug_type;
-}
-
-smsg SMSG_LEVELUP_INFO = 0x01D4 {
-    u32 new_level;
-    u32 health;
-    u32 mana;
-    u32 rage;
-    u32 focus;
-    u32 energy;
-    u32 happiness;
-    u32 strength;
-    u32 agility;
-    u32 stamina;
-    u32 intellect;
-    u32 spirit;
-}
 
 
 /* Used for CMSG_GMTICKET_CREATE */
@@ -4987,95 +2847,11 @@ enum GmTicketEscalationStatus : u8 {
     }
 }
 
-smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
-    GmTicketStatus status;
-    if (status == HASTEXT) {
-        CString text {
-            comment = "cmangos: Ticket text: data, should never exceed 1999 bytes";
-        }
-        GmTicketType ticket_type;
-        f32 days_since_ticket_creation;
-        f32 days_since_oldest_ticket_creation;
-        f32 days_since_last_updated;
-        GmTicketEscalationStatus escalation_status;
-        Bool read_by_gm;
-    }
-}
-
-smsg SMSG_BATTLEFIELD_LIST = 0x023D {
-    Guid battlemaster;
-    Map map;
-    u8 unknown1;
-    u32 unknown2 {
-        comment = "vmangos: number of bg instances, this is also present on the number_of_battlegrounds field";
-    }
-    u8 unknown3;
-    u32 number_of_battlegrounds {
-        comment = "vmangos: number of bg instances, this is also present on the unknown2 field";
-    }
-    u32[number_of_battlegrounds] battlegrounds;
-}
-
-smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
-    PackedGuid target;
-    PackedGuid attacker;
-    Spell spell;
-    u32 damage;
-    SpellSchool school;
-    u32 absorbed_damage;
-    u32 resisted {
-        comment = "cmangos/mangoszero/vmangos: sent as int32";
-    }
-    u8 periodic_log {
-        comment = "cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name";
-    }
-    u8 unused;
-    u32 blocked;
-    /* TODO Hit info? */
-    u32 hit_info;
-    u8 extend_flag {
-        comment = "cmangos has some that might be correct https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497";
-    }
-}
-
-smsg SMSG_SET_FLAT_SPELL_MODIFIER = 0x0266 {
-    /* TODO What does this mean? */
-    u8 eff;
-    u8 op;
-    u32 value;
-}
-
-smsg SMSG_SET_PCT_SPELL_MODIFIER = 0x0267 {
-    /* TODO What does this mean? */
-    u8 eff;
-    u8 op;
-    u32 value;
-}
-
-
-smsg SMSG_SPELLDISPELLOG = 0x027B {
-    Guid victim;
-    Guid caster;
-    u32 amount_of_spells;
-    /* TODO Make Spell type */
-    u32[amount_of_spells] spells;
-}
 
 
 struct WorldState {
     u32 state;
     u32 value;
-}
-
-smsg SMSG_INIT_WORLD_STATES = 0x02C2 {
-    Map map;
-    Area area;
-    u16 amount_of_states;
-    WorldState[amount_of_states] states;
-}
-
-smsg SMSG_UPDATE_WORLD_STATE = 0x02C3 {
-    WorldState state;
 }
 
 struct RaidInfo {
@@ -5084,24 +2860,7 @@ struct RaidInfo {
     u32 instance_id;
 }
 
-smsg SMSG_RAID_INSTANCE_INFO = 0x02CC {
-    u32 amount_of_raid_infos;
-    RaidInfo[amount_of_raid_infos] raid_infos;
-}
 
-
-cmsg CMSG_BATTLEMASTER_JOIN = 0x02EE {
-    Guid guid;
-    Map map;
-    u32 instance_id;
-    Bool join_as_group;
-}
-
-
-smsg SMSG_LOOT_MASTER_LIST = 0x02A4 {
-    u8 amount_of_players;
-    Guid[amount_of_players] guids;
-}
 
 struct ForcedReaction {
     u32 faction_id {
@@ -5110,10 +2869,5 @@ struct ForcedReaction {
     u32 reputation_rank {
         comment = "vmangos: reputation rank";
     }
-}
-
-smsg SMSG_SET_FORCED_REACTIONS = 0x02A5 {
-    u32 amount_of_reactions;
-    ForcedReaction[amount_of_reactions] reactions;
 }
 

@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg SMSG_DUEL_WINNER = 0x016B {
+    DuelWinnerReason reason;
+    CString opponent_name;
+    CString initiator_name;
+}
+

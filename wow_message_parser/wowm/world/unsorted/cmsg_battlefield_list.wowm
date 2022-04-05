@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
+    Map map;
+}
+

@@ -1,0 +1,14 @@
+#tag_all versions "1.12";
+
+smsg SMSG_LOG_XPGAIN = 0x01D0 {
+    u64 target_guid;
+    u32 total_exp;
+    ExperienceAwardType exp_type; 
+    if (exp_type == NON_KILL) {
+        u32 experience_without_rested;
+        f32 exp_group_bonus {
+            comment = "mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output";
+        }
+    }
+}
+

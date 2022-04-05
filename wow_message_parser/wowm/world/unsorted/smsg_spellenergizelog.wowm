@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPELLENERGIZELOG = 0x0151 {
+    PackedGuid victim_guid;
+    PackedGuid caster_guid;
+    Spell spell;
+    PowerType power;
+    u32 damage;
+}
+

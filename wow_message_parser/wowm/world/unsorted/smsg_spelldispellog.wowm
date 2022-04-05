@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPELLDISPELLOG = 0x027B {
+    Guid victim;
+    Guid caster;
+    u32 amount_of_spells;
+    /* TODO Make Spell type */
+    u32[amount_of_spells] spells;
+}
+

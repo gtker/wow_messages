@@ -1,0 +1,27 @@
+#tag_all versions "1.12";
+
+smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
+    Guid guid;
+    PvpRank highest_rank;
+    u32 today_honorable_and_dishonorable;
+    u16 yesterday_honorable;
+    u16 unknown1 {
+        comment = "vmangos: Unknown (deprecated, yesterday dishonourable?)";
+    }
+    u16 last_week_honorable;
+    u16 unknown2 {
+        comment = "vmangos: Unknown (deprecated, last week dishonourable?)";
+    }
+    u16 this_week_honorable;
+    u16 unknown3 {
+        comment = "vmangos: Unknown (deprecated, this week dishonourable?)";
+    }
+    u32 lifetime_honorable;
+    u32 lifetime_dishonorable;
+    u32 yesterday_honor;
+    u32 last_week_honor;
+    u32 this_week_honor;
+    (u32)PvpRank last_week_standing;
+    u8 rank_progress_bar;
+}
+

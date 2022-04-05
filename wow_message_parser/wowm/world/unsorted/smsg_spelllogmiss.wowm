@@ -1,0 +1,12 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPELLLOGMISS = 0x024B {
+    u32 spell_id;
+    u64 caster_guid;
+    u8 unknown1 {
+        comment = "cmangos/mangoszero: can be 0 or 1";
+    }
+    u32 amount_of_targets;
+    SpellMiss[amount_of_targets] targets;
+}
+

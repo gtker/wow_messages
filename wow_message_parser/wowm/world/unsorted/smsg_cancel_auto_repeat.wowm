@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_CANCEL_AUTO_REPEAT = 0x029C {}
+

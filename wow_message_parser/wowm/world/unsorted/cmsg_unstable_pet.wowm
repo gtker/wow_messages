@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_UNSTABLE_PET = 0x0271 {
+    u64 npc_guid;
+    u32 pet_number;
+}
+

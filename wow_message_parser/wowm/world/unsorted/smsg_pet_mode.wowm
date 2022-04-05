@@ -1,0 +1,15 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PET_MODE = 0x017A {
+    u64 guid;
+    PetReactState react_state;
+    PetCommandState command_state;
+    u8 unknown1 {
+        comment = "vmangos sets to 0.";
+    }
+    /* TODO u8 bool */
+    u8 pet_enabled {
+        comment = "vmangos sets 0 for not enabled and 0x8 for enabled.";
+    }
+}
+

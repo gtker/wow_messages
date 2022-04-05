@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_UPDATE_LAST_INSTANCE = 0x0320 {
+    Map map;
+}
+

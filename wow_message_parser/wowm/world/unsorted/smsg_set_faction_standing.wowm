@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SET_FACTION_STANDING = 0x0124 {
+    /* TODO How many factions in FactionList? */
+    u32 amount_of_factions;
+    Faction[amount_of_factions] factions;
+}
+

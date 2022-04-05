@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
+    Guid victim_guid;
+    Guid caster_guid;
+    u32 damage;
+    /* TODO: RIGHT ? */
+    (u32)SpellSchool school;
+}
+

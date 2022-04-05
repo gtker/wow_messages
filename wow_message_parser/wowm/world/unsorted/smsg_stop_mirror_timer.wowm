@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_STOP_MIRROR_TIMER = 0x01DB {
+    TimerType timer;
+}
+

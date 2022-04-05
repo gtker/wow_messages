@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+smsg SMSG_GUILD_ROSTER = 0x008A {
+    /* Complex 
+        https://github1s.com/vmangos/core/blob/HEAD/src/game/Guild/Guild.cpp#L754
+        https://github1s.com/cmangos/mangos-classic/blob/HEAD/src/game/Guilds/Guild.cpp#L717
+    */
+}
+

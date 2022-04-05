@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPIRIT_HEALER_CONFIRM = 0x0222 {
+    u64 guid;
+}
+

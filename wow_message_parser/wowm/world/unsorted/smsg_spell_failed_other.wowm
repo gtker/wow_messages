@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPELL_FAILED_OTHER = 0x02A6 {
+    u64 caster_guid;
+    /* TODO not spell id but spell info id? */
+    u32 spell_id;
+}
+

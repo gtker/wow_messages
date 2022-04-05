@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_CHANNEL_UNMODERATOR = 0x00A0 {
+    CString channel_name;
+    CString player_name;
+}
+

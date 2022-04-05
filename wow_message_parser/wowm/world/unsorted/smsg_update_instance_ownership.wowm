@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg SMSG_UPDATE_INSTANCE_OWNERSHIP = 0x032B {
+    u32 has_been_saved {
+        comment = "cmangos/vmangos/mangoszero: true or false means, whether you have current raid instances";
+    }
+}
+

@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+smsg SMSG_BUY_ITEM = 0x01A4 {
+    u64 guid;
+    u32 vendor_slot;
+    u32 amount_for_sale;
+    u32 amount_bought;
+}
+

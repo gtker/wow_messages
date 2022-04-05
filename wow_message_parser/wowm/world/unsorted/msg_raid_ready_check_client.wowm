@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+cmsg MSG_RAID_READY_CHECK_Client = 0x0322 {
+    optional answer {
+        u8 state;
+    }
+}
+

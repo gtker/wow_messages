@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg MSG_INSPECT_HONOR_STATS_Client = 0x02D6 {
+    Guid guid;
+}
+

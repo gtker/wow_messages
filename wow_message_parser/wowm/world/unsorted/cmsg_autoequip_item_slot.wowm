@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_AUTOEQUIP_ITEM_SLOT = 0x010F {
+    u64 guid;
+    u8 destination_slot;
+}
+

@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+/* TODO: Technically correct, but events require a specific amount of strings */
+smsg SMSG_GUILD_EVENT = 0x0092 {
+    GuildEvent event;
+    u8 amount_of_events;
+    CString[amount_of_events] event_descriptions;
+}
+

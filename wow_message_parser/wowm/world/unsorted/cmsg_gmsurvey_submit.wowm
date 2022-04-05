@@ -1,0 +1,14 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_GMSURVEY_SUBMIT = 0x032A {
+    /* Enum for survey id */
+    u32 survey_id {
+        comment = "cmangos: Survey ID: found in GMSurveySurveys.dbc";
+    }
+    GmSurveyQuestion[10] questions;
+    CString answer_comment {
+        comment = "cmangos: Answer comment: Unused in stock UI, can be only set by calling Lua function"; 
+        comment = "cmangos: Answer comment max sizes in bytes: Vanilla - 8106:8110, TBC - 11459:11463, Wrath - 582:586";
+    }
+}
+

@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_READ_ITEM = 0x00AD {
+    u8 bag_index;
+    u8 slot;
+}
+

@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_GUILD_INVITE = 0x0083 {
+    CString player_name;
+    CString guild_name;
+}
+

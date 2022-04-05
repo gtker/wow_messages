@@ -1,5 +1,7 @@
 #tag_all versions "1.12";
 
+#tag_all versions "1.12";
+
 smsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Server = 0x02E9 {
     u32 amount_of_carriers = 0 {
         comment = "vmangos/cmangos/mangoszero: All force to zero";

@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_ATTACKSWING_DEADTARGET = 0x0148 {}
+

@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PET_ACTION_SOUND = 0x0324 {
+    Guid guid;
+    PetTalkReason reason;
+}
+

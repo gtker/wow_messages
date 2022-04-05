@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_INVALIDATE_PLAYER = 0x031C {
+    u64 guid;
+}
+

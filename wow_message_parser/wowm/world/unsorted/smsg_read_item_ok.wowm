@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_READ_ITEM_OK = 0x00AE {
+    u64 guid;
+}
+

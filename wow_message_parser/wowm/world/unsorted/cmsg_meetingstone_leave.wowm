@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_MEETINGSTONE_LEAVE = 0x0293 {}
+

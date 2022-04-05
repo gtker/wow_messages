@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PARTYKILLLOG = 0x01F5 {
+    u64 player_with_killing_blow;
+    u64 victim;
+}
+

@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+smsg SMSG_ATTACKSTOP = 0x0144 {
+    PackedGuid player;
+    PackedGuid enemy;
+    u32 unknown1 {
+        comment = "cmangos/vmangos/mangoszero: set to 0 with comment: unk, can be 1 also";
+    }
+}
+

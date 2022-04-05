@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_GOSSIP_COMPLETE = 0x017E {}
+

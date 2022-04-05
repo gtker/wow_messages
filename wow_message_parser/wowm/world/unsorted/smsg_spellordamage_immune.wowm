@@ -1,0 +1,11 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPELLORDAMAGE_IMMUNE = 0x0263 {
+    u64 caster_guid;
+    u64 target_guid;
+    u32 spell_id;
+    u8 unknown1 {
+        comment = "vmangos/cmangos sets to 0";
+    }
+}
+

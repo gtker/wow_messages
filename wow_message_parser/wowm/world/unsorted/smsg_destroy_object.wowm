@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_DESTROY_OBJECT = 0x00AA {
+    u64 guid;
+}
+

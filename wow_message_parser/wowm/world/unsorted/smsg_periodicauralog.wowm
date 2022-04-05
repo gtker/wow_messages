@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PERIODICAURALOG = 0x024E {
+    PackedGuid target;
+    PackedGuid caster;
+    Spell spell;
+    u32 amount_of_auras;
+    AuraLog[amount_of_auras] auras;
+}
+

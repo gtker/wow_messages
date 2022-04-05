@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_GMTICKET_DELETETICKET = 0x0217 {}
+

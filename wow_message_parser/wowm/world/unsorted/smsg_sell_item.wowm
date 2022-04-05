@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SELL_ITEM = 0x01A1 {
+    Guid guid;
+    Guid item;
+    SellItemResult result;
+}
+

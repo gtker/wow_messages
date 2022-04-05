@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_TAXINODE_STATUS = 0x01AB {
+    u64 guid;
+    Bool taxi_mask_node_known;
+}
+

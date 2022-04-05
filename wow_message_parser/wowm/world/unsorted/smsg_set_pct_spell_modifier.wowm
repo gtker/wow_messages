@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SET_PCT_SPELL_MODIFIER = 0x0267 {
+    /* TODO What does this mean? */
+    u8 eff;
+    u8 op;
+    u32 value;
+}
+

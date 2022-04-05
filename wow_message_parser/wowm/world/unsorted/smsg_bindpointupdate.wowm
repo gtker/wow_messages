@@ -1,5 +1,7 @@
 #tag_all versions "1.12";
 
+#tag_all versions "1.12";
+
 smsg SMSG_BINDPOINTUPDATE = 0x0155 {
     f32 position_x;
     f32 position_y;

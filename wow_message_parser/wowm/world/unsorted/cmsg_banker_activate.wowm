@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_BANKER_ACTIVATE = 0x01B7 {
+    u64 guid;
+}
+

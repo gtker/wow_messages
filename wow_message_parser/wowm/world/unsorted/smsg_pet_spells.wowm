@@ -1,0 +1,19 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PET_SPELLS = 0x0179 {
+    Guid pet;
+    u32 unknown1 {
+        comment = "mangoszero: set to 0";
+    }
+    PetReactState react;
+    PetCommandState command;
+    u16 unknown2 {
+        comment = "mangoszero: set to 0";
+    }
+    u32[10] action_bars;
+    u8 amount_of_spells;
+    u32[amount_of_spells] spells;
+    u8 amount_of_cooldowns;
+    PetSpellCooldown[amount_of_cooldowns] cooldowns;
+}
+

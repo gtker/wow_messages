@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_CHANNEL_KICK = 0x00A4 {
+    CString channel_name;
+    CString player_name;
+}
+

@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_LEARNED_SPELL = 0x012B {
+    u32 spell_id;
+}
+

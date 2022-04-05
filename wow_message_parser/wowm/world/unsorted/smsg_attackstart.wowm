@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_ATTACKSTART = 0x0143 {
+    u64 attacker_guid;
+    u64 victim_guid;
+}
+

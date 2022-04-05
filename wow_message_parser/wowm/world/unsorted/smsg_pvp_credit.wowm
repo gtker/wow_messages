@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PVP_CREDIT = 0x028C {
+    u32 honor_points;
+    Guid victim;
+    (u32)PvpRank rank;
+}
+

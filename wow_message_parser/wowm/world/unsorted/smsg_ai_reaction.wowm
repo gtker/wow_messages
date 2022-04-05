@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_AI_REACTION = 0x013C {
+    u64 guid;
+    AiReaction reaction;
+}
+

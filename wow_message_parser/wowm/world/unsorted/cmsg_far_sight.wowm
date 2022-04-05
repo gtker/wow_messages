@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_FAR_SIGHT = 0x027A {
+    FarSightOperation operation;
+}
+

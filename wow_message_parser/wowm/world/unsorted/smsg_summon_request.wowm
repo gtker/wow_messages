@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SUMMON_REQUEST = 0x02AB {
+    u64 summoner_guid;
+    /* TODO zone or area? */
+    u32 zone_id;
+    u32 auto_decline_time_in_msecs;
+}
+

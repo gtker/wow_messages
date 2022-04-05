@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_SETSHEATHED = 0x01E0 {
+    (u32)SheathState sheathed;
+}
+

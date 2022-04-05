@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg MSG_LOOKING_FOR_GROUP_Server = 0x01FF {
+    u32 unknown1 {
+        comment = "vmangos sets to 0. cmangos/mangoszero don't implement";
+    }
+}
+

@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_CANCEL_CAST = 0x012F {
+    u32 spell_id;
+}
+

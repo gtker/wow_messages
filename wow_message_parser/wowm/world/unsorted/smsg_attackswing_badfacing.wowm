@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_ATTACKSWING_BADFACING = 0x0146 {}
+

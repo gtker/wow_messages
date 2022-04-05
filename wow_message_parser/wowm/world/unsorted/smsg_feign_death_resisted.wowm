@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_FEIGN_DEATH_RESISTED = 0x02B4 {}
+

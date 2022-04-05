@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PLAY_SOUND = 0x02D2 {
+    /* TODO Enum? */
+    u32 sound_id;
+}
+

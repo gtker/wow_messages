@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
+    /* TODO Possible enum? */
+    u32 hit_info;
+    PackedGuid attacker;
+    PackedGuid target;
+    u32 total_damage;
+}
+

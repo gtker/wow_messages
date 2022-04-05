@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_TUTORIAL_FLAG = 0x00FE {
+    /* TODO: Flag as u32 */
+    u32 tutorial_flag;
+}
+

@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_SPELLINSTAKILLLOG = 0x032F {
+    Guid target_guid;
+    Spell spell;
+}
+

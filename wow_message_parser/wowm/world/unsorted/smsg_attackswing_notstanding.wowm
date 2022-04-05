@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_ATTACKSWING_NOTSTANDING = 0x0147 {}
+

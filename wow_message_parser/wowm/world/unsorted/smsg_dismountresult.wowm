@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_DISMOUNTRESULT = 0x016F {
+    MountResult result;
+}
+

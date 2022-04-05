@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg SMSG_AREA_TRIGGER_MESSAGE = 0x02B8 {
+    /* TODO CString with length? */
+    u32 length;
+    CString message;
+}
+

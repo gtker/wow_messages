@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_SWAP_ITEM = 0x010C {
+    u8 destination_bag;
+    u8 destionation_slot;
+    u8 source_bag;
+    u8 source_slot;
+}
+

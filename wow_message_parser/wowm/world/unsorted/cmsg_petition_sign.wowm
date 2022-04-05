@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_PETITION_SIGN = 0x01C0 {
+    u64 petition_guid;
+    u8 unknown1;
+}
+

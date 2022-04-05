@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_NEW_TAXI_PATH = 0x01AF {}
+

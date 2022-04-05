@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_AUTOSTORE_LOOT_ITEM = 0x0108 {
+    u8 item_slot;
+}
+

@@ -1,0 +1,4 @@
+#tag_all versions "1.12";
+
+smsg SMSG_CHAT_WRONG_FACTION = 0x0219 {}
+

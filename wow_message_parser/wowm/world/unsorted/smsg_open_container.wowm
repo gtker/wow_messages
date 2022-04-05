@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_OPEN_CONTAINER = 0x0113 {
+    u64 guid;
+}
+

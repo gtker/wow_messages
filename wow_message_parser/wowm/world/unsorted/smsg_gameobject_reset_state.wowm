@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_GAMEOBJECT_RESET_STATE = 0x02A7 {
+    u64 guid;
+}
+

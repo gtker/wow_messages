@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_BATTLEFIELD_JOIN = 0x023E {
+    Map map;
+}
+

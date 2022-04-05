@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+smsg SMSG_WEATHER = 0x02F4 {
+    WeatherType weather_type;
+    f32 grade;
+    /* TODO weather sound id enum? */
+    u32 sound_id;
+    WeatherChangeType change;
+}
+

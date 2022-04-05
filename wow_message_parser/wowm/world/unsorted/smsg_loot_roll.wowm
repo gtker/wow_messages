@@ -1,0 +1,18 @@
+#tag_all versions "1.12";
+
+smsg SMSG_LOOT_ROLL = 0x02A2 {
+    u64 creature_guid;
+    u32 loot_slot;
+    u64 item_guid;
+    u32 item_id;
+    u32 item_random_suffix {
+        comment = "vmangos/mangoszero: not used ?";
+    }
+    u32 item_random_property_id;
+    /* TODO exact meaning? */
+    u8 roll_number {
+        comment = "vmangos/cmangos/mangoszero: 0: Need for: [item name] > 127: you passed on: [item name]      Roll number";
+    }
+    RollVote vote;
+}
+

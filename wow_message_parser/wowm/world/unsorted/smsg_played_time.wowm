@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PLAYED_TIME = 0x01CD {
+    /* TODO: What unit is this? */
+    u32 total_played_time;
+    u32 level_played_time;
+}
+

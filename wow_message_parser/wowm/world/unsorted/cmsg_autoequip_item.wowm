@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_AUTOEQUIP_ITEM = 0x010A {
+    u8 source_bag;
+    u8 source_slot;
+}
+

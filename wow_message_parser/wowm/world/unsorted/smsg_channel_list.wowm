@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+smsg SMSG_CHANNEL_LIST = 0x009B {
+    CString channel_name;
+    /* TODO: unknown flags */
+    u8 channel_flags;
+    u32 amount_of_members;
+    ChannelMember[amount_of_members] members;
+}
+

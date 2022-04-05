@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+smsg SMSG_ITEM_TIME_UPDATE = 0x01EA {
+    u64 guid;
+    u32 duration;
+}
+

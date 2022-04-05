@@ -1,0 +1,9 @@
+#tag_all versions "1.12";
+
+smsg SMSG_PROCRESIST = 0x0260 {
+    u64 guid;
+    u64 target_guid;
+    u32 spell_id;
+    LogFormat log_format;
+}
+

@@ -1,0 +1,6 @@
+#tag_all versions "1.12";
+
+smsg SMSG_CHAT_PLAYER_NOT_FOUND = 0x02A9 {
+    CString name;
+}
+

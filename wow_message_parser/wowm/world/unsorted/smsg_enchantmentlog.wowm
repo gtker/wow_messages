@@ -1,5 +1,7 @@
 #tag_all versions "1.12";
 
+#tag_all versions "1.12";
+
 smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
     Guid target_guid;
     Guid caster_guid;

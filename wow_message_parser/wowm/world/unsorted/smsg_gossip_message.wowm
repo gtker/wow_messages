@@ -1,0 +1,15 @@
+#tag_all versions "1.12";
+
+smsg SMSG_GOSSIP_MESSAGE = 0x017D {
+    Guid guid;
+    u32 title_text_id;
+    u32 amount_of_gossip_items {
+        valid_range = "0 15";
+    }
+    GossipItem[amount_of_gossip_items] gossips;
+    u32 amount_of_quests {
+        valid_range = "0 20";
+    }
+    QuestItem[amount_of_quests] quests;
+}
+

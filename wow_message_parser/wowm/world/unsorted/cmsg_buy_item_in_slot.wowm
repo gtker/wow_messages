@@ -1,0 +1,10 @@
+#tag_all versions "1.12";
+
+cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
+    u64 vendor_guid;
+    u32 item_id;
+    u64 bag_guid;
+    u8 bag_slot;
+    u8 amount;
+}
+
