@@ -598,8 +598,8 @@ version 2: {:#?} in {} line {}",
         );
     }
 
-    pub fn get_definer_field_value(&self, definer_name: &str, field_name: &str) -> u64 {
-        if let Some(e) = self.enums.iter().find(|a| a.name() == definer_name) {
+    pub fn get_definer_field_value(&self, definer_name: &str, field_name: &str, tags: &Tags) -> u64 {
+        if let Some(e) = self.enums.iter().find(|a| a.name() == definer_name && a.tags().has_version_intersections(tags)) {
             for field in e.fields() {
                 if field.name() == field_name {
                     return field.value().int();
@@ -607,7 +607,7 @@ version 2: {:#?} in {} line {}",
             }
         }
 
-        if let Some(e) = self.flags.iter().find(|a| a.name() == definer_name) {
+        if let Some(e) = self.flags.iter().find(|a| a.name() == definer_name && a.tags().has_version_intersections(tags)) {
             for field in e.fields() {
                 if field.name() == field_name {
                     return field.value().int();

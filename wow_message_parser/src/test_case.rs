@@ -139,7 +139,7 @@ impl TestCase {
                             TestValue::Flag(v)
                         }
                         _ => {
-                            let v = o.get_definer_field_value(ty.rust_str().as_str(), &value);
+                            let v = o.get_definer_field_value(ty.rust_str().as_str(), &value, tags);
                             TestValue::Enum(VerifiedContainerValue::new(v, value))
                         }
                     }

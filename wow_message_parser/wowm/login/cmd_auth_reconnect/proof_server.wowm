@@ -47,3 +47,13 @@ test CMD_AUTH_RECONNECT_PROOF_Server {
 ] {
     login_logon_versions = "2";
 }
+
+test CMD_AUTH_RECONNECT_PROOF_Server {
+    result = FAIL_LOCKED_ENFORCED;
+} [
+    0x03, /* Opcode */
+    0x10, /* result: FAIL_LOCKED_ENFORCED (16) */
+    0x00, 0x00, /* padding: 0 */
+] {
+    login_logon_versions = "8";
+}

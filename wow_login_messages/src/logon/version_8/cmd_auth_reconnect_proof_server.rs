@@ -140,4 +140,30 @@ mod test {
         assert_eq!(dest, raw);
     }
 
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 51.
+    #[test]
+    fn CMD_AUTH_RECONNECT_PROOF_Server1() {
+        let raw: Vec<u8> = vec![ 0x03, 0x10, 0x00, 0x00, ];
+
+        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
+            result: LoginResult::FAIL_LOCKED_ENFORCED,
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.result, expected.result);
+
+        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
 }

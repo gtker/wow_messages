@@ -1242,7 +1242,7 @@ impl StructMemberDefinition {
                     ))
                 } else {
                     let value = if v.identifier() != "self.size" {
-                        o.get_definer_field_value(&self.ty().rust_str(), v.identifier())
+                        o.get_definer_field_value(&self.ty().rust_str(), v.identifier(), &self.kvs)
                     } else {
                         0
                     };
