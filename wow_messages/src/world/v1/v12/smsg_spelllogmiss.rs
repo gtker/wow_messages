@@ -5,7 +5,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new3.wowm:23`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new3.wowm#L23):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/new_all.wowm:2777`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/new_all.wowm#L2777):
 /// ```text
 /// smsg SMSG_SPELLLOGMISS = 0x24B {
 ///     u32 spell_id;

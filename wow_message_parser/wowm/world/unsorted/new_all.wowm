@@ -1,0 +1,4114 @@
+#tag_all versions "1.12";
+
+enum Power : u8 {
+    MANA = 0 {
+        comment = "The most common one, mobs usually have this or rage";
+    }
+    RAGE = 1 {
+        comment = "This is what warriors use to cast their spells";
+    }
+    FOCUS = 2 {
+        comment = "Used by hunters after Cataclysm (4.x)";
+    }
+    ENERGY = 3 {
+        comment = "Used by rouges to do their spells";
+    }
+    HAPPINESS = 4 {
+        comment = "Hunter's pet's happiness affect their damage";
+    }
+    MAX_POWERS = 5;
+    ALL = 127 {
+        comment = "default for class? - need check for TBC";
+    }
+    /* Correct?
+    HEALTH = 0xFFFFFFFE {
+        comment = "Health, everyone has this (-2 as signed value)";
+    } */
+}
+
+flag GroupUpdateFlags : u32 {
+    FLAG_NONE = 0x00000000 {
+        comment = "nothing";
+    }
+    FLAG_STATUS = 0x00000001 {
+        comment = "uint8, enum GroupMemberOnlineStatus";
+    }
+    FLAG_CUR_HP = 0x00000002 {
+        comment = "uint16";
+    }
+    FLAG_MAX_HP = 0x00000004 {
+        comment = "uint16";
+    }
+    FLAG_POWER_TYPE = 0x00000008 {
+        comment = "uint8, enum Powers";
+    }
+    FLAG_CUR_POWER = 0x00000010 {
+        comment = "uint16";
+    }
+    FLAG_MAX_POWER = 0x00000020 {
+        comment = "uint16";
+    }
+    FLAG_LEVEL = 0x00000040 {
+        comment = "uint16";
+    }
+    FLAG_ZONE = 0x00000080 {
+        comment = "uint16";
+    }
+    FLAG_POSITION = 0x00000100 {
+        comment = "uint16, uint16";
+    }
+    FLAG_AURAS = 0x00000200 {
+        comment = "uint32 mask, for each bit set uint16 spellid";
+    }
+    FLAG_AURAS_2 = 0x00000400 {
+        comment = "uint16 above mask continuation, giving max total of 48 auras possible";
+    }
+    FLAG_PET_GUID = 0x00000800 {
+        comment = "uint64 pet guid";
+    }
+    FLAG_PET_NAME = 0x00001000 {
+        comment = "pet name, NULL terminated string";
+    }
+    FLAG_PET_MODEL_ID = 0x00002000 {
+        comment = "uint16, model id";
+    }
+    FLAG_PET_CUR_HP = 0x00004000 {
+        comment = "uint16 pet cur health";
+    }
+    FLAG_PET_MAX_HP = 0x00008000 {
+        comment = "uint16 pet max health";
+    }
+    FLAG_PET_POWER_TYPE = 0x00010000 {
+        comment = "uint8 pet power type";
+    }
+    FLAG_PET_CUR_POWER = 0x00020000 {
+        comment = "uint16 pet cur power";
+    }
+    FLAG_PET_MAX_POWER = 0x00040000 {
+        comment = "uint16 pet max power";
+    }
+    FLAG_PET_AURAS = 0x00080000 {
+        comment = "uint32 mask, for each bit set uint16 spellid, pet auras...";
+    }
+    FLAG_PET_AURAS_2 = 0x00100000 {
+        comment = "uint16 above mask continuation, giving max total of 48 auras possible";
+    }
+    MODE_OFFLINE = 0x10000000;
+}
+
+flag GroupMemberOnlineStatus : u8 {
+    OFFLINE = 0x0000;
+    ONLINE = 0x0001 {
+        comment = "Lua_UnitIsConnected";
+    }
+    PVP = 0x0002 {
+        comment = "Lua_UnitIsPVP";
+    }
+    DEAD = 0x0004 {
+        comment = "Lua_UnitIsDead";
+    }
+    GHOST = 0x0008 {
+        comment = "Lua_UnitIsGhost";
+    }
+    PVP_FFA = 0x0010 {
+        comment = "Lua_UnitIsPVPFreeForAll";
+    }
+    UNK3 = 0x0020 {
+        comment = "used in calls from Lua_GetPlayerMapPosition/Lua_GetBattlefieldFlagPosition";
+    }
+    AFK = 0x0040 {
+        comment = "Lua_UnitIsAFK";
+    }
+    DND = 0x0080 {
+        comment = "Lua_UnitIsDND";
+    }
+}
+
+smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
+    PackedGuid guid;
+    GroupUpdateFlags mask;
+    if (mask & FLAG_STATUS) {
+        GroupMemberOnlineStatus status;       
+    }
+    if (mask & FLAG_CUR_HP) {
+        u16 current_health;
+    }
+    if (mask & FLAG_MAX_HP) {
+        u16 max_health;
+    }
+    if (mask & FLAG_POWER_TYPE) {
+        Power power; 
+    }
+    if (mask & FLAG_CUR_POWER) {
+        u16 current_power;
+    }
+    if (mask & FLAG_MAX_POWER) {
+        u16 max_power;
+    }
+    if (mask & FLAG_LEVEL) {
+        u16 level;
+    }
+    if (mask & FLAG_ZONE) {
+        Area area;
+    }
+    if (mask & FLAG_POSITION) {
+        u16 position_x {
+            comment = "cmangos: float cast to u16";
+        }
+        u16 position_y {
+            comment = "cmangos: float cast to u16";
+        }
+    }
+    if (mask & FLAG_AURAS) {
+        AuraMask auras {
+            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
+        }
+    }
+    if (mask & FLAG_PET_NAME) {
+        CString pet_name;
+    }
+    if (mask & FLAG_PET_MODEL_ID) {
+        u16 pet_display_id;
+    }
+    if (mask & FLAG_PET_CUR_HP) {
+        u16 pet_current_health;
+    }
+    if (mask & FLAG_PET_MAX_HP) {
+        u16 pet_max_health;
+    }
+    if (mask & FLAG_PET_POWER_TYPE) {
+        Power pet_power_type;
+    }
+    if (mask & FLAG_PET_CUR_POWER) {
+        u16 pet_current_power;
+    }
+    if (mask & FLAG_PET_MAX_POWER) {
+        u16 pet_max_power;
+    }
+    if (mask & FLAG_PET_AURAS) {
+        AuraMask pet_auras;
+    }
+}
+
+
+enum PartyMemberStatus : u32 {
+    OFFLINE = 0x0000;
+    ONLINE = 0x0001 {
+        comment = "Lua_UnitIsConnected";
+    }
+    PVP = 0x0002 {
+        comment = "Lua_UnitIsPVP";
+    }
+    DEAD = 0x0004 {
+        comment = "Lua_UnitIsDead";
+    }
+    GHOST = 0x0008 {
+        comment = "Lua_UnitIsGhost";
+    }
+    PVP_FFA = 0x0010 {
+        comment = "Lua_UnitIsPVPFreeForAll";
+    }
+    ZONE_OUT = 0x0020 {
+        comment = "Lua_GetPlayerMapPosition";
+    }
+    AFK = 0x0040 {
+        comment = "Lua_UnitIsAFK";
+    }
+    DND = 0x0080 {
+        comment = "Lua_UnitIsDND";
+    }
+}
+
+
+smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
+    PackedGuid player;
+    GroupUpdateFlags mask;
+    if (mask & FLAG_STATUS) {
+        GroupMemberOnlineStatus status;       
+    }
+    if (mask & FLAG_CUR_HP) {
+        u16 current_health;
+    }
+    if (mask & FLAG_MAX_HP) {
+        u16 max_health;
+    }
+    if (mask & FLAG_POWER_TYPE) {
+        Power power; 
+    }
+    if (mask & FLAG_CUR_POWER) {
+        u16 current_power;
+    }
+    if (mask & FLAG_MAX_POWER) {
+        u16 max_power;
+    }
+    if (mask & FLAG_LEVEL) {
+        u16 level;
+    }
+    if (mask & FLAG_ZONE) {
+        Area area;
+    }
+    if (mask & FLAG_POSITION) {
+        u16 position_x {
+            comment = "cmangos: float cast to u16";
+        }
+        u16 position_y {
+            comment = "cmangos: float cast to u16";
+        }
+    }
+    if (mask & FLAG_AURAS) {
+        AuraMask auras {
+            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
+        }
+    }
+    if (mask & FLAG_PET_NAME) {
+        CString pet_name;
+    }
+    if (mask & FLAG_PET_MODEL_ID) {
+        u16 pet_display_id;
+    }
+    if (mask & FLAG_PET_CUR_HP) {
+        u16 pet_current_health;
+    }
+    if (mask & FLAG_PET_MAX_HP) {
+        u16 pet_max_health;
+    }
+    if (mask & FLAG_PET_POWER_TYPE) {
+        Power pet_power_type;
+    }
+    if (mask & FLAG_PET_CUR_POWER) {
+        u16 pet_current_power;
+    }
+    if (mask & FLAG_PET_MAX_POWER) {
+        u16 pet_max_power;
+    }
+    if (mask & FLAG_PET_AURAS) {
+        AuraMask pet_auras;
+    }
+}
+
+
+
+cmsg CMSG_MESSAGECHAT = 0x0095 {
+    (u32)ChatType chat_type;   
+    Language language;
+    if (chat_type == SAY 
+     || chat_type == EMOTE 
+     || chat_type == YELL 
+     || chat_type == PARTY 
+     || chat_type == GUILD 
+     || chat_type == OFFICER 
+     || chat_type == RAID 
+     || chat_type == RAID_LEADER 
+     || chat_type == RAID_WARNING 
+     || chat_type == BATTLEGROUND 
+     || chat_type == BATTLEGROUND_LEADER
+     || chat_type == AFK
+     || chat_type == DND) {
+        CString message;
+    } else if (chat_type == WHISPER) {
+        CString target_player;
+        CString whisper_message;
+    } else if (chat_type == CHANNEL) {
+        CString channel;
+        CString channel_message;
+    }
+}
+
+smsg SMSG_MESSAGECHAT = 0x0096 {
+    ChatType chat_type;
+    Language language;
+    if (chat_type == MONSTER_WHISPER
+     || chat_type == RAID_BOSS_EMOTE
+     || chat_type == MONSTER_EMOTE) {
+        /* CString with len? */
+        u32 name_length;
+        CString monster_name;
+        Guid monster_guid;
+    }
+    else if (chat_type == SAY
+          || chat_type == PARTY
+          || chat_type == YELL) {
+        Guid sender_guid1 {
+            comment = "cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same";
+        }
+        Guid sender_guid2 {
+            comment = "cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same";
+        }
+    }
+    else if (chat_type == MONSTER_SAY
+          || chat_type == MONSTER_YELL) {
+        Guid sender_guid3;
+        u32 sender_name_length;
+        CString sender_name;
+        Guid target_guid;
+    }
+    else if (chat_type == CHANNEL) {
+        CString channel_name;
+        u32 player_rank;
+        Guid player_guid;
+    }
+    else {
+        Guid sender_guid4;
+    }
+
+    /* CString len */
+    u32 message_length;
+    CString message;
+    PlayerChatTag tag;
+}
+
+enum PlayerChatTag : u8 {
+    NONE = 0;
+    AFK = 1;
+    DND = 2;
+    GM = 3;
+}
+
+smsg SMSG_TRADE_STATUS = 0x0120 {
+    TradeStatus status;
+    if (status == BEGIN_TRADE) {
+        u64 unknown1 {
+            comment = "Set to 0 in vmangos.";
+        }
+    }
+    else if (status == CLOSE_WINDOW) {
+        (u32)InventoryResult inventory_result;
+        /* TODO: Add bool? */
+        Bool target_error {
+            comment = "used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED";
+        }
+        u32 item_limit_category_id {
+            comment = "ItemLimitCategory.dbc entry";
+        }
+    }
+    else if (status == ONLY_CONJURED || status == NOT_ON_TAPLIST) {
+        u8 slot {
+            comment = "Trade slot -1 here clears CGTradeInfo::m_tradeMoney";
+        }
+    }
+}
+
+enum MailType : u8 {
+    NORMAL = 0;
+    AUCTION = 2;
+    CREATURE = 3 {
+        comment = "client send CMSG_CREATURE_QUERY on this mailmessagetype";
+    }
+    GAMEOBJECT = 4 {
+        comment = "client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype";
+    }
+    ITEM = 5 {
+        comment = "client send CMSG_ITEM_QUERY on this mailmessagetype";
+    }
+}
+
+
+enum AuraType : u32 {
+    NONE = 0;
+    BIND_SIGHT = 1;
+    MOD_POSSESS = 2;
+    PERIODIC_DAMAGE = 3 {
+        comment = "vmangos: The aura should do periodic damage, the function that handles this is Aura::HandlePeriodicDamage, the amount is usually decided by the Unit::SpellDamageBonusDone or Unit::MeleeDamageBonusDone which increases/decreases the Modifier::m_amount";
+    }
+    DUMMY = 4 {
+        comment = "vmangos: Used by Aura::HandleAuraDummy";
+    }
+    MOD_CONFUSE = 5 {
+        comment = "vmangos: Used by Aura::HandleModConfuse, will either confuse or unconfuse the target depending on whether the apply flag is set";
+    }
+    MOD_CHARM = 6;
+    MOD_FEAR = 7;
+    PERIODIC_HEAL = 8 {
+        comment = "vmangos: The aura will do periodic heals of a target, handled by Aura::HandlePeriodicHeal, uses Unit::SpellHealingBonusDone to calculate whether to increase or decrease Modifier::m_amount";
+    }
+    MOD_ATTACKSPEED = 9 {
+        comment = "vmangos: Changes the attackspeed, the Modifier::m_amount decides how much we change in percent, ie, if the m_amount is 50 the attackspeed will increase by 50%";
+    }
+    MOD_THREAT = 10 {
+        comment = "vmangos: Modifies the threat that the Aura does in percent, the Modifier::m_miscvalue decides which of the SpellSchools it should affect threat for.  \see SpellSchoolMask";
+    }
+    MOD_TAUNT = 11 {
+        comment = "vmangos: Just applies a taunt which will change the threat a mob has Taken care of in Aura::HandleModThreat";
+    }
+    MOD_STUN = 12 {
+        comment = "vmangos: Stuns targets in different ways, taken care of in Aura::HandleAuraModStun";
+    }
+    MOD_DAMAGE_DONE = 13 {
+        comment = "vmangos: Changes the damage done by a weapon in any hand, the Modifier::m_miscvalue will tell what school the damage is from, it's used as a bitmask \see SpellSchoolMask";
+    }
+    MOD_DAMAGE_TAKEN = 14 {
+        comment = "vmangos: Not handled by the Aura class but instead this is implemented in Unit::MeleeDamageBonusTaken and Unit::SpellBaseDamageBonusTaken";
+    }
+    DAMAGE_SHIELD = 15 {
+        comment = "vmangos: Not handled by the Aura class, implemented in Unit::DealMeleeDamage";
+    }
+    MOD_STEALTH = 16 {
+        comment = "vmangos: Taken care of in Aura::HandleModStealth, take note that this is not the same thing as invisibility";
+    }
+    MOD_STEALTH_DETECT = 17 {
+        comment = "vmangos: Not handled by the Aura class, implemented in Unit::isVisibleForOrDetect which does a lot of checks to determine whether the person is visible or not, the SPELL_AURA_MOD_STEALTH seems to determine how in/visible ie a rogue is.";
+    }
+    MOD_INVISIBILITY = 18 {
+        comment = "vmangos: Handled by Aura::HandleInvisibility, the Modifier::m_miscvalue in the struct seems to decide what kind of invisibility it is with a bitflag. the miscvalue decides which bit is set, ie: 3 would make the 3rd bit be set.";
+    }
+    MOD_INVISIBILITY_DETECTION = 19 {
+        comment = "vmangos: Adds one of the kinds of detections to the possible detections.  As in SPEALL_AURA_MOD_INVISIBILITY the Modifier::m_miscvalue seems to decide what kind of invisibility the Unit should be able to detect.";
+    }
+    OBS_MOD_HEALTH = 20 {
+        comment = "20,21 unofficial";
+    }
+    OBS_MOD_MANA = 21;
+    MOD_RESISTANCE = 22 {
+        comment = "vmangos: Handled by Aura::HandleAuraModResistance, changes the resistance for a unit the field Modifier::m_miscvalue decides which kind of resistance that should be changed, for possible values see SpellSchools.  \see SpellSchools";
+    }
+    PERIODIC_TRIGGER_SPELL = 23 {
+        comment = "vmangos: Currently just sets Aura::m_isPeriodic to apply and has a special case for Curse of the Plaguebringer.";
+    }
+    PERIODIC_ENERGIZE = 24 {
+        comment = "vmangos: Just sets Aura::m_isPeriodic to apply";
+    }
+    MOD_PACIFY = 25 {
+        comment = "vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: http://classic.wowhead.com/spell=6462";
+    }
+    MOD_ROOT = 26 {
+        comment = "vmangos: Roots or unroots the target";
+    }
+    MOD_SILENCE = 27 {
+        comment = "vmangos: Silences the target and stops and spell casts that should be stopped, they have the flag SpellPreventionType::SPELL_PREVENTION_TYPE_SILENCE";
+    }
+    REFLECT_SPELLS = 28;
+    MOD_STAT = 29;
+    MOD_SKILL = 30;
+    MOD_INCREASE_SPEED = 31;
+    MOD_INCREASE_MOUNTED_SPEED = 32;
+    MOD_DECREASE_SPEED = 33;
+    MOD_INCREASE_HEALTH = 34;
+    MOD_INCREASE_ENERGY = 35;
+    MOD_SHAPESHIFT = 36;
+    EFFECT_IMMUNITY = 37;
+    STATE_IMMUNITY = 38;
+    SCHOOL_IMMUNITY = 39;
+    DAMAGE_IMMUNITY = 40;
+    DISPEL_IMMUNITY = 41;
+    PROC_TRIGGER_SPELL = 42;
+    PROC_TRIGGER_DAMAGE = 43;
+    TRACK_CREATURES = 44;
+    TRACK_RESOURCES = 45;
+    UNKNOWN46 = 46 {
+        comment = "Ignore all Gear test spells";
+    }
+    MOD_PARRY_PERCENT = 47;
+    UNKNOWN48 = 48 {
+        comment = "One periodic spell";
+    }
+    MOD_DODGE_PERCENT = 49;
+    MOD_BLOCK_SKILL = 50;
+    MOD_BLOCK_PERCENT = 51;
+    MOD_CRIT_PERCENT = 52;
+    PERIODIC_LEECH = 53;
+    MOD_HIT_CHANCE = 54;
+    MOD_SPELL_HIT_CHANCE = 55;
+    TRANSFORM = 56;
+    MOD_SPELL_CRIT_CHANCE = 57;
+    MOD_INCREASE_SWIM_SPEED = 58;
+    MOD_DAMAGE_DONE_CREATURE = 59;
+    MOD_PACIFY_SILENCE = 60;
+    MOD_SCALE = 61;
+    PERIODIC_HEALTH_FUNNEL = 62;
+    PERIODIC_MANA_FUNNEL = 63;
+    PERIODIC_MANA_LEECH = 64;
+    MOD_CASTING_SPEED_NOT_STACK = 65;
+    FEIGN_DEATH = 66;
+    MOD_DISARM = 67;
+    MOD_STALKED = 68;
+    SCHOOL_ABSORB = 69;
+    EXTRA_ATTACKS = 70;
+    MOD_SPELL_CRIT_CHANCE_SCHOOL = 71;
+    MOD_POWER_COST_SCHOOL_PCT = 72;
+    MOD_POWER_COST_SCHOOL = 73;
+    REFLECT_SPELLS_SCHOOL = 74;
+    MOD_LANGUAGE = 75;
+    FAR_SIGHT = 76;
+    MECHANIC_IMMUNITY = 77;
+    MOUNTED = 78;
+    MOD_DAMAGE_PERCENT_DONE = 79;
+    MOD_PERCENT_STAT = 80;
+    SPLIT_DAMAGE_PCT = 81;
+    WATER_BREATHING = 82;
+    MOD_BASE_RESISTANCE = 83;
+    MOD_REGEN = 84;
+    MOD_POWER_REGEN = 85;
+    CHANNEL_DEATH_ITEM = 86;
+    MOD_DAMAGE_PERCENT_TAKEN = 87;
+    MOD_HEALTH_REGEN_PERCENT = 88;
+    PERIODIC_DAMAGE_PERCENT = 89;
+    MOD_RESIST_CHANCE = 90;
+    MOD_DETECT_RANGE = 91;
+    PREVENTS_FLEEING = 92;
+    MOD_UNATTACKABLE = 93;
+    INTERRUPT_REGEN = 94;
+    GHOST = 95;
+    SPELL_MAGNET = 96;
+    MANA_SHIELD = 97;
+    MOD_SKILL_TALENT = 98;
+    MOD_ATTACK_POWER = 99;
+    AURAS_VISIBLE = 100;
+    MOD_RESISTANCE_PCT = 101;
+    MOD_MELEE_ATTACK_POWER_VERSUS = 102;
+    MOD_TOTAL_THREAT = 103;
+    WATER_WALK = 104;
+    FEATHER_FALL = 105;
+    HOVER = 106;
+    ADD_FLAT_MODIFIER = 107;
+    ADD_PCT_MODIFIER = 108;
+    ADD_TARGET_TRIGGER = 109;
+    MOD_POWER_REGEN_PERCENT = 110;
+    ADD_CASTER_HIT_TRIGGER = 111;
+    OVERRIDE_CLASS_SCRIPTS = 112;
+    MOD_RANGED_DAMAGE_TAKEN = 113;
+    MOD_RANGED_DAMAGE_TAKEN_PCT = 114;
+    MOD_HEALING = 115;
+    MOD_REGEN_DURING_COMBAT = 116;
+    MOD_MECHANIC_RESISTANCE = 117;
+    MOD_HEALING_PCT = 118;
+    SHARE_PET_TRACKING = 119;
+    UNTRACKABLE = 120;
+    EMPATHY = 121;
+    MOD_OFFHAND_DAMAGE_PCT = 122;
+    MOD_TARGET_RESISTANCE = 123;
+    MOD_RANGED_ATTACK_POWER = 124;
+    MOD_MELEE_DAMAGE_TAKEN = 125;
+    MOD_MELEE_DAMAGE_TAKEN_PCT = 126;
+    RANGED_ATTACK_POWER_ATTACKER_BONUS = 127;
+    MOD_POSSESS_PET = 128;
+    MOD_SPEED_ALWAYS = 129;
+    MOD_MOUNTED_SPEED_ALWAYS = 130;
+    MOD_RANGED_ATTACK_POWER_VERSUS = 131;
+    MOD_INCREASE_ENERGY_PERCENT = 132;
+    MOD_INCREASE_HEALTH_PERCENT = 133;
+    MOD_MANA_REGEN_INTERRUPT = 134;
+    MOD_HEALING_DONE = 135;
+    MOD_HEALING_DONE_PERCENT = 136;
+    MOD_TOTAL_STAT_PERCENTAGE = 137;
+    MOD_MELEE_HASTE = 138;
+    FORCE_REACTION = 139;
+    MOD_RANGED_HASTE = 140;
+    MOD_RANGED_AMMO_HASTE = 141;
+    MOD_BASE_RESISTANCE_PCT = 142;
+    MOD_RESISTANCE_EXCLUSIVE = 143;
+    SAFE_FALL = 144;
+    CHARISMA = 145;
+    PERSUADED = 146;
+    MECHANIC_IMMUNITY_MASK = 147;
+    RETAIN_COMBO_POINTS = 148;
+    RESIST_PUSHBACK  = 149 {
+        comment = "Resist Pushback";
+    }
+    MOD_SHIELD_BLOCKVALUE_PCT = 150;
+    TRACK_STEALTHED  = 151 {
+        comment = "Track Stealthed";
+    }
+    MOD_DETECTED_RANGE = 152 {
+        comment = "Mod Detected Range";
+    }
+    SPLIT_DAMAGE_FLAT = 153 {
+        comment = "Split Damage Flat";
+    }
+    MOD_STEALTH_LEVEL = 154 {
+        comment = "Stealth Level Modifier";
+    }
+    MOD_WATER_BREATHING = 155 {
+        comment = "Mod Water Breathing";
+    }
+    MOD_REPUTATION_GAIN = 156 {
+        comment = "Mod Reputation Gain";
+    }
+    PET_DAMAGE_MULTI = 157 {
+        comment = "Mod Pet Damage";
+    }
+    MOD_SHIELD_BLOCKVALUE = 158;
+    NO_PVP_CREDIT = 159;
+    MOD_AOE_AVOIDANCE = 160;
+    MOD_HEALTH_REGEN_IN_COMBAT = 161;
+    POWER_BURN_MANA = 162;
+    MOD_CRIT_DAMAGE_BONUS = 163;
+    UNKNOWN164 = 164;
+    MELEE_ATTACK_POWER_ATTACKER_BONUS = 165;
+    MOD_ATTACK_POWER_PCT = 166;
+    MOD_RANGED_ATTACK_POWER_PCT = 167;
+    MOD_DAMAGE_DONE_VERSUS = 168;
+    MOD_CRIT_PERCENT_VERSUS = 169;
+    DETECT_AMORE = 170;
+    MOD_SPEED_NOT_STACK = 171;
+    MOD_MOUNTED_SPEED_NOT_STACK = 172;
+    ALLOW_CHAMPION_SPELLS = 173;
+    MOD_SPELL_DAMAGE_OF_STAT_PERCENT = 174 {
+        comment = "in 1.12.1 only dependent spirit case";
+    }
+    MOD_SPELL_HEALING_OF_STAT_PERCENT = 175;
+    SPIRIT_OF_REDEMPTION = 176;
+    AOE_CHARM = 177;
+    MOD_DEBUFF_RESISTANCE = 178;
+    MOD_ATTACKER_SPELL_CRIT_CHANCE = 179;
+    MOD_FLAT_SPELL_DAMAGE_VERSUS = 180;
+    MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS = 181 {
+        comment = "unused - possible flat spell crit damage versus";
+    }
+    MOD_RESISTANCE_OF_STAT_PERCENT = 182;
+    MOD_CRITICAL_THREAT = 183;
+    MOD_ATTACKER_MELEE_HIT_CHANCE = 184;
+    MOD_ATTACKER_RANGED_HIT_CHANCE = 185;
+    MOD_ATTACKER_SPELL_HIT_CHANCE = 186;
+    MOD_ATTACKER_MELEE_CRIT_CHANCE = 187;
+    MOD_ATTACKER_RANGED_CRIT_CHANCE = 188;
+    MOD_RATING = 189;
+    MOD_FACTION_REPUTATION_GAIN = 190;
+    USE_NORMAL_MOVEMENT_SPEED = 191;
+}
+
+struct AuraLog {
+    AuraType aura_type;
+    if (aura_type == PERIODIC_DAMAGE
+     || aura_type == PERIODIC_DAMAGE_PERCENT)
+    {
+        u32 damage1;
+        /* TODO Enum? */
+        SpellSchool school;
+        u32 absorbed;
+        u32 resisted {
+            comment = "vmangos: Sent as int32";
+        }
+    } else if (aura_type == PERIODIC_HEAL
+            || aura_type == OBS_MOD_HEALTH)
+    {
+        u32 damage2;
+    } else if (aura_type == OBS_MOD_MANA
+            || aura_type == PERIODIC_ENERGIZE)
+    {
+        u32 misc_value1 {
+            comment = "vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have";
+        }
+        u32 damage3;
+    } else if (aura_type == PERIODIC_MANA_LEECH)
+    {
+        u32 misc_value2 {
+            comment = "vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have";
+        }
+        u32 damage;
+        f32 gain_multiplier;
+    }
+}
+
+
+
+smsg SMSG_PERIODICAURALOG = 0x024E {
+    PackedGuid target;
+    PackedGuid caster;
+    Spell spell;
+    u32 amount_of_auras;
+    AuraLog[amount_of_auras] auras;
+}
+
+
+enum AuctionCommandAction : u32 {
+    STARTED = 0 {
+        comment = "ERR_AUCTION_STARTED";
+    }
+    REMOVED = 1 {
+        comment = "ERR_AUCTION_REMOVED";
+    }
+    BID_PLACED = 2 {
+        comment = "ERR_AUCTION_BID_PLACED";
+    }
+}
+
+enum AuctionCommandResult : u32 {
+    OK = 0 {
+        comment = "depends on enum AuctionAction";
+    }
+    ERR_INVENTORY = 1 {
+        comment = "depends on enum InventoryChangeResult";
+    }
+    ERR_DATABASE = 2 {
+        comment = "ERR_AUCTION_DATABASE_ERROR (default)";
+    }
+    ERR_NOT_ENOUGH_MONEY = 3 {
+        comment = "ERR_NOT_ENOUGH_MONEY";
+    }
+    ERR_ITEM_NOT_FOUND = 4 {
+        comment = "ERR_ITEM_NOT_FOUND";
+    }
+    ERR_HIGHER_BID = 5 {
+        comment = "ERR_AUCTION_HIGHER_BID";
+    }
+    ERR_BID_INCREMENT = 7 {
+        comment = "ERR_AUCTION_BID_INCREMENT";
+    }
+    ERR_BID_OWN = 10 {
+        comment = "ERR_AUCTION_BID_OWN";
+    }
+    ERR_RESTRICTED_ACCOUNT = 13 {
+        comment = "ERR_RESTRICTED_ACCOUNT";
+    }
+}
+
+
+enum SpellEffect : u32 {
+    NONE = 0;
+    INSTAKILL = 1;
+    SCHOOL_DAMAGE = 2;
+    DUMMY = 3;
+    PORTAL_TELEPORT = 4;
+    TELEPORT_UNITS = 5;
+    APPLY_AURA = 6;
+    ENVIRONMENTAL_DAMAGE = 7;
+    POWER_DRAIN = 8;
+    HEALTH_LEECH = 9;
+    HEAL = 10;
+    BIND = 11;
+    PORTAL = 12;
+    RITUAL_BASE = 13;
+    RITUAL_SPECIALIZE = 14;
+    RITUAL_ACTIVATE_PORTAL = 15;
+    QUEST_COMPLETE = 16;
+    WEAPON_DAMAGE_NOSCHOOL = 17;
+    RESURRECT = 18;
+    ADD_EXTRA_ATTACKS = 19;
+    DODGE = 20;
+    EVADE = 21;
+    PARRY = 22;
+    BLOCK = 23;
+    CREATE_ITEM = 24;
+    WEAPON = 25;
+    DEFENSE = 26;
+    PERSISTENT_AREA_AURA = 27;
+    SUMMON = 28;
+    LEAP = 29;
+    ENERGIZE = 30;
+    WEAPON_PERCENT_DAMAGE = 31;
+    TRIGGER_MISSILE = 32;
+    OPEN_LOCK = 33;
+    SUMMON_CHANGE_ITEM = 34;
+    APPLY_AREA_AURA_PARTY = 35;
+    LEARN_SPELL = 36;
+    SPELL_DEFENSE = 37;
+    DISPEL = 38;
+    LANGUAGE = 39;
+    DUAL_WIELD = 40;
+    SUMMON_WILD = 41;
+    SUMMON_GUARDIAN = 42;
+    TELEPORT_UNITS_FACE_CASTER= 43;
+    SKILL_STEP = 44;
+    ADD_HONOR = 45;
+    SPAWN = 46;
+    TRADE_SKILL = 47;
+    STEALTH = 48;
+    DETECT = 49;
+    TRANS_DOOR = 50;
+    FORCE_CRITICAL_HIT = 51;
+    GUARANTEE_HIT = 52;
+    ENCHANT_ITEM = 53;
+    ENCHANT_ITEM_TEMPORARY = 54;
+    TAMECREATURE = 55;
+    SUMMON_PET = 56;
+    LEARN_PET_SPELL = 57;
+    WEAPON_DAMAGE = 58;
+    OPEN_LOCK_ITEM = 59;
+    PROFICIENCY = 60;
+    SEND_EVENT = 61;
+    POWER_BURN = 62;
+    THREAT = 63;
+    TRIGGER_SPELL = 64;
+    HEALTH_FUNNEL = 65;
+    POWER_FUNNEL = 66;
+    HEAL_MAX_HEALTH = 67;
+    INTERRUPT_CAST = 68;
+    DISTRACT = 69;
+    PULL = 70;
+    PICKPOCKET = 71;
+    ADD_FARSIGHT = 72;
+    SUMMON_POSSESSED = 73;
+    SUMMON_TOTEM = 74;
+    HEAL_MECHANICAL = 75;
+    SUMMON_OBJECT_WILD = 76;
+    SCRIPT_EFFECT = 77;
+    ATTACK = 78;
+    SANCTUARY = 79;
+    ADD_COMBO_POINTS = 80;
+    CREATE_HOUSE = 81;
+    BIND_SIGHT = 82;
+    DUEL = 83;
+    STUCK = 84;
+    SUMMON_PLAYER = 85;
+    ACTIVATE_OBJECT = 86;
+    SUMMON_TOTEM_SLOT1 = 87;
+    SUMMON_TOTEM_SLOT2 = 88;
+    SUMMON_TOTEM_SLOT3 = 89;
+    SUMMON_TOTEM_SLOT4 = 90;
+    THREAT_ALL = 91;
+    ENCHANT_HELD_ITEM = 92;
+    SUMMON_PHANTASM = 93;
+    SELF_RESURRECT = 94;
+    SKINNING = 95;
+    CHARGE = 96;
+    SUMMON_CRITTER = 97;
+    KNOCK_BACK = 98;
+    DISENCHANT = 99;
+    INEBRIATE = 100;
+    FEED_PET = 101;
+    DISMISS_PET = 102;
+    REPUTATION = 103;
+    SUMMON_OBJECT_SLOT1 = 104;
+    SUMMON_OBJECT_SLOT2 = 105;
+    SUMMON_OBJECT_SLOT3 = 106;
+    SUMMON_OBJECT_SLOT4 = 107;
+    DISPEL_MECHANIC = 108;
+    SUMMON_DEAD_PET = 109;
+    DESTROY_ALL_TOTEMS = 110;
+    DURABILITY_DAMAGE = 111;
+    SUMMON_DEMON = 112;
+    RESURRECT_NEW = 113;
+    ATTACK_ME = 114;
+    DURABILITY_DAMAGE_PCT = 115;
+    SKIN_PLAYER_CORPSE = 116;
+    SPIRIT_HEAL = 117;
+    SKILL = 118;
+    APPLY_AREA_AURA_PET = 119;
+    TELEPORT_GRAVEYARD = 120;
+    NORMALIZED_WEAPON_DMG = 121;
+    UNKNOWN122 = 122;
+    SEND_TAXI = 123;
+    PLAYER_PULL = 124;
+    MODIFY_THREAT_PERCENT = 125;
+    UNKNOWN126 = 126;
+    UNKNOWN127 = 127;
+}
+
+struct SpellLog {
+    SpellEffect effect;
+    u32 amount_of_logs = 1 {
+        comment = "vmangos/cmangos/mangoszero: Can be variable but all use constant 1";
+    }
+    if (effect == POWER_DRAIN) {
+        Guid target1;
+        u32 unknown1;
+        u32 unknown2;
+        f32 unknown3;
+    } else if (effect == ADD_EXTRA_ATTACKS) {
+        Guid target2;
+        u32 unknown4;
+    } else if (effect == INTERRUPT_CAST) {
+        Guid target3;
+        Spell interrupted_spell;
+    } else if (effect == DURABILITY_DAMAGE) {
+        Guid target4;
+        u32 unknown5;
+        u32 unknown6;
+    } else if (effect == CREATE_ITEM) {
+        u32 spell_effect_item_type;
+    } else if (effect == FEED_PET) {
+        u32 item_target_entry;
+    } else if (effect == RESURRECT
+            || effect == DISPEL
+            || effect == THREAT
+            || effect == DISTRACT
+            || effect == SANCTUARY
+            || effect == THREAT_ALL
+            || effect == DISPEL_MECHANIC
+            || effect == RESURRECT_NEW
+            || effect == ATTACK_ME
+            || effect == SKIN_PLAYER_CORPSE
+            || effect == MODIFY_THREAT_PERCENT
+            || effect == UNKNOWN126
+            || effect == DISMISS_PET
+            || effect == OPEN_LOCK
+            || effect == OPEN_LOCK_ITEM
+            || effect == INSTAKILL)
+    {
+        Guid target5;
+    }
+}
+
+smsg SMSG_SPELLLOGEXECUTE = 0x024C {
+    PackedGuid caster;
+    Spell spell;
+    u32 amount_of_effects;
+    SpellLog[amount_of_effects] logs;
+}
+
+
+
+
+
+
+enum SimpleSpellCastResult : u8 {
+    SUCCESS = 0;
+    FAILURE = 2;
+}
+
+enum CastFailureReason : u8 {
+    AFFECTING_COMBAT = 0x00 {
+        comment = "You are in combat";
+    }
+    ALREADY_AT_FULL_HEALTH = 0x01 {
+        comment = "You are already at full Health.";
+    }
+    ALREADY_AT_FULL_POWER = 0x02 {
+        comment = "You are already at full %s.";
+    }
+    ALREADY_BEING_TAMED = 0x03 {
+        comment = "That creature is already being tamed";
+    }
+    ALREADY_HAVE_CHARM = 0x04 {
+        comment = "You already control a charmed creature";
+    }
+    ALREADY_HAVE_SUMMON = 0x05 {
+        comment = "You already control a summoned creature";
+    }
+    ALREADY_OPEN = 0x06 {
+        comment = "Already open";
+    }
+    AURA_BOUNCED = 0x07 {
+        comment = "A more powerful spell is already active";
+    }
+    AUTOTRACK_INTERRUPTED = 0x08 {
+        comment = "Message is hidden/unused";
+    }
+    BAD_IMPLICIT_TARGETS = 0x09 {
+        comment = "You have no target.";
+    }
+    BAD_TARGETS = 0x0a {
+        comment = "Invalid target";
+    }
+    CANT_BE_CHARMED = 0x0b {
+        comment = "Target can't be charmed";
+    }
+    CANT_BE_DISENCHANTED = 0x0c {
+        comment = "Item cannot be disenchanted";
+    }
+    CANT_BE_PROSPECTED = 0x0d {
+        comment = "There are no gems in this";
+    }
+    CANT_CAST_ON_TAPPED = 0x0e {
+        comment = "Target is tapped";
+    }
+    CANT_DUEL_WHILE_INVISIBLE = 0x0f {
+        comment = "You can't start a duel while invisible";
+    }
+    CANT_DUEL_WHILE_STEALTHED = 0x10 {
+        comment = "You can't start a duel while stealthed";
+    }
+    CANT_STEALTH = 0x11 {
+        comment = "You are too close to enemies";
+    }
+    CASTER_AURASTATE = 0x12 {
+        comment = "You can't do that yet";
+    }
+    CASTER_DEAD = 0x13 {
+        comment = "You are dead";
+    }
+    CHARMED = 0x14 {
+        comment = "Can't do that while charmed";
+    }
+    CHEST_IN_USE = 0x15 {
+        comment = "That is already being used";
+    }
+    CONFUSED = 0x16 {
+        comment = "Can't do that while confused";
+    }
+    DONT_REPORT = 0x17 {
+        comment = "Message is hidden/unused";
+    }
+    EQUIPPED_ITEM = 0x18 {
+        comment = "Must have the proper item equipped";
+    }
+    EQUIPPED_ITEM_CLASS = 0x19 {
+        comment = "Must have a %s equipped";
+    }
+    EQUIPPED_ITEM_CLASS_MAINHAND = 0x1a {
+        comment = "Must have a %s equipped in the main hand";
+    }
+    EQUIPPED_ITEM_CLASS_OFFHAND = 0x1b {
+        comment = "Must have a %s equipped in the offhand";
+    }
+    ERROR = 0x1c {
+        comment = "Internal error";
+    }
+    FIZZLE = 0x1d {
+        comment = "Fizzled";
+    }
+    FLEEING = 0x1e {
+        comment = "Can't do that while fleeing";
+    }
+    FOOD_LOWLEVEL = 0x1f {
+        comment = "That food's level is not high enough for your pet";
+    }
+    HIGHLEVEL = 0x20 {
+        comment = "Target is too high level";
+    }
+    HUNGER_SATIATED = 0x21 {
+        comment = "Message is hidden/unused";
+    }
+    IMMUNE = 0x22 {
+        comment = "Immune";
+    }
+    INTERRUPTED = 0x23 {
+        comment = "Interrupted";
+    }
+    INTERRUPTED_COMBAT = 0x24 {
+        comment = "Interrupted";
+    }
+    ITEM_ALREADY_ENCHANTED = 0x25 {
+        comment = "Item is already enchanted";
+    }
+    ITEM_GONE = 0x26 {
+        comment = "Item is gone";
+    }
+    ITEM_NOT_FOUND = 0x27 {
+        comment = "Tried to enchant an item that didn't exist";
+    }
+    ITEM_NOT_READY = 0x28 {
+        comment = "Item is not ready yet.";
+    }
+    LEVEL_REQUIREMENT = 0x29 {
+        comment = "You are not high enough level";
+    }
+    LINE_OF_SIGHT = 0x2a {
+        comment = "Target not in line of sight";
+    }
+    LOWLEVEL = 0x2b {
+        comment = "Target is too low level";
+    }
+    LOW_CASTLEVEL = 0x2c {
+        comment = "Skill not high enough";
+    }
+    MAINHAND_EMPTY = 0x2d {
+        comment = "Your weapon hand is empty";
+    }
+    MOVING = 0x2e {
+        comment = "Can't do that while moving";
+    }
+    NEED_AMMO = 0x2f {
+        comment = "Ammo needs to be in the paper doll ammo slot before it can be fired";
+    }
+    NEED_AMMO_POUCH = 0x30 {
+        comment = "Requires: %s";
+    }
+    NEED_EXOTIC_AMMO = 0x31 {
+        comment = "Requires exotic ammo: %s";
+    }
+    NOPATH = 0x32 {
+        comment = "No path available";
+    }
+    NOT_BEHIND = 0x33 {
+        comment = "You must be behind your target";
+    }
+    NOT_FISHABLE = 0x34 {
+        comment = "Your cast didn't land in fishable water";
+    }
+    NOT_HERE = 0x35 {
+        comment = "You can't use that here";
+    }
+    NOT_INFRONT = 0x36 {
+        comment = "You must be in front of your target";
+    }
+    NOT_IN_CONTROL = 0x37 {
+        comment = "You are not in control of your actions";
+    }
+    NOT_KNOWN = 0x38 {
+        comment = "Spell not learned";
+    }
+    NOT_MOUNTED = 0x39 {
+        comment = "You are mounted";
+    }
+    NOT_ON_TAXI = 0x3a {
+        comment = "You are in flight";
+    }
+    NOT_ON_TRANSPORT = 0x3b {
+        comment = "You are on a transport";
+    }
+    NOT_READY = 0x3c {
+        comment = "Spell is not ready yet.";
+    }
+    NOT_SHAPESHIFT = 0x3d {
+        comment = "You are in shapeshift form";
+    }
+    NOT_STANDING = 0x3e {
+        comment = "You must be standing to do that";
+    }
+    NOT_TRADEABLE = 0x3f {
+        comment = "You can only use this on an object you own";
+    }
+    NOT_TRADING = 0x40 {
+        comment = "Tried to enchant a trade item, but not trading";
+    }
+    NOT_UNSHEATHED = 0x41 {
+        comment = "You have to be unsheathed to do that!";
+    }
+    NOT_WHILE_GHOST = 0x42 {
+        comment = "Can't cast as ghost";
+    }
+    NO_AMMO = 0x43 {
+        comment = "Out of ammo";
+    }
+    NO_CHARGES_REMAIN = 0x44 {
+        comment = "No charges remain";
+    }
+    NO_CHAMPION = 0x45 {
+        comment = "You haven't selected a champion";
+    }
+    NO_COMBO_POINTS = 0x46 {
+        comment = "That ability requires combo points";
+    }
+    NO_DUELING = 0x47 {
+        comment = "Dueling isn't allowed here";
+    }
+    NO_ENDURANCE = 0x48 {
+        comment = "Not enough endurance";
+    }
+    NO_FISH = 0x49 {
+        comment = "There aren't any fish here";
+    }
+    NO_ITEMS_WHILE_SHAPESHIFTED = 0x4a {
+        comment = "Can't use items while shapeshifted";
+    }
+    NO_MOUNTS_ALLOWED = 0x4b {
+        comment = "You can't mount here";
+    }
+    NO_PET = 0x4c {
+        comment = "You do not have a pet";
+    }
+    NO_POWER = 0x4d {
+        comment = "Dynamic pre-defined messages, no args: Not enough mana, Not enough rage, etc";
+    }
+    NOTHING_TO_DISPEL = 0x4e {
+        comment = "Nothing to dispel";
+    }
+    NOTHING_TO_STEAL = 0x4f {
+        comment = "Nothing to steal";
+    }
+    ONLY_ABOVEWATER = 0x50 {
+        comment = "Cannot use while swimming";
+    }
+    ONLY_DAYTIME = 0x51 {
+        comment = "Can only use during the day";
+    }
+    ONLY_INDOORS = 0x52 {
+        comment = "Can only use indoors";
+    }
+    ONLY_MOUNTED = 0x53 {
+        comment = "Can only use while mounted";
+    }
+    ONLY_NIGHTTIME = 0x54 {
+        comment = "Can only use during the night";
+    }
+    ONLY_OUTDOORS = 0x55 {
+        comment = "Can only use outside";
+    }
+    ONLY_SHAPESHIFT = 0x56 {
+        comment = "Must be in %s";
+    }
+    ONLY_STEALTHED = 0x57 {
+        comment = "You must be in stealth mode";
+    }
+    ONLY_UNDERWATER = 0x58 {
+        comment = "Can only use while swimming";
+    }
+    OUT_OF_RANGE = 0x59 {
+        comment = "Out of range.";
+    }
+    PACIFIED = 0x5a {
+        comment = "Can't use that ability while pacified";
+    }
+    POSSESSED = 0x5b {
+        comment = "You are possessed";
+    }
+    REAGENTS = 0x5c {
+        comment = "Message is hidden/unused, supposedly implemented client-side only";
+    }
+    REQUIRES_AREA = 0x5d {
+        comment = "You need to be in %s";
+    }
+    REQUIRES_SPELL_FOCUS = 0x5e {
+        comment = "Requires %s";
+    }
+    ROOTED = 0x5f {
+        comment = "You are unable to move";
+    }
+    SILENCED = 0x60 {
+        comment = "Can't do that while silenced";
+    }
+    SPELL_IN_PROGRESS = 0x61 {
+        comment = "Another action is in progress";
+    }
+    SPELL_LEARNED = 0x62 {
+        comment = "You have already learned the spell";
+    }
+    SPELL_UNAVAILABLE = 0x63 {
+        comment = "The spell is not available to you";
+    }
+    STUNNED = 0x64 {
+        comment = "Can't do that while stunned";
+    }
+    TARGETS_DEAD = 0x65 {
+        comment = "Your target is dead";
+    }
+    TARGET_AFFECTING_COMBAT = 0x66 {
+        comment = "Target is in combat";
+    }
+    TARGET_AURASTATE = 0x67 {
+        comment = "You can't do that yet";
+    }
+    TARGET_DUELING = 0x68 {
+        comment = "Target is currently dueling";
+    }
+    TARGET_ENEMY = 0x69 {
+        comment = "Target is hostile";
+    }
+    TARGET_ENRAGED = 0x6a {
+        comment = "Target is too enraged to be charmed";
+    }
+    TARGET_FRIENDLY = 0x6b {
+        comment = "Target is friendly";
+    }
+    TARGET_IN_COMBAT = 0x6c {
+        comment = "The target can't be in combat";
+    }
+    TARGET_IS_PLAYER = 0x6d {
+        comment = "Can't target players";
+    }
+    TARGET_NOT_DEAD = 0x6e {
+        comment = "Target is alive";
+    }
+    TARGET_NOT_IN_PARTY = 0x6f {
+        comment = "Target is not in your party";
+    }
+    TARGET_NOT_LOOTED = 0x70 {
+        comment = "Creature must be looted first";
+    }
+    TARGET_NOT_PLAYER = 0x71 {
+        comment = "Target is not a player";
+    }
+    TARGET_NO_POCKETS = 0x72 {
+        comment = "No pockets to pick";
+    }
+    TARGET_NO_WEAPONS = 0x73 {
+        comment = "Target has no weapons equipped";
+    }
+    TARGET_UNSKINNABLE = 0x74 {
+        comment = "Creature is not skinnable";
+    }
+    THIRST_SATIATED = 0x75 {
+        comment = "Message is hidden/unused";
+    }
+    TOO_CLOSE = 0x76 {
+        comment = "Target too close";
+    }
+    TOO_MANY_OF_ITEM = 0x77 {
+        comment = "You have too many of that item already";
+    }
+    TOTEMS = 0x78 {
+        comment = "Message is hidden/unused, supposedly implemented client-side only";
+    }
+    TRAINING_POINTS = 0x79 {
+        comment = "Not enough training points";
+    }
+    TRY_AGAIN = 0x7a {
+        comment = "Failed attempt";
+    }
+    UNIT_NOT_BEHIND = 0x7b {
+        comment = "Target needs to be behind you";
+    }
+    UNIT_NOT_INFRONT = 0x7c {
+        comment = "Target needs to be in front of you";
+    }
+    WRONG_PET_FOOD = 0x7d {
+        comment = "Your pet doesn't like that food";
+    }
+    NOT_WHILE_FATIGUED = 0x7e {
+        comment = "Can't cast while fatigued";
+    }
+    TARGET_NOT_IN_INSTANCE = 0x7f {
+        comment = "Target must be in this instance";
+    }
+    NOT_WHILE_TRADING = 0x80 {
+        comment = "Can't cast while trading";
+    }
+    TARGET_NOT_IN_RAID = 0x81 {
+        comment = "Target is not in your party or raid group";
+    }
+    DISENCHANT_WHILE_LOOTING = 0x82 {
+        comment = "Cannot disenchant while looting";
+    }
+    PROSPECT_WHILE_LOOTING = 0x83 {
+        comment = "Cannot prospect while looting";
+    }
+    PROSPECT_NEED_MORE = 0x84 {
+        comment = "Message is hidden/unused, supposedly implemented client-side only";
+    }
+    TARGET_FREEFORALL = 0x85 {
+        comment = "Target is currently in free-for-all PvP combat";
+    }
+    NO_EDIBLE_CORPSES = 0x86 {
+        comment = "There are no nearby corpses to eat";
+    }
+    ONLY_BATTLEGROUNDS = 0x87 {
+        comment = "Can only use in battlegrounds";
+    }
+    TARGET_NOT_GHOST = 0x88 {
+        comment = "Target is not a ghost";
+    }
+    TOO_MANY_SKILLS = 0x89 {
+        comment = "Your pet can't learn any more skills";
+    }
+    TRANSFORM_UNUSABLE = 0x8a {
+        comment = "You can't use the new item";
+    }
+    WRONG_WEATHER = 0x8b {
+        comment = "The weather isn't right for that";
+    }
+    DAMAGE_IMMUNE = 0x8c {
+        comment = "You can't do that while you are immune";
+    }
+    PREVENTED_BY_MECHANIC = 0x8d {
+        comment = "Can't do that while %s";
+    }
+    PLAY_TIME = 0x8e {
+        comment = "Maximum play time exceeded";
+    }
+    REPUTATION = 0x8f {
+        comment = "Your reputation isn't high enough";
+    }
+    MIN_SKILL = 0x90 {
+        comment = "Your skill is not high enough.  Requires %s (%d).";
+    }
+    UNKNOWN = 0x91 {
+        comment = "Generic out of bounds response:  Unknown reason";
+    }
+}
+
+smsg SMSG_CAST_RESULT = 0x0130 {
+    Spell spell;
+    SimpleSpellCastResult result;
+    if (result != FAILURE) {
+        CastFailureReason reason;       
+        if (reason == REQUIRES_SPELL_FOCUS) {
+            u32 required_spell_focus;
+        } else if (reason == REQUIRES_AREA) {
+            Area area;
+        } else if (reason == EQUIPPED_ITEM_CLASS) {
+            u32 equipped_item_class;
+            u32 equipped_item_subclass_mask;
+            u32 equipped_item_inventory_type_mask;
+        }
+    }
+}
+
+
+cmsg MSG_RAID_READY_CHECK_Client = 0x0322 {
+    optional answer {
+        u8 state;
+    }
+}
+
+smsg MSG_RAID_READY_CHECK_Server = 0x0322 {
+    optional state_check {
+        Guid guid;
+        u8 state;
+    }
+}
+
+smsg SMSG_TRANSFER_PENDING = 0x003F {
+    Map map;
+    optional has_transport {
+        u32 transport;
+        Map transport_map;
+    }
+}
+
+struct ItemStat {
+    u32 item_stat_type;
+    u32 item_stat_value;
+}
+
+struct ItemDamageType {
+    u32 damage_minimum;
+    u32 damage_maximum;
+    u32 damage_type {
+        comment = "mangoszero/vmangos/cmangos: id from Resistances.dbc";
+    }
+}
+
+struct ItemSpells {
+    Spell spell;   
+    u32 spell_trigger;
+    u32 spell_charges {
+        comment = "let the database control the sign here. negative means that the item should be consumed once the charges are consumed.";
+    }
+    u32 spell_cooldown;
+    u32 spell_category;
+    u32 spell_category_cooldown;
+}
+
+cmsg CMSG_PET_SET_ACTION = 0x0174 {
+    Guid guid;
+    u32 position1;
+    u32 data1;
+    optional extra {
+        u32 position2;
+        u32 data2;
+    }
+}
+
+cmsg CMSG_GOSSIP_SELECT_OPTION = 0x017C {
+    Guid guid;
+    u32 gossip_list_id;
+    optional unknown {
+        CString code {
+            comment = "vmangos: if (_player->PlayerTalkClass->GossipOptionCoded(gossipListId))";
+        }
+    }
+}
+
+
+cmsg CMSG_TOGGLE_PVP = 0x0253 {
+    optional set {
+        Bool enable_pvp;
+    }
+} {
+    comment = "vmangos: this opcode can be used in two ways: Either set explicit new status or toggle old status";
+}
+
+enum GroupType : u8 {
+    NORMAL = 0;
+    RAID = 1;
+}
+
+struct GroupListMember {
+    CString name;
+    Guid guid;
+    Bool is_online;
+}
+
+smsg SMSG_GROUP_LIST = 0x007D {
+    GroupType group_type;   
+    u8 own_flags {
+        comment = "mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))";
+    }
+    u32 amount_of_members;
+    GroupListMember[amount_of_members] members;
+    Guid leader;
+    /* TODO: INT_EQUALS */
+    optional group_not_empty {
+        GroupLootSetting loot_setting;
+        Guid master_loot {
+            comment = "Zero if loot_setting is not MASTER_LOOT";
+        }
+        ItemQuality loot_threshold;
+    }
+}
+
+
+
+flag SpellCastTargetFlags : u16 {
+    SELF = 0x00000000;
+    UNUSED1 = 0x00000001 {
+        comment = "not used in any spells as of 2.4.3 (can be set dynamically)";
+    }
+    UNIT = 0x00000002 {
+        comment = "pguid";
+    }
+    UNIT_RAID = 0x00000004 {
+        comment = "not used in any spells as of 2.4.3 (can be set dynamically) - raid member";
+    }
+    UNIT_PARTY = 0x00000008 {
+        comment = "not used in any spells as of 2.4.3 (can be set dynamically) - party member";
+    }
+    ITEM = 0x00000010 {
+        comment = "pguid";
+    }
+    SOURCE_LOCATION = 0x00000020 {
+        comment = "3xfloat";
+    }
+    DEST_LOCATION = 0x00000040 {
+        comment = "3xfloat";
+    }
+    UNIT_ENEMY = 0x00000080 {
+        comment = "CanAttack == true";
+    }
+    UNIT_ALLY = 0x00000100 {
+        comment = "CanAssist == true";
+    }
+    CORPSE_ENEMY = 0x00000200 {
+        comment = "pguid, CanAssist == false";
+    }
+    UNIT_DEAD = 0x00000400 {
+        comment = "skinning-like effects";
+    }
+    GAMEOBJECT = 0x00000800 {
+        comment = "pguid, 0 spells in 2.4.3";
+    }
+    TRADE_ITEM = 0x00001000 {
+        comment = "pguid, 0 spells";
+    }
+    STRING = 0x00002000 {
+        comment = "string, 0 spells";
+    }
+    LOCKED = 0x00004000 {
+        comment = "199 spells, opening object/lock";
+    }
+    CORPSE_ALLY = 0x00008000 {
+        comment = "pguid, CanAssist == true";
+    }
+} {
+    comment = "Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which SpellCastTargets needs.";
+}
+
+
+
+struct SpellCastTargets {
+    SpellCastTargetFlags target_flags;
+    if (target_flags & UNIT) {
+        PackedGuid unit_target1;
+    }
+    if (target_flags & UNIT_ENEMY) {
+        PackedGuid unit_target2;
+    }
+    if (target_flags & GAMEOBJECT) {
+        PackedGuid object_target1;
+    }
+    if (target_flags & LOCKED) {
+        PackedGuid object_target2;
+    }
+    if (target_flags & ITEM) {
+        PackedGuid item_target1;
+    }
+    if (target_flags & TRADE_ITEM) {
+        PackedGuid item_target2;
+    }
+    if (target_flags & SOURCE_LOCATION) {
+        f32 position_x1;
+        f32 position_y1;
+        f32 position_z1;
+    }
+    if (target_flags & DEST_LOCATION) {
+        f32 position_x2;
+        f32 position_y2;
+        f32 position_z2;
+    }
+    if (target_flags & STRING) {
+        CString target_string;
+    }
+    if (target_flags & CORPSE_ALLY) {
+        PackedGuid corpse_target1;
+    }
+    if (target_flags & CORPSE_ENEMY) {
+        PackedGuid corpse_target2;
+    }
+}
+
+cmsg CMSG_USE_ITEM = 0x00AB {
+    u8 bag_index;
+    u8 bag_slot;
+    u8 spell_index;
+    SpellCastTargets targets;
+}
+
+cmsg CMSG_CAST_SPELL = 0x012E {
+    Spell spell;
+    SpellCastTargets targets;
+}
+
+smsg SMSG_SPELLHEALLOG = 0x0150 {
+    PackedGuid victim_guid;
+    PackedGuid caster_guid;
+    u32 spell_id;
+    u32 damage;
+    Bool critical; /* TODO: Add bool */
+}
+
+smsg SMSG_ATTACKSTOP = 0x0144 {
+    PackedGuid player;
+    PackedGuid enemy;
+    u32 unknown1 {
+        comment = "cmangos/vmangos/mangoszero: set to 0 with comment: unk, can be 1 also";
+    }
+}
+
+enum PowerType : u32 {
+    MANA = 0 {
+        comment = "UNIT_FIELD_POWER1";
+    }
+    RAGE = 1 {
+        comment = "UNIT_FIELD_POWER2";
+    }
+    FOCUS = 2 {
+        comment = "UNIT_FIELD_POWER3";
+    }
+    ENERGY = 3 {
+        comment = "UNIT_FIELD_POWER4";
+    }
+    HAPPINESS = 4 {
+        comment = "UNIT_FIELD_POWER5";
+    }
+    HEALTH = 0xFFFFFFFE {
+        comment = "(-2 as signed value)";
+    }
+}
+
+
+smsg SMSG_SPELLENERGIZELOG = 0x0151 {
+    PackedGuid victim_guid;
+    PackedGuid caster_guid;
+    Spell spell;
+    PowerType power;
+    u32 damage;
+}
+
+smsg SMSG_CLIENT_CONTROL_UPDATE = 0x0159 {
+    PackedGuid guid;
+    u8 allow_movement;
+}
+
+
+
+smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
+    /* TODO Possible enum? */
+    u32 hit_info;
+    PackedGuid attacker;
+    PackedGuid target;
+    u32 total_damage;
+}
+
+
+
+/* TODO Real names?
+enum ItemClass : u8 {
+    CONSUMABLE = 0;
+    CONTAINER = 1;
+    WEAPON = 2;
+    GEM = 3;
+    ARMOR = 4;
+    REAGENT = 5;
+    PROJECTILE = 6;
+    TRADE_GOODS = 7;
+    GENERIC = 8;
+    RECIPE = 9;
+    MONEY = 10;
+    QUIVER = 11;
+    QUEST = 12;
+    KEY = 13;
+    PERMANENT = 14;
+    JUNK = 15;
+}
+*/
+enum ItemClass : u8 {
+    CONSUMABLE = 0;
+    CONTAINER = 1;
+    WEAPON = 2;
+    RESERVED_1 = 3;
+    ARMOR = 4;
+    REAGENT = 5;
+    PROJECTILE = 6;
+    TRADE_GOODS = 7;
+    RESERVED_2 = 8;
+    RECIPE = 9;
+    RESERVED_3 = 10;
+    QUIVER = 11;
+    QUEST = 12;
+    KEY = 13;
+    RESERVED_4 = 14;
+    MISC = 15;
+}
+
+smsg SMSG_SET_PROFICIENCY = 0x0127 {
+    ItemClass class;
+    u32 item_sub_class_mask;
+}
+
+cmsg CMSG_SET_ACTION_BUTTON = 0x0128 {
+    u8 button;
+    u32 action_type {
+        comment = "Most significant byte determines types, rest is action.";
+    }
+}
+
+smsg SMSG_ACTION_BUTTONS = 0x0129 {
+    u32[120] data;
+}
+
+smsg SMSG_LEARNED_SPELL = 0x012B {
+    u32 spell_id;
+}
+
+smsg SMSG_SUPERCEDED_SPELL = 0x012C {
+    u16 new_spell_id;
+    u16 old_spell_id;
+}
+
+cmsg CMSG_CANCEL_CAST = 0x012F {
+    u32 spell_id;
+}
+
+enum SpellCastResult : u8 {
+    AFFECTING_COMBAT = 0x00;
+    ALREADY_AT_FULL_HEALTH = 0x01;
+    ALREADY_AT_FULL_MANA = 0x02;
+    ALREADY_BEING_TAMED = 0x03;
+    ALREADY_HAVE_CHARM = 0x04;
+    ALREADY_HAVE_SUMMON = 0x05;
+    ALREADY_OPEN = 0x06;
+    MORE_POWERFUL_SPELL_ACTIVE = 0x07;
+    BAD_IMPLICIT_TARGETS = 0x09;
+    BAD_TARGETS = 0x0A;
+    CANT_BE_CHARMED = 0x0B;
+    CANT_BE_DISENCHANTED = 0x0C;
+    CANT_BE_PROSPECTED = 0x0D;
+    CANT_CAST_ON_TAPPED = 0x0E;
+    CANT_DUEL_WHILE_INVISIBLE = 0x0F;
+    CANT_DUEL_WHILE_STEALTHED = 0x10;
+    CANT_TOO_CLOSE_TO_ENEMY = 0x11;
+    CANT_DO_THAT_YET = 0x12;
+    CASTER_DEAD = 0x13;
+    CHARMED = 0x14;
+    CHEST_IN_USE = 0x15;
+    CONFUSED = 0x16;
+    DONT_REPORT = 0x17;
+    EQUIPPED_ITEM = 0x18;
+    EQUIPPED_ITEM_CLASS = 0x19;
+    EQUIPPED_ITEM_CLASS_MAINHAND = 0x1A;
+    EQUIPPED_ITEM_CLASS_OFFHAND = 0x1B;
+    ERROR = 0x1C;
+    FIZZLE = 0x1D;
+    FLEEING = 0x1E;
+    FOOD_LOWLEVEL = 0x1F;
+    HIGHLEVEL = 0x20;
+    IMMUNE = 0x22;
+    INTERRUPTED = 0x23;
+    INTERRUPTED_COMBAT = 0x24;
+    ITEM_ALREADY_ENCHANTED = 0x25;
+    ITEM_GONE = 0x26;
+    ENCHANT_NOT_EXISTING_ITEM = 0x27;
+    ITEM_NOT_READY = 0x28;
+    LEVEL_REQUIREMENT = 0x29;
+    LINE_OF_SIGHT = 0x2A;
+    LOWLEVEL = 0x2B;
+    SKILL_NOT_HIGH_ENOUGH = 0x2C;
+    MAINHAND_EMPTY = 0x2D;
+    MOVING = 0x2E;
+    NEED_AMMO = 0x2F;
+    NEED_REQUIRES_SOMETHING = 0x30;
+    NEED_EXOTIC_AMMO = 0x31;
+    NOPATH = 0x32;
+    NOT_BEHIND = 0x33;
+    NOT_FISHABLE = 0x34;
+    NOT_HERE = 0x35;
+    NOT_INFRONT = 0x36;
+    NOT_IN_CONTROL = 0x37;
+    NOT_KNOWN = 0x38;
+    NOT_MOUNTED = 0x39;
+    NOT_ON_TAXI = 0x3A;
+    NOT_ON_TRANSPORT = 0x3B;
+    NOT_READY = 0x3C;
+    NOT_SHAPESHIFT = 0x3D;
+    NOT_STANDING = 0x3E;
+    NOT_TRADEABLE = 0x3F {
+        comment = "rogues trying 'enchant' other's weapon with poison";
+    }
+    NOT_TRADING = 0x40;
+    NOT_UNSHEATHED = 0x41;
+    NOT_WHILE_GHOST = 0x42;
+    NO_AMMO = 0x43;
+    NO_CHARGES_REMAIN = 0x44;
+    NO_CHAMPION = 0x45;
+    NO_COMBO_POINTS = 0x46;
+    NO_DUELING = 0x47;
+    NO_ENDURANCE = 0x48;
+    NO_FISH = 0x49;
+    NO_ITEMS_WHILE_SHAPESHIFTED = 0x4A;
+    NO_MOUNTS_ALLOWED = 0x4B;
+    NO_PET = 0x4C;
+    NO_POWER = 0x4D;
+    NOTHING_TO_DISPEL = 0x4E;
+    NOTHING_TO_STEAL = 0x4F;
+    ONLY_ABOVEWATER = 0x50;
+    ONLY_DAYTIME = 0x51;
+    ONLY_INDOORS = 0x52;
+    ONLY_MOUNTED = 0x53;
+    ONLY_NIGHTTIME = 0x54;
+    ONLY_OUTDOORS = 0x55;
+    ONLY_SHAPESHIFT = 0x56;
+    ONLY_STEALTHED = 0x57;
+    ONLY_UNDERWATER = 0x58;
+    OUT_OF_RANGE = 0x59;
+    PACIFIED = 0x5A;
+    POSSESSED = 0x5B;
+    REQUIRES_AREA = 0x5D;
+    REQUIRES_SPELL_FOCUS = 0x5E;
+    ROOTED = 0x5F;
+    SILENCED = 0x60;
+    SPELL_IN_PROGRESS = 0x61;
+    SPELL_LEARNED = 0x62;
+    SPELL_UNAVAILABLE = 0x63;
+    STUNNED = 0x64;
+    TARGETS_DEAD = 0x65;
+    TARGET_AFFECTING_COMBAT = 0x66;
+    TARGET_AURASTATE = 0x67;
+    TARGET_DUELING = 0x68;
+    TARGET_ENEMY = 0x69;
+    TARGET_ENRAGED = 0x6A;
+    TARGET_FRIENDLY = 0x6B;
+    TARGET_IN_COMBAT = 0x6C;
+    TARGET_IS_PLAYER = 0x6D;
+    TARGET_NOT_DEAD = 0x6E;
+    TARGET_NOT_IN_PARTY = 0x6F;
+    TARGET_NOT_LOOTED = 0x70;
+    TARGET_NOT_PLAYER = 0x71;
+    TARGET_NO_POCKETS = 0x72;
+    TARGET_NO_WEAPONS = 0x73;
+    TARGET_UNSKINNABLE = 0x74;
+    THIRST_SATIATED = 0x75;
+    TOO_CLOSE = 0x76;
+    TOO_MANY_OF_ITEM = 0x77;
+    TRAINING_POINTS = 0x79;
+    TRY_AGAIN = 0x7A;
+    UNIT_NOT_BEHIND = 0x7B;
+    UNIT_NOT_INFRONT = 0x7C;
+    WRONG_PET_FOOD = 0x7D;
+    NOT_WHILE_FATIGUED = 0x7E;
+    TARGET_NOT_IN_INSTANCE = 0x7F;
+    NOT_WHILE_TRADING = 0x80;
+    TARGET_NOT_IN_RAID = 0x81;
+    DISENCHANT_WHILE_LOOTING = 0x82;
+    PROSPECT_WHILE_LOOTING = 0x83;
+    TARGET_FREEFORALL = 0x85;
+    NO_EDIBLE_CORPSES = 0x86;
+    ONLY_BATTLEGROUNDS = 0x87;
+    TARGET_NOT_GHOST = 0x88;
+    TOO_MANY_SKILLS = 0x89;
+    CANT_USE_NEW_ITEM = 0x8A;
+    WRONG_WEATHER = 0x8B;
+    DAMAGE_IMMUNE = 0x8C;
+    PREVENTED_BY_MECHANIC = 0x8D;
+    PLAY_TIME = 0x8E;
+    REPUTATION = 0x8F;
+    MIN_SKILL = 0x90;
+    UNKNOWN = 0x91;
+}
+
+smsg SMSG_SPELL_FAILURE = 0x0133 {
+    u64 guid;
+    u32 spell_id;
+    SpellCastResult result;
+}
+
+smsg SMSG_COOLDOWN_EVENT = 0x0135 {
+    u32 spell_id;
+    u64 guid;
+}
+
+cmsg CMSG_CANCEL_AURA = 0x0136 {
+    u32 spell_id;
+}
+
+
+smsg SMSG_UPDATE_AURA_DURATION = 0x0137 {
+    u8 aura_slot;
+    u32 aura_duration;
+}
+
+smsg SMSG_PET_CAST_FAILED = 0x0138 {
+    u32 spell_id;
+    u8 unknown1 {
+        comment = "vmangos sets to 2 and cmangos sets to 0.";
+    }
+    SpellCastResult result;
+}
+
+cmsg CMSG_CANCEL_CHANNELLING = 0x013B {
+    u32 spell_id;
+}
+
+enum AiReaction : u32 {
+    ALERT = 0 {
+        comment = "pre-aggro (used in client packet handler)";
+    }
+    FRIENDLY = 1 {
+        comment = "(NOT used in client packet handler)";
+    }
+    HOSTILE = 2 {
+        comment = "sent on every attack, triggers aggro sound (used in client packet handler)";
+    }
+    AFRAID = 3 {
+        comment = "seen for polymorph (when AI not in control of self?) (NOT used in client packet handler)";
+    }
+    DESTROY = 4 {
+        comment = "used on object destroy (NOT used in client packet handler)";
+    }
+}
+
+smsg SMSG_AI_REACTION = 0x013C {
+    u64 guid;
+    AiReaction reaction;
+}
+
+cmsg CMSG_SET_TARGET_OBSOLETE = 0x013E {
+    u64 guid;
+}
+
+cmsg CMSG_ATTACKSWING = 0x0141 {
+    u64 guid;
+}
+
+cmsg CMSG_ATTACKSTOP = 0x0142 {}
+
+smsg SMSG_ATTACKSTART = 0x0143 {
+    u64 attacker_guid;
+    u64 victim_guid;
+}
+
+smsg SMSG_ATTACKSWING_NOTINRANGE = 0x0145 {}
+
+smsg SMSG_ATTACKSWING_BADFACING = 0x0146 {}
+
+smsg SMSG_ATTACKSWING_NOTSTANDING = 0x0147 {}
+
+smsg SMSG_ATTACKSWING_DEADTARGET = 0x0148 {}
+
+smsg SMSG_ATTACKSWING_CANT_ATTACK = 0x0149 {}
+
+smsg SMSG_CANCEL_COMBAT = 0x014E {}
+
+smsg SMSG_BINDPOINTUPDATE = 0x0155 {
+    f32 position_x;
+    f32 position_y;
+    f32 position_z;
+    Map map;
+    Area area;
+} {
+    description = "Set new hearthstone location.";
+}
+
+smsg SMSG_PLAYERBOUND = 0x0158 {
+    u64 guid;
+    Area area;
+}
+
+cmsg CMSG_REPOP_REQUEST = 0x015A {}
+
+cmsg CMSG_RESURRECT_RESPONSE = 0x015C {
+    u64 guid;
+    u8 status;
+}
+
+
+smsg SMSG_RESURRECT_REQUEST = 0x015B {
+    u64 guid;
+    u32 name_length;
+    /* CString with length? */
+    CString name;
+    u8 caster_is_spirit_healer;
+    u8 respect_resurrection_timer;
+}
+
+cmsg CMSG_LOOT = 0x015D {
+    u64 guid;
+}
+
+cmsg CMSG_LOOT_MONEY = 0x015E {}
+
+cmsg CMSG_LOOT_RELEASE = 0x015F {
+    u64 guid;
+}
+
+enum LootMethod : u8 {
+    CORPSE                 = 1;
+    PICKPOCKETING          = 2;
+    FISHING                = 3;
+    DISENCHANTING          = 4;
+    SKINNING               = 6 {
+        comment = "unsupported by client, send LOOT_PICKPOCKETING instead";
+    }
+    FISHINGHOLE            = 20 {
+        comment = "unsupported by client, send LOOT_FISHING instead";
+    }
+    FISHING_FAIL           = 21 {
+        comment = "unsupported by client, send LOOT_FISHING instead";
+    }
+    INSIGNIA               = 22 {
+        comment = "unsupported by client, send LOOT_CORPSE instead";
+    }
+}
+
+smsg SMSG_LOOT_RESPONSE = 0x0160 {
+    u64 guid;
+    LootMethod loot_method;
+}
+
+smsg SMSG_LOOT_RELEASE_RESPONSE = 0x0161 {
+    u64 guid;
+    u8 unknown1 {
+        comment = "Set to 1 on mangoszero/vmangos/cmangos";
+    }
+}
+
+smsg SMSG_LOOT_REMOVED = 0x0162 {
+    u8 slot;
+} {
+    description = "Notify a looting player that an item has been taken.";
+}
+
+smsg SMSG_LOOT_MONEY_NOTIFY = 0x0163 {
+    u32 amount;
+}
+
+smsg SMSG_LOOT_CLEAR_MONEY = 0x0165 {}
+
+smsg SMSG_DUEL_REQUESTED = 0x0167 {
+    u64 initiator_guid;
+    u64 target_guid;
+}
+
+smsg SMSG_DUEL_OUTOFBOUNDS = 0x0168 {}
+
+smsg SMSG_DUEL_INBOUNDS = 0x0169 {}
+
+
+enum DuelWinnerReason : u8 {
+    WON = 0;
+    FLED = 1;
+}
+
+smsg SMSG_DUEL_WINNER = 0x016B {
+    DuelWinnerReason reason;
+    CString opponent_name;
+    CString initiator_name;
+}
+
+cmsg CMSG_DUEL_ACCEPTED = 0x016C {
+    u64 guid;
+}
+
+cmsg CMSG_DUEL_CANCELLED = 0x016D {
+    u64 guid;
+}
+
+enum MountResult : u32 {
+    INVALIDMOUNTEE = 0    {
+        comment = "You can't mount that unit!";
+    }
+    TOOFARAWAY = 1    {
+        comment = "That mount is too far away!";
+    }
+    ALREADYMOUNTED = 2    {
+        comment = "You're already mounted!";
+    }
+    NOTMOUNTABLE = 3    {
+        comment = "That unit can't be mounted!";
+    }
+    NOTYOURPET = 4    {
+        comment = "That mount isn't your pet!";
+    }
+    OTHER = 5    {
+        comment = "internal";
+    }
+    LOOTING = 6    {
+        comment = "You can't mount while looting!";
+    }
+    RACECANTMOUNT = 7    {
+        comment = "You can't mount because of your race!";
+    }
+    SHAPESHIFTED = 8    {
+        comment = "You can't mount while shapeshifted!";
+    }
+    FORCEDDISMOUNT = 9    {
+        comment = "You dismount before continuing.";
+    }
+    OK = 10    {
+        comment = "no error";
+    }
+}
+
+smsg SMSG_MOUNTRESULT = 0x016E {
+    MountResult result;
+}
+
+smsg SMSG_DISMOUNTRESULT = 0x016F {
+    MountResult result;
+}
+
+
+
+cmsg CMSG_MOUNTSPECIAL_ANIM = 0x0171 {}
+
+smsg SMSG_MOUNTSPECIAL_ANIM = 0x0172 {
+    u64 guid;
+}
+
+enum PetTameFailureReason : u8 {
+    INVALIDCREATURE = 1;
+    TOOMANY = 2;
+    CREATUREALREADYOWNED = 3;
+    NOTTAMEABLE = 4;
+    ANOTHERSUMMONACTIVE = 5;
+    UNITSCANTTAME = 6;
+    NOPETAVAILABLE = 7 {
+        comment = "not used in taming";
+    }
+    INTERNALERROR = 8;
+    TOOHIGHLEVEL = 9;
+    DEAD = 10 {
+        comment = "not used in taming";
+    }
+    NOTDEAD = 11 {
+        comment = "not used in taming";
+    }
+    UNKNOWNERROR = 12;
+}
+
+smsg SMSG_PET_TAME_FAILURE = 0x0173 {
+    PetTameFailureReason reason;
+}
+
+
+cmsg CMSG_PET_ACTION = 0x0175 {
+    u64 pet_guid;
+    /* data? */
+    u32 data;
+    u64 target_guid;
+}
+
+cmsg CMSG_PET_ABANDON = 0x0176 {
+    u64 pet_guid;
+}
+
+cmsg CMSG_PET_RENAME = 0x0177 {
+    u64 pet_guid;
+    CString name;
+}
+
+smsg SMSG_PET_NAME_INVALID = 0x0178 {}
+
+
+enum PetReactState : u8 {
+    PASSIVE = 0;
+    DEFENSIVE = 1;
+    AGGRESSIVE = 2;
+}
+
+enum PetCommandState : u8 {
+    STAY = 0;
+    FOLLOW = 1;
+    ATTACK = 2;
+    DISMISS = 3;
+}
+
+smsg SMSG_PET_MODE = 0x017A {
+    u64 guid;
+    PetReactState react_state;
+    PetCommandState command_state;
+    u8 unknown1 {
+        comment = "vmangos sets to 0.";
+    }
+    /* TODO u8 bool */
+    u8 pet_enabled {
+        comment = "vmangos sets 0 for not enabled and 0x8 for enabled.";
+    }
+}
+
+cmsg CMSG_GOSSIP_HELLO = 0x017B {
+    u64 guid;
+}
+
+smsg SMSG_GOSSIP_COMPLETE = 0x017E {}
+
+cmsg CMSG_LIST_INVENTORY = 0x019E {
+    u64 guid;
+}
+
+cmsg CMSG_SELL_ITEM = 0x01A0 {
+    u64 vendor_guid;
+    u64 item_guid;
+    u8 amount;
+}
+
+
+cmsg CMSG_BUY_ITEM = 0x01A2 {
+    u64 vendor_guid;
+    u32 item_id;
+    u8 amount;
+    u8 unknown1 {
+        comment = "cmangos says this is hardcoded to 1 in the TBC client.";
+    }
+}
+
+cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
+    u64 vendor_guid;
+    u32 item_id;
+    u64 bag_guid;
+    u8 bag_slot;
+    u8 amount;
+}
+
+smsg SMSG_BUY_ITEM = 0x01A4 {
+    u64 guid;
+    u32 vendor_slot;
+    u32 amount_for_sale;
+    u32 amount_bought;
+}
+
+
+enum BuyResult : u8 {
+    CANT_FIND_ITEM = 0;
+    ITEM_ALREADY_SOLD = 1;
+    NOT_ENOUGHT_MONEY = 2;
+    SELLER_DONT_LIKE_YOU = 4;
+    DISTANCE_TOO_FAR = 5;
+    ITEM_SOLD_OUT = 7;
+    CANT_CARRY_MORE = 8;
+    RANK_REQUIRE = 11;
+    REPUTATION_REQUIRE = 12;
+}
+
+smsg SMSG_BUY_FAILED = 0x01A5 {
+    u64 guid;
+    u32 item_id;
+    BuyResult result;
+}
+
+
+cmsg CMSG_ACTIVATETAXI = 0x01AD {
+    u64 guid;
+    u32[2] nodes;
+}
+
+enum ActivateTaxiReply : u32 {
+    OK = 0;
+    UNSPECIFIEDSERVERERROR = 1;
+    NOSUCHPATH = 2;
+    NOTENOUGHMONEY = 3;
+    TOOFARAWAY = 4;
+    NOVENDORNEARBY = 5;
+    NOTVISITED = 6;
+    PLAYERBUSY = 7;
+    PLAYERALREADYMOUNTED = 8;
+    PLAYERSHAPESHIFTED = 9;
+    PLAYERMOVING = 10;
+    SAMENODE = 11;
+    NOTSTANDING = 12;
+}
+
+smsg SMSG_ACTIVATETAXIREPLY = 0x01AE {
+    ActivateTaxiReply reply;
+}
+
+smsg SMSG_NEW_TAXI_PATH = 0x01AF {}
+
+cmsg CMSG_TRAINER_LIST = 0x01B0 {
+    u64 guid;
+}
+
+
+cmsg CMSG_TRAINER_BUY_SPELL = 0x01B2 {
+    u64 guid;
+    u32 spell_id;
+}
+
+smsg SMSG_TRAINER_BUY_SUCCEEDED = 0x01B3 {
+    u64 guid;
+    u32 spell_id;
+}
+
+enum TrainingFailureReason : u32
+{
+    UNAVAILABLE = 0 {
+        comment = "Trainer service %d unavailable.";
+    }
+    NOT_ENOUGH_MONEY = 1 {
+        comment = "Not enough money for trainer service %d.";
+    }
+    NOT_ENOUGH_SKILL = 2 {
+        comment = "Not enough skill points for trainer service %d.";
+    }
+} {
+    comment = "These errors are only printed in client console.";
+}
+
+smsg SMSG_TRAINER_BUY_FAILED = 0x01B4 {
+    u64 guid;
+    u32 spell_id;
+    TrainingFailureReason error;
+}
+
+cmsg CMSG_BINDER_ACTIVATE = 0x01B5 {
+    u64 guid;
+}
+
+cmsg CMSG_BANKER_ACTIVATE = 0x01B7 {
+    u64 guid;
+}
+
+smsg SMSG_SHOW_BANK = 0x01B8 {
+    u64 guid;
+}
+
+cmsg CMSG_BUY_BANK_SLOT = 0x01B9 {
+    u64 guid;
+}
+
+enum BuyBankSlotResult : u32 {
+    FAILED_TOO_MANY = 0;
+    INSUFFICIENT_FUNDS = 1;
+    NOTBANKER = 2;
+    OK = 3;
+}
+
+smsg SMSG_BUY_BANK_SLOT_RESULT = 0x01BA {
+    BuyBankSlotResult result;
+}
+
+cmsg CMSG_PETITION_SHOWLIST = 0x01BB {
+    u64 guid;
+}
+
+
+cmsg CMSG_PETITION_SHOW_SIGNATURES = 0x01BE {
+    u64 item_guid;
+}
+
+smsg SMSG_PETITION_SHOW_SIGNATURES = 0x01BF {
+    u64 item_guid;
+    u64 owner_guid;
+    u64 petition_guid;
+    u8 amount_of_signatures;
+}
+
+cmsg CMSG_PETITION_SIGN = 0x01C0 {
+    u64 petition_guid;
+    u8 unknown1;
+}
+
+enum PetitionResult : u32 {
+    OK = 0;
+    ALREADY_SIGNED = 1;
+    ALREADY_IN_GUILD = 2;
+    CANT_SIGN_OWN = 3;
+    NEED_MORE = 4;
+    NOT_SERVER = 5;
+}
+
+smsg SMSG_PETITION_SIGN_RESULTS = 0x01C1 {
+    u64 petition_guid;
+    u64 owner_guid;
+    PetitionResult result;
+}
+
+cmsg CMSG_OFFER_PETITION = 0x01C3 {
+    u64 petition_guid;
+    u64 target_guid;
+}
+
+cmsg CMSG_TURN_IN_PETITION = 0x01C4 {
+    u64 petition_guid;
+}
+
+enum PetitionTurnInResult : u32 {
+    OK = 0;
+    ALREADY_SIGNED = 1;
+    ALREADY_IN_GUILD = 2;
+    CANT_SIGN_OWN = 3;
+    NEED_MORE = 4;
+    NOT_SERVER = 5;
+}
+
+smsg SMSG_TURN_IN_PETITION_RESULTS = 0x01C5 {
+    PetitionTurnInResult result;
+}
+
+smsg SMSG_FISH_NOT_HOOKED = 0x01C8 {}
+
+smsg SMSG_FISH_ESCAPED = 0x01C9 {}
+
+
+smsg SMSG_NOTIFICATION = 0x01CB {
+    CString notification;
+}
+
+cmsg CMSG_PLAYED_TIME = 0x01CC {}
+
+smsg SMSG_PLAYED_TIME = 0x01CD {
+    /* TODO: What unit is this? */
+    u32 total_played_time;
+    u32 level_played_time;
+}
+
+enum ExperienceAwardType : u8 {
+    KILL = 0;
+    NON_KILL = 1;
+}
+
+smsg SMSG_LOG_XPGAIN = 0x01D0 {
+    u64 target_guid;
+    u32 total_exp;
+    ExperienceAwardType exp_type; 
+    if (exp_type == NON_KILL) {
+        u32 experience_without_rested;
+        f32 exp_group_bonus {
+            comment = "mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output";
+        }
+    }
+}
+
+
+cmsg CMSG_RECLAIM_CORPSE = 0x01D2 {
+    u64 guid;
+}
+
+cmsg CMSG_WRAP_ITEM = 0x01D3 {
+    u8 gift_bag_index;
+    u8 gift_slot;
+    u8 item_bag_index;
+    u8 item_slot;
+}
+
+
+enum TimerType : u32 {
+    FATIGUE = 0;
+    BREATH = 1;
+    FEIGNDEATH = 2;
+    ENVIRONMENTAL = 3 {
+        comment = "Might be a mangos only thing.";
+    }
+}
+
+smsg SMSG_START_MIRROR_TIMER = 0x01D9 {
+    TimerType timer;
+    u32 time_remaining;
+    u32 duration;
+    u32 scale;
+    /* TODO: bool */
+    u8 is_frozen;
+    u32 spell_id;
+}
+
+smsg SMSG_PAUSE_MIRROR_TIMER = 0x01DA {
+    TimerType timer;
+    u8 is_frozen;
+} {
+    comment = "According to cmangos: 'Default UI handler for this is bugged, args dont match. Gotta do a full update with SMSG_START_MIRROR_TIMER to avoid lua errors.";
+}
+
+smsg SMSG_STOP_MIRROR_TIMER = 0x01DB {
+    TimerType timer;
+}
+
+smsg SMSG_CLEAR_COOLDOWN = 0x01DE {
+    u32 spell_id;
+    u64 target_guid;
+}
+
+smsg SMSG_GAMEOBJECT_PAGETEXT = 0x01DF {
+    u64 guid;
+}
+
+enum SheathState : u8 {
+    UNARMED = 0;
+    MELEE = 1;
+    RANGED = 2;
+} {
+    comment = "According to cmangos: byte value (UNIT_FIELD_BYTES_2,0)";
+}
+
+cmsg CMSG_SETSHEATHED = 0x01E0 {
+    (u32)SheathState sheathed;
+}
+
+smsg SMSG_SPELL_DELAYED = 0x01E2 {
+    u64 guid;
+    u32 delay_time;
+}
+
+smsg SMSG_ITEM_TIME_UPDATE = 0x01EA {
+    u64 guid;
+    u32 duration;
+}
+
+smsg SMSG_ITEM_ENCHANT_TIME_UPDATE = 0x01EB {
+    u64 item_guid;
+    u32 slot {
+        comment = "Possibly used with EnchantmentSlot enum.";
+    }
+    u32 duration;
+    u64 player_guid;
+}
+
+cmsg CMSG_PET_CAST_SPELL = 0x01F0 {
+    u64 guid;
+    u32 spell_id;
+}
+
+
+smsg SMSG_PLAY_SPELL_VISUAL = 0x01F3 {
+    u64 guid;
+    u32 spell_art_kit {
+        comment = "mangoszero: index from SpellVisualKit.dbc. Used with 0xB3 when buying spells.";
+    }
+}
+
+cmsg CMSG_ZONEUPDATE = 0x01F4 {
+    /* TODO: Zone or Area? */
+    u32 zone_id;
+}
+
+smsg SMSG_PARTYKILLLOG = 0x01F5 {
+    u64 player_with_killing_blow;
+    u64 victim;
+}
+
+
+smsg SMSG_PLAY_SPELL_IMPACT = 0x01F7 {
+    u64 guid;
+    u32 spell_visual_kit {
+        comment = "mangoszero: index from SpellVisualKit.dbc. Used for visual effect on player with 0x016A";
+    }
+}
+
+smsg SMSG_EXPLORATION_EXPERIENCE = 0x01F8 {
+    Area area;
+    u32 experience;
+}
+
+enum EnvironmentalDamageType : u32 {
+    EXHAUSTED = 0;
+    DROWNING = 1;
+    FALL = 2;
+    LAVA = 3;
+    SLIME = 4;
+    FIRE = 5;
+}
+
+smsg SMSG_ENVIRONMENTALDAMAGELOG = 0x01FC {
+    u64 guid;
+    EnvironmentalDamageType damage_type;
+    u32 damage;
+    u32 absorb;
+    u32 resist;
+}
+
+
+cmsg CMSG_UNLEARN_SKILL = 0x0202 {
+    /* TODO: Same as spell_id? */
+    u32 skill_id;
+}
+
+smsg SMSG_REMOVED_SPELL = 0x0203 {
+    /* TODO: cmangos + vmangos cast this to u16, but reserve 4 bytes */
+    u16 spell_id;
+}
+
+
+enum GmTicketResponse : u32 {
+    NOT_EXIST = 0;
+    ALREADY_EXIST = 1;
+    CREATE_SUCCESS = 2;
+    CREATE_ERROR = 3;
+    UPDATE_SUCCESS = 4;
+    UPDATE_ERROR = 5;
+    TICKET_DELETED = 9;
+}
+
+smsg SMSG_GMTICKET_CREATE = 0x0206 {
+    GmTicketResponse response;
+}
+
+cmsg CMSG_GMTICKET_UPDATETEXT = 0x0207 {
+    CString message;
+}
+
+smsg SMSG_GMTICKET_UPDATETEXT = 0x0208 {
+    GmTicketResponse response;
+}
+
+smsg SMSG_ACCOUNT_DATA_TIMES = 0x0209 {
+    u32[32] data {
+        comment = "cmangos/vmangos/mangoszero sets to all zeros";
+    }
+}
+
+
+cmsg CMSG_GMTICKET_GETTICKET = 0x0211 {}
+
+smsg SMSG_GAMEOBJECT_SPAWN_ANIM = 0x0214 {
+    u64 guid;
+}
+
+smsg SMSG_GAMEOBJECT_DESPAWN_ANIM = 0x0215 {
+    u64 guid;
+}
+
+
+cmsg CMSG_GMTICKET_DELETETICKET = 0x0217 {}
+
+smsg SMSG_GMTICKET_DELETETICKET = 0x0218 {
+    GmTicketResponse response;
+}
+
+smsg SMSG_CHAT_WRONG_FACTION = 0x0219 {}
+
+cmsg CMSG_GMTICKET_SYSTEMSTATUS = 0x021A {}
+
+smsg SMSG_GMTICKET_SYSTEMSTATUS = 0x021B {
+    u32 will_accept_tickets {
+        comment = "mangoszero/cmangos/vmangos all only send 1 for true and 0 for false. vmangos: Note: This only disables the ticket UI at client side and is not fully reliable are we sure this is a uint32? Should ask Zor";
+    }
+}
+
+cmsg CMSG_SPIRIT_HEALER_ACTIVATE = 0x021C {
+    u64 guid;
+}
+
+smsg SMSG_SET_REST_START = 0x021E {
+    u32 unknown1 {
+        comment = "cmangos/mangoszero: unknown, may be rest state time or experience";
+    }
+}
+
+smsg SMSG_SPIRIT_HEALER_CONFIRM = 0x0222 {
+    u64 guid;
+}
+
+smsg SMSG_GOSSIP_POI = 0x0224 {
+    u32 flags;
+    f32 position_x;
+    f32 position_y;
+    u32 icon;
+    u32 data;
+    CString location_name;
+}
+
+cmsg CMSG_CHAT_IGNORED = 0x0225 {
+    u64 guid;
+}
+
+cmsg CMSG_GUILD_RANK = 0x0231 {
+    u32 rank_id;
+    u32 rights;
+    CString rank_name;
+}
+
+cmsg CMSG_GUILD_ADD_RANK = 0x0232 {
+    CString rank_name;
+}
+
+cmsg CMSG_GUILD_DEL_RANK = 0x0233 {}
+
+cmsg CMSG_GUILD_SET_PUBLIC_NOTE = 0x0234 {
+    CString player_name;
+    CString note;
+}
+
+cmsg CMSG_GUILD_SET_OFFICER_NOTE = 0x0235 {
+    CString player_name;
+    CString note;
+}
+
+
+enum MailAction : u32 {
+    SEND = 0;
+    MONEY_TAKEN = 1;
+    ITEM_TAKEN = 2;
+    RETURNED_TO_SENDER = 3;
+    DELETED = 4;
+    MADE_PERMANENT = 5;
+}
+
+enum MailResult : u32 {
+    OK = 0;
+    ERR_EQUIP_ERROR = 1;
+    ERR_CANNOT_SEND_TO_SELF = 2;
+    ERR_NOT_ENOUGH_MONEY = 3;
+    ERR_RECIPIENT_NOT_FOUND = 4;
+    ERR_NOT_YOUR_TEAM = 5;
+    ERR_INTERNAL_ERROR = 6;
+    ERR_DISABLED_FOR_TRIAL_ACC = 14;
+    ERR_RECIPIENT_CAP_REACHED = 15;
+    ERR_CANT_SEND_WRAPPED_COD = 16;
+    ERR_MAIL_AND_CHAT_SUSPENDED = 17;
+    ERR_TOO_MANY_ATTACHMENTS = 18;
+    ERR_MAIL_ATTACHMENT_INVALID = 19;
+} {
+    comment = "mangoszero: in SMSG_SEND_MAIL_RESULT, 7-13 and 16+: 'Mail database error'";
+}
+
+
+cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
+    Map map;
+}
+
+cmsg CMSG_BATTLEFIELD_JOIN = 0x023E {
+    Map map;
+}
+
+
+
+
+
+
+enum SpellMissInfo : u32 {
+    NONE = 0;
+    MISS = 1;
+    RESIST = 2;
+    DODGE = 3;
+    PARRY = 4;
+    BLOCK = 5;
+    EVADE = 6;
+    IMMUNE = 7;
+    IMMUNE2 = 8;
+    DEFLECT = 9;
+    ABSORB = 10;
+    REFLECT = 11;
+}
+
+struct SpellMiss {
+    u64 target_guid;
+    SpellMissInfo miss_info;
+}
+
+smsg SMSG_SPELLLOGMISS = 0x024B {
+    u32 spell_id;
+    u64 caster_guid;
+    u8 unknown1 {
+        comment = "cmangos/mangoszero: can be 0 or 1";
+    }
+    u32 amount_of_targets;
+    SpellMiss[amount_of_targets] targets;
+}
+
+cmsg CMSG_LEARN_TALENT = 0x0251 {
+    /* TODO: TalentId enum? */
+    u32 talent_id;
+    u32 requested_rank;
+}
+
+smsg SMSG_ZONE_UNDER_ATTACK = 0x0254 {
+    /* Zone or area? */
+    u32 zone_id;
+}
+
+enum LogFormat : u8 {
+    DEFAULT = 0;
+    DEBUG = 1;
+}
+
+smsg SMSG_PROCRESIST = 0x0260 {
+    u64 guid;
+    u64 target_guid;
+    u32 spell_id;
+    LogFormat log_format;
+}
+
+
+smsg SMSG_SPELLORDAMAGE_IMMUNE = 0x0263 {
+    u64 caster_guid;
+    u64 target_guid;
+    u32 spell_id;
+    u8 unknown1 {
+        comment = "vmangos/cmangos sets to 0";
+    }
+}
+
+
+cmsg CMSG_PET_CANCEL_AURA = 0x026B {
+    u64 guid;
+    u32 spell_id;
+}
+
+cmsg CMSG_CANCEL_AUTO_REPEAT_SPELL = 0x026D {}
+
+
+cmsg CMSG_STABLE_PET = 0x0270 {
+    u64 npc_guid;
+}
+
+cmsg CMSG_UNSTABLE_PET = 0x0271 {
+    u64 npc_guid;
+    u32 pet_number;
+}
+
+cmsg CMSG_BUY_STABLE_SLOT = 0x0272 {
+    u64 npc_guid;
+}
+
+enum StableResult : u8 {
+    ERR_MONEY = 0x01 {
+        comment = "you don't have enough money";
+    }
+    ERR_STABLE = 0x06 {
+        comment = "currently used in most fail cases";
+    }
+    SUCCESS_STABLE = 0x08 {
+        comment = "table success";
+    }
+    SUCCESS_UNSTABLE = 0x09 {
+        comment = "unstable/swap success";
+    }
+    SUCCESS_BUY_SLOT = 0x0A {
+        comment = "buy slot success";
+    }
+}
+
+smsg SMSG_STABLE_RESULT = 0x0273 {
+    StableResult result;
+}
+
+
+
+
+smsg SMSG_PLAY_OBJECT_SOUND = 0x0278 {
+    u32 sound_id;
+    u64 guid;
+} {
+    comment = "vmangos: Nostalrius: ignored by client if unit is not loaded";
+}
+
+cmsg CMSG_REQUEST_PET_INFO = 0x0279 {}
+
+enum FarSightOperation : u8 {
+    REMOVE = 0;
+    ADD = 1;
+}
+
+cmsg CMSG_FAR_SIGHT = 0x027A {
+    FarSightOperation operation;
+}
+
+cmsg CMSG_GROUP_CHANGE_SUB_GROUP = 0x027E {
+    CString name;
+    u8 group_number;
+}
+
+cmsg CMSG_REQUEST_PARTY_MEMBER_STATS = 0x027F {
+    u64 guid;
+}
+
+cmsg CMSG_GROUP_SWAP_SUB_GROUP = 0x0280 {
+    CString name;
+    CString swap_with_name;
+}
+
+cmsg CMSG_AUTOSTORE_BANK_ITEM = 0x0282 {
+    u8 bag_index;
+    u8 slot_index;
+}
+
+cmsg CMSG_AUTOBANK_ITEM = 0x0283 {
+    u8 bag_index;
+    u8 slot_index;
+}
+
+enum RaidGroupError : u32 {
+    REQUIRED = 1;
+    FULL = 2;
+}
+
+smsg SMSG_RAID_GROUP_ONLY = 0x0286 {
+    u32 homebind_timer;
+    RaidGroupError error;
+} {
+    comment = "used when player leaves raid group inside instance";
+}
+
+cmsg CMSG_GROUP_RAID_CONVERT = 0x028E {}
+
+cmsg CMSG_GROUP_ASSISTANT_LEADER = 0x028F {
+    u64 guid;
+    /* mangos treats as bool */
+    u8 set_assistant;
+}
+
+enum BuybackSlot : u32 {
+    SLOT1 = 69;
+    SLOT2 = 70;
+    SLOT3 = 71;
+    SLOT4 = 72;
+    SLOT5 = 73;
+    SLOT6 = 74;
+    SLOT7 = 75;
+    SLOT8 = 76;
+    SLOT9 = 77;
+    SLOT10 = 78;
+    SLOT11 = 79;
+    SLOT12 = 80;
+    SLOT13 = 81;
+}
+
+cmsg CMSG_BUYBACK_ITEM = 0x0290 {
+    u64 guid;
+    BuybackSlot slot;
+}
+
+enum ServerMessageType : u32 {
+    SHUTDOWN_TIME = 1;
+    RESTART_TIME = 2;
+    CUSTOM = 3;
+    SHUTDOWN_CANCELLED = 4;
+    RESTART_CANCELLED = 5;
+}
+
+smsg SMSG_SERVER_MESSAGE = 0x0291 {
+    ServerMessageType message_type;
+    CString message;
+}
+
+cmsg CMSG_MEETINGSTONE_JOIN = 0x0292 {
+    u64 guid;
+}
+
+cmsg CMSG_MEETINGSTONE_LEAVE = 0x0293 {}
+
+enum MeetingStoneStatus : u8 {
+    LEAVE_QUEUE = 0;
+    JOINED_QUEUE = 1;
+    PARTY_MEMBER_LEFT_LFG = 2;
+    PARTY_MEMBER_REMOVED_PARTY_REMOVED = 3;
+    LOOKING_FOR_NEW_PARTY_IN_QUEUE = 4;
+    NONE = 5;
+}
+
+smsg SMSG_MEETINGSTONE_SETQUEUE = 0x0295 {
+    Area area;
+    MeetingStoneStatus status;
+}
+
+cmsg CMSG_MEETINGSTONE_INFO = 0x0296 {}
+
+smsg SMSG_MEETINGSTONE_COMPLETE = 0x0297 {}
+
+smsg SMSG_MEETINGSTONE_IN_PROGRESS = 0x0298 {}
+
+smsg SMSG_MEETINGSTONE_MEMBER_ADDED = 0x0299 {
+    u64 guid;
+}
+
+cmsg CMSG_CANCEL_GROWTH_AURA = 0x029B {}
+
+smsg SMSG_CANCEL_AUTO_REPEAT = 0x029C {}
+
+smsg SMSG_STANDSTATE_UPDATE = 0x029D {
+    UnitStandState state;
+}
+
+smsg SMSG_LOOT_ALL_PASSED = 0x029E {
+    u64 looted_target_guid;
+    u32 loot_slot;
+    /* TODO Item id enum? */
+    u32 item_id;
+    u32 item_random_property_id;
+    u32 item_random_suffix_id {
+        comment = "vmangos/mangoszero: not used ?";
+    }
+}
+
+enum RollVote : u8 {
+    PASS = 0;
+    NEED = 1;
+    GREED = 2;
+}
+
+smsg SMSG_LOOT_ROLL_WON = 0x029F {
+    u64 looted_target_guid;
+    u32 loot_slot;
+    /* TODO item_id enum */
+    u32 item_id;
+    u32 item_random_suffix {
+        comment = "vmangos/mangoszero: not used ?";
+    }
+    u32 item_random_property_id;
+    u64 winning_player_guid;
+    u8 winning_roll {
+        comment = "rollnumber related to SMSG_LOOT_ROLL";
+    }
+    RollVote vote {
+        comment = "Rolltype related to SMSG_LOOT_ROLL";
+    }
+}
+
+cmsg CMSG_LOOT_ROLL = 0x02A0 {
+    u64 item_guid;
+    u32 item_slot;
+    RollVote vote;
+}
+
+smsg SMSG_LOOT_START_ROLL = 0x02A1 {
+    u64 creature_guid;
+    u32 loot_slot;
+    u32 item_id;
+    u32 item_random_suffix {
+        comment = "vmangos/mangoszero: not used ?";
+    }
+    u32 item_random_property_id;
+    /* TODO Time units */
+    u32 countdown_time;
+}
+
+smsg SMSG_LOOT_ROLL = 0x02A2 {
+    u64 creature_guid;
+    u32 loot_slot;
+    u64 item_guid;
+    u32 item_id;
+    u32 item_random_suffix {
+        comment = "vmangos/mangoszero: not used ?";
+    }
+    u32 item_random_property_id;
+    /* TODO exact meaning? */
+    u8 roll_number {
+        comment = "vmangos/cmangos/mangoszero: 0: Need for: [item name] > 127: you passed on: [item name]      Roll number";
+    }
+    RollVote vote;
+
+}
+
+cmsg CMSG_LOOT_MASTER_GIVE = 0x02A3 {
+    u64 loot_guid;
+    u8 slot_id;
+    u64 target_player_guid;
+}
+
+smsg SMSG_SPELL_FAILED_OTHER = 0x02A6 {
+    u64 caster_guid;
+    /* TODO not spell id but spell info id? */
+    u32 spell_id;
+}
+
+smsg SMSG_GAMEOBJECT_RESET_STATE = 0x02A7 {
+    u64 guid;
+}
+
+cmsg CMSG_REPAIR_ITEM = 0x02A8 {
+    u64 npc_guid;
+    u64 item_guid;
+}
+
+smsg SMSG_CHAT_PLAYER_NOT_FOUND = 0x02A9 {
+    CString name;
+}
+
+smsg SMSG_SUMMON_REQUEST = 0x02AB {
+    u64 summoner_guid;
+    /* TODO zone or area? */
+    u32 zone_id;
+    u32 auto_decline_time_in_msecs;
+}
+
+cmsg CMSG_SUMMON_RESPONSE = 0x02AC {
+    u64 summoner_guid;
+}
+
+smsg SMSG_PET_BROKEN = 0x02AF {}
+
+cmsg CMSG_SELF_RES = 0x02B3 {}
+
+smsg SMSG_FEIGN_DEATH_RESISTED = 0x02B4 {}
+
+smsg SMSG_DUEL_COUNTDOWN = 0x02B7 {
+    u32 time_in_seconds;
+}
+
+smsg SMSG_AREA_TRIGGER_MESSAGE = 0x02B8 {
+    /* TODO CString with length? */
+    u32 length;
+    CString message;
+}
+
+cmsg CMSG_TOGGLE_HELM = 0x02B9 {}
+
+cmsg CMSG_TOGGLE_CLOAK = 0x02BA {}
+
+enum MeetingStoneFailure : u8 {
+    MEETINGSTONE_FAIL_PARTYLEADER = 1;
+    MEETINGSTONE_FAIL_FULL_GROUP = 2;
+    MEETINGSTONE_FAIL_RAID_GROUP = 3;
+}
+
+smsg SMSG_MEETINGSTONE_JOINFAILED = 0x02BB {
+    MeetingStoneFailure reason;
+}
+
+smsg SMSG_PLAYER_SKINNED = 0x02BC {}
+
+smsg SMSG_DURABILITY_DAMAGE_DEATH = 0x02BD {}
+
+cmsg CMSG_SET_ACTIONBAR_TOGGLES = 0x02BF {
+    /* TODO enum for this */
+    u8 action_bar;
+}
+
+enum PetFeedback : u8 {
+    PET_DEAD = 1;
+    NOTHING_TO_EAT = 2;
+    CANT_ATTACK_TARGET = 3;
+    NO_PATH_TO = 4;
+}
+
+smsg SMSG_PET_ACTION_FEEDBACK = 0x02C6 {
+    PetFeedback feedback;
+}
+
+smsg SMSG_INSTANCE_SAVE_CREATED = 0x02CB {
+    u32 unknown {
+        comment = "cmangos/vmangos/mangoszero set to 0";
+    }
+}
+
+cmsg CMSG_REQUEST_RAID_INFO = 0x02CD {}
+
+smsg SMSG_PLAY_SOUND = 0x02D2 {
+    /* TODO Enum? */
+    u32 sound_id;
+}
+
+cmsg CMSG_BATTLEFIELD_STATUS = 0x02D3 {}
+
+enum BattlefieldPortAction : u8 {
+    LEAVE_QUEUE = 0;
+    ENTER_BATTLE = 1;
+}
+
+cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {
+    Map map;
+    BattlefieldPortAction action;
+}
+
+cmsg CMSG_BATTLEMASTER_HELLO = 0x02D7 {
+    u64 guid;
+}
+
+cmsg CMSG_LEAVE_BATTLEFIELD = 0x02E1 {
+    u8 unknown1;
+    u8 battle_ground_type_id {
+        comment = "cmangos/vmangos/mangoszero: BattleGroundTypeId-1 ? - Classic Only";
+    }
+    u16 unknown2;
+}
+
+cmsg CMSG_AREA_SPIRIT_HEALER_QUEUE = 0x02E3 {
+    u64 guid;
+}
+
+smsg SMSG_AREA_SPIRIT_HEALER_TIME = 0x02E4 {
+    u64 guid;
+    u32 next_resurrect_time;
+}
+
+cmsg CMSG_PET_STOP_ATTACK = 0x02EA {
+    u64 pet_guid;
+}
+
+smsg SMSG_BINDER_CONFIRM = 0x02EB {
+    u64 guid;
+}
+
+smsg SMSG_BATTLEGROUND_PLAYER_JOINED = 0x02EC {
+    u64 player_guid;
+}
+
+smsg SMSG_BATTLEGROUND_PLAYER_LEFT = 0x02ED {
+    u64 guid;
+}
+
+cmsg CMSG_PET_UNLEARN = 0x02F0 {
+    u64 pet_guid;
+}
+
+smsg SMSG_PET_UNLEARN_CONFIRM = 0x02F1 {
+    u64 pet_guid;
+    u32 talent_reset_cost;
+}
+
+cmsg CMSG_PET_SPELL_AUTOCAST = 0x02F3 {
+    u64 guid;
+    u32 spell_id;
+    /* TODO bool */
+    u8 enabled;
+}
+
+enum WeatherType : u32 {
+    FINE = 0;
+    RAIN = 1;
+    SNOW = 2;
+    STORM = 3;
+}
+
+enum WeatherChangeType : u8 {
+    SMOOTH = 0;
+    INSTANT = 1;
+}
+
+smsg SMSG_WEATHER = 0x02F4 {
+    WeatherType weather_type;
+    f32 grade;
+    /* TODO weather sound id enum? */
+    u32 sound_id;
+    WeatherChangeType change;
+}
+
+enum RaidInstanceMessage : u32 {
+    WARNING_HOURS     = 1 {
+        comment = "WARNING! %s is scheduled to reset in %d hour(s).";
+    }
+    WARNING_MIN       = 2 {
+        comment = "WARNING! %s is scheduled to reset in %d minute(s)!";
+    }
+    WARNING_MIN_SOON  = 3 {
+        comment = "WARNING! %s is scheduled to reset in %d minute(s). Please exit the zone or you will be returned to your bind location!";
+    }
+    WELCOME           = 4 {
+        comment = "Welcome to %s. This raid instance is scheduled to reset in %s.";
+    }
+}
+
+smsg SMSG_RAID_INSTANCE_MESSAGE = 0x02FA {
+    RaidInstanceMessage message_type;
+    Map map;
+    /* TODO unit? */
+    u32 time_left;
+}
+
+cmsg CMSG_GUILD_INFO_TEXT = 0x02FC {
+    CString guild_info;
+}
+
+smsg SMSG_CHAT_RESTRICTED = 0x02FD {}
+
+cmsg CMSG_ACTIVATETAXIEXPRESS = 0x0312 {
+    u64 guid;
+    u32 total_cost;
+    u32 node_count;
+}
+
+cmsg CMSG_SET_FACTION_INACTIVE = 0x0317 {
+    /* TODO rep id */
+    u32 reputation_list_id;
+    /* active or inactive? */
+    u8 inactive;
+}
+
+cmsg CMSG_SET_WATCHED_FACTION = 0x0318 {
+    /* TODO rep id */
+    u32 reputation_id;
+}
+
+smsg SMSG_INVALIDATE_PLAYER = 0x031C {
+    u64 guid;
+}
+
+cmsg CMSG_RESET_INSTANCES = 0x031D {}
+
+smsg SMSG_INSTANCE_RESET = 0x031E {
+    Map map;
+}
+
+enum InstanceResetFailedReason : u8 {
+    GENERAL = 0 {
+        comment = "at least one player is in the instance";
+    }
+    OFFLINE = 1 {
+        comment = "at least one player is offline";
+    }
+    ZONING = 2 {
+        comment = "at least one player try to enter the instance (being teleported in)";
+    }
+    SILENTLY = 3;
+}
+
+smsg SMSG_INSTANCE_RESET_FAILED = 0x031F {
+    InstanceResetFailedReason reason;
+    Map map;
+}
+
+smsg SMSG_UPDATE_LAST_INSTANCE = 0x0320 {
+    Map map;
+}
+
+
+enum PetTalkReason : u32 {
+    SPECIAL_SPELL = 0;
+    ATTACK = 1;
+}
+
+smsg SMSG_PET_ACTION_SOUND = 0x0324 {
+    Guid guid;
+    PetTalkReason reason;
+}
+
+smsg SMSG_PET_DISMISS_SOUND = 0x0325 {
+    u32 sound_id;
+    f32 position_x;
+    f32 position_y;
+    f32 position_z;
+}
+
+enum GmTicketStatusResponse : u32 {
+    UPDATED = 1;
+    CLOSED = 2;
+    SURVEY = 3;
+}
+
+smsg SMSG_GM_TICKET_STATUS_UPDATE = 0x0328 {
+    GmTicketStatusResponse response;
+}
+
+struct GmSurveyQuestion {
+    u32 question_id {
+        comment = "cmangos: questions found in GMSurveyQuestions.dbc";
+    }
+    u8 answer {
+        comment = "Rating: hardcoded limit of 0-5 in pre-Wrath, ranges defined in GMSurveyAnswers.dbc Wrath+";
+    }
+}
+
+cmsg CMSG_GMSURVEY_SUBMIT = 0x032A {
+    /* Enum for survey id */
+    u32 survey_id {
+        comment = "cmangos: Survey ID: found in GMSurveySurveys.dbc";
+    }
+    GmSurveyQuestion[10] questions;
+    CString answer_comment {
+        comment = "cmangos: Answer comment: Unused in stock UI, can be only set by calling Lua function"; 
+        comment = "cmangos: Answer comment max sizes in bytes: Vanilla - 8106:8110, TBC - 11459:11463, Wrath - 582:586";
+    }
+}
+
+smsg SMSG_UPDATE_INSTANCE_OWNERSHIP = 0x032B {
+    u32 has_been_saved {
+        comment = "cmangos/vmangos/mangoszero: true or false means, whether you have current raid instances";
+    }
+}
+
+smsg SMSG_SPELLINSTAKILLLOG = 0x032F {
+    Guid target_guid;
+    Spell spell;
+}
+
+smsg SMSG_SPELL_UPDATE_CHAIN_TARGETS = 0x0330 {
+    Guid caster;
+    Spell spell;
+    u32 amount_of_targets;
+    Guid[amount_of_targets] targets;
+}
+
+smsg SMSG_EXPECTED_SPAM_RECORDS = 0x0332 {
+    u32 amount_of_records;
+    CString[amount_of_records] records;
+}
+
+smsg SMSG_DEFENSE_MESSAGE = 0x033B {
+    Map map;
+    /* TODO CString with length? */
+    u32 message_length;
+    CString message;
+}
+
+
+cmsg CMSG_WHO = 0x62 {
+    u32 minimum_level;
+    u32 maximum_level;
+    CString player_name;
+    CString guild_name;
+    u32 race_mask;
+    u32 class_mask;
+    u32 amount_of_zones {
+        maximum_value = "10";
+    }
+    u32[amount_of_zones] zones;
+    u32 amount_of_strings {
+        maximum_value = "4";
+    }
+    CString[amount_of_strings] search_strings;
+}
+
+
+enum PvpRank : u8 {
+    NO_RANK = 0;
+    PARIAH = 1;
+    OUTLAW = 2;
+    EXILED = 3;
+    DISHONORED = 4;
+    RANK1 = 5;
+    RANK2 = 6;
+    RANK3 = 7;
+    RANK4 = 8;
+    RANK5 = 9;
+    RANK6 = 10;
+    RANK7 = 11;
+    RANK8 = 12;
+    RANK9 = 13;
+    RANK10 = 14;
+    RANK11 = 15;
+    RANK12 = 16;
+    RANK13 = 17;
+    RANK14 = 18;
+    FACTION_LEADER = 19;
+}
+
+
+smsg SMSG_PVP_CREDIT = 0x028C {
+    u32 honor_points;
+    Guid victim;
+    (u32)PvpRank rank;
+}
+
+cmsg CMSG_SET_AMMO = 0x0268 {
+    u32 item;
+}
+
+smsg SMSG_CORPSE_RECLAIM_DELAY = 0x0269 {
+    u32 delay_in_seconds;
+}
+
+cmsg CMSG_STABLE_SWAP_PET = 0x0275 {
+    Guid npc;
+    u32 pet_slot;
+}
+
+smsg SMSG_PLAY_MUSIC = 0x0277 {
+    u32 sound_id;
+}
+
+
+enum BgTypeId : u32 {
+    NOT_ELIGIBLE = 0 {
+        comment = "Your group has joined a battleground queue, but you are not eligible";
+    }
+    QUEUED_FOR_AV = 1 {
+        comment = "Your group has joined the queue for AV";
+    }
+    QUEUED_FOR_WSG = 2 {
+        comment = "Your group has joined the queue for WS";
+    }
+    QUEUED_FOR_AB = 3 {
+        comment = "Your group has joined the queue for AB";
+    }
+    REMOVE_FROM_QUEUE = 0xFFFFFFFE {
+        comment = "send bg command result to show nice message";
+    }
+}
+
+smsg SMSG_GROUP_JOINED_BATTLEGROUND = 0x02E8 {
+    BgTypeId id;
+}
+
+
+/* TODO: RIGHT ? */
+enum SpellSchool : u8 {
+    NORMAL = 0 {
+        comment = "Physical, Armor";
+    }
+    HOLY = 1;
+    FIRE = 2;
+    NATURE = 3;
+    FROST = 4;
+    SHADOW = 5;
+    ARCANE = 6;
+}
+
+smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
+    Guid victim_guid;
+    Guid caster_guid;
+    u32 damage;
+    /* TODO: RIGHT ? */
+    (u32)SpellSchool school;
+}
+
+smsg SMSG_RESISTLOG = 0x01D6 {
+    /* TODO: Nothing except a comment for this */
+    u64 guid1;
+    u64 guid2;
+    u32 unknown1;
+    f32 unknown2;
+    f32 unknown3;
+    u32 unknown4;
+    u32 unknown5;
+} {
+    comment = "Structure as comment on https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525";
+}
+
+
+struct PetitionShowlist {
+    u32 index;
+    u32 charter_entry = 5863 {
+        comment = "cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863).";
+    }
+    u32 charter_display_id = 16161 {
+        comment = "cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161).";
+    }
+    u32 guild_charter_cost {
+        comment = "cmangos/vmangos/mangoszero: statically set to 1000 (10 silver).";
+    }
+    u32 unknown1 {
+        comment = "cmangos/vmangos/mangoszero: statically set to 1";
+    }
+    u32 unknown2 {
+        comment = "cmangos/vmangos/mangoszero: statically set to 9";
+        comment = "cmangos/vmangos/mangoszero: required signs?";
+    }
+}
+
+smsg SMSG_PETITION_SHOWLIST = 0x01BC {
+    Guid npc;
+    u8 amount_of_petitions;
+    PetitionShowlist[amount_of_petitions] petitions;
+}
+
+cmsg CMSG_SET_FACTION_ATWAR = 0x0125 {
+    /* TODO: Reputation list id and u8 flag */
+    u32 reputation_list_id;
+    u8 flags;
+}
+
+struct TradeSlot {
+    u8 trade_slot_number {
+        comment = "cmangos/vmangos/mangoszero: sets to index of array";
+    }
+    u32 item_id;
+    u32 display_id;
+    u32 stack_count;
+    u32 is_wrapped;
+    Guid gift_wrapper;
+    u32 enchantment;
+    Guid item_creator;
+    u32 spell_charges;
+    u32 item_suffix_factor;
+    u32 item_random_properties_id;
+    u32 lock_id;
+    u32 max_durability;
+    u32 durability;
+}
+
+smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
+    Bool self_player {
+        comment = "cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)";
+    }
+    u32 trade_slot_count1 {
+        /* TODO: Maybe an enum for maximum values? */
+        comment = "cmangos/vmangos/mangoszero: sets to 7";
+        comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases";
+    }
+    u32 trade_slot_count2 {
+        /* TODO: Maybe an enum for maximum values? */
+        comment = "cmangos/vmangos/mangoszero: sets to 7";
+        comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases";
+    }
+    u32 money_in_trade;
+    Spell spell_on_lowest_slot;
+    TradeSlot[7] trade_slots {
+        comment = "vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.";
+    }
+}
+
+
+struct InitialSpell {
+    u16 spell_id {
+        comment = "cmangos/mangoszero: only send 'first' part of spell";
+    }
+    u16 unknown1 {
+        comment = "cmangos/mangoszero: sets to 0";
+        comment = "cmangos/mangoszero: it's not slot id";
+    }
+}
+
+struct CooldownSpell {
+    u16 spell_id;
+    u16 item_id {
+        comment = "cmangos/mangoszero: cast item id";
+    }
+    u16 spell_category;
+    u32 cooldown_in_msecs;
+    u32 category_cooldown_in_msecs;
+}
+
+smsg SMSG_INITIAL_SPELLS = 0x012A {
+    u8 unknown1 {
+        comment = "cmangos/mangoszero: sets to 0";
+    }
+    u16 spell_count;
+    InitialSpell[spell_count] initial_spells;
+    u16 cooldown_count;
+    CooldownSpell[cooldown_count] cooldowns;
+}
+
+
+flag CastFlags : u16 {
+    NONE = 0x00000000;
+    HIDDEN_COMBATLOG = 0x00000001 {
+        comment = "mangoszero/cmangos/vmangos: hide in combat log?";
+    }
+    UNKNOWN2 = 0x00000002;
+    UNKNOWN3 = 0x00000004;
+    UNKNOWN4 = 0x00000008;
+    UNKNOWN5 = 0x00000010;
+    AMMO = 0x00000020 {
+        comment = "cmangos/vmangos/mangoszero: Projectiles visual";
+    }
+    UNKNOWN7 = 0x00000040 {
+        comment = "cmangos/vmangos/mangoszero: !0x41 mask used to call CGTradeSkillInfo::DoRecast";
+    }
+    UNKNOWN8 = 0x00000080;
+    UNKNOWN9 = 0x00000100;
+}
+
+smsg SMSG_SPELL_START = 0x0131 {
+    PackedGuid cast_item {
+        comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
+    }
+    PackedGuid caster;
+    Spell spell;
+    CastFlags flags;
+    u32 timer;
+    SpellCastTargets targets;
+    if (flags & AMMO) {
+        u32 ammo_display_id;
+        u32 ammo_inventory_type;
+    }
+}
+
+smsg SMSG_SPELL_GO = 0x0132 {
+    PackedGuid cast_item {
+        comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
+    }
+    PackedGuid caster;
+    Spell spell;
+    CastFlags flags;
+
+    u8 amount_of_hits;
+    Guid[amount_of_hits] hits;
+
+    u8 amount_of_misses;
+    SpellMiss[amount_of_misses] misses;
+    
+    SpellCastTargets targets;
+    if (flags & AMMO) {
+        u32 ammo_display_id;
+        u32 ammo_inventory_type;
+    }
+}
+
+
+enum NewItemSource : u32 {
+    LOOTED = 0;
+    FROM_NPC = 1;
+}
+
+enum NewItemCreationType : u32 {
+    RECEIVED = 0;
+    CREATED = 1;
+}
+
+enum NewItemChatAlert : u32 {
+    DO_NOT_SHOW = 0;
+    SHOW = 1;
+}
+
+smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
+    Guid guid;
+    NewItemSource source;
+    NewItemCreationType creation_type;
+    NewItemChatAlert alert_chat;
+    u8 bag_slot;
+    u32 item_slot {
+        comment = "mangoszero: item slot, but when added to stack: 0xFFFFFFFF";
+    }
+    u32 item_id;
+    u32 item_suffix_factor {
+        comment = "mangoszero: SuffixFactor";
+    }
+    u32 item_random_property_id {
+        comment = "mangoszero: random item property id";
+    }
+    u32 item_count;
+}
+
+
+struct PetSpellCooldown {
+    u16 spell_id;
+    u16 spell_category {
+        comment = "mangoszero: sets to 0";
+    }
+    u32 cooldown_in_msecs;
+    u32 category_cooldown_in_msecs;
+}
+
+smsg SMSG_PET_SPELLS = 0x0179 {
+    Guid pet;
+    u32 unknown1 {
+        comment = "mangoszero: set to 0";
+    }
+    PetReactState react;
+    PetCommandState command;
+    u16 unknown2 {
+        comment = "mangoszero: set to 0";
+    }
+    u32[10] action_bars;
+    u8 amount_of_spells;
+    u32[amount_of_spells] spells;
+    u8 amount_of_cooldowns;
+    PetSpellCooldown[amount_of_cooldowns] cooldowns;
+}
+
+
+struct GossipItem {
+    u32 id {
+        comment = "vmangos: sets to loop index";
+    }
+    u8 item_icon;
+    Bool coded {
+        comment = "vmangos: makes pop up box password";
+    }
+}
+
+struct QuestItem {
+    u32 quest_id;
+    u32 quest_icon;
+    u32 level;
+    CString title {
+        comment = "vmangos/cmangos/mangoszero: max 0x200";
+    }
+}
+
+smsg SMSG_GOSSIP_MESSAGE = 0x017D {
+    Guid guid;
+    u32 title_text_id;
+    u32 amount_of_gossip_items {
+        valid_range = "0 15";
+    }
+    GossipItem[amount_of_gossip_items] gossips;
+    u32 amount_of_quests {
+        valid_range = "0 20";
+    }
+    QuestItem[amount_of_quests] quests;
+}
+
+struct NpcTextUpdateEmote {
+    u32 delay;
+    u32 emote;
+}
+
+struct NpcTextUpdate {
+    f32 probability;
+    CString[2] texts;
+    Language language;
+    NpcTextUpdateEmote[3] emotes;
+}
+
+smsg SMSG_NPC_TEXT_UPDATE = 0x0180 {
+    u32 text_id;
+    f32 probability;
+    NpcTextUpdate[8] texts;
+}
+
+
+
+struct ListInventoryItem {
+    u32 item_stack_count;
+    u32 item_id;
+    u32 item_display_id;
+    u32 max_items {
+        comment = "cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case";
+    }
+    u32 price;
+    u32 max_durability;
+    u32 durability;
+}
+
+smsg SMSG_LIST_INVENTORY = 0x019F {
+    Guid vendor;
+    u8 amount_of_items {
+        comment = "cmangos: 0 displays Vendor has no inventory";
+    }
+    ListInventoryItem[amount_of_items] items;
+}
+
+enum SellItemResult : u8 {
+    CANT_FIND_ITEM = 1;
+    CANT_SELL_ITEM = 2 {
+        comment = "cmangos/vmangos/mangoszero: merchant doesn't like that item";
+    }
+    CANT_FIND_VENDOR = 3 {
+        comment = "cmangos/vmangos/mangoszero: merchant doesn't like you";
+    }
+    YOU_DONT_OWN_THAT_ITEM = 4 {
+        comment = "cmangos/vmangos/mangoszero: you don't own that item";
+    }
+    UNK = 5 {
+        comment = "cmangos/vmangos/mangoszero: nothing appears...";
+    }
+    ONLY_EMPTY_BAG = 6 {
+        comment = "cmangos/vmangos/mangoszero: can only do with empty bags";
+    }
+}
+
+smsg SMSG_SELL_ITEM = 0x01A1 {
+    Guid guid;
+    Guid item;
+    SellItemResult result;
+}
+
+
+enum TrainerSpellState : u8 {
+    GREEN = 0;
+    RED = 1;
+    GRAY = 2;
+}
+
+struct TrainerSpell {
+    u32 spell {
+        comment = "cmangos: learned spell (or cast-spell in profession case)";
+    }
+    TrainerSpellState state;
+    u32 spell_cost;
+    u32 talent_point_cost {
+        comment = "cmangos: spells don't cost talent points";
+        comment = "cmangos: set to 0";
+    }
+    u32 first_rank {
+        comment = "cmangos: must be equal prev. field to have learn button in enabled state";
+        comment = "cmangos: 1 for true 0 for false";
+    }
+    u8 required_level;
+    u32 required_skill;
+    u32 required_skill_value;
+    u32 spell_chain_required;
+    u32 spell_chain_previous;
+    u32 unknown1 {
+        comment = "cmangos/vmangos/mangoszero: all set 0";
+    }
+}
+
+smsg SMSG_TRAINER_LIST = 0x01B1 {
+    Guid guid;
+    /* TODO Enum? */
+    u32 trainer_type;
+    u32 amount_of_spells;
+    TrainerSpell[amount_of_spells] spells;
+    CString greeting;
+}
+
+
+cmsg CMSG_PETITION_BUY = 0x01BD {
+    Guid npc;
+    u32 skip1;
+    u64 skip2;
+    CString name;
+    u32 skip3;
+    u32 skip4;
+    u32 skip5;
+    u32 skip6;
+    u32 skip7;
+    u32 skip8;
+    u32 skip9;
+    u32 skip10;
+    u32 skip11;
+    u32 skip12;
+    u16 skip13;
+    u8 skip14;
+    u32 index {
+        comment = "cmangos/vmangos/mangoszero: Named but never used";
+    }
+    u32 skip15;
+} {
+    comment = "cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused";
+}
+
+cmsg CMSG_BUG = 0x01CA {
+    u32 suggestion {
+        comment = "cmangos/vmangos/mangoszero: If 0 received bug report, else received suggestion";
+    }
+    u32 content_length;
+    /* TODO CString with len? */
+    CString content;
+    u32 type_length;
+    /* TODO CString with len? */
+    CString bug_type;
+}
+
+smsg SMSG_LEVELUP_INFO = 0x01D4 {
+    u32 new_level;
+    u32 health;
+    u32 mana;
+    u32 rage;
+    u32 focus;
+    u32 energy;
+    u32 happiness;
+    u32 strength;
+    u32 agility;
+    u32 stamina;
+    u32 intellect;
+    u32 spirit;
+}
+
+
+/* Used for CMSG_GMTICKET_CREATE */
+enum GmTicketType : u8 {
+    STUCK = 1;
+    BEHAVIOR_HARASSMENT = 2;
+    GUILD = 3;
+    ITEM = 4;
+    ENVIRONMENTAL = 5;
+    NONQUEST_CREEP = 6;
+    QUEST_QUESTNPC = 7;
+    TECHNICAL = 8;
+    ACCOUNT_BILLING = 9;
+    CHARACTER = 10;
+} {
+    comment = "vmangos: From GMTicketCategory.dbc";
+}
+
+
+enum GmTicketStatus : u32 {
+    DBERROR = 0x00;
+    HASTEXT = 0x06;
+    DEFAULT = 0x0A;
+}
+
+enum GmTicketEscalationStatus : u8 {
+    GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED = 0 {
+        comment = "ticket is not currently assigned to a gm";
+    }
+    GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED = 1 {
+        comment = "ticket is assigned to a normal gm";
+    }
+    GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED = 2 {
+        comment = "ticket is in the escalation queue";
+    }
+}
+
+smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
+    GmTicketStatus status;
+    if (status == HASTEXT) {
+        CString text {
+            comment = "cmangos: Ticket text: data, should never exceed 1999 bytes";
+        }
+        GmTicketType ticket_type;
+        f32 days_since_ticket_creation;
+        f32 days_since_oldest_ticket_creation;
+        f32 days_since_last_updated;
+        GmTicketEscalationStatus escalation_status;
+        Bool read_by_gm;
+    }
+}
+
+smsg SMSG_BATTLEFIELD_LIST = 0x023D {
+    Guid battlemaster;
+    Map map;
+    u8 unknown1;
+    u32 unknown2 {
+        comment = "vmangos: number of bg instances, this is also present on the number_of_battlegrounds field";
+    }
+    u8 unknown3;
+    u32 number_of_battlegrounds {
+        comment = "vmangos: number of bg instances, this is also present on the unknown2 field";
+    }
+    u32[number_of_battlegrounds] battlegrounds;
+}
+
+smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
+    PackedGuid target;
+    PackedGuid attacker;
+    Spell spell;
+    u32 damage;
+    SpellSchool school;
+    u32 absorbed_damage;
+    u32 resisted {
+        comment = "cmangos/mangoszero/vmangos: sent as int32";
+    }
+    u8 periodic_log {
+        comment = "cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name";
+    }
+    u8 unused;
+    u32 blocked;
+    /* TODO Hit info? */
+    u32 hit_info;
+    u8 extend_flag {
+        comment = "cmangos has some that might be correct https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497";
+    }
+}
+
+smsg SMSG_SET_FLAT_SPELL_MODIFIER = 0x0266 {
+    /* TODO What does this mean? */
+    u8 eff;
+    u8 op;
+    u32 value;
+}
+
+smsg SMSG_SET_PCT_SPELL_MODIFIER = 0x0267 {
+    /* TODO What does this mean? */
+    u8 eff;
+    u8 op;
+    u32 value;
+}
+
+
+smsg SMSG_SPELLDISPELLOG = 0x027B {
+    Guid victim;
+    Guid caster;
+    u32 amount_of_spells;
+    /* TODO Make Spell type */
+    u32[amount_of_spells] spells;
+}
+
+
+struct WorldState {
+    u32 state;
+    u32 value;
+}
+
+smsg SMSG_INIT_WORLD_STATES = 0x02C2 {
+    Map map;
+    Area area;
+    u16 amount_of_states;
+    WorldState[amount_of_states] states;
+}
+
+smsg SMSG_UPDATE_WORLD_STATE = 0x02C3 {
+    WorldState state;
+}
+
+struct RaidInfo {
+    Map map;
+    u32 reset_time;
+    u32 instance_id;
+}
+
+smsg SMSG_RAID_INSTANCE_INFO = 0x02CC {
+    u32 amount_of_raid_infos;
+    RaidInfo[amount_of_raid_infos] raid_infos;
+}
+
+
+cmsg CMSG_BATTLEMASTER_JOIN = 0x02EE {
+    Guid guid;
+    Map map;
+    u32 instance_id;
+    Bool join_as_group;
+}
+
+
+smsg SMSG_LOOT_MASTER_LIST = 0x02A4 {
+    u8 amount_of_players;
+    Guid[amount_of_players] guids;
+}
+
+struct ForcedReaction {
+    u32 faction_id {
+        comment = "vmangos: faction_id (Faction.dbc)";
+    }
+    u32 reputation_rank {
+        comment = "vmangos: reputation rank";
+    }
+}
+
+smsg SMSG_SET_FORCED_REACTIONS = 0x02A5 {
+    u32 amount_of_reactions;
+    ForcedReaction[amount_of_reactions] reactions;
+}
+
