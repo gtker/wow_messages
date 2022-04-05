@@ -12,6 +12,7 @@
   * Tests
 * Working UpdateMask
   * Tests
+* Test handling of flags
 
 # Direct upgrades to Login
 
