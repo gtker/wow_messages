@@ -1,5 +1,24 @@
 #tag_all versions "1.12";
 
+enum SellItemResult : u8 {
+    CANT_FIND_ITEM = 1;
+    CANT_SELL_ITEM = 2 {
+        comment = "cmangos/vmangos/mangoszero: merchant doesn't like that item";
+    }
+    CANT_FIND_VENDOR = 3 {
+        comment = "cmangos/vmangos/mangoszero: merchant doesn't like you";
+    }
+    YOU_DONT_OWN_THAT_ITEM = 4 {
+        comment = "cmangos/vmangos/mangoszero: you don't own that item";
+    }
+    UNK = 5 {
+        comment = "cmangos/vmangos/mangoszero: nothing appears...";
+    }
+    ONLY_EMPTY_BAG = 6 {
+        comment = "cmangos/vmangos/mangoszero: can only do with empty bags";
+    }
+}
+
 smsg SMSG_SELL_ITEM = 0x01A1 {
     Guid guid;
     Guid item;

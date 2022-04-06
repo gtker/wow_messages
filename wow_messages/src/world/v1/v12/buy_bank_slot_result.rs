@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/remaining.wowm:870`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/remaining.wowm#L870):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/smsg_buy_bank_slot_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/smsg_buy_bank_slot_result.wowm#L3):
 /// ```text
 /// enum BuyBankSlotResult : u32 {
 ///     FAILED_TOO_MANY = 0;

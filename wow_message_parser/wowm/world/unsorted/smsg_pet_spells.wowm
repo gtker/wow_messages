@@ -1,5 +1,14 @@
 #tag_all versions "1.12";
 
+struct PetSpellCooldown {
+    u16 spell_id;
+    u16 spell_category {
+        comment = "mangoszero: sets to 0";
+    }
+    u32 cooldown_in_msecs;
+    u32 category_cooldown_in_msecs;
+}
+
 smsg SMSG_PET_SPELLS = 0x0179 {
     Guid pet;
     u32 unknown1 {

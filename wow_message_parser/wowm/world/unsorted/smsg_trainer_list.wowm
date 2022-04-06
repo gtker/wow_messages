@@ -1,5 +1,35 @@
 #tag_all versions "1.12";
 
+enum TrainerSpellState : u8 {
+    GREEN = 0;
+    RED = 1;
+    GRAY = 2;
+}
+
+struct TrainerSpell {
+    u32 spell {
+        comment = "cmangos: learned spell (or cast-spell in profession case)";
+    }
+    TrainerSpellState state;
+    u32 spell_cost;
+    u32 talent_point_cost {
+        comment = "cmangos: spells don't cost talent points";
+        comment = "cmangos: set to 0";
+    }
+    u32 first_rank {
+        comment = "cmangos: must be equal prev. field to have learn button in enabled state";
+        comment = "cmangos: 1 for true 0 for false";
+    }
+    u8 required_level;
+    u32 required_skill;
+    u32 required_skill_value;
+    u32 spell_chain_required;
+    u32 spell_chain_previous;
+    u32 unknown1 {
+        comment = "cmangos/vmangos/mangoszero: all set 0";
+    }
+}
+
 smsg SMSG_TRAINER_LIST = 0x01B1 {
     Guid guid;
     /* TODO Enum? */

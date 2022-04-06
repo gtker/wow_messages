@@ -4,7 +4,7 @@ use crate::world::v1::v12::{SpellEffect, SpellEffectError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/remaining.wowm:316`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/remaining.wowm#L316):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/smsg_spelllogexecute.wowm:134`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/smsg_spelllogexecute.wowm#L134):
 /// ```text
 /// struct SpellLog {
 ///     SpellEffect effect;

@@ -1,5 +1,24 @@
 #tag_all versions "1.12";
 
+struct ItemSpells {
+    Spell spell;   
+    u32 spell_trigger;
+    u32 spell_charges {
+        comment = "let the database control the sign here. negative means that the item should be consumed once the charges are consumed.";
+    }
+    u32 spell_cooldown;
+    u32 spell_category;
+    u32 spell_category_cooldown;
+}
+
+struct ItemDamageType {
+    u32 damage_minimum;
+    u32 damage_maximum;
+    u32 damage_type {
+        comment = "mangoszero/vmangos/cmangos: id from Resistances.dbc";
+    }
+}
+
 struct ItemStat {
     u32 item_stat_type;
     u32 item_stat_value;

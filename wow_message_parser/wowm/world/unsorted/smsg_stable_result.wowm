@@ -1,5 +1,23 @@
 #tag_all versions "1.12";
 
+enum StableResult : u8 {
+    ERR_MONEY = 0x01 {
+        comment = "you don't have enough money";
+    }
+    ERR_STABLE = 0x06 {
+        comment = "currently used in most fail cases";
+    }
+    SUCCESS_STABLE = 0x08 {
+        comment = "table success";
+    }
+    SUCCESS_UNSTABLE = 0x09 {
+        comment = "unstable/swap success";
+    }
+    SUCCESS_BUY_SLOT = 0x0A {
+        comment = "buy slot success";
+    }
+}
+
 smsg SMSG_STABLE_RESULT = 0x0273 {
     StableResult result;
 }

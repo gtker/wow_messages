@@ -1,5 +1,10 @@
 #tag_all versions "1.12";
 
+enum PetTalkReason : u32 {
+    SPECIAL_SPELL = 0;
+    ATTACK = 1;
+}
+
 smsg SMSG_PET_ACTION_SOUND = 0x0324 {
     Guid guid;
     PetTalkReason reason;

@@ -1,5 +1,15 @@
 #tag_all versions "1.12";
 
+struct GossipItem {
+    u32 id {
+        comment = "vmangos: sets to loop index";
+    }
+    u8 item_icon;
+    Bool coded {
+        comment = "vmangos: makes pop up box password";
+    }
+}
+
 smsg SMSG_GOSSIP_MESSAGE = 0x017D {
     Guid guid;
     u32 title_text_id;

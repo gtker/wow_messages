@@ -1,5 +1,17 @@
 #tag_all versions "1.12";
 
+enum WeatherType : u32 {
+    FINE = 0;
+    RAIN = 1;
+    SNOW = 2;
+    STORM = 3;
+}
+
+enum WeatherChangeType : u8 {
+    SMOOTH = 0;
+    INSTANT = 1;
+}
+
 smsg SMSG_WEATHER = 0x02F4 {
     WeatherType weather_type;
     f32 grade;

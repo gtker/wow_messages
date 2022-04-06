@@ -3,7 +3,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/remaining.wowm:1148`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/remaining.wowm#L1148):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/cmsg_gmsurvey_submit.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/cmsg_gmsurvey_submit.wowm#L3):
 /// ```text
 /// struct GmSurveyQuestion {
 ///     u32 question_id;

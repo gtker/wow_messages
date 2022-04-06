@@ -1,5 +1,11 @@
 #tag_all versions "1.12";
 
+struct RaidInfo {
+    Map map;
+    u32 reset_time;
+    u32 instance_id;
+}
+
 smsg SMSG_RAID_INSTANCE_INFO = 0x02CC {
     u32 amount_of_raid_infos;
     RaidInfo[amount_of_raid_infos] raid_infos;

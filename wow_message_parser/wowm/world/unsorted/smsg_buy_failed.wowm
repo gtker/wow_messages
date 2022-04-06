@@ -1,5 +1,17 @@
 #tag_all versions "1.12";
 
+enum BuyResult : u8 {
+    CANT_FIND_ITEM = 0;
+    ITEM_ALREADY_SOLD = 1;
+    NOT_ENOUGHT_MONEY = 2;
+    SELLER_DONT_LIKE_YOU = 4;
+    DISTANCE_TOO_FAR = 5;
+    ITEM_SOLD_OUT = 7;
+    CANT_CARRY_MORE = 8;
+    RANK_REQUIRE = 11;
+    REPUTATION_REQUIRE = 12;
+}
+
 smsg SMSG_BUY_FAILED = 0x01A5 {
     u64 guid;
     u32 item_id;

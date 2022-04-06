@@ -1,5 +1,10 @@
 #tag_all versions "1.12";
 
+enum FarSightOperation : u8 {
+    REMOVE = 0;
+    ADD = 1;
+}
+
 cmsg CMSG_FAR_SIGHT = 0x027A {
     FarSightOperation operation;
 }

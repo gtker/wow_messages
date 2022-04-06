@@ -1,5 +1,20 @@
 #tag_all versions "1.12";
 
+enum TrainingFailureReason : u32
+{
+    UNAVAILABLE = 0 {
+        comment = "Trainer service %d unavailable.";
+    }
+    NOT_ENOUGH_MONEY = 1 {
+        comment = "Not enough money for trainer service %d.";
+    }
+    NOT_ENOUGH_SKILL = 2 {
+        comment = "Not enough skill points for trainer service %d.";
+    }
+} {
+    comment = "These errors are only printed in client console.";
+}
+
 smsg SMSG_TRAINER_BUY_FAILED = 0x01B4 {
     u64 guid;
     u32 spell_id;

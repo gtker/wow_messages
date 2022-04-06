@@ -1,5 +1,25 @@
 #tag_all versions "1.12";
 
+struct CooldownSpell {
+    u16 spell_id;
+    u16 item_id {
+        comment = "cmangos/mangoszero: cast item id";
+    }
+    u16 spell_category;
+    u32 cooldown_in_msecs;
+    u32 category_cooldown_in_msecs;
+}
+
+struct InitialSpell {
+    u16 spell_id {
+        comment = "cmangos/mangoszero: only send 'first' part of spell";
+    }
+    u16 unknown1 {
+        comment = "cmangos/mangoszero: sets to 0";
+        comment = "cmangos/mangoszero: it's not slot id";
+    }
+}
+
 smsg SMSG_INITIAL_SPELLS = 0x012A {
     u8 unknown1 {
         comment = "cmangos/mangoszero: sets to 0";

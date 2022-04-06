@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/remaining.wowm:913`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/remaining.wowm#L913):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/cmsg_setsheathed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/cmsg_setsheathed.wowm#L3):
 /// ```text
 /// enum SheathState : u8 {
 ///     UNARMED = 0;

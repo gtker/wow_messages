@@ -1,5 +1,10 @@
 #tag_all versions "1.12";
 
+enum DuelWinnerReason : u8 {
+    WON = 0;
+    FLED = 1;
+}
+
 smsg SMSG_DUEL_WINNER = 0x016B {
     DuelWinnerReason reason;
     CString opponent_name;

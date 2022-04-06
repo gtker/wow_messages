@@ -1,5 +1,14 @@
 #tag_all versions "1.12";
 
+enum EnvironmentalDamageType : u32 {
+    EXHAUSTED = 0;
+    DROWNING = 1;
+    FALL = 2;
+    LAVA = 3;
+    SLIME = 4;
+    FIRE = 5;
+}
+
 smsg SMSG_ENVIRONMENTALDAMAGELOG = 0x01FC {
     u64 guid;
     EnvironmentalDamageType damage_type;

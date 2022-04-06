@@ -1,5 +1,17 @@
 #tag_all versions "1.12";
 
+struct ListInventoryItem {
+    u32 item_stack_count;
+    u32 item_id;
+    u32 item_display_id;
+    u32 max_items {
+        comment = "cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case";
+    }
+    u32 price;
+    u32 max_durability;
+    u32 durability;
+}
+
 smsg SMSG_LIST_INVENTORY = 0x019F {
     Guid vendor;
     u8 amount_of_items {

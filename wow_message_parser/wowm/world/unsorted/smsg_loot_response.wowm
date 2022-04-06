@@ -1,5 +1,24 @@
 #tag_all versions "1.12";
 
+enum LootMethod : u8 {
+    CORPSE                 = 1;
+    PICKPOCKETING          = 2;
+    FISHING                = 3;
+    DISENCHANTING          = 4;
+    SKINNING               = 6 {
+        comment = "unsupported by client, send LOOT_PICKPOCKETING instead";
+    }
+    FISHINGHOLE            = 20 {
+        comment = "unsupported by client, send LOOT_FISHING instead";
+    }
+    FISHING_FAIL           = 21 {
+        comment = "unsupported by client, send LOOT_FISHING instead";
+    }
+    INSIGNIA               = 22 {
+        comment = "unsupported by client, send LOOT_CORPSE instead";
+    }
+}
+
 smsg SMSG_LOOT_RESPONSE = 0x0160 {
     u64 guid;
     LootMethod loot_method;

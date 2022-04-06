@@ -1,5 +1,10 @@
 #tag_all versions "1.12";
 
+enum LogFormat : u8 {
+    DEFAULT = 0;
+    DEBUG = 1;
+}
+
 smsg SMSG_PROCRESIST = 0x0260 {
     u64 guid;
     u64 target_guid;

@@ -1,5 +1,13 @@
 #tag_all versions "1.12";
 
+enum ServerMessageType : u32 {
+    SHUTDOWN_TIME = 1;
+    RESTART_TIME = 2;
+    CUSTOM = 3;
+    SHUTDOWN_CANCELLED = 4;
+    RESTART_CANCELLED = 5;
+}
+
 smsg SMSG_SERVER_MESSAGE = 0x0291 {
     ServerMessageType message_type;
     CString message;

@@ -1,5 +1,25 @@
 #tag_all versions "1.12";
 
+struct PetitionShowlist {
+    u32 index;
+    u32 charter_entry = 5863 {
+        comment = "cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863).";
+    }
+    u32 charter_display_id = 16161 {
+        comment = "cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161).";
+    }
+    u32 guild_charter_cost {
+        comment = "cmangos/vmangos/mangoszero: statically set to 1000 (10 silver).";
+    }
+    u32 unknown1 {
+        comment = "cmangos/vmangos/mangoszero: statically set to 1";
+    }
+    u32 unknown2 {
+        comment = "cmangos/vmangos/mangoszero: statically set to 9";
+        comment = "cmangos/vmangos/mangoszero: required signs?";
+    }
+}
+
 smsg SMSG_PETITION_SHOWLIST = 0x01BC {
     Guid npc;
     u8 amount_of_petitions;

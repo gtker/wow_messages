@@ -1,5 +1,20 @@
 #tag_all versions "1.12";
 
+enum NewItemSource : u32 {
+    LOOTED = 0;
+    FROM_NPC = 1;
+}
+
+enum NewItemCreationType : u32 {
+    RECEIVED = 0;
+    CREATED = 1;
+}
+
+enum NewItemChatAlert : u32 {
+    DO_NOT_SHOW = 0;
+    SHOW = 1;
+}
+
 smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     Guid guid;
     NewItemSource source;

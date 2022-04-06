@@ -1,5 +1,16 @@
 #tag_all versions "1.12";
 
+enum GroupType : u8 {
+    NORMAL = 0;
+    RAID = 1;
+}
+
+struct GroupListMember {
+    CString name;
+    Guid guid;
+    Bool is_online;
+}
+
 smsg SMSG_GROUP_LIST = 0x007D {
     GroupType group_type;   
     u8 own_flags {

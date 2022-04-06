@@ -1,5 +1,11 @@
 #tag_all versions "1.12";
 
+enum GmTicketStatusResponse : u32 {
+    UPDATED = 1;
+    CLOSED = 2;
+    SURVEY = 3;
+}
+
 smsg SMSG_GM_TICKET_STATUS_UPDATE = 0x0328 {
     GmTicketStatusResponse response;
 }

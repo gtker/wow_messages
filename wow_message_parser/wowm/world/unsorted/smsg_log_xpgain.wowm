@@ -1,5 +1,10 @@
 #tag_all versions "1.12";
 
+enum ExperienceAwardType : u8 {
+    KILL = 0;
+    NON_KILL = 1;
+}
+
 smsg SMSG_LOG_XPGAIN = 0x01D0 {
     u64 target_guid;
     u32 total_exp;

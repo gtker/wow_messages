@@ -1,5 +1,12 @@
 #tag_all versions "1.12";
 
+enum PetFeedback : u8 {
+    PET_DEAD = 1;
+    NOTHING_TO_EAT = 2;
+    CANT_ATTACK_TARGET = 3;
+    NO_PATH_TO = 4;
+}
+
 smsg SMSG_PET_ACTION_FEEDBACK = 0x02C6 {
     PetFeedback feedback;
 }

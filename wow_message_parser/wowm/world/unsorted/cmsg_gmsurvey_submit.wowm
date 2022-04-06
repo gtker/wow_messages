@@ -1,5 +1,14 @@
 #tag_all versions "1.12";
 
+struct GmSurveyQuestion {
+    u32 question_id {
+        comment = "cmangos: questions found in GMSurveyQuestions.dbc";
+    }
+    u8 answer {
+        comment = "Rating: hardcoded limit of 0-5 in pre-Wrath, ranges defined in GMSurveyAnswers.dbc Wrath+";
+    }
+}
+
 cmsg CMSG_GMSURVEY_SUBMIT = 0x032A {
     /* Enum for survey id */
     u32 survey_id {

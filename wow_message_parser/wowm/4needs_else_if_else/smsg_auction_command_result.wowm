@@ -1,5 +1,47 @@
 #tag_all versions "1.12";
 
+enum AuctionCommandAction : u32 {
+    STARTED = 0 {
+        comment = "ERR_AUCTION_STARTED";
+    }
+    REMOVED = 1 {
+        comment = "ERR_AUCTION_REMOVED";
+    }
+    BID_PLACED = 2 {
+        comment = "ERR_AUCTION_BID_PLACED";
+    }
+}
+
+enum AuctionCommandResult : u32 {
+    OK = 0 {
+        comment = "depends on enum AuctionAction";
+    }
+    ERR_INVENTORY = 1 {
+        comment = "depends on enum InventoryChangeResult";
+    }
+    ERR_DATABASE = 2 {
+        comment = "ERR_AUCTION_DATABASE_ERROR (default)";
+    }
+    ERR_NOT_ENOUGH_MONEY = 3 {
+        comment = "ERR_NOT_ENOUGH_MONEY";
+    }
+    ERR_ITEM_NOT_FOUND = 4 {
+        comment = "ERR_ITEM_NOT_FOUND";
+    }
+    ERR_HIGHER_BID = 5 {
+        comment = "ERR_AUCTION_HIGHER_BID";
+    }
+    ERR_BID_INCREMENT = 7 {
+        comment = "ERR_AUCTION_BID_INCREMENT";
+    }
+    ERR_BID_OWN = 10 {
+        comment = "ERR_AUCTION_BID_OWN";
+    }
+    ERR_RESTRICTED_ACCOUNT = 13 {
+        comment = "ERR_RESTRICTED_ACCOUNT";
+    }
+}
+
 smsg SMSG_AUCTION_COMMAND_RESULT = 0x025B {
     u32 auction_id;
     AuctionCommandAction action;
