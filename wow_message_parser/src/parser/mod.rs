@@ -68,7 +68,6 @@ pub fn parse_commands(t: Pair<Rule>) -> Commands {
 }
 
 pub fn parse_file(filename: &Path) -> Objects {
-    dbg!(filename);
     let contents = read_to_string(filename).expect("unable to read file");
     let file = AuthParser::parse(Rule::file, &contents);
     let file = match file {

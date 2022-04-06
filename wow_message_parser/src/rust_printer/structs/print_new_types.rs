@@ -9,7 +9,6 @@ use crate::rust_printer::structs::print_common_impls::print_write::print_write_d
 use crate::rust_printer::Writer;
 
 pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
-    //dbg!(&e.nested_types().new_enums());
     for ce in e.nested_types().new_enums() {
         match ce.definer_ty() {
             DefinerType::Enum => {

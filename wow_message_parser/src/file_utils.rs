@@ -305,7 +305,7 @@ fn get_world_filepath(object_name: &str, version: &WorldVersion) -> String {
         ),
         WorldVersion::All => format!("{world_dir}/", world_dir = WORLD_DIR),
     };
-    dbg!(s + &get_module_name(object_name) + ".rs")
+    s + &get_module_name(object_name) + ".rs"
 }
 
 fn get_login_filepath(object_name: &str, subdir: &str, version: &LoginVersion) -> String {
@@ -326,11 +326,10 @@ fn get_login_filepath(object_name: &str, subdir: &str, version: &LoginVersion) -
             )
         }
     };
-    dbg!(s + &get_module_name(object_name) + ".rs")
+    s + &get_module_name(object_name) + ".rs"
 }
 
 pub fn append_string_to_file(s: &str, filename: &Path) {
-    dbg!(&filename);
     let mut f = std::fs::OpenOptions::new()
         .append(true)
         .open(filename)
