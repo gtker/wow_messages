@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{Gender, GenderError};
 use crate::world::v1::v12::{Race, RaceError};
-use crate::world::helper::{WorldServerMessageWrite, WorldMessageBody};
+use crate::helper::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
@@ -192,7 +192,7 @@ mod test {
     use crate::world::v1::v12::Gender;
     use crate::world::v1::v12::Race;
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
-    use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
+    use crate::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
     // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 12.
     #[test]

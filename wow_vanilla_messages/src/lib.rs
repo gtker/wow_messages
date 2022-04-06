@@ -9,6 +9,7 @@ use std::io::{Error, Read};
 
 pub(crate) mod util;
 mod world;
+pub mod helper;
 
 pub use world::*;
 

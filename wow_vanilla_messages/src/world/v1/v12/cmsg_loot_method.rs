@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{GroupLootSetting, GroupLootSettingError};
 use crate::world::v1::v12::{ItemQuality, ItemQualityError};
-use crate::world::helper::{WorldClientMessageWrite, WorldMessageBody};
+use crate::helper::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 

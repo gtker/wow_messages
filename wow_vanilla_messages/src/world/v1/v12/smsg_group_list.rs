@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::helper::Guid;
+use crate::helper::Guid;
 use crate::world::v1::v12::{GroupListMember, GroupListMemberError};
 use crate::world::v1::v12::{GroupLootSetting, GroupLootSettingError};
 use crate::world::v1::v12::{GroupType, GroupTypeError};
 use crate::world::v1::v12::{ItemQuality, ItemQualityError};
-use crate::world::helper::{WorldServerMessageWrite, WorldMessageBody};
+use crate::helper::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 

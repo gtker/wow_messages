@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::helper::Guid;
+use crate::helper::Guid;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]

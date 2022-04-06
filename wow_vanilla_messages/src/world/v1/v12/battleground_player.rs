@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::helper::Guid;
+use crate::helper::Guid;
 use crate::world::v1::v12::{PvpRank, PvpRankError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 

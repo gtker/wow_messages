@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::helper::{WorldClientMessageWrite, WorldMessageBody};
+use crate::helper::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
@@ -65,7 +65,7 @@ mod test {
     use super::CMSG_LOGOUT_REQUEST;
     use crate::ConstantSized;
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
-    use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
+    use crate::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
     // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm` line 5.
     #[test]

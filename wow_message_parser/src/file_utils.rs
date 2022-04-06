@@ -77,7 +77,7 @@ impl ModFiles {
         } else {
             self.v.push(ModFile {
                 name: file_dir,
-                submodules: vec![e, ("helper".to_string(), SubmoduleLocation::PubMod)],
+                submodules: vec![e],
             })
         }
 

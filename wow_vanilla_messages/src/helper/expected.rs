@@ -2,7 +2,7 @@ use std::fmt::{Display, Formatter};
 use std::io::{Error, Read};
 
 use crate::util::{read_u16_le, read_u32_le};
-use crate::world::helper::{WorldClientMessageWrite, WorldMessageBody, WorldServerMessageWrite};
+use crate::helper::{WorldClientMessageWrite, WorldMessageBody, WorldServerMessageWrite};
 
 pub fn read_expected_client_world_message<
     M: WorldClientMessageWrite + WorldMessageBody,

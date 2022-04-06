@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::helper::AuraMask;
-use crate::world::helper::UpdateMask;
+use crate::helper::AuraMask;
+use crate::helper::UpdateMask;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]

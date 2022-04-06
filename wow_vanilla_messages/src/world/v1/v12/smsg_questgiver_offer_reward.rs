@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::helper::Guid;
+use crate::helper::Guid;
 use crate::world::v1::v12::NpcTextUpdateEmote;
 use crate::world::v1::v12::QuestItemReward;
-use crate::world::helper::{WorldServerMessageWrite, WorldMessageBody};
+use crate::helper::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 

@@ -67,12 +67,12 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
         }
         ContainerType::CMsg(_) => {
             s.wln(format!(
-                "use crate::world::helper::{};",
+                "use crate::helper::{};",
                 WORLD_BODY_TRAIT_NAME
             ));
-            s.wln("use crate::world::helper::WorldMessage;");
+            s.wln("use crate::helper::WorldMessage;");
             s.wln(format!(
-                "use crate::world::helper::{{{}, {}}};",
+                "use crate::helper::{{{}, {}}};",
                 WORLD_SERVER_HEADER_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME,
             ));
             s.wln("use wow_srp::header_crypto::{Decrypter, Encrypter};");

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::helper::{WorldServerMessageWrite, WorldMessageBody};
+use crate::helper::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
@@ -89,7 +89,7 @@ mod test {
     use super::SMSG_IGNORE_LIST;
     use crate::VariableSized;
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
-    use crate::world::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
+    use crate::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
     // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 8.
     #[test]

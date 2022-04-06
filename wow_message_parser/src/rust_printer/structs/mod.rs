@@ -44,15 +44,15 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     s.wln("use std::convert::{TryFrom, TryInto};");
 
     if e.contains_guid_or_packed_guid() {
-        s.wln("use crate::world::helper::Guid;");
+        s.wln("use crate::helper::Guid;");
     }
 
     if e.contains_aura_mask() {
-        s.wln("use crate::world::helper::AuraMask;");
+        s.wln("use crate::helper::AuraMask;");
     }
 
     if e.contains_update_mask() {
-        s.wln("use crate::world::helper::UpdateMask;");
+        s.wln("use crate::helper::UpdateMask;");
     }
 
     for name in e.get_types_needing_import() {
@@ -93,21 +93,21 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
         }
         ContainerType::SMsg(_) => {
             s.wln(format!(
-                "use crate::world::helper::{{{}, {}}};",
+                "use crate::helper::{{{}, {}}};",
                 WORLD_SERVER_HEADER_TRAIT_NAME, WORLD_BODY_TRAIT_NAME,
             ));
             s.wln("use wow_srp::header_crypto::Encrypter;");
         }
         ContainerType::CMsg(_) => {
             s.wln(format!(
-                "use crate::world::helper::{{{}, {}}};",
+                "use crate::helper::{{{}, {}}};",
                 WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_BODY_TRAIT_NAME,
             ));
             s.wln("use wow_srp::header_crypto::Encrypter;");
         }
         ContainerType::Msg(_) => {
             s.wln(format!(
-                "use crate::world::helper::{{{}, {}, {}}};",
+                "use crate::helper::{{{}, {}, {}}};",
                 WORLD_CLIENT_HEADER_TRAIT_NAME,
                 WORLD_SERVER_HEADER_TRAIT_NAME,
                 WORLD_BODY_TRAIT_NAME,
