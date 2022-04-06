@@ -7,7 +7,7 @@ use crate::rust_printer::Writer;
 use std::io::Write;
 
 pub const LOGIN_DIR: &str = "wow_login_messages/src";
-pub const WORLD_DIR: &str = "wow_messages/src/world";
+pub const WORLD_DIR: &str = "wow_vanilla_messages/src/world";
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
 pub enum SubmoduleLocation {

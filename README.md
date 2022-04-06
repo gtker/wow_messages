@@ -5,9 +5,9 @@ Auto generated from the `wowm` language found in `wow_message_parser/wowm`.
 
 The project is split into the subdirectories:
 
-* `wow_login_messages`: **UNRELEASED** Rust library for the authentication server.
+* `wow_login_messages`: Rust library for the authentication server.
 * `wow_message_parser`: The parser, codegen and definitions that creates the libraries.
-* `wow_messages`: **UNRELEASED** Rust library for the world server.
+* `wow_vanilla_messages`: **UNRELEASED** Rust library for the world server for WoW version 1.x.y.
 * `wow_simple_auth`: Test binary that uses the authentication library.
 * `wowm_language`: [mdbook](https://github.com/rust-lang/mdBook) of language specification.
 

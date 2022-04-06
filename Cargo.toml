@@ -3,6 +3,6 @@
 members = [
     "wow_simple_auth",
     "wow_message_parser",
-    "wow_messages",
+    "wow_vanilla_messages",
     "wow_login_messages",
 ]
