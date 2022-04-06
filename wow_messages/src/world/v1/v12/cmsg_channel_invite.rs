@@ -4,7 +4,7 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/cmsg_channel_invite.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/cmsg_channel_invite.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_channel_invite.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_channel_invite.wowm#L3):
 /// ```text
 /// cmsg CMSG_CHANNEL_INVITE = 0xA3 {
 ///     CString channel_name;
