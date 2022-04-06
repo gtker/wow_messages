@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::helper::Guid;
 use crate::world::v1::v12::{QuestCompletable, QuestCompletableError};
 use crate::world::v1::v12::QuestItemRequirement;
-use crate::helper::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 

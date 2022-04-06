@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{BuybackSlot, BuybackSlotError};
-use crate::helper::{WorldClientMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 

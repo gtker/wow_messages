@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{LogoutResult, LogoutResultError};
 use crate::world::v1::v12::{LogoutSpeed, LogoutSpeedError};
-use crate::helper::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
@@ -124,7 +124,7 @@ mod test {
     use crate::world::v1::v12::LogoutResult;
     use crate::world::v1::v12::LogoutSpeed;
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
-    use crate::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
+    use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
     // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm` line 22.
     #[test]

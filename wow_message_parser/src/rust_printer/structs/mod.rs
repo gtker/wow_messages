@@ -93,21 +93,21 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
         }
         ContainerType::SMsg(_) => {
             s.wln(format!(
-                "use crate::helper::{{{}, {}}};",
+                "use crate::{{{}, {}}};",
                 WORLD_SERVER_HEADER_TRAIT_NAME, WORLD_BODY_TRAIT_NAME,
             ));
             s.wln("use wow_srp::header_crypto::Encrypter;");
         }
         ContainerType::CMsg(_) => {
             s.wln(format!(
-                "use crate::helper::{{{}, {}}};",
+                "use crate::{{{}, {}}};",
                 WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_BODY_TRAIT_NAME,
             ));
             s.wln("use wow_srp::header_crypto::Encrypter;");
         }
         ContainerType::Msg(_) => {
             s.wln(format!(
-                "use crate::helper::{{{}, {}, {}}};",
+                "use crate::{{{}, {}, {}}};",
                 WORLD_CLIENT_HEADER_TRAIT_NAME,
                 WORLD_SERVER_HEADER_TRAIT_NAME,
                 WORLD_BODY_TRAIT_NAME,

@@ -5,7 +5,9 @@
 
 use crate::util::read_u8_le;
 use std::fmt::{Display, Formatter};
-use std::io::{Error, Read};
+use std::io::{Write, Error, Read};
+
+use wow_srp::header_crypto::{Decrypter, Encrypter};
 
 pub(crate) mod util;
 mod world;
@@ -31,4 +33,55 @@ pub trait VariableSized: MaximumPossibleSized {
 
 pub trait MaximumPossibleSized {
     fn maximum_possible_size() -> usize;
+}
+
+pub trait WorldServerMessageWrite: WorldMessageBody {
+    const OPCODE: u16;
+
+    fn write_unencrypted_server<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
+
+    fn write_encrypted_server<W: Write, E: Encrypter>(
+        &self,
+        w: &mut W,
+        e: &mut E,
+    ) -> Result<(), std::io::Error>;
+}
+
+pub trait WorldClientMessageWrite: WorldMessageBody {
+    const OPCODE: u32;
+
+    fn write_unencrypted_client<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
+
+    fn write_encrypted_client<W: Write, E: Encrypter>(
+        &self,
+        w: &mut W,
+        e: &mut E,
+    ) -> Result<(), std::io::Error>;
+}
+
+pub trait WorldMessageBody: Sized {
+    type Error;
+
+    fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> Result<Self, Self::Error>;
+
+    fn write_body<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
+}
+
+pub trait WorldMessage: Sized {
+    type Error;
+
+    fn read_unencrypted<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
+
+    fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
+
+    fn read_encrypted<R: std::io::Read, D: Decrypter>(
+        r: &mut R,
+        d: &mut D,
+    ) -> std::result::Result<Self, Self::Error>;
+
+    fn write_encrypted<W: std::io::Write, E: Encrypter>(
+        &self,
+        w: &mut W,
+        e: &mut E,
+    ) -> std::result::Result<(), std::io::Error>;
 }

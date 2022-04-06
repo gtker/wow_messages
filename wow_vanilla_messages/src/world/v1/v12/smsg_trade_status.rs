@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{InventoryResult, InventoryResultError};
 use crate::world::v1::v12::{TradeStatus, TradeStatusError};
-use crate::helper::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 

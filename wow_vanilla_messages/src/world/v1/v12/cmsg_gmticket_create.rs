@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{GmTicketType, GmTicketTypeError};
 use crate::world::v1::v12::{Map, MapError};
-use crate::helper::{WorldClientMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 

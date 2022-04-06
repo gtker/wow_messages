@@ -7,7 +7,7 @@ use crate::world::v1::v12::{ItemQuality, ItemQualityError};
 use crate::world::v1::v12::ItemSpells;
 use crate::world::v1::v12::ItemStat;
 use crate::world::v1::v12::{Map, MapError};
-use crate::helper::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 

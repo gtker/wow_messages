@@ -53,7 +53,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             ContainerType::Msg(_) => panic!(),
             ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
                 s.wln(format!(
-                    "use crate::helper::{{{}, {}, {}, WorldMessage}};",
+                    "use crate::{{{}, {}, {}, WorldMessage}};",
                     WORLD_BODY_TRAIT_NAME,
                     WORLD_CLIENT_HEADER_TRAIT_NAME,
                     WORLD_SERVER_HEADER_TRAIT_NAME,

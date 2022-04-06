@@ -5,7 +5,7 @@ use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{GroupMemberOnlineStatus};
 use crate::world::v1::v12::{GroupUpdateFlags};
 use crate::world::v1::v12::{Power, PowerError};
-use crate::helper::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 

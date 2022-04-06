@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::helper::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
@@ -126,7 +126,7 @@ mod test {
     use super::SMSG_PET_NAME_QUERY_RESPONSE;
     use crate::VariableSized;
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
-    use crate::helper::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
+    use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
     // Generated from `wow_message_parser/wowm/world/queries/smsg_pet_name_query_response.wowm` line 9.
     #[test]
