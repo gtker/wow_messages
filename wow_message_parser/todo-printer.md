@@ -8,8 +8,6 @@
   * Flag else ifs:
     - {if else if else if} (`SMSG_UPDATE_OBJECT`)
     - {if else if else if}, {if}, {if}, {if} (`SMSG_UPDATE_OBJECT`)
-* Working AuraMask
-  * Tests
 * Working UpdateMask
   * Tests
 * Test: Flags with ifs for `CMD_REALM_LIST_Server` version 8
