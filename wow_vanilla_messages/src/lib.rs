@@ -8,7 +8,11 @@ use std::fmt::{Display, Formatter};
 use std::io::{Error, Read};
 
 pub(crate) mod util;
-pub mod world;
+mod world;
+
+pub use world::*;
+
+const DEFAULT_PORT: u16 = 8085;
 
 pub trait ReadableAndWritable: Sized {
     type Error;

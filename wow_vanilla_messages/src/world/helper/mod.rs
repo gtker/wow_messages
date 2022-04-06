@@ -16,8 +16,6 @@ mod expected;
 mod guid;
 mod update_mask;
 
-const DEFAULT_PORT: u16 = 8085;
-
 pub trait WorldServerMessageWrite: WorldMessageBody {
     const OPCODE: u16;
 
