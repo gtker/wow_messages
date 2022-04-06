@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/cmsg_set_target_obsolete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/cmsg_set_target_obsolete.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/client_set/cmsg_set_target_obsolete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/client_set/cmsg_set_target_obsolete.wowm#L3):
 /// ```text
 /// cmsg CMSG_SET_TARGET_OBSOLETE = 0x13E {
 ///     u64 guid;

@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/smsg_invalidate_player.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/smsg_invalidate_player.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_invalidate_player.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_invalidate_player.wowm#L3):
 /// ```text
 /// smsg SMSG_INVALIDATE_PLAYER = 0x31C {
 ///     u64 guid;
