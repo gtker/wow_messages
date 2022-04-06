@@ -44,15 +44,15 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     s.wln("use std::convert::{TryFrom, TryInto};");
 
     if e.contains_guid_or_packed_guid() {
-        s.wln("use crate::helper::Guid;");
+        s.wln("use crate::Guid;");
     }
 
     if e.contains_aura_mask() {
-        s.wln("use crate::helper::AuraMask;");
+        s.wln("use crate::AuraMask;");
     }
 
     if e.contains_update_mask() {
-        s.wln("use crate::helper::UpdateMask;");
+        s.wln("use crate::UpdateMask;");
     }
 
     for name in e.get_types_needing_import() {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::helper::Guid;
+use crate::Guid;
 use crate::world::v1::v12::{CastFlags};
 use crate::world::v1::v12::{SpellCastTargets, SpellCastTargetsError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};

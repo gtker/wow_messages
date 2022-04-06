@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::helper::Guid;
+use crate::Guid;
 use crate::world::v1::v12::NpcTextUpdateEmote;
 use crate::world::v1::v12::QuestItemReward;
 use crate::{WorldServerMessageWrite, WorldMessageBody};

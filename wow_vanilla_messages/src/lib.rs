@@ -15,6 +15,10 @@ pub mod helper;
 
 pub use world::*;
 
+pub use helper::guid::Guid;
+pub use helper::aura_mask::AuraMask;
+pub use helper::update_mask::UpdateMask;
+
 const DEFAULT_PORT: u16 = 8085;
 
 pub trait ReadableAndWritable: Sized {

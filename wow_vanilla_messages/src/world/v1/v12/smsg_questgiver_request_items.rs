@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::helper::Guid;
+use crate::Guid;
 use crate::world::v1::v12::{QuestCompletable, QuestCompletableError};
 use crate::world::v1::v12::QuestItemRequirement;
 use crate::{WorldServerMessageWrite, WorldMessageBody};

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::helper::Guid;
+use crate::Guid;
 use crate::world::v1::v12::{NewItemChatAlert, NewItemChatAlertError};
 use crate::world::v1::v12::{NewItemCreationType, NewItemCreationTypeError};
 use crate::world::v1::v12::{NewItemSource, NewItemSourceError};

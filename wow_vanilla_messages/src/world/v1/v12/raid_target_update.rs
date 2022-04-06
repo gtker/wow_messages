@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::helper::Guid;
+use crate::Guid;
 use crate::world::v1::v12::{RaidTargetIndex, RaidTargetIndexError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 

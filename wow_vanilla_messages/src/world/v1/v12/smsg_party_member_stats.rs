@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::helper::Guid;
-use crate::helper::AuraMask;
+use crate::Guid;
+use crate::AuraMask;
 use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{GroupMemberOnlineStatus};
 use crate::world::v1::v12::{GroupUpdateFlags};

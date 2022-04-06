@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::helper::Guid;
+use crate::Guid;
 use crate::world::v1::v12::{QuestItem, QuestItemError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
