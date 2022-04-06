@@ -17,7 +17,23 @@ impl Guid {
     }
 
     pub fn packed_guid(&self) -> Vec<u8> {
-        todo!()
+        // Worst case capacity
+        let mut v = Vec::with_capacity(9);
+        // Placeholder
+        v.push(0);
+        let guid = self.guid.to_le_bytes();
+        let mut bit_pattern = 0;
+
+        for (i, &b) in guid.iter().enumerate() {
+            if b != 0 {
+                bit_pattern |= 1 << i;
+                v.push(b);
+            }
+        }
+
+        v[0] = bit_pattern;
+
+        v
     }
 
     pub fn read(r: &mut impl Read) -> Result<Self, std::io::Error> {
@@ -61,7 +77,9 @@ impl Guid {
     }
 
     pub fn write_packed(&self, w: &mut impl Write) -> Result<(), std::io::Error> {
-        todo!()
+        w.write_all(&self.packed_guid())?;
+
+        Ok(())
     }
 }
 
@@ -70,3 +88,33 @@ impl From<u64> for Guid {
         Self::new(v)
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::Guid;
+    use std::io::Cursor;
+
+    #[test]
+    fn packed() {
+        const GUID: u64 = 0xDEADBEEFFACADE;
+
+        let guid = Guid::new(GUID);
+        assert_eq!(guid.guid(), GUID);
+
+        let mut r = Vec::with_capacity(9);
+        guid.write_packed(&mut r).unwrap();
+
+        let mut cursor = Cursor::new(r);
+        let guid2 = Guid::read_packed(&mut cursor).unwrap();
+
+        assert_eq!(guid, guid2);
+
+        let mut r = Vec::with_capacity(9);
+        guid.write(&mut r).unwrap();
+
+        let mut cursor = Cursor::new(r);
+        let guid2 = Guid::read(&mut cursor).unwrap();
+        assert_eq!(guid, guid2);
+    }
+}
+
