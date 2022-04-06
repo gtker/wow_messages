@@ -3,7 +3,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/remaining.wowm:487`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/remaining.wowm#L487):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:319`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L319):
 /// ```text
 /// struct NpcTextUpdateEmote {
 ///     u32 delay;

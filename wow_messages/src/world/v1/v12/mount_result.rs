@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/remaining.wowm:327`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/remaining.wowm#L327):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mount/mount_common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mount/mount_common.wowm#L3):
 /// ```text
 /// enum MountResult : u32 {
 ///     INVALIDMOUNTEE = 0;

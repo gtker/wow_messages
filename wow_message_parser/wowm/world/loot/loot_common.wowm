@@ -1,0 +1,8 @@
+#tag_all versions "1.12";
+
+enum RollVote : u8 {
+    PASS = 0;
+    NEED = 1;
+    GREED = 2;
+}
+

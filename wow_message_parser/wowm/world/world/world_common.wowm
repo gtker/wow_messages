@@ -1,0 +1,7 @@
+#tag_all versions "1.12";
+
+struct WorldState {
+    u32 state;
+    u32 value;
+}
+

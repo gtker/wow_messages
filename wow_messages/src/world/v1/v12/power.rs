@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/remaining.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/remaining.wowm#L18):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L3):
 /// ```text
 /// enum Power : u8 {
 ///     MANA = 0;

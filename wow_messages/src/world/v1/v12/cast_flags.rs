@@ -1,6 +1,6 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/remaining.wowm:459`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/remaining.wowm#L459):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/spell_common.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/spell_common.wowm#L45):
 /// ```text
 /// flag CastFlags : u16 {
 ///     NONE = 0x00000000;

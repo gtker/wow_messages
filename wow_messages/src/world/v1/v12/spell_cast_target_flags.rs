@@ -1,6 +1,6 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/remaining.wowm:44`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/remaining.wowm#L44):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L29):
 /// ```text
 /// flag SpellCastTargetFlags : u16 {
 ///     SELF = 0x00000000;

@@ -1,0 +1,15 @@
+#tag_all versions "1.12";
+
+enum PetReactState : u8 {
+    PASSIVE = 0;
+    DEFENSIVE = 1;
+    AGGRESSIVE = 2;
+}
+
+enum PetCommandState : u8 {
+    STAY = 0;
+    FOLLOW = 1;
+    ATTACK = 2;
+    DISMISS = 3;
+}
+

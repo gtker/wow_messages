@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/remaining.wowm:181`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/remaining.wowm#L181):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:164`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L164):
 /// ```text
 /// enum SpellCastResult : u8 {
 ///     AFFECTING_COMBAT = 0x00;

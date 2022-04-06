@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/remaining.wowm:478`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/remaining.wowm#L478):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:310`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L310):
 /// ```text
 /// struct QuestItem {
 ///     u32 quest_id;

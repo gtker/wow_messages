@@ -4,7 +4,7 @@ use crate::world::v1::v12::{SpellCastTargetFlags};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/remaining.wowm:100`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/remaining.wowm#L100):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:83`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L83):
 /// ```text
 /// struct SpellCastTargets {
 ///     SpellCastTargetFlags target_flags;

@@ -1,20 +1,5 @@
 #tag_all versions "1.12";
 
-enum UnitStandState : u8 {
-    STAND = 0;
-    SIT = 1;
-    SIT_CHAIR = 2;
-    SLEEP = 3;
-    SIT_LOW_CHAIR = 4;
-    SIT_MEDIUM_CHAIR = 5;
-    SIT_HIGH_CHAIR = 6;
-    DEAD = 7;
-    KNEEL = 8;
-    CUSTOM = 9 {
-        comment = "Used for Cthun according to cmangos.";
-    }
-}
-
 enum Power : u8 {
     MANA = 0 {
         comment = "The most common one, mobs usually have this or rage";
@@ -94,8 +79,6 @@ flag SpellCastTargetFlags : u16 {
 } {
     comment = "Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which SpellCastTargets needs.";
 }
-
-
 
 struct SpellCastTargets {
     SpellCastTargetFlags target_flags;
@@ -324,157 +307,6 @@ enum SpellCastResult : u8 {
     UNKNOWN = 0x91;
 }
 
-enum MountResult : u32 {
-    INVALIDMOUNTEE = 0    {
-        comment = "You can't mount that unit!";
-    }
-    TOOFARAWAY = 1    {
-        comment = "That mount is too far away!";
-    }
-    ALREADYMOUNTED = 2    {
-        comment = "You're already mounted!";
-    }
-    NOTMOUNTABLE = 3    {
-        comment = "That unit can't be mounted!";
-    }
-    NOTYOURPET = 4    {
-        comment = "That mount isn't your pet!";
-    }
-    OTHER = 5    {
-        comment = "internal";
-    }
-    LOOTING = 6    {
-        comment = "You can't mount while looting!";
-    }
-    RACECANTMOUNT = 7    {
-        comment = "You can't mount because of your race!";
-    }
-    SHAPESHIFTED = 8    {
-        comment = "You can't mount while shapeshifted!";
-    }
-    FORCEDDISMOUNT = 9    {
-        comment = "You dismount before continuing.";
-    }
-    OK = 10    {
-        comment = "no error";
-    }
-}
-
-enum PetReactState : u8 {
-    PASSIVE = 0;
-    DEFENSIVE = 1;
-    AGGRESSIVE = 2;
-}
-
-enum PetCommandState : u8 {
-    STAY = 0;
-    FOLLOW = 1;
-    ATTACK = 2;
-    DISMISS = 3;
-}
-
-enum TimerType : u32 {
-    FATIGUE = 0;
-    BREATH = 1;
-    FEIGNDEATH = 2;
-    ENVIRONMENTAL = 3 {
-        comment = "Might be a mangos only thing.";
-    }
-}
-
-enum GmTicketResponse : u32 {
-    NOT_EXIST = 0;
-    ALREADY_EXIST = 1;
-    CREATE_SUCCESS = 2;
-    CREATE_ERROR = 3;
-    UPDATE_SUCCESS = 4;
-    UPDATE_ERROR = 5;
-    TICKET_DELETED = 9;
-}
-
-enum SpellMissInfo : u32 {
-    NONE = 0;
-    MISS = 1;
-    RESIST = 2;
-    DODGE = 3;
-    PARRY = 4;
-    BLOCK = 5;
-    EVADE = 6;
-    IMMUNE = 7;
-    IMMUNE2 = 8;
-    DEFLECT = 9;
-    ABSORB = 10;
-    REFLECT = 11;
-}
-
-struct SpellMiss {
-    u64 target_guid;
-    SpellMissInfo miss_info;
-}
-
-enum RollVote : u8 {
-    PASS = 0;
-    NEED = 1;
-    GREED = 2;
-}
-
-enum PvpRank : u8 {
-    NO_RANK = 0;
-    PARIAH = 1;
-    OUTLAW = 2;
-    EXILED = 3;
-    DISHONORED = 4;
-    RANK1 = 5;
-    RANK2 = 6;
-    RANK3 = 7;
-    RANK4 = 8;
-    RANK5 = 9;
-    RANK6 = 10;
-    RANK7 = 11;
-    RANK8 = 12;
-    RANK9 = 13;
-    RANK10 = 14;
-    RANK11 = 15;
-    RANK12 = 16;
-    RANK13 = 17;
-    RANK14 = 18;
-    FACTION_LEADER = 19;
-}
-
-
-/* TODO: RIGHT ? */
-enum SpellSchool : u8 {
-    NORMAL = 0 {
-        comment = "Physical, Armor";
-    }
-    HOLY = 1;
-    FIRE = 2;
-    NATURE = 3;
-    FROST = 4;
-    SHADOW = 5;
-    ARCANE = 6;
-}
-
-
-flag CastFlags : u16 {
-    NONE = 0x00000000;
-    HIDDEN_COMBATLOG = 0x00000001 {
-        comment = "mangoszero/cmangos/vmangos: hide in combat log?";
-    }
-    UNKNOWN2 = 0x00000002;
-    UNKNOWN3 = 0x00000004;
-    UNKNOWN4 = 0x00000008;
-    UNKNOWN5 = 0x00000010;
-    AMMO = 0x00000020 {
-        comment = "cmangos/vmangos/mangoszero: Projectiles visual";
-    }
-    UNKNOWN7 = 0x00000040 {
-        comment = "cmangos/vmangos/mangoszero: !0x41 mask used to call CGTradeSkillInfo::DoRecast";
-    }
-    UNKNOWN8 = 0x00000080;
-    UNKNOWN9 = 0x00000100;
-}
-
 struct QuestItem {
     u32 quest_id;
     u32 quest_icon;
@@ -487,32 +319,5 @@ struct QuestItem {
 struct NpcTextUpdateEmote {
     u32 delay;
     u32 emote;
-}
-
-/* Used for CMSG_GMTICKET_CREATE */
-enum GmTicketType : u8 {
-    STUCK = 1;
-    BEHAVIOR_HARASSMENT = 2;
-    GUILD = 3;
-    ITEM = 4;
-    ENVIRONMENTAL = 5;
-    NONQUEST_CREEP = 6;
-    QUEST_QUESTNPC = 7;
-    TECHNICAL = 8;
-    ACCOUNT_BILLING = 9;
-    CHARACTER = 10;
-} {
-    comment = "vmangos: From GMTicketCategory.dbc";
-}
-
-enum GmTicketStatus : u32 {
-    DBERROR = 0x00;
-    HASTEXT = 0x06;
-    DEFAULT = 0x0A;
-}
-
-struct WorldState {
-    u32 state;
-    u32 value;
 }
 

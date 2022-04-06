@@ -1,0 +1,63 @@
+#tag_all versions "1.12";
+
+enum TimerType : u32 {
+    FATIGUE = 0;
+    BREATH = 1;
+    FEIGNDEATH = 2;
+    ENVIRONMENTAL = 3 {
+        comment = "Might be a mangos only thing.";
+    }
+}
+
+enum SpellMissInfo : u32 {
+    NONE = 0;
+    MISS = 1;
+    RESIST = 2;
+    DODGE = 3;
+    PARRY = 4;
+    BLOCK = 5;
+    EVADE = 6;
+    IMMUNE = 7;
+    IMMUNE2 = 8;
+    DEFLECT = 9;
+    ABSORB = 10;
+    REFLECT = 11;
+}
+
+struct SpellMiss {
+    u64 target_guid;
+    SpellMissInfo miss_info;
+}
+
+/* TODO: RIGHT ? */
+enum SpellSchool : u8 {
+    NORMAL = 0 {
+        comment = "Physical, Armor";
+    }
+    HOLY = 1;
+    FIRE = 2;
+    NATURE = 3;
+    FROST = 4;
+    SHADOW = 5;
+    ARCANE = 6;
+}
+
+flag CastFlags : u16 {
+    NONE = 0x00000000;
+    HIDDEN_COMBATLOG = 0x00000001 {
+        comment = "mangoszero/cmangos/vmangos: hide in combat log?";
+    }
+    UNKNOWN2 = 0x00000002;
+    UNKNOWN3 = 0x00000004;
+    UNKNOWN4 = 0x00000008;
+    UNKNOWN5 = 0x00000010;
+    AMMO = 0x00000020 {
+        comment = "cmangos/vmangos/mangoszero: Projectiles visual";
+    }
+    UNKNOWN7 = 0x00000040 {
+        comment = "cmangos/vmangos/mangoszero: !0x41 mask used to call CGTradeSkillInfo::DoRecast";
+    }
+    UNKNOWN8 = 0x00000080;
+    UNKNOWN9 = 0x00000100;
+}
+
