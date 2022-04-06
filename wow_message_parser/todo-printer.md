@@ -12,6 +12,7 @@
   * Tests
 * Working UpdateMask
   * Tests
+* Test: Flags with ifs for `CMD_REALM_LIST_Server` version 8
 
 # Direct upgrades to Login
 
