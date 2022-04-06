@@ -305,10 +305,12 @@ fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Contai
             } else {
                 s.wln_no_indent(format!("{ty}::empty()", ty = m.ty().rust_str()));
                 s.inc_indent();
+                s.w("");
                 for f in flags {
                     s.w_no_indent(format!(".set_{value}()", value = f,))
                 }
                 s.wln_no_indent(",");
+                s.dec_indent();
             }
         }
         TestValue::SubObject { ty_name, members } => {
