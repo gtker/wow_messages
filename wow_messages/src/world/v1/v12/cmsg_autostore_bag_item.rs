@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/unsorted/cmsg_autostore_bag_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/unsorted/cmsg_autostore_bag_item.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_autostore_bag_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_autostore_bag_item.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUTOSTORE_BAG_ITEM = 0x10B {
 ///     u8 source_bag;
