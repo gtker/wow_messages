@@ -200,7 +200,7 @@ impl ModFiles {
 
     pub fn write_contents_to_file(&mut self, name: &str, tags: &Tags, s: &Writer) {
         for (i, version) in tags.logon_versions().iter().enumerate() {
-            let path = get_login_filepath(name, "logon", version);
+            let path = get_login_filepath(name, version);
             self.add_login_file(name, "logon", version);
             let s = if i == 0 {
                 s.proper_as_str()
@@ -308,21 +308,19 @@ fn get_world_filepath(object_name: &str, version: &WorldVersion) -> String {
     s + &get_module_name(object_name) + ".rs"
 }
 
-fn get_login_filepath(object_name: &str, subdir: &str, version: &LoginVersion) -> String {
+fn get_login_filepath(object_name: &str, version: &LoginVersion) -> String {
     let s = match version {
         LoginVersion::Specific(v) => {
             format!(
-                "{login_dir}/{subdir}/version_{version}/",
+                "{login_dir}/logon/version_{version}/",
                 login_dir = LOGIN_DIR,
-                subdir = subdir,
                 version = v
             )
         }
         LoginVersion::All => {
             format!(
-                "{login_dir}/{subdir}/all/",
+                "{login_dir}/logon/all/",
                 login_dir = LOGIN_DIR,
-                subdir = subdir,
             )
         }
     };
