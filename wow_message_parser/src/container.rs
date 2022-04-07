@@ -497,10 +497,7 @@ impl Container {
         match m {
             StructMember::Definition(d) => match d.ty() {
                 Type::String { .. } | Type::CString => true,
-                Type::Array(array) => match array.ty() {
-                    ArrayType::CString => true,
-                    _ => false,
-                },
+                Type::Array(array) => matches!(array.ty(), ArrayType::CString),
                 _ => false,
             },
             StructMember::IfStatement(statement) => {
@@ -540,10 +537,9 @@ impl Container {
     pub fn contains_update_mask(&self) -> bool {
         fn inner(m: &StructMember) -> bool {
             match m {
-                StructMember::Definition(d) => match d.ty() {
-                    Type::UpdateMask => return true,
-                    _ => {}
-                },
+                StructMember::Definition(d) => if d.ty() == &Type::UpdateMask {
+                    return true;
+                }
                 StructMember::IfStatement(statement) => {
                     for member in statement.all_members() {
                         match inner(member) {
@@ -576,9 +572,8 @@ impl Container {
     pub fn contains_aura_mask(&self) -> bool {
         fn inner(m: &StructMember) -> bool {
             match m {
-                StructMember::Definition(d) => match d.ty() {
-                    Type::AuraMask => return true,
-                    _ => {}
+                StructMember::Definition(d) => if d.ty() == &Type::AuraMask {
+                    return true;
                 },
                 StructMember::IfStatement(statement) => {
                     for member in statement.all_members() {
@@ -973,11 +968,8 @@ impl Container {
 fn add_complex_types<'a>(m: &'a StructMember, v: &mut Vec<&'a str>) {
     match m {
         StructMember::Definition(d) => match &d.struct_type {
-            Type::Array(a) => match a.ty() {
-                ArrayType::Complex(i) => {
-                    v.push(i);
-                }
-                _ => {}
+            Type::Array(a) => if let ArrayType::Complex(i) = a.ty() {
+                v.push(i);
             },
             Type::Identifier { s, .. } => {
                 v.push(s);

@@ -68,10 +68,7 @@ impl Objects {
                 let c = self.get_container(variable_name, finder_tags);
                 c.recursive_only_has_io_errors(self)
             }
-            ObjectType::Enum => match self.get_definer(variable_name, finder_tags).self_value() {
-                None => false,
-                Some(_) => true,
-            },
+            ObjectType::Enum => self.get_definer(variable_name, finder_tags).self_value().is_some(),
             ObjectType::Flag => true,
         }
     }
@@ -80,8 +77,7 @@ impl Objects {
         if self
             .enums
             .iter()
-            .find(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags))
-            .is_some()
+            .any(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags))
         {
             return ObjectType::Enum;
         }
@@ -89,16 +85,15 @@ impl Objects {
         if self
             .flags
             .iter()
-            .find(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags))
-            .is_some()
+            .any(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags))
         {
             return ObjectType::Flag;
         }
 
-        if let Some(_) = self
+        if self
             .structs
             .iter()
-            .find(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags))
+            .any(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags))
         {
             return ObjectType::Struct;
         }
@@ -426,11 +421,11 @@ version 2: {:#?} in {} line {}",
             Type::AuraMask => return false,
         };
 
-        if self.enums.iter().find(|a| a.name() == type_name).is_some() {
+        if self.enums.iter().any(|a| a.name() == type_name) {
             return true;
         }
 
-        if self.flags.iter().find(|a| a.name() == type_name).is_some() {
+        if self.flags.iter().any(|a| a.name() == type_name) {
             return true;
         }
 
@@ -862,13 +857,7 @@ impl Array {
 
     pub fn is_constant_sized_u8_array(&self) -> bool {
         match &self.size() {
-            ArraySize::Fixed(_) => match &self.ty() {
-                ArrayType::Integer(i) => match i {
-                    IntegerType::U8 => true,
-                    _ => false,
-                },
-                _ => false,
-            },
+            ArraySize::Fixed(_) => matches!(&self.ty(), ArrayType::Integer(IntegerType::U8)),
             ArraySize::Variable(_) => false,
             ArraySize::Endless => false,
         }
@@ -1015,8 +1004,8 @@ impl Type {
                     let amount = i.next().unwrap().strip_suffix(']').unwrap();
                     let parsed = str::parse::<i64>(amount);
 
-                    let size = if parsed.is_ok() {
-                        ArraySize::Fixed(parsed.unwrap())
+                    let size = if let Ok(parsed) = parsed {
+                        ArraySize::Fixed(parsed)
                     } else if amount == "-" {
                         ArraySize::Endless
                     } else {
@@ -1183,7 +1172,7 @@ impl Tags {
     }
 
     pub fn contains(&self, name: &str) -> bool {
-        self.inner.iter().find(|a| a.key == name).is_some()
+        self.inner.iter().any(|a| a.key == name)
     }
 
     pub fn get_ref(&self, name: &str) -> Option<&str> {

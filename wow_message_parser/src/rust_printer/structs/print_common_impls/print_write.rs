@@ -138,8 +138,8 @@ pub fn print_write_field_integer(
             ));
         } else {
             s.wln(format!(
-                "w.write_all(&{constant_value}.to_{endian}_bytes())?;",
-                constant_value = format!("Self::{name}_VALUE", name = variable_name.to_uppercase()),
+                "w.write_all(&Self::{name}_VALUE.to_{endian}_bytes())?;",
+                name = variable_name.to_uppercase(),
                 endian = int_type.rust_endian_str(),
             ));
         }

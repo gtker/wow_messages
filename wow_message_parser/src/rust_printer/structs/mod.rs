@@ -123,23 +123,16 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
 
 fn can_derive_default(e: &Container) -> bool {
     fn inner(m: &StructMember) -> bool {
-        match m {
-            StructMember::Definition(d) => match d.ty() {
-                Type::Array(array) => match array.ty() {
-                    ArrayType::Integer(_) => match array.size() {
-                        ArraySize::Fixed(size) => match size {
-                            0..=32 => {}
-                            _ => return false,
-                        },
-                        ArraySize::Variable(_) => {}
-                        ArraySize::Endless => {}
-                    },
-                    _ => {}
-                },
-                _ => {}
-            },
-            StructMember::IfStatement(_) => {}
-            StructMember::OptionalStatement(_) => {}
+        if let StructMember::Definition(d) = m {
+            if let Type::Array(array) = d.ty() {
+                if let ArrayType::Integer(_) = array.ty() {
+                    if let ArraySize::Fixed(size) = array.size() {
+                        if size > 32 {
+                            return false;
+                        }
+                    }
+                }
+            }
         }
 
         true
@@ -397,12 +390,10 @@ fn print_from_general_error(s: &mut Writer, e: &Container, o: &Objects) {
             continue;
         }
 
-        match o.get_object_type_of(t, e.tags()) {
-            ObjectType::Flag => {
-                continue;
-            }
-            _ => {}
+        if o.get_object_type_of(t, e.tags()) == ObjectType::Flag {
+            continue;
         }
+
         s.bodyn(
             format!(
                 "impl From<{from_name}Error> for {name}Error",

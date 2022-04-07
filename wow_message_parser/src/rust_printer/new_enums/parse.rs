@@ -73,40 +73,36 @@ pub fn get_enumerators(
 
     let mut enumerators_that_arent_else = Vec::new();
 
-    match &statement.conditional.equations()[0] {
-        Equation::NotEquals { value } => {
-            enumerators_that_arent_else.push(value.clone());
-            let mut v = Vec::new();
-            for m in &mut statement.members {
-                inner(m, &mut v, o, c);
-            }
-            for eq in d.fields() {
-                let new_enum = enums.iter_mut().find(|a| a.name == eq.name()).unwrap();
-                if enumerators_that_arent_else
-                    .iter()
-                    .find(|a| a.as_str() == eq.name())
-                    .is_none()
-                {
-                    new_enum.add_field(v.clone());
-                }
-            }
-
-            let mut v = Vec::new();
-            for m in &mut statement.else_statement_members {
-                inner(m, &mut v, o, c);
-            }
-            for eq in statement.member_enumerators() {
-                let new_enum = enums
-                    .iter_mut()
-                    .find(|a| a.name == eq)
-                    .unwrap_or_else(|| panic!("unable to find enumerator {}", eq));
+    if let Equation::NotEquals { value } = &statement.conditional.equations()[0] {
+        enumerators_that_arent_else.push(value.clone());
+        let mut v = Vec::new();
+        for m in &mut statement.members {
+            inner(m, &mut v, o, c);
+        }
+        for eq in d.fields() {
+            let new_enum = enums.iter_mut().find(|a| a.name == eq.name()).unwrap();
+            if !enumerators_that_arent_else
+                .iter()
+                .any(|a| a.as_str() == eq.name())
+            {
                 new_enum.add_field(v.clone());
             }
-
-            return enums;
         }
-        _ => {}
-    };
+
+        let mut v = Vec::new();
+        for m in &mut statement.else_statement_members {
+            inner(m, &mut v, o, c);
+        }
+        for eq in statement.member_enumerators() {
+            let new_enum = enums
+                .iter_mut()
+                .find(|a| a.name == eq)
+                .unwrap_or_else(|| panic!("unable to find enumerator {}", eq));
+            new_enum.add_field(v.clone());
+        }
+
+        return enums;
+    }
 
     let mut v = Vec::new();
     for m in &mut statement.members {
@@ -139,10 +135,9 @@ pub fn get_enumerators(
     }
     for eq in d.fields() {
         let new_enum = enums.iter_mut().find(|a| a.name == eq.name()).unwrap();
-        if enumerators_that_arent_else
+        if !enumerators_that_arent_else
             .iter()
-            .find(|a| a.as_str() == eq.name())
-            .is_none()
+            .any(|a| a.as_str() == eq.name())
         {
             new_enum.add_field(v.clone());
         }

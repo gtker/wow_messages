@@ -305,8 +305,8 @@ fn parse_struct_member(mut t: Pair<Rule>) -> StructMember {
                 .into_inner();
 
             let value = f.find(|a| a.as_rule() == Rule::value);
-            let value = if value.is_some() {
-                let value = value.unwrap().as_str().into();
+            let value = if let Some(value) = value {
+                let value = value.as_str().into();
                 Some(value)
             } else {
                 None
@@ -366,8 +366,8 @@ fn parse_struct_member(mut t: Pair<Rule>) -> StructMember {
             }
 
             let else_statement = f.find(|a| a.as_rule() == Rule::else_statement);
-            let else_statement_members = if else_statement.is_some() {
-                let else_statement = else_statement.unwrap().into_inner();
+            let else_statement_members = if let Some(else_statement) = else_statement {
+                let else_statement = else_statement.into_inner();
 
                 let mut v = Vec::new();
 
@@ -432,8 +432,8 @@ fn parse_if_statement(f: &mut Pairs<Rule>) -> (Vec<Condition>, Vec<StructMember>
     }
 
     let container_members = f.find(|a| a.as_rule() == Rule::container_members);
-    let members = if container_members.is_some() {
-        let container_members = container_members.unwrap().into_inner();
+    let members = if let Some(container_members) = container_members {
+        let container_members = container_members.into_inner();
 
         let mut members = Vec::new();
         for m in container_members {

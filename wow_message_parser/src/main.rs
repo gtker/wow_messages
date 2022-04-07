@@ -92,11 +92,7 @@ fn write_world_opcodes(o: &Objects) {
         let cmsg: Vec<&Container> = v
             .clone()
             .into_iter()
-            .filter(|a| match a.container_type() {
-                ContainerType::CMsg(_) => true,
-                ContainerType::Msg(_) => true,
-                _ => false,
-            })
+            .filter(|a| matches!(a.container_type(), ContainerType::Msg(_) | ContainerType::CMsg(_)))
             .collect();
         if !cmsg.is_empty() {
             let s = print_world_opcodes(&cmsg, &e, ContainerType::CMsg(0));
@@ -106,11 +102,7 @@ fn write_world_opcodes(o: &Objects) {
 
         let smsg: Vec<&Container> = v
             .into_iter()
-            .filter(|a| match a.container_type() {
-                ContainerType::SMsg(_) => true,
-                ContainerType::Msg(_) => true,
-                _ => false,
-            })
+            .filter(|a| matches!(a.container_type(), ContainerType::SMsg(_) | ContainerType::Msg(_)))
             .collect();
         if !smsg.is_empty() {
             let s = print_world_opcodes(&smsg, &e, ContainerType::SMsg(0));
@@ -127,10 +119,7 @@ fn write_login_opcodes(o: &Objects) {
         let slogin: Vec<&Container> = v
             .clone()
             .into_iter()
-            .filter(|a| match a.container_type() {
-                ContainerType::SLogin(_) => true,
-                _ => false,
-            })
+            .filter(|a| matches!(a.container_type(), ContainerType::SLogin(_)))
             .collect();
         if !slogin.is_empty() {
             let s = print_login_opcodes(&slogin, &e, ContainerType::SLogin(0));
@@ -144,10 +133,7 @@ fn write_login_opcodes(o: &Objects) {
 
         let clogin: Vec<&Container> = v
             .into_iter()
-            .filter(|a| match a.container_type() {
-                ContainerType::CLogin(_) => true,
-                _ => false,
-            })
+            .filter(|a| matches!(a.container_type(), ContainerType::CLogin(_)))
             .collect();
         if !clogin.is_empty() {
             let s = print_login_opcodes(&clogin, &e, ContainerType::CLogin(0));

@@ -50,10 +50,11 @@ fn print_new_flag_declaration(s: &mut Writer, ce: &ComplexEnum) {
         for f in ce.fields() {
             if !f.should_not_be_in_type() {
                 s.wln(format!(
-                    "{variable_name}: Option<{ty_name}>,",
+                    "{variable_name}: Option<{ce_name}{f_name}>,",
                     variable_name = f.name().to_lowercase(),
-                    ty_name = format!("{}{}", ce.name(), f.name()),
-                ));
+                    ce_name = ce.name(),
+                    f_name = f.name()),
+                );
             }
         }
     });
@@ -399,7 +400,7 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
         );
 
         s.bodyn(
-            format!("impl {name}", name = format!("{}{}", ce.name(), f.name())),
+            format!("impl {c_name}{f_name}", c_name =  ce.name(), f_name = f.name()),
             |s| {
                 for sf in f.subfields() {
                     if let Some(v) = sf.constant_value() {
@@ -606,29 +607,21 @@ fn print_default_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
     s.bodyn(format!("impl Default for {name}", name = ce.name()), |s| {
         s.body("fn default() -> Self", |s| {
             s.wln("// First enumerator without any fields");
-            for f in ce.fields() {
-                if f.is_simple_or_subfields_const() {
-                    s.wln(format!("Self::{variant}", variant = f.name()));
-                    return;
-                } else {
-                    s.open_curly(format!("Self::{variant}", variant = f.name()));
+            let f = ce.fields().first().unwrap();
+            if f.is_simple_or_subfields_const() {
+                s.wln(format!("Self::{variant}", variant = f.name()));
+            } else {
+                s.open_curly(format!("Self::{variant}", variant = f.name()));
 
-                    for sf in f.subfields() {
-                        if sf.used_as_size_in().is_some() || sf.constant_value().is_some() {
-                            continue;
-                        }
-                        s.wln(format!("{name}: Default::default(),", name = sf.name()));
+                for sf in f.subfields() {
+                    if sf.used_as_size_in().is_some() || sf.constant_value().is_some() {
+                        continue;
                     }
-
-                    s.closing_curly();
-                    return;
+                    s.wln(format!("{name}: Default::default(),", name = sf.name()));
                 }
-            }
 
-            panic!(
-                "unable to find simple enumerator for default for ce: {:#?}",
-                ce
-            )
+                s.closing_curly();
+            }
         });
     });
 }
@@ -715,12 +708,11 @@ fn print_size_for_new_enum(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: &
                             Type::Identifier {
                                 s: identifier,
                                 upcast: None,
-                            } => e
+                            } => !e
                                 .nested_types()
                                 .new_enums()
                                 .iter()
-                                .find(|a| a.name() == identifier)
-                                .is_none(),
+                                .any(|a| a.name() == identifier),
                             _ => false,
                         };
 

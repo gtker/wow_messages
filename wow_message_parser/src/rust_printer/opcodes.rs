@@ -78,14 +78,10 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
     }
 
     for e in v {
-        match container_type {
-            ContainerType::SMsg(_) => match e.container_type() {
-                ContainerType::Msg(_) => {
-                    continue;
-                }
-                _ => {}
-            },
-            _ => {}
+        if let ContainerType::SMsg(_) = container_type {
+            if let ContainerType::Msg(_) = e.container_type() {
+                continue;
+            }
         }
 
         let module_name = get_import_path(e.tags());

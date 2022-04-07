@@ -327,39 +327,35 @@ fn print_read_definition(s: &mut Writer, e: &Container, o: &Objects, d: &StructM
             print_read_array(s, array, e, d, o);
         }
         Type::Identifier { s: ty, upcast } => {
-            match o.get_object_type_of(ty, e.tags()) {
-                ObjectType::Enum => match upcast {
-                    None => {}
-                    Some(integer) => {
-                        if let Some(value) = d.verified_value() {
-                            s.wln(format!(
-                                "let _{name} = {ty_name}::read_{ty}_{endian}(r)?;",
-                                name = d.name(),
-                                ty_name = ty,
-                                ty = integer.rust_str(),
-                                endian = integer.rust_endian_str(),
-                            ));
-                            s.wln(format!(
-                                "// {name} is expected to always be {constant_string} ({constant_value})",
-                                name = d.name(),
-                                constant_string = value.original_string(),
-                                constant_value = value.value(),
-                            ));
-                            s.newline();
-                        } else {
-                            s.wln(format!(
-                                "let {name} = {ty_name}::read_{ty}_{endian}(r)?;",
-                                name = d.name(),
-                                ty_name = ty,
-                                ty = integer.rust_str(),
-                                endian = integer.rust_endian_str(),
-                            ));
-                            s.newline();
-                        }
-                        return;
+            if  o.get_object_type_of(ty, e.tags()) == ObjectType::Enum {
+                if let Some(integer) = upcast {
+                    if let Some(value) = d.verified_value() {
+                        s.wln(format!(
+                            "let _{name} = {ty_name}::read_{ty}_{endian}(r)?;",
+                            name = d.name(),
+                            ty_name = ty,
+                            ty = integer.rust_str(),
+                            endian = integer.rust_endian_str(),
+                        ));
+                        s.wln(format!(
+                            "// {name} is expected to always be {constant_string} ({constant_value})",
+                            name = d.name(),
+                            constant_string = value.original_string(),
+                            constant_value = value.value(),
+                        ));
+                        s.newline();
+                    } else {
+                        s.wln(format!(
+                            "let {name} = {ty_name}::read_{ty}_{endian}(r)?;",
+                            name = d.name(),
+                            ty_name = ty,
+                            ty = integer.rust_str(),
+                            endian = integer.rust_endian_str(),
+                        ));
+                        s.newline();
                     }
-                },
-                _ => {}
+                    return;
+                }
             }
             s.wln(format!(
                 "let {value_set}{name} = {type_name}::read(r)?;",
@@ -608,8 +604,7 @@ fn print_read_if_statement_flag_new(
         .enumerators()
         .iter()
         .filter(|a| !a.fields().is_empty())
-        .collect::<Vec<&NewEnumerator>>()
-        .len();
+        .count();
     if size != 1 {
         print_read_if_statement_flag_multiple(s, e, o, ne);
         return;
@@ -779,9 +774,10 @@ fn print_read_final_flag(s: &mut Writer, nested_types: &[ComplexEnum]) {
             DefinerType::Enum => {}
             DefinerType::Flag => {
                 s.open_curly(format!(
-                    "let {var_name} = {ty_name}",
+                    "let {var_name} = {struct_name}{ty_name}",
                     var_name = c.variable_name(),
-                    ty_name = format!("{}{}", c.original_struct_name(), c.original_ty_name())
+                    struct_name = c.original_struct_name(),
+                    ty_name = c.original_ty_name(),
                 ));
                 s.wln(format!(
                     "inner: {var_name}.as_{ty}(),",
@@ -795,13 +791,10 @@ fn print_read_final_flag(s: &mut Writer, nested_types: &[ComplexEnum]) {
                     }
 
                     s.wln(format!(
-                        "{field_name}: {var_name},",
+                        "{field_name}: {c_var_name}_{f_name},",
                         field_name = f.name().to_lowercase(),
-                        var_name = format!(
-                            "{var_name}_{f_name}",
-                            var_name = c.variable_name(),
-                            f_name = f.name()
-                        ),
+                        c_var_name = c.variable_name(),
+                            f_name = f.name(),
                     ));
                 }
 
