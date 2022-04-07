@@ -60,23 +60,23 @@ pub fn print_wowm_definition(kind: &str, s: &mut Writer, e: &Definer) {
                 ty = e.ty().str(),
             ));
 
+            s.docc_inc();
             for field in e.fields() {
-                // TODO: Manual identation
                 s.docc(format!(
-                    "    {name} = {val};",
+                    "{name} = {val};",
                     name = field.name(),
                     val = field.value().original()
                 ));
             }
 
             if let Some(f) = e.self_value() {
-                // TODO: Manual identation
                 s.docc(format!(
-                    "    {name} = {self_value}",
+                    "{name} = {self_value}",
                     name = f.name(),
                     self_value = ENUM_SELF_VALUE_FIELD
                 ));
             }
+            s.docc_dec();
             s.docc("}");
         },
         match e.tags().has_login_version() {
