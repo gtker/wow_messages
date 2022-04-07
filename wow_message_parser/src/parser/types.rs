@@ -2,7 +2,7 @@ use std::fmt::{Display, Formatter};
 
 use crate::container::{Container, StructMember};
 use crate::file_info::FileInfo;
-use crate::parser::enumerator::{Definer};
+use crate::parser::enumerator::Definer;
 use crate::parser::stats::stats_for_1_12;
 use crate::test_case::TestCase;
 use crate::{LOGIN_LOGON_VERSIONS, TEST_STR, VERSIONS};
@@ -80,7 +80,8 @@ impl Objects {
         if self
             .enums
             .iter()
-            .find(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags)).is_some()
+            .find(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags))
+            .is_some()
         {
             return ObjectType::Enum;
         }
@@ -88,7 +89,8 @@ impl Objects {
         if self
             .flags
             .iter()
-            .find(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags)).is_some()
+            .find(|a| a.name() == variable_name && a.tags().has_version_intersections(finder_tags))
+            .is_some()
         {
             return ObjectType::Flag;
         }
@@ -598,8 +600,17 @@ version 2: {:#?} in {} line {}",
         );
     }
 
-    pub fn get_definer_field_value(&self, definer_name: &str, field_name: &str, tags: &Tags) -> u64 {
-        if let Some(e) = self.enums.iter().find(|a| a.name() == definer_name && a.tags().has_version_intersections(tags)) {
+    pub fn get_definer_field_value(
+        &self,
+        definer_name: &str,
+        field_name: &str,
+        tags: &Tags,
+    ) -> u64 {
+        if let Some(e) = self
+            .enums
+            .iter()
+            .find(|a| a.name() == definer_name && a.tags().has_version_intersections(tags))
+        {
             for field in e.fields() {
                 if field.name() == field_name {
                     return field.value().int();
@@ -607,7 +618,11 @@ version 2: {:#?} in {} line {}",
             }
         }
 
-        if let Some(e) = self.flags.iter().find(|a| a.name() == definer_name && a.tags().has_version_intersections(tags)) {
+        if let Some(e) = self
+            .flags
+            .iter()
+            .find(|a| a.name() == definer_name && a.tags().has_version_intersections(tags))
+        {
             for field in e.fields() {
                 if field.name() == field_name {
                     return field.value().int();
@@ -1007,8 +1022,6 @@ impl Type {
                     } else {
                         ArraySize::Variable(amount.to_string())
                     };
-
-                    
 
                     match array_type {
                         Type::Integer(i) => Self::Array(Array {

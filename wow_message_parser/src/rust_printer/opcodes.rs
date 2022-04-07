@@ -66,10 +66,7 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
             s.wln("use crate::ReadableAndWritable;");
         }
         ContainerType::CMsg(_) => {
-            s.wln(format!(
-                "use crate::{};",
-                WORLD_BODY_TRAIT_NAME
-            ));
+            s.wln(format!("use crate::{};", WORLD_BODY_TRAIT_NAME));
             s.wln("use crate::WorldMessage;");
             s.wln(format!(
                 "use crate::{{{}, {}}};",

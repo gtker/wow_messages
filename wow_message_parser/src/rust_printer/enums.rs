@@ -1,5 +1,5 @@
 use crate::file_utils::get_import_path;
-use crate::parser::enumerator::{Definer};
+use crate::parser::enumerator::Definer;
 use crate::parser::types::{Endianness, IntegerType};
 use crate::rust_printer::Writer;
 use crate::{

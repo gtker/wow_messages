@@ -64,10 +64,7 @@ impl ModFiles {
                 format!("{}/mod.rs", WORLD_DIR),
             ),
             WorldVersion::All => (
-                (
-                    get_module_name(name),
-                    SubmoduleLocation::PubUseInternal,
-                ),
+                (get_module_name(name), SubmoduleLocation::PubUseInternal),
                 get_module_name(name),
             ),
         };
@@ -176,10 +173,7 @@ impl ModFiles {
             }
         };
 
-        let e = (
-            get_module_name(name),
-            SubmoduleLocation::PubUseInternal,
-        );
+        let e = (get_module_name(name), SubmoduleLocation::PubUseInternal);
 
         if let Some(v) = self.v.iter_mut().find(|a| a.name == module_level_dir) {
             v.submodules.push(e);
@@ -254,9 +248,7 @@ pub fn get_login_logon_version_path(version: &LoginVersion) -> String {
         LoginVersion::Specific(v) => {
             format!("crate::logon::version_{}", v)
         }
-        LoginVersion::All => {
-            "crate::logon::all".to_string()
-        }
+        LoginVersion::All => "crate::logon::all".to_string(),
     }
 }
 
@@ -318,10 +310,7 @@ fn get_login_filepath(object_name: &str, version: &LoginVersion) -> String {
             )
         }
         LoginVersion::All => {
-            format!(
-                "{login_dir}/logon/all/",
-                login_dir = LOGIN_DIR,
-            )
+            format!("{login_dir}/logon/all/", login_dir = LOGIN_DIR,)
         }
     };
     s + &get_module_name(object_name) + ".rs"
@@ -345,8 +334,8 @@ pub fn write_string_to_file(s: &str, filename: &Path) {
         Err(_) => {
             let dir = filename.parent().unwrap();
             std::fs::create_dir_all(dir).unwrap();
-            std::fs::File::create(filename).unwrap_or_else(|_| panic!("unable to open file: '{}'",
-                filename.to_str().unwrap()))
+            std::fs::File::create(filename)
+                .unwrap_or_else(|_| panic!("unable to open file: '{}'", filename.to_str().unwrap()))
         }
     };
 

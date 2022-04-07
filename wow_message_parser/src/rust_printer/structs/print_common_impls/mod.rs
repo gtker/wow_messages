@@ -568,11 +568,7 @@ pub fn print_maximum_size_of_type(
                     format!("{size} * {ty}::maximum_possible_size()", size = v, ty = i)
                 }
                 ArrayType::CString => {
-                    format!(
-                        "{size} * {ty}",
-                        size = v,
-                        ty = CSTRING_LARGEST_ALLOWED
-                    )
+                    format!("{size} * {ty}", size = v, ty = CSTRING_LARGEST_ALLOWED)
                 }
                 ArrayType::Guid => {
                     format!("{size} * 8", size = v)
