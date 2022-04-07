@@ -106,16 +106,7 @@ impl Objects {
 
     pub fn get_container(&self, name: &str, finder_tags: &Tags) -> &Container {
         if let Some(e) = self
-            .messages
-            .iter()
-            .find(|a| a.name() == name && a.tags().has_version_intersections(finder_tags))
-        {
-            return e;
-        }
-
-        if let Some(e) = self
-            .structs
-            .iter()
+            .all_containers()
             .find(|a| a.name() == name && a.tags().has_version_intersections(finder_tags))
         {
             return e;
@@ -145,16 +136,7 @@ impl Objects {
         }
 
         if let Some(e) = self
-            .structs
-            .iter()
-            .find(|a| a.name() == type_name && a.tags().has_version_intersections(finder_tags))
-        {
-            return e.tags();
-        }
-
-        if let Some(e) = self
-            .messages
-            .iter()
+            .all_containers()
             .find(|a| a.name() == type_name && a.tags().has_version_intersections(finder_tags))
         {
             return e.tags();
@@ -166,7 +148,7 @@ impl Objects {
     pub fn get_world_versions_with_objects(&self) -> Vec<WorldVersion> {
         let mut v = Vec::new();
 
-        for s in self.messages() {
+        for s in self.all_containers() {
             for l in s.tags().versions() {
                 v.push(*l);
             }
@@ -189,7 +171,7 @@ impl Objects {
     ) -> Vec<&Container> {
         let mut v = Vec::new();
 
-        for s in self.messages() {
+        for s in self.all_containers() {
             let logon = s.tags().versions();
             if logon.contains(version_number) || logon.contains(&WorldVersion::All) {
                 v.push(s);
@@ -202,7 +184,7 @@ impl Objects {
     pub fn get_login_versions_with_objects(&self) -> Vec<LoginVersion> {
         let mut v = Vec::new();
 
-        for s in self.messages() {
+        for s in self.all_containers() {
             for l in s.tags().logon_versions() {
                 v.push(*l);
             }
@@ -225,7 +207,7 @@ impl Objects {
     ) -> Vec<&Container> {
         let mut v = Vec::new();
 
-        for s in self.messages() {
+        for s in self.all_containers() {
             let logon = s.tags().logon_versions();
             if logon.contains(version_number) || logon.contains(&LoginVersion::All) {
                 v.push(s);
@@ -255,6 +237,14 @@ impl Objects {
 
     pub fn flags(&self) -> &[Definer] {
         &self.flags
+    }
+
+    pub fn all_containers(&self) -> impl Iterator<Item = &Container> {
+        self.structs.iter().chain(&self.messages)
+    }
+
+    pub fn all_containers_mut(&mut self) -> impl Iterator<Item = &mut Container> {
+        self.structs.iter_mut().chain(&mut self.messages)
     }
 
     pub fn structs(&self) -> &[Container] {
@@ -314,7 +304,7 @@ impl Objects {
 
         let mut tests = self.tests.clone();
 
-        for s in self.structs_mut() {
+        for s in self.all_containers_mut() {
             s.set_internals(&c);
 
             let t = Self::get_tests_for_object(&mut tests, s.name(), s.tags());
@@ -322,13 +312,6 @@ impl Objects {
         }
 
         Self::check_versions(self.structs(), self.messages(), self.enums(), self.flags());
-
-        for s in self.messages_mut() {
-            s.set_internals(&c);
-
-            let t = Self::get_tests_for_object(&mut tests, s.name(), s.tags());
-            s.append_tests(t);
-        }
 
         self.tests = tests;
     }
@@ -429,35 +412,11 @@ version 2: {:#?} in {} line {}",
             return true;
         }
 
-        if let Some(s) = self.structs.iter().find(|a| a.name() == type_name) {
+        if let Some(s) = self.all_containers().find(|a| a.name() == type_name) {
             return s.has_constant_size(self);
         }
 
-        if let Some(s) = self.messages.iter().find(|a| a.name() == type_name) {
-            return s.has_constant_size(self);
-        }
-
-        for s in self.structs() {
-            if let Some(ce) = s
-                .nested_types()
-                .new_enums()
-                .iter()
-                .find(|&a| a.name() == type_name)
-            {
-                for f in ce.fields() {
-                    for sf in f.subfields() {
-                        match self.type_has_constant_size(sf.ty()) {
-                            true => {}
-                            false => return false,
-                        }
-                    }
-                }
-
-                return true;
-            }
-        }
-
-        for s in self.messages() {
+        for s in self.all_containers() {
             if let Some(ce) = s
                 .nested_types()
                 .new_enums()
@@ -574,13 +533,7 @@ version 2: {:#?} in {} line {}",
             }
         }
 
-        for e in self.structs() {
-            if e.name() == variable_name && e.tags().has_all_versions(tags) {
-                return;
-            }
-        }
-
-        for e in self.messages() {
+        for e in self.all_containers() {
             if e.name() == variable_name && e.tags().has_all_versions(tags) {
                 return;
             }

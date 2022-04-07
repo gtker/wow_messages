@@ -60,15 +60,7 @@ fn main() {
         m.write_contents_to_file(e.name(), e.tags(), &s);
     }
 
-    for e in o.structs() {
-        if e.has_tag(TEST_STR) || e.has_tag(SKIP_STR) {
-            continue;
-        }
-        let s = print_struct(e, &o);
-        m.write_contents_to_file(e.name(), e.tags(), &s);
-    }
-
-    for e in o.messages() {
+    for e in o.all_containers() {
         if e.has_tag(TEST_STR) || e.has_tag(SKIP_STR) {
             continue;
         }
