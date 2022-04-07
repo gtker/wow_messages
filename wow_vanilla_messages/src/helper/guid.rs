@@ -46,7 +46,7 @@ impl Guid {
         let mut amount_of_bytes = 0;
 
         for i in 0..8 {
-            if (self.guid & (0xFF << (i * 8))) != 1 {
+            if (self.guid & (0xFF << (i * 8))) != 0 {
                 amount_of_bytes += 1;
             }
         }

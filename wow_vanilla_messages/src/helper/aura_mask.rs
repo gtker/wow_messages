@@ -48,7 +48,7 @@ impl AuraMask {
     }
 
     pub fn size(&self) -> usize {
-        self.auras.len()
+        std::mem::size_of::<u32>() + std::mem::size_of::<u16>() * self.auras.len()
     }
 }
 
