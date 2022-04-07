@@ -218,10 +218,7 @@ impl Objects {
     }
 
     pub fn get_size_of_complex(&self, type_name: &str) -> u64 {
-        if let Some(e) = self.enums.iter().find(|a| a.name() == type_name) {
-            return e.ty().size() as u64;
-        }
-        if let Some(e) = self.flags.iter().find(|a| a.name() == type_name) {
+        if let Some(e) = self.all_definers().find(|a| a.name() == type_name) {
             return e.ty().size() as u64;
         }
 
@@ -237,6 +234,14 @@ impl Objects {
 
     pub fn flags(&self) -> &[Definer] {
         &self.flags
+    }
+
+    pub fn all_definers(&self) -> impl Iterator<Item = &Definer> {
+        self.enums.iter().chain(&self.flags)
+    }
+
+    pub fn all_definers_mut(&mut self) -> impl Iterator<Item = &mut Definer> {
+        self.enums.iter_mut().chain(&mut self.flags)
     }
 
     pub fn all_containers(&self) -> impl Iterator<Item = &Container> {
@@ -311,16 +316,14 @@ impl Objects {
             s.append_tests(t);
         }
 
-        Self::check_versions(self.structs(), self.messages(), self.enums(), self.flags());
+        Self::check_versions(self.all_containers(), self.all_definers());
 
         self.tests = tests;
     }
 
-    fn check_versions(
-        structs: &[Container],
-        messages: &[Container],
-        enums: &[Definer],
-        flags: &[Definer],
+    fn check_versions<'a>(
+        containers: impl Iterator<Item = &'a Container>,
+        definers: impl Iterator<Item = &'a Definer>,
     ) {
         struct Obj<'a> {
             name: &'a str,
@@ -329,28 +332,14 @@ impl Objects {
         }
 
         let mut v: Vec<Obj> = Vec::new();
-        for e in structs {
+        for e in containers {
             v.push(Obj {
                 name: e.name(),
                 tags: e.tags(),
                 file_info: e.file_info(),
             });
         }
-        for e in messages {
-            v.push(Obj {
-                name: e.name(),
-                tags: e.tags(),
-                file_info: e.file_info(),
-            });
-        }
-        for e in enums {
-            v.push(Obj {
-                name: e.name(),
-                tags: e.tags(),
-                file_info: e.file_info(),
-            });
-        }
-        for e in flags {
+        for e in definers {
             v.push(Obj {
                 name: e.name(),
                 tags: e.tags(),
@@ -404,11 +393,7 @@ version 2: {:#?} in {} line {}",
             Type::AuraMask => return false,
         };
 
-        if self.enums.iter().any(|a| a.name() == type_name) {
-            return true;
-        }
-
-        if self.flags.iter().any(|a| a.name() == type_name) {
+        if self.all_definers().any(|a| a.name() == type_name) {
             return true;
         }
 
@@ -490,20 +475,8 @@ version 2: {:#?} in {} line {}",
     }
 
     fn contains_value_in_type(&self, variable_name: &str, value_name: &str) {
-        let enums = self.enums.iter().find(|a| a.name() == variable_name);
+        let enums = self.all_definers().find(|a| a.name() == variable_name);
         match enums {
-            None => {}
-            Some(v) => {
-                for a in v.fields() {
-                    if a.name() == value_name {
-                        return;
-                    }
-                }
-            }
-        }
-
-        let flags = self.flags.iter().find(|a| a.name() == variable_name);
-        match flags {
             None => {}
             Some(v) => {
                 for a in v.fields() {
@@ -521,13 +494,7 @@ version 2: {:#?} in {} line {}",
     }
 
     fn contains_complex_type(&self, variable_name: &str, tags: &Tags, struct_name: &str) {
-        for e in self.enums() {
-            if e.name() == variable_name && e.tags().has_all_versions(tags) {
-                return;
-            }
-        }
-
-        for e in self.flags() {
+        for e in self.all_definers() {
             if e.name() == variable_name && e.tags().has_all_versions(tags) {
                 return;
             }
@@ -555,20 +522,7 @@ version 2: {:#?} in {} line {}",
         tags: &Tags,
     ) -> u64 {
         if let Some(e) = self
-            .enums
-            .iter()
-            .find(|a| a.name() == definer_name && a.tags().has_version_intersections(tags))
-        {
-            for field in e.fields() {
-                if field.name() == field_name {
-                    return field.value().int();
-                }
-            }
-        }
-
-        if let Some(e) = self
-            .flags
-            .iter()
+            .all_definers()
             .find(|a| a.name() == definer_name && a.tags().has_version_intersections(tags))
         {
             for field in e.fields() {
