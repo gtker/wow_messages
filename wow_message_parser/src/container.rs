@@ -1,5 +1,5 @@
 use crate::file_info::FileInfo;
-use crate::file_utils::get_version_path;
+use crate::file_utils::get_import_path;
 use crate::parser::types::{
     ArraySize, ArrayType, ContainerValue, LoginVersion, ObjectType, Objects, Tag, Tags, Type,
     VerifiedContainerValue, WorldVersion,
@@ -162,9 +162,9 @@ impl Container {
         let import_path = if self.tags().logon_versions().contains(&LoginVersion::All) {
             let mut tags = Tags::new();
             tags.push(Tag::new(LOGIN_LOGON_VERSIONS, "3"));
-            get_version_path(&tags)
+            get_import_path(&tags)
         } else {
-            get_version_path(self.tags())
+            get_import_path(self.tags())
         };
         match self.container_type() {
             ContainerType::CLogin(_) => {

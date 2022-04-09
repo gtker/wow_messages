@@ -257,21 +257,17 @@ pub fn get_login_version_file_path(version: &LoginVersion) -> String {
     }   
 }
 
-pub fn get_version_path(tags: &Tags) -> String {
+pub fn get_import_path(tags: &Tags) -> String {
     if let Some(f) = tags.logon_versions().first() {
         get_login_logon_version_path(f)
     } else if let Some(f) = tags.versions().first() {
         get_world_version_path(f)
     } else {
         panic!(
-            "get_version_path does not have logon or reconnect version: {:#?}",
+            "get_import_path does not have logon or reconnect version: {:#?}",
             tags
         )
     }
-}
-
-pub fn get_import_path(tags: &Tags) -> String {
-    get_version_path(tags)
 }
 
 fn get_world_filepath(object_name: &str, version: &WorldVersion) -> String {
