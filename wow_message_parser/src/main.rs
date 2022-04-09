@@ -8,7 +8,7 @@ use crate::container::{Container, ContainerType};
 use crate::file_utils::{
     append_string_to_file, get_world_version_file_path, write_string_to_file, ModFiles, LOGIN_DIR,
 };
-use crate::parser::types::Objects;
+use crate::parser::types::{Objects, Tags};
 use crate::rust_printer::{print_enum, print_flag, print_login_opcodes, print_world_opcodes};
 
 mod container;
@@ -45,7 +45,7 @@ fn main() {
     let mut m = ModFiles::new();
 
     for e in o.enums() {
-        if e.has_tag(TEST_STR) || e.has_tag(SKIP_STR) {
+        if should_not_write_object(e.tags()) {
             continue;
         }
         let s = print_enum(e);
@@ -53,7 +53,7 @@ fn main() {
     }
 
     for e in o.flags() {
-        if e.has_tag(TEST_STR) || e.has_tag(SKIP_STR) {
+        if should_not_write_object(e.tags()) {
             continue;
         }
         let s = print_flag(e);
@@ -61,7 +61,7 @@ fn main() {
     }
 
     for e in o.all_containers() {
-        if e.has_tag(TEST_STR) || e.has_tag(SKIP_STR) {
+        if should_not_write_object(e.tags()) {
             continue;
         }
         let s = print_struct(e, &o);
@@ -148,6 +148,10 @@ fn load_files(dir: &Path, components: &mut Objects) {
         components.add_vecs(c);
     }
     components.check_values();
+}
+
+fn should_not_write_object(t: &Tags) -> bool {
+    t.contains(TEST_STR) || t.contains(SKIP_STR)
 }
 
 #[cfg(test)]
