@@ -6,7 +6,7 @@ use crate::parser::types::{LoginVersion, Tags, WorldVersion};
 use crate::rust_printer::Writer;
 use std::io::Write;
 
-pub const LOGIN_DIR: &str = "wow_login_messages/src";
+pub const LOGIN_DIR: &str = "wow_login_messages/src/logon";
 pub const WORLD_DIR: &str = "wow_vanilla_messages/src/world";
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
@@ -153,7 +153,7 @@ impl ModFiles {
         };
         let e = (e, SubmoduleLocation::PubMod);
 
-        let top_level_dir = format!("{}/logon/mod.rs", LOGIN_DIR);
+        let top_level_dir = format!("{}/mod.rs", LOGIN_DIR);
 
         if let Some(v) = self.v.iter_mut().find(|a| a.name == top_level_dir) {
             v.submodules.push(e);
@@ -166,10 +166,10 @@ impl ModFiles {
 
         let module_level_dir = match version {
             LoginVersion::Specific(version) => {
-                format!("{}/logon/version_{}/mod.rs", LOGIN_DIR, version)
+                format!("{}/version_{}/mod.rs", LOGIN_DIR, version)
             }
             LoginVersion::All => {
-                format!("{}/logon/all/mod.rs", LOGIN_DIR)
+                format!("{}/all/mod.rs", LOGIN_DIR)
             }
         };
 
@@ -274,13 +274,13 @@ fn get_login_filepath(object_name: &str, version: &LoginVersion) -> String {
     let s = match version {
         LoginVersion::Specific(v) => {
             format!(
-                "{login_dir}/logon/version_{version}/",
+                "{login_dir}/version_{version}/",
                 login_dir = LOGIN_DIR,
                 version = v
             )
         }
         LoginVersion::All => {
-            format!("{login_dir}/logon/all/", login_dir = LOGIN_DIR,)
+            format!("{login_dir}/all/", login_dir = LOGIN_DIR,)
         }
     };
     s + &get_module_name(object_name) + ".rs"

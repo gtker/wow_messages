@@ -116,7 +116,7 @@ fn write_login_opcodes(o: &Objects) {
         if !slogin.is_empty() {
             let s = print_login_opcodes(&slogin, &e, ContainerType::SLogin(0));
             let filename = format!(
-                "{login_dir}/logon/version_{version}/opcodes.rs",
+                "{login_dir}/version_{version}/opcodes.rs",
                 login_dir = LOGIN_DIR,
                 version = e
             );
@@ -130,7 +130,7 @@ fn write_login_opcodes(o: &Objects) {
         if !clogin.is_empty() {
             let s = print_login_opcodes(&clogin, &e, ContainerType::CLogin(0));
             let filename = format!(
-                "{login_dir}/logon/version_{version}/opcodes.rs",
+                "{login_dir}/version_{version}/opcodes.rs",
                 login_dir = LOGIN_DIR,
                 version = e
             );
