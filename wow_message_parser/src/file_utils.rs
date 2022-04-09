@@ -144,7 +144,7 @@ impl ModFiles {
         }
     }
 
-    pub fn add_login_file(&mut self, name: &str, subdir: &str, version: &LoginVersion) {
+    pub fn add_login_file(&mut self, name: &str, version: &LoginVersion) {
         let e = match version {
             LoginVersion::Specific(v) => {
                 format!("version_{}", v)
@@ -153,7 +153,7 @@ impl ModFiles {
         };
         let e = (e, SubmoduleLocation::PubMod);
 
-        let top_level_dir = format!("{}/{}/mod.rs", LOGIN_DIR, subdir);
+        let top_level_dir = format!("{}/logon/mod.rs", LOGIN_DIR);
 
         if let Some(v) = self.v.iter_mut().find(|a| a.name == top_level_dir) {
             v.submodules.push(e);
@@ -166,10 +166,10 @@ impl ModFiles {
 
         let module_level_dir = match version {
             LoginVersion::Specific(version) => {
-                format!("{}/{}/version_{}/mod.rs", LOGIN_DIR, subdir, version)
+                format!("{}/logon/version_{}/mod.rs", LOGIN_DIR, version)
             }
             LoginVersion::All => {
-                format!("{}/{}/all/mod.rs", LOGIN_DIR, subdir)
+                format!("{}/logon/all/mod.rs", LOGIN_DIR)
             }
         };
 
@@ -195,7 +195,7 @@ impl ModFiles {
     pub fn write_contents_to_file(&mut self, name: &str, tags: &Tags, s: &Writer) {
         for (i, version) in tags.logon_versions().iter().enumerate() {
             let path = get_login_filepath(name, version);
-            self.add_login_file(name, "logon", version);
+            self.add_login_file(name, version);
             let s = if i == 0 {
                 s.proper_as_str()
             } else {
