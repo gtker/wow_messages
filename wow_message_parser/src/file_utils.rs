@@ -229,13 +229,13 @@ pub fn get_world_version_path(version: &WorldVersion) -> String {
 
 pub fn get_world_version_file_path(version: &WorldVersion) -> String {
     match version {
-        WorldVersion::Major(m) => format!("{}/v{}", WORLD_DIR, m),
-        WorldVersion::Minor(m, i) => format!("{}/v{}/v{}", WORLD_DIR, m, i),
-        WorldVersion::Patch(m, i, p) => format!("{}/v{}/v{}/v{}", WORLD_DIR, m, i, p),
+        WorldVersion::Major(m) => format!("{}/v{}/", WORLD_DIR, m),
+        WorldVersion::Minor(m, i) => format!("{}/v{}/v{}/", WORLD_DIR, m, i),
+        WorldVersion::Patch(m, i, p) => format!("{}/v{}/v{}/v{}/", WORLD_DIR, m, i, p),
         WorldVersion::Exact(m, i, p, b) => {
-            format!("{}/v{}/v{}/v{}/v{}", WORLD_DIR, m, i, p, b)
+            format!("{}/v{}/v{}/v{}/v{}/", WORLD_DIR, m, i, p, b)
         }
-        WorldVersion::All => WORLD_DIR.to_string(),
+        WorldVersion::All => format!("{}/", WORLD_DIR),
     }
 }
 
@@ -266,33 +266,7 @@ pub fn get_import_path(tags: &Tags) -> String {
 }
 
 fn get_world_filepath(object_name: &str, version: &WorldVersion) -> String {
-    let s = match version {
-        WorldVersion::Major(m) => {
-            format!("{world_dir}/v{major}/", world_dir = WORLD_DIR, major = m)
-        }
-        WorldVersion::Minor(m, i) => format!(
-            "{world_dir}/v{major}/v{minor}/",
-            world_dir = WORLD_DIR,
-            major = m,
-            minor = i
-        ),
-        WorldVersion::Patch(m, i, p) => format!(
-            "{world_dir}/v{major}/v{minor}/v{patch}/",
-            world_dir = WORLD_DIR,
-            major = m,
-            minor = i,
-            patch = p
-        ),
-        WorldVersion::Exact(m, i, p, b) => format!(
-            "{world_dir}/v{major}/v{minor}/v{patch}/v{build}/",
-            world_dir = WORLD_DIR,
-            major = m,
-            minor = i,
-            patch = p,
-            build = b
-        ),
-        WorldVersion::All => format!("{world_dir}/", world_dir = WORLD_DIR),
-    };
+    let s = get_world_version_file_path(version);
     s + &get_module_name(object_name) + ".rs"
 }
 
