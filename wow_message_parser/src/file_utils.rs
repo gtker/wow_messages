@@ -46,7 +46,8 @@ impl ModFiles {
                     }
                 }
             }
-            write_string_to_file(&s, Path::new(&m.name));
+            let filename = m.name.to_string() + "mod.rs";
+            write_string_to_file(&s, Path::new(&filename));
         }
     }
 
@@ -61,7 +62,7 @@ impl ModFiles {
             | WorldVersion::Patch(m, _, _)
             | WorldVersion::Exact(m, _, _, _) => (
                 (format!("v{}", m), SubmoduleLocation::PubMod),
-                format!("{}/mod.rs", WORLD_DIR),
+                format!("{}/", WORLD_DIR),
             ),
             WorldVersion::All => (
                 (get_module_name(name), SubmoduleLocation::PubUseInternal),
@@ -83,11 +84,11 @@ impl ModFiles {
             | WorldVersion::Patch(m, i, _)
             | WorldVersion::Exact(m, i, _, _) => (
                 (format!("v{}", i), SubmoduleLocation::PubMod),
-                format!("{}/v{}/mod.rs", WORLD_DIR, m),
+                format!("{}/v{}/", WORLD_DIR, m),
             ),
             WorldVersion::Major(m) => (
                 (get_module_name(name), SubmoduleLocation::PubUseInternal),
-                format!("{}/v{}/mod.rs", WORLD_DIR, m),
+                format!("{}/v{}/", WORLD_DIR, m),
             ),
             _ => return,
         };
@@ -104,11 +105,11 @@ impl ModFiles {
         let (e, file_dir) = match version {
             WorldVersion::Patch(m, i, p) | WorldVersion::Exact(m, i, p, _) => (
                 (format!("v{}", p), SubmoduleLocation::PubMod),
-                format!("{}/v{}/v{}/mod.rs", WORLD_DIR, m, i),
+                format!("{}/v{}/v{}/", WORLD_DIR, m, i),
             ),
             WorldVersion::Minor(m, i) => (
                 (get_module_name(name), SubmoduleLocation::PubUseInternal),
-                format!("{}/v{}/v{}/mod.rs", WORLD_DIR, m, i),
+                format!("{}/v{}/v{}/", WORLD_DIR, m, i),
             ),
             _ => return,
         };
@@ -125,11 +126,11 @@ impl ModFiles {
         let (e, file_dir) = match version {
             WorldVersion::Exact(m, i, p, b) => (
                 (format!("v{}", b), SubmoduleLocation::PubMod),
-                format!("{}/v{}/v{}/v{}/mod.rs", WORLD_DIR, m, i, p),
+                format!("{}/v{}/v{}/v{}/", WORLD_DIR, m, i, p),
             ),
             WorldVersion::Patch(m, i, p) => (
                 (get_module_name(name), SubmoduleLocation::PubUseInternal),
-                format!("{}/v{}/v{}/v{}/mod.rs", WORLD_DIR, m, i, p),
+                format!("{}/v{}/v{}/v{}/", WORLD_DIR, m, i, p),
             ),
             _ => return,
         };
@@ -153,7 +154,7 @@ impl ModFiles {
         };
         let e = (e, SubmoduleLocation::PubMod);
 
-        let top_level_dir = format!("{}/mod.rs", LOGIN_DIR);
+        let top_level_dir = format!("{}/", LOGIN_DIR);
 
         if let Some(v) = self.v.iter_mut().find(|a| a.name == top_level_dir) {
             v.submodules.push(e);
@@ -164,8 +165,7 @@ impl ModFiles {
             })
         }
 
-        let mut module_level_dir = get_login_version_file_path(version);
-        module_level_dir.push_str("mod.rs");
+        let module_level_dir = get_login_version_file_path(version);
 
         let e = (get_module_name(name), SubmoduleLocation::PubUseInternal);
 
