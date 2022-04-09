@@ -164,14 +164,8 @@ impl ModFiles {
             })
         }
 
-        let module_level_dir = match version {
-            LoginVersion::Specific(version) => {
-                format!("{}/version_{}/mod.rs", LOGIN_DIR, version)
-            }
-            LoginVersion::All => {
-                format!("{}/all/mod.rs", LOGIN_DIR)
-            }
-        };
+        let mut module_level_dir = get_login_version_file_path(version);
+        module_level_dir.push_str("mod.rs");
 
         let e = (get_module_name(name), SubmoduleLocation::PubUseInternal);
 
@@ -248,6 +242,21 @@ pub fn get_login_logon_version_path(version: &LoginVersion) -> String {
     }
 }
 
+pub fn get_login_version_file_path(version: &LoginVersion) -> String {
+    match version {
+        LoginVersion::Specific(v) => {
+            format!(
+                "{login_dir}/version_{version}/",
+                login_dir = LOGIN_DIR,
+                version = v
+                )
+        }
+        LoginVersion::All => {
+            format!("{login_dir}/all/", login_dir = LOGIN_DIR,)
+        }
+    }   
+}
+
 pub fn get_version_path(tags: &Tags) -> String {
     if let Some(f) = tags.logon_versions().first() {
         get_login_logon_version_path(f)
@@ -271,18 +280,7 @@ fn get_world_filepath(object_name: &str, version: &WorldVersion) -> String {
 }
 
 fn get_login_filepath(object_name: &str, version: &LoginVersion) -> String {
-    let s = match version {
-        LoginVersion::Specific(v) => {
-            format!(
-                "{login_dir}/version_{version}/",
-                login_dir = LOGIN_DIR,
-                version = v
-            )
-        }
-        LoginVersion::All => {
-            format!("{login_dir}/all/", login_dir = LOGIN_DIR,)
-        }
-    };
+    let s = get_login_version_file_path(version);
     s + &get_module_name(object_name) + ".rs"
 }
 
