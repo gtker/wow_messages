@@ -204,10 +204,6 @@ impl ModFiles {
             write_string_to_file(s, Path::new(&path));
         }
 
-        if tags.logon_versions().contains(&LoginVersion::All) {
-            return;
-        }
-
         for (i, version) in tags.versions().iter().enumerate() {
             let path = get_world_filepath(name, version);
             self.add_world_file(name, version);
