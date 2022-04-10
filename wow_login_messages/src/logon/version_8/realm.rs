@@ -242,6 +242,13 @@ impl RealmRealmFlag {
         }
     }
 
+    pub const fn new_SPECIFY_BUILD(specify_build: RealmRealmFlagSPECIFY_BUILD) -> Self {
+        Self {
+            inner: RealmFlag::SPECIFY_BUILD,
+            specify_build: Some(specify_build),
+        }
+    }
+
     pub const fn new_FORCE_BLUE_RECOMMENDED() -> Self {
         Self {
             inner: RealmFlag::FORCE_BLUE_RECOMMENDED,

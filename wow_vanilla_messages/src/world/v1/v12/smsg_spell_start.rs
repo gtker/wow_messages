@@ -241,6 +241,13 @@ impl SMSG_SPELL_STARTCastFlags {
         }
     }
 
+    pub const fn new_AMMO(ammo: SMSG_SPELL_STARTCastFlagsAMMO) -> Self {
+        Self {
+            inner: CastFlags::AMMO,
+            ammo: Some(ammo),
+        }
+    }
+
     pub const fn new_UNKNOWN7() -> Self {
         Self {
             inner: CastFlags::UNKNOWN7,

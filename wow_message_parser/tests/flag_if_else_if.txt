@@ -134,6 +134,38 @@ impl FlagIfElseIfUpdateFlag {
         }
     }
 
+    pub const fn new_ONE_IF(one_if: FlagIfElseIfUpdateFlagONE_IF) -> Self {
+        Self {
+            inner: UpdateFlag::ONE_IF,
+            one_if: Some(one_if),
+            eight_if: None,
+        }
+    }
+
+    pub const fn new_TWO_ELSEIF(two_elseif: FlagIfElseIfUpdateFlagTWO_ELSEIF) -> Self {
+        Self {
+            inner: UpdateFlag::TWO_ELSEIF,
+            one_if: None,
+            eight_if: None,
+        }
+    }
+
+    pub const fn new_FOUR_ELSEIF(four_elseif: FlagIfElseIfUpdateFlagFOUR_ELSEIF) -> Self {
+        Self {
+            inner: UpdateFlag::FOUR_ELSEIF,
+            one_if: None,
+            eight_if: None,
+        }
+    }
+
+    pub const fn new_EIGHT_IF(eight_if: FlagIfElseIfUpdateFlagEIGHT_IF) -> Self {
+        Self {
+            inner: UpdateFlag::EIGHT_IF,
+            one_if: None,
+            eight_if: Some(eight_if),
+        }
+    }
+
 }
 impl VariableSized for FlagIfElseIfUpdateFlag {
     fn size(&self) -> usize {

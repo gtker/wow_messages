@@ -539,6 +539,246 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlags {
         }
     }
 
+    pub const fn new_FLAG_STATUS(flag_status: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_STATUS,
+            flag_status: Some(flag_status),
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_CUR_HP(flag_cur_hp: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_HP) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_CUR_HP,
+            flag_status: None,
+            flag_cur_hp: Some(flag_cur_hp),
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_MAX_HP(flag_max_hp: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_HP) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_MAX_HP,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: Some(flag_max_hp),
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_POWER_TYPE(flag_power_type: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_POWER_TYPE,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: Some(flag_power_type),
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_CUR_POWER(flag_cur_power: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_POWER) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_CUR_POWER,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: Some(flag_cur_power),
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_MAX_POWER(flag_max_power: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_POWER) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_MAX_POWER,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: Some(flag_max_power),
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_LEVEL(flag_level: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_LEVEL) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_LEVEL,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: Some(flag_level),
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_ZONE(flag_zone: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_ZONE,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: Some(flag_zone),
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_POSITION(flag_position: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POSITION) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_POSITION,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: Some(flag_position),
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_AURAS(flag_auras: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_AURAS) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_AURAS,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: Some(flag_auras),
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
     pub const fn new_FLAG_AURAS_2() -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_AURAS_2,
@@ -584,6 +824,198 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlags {
             flag_pet_cur_power: None,
             flag_pet_max_power: None,
             flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_PET_NAME(flag_pet_name: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NAME) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_PET_NAME,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: Some(flag_pet_name),
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_PET_MODEL_ID(flag_pet_model_id: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MODEL_ID) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_PET_MODEL_ID,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: Some(flag_pet_model_id),
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_PET_CUR_HP(flag_pet_cur_hp: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_HP) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_PET_CUR_HP,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: Some(flag_pet_cur_hp),
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_PET_MAX_HP(flag_pet_max_hp: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_HP) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_PET_MAX_HP,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: Some(flag_pet_max_hp),
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_PET_POWER_TYPE(flag_pet_power_type: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_PET_POWER_TYPE,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: Some(flag_pet_power_type),
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_PET_CUR_POWER(flag_pet_cur_power: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_POWER) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_PET_CUR_POWER,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: Some(flag_pet_cur_power),
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_PET_MAX_POWER(flag_pet_max_power: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_POWER) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_PET_MAX_POWER,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: Some(flag_pet_max_power),
+            flag_pet_auras: None,
+        }
+    }
+
+    pub const fn new_FLAG_PET_AURAS(flag_pet_auras: SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_AURAS) -> Self {
+        Self {
+            inner: GroupUpdateFlags::FLAG_PET_AURAS,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: Some(flag_pet_auras),
         }
     }
 

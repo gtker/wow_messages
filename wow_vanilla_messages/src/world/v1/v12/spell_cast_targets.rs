@@ -366,6 +366,23 @@ impl SpellCastTargetsSpellCastTargetFlags {
         }
     }
 
+    pub const fn new_UNIT(unit: SpellCastTargetsSpellCastTargetFlagsUNIT) -> Self {
+        Self {
+            inner: SpellCastTargetFlags::UNIT,
+            unit: Some(unit),
+            item: None,
+            source_location: None,
+            dest_location: None,
+            unit_enemy: None,
+            corpse_enemy: None,
+            gameobject: None,
+            trade_item: None,
+            string: None,
+            locked: None,
+            corpse_ally: None,
+        }
+    }
+
     pub const fn new_UNIT_RAID() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_RAID,
@@ -400,6 +417,74 @@ impl SpellCastTargetsSpellCastTargetFlags {
         }
     }
 
+    pub const fn new_ITEM(item: SpellCastTargetsSpellCastTargetFlagsITEM) -> Self {
+        Self {
+            inner: SpellCastTargetFlags::ITEM,
+            unit: None,
+            item: Some(item),
+            source_location: None,
+            dest_location: None,
+            unit_enemy: None,
+            corpse_enemy: None,
+            gameobject: None,
+            trade_item: None,
+            string: None,
+            locked: None,
+            corpse_ally: None,
+        }
+    }
+
+    pub const fn new_SOURCE_LOCATION(source_location: SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION) -> Self {
+        Self {
+            inner: SpellCastTargetFlags::SOURCE_LOCATION,
+            unit: None,
+            item: None,
+            source_location: Some(source_location),
+            dest_location: None,
+            unit_enemy: None,
+            corpse_enemy: None,
+            gameobject: None,
+            trade_item: None,
+            string: None,
+            locked: None,
+            corpse_ally: None,
+        }
+    }
+
+    pub const fn new_DEST_LOCATION(dest_location: SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION) -> Self {
+        Self {
+            inner: SpellCastTargetFlags::DEST_LOCATION,
+            unit: None,
+            item: None,
+            source_location: None,
+            dest_location: Some(dest_location),
+            unit_enemy: None,
+            corpse_enemy: None,
+            gameobject: None,
+            trade_item: None,
+            string: None,
+            locked: None,
+            corpse_ally: None,
+        }
+    }
+
+    pub const fn new_UNIT_ENEMY(unit_enemy: SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY) -> Self {
+        Self {
+            inner: SpellCastTargetFlags::UNIT_ENEMY,
+            unit: None,
+            item: None,
+            source_location: None,
+            dest_location: None,
+            unit_enemy: Some(unit_enemy),
+            corpse_enemy: None,
+            gameobject: None,
+            trade_item: None,
+            string: None,
+            locked: None,
+            corpse_ally: None,
+        }
+    }
+
     pub const fn new_UNIT_ALLY() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_ALLY,
@@ -409,6 +494,23 @@ impl SpellCastTargetsSpellCastTargetFlags {
             dest_location: None,
             unit_enemy: None,
             corpse_enemy: None,
+            gameobject: None,
+            trade_item: None,
+            string: None,
+            locked: None,
+            corpse_ally: None,
+        }
+    }
+
+    pub const fn new_CORPSE_ENEMY(corpse_enemy: SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY) -> Self {
+        Self {
+            inner: SpellCastTargetFlags::CORPSE_ENEMY,
+            unit: None,
+            item: None,
+            source_location: None,
+            dest_location: None,
+            unit_enemy: None,
+            corpse_enemy: Some(corpse_enemy),
             gameobject: None,
             trade_item: None,
             string: None,
@@ -431,6 +533,91 @@ impl SpellCastTargetsSpellCastTargetFlags {
             string: None,
             locked: None,
             corpse_ally: None,
+        }
+    }
+
+    pub const fn new_GAMEOBJECT(gameobject: SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT) -> Self {
+        Self {
+            inner: SpellCastTargetFlags::GAMEOBJECT,
+            unit: None,
+            item: None,
+            source_location: None,
+            dest_location: None,
+            unit_enemy: None,
+            corpse_enemy: None,
+            gameobject: Some(gameobject),
+            trade_item: None,
+            string: None,
+            locked: None,
+            corpse_ally: None,
+        }
+    }
+
+    pub const fn new_TRADE_ITEM(trade_item: SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM) -> Self {
+        Self {
+            inner: SpellCastTargetFlags::TRADE_ITEM,
+            unit: None,
+            item: None,
+            source_location: None,
+            dest_location: None,
+            unit_enemy: None,
+            corpse_enemy: None,
+            gameobject: None,
+            trade_item: Some(trade_item),
+            string: None,
+            locked: None,
+            corpse_ally: None,
+        }
+    }
+
+    pub const fn new_STRING(string: SpellCastTargetsSpellCastTargetFlagsSTRING) -> Self {
+        Self {
+            inner: SpellCastTargetFlags::STRING,
+            unit: None,
+            item: None,
+            source_location: None,
+            dest_location: None,
+            unit_enemy: None,
+            corpse_enemy: None,
+            gameobject: None,
+            trade_item: None,
+            string: Some(string),
+            locked: None,
+            corpse_ally: None,
+        }
+    }
+
+    pub const fn new_LOCKED(locked: SpellCastTargetsSpellCastTargetFlagsLOCKED) -> Self {
+        Self {
+            inner: SpellCastTargetFlags::LOCKED,
+            unit: None,
+            item: None,
+            source_location: None,
+            dest_location: None,
+            unit_enemy: None,
+            corpse_enemy: None,
+            gameobject: None,
+            trade_item: None,
+            string: None,
+            locked: Some(locked),
+            corpse_ally: None,
+        }
+    }
+
+    pub const fn new_CORPSE_ALLY(corpse_ally: SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY) -> Self {
+        Self {
+            inner: SpellCastTargetFlags::CORPSE_ALLY,
+            unit: None,
+            item: None,
+            source_location: None,
+            dest_location: None,
+            unit_enemy: None,
+            corpse_enemy: None,
+            gameobject: None,
+            trade_item: None,
+            string: None,
+            locked: None,
+            corpse_ally: Some(corpse_ally),
         }
     }
 

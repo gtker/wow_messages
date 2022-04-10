@@ -319,6 +319,16 @@ impl MovementInfoMovementFlags {
         }
     }
 
+    pub const fn new_ON_TRANSPORT(on_transport: MovementInfoMovementFlagsON_TRANSPORT) -> Self {
+        Self {
+            inner: MovementFlags::ON_TRANSPORT,
+            on_transport: Some(on_transport),
+            jumping: None,
+            swimming: None,
+            spline_elevation: None,
+        }
+    }
+
     pub const fn new_LEVITATING() -> Self {
         Self {
             inner: MovementFlags::LEVITATING,
@@ -349,12 +359,32 @@ impl MovementInfoMovementFlags {
         }
     }
 
+    pub const fn new_JUMPING(jumping: MovementInfoMovementFlagsJUMPING) -> Self {
+        Self {
+            inner: MovementFlags::JUMPING,
+            on_transport: None,
+            jumping: Some(jumping),
+            swimming: None,
+            spline_elevation: None,
+        }
+    }
+
     pub const fn new_FALLINGFAR() -> Self {
         Self {
             inner: MovementFlags::FALLINGFAR,
             on_transport: None,
             jumping: None,
             swimming: None,
+            spline_elevation: None,
+        }
+    }
+
+    pub const fn new_SWIMMING(swimming: MovementInfoMovementFlagsSWIMMING) -> Self {
+        Self {
+            inner: MovementFlags::SWIMMING,
+            on_transport: None,
+            jumping: None,
+            swimming: Some(swimming),
             spline_elevation: None,
         }
     }
@@ -396,6 +426,16 @@ impl MovementInfoMovementFlags {
             jumping: None,
             swimming: None,
             spline_elevation: None,
+        }
+    }
+
+    pub const fn new_SPLINE_ELEVATION(spline_elevation: MovementInfoMovementFlagsSPLINE_ELEVATION) -> Self {
+        Self {
+            inner: MovementFlags::SPLINE_ELEVATION,
+            on_transport: None,
+            jumping: None,
+            swimming: None,
+            spline_elevation: Some(spline_elevation),
         }
     }
 

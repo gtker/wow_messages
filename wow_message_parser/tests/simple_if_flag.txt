@@ -88,6 +88,13 @@ impl SimpleIfFlagSimpleFlag {
         Ok(())
     }
 
+    pub const fn new_ZERO(zero: SimpleIfFlagSimpleFlagZERO) -> Self {
+        Self {
+            inner: SimpleFlag::ZERO,
+            zero: Some(zero),
+        }
+    }
+
     pub const fn new_ONE() -> Self {
         Self {
             inner: SimpleFlag::ONE,

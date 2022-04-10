@@ -254,6 +254,33 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         }
     }
 
+    pub const fn new_PIN(pin: CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN) -> Self {
+        Self {
+            inner: SecurityFlag::PIN,
+            pin: Some(pin),
+            unknown0: None,
+            authenticator: None,
+        }
+    }
+
+    pub const fn new_UNKNOWN0(unknown0: CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0) -> Self {
+        Self {
+            inner: SecurityFlag::UNKNOWN0,
+            pin: None,
+            unknown0: Some(unknown0),
+            authenticator: None,
+        }
+    }
+
+    pub const fn new_AUTHENTICATOR(authenticator: CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR) -> Self {
+        Self {
+            inner: SecurityFlag::AUTHENTICATOR,
+            pin: None,
+            unknown0: None,
+            authenticator: Some(authenticator),
+        }
+    }
+
 }
 impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     fn size(&self) -> usize {
