@@ -143,6 +143,20 @@ fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
                 },
             );
         }
+
+        s.funcn_pub(format!("clear_{}(&mut self)", f.name()), "Self", |s| {
+            s.wln(format!(
+                "self.inner &= {ty}::{name}.reverse_bits();",
+                ty = ce.original_ty_name(),
+                name = f.name()
+            ));
+            if !f.is_simple() {
+                s.wln(format!("self.{} = None;", f.name().to_lowercase()));
+            }
+            s.wln("// TODO: Cloning like this is not conductive to good performance but it is");
+            s.wln("// temporarily necessary due to test syntax");
+            s.wln("self.clone()");
+        });
     }
 }
 

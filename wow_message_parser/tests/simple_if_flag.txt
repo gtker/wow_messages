@@ -95,6 +95,14 @@ impl SimpleIfFlagSimpleFlag {
         }
     }
 
+    pub fn clear_ZERO(&mut self) -> Self {
+        self.inner &= SimpleFlag::ZERO.reverse_bits();
+        self.zero = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_ONE() -> Self {
         Self {
             inner: SimpleFlag::ONE,
@@ -102,11 +110,25 @@ impl SimpleIfFlagSimpleFlag {
         }
     }
 
+    pub fn clear_ONE(&mut self) -> Self {
+        self.inner &= SimpleFlag::ONE.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_TWO() -> Self {
         Self {
             inner: SimpleFlag::TWO,
             zero: None,
         }
+    }
+
+    pub fn clear_TWO(&mut self) -> Self {
+        self.inner &= SimpleFlag::TWO.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
 }

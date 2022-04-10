@@ -349,6 +349,13 @@ impl SpellCastTargetsSpellCastTargetFlags {
         }
     }
 
+    pub fn clear_SELF(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::SELF.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_UNUSED1() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNUSED1,
@@ -364,6 +371,13 @@ impl SpellCastTargetsSpellCastTargetFlags {
             locked: None,
             corpse_ally: None,
         }
+    }
+
+    pub fn clear_UNUSED1(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::UNUSED1.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_UNIT(unit: SpellCastTargetsSpellCastTargetFlagsUNIT) -> Self {
@@ -383,6 +397,14 @@ impl SpellCastTargetsSpellCastTargetFlags {
         }
     }
 
+    pub fn clear_UNIT(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::UNIT.reverse_bits();
+        self.unit = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_UNIT_RAID() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_RAID,
@@ -398,6 +420,13 @@ impl SpellCastTargetsSpellCastTargetFlags {
             locked: None,
             corpse_ally: None,
         }
+    }
+
+    pub fn clear_UNIT_RAID(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::UNIT_RAID.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_UNIT_PARTY() -> Self {
@@ -417,6 +446,13 @@ impl SpellCastTargetsSpellCastTargetFlags {
         }
     }
 
+    pub fn clear_UNIT_PARTY(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::UNIT_PARTY.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_ITEM(item: SpellCastTargetsSpellCastTargetFlagsITEM) -> Self {
         Self {
             inner: SpellCastTargetFlags::ITEM,
@@ -432,6 +468,14 @@ impl SpellCastTargetsSpellCastTargetFlags {
             locked: None,
             corpse_ally: None,
         }
+    }
+
+    pub fn clear_ITEM(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::ITEM.reverse_bits();
+        self.item = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_SOURCE_LOCATION(source_location: SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION) -> Self {
@@ -451,6 +495,14 @@ impl SpellCastTargetsSpellCastTargetFlags {
         }
     }
 
+    pub fn clear_SOURCE_LOCATION(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::SOURCE_LOCATION.reverse_bits();
+        self.source_location = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_DEST_LOCATION(dest_location: SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION) -> Self {
         Self {
             inner: SpellCastTargetFlags::DEST_LOCATION,
@@ -466,6 +518,14 @@ impl SpellCastTargetsSpellCastTargetFlags {
             locked: None,
             corpse_ally: None,
         }
+    }
+
+    pub fn clear_DEST_LOCATION(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::DEST_LOCATION.reverse_bits();
+        self.dest_location = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_UNIT_ENEMY(unit_enemy: SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY) -> Self {
@@ -485,6 +545,14 @@ impl SpellCastTargetsSpellCastTargetFlags {
         }
     }
 
+    pub fn clear_UNIT_ENEMY(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::UNIT_ENEMY.reverse_bits();
+        self.unit_enemy = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_UNIT_ALLY() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_ALLY,
@@ -500,6 +568,13 @@ impl SpellCastTargetsSpellCastTargetFlags {
             locked: None,
             corpse_ally: None,
         }
+    }
+
+    pub fn clear_UNIT_ALLY(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::UNIT_ALLY.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_CORPSE_ENEMY(corpse_enemy: SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY) -> Self {
@@ -519,6 +594,14 @@ impl SpellCastTargetsSpellCastTargetFlags {
         }
     }
 
+    pub fn clear_CORPSE_ENEMY(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::CORPSE_ENEMY.reverse_bits();
+        self.corpse_enemy = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_UNIT_DEAD() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_DEAD,
@@ -534,6 +617,13 @@ impl SpellCastTargetsSpellCastTargetFlags {
             locked: None,
             corpse_ally: None,
         }
+    }
+
+    pub fn clear_UNIT_DEAD(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::UNIT_DEAD.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_GAMEOBJECT(gameobject: SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT) -> Self {
@@ -553,6 +643,14 @@ impl SpellCastTargetsSpellCastTargetFlags {
         }
     }
 
+    pub fn clear_GAMEOBJECT(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::GAMEOBJECT.reverse_bits();
+        self.gameobject = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_TRADE_ITEM(trade_item: SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM) -> Self {
         Self {
             inner: SpellCastTargetFlags::TRADE_ITEM,
@@ -568,6 +666,14 @@ impl SpellCastTargetsSpellCastTargetFlags {
             locked: None,
             corpse_ally: None,
         }
+    }
+
+    pub fn clear_TRADE_ITEM(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::TRADE_ITEM.reverse_bits();
+        self.trade_item = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_STRING(string: SpellCastTargetsSpellCastTargetFlagsSTRING) -> Self {
@@ -587,6 +693,14 @@ impl SpellCastTargetsSpellCastTargetFlags {
         }
     }
 
+    pub fn clear_STRING(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::STRING.reverse_bits();
+        self.string = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_LOCKED(locked: SpellCastTargetsSpellCastTargetFlagsLOCKED) -> Self {
         Self {
             inner: SpellCastTargetFlags::LOCKED,
@@ -604,6 +718,14 @@ impl SpellCastTargetsSpellCastTargetFlags {
         }
     }
 
+    pub fn clear_LOCKED(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::LOCKED.reverse_bits();
+        self.locked = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_CORPSE_ALLY(corpse_ally: SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY) -> Self {
         Self {
             inner: SpellCastTargetFlags::CORPSE_ALLY,
@@ -619,6 +741,14 @@ impl SpellCastTargetsSpellCastTargetFlags {
             locked: None,
             corpse_ally: Some(corpse_ally),
         }
+    }
+
+    pub fn clear_CORPSE_ALLY(&mut self) -> Self {
+        self.inner &= SpellCastTargetFlags::CORPSE_ALLY.reverse_bits();
+        self.corpse_ally = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
 }

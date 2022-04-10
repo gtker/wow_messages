@@ -206,11 +206,25 @@ impl SMSG_SPELL_STARTCastFlags {
         }
     }
 
+    pub fn clear_NONE(&mut self) -> Self {
+        self.inner &= CastFlags::NONE.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_HIDDEN_COMBATLOG() -> Self {
         Self {
             inner: CastFlags::HIDDEN_COMBATLOG,
             ammo: None,
         }
+    }
+
+    pub fn clear_HIDDEN_COMBATLOG(&mut self) -> Self {
+        self.inner &= CastFlags::HIDDEN_COMBATLOG.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_UNKNOWN2() -> Self {
@@ -220,11 +234,25 @@ impl SMSG_SPELL_STARTCastFlags {
         }
     }
 
+    pub fn clear_UNKNOWN2(&mut self) -> Self {
+        self.inner &= CastFlags::UNKNOWN2.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_UNKNOWN3() -> Self {
         Self {
             inner: CastFlags::UNKNOWN3,
             ammo: None,
         }
+    }
+
+    pub fn clear_UNKNOWN3(&mut self) -> Self {
+        self.inner &= CastFlags::UNKNOWN3.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_UNKNOWN4() -> Self {
@@ -234,11 +262,25 @@ impl SMSG_SPELL_STARTCastFlags {
         }
     }
 
+    pub fn clear_UNKNOWN4(&mut self) -> Self {
+        self.inner &= CastFlags::UNKNOWN4.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_UNKNOWN5() -> Self {
         Self {
             inner: CastFlags::UNKNOWN5,
             ammo: None,
         }
+    }
+
+    pub fn clear_UNKNOWN5(&mut self) -> Self {
+        self.inner &= CastFlags::UNKNOWN5.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_AMMO(ammo: SMSG_SPELL_STARTCastFlagsAMMO) -> Self {
@@ -248,11 +290,26 @@ impl SMSG_SPELL_STARTCastFlags {
         }
     }
 
+    pub fn clear_AMMO(&mut self) -> Self {
+        self.inner &= CastFlags::AMMO.reverse_bits();
+        self.ammo = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_UNKNOWN7() -> Self {
         Self {
             inner: CastFlags::UNKNOWN7,
             ammo: None,
         }
+    }
+
+    pub fn clear_UNKNOWN7(&mut self) -> Self {
+        self.inner &= CastFlags::UNKNOWN7.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_UNKNOWN8() -> Self {
@@ -262,11 +319,25 @@ impl SMSG_SPELL_STARTCastFlags {
         }
     }
 
+    pub fn clear_UNKNOWN8(&mut self) -> Self {
+        self.inner &= CastFlags::UNKNOWN8.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_UNKNOWN9() -> Self {
         Self {
             inner: CastFlags::UNKNOWN9,
             ammo: None,
         }
+    }
+
+    pub fn clear_UNKNOWN9(&mut self) -> Self {
+        self.inner &= CastFlags::UNKNOWN9.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
 }

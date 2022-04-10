@@ -369,6 +369,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         }
     }
 
+    pub fn clear_NONE(&mut self) -> Self {
+        self.inner &= SecurityFlag::NONE.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_PIN(pin: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN) -> Self {
         Self {
             inner: SecurityFlag::PIN,
@@ -376,6 +383,14 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
             unknown0: None,
             authenticator: None,
         }
+    }
+
+    pub fn clear_PIN(&mut self) -> Self {
+        self.inner &= SecurityFlag::PIN.reverse_bits();
+        self.pin = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
     pub const fn new_UNKNOWN0(unknown0: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0) -> Self {
@@ -387,6 +402,14 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         }
     }
 
+    pub fn clear_UNKNOWN0(&mut self) -> Self {
+        self.inner &= SecurityFlag::UNKNOWN0.reverse_bits();
+        self.unknown0 = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
     pub const fn new_AUTHENTICATOR(authenticator: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR) -> Self {
         Self {
             inner: SecurityFlag::AUTHENTICATOR,
@@ -394,6 +417,14 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
             unknown0: None,
             authenticator: Some(authenticator),
         }
+    }
+
+    pub fn clear_AUTHENTICATOR(&mut self) -> Self {
+        self.inner &= SecurityFlag::AUTHENTICATOR.reverse_bits();
+        self.authenticator = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
     }
 
 }
