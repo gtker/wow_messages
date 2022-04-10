@@ -53,8 +53,8 @@ fn print_new_flag_declaration(s: &mut Writer, ce: &ComplexEnum) {
                     "{variable_name}: Option<{ce_name}{f_name}>,",
                     variable_name = f.name().to_lowercase(),
                     ce_name = ce.name(),
-                    f_name = f.name()),
-                );
+                    f_name = f.name()
+                ));
             }
         }
     });
@@ -400,7 +400,11 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
         );
 
         s.bodyn(
-            format!("impl {c_name}{f_name}", c_name =  ce.name(), f_name = f.name()),
+            format!(
+                "impl {c_name}{f_name}",
+                c_name = ce.name(),
+                f_name = f.name()
+            ),
             |s| {
                 for sf in f.subfields() {
                     if let Some(v) = sf.constant_value() {

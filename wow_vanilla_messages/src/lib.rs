@@ -5,18 +5,18 @@
 
 use crate::util::read_u8_le;
 use std::fmt::{Display, Formatter};
-use std::io::{Write, Error, Read};
+use std::io::{Error, Read, Write};
 
 use wow_srp::header_crypto::{Decrypter, Encrypter};
 
+pub mod helper;
 pub(crate) mod util;
 mod world;
-pub mod helper;
 
 pub use world::*;
 
-pub use helper::guid::Guid;
 pub use helper::aura_mask::AuraMask;
+pub use helper::guid::Guid;
 pub use helper::update_mask::UpdateMask;
 
 const DEFAULT_PORT: u16 = 8085;

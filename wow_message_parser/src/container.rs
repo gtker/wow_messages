@@ -537,8 +537,10 @@ impl Container {
     pub fn contains_update_mask(&self) -> bool {
         fn inner(m: &StructMember) -> bool {
             match m {
-                StructMember::Definition(d) => if d.ty() == &Type::UpdateMask {
-                    return true;
+                StructMember::Definition(d) => {
+                    if d.ty() == &Type::UpdateMask {
+                        return true;
+                    }
                 }
                 StructMember::IfStatement(statement) => {
                     for member in statement.all_members() {
@@ -572,9 +574,11 @@ impl Container {
     pub fn contains_aura_mask(&self) -> bool {
         fn inner(m: &StructMember) -> bool {
             match m {
-                StructMember::Definition(d) => if d.ty() == &Type::AuraMask {
-                    return true;
-                },
+                StructMember::Definition(d) => {
+                    if d.ty() == &Type::AuraMask {
+                        return true;
+                    }
+                }
                 StructMember::IfStatement(statement) => {
                     for member in statement.all_members() {
                         match inner(member) {
@@ -968,9 +972,11 @@ impl Container {
 fn add_complex_types<'a>(m: &'a StructMember, v: &mut Vec<&'a str>) {
     match m {
         StructMember::Definition(d) => match &d.struct_type {
-            Type::Array(a) => if let ArrayType::Complex(i) = a.ty() {
-                v.push(i);
-            },
+            Type::Array(a) => {
+                if let ArrayType::Complex(i) = a.ty() {
+                    v.push(i);
+                }
+            }
             Type::Identifier { s, .. } => {
                 v.push(s);
             }

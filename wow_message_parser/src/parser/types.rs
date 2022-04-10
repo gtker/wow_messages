@@ -68,7 +68,10 @@ impl Objects {
                 let c = self.get_container(variable_name, finder_tags);
                 c.recursive_only_has_io_errors(self)
             }
-            ObjectType::Enum => self.get_definer(variable_name, finder_tags).self_value().is_some(),
+            ObjectType::Enum => self
+                .get_definer(variable_name, finder_tags)
+                .self_value()
+                .is_some(),
             ObjectType::Flag => true,
         }
     }

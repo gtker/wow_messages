@@ -249,12 +249,12 @@ pub fn get_login_version_file_path(version: &LoginVersion) -> String {
                 "{login_dir}/version_{version}/",
                 login_dir = LOGIN_DIR,
                 version = v
-                )
+            )
         }
         LoginVersion::All => {
             format!("{login_dir}/all/", login_dir = LOGIN_DIR,)
         }
-    }   
+    }
 }
 
 pub fn get_import_path(tags: &Tags) -> String {

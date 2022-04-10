@@ -327,7 +327,7 @@ fn print_read_definition(s: &mut Writer, e: &Container, o: &Objects, d: &StructM
             print_read_array(s, array, e, d, o);
         }
         Type::Identifier { s: ty, upcast } => {
-            if  o.get_object_type_of(ty, e.tags()) == ObjectType::Enum {
+            if o.get_object_type_of(ty, e.tags()) == ObjectType::Enum {
                 if let Some(integer) = upcast {
                     if let Some(value) = d.verified_value() {
                         s.wln(format!(
@@ -794,7 +794,7 @@ fn print_read_final_flag(s: &mut Writer, nested_types: &[ComplexEnum]) {
                         "{field_name}: {c_var_name}_{f_name},",
                         field_name = f.name().to_lowercase(),
                         c_var_name = c.variable_name(),
-                            f_name = f.name(),
+                        f_name = f.name(),
                     ));
                 }
 

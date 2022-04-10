@@ -11,16 +11,14 @@ impl AuraMask {
     pub fn read(r: &mut impl Read) -> Result<Self, io::Error> {
         let mut auras = [None; Self::MAX_CAPACITY];
         let mut bit_pattern: u32 = crate::util::read_u32_le(r)?;
-        
-        for i in 0.. Self::MAX_CAPACITY {
+
+        for i in 0..Self::MAX_CAPACITY {
             if (bit_pattern & (1 << i)) != 0 {
                 auras[i] = Some(crate::util::read_u16_le(r)?);
             }
         }
 
-        Ok(Self {
-            auras,
-        })
+        Ok(Self { auras })
     }
 
     pub fn write(&self, w: &mut impl Write) -> Result<(), io::Error> {
@@ -39,7 +37,6 @@ impl AuraMask {
             }
         }
 
-
         Ok(())
     }
 
@@ -54,8 +51,8 @@ impl AuraMask {
 
 #[cfg(test)]
 mod test {
-    use std::io::Cursor;
     use super::AuraMask;
+    use std::io::Cursor;
 
     #[test]
     fn auras() {
@@ -64,7 +61,7 @@ mod test {
         for i in bits {
             v.push(i);
         }
-        let auras = [123_u8, 66, 15, 237, 231, 74 ,25 ,45, 35, 74, 99, 12];
+        let auras = [123_u8, 66, 15, 237, 231, 74, 25, 45, 35, 74, 99, 12];
         for i in auras {
             v.push(i);
         }
