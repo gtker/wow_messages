@@ -539,6 +539,11 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_NONE(&mut self) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_NONE;
+        self.clone()
+    }
+
     pub fn clear_FLAG_NONE(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_NONE.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -568,6 +573,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
             flag_pet_max_power: None,
             flag_pet_auras: None,
         }
+    }
+
+    pub fn set_FLAG_STATUS(&mut self, flag_status: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_STATUS;
+        self.flag_status = Some(flag_status);
+        self.clone()
     }
 
     pub fn clear_FLAG_STATUS(&mut self) -> Self {
@@ -602,6 +613,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_CUR_HP(&mut self, flag_cur_hp: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_CUR_HP;
+        self.flag_cur_hp = Some(flag_cur_hp);
+        self.clone()
+    }
+
     pub fn clear_FLAG_CUR_HP(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_CUR_HP.reverse_bits();
         self.flag_cur_hp = None;
@@ -632,6 +649,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
             flag_pet_max_power: None,
             flag_pet_auras: None,
         }
+    }
+
+    pub fn set_FLAG_MAX_HP(&mut self, flag_max_hp: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_MAX_HP;
+        self.flag_max_hp = Some(flag_max_hp);
+        self.clone()
     }
 
     pub fn clear_FLAG_MAX_HP(&mut self) -> Self {
@@ -666,6 +689,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_POWER_TYPE(&mut self, flag_power_type: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_POWER_TYPE;
+        self.flag_power_type = Some(flag_power_type);
+        self.clone()
+    }
+
     pub fn clear_FLAG_POWER_TYPE(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_POWER_TYPE.reverse_bits();
         self.flag_power_type = None;
@@ -696,6 +725,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
             flag_pet_max_power: None,
             flag_pet_auras: None,
         }
+    }
+
+    pub fn set_FLAG_CUR_POWER(&mut self, flag_cur_power: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_POWER) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_CUR_POWER;
+        self.flag_cur_power = Some(flag_cur_power);
+        self.clone()
     }
 
     pub fn clear_FLAG_CUR_POWER(&mut self) -> Self {
@@ -730,6 +765,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_MAX_POWER(&mut self, flag_max_power: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_MAX_POWER;
+        self.flag_max_power = Some(flag_max_power);
+        self.clone()
+    }
+
     pub fn clear_FLAG_MAX_POWER(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_MAX_POWER.reverse_bits();
         self.flag_max_power = None;
@@ -760,6 +801,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
             flag_pet_max_power: None,
             flag_pet_auras: None,
         }
+    }
+
+    pub fn set_FLAG_LEVEL(&mut self, flag_level: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_LEVEL) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_LEVEL;
+        self.flag_level = Some(flag_level);
+        self.clone()
     }
 
     pub fn clear_FLAG_LEVEL(&mut self) -> Self {
@@ -794,6 +841,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_ZONE(&mut self, flag_zone: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_ZONE;
+        self.flag_zone = Some(flag_zone);
+        self.clone()
+    }
+
     pub fn clear_FLAG_ZONE(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_ZONE.reverse_bits();
         self.flag_zone = None;
@@ -824,6 +877,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
             flag_pet_max_power: None,
             flag_pet_auras: None,
         }
+    }
+
+    pub fn set_FLAG_POSITION(&mut self, flag_position: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POSITION) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_POSITION;
+        self.flag_position = Some(flag_position);
+        self.clone()
     }
 
     pub fn clear_FLAG_POSITION(&mut self) -> Self {
@@ -858,6 +917,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_AURAS(&mut self, flag_auras: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_AURAS;
+        self.flag_auras = Some(flag_auras);
+        self.clone()
+    }
+
     pub fn clear_FLAG_AURAS(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_AURAS.reverse_bits();
         self.flag_auras = None;
@@ -888,6 +953,11 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
             flag_pet_max_power: None,
             flag_pet_auras: None,
         }
+    }
+
+    pub fn set_FLAG_AURAS_2(&mut self) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_AURAS_2;
+        self.clone()
     }
 
     pub fn clear_FLAG_AURAS_2(&mut self) -> Self {
@@ -921,6 +991,11 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_PET_GUID(&mut self) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_PET_GUID;
+        self.clone()
+    }
+
     pub fn clear_FLAG_PET_GUID(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_GUID.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -950,6 +1025,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
             flag_pet_max_power: None,
             flag_pet_auras: None,
         }
+    }
+
+    pub fn set_FLAG_PET_NAME(&mut self, flag_pet_name: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_NAME) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_PET_NAME;
+        self.flag_pet_name = Some(flag_pet_name);
+        self.clone()
     }
 
     pub fn clear_FLAG_PET_NAME(&mut self) -> Self {
@@ -984,6 +1065,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_PET_MODEL_ID(&mut self, flag_pet_model_id: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_PET_MODEL_ID;
+        self.flag_pet_model_id = Some(flag_pet_model_id);
+        self.clone()
+    }
+
     pub fn clear_FLAG_PET_MODEL_ID(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_MODEL_ID.reverse_bits();
         self.flag_pet_model_id = None;
@@ -1014,6 +1101,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
             flag_pet_max_power: None,
             flag_pet_auras: None,
         }
+    }
+
+    pub fn set_FLAG_PET_CUR_HP(&mut self, flag_pet_cur_hp: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_HP) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_PET_CUR_HP;
+        self.flag_pet_cur_hp = Some(flag_pet_cur_hp);
+        self.clone()
     }
 
     pub fn clear_FLAG_PET_CUR_HP(&mut self) -> Self {
@@ -1048,6 +1141,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_PET_MAX_HP(&mut self, flag_pet_max_hp: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_PET_MAX_HP;
+        self.flag_pet_max_hp = Some(flag_pet_max_hp);
+        self.clone()
+    }
+
     pub fn clear_FLAG_PET_MAX_HP(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_MAX_HP.reverse_bits();
         self.flag_pet_max_hp = None;
@@ -1078,6 +1177,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
             flag_pet_max_power: None,
             flag_pet_auras: None,
         }
+    }
+
+    pub fn set_FLAG_PET_POWER_TYPE(&mut self, flag_pet_power_type: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_PET_POWER_TYPE;
+        self.flag_pet_power_type = Some(flag_pet_power_type);
+        self.clone()
     }
 
     pub fn clear_FLAG_PET_POWER_TYPE(&mut self) -> Self {
@@ -1112,6 +1217,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_PET_CUR_POWER(&mut self, flag_pet_cur_power: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_PET_CUR_POWER;
+        self.flag_pet_cur_power = Some(flag_pet_cur_power);
+        self.clone()
+    }
+
     pub fn clear_FLAG_PET_CUR_POWER(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_CUR_POWER.reverse_bits();
         self.flag_pet_cur_power = None;
@@ -1142,6 +1253,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
             flag_pet_max_power: Some(flag_pet_max_power),
             flag_pet_auras: None,
         }
+    }
+
+    pub fn set_FLAG_PET_MAX_POWER(&mut self, flag_pet_max_power: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_POWER) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_PET_MAX_POWER;
+        self.flag_pet_max_power = Some(flag_pet_max_power);
+        self.clone()
     }
 
     pub fn clear_FLAG_PET_MAX_POWER(&mut self) -> Self {
@@ -1176,6 +1293,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_PET_AURAS(&mut self, flag_pet_auras: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_PET_AURAS;
+        self.flag_pet_auras = Some(flag_pet_auras);
+        self.clone()
+    }
+
     pub fn clear_FLAG_PET_AURAS(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_AURAS.reverse_bits();
         self.flag_pet_auras = None;
@@ -1208,6 +1331,11 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         }
     }
 
+    pub fn set_FLAG_PET_AURAS_2(&mut self) -> Self {
+        self.inner |= GroupUpdateFlags::FLAG_PET_AURAS_2;
+        self.clone()
+    }
+
     pub fn clear_FLAG_PET_AURAS_2(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_AURAS_2.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -1237,6 +1365,11 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
             flag_pet_max_power: None,
             flag_pet_auras: None,
         }
+    }
+
+    pub fn set_MODE_OFFLINE(&mut self) -> Self {
+        self.inner |= GroupUpdateFlags::MODE_OFFLINE;
+        self.clone()
     }
 
     pub fn clear_MODE_OFFLINE(&mut self) -> Self {

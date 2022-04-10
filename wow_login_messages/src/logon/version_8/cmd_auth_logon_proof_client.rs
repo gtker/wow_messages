@@ -254,6 +254,11 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         }
     }
 
+    pub fn set_NONE(&mut self) -> Self {
+        self.inner |= SecurityFlag::NONE;
+        self.clone()
+    }
+
     pub fn clear_NONE(&mut self) -> Self {
         self.inner &= SecurityFlag::NONE.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -268,6 +273,12 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
             unknown0: None,
             authenticator: None,
         }
+    }
+
+    pub fn set_PIN(&mut self, pin: CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN) -> Self {
+        self.inner |= SecurityFlag::PIN;
+        self.pin = Some(pin);
+        self.clone()
     }
 
     pub fn clear_PIN(&mut self) -> Self {
@@ -287,6 +298,12 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         }
     }
 
+    pub fn set_UNKNOWN0(&mut self, unknown0: CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0) -> Self {
+        self.inner |= SecurityFlag::UNKNOWN0;
+        self.unknown0 = Some(unknown0);
+        self.clone()
+    }
+
     pub fn clear_UNKNOWN0(&mut self) -> Self {
         self.inner &= SecurityFlag::UNKNOWN0.reverse_bits();
         self.unknown0 = None;
@@ -302,6 +319,12 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
             unknown0: None,
             authenticator: Some(authenticator),
         }
+    }
+
+    pub fn set_AUTHENTICATOR(&mut self, authenticator: CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR) -> Self {
+        self.inner |= SecurityFlag::AUTHENTICATOR;
+        self.authenticator = Some(authenticator);
+        self.clone()
     }
 
     pub fn clear_AUTHENTICATOR(&mut self) -> Self {

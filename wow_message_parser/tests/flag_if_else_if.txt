@@ -134,6 +134,11 @@ impl FlagIfElseIfUpdateFlag {
         }
     }
 
+    pub fn set_NONE(&mut self) -> Self {
+        self.inner |= UpdateFlag::NONE;
+        self.clone()
+    }
+
     pub fn clear_NONE(&mut self) -> Self {
         self.inner &= UpdateFlag::NONE.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -147,6 +152,12 @@ impl FlagIfElseIfUpdateFlag {
             one_if: Some(one_if),
             eight_if: None,
         }
+    }
+
+    pub fn set_ONE_IF(&mut self, one_if: FlagIfElseIfUpdateFlagONE_IF) -> Self {
+        self.inner |= UpdateFlag::ONE_IF;
+        self.one_if = Some(one_if);
+        self.clone()
     }
 
     pub fn clear_ONE_IF(&mut self) -> Self {
@@ -165,6 +176,12 @@ impl FlagIfElseIfUpdateFlag {
         }
     }
 
+    pub fn set_TWO_ELSEIF(&mut self, two_elseif: FlagIfElseIfUpdateFlagTWO_ELSEIF) -> Self {
+        self.inner |= UpdateFlag::TWO_ELSEIF;
+        self.two_elseif = Some(two_elseif);
+        self.clone()
+    }
+
     pub fn clear_TWO_ELSEIF(&mut self) -> Self {
         self.inner &= UpdateFlag::TWO_ELSEIF.reverse_bits();
         self.two_elseif = None;
@@ -181,6 +198,12 @@ impl FlagIfElseIfUpdateFlag {
         }
     }
 
+    pub fn set_FOUR_ELSEIF(&mut self, four_elseif: FlagIfElseIfUpdateFlagFOUR_ELSEIF) -> Self {
+        self.inner |= UpdateFlag::FOUR_ELSEIF;
+        self.four_elseif = Some(four_elseif);
+        self.clone()
+    }
+
     pub fn clear_FOUR_ELSEIF(&mut self) -> Self {
         self.inner &= UpdateFlag::FOUR_ELSEIF.reverse_bits();
         self.four_elseif = None;
@@ -195,6 +218,12 @@ impl FlagIfElseIfUpdateFlag {
             one_if: None,
             eight_if: Some(eight_if),
         }
+    }
+
+    pub fn set_EIGHT_IF(&mut self, eight_if: FlagIfElseIfUpdateFlagEIGHT_IF) -> Self {
+        self.inner |= UpdateFlag::EIGHT_IF;
+        self.eight_if = Some(eight_if);
+        self.clone()
     }
 
     pub fn clear_EIGHT_IF(&mut self) -> Self {

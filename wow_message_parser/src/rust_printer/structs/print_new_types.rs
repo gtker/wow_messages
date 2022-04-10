@@ -102,6 +102,16 @@ fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
                     }
                 });
             });
+
+            s.funcn_pub(format!("set_{}(&mut self)", f.name()), "Self", |s| {
+                s.wln(format!(
+                    "self.inner |= {ty}::{name};",
+                    ty = ce.original_ty_name(),
+                    name = f.name()
+                ));
+
+                s.wln("self.clone()");
+            });
         } else {
             s.funcn_pub_const(
                 format!(
@@ -140,6 +150,35 @@ fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
                             }
                         }
                     });
+                },
+            );
+
+            s.funcn_pub(
+                format!(
+                    "set_{upper_name}(&mut self, {lower_name}: {new_ty})",
+                    upper_name = f.name(),
+                    lower_name = f.name().to_lowercase(),
+                    new_ty = format!(
+                        "{}{}{}",
+                        ce.original_struct_name(),
+                        ce.original_ty_name(),
+                        f.name()
+                    ),
+                ),
+                "Self",
+                |s| {
+                    s.wln(format!(
+                        "self.inner |= {ty}::{name};",
+                        ty = ce.original_ty_name(),
+                        name = f.name()
+                    ));
+
+                    s.wln(format!(
+                        "self.{name_lower} = Some({name_lower});",
+                        name_lower = f.name().to_lowercase()
+                    ));
+
+                    s.wln("self.clone()");
                 },
             );
         }
