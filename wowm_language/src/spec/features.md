@@ -194,6 +194,15 @@ struct ComplexArrays {
 */
 ```
 
+### `EndlessArrays`
+
+```rust,ignore
+struct EndlessArrays {
+    u8[-] endless_bytes;
+}
+/* This also uses feature STRUCT, SIMPLE_BUILT_IN_TYPES */
+```
+
 ## Objects
 
 ### Enums

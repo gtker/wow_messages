@@ -45,7 +45,12 @@ The `CString` type is an array of valid UTF-8 `u8`s terminated by a null (0) byt
 
 ### Arrays
 
-Arrays are semi-built-in types of the form `<type>[<length>]` where `<type>` is any built-in or user defined type, and `<length>` is either a constant integer value or a previous integer field in the same object.
+Arrays are semi-built-in types of the form `<type>[<length>]` where `<type>` is any built-in or user defined type, and `<length>` is either a constant integer value, a previous integer field in the same object, or the character `-` for "endless" arrays.
+
+#### Endless arrays
+
+Endless arrays do not have a field that specifies how many items the array contains.
+This information is instead deducted from the total size of the message minus the sizes of any previous fields.
 
 ## Alias Types
 
@@ -114,7 +119,7 @@ Enums can have a `<value>` of `self.value`, while flags can not.
 
 A `<value>` of `self.value` means that the enumerator is not inclusive, so any values that do not exactly match an existing enumerator should be allowed and should not lead to failed parsing.
 
-The allowed values in definers are:
+The allowed number formats in definers and how they are sent over the network are:
 ```rust,ignore
 enum EnumAllowedInteger : u32 {
     INTEGER = 22; /* 22, [22, 0, 0, 0]  */
@@ -124,6 +129,8 @@ enum EnumAllowedInteger : u32 {
     OTHER = self.value; /* Accept values other than those explicitly here */
 }
 ```
+
+The string syntax has the special case of `\0` which is replaced with a single zero byte.
 
 ### Container
 
@@ -144,7 +151,7 @@ Where `<keyword>` is one of
 
 `<name>` is a valid identifier.
 
-`[= <opcode>]` is an allowed value that defines the unique opcode value for the container.
+`[= <opcode>]` is an allowed value in the same format as for definer values that defines the unique opcode value for the container.
 The `<opcode>` is required for every container except for `struct`s, which have no opcodes.
 
 #### Declaration
@@ -159,6 +166,7 @@ Where `<type>` is either a built-in or user defined type.
 `<identifier>` is a legal identifier. Two declarations or optional statements in the same object must not have identical identifiers, even across if statement blocks.
 
 The optional `<constant_value>` defines which value this field should always be sent as, used for padding values.
+Fields received with a different value will not lead to failed parsing.
 
 The optional `<upcast>` is used for an enum which should be sent over the network as a different type than it is defined with.
 This is in order to prevent needing multiple enums for the same concept.
@@ -198,6 +206,8 @@ optional <identifier> {
 Where `<identifier>` is a legal identifier.
 Two declarations or optional statements in the same object must not have identical identifiers, even across if statement blocks.
 
+Optional statements can only occur as the last element of a message.
+
 ### Test
 
 Tests take the form of
@@ -213,12 +223,12 @@ Where `<name>` is a valid name of an existing container.
 
 `<fields>` is zero or more field definitions of the form
 ```ignore
-<name> = <value>;
+<name> = <value> | "[" <array_fields>[","] "]" | "{" <subobject_fields> "}" ;
 ```
 that describe which value to expect for a specific field.
 
+`<array_fields>` and `<subobject_fields>` consist of 1 or more `<fields>`.
+
 `<bytes>` are the raw byte values sent over the network, including the size and opcode fields in unencrypted format.
-The allowed values are the same as those in definer values.
-
-
+The allowed formats are the same as those in definer values.
 
