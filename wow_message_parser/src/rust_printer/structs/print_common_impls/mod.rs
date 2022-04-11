@@ -91,15 +91,14 @@ fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
                 }
             }
             StructMember::IfStatement(statement) => {
-                for member in &statement.members {
-                    print_constant(s, member);
-                }
-                for member in &statement.else_statement_members {
+                for member in statement.all_members() {
                     print_constant(s, member);
                 }
             }
-            StructMember::OptionalStatement(_) => {
-                // TODO OPTIONAL
+            StructMember::OptionalStatement(optional) => {
+                for member in optional.members() {
+                    print_constant(s, member);
+                }
             }
         }
     }
