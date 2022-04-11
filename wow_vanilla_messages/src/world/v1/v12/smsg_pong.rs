@@ -67,3 +67,41 @@ impl MaximumPossibleSized for SMSG_PONG {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use crate::ReadableAndWritable;
+    use std::io::Cursor;
+    use super::SMSG_PONG;
+    use crate::ConstantSized;
+    use super::*;
+    use super::super::*;
+    use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
+    use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
+
+    // Generated from `wow_message_parser/wowm/world/ping_pong/smsg_pong.wowm` line 7.
+    #[test]
+    fn SMSG_PONG0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x06, 0xDD, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, ];
+
+        let expected = SMSG_PONG {
+            sequence_id: 0xDEADBEEF,
+        };
+
+        let header_size = 2 + 2;
+        let t = WorldServerOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = match t {
+            WorldServerOpcodeMessage::SMSG_PONG(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_PONG, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+
+        assert_eq!(SMSG_PONG::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write_unencrypted_server(&mut Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+}

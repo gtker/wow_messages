@@ -4,3 +4,11 @@ smsg SMSG_PONG = 0x1DD {
     u32 sequence_id;
 }
 
+test SMSG_PONG {
+    sequence_id = 0xDEADBEEF;
+} [
+    0x00, 0x06, /* size */
+    0xDD, 0x01, /* opcode */
+    0xEF, 0xBE, 0xAD, 0xDE, /* sequence_id */
+]
+
