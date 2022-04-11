@@ -5,15 +5,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_showtaxinodes.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_showtaxinodes.wowm#L3):
-/// ```text
-/// smsg SMSG_SHOWTAXINODES = 0x1A9 {
-///     u32 unknown1;
-///     Guid guid;
-///     u32 nearest_node;
-///     u32[-] nodes;
-/// }
-/// ```
 pub struct SMSG_SHOWTAXINODES {
     pub unknown1: u32,
     pub guid: Guid,

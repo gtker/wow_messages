@@ -6,18 +6,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_list.wowm#L3):
-/// ```text
-/// smsg SMSG_BATTLEFIELD_LIST = 0x23D {
-///     Guid battlemaster;
-///     Map map;
-///     u8 unknown1;
-///     u32 unknown2;
-///     u8 unknown3;
-///     u32 number_of_battlegrounds;
-///     u32[number_of_battlegrounds] battlegrounds;
-/// }
-/// ```
 pub struct SMSG_BATTLEFIELD_LIST {
     pub battlemaster: Guid,
     pub map: Map,

@@ -1,16 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_stable_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_stable_result.wowm#L3):
-/// ```text
-/// enum StableResult : u8 {
-///     ERR_MONEY = 0x01;
-///     ERR_STABLE = 0x06;
-///     SUCCESS_STABLE = 0x08;
-///     SUCCESS_UNSTABLE = 0x09;
-///     SUCCESS_BUY_SLOT = 0x0A;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum StableResult {
     ERR_MONEY,

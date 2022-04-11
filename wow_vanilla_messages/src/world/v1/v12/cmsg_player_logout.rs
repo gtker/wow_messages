@@ -5,11 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_player_logout.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_player_logout.wowm#L3):
-/// ```text
-/// cmsg CMSG_PLAYER_LOGOUT = 0x4A {
-/// }
-/// ```
 pub struct CMSG_PLAYER_LOGOUT {
 }
 
@@ -69,7 +64,6 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
     use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_player_logout.wowm` line 5.
     #[test]
     fn CMSG_PLAYER_LOGOUT0() {
         let raw: Vec<u8> = vec![ 0x00, 0x04, 0x4A, 0x00, 0x00, 0x00, ];

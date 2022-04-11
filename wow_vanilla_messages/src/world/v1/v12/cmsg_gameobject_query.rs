@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/cmsg_gameobject_query.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/cmsg_gameobject_query.wowm#L3):
-/// ```text
-/// cmsg CMSG_GAMEOBJECT_QUERY = 0x5E {
-///     u32 entry_id;
-///     Guid guid;
-/// }
-/// ```
 pub struct CMSG_GAMEOBJECT_QUERY {
     pub entry_id: u32,
     pub guid: Guid,

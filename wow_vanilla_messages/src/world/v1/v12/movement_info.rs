@@ -4,33 +4,6 @@ use crate::world::v1::v12::TransportInfo;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement.wowm#L40):
-/// ```text
-/// struct MovementInfo {
-///     MovementFlags flags;
-///     u32 timestamp;
-///     f32 position_x;
-///     f32 position_y;
-///     f32 position_z;
-///     f32 orientation;
-///     if (flags & ON_TRANSPORT) {
-///         TransportInfo transport;
-///     }
-///     if (flags & SWIMMING) {
-///         f32 pitch;
-///     }
-///     f32 fall_time;
-///     if (flags & JUMPING) {
-///         f32 z_speed;
-///         f32 cos_angle;
-///         f32 sin_angle;
-///         f32 xy_speed;
-///     }
-///     if (flags & SPLINE_ELEVATION) {
-///         f32 spline_elevation;
-///     }
-/// }
-/// ```
 pub struct MovementInfo {
     pub flags: MovementInfoMovementFlags,
     pub timestamp: u32,

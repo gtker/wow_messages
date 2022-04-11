@@ -7,21 +7,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L3):
-/// ```text
-/// cmsg CMSG_CHAR_CREATE = 0x36 {
-///     CString name;
-///     Race race;
-///     Class class;
-///     Gender gender;
-///     u8 skin;
-///     u8 face;
-///     u8 hairstyle;
-///     u8 haircolor;
-///     u8 facialhair;
-///     u8 outfit_id;
-/// }
-/// ```
 pub struct CMSG_CHAR_CREATE {
     pub name: String,
     pub race: Race,

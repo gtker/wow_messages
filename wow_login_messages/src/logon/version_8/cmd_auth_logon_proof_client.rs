@@ -5,31 +5,6 @@ use crate::ClientMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm:315`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm#L315):
-/// ```text
-/// clogin CMD_AUTH_LOGON_PROOF_Client = 0x1 {
-///     u8[32] client_public_key;
-///     u8[20] client_proof;
-///     u8[20] crc_hash;
-///     u8 number_of_telemetry_keys;
-///     TelemetryKey[number_of_telemetry_keys] telemetry_keys;
-///     SecurityFlag security_flag;
-///     if (security_flag & PIN) {
-///         u8[16] pin_salt;
-///         u8[20] pin_hash;
-///     }
-///     if (security_flag & UNKNOWN0) {
-///         u8 unknown0;
-///         u8 unknown1;
-///         u8 unknown2;
-///         u8 unknown3;
-///         u64 unknown4;
-///     }
-///     if (security_flag & AUTHENTICATOR) {
-///         u8 unknown5 = 1;
-///     }
-/// }
-/// ```
 pub struct CMD_AUTH_LOGON_PROOF_Client {
     pub client_public_key: [u8; 32],
     pub client_proof: [u8; 20],
@@ -42,15 +17,6 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     const OPCODE: u8 = 0x01;
 }
 impl CMD_AUTH_LOGON_PROOF_Client {
-    /// The field `unknown5` is constantly specified to be:
-    /// 
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `1` |
-    /// | Hex | `0x01` |
-    /// | Original | `1` |
-    /// 
-    /// **This field is not in the struct, but is written as this constant value.**
     pub const UNKNOWN5_VALUE: u8 = 0x01;
 
 }
@@ -495,15 +461,6 @@ impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICAT
 }
 
 impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
-    /// The field `unknown5` is constantly specified to be:
-    /// 
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `1` |
-    /// | Hex | `0x01` |
-    /// | Original | `1` |
-    /// 
-    /// **This field is not in the struct, but is written as this constant value.**
     pub const UNKNOWN5_VALUE: u8 = 0x01;
 
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -525,7 +482,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_8::opcodes::ClientOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 341.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client0() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -594,7 +550,6 @@ mod test {
             assert_eq!(dest, raw);
         }
 
-        // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 398.
         #[test]
         fn CMD_AUTH_LOGON_PROOF_Client1() {
             let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -655,7 +610,6 @@ mod test {
                 assert_eq!(dest, raw);
             }
 
-            // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 440.
             #[test]
             fn CMD_AUTH_LOGON_PROOF_Client2() {
                 let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4,
@@ -705,7 +659,6 @@ mod test {
                     assert_eq!(dest, raw);
                 }
 
-                // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 466.
                 #[test]
                 fn CMD_AUTH_LOGON_PROOF_Client3() {
                     let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83,
@@ -766,7 +719,6 @@ mod test {
                         assert_eq!(dest, raw);
                     }
 
-                    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 500.
                     #[test]
                     fn CMD_AUTH_LOGON_PROOF_Client4() {
                         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83,
@@ -837,7 +789,6 @@ mod test {
                             assert_eq!(dest, raw);
                         }
 
-                        // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 544.
                         #[test]
                         fn CMD_AUTH_LOGON_PROOF_Client5() {
                             let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1,

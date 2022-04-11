@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/msg_save_guild_emblem_server.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/msg_save_guild_emblem_server.wowm#L22):
-/// ```text
-/// smsg MSG_SAVE_GUILD_EMBLEM_Server = 0x1F1 {
-///     GuildEmblemResult result;
-/// }
-/// ```
 pub struct MSG_SAVE_GUILD_EMBLEM_Server {
     pub result: GuildEmblemResult,
 }

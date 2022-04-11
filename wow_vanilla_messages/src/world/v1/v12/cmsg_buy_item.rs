@@ -6,15 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_buy_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_buy_item.wowm#L3):
-/// ```text
-/// cmsg CMSG_BUY_ITEM = 0x1A2 {
-///     Guid vendor_guid;
-///     u32 item_id;
-///     u8 amount;
-///     u8 unknown1;
-/// }
-/// ```
 pub struct CMSG_BUY_ITEM {
     pub vendor_guid: Guid,
     pub item_id: u32,

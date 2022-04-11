@@ -6,15 +6,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_feather_fall_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_feather_fall_ack.wowm#L3):
-/// ```text
-/// cmsg CMSG_MOVE_FEATHER_FALL_ACK = 0x2CF {
-///     Guid guid;
-///     u32 movement_counter;
-///     MovementInfo movement_info;
-///     u32 apply;
-/// }
-/// ```
 pub struct CMSG_MOVE_FEATHER_FALL_ACK {
     pub guid: Guid,
     pub movement_counter: u32,

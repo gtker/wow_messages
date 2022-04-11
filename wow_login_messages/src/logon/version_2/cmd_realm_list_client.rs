@@ -4,12 +4,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/client.wowm#L3):
-/// ```text
-/// clogin CMD_REALM_LIST_Client = 0x10 {
-///     u32 padding = 0;
-/// }
-/// ```
 pub struct CMD_REALM_LIST_Client {
 }
 
@@ -17,15 +11,6 @@ impl ClientMessage for CMD_REALM_LIST_Client {
     const OPCODE: u8 = 0x10;
 }
 impl CMD_REALM_LIST_Client {
-    /// The field `padding` is constantly specified to be:
-    /// 
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `0` |
-    /// | Hex | `0x00` |
-    /// | Original | `0` |
-    /// 
-    /// **This field is not in the struct, but is written as this constant value.**
     pub const PADDING_VALUE: u32 = 0x00;
 
 }
@@ -76,7 +61,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/client.wowm` line 7.
     #[test]
     fn CMD_REALM_LIST_Client0() {
         let raw: Vec<u8> = vec![ 0x10, 0x00, 0x00, 0x00, 0x00, ];

@@ -1,27 +1,5 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L29):
-/// ```text
-/// flag SpellCastTargetFlags : u16 {
-///     SELF = 0x00000000;
-///     UNUSED1 = 0x00000001;
-///     UNIT = 0x00000002;
-///     UNIT_RAID = 0x00000004;
-///     UNIT_PARTY = 0x00000008;
-///     ITEM = 0x00000010;
-///     SOURCE_LOCATION = 0x00000020;
-///     DEST_LOCATION = 0x00000040;
-///     UNIT_ENEMY = 0x00000080;
-///     UNIT_ALLY = 0x00000100;
-///     CORPSE_ENEMY = 0x00000200;
-///     UNIT_DEAD = 0x00000400;
-///     GAMEOBJECT = 0x00000800;
-///     TRADE_ITEM = 0x00001000;
-///     STRING = 0x00002000;
-///     LOCKED = 0x00004000;
-///     CORPSE_ALLY = 0x00008000;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct SpellCastTargetFlags {
     inner: u16,

@@ -7,17 +7,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm#L13):
-/// ```text
-/// smsg SMSG_GOSSIP_MESSAGE = 0x17D {
-///     Guid guid;
-///     u32 title_text_id;
-///     u32 amount_of_gossip_items;
-///     GossipItem[amount_of_gossip_items] gossips;
-///     u32 amount_of_quests;
-///     QuestItem[amount_of_quests] quests;
-/// }
-/// ```
 pub struct SMSG_GOSSIP_MESSAGE {
     pub guid: Guid,
     pub title_text_id: u32,

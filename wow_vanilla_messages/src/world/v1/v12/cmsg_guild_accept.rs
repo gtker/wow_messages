@@ -5,11 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_guild_accept.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_guild_accept.wowm#L3):
-/// ```text
-/// cmsg CMSG_GUILD_ACCEPT = 0x84 {
-/// }
-/// ```
 pub struct CMSG_GUILD_ACCEPT {
 }
 

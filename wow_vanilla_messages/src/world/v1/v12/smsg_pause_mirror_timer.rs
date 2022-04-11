@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_pause_mirror_timer.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_pause_mirror_timer.wowm#L5):
-/// ```text
-/// smsg SMSG_PAUSE_MIRROR_TIMER = 0x1DA {
-///     TimerType timer;
-///     u8 is_frozen;
-/// }
-/// ```
 pub struct SMSG_PAUSE_MIRROR_TIMER {
     pub timer: TimerType,
     pub is_frozen: u8,

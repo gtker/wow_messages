@@ -1,15 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/smsg_weather.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/smsg_weather.wowm#L3):
-/// ```text
-/// enum WeatherType : u32 {
-///     FINE = 0;
-///     RAIN = 1;
-///     SNOW = 2;
-///     STORM = 3;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum WeatherType {
     FINE,

@@ -5,23 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_levelup_info.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_levelup_info.wowm#L3):
-/// ```text
-/// smsg SMSG_LEVELUP_INFO = 0x1D4 {
-///     u32 new_level;
-///     u32 health;
-///     u32 mana;
-///     u32 rage;
-///     u32 focus;
-///     u32 energy;
-///     u32 happiness;
-///     u32 strength;
-///     u32 agility;
-///     u32 stamina;
-///     u32 intellect;
-///     u32 spirit;
-/// }
-/// ```
 pub struct SMSG_LEVELUP_INFO {
     pub new_level: u32,
     pub health: u32,

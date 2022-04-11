@@ -7,14 +7,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:61`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L61):
-/// ```text
-/// msg MessageWithComplexTypes = 0x3 {
-///     SimpleEnum simple_enum;
-///     SimpleFlag simple_flag;
-///     StructWithAllBuiltInTypes simple_struct;
-/// }
-/// ```
 pub struct MessageWithComplexTypes {
     pub simple_enum: SimpleEnum,
     pub simple_flag: SimpleFlag,

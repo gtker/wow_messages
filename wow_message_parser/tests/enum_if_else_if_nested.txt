@@ -4,21 +4,6 @@ use crate::world::v1::v12::{SimpleEnum, SimpleEnumError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:325`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L325):
-/// ```text
-/// struct EnumIfElseIfNested {
-///     SimpleEnum e;
-///     NestedEnum n;
-///     if (e == ZERO) {
-///         u8 zero;
-///     }
-///     else {
-///         if (n == NESTED) {
-///             u8 nested;
-///         }
-///     }
-/// }
-/// ```
 pub struct EnumIfElseIfNested {
     pub e: EnumIfElseIfNestedSimpleEnum,
     pub n: EnumIfElseIfNestedNestedEnum,

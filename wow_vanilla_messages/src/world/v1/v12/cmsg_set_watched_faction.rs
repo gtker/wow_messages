@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/cmsg_set_watched_faction.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/cmsg_set_watched_faction.wowm#L3):
-/// ```text
-/// cmsg CMSG_SET_WATCHED_FACTION = 0x318 {
-///     u32 reputation_id;
-/// }
-/// ```
 pub struct CMSG_SET_WATCHED_FACTION {
     pub reputation_id: u32,
 }

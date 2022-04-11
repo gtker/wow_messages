@@ -2,17 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/msg_list_stabled_pets_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/msg_list_stabled_pets_server.wowm#L3):
-/// ```text
-/// struct StabledPet {
-///     u32 pet_number;
-///     u32 entry;
-///     u32 level;
-///     CString name;
-///     u32 loyalty;
-///     u8 slot;
-/// }
-/// ```
 pub struct StabledPet {
     pub pet_number: u32,
     pub entry: u32,

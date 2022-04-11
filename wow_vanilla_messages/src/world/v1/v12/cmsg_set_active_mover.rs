@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/client_set/cmsg_set_active_mover.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/client_set/cmsg_set_active_mover.wowm#L3):
-/// ```text
-/// cmsg CMSG_SET_ACTIVE_MOVER = 0x26A {
-///     Guid guid;
-/// }
-/// ```
 pub struct CMSG_SET_ACTIVE_MOVER {
     pub guid: Guid,
 }

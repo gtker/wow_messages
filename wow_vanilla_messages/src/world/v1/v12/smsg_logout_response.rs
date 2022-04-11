@@ -7,13 +7,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm#L17):
-/// ```text
-/// smsg SMSG_LOGOUT_RESPONSE = 0x4C {
-///     LogoutResult reason;
-///     LogoutSpeed speed;
-/// }
-/// ```
 pub struct SMSG_LOGOUT_RESPONSE {
     pub reason: LogoutResult,
     pub speed: LogoutSpeed,
@@ -128,7 +121,6 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm` line 22.
     #[test]
     fn SMSG_LOGOUT_RESPONSE0() {
         let raw: Vec<u8> = vec![ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00,

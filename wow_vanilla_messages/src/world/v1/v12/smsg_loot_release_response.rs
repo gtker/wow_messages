@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_release_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_release_response.wowm#L3):
-/// ```text
-/// smsg SMSG_LOOT_RELEASE_RESPONSE = 0x161 {
-///     Guid guid;
-///     u8 unknown1;
-/// }
-/// ```
 pub struct SMSG_LOOT_RELEASE_RESPONSE {
     pub guid: Guid,
     pub unknown1: u8,

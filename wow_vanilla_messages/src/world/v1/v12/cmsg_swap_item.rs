@@ -5,15 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_swap_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_swap_item.wowm#L3):
-/// ```text
-/// cmsg CMSG_SWAP_ITEM = 0x10C {
-///     u8 destination_bag;
-///     u8 destionation_slot;
-///     u8 source_bag;
-///     u8 source_slot;
-/// }
-/// ```
 pub struct CMSG_SWAP_ITEM {
     pub destination_bag: u8,
     pub destionation_slot: u8,

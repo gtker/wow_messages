@@ -5,11 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_group_destroyed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_group_destroyed.wowm#L3):
-/// ```text
-/// smsg SMSG_GROUP_DESTROYED = 0x7C {
-/// }
-/// ```
 pub struct SMSG_GROUP_DESTROYED {
 }
 

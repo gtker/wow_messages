@@ -7,16 +7,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_bindpointupdate.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_bindpointupdate.wowm#L5):
-/// ```text
-/// smsg SMSG_BINDPOINTUPDATE = 0x155 {
-///     f32 position_x;
-///     f32 position_y;
-///     f32 position_z;
-///     Map map;
-///     Area area;
-/// }
-/// ```
 pub struct SMSG_BINDPOINTUPDATE {
     pub position_x: f32,
     pub position_y: f32,

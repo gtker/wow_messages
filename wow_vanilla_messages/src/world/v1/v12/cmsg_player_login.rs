@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow#L3):
-/// ```text
-/// cmsg CMSG_PLAYER_LOGIN = 0x3D {
-///     Guid guid;
-/// }
-/// ```
 pub struct CMSG_PLAYER_LOGIN {
     pub guid: Guid,
 }

@@ -7,16 +7,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_environmentaldamagelog.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_environmentaldamagelog.wowm#L12):
-/// ```text
-/// smsg SMSG_ENVIRONMENTALDAMAGELOG = 0x1FC {
-///     Guid guid;
-///     EnvironmentalDamageType damage_type;
-///     u32 damage;
-///     u32 absorb;
-///     u32 resist;
-/// }
-/// ```
 pub struct SMSG_ENVIRONMENTALDAMAGELOG {
     pub guid: Guid,
     pub damage_type: EnvironmentalDamageType,

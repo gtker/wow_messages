@@ -6,15 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_item_enchant_time_update.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_item_enchant_time_update.wowm#L3):
-/// ```text
-/// smsg SMSG_ITEM_ENCHANT_TIME_UPDATE = 0x1EB {
-///     Guid item_guid;
-///     u32 slot;
-///     u32 duration;
-///     Guid player_guid;
-/// }
-/// ```
 pub struct SMSG_ITEM_ENCHANT_TIME_UPDATE {
     pub item_guid: Guid,
     pub slot: u32,

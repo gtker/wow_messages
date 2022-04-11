@@ -5,11 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_played_time.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_played_time.wowm#L3):
-/// ```text
-/// cmsg CMSG_PLAYED_TIME = 0x1CC {
-/// }
-/// ```
 pub struct CMSG_PLAYED_TIME {
 }
 

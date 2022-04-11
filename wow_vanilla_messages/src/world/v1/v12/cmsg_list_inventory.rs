@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_list_inventory.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_list_inventory.wowm#L3):
-/// ```text
-/// cmsg CMSG_LIST_INVENTORY = 0x19E {
-///     Guid guid;
-/// }
-/// ```
 pub struct CMSG_LIST_INVENTORY {
     pub guid: Guid,
 }

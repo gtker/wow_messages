@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_clear_cooldown.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_clear_cooldown.wowm#L3):
-/// ```text
-/// smsg SMSG_CLEAR_COOLDOWN = 0x1DE {
-///     u32 id;
-///     Guid target_guid;
-/// }
-/// ```
 pub struct SMSG_CLEAR_COOLDOWN {
     pub id: u32,
     pub target_guid: Guid,

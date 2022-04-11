@@ -1,20 +1,5 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/spell_common.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/spell_common.wowm#L45):
-/// ```text
-/// flag CastFlags : u16 {
-///     NONE = 0x00000000;
-///     HIDDEN_COMBATLOG = 0x00000001;
-///     UNKNOWN2 = 0x00000002;
-///     UNKNOWN3 = 0x00000004;
-///     UNKNOWN4 = 0x00000008;
-///     UNKNOWN5 = 0x00000010;
-///     AMMO = 0x00000020;
-///     UNKNOWN7 = 0x00000040;
-///     UNKNOWN8 = 0x00000080;
-///     UNKNOWN9 = 0x00000100;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct CastFlags {
     inner: u16,

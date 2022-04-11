@@ -5,21 +5,6 @@ use crate::ClientMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm:140`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm#L140):
-/// ```text
-/// clogin CMD_AUTH_LOGON_PROOF_Client = 0x1 {
-///     u8[32] client_public_key;
-///     u8[20] client_proof;
-///     u8[20] crc_hash;
-///     u8 number_of_telemetry_keys;
-///     TelemetryKey[number_of_telemetry_keys] telemetry_keys;
-///     SecurityFlag security_flag;
-///     if (security_flag == PIN) {
-///         u8[16] pin_salt;
-///         u8[20] pin_hash;
-///     }
-/// }
-/// ```
 pub struct CMD_AUTH_LOGON_PROOF_Client {
     pub client_public_key: [u8; 32],
     pub client_proof: [u8; 20],
@@ -302,7 +287,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 156.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client0() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -369,7 +353,6 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 213.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client1() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -426,7 +409,6 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 255.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client2() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
@@ -471,7 +453,6 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 281.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Client3() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,

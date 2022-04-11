@@ -4,18 +4,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L3):
-/// ```text
-/// cmsg CMSG_AUTH_SESSION = 0x1ED {
-///     u32 build;
-///     u32 server_id;
-///     CString username;
-///     u32 client_seed;
-///     u8[20] client_proof;
-///     u32 decompressed_addon_info_size;
-///     u8[-] compressed_addon_info;
-/// }
-/// ```
 pub struct CMSG_AUTH_SESSION {
     pub build: u32,
     pub server_id: u32,

@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/smsg_play_sound.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/smsg_play_sound.wowm#L3):
-/// ```text
-/// smsg SMSG_PLAY_SOUND = 0x2D2 {
-///     u32 sound_id;
-/// }
-/// ```
 pub struct SMSG_PLAY_SOUND {
     pub sound_id: u32,
 }

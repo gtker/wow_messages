@@ -7,13 +7,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_buyback_item.wowm:19`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_buyback_item.wowm#L19):
-/// ```text
-/// cmsg CMSG_BUYBACK_ITEM = 0x290 {
-///     Guid guid;
-///     BuybackSlot slot;
-/// }
-/// ```
 pub struct CMSG_BUYBACK_ITEM {
     pub guid: Guid,
     pub slot: BuybackSlot,

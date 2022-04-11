@@ -1,16 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_server_message.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_server_message.wowm#L3):
-/// ```text
-/// enum ServerMessageType : u32 {
-///     SHUTDOWN_TIME = 1;
-///     RESTART_TIME = 2;
-///     CUSTOM = 3;
-///     SHUTDOWN_CANCELLED = 4;
-///     RESTART_CANCELLED = 5;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ServerMessageType {
     SHUTDOWN_TIME,

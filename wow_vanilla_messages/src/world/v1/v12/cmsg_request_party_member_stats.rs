@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_request_party_member_stats.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_request_party_member_stats.wowm#L3):
-/// ```text
-/// cmsg CMSG_REQUEST_PARTY_MEMBER_STATS = 0x27F {
-///     Guid guid;
-/// }
-/// ```
 pub struct CMSG_REQUEST_PARTY_MEMBER_STATS {
     pub guid: Guid,
 }

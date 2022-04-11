@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_unlearn_skill.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_unlearn_skill.wowm#L3):
-/// ```text
-/// cmsg CMSG_UNLEARN_SKILL = 0x202 {
-///     u32 skill_id;
-/// }
-/// ```
 pub struct CMSG_UNLEARN_SKILL {
     pub skill_id: u32,
 }

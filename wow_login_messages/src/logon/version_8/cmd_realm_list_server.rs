@@ -4,16 +4,6 @@ use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:155`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L155):
-/// ```text
-/// slogin CMD_REALM_LIST_Server = 0x10 {
-///     u16 size = self.size;
-///     u32 header_padding = 0;
-///     u16 number_of_realms;
-///     Realm[number_of_realms] realms;
-///     u16 footer_padding = 0;
-/// }
-/// ```
 pub struct CMD_REALM_LIST_Server {
     pub realms: Vec<Realm>,
 }
@@ -22,26 +12,8 @@ impl ServerMessage for CMD_REALM_LIST_Server {
     const OPCODE: u8 = 0x10;
 }
 impl CMD_REALM_LIST_Server {
-    /// The field `header_padding` is constantly specified to be:
-    /// 
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `0` |
-    /// | Hex | `0x00` |
-    /// | Original | `0` |
-    /// 
-    /// **This field is not in the struct, but is written as this constant value.**
     pub const HEADER_PADDING_VALUE: u32 = 0x00;
 
-    /// The field `footer_padding` is constantly specified to be:
-    /// 
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `0` |
-    /// | Hex | `0x00` |
-    /// | Original | `0` |
-    /// 
-    /// **This field is not in the struct, but is written as this constant value.**
     pub const FOOTER_PADDING_VALUE: u16 = 0x00;
 
 }
@@ -165,7 +137,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 165.
     #[test]
     fn CMD_REALM_LIST_Server0() {
         let raw: Vec<u8> = vec![ 0x10, 0x16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
@@ -208,7 +179,6 @@ mod test {
             assert_eq!(dest, raw);
         }
 
-        // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 198.
         #[test]
         fn CMD_REALM_LIST_Server1() {
             let raw: Vec<u8> = vec![ 0x10, 0x1B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,

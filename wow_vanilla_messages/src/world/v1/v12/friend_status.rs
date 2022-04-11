@@ -1,16 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_list.wowm#L3):
-/// ```text
-/// enum FriendStatus : u8 {
-///     OFFLINE = 0;
-///     ONLINE = 1;
-///     AFK = 2;
-///     UNKNOWN3 = 3;
-///     DND = 4;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum FriendStatus {
     OFFLINE,

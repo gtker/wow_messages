@@ -4,17 +4,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_gossip_poi.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_gossip_poi.wowm#L3):
-/// ```text
-/// smsg SMSG_GOSSIP_POI = 0x224 {
-///     u32 flags;
-///     f32 position_x;
-///     f32 position_y;
-///     u32 icon;
-///     u32 data;
-///     CString location_name;
-/// }
-/// ```
 pub struct SMSG_GOSSIP_POI {
     pub flags: u32,
     pub position_x: f32,

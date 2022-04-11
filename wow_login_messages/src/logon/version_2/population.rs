@@ -1,15 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:34`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L34):
-/// ```text
-/// enum Population : u32 {
-///     GREEN_RECOMMENDED = 0x43480000;
-///     RED_FULL = 0x43c80000;
-///     BLUE_RECOMMENDED = 0x44160000;
-///     OTHER = self.value
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Population {
     GREEN_RECOMMENDED,

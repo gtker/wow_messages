@@ -4,13 +4,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_ignore_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_ignore_list.wowm#L3):
-/// ```text
-/// smsg SMSG_IGNORE_LIST = 0x6B {
-///     u8 amount_of_ignored;
-///     u64[amount_of_ignored] ignored;
-/// }
-/// ```
 pub struct SMSG_IGNORE_LIST {
     pub amount_of_ignored: u8,
     pub ignored: Vec<u64>,
@@ -93,7 +86,6 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 8.
     #[test]
     fn SMSG_IGNORE_LIST0() {
         let raw: Vec<u8> = vec![ 0x00, 0x0B, 0x6B, 0x00, 0x01, 0xEF, 0xBE, 0xAD,
@@ -122,7 +114,6 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 18.
     #[test]
     fn SMSG_IGNORE_LIST1() {
         let raw: Vec<u8> = vec![ 0x00, 0x13, 0x6B, 0x00, 0x02, 0xEF, 0xBE, 0xAD,

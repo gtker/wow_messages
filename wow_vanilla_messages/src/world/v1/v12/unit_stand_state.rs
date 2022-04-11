@@ -1,21 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common.wowm:295`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common.wowm#L295):
-/// ```text
-/// enum UnitStandState : u8 {
-///     STAND = 0;
-///     SIT = 1;
-///     SIT_CHAIR = 2;
-///     SLEEP = 3;
-///     SIT_LOW_CHAIR = 4;
-///     SIT_MEDIUM_CHAIR = 5;
-///     SIT_HIGH_CHAIR = 6;
-///     DEAD = 7;
-///     KNEEL = 8;
-///     CUSTOM = 9;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum UnitStandState {
     STAND,

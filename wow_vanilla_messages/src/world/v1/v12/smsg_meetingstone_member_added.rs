@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/meetingstone/smsg_meetingstone_member_added.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/meetingstone/smsg_meetingstone_member_added.wowm#L3):
-/// ```text
-/// smsg SMSG_MEETINGSTONE_MEMBER_ADDED = 0x299 {
-///     Guid guid;
-/// }
-/// ```
 pub struct SMSG_MEETINGSTONE_MEMBER_ADDED {
     pub guid: Guid,
 }

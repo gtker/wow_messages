@@ -4,16 +4,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_bug.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_bug.wowm#L3):
-/// ```text
-/// cmsg CMSG_BUG = 0x1CA {
-///     u32 suggestion;
-///     u32 content_length;
-///     CString content;
-///     u32 type_length;
-///     CString bug_type;
-/// }
-/// ```
 pub struct CMSG_BUG {
     pub suggestion: u32,
     pub content_length: u32,

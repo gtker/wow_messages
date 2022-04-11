@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/meetingstone/smsg_meetingstone_joinfailed.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/meetingstone/smsg_meetingstone_joinfailed.wowm#L9):
-/// ```text
-/// smsg SMSG_MEETINGSTONE_JOINFAILED = 0x2BB {
-///     MeetingStoneFailure reason;
-/// }
-/// ```
 pub struct SMSG_MEETINGSTONE_JOINFAILED {
     pub reason: MeetingStoneFailure,
 }

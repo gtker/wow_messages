@@ -3,15 +3,6 @@ use crate::world::v1::v12::{SimpleFlag};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:101`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L101):
-/// ```text
-/// struct SimpleIfFlag {
-///     SimpleFlag flag;
-///     if (flag & ZERO) {
-///         u8 basic;
-///     }
-/// }
-/// ```
 pub struct SimpleIfFlag {
     pub flag: SimpleIfFlagSimpleFlag,
 }

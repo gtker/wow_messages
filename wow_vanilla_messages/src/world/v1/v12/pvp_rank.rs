@@ -1,31 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/pvp_common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/pvp_common.wowm#L3):
-/// ```text
-/// enum PvpRank : u8 {
-///     NO_RANK = 0;
-///     PARIAH = 1;
-///     OUTLAW = 2;
-///     EXILED = 3;
-///     DISHONORED = 4;
-///     RANK1 = 5;
-///     RANK2 = 6;
-///     RANK3 = 7;
-///     RANK4 = 8;
-///     RANK5 = 9;
-///     RANK6 = 10;
-///     RANK7 = 11;
-///     RANK8 = 12;
-///     RANK9 = 13;
-///     RANK10 = 14;
-///     RANK11 = 15;
-///     RANK12 = 16;
-///     RANK13 = 17;
-///     RANK14 = 18;
-///     FACTION_LEADER = 19;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PvpRank {
     NO_RANK,

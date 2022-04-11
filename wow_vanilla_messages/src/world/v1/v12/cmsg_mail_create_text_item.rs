@@ -6,14 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/cmsg_mail_create_text_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/cmsg_mail_create_text_item.wowm#L3):
-/// ```text
-/// cmsg CMSG_MAIL_CREATE_TEXT_ITEM = 0x24A {
-///     Guid mailbox_guid;
-///     u32 mail_id;
-///     u32 mail_template_id;
-/// }
-/// ```
 pub struct CMSG_MAIL_CREATE_TEXT_ITEM {
     pub mailbox_guid: Guid,
     pub mail_id: u32,

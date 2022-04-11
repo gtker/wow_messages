@@ -5,14 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/smsg/smsg_auction_removed_notification.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/smsg/smsg_auction_removed_notification.wowm#L3):
-/// ```text
-/// smsg SMSG_AUCTION_REMOVED_NOTIFICATION = 0x28D {
-///     u32 item_id;
-///     u32 item_template;
-///     u32 random_property_id;
-/// }
-/// ```
 pub struct SMSG_AUCTION_REMOVED_NOTIFICATION {
     pub item_id: u32,
     pub item_template: u32,

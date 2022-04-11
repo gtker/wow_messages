@@ -6,17 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm#L22):
-/// ```text
-/// smsg SMSG_TRADE_STATUS_EXTENDED = 0x121 {
-///     u8 self_player;
-///     u32 trade_slot_count1;
-///     u32 trade_slot_count2;
-///     u32 money_in_trade;
-///     u32 spell_on_lowest_slot;
-///     TradeSlot[7] trade_slots;
-/// }
-/// ```
 pub struct SMSG_TRADE_STATUS_EXTENDED {
     pub self_player: u8,
     pub trade_slot_count1: u32,

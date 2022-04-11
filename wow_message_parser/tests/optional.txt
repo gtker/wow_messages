@@ -3,12 +3,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:217`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L217):
-/// ```text
-/// struct Optional {
-///     u8 basic;
-/// }
-/// ```
 pub struct Optional {
     pub basic: u8,
 }

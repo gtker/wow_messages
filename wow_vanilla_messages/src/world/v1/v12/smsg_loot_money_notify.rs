@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_money_notify.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_money_notify.wowm#L3):
-/// ```text
-/// smsg SMSG_LOOT_MONEY_NOTIFY = 0x163 {
-///     u32 amount;
-/// }
-/// ```
 pub struct SMSG_LOOT_MONEY_NOTIFY {
     pub amount: u32,
 }

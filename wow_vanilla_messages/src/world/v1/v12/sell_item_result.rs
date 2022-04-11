@@ -1,17 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_sell_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_sell_item.wowm#L3):
-/// ```text
-/// enum SellItemResult : u8 {
-///     CANT_FIND_ITEM = 1;
-///     CANT_SELL_ITEM = 2;
-///     CANT_FIND_VENDOR = 3;
-///     YOU_DONT_OWN_THAT_ITEM = 4;
-///     UNK = 5;
-///     ONLY_EMPTY_BAG = 6;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SellItemResult {
     CANT_FIND_ITEM,

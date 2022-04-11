@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/cmsg_questgiver_hello.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/cmsg_questgiver_hello.wowm#L3):
-/// ```text
-/// cmsg CMSG_QUESTGIVER_HELLO = 0x184 {
-///     Guid guid;
-/// }
-/// ```
 pub struct CMSG_QUESTGIVER_HELLO {
     pub guid: Guid,
 }

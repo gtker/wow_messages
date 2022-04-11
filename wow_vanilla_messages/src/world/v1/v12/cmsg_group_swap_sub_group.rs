@@ -4,13 +4,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_group_swap_sub_group.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_group_swap_sub_group.wowm#L3):
-/// ```text
-/// cmsg CMSG_GROUP_SWAP_SUB_GROUP = 0x280 {
-///     CString name;
-///     CString swap_with_name;
-/// }
-/// ```
 pub struct CMSG_GROUP_SWAP_SUB_GROUP {
     pub name: String,
     pub swap_with_name: String,

@@ -4,12 +4,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_chat_player_not_found.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_chat_player_not_found.wowm#L3):
-/// ```text
-/// smsg SMSG_CHAT_PLAYER_NOT_FOUND = 0x2A9 {
-///     CString name;
-/// }
-/// ```
 pub struct SMSG_CHAT_PLAYER_NOT_FOUND {
     pub name: String,
 }

@@ -6,15 +6,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_turn_rate_change_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_turn_rate_change_ack.wowm#L3):
-/// ```text
-/// cmsg CMSG_FORCE_TURN_RATE_CHANGE_ACK = 0x2DF {
-///     Guid guid;
-///     u32 counter;
-///     MovementInfo movement_info;
-///     f32 new_speed;
-/// }
-/// ```
 pub struct CMSG_FORCE_TURN_RATE_CHANGE_ACK {
     pub guid: Guid,
     pub counter: u32,

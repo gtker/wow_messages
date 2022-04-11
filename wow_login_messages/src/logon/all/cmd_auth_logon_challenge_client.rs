@@ -7,22 +7,6 @@ use crate::ClientMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm#L40):
-/// ```text
-/// clogin CMD_AUTH_LOGON_CHALLENGE_Client = 0x0 {
-///     u8 protocol_version;
-///     u16 size = self.size;
-///     u32 game_name = "\0WoW";
-///     Version version;
-///     Platform platform;
-///     Os os;
-///     Locale locale;
-///     u32 utc_timezone_offset;
-///     u32_be client_ip_address;
-///     u8 account_name_length;
-///     String[account_name_length] account_name;
-/// }
-/// ```
 pub struct CMD_AUTH_LOGON_CHALLENGE_Client {
     pub protocol_version: u8,
     pub version: Version,
@@ -38,15 +22,6 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
     const OPCODE: u8 = 0x00;
 }
 impl CMD_AUTH_LOGON_CHALLENGE_Client {
-    /// The field `game_name` is constantly specified to be:
-    /// 
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `5730135` |
-    /// | Hex | `0x576f57` |
-    /// | Original | `"\0WoW"` |
-    /// 
-    /// **This field is not in the struct, but is written as this constant value.**
     pub const GAME_NAME_VALUE: u32 = 0x576f57;
 
 }
@@ -219,7 +194,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 56.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Client0() {
         let raw: Vec<u8> = vec![ 0x00, 0x03, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,

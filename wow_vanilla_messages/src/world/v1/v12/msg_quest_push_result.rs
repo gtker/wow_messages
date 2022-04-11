@@ -7,13 +7,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/msg_quest_push_result.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/msg_quest_push_result.wowm#L35):
-/// ```text
-/// msg MSG_QUEST_PUSH_RESULT = 0x276 {
-///     Guid guid;
-///     QuestPartyMessage message;
-/// }
-/// ```
 pub struct MSG_QUEST_PUSH_RESULT {
     pub guid: Guid,
     pub message: QuestPartyMessage,

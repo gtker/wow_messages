@@ -4,14 +4,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_raid_instance_info.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_raid_instance_info.wowm#L3):
-/// ```text
-/// struct RaidInfo {
-///     Map map;
-///     u32 reset_time;
-///     u32 instance_id;
-/// }
-/// ```
 pub struct RaidInfo {
     pub map: Map,
     pub reset_time: u32,

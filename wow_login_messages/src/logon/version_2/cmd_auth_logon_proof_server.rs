@@ -4,16 +4,6 @@ use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm#L2):
-/// ```text
-/// slogin CMD_AUTH_LOGON_PROOF_Server = 0x1 {
-///     LoginResult login_result;
-///     if (login_result == SUCCESS) {
-///         u8[20] server_proof;
-///         u32 hardware_survey_id;
-///     }
-/// }
-/// ```
 pub struct CMD_AUTH_LOGON_PROOF_Server {
     pub login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult,
 }
@@ -345,7 +335,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_2::opcodes::ServerOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 12.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Server0() {
         let raw: Vec<u8> = vec![ 0x01, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,

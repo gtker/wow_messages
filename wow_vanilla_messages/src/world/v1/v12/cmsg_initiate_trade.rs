@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/cmsg_initiate_trade.wowm#L3):
-/// ```text
-/// cmsg CMSG_INITIATE_TRADE = 0x116 {
-///     Guid guid;
-/// }
-/// ```
 pub struct CMSG_INITIATE_TRADE {
     pub guid: Guid,
 }

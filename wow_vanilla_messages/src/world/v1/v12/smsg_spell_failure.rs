@@ -7,14 +7,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm#L3):
-/// ```text
-/// smsg SMSG_SPELL_FAILURE = 0x133 {
-///     Guid guid;
-///     u32 id;
-///     SpellCastResult result;
-/// }
-/// ```
 pub struct SMSG_SPELL_FAILURE {
     pub guid: Guid,
     pub id: u32,

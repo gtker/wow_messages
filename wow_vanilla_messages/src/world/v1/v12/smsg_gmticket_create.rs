@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/smsg_gmticket_create.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/smsg_gmticket_create.wowm#L3):
-/// ```text
-/// smsg SMSG_GMTICKET_CREATE = 0x206 {
-///     GmTicketResponse response;
-/// }
-/// ```
 pub struct SMSG_GMTICKET_CREATE {
     pub response: GmTicketResponse,
 }

@@ -7,17 +7,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm#L29):
-/// ```text
-/// smsg MSG_PVP_LOG_DATA_Server = 0x2E0 {
-///     BattlegroundEndStatus status;
-///     if (status == ENDED) {
-///         BattlegroundWinner winner;
-///     }
-///     u32 amount_of_players;
-///     BattlegroundPlayer[amount_of_players] players;
-/// }
-/// ```
 pub struct MSG_PVP_LOG_DATA_Server {
     pub status: MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus,
     pub amount_of_players: u32,

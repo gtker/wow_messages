@@ -5,11 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_systemstatus.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_systemstatus.wowm#L3):
-/// ```text
-/// cmsg CMSG_GMTICKET_SYSTEMSTATUS = 0x21A {
-/// }
-/// ```
 pub struct CMSG_GMTICKET_SYSTEMSTATUS {
 }
 

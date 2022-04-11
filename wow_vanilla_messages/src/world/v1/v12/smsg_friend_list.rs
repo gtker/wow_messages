@@ -5,13 +5,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_list.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_list.wowm#L21):
-/// ```text
-/// smsg SMSG_FRIEND_LIST = 0x67 {
-///     u8 amount_of_friends;
-///     Friend[amount_of_friends] friends;
-/// }
-/// ```
 pub struct SMSG_FRIEND_LIST {
     pub amount_of_friends: u8,
     pub friends: Vec<Friend>,

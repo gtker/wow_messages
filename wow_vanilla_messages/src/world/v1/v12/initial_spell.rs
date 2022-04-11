@@ -3,13 +3,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm#L13):
-/// ```text
-/// struct InitialSpell {
-///     u16 spell_id;
-///     u16 unknown1;
-/// }
-/// ```
 pub struct InitialSpell {
     pub spell_id: u16,
     pub unknown1: u16,

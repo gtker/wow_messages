@@ -5,14 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/cmsg_set_trade_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/cmsg_set_trade_item.wowm#L3):
-/// ```text
-/// cmsg CMSG_SET_TRADE_ITEM = 0x11D {
-///     u8 trade_slot;
-///     u8 bag;
-///     u8 slot;
-/// }
-/// ```
 pub struct CMSG_SET_TRADE_ITEM {
     pub trade_slot: u8,
     pub bag: u8,

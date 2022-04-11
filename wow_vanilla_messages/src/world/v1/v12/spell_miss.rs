@@ -5,13 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/spell_common.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/spell_common.wowm#L27):
-/// ```text
-/// struct SpellMiss {
-///     Guid target_guid;
-///     SpellMissInfo miss_info;
-/// }
-/// ```
 pub struct SpellMiss {
     pub target_guid: Guid,
     pub miss_info: SpellMissInfo,

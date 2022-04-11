@@ -5,14 +5,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_force_walk_speed_change.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_force_walk_speed_change.wowm#L3):
-/// ```text
-/// smsg SMSG_FORCE_WALK_SPEED_CHANGE = 0x2DA {
-///     PackedGuid guid;
-///     u32 move_event;
-///     f32 speed;
-/// }
-/// ```
 pub struct SMSG_FORCE_WALK_SPEED_CHANGE {
     pub guid: Guid,
     pub move_event: u32,

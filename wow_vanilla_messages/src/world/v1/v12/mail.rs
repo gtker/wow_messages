@@ -4,40 +4,6 @@ use crate::world::v1::v12::{MailType, MailTypeError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm#L17):
-/// ```text
-/// struct Mail {
-///     u32 message_id;
-///     MailType message_type;
-///     if (message_type == NORMAL) {
-///         Guid sender;
-///     }
-///     else if (message_type == CREATURE
-///         || message_type == GAMEOBJECT) {
-///         u32 sender_id;
-///     }
-///     else if (message_type == AUCTION) {
-///         u32 auction_id;
-///     }
-///     CString subject;
-///     u32 item_text_id;
-///     u32 unknown1;
-///     u32 stationery;
-///     u32 item_id;
-///     u32 item_enchant_id;
-///     u32 item_random_property_id;
-///     u32 item_suffix_factor;
-///     u8 item_stack_size;
-///     u32 item_spell_charges;
-///     u32 max_durability;
-///     u32 durability;
-///     u32 money;
-///     u32 cash_on_delivery_amount;
-///     u32 checked_timestamp;
-///     f32 expiration_time;
-///     u32 mail_template_id;
-/// }
-/// ```
 pub struct Mail {
     pub message_id: u32,
     pub message_type: MailMailType,

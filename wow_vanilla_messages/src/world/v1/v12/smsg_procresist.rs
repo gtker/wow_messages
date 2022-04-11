@@ -7,15 +7,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_procresist.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_procresist.wowm#L8):
-/// ```text
-/// smsg SMSG_PROCRESIST = 0x260 {
-///     Guid guid;
-///     Guid target_guid;
-///     u32 id;
-///     LogFormat log_format;
-/// }
-/// ```
 pub struct SMSG_PROCRESIST {
     pub guid: Guid,
     pub target_guid: Guid,

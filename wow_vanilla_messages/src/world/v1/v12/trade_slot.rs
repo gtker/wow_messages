@@ -4,25 +4,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm#L3):
-/// ```text
-/// struct TradeSlot {
-///     u8 trade_slot_number;
-///     u32 item_id;
-///     u32 display_id;
-///     u32 stack_count;
-///     u32 is_wrapped;
-///     Guid gift_wrapper;
-///     u32 enchantment;
-///     Guid item_creator;
-///     u32 spell_charges;
-///     u32 item_suffix_factor;
-///     u32 item_random_properties_id;
-///     u32 lock_id;
-///     u32 max_durability;
-///     u32 durability;
-/// }
-/// ```
 pub struct TradeSlot {
     pub trade_slot_number: u8,
     pub item_id: u32,

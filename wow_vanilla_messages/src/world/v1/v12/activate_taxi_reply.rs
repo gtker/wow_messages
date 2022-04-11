@@ -1,24 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_activatetaxireply.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_activatetaxireply.wowm#L3):
-/// ```text
-/// enum ActivateTaxiReply : u32 {
-///     OK = 0;
-///     UNSPECIFIEDSERVERERROR = 1;
-///     NOSUCHPATH = 2;
-///     NOTENOUGHMONEY = 3;
-///     TOOFARAWAY = 4;
-///     NOVENDORNEARBY = 5;
-///     NOTVISITED = 6;
-///     PLAYERBUSY = 7;
-///     PLAYERALREADYMOUNTED = 8;
-///     PLAYERSHAPESHIFTED = 9;
-///     PLAYERMOVING = 10;
-///     SAMENODE = 11;
-///     NOTSTANDING = 12;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ActivateTaxiReply {
     OK,

@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/cmsg_set_trade_gold.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/cmsg_set_trade_gold.wowm#L3):
-/// ```text
-/// cmsg CMSG_SET_TRADE_GOLD = 0x11F {
-///     u32 gold;
-/// }
-/// ```
 pub struct CMSG_SET_TRADE_GOLD {
     pub gold: u32,
 }

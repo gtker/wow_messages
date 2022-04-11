@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questupdate_complete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questupdate_complete.wowm#L3):
-/// ```text
-/// smsg SMSG_QUESTUPDATE_COMPLETE = 0x198 {
-///     u32 quest_id;
-/// }
-/// ```
 pub struct SMSG_QUESTUPDATE_COMPLETE {
     pub quest_id: u32,
 }

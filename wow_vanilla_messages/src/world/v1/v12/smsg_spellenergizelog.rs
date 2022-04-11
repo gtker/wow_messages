@@ -6,16 +6,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellenergizelog.wowm:24`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellenergizelog.wowm#L24):
-/// ```text
-/// smsg SMSG_SPELLENERGIZELOG = 0x151 {
-///     PackedGuid victim_guid;
-///     PackedGuid caster_guid;
-///     u32 spell;
-///     PowerType power;
-///     u32 damage;
-/// }
-/// ```
 pub struct SMSG_SPELLENERGIZELOG {
     pub victim_guid: Guid,
     pub caster_guid: Guid,

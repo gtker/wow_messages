@@ -5,20 +5,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm#L3):
-/// ```text
-/// smsg SMSG_AUTH_RESPONSE = 0x1EE {
-///     WorldResult result;
-///     if (result == AUTH_OK) {
-///         u32 billing_time;
-///         u8 billing_flags;
-///         u32 billing_rested;
-///     }
-///     else if (result == AUTH_WAIT_QUEUE) {
-///         u32 queue_position;
-///     }
-/// }
-/// ```
 pub struct SMSG_AUTH_RESPONSE {
     pub result: SMSG_AUTH_RESPONSEWorldResult,
 }

@@ -1,16 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common.wowm#L3):
-/// ```text
-/// enum GroupLootSetting : u8 {
-///     FREE_FOR_ALL = 0;
-///     ROUND_ROBIN = 1;
-///     MASTER_LOOT = 2;
-///     GROUP_LOOT = 3;
-///     NEED_BEFORE_GREED = 4;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GroupLootSetting {
     FREE_FOR_ALL,

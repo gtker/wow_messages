@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/cmsg_mail_take_money.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/cmsg_mail_take_money.wowm#L3):
-/// ```text
-/// cmsg CMSG_MAIL_TAKE_MONEY = 0x245 {
-///     Guid mailbox_guid;
-///     u32 mail_id;
-/// }
-/// ```
 pub struct CMSG_MAIL_TAKE_MONEY {
     pub mailbox_guid: Guid,
     pub mail_id: u32,

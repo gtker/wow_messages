@@ -5,13 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_autostore_bank_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_autostore_bank_item.wowm#L3):
-/// ```text
-/// cmsg CMSG_AUTOSTORE_BANK_ITEM = 0x282 {
-///     u8 bag_index;
-///     u8 slot_index;
-/// }
-/// ```
 pub struct CMSG_AUTOSTORE_BANK_ITEM {
     pub bag_index: u8,
     pub slot_index: u8,

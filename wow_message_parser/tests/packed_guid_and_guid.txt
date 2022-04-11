@@ -3,19 +3,6 @@ use crate::Guid;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:205`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L205):
-/// ```text
-/// struct PackedGuidAndGuid {
-///     PackedGuid packed;
-///     Guid guid;
-///     PackedGuid[10] static_packed;
-///     Guid[10] static_guid;
-///     u8 basic1;
-///     u8 basic2;
-///     PackedGuid[basic1] variable_packed;
-///     Guid[basic2] variable_guid;
-/// }
-/// ```
 pub struct PackedGuidAndGuid {
     pub packed: Guid,
     pub guid: Guid,

@@ -1,17 +1,5 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_initialize_factions.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_initialize_factions.wowm#L3):
-/// ```text
-/// flag FactionFlag : u8 {
-///     VISIBLE = 0x01;
-///     AT_WAR = 0x02;
-///     HIDDEN = 0x04;
-///     INVISIBLE_FORCED = 0x08;
-///     PEACE_FORCED = 0x10;
-///     INACTIVE = 0x20;
-///     RIVAL = 0x40;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct FactionFlag {
     inner: u8,

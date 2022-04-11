@@ -5,15 +5,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackerstateupdate.wowm#L3):
-/// ```text
-/// smsg SMSG_ATTACKERSTATEUPDATE = 0x14A {
-///     u32 hit_info;
-///     PackedGuid attacker;
-///     PackedGuid target;
-///     u32 total_damage;
-/// }
-/// ```
 pub struct SMSG_ATTACKERSTATEUPDATE {
     pub hit_info: u32,
     pub attacker: Guid,

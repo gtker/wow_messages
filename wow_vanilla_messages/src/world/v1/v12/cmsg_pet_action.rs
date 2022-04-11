@@ -6,14 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_pet_action.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_pet_action.wowm#L3):
-/// ```text
-/// cmsg CMSG_PET_ACTION = 0x175 {
-///     Guid pet_guid;
-///     u32 data;
-///     Guid target_guid;
-/// }
-/// ```
 pub struct CMSG_PET_ACTION {
     pub pet_guid: Guid,
     pub data: u32,

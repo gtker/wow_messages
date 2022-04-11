@@ -4,25 +4,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/auction_common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/auction_common.wowm#L3):
-/// ```text
-/// struct AuctionListItem {
-///     u32 id;
-///     u32 item_entry;
-///     u32 item_enchantment;
-///     u32 item_random_property_id;
-///     u32 item_suffix_factor;
-///     u32 item_count;
-///     u32 item_charges;
-///     Guid item_owner;
-///     u32 start_bid;
-///     u32 minimum_bid;
-///     u32 buyout_amount;
-///     u32 time_left_in_msecs;
-///     Guid highest_bidder;
-///     u32 highest_bid;
-/// }
-/// ```
 pub struct AuctionListItem {
     pub id: u32,
     pub item_entry: u32,

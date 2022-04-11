@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_set_rest_start.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_set_rest_start.wowm#L3):
-/// ```text
-/// smsg SMSG_SET_REST_START = 0x21E {
-///     u32 unknown1;
-/// }
-/// ```
 pub struct SMSG_SET_REST_START {
     pub unknown1: u32,
 }

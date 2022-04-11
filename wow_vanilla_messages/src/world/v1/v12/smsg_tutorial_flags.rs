@@ -5,19 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm#L3):
-/// ```text
-/// smsg SMSG_TUTORIAL_FLAGS = 0xFD {
-///     u32 tutorial_data0;
-///     u32 tutorial_data1;
-///     u32 tutorial_data2;
-///     u32 tutorial_data3;
-///     u32 tutorial_data4;
-///     u32 tutorial_data5;
-///     u32 tutorial_data6;
-///     u32 tutorial_data7;
-/// }
-/// ```
 pub struct SMSG_TUTORIAL_FLAGS {
     pub tutorial_data0: u32,
     pub tutorial_data1: u32,

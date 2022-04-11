@@ -9,21 +9,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_item_push_result.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_item_push_result.wowm#L18):
-/// ```text
-/// smsg SMSG_ITEM_PUSH_RESULT = 0x166 {
-///     Guid guid;
-///     NewItemSource source;
-///     NewItemCreationType creation_type;
-///     NewItemChatAlert alert_chat;
-///     u8 bag_slot;
-///     u32 item_slot;
-///     u32 item_id;
-///     u32 item_suffix_factor;
-///     u32 item_random_property_id;
-///     u32 item_count;
-/// }
-/// ```
 pub struct SMSG_ITEM_PUSH_RESULT {
     pub guid: Guid,
     pub source: NewItemSource,

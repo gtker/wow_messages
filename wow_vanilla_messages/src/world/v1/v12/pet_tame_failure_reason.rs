@@ -1,23 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_tame_failure.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_tame_failure.wowm#L3):
-/// ```text
-/// enum PetTameFailureReason : u8 {
-///     INVALIDCREATURE = 1;
-///     TOOMANY = 2;
-///     CREATUREALREADYOWNED = 3;
-///     NOTTAMEABLE = 4;
-///     ANOTHERSUMMONACTIVE = 5;
-///     UNITSCANTTAME = 6;
-///     NOPETAVAILABLE = 7;
-///     INTERNALERROR = 8;
-///     TOOHIGHLEVEL = 9;
-///     DEAD = 10;
-///     NOTDEAD = 11;
-///     UNKNOWNERROR = 12;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetTameFailureReason {
     INVALIDCREATURE,

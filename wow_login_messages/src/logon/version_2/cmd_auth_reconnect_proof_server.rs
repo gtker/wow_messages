@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm#L1):
-/// ```text
-/// slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x3 {
-///     LoginResult result;
-/// }
-/// ```
 pub struct CMD_AUTH_RECONNECT_PROOF_Server {
     pub result: LoginResult,
 }
@@ -93,7 +87,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_2::opcodes::ServerOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 7.
     #[test]
     fn CMD_AUTH_RECONNECT_PROOF_Server0() {
         let raw: Vec<u8> = vec![ 0x03, 0x00, ];
@@ -119,7 +112,6 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 16.
     #[test]
     fn CMD_AUTH_RECONNECT_PROOF_Server1() {
         let raw: Vec<u8> = vec![ 0x03, 0x0E, ];
@@ -145,7 +137,6 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 42.
     #[test]
     fn CMD_AUTH_RECONNECT_PROOF_Server2() {
         let raw: Vec<u8> = vec![ 0x03, 0x0E, ];

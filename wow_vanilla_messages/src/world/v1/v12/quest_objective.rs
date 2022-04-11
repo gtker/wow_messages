@@ -3,15 +3,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm#L3):
-/// ```text
-/// struct QuestObjective {
-///     u32 creature_id;
-///     u32 kill_count;
-///     u32 required_item_id;
-///     u32 required_item_count;
-/// }
-/// ```
 pub struct QuestObjective {
     pub creature_id: u32,
     pub kill_count: u32,

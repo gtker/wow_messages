@@ -4,18 +4,6 @@ use crate::world::v1::v12::{Race, RaceError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_who.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_who.wowm#L3):
-/// ```text
-/// struct WhoPlayer {
-///     CString name;
-///     CString guild;
-///     u32 level;
-///     Class class;
-///     Race race;
-///     u32 zone_id;
-///     u32 party_status;
-/// }
-/// ```
 pub struct WhoPlayer {
     pub name: String,
     pub guild: String,

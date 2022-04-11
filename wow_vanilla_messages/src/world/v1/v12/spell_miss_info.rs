@@ -1,23 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/spell_common.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/spell_common.wowm#L12):
-/// ```text
-/// enum SpellMissInfo : u32 {
-///     NONE = 0;
-///     MISS = 1;
-///     RESIST = 2;
-///     DODGE = 3;
-///     PARRY = 4;
-///     BLOCK = 5;
-///     EVADE = 6;
-///     IMMUNE = 7;
-///     IMMUNE2 = 8;
-///     DEFLECT = 9;
-///     ABSORB = 10;
-///     REFLECT = 11;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SpellMissInfo {
     NONE,

@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_repair_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_repair_item.wowm#L3):
-/// ```text
-/// cmsg CMSG_REPAIR_ITEM = 0x2A8 {
-///     Guid npc_guid;
-///     Guid item_guid;
-/// }
-/// ```
 pub struct CMSG_REPAIR_ITEM {
     pub npc_guid: Guid,
     pub item_guid: Guid,

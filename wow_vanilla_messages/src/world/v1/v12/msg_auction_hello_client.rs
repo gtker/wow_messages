@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/msg/msg_auction_hello_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/msg/msg_auction_hello_client.wowm#L3):
-/// ```text
-/// cmsg MSG_AUCTION_HELLO_Client = 0x255 {
-///     Guid auctioneer;
-/// }
-/// ```
 pub struct MSG_AUCTION_HELLO_Client {
     pub auctioneer: Guid,
 }
@@ -79,7 +73,6 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
     use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_client.wowm` line 7.
     #[test]
     fn MSG_AUCTION_HELLO_Client0() {
         let raw: Vec<u8> = vec![ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE,

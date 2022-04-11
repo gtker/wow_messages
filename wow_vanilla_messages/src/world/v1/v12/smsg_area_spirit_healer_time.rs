@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/resurrect/smsg_area_spirit_healer_time.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/resurrect/smsg_area_spirit_healer_time.wowm#L3):
-/// ```text
-/// smsg SMSG_AREA_SPIRIT_HEALER_TIME = 0x2E4 {
-///     Guid guid;
-///     u32 next_resurrect_time;
-/// }
-/// ```
 pub struct SMSG_AREA_SPIRIT_HEALER_TIME {
     pub guid: Guid,
     pub next_resurrect_time: u32,

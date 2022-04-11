@@ -5,37 +5,6 @@ use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm:203`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm#L203):
-/// ```text
-/// slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x0 {
-///     u8 protocol_version = 0;
-///     LoginResult login_result;
-///     if (login_result == SUCCESS) {
-///         u8[32] server_public_key;
-///         u8 generator_length;
-///         u8[generator_length] generator;
-///         u8 large_safe_prime_length;
-///         u8[large_safe_prime_length] large_safe_prime;
-///         u8[32] salt;
-///         u8[16] crc_salt;
-///         SecurityFlag security_flag;
-///         if (security_flag & PIN) {
-///             u32 pin_grid_seed;
-///             u8[16] pin_salt;
-///         }
-///         if (security_flag & UNKNOWN0) {
-///             u8 unknown0;
-///             u8 unknown1;
-///             u8 unknown2;
-///             u8 unknown3;
-///             u64 unknown4;
-///         }
-///         if (security_flag & AUTHENTICATOR) {
-///             u8 unknown5 = 1;
-///         }
-///     }
-/// }
-/// ```
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server {
     pub login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult,
 }
@@ -44,26 +13,8 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
     const OPCODE: u8 = 0x00;
 }
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
-    /// The field `protocol_version` is constantly specified to be:
-    /// 
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `0` |
-    /// | Hex | `0x00` |
-    /// | Original | `0` |
-    /// 
-    /// **This field is not in the struct, but is written as this constant value.**
     pub const PROTOCOL_VERSION_VALUE: u8 = 0x00;
 
-    /// The field `unknown5` is constantly specified to be:
-    /// 
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `1` |
-    /// | Hex | `0x01` |
-    /// | Original | `1` |
-    /// 
-    /// **This field is not in the struct, but is written as this constant value.**
     pub const UNKNOWN5_VALUE: u8 = 0x01;
 
 }
@@ -608,15 +559,6 @@ impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENT
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
-    /// The field `unknown5` is constantly specified to be:
-    /// 
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `1` |
-    /// | Hex | `0x01` |
-    /// | Original | `1` |
-    /// 
-    /// **This field is not in the struct, but is written as this constant value.**
     pub const UNKNOWN5_VALUE: u8 = 0x01;
 
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -853,7 +795,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 236.
     #[test]
     fn CMD_AUTH_LOGON_CHALLENGE_Server0() {
         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68,
@@ -908,7 +849,6 @@ mod test {
             assert_eq!(dest, raw);
         }
 
-        // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 289.
         #[test]
         fn CMD_AUTH_LOGON_CHALLENGE_Server1() {
             let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68,
@@ -970,7 +910,6 @@ mod test {
                 assert_eq!(dest, raw);
             }
 
-            // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 349.
             #[test]
             fn CMD_AUTH_LOGON_CHALLENGE_Server2() {
                 let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC,
@@ -1029,7 +968,6 @@ mod test {
                     assert_eq!(dest, raw);
                 }
 
-                // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 404.
                 #[test]
                 fn CMD_AUTH_LOGON_CHALLENGE_Server3() {
                     let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2,
@@ -1096,7 +1034,6 @@ mod test {
                         assert_eq!(dest, raw);
                     }
 
-                    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 467.
                     #[test]
                     fn CMD_AUTH_LOGON_CHALLENGE_Server4() {
                         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x05, ];
@@ -1122,7 +1059,6 @@ mod test {
                         assert_eq!(dest, raw);
                     }
 
-                    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 477.
                     #[test]
                     fn CMD_AUTH_LOGON_CHALLENGE_Server5() {
                         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2,
@@ -1194,7 +1130,6 @@ mod test {
                             assert_eq!(dest, raw);
                         }
 
-                        // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 544.
                         #[test]
                         fn CMD_AUTH_LOGON_CHALLENGE_Server6() {
                             let raw: Vec<u8> = vec![ 0x00, 0x00, 0x05, ];

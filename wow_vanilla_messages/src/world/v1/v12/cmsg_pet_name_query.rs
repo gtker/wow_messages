@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/cmsg_pet_name_query.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/cmsg_pet_name_query.wowm#L3):
-/// ```text
-/// cmsg CMSG_PET_NAME_QUERY = 0x52 {
-///     u32 pet_number;
-///     Guid guid;
-/// }
-/// ```
 pub struct CMSG_PET_NAME_QUERY {
     pub pet_number: u32,
     pub guid: Guid,
@@ -89,7 +82,6 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
     use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/queries/cmsg_pet_name_query.wowm` line 8.
     #[test]
     fn CMSG_PET_NAME_QUERY0() {
         let raw: Vec<u8> = vec![ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE,

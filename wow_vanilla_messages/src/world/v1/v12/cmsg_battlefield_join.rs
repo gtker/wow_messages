@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_battlefield_join.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_battlefield_join.wowm#L3):
-/// ```text
-/// cmsg CMSG_BATTLEFIELD_JOIN = 0x23E {
-///     Map map;
-/// }
-/// ```
 pub struct CMSG_BATTLEFIELD_JOIN {
     pub map: Map,
 }

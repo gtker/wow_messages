@@ -1,20 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_party_command_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_party_command_result.wowm#L3):
-/// ```text
-/// enum PartyResult : u8 {
-///     SUCCESS = 0;
-///     BAD_PLAYER_NAME = 1;
-///     TARGET_NOT_IN_GROUP = 2;
-///     GROUP_FULL = 3;
-///     ALREADY_IN_GROUP = 4;
-///     NOT_IN_GROUP = 5;
-///     NOT_LEADER = 6;
-///     PLAYER_WRONG_FACTION = 7;
-///     IGNORING_YOU = 8;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PartyResult {
     SUCCESS,

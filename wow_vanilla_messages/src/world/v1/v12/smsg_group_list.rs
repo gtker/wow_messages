@@ -9,21 +9,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_group_list.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_group_list.wowm#L14):
-/// ```text
-/// smsg SMSG_GROUP_LIST = 0x7D {
-///     GroupType group_type;
-///     u8 own_flags;
-///     u32 amount_of_members;
-///     GroupListMember[amount_of_members] members;
-///     Guid leader;
-///     optional group_not_empty {
-///         GroupLootSetting loot_setting;
-///         Guid master_loot;
-///         ItemQuality loot_threshold;
-///     }
-/// }
-/// ```
 pub struct SMSG_GROUP_LIST {
     pub group_type: GroupType,
     pub own_flags: u8,

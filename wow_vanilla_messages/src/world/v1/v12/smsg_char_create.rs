@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_create.wowm#L3):
-/// ```text
-/// smsg SMSG_CHAR_CREATE = 0x3A {
-///     WorldResult result;
-/// }
-/// ```
 pub struct SMSG_CHAR_CREATE {
     pub result: WorldResult,
 }

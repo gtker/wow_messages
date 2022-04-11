@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/cmsg_autostore_loot_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/cmsg_autostore_loot_item.wowm#L3):
-/// ```text
-/// cmsg CMSG_AUTOSTORE_LOOT_ITEM = 0x108 {
-///     u8 item_slot;
-/// }
-/// ```
 pub struct CMSG_AUTOSTORE_LOOT_ITEM {
     pub item_slot: u8,
 }

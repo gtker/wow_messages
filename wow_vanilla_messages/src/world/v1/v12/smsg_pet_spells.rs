@@ -8,21 +8,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm#L12):
-/// ```text
-/// smsg SMSG_PET_SPELLS = 0x179 {
-///     Guid pet;
-///     u32 unknown1;
-///     PetReactState react;
-///     PetCommandState command;
-///     u16 unknown2;
-///     u32[10] action_bars;
-///     u8 amount_of_spells;
-///     u32[amount_of_spells] spells;
-///     u8 amount_of_cooldowns;
-///     PetSpellCooldown[amount_of_cooldowns] cooldowns;
-/// }
-/// ```
 pub struct SMSG_PET_SPELLS {
     pub pet: Guid,
     pub unknown1: u32,

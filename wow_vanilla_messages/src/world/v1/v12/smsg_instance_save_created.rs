@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_instance_save_created.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_instance_save_created.wowm#L3):
-/// ```text
-/// smsg SMSG_INSTANCE_SAVE_CREATED = 0x2CB {
-///     u32 unknown;
-/// }
-/// ```
 pub struct SMSG_INSTANCE_SAVE_CREATED {
     pub unknown: u32,
 }

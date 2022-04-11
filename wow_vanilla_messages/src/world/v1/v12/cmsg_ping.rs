@@ -5,13 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm#L3):
-/// ```text
-/// cmsg CMSG_PING = 0x1DC {
-///     u32 sequence_id;
-///     u32 round_time_in_ms;
-/// }
-/// ```
 pub struct CMSG_PING {
     pub sequence_id: u32,
     pub round_time_in_ms: u32,
@@ -88,7 +81,6 @@ mod test {
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
     use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
-    // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 8.
     #[test]
     fn CMSG_PING0() {
         let raw: Vec<u8> = vec![ 0x00, 0x0C, 0xDC, 0x01, 0x00, 0x00, 0xEF, 0xBE,

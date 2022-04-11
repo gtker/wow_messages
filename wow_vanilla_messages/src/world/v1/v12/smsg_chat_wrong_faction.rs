@@ -5,11 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_chat_wrong_faction.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_chat_wrong_faction.wowm#L3):
-/// ```text
-/// smsg SMSG_CHAT_WRONG_FACTION = 0x219 {
-/// }
-/// ```
 pub struct SMSG_CHAT_WRONG_FACTION {
 }
 

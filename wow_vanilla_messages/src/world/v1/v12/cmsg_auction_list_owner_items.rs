@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_owner_items.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_owner_items.wowm#L3):
-/// ```text
-/// cmsg CMSG_AUCTION_LIST_OWNER_ITEMS = 0x259 {
-///     Guid auctioneer_guid;
-///     u32 list_from;
-/// }
-/// ```
 pub struct CMSG_AUCTION_LIST_OWNER_ITEMS {
     pub auctioneer_guid: Guid,
     pub list_from: u32,

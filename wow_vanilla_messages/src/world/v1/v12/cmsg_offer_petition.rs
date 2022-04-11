@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_offer_petition.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_offer_petition.wowm#L3):
-/// ```text
-/// cmsg CMSG_OFFER_PETITION = 0x1C3 {
-///     Guid petition_guid;
-///     Guid target_guid;
-/// }
-/// ```
 pub struct CMSG_OFFER_PETITION {
     pub petition_guid: Guid,
     pub target_guid: Guid,

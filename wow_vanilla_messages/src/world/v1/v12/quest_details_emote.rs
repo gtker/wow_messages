@@ -3,13 +3,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm#L3):
-/// ```text
-/// struct QuestDetailsEmote {
-///     u32 emote;
-///     u32 emote_delay_in_msecs;
-/// }
-/// ```
 pub struct QuestDetailsEmote {
     pub emote: u32,
     pub emote_delay_in_msecs: u32,

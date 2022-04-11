@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_far_sight.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_far_sight.wowm#L8):
-/// ```text
-/// cmsg CMSG_FAR_SIGHT = 0x27A {
-///     FarSightOperation operation;
-/// }
-/// ```
 pub struct CMSG_FAR_SIGHT {
     pub operation: FarSightOperation,
 }

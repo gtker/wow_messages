@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mount/smsg_dismountresult.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mount/smsg_dismountresult.wowm#L3):
-/// ```text
-/// smsg SMSG_DISMOUNTRESULT = 0x16F {
-///     MountResult result;
-/// }
-/// ```
 pub struct SMSG_DISMOUNTRESULT {
     pub result: MountResult,
 }

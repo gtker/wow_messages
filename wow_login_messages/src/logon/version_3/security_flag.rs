@@ -1,13 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/common.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/common.wowm#L1):
-/// ```text
-/// enum SecurityFlag : u8 {
-///     NONE = 0x0;
-///     PIN = 0x1;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SecurityFlag {
     NONE,

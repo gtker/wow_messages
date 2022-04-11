@@ -1,14 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/meetingstone/smsg_meetingstone_joinfailed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/meetingstone/smsg_meetingstone_joinfailed.wowm#L3):
-/// ```text
-/// enum MeetingStoneFailure : u8 {
-///     MEETINGSTONE_FAIL_PARTYLEADER = 1;
-///     MEETINGSTONE_FAIL_FULL_GROUP = 2;
-///     MEETINGSTONE_FAIL_RAID_GROUP = 3;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum MeetingStoneFailure {
     MEETINGSTONE_FAIL_PARTYLEADER,

@@ -1,21 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/gamemaster_common.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/gamemaster_common.wowm#L14):
-/// ```text
-/// enum GmTicketType : u8 {
-///     STUCK = 1;
-///     BEHAVIOR_HARASSMENT = 2;
-///     GUILD = 3;
-///     ITEM = 4;
-///     ENVIRONMENTAL = 5;
-///     NONQUEST_CREEP = 6;
-///     QUEST_QUESTNPC = 7;
-///     TECHNICAL = 8;
-///     ACCOUNT_BILLING = 9;
-///     CHARACTER = 10;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketType {
     STUCK,

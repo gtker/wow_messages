@@ -6,14 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/msg_minimap_ping_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/msg_minimap_ping_server.wowm#L3):
-/// ```text
-/// smsg MSG_MINIMAP_PING_Server = 0x1D5 {
-///     Guid guid;
-///     f32 position_x;
-///     f32 position_y;
-/// }
-/// ```
 pub struct MSG_MINIMAP_PING_Server {
     pub guid: Guid,
     pub position_x: f32,

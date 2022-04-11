@@ -3,24 +3,6 @@ use crate::world::v1::v12::{StructWithAllBuiltInTypes, StructWithAllBuiltInTypes
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:68`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L68):
-/// ```text
-/// struct Arrays {
-///     u8 index;
-///     u8[20] basic_fixed_array;
-///     u16[16] simple_2byte_fixed_array;
-///     u16_be[16] simple_2byte_be_fixed_array;
-///     u16[index] simple_2byte_variable_array;
-///     u32_be[16] simple_4byte_be_fixed_array;
-///     u32[index] simple_4byte_variable_array;
-///     u64_be[16] simple_8byte_be_fixed_array;
-///     u64[index] simple_8byte_variable_array;
-///     StructWithAllBuiltInTypes[10] complex_fixed_array;
-///     StructWithAllBuiltInTypes[index] complex_variable_array;
-///     CString[10] fixed_cstring_array;
-///     CString[index] variable_cstring_array;
-/// }
-/// ```
 pub struct Arrays {
     pub basic_fixed_array: [u8; 20],
     pub simple_2byte_fixed_array: [u16; 16],

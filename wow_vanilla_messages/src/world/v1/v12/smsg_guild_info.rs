@@ -4,17 +4,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_info.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_info.wowm#L3):
-/// ```text
-/// smsg SMSG_GUILD_INFO = 0x88 {
-///     CString guild_name;
-///     u32 created_day;
-///     u32 created_month;
-///     u32 created_year;
-///     u32 amount_of_characters_in_guild;
-///     u32 amount_of_accounts_in_guild;
-/// }
-/// ```
 pub struct SMSG_GUILD_INFO {
     pub guild_name: String,
     pub created_day: u32,

@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/cmsg_questgiver_accept_quest.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/cmsg_questgiver_accept_quest.wowm#L3):
-/// ```text
-/// cmsg CMSG_QUESTGIVER_ACCEPT_QUEST = 0x189 {
-///     Guid guid;
-///     u32 quest_id;
-/// }
-/// ```
 pub struct CMSG_QUESTGIVER_ACCEPT_QUEST {
     pub guid: Guid,
     pub quest_id: u32,

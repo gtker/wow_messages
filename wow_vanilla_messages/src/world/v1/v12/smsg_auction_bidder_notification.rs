@@ -6,18 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/smsg/smsg_auction_bidder_notification.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/smsg/smsg_auction_bidder_notification.wowm#L3):
-/// ```text
-/// smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x25E {
-///     u32 auction_house_id;
-///     u32 auction_id;
-///     Guid bidder;
-///     u32 won;
-///     u32 out_bid;
-///     u32 item_template;
-///     u32 item_random_property_id;
-/// }
-/// ```
 pub struct SMSG_AUCTION_BIDDER_NOTIFICATION {
     pub auction_house_id: u32,
     pub auction_id: u32,

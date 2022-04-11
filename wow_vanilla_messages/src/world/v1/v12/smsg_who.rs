@@ -5,14 +5,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_who.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_who.wowm#L13):
-/// ```text
-/// smsg SMSG_WHO = 0x63 {
-///     u32 listed_players;
-///     u32 online_players;
-///     WhoPlayer[listed_players] players;
-/// }
-/// ```
 pub struct SMSG_WHO {
     pub listed_players: u32,
     pub online_players: u32,

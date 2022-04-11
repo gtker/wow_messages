@@ -5,14 +5,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmsurvey_submit.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmsurvey_submit.wowm#L12):
-/// ```text
-/// cmsg CMSG_GMSURVEY_SUBMIT = 0x32A {
-///     u32 survey_id;
-///     GmSurveyQuestion[10] questions;
-///     CString answer_comment;
-/// }
-/// ```
 pub struct CMSG_GMSURVEY_SUBMIT {
     pub survey_id: u32,
     pub questions: [GmSurveyQuestion; 10],

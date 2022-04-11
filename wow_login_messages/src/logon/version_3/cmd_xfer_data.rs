@@ -3,13 +3,6 @@ use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L10):
-/// ```text
-/// slogin CMD_XFER_DATA = 0x31 {
-///     u16 size;
-///     u8[size] data;
-/// }
-/// ```
 pub struct CMD_XFER_DATA {
     pub data: Vec<u8>,
 }
@@ -76,7 +69,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 15.
     #[test]
     fn CMD_XFER_DATA0() {
         let raw: Vec<u8> = vec![ 0x31, 0x01, 0x00, 0xFF, ];
@@ -102,7 +94,6 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 24.
     #[test]
     fn CMD_XFER_DATA1() {
         let raw: Vec<u8> = vec![ 0x31, 0x00, 0x00, ];

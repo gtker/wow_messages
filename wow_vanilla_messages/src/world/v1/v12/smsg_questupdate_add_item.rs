@@ -5,13 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questupdate_add_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questupdate_add_item.wowm#L3):
-/// ```text
-/// smsg SMSG_QUESTUPDATE_ADD_ITEM = 0x19A {
-///     u32 required_item_id;
-///     u32 items_required;
-/// }
-/// ```
 pub struct SMSG_QUESTUPDATE_ADD_ITEM {
     pub required_item_id: u32,
     pub items_required: u32,

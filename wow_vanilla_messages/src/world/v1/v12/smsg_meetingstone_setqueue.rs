@@ -7,13 +7,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/meetingstone/smsg_meetingstone_setqueue.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/meetingstone/smsg_meetingstone_setqueue.wowm#L12):
-/// ```text
-/// smsg SMSG_MEETINGSTONE_SETQUEUE = 0x295 {
-///     Area area;
-///     MeetingStoneStatus status;
-/// }
-/// ```
 pub struct SMSG_MEETINGSTONE_SETQUEUE {
     pub area: Area,
     pub status: MeetingStoneStatus,

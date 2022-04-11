@@ -3,15 +3,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm#L3):
-/// ```text
-/// struct PetSpellCooldown {
-///     u16 spell_id;
-///     u16 spell_category;
-///     u32 cooldown_in_msecs;
-///     u32 category_cooldown_in_msecs;
-/// }
-/// ```
 pub struct PetSpellCooldown {
     pub spell_id: u16,
     pub spell_category: u16,

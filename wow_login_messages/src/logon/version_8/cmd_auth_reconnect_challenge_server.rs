@@ -4,16 +4,6 @@ use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm:34`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm#L34):
-/// ```text
-/// slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x2 {
-///     LoginResult result;
-///     if (result == SUCCESS) {
-///         u8[16] challenge_data;
-///         u8[16] checksum_salt;
-///     }
-/// }
-/// ```
 pub struct CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult,
 }
@@ -356,7 +346,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 44.
     #[test]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Server0() {
         let raw: Vec<u8> = vec![ 0x02, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
@@ -390,7 +379,6 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 57.
     #[test]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Server1() {
         let raw: Vec<u8> = vec![ 0x02, 0x03, ];

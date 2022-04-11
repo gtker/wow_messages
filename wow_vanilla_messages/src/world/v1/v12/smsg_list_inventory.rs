@@ -6,14 +6,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_list_inventory.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_list_inventory.wowm#L15):
-/// ```text
-/// smsg SMSG_LIST_INVENTORY = 0x19F {
-///     Guid vendor;
-///     u8 amount_of_items;
-///     ListInventoryItem[amount_of_items] items;
-/// }
-/// ```
 pub struct SMSG_LIST_INVENTORY {
     pub vendor: Guid,
     pub amount_of_items: u8,

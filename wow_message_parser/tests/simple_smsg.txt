@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:46`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L46):
-/// ```text
-/// smsg SimpleSmsg = 0x0 {
-///     u8 basic;
-/// }
-/// ```
 pub struct SimpleSmsg {
     pub basic: u8,
 }

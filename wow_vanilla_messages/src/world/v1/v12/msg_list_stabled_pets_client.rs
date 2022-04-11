@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/msg_list_stabled_pets_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/msg_list_stabled_pets_client.wowm#L3):
-/// ```text
-/// cmsg MSG_LIST_STABLED_PETS_Client = 0x26F {
-///     Guid npc;
-/// }
-/// ```
 pub struct MSG_LIST_STABLED_PETS_Client {
     pub npc: Guid,
 }

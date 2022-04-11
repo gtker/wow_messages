@@ -1,17 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_turn_in_petition_results.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_turn_in_petition_results.wowm#L3):
-/// ```text
-/// enum PetitionTurnInResult : u32 {
-///     OK = 0;
-///     ALREADY_SIGNED = 1;
-///     ALREADY_IN_GUILD = 2;
-///     CANT_SIGN_OWN = 3;
-///     NEED_MORE = 4;
-///     NOT_SERVER = 5;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetitionTurnInResult {
     OK,

@@ -3,17 +3,6 @@ use crate::Guid;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement.wowm#L3):
-/// ```text
-/// struct TransportInfo {
-///     PackedGuid guid;
-///     f32 position_x;
-///     f32 position_y;
-///     f32 position_z;
-///     f32 orientation;
-///     u32 timestamp;
-/// }
-/// ```
 pub struct TransportInfo {
     pub guid: Guid,
     pub position_x: f32,

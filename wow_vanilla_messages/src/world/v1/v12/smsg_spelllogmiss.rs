@@ -6,16 +6,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelllogmiss.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelllogmiss.wowm#L3):
-/// ```text
-/// smsg SMSG_SPELLLOGMISS = 0x24B {
-///     u32 id;
-///     Guid caster_guid;
-///     u8 unknown1;
-///     u32 amount_of_targets;
-///     SpellMiss[amount_of_targets] targets;
-/// }
-/// ```
 pub struct SMSG_SPELLLOGMISS {
     pub id: u32,
     pub caster_guid: Guid,

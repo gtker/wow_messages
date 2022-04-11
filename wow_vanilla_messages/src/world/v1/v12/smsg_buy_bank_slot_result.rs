@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_buy_bank_slot_result.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_buy_bank_slot_result.wowm#L10):
-/// ```text
-/// smsg SMSG_BUY_BANK_SLOT_RESULT = 0x1BA {
-///     BuyBankSlotResult result;
-/// }
-/// ```
 pub struct SMSG_BUY_BANK_SLOT_RESULT {
     pub result: BuyBankSlotResult,
 }

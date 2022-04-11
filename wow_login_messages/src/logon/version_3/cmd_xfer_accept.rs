@@ -4,11 +4,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:33`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L33):
-/// ```text
-/// clogin CMD_XFER_ACCEPT = 0x32 {
-/// }
-/// ```
 pub struct CMD_XFER_ACCEPT {
 }
 
@@ -54,7 +49,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 35.
     #[test]
     fn CMD_XFER_ACCEPT0() {
         let raw: Vec<u8> = vec![ 0x32, ];

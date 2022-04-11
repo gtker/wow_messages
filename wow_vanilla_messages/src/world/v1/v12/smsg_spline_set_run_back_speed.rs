@@ -5,13 +5,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_spline_set_run_back_speed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_spline_set_run_back_speed.wowm#L3):
-/// ```text
-/// smsg SMSG_SPLINE_SET_RUN_BACK_SPEED = 0x2FF {
-///     PackedGuid guid;
-///     f32 speed;
-/// }
-/// ```
 pub struct SMSG_SPLINE_SET_RUN_BACK_SPEED {
     pub guid: Guid,
     pub speed: f32,

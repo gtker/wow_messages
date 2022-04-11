@@ -4,13 +4,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_channel_kick.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_channel_kick.wowm#L3):
-/// ```text
-/// cmsg CMSG_CHANNEL_KICK = 0xA4 {
-///     CString channel_name;
-///     CString player_name;
-/// }
-/// ```
 pub struct CMSG_CHANNEL_KICK {
     pub channel_name: String,
     pub player_name: String,

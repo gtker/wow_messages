@@ -5,12 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/cmsg_areatrigger.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/cmsg_areatrigger.wowm#L3):
-/// ```text
-/// cmsg CMSG_AREATRIGGER = 0xB4 {
-///     u32 trigger_id;
-/// }
-/// ```
 pub struct CMSG_AREATRIGGER {
     pub trigger_id: u32,
 }

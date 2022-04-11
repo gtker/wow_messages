@@ -1,17 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/meetingstone/smsg_meetingstone_setqueue.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/meetingstone/smsg_meetingstone_setqueue.wowm#L3):
-/// ```text
-/// enum MeetingStoneStatus : u8 {
-///     LEAVE_QUEUE = 0;
-///     JOINED_QUEUE = 1;
-///     PARTY_MEMBER_LEFT_LFG = 2;
-///     PARTY_MEMBER_REMOVED_PARTY_REMOVED = 3;
-///     LOOKING_FOR_NEW_PARTY_IN_QUEUE = 4;
-///     NONE = 5;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum MeetingStoneStatus {
     LEAVE_QUEUE,

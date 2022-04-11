@@ -8,16 +8,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm#L3):
-/// ```text
-/// smsg SMSG_PET_MODE = 0x17A {
-///     Guid guid;
-///     PetReactState react_state;
-///     PetCommandState command_state;
-///     u8 unknown1;
-///     u8 pet_enabled;
-/// }
-/// ```
 pub struct SMSG_PET_MODE {
     pub guid: Guid,
     pub react_state: PetReactState,

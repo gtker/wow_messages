@@ -3,15 +3,6 @@ use crate::ClientMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/survey_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/survey_result.wowm#L3):
-/// ```text
-/// clogin CMD_SURVEY_RESULT = 0x4 {
-///     u32 survey_id;
-///     u8 error;
-///     u16 compressed_data_length;
-///     u8[compressed_data_length] data;
-/// }
-/// ```
 pub struct CMD_SURVEY_RESULT {
     pub survey_id: u32,
     pub error: u8,
@@ -98,7 +89,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/survey_result.wowm` line 10.
     #[test]
     fn CMD_SURVEY_RESULT0() {
         let raw: Vec<u8> = vec![ 0x04, 0xDE, 0xFA, 0x00, 0x00, 0x00, 0x01, 0x00,

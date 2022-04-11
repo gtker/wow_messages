@@ -5,15 +5,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelldispellog.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelldispellog.wowm#L3):
-/// ```text
-/// smsg SMSG_SPELLDISPELLOG = 0x27B {
-///     Guid victim;
-///     Guid caster;
-///     u32 amount_of_spells;
-///     u32[amount_of_spells] spells;
-/// }
-/// ```
 pub struct SMSG_SPELLDISPELLOG {
     pub victim: Guid,
     pub caster: Guid,

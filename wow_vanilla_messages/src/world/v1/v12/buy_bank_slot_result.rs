@@ -1,15 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_buy_bank_slot_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_buy_bank_slot_result.wowm#L3):
-/// ```text
-/// enum BuyBankSlotResult : u32 {
-///     FAILED_TOO_MANY = 0;
-///     INSUFFICIENT_FUNDS = 1;
-///     NOTBANKER = 2;
-///     OK = 3;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BuyBankSlotResult {
     FAILED_TOO_MANY,

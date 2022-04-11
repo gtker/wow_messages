@@ -4,27 +4,6 @@ use crate::world::v1::v12::{UpdateFlag};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:305`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L305):
-/// ```text
-/// struct FlagIfElseIf {
-///     UpdateFlag flags;
-///     if (flags & ONE_IF) {
-///         u8 b_if;
-///     }
-///     else if (flags & TWO_ELSEIF) {
-///         SimpleFlag s;
-///         if (s & ONE) {
-///             u8 if_one;
-///         }
-///     }
-///     else if (flags & FOUR_ELSEIF) {
-///         u8 elseif2;
-///     }
-///     if (flags & EIGHT_IF) {
-///         u8 last_if;
-///     }
-/// }
-/// ```
 pub struct FlagIfElseIf {
     pub flags: FlagIfElseIfUpdateFlag,
 }

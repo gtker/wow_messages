@@ -1,15 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_raid_instance_message.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_raid_instance_message.wowm#L3):
-/// ```text
-/// enum RaidInstanceMessage : u32 {
-///     WARNING_HOURS = 1;
-///     WARNING_MIN = 2;
-///     WARNING_MIN_SOON = 3;
-///     WELCOME = 4;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RaidInstanceMessage {
     WARNING_HOURS,

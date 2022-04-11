@@ -5,14 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_leave_battlefield.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_leave_battlefield.wowm#L3):
-/// ```text
-/// cmsg CMSG_LEAVE_BATTLEFIELD = 0x2E1 {
-///     u8 unknown1;
-///     u8 battle_ground_type_id;
-///     u16 unknown2;
-/// }
-/// ```
 pub struct CMSG_LEAVE_BATTLEFIELD {
     pub unknown1: u8,
     pub battle_ground_type_id: u8,

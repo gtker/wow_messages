@@ -5,11 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_cancel_combat.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_cancel_combat.wowm#L3):
-/// ```text
-/// smsg SMSG_CANCEL_COMBAT = 0x14E {
-/// }
-/// ```
 pub struct SMSG_CANCEL_COMBAT {
 }
 

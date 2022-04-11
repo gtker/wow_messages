@@ -5,15 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_dismiss_sound.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_dismiss_sound.wowm#L3):
-/// ```text
-/// smsg SMSG_PET_DISMISS_SOUND = 0x325 {
-///     u32 sound_id;
-///     f32 position_x;
-///     f32 position_y;
-///     f32 position_z;
-/// }
-/// ```
 pub struct SMSG_PET_DISMISS_SOUND {
     pub sound_id: u32,
     pub position_x: f32,

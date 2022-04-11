@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/msg_talent_wipe_confirm_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/msg_talent_wipe_confirm_client.wowm#L3):
-/// ```text
-/// cmsg MSG_TALENT_WIPE_CONFIRM_Client = 0x2AA {
-///     Guid wiping_npc;
-/// }
-/// ```
 pub struct MSG_TALENT_WIPE_CONFIRM_Client {
     pub wiping_npc: Guid,
 }

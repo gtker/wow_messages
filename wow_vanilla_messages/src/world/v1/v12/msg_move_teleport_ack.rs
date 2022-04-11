@@ -6,14 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm#L3):
-/// ```text
-/// msg MSG_MOVE_TELEPORT_ACK = 0xC7 {
-///     Guid guid;
-///     u32 movement_counter;
-///     u32 time_in_msecs;
-/// }
-/// ```
 pub struct MSG_MOVE_TELEPORT_ACK {
     pub guid: Guid,
     pub movement_counter: u32,

@@ -7,13 +7,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_ai_reaction.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_ai_reaction.wowm#L21):
-/// ```text
-/// smsg SMSG_AI_REACTION = 0x13C {
-///     Guid guid;
-///     AiReaction reaction;
-/// }
-/// ```
 pub struct SMSG_AI_REACTION {
     pub guid: Guid,
     pub reaction: AiReaction,

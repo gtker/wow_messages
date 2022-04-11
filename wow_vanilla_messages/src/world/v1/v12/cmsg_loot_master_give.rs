@@ -6,14 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/cmsg_loot_master_give.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/cmsg_loot_master_give.wowm#L3):
-/// ```text
-/// cmsg CMSG_LOOT_MASTER_GIVE = 0x2A3 {
-///     Guid loot_guid;
-///     u8 slot_id;
-///     Guid target_player_guid;
-/// }
-/// ```
 pub struct CMSG_LOOT_MASTER_GIVE {
     pub loot_guid: Guid,
     pub slot_id: u8,

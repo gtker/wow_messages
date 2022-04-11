@@ -6,13 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_petition_sign.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_petition_sign.wowm#L3):
-/// ```text
-/// cmsg CMSG_PETITION_SIGN = 0x1C0 {
-///     Guid petition_guid;
-///     u8 unknown1;
-/// }
-/// ```
 pub struct CMSG_PETITION_SIGN {
     pub petition_guid: Guid,
     pub unknown1: u8,

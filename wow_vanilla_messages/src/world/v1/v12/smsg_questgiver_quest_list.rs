@@ -6,17 +6,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_list.wowm#L3):
-/// ```text
-/// smsg SMSG_QUESTGIVER_QUEST_LIST = 0x185 {
-///     Guid npc;
-///     CString title;
-///     u32 emote_delay;
-///     u32 emote;
-///     u8 amount_of_entries;
-///     QuestItem[amount_of_entries] quest_items;
-/// }
-/// ```
 pub struct SMSG_QUESTGIVER_QUEST_LIST {
     pub npc: Guid,
     pub title: String,

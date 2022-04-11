@@ -6,17 +6,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm#L11):
-/// ```text
-/// smsg SMSG_MONSTER_MOVE = 0xDD {
-///     PackedGuid guid;
-///     f32 position_x;
-///     f32 position_y;
-///     f32 position_z;
-///     u32 spline_id;
-///     MonsterMoveType move_type;
-/// }
-/// ```
 pub struct SMSG_MONSTER_MOVE {
     pub guid: Guid,
     pub position_x: f32,

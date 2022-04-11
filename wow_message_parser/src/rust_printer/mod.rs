@@ -36,7 +36,7 @@ pub const WORLD_SERVER_HEADER_TRAIT_NAME: &str = "WorldServerMessageWrite";
 
 impl Writer {
     const INDENTATION: &'static str = "    ";
-    const METADATA: bool = true;
+    const METADATA: bool = false;
 
     pub fn new(import_path: &str) -> Self {
         Self {
@@ -430,6 +430,9 @@ impl Writer {
     }
 
     pub fn docc<S: AsRef<str>>(&mut self, s: S) {
+        if !Self::METADATA {
+            return;
+        }
         self.w("/// ");
         for _ in 0..self.docc_indentation_level {
             self.w(Self::INDENTATION);
@@ -439,6 +442,9 @@ impl Writer {
     }
 
     pub fn docc_w<S: AsRef<str>>(&mut self, s: S) {
+        if !Self::METADATA {
+            return;
+        }
         self.w("/// ");
         for _ in 0..self.docc_indentation_level {
             self.w(Self::INDENTATION);
@@ -461,6 +467,9 @@ impl Writer {
     }
 
     pub fn docc_wowm(&mut self, f: impl Fn(&mut Self), repo: impl AsRef<str>, fileinfo: &FileInfo) {
+        if !Self::METADATA {
+            return;
+        }
         self.docc(format!(
             "Auto generated from the original `wowm` in file [`{name}:{line}`]({github_repo}/tree/main/{name}#L{line}):",
             name = fileinfo.name(),

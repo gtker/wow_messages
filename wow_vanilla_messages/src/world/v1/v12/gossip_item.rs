@@ -3,14 +3,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm#L3):
-/// ```text
-/// struct GossipItem {
-///     u32 id;
-///     u8 item_icon;
-///     u8 coded;
-/// }
-/// ```
 pub struct GossipItem {
     pub id: u32,
     pub item_icon: u8,

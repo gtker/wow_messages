@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/msg_tabardvendor_activate.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/msg_tabardvendor_activate.wowm#L3):
-/// ```text
-/// msg MSG_TABARDVENDOR_ACTIVATE = 0x1F2 {
-///     Guid guid;
-/// }
-/// ```
 pub struct MSG_TABARDVENDOR_ACTIVATE {
     pub guid: Guid,
 }

@@ -5,21 +5,6 @@ use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm:34`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm#L34):
-/// ```text
-/// slogin CMD_AUTH_LOGON_PROOF_Server = 0x1 {
-///     LoginResult login_result;
-///     if (login_result == SUCCESS) {
-///         u8[20] server_proof;
-///         AccountFlag account_flag;
-///         u32 hardware_survey_id;
-///         u16 unknown_flags;
-///     }
-///     else {
-///         u16 padding = 0;
-///     }
-/// }
-/// ```
 pub struct CMD_AUTH_LOGON_PROOF_Server {
     pub login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult,
 }
@@ -28,15 +13,6 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
     const OPCODE: u8 = 0x01;
 }
 impl CMD_AUTH_LOGON_PROOF_Server {
-    /// The field `padding` is constantly specified to be:
-    /// 
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `0` |
-    /// | Hex | `0x00` |
-    /// | Original | `0` |
-    /// 
-    /// **This field is not in the struct, but is written as this constant value.**
     pub const PADDING_VALUE: u16 = 0x00;
 
 }
@@ -608,7 +584,6 @@ mod test {
     use super::super::*;
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 48.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Server0() {
         let raw: Vec<u8> = vec![ 0x01, 0x07, 0x00, 0x00, ];
@@ -635,7 +610,6 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 57.
     #[test]
     fn CMD_AUTH_LOGON_PROOF_Server1() {
         let raw: Vec<u8> = vec![ 0x01, 0x08, 0x00, 0x00, ];

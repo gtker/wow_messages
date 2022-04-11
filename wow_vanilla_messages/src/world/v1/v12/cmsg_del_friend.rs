@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_del_friend.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_del_friend.wowm#L3):
-/// ```text
-/// cmsg CMSG_DEL_FRIEND = 0x6A {
-///     Guid guid;
-/// }
-/// ```
 pub struct CMSG_DEL_FRIEND {
     pub guid: Guid,
 }

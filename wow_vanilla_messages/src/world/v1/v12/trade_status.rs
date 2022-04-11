@@ -1,35 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status.wowm:75`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status.wowm#L75):
-/// ```text
-/// enum TradeStatus : u32 {
-///     BUSY = 0;
-///     BEGIN_TRADE = 1;
-///     OPEN_WINDOW = 2;
-///     TRADE_CANCELED = 3;
-///     TRADE_ACCEPT = 4;
-///     BUSY_2 = 5;
-///     NO_TARGET = 6;
-///     BACK_TO_TRADE = 7;
-///     TRADE_COMPLETE = 8;
-///     TRADE_REJECTED = 9;
-///     TARGET_TO_FAR = 10;
-///     WRONG_FACTION = 11;
-///     CLOSE_WINDOW = 12;
-///     UNKNOWN_13 = 13;
-///     IGNORE_YOU = 14;
-///     YOU_STUNNED = 15;
-///     TARGET_STUNNED = 16;
-///     YOU_DEAD = 17;
-///     TARGET_DEAD = 18;
-///     YOU_LOGOUT = 19;
-///     TARGET_LOGOUT = 20;
-///     TRIAL_ACCOUNT = 21;
-///     ONLY_CONJURED = 22;
-///     NOT_ON_TAPLIST = 23;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TradeStatus {
     BUSY,

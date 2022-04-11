@@ -1,19 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_response.wowm#L3):
-/// ```text
-/// enum LootMethod : u8 {
-///     CORPSE = 1;
-///     PICKPOCKETING = 2;
-///     FISHING = 3;
-///     DISENCHANTING = 4;
-///     SKINNING = 6;
-///     FISHINGHOLE = 20;
-///     FISHING_FAIL = 21;
-///     INSIGNIA = 22;
-/// }
-/// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LootMethod {
     CORPSE,

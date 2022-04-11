@@ -2,24 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`tests/impl_levels.wowm:19`](https://github.com/gtker/wow_messages/tree/main/tests/impl_levels.wowm#L19):
-/// ```text
-/// struct StructWithAllBuiltInTypes {
-///     u8 basic8;
-///     u16 basic16;
-///     u32 basic32;
-///     u64 basic64;
-///     u16_be basic16_be;
-///     u32_be basic32_be;
-///     u64_be basic64_be;
-///     f32 decimal32;
-///     f32_be decimal32_be;
-///     f64 decimal64;
-///     f64_be decimal64_be;
-///     CString simple_cstring;
-///     String[basic8] simple_string;
-/// }
-/// ```
 pub struct StructWithAllBuiltInTypes {
     pub basic16: u16,
     pub basic32: u32,

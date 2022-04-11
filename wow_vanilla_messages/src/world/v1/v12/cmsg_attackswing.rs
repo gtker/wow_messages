@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm#L3):
-/// ```text
-/// cmsg CMSG_ATTACKSWING = 0x141 {
-///     Guid guid;
-/// }
-/// ```
 pub struct CMSG_ATTACKSWING {
     pub guid: Guid,
 }

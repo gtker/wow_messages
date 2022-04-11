@@ -6,14 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_place_bid.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_place_bid.wowm#L3):
-/// ```text
-/// cmsg CMSG_AUCTION_PLACE_BID = 0x25A {
-///     Guid auctioneer_guid;
-///     u32 auction_id;
-///     u32 price;
-/// }
-/// ```
 pub struct CMSG_AUCTION_PLACE_BID {
     pub auctioneer_guid: Guid,
     pub auction_id: u32,

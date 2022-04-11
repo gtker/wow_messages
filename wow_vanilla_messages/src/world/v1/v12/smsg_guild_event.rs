@@ -5,14 +5,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_event.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_event.wowm#L21):
-/// ```text
-/// smsg SMSG_GUILD_EVENT = 0x92 {
-///     GuildEvent event;
-///     u8 amount_of_events;
-///     CString[amount_of_events] event_descriptions;
-/// }
-/// ```
 pub struct SMSG_GUILD_EVENT {
     pub event: GuildEvent,
     pub amount_of_events: u8,

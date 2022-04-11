@@ -6,12 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/resurrect/cmsg_area_spirit_healer_queue.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/resurrect/cmsg_area_spirit_healer_queue.wowm#L3):
-/// ```text
-/// cmsg CMSG_AREA_SPIRIT_HEALER_QUEUE = 0x2E3 {
-///     Guid guid;
-/// }
-/// ```
 pub struct CMSG_AREA_SPIRIT_HEALER_QUEUE {
     pub guid: Guid,
 }

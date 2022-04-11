@@ -7,24 +7,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status.wowm:102`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status.wowm#L102):
-/// ```text
-/// smsg SMSG_TRADE_STATUS = 0x120 {
-///     TradeStatus status;
-///     if (status == BEGIN_TRADE) {
-///         Guid unknown1;
-///     }
-///     else if (status == CLOSE_WINDOW) {
-///         InventoryResult inventory_result;
-///         u8 target_error;
-///         u32 item_limit_category_id;
-///     }
-///     else if (status == ONLY_CONJURED
-///         || status == NOT_ON_TAPLIST) {
-///         u8 slot;
-///     }
-/// }
-/// ```
 pub struct SMSG_TRADE_STATUS {
     pub status: SMSG_TRADE_STATUSTradeStatus,
 }

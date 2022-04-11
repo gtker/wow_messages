@@ -5,14 +5,6 @@ use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
 #[derive(Debug, PartialEq, Clone, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/smsg/smsg_auction_bidder_list_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/smsg/smsg_auction_bidder_list_result.wowm#L3):
-/// ```text
-/// smsg SMSG_AUCTION_BIDDER_LIST_RESULT = 0x265 {
-///     u32 count;
-///     AuctionListItem[count] auctions;
-///     u32 total_amount_of_auctions;
-/// }
-/// ```
 pub struct SMSG_AUCTION_BIDDER_LIST_RESULT {
     pub count: u32,
     pub auctions: Vec<AuctionListItem>,

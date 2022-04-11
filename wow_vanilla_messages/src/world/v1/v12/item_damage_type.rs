@@ -3,14 +3,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L14):
-/// ```text
-/// struct ItemDamageType {
-///     u32 damage_minimum;
-///     u32 damage_maximum;
-///     u32 damage_type;
-/// }
-/// ```
 pub struct ItemDamageType {
     pub damage_minimum: u32,
     pub damage_maximum: u32,
