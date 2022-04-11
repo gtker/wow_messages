@@ -3,3 +3,9 @@
 clogin CMD_REALM_LIST_Client = 0x10 {
     u32 padding = 0;
 }
+
+test CMD_REALM_LIST_Client {} [
+    0x10, /* opcode */
+    0x00, 0x00, 0x00, 0x00, /* padding */
+]
+
