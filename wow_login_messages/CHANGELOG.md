@@ -23,3 +23,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [0.1.0] - 2021-04-03
+
+### Added
+
+* Initial release. This is very WIP and things are not guaranteed to be documented or actually work correctly.
+
+[0.1.0]: https://github.com/gtker/wow_messages/tree/505efadbe332dee2bdd5d321242b7e5d2565d841
