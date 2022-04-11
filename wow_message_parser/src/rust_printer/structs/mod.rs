@@ -250,55 +250,46 @@ fn print_docc_members(s: &mut Writer, e: &Container, field: &StructMember) {
             s.docc("}");
 
             if !statement.else_ifs().is_empty() {
-                let equations = {
-                    let mut equations = Vec::new();
-                    for f in statement.else_ifs() {
-                        for c in f.conditional.equations() {
-                            equations.push(c);
+                for else_if in statement.else_ifs() {
+                    let equations = else_if.conditional.equations();
+                    for (i, eq) in equations.iter().enumerate() {
+                        let name = statement.conditional.variable_name();
+                        let (op, cond) = match eq {
+                            Equation::Equals { value } => ("==", value),
+                            Equation::NotEquals { value } => ("!=", value),
+                            Equation::BitwiseAnd { value } => ("&", value),
+                        };
+
+                        if i == 0 {
+                            s.docc_w(format!(
+                                "else if ({name} {op} {cond}",
+                                name = name,
+                                op = op,
+                                cond = cond
+                            ));
+                            s.docc_inc();
+                        } else {
+                            s.docc_w(format!(
+                                "|| {name} {op} {cond}",
+                                name = name,
+                                op = op,
+                                cond = cond
+                            ));
+                        }
+
+                        if i == equations.len() - 1 {
+                            s.wln_no_indent(") {");
+                        } else {
+                            s.wln_no_indent("");
                         }
                     }
-                    equations
-                };
-                for (i, eq) in equations.iter().enumerate() {
-                    let name = statement.conditional.variable_name();
-                    let (op, cond) = match eq {
-                        Equation::Equals { value } => ("==", value),
-                        Equation::NotEquals { value } => ("!=", value),
-                        Equation::BitwiseAnd { value } => ("&", value),
-                    };
-
-                    if i == 0 {
-                        s.docc_w(format!(
-                            "else if ({name} {op} {cond}",
-                            name = name,
-                            op = op,
-                            cond = cond
-                        ));
-                        s.docc_inc();
-                    } else {
-                        s.docc_w(format!(
-                            "|| {name} {op} {cond}",
-                            name = name,
-                            op = op,
-                            cond = cond
-                        ));
-                    }
-
-                    if i == equations.len() - 1 {
-                        s.wln_no_indent(") {");
-                    } else {
-                        s.wln_no_indent("");
-                    }
-                }
-
-                for f in statement.else_ifs() {
-                    for m in f.members() {
+                    for m in else_if.members() {
                         print_docc_members(s, e, m);
                     }
-                }
 
-                s.docc_dec();
-                s.docc("}");
+                    s.docc_dec();
+                    s.docc("}");
+                }
             }
 
             if !statement.else_statement_members.is_empty() {

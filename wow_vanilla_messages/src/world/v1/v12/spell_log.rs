@@ -15,12 +15,26 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         u32 unknown2;
 ///         f32 unknown3;
 ///     }
-///     else if (effect == ADD_EXTRA_ATTACKS
-///         || effect == INTERRUPT_CAST
-///         || effect == DURABILITY_DAMAGE
-///         || effect == CREATE_ITEM
-///         || effect == FEED_PET
-///         || effect == RESURRECT
+///     else if (effect == ADD_EXTRA_ATTACKS) {
+///         Guid target2;
+///         u32 unknown4;
+///     }
+///     else if (effect == INTERRUPT_CAST) {
+///         Guid target3;
+///         u32 interrupted_spell;
+///     }
+///     else if (effect == DURABILITY_DAMAGE) {
+///         Guid target4;
+///         u32 unknown5;
+///         u32 unknown6;
+///     }
+///     else if (effect == CREATE_ITEM) {
+///         u32 spell_effect_item_type;
+///     }
+///     else if (effect == FEED_PET) {
+///         u32 item_target_entry;
+///     }
+///     else if (effect == RESURRECT
 ///         || effect == DISPEL
 ///         || effect == THREAT
 ///         || effect == DISTRACT
@@ -36,15 +50,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         || effect == OPEN_LOCK
 ///         || effect == OPEN_LOCK_ITEM
 ///         || effect == INSTAKILL) {
-///         Guid target2;
-///         u32 unknown4;
-///         Guid target3;
-///         u32 interrupted_spell;
-///         Guid target4;
-///         u32 unknown5;
-///         u32 unknown6;
-///         u32 spell_effect_item_type;
-///         u32 item_target_entry;
 ///         Guid target5;
 ///     }
 /// }

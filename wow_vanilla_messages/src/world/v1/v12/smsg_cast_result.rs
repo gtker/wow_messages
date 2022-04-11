@@ -17,9 +17,10 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         if (reason == REQUIRES_SPELL_FOCUS) {
 ///             u32 required_spell_focus;
 ///         }
-///         else if (reason == REQUIRES_AREA
-///             || reason == EQUIPPED_ITEM_CLASS) {
+///         else if (reason == REQUIRES_AREA) {
 ///             Area area;
+///         }
+///         else if (reason == EQUIPPED_ITEM_CLASS) {
 ///             u32 equipped_item_class;
 ///             u32 equipped_item_subclass_mask;
 ///             u32 equipped_item_inventory_type_mask;

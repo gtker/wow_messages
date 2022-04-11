@@ -13,10 +13,11 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         u8 basic1;
 ///     }
 ///     else if (t == THREE
-///         || t == FOUR
-///         || t == FIVE
-///         || t == SIX) {
+///         || t == FOUR) {
 ///         u8 basic3;
+///     }
+///     else if (t == FIVE
+///         || t == SIX) {
 ///         u8 basic5;
 ///     }
 ///     else {

@@ -10,9 +10,10 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     if (flags & ONE_IF) {
 ///         u8 b_if;
 ///     }
-///     else if (flags & TWO_ELSEIF
-///         || flags & FOUR_ELSEIF) {
+///     else if (flags & TWO_ELSEIF) {
 ///         u8 elseif1;
+///     }
+///     else if (flags & FOUR_ELSEIF) {
 ///         u8 elseif2;
 ///     }
 ///     if (flags & EIGHT_IF) {

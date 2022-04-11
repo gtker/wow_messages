@@ -22,16 +22,18 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     }
 ///     else if (chat_type == SAY
 ///         || chat_type == PARTY
-///         || chat_type == YELL
-///         || chat_type == MONSTER_SAY
-///         || chat_type == MONSTER_YELL
-///         || chat_type == CHANNEL) {
+///         || chat_type == YELL) {
 ///         Guid sender_guid1;
 ///         Guid sender_guid2;
+///     }
+///     else if (chat_type == MONSTER_SAY
+///         || chat_type == MONSTER_YELL) {
 ///         Guid sender_guid3;
 ///         u32 sender_name_length;
 ///         CString sender_name;
 ///         Guid target_guid;
+///     }
+///     else if (chat_type == CHANNEL) {
 ///         CString channel_name;
 ///         u32 player_rank;
 ///         Guid player_guid;

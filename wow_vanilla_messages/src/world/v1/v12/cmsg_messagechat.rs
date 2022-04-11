@@ -26,10 +26,11 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         || chat_type == DND) {
 ///         CString message;
 ///     }
-///     else if (chat_type == WHISPER
-///         || chat_type == CHANNEL) {
+///     else if (chat_type == WHISPER) {
 ///         CString target_player;
 ///         CString whisper_message;
+///     }
+///     else if (chat_type == CHANNEL) {
 ///         CString channel;
 ///         CString channel_message;
 ///     }

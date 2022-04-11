@@ -13,9 +13,10 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         Guid sender;
 ///     }
 ///     else if (message_type == CREATURE
-///         || message_type == GAMEOBJECT
-///         || message_type == AUCTION) {
+///         || message_type == GAMEOBJECT) {
 ///         u32 sender_id;
+///     }
+///     else if (message_type == AUCTION) {
 ///         u32 auction_id;
 ///     }
 ///     CString subject;
