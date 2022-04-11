@@ -121,43 +121,27 @@ struct SpellCastTargets {
     }
 }
 
-/* TODO Real names?
 enum ItemClass : u8 {
     CONSUMABLE = 0;
     CONTAINER = 1;
     WEAPON = 2;
-    GEM = 3;
-    ARMOR = 4;
-    REAGENT = 5;
-    PROJECTILE = 6;
-    TRADE_GOODS = 7;
-    GENERIC = 8;
-    RECIPE = 9;
-    MONEY = 10;
-    QUIVER = 11;
-    QUEST = 12;
-    KEY = 13;
-    PERMANENT = 14;
-    JUNK = 15;
-}
-*/
-
-enum ItemClass : u8 {
-    CONSUMABLE = 0;
-    CONTAINER = 1;
-    WEAPON = 2;
+    /* GEM = 3; in vmangos */
     RESERVED_1 = 3;
     ARMOR = 4;
     REAGENT = 5;
     PROJECTILE = 6;
     TRADE_GOODS = 7;
+    /* GENERIC = 8; in vmangos */
     RESERVED_2 = 8;
     RECIPE = 9;
+    /* MONEY = 10; in vmangos */
     RESERVED_3 = 10;
     QUIVER = 11;
     QUEST = 12;
     KEY = 13;
+    /* PERMANENT = 14; in vmangos */
     RESERVED_4 = 14;
+    /* JUNK = 15; in vmangos */
     MISC = 15;
 }
 

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:145`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L145):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:124`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L124):
 /// ```text
 /// enum ItemClass : u8 {
 ///     CONSUMABLE = 0;
