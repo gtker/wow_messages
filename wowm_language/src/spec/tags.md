@@ -90,6 +90,8 @@ Where:
 * `<build>` is the exact build number of the client. Often different between localizations.
 * `*` means all known versions.
 
+Multiple versions separated by a space are allowed.
+
 For example
 ```rust,ignore
 struct S {
@@ -117,6 +119,8 @@ MUST be in the format of a single positive integer.
 
 This value is first sent by the client in `CMD_AUTH_LOGON_CHALLENGE_Client` or `CMD_AUTH_RECONNECT_CHALLENGE_Client`.
 
+Multiple versions separated by a space are allowed.
+
 For example
 ```rust,ignore
 struct S {
@@ -125,6 +129,16 @@ struct S {
     login_versions = "2";
 }
 ```
+
+Or covering more versions
+```rust,ignore
+struct S {
+    u8 basic;
+} {
+    login_versions = "2 3 8";
+}
+```
+Which means that `S` is valid for versions 2, 3, and 8, and no other versions.
 
 ### `test`
 
@@ -227,7 +241,7 @@ For example
 ```rust,ignore
 struct S {
     u8 basic {
-        valid_range = "2 4 6 8 10";
+        valid_values = "2 4 6 8 10";
         comment = "Odd values crash the client.";
     }
 }
