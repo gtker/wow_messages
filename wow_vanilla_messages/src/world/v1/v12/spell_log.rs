@@ -14,7 +14,38 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         u32 unknown1;
 ///         u32 unknown2;
 ///         f32 unknown3;
-///         ELSE-IF-STATEMENT-DOCC: unimplemented
+///     }
+///     else if (effect == ADD_EXTRA_ATTACKS
+///         || effect == INTERRUPT_CAST
+///         || effect == DURABILITY_DAMAGE
+///         || effect == CREATE_ITEM
+///         || effect == FEED_PET
+///         || effect == RESURRECT
+///         || effect == DISPEL
+///         || effect == THREAT
+///         || effect == DISTRACT
+///         || effect == SANCTUARY
+///         || effect == THREAT_ALL
+///         || effect == DISPEL_MECHANIC
+///         || effect == RESURRECT_NEW
+///         || effect == ATTACK_ME
+///         || effect == SKIN_PLAYER_CORPSE
+///         || effect == MODIFY_THREAT_PERCENT
+///         || effect == UNKNOWN126
+///         || effect == DISMISS_PET
+///         || effect == OPEN_LOCK
+///         || effect == OPEN_LOCK_ITEM
+///         || effect == INSTAKILL) {
+///         Guid target2;
+///         u32 unknown4;
+///         Guid target3;
+///         u32 interrupted_spell;
+///         Guid target4;
+///         u32 unknown5;
+///         u32 unknown6;
+///         u32 spell_effect_item_type;
+///         u32 item_target_entry;
+///         Guid target5;
 ///     }
 /// }
 /// ```

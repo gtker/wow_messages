@@ -13,7 +13,14 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     TradeStatus status;
 ///     if (status == BEGIN_TRADE) {
 ///         Guid unknown1;
-///         ELSE-IF-STATEMENT-DOCC: unimplemented
+///     }
+///     else if (status == CLOSE_WINDOW
+///         || status == ONLY_CONJURED
+///         || status == NOT_ON_TAPLIST) {
+///         InventoryResult inventory_result;
+///         u8 target_error;
+///         u32 item_limit_category_id;
+///         u8 slot;
 ///     }
 /// }
 /// ```

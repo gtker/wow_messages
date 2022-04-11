@@ -19,7 +19,22 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         u32 name_length;
 ///         CString monster_name;
 ///         Guid monster_guid;
-///         ELSE-IF-STATEMENT-DOCC: unimplemented
+///     }
+///     else if (chat_type == SAY
+///         || chat_type == PARTY
+///         || chat_type == YELL
+///         || chat_type == MONSTER_SAY
+///         || chat_type == MONSTER_YELL
+///         || chat_type == CHANNEL) {
+///         Guid sender_guid1;
+///         Guid sender_guid2;
+///         Guid sender_guid3;
+///         u32 sender_name_length;
+///         CString sender_name;
+///         Guid target_guid;
+///         CString channel_name;
+///         u32 player_rank;
+///         Guid player_guid;
 ///     } else {
 ///         Guid sender_guid4;
 ///     }

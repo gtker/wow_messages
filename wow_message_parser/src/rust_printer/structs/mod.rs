@@ -246,15 +246,66 @@ fn print_docc_members(s: &mut Writer, e: &Container, field: &StructMember) {
                 print_docc_members(s, e, f);
             }
 
+            s.docc_dec();
+            s.docc_w("}");
+
             if !statement.else_ifs().is_empty() {
-                s.docc("ELSE-IF-STATEMENT-DOCC: unimplemented");
+                s.wln_no_indent("");
+                let equations = {
+                    let mut equations = Vec::new();
+                    for f in statement.else_ifs() {
+                        for c in f.conditional.equations() {
+                            equations.push(c);
+                        }
+                    }
+                    equations
+                };
+                for (i, eq) in equations.iter().enumerate() {
+                    let name = statement.conditional.variable_name();
+                    let (op, cond) = match eq {
+                        Equation::Equals { value } => ("==", value),
+                        Equation::NotEquals { value } => ("!=", value),
+                        Equation::BitwiseAnd { value } => ("&", value),
+                    };
+
+                    if i == 0 {
+                        s.docc_w(format!(
+                            "else if ({name} {op} {cond}",
+                            name = name,
+                            op = op,
+                            cond = cond
+                        ));
+                        s.docc_inc();
+                    } else {
+                        s.docc_w(format!(
+                            "|| {name} {op} {cond}",
+                            name = name,
+                            op = op,
+                            cond = cond
+                        ));
+                    }
+
+                    if i == equations.len() - 1 {
+                        s.wln_no_indent(") {");
+                    } else {
+                        s.wln_no_indent("");
+                    }
+                }
+
+                for f in statement.else_ifs() {
+                    for m in f.members() {
+                        print_docc_members(s, e, m);
+                    }
+                }
+
+                s.docc_dec();
+                s.docc_w("}");
             }
 
-            s.docc_dec();
             if statement.else_statement_members.is_empty() {
-                s.docc("}");
+                s.wln_no_indent("");
             } else {
-                s.docc("} else {");
+                s.wln_no_indent(" else {");
                 s.docc_inc();
 
                 for f in &statement.else_statement_members {

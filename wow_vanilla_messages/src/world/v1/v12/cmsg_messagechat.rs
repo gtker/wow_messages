@@ -25,7 +25,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         || chat_type == AFK
 ///         || chat_type == DND) {
 ///         CString message;
-///         ELSE-IF-STATEMENT-DOCC: unimplemented
+///     }
+///     else if (chat_type == WHISPER
+///         || chat_type == CHANNEL) {
+///         CString target_player;
+///         CString whisper_message;
+///         CString channel;
+///         CString channel_message;
 ///     }
 /// }
 /// ```

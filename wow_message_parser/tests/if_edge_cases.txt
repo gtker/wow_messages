@@ -11,7 +11,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         || t == ONE
 ///         || t == TWO) {
 ///         u8 basic1;
-///         ELSE-IF-STATEMENT-DOCC: unimplemented
+///     }
+///     else if (t == THREE
+///         || t == FOUR
+///         || t == FIVE
+///         || t == SIX) {
+///         u8 basic3;
+///         u8 basic5;
 ///     } else {
 ///         u8 rest;
 ///     }

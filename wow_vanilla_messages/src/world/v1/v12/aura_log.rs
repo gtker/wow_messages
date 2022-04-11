@@ -14,7 +14,18 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         SpellSchool school;
 ///         u32 absorbed;
 ///         u32 resisted;
-///         ELSE-IF-STATEMENT-DOCC: unimplemented
+///     }
+///     else if (aura_type == PERIODIC_HEAL
+///         || aura_type == OBS_MOD_HEALTH
+///         || aura_type == OBS_MOD_MANA
+///         || aura_type == PERIODIC_ENERGIZE
+///         || aura_type == PERIODIC_MANA_LEECH) {
+///         u32 damage2;
+///         u32 misc_value1;
+///         u32 damage3;
+///         u32 misc_value2;
+///         u32 damage;
+///         f32 gain_multiplier;
 ///     }
 /// }
 /// ```

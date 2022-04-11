@@ -18,7 +18,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         if (status_id == WAIT_QUEUE) {
 ///             u32 average_wait_time_in_ms;
 ///             u32 time_in_queue_in_ms;
-///             ELSE-IF-STATEMENT-DOCC: unimplemented
+///         }
+///         else if (status_id == WAIT_JOIN
+///             || status_id == IN_PROGRESS) {
+///             u32 time_to_remove_in_queue_in_ms;
+///             u32 time_to_bg_autoleave_in_ms;
+///             u32 time_to_bg_start_in_ms;
 ///         }
 ///     }
 /// }

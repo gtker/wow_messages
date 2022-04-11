@@ -11,7 +11,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     MailType message_type;
 ///     if (message_type == NORMAL) {
 ///         Guid sender;
-///         ELSE-IF-STATEMENT-DOCC: unimplemented
+///     }
+///     else if (message_type == CREATURE
+///         || message_type == GAMEOBJECT
+///         || message_type == AUCTION) {
+///         u32 sender_id;
+///         u32 auction_id;
 ///     }
 ///     CString subject;
 ///     u32 item_text_id;

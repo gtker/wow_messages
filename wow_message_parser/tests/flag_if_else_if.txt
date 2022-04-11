@@ -9,7 +9,11 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     UpdateFlag flags;
 ///     if (flags & ONE_IF) {
 ///         u8 b_if;
-///         ELSE-IF-STATEMENT-DOCC: unimplemented
+///     }
+///     else if (flags & TWO_ELSEIF
+///         || flags & FOUR_ELSEIF) {
+///         u8 elseif1;
+///         u8 elseif2;
 ///     }
 ///     if (flags & EIGHT_IF) {
 ///         u8 last_if;

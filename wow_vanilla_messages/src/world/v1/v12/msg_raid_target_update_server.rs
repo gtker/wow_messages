@@ -12,7 +12,9 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     RaidTargetUpdateType update_type;
 ///     if (update_type == FULL) {
 ///         RaidTargetUpdate[8] raid_targets;
-///         ELSE-IF-STATEMENT-DOCC: unimplemented
+///     }
+///     else if (update_type == PARTIAL) {
+///         RaidTargetUpdate raid_target;
 ///     }
 /// }
 /// ```

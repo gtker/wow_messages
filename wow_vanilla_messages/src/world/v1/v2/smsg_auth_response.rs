@@ -13,7 +13,9 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         u32 billing_time;
 ///         u8 billing_flags;
 ///         u32 billing_rested;
-///         ELSE-IF-STATEMENT-DOCC: unimplemented
+///     }
+///     else if (result == AUTH_WAIT_QUEUE) {
+///         u32 queue_position;
 ///     }
 /// }
 /// ```
