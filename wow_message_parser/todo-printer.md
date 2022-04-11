@@ -10,7 +10,6 @@
     - {if else if else if}, {if}, {if}, {if} (`SMSG_UPDATE_OBJECT`)
 * Working UpdateMask
   * Tests
-* Test: Flags with ifs for `CMD_REALM_LIST_Server` version 8
 
 # Direct upgrades to Login
 
