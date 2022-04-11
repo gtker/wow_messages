@@ -125,12 +125,14 @@ impl TestCase {
                     value: value.parse().unwrap(),
                     original_string: value.clone(),
                 },
-                Type::Integer(_) => TestValue::Number(
-                    VerifiedContainerValue::new(parse_value(&value).unwrap(), value.clone()),
-                ),
-                Type::Guid | Type::PackedGuid => TestValue::Guid(
-                    VerifiedContainerValue::new(parse_value(&value).unwrap(), value.clone()),
-                ),
+                Type::Integer(_) => TestValue::Number(VerifiedContainerValue::new(
+                    parse_value(&value).unwrap(),
+                    value.clone(),
+                )),
+                Type::Guid | Type::PackedGuid => TestValue::Guid(VerifiedContainerValue::new(
+                    parse_value(&value).unwrap(),
+                    value.clone(),
+                )),
                 Type::Identifier { .. } => {
                     let sub_ty = o.get_object_type_of(ty.rust_str().as_str(), tags);
                     match sub_ty {

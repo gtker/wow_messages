@@ -1,6 +1,6 @@
+use crate::Guid;
 use std::io;
 use std::io::{Read, Write};
-use crate::Guid;
 
 pub struct UpdateObject {
     pub guid: Guid,
@@ -89,41 +89,41 @@ mod test {
     #[test]
     fn most_minimal_example() {
         let b = [
-           2_u8, // Amount of u32 mask blocks that will follow
-           // Mask blocks
-           7, 0, 64, 0,   16, 0, 0, 0,
-           // End of mask blocks
-           4, 0, 0, 0, 0, 0, 0, 0, // OBJECT_FIELD_GUID (4) (notice unpacked u64)
-           25, 0, 0, 0, // OBJECT_FIELD_TYPE (16 | 8 | 1) (TYPE_PLAYER | TYPE_UNIT | TYPE_OBJECT)
-           100, 0, 0, 0, // UNIT_FIELD_HEALTH (100)
-           1, // UNIT_FIELD_BYTES[0] // Race (Human)
-           1, // UNIT_FIELD_BYTES[1] // Class (Warrior)
-           1, // UNIT_FIELD_BYTES[2] // Gender (Female)
-           1, // UNIT_FIELD_BYTES[3] // Power (Rage)
+            2_u8, // Amount of u32 mask blocks that will follow
+            // Mask blocks
+            7, 0, 64, 0, 16, 0, 0, 0, // End of mask blocks
+            4, 0, 0, 0, 0, 0, 0, 0, // OBJECT_FIELD_GUID (4) (notice unpacked u64)
+            25, 0, 0,
+            0, // OBJECT_FIELD_TYPE (16 | 8 | 1) (TYPE_PLAYER | TYPE_UNIT | TYPE_OBJECT)
+            100, 0, 0, 0, // UNIT_FIELD_HEALTH (100)
+            1, // UNIT_FIELD_BYTES[0] // Race (Human)
+            1, // UNIT_FIELD_BYTES[1] // Class (Warrior)
+            1, // UNIT_FIELD_BYTES[2] // Gender (Female)
+            1, // UNIT_FIELD_BYTES[3] // Power (Rage)
         ];
-
     }
 
     #[test]
     fn small_example() {
         let b = [
-           5_u8, // Amount of u32 mask blocks that will follow
-           // Mask blocks
-           23, 0, 64, 16,    28, 0, 0, 0,    0, 0, 0, 0,    0, 0, 0, 0,    24, 0, 0, 0,
-           // End of mask blocks
-           4, 0, 0, 0, 0, 0, 0, 0, // OBJECT_FIELD_GUID (4) (notice unpacked u64)
-           25, 0, 0, 0, // OBJECT_FIELD_TYPE (16 | 8 | 1) (TYPE_PLAYER | TYPE_UNIT | TYPE_OBJECT)
-           0, 0, 128, 63, // Scale (1.0)
-           100, 0, 0, 0, // UNIT_FIELD_HEALTH (100)
-           100, 0, 0, 0, // UNIT_FIELD_MAXHEALTH (100)
-           1, 0, 0, 0, // UNIT_FIELD_LEVEL (1)
-           1, 0, 0, 0, // UNIT_FIELD_FACTIONTEMPLATE (1)
-           1, // UNIT_FIELD_BYTES[0] // Race (Human)
-           1, // UNIT_FIELD_BYTES[1] // Class (Warrior)
-           1, // UNIT_FIELD_BYTES[2] // Gender (Female)
-           1, // UNIT_FIELD_BYTES[3] // Power (Rage)
-           50, 0, 0, 0, // UNIT_FIELD_DISPLAYD (50, Human Female)
-           50, 0, 0, 0, // UNIT_FIELD_NATIVEDISPLAYID (50, Human Female)
+            5_u8, // Amount of u32 mask blocks that will follow
+            // Mask blocks
+            23, 0, 64, 16, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 0, 0, 0,
+            // End of mask blocks
+            4, 0, 0, 0, 0, 0, 0, 0, // OBJECT_FIELD_GUID (4) (notice unpacked u64)
+            25, 0, 0,
+            0, // OBJECT_FIELD_TYPE (16 | 8 | 1) (TYPE_PLAYER | TYPE_UNIT | TYPE_OBJECT)
+            0, 0, 128, 63, // Scale (1.0)
+            100, 0, 0, 0, // UNIT_FIELD_HEALTH (100)
+            100, 0, 0, 0, // UNIT_FIELD_MAXHEALTH (100)
+            1, 0, 0, 0, // UNIT_FIELD_LEVEL (1)
+            1, 0, 0, 0, // UNIT_FIELD_FACTIONTEMPLATE (1)
+            1, // UNIT_FIELD_BYTES[0] // Race (Human)
+            1, // UNIT_FIELD_BYTES[1] // Class (Warrior)
+            1, // UNIT_FIELD_BYTES[2] // Gender (Female)
+            1, // UNIT_FIELD_BYTES[3] // Power (Rage)
+            50, 0, 0, 0, // UNIT_FIELD_DISPLAYD (50, Human Female)
+            50, 0, 0, 0, // UNIT_FIELD_NATIVEDISPLAYID (50, Human Female)
         ];
     }
 }
