@@ -11,13 +11,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// smsg SMSG_SPELL_FAILURE = 0x133 {
 ///     Guid guid;
-///     u32 spell_id;
+///     u32 id;
 ///     SpellCastResult result;
 /// }
 /// ```
 pub struct SMSG_SPELL_FAILURE {
     pub guid: Guid,
-    pub spell_id: u32,
+    pub id: u32,
     pub result: SpellCastResult,
 }
 
@@ -48,15 +48,15 @@ impl WorldMessageBody for SMSG_SPELL_FAILURE {
         // guid: Guid
         let guid = Guid::read(r)?;
 
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         // result: SpellCastResult
         let result = SpellCastResult::read(r)?;
 
         Ok(Self {
             guid,
-            spell_id,
+            id,
             result,
         })
     }
@@ -65,8 +65,8 @@ impl WorldMessageBody for SMSG_SPELL_FAILURE {
         // guid: Guid
         self.guid.write(w)?;
 
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         // result: SpellCastResult
         self.result.write(w)?;
@@ -84,7 +84,7 @@ impl ConstantSized for SMSG_SPELL_FAILURE {
 impl MaximumPossibleSized for SMSG_SPELL_FAILURE {
     fn maximum_possible_size() -> usize {
         8 // guid: Guid
-        + 4 // spell_id: u32
+        + 4 // id: u32
         + SpellCastResult::size() // result: SpellCastResult
     }
 }

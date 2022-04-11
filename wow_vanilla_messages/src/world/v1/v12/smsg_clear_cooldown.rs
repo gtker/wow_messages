@@ -9,12 +9,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_clear_cooldown.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_clear_cooldown.wowm#L3):
 /// ```text
 /// smsg SMSG_CLEAR_COOLDOWN = 0x1DE {
-///     u32 spell_id;
+///     u32 id;
 ///     Guid target_guid;
 /// }
 /// ```
 pub struct SMSG_CLEAR_COOLDOWN {
-    pub spell_id: u32,
+    pub id: u32,
     pub target_guid: Guid,
 }
 
@@ -42,21 +42,21 @@ impl WorldMessageBody for SMSG_CLEAR_COOLDOWN {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         // target_guid: Guid
         let target_guid = Guid::read(r)?;
 
         Ok(Self {
-            spell_id,
+            id,
             target_guid,
         })
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         // target_guid: Guid
         self.target_guid.write(w)?;
@@ -73,7 +73,7 @@ impl ConstantSized for SMSG_CLEAR_COOLDOWN {
 
 impl MaximumPossibleSized for SMSG_CLEAR_COOLDOWN {
     fn maximum_possible_size() -> usize {
-        4 // spell_id: u32
+        4 // id: u32
         + 8 // target_guid: Guid
     }
 }

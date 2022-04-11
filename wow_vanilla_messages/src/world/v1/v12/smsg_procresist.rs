@@ -12,14 +12,14 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// smsg SMSG_PROCRESIST = 0x260 {
 ///     Guid guid;
 ///     Guid target_guid;
-///     u32 spell_id;
+///     u32 id;
 ///     LogFormat log_format;
 /// }
 /// ```
 pub struct SMSG_PROCRESIST {
     pub guid: Guid,
     pub target_guid: Guid,
-    pub spell_id: u32,
+    pub id: u32,
     pub log_format: LogFormat,
 }
 
@@ -53,8 +53,8 @@ impl WorldMessageBody for SMSG_PROCRESIST {
         // target_guid: Guid
         let target_guid = Guid::read(r)?;
 
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         // log_format: LogFormat
         let log_format = LogFormat::read(r)?;
@@ -62,7 +62,7 @@ impl WorldMessageBody for SMSG_PROCRESIST {
         Ok(Self {
             guid,
             target_guid,
-            spell_id,
+            id,
             log_format,
         })
     }
@@ -74,8 +74,8 @@ impl WorldMessageBody for SMSG_PROCRESIST {
         // target_guid: Guid
         self.target_guid.write(w)?;
 
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         // log_format: LogFormat
         self.log_format.write(w)?;
@@ -94,7 +94,7 @@ impl MaximumPossibleSized for SMSG_PROCRESIST {
     fn maximum_possible_size() -> usize {
         8 // guid: Guid
         + 8 // target_guid: Guid
-        + 4 // spell_id: u32
+        + 4 // id: u32
         + LogFormat::size() // log_format: LogFormat
     }
 }

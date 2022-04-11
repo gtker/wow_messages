@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_SPELLLOGMISS = 0x024B {
-    u32 spell_id;
+    Spell id;
     Guid caster_guid;
     u8 unknown1 {
         comment = "cmangos/mangoszero: can be 0 or 1";

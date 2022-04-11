@@ -11,13 +11,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// smsg SMSG_TRAINER_BUY_FAILED = 0x1B4 {
 ///     Guid guid;
-///     u32 spell_id;
+///     u32 id;
 ///     TrainingFailureReason error;
 /// }
 /// ```
 pub struct SMSG_TRAINER_BUY_FAILED {
     pub guid: Guid,
-    pub spell_id: u32,
+    pub id: u32,
     pub error: TrainingFailureReason,
 }
 
@@ -48,15 +48,15 @@ impl WorldMessageBody for SMSG_TRAINER_BUY_FAILED {
         // guid: Guid
         let guid = Guid::read(r)?;
 
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         // error: TrainingFailureReason
         let error = TrainingFailureReason::read(r)?;
 
         Ok(Self {
             guid,
-            spell_id,
+            id,
             error,
         })
     }
@@ -65,8 +65,8 @@ impl WorldMessageBody for SMSG_TRAINER_BUY_FAILED {
         // guid: Guid
         self.guid.write(w)?;
 
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         // error: TrainingFailureReason
         self.error.write(w)?;
@@ -84,7 +84,7 @@ impl ConstantSized for SMSG_TRAINER_BUY_FAILED {
 impl MaximumPossibleSized for SMSG_TRAINER_BUY_FAILED {
     fn maximum_possible_size() -> usize {
         8 // guid: Guid
-        + 4 // spell_id: u32
+        + 4 // id: u32
         + TrainingFailureReason::size() // error: TrainingFailureReason
     }
 }

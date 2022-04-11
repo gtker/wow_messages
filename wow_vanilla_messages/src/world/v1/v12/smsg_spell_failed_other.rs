@@ -10,12 +10,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// smsg SMSG_SPELL_FAILED_OTHER = 0x2A6 {
 ///     Guid caster_guid;
-///     u32 spell_id;
+///     u32 id;
 /// }
 /// ```
 pub struct SMSG_SPELL_FAILED_OTHER {
     pub caster_guid: Guid,
-    pub spell_id: u32,
+    pub id: u32,
 }
 
 impl WorldServerMessageWrite for SMSG_SPELL_FAILED_OTHER {
@@ -45,12 +45,12 @@ impl WorldMessageBody for SMSG_SPELL_FAILED_OTHER {
         // caster_guid: Guid
         let caster_guid = Guid::read(r)?;
 
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         Ok(Self {
             caster_guid,
-            spell_id,
+            id,
         })
     }
 
@@ -58,8 +58,8 @@ impl WorldMessageBody for SMSG_SPELL_FAILED_OTHER {
         // caster_guid: Guid
         self.caster_guid.write(w)?;
 
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         Ok(())
     }
@@ -74,7 +74,7 @@ impl ConstantSized for SMSG_SPELL_FAILED_OTHER {
 impl MaximumPossibleSized for SMSG_SPELL_FAILED_OTHER {
     fn maximum_possible_size() -> usize {
         8 // caster_guid: Guid
-        + 4 // spell_id: u32
+        + 4 // id: u32
     }
 }
 

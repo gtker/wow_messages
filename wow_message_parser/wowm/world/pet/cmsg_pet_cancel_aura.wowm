@@ -2,6 +2,6 @@
 
 cmsg CMSG_PET_CANCEL_AURA = 0x026B {
     Guid guid;
-    u32 spell_id;
+    Spell id;
 }
 

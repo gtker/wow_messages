@@ -11,14 +11,14 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// smsg SMSG_SPELLORDAMAGE_IMMUNE = 0x263 {
 ///     Guid caster_guid;
 ///     Guid target_guid;
-///     u32 spell_id;
+///     u32 id;
 ///     u8 unknown1;
 /// }
 /// ```
 pub struct SMSG_SPELLORDAMAGE_IMMUNE {
     pub caster_guid: Guid,
     pub target_guid: Guid,
-    pub spell_id: u32,
+    pub id: u32,
     pub unknown1: u8,
 }
 
@@ -52,8 +52,8 @@ impl WorldMessageBody for SMSG_SPELLORDAMAGE_IMMUNE {
         // target_guid: Guid
         let target_guid = Guid::read(r)?;
 
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;
@@ -61,7 +61,7 @@ impl WorldMessageBody for SMSG_SPELLORDAMAGE_IMMUNE {
         Ok(Self {
             caster_guid,
             target_guid,
-            spell_id,
+            id,
             unknown1,
         })
     }
@@ -73,8 +73,8 @@ impl WorldMessageBody for SMSG_SPELLORDAMAGE_IMMUNE {
         // target_guid: Guid
         self.target_guid.write(w)?;
 
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -93,7 +93,7 @@ impl MaximumPossibleSized for SMSG_SPELLORDAMAGE_IMMUNE {
     fn maximum_possible_size() -> usize {
         8 // caster_guid: Guid
         + 8 // target_guid: Guid
-        + 4 // spell_id: u32
+        + 4 // id: u32
         + 1 // unknown1: u8
     }
 }

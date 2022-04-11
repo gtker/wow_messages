@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_PET_CAST_FAILED = 0x0138 {
-    u32 spell_id;
+    Spell id;
     u8 unknown1 {
         comment = "vmangos sets to 2 and cmangos sets to 0.";
     }

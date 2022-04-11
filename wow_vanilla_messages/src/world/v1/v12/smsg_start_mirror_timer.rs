@@ -14,7 +14,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     u32 duration;
 ///     u32 scale;
 ///     u8 is_frozen;
-///     u32 spell_id;
+///     u32 id;
 /// }
 /// ```
 pub struct SMSG_START_MIRROR_TIMER {
@@ -23,7 +23,7 @@ pub struct SMSG_START_MIRROR_TIMER {
     pub duration: u32,
     pub scale: u32,
     pub is_frozen: u8,
-    pub spell_id: u32,
+    pub id: u32,
 }
 
 impl WorldServerMessageWrite for SMSG_START_MIRROR_TIMER {
@@ -65,8 +65,8 @@ impl WorldMessageBody for SMSG_START_MIRROR_TIMER {
         // is_frozen: u8
         let is_frozen = crate::util::read_u8_le(r)?;
 
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         Ok(Self {
             timer,
@@ -74,7 +74,7 @@ impl WorldMessageBody for SMSG_START_MIRROR_TIMER {
             duration,
             scale,
             is_frozen,
-            spell_id,
+            id,
         })
     }
 
@@ -94,8 +94,8 @@ impl WorldMessageBody for SMSG_START_MIRROR_TIMER {
         // is_frozen: u8
         w.write_all(&self.is_frozen.to_le_bytes())?;
 
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         Ok(())
     }
@@ -114,7 +114,7 @@ impl MaximumPossibleSized for SMSG_START_MIRROR_TIMER {
         + 4 // duration: u32
         + 4 // scale: u32
         + 1 // is_frozen: u8
-        + 4 // spell_id: u32
+        + 4 // id: u32
     }
 }
 

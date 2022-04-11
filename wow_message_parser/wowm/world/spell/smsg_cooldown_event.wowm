@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_COOLDOWN_EVENT = 0x0135 {
-    u32 spell_id;
+    Spell id;
     Guid guid;
 }
 

@@ -10,12 +10,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// cmsg CMSG_TRAINER_BUY_SPELL = 0x1B2 {
 ///     Guid guid;
-///     u32 spell_id;
+///     u32 id;
 /// }
 /// ```
 pub struct CMSG_TRAINER_BUY_SPELL {
     pub guid: Guid,
-    pub spell_id: u32,
+    pub id: u32,
 }
 
 impl WorldClientMessageWrite for CMSG_TRAINER_BUY_SPELL {
@@ -45,12 +45,12 @@ impl WorldMessageBody for CMSG_TRAINER_BUY_SPELL {
         // guid: Guid
         let guid = Guid::read(r)?;
 
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         Ok(Self {
             guid,
-            spell_id,
+            id,
         })
     }
 
@@ -58,8 +58,8 @@ impl WorldMessageBody for CMSG_TRAINER_BUY_SPELL {
         // guid: Guid
         self.guid.write(w)?;
 
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         Ok(())
     }
@@ -74,7 +74,7 @@ impl ConstantSized for CMSG_TRAINER_BUY_SPELL {
 impl MaximumPossibleSized for CMSG_TRAINER_BUY_SPELL {
     fn maximum_possible_size() -> usize {
         8 // guid: Guid
-        + 4 // spell_id: u32
+        + 4 // id: u32
     }
 }
 

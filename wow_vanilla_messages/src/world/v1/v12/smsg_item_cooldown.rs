@@ -10,12 +10,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// smsg SMSG_ITEM_COOLDOWN = 0xB0 {
 ///     Guid guid;
-///     u32 spell_id;
+///     u32 id;
 /// }
 /// ```
 pub struct SMSG_ITEM_COOLDOWN {
     pub guid: Guid,
-    pub spell_id: u32,
+    pub id: u32,
 }
 
 impl WorldServerMessageWrite for SMSG_ITEM_COOLDOWN {
@@ -45,12 +45,12 @@ impl WorldMessageBody for SMSG_ITEM_COOLDOWN {
         // guid: Guid
         let guid = Guid::read(r)?;
 
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         Ok(Self {
             guid,
-            spell_id,
+            id,
         })
     }
 
@@ -58,8 +58,8 @@ impl WorldMessageBody for SMSG_ITEM_COOLDOWN {
         // guid: Guid
         self.guid.write(w)?;
 
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         Ok(())
     }
@@ -74,7 +74,7 @@ impl ConstantSized for SMSG_ITEM_COOLDOWN {
 impl MaximumPossibleSized for SMSG_ITEM_COOLDOWN {
     fn maximum_possible_size() -> usize {
         8 // guid: Guid
-        + 4 // spell_id: u32
+        + 4 // id: u32
     }
 }
 

@@ -10,7 +10,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// smsg SMSG_SPELLHEALLOG = 0x150 {
 ///     PackedGuid victim_guid;
 ///     PackedGuid caster_guid;
-///     u32 spell_id;
+///     u32 id;
 ///     u32 damage;
 ///     u8 critical;
 /// }
@@ -18,7 +18,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 pub struct SMSG_SPELLHEALLOG {
     pub victim_guid: Guid,
     pub caster_guid: Guid,
-    pub spell_id: u32,
+    pub id: u32,
     pub damage: u32,
     pub critical: u8,
 }
@@ -53,8 +53,8 @@ impl WorldMessageBody for SMSG_SPELLHEALLOG {
         // caster_guid: PackedGuid
         let caster_guid = Guid::read_packed(r)?;
 
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         // damage: u32
         let damage = crate::util::read_u32_le(r)?;
@@ -65,7 +65,7 @@ impl WorldMessageBody for SMSG_SPELLHEALLOG {
         Ok(Self {
             victim_guid,
             caster_guid,
-            spell_id,
+            id,
             damage,
             critical,
         })
@@ -78,8 +78,8 @@ impl WorldMessageBody for SMSG_SPELLHEALLOG {
         // caster_guid: PackedGuid
         self.caster_guid.write_packed(w)?;
 
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         // damage: u32
         w.write_all(&self.damage.to_le_bytes())?;
@@ -95,7 +95,7 @@ impl VariableSized for SMSG_SPELLHEALLOG {
     fn size(&self) -> usize {
         self.victim_guid.size() // victim_guid: PackedGuid
         + self.caster_guid.size() // caster_guid: PackedGuid
-        + 4 // spell_id: u32
+        + 4 // id: u32
         + 4 // damage: u32
         + 1 // critical: u8
     }
@@ -105,7 +105,7 @@ impl MaximumPossibleSized for SMSG_SPELLHEALLOG {
     fn maximum_possible_size() -> usize {
         9 // victim_guid: PackedGuid
         + 9 // caster_guid: PackedGuid
-        + 4 // spell_id: u32
+        + 4 // id: u32
         + 4 // damage: u32
         + 1 // critical: u8
     }

@@ -10,13 +10,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// cmsg CMSG_PET_SPELL_AUTOCAST = 0x2F3 {
 ///     Guid guid;
-///     u32 spell_id;
+///     u32 id;
 ///     u8 enabled;
 /// }
 /// ```
 pub struct CMSG_PET_SPELL_AUTOCAST {
     pub guid: Guid,
-    pub spell_id: u32,
+    pub id: u32,
     pub enabled: u8,
 }
 
@@ -47,15 +47,15 @@ impl WorldMessageBody for CMSG_PET_SPELL_AUTOCAST {
         // guid: Guid
         let guid = Guid::read(r)?;
 
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         // enabled: u8
         let enabled = crate::util::read_u8_le(r)?;
 
         Ok(Self {
             guid,
-            spell_id,
+            id,
             enabled,
         })
     }
@@ -64,8 +64,8 @@ impl WorldMessageBody for CMSG_PET_SPELL_AUTOCAST {
         // guid: Guid
         self.guid.write(w)?;
 
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         // enabled: u8
         w.write_all(&self.enabled.to_le_bytes())?;
@@ -83,7 +83,7 @@ impl ConstantSized for CMSG_PET_SPELL_AUTOCAST {
 impl MaximumPossibleSized for CMSG_PET_SPELL_AUTOCAST {
     fn maximum_possible_size() -> usize {
         8 // guid: Guid
-        + 4 // spell_id: u32
+        + 4 // id: u32
         + 1 // enabled: u8
     }
 }

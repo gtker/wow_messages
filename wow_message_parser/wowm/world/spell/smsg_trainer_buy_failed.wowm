@@ -17,7 +17,7 @@ enum TrainingFailureReason : u32
 
 smsg SMSG_TRAINER_BUY_FAILED = 0x01B4 {
     Guid guid;
-    u32 spell_id;
+    Spell id;
     TrainingFailureReason error;
 }
 

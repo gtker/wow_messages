@@ -2,7 +2,7 @@
 
 smsg SMSG_SPELL_FAILURE = 0x0133 {
     Guid guid;
-    u32 spell_id;
+    Spell id;
     SpellCastResult result;
 }
 

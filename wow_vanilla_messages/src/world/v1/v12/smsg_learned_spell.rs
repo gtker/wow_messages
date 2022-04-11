@@ -8,11 +8,11 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_learned_spell.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_learned_spell.wowm#L3):
 /// ```text
 /// smsg SMSG_LEARNED_SPELL = 0x12B {
-///     u32 spell_id;
+///     u32 id;
 /// }
 /// ```
 pub struct SMSG_LEARNED_SPELL {
-    pub spell_id: u32,
+    pub id: u32,
 }
 
 impl WorldServerMessageWrite for SMSG_LEARNED_SPELL {
@@ -39,17 +39,17 @@ impl WorldMessageBody for SMSG_LEARNED_SPELL {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         Ok(Self {
-            spell_id,
+            id,
         })
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         Ok(())
     }
@@ -63,7 +63,7 @@ impl ConstantSized for SMSG_LEARNED_SPELL {
 
 impl MaximumPossibleSized for SMSG_LEARNED_SPELL {
     fn maximum_possible_size() -> usize {
-        4 // spell_id: u32
+        4 // id: u32
     }
 }
 

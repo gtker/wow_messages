@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 struct SpellCooldownStatus {
-    u32 spell_id;
+    Spell id;
     u32 cooldown_time_in_msecs;
 }
 

@@ -9,7 +9,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelllogmiss.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelllogmiss.wowm#L3):
 /// ```text
 /// smsg SMSG_SPELLLOGMISS = 0x24B {
-///     u32 spell_id;
+///     u32 id;
 ///     Guid caster_guid;
 ///     u8 unknown1;
 ///     u32 amount_of_targets;
@@ -17,7 +17,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct SMSG_SPELLLOGMISS {
-    pub spell_id: u32,
+    pub id: u32,
     pub caster_guid: Guid,
     pub unknown1: u8,
     pub amount_of_targets: u32,
@@ -48,8 +48,8 @@ impl WorldMessageBody for SMSG_SPELLLOGMISS {
     type Error = SMSG_SPELLLOGMISSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(r)?;
+        // id: u32
+        let id = crate::util::read_u32_le(r)?;
 
         // caster_guid: Guid
         let caster_guid = Guid::read(r)?;
@@ -67,7 +67,7 @@ impl WorldMessageBody for SMSG_SPELLLOGMISS {
         }
 
         Ok(Self {
-            spell_id,
+            id,
             caster_guid,
             unknown1,
             amount_of_targets,
@@ -76,8 +76,8 @@ impl WorldMessageBody for SMSG_SPELLLOGMISS {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spell_id: u32
-        w.write_all(&self.spell_id.to_le_bytes())?;
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
 
         // caster_guid: Guid
         self.caster_guid.write(w)?;
@@ -99,7 +99,7 @@ impl WorldMessageBody for SMSG_SPELLLOGMISS {
 
 impl VariableSized for SMSG_SPELLLOGMISS {
     fn size(&self) -> usize {
-        4 // spell_id: u32
+        4 // id: u32
         + 8 // caster_guid: Guid
         + 1 // unknown1: u8
         + 4 // amount_of_targets: u32
@@ -109,7 +109,7 @@ impl VariableSized for SMSG_SPELLLOGMISS {
 
 impl MaximumPossibleSized for SMSG_SPELLLOGMISS {
     fn maximum_possible_size() -> usize {
-        4 // spell_id: u32
+        4 // id: u32
         + 8 // caster_guid: Guid
         + 1 // unknown1: u8
         + 4 // amount_of_targets: u32
