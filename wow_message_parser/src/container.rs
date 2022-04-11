@@ -9,6 +9,7 @@ use crate::parser::types::{
 use crate::rust_printer::complex_print::{DefinerType, RustStructComplexTree};
 use crate::rust_printer::new_enums::parse::add_to_statement;
 use crate::rust_printer::new_enums::NewIfStatement;
+use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
     LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
     WORLD_SERVER_MESSAGE_ENUM_NAME,
@@ -50,11 +51,16 @@ pub struct Container {
     tests: Vec<TestCase>,
     file_info: FileInfo,
     only_has_io_error: Option<bool>,
+    rust_object_view: Option<RustObject>,
 }
 
 impl Container {
     pub fn append_tests(&mut self, mut t: Vec<TestCase>) {
         self.tests.append(&mut t);
+    }
+
+    pub fn set_rust_object(&mut self, object: RustObject) {
+        self.rust_object_view = Some(object);
     }
 
     pub fn type_definition_in_same_scope(&self, variable_name: &str) -> bool {
@@ -727,6 +733,7 @@ impl Container {
             tests: vec![],
             file_info,
             only_has_io_error: None,
+            rust_object_view: None,
         }
     }
 

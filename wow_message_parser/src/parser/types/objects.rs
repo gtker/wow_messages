@@ -5,6 +5,7 @@ use crate::parser::stats::stats_for_1_12;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, ObjectType};
+use crate::rust_printer::rust_view::create_rust_object;
 use crate::test_case::TestCase;
 
 #[derive(Debug, Clone)]
@@ -50,7 +51,7 @@ impl Objects {
             return d;
         }
 
-        panic!("unable to find definer");
+        panic!("unable to find definer: '{}'", ty_name);
     }
 
     pub fn object_has_only_io_errors(&self, variable_name: &str, finder_tags: &Tags) -> bool {
@@ -295,6 +296,13 @@ impl Objects {
         v
     }
 
+    pub fn add_rust_views(&mut self) {
+        let temp = self.clone();
+        for e in self.all_containers_mut() {
+            e.set_rust_object(create_rust_object(e, &temp));
+        }
+    }
+
     pub fn check_values(&mut self) {
         let c = self.clone();
         for s in &mut self.tests {
@@ -311,6 +319,8 @@ impl Objects {
         }
 
         Self::check_versions(self.all_containers(), self.all_definers());
+
+        self.add_rust_views();
 
         self.tests = tests;
     }

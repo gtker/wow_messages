@@ -3,6 +3,7 @@ mod enums;
 mod flags;
 pub mod new_enums;
 mod opcodes;
+pub mod rust_view;
 mod structs;
 
 pub use enums::print_enum;
