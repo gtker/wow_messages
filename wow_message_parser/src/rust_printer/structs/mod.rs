@@ -1,4 +1,4 @@
-use crate::container::{Container, ContainerType, Equation, StructMember};
+use crate::container::{Container, ContainerType, Equation, IfStatement, StructMember};
 use crate::file_utils::get_import_path;
 use crate::parser::types::{ArraySize, ArrayType, ObjectType, Objects, Type};
 use crate::rust_printer::{
@@ -195,6 +195,42 @@ fn print_declaration(s: &mut Writer, e: &Container) {
     });
 }
 
+fn print_docc_if_statement(s: &mut Writer, statement: &IfStatement, condition: &str) {
+    let equations = statement.conditional.equations();
+    for (i, eq) in equations.iter().enumerate() {
+        let name = statement.conditional.variable_name();
+        let (op, cond) = match eq {
+            Equation::Equals { value } => ("==", value),
+            Equation::NotEquals { value } => ("!=", value),
+            Equation::BitwiseAnd { value } => ("&", value),
+        };
+
+        if i == 0 {
+            s.docc_w(format!(
+                "{condition} ({name} {op} {cond}",
+                condition = condition,
+                name = name,
+                op = op,
+                cond = cond
+            ));
+            s.docc_inc();
+        } else {
+            s.docc_w(format!(
+                "|| {name} {op} {cond}",
+                name = name,
+                op = op,
+                cond = cond
+            ));
+        }
+
+        if i == equations.len() - 1 {
+            s.wln_no_indent(") {");
+        } else {
+            s.wln_no_indent("");
+        }
+    }
+}
+
 fn print_docc_members(s: &mut Writer, e: &Container, field: &StructMember) {
     match field {
         StructMember::Definition(d) => {
@@ -209,38 +245,7 @@ fn print_docc_members(s: &mut Writer, e: &Container, field: &StructMember) {
             ));
         }
         StructMember::IfStatement(statement) => {
-            let equations = statement.conditional.equations();
-            for (i, eq) in equations.iter().enumerate() {
-                let name = statement.conditional.variable_name();
-                let (op, cond) = match eq {
-                    Equation::Equals { value } => ("==", value),
-                    Equation::NotEquals { value } => ("!=", value),
-                    Equation::BitwiseAnd { value } => ("&", value),
-                };
-
-                if i == 0 {
-                    s.docc_w(format!(
-                        "if ({name} {op} {cond}",
-                        name = name,
-                        op = op,
-                        cond = cond
-                    ));
-                    s.docc_inc();
-                } else {
-                    s.docc_w(format!(
-                        "|| {name} {op} {cond}",
-                        name = name,
-                        op = op,
-                        cond = cond
-                    ));
-                }
-
-                if i == equations.len() - 1 {
-                    s.wln_no_indent(") {");
-                } else {
-                    s.wln_no_indent("");
-                }
-            }
+            print_docc_if_statement(s, statement, "if");
 
             for f in statement.members() {
                 print_docc_members(s, e, f);
@@ -251,38 +256,8 @@ fn print_docc_members(s: &mut Writer, e: &Container, field: &StructMember) {
 
             if !statement.else_ifs().is_empty() {
                 for else_if in statement.else_ifs() {
-                    let equations = else_if.conditional.equations();
-                    for (i, eq) in equations.iter().enumerate() {
-                        let name = statement.conditional.variable_name();
-                        let (op, cond) = match eq {
-                            Equation::Equals { value } => ("==", value),
-                            Equation::NotEquals { value } => ("!=", value),
-                            Equation::BitwiseAnd { value } => ("&", value),
-                        };
+                    print_docc_if_statement(s, else_if, "else if");
 
-                        if i == 0 {
-                            s.docc_w(format!(
-                                "else if ({name} {op} {cond}",
-                                name = name,
-                                op = op,
-                                cond = cond
-                            ));
-                            s.docc_inc();
-                        } else {
-                            s.docc_w(format!(
-                                "|| {name} {op} {cond}",
-                                name = name,
-                                op = op,
-                                cond = cond
-                            ));
-                        }
-
-                        if i == equations.len() - 1 {
-                            s.wln_no_indent(") {");
-                        } else {
-                            s.wln_no_indent("");
-                        }
-                    }
                     for m in else_if.members() {
                         print_docc_members(s, e, m);
                     }
