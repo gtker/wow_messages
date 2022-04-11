@@ -8,6 +8,7 @@ use pest_derive::Parser;
 
 use enumerator::DefinerField;
 use types::objects::Objects;
+use types::tags::{Tag, Tags};
 
 use crate::container::{
     Condition, Conditional, Container, ContainerType, IfStatement, OptionalStatement, StructMember,
@@ -15,7 +16,7 @@ use crate::container::{
 };
 use crate::file_info::FileInfo;
 use crate::parser::enumerator::{Definer, SelfValueDefinerField};
-use crate::parser::types::{Tag, Tags, Type};
+use crate::parser::types::Type;
 use crate::parser::utility::parse_value;
 use crate::test_case::{TestCase, TestCaseMember, TestCaseValueInitial};
 use crate::ENUM_SELF_VALUE_FIELD;

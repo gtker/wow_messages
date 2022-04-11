@@ -1,7 +1,8 @@
 use crate::container::Container;
 use crate::file_info::FileInfo;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::{ArraySize, ArrayType, ObjectType, Tags, Type, VerifiedContainerValue};
+use crate::parser::types::tags::Tags;
+use crate::parser::types::{ArraySize, ArrayType, ObjectType, Type, VerifiedContainerValue};
 use crate::parser::utility::parse_value;
 
 #[derive(Debug, Clone)]

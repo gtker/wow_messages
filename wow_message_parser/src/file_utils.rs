@@ -1,10 +1,10 @@
+use std::io::Write;
 use std::path::Path;
 
 use heck::SnakeCase;
 
-use crate::parser::types::{LoginVersion, Tags, WorldVersion};
+use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::rust_printer::Writer;
-use std::io::Write;
 
 pub const LOGIN_DIR: &str = "wow_login_messages/src/logon";
 pub const WORLD_DIR: &str = "wow_vanilla_messages/src/world";

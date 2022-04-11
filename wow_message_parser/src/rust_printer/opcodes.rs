@@ -1,6 +1,6 @@
 use crate::container::{Container, ContainerType};
 use crate::file_utils::{get_import_path, get_login_logon_version_path, get_world_version_path};
-use crate::parser::types::{LoginVersion, WorldVersion};
+use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
     Writer, WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };

@@ -1,6 +1,6 @@
 use crate::container::ContainerType;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::Tags;
+use crate::parser::types::tags::Tags;
 use crate::VERSIONS;
 
 pub fn stats_for_1_12(o: &Objects) {

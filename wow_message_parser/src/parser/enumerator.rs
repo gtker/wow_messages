@@ -1,5 +1,6 @@
 use crate::file_info::FileInfo;
-use crate::parser::types::{IntegerType, Tags};
+use crate::parser::types::tags::Tags;
+use crate::parser::types::IntegerType;
 use crate::parser::utility;
 use crate::ENUM_SELF_VALUE_FIELD;
 

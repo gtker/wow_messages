@@ -2,9 +2,8 @@ use crate::container::{Container, StructMember};
 use crate::file_info::FileInfo;
 use crate::parser::enumerator::Definer;
 use crate::parser::stats::stats_for_1_12;
-use crate::parser::types::{
-    ArraySize, ArrayType, LoginVersion, ObjectType, Tags, Type, WorldVersion,
-};
+use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use crate::parser::types::{ArraySize, ArrayType, ObjectType, Type};
 use crate::test_case::TestCase;
 
 #[derive(Debug, Clone)]
