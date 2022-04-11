@@ -1,8 +1,8 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_LOOT_MASTER_GIVE = 0x02A3 {
-    u64 loot_guid;
+    Guid loot_guid;
     u8 slot_id;
-    u64 target_player_guid;
+    Guid target_player_guid;
 }
 

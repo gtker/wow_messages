@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_PLAYER_LOGIN = 0x3D {
-    u64 guid;
+    Guid guid;
 }
 

@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -9,12 +10,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// cmsg CMSG_PETITION_QUERY = 0x1C6 {
 ///     u32 guild_guid;
-///     u64 petition_guid;
+///     Guid petition_guid;
 /// }
 /// ```
 pub struct CMSG_PETITION_QUERY {
     pub guild_guid: u32,
-    pub petition_guid: u64,
+    pub petition_guid: Guid,
 }
 
 impl WorldClientMessageWrite for CMSG_PETITION_QUERY {
@@ -44,8 +45,8 @@ impl WorldMessageBody for CMSG_PETITION_QUERY {
         // guild_guid: u32
         let guild_guid = crate::util::read_u32_le(r)?;
 
-        // petition_guid: u64
-        let petition_guid = crate::util::read_u64_le(r)?;
+        // petition_guid: Guid
+        let petition_guid = Guid::read(r)?;
 
         Ok(Self {
             guild_guid,
@@ -57,8 +58,8 @@ impl WorldMessageBody for CMSG_PETITION_QUERY {
         // guild_guid: u32
         w.write_all(&self.guild_guid.to_le_bytes())?;
 
-        // petition_guid: u64
-        w.write_all(&self.petition_guid.to_le_bytes())?;
+        // petition_guid: Guid
+        self.petition_guid.write(w)?;
 
         Ok(())
     }
@@ -73,7 +74,7 @@ impl ConstantSized for CMSG_PETITION_QUERY {
 impl MaximumPossibleSized for CMSG_PETITION_QUERY {
     fn maximum_possible_size() -> usize {
         4 // guild_guid: u32
-        + 8 // petition_guid: u64
+        + 8 // petition_guid: Guid
     }
 }
 

@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,13 +9,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/duel/smsg_duel_requested.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/duel/smsg_duel_requested.wowm#L3):
 /// ```text
 /// smsg SMSG_DUEL_REQUESTED = 0x167 {
-///     u64 initiator_guid;
-///     u64 target_guid;
+///     Guid initiator_guid;
+///     Guid target_guid;
 /// }
 /// ```
 pub struct SMSG_DUEL_REQUESTED {
-    pub initiator_guid: u64,
-    pub target_guid: u64,
+    pub initiator_guid: Guid,
+    pub target_guid: Guid,
 }
 
 impl WorldServerMessageWrite for SMSG_DUEL_REQUESTED {
@@ -41,11 +42,11 @@ impl WorldMessageBody for SMSG_DUEL_REQUESTED {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // initiator_guid: u64
-        let initiator_guid = crate::util::read_u64_le(r)?;
+        // initiator_guid: Guid
+        let initiator_guid = Guid::read(r)?;
 
-        // target_guid: u64
-        let target_guid = crate::util::read_u64_le(r)?;
+        // target_guid: Guid
+        let target_guid = Guid::read(r)?;
 
         Ok(Self {
             initiator_guid,
@@ -54,11 +55,11 @@ impl WorldMessageBody for SMSG_DUEL_REQUESTED {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // initiator_guid: u64
-        w.write_all(&self.initiator_guid.to_le_bytes())?;
+        // initiator_guid: Guid
+        self.initiator_guid.write(w)?;
 
-        // target_guid: u64
-        w.write_all(&self.target_guid.to_le_bytes())?;
+        // target_guid: Guid
+        self.target_guid.write(w)?;
 
         Ok(())
     }
@@ -72,8 +73,8 @@ impl ConstantSized for SMSG_DUEL_REQUESTED {
 
 impl MaximumPossibleSized for SMSG_DUEL_REQUESTED {
     fn maximum_possible_size() -> usize {
-        8 // initiator_guid: u64
-        + 8 // target_guid: u64
+        8 // initiator_guid: Guid
+        + 8 // target_guid: Guid
     }
 }
 

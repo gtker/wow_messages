@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_PET_UNLEARN = 0x02F0 {
-    u64 pet_guid;
+    Guid pet_guid;
 }
 

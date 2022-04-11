@@ -1,9 +1,9 @@
 #tag_all versions "1.12";
 
 smsg SMSG_LOOT_ROLL = 0x02A2 {
-    u64 creature_guid;
+    Guid creature_guid;
     u32 loot_slot;
-    u64 item_guid;
+    Guid item_guid;
     u32 item_id;
     u32 item_random_suffix {
         comment = "vmangos/mangoszero: not used ?";

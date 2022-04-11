@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{Emote, EmoteError};
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -11,13 +12,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// cmsg CMSG_TEXT_EMOTE = 0x104 {
 ///     u32 text_emote;
 ///     Emote emote;
-///     u64 guid;
+///     Guid guid;
 /// }
 /// ```
 pub struct CMSG_TEXT_EMOTE {
     pub text_emote: u32,
     pub emote: Emote,
-    pub guid: u64,
+    pub guid: Guid,
 }
 
 impl WorldClientMessageWrite for CMSG_TEXT_EMOTE {
@@ -50,8 +51,8 @@ impl WorldMessageBody for CMSG_TEXT_EMOTE {
         // emote: Emote
         let emote = Emote::read(r)?;
 
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         Ok(Self {
             text_emote,
@@ -67,8 +68,8 @@ impl WorldMessageBody for CMSG_TEXT_EMOTE {
         // emote: Emote
         self.emote.write(w)?;
 
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         Ok(())
     }
@@ -84,7 +85,7 @@ impl MaximumPossibleSized for CMSG_TEXT_EMOTE {
     fn maximum_possible_size() -> usize {
         4 // text_emote: u32
         + Emote::size() // emote: Emote
-        + 8 // guid: u64
+        + 8 // guid: Guid
     }
 }
 

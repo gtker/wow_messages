@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -12,7 +13,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     u32 create_id;
 ///     u32 kill_count;
 ///     u32 required_kill_count;
-///     u64 guid;
+///     Guid guid;
 /// }
 /// ```
 pub struct SMSG_QUESTUPDATE_ADD_KILL {
@@ -20,7 +21,7 @@ pub struct SMSG_QUESTUPDATE_ADD_KILL {
     pub create_id: u32,
     pub kill_count: u32,
     pub required_kill_count: u32,
-    pub guid: u64,
+    pub guid: Guid,
 }
 
 impl WorldServerMessageWrite for SMSG_QUESTUPDATE_ADD_KILL {
@@ -59,8 +60,8 @@ impl WorldMessageBody for SMSG_QUESTUPDATE_ADD_KILL {
         // required_kill_count: u32
         let required_kill_count = crate::util::read_u32_le(r)?;
 
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         Ok(Self {
             quest_id,
@@ -84,8 +85,8 @@ impl WorldMessageBody for SMSG_QUESTUPDATE_ADD_KILL {
         // required_kill_count: u32
         w.write_all(&self.required_kill_count.to_le_bytes())?;
 
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         Ok(())
     }
@@ -103,7 +104,7 @@ impl MaximumPossibleSized for SMSG_QUESTUPDATE_ADD_KILL {
         + 4 // create_id: u32
         + 4 // kill_count: u32
         + 4 // required_kill_count: u32
-        + 8 // guid: u64
+        + 8 // guid: Guid
     }
 }
 

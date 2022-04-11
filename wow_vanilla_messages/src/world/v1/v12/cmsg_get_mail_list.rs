@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,11 +9,11 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/cmsg_get_mail_list.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/cmsg_get_mail_list.wowm#L3):
 /// ```text
 /// cmsg CMSG_GET_MAIL_LIST = 0x23A {
-///     u64 mailbox_guid;
+///     Guid mailbox_guid;
 /// }
 /// ```
 pub struct CMSG_GET_MAIL_LIST {
-    pub mailbox_guid: u64,
+    pub mailbox_guid: Guid,
 }
 
 impl WorldClientMessageWrite for CMSG_GET_MAIL_LIST {
@@ -39,8 +40,8 @@ impl WorldMessageBody for CMSG_GET_MAIL_LIST {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // mailbox_guid: u64
-        let mailbox_guid = crate::util::read_u64_le(r)?;
+        // mailbox_guid: Guid
+        let mailbox_guid = Guid::read(r)?;
 
         Ok(Self {
             mailbox_guid,
@@ -48,8 +49,8 @@ impl WorldMessageBody for CMSG_GET_MAIL_LIST {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // mailbox_guid: u64
-        w.write_all(&self.mailbox_guid.to_le_bytes())?;
+        // mailbox_guid: Guid
+        self.mailbox_guid.write(w)?;
 
         Ok(())
     }
@@ -63,7 +64,7 @@ impl ConstantSized for CMSG_GET_MAIL_LIST {
 
 impl MaximumPossibleSized for CMSG_GET_MAIL_LIST {
     fn maximum_possible_size() -> usize {
-        8 // mailbox_guid: u64
+        8 // mailbox_guid: Guid
     }
 }
 

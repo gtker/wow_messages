@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_SUMMON_RESPONSE = 0x02AC {
-    u64 summoner_guid;
+    Guid summoner_guid;
 }
 

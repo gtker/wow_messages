@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{PetCommandState, PetCommandStateError};
 use crate::world::v1::v12::{PetReactState, PetReactStateError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
@@ -10,7 +11,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm#L3):
 /// ```text
 /// smsg SMSG_PET_MODE = 0x17A {
-///     u64 guid;
+///     Guid guid;
 ///     PetReactState react_state;
 ///     PetCommandState command_state;
 ///     u8 unknown1;
@@ -18,7 +19,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct SMSG_PET_MODE {
-    pub guid: u64,
+    pub guid: Guid,
     pub react_state: PetReactState,
     pub command_state: PetCommandState,
     pub unknown1: u8,
@@ -49,8 +50,8 @@ impl WorldMessageBody for SMSG_PET_MODE {
     type Error = SMSG_PET_MODEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         // react_state: PetReactState
         let react_state = PetReactState::read(r)?;
@@ -74,8 +75,8 @@ impl WorldMessageBody for SMSG_PET_MODE {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         // react_state: PetReactState
         self.react_state.write(w)?;
@@ -101,7 +102,7 @@ impl ConstantSized for SMSG_PET_MODE {
 
 impl MaximumPossibleSized for SMSG_PET_MODE {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + PetReactState::size() // react_state: PetReactState
         + PetCommandState::size() // command_state: PetCommandState
         + 1 // unknown1: u8

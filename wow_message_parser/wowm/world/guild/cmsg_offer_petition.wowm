@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_OFFER_PETITION = 0x01C3 {
-    u64 petition_guid;
-    u64 target_guid;
+    Guid petition_guid;
+    Guid target_guid;
 }
 

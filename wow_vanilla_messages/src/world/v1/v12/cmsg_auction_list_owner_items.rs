@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,12 +9,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_owner_items.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_owner_items.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUCTION_LIST_OWNER_ITEMS = 0x259 {
-///     u64 auctioneer_guid;
+///     Guid auctioneer_guid;
 ///     u32 list_from;
 /// }
 /// ```
 pub struct CMSG_AUCTION_LIST_OWNER_ITEMS {
-    pub auctioneer_guid: u64,
+    pub auctioneer_guid: Guid,
     pub list_from: u32,
 }
 
@@ -41,8 +42,8 @@ impl WorldMessageBody for CMSG_AUCTION_LIST_OWNER_ITEMS {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // auctioneer_guid: u64
-        let auctioneer_guid = crate::util::read_u64_le(r)?;
+        // auctioneer_guid: Guid
+        let auctioneer_guid = Guid::read(r)?;
 
         // list_from: u32
         let list_from = crate::util::read_u32_le(r)?;
@@ -54,8 +55,8 @@ impl WorldMessageBody for CMSG_AUCTION_LIST_OWNER_ITEMS {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // auctioneer_guid: u64
-        w.write_all(&self.auctioneer_guid.to_le_bytes())?;
+        // auctioneer_guid: Guid
+        self.auctioneer_guid.write(w)?;
 
         // list_from: u32
         w.write_all(&self.list_from.to_le_bytes())?;
@@ -72,7 +73,7 @@ impl ConstantSized for CMSG_AUCTION_LIST_OWNER_ITEMS {
 
 impl MaximumPossibleSized for CMSG_AUCTION_LIST_OWNER_ITEMS {
     fn maximum_possible_size() -> usize {
-        8 // auctioneer_guid: u64
+        8 // auctioneer_guid: Guid
         + 4 // list_from: u32
     }
 }

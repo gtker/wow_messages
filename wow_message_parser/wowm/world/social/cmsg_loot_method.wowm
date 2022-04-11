@@ -2,7 +2,7 @@
 
 cmsg CMSG_LOOT_METHOD = 0x007A {
     (u32)GroupLootSetting loot_setting;
-    u64 loot_master;
+    Guid loot_master;
     (u32)ItemQuality loot_threshold;
 }
 

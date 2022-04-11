@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{FriendResult, FriendResultError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -10,12 +11,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// smsg SMSG_FRIEND_STATUS = 0x68 {
 ///     FriendResult result;
-///     u64 guid;
+///     Guid guid;
 /// }
 /// ```
 pub struct SMSG_FRIEND_STATUS {
     pub result: FriendResult,
-    pub guid: u64,
+    pub guid: Guid,
 }
 
 impl WorldServerMessageWrite for SMSG_FRIEND_STATUS {
@@ -45,8 +46,8 @@ impl WorldMessageBody for SMSG_FRIEND_STATUS {
         // result: FriendResult
         let result = FriendResult::read(r)?;
 
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         Ok(Self {
             result,
@@ -58,8 +59,8 @@ impl WorldMessageBody for SMSG_FRIEND_STATUS {
         // result: FriendResult
         self.result.write(w)?;
 
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         Ok(())
     }
@@ -74,7 +75,7 @@ impl ConstantSized for SMSG_FRIEND_STATUS {
 impl MaximumPossibleSized for SMSG_FRIEND_STATUS {
     fn maximum_possible_size() -> usize {
         FriendResult::size() // result: FriendResult
-        + 8 // guid: u64
+        + 8 // guid: Guid
     }
 }
 

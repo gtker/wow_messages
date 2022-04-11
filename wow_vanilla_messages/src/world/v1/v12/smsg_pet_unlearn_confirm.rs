@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,12 +9,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_unlearn_confirm.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_unlearn_confirm.wowm#L3):
 /// ```text
 /// smsg SMSG_PET_UNLEARN_CONFIRM = 0x2F1 {
-///     u64 pet_guid;
+///     Guid pet_guid;
 ///     u32 talent_reset_cost;
 /// }
 /// ```
 pub struct SMSG_PET_UNLEARN_CONFIRM {
-    pub pet_guid: u64,
+    pub pet_guid: Guid,
     pub talent_reset_cost: u32,
 }
 
@@ -41,8 +42,8 @@ impl WorldMessageBody for SMSG_PET_UNLEARN_CONFIRM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // pet_guid: u64
-        let pet_guid = crate::util::read_u64_le(r)?;
+        // pet_guid: Guid
+        let pet_guid = Guid::read(r)?;
 
         // talent_reset_cost: u32
         let talent_reset_cost = crate::util::read_u32_le(r)?;
@@ -54,8 +55,8 @@ impl WorldMessageBody for SMSG_PET_UNLEARN_CONFIRM {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_guid: u64
-        w.write_all(&self.pet_guid.to_le_bytes())?;
+        // pet_guid: Guid
+        self.pet_guid.write(w)?;
 
         // talent_reset_cost: u32
         w.write_all(&self.talent_reset_cost.to_le_bytes())?;
@@ -72,7 +73,7 @@ impl ConstantSized for SMSG_PET_UNLEARN_CONFIRM {
 
 impl MaximumPossibleSized for SMSG_PET_UNLEARN_CONFIRM {
     fn maximum_possible_size() -> usize {
-        8 // pet_guid: u64
+        8 // pet_guid: Guid
         + 4 // talent_reset_cost: u32
     }
 }

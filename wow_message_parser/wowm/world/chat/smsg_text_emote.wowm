@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_TEXT_EMOTE = 0x0105 {
-    u64 guid;
+    Guid guid;
     /* TODO: text_emote could be an enum */
     u32 text_emote;
     Emote emote;

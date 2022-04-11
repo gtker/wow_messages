@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{PetitionResult, PetitionResultError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -9,14 +10,14 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_sign_results.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_sign_results.wowm#L12):
 /// ```text
 /// smsg SMSG_PETITION_SIGN_RESULTS = 0x1C1 {
-///     u64 petition_guid;
-///     u64 owner_guid;
+///     Guid petition_guid;
+///     Guid owner_guid;
 ///     PetitionResult result;
 /// }
 /// ```
 pub struct SMSG_PETITION_SIGN_RESULTS {
-    pub petition_guid: u64,
-    pub owner_guid: u64,
+    pub petition_guid: Guid,
+    pub owner_guid: Guid,
     pub result: PetitionResult,
 }
 
@@ -44,11 +45,11 @@ impl WorldMessageBody for SMSG_PETITION_SIGN_RESULTS {
     type Error = SMSG_PETITION_SIGN_RESULTSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // petition_guid: u64
-        let petition_guid = crate::util::read_u64_le(r)?;
+        // petition_guid: Guid
+        let petition_guid = Guid::read(r)?;
 
-        // owner_guid: u64
-        let owner_guid = crate::util::read_u64_le(r)?;
+        // owner_guid: Guid
+        let owner_guid = Guid::read(r)?;
 
         // result: PetitionResult
         let result = PetitionResult::read(r)?;
@@ -61,11 +62,11 @@ impl WorldMessageBody for SMSG_PETITION_SIGN_RESULTS {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // petition_guid: u64
-        w.write_all(&self.petition_guid.to_le_bytes())?;
+        // petition_guid: Guid
+        self.petition_guid.write(w)?;
 
-        // owner_guid: u64
-        w.write_all(&self.owner_guid.to_le_bytes())?;
+        // owner_guid: Guid
+        self.owner_guid.write(w)?;
 
         // result: PetitionResult
         self.result.write(w)?;
@@ -82,8 +83,8 @@ impl ConstantSized for SMSG_PETITION_SIGN_RESULTS {
 
 impl MaximumPossibleSized for SMSG_PETITION_SIGN_RESULTS {
     fn maximum_possible_size() -> usize {
-        8 // petition_guid: u64
-        + 8 // owner_guid: u64
+        8 // petition_guid: Guid
+        + 8 // owner_guid: Guid
         + PetitionResult::size() // result: PetitionResult
     }
 }

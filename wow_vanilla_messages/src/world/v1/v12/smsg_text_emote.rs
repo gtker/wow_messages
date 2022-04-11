@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{Emote, EmoteError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -8,7 +9,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_text_emote.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_text_emote.wowm#L3):
 /// ```text
 /// smsg SMSG_TEXT_EMOTE = 0x105 {
-///     u64 guid;
+///     Guid guid;
 ///     u32 text_emote;
 ///     Emote emote;
 ///     u32 name_length;
@@ -16,7 +17,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct SMSG_TEXT_EMOTE {
-    pub guid: u64,
+    pub guid: Guid,
     pub text_emote: u32,
     pub emote: Emote,
     pub name_length: u32,
@@ -47,8 +48,8 @@ impl WorldMessageBody for SMSG_TEXT_EMOTE {
     type Error = SMSG_TEXT_EMOTEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         // text_emote: u32
         let text_emote = crate::util::read_u32_le(r)?;
@@ -73,8 +74,8 @@ impl WorldMessageBody for SMSG_TEXT_EMOTE {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         // text_emote: u32
         w.write_all(&self.text_emote.to_le_bytes())?;
@@ -96,7 +97,7 @@ impl WorldMessageBody for SMSG_TEXT_EMOTE {
 
 impl VariableSized for SMSG_TEXT_EMOTE {
     fn size(&self) -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + 4 // text_emote: u32
         + Emote::size() // emote: Emote
         + 4 // name_length: u32
@@ -106,7 +107,7 @@ impl VariableSized for SMSG_TEXT_EMOTE {
 
 impl MaximumPossibleSized for SMSG_TEXT_EMOTE {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + 4 // text_emote: u32
         + Emote::maximum_possible_size() // emote: Emote
         + 4 // name_length: u32

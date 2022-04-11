@@ -2,6 +2,6 @@
 
 cmsg CMSG_ITEM_QUERY_SINGLE = 0x56 {
     u32 item;
-    u64 guid;
+    Guid guid;
 }
 

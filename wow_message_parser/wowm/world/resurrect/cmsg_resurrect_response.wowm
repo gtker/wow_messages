@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_RESURRECT_RESPONSE = 0x015C {
-    u64 guid;
+    Guid guid;
     u8 status;
 }
 

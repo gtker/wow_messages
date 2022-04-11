@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 smsg SMSG_BINDER_CONFIRM = 0x02EB {
-    u64 guid;
+    Guid guid;
 }
 

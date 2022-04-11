@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,12 +9,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_remove_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_remove_item.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUCTION_REMOVE_ITEM = 0x257 {
-///     u64 auctioneer_guid;
+///     Guid auctioneer_guid;
 ///     u32 auction_id;
 /// }
 /// ```
 pub struct CMSG_AUCTION_REMOVE_ITEM {
-    pub auctioneer_guid: u64,
+    pub auctioneer_guid: Guid,
     pub auction_id: u32,
 }
 
@@ -41,8 +42,8 @@ impl WorldMessageBody for CMSG_AUCTION_REMOVE_ITEM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // auctioneer_guid: u64
-        let auctioneer_guid = crate::util::read_u64_le(r)?;
+        // auctioneer_guid: Guid
+        let auctioneer_guid = Guid::read(r)?;
 
         // auction_id: u32
         let auction_id = crate::util::read_u32_le(r)?;
@@ -54,8 +55,8 @@ impl WorldMessageBody for CMSG_AUCTION_REMOVE_ITEM {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // auctioneer_guid: u64
-        w.write_all(&self.auctioneer_guid.to_le_bytes())?;
+        // auctioneer_guid: Guid
+        self.auctioneer_guid.write(w)?;
 
         // auction_id: u32
         w.write_all(&self.auction_id.to_le_bytes())?;
@@ -72,7 +73,7 @@ impl ConstantSized for CMSG_AUCTION_REMOVE_ITEM {
 
 impl MaximumPossibleSized for CMSG_AUCTION_REMOVE_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // auctioneer_guid: u64
+        8 // auctioneer_guid: Guid
         + 4 // auction_id: u32
     }
 }

@@ -4,6 +4,6 @@ cmsg CMSG_TEXT_EMOTE = 0x0104 {
     /* TODO: text_emote could be an enum */
     u32 text_emote;
     Emote emote;
-    u64 guid;
+    Guid guid;
 }
 

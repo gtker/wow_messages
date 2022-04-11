@@ -4,7 +4,7 @@
 
 smsg SMSG_PLAY_OBJECT_SOUND = 0x0278 {
     u32 sound_id;
-    u64 guid;
+    Guid guid;
 } {
     comment = "vmangos: Nostalrius: ignored by client if unit is not loaded";
 }

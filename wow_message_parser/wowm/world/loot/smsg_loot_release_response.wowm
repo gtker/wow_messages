@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_LOOT_RELEASE_RESPONSE = 0x0161 {
-    u64 guid;
+    Guid guid;
     u8 unknown1 {
         comment = "Set to 1 on mangoszero/vmangos/cmangos";
     }

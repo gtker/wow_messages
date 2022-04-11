@@ -3,6 +3,6 @@
 cmsg CMSG_ITEM_NAME_QUERY = 0x02C4 {
     /* TODO Enum? */
     u32 item_id;
-    u64 guid;
+    Guid guid;
 }
 

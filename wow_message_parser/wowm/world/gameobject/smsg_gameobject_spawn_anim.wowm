@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 smsg SMSG_GAMEOBJECT_SPAWN_ANIM = 0x0214 {
-    u64 guid;
+    Guid guid;
 }
 

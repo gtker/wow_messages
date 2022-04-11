@@ -17,7 +17,7 @@ enum BuybackSlot : u32 {
 }
 
 cmsg CMSG_BUYBACK_ITEM = 0x0290 {
-    u64 guid;
+    Guid guid;
     BuybackSlot slot;
 }
 

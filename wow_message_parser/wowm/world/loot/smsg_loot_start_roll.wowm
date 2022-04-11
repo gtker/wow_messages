@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_LOOT_START_ROLL = 0x02A1 {
-    u64 creature_guid;
+    Guid creature_guid;
     u32 loot_slot;
     u32 item_id;
     u32 item_random_suffix {

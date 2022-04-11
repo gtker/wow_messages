@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -7,12 +8,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_pet_rename.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_pet_rename.wowm#L3):
 /// ```text
 /// cmsg CMSG_PET_RENAME = 0x177 {
-///     u64 pet_guid;
+///     Guid pet_guid;
 ///     CString name;
 /// }
 /// ```
 pub struct CMSG_PET_RENAME {
-    pub pet_guid: u64,
+    pub pet_guid: Guid,
     pub name: String,
 }
 
@@ -40,8 +41,8 @@ impl WorldMessageBody for CMSG_PET_RENAME {
     type Error = CMSG_PET_RENAMEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // pet_guid: u64
-        let pet_guid = crate::util::read_u64_le(r)?;
+        // pet_guid: Guid
+        let pet_guid = Guid::read(r)?;
 
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
@@ -54,8 +55,8 @@ impl WorldMessageBody for CMSG_PET_RENAME {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_guid: u64
-        w.write_all(&self.pet_guid.to_le_bytes())?;
+        // pet_guid: Guid
+        self.pet_guid.write(w)?;
 
         // name: CString
         w.write_all(self.name.as_bytes())?;
@@ -68,14 +69,14 @@ impl WorldMessageBody for CMSG_PET_RENAME {
 
 impl VariableSized for CMSG_PET_RENAME {
     fn size(&self) -> usize {
-        8 // pet_guid: u64
+        8 // pet_guid: Guid
         + self.name.len() + 1 // name: CString and Null Terminator
     }
 }
 
 impl MaximumPossibleSized for CMSG_PET_RENAME {
     fn maximum_possible_size() -> usize {
-        8 // pet_guid: u64
+        8 // pet_guid: Guid
         + 256 // name: CString
     }
 }

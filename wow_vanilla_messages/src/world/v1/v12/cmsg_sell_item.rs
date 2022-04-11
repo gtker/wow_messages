@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,14 +9,14 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_sell_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_sell_item.wowm#L3):
 /// ```text
 /// cmsg CMSG_SELL_ITEM = 0x1A0 {
-///     u64 vendor_guid;
-///     u64 item_guid;
+///     Guid vendor_guid;
+///     Guid item_guid;
 ///     u8 amount;
 /// }
 /// ```
 pub struct CMSG_SELL_ITEM {
-    pub vendor_guid: u64,
-    pub item_guid: u64,
+    pub vendor_guid: Guid,
+    pub item_guid: Guid,
     pub amount: u8,
 }
 
@@ -43,11 +44,11 @@ impl WorldMessageBody for CMSG_SELL_ITEM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // vendor_guid: u64
-        let vendor_guid = crate::util::read_u64_le(r)?;
+        // vendor_guid: Guid
+        let vendor_guid = Guid::read(r)?;
 
-        // item_guid: u64
-        let item_guid = crate::util::read_u64_le(r)?;
+        // item_guid: Guid
+        let item_guid = Guid::read(r)?;
 
         // amount: u8
         let amount = crate::util::read_u8_le(r)?;
@@ -60,11 +61,11 @@ impl WorldMessageBody for CMSG_SELL_ITEM {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // vendor_guid: u64
-        w.write_all(&self.vendor_guid.to_le_bytes())?;
+        // vendor_guid: Guid
+        self.vendor_guid.write(w)?;
 
-        // item_guid: u64
-        w.write_all(&self.item_guid.to_le_bytes())?;
+        // item_guid: Guid
+        self.item_guid.write(w)?;
 
         // amount: u8
         w.write_all(&self.amount.to_le_bytes())?;
@@ -81,8 +82,8 @@ impl ConstantSized for CMSG_SELL_ITEM {
 
 impl MaximumPossibleSized for CMSG_SELL_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // vendor_guid: u64
-        + 8 // item_guid: u64
+        8 // vendor_guid: Guid
+        + 8 // item_guid: Guid
         + 1 // amount: u8
     }
 }

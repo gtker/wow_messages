@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,11 +9,11 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_summon_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_summon_response.wowm#L3):
 /// ```text
 /// cmsg CMSG_SUMMON_RESPONSE = 0x2AC {
-///     u64 summoner_guid;
+///     Guid summoner_guid;
 /// }
 /// ```
 pub struct CMSG_SUMMON_RESPONSE {
-    pub summoner_guid: u64,
+    pub summoner_guid: Guid,
 }
 
 impl WorldClientMessageWrite for CMSG_SUMMON_RESPONSE {
@@ -39,8 +40,8 @@ impl WorldMessageBody for CMSG_SUMMON_RESPONSE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // summoner_guid: u64
-        let summoner_guid = crate::util::read_u64_le(r)?;
+        // summoner_guid: Guid
+        let summoner_guid = Guid::read(r)?;
 
         Ok(Self {
             summoner_guid,
@@ -48,8 +49,8 @@ impl WorldMessageBody for CMSG_SUMMON_RESPONSE {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // summoner_guid: u64
-        w.write_all(&self.summoner_guid.to_le_bytes())?;
+        // summoner_guid: Guid
+        self.summoner_guid.write(w)?;
 
         Ok(())
     }
@@ -63,7 +64,7 @@ impl ConstantSized for CMSG_SUMMON_RESPONSE {
 
 impl MaximumPossibleSized for CMSG_SUMMON_RESPONSE {
     fn maximum_possible_size() -> usize {
-        8 // summoner_guid: u64
+        8 // summoner_guid: Guid
     }
 }
 

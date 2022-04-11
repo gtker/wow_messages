@@ -4,8 +4,8 @@
 
 smsg SMSG_RESISTLOG = 0x01D6 {
     /* TODO: Nothing except a comment for this */
-    u64 guid1;
-    u64 guid2;
+    Guid guid1;
+    Guid guid2;
     u32 unknown1;
     f32 unknown2;
     f32 unknown3;

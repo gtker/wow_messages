@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_DUEL_CANCELLED = 0x016D {
-    u64 guid;
+    Guid guid;
 }
 

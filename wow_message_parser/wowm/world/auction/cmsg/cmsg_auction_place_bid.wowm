@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_AUCTION_PLACE_BID = 0x025A {
-    u64 auctioneer_guid;
+    Guid auctioneer_guid;
     u32 auction_id;
     u32 price;
 }

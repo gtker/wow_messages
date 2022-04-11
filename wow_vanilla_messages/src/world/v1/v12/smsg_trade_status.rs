@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{InventoryResult, InventoryResultError};
 use crate::world::v1::v12::{TradeStatus, TradeStatusError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
@@ -11,7 +12,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// smsg SMSG_TRADE_STATUS = 0x120 {
 ///     TradeStatus status;
 ///     if (status == BEGIN_TRADE) {
-///         u64 unknown1;
+///         Guid unknown1;
 ///         ELSE-IF-STATEMENT-DOCC: unimplemented
 ///     }
 /// }
@@ -50,8 +51,8 @@ impl WorldMessageBody for SMSG_TRADE_STATUS {
         let status_if = match status {
             TradeStatus::BUSY => SMSG_TRADE_STATUSTradeStatus::BUSY,
             TradeStatus::BEGIN_TRADE => {
-                // unknown1: u64
-                let unknown1 = crate::util::read_u64_le(r)?;
+                // unknown1: Guid
+                let unknown1 = Guid::read(r)?;
 
                 SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE {
                     unknown1,
@@ -124,8 +125,8 @@ impl WorldMessageBody for SMSG_TRADE_STATUS {
             SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE {
                 unknown1,
             } => {
-                // unknown1: u64
-                w.write_all(&unknown1.to_le_bytes())?;
+                // unknown1: Guid
+                unknown1.write(w)?;
 
             }
             SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW => {}
@@ -234,7 +235,7 @@ impl From<TradeStatusError> for SMSG_TRADE_STATUSError {
 pub enum SMSG_TRADE_STATUSTradeStatus {
     BUSY,
     BEGIN_TRADE {
-        unknown1: u64,
+        unknown1: Guid,
     },
     OPEN_WINDOW,
     TRADE_CANCELED,
@@ -381,7 +382,7 @@ impl VariableSized for SMSG_TRADE_STATUSTradeStatus {
                 unknown1,
             } => {
                 4
-                + 8 // unknown1: u64
+                + 8 // unknown1: Guid
             }
             Self::OPEN_WINDOW =>  {
                 4

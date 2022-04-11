@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,7 +9,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_start_roll.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_start_roll.wowm#L3):
 /// ```text
 /// smsg SMSG_LOOT_START_ROLL = 0x2A1 {
-///     u64 creature_guid;
+///     Guid creature_guid;
 ///     u32 loot_slot;
 ///     u32 item_id;
 ///     u32 item_random_suffix;
@@ -17,7 +18,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct SMSG_LOOT_START_ROLL {
-    pub creature_guid: u64,
+    pub creature_guid: Guid,
     pub loot_slot: u32,
     pub item_id: u32,
     pub item_random_suffix: u32,
@@ -49,8 +50,8 @@ impl WorldMessageBody for SMSG_LOOT_START_ROLL {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // creature_guid: u64
-        let creature_guid = crate::util::read_u64_le(r)?;
+        // creature_guid: Guid
+        let creature_guid = Guid::read(r)?;
 
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(r)?;
@@ -78,8 +79,8 @@ impl WorldMessageBody for SMSG_LOOT_START_ROLL {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // creature_guid: u64
-        w.write_all(&self.creature_guid.to_le_bytes())?;
+        // creature_guid: Guid
+        self.creature_guid.write(w)?;
 
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
@@ -108,7 +109,7 @@ impl ConstantSized for SMSG_LOOT_START_ROLL {
 
 impl MaximumPossibleSized for SMSG_LOOT_START_ROLL {
     fn maximum_possible_size() -> usize {
-        8 // creature_guid: u64
+        8 // creature_guid: Guid
         + 4 // loot_slot: u32
         + 4 // item_id: u32
         + 4 // item_random_suffix: u32

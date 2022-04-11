@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_CHAR_RENAME = 0x2C7 {
-    u64 guid;
+    Guid guid;
     CString name;
 }
 

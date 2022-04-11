@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -9,12 +10,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// smsg SMSG_CLEAR_COOLDOWN = 0x1DE {
 ///     u32 spell_id;
-///     u64 target_guid;
+///     Guid target_guid;
 /// }
 /// ```
 pub struct SMSG_CLEAR_COOLDOWN {
     pub spell_id: u32,
-    pub target_guid: u64,
+    pub target_guid: Guid,
 }
 
 impl WorldServerMessageWrite for SMSG_CLEAR_COOLDOWN {
@@ -44,8 +45,8 @@ impl WorldMessageBody for SMSG_CLEAR_COOLDOWN {
         // spell_id: u32
         let spell_id = crate::util::read_u32_le(r)?;
 
-        // target_guid: u64
-        let target_guid = crate::util::read_u64_le(r)?;
+        // target_guid: Guid
+        let target_guid = Guid::read(r)?;
 
         Ok(Self {
             spell_id,
@@ -57,8 +58,8 @@ impl WorldMessageBody for SMSG_CLEAR_COOLDOWN {
         // spell_id: u32
         w.write_all(&self.spell_id.to_le_bytes())?;
 
-        // target_guid: u64
-        w.write_all(&self.target_guid.to_le_bytes())?;
+        // target_guid: Guid
+        self.target_guid.write(w)?;
 
         Ok(())
     }
@@ -73,7 +74,7 @@ impl ConstantSized for SMSG_CLEAR_COOLDOWN {
 impl MaximumPossibleSized for SMSG_CLEAR_COOLDOWN {
     fn maximum_possible_size() -> usize {
         4 // spell_id: u32
-        + 8 // target_guid: u64
+        + 8 // target_guid: Guid
     }
 }
 

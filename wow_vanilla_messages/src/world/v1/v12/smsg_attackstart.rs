@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,13 +9,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackstart.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackstart.wowm#L3):
 /// ```text
 /// smsg SMSG_ATTACKSTART = 0x143 {
-///     u64 attacker_guid;
-///     u64 victim_guid;
+///     Guid attacker_guid;
+///     Guid victim_guid;
 /// }
 /// ```
 pub struct SMSG_ATTACKSTART {
-    pub attacker_guid: u64,
-    pub victim_guid: u64,
+    pub attacker_guid: Guid,
+    pub victim_guid: Guid,
 }
 
 impl WorldServerMessageWrite for SMSG_ATTACKSTART {
@@ -41,11 +42,11 @@ impl WorldMessageBody for SMSG_ATTACKSTART {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // attacker_guid: u64
-        let attacker_guid = crate::util::read_u64_le(r)?;
+        // attacker_guid: Guid
+        let attacker_guid = Guid::read(r)?;
 
-        // victim_guid: u64
-        let victim_guid = crate::util::read_u64_le(r)?;
+        // victim_guid: Guid
+        let victim_guid = Guid::read(r)?;
 
         Ok(Self {
             attacker_guid,
@@ -54,11 +55,11 @@ impl WorldMessageBody for SMSG_ATTACKSTART {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // attacker_guid: u64
-        w.write_all(&self.attacker_guid.to_le_bytes())?;
+        // attacker_guid: Guid
+        self.attacker_guid.write(w)?;
 
-        // victim_guid: u64
-        w.write_all(&self.victim_guid.to_le_bytes())?;
+        // victim_guid: Guid
+        self.victim_guid.write(w)?;
 
         Ok(())
     }
@@ -72,8 +73,8 @@ impl ConstantSized for SMSG_ATTACKSTART {
 
 impl MaximumPossibleSized for SMSG_ATTACKSTART {
     fn maximum_possible_size() -> usize {
-        8 // attacker_guid: u64
-        + 8 // victim_guid: u64
+        8 // attacker_guid: Guid
+        + 8 // victim_guid: Guid
     }
 }
 

@@ -2,6 +2,6 @@
 
 smsg SMSG_CLEAR_COOLDOWN = 0x01DE {
     u32 spell_id;
-    u64 target_guid;
+    Guid target_guid;
 }
 

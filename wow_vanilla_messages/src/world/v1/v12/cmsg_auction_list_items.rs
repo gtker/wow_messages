@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -7,7 +8,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_items.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_items.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUCTION_LIST_ITEMS = 0x258 {
-///     u64 auctioneer_guid;
+///     Guid auctioneer_guid;
 ///     u32 list_start_item;
 ///     CString searched_name;
 ///     u8 minimum_level;
@@ -20,7 +21,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct CMSG_AUCTION_LIST_ITEMS {
-    pub auctioneer_guid: u64,
+    pub auctioneer_guid: Guid,
     pub list_start_item: u32,
     pub searched_name: String,
     pub minimum_level: u8,
@@ -56,8 +57,8 @@ impl WorldMessageBody for CMSG_AUCTION_LIST_ITEMS {
     type Error = CMSG_AUCTION_LIST_ITEMSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // auctioneer_guid: u64
-        let auctioneer_guid = crate::util::read_u64_le(r)?;
+        // auctioneer_guid: Guid
+        let auctioneer_guid = Guid::read(r)?;
 
         // list_start_item: u32
         let list_start_item = crate::util::read_u32_le(r)?;
@@ -102,8 +103,8 @@ impl WorldMessageBody for CMSG_AUCTION_LIST_ITEMS {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // auctioneer_guid: u64
-        w.write_all(&self.auctioneer_guid.to_le_bytes())?;
+        // auctioneer_guid: Guid
+        self.auctioneer_guid.write(w)?;
 
         // list_start_item: u32
         w.write_all(&self.list_start_item.to_le_bytes())?;
@@ -140,7 +141,7 @@ impl WorldMessageBody for CMSG_AUCTION_LIST_ITEMS {
 
 impl VariableSized for CMSG_AUCTION_LIST_ITEMS {
     fn size(&self) -> usize {
-        8 // auctioneer_guid: u64
+        8 // auctioneer_guid: Guid
         + 4 // list_start_item: u32
         + self.searched_name.len() + 1 // searched_name: CString and Null Terminator
         + 1 // minimum_level: u8
@@ -155,7 +156,7 @@ impl VariableSized for CMSG_AUCTION_LIST_ITEMS {
 
 impl MaximumPossibleSized for CMSG_AUCTION_LIST_ITEMS {
     fn maximum_possible_size() -> usize {
-        8 // auctioneer_guid: u64
+        8 // auctioneer_guid: Guid
         + 4 // list_start_item: u32
         + 256 // searched_name: CString
         + 1 // minimum_level: u8

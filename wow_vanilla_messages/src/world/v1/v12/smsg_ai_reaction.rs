@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{AiReaction, AiReactionError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -9,12 +10,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_ai_reaction.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_ai_reaction.wowm#L21):
 /// ```text
 /// smsg SMSG_AI_REACTION = 0x13C {
-///     u64 guid;
+///     Guid guid;
 ///     AiReaction reaction;
 /// }
 /// ```
 pub struct SMSG_AI_REACTION {
-    pub guid: u64,
+    pub guid: Guid,
     pub reaction: AiReaction,
 }
 
@@ -42,8 +43,8 @@ impl WorldMessageBody for SMSG_AI_REACTION {
     type Error = SMSG_AI_REACTIONError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         // reaction: AiReaction
         let reaction = AiReaction::read(r)?;
@@ -55,8 +56,8 @@ impl WorldMessageBody for SMSG_AI_REACTION {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         // reaction: AiReaction
         self.reaction.write(w)?;
@@ -73,7 +74,7 @@ impl ConstantSized for SMSG_AI_REACTION {
 
 impl MaximumPossibleSized for SMSG_AI_REACTION {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + AiReaction::size() // reaction: AiReaction
     }
 }

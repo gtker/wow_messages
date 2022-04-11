@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{SpellMiss, SpellMissError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -9,7 +10,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// smsg SMSG_SPELLLOGMISS = 0x24B {
 ///     u32 spell_id;
-///     u64 caster_guid;
+///     Guid caster_guid;
 ///     u8 unknown1;
 ///     u32 amount_of_targets;
 ///     SpellMiss[amount_of_targets] targets;
@@ -17,7 +18,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```
 pub struct SMSG_SPELLLOGMISS {
     pub spell_id: u32,
-    pub caster_guid: u64,
+    pub caster_guid: Guid,
     pub unknown1: u8,
     pub amount_of_targets: u32,
     pub targets: Vec<SpellMiss>,
@@ -50,8 +51,8 @@ impl WorldMessageBody for SMSG_SPELLLOGMISS {
         // spell_id: u32
         let spell_id = crate::util::read_u32_le(r)?;
 
-        // caster_guid: u64
-        let caster_guid = crate::util::read_u64_le(r)?;
+        // caster_guid: Guid
+        let caster_guid = Guid::read(r)?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;
@@ -78,8 +79,8 @@ impl WorldMessageBody for SMSG_SPELLLOGMISS {
         // spell_id: u32
         w.write_all(&self.spell_id.to_le_bytes())?;
 
-        // caster_guid: u64
-        w.write_all(&self.caster_guid.to_le_bytes())?;
+        // caster_guid: Guid
+        self.caster_guid.write(w)?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -99,7 +100,7 @@ impl WorldMessageBody for SMSG_SPELLLOGMISS {
 impl VariableSized for SMSG_SPELLLOGMISS {
     fn size(&self) -> usize {
         4 // spell_id: u32
-        + 8 // caster_guid: u64
+        + 8 // caster_guid: Guid
         + 1 // unknown1: u8
         + 4 // amount_of_targets: u32
         + self.targets.iter().fold(0, |acc, x| acc + SpellMiss::size()) // targets: SpellMiss[amount_of_targets]
@@ -109,7 +110,7 @@ impl VariableSized for SMSG_SPELLLOGMISS {
 impl MaximumPossibleSized for SMSG_SPELLLOGMISS {
     fn maximum_possible_size() -> usize {
         4 // spell_id: u32
-        + 8 // caster_guid: u64
+        + 8 // caster_guid: Guid
         + 1 // unknown1: u8
         + 4 // amount_of_targets: u32
         + 4294967295 * SpellMiss::maximum_possible_size() // targets: SpellMiss[amount_of_targets]

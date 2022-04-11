@@ -3,7 +3,7 @@
 smsg SMSG_CHAR_RENAME = 0x2C8 {
     WorldResult result;
     if (result == RESPONSE_SUCCESS) {
-        u64 guid;
+        Guid guid;
         CString name;
     }
 }

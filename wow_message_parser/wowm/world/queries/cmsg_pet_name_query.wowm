@@ -2,7 +2,7 @@
 
 cmsg CMSG_PET_NAME_QUERY = 0x52 {
     u32 pet_number;
-    u64 guid;
+    Guid guid;
 }
 
 test CMSG_PET_NAME_QUERY {

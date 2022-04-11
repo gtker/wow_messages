@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,16 +9,16 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_show_signatures.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_show_signatures.wowm#L3):
 /// ```text
 /// smsg SMSG_PETITION_SHOW_SIGNATURES = 0x1BF {
-///     u64 item_guid;
-///     u64 owner_guid;
-///     u64 petition_guid;
+///     Guid item_guid;
+///     Guid owner_guid;
+///     Guid petition_guid;
 ///     u8 amount_of_signatures;
 /// }
 /// ```
 pub struct SMSG_PETITION_SHOW_SIGNATURES {
-    pub item_guid: u64,
-    pub owner_guid: u64,
-    pub petition_guid: u64,
+    pub item_guid: Guid,
+    pub owner_guid: Guid,
+    pub petition_guid: Guid,
     pub amount_of_signatures: u8,
 }
 
@@ -45,14 +46,14 @@ impl WorldMessageBody for SMSG_PETITION_SHOW_SIGNATURES {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // item_guid: u64
-        let item_guid = crate::util::read_u64_le(r)?;
+        // item_guid: Guid
+        let item_guid = Guid::read(r)?;
 
-        // owner_guid: u64
-        let owner_guid = crate::util::read_u64_le(r)?;
+        // owner_guid: Guid
+        let owner_guid = Guid::read(r)?;
 
-        // petition_guid: u64
-        let petition_guid = crate::util::read_u64_le(r)?;
+        // petition_guid: Guid
+        let petition_guid = Guid::read(r)?;
 
         // amount_of_signatures: u8
         let amount_of_signatures = crate::util::read_u8_le(r)?;
@@ -66,14 +67,14 @@ impl WorldMessageBody for SMSG_PETITION_SHOW_SIGNATURES {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_guid: u64
-        w.write_all(&self.item_guid.to_le_bytes())?;
+        // item_guid: Guid
+        self.item_guid.write(w)?;
 
-        // owner_guid: u64
-        w.write_all(&self.owner_guid.to_le_bytes())?;
+        // owner_guid: Guid
+        self.owner_guid.write(w)?;
 
-        // petition_guid: u64
-        w.write_all(&self.petition_guid.to_le_bytes())?;
+        // petition_guid: Guid
+        self.petition_guid.write(w)?;
 
         // amount_of_signatures: u8
         w.write_all(&self.amount_of_signatures.to_le_bytes())?;
@@ -90,9 +91,9 @@ impl ConstantSized for SMSG_PETITION_SHOW_SIGNATURES {
 
 impl MaximumPossibleSized for SMSG_PETITION_SHOW_SIGNATURES {
     fn maximum_possible_size() -> usize {
-        8 // item_guid: u64
-        + 8 // owner_guid: u64
-        + 8 // petition_guid: u64
+        8 // item_guid: Guid
+        + 8 // owner_guid: Guid
+        + 8 // petition_guid: Guid
         + 1 // amount_of_signatures: u8
     }
 }

@@ -6,8 +6,8 @@ enum LogFormat : u8 {
 }
 
 smsg SMSG_PROCRESIST = 0x0260 {
-    u64 guid;
-    u64 target_guid;
+    Guid guid;
+    Guid target_guid;
     u32 spell_id;
     LogFormat log_format;
 }

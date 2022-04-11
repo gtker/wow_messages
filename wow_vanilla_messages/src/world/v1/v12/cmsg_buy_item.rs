@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,14 +9,14 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_buy_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_buy_item.wowm#L3):
 /// ```text
 /// cmsg CMSG_BUY_ITEM = 0x1A2 {
-///     u64 vendor_guid;
+///     Guid vendor_guid;
 ///     u32 item_id;
 ///     u8 amount;
 ///     u8 unknown1;
 /// }
 /// ```
 pub struct CMSG_BUY_ITEM {
-    pub vendor_guid: u64,
+    pub vendor_guid: Guid,
     pub item_id: u32,
     pub amount: u8,
     pub unknown1: u8,
@@ -45,8 +46,8 @@ impl WorldMessageBody for CMSG_BUY_ITEM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // vendor_guid: u64
-        let vendor_guid = crate::util::read_u64_le(r)?;
+        // vendor_guid: Guid
+        let vendor_guid = Guid::read(r)?;
 
         // item_id: u32
         let item_id = crate::util::read_u32_le(r)?;
@@ -66,8 +67,8 @@ impl WorldMessageBody for CMSG_BUY_ITEM {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // vendor_guid: u64
-        w.write_all(&self.vendor_guid.to_le_bytes())?;
+        // vendor_guid: Guid
+        self.vendor_guid.write(w)?;
 
         // item_id: u32
         w.write_all(&self.item_id.to_le_bytes())?;
@@ -90,7 +91,7 @@ impl ConstantSized for CMSG_BUY_ITEM {
 
 impl MaximumPossibleSized for CMSG_BUY_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // vendor_guid: u64
+        8 // vendor_guid: Guid
         + 4 // item_id: u32
         + 1 // amount: u8
         + 1 // unknown1: u8

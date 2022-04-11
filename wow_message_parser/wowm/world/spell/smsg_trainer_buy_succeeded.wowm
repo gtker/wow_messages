@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_TRAINER_BUY_SUCCEEDED = 0x01B3 {
-    u64 guid;
+    Guid guid;
     u32 spell_id;
 }
 

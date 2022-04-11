@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_ITEM_COOLDOWN = 0x00B0 {
-    u64 guid;
+    Guid guid;
     u32 spell_id;
 }
 

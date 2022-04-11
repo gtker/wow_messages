@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,13 +9,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_partykilllog.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_partykilllog.wowm#L3):
 /// ```text
 /// smsg SMSG_PARTYKILLLOG = 0x1F5 {
-///     u64 player_with_killing_blow;
-///     u64 victim;
+///     Guid player_with_killing_blow;
+///     Guid victim;
 /// }
 /// ```
 pub struct SMSG_PARTYKILLLOG {
-    pub player_with_killing_blow: u64,
-    pub victim: u64,
+    pub player_with_killing_blow: Guid,
+    pub victim: Guid,
 }
 
 impl WorldServerMessageWrite for SMSG_PARTYKILLLOG {
@@ -41,11 +42,11 @@ impl WorldMessageBody for SMSG_PARTYKILLLOG {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // player_with_killing_blow: u64
-        let player_with_killing_blow = crate::util::read_u64_le(r)?;
+        // player_with_killing_blow: Guid
+        let player_with_killing_blow = Guid::read(r)?;
 
-        // victim: u64
-        let victim = crate::util::read_u64_le(r)?;
+        // victim: Guid
+        let victim = Guid::read(r)?;
 
         Ok(Self {
             player_with_killing_blow,
@@ -54,11 +55,11 @@ impl WorldMessageBody for SMSG_PARTYKILLLOG {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // player_with_killing_blow: u64
-        w.write_all(&self.player_with_killing_blow.to_le_bytes())?;
+        // player_with_killing_blow: Guid
+        self.player_with_killing_blow.write(w)?;
 
-        // victim: u64
-        w.write_all(&self.victim.to_le_bytes())?;
+        // victim: Guid
+        self.victim.write(w)?;
 
         Ok(())
     }
@@ -72,8 +73,8 @@ impl ConstantSized for SMSG_PARTYKILLLOG {
 
 impl MaximumPossibleSized for SMSG_PARTYKILLLOG {
     fn maximum_possible_size() -> usize {
-        8 // player_with_killing_blow: u64
-        + 8 // victim: u64
+        8 // player_with_killing_blow: Guid
+        + 8 // victim: Guid
     }
 }
 

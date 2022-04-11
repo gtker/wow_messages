@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{SpellMissInfo, SpellMissInfoError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
@@ -7,12 +8,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/spell_common.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/spell_common.wowm#L27):
 /// ```text
 /// struct SpellMiss {
-///     u64 target_guid;
+///     Guid target_guid;
 ///     SpellMissInfo miss_info;
 /// }
 /// ```
 pub struct SpellMiss {
-    pub target_guid: u64,
+    pub target_guid: Guid,
     pub miss_info: SpellMissInfo,
 }
 
@@ -20,8 +21,8 @@ impl ReadableAndWritable for SpellMiss {
     type Error = SpellMissError;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // target_guid: u64
-        let target_guid = crate::util::read_u64_le(r)?;
+        // target_guid: Guid
+        let target_guid = Guid::read(r)?;
 
         // miss_info: SpellMissInfo
         let miss_info = SpellMissInfo::read(r)?;
@@ -33,8 +34,8 @@ impl ReadableAndWritable for SpellMiss {
     }
 
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // target_guid: u64
-        w.write_all(&self.target_guid.to_le_bytes())?;
+        // target_guid: Guid
+        self.target_guid.write(w)?;
 
         // miss_info: SpellMissInfo
         self.miss_info.write(w)?;
@@ -52,7 +53,7 @@ impl ConstantSized for SpellMiss {
 
 impl MaximumPossibleSized for SpellMiss {
     fn maximum_possible_size() -> usize {
-        8 // target_guid: u64
+        8 // target_guid: Guid
         + SpellMissInfo::size() // miss_info: SpellMissInfo
     }
 }

@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_REPAIR_ITEM = 0x02A8 {
-    u64 npc_guid;
-    u64 item_guid;
+    Guid npc_guid;
+    Guid item_guid;
 }
 

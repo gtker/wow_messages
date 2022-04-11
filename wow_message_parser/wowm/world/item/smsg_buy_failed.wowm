@@ -13,7 +13,7 @@ enum BuyResult : u8 {
 }
 
 smsg SMSG_BUY_FAILED = 0x01A5 {
-    u64 guid;
+    Guid guid;
     u32 item_id;
     BuyResult result;
 }

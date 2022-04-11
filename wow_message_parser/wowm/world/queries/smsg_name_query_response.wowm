@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
-    u64 guid;
+    Guid guid;
     CString character_name;
     CString realm_name;
     (u32)Race race;

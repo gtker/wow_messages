@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,11 +9,11 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battleground_player_left.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battleground_player_left.wowm#L3):
 /// ```text
 /// smsg SMSG_BATTLEGROUND_PLAYER_LEFT = 0x2ED {
-///     u64 guid;
+///     Guid guid;
 /// }
 /// ```
 pub struct SMSG_BATTLEGROUND_PLAYER_LEFT {
-    pub guid: u64,
+    pub guid: Guid,
 }
 
 impl WorldServerMessageWrite for SMSG_BATTLEGROUND_PLAYER_LEFT {
@@ -39,8 +40,8 @@ impl WorldMessageBody for SMSG_BATTLEGROUND_PLAYER_LEFT {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         Ok(Self {
             guid,
@@ -48,8 +49,8 @@ impl WorldMessageBody for SMSG_BATTLEGROUND_PLAYER_LEFT {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         Ok(())
     }
@@ -63,7 +64,7 @@ impl ConstantSized for SMSG_BATTLEGROUND_PLAYER_LEFT {
 
 impl MaximumPossibleSized for SMSG_BATTLEGROUND_PLAYER_LEFT {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
     }
 }
 

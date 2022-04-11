@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_LOOT_RELEASE = 0x015F {
-    u64 guid;
+    Guid guid;
 }
 

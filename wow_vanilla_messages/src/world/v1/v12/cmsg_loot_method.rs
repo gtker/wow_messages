@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{GroupLootSetting, GroupLootSettingError};
 use crate::world::v1::v12::{ItemQuality, ItemQualityError};
 use crate::{WorldClientMessageWrite, WorldMessageBody};
@@ -11,13 +12,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// cmsg CMSG_LOOT_METHOD = 0x7A {
 ///     GroupLootSetting loot_setting;
-///     u64 loot_master;
+///     Guid loot_master;
 ///     ItemQuality loot_threshold;
 /// }
 /// ```
 pub struct CMSG_LOOT_METHOD {
     pub loot_setting: GroupLootSetting,
-    pub loot_master: u64,
+    pub loot_master: Guid,
     pub loot_threshold: ItemQuality,
 }
 
@@ -48,8 +49,8 @@ impl WorldMessageBody for CMSG_LOOT_METHOD {
         // loot_setting: GroupLootSetting
         let loot_setting = GroupLootSetting::read_u32_le(r)?;
 
-        // loot_master: u64
-        let loot_master = crate::util::read_u64_le(r)?;
+        // loot_master: Guid
+        let loot_master = Guid::read(r)?;
 
         // loot_threshold: ItemQuality
         let loot_threshold = ItemQuality::read_u32_le(r)?;
@@ -65,8 +66,8 @@ impl WorldMessageBody for CMSG_LOOT_METHOD {
         // loot_setting: GroupLootSetting
         self.loot_setting.write_u32_le(w)?;
 
-        // loot_master: u64
-        w.write_all(&self.loot_master.to_le_bytes())?;
+        // loot_master: Guid
+        self.loot_master.write(w)?;
 
         // loot_threshold: ItemQuality
         self.loot_threshold.write_u32_le(w)?;
@@ -84,7 +85,7 @@ impl ConstantSized for CMSG_LOOT_METHOD {
 impl MaximumPossibleSized for CMSG_LOOT_METHOD {
     fn maximum_possible_size() -> usize {
         4 // loot_setting: GroupLootSetting upcasted to u32
-        + 8 // loot_master: u64
+        + 8 // loot_master: Guid
         + 4 // loot_threshold: ItemQuality upcasted to u32
     }
 }

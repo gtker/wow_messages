@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -9,13 +10,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// smsg SMSG_QUEST_CONFIRM_ACCEPT = 0x19C {
 ///     u32 quest_id;
 ///     CString quest_title;
-///     u64 guid;
+///     Guid guid;
 /// }
 /// ```
 pub struct SMSG_QUEST_CONFIRM_ACCEPT {
     pub quest_id: u32,
     pub quest_title: String,
-    pub guid: u64,
+    pub guid: Guid,
 }
 
 impl WorldServerMessageWrite for SMSG_QUEST_CONFIRM_ACCEPT {
@@ -49,8 +50,8 @@ impl WorldMessageBody for SMSG_QUEST_CONFIRM_ACCEPT {
         let quest_title = crate::util::read_c_string_to_vec(r)?;
         let quest_title = String::from_utf8(quest_title)?;
 
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         Ok(Self {
             quest_id,
@@ -68,8 +69,8 @@ impl WorldMessageBody for SMSG_QUEST_CONFIRM_ACCEPT {
         // Null terminator
         w.write_all(&[0])?;
 
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         Ok(())
     }
@@ -79,7 +80,7 @@ impl VariableSized for SMSG_QUEST_CONFIRM_ACCEPT {
     fn size(&self) -> usize {
         4 // quest_id: u32
         + self.quest_title.len() + 1 // quest_title: CString and Null Terminator
-        + 8 // guid: u64
+        + 8 // guid: Guid
     }
 }
 
@@ -87,7 +88,7 @@ impl MaximumPossibleSized for SMSG_QUEST_CONFIRM_ACCEPT {
     fn maximum_possible_size() -> usize {
         4 // quest_id: u32
         + 256 // quest_title: CString
-        + 8 // guid: u64
+        + 8 // guid: Guid
     }
 }
 

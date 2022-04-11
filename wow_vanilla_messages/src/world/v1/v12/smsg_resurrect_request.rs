@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -7,7 +8,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/resurrect/smsg_resurrect_request.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/resurrect/smsg_resurrect_request.wowm#L3):
 /// ```text
 /// smsg SMSG_RESURRECT_REQUEST = 0x15B {
-///     u64 guid;
+///     Guid guid;
 ///     u32 name_length;
 ///     CString name;
 ///     u8 caster_is_spirit_healer;
@@ -15,7 +16,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct SMSG_RESURRECT_REQUEST {
-    pub guid: u64,
+    pub guid: Guid,
     pub name_length: u32,
     pub name: String,
     pub caster_is_spirit_healer: u8,
@@ -46,8 +47,8 @@ impl WorldMessageBody for SMSG_RESURRECT_REQUEST {
     type Error = SMSG_RESURRECT_REQUESTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         // name_length: u32
         let name_length = crate::util::read_u32_le(r)?;
@@ -72,8 +73,8 @@ impl WorldMessageBody for SMSG_RESURRECT_REQUEST {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         // name_length: u32
         w.write_all(&self.name_length.to_le_bytes())?;
@@ -95,7 +96,7 @@ impl WorldMessageBody for SMSG_RESURRECT_REQUEST {
 
 impl VariableSized for SMSG_RESURRECT_REQUEST {
     fn size(&self) -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + 4 // name_length: u32
         + self.name.len() + 1 // name: CString and Null Terminator
         + 1 // caster_is_spirit_healer: u8
@@ -105,7 +106,7 @@ impl VariableSized for SMSG_RESURRECT_REQUEST {
 
 impl MaximumPossibleSized for SMSG_RESURRECT_REQUEST {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + 4 // name_length: u32
         + 256 // name: CString
         + 1 // caster_is_spirit_healer: u8

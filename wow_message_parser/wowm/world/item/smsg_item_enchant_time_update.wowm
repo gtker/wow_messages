@@ -1,11 +1,11 @@
 #tag_all versions "1.12";
 
 smsg SMSG_ITEM_ENCHANT_TIME_UPDATE = 0x01EB {
-    u64 item_guid;
+    Guid item_guid;
     u32 slot {
         comment = "Possibly used with EnchantmentSlot enum.";
     }
     u32 duration;
-    u64 player_guid;
+    Guid player_guid;
 }
 

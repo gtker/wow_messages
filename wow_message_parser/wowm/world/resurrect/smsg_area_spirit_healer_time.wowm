@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_AREA_SPIRIT_HEALER_TIME = 0x02E4 {
-    u64 guid;
+    Guid guid;
     u32 next_resurrect_time;
 }
 

@@ -102,7 +102,7 @@ enum TradeStatus : u32 {
 smsg SMSG_TRADE_STATUS = 0x0120 {
     TradeStatus status;
     if (status == BEGIN_TRADE) {
-        u64 unknown1 {
+        Guid unknown1 {
             comment = "Set to 0 in vmangos.";
         }
     }

@@ -2,6 +2,6 @@
 
 smsg SMSG_COOLDOWN_EVENT = 0x0135 {
     u32 spell_id;
-    u64 guid;
+    Guid guid;
 }
 

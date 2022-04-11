@@ -2,6 +2,6 @@
 
 cmsg CMSG_PETITION_QUERY = 0x01C6 {
     u32 guild_guid;
-    u64 petition_guid;
+    Guid petition_guid;
 }
 

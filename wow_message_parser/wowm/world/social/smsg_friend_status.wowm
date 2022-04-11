@@ -32,6 +32,6 @@ enum FriendResult : u8 {
 
 smsg SMSG_FRIEND_STATUS = 0x68 {
     FriendResult result;
-    u64 guid;
+    Guid guid;
 }
 

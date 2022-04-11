@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 smsg SMSG_SHOW_BANK = 0x01B8 {
-    u64 guid;
+    Guid guid;
 }
 

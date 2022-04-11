@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v2::{WorldResult, WorldResultError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -10,7 +11,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// smsg SMSG_CHAR_RENAME = 0x2C8 {
 ///     WorldResult result;
 ///     if (result == RESPONSE_SUCCESS) {
-///         u64 guid;
+///         Guid guid;
 ///         CString name;
 ///     }
 /// }
@@ -48,8 +49,8 @@ impl WorldMessageBody for SMSG_CHAR_RENAME {
 
         let result_if = match result {
             WorldResult::RESPONSE_SUCCESS => {
-                // guid: u64
-                let guid = crate::util::read_u64_le(r)?;
+                // guid: Guid
+                let guid = Guid::read(r)?;
 
                 // name: CString
                 let name = crate::util::read_c_string_to_vec(r)?;
@@ -157,8 +158,8 @@ impl WorldMessageBody for SMSG_CHAR_RENAME {
                 guid,
                 name,
             } => {
-                // guid: u64
-                w.write_all(&guid.to_le_bytes())?;
+                // guid: Guid
+                guid.write(w)?;
 
                 // name: CString
                 w.write_all(name.as_bytes())?;
@@ -304,7 +305,7 @@ impl From<WorldResultError> for SMSG_CHAR_RENAMEError {
 #[derive(Debug, PartialEq, Clone)]
 pub enum SMSG_CHAR_RENAMEWorldResult {
     RESPONSE_SUCCESS {
-        guid: u64,
+        guid: Guid,
         name: String,
     },
     RESPONSE_FAILURE,
@@ -613,7 +614,7 @@ impl VariableSized for SMSG_CHAR_RENAMEWorldResult {
                 name,
             } => {
                 4
-                + 8 // guid: u64
+                + 8 // guid: Guid
                 + name.len() + 1 // name: CString and Null Terminator
             }
             Self::RESPONSE_FAILURE =>  {

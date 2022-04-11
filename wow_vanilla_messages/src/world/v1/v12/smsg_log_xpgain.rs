@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{ExperienceAwardType, ExperienceAwardTypeError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -8,7 +9,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm#L8):
 /// ```text
 /// smsg SMSG_LOG_XPGAIN = 0x1D0 {
-///     u64 target_guid;
+///     Guid target_guid;
 ///     u32 total_exp;
 ///     ExperienceAwardType exp_type;
 ///     if (exp_type == NON_KILL) {
@@ -18,7 +19,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct SMSG_LOG_XPGAIN {
-    pub target_guid: u64,
+    pub target_guid: Guid,
     pub total_exp: u32,
     pub exp_type: SMSG_LOG_XPGAINExperienceAwardType,
 }
@@ -47,8 +48,8 @@ impl WorldMessageBody for SMSG_LOG_XPGAIN {
     type Error = SMSG_LOG_XPGAINError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // target_guid: u64
-        let target_guid = crate::util::read_u64_le(r)?;
+        // target_guid: Guid
+        let target_guid = Guid::read(r)?;
 
         // total_exp: u32
         let total_exp = crate::util::read_u32_le(r)?;
@@ -79,8 +80,8 @@ impl WorldMessageBody for SMSG_LOG_XPGAIN {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // target_guid: u64
-        w.write_all(&self.target_guid.to_le_bytes())?;
+        // target_guid: Guid
+        self.target_guid.write(w)?;
 
         // total_exp: u32
         w.write_all(&self.total_exp.to_le_bytes())?;
@@ -109,7 +110,7 @@ impl WorldMessageBody for SMSG_LOG_XPGAIN {
 
 impl VariableSized for SMSG_LOG_XPGAIN {
     fn size(&self) -> usize {
-        8 // target_guid: u64
+        8 // target_guid: Guid
         + 4 // total_exp: u32
         + self.exp_type.size() // exp_type: ExperienceAwardType and subfields
     }
@@ -117,7 +118,7 @@ impl VariableSized for SMSG_LOG_XPGAIN {
 
 impl MaximumPossibleSized for SMSG_LOG_XPGAIN {
     fn maximum_possible_size() -> usize {
-        8 // target_guid: u64
+        8 // target_guid: Guid
         + 4 // total_exp: u32
         + ExperienceAwardType::maximum_possible_size() // exp_type: ExperienceAwardType
     }

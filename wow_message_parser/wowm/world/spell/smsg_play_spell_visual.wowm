@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_PLAY_SPELL_VISUAL = 0x01F3 {
-    u64 guid;
+    Guid guid;
     u32 spell_art_kit {
         comment = "mangoszero: index from SpellVisualKit.dbc. Used with 0xB3 when buying spells.";
     }

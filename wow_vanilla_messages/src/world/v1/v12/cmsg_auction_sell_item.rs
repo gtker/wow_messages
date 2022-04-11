@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,8 +9,8 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_sell_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_sell_item.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUCTION_SELL_ITEM = 0x256 {
-///     u64 auctioneer_guid;
-///     u64 object_guid;
+///     Guid auctioneer_guid;
+///     Guid object_guid;
 ///     u32 stack_size;
 ///     u32 starting_bid;
 ///     u32 buyout;
@@ -17,8 +18,8 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct CMSG_AUCTION_SELL_ITEM {
-    pub auctioneer_guid: u64,
-    pub object_guid: u64,
+    pub auctioneer_guid: Guid,
+    pub object_guid: Guid,
     pub stack_size: u32,
     pub starting_bid: u32,
     pub buyout: u32,
@@ -49,11 +50,11 @@ impl WorldMessageBody for CMSG_AUCTION_SELL_ITEM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // auctioneer_guid: u64
-        let auctioneer_guid = crate::util::read_u64_le(r)?;
+        // auctioneer_guid: Guid
+        let auctioneer_guid = Guid::read(r)?;
 
-        // object_guid: u64
-        let object_guid = crate::util::read_u64_le(r)?;
+        // object_guid: Guid
+        let object_guid = Guid::read(r)?;
 
         // stack_size: u32
         let stack_size = crate::util::read_u32_le(r)?;
@@ -78,11 +79,11 @@ impl WorldMessageBody for CMSG_AUCTION_SELL_ITEM {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // auctioneer_guid: u64
-        w.write_all(&self.auctioneer_guid.to_le_bytes())?;
+        // auctioneer_guid: Guid
+        self.auctioneer_guid.write(w)?;
 
-        // object_guid: u64
-        w.write_all(&self.object_guid.to_le_bytes())?;
+        // object_guid: Guid
+        self.object_guid.write(w)?;
 
         // stack_size: u32
         w.write_all(&self.stack_size.to_le_bytes())?;
@@ -108,8 +109,8 @@ impl ConstantSized for CMSG_AUCTION_SELL_ITEM {
 
 impl MaximumPossibleSized for CMSG_AUCTION_SELL_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // auctioneer_guid: u64
-        + 8 // object_guid: u64
+        8 // auctioneer_guid: Guid
+        + 8 // object_guid: Guid
         + 4 // stack_size: u32
         + 4 // starting_bid: u32
         + 4 // buyout: u32

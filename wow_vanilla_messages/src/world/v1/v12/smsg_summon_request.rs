@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,13 +9,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_summon_request.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_summon_request.wowm#L3):
 /// ```text
 /// smsg SMSG_SUMMON_REQUEST = 0x2AB {
-///     u64 summoner_guid;
+///     Guid summoner_guid;
 ///     u32 zone_id;
 ///     u32 auto_decline_time_in_msecs;
 /// }
 /// ```
 pub struct SMSG_SUMMON_REQUEST {
-    pub summoner_guid: u64,
+    pub summoner_guid: Guid,
     pub zone_id: u32,
     pub auto_decline_time_in_msecs: u32,
 }
@@ -43,8 +44,8 @@ impl WorldMessageBody for SMSG_SUMMON_REQUEST {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // summoner_guid: u64
-        let summoner_guid = crate::util::read_u64_le(r)?;
+        // summoner_guid: Guid
+        let summoner_guid = Guid::read(r)?;
 
         // zone_id: u32
         let zone_id = crate::util::read_u32_le(r)?;
@@ -60,8 +61,8 @@ impl WorldMessageBody for SMSG_SUMMON_REQUEST {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // summoner_guid: u64
-        w.write_all(&self.summoner_guid.to_le_bytes())?;
+        // summoner_guid: Guid
+        self.summoner_guid.write(w)?;
 
         // zone_id: u32
         w.write_all(&self.zone_id.to_le_bytes())?;
@@ -81,7 +82,7 @@ impl ConstantSized for SMSG_SUMMON_REQUEST {
 
 impl MaximumPossibleSized for SMSG_SUMMON_REQUEST {
     fn maximum_possible_size() -> usize {
-        8 // summoner_guid: u64
+        8 // summoner_guid: Guid
         + 4 // zone_id: u32
         + 4 // auto_decline_time_in_msecs: u32
     }

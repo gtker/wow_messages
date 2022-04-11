@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_BINDER_ACTIVATE = 0x01B5 {
-    u64 guid;
+    Guid guid;
 }
 

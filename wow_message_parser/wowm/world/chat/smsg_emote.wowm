@@ -2,6 +2,6 @@
 
 smsg SMSG_EMOTE = 0x0103 {
     Emote emote;
-    u64 guid;
+    Guid guid;
 }
 

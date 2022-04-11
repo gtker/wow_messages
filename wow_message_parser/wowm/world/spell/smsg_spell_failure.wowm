@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_SPELL_FAILURE = 0x0133 {
-    u64 guid;
+    Guid guid;
     u32 spell_id;
     SpellCastResult result;
 }

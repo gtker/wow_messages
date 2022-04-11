@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,11 +9,11 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_turn_in_petition.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_turn_in_petition.wowm#L3):
 /// ```text
 /// cmsg CMSG_TURN_IN_PETITION = 0x1C4 {
-///     u64 petition_guid;
+///     Guid petition_guid;
 /// }
 /// ```
 pub struct CMSG_TURN_IN_PETITION {
-    pub petition_guid: u64,
+    pub petition_guid: Guid,
 }
 
 impl WorldClientMessageWrite for CMSG_TURN_IN_PETITION {
@@ -39,8 +40,8 @@ impl WorldMessageBody for CMSG_TURN_IN_PETITION {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // petition_guid: u64
-        let petition_guid = crate::util::read_u64_le(r)?;
+        // petition_guid: Guid
+        let petition_guid = Guid::read(r)?;
 
         Ok(Self {
             petition_guid,
@@ -48,8 +49,8 @@ impl WorldMessageBody for CMSG_TURN_IN_PETITION {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // petition_guid: u64
-        w.write_all(&self.petition_guid.to_le_bytes())?;
+        // petition_guid: Guid
+        self.petition_guid.write(w)?;
 
         Ok(())
     }
@@ -63,7 +64,7 @@ impl ConstantSized for CMSG_TURN_IN_PETITION {
 
 impl MaximumPossibleSized for CMSG_TURN_IN_PETITION {
     fn maximum_possible_size() -> usize {
-        8 // petition_guid: u64
+        8 // petition_guid: Guid
     }
 }
 

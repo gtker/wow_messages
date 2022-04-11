@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -9,12 +10,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// cmsg CMSG_CREATURE_QUERY = 0x60 {
 ///     u32 creature;
-///     u64 guid;
+///     Guid guid;
 /// }
 /// ```
 pub struct CMSG_CREATURE_QUERY {
     pub creature: u32,
-    pub guid: u64,
+    pub guid: Guid,
 }
 
 impl WorldClientMessageWrite for CMSG_CREATURE_QUERY {
@@ -44,8 +45,8 @@ impl WorldMessageBody for CMSG_CREATURE_QUERY {
         // creature: u32
         let creature = crate::util::read_u32_le(r)?;
 
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         Ok(Self {
             creature,
@@ -57,8 +58,8 @@ impl WorldMessageBody for CMSG_CREATURE_QUERY {
         // creature: u32
         w.write_all(&self.creature.to_le_bytes())?;
 
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         Ok(())
     }
@@ -73,7 +74,7 @@ impl ConstantSized for CMSG_CREATURE_QUERY {
 impl MaximumPossibleSized for CMSG_CREATURE_QUERY {
     fn maximum_possible_size() -> usize {
         4 // creature: u32
-        + 8 // guid: u64
+        + 8 // guid: Guid
     }
 }
 

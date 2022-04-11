@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -9,12 +10,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// cmsg CMSG_ITEM_QUERY_SINGLE = 0x56 {
 ///     u32 item;
-///     u64 guid;
+///     Guid guid;
 /// }
 /// ```
 pub struct CMSG_ITEM_QUERY_SINGLE {
     pub item: u32,
-    pub guid: u64,
+    pub guid: Guid,
 }
 
 impl WorldClientMessageWrite for CMSG_ITEM_QUERY_SINGLE {
@@ -44,8 +45,8 @@ impl WorldMessageBody for CMSG_ITEM_QUERY_SINGLE {
         // item: u32
         let item = crate::util::read_u32_le(r)?;
 
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         Ok(Self {
             item,
@@ -57,8 +58,8 @@ impl WorldMessageBody for CMSG_ITEM_QUERY_SINGLE {
         // item: u32
         w.write_all(&self.item.to_le_bytes())?;
 
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         Ok(())
     }
@@ -73,7 +74,7 @@ impl ConstantSized for CMSG_ITEM_QUERY_SINGLE {
 impl MaximumPossibleSized for CMSG_ITEM_QUERY_SINGLE {
     fn maximum_possible_size() -> usize {
         4 // item: u32
-        + 8 // guid: u64
+        + 8 // guid: Guid
     }
 }
 

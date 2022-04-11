@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{CharacterFlags};
 use crate::world::v1::v12::{CharacterGear, CharacterGearError};
@@ -12,7 +13,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm#L17):
 /// ```text
 /// struct Character {
-///     u64 guid;
+///     Guid guid;
 ///     CString name;
 ///     Race race;
 ///     Class class;
@@ -40,7 +41,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct Character {
-    pub guid: u64,
+    pub guid: Guid,
     pub name: String,
     pub race: Race,
     pub class: Class,
@@ -94,8 +95,8 @@ impl ReadableAndWritable for Character {
     type Error = CharacterError;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
@@ -201,8 +202,8 @@ impl ReadableAndWritable for Character {
     }
 
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         // name: CString
         w.write_all(self.name.as_bytes())?;
@@ -287,7 +288,7 @@ impl ReadableAndWritable for Character {
 
 impl VariableSized for Character {
     fn size(&self) -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + self.name.len() + 1 // name: CString and Null Terminator
         + Race::size() // race: Race
         + Class::size() // class: Class
@@ -317,7 +318,7 @@ impl VariableSized for Character {
 
 impl MaximumPossibleSized for Character {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + 256 // name: CString
         + Race::maximum_possible_size() // race: Race
         + Class::maximum_possible_size() // class: Class

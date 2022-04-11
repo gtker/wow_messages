@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,11 +9,11 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_buy_stable_slot.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_buy_stable_slot.wowm#L3):
 /// ```text
 /// cmsg CMSG_BUY_STABLE_SLOT = 0x272 {
-///     u64 npc_guid;
+///     Guid npc_guid;
 /// }
 /// ```
 pub struct CMSG_BUY_STABLE_SLOT {
-    pub npc_guid: u64,
+    pub npc_guid: Guid,
 }
 
 impl WorldClientMessageWrite for CMSG_BUY_STABLE_SLOT {
@@ -39,8 +40,8 @@ impl WorldMessageBody for CMSG_BUY_STABLE_SLOT {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // npc_guid: u64
-        let npc_guid = crate::util::read_u64_le(r)?;
+        // npc_guid: Guid
+        let npc_guid = Guid::read(r)?;
 
         Ok(Self {
             npc_guid,
@@ -48,8 +49,8 @@ impl WorldMessageBody for CMSG_BUY_STABLE_SLOT {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // npc_guid: u64
-        w.write_all(&self.npc_guid.to_le_bytes())?;
+        // npc_guid: Guid
+        self.npc_guid.write(w)?;
 
         Ok(())
     }
@@ -63,7 +64,7 @@ impl ConstantSized for CMSG_BUY_STABLE_SLOT {
 
 impl MaximumPossibleSized for CMSG_BUY_STABLE_SLOT {
     fn maximum_possible_size() -> usize {
-        8 // npc_guid: u64
+        8 // npc_guid: Guid
     }
 }
 

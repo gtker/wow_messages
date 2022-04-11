@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,12 +9,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_failed_other.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_failed_other.wowm#L3):
 /// ```text
 /// smsg SMSG_SPELL_FAILED_OTHER = 0x2A6 {
-///     u64 caster_guid;
+///     Guid caster_guid;
 ///     u32 spell_id;
 /// }
 /// ```
 pub struct SMSG_SPELL_FAILED_OTHER {
-    pub caster_guid: u64,
+    pub caster_guid: Guid,
     pub spell_id: u32,
 }
 
@@ -41,8 +42,8 @@ impl WorldMessageBody for SMSG_SPELL_FAILED_OTHER {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // caster_guid: u64
-        let caster_guid = crate::util::read_u64_le(r)?;
+        // caster_guid: Guid
+        let caster_guid = Guid::read(r)?;
 
         // spell_id: u32
         let spell_id = crate::util::read_u32_le(r)?;
@@ -54,8 +55,8 @@ impl WorldMessageBody for SMSG_SPELL_FAILED_OTHER {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // caster_guid: u64
-        w.write_all(&self.caster_guid.to_le_bytes())?;
+        // caster_guid: Guid
+        self.caster_guid.write(w)?;
 
         // spell_id: u32
         w.write_all(&self.spell_id.to_le_bytes())?;
@@ -72,7 +73,7 @@ impl ConstantSized for SMSG_SPELL_FAILED_OTHER {
 
 impl MaximumPossibleSized for SMSG_SPELL_FAILED_OTHER {
     fn maximum_possible_size() -> usize {
-        8 // caster_guid: u64
+        8 // caster_guid: Guid
         + 4 // spell_id: u32
     }
 }

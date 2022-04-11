@@ -1,9 +1,9 @@
 #tag_all versions "1.12";
 
 smsg SMSG_PETITION_SHOW_SIGNATURES = 0x01BF {
-    u64 item_guid;
-    u64 owner_guid;
-    u64 petition_guid;
+    Guid item_guid;
+    Guid owner_guid;
+    Guid petition_guid;
     u8 amount_of_signatures;
 }
 

@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_GROUP_ASSISTANT_LEADER = 0x028F {
-    u64 guid;
+    Guid guid;
     /* mangos treats as bool */
     u8 set_assistant;
 }

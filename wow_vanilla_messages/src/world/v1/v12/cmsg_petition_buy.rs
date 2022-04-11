@@ -10,7 +10,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// cmsg CMSG_PETITION_BUY = 0x1BD {
 ///     Guid npc;
 ///     u32 skip1;
-///     u64 skip2;
+///     Guid skip2;
 ///     CString name;
 ///     u32 skip3;
 ///     u32 skip4;
@@ -31,7 +31,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 pub struct CMSG_PETITION_BUY {
     pub npc: Guid,
     pub skip1: u32,
-    pub skip2: u64,
+    pub skip2: Guid,
     pub name: String,
     pub skip3: u32,
     pub skip4: u32,
@@ -79,8 +79,8 @@ impl WorldMessageBody for CMSG_PETITION_BUY {
         // skip1: u32
         let skip1 = crate::util::read_u32_le(r)?;
 
-        // skip2: u64
-        let skip2 = crate::util::read_u64_le(r)?;
+        // skip2: Guid
+        let skip2 = Guid::read(r)?;
 
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
@@ -157,8 +157,8 @@ impl WorldMessageBody for CMSG_PETITION_BUY {
         // skip1: u32
         w.write_all(&self.skip1.to_le_bytes())?;
 
-        // skip2: u64
-        w.write_all(&self.skip2.to_le_bytes())?;
+        // skip2: Guid
+        self.skip2.write(w)?;
 
         // name: CString
         w.write_all(self.name.as_bytes())?;
@@ -215,7 +215,7 @@ impl VariableSized for CMSG_PETITION_BUY {
     fn size(&self) -> usize {
         8 // npc: Guid
         + 4 // skip1: u32
-        + 8 // skip2: u64
+        + 8 // skip2: Guid
         + self.name.len() + 1 // name: CString and Null Terminator
         + 4 // skip3: u32
         + 4 // skip4: u32
@@ -238,7 +238,7 @@ impl MaximumPossibleSized for CMSG_PETITION_BUY {
     fn maximum_possible_size() -> usize {
         8 // npc: Guid
         + 4 // skip1: u32
-        + 8 // skip2: u64
+        + 8 // skip2: Guid
         + 256 // name: CString
         + 4 // skip3: u32
         + 4 // skip4: u32

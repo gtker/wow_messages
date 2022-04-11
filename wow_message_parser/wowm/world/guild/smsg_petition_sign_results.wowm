@@ -10,8 +10,8 @@ enum PetitionResult : u32 {
 }
 
 smsg SMSG_PETITION_SIGN_RESULTS = 0x01C1 {
-    u64 petition_guid;
-    u64 owner_guid;
+    Guid petition_guid;
+    Guid owner_guid;
     PetitionResult result;
 }
 

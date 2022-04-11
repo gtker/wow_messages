@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_DEL_FRIEND = 0x6A {
-    u64 guid;
+    Guid guid;
 }
 

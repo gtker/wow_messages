@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{FriendStatus, FriendStatusError};
@@ -8,7 +9,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_list.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_list.wowm#L11):
 /// ```text
 /// struct Friend {
-///     u64 guid;
+///     Guid guid;
 ///     FriendStatus status;
 ///     if (status != OFFLINE) {
 ///         Area area;
@@ -18,7 +19,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct Friend {
-    pub guid: u64,
+    pub guid: Guid,
     pub status: FriendFriendStatus,
 }
 
@@ -26,8 +27,8 @@ impl ReadableAndWritable for Friend {
     type Error = FriendError;
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         // status: FriendStatus
         let status = FriendStatus::read(r)?;
@@ -107,8 +108,8 @@ impl ReadableAndWritable for Friend {
     }
 
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         // status: FriendStatus
         self.status.write(w)?;
@@ -184,14 +185,14 @@ impl ReadableAndWritable for Friend {
 
 impl VariableSized for Friend {
     fn size(&self) -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + self.status.size() // status: FriendStatus and subfields
     }
 }
 
 impl MaximumPossibleSized for Friend {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + FriendStatus::maximum_possible_size() // status: FriendStatus
     }
 }

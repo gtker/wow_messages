@@ -15,7 +15,7 @@ struct CharacterGear {
 }
 
 struct Character {
-    u64 guid;
+    Guid guid;
     CString name;
     Race race;
     Class class;

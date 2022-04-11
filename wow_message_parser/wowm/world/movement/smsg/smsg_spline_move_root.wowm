@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 smsg SMSG_SPLINE_MOVE_ROOT = 0x031A {
-    u64 guid;
+    Guid guid;
 }
 

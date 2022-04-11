@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::SpellCooldownStatus;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -8,12 +9,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_cooldown.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_cooldown.wowm#L8):
 /// ```text
 /// smsg SMSG_SPELL_COOLDOWN = 0x134 {
-///     u64 guid;
+///     Guid guid;
 ///     SpellCooldownStatus[-] cooldowns;
 /// }
 /// ```
 pub struct SMSG_SPELL_COOLDOWN {
-    pub guid: u64,
+    pub guid: Guid,
     pub cooldowns: Vec<SpellCooldownStatus>,
 }
 
@@ -41,12 +42,12 @@ impl WorldMessageBody for SMSG_SPELL_COOLDOWN {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         // cooldowns: SpellCooldownStatus[-]
         let mut current_size = {
-            8 // guid: u64
+            8 // guid: Guid
         };
         let mut cooldowns = Vec::with_capacity(body_size as usize - current_size);
         while current_size < (body_size as usize) {
@@ -61,8 +62,8 @@ impl WorldMessageBody for SMSG_SPELL_COOLDOWN {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         // cooldowns: SpellCooldownStatus[-]
         for i in self.cooldowns.iter() {
@@ -75,14 +76,14 @@ impl WorldMessageBody for SMSG_SPELL_COOLDOWN {
 
 impl VariableSized for SMSG_SPELL_COOLDOWN {
     fn size(&self) -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + self.cooldowns.iter().fold(0, |acc, x| acc + SpellCooldownStatus::size()) // cooldowns: SpellCooldownStatus[-]
     }
 }
 
 impl MaximumPossibleSized for SMSG_SPELL_COOLDOWN {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + 65536 // cooldowns: SpellCooldownStatus[-]
     }
 }

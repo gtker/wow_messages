@@ -6,7 +6,7 @@ struct SpellCooldownStatus {
 }
 
 smsg SMSG_SPELL_COOLDOWN = 0x0134 {
-    u64 guid;
+    Guid guid;
     SpellCooldownStatus[-] cooldowns;
 }
 

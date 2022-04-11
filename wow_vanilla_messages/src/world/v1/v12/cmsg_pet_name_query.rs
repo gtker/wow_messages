@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -9,12 +10,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// cmsg CMSG_PET_NAME_QUERY = 0x52 {
 ///     u32 pet_number;
-///     u64 guid;
+///     Guid guid;
 /// }
 /// ```
 pub struct CMSG_PET_NAME_QUERY {
     pub pet_number: u32,
-    pub guid: u64,
+    pub guid: Guid,
 }
 
 impl WorldClientMessageWrite for CMSG_PET_NAME_QUERY {
@@ -44,8 +45,8 @@ impl WorldMessageBody for CMSG_PET_NAME_QUERY {
         // pet_number: u32
         let pet_number = crate::util::read_u32_le(r)?;
 
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         Ok(Self {
             pet_number,
@@ -57,8 +58,8 @@ impl WorldMessageBody for CMSG_PET_NAME_QUERY {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;
 
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         Ok(())
     }
@@ -73,7 +74,7 @@ impl ConstantSized for CMSG_PET_NAME_QUERY {
 impl MaximumPossibleSized for CMSG_PET_NAME_QUERY {
     fn maximum_possible_size() -> usize {
         4 // pet_number: u32
-        + 8 // guid: u64
+        + 8 // guid: Guid
     }
 }
 
@@ -96,7 +97,7 @@ mod test {
 
         let expected = CMSG_PET_NAME_QUERY {
             pet_number: 0xDEADBEEF,
-            guid: 0xFACADEDEADBEEF,
+            guid: Guid::new(0xFACADEDEADBEEF),
         };
 
         let header_size = 2 + 4;

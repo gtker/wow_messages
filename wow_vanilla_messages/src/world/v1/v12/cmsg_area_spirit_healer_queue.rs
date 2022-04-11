@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,11 +9,11 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/resurrect/cmsg_area_spirit_healer_queue.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/resurrect/cmsg_area_spirit_healer_queue.wowm#L3):
 /// ```text
 /// cmsg CMSG_AREA_SPIRIT_HEALER_QUEUE = 0x2E3 {
-///     u64 guid;
+///     Guid guid;
 /// }
 /// ```
 pub struct CMSG_AREA_SPIRIT_HEALER_QUEUE {
-    pub guid: u64,
+    pub guid: Guid,
 }
 
 impl WorldClientMessageWrite for CMSG_AREA_SPIRIT_HEALER_QUEUE {
@@ -39,8 +40,8 @@ impl WorldMessageBody for CMSG_AREA_SPIRIT_HEALER_QUEUE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         Ok(Self {
             guid,
@@ -48,8 +49,8 @@ impl WorldMessageBody for CMSG_AREA_SPIRIT_HEALER_QUEUE {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         Ok(())
     }
@@ -63,7 +64,7 @@ impl ConstantSized for CMSG_AREA_SPIRIT_HEALER_QUEUE {
 
 impl MaximumPossibleSized for CMSG_AREA_SPIRIT_HEALER_QUEUE {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
     }
 }
 

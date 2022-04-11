@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_LOOT_ROLL = 0x02A0 {
-    u64 item_guid;
+    Guid item_guid;
     u32 item_slot;
     RollVote vote;
 }

@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 struct ChannelMember {
-    u64 guid;
+    Guid guid;
     /* TODO: unknown flags */
     u8 member_flags;
 }

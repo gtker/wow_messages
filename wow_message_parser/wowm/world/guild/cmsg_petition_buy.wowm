@@ -5,7 +5,7 @@
 cmsg CMSG_PETITION_BUY = 0x01BD {
     Guid npc;
     u32 skip1;
-    u64 skip2;
+    Guid skip2;
     CString name;
     u32 skip3;
     u32 skip4;

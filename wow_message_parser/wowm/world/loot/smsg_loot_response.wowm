@@ -20,7 +20,7 @@ enum LootMethod : u8 {
 }
 
 smsg SMSG_LOOT_RESPONSE = 0x0160 {
-    u64 guid;
+    Guid guid;
     LootMethod loot_method;
 }
 

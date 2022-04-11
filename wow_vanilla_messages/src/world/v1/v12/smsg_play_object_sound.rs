@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -9,12 +10,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// smsg SMSG_PLAY_OBJECT_SOUND = 0x278 {
 ///     u32 sound_id;
-///     u64 guid;
+///     Guid guid;
 /// }
 /// ```
 pub struct SMSG_PLAY_OBJECT_SOUND {
     pub sound_id: u32,
-    pub guid: u64,
+    pub guid: Guid,
 }
 
 impl WorldServerMessageWrite for SMSG_PLAY_OBJECT_SOUND {
@@ -44,8 +45,8 @@ impl WorldMessageBody for SMSG_PLAY_OBJECT_SOUND {
         // sound_id: u32
         let sound_id = crate::util::read_u32_le(r)?;
 
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         Ok(Self {
             sound_id,
@@ -57,8 +58,8 @@ impl WorldMessageBody for SMSG_PLAY_OBJECT_SOUND {
         // sound_id: u32
         w.write_all(&self.sound_id.to_le_bytes())?;
 
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         Ok(())
     }
@@ -73,7 +74,7 @@ impl ConstantSized for SMSG_PLAY_OBJECT_SOUND {
 impl MaximumPossibleSized for SMSG_PLAY_OBJECT_SOUND {
     fn maximum_possible_size() -> usize {
         4 // sound_id: u32
-        + 8 // guid: u64
+        + 8 // guid: Guid
     }
 }
 

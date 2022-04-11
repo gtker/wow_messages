@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,13 +9,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_repair_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_repair_item.wowm#L3):
 /// ```text
 /// cmsg CMSG_REPAIR_ITEM = 0x2A8 {
-///     u64 npc_guid;
-///     u64 item_guid;
+///     Guid npc_guid;
+///     Guid item_guid;
 /// }
 /// ```
 pub struct CMSG_REPAIR_ITEM {
-    pub npc_guid: u64,
-    pub item_guid: u64,
+    pub npc_guid: Guid,
+    pub item_guid: Guid,
 }
 
 impl WorldClientMessageWrite for CMSG_REPAIR_ITEM {
@@ -41,11 +42,11 @@ impl WorldMessageBody for CMSG_REPAIR_ITEM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // npc_guid: u64
-        let npc_guid = crate::util::read_u64_le(r)?;
+        // npc_guid: Guid
+        let npc_guid = Guid::read(r)?;
 
-        // item_guid: u64
-        let item_guid = crate::util::read_u64_le(r)?;
+        // item_guid: Guid
+        let item_guid = Guid::read(r)?;
 
         Ok(Self {
             npc_guid,
@@ -54,11 +55,11 @@ impl WorldMessageBody for CMSG_REPAIR_ITEM {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // npc_guid: u64
-        w.write_all(&self.npc_guid.to_le_bytes())?;
+        // npc_guid: Guid
+        self.npc_guid.write(w)?;
 
-        // item_guid: u64
-        w.write_all(&self.item_guid.to_le_bytes())?;
+        // item_guid: Guid
+        self.item_guid.write(w)?;
 
         Ok(())
     }
@@ -72,8 +73,8 @@ impl ConstantSized for CMSG_REPAIR_ITEM {
 
 impl MaximumPossibleSized for CMSG_REPAIR_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // npc_guid: u64
-        + 8 // item_guid: u64
+        8 // npc_guid: Guid
+        + 8 // item_guid: Guid
     }
 }
 

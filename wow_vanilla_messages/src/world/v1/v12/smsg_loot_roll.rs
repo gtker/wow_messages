@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{RollVote, RollVoteError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -9,9 +10,9 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm#L3):
 /// ```text
 /// smsg SMSG_LOOT_ROLL = 0x2A2 {
-///     u64 creature_guid;
+///     Guid creature_guid;
 ///     u32 loot_slot;
-///     u64 item_guid;
+///     Guid item_guid;
 ///     u32 item_id;
 ///     u32 item_random_suffix;
 ///     u32 item_random_property_id;
@@ -20,9 +21,9 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct SMSG_LOOT_ROLL {
-    pub creature_guid: u64,
+    pub creature_guid: Guid,
     pub loot_slot: u32,
-    pub item_guid: u64,
+    pub item_guid: Guid,
     pub item_id: u32,
     pub item_random_suffix: u32,
     pub item_random_property_id: u32,
@@ -54,14 +55,14 @@ impl WorldMessageBody for SMSG_LOOT_ROLL {
     type Error = SMSG_LOOT_ROLLError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // creature_guid: u64
-        let creature_guid = crate::util::read_u64_le(r)?;
+        // creature_guid: Guid
+        let creature_guid = Guid::read(r)?;
 
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(r)?;
 
-        // item_guid: u64
-        let item_guid = crate::util::read_u64_le(r)?;
+        // item_guid: Guid
+        let item_guid = Guid::read(r)?;
 
         // item_id: u32
         let item_id = crate::util::read_u32_le(r)?;
@@ -91,14 +92,14 @@ impl WorldMessageBody for SMSG_LOOT_ROLL {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // creature_guid: u64
-        w.write_all(&self.creature_guid.to_le_bytes())?;
+        // creature_guid: Guid
+        self.creature_guid.write(w)?;
 
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
 
-        // item_guid: u64
-        w.write_all(&self.item_guid.to_le_bytes())?;
+        // item_guid: Guid
+        self.item_guid.write(w)?;
 
         // item_id: u32
         w.write_all(&self.item_id.to_le_bytes())?;
@@ -127,9 +128,9 @@ impl ConstantSized for SMSG_LOOT_ROLL {
 
 impl MaximumPossibleSized for SMSG_LOOT_ROLL {
     fn maximum_possible_size() -> usize {
-        8 // creature_guid: u64
+        8 // creature_guid: Guid
         + 4 // loot_slot: u32
-        + 8 // item_guid: u64
+        + 8 // item_guid: Guid
         + 4 // item_id: u32
         + 4 // item_random_suffix: u32
         + 4 // item_random_property_id: u32

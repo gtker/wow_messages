@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,12 +9,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_group_assistant_leader.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_group_assistant_leader.wowm#L3):
 /// ```text
 /// cmsg CMSG_GROUP_ASSISTANT_LEADER = 0x28F {
-///     u64 guid;
+///     Guid guid;
 ///     u8 set_assistant;
 /// }
 /// ```
 pub struct CMSG_GROUP_ASSISTANT_LEADER {
-    pub guid: u64,
+    pub guid: Guid,
     pub set_assistant: u8,
 }
 
@@ -41,8 +42,8 @@ impl WorldMessageBody for CMSG_GROUP_ASSISTANT_LEADER {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         // set_assistant: u8
         let set_assistant = crate::util::read_u8_le(r)?;
@@ -54,8 +55,8 @@ impl WorldMessageBody for CMSG_GROUP_ASSISTANT_LEADER {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         // set_assistant: u8
         w.write_all(&self.set_assistant.to_le_bytes())?;
@@ -72,7 +73,7 @@ impl ConstantSized for CMSG_GROUP_ASSISTANT_LEADER {
 
 impl MaximumPossibleSized for CMSG_GROUP_ASSISTANT_LEADER {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + 1 // set_assistant: u8
     }
 }

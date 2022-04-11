@@ -19,7 +19,7 @@ enum AiReaction : u32 {
 }
 
 smsg SMSG_AI_REACTION = 0x013C {
-    u64 guid;
+    Guid guid;
     AiReaction reaction;
 }
 

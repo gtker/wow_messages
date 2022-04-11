@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,12 +9,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_item_time_update.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_item_time_update.wowm#L3):
 /// ```text
 /// smsg SMSG_ITEM_TIME_UPDATE = 0x1EA {
-///     u64 guid;
+///     Guid guid;
 ///     u32 duration;
 /// }
 /// ```
 pub struct SMSG_ITEM_TIME_UPDATE {
-    pub guid: u64,
+    pub guid: Guid,
     pub duration: u32,
 }
 
@@ -41,8 +42,8 @@ impl WorldMessageBody for SMSG_ITEM_TIME_UPDATE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         // duration: u32
         let duration = crate::util::read_u32_le(r)?;
@@ -54,8 +55,8 @@ impl WorldMessageBody for SMSG_ITEM_TIME_UPDATE {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         // duration: u32
         w.write_all(&self.duration.to_le_bytes())?;
@@ -72,7 +73,7 @@ impl ConstantSized for SMSG_ITEM_TIME_UPDATE {
 
 impl MaximumPossibleSized for SMSG_ITEM_TIME_UPDATE {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + 4 // duration: u32
     }
 }

@@ -2,6 +2,6 @@
 
 cmsg CMSG_CREATURE_QUERY = 0x60 {
     u32 creature;
-    u64 guid;
+    Guid guid;
 }
 

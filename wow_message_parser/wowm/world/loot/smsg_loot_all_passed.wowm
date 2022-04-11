@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_LOOT_ALL_PASSED = 0x029E {
-    u64 looted_target_guid;
+    Guid looted_target_guid;
     u32 loot_slot;
     /* TODO Item id enum? */
     u32 item_id;

@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,8 +9,8 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_resistlog.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_resistlog.wowm#L5):
 /// ```text
 /// smsg SMSG_RESISTLOG = 0x1D6 {
-///     u64 guid1;
-///     u64 guid2;
+///     Guid guid1;
+///     Guid guid2;
 ///     u32 unknown1;
 ///     f32 unknown2;
 ///     f32 unknown3;
@@ -18,8 +19,8 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct SMSG_RESISTLOG {
-    pub guid1: u64,
-    pub guid2: u64,
+    pub guid1: Guid,
+    pub guid2: Guid,
     pub unknown1: u32,
     pub unknown2: f32,
     pub unknown3: f32,
@@ -51,11 +52,11 @@ impl WorldMessageBody for SMSG_RESISTLOG {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid1: u64
-        let guid1 = crate::util::read_u64_le(r)?;
+        // guid1: Guid
+        let guid1 = Guid::read(r)?;
 
-        // guid2: u64
-        let guid2 = crate::util::read_u64_le(r)?;
+        // guid2: Guid
+        let guid2 = Guid::read(r)?;
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
@@ -82,11 +83,11 @@ impl WorldMessageBody for SMSG_RESISTLOG {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid1: u64
-        w.write_all(&self.guid1.to_le_bytes())?;
+        // guid1: Guid
+        self.guid1.write(w)?;
 
-        // guid2: u64
-        w.write_all(&self.guid2.to_le_bytes())?;
+        // guid2: Guid
+        self.guid2.write(w)?;
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -115,8 +116,8 @@ impl ConstantSized for SMSG_RESISTLOG {
 
 impl MaximumPossibleSized for SMSG_RESISTLOG {
     fn maximum_possible_size() -> usize {
-        8 // guid1: u64
-        + 8 // guid2: u64
+        8 // guid1: Guid
+        + 8 // guid2: Guid
         + 4 // unknown1: u32
         + 4 // unknown2: f32
         + 4 // unknown3: f32

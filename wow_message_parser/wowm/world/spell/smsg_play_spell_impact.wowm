@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 smsg SMSG_PLAY_SPELL_IMPACT = 0x01F7 {
-    u64 guid;
+    Guid guid;
     u32 spell_visual_kit {
         comment = "mangoszero: index from SpellVisualKit.dbc. Used for visual effect on player with 0x016A";
     }

@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{Gender, GenderError};
 use crate::world::v1::v12::{Race, RaceError};
@@ -10,7 +11,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm#L3):
 /// ```text
 /// smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
-///     u64 guid;
+///     Guid guid;
 ///     CString character_name;
 ///     CString realm_name;
 ///     Race race;
@@ -19,7 +20,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// }
 /// ```
 pub struct SMSG_NAME_QUERY_RESPONSE {
-    pub guid: u64,
+    pub guid: Guid,
     pub character_name: String,
     pub realm_name: String,
     pub race: Race,
@@ -51,8 +52,8 @@ impl WorldMessageBody for SMSG_NAME_QUERY_RESPONSE {
     type Error = SMSG_NAME_QUERY_RESPONSEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         // character_name: CString
         let character_name = crate::util::read_c_string_to_vec(r)?;
@@ -82,8 +83,8 @@ impl WorldMessageBody for SMSG_NAME_QUERY_RESPONSE {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         // character_name: CString
         w.write_all(self.character_name.as_bytes())?;
@@ -110,7 +111,7 @@ impl WorldMessageBody for SMSG_NAME_QUERY_RESPONSE {
 
 impl VariableSized for SMSG_NAME_QUERY_RESPONSE {
     fn size(&self) -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + self.character_name.len() + 1 // character_name: CString and Null Terminator
         + self.realm_name.len() + 1 // realm_name: CString and Null Terminator
         + 4 // race: Race upcasted to u32
@@ -121,7 +122,7 @@ impl VariableSized for SMSG_NAME_QUERY_RESPONSE {
 
 impl MaximumPossibleSized for SMSG_NAME_QUERY_RESPONSE {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + 256 // character_name: CString
         + 256 // realm_name: CString
         + Race::maximum_possible_size() // race: Race
@@ -204,7 +205,7 @@ mod test {
              0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
         let expected = SMSG_NAME_QUERY_RESPONSE {
-            guid: 0xDEADBEEF,
+            guid: Guid::new(0xDEADBEEF),
             character_name: String::from("Asdf"),
             realm_name: String::from(""),
             race: Race::HUMAN,
@@ -242,7 +243,7 @@ mod test {
              0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
         let expected = SMSG_NAME_QUERY_RESPONSE {
-            guid: 0xDEADBEEF,
+            guid: Guid::new(0xDEADBEEF),
             character_name: String::from("Asdf"),
             realm_name: String::from("A"),
             race: Race::HUMAN,

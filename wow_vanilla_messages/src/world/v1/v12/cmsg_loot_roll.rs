@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::v1::v12::{RollVote, RollVoteError};
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -9,13 +10,13 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/cmsg_loot_roll.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/cmsg_loot_roll.wowm#L3):
 /// ```text
 /// cmsg CMSG_LOOT_ROLL = 0x2A0 {
-///     u64 item_guid;
+///     Guid item_guid;
 ///     u32 item_slot;
 ///     RollVote vote;
 /// }
 /// ```
 pub struct CMSG_LOOT_ROLL {
-    pub item_guid: u64,
+    pub item_guid: Guid,
     pub item_slot: u32,
     pub vote: RollVote,
 }
@@ -44,8 +45,8 @@ impl WorldMessageBody for CMSG_LOOT_ROLL {
     type Error = CMSG_LOOT_ROLLError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // item_guid: u64
-        let item_guid = crate::util::read_u64_le(r)?;
+        // item_guid: Guid
+        let item_guid = Guid::read(r)?;
 
         // item_slot: u32
         let item_slot = crate::util::read_u32_le(r)?;
@@ -61,8 +62,8 @@ impl WorldMessageBody for CMSG_LOOT_ROLL {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_guid: u64
-        w.write_all(&self.item_guid.to_le_bytes())?;
+        // item_guid: Guid
+        self.item_guid.write(w)?;
 
         // item_slot: u32
         w.write_all(&self.item_slot.to_le_bytes())?;
@@ -82,7 +83,7 @@ impl ConstantSized for CMSG_LOOT_ROLL {
 
 impl MaximumPossibleSized for CMSG_LOOT_ROLL {
     fn maximum_possible_size() -> usize {
-        8 // item_guid: u64
+        8 // item_guid: Guid
         + 4 // item_slot: u32
         + RollVote::size() // vote: RollVote
     }

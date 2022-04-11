@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_WORLD_TELEPORT = 0x08 {
-    u64 time_in_msec;
+    Guid time_in_msec;
     Map map;
     f32 position_x;
     f32 position_y;

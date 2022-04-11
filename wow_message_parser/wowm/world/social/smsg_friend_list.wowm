@@ -9,7 +9,7 @@ enum FriendStatus : u8 {
 }
 
 struct Friend {
-    u64 guid;
+    Guid guid;
     FriendStatus status;
     if (status != OFFLINE) {
         Area area;

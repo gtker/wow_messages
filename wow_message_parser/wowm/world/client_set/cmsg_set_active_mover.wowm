@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_SET_ACTIVE_MOVER = 0x26A {
-    u64 guid;
+    Guid guid;
 }
 

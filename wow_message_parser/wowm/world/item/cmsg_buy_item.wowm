@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_BUY_ITEM = 0x01A2 {
-    u64 vendor_guid;
+    Guid vendor_guid;
     u32 item_id;
     u8 amount;
     u8 unknown1 {

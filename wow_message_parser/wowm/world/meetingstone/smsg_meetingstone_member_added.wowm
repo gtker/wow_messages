@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 smsg SMSG_MEETINGSTONE_MEMBER_ADDED = 0x0299 {
-    u64 guid;
+    Guid guid;
 }
 

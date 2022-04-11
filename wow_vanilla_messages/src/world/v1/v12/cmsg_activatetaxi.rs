@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
@@ -8,12 +9,12 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_activatetaxi.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_activatetaxi.wowm#L3):
 /// ```text
 /// cmsg CMSG_ACTIVATETAXI = 0x1AD {
-///     u64 guid;
+///     Guid guid;
 ///     u32[2] nodes;
 /// }
 /// ```
 pub struct CMSG_ACTIVATETAXI {
-    pub guid: u64,
+    pub guid: Guid,
     pub nodes: [u32; 2],
 }
 
@@ -41,8 +42,8 @@ impl WorldMessageBody for CMSG_ACTIVATETAXI {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: u64
-        let guid = crate::util::read_u64_le(r)?;
+        // guid: Guid
+        let guid = Guid::read(r)?;
 
         // nodes: u32[2]
         let mut nodes = [u32::default(); 2];
@@ -57,8 +58,8 @@ impl WorldMessageBody for CMSG_ACTIVATETAXI {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: u64
-        w.write_all(&self.guid.to_le_bytes())?;
+        // guid: Guid
+        self.guid.write(w)?;
 
         // nodes: u32[2]
         for i in self.nodes.iter() {
@@ -77,7 +78,7 @@ impl ConstantSized for CMSG_ACTIVATETAXI {
 
 impl MaximumPossibleSized for CMSG_ACTIVATETAXI {
     fn maximum_possible_size() -> usize {
-        8 // guid: u64
+        8 // guid: Guid
         + 2 * core::mem::size_of::<u32>() // nodes: u32[2]
     }
 }

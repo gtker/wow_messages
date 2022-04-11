@@ -10,7 +10,7 @@ enum EnvironmentalDamageType : u32 {
 }
 
 smsg SMSG_ENVIRONMENTALDAMAGELOG = 0x01FC {
-    u64 guid;
+    Guid guid;
     EnvironmentalDamageType damage_type;
     u32 damage;
     u32 absorb;

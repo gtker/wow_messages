@@ -1,6 +1,6 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_DEL_IGNORE = 0x6D {
-    u64 guid;
+    Guid guid;
 }
 
