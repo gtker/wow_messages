@@ -15,8 +15,5 @@
 # Intermediate Representation
 - [Specification](./spec/ir_spec.md)
 
-# Creating a library
-- [Decide on API]()
-
 # Docs
 - [SMSG_AUTH_SESSION](docs/smsg_auth_sessions.md)
