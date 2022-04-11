@@ -112,6 +112,8 @@ mod test {
     use super::CMD_AUTH_RECONNECT_PROOF_Server;
     use crate::ConstantSized;
     use crate::logon::version_8::LoginResult;
+    use super::*;
+    use super::super::*;
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 32.

@@ -72,6 +72,8 @@ mod test {
     use std::io::Cursor;
     use super::CMD_XFER_DATA;
     use crate::VariableSized;
+    use super::*;
+    use super::super::*;
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;
 
     // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 14.

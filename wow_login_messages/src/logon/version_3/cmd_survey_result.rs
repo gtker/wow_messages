@@ -94,6 +94,8 @@ mod test {
     use std::io::Cursor;
     use super::CMD_SURVEY_RESULT;
     use crate::VariableSized;
+    use super::*;
+    use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
     // Generated from `wow_message_parser/wowm/login/survey_result.wowm` line 10.

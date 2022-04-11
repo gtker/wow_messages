@@ -161,3 +161,36 @@ slogin CMD_REALM_LIST_Server = 0x10 {
 } {
     login_logon_versions = "8";
 }
+
+test CMD_REALM_LIST_Server {
+    realms = [
+        {
+            realm_type = 0;  
+            locked = 0;
+            flag = INVALID | OFFLINE;
+            name = "A";
+            address = "A";
+            population = RED_FULL;
+            number_of_characters_on_realm = 1;
+            category = DEFAULT;
+            realm_id = 2;
+        },
+    ];
+} [
+    0x10, /* Opcode */
+    0x16, 0x00, /* size */
+    0x00, 0x00, 0x00, 0x00, /* header_padding */
+    0x01, 0x00, /* number_of_realms */
+    0x00, /* realm_type */
+    0x00, /* locked */
+    0x03, /* flag */
+    0x41, 0x00, /* name */
+    0x41, 0x00, /* address */
+    0x00, 0x00, 0xC8, 0x43, /* Population: RED_FULL */
+    0x01, /* number_of_characters_on_realm */
+    0x00, /* category */
+    0x02, /* realm_id */
+    0x00, 0x00, /* footer_padding */
+] {
+    login_logon_versions = "8";
+}

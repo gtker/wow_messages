@@ -1,7 +1,7 @@
 use crate::container::{Container, ContainerType};
 use crate::file_utils::get_import_path;
 use crate::parser::types::{ArraySize, Objects};
-use crate::rust_printer::complex_print::{Declaration, DefinerType};
+use crate::rust_printer::complex_print::Declaration;
 use crate::rust_printer::opcodes::get_enumerator_name;
 use crate::rust_printer::{
     Writer, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_BODY_TRAIT_NAME,
@@ -34,20 +34,8 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             ));
         }
 
-        for ce in e.nested_types().new_enums() {
-            s.wln(format!("use super::{};", ce.name()));
-            match ce.definer_ty() {
-                DefinerType::Enum => {}
-                DefinerType::Flag => {
-                    for f in ce.fields() {
-                        if f.is_simple() {
-                            continue;
-                        }
-                        s.wln(format!("use super::{}{};", ce.name(), f.name()));
-                    }
-                }
-            }
-        }
+        s.wln("use super::*;");
+        s.wln("use super::super::*;");
         s.wln(format!("use {};", e.get_opcode_import_path(),));
         match e.container_type() {
             ContainerType::Msg(_) => panic!(),
@@ -253,39 +241,26 @@ fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Contai
         }
         TestValue::Flag(flags) => {
             if !e.nested_types().new_enums().is_empty() {
-                s.wln_no_indent(format!("{ty} {{", ty = m.ty().rust_str()));
+                s.wln_no_indent(format!("{ty}::empty()", ty = m.ty().rust_str()));
                 s.inc_indent();
 
-                s.w("inner: 0");
-                for f in flags {
-                    s.w_no_indent(format!(
-                        " | {original_ty}::{value}",
-                        original_ty = m.ty().rust_str(),
-                        value = f,
-                    ))
-                }
-                s.wln_no_indent(",");
-
-                for f in e
+                let set_flags = e
                     .nested_types()
                     .new_enums()
                     .iter()
                     .find(|a| a.variable_name() == m.name())
                     .unwrap()
-                    .fields()
-                {
-                    if f.is_simple() {
-                        continue;
-                    }
-
-                    s.w(format!(
-                        "{variable_name}: ",
-                        variable_name = f.name().to_lowercase(),
-                    ));
-
+                    .fields();
+                for f in set_flags {
                     if let Some(flag) = flags.iter().find(|a| a.as_str() == f.name()) {
+                        if f.is_simple() {
+                            s.wln(format!(".set_{variable_name}()", variable_name = f.name()));
+                            continue;
+                        }
+                        s.w(format!(".set_{variable_name}(", variable_name = f.name(),));
+
                         s.wln_no_indent(format!(
-                            "Some({}{}{} {{",
+                            "{}{}{} {{",
                             e.name(),
                             m.ty().rust_str(),
                             f.name()
@@ -295,13 +270,12 @@ fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Contai
                         for sf in &subvars {
                             print_value(s, sf, t, e, o);
                         }
-                        s.closing_curly_with("),");
-                    } else {
-                        s.wln_no_indent("None,");
+
+                        s.closing_curly_with(")");
                     }
                 }
 
-                s.closing_curly_with(",");
+                s.wln_no_indent(",");
             } else {
                 s.wln_no_indent(format!("{ty}::empty()", ty = m.ty().rust_str()));
                 s.inc_indent();

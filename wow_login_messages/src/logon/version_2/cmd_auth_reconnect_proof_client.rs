@@ -111,6 +111,8 @@ mod test {
     use std::io::Cursor;
     use super::CMD_AUTH_RECONNECT_PROOF_Client;
     use crate::ConstantSized;
+    use super::*;
+    use super::super::*;
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_client.wowm` line 10.

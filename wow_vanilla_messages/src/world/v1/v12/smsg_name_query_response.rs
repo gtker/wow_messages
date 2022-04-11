@@ -191,6 +191,8 @@ mod test {
     use crate::world::v1::v12::Class;
     use crate::world::v1::v12::Gender;
     use crate::world::v1::v12::Race;
+    use super::*;
+    use super::super::*;
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 

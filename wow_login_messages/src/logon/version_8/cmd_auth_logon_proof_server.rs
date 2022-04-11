@@ -603,7 +603,8 @@ mod test {
     use crate::VariableSized;
     use crate::logon::version_8::AccountFlag;
     use crate::logon::version_8::LoginResult;
-    use super::CMD_AUTH_LOGON_PROOF_ServerLoginResult;
+    use super::*;
+    use super::super::*;
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm` line 48.

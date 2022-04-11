@@ -601,8 +601,8 @@ mod test {
     use crate::VariableSized;
     use crate::logon::version_2::LoginResult;
     use crate::logon::version_3::SecurityFlag;
-    use super::CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag;
-    use super::CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult;
+    use super::*;
+    use super::super::*;
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 90.

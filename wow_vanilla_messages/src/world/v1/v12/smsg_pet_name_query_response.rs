@@ -125,6 +125,8 @@ mod test {
     use std::io::Cursor;
     use super::SMSG_PET_NAME_QUERY_RESPONSE;
     use crate::VariableSized;
+    use super::*;
+    use super::super::*;
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 

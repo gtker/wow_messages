@@ -215,6 +215,8 @@ mod test {
     use crate::logon::all::Os;
     use crate::logon::all::Platform;
     use crate::logon::all::Version;
+    use super::*;
+    use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 17.

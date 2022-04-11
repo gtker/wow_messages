@@ -149,6 +149,8 @@ mod test {
     use super::CMSG_WORLD_TELEPORT;
     use crate::ConstantSized;
     use crate::world::v1::v12::Map;
+    use super::*;
+    use super::super::*;
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
     use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 

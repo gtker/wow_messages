@@ -50,6 +50,8 @@ mod test {
     use std::io::Cursor;
     use super::CMD_XFER_INITIATE;
     use crate::ConstantSized;
+    use super::*;
+    use super::super::*;
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;
 
     // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 5.

@@ -116,6 +116,8 @@ mod test {
     use super::CMD_AUTH_LOGON_PROOF_Client;
     use crate::VariableSized;
     use crate::logon::version_2::TelemetryKey;
+    use super::*;
+    use super::super::*;
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 21.

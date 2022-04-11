@@ -123,6 +123,8 @@ mod test {
     use crate::ConstantSized;
     use crate::world::v1::v12::LogoutResult;
     use crate::world::v1::v12::LogoutSpeed;
+    use super::*;
+    use super::super::*;
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
     use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 

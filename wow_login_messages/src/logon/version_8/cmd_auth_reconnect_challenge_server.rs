@@ -352,7 +352,8 @@ mod test {
     use super::CMD_AUTH_RECONNECT_CHALLENGE_Server;
     use crate::VariableSized;
     use crate::logon::version_8::LoginResult;
-    use super::CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult;
+    use super::*;
+    use super::super::*;
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
     // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_server.wowm` line 44.

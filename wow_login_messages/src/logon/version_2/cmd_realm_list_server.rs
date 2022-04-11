@@ -161,6 +161,8 @@ mod test {
     use crate::logon::version_2::RealmCategory;
     use crate::logon::version_2::RealmFlag;
     use crate::logon::version_2::RealmType;
+    use super::*;
+    use super::super::*;
     use crate::logon::version_2::opcodes::ServerOpcodeMessage;
 
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 76.

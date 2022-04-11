@@ -64,6 +64,8 @@ mod test {
     use std::io::Cursor;
     use super::CMSG_LOGOUT_REQUEST;
     use crate::ConstantSized;
+    use super::*;
+    use super::super::*;
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
     use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
 
