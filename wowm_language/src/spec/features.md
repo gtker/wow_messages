@@ -2,7 +2,7 @@
 
 ## Declarations
 
-### `SIMPLE_BUILT_IN_TYPES`
+### `SimpleBuiltInTypes`
 
 ```rust,ignore
 struct BuiltInTypes {
@@ -24,7 +24,7 @@ struct BuiltInTypes {
 /* This also uses feature STRUCT */
 ```
 
-### `SIMPLE_DEFINER_TYPES`
+### `SimpleDefinerTypes`
 
 ```rust,ignore
 enum SimpleEnum : u8 {
@@ -55,7 +55,7 @@ struct SimpleDefinerTypes {
 /* This also uses feature STRUCT */
 ```
 
-### `PACKED_GUID_TYPES`
+### `PackedGuidTypes`
 
 ```rust,ignore
 struct PackedGuidTypes {
@@ -64,7 +64,7 @@ struct PackedGuidTypes {
 /* This also uses feature STRUCT */
 ```
 
-### `UPDATE_MASK_TYPES`
+### `UpdateMaskTypes`
 
 ```rust,ignore
 struct UpdateMaskTypes {
@@ -73,7 +73,7 @@ struct UpdateMaskTypes {
 /* This also uses feature STRUCT */
 ```
 
-### `AURA_MASK_TYPES`
+### `AuraMaskTypes`
 
 ```rust,ignore
 struct AuraMaskTypes {
@@ -82,7 +82,7 @@ struct AuraMaskTypes {
 /* This also uses feature STRUCT */
 ```
 
-### `NESTED_STRUCT_TYPES`
+### `NestedStructTypes`
 
 ```rust,ignore
 struct InnerStruct {
@@ -94,7 +94,7 @@ struct NestedStructsTypes {
 }
 ```
 
-### `SIMPLE_ARRAYS`
+### `SimpleArrays`
 
 ```rust,ignore
 struct SimpleArrays {
@@ -146,7 +146,7 @@ struct SimpleArrays {
 /* This also uses feature STRUCT and SIMPLE_BUILT_IN_TYPES */
 ```
 
-### `COMPLEX_ARRAYS`
+### `ComplexArrays`
 
 ```rust,ignore
 flag SimpleFlag : u8 {
@@ -197,40 +197,40 @@ struct ComplexArrays {
 ## Objects
 
 ### Enums
-#### `ENUM`
+#### `Enum`
 
 Any enumerator without a `self.value` field.
 
-### `ENUM_SELF`
+### `EnumSelf`
 
 Any enumerator with a `self.value` field.
 
 ### Flags
-#### `FLAG`
+#### `Flag`
 
 Any flag.
 
 ### Structs
-#### `STRUCT`
+#### `Struct`
 
 Any struct.
 
 ### Login Messages
-#### `CLOGIN`
-#### `SLOGIN`
+#### `CLogin`
+#### `SLogin`
 
 ### World Messages
-#### `SMSG`
-#### `CMSG`
-#### `MSG`
+#### `SMsg`
+#### `CMsg`
+#### `Msg`
 
 ## Versions
 
-### `WORLD_VERSION`
+### `WorldVersion`
 
 Any object with a world version (`versions` [tag](tags.md)).
 
-### `LOGIN_VERSION`
+### `LoginVersion`
 
 Any object with a login version (`logon_login_versions` [tag](tags.md)).
 
