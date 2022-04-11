@@ -78,3 +78,44 @@ impl MaximumPossibleSized for MSG_AUCTION_HELLO_Server {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use crate::ReadableAndWritable;
+    use std::io::Cursor;
+    use super::MSG_AUCTION_HELLO_Server;
+    use crate::ConstantSized;
+    use super::*;
+    use super::super::*;
+    use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
+    use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
+
+    // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
+    #[test]
+    fn MSG_AUCTION_HELLO_Server0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF,
+             0xBE, 0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];
+
+        let expected = MSG_AUCTION_HELLO_Server {
+            auctioneer: Guid::new(0xDEADBEEFFACADE),
+            auction_house_id: 0x12,
+        };
+
+        let header_size = 2 + 2;
+        let t = WorldServerOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = match t {
+            WorldServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.auctioneer, expected.auctioneer);
+        assert_eq!(t.auction_house_id, expected.auction_house_id);
+
+        assert_eq!(MSG_AUCTION_HELLO_Server::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write_unencrypted_server(&mut Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+}
