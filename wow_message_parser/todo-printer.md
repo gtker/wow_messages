@@ -31,6 +31,5 @@
   * World
 * Error on invalid flag enumerator used
 * Error out on using == for flags and vice versa
-* Wowm optional, elseif in doc comments (`DOCC` message output currently)
 * Function to Write objects (eg strings) by reference
 * Tokio support

@@ -17,7 +17,11 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     u32 amount_of_members;
 ///     GroupListMember[amount_of_members] members;
 ///     Guid leader;
-///     OPTIONAL-STATEMENT-DOCC: unimplemented
+///     optional group_not_empty {
+///         GroupLootSetting loot_setting;
+///         Guid master_loot;
+///         ItemQuality loot_threshold;
+///     }
 /// }
 /// ```
 pub struct SMSG_GROUP_LIST {

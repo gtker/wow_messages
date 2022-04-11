@@ -8,7 +8,22 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
 ///     u32 creature_entry;
-///     OPTIONAL-STATEMENT-DOCC: unimplemented
+///     optional found {
+///         CString name1;
+///         CString name2;
+///         CString name3;
+///         CString name4;
+///         CString sub_name;
+///         u32 type_flags;
+///         u32 creature_type;
+///         u32 creature_family;
+///         u32 creature_rank;
+///         u32 unknown0;
+///         u32 spell_data_id;
+///         u32 display_id;
+///         u8 civilian;
+///         u8 racial_leader;
+///     }
 /// }
 /// ```
 pub struct SMSG_CREATURE_QUERY_RESPONSE {

@@ -7,7 +7,9 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_raid_ready_check_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_raid_ready_check_client.wowm#L3):
 /// ```text
 /// cmsg MSG_RAID_READY_CHECK_Client = 0x322 {
-///     OPTIONAL-STATEMENT-DOCC: unimplemented
+///     optional answer {
+///         u8 state;
+///     }
 /// }
 /// ```
 pub struct MSG_RAID_READY_CHECK_Client {

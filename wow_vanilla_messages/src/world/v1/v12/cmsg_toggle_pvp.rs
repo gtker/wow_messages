@@ -7,7 +7,9 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/cmsg_toggle_pvp.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/cmsg_toggle_pvp.wowm#L5):
 /// ```text
 /// cmsg CMSG_TOGGLE_PVP = 0x253 {
-///     OPTIONAL-STATEMENT-DOCC: unimplemented
+///     optional set {
+///         u8 enable_pvp;
+///     }
 /// }
 /// ```
 pub struct CMSG_TOGGLE_PVP {

@@ -9,7 +9,10 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// smsg SMSG_TRANSFER_PENDING = 0x3F {
 ///     Map map;
-///     OPTIONAL-STATEMENT-DOCC: unimplemented
+///     optional has_transport {
+///         u32 transport;
+///         Map transport_map;
+///     }
 /// }
 /// ```
 pub struct SMSG_TRANSFER_PENDING {

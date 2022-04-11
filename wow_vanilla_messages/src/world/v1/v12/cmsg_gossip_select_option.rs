@@ -10,7 +10,9 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// cmsg CMSG_GOSSIP_SELECT_OPTION = 0x17C {
 ///     Guid guid;
 ///     u32 gossip_list_id;
-///     OPTIONAL-STATEMENT-DOCC: unimplemented
+///     optional unknown {
+///         CString code;
+///     }
 /// }
 /// ```
 pub struct CMSG_GOSSIP_SELECT_OPTION {

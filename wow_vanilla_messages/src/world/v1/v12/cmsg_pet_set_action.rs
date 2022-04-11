@@ -11,7 +11,10 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     Guid guid;
 ///     u32 position1;
 ///     u32 data1;
-///     OPTIONAL-STATEMENT-DOCC: unimplemented
+///     optional extra {
+///         u32 position2;
+///         u32 data2;
+///     }
 /// }
 /// ```
 pub struct CMSG_PET_SET_ACTION {

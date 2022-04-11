@@ -8,7 +8,10 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_raid_ready_check_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_raid_ready_check_server.wowm#L3):
 /// ```text
 /// smsg MSG_RAID_READY_CHECK_Server = 0x322 {
-///     OPTIONAL-STATEMENT-DOCC: unimplemented
+///     optional state_check {
+///         Guid guid;
+///         u8 state;
+///     }
 /// }
 /// ```
 pub struct MSG_RAID_READY_CHECK_Server {

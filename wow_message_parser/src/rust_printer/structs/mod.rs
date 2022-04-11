@@ -313,7 +313,17 @@ fn print_docc_members(s: &mut Writer, e: &Container, field: &StructMember) {
                 s.docc("}");
             }
         }
-        StructMember::OptionalStatement(_) => s.docc("OPTIONAL-STATEMENT-DOCC: unimplemented"),
+        StructMember::OptionalStatement(optional) => {
+            s.docc(format!("optional {name} {{", name = optional.name()));
+            s.docc_inc();
+
+            for m in optional.members() {
+                print_docc_members(s, e, m);
+            }
+
+            s.docc_dec();
+            s.docc("}");
+        }
     }
 }
 
