@@ -194,3 +194,46 @@ test CMD_REALM_LIST_Server {
 ] {
     login_logon_versions = "8";
 }
+
+test CMD_REALM_LIST_Server {
+    realms = [
+        {
+            realm_type = 0;  
+            locked = 0;
+            flag = SPECIFY_BUILD;
+            name = "A";
+            address = "A";
+            population = RED_FULL;
+            number_of_characters_on_realm = 1;
+            category = DEFAULT;
+            realm_id = 2;
+            version = {
+                major = 1;
+                minor = 12;
+                patch = 1;
+                build = 5875;
+            };
+        },
+    ];
+} [
+    0x10, /* Opcode */
+    0x1b, 0x00, /* size */
+    0x00, 0x00, 0x00, 0x00, /* header_padding */
+    0x01, 0x00, /* number_of_realms */
+    0x00, /* realm_type */
+    0x00, /* locked */
+    0x04, /* flag */
+    0x41, 0x00, /* name */
+    0x41, 0x00, /* address */
+    0x00, 0x00, 0xC8, 0x43, /* Population: RED_FULL */
+    0x01, /* number_of_characters_on_realm */
+    0x00, /* category */
+    0x02, /* realm_id */
+    0x01, /* version.major */
+    0x0C, /* version.minor */
+    0x01, /* version.patch */
+    0xF3, 0x16, /* version.build */
+    0x00, 0x00, /* footer_padding */
+] {
+    login_logon_versions = "8";
+}
