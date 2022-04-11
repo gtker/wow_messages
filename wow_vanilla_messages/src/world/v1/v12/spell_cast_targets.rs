@@ -332,6 +332,23 @@ impl SpellCastTargetsSpellCastTargetFlags {
         Ok(())
     }
 
+    pub const fn empty() -> Self {
+        Self {
+            inner: 0,
+            unit: None,
+            item: None,
+            source_location: None,
+            dest_location: None,
+            unit_enemy: None,
+            corpse_enemy: None,
+            gameobject: None,
+            trade_item: None,
+            string: None,
+            locked: None,
+            corpse_ally: None,
+        }
+    }
+
     pub const fn new_SELF() -> Self {
         Self {
             inner: SpellCastTargetFlags::SELF,

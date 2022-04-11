@@ -515,6 +515,30 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlags {
         Ok(())
     }
 
+    pub const fn empty() -> Self {
+        Self {
+            inner: 0,
+            flag_status: None,
+            flag_cur_hp: None,
+            flag_max_hp: None,
+            flag_power_type: None,
+            flag_cur_power: None,
+            flag_max_power: None,
+            flag_level: None,
+            flag_zone: None,
+            flag_position: None,
+            flag_auras: None,
+            flag_pet_name: None,
+            flag_pet_model_id: None,
+            flag_pet_cur_hp: None,
+            flag_pet_max_hp: None,
+            flag_pet_power_type: None,
+            flag_pet_cur_power: None,
+            flag_pet_max_power: None,
+            flag_pet_auras: None,
+        }
+    }
+
     pub const fn new_FLAG_NONE() -> Self {
         Self {
             inner: GroupUpdateFlags::FLAG_NONE,

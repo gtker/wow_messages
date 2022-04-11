@@ -82,6 +82,17 @@ fn print_write_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
 }
 
 fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
+    s.funcn_pub_const("empty()", "Self", |s| {
+        s.body("Self", |s| {
+            s.wln("inner: 0,");
+            for f in ce.fields() {
+                if !f.should_not_be_in_type() {
+                    s.wln(format!("{name}: None,", name = f.name().to_lowercase()))
+                }
+            }
+        });
+    });
+
     for f in ce.fields() {
         if f.is_simple() {
             s.funcn_pub_const(format!("new_{}()", f.name()), "Self", |s| {

@@ -221,6 +221,13 @@ impl RealmRealmFlag {
         Ok(())
     }
 
+    pub const fn empty() -> Self {
+        Self {
+            inner: 0,
+            specify_build: None,
+        }
+    }
+
     pub const fn new_NONE() -> Self {
         Self {
             inner: RealmFlag::NONE,

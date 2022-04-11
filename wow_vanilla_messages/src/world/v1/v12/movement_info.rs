@@ -219,6 +219,16 @@ impl MovementInfoMovementFlags {
         Ok(())
     }
 
+    pub const fn empty() -> Self {
+        Self {
+            inner: 0,
+            on_transport: None,
+            jumping: None,
+            swimming: None,
+            spline_elevation: None,
+        }
+    }
+
     pub const fn new_NONE() -> Self {
         Self {
             inner: MovementFlags::NONE,

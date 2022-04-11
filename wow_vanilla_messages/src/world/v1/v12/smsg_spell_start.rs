@@ -199,6 +199,13 @@ impl SMSG_SPELL_STARTCastFlags {
         Ok(())
     }
 
+    pub const fn empty() -> Self {
+        Self {
+            inner: 0,
+            ammo: None,
+        }
+    }
+
     pub const fn new_NONE() -> Self {
         Self {
             inner: CastFlags::NONE,

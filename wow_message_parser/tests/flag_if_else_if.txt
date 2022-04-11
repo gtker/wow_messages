@@ -126,6 +126,14 @@ impl FlagIfElseIfUpdateFlag {
         Ok(())
     }
 
+    pub const fn empty() -> Self {
+        Self {
+            inner: 0,
+            one_if: None,
+            eight_if: None,
+        }
+    }
+
     pub const fn new_NONE() -> Self {
         Self {
             inner: UpdateFlag::NONE,

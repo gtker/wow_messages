@@ -360,6 +360,15 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         Ok(())
     }
 
+    pub const fn empty() -> Self {
+        Self {
+            inner: 0,
+            pin: None,
+            unknown0: None,
+            authenticator: None,
+        }
+    }
+
     pub const fn new_NONE() -> Self {
         Self {
             inner: SecurityFlag::NONE,
