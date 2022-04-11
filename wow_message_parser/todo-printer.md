@@ -11,7 +11,6 @@
 * Working UpdateMask
   * Tests
 * Test: Flags with ifs for `CMD_REALM_LIST_Server` version 8
-* Test: Add support for Guids
 
 # Direct upgrades to Login
 

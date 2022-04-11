@@ -125,7 +125,10 @@ impl TestCase {
                     value: value.parse().unwrap(),
                     original_string: value.clone(),
                 },
-                Type::Integer(_) | Type::Guid | Type::PackedGuid => TestValue::Number(
+                Type::Integer(_) => TestValue::Number(
+                    VerifiedContainerValue::new(parse_value(&value).unwrap(), value.clone()),
+                ),
+                Type::Guid | Type::PackedGuid => TestValue::Guid(
                     VerifiedContainerValue::new(parse_value(&value).unwrap(), value.clone()),
                 ),
                 Type::Identifier { .. } => {
@@ -210,6 +213,7 @@ impl TestCaseMember {
 #[derive(Debug, Clone)]
 pub enum TestValue {
     Number(VerifiedContainerValue),
+    Guid(VerifiedContainerValue),
     FloatingNumber {
         value: f64,
         original_string: String,

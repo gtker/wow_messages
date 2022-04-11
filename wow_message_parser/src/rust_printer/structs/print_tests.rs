@@ -193,6 +193,9 @@ fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Contai
         TestValue::Number(i) => {
             s.wln_no_indent(format!("{:#X},", i.value()));
         }
+        TestValue::Guid(i) => {
+            s.wln_no_indent(format!("Guid::new({:#X}),", i.value()));
+        }
         TestValue::FloatingNumber { value, .. } => {
             s.wln_no_indent(format!("{:1.1},", value));
         }
