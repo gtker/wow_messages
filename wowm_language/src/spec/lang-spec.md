@@ -154,6 +154,9 @@ Where `<keyword>` is one of
 `[= <opcode>]` is an allowed value in the same format as for definer values that defines the unique opcode value for the container.
 The `<opcode>` is required for every container except for `struct`s, which have no opcodes.
 
+For `msg`, `smsg`, and `cmsg` the size field is implicitly added as part of the message header.
+`clogin` and `slogin` messages that require a specific size field must set the field equal to `self.size`.
+
 #### Declaration
 
 `<declaration>` is of the form
