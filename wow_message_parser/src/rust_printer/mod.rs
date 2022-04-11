@@ -438,6 +438,14 @@ impl Writer {
         self.newline();
     }
 
+    pub fn docc_w<S: AsRef<str>>(&mut self, s: S) {
+        self.w("/// ");
+        for _ in 0..self.docc_indentation_level {
+            self.w(Self::INDENTATION);
+        }
+        self.w_no_indent(s.as_ref());
+    }
+
     pub fn docc_dec(&mut self) {
         if self.docc_indentation_level == 0 {
             panic!("attmpted to underflow docc level")
