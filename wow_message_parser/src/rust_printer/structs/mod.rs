@@ -209,10 +209,6 @@ fn print_docc_members(s: &mut Writer, e: &Container, field: &StructMember) {
             ));
         }
         StructMember::IfStatement(statement) => {
-            if statement.conditional.equations().len() > 1 {
-                s.docc("IF-STATEMENT-MULTIPLE-DOCC: unimplemented");
-            }
-
             let equations = statement.conditional.equations();
             for (i, eq) in equations.iter().enumerate() {
                 let name = statement.conditional.variable_name();
@@ -230,10 +226,19 @@ fn print_docc_members(s: &mut Writer, e: &Container, field: &StructMember) {
                         cond = cond
                     ));
                     s.docc_inc();
+                } else {
+                    s.docc_w(format!(
+                        "|| {name} {op} {cond}",
+                        name = name,
+                        op = op,
+                        cond = cond
+                    ));
                 }
 
                 if i == equations.len() - 1 {
                     s.wln_no_indent(") {");
+                } else {
+                    s.wln_no_indent("");
                 }
             }
 

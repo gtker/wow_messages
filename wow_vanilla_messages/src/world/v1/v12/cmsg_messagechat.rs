@@ -11,8 +11,19 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// cmsg CMSG_MESSAGECHAT = 0x95 {
 ///     ChatType chat_type;
 ///     Language language;
-///     IF-STATEMENT-MULTIPLE-DOCC: unimplemented
-///     if (chat_type == SAY) {
+///     if (chat_type == SAY
+///         || chat_type == EMOTE
+///         || chat_type == YELL
+///         || chat_type == PARTY
+///         || chat_type == GUILD
+///         || chat_type == OFFICER
+///         || chat_type == RAID
+///         || chat_type == RAID_LEADER
+///         || chat_type == RAID_WARNING
+///         || chat_type == BATTLEGROUND
+///         || chat_type == BATTLEGROUND_LEADER
+///         || chat_type == AFK
+///         || chat_type == DND) {
 ///         CString message;
 ///         ELSE-IF-STATEMENT-DOCC: unimplemented
 ///     }

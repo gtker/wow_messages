@@ -13,8 +13,9 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// smsg SMSG_MESSAGECHAT = 0x96 {
 ///     ChatType chat_type;
 ///     Language language;
-///     IF-STATEMENT-MULTIPLE-DOCC: unimplemented
-///     if (chat_type == MONSTER_WHISPER) {
+///     if (chat_type == MONSTER_WHISPER
+///         || chat_type == RAID_BOSS_EMOTE
+///         || chat_type == MONSTER_EMOTE) {
 ///         u32 name_length;
 ///         CString monster_name;
 ///         Guid monster_guid;

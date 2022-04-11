@@ -8,8 +8,8 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 /// ```text
 /// struct AuraLog {
 ///     AuraType aura_type;
-///     IF-STATEMENT-MULTIPLE-DOCC: unimplemented
-///     if (aura_type == PERIODIC_DAMAGE) {
+///     if (aura_type == PERIODIC_DAMAGE
+///         || aura_type == PERIODIC_DAMAGE_PERCENT) {
 ///         u32 damage1;
 ///         SpellSchool school;
 ///         u32 absorbed;
