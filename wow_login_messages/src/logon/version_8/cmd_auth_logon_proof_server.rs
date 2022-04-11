@@ -14,7 +14,8 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         AccountFlag account_flag;
 ///         u32 hardware_survey_id;
 ///         u16 unknown_flags;
-///     } else {
+///     }
+///     else {
 ///         u16 padding = 0;
 ///     }
 /// }

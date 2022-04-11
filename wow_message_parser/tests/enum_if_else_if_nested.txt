@@ -11,7 +11,8 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     NestedEnum n;
 ///     if (e == ZERO) {
 ///         u8 zero;
-///     } else {
+///     }
+///     else {
 ///         if (n == NESTED) {
 ///             u8 nested;
 ///         }

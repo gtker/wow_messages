@@ -247,10 +247,9 @@ fn print_docc_members(s: &mut Writer, e: &Container, field: &StructMember) {
             }
 
             s.docc_dec();
-            s.docc_w("}");
+            s.docc("}");
 
             if !statement.else_ifs().is_empty() {
-                s.wln_no_indent("");
                 let equations = {
                     let mut equations = Vec::new();
                     for f in statement.else_ifs() {
@@ -299,13 +298,11 @@ fn print_docc_members(s: &mut Writer, e: &Container, field: &StructMember) {
                 }
 
                 s.docc_dec();
-                s.docc_w("}");
+                s.docc("}");
             }
 
-            if statement.else_statement_members.is_empty() {
-                s.wln_no_indent("");
-            } else {
-                s.wln_no_indent(" else {");
+            if !statement.else_statement_members.is_empty() {
+                s.docc("else {");
                 s.docc_inc();
 
                 for f in &statement.else_statement_members {

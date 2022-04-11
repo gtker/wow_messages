@@ -18,7 +18,8 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         || t == SIX) {
 ///         u8 basic3;
 ///         u8 basic5;
-///     } else {
+///     }
+///     else {
 ///         u8 rest;
 ///     }
 /// }

@@ -35,7 +35,8 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         CString channel_name;
 ///         u32 player_rank;
 ///         Guid player_guid;
-///     } else {
+///     }
+///     else {
 ///         Guid sender_guid4;
 ///     }
 ///     u32 message_length;

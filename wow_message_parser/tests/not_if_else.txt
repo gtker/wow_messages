@@ -9,7 +9,8 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     SimpleEnum enum;
 ///     if (enum != ZERO) {
 ///         u8 others;
-///     } else {
+///     }
+///     else {
 ///         u16 zero;
 ///     }
 /// }

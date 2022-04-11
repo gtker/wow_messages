@@ -10,7 +10,8 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///     if (enum == ZERO
 ///         || enum == ONE) {
 ///         u8 basic;
-///     } else {
+///     }
+///     else {
 ///         u16 other;
 ///     }
 /// }
