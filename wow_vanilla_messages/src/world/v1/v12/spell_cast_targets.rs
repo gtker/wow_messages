@@ -371,6 +371,11 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.clone()
     }
 
+    pub const fn get_SELF(&self) -> bool {
+        // Underlying value is 0
+        self.inner == SpellCastTargetFlags::SELF
+    }
+
     pub fn clear_SELF(&mut self) -> Self {
         self.inner &= SpellCastTargetFlags::SELF.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -398,6 +403,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
     pub fn set_UNUSED1(&mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNUSED1;
         self.clone()
+    }
+
+    pub const fn get_UNUSED1(&self) -> bool {
+        (self.inner & SpellCastTargetFlags::UNUSED1) != 0
     }
 
     pub fn clear_UNUSED1(&mut self) -> Self {
@@ -430,6 +439,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.clone()
     }
 
+    pub const fn get_UNIT(&self) -> Option<&SpellCastTargetsSpellCastTargetFlagsUNIT> {
+        self.unit.as_ref()
+    }
+
     pub fn clear_UNIT(&mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT.reverse_bits();
         self.unit = None;
@@ -458,6 +471,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
     pub fn set_UNIT_RAID(&mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_RAID;
         self.clone()
+    }
+
+    pub const fn get_UNIT_RAID(&self) -> bool {
+        (self.inner & SpellCastTargetFlags::UNIT_RAID) != 0
     }
 
     pub fn clear_UNIT_RAID(&mut self) -> Self {
@@ -489,6 +506,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.clone()
     }
 
+    pub const fn get_UNIT_PARTY(&self) -> bool {
+        (self.inner & SpellCastTargetFlags::UNIT_PARTY) != 0
+    }
+
     pub fn clear_UNIT_PARTY(&mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_PARTY.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -517,6 +538,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.inner |= SpellCastTargetFlags::ITEM;
         self.item = Some(item);
         self.clone()
+    }
+
+    pub const fn get_ITEM(&self) -> Option<&SpellCastTargetsSpellCastTargetFlagsITEM> {
+        self.item.as_ref()
     }
 
     pub fn clear_ITEM(&mut self) -> Self {
@@ -550,6 +575,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.clone()
     }
 
+    pub const fn get_SOURCE_LOCATION(&self) -> Option<&SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION> {
+        self.source_location.as_ref()
+    }
+
     pub fn clear_SOURCE_LOCATION(&mut self) -> Self {
         self.inner &= SpellCastTargetFlags::SOURCE_LOCATION.reverse_bits();
         self.source_location = None;
@@ -579,6 +608,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.inner |= SpellCastTargetFlags::DEST_LOCATION;
         self.dest_location = Some(dest_location);
         self.clone()
+    }
+
+    pub const fn get_DEST_LOCATION(&self) -> Option<&SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION> {
+        self.dest_location.as_ref()
     }
 
     pub fn clear_DEST_LOCATION(&mut self) -> Self {
@@ -612,6 +645,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.clone()
     }
 
+    pub const fn get_UNIT_ENEMY(&self) -> Option<&SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY> {
+        self.unit_enemy.as_ref()
+    }
+
     pub fn clear_UNIT_ENEMY(&mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_ENEMY.reverse_bits();
         self.unit_enemy = None;
@@ -640,6 +677,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
     pub fn set_UNIT_ALLY(&mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_ALLY;
         self.clone()
+    }
+
+    pub const fn get_UNIT_ALLY(&self) -> bool {
+        (self.inner & SpellCastTargetFlags::UNIT_ALLY) != 0
     }
 
     pub fn clear_UNIT_ALLY(&mut self) -> Self {
@@ -672,6 +713,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.clone()
     }
 
+    pub const fn get_CORPSE_ENEMY(&self) -> Option<&SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY> {
+        self.corpse_enemy.as_ref()
+    }
+
     pub fn clear_CORPSE_ENEMY(&mut self) -> Self {
         self.inner &= SpellCastTargetFlags::CORPSE_ENEMY.reverse_bits();
         self.corpse_enemy = None;
@@ -702,6 +747,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.clone()
     }
 
+    pub const fn get_UNIT_DEAD(&self) -> bool {
+        (self.inner & SpellCastTargetFlags::UNIT_DEAD) != 0
+    }
+
     pub fn clear_UNIT_DEAD(&mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_DEAD.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -730,6 +779,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.inner |= SpellCastTargetFlags::GAMEOBJECT;
         self.gameobject = Some(gameobject);
         self.clone()
+    }
+
+    pub const fn get_GAMEOBJECT(&self) -> Option<&SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT> {
+        self.gameobject.as_ref()
     }
 
     pub fn clear_GAMEOBJECT(&mut self) -> Self {
@@ -763,6 +816,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.clone()
     }
 
+    pub const fn get_TRADE_ITEM(&self) -> Option<&SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM> {
+        self.trade_item.as_ref()
+    }
+
     pub fn clear_TRADE_ITEM(&mut self) -> Self {
         self.inner &= SpellCastTargetFlags::TRADE_ITEM.reverse_bits();
         self.trade_item = None;
@@ -792,6 +849,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.inner |= SpellCastTargetFlags::STRING;
         self.string = Some(string);
         self.clone()
+    }
+
+    pub const fn get_STRING(&self) -> Option<&SpellCastTargetsSpellCastTargetFlagsSTRING> {
+        self.string.as_ref()
     }
 
     pub fn clear_STRING(&mut self) -> Self {
@@ -825,6 +886,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.clone()
     }
 
+    pub const fn get_LOCKED(&self) -> Option<&SpellCastTargetsSpellCastTargetFlagsLOCKED> {
+        self.locked.as_ref()
+    }
+
     pub fn clear_LOCKED(&mut self) -> Self {
         self.inner &= SpellCastTargetFlags::LOCKED.reverse_bits();
         self.locked = None;
@@ -854,6 +919,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.inner |= SpellCastTargetFlags::CORPSE_ALLY;
         self.corpse_ally = Some(corpse_ally);
         self.clone()
+    }
+
+    pub const fn get_CORPSE_ALLY(&self) -> Option<&SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY> {
+        self.corpse_ally.as_ref()
     }
 
     pub fn clear_CORPSE_ALLY(&mut self) -> Self {

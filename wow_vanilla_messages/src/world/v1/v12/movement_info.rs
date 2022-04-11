@@ -244,6 +244,11 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_NONE(&self) -> bool {
+        // Underlying value is 0
+        self.inner == MovementFlags::NONE
+    }
+
     pub fn clear_NONE(&mut self) -> Self {
         self.inner &= MovementFlags::NONE.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -264,6 +269,10 @@ impl MovementInfoMovementFlags {
     pub fn set_FORWARD(&mut self) -> Self {
         self.inner |= MovementFlags::FORWARD;
         self.clone()
+    }
+
+    pub const fn get_FORWARD(&self) -> bool {
+        (self.inner & MovementFlags::FORWARD) != 0
     }
 
     pub fn clear_FORWARD(&mut self) -> Self {
@@ -288,6 +297,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_BACKWARD(&self) -> bool {
+        (self.inner & MovementFlags::BACKWARD) != 0
+    }
+
     pub fn clear_BACKWARD(&mut self) -> Self {
         self.inner &= MovementFlags::BACKWARD.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -308,6 +321,10 @@ impl MovementInfoMovementFlags {
     pub fn set_STRAFE_LEFT(&mut self) -> Self {
         self.inner |= MovementFlags::STRAFE_LEFT;
         self.clone()
+    }
+
+    pub const fn get_STRAFE_LEFT(&self) -> bool {
+        (self.inner & MovementFlags::STRAFE_LEFT) != 0
     }
 
     pub fn clear_STRAFE_LEFT(&mut self) -> Self {
@@ -332,6 +349,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_STRAFE_RIGHT(&self) -> bool {
+        (self.inner & MovementFlags::STRAFE_RIGHT) != 0
+    }
+
     pub fn clear_STRAFE_RIGHT(&mut self) -> Self {
         self.inner &= MovementFlags::STRAFE_RIGHT.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -352,6 +373,10 @@ impl MovementInfoMovementFlags {
     pub fn set_TURN_LEFT(&mut self) -> Self {
         self.inner |= MovementFlags::TURN_LEFT;
         self.clone()
+    }
+
+    pub const fn get_TURN_LEFT(&self) -> bool {
+        (self.inner & MovementFlags::TURN_LEFT) != 0
     }
 
     pub fn clear_TURN_LEFT(&mut self) -> Self {
@@ -376,6 +401,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_TURN_RIGHT(&self) -> bool {
+        (self.inner & MovementFlags::TURN_RIGHT) != 0
+    }
+
     pub fn clear_TURN_RIGHT(&mut self) -> Self {
         self.inner &= MovementFlags::TURN_RIGHT.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -396,6 +425,10 @@ impl MovementInfoMovementFlags {
     pub fn set_PITCH_UP(&mut self) -> Self {
         self.inner |= MovementFlags::PITCH_UP;
         self.clone()
+    }
+
+    pub const fn get_PITCH_UP(&self) -> bool {
+        (self.inner & MovementFlags::PITCH_UP) != 0
     }
 
     pub fn clear_PITCH_UP(&mut self) -> Self {
@@ -420,6 +453,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_PITCH_DOWN(&self) -> bool {
+        (self.inner & MovementFlags::PITCH_DOWN) != 0
+    }
+
     pub fn clear_PITCH_DOWN(&mut self) -> Self {
         self.inner &= MovementFlags::PITCH_DOWN.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -440,6 +477,10 @@ impl MovementInfoMovementFlags {
     pub fn set_WALK_MODE(&mut self) -> Self {
         self.inner |= MovementFlags::WALK_MODE;
         self.clone()
+    }
+
+    pub const fn get_WALK_MODE(&self) -> bool {
+        (self.inner & MovementFlags::WALK_MODE) != 0
     }
 
     pub fn clear_WALK_MODE(&mut self) -> Self {
@@ -465,6 +506,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_ON_TRANSPORT(&self) -> Option<&MovementInfoMovementFlagsON_TRANSPORT> {
+        self.on_transport.as_ref()
+    }
+
     pub fn clear_ON_TRANSPORT(&mut self) -> Self {
         self.inner &= MovementFlags::ON_TRANSPORT.reverse_bits();
         self.on_transport = None;
@@ -486,6 +531,10 @@ impl MovementInfoMovementFlags {
     pub fn set_LEVITATING(&mut self) -> Self {
         self.inner |= MovementFlags::LEVITATING;
         self.clone()
+    }
+
+    pub const fn get_LEVITATING(&self) -> bool {
+        (self.inner & MovementFlags::LEVITATING) != 0
     }
 
     pub fn clear_LEVITATING(&mut self) -> Self {
@@ -510,6 +559,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_FIXED_Z(&self) -> bool {
+        (self.inner & MovementFlags::FIXED_Z) != 0
+    }
+
     pub fn clear_FIXED_Z(&mut self) -> Self {
         self.inner &= MovementFlags::FIXED_Z.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -530,6 +583,10 @@ impl MovementInfoMovementFlags {
     pub fn set_ROOT(&mut self) -> Self {
         self.inner |= MovementFlags::ROOT;
         self.clone()
+    }
+
+    pub const fn get_ROOT(&self) -> bool {
+        (self.inner & MovementFlags::ROOT) != 0
     }
 
     pub fn clear_ROOT(&mut self) -> Self {
@@ -555,6 +612,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_JUMPING(&self) -> Option<&MovementInfoMovementFlagsJUMPING> {
+        self.jumping.as_ref()
+    }
+
     pub fn clear_JUMPING(&mut self) -> Self {
         self.inner &= MovementFlags::JUMPING.reverse_bits();
         self.jumping = None;
@@ -576,6 +637,10 @@ impl MovementInfoMovementFlags {
     pub fn set_FALLINGFAR(&mut self) -> Self {
         self.inner |= MovementFlags::FALLINGFAR;
         self.clone()
+    }
+
+    pub const fn get_FALLINGFAR(&self) -> bool {
+        (self.inner & MovementFlags::FALLINGFAR) != 0
     }
 
     pub fn clear_FALLINGFAR(&mut self) -> Self {
@@ -601,6 +666,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_SWIMMING(&self) -> Option<&MovementInfoMovementFlagsSWIMMING> {
+        self.swimming.as_ref()
+    }
+
     pub fn clear_SWIMMING(&mut self) -> Self {
         self.inner &= MovementFlags::SWIMMING.reverse_bits();
         self.swimming = None;
@@ -622,6 +691,10 @@ impl MovementInfoMovementFlags {
     pub fn set_SPLINE_ENABLED(&mut self) -> Self {
         self.inner |= MovementFlags::SPLINE_ENABLED;
         self.clone()
+    }
+
+    pub const fn get_SPLINE_ENABLED(&self) -> bool {
+        (self.inner & MovementFlags::SPLINE_ENABLED) != 0
     }
 
     pub fn clear_SPLINE_ENABLED(&mut self) -> Self {
@@ -646,6 +719,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_CAN_FLY(&self) -> bool {
+        (self.inner & MovementFlags::CAN_FLY) != 0
+    }
+
     pub fn clear_CAN_FLY(&mut self) -> Self {
         self.inner &= MovementFlags::CAN_FLY.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -668,6 +745,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_FLYING(&self) -> bool {
+        (self.inner & MovementFlags::FLYING) != 0
+    }
+
     pub fn clear_FLYING(&mut self) -> Self {
         self.inner &= MovementFlags::FLYING.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -688,6 +769,10 @@ impl MovementInfoMovementFlags {
     pub fn set_ONTRANSPORT(&mut self) -> Self {
         self.inner |= MovementFlags::ONTRANSPORT;
         self.clone()
+    }
+
+    pub const fn get_ONTRANSPORT(&self) -> bool {
+        (self.inner & MovementFlags::ONTRANSPORT) != 0
     }
 
     pub fn clear_ONTRANSPORT(&mut self) -> Self {
@@ -713,6 +798,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_SPLINE_ELEVATION(&self) -> Option<&MovementInfoMovementFlagsSPLINE_ELEVATION> {
+        self.spline_elevation.as_ref()
+    }
+
     pub fn clear_SPLINE_ELEVATION(&mut self) -> Self {
         self.inner &= MovementFlags::SPLINE_ELEVATION.reverse_bits();
         self.spline_elevation = None;
@@ -734,6 +823,10 @@ impl MovementInfoMovementFlags {
     pub fn set_WATERWALKING(&mut self) -> Self {
         self.inner |= MovementFlags::WATERWALKING;
         self.clone()
+    }
+
+    pub const fn get_WATERWALKING(&self) -> bool {
+        (self.inner & MovementFlags::WATERWALKING) != 0
     }
 
     pub fn clear_WATERWALKING(&mut self) -> Self {
@@ -758,6 +851,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub const fn get_SAFE_FALL(&self) -> bool {
+        (self.inner & MovementFlags::SAFE_FALL) != 0
+    }
+
     pub fn clear_SAFE_FALL(&mut self) -> Self {
         self.inner &= MovementFlags::SAFE_FALL.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -778,6 +875,10 @@ impl MovementInfoMovementFlags {
     pub fn set_HOVER(&mut self) -> Self {
         self.inner |= MovementFlags::HOVER;
         self.clone()
+    }
+
+    pub const fn get_HOVER(&self) -> bool {
+        (self.inner & MovementFlags::HOVER) != 0
     }
 
     pub fn clear_HOVER(&mut self) -> Self {

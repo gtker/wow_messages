@@ -568,6 +568,11 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_NONE(&self) -> bool {
+        // Underlying value is 0
+        self.inner == GroupUpdateFlags::FLAG_NONE
+    }
+
     pub fn clear_FLAG_NONE(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_NONE.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -603,6 +608,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.inner |= GroupUpdateFlags::FLAG_STATUS;
         self.flag_status = Some(flag_status);
         self.clone()
+    }
+
+    pub const fn get_FLAG_STATUS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS> {
+        self.flag_status.as_ref()
     }
 
     pub fn clear_FLAG_STATUS(&mut self) -> Self {
@@ -643,6 +652,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_CUR_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP> {
+        self.flag_cur_hp.as_ref()
+    }
+
     pub fn clear_FLAG_CUR_HP(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_CUR_HP.reverse_bits();
         self.flag_cur_hp = None;
@@ -679,6 +692,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.inner |= GroupUpdateFlags::FLAG_MAX_HP;
         self.flag_max_hp = Some(flag_max_hp);
         self.clone()
+    }
+
+    pub const fn get_FLAG_MAX_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP> {
+        self.flag_max_hp.as_ref()
     }
 
     pub fn clear_FLAG_MAX_HP(&mut self) -> Self {
@@ -719,6 +736,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_POWER_TYPE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE> {
+        self.flag_power_type.as_ref()
+    }
+
     pub fn clear_FLAG_POWER_TYPE(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_POWER_TYPE.reverse_bits();
         self.flag_power_type = None;
@@ -755,6 +776,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.inner |= GroupUpdateFlags::FLAG_CUR_POWER;
         self.flag_cur_power = Some(flag_cur_power);
         self.clone()
+    }
+
+    pub const fn get_FLAG_CUR_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_POWER> {
+        self.flag_cur_power.as_ref()
     }
 
     pub fn clear_FLAG_CUR_POWER(&mut self) -> Self {
@@ -795,6 +820,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_MAX_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER> {
+        self.flag_max_power.as_ref()
+    }
+
     pub fn clear_FLAG_MAX_POWER(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_MAX_POWER.reverse_bits();
         self.flag_max_power = None;
@@ -831,6 +860,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.inner |= GroupUpdateFlags::FLAG_LEVEL;
         self.flag_level = Some(flag_level);
         self.clone()
+    }
+
+    pub const fn get_FLAG_LEVEL(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_LEVEL> {
+        self.flag_level.as_ref()
     }
 
     pub fn clear_FLAG_LEVEL(&mut self) -> Self {
@@ -871,6 +904,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_ZONE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE> {
+        self.flag_zone.as_ref()
+    }
+
     pub fn clear_FLAG_ZONE(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_ZONE.reverse_bits();
         self.flag_zone = None;
@@ -907,6 +944,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.inner |= GroupUpdateFlags::FLAG_POSITION;
         self.flag_position = Some(flag_position);
         self.clone()
+    }
+
+    pub const fn get_FLAG_POSITION(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POSITION> {
+        self.flag_position.as_ref()
     }
 
     pub fn clear_FLAG_POSITION(&mut self) -> Self {
@@ -947,6 +988,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_AURAS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS> {
+        self.flag_auras.as_ref()
+    }
+
     pub fn clear_FLAG_AURAS(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_AURAS.reverse_bits();
         self.flag_auras = None;
@@ -982,6 +1027,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
     pub fn set_FLAG_AURAS_2(&mut self) -> Self {
         self.inner |= GroupUpdateFlags::FLAG_AURAS_2;
         self.clone()
+    }
+
+    pub const fn get_FLAG_AURAS_2(&self) -> bool {
+        (self.inner & GroupUpdateFlags::FLAG_AURAS_2) != 0
     }
 
     pub fn clear_FLAG_AURAS_2(&mut self) -> Self {
@@ -1020,6 +1069,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_PET_GUID(&self) -> bool {
+        (self.inner & GroupUpdateFlags::FLAG_PET_GUID) != 0
+    }
+
     pub fn clear_FLAG_PET_GUID(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_GUID.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -1055,6 +1108,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.inner |= GroupUpdateFlags::FLAG_PET_NAME;
         self.flag_pet_name = Some(flag_pet_name);
         self.clone()
+    }
+
+    pub const fn get_FLAG_PET_NAME(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_NAME> {
+        self.flag_pet_name.as_ref()
     }
 
     pub fn clear_FLAG_PET_NAME(&mut self) -> Self {
@@ -1095,6 +1152,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_PET_MODEL_ID(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID> {
+        self.flag_pet_model_id.as_ref()
+    }
+
     pub fn clear_FLAG_PET_MODEL_ID(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_MODEL_ID.reverse_bits();
         self.flag_pet_model_id = None;
@@ -1131,6 +1192,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.inner |= GroupUpdateFlags::FLAG_PET_CUR_HP;
         self.flag_pet_cur_hp = Some(flag_pet_cur_hp);
         self.clone()
+    }
+
+    pub const fn get_FLAG_PET_CUR_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_HP> {
+        self.flag_pet_cur_hp.as_ref()
     }
 
     pub fn clear_FLAG_PET_CUR_HP(&mut self) -> Self {
@@ -1171,6 +1236,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_PET_MAX_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP> {
+        self.flag_pet_max_hp.as_ref()
+    }
+
     pub fn clear_FLAG_PET_MAX_HP(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_MAX_HP.reverse_bits();
         self.flag_pet_max_hp = None;
@@ -1207,6 +1276,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.inner |= GroupUpdateFlags::FLAG_PET_POWER_TYPE;
         self.flag_pet_power_type = Some(flag_pet_power_type);
         self.clone()
+    }
+
+    pub const fn get_FLAG_PET_POWER_TYPE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE> {
+        self.flag_pet_power_type.as_ref()
     }
 
     pub fn clear_FLAG_PET_POWER_TYPE(&mut self) -> Self {
@@ -1247,6 +1320,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_PET_CUR_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER> {
+        self.flag_pet_cur_power.as_ref()
+    }
+
     pub fn clear_FLAG_PET_CUR_POWER(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_CUR_POWER.reverse_bits();
         self.flag_pet_cur_power = None;
@@ -1283,6 +1360,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.inner |= GroupUpdateFlags::FLAG_PET_MAX_POWER;
         self.flag_pet_max_power = Some(flag_pet_max_power);
         self.clone()
+    }
+
+    pub const fn get_FLAG_PET_MAX_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_POWER> {
+        self.flag_pet_max_power.as_ref()
     }
 
     pub fn clear_FLAG_PET_MAX_POWER(&mut self) -> Self {
@@ -1323,6 +1404,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_PET_AURAS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS> {
+        self.flag_pet_auras.as_ref()
+    }
+
     pub fn clear_FLAG_PET_AURAS(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_AURAS.reverse_bits();
         self.flag_pet_auras = None;
@@ -1360,6 +1445,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
         self.clone()
     }
 
+    pub const fn get_FLAG_PET_AURAS_2(&self) -> bool {
+        (self.inner & GroupUpdateFlags::FLAG_PET_AURAS_2) != 0
+    }
+
     pub fn clear_FLAG_PET_AURAS_2(&mut self) -> Self {
         self.inner &= GroupUpdateFlags::FLAG_PET_AURAS_2.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -1394,6 +1483,10 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
     pub fn set_MODE_OFFLINE(&mut self) -> Self {
         self.inner |= GroupUpdateFlags::MODE_OFFLINE;
         self.clone()
+    }
+
+    pub const fn get_MODE_OFFLINE(&self) -> bool {
+        (self.inner & GroupUpdateFlags::MODE_OFFLINE) != 0
     }
 
     pub fn clear_MODE_OFFLINE(&mut self) -> Self {

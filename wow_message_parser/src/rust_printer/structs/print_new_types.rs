@@ -123,18 +123,36 @@ fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
 
                 s.wln("self.clone()");
             });
+
+            s.funcn_pub_const(format!("get_{}(&self)", f.name()), "bool", |s| {
+                if f.value().int() == 0 {
+                    s.wln("// Underlying value is 0");
+                    s.wln(format!(
+                        "self.inner == {ty}::{name}",
+                        ty = ce.original_ty_name(),
+                        name = f.name()
+                    ));
+                } else {
+                    s.wln(format!(
+                        "(self.inner & {ty}::{name}) != 0",
+                        ty = ce.original_ty_name(),
+                        name = f.name()
+                    ));
+                }
+            });
         } else {
+            let new_ty = format!(
+                "{}{}{}",
+                ce.original_struct_name(),
+                ce.original_ty_name(),
+                f.name()
+            );
             s.funcn_pub_const(
                 format!(
                     "new_{upper_name}({lower_name}: {new_ty})",
                     upper_name = f.name(),
                     lower_name = f.name().to_lowercase(),
-                    new_ty = format!(
-                        "{}{}{}",
-                        ce.original_struct_name(),
-                        ce.original_ty_name(),
-                        f.name()
-                    ),
+                    new_ty = new_ty,
                 ),
                 "Self",
                 |s| {
@@ -169,12 +187,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
                     "set_{upper_name}(&mut self, {lower_name}: {new_ty})",
                     upper_name = f.name(),
                     lower_name = f.name().to_lowercase(),
-                    new_ty = format!(
-                        "{}{}{}",
-                        ce.original_struct_name(),
-                        ce.original_ty_name(),
-                        f.name()
-                    ),
+                    new_ty = new_ty,
                 ),
                 "Self",
                 |s| {
@@ -190,6 +203,14 @@ fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
                     ));
 
                     s.wln("self.clone()");
+                },
+            );
+
+            s.funcn_pub_const(
+                format!("get_{}(&self)", f.name()),
+                format!("Option<&{new_ty}>", new_ty = new_ty),
+                |s| {
+                    s.wln(format!("self.{}.as_ref()", f.name().to_lowercase()));
                 },
             );
         }

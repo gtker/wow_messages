@@ -108,6 +108,10 @@ impl SimpleIfFlagSimpleFlag {
         self.clone()
     }
 
+    pub const fn get_ZERO(&self) -> Option<&SimpleIfFlagSimpleFlagZERO> {
+        self.zero.as_ref()
+    }
+
     pub fn clear_ZERO(&mut self) -> Self {
         self.inner &= SimpleFlag::ZERO.reverse_bits();
         self.zero = None;
@@ -128,6 +132,10 @@ impl SimpleIfFlagSimpleFlag {
         self.clone()
     }
 
+    pub const fn get_ONE(&self) -> bool {
+        (self.inner & SimpleFlag::ONE) != 0
+    }
+
     pub fn clear_ONE(&mut self) -> Self {
         self.inner &= SimpleFlag::ONE.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -145,6 +153,10 @@ impl SimpleIfFlagSimpleFlag {
     pub fn set_TWO(&mut self) -> Self {
         self.inner |= SimpleFlag::TWO;
         self.clone()
+    }
+
+    pub const fn get_TWO(&self) -> bool {
+        (self.inner & SimpleFlag::TWO) != 0
     }
 
     pub fn clear_TWO(&mut self) -> Self {

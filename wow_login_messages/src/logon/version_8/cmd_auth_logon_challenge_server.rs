@@ -383,6 +383,11 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         self.clone()
     }
 
+    pub const fn get_NONE(&self) -> bool {
+        // Underlying value is 0
+        self.inner == SecurityFlag::NONE
+    }
+
     pub fn clear_NONE(&mut self) -> Self {
         self.inner &= SecurityFlag::NONE.reverse_bits();
         // TODO: Cloning like this is not conductive to good performance but it is
@@ -403,6 +408,10 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         self.inner |= SecurityFlag::PIN;
         self.pin = Some(pin);
         self.clone()
+    }
+
+    pub const fn get_PIN(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN> {
+        self.pin.as_ref()
     }
 
     pub fn clear_PIN(&mut self) -> Self {
@@ -428,6 +437,10 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         self.clone()
     }
 
+    pub const fn get_UNKNOWN0(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0> {
+        self.unknown0.as_ref()
+    }
+
     pub fn clear_UNKNOWN0(&mut self) -> Self {
         self.inner &= SecurityFlag::UNKNOWN0.reverse_bits();
         self.unknown0 = None;
@@ -449,6 +462,10 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         self.inner |= SecurityFlag::AUTHENTICATOR;
         self.authenticator = Some(authenticator);
         self.clone()
+    }
+
+    pub const fn get_AUTHENTICATOR(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR> {
+        self.authenticator.as_ref()
     }
 
     pub fn clear_AUTHENTICATOR(&mut self) -> Self {

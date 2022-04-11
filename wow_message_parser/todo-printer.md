@@ -21,7 +21,6 @@
 # Low Priority
 
 * MaximumPossibleSize for derived enums
-* Make derived flags usable with members
 * Workable Intermediate Representation for World
 * cfg options for `wow_srp`
 * More tests/definitions
