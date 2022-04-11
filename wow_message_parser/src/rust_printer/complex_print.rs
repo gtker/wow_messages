@@ -9,7 +9,6 @@ use crate::parser::types::{ContainerValue, IntegerType};
 
 #[derive(Debug, Clone)]
 pub struct RustStructComplexTree {
-    name: String,
     tree: OrderedMap,
     new_enums: Vec<ComplexEnum>,
 }
@@ -327,11 +326,7 @@ impl RustStructComplexTree {
 
         let new_enums = add_new_enums(s.name(), s.tags(), &tree.inner, enums, flags);
 
-        Self {
-            name: s.name().to_string(),
-            tree,
-            new_enums,
-        }
+        Self { tree, new_enums }
     }
 
     pub fn contains_any_complex_enums(&self) -> bool {
@@ -341,10 +336,6 @@ impl RustStructComplexTree {
             }
         }
         false
-    }
-
-    pub fn name(&self) -> &str {
-        &self.name
     }
 
     pub fn declarations(&self) -> &[Declaration] {
