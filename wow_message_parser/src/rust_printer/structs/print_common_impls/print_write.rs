@@ -1,6 +1,7 @@
 use crate::container::{Container, ContainerType, StructMember, StructMemberDefinition};
+use crate::parser::types::objects::Objects;
 use crate::parser::types::{
-    Array, ArrayType, FloatingPointType, IntegerType, Objects, Type, VerifiedContainerValue,
+    Array, ArrayType, FloatingPointType, IntegerType, Type, VerifiedContainerValue,
 };
 use crate::rust_printer::complex_print::DefinerType;
 use crate::rust_printer::new_enums::{

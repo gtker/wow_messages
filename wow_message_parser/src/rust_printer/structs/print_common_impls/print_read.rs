@@ -1,7 +1,8 @@
 use std::collections::HashMap;
 
 use crate::container::{Container, StructMember, StructMemberDefinition};
-use crate::parser::types::{Array, ArraySize, ArrayType, ObjectType, Objects, Type};
+use crate::parser::types::objects::Objects;
+use crate::parser::types::{Array, ArraySize, ArrayType, ObjectType, Type};
 use crate::rust_printer::complex_print::{ComplexEnum, DefinerType};
 use crate::rust_printer::new_enums::{
     IfStatementType, NewEnumStructMember, NewEnumerator, NewIfStatement,

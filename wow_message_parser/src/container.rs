@@ -1,7 +1,8 @@
 use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
+use crate::parser::types::objects::Objects;
 use crate::parser::types::{
-    ArraySize, ArrayType, ContainerValue, LoginVersion, ObjectType, Objects, Tag, Tags, Type,
+    ArraySize, ArrayType, ContainerValue, LoginVersion, ObjectType, Tag, Tags, Type,
     VerifiedContainerValue, WorldVersion,
 };
 use crate::rust_printer::complex_print::{DefinerType, RustStructComplexTree};

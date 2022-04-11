@@ -1,6 +1,7 @@
 use crate::container::{Container, ContainerType};
 use crate::file_utils::get_import_path;
-use crate::parser::types::{ArraySize, Objects};
+use crate::parser::types::objects::Objects;
+use crate::parser::types::ArraySize;
 use crate::rust_printer::complex_print::Declaration;
 use crate::rust_printer::opcodes::get_enumerator_name;
 use crate::rust_printer::{

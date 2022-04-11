@@ -2,13 +2,14 @@ use std::path::Path;
 
 use walkdir::WalkDir;
 
+use parser::types::objects::Objects;
 use rust_printer::print_struct;
 
 use crate::container::{Container, ContainerType};
 use crate::file_utils::{
     append_string_to_file, get_world_version_file_path, write_string_to_file, ModFiles, LOGIN_DIR,
 };
-use crate::parser::types::{Objects, Tags};
+use crate::parser::types::Tags;
 use crate::rust_printer::{print_enum, print_flag, print_login_opcodes, print_world_opcodes};
 
 mod container;

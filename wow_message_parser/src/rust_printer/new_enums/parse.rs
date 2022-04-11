@@ -1,5 +1,5 @@
 use crate::container::{Container, Equation, IfStatement, StructMember};
-use crate::parser::types::Objects;
+use crate::parser::types::objects::Objects;
 use crate::rust_printer::new_enums::{
     IfStatementType, NewEnumStructMember, NewEnumerator, NewIfStatement,
 };

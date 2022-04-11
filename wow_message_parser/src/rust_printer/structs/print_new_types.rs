@@ -1,5 +1,6 @@
 use crate::container::Container;
-use crate::parser::types::{ArrayType, Objects, Type, VerifiedContainerValue};
+use crate::parser::types::objects::Objects;
+use crate::parser::types::{ArrayType, Type, VerifiedContainerValue};
 use crate::rust_printer::complex_print::{ComplexEnum, DefinerType, Enumerator};
 use crate::rust_printer::enums::get_upcast_types;
 use crate::rust_printer::new_enums::{NewEnumStructMember, NewIfStatement};
