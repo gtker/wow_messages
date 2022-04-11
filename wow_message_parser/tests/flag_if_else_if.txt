@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::world::v1::v12::{SimpleFlag};
 use crate::world::v1::v12::{UpdateFlag};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 
@@ -11,7 +12,10 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 ///         u8 b_if;
 ///     }
 ///     else if (flags & TWO_ELSEIF) {
-///         u8 elseif1;
+///         SimpleFlag s;
+///         if (s & ONE) {
+///             u8 if_one;
+///         }
 ///     }
 ///     else if (flags & FOUR_ELSEIF) {
 ///         u8 elseif2;
@@ -41,11 +45,22 @@ impl ReadableAndWritable for FlagIfElseIf {
             })
         }
         else if flags.is_TWO_ELSEIF() {
-            // elseif1: u8
-            let elseif1 = crate::util::read_u8_le(r)?;
+            // s: SimpleFlag
+            let s = SimpleFlag::read(r)?;
+
+            let s_ONE = if s.is_ONE() {
+                // if_one: u8
+                let if_one = crate::util::read_u8_le(r)?;
+
+                Some(FlagIfElseIfSimpleFlagONE {
+                    if_one,
+                })
+            } else {
+                None
+            };
 
             Some(FlagIfElseIfUpdateFlag_ONE_IF::TWO_ELSEIF {
-                elseif1,
+                s,
             })
         }
         else if flags.is_FOUR_ELSEIF() {
@@ -108,6 +123,150 @@ impl VariableSized for FlagIfElseIf {
 impl MaximumPossibleSized for FlagIfElseIf {
     fn maximum_possible_size() -> usize {
         UpdateFlag::maximum_possible_size() // flags: UpdateFlag
+    }
+}
+
+#[derive(Default, Debug, PartialEq, Clone)]
+pub struct FlagIfElseIfSimpleFlag {
+    inner: u8,
+    one: Option<FlagIfElseIfSimpleFlagONE>,
+}
+
+impl From<&FlagIfElseIfSimpleFlag> for SimpleFlag {
+    fn from(e: &FlagIfElseIfSimpleFlag) -> Self {
+        Self::new(e.inner)
+    }
+}
+
+impl FlagIfElseIfSimpleFlag {
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleFlag = self.into();
+        a.write(w)?;
+        Ok(())
+    }
+
+    pub const fn empty() -> Self {
+        Self {
+            inner: 0,
+            one: None,
+        }
+    }
+
+    pub const fn new_ZERO() -> Self {
+        Self {
+            inner: SimpleFlag::ZERO,
+            one: None,
+        }
+    }
+
+    pub fn set_ZERO(&mut self) -> Self {
+        self.inner |= SimpleFlag::ZERO;
+        self.clone()
+    }
+
+    pub const fn get_ZERO(&self) -> bool {
+        // Underlying value is 0
+        self.inner == SimpleFlag::ZERO
+    }
+
+    pub fn clear_ZERO(&mut self) -> Self {
+        self.inner &= SimpleFlag::ZERO.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
+    pub const fn new_ONE(one: FlagIfElseIfSimpleFlagONE) -> Self {
+        Self {
+            inner: SimpleFlag::ONE,
+            one: Some(one),
+        }
+    }
+
+    pub fn set_ONE(&mut self, one: FlagIfElseIfSimpleFlagONE) -> Self {
+        self.inner |= SimpleFlag::ONE;
+        self.one = Some(one);
+        self.clone()
+    }
+
+    pub const fn get_ONE(&self) -> Option<&FlagIfElseIfSimpleFlagONE> {
+        self.one.as_ref()
+    }
+
+    pub fn clear_ONE(&mut self) -> Self {
+        self.inner &= SimpleFlag::ONE.reverse_bits();
+        self.one = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
+    pub const fn new_TWO() -> Self {
+        Self {
+            inner: SimpleFlag::TWO,
+            one: None,
+        }
+    }
+
+    pub fn set_TWO(&mut self) -> Self {
+        self.inner |= SimpleFlag::TWO;
+        self.clone()
+    }
+
+    pub const fn get_TWO(&self) -> bool {
+        (self.inner & SimpleFlag::TWO) != 0
+    }
+
+    pub fn clear_TWO(&mut self) -> Self {
+        self.inner &= SimpleFlag::TWO.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
+}
+impl VariableSized for FlagIfElseIfSimpleFlag {
+    fn size(&self) -> usize {
+        1 // inner: SimpleFlag (u8)
+        + {
+            if let Some(s) = &self.one {
+                s.size()
+            } else {
+                0
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for FlagIfElseIfSimpleFlag {
+    fn maximum_possible_size() -> usize {
+        1 // inner: SimpleFlag (u8)
+        + FlagIfElseIfSimpleFlagONE::maximum_possible_size() // ONE enumerator
+    }
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub struct FlagIfElseIfSimpleFlagONE {
+    pub if_one: u8,
+}
+
+impl VariableSized for FlagIfElseIfSimpleFlagONE {
+    fn size(&self) -> usize {
+        1 // if_one: u8
+    }
+}
+
+impl MaximumPossibleSized for FlagIfElseIfSimpleFlagONE {
+    fn maximum_possible_size() -> usize {
+        1 // if_one: u8
+    }
+}
+
+impl FlagIfElseIfSimpleFlagONE {
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.if_one.to_le_bytes())?;
+
+        Ok(())
     }
 }
 
@@ -303,7 +462,7 @@ pub enum FlagIfElseIfUpdateFlagONE_IF {
         b_if: u8,
     },
     TWO_ELSEIF {
-        elseif1: u8,
+        s: SimpleFlag,
     },
     FOUR_ELSEIF {
         elseif2: u8,
@@ -317,7 +476,8 @@ impl VariableSized for FlagIfElseIfUpdateFlagONE_IF {
                 1 // b_if: u8
             }
             Self::TWO_ELSEIF => {
-                1 // elseif1: u8
+                SimpleFlag::size() // s: SimpleFlag
+                s.size() // s
             }
             Self::FOUR_ELSEIF => {
                 1 // elseif2: u8
@@ -343,10 +503,15 @@ impl FlagIfElseIfUpdateFlagONE_IF {
 
             }
             Self::TWO_ELSEIF {
-                elseif1,
+                s,
+                s
             } => {
-                // elseif1: u8
-                w.write_all(&elseif1.to_le_bytes())?;
+                // s: SimpleFlag
+                s.write(w)?;
+
+                if let Some(s) = &s.one {
+                    s.write(w)?;
+                }
 
             }
             Self::FOUR_ELSEIF {

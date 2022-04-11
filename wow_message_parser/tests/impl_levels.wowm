@@ -308,7 +308,10 @@ struct FlagIfElseIf {
         u8 b_if;
     }
     else if (flags & TWO_ELSEIF) {
-        u8 elseif1;
+        SimpleFlag s;
+        if (s & ONE) {
+            u8 if_one;
+        }
     }
     else if (flags & FOUR_ELSEIF) {
         u8 elseif2;

@@ -327,7 +327,7 @@ fn print_write_field(
     }
 }
 
-fn print_flag_if_statement(s: &mut Writer, variable_prefix: &str, statement: &NewIfStatement) {
+pub fn print_flag_if_statement(s: &mut Writer, variable_prefix: &str, statement: &NewIfStatement) {
     assert!(statement.enum_or_flag() == IfStatementType::Flag);
 
     let enumerator = statement
@@ -349,7 +349,7 @@ fn print_flag_if_statement(s: &mut Writer, variable_prefix: &str, statement: &Ne
     );
 }
 
-fn print_enum_if_statement_new(
+pub fn print_enum_if_statement_new(
     s: &mut Writer,
     e: &Container,
     o: &Objects,

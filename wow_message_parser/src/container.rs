@@ -1007,7 +1007,7 @@ fn get_type(variable_name: &str, m: &StructMember) -> Option<Type> {
             }
         }
         StructMember::IfStatement(statement) => {
-            for m in &statement.members {
+            for m in statement.all_members() {
                 match get_type(variable_name, m) {
                     None => {}
                     Some(t) => {
@@ -1016,14 +1016,6 @@ fn get_type(variable_name: &str, m: &StructMember) -> Option<Type> {
                 }
             }
 
-            for m in &statement.else_statement_members {
-                match get_type(variable_name, m) {
-                    None => {}
-                    Some(t) => {
-                        return Some(t);
-                    }
-                }
-            }
             None
         }
         StructMember::OptionalStatement(optional) => {

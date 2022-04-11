@@ -4,10 +4,12 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{ArrayType, VerifiedContainerValue};
 use crate::rust_printer::complex_print::{ComplexEnum, DefinerType, Enumerator};
 use crate::rust_printer::enums::get_upcast_types;
-use crate::rust_printer::new_enums::{NewEnumStructMember, NewIfStatement};
+use crate::rust_printer::new_enums::{IfStatementType, NewEnumStructMember, NewIfStatement};
 use crate::rust_printer::structs::print_common_impls;
 use crate::rust_printer::structs::print_common_impls::print_write;
-use crate::rust_printer::structs::print_common_impls::print_write::print_write_definition;
+use crate::rust_printer::structs::print_common_impls::print_write::{
+    print_enum_if_statement_new, print_flag_if_statement, print_write_definition,
+};
 use crate::rust_printer::Writer;
 
 pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
@@ -420,7 +422,9 @@ fn print_types_for_new_flag_flag_elseif(
                         NewEnumStructMember::Definition(d) => {
                             s.wln(format!("{name},", name = d.name()));
                         }
-                        NewEnumStructMember::IfStatement(_) => panic!("{:#?}", &f),
+                        NewEnumStructMember::IfStatement(statement) => {
+                            s.wln(format!("{name}", name = statement.variable_name()));
+                        }
                     }
                 }
                 s.closing_curly_with(" => {");
@@ -431,7 +435,14 @@ fn print_types_for_new_flag_flag_elseif(
                         NewEnumStructMember::Definition(d) => {
                             print_write_definition(s, e, o, "", d);
                         }
-                        NewEnumStructMember::IfStatement(_) => panic!(),
+                        NewEnumStructMember::IfStatement(statement) => {
+                            match statement.enum_or_flag() {
+                                IfStatementType::Enum => {
+                                    print_enum_if_statement_new(s, e, o, "", statement);
+                                }
+                                IfStatementType::Flag => print_flag_if_statement(s, "", statement),
+                            }
+                        }
                     }
                 }
 
