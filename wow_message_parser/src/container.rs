@@ -2,8 +2,9 @@ use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::{LoginVersion, Tag, Tags, WorldVersion};
+use crate::parser::types::ty::Type;
 use crate::parser::types::{
-    ArraySize, ArrayType, ContainerValue, ObjectType, Type, VerifiedContainerValue,
+    ArraySize, ArrayType, ContainerValue, ObjectType, VerifiedContainerValue,
 };
 use crate::rust_printer::complex_print::{DefinerType, RustStructComplexTree};
 use crate::rust_printer::new_enums::parse::add_to_statement;

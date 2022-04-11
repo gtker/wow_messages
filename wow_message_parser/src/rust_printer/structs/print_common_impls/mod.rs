@@ -1,6 +1,7 @@
 use crate::container::{Container, ContainerType, StructMember};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::{ArraySize, ArrayType, IntegerType, Type};
+use crate::parser::types::ty::Type;
+use crate::parser::types::{ArraySize, ArrayType, IntegerType};
 use crate::rust_printer::{
     Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
     WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,

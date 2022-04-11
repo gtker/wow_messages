@@ -1,6 +1,7 @@
 use crate::container::{Container, OptionalStatement, StructMember};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::{ArrayType, Type};
+use crate::parser::types::ty::Type;
+use crate::parser::types::ArrayType;
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty;
 use crate::rust_printer::Writer;
 

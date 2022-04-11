@@ -1,7 +1,8 @@
 use crate::container::{Container, ContainerType, Equation, IfStatement, StructMember};
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::{ArraySize, ArrayType, ObjectType, Type};
+use crate::parser::types::ty::Type;
+use crate::parser::types::{ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::{
     Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
     WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,

@@ -3,8 +3,9 @@ use std::collections::HashMap;
 use crate::container::{Container, Equation, StructMember};
 use crate::parser::enumerator::{Definer, DefinerValue};
 use crate::parser::types::tags::Tags;
-use crate::parser::types::Type::Identifier;
-use crate::parser::types::{ContainerValue, IntegerType, Type};
+use crate::parser::types::ty::Type;
+use crate::parser::types::ty::Type::Identifier;
+use crate::parser::types::{ContainerValue, IntegerType};
 
 #[derive(Debug, Clone)]
 pub struct RustStructComplexTree {

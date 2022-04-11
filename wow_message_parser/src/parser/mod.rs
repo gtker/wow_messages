@@ -16,10 +16,10 @@ use crate::container::{
 };
 use crate::file_info::FileInfo;
 use crate::parser::enumerator::{Definer, SelfValueDefinerField};
-use crate::parser::types::Type;
 use crate::parser::utility::parse_value;
 use crate::test_case::{TestCase, TestCaseMember, TestCaseValueInitial};
 use crate::ENUM_SELF_VALUE_FIELD;
+use types::ty::Type;
 
 pub mod enumerator;
 mod stats;
