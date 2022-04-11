@@ -4,7 +4,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:48`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L48):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_xfer.wowm:52`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_xfer.wowm#L52):
 /// ```text
 /// clogin CMD_XFER_CANCEL = 0x34 {
 /// }
@@ -54,7 +54,7 @@ mod test {
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
-    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 50.
+    // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 54.
     #[test]
     fn CMD_XFER_CANCEL0() {
         let raw: Vec<u8> = vec![ 0x34, ];
