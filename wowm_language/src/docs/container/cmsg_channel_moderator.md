@@ -1,0 +1,4 @@
+# CMSG_CHANNEL_MODERATOR
+
+# Client Version 1.12
+

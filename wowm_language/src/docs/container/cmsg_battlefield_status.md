@@ -1,0 +1,4 @@
+# CMSG_BATTLEFIELD_STATUS
+
+# Client Version 1.12
+

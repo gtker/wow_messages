@@ -1,0 +1,4 @@
+# CMSG_QUESTLOG_SWAP_QUEST
+
+# Client Version 1.12
+

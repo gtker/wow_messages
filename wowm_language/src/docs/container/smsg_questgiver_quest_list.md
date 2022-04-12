@@ -1,0 +1,4 @@
+# SMSG_QUESTGIVER_QUEST_LIST
+
+# Client Version 1.12
+

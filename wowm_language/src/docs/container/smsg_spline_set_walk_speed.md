@@ -1,0 +1,4 @@
+# SMSG_SPLINE_SET_WALK_SPEED
+
+# Client Version 1.12
+

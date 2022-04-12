@@ -1,0 +1,4 @@
+# CMSG_TAXINODE_STATUS_QUERY
+
+# Client Version 1.12
+

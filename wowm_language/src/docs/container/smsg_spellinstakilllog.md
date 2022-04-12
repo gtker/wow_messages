@@ -1,0 +1,4 @@
+# SMSG_SPELLINSTAKILLLOG
+
+# Client Version 1.12
+

@@ -1,0 +1,4 @@
+# SMSG_QUESTUPDATE_FAILED
+
+# Client Version 1.12
+

@@ -1,0 +1,4 @@
+# SMSG_ATTACKSWING_DEADTARGET
+
+# Client Version 1.12
+

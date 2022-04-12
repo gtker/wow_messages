@@ -1,0 +1,4 @@
+# CMSG_AUTOEQUIP_ITEM_SLOT
+
+# Client Version 1.12
+

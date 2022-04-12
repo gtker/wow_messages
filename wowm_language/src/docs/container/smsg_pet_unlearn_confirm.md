@@ -1,0 +1,4 @@
+# SMSG_PET_UNLEARN_CONFIRM
+
+# Client Version 1.12
+

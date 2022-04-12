@@ -1,0 +1,4 @@
+# SMSG_QUESTUPDATE_ADD_ITEM
+
+# Client Version 1.12
+

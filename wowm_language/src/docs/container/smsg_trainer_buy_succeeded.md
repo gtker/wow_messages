@@ -1,0 +1,4 @@
+# SMSG_TRAINER_BUY_SUCCEEDED
+
+# Client Version 1.12
+

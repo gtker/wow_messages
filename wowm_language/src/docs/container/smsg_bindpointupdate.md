@@ -1,0 +1,4 @@
+# SMSG_BINDPOINTUPDATE
+
+# Client Version 1.12
+

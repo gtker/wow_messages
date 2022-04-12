@@ -1,0 +1,4 @@
+# SMSG_BATTLEGROUND_PLAYER_LEFT
+
+# Client Version 1.12
+

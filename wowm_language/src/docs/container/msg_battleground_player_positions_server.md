@@ -1,0 +1,4 @@
+# MSG_BATTLEGROUND_PLAYER_POSITIONS_Server
+
+# Client Version 1.12
+

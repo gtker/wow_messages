@@ -1,0 +1,4 @@
+# SMSG_QUERY_TIME_RESPONSE
+
+# Client Version 1.12
+

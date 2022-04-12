@@ -1,0 +1,4 @@
+# CMSG_NEXT_CINEMATIC_CAMERA
+
+# Client Version 1.12
+

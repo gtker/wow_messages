@@ -1,0 +1,4 @@
+# SMSG_GMTICKET_DELETETICKET
+
+# Client Version 1.12
+

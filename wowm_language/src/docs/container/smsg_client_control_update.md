@@ -1,0 +1,4 @@
+# SMSG_CLIENT_CONTROL_UPDATE
+
+# Client Version 1.12
+

@@ -1,0 +1,4 @@
+# SMSG_STANDSTATE_UPDATE
+
+# Client Version 1.12
+

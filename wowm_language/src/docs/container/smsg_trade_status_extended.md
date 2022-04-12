@@ -1,0 +1,4 @@
+# SMSG_TRADE_STATUS_EXTENDED
+
+# Client Version 1.12
+

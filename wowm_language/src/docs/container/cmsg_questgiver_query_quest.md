@@ -1,0 +1,4 @@
+# CMSG_QUESTGIVER_QUERY_QUEST
+
+# Client Version 1.12
+

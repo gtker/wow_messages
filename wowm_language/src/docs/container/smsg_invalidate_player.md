@@ -1,0 +1,4 @@
+# SMSG_INVALIDATE_PLAYER
+
+# Client Version 1.12
+

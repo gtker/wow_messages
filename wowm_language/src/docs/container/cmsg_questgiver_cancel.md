@@ -1,0 +1,4 @@
+# CMSG_QUESTGIVER_CANCEL
+
+# Client Version 1.12
+

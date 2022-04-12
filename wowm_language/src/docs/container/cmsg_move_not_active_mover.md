@@ -1,0 +1,4 @@
+# CMSG_MOVE_NOT_ACTIVE_MOVER
+
+# Client Version 1.12
+

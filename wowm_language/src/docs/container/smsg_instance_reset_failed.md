@@ -1,0 +1,4 @@
+# SMSG_INSTANCE_RESET_FAILED
+
+# Client Version 1.12
+

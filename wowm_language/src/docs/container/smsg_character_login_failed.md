@@ -1,0 +1,4 @@
+# SMSG_CHARACTER_LOGIN_FAILED
+
+# Client Version 1.12
+

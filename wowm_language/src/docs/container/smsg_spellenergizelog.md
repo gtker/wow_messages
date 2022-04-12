@@ -1,0 +1,4 @@
+# SMSG_SPELLENERGIZELOG
+
+# Client Version 1.12
+

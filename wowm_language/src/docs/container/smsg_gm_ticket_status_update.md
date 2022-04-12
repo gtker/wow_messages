@@ -1,0 +1,4 @@
+# SMSG_GM_TICKET_STATUS_UPDATE
+
+# Client Version 1.12
+

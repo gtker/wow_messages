@@ -1,0 +1,4 @@
+# SMSG_PARTY_COMMAND_RESULT
+
+# Client Version 1.12
+

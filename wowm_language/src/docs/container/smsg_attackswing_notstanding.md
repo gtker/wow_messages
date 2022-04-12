@@ -1,0 +1,4 @@
+# SMSG_ATTACKSWING_NOTSTANDING
+
+# Client Version 1.12
+

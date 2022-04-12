@@ -1,0 +1,4 @@
+# SMSG_SPELLNONMELEEDAMAGELOG
+
+# Client Version 1.12
+

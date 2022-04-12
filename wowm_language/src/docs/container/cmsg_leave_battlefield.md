@@ -1,0 +1,4 @@
+# CMSG_LEAVE_BATTLEFIELD
+
+# Client Version 1.12
+

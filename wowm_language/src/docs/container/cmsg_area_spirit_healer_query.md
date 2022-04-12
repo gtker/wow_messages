@@ -1,0 +1,4 @@
+# CMSG_AREA_SPIRIT_HEALER_QUERY
+
+# Client Version 1.12
+

@@ -1,0 +1,4 @@
+# SMSG_MEETINGSTONE_IN_PROGRESS
+
+# Client Version 1.12
+

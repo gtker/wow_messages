@@ -1,0 +1,4 @@
+# CMSG_GMTICKET_UPDATETEXT
+
+# Client Version 1.12
+

@@ -1,0 +1,4 @@
+# SMSG_QUESTGIVER_REQUEST_ITEMS
+
+# Client Version 1.12
+

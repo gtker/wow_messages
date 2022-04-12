@@ -6,6 +6,10 @@ use parser::types::objects::Objects;
 use rust_printer::print_struct;
 
 use crate::container::{Container, ContainerType};
+use crate::doc_printer::{
+    print_docs_for_container, print_docs_for_enum, print_docs_for_flag,
+    print_docs_summary_and_objects,
+};
 use crate::file_utils::{
     append_string_to_file, get_world_version_file_path, write_string_to_file, ModFiles, LOGIN_DIR,
 };
@@ -13,11 +17,13 @@ use crate::rust_printer::{print_enum, print_flag, print_login_opcodes, print_wor
 use parser::types::tags::Tags;
 
 mod container;
+mod doc_printer;
 pub(crate) mod file_info;
 mod file_utils;
 pub mod parser;
 mod rust_printer;
 mod test_case;
+mod wowm_printer;
 
 const UTILITY_PATH: &str = "crate::util";
 
@@ -45,12 +51,15 @@ fn main() {
 
     let mut m = ModFiles::new();
 
+    let mut definer_docs = Vec::new();
     for e in o.enums() {
         if should_not_write_object(e.tags()) {
             continue;
         }
         let s = print_enum(e);
         m.write_contents_to_file(e.name(), e.tags(), &s);
+
+        definer_docs.push(print_docs_for_enum(e));
     }
 
     for e in o.flags() {
@@ -59,15 +68,23 @@ fn main() {
         }
         let s = print_flag(e);
         m.write_contents_to_file(e.name(), e.tags(), &s);
+
+        definer_docs.push(print_docs_for_flag(e));
     }
 
+    definer_docs.sort_by(|a, b| a.name().cmp(b.name()));
+
+    let mut object_docs = Vec::new();
     for e in o.all_containers() {
         if should_not_write_object(e.tags()) {
             continue;
         }
         let s = print_struct(e, &o);
         m.write_contents_to_file(e.name(), e.tags(), &s);
+        object_docs.push(print_docs_for_container(e));
     }
+
+    print_docs_summary_and_objects(&definer_docs, &object_docs);
 
     m.write_mod_files();
 

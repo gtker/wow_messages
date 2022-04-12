@@ -1,0 +1,4 @@
+# SMSG_ITEM_QUERY_SINGLE_RESPONSE
+
+# Client Version 1.12
+

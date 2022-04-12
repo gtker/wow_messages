@@ -1,0 +1,4 @@
+# CMSG_BATTLEMASTER_JOIN
+
+# Client Version 1.12
+
