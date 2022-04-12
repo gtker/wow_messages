@@ -7,6 +7,7 @@ use crate::rust_printer::{
     Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
     WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
+use crate::wowm_printer::get_struct_wowm_definition;
 use crate::{LOGIN_MESSAGES_GITHUB_REPO, WORLD_MESSAGES_GITHUB_REPO};
 
 mod print_common_impls;
@@ -182,134 +183,12 @@ fn print_declaration(s: &mut Writer, e: &Container) {
     });
 }
 
-fn print_docc_if_statement(s: &mut Writer, statement: &IfStatement, condition: &str) {
-    let equations = statement.conditional.equations();
-    for (i, eq) in equations.iter().enumerate() {
-        let name = statement.conditional.variable_name();
-        let (op, cond) = match eq {
-            Equation::Equals { value } => ("==", value),
-            Equation::NotEquals { value } => ("!=", value),
-            Equation::BitwiseAnd { value } => ("&", value),
-        };
-
-        if i == 0 {
-            s.docc_w(format!(
-                "{condition} ({name} {op} {cond}",
-                condition = condition,
-                name = name,
-                op = op,
-                cond = cond
-            ));
-            s.docc_inc();
-        } else {
-            s.docc_w(format!(
-                "|| {name} {op} {cond}",
-                name = name,
-                op = op,
-                cond = cond
-            ));
-        }
-
-        if i == equations.len() - 1 {
-            s.wln_no_indent(") {");
-        } else {
-            s.wln_no_indent("");
-        }
-    }
-}
-
-fn print_docc_members(s: &mut Writer, e: &Container, field: &StructMember) {
-    match field {
-        StructMember::Definition(d) => {
-            s.docc(format!(
-                "{ty} {name}{constant};",
-                ty = d.ty().str(),
-                name = d.name(),
-                constant = match d.verified_value() {
-                    None => "".to_string(),
-                    Some(c) => format!(" = {val}", val = c.original_string()),
-                }
-            ));
-        }
-        StructMember::IfStatement(statement) => {
-            print_docc_if_statement(s, statement, "if");
-
-            for f in statement.members() {
-                print_docc_members(s, e, f);
-            }
-
-            s.docc_dec();
-            s.docc("}");
-
-            if !statement.else_ifs().is_empty() {
-                for else_if in statement.else_ifs() {
-                    print_docc_if_statement(s, else_if, "else if");
-
-                    for m in else_if.members() {
-                        print_docc_members(s, e, m);
-                    }
-
-                    s.docc_dec();
-                    s.docc("}");
-                }
-            }
-
-            if !statement.else_statement_members.is_empty() {
-                s.docc("else {");
-                s.docc_inc();
-
-                for f in &statement.else_statement_members {
-                    print_docc_members(s, e, f);
-                }
-
-                s.docc_dec();
-                s.docc("}");
-            }
-        }
-        StructMember::OptionalStatement(optional) => {
-            s.docc(format!("optional {name} {{", name = optional.name()));
-            s.docc_inc();
-
-            for m in optional.members() {
-                print_docc_members(s, e, m);
-            }
-
-            s.docc_dec();
-            s.docc("}");
-        }
-    }
-}
-
 fn print_struct_wowm_definition(s: &mut Writer, e: &Container) {
     s.docc_wowm(
         |s| {
-            s.docc(format!(
-                "{kind} {name}{opcode} {{",
-                kind = e.container_type().str(),
-                name = e.name(),
-                opcode = match e.container_type() {
-                    ContainerType::Struct => "".to_string(),
-                    ContainerType::CLogin(o)
-                    | ContainerType::SLogin(o)
-                    | ContainerType::Msg(o)
-                    | ContainerType::CMsg(o)
-                    | ContainerType::SMsg(o) => format!(" = 0x{opcode:X}", opcode = o),
-                }
-            ));
-
-            s.docc_inc();
-
-            for field in e.fields() {
-                print_docc_members(s, e, field);
-            }
-
-            s.docc_dec();
-            s.docc("}")
+            s.wln(get_struct_wowm_definition(e, "/// "));
         },
-        match e.tags().has_login_version() {
-            true => LOGIN_MESSAGES_GITHUB_REPO,
-            false => WORLD_MESSAGES_GITHUB_REPO,
-        },
+        LOGIN_MESSAGES_GITHUB_REPO,
         e.file_info(),
     );
 }
