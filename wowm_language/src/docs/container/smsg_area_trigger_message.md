@@ -1,4 +1,4 @@
-# SMSG_AREA_TRIGGER_MESSAGE
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

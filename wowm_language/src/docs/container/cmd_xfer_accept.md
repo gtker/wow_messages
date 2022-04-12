@@ -1,4 +1,4 @@
-# CMD_XFER_ACCEPT
+## Protocol Version 3
 
-# Protocol Version 3
-
+```rust,ignore
+```

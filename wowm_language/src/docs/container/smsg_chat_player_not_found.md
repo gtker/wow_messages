@@ -1,4 +1,4 @@
-# SMSG_CHAT_PLAYER_NOT_FOUND
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

@@ -1,4 +1,4 @@
-# SMSG_PET_TAME_FAILURE
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

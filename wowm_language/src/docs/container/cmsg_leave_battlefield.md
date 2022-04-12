@@ -1,4 +1,4 @@
-# CMSG_LEAVE_BATTLEFIELD
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

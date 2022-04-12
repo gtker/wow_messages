@@ -1,4 +1,4 @@
-# SMSG_AUCTION_REMOVED_NOTIFICATION
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

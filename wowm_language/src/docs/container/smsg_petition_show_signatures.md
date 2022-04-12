@@ -1,4 +1,4 @@
-# SMSG_PETITION_SHOW_SIGNATURES
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

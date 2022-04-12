@@ -1,4 +1,4 @@
-# SMSG_ACCOUNT_DATA_TIMES
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

@@ -1,4 +1,4 @@
-# CMSG_TUTORIAL_RESET
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

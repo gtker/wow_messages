@@ -1,4 +1,4 @@
-# SMSG_QUESTGIVER_QUEST_COMPLETE
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

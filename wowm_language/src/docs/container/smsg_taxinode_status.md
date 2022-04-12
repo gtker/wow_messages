@@ -1,4 +1,4 @@
-# SMSG_TAXINODE_STATUS
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

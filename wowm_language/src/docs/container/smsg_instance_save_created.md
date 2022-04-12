@@ -1,4 +1,4 @@
-# SMSG_INSTANCE_SAVE_CREATED
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

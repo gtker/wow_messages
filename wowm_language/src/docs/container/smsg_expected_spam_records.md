@@ -1,4 +1,4 @@
-# SMSG_EXPECTED_SPAM_RECORDS
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

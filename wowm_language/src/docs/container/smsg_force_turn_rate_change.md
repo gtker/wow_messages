@@ -1,4 +1,4 @@
-# SMSG_FORCE_TURN_RATE_CHANGE
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

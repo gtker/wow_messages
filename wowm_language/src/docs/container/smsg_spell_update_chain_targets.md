@@ -1,4 +1,4 @@
-# SMSG_SPELL_UPDATE_CHAIN_TARGETS
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

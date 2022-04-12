@@ -1,4 +1,4 @@
-# SMSG_DURABILITY_DAMAGE_DEATH
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

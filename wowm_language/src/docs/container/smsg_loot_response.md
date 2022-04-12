@@ -1,4 +1,4 @@
-# SMSG_LOOT_RESPONSE
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

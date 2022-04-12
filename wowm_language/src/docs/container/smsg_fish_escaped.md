@@ -1,4 +1,4 @@
-# SMSG_FISH_ESCAPED
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

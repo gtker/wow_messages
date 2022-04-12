@@ -1,4 +1,4 @@
-# CMSG_QUESTGIVER_QUEST_AUTOLAUNCH
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

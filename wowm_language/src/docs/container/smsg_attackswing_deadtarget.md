@@ -1,4 +1,4 @@
-# SMSG_ATTACKSWING_DEADTARGET
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

@@ -1,4 +1,4 @@
-# SMSG_CHAR_RENAME
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

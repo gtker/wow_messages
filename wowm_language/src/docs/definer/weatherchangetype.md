@@ -1,4 +1,9 @@
-# WeatherChangeType
+## Client Version 1.12
 
-# Client Version 1.12
+```rust,ignore
+enum WeatherChangeType : u8 {
+    SMOOTH = 0;    
+    INSTANT = 1;    
+}
 
+```

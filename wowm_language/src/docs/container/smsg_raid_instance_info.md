@@ -1,4 +1,4 @@
-# SMSG_RAID_INSTANCE_INFO
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

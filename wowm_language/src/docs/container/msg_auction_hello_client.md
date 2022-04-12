@@ -1,4 +1,4 @@
-# MSG_AUCTION_HELLO_Client
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

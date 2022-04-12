@@ -1,4 +1,4 @@
-# SMSG_QUEST_CONFIRM_ACCEPT
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

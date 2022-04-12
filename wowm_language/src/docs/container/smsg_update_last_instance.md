@@ -1,4 +1,4 @@
-# SMSG_UPDATE_LAST_INSTANCE
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

@@ -1,4 +1,4 @@
-# CMSG_SET_ACTIONBAR_TOGGLES
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

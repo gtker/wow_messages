@@ -1,4 +1,4 @@
-# CMSG_CHANNEL_BAN
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

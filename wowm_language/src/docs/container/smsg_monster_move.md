@@ -1,4 +1,4 @@
-# SMSG_MONSTER_MOVE
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

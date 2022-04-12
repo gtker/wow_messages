@@ -1,4 +1,4 @@
-# SMSG_BATTLEGROUND_PLAYER_JOINED
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

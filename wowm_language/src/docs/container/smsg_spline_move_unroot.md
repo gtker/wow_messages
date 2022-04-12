@@ -1,4 +1,4 @@
-# SMSG_SPLINE_MOVE_UNROOT
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

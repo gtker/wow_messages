@@ -1,4 +1,8 @@
-# CMD_AUTH_RECONNECT_PROOF_Server
+## Protocol Version 2
 
-# Protocol Version 8
+```rust,ignore
+```
+## Protocol Version 8
 
+```rust,ignore
+```

@@ -1,4 +1,4 @@
-# SMSG_UPDATE_INSTANCE_OWNERSHIP
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

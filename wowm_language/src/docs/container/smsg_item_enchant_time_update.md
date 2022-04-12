@@ -1,4 +1,4 @@
-# SMSG_ITEM_ENCHANT_TIME_UPDATE
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

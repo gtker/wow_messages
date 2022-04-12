@@ -2,6 +2,7 @@ use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
 use crate::parser::types::{Endianness, IntegerType};
 use crate::rust_printer::Writer;
+use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{
     DISPLAY_STR, ENUM_SELF_VALUE_FIELD, LOGIN_MESSAGES_GITHUB_REPO, WORLD_MESSAGES_GITHUB_REPO,
 };
@@ -53,36 +54,9 @@ fn declaration(s: &mut Writer, e: &Definer) {
 pub fn print_wowm_definition(kind: &str, s: &mut Writer, e: &Definer) {
     s.docc_wowm(
         |s| {
-            s.docc(format!(
-                "{kind} {name} : {ty} {{",
-                kind = kind,
-                name = e.name(),
-                ty = e.ty().str(),
-            ));
-
-            s.docc_inc();
-            for field in e.fields() {
-                s.docc(format!(
-                    "{name} = {val};",
-                    name = field.name(),
-                    val = field.value().original()
-                ));
-            }
-
-            if let Some(f) = e.self_value() {
-                s.docc(format!(
-                    "{name} = {self_value}",
-                    name = f.name(),
-                    self_value = ENUM_SELF_VALUE_FIELD
-                ));
-            }
-            s.docc_dec();
-            s.docc("}");
+            s.wln(get_definer_wowm_definition(kind, e, "/// "));
         },
-        match e.tags().has_login_version() {
-            true => LOGIN_MESSAGES_GITHUB_REPO,
-            false => WORLD_MESSAGES_GITHUB_REPO,
-        },
+        LOGIN_MESSAGES_GITHUB_REPO,
         e.file_info(),
     );
 }

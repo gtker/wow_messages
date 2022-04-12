@@ -1,4 +1,4 @@
-# CMSG_MAIL_TAKE_ITEM
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

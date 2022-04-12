@@ -1,4 +1,4 @@
-# SMSG_GROUP_SET_LEADER
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

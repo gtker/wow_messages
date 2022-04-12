@@ -1,4 +1,4 @@
-# SMSG_SET_FACTION_STANDING
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

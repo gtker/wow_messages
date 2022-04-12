@@ -1,4 +1,4 @@
-# SMSG_PLAY_MUSIC
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

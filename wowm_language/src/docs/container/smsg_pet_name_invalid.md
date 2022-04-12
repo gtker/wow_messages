@@ -1,4 +1,4 @@
-# SMSG_PET_NAME_INVALID
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

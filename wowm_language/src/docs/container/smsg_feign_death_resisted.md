@@ -1,4 +1,4 @@
-# SMSG_FEIGN_DEATH_RESISTED
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

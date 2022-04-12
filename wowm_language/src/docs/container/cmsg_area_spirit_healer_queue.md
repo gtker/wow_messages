@@ -1,4 +1,4 @@
-# CMSG_AREA_SPIRIT_HEALER_QUEUE
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

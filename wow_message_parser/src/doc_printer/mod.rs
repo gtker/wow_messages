@@ -1,7 +1,8 @@
 use crate::container::Container;
-use crate::file_utils::write_string_to_file;
+use crate::file_utils::{append_string_to_file, create_or_append, write_string_to_file};
 use crate::parser::enumerator::Definer;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use crate::wowm_printer::get_definer_wowm_definition;
 use std::fmt::Write;
 use std::fs::read_to_string;
 use std::path::Path;
@@ -62,7 +63,7 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
             path = path,
         ))
         .unwrap();
-        write_string_to_file(
+        create_or_append(
             definer.inner(),
             Path::new(&("wowm_language/src/".to_string() + &path)),
         )
@@ -83,7 +84,7 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
         ))
         .unwrap();
 
-        write_string_to_file(
+        create_or_append(
             container.inner(),
             Path::new(&("wowm_language/src/".to_string() + &path)),
         )
@@ -92,10 +93,7 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
     write_string_to_file(&s, Path::new(SUMMARY_PATH))
 }
 
-fn common(s: &mut DocWriter, name: &str, tags: &Tags) {
-    s.wln(format!("# {name}", name = name));
-    s.newline();
-
+fn common(s: &mut DocWriter, tags: &Tags) {
     print_versions(s, tags.logon_versions(), tags.versions());
 }
 
@@ -104,7 +102,7 @@ fn print_versions(
     login_versions: &[LoginVersion],
     world_versions: &[WorldVersion],
 ) {
-    s.w("# ");
+    s.w("## ");
 
     for (i, l) in login_versions.iter().enumerate() {
         s.w(format!("Protocol Version {}", l.to_string()));
@@ -127,7 +125,10 @@ fn print_versions(
 pub fn print_docs_for_enum(e: &Definer) -> DocWriter {
     let mut s = DocWriter::new(e.name());
 
-    common(&mut s, e.name(), e.tags());
+    common(&mut s, e.tags());
+    s.wln("```rust,ignore");
+    s.wln(get_definer_wowm_definition("enum", e, ""));
+    s.wln("```");
 
     s
 }
@@ -135,7 +136,10 @@ pub fn print_docs_for_enum(e: &Definer) -> DocWriter {
 pub fn print_docs_for_flag(e: &Definer) -> DocWriter {
     let mut s = DocWriter::new(e.name());
 
-    common(&mut s, e.name(), e.tags());
+    common(&mut s, e.tags());
+    s.wln("```rust,ignore");
+    s.wln(get_definer_wowm_definition("flag", e, ""));
+    s.wln("```");
 
     s
 }
@@ -143,7 +147,10 @@ pub fn print_docs_for_flag(e: &Definer) -> DocWriter {
 pub fn print_docs_for_container(e: &Container) -> DocWriter {
     let mut s = DocWriter::new(e.name());
 
-    common(&mut s, e.name(), e.tags());
+    common(&mut s, e.tags());
+    s.wln("```rust,ignore");
+
+    s.wln("```");
 
     s
 }

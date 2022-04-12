@@ -1,4 +1,4 @@
-# SMSG_ITEM_PUSH_RESULT
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

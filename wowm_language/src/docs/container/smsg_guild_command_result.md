@@ -1,4 +1,4 @@
-# SMSG_GUILD_COMMAND_RESULT
+## Client Version 1.12
 
-# Client Version 1.12
-
+```rust,ignore
+```

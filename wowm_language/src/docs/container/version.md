@@ -1,4 +1,4 @@
-# Version
+## Protocol Version *
 
-# Protocol Version *
-
+```rust,ignore
+```

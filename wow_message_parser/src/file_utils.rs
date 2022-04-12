@@ -306,6 +306,15 @@ pub fn write_string_to_file(s: &str, filename: &Path) {
     f.write_all(s.as_bytes()).unwrap();
 }
 
+pub fn create_or_append(s: &str, filename: &Path) {
+    let mut f = std::fs::OpenOptions::new().append(true).open(filename);
+    if let Ok(mut f) = f {
+        f.write_all(s.as_bytes()).unwrap();
+    } else {
+        write_string_to_file(s, filename);
+    }
+}
+
 pub fn get_module_name(e: &str) -> String {
     e.to_snake_case()
 }
