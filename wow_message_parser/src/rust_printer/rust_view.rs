@@ -27,10 +27,7 @@ pub struct RustEnumerator {
 
 #[derive(Debug, Clone)]
 pub enum RustType {
-    Integer {
-        ty: IntegerType,
-        constant_value: Option<VerifiedContainerValue>,
-    },
+    Integer(IntegerType),
     Floating(FloatingPointType),
     BuiltIn(String),
     String,
@@ -176,16 +173,21 @@ pub fn create_struct_member(
         StructMember::Definition(d) => {
             let name = d.name().to_string();
             let ty = match d.ty() {
-                Type::Integer(i) => RustType::Integer {
-                    ty: i.clone(),
-                    constant_value: d.verified_value().clone(),
-                },
+                Type::Integer(i) => {
+                    if d.used_as_size_in() {
+                        return;
+                    }
+                    if let Some(_) = constant_value {
+                        return;
+                    }
+                    RustType::Integer(i.clone())
+                }
                 Type::Guid | Type::PackedGuid => RustType::BuiltIn("Guid".to_string()),
                 Type::FloatingPoint(f) => RustType::Floating(f.clone()),
                 Type::CString | Type::String { .. } => RustType::String,
                 Type::Array(array) => RustType::Array(array.clone()),
-                Type::Identifier { s, upcast } => match o.get_object_type_of(s, tags) {
-                    ObjectType::Enum => {
+                Type::Identifier { s, upcast } => {
+                    let add_types = || -> Vec<Enumerators> {
                         let mut enumerators = Vec::new();
                         let definer = o.get_definer(s, tags);
 
@@ -196,31 +198,28 @@ pub fn create_struct_member(
                                 members: vec![],
                             });
                         }
+                        enumerators
+                    };
+                    match o.get_object_type_of(s, tags) {
+                        ObjectType::Enum => {
+                            let mut enumerators = add_types();
 
-                        RustType::Enum {
-                            enumerators,
-                            upcast: upcast.clone(),
+                            RustType::Enum {
+                                enumerators,
+                                upcast: upcast.clone(),
+                            }
+                        }
+                        ObjectType::Flag => {
+                            let mut enumerators = add_types();
+
+                            RustType::Flag { enumerators }
+                        }
+                        ObjectType::Struct => RustType::Struct,
+                        ObjectType::CLogin | ObjectType::SLogin => {
+                            panic!("object contains message type")
                         }
                     }
-                    ObjectType::Flag => {
-                        let mut enumerators = Vec::new();
-                        let definer = o.get_definer(s, tags);
-
-                        for field in definer.fields() {
-                            enumerators.push(RustEnumerator {
-                                name: field.name().to_string(),
-                                value: field.value().clone(),
-                                members: vec![],
-                            });
-                        }
-
-                        RustType::Flag { enumerators }
-                    }
-                    ObjectType::Struct => RustType::Struct,
-                    ObjectType::CLogin | ObjectType::SLogin => {
-                        panic!("object contains message type")
-                    }
-                },
+                }
                 Type::UpdateMask => RustType::BuiltIn("UpdateMask".to_string()),
                 Type::AuraMask => RustType::BuiltIn("AuraMask".to_string()),
             };
