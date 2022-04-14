@@ -344,6 +344,10 @@ impl Container {
         self.nested_types.as_ref().unwrap()
     }
 
+    pub fn rust_object(&self) -> &RustObject {
+        &self.rust_object
+    }
+
     pub fn size_of_fields_before_size(&self, o: &Objects) -> u64 {
         let mut sum = match self.object_type {
             ContainerType::Struct => 0,

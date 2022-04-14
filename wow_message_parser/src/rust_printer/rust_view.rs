@@ -4,11 +4,8 @@ use crate::parser::enumerator::DefinerValue;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{
-    Array, FloatingPointType, IntegerType, ObjectType, VerifiedContainerValue,
-};
+use crate::parser::types::{Array, FloatingPointType, IntegerType, ObjectType};
 use crate::test_case::TestCase;
-use crate::TEST_STR;
 
 #[derive(Debug, Clone)]
 pub struct RustMember {
@@ -62,6 +59,7 @@ pub struct RustObject {
 
 pub fn create_if_statement(
     statement: &IfStatement,
+    ty_name: &str,
     tags: &Tags,
     o: &Objects,
     current_scope: &mut Vec<RustMember>,
@@ -83,6 +81,7 @@ pub fn create_if_statement(
     for m in statement.members() {
         create_struct_member(
             m,
+            ty_name,
             tags,
             o,
             &mut if_enumerator_members,
@@ -95,6 +94,7 @@ pub fn create_if_statement(
     for m in &statement.else_statement_members {
         create_struct_member(
             m,
+            ty_name,
             tags,
             o,
             &mut else_enumerator_members,
@@ -105,11 +105,11 @@ pub fn create_if_statement(
 
     let subject = current_scope
         .iter_mut()
-        .find(|a| statement.name() == &a.name);
+        .find(|a| format!("{}{}", ty_name, statement.name()) == a.name);
     let subject = match subject {
         None => parent_scope
             .iter_mut()
-            .find(|a| statement.name() == a.name)
+            .find(|a| format!("{}{}", ty_name, statement.name()) == a.name)
             .unwrap(),
         Some(s) => s,
     };
@@ -157,12 +157,13 @@ pub fn create_if_statement(
     }
 
     for else_if in statement.else_ifs() {
-        create_if_statement(else_if, tags, o, current_scope, parent_scope);
+        create_if_statement(else_if, ty_name, tags, o, current_scope, parent_scope);
     }
 }
 
 pub fn create_struct_member(
     m: &StructMember,
+    ty_name: &str,
     tags: &Tags,
     o: &Objects,
     current_scope: &mut Vec<RustMember>,
@@ -171,13 +172,12 @@ pub fn create_struct_member(
 ) {
     match m {
         StructMember::Definition(d) => {
-            let name = d.name().to_string();
             let ty = match d.ty() {
                 Type::Integer(i) => {
-                    if d.used_as_size_in() {
+                    if let Some(_) = d.used_as_size_in() {
                         return;
                     }
-                    if let Some(_) = constant_value {
+                    if let Some(_) = d.verified_value() {
                         return;
                     }
                     RustType::Integer(i.clone())
@@ -187,7 +187,7 @@ pub fn create_struct_member(
                 Type::CString | Type::String { .. } => RustType::String,
                 Type::Array(array) => RustType::Array(array.clone()),
                 Type::Identifier { s, upcast } => {
-                    let add_types = || -> Vec<Enumerators> {
+                    let add_types = || -> Vec<RustEnumerator> {
                         let mut enumerators = Vec::new();
                         let definer = o.get_definer(s, tags);
 
@@ -202,7 +202,7 @@ pub fn create_struct_member(
                     };
                     match o.get_object_type_of(s, tags) {
                         ObjectType::Enum => {
-                            let mut enumerators = add_types();
+                            let enumerators = add_types();
 
                             RustType::Enum {
                                 enumerators,
@@ -210,7 +210,7 @@ pub fn create_struct_member(
                             }
                         }
                         ObjectType::Flag => {
-                            let mut enumerators = add_types();
+                            let enumerators = add_types();
 
                             RustType::Flag { enumerators }
                         }
@@ -224,6 +224,12 @@ pub fn create_struct_member(
                 Type::AuraMask => RustType::BuiltIn("AuraMask".to_string()),
             };
 
+            let name = d.name().to_string();
+            let name = match ty {
+                RustType::Enum { .. } | RustType::Flag { .. } => format!("{}{}", ty_name, name),
+                _ => name,
+            };
+
             current_scope.push(RustMember {
                 name,
                 ty,
@@ -231,13 +237,13 @@ pub fn create_struct_member(
             });
         }
         StructMember::IfStatement(statement) => {
-            create_if_statement(statement, tags, o, current_scope, parent_scope);
+            create_if_statement(statement, ty_name, tags, o, current_scope, parent_scope);
         }
         StructMember::OptionalStatement(option) => {
             let mut members = Vec::new();
 
             for i in option.members() {
-                create_struct_member(i, tags, o, &mut members, current_scope, &mut None);
+                create_struct_member(i, ty_name, tags, o, &mut members, current_scope, &mut None);
             }
 
             *optional = Some(RustOptional {
@@ -253,7 +259,7 @@ pub fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
     let mut optional = None;
 
     for m in e.fields() {
-        create_struct_member(m, e.tags(), o, &mut v, &mut vec![], &mut optional);
+        create_struct_member(m, e.name(), e.tags(), o, &mut v, &mut vec![], &mut optional);
     }
 
     RustObject {
