@@ -15,6 +15,8 @@ pub struct RustMember {
     name: String,
     ty: RustType,
 
+    constant_sized: bool,
+
     tags: Tags,
 }
 
@@ -27,6 +29,9 @@ impl RustMember {
     }
     pub fn tags(&self) -> &Tags {
         &self.tags
+    }
+    pub fn constant_sized(&self) -> bool {
+        self.constant_sized
     }
 }
 
@@ -207,6 +212,7 @@ pub fn create_if_statement(
         match &mut subject.ty {
             RustType::Enum { is_simple, .. } | RustType::Flag { is_simple, .. } => {
                 *is_simple = false;
+                subject.constant_sized = false;
             }
             _ => panic!("{} is not a definer", subject.name),
         }
@@ -277,6 +283,7 @@ pub fn create_struct_member(
 ) {
     match m {
         StructMember::Definition(d) => {
+            let mut definition_constantly_sized = true;
             let ty = match d.ty() {
                 Type::Integer(i) => {
                     if let Some(_) = d.used_as_size_in() {
@@ -290,11 +297,13 @@ pub fn create_struct_member(
                 Type::Guid => RustType::BuiltIn("Guid".to_string()),
                 Type::PackedGuid => {
                     *constant_sized = false;
+                    definition_constantly_sized = false;
                     RustType::BuiltIn("Guid".to_string())
                 }
                 Type::FloatingPoint(f) => RustType::Floating(f.clone()),
                 Type::CString | Type::String { .. } => {
                     *constant_sized = false;
+                    definition_constantly_sized = false;
                     RustType::String
                 }
                 Type::Array(array) => {
@@ -302,6 +311,7 @@ pub fn create_struct_member(
                         ArraySize::Fixed(_) => {}
                         ArraySize::Variable(_) | ArraySize::Endless => {
                             *constant_sized = false;
+                            definition_constantly_sized = false;
                         }
                     }
 
@@ -311,10 +321,12 @@ pub fn create_struct_member(
                             let c = o.get_container(complex, tags);
                             if !c.has_constant_size(o) {
                                 *constant_sized = false;
+                                definition_constantly_sized = false;
                             }
                         }
                         ArrayType::PackedGuid | ArrayType::CString => {
                             *constant_sized = false;
+                            definition_constantly_sized = false;
                         }
                     }
 
@@ -359,6 +371,7 @@ pub fn create_struct_member(
                             let c = o.get_container(s, tags);
                             if !c.has_constant_size(o) {
                                 *constant_sized = false;
+                                definition_constantly_sized = false;
                             }
 
                             RustType::Struct(s.clone())
@@ -370,10 +383,12 @@ pub fn create_struct_member(
                 }
                 Type::UpdateMask => {
                     *constant_sized = false;
+                    definition_constantly_sized = false;
                     RustType::BuiltIn("UpdateMask".to_string())
                 }
                 Type::AuraMask => {
                     *constant_sized = false;
+                    definition_constantly_sized = false;
                     RustType::BuiltIn("AuraMask".to_string())
                 }
             };
@@ -383,6 +398,7 @@ pub fn create_struct_member(
             current_scope.push(RustMember {
                 name,
                 ty,
+                constant_sized: definition_constantly_sized,
                 tags: tags.clone(),
             });
         }
