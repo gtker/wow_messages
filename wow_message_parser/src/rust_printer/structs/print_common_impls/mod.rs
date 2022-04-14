@@ -437,32 +437,26 @@ fn print_size(s: &mut Writer, e: &Container, o: &Objects) {
             );
         }
 
-        for m in e.fields() {
-            match m {
-                StructMember::Definition(_) => {}
-                StructMember::IfStatement(_) => {}
-                StructMember::OptionalStatement(optional) => {
-                    if e.nested_types().declarations().is_empty() {
-                        s.w("");
-                    } else {
-                        s.w("+ ");
-                    }
-
-                    s.wln_no_indent("{");
-                    s.inc_indent();
-
-                    s.body_else(
-                        format!("if let Some(v) = &self.{name}", name = optional.name()),
-                        |s| {
-                            s.wln("v.size()");
-                        },
-                        |s| {
-                            s.wln("0");
-                        },
-                    );
-                    s.closing_curly_with(format!(" // optional {name}", name = optional.name()));
-                }
+        if let Some(optional) = e.rust_object().optional() {
+            if e.nested_types().declarations().is_empty() {
+                s.w("");
+            } else {
+                s.w("+ ");
             }
+
+            s.wln_no_indent("{");
+            s.inc_indent();
+
+            s.body_else(
+                format!("if let Some(v) = &self.{name}", name = optional.name()),
+                |s| {
+                    s.wln("v.size()");
+                },
+                |s| {
+                    s.wln("0");
+                },
+            );
+            s.closing_curly_with(format!(" // optional {name}", name = optional.name()));
         }
     };
 
