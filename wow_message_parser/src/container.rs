@@ -345,7 +345,7 @@ impl Container {
     }
 
     pub fn rust_object(&self) -> &RustObject {
-        &self.rust_object
+        self.rust_object_view.as_ref().unwrap()
     }
 
     pub fn size_of_fields_before_size(&self, o: &Objects) -> u64 {

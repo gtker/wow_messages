@@ -6,6 +6,7 @@ use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, FloatingPointType, IntegerType, ObjectType};
 use crate::test_case::TestCase;
+use std::fmt::{Display, Formatter};
 
 #[derive(Debug, Clone)]
 pub struct RustMember {
@@ -13,6 +14,18 @@ pub struct RustMember {
     ty: RustType,
 
     tags: Tags,
+}
+
+impl RustMember {
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+    pub fn ty(&self) -> &RustType {
+        &self.ty
+    }
+    pub fn tags(&self) -> &Tags {
+        &self.tags
+    }
 }
 
 #[derive(Debug, Clone)]
@@ -30,19 +43,50 @@ pub enum RustType {
     String,
     Array(Array),
     Enum {
+        ty_name: String,
         enumerators: Vec<RustEnumerator>,
         upcast: Option<IntegerType>,
+        is_simple: bool,
     },
     Flag {
+        ty_name: String,
         enumerators: Vec<RustEnumerator>,
+        is_simple: bool,
     },
-    Struct,
+    Struct(String),
+}
+
+impl Display for RustType {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            RustType::Integer(i) => f.write_str(i.rust_str()),
+            RustType::Floating(i) => f.write_str(i.rust_str()),
+            RustType::BuiltIn(builtin) => f.write_str(builtin),
+            RustType::String => f.write_str("String"),
+            RustType::Array(array) => f.write_str(&array.rust_str()),
+            RustType::Enum { ty_name, .. } | RustType::Flag { ty_name, .. } => f.write_str(ty_name),
+            RustType::Struct(name) => f.write_str(name),
+        }
+    }
 }
 
 #[derive(Debug, Clone)]
 pub struct RustOptional {
     name: String,
+    ty: String,
     members: Vec<RustMember>,
+}
+
+impl RustOptional {
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+    pub fn ty(&self) -> &str {
+        &self.ty
+    }
+    pub fn members(&self) -> &Vec<RustMember> {
+        &self.members
+    }
 }
 
 #[derive(Debug, Clone)]
@@ -57,9 +101,30 @@ pub struct RustObject {
     file_info: FileInfo,
 }
 
+impl RustObject {
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+    pub fn members(&self) -> &[RustMember] {
+        &self.members
+    }
+    pub fn optional(&self) -> Option<&RustOptional> {
+        self.optional.as_ref()
+    }
+    pub fn tests(&self) -> &[TestCase] {
+        &self.tests
+    }
+    pub fn tags(&self) -> &Tags {
+        &self.tags
+    }
+    pub fn file_info(&self) -> &FileInfo {
+        &self.file_info
+    }
+}
+
 pub fn create_if_statement(
     statement: &IfStatement,
-    ty_name: &str,
+    struct_ty_name: &str,
     tags: &Tags,
     o: &Objects,
     current_scope: &mut Vec<RustMember>,
@@ -81,7 +146,7 @@ pub fn create_if_statement(
     for m in statement.members() {
         create_struct_member(
             m,
-            ty_name,
+            struct_ty_name,
             tags,
             o,
             &mut if_enumerator_members,
@@ -94,7 +159,7 @@ pub fn create_if_statement(
     for m in &statement.else_statement_members {
         create_struct_member(
             m,
-            ty_name,
+            struct_ty_name,
             tags,
             o,
             &mut else_enumerator_members,
@@ -105,18 +170,26 @@ pub fn create_if_statement(
 
     let subject = current_scope
         .iter_mut()
-        .find(|a| format!("{}{}", ty_name, statement.name()) == a.name);
+        .find(|a| statement.name() == a.name);
     let subject = match subject {
         None => parent_scope
             .iter_mut()
-            .find(|a| format!("{}{}", ty_name, statement.name()) == a.name)
+            .find(|a| statement.name() == a.name)
             .unwrap(),
         Some(s) => s,
     };
 
+    if !if_enumerator_members.is_empty() {
+        match &mut subject.ty {
+            RustType::Enum { is_simple, .. } | RustType::Flag { is_simple, .. } => {
+                *is_simple = false;
+            }
+            _ => panic!("{} is not a definer", subject.name),
+        }
+    }
+
     let enums = match &mut subject.ty {
-        RustType::Enum { enumerators, .. } => enumerators,
-        RustType::Flag { enumerators } => enumerators,
+        RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => enumerators,
         _ => panic!(),
     };
 
@@ -157,13 +230,20 @@ pub fn create_if_statement(
     }
 
     for else_if in statement.else_ifs() {
-        create_if_statement(else_if, ty_name, tags, o, current_scope, parent_scope);
+        create_if_statement(
+            else_if,
+            struct_ty_name,
+            tags,
+            o,
+            current_scope,
+            parent_scope,
+        );
     }
 }
 
 pub fn create_struct_member(
     m: &StructMember,
-    ty_name: &str,
+    struct_ty_name: &str,
     tags: &Tags,
     o: &Objects,
     current_scope: &mut Vec<RustMember>,
@@ -205,16 +285,22 @@ pub fn create_struct_member(
                             let enumerators = add_types();
 
                             RustType::Enum {
+                                ty_name: s.clone(),
                                 enumerators,
                                 upcast: upcast.clone(),
+                                is_simple: true,
                             }
                         }
                         ObjectType::Flag => {
                             let enumerators = add_types();
 
-                            RustType::Flag { enumerators }
+                            RustType::Flag {
+                                ty_name: s.clone(),
+                                enumerators,
+                                is_simple: true,
+                            }
                         }
-                        ObjectType::Struct => RustType::Struct,
+                        ObjectType::Struct => RustType::Struct(s.clone()),
                         ObjectType::CLogin | ObjectType::SLogin => {
                             panic!("object contains message type")
                         }
@@ -225,10 +311,6 @@ pub fn create_struct_member(
             };
 
             let name = d.name().to_string();
-            let name = match ty {
-                RustType::Enum { .. } | RustType::Flag { .. } => format!("{}{}", ty_name, name),
-                _ => name,
-            };
 
             current_scope.push(RustMember {
                 name,
@@ -237,17 +319,37 @@ pub fn create_struct_member(
             });
         }
         StructMember::IfStatement(statement) => {
-            create_if_statement(statement, ty_name, tags, o, current_scope, parent_scope);
+            create_if_statement(
+                statement,
+                struct_ty_name,
+                tags,
+                o,
+                current_scope,
+                parent_scope,
+            );
         }
         StructMember::OptionalStatement(option) => {
             let mut members = Vec::new();
 
             for i in option.members() {
-                create_struct_member(i, ty_name, tags, o, &mut members, current_scope, &mut None);
+                create_struct_member(
+                    i,
+                    struct_ty_name,
+                    tags,
+                    o,
+                    &mut members,
+                    current_scope,
+                    &mut None,
+                );
             }
 
             *optional = Some(RustOptional {
                 name: option.name().to_string(),
+                ty: format!(
+                    "{original_ty}_{ty}",
+                    original_ty = struct_ty_name,
+                    ty = option.name()
+                ),
                 members,
             });
         }
@@ -262,6 +364,10 @@ pub fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
         create_struct_member(m, e.name(), e.tags(), o, &mut v, &mut vec![], &mut optional);
     }
 
+    for m in &mut v {
+        set_simple_objects_name(m, e.name());
+    }
+
     RustObject {
         name: e.name().to_string(),
         members: v,
@@ -269,5 +375,39 @@ pub fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
         tests: e.tests().to_vec(),
         tags: e.tags().clone(),
         file_info: e.file_info().clone(),
+    }
+}
+
+fn set_simple_objects_name(m: &mut RustMember, struct_ty_name: &str) {
+    match &mut m.ty {
+        RustType::Enum {
+            ty_name,
+            is_simple,
+            enumerators,
+            ..
+        }
+        | RustType::Flag {
+            ty_name,
+            is_simple,
+            enumerators,
+            ..
+        } => {
+            if !(*is_simple) {
+                let definer_ty = ty_name.clone();
+                ty_name.clear();
+                ty_name.push_str(&format!(
+                    "{struct_ty_name}{definer_ty}",
+                    struct_ty_name = struct_ty_name,
+                    definer_ty = definer_ty
+                ));
+
+                for e in enumerators {
+                    for f in &mut e.members {
+                        set_simple_objects_name(f, struct_ty_name);
+                    }
+                }
+            }
+        }
+        _ => {}
     }
 }
