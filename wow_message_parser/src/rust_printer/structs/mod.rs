@@ -320,7 +320,6 @@ fn print_errors(s: &mut Writer, e: &Container, o: &Objects) {
     }
 
     print_general_error(s, e, o);
-    print_from_general_error(s, e, o);
 }
 
 fn print_general_error(s: &mut Writer, e: &Container, o: &Objects) {
@@ -346,6 +345,7 @@ fn print_general_error(s: &mut Writer, e: &Container, o: &Objects) {
     });
 
     print_display_for_general_error(s, e, o);
+    print_from_general_error(s, e, o);
 }
 
 fn print_display_for_general_error(s: &mut Writer, e: &Container, o: &Objects) {
