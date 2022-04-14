@@ -10,9 +10,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 pub struct SMSG_GOSSIP_MESSAGE {
     pub guid: Guid,
     pub title_text_id: u32,
-    pub amount_of_gossip_items: u32,
     pub gossips: Vec<GossipItem>,
-    pub amount_of_quests: u32,
     pub quests: Vec<QuestItem>,
 }
 
@@ -67,9 +65,7 @@ impl WorldMessageBody for SMSG_GOSSIP_MESSAGE {
         Ok(Self {
             guid,
             title_text_id,
-            amount_of_gossip_items,
             gossips,
-            amount_of_quests,
             quests,
         })
     }

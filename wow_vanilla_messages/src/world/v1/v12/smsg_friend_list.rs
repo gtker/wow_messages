@@ -6,7 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_FRIEND_LIST {
-    pub amount_of_friends: u8,
     pub friends: Vec<Friend>,
 }
 
@@ -44,7 +43,6 @@ impl WorldMessageBody for SMSG_FRIEND_LIST {
         }
 
         Ok(Self {
-            amount_of_friends,
             friends,
         })
     }

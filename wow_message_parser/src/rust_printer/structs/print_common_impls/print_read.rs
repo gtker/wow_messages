@@ -8,6 +8,7 @@ use crate::rust_printer::complex_print::{ComplexEnum, DefinerType};
 use crate::rust_printer::new_enums::{
     IfStatementType, NewEnumStructMember, NewEnumerator, NewIfStatement,
 };
+use crate::rust_printer::rust_view::RustType;
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty;
 use crate::rust_printer::Writer;
 use crate::UTILITY_PATH;
@@ -823,28 +824,22 @@ pub fn print_read(s: &mut Writer, e: &Container, o: &Objects) {
     print_read_final_flag(s, &nested_types);
 
     s.open_curly("Ok(Self");
-    let types = e.nested_types();
-    for field in types.declarations() {
-        if field.constant_value().is_some() || field.used_as_size_in().is_some() {
-            continue;
+
+    for f in e.rust_object().members() {
+        match f.ty() {
+            RustType::Enum { is_simple, .. } => {
+                if !is_simple {
+                    s.wln(format!("{name}: {name}_if,", name = f.name()));
+                    continue;
+                }
+            }
+            _ => {}
         }
-        if !field.does_not_have_subvariables()
-            && o.get_object_type_of(&field.ty().str(), e.tags()) == ObjectType::Enum
-        {
-            s.wln(format!("{name}: {name}_if,", name = field.name(),));
-        } else {
-            s.wln(format!("{name},", name = field.name(),));
-        }
+        s.wln(format!("{name},", name = f.name()));
     }
 
-    for m in e.fields() {
-        match m {
-            StructMember::Definition(_) => {}
-            StructMember::IfStatement(_) => {}
-            StructMember::OptionalStatement(optional) => {
-                s.wln(format!("{name},", name = optional.name()));
-            }
-        }
+    if let Some(optional) = e.rust_object().optional() {
+        s.wln(format!("{name},", name = optional.name()));
     }
 
     s.dec_indent();

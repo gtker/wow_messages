@@ -6,7 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_LOOT_MASTER_LIST {
-    pub amount_of_players: u8,
     pub guids: Vec<Guid>,
 }
 
@@ -44,7 +43,6 @@ impl WorldMessageBody for SMSG_LOOT_MASTER_LIST {
         }
 
         Ok(Self {
-            amount_of_players,
             guids,
         })
     }

@@ -10,7 +10,6 @@ pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
     pub unknown: u32,
     pub experience_reward: u32,
     pub money_reward: u32,
-    pub amount_of_item_rewards: u32,
     pub item_rewards: Vec<QuestItemReward>,
 }
 
@@ -64,7 +63,6 @@ impl WorldMessageBody for SMSG_QUESTGIVER_QUEST_COMPLETE {
             unknown,
             experience_reward,
             money_reward,
-            amount_of_item_rewards,
             item_rewards,
         })
     }

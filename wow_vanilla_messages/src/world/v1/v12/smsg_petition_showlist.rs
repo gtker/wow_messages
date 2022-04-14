@@ -8,7 +8,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_PETITION_SHOWLIST {
     pub npc: Guid,
-    pub amount_of_petitions: u8,
     pub petitions: Vec<PetitionShowlist>,
 }
 
@@ -50,7 +49,6 @@ impl WorldMessageBody for SMSG_PETITION_SHOWLIST {
 
         Ok(Self {
             npc,
-            amount_of_petitions,
             petitions,
         })
     }

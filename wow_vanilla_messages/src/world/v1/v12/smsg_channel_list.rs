@@ -8,7 +8,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 pub struct SMSG_CHANNEL_LIST {
     pub channel_name: String,
     pub channel_flags: u8,
-    pub amount_of_members: u32,
     pub members: Vec<ChannelMember>,
 }
 
@@ -55,7 +54,6 @@ impl WorldMessageBody for SMSG_CHANNEL_LIST {
         Ok(Self {
             channel_name,
             channel_flags,
-            amount_of_members,
             members,
         })
     }

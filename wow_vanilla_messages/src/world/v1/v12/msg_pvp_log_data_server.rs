@@ -9,7 +9,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MSG_PVP_LOG_DATA_Server {
     pub status: MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus,
-    pub amount_of_players: u32,
     pub players: Vec<BattlegroundPlayer>,
 }
 
@@ -63,7 +62,6 @@ impl WorldMessageBody for MSG_PVP_LOG_DATA_Server {
 
         Ok(Self {
             status: status_if,
-            amount_of_players,
             players,
         })
     }

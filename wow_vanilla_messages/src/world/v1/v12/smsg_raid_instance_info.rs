@@ -6,7 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_RAID_INSTANCE_INFO {
-    pub amount_of_raid_infos: u32,
     pub raid_infos: Vec<RaidInfo>,
 }
 
@@ -44,7 +43,6 @@ impl WorldMessageBody for SMSG_RAID_INSTANCE_INFO {
         }
 
         Ok(Self {
-            amount_of_raid_infos,
             raid_infos,
         })
     }

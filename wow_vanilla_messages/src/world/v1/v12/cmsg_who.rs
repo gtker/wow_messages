@@ -11,9 +11,7 @@ pub struct CMSG_WHO {
     pub guild_name: String,
     pub race_mask: u32,
     pub class_mask: u32,
-    pub amount_of_zones: u32,
     pub zones: Vec<u32>,
-    pub amount_of_strings: u32,
     pub search_strings: Vec<String>,
 }
 
@@ -87,9 +85,7 @@ impl WorldMessageBody for CMSG_WHO {
             guild_name,
             race_mask,
             class_mask,
-            amount_of_zones,
             zones,
-            amount_of_strings,
             search_strings,
         })
     }

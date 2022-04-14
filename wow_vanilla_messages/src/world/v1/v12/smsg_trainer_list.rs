@@ -9,7 +9,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 pub struct SMSG_TRAINER_LIST {
     pub guid: Guid,
     pub trainer_type: u32,
-    pub amount_of_spells: u32,
     pub spells: Vec<TrainerSpell>,
     pub greeting: String,
 }
@@ -60,7 +59,6 @@ impl WorldMessageBody for SMSG_TRAINER_LIST {
         Ok(Self {
             guid,
             trainer_type,
-            amount_of_spells,
             spells,
             greeting,
         })

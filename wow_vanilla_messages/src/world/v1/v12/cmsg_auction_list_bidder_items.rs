@@ -8,7 +8,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 pub struct CMSG_AUCTION_LIST_BIDDER_ITEMS {
     pub auctioneer: Guid,
     pub start_from_page: u32,
-    pub amount_of_outbidded_items: u32,
     pub outbid_item_ids: Vec<u32>,
 }
 
@@ -54,7 +53,6 @@ impl WorldMessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
         Ok(Self {
             auctioneer,
             start_from_page,
-            amount_of_outbidded_items,
             outbid_item_ids,
         })
     }

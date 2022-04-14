@@ -6,7 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_SET_FORCED_REACTIONS {
-    pub amount_of_reactions: u32,
     pub reactions: Vec<ForcedReaction>,
 }
 
@@ -44,7 +43,6 @@ impl WorldMessageBody for SMSG_SET_FORCED_REACTIONS {
         }
 
         Ok(Self {
-            amount_of_reactions,
             reactions,
         })
     }

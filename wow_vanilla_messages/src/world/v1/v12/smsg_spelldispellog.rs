@@ -8,7 +8,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 pub struct SMSG_SPELLDISPELLOG {
     pub victim: Guid,
     pub caster: Guid,
-    pub amount_of_spells: u32,
     pub spells: Vec<u32>,
 }
 
@@ -54,7 +53,6 @@ impl WorldMessageBody for SMSG_SPELLDISPELLOG {
         Ok(Self {
             victim,
             caster,
-            amount_of_spells,
             spells,
         })
     }

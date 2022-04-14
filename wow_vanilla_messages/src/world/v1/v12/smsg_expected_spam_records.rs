@@ -5,7 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_EXPECTED_SPAM_RECORDS {
-    pub amount_of_records: u32,
     pub records: Vec<String>,
 }
 
@@ -44,7 +43,6 @@ impl WorldMessageBody for SMSG_EXPECTED_SPAM_RECORDS {
         }
 
         Ok(Self {
-            amount_of_records,
             records,
         })
     }

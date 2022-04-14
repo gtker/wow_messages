@@ -11,7 +11,6 @@ pub struct SMSG_QUESTGIVER_QUEST_LIST {
     pub title: String,
     pub emote_delay: u32,
     pub emote: u32,
-    pub amount_of_entries: u8,
     pub quest_items: Vec<QuestItem>,
 }
 
@@ -66,7 +65,6 @@ impl WorldMessageBody for SMSG_QUESTGIVER_QUEST_LIST {
             title,
             emote_delay,
             emote,
-            amount_of_entries,
             quest_items,
         })
     }

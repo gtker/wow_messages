@@ -226,7 +226,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
             u64 unknown4;
         }
         if (security_flag & AUTHENTICATOR) {
-            u8 unknown5 = 1;
+            u8 unknown5;
         }
     }
 } {
@@ -428,6 +428,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     unknown2 = 0xDD;
     unknown3 = 0xCC;
     unknown4 = 0xDEADBEEFFACADE;
+    unknown5 = 1;
 } [
     0x00, /* Opcode: CMD_AUTH_LOGON_CHALLENGE */
     0x00, /* Protocol Version: 0 */

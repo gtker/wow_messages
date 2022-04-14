@@ -589,8 +589,7 @@ mod test {
         let raw: Vec<u8> = vec![ 0x01, 0x07, 0x00, 0x00, ];
 
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
-            },
+            login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
         };
 
         let header_size = 1;
@@ -615,8 +614,7 @@ mod test {
         let raw: Vec<u8> = vec![ 0x01, 0x08, 0x00, 0x00, ];
 
         let expected = CMD_AUTH_LOGON_PROOF_Server {
-            login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
-            },
+            login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
         };
 
         let header_size = 1;

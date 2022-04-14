@@ -8,7 +8,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 pub struct SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     pub caster: Guid,
     pub spell: u32,
-    pub amount_of_targets: u32,
     pub targets: Vec<Guid>,
 }
 
@@ -54,7 +53,6 @@ impl WorldMessageBody for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
         Ok(Self {
             caster,
             spell,
-            amount_of_targets,
             targets,
         })
     }

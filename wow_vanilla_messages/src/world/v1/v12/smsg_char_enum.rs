@@ -6,7 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_CHAR_ENUM {
-    pub amount_of_characters: u8,
     pub characters: Vec<Character>,
 }
 
@@ -44,7 +43,6 @@ impl WorldMessageBody for SMSG_CHAR_ENUM {
         }
 
         Ok(Self {
-            amount_of_characters,
             characters,
         })
     }

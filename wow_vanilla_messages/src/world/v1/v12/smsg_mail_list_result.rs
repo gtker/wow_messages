@@ -6,7 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_MAIL_LIST_RESULT {
-    pub amount_of_mails: u8,
     pub mails: Vec<Mail>,
 }
 
@@ -44,7 +43,6 @@ impl WorldMessageBody for SMSG_MAIL_LIST_RESULT {
         }
 
         Ok(Self {
-            amount_of_mails,
             mails,
         })
     }

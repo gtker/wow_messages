@@ -164,35 +164,20 @@ fn print_declaration(s: &mut Writer, e: &Container) {
     print_struct_wowm_definition(s, e);
 
     s.new_struct(e.name(), |s| {
-        let types = e.nested_types();
-
-        for field in types.declarations() {
-            if field.constant_value().is_some() || field.used_as_size_in().is_some() {
-                continue;
-            }
+        for member in e.rust_object().members() {
             s.wln(format!(
-                "pub {name}: {enum_prefix}{type_name},",
-                name = field.name(),
-                type_name = field.ty().rust_str(),
-                enum_prefix = match field.does_not_have_subvariables() {
-                    true => "",
-                    false => e.name(),
-                },
+                "pub {name}: {ty},",
+                name = member.name(),
+                ty = member.ty(),
             ));
         }
 
-        for m in e.fields() {
-            match m {
-                StructMember::Definition(_) => {}
-                StructMember::IfStatement(_) => {}
-                StructMember::OptionalStatement(optional) => {
-                    s.wln(format!(
-                        "pub {name}: Option<{original_ty}_{name}>,",
-                        name = optional.name(),
-                        original_ty = e.name()
-                    ));
-                }
-            }
+        if let Some(optional) = e.rust_object().optional() {
+            s.wln(format!(
+                "pub {name}: Option<{ty}>,",
+                name = optional.name(),
+                ty = optional.ty()
+            ));
         }
     });
 }

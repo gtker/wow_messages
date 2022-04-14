@@ -5,7 +5,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_IGNORE_LIST {
-    pub amount_of_ignored: u8,
     pub ignored: Vec<u64>,
 }
 
@@ -43,7 +42,6 @@ impl WorldMessageBody for SMSG_IGNORE_LIST {
         }
 
         Ok(Self {
-            amount_of_ignored,
             ignored,
         })
     }
@@ -92,7 +90,6 @@ mod test {
              0xDE, 0xFE, 0x0F, 0xDC, 0xBA, ];
 
         let expected = SMSG_IGNORE_LIST {
-            amount_of_ignored: 0x1,
             ignored: vec![ 0xBADC0FFEDEADBEEF, ],
         };
 
@@ -103,7 +100,6 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.amount_of_ignored, expected.amount_of_ignored);
         assert_eq!(t.ignored, expected.ignored);
 
         assert_eq!(t.size() + header_size, raw.len());
@@ -121,7 +117,6 @@ mod test {
              0x00, ];
 
         let expected = SMSG_IGNORE_LIST {
-            amount_of_ignored: 0x2,
             ignored: vec![ 0xBADC0FFEDEADBEEF, 0xDEADBEEF, ],
         };
 
@@ -132,7 +127,6 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.amount_of_ignored, expected.amount_of_ignored);
         assert_eq!(t.ignored, expected.ignored);
 
         assert_eq!(t.size() + header_size, raw.len());

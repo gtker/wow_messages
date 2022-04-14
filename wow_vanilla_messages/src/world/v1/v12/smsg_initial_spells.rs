@@ -8,9 +8,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_INITIAL_SPELLS {
     pub unknown1: u8,
-    pub spell_count: u16,
     pub initial_spells: Vec<InitialSpell>,
-    pub cooldown_count: u16,
     pub cooldowns: Vec<CooldownSpell>,
 }
 
@@ -61,9 +59,7 @@ impl WorldMessageBody for SMSG_INITIAL_SPELLS {
 
         Ok(Self {
             unknown1,
-            spell_count,
             initial_spells,
-            cooldown_count,
             cooldowns,
         })
     }

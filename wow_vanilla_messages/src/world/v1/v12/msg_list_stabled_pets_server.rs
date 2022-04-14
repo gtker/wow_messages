@@ -8,7 +8,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MSG_LIST_STABLED_PETS_Server {
     pub npc: Guid,
-    pub amount_of_pets: u8,
     pub stable_slots: u8,
     pub pets: Vec<StabledPet>,
 }
@@ -54,7 +53,6 @@ impl WorldMessageBody for MSG_LIST_STABLED_PETS_Server {
 
         Ok(Self {
             npc,
-            amount_of_pets,
             stable_slots,
             pets,
         })

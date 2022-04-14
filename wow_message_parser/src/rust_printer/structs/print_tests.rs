@@ -2,8 +2,8 @@ use crate::container::{Container, ContainerType};
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ArraySize;
-use crate::rust_printer::complex_print::Declaration;
 use crate::rust_printer::opcodes::get_enumerator_name;
+use crate::rust_printer::rust_view::{RustMember, RustType};
 use crate::rust_printer::{
     Writer, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_BODY_TRAIT_NAME,
     WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
@@ -81,11 +81,7 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects) {
     s.body_closing_with(
         format!("let expected = {}", t.subject()),
         |s| {
-            for m in e.nested_types().declarations() {
-                if m.constant_value().is_some() || m.used_as_size_in().is_some() {
-                    continue;
-                }
-
+            for m in e.rust_object().members() {
                 print_value(s, m, t.members(), e, o);
             }
         },
@@ -143,11 +139,7 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects) {
     );
 
     // Better error reporting when something is wrong.
-    for m in e.nested_types().declarations() {
-        if m.constant_value().is_some() || m.used_as_size_in().is_some() {
-            continue;
-        }
-
+    for m in e.rust_object().members() {
         s.wln(format!(
             "assert_eq!(t.{field}, expected.{field});",
             field = m.name()
@@ -179,16 +171,9 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects) {
     s.wln("assert_eq!(dest, raw);")
 }
 
-fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Container, o: &Objects) {
+fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Container, o: &Objects) {
     let member = TestCase::get_member(t, m.name());
-    s.w(format!(
-        "{name}: {enum_prefix}",
-        name = m.name(),
-        enum_prefix = match m.does_not_have_subvariables() {
-            true => "",
-            false => e.name(),
-        },
-    ));
+    s.w(format!("{name}: ", name = m.name(),));
 
     match member.value() {
         TestValue::Number(i) => {
@@ -230,7 +215,7 @@ fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Contai
                 s.wln(format!("{} {{", ty_name));
                 s.inc_indent();
 
-                for m in array_container.nested_types().declarations() {
+                for m in array_container.rust_object().members() {
                     print_value(s, m, multiple, array_container, o);
                 }
 
@@ -245,7 +230,7 @@ fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Contai
         }
         TestValue::Flag(flags) => {
             if !e.nested_types().new_enums().is_empty() {
-                s.wln_no_indent(format!("{ty}::empty()", ty = m.ty().rust_str()));
+                s.wln_no_indent(format!("{ty}::empty()", ty = m.ty()));
                 s.inc_indent();
 
                 let set_flags = e
@@ -256,22 +241,22 @@ fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Contai
                     .unwrap()
                     .fields();
                 for f in set_flags {
-                    if let Some(flag) = flags.iter().find(|a| a.as_str() == f.name()) {
+                    if let Some(_) = flags.iter().find(|a| a.as_str() == f.name()) {
                         if f.is_simple() {
                             s.wln(format!(".set_{variable_name}()", variable_name = f.name()));
                             continue;
                         }
                         s.w(format!(".set_{variable_name}(", variable_name = f.name(),));
 
-                        s.wln_no_indent(format!(
-                            "{}{}{} {{",
-                            e.name(),
-                            m.ty().rust_str(),
-                            f.name()
-                        ));
+                        s.wln_no_indent(format!("{}{} {{", m.ty(), f.name()));
                         s.inc_indent();
-                        let subvars = m.get_subfields_for_enumerator(flag.as_str());
-                        for sf in &subvars {
+                        let subvars = match m.ty() {
+                            RustType::Flag { enumerators, .. } => {
+                                enumerators.iter().find(|a| a.name() == f.name()).unwrap()
+                            }
+                            _ => panic!("{} is not a flag", m.ty()),
+                        };
+                        for sf in subvars.members() {
                             print_value(s, sf, t, e, o);
                         }
 
@@ -281,7 +266,7 @@ fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Contai
 
                 s.wln_no_indent(",");
             } else {
-                s.wln_no_indent(format!("{ty}::empty()", ty = m.ty().rust_str()));
+                s.wln_no_indent(format!("{ty}::empty()", ty = m.ty()));
                 s.inc_indent();
                 s.w("");
                 for f in flags {
@@ -304,11 +289,18 @@ fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Contai
         TestValue::Enum(i) => {
             s.w_no_indent(format!(
                 "{ty}::{enumerator}",
-                ty = m.ty().rust_str(),
+                ty = m.ty(),
                 enumerator = i.original_string(),
             ));
 
-            let subvars = m.get_subfields_for_enumerator(member.value().original_string());
+            let subvars = match m.ty() {
+                RustType::Enum { enumerators, .. } => enumerators
+                    .iter()
+                    .find(|a| a.name() == i.original_string())
+                    .unwrap()
+                    .members(),
+                _ => panic!("{} is not an enum", m.ty()),
+            };
             if subvars.is_empty() {
                 s.wln_no_indent(",");
                 return;
@@ -318,9 +310,6 @@ fn print_value(s: &mut Writer, m: &Declaration, t: &[TestCaseMember], e: &Contai
             s.inc_indent();
 
             for sf in subvars {
-                if sf.used_as_size_in().is_some() || sf.constant_value().is_some() {
-                    continue;
-                }
                 print_value(s, sf, t, e, o);
             }
 

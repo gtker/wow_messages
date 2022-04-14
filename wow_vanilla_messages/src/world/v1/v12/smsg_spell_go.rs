@@ -13,9 +13,7 @@ pub struct SMSG_SPELL_GO {
     pub caster: Guid,
     pub spell: u32,
     pub flags: SMSG_SPELL_GOCastFlags,
-    pub amount_of_hits: u8,
     pub hits: Vec<Guid>,
-    pub amount_of_misses: u8,
     pub misses: Vec<SpellMiss>,
     pub targets: SpellCastTargets,
 }
@@ -102,9 +100,7 @@ impl WorldMessageBody for SMSG_SPELL_GO {
             caster,
             spell,
             flags,
-            amount_of_hits,
             hits,
-            amount_of_misses,
             misses,
             targets,
         })

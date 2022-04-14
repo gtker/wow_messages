@@ -12,7 +12,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 pub struct SMSG_GROUP_LIST {
     pub group_type: GroupType,
     pub own_flags: u8,
-    pub amount_of_members: u32,
     pub members: Vec<GroupListMember>,
     pub leader: Guid,
     pub group_not_empty: Option<SMSG_GROUP_LIST_group_not_empty>,
@@ -91,7 +90,6 @@ impl WorldMessageBody for SMSG_GROUP_LIST {
         Ok(Self {
             group_type,
             own_flags,
-            amount_of_members,
             members,
             leader,
             group_not_empty,

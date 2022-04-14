@@ -16,11 +16,6 @@ pub struct CMD_AUTH_LOGON_PROOF_Client {
 impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     const OPCODE: u8 = 0x01;
 }
-impl CMD_AUTH_LOGON_PROOF_Client {
-    pub const UNKNOWN5_VALUE: u8 = 0x01;
-
-}
-
 impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
     type Error = std::io::Error;
 
@@ -95,11 +90,10 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
 
         let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
             // unknown5: u8
-            let _unknown5 = crate::util::read_u8_le(r)?;
-            // unknown5 is expected to always be 1 (1)
+            let unknown5 = crate::util::read_u8_le(r)?;
 
             Some(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
-                unknown5: _unknown5,
+                unknown5,
             })
         } else {
             None
@@ -461,10 +455,8 @@ impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICAT
 }
 
 impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
-    pub const UNKNOWN5_VALUE: u8 = 0x01;
-
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&Self::UNKNOWN5_VALUE.to_le_bytes())?;
+        w.write_all(&self.unknown5.to_le_bytes())?;
 
         Ok(())
     }

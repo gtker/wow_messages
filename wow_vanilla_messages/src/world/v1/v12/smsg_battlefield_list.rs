@@ -12,7 +12,6 @@ pub struct SMSG_BATTLEFIELD_LIST {
     pub unknown1: u8,
     pub unknown2: u32,
     pub unknown3: u8,
-    pub number_of_battlegrounds: u32,
     pub battlegrounds: Vec<u32>,
 }
 
@@ -70,7 +69,6 @@ impl WorldMessageBody for SMSG_BATTLEFIELD_LIST {
             unknown1,
             unknown2,
             unknown3,
-            number_of_battlegrounds,
             battlegrounds,
         })
     }

@@ -15,9 +15,7 @@ pub struct SMSG_PET_SPELLS {
     pub command: PetCommandState,
     pub unknown2: u16,
     pub action_bars: [u32; 10],
-    pub amount_of_spells: u8,
     pub spells: Vec<u32>,
-    pub amount_of_cooldowns: u8,
     pub cooldowns: Vec<PetSpellCooldown>,
 }
 
@@ -92,9 +90,7 @@ impl WorldMessageBody for SMSG_PET_SPELLS {
             command,
             unknown2,
             action_bars,
-            amount_of_spells,
             spells,
-            amount_of_cooldowns,
             cooldowns,
         })
     }

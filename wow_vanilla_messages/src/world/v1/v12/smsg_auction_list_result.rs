@@ -6,7 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_AUCTION_LIST_RESULT {
-    pub count: u32,
     pub auctions: Vec<AuctionListItem>,
     pub total_amount_of_auctions: u32,
 }
@@ -48,7 +47,6 @@ impl WorldMessageBody for SMSG_AUCTION_LIST_RESULT {
         let total_amount_of_auctions = crate::util::read_u32_le(r)?;
 
         Ok(Self {
-            count,
             auctions,
             total_amount_of_auctions,
         })

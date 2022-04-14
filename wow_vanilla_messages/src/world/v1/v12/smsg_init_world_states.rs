@@ -10,7 +10,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 pub struct SMSG_INIT_WORLD_STATES {
     pub map: Map,
     pub area: Area,
-    pub amount_of_states: u16,
     pub states: Vec<WorldState>,
 }
 
@@ -56,7 +55,6 @@ impl WorldMessageBody for SMSG_INIT_WORLD_STATES {
         Ok(Self {
             map,
             area,
-            amount_of_states,
             states,
         })
     }

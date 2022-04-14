@@ -10,7 +10,6 @@ pub struct SMSG_PERIODICAURALOG {
     pub target: Guid,
     pub caster: Guid,
     pub spell: u32,
-    pub amount_of_auras: u32,
     pub auras: Vec<AuraLog>,
 }
 
@@ -60,7 +59,6 @@ impl WorldMessageBody for SMSG_PERIODICAURALOG {
             target,
             caster,
             spell,
-            amount_of_auras,
             auras,
         })
     }

@@ -14,13 +14,10 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub details: String,
     pub objectives: String,
     pub auto_finish: u32,
-    pub amount_of_choice_item_rewards: u32,
     pub choice_item_rewards: Vec<QuestItemReward>,
-    pub amount_of_item_rewards: u32,
     pub item_rewards: Vec<QuestItemReward>,
     pub money_reward: u32,
     pub reward_spell: u32,
-    pub amount_of_emotes: u32,
     pub emotes: Vec<QuestDetailsEmote>,
 }
 
@@ -109,13 +106,10 @@ impl WorldMessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
             details,
             objectives,
             auto_finish,
-            amount_of_choice_item_rewards,
             choice_item_rewards,
-            amount_of_item_rewards,
             item_rewards,
             money_reward,
             reward_spell,
-            amount_of_emotes,
             emotes,
         })
     }

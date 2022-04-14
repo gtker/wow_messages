@@ -11,7 +11,6 @@ pub struct BattlegroundPlayer {
     pub honorable_kills: u32,
     pub deaths: u32,
     pub bonus_honor: u32,
-    pub amount_of_extra_fields: u32,
     pub fields: Vec<u32>,
 }
 
@@ -53,7 +52,6 @@ impl ReadableAndWritable for BattlegroundPlayer {
             honorable_kills,
             deaths,
             bonus_honor,
-            amount_of_extra_fields,
             fields,
         })
     }

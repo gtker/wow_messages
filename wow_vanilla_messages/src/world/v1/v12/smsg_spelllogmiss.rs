@@ -10,7 +10,6 @@ pub struct SMSG_SPELLLOGMISS {
     pub id: u32,
     pub caster_guid: Guid,
     pub unknown1: u8,
-    pub amount_of_targets: u32,
     pub targets: Vec<SpellMiss>,
 }
 
@@ -60,7 +59,6 @@ impl WorldMessageBody for SMSG_SPELLLOGMISS {
             id,
             caster_guid,
             unknown1,
-            amount_of_targets,
             targets,
         })
     }

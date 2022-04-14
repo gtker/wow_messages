@@ -6,7 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
-    pub amount_of_flag_carriers: u32,
     pub flag_carriers: Vec<BattlegroundPlayerPosition>,
 }
 
@@ -53,7 +52,6 @@ impl WorldMessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         }
 
         Ok(Self {
-            amount_of_flag_carriers,
             flag_carriers,
         })
     }

@@ -8,7 +8,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_LIST_INVENTORY {
     pub vendor: Guid,
-    pub amount_of_items: u8,
     pub items: Vec<ListInventoryItem>,
 }
 
@@ -50,7 +49,6 @@ impl WorldMessageBody for SMSG_LIST_INVENTORY {
 
         Ok(Self {
             vendor,
-            amount_of_items,
             items,
         })
     }

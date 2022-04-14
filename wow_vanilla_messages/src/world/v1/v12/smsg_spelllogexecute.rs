@@ -9,7 +9,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 pub struct SMSG_SPELLLOGEXECUTE {
     pub caster: Guid,
     pub spell: u32,
-    pub amount_of_effects: u32,
     pub logs: Vec<SpellLog>,
 }
 
@@ -55,7 +54,6 @@ impl WorldMessageBody for SMSG_SPELLLOGEXECUTE {
         Ok(Self {
             caster,
             spell,
-            amount_of_effects,
             logs,
         })
     }

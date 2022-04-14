@@ -5,7 +5,7 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct EnumOutsideOfIf {
-    pub t: EnumOutsideOfIfTEnum,
+    pub t: TEnum,
     pub n: EnumOutsideOfIfNestedEnum,
 }
 
@@ -47,7 +47,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
         };
 
         Ok(Self {
-            t: t_if,
+            t,
             n: n_if,
         })
     }

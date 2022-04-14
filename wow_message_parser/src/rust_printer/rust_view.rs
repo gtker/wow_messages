@@ -35,6 +35,18 @@ pub struct RustEnumerator {
     members: Vec<RustMember>,
 }
 
+impl RustEnumerator {
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+    pub fn value(&self) -> &DefinerValue {
+        &self.value
+    }
+    pub fn members(&self) -> &[RustMember] {
+        &self.members
+    }
+}
+
 #[derive(Debug, Clone)]
 pub enum RustType {
     Integer(IntegerType),

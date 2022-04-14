@@ -7,7 +7,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_GUILD_EVENT {
     pub event: GuildEvent,
-    pub amount_of_events: u8,
     pub event_descriptions: Vec<String>,
 }
 
@@ -50,7 +49,6 @@ impl WorldMessageBody for SMSG_GUILD_EVENT {
 
         Ok(Self {
             event,
-            amount_of_events,
             event_descriptions,
         })
     }

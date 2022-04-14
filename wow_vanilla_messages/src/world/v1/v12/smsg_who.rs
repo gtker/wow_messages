@@ -6,7 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_WHO {
-    pub listed_players: u32,
     pub online_players: u32,
     pub players: Vec<WhoPlayer>,
 }
@@ -48,7 +47,6 @@ impl WorldMessageBody for SMSG_WHO {
         }
 
         Ok(Self {
-            listed_players,
             online_players,
             players,
         })

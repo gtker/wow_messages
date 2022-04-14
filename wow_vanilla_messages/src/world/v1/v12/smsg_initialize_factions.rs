@@ -6,7 +6,6 @@ use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSi
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_INITIALIZE_FACTIONS {
-    pub amount_of_factions: u32,
     pub factions: Vec<FactionInitializer>,
 }
 
@@ -44,7 +43,6 @@ impl WorldMessageBody for SMSG_INITIALIZE_FACTIONS {
         }
 
         Ok(Self {
-            amount_of_factions,
             factions,
         })
     }
