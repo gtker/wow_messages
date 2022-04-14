@@ -237,7 +237,7 @@ pub fn print_constant_member(
 pub fn print_size_of_ty(
     s: &mut Writer,
     ty: &Type,
-    d_name: &str,
+    variable_name: &str,
     d_does_not_have_subvariables: bool,
     o_type_has_constant_size: bool,
     array_inner_has_constant: bool,
@@ -247,21 +247,21 @@ pub fn print_size_of_ty(
         Type::Integer(integer_type) => s.wln_no_indent(format!(
             "{size} // {name}: {type_name}",
             size = integer_type.size(),
-            name = d_name,
+            name = variable_name,
             type_name = ty.str()
         )),
         Type::FloatingPoint(floating) => {
             s.wln_no_indent(format!("{size} // {name}: {type_name}", size = floating.size(),
-            name = d_name, type_name = ty.str()))
+                                    name = variable_name, type_name = ty.str()))
         }
         Type::CString => s.wln_no_indent(format!(
             "{prefix}{name}.len() + 1 // {name}: CString and Null Terminator",
             prefix = prefix,
-            name = d_name
+            name = variable_name
         )),
         Type::String { .. } => s.wln_no_indent(format!(
             "{prefix}{name}.len() // {name}: {type_name}",
-            name = d_name,
+            name = variable_name,
             prefix = prefix,
             type_name = ty.str()
         )),
@@ -272,13 +272,13 @@ pub fn print_size_of_ty(
                         "{array_size} * core::mem::size_of::<{ty}>() // {name}: {type_name}",
                         array_size = fixed_value,
                         ty = integer_type.rust_str(),
-                        name = d_name,
+                        name = variable_name,
                         type_name = ty.str(),
                     )),
                     ArraySize::Variable(_) | ArraySize::Endless=> {
                         s.wln_no_indent(format!(
                             "{prefix}{name}.len() * core::mem::size_of::<{ty}>() // {name}: {type_name}",
-                            name = d_name,
+                            name = variable_name,
                             prefix = prefix,
                             ty = integer_type.rust_str(),
                             type_name = ty.str(),
@@ -292,26 +292,26 @@ pub fn print_size_of_ty(
                             true => s.wln_no_indent(format!(
                                 "{fixed_value} * {inner_type_name}::size() // {name}: {type_name}",
                                 inner_type_name = complex_type,
-                                name = d_name,
+                                name = variable_name,
                                 type_name = array.str(),
                                 fixed_value = fixed_value,
                             )),
                             false => {
                                 s.wln_no_indent(
                                     format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.size()) // {name}: {type_name}",
-                                        name = d_name,
-                                        prefix = prefix,
-                                        type_name = ty.str()))
+                                            name = variable_name,
+                                            prefix = prefix,
+                                            type_name = ty.str()))
                             }
                         }
                         }
                         ArraySize::Variable(_) | ArraySize::Endless => {
                             s.wln_no_indent(
                             format!("{prefix}{name}.iter().fold(0, |acc, x| acc + {size_function}) // {name}: {type_name}",
-                                name = d_name,
-                                prefix = prefix,
-                                type_name = ty.str(),
-                                size_function = match array_inner_has_constant {
+                                    name = variable_name,
+                                    prefix = prefix,
+                                    type_name = ty.str(),
+                                    size_function = match array_inner_has_constant {
                                     true => format!("{type_name}::size()", type_name = complex_type),
                                     false => "x.size()".to_string(),
                                 },
@@ -322,21 +322,21 @@ pub fn print_size_of_ty(
                 ArrayType::CString => {
                     s.wln_no_indent(
                         format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.len() + 1) // {name}: {type_name}",
-                                name = d_name,
+                                name = variable_name,
                                 prefix = prefix,
                                 type_name = ty.str()));
                 }
                 ArrayType::Guid => {
                     s.wln_no_indent(format!(
                         "8 // {name}: {type_name}",
-                        name = d_name,
+                        name = variable_name,
                         type_name = ty.str()
                     ))
                 }
                 ArrayType::PackedGuid => {
                     s.wln_no_indent(
                         format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.size()) // {name}: {type_name}",
-                                name = d_name,
+                                name = variable_name,
                                 prefix = prefix,
                                 type_name = ty.str()));
                 }
@@ -348,7 +348,7 @@ pub fn print_size_of_ty(
                 Some(integer) => {
                     s.wln_no_indent(format!("{size} // {name}: {type_name} upcasted to {ty}",
                                             size = integer.size(),
-                                            name = d_name,
+                                            name = variable_name,
                                             type_name = identifier,
                                             ty = integer.rust_str()));
                     return;
@@ -358,13 +358,13 @@ pub fn print_size_of_ty(
                 if o_type_has_constant_size {
                     s.wln_no_indent(format!(
                         "{type_name}::size() // {name}: {type_name}",
-                        name = d_name,
+                        name = variable_name,
                         type_name = identifier,
                     ));
                 } else {
                     s.wln_no_indent(format!(
                         "{prefix}{name}.size() // {name}: {type_name}",
-                        name = d_name,
+                        name = variable_name,
                         prefix = prefix,
                         type_name = identifier,
                     ));
@@ -372,7 +372,7 @@ pub fn print_size_of_ty(
             } else {
                 s.wln_no_indent(format!(
                     "{prefix}{name}.size() // {name}: {type_name} and subfields",
-                    name = d_name,
+                    name = variable_name,
                     prefix = prefix,
                     type_name = identifier,
                 ));
@@ -380,19 +380,19 @@ pub fn print_size_of_ty(
         }
         Type::PackedGuid => {
             s.wln_no_indent(format!("{prefix}{name}.size() // {name}: {type_name}",
-                                    name = d_name,
+                                    name = variable_name,
                                     prefix = prefix,
                                     type_name = ty.str()));
         }
         Type::Guid => {
             s.wln_no_indent(format!("8 // {name}: {type_name}",
-                                    name = d_name,
+                                    name = variable_name,
                                     type_name = ty.str()));
         }
         Type::UpdateMask | Type::AuraMask => {
 
             s.wln_no_indent(format!("{prefix}{name}.size() // {name}: {type_name}",
-                                    name = d_name,
+                                    name = variable_name,
                                     prefix = prefix,
                                     type_name = ty.str()));
         }
