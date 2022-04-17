@@ -357,7 +357,13 @@ pub fn print_size_of_ty(
         }
     }
 
-    print_comment_for_size_of_ty(s, ty, variable_name, d_does_not_have_subvariables);
+    print_comment_for_size_of_ty(
+        s,
+        ty,
+        variable_name,
+        d_does_not_have_subvariables,
+        &ty.str(),
+    );
 }
 
 fn print_comment_for_size_of_ty(
@@ -365,11 +371,12 @@ fn print_comment_for_size_of_ty(
     ty: &Type,
     variable_name: &str,
     d_does_not_have_subvariables: bool,
+    original_ty_name: &str,
 ) {
     s.w_no_indent(format!(
         " // {name}: {type_name}",
         name = variable_name,
-        type_name = ty.str()
+        type_name = original_ty_name,
     ));
 
     match ty {
