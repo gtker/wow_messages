@@ -244,159 +244,145 @@ pub fn print_size_of_ty(
     prefix: &str,
 ) {
     match ty {
-        Type::Integer(integer_type) => s.wln_no_indent(format!(
-            "{size} // {name}: {type_name}",
-            size = integer_type.size(),
-            name = variable_name,
-            type_name = ty.str()
-        )),
-        Type::FloatingPoint(floating) => {
-            s.wln_no_indent(format!("{size} // {name}: {type_name}", size = floating.size(),
-                                    name = variable_name, type_name = ty.str()))
+        Type::Integer(integer_type) => {
+            s.w_no_indent(format!("{size}", size = integer_type.size(),))
         }
-        Type::CString => s.wln_no_indent(format!(
-            "{prefix}{name}.len() + 1 // {name}: CString and Null Terminator",
+        Type::FloatingPoint(floating) => s.w_no_indent(format!("{size}", size = floating.size(),)),
+        Type::CString => s.w_no_indent(format!(
+            "{prefix}{name}.len() + 1",
             prefix = prefix,
             name = variable_name
         )),
-        Type::String { .. } => s.wln_no_indent(format!(
-            "{prefix}{name}.len() // {name}: {type_name}",
+        Type::String { .. } => s.w_no_indent(format!(
+            "{prefix}{name}.len()",
             name = variable_name,
             prefix = prefix,
-            type_name = ty.str()
         )),
-        Type::Array(array) => {
-            match array.ty() {
-                ArrayType::Integer(integer_type) => match array.size() {
-                    ArraySize::Fixed(fixed_value) => s.wln_no_indent(format!(
-                        "{array_size} * core::mem::size_of::<{ty}>() // {name}: {type_name}",
-                        array_size = fixed_value,
-                        ty = integer_type.rust_str(),
-                        name = variable_name,
-                        type_name = ty.str(),
-                    )),
-                    ArraySize::Variable(_) | ArraySize::Endless=> {
-                        s.wln_no_indent(format!(
-                            "{prefix}{name}.len() * core::mem::size_of::<{ty}>() // {name}: {type_name}",
-                            name = variable_name,
-                            prefix = prefix,
-                            ty = integer_type.rust_str(),
-                            type_name = ty.str(),
-                        ));
-                    }
-                },
-                ArrayType::Complex(complex_type) => {
-                    match array.size() {
-                        ArraySize::Fixed(fixed_value) => {
-                            match o_type_has_constant_size {
-                            true => s.wln_no_indent(format!(
-                                "{fixed_value} * {inner_type_name}::size() // {name}: {type_name}",
-                                inner_type_name = complex_type,
-                                name = variable_name,
-                                type_name = array.str(),
-                                fixed_value = fixed_value,
-                            )),
-                            false => {
-                                s.wln_no_indent(
-                                    format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.size()) // {name}: {type_name}",
-                                            name = variable_name,
-                                            prefix = prefix,
-                                            type_name = ty.str()))
-                            }
-                        }
-                        }
-                        ArraySize::Variable(_) | ArraySize::Endless => {
-                            s.wln_no_indent(
-                            format!("{prefix}{name}.iter().fold(0, |acc, x| acc + {size_function}) // {name}: {type_name}",
-                                    name = variable_name,
-                                    prefix = prefix,
-                                    type_name = ty.str(),
-                                    size_function = match array_inner_has_constant {
-                                    true => format!("{type_name}::size()", type_name = complex_type),
-                                    false => "x.size()".to_string(),
-                                },
-                            ));
-                        }
-                    }
-                }
-                ArrayType::CString => {
-                    s.wln_no_indent(
-                        format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.len() + 1) // {name}: {type_name}",
-                                name = variable_name,
-                                prefix = prefix,
-                                type_name = ty.str()));
-                }
-                ArrayType::Guid => {
-                    s.wln_no_indent(format!(
-                        "8 // {name}: {type_name}",
-                        name = variable_name,
-                        type_name = ty.str()
-                    ))
-                }
-                ArrayType::PackedGuid => {
-                    s.wln_no_indent(
-                        format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.size()) // {name}: {type_name}",
-                                name = variable_name,
-                                prefix = prefix,
-                                type_name = ty.str()));
-                }
-            }
-        }
-        Type::Identifier{s: identifier, upcast} => {
-            match upcast {
-                None => {}
-                Some(integer) => {
-                    s.wln_no_indent(format!("{size} // {name}: {type_name} upcasted to {ty}",
-                                            size = integer.size(),
-                                            name = variable_name,
-                                            type_name = identifier,
-                                            ty = integer.rust_str()));
-                    return;
-                }
-            }
-            if d_does_not_have_subvariables {
-                if o_type_has_constant_size {
-                    s.wln_no_indent(format!(
-                        "{type_name}::size() // {name}: {type_name}",
-                        name = variable_name,
-                        type_name = identifier,
-                    ));
-                } else {
-                    s.wln_no_indent(format!(
-                        "{prefix}{name}.size() // {name}: {type_name}",
+        Type::Array(array) => match array.ty() {
+            ArrayType::Integer(integer_type) => match array.size() {
+                ArraySize::Fixed(fixed_value) => s.w_no_indent(format!(
+                    "{array_size} * core::mem::size_of::<{ty}>()",
+                    array_size = fixed_value,
+                    ty = integer_type.rust_str(),
+                )),
+                ArraySize::Variable(_) | ArraySize::Endless => {
+                    s.w_no_indent(format!(
+                        "{prefix}{name}.len() * core::mem::size_of::<{ty}>()",
                         name = variable_name,
                         prefix = prefix,
-                        type_name = identifier,
+                        ty = integer_type.rust_str(),
+                    ));
+                }
+            },
+            ArrayType::Complex(complex_type) => match array.size() {
+                ArraySize::Fixed(fixed_value) => match o_type_has_constant_size {
+                    true => s.w_no_indent(format!(
+                        "{fixed_value} * {inner_type_name}::size()",
+                        inner_type_name = complex_type,
+                        fixed_value = fixed_value,
+                    )),
+                    false => s.w_no_indent(format!(
+                        "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
+                        name = variable_name,
+                        prefix = prefix,
+                    )),
+                },
+                ArraySize::Variable(_) | ArraySize::Endless => {
+                    s.w_no_indent(format!(
+                        "{prefix}{name}.iter().fold(0, |acc, x| acc + {size_function})",
+                        name = variable_name,
+                        prefix = prefix,
+                        size_function = match array_inner_has_constant {
+                            true => format!("{type_name}::size()", type_name = complex_type),
+                            false => "x.size()".to_string(),
+                        },
+                    ));
+                }
+            },
+            ArrayType::CString => {
+                s.w_no_indent(format!(
+                    "{prefix}{name}.iter().fold(0, |acc, x| acc + x.len() + 1)",
+                    name = variable_name,
+                    prefix = prefix,
+                ));
+            }
+            ArrayType::Guid => {
+                s.w_no_indent("8");
+            }
+            ArrayType::PackedGuid => {
+                s.w_no_indent(format!(
+                    "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
+                    name = variable_name,
+                    prefix = prefix,
+                ));
+            }
+        },
+        Type::Identifier {
+            s: identifier,
+            upcast,
+        } => {
+            if let Some(upcast) = upcast {
+                s.w_no_indent(format!("{size}", size = upcast.size(),));
+            } else if d_does_not_have_subvariables {
+                if o_type_has_constant_size {
+                    s.w_no_indent(format!("{type_name}::size()", type_name = identifier,));
+                } else {
+                    s.w_no_indent(format!(
+                        "{prefix}{name}.size()",
+                        name = variable_name,
+                        prefix = prefix,
                     ));
                 }
             } else {
-                s.wln_no_indent(format!(
-                    "{prefix}{name}.size() // {name}: {type_name} and subfields",
+                s.w_no_indent(format!(
+                    "{prefix}{name}.size()",
                     name = variable_name,
                     prefix = prefix,
-                    type_name = identifier,
                 ));
             }
         }
-        Type::PackedGuid => {
-            s.wln_no_indent(format!("{prefix}{name}.size() // {name}: {type_name}",
-                                    name = variable_name,
-                                    prefix = prefix,
-                                    type_name = ty.str()));
-        }
         Type::Guid => {
-            s.wln_no_indent(format!("8 // {name}: {type_name}",
-                                    name = variable_name,
-                                    type_name = ty.str()));
+            s.w_no_indent("8");
         }
-        Type::UpdateMask | Type::AuraMask => {
-
-            s.wln_no_indent(format!("{prefix}{name}.size() // {name}: {type_name}",
-                                    name = variable_name,
-                                    prefix = prefix,
-                                    type_name = ty.str()));
+        Type::UpdateMask | Type::AuraMask | Type::PackedGuid => {
+            s.w_no_indent(format!(
+                "{prefix}{name}.size()",
+                name = variable_name,
+                prefix = prefix,
+            ));
         }
     }
+
+    print_comment_for_size_of_ty(s, ty, variable_name, d_does_not_have_subvariables);
+}
+
+fn print_comment_for_size_of_ty(
+    s: &mut Writer,
+    ty: &Type,
+    variable_name: &str,
+    d_does_not_have_subvariables: bool,
+) {
+    s.w_no_indent(format!(
+        " // {name}: {type_name}",
+        name = variable_name,
+        type_name = ty.str()
+    ));
+
+    match ty {
+        Type::CString => {
+            s.w_no_indent(" and Null Terminator");
+        }
+        Type::Identifier { upcast, .. } => {
+            if let Some(upcast) = upcast {
+                s.w_no_indent(format!(" upcasted to {ty}", ty = upcast.rust_str()));
+            } else if !d_does_not_have_subvariables {
+                s.w_no_indent(" and subfields");
+            }
+        }
+        _ => {}
+    }
+
+    s.wln_no_indent("");
 }
 
 fn print_size(s: &mut Writer, e: &Container, o: &Objects) {

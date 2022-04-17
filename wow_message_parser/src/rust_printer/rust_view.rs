@@ -14,6 +14,7 @@ use std::fmt::{Display, Formatter};
 pub struct RustMember {
     name: String,
     ty: RustType,
+    original_ty: String,
 
     constant_sized: bool,
 
@@ -32,6 +33,9 @@ impl RustMember {
     }
     pub fn constant_sized(&self) -> bool {
         self.constant_sized
+    }
+    pub fn original_ty(&self) -> &str {
+        &self.original_ty
     }
 }
 
@@ -398,6 +402,7 @@ pub fn create_struct_member(
             current_scope.push(RustMember {
                 name,
                 ty,
+                original_ty: d.ty().str(),
                 constant_sized: definition_constantly_sized,
                 tags: tags.clone(),
             });
