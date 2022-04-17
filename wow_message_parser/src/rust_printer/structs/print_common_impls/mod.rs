@@ -307,7 +307,11 @@ pub fn print_size_of_ty(
                 ));
             }
             ArrayType::Guid => {
-                s.w_no_indent("8");
+                s.w_no_indent(format!(
+                    "{prefix}{name}.iter().fold(0, |acc, _| acc + 8)",
+                    name = variable_name,
+                    prefix = prefix,
+                ));
             }
             ArrayType::PackedGuid => {
                 s.w_no_indent(format!(

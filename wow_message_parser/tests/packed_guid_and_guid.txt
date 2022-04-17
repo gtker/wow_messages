@@ -107,11 +107,11 @@ impl VariableSized for PackedGuidAndGuid {
         self.packed.size() // packed: PackedGuid
         + 8 // guid: Guid
         + self.static_packed.iter().fold(0, |acc, x| acc + x.size()) // static_packed: PackedGuid[10]
-        + 8 // static_guid: Guid[10]
+        + self.static_guid.iter().fold(0, |acc, _| acc + 8) // static_guid: Guid[10]
         + 1 // basic1: u8
         + 1 // basic2: u8
         + self.variable_packed.iter().fold(0, |acc, x| acc + x.size()) // variable_packed: PackedGuid[basic1]
-        + 8 // variable_guid: Guid[basic2]
+        + self.variable_guid.iter().fold(0, |acc, _| acc + 8) // variable_guid: Guid[basic2]
     }
 }
 

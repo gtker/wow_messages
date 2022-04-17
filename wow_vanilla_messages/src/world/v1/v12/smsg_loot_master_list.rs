@@ -63,7 +63,7 @@ impl WorldMessageBody for SMSG_LOOT_MASTER_LIST {
 impl VariableSized for SMSG_LOOT_MASTER_LIST {
     fn size(&self) -> usize {
         1 // amount_of_players: u8
-        + 8 // guids: Guid[amount_of_players]
+        + self.guids.iter().fold(0, |acc, _| acc + 8) // guids: Guid[amount_of_players]
     }
 }
 

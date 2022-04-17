@@ -153,7 +153,7 @@ impl VariableSized for SMSG_SPELL_GO {
         + 4 // spell: u32
         + self.flags.size() // flags: CastFlags and subfields
         + 1 // amount_of_hits: u8
-        + 8 // hits: Guid[amount_of_hits]
+        + self.hits.iter().fold(0, |acc, _| acc + 8) // hits: Guid[amount_of_hits]
         + 1 // amount_of_misses: u8
         + self.misses.iter().fold(0, |acc, x| acc + SpellMiss::size()) // misses: SpellMiss[amount_of_misses]
         + self.targets.size() // targets: SpellCastTargets
