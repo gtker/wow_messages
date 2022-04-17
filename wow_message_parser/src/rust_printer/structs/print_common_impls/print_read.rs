@@ -256,6 +256,7 @@ fn print_current_size(s: &mut Writer, e: &Container, d: &StructMemberDefinition,
                     true,
                     array_inner_constant,
                     "",
+                    &size.ty().str(),
                 );
             }
         },
@@ -464,6 +465,7 @@ fn print_read_field(s: &mut Writer, e: &Container, o: &Objects, field: &StructMe
                             true,
                             array_inner_constant,
                             "",
+                            &size.ty().str(),
                         );
                     }
                 },

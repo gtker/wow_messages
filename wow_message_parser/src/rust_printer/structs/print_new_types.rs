@@ -388,6 +388,7 @@ fn print_types_for_new_flag_flag_elseif(
                         o.type_has_constant_size(sf.ty()),
                         array_inner_constant,
                         "self.",
+                        &sf.ty().str(),
                     );
                 }
 
@@ -515,6 +516,7 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
                         o.type_has_constant_size(sf.ty()),
                         array_inner_constant,
                         "self.",
+                        &sf.ty().str(),
                     );
                 }
             },
@@ -868,6 +870,7 @@ fn print_size_for_new_enum(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: &
                             o.type_has_constant_size(sf.ty()),
                             array_inner_is_constant,
                             "",
+                            &sf.ty().str(),
                         );
                     }
 

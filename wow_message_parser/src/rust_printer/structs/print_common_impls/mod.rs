@@ -242,6 +242,7 @@ pub fn print_size_of_ty(
     o_type_has_constant_size: bool,
     array_inner_has_constant: bool,
     prefix: &str,
+    original_ty_name: &str,
 ) {
     match ty {
         Type::Integer(integer_type) => {
@@ -362,7 +363,7 @@ pub fn print_size_of_ty(
         ty,
         variable_name,
         d_does_not_have_subvariables,
-        &ty.str(),
+        original_ty_name,
     );
 }
 
@@ -431,6 +432,7 @@ fn print_size(s: &mut Writer, e: &Container, o: &Objects) {
                 o.type_has_constant_size(d.ty()),
                 array_inner_constant,
                 "self.",
+                &d.ty().str(),
             );
         }
 

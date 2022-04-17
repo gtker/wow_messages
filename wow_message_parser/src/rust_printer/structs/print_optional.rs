@@ -78,6 +78,7 @@ fn print_impls(s: &mut Writer, e: &Container, optional: &OptionalStatement, o: &
                         o.type_has_constant_size(d.ty()),
                         array_inner_constant,
                         "self.",
+                        &d.ty().str(),
                     );
                 }
                 StructMember::IfStatement(_) => panic!(),
