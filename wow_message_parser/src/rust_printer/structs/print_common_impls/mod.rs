@@ -18,8 +18,6 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         false => format!("{}Error", e.name()),
     };
 
-    let no_fixes = "";
-
     match e.container_type() {
         ContainerType::Struct | ContainerType::CLogin(_) | ContainerType::SLogin(_) => {
             s.impl_read_and_writable_with_error(
@@ -38,11 +36,11 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
             s.impl_world_read_and_writable_with_error(
                 e.name(),
                 error_ty,
-                |s| {
-                    print_read::print_read(s, e, o, no_fixes, no_fixes);
+                |s, it| {
+                    print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
-                |s| {
-                    print_write::print_write(s, e, o, no_fixes, no_fixes);
+                |s, it| {
+                    print_write::print_write(s, e, o, it.prefix(), it.postfix());
                 },
             );
         }

@@ -182,8 +182,8 @@ impl Writer {
         &mut self,
         type_name: impl AsRef<str>,
         error_name: impl AsRef<str>,
-        read_function: impl Fn(&mut Self),
-        write_function: impl Fn(&mut Self),
+        read_function: impl Fn(&mut Self, ImplType),
+        write_function: impl Fn(&mut Self, ImplType),
     ) {
         self.open_curly(format!(
             "impl {} for {}",
@@ -199,11 +199,11 @@ impl Writer {
         self.open_curly(
             "fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error>",
         );
-        read_function(self);
+        read_function(self, ImplType::Std);
         self.closing_curly_newline();
 
         self.open_curly("fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
-        write_function(self);
+        write_function(self, ImplType::Std);
         self.closing_curly();
 
         self.closing_curly_newline();
