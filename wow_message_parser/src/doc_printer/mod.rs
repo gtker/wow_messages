@@ -2,7 +2,7 @@ use crate::container::Container;
 use crate::file_utils::{append_string_to_file, create_or_append, write_string_to_file};
 use crate::parser::enumerator::Definer;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
-use crate::wowm_printer::get_definer_wowm_definition;
+use crate::wowm_printer::{get_definer_wowm_definition, get_struct_wowm_definition};
 use std::fmt::Write;
 use std::fs::read_to_string;
 use std::path::Path;
@@ -52,21 +52,31 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
     let mut s = s.to_string();
     s.push_str(DEFINER_HEADER);
 
+    let mut already_added_files = Vec::new();
+
     for definer in definers {
         let path = format!(
             "docs/definer/{lower_name}.md",
             lower_name = definer.name().to_lowercase()
         );
+
+        create_or_append(
+            definer.inner(),
+            Path::new(&("wowm_language/src/".to_string() + &path)),
+        );
+
+        if already_added_files.contains(&path) {
+            continue;
+        }
+
         s.write_fmt(format_args!(
             "- [{name}]({path})\n",
             name = definer.name(),
             path = path,
         ))
         .unwrap();
-        create_or_append(
-            definer.inner(),
-            Path::new(&("wowm_language/src/".to_string() + &path)),
-        )
+
+        already_added_files.push(path);
     }
 
     s.push('\n');
@@ -77,6 +87,15 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
             lower_name = container.name().to_lowercase()
         );
 
+        create_or_append(
+            container.inner(),
+            Path::new(&("wowm_language/src/".to_string() + &path)),
+        );
+
+        if already_added_files.contains(&path) {
+            continue;
+        }
+
         s.write_fmt(format_args!(
             "- [{name}]({path})\n",
             name = container.name(),
@@ -84,10 +103,7 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
         ))
         .unwrap();
 
-        create_or_append(
-            container.inner(),
-            Path::new(&("wowm_language/src/".to_string() + &path)),
-        )
+        already_added_files.push(path);
     }
 
     write_string_to_file(&s, Path::new(SUMMARY_PATH))
@@ -149,7 +165,7 @@ pub fn print_docs_for_container(e: &Container) -> DocWriter {
 
     common(&mut s, e.tags());
     s.wln("```rust,ignore");
-
+    s.wln(get_struct_wowm_definition(e, ""));
     s.wln("```");
 
     s
