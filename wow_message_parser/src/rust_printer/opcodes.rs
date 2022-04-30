@@ -2,7 +2,8 @@ use crate::container::{Container, ContainerType};
 use crate::file_utils::{get_import_path, get_login_logon_version_path, get_world_version_path};
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
-    Writer, WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
+    Writer, ASYNC_TRAIT, ASYNC_TRAIT_IMPORT, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO, TOKIO_IMPORT,
+    WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
 
 const CLOGIN_NAME: &str = "Client";
@@ -64,6 +65,13 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
     match container_type {
         ContainerType::SLogin(_) => {
             s.wln("use crate::ReadableAndWritable;");
+            s.newline();
+            s.wln(CFG_ASYNC_ANY);
+            s.wln(format!("use crate::{};", ASYNC_TRAIT));
+            s.wln(CFG_ASYNC_ANY);
+            s.wln(ASYNC_TRAIT_IMPORT);
+            s.wln(CFG_ASYNC_TOKIO);
+            s.wln(TOKIO_IMPORT);
         }
         ContainerType::CMsg(_) => {
             s.wln(format!("use crate::{};", WORLD_BODY_TRAIT_NAME));
@@ -73,6 +81,13 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
                 WORLD_SERVER_HEADER_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME,
             ));
             s.wln("use wow_srp::header_crypto::{Decrypter, Encrypter};");
+            s.newline();
+            s.wln(CFG_ASYNC_ANY);
+            s.wln(format!("use crate::{};", ASYNC_TRAIT));
+            s.wln(CFG_ASYNC_ANY);
+            s.wln(ASYNC_TRAIT_IMPORT);
+            s.wln(CFG_ASYNC_TOKIO);
+            s.wln(TOKIO_IMPORT);
         }
         _ => {}
     }
@@ -99,6 +114,7 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
             ));
         }
     }
+
     s.newline();
 }
 
@@ -211,6 +227,37 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
                 for e in v {
                     s.wln(format!(
                         "Self::{enum_name}(e) => e.write(w)?,",
+                        enum_name = get_enumerator_name(e.name()),
+                    ));
+                }
+            });
+
+            s.wln("Ok(())");
+        },
+    );
+
+    s.impl_async_readable_and_writable(
+        format!("{t}OpcodeMessage", t = ty),
+        |s| {
+            s.wln(format!("let opcode = {t}Opcode::tokio_read(r).await?;", t = ty));
+
+            s.body("match opcode", |s| {
+                for e in v {
+                    s.wln(format!(
+                        "{t}Opcode::{enum_name} => Ok(Self::{enum_name}({name}::tokio_read(r).await?)),",
+                        name = e.name(),
+                        enum_name = get_enumerator_name(e.name()),
+                        t = ty,
+                    ));
+                }
+            });
+        },
+        |s| {
+            s.wln(format!("{t}Opcode::from(self).tokio_write(w).await?;\n", t = ty));
+            s.bodyn("match self", |s| {
+                for e in v {
+                    s.wln(format!(
+                        "Self::{enum_name}(e) => e.tokio_write(w).await?,",
                         enum_name = get_enumerator_name(e.name()),
                     ));
                 }
@@ -486,6 +533,36 @@ pub fn opcode_enum_login(s: &mut Writer, v: &[&Container], ty: &str) {
         },
         |s| {
             s.wln("crate::util::write_u8_le(w, self.as_u8())?;");
+            s.wln("Ok(())");
+        },
+    );
+
+    s.impl_async_readable_and_writable(
+        &format!("{t}Opcode", t = ty),
+        |s| {
+            s.wln("let opcode = crate::util::tokio_read_u8_le(r).await?;\n");
+
+            s.body("match opcode", |s| {
+                for e in v {
+                    s.wln(format!(
+                        "{value:#04x} => Ok(Self::{enum_name}),",
+                        enum_name = get_enumerator_name(e.name()),
+                        value = match e.container_type() {
+                            ContainerType::CLogin(i) | ContainerType::SLogin(i) => i,
+                            ContainerType::SMsg(i) | ContainerType::CMsg(i) => i,
+                            _ => panic!("invalid type for opcode enum"),
+                        }
+                    ));
+                }
+
+                s.wln(format!(
+                    "opcode => Err({t}OpcodeError::InvalidOpcode(opcode)),",
+                    t = ty
+                ));
+            });
+        },
+        |s| {
+            s.wln("crate::util::tokio_write_u8_le(w, self.as_u8()).await?;");
             s.wln("Ok(())");
         },
     );

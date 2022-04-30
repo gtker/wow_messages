@@ -2,7 +2,7 @@ use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
 use crate::parser::types::{Endianness, IntegerType};
 use crate::rust_printer::{
-    ImplType, Writer, ASYNC_TRAIT, ASYNC_TRAIT_MACRO, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO, TOKIO_IMPORT,
+    ImplType, Writer, ASYNC_TRAIT, ASYNC_TRAIT_MACRO, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO,
 };
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{DISPLAY_STR, LOGIN_MESSAGES_GITHUB_REPO};
@@ -30,12 +30,9 @@ pub fn print_enum(e: &Definer) -> Writer {
 fn includes(s: &mut Writer) {
     s.wln("use std::convert::{TryFrom, TryInto};");
     s.wln("use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};");
-    s.wln(CFG_ASYNC_ANY);
-    s.wln("use async_trait::async_trait;");
-    s.wln(CFG_ASYNC_TOKIO);
-    s.wln(format!("use crate::{};", ASYNC_TRAIT));
-    s.wln(CFG_ASYNC_TOKIO);
-    s.wln(TOKIO_IMPORT);
+
+    s.write_async_includes();
+
     s.newline();
 }
 
@@ -185,6 +182,7 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
             },
         );
 
+        s.wln(CFG_ASYNC_TOKIO);
         s.async_funcn_pub(
             format!(
                 "tokio_read_{ty}_{endian}<R: AsyncReadExt + Unpin + Send>(r: &mut R)",
@@ -229,6 +227,8 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
                 s.wln("Ok(())");
             },
         );
+
+        s.wln(CFG_ASYNC_TOKIO);
         s.async_funcn_pub(
             format!(
                 "tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",

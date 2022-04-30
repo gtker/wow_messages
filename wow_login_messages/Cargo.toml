@@ -28,4 +28,5 @@ optional = true
 [dependencies.async-std]
 version = "1.11"
 optional = true
-features = ["async-io"]
+default-features = false
+features = ["async-io", "std"]

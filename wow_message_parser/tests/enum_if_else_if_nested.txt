@@ -338,6 +338,7 @@ impl EnumIfElseIfNestedSimpleEnum {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.tokio_write(w).await?;
@@ -349,6 +350,7 @@ impl EnumIfElseIfNestedSimpleEnum {
         a.write_u16_le(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.tokio_write_u16_le(w).await
@@ -359,6 +361,7 @@ impl EnumIfElseIfNestedSimpleEnum {
         a.write_u16_be(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.tokio_write_u16_be(w).await
@@ -369,6 +372,7 @@ impl EnumIfElseIfNestedSimpleEnum {
         a.write_u32_le(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.tokio_write_u32_le(w).await
@@ -379,6 +383,7 @@ impl EnumIfElseIfNestedSimpleEnum {
         a.write_u32_be(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.tokio_write_u32_be(w).await
@@ -389,6 +394,7 @@ impl EnumIfElseIfNestedSimpleEnum {
         a.write_u64_le(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.tokio_write_u64_le(w).await
@@ -399,6 +405,7 @@ impl EnumIfElseIfNestedSimpleEnum {
         a.write_u64_be(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.tokio_write_u64_be(w).await
@@ -475,6 +482,7 @@ impl EnumIfElseIfNestedNestedEnum {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: NestedEnum = self.into();
         a.tokio_write(w).await?;
@@ -486,6 +494,7 @@ impl EnumIfElseIfNestedNestedEnum {
         a.write_u16_le(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: NestedEnum = self.into();
         a.tokio_write_u16_le(w).await
@@ -496,6 +505,7 @@ impl EnumIfElseIfNestedNestedEnum {
         a.write_u16_be(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: NestedEnum = self.into();
         a.tokio_write_u16_be(w).await
@@ -506,6 +516,7 @@ impl EnumIfElseIfNestedNestedEnum {
         a.write_u32_le(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: NestedEnum = self.into();
         a.tokio_write_u32_le(w).await
@@ -516,6 +527,7 @@ impl EnumIfElseIfNestedNestedEnum {
         a.write_u32_be(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: NestedEnum = self.into();
         a.tokio_write_u32_be(w).await
@@ -526,6 +538,7 @@ impl EnumIfElseIfNestedNestedEnum {
         a.write_u64_le(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: NestedEnum = self.into();
         a.tokio_write_u64_le(w).await
@@ -536,6 +549,7 @@ impl EnumIfElseIfNestedNestedEnum {
         a.write_u64_be(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: NestedEnum = self.into();
         a.tokio_write_u64_be(w).await

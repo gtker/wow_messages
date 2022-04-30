@@ -441,6 +441,7 @@ impl IfEdgeCasesTEnum {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: TEnum = self.into();
         a.tokio_write(w).await?;
@@ -452,6 +453,7 @@ impl IfEdgeCasesTEnum {
         a.write_u16_le(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: TEnum = self.into();
         a.tokio_write_u16_le(w).await
@@ -462,6 +464,7 @@ impl IfEdgeCasesTEnum {
         a.write_u16_be(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: TEnum = self.into();
         a.tokio_write_u16_be(w).await
@@ -472,6 +475,7 @@ impl IfEdgeCasesTEnum {
         a.write_u32_le(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: TEnum = self.into();
         a.tokio_write_u32_le(w).await
@@ -482,6 +486,7 @@ impl IfEdgeCasesTEnum {
         a.write_u32_be(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: TEnum = self.into();
         a.tokio_write_u32_be(w).await
@@ -492,6 +497,7 @@ impl IfEdgeCasesTEnum {
         a.write_u64_le(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: TEnum = self.into();
         a.tokio_write_u64_le(w).await
@@ -502,6 +508,7 @@ impl IfEdgeCasesTEnum {
         a.write_u64_be(w)
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: TEnum = self.into();
         a.tokio_write_u64_be(w).await

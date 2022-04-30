@@ -84,6 +84,7 @@ fn print_write_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
         },
     );
 
+    s.wln(CFG_ASYNC_TOKIO);
     s.bodyn("pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", |s| {
         s.wln(format!(
             "let a: {ty} = self.into();",
@@ -827,6 +828,7 @@ fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
         },
     );
 
+    s.wln(CFG_ASYNC_TOKIO);
     s.bodyn("pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", |s| {
         s.wln(format!(
             "let a: {ty} = self.into();",
@@ -859,6 +861,7 @@ fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
             },
         );
 
+        s.wln(CFG_ASYNC_TOKIO);
         s.bodyn(
             format!(
                 "pub async fn tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",

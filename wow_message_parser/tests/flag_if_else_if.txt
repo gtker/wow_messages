@@ -219,6 +219,7 @@ impl FlagIfElseIfSimpleFlag {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleFlag = self.into();
         a.tokio_write(w).await?;
@@ -382,6 +383,7 @@ impl FlagIfElseIfUpdateFlag {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: UpdateFlag = self.into();
         a.tokio_write(w).await?;

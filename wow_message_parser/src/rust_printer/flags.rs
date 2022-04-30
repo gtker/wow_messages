@@ -1,10 +1,7 @@
 use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
 use crate::rust_printer::enums::print_wowm_definition;
-use crate::rust_printer::{
-    Writer, ASYNC_TRAIT, ASYNC_TRAIT_IMPORT, ASYNC_TRAIT_MACRO, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO,
-    TOKIO_IMPORT,
-};
+use crate::rust_printer::{Writer, ASYNC_TRAIT, ASYNC_TRAIT_MACRO, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO};
 use crate::UTILITY_PATH;
 
 pub fn print_flag(e: &Definer) -> Writer {
@@ -22,13 +19,7 @@ pub fn print_flag(e: &Definer) -> Writer {
 fn includes(s: &mut Writer) {
     s.wln("use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};\n");
 
-    s.wln(CFG_ASYNC_ANY);
-    s.wln(ASYNC_TRAIT_IMPORT);
-    s.wln(CFG_ASYNC_TOKIO);
-    s.wln(TOKIO_IMPORT);
-
-    s.wln(CFG_ASYNC_ANY);
-    s.wln(format!("use crate::{};", ASYNC_TRAIT))
+    s.write_async_includes();
 }
 
 fn declaration(s: &mut Writer, e: &Definer) {

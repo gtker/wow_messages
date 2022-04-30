@@ -240,6 +240,7 @@ impl Writer {
         self.closing_curly_newline();
     }
 
+    #[allow(unused)]
     pub fn impl_async_readable_and_writable(
         &mut self,
         type_name: impl AsRef<str>,
@@ -490,6 +491,15 @@ impl Writer {
     pub fn wln<S: AsRef<str>>(&mut self, s: S) {
         self.w(s);
         self.newline();
+    }
+
+    pub fn write_async_includes(&mut self) {
+        self.wln(CFG_ASYNC_ANY);
+        self.wln(format!("use crate::{};", ASYNC_TRAIT));
+        self.wln(CFG_ASYNC_ANY);
+        self.wln(ASYNC_TRAIT_IMPORT);
+        self.wln(CFG_ASYNC_TOKIO);
+        self.wln(TOKIO_IMPORT);
     }
 
     pub fn metadata_comment<S: AsRef<str>>(&mut self, s: S) {
