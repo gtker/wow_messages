@@ -72,8 +72,6 @@ fn main() {
         definer_docs.push(print_docs_for_flag(e));
     }
 
-    definer_docs.sort_by(|a, b| a.name().cmp(b.name()));
-
     let mut object_docs = Vec::new();
     for e in o.all_containers() {
         if should_not_write_object(e.tags()) {
@@ -83,6 +81,9 @@ fn main() {
         m.write_contents_to_file(e.name(), e.tags(), &s);
         object_docs.push(print_docs_for_container(e));
     }
+
+    definer_docs.sort_by(|a, b| a.name().cmp(b.name()));
+    object_docs.sort_by(|a, b| a.name().cmp(b.name()));
 
     print_docs_summary_and_objects(&definer_docs, &object_docs);
 
