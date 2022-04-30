@@ -317,7 +317,7 @@ fn print_container_example_array(
 
                 for (i, m) in c.fields().iter().enumerate() {
                     let prefix = format!("{}[{}].{}", prefix, i, c.name());
-                    print_container_example_member(s, m, bytes, values, o, tags, &prefix);
+                    print_container_example_member(s, c, m, bytes, values, o, tags, &prefix);
                 }
             }
         }
@@ -391,7 +391,7 @@ fn print_container_example_definition(
                     let c = o.get_container(identifier, tags);
 
                     for m in c.fields() {
-                        print_container_example_member(s, m, bytes, values, o, tags, c.name());
+                        print_container_example_member(s, c, m, bytes, values, o, tags, c.name());
                     }
 
                     return;
@@ -451,6 +451,7 @@ fn print_container_example_definition(
 
 fn print_container_example_member(
     s: &mut DocWriter,
+    e: &Container,
     m: &StructMember,
     bytes: &mut Iter<u8>,
     values: &mut HashMap<String, usize>,
@@ -462,8 +463,71 @@ fn print_container_example_member(
         StructMember::Definition(d) => {
             print_container_example_definition(s, d, bytes, values, o, tags, prefix);
         }
-        StructMember::IfStatement(_) => {
-            s.wln("UNIMPLEMENTED_DOC_IF");
+        StructMember::IfStatement(statement) => {
+            let enum_value = *values.get(statement.name()).unwrap();
+
+            let definer_ty = match e.get_type_of_variable(statement.name()) {
+                Type::Identifier { s: identifier, .. } => o.get_definer(&identifier, tags),
+                _ => panic!(),
+            };
+
+            let statement_set = |statement: &IfStatement, enum_value: usize| {
+                let mut set = false;
+                for eq in statement.get_conditional().equations() {
+                    match eq {
+                        Equation::Equals { value } => {
+                            let eq_value = definer_ty
+                                .fields()
+                                .iter()
+                                .find(|a| a.name() == value)
+                                .unwrap()
+                                .value()
+                                .int();
+
+                            if eq_value == enum_value as u64 {
+                                set = true;
+                            }
+                        }
+                        Equation::BitwiseAnd { value } => {
+                            let eq_value = definer_ty
+                                .fields()
+                                .iter()
+                                .find(|a| a.name() == value)
+                                .unwrap()
+                                .value()
+                                .int();
+
+                            if (eq_value == 0 && enum_value == 0)
+                                || (eq_value & enum_value as u64) != 0
+                            {
+                                set = true;
+                            }
+                        }
+                        Equation::NotEquals { .. } => panic!(),
+                    }
+                }
+                set
+            };
+
+            if statement_set(statement, enum_value) {
+                for m in statement.members() {
+                    print_container_example_member(s, e, m, bytes, values, o, tags, prefix);
+                }
+            } else if !statement.else_ifs().is_empty() {
+                for elseif in statement.else_ifs() {
+                    let value = *values.get(elseif.name()).unwrap();
+
+                    if statement_set(elseif, value) {
+                        for m in elseif.members() {
+                            print_container_example_member(s, e, m, bytes, values, o, tags, prefix);
+                        }
+                    }
+                }
+            } else {
+                for m in &statement.else_statement_members {
+                    print_container_example_member(s, e, m, bytes, values, o, tags, prefix);
+                }
+            }
         }
         StructMember::OptionalStatement(_) => {
             panic!("UNIMPLEMENTED_DOC_OPTIONAL");
@@ -512,7 +576,7 @@ fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
         let mut values = HashMap::new();
 
         for m in e.fields() {
-            print_container_example_member(s, m, &mut bytes, &mut values, o, e.tags(), "");
+            print_container_example_member(s, e, m, &mut bytes, &mut values, o, e.tags(), "");
         }
 
         s.wln("```");

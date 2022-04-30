@@ -25,12 +25,12 @@ If result is equal to `SUCCESS`:
 ```c
 2, // opcode (2)
 0, // result: LoginResult SUCCESS (0x00)
-UNIMPLEMENTED_DOC_IF
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // challenge_data: u8[16]
+255, 254, 253, 252, 251, 250, 249, 248, 247, 246, 245, 244, 243, 242, 241, 240, // checksum_salt: u8[16]
 ```
 ```c
 2, // opcode (2)
 3, // result: LoginResult FAIL_BANNED (0x03)
-UNIMPLEMENTED_DOC_IF
 ```
 ## Protocol Version 8
 
@@ -59,10 +59,10 @@ If result is equal to `SUCCESS`:
 ```c
 2, // opcode (2)
 0, // result: LoginResult SUCCESS (0x00)
-UNIMPLEMENTED_DOC_IF
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // challenge_data: u8[16]
+255, 254, 253, 252, 251, 250, 249, 248, 247, 246, 245, 244, 243, 242, 241, 240, // checksum_salt: u8[16]
 ```
 ```c
 2, // opcode (2)
 3, // result: LoginResult FAIL_BANNED (0x03)
-UNIMPLEMENTED_DOC_IF
 ```

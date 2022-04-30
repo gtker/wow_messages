@@ -25,7 +25,8 @@ If login_result is equal to `SUCCESS`:
 ```c
 1, // opcode (1)
 0, // login_result: LoginResult SUCCESS (0x00)
-UNIMPLEMENTED_DOC_IF
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // server_proof: u8[20]
+239, 190, 173, 222, // hardware_survey_id: u32
 ```
 ## Protocol Version 8
 
@@ -64,10 +65,10 @@ Else:
 ```c
 1, // opcode (1)
 7, // login_result: LoginResult FAIL_NO_TIME (0x07)
-UNIMPLEMENTED_DOC_IF
+0, 0, // padding: u16
 ```
 ```c
 1, // opcode (1)
 8, // login_result: LoginResult FAIL_DB_BUSY (0x08)
-UNIMPLEMENTED_DOC_IF
+0, 0, // padding: u16
 ```

@@ -86,7 +86,6 @@ slogin CMD_REALM_LIST_Server = 0x10 {
 1, // [6].Realm.number_of_characters_on_realm: u8
 0, // [7].Realm.category: RealmCategory DEFAULT (0x0)
 2, // [8].Realm.realm_id: u8
-UNIMPLEMENTED_DOC_IF
 // realms: Realm[number_of_realms]
 0, 0, // footer_padding: u16
 ```
@@ -104,7 +103,10 @@ UNIMPLEMENTED_DOC_IF
 1, // [6].Realm.number_of_characters_on_realm: u8
 0, // [7].Realm.category: RealmCategory DEFAULT (0x0)
 2, // [8].Realm.realm_id: u8
-UNIMPLEMENTED_DOC_IF
+1, // Version.major: u8
+12, // Version.minor: u8
+1, // Version.patch: u8
+243, 22, // Version.build: u16
 // realms: Realm[number_of_realms]
-1, 12, // footer_padding: u16
+0, 0, // footer_padding: u16
 ```

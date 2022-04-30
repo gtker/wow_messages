@@ -117,7 +117,6 @@ If security_flag is equal to `PIN`:
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, // [3].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag NONE (0x0)
-UNIMPLEMENTED_DOC_IF
 ```
 ```c
 1, // opcode (1)
@@ -134,7 +133,6 @@ UNIMPLEMENTED_DOC_IF
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [3].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag NONE (0x0)
-UNIMPLEMENTED_DOC_IF
 ```
 ```c
 1, // opcode (1)
@@ -147,7 +145,6 @@ UNIMPLEMENTED_DOC_IF
 0, // number_of_telemetry_keys: u8
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag NONE (0x0)
-UNIMPLEMENTED_DOC_IF
 ```
 ```c
 1, // opcode (1)
@@ -160,7 +157,8 @@ UNIMPLEMENTED_DOC_IF
 0, // number_of_telemetry_keys: u8
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 1, // security_flag: SecurityFlag PIN (0x1)
-UNIMPLEMENTED_DOC_IF
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // pin_salt: u8[16]
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // pin_hash: u8[20]
 ```
 ## Protocol Version 8
 
@@ -241,9 +239,6 @@ If security_flag contains `AUTHENTICATOR`:
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, // [3].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag  NONE (0)
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
 ```
 ```c
 1, // opcode (1)
@@ -260,9 +255,6 @@ UNIMPLEMENTED_DOC_IF
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // [3].TelemetryKey.unknown4: u8[20]
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag  NONE (0)
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
 ```
 ```c
 1, // opcode (1)
@@ -275,9 +267,6 @@ UNIMPLEMENTED_DOC_IF
 0, // number_of_telemetry_keys: u8
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 0, // security_flag: SecurityFlag  NONE (0)
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
 ```
 ```c
 1, // opcode (1)
@@ -290,9 +279,8 @@ UNIMPLEMENTED_DOC_IF
 0, // number_of_telemetry_keys: u8
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 1, // security_flag: SecurityFlag  PIN (1)
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // pin_salt: u8[16]
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // pin_hash: u8[20]
 ```
 ```c
 1, // opcode (1)
@@ -305,9 +293,13 @@ UNIMPLEMENTED_DOC_IF
 0, // number_of_telemetry_keys: u8
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 3, // security_flag: SecurityFlag  PIN| UNKNOWN0 (3)
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // pin_salt: u8[16]
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // pin_hash: u8[20]
+16, // unknown0: u8
+32, // unknown1: u8
+48, // unknown2: u8
+64, // unknown3: u8
+239, 190, 173, 222, 0, 0, 0, 0, // unknown4: u64
 ```
 ```c
 1, // opcode (1)
@@ -320,7 +312,12 @@ UNIMPLEMENTED_DOC_IF
 0, // number_of_telemetry_keys: u8
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 7, // security_flag: SecurityFlag  PIN| UNKNOWN0| AUTHENTICATOR (7)
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
-UNIMPLEMENTED_DOC_IF
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // pin_salt: u8[16]
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // pin_hash: u8[20]
+16, // unknown0: u8
+32, // unknown1: u8
+48, // unknown2: u8
+64, // unknown3: u8
+239, 190, 173, 222, 0, 0, 0, 0, // unknown4: u64
+1, // unknown5: u8
 ```
