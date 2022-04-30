@@ -12,9 +12,7 @@ pub fn print_async(s: &mut Writer, e: &Container, o: &Objects, error_ty: &str) {
 
         s.wln(CFG_ASYNC_TOKIO);
         s.body("async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>", |s| {
-            print_read(s, e, o, ImplType::Tokio);
+            print_read(s, e, o, "tokio_", ".await");
         });
     });
 }
-
-pub fn print_async_read(s: &mut Writer, e: &Container, o: &Objects) {}

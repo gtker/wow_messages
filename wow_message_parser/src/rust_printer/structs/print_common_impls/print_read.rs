@@ -324,18 +324,10 @@ fn print_read_definition(
     e: &Container,
     o: &Objects,
     d: &StructMemberDefinition,
-    i: ImplType,
+    prefix: &str,
+    postfix: &str,
 ) {
     s.wln(format!("// {}: {}", d.name(), d.ty().str()));
-    let prefix = match i {
-        ImplType::Std => "",
-        ImplType::Tokio => "tokio_",
-        ImplType::AsyncStd => "astd_",
-    };
-    let postfix = match i {
-        ImplType::Std => "",
-        _ => ".await",
-    };
 
     match &d.ty() {
         Type::Integer(integer) => {
@@ -506,18 +498,19 @@ fn print_read_field(
     e: &Container,
     o: &Objects,
     field: &StructMember,
-    it: ImplType,
+    prefix: &str,
+    postfix: &str,
 ) {
     match field {
         StructMember::Definition(d) => {
-            print_read_definition(s, e, o, d, it);
+            print_read_definition(s, e, o, d, prefix, postfix);
         }
         StructMember::IfStatement(statement) => match statement.definer_type() {
             DefinerType::Enum => {
-                print_read_if_statement_enum_new(s, e, o, statement.new_enum(), it);
+                print_read_if_statement_enum_new(s, e, o, statement.new_enum(), prefix, postfix);
             }
             DefinerType::Flag => {
-                print_read_if_statement_flag_new(s, e, o, statement.new_enum(), it);
+                print_read_if_statement_flag_new(s, e, o, statement.new_enum(), prefix, postfix);
             }
         },
         StructMember::OptionalStatement(optional) => {
@@ -584,7 +577,7 @@ fn print_read_field(
                 ";",
                 |s| {
                     for field in optional.members() {
-                        print_read_field(s, e, o, field, it);
+                        print_read_field(s, e, o, field, prefix, postfix);
                     }
 
                     s.body_closing_with(
@@ -622,7 +615,8 @@ fn print_read_if_statement_flag_multiple(
     e: &Container,
     o: &Objects,
     ne: &NewIfStatement,
-    it: ImplType,
+    prefix: &str,
+    postfix: &str,
 ) {
     let enumerators = ne
         .enumerators()
@@ -656,14 +650,14 @@ fn print_read_if_statement_flag_multiple(
         for f in enumerator.fields() {
             match f {
                 NewEnumStructMember::Definition(d) => {
-                    print_read_definition(s, e, o, d, it);
+                    print_read_definition(s, e, o, d, prefix, postfix);
                 }
                 NewEnumStructMember::IfStatement(statement) => match statement.enum_or_flag() {
                     IfStatementType::Enum => {
-                        print_read_if_statement_enum_new(s, e, o, statement, it);
+                        print_read_if_statement_enum_new(s, e, o, statement, prefix, postfix);
                     }
                     IfStatementType::Flag => {
-                        print_read_if_statement_flag_new(s, e, o, statement, it);
+                        print_read_if_statement_flag_new(s, e, o, statement, prefix, postfix);
                     }
                 },
             }
@@ -709,7 +703,8 @@ fn print_read_if_statement_flag_new(
     e: &Container,
     o: &Objects,
     ne: &NewIfStatement,
-    it: ImplType,
+    prefix: &str,
+    postfix: &str,
 ) {
     let size = ne
         .enumerators()
@@ -717,7 +712,7 @@ fn print_read_if_statement_flag_new(
         .filter(|a| !a.fields().is_empty())
         .count();
     if size != 1 {
-        print_read_if_statement_flag_multiple(s, e, o, ne, it);
+        print_read_if_statement_flag_multiple(s, e, o, ne, prefix, postfix);
         return;
     }
 
@@ -735,14 +730,14 @@ fn print_read_if_statement_flag_new(
             for f in enumerator.fields() {
                 match f {
                     NewEnumStructMember::Definition(d) => {
-                        print_read_definition(s, e, o, d, it);
+                        print_read_definition(s, e, o, d, prefix, postfix);
                     }
                     NewEnumStructMember::IfStatement(statement) => match statement.enum_or_flag() {
                         IfStatementType::Enum => {
-                            print_read_if_statement_enum_new(s, e, o, statement, it);
+                            print_read_if_statement_enum_new(s, e, o, statement, prefix, postfix);
                         }
                         IfStatementType::Flag => {
-                            print_read_if_statement_flag_new(s, e, o, statement, it);
+                            print_read_if_statement_flag_new(s, e, o, statement, prefix, postfix);
                         }
                     },
                 }
@@ -779,7 +774,8 @@ fn print_read_if_statement_enum_new(
     e: &Container,
     o: &Objects,
     ne: &NewIfStatement,
-    it: ImplType,
+    prefix: &str,
+    postfix: &str,
 ) {
     assert!(ne.enum_or_flag() == IfStatementType::Enum);
 
@@ -808,14 +804,14 @@ fn print_read_if_statement_enum_new(
         for f in en.fields() {
             match f {
                 NewEnumStructMember::Definition(d) => {
-                    print_read_definition(s, e, o, d, it);
+                    print_read_definition(s, e, o, d, prefix, postfix);
                 }
                 NewEnumStructMember::IfStatement(statement) => match statement.enum_or_flag() {
                     IfStatementType::Enum => {
-                        print_read_if_statement_enum_new(s, e, o, statement, it);
+                        print_read_if_statement_enum_new(s, e, o, statement, prefix, postfix);
                     }
                     IfStatementType::Flag => {
-                        print_read_if_statement_flag_new(s, e, o, statement, it);
+                        print_read_if_statement_flag_new(s, e, o, statement, prefix, postfix);
                     }
                 },
             }
@@ -916,9 +912,9 @@ fn print_read_final_flag(s: &mut Writer, nested_types: &[ComplexEnum]) {
     }
 }
 
-pub fn print_read(s: &mut Writer, e: &Container, o: &Objects, i: ImplType) {
+pub fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
     for field in e.fields() {
-        print_read_field(s, e, o, field, i);
+        print_read_field(s, e, o, field, prefix, postfix);
     }
 
     let mut nested_types = Vec::new();

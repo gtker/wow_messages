@@ -295,6 +295,9 @@ fn print_types_for_new_flag_flag_elseif(
     f: &Enumerator,
 ) {
     let new_ty_name = format!("{}{}", ne.new_ty_name(), f.name());
+    let prefix = "";
+    let postfix = "";
+
     s.wln("#[derive(Debug, PartialEq, Clone)]");
     s.new_enum(
         format!(
@@ -408,7 +411,6 @@ fn print_types_for_new_flag_flag_elseif(
         "std::result::Result<(), std::io::Error>",
         |s| {
             s.open_curly("match &self");
-
             for enumerator in ne.enumerators() {
                 if enumerator.fields().is_empty() {
                     continue;
@@ -434,14 +436,18 @@ fn print_types_for_new_flag_flag_elseif(
                 for f in enumerator.fields() {
                     match f {
                         NewEnumStructMember::Definition(d) => {
-                            print_write_definition(s, e, o, "", d);
+                            print_write_definition(s, e, o, "", d, prefix, postfix);
                         }
                         NewEnumStructMember::IfStatement(statement) => {
                             match statement.enum_or_flag() {
                                 IfStatementType::Enum => {
-                                    print_enum_if_statement_new(s, e, o, "", statement);
+                                    print_enum_if_statement_new(
+                                        s, e, o, "", statement, prefix, postfix,
+                                    );
                                 }
-                                IfStatementType::Flag => print_flag_if_statement(s, "", statement),
+                                IfStatementType::Flag => {
+                                    print_flag_if_statement(s, "", statement, prefix, postfix)
+                                }
                             }
                         }
                     }
@@ -462,6 +468,9 @@ fn print_types_for_new_flag_flag_elseif(
 }
 
 fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: &Objects) {
+    let prefix = "";
+    let postfix = "";
+
     for f in ce.fields() {
         if f.should_not_be_in_type() {
             continue;
@@ -588,6 +597,7 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
                                         sf.used_as_size_in(),
                                         &verified,
                                         0,
+                                        postfix,
                                     );
                                 }
                                 Type::FloatingPoint(floating) => {
@@ -596,13 +606,24 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
                                         sf.name(),
                                         "self.",
                                         floating,
+                                        postfix,
                                     );
                                 }
                                 Type::CString => {
-                                    print_write::print_write_field_cstring(s, sf.name(), "self.");
+                                    print_write::print_write_field_cstring(
+                                        s,
+                                        sf.name(),
+                                        "self.",
+                                        postfix,
+                                    );
                                 }
                                 Type::String { .. } => {
-                                    print_write::print_write_field_string(s, sf.name(), "self.");
+                                    print_write::print_write_field_string(
+                                        s,
+                                        sf.name(),
+                                        "self.",
+                                        postfix,
+                                    );
                                 }
                                 Type::Array(array) => {
                                     print_write::print_write_field_array(
@@ -610,6 +631,7 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
                                         sf.name(),
                                         "self.",
                                         array,
+                                        postfix,
                                     );
                                 }
                                 Type::Identifier { s: identifier, .. } => {
@@ -619,6 +641,8 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
                                         "self.",
                                         &None,
                                         identifier,
+                                        prefix,
+                                        postfix,
                                     )
                                 }
                                 Type::PackedGuid => {

@@ -8,7 +8,7 @@ use crate::rust_printer::complex_print::DefinerType;
 use crate::rust_printer::new_enums::{
     IfStatementType, NewEnumStructMember, NewEnumerator, NewIfStatement,
 };
-use crate::rust_printer::Writer;
+use crate::rust_printer::{ImplType, Writer};
 
 pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container) {
     match e.container_type() {
@@ -54,22 +54,34 @@ pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container) {
     }
 }
 
-pub fn print_write_field_cstring(s: &mut Writer, variable_name: &str, variable_prefix: &str) {
+pub fn print_write_field_cstring(
+    s: &mut Writer,
+    variable_name: &str,
+    variable_prefix: &str,
+    postfix: &str,
+) {
     s.wln(format!(
-        "w.write_all({prefix}{name}.as_bytes())?;",
+        "w.write_all({prefix}{name}.as_bytes()){postfix}?;",
         name = variable_name,
         prefix = variable_prefix,
+        postfix = postfix,
     ));
     s.wln("// Null terminator");
     s.wln("w.write_all(&[0])?;");
     s.newline();
 }
 
-pub fn print_write_field_string(s: &mut Writer, variable_name: &str, variable_prefix: &str) {
+pub fn print_write_field_string(
+    s: &mut Writer,
+    variable_name: &str,
+    variable_prefix: &str,
+    postfix: &str,
+) {
     s.wln(format!(
-        "w.write_all({prefix}{name}.as_bytes())?;",
+        "w.write_all({prefix}{name}.as_bytes()){postfix}?;",
         name = variable_name,
         prefix = variable_prefix,
+        postfix = postfix,
     ));
 
     s.newline();
@@ -80,6 +92,7 @@ pub fn print_write_field_array(
     variable_name: &str,
     variable_prefix: &str,
     array: &Array,
+    postfix: &str,
 ) {
     s.open_curly(format!(
         "for i in {prefix}{name}.iter()",
@@ -89,18 +102,19 @@ pub fn print_write_field_array(
 
     match array.ty() {
         ArrayType::Integer(integer_type) => s.wln(format!(
-            "w.write_all(&i.to_{endian}_bytes())?;",
-            endian = integer_type.rust_endian_str()
+            "w.write_all(&i.to_{endian}_bytes()){postfix}?;",
+            endian = integer_type.rust_endian_str(),
+            postfix = postfix,
         )),
-        ArrayType::Complex(_) => s.wln("i.write(w)?;"),
+        ArrayType::Complex(_) => s.wln(format!("i.write(w){}?;", postfix)),
         ArrayType::CString => {
-            s.wln("w.write_all(&i.as_bytes())?;");
-            s.wln("w.write_all(&[0])?;")
+            s.wln(format!("w.write_all(&i.as_bytes()){}?;", postfix));
+            s.wln(format!("w.write_all(&[0]){}?;", postfix));
         }
         ArrayType::Guid => {
-            s.wln("i.write(w)?;");
+            s.wln(format!("i.write(w){}?;", postfix));
         }
-        ArrayType::PackedGuid => s.wln("i.write_packed(w)?;"),
+        ArrayType::PackedGuid => s.wln(format!("i.write_packed(w){}?;", postfix)),
     }
 
     s.closing_curly_newline();
@@ -111,12 +125,14 @@ pub fn print_write_field_floating(
     variable_name: &str,
     variable_prefix: &str,
     floating: &FloatingPointType,
+    postfix: &str,
 ) {
     s.wln(format!(
-        "w.write_all(&{variable_prefix}{variable_name}.to_{endian}_bytes())?;",
+        "w.write_all(&{variable_prefix}{variable_name}.to_{endian}_bytes()){postfix}?;",
         variable_prefix = variable_prefix,
         variable_name = variable_name,
-        endian = floating.rust_endian_str()
+        endian = floating.rust_endian_str(),
+        postfix = postfix,
     ));
 
     s.newline();
@@ -130,35 +146,40 @@ pub fn print_write_field_integer(
     used_as_size_in: &Option<String>,
     verified_value: &Option<VerifiedContainerValue>,
     size_of_fields_before_size: u64,
+    postfix: &str,
 ) {
     if let Some(value) = verified_value {
         if value.original_string() == "self.size" {
-            s.wln(format!("w.write_all(&((self.size() - {minus_value}) as {basic_type}).to_{endian}_bytes())?;",
+            s.wln(format!("w.write_all(&((self.size() - {minus_value}) as {basic_type}).to_{endian}_bytes()){postfix}?;",
                           minus_value = size_of_fields_before_size,
                           endian = int_type.rust_endian_str(),
                           basic_type = int_type.rust_str(),
+                postfix = postfix,
             ));
         } else {
             s.wln(format!(
-                "w.write_all(&Self::{name}_VALUE.to_{endian}_bytes())?;",
+                "w.write_all(&Self::{name}_VALUE.to_{endian}_bytes()){postfix}?;",
                 name = variable_name.to_uppercase(),
                 endian = int_type.rust_endian_str(),
+                postfix = postfix,
             ));
         }
     } else if let Some(v) = used_as_size_in {
         s.wln(format!(
-            "w.write_all(&({variable_prefix}{array}.len() as {basic_type}).to_{endian}_bytes())?;",
+            "w.write_all(&({variable_prefix}{array}.len() as {basic_type}).to_{endian}_bytes()){postfix}?;",
             array = v,
             basic_type = int_type.rust_str(),
             endian = int_type.rust_endian_str(),
-            variable_prefix = variable_prefix
+            variable_prefix = variable_prefix,
+                postfix = postfix,
         ));
     } else {
         s.wln(format!(
-            "w.write_all(&{prefix}{name}.to_{endian}_bytes())?;",
+            "w.write_all(&{prefix}{name}.to_{endian}_bytes()){postfix}?;",
             name = variable_name,
             endian = int_type.rust_endian_str(),
             prefix = variable_prefix,
+            postfix = postfix,
         ));
     }
 
@@ -171,11 +192,15 @@ pub fn print_write_field_identifier(
     variable_prefix: &str,
     verified_value: &Option<VerifiedContainerValue>,
     identifier: &str,
+    prefix: &str,
+    postfix: &str,
 ) {
     if verified_value.is_some() {
         s.wln(format!(
-            "{type_name}::{variant}.write(w)?;",
+            "{type_name}::{variant}.{prefix}write(w){postfix}?;",
             type_name = identifier,
+            prefix = prefix,
+            postfix = postfix,
             variant = verified_value.as_ref().unwrap().original_string()
         ));
         s.wln(format!(
@@ -186,18 +211,20 @@ pub fn print_write_field_identifier(
         ));
     } else {
         s.wln(format!(
-            "{prefix}{name}.write(w)?;",
+            "{variable_prefix}{name}.{prefix}write(w){postfix}?;",
             name = variable_name,
-            prefix = variable_prefix
+            variable_prefix = variable_prefix,
+            prefix = prefix,
+            postfix = postfix,
         ));
     }
 
     s.newline();
 }
 
-pub fn print_write(s: &mut Writer, e: &Container, o: &Objects) {
+pub fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
     for field in e.fields() {
-        print_write_field(s, e, o, field, "self.");
+        print_write_field(s, e, o, field, "self.", prefix, postfix);
     }
 
     s.wln("Ok(())");
@@ -209,6 +236,8 @@ pub fn print_write_definition(
     o: &Objects,
     variable_prefix: &str,
     d: &StructMemberDefinition,
+    prefix: &str,
+    postfix: &str,
 ) {
     s.wln(format!(
         "// {name}: {type_name}",
@@ -234,19 +263,20 @@ pub fn print_write_definition(
                 d.used_as_size_in(),
                 d.verified_value(),
                 size,
+                postfix,
             );
         }
         Type::FloatingPoint(floating) => {
-            print_write_field_floating(s, d.name(), variable_prefix, floating);
+            print_write_field_floating(s, d.name(), variable_prefix, floating, postfix);
         }
         Type::CString => {
-            print_write_field_cstring(s, d.name(), variable_prefix);
+            print_write_field_cstring(s, d.name(), variable_prefix, postfix);
         }
         Type::String { .. } => {
-            print_write_field_string(s, d.name(), variable_prefix);
+            print_write_field_string(s, d.name(), variable_prefix, postfix);
         }
         Type::Array(array) => {
-            print_write_field_array(s, d.name(), variable_prefix, array);
+            print_write_field_array(s, d.name(), variable_prefix, array, postfix);
         }
         Type::Identifier {
             s: identifier,
@@ -256,8 +286,10 @@ pub fn print_write_definition(
                 None => {}
                 Some(integer) => {
                     s.wln(format!(
-                        "{variable_prefix}{name}.write_{ty}_{endian}(w)?;",
+                        "{variable_prefix}{name}.{prefix}write_{ty}_{endian}(w){postfix}?;",
                         variable_prefix = variable_prefix,
+                        prefix = prefix,
+                        postfix = postfix,
                         name = d.name(),
                         ty = integer.rust_str(),
                         endian = integer.rust_endian_str()
@@ -272,20 +304,26 @@ pub fn print_write_definition(
                 variable_prefix,
                 d.verified_value(),
                 identifier,
+                prefix,
+                postfix,
             );
         }
         Type::PackedGuid => {
             s.wln(format!(
-                "{variable_prefix}{name}.write_packed(w)?;",
+                "{variable_prefix}{name}.{prefix}write_packed(w){postfix}?;",
                 variable_prefix = variable_prefix,
-                name = d.name()
+                prefix = prefix,
+                postfix = postfix,
+                name = d.name(),
             ));
             s.newline();
         }
         Type::Guid | Type::UpdateMask | Type::AuraMask => {
             s.wln(format!(
-                "{variable_prefix}{name}.write(w)?;",
+                "{variable_prefix}{name}.{prefix}write(w){postfix}?;",
                 variable_prefix = variable_prefix,
+                prefix = prefix,
+                postfix = postfix,
                 name = d.name()
             ));
             s.newline();
@@ -299,16 +337,28 @@ fn print_write_field(
     o: &Objects,
     field: &StructMember,
     variable_prefix: &str,
+    prefix: &str,
+    postfix: &str,
 ) {
     match field {
         StructMember::Definition(d) => {
-            print_write_definition(s, e, o, variable_prefix, d);
+            print_write_definition(s, e, o, variable_prefix, d, prefix, postfix);
         }
         StructMember::IfStatement(statement) => match statement.definer_type() {
             DefinerType::Enum => {
-                print_enum_if_statement_new(s, e, o, variable_prefix, statement.new_enum());
+                print_enum_if_statement_new(
+                    s,
+                    e,
+                    o,
+                    variable_prefix,
+                    statement.new_enum(),
+                    prefix,
+                    postfix,
+                );
             }
-            DefinerType::Flag => print_flag_if_statement(s, variable_prefix, statement.new_enum()),
+            DefinerType::Flag => {
+                print_flag_if_statement(s, variable_prefix, statement.new_enum(), prefix, postfix)
+            }
         },
         StructMember::OptionalStatement(optional) => {
             s.wln(format!("// optional {name}", name = optional.name()));
@@ -317,7 +367,7 @@ fn print_write_field(
                 format!("if let Some(v) = &self.{name}", name = optional.name()),
                 |s| {
                     for m in optional.members() {
-                        print_write_field(s, e, o, m, "v.");
+                        print_write_field(s, e, o, m, "v.", prefix, postfix);
                     }
                 },
             );
@@ -327,7 +377,13 @@ fn print_write_field(
     }
 }
 
-pub fn print_flag_if_statement(s: &mut Writer, variable_prefix: &str, statement: &NewIfStatement) {
+pub fn print_flag_if_statement(
+    s: &mut Writer,
+    variable_prefix: &str,
+    statement: &NewIfStatement,
+    prefix: &str,
+    postfix: &str,
+) {
     assert!(statement.enum_or_flag() == IfStatementType::Flag);
 
     let enumerator = statement
@@ -344,7 +400,11 @@ pub fn print_flag_if_statement(s: &mut Writer, variable_prefix: &str, statement:
             variant = &enumerator.name().to_lowercase(),
         ),
         |s| {
-            s.wln("s.write(w)?;");
+            s.wln(format!(
+                "s.{prefix}write(w){postfix}?;",
+                prefix = prefix,
+                postfix = postfix,
+            ));
         },
     );
 }
@@ -355,6 +415,8 @@ pub fn print_enum_if_statement_new(
     o: &Objects,
     variable_prefix: &str,
     ne: &NewIfStatement,
+    prefix: &str,
+    postfix: &str,
 ) {
     s.open_curly(format!(
         "match &{prefix}{name}",
@@ -399,14 +461,14 @@ pub fn print_enum_if_statement_new(
         for m in en.fields() {
             match m {
                 NewEnumStructMember::Definition(d) => {
-                    print_write_definition(s, e, o, "", d);
+                    print_write_definition(s, e, o, "", d, prefix, postfix);
                 }
                 NewEnumStructMember::IfStatement(statement) => match statement.enum_or_flag() {
                     IfStatementType::Enum => {
-                        print_enum_if_statement_new(s, e, o, "", statement);
+                        print_enum_if_statement_new(s, e, o, "", statement, prefix, postfix);
                     }
                     IfStatementType::Flag => {
-                        print_flag_if_statement(s, "", statement);
+                        print_flag_if_statement(s, "", statement, prefix, postfix);
                     }
                 },
             }
