@@ -35,6 +35,7 @@ pub const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "WorldServerOpcodeMessage";
 pub const WORLD_BODY_TRAIT_NAME: &str = "WorldMessageBody";
 pub const WORLD_CLIENT_HEADER_TRAIT_NAME: &str = "WorldClientMessageWrite";
 pub const WORLD_SERVER_HEADER_TRAIT_NAME: &str = "WorldServerMessageWrite";
+pub const OPCODE_MESSAGE_TRAIT_NAME: &str = "OpcodeMessage";
 
 pub const ASYNC_TRAIT: &str = "AsyncReadWrite";
 pub const ASYNC_TRAIT_MACRO: &str = "#[async_trait]";

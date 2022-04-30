@@ -1,5 +1,5 @@
 use crate::WorldMessageBody;
-use crate::WorldMessage;
+use crate::OpcodeMessage;
 use crate::{WorldServerMessageWrite, WorldClientMessageWrite};
 use wow_srp::header_crypto::{Decrypter, Encrypter};
 
@@ -1868,7 +1868,7 @@ pub enum WorldClientOpcodeMessage {
     CMSG_GMSURVEY_SUBMIT(CMSG_GMSURVEY_SUBMIT),
 }
 
-impl WorldMessage for WorldClientOpcodeMessage {
+impl OpcodeMessage for WorldClientOpcodeMessage {
     type Error = WorldClientOpcodeMessageError;
     fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         match self {
@@ -5919,7 +5919,7 @@ pub enum WorldServerOpcodeMessage {
     SMSG_DEFENSE_MESSAGE(SMSG_DEFENSE_MESSAGE),
 }
 
-impl WorldMessage for WorldServerOpcodeMessage {
+impl OpcodeMessage for WorldServerOpcodeMessage {
     type Error = WorldServerOpcodeMessageError;
     fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         match self {

@@ -5,9 +5,9 @@ use crate::parser::types::ArraySize;
 use crate::rust_printer::opcodes::get_enumerator_name;
 use crate::rust_printer::rust_view::{RustMember, RustType};
 use crate::rust_printer::{
-    Writer, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_BODY_TRAIT_NAME,
-    WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
-    WORLD_SERVER_MESSAGE_ENUM_NAME,
+    Writer, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
+    OPCODE_MESSAGE_TRAIT_NAME, WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME,
+    WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_HEADER_TRAIT_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::test_case::{TestCase, TestCaseMember, TestValue};
 
@@ -42,10 +42,11 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             ContainerType::Msg(_) => panic!(),
             ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
                 s.wln(format!(
-                    "use crate::{{{}, {}, {}, WorldMessage}};",
+                    "use crate::{{{}, {}, {}, {}}};",
                     WORLD_BODY_TRAIT_NAME,
                     WORLD_CLIENT_HEADER_TRAIT_NAME,
                     WORLD_SERVER_HEADER_TRAIT_NAME,
+                    OPCODE_MESSAGE_TRAIT_NAME,
                 ));
             }
             _ => {}

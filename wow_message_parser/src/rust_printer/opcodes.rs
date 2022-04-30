@@ -3,8 +3,8 @@ use crate::file_utils::{get_import_path, get_login_logon_version_path, get_world
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
     Writer, ASYNC_STD_IMPORT, ASYNC_TRAIT, ASYNC_TRAIT_IMPORT, CFG_ASYNC_ANY, CFG_ASYNC_ASYNC_STD,
-    CFG_ASYNC_TOKIO, TOKIO_IMPORT, WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME,
-    WORLD_SERVER_HEADER_TRAIT_NAME,
+    CFG_ASYNC_TOKIO, OPCODE_MESSAGE_TRAIT_NAME, TOKIO_IMPORT, WORLD_BODY_TRAIT_NAME,
+    WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
 
 const CLOGIN_NAME: &str = "Client";
@@ -80,7 +80,7 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
         }
         ContainerType::CMsg(_) => {
             s.wln(format!("use crate::{};", WORLD_BODY_TRAIT_NAME));
-            s.wln("use crate::WorldMessage;");
+            s.wln(format!("use crate::{};", OPCODE_MESSAGE_TRAIT_NAME));
             s.wln(format!(
                 "use crate::{{{}, {}}};",
                 WORLD_SERVER_HEADER_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME,
@@ -151,7 +151,7 @@ pub fn common_impls_world(
         ContainerType::SMsg(_) => ("server", "u16", 2),
         _ => panic!(),
     };
-    s.impl_for("WorldMessage", format!("{t}OpcodeMessage", t = ty), |s| {
+    s.impl_for(OPCODE_MESSAGE_TRAIT_NAME, format!("{t}OpcodeMessage", t = ty), |s| {
         s.wln(format!("type Error = {t}OpcodeMessageError;", t = ty));
 
         s.bodyn("fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", |s| {

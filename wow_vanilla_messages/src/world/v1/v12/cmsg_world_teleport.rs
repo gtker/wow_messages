@@ -149,7 +149,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
-    use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
+    use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, OpcodeMessage};
 
     #[test]
     fn CMSG_WORLD_TELEPORT0() {

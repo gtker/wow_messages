@@ -78,7 +78,7 @@ pub trait WorldMessageBody: Sized {
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 }
 
-pub trait WorldMessage: Sized {
+pub trait OpcodeMessage: Sized {
     type Error;
 
     fn read_unencrypted<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;

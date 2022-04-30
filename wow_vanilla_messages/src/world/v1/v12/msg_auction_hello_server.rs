@@ -88,7 +88,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
-    use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, WorldMessage};
+    use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, OpcodeMessage};
 
     #[test]
     fn MSG_AUCTION_HELLO_Server0() {
