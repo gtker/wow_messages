@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_AUCTION_LIST_BIDDER_ITEMS = 0x264 {
+cmsg CMSG_AUCTION_LIST_BIDDER_ITEMS = 0x0264 {
     Guid auctioneer;    
     u32 start_from_page;    
     u32 amount_of_outbidded_items;    

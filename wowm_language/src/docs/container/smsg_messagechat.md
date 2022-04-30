@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_MESSAGECHAT = 0x96 {
+smsg SMSG_MESSAGECHAT = 0x0096 {
     ChatType chat_type;    
     Language language;    
     if (chat_type == MONSTER_WHISPER        

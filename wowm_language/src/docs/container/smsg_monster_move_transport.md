@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x2AE {
+smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
     PackedGuid transport;    
     f32 position_x;    
     f32 position_y;    

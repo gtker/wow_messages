@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_FORCE_MOVE_UNROOT_ACK = 0xEB {
+cmsg CMSG_FORCE_MOVE_UNROOT_ACK = 0x00EB {
     Guid guid;    
     u32 movement_counter;    
     MovementInfo movement_info;    

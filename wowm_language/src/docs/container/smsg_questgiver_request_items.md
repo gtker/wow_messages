@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x18B {
+smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     Guid npc;    
     u32 quest_id;    
     CString title;    

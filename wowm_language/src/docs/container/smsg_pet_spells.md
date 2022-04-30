@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_PET_SPELLS = 0x179 {
+smsg SMSG_PET_SPELLS = 0x0179 {
     Guid pet;    
     u32 unknown1;    
     PetReactState react;    

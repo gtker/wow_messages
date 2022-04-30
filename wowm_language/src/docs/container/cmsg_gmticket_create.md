@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_GMTICKET_CREATE = 0x205 {
+cmsg CMSG_GMTICKET_CREATE = 0x0205 {
     GmTicketType category;    
     Map map;    
     f32 position_x;    

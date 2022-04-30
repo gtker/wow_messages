@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x188 {
+smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
     Guid guid;    
     u32 quest_id;    
     CString title;    

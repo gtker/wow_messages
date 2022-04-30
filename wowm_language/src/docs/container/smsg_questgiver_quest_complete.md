@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x191 {
+smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
     u32 quest_id;    
     u32 unknown;    
     u32 experience_reward;    

@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_CAST_RESULT = 0x130 {
+smsg SMSG_CAST_RESULT = 0x0130 {
     u32 spell;    
     SimpleSpellCastResult result;    
     if (result != FAILURE) {        

@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_PET_MODE = 0x17A {
+smsg SMSG_PET_MODE = 0x017A {
     Guid guid;    
     PetReactState react_state;    
     PetCommandState command_state;    

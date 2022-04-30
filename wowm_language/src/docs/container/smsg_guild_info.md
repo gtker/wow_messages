@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_GUILD_INFO = 0x88 {
+smsg SMSG_GUILD_INFO = 0x0088 {
     CString guild_name;    
     u32 created_day;    
     u32 created_month;    

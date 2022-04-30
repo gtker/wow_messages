@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg MSG_INSPECT_HONOR_STATS_Server = 0x2D6 {
+smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
     Guid guid;    
     PvpRank highest_rank;    
     u32 today_honorable_and_dishonorable;    

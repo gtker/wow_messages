@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_DESTROYITEM = 0x111 {
+cmsg CMSG_DESTROYITEM = 0x0111 {
     u8 bag;    
     u8 slot;    
     u8 amount;    

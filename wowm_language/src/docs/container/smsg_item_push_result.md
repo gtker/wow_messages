@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_ITEM_PUSH_RESULT = 0x166 {
+smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     Guid guid;    
     NewItemSource source;    
     NewItemCreationType creation_type;    

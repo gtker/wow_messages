@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_AUCTION_LIST_ITEMS = 0x258 {
+cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
     Guid auctioneer_guid;    
     u32 list_start_item;    
     CString searched_name;    

@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_AUTH_SESSION = 0x1ED {
+cmsg CMSG_AUTH_SESSION = 0x01ED {
     u32 build;    
     u32 server_id;    
     CString username;    

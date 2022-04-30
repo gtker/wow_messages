@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_MOVE_KNOCK_BACK = 0xEF {
+smsg SMSG_MOVE_KNOCK_BACK = 0x00EF {
     PackedGuid guid;    
     u32 movement_counter;    
     f32 v_cos;    

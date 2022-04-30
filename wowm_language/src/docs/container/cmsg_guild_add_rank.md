@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_GUILD_ADD_RANK = 0x232 {
+cmsg CMSG_GUILD_ADD_RANK = 0x0232 {
     CString rank_name;    
 }
 

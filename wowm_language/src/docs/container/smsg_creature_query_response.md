@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
+smsg SMSG_CREATURE_QUERY_RESPONSE = 0x0061 {
     u32 creature_entry;    
     optional found {    
         CString name1;        

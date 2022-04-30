@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x2F2 {
+smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
     PackedGuid player;    
     GroupUpdateFlags mask;    
     if (mask & FLAG_STATUS) {        

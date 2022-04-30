@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_BATTLEFIELD_STATUS = 0x2D4 {
+smsg SMSG_BATTLEFIELD_STATUS = 0x02D4 {
     u32 queue_slot;    
     Map map;    
     if (map != EASTERN_KINGDOMS) {        

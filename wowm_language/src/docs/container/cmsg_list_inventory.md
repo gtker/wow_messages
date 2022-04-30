@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_LIST_INVENTORY = 0x19E {
+cmsg CMSG_LIST_INVENTORY = 0x019E {
     Guid guid;    
 }
 

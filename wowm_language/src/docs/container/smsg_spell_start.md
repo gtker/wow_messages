@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_SPELL_START = 0x131 {
+smsg SMSG_SPELL_START = 0x0131 {
     PackedGuid cast_item;    
     PackedGuid caster;    
     u32 spell;    

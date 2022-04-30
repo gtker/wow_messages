@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_CHAR_CREATE = 0x36 {
+cmsg CMSG_CHAR_CREATE = 0x0036 {
     CString name;    
     Race race;    
     Class class;    

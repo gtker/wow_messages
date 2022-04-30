@@ -1,7 +1,7 @@
 ## Client Version 1.2, Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_AUTH_RESPONSE = 0x1EE {
+smsg SMSG_AUTH_RESPONSE = 0x01EE {
     WorldResult result;    
     if (result == AUTH_OK) {        
         u32 billing_time;        

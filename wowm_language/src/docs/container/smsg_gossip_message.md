@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_GOSSIP_MESSAGE = 0x17D {
+smsg SMSG_GOSSIP_MESSAGE = 0x017D {
     Guid guid;    
     u32 title_text_id;    
     u32 amount_of_gossip_items;    

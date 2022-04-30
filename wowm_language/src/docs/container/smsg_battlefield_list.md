@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_BATTLEFIELD_LIST = 0x23D {
+smsg SMSG_BATTLEFIELD_LIST = 0x023D {
     Guid battlemaster;    
     Map map;    
     u8 unknown1;    

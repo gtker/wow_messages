@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_QUESTGIVER_QUEST_LIST = 0x185 {
+smsg SMSG_QUESTGIVER_QUEST_LIST = 0x0185 {
     Guid npc;    
     CString title;    
     u32 emote_delay;    

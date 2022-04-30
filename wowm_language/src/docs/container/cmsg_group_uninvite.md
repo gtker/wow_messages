@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_GROUP_UNINVITE = 0x75 {
+cmsg CMSG_GROUP_UNINVITE = 0x0075 {
     CString name;    
 }
 

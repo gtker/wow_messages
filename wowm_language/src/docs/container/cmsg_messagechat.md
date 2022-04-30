@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_MESSAGECHAT = 0x95 {
+cmsg CMSG_MESSAGECHAT = 0x0095 {
     ChatType chat_type;    
     Language language;    
     if (chat_type == SAY        

@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_PET_NAME_INVALID = 0x178 {
+smsg SMSG_PET_NAME_INVALID = 0x0178 {
 }
 
 ```

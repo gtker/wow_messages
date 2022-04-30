@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_PROCRESIST = 0x260 {
+smsg SMSG_PROCRESIST = 0x0260 {
     Guid guid;    
     Guid target_guid;    
     u32 id;    

@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_LOG_XPGAIN = 0x1D0 {
+smsg SMSG_LOG_XPGAIN = 0x01D0 {
     Guid target_guid;    
     u32 total_exp;    
     ExperienceAwardType exp_type;    

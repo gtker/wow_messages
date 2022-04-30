@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x18D {
+smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     Guid npc;    
     u32 quest_id;    
     CString title;    

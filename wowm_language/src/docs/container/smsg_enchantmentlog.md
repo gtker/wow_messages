@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_ENCHANTMENTLOG = 0x1D7 {
+smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
     Guid target_guid;    
     Guid caster_guid;    
     u32 item;    

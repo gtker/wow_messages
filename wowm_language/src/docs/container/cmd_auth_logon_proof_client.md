@@ -1,7 +1,7 @@
 ## Protocol Version 2
 
 ```rust,ignore
-clogin CMD_AUTH_LOGON_PROOF_Client = 0x1 {
+clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     u8[32] client_public_key;    
     u8[20] client_proof;    
     u8[20] crc_hash;    
@@ -13,7 +13,7 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x1 {
 ## Protocol Version 3
 
 ```rust,ignore
-clogin CMD_AUTH_LOGON_PROOF_Client = 0x1 {
+clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     u8[32] client_public_key;    
     u8[20] client_proof;    
     u8[20] crc_hash;    
@@ -30,7 +30,7 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x1 {
 ## Protocol Version 8
 
 ```rust,ignore
-clogin CMD_AUTH_LOGON_PROOF_Client = 0x1 {
+clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     u8[32] client_public_key;    
     u8[20] client_proof;    
     u8[20] crc_hash;    

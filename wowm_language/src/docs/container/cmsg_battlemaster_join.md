@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_BATTLEMASTER_JOIN = 0x2EE {
+cmsg CMSG_BATTLEMASTER_JOIN = 0x02EE {
     Guid guid;    
     Map map;    
     u32 instance_id;    

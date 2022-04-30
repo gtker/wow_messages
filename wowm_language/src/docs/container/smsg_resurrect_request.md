@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_RESURRECT_REQUEST = 0x15B {
+smsg SMSG_RESURRECT_REQUEST = 0x015B {
     Guid guid;    
     u32 name_length;    
     CString name;    

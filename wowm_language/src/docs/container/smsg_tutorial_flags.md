@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_TUTORIAL_FLAGS = 0xFD {
+smsg SMSG_TUTORIAL_FLAGS = 0x00FD {
     u32 tutorial_data0;    
     u32 tutorial_data1;    
     u32 tutorial_data2;    

@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_SEND_MAIL = 0x238 {
+cmsg CMSG_SEND_MAIL = 0x0238 {
     Guid mailbox;    
     CString receiver;    
     CString subject;    

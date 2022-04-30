@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_LOOT_START_ROLL = 0x2A1 {
+smsg SMSG_LOOT_START_ROLL = 0x02A1 {
     Guid creature_guid;    
     u32 loot_slot;    
     u32 item_id;    

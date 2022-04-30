@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_BUG = 0x1CA {
+cmsg CMSG_BUG = 0x01CA {
     u32 suggestion;    
     u32 content_length;    
     CString content;    

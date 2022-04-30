@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_TRADE_STATUS = 0x120 {
+smsg SMSG_TRADE_STATUS = 0x0120 {
     TradeStatus status;    
     if (status == BEGIN_TRADE) {        
         Guid unknown1;        

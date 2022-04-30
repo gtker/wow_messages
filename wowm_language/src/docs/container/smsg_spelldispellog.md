@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_SPELLDISPELLOG = 0x27B {
+smsg SMSG_SPELLDISPELLOG = 0x027B {
     Guid victim;    
     Guid caster;    
     u32 amount_of_spells;    

@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_MOVE_HOVER_ACK = 0xF6 {
+cmsg CMSG_MOVE_HOVER_ACK = 0x00F6 {
     Guid guid;    
     u32 counter;    
     MovementInfo movement_info;    

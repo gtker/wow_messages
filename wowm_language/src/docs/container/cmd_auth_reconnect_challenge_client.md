@@ -1,7 +1,7 @@
 ## Protocol Version *
 
 ```rust,ignore
-clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x2 {
+clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
     u8 protocol_version;    
     u16 size = self.size;    
     u32 game_name = "\0WoW";    

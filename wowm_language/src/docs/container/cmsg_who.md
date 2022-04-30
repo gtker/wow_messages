@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-cmsg CMSG_WHO = 0x62 {
+cmsg CMSG_WHO = 0x0062 {
     u32 minimum_level;    
     u32 maximum_level;    
     CString player_name;    

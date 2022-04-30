@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_SPELLLOGMISS = 0x24B {
+smsg SMSG_SPELLLOGMISS = 0x024B {
     u32 id;    
     Guid caster_guid;    
     u8 unknown1;    

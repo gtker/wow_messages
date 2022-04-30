@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_TRIGGER_CINEMATIC = 0xFA {
+smsg SMSG_TRIGGER_CINEMATIC = 0x00FA {
     CinematicSequenceId cinematic_sequence_id;    
 }
 

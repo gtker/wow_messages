@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_GMTICKET_GETTICKET = 0x212 {
+smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
     GmTicketStatus status;    
     if (status == HASTEXT) {        
         CString text;        

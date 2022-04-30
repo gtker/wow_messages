@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_GUILD_QUERY_RESPONSE = 0x55 {
+smsg SMSG_GUILD_QUERY_RESPONSE = 0x0055 {
     u32 id;    
     CString name;    
     CString[10] rank_names;    

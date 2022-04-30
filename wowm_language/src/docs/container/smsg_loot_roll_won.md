@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_LOOT_ROLL_WON = 0x29F {
+smsg SMSG_LOOT_ROLL_WON = 0x029F {
     Guid looted_target_guid;    
     u32 loot_slot;    
     u32 item_id;    

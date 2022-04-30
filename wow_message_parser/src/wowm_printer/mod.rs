@@ -94,11 +94,10 @@ pub fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String {
         name = e.name(),
         opcode = match e.container_type() {
             ContainerType::Struct => "".to_string(),
-            ContainerType::CLogin(o)
-            | ContainerType::SLogin(o)
-            | ContainerType::Msg(o)
-            | ContainerType::CMsg(o)
-            | ContainerType::SMsg(o) => format!(" = 0x{opcode:X}", opcode = o),
+            ContainerType::CLogin(o) | ContainerType::SLogin(o) =>
+                format!(" = 0x{opcode:0>2X}", opcode = o),
+            ContainerType::Msg(o) | ContainerType::CMsg(o) | ContainerType::SMsg(o) =>
+                format!(" = 0x{opcode:0>4X}", opcode = o),
         }
     ));
 

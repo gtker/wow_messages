@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_TRANSFER_ABORTED = 0x40 {
+smsg SMSG_TRANSFER_ABORTED = 0x0040 {
     Map map;    
     TransferAbortReason reason;    
     u8 padding = 0;    

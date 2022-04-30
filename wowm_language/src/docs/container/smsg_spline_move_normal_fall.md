@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_SPLINE_MOVE_NORMAL_FALL = 0x306 {
+smsg SMSG_SPLINE_MOVE_NORMAL_FALL = 0x0306 {
     PackedGuid guid;    
 }
 

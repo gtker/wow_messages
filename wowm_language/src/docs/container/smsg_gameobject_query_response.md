@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x5F {
+smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
     u32 entry_id;    
     optional found {    
         u32 info_type;        

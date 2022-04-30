@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_PERIODICAURALOG = 0x24E {
+smsg SMSG_PERIODICAURALOG = 0x024E {
     PackedGuid target;    
     PackedGuid caster;    
     u32 spell;    

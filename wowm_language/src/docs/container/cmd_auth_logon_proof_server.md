@@ -1,7 +1,7 @@
 ## Protocol Version 2, Protocol Version 3
 
 ```rust,ignore
-slogin CMD_AUTH_LOGON_PROOF_Server = 0x1 {
+slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
     LoginResult login_result;    
     if (login_result == SUCCESS) {        
         u8[20] server_proof;        
@@ -13,7 +13,7 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x1 {
 ## Protocol Version 8
 
 ```rust,ignore
-slogin CMD_AUTH_LOGON_PROOF_Server = 0x1 {
+slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
     LoginResult login_result;    
     if (login_result == SUCCESS) {        
         u8[20] server_proof;        

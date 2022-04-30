@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_SPELLHEALLOG = 0x150 {
+smsg SMSG_SPELLHEALLOG = 0x0150 {
     PackedGuid victim_guid;    
     PackedGuid caster_guid;    
     u32 id;    

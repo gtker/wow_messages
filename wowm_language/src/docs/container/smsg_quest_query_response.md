@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_QUEST_QUERY_RESPONSE = 0x5D {
+smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     u32 quest_id;    
     u32 quest_method;    
     u32 quest_level;    

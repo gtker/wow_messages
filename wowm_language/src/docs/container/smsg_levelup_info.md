@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_LEVELUP_INFO = 0x1D4 {
+smsg SMSG_LEVELUP_INFO = 0x01D4 {
     u32 new_level;    
     u32 health;    
     u32 mana;    

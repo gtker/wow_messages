@@ -1,7 +1,7 @@
 ## Protocol Version 2
 
 ```rust,ignore
-slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x0 {
+slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
     u8 protocol_version = 0;    
     LoginResult login_result;    
     if (login_result == SUCCESS) {        
@@ -19,7 +19,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x0 {
 ## Protocol Version 3
 
 ```rust,ignore
-slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x0 {
+slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
     u8 protocol_version = 0;    
     LoginResult login_result;    
     if (login_result == SUCCESS) {        
@@ -42,7 +42,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x0 {
 ## Protocol Version 8
 
 ```rust,ignore
-slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x0 {
+slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
     u8 protocol_version = 0;    
     LoginResult login_result;    
     if (login_result == SUCCESS) {        

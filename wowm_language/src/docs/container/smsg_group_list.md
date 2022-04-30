@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_GROUP_LIST = 0x7D {
+smsg SMSG_GROUP_LIST = 0x007D {
     GroupType group_type;    
     u8 own_flags;    
     u32 amount_of_members;    

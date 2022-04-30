@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x58 {
+smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
     u32 item;    
     optional found {    
         ItemClass item_class;        

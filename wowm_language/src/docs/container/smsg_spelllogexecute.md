@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_SPELLLOGEXECUTE = 0x24C {
+smsg SMSG_SPELLLOGEXECUTE = 0x024C {
     PackedGuid caster;    
     u32 spell;    
     u32 amount_of_effects;    

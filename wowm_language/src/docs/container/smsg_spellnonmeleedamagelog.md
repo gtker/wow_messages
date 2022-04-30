@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x250 {
+smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
     PackedGuid target;    
     PackedGuid attacker;    
     u32 spell;    

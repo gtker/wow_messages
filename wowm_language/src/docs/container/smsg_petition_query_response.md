@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_PETITION_QUERY_RESPONSE = 0x1C7 {
+smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     Guid petition_guid;    
     Guid charter_owner;    
     CString guild_name;    

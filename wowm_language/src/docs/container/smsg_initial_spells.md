@@ -1,7 +1,7 @@
 ## Client Version 1.12
 
 ```rust,ignore
-smsg SMSG_INITIAL_SPELLS = 0x12A {
+smsg SMSG_INITIAL_SPELLS = 0x012A {
     u8 unknown1;    
     u16 spell_count;    
     InitialSpell[spell_count] initial_spells;    
