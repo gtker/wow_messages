@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_READ_ITEM = 0x00AD {
-    u8 bag_index;    
-    u8 slot;    
+    u8 bag_index;
+    u8 slot;
 }
 ```
 ### Header

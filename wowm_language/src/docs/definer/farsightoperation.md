@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum FarSightOperation : u8 {
-    REMOVE = 0;    
-    ADD = 1;    
+    REMOVE = 0;
+    ADD = 1;
 }
 ```
 ### Type

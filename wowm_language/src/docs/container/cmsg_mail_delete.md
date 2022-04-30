@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_MAIL_DELETE = 0x0249 {
-    Guid mailbox_id;    
-    u32 mail_id;    
+    Guid mailbox_id;
+    u32 mail_id;
 }
 ```
 ### Header

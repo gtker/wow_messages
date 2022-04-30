@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_REPAIR_ITEM = 0x02A8 {
-    Guid npc_guid;    
-    Guid item_guid;    
+    Guid npc_guid;
+    Guid item_guid;
 }
 ```
 ### Header

@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_LOGOUT_RESPONSE = 0x004C {
-    LogoutResult reason;    
-    LogoutSpeed speed;    
+    LogoutResult reason;
+    LogoutSpeed speed;
 }
 ```
 ### Header

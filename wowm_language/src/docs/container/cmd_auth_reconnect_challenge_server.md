@@ -3,11 +3,11 @@
 ### Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
-    LoginResult result;    
-    if (result == SUCCESS) {        
-        u8[16] challenge_data;        
-        u8[16] checksum_salt;        
-    }    
+    LoginResult result;
+    if (result == SUCCESS) {
+        u8[16] challenge_data;
+        u8[16] checksum_salt;
+    }
 }
 ```
 ### Body
@@ -26,11 +26,11 @@ If result is equal to `SUCCESS`:
 ### Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
-    LoginResult result;    
-    if (result == SUCCESS) {        
-        u8[16] challenge_data;        
-        u8[16] checksum_salt;        
-    }    
+    LoginResult result;
+    if (result == SUCCESS) {
+        u8[16] challenge_data;
+        u8[16] checksum_salt;
+    }
 }
 ```
 ### Body

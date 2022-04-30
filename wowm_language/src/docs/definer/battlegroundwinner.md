@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 enum BattlegroundWinner : u8 {
-    HORDE = 0;    
-    ALLIANCE = 1;    
-    NONE = 2;    
+    HORDE = 0;
+    ALLIANCE = 1;
+    NONE = 2;
 }
 ```
 ### Type

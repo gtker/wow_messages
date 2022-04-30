@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_SPLINE_MOVE_UNSET_HOVER = 0x0308 {
-    PackedGuid guid;    
+    PackedGuid guid;
 }
 ```
 ### Header

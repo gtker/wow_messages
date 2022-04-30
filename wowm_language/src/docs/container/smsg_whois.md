@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_WHOIS = 0x0065 {
-    CString message;    
+    CString message;
 }
 ```
 ### Header

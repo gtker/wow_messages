@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg MSG_LOOKING_FOR_GROUP_Server = 0x01FF {
-    u32 unknown1;    
+    u32 unknown1;
 }
 ```
 ### Header

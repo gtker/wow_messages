@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum ExperienceAwardType : u8 {
-    KILL = 0;    
-    NON_KILL = 1;    
+    KILL = 0;
+    NON_KILL = 1;
 }
 ```
 ### Type

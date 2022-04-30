@@ -186,7 +186,7 @@ fn print_declaration(s: &mut Writer, e: &Container) {
 fn print_struct_wowm_definition(s: &mut Writer, e: &Container) {
     s.docc_wowm(
         |s| {
-            s.wln(get_struct_wowm_definition(e, "/// "));
+            s.w(get_struct_wowm_definition(e, "/// "));
         },
         LOGIN_MESSAGES_GITHUB_REPO,
         e.file_info(),

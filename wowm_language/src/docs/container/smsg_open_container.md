@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_OPEN_CONTAINER = 0x0113 {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

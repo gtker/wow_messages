@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum QuestCompletable : u32 {
-    NOT_COMPLETABLE = 0;    
-    COMPLETEABLE = 3;    
+    NOT_COMPLETABLE = 0;
+    COMPLETEABLE = 3;
 }
 ```
 ### Type

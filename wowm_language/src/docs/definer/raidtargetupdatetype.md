@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum RaidTargetUpdateType : u8 {
-    PARTIAL = 0;    
-    FULL = 1;    
+    PARTIAL = 0;
+    FULL = 1;
 }
 ```
 ### Type

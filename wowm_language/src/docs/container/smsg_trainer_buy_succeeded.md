@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_TRAINER_BUY_SUCCEEDED = 0x01B3 {
-    Guid guid;    
-    u32 id;    
+    Guid guid;
+    u32 id;
 }
 ```
 ### Header

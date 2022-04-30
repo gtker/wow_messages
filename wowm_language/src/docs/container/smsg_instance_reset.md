@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_INSTANCE_RESET = 0x031E {
-    Map map;    
+    Map map;
 }
 ```
 ### Header

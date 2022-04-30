@@ -3,10 +3,10 @@
 ### Wowm Representation
 ```rust,ignore
 enum InstanceResetFailedReason : u8 {
-    GENERAL = 0;    
-    OFFLINE = 1;    
-    ZONING = 2;    
-    SILENTLY = 3;    
+    GENERAL = 0;
+    OFFLINE = 1;
+    ZONING = 2;
+    SILENTLY = 3;
 }
 ```
 ### Type

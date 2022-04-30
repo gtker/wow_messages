@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_GUILD_SET_OFFICER_NOTE = 0x0235 {
-    CString player_name;    
-    CString note;    
+    CString player_name;
+    CString note;
 }
 ```
 ### Header

@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_LOOT_MASTER_GIVE = 0x02A3 {
-    Guid loot_guid;    
-    u8 slot_id;    
-    Guid target_player_guid;    
+    Guid loot_guid;
+    u8 slot_id;
+    Guid target_player_guid;
 }
 ```
 ### Header

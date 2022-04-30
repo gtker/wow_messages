@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_SPELLINSTAKILLLOG = 0x032F {
-    Guid target_guid;    
-    u32 spell;    
+    Guid target_guid;
+    u32 spell;
 }
 ```
 ### Header

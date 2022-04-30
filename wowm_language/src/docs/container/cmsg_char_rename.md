@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_CHAR_RENAME = 0x02C7 {
-    Guid guid;    
-    CString name;    
+    Guid guid;
+    CString name;
 }
 ```
 ### Header

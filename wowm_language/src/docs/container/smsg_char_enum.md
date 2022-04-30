@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_CHAR_ENUM = 0x003B {
-    u8 amount_of_characters;    
-    Character[amount_of_characters] characters;    
+    u8 amount_of_characters;
+    Character[amount_of_characters] characters;
 }
 ```
 ### Header

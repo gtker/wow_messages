@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_CHAT_IGNORED = 0x0225 {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

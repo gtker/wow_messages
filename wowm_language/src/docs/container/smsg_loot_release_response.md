@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_LOOT_RELEASE_RESPONSE = 0x0161 {
-    Guid guid;    
-    u8 unknown1;    
+    Guid guid;
+    u8 unknown1;
 }
 ```
 ### Header

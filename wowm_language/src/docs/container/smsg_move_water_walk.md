@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_MOVE_WATER_WALK = 0x00DE {
-    PackedGuid guid;    
-    u32 counter;    
+    PackedGuid guid;
+    u32 counter;
 }
 ```
 ### Header

@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_SET_REST_START = 0x021E {
-    u32 unknown1;    
+    u32 unknown1;
 }
 ```
 ### Header

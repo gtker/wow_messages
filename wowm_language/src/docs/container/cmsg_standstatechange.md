@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_STANDSTATECHANGE = 0x0101 {
-    UnitStandState animation_state;    
+    UnitStandState animation_state;
 }
 ```
 ### Header

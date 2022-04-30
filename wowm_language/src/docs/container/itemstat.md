@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 struct ItemStat {
-    u32 item_stat_type;    
-    u32 item_stat_value;    
+    u32 item_stat_type;
+    u32 item_stat_value;
 }
 ```
 ### Body

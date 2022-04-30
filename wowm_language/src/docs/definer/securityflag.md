@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum SecurityFlag : u8 {
-    NONE = 0x0;    
-    PIN = 0x1;    
+    NONE = 0x0;
+    PIN = 0x1;
 }
 ```
 ### Type
@@ -19,10 +19,10 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Wowm Representation
 ```rust,ignore
 flag SecurityFlag : u8 {
-    NONE = 0x00;    
-    PIN = 0x01;    
-    UNKNOWN0 = 0x02;    
-    AUTHENTICATOR = 0x04;    
+    NONE = 0x00;
+    PIN = 0x01;
+    UNKNOWN0 = 0x02;
+    AUTHENTICATOR = 0x04;
 }
 ```
 ### Type

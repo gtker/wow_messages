@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 struct SpellMiss {
-    Guid target_guid;    
-    SpellMissInfo miss_info;    
+    Guid target_guid;
+    SpellMissInfo miss_info;
 }
 ```
 ### Body

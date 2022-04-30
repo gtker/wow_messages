@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_PET_TAME_FAILURE = 0x0173 {
-    PetTameFailureReason reason;    
+    PetTameFailureReason reason;
 }
 ```
 ### Header

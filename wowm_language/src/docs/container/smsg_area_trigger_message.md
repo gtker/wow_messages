@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_AREA_TRIGGER_MESSAGE = 0x02B8 {
-    u32 length;    
-    CString message;    
+    u32 length;
+    CString message;
 }
 ```
 ### Header

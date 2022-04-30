@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum BattlegroundEndStatus : u8 {
-    NOT_ENDED = 0;    
-    ENDED = 1;    
+    NOT_ENDED = 0;
+    ENDED = 1;
 }
 ```
 ### Type

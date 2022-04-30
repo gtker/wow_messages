@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_REMOVED_SPELL = 0x0203 {
-    u16 spell_id;    
+    u16 spell_id;
 }
 ```
 ### Header

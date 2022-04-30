@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum NewItemCreationType : u32 {
-    RECEIVED = 0;    
-    CREATED = 1;    
+    RECEIVED = 0;
+    CREATED = 1;
 }
 ```
 ### Type

@@ -3,11 +3,11 @@
 ### Wowm Representation
 ```rust,ignore
 enum FriendStatus : u8 {
-    OFFLINE = 0;    
-    ONLINE = 1;    
-    AFK = 2;    
-    UNKNOWN3 = 3;    
-    DND = 4;    
+    OFFLINE = 0;
+    ONLINE = 1;
+    AFK = 2;
+    UNKNOWN3 = 3;
+    DND = 4;
 }
 ```
 ### Type

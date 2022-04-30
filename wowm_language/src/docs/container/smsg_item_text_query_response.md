@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_ITEM_TEXT_QUERY_RESPONSE = 0x0244 {
-    u32 item_text_id;    
-    CString text;    
+    u32 item_text_id;
+    CString text;
 }
 ```
 ### Header

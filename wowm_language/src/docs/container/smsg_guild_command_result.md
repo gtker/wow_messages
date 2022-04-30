@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_GUILD_COMMAND_RESULT = 0x0093 {
-    GuildCommand command;    
-    CString string;    
-    GuildCommandResult result;    
+    GuildCommand command;
+    CString string;
+    GuildCommandResult result;
 }
 ```
 ### Header

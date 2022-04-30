@@ -3,14 +3,14 @@
 ### Wowm Representation
 ```rust,ignore
 struct Realm {
-    RealmType realm_type;    
-    RealmFlag flag;    
-    CString name;    
-    CString address;    
-    Population population;    
-    u8 number_of_characters_on_realm;    
-    RealmCategory category;    
-    u8 realm_id;    
+    RealmType realm_type;
+    RealmFlag flag;
+    CString name;
+    CString address;
+    Population population;
+    u8 number_of_characters_on_realm;
+    RealmCategory category;
+    u8 realm_id;
 }
 ```
 ### Body
@@ -29,18 +29,18 @@ struct Realm {
 ### Wowm Representation
 ```rust,ignore
 struct Realm {
-    u8 realm_type;    
-    u8 locked;    
-    RealmFlag flag;    
-    CString name;    
-    CString address;    
-    Population population;    
-    u8 number_of_characters_on_realm;    
-    RealmCategory category;    
-    u8 realm_id;    
-    if (flag & SPECIFY_BUILD) {        
-        Version version;        
-    }    
+    u8 realm_type;
+    u8 locked;
+    RealmFlag flag;
+    CString name;
+    CString address;
+    Population population;
+    u8 number_of_characters_on_realm;
+    RealmCategory category;
+    u8 realm_id;
+    if (flag & SPECIFY_BUILD) {
+        Version version;
+    }
 }
 ```
 ### Body

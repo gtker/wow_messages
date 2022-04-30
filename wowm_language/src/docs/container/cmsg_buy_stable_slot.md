@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_BUY_STABLE_SLOT = 0x0272 {
-    Guid npc_guid;    
+    Guid npc_guid;
 }
 ```
 ### Header

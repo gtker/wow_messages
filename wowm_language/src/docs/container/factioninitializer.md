@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 struct FactionInitializer {
-    FactionFlag flag;    
-    u32 standing;    
+    FactionFlag flag;
+    u32 standing;
 }
 ```
 ### Body

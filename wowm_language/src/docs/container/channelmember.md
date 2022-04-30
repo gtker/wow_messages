@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 struct ChannelMember {
-    Guid guid;    
-    u8 member_flags;    
+    Guid guid;
+    u8 member_flags;
 }
 ```
 ### Body

@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_QUEST_QUERY = 0x005C {
-    u32 quest_id;    
+    u32 quest_id;
 }
 ```
 ### Header

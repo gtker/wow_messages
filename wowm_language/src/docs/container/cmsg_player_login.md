@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_PLAYER_LOGIN = 0x003D {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

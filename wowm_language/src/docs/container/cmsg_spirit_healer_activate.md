@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_SPIRIT_HEALER_ACTIVATE = 0x021C {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

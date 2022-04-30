@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
-    LoginResult result;    
+    LoginResult result;
 }
 ```
 ### Body
@@ -15,8 +15,8 @@ slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
 ### Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
-    LoginResult result;    
-    u16 padding = 0;    
+    LoginResult result;
+    u16 padding = 0;
 }
 ```
 ### Body

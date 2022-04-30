@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_MOVE_FEATHER_FALL = 0x00F2 {
-    PackedGuid guid;    
-    u32 counter;    
+    PackedGuid guid;
+    u32 counter;
 }
 ```
 ### Header

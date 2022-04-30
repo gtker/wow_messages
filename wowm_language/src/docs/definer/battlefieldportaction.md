@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum BattlefieldPortAction : u8 {
-    LEAVE_QUEUE = 0;    
-    ENTER_BATTLE = 1;    
+    LEAVE_QUEUE = 0;
+    ENTER_BATTLE = 1;
 }
 ```
 ### Type

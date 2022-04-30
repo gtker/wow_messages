@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_PLAY_MUSIC = 0x0277 {
-    u32 sound_id;    
+    u32 sound_id;
 }
 ```
 ### Header

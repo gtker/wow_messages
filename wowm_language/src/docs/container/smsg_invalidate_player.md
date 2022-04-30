@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_INVALIDATE_PLAYER = 0x031C {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

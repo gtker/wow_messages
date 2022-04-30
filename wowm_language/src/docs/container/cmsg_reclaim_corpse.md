@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_RECLAIM_CORPSE = 0x01D2 {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

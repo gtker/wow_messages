@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_SPLINE_SET_SWIM_SPEED = 0x0300 {
-    PackedGuid guid;    
-    f32 speed;    
+    PackedGuid guid;
+    f32 speed;
 }
 ```
 ### Header

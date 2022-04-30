@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum PartyOperation : u8 {
-    INVITE = 0;    
-    LEAVE = 2;    
+    INVITE = 0;
+    LEAVE = 2;
 }
 ```
 ### Type

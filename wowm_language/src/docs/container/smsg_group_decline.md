@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_GROUP_DECLINE = 0x0074 {
-    CString name;    
+    CString name;
 }
 ```
 ### Header

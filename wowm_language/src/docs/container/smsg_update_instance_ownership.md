@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_UPDATE_INSTANCE_OWNERSHIP = 0x032B {
-    u32 has_been_saved;    
+    u32 has_been_saved;
 }
 ```
 ### Header

@@ -7,9 +7,9 @@ According to cmangos: byte value (UNIT_FIELD_BYTES_2,0)
 ### Wowm Representation
 ```rust,ignore
 enum SheathState : u8 {
-    UNARMED = 0;    
-    MELEE = 1;    
-    RANGED = 2;    
+    UNARMED = 0;
+    MELEE = 1;
+    RANGED = 2;
 }
 ```
 ### Type

@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_BUY_FAILED = 0x01A5 {
-    Guid guid;    
-    u32 item_id;    
-    BuyResult result;    
+    Guid guid;
+    u32 item_id;
+    BuyResult result;
 }
 ```
 ### Header

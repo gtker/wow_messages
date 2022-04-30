@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 msg MSG_MOVE_JUMP = 0x00BB {
-    MovementInfo info;    
+    MovementInfo info;
 }
 ```
 ### Header

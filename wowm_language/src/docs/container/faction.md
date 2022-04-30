@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 struct Faction {
-    u32 reputation_list_id;    
-    u32 standing;    
+    u32 reputation_list_id;
+    u32 standing;
 }
 ```
 ### Body

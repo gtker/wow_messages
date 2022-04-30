@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_GROUP_ASSISTANT_LEADER = 0x028F {
-    Guid guid;    
-    u8 set_assistant;    
+    Guid guid;
+    u8 set_assistant;
 }
 ```
 ### Header

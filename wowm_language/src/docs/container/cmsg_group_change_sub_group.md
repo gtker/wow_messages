@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_GROUP_CHANGE_SUB_GROUP = 0x027E {
-    CString name;    
-    u8 group_number;    
+    CString name;
+    u8 group_number;
 }
 ```
 ### Header

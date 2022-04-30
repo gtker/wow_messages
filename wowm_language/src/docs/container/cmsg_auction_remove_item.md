@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_AUCTION_REMOVE_ITEM = 0x0257 {
-    Guid auctioneer_guid;    
-    u32 auction_id;    
+    Guid auctioneer_guid;
+    u32 auction_id;
 }
 ```
 ### Header

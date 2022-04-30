@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 struct RaidInfo {
-    Map map;    
-    u32 reset_time;    
-    u32 instance_id;    
+    Map map;
+    u32 reset_time;
+    u32 instance_id;
 }
 ```
 ### Body

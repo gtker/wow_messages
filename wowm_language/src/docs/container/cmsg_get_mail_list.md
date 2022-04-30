@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_GET_MAIL_LIST = 0x023A {
-    Guid mailbox_guid;    
+    Guid mailbox_guid;
 }
 ```
 ### Header

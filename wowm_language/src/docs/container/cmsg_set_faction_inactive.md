@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_SET_FACTION_INACTIVE = 0x0317 {
-    u32 reputation_list_id;    
-    u8 inactive;    
+    u32 reputation_list_id;
+    u8 inactive;
 }
 ```
 ### Header

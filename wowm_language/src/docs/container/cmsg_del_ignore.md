@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_DEL_IGNORE = 0x006D {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

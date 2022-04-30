@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_MOVE_TIME_SKIPPED = 0x02CE {
-    Guid guid;    
-    u32 lag;    
+    Guid guid;
+    u32 lag;
 }
 ```
 ### Header

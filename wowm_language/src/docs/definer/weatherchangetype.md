@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum WeatherChangeType : u8 {
-    SMOOTH = 0;    
-    INSTANT = 1;    
+    SMOOTH = 0;
+    INSTANT = 1;
 }
 ```
 ### Type

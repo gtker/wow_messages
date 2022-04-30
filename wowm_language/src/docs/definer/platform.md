@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 enum Platform : u32 {
-    X86 = "\0x86";    
-    PPC = "\0PPC";    
-    OTHER = self.value    
+    X86 = "\0x86";
+    PPC = "\0PPC";
+    OTHER = self.value
 }
 ```
 ### Type

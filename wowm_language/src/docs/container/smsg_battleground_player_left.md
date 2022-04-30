@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_BATTLEGROUND_PLAYER_LEFT = 0x02ED {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

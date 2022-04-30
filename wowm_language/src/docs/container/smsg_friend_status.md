@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_FRIEND_STATUS = 0x0068 {
-    FriendResult result;    
-    Guid guid;    
+    FriendResult result;
+    Guid guid;
 }
 ```
 ### Header

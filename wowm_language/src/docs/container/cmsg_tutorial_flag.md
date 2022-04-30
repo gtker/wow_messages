@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_TUTORIAL_FLAG = 0x00FE {
-    u32 tutorial_flag;    
+    u32 tutorial_flag;
 }
 ```
 ### Header

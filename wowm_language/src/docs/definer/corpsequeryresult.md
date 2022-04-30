@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum CorpseQueryResult : u8 {
-    NOT_FOUND = 0;    
-    FOUND = 1;    
+    NOT_FOUND = 0;
+    FOUND = 1;
 }
 ```
 ### Type

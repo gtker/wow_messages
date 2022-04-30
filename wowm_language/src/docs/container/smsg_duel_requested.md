@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_DUEL_REQUESTED = 0x0167 {
-    Guid initiator_guid;    
-    Guid target_guid;    
+    Guid initiator_guid;
+    Guid target_guid;
 }
 ```
 ### Header

@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_ATTACKSWING = 0x0141 {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

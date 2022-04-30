@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_PARTY_COMMAND_RESULT = 0x007F {
-    PartyOperation operation;    
-    CString member;    
-    PartyResult result;    
+    PartyOperation operation;
+    CString member;
+    PartyResult result;
 }
 ```
 ### Header

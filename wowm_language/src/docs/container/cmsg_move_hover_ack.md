@@ -3,10 +3,10 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_MOVE_HOVER_ACK = 0x00F6 {
-    Guid guid;    
-    u32 counter;    
-    MovementInfo movement_info;    
-    u32 is_applied;    
+    Guid guid;
+    u32 counter;
+    MovementInfo movement_info;
+    u32 is_applied;
 }
 ```
 ### Header

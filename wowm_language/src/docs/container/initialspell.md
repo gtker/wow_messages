@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 struct InitialSpell {
-    u16 spell_id;    
-    u16 unknown1;    
+    u16 spell_id;
+    u16 unknown1;
 }
 ```
 ### Body

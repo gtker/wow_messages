@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_BUY_BANK_SLOT_RESULT = 0x01BA {
-    BuyBankSlotResult result;    
+    BuyBankSlotResult result;
 }
 ```
 ### Header

@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_DUEL_CANCELLED = 0x016D {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_GAMEOBJ_USE = 0x00B1 {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

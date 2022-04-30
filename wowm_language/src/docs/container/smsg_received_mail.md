@@ -7,7 +7,7 @@ cmangos/vmangos/mangoszero: deliver undelivered mail
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_RECEIVED_MAIL = 0x0285 {
-    u32 unknown1;    
+    u32 unknown1;
 }
 ```
 ### Header

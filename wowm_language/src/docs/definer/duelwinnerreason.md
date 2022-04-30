@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum DuelWinnerReason : u8 {
-    WON = 0;    
-    FLED = 1;    
+    WON = 0;
+    FLED = 1;
 }
 ```
 ### Type

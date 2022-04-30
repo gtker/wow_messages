@@ -3,10 +3,10 @@
 ### Wowm Representation
 ```rust,ignore
 enum BuyBankSlotResult : u32 {
-    FAILED_TOO_MANY = 0;    
-    INSUFFICIENT_FUNDS = 1;    
-    NOTBANKER = 2;    
-    OK = 3;    
+    FAILED_TOO_MANY = 0;
+    INSUFFICIENT_FUNDS = 1;
+    NOTBANKER = 2;
+    OK = 3;
 }
 ```
 ### Type

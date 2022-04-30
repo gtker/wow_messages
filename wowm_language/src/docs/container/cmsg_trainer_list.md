@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_TRAINER_LIST = 0x01B0 {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

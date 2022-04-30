@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_SUMMON_RESPONSE = 0x02AC {
-    Guid summoner_guid;    
+    Guid summoner_guid;
 }
 ```
 ### Header

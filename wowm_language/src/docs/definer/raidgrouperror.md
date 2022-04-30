@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum RaidGroupError : u32 {
-    REQUIRED = 1;    
-    FULL = 2;    
+    REQUIRED = 1;
+    FULL = 2;
 }
 ```
 ### Type

@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_ADD_IGNORE = 0x006C {
-    CString ignore_name;    
+    CString ignore_name;
 }
 ```
 ### Header

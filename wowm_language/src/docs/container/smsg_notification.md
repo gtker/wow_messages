@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_NOTIFICATION = 0x01CB {
-    CString notification;    
+    CString notification;
 }
 ```
 ### Header

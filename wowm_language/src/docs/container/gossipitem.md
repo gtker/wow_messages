@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 struct GossipItem {
-    u32 id;    
-    u8 item_icon;    
-    u8 coded;    
+    u32 id;
+    u8 item_icon;
+    u8 coded;
 }
 ```
 ### Body

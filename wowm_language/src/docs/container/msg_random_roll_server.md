@@ -3,10 +3,10 @@
 ### Wowm Representation
 ```rust,ignore
 smsg MSG_RANDOM_ROLL_Server = 0x01FB {
-    u32 minimum;    
-    u32 maximum;    
-    u32 actual_roll;    
-    Guid guid;    
+    u32 minimum;
+    u32 maximum;
+    u32 actual_roll;
+    Guid guid;
 }
 ```
 ### Header

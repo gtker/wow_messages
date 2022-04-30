@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 enum RollVote : u8 {
-    PASS = 0;    
-    NEED = 1;    
-    GREED = 2;    
+    PASS = 0;
+    NEED = 1;
+    GREED = 2;
 }
 ```
 ### Type

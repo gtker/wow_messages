@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_QUERY_TIME_RESPONSE = 0x01CF {
-    u32 time;    
+    u32 time;
 }
 ```
 ### Header

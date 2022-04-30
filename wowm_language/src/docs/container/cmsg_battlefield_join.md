@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_BATTLEFIELD_JOIN = 0x023E {
-    Map map;    
+    Map map;
 }
 ```
 ### Header

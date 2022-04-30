@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_MOVE_SET_HOVER = 0x00F4 {
-    PackedGuid guid;    
-    u32 counter;    
+    PackedGuid guid;
+    u32 counter;
 }
 ```
 ### Header

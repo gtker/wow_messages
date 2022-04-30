@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_MEETINGSTONE_MEMBER_ADDED = 0x0299 {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

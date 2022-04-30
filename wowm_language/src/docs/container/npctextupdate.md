@@ -3,10 +3,10 @@
 ### Wowm Representation
 ```rust,ignore
 struct NpcTextUpdate {
-    f32 probability;    
-    CString[2] texts;    
-    Language language;    
-    NpcTextUpdateEmote[3] emotes;    
+    f32 probability;
+    CString[2] texts;
+    Language language;
+    NpcTextUpdateEmote[3] emotes;
 }
 ```
 ### Body

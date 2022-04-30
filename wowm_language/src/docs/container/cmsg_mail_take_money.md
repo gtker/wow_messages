@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_MAIL_TAKE_MONEY = 0x0245 {
-    Guid mailbox_guid;    
-    u32 mail_id;    
+    Guid mailbox_guid;
+    u32 mail_id;
 }
 ```
 ### Header

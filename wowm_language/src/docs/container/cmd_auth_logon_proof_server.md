@@ -3,11 +3,11 @@
 ### Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
-    LoginResult login_result;    
-    if (login_result == SUCCESS) {        
-        u8[20] server_proof;        
-        u32 hardware_survey_id;        
-    }    
+    LoginResult login_result;
+    if (login_result == SUCCESS) {
+        u8[20] server_proof;
+        u32 hardware_survey_id;
+    }
 }
 ```
 ### Body
@@ -26,16 +26,16 @@ If login_result is equal to `SUCCESS`:
 ### Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
-    LoginResult login_result;    
-    if (login_result == SUCCESS) {        
-        u8[20] server_proof;        
-        AccountFlag account_flag;        
-        u32 hardware_survey_id;        
-        u16 unknown_flags;        
-    }    
-    else {    
-        u16 padding = 0;        
-    }    
+    LoginResult login_result;
+    if (login_result == SUCCESS) {
+        u8[20] server_proof;
+        AccountFlag account_flag;
+        u32 hardware_survey_id;
+        u16 unknown_flags;
+    }
+    else {
+        u16 padding = 0;
+    }
 }
 ```
 ### Body

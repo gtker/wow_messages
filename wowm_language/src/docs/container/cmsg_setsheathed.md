@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_SETSHEATHED = 0x01E0 {
-    SheathState sheathed;    
+    SheathState sheathed;
 }
 ```
 ### Header

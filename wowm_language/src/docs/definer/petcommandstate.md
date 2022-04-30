@@ -3,10 +3,10 @@
 ### Wowm Representation
 ```rust,ignore
 enum PetCommandState : u8 {
-    STAY = 0;    
-    FOLLOW = 1;    
-    ATTACK = 2;    
-    DISMISS = 3;    
+    STAY = 0;
+    FOLLOW = 1;
+    ATTACK = 2;
+    DISMISS = 3;
 }
 ```
 ### Type

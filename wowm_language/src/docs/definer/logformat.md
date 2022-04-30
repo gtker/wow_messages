@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum LogFormat : u8 {
-    DEFAULT = 0;    
-    DEBUG = 1;    
+    DEFAULT = 0;
+    DEBUG = 1;
 }
 ```
 ### Type

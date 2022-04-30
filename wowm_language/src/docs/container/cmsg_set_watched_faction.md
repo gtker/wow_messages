@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_SET_WATCHED_FACTION = 0x0318 {
-    u32 reputation_id;    
+    u32 reputation_id;
 }
 ```
 ### Header

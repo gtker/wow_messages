@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 msg MSG_MOVE_STOP_STRAFE = 0x00BA {
-    MovementInfo info;    
+    MovementInfo info;
 }
 ```
 ### Header

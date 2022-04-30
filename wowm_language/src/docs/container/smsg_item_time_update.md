@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_ITEM_TIME_UPDATE = 0x01EA {
-    Guid guid;    
-    u32 duration;    
+    Guid guid;
+    u32 duration;
 }
 ```
 ### Header

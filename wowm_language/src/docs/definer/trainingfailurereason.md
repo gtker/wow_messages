@@ -7,9 +7,9 @@ These errors are only printed in client console.
 ### Wowm Representation
 ```rust,ignore
 enum TrainingFailureReason : u32 {
-    UNAVAILABLE = 0;    
-    NOT_ENOUGH_MONEY = 1;    
-    NOT_ENOUGH_SKILL = 2;    
+    UNAVAILABLE = 0;
+    NOT_ENOUGH_MONEY = 1;
+    NOT_ENOUGH_SKILL = 2;
 }
 ```
 ### Type

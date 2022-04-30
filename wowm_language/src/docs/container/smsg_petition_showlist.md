@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_PETITION_SHOWLIST = 0x01BC {
-    Guid npc;    
-    u8 amount_of_petitions;    
-    PetitionShowlist[amount_of_petitions] petitions;    
+    Guid npc;
+    u8 amount_of_petitions;
+    PetitionShowlist[amount_of_petitions] petitions;
 }
 ```
 ### Header

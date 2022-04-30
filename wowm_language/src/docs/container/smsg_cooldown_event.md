@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_COOLDOWN_EVENT = 0x0135 {
-    u32 id;    
-    Guid guid;    
+    u32 id;
+    Guid guid;
 }
 ```
 ### Header

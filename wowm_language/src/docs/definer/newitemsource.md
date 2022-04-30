@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum NewItemSource : u32 {
-    LOOTED = 0;    
-    FROM_NPC = 1;    
+    LOOTED = 0;
+    FROM_NPC = 1;
 }
 ```
 ### Type

@@ -3,10 +3,10 @@
 ### Wowm Representation
 ```rust,ignore
 enum RealmType : u32 {
-    PLAYER_VS_ENVIRONMENT = 0;    
-    PLAYER_VS_PLAYER = 1;    
-    ROLEPLAYING = 6;    
-    ROLEPLAYING_PLAYER_VS_PLAYER = 8;    
+    PLAYER_VS_ENVIRONMENT = 0;
+    PLAYER_VS_PLAYER = 1;
+    ROLEPLAYING = 6;
+    ROLEPLAYING_PLAYER_VS_PLAYER = 8;
 }
 ```
 ### Type

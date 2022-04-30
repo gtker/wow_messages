@@ -20,6 +20,8 @@ impl WowmWriter {
     }
 
     pub fn w(&mut self, s: impl AsRef<str>) {
+        self.inner.write_str(self.prefix.as_str()).unwrap();
+
         for _ in 0..self.indentation {
             self.inner.write_str(Writer::INDENTATION).unwrap();
         }
@@ -28,7 +30,7 @@ impl WowmWriter {
     }
 
     pub fn newline(&mut self) {
-        self.w("\n");
+        self.inner.write_str("\n").unwrap();
     }
 
     pub fn wln(&mut self, s: impl AsRef<str>) {

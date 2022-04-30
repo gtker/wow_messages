@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_DUEL_COUNTDOWN = 0x02B7 {
-    u32 time_in_seconds;    
+    u32 time_in_seconds;
 }
 ```
 ### Header

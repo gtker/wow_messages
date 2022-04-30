@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum GroupType : u8 {
-    NORMAL = 0;    
-    RAID = 1;    
+    NORMAL = 0;
+    RAID = 1;
 }
 ```
 ### Type

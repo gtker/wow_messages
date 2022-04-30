@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_INITIATE_TRADE = 0x0116 {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

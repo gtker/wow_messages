@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_SPELL_COOLDOWN = 0x0134 {
-    Guid guid;    
-    SpellCooldownStatus[-] cooldowns;    
+    Guid guid;
+    SpellCooldownStatus[-] cooldowns;
 }
 ```
 ### Header

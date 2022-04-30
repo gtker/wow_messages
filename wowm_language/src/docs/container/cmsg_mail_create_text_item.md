@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_MAIL_CREATE_TEXT_ITEM = 0x024A {
-    Guid mailbox_guid;    
-    u32 mail_id;    
-    u32 mail_template_id;    
+    Guid mailbox_guid;
+    u32 mail_id;
+    u32 mail_template_id;
 }
 ```
 ### Header

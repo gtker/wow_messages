@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_SPLINE_SET_TURN_RATE = 0x0303 {
-    PackedGuid guid;    
-    f32 speed;    
+    PackedGuid guid;
+    f32 speed;
 }
 ```
 ### Header

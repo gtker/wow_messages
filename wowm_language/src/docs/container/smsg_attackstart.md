@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_ATTACKSTART = 0x0143 {
-    Guid attacker_guid;    
-    Guid victim_guid;    
+    Guid attacker_guid;
+    Guid victim_guid;
 }
 ```
 ### Header

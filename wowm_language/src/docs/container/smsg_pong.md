@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_PONG = 0x01DD {
-    u32 sequence_id;    
+    u32 sequence_id;
 }
 ```
 ### Header

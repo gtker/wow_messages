@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_DISMOUNTRESULT = 0x016F {
-    MountResult result;    
+    MountResult result;
 }
 ```
 ### Header

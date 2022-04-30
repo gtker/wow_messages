@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 clogin CMD_REALM_LIST_Client = 0x10 {
-    u32 padding = 0;    
+    u32 padding = 0;
 }
 ```
 ### Body

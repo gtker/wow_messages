@@ -3,10 +3,10 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_PROCRESIST = 0x0260 {
-    Guid guid;    
-    Guid target_guid;    
-    u32 id;    
-    LogFormat log_format;    
+    Guid guid;
+    Guid target_guid;
+    u32 id;
+    LogFormat log_format;
 }
 ```
 ### Header

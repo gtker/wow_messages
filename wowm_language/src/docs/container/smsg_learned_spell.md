@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_LEARNED_SPELL = 0x012B {
-    u32 id;    
+    u32 id;
 }
 ```
 ### Header

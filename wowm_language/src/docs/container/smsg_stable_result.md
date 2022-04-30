@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_STABLE_RESULT = 0x0273 {
-    StableResult result;    
+    StableResult result;
 }
 ```
 ### Header

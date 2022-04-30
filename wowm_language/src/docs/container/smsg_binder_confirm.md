@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_BINDER_CONFIRM = 0x02EB {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

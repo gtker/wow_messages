@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_SET_AMMO = 0x0268 {
-    u32 item;    
+    u32 item;
 }
 ```
 ### Header

@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_CHANNEL_MODERATOR = 0x009F {
-    CString channel_name;    
-    CString player_name;    
+    CString channel_name;
+    CString player_name;
 }
 ```
 ### Header

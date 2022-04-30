@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_TAXINODE_STATUS = 0x01AB {
-    Guid guid;    
-    u8 taxi_mask_node_known;    
+    Guid guid;
+    u8 taxi_mask_node_known;
 }
 ```
 ### Header

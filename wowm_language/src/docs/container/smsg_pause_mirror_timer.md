@@ -7,8 +7,8 @@ According to cmangos: 'Default UI handler for this is bugged, args dont match. G
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_PAUSE_MIRROR_TIMER = 0x01DA {
-    TimerType timer;    
-    u8 is_frozen;    
+    TimerType timer;
+    u8 is_frozen;
 }
 ```
 ### Header

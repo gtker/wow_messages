@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 enum PetReactState : u8 {
-    PASSIVE = 0;    
-    DEFENSIVE = 1;    
-    AGGRESSIVE = 2;    
+    PASSIVE = 0;
+    DEFENSIVE = 1;
+    AGGRESSIVE = 2;
 }
 ```
 ### Type

@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_GROUP_UNINVITE = 0x0075 {
-    CString name;    
+    CString name;
 }
 ```
 ### Header

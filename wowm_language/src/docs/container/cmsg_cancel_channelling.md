@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_CANCEL_CHANNELLING = 0x013B {
-    u32 id;    
+    u32 id;
 }
 ```
 ### Header

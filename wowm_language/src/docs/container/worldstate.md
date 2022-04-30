@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 struct WorldState {
-    u32 state;    
-    u32 value;    
+    u32 state;
+    u32 value;
 }
 ```
 ### Body

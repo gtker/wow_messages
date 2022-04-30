@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 msg MSG_MOVE_HEARTBEAT = 0x00EE {
-    MovementInfo info;    
+    MovementInfo info;
 }
 ```
 ### Header

@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 enum SimpleSpellCastResult : u8 {
-    SUCCESS = 0;    
-    FAILURE = 2;    
+    SUCCESS = 0;
+    FAILURE = 2;
 }
 ```
 ### Type

@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_GMTICKET_UPDATETEXT = 0x0207 {
-    CString message;    
+    CString message;
 }
 ```
 ### Header

@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 struct GroupListMember {
-    CString name;    
-    Guid guid;    
-    u8 is_online;    
+    CString name;
+    Guid guid;
+    u8 is_online;
 }
 ```
 ### Body

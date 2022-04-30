@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_UPDATE_LAST_INSTANCE = 0x0320 {
-    Map map;    
+    Map map;
 }
 ```
 ### Header

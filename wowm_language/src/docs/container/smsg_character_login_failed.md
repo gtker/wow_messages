@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_CHARACTER_LOGIN_FAILED = 0x0041 {
-    WorldResult result;    
+    WorldResult result;
 }
 ```
 ### Header

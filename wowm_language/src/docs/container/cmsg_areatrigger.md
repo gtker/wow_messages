@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_AREATRIGGER = 0x00B4 {
-    u32 trigger_id;    
+    u32 trigger_id;
 }
 ```
 ### Header

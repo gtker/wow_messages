@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_OFFER_PETITION = 0x01C3 {
-    Guid petition_guid;    
-    Guid target_guid;    
+    Guid petition_guid;
+    Guid target_guid;
 }
 ```
 ### Header

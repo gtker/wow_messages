@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_EMOTE = 0x0103 {
-    Emote emote;    
-    Guid guid;    
+    Emote emote;
+    Guid guid;
 }
 ```
 ### Header

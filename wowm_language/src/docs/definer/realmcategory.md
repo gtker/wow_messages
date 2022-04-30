@@ -3,11 +3,11 @@
 ### Wowm Representation
 ```rust,ignore
 enum RealmCategory : u8 {
-    DEFAULT = 0x0;    
-    ONE = 0x1;    
-    TWO = 0x2;    
-    THREE = 0x3;    
-    FIVE = 0x5;    
+    DEFAULT = 0x0;
+    ONE = 0x1;
+    TWO = 0x2;
+    THREE = 0x3;
+    FIVE = 0x5;
 }
 ```
 ### Type

@@ -3,8 +3,8 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_PET_ACTION_SOUND = 0x0324 {
-    Guid guid;    
-    PetTalkReason reason;    
+    Guid guid;
+    PetTalkReason reason;
 }
 ```
 ### Header

@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_GMTICKET_CREATE = 0x0206 {
-    GmTicketResponse response;    
+    GmTicketResponse response;
 }
 ```
 ### Header

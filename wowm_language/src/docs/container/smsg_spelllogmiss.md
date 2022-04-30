@@ -3,11 +3,11 @@
 ### Wowm Representation
 ```rust,ignore
 smsg SMSG_SPELLLOGMISS = 0x024B {
-    u32 id;    
-    Guid caster_guid;    
-    u8 unknown1;    
-    u32 amount_of_targets;    
-    SpellMiss[amount_of_targets] targets;    
+    u32 id;
+    Guid caster_guid;
+    u8 unknown1;
+    u32 amount_of_targets;
+    SpellMiss[amount_of_targets] targets;
 }
 ```
 ### Header

@@ -3,9 +3,9 @@
 ### Wowm Representation
 ```rust,ignore
 enum TrainerSpellState : u8 {
-    GREEN = 0;    
-    RED = 1;    
-    GRAY = 2;    
+    GREEN = 0;
+    RED = 1;
+    GRAY = 2;
 }
 ```
 ### Type

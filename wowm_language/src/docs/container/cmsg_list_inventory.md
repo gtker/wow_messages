@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_LIST_INVENTORY = 0x019E {
-    Guid guid;    
+    Guid guid;
 }
 ```
 ### Header

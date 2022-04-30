@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 clogin CMD_XFER_RESUME = 0x33 {
-    u64 offset;    
+    u64 offset;
 }
 ```
 ### Body
