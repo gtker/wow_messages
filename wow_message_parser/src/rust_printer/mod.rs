@@ -314,15 +314,17 @@ impl Writer {
 
     pub fn async_funcn_pub<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self, ImplType)>(
         &mut self,
-        name_and_args_sync: S,
-        name_and_args_tokio: S,
-        name_and_args_astd: S,
+        name: impl AsRef<str>,
+        args_sync: S,
+        args_tokio: S,
+        args_astd: S,
         return_type: S1,
         f: F,
     ) {
         self.open_curly(format!(
-            "pub fn {} -> {}",
-            name_and_args_sync.as_ref(),
+            "pub fn {}{} -> {}",
+            name.as_ref(),
+            args_sync.as_ref(),
             return_type.as_ref()
         ));
 
@@ -332,9 +334,11 @@ impl Writer {
 
         self.wln(CFG_ASYNC_TOKIO);
         self.open_curly(format!(
-            "pub async fn {} -> {}",
-            name_and_args_tokio.as_ref(),
-            return_type.as_ref()
+            "pub async fn {prefix}{name}{args} -> {return_value}",
+            prefix = ImplType::Tokio.prefix(),
+            name = name.as_ref(),
+            args = args_tokio.as_ref(),
+            return_value = return_type.as_ref()
         ));
 
         f(self, ImplType::Tokio);
@@ -343,9 +347,11 @@ impl Writer {
 
         self.wln(CFG_ASYNC_ASYNC_STD);
         self.open_curly(format!(
-            "pub async fn {} -> {}",
-            name_and_args_astd.as_ref(),
-            return_type.as_ref()
+            "pub async fn {prefix}{name}{args} -> {return_value}",
+            prefix = ImplType::AsyncStd.prefix(),
+            name = name.as_ref(),
+            args = args_astd.as_ref(),
+            return_value = return_type.as_ref()
         ));
 
         f(self, ImplType::AsyncStd);

@@ -147,20 +147,13 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
 
         s.async_funcn_pub(
             format!(
-                "read_{ty}_{endian}<R: std::io::Read>(r: &mut R)",
+                "read_{ty}_{endian}",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str(),
             ),
-            format!(
-                "tokio_read_{ty}_{endian}<R: AsyncReadExt + Unpin + Send>(r: &mut R)",
-                ty = t.rust_str(),
-                endian = t.rust_endian_str()
-            ),
-            format!(
-                "astd_read_{ty}_{endian}<R: ReadExt + Unpin + Send>(r: &mut R)",
-                ty = t.rust_str(),
-                endian = t.rust_endian_str()
-            ),
+            "<R: std::io::Read>(r: &mut R)",
+            "<R: AsyncReadExt + Unpin + Send>(r: &mut R)",
+            "<R: ReadExt + Unpin + Send>(r: &mut R)",
             &return_type,
             |s, it| {
                 s.wln(format!(
@@ -185,20 +178,13 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
         let return_type = "std::result::Result<(), std::io::Error>";
         s.async_funcn_pub(
             format!(
-                "write_{ty}_{endian}<W: std::io::Write>(&self, w: &mut W)",
+                "write_{ty}_{endian}",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
             ),
-            format!(
-                "tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
-                ty = t.rust_str(),
-                endian = t.rust_endian_str()
-            ),
-            format!(
-                "astd_write_{ty}_{endian}<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
-                ty = t.rust_str(),
-                endian = t.rust_endian_str()
-            ),
+            "<W: std::io::Write>(&self, w: &mut W)",
+            "<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
+            "<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
             &return_type,
             |s, it| {
                 s.wln(format!(
