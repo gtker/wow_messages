@@ -30,3 +30,7 @@ version = "1.11"
 optional = true
 default-features = false
 features = ["async-io", "std"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
