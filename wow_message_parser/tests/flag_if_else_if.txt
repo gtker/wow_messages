@@ -103,8 +103,9 @@ impl ReadableAndWritable for FlagIfElseIf {
 #[async_trait]
 impl AsyncReadWrite for FlagIfElseIf {
     type Error = std::io::Error;
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // flags: UpdateFlag
         let flags = UpdateFlag::tokio_read(r).await?;
 
@@ -168,8 +169,9 @@ impl AsyncReadWrite for FlagIfElseIf {
             flags,
         })
     }
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // flags: UpdateFlag
         self.flags.tokio_write(w).await?;
 
@@ -183,7 +185,9 @@ impl AsyncReadWrite for FlagIfElseIf {
 
         Ok(())
     }
+
 }
+
 impl VariableSized for FlagIfElseIf {
     fn size(&self) -> usize {
         self.flags.size() // flags: UpdateFlag and subfields

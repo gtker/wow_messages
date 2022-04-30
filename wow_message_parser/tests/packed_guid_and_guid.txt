@@ -112,8 +112,9 @@ impl ReadableAndWritable for PackedGuidAndGuid {
 #[async_trait]
 impl AsyncReadWrite for PackedGuidAndGuid {
     type Error = std::io::Error;
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // packed: PackedGuid
         let packed = Guid::tokio_read_packed(r).await?;
 
@@ -161,8 +162,9 @@ impl AsyncReadWrite for PackedGuidAndGuid {
             variable_guid,
         })
     }
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // packed: PackedGuid
         self.packed.tokio_write_packed(w).await?;
 
@@ -197,7 +199,9 @@ impl AsyncReadWrite for PackedGuidAndGuid {
 
         Ok(())
     }
+
 }
+
 impl VariableSized for PackedGuidAndGuid {
     fn size(&self) -> usize {
         self.packed.size() // packed: PackedGuid

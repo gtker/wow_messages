@@ -200,8 +200,9 @@ impl ReadableAndWritable for Arrays {
 #[async_trait]
 impl AsyncReadWrite for Arrays {
     type Error = ArraysError;
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // index: u8
         let index = crate::util::tokio_read_u8_le(r).await?;
 
@@ -298,8 +299,9 @@ impl AsyncReadWrite for Arrays {
             variable_cstring_array,
         })
     }
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // index: u8
         w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes()).await?;
 
@@ -367,7 +369,9 @@ impl AsyncReadWrite for Arrays {
 
         Ok(())
     }
+
 }
+
 impl VariableSized for Arrays {
     fn size(&self) -> usize {
         1 // index: u8

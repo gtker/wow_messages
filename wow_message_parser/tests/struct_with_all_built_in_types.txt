@@ -131,8 +131,9 @@ impl ReadableAndWritable for StructWithAllBuiltInTypes {
 #[async_trait]
 impl AsyncReadWrite for StructWithAllBuiltInTypes {
     type Error = StructWithAllBuiltInTypesError;
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // basic8: u8
         let basic8 = crate::util::tokio_read_u8_le(r).await?;
 
@@ -185,8 +186,9 @@ impl AsyncReadWrite for StructWithAllBuiltInTypes {
             simple_string,
         })
     }
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // basic8: u8
         w.write_all(&(self.simple_string.len() as u8).to_le_bytes()).await?;
 
@@ -230,7 +232,9 @@ impl AsyncReadWrite for StructWithAllBuiltInTypes {
 
         Ok(())
     }
+
 }
+
 impl VariableSized for StructWithAllBuiltInTypes {
     fn size(&self) -> usize {
         1 // basic8: u8

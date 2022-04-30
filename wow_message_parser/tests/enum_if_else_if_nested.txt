@@ -130,8 +130,9 @@ impl ReadableAndWritable for EnumIfElseIfNested {
 #[async_trait]
 impl AsyncReadWrite for EnumIfElseIfNested {
     type Error = EnumIfElseIfNestedError;
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // e: SimpleEnum
         let e = SimpleEnum::tokio_read(r).await?;
 
@@ -188,8 +189,9 @@ impl AsyncReadWrite for EnumIfElseIfNested {
             n: n_if,
         })
     }
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // e: SimpleEnum
         self.e.tokio_write(w).await?;
 
@@ -236,7 +238,9 @@ impl AsyncReadWrite for EnumIfElseIfNested {
 
         Ok(())
     }
+
 }
+
 impl VariableSized for EnumIfElseIfNested {
     fn size(&self) -> usize {
         self.e.size() // e: SimpleEnum and subfields

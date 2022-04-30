@@ -164,8 +164,9 @@ impl ReadableAndWritable for IfEdgeCases {
 #[async_trait]
 impl AsyncReadWrite for IfEdgeCases {
     type Error = IfEdgeCasesError;
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // t: TEnum
         let t = TEnum::tokio_read(r).await?;
 
@@ -240,8 +241,9 @@ impl AsyncReadWrite for IfEdgeCases {
             t: t_if,
         })
     }
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // t: TEnum
         self.t.tokio_write(w).await?;
 
@@ -306,7 +308,9 @@ impl AsyncReadWrite for IfEdgeCases {
 
         Ok(())
     }
+
 }
+
 impl VariableSized for IfEdgeCases {
     fn size(&self) -> usize {
         self.t.size() // t: TEnum and subfields

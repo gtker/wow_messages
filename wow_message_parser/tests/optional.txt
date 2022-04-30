@@ -38,8 +38,9 @@ impl ReadableAndWritable for Optional {
 #[async_trait]
 impl AsyncReadWrite for Optional {
     type Error = std::io::Error;
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // basic: u8
         let basic = crate::util::tokio_read_u8_le(r).await?;
 
@@ -47,14 +48,17 @@ impl AsyncReadWrite for Optional {
             basic,
         })
     }
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // basic: u8
         w.write_all(&self.basic.to_le_bytes()).await?;
 
         Ok(())
     }
+
 }
+
 impl ConstantSized for Optional {
     fn size() -> usize {
         Self::maximum_possible_size()

@@ -89,8 +89,9 @@ impl ReadableAndWritable for SimpleIfEnumIfElse {
 #[async_trait]
 impl AsyncReadWrite for SimpleIfEnumIfElse {
     type Error = SimpleIfEnumIfElseError;
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // enum: SimpleEnum
         let enum = SimpleEnum::tokio_read(r).await?;
 
@@ -125,8 +126,9 @@ impl AsyncReadWrite for SimpleIfEnumIfElse {
             enum: enum_if,
         })
     }
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // enum: SimpleEnum
         self.enum.tokio_write(w).await?;
 
@@ -156,7 +158,9 @@ impl AsyncReadWrite for SimpleIfEnumIfElse {
 
         Ok(())
     }
+
 }
+
 impl VariableSized for SimpleIfEnumIfElse {
     fn size(&self) -> usize {
         self.enum.size() // enum: SimpleEnum and subfields

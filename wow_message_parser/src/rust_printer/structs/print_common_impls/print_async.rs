@@ -2,24 +2,18 @@ use crate::container::Container;
 use crate::parser::types::objects::Objects;
 use crate::rust_printer::structs::print_common_impls::print_read::print_read;
 use crate::rust_printer::structs::print_common_impls::print_write::print_write;
-use crate::rust_printer::{ImplType, ASYNC_TRAIT_MACRO, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO};
-use crate::rust_printer::{Writer, ASYNC_TRAIT};
+use crate::rust_printer::ImplType;
+use crate::rust_printer::Writer;
 
 pub fn print_async(s: &mut Writer, e: &Container, o: &Objects, error_ty: &str) {
-    s.wln(CFG_ASYNC_ANY);
-    s.wln(ASYNC_TRAIT_MACRO);
-    s.body(format!("impl {async_trait} for {name}", async_trait = ASYNC_TRAIT, name = e.name()), |s| {
-        s.wln(format!("type Error = {};", error_ty));
-
-        s.wln(CFG_ASYNC_TOKIO);
-        s.body("async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>", |s| {
+    s.impl_async_read_and_writable_with_error(
+        e.name(),
+        error_ty,
+        |s| {
             print_read(s, e, o, ImplType::Tokio.prefix(), ImplType::Tokio.postfix());
-        });
-
-        s.wln(CFG_ASYNC_TOKIO);
-        s.body("async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error>", |s| {
+        },
+        |s| {
             print_write(s, e, o, ImplType::Tokio.prefix(), ImplType::Tokio.postfix());
-        });
-
-    });
+        },
+    );
 }

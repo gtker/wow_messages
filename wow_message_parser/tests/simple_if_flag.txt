@@ -58,8 +58,9 @@ impl ReadableAndWritable for SimpleIfFlag {
 #[async_trait]
 impl AsyncReadWrite for SimpleIfFlag {
     type Error = std::io::Error;
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // flag: SimpleFlag
         let flag = SimpleFlag::tokio_read(r).await?;
 
@@ -83,8 +84,9 @@ impl AsyncReadWrite for SimpleIfFlag {
             flag,
         })
     }
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // flag: SimpleFlag
         self.flag.tokio_write(w).await?;
 
@@ -94,7 +96,9 @@ impl AsyncReadWrite for SimpleIfFlag {
 
         Ok(())
     }
+
 }
+
 impl VariableSized for SimpleIfFlag {
     fn size(&self) -> usize {
         self.flag.size() // flag: SimpleFlag and subfields
