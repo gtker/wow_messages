@@ -313,7 +313,7 @@ use crate::world::v1::v12::MSG_RAID_READY_CHECK_Client;
 use crate::world::v1::v12::{CMSG_GMSURVEY_SUBMIT, CMSG_GMSURVEY_SUBMITError};
 
 #[derive(Debug)]
-pub enum WorldClientOpcode {
+pub enum ClientOpcode {
     MSG_MOVE_START_FORWARD,
     MSG_MOVE_START_BACKWARD,
     MSG_MOVE_STOP,
@@ -616,7 +616,7 @@ pub enum WorldClientOpcode {
     CMSG_GMSURVEY_SUBMIT,
 }
 
-impl WorldClientOpcode {
+impl ClientOpcode {
     pub const fn as_u32(&self) -> u32 {
         match self {
             Self::MSG_MOVE_START_FORWARD => 0xb5,
@@ -924,8 +924,8 @@ impl WorldClientOpcode {
 
 }
 
-impl WorldClientOpcode {
-    pub fn new(opcode: u32) -> std::result::Result<Self, WorldClientOpcodeError> {
+impl ClientOpcode {
+    pub fn new(opcode: u32) -> std::result::Result<Self, ClientOpcodeError> {
         match opcode {
             0xb5 => Ok(Self::MSG_MOVE_START_FORWARD),
             0xb6 => Ok(Self::MSG_MOVE_START_BACKWARD),
@@ -1227,345 +1227,345 @@ impl WorldClientOpcode {
             0x321 => Ok(Self::MSG_RAID_TARGET_UPDATE),
             0x322 => Ok(Self::MSG_RAID_READY_CHECK),
             0x32a => Ok(Self::CMSG_GMSURVEY_SUBMIT),
-            opcode => Err(WorldClientOpcodeError::InvalidOpcode(opcode)),
+            opcode => Err(ClientOpcodeError::InvalidOpcode(opcode)),
         }
     }
 
 }
 
-impl From<&WorldClientOpcodeMessage> for WorldClientOpcode {
-    fn from(e: &WorldClientOpcodeMessage) -> Self {
+impl From<&ClientOpcodeMessage> for ClientOpcode {
+    fn from(e: &ClientOpcodeMessage) -> Self {
         match *e {
-            WorldClientOpcodeMessage::MSG_MOVE_START_FORWARD(_) => Self::MSG_MOVE_START_FORWARD,
-            WorldClientOpcodeMessage::MSG_MOVE_START_BACKWARD(_) => Self::MSG_MOVE_START_BACKWARD,
-            WorldClientOpcodeMessage::MSG_MOVE_STOP(_) => Self::MSG_MOVE_STOP,
-            WorldClientOpcodeMessage::MSG_MOVE_START_STRAFE_LEFT(_) => Self::MSG_MOVE_START_STRAFE_LEFT,
-            WorldClientOpcodeMessage::MSG_MOVE_START_STRAFE_RIGHT(_) => Self::MSG_MOVE_START_STRAFE_RIGHT,
-            WorldClientOpcodeMessage::MSG_MOVE_STOP_STRAFE(_) => Self::MSG_MOVE_STOP_STRAFE,
-            WorldClientOpcodeMessage::MSG_MOVE_JUMP(_) => Self::MSG_MOVE_JUMP,
-            WorldClientOpcodeMessage::MSG_MOVE_START_TURN_LEFT(_) => Self::MSG_MOVE_START_TURN_LEFT,
-            WorldClientOpcodeMessage::MSG_MOVE_START_TURN_RIGHT(_) => Self::MSG_MOVE_START_TURN_RIGHT,
-            WorldClientOpcodeMessage::MSG_MOVE_STOP_TURN(_) => Self::MSG_MOVE_STOP_TURN,
-            WorldClientOpcodeMessage::MSG_MOVE_START_PITCH_UP(_) => Self::MSG_MOVE_START_PITCH_UP,
-            WorldClientOpcodeMessage::MSG_MOVE_START_PITCH_DOWN(_) => Self::MSG_MOVE_START_PITCH_DOWN,
-            WorldClientOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => Self::MSG_MOVE_STOP_PITCH,
-            WorldClientOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => Self::MSG_MOVE_SET_RUN_MODE,
-            WorldClientOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => Self::MSG_MOVE_SET_WALK_MODE,
-            WorldClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => Self::MSG_MOVE_TELEPORT_ACK,
-            WorldClientOpcodeMessage::MSG_MOVE_FALL_LAND(_) => Self::MSG_MOVE_FALL_LAND,
-            WorldClientOpcodeMessage::MSG_MOVE_START_SWIM(_) => Self::MSG_MOVE_START_SWIM,
-            WorldClientOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => Self::MSG_MOVE_STOP_SWIM,
-            WorldClientOpcodeMessage::MSG_MOVE_SET_FACING(_) => Self::MSG_MOVE_SET_FACING,
-            WorldClientOpcodeMessage::MSG_MOVE_SET_PITCH(_) => Self::MSG_MOVE_SET_PITCH,
-            WorldClientOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => Self::MSG_MOVE_WORLDPORT_ACK,
-            WorldClientOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => Self::MSG_MOVE_HEARTBEAT,
-            WorldClientOpcodeMessage::MSG_PETITION_DECLINE(_) => Self::MSG_PETITION_DECLINE,
-            WorldClientOpcodeMessage::MSG_TABARDVENDOR_ACTIVATE(_) => Self::MSG_TABARDVENDOR_ACTIVATE,
-            WorldClientOpcodeMessage::MSG_QUEST_PUSH_RESULT(_) => Self::MSG_QUEST_PUSH_RESULT,
-            WorldClientOpcodeMessage::MSG_PETITION_RENAME(_) => Self::MSG_PETITION_RENAME,
-            WorldClientOpcodeMessage::CMSG_WORLD_TELEPORT(_) => Self::CMSG_WORLD_TELEPORT,
-            WorldClientOpcodeMessage::CMSG_CHAR_CREATE(_) => Self::CMSG_CHAR_CREATE,
-            WorldClientOpcodeMessage::CMSG_CHAR_ENUM(_) => Self::CMSG_CHAR_ENUM,
-            WorldClientOpcodeMessage::CMSG_CHAR_DELETE(_) => Self::CMSG_CHAR_DELETE,
-            WorldClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => Self::CMSG_PLAYER_LOGIN,
-            WorldClientOpcodeMessage::CMSG_PLAYER_LOGOUT(_) => Self::CMSG_PLAYER_LOGOUT,
-            WorldClientOpcodeMessage::CMSG_LOGOUT_REQUEST(_) => Self::CMSG_LOGOUT_REQUEST,
-            WorldClientOpcodeMessage::CMSG_LOGOUT_CANCEL(_) => Self::CMSG_LOGOUT_CANCEL,
-            WorldClientOpcodeMessage::CMSG_NAME_QUERY(_) => Self::CMSG_NAME_QUERY,
-            WorldClientOpcodeMessage::CMSG_PET_NAME_QUERY(_) => Self::CMSG_PET_NAME_QUERY,
-            WorldClientOpcodeMessage::CMSG_GUILD_QUERY(_) => Self::CMSG_GUILD_QUERY,
-            WorldClientOpcodeMessage::CMSG_ITEM_QUERY_SINGLE(_) => Self::CMSG_ITEM_QUERY_SINGLE,
-            WorldClientOpcodeMessage::CMSG_PAGE_TEXT_QUERY(_) => Self::CMSG_PAGE_TEXT_QUERY,
-            WorldClientOpcodeMessage::CMSG_QUEST_QUERY(_) => Self::CMSG_QUEST_QUERY,
-            WorldClientOpcodeMessage::CMSG_GAMEOBJECT_QUERY(_) => Self::CMSG_GAMEOBJECT_QUERY,
-            WorldClientOpcodeMessage::CMSG_CREATURE_QUERY(_) => Self::CMSG_CREATURE_QUERY,
-            WorldClientOpcodeMessage::CMSG_WHO(_) => Self::CMSG_WHO,
-            WorldClientOpcodeMessage::CMSG_WHOIS(_) => Self::CMSG_WHOIS,
-            WorldClientOpcodeMessage::CMSG_FRIEND_LIST(_) => Self::CMSG_FRIEND_LIST,
-            WorldClientOpcodeMessage::CMSG_ADD_FRIEND(_) => Self::CMSG_ADD_FRIEND,
-            WorldClientOpcodeMessage::CMSG_DEL_FRIEND(_) => Self::CMSG_DEL_FRIEND,
-            WorldClientOpcodeMessage::CMSG_ADD_IGNORE(_) => Self::CMSG_ADD_IGNORE,
-            WorldClientOpcodeMessage::CMSG_DEL_IGNORE(_) => Self::CMSG_DEL_IGNORE,
-            WorldClientOpcodeMessage::CMSG_GROUP_INVITE(_) => Self::CMSG_GROUP_INVITE,
-            WorldClientOpcodeMessage::CMSG_GROUP_ACCEPT(_) => Self::CMSG_GROUP_ACCEPT,
-            WorldClientOpcodeMessage::CMSG_GROUP_DECLINE(_) => Self::CMSG_GROUP_DECLINE,
-            WorldClientOpcodeMessage::CMSG_GROUP_UNINVITE(_) => Self::CMSG_GROUP_UNINVITE,
-            WorldClientOpcodeMessage::CMSG_GROUP_UNINVITE_GUID(_) => Self::CMSG_GROUP_UNINVITE_GUID,
-            WorldClientOpcodeMessage::CMSG_GROUP_SET_LEADER(_) => Self::CMSG_GROUP_SET_LEADER,
-            WorldClientOpcodeMessage::CMSG_LOOT_METHOD(_) => Self::CMSG_LOOT_METHOD,
-            WorldClientOpcodeMessage::CMSG_GROUP_DISBAND(_) => Self::CMSG_GROUP_DISBAND,
-            WorldClientOpcodeMessage::CMSG_GUILD_CREATE(_) => Self::CMSG_GUILD_CREATE,
-            WorldClientOpcodeMessage::CMSG_GUILD_INVITE(_) => Self::CMSG_GUILD_INVITE,
-            WorldClientOpcodeMessage::CMSG_GUILD_ACCEPT(_) => Self::CMSG_GUILD_ACCEPT,
-            WorldClientOpcodeMessage::CMSG_GUILD_DECLINE(_) => Self::CMSG_GUILD_DECLINE,
-            WorldClientOpcodeMessage::CMSG_GUILD_INFO(_) => Self::CMSG_GUILD_INFO,
-            WorldClientOpcodeMessage::CMSG_GUILD_ROSTER(_) => Self::CMSG_GUILD_ROSTER,
-            WorldClientOpcodeMessage::CMSG_GUILD_PROMOTE(_) => Self::CMSG_GUILD_PROMOTE,
-            WorldClientOpcodeMessage::CMSG_GUILD_DEMOTE(_) => Self::CMSG_GUILD_DEMOTE,
-            WorldClientOpcodeMessage::CMSG_GUILD_LEAVE(_) => Self::CMSG_GUILD_LEAVE,
-            WorldClientOpcodeMessage::CMSG_GUILD_REMOVE(_) => Self::CMSG_GUILD_REMOVE,
-            WorldClientOpcodeMessage::CMSG_GUILD_DISBAND(_) => Self::CMSG_GUILD_DISBAND,
-            WorldClientOpcodeMessage::CMSG_GUILD_LEADER(_) => Self::CMSG_GUILD_LEADER,
-            WorldClientOpcodeMessage::CMSG_GUILD_MOTD(_) => Self::CMSG_GUILD_MOTD,
-            WorldClientOpcodeMessage::CMSG_MESSAGECHAT(_) => Self::CMSG_MESSAGECHAT,
-            WorldClientOpcodeMessage::CMSG_JOIN_CHANNEL(_) => Self::CMSG_JOIN_CHANNEL,
-            WorldClientOpcodeMessage::CMSG_LEAVE_CHANNEL(_) => Self::CMSG_LEAVE_CHANNEL,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_LIST(_) => Self::CMSG_CHANNEL_LIST,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_PASSWORD(_) => Self::CMSG_CHANNEL_PASSWORD,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_SET_OWNER(_) => Self::CMSG_CHANNEL_SET_OWNER,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_OWNER(_) => Self::CMSG_CHANNEL_OWNER,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_MODERATOR(_) => Self::CMSG_CHANNEL_MODERATOR,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_UNMODERATOR(_) => Self::CMSG_CHANNEL_UNMODERATOR,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_MUTE(_) => Self::CMSG_CHANNEL_MUTE,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_UNMUTE(_) => Self::CMSG_CHANNEL_UNMUTE,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_INVITE(_) => Self::CMSG_CHANNEL_INVITE,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_KICK(_) => Self::CMSG_CHANNEL_KICK,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_BAN(_) => Self::CMSG_CHANNEL_BAN,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_UNBAN(_) => Self::CMSG_CHANNEL_UNBAN,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_ANNOUNCEMENTS(_) => Self::CMSG_CHANNEL_ANNOUNCEMENTS,
-            WorldClientOpcodeMessage::CMSG_CHANNEL_MODERATE(_) => Self::CMSG_CHANNEL_MODERATE,
-            WorldClientOpcodeMessage::CMSG_USE_ITEM(_) => Self::CMSG_USE_ITEM,
-            WorldClientOpcodeMessage::CMSG_OPEN_ITEM(_) => Self::CMSG_OPEN_ITEM,
-            WorldClientOpcodeMessage::CMSG_READ_ITEM(_) => Self::CMSG_READ_ITEM,
-            WorldClientOpcodeMessage::CMSG_GAMEOBJ_USE(_) => Self::CMSG_GAMEOBJ_USE,
-            WorldClientOpcodeMessage::CMSG_AREATRIGGER(_) => Self::CMSG_AREATRIGGER,
-            WorldClientOpcodeMessage::CMSG_MOVE_SET_RAW_POSITION(_) => Self::CMSG_MOVE_SET_RAW_POSITION,
-            WorldClientOpcodeMessage::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(_) => Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK,
-            WorldClientOpcodeMessage::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(_) => Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK,
-            WorldClientOpcodeMessage::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(_) => Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK,
-            WorldClientOpcodeMessage::CMSG_FORCE_MOVE_ROOT_ACK(_) => Self::CMSG_FORCE_MOVE_ROOT_ACK,
-            WorldClientOpcodeMessage::CMSG_FORCE_MOVE_UNROOT_ACK(_) => Self::CMSG_FORCE_MOVE_UNROOT_ACK,
-            WorldClientOpcodeMessage::CMSG_MOVE_KNOCK_BACK_ACK(_) => Self::CMSG_MOVE_KNOCK_BACK_ACK,
-            WorldClientOpcodeMessage::CMSG_MOVE_HOVER_ACK(_) => Self::CMSG_MOVE_HOVER_ACK,
-            WorldClientOpcodeMessage::CMSG_NEXT_CINEMATIC_CAMERA(_) => Self::CMSG_NEXT_CINEMATIC_CAMERA,
-            WorldClientOpcodeMessage::CMSG_COMPLETE_CINEMATIC(_) => Self::CMSG_COMPLETE_CINEMATIC,
-            WorldClientOpcodeMessage::CMSG_TUTORIAL_FLAG(_) => Self::CMSG_TUTORIAL_FLAG,
-            WorldClientOpcodeMessage::CMSG_TUTORIAL_CLEAR(_) => Self::CMSG_TUTORIAL_CLEAR,
-            WorldClientOpcodeMessage::CMSG_TUTORIAL_RESET(_) => Self::CMSG_TUTORIAL_RESET,
-            WorldClientOpcodeMessage::CMSG_STANDSTATECHANGE(_) => Self::CMSG_STANDSTATECHANGE,
-            WorldClientOpcodeMessage::CMSG_EMOTE(_) => Self::CMSG_EMOTE,
-            WorldClientOpcodeMessage::CMSG_TEXT_EMOTE(_) => Self::CMSG_TEXT_EMOTE,
-            WorldClientOpcodeMessage::CMSG_AUTOSTORE_LOOT_ITEM(_) => Self::CMSG_AUTOSTORE_LOOT_ITEM,
-            WorldClientOpcodeMessage::CMSG_AUTOEQUIP_ITEM(_) => Self::CMSG_AUTOEQUIP_ITEM,
-            WorldClientOpcodeMessage::CMSG_AUTOSTORE_BAG_ITEM(_) => Self::CMSG_AUTOSTORE_BAG_ITEM,
-            WorldClientOpcodeMessage::CMSG_SWAP_ITEM(_) => Self::CMSG_SWAP_ITEM,
-            WorldClientOpcodeMessage::CMSG_SWAP_INV_ITEM(_) => Self::CMSG_SWAP_INV_ITEM,
-            WorldClientOpcodeMessage::CMSG_SPLIT_ITEM(_) => Self::CMSG_SPLIT_ITEM,
-            WorldClientOpcodeMessage::CMSG_AUTOEQUIP_ITEM_SLOT(_) => Self::CMSG_AUTOEQUIP_ITEM_SLOT,
-            WorldClientOpcodeMessage::CMSG_DESTROYITEM(_) => Self::CMSG_DESTROYITEM,
-            WorldClientOpcodeMessage::CMSG_INSPECT(_) => Self::CMSG_INSPECT,
-            WorldClientOpcodeMessage::CMSG_INITIATE_TRADE(_) => Self::CMSG_INITIATE_TRADE,
-            WorldClientOpcodeMessage::CMSG_BEGIN_TRADE(_) => Self::CMSG_BEGIN_TRADE,
-            WorldClientOpcodeMessage::CMSG_BUSY_TRADE(_) => Self::CMSG_BUSY_TRADE,
-            WorldClientOpcodeMessage::CMSG_IGNORE_TRADE(_) => Self::CMSG_IGNORE_TRADE,
-            WorldClientOpcodeMessage::CMSG_ACCEPT_TRADE(_) => Self::CMSG_ACCEPT_TRADE,
-            WorldClientOpcodeMessage::CMSG_UNACCEPT_TRADE(_) => Self::CMSG_UNACCEPT_TRADE,
-            WorldClientOpcodeMessage::CMSG_CANCEL_TRADE(_) => Self::CMSG_CANCEL_TRADE,
-            WorldClientOpcodeMessage::CMSG_SET_TRADE_ITEM(_) => Self::CMSG_SET_TRADE_ITEM,
-            WorldClientOpcodeMessage::CMSG_CLEAR_TRADE_ITEM(_) => Self::CMSG_CLEAR_TRADE_ITEM,
-            WorldClientOpcodeMessage::CMSG_SET_TRADE_GOLD(_) => Self::CMSG_SET_TRADE_GOLD,
-            WorldClientOpcodeMessage::CMSG_SET_FACTION_ATWAR(_) => Self::CMSG_SET_FACTION_ATWAR,
-            WorldClientOpcodeMessage::CMSG_SET_ACTION_BUTTON(_) => Self::CMSG_SET_ACTION_BUTTON,
-            WorldClientOpcodeMessage::CMSG_CAST_SPELL(_) => Self::CMSG_CAST_SPELL,
-            WorldClientOpcodeMessage::CMSG_CANCEL_CAST(_) => Self::CMSG_CANCEL_CAST,
-            WorldClientOpcodeMessage::CMSG_CANCEL_AURA(_) => Self::CMSG_CANCEL_AURA,
-            WorldClientOpcodeMessage::CMSG_CANCEL_CHANNELLING(_) => Self::CMSG_CANCEL_CHANNELLING,
-            WorldClientOpcodeMessage::CMSG_SET_SELECTION(_) => Self::CMSG_SET_SELECTION,
-            WorldClientOpcodeMessage::CMSG_SET_TARGET_OBSOLETE(_) => Self::CMSG_SET_TARGET_OBSOLETE,
-            WorldClientOpcodeMessage::CMSG_ATTACKSWING(_) => Self::CMSG_ATTACKSWING,
-            WorldClientOpcodeMessage::CMSG_ATTACKSTOP(_) => Self::CMSG_ATTACKSTOP,
-            WorldClientOpcodeMessage::CMSG_REPOP_REQUEST(_) => Self::CMSG_REPOP_REQUEST,
-            WorldClientOpcodeMessage::CMSG_RESURRECT_RESPONSE(_) => Self::CMSG_RESURRECT_RESPONSE,
-            WorldClientOpcodeMessage::CMSG_LOOT(_) => Self::CMSG_LOOT,
-            WorldClientOpcodeMessage::CMSG_LOOT_MONEY(_) => Self::CMSG_LOOT_MONEY,
-            WorldClientOpcodeMessage::CMSG_LOOT_RELEASE(_) => Self::CMSG_LOOT_RELEASE,
-            WorldClientOpcodeMessage::CMSG_DUEL_ACCEPTED(_) => Self::CMSG_DUEL_ACCEPTED,
-            WorldClientOpcodeMessage::CMSG_DUEL_CANCELLED(_) => Self::CMSG_DUEL_CANCELLED,
-            WorldClientOpcodeMessage::CMSG_MOUNTSPECIAL_ANIM(_) => Self::CMSG_MOUNTSPECIAL_ANIM,
-            WorldClientOpcodeMessage::CMSG_PET_SET_ACTION(_) => Self::CMSG_PET_SET_ACTION,
-            WorldClientOpcodeMessage::CMSG_PET_ACTION(_) => Self::CMSG_PET_ACTION,
-            WorldClientOpcodeMessage::CMSG_PET_ABANDON(_) => Self::CMSG_PET_ABANDON,
-            WorldClientOpcodeMessage::CMSG_PET_RENAME(_) => Self::CMSG_PET_RENAME,
-            WorldClientOpcodeMessage::CMSG_GOSSIP_HELLO(_) => Self::CMSG_GOSSIP_HELLO,
-            WorldClientOpcodeMessage::CMSG_GOSSIP_SELECT_OPTION(_) => Self::CMSG_GOSSIP_SELECT_OPTION,
-            WorldClientOpcodeMessage::CMSG_NPC_TEXT_QUERY(_) => Self::CMSG_NPC_TEXT_QUERY,
-            WorldClientOpcodeMessage::CMSG_QUESTGIVER_STATUS_QUERY(_) => Self::CMSG_QUESTGIVER_STATUS_QUERY,
-            WorldClientOpcodeMessage::CMSG_QUESTGIVER_HELLO(_) => Self::CMSG_QUESTGIVER_HELLO,
-            WorldClientOpcodeMessage::CMSG_QUESTGIVER_QUERY_QUEST(_) => Self::CMSG_QUESTGIVER_QUERY_QUEST,
-            WorldClientOpcodeMessage::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(_) => Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH,
-            WorldClientOpcodeMessage::CMSG_QUESTGIVER_ACCEPT_QUEST(_) => Self::CMSG_QUESTGIVER_ACCEPT_QUEST,
-            WorldClientOpcodeMessage::CMSG_QUESTGIVER_COMPLETE_QUEST(_) => Self::CMSG_QUESTGIVER_COMPLETE_QUEST,
-            WorldClientOpcodeMessage::CMSG_QUESTGIVER_REQUEST_REWARD(_) => Self::CMSG_QUESTGIVER_REQUEST_REWARD,
-            WorldClientOpcodeMessage::CMSG_QUESTGIVER_CHOOSE_REWARD(_) => Self::CMSG_QUESTGIVER_CHOOSE_REWARD,
-            WorldClientOpcodeMessage::CMSG_QUESTGIVER_CANCEL(_) => Self::CMSG_QUESTGIVER_CANCEL,
-            WorldClientOpcodeMessage::CMSG_QUESTLOG_SWAP_QUEST(_) => Self::CMSG_QUESTLOG_SWAP_QUEST,
-            WorldClientOpcodeMessage::CMSG_QUESTLOG_REMOVE_QUEST(_) => Self::CMSG_QUESTLOG_REMOVE_QUEST,
-            WorldClientOpcodeMessage::CMSG_QUEST_CONFIRM_ACCEPT(_) => Self::CMSG_QUEST_CONFIRM_ACCEPT,
-            WorldClientOpcodeMessage::CMSG_PUSHQUESTTOPARTY(_) => Self::CMSG_PUSHQUESTTOPARTY,
-            WorldClientOpcodeMessage::CMSG_LIST_INVENTORY(_) => Self::CMSG_LIST_INVENTORY,
-            WorldClientOpcodeMessage::CMSG_SELL_ITEM(_) => Self::CMSG_SELL_ITEM,
-            WorldClientOpcodeMessage::CMSG_BUY_ITEM(_) => Self::CMSG_BUY_ITEM,
-            WorldClientOpcodeMessage::CMSG_BUY_ITEM_IN_SLOT(_) => Self::CMSG_BUY_ITEM_IN_SLOT,
-            WorldClientOpcodeMessage::CMSG_TAXINODE_STATUS_QUERY(_) => Self::CMSG_TAXINODE_STATUS_QUERY,
-            WorldClientOpcodeMessage::CMSG_TAXIQUERYAVAILABLENODES(_) => Self::CMSG_TAXIQUERYAVAILABLENODES,
-            WorldClientOpcodeMessage::CMSG_ACTIVATETAXI(_) => Self::CMSG_ACTIVATETAXI,
-            WorldClientOpcodeMessage::CMSG_TRAINER_LIST(_) => Self::CMSG_TRAINER_LIST,
-            WorldClientOpcodeMessage::CMSG_TRAINER_BUY_SPELL(_) => Self::CMSG_TRAINER_BUY_SPELL,
-            WorldClientOpcodeMessage::CMSG_BINDER_ACTIVATE(_) => Self::CMSG_BINDER_ACTIVATE,
-            WorldClientOpcodeMessage::CMSG_BANKER_ACTIVATE(_) => Self::CMSG_BANKER_ACTIVATE,
-            WorldClientOpcodeMessage::CMSG_BUY_BANK_SLOT(_) => Self::CMSG_BUY_BANK_SLOT,
-            WorldClientOpcodeMessage::CMSG_PETITION_SHOWLIST(_) => Self::CMSG_PETITION_SHOWLIST,
-            WorldClientOpcodeMessage::CMSG_PETITION_BUY(_) => Self::CMSG_PETITION_BUY,
-            WorldClientOpcodeMessage::CMSG_PETITION_SHOW_SIGNATURES(_) => Self::CMSG_PETITION_SHOW_SIGNATURES,
-            WorldClientOpcodeMessage::CMSG_PETITION_SIGN(_) => Self::CMSG_PETITION_SIGN,
-            WorldClientOpcodeMessage::CMSG_OFFER_PETITION(_) => Self::CMSG_OFFER_PETITION,
-            WorldClientOpcodeMessage::CMSG_TURN_IN_PETITION(_) => Self::CMSG_TURN_IN_PETITION,
-            WorldClientOpcodeMessage::CMSG_PETITION_QUERY(_) => Self::CMSG_PETITION_QUERY,
-            WorldClientOpcodeMessage::CMSG_BUG(_) => Self::CMSG_BUG,
-            WorldClientOpcodeMessage::CMSG_PLAYED_TIME(_) => Self::CMSG_PLAYED_TIME,
-            WorldClientOpcodeMessage::CMSG_QUERY_TIME(_) => Self::CMSG_QUERY_TIME,
-            WorldClientOpcodeMessage::CMSG_RECLAIM_CORPSE(_) => Self::CMSG_RECLAIM_CORPSE,
-            WorldClientOpcodeMessage::CMSG_WRAP_ITEM(_) => Self::CMSG_WRAP_ITEM,
-            WorldClientOpcodeMessage::MSG_MINIMAP_PING(_) => Self::MSG_MINIMAP_PING,
-            WorldClientOpcodeMessage::CMSG_PING(_) => Self::CMSG_PING,
-            WorldClientOpcodeMessage::CMSG_SETSHEATHED(_) => Self::CMSG_SETSHEATHED,
-            WorldClientOpcodeMessage::CMSG_AUTH_SESSION(_) => Self::CMSG_AUTH_SESSION,
-            WorldClientOpcodeMessage::CMSG_PET_CAST_SPELL(_) => Self::CMSG_PET_CAST_SPELL,
-            WorldClientOpcodeMessage::MSG_SAVE_GUILD_EMBLEM(_) => Self::MSG_SAVE_GUILD_EMBLEM,
-            WorldClientOpcodeMessage::CMSG_ZONEUPDATE(_) => Self::CMSG_ZONEUPDATE,
-            WorldClientOpcodeMessage::MSG_RANDOM_ROLL(_) => Self::MSG_RANDOM_ROLL,
-            WorldClientOpcodeMessage::MSG_LOOKING_FOR_GROUP(_) => Self::MSG_LOOKING_FOR_GROUP,
-            WorldClientOpcodeMessage::CMSG_UNLEARN_SKILL(_) => Self::CMSG_UNLEARN_SKILL,
-            WorldClientOpcodeMessage::CMSG_GMTICKET_CREATE(_) => Self::CMSG_GMTICKET_CREATE,
-            WorldClientOpcodeMessage::CMSG_GMTICKET_UPDATETEXT(_) => Self::CMSG_GMTICKET_UPDATETEXT,
-            WorldClientOpcodeMessage::CMSG_REQUEST_ACCOUNT_DATA(_) => Self::CMSG_REQUEST_ACCOUNT_DATA,
-            WorldClientOpcodeMessage::CMSG_GMTICKET_GETTICKET(_) => Self::CMSG_GMTICKET_GETTICKET,
-            WorldClientOpcodeMessage::MSG_CORPSE_QUERY(_) => Self::MSG_CORPSE_QUERY,
-            WorldClientOpcodeMessage::CMSG_GMTICKET_DELETETICKET(_) => Self::CMSG_GMTICKET_DELETETICKET,
-            WorldClientOpcodeMessage::CMSG_GMTICKET_SYSTEMSTATUS(_) => Self::CMSG_GMTICKET_SYSTEMSTATUS,
-            WorldClientOpcodeMessage::CMSG_SPIRIT_HEALER_ACTIVATE(_) => Self::CMSG_SPIRIT_HEALER_ACTIVATE,
-            WorldClientOpcodeMessage::CMSG_CHAT_IGNORED(_) => Self::CMSG_CHAT_IGNORED,
-            WorldClientOpcodeMessage::CMSG_GUILD_RANK(_) => Self::CMSG_GUILD_RANK,
-            WorldClientOpcodeMessage::CMSG_GUILD_ADD_RANK(_) => Self::CMSG_GUILD_ADD_RANK,
-            WorldClientOpcodeMessage::CMSG_GUILD_DEL_RANK(_) => Self::CMSG_GUILD_DEL_RANK,
-            WorldClientOpcodeMessage::CMSG_GUILD_SET_PUBLIC_NOTE(_) => Self::CMSG_GUILD_SET_PUBLIC_NOTE,
-            WorldClientOpcodeMessage::CMSG_GUILD_SET_OFFICER_NOTE(_) => Self::CMSG_GUILD_SET_OFFICER_NOTE,
-            WorldClientOpcodeMessage::CMSG_SEND_MAIL(_) => Self::CMSG_SEND_MAIL,
-            WorldClientOpcodeMessage::CMSG_GET_MAIL_LIST(_) => Self::CMSG_GET_MAIL_LIST,
-            WorldClientOpcodeMessage::CMSG_BATTLEFIELD_LIST(_) => Self::CMSG_BATTLEFIELD_LIST,
-            WorldClientOpcodeMessage::CMSG_BATTLEFIELD_JOIN(_) => Self::CMSG_BATTLEFIELD_JOIN,
-            WorldClientOpcodeMessage::CMSG_ITEM_TEXT_QUERY(_) => Self::CMSG_ITEM_TEXT_QUERY,
-            WorldClientOpcodeMessage::CMSG_MAIL_TAKE_MONEY(_) => Self::CMSG_MAIL_TAKE_MONEY,
-            WorldClientOpcodeMessage::CMSG_MAIL_TAKE_ITEM(_) => Self::CMSG_MAIL_TAKE_ITEM,
-            WorldClientOpcodeMessage::CMSG_MAIL_MARK_AS_READ(_) => Self::CMSG_MAIL_MARK_AS_READ,
-            WorldClientOpcodeMessage::CMSG_MAIL_RETURN_TO_SENDER(_) => Self::CMSG_MAIL_RETURN_TO_SENDER,
-            WorldClientOpcodeMessage::CMSG_MAIL_DELETE(_) => Self::CMSG_MAIL_DELETE,
-            WorldClientOpcodeMessage::CMSG_MAIL_CREATE_TEXT_ITEM(_) => Self::CMSG_MAIL_CREATE_TEXT_ITEM,
-            WorldClientOpcodeMessage::CMSG_LEARN_TALENT(_) => Self::CMSG_LEARN_TALENT,
-            WorldClientOpcodeMessage::CMSG_TOGGLE_PVP(_) => Self::CMSG_TOGGLE_PVP,
-            WorldClientOpcodeMessage::MSG_AUCTION_HELLO(_) => Self::MSG_AUCTION_HELLO,
-            WorldClientOpcodeMessage::CMSG_AUCTION_SELL_ITEM(_) => Self::CMSG_AUCTION_SELL_ITEM,
-            WorldClientOpcodeMessage::CMSG_AUCTION_REMOVE_ITEM(_) => Self::CMSG_AUCTION_REMOVE_ITEM,
-            WorldClientOpcodeMessage::CMSG_AUCTION_LIST_ITEMS(_) => Self::CMSG_AUCTION_LIST_ITEMS,
-            WorldClientOpcodeMessage::CMSG_AUCTION_LIST_OWNER_ITEMS(_) => Self::CMSG_AUCTION_LIST_OWNER_ITEMS,
-            WorldClientOpcodeMessage::CMSG_AUCTION_PLACE_BID(_) => Self::CMSG_AUCTION_PLACE_BID,
-            WorldClientOpcodeMessage::CMSG_AUCTION_LIST_BIDDER_ITEMS(_) => Self::CMSG_AUCTION_LIST_BIDDER_ITEMS,
-            WorldClientOpcodeMessage::CMSG_SET_AMMO(_) => Self::CMSG_SET_AMMO,
-            WorldClientOpcodeMessage::CMSG_SET_ACTIVE_MOVER(_) => Self::CMSG_SET_ACTIVE_MOVER,
-            WorldClientOpcodeMessage::CMSG_PET_CANCEL_AURA(_) => Self::CMSG_PET_CANCEL_AURA,
-            WorldClientOpcodeMessage::CMSG_CANCEL_AUTO_REPEAT_SPELL(_) => Self::CMSG_CANCEL_AUTO_REPEAT_SPELL,
-            WorldClientOpcodeMessage::MSG_LIST_STABLED_PETS(_) => Self::MSG_LIST_STABLED_PETS,
-            WorldClientOpcodeMessage::CMSG_STABLE_PET(_) => Self::CMSG_STABLE_PET,
-            WorldClientOpcodeMessage::CMSG_UNSTABLE_PET(_) => Self::CMSG_UNSTABLE_PET,
-            WorldClientOpcodeMessage::CMSG_BUY_STABLE_SLOT(_) => Self::CMSG_BUY_STABLE_SLOT,
-            WorldClientOpcodeMessage::CMSG_STABLE_SWAP_PET(_) => Self::CMSG_STABLE_SWAP_PET,
-            WorldClientOpcodeMessage::CMSG_REQUEST_PET_INFO(_) => Self::CMSG_REQUEST_PET_INFO,
-            WorldClientOpcodeMessage::CMSG_FAR_SIGHT(_) => Self::CMSG_FAR_SIGHT,
-            WorldClientOpcodeMessage::CMSG_GROUP_CHANGE_SUB_GROUP(_) => Self::CMSG_GROUP_CHANGE_SUB_GROUP,
-            WorldClientOpcodeMessage::CMSG_REQUEST_PARTY_MEMBER_STATS(_) => Self::CMSG_REQUEST_PARTY_MEMBER_STATS,
-            WorldClientOpcodeMessage::CMSG_GROUP_SWAP_SUB_GROUP(_) => Self::CMSG_GROUP_SWAP_SUB_GROUP,
-            WorldClientOpcodeMessage::CMSG_AUTOSTORE_BANK_ITEM(_) => Self::CMSG_AUTOSTORE_BANK_ITEM,
-            WorldClientOpcodeMessage::CMSG_AUTOBANK_ITEM(_) => Self::CMSG_AUTOBANK_ITEM,
-            WorldClientOpcodeMessage::MSG_QUERY_NEXT_MAIL_TIME(_) => Self::MSG_QUERY_NEXT_MAIL_TIME,
-            WorldClientOpcodeMessage::CMSG_GROUP_RAID_CONVERT(_) => Self::CMSG_GROUP_RAID_CONVERT,
-            WorldClientOpcodeMessage::CMSG_GROUP_ASSISTANT_LEADER(_) => Self::CMSG_GROUP_ASSISTANT_LEADER,
-            WorldClientOpcodeMessage::CMSG_BUYBACK_ITEM(_) => Self::CMSG_BUYBACK_ITEM,
-            WorldClientOpcodeMessage::CMSG_MEETINGSTONE_JOIN(_) => Self::CMSG_MEETINGSTONE_JOIN,
-            WorldClientOpcodeMessage::CMSG_MEETINGSTONE_LEAVE(_) => Self::CMSG_MEETINGSTONE_LEAVE,
-            WorldClientOpcodeMessage::CMSG_MEETINGSTONE_INFO(_) => Self::CMSG_MEETINGSTONE_INFO,
-            WorldClientOpcodeMessage::CMSG_CANCEL_GROWTH_AURA(_) => Self::CMSG_CANCEL_GROWTH_AURA,
-            WorldClientOpcodeMessage::CMSG_LOOT_ROLL(_) => Self::CMSG_LOOT_ROLL,
-            WorldClientOpcodeMessage::CMSG_LOOT_MASTER_GIVE(_) => Self::CMSG_LOOT_MASTER_GIVE,
-            WorldClientOpcodeMessage::CMSG_REPAIR_ITEM(_) => Self::CMSG_REPAIR_ITEM,
-            WorldClientOpcodeMessage::MSG_TALENT_WIPE_CONFIRM(_) => Self::MSG_TALENT_WIPE_CONFIRM,
-            WorldClientOpcodeMessage::CMSG_SUMMON_RESPONSE(_) => Self::CMSG_SUMMON_RESPONSE,
-            WorldClientOpcodeMessage::CMSG_SELF_RES(_) => Self::CMSG_SELF_RES,
-            WorldClientOpcodeMessage::CMSG_TOGGLE_HELM(_) => Self::CMSG_TOGGLE_HELM,
-            WorldClientOpcodeMessage::CMSG_TOGGLE_CLOAK(_) => Self::CMSG_TOGGLE_CLOAK,
-            WorldClientOpcodeMessage::CMSG_SET_ACTIONBAR_TOGGLES(_) => Self::CMSG_SET_ACTIONBAR_TOGGLES,
-            WorldClientOpcodeMessage::CMSG_ITEM_NAME_QUERY(_) => Self::CMSG_ITEM_NAME_QUERY,
-            WorldClientOpcodeMessage::CMSG_CHAR_RENAME(_) => Self::CMSG_CHAR_RENAME,
-            WorldClientOpcodeMessage::CMSG_MOVE_SPLINE_DONE(_) => Self::CMSG_MOVE_SPLINE_DONE,
-            WorldClientOpcodeMessage::CMSG_MOVE_FALL_RESET(_) => Self::CMSG_MOVE_FALL_RESET,
-            WorldClientOpcodeMessage::CMSG_REQUEST_RAID_INFO(_) => Self::CMSG_REQUEST_RAID_INFO,
-            WorldClientOpcodeMessage::CMSG_MOVE_TIME_SKIPPED(_) => Self::CMSG_MOVE_TIME_SKIPPED,
-            WorldClientOpcodeMessage::CMSG_MOVE_FEATHER_FALL_ACK(_) => Self::CMSG_MOVE_FEATHER_FALL_ACK,
-            WorldClientOpcodeMessage::CMSG_MOVE_WATER_WALK_ACK(_) => Self::CMSG_MOVE_WATER_WALK_ACK,
-            WorldClientOpcodeMessage::CMSG_MOVE_NOT_ACTIVE_MOVER(_) => Self::CMSG_MOVE_NOT_ACTIVE_MOVER,
-            WorldClientOpcodeMessage::CMSG_BATTLEFIELD_STATUS(_) => Self::CMSG_BATTLEFIELD_STATUS,
-            WorldClientOpcodeMessage::CMSG_BATTLEFIELD_PORT(_) => Self::CMSG_BATTLEFIELD_PORT,
-            WorldClientOpcodeMessage::MSG_INSPECT_HONOR_STATS(_) => Self::MSG_INSPECT_HONOR_STATS,
-            WorldClientOpcodeMessage::CMSG_BATTLEMASTER_HELLO(_) => Self::CMSG_BATTLEMASTER_HELLO,
-            WorldClientOpcodeMessage::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(_) => Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK,
-            WorldClientOpcodeMessage::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(_) => Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK,
-            WorldClientOpcodeMessage::CMSG_FORCE_TURN_RATE_CHANGE_ACK(_) => Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK,
-            WorldClientOpcodeMessage::MSG_PVP_LOG_DATA(_) => Self::MSG_PVP_LOG_DATA,
-            WorldClientOpcodeMessage::CMSG_LEAVE_BATTLEFIELD(_) => Self::CMSG_LEAVE_BATTLEFIELD,
-            WorldClientOpcodeMessage::CMSG_AREA_SPIRIT_HEALER_QUERY(_) => Self::CMSG_AREA_SPIRIT_HEALER_QUERY,
-            WorldClientOpcodeMessage::CMSG_AREA_SPIRIT_HEALER_QUEUE(_) => Self::CMSG_AREA_SPIRIT_HEALER_QUEUE,
-            WorldClientOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => Self::MSG_BATTLEGROUND_PLAYER_POSITIONS,
-            WorldClientOpcodeMessage::CMSG_PET_STOP_ATTACK(_) => Self::CMSG_PET_STOP_ATTACK,
-            WorldClientOpcodeMessage::CMSG_BATTLEMASTER_JOIN(_) => Self::CMSG_BATTLEMASTER_JOIN,
-            WorldClientOpcodeMessage::CMSG_PET_UNLEARN(_) => Self::CMSG_PET_UNLEARN,
-            WorldClientOpcodeMessage::CMSG_PET_SPELL_AUTOCAST(_) => Self::CMSG_PET_SPELL_AUTOCAST,
-            WorldClientOpcodeMessage::CMSG_GUILD_INFO_TEXT(_) => Self::CMSG_GUILD_INFO_TEXT,
-            WorldClientOpcodeMessage::CMSG_ACTIVATETAXIEXPRESS(_) => Self::CMSG_ACTIVATETAXIEXPRESS,
-            WorldClientOpcodeMessage::CMSG_SET_FACTION_INACTIVE(_) => Self::CMSG_SET_FACTION_INACTIVE,
-            WorldClientOpcodeMessage::CMSG_SET_WATCHED_FACTION(_) => Self::CMSG_SET_WATCHED_FACTION,
-            WorldClientOpcodeMessage::CMSG_RESET_INSTANCES(_) => Self::CMSG_RESET_INSTANCES,
-            WorldClientOpcodeMessage::MSG_RAID_TARGET_UPDATE(_) => Self::MSG_RAID_TARGET_UPDATE,
-            WorldClientOpcodeMessage::MSG_RAID_READY_CHECK(_) => Self::MSG_RAID_READY_CHECK,
-            WorldClientOpcodeMessage::CMSG_GMSURVEY_SUBMIT(_) => Self::CMSG_GMSURVEY_SUBMIT,
+            ClientOpcodeMessage::MSG_MOVE_START_FORWARD(_) => Self::MSG_MOVE_START_FORWARD,
+            ClientOpcodeMessage::MSG_MOVE_START_BACKWARD(_) => Self::MSG_MOVE_START_BACKWARD,
+            ClientOpcodeMessage::MSG_MOVE_STOP(_) => Self::MSG_MOVE_STOP,
+            ClientOpcodeMessage::MSG_MOVE_START_STRAFE_LEFT(_) => Self::MSG_MOVE_START_STRAFE_LEFT,
+            ClientOpcodeMessage::MSG_MOVE_START_STRAFE_RIGHT(_) => Self::MSG_MOVE_START_STRAFE_RIGHT,
+            ClientOpcodeMessage::MSG_MOVE_STOP_STRAFE(_) => Self::MSG_MOVE_STOP_STRAFE,
+            ClientOpcodeMessage::MSG_MOVE_JUMP(_) => Self::MSG_MOVE_JUMP,
+            ClientOpcodeMessage::MSG_MOVE_START_TURN_LEFT(_) => Self::MSG_MOVE_START_TURN_LEFT,
+            ClientOpcodeMessage::MSG_MOVE_START_TURN_RIGHT(_) => Self::MSG_MOVE_START_TURN_RIGHT,
+            ClientOpcodeMessage::MSG_MOVE_STOP_TURN(_) => Self::MSG_MOVE_STOP_TURN,
+            ClientOpcodeMessage::MSG_MOVE_START_PITCH_UP(_) => Self::MSG_MOVE_START_PITCH_UP,
+            ClientOpcodeMessage::MSG_MOVE_START_PITCH_DOWN(_) => Self::MSG_MOVE_START_PITCH_DOWN,
+            ClientOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => Self::MSG_MOVE_STOP_PITCH,
+            ClientOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => Self::MSG_MOVE_SET_RUN_MODE,
+            ClientOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => Self::MSG_MOVE_SET_WALK_MODE,
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => Self::MSG_MOVE_TELEPORT_ACK,
+            ClientOpcodeMessage::MSG_MOVE_FALL_LAND(_) => Self::MSG_MOVE_FALL_LAND,
+            ClientOpcodeMessage::MSG_MOVE_START_SWIM(_) => Self::MSG_MOVE_START_SWIM,
+            ClientOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => Self::MSG_MOVE_STOP_SWIM,
+            ClientOpcodeMessage::MSG_MOVE_SET_FACING(_) => Self::MSG_MOVE_SET_FACING,
+            ClientOpcodeMessage::MSG_MOVE_SET_PITCH(_) => Self::MSG_MOVE_SET_PITCH,
+            ClientOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => Self::MSG_MOVE_WORLDPORT_ACK,
+            ClientOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => Self::MSG_MOVE_HEARTBEAT,
+            ClientOpcodeMessage::MSG_PETITION_DECLINE(_) => Self::MSG_PETITION_DECLINE,
+            ClientOpcodeMessage::MSG_TABARDVENDOR_ACTIVATE(_) => Self::MSG_TABARDVENDOR_ACTIVATE,
+            ClientOpcodeMessage::MSG_QUEST_PUSH_RESULT(_) => Self::MSG_QUEST_PUSH_RESULT,
+            ClientOpcodeMessage::MSG_PETITION_RENAME(_) => Self::MSG_PETITION_RENAME,
+            ClientOpcodeMessage::CMSG_WORLD_TELEPORT(_) => Self::CMSG_WORLD_TELEPORT,
+            ClientOpcodeMessage::CMSG_CHAR_CREATE(_) => Self::CMSG_CHAR_CREATE,
+            ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => Self::CMSG_CHAR_ENUM,
+            ClientOpcodeMessage::CMSG_CHAR_DELETE(_) => Self::CMSG_CHAR_DELETE,
+            ClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => Self::CMSG_PLAYER_LOGIN,
+            ClientOpcodeMessage::CMSG_PLAYER_LOGOUT(_) => Self::CMSG_PLAYER_LOGOUT,
+            ClientOpcodeMessage::CMSG_LOGOUT_REQUEST(_) => Self::CMSG_LOGOUT_REQUEST,
+            ClientOpcodeMessage::CMSG_LOGOUT_CANCEL(_) => Self::CMSG_LOGOUT_CANCEL,
+            ClientOpcodeMessage::CMSG_NAME_QUERY(_) => Self::CMSG_NAME_QUERY,
+            ClientOpcodeMessage::CMSG_PET_NAME_QUERY(_) => Self::CMSG_PET_NAME_QUERY,
+            ClientOpcodeMessage::CMSG_GUILD_QUERY(_) => Self::CMSG_GUILD_QUERY,
+            ClientOpcodeMessage::CMSG_ITEM_QUERY_SINGLE(_) => Self::CMSG_ITEM_QUERY_SINGLE,
+            ClientOpcodeMessage::CMSG_PAGE_TEXT_QUERY(_) => Self::CMSG_PAGE_TEXT_QUERY,
+            ClientOpcodeMessage::CMSG_QUEST_QUERY(_) => Self::CMSG_QUEST_QUERY,
+            ClientOpcodeMessage::CMSG_GAMEOBJECT_QUERY(_) => Self::CMSG_GAMEOBJECT_QUERY,
+            ClientOpcodeMessage::CMSG_CREATURE_QUERY(_) => Self::CMSG_CREATURE_QUERY,
+            ClientOpcodeMessage::CMSG_WHO(_) => Self::CMSG_WHO,
+            ClientOpcodeMessage::CMSG_WHOIS(_) => Self::CMSG_WHOIS,
+            ClientOpcodeMessage::CMSG_FRIEND_LIST(_) => Self::CMSG_FRIEND_LIST,
+            ClientOpcodeMessage::CMSG_ADD_FRIEND(_) => Self::CMSG_ADD_FRIEND,
+            ClientOpcodeMessage::CMSG_DEL_FRIEND(_) => Self::CMSG_DEL_FRIEND,
+            ClientOpcodeMessage::CMSG_ADD_IGNORE(_) => Self::CMSG_ADD_IGNORE,
+            ClientOpcodeMessage::CMSG_DEL_IGNORE(_) => Self::CMSG_DEL_IGNORE,
+            ClientOpcodeMessage::CMSG_GROUP_INVITE(_) => Self::CMSG_GROUP_INVITE,
+            ClientOpcodeMessage::CMSG_GROUP_ACCEPT(_) => Self::CMSG_GROUP_ACCEPT,
+            ClientOpcodeMessage::CMSG_GROUP_DECLINE(_) => Self::CMSG_GROUP_DECLINE,
+            ClientOpcodeMessage::CMSG_GROUP_UNINVITE(_) => Self::CMSG_GROUP_UNINVITE,
+            ClientOpcodeMessage::CMSG_GROUP_UNINVITE_GUID(_) => Self::CMSG_GROUP_UNINVITE_GUID,
+            ClientOpcodeMessage::CMSG_GROUP_SET_LEADER(_) => Self::CMSG_GROUP_SET_LEADER,
+            ClientOpcodeMessage::CMSG_LOOT_METHOD(_) => Self::CMSG_LOOT_METHOD,
+            ClientOpcodeMessage::CMSG_GROUP_DISBAND(_) => Self::CMSG_GROUP_DISBAND,
+            ClientOpcodeMessage::CMSG_GUILD_CREATE(_) => Self::CMSG_GUILD_CREATE,
+            ClientOpcodeMessage::CMSG_GUILD_INVITE(_) => Self::CMSG_GUILD_INVITE,
+            ClientOpcodeMessage::CMSG_GUILD_ACCEPT(_) => Self::CMSG_GUILD_ACCEPT,
+            ClientOpcodeMessage::CMSG_GUILD_DECLINE(_) => Self::CMSG_GUILD_DECLINE,
+            ClientOpcodeMessage::CMSG_GUILD_INFO(_) => Self::CMSG_GUILD_INFO,
+            ClientOpcodeMessage::CMSG_GUILD_ROSTER(_) => Self::CMSG_GUILD_ROSTER,
+            ClientOpcodeMessage::CMSG_GUILD_PROMOTE(_) => Self::CMSG_GUILD_PROMOTE,
+            ClientOpcodeMessage::CMSG_GUILD_DEMOTE(_) => Self::CMSG_GUILD_DEMOTE,
+            ClientOpcodeMessage::CMSG_GUILD_LEAVE(_) => Self::CMSG_GUILD_LEAVE,
+            ClientOpcodeMessage::CMSG_GUILD_REMOVE(_) => Self::CMSG_GUILD_REMOVE,
+            ClientOpcodeMessage::CMSG_GUILD_DISBAND(_) => Self::CMSG_GUILD_DISBAND,
+            ClientOpcodeMessage::CMSG_GUILD_LEADER(_) => Self::CMSG_GUILD_LEADER,
+            ClientOpcodeMessage::CMSG_GUILD_MOTD(_) => Self::CMSG_GUILD_MOTD,
+            ClientOpcodeMessage::CMSG_MESSAGECHAT(_) => Self::CMSG_MESSAGECHAT,
+            ClientOpcodeMessage::CMSG_JOIN_CHANNEL(_) => Self::CMSG_JOIN_CHANNEL,
+            ClientOpcodeMessage::CMSG_LEAVE_CHANNEL(_) => Self::CMSG_LEAVE_CHANNEL,
+            ClientOpcodeMessage::CMSG_CHANNEL_LIST(_) => Self::CMSG_CHANNEL_LIST,
+            ClientOpcodeMessage::CMSG_CHANNEL_PASSWORD(_) => Self::CMSG_CHANNEL_PASSWORD,
+            ClientOpcodeMessage::CMSG_CHANNEL_SET_OWNER(_) => Self::CMSG_CHANNEL_SET_OWNER,
+            ClientOpcodeMessage::CMSG_CHANNEL_OWNER(_) => Self::CMSG_CHANNEL_OWNER,
+            ClientOpcodeMessage::CMSG_CHANNEL_MODERATOR(_) => Self::CMSG_CHANNEL_MODERATOR,
+            ClientOpcodeMessage::CMSG_CHANNEL_UNMODERATOR(_) => Self::CMSG_CHANNEL_UNMODERATOR,
+            ClientOpcodeMessage::CMSG_CHANNEL_MUTE(_) => Self::CMSG_CHANNEL_MUTE,
+            ClientOpcodeMessage::CMSG_CHANNEL_UNMUTE(_) => Self::CMSG_CHANNEL_UNMUTE,
+            ClientOpcodeMessage::CMSG_CHANNEL_INVITE(_) => Self::CMSG_CHANNEL_INVITE,
+            ClientOpcodeMessage::CMSG_CHANNEL_KICK(_) => Self::CMSG_CHANNEL_KICK,
+            ClientOpcodeMessage::CMSG_CHANNEL_BAN(_) => Self::CMSG_CHANNEL_BAN,
+            ClientOpcodeMessage::CMSG_CHANNEL_UNBAN(_) => Self::CMSG_CHANNEL_UNBAN,
+            ClientOpcodeMessage::CMSG_CHANNEL_ANNOUNCEMENTS(_) => Self::CMSG_CHANNEL_ANNOUNCEMENTS,
+            ClientOpcodeMessage::CMSG_CHANNEL_MODERATE(_) => Self::CMSG_CHANNEL_MODERATE,
+            ClientOpcodeMessage::CMSG_USE_ITEM(_) => Self::CMSG_USE_ITEM,
+            ClientOpcodeMessage::CMSG_OPEN_ITEM(_) => Self::CMSG_OPEN_ITEM,
+            ClientOpcodeMessage::CMSG_READ_ITEM(_) => Self::CMSG_READ_ITEM,
+            ClientOpcodeMessage::CMSG_GAMEOBJ_USE(_) => Self::CMSG_GAMEOBJ_USE,
+            ClientOpcodeMessage::CMSG_AREATRIGGER(_) => Self::CMSG_AREATRIGGER,
+            ClientOpcodeMessage::CMSG_MOVE_SET_RAW_POSITION(_) => Self::CMSG_MOVE_SET_RAW_POSITION,
+            ClientOpcodeMessage::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(_) => Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK,
+            ClientOpcodeMessage::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(_) => Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK,
+            ClientOpcodeMessage::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(_) => Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK,
+            ClientOpcodeMessage::CMSG_FORCE_MOVE_ROOT_ACK(_) => Self::CMSG_FORCE_MOVE_ROOT_ACK,
+            ClientOpcodeMessage::CMSG_FORCE_MOVE_UNROOT_ACK(_) => Self::CMSG_FORCE_MOVE_UNROOT_ACK,
+            ClientOpcodeMessage::CMSG_MOVE_KNOCK_BACK_ACK(_) => Self::CMSG_MOVE_KNOCK_BACK_ACK,
+            ClientOpcodeMessage::CMSG_MOVE_HOVER_ACK(_) => Self::CMSG_MOVE_HOVER_ACK,
+            ClientOpcodeMessage::CMSG_NEXT_CINEMATIC_CAMERA(_) => Self::CMSG_NEXT_CINEMATIC_CAMERA,
+            ClientOpcodeMessage::CMSG_COMPLETE_CINEMATIC(_) => Self::CMSG_COMPLETE_CINEMATIC,
+            ClientOpcodeMessage::CMSG_TUTORIAL_FLAG(_) => Self::CMSG_TUTORIAL_FLAG,
+            ClientOpcodeMessage::CMSG_TUTORIAL_CLEAR(_) => Self::CMSG_TUTORIAL_CLEAR,
+            ClientOpcodeMessage::CMSG_TUTORIAL_RESET(_) => Self::CMSG_TUTORIAL_RESET,
+            ClientOpcodeMessage::CMSG_STANDSTATECHANGE(_) => Self::CMSG_STANDSTATECHANGE,
+            ClientOpcodeMessage::CMSG_EMOTE(_) => Self::CMSG_EMOTE,
+            ClientOpcodeMessage::CMSG_TEXT_EMOTE(_) => Self::CMSG_TEXT_EMOTE,
+            ClientOpcodeMessage::CMSG_AUTOSTORE_LOOT_ITEM(_) => Self::CMSG_AUTOSTORE_LOOT_ITEM,
+            ClientOpcodeMessage::CMSG_AUTOEQUIP_ITEM(_) => Self::CMSG_AUTOEQUIP_ITEM,
+            ClientOpcodeMessage::CMSG_AUTOSTORE_BAG_ITEM(_) => Self::CMSG_AUTOSTORE_BAG_ITEM,
+            ClientOpcodeMessage::CMSG_SWAP_ITEM(_) => Self::CMSG_SWAP_ITEM,
+            ClientOpcodeMessage::CMSG_SWAP_INV_ITEM(_) => Self::CMSG_SWAP_INV_ITEM,
+            ClientOpcodeMessage::CMSG_SPLIT_ITEM(_) => Self::CMSG_SPLIT_ITEM,
+            ClientOpcodeMessage::CMSG_AUTOEQUIP_ITEM_SLOT(_) => Self::CMSG_AUTOEQUIP_ITEM_SLOT,
+            ClientOpcodeMessage::CMSG_DESTROYITEM(_) => Self::CMSG_DESTROYITEM,
+            ClientOpcodeMessage::CMSG_INSPECT(_) => Self::CMSG_INSPECT,
+            ClientOpcodeMessage::CMSG_INITIATE_TRADE(_) => Self::CMSG_INITIATE_TRADE,
+            ClientOpcodeMessage::CMSG_BEGIN_TRADE(_) => Self::CMSG_BEGIN_TRADE,
+            ClientOpcodeMessage::CMSG_BUSY_TRADE(_) => Self::CMSG_BUSY_TRADE,
+            ClientOpcodeMessage::CMSG_IGNORE_TRADE(_) => Self::CMSG_IGNORE_TRADE,
+            ClientOpcodeMessage::CMSG_ACCEPT_TRADE(_) => Self::CMSG_ACCEPT_TRADE,
+            ClientOpcodeMessage::CMSG_UNACCEPT_TRADE(_) => Self::CMSG_UNACCEPT_TRADE,
+            ClientOpcodeMessage::CMSG_CANCEL_TRADE(_) => Self::CMSG_CANCEL_TRADE,
+            ClientOpcodeMessage::CMSG_SET_TRADE_ITEM(_) => Self::CMSG_SET_TRADE_ITEM,
+            ClientOpcodeMessage::CMSG_CLEAR_TRADE_ITEM(_) => Self::CMSG_CLEAR_TRADE_ITEM,
+            ClientOpcodeMessage::CMSG_SET_TRADE_GOLD(_) => Self::CMSG_SET_TRADE_GOLD,
+            ClientOpcodeMessage::CMSG_SET_FACTION_ATWAR(_) => Self::CMSG_SET_FACTION_ATWAR,
+            ClientOpcodeMessage::CMSG_SET_ACTION_BUTTON(_) => Self::CMSG_SET_ACTION_BUTTON,
+            ClientOpcodeMessage::CMSG_CAST_SPELL(_) => Self::CMSG_CAST_SPELL,
+            ClientOpcodeMessage::CMSG_CANCEL_CAST(_) => Self::CMSG_CANCEL_CAST,
+            ClientOpcodeMessage::CMSG_CANCEL_AURA(_) => Self::CMSG_CANCEL_AURA,
+            ClientOpcodeMessage::CMSG_CANCEL_CHANNELLING(_) => Self::CMSG_CANCEL_CHANNELLING,
+            ClientOpcodeMessage::CMSG_SET_SELECTION(_) => Self::CMSG_SET_SELECTION,
+            ClientOpcodeMessage::CMSG_SET_TARGET_OBSOLETE(_) => Self::CMSG_SET_TARGET_OBSOLETE,
+            ClientOpcodeMessage::CMSG_ATTACKSWING(_) => Self::CMSG_ATTACKSWING,
+            ClientOpcodeMessage::CMSG_ATTACKSTOP(_) => Self::CMSG_ATTACKSTOP,
+            ClientOpcodeMessage::CMSG_REPOP_REQUEST(_) => Self::CMSG_REPOP_REQUEST,
+            ClientOpcodeMessage::CMSG_RESURRECT_RESPONSE(_) => Self::CMSG_RESURRECT_RESPONSE,
+            ClientOpcodeMessage::CMSG_LOOT(_) => Self::CMSG_LOOT,
+            ClientOpcodeMessage::CMSG_LOOT_MONEY(_) => Self::CMSG_LOOT_MONEY,
+            ClientOpcodeMessage::CMSG_LOOT_RELEASE(_) => Self::CMSG_LOOT_RELEASE,
+            ClientOpcodeMessage::CMSG_DUEL_ACCEPTED(_) => Self::CMSG_DUEL_ACCEPTED,
+            ClientOpcodeMessage::CMSG_DUEL_CANCELLED(_) => Self::CMSG_DUEL_CANCELLED,
+            ClientOpcodeMessage::CMSG_MOUNTSPECIAL_ANIM(_) => Self::CMSG_MOUNTSPECIAL_ANIM,
+            ClientOpcodeMessage::CMSG_PET_SET_ACTION(_) => Self::CMSG_PET_SET_ACTION,
+            ClientOpcodeMessage::CMSG_PET_ACTION(_) => Self::CMSG_PET_ACTION,
+            ClientOpcodeMessage::CMSG_PET_ABANDON(_) => Self::CMSG_PET_ABANDON,
+            ClientOpcodeMessage::CMSG_PET_RENAME(_) => Self::CMSG_PET_RENAME,
+            ClientOpcodeMessage::CMSG_GOSSIP_HELLO(_) => Self::CMSG_GOSSIP_HELLO,
+            ClientOpcodeMessage::CMSG_GOSSIP_SELECT_OPTION(_) => Self::CMSG_GOSSIP_SELECT_OPTION,
+            ClientOpcodeMessage::CMSG_NPC_TEXT_QUERY(_) => Self::CMSG_NPC_TEXT_QUERY,
+            ClientOpcodeMessage::CMSG_QUESTGIVER_STATUS_QUERY(_) => Self::CMSG_QUESTGIVER_STATUS_QUERY,
+            ClientOpcodeMessage::CMSG_QUESTGIVER_HELLO(_) => Self::CMSG_QUESTGIVER_HELLO,
+            ClientOpcodeMessage::CMSG_QUESTGIVER_QUERY_QUEST(_) => Self::CMSG_QUESTGIVER_QUERY_QUEST,
+            ClientOpcodeMessage::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(_) => Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH,
+            ClientOpcodeMessage::CMSG_QUESTGIVER_ACCEPT_QUEST(_) => Self::CMSG_QUESTGIVER_ACCEPT_QUEST,
+            ClientOpcodeMessage::CMSG_QUESTGIVER_COMPLETE_QUEST(_) => Self::CMSG_QUESTGIVER_COMPLETE_QUEST,
+            ClientOpcodeMessage::CMSG_QUESTGIVER_REQUEST_REWARD(_) => Self::CMSG_QUESTGIVER_REQUEST_REWARD,
+            ClientOpcodeMessage::CMSG_QUESTGIVER_CHOOSE_REWARD(_) => Self::CMSG_QUESTGIVER_CHOOSE_REWARD,
+            ClientOpcodeMessage::CMSG_QUESTGIVER_CANCEL(_) => Self::CMSG_QUESTGIVER_CANCEL,
+            ClientOpcodeMessage::CMSG_QUESTLOG_SWAP_QUEST(_) => Self::CMSG_QUESTLOG_SWAP_QUEST,
+            ClientOpcodeMessage::CMSG_QUESTLOG_REMOVE_QUEST(_) => Self::CMSG_QUESTLOG_REMOVE_QUEST,
+            ClientOpcodeMessage::CMSG_QUEST_CONFIRM_ACCEPT(_) => Self::CMSG_QUEST_CONFIRM_ACCEPT,
+            ClientOpcodeMessage::CMSG_PUSHQUESTTOPARTY(_) => Self::CMSG_PUSHQUESTTOPARTY,
+            ClientOpcodeMessage::CMSG_LIST_INVENTORY(_) => Self::CMSG_LIST_INVENTORY,
+            ClientOpcodeMessage::CMSG_SELL_ITEM(_) => Self::CMSG_SELL_ITEM,
+            ClientOpcodeMessage::CMSG_BUY_ITEM(_) => Self::CMSG_BUY_ITEM,
+            ClientOpcodeMessage::CMSG_BUY_ITEM_IN_SLOT(_) => Self::CMSG_BUY_ITEM_IN_SLOT,
+            ClientOpcodeMessage::CMSG_TAXINODE_STATUS_QUERY(_) => Self::CMSG_TAXINODE_STATUS_QUERY,
+            ClientOpcodeMessage::CMSG_TAXIQUERYAVAILABLENODES(_) => Self::CMSG_TAXIQUERYAVAILABLENODES,
+            ClientOpcodeMessage::CMSG_ACTIVATETAXI(_) => Self::CMSG_ACTIVATETAXI,
+            ClientOpcodeMessage::CMSG_TRAINER_LIST(_) => Self::CMSG_TRAINER_LIST,
+            ClientOpcodeMessage::CMSG_TRAINER_BUY_SPELL(_) => Self::CMSG_TRAINER_BUY_SPELL,
+            ClientOpcodeMessage::CMSG_BINDER_ACTIVATE(_) => Self::CMSG_BINDER_ACTIVATE,
+            ClientOpcodeMessage::CMSG_BANKER_ACTIVATE(_) => Self::CMSG_BANKER_ACTIVATE,
+            ClientOpcodeMessage::CMSG_BUY_BANK_SLOT(_) => Self::CMSG_BUY_BANK_SLOT,
+            ClientOpcodeMessage::CMSG_PETITION_SHOWLIST(_) => Self::CMSG_PETITION_SHOWLIST,
+            ClientOpcodeMessage::CMSG_PETITION_BUY(_) => Self::CMSG_PETITION_BUY,
+            ClientOpcodeMessage::CMSG_PETITION_SHOW_SIGNATURES(_) => Self::CMSG_PETITION_SHOW_SIGNATURES,
+            ClientOpcodeMessage::CMSG_PETITION_SIGN(_) => Self::CMSG_PETITION_SIGN,
+            ClientOpcodeMessage::CMSG_OFFER_PETITION(_) => Self::CMSG_OFFER_PETITION,
+            ClientOpcodeMessage::CMSG_TURN_IN_PETITION(_) => Self::CMSG_TURN_IN_PETITION,
+            ClientOpcodeMessage::CMSG_PETITION_QUERY(_) => Self::CMSG_PETITION_QUERY,
+            ClientOpcodeMessage::CMSG_BUG(_) => Self::CMSG_BUG,
+            ClientOpcodeMessage::CMSG_PLAYED_TIME(_) => Self::CMSG_PLAYED_TIME,
+            ClientOpcodeMessage::CMSG_QUERY_TIME(_) => Self::CMSG_QUERY_TIME,
+            ClientOpcodeMessage::CMSG_RECLAIM_CORPSE(_) => Self::CMSG_RECLAIM_CORPSE,
+            ClientOpcodeMessage::CMSG_WRAP_ITEM(_) => Self::CMSG_WRAP_ITEM,
+            ClientOpcodeMessage::MSG_MINIMAP_PING(_) => Self::MSG_MINIMAP_PING,
+            ClientOpcodeMessage::CMSG_PING(_) => Self::CMSG_PING,
+            ClientOpcodeMessage::CMSG_SETSHEATHED(_) => Self::CMSG_SETSHEATHED,
+            ClientOpcodeMessage::CMSG_AUTH_SESSION(_) => Self::CMSG_AUTH_SESSION,
+            ClientOpcodeMessage::CMSG_PET_CAST_SPELL(_) => Self::CMSG_PET_CAST_SPELL,
+            ClientOpcodeMessage::MSG_SAVE_GUILD_EMBLEM(_) => Self::MSG_SAVE_GUILD_EMBLEM,
+            ClientOpcodeMessage::CMSG_ZONEUPDATE(_) => Self::CMSG_ZONEUPDATE,
+            ClientOpcodeMessage::MSG_RANDOM_ROLL(_) => Self::MSG_RANDOM_ROLL,
+            ClientOpcodeMessage::MSG_LOOKING_FOR_GROUP(_) => Self::MSG_LOOKING_FOR_GROUP,
+            ClientOpcodeMessage::CMSG_UNLEARN_SKILL(_) => Self::CMSG_UNLEARN_SKILL,
+            ClientOpcodeMessage::CMSG_GMTICKET_CREATE(_) => Self::CMSG_GMTICKET_CREATE,
+            ClientOpcodeMessage::CMSG_GMTICKET_UPDATETEXT(_) => Self::CMSG_GMTICKET_UPDATETEXT,
+            ClientOpcodeMessage::CMSG_REQUEST_ACCOUNT_DATA(_) => Self::CMSG_REQUEST_ACCOUNT_DATA,
+            ClientOpcodeMessage::CMSG_GMTICKET_GETTICKET(_) => Self::CMSG_GMTICKET_GETTICKET,
+            ClientOpcodeMessage::MSG_CORPSE_QUERY(_) => Self::MSG_CORPSE_QUERY,
+            ClientOpcodeMessage::CMSG_GMTICKET_DELETETICKET(_) => Self::CMSG_GMTICKET_DELETETICKET,
+            ClientOpcodeMessage::CMSG_GMTICKET_SYSTEMSTATUS(_) => Self::CMSG_GMTICKET_SYSTEMSTATUS,
+            ClientOpcodeMessage::CMSG_SPIRIT_HEALER_ACTIVATE(_) => Self::CMSG_SPIRIT_HEALER_ACTIVATE,
+            ClientOpcodeMessage::CMSG_CHAT_IGNORED(_) => Self::CMSG_CHAT_IGNORED,
+            ClientOpcodeMessage::CMSG_GUILD_RANK(_) => Self::CMSG_GUILD_RANK,
+            ClientOpcodeMessage::CMSG_GUILD_ADD_RANK(_) => Self::CMSG_GUILD_ADD_RANK,
+            ClientOpcodeMessage::CMSG_GUILD_DEL_RANK(_) => Self::CMSG_GUILD_DEL_RANK,
+            ClientOpcodeMessage::CMSG_GUILD_SET_PUBLIC_NOTE(_) => Self::CMSG_GUILD_SET_PUBLIC_NOTE,
+            ClientOpcodeMessage::CMSG_GUILD_SET_OFFICER_NOTE(_) => Self::CMSG_GUILD_SET_OFFICER_NOTE,
+            ClientOpcodeMessage::CMSG_SEND_MAIL(_) => Self::CMSG_SEND_MAIL,
+            ClientOpcodeMessage::CMSG_GET_MAIL_LIST(_) => Self::CMSG_GET_MAIL_LIST,
+            ClientOpcodeMessage::CMSG_BATTLEFIELD_LIST(_) => Self::CMSG_BATTLEFIELD_LIST,
+            ClientOpcodeMessage::CMSG_BATTLEFIELD_JOIN(_) => Self::CMSG_BATTLEFIELD_JOIN,
+            ClientOpcodeMessage::CMSG_ITEM_TEXT_QUERY(_) => Self::CMSG_ITEM_TEXT_QUERY,
+            ClientOpcodeMessage::CMSG_MAIL_TAKE_MONEY(_) => Self::CMSG_MAIL_TAKE_MONEY,
+            ClientOpcodeMessage::CMSG_MAIL_TAKE_ITEM(_) => Self::CMSG_MAIL_TAKE_ITEM,
+            ClientOpcodeMessage::CMSG_MAIL_MARK_AS_READ(_) => Self::CMSG_MAIL_MARK_AS_READ,
+            ClientOpcodeMessage::CMSG_MAIL_RETURN_TO_SENDER(_) => Self::CMSG_MAIL_RETURN_TO_SENDER,
+            ClientOpcodeMessage::CMSG_MAIL_DELETE(_) => Self::CMSG_MAIL_DELETE,
+            ClientOpcodeMessage::CMSG_MAIL_CREATE_TEXT_ITEM(_) => Self::CMSG_MAIL_CREATE_TEXT_ITEM,
+            ClientOpcodeMessage::CMSG_LEARN_TALENT(_) => Self::CMSG_LEARN_TALENT,
+            ClientOpcodeMessage::CMSG_TOGGLE_PVP(_) => Self::CMSG_TOGGLE_PVP,
+            ClientOpcodeMessage::MSG_AUCTION_HELLO(_) => Self::MSG_AUCTION_HELLO,
+            ClientOpcodeMessage::CMSG_AUCTION_SELL_ITEM(_) => Self::CMSG_AUCTION_SELL_ITEM,
+            ClientOpcodeMessage::CMSG_AUCTION_REMOVE_ITEM(_) => Self::CMSG_AUCTION_REMOVE_ITEM,
+            ClientOpcodeMessage::CMSG_AUCTION_LIST_ITEMS(_) => Self::CMSG_AUCTION_LIST_ITEMS,
+            ClientOpcodeMessage::CMSG_AUCTION_LIST_OWNER_ITEMS(_) => Self::CMSG_AUCTION_LIST_OWNER_ITEMS,
+            ClientOpcodeMessage::CMSG_AUCTION_PLACE_BID(_) => Self::CMSG_AUCTION_PLACE_BID,
+            ClientOpcodeMessage::CMSG_AUCTION_LIST_BIDDER_ITEMS(_) => Self::CMSG_AUCTION_LIST_BIDDER_ITEMS,
+            ClientOpcodeMessage::CMSG_SET_AMMO(_) => Self::CMSG_SET_AMMO,
+            ClientOpcodeMessage::CMSG_SET_ACTIVE_MOVER(_) => Self::CMSG_SET_ACTIVE_MOVER,
+            ClientOpcodeMessage::CMSG_PET_CANCEL_AURA(_) => Self::CMSG_PET_CANCEL_AURA,
+            ClientOpcodeMessage::CMSG_CANCEL_AUTO_REPEAT_SPELL(_) => Self::CMSG_CANCEL_AUTO_REPEAT_SPELL,
+            ClientOpcodeMessage::MSG_LIST_STABLED_PETS(_) => Self::MSG_LIST_STABLED_PETS,
+            ClientOpcodeMessage::CMSG_STABLE_PET(_) => Self::CMSG_STABLE_PET,
+            ClientOpcodeMessage::CMSG_UNSTABLE_PET(_) => Self::CMSG_UNSTABLE_PET,
+            ClientOpcodeMessage::CMSG_BUY_STABLE_SLOT(_) => Self::CMSG_BUY_STABLE_SLOT,
+            ClientOpcodeMessage::CMSG_STABLE_SWAP_PET(_) => Self::CMSG_STABLE_SWAP_PET,
+            ClientOpcodeMessage::CMSG_REQUEST_PET_INFO(_) => Self::CMSG_REQUEST_PET_INFO,
+            ClientOpcodeMessage::CMSG_FAR_SIGHT(_) => Self::CMSG_FAR_SIGHT,
+            ClientOpcodeMessage::CMSG_GROUP_CHANGE_SUB_GROUP(_) => Self::CMSG_GROUP_CHANGE_SUB_GROUP,
+            ClientOpcodeMessage::CMSG_REQUEST_PARTY_MEMBER_STATS(_) => Self::CMSG_REQUEST_PARTY_MEMBER_STATS,
+            ClientOpcodeMessage::CMSG_GROUP_SWAP_SUB_GROUP(_) => Self::CMSG_GROUP_SWAP_SUB_GROUP,
+            ClientOpcodeMessage::CMSG_AUTOSTORE_BANK_ITEM(_) => Self::CMSG_AUTOSTORE_BANK_ITEM,
+            ClientOpcodeMessage::CMSG_AUTOBANK_ITEM(_) => Self::CMSG_AUTOBANK_ITEM,
+            ClientOpcodeMessage::MSG_QUERY_NEXT_MAIL_TIME(_) => Self::MSG_QUERY_NEXT_MAIL_TIME,
+            ClientOpcodeMessage::CMSG_GROUP_RAID_CONVERT(_) => Self::CMSG_GROUP_RAID_CONVERT,
+            ClientOpcodeMessage::CMSG_GROUP_ASSISTANT_LEADER(_) => Self::CMSG_GROUP_ASSISTANT_LEADER,
+            ClientOpcodeMessage::CMSG_BUYBACK_ITEM(_) => Self::CMSG_BUYBACK_ITEM,
+            ClientOpcodeMessage::CMSG_MEETINGSTONE_JOIN(_) => Self::CMSG_MEETINGSTONE_JOIN,
+            ClientOpcodeMessage::CMSG_MEETINGSTONE_LEAVE(_) => Self::CMSG_MEETINGSTONE_LEAVE,
+            ClientOpcodeMessage::CMSG_MEETINGSTONE_INFO(_) => Self::CMSG_MEETINGSTONE_INFO,
+            ClientOpcodeMessage::CMSG_CANCEL_GROWTH_AURA(_) => Self::CMSG_CANCEL_GROWTH_AURA,
+            ClientOpcodeMessage::CMSG_LOOT_ROLL(_) => Self::CMSG_LOOT_ROLL,
+            ClientOpcodeMessage::CMSG_LOOT_MASTER_GIVE(_) => Self::CMSG_LOOT_MASTER_GIVE,
+            ClientOpcodeMessage::CMSG_REPAIR_ITEM(_) => Self::CMSG_REPAIR_ITEM,
+            ClientOpcodeMessage::MSG_TALENT_WIPE_CONFIRM(_) => Self::MSG_TALENT_WIPE_CONFIRM,
+            ClientOpcodeMessage::CMSG_SUMMON_RESPONSE(_) => Self::CMSG_SUMMON_RESPONSE,
+            ClientOpcodeMessage::CMSG_SELF_RES(_) => Self::CMSG_SELF_RES,
+            ClientOpcodeMessage::CMSG_TOGGLE_HELM(_) => Self::CMSG_TOGGLE_HELM,
+            ClientOpcodeMessage::CMSG_TOGGLE_CLOAK(_) => Self::CMSG_TOGGLE_CLOAK,
+            ClientOpcodeMessage::CMSG_SET_ACTIONBAR_TOGGLES(_) => Self::CMSG_SET_ACTIONBAR_TOGGLES,
+            ClientOpcodeMessage::CMSG_ITEM_NAME_QUERY(_) => Self::CMSG_ITEM_NAME_QUERY,
+            ClientOpcodeMessage::CMSG_CHAR_RENAME(_) => Self::CMSG_CHAR_RENAME,
+            ClientOpcodeMessage::CMSG_MOVE_SPLINE_DONE(_) => Self::CMSG_MOVE_SPLINE_DONE,
+            ClientOpcodeMessage::CMSG_MOVE_FALL_RESET(_) => Self::CMSG_MOVE_FALL_RESET,
+            ClientOpcodeMessage::CMSG_REQUEST_RAID_INFO(_) => Self::CMSG_REQUEST_RAID_INFO,
+            ClientOpcodeMessage::CMSG_MOVE_TIME_SKIPPED(_) => Self::CMSG_MOVE_TIME_SKIPPED,
+            ClientOpcodeMessage::CMSG_MOVE_FEATHER_FALL_ACK(_) => Self::CMSG_MOVE_FEATHER_FALL_ACK,
+            ClientOpcodeMessage::CMSG_MOVE_WATER_WALK_ACK(_) => Self::CMSG_MOVE_WATER_WALK_ACK,
+            ClientOpcodeMessage::CMSG_MOVE_NOT_ACTIVE_MOVER(_) => Self::CMSG_MOVE_NOT_ACTIVE_MOVER,
+            ClientOpcodeMessage::CMSG_BATTLEFIELD_STATUS(_) => Self::CMSG_BATTLEFIELD_STATUS,
+            ClientOpcodeMessage::CMSG_BATTLEFIELD_PORT(_) => Self::CMSG_BATTLEFIELD_PORT,
+            ClientOpcodeMessage::MSG_INSPECT_HONOR_STATS(_) => Self::MSG_INSPECT_HONOR_STATS,
+            ClientOpcodeMessage::CMSG_BATTLEMASTER_HELLO(_) => Self::CMSG_BATTLEMASTER_HELLO,
+            ClientOpcodeMessage::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(_) => Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK,
+            ClientOpcodeMessage::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(_) => Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK,
+            ClientOpcodeMessage::CMSG_FORCE_TURN_RATE_CHANGE_ACK(_) => Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK,
+            ClientOpcodeMessage::MSG_PVP_LOG_DATA(_) => Self::MSG_PVP_LOG_DATA,
+            ClientOpcodeMessage::CMSG_LEAVE_BATTLEFIELD(_) => Self::CMSG_LEAVE_BATTLEFIELD,
+            ClientOpcodeMessage::CMSG_AREA_SPIRIT_HEALER_QUERY(_) => Self::CMSG_AREA_SPIRIT_HEALER_QUERY,
+            ClientOpcodeMessage::CMSG_AREA_SPIRIT_HEALER_QUEUE(_) => Self::CMSG_AREA_SPIRIT_HEALER_QUEUE,
+            ClientOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => Self::MSG_BATTLEGROUND_PLAYER_POSITIONS,
+            ClientOpcodeMessage::CMSG_PET_STOP_ATTACK(_) => Self::CMSG_PET_STOP_ATTACK,
+            ClientOpcodeMessage::CMSG_BATTLEMASTER_JOIN(_) => Self::CMSG_BATTLEMASTER_JOIN,
+            ClientOpcodeMessage::CMSG_PET_UNLEARN(_) => Self::CMSG_PET_UNLEARN,
+            ClientOpcodeMessage::CMSG_PET_SPELL_AUTOCAST(_) => Self::CMSG_PET_SPELL_AUTOCAST,
+            ClientOpcodeMessage::CMSG_GUILD_INFO_TEXT(_) => Self::CMSG_GUILD_INFO_TEXT,
+            ClientOpcodeMessage::CMSG_ACTIVATETAXIEXPRESS(_) => Self::CMSG_ACTIVATETAXIEXPRESS,
+            ClientOpcodeMessage::CMSG_SET_FACTION_INACTIVE(_) => Self::CMSG_SET_FACTION_INACTIVE,
+            ClientOpcodeMessage::CMSG_SET_WATCHED_FACTION(_) => Self::CMSG_SET_WATCHED_FACTION,
+            ClientOpcodeMessage::CMSG_RESET_INSTANCES(_) => Self::CMSG_RESET_INSTANCES,
+            ClientOpcodeMessage::MSG_RAID_TARGET_UPDATE(_) => Self::MSG_RAID_TARGET_UPDATE,
+            ClientOpcodeMessage::MSG_RAID_READY_CHECK(_) => Self::MSG_RAID_READY_CHECK,
+            ClientOpcodeMessage::CMSG_GMSURVEY_SUBMIT(_) => Self::CMSG_GMSURVEY_SUBMIT,
         }
     }
 }
 
 #[derive(Debug)]
-pub enum WorldClientOpcodeError {
+pub enum ClientOpcodeError {
     Io(std::io::Error),
     InvalidOpcode(u32),
 }
 
-impl std::error::Error for WorldClientOpcodeError {
+impl std::error::Error for ClientOpcodeError {
 }
 
-impl std::fmt::Display for WorldClientOpcodeError {
+impl std::fmt::Display for ClientOpcodeError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode for WorldClient: '{}'", i)),
+            Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode for Client: '{}'", i)),
         }
     }
 }
 
-impl From<std::io::Error> for WorldClientOpcodeError {
+impl From<std::io::Error> for ClientOpcodeError {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
     }
 }
 
 #[derive(Debug)]
-pub enum WorldClientOpcodeMessage {
+pub enum ClientOpcodeMessage {
     MSG_MOVE_START_FORWARD(MSG_MOVE_START_FORWARD),
     MSG_MOVE_START_BACKWARD(MSG_MOVE_START_BACKWARD),
     MSG_MOVE_STOP(MSG_MOVE_STOP),
@@ -1868,8 +1868,8 @@ pub enum WorldClientOpcodeMessage {
     CMSG_GMSURVEY_SUBMIT(CMSG_GMSURVEY_SUBMIT),
 }
 
-impl OpcodeMessage for WorldClientOpcodeMessage {
-    type Error = WorldClientOpcodeMessageError;
+impl OpcodeMessage for ClientOpcodeMessage {
+    type Error = ClientOpcodeMessageError;
     fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(i) => i.write_body(w)?,
@@ -3101,7 +3101,7 @@ impl OpcodeMessage for WorldClientOpcodeMessage {
 }
 
 #[derive(Debug)]
-pub enum WorldClientOpcodeMessageError {
+pub enum ClientOpcodeMessageError {
     Io(std::io::Error),
     InvalidOpcode(u32),
     MSG_QUEST_PUSH_RESULT(MSG_QUEST_PUSH_RESULTError),
@@ -3173,12 +3173,12 @@ pub enum WorldClientOpcodeMessageError {
     CMSG_GMSURVEY_SUBMIT(CMSG_GMSURVEY_SUBMITError),
 }
 
-impl std::error::Error for WorldClientOpcodeMessageError {}
-impl std::fmt::Display for WorldClientOpcodeMessageError {
+impl std::error::Error for ClientOpcodeMessageError {}
+impl std::fmt::Display for ClientOpcodeMessageError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode received for WorldClientMessage: '{}'", i)),
+            Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode received for ClientMessage: '{}'", i)),
             Self::MSG_QUEST_PUSH_RESULT(i) => i.fmt(f),
             Self::MSG_PETITION_RENAME(i) => i.fmt(f),
             Self::CMSG_WORLD_TELEPORT(i) => i.fmt(f),
@@ -3250,22 +3250,22 @@ impl std::fmt::Display for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<std::io::Error> for WorldClientOpcodeMessageError {
+impl From<std::io::Error> for ClientOpcodeMessageError {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
     }
 }
 
-impl From<WorldClientOpcodeError> for WorldClientOpcodeMessageError {
-    fn from(e: WorldClientOpcodeError) -> Self {
+impl From<ClientOpcodeError> for ClientOpcodeMessageError {
+    fn from(e: ClientOpcodeError) -> Self {
         match e {
-            WorldClientOpcodeError::Io(i) => Self::Io(i),
-            WorldClientOpcodeError::InvalidOpcode(i) => Self::InvalidOpcode(i),
+            ClientOpcodeError::Io(i) => Self::Io(i),
+            ClientOpcodeError::InvalidOpcode(i) => Self::InvalidOpcode(i),
         }
     }
 }
 
-impl From<MSG_QUEST_PUSH_RESULTError> for WorldClientOpcodeMessageError {
+impl From<MSG_QUEST_PUSH_RESULTError> for ClientOpcodeMessageError {
     fn from(e: MSG_QUEST_PUSH_RESULTError) -> Self {
         match e {
             MSG_QUEST_PUSH_RESULTError::Io(i) => Self::Io(i),
@@ -3274,7 +3274,7 @@ impl From<MSG_QUEST_PUSH_RESULTError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<MSG_PETITION_RENAMEError> for WorldClientOpcodeMessageError {
+impl From<MSG_PETITION_RENAMEError> for ClientOpcodeMessageError {
     fn from(e: MSG_PETITION_RENAMEError) -> Self {
         match e {
             MSG_PETITION_RENAMEError::Io(i) => Self::Io(i),
@@ -3283,7 +3283,7 @@ impl From<MSG_PETITION_RENAMEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_WORLD_TELEPORTError> for WorldClientOpcodeMessageError {
+impl From<CMSG_WORLD_TELEPORTError> for ClientOpcodeMessageError {
     fn from(e: CMSG_WORLD_TELEPORTError) -> Self {
         match e {
             CMSG_WORLD_TELEPORTError::Io(i) => Self::Io(i),
@@ -3292,7 +3292,7 @@ impl From<CMSG_WORLD_TELEPORTError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHAR_CREATEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHAR_CREATEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHAR_CREATEError) -> Self {
         match e {
             CMSG_CHAR_CREATEError::Io(i) => Self::Io(i),
@@ -3301,7 +3301,7 @@ impl From<CMSG_CHAR_CREATEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_WHOError> for WorldClientOpcodeMessageError {
+impl From<CMSG_WHOError> for ClientOpcodeMessageError {
     fn from(e: CMSG_WHOError) -> Self {
         match e {
             CMSG_WHOError::Io(i) => Self::Io(i),
@@ -3310,7 +3310,7 @@ impl From<CMSG_WHOError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_WHOISError> for WorldClientOpcodeMessageError {
+impl From<CMSG_WHOISError> for ClientOpcodeMessageError {
     fn from(e: CMSG_WHOISError) -> Self {
         match e {
             CMSG_WHOISError::Io(i) => Self::Io(i),
@@ -3319,7 +3319,7 @@ impl From<CMSG_WHOISError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_ADD_FRIENDError> for WorldClientOpcodeMessageError {
+impl From<CMSG_ADD_FRIENDError> for ClientOpcodeMessageError {
     fn from(e: CMSG_ADD_FRIENDError) -> Self {
         match e {
             CMSG_ADD_FRIENDError::Io(i) => Self::Io(i),
@@ -3328,7 +3328,7 @@ impl From<CMSG_ADD_FRIENDError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_ADD_IGNOREError> for WorldClientOpcodeMessageError {
+impl From<CMSG_ADD_IGNOREError> for ClientOpcodeMessageError {
     fn from(e: CMSG_ADD_IGNOREError) -> Self {
         match e {
             CMSG_ADD_IGNOREError::Io(i) => Self::Io(i),
@@ -3337,7 +3337,7 @@ impl From<CMSG_ADD_IGNOREError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GROUP_INVITEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GROUP_INVITEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GROUP_INVITEError) -> Self {
         match e {
             CMSG_GROUP_INVITEError::Io(i) => Self::Io(i),
@@ -3346,7 +3346,7 @@ impl From<CMSG_GROUP_INVITEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GROUP_UNINVITEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GROUP_UNINVITEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GROUP_UNINVITEError) -> Self {
         match e {
             CMSG_GROUP_UNINVITEError::Io(i) => Self::Io(i),
@@ -3355,7 +3355,7 @@ impl From<CMSG_GROUP_UNINVITEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_LOOT_METHODError> for WorldClientOpcodeMessageError {
+impl From<CMSG_LOOT_METHODError> for ClientOpcodeMessageError {
     fn from(e: CMSG_LOOT_METHODError) -> Self {
         match e {
             CMSG_LOOT_METHODError::Io(i) => Self::Io(i),
@@ -3364,7 +3364,7 @@ impl From<CMSG_LOOT_METHODError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_CREATEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_CREATEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_CREATEError) -> Self {
         match e {
             CMSG_GUILD_CREATEError::Io(i) => Self::Io(i),
@@ -3373,7 +3373,7 @@ impl From<CMSG_GUILD_CREATEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_INVITEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_INVITEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_INVITEError) -> Self {
         match e {
             CMSG_GUILD_INVITEError::Io(i) => Self::Io(i),
@@ -3382,7 +3382,7 @@ impl From<CMSG_GUILD_INVITEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_PROMOTEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_PROMOTEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_PROMOTEError) -> Self {
         match e {
             CMSG_GUILD_PROMOTEError::Io(i) => Self::Io(i),
@@ -3391,7 +3391,7 @@ impl From<CMSG_GUILD_PROMOTEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_DEMOTEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_DEMOTEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_DEMOTEError) -> Self {
         match e {
             CMSG_GUILD_DEMOTEError::Io(i) => Self::Io(i),
@@ -3400,7 +3400,7 @@ impl From<CMSG_GUILD_DEMOTEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_REMOVEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_REMOVEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_REMOVEError) -> Self {
         match e {
             CMSG_GUILD_REMOVEError::Io(i) => Self::Io(i),
@@ -3409,7 +3409,7 @@ impl From<CMSG_GUILD_REMOVEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_LEADERError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_LEADERError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_LEADERError) -> Self {
         match e {
             CMSG_GUILD_LEADERError::Io(i) => Self::Io(i),
@@ -3418,7 +3418,7 @@ impl From<CMSG_GUILD_LEADERError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_MOTDError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_MOTDError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_MOTDError) -> Self {
         match e {
             CMSG_GUILD_MOTDError::Io(i) => Self::Io(i),
@@ -3427,7 +3427,7 @@ impl From<CMSG_GUILD_MOTDError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_MESSAGECHATError> for WorldClientOpcodeMessageError {
+impl From<CMSG_MESSAGECHATError> for ClientOpcodeMessageError {
     fn from(e: CMSG_MESSAGECHATError) -> Self {
         match e {
             CMSG_MESSAGECHATError::Io(i) => Self::Io(i),
@@ -3436,7 +3436,7 @@ impl From<CMSG_MESSAGECHATError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_JOIN_CHANNELError> for WorldClientOpcodeMessageError {
+impl From<CMSG_JOIN_CHANNELError> for ClientOpcodeMessageError {
     fn from(e: CMSG_JOIN_CHANNELError) -> Self {
         match e {
             CMSG_JOIN_CHANNELError::Io(i) => Self::Io(i),
@@ -3445,7 +3445,7 @@ impl From<CMSG_JOIN_CHANNELError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_LEAVE_CHANNELError> for WorldClientOpcodeMessageError {
+impl From<CMSG_LEAVE_CHANNELError> for ClientOpcodeMessageError {
     fn from(e: CMSG_LEAVE_CHANNELError) -> Self {
         match e {
             CMSG_LEAVE_CHANNELError::Io(i) => Self::Io(i),
@@ -3454,7 +3454,7 @@ impl From<CMSG_LEAVE_CHANNELError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_LISTError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_LISTError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_LISTError) -> Self {
         match e {
             CMSG_CHANNEL_LISTError::Io(i) => Self::Io(i),
@@ -3463,7 +3463,7 @@ impl From<CMSG_CHANNEL_LISTError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_PASSWORDError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_PASSWORDError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_PASSWORDError) -> Self {
         match e {
             CMSG_CHANNEL_PASSWORDError::Io(i) => Self::Io(i),
@@ -3472,7 +3472,7 @@ impl From<CMSG_CHANNEL_PASSWORDError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_SET_OWNERError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_SET_OWNERError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_SET_OWNERError) -> Self {
         match e {
             CMSG_CHANNEL_SET_OWNERError::Io(i) => Self::Io(i),
@@ -3481,7 +3481,7 @@ impl From<CMSG_CHANNEL_SET_OWNERError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_OWNERError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_OWNERError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_OWNERError) -> Self {
         match e {
             CMSG_CHANNEL_OWNERError::Io(i) => Self::Io(i),
@@ -3490,7 +3490,7 @@ impl From<CMSG_CHANNEL_OWNERError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_MODERATORError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_MODERATORError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_MODERATORError) -> Self {
         match e {
             CMSG_CHANNEL_MODERATORError::Io(i) => Self::Io(i),
@@ -3499,7 +3499,7 @@ impl From<CMSG_CHANNEL_MODERATORError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_UNMODERATORError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_UNMODERATORError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_UNMODERATORError) -> Self {
         match e {
             CMSG_CHANNEL_UNMODERATORError::Io(i) => Self::Io(i),
@@ -3508,7 +3508,7 @@ impl From<CMSG_CHANNEL_UNMODERATORError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_MUTEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_MUTEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_MUTEError) -> Self {
         match e {
             CMSG_CHANNEL_MUTEError::Io(i) => Self::Io(i),
@@ -3517,7 +3517,7 @@ impl From<CMSG_CHANNEL_MUTEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_UNMUTEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_UNMUTEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_UNMUTEError) -> Self {
         match e {
             CMSG_CHANNEL_UNMUTEError::Io(i) => Self::Io(i),
@@ -3526,7 +3526,7 @@ impl From<CMSG_CHANNEL_UNMUTEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_INVITEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_INVITEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_INVITEError) -> Self {
         match e {
             CMSG_CHANNEL_INVITEError::Io(i) => Self::Io(i),
@@ -3535,7 +3535,7 @@ impl From<CMSG_CHANNEL_INVITEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_KICKError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_KICKError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_KICKError) -> Self {
         match e {
             CMSG_CHANNEL_KICKError::Io(i) => Self::Io(i),
@@ -3544,7 +3544,7 @@ impl From<CMSG_CHANNEL_KICKError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_BANError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_BANError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_BANError) -> Self {
         match e {
             CMSG_CHANNEL_BANError::Io(i) => Self::Io(i),
@@ -3553,7 +3553,7 @@ impl From<CMSG_CHANNEL_BANError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_UNBANError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_UNBANError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_UNBANError) -> Self {
         match e {
             CMSG_CHANNEL_UNBANError::Io(i) => Self::Io(i),
@@ -3562,7 +3562,7 @@ impl From<CMSG_CHANNEL_UNBANError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_ANNOUNCEMENTSError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_ANNOUNCEMENTSError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_ANNOUNCEMENTSError) -> Self {
         match e {
             CMSG_CHANNEL_ANNOUNCEMENTSError::Io(i) => Self::Io(i),
@@ -3571,7 +3571,7 @@ impl From<CMSG_CHANNEL_ANNOUNCEMENTSError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHANNEL_MODERATEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHANNEL_MODERATEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHANNEL_MODERATEError) -> Self {
         match e {
             CMSG_CHANNEL_MODERATEError::Io(i) => Self::Io(i),
@@ -3580,7 +3580,7 @@ impl From<CMSG_CHANNEL_MODERATEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_USE_ITEMError> for WorldClientOpcodeMessageError {
+impl From<CMSG_USE_ITEMError> for ClientOpcodeMessageError {
     fn from(e: CMSG_USE_ITEMError) -> Self {
         match e {
             CMSG_USE_ITEMError::Io(i) => Self::Io(i),
@@ -3589,7 +3589,7 @@ impl From<CMSG_USE_ITEMError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_STANDSTATECHANGEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_STANDSTATECHANGEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_STANDSTATECHANGEError) -> Self {
         match e {
             CMSG_STANDSTATECHANGEError::Io(i) => Self::Io(i),
@@ -3598,7 +3598,7 @@ impl From<CMSG_STANDSTATECHANGEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_EMOTEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_EMOTEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_EMOTEError) -> Self {
         match e {
             CMSG_EMOTEError::Io(i) => Self::Io(i),
@@ -3607,7 +3607,7 @@ impl From<CMSG_EMOTEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_TEXT_EMOTEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_TEXT_EMOTEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_TEXT_EMOTEError) -> Self {
         match e {
             CMSG_TEXT_EMOTEError::Io(i) => Self::Io(i),
@@ -3616,7 +3616,7 @@ impl From<CMSG_TEXT_EMOTEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CAST_SPELLError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CAST_SPELLError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CAST_SPELLError) -> Self {
         match e {
             CMSG_CAST_SPELLError::Io(i) => Self::Io(i),
@@ -3625,7 +3625,7 @@ impl From<CMSG_CAST_SPELLError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_PET_RENAMEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_PET_RENAMEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_PET_RENAMEError) -> Self {
         match e {
             CMSG_PET_RENAMEError::Io(i) => Self::Io(i),
@@ -3634,7 +3634,7 @@ impl From<CMSG_PET_RENAMEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GOSSIP_SELECT_OPTIONError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GOSSIP_SELECT_OPTIONError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GOSSIP_SELECT_OPTIONError) -> Self {
         match e {
             CMSG_GOSSIP_SELECT_OPTIONError::Io(i) => Self::Io(i),
@@ -3643,7 +3643,7 @@ impl From<CMSG_GOSSIP_SELECT_OPTIONError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_PETITION_BUYError> for WorldClientOpcodeMessageError {
+impl From<CMSG_PETITION_BUYError> for ClientOpcodeMessageError {
     fn from(e: CMSG_PETITION_BUYError) -> Self {
         match e {
             CMSG_PETITION_BUYError::Io(i) => Self::Io(i),
@@ -3652,7 +3652,7 @@ impl From<CMSG_PETITION_BUYError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_BUGError> for WorldClientOpcodeMessageError {
+impl From<CMSG_BUGError> for ClientOpcodeMessageError {
     fn from(e: CMSG_BUGError) -> Self {
         match e {
             CMSG_BUGError::Io(i) => Self::Io(i),
@@ -3661,7 +3661,7 @@ impl From<CMSG_BUGError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_SETSHEATHEDError> for WorldClientOpcodeMessageError {
+impl From<CMSG_SETSHEATHEDError> for ClientOpcodeMessageError {
     fn from(e: CMSG_SETSHEATHEDError) -> Self {
         match e {
             CMSG_SETSHEATHEDError::Io(i) => Self::Io(i),
@@ -3670,7 +3670,7 @@ impl From<CMSG_SETSHEATHEDError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_AUTH_SESSIONError> for WorldClientOpcodeMessageError {
+impl From<CMSG_AUTH_SESSIONError> for ClientOpcodeMessageError {
     fn from(e: CMSG_AUTH_SESSIONError) -> Self {
         match e {
             CMSG_AUTH_SESSIONError::Io(i) => Self::Io(i),
@@ -3679,7 +3679,7 @@ impl From<CMSG_AUTH_SESSIONError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GMTICKET_CREATEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GMTICKET_CREATEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GMTICKET_CREATEError) -> Self {
         match e {
             CMSG_GMTICKET_CREATEError::Io(i) => Self::Io(i),
@@ -3688,7 +3688,7 @@ impl From<CMSG_GMTICKET_CREATEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GMTICKET_UPDATETEXTError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GMTICKET_UPDATETEXTError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GMTICKET_UPDATETEXTError) -> Self {
         match e {
             CMSG_GMTICKET_UPDATETEXTError::Io(i) => Self::Io(i),
@@ -3697,7 +3697,7 @@ impl From<CMSG_GMTICKET_UPDATETEXTError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_RANKError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_RANKError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_RANKError) -> Self {
         match e {
             CMSG_GUILD_RANKError::Io(i) => Self::Io(i),
@@ -3706,7 +3706,7 @@ impl From<CMSG_GUILD_RANKError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_ADD_RANKError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_ADD_RANKError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_ADD_RANKError) -> Self {
         match e {
             CMSG_GUILD_ADD_RANKError::Io(i) => Self::Io(i),
@@ -3715,7 +3715,7 @@ impl From<CMSG_GUILD_ADD_RANKError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_SET_PUBLIC_NOTEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_SET_PUBLIC_NOTEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_SET_PUBLIC_NOTEError) -> Self {
         match e {
             CMSG_GUILD_SET_PUBLIC_NOTEError::Io(i) => Self::Io(i),
@@ -3724,7 +3724,7 @@ impl From<CMSG_GUILD_SET_PUBLIC_NOTEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_SET_OFFICER_NOTEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_SET_OFFICER_NOTEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_SET_OFFICER_NOTEError) -> Self {
         match e {
             CMSG_GUILD_SET_OFFICER_NOTEError::Io(i) => Self::Io(i),
@@ -3733,7 +3733,7 @@ impl From<CMSG_GUILD_SET_OFFICER_NOTEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_SEND_MAILError> for WorldClientOpcodeMessageError {
+impl From<CMSG_SEND_MAILError> for ClientOpcodeMessageError {
     fn from(e: CMSG_SEND_MAILError) -> Self {
         match e {
             CMSG_SEND_MAILError::Io(i) => Self::Io(i),
@@ -3742,7 +3742,7 @@ impl From<CMSG_SEND_MAILError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_BATTLEFIELD_LISTError> for WorldClientOpcodeMessageError {
+impl From<CMSG_BATTLEFIELD_LISTError> for ClientOpcodeMessageError {
     fn from(e: CMSG_BATTLEFIELD_LISTError) -> Self {
         match e {
             CMSG_BATTLEFIELD_LISTError::Io(i) => Self::Io(i),
@@ -3751,7 +3751,7 @@ impl From<CMSG_BATTLEFIELD_LISTError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_BATTLEFIELD_JOINError> for WorldClientOpcodeMessageError {
+impl From<CMSG_BATTLEFIELD_JOINError> for ClientOpcodeMessageError {
     fn from(e: CMSG_BATTLEFIELD_JOINError) -> Self {
         match e {
             CMSG_BATTLEFIELD_JOINError::Io(i) => Self::Io(i),
@@ -3760,7 +3760,7 @@ impl From<CMSG_BATTLEFIELD_JOINError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_AUCTION_LIST_ITEMSError> for WorldClientOpcodeMessageError {
+impl From<CMSG_AUCTION_LIST_ITEMSError> for ClientOpcodeMessageError {
     fn from(e: CMSG_AUCTION_LIST_ITEMSError) -> Self {
         match e {
             CMSG_AUCTION_LIST_ITEMSError::Io(i) => Self::Io(i),
@@ -3769,7 +3769,7 @@ impl From<CMSG_AUCTION_LIST_ITEMSError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_FAR_SIGHTError> for WorldClientOpcodeMessageError {
+impl From<CMSG_FAR_SIGHTError> for ClientOpcodeMessageError {
     fn from(e: CMSG_FAR_SIGHTError) -> Self {
         match e {
             CMSG_FAR_SIGHTError::Io(i) => Self::Io(i),
@@ -3778,7 +3778,7 @@ impl From<CMSG_FAR_SIGHTError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GROUP_CHANGE_SUB_GROUPError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GROUP_CHANGE_SUB_GROUPError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GROUP_CHANGE_SUB_GROUPError) -> Self {
         match e {
             CMSG_GROUP_CHANGE_SUB_GROUPError::Io(i) => Self::Io(i),
@@ -3787,7 +3787,7 @@ impl From<CMSG_GROUP_CHANGE_SUB_GROUPError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GROUP_SWAP_SUB_GROUPError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GROUP_SWAP_SUB_GROUPError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GROUP_SWAP_SUB_GROUPError) -> Self {
         match e {
             CMSG_GROUP_SWAP_SUB_GROUPError::Io(i) => Self::Io(i),
@@ -3796,7 +3796,7 @@ impl From<CMSG_GROUP_SWAP_SUB_GROUPError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_BUYBACK_ITEMError> for WorldClientOpcodeMessageError {
+impl From<CMSG_BUYBACK_ITEMError> for ClientOpcodeMessageError {
     fn from(e: CMSG_BUYBACK_ITEMError) -> Self {
         match e {
             CMSG_BUYBACK_ITEMError::Io(i) => Self::Io(i),
@@ -3805,7 +3805,7 @@ impl From<CMSG_BUYBACK_ITEMError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_LOOT_ROLLError> for WorldClientOpcodeMessageError {
+impl From<CMSG_LOOT_ROLLError> for ClientOpcodeMessageError {
     fn from(e: CMSG_LOOT_ROLLError) -> Self {
         match e {
             CMSG_LOOT_ROLLError::Io(i) => Self::Io(i),
@@ -3814,7 +3814,7 @@ impl From<CMSG_LOOT_ROLLError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_CHAR_RENAMEError> for WorldClientOpcodeMessageError {
+impl From<CMSG_CHAR_RENAMEError> for ClientOpcodeMessageError {
     fn from(e: CMSG_CHAR_RENAMEError) -> Self {
         match e {
             CMSG_CHAR_RENAMEError::Io(i) => Self::Io(i),
@@ -3823,7 +3823,7 @@ impl From<CMSG_CHAR_RENAMEError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_BATTLEFIELD_PORTError> for WorldClientOpcodeMessageError {
+impl From<CMSG_BATTLEFIELD_PORTError> for ClientOpcodeMessageError {
     fn from(e: CMSG_BATTLEFIELD_PORTError) -> Self {
         match e {
             CMSG_BATTLEFIELD_PORTError::Io(i) => Self::Io(i),
@@ -3832,7 +3832,7 @@ impl From<CMSG_BATTLEFIELD_PORTError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_BATTLEMASTER_JOINError> for WorldClientOpcodeMessageError {
+impl From<CMSG_BATTLEMASTER_JOINError> for ClientOpcodeMessageError {
     fn from(e: CMSG_BATTLEMASTER_JOINError) -> Self {
         match e {
             CMSG_BATTLEMASTER_JOINError::Io(i) => Self::Io(i),
@@ -3841,7 +3841,7 @@ impl From<CMSG_BATTLEMASTER_JOINError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<CMSG_GUILD_INFO_TEXTError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GUILD_INFO_TEXTError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GUILD_INFO_TEXTError) -> Self {
         match e {
             CMSG_GUILD_INFO_TEXTError::Io(i) => Self::Io(i),
@@ -3850,7 +3850,7 @@ impl From<CMSG_GUILD_INFO_TEXTError> for WorldClientOpcodeMessageError {
     }
 }
 
-impl From<MSG_RAID_TARGET_UPDATE_ClientError> for WorldClientOpcodeMessageError {
+impl From<MSG_RAID_TARGET_UPDATE_ClientError> for ClientOpcodeMessageError {
     fn from(e: MSG_RAID_TARGET_UPDATE_ClientError) -> Self {
         match e {
             MSG_RAID_TARGET_UPDATE_ClientError::Io(i) => Self::Io(i),
@@ -3859,7 +3859,7 @@ impl From<MSG_RAID_TARGET_UPDATE_ClientError> for WorldClientOpcodeMessageError 
     }
 }
 
-impl From<CMSG_GMSURVEY_SUBMITError> for WorldClientOpcodeMessageError {
+impl From<CMSG_GMSURVEY_SUBMITError> for ClientOpcodeMessageError {
     fn from(e: CMSG_GMSURVEY_SUBMITError) -> Self {
         match e {
             CMSG_GMSURVEY_SUBMITError::Io(i) => Self::Io(i),
@@ -4180,7 +4180,7 @@ use crate::world::v1::v12::{SMSG_EXPECTED_SPAM_RECORDS, SMSG_EXPECTED_SPAM_RECOR
 use crate::world::v1::v12::{SMSG_DEFENSE_MESSAGE, SMSG_DEFENSE_MESSAGEError};
 
 #[derive(Debug)]
-pub enum WorldServerOpcode {
+pub enum ServerOpcode {
     MSG_MOVE_START_FORWARD,
     MSG_MOVE_START_BACKWARD,
     MSG_MOVE_STOP,
@@ -4520,7 +4520,7 @@ pub enum WorldServerOpcode {
     SMSG_DEFENSE_MESSAGE,
 }
 
-impl WorldServerOpcode {
+impl ServerOpcode {
     pub const fn as_u16(&self) -> u16 {
         match self {
             Self::MSG_MOVE_START_FORWARD => 0xb5,
@@ -4865,8 +4865,8 @@ impl WorldServerOpcode {
 
 }
 
-impl WorldServerOpcode {
-    pub fn new(opcode: u16) -> std::result::Result<Self, WorldServerOpcodeError> {
+impl ServerOpcode {
+    pub fn new(opcode: u16) -> std::result::Result<Self, ServerOpcodeError> {
         match opcode {
             0xb5 => Ok(Self::MSG_MOVE_START_FORWARD),
             0xb6 => Ok(Self::MSG_MOVE_START_BACKWARD),
@@ -5205,382 +5205,382 @@ impl WorldServerOpcode {
             0x330 => Ok(Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS),
             0x332 => Ok(Self::SMSG_EXPECTED_SPAM_RECORDS),
             0x33b => Ok(Self::SMSG_DEFENSE_MESSAGE),
-            opcode => Err(WorldServerOpcodeError::InvalidOpcode(opcode)),
+            opcode => Err(ServerOpcodeError::InvalidOpcode(opcode)),
         }
     }
 
 }
 
-impl From<&WorldServerOpcodeMessage> for WorldServerOpcode {
-    fn from(e: &WorldServerOpcodeMessage) -> Self {
+impl From<&ServerOpcodeMessage> for ServerOpcode {
+    fn from(e: &ServerOpcodeMessage) -> Self {
         match *e {
-            WorldServerOpcodeMessage::MSG_MOVE_START_FORWARD(_) => Self::MSG_MOVE_START_FORWARD,
-            WorldServerOpcodeMessage::MSG_MOVE_START_BACKWARD(_) => Self::MSG_MOVE_START_BACKWARD,
-            WorldServerOpcodeMessage::MSG_MOVE_STOP(_) => Self::MSG_MOVE_STOP,
-            WorldServerOpcodeMessage::MSG_MOVE_START_STRAFE_LEFT(_) => Self::MSG_MOVE_START_STRAFE_LEFT,
-            WorldServerOpcodeMessage::MSG_MOVE_START_STRAFE_RIGHT(_) => Self::MSG_MOVE_START_STRAFE_RIGHT,
-            WorldServerOpcodeMessage::MSG_MOVE_STOP_STRAFE(_) => Self::MSG_MOVE_STOP_STRAFE,
-            WorldServerOpcodeMessage::MSG_MOVE_JUMP(_) => Self::MSG_MOVE_JUMP,
-            WorldServerOpcodeMessage::MSG_MOVE_START_TURN_LEFT(_) => Self::MSG_MOVE_START_TURN_LEFT,
-            WorldServerOpcodeMessage::MSG_MOVE_START_TURN_RIGHT(_) => Self::MSG_MOVE_START_TURN_RIGHT,
-            WorldServerOpcodeMessage::MSG_MOVE_STOP_TURN(_) => Self::MSG_MOVE_STOP_TURN,
-            WorldServerOpcodeMessage::MSG_MOVE_START_PITCH_UP(_) => Self::MSG_MOVE_START_PITCH_UP,
-            WorldServerOpcodeMessage::MSG_MOVE_START_PITCH_DOWN(_) => Self::MSG_MOVE_START_PITCH_DOWN,
-            WorldServerOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => Self::MSG_MOVE_STOP_PITCH,
-            WorldServerOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => Self::MSG_MOVE_SET_RUN_MODE,
-            WorldServerOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => Self::MSG_MOVE_SET_WALK_MODE,
-            WorldServerOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => Self::MSG_MOVE_TELEPORT_ACK,
-            WorldServerOpcodeMessage::MSG_MOVE_FALL_LAND(_) => Self::MSG_MOVE_FALL_LAND,
-            WorldServerOpcodeMessage::MSG_MOVE_START_SWIM(_) => Self::MSG_MOVE_START_SWIM,
-            WorldServerOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => Self::MSG_MOVE_STOP_SWIM,
-            WorldServerOpcodeMessage::MSG_MOVE_SET_FACING(_) => Self::MSG_MOVE_SET_FACING,
-            WorldServerOpcodeMessage::MSG_MOVE_SET_PITCH(_) => Self::MSG_MOVE_SET_PITCH,
-            WorldServerOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => Self::MSG_MOVE_WORLDPORT_ACK,
-            WorldServerOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => Self::MSG_MOVE_HEARTBEAT,
-            WorldServerOpcodeMessage::MSG_PETITION_DECLINE(_) => Self::MSG_PETITION_DECLINE,
-            WorldServerOpcodeMessage::MSG_TABARDVENDOR_ACTIVATE(_) => Self::MSG_TABARDVENDOR_ACTIVATE,
-            WorldServerOpcodeMessage::MSG_QUEST_PUSH_RESULT(_) => Self::MSG_QUEST_PUSH_RESULT,
-            WorldServerOpcodeMessage::MSG_PETITION_RENAME(_) => Self::MSG_PETITION_RENAME,
-            WorldServerOpcodeMessage::SMSG_CHAR_CREATE(_) => Self::SMSG_CHAR_CREATE,
-            WorldServerOpcodeMessage::SMSG_CHAR_ENUM(_) => Self::SMSG_CHAR_ENUM,
-            WorldServerOpcodeMessage::SMSG_CHAR_DELETE(_) => Self::SMSG_CHAR_DELETE,
-            WorldServerOpcodeMessage::SMSG_NEW_WORLD(_) => Self::SMSG_NEW_WORLD,
-            WorldServerOpcodeMessage::SMSG_TRANSFER_PENDING(_) => Self::SMSG_TRANSFER_PENDING,
-            WorldServerOpcodeMessage::SMSG_TRANSFER_ABORTED(_) => Self::SMSG_TRANSFER_ABORTED,
-            WorldServerOpcodeMessage::SMSG_CHARACTER_LOGIN_FAILED(_) => Self::SMSG_CHARACTER_LOGIN_FAILED,
-            WorldServerOpcodeMessage::SMSG_LOGIN_SETTIMESPEED(_) => Self::SMSG_LOGIN_SETTIMESPEED,
-            WorldServerOpcodeMessage::SMSG_LOGOUT_RESPONSE(_) => Self::SMSG_LOGOUT_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_LOGOUT_COMPLETE(_) => Self::SMSG_LOGOUT_COMPLETE,
-            WorldServerOpcodeMessage::SMSG_LOGOUT_CANCEL_ACK(_) => Self::SMSG_LOGOUT_CANCEL_ACK,
-            WorldServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(_) => Self::SMSG_NAME_QUERY_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_PET_NAME_QUERY_RESPONSE(_) => Self::SMSG_PET_NAME_QUERY_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_GUILD_QUERY_RESPONSE(_) => Self::SMSG_GUILD_QUERY_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_ITEM_QUERY_SINGLE_RESPONSE(_) => Self::SMSG_ITEM_QUERY_SINGLE_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_PAGE_TEXT_QUERY_RESPONSE(_) => Self::SMSG_PAGE_TEXT_QUERY_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_QUEST_QUERY_RESPONSE(_) => Self::SMSG_QUEST_QUERY_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_GAMEOBJECT_QUERY_RESPONSE(_) => Self::SMSG_GAMEOBJECT_QUERY_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_CREATURE_QUERY_RESPONSE(_) => Self::SMSG_CREATURE_QUERY_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_WHO(_) => Self::SMSG_WHO,
-            WorldServerOpcodeMessage::SMSG_WHOIS(_) => Self::SMSG_WHOIS,
-            WorldServerOpcodeMessage::SMSG_FRIEND_LIST(_) => Self::SMSG_FRIEND_LIST,
-            WorldServerOpcodeMessage::SMSG_FRIEND_STATUS(_) => Self::SMSG_FRIEND_STATUS,
-            WorldServerOpcodeMessage::SMSG_IGNORE_LIST(_) => Self::SMSG_IGNORE_LIST,
-            WorldServerOpcodeMessage::SMSG_GROUP_INVITE(_) => Self::SMSG_GROUP_INVITE,
-            WorldServerOpcodeMessage::SMSG_GROUP_DECLINE(_) => Self::SMSG_GROUP_DECLINE,
-            WorldServerOpcodeMessage::SMSG_GROUP_UNINVITE(_) => Self::SMSG_GROUP_UNINVITE,
-            WorldServerOpcodeMessage::SMSG_GROUP_SET_LEADER(_) => Self::SMSG_GROUP_SET_LEADER,
-            WorldServerOpcodeMessage::SMSG_GROUP_DESTROYED(_) => Self::SMSG_GROUP_DESTROYED,
-            WorldServerOpcodeMessage::SMSG_GROUP_LIST(_) => Self::SMSG_GROUP_LIST,
-            WorldServerOpcodeMessage::SMSG_PARTY_MEMBER_STATS(_) => Self::SMSG_PARTY_MEMBER_STATS,
-            WorldServerOpcodeMessage::SMSG_PARTY_COMMAND_RESULT(_) => Self::SMSG_PARTY_COMMAND_RESULT,
-            WorldServerOpcodeMessage::SMSG_GUILD_INVITE(_) => Self::SMSG_GUILD_INVITE,
-            WorldServerOpcodeMessage::SMSG_GUILD_INFO(_) => Self::SMSG_GUILD_INFO,
-            WorldServerOpcodeMessage::SMSG_GUILD_ROSTER(_) => Self::SMSG_GUILD_ROSTER,
-            WorldServerOpcodeMessage::SMSG_GUILD_EVENT(_) => Self::SMSG_GUILD_EVENT,
-            WorldServerOpcodeMessage::SMSG_GUILD_COMMAND_RESULT(_) => Self::SMSG_GUILD_COMMAND_RESULT,
-            WorldServerOpcodeMessage::SMSG_MESSAGECHAT(_) => Self::SMSG_MESSAGECHAT,
-            WorldServerOpcodeMessage::SMSG_CHANNEL_NOTIFY(_) => Self::SMSG_CHANNEL_NOTIFY,
-            WorldServerOpcodeMessage::SMSG_CHANNEL_LIST(_) => Self::SMSG_CHANNEL_LIST,
-            WorldServerOpcodeMessage::SMSG_DESTROY_OBJECT(_) => Self::SMSG_DESTROY_OBJECT,
-            WorldServerOpcodeMessage::SMSG_READ_ITEM_OK(_) => Self::SMSG_READ_ITEM_OK,
-            WorldServerOpcodeMessage::SMSG_READ_ITEM_FAILED(_) => Self::SMSG_READ_ITEM_FAILED,
-            WorldServerOpcodeMessage::SMSG_ITEM_COOLDOWN(_) => Self::SMSG_ITEM_COOLDOWN,
-            WorldServerOpcodeMessage::SMSG_GAMEOBJECT_CUSTOM_ANIM(_) => Self::SMSG_GAMEOBJECT_CUSTOM_ANIM,
-            WorldServerOpcodeMessage::SMSG_MONSTER_MOVE(_) => Self::SMSG_MONSTER_MOVE,
-            WorldServerOpcodeMessage::SMSG_MOVE_WATER_WALK(_) => Self::SMSG_MOVE_WATER_WALK,
-            WorldServerOpcodeMessage::SMSG_MOVE_LAND_WALK(_) => Self::SMSG_MOVE_LAND_WALK,
-            WorldServerOpcodeMessage::SMSG_FORCE_RUN_SPEED_CHANGE(_) => Self::SMSG_FORCE_RUN_SPEED_CHANGE,
-            WorldServerOpcodeMessage::SMSG_FORCE_RUN_BACK_SPEED_CHANGE(_) => Self::SMSG_FORCE_RUN_BACK_SPEED_CHANGE,
-            WorldServerOpcodeMessage::SMSG_FORCE_SWIM_SPEED_CHANGE(_) => Self::SMSG_FORCE_SWIM_SPEED_CHANGE,
-            WorldServerOpcodeMessage::SMSG_FORCE_MOVE_ROOT(_) => Self::SMSG_FORCE_MOVE_ROOT,
-            WorldServerOpcodeMessage::SMSG_FORCE_MOVE_UNROOT(_) => Self::SMSG_FORCE_MOVE_UNROOT,
-            WorldServerOpcodeMessage::SMSG_MOVE_KNOCK_BACK(_) => Self::SMSG_MOVE_KNOCK_BACK,
-            WorldServerOpcodeMessage::SMSG_MOVE_FEATHER_FALL(_) => Self::SMSG_MOVE_FEATHER_FALL,
-            WorldServerOpcodeMessage::SMSG_MOVE_NORMAL_FALL(_) => Self::SMSG_MOVE_NORMAL_FALL,
-            WorldServerOpcodeMessage::SMSG_MOVE_SET_HOVER(_) => Self::SMSG_MOVE_SET_HOVER,
-            WorldServerOpcodeMessage::SMSG_MOVE_UNSET_HOVER(_) => Self::SMSG_MOVE_UNSET_HOVER,
-            WorldServerOpcodeMessage::SMSG_TRIGGER_CINEMATIC(_) => Self::SMSG_TRIGGER_CINEMATIC,
-            WorldServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(_) => Self::SMSG_TUTORIAL_FLAGS,
-            WorldServerOpcodeMessage::SMSG_EMOTE(_) => Self::SMSG_EMOTE,
-            WorldServerOpcodeMessage::SMSG_TEXT_EMOTE(_) => Self::SMSG_TEXT_EMOTE,
-            WorldServerOpcodeMessage::SMSG_OPEN_CONTAINER(_) => Self::SMSG_OPEN_CONTAINER,
-            WorldServerOpcodeMessage::SMSG_INSPECT(_) => Self::SMSG_INSPECT,
-            WorldServerOpcodeMessage::SMSG_TRADE_STATUS(_) => Self::SMSG_TRADE_STATUS,
-            WorldServerOpcodeMessage::SMSG_TRADE_STATUS_EXTENDED(_) => Self::SMSG_TRADE_STATUS_EXTENDED,
-            WorldServerOpcodeMessage::SMSG_INITIALIZE_FACTIONS(_) => Self::SMSG_INITIALIZE_FACTIONS,
-            WorldServerOpcodeMessage::SMSG_SET_FACTION_VISIBLE(_) => Self::SMSG_SET_FACTION_VISIBLE,
-            WorldServerOpcodeMessage::SMSG_SET_FACTION_STANDING(_) => Self::SMSG_SET_FACTION_STANDING,
-            WorldServerOpcodeMessage::SMSG_SET_PROFICIENCY(_) => Self::SMSG_SET_PROFICIENCY,
-            WorldServerOpcodeMessage::SMSG_ACTION_BUTTONS(_) => Self::SMSG_ACTION_BUTTONS,
-            WorldServerOpcodeMessage::SMSG_INITIAL_SPELLS(_) => Self::SMSG_INITIAL_SPELLS,
-            WorldServerOpcodeMessage::SMSG_LEARNED_SPELL(_) => Self::SMSG_LEARNED_SPELL,
-            WorldServerOpcodeMessage::SMSG_SUPERCEDED_SPELL(_) => Self::SMSG_SUPERCEDED_SPELL,
-            WorldServerOpcodeMessage::SMSG_CAST_RESULT(_) => Self::SMSG_CAST_RESULT,
-            WorldServerOpcodeMessage::SMSG_SPELL_START(_) => Self::SMSG_SPELL_START,
-            WorldServerOpcodeMessage::SMSG_SPELL_GO(_) => Self::SMSG_SPELL_GO,
-            WorldServerOpcodeMessage::SMSG_SPELL_FAILURE(_) => Self::SMSG_SPELL_FAILURE,
-            WorldServerOpcodeMessage::SMSG_SPELL_COOLDOWN(_) => Self::SMSG_SPELL_COOLDOWN,
-            WorldServerOpcodeMessage::SMSG_COOLDOWN_EVENT(_) => Self::SMSG_COOLDOWN_EVENT,
-            WorldServerOpcodeMessage::SMSG_UPDATE_AURA_DURATION(_) => Self::SMSG_UPDATE_AURA_DURATION,
-            WorldServerOpcodeMessage::SMSG_PET_CAST_FAILED(_) => Self::SMSG_PET_CAST_FAILED,
-            WorldServerOpcodeMessage::SMSG_AI_REACTION(_) => Self::SMSG_AI_REACTION,
-            WorldServerOpcodeMessage::SMSG_ATTACKSTART(_) => Self::SMSG_ATTACKSTART,
-            WorldServerOpcodeMessage::SMSG_ATTACKSTOP(_) => Self::SMSG_ATTACKSTOP,
-            WorldServerOpcodeMessage::SMSG_ATTACKSWING_NOTINRANGE(_) => Self::SMSG_ATTACKSWING_NOTINRANGE,
-            WorldServerOpcodeMessage::SMSG_ATTACKSWING_BADFACING(_) => Self::SMSG_ATTACKSWING_BADFACING,
-            WorldServerOpcodeMessage::SMSG_ATTACKSWING_NOTSTANDING(_) => Self::SMSG_ATTACKSWING_NOTSTANDING,
-            WorldServerOpcodeMessage::SMSG_ATTACKSWING_DEADTARGET(_) => Self::SMSG_ATTACKSWING_DEADTARGET,
-            WorldServerOpcodeMessage::SMSG_ATTACKSWING_CANT_ATTACK(_) => Self::SMSG_ATTACKSWING_CANT_ATTACK,
-            WorldServerOpcodeMessage::SMSG_ATTACKERSTATEUPDATE(_) => Self::SMSG_ATTACKERSTATEUPDATE,
-            WorldServerOpcodeMessage::SMSG_CANCEL_COMBAT(_) => Self::SMSG_CANCEL_COMBAT,
-            WorldServerOpcodeMessage::SMSG_SPELLHEALLOG(_) => Self::SMSG_SPELLHEALLOG,
-            WorldServerOpcodeMessage::SMSG_SPELLENERGIZELOG(_) => Self::SMSG_SPELLENERGIZELOG,
-            WorldServerOpcodeMessage::SMSG_BINDPOINTUPDATE(_) => Self::SMSG_BINDPOINTUPDATE,
-            WorldServerOpcodeMessage::SMSG_PLAYERBOUND(_) => Self::SMSG_PLAYERBOUND,
-            WorldServerOpcodeMessage::SMSG_CLIENT_CONTROL_UPDATE(_) => Self::SMSG_CLIENT_CONTROL_UPDATE,
-            WorldServerOpcodeMessage::SMSG_RESURRECT_REQUEST(_) => Self::SMSG_RESURRECT_REQUEST,
-            WorldServerOpcodeMessage::SMSG_LOOT_RESPONSE(_) => Self::SMSG_LOOT_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_LOOT_RELEASE_RESPONSE(_) => Self::SMSG_LOOT_RELEASE_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_LOOT_REMOVED(_) => Self::SMSG_LOOT_REMOVED,
-            WorldServerOpcodeMessage::SMSG_LOOT_MONEY_NOTIFY(_) => Self::SMSG_LOOT_MONEY_NOTIFY,
-            WorldServerOpcodeMessage::SMSG_LOOT_CLEAR_MONEY(_) => Self::SMSG_LOOT_CLEAR_MONEY,
-            WorldServerOpcodeMessage::SMSG_ITEM_PUSH_RESULT(_) => Self::SMSG_ITEM_PUSH_RESULT,
-            WorldServerOpcodeMessage::SMSG_DUEL_REQUESTED(_) => Self::SMSG_DUEL_REQUESTED,
-            WorldServerOpcodeMessage::SMSG_DUEL_OUTOFBOUNDS(_) => Self::SMSG_DUEL_OUTOFBOUNDS,
-            WorldServerOpcodeMessage::SMSG_DUEL_INBOUNDS(_) => Self::SMSG_DUEL_INBOUNDS,
-            WorldServerOpcodeMessage::SMSG_DUEL_COMPLETE(_) => Self::SMSG_DUEL_COMPLETE,
-            WorldServerOpcodeMessage::SMSG_DUEL_WINNER(_) => Self::SMSG_DUEL_WINNER,
-            WorldServerOpcodeMessage::SMSG_MOUNTRESULT(_) => Self::SMSG_MOUNTRESULT,
-            WorldServerOpcodeMessage::SMSG_DISMOUNTRESULT(_) => Self::SMSG_DISMOUNTRESULT,
-            WorldServerOpcodeMessage::SMSG_MOUNTSPECIAL_ANIM(_) => Self::SMSG_MOUNTSPECIAL_ANIM,
-            WorldServerOpcodeMessage::SMSG_PET_TAME_FAILURE(_) => Self::SMSG_PET_TAME_FAILURE,
-            WorldServerOpcodeMessage::SMSG_PET_NAME_INVALID(_) => Self::SMSG_PET_NAME_INVALID,
-            WorldServerOpcodeMessage::SMSG_PET_SPELLS(_) => Self::SMSG_PET_SPELLS,
-            WorldServerOpcodeMessage::SMSG_PET_MODE(_) => Self::SMSG_PET_MODE,
-            WorldServerOpcodeMessage::SMSG_GOSSIP_MESSAGE(_) => Self::SMSG_GOSSIP_MESSAGE,
-            WorldServerOpcodeMessage::SMSG_GOSSIP_COMPLETE(_) => Self::SMSG_GOSSIP_COMPLETE,
-            WorldServerOpcodeMessage::SMSG_NPC_TEXT_UPDATE(_) => Self::SMSG_NPC_TEXT_UPDATE,
-            WorldServerOpcodeMessage::SMSG_QUESTGIVER_STATUS(_) => Self::SMSG_QUESTGIVER_STATUS,
-            WorldServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_LIST(_) => Self::SMSG_QUESTGIVER_QUEST_LIST,
-            WorldServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_DETAILS(_) => Self::SMSG_QUESTGIVER_QUEST_DETAILS,
-            WorldServerOpcodeMessage::SMSG_QUESTGIVER_REQUEST_ITEMS(_) => Self::SMSG_QUESTGIVER_REQUEST_ITEMS,
-            WorldServerOpcodeMessage::SMSG_QUESTGIVER_OFFER_REWARD(_) => Self::SMSG_QUESTGIVER_OFFER_REWARD,
-            WorldServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_INVALID(_) => Self::SMSG_QUESTGIVER_QUEST_INVALID,
-            WorldServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_COMPLETE(_) => Self::SMSG_QUESTGIVER_QUEST_COMPLETE,
-            WorldServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_FAILED(_) => Self::SMSG_QUESTGIVER_QUEST_FAILED,
-            WorldServerOpcodeMessage::SMSG_QUESTLOG_FULL(_) => Self::SMSG_QUESTLOG_FULL,
-            WorldServerOpcodeMessage::SMSG_QUESTUPDATE_FAILED(_) => Self::SMSG_QUESTUPDATE_FAILED,
-            WorldServerOpcodeMessage::SMSG_QUESTUPDATE_FAILEDTIMER(_) => Self::SMSG_QUESTUPDATE_FAILEDTIMER,
-            WorldServerOpcodeMessage::SMSG_QUESTUPDATE_COMPLETE(_) => Self::SMSG_QUESTUPDATE_COMPLETE,
-            WorldServerOpcodeMessage::SMSG_QUESTUPDATE_ADD_KILL(_) => Self::SMSG_QUESTUPDATE_ADD_KILL,
-            WorldServerOpcodeMessage::SMSG_QUESTUPDATE_ADD_ITEM(_) => Self::SMSG_QUESTUPDATE_ADD_ITEM,
-            WorldServerOpcodeMessage::SMSG_QUEST_CONFIRM_ACCEPT(_) => Self::SMSG_QUEST_CONFIRM_ACCEPT,
-            WorldServerOpcodeMessage::SMSG_LIST_INVENTORY(_) => Self::SMSG_LIST_INVENTORY,
-            WorldServerOpcodeMessage::SMSG_SELL_ITEM(_) => Self::SMSG_SELL_ITEM,
-            WorldServerOpcodeMessage::SMSG_BUY_ITEM(_) => Self::SMSG_BUY_ITEM,
-            WorldServerOpcodeMessage::SMSG_BUY_FAILED(_) => Self::SMSG_BUY_FAILED,
-            WorldServerOpcodeMessage::SMSG_SHOWTAXINODES(_) => Self::SMSG_SHOWTAXINODES,
-            WorldServerOpcodeMessage::SMSG_TAXINODE_STATUS(_) => Self::SMSG_TAXINODE_STATUS,
-            WorldServerOpcodeMessage::SMSG_ACTIVATETAXIREPLY(_) => Self::SMSG_ACTIVATETAXIREPLY,
-            WorldServerOpcodeMessage::SMSG_NEW_TAXI_PATH(_) => Self::SMSG_NEW_TAXI_PATH,
-            WorldServerOpcodeMessage::SMSG_TRAINER_LIST(_) => Self::SMSG_TRAINER_LIST,
-            WorldServerOpcodeMessage::SMSG_TRAINER_BUY_SUCCEEDED(_) => Self::SMSG_TRAINER_BUY_SUCCEEDED,
-            WorldServerOpcodeMessage::SMSG_TRAINER_BUY_FAILED(_) => Self::SMSG_TRAINER_BUY_FAILED,
-            WorldServerOpcodeMessage::SMSG_SHOW_BANK(_) => Self::SMSG_SHOW_BANK,
-            WorldServerOpcodeMessage::SMSG_BUY_BANK_SLOT_RESULT(_) => Self::SMSG_BUY_BANK_SLOT_RESULT,
-            WorldServerOpcodeMessage::SMSG_PETITION_SHOWLIST(_) => Self::SMSG_PETITION_SHOWLIST,
-            WorldServerOpcodeMessage::SMSG_PETITION_SHOW_SIGNATURES(_) => Self::SMSG_PETITION_SHOW_SIGNATURES,
-            WorldServerOpcodeMessage::SMSG_PETITION_SIGN_RESULTS(_) => Self::SMSG_PETITION_SIGN_RESULTS,
-            WorldServerOpcodeMessage::SMSG_TURN_IN_PETITION_RESULTS(_) => Self::SMSG_TURN_IN_PETITION_RESULTS,
-            WorldServerOpcodeMessage::SMSG_PETITION_QUERY_RESPONSE(_) => Self::SMSG_PETITION_QUERY_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_FISH_NOT_HOOKED(_) => Self::SMSG_FISH_NOT_HOOKED,
-            WorldServerOpcodeMessage::SMSG_FISH_ESCAPED(_) => Self::SMSG_FISH_ESCAPED,
-            WorldServerOpcodeMessage::SMSG_NOTIFICATION(_) => Self::SMSG_NOTIFICATION,
-            WorldServerOpcodeMessage::SMSG_PLAYED_TIME(_) => Self::SMSG_PLAYED_TIME,
-            WorldServerOpcodeMessage::SMSG_QUERY_TIME_RESPONSE(_) => Self::SMSG_QUERY_TIME_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_LOG_XPGAIN(_) => Self::SMSG_LOG_XPGAIN,
-            WorldServerOpcodeMessage::SMSG_LEVELUP_INFO(_) => Self::SMSG_LEVELUP_INFO,
-            WorldServerOpcodeMessage::MSG_MINIMAP_PING(_) => Self::MSG_MINIMAP_PING,
-            WorldServerOpcodeMessage::SMSG_RESISTLOG(_) => Self::SMSG_RESISTLOG,
-            WorldServerOpcodeMessage::SMSG_ENCHANTMENTLOG(_) => Self::SMSG_ENCHANTMENTLOG,
-            WorldServerOpcodeMessage::SMSG_START_MIRROR_TIMER(_) => Self::SMSG_START_MIRROR_TIMER,
-            WorldServerOpcodeMessage::SMSG_PAUSE_MIRROR_TIMER(_) => Self::SMSG_PAUSE_MIRROR_TIMER,
-            WorldServerOpcodeMessage::SMSG_STOP_MIRROR_TIMER(_) => Self::SMSG_STOP_MIRROR_TIMER,
-            WorldServerOpcodeMessage::SMSG_PONG(_) => Self::SMSG_PONG,
-            WorldServerOpcodeMessage::SMSG_CLEAR_COOLDOWN(_) => Self::SMSG_CLEAR_COOLDOWN,
-            WorldServerOpcodeMessage::SMSG_GAMEOBJECT_PAGETEXT(_) => Self::SMSG_GAMEOBJECT_PAGETEXT,
-            WorldServerOpcodeMessage::SMSG_SPELL_DELAYED(_) => Self::SMSG_SPELL_DELAYED,
-            WorldServerOpcodeMessage::SMSG_ITEM_TIME_UPDATE(_) => Self::SMSG_ITEM_TIME_UPDATE,
-            WorldServerOpcodeMessage::SMSG_ITEM_ENCHANT_TIME_UPDATE(_) => Self::SMSG_ITEM_ENCHANT_TIME_UPDATE,
-            WorldServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => Self::SMSG_AUTH_CHALLENGE,
-            WorldServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => Self::SMSG_AUTH_RESPONSE,
-            WorldServerOpcodeMessage::MSG_SAVE_GUILD_EMBLEM(_) => Self::MSG_SAVE_GUILD_EMBLEM,
-            WorldServerOpcodeMessage::SMSG_PLAY_SPELL_VISUAL(_) => Self::SMSG_PLAY_SPELL_VISUAL,
-            WorldServerOpcodeMessage::SMSG_PARTYKILLLOG(_) => Self::SMSG_PARTYKILLLOG,
-            WorldServerOpcodeMessage::SMSG_PLAY_SPELL_IMPACT(_) => Self::SMSG_PLAY_SPELL_IMPACT,
-            WorldServerOpcodeMessage::SMSG_EXPLORATION_EXPERIENCE(_) => Self::SMSG_EXPLORATION_EXPERIENCE,
-            WorldServerOpcodeMessage::MSG_RANDOM_ROLL(_) => Self::MSG_RANDOM_ROLL,
-            WorldServerOpcodeMessage::SMSG_ENVIRONMENTALDAMAGELOG(_) => Self::SMSG_ENVIRONMENTALDAMAGELOG,
-            WorldServerOpcodeMessage::MSG_LOOKING_FOR_GROUP(_) => Self::MSG_LOOKING_FOR_GROUP,
-            WorldServerOpcodeMessage::SMSG_REMOVED_SPELL(_) => Self::SMSG_REMOVED_SPELL,
-            WorldServerOpcodeMessage::SMSG_GMTICKET_CREATE(_) => Self::SMSG_GMTICKET_CREATE,
-            WorldServerOpcodeMessage::SMSG_GMTICKET_UPDATETEXT(_) => Self::SMSG_GMTICKET_UPDATETEXT,
-            WorldServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => Self::SMSG_ACCOUNT_DATA_TIMES,
-            WorldServerOpcodeMessage::SMSG_GMTICKET_GETTICKET(_) => Self::SMSG_GMTICKET_GETTICKET,
-            WorldServerOpcodeMessage::SMSG_GAMEOBJECT_SPAWN_ANIM(_) => Self::SMSG_GAMEOBJECT_SPAWN_ANIM,
-            WorldServerOpcodeMessage::SMSG_GAMEOBJECT_DESPAWN_ANIM(_) => Self::SMSG_GAMEOBJECT_DESPAWN_ANIM,
-            WorldServerOpcodeMessage::MSG_CORPSE_QUERY(_) => Self::MSG_CORPSE_QUERY,
-            WorldServerOpcodeMessage::SMSG_GMTICKET_DELETETICKET(_) => Self::SMSG_GMTICKET_DELETETICKET,
-            WorldServerOpcodeMessage::SMSG_CHAT_WRONG_FACTION(_) => Self::SMSG_CHAT_WRONG_FACTION,
-            WorldServerOpcodeMessage::SMSG_GMTICKET_SYSTEMSTATUS(_) => Self::SMSG_GMTICKET_SYSTEMSTATUS,
-            WorldServerOpcodeMessage::SMSG_SET_REST_START(_) => Self::SMSG_SET_REST_START,
-            WorldServerOpcodeMessage::SMSG_SPIRIT_HEALER_CONFIRM(_) => Self::SMSG_SPIRIT_HEALER_CONFIRM,
-            WorldServerOpcodeMessage::SMSG_GOSSIP_POI(_) => Self::SMSG_GOSSIP_POI,
-            WorldServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => Self::SMSG_LOGIN_VERIFY_WORLD,
-            WorldServerOpcodeMessage::SMSG_MAIL_LIST_RESULT(_) => Self::SMSG_MAIL_LIST_RESULT,
-            WorldServerOpcodeMessage::SMSG_BATTLEFIELD_LIST(_) => Self::SMSG_BATTLEFIELD_LIST,
-            WorldServerOpcodeMessage::SMSG_ITEM_TEXT_QUERY_RESPONSE(_) => Self::SMSG_ITEM_TEXT_QUERY_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_SPELLLOGMISS(_) => Self::SMSG_SPELLLOGMISS,
-            WorldServerOpcodeMessage::SMSG_SPELLLOGEXECUTE(_) => Self::SMSG_SPELLLOGEXECUTE,
-            WorldServerOpcodeMessage::SMSG_PERIODICAURALOG(_) => Self::SMSG_PERIODICAURALOG,
-            WorldServerOpcodeMessage::SMSG_SPELLDAMAGESHIELD(_) => Self::SMSG_SPELLDAMAGESHIELD,
-            WorldServerOpcodeMessage::SMSG_SPELLNONMELEEDAMAGELOG(_) => Self::SMSG_SPELLNONMELEEDAMAGELOG,
-            WorldServerOpcodeMessage::SMSG_ZONE_UNDER_ATTACK(_) => Self::SMSG_ZONE_UNDER_ATTACK,
-            WorldServerOpcodeMessage::MSG_AUCTION_HELLO(_) => Self::MSG_AUCTION_HELLO,
-            WorldServerOpcodeMessage::SMSG_AUCTION_LIST_RESULT(_) => Self::SMSG_AUCTION_LIST_RESULT,
-            WorldServerOpcodeMessage::SMSG_AUCTION_OWNER_LIST_RESULT(_) => Self::SMSG_AUCTION_OWNER_LIST_RESULT,
-            WorldServerOpcodeMessage::SMSG_AUCTION_BIDDER_NOTIFICATION(_) => Self::SMSG_AUCTION_BIDDER_NOTIFICATION,
-            WorldServerOpcodeMessage::SMSG_AUCTION_OWNER_NOTIFICATION(_) => Self::SMSG_AUCTION_OWNER_NOTIFICATION,
-            WorldServerOpcodeMessage::SMSG_PROCRESIST(_) => Self::SMSG_PROCRESIST,
-            WorldServerOpcodeMessage::SMSG_DISPEL_FAILED(_) => Self::SMSG_DISPEL_FAILED,
-            WorldServerOpcodeMessage::SMSG_SPELLORDAMAGE_IMMUNE(_) => Self::SMSG_SPELLORDAMAGE_IMMUNE,
-            WorldServerOpcodeMessage::SMSG_AUCTION_BIDDER_LIST_RESULT(_) => Self::SMSG_AUCTION_BIDDER_LIST_RESULT,
-            WorldServerOpcodeMessage::SMSG_SET_FLAT_SPELL_MODIFIER(_) => Self::SMSG_SET_FLAT_SPELL_MODIFIER,
-            WorldServerOpcodeMessage::SMSG_SET_PCT_SPELL_MODIFIER(_) => Self::SMSG_SET_PCT_SPELL_MODIFIER,
-            WorldServerOpcodeMessage::SMSG_CORPSE_RECLAIM_DELAY(_) => Self::SMSG_CORPSE_RECLAIM_DELAY,
-            WorldServerOpcodeMessage::MSG_LIST_STABLED_PETS(_) => Self::MSG_LIST_STABLED_PETS,
-            WorldServerOpcodeMessage::SMSG_STABLE_RESULT(_) => Self::SMSG_STABLE_RESULT,
-            WorldServerOpcodeMessage::SMSG_PLAY_MUSIC(_) => Self::SMSG_PLAY_MUSIC,
-            WorldServerOpcodeMessage::SMSG_PLAY_OBJECT_SOUND(_) => Self::SMSG_PLAY_OBJECT_SOUND,
-            WorldServerOpcodeMessage::SMSG_SPELLDISPELLOG(_) => Self::SMSG_SPELLDISPELLOG,
-            WorldServerOpcodeMessage::MSG_QUERY_NEXT_MAIL_TIME(_) => Self::MSG_QUERY_NEXT_MAIL_TIME,
-            WorldServerOpcodeMessage::SMSG_RECEIVED_MAIL(_) => Self::SMSG_RECEIVED_MAIL,
-            WorldServerOpcodeMessage::SMSG_RAID_GROUP_ONLY(_) => Self::SMSG_RAID_GROUP_ONLY,
-            WorldServerOpcodeMessage::SMSG_PVP_CREDIT(_) => Self::SMSG_PVP_CREDIT,
-            WorldServerOpcodeMessage::SMSG_AUCTION_REMOVED_NOTIFICATION(_) => Self::SMSG_AUCTION_REMOVED_NOTIFICATION,
-            WorldServerOpcodeMessage::SMSG_SERVER_MESSAGE(_) => Self::SMSG_SERVER_MESSAGE,
-            WorldServerOpcodeMessage::SMSG_MEETINGSTONE_SETQUEUE(_) => Self::SMSG_MEETINGSTONE_SETQUEUE,
-            WorldServerOpcodeMessage::SMSG_MEETINGSTONE_COMPLETE(_) => Self::SMSG_MEETINGSTONE_COMPLETE,
-            WorldServerOpcodeMessage::SMSG_MEETINGSTONE_IN_PROGRESS(_) => Self::SMSG_MEETINGSTONE_IN_PROGRESS,
-            WorldServerOpcodeMessage::SMSG_MEETINGSTONE_MEMBER_ADDED(_) => Self::SMSG_MEETINGSTONE_MEMBER_ADDED,
-            WorldServerOpcodeMessage::SMSG_CANCEL_AUTO_REPEAT(_) => Self::SMSG_CANCEL_AUTO_REPEAT,
-            WorldServerOpcodeMessage::SMSG_STANDSTATE_UPDATE(_) => Self::SMSG_STANDSTATE_UPDATE,
-            WorldServerOpcodeMessage::SMSG_LOOT_ALL_PASSED(_) => Self::SMSG_LOOT_ALL_PASSED,
-            WorldServerOpcodeMessage::SMSG_LOOT_ROLL_WON(_) => Self::SMSG_LOOT_ROLL_WON,
-            WorldServerOpcodeMessage::SMSG_LOOT_START_ROLL(_) => Self::SMSG_LOOT_START_ROLL,
-            WorldServerOpcodeMessage::SMSG_LOOT_ROLL(_) => Self::SMSG_LOOT_ROLL,
-            WorldServerOpcodeMessage::SMSG_LOOT_MASTER_LIST(_) => Self::SMSG_LOOT_MASTER_LIST,
-            WorldServerOpcodeMessage::SMSG_SET_FORCED_REACTIONS(_) => Self::SMSG_SET_FORCED_REACTIONS,
-            WorldServerOpcodeMessage::SMSG_SPELL_FAILED_OTHER(_) => Self::SMSG_SPELL_FAILED_OTHER,
-            WorldServerOpcodeMessage::SMSG_GAMEOBJECT_RESET_STATE(_) => Self::SMSG_GAMEOBJECT_RESET_STATE,
-            WorldServerOpcodeMessage::SMSG_CHAT_PLAYER_NOT_FOUND(_) => Self::SMSG_CHAT_PLAYER_NOT_FOUND,
-            WorldServerOpcodeMessage::MSG_TALENT_WIPE_CONFIRM(_) => Self::MSG_TALENT_WIPE_CONFIRM,
-            WorldServerOpcodeMessage::SMSG_SUMMON_REQUEST(_) => Self::SMSG_SUMMON_REQUEST,
-            WorldServerOpcodeMessage::SMSG_MONSTER_MOVE_TRANSPORT(_) => Self::SMSG_MONSTER_MOVE_TRANSPORT,
-            WorldServerOpcodeMessage::SMSG_PET_BROKEN(_) => Self::SMSG_PET_BROKEN,
-            WorldServerOpcodeMessage::SMSG_FEIGN_DEATH_RESISTED(_) => Self::SMSG_FEIGN_DEATH_RESISTED,
-            WorldServerOpcodeMessage::SMSG_DUEL_COUNTDOWN(_) => Self::SMSG_DUEL_COUNTDOWN,
-            WorldServerOpcodeMessage::SMSG_AREA_TRIGGER_MESSAGE(_) => Self::SMSG_AREA_TRIGGER_MESSAGE,
-            WorldServerOpcodeMessage::SMSG_MEETINGSTONE_JOINFAILED(_) => Self::SMSG_MEETINGSTONE_JOINFAILED,
-            WorldServerOpcodeMessage::SMSG_PLAYER_SKINNED(_) => Self::SMSG_PLAYER_SKINNED,
-            WorldServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => Self::SMSG_DURABILITY_DAMAGE_DEATH,
-            WorldServerOpcodeMessage::SMSG_INIT_WORLD_STATES(_) => Self::SMSG_INIT_WORLD_STATES,
-            WorldServerOpcodeMessage::SMSG_UPDATE_WORLD_STATE(_) => Self::SMSG_UPDATE_WORLD_STATE,
-            WorldServerOpcodeMessage::SMSG_ITEM_NAME_QUERY_RESPONSE(_) => Self::SMSG_ITEM_NAME_QUERY_RESPONSE,
-            WorldServerOpcodeMessage::SMSG_PET_ACTION_FEEDBACK(_) => Self::SMSG_PET_ACTION_FEEDBACK,
-            WorldServerOpcodeMessage::SMSG_CHAR_RENAME(_) => Self::SMSG_CHAR_RENAME,
-            WorldServerOpcodeMessage::SMSG_INSTANCE_SAVE_CREATED(_) => Self::SMSG_INSTANCE_SAVE_CREATED,
-            WorldServerOpcodeMessage::SMSG_RAID_INSTANCE_INFO(_) => Self::SMSG_RAID_INSTANCE_INFO,
-            WorldServerOpcodeMessage::SMSG_PLAY_SOUND(_) => Self::SMSG_PLAY_SOUND,
-            WorldServerOpcodeMessage::SMSG_BATTLEFIELD_STATUS(_) => Self::SMSG_BATTLEFIELD_STATUS,
-            WorldServerOpcodeMessage::MSG_INSPECT_HONOR_STATS(_) => Self::MSG_INSPECT_HONOR_STATS,
-            WorldServerOpcodeMessage::SMSG_FORCE_WALK_SPEED_CHANGE(_) => Self::SMSG_FORCE_WALK_SPEED_CHANGE,
-            WorldServerOpcodeMessage::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(_) => Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE,
-            WorldServerOpcodeMessage::SMSG_FORCE_TURN_RATE_CHANGE(_) => Self::SMSG_FORCE_TURN_RATE_CHANGE,
-            WorldServerOpcodeMessage::MSG_PVP_LOG_DATA(_) => Self::MSG_PVP_LOG_DATA,
-            WorldServerOpcodeMessage::SMSG_AREA_SPIRIT_HEALER_TIME(_) => Self::SMSG_AREA_SPIRIT_HEALER_TIME,
-            WorldServerOpcodeMessage::SMSG_GROUP_JOINED_BATTLEGROUND(_) => Self::SMSG_GROUP_JOINED_BATTLEGROUND,
-            WorldServerOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => Self::MSG_BATTLEGROUND_PLAYER_POSITIONS,
-            WorldServerOpcodeMessage::SMSG_BINDER_CONFIRM(_) => Self::SMSG_BINDER_CONFIRM,
-            WorldServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_JOINED(_) => Self::SMSG_BATTLEGROUND_PLAYER_JOINED,
-            WorldServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_LEFT(_) => Self::SMSG_BATTLEGROUND_PLAYER_LEFT,
-            WorldServerOpcodeMessage::SMSG_PET_UNLEARN_CONFIRM(_) => Self::SMSG_PET_UNLEARN_CONFIRM,
-            WorldServerOpcodeMessage::SMSG_PARTY_MEMBER_STATS_FULL(_) => Self::SMSG_PARTY_MEMBER_STATS_FULL,
-            WorldServerOpcodeMessage::SMSG_WEATHER(_) => Self::SMSG_WEATHER,
-            WorldServerOpcodeMessage::SMSG_RAID_INSTANCE_MESSAGE(_) => Self::SMSG_RAID_INSTANCE_MESSAGE,
-            WorldServerOpcodeMessage::SMSG_CHAT_RESTRICTED(_) => Self::SMSG_CHAT_RESTRICTED,
-            WorldServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(_) => Self::SMSG_SPLINE_SET_RUN_SPEED,
-            WorldServerOpcodeMessage::SMSG_SPLINE_SET_RUN_BACK_SPEED(_) => Self::SMSG_SPLINE_SET_RUN_BACK_SPEED,
-            WorldServerOpcodeMessage::SMSG_SPLINE_SET_SWIM_SPEED(_) => Self::SMSG_SPLINE_SET_SWIM_SPEED,
-            WorldServerOpcodeMessage::SMSG_SPLINE_SET_WALK_SPEED(_) => Self::SMSG_SPLINE_SET_WALK_SPEED,
-            WorldServerOpcodeMessage::SMSG_SPLINE_SET_SWIM_BACK_SPEED(_) => Self::SMSG_SPLINE_SET_SWIM_BACK_SPEED,
-            WorldServerOpcodeMessage::SMSG_SPLINE_SET_TURN_RATE(_) => Self::SMSG_SPLINE_SET_TURN_RATE,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_UNROOT(_) => Self::SMSG_SPLINE_MOVE_UNROOT,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_FEATHER_FALL(_) => Self::SMSG_SPLINE_MOVE_FEATHER_FALL,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_NORMAL_FALL(_) => Self::SMSG_SPLINE_MOVE_NORMAL_FALL,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_HOVER(_) => Self::SMSG_SPLINE_MOVE_SET_HOVER,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_UNSET_HOVER(_) => Self::SMSG_SPLINE_MOVE_UNSET_HOVER,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_WATER_WALK(_) => Self::SMSG_SPLINE_MOVE_WATER_WALK,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_LAND_WALK(_) => Self::SMSG_SPLINE_MOVE_LAND_WALK,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_START_SWIM(_) => Self::SMSG_SPLINE_MOVE_START_SWIM,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_STOP_SWIM(_) => Self::SMSG_SPLINE_MOVE_STOP_SWIM,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_RUN_MODE(_) => Self::SMSG_SPLINE_MOVE_SET_RUN_MODE,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_WALK_MODE(_) => Self::SMSG_SPLINE_MOVE_SET_WALK_MODE,
-            WorldServerOpcodeMessage::SMSG_SPLINE_MOVE_ROOT(_) => Self::SMSG_SPLINE_MOVE_ROOT,
-            WorldServerOpcodeMessage::SMSG_INVALIDATE_PLAYER(_) => Self::SMSG_INVALIDATE_PLAYER,
-            WorldServerOpcodeMessage::SMSG_INSTANCE_RESET(_) => Self::SMSG_INSTANCE_RESET,
-            WorldServerOpcodeMessage::SMSG_INSTANCE_RESET_FAILED(_) => Self::SMSG_INSTANCE_RESET_FAILED,
-            WorldServerOpcodeMessage::SMSG_UPDATE_LAST_INSTANCE(_) => Self::SMSG_UPDATE_LAST_INSTANCE,
-            WorldServerOpcodeMessage::MSG_RAID_TARGET_UPDATE(_) => Self::MSG_RAID_TARGET_UPDATE,
-            WorldServerOpcodeMessage::MSG_RAID_READY_CHECK(_) => Self::MSG_RAID_READY_CHECK,
-            WorldServerOpcodeMessage::SMSG_PET_ACTION_SOUND(_) => Self::SMSG_PET_ACTION_SOUND,
-            WorldServerOpcodeMessage::SMSG_PET_DISMISS_SOUND(_) => Self::SMSG_PET_DISMISS_SOUND,
-            WorldServerOpcodeMessage::SMSG_GM_TICKET_STATUS_UPDATE(_) => Self::SMSG_GM_TICKET_STATUS_UPDATE,
-            WorldServerOpcodeMessage::SMSG_UPDATE_INSTANCE_OWNERSHIP(_) => Self::SMSG_UPDATE_INSTANCE_OWNERSHIP,
-            WorldServerOpcodeMessage::SMSG_SPELLINSTAKILLLOG(_) => Self::SMSG_SPELLINSTAKILLLOG,
-            WorldServerOpcodeMessage::SMSG_SPELL_UPDATE_CHAIN_TARGETS(_) => Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS,
-            WorldServerOpcodeMessage::SMSG_EXPECTED_SPAM_RECORDS(_) => Self::SMSG_EXPECTED_SPAM_RECORDS,
-            WorldServerOpcodeMessage::SMSG_DEFENSE_MESSAGE(_) => Self::SMSG_DEFENSE_MESSAGE,
+            ServerOpcodeMessage::MSG_MOVE_START_FORWARD(_) => Self::MSG_MOVE_START_FORWARD,
+            ServerOpcodeMessage::MSG_MOVE_START_BACKWARD(_) => Self::MSG_MOVE_START_BACKWARD,
+            ServerOpcodeMessage::MSG_MOVE_STOP(_) => Self::MSG_MOVE_STOP,
+            ServerOpcodeMessage::MSG_MOVE_START_STRAFE_LEFT(_) => Self::MSG_MOVE_START_STRAFE_LEFT,
+            ServerOpcodeMessage::MSG_MOVE_START_STRAFE_RIGHT(_) => Self::MSG_MOVE_START_STRAFE_RIGHT,
+            ServerOpcodeMessage::MSG_MOVE_STOP_STRAFE(_) => Self::MSG_MOVE_STOP_STRAFE,
+            ServerOpcodeMessage::MSG_MOVE_JUMP(_) => Self::MSG_MOVE_JUMP,
+            ServerOpcodeMessage::MSG_MOVE_START_TURN_LEFT(_) => Self::MSG_MOVE_START_TURN_LEFT,
+            ServerOpcodeMessage::MSG_MOVE_START_TURN_RIGHT(_) => Self::MSG_MOVE_START_TURN_RIGHT,
+            ServerOpcodeMessage::MSG_MOVE_STOP_TURN(_) => Self::MSG_MOVE_STOP_TURN,
+            ServerOpcodeMessage::MSG_MOVE_START_PITCH_UP(_) => Self::MSG_MOVE_START_PITCH_UP,
+            ServerOpcodeMessage::MSG_MOVE_START_PITCH_DOWN(_) => Self::MSG_MOVE_START_PITCH_DOWN,
+            ServerOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => Self::MSG_MOVE_STOP_PITCH,
+            ServerOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => Self::MSG_MOVE_SET_RUN_MODE,
+            ServerOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => Self::MSG_MOVE_SET_WALK_MODE,
+            ServerOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => Self::MSG_MOVE_TELEPORT_ACK,
+            ServerOpcodeMessage::MSG_MOVE_FALL_LAND(_) => Self::MSG_MOVE_FALL_LAND,
+            ServerOpcodeMessage::MSG_MOVE_START_SWIM(_) => Self::MSG_MOVE_START_SWIM,
+            ServerOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => Self::MSG_MOVE_STOP_SWIM,
+            ServerOpcodeMessage::MSG_MOVE_SET_FACING(_) => Self::MSG_MOVE_SET_FACING,
+            ServerOpcodeMessage::MSG_MOVE_SET_PITCH(_) => Self::MSG_MOVE_SET_PITCH,
+            ServerOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => Self::MSG_MOVE_WORLDPORT_ACK,
+            ServerOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => Self::MSG_MOVE_HEARTBEAT,
+            ServerOpcodeMessage::MSG_PETITION_DECLINE(_) => Self::MSG_PETITION_DECLINE,
+            ServerOpcodeMessage::MSG_TABARDVENDOR_ACTIVATE(_) => Self::MSG_TABARDVENDOR_ACTIVATE,
+            ServerOpcodeMessage::MSG_QUEST_PUSH_RESULT(_) => Self::MSG_QUEST_PUSH_RESULT,
+            ServerOpcodeMessage::MSG_PETITION_RENAME(_) => Self::MSG_PETITION_RENAME,
+            ServerOpcodeMessage::SMSG_CHAR_CREATE(_) => Self::SMSG_CHAR_CREATE,
+            ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => Self::SMSG_CHAR_ENUM,
+            ServerOpcodeMessage::SMSG_CHAR_DELETE(_) => Self::SMSG_CHAR_DELETE,
+            ServerOpcodeMessage::SMSG_NEW_WORLD(_) => Self::SMSG_NEW_WORLD,
+            ServerOpcodeMessage::SMSG_TRANSFER_PENDING(_) => Self::SMSG_TRANSFER_PENDING,
+            ServerOpcodeMessage::SMSG_TRANSFER_ABORTED(_) => Self::SMSG_TRANSFER_ABORTED,
+            ServerOpcodeMessage::SMSG_CHARACTER_LOGIN_FAILED(_) => Self::SMSG_CHARACTER_LOGIN_FAILED,
+            ServerOpcodeMessage::SMSG_LOGIN_SETTIMESPEED(_) => Self::SMSG_LOGIN_SETTIMESPEED,
+            ServerOpcodeMessage::SMSG_LOGOUT_RESPONSE(_) => Self::SMSG_LOGOUT_RESPONSE,
+            ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE(_) => Self::SMSG_LOGOUT_COMPLETE,
+            ServerOpcodeMessage::SMSG_LOGOUT_CANCEL_ACK(_) => Self::SMSG_LOGOUT_CANCEL_ACK,
+            ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(_) => Self::SMSG_NAME_QUERY_RESPONSE,
+            ServerOpcodeMessage::SMSG_PET_NAME_QUERY_RESPONSE(_) => Self::SMSG_PET_NAME_QUERY_RESPONSE,
+            ServerOpcodeMessage::SMSG_GUILD_QUERY_RESPONSE(_) => Self::SMSG_GUILD_QUERY_RESPONSE,
+            ServerOpcodeMessage::SMSG_ITEM_QUERY_SINGLE_RESPONSE(_) => Self::SMSG_ITEM_QUERY_SINGLE_RESPONSE,
+            ServerOpcodeMessage::SMSG_PAGE_TEXT_QUERY_RESPONSE(_) => Self::SMSG_PAGE_TEXT_QUERY_RESPONSE,
+            ServerOpcodeMessage::SMSG_QUEST_QUERY_RESPONSE(_) => Self::SMSG_QUEST_QUERY_RESPONSE,
+            ServerOpcodeMessage::SMSG_GAMEOBJECT_QUERY_RESPONSE(_) => Self::SMSG_GAMEOBJECT_QUERY_RESPONSE,
+            ServerOpcodeMessage::SMSG_CREATURE_QUERY_RESPONSE(_) => Self::SMSG_CREATURE_QUERY_RESPONSE,
+            ServerOpcodeMessage::SMSG_WHO(_) => Self::SMSG_WHO,
+            ServerOpcodeMessage::SMSG_WHOIS(_) => Self::SMSG_WHOIS,
+            ServerOpcodeMessage::SMSG_FRIEND_LIST(_) => Self::SMSG_FRIEND_LIST,
+            ServerOpcodeMessage::SMSG_FRIEND_STATUS(_) => Self::SMSG_FRIEND_STATUS,
+            ServerOpcodeMessage::SMSG_IGNORE_LIST(_) => Self::SMSG_IGNORE_LIST,
+            ServerOpcodeMessage::SMSG_GROUP_INVITE(_) => Self::SMSG_GROUP_INVITE,
+            ServerOpcodeMessage::SMSG_GROUP_DECLINE(_) => Self::SMSG_GROUP_DECLINE,
+            ServerOpcodeMessage::SMSG_GROUP_UNINVITE(_) => Self::SMSG_GROUP_UNINVITE,
+            ServerOpcodeMessage::SMSG_GROUP_SET_LEADER(_) => Self::SMSG_GROUP_SET_LEADER,
+            ServerOpcodeMessage::SMSG_GROUP_DESTROYED(_) => Self::SMSG_GROUP_DESTROYED,
+            ServerOpcodeMessage::SMSG_GROUP_LIST(_) => Self::SMSG_GROUP_LIST,
+            ServerOpcodeMessage::SMSG_PARTY_MEMBER_STATS(_) => Self::SMSG_PARTY_MEMBER_STATS,
+            ServerOpcodeMessage::SMSG_PARTY_COMMAND_RESULT(_) => Self::SMSG_PARTY_COMMAND_RESULT,
+            ServerOpcodeMessage::SMSG_GUILD_INVITE(_) => Self::SMSG_GUILD_INVITE,
+            ServerOpcodeMessage::SMSG_GUILD_INFO(_) => Self::SMSG_GUILD_INFO,
+            ServerOpcodeMessage::SMSG_GUILD_ROSTER(_) => Self::SMSG_GUILD_ROSTER,
+            ServerOpcodeMessage::SMSG_GUILD_EVENT(_) => Self::SMSG_GUILD_EVENT,
+            ServerOpcodeMessage::SMSG_GUILD_COMMAND_RESULT(_) => Self::SMSG_GUILD_COMMAND_RESULT,
+            ServerOpcodeMessage::SMSG_MESSAGECHAT(_) => Self::SMSG_MESSAGECHAT,
+            ServerOpcodeMessage::SMSG_CHANNEL_NOTIFY(_) => Self::SMSG_CHANNEL_NOTIFY,
+            ServerOpcodeMessage::SMSG_CHANNEL_LIST(_) => Self::SMSG_CHANNEL_LIST,
+            ServerOpcodeMessage::SMSG_DESTROY_OBJECT(_) => Self::SMSG_DESTROY_OBJECT,
+            ServerOpcodeMessage::SMSG_READ_ITEM_OK(_) => Self::SMSG_READ_ITEM_OK,
+            ServerOpcodeMessage::SMSG_READ_ITEM_FAILED(_) => Self::SMSG_READ_ITEM_FAILED,
+            ServerOpcodeMessage::SMSG_ITEM_COOLDOWN(_) => Self::SMSG_ITEM_COOLDOWN,
+            ServerOpcodeMessage::SMSG_GAMEOBJECT_CUSTOM_ANIM(_) => Self::SMSG_GAMEOBJECT_CUSTOM_ANIM,
+            ServerOpcodeMessage::SMSG_MONSTER_MOVE(_) => Self::SMSG_MONSTER_MOVE,
+            ServerOpcodeMessage::SMSG_MOVE_WATER_WALK(_) => Self::SMSG_MOVE_WATER_WALK,
+            ServerOpcodeMessage::SMSG_MOVE_LAND_WALK(_) => Self::SMSG_MOVE_LAND_WALK,
+            ServerOpcodeMessage::SMSG_FORCE_RUN_SPEED_CHANGE(_) => Self::SMSG_FORCE_RUN_SPEED_CHANGE,
+            ServerOpcodeMessage::SMSG_FORCE_RUN_BACK_SPEED_CHANGE(_) => Self::SMSG_FORCE_RUN_BACK_SPEED_CHANGE,
+            ServerOpcodeMessage::SMSG_FORCE_SWIM_SPEED_CHANGE(_) => Self::SMSG_FORCE_SWIM_SPEED_CHANGE,
+            ServerOpcodeMessage::SMSG_FORCE_MOVE_ROOT(_) => Self::SMSG_FORCE_MOVE_ROOT,
+            ServerOpcodeMessage::SMSG_FORCE_MOVE_UNROOT(_) => Self::SMSG_FORCE_MOVE_UNROOT,
+            ServerOpcodeMessage::SMSG_MOVE_KNOCK_BACK(_) => Self::SMSG_MOVE_KNOCK_BACK,
+            ServerOpcodeMessage::SMSG_MOVE_FEATHER_FALL(_) => Self::SMSG_MOVE_FEATHER_FALL,
+            ServerOpcodeMessage::SMSG_MOVE_NORMAL_FALL(_) => Self::SMSG_MOVE_NORMAL_FALL,
+            ServerOpcodeMessage::SMSG_MOVE_SET_HOVER(_) => Self::SMSG_MOVE_SET_HOVER,
+            ServerOpcodeMessage::SMSG_MOVE_UNSET_HOVER(_) => Self::SMSG_MOVE_UNSET_HOVER,
+            ServerOpcodeMessage::SMSG_TRIGGER_CINEMATIC(_) => Self::SMSG_TRIGGER_CINEMATIC,
+            ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(_) => Self::SMSG_TUTORIAL_FLAGS,
+            ServerOpcodeMessage::SMSG_EMOTE(_) => Self::SMSG_EMOTE,
+            ServerOpcodeMessage::SMSG_TEXT_EMOTE(_) => Self::SMSG_TEXT_EMOTE,
+            ServerOpcodeMessage::SMSG_OPEN_CONTAINER(_) => Self::SMSG_OPEN_CONTAINER,
+            ServerOpcodeMessage::SMSG_INSPECT(_) => Self::SMSG_INSPECT,
+            ServerOpcodeMessage::SMSG_TRADE_STATUS(_) => Self::SMSG_TRADE_STATUS,
+            ServerOpcodeMessage::SMSG_TRADE_STATUS_EXTENDED(_) => Self::SMSG_TRADE_STATUS_EXTENDED,
+            ServerOpcodeMessage::SMSG_INITIALIZE_FACTIONS(_) => Self::SMSG_INITIALIZE_FACTIONS,
+            ServerOpcodeMessage::SMSG_SET_FACTION_VISIBLE(_) => Self::SMSG_SET_FACTION_VISIBLE,
+            ServerOpcodeMessage::SMSG_SET_FACTION_STANDING(_) => Self::SMSG_SET_FACTION_STANDING,
+            ServerOpcodeMessage::SMSG_SET_PROFICIENCY(_) => Self::SMSG_SET_PROFICIENCY,
+            ServerOpcodeMessage::SMSG_ACTION_BUTTONS(_) => Self::SMSG_ACTION_BUTTONS,
+            ServerOpcodeMessage::SMSG_INITIAL_SPELLS(_) => Self::SMSG_INITIAL_SPELLS,
+            ServerOpcodeMessage::SMSG_LEARNED_SPELL(_) => Self::SMSG_LEARNED_SPELL,
+            ServerOpcodeMessage::SMSG_SUPERCEDED_SPELL(_) => Self::SMSG_SUPERCEDED_SPELL,
+            ServerOpcodeMessage::SMSG_CAST_RESULT(_) => Self::SMSG_CAST_RESULT,
+            ServerOpcodeMessage::SMSG_SPELL_START(_) => Self::SMSG_SPELL_START,
+            ServerOpcodeMessage::SMSG_SPELL_GO(_) => Self::SMSG_SPELL_GO,
+            ServerOpcodeMessage::SMSG_SPELL_FAILURE(_) => Self::SMSG_SPELL_FAILURE,
+            ServerOpcodeMessage::SMSG_SPELL_COOLDOWN(_) => Self::SMSG_SPELL_COOLDOWN,
+            ServerOpcodeMessage::SMSG_COOLDOWN_EVENT(_) => Self::SMSG_COOLDOWN_EVENT,
+            ServerOpcodeMessage::SMSG_UPDATE_AURA_DURATION(_) => Self::SMSG_UPDATE_AURA_DURATION,
+            ServerOpcodeMessage::SMSG_PET_CAST_FAILED(_) => Self::SMSG_PET_CAST_FAILED,
+            ServerOpcodeMessage::SMSG_AI_REACTION(_) => Self::SMSG_AI_REACTION,
+            ServerOpcodeMessage::SMSG_ATTACKSTART(_) => Self::SMSG_ATTACKSTART,
+            ServerOpcodeMessage::SMSG_ATTACKSTOP(_) => Self::SMSG_ATTACKSTOP,
+            ServerOpcodeMessage::SMSG_ATTACKSWING_NOTINRANGE(_) => Self::SMSG_ATTACKSWING_NOTINRANGE,
+            ServerOpcodeMessage::SMSG_ATTACKSWING_BADFACING(_) => Self::SMSG_ATTACKSWING_BADFACING,
+            ServerOpcodeMessage::SMSG_ATTACKSWING_NOTSTANDING(_) => Self::SMSG_ATTACKSWING_NOTSTANDING,
+            ServerOpcodeMessage::SMSG_ATTACKSWING_DEADTARGET(_) => Self::SMSG_ATTACKSWING_DEADTARGET,
+            ServerOpcodeMessage::SMSG_ATTACKSWING_CANT_ATTACK(_) => Self::SMSG_ATTACKSWING_CANT_ATTACK,
+            ServerOpcodeMessage::SMSG_ATTACKERSTATEUPDATE(_) => Self::SMSG_ATTACKERSTATEUPDATE,
+            ServerOpcodeMessage::SMSG_CANCEL_COMBAT(_) => Self::SMSG_CANCEL_COMBAT,
+            ServerOpcodeMessage::SMSG_SPELLHEALLOG(_) => Self::SMSG_SPELLHEALLOG,
+            ServerOpcodeMessage::SMSG_SPELLENERGIZELOG(_) => Self::SMSG_SPELLENERGIZELOG,
+            ServerOpcodeMessage::SMSG_BINDPOINTUPDATE(_) => Self::SMSG_BINDPOINTUPDATE,
+            ServerOpcodeMessage::SMSG_PLAYERBOUND(_) => Self::SMSG_PLAYERBOUND,
+            ServerOpcodeMessage::SMSG_CLIENT_CONTROL_UPDATE(_) => Self::SMSG_CLIENT_CONTROL_UPDATE,
+            ServerOpcodeMessage::SMSG_RESURRECT_REQUEST(_) => Self::SMSG_RESURRECT_REQUEST,
+            ServerOpcodeMessage::SMSG_LOOT_RESPONSE(_) => Self::SMSG_LOOT_RESPONSE,
+            ServerOpcodeMessage::SMSG_LOOT_RELEASE_RESPONSE(_) => Self::SMSG_LOOT_RELEASE_RESPONSE,
+            ServerOpcodeMessage::SMSG_LOOT_REMOVED(_) => Self::SMSG_LOOT_REMOVED,
+            ServerOpcodeMessage::SMSG_LOOT_MONEY_NOTIFY(_) => Self::SMSG_LOOT_MONEY_NOTIFY,
+            ServerOpcodeMessage::SMSG_LOOT_CLEAR_MONEY(_) => Self::SMSG_LOOT_CLEAR_MONEY,
+            ServerOpcodeMessage::SMSG_ITEM_PUSH_RESULT(_) => Self::SMSG_ITEM_PUSH_RESULT,
+            ServerOpcodeMessage::SMSG_DUEL_REQUESTED(_) => Self::SMSG_DUEL_REQUESTED,
+            ServerOpcodeMessage::SMSG_DUEL_OUTOFBOUNDS(_) => Self::SMSG_DUEL_OUTOFBOUNDS,
+            ServerOpcodeMessage::SMSG_DUEL_INBOUNDS(_) => Self::SMSG_DUEL_INBOUNDS,
+            ServerOpcodeMessage::SMSG_DUEL_COMPLETE(_) => Self::SMSG_DUEL_COMPLETE,
+            ServerOpcodeMessage::SMSG_DUEL_WINNER(_) => Self::SMSG_DUEL_WINNER,
+            ServerOpcodeMessage::SMSG_MOUNTRESULT(_) => Self::SMSG_MOUNTRESULT,
+            ServerOpcodeMessage::SMSG_DISMOUNTRESULT(_) => Self::SMSG_DISMOUNTRESULT,
+            ServerOpcodeMessage::SMSG_MOUNTSPECIAL_ANIM(_) => Self::SMSG_MOUNTSPECIAL_ANIM,
+            ServerOpcodeMessage::SMSG_PET_TAME_FAILURE(_) => Self::SMSG_PET_TAME_FAILURE,
+            ServerOpcodeMessage::SMSG_PET_NAME_INVALID(_) => Self::SMSG_PET_NAME_INVALID,
+            ServerOpcodeMessage::SMSG_PET_SPELLS(_) => Self::SMSG_PET_SPELLS,
+            ServerOpcodeMessage::SMSG_PET_MODE(_) => Self::SMSG_PET_MODE,
+            ServerOpcodeMessage::SMSG_GOSSIP_MESSAGE(_) => Self::SMSG_GOSSIP_MESSAGE,
+            ServerOpcodeMessage::SMSG_GOSSIP_COMPLETE(_) => Self::SMSG_GOSSIP_COMPLETE,
+            ServerOpcodeMessage::SMSG_NPC_TEXT_UPDATE(_) => Self::SMSG_NPC_TEXT_UPDATE,
+            ServerOpcodeMessage::SMSG_QUESTGIVER_STATUS(_) => Self::SMSG_QUESTGIVER_STATUS,
+            ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_LIST(_) => Self::SMSG_QUESTGIVER_QUEST_LIST,
+            ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_DETAILS(_) => Self::SMSG_QUESTGIVER_QUEST_DETAILS,
+            ServerOpcodeMessage::SMSG_QUESTGIVER_REQUEST_ITEMS(_) => Self::SMSG_QUESTGIVER_REQUEST_ITEMS,
+            ServerOpcodeMessage::SMSG_QUESTGIVER_OFFER_REWARD(_) => Self::SMSG_QUESTGIVER_OFFER_REWARD,
+            ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_INVALID(_) => Self::SMSG_QUESTGIVER_QUEST_INVALID,
+            ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_COMPLETE(_) => Self::SMSG_QUESTGIVER_QUEST_COMPLETE,
+            ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_FAILED(_) => Self::SMSG_QUESTGIVER_QUEST_FAILED,
+            ServerOpcodeMessage::SMSG_QUESTLOG_FULL(_) => Self::SMSG_QUESTLOG_FULL,
+            ServerOpcodeMessage::SMSG_QUESTUPDATE_FAILED(_) => Self::SMSG_QUESTUPDATE_FAILED,
+            ServerOpcodeMessage::SMSG_QUESTUPDATE_FAILEDTIMER(_) => Self::SMSG_QUESTUPDATE_FAILEDTIMER,
+            ServerOpcodeMessage::SMSG_QUESTUPDATE_COMPLETE(_) => Self::SMSG_QUESTUPDATE_COMPLETE,
+            ServerOpcodeMessage::SMSG_QUESTUPDATE_ADD_KILL(_) => Self::SMSG_QUESTUPDATE_ADD_KILL,
+            ServerOpcodeMessage::SMSG_QUESTUPDATE_ADD_ITEM(_) => Self::SMSG_QUESTUPDATE_ADD_ITEM,
+            ServerOpcodeMessage::SMSG_QUEST_CONFIRM_ACCEPT(_) => Self::SMSG_QUEST_CONFIRM_ACCEPT,
+            ServerOpcodeMessage::SMSG_LIST_INVENTORY(_) => Self::SMSG_LIST_INVENTORY,
+            ServerOpcodeMessage::SMSG_SELL_ITEM(_) => Self::SMSG_SELL_ITEM,
+            ServerOpcodeMessage::SMSG_BUY_ITEM(_) => Self::SMSG_BUY_ITEM,
+            ServerOpcodeMessage::SMSG_BUY_FAILED(_) => Self::SMSG_BUY_FAILED,
+            ServerOpcodeMessage::SMSG_SHOWTAXINODES(_) => Self::SMSG_SHOWTAXINODES,
+            ServerOpcodeMessage::SMSG_TAXINODE_STATUS(_) => Self::SMSG_TAXINODE_STATUS,
+            ServerOpcodeMessage::SMSG_ACTIVATETAXIREPLY(_) => Self::SMSG_ACTIVATETAXIREPLY,
+            ServerOpcodeMessage::SMSG_NEW_TAXI_PATH(_) => Self::SMSG_NEW_TAXI_PATH,
+            ServerOpcodeMessage::SMSG_TRAINER_LIST(_) => Self::SMSG_TRAINER_LIST,
+            ServerOpcodeMessage::SMSG_TRAINER_BUY_SUCCEEDED(_) => Self::SMSG_TRAINER_BUY_SUCCEEDED,
+            ServerOpcodeMessage::SMSG_TRAINER_BUY_FAILED(_) => Self::SMSG_TRAINER_BUY_FAILED,
+            ServerOpcodeMessage::SMSG_SHOW_BANK(_) => Self::SMSG_SHOW_BANK,
+            ServerOpcodeMessage::SMSG_BUY_BANK_SLOT_RESULT(_) => Self::SMSG_BUY_BANK_SLOT_RESULT,
+            ServerOpcodeMessage::SMSG_PETITION_SHOWLIST(_) => Self::SMSG_PETITION_SHOWLIST,
+            ServerOpcodeMessage::SMSG_PETITION_SHOW_SIGNATURES(_) => Self::SMSG_PETITION_SHOW_SIGNATURES,
+            ServerOpcodeMessage::SMSG_PETITION_SIGN_RESULTS(_) => Self::SMSG_PETITION_SIGN_RESULTS,
+            ServerOpcodeMessage::SMSG_TURN_IN_PETITION_RESULTS(_) => Self::SMSG_TURN_IN_PETITION_RESULTS,
+            ServerOpcodeMessage::SMSG_PETITION_QUERY_RESPONSE(_) => Self::SMSG_PETITION_QUERY_RESPONSE,
+            ServerOpcodeMessage::SMSG_FISH_NOT_HOOKED(_) => Self::SMSG_FISH_NOT_HOOKED,
+            ServerOpcodeMessage::SMSG_FISH_ESCAPED(_) => Self::SMSG_FISH_ESCAPED,
+            ServerOpcodeMessage::SMSG_NOTIFICATION(_) => Self::SMSG_NOTIFICATION,
+            ServerOpcodeMessage::SMSG_PLAYED_TIME(_) => Self::SMSG_PLAYED_TIME,
+            ServerOpcodeMessage::SMSG_QUERY_TIME_RESPONSE(_) => Self::SMSG_QUERY_TIME_RESPONSE,
+            ServerOpcodeMessage::SMSG_LOG_XPGAIN(_) => Self::SMSG_LOG_XPGAIN,
+            ServerOpcodeMessage::SMSG_LEVELUP_INFO(_) => Self::SMSG_LEVELUP_INFO,
+            ServerOpcodeMessage::MSG_MINIMAP_PING(_) => Self::MSG_MINIMAP_PING,
+            ServerOpcodeMessage::SMSG_RESISTLOG(_) => Self::SMSG_RESISTLOG,
+            ServerOpcodeMessage::SMSG_ENCHANTMENTLOG(_) => Self::SMSG_ENCHANTMENTLOG,
+            ServerOpcodeMessage::SMSG_START_MIRROR_TIMER(_) => Self::SMSG_START_MIRROR_TIMER,
+            ServerOpcodeMessage::SMSG_PAUSE_MIRROR_TIMER(_) => Self::SMSG_PAUSE_MIRROR_TIMER,
+            ServerOpcodeMessage::SMSG_STOP_MIRROR_TIMER(_) => Self::SMSG_STOP_MIRROR_TIMER,
+            ServerOpcodeMessage::SMSG_PONG(_) => Self::SMSG_PONG,
+            ServerOpcodeMessage::SMSG_CLEAR_COOLDOWN(_) => Self::SMSG_CLEAR_COOLDOWN,
+            ServerOpcodeMessage::SMSG_GAMEOBJECT_PAGETEXT(_) => Self::SMSG_GAMEOBJECT_PAGETEXT,
+            ServerOpcodeMessage::SMSG_SPELL_DELAYED(_) => Self::SMSG_SPELL_DELAYED,
+            ServerOpcodeMessage::SMSG_ITEM_TIME_UPDATE(_) => Self::SMSG_ITEM_TIME_UPDATE,
+            ServerOpcodeMessage::SMSG_ITEM_ENCHANT_TIME_UPDATE(_) => Self::SMSG_ITEM_ENCHANT_TIME_UPDATE,
+            ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => Self::SMSG_AUTH_CHALLENGE,
+            ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => Self::SMSG_AUTH_RESPONSE,
+            ServerOpcodeMessage::MSG_SAVE_GUILD_EMBLEM(_) => Self::MSG_SAVE_GUILD_EMBLEM,
+            ServerOpcodeMessage::SMSG_PLAY_SPELL_VISUAL(_) => Self::SMSG_PLAY_SPELL_VISUAL,
+            ServerOpcodeMessage::SMSG_PARTYKILLLOG(_) => Self::SMSG_PARTYKILLLOG,
+            ServerOpcodeMessage::SMSG_PLAY_SPELL_IMPACT(_) => Self::SMSG_PLAY_SPELL_IMPACT,
+            ServerOpcodeMessage::SMSG_EXPLORATION_EXPERIENCE(_) => Self::SMSG_EXPLORATION_EXPERIENCE,
+            ServerOpcodeMessage::MSG_RANDOM_ROLL(_) => Self::MSG_RANDOM_ROLL,
+            ServerOpcodeMessage::SMSG_ENVIRONMENTALDAMAGELOG(_) => Self::SMSG_ENVIRONMENTALDAMAGELOG,
+            ServerOpcodeMessage::MSG_LOOKING_FOR_GROUP(_) => Self::MSG_LOOKING_FOR_GROUP,
+            ServerOpcodeMessage::SMSG_REMOVED_SPELL(_) => Self::SMSG_REMOVED_SPELL,
+            ServerOpcodeMessage::SMSG_GMTICKET_CREATE(_) => Self::SMSG_GMTICKET_CREATE,
+            ServerOpcodeMessage::SMSG_GMTICKET_UPDATETEXT(_) => Self::SMSG_GMTICKET_UPDATETEXT,
+            ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => Self::SMSG_ACCOUNT_DATA_TIMES,
+            ServerOpcodeMessage::SMSG_GMTICKET_GETTICKET(_) => Self::SMSG_GMTICKET_GETTICKET,
+            ServerOpcodeMessage::SMSG_GAMEOBJECT_SPAWN_ANIM(_) => Self::SMSG_GAMEOBJECT_SPAWN_ANIM,
+            ServerOpcodeMessage::SMSG_GAMEOBJECT_DESPAWN_ANIM(_) => Self::SMSG_GAMEOBJECT_DESPAWN_ANIM,
+            ServerOpcodeMessage::MSG_CORPSE_QUERY(_) => Self::MSG_CORPSE_QUERY,
+            ServerOpcodeMessage::SMSG_GMTICKET_DELETETICKET(_) => Self::SMSG_GMTICKET_DELETETICKET,
+            ServerOpcodeMessage::SMSG_CHAT_WRONG_FACTION(_) => Self::SMSG_CHAT_WRONG_FACTION,
+            ServerOpcodeMessage::SMSG_GMTICKET_SYSTEMSTATUS(_) => Self::SMSG_GMTICKET_SYSTEMSTATUS,
+            ServerOpcodeMessage::SMSG_SET_REST_START(_) => Self::SMSG_SET_REST_START,
+            ServerOpcodeMessage::SMSG_SPIRIT_HEALER_CONFIRM(_) => Self::SMSG_SPIRIT_HEALER_CONFIRM,
+            ServerOpcodeMessage::SMSG_GOSSIP_POI(_) => Self::SMSG_GOSSIP_POI,
+            ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => Self::SMSG_LOGIN_VERIFY_WORLD,
+            ServerOpcodeMessage::SMSG_MAIL_LIST_RESULT(_) => Self::SMSG_MAIL_LIST_RESULT,
+            ServerOpcodeMessage::SMSG_BATTLEFIELD_LIST(_) => Self::SMSG_BATTLEFIELD_LIST,
+            ServerOpcodeMessage::SMSG_ITEM_TEXT_QUERY_RESPONSE(_) => Self::SMSG_ITEM_TEXT_QUERY_RESPONSE,
+            ServerOpcodeMessage::SMSG_SPELLLOGMISS(_) => Self::SMSG_SPELLLOGMISS,
+            ServerOpcodeMessage::SMSG_SPELLLOGEXECUTE(_) => Self::SMSG_SPELLLOGEXECUTE,
+            ServerOpcodeMessage::SMSG_PERIODICAURALOG(_) => Self::SMSG_PERIODICAURALOG,
+            ServerOpcodeMessage::SMSG_SPELLDAMAGESHIELD(_) => Self::SMSG_SPELLDAMAGESHIELD,
+            ServerOpcodeMessage::SMSG_SPELLNONMELEEDAMAGELOG(_) => Self::SMSG_SPELLNONMELEEDAMAGELOG,
+            ServerOpcodeMessage::SMSG_ZONE_UNDER_ATTACK(_) => Self::SMSG_ZONE_UNDER_ATTACK,
+            ServerOpcodeMessage::MSG_AUCTION_HELLO(_) => Self::MSG_AUCTION_HELLO,
+            ServerOpcodeMessage::SMSG_AUCTION_LIST_RESULT(_) => Self::SMSG_AUCTION_LIST_RESULT,
+            ServerOpcodeMessage::SMSG_AUCTION_OWNER_LIST_RESULT(_) => Self::SMSG_AUCTION_OWNER_LIST_RESULT,
+            ServerOpcodeMessage::SMSG_AUCTION_BIDDER_NOTIFICATION(_) => Self::SMSG_AUCTION_BIDDER_NOTIFICATION,
+            ServerOpcodeMessage::SMSG_AUCTION_OWNER_NOTIFICATION(_) => Self::SMSG_AUCTION_OWNER_NOTIFICATION,
+            ServerOpcodeMessage::SMSG_PROCRESIST(_) => Self::SMSG_PROCRESIST,
+            ServerOpcodeMessage::SMSG_DISPEL_FAILED(_) => Self::SMSG_DISPEL_FAILED,
+            ServerOpcodeMessage::SMSG_SPELLORDAMAGE_IMMUNE(_) => Self::SMSG_SPELLORDAMAGE_IMMUNE,
+            ServerOpcodeMessage::SMSG_AUCTION_BIDDER_LIST_RESULT(_) => Self::SMSG_AUCTION_BIDDER_LIST_RESULT,
+            ServerOpcodeMessage::SMSG_SET_FLAT_SPELL_MODIFIER(_) => Self::SMSG_SET_FLAT_SPELL_MODIFIER,
+            ServerOpcodeMessage::SMSG_SET_PCT_SPELL_MODIFIER(_) => Self::SMSG_SET_PCT_SPELL_MODIFIER,
+            ServerOpcodeMessage::SMSG_CORPSE_RECLAIM_DELAY(_) => Self::SMSG_CORPSE_RECLAIM_DELAY,
+            ServerOpcodeMessage::MSG_LIST_STABLED_PETS(_) => Self::MSG_LIST_STABLED_PETS,
+            ServerOpcodeMessage::SMSG_STABLE_RESULT(_) => Self::SMSG_STABLE_RESULT,
+            ServerOpcodeMessage::SMSG_PLAY_MUSIC(_) => Self::SMSG_PLAY_MUSIC,
+            ServerOpcodeMessage::SMSG_PLAY_OBJECT_SOUND(_) => Self::SMSG_PLAY_OBJECT_SOUND,
+            ServerOpcodeMessage::SMSG_SPELLDISPELLOG(_) => Self::SMSG_SPELLDISPELLOG,
+            ServerOpcodeMessage::MSG_QUERY_NEXT_MAIL_TIME(_) => Self::MSG_QUERY_NEXT_MAIL_TIME,
+            ServerOpcodeMessage::SMSG_RECEIVED_MAIL(_) => Self::SMSG_RECEIVED_MAIL,
+            ServerOpcodeMessage::SMSG_RAID_GROUP_ONLY(_) => Self::SMSG_RAID_GROUP_ONLY,
+            ServerOpcodeMessage::SMSG_PVP_CREDIT(_) => Self::SMSG_PVP_CREDIT,
+            ServerOpcodeMessage::SMSG_AUCTION_REMOVED_NOTIFICATION(_) => Self::SMSG_AUCTION_REMOVED_NOTIFICATION,
+            ServerOpcodeMessage::SMSG_SERVER_MESSAGE(_) => Self::SMSG_SERVER_MESSAGE,
+            ServerOpcodeMessage::SMSG_MEETINGSTONE_SETQUEUE(_) => Self::SMSG_MEETINGSTONE_SETQUEUE,
+            ServerOpcodeMessage::SMSG_MEETINGSTONE_COMPLETE(_) => Self::SMSG_MEETINGSTONE_COMPLETE,
+            ServerOpcodeMessage::SMSG_MEETINGSTONE_IN_PROGRESS(_) => Self::SMSG_MEETINGSTONE_IN_PROGRESS,
+            ServerOpcodeMessage::SMSG_MEETINGSTONE_MEMBER_ADDED(_) => Self::SMSG_MEETINGSTONE_MEMBER_ADDED,
+            ServerOpcodeMessage::SMSG_CANCEL_AUTO_REPEAT(_) => Self::SMSG_CANCEL_AUTO_REPEAT,
+            ServerOpcodeMessage::SMSG_STANDSTATE_UPDATE(_) => Self::SMSG_STANDSTATE_UPDATE,
+            ServerOpcodeMessage::SMSG_LOOT_ALL_PASSED(_) => Self::SMSG_LOOT_ALL_PASSED,
+            ServerOpcodeMessage::SMSG_LOOT_ROLL_WON(_) => Self::SMSG_LOOT_ROLL_WON,
+            ServerOpcodeMessage::SMSG_LOOT_START_ROLL(_) => Self::SMSG_LOOT_START_ROLL,
+            ServerOpcodeMessage::SMSG_LOOT_ROLL(_) => Self::SMSG_LOOT_ROLL,
+            ServerOpcodeMessage::SMSG_LOOT_MASTER_LIST(_) => Self::SMSG_LOOT_MASTER_LIST,
+            ServerOpcodeMessage::SMSG_SET_FORCED_REACTIONS(_) => Self::SMSG_SET_FORCED_REACTIONS,
+            ServerOpcodeMessage::SMSG_SPELL_FAILED_OTHER(_) => Self::SMSG_SPELL_FAILED_OTHER,
+            ServerOpcodeMessage::SMSG_GAMEOBJECT_RESET_STATE(_) => Self::SMSG_GAMEOBJECT_RESET_STATE,
+            ServerOpcodeMessage::SMSG_CHAT_PLAYER_NOT_FOUND(_) => Self::SMSG_CHAT_PLAYER_NOT_FOUND,
+            ServerOpcodeMessage::MSG_TALENT_WIPE_CONFIRM(_) => Self::MSG_TALENT_WIPE_CONFIRM,
+            ServerOpcodeMessage::SMSG_SUMMON_REQUEST(_) => Self::SMSG_SUMMON_REQUEST,
+            ServerOpcodeMessage::SMSG_MONSTER_MOVE_TRANSPORT(_) => Self::SMSG_MONSTER_MOVE_TRANSPORT,
+            ServerOpcodeMessage::SMSG_PET_BROKEN(_) => Self::SMSG_PET_BROKEN,
+            ServerOpcodeMessage::SMSG_FEIGN_DEATH_RESISTED(_) => Self::SMSG_FEIGN_DEATH_RESISTED,
+            ServerOpcodeMessage::SMSG_DUEL_COUNTDOWN(_) => Self::SMSG_DUEL_COUNTDOWN,
+            ServerOpcodeMessage::SMSG_AREA_TRIGGER_MESSAGE(_) => Self::SMSG_AREA_TRIGGER_MESSAGE,
+            ServerOpcodeMessage::SMSG_MEETINGSTONE_JOINFAILED(_) => Self::SMSG_MEETINGSTONE_JOINFAILED,
+            ServerOpcodeMessage::SMSG_PLAYER_SKINNED(_) => Self::SMSG_PLAYER_SKINNED,
+            ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => Self::SMSG_DURABILITY_DAMAGE_DEATH,
+            ServerOpcodeMessage::SMSG_INIT_WORLD_STATES(_) => Self::SMSG_INIT_WORLD_STATES,
+            ServerOpcodeMessage::SMSG_UPDATE_WORLD_STATE(_) => Self::SMSG_UPDATE_WORLD_STATE,
+            ServerOpcodeMessage::SMSG_ITEM_NAME_QUERY_RESPONSE(_) => Self::SMSG_ITEM_NAME_QUERY_RESPONSE,
+            ServerOpcodeMessage::SMSG_PET_ACTION_FEEDBACK(_) => Self::SMSG_PET_ACTION_FEEDBACK,
+            ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => Self::SMSG_CHAR_RENAME,
+            ServerOpcodeMessage::SMSG_INSTANCE_SAVE_CREATED(_) => Self::SMSG_INSTANCE_SAVE_CREATED,
+            ServerOpcodeMessage::SMSG_RAID_INSTANCE_INFO(_) => Self::SMSG_RAID_INSTANCE_INFO,
+            ServerOpcodeMessage::SMSG_PLAY_SOUND(_) => Self::SMSG_PLAY_SOUND,
+            ServerOpcodeMessage::SMSG_BATTLEFIELD_STATUS(_) => Self::SMSG_BATTLEFIELD_STATUS,
+            ServerOpcodeMessage::MSG_INSPECT_HONOR_STATS(_) => Self::MSG_INSPECT_HONOR_STATS,
+            ServerOpcodeMessage::SMSG_FORCE_WALK_SPEED_CHANGE(_) => Self::SMSG_FORCE_WALK_SPEED_CHANGE,
+            ServerOpcodeMessage::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(_) => Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE,
+            ServerOpcodeMessage::SMSG_FORCE_TURN_RATE_CHANGE(_) => Self::SMSG_FORCE_TURN_RATE_CHANGE,
+            ServerOpcodeMessage::MSG_PVP_LOG_DATA(_) => Self::MSG_PVP_LOG_DATA,
+            ServerOpcodeMessage::SMSG_AREA_SPIRIT_HEALER_TIME(_) => Self::SMSG_AREA_SPIRIT_HEALER_TIME,
+            ServerOpcodeMessage::SMSG_GROUP_JOINED_BATTLEGROUND(_) => Self::SMSG_GROUP_JOINED_BATTLEGROUND,
+            ServerOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => Self::MSG_BATTLEGROUND_PLAYER_POSITIONS,
+            ServerOpcodeMessage::SMSG_BINDER_CONFIRM(_) => Self::SMSG_BINDER_CONFIRM,
+            ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_JOINED(_) => Self::SMSG_BATTLEGROUND_PLAYER_JOINED,
+            ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_LEFT(_) => Self::SMSG_BATTLEGROUND_PLAYER_LEFT,
+            ServerOpcodeMessage::SMSG_PET_UNLEARN_CONFIRM(_) => Self::SMSG_PET_UNLEARN_CONFIRM,
+            ServerOpcodeMessage::SMSG_PARTY_MEMBER_STATS_FULL(_) => Self::SMSG_PARTY_MEMBER_STATS_FULL,
+            ServerOpcodeMessage::SMSG_WEATHER(_) => Self::SMSG_WEATHER,
+            ServerOpcodeMessage::SMSG_RAID_INSTANCE_MESSAGE(_) => Self::SMSG_RAID_INSTANCE_MESSAGE,
+            ServerOpcodeMessage::SMSG_CHAT_RESTRICTED(_) => Self::SMSG_CHAT_RESTRICTED,
+            ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(_) => Self::SMSG_SPLINE_SET_RUN_SPEED,
+            ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_BACK_SPEED(_) => Self::SMSG_SPLINE_SET_RUN_BACK_SPEED,
+            ServerOpcodeMessage::SMSG_SPLINE_SET_SWIM_SPEED(_) => Self::SMSG_SPLINE_SET_SWIM_SPEED,
+            ServerOpcodeMessage::SMSG_SPLINE_SET_WALK_SPEED(_) => Self::SMSG_SPLINE_SET_WALK_SPEED,
+            ServerOpcodeMessage::SMSG_SPLINE_SET_SWIM_BACK_SPEED(_) => Self::SMSG_SPLINE_SET_SWIM_BACK_SPEED,
+            ServerOpcodeMessage::SMSG_SPLINE_SET_TURN_RATE(_) => Self::SMSG_SPLINE_SET_TURN_RATE,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_UNROOT(_) => Self::SMSG_SPLINE_MOVE_UNROOT,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_FEATHER_FALL(_) => Self::SMSG_SPLINE_MOVE_FEATHER_FALL,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_NORMAL_FALL(_) => Self::SMSG_SPLINE_MOVE_NORMAL_FALL,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_HOVER(_) => Self::SMSG_SPLINE_MOVE_SET_HOVER,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_UNSET_HOVER(_) => Self::SMSG_SPLINE_MOVE_UNSET_HOVER,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_WATER_WALK(_) => Self::SMSG_SPLINE_MOVE_WATER_WALK,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_LAND_WALK(_) => Self::SMSG_SPLINE_MOVE_LAND_WALK,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_START_SWIM(_) => Self::SMSG_SPLINE_MOVE_START_SWIM,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_STOP_SWIM(_) => Self::SMSG_SPLINE_MOVE_STOP_SWIM,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_RUN_MODE(_) => Self::SMSG_SPLINE_MOVE_SET_RUN_MODE,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_WALK_MODE(_) => Self::SMSG_SPLINE_MOVE_SET_WALK_MODE,
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_ROOT(_) => Self::SMSG_SPLINE_MOVE_ROOT,
+            ServerOpcodeMessage::SMSG_INVALIDATE_PLAYER(_) => Self::SMSG_INVALIDATE_PLAYER,
+            ServerOpcodeMessage::SMSG_INSTANCE_RESET(_) => Self::SMSG_INSTANCE_RESET,
+            ServerOpcodeMessage::SMSG_INSTANCE_RESET_FAILED(_) => Self::SMSG_INSTANCE_RESET_FAILED,
+            ServerOpcodeMessage::SMSG_UPDATE_LAST_INSTANCE(_) => Self::SMSG_UPDATE_LAST_INSTANCE,
+            ServerOpcodeMessage::MSG_RAID_TARGET_UPDATE(_) => Self::MSG_RAID_TARGET_UPDATE,
+            ServerOpcodeMessage::MSG_RAID_READY_CHECK(_) => Self::MSG_RAID_READY_CHECK,
+            ServerOpcodeMessage::SMSG_PET_ACTION_SOUND(_) => Self::SMSG_PET_ACTION_SOUND,
+            ServerOpcodeMessage::SMSG_PET_DISMISS_SOUND(_) => Self::SMSG_PET_DISMISS_SOUND,
+            ServerOpcodeMessage::SMSG_GM_TICKET_STATUS_UPDATE(_) => Self::SMSG_GM_TICKET_STATUS_UPDATE,
+            ServerOpcodeMessage::SMSG_UPDATE_INSTANCE_OWNERSHIP(_) => Self::SMSG_UPDATE_INSTANCE_OWNERSHIP,
+            ServerOpcodeMessage::SMSG_SPELLINSTAKILLLOG(_) => Self::SMSG_SPELLINSTAKILLLOG,
+            ServerOpcodeMessage::SMSG_SPELL_UPDATE_CHAIN_TARGETS(_) => Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS,
+            ServerOpcodeMessage::SMSG_EXPECTED_SPAM_RECORDS(_) => Self::SMSG_EXPECTED_SPAM_RECORDS,
+            ServerOpcodeMessage::SMSG_DEFENSE_MESSAGE(_) => Self::SMSG_DEFENSE_MESSAGE,
         }
     }
 }
 
 #[derive(Debug)]
-pub enum WorldServerOpcodeError {
+pub enum ServerOpcodeError {
     Io(std::io::Error),
     InvalidOpcode(u16),
 }
 
-impl std::error::Error for WorldServerOpcodeError {
+impl std::error::Error for ServerOpcodeError {
 }
 
-impl std::fmt::Display for WorldServerOpcodeError {
+impl std::fmt::Display for ServerOpcodeError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode for WorldServer: '{}'", i)),
+            Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode for Server: '{}'", i)),
         }
     }
 }
 
-impl From<std::io::Error> for WorldServerOpcodeError {
+impl From<std::io::Error> for ServerOpcodeError {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
     }
 }
 
 #[derive(Debug)]
-pub enum WorldServerOpcodeMessage {
+pub enum ServerOpcodeMessage {
     MSG_MOVE_START_FORWARD(MSG_MOVE_START_FORWARD),
     MSG_MOVE_START_BACKWARD(MSG_MOVE_START_BACKWARD),
     MSG_MOVE_STOP(MSG_MOVE_STOP),
@@ -5920,8 +5920,8 @@ pub enum WorldServerOpcodeMessage {
     SMSG_DEFENSE_MESSAGE(SMSG_DEFENSE_MESSAGE),
 }
 
-impl OpcodeMessage for WorldServerOpcodeMessage {
-    type Error = WorldServerOpcodeMessageError;
+impl OpcodeMessage for ServerOpcodeMessage {
+    type Error = ServerOpcodeMessageError;
     fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(i) => i.write_body(w)?,
@@ -7301,7 +7301,7 @@ impl OpcodeMessage for WorldServerOpcodeMessage {
 }
 
 #[derive(Debug)]
-pub enum WorldServerOpcodeMessageError {
+pub enum ServerOpcodeMessageError {
     Io(std::io::Error),
     InvalidOpcode(u16),
     MSG_QUEST_PUSH_RESULT(MSG_QUEST_PUSH_RESULTError),
@@ -7441,12 +7441,12 @@ pub enum WorldServerOpcodeMessageError {
     SMSG_DEFENSE_MESSAGE(SMSG_DEFENSE_MESSAGEError),
 }
 
-impl std::error::Error for WorldServerOpcodeMessageError {}
-impl std::fmt::Display for WorldServerOpcodeMessageError {
+impl std::error::Error for ServerOpcodeMessageError {}
+impl std::fmt::Display for ServerOpcodeMessageError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Io(i) => i.fmt(f),
-            Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode received for WorldServerMessage: '{}'", i)),
+            Self::InvalidOpcode(i) => f.write_fmt(format_args!("invalid opcode received for ServerMessage: '{}'", i)),
             Self::MSG_QUEST_PUSH_RESULT(i) => i.fmt(f),
             Self::MSG_PETITION_RENAME(i) => i.fmt(f),
             Self::SMSG_CHAR_CREATE(i) => i.fmt(f),
@@ -7586,22 +7586,22 @@ impl std::fmt::Display for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<std::io::Error> for WorldServerOpcodeMessageError {
+impl From<std::io::Error> for ServerOpcodeMessageError {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
     }
 }
 
-impl From<WorldServerOpcodeError> for WorldServerOpcodeMessageError {
-    fn from(e: WorldServerOpcodeError) -> Self {
+impl From<ServerOpcodeError> for ServerOpcodeMessageError {
+    fn from(e: ServerOpcodeError) -> Self {
         match e {
-            WorldServerOpcodeError::Io(i) => Self::Io(i),
-            WorldServerOpcodeError::InvalidOpcode(i) => Self::InvalidOpcode(i),
+            ServerOpcodeError::Io(i) => Self::Io(i),
+            ServerOpcodeError::InvalidOpcode(i) => Self::InvalidOpcode(i),
         }
     }
 }
 
-impl From<MSG_QUEST_PUSH_RESULTError> for WorldServerOpcodeMessageError {
+impl From<MSG_QUEST_PUSH_RESULTError> for ServerOpcodeMessageError {
     fn from(e: MSG_QUEST_PUSH_RESULTError) -> Self {
         match e {
             MSG_QUEST_PUSH_RESULTError::Io(i) => Self::Io(i),
@@ -7610,7 +7610,7 @@ impl From<MSG_QUEST_PUSH_RESULTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<MSG_PETITION_RENAMEError> for WorldServerOpcodeMessageError {
+impl From<MSG_PETITION_RENAMEError> for ServerOpcodeMessageError {
     fn from(e: MSG_PETITION_RENAMEError) -> Self {
         match e {
             MSG_PETITION_RENAMEError::Io(i) => Self::Io(i),
@@ -7619,7 +7619,7 @@ impl From<MSG_PETITION_RENAMEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_CHAR_CREATEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_CHAR_CREATEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_CHAR_CREATEError) -> Self {
         match e {
             SMSG_CHAR_CREATEError::Io(i) => Self::Io(i),
@@ -7628,7 +7628,7 @@ impl From<SMSG_CHAR_CREATEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_CHAR_ENUMError> for WorldServerOpcodeMessageError {
+impl From<SMSG_CHAR_ENUMError> for ServerOpcodeMessageError {
     fn from(e: SMSG_CHAR_ENUMError) -> Self {
         match e {
             SMSG_CHAR_ENUMError::Io(i) => Self::Io(i),
@@ -7637,7 +7637,7 @@ impl From<SMSG_CHAR_ENUMError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_CHAR_DELETEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_CHAR_DELETEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_CHAR_DELETEError) -> Self {
         match e {
             SMSG_CHAR_DELETEError::Io(i) => Self::Io(i),
@@ -7646,7 +7646,7 @@ impl From<SMSG_CHAR_DELETEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_TRANSFER_PENDINGError> for WorldServerOpcodeMessageError {
+impl From<SMSG_TRANSFER_PENDINGError> for ServerOpcodeMessageError {
     fn from(e: SMSG_TRANSFER_PENDINGError) -> Self {
         match e {
             SMSG_TRANSFER_PENDINGError::Io(i) => Self::Io(i),
@@ -7655,7 +7655,7 @@ impl From<SMSG_TRANSFER_PENDINGError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_TRANSFER_ABORTEDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_TRANSFER_ABORTEDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_TRANSFER_ABORTEDError) -> Self {
         match e {
             SMSG_TRANSFER_ABORTEDError::Io(i) => Self::Io(i),
@@ -7664,7 +7664,7 @@ impl From<SMSG_TRANSFER_ABORTEDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_CHARACTER_LOGIN_FAILEDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_CHARACTER_LOGIN_FAILEDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_CHARACTER_LOGIN_FAILEDError) -> Self {
         match e {
             SMSG_CHARACTER_LOGIN_FAILEDError::Io(i) => Self::Io(i),
@@ -7673,7 +7673,7 @@ impl From<SMSG_CHARACTER_LOGIN_FAILEDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_LOGOUT_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_LOGOUT_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_LOGOUT_RESPONSEError) -> Self {
         match e {
             SMSG_LOGOUT_RESPONSEError::Io(i) => Self::Io(i),
@@ -7682,7 +7682,7 @@ impl From<SMSG_LOGOUT_RESPONSEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_NAME_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_NAME_QUERY_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_NAME_QUERY_RESPONSEError) -> Self {
         match e {
             SMSG_NAME_QUERY_RESPONSEError::Io(i) => Self::Io(i),
@@ -7691,7 +7691,7 @@ impl From<SMSG_NAME_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PET_NAME_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PET_NAME_QUERY_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PET_NAME_QUERY_RESPONSEError) -> Self {
         match e {
             SMSG_PET_NAME_QUERY_RESPONSEError::Io(i) => Self::Io(i),
@@ -7700,7 +7700,7 @@ impl From<SMSG_PET_NAME_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GUILD_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GUILD_QUERY_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GUILD_QUERY_RESPONSEError) -> Self {
         match e {
             SMSG_GUILD_QUERY_RESPONSEError::Io(i) => Self::Io(i),
@@ -7709,7 +7709,7 @@ impl From<SMSG_GUILD_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_ITEM_QUERY_SINGLE_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_ITEM_QUERY_SINGLE_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_ITEM_QUERY_SINGLE_RESPONSEError) -> Self {
         match e {
             SMSG_ITEM_QUERY_SINGLE_RESPONSEError::Io(i) => Self::Io(i),
@@ -7718,7 +7718,7 @@ impl From<SMSG_ITEM_QUERY_SINGLE_RESPONSEError> for WorldServerOpcodeMessageErro
     }
 }
 
-impl From<SMSG_PAGE_TEXT_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PAGE_TEXT_QUERY_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PAGE_TEXT_QUERY_RESPONSEError) -> Self {
         match e {
             SMSG_PAGE_TEXT_QUERY_RESPONSEError::Io(i) => Self::Io(i),
@@ -7727,7 +7727,7 @@ impl From<SMSG_PAGE_TEXT_QUERY_RESPONSEError> for WorldServerOpcodeMessageError 
     }
 }
 
-impl From<SMSG_QUEST_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_QUEST_QUERY_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_QUEST_QUERY_RESPONSEError) -> Self {
         match e {
             SMSG_QUEST_QUERY_RESPONSEError::Io(i) => Self::Io(i),
@@ -7736,7 +7736,7 @@ impl From<SMSG_QUEST_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GAMEOBJECT_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GAMEOBJECT_QUERY_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GAMEOBJECT_QUERY_RESPONSEError) -> Self {
         match e {
             SMSG_GAMEOBJECT_QUERY_RESPONSEError::Io(i) => Self::Io(i),
@@ -7745,7 +7745,7 @@ impl From<SMSG_GAMEOBJECT_QUERY_RESPONSEError> for WorldServerOpcodeMessageError
     }
 }
 
-impl From<SMSG_CREATURE_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_CREATURE_QUERY_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_CREATURE_QUERY_RESPONSEError) -> Self {
         match e {
             SMSG_CREATURE_QUERY_RESPONSEError::Io(i) => Self::Io(i),
@@ -7754,7 +7754,7 @@ impl From<SMSG_CREATURE_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_WHOError> for WorldServerOpcodeMessageError {
+impl From<SMSG_WHOError> for ServerOpcodeMessageError {
     fn from(e: SMSG_WHOError) -> Self {
         match e {
             SMSG_WHOError::Io(i) => Self::Io(i),
@@ -7763,7 +7763,7 @@ impl From<SMSG_WHOError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_WHOISError> for WorldServerOpcodeMessageError {
+impl From<SMSG_WHOISError> for ServerOpcodeMessageError {
     fn from(e: SMSG_WHOISError) -> Self {
         match e {
             SMSG_WHOISError::Io(i) => Self::Io(i),
@@ -7772,7 +7772,7 @@ impl From<SMSG_WHOISError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_FRIEND_LISTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_FRIEND_LISTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_FRIEND_LISTError) -> Self {
         match e {
             SMSG_FRIEND_LISTError::Io(i) => Self::Io(i),
@@ -7781,7 +7781,7 @@ impl From<SMSG_FRIEND_LISTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_FRIEND_STATUSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_FRIEND_STATUSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_FRIEND_STATUSError) -> Self {
         match e {
             SMSG_FRIEND_STATUSError::Io(i) => Self::Io(i),
@@ -7790,7 +7790,7 @@ impl From<SMSG_FRIEND_STATUSError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GROUP_INVITEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GROUP_INVITEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GROUP_INVITEError) -> Self {
         match e {
             SMSG_GROUP_INVITEError::Io(i) => Self::Io(i),
@@ -7799,7 +7799,7 @@ impl From<SMSG_GROUP_INVITEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GROUP_DECLINEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GROUP_DECLINEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GROUP_DECLINEError) -> Self {
         match e {
             SMSG_GROUP_DECLINEError::Io(i) => Self::Io(i),
@@ -7808,7 +7808,7 @@ impl From<SMSG_GROUP_DECLINEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GROUP_SET_LEADERError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GROUP_SET_LEADERError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GROUP_SET_LEADERError) -> Self {
         match e {
             SMSG_GROUP_SET_LEADERError::Io(i) => Self::Io(i),
@@ -7817,7 +7817,7 @@ impl From<SMSG_GROUP_SET_LEADERError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GROUP_LISTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GROUP_LISTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GROUP_LISTError) -> Self {
         match e {
             SMSG_GROUP_LISTError::Io(i) => Self::Io(i),
@@ -7826,7 +7826,7 @@ impl From<SMSG_GROUP_LISTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PARTY_MEMBER_STATSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PARTY_MEMBER_STATSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PARTY_MEMBER_STATSError) -> Self {
         match e {
             SMSG_PARTY_MEMBER_STATSError::Io(i) => Self::Io(i),
@@ -7835,7 +7835,7 @@ impl From<SMSG_PARTY_MEMBER_STATSError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PARTY_COMMAND_RESULTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PARTY_COMMAND_RESULTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PARTY_COMMAND_RESULTError) -> Self {
         match e {
             SMSG_PARTY_COMMAND_RESULTError::Io(i) => Self::Io(i),
@@ -7844,7 +7844,7 @@ impl From<SMSG_PARTY_COMMAND_RESULTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GUILD_INVITEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GUILD_INVITEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GUILD_INVITEError) -> Self {
         match e {
             SMSG_GUILD_INVITEError::Io(i) => Self::Io(i),
@@ -7853,7 +7853,7 @@ impl From<SMSG_GUILD_INVITEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GUILD_INFOError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GUILD_INFOError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GUILD_INFOError) -> Self {
         match e {
             SMSG_GUILD_INFOError::Io(i) => Self::Io(i),
@@ -7862,7 +7862,7 @@ impl From<SMSG_GUILD_INFOError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GUILD_EVENTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GUILD_EVENTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GUILD_EVENTError) -> Self {
         match e {
             SMSG_GUILD_EVENTError::Io(i) => Self::Io(i),
@@ -7871,7 +7871,7 @@ impl From<SMSG_GUILD_EVENTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GUILD_COMMAND_RESULTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GUILD_COMMAND_RESULTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GUILD_COMMAND_RESULTError) -> Self {
         match e {
             SMSG_GUILD_COMMAND_RESULTError::Io(i) => Self::Io(i),
@@ -7880,7 +7880,7 @@ impl From<SMSG_GUILD_COMMAND_RESULTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_MESSAGECHATError> for WorldServerOpcodeMessageError {
+impl From<SMSG_MESSAGECHATError> for ServerOpcodeMessageError {
     fn from(e: SMSG_MESSAGECHATError) -> Self {
         match e {
             SMSG_MESSAGECHATError::Io(i) => Self::Io(i),
@@ -7889,7 +7889,7 @@ impl From<SMSG_MESSAGECHATError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_CHANNEL_NOTIFYError> for WorldServerOpcodeMessageError {
+impl From<SMSG_CHANNEL_NOTIFYError> for ServerOpcodeMessageError {
     fn from(e: SMSG_CHANNEL_NOTIFYError) -> Self {
         match e {
             SMSG_CHANNEL_NOTIFYError::Io(i) => Self::Io(i),
@@ -7898,7 +7898,7 @@ impl From<SMSG_CHANNEL_NOTIFYError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_CHANNEL_LISTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_CHANNEL_LISTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_CHANNEL_LISTError) -> Self {
         match e {
             SMSG_CHANNEL_LISTError::Io(i) => Self::Io(i),
@@ -7907,7 +7907,7 @@ impl From<SMSG_CHANNEL_LISTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_MONSTER_MOVEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_MONSTER_MOVEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_MONSTER_MOVEError) -> Self {
         match e {
             SMSG_MONSTER_MOVEError::Io(i) => Self::Io(i),
@@ -7916,7 +7916,7 @@ impl From<SMSG_MONSTER_MOVEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_TRIGGER_CINEMATICError> for WorldServerOpcodeMessageError {
+impl From<SMSG_TRIGGER_CINEMATICError> for ServerOpcodeMessageError {
     fn from(e: SMSG_TRIGGER_CINEMATICError) -> Self {
         match e {
             SMSG_TRIGGER_CINEMATICError::Io(i) => Self::Io(i),
@@ -7925,7 +7925,7 @@ impl From<SMSG_TRIGGER_CINEMATICError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_EMOTEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_EMOTEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_EMOTEError) -> Self {
         match e {
             SMSG_EMOTEError::Io(i) => Self::Io(i),
@@ -7934,7 +7934,7 @@ impl From<SMSG_EMOTEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_TEXT_EMOTEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_TEXT_EMOTEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_TEXT_EMOTEError) -> Self {
         match e {
             SMSG_TEXT_EMOTEError::Io(i) => Self::Io(i),
@@ -7943,7 +7943,7 @@ impl From<SMSG_TEXT_EMOTEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_TRADE_STATUSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_TRADE_STATUSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_TRADE_STATUSError) -> Self {
         match e {
             SMSG_TRADE_STATUSError::Io(i) => Self::Io(i),
@@ -7952,7 +7952,7 @@ impl From<SMSG_TRADE_STATUSError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_SET_PROFICIENCYError> for WorldServerOpcodeMessageError {
+impl From<SMSG_SET_PROFICIENCYError> for ServerOpcodeMessageError {
     fn from(e: SMSG_SET_PROFICIENCYError) -> Self {
         match e {
             SMSG_SET_PROFICIENCYError::Io(i) => Self::Io(i),
@@ -7961,7 +7961,7 @@ impl From<SMSG_SET_PROFICIENCYError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_CAST_RESULTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_CAST_RESULTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_CAST_RESULTError) -> Self {
         match e {
             SMSG_CAST_RESULTError::Io(i) => Self::Io(i),
@@ -7970,7 +7970,7 @@ impl From<SMSG_CAST_RESULTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_SPELL_STARTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_SPELL_STARTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_SPELL_STARTError) -> Self {
         match e {
             SMSG_SPELL_STARTError::Io(i) => Self::Io(i),
@@ -7979,7 +7979,7 @@ impl From<SMSG_SPELL_STARTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_SPELL_GOError> for WorldServerOpcodeMessageError {
+impl From<SMSG_SPELL_GOError> for ServerOpcodeMessageError {
     fn from(e: SMSG_SPELL_GOError) -> Self {
         match e {
             SMSG_SPELL_GOError::Io(i) => Self::Io(i),
@@ -7988,7 +7988,7 @@ impl From<SMSG_SPELL_GOError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_SPELL_FAILUREError> for WorldServerOpcodeMessageError {
+impl From<SMSG_SPELL_FAILUREError> for ServerOpcodeMessageError {
     fn from(e: SMSG_SPELL_FAILUREError) -> Self {
         match e {
             SMSG_SPELL_FAILUREError::Io(i) => Self::Io(i),
@@ -7997,7 +7997,7 @@ impl From<SMSG_SPELL_FAILUREError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PET_CAST_FAILEDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PET_CAST_FAILEDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PET_CAST_FAILEDError) -> Self {
         match e {
             SMSG_PET_CAST_FAILEDError::Io(i) => Self::Io(i),
@@ -8006,7 +8006,7 @@ impl From<SMSG_PET_CAST_FAILEDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_AI_REACTIONError> for WorldServerOpcodeMessageError {
+impl From<SMSG_AI_REACTIONError> for ServerOpcodeMessageError {
     fn from(e: SMSG_AI_REACTIONError) -> Self {
         match e {
             SMSG_AI_REACTIONError::Io(i) => Self::Io(i),
@@ -8015,7 +8015,7 @@ impl From<SMSG_AI_REACTIONError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_SPELLENERGIZELOGError> for WorldServerOpcodeMessageError {
+impl From<SMSG_SPELLENERGIZELOGError> for ServerOpcodeMessageError {
     fn from(e: SMSG_SPELLENERGIZELOGError) -> Self {
         match e {
             SMSG_SPELLENERGIZELOGError::Io(i) => Self::Io(i),
@@ -8024,7 +8024,7 @@ impl From<SMSG_SPELLENERGIZELOGError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_BINDPOINTUPDATEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_BINDPOINTUPDATEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_BINDPOINTUPDATEError) -> Self {
         match e {
             SMSG_BINDPOINTUPDATEError::Io(i) => Self::Io(i),
@@ -8033,7 +8033,7 @@ impl From<SMSG_BINDPOINTUPDATEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PLAYERBOUNDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PLAYERBOUNDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PLAYERBOUNDError) -> Self {
         match e {
             SMSG_PLAYERBOUNDError::Io(i) => Self::Io(i),
@@ -8042,7 +8042,7 @@ impl From<SMSG_PLAYERBOUNDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_RESURRECT_REQUESTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_RESURRECT_REQUESTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_RESURRECT_REQUESTError) -> Self {
         match e {
             SMSG_RESURRECT_REQUESTError::Io(i) => Self::Io(i),
@@ -8051,7 +8051,7 @@ impl From<SMSG_RESURRECT_REQUESTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_LOOT_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_LOOT_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_LOOT_RESPONSEError) -> Self {
         match e {
             SMSG_LOOT_RESPONSEError::Io(i) => Self::Io(i),
@@ -8060,7 +8060,7 @@ impl From<SMSG_LOOT_RESPONSEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_ITEM_PUSH_RESULTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_ITEM_PUSH_RESULTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_ITEM_PUSH_RESULTError) -> Self {
         match e {
             SMSG_ITEM_PUSH_RESULTError::Io(i) => Self::Io(i),
@@ -8069,7 +8069,7 @@ impl From<SMSG_ITEM_PUSH_RESULTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_DUEL_WINNERError> for WorldServerOpcodeMessageError {
+impl From<SMSG_DUEL_WINNERError> for ServerOpcodeMessageError {
     fn from(e: SMSG_DUEL_WINNERError) -> Self {
         match e {
             SMSG_DUEL_WINNERError::Io(i) => Self::Io(i),
@@ -8078,7 +8078,7 @@ impl From<SMSG_DUEL_WINNERError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_MOUNTRESULTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_MOUNTRESULTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_MOUNTRESULTError) -> Self {
         match e {
             SMSG_MOUNTRESULTError::Io(i) => Self::Io(i),
@@ -8087,7 +8087,7 @@ impl From<SMSG_MOUNTRESULTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_DISMOUNTRESULTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_DISMOUNTRESULTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_DISMOUNTRESULTError) -> Self {
         match e {
             SMSG_DISMOUNTRESULTError::Io(i) => Self::Io(i),
@@ -8096,7 +8096,7 @@ impl From<SMSG_DISMOUNTRESULTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PET_TAME_FAILUREError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PET_TAME_FAILUREError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PET_TAME_FAILUREError) -> Self {
         match e {
             SMSG_PET_TAME_FAILUREError::Io(i) => Self::Io(i),
@@ -8105,7 +8105,7 @@ impl From<SMSG_PET_TAME_FAILUREError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PET_SPELLSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PET_SPELLSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PET_SPELLSError) -> Self {
         match e {
             SMSG_PET_SPELLSError::Io(i) => Self::Io(i),
@@ -8114,7 +8114,7 @@ impl From<SMSG_PET_SPELLSError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PET_MODEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PET_MODEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PET_MODEError) -> Self {
         match e {
             SMSG_PET_MODEError::Io(i) => Self::Io(i),
@@ -8123,7 +8123,7 @@ impl From<SMSG_PET_MODEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GOSSIP_MESSAGEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GOSSIP_MESSAGEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GOSSIP_MESSAGEError) -> Self {
         match e {
             SMSG_GOSSIP_MESSAGEError::Io(i) => Self::Io(i),
@@ -8132,7 +8132,7 @@ impl From<SMSG_GOSSIP_MESSAGEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_NPC_TEXT_UPDATEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_NPC_TEXT_UPDATEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_NPC_TEXT_UPDATEError) -> Self {
         match e {
             SMSG_NPC_TEXT_UPDATEError::Io(i) => Self::Io(i),
@@ -8141,7 +8141,7 @@ impl From<SMSG_NPC_TEXT_UPDATEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_QUESTGIVER_STATUSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_QUESTGIVER_STATUSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_QUESTGIVER_STATUSError) -> Self {
         match e {
             SMSG_QUESTGIVER_STATUSError::Io(i) => Self::Io(i),
@@ -8150,7 +8150,7 @@ impl From<SMSG_QUESTGIVER_STATUSError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_QUESTGIVER_QUEST_LISTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_QUESTGIVER_QUEST_LISTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_QUESTGIVER_QUEST_LISTError) -> Self {
         match e {
             SMSG_QUESTGIVER_QUEST_LISTError::Io(i) => Self::Io(i),
@@ -8159,7 +8159,7 @@ impl From<SMSG_QUESTGIVER_QUEST_LISTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_QUESTGIVER_QUEST_DETAILSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_QUESTGIVER_QUEST_DETAILSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_QUESTGIVER_QUEST_DETAILSError) -> Self {
         match e {
             SMSG_QUESTGIVER_QUEST_DETAILSError::Io(i) => Self::Io(i),
@@ -8168,7 +8168,7 @@ impl From<SMSG_QUESTGIVER_QUEST_DETAILSError> for WorldServerOpcodeMessageError 
     }
 }
 
-impl From<SMSG_QUESTGIVER_REQUEST_ITEMSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_QUESTGIVER_REQUEST_ITEMSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_QUESTGIVER_REQUEST_ITEMSError) -> Self {
         match e {
             SMSG_QUESTGIVER_REQUEST_ITEMSError::Io(i) => Self::Io(i),
@@ -8177,7 +8177,7 @@ impl From<SMSG_QUESTGIVER_REQUEST_ITEMSError> for WorldServerOpcodeMessageError 
     }
 }
 
-impl From<SMSG_QUESTGIVER_OFFER_REWARDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_QUESTGIVER_OFFER_REWARDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_QUESTGIVER_OFFER_REWARDError) -> Self {
         match e {
             SMSG_QUESTGIVER_OFFER_REWARDError::Io(i) => Self::Io(i),
@@ -8186,7 +8186,7 @@ impl From<SMSG_QUESTGIVER_OFFER_REWARDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_QUESTGIVER_QUEST_INVALIDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_QUESTGIVER_QUEST_INVALIDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_QUESTGIVER_QUEST_INVALIDError) -> Self {
         match e {
             SMSG_QUESTGIVER_QUEST_INVALIDError::Io(i) => Self::Io(i),
@@ -8195,7 +8195,7 @@ impl From<SMSG_QUESTGIVER_QUEST_INVALIDError> for WorldServerOpcodeMessageError 
     }
 }
 
-impl From<SMSG_QUESTGIVER_QUEST_FAILEDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_QUESTGIVER_QUEST_FAILEDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_QUESTGIVER_QUEST_FAILEDError) -> Self {
         match e {
             SMSG_QUESTGIVER_QUEST_FAILEDError::Io(i) => Self::Io(i),
@@ -8204,7 +8204,7 @@ impl From<SMSG_QUESTGIVER_QUEST_FAILEDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_QUEST_CONFIRM_ACCEPTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_QUEST_CONFIRM_ACCEPTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_QUEST_CONFIRM_ACCEPTError) -> Self {
         match e {
             SMSG_QUEST_CONFIRM_ACCEPTError::Io(i) => Self::Io(i),
@@ -8213,7 +8213,7 @@ impl From<SMSG_QUEST_CONFIRM_ACCEPTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_SELL_ITEMError> for WorldServerOpcodeMessageError {
+impl From<SMSG_SELL_ITEMError> for ServerOpcodeMessageError {
     fn from(e: SMSG_SELL_ITEMError) -> Self {
         match e {
             SMSG_SELL_ITEMError::Io(i) => Self::Io(i),
@@ -8222,7 +8222,7 @@ impl From<SMSG_SELL_ITEMError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_BUY_FAILEDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_BUY_FAILEDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_BUY_FAILEDError) -> Self {
         match e {
             SMSG_BUY_FAILEDError::Io(i) => Self::Io(i),
@@ -8231,7 +8231,7 @@ impl From<SMSG_BUY_FAILEDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_ACTIVATETAXIREPLYError> for WorldServerOpcodeMessageError {
+impl From<SMSG_ACTIVATETAXIREPLYError> for ServerOpcodeMessageError {
     fn from(e: SMSG_ACTIVATETAXIREPLYError) -> Self {
         match e {
             SMSG_ACTIVATETAXIREPLYError::Io(i) => Self::Io(i),
@@ -8240,7 +8240,7 @@ impl From<SMSG_ACTIVATETAXIREPLYError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_TRAINER_LISTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_TRAINER_LISTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_TRAINER_LISTError) -> Self {
         match e {
             SMSG_TRAINER_LISTError::Io(i) => Self::Io(i),
@@ -8249,7 +8249,7 @@ impl From<SMSG_TRAINER_LISTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_TRAINER_BUY_FAILEDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_TRAINER_BUY_FAILEDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_TRAINER_BUY_FAILEDError) -> Self {
         match e {
             SMSG_TRAINER_BUY_FAILEDError::Io(i) => Self::Io(i),
@@ -8258,7 +8258,7 @@ impl From<SMSG_TRAINER_BUY_FAILEDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_BUY_BANK_SLOT_RESULTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_BUY_BANK_SLOT_RESULTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_BUY_BANK_SLOT_RESULTError) -> Self {
         match e {
             SMSG_BUY_BANK_SLOT_RESULTError::Io(i) => Self::Io(i),
@@ -8267,7 +8267,7 @@ impl From<SMSG_BUY_BANK_SLOT_RESULTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PETITION_SIGN_RESULTSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PETITION_SIGN_RESULTSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PETITION_SIGN_RESULTSError) -> Self {
         match e {
             SMSG_PETITION_SIGN_RESULTSError::Io(i) => Self::Io(i),
@@ -8276,7 +8276,7 @@ impl From<SMSG_PETITION_SIGN_RESULTSError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_TURN_IN_PETITION_RESULTSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_TURN_IN_PETITION_RESULTSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_TURN_IN_PETITION_RESULTSError) -> Self {
         match e {
             SMSG_TURN_IN_PETITION_RESULTSError::Io(i) => Self::Io(i),
@@ -8285,7 +8285,7 @@ impl From<SMSG_TURN_IN_PETITION_RESULTSError> for WorldServerOpcodeMessageError 
     }
 }
 
-impl From<SMSG_PETITION_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PETITION_QUERY_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PETITION_QUERY_RESPONSEError) -> Self {
         match e {
             SMSG_PETITION_QUERY_RESPONSEError::Io(i) => Self::Io(i),
@@ -8294,7 +8294,7 @@ impl From<SMSG_PETITION_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_NOTIFICATIONError> for WorldServerOpcodeMessageError {
+impl From<SMSG_NOTIFICATIONError> for ServerOpcodeMessageError {
     fn from(e: SMSG_NOTIFICATIONError) -> Self {
         match e {
             SMSG_NOTIFICATIONError::Io(i) => Self::Io(i),
@@ -8303,7 +8303,7 @@ impl From<SMSG_NOTIFICATIONError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_LOG_XPGAINError> for WorldServerOpcodeMessageError {
+impl From<SMSG_LOG_XPGAINError> for ServerOpcodeMessageError {
     fn from(e: SMSG_LOG_XPGAINError) -> Self {
         match e {
             SMSG_LOG_XPGAINError::Io(i) => Self::Io(i),
@@ -8312,7 +8312,7 @@ impl From<SMSG_LOG_XPGAINError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_START_MIRROR_TIMERError> for WorldServerOpcodeMessageError {
+impl From<SMSG_START_MIRROR_TIMERError> for ServerOpcodeMessageError {
     fn from(e: SMSG_START_MIRROR_TIMERError) -> Self {
         match e {
             SMSG_START_MIRROR_TIMERError::Io(i) => Self::Io(i),
@@ -8321,7 +8321,7 @@ impl From<SMSG_START_MIRROR_TIMERError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PAUSE_MIRROR_TIMERError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PAUSE_MIRROR_TIMERError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PAUSE_MIRROR_TIMERError) -> Self {
         match e {
             SMSG_PAUSE_MIRROR_TIMERError::Io(i) => Self::Io(i),
@@ -8330,7 +8330,7 @@ impl From<SMSG_PAUSE_MIRROR_TIMERError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_STOP_MIRROR_TIMERError> for WorldServerOpcodeMessageError {
+impl From<SMSG_STOP_MIRROR_TIMERError> for ServerOpcodeMessageError {
     fn from(e: SMSG_STOP_MIRROR_TIMERError) -> Self {
         match e {
             SMSG_STOP_MIRROR_TIMERError::Io(i) => Self::Io(i),
@@ -8339,7 +8339,7 @@ impl From<SMSG_STOP_MIRROR_TIMERError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_AUTH_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_AUTH_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_AUTH_RESPONSEError) -> Self {
         match e {
             SMSG_AUTH_RESPONSEError::Io(i) => Self::Io(i),
@@ -8348,7 +8348,7 @@ impl From<SMSG_AUTH_RESPONSEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<MSG_SAVE_GUILD_EMBLEM_ServerError> for WorldServerOpcodeMessageError {
+impl From<MSG_SAVE_GUILD_EMBLEM_ServerError> for ServerOpcodeMessageError {
     fn from(e: MSG_SAVE_GUILD_EMBLEM_ServerError) -> Self {
         match e {
             MSG_SAVE_GUILD_EMBLEM_ServerError::Io(i) => Self::Io(i),
@@ -8357,7 +8357,7 @@ impl From<MSG_SAVE_GUILD_EMBLEM_ServerError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_EXPLORATION_EXPERIENCEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_EXPLORATION_EXPERIENCEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_EXPLORATION_EXPERIENCEError) -> Self {
         match e {
             SMSG_EXPLORATION_EXPERIENCEError::Io(i) => Self::Io(i),
@@ -8366,7 +8366,7 @@ impl From<SMSG_EXPLORATION_EXPERIENCEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_ENVIRONMENTALDAMAGELOGError> for WorldServerOpcodeMessageError {
+impl From<SMSG_ENVIRONMENTALDAMAGELOGError> for ServerOpcodeMessageError {
     fn from(e: SMSG_ENVIRONMENTALDAMAGELOGError) -> Self {
         match e {
             SMSG_ENVIRONMENTALDAMAGELOGError::Io(i) => Self::Io(i),
@@ -8375,7 +8375,7 @@ impl From<SMSG_ENVIRONMENTALDAMAGELOGError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GMTICKET_CREATEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GMTICKET_CREATEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GMTICKET_CREATEError) -> Self {
         match e {
             SMSG_GMTICKET_CREATEError::Io(i) => Self::Io(i),
@@ -8384,7 +8384,7 @@ impl From<SMSG_GMTICKET_CREATEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GMTICKET_UPDATETEXTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GMTICKET_UPDATETEXTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GMTICKET_UPDATETEXTError) -> Self {
         match e {
             SMSG_GMTICKET_UPDATETEXTError::Io(i) => Self::Io(i),
@@ -8393,7 +8393,7 @@ impl From<SMSG_GMTICKET_UPDATETEXTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GMTICKET_GETTICKETError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GMTICKET_GETTICKETError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GMTICKET_GETTICKETError) -> Self {
         match e {
             SMSG_GMTICKET_GETTICKETError::Io(i) => Self::Io(i),
@@ -8402,7 +8402,7 @@ impl From<SMSG_GMTICKET_GETTICKETError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<MSG_CORPSE_QUERY_ServerError> for WorldServerOpcodeMessageError {
+impl From<MSG_CORPSE_QUERY_ServerError> for ServerOpcodeMessageError {
     fn from(e: MSG_CORPSE_QUERY_ServerError) -> Self {
         match e {
             MSG_CORPSE_QUERY_ServerError::Io(i) => Self::Io(i),
@@ -8411,7 +8411,7 @@ impl From<MSG_CORPSE_QUERY_ServerError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GMTICKET_DELETETICKETError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GMTICKET_DELETETICKETError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GMTICKET_DELETETICKETError) -> Self {
         match e {
             SMSG_GMTICKET_DELETETICKETError::Io(i) => Self::Io(i),
@@ -8420,7 +8420,7 @@ impl From<SMSG_GMTICKET_DELETETICKETError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GOSSIP_POIError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GOSSIP_POIError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GOSSIP_POIError) -> Self {
         match e {
             SMSG_GOSSIP_POIError::Io(i) => Self::Io(i),
@@ -8429,7 +8429,7 @@ impl From<SMSG_GOSSIP_POIError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_LOGIN_VERIFY_WORLDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_LOGIN_VERIFY_WORLDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_LOGIN_VERIFY_WORLDError) -> Self {
         match e {
             SMSG_LOGIN_VERIFY_WORLDError::Io(i) => Self::Io(i),
@@ -8438,7 +8438,7 @@ impl From<SMSG_LOGIN_VERIFY_WORLDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_MAIL_LIST_RESULTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_MAIL_LIST_RESULTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_MAIL_LIST_RESULTError) -> Self {
         match e {
             SMSG_MAIL_LIST_RESULTError::Io(i) => Self::Io(i),
@@ -8447,7 +8447,7 @@ impl From<SMSG_MAIL_LIST_RESULTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_BATTLEFIELD_LISTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_BATTLEFIELD_LISTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_BATTLEFIELD_LISTError) -> Self {
         match e {
             SMSG_BATTLEFIELD_LISTError::Io(i) => Self::Io(i),
@@ -8456,7 +8456,7 @@ impl From<SMSG_BATTLEFIELD_LISTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_ITEM_TEXT_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_ITEM_TEXT_QUERY_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_ITEM_TEXT_QUERY_RESPONSEError) -> Self {
         match e {
             SMSG_ITEM_TEXT_QUERY_RESPONSEError::Io(i) => Self::Io(i),
@@ -8465,7 +8465,7 @@ impl From<SMSG_ITEM_TEXT_QUERY_RESPONSEError> for WorldServerOpcodeMessageError 
     }
 }
 
-impl From<SMSG_SPELLLOGMISSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_SPELLLOGMISSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_SPELLLOGMISSError) -> Self {
         match e {
             SMSG_SPELLLOGMISSError::Io(i) => Self::Io(i),
@@ -8474,7 +8474,7 @@ impl From<SMSG_SPELLLOGMISSError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_SPELLLOGEXECUTEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_SPELLLOGEXECUTEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_SPELLLOGEXECUTEError) -> Self {
         match e {
             SMSG_SPELLLOGEXECUTEError::Io(i) => Self::Io(i),
@@ -8483,7 +8483,7 @@ impl From<SMSG_SPELLLOGEXECUTEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PERIODICAURALOGError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PERIODICAURALOGError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PERIODICAURALOGError) -> Self {
         match e {
             SMSG_PERIODICAURALOGError::Io(i) => Self::Io(i),
@@ -8492,7 +8492,7 @@ impl From<SMSG_PERIODICAURALOGError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_SPELLDAMAGESHIELDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_SPELLDAMAGESHIELDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_SPELLDAMAGESHIELDError) -> Self {
         match e {
             SMSG_SPELLDAMAGESHIELDError::Io(i) => Self::Io(i),
@@ -8501,7 +8501,7 @@ impl From<SMSG_SPELLDAMAGESHIELDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_SPELLNONMELEEDAMAGELOGError> for WorldServerOpcodeMessageError {
+impl From<SMSG_SPELLNONMELEEDAMAGELOGError> for ServerOpcodeMessageError {
     fn from(e: SMSG_SPELLNONMELEEDAMAGELOGError) -> Self {
         match e {
             SMSG_SPELLNONMELEEDAMAGELOGError::Io(i) => Self::Io(i),
@@ -8510,7 +8510,7 @@ impl From<SMSG_SPELLNONMELEEDAMAGELOGError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PROCRESISTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PROCRESISTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PROCRESISTError) -> Self {
         match e {
             SMSG_PROCRESISTError::Io(i) => Self::Io(i),
@@ -8519,7 +8519,7 @@ impl From<SMSG_PROCRESISTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<MSG_LIST_STABLED_PETS_ServerError> for WorldServerOpcodeMessageError {
+impl From<MSG_LIST_STABLED_PETS_ServerError> for ServerOpcodeMessageError {
     fn from(e: MSG_LIST_STABLED_PETS_ServerError) -> Self {
         match e {
             MSG_LIST_STABLED_PETS_ServerError::Io(i) => Self::Io(i),
@@ -8528,7 +8528,7 @@ impl From<MSG_LIST_STABLED_PETS_ServerError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_STABLE_RESULTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_STABLE_RESULTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_STABLE_RESULTError) -> Self {
         match e {
             SMSG_STABLE_RESULTError::Io(i) => Self::Io(i),
@@ -8537,7 +8537,7 @@ impl From<SMSG_STABLE_RESULTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_RAID_GROUP_ONLYError> for WorldServerOpcodeMessageError {
+impl From<SMSG_RAID_GROUP_ONLYError> for ServerOpcodeMessageError {
     fn from(e: SMSG_RAID_GROUP_ONLYError) -> Self {
         match e {
             SMSG_RAID_GROUP_ONLYError::Io(i) => Self::Io(i),
@@ -8546,7 +8546,7 @@ impl From<SMSG_RAID_GROUP_ONLYError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_PVP_CREDITError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PVP_CREDITError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PVP_CREDITError) -> Self {
         match e {
             SMSG_PVP_CREDITError::Io(i) => Self::Io(i),
@@ -8555,7 +8555,7 @@ impl From<SMSG_PVP_CREDITError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_SERVER_MESSAGEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_SERVER_MESSAGEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_SERVER_MESSAGEError) -> Self {
         match e {
             SMSG_SERVER_MESSAGEError::Io(i) => Self::Io(i),
@@ -8564,7 +8564,7 @@ impl From<SMSG_SERVER_MESSAGEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_MEETINGSTONE_SETQUEUEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_MEETINGSTONE_SETQUEUEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_MEETINGSTONE_SETQUEUEError) -> Self {
         match e {
             SMSG_MEETINGSTONE_SETQUEUEError::Io(i) => Self::Io(i),
@@ -8573,7 +8573,7 @@ impl From<SMSG_MEETINGSTONE_SETQUEUEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_STANDSTATE_UPDATEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_STANDSTATE_UPDATEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_STANDSTATE_UPDATEError) -> Self {
         match e {
             SMSG_STANDSTATE_UPDATEError::Io(i) => Self::Io(i),
@@ -8582,7 +8582,7 @@ impl From<SMSG_STANDSTATE_UPDATEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_LOOT_ROLL_WONError> for WorldServerOpcodeMessageError {
+impl From<SMSG_LOOT_ROLL_WONError> for ServerOpcodeMessageError {
     fn from(e: SMSG_LOOT_ROLL_WONError) -> Self {
         match e {
             SMSG_LOOT_ROLL_WONError::Io(i) => Self::Io(i),
@@ -8591,7 +8591,7 @@ impl From<SMSG_LOOT_ROLL_WONError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_LOOT_ROLLError> for WorldServerOpcodeMessageError {
+impl From<SMSG_LOOT_ROLLError> for ServerOpcodeMessageError {
     fn from(e: SMSG_LOOT_ROLLError) -> Self {
         match e {
             SMSG_LOOT_ROLLError::Io(i) => Self::Io(i),
@@ -8600,7 +8600,7 @@ impl From<SMSG_LOOT_ROLLError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_CHAT_PLAYER_NOT_FOUNDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_CHAT_PLAYER_NOT_FOUNDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_CHAT_PLAYER_NOT_FOUNDError) -> Self {
         match e {
             SMSG_CHAT_PLAYER_NOT_FOUNDError::Io(i) => Self::Io(i),
@@ -8609,7 +8609,7 @@ impl From<SMSG_CHAT_PLAYER_NOT_FOUNDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_MONSTER_MOVE_TRANSPORTError> for WorldServerOpcodeMessageError {
+impl From<SMSG_MONSTER_MOVE_TRANSPORTError> for ServerOpcodeMessageError {
     fn from(e: SMSG_MONSTER_MOVE_TRANSPORTError) -> Self {
         match e {
             SMSG_MONSTER_MOVE_TRANSPORTError::Io(i) => Self::Io(i),
@@ -8618,7 +8618,7 @@ impl From<SMSG_MONSTER_MOVE_TRANSPORTError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_AREA_TRIGGER_MESSAGEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_AREA_TRIGGER_MESSAGEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_AREA_TRIGGER_MESSAGEError) -> Self {
         match e {
             SMSG_AREA_TRIGGER_MESSAGEError::Io(i) => Self::Io(i),
@@ -8627,7 +8627,7 @@ impl From<SMSG_AREA_TRIGGER_MESSAGEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_MEETINGSTONE_JOINFAILEDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_MEETINGSTONE_JOINFAILEDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_MEETINGSTONE_JOINFAILEDError) -> Self {
         match e {
             SMSG_MEETINGSTONE_JOINFAILEDError::Io(i) => Self::Io(i),
@@ -8636,7 +8636,7 @@ impl From<SMSG_MEETINGSTONE_JOINFAILEDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_INIT_WORLD_STATESError> for WorldServerOpcodeMessageError {
+impl From<SMSG_INIT_WORLD_STATESError> for ServerOpcodeMessageError {
     fn from(e: SMSG_INIT_WORLD_STATESError) -> Self {
         match e {
             SMSG_INIT_WORLD_STATESError::Io(i) => Self::Io(i),
@@ -8645,7 +8645,7 @@ impl From<SMSG_INIT_WORLD_STATESError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_ITEM_NAME_QUERY_RESPONSEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_ITEM_NAME_QUERY_RESPONSEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_ITEM_NAME_QUERY_RESPONSEError) -> Self {
         match e {
             SMSG_ITEM_NAME_QUERY_RESPONSEError::Io(i) => Self::Io(i),
@@ -8654,7 +8654,7 @@ impl From<SMSG_ITEM_NAME_QUERY_RESPONSEError> for WorldServerOpcodeMessageError 
     }
 }
 
-impl From<SMSG_PET_ACTION_FEEDBACKError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PET_ACTION_FEEDBACKError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PET_ACTION_FEEDBACKError) -> Self {
         match e {
             SMSG_PET_ACTION_FEEDBACKError::Io(i) => Self::Io(i),
@@ -8663,7 +8663,7 @@ impl From<SMSG_PET_ACTION_FEEDBACKError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_CHAR_RENAMEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_CHAR_RENAMEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_CHAR_RENAMEError) -> Self {
         match e {
             SMSG_CHAR_RENAMEError::Io(i) => Self::Io(i),
@@ -8672,7 +8672,7 @@ impl From<SMSG_CHAR_RENAMEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_RAID_INSTANCE_INFOError> for WorldServerOpcodeMessageError {
+impl From<SMSG_RAID_INSTANCE_INFOError> for ServerOpcodeMessageError {
     fn from(e: SMSG_RAID_INSTANCE_INFOError) -> Self {
         match e {
             SMSG_RAID_INSTANCE_INFOError::Io(i) => Self::Io(i),
@@ -8681,7 +8681,7 @@ impl From<SMSG_RAID_INSTANCE_INFOError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_BATTLEFIELD_STATUSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_BATTLEFIELD_STATUSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_BATTLEFIELD_STATUSError) -> Self {
         match e {
             SMSG_BATTLEFIELD_STATUSError::Io(i) => Self::Io(i),
@@ -8690,7 +8690,7 @@ impl From<SMSG_BATTLEFIELD_STATUSError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<MSG_INSPECT_HONOR_STATS_ServerError> for WorldServerOpcodeMessageError {
+impl From<MSG_INSPECT_HONOR_STATS_ServerError> for ServerOpcodeMessageError {
     fn from(e: MSG_INSPECT_HONOR_STATS_ServerError) -> Self {
         match e {
             MSG_INSPECT_HONOR_STATS_ServerError::Io(i) => Self::Io(i),
@@ -8699,7 +8699,7 @@ impl From<MSG_INSPECT_HONOR_STATS_ServerError> for WorldServerOpcodeMessageError
     }
 }
 
-impl From<MSG_PVP_LOG_DATA_ServerError> for WorldServerOpcodeMessageError {
+impl From<MSG_PVP_LOG_DATA_ServerError> for ServerOpcodeMessageError {
     fn from(e: MSG_PVP_LOG_DATA_ServerError) -> Self {
         match e {
             MSG_PVP_LOG_DATA_ServerError::Io(i) => Self::Io(i),
@@ -8708,7 +8708,7 @@ impl From<MSG_PVP_LOG_DATA_ServerError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GROUP_JOINED_BATTLEGROUNDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GROUP_JOINED_BATTLEGROUNDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GROUP_JOINED_BATTLEGROUNDError) -> Self {
         match e {
             SMSG_GROUP_JOINED_BATTLEGROUNDError::Io(i) => Self::Io(i),
@@ -8717,7 +8717,7 @@ impl From<SMSG_GROUP_JOINED_BATTLEGROUNDError> for WorldServerOpcodeMessageError
     }
 }
 
-impl From<SMSG_PARTY_MEMBER_STATS_FULLError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PARTY_MEMBER_STATS_FULLError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PARTY_MEMBER_STATS_FULLError) -> Self {
         match e {
             SMSG_PARTY_MEMBER_STATS_FULLError::Io(i) => Self::Io(i),
@@ -8726,7 +8726,7 @@ impl From<SMSG_PARTY_MEMBER_STATS_FULLError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_WEATHERError> for WorldServerOpcodeMessageError {
+impl From<SMSG_WEATHERError> for ServerOpcodeMessageError {
     fn from(e: SMSG_WEATHERError) -> Self {
         match e {
             SMSG_WEATHERError::Io(i) => Self::Io(i),
@@ -8735,7 +8735,7 @@ impl From<SMSG_WEATHERError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_RAID_INSTANCE_MESSAGEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_RAID_INSTANCE_MESSAGEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_RAID_INSTANCE_MESSAGEError) -> Self {
         match e {
             SMSG_RAID_INSTANCE_MESSAGEError::Io(i) => Self::Io(i),
@@ -8744,7 +8744,7 @@ impl From<SMSG_RAID_INSTANCE_MESSAGEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_INSTANCE_RESETError> for WorldServerOpcodeMessageError {
+impl From<SMSG_INSTANCE_RESETError> for ServerOpcodeMessageError {
     fn from(e: SMSG_INSTANCE_RESETError) -> Self {
         match e {
             SMSG_INSTANCE_RESETError::Io(i) => Self::Io(i),
@@ -8753,7 +8753,7 @@ impl From<SMSG_INSTANCE_RESETError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_INSTANCE_RESET_FAILEDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_INSTANCE_RESET_FAILEDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_INSTANCE_RESET_FAILEDError) -> Self {
         match e {
             SMSG_INSTANCE_RESET_FAILEDError::Io(i) => Self::Io(i),
@@ -8762,7 +8762,7 @@ impl From<SMSG_INSTANCE_RESET_FAILEDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_UPDATE_LAST_INSTANCEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_UPDATE_LAST_INSTANCEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_UPDATE_LAST_INSTANCEError) -> Self {
         match e {
             SMSG_UPDATE_LAST_INSTANCEError::Io(i) => Self::Io(i),
@@ -8771,7 +8771,7 @@ impl From<SMSG_UPDATE_LAST_INSTANCEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<MSG_RAID_TARGET_UPDATE_ServerError> for WorldServerOpcodeMessageError {
+impl From<MSG_RAID_TARGET_UPDATE_ServerError> for ServerOpcodeMessageError {
     fn from(e: MSG_RAID_TARGET_UPDATE_ServerError) -> Self {
         match e {
             MSG_RAID_TARGET_UPDATE_ServerError::Io(i) => Self::Io(i),
@@ -8780,7 +8780,7 @@ impl From<MSG_RAID_TARGET_UPDATE_ServerError> for WorldServerOpcodeMessageError 
     }
 }
 
-impl From<SMSG_PET_ACTION_SOUNDError> for WorldServerOpcodeMessageError {
+impl From<SMSG_PET_ACTION_SOUNDError> for ServerOpcodeMessageError {
     fn from(e: SMSG_PET_ACTION_SOUNDError) -> Self {
         match e {
             SMSG_PET_ACTION_SOUNDError::Io(i) => Self::Io(i),
@@ -8789,7 +8789,7 @@ impl From<SMSG_PET_ACTION_SOUNDError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_GM_TICKET_STATUS_UPDATEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_GM_TICKET_STATUS_UPDATEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_GM_TICKET_STATUS_UPDATEError) -> Self {
         match e {
             SMSG_GM_TICKET_STATUS_UPDATEError::Io(i) => Self::Io(i),
@@ -8798,7 +8798,7 @@ impl From<SMSG_GM_TICKET_STATUS_UPDATEError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_EXPECTED_SPAM_RECORDSError> for WorldServerOpcodeMessageError {
+impl From<SMSG_EXPECTED_SPAM_RECORDSError> for ServerOpcodeMessageError {
     fn from(e: SMSG_EXPECTED_SPAM_RECORDSError) -> Self {
         match e {
             SMSG_EXPECTED_SPAM_RECORDSError::Io(i) => Self::Io(i),
@@ -8807,7 +8807,7 @@ impl From<SMSG_EXPECTED_SPAM_RECORDSError> for WorldServerOpcodeMessageError {
     }
 }
 
-impl From<SMSG_DEFENSE_MESSAGEError> for WorldServerOpcodeMessageError {
+impl From<SMSG_DEFENSE_MESSAGEError> for ServerOpcodeMessageError {
     fn from(e: SMSG_DEFENSE_MESSAGEError) -> Self {
         match e {
             SMSG_DEFENSE_MESSAGEError::Io(i) => Self::Io(i),

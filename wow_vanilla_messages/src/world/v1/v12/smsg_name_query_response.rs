@@ -180,7 +180,7 @@ mod test {
     use crate::world::v1::v12::Race;
     use super::*;
     use super::super::*;
-    use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
+    use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
     #[test]
@@ -199,9 +199,9 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = WorldServerOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
         let t = match t {
-            WorldServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
+            ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
         };
 
@@ -236,9 +236,9 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = WorldServerOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
         let t = match t {
-            WorldServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
+            ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
         };
 

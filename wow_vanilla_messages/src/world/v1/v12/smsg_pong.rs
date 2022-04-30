@@ -66,7 +66,7 @@ mod test {
     use crate::ConstantSized;
     use super::*;
     use super::super::*;
-    use crate::world::v1::v12::opcodes::WorldServerOpcodeMessage;
+    use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
     #[test]
@@ -78,9 +78,9 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = WorldServerOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
         let t = match t {
-            WorldServerOpcodeMessage::SMSG_PONG(t) => t,
+            ServerOpcodeMessage::SMSG_PONG(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_PONG, got {opcode:#?}", opcode = opcode),
         };
 

@@ -29,8 +29,8 @@ pub const LOGIN_CLIENT_MESSAGE_TRAIT_NAME: &str = "ClientMessage";
 pub const LOGIN_SERVER_MESSAGE_TRAIT_NAME: &str = "ServerMessage";
 pub const LOGIN_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
 pub const LOGIN_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
-pub const WORLD_CLIENT_MESSAGE_ENUM_NAME: &str = "WorldClientOpcodeMessage";
-pub const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "WorldServerOpcodeMessage";
+pub const WORLD_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
+pub const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 
 pub const WORLD_BODY_TRAIT_NAME: &str = "MessageBody";
 pub const WORLD_CLIENT_HEADER_TRAIT_NAME: &str = "ClientMessageWrite";

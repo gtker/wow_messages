@@ -58,7 +58,7 @@ mod test {
     use crate::ConstantSized;
     use super::*;
     use super::super::*;
-    use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
+    use crate::world::v1::v12::opcodes::ClientOpcodeMessage;
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
     #[test]
@@ -69,9 +69,9 @@ mod test {
         };
 
         let header_size = 2 + 4;
-        let t = WorldClientOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
         let t = match t {
-            WorldClientOpcodeMessage::CMSG_PLAYER_LOGOUT(t) => t,
+            ClientOpcodeMessage::CMSG_PLAYER_LOGOUT(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_PLAYER_LOGOUT, got {opcode:#?}", opcode = opcode),
         };
 

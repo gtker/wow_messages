@@ -137,7 +137,7 @@ mod test {
     use crate::world::v1::v12::Map;
     use super::*;
     use super::super::*;
-    use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
+    use crate::world::v1::v12::opcodes::ClientOpcodeMessage;
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
     #[test]
@@ -157,9 +157,9 @@ mod test {
         };
 
         let header_size = 2 + 4;
-        let t = WorldClientOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
         let t = match t {
-            WorldClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
+            ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
         };
 

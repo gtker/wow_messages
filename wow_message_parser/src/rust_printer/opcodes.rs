@@ -9,8 +9,8 @@ use crate::rust_printer::{
 
 const CLOGIN_NAME: &str = "Client";
 const SLOGIN_NAME: &str = "Server";
-const CMSG_NAME: &str = "WorldClient";
-const SMSG_NAME: &str = "WorldServer";
+const CMSG_NAME: &str = "Client";
+const SMSG_NAME: &str = "Server";
 
 pub fn print_world_opcodes(
     v: &[&Container],
