@@ -72,9 +72,9 @@ fn print_from_new_flag_to_old(s: &mut Writer, ce: &ComplexEnum) {
 
 fn print_write_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
     s.async_funcn_pub(
-        "pub fn write<W: std::io::Write>(&self, w: &mut W)",
-        "pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
-        "pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
+        "write<W: std::io::Write>(&self, w: &mut W)",
+        "tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
+        "astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
         "std::result::Result<(), std::io::Error>",
         |s, it| {
             s.wln(format!(
@@ -819,9 +819,9 @@ fn print_default_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
 
 fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
     s.async_funcn_pub(
-        "pub fn write<W: std::io::Write>(&self, w: &mut W)",
-        "pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
-        "pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
+        "write<W: std::io::Write>(&self, w: &mut W)",
+        "tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
+        "astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
         "std::result::Result<(), std::io::Error>",
         |s, it| {
             s.wln(format!(
@@ -842,16 +842,20 @@ fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
     for t in types {
         s.async_funcn_pub(
             format!(
-                "pub fn write_{ty}_{endian}<W: std::io::Write>(&self, w: &mut W)",
+                "write_{ty}_{endian}<W: std::io::Write>(&self, w: &mut W)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
-            ),format!(
-                "pub async fn tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
+            ),
+            format!(
+                "tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
                 ty = t.rust_str(),
-                endian = t.rust_endian_str()),format!(
-                "pub async fn astd_write_{ty}_{endian}<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
+                endian = t.rust_endian_str()
+            ),
+            format!(
+                "astd_write_{ty}_{endian}<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
                 ty = t.rust_str(),
-                endian = t.rust_endian_str()),
+                endian = t.rust_endian_str()
+            ),
             "std::result::Result<(), std::io::Error>",
             |s, it| {
                 s.wln(format!(
@@ -862,7 +866,8 @@ fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
                     "a.{prefix}write_{ty}_{endian}(w){postfix}",
                     ty = t.rust_str(),
                     endian = t.rust_endian_str(),
-                    prefix = it.prefix(), postfix = it.postfix(),
+                    prefix = it.prefix(),
+                    postfix = it.postfix(),
                 ));
             },
         );

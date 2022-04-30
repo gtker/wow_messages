@@ -147,17 +147,17 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
 
         s.async_funcn_pub(
             format!(
-                "pub fn read_{ty}_{endian}<R: std::io::Read>(r: &mut R)",
+                "read_{ty}_{endian}<R: std::io::Read>(r: &mut R)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str(),
             ),
             format!(
-                "pub async fn tokio_read_{ty}_{endian}<R: AsyncReadExt + Unpin + Send>(r: &mut R)",
+                "tokio_read_{ty}_{endian}<R: AsyncReadExt + Unpin + Send>(r: &mut R)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
             ),
             format!(
-                "pub async fn astd_read_{ty}_{endian}<R: ReadExt + Unpin + Send>(r: &mut R)",
+                "astd_read_{ty}_{endian}<R: ReadExt + Unpin + Send>(r: &mut R)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
             ),
@@ -185,17 +185,17 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
         let return_type = "std::result::Result<(), std::io::Error>";
         s.async_funcn_pub(
             format!(
-                "pub fn write_{ty}_{endian}<W: std::io::Write>(&self, w: &mut W)",
+                "write_{ty}_{endian}<W: std::io::Write>(&self, w: &mut W)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
             ),
             format!(
-                "pub async fn tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
+                "tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
             ),
             format!(
-                "pub async fn astd_write_{ty}_{endian}<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
+                "astd_write_{ty}_{endian}<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
             ),

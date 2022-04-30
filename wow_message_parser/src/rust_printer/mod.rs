@@ -321,7 +321,7 @@ impl Writer {
         f: F,
     ) {
         self.open_curly(format!(
-            "{} -> {}",
+            "pub fn {} -> {}",
             name_and_args_sync.as_ref(),
             return_type.as_ref()
         ));
@@ -332,7 +332,7 @@ impl Writer {
 
         self.wln(CFG_ASYNC_TOKIO);
         self.open_curly(format!(
-            "{} -> {}",
+            "pub async fn {} -> {}",
             name_and_args_tokio.as_ref(),
             return_type.as_ref()
         ));
@@ -343,7 +343,7 @@ impl Writer {
 
         self.wln(CFG_ASYNC_ASYNC_STD);
         self.open_curly(format!(
-            "{} -> {}",
+            "pub async fn {} -> {}",
             name_and_args_astd.as_ref(),
             return_type.as_ref()
         ));
