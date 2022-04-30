@@ -121,7 +121,7 @@ pub trait ReadableAndWritable: Sized {
 
 #[async_trait]
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-pub trait AsyncReadWrite: Sized + Unpin {
+pub trait AsyncReadWrite: Sized {
     type Error;
 
     #[cfg(feature = "async_std")]

@@ -86,7 +86,6 @@
     clippy::doc_markdown,
     clippy::unseparated_literal_suffix
 )]
-
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
@@ -136,7 +135,7 @@ pub trait MaximumPossibleSized {
 
 #[async_trait]
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-pub trait AsyncReadWrite: Sized + Unpin {
+pub trait AsyncReadWrite: Sized {
     type Error;
 
     #[cfg(feature = "async_std")]
