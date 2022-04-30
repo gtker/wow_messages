@@ -661,4 +661,34 @@ impl ImplType {
             ImplType::AsyncStd => "astd_",
         }
     }
+
+    pub fn func(&self) -> &str {
+        match self {
+            ImplType::Std => "",
+            ImplType::Tokio | ImplType::AsyncStd => "async ",
+        }
+    }
+
+    pub fn write(&self) -> &str {
+        match self {
+            ImplType::Std => "std::io::Write",
+            ImplType::Tokio => "AsyncWriteExt + Unpin + Send",
+            ImplType::AsyncStd => "WriteExt + Unpin + Send",
+        }
+    }
+
+    pub fn read(&self) -> &str {
+        match self {
+            ImplType::Std => "std::io::Read",
+            ImplType::Tokio => "AsyncReadExt + Unpin + Send",
+            ImplType::AsyncStd => "ReadExt + Unpin + Send",
+        }
+    }
+
+    pub fn decrypter(&self) -> &str {
+        match self {
+            ImplType::Std => "",
+            ImplType::AsyncStd | ImplType::Tokio => " + Send",
+        }
+    }
 }

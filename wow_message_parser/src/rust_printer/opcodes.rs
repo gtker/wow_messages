@@ -2,7 +2,7 @@ use crate::container::{Container, ContainerType};
 use crate::file_utils::{get_import_path, get_login_logon_version_path, get_world_version_path};
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
-    Writer, ASYNC_STD_IMPORT, ASYNC_TRAIT_IMPORT, CFG_ASYNC_ANY, CFG_ASYNC_ASYNC_STD,
+    ImplType, Writer, ASYNC_STD_IMPORT, ASYNC_TRAIT_IMPORT, CFG_ASYNC_ANY, CFG_ASYNC_ASYNC_STD,
     CFG_ASYNC_TOKIO, OPCODE_MESSAGE_TRAIT_NAME, TOKIO_IMPORT, WORLD_BODY_TRAIT_NAME,
     WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
@@ -136,6 +136,77 @@ pub fn definition(s: &mut Writer, v: &[&Container], ty: &str) {
     });
 }
 
+fn world_common_impls_read_write(
+    s: &mut Writer,
+    v: &[&Container],
+    cd: &str,
+    size: &str,
+    opcode_size: i32,
+    it: ImplType,
+) {
+    s.bodyn(format!("{func}fn {prefix}write_unencrypted<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", func = it.func(), prefix = it.prefix(), write = it.write() ), |s| {
+        s.body("match self", |s| {
+            for &e in v {
+                s.wln(format!("Self::{name}(i) => i.{prefix}write_body(w){postfix}?,",
+                    prefix = it.prefix(), postfix = it.postfix(),
+                      name = get_enumerator_name(e.name())));
+            }
+        });
+        s.wln("Ok(())");
+    });
+
+    s.bodyn(format!("{func}fn {prefix}read_unencrypted<R: {read}>(r: &mut R) -> std::result::Result<Self, Self::Error>", func = it.func(), prefix = it.prefix(), read = it.read()), |s| {
+        s.wln(format!("let size = ({path}::{prefix}read_u16_be(r){postfix}? - {opcode_size}) as u32;", path = "crate::util", opcode_size = opcode_size, prefix = it.prefix(), postfix = it.postfix()));
+
+        s.wln(format!("let opcode = {path}::{prefix}read_{size}_le(r){postfix}?;",path = "crate::util", size = size, prefix = it.prefix(), postfix = it.postfix()));
+
+        s.body("match opcode", |s| {
+            for &e in v {
+                let opcode = match e.container_type() {
+                    ContainerType::CMsg(i) => i,
+                    ContainerType::SMsg(i) => i,
+                    ContainerType::Msg(i) => i,
+                    _ => panic!(),
+                };
+                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({name}::{prefix}read_body(r, size){postfix}?)),",
+                              opcode = opcode,
+                              name = e.name(),
+                              prefix = it.prefix(),
+                              postfix = it.postfix(),
+                              enum_name = get_enumerator_name(e.name())));
+            }
+            s.wln("_ => Err(Self::Error::InvalidOpcode(opcode)),");
+        });
+    });
+
+    s.bodyn(format!("{func}fn {prefix}read_encrypted<R: {read}, D: Decrypter{decrypter}>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error>", func = it.func(), prefix = it.prefix(), read = it.read(), decrypter = it.decrypter()), |s| {
+        s.wln(format!("let header = d.read_and_decrypt_{cd}_header(r)?;", cd = cd));
+        s.wln(format!("let header_size = (header.size - {opcode_size}) as u32;", opcode_size = opcode_size));
+        s.body("match header.opcode", |s| {
+            for &e in v {
+                let opcode = match e.container_type() {
+                    ContainerType::CMsg(i) => i,
+                    ContainerType::SMsg(i) => i,
+                    ContainerType::Msg(i) => i,
+                    _ => panic!(),
+                };
+
+                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({name}::{prefix}read_body(r, header_size){postfix}?)),", prefix = it.prefix(), postfix = it.postfix(), opcode = opcode, name = e.name(), enum_name = get_enumerator_name(e.name())));
+            }
+            s.wln("_ => Err(Self::Error::InvalidOpcode(header.opcode)),");
+        });
+    });
+
+    s.bodyn(format!("{func}fn {prefix}write_encrypted<W: {write}, E: Encrypter{decrypter}>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error>", decrypter = it.decrypter(), prefix = it.prefix(), func = it.func(), write = it.write()), |s| {
+        s.body("match self", |s| {
+            for &e in v {
+                s.wln(format!("Self::{name}(i) => i.{prefix}write_encrypted_{cd}(w, e){postfix}?,", prefix = it.prefix(), postfix = it.postfix(), name = get_enumerator_name(e.name()), cd = cd));
+            }
+        });
+        s.wln("Ok(())");
+    });
+}
+
 pub fn common_impls_world(
     s: &mut Writer,
     v: &[&Container],
@@ -147,69 +218,15 @@ pub fn common_impls_world(
         ContainerType::SMsg(_) => ("server", "u16", 2),
         _ => panic!(),
     };
-    s.impl_for(OPCODE_MESSAGE_TRAIT_NAME, format!("{t}OpcodeMessage", t = ty), |s| {
-        s.wln(format!("type Error = {t}OpcodeMessageError;", t = ty));
+    s.impl_for(
+        OPCODE_MESSAGE_TRAIT_NAME,
+        format!("{t}OpcodeMessage", t = ty),
+        |s| {
+            s.wln(format!("type Error = {t}OpcodeMessageError;", t = ty));
 
-        s.bodyn("fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", |s| {
-            s.body("match self", |s| {
-                for &e in v {
-                    s.wln(format!("Self::{name}(i) => i.write_body(w)?,",
-                                  name = get_enumerator_name(e.name())));
-                }
-            });
-            s.wln("Ok(())");
-        });
-
-        s.bodyn("fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error>", |s| {
-            s.wln(format!("let size = ({path}::read_u16_be(r)? - {opcode_size}) as u32;",path = "crate::util", opcode_size = opcode_size));
-
-            s.wln(format!("let opcode = {path}::read_{size}_le(r)?;",path = "crate::util", size = size));
-
-            s.body("match opcode", |s| {
-                for &e in v {
-                    let opcode = match e.container_type() {
-                        ContainerType::CMsg(i) => i,
-                        ContainerType::SMsg(i) => i,
-                        ContainerType::Msg(i) => i,
-                        _ => panic!(),
-                    };
-                    s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({name}::read_body(r, size)?)),",
-                                opcode = opcode,
-                                name = e.name(),
-                                enum_name = get_enumerator_name(e.name())));
-                }
-                s.wln("_ => Err(Self::Error::InvalidOpcode(opcode)),");
-            });
-        });
-
-        s.bodyn("fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error>", |s| {
-            s.wln(format!("let header = d.read_and_decrypt_{cd}_header(r)?;", cd = cd));
-            s.wln(format!("let header_size = (header.size - {opcode_size}) as u32;", opcode_size = opcode_size));
-            s.body("match header.opcode", |s| {
-                for &e in v {
-                    let opcode = match e.container_type() {
-                        ContainerType::CMsg(i) => i,
-                        ContainerType::SMsg(i) => i,
-                        ContainerType::Msg(i) => i,
-                        _ => panic!(),
-                    };
-
-                    s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({name}::read_body(r, header_size)?)),", opcode = opcode, name = e.name(), enum_name = get_enumerator_name(e.name())));
-                }
-                s.wln("_ => Err(Self::Error::InvalidOpcode(header.opcode)),");
-            });
-        });
-
-        s.bodyn("fn write_encrypted<W: std::io::Write, E: Encrypter>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error>", |s| {
-            s.body("match self", |s| {
-                for &e in v {
-                    s.wln(format!("Self::{name}(i) => i.write_encrypted_{cd}(w, e)?,", name = get_enumerator_name(e.name()), cd = cd));
-                }
-            });
-            s.wln("Ok(())");
-        });
-
-    });
+            world_common_impls_read_write(s, v, cd, size, opcode_size, ImplType::Std);
+        },
+    );
 }
 
 pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
