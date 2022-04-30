@@ -1,9 +1,7 @@
 use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
 use crate::parser::types::{Endianness, IntegerType};
-use crate::rust_printer::{
-    ImplType, Writer, ASYNC_TRAIT, ASYNC_TRAIT_MACRO, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO,
-};
+use crate::rust_printer::{ImplType, Writer};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{DISPLAY_STR, LOGIN_MESSAGES_GITHUB_REPO};
 
@@ -65,31 +63,20 @@ pub fn print_wowm_definition(kind: &str, s: &mut Writer, e: &Definer) {
 }
 
 fn common_impls(s: &mut Writer, e: &Definer) {
-    let error_string = format!(
-        "type Error = {};\n",
-        match e.self_value() {
-            None => format!("{}Error", e.name()),
-            Some(_) => "std::io::Error".to_string(),
-        }
+    let error_string = match e.self_value() {
+        None => format!("{}Error", e.name()),
+        Some(_) => "std::io::Error".to_string(),
+    };
+    s.impl_read_and_writable_with_error(
+        e.name(),
+        error_string,
+        |s, it| {
+            print_read(s, e, it);
+        },
+        |s, it| {
+            print_write(s, e, it);
+        },
     );
-    s.impl_for("ReadableAndWritable", e.name(), |s| {
-        s.wln(&error_string);
-        print_read(s, e, ImplType::Std);
-
-        print_write(s, e, ImplType::Std);
-    });
-
-    s.wln(CFG_ASYNC_ANY);
-    s.wln(ASYNC_TRAIT_MACRO);
-    s.impl_for(ASYNC_TRAIT, e.name(), |s| {
-        s.wln(&error_string);
-
-        s.wln(CFG_ASYNC_TOKIO);
-        print_read(s, e, ImplType::Tokio);
-
-        s.wln(CFG_ASYNC_TOKIO);
-        print_write(s, e, ImplType::Tokio);
-    });
 
     s.bodyn(format!("impl {}", e.name()), |s| {
         read_write_as(s, e);
@@ -249,53 +236,34 @@ fn print_new(s: &mut Writer, e: &Definer) {
 }
 
 fn print_read(s: &mut Writer, e: &Definer, it: ImplType) {
-    let prefix = it.prefix();
-    let postfix = it.postfix();
+    s.wln(format!(
+        "let a = {util_path}::{prefix}read_{ty}_{endian}(r){postfix}?;",
+        util_path = "crate::util",
+        ty = e.ty().rust_str(),
+        endian = e.ty().rust_endian_str(),
+        prefix = it.prefix(),
+        postfix = it.postfix(),
+    ));
+    s.newline();
 
-    let title = match it {
-        ImplType::Std => "fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error>",
-        ImplType::Tokio => "async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error>",
-        ImplType::AsyncStd => "async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error>",
-    };
-
-    s.bodyn(title, |s| {
-        s.wln(format!(
-            "let a = {util_path}::{prefix}read_{ty}_{endian}(r){postfix}?;",
-            util_path = "crate::util",
-            ty = e.ty().rust_str(),
-            endian = e.ty().rust_endian_str(),
-            prefix = prefix,
-            postfix = postfix,
-        ));
-        s.newline();
-
-        s.wln(format!(
-            "Ok(a.{})",
-            match e.self_value() {
-                None => "try_into()?",
-                Some(_) => "into()",
-            }
-        ));
-    });
+    s.wln(format!(
+        "Ok(a.{})",
+        match e.self_value() {
+            None => "try_into()?",
+            Some(_) => "into()",
+        }
+    ));
 }
 
 fn print_write(s: &mut Writer, e: &Definer, it: ImplType) {
-    let title = match it {
-        ImplType::Std => "fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
-        ImplType::Tokio => "async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
-        ImplType::AsyncStd => "async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
-    };
+    s.wln(format!(
+        "w.write_all(&self.as_{}().to_{}_bytes()){}?;",
+        e.ty().rust_str(),
+        e.ty().rust_endian_str(),
+        it.postfix(),
+    ));
 
-    s.bodyn(title, |s| {
-        s.wln(format!(
-            "w.write_all(&self.as_{}().to_{}_bytes()){}?;",
-            e.ty().rust_str(),
-            e.ty().rust_endian_str(),
-            it.postfix(),
-        ));
-
-        s.wln("Ok(())");
-    });
+    s.wln("Ok(())");
 }
 
 fn print_default(s: &mut Writer, e: &Definer) {
