@@ -3,8 +3,6 @@ use crate::world::v1::v12::{Language, LanguageError};
 use crate::world::v1::v12::NpcTextUpdateEmote;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use crate::AsyncReadWrite;
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -19,6 +17,7 @@ pub struct NpcTextUpdate {
     pub emotes: [NpcTextUpdateEmote; 3],
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for NpcTextUpdate {
     type Error = NpcTextUpdateError;
 
@@ -71,13 +70,6 @@ impl ReadableAndWritable for NpcTextUpdate {
 
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for NpcTextUpdate {
-    type Error = NpcTextUpdateError;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {

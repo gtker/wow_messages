@@ -1,8 +1,6 @@
 use crate::ReadableAndWritable;
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use crate::AsyncReadWrite;
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -23,6 +21,7 @@ pub enum ServerOpcodeMessage {
     CMD_REALM_LIST(CMD_REALM_LIST_Server),
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for ServerOpcodeMessage {
     type Error = ServerOpcodeMessageError;
 
@@ -50,13 +49,6 @@ impl ReadableAndWritable for ServerOpcodeMessage {
 
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for ServerOpcodeMessage {
-    type Error = ServerOpcodeMessageError;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
@@ -222,6 +214,7 @@ impl ServerOpcode {
 
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for ServerOpcode {
     type Error = ServerOpcodeError;
 
@@ -242,13 +235,6 @@ impl ReadableAndWritable for ServerOpcode {
         crate::util::write_u8_le(w, self.as_u8())?;
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for ServerOpcode {
-    type Error = ServerOpcodeError;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
@@ -343,6 +329,7 @@ pub enum ClientOpcodeMessage {
     CMD_REALM_LIST(CMD_REALM_LIST_Client),
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for ClientOpcodeMessage {
     type Error = ClientOpcodeMessageError;
 
@@ -370,13 +357,6 @@ impl ReadableAndWritable for ClientOpcodeMessage {
 
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for ClientOpcodeMessage {
-    type Error = ClientOpcodeMessageError;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
@@ -509,6 +489,7 @@ impl ClientOpcode {
 
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for ClientOpcode {
     type Error = ClientOpcodeError;
 
@@ -529,13 +510,6 @@ impl ReadableAndWritable for ClientOpcode {
         crate::util::write_u8_le(w, self.as_u8())?;
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for ClientOpcode {
-    type Error = ClientOpcodeError;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {

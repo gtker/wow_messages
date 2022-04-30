@@ -3,8 +3,6 @@ use crate::logon::version_2::{LoginResult, LoginResultError};
 use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use crate::AsyncReadWrite;
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -20,6 +18,7 @@ pub struct CMD_AUTH_RECONNECT_PROOF_Server {
 impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
     const OPCODE: u8 = 0x03;
 }
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
     type Error = CMD_AUTH_RECONNECT_PROOF_ServerError;
 
@@ -41,13 +40,6 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
 
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for CMD_AUTH_RECONNECT_PROOF_Server {
-    type Error = CMD_AUTH_RECONNECT_PROOF_ServerError;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {

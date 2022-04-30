@@ -3,8 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{SpellEffect, SpellEffectError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use crate::AsyncReadWrite;
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -21,6 +19,7 @@ impl SpellLog {
 
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for SpellLog {
     type Error = SpellLogError;
 
@@ -649,13 +648,6 @@ impl ReadableAndWritable for SpellLog {
 
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for SpellLog {
-    type Error = SpellLogError;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {

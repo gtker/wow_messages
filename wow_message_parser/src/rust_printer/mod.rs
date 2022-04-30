@@ -37,7 +37,6 @@ pub const WORLD_CLIENT_HEADER_TRAIT_NAME: &str = "ClientMessageWrite";
 pub const WORLD_SERVER_HEADER_TRAIT_NAME: &str = "ServerMessageWrite";
 pub const OPCODE_MESSAGE_TRAIT_NAME: &str = "OpcodeMessage";
 
-pub const ASYNC_TRAIT: &str = "AsyncReadWrite";
 pub const ASYNC_TRAIT_MACRO: &str =
     "#[cfg_attr(any(feature = \"async_tokio\", feature = \"async_std\"), async_trait)]";
 pub const ASYNC_TRAIT_IMPORT: &str = "use async_trait::async_trait;";
@@ -240,6 +239,7 @@ impl Writer {
         read_function: F,
         write_function: F2,
     ) {
+        self.wln(ASYNC_TRAIT_MACRO);
         self.open_curly(format!(
             "impl ReadableAndWritable for {}",
             type_name.as_ref()
@@ -259,17 +259,6 @@ impl Writer {
         self.open_curly("fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
         write_function(self, ImplType::Std);
         self.closing_curly_newline();
-        self.closing_curly_newline();
-
-        self.wln(CFG_ASYNC_ANY);
-        self.wln(ASYNC_TRAIT_MACRO);
-        self.open_curly(format!("impl {} for {}", ASYNC_TRAIT, type_name.as_ref()));
-
-        self.wln(format!(
-            "type Error = {err_ty};",
-            err_ty = error_name.as_ref()
-        ));
-        self.newline();
 
         self.wln(CFG_ASYNC_TOKIO);
         self.open_curly(
@@ -540,9 +529,6 @@ impl Writer {
     }
 
     pub fn write_async_includes(&mut self) {
-        self.wln(CFG_ASYNC_ANY);
-        self.wln(format!("use crate::{};", ASYNC_TRAIT));
-
         self.wln(CFG_ASYNC_ANY);
         self.wln(ASYNC_TRAIT_IMPORT);
 

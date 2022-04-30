@@ -2,8 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use crate::AsyncReadWrite;
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -18,6 +16,7 @@ pub struct RaidInfo {
     pub instance_id: u32,
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for RaidInfo {
     type Error = RaidInfoError;
 
@@ -50,13 +49,6 @@ impl ReadableAndWritable for RaidInfo {
 
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for RaidInfo {
-    type Error = RaidInfoError;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {

@@ -3,8 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{PvpRank, PvpRankError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use crate::AsyncReadWrite;
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -22,6 +20,7 @@ pub struct BattlegroundPlayer {
     pub fields: Vec<u32>,
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for BattlegroundPlayer {
     type Error = BattlegroundPlayerError;
 
@@ -93,13 +92,6 @@ impl ReadableAndWritable for BattlegroundPlayer {
 
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for BattlegroundPlayer {
-    type Error = BattlegroundPlayerError;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {

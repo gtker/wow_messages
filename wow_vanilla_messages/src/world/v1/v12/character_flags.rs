@@ -1,8 +1,6 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use crate::AsyncReadWrite;
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -20,6 +18,7 @@ impl CharacterFlags {
 
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CharacterFlags {
     type Error = std::io::Error;
 
@@ -32,13 +31,6 @@ impl ReadableAndWritable for CharacterFlags {
         w.write_all(&self.inner.to_le_bytes())?;
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for CharacterFlags {
-    type Error = std::io::Error;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {

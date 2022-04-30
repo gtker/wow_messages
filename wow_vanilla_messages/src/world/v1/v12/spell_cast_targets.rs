@@ -3,8 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{SpellCastTargetFlags};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use crate::AsyncReadWrite;
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -16,6 +14,7 @@ pub struct SpellCastTargets {
     pub target_flags: SpellCastTargetsSpellCastTargetFlags,
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for SpellCastTargets {
     type Error = SpellCastTargetsError;
 
@@ -225,13 +224,6 @@ impl ReadableAndWritable for SpellCastTargets {
 
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for SpellCastTargets {
-    type Error = SpellCastTargetsError;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {

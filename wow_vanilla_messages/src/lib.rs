@@ -113,16 +113,11 @@ pub trait OpcodeMessage: Sized {
     ) -> std::result::Result<(), std::io::Error>;
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 pub trait ReadableAndWritable: Sized {
     type Error;
     fn read<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
     fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
-}
-
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-pub trait AsyncReadWrite: Sized {
-    type Error;
 
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>;

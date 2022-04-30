@@ -2,8 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::ClientMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use crate::AsyncReadWrite;
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -20,6 +18,7 @@ pub struct CMD_SURVEY_RESULT {
 impl ClientMessage for CMD_SURVEY_RESULT {
     const OPCODE: u8 = 0x04;
 }
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CMD_SURVEY_RESULT {
     type Error = std::io::Error;
 
@@ -66,13 +65,6 @@ impl ReadableAndWritable for CMD_SURVEY_RESULT {
 
         Ok(())
     }
-
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-impl AsyncReadWrite for CMD_SURVEY_RESULT {
-    type Error = std::io::Error;
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {

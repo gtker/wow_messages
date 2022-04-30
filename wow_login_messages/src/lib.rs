@@ -115,28 +115,11 @@ pub trait ClientMessage: ReadableAndWritable {
     const OPCODE: u8;
 }
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 pub trait ReadableAndWritable: Sized {
     type Error;
     fn read<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
     fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
-}
-
-pub trait ConstantSized: MaximumPossibleSized {
-    fn size() -> usize;
-}
-
-pub trait VariableSized: MaximumPossibleSized {
-    fn size(&self) -> usize;
-}
-
-pub trait MaximumPossibleSized {
-    fn maximum_possible_size() -> usize;
-}
-
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-pub trait AsyncReadWrite: Sized {
-    type Error;
 
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>;
@@ -152,4 +135,16 @@ pub trait AsyncReadWrite: Sized {
         &self,
         w: &mut W,
     ) -> Result<(), std::io::Error>;
+}
+
+pub trait ConstantSized: MaximumPossibleSized {
+    fn size() -> usize;
+}
+
+pub trait VariableSized: MaximumPossibleSized {
+    fn size(&self) -> usize;
+}
+
+pub trait MaximumPossibleSized {
+    fn maximum_possible_size() -> usize;
 }

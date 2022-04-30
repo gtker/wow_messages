@@ -4,8 +4,6 @@ use crate::{ServerMessageWrite, ClientMessageWrite};
 use wow_srp::header_crypto::{Decrypter, Encrypter};
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use crate::AsyncReadWrite;
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
