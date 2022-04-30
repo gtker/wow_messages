@@ -28,24 +28,6 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 const DEFAULT_PORT: u16 = 8085;
 
-pub trait ReadableAndWritable: Sized {
-    type Error;
-    fn read<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
-    fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
-}
-
-pub trait ConstantSized: MaximumPossibleSized {
-    fn size() -> usize;
-}
-
-pub trait VariableSized: MaximumPossibleSized {
-    fn size(&self) -> usize;
-}
-
-pub trait MaximumPossibleSized {
-    fn maximum_possible_size() -> usize;
-}
-
 pub trait ServerMessageWrite: MessageBody {
     const OPCODE: u16;
 
@@ -135,6 +117,12 @@ pub trait OpcodeMessage: Sized {
     ) -> std::result::Result<(), std::io::Error>;
 }
 
+pub trait ReadableAndWritable: Sized {
+    type Error;
+    fn read<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
+    fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
+}
+
 #[async_trait]
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
 pub trait AsyncReadWrite: Sized + Unpin {
@@ -154,4 +142,16 @@ pub trait AsyncReadWrite: Sized + Unpin {
         &self,
         w: &mut W,
     ) -> Result<(), std::io::Error>;
+}
+
+pub trait ConstantSized: MaximumPossibleSized {
+    fn size() -> usize;
+}
+
+pub trait VariableSized: MaximumPossibleSized {
+    fn size(&self) -> usize;
+}
+
+pub trait MaximumPossibleSized {
+    fn maximum_possible_size() -> usize;
 }
