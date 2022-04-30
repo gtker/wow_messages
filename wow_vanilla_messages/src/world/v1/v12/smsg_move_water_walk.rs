@@ -21,23 +21,12 @@ pub struct SMSG_MOVE_WATER_WALK {
 impl ServerMessageWrite for SMSG_MOVE_WATER_WALK {
     const OPCODE: u16 = 0xde;
 
-    fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // size: u16_be, and opcode: u16
-        crate::util::write_u16_be(w, (self.size() + 2) as u16)?;
-        crate::util::write_u16_le(w, <Self as ServerMessageWrite>::OPCODE)?;
-
-        self.write_body(w)?;
-        Ok(())
+    fn size_without_size_field(&self) -> u16 {
+        self.size() as u16
     }
 
-    fn write_encrypted_server<W: std::io::Write, E: Encrypter>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error> {
-        // size: u16_be, and opcode: u16
-        e.write_encrypted_server_header(w, (self.size() + 2) as u16, <Self as ServerMessageWrite>::OPCODE)?;
-
-        self.write_body(w)?;
-        Ok(())
-    }
 }
+
 impl MessageBody for SMSG_MOVE_WATER_WALK {
     type Error = std::io::Error;
 

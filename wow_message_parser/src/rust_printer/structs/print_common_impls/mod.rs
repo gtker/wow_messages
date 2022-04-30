@@ -115,94 +115,39 @@ fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
 }
 
 fn print_client_message_header(s: &mut Writer, e: &Container, v: u16) {
-    s.body(
+    s.bodyn(
         format!("impl {} for {}", WORLD_CLIENT_HEADER_TRAIT_NAME, e.name()),
         |s| {
             s.wln(format!("const OPCODE: u32 = {:#04x};", v));
             s.newline();
 
-            s.bodyn("fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", |s| {
-                s.wln("// size: u16_be, and opcode: u32");
+            s.bodyn("fn size_without_size_field(&self) -> u16", |s| {
                 s.wln(format!(
-                    "{import_path}::write_u16_be(w, ({size}size() + 4) as u16)?;",
-                    import_path = "crate::util",
-                    size = match e.is_constant_sized() {
-                        true => "Self::",
-                        false => "self.",
+                    "{}",
+                    match e.is_constant_sized() {
+                        true => "Self::size() as u16",
+                        false => "self.size() as u16",
                     }
-                ));
-                s.wln(format!(
-                    "{import_path}::write_u32_le(w, <Self as {header}>::OPCODE)?;",
-                    import_path = "crate::util",
-                    header = WORLD_CLIENT_HEADER_TRAIT_NAME,
-                ));
-                s.newline();
-
-                s.wln("self.write_body(w)?;");
-                s.wln("Ok(())");
-            });
-
-            s.body("fn write_encrypted_client<W: std::io::Write, E: Encrypter>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error>", |s| {
-                s.wln("// size: u16_be, and opcode: u32");
-                s.wln(format!(
-                    "e.write_encrypted_client_header(w, ({size}size() + 4) as u16, <Self as {header}>::OPCODE)?;",
-                    size = match e.is_constant_sized() {
-                        true => "Self::",
-                        false => "self.",
-                    },
-                    header = WORLD_CLIENT_HEADER_TRAIT_NAME,
-                ));
-                s.newline();
-
-                s.wln("self.write_body(w)?;");
-                s.wln("Ok(())");
+                ))
             });
         },
     );
 }
 
 fn print_server_message_header(s: &mut Writer, e: &Container, v: u16) {
-    s.body(
+    s.bodyn(
         format!("impl {} for {}", WORLD_SERVER_HEADER_TRAIT_NAME, e.name()),
         |s| {
             s.wln(format!("const OPCODE: u16 = {:#04x};", v));
             s.newline();
-
-            s.bodyn("fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", |s| {
-                s.wln("// size: u16_be, and opcode: u16");
+            s.bodyn("fn size_without_size_field(&self) -> u16", |s| {
                 s.wln(format!(
-                    "{import_path}::write_u16_be(w, ({size}size() + 2) as u16)?;",
-                    import_path = "crate::util",
-                    size = match e.is_constant_sized() {
-                        true => "Self::",
-                        false => "self.",
+                    "{}",
+                    match e.is_constant_sized() {
+                        true => "Self::size() as u16",
+                        false => "self.size() as u16",
                     }
-                ));
-                s.wln(format!(
-                    "{import_path}::write_u16_le(w, <Self as {header}>::OPCODE)?;",
-                    import_path = "crate::util",
-                    header = WORLD_SERVER_HEADER_TRAIT_NAME,
-                ));
-                s.newline();
-
-                s.wln("self.write_body(w)?;");
-                s.wln("Ok(())");
-            });
-
-            s.body("fn write_encrypted_server<W: std::io::Write, E: Encrypter>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error>", |s| {
-                s.wln("// size: u16_be, and opcode: u16");
-                s.wln(format!(
-                    "e.write_encrypted_server_header(w, ({size}size() + 2) as u16, <Self as {header}>::OPCODE)?;",
-                    size = match e.is_constant_sized() {
-                        true => "Self::",
-                        false => "self.",
-                    },
-                    header = WORLD_SERVER_HEADER_TRAIT_NAME,
-                ));
-                s.newline();
-
-                s.wln("self.write_body(w)?;");
-                s.wln("Ok(())");
+                ))
             });
         },
     );

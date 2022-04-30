@@ -49,25 +49,63 @@ pub trait MaximumPossibleSized {
 pub trait ServerMessageWrite: MessageBody {
     const OPCODE: u16;
 
-    fn write_unencrypted_server<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
+    fn size_without_size_field(&self) -> u16;
+
+    fn write_unencrypted_server<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // size: u16_be, and opcode: u16
+        crate::util::write_u16_be(w, self.size_without_size_field() + 2)?;
+        crate::util::write_u16_le(w, <Self as ServerMessageWrite>::OPCODE)?;
+
+        self.write_body(w)?;
+        Ok(())
+    }
 
     fn write_encrypted_server<W: Write, E: Encrypter>(
         &self,
         w: &mut W,
         e: &mut E,
-    ) -> Result<(), std::io::Error>;
+    ) -> Result<(), std::io::Error> {
+        // size: u16_be, and opcode: u16
+        e.write_encrypted_server_header(
+            w,
+            self.size_without_size_field() + 2,
+            <Self as ServerMessageWrite>::OPCODE,
+        )?;
+
+        self.write_body(w)?;
+        Ok(())
+    }
 }
 
 pub trait ClientMessageWrite: MessageBody {
     const OPCODE: u32;
 
-    fn write_unencrypted_client<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
+    fn size_without_size_field(&self) -> u16;
+
+    fn write_unencrypted_client<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // size: u16_be, and opcode: u32
+        crate::util::write_u16_be(w, (self.size_without_size_field() + 4))?;
+        crate::util::write_u32_le(w, <Self as ClientMessageWrite>::OPCODE)?;
+
+        self.write_body(w)?;
+        Ok(())
+    }
 
     fn write_encrypted_client<W: Write, E: Encrypter>(
         &self,
         w: &mut W,
         e: &mut E,
-    ) -> Result<(), std::io::Error>;
+    ) -> Result<(), std::io::Error> {
+        // size: u16_be, and opcode: u32
+        e.write_encrypted_client_header(
+            w,
+            (self.size_without_size_field() + 4),
+            <Self as ClientMessageWrite>::OPCODE,
+        )?;
+
+        self.write_body(w)?;
+        Ok(())
+    }
 }
 
 pub trait MessageBody: Sized {

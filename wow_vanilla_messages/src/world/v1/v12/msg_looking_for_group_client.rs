@@ -19,23 +19,12 @@ pub struct MSG_LOOKING_FOR_GROUP_Client {
 impl ClientMessageWrite for MSG_LOOKING_FOR_GROUP_Client {
     const OPCODE: u32 = 0x1ff;
 
-    fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // size: u16_be, and opcode: u32
-        crate::util::write_u16_be(w, (Self::size() + 4) as u16)?;
-        crate::util::write_u32_le(w, <Self as ClientMessageWrite>::OPCODE)?;
-
-        self.write_body(w)?;
-        Ok(())
+    fn size_without_size_field(&self) -> u16 {
+        Self::size() as u16
     }
 
-    fn write_encrypted_client<W: std::io::Write, E: Encrypter>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error> {
-        // size: u16_be, and opcode: u32
-        e.write_encrypted_client_header(w, (Self::size() + 4) as u16, <Self as ClientMessageWrite>::OPCODE)?;
-
-        self.write_body(w)?;
-        Ok(())
-    }
 }
+
 impl MessageBody for MSG_LOOKING_FOR_GROUP_Client {
     type Error = std::io::Error;
 
