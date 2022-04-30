@@ -18,7 +18,7 @@ enum QuestFailedReason : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `DONT_HAVE_REQ` | 0 (0x00) |  | this is default case |
 | `QUEST_FAILED_LOW_LEVEL` | 1 (0x01) |  | You are not high enough level for that quest. |

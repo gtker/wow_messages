@@ -24,7 +24,7 @@ enum GuildCommandResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `PLAYER_NO_MORE_IN_GUILD` | 0 (0x00) |  |  |
 | `GUILD_INTERNAL` | 1 (0x01) |  |  |

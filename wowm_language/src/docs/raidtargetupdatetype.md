@@ -10,7 +10,7 @@ enum RaidTargetUpdateType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `PARTIAL` | 0 (0x00) |  |  |
 | `FULL` | 1 (0x01) |  |  |

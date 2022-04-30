@@ -12,7 +12,7 @@ enum TimerType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `FATIGUE` | 0 (0x00) |  |  |
 | `BREATH` | 1 (0x01) |  |  |

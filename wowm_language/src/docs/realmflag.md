@@ -14,7 +14,7 @@ flag RealmFlag : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `NONE` | 0 (0x00) |  |  |
 | `INVALID` | 1 (0x01) |  |  |
@@ -39,7 +39,7 @@ flag RealmFlag : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `NONE` | 0 (0x00) |  |  |
 | `INVALID` | 1 (0x01) |  |  |

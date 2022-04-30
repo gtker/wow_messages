@@ -90,7 +90,7 @@ enum WorldResult : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `RESPONSE_SUCCESS` | 0 (0x00) |  |  |
 | `RESPONSE_FAILURE` | 1 (0x01) |  |  |

@@ -856,7 +856,7 @@ fn print_definer_table(s: &mut DocWriter, e: &Definer) {
 
     let any_fields_has_display = e.fields().iter().any(|f| f.tags().display().is_some());
 
-    s.w("| Enumerator | Original  | Description | Comment |");
+    s.w("| Enumerator | Value  | Description | Comment |");
     if any_fields_has_display {
         s.wln(" Display |");
     } else {

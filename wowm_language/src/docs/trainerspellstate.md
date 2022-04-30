@@ -11,7 +11,7 @@ enum TrainerSpellState : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `GREEN` | 0 (0x00) |  |  |
 | `RED` | 1 (0x01) |  |  |

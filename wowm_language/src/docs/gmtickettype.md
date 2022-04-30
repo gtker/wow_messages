@@ -22,7 +22,7 @@ enum GmTicketType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `STUCK` | 1 (0x01) |  |  |
 | `BEHAVIOR_HARASSMENT` | 2 (0x02) |  |  |

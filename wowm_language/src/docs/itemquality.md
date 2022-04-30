@@ -15,7 +15,7 @@ enum ItemQuality : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `POOR` | 0 (0x00) |  |  |
 | `NORMAL` | 1 (0x01) |  |  |

@@ -21,7 +21,7 @@ enum QuestPartyMessage : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `SHARING_QUEST` | 0 (0x00) |  | ERR_QUEST_PUSH_SUCCESS_S |
 | `CANT_TAKE_QUEST` | 1 (0x01) |  | ERR_QUEST_PUSH_INVALID_S |

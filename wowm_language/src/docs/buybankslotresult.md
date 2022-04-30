@@ -12,7 +12,7 @@ enum BuyBankSlotResult : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `FAILED_TOO_MANY` | 0 (0x00) |  |  |
 | `INSUFFICIENT_FUNDS` | 1 (0x01) |  |  |

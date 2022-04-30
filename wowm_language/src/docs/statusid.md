@@ -13,7 +13,7 @@ enum StatusId : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `NONE` | 0 (0x00) |  | first status, should mean bg is not instance |
 | `WAIT_QUEUE` | 1 (0x01) |  | means bg is empty and waiting for queue |

@@ -18,7 +18,7 @@ flag CastFlags : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `NONE` | 0 (0x00) |  |  |
 | `HIDDEN_COMBATLOG` | 1 (0x01) |  | mangoszero/cmangos/vmangos: hide in combat log? |

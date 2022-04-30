@@ -14,7 +14,7 @@ enum PowerType : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `MANA` | 0 (0x00) |  | UNIT_FIELD_POWER1 |
 | `RAGE` | 1 (0x01) |  | UNIT_FIELD_POWER2 |

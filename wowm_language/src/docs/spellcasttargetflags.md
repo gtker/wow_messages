@@ -29,7 +29,7 @@ flag SpellCastTargetFlags : u16 {
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `SELF` | 0 (0x00) |  |  |
 | `UNUSED1` | 1 (0x01) |  | not used in any spells as of 2.4.3 (can be set dynamically) |

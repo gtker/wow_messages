@@ -14,7 +14,7 @@ enum SellItemResult : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `CANT_FIND_ITEM` | 1 (0x01) |  |  |
 | `CANT_SELL_ITEM` | 2 (0x02) |  | cmangos/vmangos/mangoszero: merchant doesn't like that item |

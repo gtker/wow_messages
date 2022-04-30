@@ -43,7 +43,7 @@ enum ChatType : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `SAY` | 0 (0x00) |  |  |
 | `PARTY` | 1 (0x01) |  |  |

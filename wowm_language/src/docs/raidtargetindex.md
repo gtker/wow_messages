@@ -18,7 +18,7 @@ enum RaidTargetIndex : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `UNKNOWN0` | 0 (0x00) |  |  |
 | `UNKNOWN1` | 1 (0x01) |  |  |

@@ -13,7 +13,7 @@ enum BgTypeId : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `NOT_ELIGIBLE` | 0 (0x00) |  | Your group has joined a battleground queue, but you are not eligible |
 | `QUEUED_FOR_AV` | 1 (0x01) |  | Your group has joined the queue for AV |

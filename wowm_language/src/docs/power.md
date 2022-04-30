@@ -15,7 +15,7 @@ enum Power : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `MANA` | 0 (0x00) |  | The most common one, mobs usually have this or rage |
 | `RAGE` | 1 (0x01) |  | This is what warriors use to cast their spells |

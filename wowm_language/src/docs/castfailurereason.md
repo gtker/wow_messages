@@ -154,7 +154,7 @@ enum CastFailureReason : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `AFFECTING_COMBAT` | 0 (0x00) |  | You are in combat |
 | `ALREADY_AT_FULL_HEALTH` | 1 (0x01) |  | You are already at full Health. |

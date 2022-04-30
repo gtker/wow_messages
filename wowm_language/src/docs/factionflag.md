@@ -15,7 +15,7 @@ flag FactionFlag : u8 {
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `VISIBLE` | 1 (0x01) |  | makes visible in client (set or can be set at interaction with target of this faction) |
 | `AT_WAR` | 2 (0x02) |  | enable AtWar-button in client. player controlled (except opposition team always war state), Flag only set on initial creation |

@@ -23,7 +23,7 @@ enum Locale : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `EN_GB` | 1701726018 (0x656E4742) |  |  |
 | `EN_US` | 1701729619 (0x656E5553) |  |  |

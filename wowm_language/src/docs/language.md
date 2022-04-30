@@ -23,7 +23,7 @@ enum Language : u32 {
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ### Enumerators
-| Enumerator | Original  | Description | Comment |
+| Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `UNIVERSAL` | 0 (0x00) |  |  |
 | `ORCISH` | 1 (0x01) |  |  |
