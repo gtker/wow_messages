@@ -7,7 +7,6 @@ enum BattlegroundWinner : u8 {
     ALLIANCE = 1;    
     NONE = 2;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

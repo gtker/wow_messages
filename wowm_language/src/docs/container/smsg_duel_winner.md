@@ -7,7 +7,6 @@ smsg SMSG_DUEL_WINNER = 0x016B {
     CString opponent_name;    
     CString initiator_name;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

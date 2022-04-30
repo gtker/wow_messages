@@ -6,7 +6,6 @@ smsg SMSG_PLAYED_TIME = 0x01CD {
     u32 total_played_time;    
     u32 level_played_time;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

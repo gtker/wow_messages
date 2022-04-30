@@ -7,7 +7,6 @@ smsg SMSG_WHO = 0x0063 {
     u32 online_players;    
     WhoPlayer[listed_players] players;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

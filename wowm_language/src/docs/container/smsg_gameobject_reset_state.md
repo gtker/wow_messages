@@ -5,7 +5,6 @@
 smsg SMSG_GAMEOBJECT_RESET_STATE = 0x02A7 {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

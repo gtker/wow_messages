@@ -11,7 +11,6 @@ smsg SMSG_LOG_XPGAIN = 0x01D0 {
         f32 exp_group_bonus;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

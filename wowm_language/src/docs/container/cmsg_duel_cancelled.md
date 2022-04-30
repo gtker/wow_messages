@@ -5,7 +5,6 @@
 cmsg CMSG_DUEL_CANCELLED = 0x016D {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

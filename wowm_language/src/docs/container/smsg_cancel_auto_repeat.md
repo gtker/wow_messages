@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_CANCEL_AUTO_REPEAT = 0x029C {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

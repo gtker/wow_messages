@@ -5,7 +5,6 @@
 smsg SMSG_STABLE_RESULT = 0x0273 {
     StableResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

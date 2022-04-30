@@ -5,7 +5,6 @@
 cmsg CMSG_PETITION_SHOWLIST = 0x01BB {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -11,7 +11,6 @@ smsg MSG_RAID_TARGET_UPDATE_Server = 0x0321 {
         RaidTargetUpdate raid_target;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

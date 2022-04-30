@@ -6,7 +6,6 @@ enum PartyOperation : u8 {
     INVITE = 0;    
     LEAVE = 2;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

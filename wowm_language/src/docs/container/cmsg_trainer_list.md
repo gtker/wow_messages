@@ -5,7 +5,6 @@
 cmsg CMSG_TRAINER_LIST = 0x01B0 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

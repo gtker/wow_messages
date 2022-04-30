@@ -5,7 +5,6 @@
 smsg SMSG_BUY_BANK_SLOT_RESULT = 0x01BA {
     BuyBankSlotResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -5,7 +5,6 @@
 smsg SMSG_SET_FACTION_VISIBLE = 0x0123 {
     u32 reputation_list_id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

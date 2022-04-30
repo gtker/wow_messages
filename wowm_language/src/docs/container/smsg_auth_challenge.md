@@ -5,7 +5,6 @@
 smsg SMSG_AUTH_CHALLENGE = 0x01EC {
     u32 server_seed;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

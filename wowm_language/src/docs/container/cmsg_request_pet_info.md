@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_REQUEST_PET_INFO = 0x0279 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

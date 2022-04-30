@@ -7,7 +7,6 @@ smsg SMSG_NPC_TEXT_UPDATE = 0x0180 {
     f32 probability;    
     NpcTextUpdate[8] texts;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

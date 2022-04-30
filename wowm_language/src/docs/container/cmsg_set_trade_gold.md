@@ -5,7 +5,6 @@
 cmsg CMSG_SET_TRADE_GOLD = 0x011F {
     u32 gold;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -6,7 +6,6 @@ struct QuestDetailsEmote {
     u32 emote;    
     u32 emote_delay_in_msecs;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

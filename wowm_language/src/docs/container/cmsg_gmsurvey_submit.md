@@ -7,7 +7,6 @@ cmsg CMSG_GMSURVEY_SUBMIT = 0x032A {
     GmSurveyQuestion[10] questions;    
     CString answer_comment;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

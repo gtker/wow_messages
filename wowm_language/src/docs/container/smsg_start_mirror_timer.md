@@ -10,7 +10,6 @@ smsg SMSG_START_MIRROR_TIMER = 0x01D9 {
     u8 is_frozen;    
     u32 id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

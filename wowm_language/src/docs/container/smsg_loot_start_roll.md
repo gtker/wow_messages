@@ -10,7 +10,6 @@ smsg SMSG_LOOT_START_ROLL = 0x02A1 {
     u32 item_random_property_id;    
     u32 countdown_time;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

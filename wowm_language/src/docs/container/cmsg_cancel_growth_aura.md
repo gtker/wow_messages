@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_CANCEL_GROWTH_AURA = 0x029B {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

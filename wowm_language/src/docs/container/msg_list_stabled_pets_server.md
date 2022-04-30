@@ -8,7 +8,6 @@ smsg MSG_LIST_STABLED_PETS_Server = 0x026F {
     u8 stable_slots;    
     StabledPet[amount_of_pets] pets;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

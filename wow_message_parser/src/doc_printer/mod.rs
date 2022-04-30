@@ -165,7 +165,7 @@ pub fn print_docs_for_enum(e: &Definer) -> DocWriter {
 
     s.wln("### Wowm Representation");
     s.wln("```rust,ignore");
-    s.wln(get_definer_wowm_definition("enum", e, ""));
+    s.w(get_definer_wowm_definition("enum", e, ""));
     s.wln("```");
 
     print_definer_table(&mut s, e);
@@ -180,7 +180,7 @@ pub fn print_docs_for_flag(e: &Definer) -> DocWriter {
 
     s.wln("### Wowm Representation");
     s.wln("```rust,ignore");
-    s.wln(get_definer_wowm_definition("flag", e, ""));
+    s.w(get_definer_wowm_definition("flag", e, ""));
     s.wln("```");
 
     print_definer_table(&mut s, e);
@@ -195,7 +195,7 @@ pub fn print_docs_for_container(e: &Container) -> DocWriter {
 
     s.wln("### Wowm Representation");
     s.wln("```rust,ignore");
-    s.wln(get_struct_wowm_definition(e, ""));
+    s.w(get_struct_wowm_definition(e, ""));
     s.wln("```");
 
     print_container_header(&mut s, e);

@@ -5,7 +5,6 @@
 smsg SMSG_ACCOUNT_DATA_TIMES = 0x0209 {
     u32[32] data;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

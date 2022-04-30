@@ -11,7 +11,6 @@ cmsg CMSG_AUTH_SESSION = 0x01ED {
     u32 decompressed_addon_info_size;    
     u8[-] compressed_addon_info;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

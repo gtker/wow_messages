@@ -11,7 +11,6 @@ struct ListInventoryItem {
     u32 max_durability;    
     u32 durability;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

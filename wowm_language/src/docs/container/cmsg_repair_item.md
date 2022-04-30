@@ -6,7 +6,6 @@ cmsg CMSG_REPAIR_ITEM = 0x02A8 {
     Guid npc_guid;    
     Guid item_guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

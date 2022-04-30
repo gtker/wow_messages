@@ -24,7 +24,6 @@ enum PvpRank : u8 {
     RANK14 = 18;    
     FACTION_LEADER = 19;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

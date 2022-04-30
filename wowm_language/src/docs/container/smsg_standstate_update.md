@@ -5,7 +5,6 @@
 smsg SMSG_STANDSTATE_UPDATE = 0x029D {
     UnitStandState state;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

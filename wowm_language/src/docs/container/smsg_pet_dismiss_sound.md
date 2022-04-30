@@ -8,7 +8,6 @@ smsg SMSG_PET_DISMISS_SOUND = 0x0325 {
     f32 position_y;    
     f32 position_z;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

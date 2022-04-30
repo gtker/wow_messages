@@ -6,7 +6,6 @@ smsg SMSG_MEETINGSTONE_SETQUEUE = 0x0295 {
     Area area;    
     MeetingStoneStatus status;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

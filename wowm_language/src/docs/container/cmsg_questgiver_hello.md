@@ -5,7 +5,6 @@
 cmsg CMSG_QUESTGIVER_HELLO = 0x0184 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

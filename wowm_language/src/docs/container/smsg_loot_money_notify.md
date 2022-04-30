@@ -5,7 +5,6 @@
 smsg SMSG_LOOT_MONEY_NOTIFY = 0x0163 {
     u32 amount;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

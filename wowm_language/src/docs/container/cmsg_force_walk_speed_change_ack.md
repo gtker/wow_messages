@@ -8,7 +8,6 @@ cmsg CMSG_FORCE_WALK_SPEED_CHANGE_ACK = 0x02DB {
     MovementInfo movement_info;    
     f32 new_speed;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

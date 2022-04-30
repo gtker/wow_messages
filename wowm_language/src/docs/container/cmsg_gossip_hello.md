@@ -5,7 +5,6 @@
 cmsg CMSG_GOSSIP_HELLO = 0x017B {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

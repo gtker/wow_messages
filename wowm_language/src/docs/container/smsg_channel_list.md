@@ -8,7 +8,6 @@ smsg SMSG_CHANNEL_LIST = 0x009B {
     u32 amount_of_members;    
     ChannelMember[amount_of_members] members;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

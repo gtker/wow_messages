@@ -5,7 +5,6 @@
 smsg SMSG_DUEL_COUNTDOWN = 0x02B7 {
     u32 time_in_seconds;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

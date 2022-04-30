@@ -6,7 +6,6 @@ cmsg CMSG_QUESTGIVER_QUERY_QUEST = 0x0186 {
     Guid guid;    
     u32 quest_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

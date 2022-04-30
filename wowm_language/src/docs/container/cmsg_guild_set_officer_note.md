@@ -6,7 +6,6 @@ cmsg CMSG_GUILD_SET_OFFICER_NOTE = 0x0235 {
     CString player_name;    
     CString note;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

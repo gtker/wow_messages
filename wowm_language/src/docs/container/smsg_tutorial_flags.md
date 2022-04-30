@@ -12,7 +12,6 @@ smsg SMSG_TUTORIAL_FLAGS = 0x00FD {
     u32 tutorial_data6;    
     u32 tutorial_data7;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

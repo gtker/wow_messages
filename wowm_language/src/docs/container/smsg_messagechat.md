@@ -37,7 +37,6 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     CString message;    
     PlayerChatTag tag;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

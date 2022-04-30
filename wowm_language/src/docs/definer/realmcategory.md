@@ -9,7 +9,6 @@ enum RealmCategory : u8 {
     THREE = 0x3;    
     FIVE = 0x5;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

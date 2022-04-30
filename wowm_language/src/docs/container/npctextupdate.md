@@ -8,7 +8,6 @@ struct NpcTextUpdate {
     Language language;    
     NpcTextUpdateEmote[3] emotes;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

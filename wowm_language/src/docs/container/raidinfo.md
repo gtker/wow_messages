@@ -7,7 +7,6 @@ struct RaidInfo {
     u32 reset_time;    
     u32 instance_id;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

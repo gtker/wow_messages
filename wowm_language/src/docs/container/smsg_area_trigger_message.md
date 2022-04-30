@@ -6,7 +6,6 @@ smsg SMSG_AREA_TRIGGER_MESSAGE = 0x02B8 {
     u32 length;    
     CString message;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

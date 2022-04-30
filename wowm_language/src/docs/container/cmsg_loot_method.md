@@ -7,7 +7,6 @@ cmsg CMSG_LOOT_METHOD = 0x007A {
     Guid loot_master;    
     ItemQuality loot_threshold;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -6,7 +6,6 @@ cmsg CMSG_CAST_SPELL = 0x012E {
     u32 spell;    
     SpellCastTargets targets;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

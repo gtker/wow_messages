@@ -7,7 +7,6 @@ smsg SMSG_TRANSFER_ABORTED = 0x0040 {
     TransferAbortReason reason;    
     u8 padding = 0;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

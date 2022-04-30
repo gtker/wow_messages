@@ -5,7 +5,6 @@
 cmsg CMSG_GROUP_SET_LEADER = 0x0078 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

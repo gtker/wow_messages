@@ -6,7 +6,6 @@ cmsg CMSG_TRAINER_BUY_SPELL = 0x01B2 {
     Guid guid;    
     u32 id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

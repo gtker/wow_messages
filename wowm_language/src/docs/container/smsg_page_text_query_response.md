@@ -7,7 +7,6 @@ smsg SMSG_PAGE_TEXT_QUERY_RESPONSE = 0x005B {
     CString text;    
     u32 next_page_id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

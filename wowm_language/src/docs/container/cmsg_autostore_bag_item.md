@@ -7,7 +7,6 @@ cmsg CMSG_AUTOSTORE_BAG_ITEM = 0x010B {
     u8 source_slot;    
     u8 destination_bag;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

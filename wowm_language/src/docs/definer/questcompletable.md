@@ -6,7 +6,6 @@ enum QuestCompletable : u32 {
     NOT_COMPLETABLE = 0;    
     COMPLETEABLE = 3;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

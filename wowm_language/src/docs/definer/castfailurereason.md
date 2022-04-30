@@ -150,7 +150,6 @@ enum CastFailureReason : u8 {
     MIN_SKILL = 0x90;    
     UNKNOWN = 0x91;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

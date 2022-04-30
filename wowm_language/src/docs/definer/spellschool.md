@@ -11,7 +11,6 @@ enum SpellSchool : u8 {
     SHADOW = 5;    
     ARCANE = 6;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

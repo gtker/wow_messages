@@ -8,7 +8,6 @@ clogin CMD_SURVEY_RESULT = 0x04 {
     u16 compressed_data_length;    
     u8[compressed_data_length] data;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

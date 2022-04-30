@@ -9,7 +9,6 @@ smsg SMSG_SPELLHEALLOG = 0x0150 {
     u32 damage;    
     u8 critical;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

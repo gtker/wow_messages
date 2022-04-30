@@ -5,7 +5,6 @@
 cmsg CMSG_BUY_BANK_SLOT = 0x01B9 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

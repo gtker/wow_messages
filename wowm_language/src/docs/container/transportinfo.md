@@ -10,7 +10,6 @@ struct TransportInfo {
     f32 orientation;    
     u32 timestamp;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_FRIEND_LIST = 0x0066 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

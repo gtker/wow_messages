@@ -5,7 +5,6 @@
 cmsg CMSG_TAXIQUERYAVAILABLENODES = 0x01AC {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

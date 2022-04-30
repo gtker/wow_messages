@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_FISH_ESCAPED = 0x01C9 {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

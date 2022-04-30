@@ -5,7 +5,6 @@
 cmsg CMSG_AREA_SPIRIT_HEALER_QUEUE = 0x02E3 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

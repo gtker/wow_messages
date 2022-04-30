@@ -6,7 +6,6 @@ smsg SMSG_MOVE_FEATHER_FALL = 0x00F2 {
     PackedGuid guid;    
     u32 counter;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

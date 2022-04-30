@@ -5,7 +5,6 @@
 smsg SMSG_UPDATE_INSTANCE_OWNERSHIP = 0x032B {
     u32 has_been_saved;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -5,7 +5,6 @@
 smsg SMSG_TURN_IN_PETITION_RESULTS = 0x01C5 {
     PetitionTurnInResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_ATTACKSTOP = 0x0142 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

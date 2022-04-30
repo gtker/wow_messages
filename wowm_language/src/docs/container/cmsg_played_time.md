@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_PLAYED_TIME = 0x01CC {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

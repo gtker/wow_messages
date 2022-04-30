@@ -7,7 +7,6 @@ smsg SMSG_ATTACKSTOP = 0x0144 {
     PackedGuid enemy;    
     u32 unknown1;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

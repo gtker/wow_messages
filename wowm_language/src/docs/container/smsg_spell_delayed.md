@@ -6,7 +6,6 @@ smsg SMSG_SPELL_DELAYED = 0x01E2 {
     Guid guid;    
     u32 delay_time;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

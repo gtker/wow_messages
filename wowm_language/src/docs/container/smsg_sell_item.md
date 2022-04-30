@@ -7,7 +7,6 @@ smsg SMSG_SELL_ITEM = 0x01A1 {
     Guid item;    
     SellItemResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

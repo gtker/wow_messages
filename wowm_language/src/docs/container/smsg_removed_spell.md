@@ -5,7 +5,6 @@
 smsg SMSG_REMOVED_SPELL = 0x0203 {
     u16 spell_id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

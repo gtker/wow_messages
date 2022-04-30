@@ -10,7 +10,6 @@ smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
     u32 spell_on_lowest_slot;    
     TradeSlot[7] trade_slots;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

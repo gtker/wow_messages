@@ -5,7 +5,6 @@
 smsg SMSG_GROUP_DECLINE = 0x0074 {
     CString name;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

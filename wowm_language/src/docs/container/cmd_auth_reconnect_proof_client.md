@@ -8,7 +8,6 @@ clogin CMD_AUTH_RECONNECT_PROOF_Client = 0x03 {
     u8[20] client_checksum;    
     u8 key_count = 0;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

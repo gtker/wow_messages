@@ -9,7 +9,6 @@ smsg SMSG_RESURRECT_REQUEST = 0x015B {
     u8 caster_is_spirit_healer;    
     u8 respect_resurrection_timer;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

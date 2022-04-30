@@ -15,7 +15,6 @@ smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
         u32[6] raw_data;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

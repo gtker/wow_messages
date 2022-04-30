@@ -7,7 +7,6 @@ smsg SMSG_FORCE_SWIM_SPEED_CHANGE = 0x00E6 {
     u32 move_event;    
     f32 speed;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

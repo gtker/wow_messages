@@ -5,7 +5,6 @@
 smsg SMSG_SPLINE_MOVE_FEATHER_FALL = 0x0305 {
     PackedGuid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

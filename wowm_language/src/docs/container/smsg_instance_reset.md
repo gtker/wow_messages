@@ -5,7 +5,6 @@
 smsg SMSG_INSTANCE_RESET = 0x031E {
     Map map;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

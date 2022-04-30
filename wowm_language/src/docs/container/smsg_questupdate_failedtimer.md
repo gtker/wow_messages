@@ -5,7 +5,6 @@
 smsg SMSG_QUESTUPDATE_FAILEDTIMER = 0x0197 {
     u32 quest_id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -5,7 +5,6 @@
 cmsg CMSG_GMTICKET_UPDATETEXT = 0x0207 {
     CString message;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

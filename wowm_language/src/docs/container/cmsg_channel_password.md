@@ -6,7 +6,6 @@ cmsg CMSG_CHANNEL_PASSWORD = 0x009C {
     CString channel_name;    
     CString channel_password;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

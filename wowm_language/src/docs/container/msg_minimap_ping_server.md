@@ -7,7 +7,6 @@ smsg MSG_MINIMAP_PING_Server = 0x01D5 {
     f32 position_x;    
     f32 position_y;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

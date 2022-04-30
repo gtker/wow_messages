@@ -7,7 +7,6 @@ enum RollVote : u8 {
     NEED = 1;    
     GREED = 2;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

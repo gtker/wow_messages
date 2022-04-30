@@ -7,7 +7,6 @@ smsg SMSG_FORCE_TURN_RATE_CHANGE = 0x02DE {
     u32 move_event;    
     f32 speed;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

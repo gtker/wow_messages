@@ -10,7 +10,6 @@ struct PetitionShowlist {
     u32 unknown1;    
     u32 unknown2;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

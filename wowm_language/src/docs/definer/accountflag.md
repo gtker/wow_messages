@@ -7,7 +7,6 @@ flag AccountFlag : u32 {
     TRIAL = 0x000008;    
     PROPASS = 0x800000;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

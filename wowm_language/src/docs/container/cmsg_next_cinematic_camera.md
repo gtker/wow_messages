@@ -7,7 +7,6 @@ Sent by client when cinematic beings.
 ```rust,ignore
 cmsg CMSG_NEXT_CINEMATIC_CAMERA = 0x00FB {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

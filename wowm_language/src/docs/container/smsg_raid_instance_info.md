@@ -6,7 +6,6 @@ smsg SMSG_RAID_INSTANCE_INFO = 0x02CC {
     u32 amount_of_raid_infos;    
     RaidInfo[amount_of_raid_infos] raid_infos;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -6,7 +6,6 @@ enum LogFormat : u8 {
     DEFAULT = 0;    
     DEBUG = 1;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

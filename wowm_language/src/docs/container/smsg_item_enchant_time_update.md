@@ -8,7 +8,6 @@ smsg SMSG_ITEM_ENCHANT_TIME_UPDATE = 0x01EB {
     u32 duration;    
     Guid player_guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

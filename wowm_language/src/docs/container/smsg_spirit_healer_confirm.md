@@ -5,7 +5,6 @@
 smsg SMSG_SPIRIT_HEALER_CONFIRM = 0x0222 {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -9,7 +9,6 @@ smsg SMSG_QUESTUPDATE_ADD_KILL = 0x0199 {
     u32 required_kill_count;    
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

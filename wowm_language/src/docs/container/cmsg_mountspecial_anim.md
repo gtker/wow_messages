@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_MOUNTSPECIAL_ANIM = 0x0171 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -6,7 +6,6 @@ smsg SMSG_SPELL_FAILED_OTHER = 0x02A6 {
     Guid caster_guid;    
     u32 id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

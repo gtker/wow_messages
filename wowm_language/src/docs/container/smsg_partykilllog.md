@@ -6,7 +6,6 @@ smsg SMSG_PARTYKILLLOG = 0x01F5 {
     Guid player_with_killing_blow;    
     Guid victim;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

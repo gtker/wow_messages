@@ -5,7 +5,6 @@
 cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
     Map map;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

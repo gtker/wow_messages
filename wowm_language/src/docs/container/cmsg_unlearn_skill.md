@@ -5,7 +5,6 @@
 cmsg CMSG_UNLEARN_SKILL = 0x0202 {
     u32 skill_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

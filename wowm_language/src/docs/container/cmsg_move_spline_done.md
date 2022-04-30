@@ -7,7 +7,6 @@ cmsg CMSG_MOVE_SPLINE_DONE = 0x02C9 {
     u32 movement_counter;    
     u32 unknown1;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

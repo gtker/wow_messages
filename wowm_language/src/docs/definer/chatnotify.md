@@ -36,7 +36,6 @@ enum ChatNotify : u8 {
     PLAYER_INVITE_BANNED_NOTICE = 0x1E;    
     THROTTLED_NOTICE = 0x1F;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_QUERY_TIME = 0x01CE {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

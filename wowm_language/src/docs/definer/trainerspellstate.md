@@ -7,7 +7,6 @@ enum TrainerSpellState : u8 {
     RED = 1;    
     GRAY = 2;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

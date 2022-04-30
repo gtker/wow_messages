@@ -10,7 +10,6 @@ smsg SMSG_MOVE_KNOCK_BACK = 0x00EF {
     f32 horizontal_speed;    
     f32 vertical_speed;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

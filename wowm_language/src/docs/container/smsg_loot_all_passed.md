@@ -9,7 +9,6 @@ smsg SMSG_LOOT_ALL_PASSED = 0x029E {
     u32 item_random_property_id;    
     u32 item_random_suffix_id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -5,7 +5,6 @@
 cmsg MSG_AUCTION_HELLO_Client = 0x0255 {
     Guid auctioneer;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

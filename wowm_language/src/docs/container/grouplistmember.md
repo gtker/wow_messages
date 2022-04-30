@@ -7,7 +7,6 @@ struct GroupListMember {
     Guid guid;    
     u8 is_online;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

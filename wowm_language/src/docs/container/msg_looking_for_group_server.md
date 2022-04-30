@@ -5,7 +5,6 @@
 smsg MSG_LOOKING_FOR_GROUP_Server = 0x01FF {
     u32 unknown1;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

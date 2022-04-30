@@ -7,7 +7,6 @@ struct GossipItem {
     u8 item_icon;    
     u8 coded;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

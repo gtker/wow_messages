@@ -20,7 +20,6 @@ smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
     PvpRank last_week_standing;    
     u8 rank_progress_bar;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -9,7 +9,6 @@ smsg SMSG_LOGIN_VERIFY_WORLD = 0x0236 {
     f32 position_z;    
     f32 orientation;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

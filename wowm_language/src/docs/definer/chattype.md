@@ -39,7 +39,6 @@ enum ChatType : u8 {
     BATTLEGROUND = 0x5C;    
     BATTLEGROUND_LEADER = 0x5D;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

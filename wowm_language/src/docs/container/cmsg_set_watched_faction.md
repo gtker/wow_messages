@@ -5,7 +5,6 @@
 cmsg CMSG_SET_WATCHED_FACTION = 0x0318 {
     u32 reputation_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

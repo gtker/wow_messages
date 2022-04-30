@@ -11,7 +11,6 @@ struct WhoPlayer {
     u32 zone_id;    
     u32 party_status;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

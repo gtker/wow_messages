@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg MSG_PVP_LOG_DATA_Client = 0x02E0 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

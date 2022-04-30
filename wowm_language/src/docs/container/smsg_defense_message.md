@@ -7,7 +7,6 @@ smsg SMSG_DEFENSE_MESSAGE = 0x033B {
     u32 message_length;    
     CString message;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

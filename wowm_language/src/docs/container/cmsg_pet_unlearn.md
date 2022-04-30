@@ -5,7 +5,6 @@
 cmsg CMSG_PET_UNLEARN = 0x02F0 {
     Guid pet_guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

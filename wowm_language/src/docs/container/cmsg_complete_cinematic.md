@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_COMPLETE_CINEMATIC = 0x00FC {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

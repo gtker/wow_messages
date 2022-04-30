@@ -9,7 +9,6 @@ enum MonsterMoveType : u8 {
     FACING_TARGET = 3;    
     FACING_ANGLE = 4;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

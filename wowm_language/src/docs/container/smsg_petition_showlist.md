@@ -7,7 +7,6 @@ smsg SMSG_PETITION_SHOWLIST = 0x01BC {
     u8 amount_of_petitions;    
     PetitionShowlist[amount_of_petitions] petitions;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

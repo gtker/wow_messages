@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_MEETINGSTONE_COMPLETE = 0x0297 {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

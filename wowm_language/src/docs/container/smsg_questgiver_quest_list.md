@@ -10,7 +10,6 @@ smsg SMSG_QUESTGIVER_QUEST_LIST = 0x0185 {
     u8 amount_of_entries;    
     QuestItem[amount_of_entries] quest_items;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

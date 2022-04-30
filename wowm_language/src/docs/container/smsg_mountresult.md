@@ -5,7 +5,6 @@
 smsg SMSG_MOUNTRESULT = 0x016E {
     MountResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -18,7 +18,6 @@ enum GuildEvent : u8 {
     SIGNED_ON = 12;    
     SIGNED_OFF = 13;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

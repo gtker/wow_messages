@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_DUEL_OUTOFBOUNDS = 0x0168 {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

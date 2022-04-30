@@ -13,7 +13,6 @@ smsg SMSG_AUTH_RESPONSE = 0x01EE {
         u32 queue_position;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

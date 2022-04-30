@@ -6,7 +6,6 @@ cmsg CMSG_PET_CAST_SPELL = 0x01F0 {
     Guid guid;    
     u32 id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

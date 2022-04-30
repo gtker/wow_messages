@@ -10,7 +10,6 @@ struct StabledPet {
     u32 loyalty;    
     u8 slot;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

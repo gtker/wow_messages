@@ -6,7 +6,6 @@ smsg SMSG_PLAYERBOUND = 0x0158 {
     Guid guid;    
     Area area;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

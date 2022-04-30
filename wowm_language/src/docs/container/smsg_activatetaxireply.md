@@ -5,7 +5,6 @@
 smsg SMSG_ACTIVATETAXIREPLY = 0x01AE {
     ActivateTaxiReply reply;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

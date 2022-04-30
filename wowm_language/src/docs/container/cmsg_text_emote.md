@@ -7,7 +7,6 @@ cmsg CMSG_TEXT_EMOTE = 0x0104 {
     Emote emote;    
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

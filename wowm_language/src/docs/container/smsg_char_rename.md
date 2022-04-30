@@ -9,7 +9,6 @@ smsg SMSG_CHAR_RENAME = 0x02C8 {
         CString name;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

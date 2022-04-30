@@ -31,7 +31,6 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     QuestObjective[4] objectives;    
     CString[4] objective_texts;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

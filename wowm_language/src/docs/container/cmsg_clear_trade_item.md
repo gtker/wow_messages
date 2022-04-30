@@ -5,7 +5,6 @@
 cmsg CMSG_CLEAR_TRADE_ITEM = 0x011E {
     u8 trade_slot;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

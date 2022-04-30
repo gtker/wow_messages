@@ -5,7 +5,6 @@
 clogin CMD_REALM_LIST_Client = 0x10 {
     u32 padding = 0;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

@@ -6,7 +6,6 @@ msg MSG_PETITION_RENAME = 0x02C1 {
     Guid petition_guid;    
     CString new_name;    
 }
-
 ```
 ### Header
 MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 4 bytes if they are sent from the server (SMSG).

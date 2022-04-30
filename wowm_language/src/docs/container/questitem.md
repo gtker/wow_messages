@@ -8,7 +8,6 @@ struct QuestItem {
     u32 level;    
     CString title;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

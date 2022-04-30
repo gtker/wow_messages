@@ -5,7 +5,6 @@
 clogin CMD_XFER_RESUME = 0x33 {
     u64 offset;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

@@ -7,7 +7,6 @@ smsg SMSG_FORCE_RUN_BACK_SPEED_CHANGE = 0x00E4 {
     u32 move_event;    
     f32 speed;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

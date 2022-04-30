@@ -5,7 +5,6 @@
 cmsg CMSG_SET_TARGET_OBSOLETE = 0x013E {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

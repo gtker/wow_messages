@@ -6,7 +6,6 @@ smsg SMSG_FRIEND_STATUS = 0x0068 {
     FriendResult result;    
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

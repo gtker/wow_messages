@@ -17,7 +17,6 @@ enum QuestPartyMessage : u8 {
     HAVE_QUEST = 7;    
     FINISH_QUEST = 8;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

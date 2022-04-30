@@ -6,7 +6,6 @@ msg MSG_QUEST_PUSH_RESULT = 0x0276 {
     Guid guid;    
     QuestPartyMessage message;    
 }
-
 ```
 ### Header
 MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 4 bytes if they are sent from the server (SMSG).

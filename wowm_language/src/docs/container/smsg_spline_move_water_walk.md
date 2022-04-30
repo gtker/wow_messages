@@ -5,7 +5,6 @@
 smsg SMSG_SPLINE_MOVE_WATER_WALK = 0x0309 {
     PackedGuid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

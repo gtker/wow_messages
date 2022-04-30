@@ -7,7 +7,6 @@ smsg SMSG_TRAINER_BUY_FAILED = 0x01B4 {
     u32 id;    
     TrainingFailureReason error;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

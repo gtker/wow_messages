@@ -6,7 +6,6 @@ struct ChannelMember {
     Guid guid;    
     u8 member_flags;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

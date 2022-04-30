@@ -16,7 +16,6 @@ smsg SMSG_LEVELUP_INFO = 0x01D4 {
     u32 intellect;    
     u32 spirit;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

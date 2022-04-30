@@ -14,7 +14,6 @@ smsg SMSG_PET_SPELLS = 0x0179 {
     u8 amount_of_cooldowns;    
     PetSpellCooldown[amount_of_cooldowns] cooldowns;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

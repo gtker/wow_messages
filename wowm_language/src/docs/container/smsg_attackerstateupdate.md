@@ -8,7 +8,6 @@ smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
     PackedGuid target;    
     u32 total_damage;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

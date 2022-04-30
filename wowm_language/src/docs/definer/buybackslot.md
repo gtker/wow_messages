@@ -17,7 +17,6 @@ enum BuybackSlot : u32 {
     SLOT12 = 80;    
     SLOT13 = 81;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

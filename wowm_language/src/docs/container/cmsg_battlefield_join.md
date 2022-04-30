@@ -5,7 +5,6 @@
 cmsg CMSG_BATTLEFIELD_JOIN = 0x023E {
     Map map;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -5,7 +5,6 @@
 smsg SMSG_QUERY_TIME_RESPONSE = 0x01CF {
     u32 time;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

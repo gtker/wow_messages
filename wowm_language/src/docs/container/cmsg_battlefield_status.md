@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_BATTLEFIELD_STATUS = 0x02D3 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

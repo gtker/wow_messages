@@ -5,7 +5,6 @@
 cmsg CMSG_PET_STOP_ATTACK = 0x02EA {
     Guid pet_guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -5,7 +5,6 @@
 smsg SMSG_GAMEOBJECT_SPAWN_ANIM = 0x0214 {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

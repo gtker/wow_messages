@@ -7,7 +7,6 @@ smsg SMSG_SUMMON_REQUEST = 0x02AB {
     u32 zone_id;    
     u32 auto_decline_time_in_msecs;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

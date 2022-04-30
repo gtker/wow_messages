@@ -6,7 +6,6 @@ smsg SMSG_LOOT_MASTER_LIST = 0x02A4 {
     u8 amount_of_players;    
     Guid[amount_of_players] guids;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

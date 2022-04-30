@@ -5,7 +5,6 @@
 cmsg CMSG_MEETINGSTONE_JOIN = 0x0292 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

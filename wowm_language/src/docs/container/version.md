@@ -8,7 +8,6 @@ struct Version {
     u8 patch;    
     u16 build;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

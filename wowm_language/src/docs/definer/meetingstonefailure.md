@@ -7,7 +7,6 @@ enum MeetingStoneFailure : u8 {
     MEETINGSTONE_FAIL_FULL_GROUP = 2;    
     MEETINGSTONE_FAIL_RAID_GROUP = 3;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

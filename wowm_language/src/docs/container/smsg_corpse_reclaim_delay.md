@@ -5,7 +5,6 @@
 smsg SMSG_CORPSE_RECLAIM_DELAY = 0x0269 {
     u32 delay_in_seconds;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

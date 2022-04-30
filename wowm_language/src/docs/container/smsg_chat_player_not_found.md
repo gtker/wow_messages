@@ -5,7 +5,6 @@
 smsg SMSG_CHAT_PLAYER_NOT_FOUND = 0x02A9 {
     CString name;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

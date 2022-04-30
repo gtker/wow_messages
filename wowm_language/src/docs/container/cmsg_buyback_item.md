@@ -6,7 +6,6 @@ cmsg CMSG_BUYBACK_ITEM = 0x0290 {
     Guid guid;    
     BuybackSlot slot;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

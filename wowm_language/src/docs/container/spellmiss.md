@@ -6,7 +6,6 @@ struct SpellMiss {
     Guid target_guid;    
     SpellMissInfo miss_info;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

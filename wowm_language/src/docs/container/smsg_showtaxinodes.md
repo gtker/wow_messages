@@ -8,7 +8,6 @@ smsg SMSG_SHOWTAXINODES = 0x01A9 {
     u32 nearest_node;    
     u32[-] nodes;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

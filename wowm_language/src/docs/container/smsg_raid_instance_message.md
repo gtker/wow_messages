@@ -7,7 +7,6 @@ smsg SMSG_RAID_INSTANCE_MESSAGE = 0x02FA {
     Map map;    
     u32 time_left;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -5,7 +5,6 @@
 smsg SMSG_GMTICKET_DELETETICKET = 0x0218 {
     GmTicketResponse response;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

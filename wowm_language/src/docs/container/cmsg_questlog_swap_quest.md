@@ -6,7 +6,6 @@ cmsg CMSG_QUESTLOG_SWAP_QUEST = 0x0193 {
     u8 slot1;    
     u8 slot2;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

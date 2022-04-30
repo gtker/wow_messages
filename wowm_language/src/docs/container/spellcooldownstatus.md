@@ -6,7 +6,6 @@ struct SpellCooldownStatus {
     u32 id;    
     u32 cooldown_time_in_msecs;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

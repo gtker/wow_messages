@@ -5,7 +5,6 @@
 cmsg CMSG_BATTLEMASTER_HELLO = 0x02D7 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

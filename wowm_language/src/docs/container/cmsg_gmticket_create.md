@@ -16,7 +16,6 @@ cmsg CMSG_GMTICKET_CREATE = 0x0205 {
         u8[-] compressed_chat_data;        
     }    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

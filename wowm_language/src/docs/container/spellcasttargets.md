@@ -42,7 +42,6 @@ struct SpellCastTargets {
         PackedGuid corpse_target2;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

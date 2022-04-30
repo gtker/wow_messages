@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_PLAYER_SKINNED = 0x02BC {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

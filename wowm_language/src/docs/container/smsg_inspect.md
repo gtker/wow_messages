@@ -5,7 +5,6 @@
 smsg SMSG_INSPECT = 0x0115 {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

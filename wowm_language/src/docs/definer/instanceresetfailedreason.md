@@ -8,7 +8,6 @@ enum InstanceResetFailedReason : u8 {
     ZONING = 2;    
     SILENTLY = 3;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

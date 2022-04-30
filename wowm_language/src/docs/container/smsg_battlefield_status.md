@@ -22,7 +22,6 @@ smsg SMSG_BATTLEFIELD_STATUS = 0x02D4 {
         }        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

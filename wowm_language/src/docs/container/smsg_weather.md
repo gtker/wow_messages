@@ -8,7 +8,6 @@ smsg SMSG_WEATHER = 0x02F4 {
     u32 sound_id;    
     WeatherChangeType change;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

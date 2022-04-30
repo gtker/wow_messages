@@ -14,7 +14,6 @@ enum QuestFailedReason : u32 {
     QUEST_FAILED_MISSING_ITEMS = 20;    
     QUEST_FAILED_NOT_ENOUGH_MONEY = 22;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

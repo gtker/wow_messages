@@ -5,7 +5,6 @@
 cmsg CMSG_CANCEL_AURA = 0x0136 {
     u32 id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

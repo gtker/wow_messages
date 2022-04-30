@@ -7,7 +7,6 @@ smsg SMSG_AUCTION_LIST_RESULT = 0x025C {
     AuctionListItem[count] auctions;    
     u32 total_amount_of_auctions;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

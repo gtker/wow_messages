@@ -6,7 +6,6 @@ smsg SMSG_MAIL_LIST_RESULT = 0x023B {
     u8 amount_of_mails;    
     Mail[amount_of_mails] mails;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

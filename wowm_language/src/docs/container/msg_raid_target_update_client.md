@@ -8,7 +8,6 @@ cmsg MSG_RAID_TARGET_UPDATE_Client = 0x0321 {
         Guid target;        
     }    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

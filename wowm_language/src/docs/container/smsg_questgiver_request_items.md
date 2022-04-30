@@ -22,7 +22,6 @@ smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     u32 flags2;    
     u32 flags3;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

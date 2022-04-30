@@ -12,7 +12,6 @@ smsg SMSG_LOOT_ROLL_WON = 0x029F {
     u8 winning_roll;    
     RollVote vote;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

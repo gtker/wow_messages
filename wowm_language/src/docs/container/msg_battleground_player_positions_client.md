@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Client = 0x02E9 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

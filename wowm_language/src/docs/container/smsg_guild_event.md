@@ -7,7 +7,6 @@ smsg SMSG_GUILD_EVENT = 0x0092 {
     u8 amount_of_events;    
     CString[amount_of_events] event_descriptions;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

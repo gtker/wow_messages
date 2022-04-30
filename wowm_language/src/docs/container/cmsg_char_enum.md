@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_CHAR_ENUM = 0x0037 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

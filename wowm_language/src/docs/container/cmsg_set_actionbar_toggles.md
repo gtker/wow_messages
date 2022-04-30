@@ -5,7 +5,6 @@
 cmsg CMSG_SET_ACTIONBAR_TOGGLES = 0x02BF {
     u8 action_bar;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

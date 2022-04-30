@@ -6,7 +6,6 @@ cmsg CMSG_CHANNEL_KICK = 0x00A4 {
     CString channel_name;    
     CString player_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

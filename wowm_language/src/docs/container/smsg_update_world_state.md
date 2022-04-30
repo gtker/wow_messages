@@ -5,7 +5,6 @@
 smsg SMSG_UPDATE_WORLD_STATE = 0x02C3 {
     WorldState state;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

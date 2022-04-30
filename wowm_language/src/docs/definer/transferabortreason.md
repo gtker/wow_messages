@@ -9,7 +9,6 @@ enum TransferAbortReason : u8 {
     TOO_MANY_INSTANCES = 0x03;    
     ZONE_IS_IN_COMBAT = 0x05;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

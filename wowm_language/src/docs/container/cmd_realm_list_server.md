@@ -9,7 +9,6 @@ slogin CMD_REALM_LIST_Server = 0x10 {
     Realm[number_of_realms] realms;    
     u16 footer_padding = 0;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
@@ -30,7 +29,6 @@ slogin CMD_REALM_LIST_Server = 0x10 {
     Realm[number_of_realms] realms;    
     u16 footer_padding = 0;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

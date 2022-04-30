@@ -8,7 +8,6 @@ enum LogoutResult : u32 {
     FAILURE_FROZEN_BY_GM = 2;    
     FAILURE_JUMPING_OR_FALLING = 3;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

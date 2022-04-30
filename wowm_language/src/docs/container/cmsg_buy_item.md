@@ -8,7 +8,6 @@ cmsg CMSG_BUY_ITEM = 0x01A2 {
     u8 amount;    
     u8 unknown1;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -5,7 +5,6 @@
 msg MSG_MOVE_START_PITCH_UP = 0x00BF {
     MovementInfo info;    
 }
-
 ```
 ### Header
 MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 4 bytes if they are sent from the server (SMSG).

@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_CHAT_RESTRICTED = 0x02FD {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

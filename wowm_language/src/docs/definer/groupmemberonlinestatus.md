@@ -13,7 +13,6 @@ flag GroupMemberOnlineStatus : u8 {
     AFK = 0x0040;    
     DND = 0x0080;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

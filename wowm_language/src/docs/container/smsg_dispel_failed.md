@@ -7,7 +7,6 @@ smsg SMSG_DISPEL_FAILED = 0x0262 {
     Guid target_guid;    
     u32[-] spells;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

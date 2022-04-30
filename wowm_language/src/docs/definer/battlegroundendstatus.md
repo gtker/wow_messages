@@ -6,7 +6,6 @@ enum BattlegroundEndStatus : u8 {
     NOT_ENDED = 0;    
     ENDED = 1;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

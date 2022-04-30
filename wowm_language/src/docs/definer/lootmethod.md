@@ -12,7 +12,6 @@ enum LootMethod : u8 {
     FISHING_FAIL = 21;    
     INSIGNIA = 22;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

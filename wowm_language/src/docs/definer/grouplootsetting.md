@@ -9,7 +9,6 @@ enum GroupLootSetting : u8 {
     GROUP_LOOT = 3;    
     NEED_BEFORE_GREED = 4;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

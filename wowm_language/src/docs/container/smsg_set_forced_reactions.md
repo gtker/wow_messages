@@ -6,7 +6,6 @@ smsg SMSG_SET_FORCED_REACTIONS = 0x02A5 {
     u32 amount_of_reactions;    
     ForcedReaction[amount_of_reactions] reactions;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -48,7 +48,6 @@ enum Map : u32 {
     AHN_QIRAJ_TEMPLE = 531;    
     NAXXRAMAS = 533;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_NEW_TAXI_PATH = 0x01AF {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

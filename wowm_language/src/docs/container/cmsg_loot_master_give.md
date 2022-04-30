@@ -7,7 +7,6 @@ cmsg CMSG_LOOT_MASTER_GIVE = 0x02A3 {
     u8 slot_id;    
     Guid target_player_guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

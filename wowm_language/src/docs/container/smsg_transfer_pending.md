@@ -9,7 +9,6 @@ smsg SMSG_TRANSFER_PENDING = 0x003F {
         Map transport_map;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -7,7 +7,6 @@ smsg SMSG_QUEST_CONFIRM_ACCEPT = 0x019C {
     CString quest_title;    
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

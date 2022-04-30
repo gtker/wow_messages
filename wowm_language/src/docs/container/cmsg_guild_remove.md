@@ -5,7 +5,6 @@
 cmsg CMSG_GUILD_REMOVE = 0x008E {
     CString player_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

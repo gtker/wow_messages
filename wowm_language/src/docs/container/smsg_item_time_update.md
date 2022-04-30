@@ -6,7 +6,6 @@ smsg SMSG_ITEM_TIME_UPDATE = 0x01EA {
     Guid guid;    
     u32 duration;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

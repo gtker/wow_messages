@@ -5,7 +5,6 @@
 smsg SMSG_MOUNTSPECIAL_ANIM = 0x0172 {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

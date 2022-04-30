@@ -75,7 +75,6 @@ enum InventoryResult : u8 {
     TOO_MANY_SPECIAL_BAGS = 65;    
     LOOT_CANT_LOOT_THAT_NOW = 66;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

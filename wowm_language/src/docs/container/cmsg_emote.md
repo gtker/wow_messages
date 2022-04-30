@@ -5,7 +5,6 @@
 cmsg CMSG_EMOTE = 0x0102 {
     Emote emote;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -5,7 +5,6 @@
 smsg SMSG_NOTIFICATION = 0x01CB {
     CString notification;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

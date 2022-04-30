@@ -6,7 +6,6 @@ cmsg CMSG_CHANNEL_UNMUTE = 0x00A2 {
     CString channel_name;    
     CString player_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

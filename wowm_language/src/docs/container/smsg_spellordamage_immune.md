@@ -8,7 +8,6 @@ smsg SMSG_SPELLORDAMAGE_IMMUNE = 0x0263 {
     u32 id;    
     u8 unknown1;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

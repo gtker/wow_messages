@@ -5,7 +5,6 @@
 smsg SMSG_SPLINE_MOVE_NORMAL_FALL = 0x0306 {
     PackedGuid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

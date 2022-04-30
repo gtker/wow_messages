@@ -5,7 +5,6 @@
 smsg SMSG_SPLINE_MOVE_ROOT = 0x031A {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

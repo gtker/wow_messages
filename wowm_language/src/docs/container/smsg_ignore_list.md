@@ -6,7 +6,6 @@ smsg SMSG_IGNORE_LIST = 0x006B {
     u8 amount_of_ignored;    
     u64[amount_of_ignored] ignored;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

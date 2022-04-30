@@ -5,7 +5,6 @@
 smsg SMSG_GMTICKET_CREATE = 0x0206 {
     GmTicketResponse response;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -9,7 +9,6 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
         u32 hardware_survey_id;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
@@ -38,7 +37,6 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
         u16 padding = 0;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_GROUP_UNINVITE = 0x0077 {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -5,7 +5,6 @@
 smsg SMSG_INVALIDATE_PLAYER = 0x031C {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

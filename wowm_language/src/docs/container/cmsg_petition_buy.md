@@ -26,7 +26,6 @@ cmsg CMSG_PETITION_BUY = 0x01BD {
     u32 index;    
     u32 skip15;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

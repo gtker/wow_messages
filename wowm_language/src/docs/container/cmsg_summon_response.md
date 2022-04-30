@@ -5,7 +5,6 @@
 cmsg CMSG_SUMMON_RESPONSE = 0x02AC {
     Guid summoner_guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -6,7 +6,6 @@ enum FarSightOperation : u8 {
     REMOVE = 0;    
     ADD = 1;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

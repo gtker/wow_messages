@@ -5,7 +5,6 @@
 cmsg CMSG_CANCEL_CAST = 0x012F {
     u32 id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

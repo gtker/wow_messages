@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_RESET_INSTANCES = 0x031D {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -7,7 +7,6 @@ smsg SMSG_BUY_FAILED = 0x01A5 {
     u32 item_id;    
     BuyResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

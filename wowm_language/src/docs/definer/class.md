@@ -13,7 +13,6 @@ enum Class : u8 {
     WARLOCK = 9;    
     DRUID = 11;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

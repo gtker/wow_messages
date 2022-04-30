@@ -6,7 +6,6 @@ cmsg MSG_RANDOM_ROLL_Client = 0x01FB {
     u32 minimum;    
     u32 maximum;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

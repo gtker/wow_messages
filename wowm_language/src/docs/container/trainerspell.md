@@ -15,7 +15,6 @@ struct TrainerSpell {
     u32 spell_chain_previous;    
     u32 unknown1;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

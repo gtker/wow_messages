@@ -10,7 +10,6 @@ smsg SMSG_PAUSE_MIRROR_TIMER = 0x01DA {
     TimerType timer;    
     u8 is_frozen;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

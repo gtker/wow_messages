@@ -5,7 +5,6 @@
 msg MSG_PETITION_DECLINE = 0x01C2 {
     Guid petition;    
 }
-
 ```
 ### Header
 MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 4 bytes if they are sent from the server (SMSG).

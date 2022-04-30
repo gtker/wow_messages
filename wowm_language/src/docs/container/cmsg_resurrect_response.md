@@ -6,7 +6,6 @@ cmsg CMSG_RESURRECT_RESPONSE = 0x015C {
     Guid guid;    
     u8 status;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

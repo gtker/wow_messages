@@ -10,7 +10,6 @@ cmsg CMSG_DESTROYITEM = 0x0111 {
     u8 unknown2;    
     u8 unknown3;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

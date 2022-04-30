@@ -11,7 +11,6 @@ enum Power : u8 {
     MAX_POWERS = 5;    
     ALL = 127;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

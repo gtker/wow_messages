@@ -8,7 +8,6 @@ enum PlayerChatTag : u8 {
     DND = 2;    
     GM = 3;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

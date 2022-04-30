@@ -5,7 +5,6 @@
 smsg SMSG_READ_ITEM_FAILED = 0x00AF {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

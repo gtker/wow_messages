@@ -10,7 +10,6 @@ cmsg CMSG_WORLD_TELEPORT = 0x0008 {
     f32 position_z;    
     f32 orientation;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

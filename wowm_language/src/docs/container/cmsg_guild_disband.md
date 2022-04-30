@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_GUILD_DISBAND = 0x008F {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

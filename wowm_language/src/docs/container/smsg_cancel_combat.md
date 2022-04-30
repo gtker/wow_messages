@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_CANCEL_COMBAT = 0x014E {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

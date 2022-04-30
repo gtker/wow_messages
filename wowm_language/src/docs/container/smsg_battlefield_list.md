@@ -11,7 +11,6 @@ smsg SMSG_BATTLEFIELD_LIST = 0x023D {
     u32 number_of_battlegrounds;    
     u32[number_of_battlegrounds] battlegrounds;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

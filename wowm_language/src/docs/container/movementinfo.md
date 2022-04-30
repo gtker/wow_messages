@@ -26,7 +26,6 @@ struct MovementInfo {
         f32 spline_elevation;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

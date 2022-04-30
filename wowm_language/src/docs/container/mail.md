@@ -33,7 +33,6 @@ struct Mail {
     f32 expiration_time;    
     u32 mail_template_id;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

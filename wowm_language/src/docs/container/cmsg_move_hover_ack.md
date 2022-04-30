@@ -8,7 +8,6 @@ cmsg CMSG_MOVE_HOVER_ACK = 0x00F6 {
     MovementInfo movement_info;    
     u32 is_applied;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

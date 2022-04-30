@@ -6,7 +6,6 @@ cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {
     Map map;    
     BattlefieldPortAction action;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

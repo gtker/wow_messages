@@ -16,7 +16,6 @@ smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
     u32 hit_info;    
     u8 extend_flag;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -9,7 +9,6 @@ enum StableResult : u8 {
     SUCCESS_UNSTABLE = 0x09;    
     SUCCESS_BUY_SLOT = 0x0A;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

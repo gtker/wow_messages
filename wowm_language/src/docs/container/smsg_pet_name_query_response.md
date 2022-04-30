@@ -7,7 +7,6 @@ smsg SMSG_PET_NAME_QUERY_RESPONSE = 0x0053 {
     CString name;    
     u32 pet_name_timestamp;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

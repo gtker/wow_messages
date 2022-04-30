@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_GROUP_RAID_CONVERT = 0x028E {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

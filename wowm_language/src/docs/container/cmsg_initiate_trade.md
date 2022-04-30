@@ -5,7 +5,6 @@
 cmsg CMSG_INITIATE_TRADE = 0x0116 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

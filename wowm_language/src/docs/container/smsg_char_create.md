@@ -5,7 +5,6 @@
 smsg SMSG_CHAR_CREATE = 0x003A {
     WorldResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -6,7 +6,6 @@ smsg SMSG_EMOTE = 0x0103 {
     Emote emote;    
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

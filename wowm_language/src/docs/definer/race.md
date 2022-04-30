@@ -13,7 +13,6 @@ enum Race : u8 {
     TROLL = 8;    
     GOBLIN = 9;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

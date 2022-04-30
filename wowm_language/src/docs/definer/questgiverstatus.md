@@ -12,7 +12,6 @@ enum QuestGiverStatus : u8 {
     REWARD_OLD = 6;    
     REWARD2 = 7;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

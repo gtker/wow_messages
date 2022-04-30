@@ -15,7 +15,6 @@ cmsg CMSG_SEND_MAIL = 0x0238 {
     u32 unknown3;    
     u32 unknown4;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

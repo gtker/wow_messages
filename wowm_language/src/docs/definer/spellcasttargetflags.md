@@ -25,7 +25,6 @@ flag SpellCastTargetFlags : u16 {
     LOCKED = 0x00004000;    
     CORPSE_ALLY = 0x00008000;    
 }
-
 ```
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.

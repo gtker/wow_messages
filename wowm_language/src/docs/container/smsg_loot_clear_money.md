@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_LOOT_CLEAR_MONEY = 0x0165 {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

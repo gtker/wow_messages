@@ -5,7 +5,6 @@
 cmsg CMSG_LIST_INVENTORY = 0x019E {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

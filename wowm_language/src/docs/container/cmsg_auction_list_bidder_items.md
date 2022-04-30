@@ -8,7 +8,6 @@ cmsg CMSG_AUCTION_LIST_BIDDER_ITEMS = 0x0264 {
     u32 amount_of_outbidded_items;    
     u32[amount_of_outbidded_items] outbid_item_ids;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

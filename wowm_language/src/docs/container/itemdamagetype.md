@@ -7,7 +7,6 @@ struct ItemDamageType {
     u32 damage_maximum;    
     u32 damage_type;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

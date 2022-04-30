@@ -132,7 +132,6 @@ enum SpellEffect : u32 {
     UNKNOWN126 = 126;    
     UNKNOWN127 = 127;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

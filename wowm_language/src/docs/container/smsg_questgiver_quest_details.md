@@ -18,7 +18,6 @@ smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
     u32 amount_of_emotes;    
     QuestDetailsEmote[amount_of_emotes] emotes;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

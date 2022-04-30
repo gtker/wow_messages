@@ -18,7 +18,6 @@ struct AuctionListItem {
     Guid highest_bidder;    
     u32 highest_bid;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

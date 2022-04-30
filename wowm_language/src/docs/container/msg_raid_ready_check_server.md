@@ -8,7 +8,6 @@ smsg MSG_RAID_READY_CHECK_Server = 0x0322 {
         u8 state;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

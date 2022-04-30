@@ -5,7 +5,6 @@
 cmsg CMSG_CHAT_IGNORED = 0x0225 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -9,7 +9,6 @@ cmangos/vmangos/mangoszero: deliver undelivered mail
 smsg SMSG_RECEIVED_MAIL = 0x0285 {
     u32 unknown1;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

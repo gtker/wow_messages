@@ -5,7 +5,6 @@
 smsg SMSG_STOP_MIRROR_TIMER = 0x01DB {
     TimerType timer;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

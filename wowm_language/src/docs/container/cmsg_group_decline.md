@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_GROUP_DECLINE = 0x0073 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

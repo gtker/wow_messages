@@ -9,7 +9,6 @@ smsg SMSG_PERIODICAURALOG = 0x024E {
     u32 amount_of_auras;    
     AuraLog[amount_of_auras] auras;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

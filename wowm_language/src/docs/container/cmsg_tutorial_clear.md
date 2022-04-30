@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_TUTORIAL_CLEAR = 0x00FF {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

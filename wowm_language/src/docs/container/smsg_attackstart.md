@@ -6,7 +6,6 @@ smsg SMSG_ATTACKSTART = 0x0143 {
     Guid attacker_guid;    
     Guid victim_guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

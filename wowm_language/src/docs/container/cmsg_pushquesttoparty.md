@@ -5,7 +5,6 @@
 cmsg CMSG_PUSHQUESTTOPARTY = 0x019D {
     u32 quest_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

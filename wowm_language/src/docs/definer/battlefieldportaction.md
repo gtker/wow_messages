@@ -6,7 +6,6 @@ enum BattlefieldPortAction : u8 {
     LEAVE_QUEUE = 0;    
     ENTER_BATTLE = 1;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

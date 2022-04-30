@@ -5,7 +5,6 @@
 cmsg CMSG_AREATRIGGER = 0x00B4 {
     u32 trigger_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

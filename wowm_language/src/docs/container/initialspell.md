@@ -6,7 +6,6 @@ struct InitialSpell {
     u16 spell_id;    
     u16 unknown1;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

@@ -9,7 +9,6 @@ enum BgTypeId : u32 {
     QUEUED_FOR_AB = 3;    
     REMOVE_FROM_QUEUE = 0xFFFFFFFE;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

@@ -5,7 +5,6 @@
 cmsg CMSG_BINDER_ACTIVATE = 0x01B5 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

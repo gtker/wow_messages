@@ -5,7 +5,6 @@
 cmsg CMSG_FAR_SIGHT = 0x027A {
     FarSightOperation operation;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

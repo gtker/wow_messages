@@ -10,7 +10,6 @@ flag CharacterFlags : u32 {
     GHOST = 0x2000;    
     RENAME = 0x4000;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

@@ -15,7 +15,6 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
         u8[16] crc_salt;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
@@ -56,7 +55,6 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
         }        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
@@ -115,7 +113,6 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
         }        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

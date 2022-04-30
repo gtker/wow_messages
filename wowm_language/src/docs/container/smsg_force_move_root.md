@@ -6,7 +6,6 @@ smsg SMSG_FORCE_MOVE_ROOT = 0x00E8 {
     Guid guid;    
     u32 counter;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_LOGOUT_CANCEL_ACK = 0x004F {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

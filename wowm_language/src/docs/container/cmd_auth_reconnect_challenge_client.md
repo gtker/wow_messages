@@ -15,7 +15,6 @@ clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
     u8 account_name_length;    
     String[account_name_length] account_name;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

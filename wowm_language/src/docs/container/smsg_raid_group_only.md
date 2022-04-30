@@ -10,7 +10,6 @@ smsg SMSG_RAID_GROUP_ONLY = 0x0286 {
     u32 homebind_timer;    
     RaidGroupError error;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

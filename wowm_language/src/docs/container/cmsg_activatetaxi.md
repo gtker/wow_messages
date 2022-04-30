@@ -6,7 +6,6 @@ cmsg CMSG_ACTIVATETAXI = 0x01AD {
     Guid guid;    
     u32[2] nodes;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

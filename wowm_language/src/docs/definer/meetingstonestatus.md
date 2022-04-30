@@ -10,7 +10,6 @@ enum MeetingStoneStatus : u8 {
     LOOKING_FOR_NEW_PARTY_IN_QUEUE = 4;    
     NONE = 5;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

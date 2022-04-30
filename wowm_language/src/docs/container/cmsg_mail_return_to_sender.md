@@ -6,7 +6,6 @@ cmsg CMSG_MAIL_RETURN_TO_SENDER = 0x0248 {
     Guid mailbox_id;    
     u32 mail_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

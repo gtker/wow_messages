@@ -10,7 +10,6 @@ smsg SMSG_PLAY_OBJECT_SOUND = 0x0278 {
     u32 sound_id;    
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

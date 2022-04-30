@@ -5,7 +5,6 @@
 cmsg CMSG_GAMEOBJ_USE = 0x00B1 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

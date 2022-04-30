@@ -8,7 +8,6 @@ cmsg CMSG_MOVE_WATER_WALK_ACK = 0x02D0 {
     MovementInfo movement_info;    
     u32 apply;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

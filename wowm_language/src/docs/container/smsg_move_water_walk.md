@@ -6,7 +6,6 @@ smsg SMSG_MOVE_WATER_WALK = 0x00DE {
     PackedGuid guid;    
     u32 counter;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

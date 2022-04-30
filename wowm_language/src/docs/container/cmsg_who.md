@@ -14,7 +14,6 @@ cmsg CMSG_WHO = 0x0062 {
     u32 amount_of_strings;    
     CString[amount_of_strings] search_strings;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

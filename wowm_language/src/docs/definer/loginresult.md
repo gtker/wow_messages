@@ -20,7 +20,6 @@ enum LoginResult : u8 {
     SUCCESS_SURVEY = 0x0E;    
     FAIL_PARENTALCONTROL = 0x0F;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
@@ -66,7 +65,6 @@ enum LoginResult : u8 {
     FAIL_PARENTALCONTROL = 0x0F;    
     FAIL_LOCKED_ENFORCED = 0x10;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

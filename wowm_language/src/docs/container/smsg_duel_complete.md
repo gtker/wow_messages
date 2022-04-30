@@ -5,7 +5,6 @@
 smsg SMSG_DUEL_COMPLETE = 0x016A {
     u8 ended_without_interruption;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

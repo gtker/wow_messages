@@ -6,7 +6,6 @@ smsg SMSG_LOGIN_SETTIMESPEED = 0x0042 {
     u32 secs_to_time_bit_field;    
     f32 game_speed;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

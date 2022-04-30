@@ -17,7 +17,6 @@ enum ActivateTaxiReply : u32 {
     SAMENODE = 11;    
     NOTSTANDING = 12;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

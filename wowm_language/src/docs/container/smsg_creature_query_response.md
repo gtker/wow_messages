@@ -21,7 +21,6 @@ smsg SMSG_CREATURE_QUERY_RESPONSE = 0x0061 {
         u8 racial_leader;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

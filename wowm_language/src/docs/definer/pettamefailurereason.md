@@ -16,7 +16,6 @@ enum PetTameFailureReason : u8 {
     NOTDEAD = 11;    
     UNKNOWNERROR = 12;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

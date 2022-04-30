@@ -5,7 +5,6 @@
 smsg SMSG_CHAR_DELETE = 0x003C {
     WorldResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

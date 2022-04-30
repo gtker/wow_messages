@@ -5,7 +5,6 @@
 smsg SMSG_WHOIS = 0x0065 {
     CString message;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

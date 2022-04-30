@@ -10,7 +10,6 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x0051 {
     Gender gender;    
     Class class;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

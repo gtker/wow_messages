@@ -8,7 +8,6 @@ cmsg CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK = 0x02DD {
     MovementInfo movement_info;    
     f32 new_speed;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

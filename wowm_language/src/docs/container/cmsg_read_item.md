@@ -6,7 +6,6 @@ cmsg CMSG_READ_ITEM = 0x00AD {
     u8 bag_index;    
     u8 slot;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

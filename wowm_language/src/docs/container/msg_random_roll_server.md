@@ -8,7 +8,6 @@ smsg MSG_RANDOM_ROLL_Server = 0x01FB {
     u32 actual_roll;    
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

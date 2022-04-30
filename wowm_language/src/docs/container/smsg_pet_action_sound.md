@@ -6,7 +6,6 @@ smsg SMSG_PET_ACTION_SOUND = 0x0324 {
     Guid guid;    
     PetTalkReason reason;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

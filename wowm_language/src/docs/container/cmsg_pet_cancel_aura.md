@@ -6,7 +6,6 @@ cmsg CMSG_PET_CANCEL_AURA = 0x026B {
     Guid guid;    
     u32 id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

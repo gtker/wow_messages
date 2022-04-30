@@ -5,7 +5,6 @@
 smsg SMSG_GMTICKET_UPDATETEXT = 0x0208 {
     GmTicketResponse response;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

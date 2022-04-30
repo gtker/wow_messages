@@ -6,7 +6,6 @@ smsg SMSG_FORCE_MOVE_UNROOT = 0x00EA {
     Guid guid;    
     u32 counter;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

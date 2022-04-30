@@ -5,7 +5,6 @@
 cmsg CMSG_WHOIS = 0x0064 {
     CString character;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -5,7 +5,6 @@
 cmsg CMSG_QUESTLOG_REMOVE_QUEST = 0x0194 {
     u8 slot;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

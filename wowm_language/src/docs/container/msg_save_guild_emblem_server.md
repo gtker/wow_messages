@@ -5,7 +5,6 @@
 smsg MSG_SAVE_GUILD_EMBLEM_Server = 0x01F1 {
     GuildEmblemResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

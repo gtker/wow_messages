@@ -8,7 +8,6 @@ cmsg CMSG_USE_ITEM = 0x00AB {
     u8 spell_index;    
     SpellCastTargets targets;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

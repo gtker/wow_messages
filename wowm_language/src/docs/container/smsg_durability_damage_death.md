@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_DURABILITY_DAMAGE_DEATH = 0x02BD {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

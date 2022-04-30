@@ -6,7 +6,6 @@ cmsg CMSG_PETITION_SIGN = 0x01C0 {
     Guid petition_guid;    
     u8 unknown1;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

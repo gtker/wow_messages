@@ -5,7 +5,6 @@
 cmsg CMSG_AUTOSTORE_LOOT_ITEM = 0x0108 {
     u8 item_slot;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -14,7 +14,6 @@ smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
         u8 read_by_gm;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

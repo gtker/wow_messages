@@ -28,7 +28,6 @@ enum TradeStatus : u32 {
     ONLY_CONJURED = 22;    
     NOT_ON_TAPLIST = 23;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

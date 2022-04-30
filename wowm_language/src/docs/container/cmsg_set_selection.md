@@ -5,7 +5,6 @@
 cmsg CMSG_SET_SELECTION = 0x013D {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

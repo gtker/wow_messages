@@ -11,7 +11,6 @@ smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x025E {
     u32 item_template;    
     u32 item_random_property_id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

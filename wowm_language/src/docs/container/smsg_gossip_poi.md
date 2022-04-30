@@ -10,7 +10,6 @@ smsg SMSG_GOSSIP_POI = 0x0224 {
     u32 data;    
     CString location_name;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

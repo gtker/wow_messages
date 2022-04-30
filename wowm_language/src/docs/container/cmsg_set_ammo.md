@@ -5,7 +5,6 @@
 cmsg CMSG_SET_AMMO = 0x0268 {
     u32 item;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

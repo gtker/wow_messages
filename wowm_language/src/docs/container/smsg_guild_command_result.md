@@ -7,7 +7,6 @@ smsg SMSG_GUILD_COMMAND_RESULT = 0x0093 {
     CString string;    
     GuildCommandResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

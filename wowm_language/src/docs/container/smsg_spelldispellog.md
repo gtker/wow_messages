@@ -8,7 +8,6 @@ smsg SMSG_SPELLDISPELLOG = 0x027B {
     u32 amount_of_spells;    
     u32[amount_of_spells] spells;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

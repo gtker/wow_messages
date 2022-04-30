@@ -10,7 +10,6 @@ smsg MSG_PVP_LOG_DATA_Server = 0x02E0 {
     u32 amount_of_players;    
     BattlegroundPlayer[amount_of_players] players;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

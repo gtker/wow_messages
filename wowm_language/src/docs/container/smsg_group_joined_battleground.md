@@ -5,7 +5,6 @@
 smsg SMSG_GROUP_JOINED_BATTLEGROUND = 0x02E8 {
     BgTypeId id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

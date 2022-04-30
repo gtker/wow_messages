@@ -4,7 +4,6 @@
 ```rust,ignore
 msg MSG_MOVE_WORLDPORT_ACK = 0x00DC {
 }
-
 ```
 ### Header
 MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 4 bytes if they are sent from the server (SMSG).

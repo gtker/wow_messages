@@ -6,7 +6,6 @@ smsg SMSG_MOVE_UNSET_HOVER = 0x00F5 {
     PackedGuid guid;    
     u32 counter;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

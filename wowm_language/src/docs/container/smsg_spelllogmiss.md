@@ -9,7 +9,6 @@ smsg SMSG_SPELLLOGMISS = 0x024B {
     u32 amount_of_targets;    
     SpellMiss[amount_of_targets] targets;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

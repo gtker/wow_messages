@@ -5,7 +5,6 @@
 smsg SMSG_QUESTUPDATE_COMPLETE = 0x0198 {
     u32 quest_id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

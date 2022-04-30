@@ -7,7 +7,6 @@ cmsg CMSG_GUILD_RANK = 0x0231 {
     u32 rights;    
     CString rank_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -6,7 +6,6 @@ smsg SMSG_QUESTGIVER_STATUS = 0x0183 {
     Guid guid;    
     QuestGiverStatus status;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

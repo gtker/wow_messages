@@ -12,7 +12,6 @@ struct BattlegroundPlayer {
     u32 amount_of_extra_fields;    
     u32[amount_of_extra_fields] fields;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

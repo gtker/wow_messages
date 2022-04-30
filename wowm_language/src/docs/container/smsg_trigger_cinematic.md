@@ -5,7 +5,6 @@
 smsg SMSG_TRIGGER_CINEMATIC = 0x00FA {
     CinematicSequenceId cinematic_sequence_id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

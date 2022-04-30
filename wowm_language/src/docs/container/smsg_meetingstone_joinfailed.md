@@ -5,7 +5,6 @@
 smsg SMSG_MEETINGSTONE_JOINFAILED = 0x02BB {
     MeetingStoneFailure reason;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

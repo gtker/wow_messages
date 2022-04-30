@@ -8,7 +8,6 @@ struct TelemetryKey {
     u8[4] unknown3;    
     u8[20] unknown4;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

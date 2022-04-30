@@ -6,7 +6,6 @@ cmsg CMSG_GAMEOBJECT_QUERY = 0x005E {
     u32 entry_id;    
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

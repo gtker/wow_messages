@@ -5,7 +5,6 @@
 smsg SMSG_PET_ACTION_FEEDBACK = 0x02C6 {
     PetFeedback feedback;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

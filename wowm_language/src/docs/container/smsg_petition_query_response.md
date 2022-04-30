@@ -21,7 +21,6 @@ smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     u32 todo_amount_of_signers;    
     u32 number_of_choices;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

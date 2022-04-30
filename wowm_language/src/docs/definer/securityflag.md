@@ -6,7 +6,6 @@ enum SecurityFlag : u8 {
     NONE = 0x0;    
     PIN = 0x1;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
@@ -25,7 +24,6 @@ flag SecurityFlag : u8 {
     UNKNOWN0 = 0x02;    
     AUTHENTICATOR = 0x04;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

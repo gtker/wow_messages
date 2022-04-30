@@ -5,7 +5,6 @@
 smsg SMSG_OPEN_CONTAINER = 0x0113 {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -7,7 +7,6 @@ cmsg CMSG_SET_TRADE_ITEM = 0x011D {
     u8 bag;    
     u8 slot;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

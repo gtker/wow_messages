@@ -49,7 +49,6 @@ struct SpellLog {
         Guid target5;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_GMTICKET_SYSTEMSTATUS = 0x021A {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -7,7 +7,6 @@ cmsg CMSG_AUCTION_PLACE_BID = 0x025A {
     u32 auction_id;    
     u32 price;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -10,7 +10,6 @@ smsg SMSG_GOSSIP_MESSAGE = 0x017D {
     u32 amount_of_quests;    
     QuestItem[amount_of_quests] quests;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

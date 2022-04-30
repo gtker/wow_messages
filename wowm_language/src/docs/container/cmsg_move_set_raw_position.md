@@ -12,7 +12,6 @@ cmsg CMSG_MOVE_SET_RAW_POSITION = 0x00E1 {
     f32 position_z;    
     f32 orientation;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

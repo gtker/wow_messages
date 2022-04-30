@@ -10,7 +10,6 @@ cmsg MSG_SAVE_GUILD_EMBLEM_Client = 0x01F1 {
     u32 border_color;    
     u32 background_color;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

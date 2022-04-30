@@ -6,7 +6,6 @@ struct Faction {
     u32 reputation_list_id;    
     u32 standing;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

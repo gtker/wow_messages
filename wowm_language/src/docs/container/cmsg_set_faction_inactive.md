@@ -6,7 +6,6 @@ cmsg CMSG_SET_FACTION_INACTIVE = 0x0317 {
     u32 reputation_list_id;    
     u8 inactive;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

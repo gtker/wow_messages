@@ -9,7 +9,6 @@ struct CooldownSpell {
     u32 cooldown_in_msecs;    
     u32 category_cooldown_in_msecs;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

@@ -9,7 +9,6 @@ slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
         u8[16] checksum_salt;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
@@ -33,7 +32,6 @@ slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
         u8[16] checksum_salt;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

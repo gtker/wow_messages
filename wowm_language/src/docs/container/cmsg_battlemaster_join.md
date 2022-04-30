@@ -8,7 +8,6 @@ cmsg CMSG_BATTLEMASTER_JOIN = 0x02EE {
     u32 instance_id;    
     u8 join_as_group;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

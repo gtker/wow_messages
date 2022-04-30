@@ -6,7 +6,6 @@ struct NpcTextUpdateEmote {
     u32 delay;    
     u32 emote;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

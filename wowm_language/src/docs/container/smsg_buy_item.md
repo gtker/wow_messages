@@ -8,7 +8,6 @@ smsg SMSG_BUY_ITEM = 0x01A4 {
     u32 amount_for_sale;    
     u32 amount_bought;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

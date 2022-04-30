@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_GUILD_ROSTER = 0x0089 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -9,7 +9,6 @@ smsg SMSG_TRAINER_LIST = 0x01B1 {
     TrainerSpell[amount_of_spells] spells;    
     CString greeting;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

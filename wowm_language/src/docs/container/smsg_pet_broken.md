@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_PET_BROKEN = 0x02AF {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

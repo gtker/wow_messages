@@ -27,7 +27,6 @@ flag GroupUpdateFlags : u32 {
     FLAG_PET_AURAS_2 = 0x00100000;    
     MODE_OFFLINE = 0x10000000;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

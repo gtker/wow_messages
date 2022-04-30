@@ -12,7 +12,6 @@ smsg SMSG_GUILD_QUERY_RESPONSE = 0x0055 {
     u32 border_color;    
     u32 background_color;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

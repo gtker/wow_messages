@@ -7,7 +7,6 @@ smsg SMSG_PET_CAST_FAILED = 0x0138 {
     u8 unknown1;    
     SpellCastResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

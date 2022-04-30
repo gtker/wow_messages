@@ -20,7 +20,6 @@ enum GuildCommandResult : u8 {
     GUILD_RANK_TOO_HIGH_S = 0x0D;    
     GUILD_RANK_TOO_LOW_S = 0x0E;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

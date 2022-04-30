@@ -6,7 +6,6 @@ cmsg CMSG_CREATURE_QUERY = 0x0060 {
     u32 creature;    
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -6,7 +6,6 @@ smsg SMSG_SPELLINSTAKILLLOG = 0x032F {
     Guid target_guid;    
     u32 spell;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

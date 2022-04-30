@@ -12,7 +12,6 @@ smsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Server = 0x02E9 {
     u32 amount_of_flag_carriers;    
     BattlegroundPlayerPosition[amount_of_flag_carriers] flag_carriers;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

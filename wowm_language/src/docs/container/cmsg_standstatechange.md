@@ -5,7 +5,6 @@
 cmsg CMSG_STANDSTATECHANGE = 0x0101 {
     UnitStandState animation_state;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

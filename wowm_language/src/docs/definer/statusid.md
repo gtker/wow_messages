@@ -9,7 +9,6 @@ enum StatusId : u8 {
     IN_PROGRESS = 3;    
     WAIT_LEAVE = 4;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

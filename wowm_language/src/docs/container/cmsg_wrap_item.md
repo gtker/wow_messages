@@ -8,7 +8,6 @@ cmsg CMSG_WRAP_ITEM = 0x01D3 {
     u8 item_bag_index;    
     u8 item_slot;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

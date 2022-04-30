@@ -5,7 +5,6 @@
 cmsg MSG_TALENT_WIPE_CONFIRM_Client = 0x02AA {
     Guid wiping_npc;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

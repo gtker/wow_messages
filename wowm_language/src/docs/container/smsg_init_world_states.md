@@ -8,7 +8,6 @@ smsg SMSG_INIT_WORLD_STATES = 0x02C2 {
     u16 amount_of_states;    
     WorldState[amount_of_states] states;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

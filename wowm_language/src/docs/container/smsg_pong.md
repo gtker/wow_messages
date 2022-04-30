@@ -5,7 +5,6 @@
 smsg SMSG_PONG = 0x01DD {
     u32 sequence_id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

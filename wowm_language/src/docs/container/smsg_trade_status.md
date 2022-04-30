@@ -17,7 +17,6 @@ smsg SMSG_TRADE_STATUS = 0x0120 {
         u8 slot;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

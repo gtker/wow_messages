@@ -26,7 +26,6 @@ struct AuraLog {
         f32 gain_multiplier;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

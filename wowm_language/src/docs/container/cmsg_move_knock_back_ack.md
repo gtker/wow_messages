@@ -7,7 +7,6 @@ cmsg CMSG_MOVE_KNOCK_BACK_ACK = 0x00F0 {
     u32 counter;    
     MovementInfo movement_info;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

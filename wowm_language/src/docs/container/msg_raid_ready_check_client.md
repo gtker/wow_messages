@@ -7,7 +7,6 @@ cmsg MSG_RAID_READY_CHECK_Client = 0x0322 {
         u8 state;        
     }    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

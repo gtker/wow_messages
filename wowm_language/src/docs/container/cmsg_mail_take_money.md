@@ -6,7 +6,6 @@ cmsg CMSG_MAIL_TAKE_MONEY = 0x0245 {
     Guid mailbox_guid;    
     u32 mail_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

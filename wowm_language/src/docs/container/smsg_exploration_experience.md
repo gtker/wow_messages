@@ -6,7 +6,6 @@ smsg SMSG_EXPLORATION_EXPERIENCE = 0x01F8 {
     Area area;    
     u32 experience;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

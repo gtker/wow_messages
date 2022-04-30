@@ -6,7 +6,6 @@ struct RaidTargetUpdate {
     RaidTargetIndex index;    
     Guid guid;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

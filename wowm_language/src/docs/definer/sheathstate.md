@@ -11,7 +11,6 @@ enum SheathState : u8 {
     MELEE = 1;    
     RANGED = 2;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

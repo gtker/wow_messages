@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_LOOT_MONEY = 0x015E {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -6,7 +6,6 @@ smsg SMSG_COOLDOWN_EVENT = 0x0135 {
     u32 id;    
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_ATTACKSWING_NOTSTANDING = 0x0147 {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

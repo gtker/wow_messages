@@ -6,7 +6,6 @@ smsg SMSG_LOOT_RESPONSE = 0x0160 {
     Guid guid;    
     LootMethod loot_method;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

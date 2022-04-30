@@ -8,7 +8,6 @@ smsg SMSG_PROCRESIST = 0x0260 {
     u32 id;    
     LogFormat log_format;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -6,7 +6,6 @@ cmsg CMSG_PET_NAME_QUERY = 0x0052 {
     u32 pet_number;    
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

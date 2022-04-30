@@ -15,7 +15,6 @@ smsg SMSG_RESISTLOG = 0x01D6 {
     u32 unknown4;    
     u32 unknown5;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

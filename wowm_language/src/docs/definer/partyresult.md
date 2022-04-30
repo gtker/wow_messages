@@ -13,7 +13,6 @@ enum PartyResult : u8 {
     PLAYER_WRONG_FACTION = 7;    
     IGNORING_YOU = 8;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

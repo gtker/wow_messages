@@ -7,7 +7,6 @@ smsg SMSG_SPELL_FAILURE = 0x0133 {
     u32 id;    
     SpellCastResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

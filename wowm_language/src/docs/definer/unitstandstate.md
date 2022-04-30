@@ -14,7 +14,6 @@ enum UnitStandState : u8 {
     KNEEL = 8;    
     CUSTOM = 9;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

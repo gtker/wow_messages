@@ -10,7 +10,6 @@ smsg SMSG_GUILD_INFO = 0x0088 {
     u32 amount_of_characters_in_guild;    
     u32 amount_of_accounts_in_guild;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -5,7 +5,6 @@
 cmsg CMSG_DUEL_ACCEPTED = 0x016C {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

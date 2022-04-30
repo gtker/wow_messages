@@ -10,7 +10,6 @@ flag RealmFlag : u8 {
     FORCE_GREEN_RECOMMENDED = 0x40;    
     FORCE_RED_FULL = 0x80;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
@@ -36,7 +35,6 @@ flag RealmFlag : u8 {
     FORCE_GREEN_RECOMMENDED = 0x40;    
     FORCE_RED_FULL = 0x80;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

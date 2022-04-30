@@ -20,7 +20,6 @@ enum ItemClass : u8 {
     RESERVED_4 = 14;    
     MISC = 15;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

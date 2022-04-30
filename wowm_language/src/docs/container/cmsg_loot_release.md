@@ -5,7 +5,6 @@
 cmsg CMSG_LOOT_RELEASE = 0x015F {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

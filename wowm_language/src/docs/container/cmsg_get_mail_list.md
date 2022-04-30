@@ -5,7 +5,6 @@
 cmsg CMSG_GET_MAIL_LIST = 0x023A {
     Guid mailbox_guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

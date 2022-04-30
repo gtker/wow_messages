@@ -14,7 +14,6 @@ smsg SMSG_GROUP_LIST = 0x007D {
         ItemQuality loot_threshold;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

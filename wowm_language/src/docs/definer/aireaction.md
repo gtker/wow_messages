@@ -9,7 +9,6 @@ enum AiReaction : u32 {
     AFRAID = 3;    
     DESTROY = 4;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

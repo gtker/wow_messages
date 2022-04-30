@@ -5,7 +5,6 @@
 cmsg CMSG_PAGE_TEXT_QUERY = 0x005A {
     u32 page_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

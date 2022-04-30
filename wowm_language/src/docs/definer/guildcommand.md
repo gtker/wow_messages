@@ -10,7 +10,6 @@ enum GuildCommand : u8 {
     UNKNOWN19 = 0x13;    
     UNKNOWN20 = 0x14;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

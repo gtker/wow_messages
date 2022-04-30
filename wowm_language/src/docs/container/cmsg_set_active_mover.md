@@ -5,7 +5,6 @@
 cmsg CMSG_SET_ACTIVE_MOVER = 0x026A {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -6,7 +6,6 @@ cmsg CMSG_AUTOEQUIP_ITEM_SLOT = 0x010F {
     Guid guid;    
     u8 destination_slot;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

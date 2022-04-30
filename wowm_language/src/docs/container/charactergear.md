@@ -6,7 +6,6 @@ struct CharacterGear {
     u32 equipment_display_id;    
     InventoryType inventory_type;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

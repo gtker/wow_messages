@@ -5,7 +5,6 @@
 cmsg CMSG_GUILD_PROMOTE = 0x008B {
     CString player_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

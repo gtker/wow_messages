@@ -5,7 +5,6 @@
 cmsg CMSG_SETSHEATHED = 0x01E0 {
     SheathState sheathed;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

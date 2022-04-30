@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_GOSSIP_COMPLETE = 0x017E {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

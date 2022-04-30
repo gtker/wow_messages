@@ -5,7 +5,6 @@
 cmsg CMSG_ATTACKSWING = 0x0141 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

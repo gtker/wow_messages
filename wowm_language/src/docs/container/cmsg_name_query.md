@@ -5,7 +5,6 @@
 cmsg CMSG_NAME_QUERY = 0x0050 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

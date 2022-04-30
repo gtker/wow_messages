@@ -6,7 +6,6 @@ cmsg CMSG_CHANNEL_UNMODERATOR = 0x00A0 {
     CString channel_name;    
     CString player_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

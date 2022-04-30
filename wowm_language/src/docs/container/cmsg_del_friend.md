@@ -5,7 +5,6 @@
 cmsg CMSG_DEL_FRIEND = 0x006A {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

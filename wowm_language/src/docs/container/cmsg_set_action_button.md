@@ -6,7 +6,6 @@ cmsg CMSG_SET_ACTION_BUTTON = 0x0128 {
     u8 button;    
     u32 action_type;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -7,7 +7,6 @@ struct QuestItemRequirement {
     u32 item_count;    
     u32 item_display_id;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

@@ -5,7 +5,6 @@
 cmsg CMSG_GUILD_MOTD = 0x0091 {
     CString message_of_the_day;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

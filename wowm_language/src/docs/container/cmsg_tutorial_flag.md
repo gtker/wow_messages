@@ -5,7 +5,6 @@
 cmsg CMSG_TUTORIAL_FLAG = 0x00FE {
     u32 tutorial_flag;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

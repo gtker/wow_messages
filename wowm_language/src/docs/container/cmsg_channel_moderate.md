@@ -5,7 +5,6 @@
 cmsg CMSG_CHANNEL_MODERATE = 0x00A8 {
     CString channel_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

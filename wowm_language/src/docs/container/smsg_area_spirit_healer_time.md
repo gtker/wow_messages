@@ -6,7 +6,6 @@ smsg SMSG_AREA_SPIRIT_HEALER_TIME = 0x02E4 {
     Guid guid;    
     u32 next_resurrect_time;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

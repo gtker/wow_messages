@@ -6,7 +6,6 @@ smsg SMSG_PLAY_SPELL_VISUAL = 0x01F3 {
     Guid guid;    
     u32 spell_art_kit;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

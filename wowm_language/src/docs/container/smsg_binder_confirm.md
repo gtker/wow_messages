@@ -5,7 +5,6 @@
 smsg SMSG_BINDER_CONFIRM = 0x02EB {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

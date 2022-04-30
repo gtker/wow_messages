@@ -5,7 +5,6 @@
 smsg SMSG_BATTLEGROUND_PLAYER_LEFT = 0x02ED {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

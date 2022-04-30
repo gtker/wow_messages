@@ -14,7 +14,6 @@ cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
     u32 auction_quality;    
     u8 usable;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -9,7 +9,6 @@ smsg SMSG_PET_MODE = 0x017A {
     u8 unknown1;    
     u8 pet_enabled;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

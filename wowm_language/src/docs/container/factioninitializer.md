@@ -6,7 +6,6 @@ struct FactionInitializer {
     FactionFlag flag;    
     u32 standing;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

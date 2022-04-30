@@ -9,7 +9,6 @@ smsg SMSG_SPELLENERGIZELOG = 0x0151 {
     PowerType power;    
     u32 damage;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

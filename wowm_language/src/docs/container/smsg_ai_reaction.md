@@ -6,7 +6,6 @@ smsg SMSG_AI_REACTION = 0x013C {
     Guid guid;    
     AiReaction reaction;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

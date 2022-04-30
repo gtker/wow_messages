@@ -62,7 +62,6 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 bag_family;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -6,7 +6,6 @@ smsg SMSG_SPELL_COOLDOWN = 0x0134 {
     Guid guid;    
     SpellCooldownStatus[-] cooldowns;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

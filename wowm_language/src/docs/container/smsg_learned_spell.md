@@ -5,7 +5,6 @@
 smsg SMSG_LEARNED_SPELL = 0x012B {
     u32 id;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -7,7 +7,6 @@ msg MSG_MOVE_TELEPORT_ACK = 0x00C7 {
     u32 movement_counter;    
     u32 time_in_msecs;    
 }
-
 ```
 ### Header
 MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 4 bytes if they are sent from the server (SMSG).

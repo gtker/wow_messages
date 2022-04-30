@@ -6,7 +6,6 @@ cmsg CMSG_SWAP_INV_ITEM = 0x010D {
     u8 source_slot;    
     u8 destination_slot;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_BEGIN_TRADE = 0x0117 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

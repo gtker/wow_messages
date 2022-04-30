@@ -14,7 +14,6 @@ smsg SMSG_SPELL_START = 0x0131 {
         u32 ammo_inventory_type;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

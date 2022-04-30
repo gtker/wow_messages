@@ -5,7 +5,6 @@
 smsg SMSG_PET_TAME_FAILURE = 0x0173 {
     PetTameFailureReason reason;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

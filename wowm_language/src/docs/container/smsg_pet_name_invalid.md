@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_PET_NAME_INVALID = 0x0178 {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

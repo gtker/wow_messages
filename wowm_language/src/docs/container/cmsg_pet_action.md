@@ -7,7 +7,6 @@ cmsg CMSG_PET_ACTION = 0x0175 {
     u32 data;    
     Guid target_guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

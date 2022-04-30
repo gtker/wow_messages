@@ -5,7 +5,6 @@
 cmsg CMSG_REQUEST_PARTY_MEMBER_STATS = 0x027F {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -5,7 +5,6 @@
 cmsg CMSG_GUILD_LEADER = 0x0090 {
     CString new_guild_leader_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

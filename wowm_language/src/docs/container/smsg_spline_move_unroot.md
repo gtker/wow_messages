@@ -5,7 +5,6 @@
 smsg SMSG_SPLINE_MOVE_UNROOT = 0x0304 {
     PackedGuid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

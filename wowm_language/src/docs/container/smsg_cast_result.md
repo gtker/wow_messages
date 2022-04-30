@@ -20,7 +20,6 @@ smsg SMSG_CAST_RESULT = 0x0130 {
         }        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

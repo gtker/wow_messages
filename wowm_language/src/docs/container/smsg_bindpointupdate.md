@@ -12,7 +12,6 @@ smsg SMSG_BINDPOINTUPDATE = 0x0155 {
     Map map;    
     Area area;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

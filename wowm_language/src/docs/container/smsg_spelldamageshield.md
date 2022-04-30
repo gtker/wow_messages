@@ -8,7 +8,6 @@ smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
     u32 damage;    
     SpellSchool school;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

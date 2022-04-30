@@ -5,7 +5,6 @@
 smsg SMSG_DESTROY_OBJECT = 0x00AA {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

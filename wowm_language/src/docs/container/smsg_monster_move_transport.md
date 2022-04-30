@@ -10,7 +10,6 @@ smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
     u32 spline_id;    
     MonsterMoveType move_type;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

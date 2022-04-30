@@ -5,7 +5,6 @@
 cmsg CMSG_MOVE_FALL_RESET = 0x02CA {
     MovementInfo info;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

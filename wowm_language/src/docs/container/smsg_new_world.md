@@ -8,7 +8,6 @@ smsg SMSG_NEW_WORLD = 0x003E {
     f32 position_z;    
     f32 orientation;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

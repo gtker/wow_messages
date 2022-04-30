@@ -7,7 +7,6 @@ smsg SMSG_PVP_CREDIT = 0x028C {
     Guid victim;    
     PvpRank rank;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

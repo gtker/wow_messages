@@ -14,7 +14,6 @@ flag CastFlags : u16 {
     UNKNOWN8 = 0x00000080;    
     UNKNOWN9 = 0x00000100;    
 }
-
 ```
 ### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.

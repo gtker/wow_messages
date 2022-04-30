@@ -6,7 +6,6 @@ struct ItemStat {
     u32 item_stat_type;    
     u32 item_stat_value;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

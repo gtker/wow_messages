@@ -5,7 +5,6 @@
 smsg SMSG_GROUP_INVITE = 0x006F {
     CString name;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

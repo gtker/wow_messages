@@ -6,7 +6,6 @@ smsg SMSG_CHANNEL_NOTIFY = 0x0099 {
     ChatNotify notify_type;    
     CString channel_name;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

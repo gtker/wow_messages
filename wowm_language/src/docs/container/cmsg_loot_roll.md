@@ -7,7 +7,6 @@ cmsg CMSG_LOOT_ROLL = 0x02A0 {
     u32 item_slot;    
     RollVote vote;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

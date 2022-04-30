@@ -5,7 +5,6 @@
 smsg SMSG_SET_REST_START = 0x021E {
     u32 unknown1;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

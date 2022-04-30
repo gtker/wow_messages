@@ -8,7 +8,6 @@ enum PetFeedback : u8 {
     CANT_ATTACK_TARGET = 3;    
     NO_PATH_TO = 4;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

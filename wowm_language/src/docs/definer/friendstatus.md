@@ -9,7 +9,6 @@ enum FriendStatus : u8 {
     UNKNOWN3 = 3;    
     DND = 4;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

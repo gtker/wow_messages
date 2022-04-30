@@ -6,7 +6,6 @@ struct WorldState {
     u32 state;    
     u32 value;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_REPOP_REQUEST = 0x015A {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

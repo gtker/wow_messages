@@ -31,7 +31,6 @@ enum FriendResult : u8 {
     UNKNOWN19 = 0x19;    
     UNKNOWN20 = 0x1A;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

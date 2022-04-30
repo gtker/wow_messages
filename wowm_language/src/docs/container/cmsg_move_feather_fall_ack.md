@@ -8,7 +8,6 @@ cmsg CMSG_MOVE_FEATHER_FALL_ACK = 0x02CF {
     MovementInfo movement_info;    
     u32 apply;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

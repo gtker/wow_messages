@@ -8,7 +8,6 @@ struct QuestObjective {
     u32 required_item_id;    
     u32 required_item_count;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

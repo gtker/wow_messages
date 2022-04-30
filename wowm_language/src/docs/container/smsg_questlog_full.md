@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_QUESTLOG_FULL = 0x0195 {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

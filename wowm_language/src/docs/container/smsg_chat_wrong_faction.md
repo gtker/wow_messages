@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_CHAT_WRONG_FACTION = 0x0219 {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

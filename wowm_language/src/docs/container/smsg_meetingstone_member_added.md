@@ -5,7 +5,6 @@
 smsg SMSG_MEETINGSTONE_MEMBER_ADDED = 0x0299 {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

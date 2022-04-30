@@ -14,7 +14,6 @@ smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     u32 item_random_property_id;    
     u32 item_count;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

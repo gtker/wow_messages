@@ -11,7 +11,6 @@ cmsg CMSG_TOGGLE_PVP = 0x0253 {
         u8 enable_pvp;        
     }    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

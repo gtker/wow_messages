@@ -9,7 +9,6 @@ smsg SMSG_TEXT_EMOTE = 0x0105 {
     u32 name_length;    
     CString name;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

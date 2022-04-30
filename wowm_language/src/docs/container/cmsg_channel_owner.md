@@ -5,7 +5,6 @@
 cmsg CMSG_CHANNEL_OWNER = 0x009E {
     CString channel_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

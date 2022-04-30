@@ -6,7 +6,6 @@ cmsg CMSG_AUCTION_LIST_OWNER_ITEMS = 0x0259 {
     Guid auctioneer_guid;    
     u32 list_from;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

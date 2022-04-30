@@ -5,7 +5,6 @@
 cmsg CMSG_ADD_FRIEND = 0x0069 {
     CString friend_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

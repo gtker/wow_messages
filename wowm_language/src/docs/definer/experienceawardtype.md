@@ -6,7 +6,6 @@ enum ExperienceAwardType : u8 {
     KILL = 0;    
     NON_KILL = 1;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

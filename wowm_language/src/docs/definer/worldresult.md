@@ -86,7 +86,6 @@ enum WorldResult : u32 {
     CHAR_NAME_SUCCESS = 0x50;    
     CHAR_NAME_FAILURE = 0x51;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

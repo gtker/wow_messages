@@ -6,7 +6,6 @@ smsg SMSG_LOGOUT_RESPONSE = 0x004C {
     LogoutResult reason;    
     LogoutSpeed speed;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

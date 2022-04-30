@@ -7,7 +7,6 @@ cmsg CMSG_FORCE_MOVE_ROOT_ACK = 0x00E9 {
     u32 movement_counter;    
     MovementInfo movement_info;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

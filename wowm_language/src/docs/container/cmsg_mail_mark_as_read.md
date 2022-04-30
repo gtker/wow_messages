@@ -6,7 +6,6 @@ cmsg CMSG_MAIL_MARK_AS_READ = 0x0247 {
     Guid mailbox_guid;    
     u32 mail_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

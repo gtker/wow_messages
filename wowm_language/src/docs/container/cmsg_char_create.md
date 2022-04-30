@@ -14,7 +14,6 @@ cmsg CMSG_CHAR_CREATE = 0x0036 {
     u8 facialhair;    
     u8 outfit_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

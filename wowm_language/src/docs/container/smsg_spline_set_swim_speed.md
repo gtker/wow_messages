@@ -6,7 +6,6 @@ smsg SMSG_SPLINE_SET_SWIM_SPEED = 0x0300 {
     PackedGuid guid;    
     f32 speed;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

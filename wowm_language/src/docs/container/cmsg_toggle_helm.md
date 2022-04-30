@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_TOGGLE_HELM = 0x02B9 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

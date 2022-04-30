@@ -5,7 +5,6 @@
 smsg SMSG_QUESTGIVER_QUEST_INVALID = 0x018F {
     QuestFailedReason msg;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

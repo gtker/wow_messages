@@ -5,7 +5,6 @@
 smsg SMSG_UPDATE_LAST_INSTANCE = 0x0320 {
     Map map;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

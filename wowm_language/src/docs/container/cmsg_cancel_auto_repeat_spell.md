@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_CANCEL_AUTO_REPEAT_SPELL = 0x026D {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

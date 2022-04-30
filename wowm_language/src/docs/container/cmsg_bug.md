@@ -9,7 +9,6 @@ cmsg CMSG_BUG = 0x01CA {
     u32 type_length;    
     CString bug_type;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

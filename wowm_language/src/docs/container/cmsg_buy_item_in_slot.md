@@ -9,7 +9,6 @@ cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
     u8 bag_slot;    
     u8 amount;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

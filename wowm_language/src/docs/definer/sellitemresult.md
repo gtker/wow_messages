@@ -10,7 +10,6 @@ enum SellItemResult : u8 {
     UNK = 5;    
     ONLY_EMPTY_BAG = 6;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

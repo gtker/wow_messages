@@ -5,7 +5,6 @@
 cmsg CMSG_ACCEPT_TRADE = 0x011A {
     u32 unknown1;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

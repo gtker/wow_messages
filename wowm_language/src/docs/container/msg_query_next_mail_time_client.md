@@ -8,7 +8,6 @@ mangoszero/vmangos: No idea when this is called.
 ```rust,ignore
 cmsg MSG_QUERY_NEXT_MAIL_TIME_Client = 0x0284 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

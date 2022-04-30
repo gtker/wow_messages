@@ -7,7 +7,6 @@ smsg SMSG_PARTY_COMMAND_RESULT = 0x007F {
     CString member;    
     PartyResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

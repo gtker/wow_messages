@@ -61,7 +61,6 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
         AuraMask pet_auras;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

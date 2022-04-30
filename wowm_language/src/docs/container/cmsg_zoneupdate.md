@@ -5,7 +5,6 @@
 cmsg CMSG_ZONEUPDATE = 0x01F4 {
     u32 zone_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

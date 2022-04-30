@@ -5,7 +5,6 @@
 cmsg CMSG_STABLE_PET = 0x0270 {
     Guid npc_guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

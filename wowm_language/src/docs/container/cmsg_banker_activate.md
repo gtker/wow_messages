@@ -5,7 +5,6 @@
 cmsg CMSG_BANKER_ACTIVATE = 0x01B7 {
     Guid guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

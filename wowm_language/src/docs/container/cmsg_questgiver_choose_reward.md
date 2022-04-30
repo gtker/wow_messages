@@ -7,7 +7,6 @@ cmsg CMSG_QUESTGIVER_CHOOSE_REWARD = 0x018E {
     u32 quest_id;    
     u32 reward;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

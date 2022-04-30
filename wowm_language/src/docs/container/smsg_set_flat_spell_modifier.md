@@ -7,7 +7,6 @@ smsg SMSG_SET_FLAT_SPELL_MODIFIER = 0x0266 {
     u8 op;    
     u32 value;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -7,7 +7,6 @@ struct BattlegroundPlayerPosition {
     f32 position_x;    
     f32 position_y;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

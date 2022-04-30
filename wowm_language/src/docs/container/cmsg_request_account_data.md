@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_REQUEST_ACCOUNT_DATA = 0x020A {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

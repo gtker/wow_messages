@@ -7,7 +7,6 @@ cmsg CMSG_ACTIVATETAXIEXPRESS = 0x0312 {
     u32 total_cost;    
     u32 node_count;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

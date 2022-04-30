@@ -5,7 +5,6 @@
 smsg SMSG_SPLINE_MOVE_SET_RUN_MODE = 0x030D {
     PackedGuid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

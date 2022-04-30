@@ -29,7 +29,6 @@ struct Character {
     u32 first_bag_display_id = 0;    
     u8 first_bag_inventory_id = 0;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

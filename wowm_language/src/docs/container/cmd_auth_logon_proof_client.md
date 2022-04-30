@@ -9,7 +9,6 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     u8 number_of_telemetry_keys;    
     TelemetryKey[number_of_telemetry_keys] telemetry_keys;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
@@ -35,7 +34,6 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
         u8[20] pin_hash;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
@@ -79,7 +77,6 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
         u8 unknown5;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

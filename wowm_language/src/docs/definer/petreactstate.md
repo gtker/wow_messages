@@ -7,7 +7,6 @@ enum PetReactState : u8 {
     DEFENSIVE = 1;    
     AGGRESSIVE = 2;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

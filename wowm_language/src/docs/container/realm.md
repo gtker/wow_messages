@@ -12,7 +12,6 @@ struct Realm {
     RealmCategory category;    
     u8 realm_id;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
@@ -43,7 +42,6 @@ struct Realm {
         Version version;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

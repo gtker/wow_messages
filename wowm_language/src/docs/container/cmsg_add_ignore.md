@@ -5,7 +5,6 @@
 cmsg CMSG_ADD_IGNORE = 0x006C {
     CString ignore_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

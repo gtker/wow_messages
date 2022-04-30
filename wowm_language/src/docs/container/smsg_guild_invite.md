@@ -6,7 +6,6 @@ smsg SMSG_GUILD_INVITE = 0x0083 {
     CString player_name;    
     CString guild_name;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

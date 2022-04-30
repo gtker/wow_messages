@@ -5,7 +5,6 @@
 cmsg CMSG_BUY_STABLE_SLOT = 0x0272 {
     Guid npc_guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

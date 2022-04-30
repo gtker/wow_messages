@@ -8,7 +8,6 @@ smsg SMSG_PETITION_SHOW_SIGNATURES = 0x01BF {
     Guid petition_guid;    
     u8 amount_of_signatures;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

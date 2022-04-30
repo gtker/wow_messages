@@ -6,7 +6,6 @@ cmsg CMSG_JOIN_CHANNEL = 0x0097 {
     CString channel_name;    
     CString channel_password;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

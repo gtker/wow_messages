@@ -8,7 +8,6 @@ enum RaidInstanceMessage : u32 {
     WARNING_MIN_SOON = 3;    
     WELCOME = 4;    
 }
-
 ```
 ### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.

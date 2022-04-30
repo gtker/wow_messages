@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg MSG_LOOKING_FOR_GROUP_Client = 0x01FF {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

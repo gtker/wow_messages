@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_MEETINGSTONE_INFO = 0x0296 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

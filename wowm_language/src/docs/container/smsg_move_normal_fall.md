@@ -6,7 +6,6 @@ smsg SMSG_MOVE_NORMAL_FALL = 0x00F3 {
     PackedGuid guid;    
     u32 counter;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -7,7 +7,6 @@ cmsg CMSG_PET_SPELL_AUTOCAST = 0x02F3 {
     u32 id;    
     u8 enabled;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -11,7 +11,6 @@ struct Friend {
         Class class;        
     }    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

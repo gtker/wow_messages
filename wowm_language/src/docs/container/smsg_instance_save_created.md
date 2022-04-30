@@ -5,7 +5,6 @@
 smsg SMSG_INSTANCE_SAVE_CREATED = 0x02CB {
     u32 unknown;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg MSG_CORPSE_QUERY_Client = 0x0216 {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

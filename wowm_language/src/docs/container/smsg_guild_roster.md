@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_GUILD_ROSTER = 0x008A {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

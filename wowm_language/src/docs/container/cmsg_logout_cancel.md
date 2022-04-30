@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_LOGOUT_CANCEL = 0x004E {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

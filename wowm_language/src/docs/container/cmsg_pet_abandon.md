@@ -5,7 +5,6 @@
 cmsg CMSG_PET_ABANDON = 0x0176 {
     Guid pet_guid;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

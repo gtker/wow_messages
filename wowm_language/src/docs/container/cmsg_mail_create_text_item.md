@@ -7,7 +7,6 @@ cmsg CMSG_MAIL_CREATE_TEXT_ITEM = 0x024A {
     u32 mail_id;    
     u32 mail_template_id;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

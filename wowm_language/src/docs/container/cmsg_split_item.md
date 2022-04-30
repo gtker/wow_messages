@@ -9,7 +9,6 @@ cmsg CMSG_SPLIT_ITEM = 0x010E {
     u8 destination_slot;    
     u8 amount;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

@@ -5,7 +5,6 @@
 smsg SMSG_GAMEOBJECT_PAGETEXT = 0x01DF {
     Guid guid;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

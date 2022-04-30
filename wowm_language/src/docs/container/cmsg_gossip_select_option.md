@@ -9,7 +9,6 @@ cmsg CMSG_GOSSIP_SELECT_OPTION = 0x017C {
         CString code;        
     }    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

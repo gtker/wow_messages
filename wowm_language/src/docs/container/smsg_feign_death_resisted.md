@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_FEIGN_DEATH_RESISTED = 0x02B4 {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -18,7 +18,6 @@ smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     u32 reward_spell;    
     u32 reward_spell_cast;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

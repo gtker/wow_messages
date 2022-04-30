@@ -13,7 +13,6 @@ smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
     u32 spell;    
     u8 unknown1;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

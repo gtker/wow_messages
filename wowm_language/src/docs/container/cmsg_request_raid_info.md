@@ -4,7 +4,6 @@
 ```rust,ignore
 cmsg CMSG_REQUEST_RAID_INFO = 0x02CD {
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

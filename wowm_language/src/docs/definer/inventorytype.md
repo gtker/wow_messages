@@ -32,7 +32,6 @@ enum InventoryType : u8 {
     RANGED_RIGHT = 26;    
     QUIVER = 27;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

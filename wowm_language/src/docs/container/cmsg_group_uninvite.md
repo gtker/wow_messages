@@ -5,7 +5,6 @@
 cmsg CMSG_GROUP_UNINVITE = 0x0075 {
     CString name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

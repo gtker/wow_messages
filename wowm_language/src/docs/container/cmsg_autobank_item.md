@@ -6,7 +6,6 @@ cmsg CMSG_AUTOBANK_ITEM = 0x0283 {
     u8 bag_index;    
     u8 slot_index;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

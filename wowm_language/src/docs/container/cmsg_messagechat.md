@@ -29,7 +29,6 @@ cmsg CMSG_MESSAGECHAT = 0x0095 {
         CString channel_message;        
     }    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

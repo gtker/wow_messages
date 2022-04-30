@@ -12,7 +12,6 @@ smsg MSG_CORPSE_QUERY_Server = 0x0216 {
         Map corpse_map;        
     }    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

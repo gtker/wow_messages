@@ -8,7 +8,6 @@ Notify a looting player that an item has been taken.
 smsg SMSG_LOOT_REMOVED = 0x0162 {
     u8 slot;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -6,7 +6,6 @@ struct QuestItemReward {
     u32 item;    
     u32 item_count;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

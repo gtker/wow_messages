@@ -6,7 +6,6 @@ cmsg CMSG_CHANNEL_UNBAN = 0x00A6 {
     CString channel_name;    
     CString player_name;    
 }
-
 ```
 ### Header
 CMSG have a header of 6 bytes.

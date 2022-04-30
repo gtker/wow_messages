@@ -11,7 +11,6 @@ flag FactionFlag : u8 {
     INACTIVE = 0x20;    
     RIVAL = 0x40;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.

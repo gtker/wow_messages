@@ -10,7 +10,6 @@ smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
     u32 amount_of_item_rewards;    
     QuestItemReward[amount_of_item_rewards] item_rewards;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -6,7 +6,6 @@ struct GmSurveyQuestion {
     u32 question_id;    
     u8 answer;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

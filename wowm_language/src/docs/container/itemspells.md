@@ -10,7 +10,6 @@ struct ItemSpells {
     u32 spell_category;    
     u32 spell_category_cooldown;    
 }
-
 ```
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |

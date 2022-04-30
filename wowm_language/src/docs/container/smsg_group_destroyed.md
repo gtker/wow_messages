@@ -4,7 +4,6 @@
 ```rust,ignore
 smsg SMSG_GROUP_DESTROYED = 0x007C {
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

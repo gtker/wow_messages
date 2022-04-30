@@ -6,7 +6,6 @@ smsg SMSG_PET_UNLEARN_CONFIRM = 0x02F1 {
     Guid pet_guid;    
     u32 talent_reset_cost;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

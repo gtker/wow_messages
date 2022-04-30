@@ -9,7 +9,6 @@ smsg SMSG_ENVIRONMENTALDAMAGELOG = 0x01FC {
     u32 absorb;    
     u32 resist;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

@@ -6,7 +6,6 @@ smsg SMSG_TAXINODE_STATUS = 0x01AB {
     Guid guid;    
     u8 taxi_mask_node_known;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

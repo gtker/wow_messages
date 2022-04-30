@@ -7,7 +7,6 @@ smsg SMSG_PETITION_SIGN_RESULTS = 0x01C1 {
     Guid owner_guid;    
     PetitionResult result;    
 }
-
 ```
 ### Header
 SMSG have a header of 4 bytes.

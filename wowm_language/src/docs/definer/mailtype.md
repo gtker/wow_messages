@@ -9,7 +9,6 @@ enum MailType : u8 {
     GAMEOBJECT = 4;    
     ITEM = 5;    
 }
-
 ```
 ### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
