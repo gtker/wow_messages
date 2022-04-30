@@ -1,5 +1,11 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, ReadableAndWritable, MaximumPossibleSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use crate::AsyncReadWrite;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum InventoryType {
@@ -45,6 +51,19 @@ impl ReadableAndWritable for InventoryType {
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.as_u8().to_le_bytes())?;
         Ok(())
+    }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for InventoryType {
+    type Error = InventoryTypeError;
+
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        let a = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(a.try_into()?)
     }
 
 }

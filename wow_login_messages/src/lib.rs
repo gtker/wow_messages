@@ -131,17 +131,21 @@ pub trait MaximumPossibleSized {
 pub trait AsyncReadWrite: Sized + Unpin {
     type Error;
 
+    /*
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>;
     #[cfg(feature = "async_std")]
     async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W)
         -> Result<(), std::io::Error>;
+        */
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>;
+    /*
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
         &self,
         w: &mut W,
     ) -> Result<(), std::io::Error>;
+    */
 }

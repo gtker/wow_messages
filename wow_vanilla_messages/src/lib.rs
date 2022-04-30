@@ -19,6 +19,12 @@ pub use helper::aura_mask::AuraMask;
 pub use helper::guid::Guid;
 pub use helper::update_mask::UpdateMask;
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+
+
 const DEFAULT_PORT: u16 = 8085;
 
 pub trait ReadableAndWritable: Sized {
@@ -88,4 +94,28 @@ pub trait WorldMessage: Sized {
         w: &mut W,
         e: &mut E,
     ) -> std::result::Result<(), std::io::Error>;
+}
+
+#[async_trait]
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+pub trait AsyncReadWrite: Sized + Unpin {
+    type Error;
+
+    /*
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>;
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W)
+        -> Result<(), std::io::Error>;
+        */
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>;
+    /*
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
+        &self,
+        w: &mut W,
+    ) -> Result<(), std::io::Error>;
+    */
 }

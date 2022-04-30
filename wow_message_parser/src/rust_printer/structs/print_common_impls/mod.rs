@@ -3,11 +3,12 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, IntegerType};
 use crate::rust_printer::{
-    Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
+    ImplType, Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
     WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
 use crate::CSTRING_LARGEST_ALLOWED;
 
+pub mod print_async;
 pub mod print_read;
 pub mod print_write;
 
@@ -22,22 +23,27 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         ContainerType::Struct | ContainerType::CLogin(_) | ContainerType::SLogin(_) => {
             s.impl_read_and_writable_with_error(
                 e.name(),
-                error_ty,
+                &error_ty,
                 |s| {
-                    print_read::print_read(s, e, o);
+                    print_read::print_read(s, e, o, ImplType::Std);
+                    print_async::print_async_read(s, e, o);
                 },
                 |s| {
                     print_write::print_unencrypted_write_header(s, e);
                     print_write::print_write(s, e, o);
                 },
             );
+
+            if !e.tags().logon_versions().is_empty() {
+                print_async::print_async(s, e, o, &error_ty);
+            }
         }
         ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
             s.impl_world_read_and_writable_with_error(
                 e.name(),
                 error_ty,
                 |s| {
-                    print_read::print_read(s, e, o);
+                    print_read::print_read(s, e, o, ImplType::Std);
                 },
                 |s| {
                     print_write::print_write(s, e, o);

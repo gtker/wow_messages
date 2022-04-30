@@ -1,10 +1,4 @@
-pub mod complex_print;
-mod enums;
-mod flags;
-pub mod new_enums;
-mod opcodes;
-pub mod rust_view;
-mod structs;
+use std::fmt::Write;
 
 pub use enums::print_enum;
 pub use flags::print_flag;
@@ -13,7 +7,14 @@ pub use opcodes::print_world_opcodes;
 pub use structs::print_struct;
 
 use crate::file_info::FileInfo;
-use std::fmt::Write;
+
+pub mod complex_print;
+mod enums;
+mod flags;
+pub mod new_enums;
+mod opcodes;
+pub mod rust_view;
+mod structs;
 
 #[derive(Debug)]
 pub struct Writer {
@@ -34,6 +35,15 @@ pub const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "WorldServerOpcodeMessage";
 pub const WORLD_BODY_TRAIT_NAME: &str = "WorldMessageBody";
 pub const WORLD_CLIENT_HEADER_TRAIT_NAME: &str = "WorldClientMessageWrite";
 pub const WORLD_SERVER_HEADER_TRAIT_NAME: &str = "WorldServerMessageWrite";
+
+pub const ASYNC_TRAIT: &str = "AsyncReadWrite";
+pub const ASYNC_TRAIT_MACRO: &str = "#[async_trait]";
+pub const ASYNC_TRAIT_IMPORT: &str = "use async_trait::async_trait;";
+
+pub const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
+
+const CFG_ASYNC_ANY: &str = "#[cfg(any(feature = \"async_tokio\", feature = \"async_std\"))]";
+const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"async_tokio\")]";
 
 impl Writer {
     pub(crate) const INDENTATION: &'static str = "    ";
@@ -498,4 +508,11 @@ impl Writer {
     pub fn imports(&self) -> &str {
         self.imports.as_str()
     }
+}
+
+#[derive(Debug, Clone, Copy)]
+pub enum ImplType {
+    Std,
+    Tokio,
+    AsyncStd,
 }

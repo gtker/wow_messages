@@ -1,5 +1,11 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct FactionFlag {
     inner: u8,
@@ -27,6 +33,15 @@ impl ReadableAndWritable for FactionFlag {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for FactionFlag {
+    type Error = std::io::Error;
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        let inner = crate::util::tokio_read_u8_le(r).await?;
+        Ok(Self { inner })
+    }
+}
 impl FactionFlag {
     pub const VISIBLE: u8 = 0x01;
     pub const AT_WAR: u8 = 0x02;

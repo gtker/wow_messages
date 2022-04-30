@@ -4,6 +4,12 @@ use crate::logon::version_2::{RealmCategory, RealmCategoryError};
 use crate::logon::version_2::{RealmFlag};
 use crate::logon::version_2::{RealmType, RealmTypeError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Realm {
@@ -93,6 +99,50 @@ impl ReadableAndWritable for Realm {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for Realm {
+    type Error = RealmError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // realm_type: RealmType
+        let realm_type = RealmType::tokio_read(r).await?;
+
+        // flag: RealmFlag
+        let flag = RealmFlag::tokio_read(r).await?;
+
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // address: CString
+        let address = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let address = String::from_utf8(address)?;
+
+        // population: Population
+        let population = Population::tokio_read(r).await?;
+
+        // number_of_characters_on_realm: u8
+        let number_of_characters_on_realm = crate::util::tokio_read_u8_le(r).await?;
+
+        // category: RealmCategory
+        let category = RealmCategory::tokio_read(r).await?;
+
+        // realm_id: u8
+        let realm_id = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            realm_type,
+            flag,
+            name,
+            address,
+            population,
+            number_of_characters_on_realm,
+            category,
+            realm_id,
+        })
+    }
+}
 impl VariableSized for Realm {
     fn size(&self) -> usize {
         RealmType::size() // realm_type: RealmType

@@ -1,7 +1,10 @@
 use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
 use crate::rust_printer::enums::print_wowm_definition;
-use crate::rust_printer::Writer;
+use crate::rust_printer::{
+    Writer, ASYNC_TRAIT, ASYNC_TRAIT_IMPORT, ASYNC_TRAIT_MACRO, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO,
+    TOKIO_IMPORT,
+};
 use crate::UTILITY_PATH;
 
 pub fn print_flag(e: &Definer) -> Writer {
@@ -18,6 +21,14 @@ pub fn print_flag(e: &Definer) -> Writer {
 
 fn includes(s: &mut Writer) {
     s.wln("use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};\n");
+
+    s.wln(CFG_ASYNC_ANY);
+    s.wln(ASYNC_TRAIT_IMPORT);
+    s.wln(CFG_ASYNC_TOKIO);
+    s.wln(TOKIO_IMPORT);
+
+    s.wln(CFG_ASYNC_ANY);
+    s.wln(format!("use crate::{};", ASYNC_TRAIT))
 }
 
 fn declaration(s: &mut Writer, e: &Definer) {
@@ -58,6 +69,22 @@ fn common_impls(s: &mut Writer, e: &Definer) {
             s.wln("Ok(())");
         },
     );
+
+    s.wln(CFG_ASYNC_ANY);
+    s.wln(ASYNC_TRAIT_MACRO);
+    s.body(format!("impl {} for {}", ASYNC_TRAIT, e.name()), |s| {
+        s.wln("type Error = std::io::Error;");
+
+        s.body("async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>", |s| {
+            s.wln(format!(
+                "let inner = {module}::tokio_read_{ty}_{endian}(r).await?;",
+                module = UTILITY_PATH,
+                ty = e.ty().rust_str(),
+                endian = e.ty().rust_endian_str()
+            ));
+            s.wln("Ok(Self { inner })");
+        });
+    });
 
     s.bodyn(format!("impl {name}", name = e.name()), |s| {
         print_fields(s, e);

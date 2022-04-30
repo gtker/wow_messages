@@ -1,6 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_XFER_DATA {
@@ -45,6 +51,26 @@ impl ReadableAndWritable for CMD_XFER_DATA {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for CMD_XFER_DATA {
+    type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // size: u16
+        let size = crate::util::tokio_read_u16_le(r).await?;
+
+        // data: u8[size]
+        let mut data = Vec::with_capacity(size as usize);
+        for i in 0..size {
+            data.push(crate::util::tokio_read_u8_le(r).await?);
+        }
+
+        Ok(Self {
+            data,
+        })
+    }
+}
 impl VariableSized for CMD_XFER_DATA {
     fn size(&self) -> usize {
         2 // size: u16

@@ -1,5 +1,11 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct MovementFlags {
     inner: u32,
@@ -27,6 +33,15 @@ impl ReadableAndWritable for MovementFlags {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for MovementFlags {
+    type Error = std::io::Error;
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        let inner = crate::util::tokio_read_u32_le(r).await?;
+        Ok(Self { inner })
+    }
+}
 impl MovementFlags {
     pub const NONE: u32 = 0x00;
     pub const FORWARD: u32 = 0x01;

@@ -1,5 +1,11 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct CharacterFlags {
     inner: u32,
@@ -27,6 +33,15 @@ impl ReadableAndWritable for CharacterFlags {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for CharacterFlags {
+    type Error = std::io::Error;
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        let inner = crate::util::tokio_read_u32_le(r).await?;
+        Ok(Self { inner })
+    }
+}
 impl CharacterFlags {
     pub const NONE: u32 = 0x00;
     pub const LOCKED_FOR_TRANSFER: u32 = 0x04;

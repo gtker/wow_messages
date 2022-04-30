@@ -3,6 +3,12 @@ use crate::logon::version_8::{AccountFlag};
 use crate::logon::version_8::{LoginResult, LoginResultError};
 use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Server {
@@ -313,6 +319,172 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for CMD_AUTH_LOGON_PROOF_Server {
+    type Error = CMD_AUTH_LOGON_PROOF_ServerError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // login_result: LoginResult
+        let login_result = LoginResult::tokio_read(r).await?;
+
+        let login_result_if = match login_result {
+            LoginResult::SUCCESS => {
+                // server_proof: u8[20]
+                let mut server_proof = [0_u8; 20];
+                r.read_exact(&mut server_proof).await?;
+
+                // account_flag: AccountFlag
+                let account_flag = AccountFlag::tokio_read(r).await?;
+
+                // hardware_survey_id: u32
+                let hardware_survey_id = crate::util::tokio_read_u32_le(r).await?;
+
+                // unknown_flags: u16
+                let unknown_flags = crate::util::tokio_read_u16_le(r).await?;
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+                    server_proof,
+                    account_flag,
+                    hardware_survey_id,
+                    unknown_flags,
+                }
+            }
+            LoginResult::FAIL_UNKNOWN0 => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
+                }
+            }
+            LoginResult::FAIL_UNKNOWN1 => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
+                }
+            }
+            LoginResult::FAIL_BANNED => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
+                }
+            }
+            LoginResult::FAIL_UNKNOWN_ACCOUNT => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
+                }
+            }
+            LoginResult::FAIL_INCORRECT_PASSWORD => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
+                }
+            }
+            LoginResult::FAIL_ALREADY_ONLINE => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
+                }
+            }
+            LoginResult::FAIL_NO_TIME => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
+                }
+            }
+            LoginResult::FAIL_DB_BUSY => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
+                }
+            }
+            LoginResult::FAIL_VERSION_INVALID => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
+                }
+            }
+            LoginResult::LOGIN_DOWNLOAD_FILE => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
+                }
+            }
+            LoginResult::FAIL_INVALID_SERVER => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
+                }
+            }
+            LoginResult::FAIL_SUSPENDED => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
+                }
+            }
+            LoginResult::FAIL_NO_ACCESS => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
+                }
+            }
+            LoginResult::SUCCESS_SURVEY => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
+                }
+            }
+            LoginResult::FAIL_PARENTALCONTROL => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
+                }
+            }
+            LoginResult::FAIL_LOCKED_ENFORCED => {
+                // padding: u16
+                let _padding = crate::util::tokio_read_u16_le(r).await?;
+                // padding is expected to always be 0 (0)
+
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
+                }
+            }
+        };
+
+        Ok(Self {
+            login_result: login_result_if,
+        })
+    }
+}
 impl VariableSized for CMD_AUTH_LOGON_PROOF_Server {
     fn size(&self) -> usize {
         self.login_result.size() // login_result: LoginResult and subfields

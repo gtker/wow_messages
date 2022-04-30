@@ -3,6 +3,12 @@ use crate::logon::version_8::{LoginResult, LoginResultError};
 use crate::logon::version_8::{SecurityFlag};
 use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -245,6 +251,147 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for CMD_AUTH_LOGON_CHALLENGE_Server {
+    type Error = CMD_AUTH_LOGON_CHALLENGE_ServerError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // protocol_version: u8
+        let _protocol_version = crate::util::tokio_read_u8_le(r).await?;
+        // protocol_version is expected to always be 0 (0)
+
+        // login_result: LoginResult
+        let login_result = LoginResult::tokio_read(r).await?;
+
+        let login_result_if = match login_result {
+            LoginResult::SUCCESS => {
+                // server_public_key: u8[32]
+                let mut server_public_key = [0_u8; 32];
+                r.read_exact(&mut server_public_key).await?;
+
+                // generator_length: u8
+                let generator_length = crate::util::tokio_read_u8_le(r).await?;
+
+                // generator: u8[generator_length]
+                let mut generator = Vec::with_capacity(generator_length as usize);
+                for i in 0..generator_length {
+                    generator.push(crate::util::tokio_read_u8_le(r).await?);
+                }
+
+                // large_safe_prime_length: u8
+                let large_safe_prime_length = crate::util::tokio_read_u8_le(r).await?;
+
+                // large_safe_prime: u8[large_safe_prime_length]
+                let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
+                for i in 0..large_safe_prime_length {
+                    large_safe_prime.push(crate::util::tokio_read_u8_le(r).await?);
+                }
+
+                // salt: u8[32]
+                let mut salt = [0_u8; 32];
+                r.read_exact(&mut salt).await?;
+
+                // crc_salt: u8[16]
+                let mut crc_salt = [0_u8; 16];
+                r.read_exact(&mut crc_salt).await?;
+
+                // security_flag: SecurityFlag
+                let security_flag = SecurityFlag::tokio_read(r).await?;
+
+                let security_flag_PIN = if security_flag.is_PIN() {
+                    // pin_grid_seed: u32
+                    let pin_grid_seed = crate::util::tokio_read_u32_le(r).await?;
+
+                    // pin_salt: u8[16]
+                    let mut pin_salt = [0_u8; 16];
+                    r.read_exact(&mut pin_salt).await?;
+
+                    Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
+                        pin_grid_seed,
+                        pin_salt,
+                    })
+                } else {
+                    None
+                };
+
+                let security_flag_UNKNOWN0 = if security_flag.is_UNKNOWN0() {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+
+                    // unknown1: u8
+                    let unknown1 = crate::util::tokio_read_u8_le(r).await?;
+
+                    // unknown2: u8
+                    let unknown2 = crate::util::tokio_read_u8_le(r).await?;
+
+                    // unknown3: u8
+                    let unknown3 = crate::util::tokio_read_u8_le(r).await?;
+
+                    // unknown4: u64
+                    let unknown4 = crate::util::tokio_read_u64_le(r).await?;
+
+                    Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+                        unknown0,
+                        unknown1,
+                        unknown2,
+                        unknown3,
+                        unknown4,
+                    })
+                } else {
+                    None
+                };
+
+                let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
+                    // unknown5: u8
+                    let unknown5 = crate::util::tokio_read_u8_le(r).await?;
+
+                    Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+                        unknown5,
+                    })
+                } else {
+                    None
+                };
+
+                let security_flag = CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
+                    inner: security_flag.as_u8(),
+                    pin: security_flag_PIN,
+                    unknown0: security_flag_UNKNOWN0,
+                    authenticator: security_flag_AUTHENTICATOR,
+                };
+
+                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+                    server_public_key,
+                    generator,
+                    large_safe_prime,
+                    salt,
+                    crc_salt,
+                    security_flag,
+                }
+            }
+            LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
+            LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1,
+            LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED,
+            LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
+            LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+            LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE,
+            LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME,
+            LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY,
+            LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID,
+            LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
+            LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER,
+            LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED,
+            LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS,
+            LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY,
+            LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL,
+            LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_LOCKED_ENFORCED,
+        };
+
+        Ok(Self {
+            login_result: login_result_if,
+        })
+    }
+}
 impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_Server {
     fn size(&self) -> usize {
         1 // protocol_version: u8

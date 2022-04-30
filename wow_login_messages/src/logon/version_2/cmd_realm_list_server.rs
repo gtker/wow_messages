@@ -2,6 +2,12 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::{Realm, RealmError};
 use crate::ServerMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_REALM_LIST_Server {
@@ -74,6 +80,38 @@ impl ReadableAndWritable for CMD_REALM_LIST_Server {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for CMD_REALM_LIST_Server {
+    type Error = CMD_REALM_LIST_ServerError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // size: u16
+        let _size = crate::util::tokio_read_u16_le(r).await?;
+        // size is expected to always be self.size (0)
+
+        // header_padding: u32
+        let _header_padding = crate::util::tokio_read_u32_le(r).await?;
+        // header_padding is expected to always be 0 (0)
+
+        // number_of_realms: u8
+        let number_of_realms = crate::util::tokio_read_u8_le(r).await?;
+
+        // realms: Realm[number_of_realms]
+        let mut realms = Vec::with_capacity(number_of_realms as usize);
+        for i in 0..number_of_realms {
+            realms.push(Realm::tokio_read(r).await?);
+        }
+
+        // footer_padding: u16
+        let _footer_padding = crate::util::tokio_read_u16_le(r).await?;
+        // footer_padding is expected to always be 0 (0)
+
+        Ok(Self {
+            realms,
+        })
+    }
+}
 impl VariableSized for CMD_REALM_LIST_Server {
     fn size(&self) -> usize {
         2 // size: u16

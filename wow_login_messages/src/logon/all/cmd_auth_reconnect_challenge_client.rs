@@ -5,6 +5,12 @@ use crate::logon::all::Platform;
 use crate::logon::all::Version;
 use crate::ClientMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_RECONNECT_CHALLENGE_Client {
@@ -120,6 +126,60 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for CMD_AUTH_RECONNECT_CHALLENGE_Client {
+    type Error = CMD_AUTH_RECONNECT_CHALLENGE_ClientError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // protocol_version: u8
+        let protocol_version = crate::util::tokio_read_u8_le(r).await?;
+
+        // size: u16
+        let _size = crate::util::tokio_read_u16_le(r).await?;
+        // size is expected to always be self.size (0)
+
+        // game_name: u32
+        let _game_name = crate::util::tokio_read_u32_le(r).await?;
+        // game_name is expected to always be "\0WoW" (5730135)
+
+        // version: Version
+        let version = Version::tokio_read(r).await?;
+
+        // platform: Platform
+        let platform = Platform::tokio_read(r).await?;
+
+        // os: Os
+        let os = Os::tokio_read(r).await?;
+
+        // locale: Locale
+        let locale = Locale::tokio_read(r).await?;
+
+        // utc_timezone_offset: u32
+        let utc_timezone_offset = crate::util::tokio_read_u32_le(r).await?;
+
+        // client_ip_address: u32_be
+        let client_ip_address = crate::util::tokio_read_u32_be(r).await?;
+
+        // account_name_length: u8
+        let account_name_length = crate::util::tokio_read_u8_le(r).await?;
+
+        // account_name: String[account_name_length]
+        let account_name = crate::util::tokio_read_fixed_string_to_vec(r, account_name_length as usize).await?;
+        let account_name = String::from_utf8(account_name)?;
+
+        Ok(Self {
+            protocol_version,
+            version,
+            platform,
+            os,
+            locale,
+            utc_timezone_offset,
+            client_ip_address,
+            account_name,
+        })
+    }
+}
 impl VariableSized for CMD_AUTH_RECONNECT_CHALLENGE_Client {
     fn size(&self) -> usize {
         1 // protocol_version: u8

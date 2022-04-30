@@ -1,6 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ClientMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_SURVEY_RESULT {
@@ -61,6 +67,34 @@ impl ReadableAndWritable for CMD_SURVEY_RESULT {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for CMD_SURVEY_RESULT {
+    type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // survey_id: u32
+        let survey_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // error: u8
+        let error = crate::util::tokio_read_u8_le(r).await?;
+
+        // compressed_data_length: u16
+        let compressed_data_length = crate::util::tokio_read_u16_le(r).await?;
+
+        // data: u8[compressed_data_length]
+        let mut data = Vec::with_capacity(compressed_data_length as usize);
+        for i in 0..compressed_data_length {
+            data.push(crate::util::tokio_read_u8_le(r).await?);
+        }
+
+        Ok(Self {
+            survey_id,
+            error,
+            data,
+        })
+    }
+}
 impl VariableSized for CMD_SURVEY_RESULT {
     fn size(&self) -> usize {
         4 // survey_id: u32

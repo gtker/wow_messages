@@ -4,7 +4,8 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, ObjectType};
 use crate::rust_printer::{
-    Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
+    Writer, ASYNC_TRAIT, ASYNC_TRAIT_IMPORT, ASYNC_TRAIT_MACRO, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO,
+    LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME, TOKIO_IMPORT,
     WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
 use crate::wowm_printer::get_struct_wowm_definition;
@@ -120,6 +121,20 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
         _ => {}
     }
     s.wln("use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};");
+
+    match e.container_type() {
+        ContainerType::Struct | ContainerType::CLogin(_) | ContainerType::SLogin(_) => {
+            if !e.tags().logon_versions().is_empty() {
+                s.wln(CFG_ASYNC_ANY);
+                s.wln(format!("use crate::{};", ASYNC_TRAIT));
+                s.wln(CFG_ASYNC_ANY);
+                s.wln(ASYNC_TRAIT_IMPORT);
+                s.wln(CFG_ASYNC_TOKIO);
+                s.wln(TOKIO_IMPORT);
+            }
+        }
+        _ => {}
+    }
 
     s.newline();
 }
