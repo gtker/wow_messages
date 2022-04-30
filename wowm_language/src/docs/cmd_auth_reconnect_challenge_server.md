@@ -21,6 +21,17 @@ If result is equal to `SUCCESS`:
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | ? / - | u8[16] | challenge_data |  |
 | - | ? / - | u8[16] | checksum_salt |  |
+### Examples
+```c
+2, // opcode (2)
+0, // result: LoginResult SUCCESS (0x00)
+UNIMPLEMENTED_DOC_IF
+```
+```c
+2, // opcode (2)
+3, // result: LoginResult FAIL_BANNED (0x03)
+UNIMPLEMENTED_DOC_IF
+```
 ## Protocol Version 8
 
 ### Wowm Representation
@@ -44,3 +55,14 @@ If result is equal to `SUCCESS`:
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | ? / - | u8[16] | challenge_data |  |
 | - | ? / - | u8[16] | checksum_salt |  |
+### Examples
+```c
+2, // opcode (2)
+0, // result: LoginResult SUCCESS (0x00)
+UNIMPLEMENTED_DOC_IF
+```
+```c
+2, // opcode (2)
+3, // result: LoginResult FAIL_BANNED (0x03)
+UNIMPLEMENTED_DOC_IF
+```

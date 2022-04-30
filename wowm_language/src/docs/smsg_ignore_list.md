@@ -20,3 +20,18 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 1 / - | u8 | amount_of_ignored |  |
 | 0x05 | ? / - | u64[amount_of_ignored] | ignored |  |
+### Examples
+```c
+0, 11, // size
+107, 0, // opcode (107)
+1, // amount_of_ignored: u8
+UNIMPLEMENTED_DOC_ARRAY
+// ignored: u64[amount_of_ignored]
+```
+```c
+0, 19, // size
+107, 0, // opcode (107)
+2, // amount_of_ignored: u8
+UNIMPLEMENTED_DOC_ARRAY
+// ignored: u64[amount_of_ignored]
+```

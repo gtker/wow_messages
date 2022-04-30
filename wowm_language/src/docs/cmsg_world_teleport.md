@@ -3,7 +3,7 @@
 ### Wowm Representation
 ```rust,ignore
 cmsg CMSG_WORLD_TELEPORT = 0x0008 {
-    Guid time_in_msec;
+    u64 time_in_msec;
     Map map;
     f32 position_x;
     f32 position_y;
@@ -22,9 +22,20 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | time_in_msec |  |
+| 0x06 | 8 / Little | u64 | time_in_msec |  |
 | 0x0E | ? / - | [Map](map.md) | map |  |
 | - | 4 / Little | f32 | position_x |  |
 | - | 4 / Little | f32 | position_y |  |
 | - | 4 / Little | f32 | position_z |  |
 | - | 4 / Little | f32 | orientation |  |
+### Examples
+```c
+0, 32, // size
+8, 0, 0, 0, // opcode (8)
+239, 190, 173, 222, 222, 202, 250, 0, // time_in_msec: u64
+1, 0, 0, 0, // map: Map KALIMDOR (1)
+0, 0, 128, 63, // position_x: f32
+0, 0, 0, 64, // position_y: f32
+0, 0, 64, 64, // position_z: f32
+0, 0, 128, 64, // orientation: f32
+```

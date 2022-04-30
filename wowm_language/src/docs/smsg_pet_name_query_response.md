@@ -22,3 +22,11 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | pet_number |  |
 | 0x08 | - / - | CString | name |  |
 | - | 4 / Little | u32 | pet_name_timestamp |  |
+### Examples
+```c
+0, 17, // size
+83, 0, // opcode (83)
+239, 190, 173, 222, // pet_number: u32
+65, 66, 67, 68, 69, 70, 0, // name: CString
+222, 202, 250, 0, // pet_name_timestamp: u32
+```

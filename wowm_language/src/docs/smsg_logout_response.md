@@ -20,3 +20,10 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | ? / - | [LogoutResult](logoutresult.md) | reason |  |
 | - | ? / - | [LogoutSpeed](logoutspeed.md) | speed |  |
+### Examples
+```c
+0, 7, // size
+76, 0, // opcode (76)
+0, 0, 0, 0, // reason: LogoutResult SUCCESS (0)
+1, // speed: LogoutSpeed INSTANT (1)
+```

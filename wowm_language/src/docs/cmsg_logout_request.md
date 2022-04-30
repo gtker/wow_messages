@@ -16,3 +16,8 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
+### Examples
+```c
+0, 4, // size
+75, 0, 0, 0, // opcode (75)
+```

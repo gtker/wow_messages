@@ -21,6 +21,12 @@ If login_result is equal to `SUCCESS`:
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | ? / - | u8[20] | server_proof |  |
 | - | 4 / Little | u32 | hardware_survey_id |  |
+### Examples
+```c
+1, // opcode (1)
+0, // login_result: LoginResult SUCCESS (0x00)
+UNIMPLEMENTED_DOC_IF
+```
 ## Protocol Version 8
 
 ### Wowm Representation
@@ -54,3 +60,14 @@ If login_result is equal to `SUCCESS`:
 
 Else: 
 | - | 2 / Little | u16 | padding |  |
+### Examples
+```c
+1, // opcode (1)
+7, // login_result: LoginResult FAIL_NO_TIME (0x07)
+UNIMPLEMENTED_DOC_IF
+```
+```c
+1, // opcode (1)
+8, // login_result: LoginResult FAIL_DB_BUSY (0x08)
+UNIMPLEMENTED_DOC_IF
+```

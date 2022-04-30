@@ -20,3 +20,10 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x06 | 4 / Little | u32 | sequence_id |  |
 | 0x0A | 4 / Little | u32 | round_time_in_ms |  |
+### Examples
+```c
+0, 12, // size
+220, 1, 0, 0, // opcode (476)
+239, 190, 173, 222, // sequence_id: u32
+222, 202, 250, 0, // round_time_in_ms: u32
+```

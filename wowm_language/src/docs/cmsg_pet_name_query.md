@@ -20,3 +20,10 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x06 | 4 / Little | u32 | pet_number |  |
 | 0x0A | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |
+### Examples
+```c
+0, 16, // size
+82, 0, 0, 0, // opcode (82)
+239, 190, 173, 222, // pet_number: u32
+239, 190, 173, 222, 222, 202, 250, 0, // guid: Guid
+```

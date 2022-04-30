@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::Guid;
 use crate::world::v1::v12::{Map, MapError};
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
@@ -14,7 +13,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
 pub struct CMSG_WORLD_TELEPORT {
-    pub time_in_msec: Guid,
+    pub time_in_msec: u64,
     pub map: Map,
     pub position_x: f32,
     pub position_y: f32,
@@ -46,8 +45,8 @@ impl WorldMessageBody for CMSG_WORLD_TELEPORT {
     type Error = CMSG_WORLD_TELEPORTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // time_in_msec: Guid
-        let time_in_msec = Guid::read(r)?;
+        // time_in_msec: u64
+        let time_in_msec = crate::util::read_u64_le(r)?;
 
         // map: Map
         let map = Map::read(r)?;
@@ -71,8 +70,8 @@ impl WorldMessageBody for CMSG_WORLD_TELEPORT {
     }
 
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // time_in_msec: Guid
-        self.time_in_msec.write(w)?;
+        // time_in_msec: u64
+        w.write_all(&self.time_in_msec.to_le_bytes())?;
 
         // map: Map
         self.map.write(w)?;
@@ -101,7 +100,7 @@ impl ConstantSized for CMSG_WORLD_TELEPORT {
 
 impl MaximumPossibleSized for CMSG_WORLD_TELEPORT {
     fn maximum_possible_size() -> usize {
-        8 // time_in_msec: Guid
+        8 // time_in_msec: u64
         + Map::size() // map: Map
         + 4 // position_x: f32
         + 4 // position_y: f32
@@ -158,7 +157,7 @@ mod test {
              0x80, 0x40, ];
 
         let expected = CMSG_WORLD_TELEPORT {
-            time_in_msec: Guid::new(0xFACADEDEADBEEF),
+            time_in_msec: 0xFACADEDEADBEEF,
             map: Map::KALIMDOR,
             position_x: 1.0,
             position_y: 2.0,

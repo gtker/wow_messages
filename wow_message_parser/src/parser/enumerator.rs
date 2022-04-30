@@ -149,4 +149,25 @@ impl Definer {
     pub fn has_tag(&self, tag: &str) -> bool {
         self.tags().contains(tag)
     }
+
+    pub fn get_field_with_value(&self, value: usize) -> Option<&DefinerField> {
+        let value = value as u64;
+        self.fields.iter().find(|a| a.value.int == value)
+    }
+
+    pub fn get_set_flag_fields(&self, value: usize) -> Vec<&DefinerField> {
+        let mut v = Vec::new();
+        let value = value as u64;
+
+        for f in self.fields() {
+            let val = f.value().int();
+            if val == 0 && value == 0 {
+                v.push(f);
+            } else if (value & f.value().int()) != 0 {
+                v.push(f);
+            }
+        }
+
+        v
+    }
 }

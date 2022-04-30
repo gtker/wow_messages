@@ -16,3 +16,14 @@ clogin CMD_AUTH_RECONNECT_PROOF_Client = 0x03 {
 | - | ? / - | u8[20] | client_proof |  |
 | - | ? / - | u8[20] | client_checksum |  |
 | - | 1 / - | u8 | key_count |  |
+### Examples
+```c
+3, // opcode (3)
+UNIMPLEMENTED_DOC_ARRAY
+// proof_data: u8[16]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// client_checksum: u8[20]
+234, // key_count: u8
+```

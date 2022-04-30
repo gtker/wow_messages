@@ -18,6 +18,43 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
 | - | ? / - | u8[20] | crc_hash |  |
 | - | 1 / - | u8 | number_of_telemetry_keys |  |
 | - | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |
+### Examples
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+```
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+```
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+```
 ## Protocol Version 3
 
 ### Wowm Representation
@@ -51,6 +88,63 @@ If security_flag is equal to `PIN`:
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | ? / - | u8[16] | pin_salt |  |
 | - | ? / - | u8[20] | pin_hash |  |
+### Examples
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+62, UNABLE TO FIND DEFINER VALUE PROBABLY FROM OTHER MISSING IMPLS
+UNIMPLEMENTED_DOC_IF
+```
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+62, UNABLE TO FIND DEFINER VALUE PROBABLY FROM OTHER MISSING IMPLS
+UNIMPLEMENTED_DOC_IF
+```
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+62, UNABLE TO FIND DEFINER VALUE PROBABLY FROM OTHER MISSING IMPLS
+UNIMPLEMENTED_DOC_IF
+```
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+62, UNABLE TO FIND DEFINER VALUE PROBABLY FROM OTHER MISSING IMPLS
+UNIMPLEMENTED_DOC_IF
+```
 ## Protocol Version 8
 
 ### Wowm Representation
@@ -110,3 +204,100 @@ If security_flag contains `AUTHENTICATOR`:
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | 1 / - | u8 | unknown5 |  |
+### Examples
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+62, // security_flag: SecurityFlag  UNKNOWN0| AUTHENTICATOR (62)
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+```
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+62, // security_flag: SecurityFlag  UNKNOWN0| AUTHENTICATOR (62)
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+```
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+62, // security_flag: SecurityFlag  UNKNOWN0| AUTHENTICATOR (62)
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+```
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+62, // security_flag: SecurityFlag  UNKNOWN0| AUTHENTICATOR (62)
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+```
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+62, // security_flag: SecurityFlag  UNKNOWN0| AUTHENTICATOR (62)
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+```
+```c
+1, // opcode (1)
+UNIMPLEMENTED_DOC_ARRAY
+// client_public_key: u8[32]
+UNIMPLEMENTED_DOC_ARRAY
+// client_proof: u8[20]
+UNIMPLEMENTED_DOC_ARRAY
+// crc_hash: u8[20]
+241, // number_of_telemetry_keys: u8
+UNIMPLEMENTED_DOC_ARRAY
+// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+62, // security_flag: SecurityFlag  UNKNOWN0| AUTHENTICATOR (62)
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+UNIMPLEMENTED_DOC_IF
+```

@@ -1,14 +1,18 @@
-use crate::container::{Container, Equation, IfStatement, StructMember};
+use crate::container::{Container, Equation, IfStatement, StructMember, StructMemberDefinition};
 use crate::file_utils::{create_or_append, write_string_to_file};
 use crate::parser::enumerator::Definer;
+use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArrayType, Endianness, IntegerType};
+use crate::parser::types::{ArrayType, Endianness, IntegerType, ObjectType};
 use crate::wowm_printer::{get_definer_wowm_definition, get_struct_wowm_definition};
 use crate::ContainerType;
+use std::collections::HashMap;
+use std::convert::TryInto;
 use std::fmt::Write;
 use std::fs::read_to_string;
 use std::path::Path;
+use std::slice::Iter;
 
 pub struct DocWriter {
     name: String,
@@ -42,6 +46,12 @@ impl DocWriter {
     pub fn wln(&mut self, s: impl AsRef<str>) {
         self.w(s);
         self.newline();
+    }
+
+    pub fn bytes<'a>(&mut self, bytes: impl Iterator<Item = &'a u8>) {
+        for b in bytes {
+            self.w(format!("{}, ", b));
+        }
     }
 }
 
@@ -188,7 +198,7 @@ pub fn print_docs_for_flag(e: &Definer) -> DocWriter {
     s
 }
 
-pub fn print_docs_for_container(e: &Container) -> DocWriter {
+pub fn print_docs_for_container(e: &Container, o: &Objects) -> DocWriter {
     let mut s = DocWriter::new(e.name());
 
     common(&mut s, e.tags());
@@ -201,7 +211,231 @@ pub fn print_docs_for_container(e: &Container) -> DocWriter {
     print_container_header(&mut s, e);
     print_container_body(&mut s, e);
 
+    print_container_examples(&mut s, e, o);
+
     s
+}
+
+fn get_integer_value(t: &IntegerType, value: &[u8]) -> usize {
+    match t {
+        IntegerType::U8 => value[0] as usize,
+        IntegerType::U16(e) => {
+            let value: [u8; 2] = value.try_into().unwrap();
+            match e {
+                Endianness::Little => u16::from_le_bytes(value) as usize,
+                Endianness::Big => u16::from_be_bytes(value) as usize,
+            }
+        }
+        IntegerType::U32(e) => {
+            let value: [u8; 4] = value.try_into().unwrap();
+            match e {
+                Endianness::Little => u32::from_le_bytes(value) as usize,
+                Endianness::Big => u32::from_be_bytes(value) as usize,
+            }
+        }
+        IntegerType::U64(e) => {
+            let value: [u8; 8] = value.try_into().unwrap();
+            match e {
+                Endianness::Little => u64::from_le_bytes(value) as usize,
+                Endianness::Big => u64::from_be_bytes(value) as usize,
+            }
+        }
+    }
+}
+
+fn print_container_example_definition(
+    s: &mut DocWriter,
+    d: &StructMemberDefinition,
+    bytes: &mut Iter<u8>,
+    values: &mut HashMap<String, usize>,
+    o: &Objects,
+    tags: &Tags,
+    prefix: &str,
+) {
+    let comment = if prefix != "" {
+        format!("// {}.{}: {}", prefix, d.name(), d.ty().str())
+    } else {
+        format!("// {}: {}", d.name(), d.ty().str())
+    };
+
+    match d.ty() {
+        Type::Integer(t) => {
+            let bytes = bytes.take(t.size() as usize).cloned().collect::<Vec<u8>>();
+
+            let value = bytes.clone();
+            let value = get_integer_value(t, value.as_slice());
+            values.insert(d.name().to_string(), value);
+
+            for b in bytes {
+                s.w(format!("{}, ", b));
+            }
+        }
+        Type::Guid => {
+            s.bytes(bytes.take(core::mem::size_of::<u64>()).into_iter());
+        }
+        Type::FloatingPoint(f) => {
+            s.bytes(bytes.take(f.size() as usize).into_iter());
+        }
+        Type::PackedGuid => {
+            let mask = bytes.next().unwrap();
+            let bytes = bytes.take(mask.count_ones() as _);
+            s.bytes(bytes.into_iter());
+        }
+        Type::CString => {
+            let mut b = bytes.next().unwrap();
+            while *b != 0 {
+                s.w(format!("{}, ", b));
+                b = bytes.next().unwrap();
+            }
+            s.w(format!("{}, ", b));
+        }
+        Type::String { length } => {
+            let length = if let Ok(length) = length.parse::<usize>() {
+                length
+            } else {
+                *values.get(length).unwrap()
+            };
+            s.bytes(bytes.take(length).into_iter());
+        }
+        Type::Array(_) => {
+            s.wln("UNIMPLEMENTED_DOC_ARRAY");
+        }
+        Type::Identifier {
+            s: identifier,
+            upcast,
+        } => {
+            let type_of = o.get_object_type_of(identifier, tags);
+            match type_of {
+                ObjectType::Struct => {
+                    let c = o.get_container(identifier, tags);
+
+                    for m in c.fields() {
+                        print_container_example_member(s, m, bytes, values, o, tags, c.name());
+                    }
+
+                    return;
+                }
+                ObjectType::Enum | ObjectType::Flag => {
+                    let e = o.get_definer(identifier, tags);
+                    let ty = if let Some(ty) = upcast { ty } else { e.ty() };
+
+                    let bytes = bytes.take(ty.size() as usize).cloned().collect::<Vec<u8>>();
+
+                    let value = get_integer_value(ty, bytes.as_slice());
+                    values.insert(d.name().to_string(), value);
+                    for b in bytes {
+                        s.w(format!("{}, ", b));
+                    }
+
+                    let c = if type_of == ObjectType::Enum {
+                        if let Some(value) = e.get_field_with_value(value) {
+                            let name = value.name();
+                            let value = value.value().original();
+                            format!("{} {} ({})", comment, name, value)
+                        } else {
+                            "UNABLE TO FIND DEFINER VALUE PROBABLY FROM OTHER MISSING IMPLS"
+                                .to_string()
+                        }
+                    } else if type_of == ObjectType::Flag {
+                        let values = e.get_set_flag_fields(value);
+                        let mut t = comment.to_string();
+                        t.push(' ');
+
+                        for (i, v) in values.iter().enumerate() {
+                            if i != 0 {
+                                t.push_str("| ");
+                            } else {
+                                t.push_str(" ");
+                            }
+                            t.push_str(v.name());
+                        }
+
+                        t.push_str(&format!(" ({})", value));
+                        t
+                    } else {
+                        panic!()
+                    };
+
+                    s.wln(c);
+                    return;
+                }
+                _ => panic!("unsupported"),
+            }
+        }
+        Type::UpdateMask => panic!("UpdateMask example"),
+        Type::AuraMask => panic!("AuraMask example"),
+    }
+    s.wln(comment);
+}
+
+fn print_container_example_member(
+    s: &mut DocWriter,
+    m: &StructMember,
+    bytes: &mut Iter<u8>,
+    values: &mut HashMap<String, usize>,
+    o: &Objects,
+    tags: &Tags,
+    prefix: &str,
+) {
+    match m {
+        StructMember::Definition(d) => {
+            print_container_example_definition(s, d, bytes, values, o, tags, prefix);
+        }
+        StructMember::IfStatement(_) => {
+            s.wln("UNIMPLEMENTED_DOC_IF");
+        }
+        StructMember::OptionalStatement(_) => {
+            s.wln("UNIMPLEMENTED_DOC_OPTIONAL");
+        }
+    }
+}
+
+fn print_container_example_header(s: &mut DocWriter, e: &Container, bytes: &mut Iter<u8>) {
+    match e.container_type() {
+        ContainerType::CLogin(o) | ContainerType::SLogin(o) => {
+            let bytes = bytes.take(core::mem::size_of::<u8>());
+            s.bytes(bytes.into_iter());
+            s.wln(format!("// opcode ({})", o));
+            return;
+        }
+        ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
+            let size = bytes.take(core::mem::size_of::<u16>());
+            s.bytes(size.into_iter());
+            s.wln("// size");
+        }
+        ContainerType::Msg(_) | ContainerType::Struct => panic!("struct/MSG not supported"),
+    }
+
+    let (opcode, o) = match e.container_type() {
+        ContainerType::CMsg(o) => (bytes.take(core::mem::size_of::<u32>()), o),
+        ContainerType::SMsg(o) => (bytes.take(core::mem::size_of::<u16>()), o),
+        _ => panic!(),
+    };
+    s.bytes(opcode.into_iter());
+    s.wln(format!("// opcode ({})", o));
+}
+
+fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
+    if e.tests().is_empty() {
+        return;
+    }
+
+    s.wln("### Examples");
+
+    for t in e.tests() {
+        s.wln("```c");
+        let mut bytes = t.raw_bytes().iter();
+
+        print_container_example_header(s, e, &mut bytes);
+
+        let mut values = HashMap::new();
+
+        for m in e.fields() {
+            print_container_example_member(s, m, &mut bytes, &mut values, o, e.tags(), "");
+        }
+
+        s.wln("```");
+    }
 }
 
 fn print_container_if_statement(

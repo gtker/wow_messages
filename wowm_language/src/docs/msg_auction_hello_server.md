@@ -20,3 +20,10 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | auctioneer |  |
 | 0x0C | 4 / Little | u32 | auction_house_id |  |
+### Examples
+```c
+0, 14, // size
+85, 2, // opcode (597)
+222, 202, 250, 239, 190, 173, 222, 0, // auctioneer: Guid
+18, 0, 0, 0, // auction_house_id: u32
+```

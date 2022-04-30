@@ -80,7 +80,7 @@ fn main() {
         }
         let s = print_struct(e, &o);
         m.write_contents_to_file(e.name(), e.tags(), &s);
-        object_docs.push(print_docs_for_container(e));
+        object_docs.push(print_docs_for_container(e, &o));
     }
 
     definer_docs.sort_by(|a, b| a.name().cmp(b.name()));

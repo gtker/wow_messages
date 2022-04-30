@@ -33,6 +33,13 @@ If login_result is equal to `SUCCESS`:
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |
 | - | ? / - | u8[32] | salt |  |
 | - | ? / - | u8[16] | crc_salt |  |
+### Examples
+```c
+0, // opcode (0)
+0, // protocol_version: u8
+0, // login_result: LoginResult SUCCESS (0x00)
+UNIMPLEMENTED_DOC_IF
+```
 ## Protocol Version 3
 
 ### Wowm Representation
@@ -81,6 +88,19 @@ If security_flag is equal to `PIN`:
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | 4 / Little | u32 | pin_grid_seed |  |
 | - | ? / - | u8[16] | pin_salt |  |
+### Examples
+```c
+0, // opcode (0)
+0, // protocol_version: u8
+0, // login_result: LoginResult SUCCESS (0x00)
+UNIMPLEMENTED_DOC_IF
+```
+```c
+0, // opcode (0)
+0, // protocol_version: u8
+0, // login_result: LoginResult SUCCESS (0x00)
+UNIMPLEMENTED_DOC_IF
+```
 ## Protocol Version 8
 
 ### Wowm Representation
@@ -155,3 +175,46 @@ If security_flag contains `AUTHENTICATOR`:
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | 1 / - | u8 | unknown5 |  |
+### Examples
+```c
+0, // opcode (0)
+0, // protocol_version: u8
+0, // login_result: LoginResult SUCCESS (0x00)
+UNIMPLEMENTED_DOC_IF
+```
+```c
+0, // opcode (0)
+0, // protocol_version: u8
+0, // login_result: LoginResult SUCCESS (0x00)
+UNIMPLEMENTED_DOC_IF
+```
+```c
+0, // opcode (0)
+0, // protocol_version: u8
+0, // login_result: LoginResult SUCCESS (0x00)
+UNIMPLEMENTED_DOC_IF
+```
+```c
+0, // opcode (0)
+0, // protocol_version: u8
+0, // login_result: LoginResult SUCCESS (0x00)
+UNIMPLEMENTED_DOC_IF
+```
+```c
+0, // opcode (0)
+0, // protocol_version: u8
+5, // login_result: LoginResult FAIL_INCORRECT_PASSWORD (0x05)
+UNIMPLEMENTED_DOC_IF
+```
+```c
+0, // opcode (0)
+0, // protocol_version: u8
+0, // login_result: LoginResult SUCCESS (0x00)
+UNIMPLEMENTED_DOC_IF
+```
+```c
+0, // opcode (0)
+0, // protocol_version: u8
+5, // login_result: LoginResult FAIL_INCORRECT_PASSWORD (0x05)
+UNIMPLEMENTED_DOC_IF
+```
