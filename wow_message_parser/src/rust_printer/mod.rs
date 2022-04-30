@@ -277,51 +277,6 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    #[allow(unused)]
-    pub fn impl_async_readable_and_writable(
-        &mut self,
-        type_name: impl AsRef<str>,
-        read_function: impl Fn(&mut Self),
-        write_function: impl Fn(&mut Self),
-    ) {
-        self.impl_async_read_and_writable_with_error(
-            type_name.as_ref(),
-            format!("{t}Error", t = type_name.as_ref()),
-            read_function,
-            write_function,
-        );
-    }
-
-    pub fn impl_async_read_and_writable_with_error(
-        &mut self,
-        type_name: impl AsRef<str>,
-        error_name: impl AsRef<str>,
-        read_function: impl Fn(&mut Self),
-        write_function: impl Fn(&mut Self),
-    ) {
-        self.wln(CFG_ASYNC_ANY);
-        self.wln(ASYNC_TRAIT_MACRO);
-        self.open_curly(format!("impl {} for {}", ASYNC_TRAIT, type_name.as_ref(),));
-        self.wln(format!(
-            "type Error = {err_ty};",
-            err_ty = error_name.as_ref()
-        ));
-        self.newline();
-
-        self.wln(CFG_ASYNC_TOKIO);
-        self.open_curly(
-            "async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error>",
-        );
-        read_function(self);
-        self.closing_curly_newline();
-
-        self.wln(CFG_ASYNC_TOKIO);
-        self.open_curly("async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
-        write_function(self);
-        self.closing_curly_newline();
-        self.closing_curly_newline();
-    }
-
     pub fn impl_readable_and_writable<
         S: AsRef<str>,
         F: Fn(&mut Self, ImplType),
