@@ -59,7 +59,7 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
 
     for definer in definers {
         let path = format!(
-            "docs/definer/{lower_name}.md",
+            "docs/{lower_name}.md",
             lower_name = definer.name().to_lowercase()
         );
 
@@ -86,7 +86,7 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
     s.push_str(CONTAINER_HEADER);
     for container in containers {
         let path = format!(
-            "docs/container/{lower_name}.md",
+            "docs/{lower_name}.md",
             lower_name = container.name().to_lowercase()
         );
 
