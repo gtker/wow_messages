@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::BattlegroundPlayerPosition;
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -42,7 +42,7 @@ impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
 }
 
-impl WorldMessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
+impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

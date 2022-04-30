@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{FriendResult, FriendResultError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -40,7 +40,7 @@ impl WorldServerMessageWrite for SMSG_FRIEND_STATUS {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_FRIEND_STATUS {
+impl MessageBody for SMSG_FRIEND_STATUS {
     type Error = SMSG_FRIEND_STATUSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

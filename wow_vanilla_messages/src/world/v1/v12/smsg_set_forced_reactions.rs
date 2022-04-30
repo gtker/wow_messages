@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::ForcedReaction;
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -37,7 +37,7 @@ impl WorldServerMessageWrite for SMSG_SET_FORCED_REACTIONS {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_SET_FORCED_REACTIONS {
+impl MessageBody for SMSG_SET_FORCED_REACTIONS {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

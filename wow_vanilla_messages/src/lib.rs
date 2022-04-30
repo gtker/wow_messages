@@ -46,7 +46,7 @@ pub trait MaximumPossibleSized {
     fn maximum_possible_size() -> usize;
 }
 
-pub trait WorldServerMessageWrite: WorldMessageBody {
+pub trait WorldServerMessageWrite: MessageBody {
     const OPCODE: u16;
 
     fn write_unencrypted_server<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
@@ -58,7 +58,7 @@ pub trait WorldServerMessageWrite: WorldMessageBody {
     ) -> Result<(), std::io::Error>;
 }
 
-pub trait WorldClientMessageWrite: WorldMessageBody {
+pub trait WorldClientMessageWrite: MessageBody {
     const OPCODE: u32;
 
     fn write_unencrypted_client<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
@@ -70,7 +70,7 @@ pub trait WorldClientMessageWrite: WorldMessageBody {
     ) -> Result<(), std::io::Error>;
 }
 
-pub trait WorldMessageBody: Sized {
+pub trait MessageBody: Sized {
     type Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> Result<Self, Self::Error>;

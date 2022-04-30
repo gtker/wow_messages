@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{GroupLootSetting, GroupLootSettingError};
 use crate::world::v1::v12::{ItemQuality, ItemQualityError};
-use crate::{WorldClientMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -42,7 +42,7 @@ impl WorldClientMessageWrite for CMSG_LOOT_METHOD {
         Ok(())
     }
 }
-impl WorldMessageBody for CMSG_LOOT_METHOD {
+impl MessageBody for CMSG_LOOT_METHOD {
     type Error = CMSG_LOOT_METHODError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

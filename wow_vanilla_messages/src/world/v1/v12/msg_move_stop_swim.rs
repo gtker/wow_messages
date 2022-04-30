@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::MovementInfo;
-use crate::{WorldClientMessageWrite, WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -57,7 +57,7 @@ impl WorldServerMessageWrite for MSG_MOVE_STOP_SWIM {
         Ok(())
     }
 }
-impl WorldMessageBody for MSG_MOVE_STOP_SWIM {
+impl MessageBody for MSG_MOVE_STOP_SWIM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

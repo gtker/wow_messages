@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{WorldClientMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -40,7 +40,7 @@ impl WorldClientMessageWrite for CMSG_WRAP_ITEM {
         Ok(())
     }
 }
-impl WorldMessageBody for CMSG_WRAP_ITEM {
+impl MessageBody for CMSG_WRAP_ITEM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

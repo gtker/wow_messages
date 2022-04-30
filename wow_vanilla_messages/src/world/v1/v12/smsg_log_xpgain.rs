@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{ExperienceAwardType, ExperienceAwardTypeError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -40,7 +40,7 @@ impl WorldServerMessageWrite for SMSG_LOG_XPGAIN {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_LOG_XPGAIN {
+impl MessageBody for SMSG_LOG_XPGAIN {
     type Error = SMSG_LOG_XPGAINError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

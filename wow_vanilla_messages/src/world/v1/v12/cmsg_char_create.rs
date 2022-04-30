@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{Gender, GenderError};
 use crate::world::v1::v12::{Race, RaceError};
-use crate::{WorldClientMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -48,7 +48,7 @@ impl WorldClientMessageWrite for CMSG_CHAR_CREATE {
         Ok(())
     }
 }
-impl WorldMessageBody for CMSG_CHAR_CREATE {
+impl MessageBody for CMSG_CHAR_CREATE {
     type Error = CMSG_CHAR_CREATEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

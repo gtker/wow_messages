@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{QuestPartyMessage, QuestPartyMessageError};
-use crate::{WorldClientMessageWrite, WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -60,7 +60,7 @@ impl WorldServerMessageWrite for MSG_QUEST_PUSH_RESULT {
         Ok(())
     }
 }
-impl WorldMessageBody for MSG_QUEST_PUSH_RESULT {
+impl MessageBody for MSG_QUEST_PUSH_RESULT {
     type Error = MSG_QUEST_PUSH_RESULTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

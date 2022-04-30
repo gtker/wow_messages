@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -39,7 +39,7 @@ impl WorldServerMessageWrite for SMSG_QUEST_CONFIRM_ACCEPT {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_QUEST_CONFIRM_ACCEPT {
+impl MessageBody for SMSG_QUEST_CONFIRM_ACCEPT {
     type Error = SMSG_QUEST_CONFIRM_ACCEPTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

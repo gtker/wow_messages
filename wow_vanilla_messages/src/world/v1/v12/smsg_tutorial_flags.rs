@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -44,7 +44,7 @@ impl WorldServerMessageWrite for SMSG_TUTORIAL_FLAGS {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_TUTORIAL_FLAGS {
+impl MessageBody for SMSG_TUTORIAL_FLAGS {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

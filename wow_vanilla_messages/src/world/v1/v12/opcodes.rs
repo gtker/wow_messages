@@ -1,4 +1,4 @@
-use crate::WorldMessageBody;
+use crate::MessageBody;
 use crate::OpcodeMessage;
 use crate::{WorldServerMessageWrite, WorldClientMessageWrite};
 use wow_srp::header_crypto::{Decrypter, Encrypter};

@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::v1::v12::{ChatType, ChatTypeError};
 use crate::world::v1::v12::{Language, LanguageError};
 use crate::world::v1::v12::{PlayerChatTag, PlayerChatTagError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -44,7 +44,7 @@ impl WorldServerMessageWrite for SMSG_MESSAGECHAT {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_MESSAGECHAT {
+impl MessageBody for SMSG_MESSAGECHAT {
     type Error = SMSG_MESSAGECHATError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{WorldClientMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -38,7 +38,7 @@ impl WorldClientMessageWrite for CMSG_PING {
         Ok(())
     }
 }
-impl WorldMessageBody for CMSG_PING {
+impl MessageBody for CMSG_PING {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
@@ -87,7 +87,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::WorldClientOpcodeMessage;
-    use crate::{WorldMessageBody, WorldClientMessageWrite, WorldServerMessageWrite, OpcodeMessage};
+    use crate::{MessageBody, WorldClientMessageWrite, WorldServerMessageWrite, OpcodeMessage};
 
     #[test]
     fn CMSG_PING0() {

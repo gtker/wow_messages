@@ -4,7 +4,7 @@ use crate::world::v1::v12::{GroupListMember, GroupListMemberError};
 use crate::world::v1::v12::{GroupLootSetting, GroupLootSettingError};
 use crate::world::v1::v12::{GroupType, GroupTypeError};
 use crate::world::v1::v12::{ItemQuality, ItemQualityError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -45,7 +45,7 @@ impl WorldServerMessageWrite for SMSG_GROUP_LIST {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_GROUP_LIST {
+impl MessageBody for SMSG_GROUP_LIST {
     type Error = SMSG_GROUP_LISTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

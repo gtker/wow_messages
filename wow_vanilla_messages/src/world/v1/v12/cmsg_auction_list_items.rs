@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{WorldClientMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -46,7 +46,7 @@ impl WorldClientMessageWrite for CMSG_AUCTION_LIST_ITEMS {
         Ok(())
     }
 }
-impl WorldMessageBody for CMSG_AUCTION_LIST_ITEMS {
+impl MessageBody for CMSG_AUCTION_LIST_ITEMS {
     type Error = CMSG_AUCTION_LIST_ITEMSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

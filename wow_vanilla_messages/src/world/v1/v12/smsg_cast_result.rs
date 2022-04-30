@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{CastFailureReason, CastFailureReasonError};
 use crate::world::v1::v12::{SimpleSpellCastResult, SimpleSpellCastResultError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -40,7 +40,7 @@ impl WorldServerMessageWrite for SMSG_CAST_RESULT {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_CAST_RESULT {
+impl MessageBody for SMSG_CAST_RESULT {
     type Error = SMSG_CAST_RESULTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

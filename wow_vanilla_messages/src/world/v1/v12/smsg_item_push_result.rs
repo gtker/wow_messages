@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::v1::v12::{NewItemChatAlert, NewItemChatAlertError};
 use crate::world::v1::v12::{NewItemCreationType, NewItemCreationTypeError};
 use crate::world::v1::v12::{NewItemSource, NewItemSourceError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -50,7 +50,7 @@ impl WorldServerMessageWrite for SMSG_ITEM_PUSH_RESULT {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_ITEM_PUSH_RESULT {
+impl MessageBody for SMSG_ITEM_PUSH_RESULT {
     type Error = SMSG_ITEM_PUSH_RESULTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

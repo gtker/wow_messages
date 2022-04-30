@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -38,7 +38,7 @@ impl WorldServerMessageWrite for SMSG_UPDATE_LAST_INSTANCE {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_UPDATE_LAST_INSTANCE {
+impl MessageBody for SMSG_UPDATE_LAST_INSTANCE {
     type Error = SMSG_UPDATE_LAST_INSTANCEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

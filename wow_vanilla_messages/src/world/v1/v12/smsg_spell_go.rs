@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::v1::v12::{CastFlags};
 use crate::world::v1::v12::{SpellCastTargets, SpellCastTargetsError};
 use crate::world::v1::v12::{SpellMiss, SpellMissError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -46,7 +46,7 @@ impl WorldServerMessageWrite for SMSG_SPELL_GO {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_SPELL_GO {
+impl MessageBody for SMSG_SPELL_GO {
     type Error = SMSG_SPELL_GOError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

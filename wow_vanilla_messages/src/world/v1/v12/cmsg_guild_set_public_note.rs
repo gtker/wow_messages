@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{WorldClientMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -37,7 +37,7 @@ impl WorldClientMessageWrite for CMSG_GUILD_SET_PUBLIC_NOTE {
         Ok(())
     }
 }
-impl WorldMessageBody for CMSG_GUILD_SET_PUBLIC_NOTE {
+impl MessageBody for CMSG_GUILD_SET_PUBLIC_NOTE {
     type Error = CMSG_GUILD_SET_PUBLIC_NOTEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

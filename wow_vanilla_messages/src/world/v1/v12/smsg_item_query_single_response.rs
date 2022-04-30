@@ -7,7 +7,7 @@ use crate::world::v1::v12::{ItemQuality, ItemQualityError};
 use crate::world::v1::v12::ItemSpells;
 use crate::world::v1::v12::ItemStat;
 use crate::world::v1::v12::{Map, MapError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -45,7 +45,7 @@ impl WorldServerMessageWrite for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
+impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     type Error = SMSG_ITEM_QUERY_SINGLE_RESPONSEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

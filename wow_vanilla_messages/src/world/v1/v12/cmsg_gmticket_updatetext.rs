@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{WorldClientMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -36,7 +36,7 @@ impl WorldClientMessageWrite for CMSG_GMTICKET_UPDATETEXT {
         Ok(())
     }
 }
-impl WorldMessageBody for CMSG_GMTICKET_UPDATETEXT {
+impl MessageBody for CMSG_GMTICKET_UPDATETEXT {
     type Error = CMSG_GMTICKET_UPDATETEXTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

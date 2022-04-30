@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{FarSightOperation, FarSightOperationError};
-use crate::{WorldClientMessageWrite, WorldMessageBody};
+use crate::{WorldClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -38,7 +38,7 @@ impl WorldClientMessageWrite for CMSG_FAR_SIGHT {
         Ok(())
     }
 }
-impl WorldMessageBody for CMSG_FAR_SIGHT {
+impl MessageBody for CMSG_FAR_SIGHT {
     type Error = CMSG_FAR_SIGHTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

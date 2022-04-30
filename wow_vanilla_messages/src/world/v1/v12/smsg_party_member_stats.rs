@@ -5,7 +5,7 @@ use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{GroupMemberOnlineStatus};
 use crate::world::v1::v12::{GroupUpdateFlags};
 use crate::world::v1::v12::{Power, PowerError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -43,7 +43,7 @@ impl WorldServerMessageWrite for SMSG_PARTY_MEMBER_STATS {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_PARTY_MEMBER_STATS {
+impl MessageBody for SMSG_PARTY_MEMBER_STATS {
     type Error = SMSG_PARTY_MEMBER_STATSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

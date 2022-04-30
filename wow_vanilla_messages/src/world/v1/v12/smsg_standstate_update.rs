@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{UnitStandState, UnitStandStateError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -38,7 +38,7 @@ impl WorldServerMessageWrite for SMSG_STANDSTATE_UPDATE {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_STANDSTATE_UPDATE {
+impl MessageBody for SMSG_STANDSTATE_UPDATE {
     type Error = SMSG_STANDSTATE_UPDATEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

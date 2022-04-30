@@ -32,7 +32,7 @@ pub const LOGIN_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 pub const WORLD_CLIENT_MESSAGE_ENUM_NAME: &str = "WorldClientOpcodeMessage";
 pub const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "WorldServerOpcodeMessage";
 
-pub const WORLD_BODY_TRAIT_NAME: &str = "WorldMessageBody";
+pub const WORLD_BODY_TRAIT_NAME: &str = "MessageBody";
 pub const WORLD_CLIENT_HEADER_TRAIT_NAME: &str = "WorldClientMessageWrite";
 pub const WORLD_SERVER_HEADER_TRAIT_NAME: &str = "WorldServerMessageWrite";
 pub const OPCODE_MESSAGE_TRAIT_NAME: &str = "OpcodeMessage";

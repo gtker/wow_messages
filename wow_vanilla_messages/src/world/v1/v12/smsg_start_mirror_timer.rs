@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{TimerType, TimerTypeError};
-use crate::{WorldServerMessageWrite, WorldMessageBody};
+use crate::{WorldServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -43,7 +43,7 @@ impl WorldServerMessageWrite for SMSG_START_MIRROR_TIMER {
         Ok(())
     }
 }
-impl WorldMessageBody for SMSG_START_MIRROR_TIMER {
+impl MessageBody for SMSG_START_MIRROR_TIMER {
     type Error = SMSG_START_MIRROR_TIMERError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
