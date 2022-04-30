@@ -210,7 +210,7 @@ impl Writer {
         ));
         self.newline();
 
-        for it in [ImplType::Std, ImplType::Tokio, ImplType::AsyncStd] {
+        for it in ImplType::types() {
             if it != ImplType::Std {
                 self.wln(it.cfg());
             }
@@ -257,40 +257,32 @@ impl Writer {
         ));
         self.newline();
 
-        self.open_curly(
-            "fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error>",
-        );
-        read_function(self, ImplType::Std);
-        self.closing_curly_newline();
+        for it in ImplType::types() {
+            if it != ImplType::Std {
+                self.wln(it.cfg());
+            }
+            self.open_curly(format!(
+                "{func}fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, Self::Error>",
+                func = it.func(),
+                prefix = it.prefix(),
+                read = it.read()
+            ));
+            read_function(self, it);
+            self.closing_curly_newline();
 
-        self.open_curly("fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
-        write_function(self, ImplType::Std);
-        self.closing_curly_newline();
+            if it != ImplType::Std {
+                self.wln(it.cfg());
+            }
+            self.open_curly(format!("{func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
+                                    func = it.func(),
+                                    prefix = it.prefix(),
+                                    write = it.write()
+            ));
+            write_function(self, it);
+            self.closing_curly_newline();
+        }
 
-        self.wln(CFG_ASYNC_TOKIO);
-        self.open_curly(
-            "async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error>",
-        );
-        read_function(self, ImplType::Tokio);
-        self.closing_curly_newline();
-
-        self.wln(CFG_ASYNC_TOKIO);
-        self.open_curly("async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
-        write_function(self, ImplType::Tokio);
-        self.closing_curly_newline();
-
-        self.wln(CFG_ASYNC_ASYNC_STD);
-        self.open_curly(
-            "async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error>",
-        );
-        read_function(self, ImplType::AsyncStd);
-        self.closing_curly_newline();
-
-        self.wln(CFG_ASYNC_ASYNC_STD);
-        self.open_curly("async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
-        write_function(self, ImplType::AsyncStd);
-        self.closing_curly_newline();
-        self.closing_curly_newline();
+        self.closing_curly_newline(); // impl
     }
 
     pub fn impl_readable_and_writable<
@@ -685,5 +677,9 @@ impl ImplType {
             ImplType::Tokio => CFG_ASYNC_TOKIO,
             ImplType::AsyncStd => CFG_ASYNC_ASYNC_STD,
         }
+    }
+
+    pub fn types() -> Vec<Self> {
+        vec![ImplType::Std, ImplType::Tokio, ImplType::AsyncStd]
     }
 }
