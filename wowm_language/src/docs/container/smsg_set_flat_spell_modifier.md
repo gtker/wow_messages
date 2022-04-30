@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 smsg SMSG_SET_FLAT_SPELL_MODIFIER = 0x0266 {
     u8 eff;    

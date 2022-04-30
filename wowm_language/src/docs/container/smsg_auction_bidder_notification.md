@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x025E {
     u32 auction_house_id;    

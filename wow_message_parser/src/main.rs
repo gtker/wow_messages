@@ -28,6 +28,8 @@ mod wowm_printer;
 const UTILITY_PATH: &str = "crate::util";
 
 const VERSIONS: &str = "versions";
+const DESCRIPTION: &str = "description";
+const COMMENT: &str = "comment";
 const TEST_STR: &str = "test";
 const DISPLAY_STR: &str = "display";
 const SKIP_STR: &str = "skip_codegen";

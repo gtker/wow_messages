@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 cmsg CMSG_BATTLEMASTER_JOIN = 0x02EE {
     Guid guid;    

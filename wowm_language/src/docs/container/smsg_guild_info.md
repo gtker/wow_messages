@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 smsg SMSG_GUILD_INFO = 0x0088 {
     CString guild_name;    

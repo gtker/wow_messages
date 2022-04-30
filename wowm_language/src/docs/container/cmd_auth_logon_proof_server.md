@@ -1,5 +1,6 @@
 ## Protocol Version 2, Protocol Version 3
 
+## Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
     LoginResult login_result;    
@@ -12,6 +13,7 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
 ```
 ## Protocol Version 8
 
+## Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
     LoginResult login_result;    

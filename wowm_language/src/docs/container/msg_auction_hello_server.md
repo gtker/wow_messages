@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 smsg MSG_AUCTION_HELLO_Server = 0x0255 {
     Guid auctioneer;    

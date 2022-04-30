@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 smsg SMSG_CHANNEL_NOTIFY = 0x0099 {
     ChatNotify notify_type;    

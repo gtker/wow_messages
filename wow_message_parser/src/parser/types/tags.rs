@@ -1,6 +1,6 @@
 use std::fmt::{Display, Formatter};
 
-use crate::{LOGIN_LOGON_VERSIONS, TEST_STR, VERSIONS};
+use crate::{COMMENT, DESCRIPTION, LOGIN_LOGON_VERSIONS, TEST_STR, VERSIONS};
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Copy, Clone)]
 pub enum WorldVersion {
@@ -43,6 +43,8 @@ pub struct Tags {
     inner: Vec<Tag>,
     login_logon_versions: Vec<LoginVersion>,
     world_versions: Vec<WorldVersion>,
+    description: String,
+    comment: String,
 }
 
 impl Tags {
@@ -51,6 +53,8 @@ impl Tags {
             inner: vec![],
             login_logon_versions: vec![],
             world_versions: vec![],
+            description: "".to_string(),
+            comment: "".to_string(),
         }
     }
 
@@ -105,7 +109,12 @@ impl Tags {
             if self.world_versions.contains(&WorldVersion::All) {
                 self.world_versions = vec![WorldVersion::All];
             }
+        } else if key == DESCRIPTION {
+            self.description += &value.to_string();
+        } else if key == COMMENT {
+            self.comment += &value.to_string();
         }
+
         for v in self.inner.iter_mut() {
             if v.key == key {
                 v.value += " ";
@@ -208,6 +217,14 @@ impl Tags {
         }
 
         false
+    }
+
+    pub fn description(&self) -> &str {
+        &self.description
+    }
+
+    pub fn comment(&self) -> &str {
+        &self.comment
     }
 }
 

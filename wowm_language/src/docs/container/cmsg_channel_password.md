@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 cmsg CMSG_CHANNEL_PASSWORD = 0x009C {
     CString channel_name;    

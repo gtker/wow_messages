@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 smsg SMSG_BUY_ITEM = 0x01A4 {
     Guid guid;    

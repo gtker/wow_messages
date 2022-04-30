@@ -142,9 +142,13 @@ pub fn print_docs_for_enum(e: &Definer) -> DocWriter {
     let mut s = DocWriter::new(e.name());
 
     common(&mut s, e.tags());
+
+    s.wln("## Wowm Representation");
     s.wln("```rust,ignore");
     s.wln(get_definer_wowm_definition("enum", e, ""));
     s.wln("```");
+
+    print_definer_table(&mut s, e);
 
     s
 }
@@ -153,9 +157,13 @@ pub fn print_docs_for_flag(e: &Definer) -> DocWriter {
     let mut s = DocWriter::new(e.name());
 
     common(&mut s, e.tags());
+
+    s.wln("## Wowm Representation");
     s.wln("```rust,ignore");
     s.wln(get_definer_wowm_definition("flag", e, ""));
     s.wln("```");
+
+    print_definer_table(&mut s, e);
 
     s
 }
@@ -164,9 +172,30 @@ pub fn print_docs_for_container(e: &Container) -> DocWriter {
     let mut s = DocWriter::new(e.name());
 
     common(&mut s, e.tags());
+
+    s.wln("## Wowm Representation");
     s.wln("```rust,ignore");
     s.wln(get_struct_wowm_definition(e, ""));
     s.wln("```");
 
     s
+}
+
+fn print_definer_table(s: &mut DocWriter, e: &Definer) {
+    s.wln("## Enumerators");
+
+    s.wln("| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |");
+    s.wln("| --------- | -------- | ------------- | --------- | ----------- | ------- |");
+
+    for f in e.fields() {
+        s.wln(format!(
+            "| {} | {} | {} | 0x{:X} | {} | {} |",
+            f.name(),
+            f.value().original(),
+            f.value().int(),
+            f.value().int(),
+            f.tags().description(),
+            f.tags().comment(),
+        ));
+    }
 }

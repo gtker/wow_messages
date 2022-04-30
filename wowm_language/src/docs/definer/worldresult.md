@@ -1,5 +1,6 @@
 ## Client Version 1.2, Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 enum WorldResult : u32 {
     RESPONSE_SUCCESS = 0x00;    
@@ -87,3 +88,88 @@ enum WorldResult : u32 {
 }
 
 ```
+## Enumerators
+| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
+| --------- | -------- | ------------- | --------- | ----------- | ------- |
+| RESPONSE_SUCCESS | 0x00 | 0 | 0x0 |  |  |
+| RESPONSE_FAILURE | 0x01 | 1 | 0x1 |  |  |
+| RESPONSE_CANCELLED | 0x02 | 2 | 0x2 |  |  |
+| RESPONSE_DISCONNECTED | 0x03 | 3 | 0x3 |  |  |
+| RESPONSE_FAILED_TO_CONNECT | 0x04 | 4 | 0x4 |  |  |
+| RESPONSE_CONNECTED | 0x05 | 5 | 0x5 |  |  |
+| RESPONSE_VERSION_MISMATCH | 0x06 | 6 | 0x6 |  |  |
+| CSTATUS_CONNECTING | 0x07 | 7 | 0x7 |  |  |
+| CSTATUS_NEGOTIATING_SECURITY | 0x08 | 8 | 0x8 |  |  |
+| CSTATUS_NEGOTIATION_COMPLETE | 0x09 | 9 | 0x9 |  |  |
+| CSTATUS_NEGOTIATION_FAILED | 0x0A | 10 | 0xA |  |  |
+| CSTATUS_AUTHENTICATING | 0x0B | 11 | 0xB |  |  |
+| AUTH_OK | 0x0C | 12 | 0xC |  |  |
+| AUTH_FAILED | 0x0D | 13 | 0xD |  |  |
+| AUTH_REJECT | 0x0E | 14 | 0xE |  |  |
+| AUTH_BAD_SERVER_PROOF | 0x0F | 15 | 0xF |  |  |
+| AUTH_UNAVAILABLE | 0x10 | 16 | 0x10 |  |  |
+| AUTH_SYSTEM_ERROR | 0x11 | 17 | 0x11 |  |  |
+| AUTH_BILLING_ERROR | 0x12 | 18 | 0x12 |  |  |
+| AUTH_BILLING_EXPIRED | 0x13 | 19 | 0x13 |  |  |
+| AUTH_VERSION_MISMATCH | 0x14 | 20 | 0x14 |  |  |
+| AUTH_UNKNOWN_ACCOUNT | 0x15 | 21 | 0x15 |  |  |
+| AUTH_INCORRECT_PASSWORD | 0x16 | 22 | 0x16 |  |  |
+| AUTH_SESSION_EXPIRED | 0x17 | 23 | 0x17 |  |  |
+| AUTH_SERVER_SHUTTING_DOWN | 0x18 | 24 | 0x18 |  |  |
+| AUTH_ALREADY_LOGGING_IN | 0x19 | 25 | 0x19 |  |  |
+| AUTH_LOGIN_SERVER_NOT_FOUND | 0x1A | 26 | 0x1A |  |  |
+| AUTH_WAIT_QUEUE | 0x1B | 27 | 0x1B |  |  |
+| AUTH_BANNED | 0x1C | 28 | 0x1C |  |  |
+| AUTH_ALREADY_ONLINE | 0x1D | 29 | 0x1D |  |  |
+| AUTH_NO_TIME | 0x1E | 30 | 0x1E |  |  |
+| AUTH_DB_BUSY | 0x1F | 31 | 0x1F |  |  |
+| AUTH_SUSPENDED | 0x20 | 32 | 0x20 |  |  |
+| AUTH_PARENTAL_CONTROL | 0x21 | 33 | 0x21 |  |  |
+| REALM_LIST_IN_PROGRESS | 0x22 | 34 | 0x22 |  |  |
+| REALM_LIST_SUCCESS | 0x23 | 35 | 0x23 |  |  |
+| REALM_LIST_FAILED | 0x24 | 36 | 0x24 |  |  |
+| REALM_LIST_INVALID | 0x25 | 37 | 0x25 |  |  |
+| REALM_LIST_REALM_NOT_FOUND | 0x26 | 38 | 0x26 |  |  |
+| ACCOUNT_CREATE_IN_PROGRESS | 0x27 | 39 | 0x27 |  |  |
+| ACCOUNT_CREATE_SUCCESS | 0x28 | 40 | 0x28 |  |  |
+| ACCOUNT_CREATE_FAILED | 0x29 | 41 | 0x29 |  |  |
+| CHAR_LIST_RETRIEVING | 0x2A | 42 | 0x2A |  |  |
+| CHAR_LIST_RETRIEVED | 0x2B | 43 | 0x2B |  |  |
+| CHAR_LIST_FAILED | 0x2C | 44 | 0x2C |  |  |
+| CHAR_CREATE_IN_PROGRESS | 0x2D | 45 | 0x2D |  |  |
+| CHAR_CREATE_SUCCESS | 0x2E | 46 | 0x2E |  |  |
+| CHAR_CREATE_ERROR | 0x2F | 47 | 0x2F |  |  |
+| CHAR_CREATE_FAILED | 0x30 | 48 | 0x30 |  |  |
+| CHAR_CREATE_NAME_IN_USE | 0x31 | 49 | 0x31 |  |  |
+| CHAR_CREATE_DISABLED | 0x32 | 50 | 0x32 |  |  |
+| CHAR_CREATE_PVP_TEAMS_VIOLATION | 0x33 | 51 | 0x33 |  |  |
+| CHAR_CREATE_SERVER_LIMIT | 0x34 | 52 | 0x34 |  |  |
+| CHAR_CREATE_ACCOUNT_LIMIT | 0x35 | 53 | 0x35 |  |  |
+| CHAR_CREATE_SERVER_QUEUE | 0x36 | 54 | 0x36 |  |  |
+| CHAR_CREATE_ONLY_EXISTING | 0x37 | 55 | 0x37 |  |  |
+| CHAR_DELETE_IN_PROGRESS | 0x38 | 56 | 0x38 |  |  |
+| CHAR_DELETE_SUCCESS | 0x39 | 57 | 0x39 |  |  |
+| CHAR_DELETE_FAILED | 0x3A | 58 | 0x3A |  |  |
+| CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER | 0x3B | 59 | 0x3B |  |  |
+| CHAR_LOGIN_IN_PROGRESS | 0x3C | 60 | 0x3C |  |  |
+| CHAR_LOGIN_SUCCESS | 0x3D | 61 | 0x3D |  |  |
+| CHAR_LOGIN_NO_WORLD | 0x3E | 62 | 0x3E |  |  |
+| CHAR_LOGIN_DUPLICATE_CHARACTER | 0x3F | 63 | 0x3F |  |  |
+| CHAR_LOGIN_NO_INSTANCES | 0x40 | 64 | 0x40 |  |  |
+| CHAR_LOGIN_FAILED | 0x41 | 65 | 0x41 |  |  |
+| CHAR_LOGIN_DISABLED | 0x42 | 66 | 0x42 |  |  |
+| CHAR_LOGIN_NO_CHARACTER | 0x43 | 67 | 0x43 |  |  |
+| CHAR_LOGIN_LOCKED_FOR_TRANSFER | 0x44 | 68 | 0x44 |  |  |
+| CHAR_NAME_NO_NAME | 0x45 | 69 | 0x45 |  |  |
+| CHAR_NAME_TOO_SHORT | 0x46 | 70 | 0x46 |  |  |
+| CHAR_NAME_TOO_LONG | 0x47 | 71 | 0x47 |  |  |
+| CHAR_NAME_ONLY_LETTERS | 0x48 | 72 | 0x48 |  |  |
+| CHAR_NAME_MIXED_LANGUAGES | 0x49 | 73 | 0x49 |  |  |
+| CHAR_NAME_PROFANE | 0x4A | 74 | 0x4A |  |  |
+| CHAR_NAME_RESERVED | 0x4B | 75 | 0x4B |  |  |
+| CHAR_NAME_INVALID_APOSTROPHE | 0x4C | 76 | 0x4C |  |  |
+| CHAR_NAME_MULTIPLE_APOSTROPHES | 0x4D | 77 | 0x4D |  |  |
+| CHAR_NAME_THREE_CONSECUTIVE | 0x4E | 78 | 0x4E |  |  |
+| CHAR_NAME_INVALID_SPACE | 0x4F | 79 | 0x4F |  |  |
+| CHAR_NAME_SUCCESS | 0x50 | 80 | 0x50 |  |  |
+| CHAR_NAME_FAILURE | 0x51 | 81 | 0x51 |  |  |

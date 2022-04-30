@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 smsg SMSG_RESURRECT_REQUEST = 0x015B {
     Guid guid;    

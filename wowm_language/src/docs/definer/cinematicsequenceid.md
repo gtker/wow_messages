@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 enum CinematicSequenceId : u32 {
     HUMAN = 81;    
@@ -14,3 +15,15 @@ enum CinematicSequenceId : u32 {
 }
 
 ```
+## Enumerators
+| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
+| --------- | -------- | ------------- | --------- | ----------- | ------- |
+| HUMAN | 81 | 81 | 0x51 |  |  |
+| ORC | 21 | 21 | 0x15 |  |  |
+| DWARF | 41 | 41 | 0x29 |  |  |
+| NIGHT_ELF | 61 | 61 | 0x3D |  |  |
+| UNDEAD | 2 | 2 | 0x2 |  |  |
+| TAUREN | 141 | 141 | 0x8D |  |  |
+| GNOME | 101 | 101 | 0x65 |  |  |
+| TROLL | 121 | 121 | 0x79 |  |  |
+| GOBLIN | 0 | 0 | 0x0 |  |  |

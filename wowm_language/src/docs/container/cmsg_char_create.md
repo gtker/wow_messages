@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 cmsg CMSG_CHAR_CREATE = 0x0036 {
     CString name;    

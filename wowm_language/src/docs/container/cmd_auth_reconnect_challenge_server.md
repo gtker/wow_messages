@@ -1,5 +1,6 @@
 ## Protocol Version 2
 
+## Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
     LoginResult result;    
@@ -12,6 +13,7 @@ slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
 ```
 ## Protocol Version 8
 
+## Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
     LoginResult result;    

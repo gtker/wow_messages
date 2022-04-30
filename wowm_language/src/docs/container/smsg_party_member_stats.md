@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
     PackedGuid guid;    

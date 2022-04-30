@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 enum Emote : u32 {
     ONESHOT_NONE = 0;    
@@ -122,3 +123,123 @@ enum Emote : u32 {
 }
 
 ```
+## Enumerators
+| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
+| --------- | -------- | ------------- | --------- | ----------- | ------- |
+| ONESHOT_NONE | 0 | 0 | 0x0 |  |  |
+| ONESHOT_TALK | 1 | 1 | 0x1 |  |  |
+| ONESHOT_BOW | 2 | 2 | 0x2 |  |  |
+| ONESHOT_WAVE | 3 | 3 | 0x3 |  |  |
+| ONESHOT_CHEER | 4 | 4 | 0x4 |  |  |
+| ONESHOT_EXCLAMATION | 5 | 5 | 0x5 |  |  |
+| ONESHOT_QUESTION | 6 | 6 | 0x6 |  |  |
+| ONESHOT_EAT | 7 | 7 | 0x7 |  |  |
+| STATE_DANCE | 10 | 10 | 0xA |  |  |
+| ONESHOT_LAUGH | 11 | 11 | 0xB |  |  |
+| STATE_SLEEP | 12 | 12 | 0xC |  |  |
+| STATE_SIT | 13 | 13 | 0xD |  |  |
+| ONESHOT_RUDE | 14 | 14 | 0xE |  |  |
+| ONESHOT_ROAR | 15 | 15 | 0xF |  |  |
+| ONESHOT_KNEEL | 16 | 16 | 0x10 |  |  |
+| ONESHOT_KISS | 17 | 17 | 0x11 |  |  |
+| ONESHOT_CRY | 18 | 18 | 0x12 |  |  |
+| ONESHOT_CHICKEN | 19 | 19 | 0x13 |  |  |
+| ONESHOT_BEG | 20 | 20 | 0x14 |  |  |
+| ONESHOT_APPLAUD | 21 | 21 | 0x15 |  |  |
+| ONESHOT_SHOUT | 22 | 22 | 0x16 |  |  |
+| ONESHOT_FLEX | 23 | 23 | 0x17 |  |  |
+| ONESHOT_SHY | 24 | 24 | 0x18 |  |  |
+| ONESHOT_POINT | 25 | 25 | 0x19 |  |  |
+| STATE_STAND | 26 | 26 | 0x1A |  |  |
+| STATE_READYUNARMED | 27 | 27 | 0x1B |  |  |
+| STATE_WORK_SHEATHED | 28 | 28 | 0x1C |  |  |
+| STATE_POINT | 29 | 29 | 0x1D |  |  |
+| STATE_NONE | 30 | 30 | 0x1E |  |  |
+| ONESHOT_WOUND | 33 | 33 | 0x21 |  |  |
+| ONESHOT_WOUNDCRITICAL | 34 | 34 | 0x22 |  |  |
+| ONESHOT_ATTACKUNARMED | 35 | 35 | 0x23 |  |  |
+| ONESHOT_ATTACK1H | 36 | 36 | 0x24 |  |  |
+| ONESHOT_ATTACK2HTIGHT | 37 | 37 | 0x25 |  |  |
+| ONESHOT_ATTACK2HLOOSE | 38 | 38 | 0x26 |  |  |
+| ONESHOT_PARRYUNARMED | 39 | 39 | 0x27 |  |  |
+| ONESHOT_PARRYSHIELD | 43 | 43 | 0x2B |  |  |
+| ONESHOT_READYUNARMED | 44 | 44 | 0x2C |  |  |
+| ONESHOT_READY1H | 45 | 45 | 0x2D |  |  |
+| ONESHOT_READYBOW | 48 | 48 | 0x30 |  |  |
+| ONESHOT_SPELLPRECAST | 50 | 50 | 0x32 |  |  |
+| ONESHOT_SPELLCAST | 51 | 51 | 0x33 |  |  |
+| ONESHOT_BATTLEROAR | 53 | 53 | 0x35 |  |  |
+| ONESHOT_SPECIALATTACK1H | 54 | 54 | 0x36 |  |  |
+| ONESHOT_KICK | 60 | 60 | 0x3C |  |  |
+| ONESHOT_ATTACKTHROWN | 61 | 61 | 0x3D |  |  |
+| STATE_STUN | 64 | 64 | 0x40 |  |  |
+| STATE_DEAD | 65 | 65 | 0x41 |  |  |
+| ONESHOT_SALUTE | 66 | 66 | 0x42 |  |  |
+| STATE_KNEEL | 68 | 68 | 0x44 |  |  |
+| STATE_USESTANDING | 69 | 69 | 0x45 |  |  |
+| ONESHOT_WAVE_NOSHEATHE | 70 | 70 | 0x46 |  |  |
+| ONESHOT_CHEER_NOSHEATHE | 71 | 71 | 0x47 |  |  |
+| ONESHOT_EAT_NOSHEATHE | 92 | 92 | 0x5C |  |  |
+| STATE_STUN_NOSHEATHE | 93 | 93 | 0x5D |  |  |
+| ONESHOT_DANCE | 94 | 94 | 0x5E |  |  |
+| ONESHOT_SALUTE_NOSHEATH | 113 | 113 | 0x71 |  |  |
+| STATE_USESTANDING_NOSHEATHE | 133 | 133 | 0x85 |  |  |
+| ONESHOT_LAUGH_NOSHEATHE | 153 | 153 | 0x99 |  |  |
+| STATE_WORK | 173 | 173 | 0xAD |  |  |
+| STATE_SPELLPRECAST | 193 | 193 | 0xC1 |  |  |
+| ONESHOT_READYRIFLE | 213 | 213 | 0xD5 |  |  |
+| STATE_READYRIFLE | 214 | 214 | 0xD6 |  |  |
+| STATE_WORK_MINING | 233 | 233 | 0xE9 |  |  |
+| STATE_WORK_CHOPWOOD | 234 | 234 | 0xEA |  |  |
+| STATE_APPLAUD | 253 | 253 | 0xFD |  |  |
+| ONESHOT_LIFTOFF | 254 | 254 | 0xFE |  |  |
+| ONESHOT_YES | 273 | 273 | 0x111 |  |  |
+| ONESHOT_NO | 274 | 274 | 0x112 |  |  |
+| ONESHOT_TRAIN | 275 | 275 | 0x113 |  |  |
+| ONESHOT_LAND | 293 | 293 | 0x125 |  |  |
+| STATE_AT_EASE | 313 | 313 | 0x139 |  |  |
+| STATE_READY1H | 333 | 333 | 0x14D |  |  |
+| STATE_SPELLKNEELSTART | 353 | 353 | 0x161 |  |  |
+| STATE_SUBMERGED | 373 | 373 | 0x175 |  |  |
+| ONESHOT_SUBMERGE | 374 | 374 | 0x176 |  |  |
+| STATE_READY2H | 375 | 375 | 0x177 |  |  |
+| STATE_READYBOW | 376 | 376 | 0x178 |  |  |
+| ONESHOT_MOUNTSPECIAL | 377 | 377 | 0x179 |  |  |
+| STATE_TALK | 378 | 378 | 0x17A |  |  |
+| STATE_FISHING | 379 | 379 | 0x17B |  |  |
+| ONESHOT_FISHING | 380 | 380 | 0x17C |  |  |
+| ONESHOT_LOOT | 381 | 381 | 0x17D |  |  |
+| STATE_WHIRLWIND | 382 | 382 | 0x17E |  |  |
+| STATE_DROWNED | 383 | 383 | 0x17F |  |  |
+| STATE_HOLD_BOW | 384 | 384 | 0x180 |  |  |
+| STATE_HOLD_RIFLE | 385 | 385 | 0x181 |  |  |
+| STATE_HOLD_THROWN | 386 | 386 | 0x182 |  |  |
+| ONESHOT_DROWN | 387 | 387 | 0x183 |  |  |
+| ONESHOT_STOMP | 388 | 388 | 0x184 |  |  |
+| ONESHOT_ATTACKOFF | 389 | 389 | 0x185 |  |  |
+| ONESHOT_ATTACKOFFPIERCE | 390 | 390 | 0x186 |  |  |
+| STATE_ROAR | 391 | 391 | 0x187 |  |  |
+| STATE_LAUGH | 392 | 392 | 0x188 |  |  |
+| ONESHOT_CREATURE_SPECIAL | 393 | 393 | 0x189 |  |  |
+| ONESHOT_JUMPLANDRUN | 394 | 394 | 0x18A |  |  |
+| ONESHOT_JUMPEND | 395 | 395 | 0x18B |  |  |
+| ONESHOT_TALK_NOSHEATHE | 396 | 396 | 0x18C |  |  |
+| ONESHOT_POINT_NOSHEATHE | 397 | 397 | 0x18D |  |  |
+| STATE_CANNIBALIZE | 398 | 398 | 0x18E |  |  |
+| ONESHOT_JUMPSTART | 399 | 399 | 0x18F |  |  |
+| STATE_DANCESPECIAL | 400 | 400 | 0x190 |  |  |
+| ONESHOT_DANCESPECIAL | 401 | 401 | 0x191 |  |  |
+| ONESHOT_CUSTOMSPELL01 | 402 | 402 | 0x192 |  |  |
+| ONESHOT_CUSTOMSPELL02 | 403 | 403 | 0x193 |  |  |
+| ONESHOT_CUSTOMSPELL03 | 404 | 404 | 0x194 |  |  |
+| ONESHOT_CUSTOMSPELL04 | 405 | 405 | 0x195 |  |  |
+| ONESHOT_CUSTOMSPELL05 | 406 | 406 | 0x196 |  |  |
+| ONESHOT_CUSTOMSPELL06 | 407 | 407 | 0x197 |  |  |
+| ONESHOT_CUSTOMSPELL07 | 408 | 408 | 0x198 |  |  |
+| ONESHOT_CUSTOMSPELL08 | 409 | 409 | 0x199 |  |  |
+| ONESHOT_CUSTOMSPELL09 | 410 | 410 | 0x19A |  |  |
+| ONESHOT_CUSTOMSPELL10 | 411 | 411 | 0x19B |  |  |
+| STATE_EXCLAIM | 412 | 412 | 0x19C |  |  |
+| STATE_SIT_CHAIR_MED | 415 | 415 | 0x19F |  |  |
+| STATE_SPELLEFFECT_HOLD | 422 | 422 | 0x1A6 |  |  |
+| STATE_EAT_NO_SHEATHE | 423 | 423 | 0x1A7 |  |  |

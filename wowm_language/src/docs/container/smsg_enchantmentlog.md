@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 smsg SMSG_ENCHANTMENTLOG = 0x01D7 {
     Guid target_guid;    

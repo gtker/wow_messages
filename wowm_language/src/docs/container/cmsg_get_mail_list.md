@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 cmsg CMSG_GET_MAIL_LIST = 0x023A {
     Guid mailbox_guid;    

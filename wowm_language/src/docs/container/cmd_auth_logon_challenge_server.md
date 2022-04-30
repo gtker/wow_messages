@@ -1,5 +1,6 @@
 ## Protocol Version 2
 
+## Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
     u8 protocol_version = 0;    
@@ -18,6 +19,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
 ```
 ## Protocol Version 3
 
+## Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
     u8 protocol_version = 0;    
@@ -41,6 +43,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
 ```
 ## Protocol Version 8
 
+## Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
     u8 protocol_version = 0;    

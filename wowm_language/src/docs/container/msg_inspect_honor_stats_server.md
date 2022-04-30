@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
     Guid guid;    

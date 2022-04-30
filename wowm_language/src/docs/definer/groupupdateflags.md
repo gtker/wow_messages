@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 flag GroupUpdateFlags : u32 {
     FLAG_NONE = 0x00000000;    
@@ -28,3 +29,29 @@ flag GroupUpdateFlags : u32 {
 }
 
 ```
+## Enumerators
+| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
+| --------- | -------- | ------------- | --------- | ----------- | ------- |
+| FLAG_NONE | 0x00000000 | 0 | 0x0 |  | nothing |
+| FLAG_STATUS | 0x00000001 | 1 | 0x1 |  | uint8, enum GroupMemberOnlineStatus |
+| FLAG_CUR_HP | 0x00000002 | 2 | 0x2 |  | uint16 |
+| FLAG_MAX_HP | 0x00000004 | 4 | 0x4 |  | uint16 |
+| FLAG_POWER_TYPE | 0x00000008 | 8 | 0x8 |  | uint8, enum Powers |
+| FLAG_CUR_POWER | 0x00000010 | 16 | 0x10 |  | uint16 |
+| FLAG_MAX_POWER | 0x00000020 | 32 | 0x20 |  | uint16 |
+| FLAG_LEVEL | 0x00000040 | 64 | 0x40 |  | uint16 |
+| FLAG_ZONE | 0x00000080 | 128 | 0x80 |  | uint16 |
+| FLAG_POSITION | 0x00000100 | 256 | 0x100 |  | uint16, uint16 |
+| FLAG_AURAS | 0x00000200 | 512 | 0x200 |  | uint32 mask, for each bit set uint16 spellid |
+| FLAG_AURAS_2 | 0x00000400 | 1024 | 0x400 |  | uint16 above mask continuation, giving max total of 48 auras possible |
+| FLAG_PET_GUID | 0x00000800 | 2048 | 0x800 |  | uint64 pet guid |
+| FLAG_PET_NAME | 0x00001000 | 4096 | 0x1000 |  | pet name, NULL terminated string |
+| FLAG_PET_MODEL_ID | 0x00002000 | 8192 | 0x2000 |  | uint16, model id |
+| FLAG_PET_CUR_HP | 0x00004000 | 16384 | 0x4000 |  | uint16 pet cur health |
+| FLAG_PET_MAX_HP | 0x00008000 | 32768 | 0x8000 |  | uint16 pet max health |
+| FLAG_PET_POWER_TYPE | 0x00010000 | 65536 | 0x10000 |  | uint8 pet power type |
+| FLAG_PET_CUR_POWER | 0x00020000 | 131072 | 0x20000 |  | uint16 pet cur power |
+| FLAG_PET_MAX_POWER | 0x00040000 | 262144 | 0x40000 |  | uint16 pet max power |
+| FLAG_PET_AURAS | 0x00080000 | 524288 | 0x80000 |  | uint32 mask, for each bit set uint16 spellid, pet auras... |
+| FLAG_PET_AURAS_2 | 0x00100000 | 1048576 | 0x100000 |  | uint16 above mask continuation, giving max total of 48 auras possible |
+| MODE_OFFLINE | 0x10000000 | 268435456 | 0x10000000 |  |  |

@@ -1,5 +1,6 @@
 ## Client Version 1.12
 
+## Wowm Representation
 ```rust,ignore
 smsg SMSG_LOOT_ALL_PASSED = 0x029E {
     Guid looted_target_guid;    
