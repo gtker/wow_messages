@@ -13,13 +13,15 @@ enum ItemQuality : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| POOR | 0 | 0 | 0x0 |  |  |
-| NORMAL | 1 | 1 | 0x1 |  |  |
-| UNCOMMON | 2 | 2 | 0x2 |  |  |
-| RARE | 3 | 3 | 0x3 |  |  |
-| EPIC | 4 | 4 | 0x4 |  |  |
-| LEGENDARY | 5 | 5 | 0x5 |  |  |
-| ARTIFACT | 6 | 6 | 0x6 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `POOR` | 0 (0x00) |  |  |
+| `NORMAL` | 1 (0x01) |  |  |
+| `UNCOMMON` | 2 (0x02) |  |  |
+| `RARE` | 3 (0x03) |  |  |
+| `EPIC` | 4 (0x04) |  |  |
+| `LEGENDARY` | 5 (0x05) |  |  |
+| `ARTIFACT` | 6 (0x06) |  |  |

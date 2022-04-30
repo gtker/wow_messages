@@ -9,8 +9,10 @@ enum Os : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| WINDOWS | "\0Win" | 5728622 | 0x57696E |  |  |
-| OSX | "\0OSX" | 5198680 | 0x4F5358 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `WINDOWS` | 5728622 (0x57696E) |  |  |
+| `OSX` | 5198680 (0x4F5358) |  |  |

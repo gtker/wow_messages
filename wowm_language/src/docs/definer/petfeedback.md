@@ -10,10 +10,12 @@ enum PetFeedback : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| PET_DEAD | 1 | 1 | 0x1 |  |  |
-| NOTHING_TO_EAT | 2 | 2 | 0x2 |  |  |
-| CANT_ATTACK_TARGET | 3 | 3 | 0x3 |  |  |
-| NO_PATH_TO | 4 | 4 | 0x4 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `PET_DEAD` | 1 (0x01) |  |  |
+| `NOTHING_TO_EAT` | 2 (0x02) |  |  |
+| `CANT_ATTACK_TARGET` | 3 (0x03) |  |  |
+| `NO_PATH_TO` | 4 (0x04) |  |  |

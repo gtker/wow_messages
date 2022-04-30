@@ -22,22 +22,24 @@ enum ItemClass : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| CONSUMABLE | 0 | 0 | 0x0 |  |  |
-| CONTAINER | 1 | 1 | 0x1 |  |  |
-| WEAPON | 2 | 2 | 0x2 |  |  |
-| RESERVED_1 | 3 | 3 | 0x3 |  |  |
-| ARMOR | 4 | 4 | 0x4 |  |  |
-| REAGENT | 5 | 5 | 0x5 |  |  |
-| PROJECTILE | 6 | 6 | 0x6 |  |  |
-| TRADE_GOODS | 7 | 7 | 0x7 |  |  |
-| RESERVED_2 | 8 | 8 | 0x8 |  |  |
-| RECIPE | 9 | 9 | 0x9 |  |  |
-| RESERVED_3 | 10 | 10 | 0xA |  |  |
-| QUIVER | 11 | 11 | 0xB |  |  |
-| QUEST | 12 | 12 | 0xC |  |  |
-| KEY | 13 | 13 | 0xD |  |  |
-| RESERVED_4 | 14 | 14 | 0xE |  |  |
-| MISC | 15 | 15 | 0xF |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `CONSUMABLE` | 0 (0x00) |  |  |
+| `CONTAINER` | 1 (0x01) |  |  |
+| `WEAPON` | 2 (0x02) |  |  |
+| `RESERVED_1` | 3 (0x03) |  |  |
+| `ARMOR` | 4 (0x04) |  |  |
+| `REAGENT` | 5 (0x05) |  |  |
+| `PROJECTILE` | 6 (0x06) |  |  |
+| `TRADE_GOODS` | 7 (0x07) |  |  |
+| `RESERVED_2` | 8 (0x08) |  |  |
+| `RECIPE` | 9 (0x09) |  |  |
+| `RESERVED_3` | 10 (0x0A) |  |  |
+| `QUIVER` | 11 (0x0B) |  |  |
+| `QUEST` | 12 (0x0C) |  |  |
+| `KEY` | 13 (0x0D) |  |  |
+| `RESERVED_4` | 14 (0x0E) |  |  |
+| `MISC` | 15 (0x0F) |  |  |

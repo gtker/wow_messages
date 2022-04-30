@@ -11,11 +11,13 @@ enum StableResult : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| ERR_MONEY | 0x01 | 1 | 0x1 |  | you don't have enough money |
-| ERR_STABLE | 0x06 | 6 | 0x6 |  | currently used in most fail cases |
-| SUCCESS_STABLE | 0x08 | 8 | 0x8 |  | table success |
-| SUCCESS_UNSTABLE | 0x09 | 9 | 0x9 |  | unstable/swap success |
-| SUCCESS_BUY_SLOT | 0x0A | 10 | 0xA |  | buy slot success |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `ERR_MONEY` | 1 (0x01) |  | you don't have enough money |
+| `ERR_STABLE` | 6 (0x06) |  | currently used in most fail cases |
+| `SUCCESS_STABLE` | 8 (0x08) |  | table success |
+| `SUCCESS_UNSTABLE` | 9 (0x09) |  | unstable/swap success |
+| `SUCCESS_BUY_SLOT` | 10 (0x0A) |  | buy slot success |

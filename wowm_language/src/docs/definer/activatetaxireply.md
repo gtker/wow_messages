@@ -19,19 +19,21 @@ enum ActivateTaxiReply : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| OK | 0 | 0 | 0x0 |  |  |
-| UNSPECIFIEDSERVERERROR | 1 | 1 | 0x1 |  |  |
-| NOSUCHPATH | 2 | 2 | 0x2 |  |  |
-| NOTENOUGHMONEY | 3 | 3 | 0x3 |  |  |
-| TOOFARAWAY | 4 | 4 | 0x4 |  |  |
-| NOVENDORNEARBY | 5 | 5 | 0x5 |  |  |
-| NOTVISITED | 6 | 6 | 0x6 |  |  |
-| PLAYERBUSY | 7 | 7 | 0x7 |  |  |
-| PLAYERALREADYMOUNTED | 8 | 8 | 0x8 |  |  |
-| PLAYERSHAPESHIFTED | 9 | 9 | 0x9 |  |  |
-| PLAYERMOVING | 10 | 10 | 0xA |  |  |
-| SAMENODE | 11 | 11 | 0xB |  |  |
-| NOTSTANDING | 12 | 12 | 0xC |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `OK` | 0 (0x00) |  |  |
+| `UNSPECIFIEDSERVERERROR` | 1 (0x01) |  |  |
+| `NOSUCHPATH` | 2 (0x02) |  |  |
+| `NOTENOUGHMONEY` | 3 (0x03) |  |  |
+| `TOOFARAWAY` | 4 (0x04) |  |  |
+| `NOVENDORNEARBY` | 5 (0x05) |  |  |
+| `NOTVISITED` | 6 (0x06) |  |  |
+| `PLAYERBUSY` | 7 (0x07) |  |  |
+| `PLAYERALREADYMOUNTED` | 8 (0x08) |  |  |
+| `PLAYERSHAPESHIFTED` | 9 (0x09) |  |  |
+| `PLAYERMOVING` | 10 (0x0A) |  |  |
+| `SAMENODE` | 11 (0x0B) |  |  |
+| `NOTSTANDING` | 12 (0x0C) |  |  |

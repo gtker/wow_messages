@@ -14,14 +14,16 @@ enum QuestGiverStatus : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| NONE | 0 | 0 | 0x0 |  |  |
-| UNAVAILABLE | 1 | 1 | 0x1 |  |  |
-| CHAT | 2 | 2 | 0x2 |  |  |
-| INCOMPLETE | 3 | 3 | 0x3 |  |  |
-| REWARD_REP | 4 | 4 | 0x4 |  |  |
-| AVAILABLE | 5 | 5 | 0x5 |  |  |
-| REWARD_OLD | 6 | 6 | 0x6 |  | red dot on minimap |
-| REWARD2 | 7 | 7 | 0x7 |  | yellow dot on minimap |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `NONE` | 0 (0x00) |  |  |
+| `UNAVAILABLE` | 1 (0x01) |  |  |
+| `CHAT` | 2 (0x02) |  |  |
+| `INCOMPLETE` | 3 (0x03) |  |  |
+| `REWARD_REP` | 4 (0x04) |  |  |
+| `AVAILABLE` | 5 (0x05) |  |  |
+| `REWARD_OLD` | 6 (0x06) |  | red dot on minimap |
+| `REWARD2` | 7 (0x07) |  | yellow dot on minimap |

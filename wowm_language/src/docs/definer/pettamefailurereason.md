@@ -18,18 +18,20 @@ enum PetTameFailureReason : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| INVALIDCREATURE | 1 | 1 | 0x1 |  |  |
-| TOOMANY | 2 | 2 | 0x2 |  |  |
-| CREATUREALREADYOWNED | 3 | 3 | 0x3 |  |  |
-| NOTTAMEABLE | 4 | 4 | 0x4 |  |  |
-| ANOTHERSUMMONACTIVE | 5 | 5 | 0x5 |  |  |
-| UNITSCANTTAME | 6 | 6 | 0x6 |  |  |
-| NOPETAVAILABLE | 7 | 7 | 0x7 |  | not used in taming |
-| INTERNALERROR | 8 | 8 | 0x8 |  |  |
-| TOOHIGHLEVEL | 9 | 9 | 0x9 |  |  |
-| DEAD | 10 | 10 | 0xA |  | not used in taming |
-| NOTDEAD | 11 | 11 | 0xB |  | not used in taming |
-| UNKNOWNERROR | 12 | 12 | 0xC |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `INVALIDCREATURE` | 1 (0x01) |  |  |
+| `TOOMANY` | 2 (0x02) |  |  |
+| `CREATUREALREADYOWNED` | 3 (0x03) |  |  |
+| `NOTTAMEABLE` | 4 (0x04) |  |  |
+| `ANOTHERSUMMONACTIVE` | 5 (0x05) |  |  |
+| `UNITSCANTTAME` | 6 (0x06) |  |  |
+| `NOPETAVAILABLE` | 7 (0x07) |  | not used in taming |
+| `INTERNALERROR` | 8 (0x08) |  |  |
+| `TOOHIGHLEVEL` | 9 (0x09) |  |  |
+| `DEAD` | 10 (0x0A) |  | not used in taming |
+| `NOTDEAD` | 11 (0x0B) |  | not used in taming |
+| `UNKNOWNERROR` | 12 (0x0C) |  |  |

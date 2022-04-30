@@ -13,13 +13,15 @@ enum GmTicketResponse : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| NOT_EXIST | 0 | 0 | 0x0 |  |  |
-| ALREADY_EXIST | 1 | 1 | 0x1 |  |  |
-| CREATE_SUCCESS | 2 | 2 | 0x2 |  |  |
-| CREATE_ERROR | 3 | 3 | 0x3 |  |  |
-| UPDATE_SUCCESS | 4 | 4 | 0x4 |  |  |
-| UPDATE_ERROR | 5 | 5 | 0x5 |  |  |
-| TICKET_DELETED | 9 | 9 | 0x9 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `NOT_EXIST` | 0 (0x00) |  |  |
+| `ALREADY_EXIST` | 1 (0x01) |  |  |
+| `CREATE_SUCCESS` | 2 (0x02) |  |  |
+| `CREATE_ERROR` | 3 (0x03) |  |  |
+| `UPDATE_SUCCESS` | 4 (0x04) |  |  |
+| `UPDATE_ERROR` | 5 (0x05) |  |  |
+| `TICKET_DELETED` | 9 (0x09) |  |  |

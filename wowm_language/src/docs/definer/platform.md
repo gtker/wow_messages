@@ -9,8 +9,10 @@ enum Platform : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| X86 | "\0x86" | 7878710 | 0x783836 |  |  |
-| PPC | "\0PPC" | 5263427 | 0x505043 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `X86` | 7878710 (0x783836) |  |  |
+| `PPC` | 5263427 (0x505043) |  |  |

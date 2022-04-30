@@ -15,15 +15,17 @@ enum Race : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| HUMAN | 1 | 1 | 0x1 |  |  |
-| ORC | 2 | 2 | 0x2 |  |  |
-| DWARF | 3 | 3 | 0x3 |  |  |
-| NIGHTELF | 4 | 4 | 0x4 |  |  |
-| UNDEAD | 5 | 5 | 0x5 |  |  |
-| TAUREN | 6 | 6 | 0x6 |  |  |
-| GNOME | 7 | 7 | 0x7 |  |  |
-| TROLL | 8 | 8 | 0x8 |  |  |
-| GOBLIN | 9 | 9 | 0x9 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `HUMAN` | 1 (0x01) |  |  |
+| `ORC` | 2 (0x02) |  |  |
+| `DWARF` | 3 (0x03) |  |  |
+| `NIGHTELF` | 4 (0x04) |  |  |
+| `UNDEAD` | 5 (0x05) |  |  |
+| `TAUREN` | 6 (0x06) |  |  |
+| `GNOME` | 7 (0x07) |  |  |
+| `TROLL` | 8 (0x08) |  |  |
+| `GOBLIN` | 9 (0x09) |  |  |

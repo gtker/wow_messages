@@ -11,11 +11,13 @@ enum GroupLootSetting : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| FREE_FOR_ALL | 0 | 0 | 0x0 |  |  |
-| ROUND_ROBIN | 1 | 1 | 0x1 |  |  |
-| MASTER_LOOT | 2 | 2 | 0x2 |  |  |
-| GROUP_LOOT | 3 | 3 | 0x3 |  |  |
-| NEED_BEFORE_GREED | 4 | 4 | 0x4 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `FREE_FOR_ALL` | 0 (0x00) |  |  |
+| `ROUND_ROBIN` | 1 (0x01) |  |  |
+| `MASTER_LOOT` | 2 (0x02) |  |  |
+| `GROUP_LOOT` | 3 (0x03) |  |  |
+| `NEED_BEFORE_GREED` | 4 (0x04) |  |  |

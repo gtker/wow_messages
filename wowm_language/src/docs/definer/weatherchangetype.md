@@ -8,8 +8,10 @@ enum WeatherChangeType : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| SMOOTH | 0 | 0 | 0x0 |  |  |
-| INSTANT | 1 | 1 | 0x1 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `SMOOTH` | 0 (0x00) |  |  |
+| `INSTANT` | 1 (0x01) |  |  |

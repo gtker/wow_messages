@@ -10,10 +10,12 @@ enum TimerType : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| FATIGUE | 0 | 0 | 0x0 |  |  |
-| BREATH | 1 | 1 | 0x1 |  |  |
-| FEIGNDEATH | 2 | 2 | 0x2 |  |  |
-| ENVIRONMENTAL | 3 | 3 | 0x3 |  | Might be a mangos only thing. |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `FATIGUE` | 0 (0x00) |  |  |
+| `BREATH` | 1 (0x01) |  |  |
+| `FEIGNDEATH` | 2 (0x02) |  |  |
+| `ENVIRONMENTAL` | 3 (0x03) |  | Might be a mangos only thing. |

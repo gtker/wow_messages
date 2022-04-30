@@ -12,12 +12,14 @@ enum MeetingStoneStatus : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| LEAVE_QUEUE | 0 | 0 | 0x0 |  |  |
-| JOINED_QUEUE | 1 | 1 | 0x1 |  |  |
-| PARTY_MEMBER_LEFT_LFG | 2 | 2 | 0x2 |  |  |
-| PARTY_MEMBER_REMOVED_PARTY_REMOVED | 3 | 3 | 0x3 |  |  |
-| LOOKING_FOR_NEW_PARTY_IN_QUEUE | 4 | 4 | 0x4 |  |  |
-| NONE | 5 | 5 | 0x5 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `LEAVE_QUEUE` | 0 (0x00) |  |  |
+| `JOINED_QUEUE` | 1 (0x01) |  |  |
+| `PARTY_MEMBER_LEFT_LFG` | 2 (0x02) |  |  |
+| `PARTY_MEMBER_REMOVED_PARTY_REMOVED` | 3 (0x03) |  |  |
+| `LOOKING_FOR_NEW_PARTY_IN_QUEUE` | 4 (0x04) |  |  |
+| `NONE` | 5 (0x05) |  |  |

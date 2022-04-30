@@ -12,12 +12,14 @@ enum PetitionTurnInResult : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| OK | 0 | 0 | 0x0 |  |  |
-| ALREADY_SIGNED | 1 | 1 | 0x1 |  |  |
-| ALREADY_IN_GUILD | 2 | 2 | 0x2 |  |  |
-| CANT_SIGN_OWN | 3 | 3 | 0x3 |  |  |
-| NEED_MORE | 4 | 4 | 0x4 |  |  |
-| NOT_SERVER | 5 | 5 | 0x5 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `OK` | 0 (0x00) |  |  |
+| `ALREADY_SIGNED` | 1 (0x01) |  |  |
+| `ALREADY_IN_GUILD` | 2 (0x02) |  |  |
+| `CANT_SIGN_OWN` | 3 (0x03) |  |  |
+| `NEED_MORE` | 4 (0x04) |  |  |
+| `NOT_SERVER` | 5 (0x05) |  |  |

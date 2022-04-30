@@ -16,16 +16,18 @@ enum UnitStandState : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| STAND | 0 | 0 | 0x0 |  |  |
-| SIT | 1 | 1 | 0x1 |  |  |
-| SIT_CHAIR | 2 | 2 | 0x2 |  |  |
-| SLEEP | 3 | 3 | 0x3 |  |  |
-| SIT_LOW_CHAIR | 4 | 4 | 0x4 |  |  |
-| SIT_MEDIUM_CHAIR | 5 | 5 | 0x5 |  |  |
-| SIT_HIGH_CHAIR | 6 | 6 | 0x6 |  |  |
-| DEAD | 7 | 7 | 0x7 |  |  |
-| KNEEL | 8 | 8 | 0x8 |  |  |
-| CUSTOM | 9 | 9 | 0x9 |  | Used for Cthun according to cmangos. |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `STAND` | 0 (0x00) |  |  |
+| `SIT` | 1 (0x01) |  |  |
+| `SIT_CHAIR` | 2 (0x02) |  |  |
+| `SLEEP` | 3 (0x03) |  |  |
+| `SIT_LOW_CHAIR` | 4 (0x04) |  |  |
+| `SIT_MEDIUM_CHAIR` | 5 (0x05) |  |  |
+| `SIT_HIGH_CHAIR` | 6 (0x06) |  |  |
+| `DEAD` | 7 (0x07) |  |  |
+| `KNEEL` | 8 (0x08) |  |  |
+| `CUSTOM` | 9 (0x09) |  | Used for Cthun according to cmangos. |

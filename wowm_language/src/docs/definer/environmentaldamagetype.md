@@ -12,12 +12,14 @@ enum EnvironmentalDamageType : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| EXHAUSTED | 0 | 0 | 0x0 |  |  |
-| DROWNING | 1 | 1 | 0x1 |  |  |
-| FALL | 2 | 2 | 0x2 |  |  |
-| LAVA | 3 | 3 | 0x3 |  |  |
-| SLIME | 4 | 4 | 0x4 |  |  |
-| FIRE | 5 | 5 | 0x5 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `EXHAUSTED` | 0 (0x00) |  |  |
+| `DROWNING` | 1 (0x01) |  |  |
+| `FALL` | 2 (0x02) |  |  |
+| `LAVA` | 3 (0x03) |  |  |
+| `SLIME` | 4 (0x04) |  |  |
+| `FIRE` | 5 (0x05) |  |  |

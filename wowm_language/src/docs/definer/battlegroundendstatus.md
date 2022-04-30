@@ -8,8 +8,10 @@ enum BattlegroundEndStatus : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| NOT_ENDED | 0 | 0 | 0x0 |  |  |
-| ENDED | 1 | 1 | 0x1 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `NOT_ENDED` | 0 (0x00) |  |  |
+| `ENDED` | 1 (0x01) |  |  |

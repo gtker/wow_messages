@@ -11,11 +11,13 @@ enum MailType : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| NORMAL | 0 | 0 | 0x0 |  |  |
-| AUCTION | 2 | 2 | 0x2 |  |  |
-| CREATURE | 3 | 3 | 0x3 |  | client send CMSG_CREATURE_QUERY on this mailmessagetype |
-| GAMEOBJECT | 4 | 4 | 0x4 |  | client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype |
-| ITEM | 5 | 5 | 0x5 |  | client send CMSG_ITEM_QUERY on this mailmessagetype |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `NORMAL` | 0 (0x00) |  |  |
+| `AUCTION` | 2 (0x02) |  |  |
+| `CREATURE` | 3 (0x03) |  | client send CMSG_CREATURE_QUERY on this mailmessagetype |
+| `GAMEOBJECT` | 4 (0x04) |  | client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype |
+| `ITEM` | 5 (0x05) |  | client send CMSG_ITEM_QUERY on this mailmessagetype |

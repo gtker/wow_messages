@@ -9,9 +9,11 @@ enum SheathState : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| UNARMED | 0 | 0 | 0x0 |  |  |
-| MELEE | 1 | 1 | 0x1 |  |  |
-| RANGED | 2 | 2 | 0x2 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `UNARMED` | 0 (0x00) |  |  |
+| `MELEE` | 1 (0x01) |  |  |
+| `RANGED` | 2 (0x02) |  |  |

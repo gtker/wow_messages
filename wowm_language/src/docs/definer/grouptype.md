@@ -8,8 +8,10 @@ enum GroupType : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| NORMAL | 0 | 0 | 0x0 |  |  |
-| RAID | 1 | 1 | 0x1 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `NORMAL` | 0 (0x00) |  |  |
+| `RAID` | 1 (0x01) |  |  |

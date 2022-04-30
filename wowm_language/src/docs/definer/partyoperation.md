@@ -8,8 +8,10 @@ enum PartyOperation : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| INVITE | 0 | 0 | 0x0 |  |  |
-| LEAVE | 2 | 2 | 0x2 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `INVITE` | 0 (0x00) |  |  |
+| `LEAVE` | 2 (0x02) |  |  |

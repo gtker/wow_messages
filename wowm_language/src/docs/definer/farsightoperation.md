@@ -8,8 +8,10 @@ enum FarSightOperation : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| REMOVE | 0 | 0 | 0x0 |  |  |
-| ADD | 1 | 1 | 0x1 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `REMOVE` | 0 (0x00) |  |  |
+| `ADD` | 1 (0x01) |  |  |

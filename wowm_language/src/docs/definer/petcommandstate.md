@@ -10,10 +10,12 @@ enum PetCommandState : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| STAY | 0 | 0 | 0x0 |  |  |
-| FOLLOW | 1 | 1 | 0x1 |  |  |
-| ATTACK | 2 | 2 | 0x2 |  |  |
-| DISMISS | 3 | 3 | 0x3 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `STAY` | 0 (0x00) |  |  |
+| `FOLLOW` | 1 (0x01) |  |  |
+| `ATTACK` | 2 (0x02) |  |  |
+| `DISMISS` | 3 (0x03) |  |  |

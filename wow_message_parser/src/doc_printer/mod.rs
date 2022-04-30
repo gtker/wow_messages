@@ -2,6 +2,7 @@ use crate::container::Container;
 use crate::file_utils::{append_string_to_file, create_or_append, write_string_to_file};
 use crate::parser::enumerator::Definer;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use crate::parser::types::{Endianness, IntegerType};
 use crate::wowm_printer::{get_definer_wowm_definition, get_struct_wowm_definition};
 use std::fmt::Write;
 use std::fs::read_to_string;
@@ -111,7 +112,11 @@ pub fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocW
 
 fn common(s: &mut DocWriter, tags: &Tags) {
     print_versions(s, tags.logon_versions(), tags.versions());
+
+    print_metadata(s, tags);
 }
+
+fn print_metadata(s: &mut DocWriter, tags: &Tags) {}
 
 fn print_versions(
     s: &mut DocWriter,
@@ -182,20 +187,55 @@ pub fn print_docs_for_container(e: &Container) -> DocWriter {
 }
 
 fn print_definer_table(s: &mut DocWriter, e: &Definer) {
+    s.wln("## Type");
+    s.wln(format!(
+        "The basic type is `{ty_str}`, a {byte} byte ({bit} bit){endian} integer.",
+        ty_str = e.ty().str(),
+        byte = e.ty().size(),
+        bit = e.ty().size() * 8,
+        endian = match e.ty() {
+            IntegerType::U8 => "".to_string(),
+            IntegerType::U16(e) | IntegerType::U32(e) | IntegerType::U64(e) => format!(
+                " {} endian",
+                match e {
+                    Endianness::Little => "little",
+                    Endianness::Big => "big",
+                }
+            ),
+        }
+    ));
+
     s.wln("## Enumerators");
 
-    s.wln("| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |");
-    s.wln("| --------- | -------- | ------------- | --------- | ----------- | ------- |");
+    let any_fields_has_display = e.fields().iter().any(|f| f.tags().display().is_some());
+
+    s.w("| Enumerator | Original  | Description | Comment |");
+    if any_fields_has_display {
+        s.wln(" Display |");
+    } else {
+        s.newline();
+    }
+
+    s.w("| --------- | -------- | ----------- | ------- |");
+    if any_fields_has_display {
+        s.wln(" ------- |");
+    } else {
+        s.newline();
+    }
 
     for f in e.fields() {
-        s.wln(format!(
-            "| {} | {} | {} | 0x{:X} | {} | {} |",
-            f.name(),
-            f.value().original(),
-            f.value().int(),
-            f.value().int(),
-            f.tags().description(),
-            f.tags().comment(),
+        s.w(format!(
+            "| `{name}` | {value} (0x{hex:0>2X}) | {description} | {comment} |",
+            name = f.name(),
+            value = f.value().int(),
+            hex = f.value().int(),
+            description = f.tags().description().unwrap_or(""),
+            comment = f.tags().comment().unwrap_or(""),
         ));
+        if any_fields_has_display {
+            s.wln(format!(" {} |", f.tags().display().unwrap_or("")));
+        } else {
+            s.newline();
+        }
     }
 }

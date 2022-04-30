@@ -9,9 +9,11 @@ enum RollVote : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| PASS | 0 | 0 | 0x0 |  |  |
-| NEED | 1 | 1 | 0x1 |  |  |
-| GREED | 2 | 2 | 0x2 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `PASS` | 0 (0x00) |  |  |
+| `NEED` | 1 (0x01) |  |  |
+| `GREED` | 2 (0x02) |  |  |

@@ -8,8 +8,10 @@ enum LogFormat : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| DEFAULT | 0 | 0 | 0x0 |  |  |
-| DEBUG | 1 | 1 | 0x1 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `DEFAULT` | 0 (0x00) |  |  |
+| `DEBUG` | 1 (0x01) |  |  |

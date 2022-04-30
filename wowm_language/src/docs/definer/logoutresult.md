@@ -10,10 +10,12 @@ enum LogoutResult : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| SUCCESS | 0 | 0 | 0x0 |  |  |
-| FAILURE_IN_COMBAT | 1 | 1 | 0x1 |  |  |
-| FAILURE_FROZEN_BY_GM | 2 | 2 | 0x2 |  | vmangos checks for aura 9454. Has FIXME - Need the correct value. |
-| FAILURE_JUMPING_OR_FALLING | 3 | 3 | 0x3 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `SUCCESS` | 0 (0x00) |  |  |
+| `FAILURE_IN_COMBAT` | 1 (0x01) |  |  |
+| `FAILURE_FROZEN_BY_GM` | 2 (0x02) |  | vmangos checks for aura 9454. Has FIXME - Need the correct value. |
+| `FAILURE_JUMPING_OR_FALLING` | 3 (0x03) |  |  |

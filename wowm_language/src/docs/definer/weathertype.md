@@ -10,10 +10,12 @@ enum WeatherType : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| FINE | 0 | 0 | 0x0 |  |  |
-| RAIN | 1 | 1 | 0x1 |  |  |
-| SNOW | 2 | 2 | 0x2 |  |  |
-| STORM | 3 | 3 | 0x3 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `FINE` | 0 (0x00) |  |  |
+| `RAIN` | 1 (0x01) |  |  |
+| `SNOW` | 2 (0x02) |  |  |
+| `STORM` | 3 (0x03) |  |  |

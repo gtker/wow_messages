@@ -1,6 +1,6 @@
 use std::fmt::{Display, Formatter};
 
-use crate::{COMMENT, DESCRIPTION, LOGIN_LOGON_VERSIONS, TEST_STR, VERSIONS};
+use crate::{COMMENT, DESCRIPTION, DISPLAY, LOGIN_LOGON_VERSIONS, TEST_STR, VERSIONS};
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Copy, Clone)]
 pub enum WorldVersion {
@@ -45,6 +45,7 @@ pub struct Tags {
     world_versions: Vec<WorldVersion>,
     description: String,
     comment: String,
+    display: String,
 }
 
 impl Tags {
@@ -55,6 +56,7 @@ impl Tags {
             world_versions: vec![],
             description: "".to_string(),
             comment: "".to_string(),
+            display: "".to_string(),
         }
     }
 
@@ -110,9 +112,21 @@ impl Tags {
                 self.world_versions = vec![WorldVersion::All];
             }
         } else if key == DESCRIPTION {
-            self.description += &value.to_string();
+            if self.description == "" {
+                self.description = value.to_string();
+            } else {
+                self.description.push_str("\n");
+                self.description.push_str(value);
+            }
         } else if key == COMMENT {
-            self.comment += &value.to_string();
+            if self.comment == "" {
+                self.comment = value.to_string();
+            } else {
+                self.comment.push_str("\n");
+                self.comment.push_str(value);
+            }
+        } else if key == DISPLAY {
+            self.display = value.to_string();
         }
 
         for v in self.inner.iter_mut() {
@@ -219,12 +233,32 @@ impl Tags {
         false
     }
 
-    pub fn description(&self) -> &str {
-        &self.description
+    pub fn description(&self) -> Option<&str> {
+        if self.description == "" {
+            None
+        } else {
+            Some(&self.description)
+        }
     }
 
-    pub fn comment(&self) -> &str {
-        &self.comment
+    pub fn comment(&self) -> Option<&str> {
+        if self.comment == "" {
+            None
+        } else {
+            Some(&self.comment)
+        }
+    }
+
+    pub fn display(&self) -> Option<&str> {
+        if self.display == "" {
+            None
+        } else {
+            Some(&self.display)
+        }
+    }
+
+    pub fn has_display(&self) -> bool {
+        self.display != ""
     }
 }
 

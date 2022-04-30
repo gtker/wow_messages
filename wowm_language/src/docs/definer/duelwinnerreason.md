@@ -8,8 +8,10 @@ enum DuelWinnerReason : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| WON | 0 | 0 | 0x0 |  |  |
-| FLED | 1 | 1 | 0x1 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `WON` | 0 (0x00) |  |  |
+| `FLED` | 1 (0x01) |  |  |

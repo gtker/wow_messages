@@ -8,8 +8,10 @@ enum QuestCompletable : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| NOT_COMPLETABLE | 0 | 0 | 0x0 |  |  |
-| COMPLETEABLE | 3 | 3 | 0x3 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `NOT_COMPLETABLE` | 0 (0x00) |  |  |
+| `COMPLETEABLE` | 3 (0x03) |  |  |

@@ -11,11 +11,13 @@ enum ServerMessageType : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| SHUTDOWN_TIME | 1 | 1 | 0x1 |  |  |
-| RESTART_TIME | 2 | 2 | 0x2 |  |  |
-| CUSTOM | 3 | 3 | 0x3 |  |  |
-| SHUTDOWN_CANCELLED | 4 | 4 | 0x4 |  |  |
-| RESTART_CANCELLED | 5 | 5 | 0x5 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `SHUTDOWN_TIME` | 1 (0x01) |  |  |
+| `RESTART_TIME` | 2 (0x02) |  |  |
+| `CUSTOM` | 3 (0x03) |  |  |
+| `SHUTDOWN_CANCELLED` | 4 (0x04) |  |  |
+| `RESTART_CANCELLED` | 5 (0x05) |  |  |

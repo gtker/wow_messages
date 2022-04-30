@@ -13,13 +13,15 @@ enum SpellSchool : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| NORMAL | 0 | 0 | 0x0 |  | Physical, Armor |
-| HOLY | 1 | 1 | 0x1 |  |  |
-| FIRE | 2 | 2 | 0x2 |  |  |
-| NATURE | 3 | 3 | 0x3 |  |  |
-| FROST | 4 | 4 | 0x4 |  |  |
-| SHADOW | 5 | 5 | 0x5 |  |  |
-| ARCANE | 6 | 6 | 0x6 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `NORMAL` | 0 (0x00) |  | Physical, Armor |
+| `HOLY` | 1 (0x01) |  |  |
+| `FIRE` | 2 (0x02) |  |  |
+| `NATURE` | 3 (0x03) |  |  |
+| `FROST` | 4 (0x04) |  |  |
+| `SHADOW` | 5 (0x05) |  |  |
+| `ARCANE` | 6 (0x06) |  |  |

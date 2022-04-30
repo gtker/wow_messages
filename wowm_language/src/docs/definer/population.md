@@ -10,9 +10,11 @@ enum Population : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| GREEN_RECOMMENDED | 0x43480000 | 1128792064 | 0x43480000 |  |  |
-| RED_FULL | 0x43c80000 | 1137180672 | 0x43C80000 |  |  |
-| BLUE_RECOMMENDED | 0x44160000 | 1142292480 | 0x44160000 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `GREEN_RECOMMENDED` | 1128792064 (0x43480000) |  |  |
+| `RED_FULL` | 1137180672 (0x43C80000) |  |  |
+| `BLUE_RECOMMENDED` | 1142292480 (0x44160000) |  |  |

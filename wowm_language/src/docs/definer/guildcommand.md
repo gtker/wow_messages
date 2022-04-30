@@ -12,12 +12,14 @@ enum GuildCommand : u8 {
 }
 
 ```
+## Type
+The basic type is `u8`, a 1 byte (8 bit) integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| CREATE | 0x00 | 0 | 0x0 |  |  |
-| INVITE | 0x01 | 1 | 0x1 |  |  |
-| QUIT | 0x03 | 3 | 0x3 |  |  |
-| FOUNDER | 0x0E | 14 | 0xE |  |  |
-| UNKNOWN19 | 0x13 | 19 | 0x13 |  | cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE |
-| UNKNOWN20 | 0x14 | 20 | 0x14 |  | cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `CREATE` | 0 (0x00) |  |  |
+| `INVITE` | 1 (0x01) |  |  |
+| `QUIT` | 3 (0x03) |  |  |
+| `FOUNDER` | 14 (0x0E) |  |  |
+| `UNKNOWN19` | 19 (0x13) |  | cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE |
+| `UNKNOWN20` | 20 (0x14) |  | cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE |

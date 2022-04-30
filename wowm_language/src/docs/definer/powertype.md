@@ -12,12 +12,14 @@ enum PowerType : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| MANA | 0 | 0 | 0x0 |  | UNIT_FIELD_POWER1 |
-| RAGE | 1 | 1 | 0x1 |  | UNIT_FIELD_POWER2 |
-| FOCUS | 2 | 2 | 0x2 |  | UNIT_FIELD_POWER3 |
-| ENERGY | 3 | 3 | 0x3 |  | UNIT_FIELD_POWER4 |
-| HAPPINESS | 4 | 4 | 0x4 |  | UNIT_FIELD_POWER5 |
-| HEALTH | 0xFFFFFFFE | 4294967294 | 0xFFFFFFFE |  | (-2 as signed value) |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `MANA` | 0 (0x00) |  | UNIT_FIELD_POWER1 |
+| `RAGE` | 1 (0x01) |  | UNIT_FIELD_POWER2 |
+| `FOCUS` | 2 (0x02) |  | UNIT_FIELD_POWER3 |
+| `ENERGY` | 3 (0x03) |  | UNIT_FIELD_POWER4 |
+| `HAPPINESS` | 4 (0x04) |  | UNIT_FIELD_POWER5 |
+| `HEALTH` | 4294967294 (0xFFFFFFFE) |  | (-2 as signed value) |

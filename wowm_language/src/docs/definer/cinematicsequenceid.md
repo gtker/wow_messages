@@ -15,15 +15,17 @@ enum CinematicSequenceId : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| HUMAN | 81 | 81 | 0x51 |  |  |
-| ORC | 21 | 21 | 0x15 |  |  |
-| DWARF | 41 | 41 | 0x29 |  |  |
-| NIGHT_ELF | 61 | 61 | 0x3D |  |  |
-| UNDEAD | 2 | 2 | 0x2 |  |  |
-| TAUREN | 141 | 141 | 0x8D |  |  |
-| GNOME | 101 | 101 | 0x65 |  |  |
-| TROLL | 121 | 121 | 0x79 |  |  |
-| GOBLIN | 0 | 0 | 0x0 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `HUMAN` | 81 (0x51) |  |  |
+| `ORC` | 21 (0x15) |  |  |
+| `DWARF` | 41 (0x29) |  |  |
+| `NIGHT_ELF` | 61 (0x3D) |  |  |
+| `UNDEAD` | 2 (0x02) |  |  |
+| `TAUREN` | 141 (0x8D) |  |  |
+| `GNOME` | 101 (0x65) |  |  |
+| `TROLL` | 121 (0x79) |  |  |
+| `GOBLIN` | 0 (0x00) |  |  |

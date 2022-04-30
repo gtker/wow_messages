@@ -9,9 +9,11 @@ flag AccountFlag : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| GM | 0x000001 | 1 | 0x1 |  |  |
-| TRIAL | 0x000008 | 8 | 0x8 |  |  |
-| PROPASS | 0x800000 | 8388608 | 0x800000 |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `GM` | 1 (0x01) |  |  |
+| `TRIAL` | 8 (0x08) |  |  |
+| `PROPASS` | 8388608 (0x800000) |  |  |

@@ -9,9 +9,11 @@ enum GmTicketStatus : u32 {
 }
 
 ```
+## Type
+The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 ## Enumerators
-| Enumerator | Original | Decimal Value | Hex Value | Description | Comment |
-| --------- | -------- | ------------- | --------- | ----------- | ------- |
-| DBERROR | 0x00 | 0 | 0x0 |  |  |
-| HASTEXT | 0x06 | 6 | 0x6 |  |  |
-| DEFAULT | 0x0A | 10 | 0xA |  |  |
+| Enumerator | Original  | Description | Comment |
+| --------- | -------- | ----------- | ------- |
+| `DBERROR` | 0 (0x00) |  |  |
+| `HASTEXT` | 6 (0x06) |  |  |
+| `DEFAULT` | 10 (0x0A) |  |  |
