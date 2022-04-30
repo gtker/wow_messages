@@ -2,6 +2,12 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{MovementFlags};
 use crate::world::v1::v12::TransportInfo;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MovementInfo {
@@ -146,6 +152,138 @@ impl ReadableAndWritable for MovementInfo {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for MovementInfo {
+    type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // flags: MovementFlags
+        let flags = MovementFlags::tokio_read(r).await?;
+
+        // timestamp: u32
+        let timestamp = crate::util::tokio_read_u32_le(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::tokio_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::tokio_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::tokio_read_f32_le(r).await?;
+        // orientation: f32
+        let orientation = crate::util::tokio_read_f32_le(r).await?;
+        let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
+            // transport: TransportInfo
+            let transport = TransportInfo::tokio_read(r).await?;
+
+            Some(MovementInfoMovementFlagsON_TRANSPORT {
+                transport,
+            })
+        } else {
+            None
+        };
+
+        let flags_SWIMMING = if flags.is_SWIMMING() {
+            // pitch: f32
+            let pitch = crate::util::tokio_read_f32_le(r).await?;
+            Some(MovementInfoMovementFlagsSWIMMING {
+                pitch,
+            })
+        } else {
+            None
+        };
+
+        // fall_time: f32
+        let fall_time = crate::util::tokio_read_f32_le(r).await?;
+        let flags_JUMPING = if flags.is_JUMPING() {
+            // z_speed: f32
+            let z_speed = crate::util::tokio_read_f32_le(r).await?;
+            // cos_angle: f32
+            let cos_angle = crate::util::tokio_read_f32_le(r).await?;
+            // sin_angle: f32
+            let sin_angle = crate::util::tokio_read_f32_le(r).await?;
+            // xy_speed: f32
+            let xy_speed = crate::util::tokio_read_f32_le(r).await?;
+            Some(MovementInfoMovementFlagsJUMPING {
+                z_speed,
+                cos_angle,
+                sin_angle,
+                xy_speed,
+            })
+        } else {
+            None
+        };
+
+        let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
+            // spline_elevation: f32
+            let spline_elevation = crate::util::tokio_read_f32_le(r).await?;
+            Some(MovementInfoMovementFlagsSPLINE_ELEVATION {
+                spline_elevation,
+            })
+        } else {
+            None
+        };
+
+        let flags = MovementInfoMovementFlags {
+            inner: flags.as_u32(),
+            on_transport: flags_ON_TRANSPORT,
+            jumping: flags_JUMPING,
+            swimming: flags_SWIMMING,
+            spline_elevation: flags_SPLINE_ELEVATION,
+        };
+
+        Ok(Self {
+            flags,
+            timestamp,
+            position_x,
+            position_y,
+            position_z,
+            orientation,
+            fall_time,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // flags: MovementFlags
+        self.flags.tokio_write(w).await?;
+
+        // timestamp: u32
+        w.write_all(&self.timestamp.to_le_bytes()).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
+
+        // orientation: f32
+        w.write_all(&self.orientation.to_le_bytes()).await?;
+
+        if let Some(s) = &self.flags.on_transport {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.flags.swimming {
+            s.tokio_write(w).await?;
+        }
+
+        // fall_time: f32
+        w.write_all(&self.fall_time.to_le_bytes()).await?;
+
+        if let Some(s) = &self.flags.jumping {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.flags.spline_elevation {
+            s.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+}
 impl VariableSized for MovementInfo {
     fn size(&self) -> usize {
         self.flags.size() // flags: MovementFlags and subfields
@@ -189,6 +327,12 @@ impl MovementInfoMovementFlags {
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: MovementFlags = self.into();
         a.write(w)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: MovementFlags = self.into();
+        a.tokio_write(w).await?;
         Ok(())
     }
 
@@ -929,6 +1073,18 @@ impl MovementInfoMovementFlagsON_TRANSPORT {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl MovementInfoMovementFlagsON_TRANSPORT {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.transport.tokio_write(w).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -969,6 +1125,24 @@ impl MovementInfoMovementFlagsJUMPING {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl MovementInfoMovementFlagsJUMPING {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.z_speed.to_le_bytes()).await?;
+
+        w.write_all(&self.cos_angle.to_le_bytes()).await?;
+
+        w.write_all(&self.sin_angle.to_le_bytes()).await?;
+
+        w.write_all(&self.xy_speed.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -994,6 +1168,18 @@ impl MovementInfoMovementFlagsSWIMMING {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl MovementInfoMovementFlagsSWIMMING {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.pitch.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1019,5 +1205,17 @@ impl MovementInfoMovementFlagsSPLINE_ELEVATION {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl MovementInfoMovementFlagsSPLINE_ELEVATION {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.spline_elevation.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 

@@ -71,6 +71,16 @@ impl AsyncReadWrite for CMD_AUTH_RECONNECT_PROOF_Server {
             result,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // result: LoginResult
+        self.result.tokio_write(w).await?;
+
+        // padding: u16
+        w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+        Ok(())
+    }
 }
 impl ConstantSized for CMD_AUTH_RECONNECT_PROOF_Server {
     fn size() -> usize {

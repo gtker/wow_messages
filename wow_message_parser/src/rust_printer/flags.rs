@@ -75,6 +75,7 @@ fn common_impls(s: &mut Writer, e: &Definer) {
     s.body(format!("impl {} for {}", ASYNC_TRAIT, e.name()), |s| {
         s.wln("type Error = std::io::Error;");
 
+        s.wln(CFG_ASYNC_TOKIO);
         s.body("async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>", |s| {
             s.wln(format!(
                 "let inner = {module}::tokio_read_{ty}_{endian}(r).await?;",
@@ -83,6 +84,15 @@ fn common_impls(s: &mut Writer, e: &Definer) {
                 endian = e.ty().rust_endian_str()
             ));
             s.wln("Ok(Self { inner })");
+        });
+
+        s.wln(CFG_ASYNC_TOKIO);
+        s.body("async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error>", |s| {
+            s.wln(format!(
+                "w.write_all(&self.inner.to_{endian}_bytes()).await?;",
+                endian = e.ty().rust_endian_str(),
+            ));
+            s.wln("Ok(())");
         });
     });
 

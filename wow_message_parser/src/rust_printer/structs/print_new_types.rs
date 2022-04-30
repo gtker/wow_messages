@@ -10,7 +10,7 @@ use crate::rust_printer::structs::print_common_impls::print_write;
 use crate::rust_printer::structs::print_common_impls::print_write::{
     print_enum_if_statement_new, print_flag_if_statement, print_write_definition,
 };
-use crate::rust_printer::Writer;
+use crate::rust_printer::{ImplType, Writer, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO};
 
 pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
     for ce in e.nested_types().new_enums() {
@@ -83,6 +83,15 @@ fn print_write_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
             s.wln("Ok(())");
         },
     );
+
+    s.bodyn("pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", |s| {
+        s.wln(format!(
+            "let a: {ty} = self.into();",
+            ty = ce.original_ty_name(),
+        ));
+        s.wln("a.tokio_write(w).await?;");
+        s.wln("Ok(())");
+    });
 }
 
 fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
@@ -467,10 +476,105 @@ fn print_types_for_new_flag_flag_elseif(
     s.newline();
 }
 
-fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: &Objects) {
-    let prefix = "";
-    let postfix = "";
+fn print_write_for_new_flag_complex(
+    s: &mut Writer,
+    f: &Enumerator,
+    function_header: &str,
+    prefix: &str,
+    postfix: &str,
+) {
+    s.bodyn(function_header, |s| {
+        for sf in f.subfields() {
+            match sf.ty() {
+                Type::Integer(int_type) => {
+                    let verified = match sf.constant_value() {
+                        None => None,
+                        Some(v) => {
+                            let parsed_value = crate::parser::utility::parse_value(v);
+                            if let Ok(v) = parsed_value {
+                                Some(VerifiedContainerValue::new(
+                                    v,
+                                    sf.constant_value().as_ref().unwrap().clone(),
+                                ))
+                            } else {
+                                None
+                            }
+                        }
+                    };
+                    print_write::print_write_field_integer(
+                        s,
+                        sf.name(),
+                        "self.",
+                        &int_type,
+                        sf.used_as_size_in(),
+                        &verified,
+                        0,
+                        postfix,
+                    );
+                }
+                Type::FloatingPoint(floating) => {
+                    print_write::print_write_field_floating(
+                        s,
+                        sf.name(),
+                        "self.",
+                        &floating,
+                        postfix,
+                    );
+                }
+                Type::CString => {
+                    print_write::print_write_field_cstring(s, sf.name(), "self.", postfix);
+                }
+                Type::String { .. } => {
+                    print_write::print_write_field_string(s, sf.name(), "self.", postfix);
+                }
+                Type::Array(array) => {
+                    print_write::print_write_field_array(
+                        s,
+                        sf.name(),
+                        "self.",
+                        array,
+                        prefix,
+                        postfix,
+                    );
+                }
+                Type::Identifier { s: identifier, .. } => {
+                    print_write::print_write_field_identifier(
+                        s,
+                        sf.name(),
+                        "self.",
+                        &None,
+                        identifier,
+                        prefix,
+                        postfix,
+                    )
+                }
+                Type::PackedGuid => {
+                    s.wln(format!(
+                        "{variable_prefix}{name}.{prefix}write_packed(w){postfix}?;",
+                        variable_prefix = "self.",
+                        name = sf.name(),
+                        prefix = prefix,
+                        postfix = postfix,
+                    ));
+                    s.newline();
+                }
+                Type::Guid | Type::UpdateMask | Type::AuraMask => {
+                    s.wln(format!(
+                        "{variable_prefix}{name}.{prefix}write(w){postfix}?;",
+                        variable_prefix = "self.",
+                        name = sf.name(),
+                        prefix = prefix,
+                        postfix = postfix,
+                    ));
+                    s.newline();
+                }
+            }
+        }
+        s.wln("Ok(())");
+    });
+}
 
+fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: &Objects) {
     for f in ce.fields() {
         if f.should_not_be_in_type() {
             continue;
@@ -567,105 +671,20 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
                     }
                 }
 
-                s.func_pub(
-                    "write<W: std::io::Write>(&self, w: &mut W)",
-                    "std::result::Result<(), std::io::Error>",
-                    |s| {
-                        for sf in f.subfields() {
-                            match sf.ty() {
-                                Type::Integer(int_type) => {
-                                    let verified = match sf.constant_value() {
-                                        None => None,
-                                        Some(v) => {
-                                            let parsed_value =
-                                                crate::parser::utility::parse_value(v);
-                                            if let Ok(v) = parsed_value {
-                                                Some(VerifiedContainerValue::new(
-                                                    v,
-                                                    sf.constant_value().as_ref().unwrap().clone(),
-                                                ))
-                                            } else {
-                                                None
-                                            }
-                                        }
-                                    };
-                                    print_write::print_write_field_integer(
-                                        s,
-                                        sf.name(),
-                                        "self.",
-                                        int_type,
-                                        sf.used_as_size_in(),
-                                        &verified,
-                                        0,
-                                        postfix,
-                                    );
-                                }
-                                Type::FloatingPoint(floating) => {
-                                    print_write::print_write_field_floating(
-                                        s,
-                                        sf.name(),
-                                        "self.",
-                                        floating,
-                                        postfix,
-                                    );
-                                }
-                                Type::CString => {
-                                    print_write::print_write_field_cstring(
-                                        s,
-                                        sf.name(),
-                                        "self.",
-                                        postfix,
-                                    );
-                                }
-                                Type::String { .. } => {
-                                    print_write::print_write_field_string(
-                                        s,
-                                        sf.name(),
-                                        "self.",
-                                        postfix,
-                                    );
-                                }
-                                Type::Array(array) => {
-                                    print_write::print_write_field_array(
-                                        s,
-                                        sf.name(),
-                                        "self.",
-                                        array,
-                                        postfix,
-                                    );
-                                }
-                                Type::Identifier { s: identifier, .. } => {
-                                    print_write::print_write_field_identifier(
-                                        s,
-                                        sf.name(),
-                                        "self.",
-                                        &None,
-                                        identifier,
-                                        prefix,
-                                        postfix,
-                                    )
-                                }
-                                Type::PackedGuid => {
-                                    s.wln(format!(
-                                        "{variable_prefix}{name}.write_packed(w)?;",
-                                        variable_prefix = "self.",
-                                        name = sf.name()
-                                    ));
-                                    s.newline();
-                                }
-                                Type::Guid | Type::UpdateMask | Type::AuraMask => {
-                                    s.wln(format!(
-                                        "{variable_prefix}{name}.write(w)?;",
-                                        variable_prefix = "self.",
-                                        name = sf.name()
-                                    ));
-                                    s.newline();
-                                }
-                            }
-                        }
-                        s.wln("Ok(())");
-                    },
-                );
+                print_write_for_new_flag_complex(s, f, "pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", "", "");
+            },
+        );
+
+        s.wln(CFG_ASYNC_ANY);
+        s.bodyn(
+            format!(
+                "impl {c_name}{f_name}",
+                c_name = ce.name(),
+                f_name = f.name(),
+            ),
+            |s| {
+                s.wln(CFG_ASYNC_TOKIO);
+                print_write_for_new_flag_complex(s, f, "async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", ImplType::Tokio.prefix(), ImplType::Tokio.postfix());
             },
         );
     }
@@ -808,6 +827,15 @@ fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
         },
     );
 
+    s.bodyn("pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", |s| {
+        s.wln(format!(
+            "let a: {ty} = self.into();",
+            ty = ce.original_ty_name(),
+        ));
+        s.wln("a.tokio_write(w).await?;");
+        s.wln("Ok(())");
+    });
+
     let types = get_upcast_types(ce.ty());
 
     for t in types {
@@ -830,6 +858,23 @@ fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
                 ));
             },
         );
+
+        s.bodyn(
+            format!(
+                "pub async fn tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
+                ty = t.rust_str(),
+                endian = t.rust_endian_str()),
+            |s| {
+            s.wln(format!(
+                "let a: {ty} = self.into();",
+                ty = ce.original_ty_name(),
+            ));
+            s.wln(format!(
+                "a.tokio_write_{ty}_{endian}(w).await",
+                ty = t.rust_str(),
+                endian = t.rust_endian_str()
+            ));
+        });
     }
 }
 

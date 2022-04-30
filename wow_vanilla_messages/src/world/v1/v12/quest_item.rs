@@ -1,5 +1,11 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct QuestItem {
@@ -54,6 +60,51 @@ impl ReadableAndWritable for QuestItem {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for QuestItem {
+    type Error = QuestItemError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // quest_id: u32
+        let quest_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // quest_icon: u32
+        let quest_icon = crate::util::tokio_read_u32_le(r).await?;
+
+        // level: u32
+        let level = crate::util::tokio_read_u32_le(r).await?;
+
+        // title: CString
+        let title = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let title = String::from_utf8(title)?;
+
+        Ok(Self {
+            quest_id,
+            quest_icon,
+            level,
+            title,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+        // quest_icon: u32
+        w.write_all(&self.quest_icon.to_le_bytes()).await?;
+
+        // level: u32
+        w.write_all(&self.level.to_le_bytes()).await?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+}
 impl VariableSized for QuestItem {
     fn size(&self) -> usize {
         4 // quest_id: u32

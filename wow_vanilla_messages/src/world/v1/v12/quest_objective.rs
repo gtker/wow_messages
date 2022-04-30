@@ -1,5 +1,11 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -52,6 +58,48 @@ impl ReadableAndWritable for QuestObjective {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for QuestObjective {
+    type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // creature_id: u32
+        let creature_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // kill_count: u32
+        let kill_count = crate::util::tokio_read_u32_le(r).await?;
+
+        // required_item_id: u32
+        let required_item_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // required_item_count: u32
+        let required_item_count = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            creature_id,
+            kill_count,
+            required_item_id,
+            required_item_count,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // creature_id: u32
+        w.write_all(&self.creature_id.to_le_bytes()).await?;
+
+        // kill_count: u32
+        w.write_all(&self.kill_count.to_le_bytes()).await?;
+
+        // required_item_id: u32
+        w.write_all(&self.required_item_id.to_le_bytes()).await?;
+
+        // required_item_count: u32
+        w.write_all(&self.required_item_count.to_le_bytes()).await?;
+
+        Ok(())
+    }
+}
 impl ConstantSized for QuestObjective {
     fn size() -> usize {
         Self::maximum_possible_size()

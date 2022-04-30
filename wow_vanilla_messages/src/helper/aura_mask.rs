@@ -1,6 +1,9 @@
 use std::io;
 use std::io::{Read, Write};
 
+#[cfg(feature = "async_tokio")]
+use tokio::io::AsyncWriteExt;
+
 #[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub struct AuraMask {
     auras: [Option<u16>; Self::MAX_CAPACITY],
@@ -33,7 +36,30 @@ impl AuraMask {
 
         for &i in self.auras() {
             if let Some(b) = i {
-                crate::util::write_u16_le(w, b);
+                crate::util::write_u16_le(w, b)?;
+            }
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
+        &self,
+        w: &mut W,
+    ) -> Result<(), std::io::Error> {
+        let mut bit_pattern: u32 = 0;
+        for (i, &b) in self.auras().iter().enumerate() {
+            if b.is_some() {
+                bit_pattern |= 1 << i;
+            }
+        }
+
+        crate::util::tokio_write_u32_le(w, bit_pattern).await?;
+
+        for &i in self.auras() {
+            if let Some(b) = i {
+                crate::util::tokio_write_u16_le(w, b).await?;
             }
         }
 

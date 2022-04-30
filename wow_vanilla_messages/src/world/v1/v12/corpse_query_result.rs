@@ -34,10 +34,17 @@ impl ReadableAndWritable for CorpseQueryResult {
 impl AsyncReadWrite for CorpseQueryResult {
     type Error = CorpseQueryResultError;
 
+    #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let a = crate::util::tokio_read_u8_le(r).await?;
 
         Ok(a.try_into()?)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.as_u8().to_le_bytes()).await?;
+        Ok(())
     }
 
 }
@@ -48,8 +55,18 @@ impl CorpseQueryResult {
         Ok((a as u8).try_into()?)
     }
 
+    pub async fn tokio_read_u16_le<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, CorpseQueryResultError> {
+        let a = crate::util::tokio_read_u16_le(r).await?;
+        Ok((a as u8).try_into()?)
+    }
+
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u16_le(w, self.as_u8() as u16)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::tokio_write_u16_le(w, self.as_u8() as u16).await?;
         Ok(())
     }
 
@@ -58,8 +75,18 @@ impl CorpseQueryResult {
         Ok((a as u8).try_into()?)
     }
 
+    pub async fn tokio_read_u16_be<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, CorpseQueryResultError> {
+        let a = crate::util::tokio_read_u16_be(r).await?;
+        Ok((a as u8).try_into()?)
+    }
+
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u16_be(w, self.as_u8() as u16)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::tokio_write_u16_be(w, self.as_u8() as u16).await?;
         Ok(())
     }
 
@@ -68,8 +95,18 @@ impl CorpseQueryResult {
         Ok((a as u8).try_into()?)
     }
 
+    pub async fn tokio_read_u32_le<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, CorpseQueryResultError> {
+        let a = crate::util::tokio_read_u32_le(r).await?;
+        Ok((a as u8).try_into()?)
+    }
+
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u32_le(w, self.as_u8() as u32)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::tokio_write_u32_le(w, self.as_u8() as u32).await?;
         Ok(())
     }
 
@@ -78,8 +115,18 @@ impl CorpseQueryResult {
         Ok((a as u8).try_into()?)
     }
 
+    pub async fn tokio_read_u32_be<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, CorpseQueryResultError> {
+        let a = crate::util::tokio_read_u32_be(r).await?;
+        Ok((a as u8).try_into()?)
+    }
+
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u32_be(w, self.as_u8() as u32)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::tokio_write_u32_be(w, self.as_u8() as u32).await?;
         Ok(())
     }
 
@@ -88,8 +135,18 @@ impl CorpseQueryResult {
         Ok((a as u8).try_into()?)
     }
 
+    pub async fn tokio_read_u64_le<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, CorpseQueryResultError> {
+        let a = crate::util::tokio_read_u64_le(r).await?;
+        Ok((a as u8).try_into()?)
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u64_le(w, self.as_u8() as u64)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::tokio_write_u64_le(w, self.as_u8() as u64).await?;
         Ok(())
     }
 
@@ -98,8 +155,18 @@ impl CorpseQueryResult {
         Ok((a as u8).try_into()?)
     }
 
+    pub async fn tokio_read_u64_be<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, CorpseQueryResultError> {
+        let a = crate::util::tokio_read_u64_be(r).await?;
+        Ok((a as u8).try_into()?)
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u64_be(w, self.as_u8() as u64)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::tokio_write_u64_be(w, self.as_u8() as u64).await?;
         Ok(())
     }
 

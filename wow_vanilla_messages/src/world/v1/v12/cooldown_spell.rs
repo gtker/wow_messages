@@ -1,5 +1,11 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -60,6 +66,55 @@ impl ReadableAndWritable for CooldownSpell {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for CooldownSpell {
+    type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // spell_id: u16
+        let spell_id = crate::util::tokio_read_u16_le(r).await?;
+
+        // item_id: u16
+        let item_id = crate::util::tokio_read_u16_le(r).await?;
+
+        // spell_category: u16
+        let spell_category = crate::util::tokio_read_u16_le(r).await?;
+
+        // cooldown_in_msecs: u32
+        let cooldown_in_msecs = crate::util::tokio_read_u32_le(r).await?;
+
+        // category_cooldown_in_msecs: u32
+        let category_cooldown_in_msecs = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            spell_id,
+            item_id,
+            spell_category,
+            cooldown_in_msecs,
+            category_cooldown_in_msecs,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // spell_id: u16
+        w.write_all(&self.spell_id.to_le_bytes()).await?;
+
+        // item_id: u16
+        w.write_all(&self.item_id.to_le_bytes()).await?;
+
+        // spell_category: u16
+        w.write_all(&self.spell_category.to_le_bytes()).await?;
+
+        // cooldown_in_msecs: u32
+        w.write_all(&self.cooldown_in_msecs.to_le_bytes()).await?;
+
+        // category_cooldown_in_msecs: u32
+        w.write_all(&self.category_cooldown_in_msecs.to_le_bytes()).await?;
+
+        Ok(())
+    }
+}
 impl ConstantSized for CooldownSpell {
     fn size() -> usize {
         Self::maximum_possible_size()

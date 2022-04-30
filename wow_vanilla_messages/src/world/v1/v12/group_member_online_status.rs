@@ -37,9 +37,15 @@ impl ReadableAndWritable for GroupMemberOnlineStatus {
 #[async_trait]
 impl AsyncReadWrite for GroupMemberOnlineStatus {
     type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
         let inner = crate::util::tokio_read_u8_le(r).await?;
         Ok(Self { inner })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        w.write_all(&self.inner.to_le_bytes()).await?;
+        Ok(())
     }
 }
 impl GroupMemberOnlineStatus {

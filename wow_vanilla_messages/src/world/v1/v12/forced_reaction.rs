@@ -1,5 +1,11 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -36,6 +42,34 @@ impl ReadableAndWritable for ForcedReaction {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for ForcedReaction {
+    type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // faction_id: u32
+        let faction_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // reputation_rank: u32
+        let reputation_rank = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            faction_id,
+            reputation_rank,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // faction_id: u32
+        w.write_all(&self.faction_id.to_le_bytes()).await?;
+
+        // reputation_rank: u32
+        w.write_all(&self.reputation_rank.to_le_bytes()).await?;
+
+        Ok(())
+    }
+}
 impl ConstantSized for ForcedReaction {
     fn size() -> usize {
         Self::maximum_possible_size()

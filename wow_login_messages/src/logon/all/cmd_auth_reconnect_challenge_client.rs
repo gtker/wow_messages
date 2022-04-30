@@ -179,6 +179,43 @@ impl AsyncReadWrite for CMD_AUTH_RECONNECT_CHALLENGE_Client {
             account_name,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // protocol_version: u8
+        w.write_all(&self.protocol_version.to_le_bytes()).await?;
+
+        // size: u16
+        w.write_all(&((self.size() - 3) as u16).to_le_bytes()).await?;
+
+        // game_name: u32
+        w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes()).await?;
+
+        // version: Version
+        self.version.tokio_write(w).await?;
+
+        // platform: Platform
+        self.platform.tokio_write(w).await?;
+
+        // os: Os
+        self.os.tokio_write(w).await?;
+
+        // locale: Locale
+        self.locale.tokio_write(w).await?;
+
+        // utc_timezone_offset: u32
+        w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;
+
+        // client_ip_address: u32_be
+        w.write_all(&self.client_ip_address.to_be_bytes()).await?;
+
+        // account_name_length: u8
+        w.write_all(&(self.account_name.len() as u8).to_le_bytes()).await?;
+
+        // account_name: String[account_name_length]
+        w.write_all(self.account_name.as_bytes()).await?;
+
+        Ok(())
+    }
 }
 impl VariableSized for CMD_AUTH_RECONNECT_CHALLENGE_Client {
     fn size(&self) -> usize {

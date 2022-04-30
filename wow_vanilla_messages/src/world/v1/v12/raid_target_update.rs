@@ -2,6 +2,12 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{RaidTargetIndex, RaidTargetIndexError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -38,6 +44,34 @@ impl ReadableAndWritable for RaidTargetUpdate {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for RaidTargetUpdate {
+    type Error = RaidTargetUpdateError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // index: RaidTargetIndex
+        let index = RaidTargetIndex::tokio_read(r).await?;
+
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        Ok(Self {
+            index,
+            guid,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // index: RaidTargetIndex
+        self.index.tokio_write(w).await?;
+
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        Ok(())
+    }
+}
 impl ConstantSized for RaidTargetUpdate {
     fn size() -> usize {
         Self::maximum_possible_size()

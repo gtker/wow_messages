@@ -58,6 +58,13 @@ impl AsyncReadWrite for CMD_REALM_LIST_Client {
         Ok(Self {
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // padding: u32
+        w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+        Ok(())
+    }
 }
 impl ConstantSized for CMD_REALM_LIST_Client {
     fn size() -> usize {

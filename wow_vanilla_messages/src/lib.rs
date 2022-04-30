@@ -111,11 +111,10 @@ pub trait AsyncReadWrite: Sized + Unpin {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>;
-    /*
+
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
         &self,
         w: &mut W,
     ) -> Result<(), std::io::Error>;
-    */
 }

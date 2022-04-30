@@ -76,10 +76,17 @@ impl ReadableAndWritable for Map {
 impl AsyncReadWrite for Map {
     type Error = MapError;
 
+    #[cfg(feature = "async_tokio")]
     async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let a = crate::util::tokio_read_u32_le(r).await?;
 
         Ok(a.try_into()?)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.as_u32().to_le_bytes()).await?;
+        Ok(())
     }
 
 }
@@ -90,8 +97,18 @@ impl Map {
         Ok((a as u32).try_into()?)
     }
 
+    pub async fn tokio_read_u32_be<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, MapError> {
+        let a = crate::util::tokio_read_u32_be(r).await?;
+        Ok((a as u32).try_into()?)
+    }
+
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u32_be(w, self.as_u32() as u32)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::tokio_write_u32_be(w, self.as_u32() as u32).await?;
         Ok(())
     }
 
@@ -100,8 +117,18 @@ impl Map {
         Ok((a as u32).try_into()?)
     }
 
+    pub async fn tokio_read_u64_le<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, MapError> {
+        let a = crate::util::tokio_read_u64_le(r).await?;
+        Ok((a as u32).try_into()?)
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u64_le(w, self.as_u32() as u64)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::tokio_write_u64_le(w, self.as_u32() as u64).await?;
         Ok(())
     }
 
@@ -110,8 +137,18 @@ impl Map {
         Ok((a as u32).try_into()?)
     }
 
+    pub async fn tokio_read_u64_be<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, MapError> {
+        let a = crate::util::tokio_read_u64_be(r).await?;
+        Ok((a as u32).try_into()?)
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u64_be(w, self.as_u32() as u64)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::tokio_write_u64_be(w, self.as_u32() as u64).await?;
         Ok(())
     }
 

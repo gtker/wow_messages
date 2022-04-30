@@ -151,6 +151,46 @@ impl AsyncReadWrite for CMD_AUTH_RECONNECT_CHALLENGE_Server {
             result: result_if,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // result: LoginResult
+        self.result.tokio_write(w).await?;
+
+        match &self.result {
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS {
+                challenge_data,
+                checksum_salt,
+            } => {
+                // challenge_data: u8[16]
+                for i in challenge_data.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+                // checksum_salt: u8[16]
+                for i in checksum_salt.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+            }
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_BANNED => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => {}
+            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => {}
+        }
+
+        Ok(())
+    }
 }
 impl VariableSized for CMD_AUTH_RECONNECT_CHALLENGE_Server {
     fn size(&self) -> usize {
@@ -281,9 +321,20 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult {
         Ok(())
     }
 
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write(w).await?;
+        Ok(())
+    }
+
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u16_le(w)
+    }
+
+    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u16_le(w).await
     }
 
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -291,9 +342,19 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult {
         a.write_u16_be(w)
     }
 
+    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u16_be(w).await
+    }
+
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u32_le(w)
+    }
+
+    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u32_le(w).await
     }
 
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -301,14 +362,29 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult {
         a.write_u32_be(w)
     }
 
+    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u32_be(w).await
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u64_le(w)
     }
 
+    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u64_le(w).await
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u64_be(w)
+    }
+
+    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u64_be(w).await
     }
 
 }

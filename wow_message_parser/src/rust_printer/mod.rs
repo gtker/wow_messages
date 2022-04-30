@@ -271,6 +271,23 @@ impl Writer {
         self.closing_curly_newline();
     }
 
+    pub fn async_funcn_pub<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self)>(
+        &mut self,
+        name_and_args: S,
+        return_type: S1,
+        f: F,
+    ) {
+        self.open_curly(format!(
+            "pub async fn {} -> {}",
+            name_and_args.as_ref(),
+            return_type.as_ref()
+        ));
+
+        f(self);
+
+        self.closing_curly_newline();
+    }
+
     pub fn funcn_pub<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self)>(
         &mut self,
         name_and_args: S,
@@ -515,4 +532,21 @@ pub enum ImplType {
     Std,
     Tokio,
     AsyncStd,
+}
+
+impl ImplType {
+    pub fn postfix(&self) -> &str {
+        match self {
+            ImplType::Std => "",
+            _ => ".await",
+        }
+    }
+
+    pub fn prefix(&self) -> &str {
+        match self {
+            ImplType::Std => "",
+            ImplType::Tokio => "tokio_",
+            ImplType::AsyncStd => "astd_",
+        }
+    }
 }

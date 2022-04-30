@@ -2,6 +2,12 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Language, LanguageError};
 use crate::world::v1::v12::NpcTextUpdateEmote;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct NpcTextUpdate {
@@ -66,6 +72,61 @@ impl ReadableAndWritable for NpcTextUpdate {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for NpcTextUpdate {
+    type Error = NpcTextUpdateError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // probability: f32
+        let probability = crate::util::tokio_read_f32_le(r).await?;
+        // texts: CString[2]
+        let mut texts = Vec::with_capacity(2 as usize);
+        for i in 0..2 {
+            let s = crate::util::tokio_read_c_string_to_vec(r).await?;
+            texts[i] = String::from_utf8(s)?;
+        }
+        let texts = texts.try_into().unwrap();
+
+        // language: Language
+        let language = Language::tokio_read(r).await?;
+
+        // emotes: NpcTextUpdateEmote[3]
+        let mut emotes = Vec::with_capacity(3 as usize);
+        for i in 0..3 {
+            emotes.push(NpcTextUpdateEmote::tokio_read(r).await?);
+        }
+        let emotes = emotes.try_into().unwrap();
+
+        Ok(Self {
+            probability,
+            texts,
+            language,
+            emotes,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // probability: f32
+        w.write_all(&self.probability.to_le_bytes()).await?;
+
+        // texts: CString[2]
+        for i in self.texts.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
+        }
+
+        // language: Language
+        self.language.tokio_write(w).await?;
+
+        // emotes: NpcTextUpdateEmote[3]
+        for i in self.emotes.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+}
 impl VariableSized for NpcTextUpdate {
     fn size(&self) -> usize {
         4 // probability: f32

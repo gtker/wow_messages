@@ -10,7 +10,7 @@ use crate::rust_printer::new_enums::{
 };
 use crate::rust_printer::rust_view::RustType;
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty;
-use crate::rust_printer::{ImplType, Writer};
+use crate::rust_printer::Writer;
 use crate::UTILITY_PATH;
 
 fn print_read_array(

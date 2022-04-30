@@ -1,5 +1,11 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -68,6 +74,62 @@ impl ReadableAndWritable for ItemSpells {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for ItemSpells {
+    type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // spell: u32
+        let spell = crate::util::tokio_read_u32_le(r).await?;
+
+        // spell_trigger: u32
+        let spell_trigger = crate::util::tokio_read_u32_le(r).await?;
+
+        // spell_charges: u32
+        let spell_charges = crate::util::tokio_read_u32_le(r).await?;
+
+        // spell_cooldown: u32
+        let spell_cooldown = crate::util::tokio_read_u32_le(r).await?;
+
+        // spell_category: u32
+        let spell_category = crate::util::tokio_read_u32_le(r).await?;
+
+        // spell_category_cooldown: u32
+        let spell_category_cooldown = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            spell,
+            spell_trigger,
+            spell_charges,
+            spell_cooldown,
+            spell_category,
+            spell_category_cooldown,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes()).await?;
+
+        // spell_trigger: u32
+        w.write_all(&self.spell_trigger.to_le_bytes()).await?;
+
+        // spell_charges: u32
+        w.write_all(&self.spell_charges.to_le_bytes()).await?;
+
+        // spell_cooldown: u32
+        w.write_all(&self.spell_cooldown.to_le_bytes()).await?;
+
+        // spell_category: u32
+        w.write_all(&self.spell_category.to_le_bytes()).await?;
+
+        // spell_category_cooldown: u32
+        w.write_all(&self.spell_category_cooldown.to_le_bytes()).await?;
+
+        Ok(())
+    }
+}
 impl ConstantSized for ItemSpells {
     fn size() -> usize {
         Self::maximum_possible_size()

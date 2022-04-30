@@ -1,6 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{SimpleEnum, SimpleEnumError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SimpleIfEnumIfElse {
@@ -79,6 +85,78 @@ impl ReadableAndWritable for SimpleIfEnumIfElse {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for SimpleIfEnumIfElse {
+    type Error = SimpleIfEnumIfElseError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // enum: SimpleEnum
+        let enum = SimpleEnum::tokio_read(r).await?;
+
+        let enum_if = match enum {
+            SimpleEnum::ZERO => {
+                // basic: u8
+                let basic = crate::util::tokio_read_u8_le(r).await?;
+
+                SimpleIfEnumIfElseSimpleEnum::ZERO {
+                    basic,
+                }
+            }
+            SimpleEnum::ONE => {
+                // basic: u8
+                let basic = crate::util::tokio_read_u8_le(r).await?;
+
+                SimpleIfEnumIfElseSimpleEnum::ONE {
+                    basic,
+                }
+            }
+            SimpleEnum::TWO => {
+                // other: u16
+                let other = crate::util::tokio_read_u16_le(r).await?;
+
+                SimpleIfEnumIfElseSimpleEnum::TWO {
+                    other,
+                }
+            }
+        };
+
+        Ok(Self {
+            enum: enum_if,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // enum: SimpleEnum
+        self.enum.tokio_write(w).await?;
+
+        match &self.enum {
+            SimpleIfEnumIfElseSimpleEnum::ZERO {
+                basic,
+            } => {
+                // basic: u8
+                w.write_all(&basic.to_le_bytes()).await?;
+
+            }
+            SimpleIfEnumIfElseSimpleEnum::ONE {
+                basic,
+            } => {
+                // basic: u8
+                w.write_all(&basic.to_le_bytes()).await?;
+
+            }
+            SimpleIfEnumIfElseSimpleEnum::TWO {
+                other,
+            } => {
+                // other: u16
+                w.write_all(&other.to_le_bytes()).await?;
+
+            }
+        }
+
+        Ok(())
+    }
+}
 impl VariableSized for SimpleIfEnumIfElse {
     fn size(&self) -> usize {
         self.enum.size() // enum: SimpleEnum and subfields
@@ -174,9 +252,20 @@ impl SimpleIfEnumIfElseSimpleEnum {
         Ok(())
     }
 
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.tokio_write(w).await?;
+        Ok(())
+    }
+
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.write_u16_le(w)
+    }
+
+    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.tokio_write_u16_le(w).await
     }
 
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -184,9 +273,19 @@ impl SimpleIfEnumIfElseSimpleEnum {
         a.write_u16_be(w)
     }
 
+    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.tokio_write_u16_be(w).await
+    }
+
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.write_u32_le(w)
+    }
+
+    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.tokio_write_u32_le(w).await
     }
 
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -194,14 +293,29 @@ impl SimpleIfEnumIfElseSimpleEnum {
         a.write_u32_be(w)
     }
 
+    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.tokio_write_u32_be(w).await
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.write_u64_le(w)
     }
 
+    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.tokio_write_u64_le(w).await
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.write_u64_be(w)
+    }
+
+    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleEnum = self.into();
+        a.tokio_write_u64_be(w).await
     }
 
 }

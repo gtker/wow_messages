@@ -2,6 +2,12 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{Race, RaceError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct WhoPlayer {
@@ -83,6 +89,75 @@ impl ReadableAndWritable for WhoPlayer {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for WhoPlayer {
+    type Error = WhoPlayerError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // guild: CString
+        let guild = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let guild = String::from_utf8(guild)?;
+
+        // level: u32
+        let level = crate::util::tokio_read_u32_le(r).await?;
+
+        // class: Class
+        let class = Class::tokio_read(r).await?;
+
+        // race: Race
+        let race = Race::tokio_read(r).await?;
+
+        // zone_id: u32
+        let zone_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // party_status: u32
+        let party_status = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            name,
+            guild,
+            level,
+            class,
+            race,
+            zone_id,
+            party_status,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // guild: CString
+        w.write_all(self.guild.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // level: u32
+        w.write_all(&self.level.to_le_bytes()).await?;
+
+        // class: Class
+        self.class.tokio_write(w).await?;
+
+        // race: Race
+        self.race.tokio_write(w).await?;
+
+        // zone_id: u32
+        w.write_all(&self.zone_id.to_le_bytes()).await?;
+
+        // party_status: u32
+        w.write_all(&self.party_status.to_le_bytes()).await?;
+
+        Ok(())
+    }
+}
 impl VariableSized for WhoPlayer {
     fn size(&self) -> usize {
         self.name.len() + 1 // name: CString and Null Terminator

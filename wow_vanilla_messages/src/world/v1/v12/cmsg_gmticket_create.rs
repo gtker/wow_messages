@@ -4,6 +4,12 @@ use crate::world::v1::v12::{Map, MapError};
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_GMTICKET_CREATE {
@@ -309,9 +315,20 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
         Ok(())
     }
 
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: GmTicketType = self.into();
+        a.tokio_write(w).await?;
+        Ok(())
+    }
+
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GmTicketType = self.into();
         a.write_u16_le(w)
+    }
+
+    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: GmTicketType = self.into();
+        a.tokio_write_u16_le(w).await
     }
 
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -319,9 +336,19 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
         a.write_u16_be(w)
     }
 
+    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: GmTicketType = self.into();
+        a.tokio_write_u16_be(w).await
+    }
+
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GmTicketType = self.into();
         a.write_u32_le(w)
+    }
+
+    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: GmTicketType = self.into();
+        a.tokio_write_u32_le(w).await
     }
 
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -329,14 +356,29 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
         a.write_u32_be(w)
     }
 
+    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: GmTicketType = self.into();
+        a.tokio_write_u32_be(w).await
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GmTicketType = self.into();
         a.write_u64_le(w)
     }
 
+    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: GmTicketType = self.into();
+        a.tokio_write_u64_le(w).await
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GmTicketType = self.into();
         a.write_u64_be(w)
+    }
+
+    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: GmTicketType = self.into();
+        a.tokio_write_u64_be(w).await
     }
 
 }

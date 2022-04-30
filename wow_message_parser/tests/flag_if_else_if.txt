@@ -2,6 +2,12 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{SimpleFlag};
 use crate::world::v1::v12::{UpdateFlag};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct FlagIfElseIf {
@@ -93,6 +99,91 @@ impl ReadableAndWritable for FlagIfElseIf {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for FlagIfElseIf {
+    type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // flags: UpdateFlag
+        let flags = UpdateFlag::tokio_read(r).await?;
+
+        let flags_ONE_IF = if flags.is_ONE_IF() {
+            // b_if: u8
+            let b_if = crate::util::tokio_read_u8_le(r).await?;
+
+            Some(FlagIfElseIfUpdateFlag_ONE_IF::ONE_IF {
+                b_if,
+            })
+        }
+        else if flags.is_TWO_ELSEIF() {
+            // s: SimpleFlag
+            let s = SimpleFlag::tokio_read(r).await?;
+
+            let s_ONE = if s.is_ONE() {
+                // if_one: u8
+                let if_one = crate::util::tokio_read_u8_le(r).await?;
+
+                Some(FlagIfElseIfSimpleFlagONE {
+                    if_one,
+                })
+            } else {
+                None
+            };
+
+            Some(FlagIfElseIfUpdateFlag_ONE_IF::TWO_ELSEIF {
+                s,
+            })
+        }
+        else if flags.is_FOUR_ELSEIF() {
+            // elseif2: u8
+            let elseif2 = crate::util::tokio_read_u8_le(r).await?;
+
+            Some(FlagIfElseIfUpdateFlag_ONE_IF::FOUR_ELSEIF {
+                elseif2,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_EIGHT_IF = if flags.is_EIGHT_IF() {
+            // last_if: u8
+            let last_if = crate::util::tokio_read_u8_le(r).await?;
+
+            Some(FlagIfElseIfUpdateFlagEIGHT_IF {
+                last_if,
+            })
+        } else {
+            None
+        };
+
+        let flags = FlagIfElseIfUpdateFlag {
+            inner: flags.as_u8(),
+            one_if: flags_ONE_IF,
+            eight_if: flags_EIGHT_IF,
+        };
+
+        Ok(Self {
+            flags,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // flags: UpdateFlag
+        self.flags.tokio_write(w).await?;
+
+        if let Some(s) = &self.flags.one_if {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.flags.eight_if {
+            s.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+}
 impl VariableSized for FlagIfElseIf {
     fn size(&self) -> usize {
         self.flags.size() // flags: UpdateFlag and subfields
@@ -121,6 +212,12 @@ impl FlagIfElseIfSimpleFlag {
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleFlag = self.into();
         a.write(w)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleFlag = self.into();
+        a.tokio_write(w).await?;
         Ok(())
     }
 
@@ -247,6 +344,18 @@ impl FlagIfElseIfSimpleFlagONE {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl FlagIfElseIfSimpleFlagONE {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.if_one.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Default, Debug, PartialEq, Clone)]
@@ -266,6 +375,12 @@ impl FlagIfElseIfUpdateFlag {
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: UpdateFlag = self.into();
         a.write(w)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: UpdateFlag = self.into();
+        a.tokio_write(w).await?;
         Ok(())
     }
 
@@ -529,5 +644,17 @@ impl FlagIfElseIfUpdateFlagEIGHT_IF {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl FlagIfElseIfUpdateFlagEIGHT_IF {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.last_if.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 

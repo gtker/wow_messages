@@ -190,6 +190,45 @@ impl AsyncReadWrite for Realm {
             realm_id,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // realm_type: u8
+        w.write_all(&self.realm_type.to_le_bytes()).await?;
+
+        // locked: u8
+        w.write_all(&self.locked.to_le_bytes()).await?;
+
+        // flag: RealmFlag
+        self.flag.tokio_write(w).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // address: CString
+        w.write_all(self.address.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // population: Population
+        self.population.tokio_write(w).await?;
+
+        // number_of_characters_on_realm: u8
+        w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
+
+        // category: RealmCategory
+        self.category.tokio_write(w).await?;
+
+        // realm_id: u8
+        w.write_all(&self.realm_id.to_le_bytes()).await?;
+
+        if let Some(s) = &self.flag.specify_build {
+            s.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
 }
 impl VariableSized for Realm {
     fn size(&self) -> usize {
@@ -271,6 +310,12 @@ impl RealmRealmFlag {
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: RealmFlag = self.into();
         a.write(w)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: RealmFlag = self.into();
+        a.tokio_write(w).await?;
         Ok(())
     }
 
@@ -489,5 +534,17 @@ impl RealmRealmFlagSPECIFY_BUILD {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl RealmRealmFlagSPECIFY_BUILD {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.version.tokio_write(w).await?;
+
+        Ok(())
+    }
+
 }
 

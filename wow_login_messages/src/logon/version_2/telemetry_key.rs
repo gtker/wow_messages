@@ -91,6 +91,26 @@ impl AsyncReadWrite for TelemetryKey {
             unknown4,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // unknown1: u16
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // unknown2: u32
+        w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+        // unknown3: u8[4]
+        for i in self.unknown3.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // unknown4: u8[20]
+        for i in self.unknown4.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        Ok(())
+    }
 }
 impl ConstantSized for TelemetryKey {
     fn size() -> usize {

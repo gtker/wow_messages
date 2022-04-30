@@ -484,6 +484,133 @@ impl AsyncReadWrite for CMD_AUTH_LOGON_PROOF_Server {
             login_result: login_result_if,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // login_result: LoginResult
+        self.login_result.tokio_write(w).await?;
+
+        match &self.login_result {
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+                server_proof,
+                account_flag,
+                hardware_survey_id,
+                unknown_flags,
+            } => {
+                // server_proof: u8[20]
+                for i in server_proof.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+                // account_flag: AccountFlag
+                account_flag.tokio_write(w).await?;
+
+                // hardware_survey_id: u32
+                w.write_all(&hardware_survey_id.to_le_bytes()).await?;
+
+                // unknown_flags: u16
+                w.write_all(&unknown_flags.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
+            } => {
+                // padding: u16
+                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+            }
+        }
+
+        Ok(())
+    }
 }
 impl VariableSized for CMD_AUTH_LOGON_PROOF_Server {
     fn size(&self) -> usize {
@@ -623,9 +750,20 @@ impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
         Ok(())
     }
 
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write(w).await?;
+        Ok(())
+    }
+
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u16_le(w)
+    }
+
+    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u16_le(w).await
     }
 
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -633,9 +771,19 @@ impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
         a.write_u16_be(w)
     }
 
+    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u16_be(w).await
+    }
+
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u32_le(w)
+    }
+
+    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u32_le(w).await
     }
 
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -643,14 +791,29 @@ impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
         a.write_u32_be(w)
     }
 
+    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u32_be(w).await
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u64_le(w)
     }
 
+    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u64_le(w).await
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u64_be(w)
+    }
+
+    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u64_be(w).await
     }
 
 }

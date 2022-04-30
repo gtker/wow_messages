@@ -1,5 +1,11 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct StabledPet {
@@ -70,6 +76,65 @@ impl ReadableAndWritable for StabledPet {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for StabledPet {
+    type Error = StabledPetError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // pet_number: u32
+        let pet_number = crate::util::tokio_read_u32_le(r).await?;
+
+        // entry: u32
+        let entry = crate::util::tokio_read_u32_le(r).await?;
+
+        // level: u32
+        let level = crate::util::tokio_read_u32_le(r).await?;
+
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // loyalty: u32
+        let loyalty = crate::util::tokio_read_u32_le(r).await?;
+
+        // slot: u8
+        let slot = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            pet_number,
+            entry,
+            level,
+            name,
+            loyalty,
+            slot,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // pet_number: u32
+        w.write_all(&self.pet_number.to_le_bytes()).await?;
+
+        // entry: u32
+        w.write_all(&self.entry.to_le_bytes()).await?;
+
+        // level: u32
+        w.write_all(&self.level.to_le_bytes()).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // loyalty: u32
+        w.write_all(&self.loyalty.to_le_bytes()).await?;
+
+        // slot: u8
+        w.write_all(&self.slot.to_le_bytes()).await?;
+
+        Ok(())
+    }
+}
 impl VariableSized for StabledPet {
     fn size(&self) -> usize {
         4 // pet_number: u32

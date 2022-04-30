@@ -2,6 +2,12 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{PvpRank, PvpRankError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct BattlegroundPlayer {
@@ -88,6 +94,80 @@ impl ReadableAndWritable for BattlegroundPlayer {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for BattlegroundPlayer {
+    type Error = BattlegroundPlayerError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // player: Guid
+        let player = Guid::tokio_read(r).await?;
+
+        // rank: PvpRank
+        let rank = PvpRank::tokio_read_u32_le(r).await?;
+
+        // killing_blows: u32
+        let killing_blows = crate::util::tokio_read_u32_le(r).await?;
+
+        // honorable_kills: u32
+        let honorable_kills = crate::util::tokio_read_u32_le(r).await?;
+
+        // deaths: u32
+        let deaths = crate::util::tokio_read_u32_le(r).await?;
+
+        // bonus_honor: u32
+        let bonus_honor = crate::util::tokio_read_u32_le(r).await?;
+
+        // amount_of_extra_fields: u32
+        let amount_of_extra_fields = crate::util::tokio_read_u32_le(r).await?;
+
+        // fields: u32[amount_of_extra_fields]
+        let mut fields = Vec::with_capacity(amount_of_extra_fields as usize);
+        for i in 0..amount_of_extra_fields {
+            fields.push(crate::util::tokio_read_u32_le(r).await?);
+        }
+
+        Ok(Self {
+            player,
+            rank,
+            killing_blows,
+            honorable_kills,
+            deaths,
+            bonus_honor,
+            fields,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // player: Guid
+        self.player.tokio_write(w).await?;
+
+        // rank: PvpRank
+        self.rank.tokio_write_u32_le(w).await?;
+
+        // killing_blows: u32
+        w.write_all(&self.killing_blows.to_le_bytes()).await?;
+
+        // honorable_kills: u32
+        w.write_all(&self.honorable_kills.to_le_bytes()).await?;
+
+        // deaths: u32
+        w.write_all(&self.deaths.to_le_bytes()).await?;
+
+        // bonus_honor: u32
+        w.write_all(&self.bonus_honor.to_le_bytes()).await?;
+
+        // amount_of_extra_fields: u32
+        w.write_all(&(self.fields.len() as u32).to_le_bytes()).await?;
+
+        // fields: u32[amount_of_extra_fields]
+        for i in self.fields.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        Ok(())
+    }
+}
 impl VariableSized for BattlegroundPlayer {
     fn size(&self) -> usize {
         8 // player: Guid

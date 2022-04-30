@@ -119,6 +119,33 @@ impl AsyncReadWrite for CMD_AUTH_LOGON_PROOF_Client {
             telemetry_keys,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // client_public_key: u8[32]
+        for i in self.client_public_key.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // client_proof: u8[20]
+        for i in self.client_proof.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // crc_hash: u8[20]
+        for i in self.crc_hash.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // number_of_telemetry_keys: u8
+        w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes()).await?;
+
+        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        for i in self.telemetry_keys.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
 }
 impl VariableSized for CMD_AUTH_LOGON_PROOF_Client {
     fn size(&self) -> usize {

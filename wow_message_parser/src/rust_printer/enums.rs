@@ -79,7 +79,7 @@ fn common_impls(s: &mut Writer, e: &Definer) {
         s.wln(&error_string);
         print_read(s, e, ImplType::Std);
 
-        print_write(s, e);
+        print_write(s, e, ImplType::Std);
     });
 
     s.wln(CFG_ASYNC_ANY);
@@ -87,7 +87,11 @@ fn common_impls(s: &mut Writer, e: &Definer) {
     s.impl_for(ASYNC_TRAIT, e.name(), |s| {
         s.wln(&error_string);
 
+        s.wln(CFG_ASYNC_TOKIO);
         print_read(s, e, ImplType::Tokio);
+
+        s.wln(CFG_ASYNC_TOKIO);
+        print_write(s, e, ImplType::Tokio);
     });
 
     s.bodyn(format!("impl {}", e.name()), |s| {
@@ -149,19 +153,20 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
     let types = get_upcast_types(e.ty());
 
     for t in types {
+        let return_type = format!(
+            "std::result::Result<Self, {name}>",
+            name = match e.self_value() {
+                None => format!("{}Error", e.name()),
+                Some(_) => "std::io::Error".to_string(),
+            },
+        );
         s.funcn_pub(
             format!(
                 "read_{ty}_{endian}<R: std::io::Read>(r: &mut R)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str(),
             ),
-            format!(
-                "std::result::Result<Self, {name}>",
-                name = match e.self_value() {
-                    None => format!("{}Error", e.name()),
-                    Some(_) => "std::io::Error".to_string(),
-                },
-            ),
+            &return_type,
             |s| {
                 s.wln(format!(
                     "let a = {util_path}::read_{ty}_{endian}(r)?;",
@@ -180,16 +185,60 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
             },
         );
 
+        s.async_funcn_pub(
+            format!(
+                "tokio_read_{ty}_{endian}<R: AsyncReadExt + Unpin + Send>(r: &mut R)",
+                ty = t.rust_str(),
+                endian = t.rust_endian_str()
+            ),
+            &return_type,
+            |s| {
+                s.wln(format!(
+                    "let a = {util_path}::tokio_read_{ty}_{endian}(r).await?;",
+                    util_path = "crate::util",
+                    ty = t.rust_str(),
+                    endian = t.rust_endian_str(),
+                ));
+                s.wln(format!(
+                    "Ok((a as {original_ty}).{from})",
+                    original_ty = e.ty().rust_str(),
+                    from = match e.self_value() {
+                        None => "try_into()?",
+                        Some(_) => "into()",
+                    }
+                ));
+            },
+        );
+
+        let return_type = "std::result::Result<(), std::io::Error>";
         s.funcn_pub(
             format!(
                 "write_{ty}_{endian}<W: std::io::Write>(&self, w: &mut W)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
             ),
-            "std::result::Result<(), std::io::Error>",
+            &return_type,
             |s| {
                 s.wln(format!(
                     "{util_path}::write_{ty}_{endian}(w, self.as_{original_ty}() as {ty})?;",
+                    util_path = "crate::util",
+                    ty = t.rust_str(),
+                    endian = t.rust_endian_str(),
+                    original_ty = e.ty().rust_str(),
+                ));
+                s.wln("Ok(())");
+            },
+        );
+        s.async_funcn_pub(
+            format!(
+                "tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
+                ty = t.rust_str(),
+                endian = t.rust_endian_str()
+            ),
+            &return_type,
+            |s| {
+                s.wln(format!(
+                    "{util_path}::tokio_write_{ty}_{endian}(w, self.as_{original_ty}() as {ty}).await?;",
                     util_path = "crate::util",
                     ty = t.rust_str(),
                     endian = t.rust_endian_str(),
@@ -232,15 +281,8 @@ fn print_new(s: &mut Writer, e: &Definer) {
 }
 
 fn print_read(s: &mut Writer, e: &Definer, it: ImplType) {
-    let prefix = match it {
-        ImplType::Std => "",
-        ImplType::Tokio => "tokio_",
-        ImplType::AsyncStd => "astd_",
-    };
-    let postfix = match it {
-        ImplType::Std => "",
-        _ => ".await",
-    };
+    let prefix = it.prefix();
+    let postfix = it.postfix();
 
     let title = match it {
         ImplType::Std => "fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error>",
@@ -269,19 +311,23 @@ fn print_read(s: &mut Writer, e: &Definer, it: ImplType) {
     });
 }
 
-fn print_write(s: &mut Writer, e: &Definer) {
-    s.bodyn(
-        "fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
-        |s| {
-            s.wln(format!(
-                "w.write_all(&self.as_{}().to_{}_bytes())?;",
-                e.ty().rust_str(),
-                e.ty().rust_endian_str(),
-            ));
+fn print_write(s: &mut Writer, e: &Definer, it: ImplType) {
+    let title = match it {
+        ImplType::Std => "fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
+        ImplType::Tokio => "async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
+        ImplType::AsyncStd => "async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
+    };
 
-            s.wln("Ok(())");
-        },
-    );
+    s.bodyn(title, |s| {
+        s.wln(format!(
+            "w.write_all(&self.as_{}().to_{}_bytes()){}?;",
+            e.ty().rust_str(),
+            e.ty().rust_endian_str(),
+            it.postfix(),
+        ));
+
+        s.wln("Ok(())");
+    });
 }
 
 fn print_default(s: &mut Writer, e: &Definer) {

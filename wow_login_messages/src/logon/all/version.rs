@@ -83,6 +83,22 @@ impl AsyncReadWrite for Version {
             build,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // major: u8
+        w.write_all(&self.major.to_le_bytes()).await?;
+
+        // minor: u8
+        w.write_all(&self.minor.to_le_bytes()).await?;
+
+        // patch: u8
+        w.write_all(&self.patch.to_le_bytes()).await?;
+
+        // build: u16
+        w.write_all(&self.build.to_le_bytes()).await?;
+
+        Ok(())
+    }
 }
 impl ConstantSized for Version {
     fn size() -> usize {

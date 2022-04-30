@@ -42,6 +42,10 @@ impl AsyncReadWrite for CMD_XFER_INITIATE {
         Ok(Self {
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        Ok(())
+    }
 }
 impl ConstantSized for CMD_XFER_INITIATE {
     fn size() -> usize {

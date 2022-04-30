@@ -268,6 +268,48 @@ impl AsyncReadWrite for CMD_AUTH_LOGON_PROOF_Client {
             security_flag,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // client_public_key: u8[32]
+        for i in self.client_public_key.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // client_proof: u8[20]
+        for i in self.client_proof.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // crc_hash: u8[20]
+        for i in self.crc_hash.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // number_of_telemetry_keys: u8
+        w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes()).await?;
+
+        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        for i in self.telemetry_keys.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // security_flag: SecurityFlag
+        self.security_flag.tokio_write(w).await?;
+
+        if let Some(s) = &self.security_flag.pin {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.security_flag.unknown0 {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.security_flag.authenticator {
+            s.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
 }
 impl VariableSized for CMD_AUTH_LOGON_PROOF_Client {
     fn size(&self) -> usize {
@@ -309,6 +351,12 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write(w)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.tokio_write(w).await?;
         Ok(())
     }
 
@@ -497,6 +545,24 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        for i in self.pin_salt.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        for i in self.pin_hash.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -542,6 +608,26 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.unknown0.to_le_bytes()).await?;
+
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+        w.write_all(&self.unknown3.to_le_bytes()).await?;
+
+        w.write_all(&self.unknown4.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -567,6 +653,18 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.unknown5.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[cfg(test)]

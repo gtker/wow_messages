@@ -1,5 +1,11 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -44,6 +50,41 @@ impl ReadableAndWritable for ItemDamageType {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for ItemDamageType {
+    type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // damage_minimum: u32
+        let damage_minimum = crate::util::tokio_read_u32_le(r).await?;
+
+        // damage_maximum: u32
+        let damage_maximum = crate::util::tokio_read_u32_le(r).await?;
+
+        // damage_type: u32
+        let damage_type = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            damage_minimum,
+            damage_maximum,
+            damage_type,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // damage_minimum: u32
+        w.write_all(&self.damage_minimum.to_le_bytes()).await?;
+
+        // damage_maximum: u32
+        w.write_all(&self.damage_maximum.to_le_bytes()).await?;
+
+        // damage_type: u32
+        w.write_all(&self.damage_type.to_le_bytes()).await?;
+
+        Ok(())
+    }
+}
 impl ConstantSized for ItemDamageType {
     fn size() -> usize {
         Self::maximum_possible_size()

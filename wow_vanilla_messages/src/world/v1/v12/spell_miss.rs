@@ -2,6 +2,12 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{SpellMissInfo, SpellMissInfoError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -38,6 +44,34 @@ impl ReadableAndWritable for SpellMiss {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for SpellMiss {
+    type Error = SpellMissError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // target_guid: Guid
+        let target_guid = Guid::tokio_read(r).await?;
+
+        // miss_info: SpellMissInfo
+        let miss_info = SpellMissInfo::tokio_read(r).await?;
+
+        Ok(Self {
+            target_guid,
+            miss_info,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // target_guid: Guid
+        self.target_guid.tokio_write(w).await?;
+
+        // miss_info: SpellMissInfo
+        self.miss_info.tokio_write(w).await?;
+
+        Ok(())
+    }
+}
 impl ConstantSized for SpellMiss {
     fn size() -> usize {
         Self::maximum_possible_size()

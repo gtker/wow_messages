@@ -4,6 +4,12 @@ use crate::world::v1::v12::MovementInfo;
 use crate::{WorldClientMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_MOVE_WATER_WALK_ACK {

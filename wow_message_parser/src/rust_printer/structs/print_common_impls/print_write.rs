@@ -8,7 +8,7 @@ use crate::rust_printer::complex_print::DefinerType;
 use crate::rust_printer::new_enums::{
     IfStatementType, NewEnumStructMember, NewEnumerator, NewIfStatement,
 };
-use crate::rust_printer::{ImplType, Writer};
+use crate::rust_printer::Writer;
 
 pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container) {
     match e.container_type() {
@@ -67,7 +67,7 @@ pub fn print_write_field_cstring(
         postfix = postfix,
     ));
     s.wln("// Null terminator");
-    s.wln("w.write_all(&[0])?;");
+    s.wln(format!("w.write_all(&[0]){postfix}?;", postfix = postfix));
     s.newline();
 }
 
@@ -92,6 +92,7 @@ pub fn print_write_field_array(
     variable_name: &str,
     variable_prefix: &str,
     array: &Array,
+    prefix: &str,
     postfix: &str,
 ) {
     s.open_curly(format!(
@@ -106,15 +107,15 @@ pub fn print_write_field_array(
             endian = integer_type.rust_endian_str(),
             postfix = postfix,
         )),
-        ArrayType::Complex(_) => s.wln(format!("i.write(w){}?;", postfix)),
+        ArrayType::Complex(_) => s.wln(format!("i.{}write(w){}?;", prefix, postfix)),
         ArrayType::CString => {
             s.wln(format!("w.write_all(&i.as_bytes()){}?;", postfix));
             s.wln(format!("w.write_all(&[0]){}?;", postfix));
         }
         ArrayType::Guid => {
-            s.wln(format!("i.write(w){}?;", postfix));
+            s.wln(format!("i.{}write(w){}?;", prefix, postfix));
         }
-        ArrayType::PackedGuid => s.wln(format!("i.write_packed(w){}?;", postfix)),
+        ArrayType::PackedGuid => s.wln(format!("i.{}write_packed(w){}?;", prefix, postfix)),
     }
 
     s.closing_curly_newline();
@@ -276,7 +277,7 @@ pub fn print_write_definition(
             print_write_field_string(s, d.name(), variable_prefix, postfix);
         }
         Type::Array(array) => {
-            print_write_field_array(s, d.name(), variable_prefix, array, postfix);
+            print_write_field_array(s, d.name(), variable_prefix, array, prefix, postfix);
         }
         Type::Identifier {
             s: identifier,

@@ -1,6 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{SimpleFlag};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SimpleIfFlag {
@@ -48,6 +54,47 @@ impl ReadableAndWritable for SimpleIfFlag {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for SimpleIfFlag {
+    type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // flag: SimpleFlag
+        let flag = SimpleFlag::tokio_read(r).await?;
+
+        let flag_ZERO = if flag.is_ZERO() {
+            // basic: u8
+            let basic = crate::util::tokio_read_u8_le(r).await?;
+
+            Some(SimpleIfFlagSimpleFlagZERO {
+                basic,
+            })
+        } else {
+            None
+        };
+
+        let flag = SimpleIfFlagSimpleFlag {
+            inner: flag.as_u8(),
+            zero: flag_ZERO,
+        };
+
+        Ok(Self {
+            flag,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // flag: SimpleFlag
+        self.flag.tokio_write(w).await?;
+
+        if let Some(s) = &self.flag.zero {
+            s.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+}
 impl VariableSized for SimpleIfFlag {
     fn size(&self) -> usize {
         self.flag.size() // flag: SimpleFlag and subfields
@@ -76,6 +123,12 @@ impl SimpleIfFlagSimpleFlag {
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleFlag = self.into();
         a.write(w)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleFlag = self.into();
+        a.tokio_write(w).await?;
         Ok(())
     }
 
@@ -201,5 +254,17 @@ impl SimpleIfFlagSimpleFlagZERO {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SimpleIfFlagSimpleFlagZERO {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.basic.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 

@@ -70,6 +70,18 @@ impl AsyncReadWrite for CMD_XFER_DATA {
             data,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // size: u16
+        w.write_all(&(self.data.len() as u16).to_le_bytes()).await?;
+
+        // data: u8[size]
+        for i in self.data.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        Ok(())
+    }
 }
 impl VariableSized for CMD_XFER_DATA {
     fn size(&self) -> usize {

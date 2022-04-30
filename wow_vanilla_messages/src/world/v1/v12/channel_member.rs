@@ -1,6 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -37,6 +43,34 @@ impl ReadableAndWritable for ChannelMember {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for ChannelMember {
+    type Error = std::io::Error;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // member_flags: u8
+        let member_flags = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            guid,
+            member_flags,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // member_flags: u8
+        w.write_all(&self.member_flags.to_le_bytes()).await?;
+
+        Ok(())
+    }
+}
 impl ConstantSized for ChannelMember {
     fn size() -> usize {
         Self::maximum_possible_size()

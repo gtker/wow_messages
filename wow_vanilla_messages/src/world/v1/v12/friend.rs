@@ -4,6 +4,12 @@ use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{FriendStatus, FriendStatusError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Friend {
@@ -171,6 +177,166 @@ impl ReadableAndWritable for Friend {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for Friend {
+    type Error = FriendError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // status: FriendStatus
+        let status = FriendStatus::tokio_read(r).await?;
+
+        let status_if = match status {
+            FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
+            FriendStatus::ONLINE => {
+                // area: Area
+                let area = Area::tokio_read(r).await?;
+
+                // level: u32
+                let level = crate::util::tokio_read_u32_le(r).await?;
+
+                // class: Class
+                let class = Class::tokio_read_u32_le(r).await?;
+
+                FriendFriendStatus::ONLINE {
+                    area,
+                    level,
+                    class,
+                }
+            }
+            FriendStatus::AFK => {
+                // area: Area
+                let area = Area::tokio_read(r).await?;
+
+                // level: u32
+                let level = crate::util::tokio_read_u32_le(r).await?;
+
+                // class: Class
+                let class = Class::tokio_read_u32_le(r).await?;
+
+                FriendFriendStatus::AFK {
+                    area,
+                    level,
+                    class,
+                }
+            }
+            FriendStatus::UNKNOWN3 => {
+                // area: Area
+                let area = Area::tokio_read(r).await?;
+
+                // level: u32
+                let level = crate::util::tokio_read_u32_le(r).await?;
+
+                // class: Class
+                let class = Class::tokio_read_u32_le(r).await?;
+
+                FriendFriendStatus::UNKNOWN3 {
+                    area,
+                    level,
+                    class,
+                }
+            }
+            FriendStatus::DND => {
+                // area: Area
+                let area = Area::tokio_read(r).await?;
+
+                // level: u32
+                let level = crate::util::tokio_read_u32_le(r).await?;
+
+                // class: Class
+                let class = Class::tokio_read_u32_le(r).await?;
+
+                FriendFriendStatus::DND {
+                    area,
+                    level,
+                    class,
+                }
+            }
+        };
+
+        Ok(Self {
+            guid,
+            status: status_if,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // status: FriendStatus
+        self.status.tokio_write(w).await?;
+
+        match &self.status {
+            FriendFriendStatus::OFFLINE => {}
+            FriendFriendStatus::ONLINE {
+                area,
+                level,
+                class,
+            } => {
+                // area: Area
+                area.tokio_write(w).await?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
+
+                // class: Class
+                class.tokio_write_u32_le(w).await?;
+
+            }
+            FriendFriendStatus::AFK {
+                area,
+                level,
+                class,
+            } => {
+                // area: Area
+                area.tokio_write(w).await?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
+
+                // class: Class
+                class.tokio_write_u32_le(w).await?;
+
+            }
+            FriendFriendStatus::UNKNOWN3 {
+                area,
+                level,
+                class,
+            } => {
+                // area: Area
+                area.tokio_write(w).await?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
+
+                // class: Class
+                class.tokio_write_u32_le(w).await?;
+
+            }
+            FriendFriendStatus::DND {
+                area,
+                level,
+                class,
+            } => {
+                // area: Area
+                area.tokio_write(w).await?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
+
+                // class: Class
+                class.tokio_write_u32_le(w).await?;
+
+            }
+        }
+
+        Ok(())
+    }
+}
 impl VariableSized for Friend {
     fn size(&self) -> usize {
         8 // guid: Guid
@@ -308,9 +474,20 @@ impl FriendFriendStatus {
         Ok(())
     }
 
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: FriendStatus = self.into();
+        a.tokio_write(w).await?;
+        Ok(())
+    }
+
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: FriendStatus = self.into();
         a.write_u16_le(w)
+    }
+
+    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: FriendStatus = self.into();
+        a.tokio_write_u16_le(w).await
     }
 
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -318,9 +495,19 @@ impl FriendFriendStatus {
         a.write_u16_be(w)
     }
 
+    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: FriendStatus = self.into();
+        a.tokio_write_u16_be(w).await
+    }
+
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: FriendStatus = self.into();
         a.write_u32_le(w)
+    }
+
+    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: FriendStatus = self.into();
+        a.tokio_write_u32_le(w).await
     }
 
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -328,14 +515,29 @@ impl FriendFriendStatus {
         a.write_u32_be(w)
     }
 
+    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: FriendStatus = self.into();
+        a.tokio_write_u32_be(w).await
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: FriendStatus = self.into();
         a.write_u64_le(w)
     }
 
+    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: FriendStatus = self.into();
+        a.tokio_write_u64_le(w).await
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: FriendStatus = self.into();
         a.write_u64_be(w)
+    }
+
+    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: FriendStatus = self.into();
+        a.tokio_write_u64_be(w).await
     }
 
 }

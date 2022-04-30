@@ -1,4 +1,6 @@
 use std::io::{Read, Write};
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 use crate::util::{read_u64_le, read_u8_le};
 
@@ -78,6 +80,53 @@ impl Guid {
 
     pub fn write_packed(&self, w: &mut impl Write) -> Result<(), std::io::Error> {
         w.write_all(&self.packed_guid())?;
+
+        Ok(())
+    }
+}
+
+#[cfg(feature = "async_tokio")]
+impl Guid {
+    pub async fn tokio_read_packed<R: AsyncReadExt + Unpin + Send>(
+        r: &mut R,
+    ) -> Result<Self, std::io::Error> {
+        let bit_pattern = crate::util::tokio_read_u8_le(r).await?;
+        let mut guid: u64 = 0;
+
+        for index in 0..8 {
+            let bit = bit_pattern & (1 << index);
+
+            if bit != 0 {
+                let byte = crate::util::tokio_read_u8_le(r).await?;
+                guid |= ((byte as u64) << (index * 8));
+            }
+        }
+
+        Ok(Self { guid })
+    }
+
+    pub async fn tokio_write_packed<W: AsyncWriteExt + Unpin + Send>(
+        &self,
+        w: &mut W,
+    ) -> Result<(), std::io::Error> {
+        w.write_all(&self.packed_guid()).await?;
+
+        Ok(())
+    }
+
+    pub async fn tokio_read<R: AsyncReadExt + Unpin + Send>(
+        r: &mut R,
+    ) -> Result<Self, std::io::Error> {
+        Ok(Self {
+            guid: crate::util::tokio_read_u64_le(r).await?,
+        })
+    }
+
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
+        &self,
+        w: &mut W,
+    ) -> Result<(), std::io::Error> {
+        crate::util::tokio_write_u64_le(w, self.guid).await?;
 
         Ok(())
     }

@@ -1,6 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{TrainerSpellState, TrainerSpellStateError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -109,6 +115,97 @@ impl ReadableAndWritable for TrainerSpell {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for TrainerSpell {
+    type Error = TrainerSpellError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // spell: u32
+        let spell = crate::util::tokio_read_u32_le(r).await?;
+
+        // state: TrainerSpellState
+        let state = TrainerSpellState::tokio_read(r).await?;
+
+        // spell_cost: u32
+        let spell_cost = crate::util::tokio_read_u32_le(r).await?;
+
+        // talent_point_cost: u32
+        let talent_point_cost = crate::util::tokio_read_u32_le(r).await?;
+
+        // first_rank: u32
+        let first_rank = crate::util::tokio_read_u32_le(r).await?;
+
+        // required_level: u8
+        let required_level = crate::util::tokio_read_u8_le(r).await?;
+
+        // required_skill: u32
+        let required_skill = crate::util::tokio_read_u32_le(r).await?;
+
+        // required_skill_value: u32
+        let required_skill_value = crate::util::tokio_read_u32_le(r).await?;
+
+        // spell_chain_required: u32
+        let spell_chain_required = crate::util::tokio_read_u32_le(r).await?;
+
+        // spell_chain_previous: u32
+        let spell_chain_previous = crate::util::tokio_read_u32_le(r).await?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            spell,
+            state,
+            spell_cost,
+            talent_point_cost,
+            first_rank,
+            required_level,
+            required_skill,
+            required_skill_value,
+            spell_chain_required,
+            spell_chain_previous,
+            unknown1,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes()).await?;
+
+        // state: TrainerSpellState
+        self.state.tokio_write(w).await?;
+
+        // spell_cost: u32
+        w.write_all(&self.spell_cost.to_le_bytes()).await?;
+
+        // talent_point_cost: u32
+        w.write_all(&self.talent_point_cost.to_le_bytes()).await?;
+
+        // first_rank: u32
+        w.write_all(&self.first_rank.to_le_bytes()).await?;
+
+        // required_level: u8
+        w.write_all(&self.required_level.to_le_bytes()).await?;
+
+        // required_skill: u32
+        w.write_all(&self.required_skill.to_le_bytes()).await?;
+
+        // required_skill_value: u32
+        w.write_all(&self.required_skill_value.to_le_bytes()).await?;
+
+        // spell_chain_required: u32
+        w.write_all(&self.spell_chain_required.to_le_bytes()).await?;
+
+        // spell_chain_previous: u32
+        w.write_all(&self.spell_chain_previous.to_le_bytes()).await?;
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        Ok(())
+    }
+}
 impl ConstantSized for TrainerSpell {
     fn size() -> usize {
         Self::maximum_possible_size()

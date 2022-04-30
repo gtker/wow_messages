@@ -8,6 +8,12 @@ use crate::world::v1::v12::{Power, PowerError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL {
@@ -450,6 +456,12 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GroupUpdateFlags = self.into();
         a.write(w)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: GroupUpdateFlags = self.into();
+        a.tokio_write(w).await?;
         Ok(())
     }
 
@@ -1614,6 +1626,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.status.tokio_write(w).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1639,6 +1663,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.current_health.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1664,6 +1700,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.max_health.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1689,6 +1737,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.power.tokio_write(w).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1714,6 +1774,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_POWER {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_POWER {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.current_power.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1739,6 +1811,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.max_power.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1764,6 +1848,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_LEVEL {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_LEVEL {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.level.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1789,6 +1885,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.area.tokio_write(w).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1819,6 +1927,20 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POSITION {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POSITION {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1844,6 +1966,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.auras.tokio_write(w).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1871,6 +2005,20 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_NAME {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_NAME {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(self.pet_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1896,6 +2044,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.pet_display_id.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1921,6 +2081,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_HP {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_HP {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.pet_current_health.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1946,6 +2118,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.pet_max_health.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1971,6 +2155,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.pet_power_type.tokio_write(w).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1996,6 +2192,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.pet_current_power.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -2021,6 +2229,18 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_POWER {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_POWER {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.pet_max_power.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -2046,5 +2266,17 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.pet_auras.tokio_write(w).await?;
+
+        Ok(())
+    }
+
 }
 

@@ -94,6 +94,24 @@ impl AsyncReadWrite for CMD_SURVEY_RESULT {
             data,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // survey_id: u32
+        w.write_all(&self.survey_id.to_le_bytes()).await?;
+
+        // error: u8
+        w.write_all(&self.error.to_le_bytes()).await?;
+
+        // compressed_data_length: u16
+        w.write_all(&(self.data.len() as u16).to_le_bytes()).await?;
+
+        // data: u8[compressed_data_length]
+        for i in self.data.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        Ok(())
+    }
 }
 impl VariableSized for CMD_SURVEY_RESULT {
     fn size(&self) -> usize {

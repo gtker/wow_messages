@@ -1,6 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{InventoryType, InventoryTypeError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -37,6 +43,34 @@ impl ReadableAndWritable for CharacterGear {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for CharacterGear {
+    type Error = CharacterGearError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // equipment_display_id: u32
+        let equipment_display_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // inventory_type: InventoryType
+        let inventory_type = InventoryType::tokio_read(r).await?;
+
+        Ok(Self {
+            equipment_display_id,
+            inventory_type,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // equipment_display_id: u32
+        w.write_all(&self.equipment_display_id.to_le_bytes()).await?;
+
+        // inventory_type: InventoryType
+        self.inventory_type.tokio_write(w).await?;
+
+        Ok(())
+    }
+}
 impl ConstantSized for CharacterGear {
     fn size() -> usize {
         Self::maximum_possible_size()

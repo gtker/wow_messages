@@ -142,6 +142,38 @@ impl AsyncReadWrite for Realm {
             realm_id,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // realm_type: RealmType
+        self.realm_type.tokio_write(w).await?;
+
+        // flag: RealmFlag
+        self.flag.tokio_write(w).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // address: CString
+        w.write_all(self.address.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // population: Population
+        self.population.tokio_write(w).await?;
+
+        // number_of_characters_on_realm: u8
+        w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
+
+        // category: RealmCategory
+        self.category.tokio_write(w).await?;
+
+        // realm_id: u8
+        w.write_all(&self.realm_id.to_le_bytes()).await?;
+
+        Ok(())
+    }
 }
 impl VariableSized for Realm {
     fn size(&self) -> usize {

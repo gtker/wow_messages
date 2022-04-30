@@ -8,6 +8,12 @@ use crate::world::v1::v12::{Gender, GenderError};
 use crate::world::v1::v12::{Map, MapError};
 use crate::world::v1::v12::{Race, RaceError};
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Character {
@@ -238,6 +244,201 @@ impl ReadableAndWritable for Character {
 
 }
 
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+#[async_trait]
+impl AsyncReadWrite for Character {
+    type Error = CharacterError;
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // race: Race
+        let race = Race::tokio_read(r).await?;
+
+        // class: Class
+        let class = Class::tokio_read(r).await?;
+
+        // gender: Gender
+        let gender = Gender::tokio_read(r).await?;
+
+        // skin: u8
+        let skin = crate::util::tokio_read_u8_le(r).await?;
+
+        // face: u8
+        let face = crate::util::tokio_read_u8_le(r).await?;
+
+        // hairstyle: u8
+        let hairstyle = crate::util::tokio_read_u8_le(r).await?;
+
+        // haircolor: u8
+        let haircolor = crate::util::tokio_read_u8_le(r).await?;
+
+        // facialhair: u8
+        let facialhair = crate::util::tokio_read_u8_le(r).await?;
+
+        // level: u8
+        let level = crate::util::tokio_read_u8_le(r).await?;
+
+        // area: Area
+        let area = Area::tokio_read(r).await?;
+
+        // map: Map
+        let map = Map::tokio_read(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::tokio_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::tokio_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::tokio_read_f32_le(r).await?;
+        // guild_id: u32
+        let guild_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // flags: CharacterFlags
+        let flags = CharacterFlags::tokio_read(r).await?;
+
+        // first_login: u8
+        let first_login = crate::util::tokio_read_u8_le(r).await?;
+
+        // pet_display_id: u32
+        let pet_display_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // pet_level: u32
+        let pet_level = crate::util::tokio_read_u32_le(r).await?;
+
+        // pet_familiy: u32
+        let pet_familiy = crate::util::tokio_read_u32_le(r).await?;
+
+        // equipment: CharacterGear[19]
+        let mut equipment = Vec::with_capacity(19 as usize);
+        for i in 0..19 {
+            equipment.push(CharacterGear::tokio_read(r).await?);
+        }
+        let equipment = equipment.try_into().unwrap();
+
+        // first_bag_display_id: u32
+        let _first_bag_display_id = crate::util::tokio_read_u32_le(r).await?;
+        // first_bag_display_id is expected to always be 0 (0)
+
+        // first_bag_inventory_id: u8
+        let _first_bag_inventory_id = crate::util::tokio_read_u8_le(r).await?;
+        // first_bag_inventory_id is expected to always be 0 (0)
+
+        Ok(Self {
+            guid,
+            name,
+            race,
+            class,
+            gender,
+            skin,
+            face,
+            hairstyle,
+            haircolor,
+            facialhair,
+            level,
+            area,
+            map,
+            position_x,
+            position_y,
+            position_z,
+            guild_id,
+            flags,
+            first_login,
+            pet_display_id,
+            pet_level,
+            pet_familiy,
+            equipment,
+        })
+    }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // race: Race
+        self.race.tokio_write(w).await?;
+
+        // class: Class
+        self.class.tokio_write(w).await?;
+
+        // gender: Gender
+        self.gender.tokio_write(w).await?;
+
+        // skin: u8
+        w.write_all(&self.skin.to_le_bytes()).await?;
+
+        // face: u8
+        w.write_all(&self.face.to_le_bytes()).await?;
+
+        // hairstyle: u8
+        w.write_all(&self.hairstyle.to_le_bytes()).await?;
+
+        // haircolor: u8
+        w.write_all(&self.haircolor.to_le_bytes()).await?;
+
+        // facialhair: u8
+        w.write_all(&self.facialhair.to_le_bytes()).await?;
+
+        // level: u8
+        w.write_all(&self.level.to_le_bytes()).await?;
+
+        // area: Area
+        self.area.tokio_write(w).await?;
+
+        // map: Map
+        self.map.tokio_write(w).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
+
+        // guild_id: u32
+        w.write_all(&self.guild_id.to_le_bytes()).await?;
+
+        // flags: CharacterFlags
+        self.flags.tokio_write(w).await?;
+
+        // first_login: u8
+        w.write_all(&self.first_login.to_le_bytes()).await?;
+
+        // pet_display_id: u32
+        w.write_all(&self.pet_display_id.to_le_bytes()).await?;
+
+        // pet_level: u32
+        w.write_all(&self.pet_level.to_le_bytes()).await?;
+
+        // pet_familiy: u32
+        w.write_all(&self.pet_familiy.to_le_bytes()).await?;
+
+        // equipment: CharacterGear[19]
+        for i in self.equipment.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // first_bag_display_id: u32
+        w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes()).await?;
+
+        // first_bag_inventory_id: u8
+        w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes()).await?;
+
+        Ok(())
+    }
+}
 impl VariableSized for Character {
     fn size(&self) -> usize {
         8 // guid: Guid

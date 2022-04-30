@@ -6,6 +6,12 @@ use crate::world::v1::v12::{SpellMiss, SpellMissError};
 use crate::{WorldServerMessageWrite, WorldMessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use crate::AsyncReadWrite;
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+use async_trait::async_trait;
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_SPELL_GO {
@@ -226,6 +232,12 @@ impl SMSG_SPELL_GOCastFlags {
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: CastFlags = self.into();
         a.write(w)?;
+        Ok(())
+    }
+
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: CastFlags = self.into();
+        a.tokio_write(w).await?;
         Ok(())
     }
 
@@ -518,5 +530,19 @@ impl SMSG_SPELL_GOCastFlagsAMMO {
 
         Ok(())
     }
+
+}
+
+#[cfg(any(feature = "async_tokio", feature = "async_std"))]
+impl SMSG_SPELL_GOCastFlagsAMMO {
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.ammo_display_id.to_le_bytes()).await?;
+
+        w.write_all(&self.ammo_inventory_type.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 

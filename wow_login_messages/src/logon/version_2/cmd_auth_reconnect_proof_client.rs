@@ -106,6 +106,28 @@ impl AsyncReadWrite for CMD_AUTH_RECONNECT_PROOF_Client {
             client_checksum,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // proof_data: u8[16]
+        for i in self.proof_data.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // client_proof: u8[20]
+        for i in self.client_proof.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // client_checksum: u8[20]
+        for i in self.client_checksum.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // key_count: u8
+        w.write_all(&Self::KEY_COUNT_VALUE.to_le_bytes()).await?;
+
+        Ok(())
+    }
 }
 impl ConstantSized for CMD_AUTH_RECONNECT_PROOF_Client {
     fn size() -> usize {

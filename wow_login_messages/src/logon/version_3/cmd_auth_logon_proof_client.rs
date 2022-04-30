@@ -187,6 +187,55 @@ impl AsyncReadWrite for CMD_AUTH_LOGON_PROOF_Client {
             security_flag: security_flag_if,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // client_public_key: u8[32]
+        for i in self.client_public_key.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // client_proof: u8[20]
+        for i in self.client_proof.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // crc_hash: u8[20]
+        for i in self.crc_hash.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // number_of_telemetry_keys: u8
+        w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes()).await?;
+
+        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        for i in self.telemetry_keys.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // security_flag: SecurityFlag
+        self.security_flag.tokio_write(w).await?;
+
+        match &self.security_flag {
+            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
+            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
+                pin_salt,
+                pin_hash,
+            } => {
+                // pin_salt: u8[16]
+                for i in pin_salt.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+                // pin_hash: u8[20]
+                for i in pin_hash.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+            }
+        }
+
+        Ok(())
+    }
 }
 impl VariableSized for CMD_AUTH_LOGON_PROOF_Client {
     fn size(&self) -> usize {
@@ -282,9 +331,20 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         Ok(())
     }
 
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.tokio_write(w).await?;
+        Ok(())
+    }
+
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u16_le(w)
+    }
+
+    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.tokio_write_u16_le(w).await
     }
 
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -292,9 +352,19 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         a.write_u16_be(w)
     }
 
+    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.tokio_write_u16_be(w).await
+    }
+
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u32_le(w)
+    }
+
+    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.tokio_write_u32_le(w).await
     }
 
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -302,14 +372,29 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         a.write_u32_be(w)
     }
 
+    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.tokio_write_u32_be(w).await
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u64_le(w)
     }
 
+    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.tokio_write_u64_le(w).await
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u64_be(w)
+    }
+
+    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.tokio_write_u64_be(w).await
     }
 
 }

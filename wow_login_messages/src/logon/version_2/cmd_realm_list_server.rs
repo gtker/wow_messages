@@ -111,6 +111,27 @@ impl AsyncReadWrite for CMD_REALM_LIST_Server {
             realms,
         })
     }
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        // size: u16
+        w.write_all(&((self.size() - 2) as u16).to_le_bytes()).await?;
+
+        // header_padding: u32
+        w.write_all(&Self::HEADER_PADDING_VALUE.to_le_bytes()).await?;
+
+        // number_of_realms: u8
+        w.write_all(&(self.realms.len() as u8).to_le_bytes()).await?;
+
+        // realms: Realm[number_of_realms]
+        for i in self.realms.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // footer_padding: u16
+        w.write_all(&Self::FOOTER_PADDING_VALUE.to_le_bytes()).await?;
+
+        Ok(())
+    }
 }
 impl VariableSized for CMD_REALM_LIST_Server {
     fn size(&self) -> usize {

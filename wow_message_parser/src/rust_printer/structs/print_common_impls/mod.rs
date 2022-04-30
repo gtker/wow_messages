@@ -3,7 +3,7 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, IntegerType};
 use crate::rust_printer::{
-    ImplType, Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
+    Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
     WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
 use crate::CSTRING_LARGEST_ALLOWED;
@@ -35,9 +35,7 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 },
             );
 
-            if !e.tags().logon_versions().is_empty() {
-                print_async::print_async(s, e, o, &error_ty);
-            }
+            print_async::print_async(s, e, o, &error_ty);
         }
         ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
             s.impl_world_read_and_writable_with_error(
