@@ -11,7 +11,7 @@ authors = ["Gtker <github@gtker.com"]
 edition = "2018"
 
 [features]
-default = ["async_tokio", "async_std"]
+default = []
 async_tokio = ["tokio", "async-trait"]
 async_std = ["async-std", "async-trait"]
 

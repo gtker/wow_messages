@@ -44,6 +44,11 @@
 //!
 //! And then use the structs from the relevant version module.
 //!
+//! ## Features
+//!
+//! Tokio and async-std support are gated behind the `async_tokio` and `async_std` features.
+//! Both of these are disabled by default.
+//!
 //! ## Design Decisions
 //!
 //! Types have been named the ugly `CMD_SCREAMING_SNAKE_CASE` way because that's
