@@ -13,7 +13,6 @@
 
 # Direct upgrades to Login
 
-* async-std support
 * Workable Intermediate Representation for Login
 * Single Read/Write call in read/write
   * Read/write const arrays?

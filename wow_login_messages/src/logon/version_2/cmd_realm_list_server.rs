@@ -8,6 +8,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_REALM_LIST_Server {
@@ -130,6 +132,59 @@ impl AsyncReadWrite for CMD_REALM_LIST_Server {
         // realms: Realm[number_of_realms]
         for i in self.realms.iter() {
             i.tokio_write(w).await?;
+        }
+
+        // footer_padding: u16
+        w.write_all(&Self::FOOTER_PADDING_VALUE.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // size: u16
+        let _size = crate::util::astd_read_u16_le(r).await?;
+        // size is expected to always be self.size (0)
+
+        // header_padding: u32
+        let _header_padding = crate::util::astd_read_u32_le(r).await?;
+        // header_padding is expected to always be 0 (0)
+
+        // number_of_realms: u8
+        let number_of_realms = crate::util::astd_read_u8_le(r).await?;
+
+        // realms: Realm[number_of_realms]
+        let mut realms = Vec::with_capacity(number_of_realms as usize);
+        for i in 0..number_of_realms {
+            realms.push(Realm::astd_read(r).await?);
+        }
+
+        // footer_padding: u16
+        let _footer_padding = crate::util::astd_read_u16_le(r).await?;
+        // footer_padding is expected to always be 0 (0)
+
+        Ok(Self {
+            realms,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+
+        // size: u16
+        w.write_all(&((self.size() - 2) as u16).to_le_bytes()).await?;
+
+        // header_padding: u32
+        w.write_all(&Self::HEADER_PADDING_VALUE.to_le_bytes()).await?;
+
+        // number_of_realms: u8
+        w.write_all(&(self.realms.len() as u8).to_le_bytes()).await?;
+
+        // realms: Realm[number_of_realms]
+        for i in self.realms.iter() {
+            i.astd_write(w).await?;
         }
 
         // footer_padding: u16

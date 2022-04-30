@@ -156,6 +156,11 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
             ),
+            format!(
+                "pub async fn astd_read_{ty}_{endian}<R: ReadExt + Unpin + Send>(r: &mut R)",
+                ty = t.rust_str(),
+                endian = t.rust_endian_str()
+            ),
             &return_type,
             |s, it| {
                 s.wln(format!(
@@ -186,6 +191,11 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
             ),
             format!(
                 "pub async fn tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
+                ty = t.rust_str(),
+                endian = t.rust_endian_str()
+            ),
+            format!(
+                "pub async fn astd_write_{ty}_{endian}<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
             ),

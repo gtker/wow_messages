@@ -8,6 +8,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct BattlegroundPlayer {
@@ -146,6 +148,77 @@ impl AsyncReadWrite for BattlegroundPlayer {
 
         // rank: PvpRank
         self.rank.tokio_write_u32_le(w).await?;
+
+        // killing_blows: u32
+        w.write_all(&self.killing_blows.to_le_bytes()).await?;
+
+        // honorable_kills: u32
+        w.write_all(&self.honorable_kills.to_le_bytes()).await?;
+
+        // deaths: u32
+        w.write_all(&self.deaths.to_le_bytes()).await?;
+
+        // bonus_honor: u32
+        w.write_all(&self.bonus_honor.to_le_bytes()).await?;
+
+        // amount_of_extra_fields: u32
+        w.write_all(&(self.fields.len() as u32).to_le_bytes()).await?;
+
+        // fields: u32[amount_of_extra_fields]
+        for i in self.fields.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // player: Guid
+        let player = Guid::astd_read(r).await?;
+
+        // rank: PvpRank
+        let rank = PvpRank::astd_read_u32_le(r).await?;
+
+        // killing_blows: u32
+        let killing_blows = crate::util::astd_read_u32_le(r).await?;
+
+        // honorable_kills: u32
+        let honorable_kills = crate::util::astd_read_u32_le(r).await?;
+
+        // deaths: u32
+        let deaths = crate::util::astd_read_u32_le(r).await?;
+
+        // bonus_honor: u32
+        let bonus_honor = crate::util::astd_read_u32_le(r).await?;
+
+        // amount_of_extra_fields: u32
+        let amount_of_extra_fields = crate::util::astd_read_u32_le(r).await?;
+
+        // fields: u32[amount_of_extra_fields]
+        let mut fields = Vec::with_capacity(amount_of_extra_fields as usize);
+        for i in 0..amount_of_extra_fields {
+            fields.push(crate::util::astd_read_u32_le(r).await?);
+        }
+
+        Ok(Self {
+            player,
+            rank,
+            killing_blows,
+            honorable_kills,
+            deaths,
+            bonus_honor,
+            fields,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // player: Guid
+        self.player.astd_write(w).await?;
+
+        // rank: PvpRank
+        self.rank.astd_write_u32_le(w).await?;
 
         // killing_blows: u32
         w.write_all(&self.killing_blows.to_le_bytes()).await?;

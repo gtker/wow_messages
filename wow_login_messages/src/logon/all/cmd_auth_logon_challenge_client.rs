@@ -11,6 +11,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Client {
@@ -206,6 +208,97 @@ impl AsyncReadWrite for CMD_AUTH_LOGON_CHALLENGE_Client {
 
         // locale: Locale
         self.locale.tokio_write(w).await?;
+
+        // utc_timezone_offset: u32
+        w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;
+
+        // client_ip_address: u32_be
+        w.write_all(&self.client_ip_address.to_be_bytes()).await?;
+
+        // account_name_length: u8
+        w.write_all(&(self.account_name.len() as u8).to_le_bytes()).await?;
+
+        // account_name: String[account_name_length]
+        w.write_all(self.account_name.as_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // protocol_version: u8
+        let protocol_version = crate::util::astd_read_u8_le(r).await?;
+
+        // size: u16
+        let _size = crate::util::astd_read_u16_le(r).await?;
+        // size is expected to always be self.size (0)
+
+        // game_name: u32
+        let _game_name = crate::util::astd_read_u32_le(r).await?;
+        // game_name is expected to always be "\0WoW" (5730135)
+
+        // version: Version
+        let version = Version::astd_read(r).await?;
+
+        // platform: Platform
+        let platform = Platform::astd_read(r).await?;
+
+        // os: Os
+        let os = Os::astd_read(r).await?;
+
+        // locale: Locale
+        let locale = Locale::astd_read(r).await?;
+
+        // utc_timezone_offset: u32
+        let utc_timezone_offset = crate::util::astd_read_u32_le(r).await?;
+
+        // client_ip_address: u32_be
+        let client_ip_address = crate::util::astd_read_u32_be(r).await?;
+
+        // account_name_length: u8
+        let account_name_length = crate::util::astd_read_u8_le(r).await?;
+
+        // account_name: String[account_name_length]
+        let account_name = crate::util::astd_read_fixed_string_to_vec(r, account_name_length as usize).await?;
+        let account_name = String::from_utf8(account_name)?;
+
+        Ok(Self {
+            protocol_version,
+            version,
+            platform,
+            os,
+            locale,
+            utc_timezone_offset,
+            client_ip_address,
+            account_name,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+
+        // protocol_version: u8
+        w.write_all(&self.protocol_version.to_le_bytes()).await?;
+
+        // size: u16
+        w.write_all(&((self.size() - 3) as u16).to_le_bytes()).await?;
+
+        // game_name: u32
+        w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes()).await?;
+
+        // version: Version
+        self.version.astd_write(w).await?;
+
+        // platform: Platform
+        self.platform.astd_write(w).await?;
+
+        // os: Os
+        self.os.astd_write(w).await?;
+
+        // locale: Locale
+        self.locale.astd_write(w).await?;
 
         // utc_timezone_offset: u32
         w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;

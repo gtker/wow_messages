@@ -1,6 +1,7 @@
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 use std::io;
 use std::io::{Read, Write};
-
 #[cfg(feature = "async_tokio")]
 use tokio::io::AsyncWriteExt;
 
@@ -37,6 +38,29 @@ impl AuraMask {
         for &i in self.auras() {
             if let Some(b) = i {
                 crate::util::write_u16_le(w, b)?;
+            }
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(
+        &self,
+        w: &mut W,
+    ) -> Result<(), std::io::Error> {
+        let mut bit_pattern: u32 = 0;
+        for (i, &b) in self.auras().iter().enumerate() {
+            if b.is_some() {
+                bit_pattern |= 1 << i;
+            }
+        }
+
+        crate::util::astd_write_u32_le(w, bit_pattern).await?;
+
+        for &i in self.auras() {
+            if let Some(b) = i {
+                crate::util::astd_write_u16_le(w, b).await?;
             }
         }
 

@@ -7,6 +7,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Arrays {
@@ -353,6 +355,175 @@ impl AsyncReadWrite for Arrays {
         // complex_variable_array: StructWithAllBuiltInTypes[index]
         for i in self.complex_variable_array.iter() {
             i.tokio_write(w).await?;
+        }
+
+        // fixed_cstring_array: CString[10]
+        for i in self.fixed_cstring_array.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
+        }
+
+        // variable_cstring_array: CString[index]
+        for i in self.variable_cstring_array.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // index: u8
+        let index = crate::util::astd_read_u8_le(r).await?;
+
+        // basic_fixed_array: u8[20]
+        let mut basic_fixed_array = [0_u8; 20];
+        r.read_exact(&mut basic_fixed_array).await?;
+
+        // simple_2byte_fixed_array: u16[16]
+        let mut simple_2byte_fixed_array = Vec::with_capacity(16 as usize);
+        for i in 0..16 {
+            simple_2byte_fixed_array.push(crate::util::astd_read_u16_le(r).await?);
+        }
+        let simple_2byte_fixed_array = simple_2byte_fixed_array.try_into().unwrap();
+
+        // simple_2byte_be_fixed_array: u16_be[16]
+        let mut simple_2byte_be_fixed_array = Vec::with_capacity(16 as usize);
+        for i in 0..16 {
+            simple_2byte_be_fixed_array.push(crate::util::astd_read_u16_be(r).await?);
+        }
+        let simple_2byte_be_fixed_array = simple_2byte_be_fixed_array.try_into().unwrap();
+
+        // simple_2byte_variable_array: u16[index]
+        let mut simple_2byte_variable_array = Vec::with_capacity(index as usize);
+        for i in 0..index {
+            simple_2byte_variable_array.push(crate::util::astd_read_u16_le(r).await?);
+        }
+
+        // simple_4byte_be_fixed_array: u32_be[16]
+        let mut simple_4byte_be_fixed_array = Vec::with_capacity(16 as usize);
+        for i in 0..16 {
+            simple_4byte_be_fixed_array.push(crate::util::astd_read_u32_be(r).await?);
+        }
+        let simple_4byte_be_fixed_array = simple_4byte_be_fixed_array.try_into().unwrap();
+
+        // simple_4byte_variable_array: u32[index]
+        let mut simple_4byte_variable_array = Vec::with_capacity(index as usize);
+        for i in 0..index {
+            simple_4byte_variable_array.push(crate::util::astd_read_u32_le(r).await?);
+        }
+
+        // simple_8byte_be_fixed_array: u64_be[16]
+        let mut simple_8byte_be_fixed_array = Vec::with_capacity(16 as usize);
+        for i in 0..16 {
+            simple_8byte_be_fixed_array.push(crate::util::astd_read_u64_be(r).await?);
+        }
+        let simple_8byte_be_fixed_array = simple_8byte_be_fixed_array.try_into().unwrap();
+
+        // simple_8byte_variable_array: u64[index]
+        let mut simple_8byte_variable_array = Vec::with_capacity(index as usize);
+        for i in 0..index {
+            simple_8byte_variable_array.push(crate::util::astd_read_u64_le(r).await?);
+        }
+
+        // complex_fixed_array: StructWithAllBuiltInTypes[10]
+        let mut complex_fixed_array = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            complex_fixed_array.push(StructWithAllBuiltInTypes::astd_read(r).await?);
+        }
+        let complex_fixed_array = complex_fixed_array.try_into().unwrap();
+
+        // complex_variable_array: StructWithAllBuiltInTypes[index]
+        let mut complex_variable_array = Vec::with_capacity(index as usize);
+        for i in 0..index {
+            complex_variable_array.push(StructWithAllBuiltInTypes::astd_read(r).await?);
+        }
+
+        // fixed_cstring_array: CString[10]
+        let mut fixed_cstring_array = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            let s = crate::util::astd_read_c_string_to_vec(r).await?;
+            fixed_cstring_array[i] = String::from_utf8(s)?;
+        }
+        let fixed_cstring_array = fixed_cstring_array.try_into().unwrap();
+
+        // variable_cstring_array: CString[index]
+        let mut variable_cstring_array = Vec::with_capacity(index as usize);
+        for i in 0..index {
+            let s = crate::util::astd_read_c_string_to_vec(r).await?;
+            variable_cstring_array.push(String::from_utf8(s)?);
+        }
+
+        Ok(Self {
+            basic_fixed_array,
+            simple_2byte_fixed_array,
+            simple_2byte_be_fixed_array,
+            simple_2byte_variable_array,
+            simple_4byte_be_fixed_array,
+            simple_4byte_variable_array,
+            simple_8byte_be_fixed_array,
+            simple_8byte_variable_array,
+            complex_fixed_array,
+            complex_variable_array,
+            fixed_cstring_array,
+            variable_cstring_array,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // index: u8
+        w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes()).await?;
+
+        // basic_fixed_array: u8[20]
+        for i in self.basic_fixed_array.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // simple_2byte_fixed_array: u16[16]
+        for i in self.simple_2byte_fixed_array.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // simple_2byte_be_fixed_array: u16_be[16]
+        for i in self.simple_2byte_be_fixed_array.iter() {
+            w.write_all(&i.to_be_bytes()).await?;
+        }
+
+        // simple_2byte_variable_array: u16[index]
+        for i in self.simple_2byte_variable_array.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // simple_4byte_be_fixed_array: u32_be[16]
+        for i in self.simple_4byte_be_fixed_array.iter() {
+            w.write_all(&i.to_be_bytes()).await?;
+        }
+
+        // simple_4byte_variable_array: u32[index]
+        for i in self.simple_4byte_variable_array.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // simple_8byte_be_fixed_array: u64_be[16]
+        for i in self.simple_8byte_be_fixed_array.iter() {
+            w.write_all(&i.to_be_bytes()).await?;
+        }
+
+        // simple_8byte_variable_array: u64[index]
+        for i in self.simple_8byte_variable_array.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // complex_fixed_array: StructWithAllBuiltInTypes[10]
+        for i in self.complex_fixed_array.iter() {
+            i.astd_write(w).await?;
+        }
+
+        // complex_variable_array: StructWithAllBuiltInTypes[index]
+        for i in self.complex_variable_array.iter() {
+            i.astd_write(w).await?;
         }
 
         // fixed_cstring_array: CString[10]

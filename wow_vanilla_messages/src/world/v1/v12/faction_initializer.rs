@@ -7,6 +7,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -66,6 +68,31 @@ impl AsyncReadWrite for FactionInitializer {
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // flag: FactionFlag
         self.flag.tokio_write(w).await?;
+
+        // standing: u32
+        w.write_all(&self.standing.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // flag: FactionFlag
+        let flag = FactionFlag::astd_read(r).await?;
+
+        // standing: u32
+        let standing = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            flag,
+            standing,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // flag: FactionFlag
+        self.flag.astd_write(w).await?;
 
         // standing: u32
         w.write_all(&self.standing.to_le_bytes()).await?;

@@ -11,6 +11,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MSG_PVP_LOG_DATA_Server {
@@ -208,6 +210,13 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: BattlegroundEndStatus = self.into();
+        a.astd_write(w).await?;
+        Ok(())
+    }
+
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.write_u16_le(w)
@@ -217,6 +226,12 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
     pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.tokio_write_u16_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: BattlegroundEndStatus = self.into();
+        a.astd_write_u16_le(w).await
     }
 
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -230,6 +245,12 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
         a.tokio_write_u16_be(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: BattlegroundEndStatus = self.into();
+        a.astd_write_u16_be(w).await
+    }
+
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.write_u32_le(w)
@@ -239,6 +260,12 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
     pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.tokio_write_u32_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: BattlegroundEndStatus = self.into();
+        a.astd_write_u32_le(w).await
     }
 
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -252,6 +279,12 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
         a.tokio_write_u32_be(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: BattlegroundEndStatus = self.into();
+        a.astd_write_u32_be(w).await
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.write_u64_le(w)
@@ -263,6 +296,12 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
         a.tokio_write_u64_le(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: BattlegroundEndStatus = self.into();
+        a.astd_write_u64_le(w).await
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.write_u64_be(w)
@@ -272,6 +311,12 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
     pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.tokio_write_u64_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: BattlegroundEndStatus = self.into();
+        a.astd_write_u64_be(w).await
     }
 
 }

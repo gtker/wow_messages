@@ -9,6 +9,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -399,6 +401,190 @@ impl AsyncReadWrite for CMD_AUTH_LOGON_CHALLENGE_Server {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // protocol_version: u8
+        let _protocol_version = crate::util::astd_read_u8_le(r).await?;
+        // protocol_version is expected to always be 0 (0)
+
+        // login_result: LoginResult
+        let login_result = LoginResult::astd_read(r).await?;
+
+        let login_result_if = match login_result {
+            LoginResult::SUCCESS => {
+                // server_public_key: u8[32]
+                let mut server_public_key = [0_u8; 32];
+                r.read_exact(&mut server_public_key).await?;
+
+                // generator_length: u8
+                let generator_length = crate::util::astd_read_u8_le(r).await?;
+
+                // generator: u8[generator_length]
+                let mut generator = Vec::with_capacity(generator_length as usize);
+                for i in 0..generator_length {
+                    generator.push(crate::util::astd_read_u8_le(r).await?);
+                }
+
+                // large_safe_prime_length: u8
+                let large_safe_prime_length = crate::util::astd_read_u8_le(r).await?;
+
+                // large_safe_prime: u8[large_safe_prime_length]
+                let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
+                for i in 0..large_safe_prime_length {
+                    large_safe_prime.push(crate::util::astd_read_u8_le(r).await?);
+                }
+
+                // salt: u8[32]
+                let mut salt = [0_u8; 32];
+                r.read_exact(&mut salt).await?;
+
+                // crc_salt: u8[16]
+                let mut crc_salt = [0_u8; 16];
+                r.read_exact(&mut crc_salt).await?;
+
+                // security_flag: SecurityFlag
+                let security_flag = SecurityFlag::astd_read(r).await?;
+
+                let security_flag_if = match security_flag {
+                    SecurityFlag::NONE => CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::NONE,
+                    SecurityFlag::PIN => {
+                        // pin_grid_seed: u32
+                        let pin_grid_seed = crate::util::astd_read_u32_le(r).await?;
+
+                        // pin_salt: u8[16]
+                        let mut pin_salt = [0_u8; 16];
+                        r.read_exact(&mut pin_salt).await?;
+
+                        CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::PIN {
+                            pin_grid_seed,
+                            pin_salt,
+                        }
+                    }
+                };
+
+                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+                    server_public_key,
+                    generator,
+                    large_safe_prime,
+                    salt,
+                    crc_salt,
+                    security_flag: security_flag_if,
+                }
+            }
+            LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
+            LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1,
+            LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED,
+            LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
+            LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+            LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE,
+            LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME,
+            LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY,
+            LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID,
+            LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
+            LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER,
+            LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED,
+            LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS,
+            LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY,
+            LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL,
+        };
+
+        Ok(Self {
+            login_result: login_result_if,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+
+        // protocol_version: u8
+        w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes()).await?;
+
+        // login_result: LoginResult
+        self.login_result.astd_write(w).await?;
+
+        match &self.login_result {
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+                server_public_key,
+                generator,
+                large_safe_prime,
+                salt,
+                crc_salt,
+                security_flag,
+            } => {
+                // server_public_key: u8[32]
+                for i in server_public_key.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+                // generator_length: u8
+                w.write_all(&(generator.len() as u8).to_le_bytes()).await?;
+
+                // generator: u8[generator_length]
+                for i in generator.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+                // large_safe_prime_length: u8
+                w.write_all(&(large_safe_prime.len() as u8).to_le_bytes()).await?;
+
+                // large_safe_prime: u8[large_safe_prime_length]
+                for i in large_safe_prime.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+                // salt: u8[32]
+                for i in salt.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+                // crc_salt: u8[16]
+                for i in crc_salt.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+                // security_flag: SecurityFlag
+                security_flag.astd_write(w).await?;
+
+                match &security_flag {
+                    CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::NONE => {}
+                    CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag::PIN {
+                        pin_grid_seed,
+                        pin_salt,
+                    } => {
+                        // pin_grid_seed: u32
+                        w.write_all(&pin_grid_seed.to_le_bytes()).await?;
+
+                        // pin_salt: u8[16]
+                        for i in pin_salt.iter() {
+                            w.write_all(&i.to_le_bytes()).await?;
+                        }
+
+                    }
+                }
+
+            }
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => {}
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => {}
+        }
+
+        Ok(())
+    }
+
 }
 
 impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_Server {
@@ -502,6 +688,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write(w).await?;
+        Ok(())
+    }
+
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u16_le(w)
@@ -511,6 +704,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
     pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.tokio_write_u16_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u16_le(w).await
     }
 
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -524,6 +723,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         a.tokio_write_u16_be(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u16_be(w).await
+    }
+
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u32_le(w)
@@ -533,6 +738,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
     pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.tokio_write_u32_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u32_le(w).await
     }
 
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -546,6 +757,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         a.tokio_write_u32_be(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u32_be(w).await
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u64_le(w)
@@ -557,6 +774,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         a.tokio_write_u64_le(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u64_le(w).await
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u64_be(w)
@@ -566,6 +789,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
     pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.tokio_write_u64_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u64_be(w).await
     }
 
 }
@@ -702,6 +931,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write(w).await?;
+        Ok(())
+    }
+
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u16_le(w)
@@ -711,6 +947,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.tokio_write_u16_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u16_le(w).await
     }
 
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -724,6 +966,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
         a.tokio_write_u16_be(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u16_be(w).await
+    }
+
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u32_le(w)
@@ -733,6 +981,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.tokio_write_u32_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u32_le(w).await
     }
 
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -746,6 +1000,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
         a.tokio_write_u32_be(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u32_be(w).await
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u64_le(w)
@@ -757,6 +1017,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
         a.tokio_write_u64_le(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u64_le(w).await
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u64_be(w)
@@ -766,6 +1032,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.tokio_write_u64_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u64_be(w).await
     }
 
 }

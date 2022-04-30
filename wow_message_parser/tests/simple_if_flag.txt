@@ -7,6 +7,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SimpleIfFlag {
@@ -97,6 +99,44 @@ impl AsyncReadWrite for SimpleIfFlag {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // flag: SimpleFlag
+        let flag = SimpleFlag::astd_read(r).await?;
+
+        let flag_ZERO = if flag.is_ZERO() {
+            // basic: u8
+            let basic = crate::util::astd_read_u8_le(r).await?;
+
+            Some(SimpleIfFlagSimpleFlagZERO {
+                basic,
+            })
+        } else {
+            None
+        };
+
+        let flag = SimpleIfFlagSimpleFlag {
+            inner: flag.as_u8(),
+            zero: flag_ZERO,
+        };
+
+        Ok(Self {
+            flag,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // flag: SimpleFlag
+        self.flag.astd_write(w).await?;
+
+        if let Some(s) = &self.flag.zero {
+            s.astd_write(w).await?;
+        }
+
+        Ok(())
+    }
+
 }
 
 impl VariableSized for SimpleIfFlag {
@@ -134,6 +174,13 @@ impl SimpleIfFlagSimpleFlag {
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleFlag = self.into();
         a.tokio_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleFlag = self.into();
+        a.astd_write(w).await?;
         Ok(())
     }
 
@@ -266,6 +313,14 @@ impl SimpleIfFlagSimpleFlagZERO {
 impl SimpleIfFlagSimpleFlagZERO {
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.basic.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.basic.to_le_bytes()).await?;
 
         Ok(())

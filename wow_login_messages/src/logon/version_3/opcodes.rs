@@ -85,6 +85,33 @@ impl AsyncReadWrite for ServerOpcodeMessage {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        let opcode = ServerOpcode::astd_read(r).await?;
+        match opcode {
+            ServerOpcode::CMD_AUTH_LOGON_CHALLENGE => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::astd_read(r).await?)),
+            ServerOpcode::CMD_AUTH_LOGON_PROOF => Ok(Self::CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Server::astd_read(r).await?)),
+            ServerOpcode::CMD_REALM_LIST => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Server::astd_read(r).await?)),
+            ServerOpcode::CMD_XFER_INITIATE => Ok(Self::CMD_XFER_INITIATE(CMD_XFER_INITIATE::astd_read(r).await?)),
+            ServerOpcode::CMD_XFER_DATA => Ok(Self::CMD_XFER_DATA(CMD_XFER_DATA::astd_read(r).await?)),
+        }
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        ServerOpcode::from(self).astd_write(w).await?;
+
+        match self {
+            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.astd_write(w).await?,
+            Self::CMD_AUTH_LOGON_PROOF(e) => e.astd_write(w).await?,
+            Self::CMD_REALM_LIST(e) => e.astd_write(w).await?,
+            Self::CMD_XFER_INITIATE(e) => e.astd_write(w).await?,
+            Self::CMD_XFER_DATA(e) => e.astd_write(w).await?,
+        }
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug)]
@@ -221,6 +248,26 @@ impl AsyncReadWrite for ServerOpcode {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        let opcode = crate::util::astd_read_u8_le(r).await?;
+
+        match opcode {
+            0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE),
+            0x01 => Ok(Self::CMD_AUTH_LOGON_PROOF),
+            0x10 => Ok(Self::CMD_REALM_LIST),
+            0x30 => Ok(Self::CMD_XFER_INITIATE),
+            0x31 => Ok(Self::CMD_XFER_DATA),
+            opcode => Err(ServerOpcodeError::InvalidOpcode(opcode)),
+        }
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::astd_write_u8_le(w, self.as_u8()).await?;
+        Ok(())
+    }
+
 }
 
 impl From<&ServerOpcodeMessage> for ServerOpcode {
@@ -349,6 +396,39 @@ impl AsyncReadWrite for ClientOpcodeMessage {
             Self::CMD_XFER_ACCEPT(e) => e.tokio_write(w).await?,
             Self::CMD_XFER_RESUME(e) => e.tokio_write(w).await?,
             Self::CMD_XFER_CANCEL(e) => e.tokio_write(w).await?,
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        let opcode = ClientOpcode::astd_read(r).await?;
+        match opcode {
+            ClientOpcode::CMD_AUTH_LOGON_CHALLENGE => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client::astd_read(r).await?)),
+            ClientOpcode::CMD_AUTH_LOGON_PROOF => Ok(Self::CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Client::astd_read(r).await?)),
+            ClientOpcode::CMD_AUTH_RECONNECT_CHALLENGE => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::astd_read(r).await?)),
+            ClientOpcode::CMD_SURVEY_RESULT => Ok(Self::CMD_SURVEY_RESULT(CMD_SURVEY_RESULT::astd_read(r).await?)),
+            ClientOpcode::CMD_REALM_LIST => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::astd_read(r).await?)),
+            ClientOpcode::CMD_XFER_ACCEPT => Ok(Self::CMD_XFER_ACCEPT(CMD_XFER_ACCEPT::astd_read(r).await?)),
+            ClientOpcode::CMD_XFER_RESUME => Ok(Self::CMD_XFER_RESUME(CMD_XFER_RESUME::astd_read(r).await?)),
+            ClientOpcode::CMD_XFER_CANCEL => Ok(Self::CMD_XFER_CANCEL(CMD_XFER_CANCEL::astd_read(r).await?)),
+        }
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        ClientOpcode::from(self).astd_write(w).await?;
+
+        match self {
+            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.astd_write(w).await?,
+            Self::CMD_AUTH_LOGON_PROOF(e) => e.astd_write(w).await?,
+            Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.astd_write(w).await?,
+            Self::CMD_SURVEY_RESULT(e) => e.astd_write(w).await?,
+            Self::CMD_REALM_LIST(e) => e.astd_write(w).await?,
+            Self::CMD_XFER_ACCEPT(e) => e.astd_write(w).await?,
+            Self::CMD_XFER_RESUME(e) => e.astd_write(w).await?,
+            Self::CMD_XFER_CANCEL(e) => e.astd_write(w).await?,
         }
 
         Ok(())
@@ -499,6 +579,29 @@ impl AsyncReadWrite for ClientOpcode {
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::tokio_write_u8_le(w, self.as_u8()).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        let opcode = crate::util::astd_read_u8_le(r).await?;
+
+        match opcode {
+            0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE),
+            0x01 => Ok(Self::CMD_AUTH_LOGON_PROOF),
+            0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE),
+            0x04 => Ok(Self::CMD_SURVEY_RESULT),
+            0x10 => Ok(Self::CMD_REALM_LIST),
+            0x32 => Ok(Self::CMD_XFER_ACCEPT),
+            0x33 => Ok(Self::CMD_XFER_RESUME),
+            0x34 => Ok(Self::CMD_XFER_CANCEL),
+            opcode => Err(ClientOpcodeError::InvalidOpcode(opcode)),
+        }
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::astd_write_u8_le(w, self.as_u8()).await?;
         Ok(())
     }
 

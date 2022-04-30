@@ -6,6 +6,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -95,6 +97,51 @@ impl AsyncReadWrite for TelemetryKey {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // unknown1: u16
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // unknown2: u32
+        w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+        // unknown3: u8[4]
+        for i in self.unknown3.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // unknown4: u8[20]
+        for i in self.unknown4.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // unknown1: u16
+        let unknown1 = crate::util::astd_read_u16_le(r).await?;
+
+        // unknown2: u32
+        let unknown2 = crate::util::astd_read_u32_le(r).await?;
+
+        // unknown3: u8[4]
+        let mut unknown3 = [0_u8; 4];
+        r.read_exact(&mut unknown3).await?;
+
+        // unknown4: u8[20]
+        let mut unknown4 = [0_u8; 20];
+        r.read_exact(&mut unknown4).await?;
+
+        Ok(Self {
+            unknown1,
+            unknown2,
+            unknown3,
+            unknown4,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // unknown1: u16
         w.write_all(&self.unknown1.to_le_bytes()).await?;
 

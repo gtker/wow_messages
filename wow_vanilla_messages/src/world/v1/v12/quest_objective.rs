@@ -6,6 +6,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -87,6 +89,45 @@ impl AsyncReadWrite for QuestObjective {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // creature_id: u32
+        w.write_all(&self.creature_id.to_le_bytes()).await?;
+
+        // kill_count: u32
+        w.write_all(&self.kill_count.to_le_bytes()).await?;
+
+        // required_item_id: u32
+        w.write_all(&self.required_item_id.to_le_bytes()).await?;
+
+        // required_item_count: u32
+        w.write_all(&self.required_item_count.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // creature_id: u32
+        let creature_id = crate::util::astd_read_u32_le(r).await?;
+
+        // kill_count: u32
+        let kill_count = crate::util::astd_read_u32_le(r).await?;
+
+        // required_item_id: u32
+        let required_item_id = crate::util::astd_read_u32_le(r).await?;
+
+        // required_item_count: u32
+        let required_item_count = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            creature_id,
+            kill_count,
+            required_item_id,
+            required_item_count,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // creature_id: u32
         w.write_all(&self.creature_id.to_le_bytes()).await?;
 

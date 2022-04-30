@@ -12,6 +12,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_SPELL_GO {
@@ -239,6 +241,13 @@ impl SMSG_SPELL_GOCastFlags {
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: CastFlags = self.into();
         a.tokio_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: CastFlags = self.into();
+        a.astd_write(w).await?;
         Ok(())
     }
 
@@ -538,6 +547,16 @@ impl SMSG_SPELL_GOCastFlagsAMMO {
 impl SMSG_SPELL_GOCastFlagsAMMO {
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.ammo_display_id.to_le_bytes()).await?;
+
+        w.write_all(&self.ammo_inventory_type.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.ammo_display_id.to_le_bytes()).await?;
 
         w.write_all(&self.ammo_inventory_type.to_le_bytes()).await?;

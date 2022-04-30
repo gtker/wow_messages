@@ -7,6 +7,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -110,6 +112,57 @@ impl AsyncReadWrite for CMD_AUTH_RECONNECT_PROOF_Client {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+
+        // proof_data: u8[16]
+        for i in self.proof_data.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // client_proof: u8[20]
+        for i in self.client_proof.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // client_checksum: u8[20]
+        for i in self.client_checksum.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // key_count: u8
+        w.write_all(&Self::KEY_COUNT_VALUE.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // proof_data: u8[16]
+        let mut proof_data = [0_u8; 16];
+        r.read_exact(&mut proof_data).await?;
+
+        // client_proof: u8[20]
+        let mut client_proof = [0_u8; 20];
+        r.read_exact(&mut client_proof).await?;
+
+        // client_checksum: u8[20]
+        let mut client_checksum = [0_u8; 20];
+        r.read_exact(&mut client_checksum).await?;
+
+        // key_count: u8
+        let _key_count = crate::util::astd_read_u8_le(r).await?;
+        // key_count is expected to always be 0 (0)
+
+        Ok(Self {
+            proof_data,
+            client_proof,
+            client_checksum,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 

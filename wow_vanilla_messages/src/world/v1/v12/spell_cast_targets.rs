@@ -8,6 +8,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SpellCastTargets {
@@ -440,6 +442,215 @@ impl AsyncReadWrite for SpellCastTargets {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // target_flags: SpellCastTargetFlags
+        let target_flags = SpellCastTargetFlags::astd_read(r).await?;
+
+        let target_flags_UNIT = if target_flags.is_UNIT() {
+            // unit_target1: PackedGuid
+            let unit_target1 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsUNIT {
+                unit_target1,
+            })
+        } else {
+            None
+        };
+
+        let target_flags_UNIT_ENEMY = if target_flags.is_UNIT_ENEMY() {
+            // unit_target2: PackedGuid
+            let unit_target2 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
+                unit_target2,
+            })
+        } else {
+            None
+        };
+
+        let target_flags_GAMEOBJECT = if target_flags.is_GAMEOBJECT() {
+            // object_target1: PackedGuid
+            let object_target1 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
+                object_target1,
+            })
+        } else {
+            None
+        };
+
+        let target_flags_LOCKED = if target_flags.is_LOCKED() {
+            // object_target2: PackedGuid
+            let object_target2 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsLOCKED {
+                object_target2,
+            })
+        } else {
+            None
+        };
+
+        let target_flags_ITEM = if target_flags.is_ITEM() {
+            // item_target1: PackedGuid
+            let item_target1 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsITEM {
+                item_target1,
+            })
+        } else {
+            None
+        };
+
+        let target_flags_TRADE_ITEM = if target_flags.is_TRADE_ITEM() {
+            // item_target2: PackedGuid
+            let item_target2 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
+                item_target2,
+            })
+        } else {
+            None
+        };
+
+        let target_flags_SOURCE_LOCATION = if target_flags.is_SOURCE_LOCATION() {
+            // position_x1: f32
+            let position_x1 = crate::util::astd_read_f32_le(r).await?;
+            // position_y1: f32
+            let position_y1 = crate::util::astd_read_f32_le(r).await?;
+            // position_z1: f32
+            let position_z1 = crate::util::astd_read_f32_le(r).await?;
+            Some(SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
+                position_x1,
+                position_y1,
+                position_z1,
+            })
+        } else {
+            None
+        };
+
+        let target_flags_DEST_LOCATION = if target_flags.is_DEST_LOCATION() {
+            // position_x2: f32
+            let position_x2 = crate::util::astd_read_f32_le(r).await?;
+            // position_y2: f32
+            let position_y2 = crate::util::astd_read_f32_le(r).await?;
+            // position_z2: f32
+            let position_z2 = crate::util::astd_read_f32_le(r).await?;
+            Some(SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
+                position_x2,
+                position_y2,
+                position_z2,
+            })
+        } else {
+            None
+        };
+
+        let target_flags_STRING = if target_flags.is_STRING() {
+            // target_string: CString
+            let target_string = crate::util::astd_read_c_string_to_vec(r).await?;
+            let target_string = String::from_utf8(target_string)?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsSTRING {
+                target_string,
+            })
+        } else {
+            None
+        };
+
+        let target_flags_CORPSE_ALLY = if target_flags.is_CORPSE_ALLY() {
+            // corpse_target1: PackedGuid
+            let corpse_target1 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
+                corpse_target1,
+            })
+        } else {
+            None
+        };
+
+        let target_flags_CORPSE_ENEMY = if target_flags.is_CORPSE_ENEMY() {
+            // corpse_target2: PackedGuid
+            let corpse_target2 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
+                corpse_target2,
+            })
+        } else {
+            None
+        };
+
+        let target_flags = SpellCastTargetsSpellCastTargetFlags {
+            inner: target_flags.as_u16(),
+            unit: target_flags_UNIT,
+            item: target_flags_ITEM,
+            source_location: target_flags_SOURCE_LOCATION,
+            dest_location: target_flags_DEST_LOCATION,
+            unit_enemy: target_flags_UNIT_ENEMY,
+            corpse_enemy: target_flags_CORPSE_ENEMY,
+            gameobject: target_flags_GAMEOBJECT,
+            trade_item: target_flags_TRADE_ITEM,
+            string: target_flags_STRING,
+            locked: target_flags_LOCKED,
+            corpse_ally: target_flags_CORPSE_ALLY,
+        };
+
+        Ok(Self {
+            target_flags,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // target_flags: SpellCastTargetFlags
+        self.target_flags.astd_write(w).await?;
+
+        if let Some(s) = &self.target_flags.unit {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.target_flags.unit_enemy {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.target_flags.gameobject {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.target_flags.locked {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.target_flags.item {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.target_flags.trade_item {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.target_flags.source_location {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.target_flags.dest_location {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.target_flags.string {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.target_flags.corpse_ally {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.target_flags.corpse_enemy {
+            s.astd_write(w).await?;
+        }
+
+        Ok(())
+    }
+
 }
 
 impl VariableSized for SpellCastTargets {
@@ -515,6 +726,13 @@ impl SpellCastTargetsSpellCastTargetFlags {
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SpellCastTargetFlags = self.into();
         a.tokio_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SpellCastTargetFlags = self.into();
+        a.astd_write(w).await?;
         Ok(())
     }
 
@@ -1255,6 +1473,14 @@ impl SpellCastTargetsSpellCastTargetFlagsUNIT {
         Ok(())
     }
 
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.unit_target1.astd_write_packed(w).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1288,6 +1514,14 @@ impl SpellCastTargetsSpellCastTargetFlagsITEM {
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.item_target1.tokio_write_packed(w).await?;
+
+        Ok(())
+    }
+
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.item_target1.astd_write_packed(w).await?;
 
         Ok(())
     }
@@ -1334,6 +1568,18 @@ impl SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
 impl SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.position_x1.to_le_bytes()).await?;
+
+        w.write_all(&self.position_y1.to_le_bytes()).await?;
+
+        w.write_all(&self.position_z1.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.position_x1.to_le_bytes()).await?;
 
         w.write_all(&self.position_y1.to_le_bytes()).await?;
@@ -1394,6 +1640,18 @@ impl SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
         Ok(())
     }
 
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.position_x2.to_le_bytes()).await?;
+
+        w.write_all(&self.position_y2.to_le_bytes()).await?;
+
+        w.write_all(&self.position_z2.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1427,6 +1685,14 @@ impl SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.unit_target2.tokio_write_packed(w).await?;
+
+        Ok(())
+    }
+
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.unit_target2.astd_write_packed(w).await?;
 
         Ok(())
     }
@@ -1468,6 +1734,14 @@ impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
         Ok(())
     }
 
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.corpse_target2.astd_write_packed(w).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1505,6 +1779,14 @@ impl SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
         Ok(())
     }
 
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.object_target1.astd_write_packed(w).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1538,6 +1820,14 @@ impl SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.item_target2.tokio_write_packed(w).await?;
+
+        Ok(())
+    }
+
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.item_target2.astd_write_packed(w).await?;
 
         Ok(())
     }
@@ -1583,6 +1873,16 @@ impl SpellCastTargetsSpellCastTargetFlagsSTRING {
         Ok(())
     }
 
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(self.target_string.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1620,6 +1920,14 @@ impl SpellCastTargetsSpellCastTargetFlagsLOCKED {
         Ok(())
     }
 
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.object_target2.astd_write_packed(w).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1653,6 +1961,14 @@ impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.corpse_target1.tokio_write_packed(w).await?;
+
+        Ok(())
+    }
+
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.corpse_target1.astd_write_packed(w).await?;
 
         Ok(())
     }

@@ -8,6 +8,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -70,6 +72,31 @@ impl AsyncReadWrite for SpellMiss {
 
         // miss_info: SpellMissInfo
         self.miss_info.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // target_guid: Guid
+        let target_guid = Guid::astd_read(r).await?;
+
+        // miss_info: SpellMissInfo
+        let miss_info = SpellMissInfo::astd_read(r).await?;
+
+        Ok(Self {
+            target_guid,
+            miss_info,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // target_guid: Guid
+        self.target_guid.astd_write(w).await?;
+
+        // miss_info: SpellMissInfo
+        self.miss_info.astd_write(w).await?;
 
         Ok(())
     }

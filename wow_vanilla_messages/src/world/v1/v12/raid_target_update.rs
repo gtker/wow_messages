@@ -8,6 +8,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -70,6 +72,31 @@ impl AsyncReadWrite for RaidTargetUpdate {
 
         // guid: Guid
         self.guid.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // index: RaidTargetIndex
+        let index = RaidTargetIndex::astd_read(r).await?;
+
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        Ok(Self {
+            index,
+            guid,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // index: RaidTargetIndex
+        self.index.astd_write(w).await?;
+
+        // guid: Guid
+        self.guid.astd_write(w).await?;
 
         Ok(())
     }

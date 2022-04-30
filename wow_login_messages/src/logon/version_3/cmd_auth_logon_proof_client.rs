@@ -9,6 +9,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client {
@@ -242,6 +244,112 @@ impl AsyncReadWrite for CMD_AUTH_LOGON_PROOF_Client {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // client_public_key: u8[32]
+        let mut client_public_key = [0_u8; 32];
+        r.read_exact(&mut client_public_key).await?;
+
+        // client_proof: u8[20]
+        let mut client_proof = [0_u8; 20];
+        r.read_exact(&mut client_proof).await?;
+
+        // crc_hash: u8[20]
+        let mut crc_hash = [0_u8; 20];
+        r.read_exact(&mut crc_hash).await?;
+
+        // number_of_telemetry_keys: u8
+        let number_of_telemetry_keys = crate::util::astd_read_u8_le(r).await?;
+
+        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
+        for i in 0..number_of_telemetry_keys {
+            telemetry_keys.push(TelemetryKey::astd_read(r).await?);
+        }
+
+        // security_flag: SecurityFlag
+        let security_flag = SecurityFlag::astd_read(r).await?;
+
+        let security_flag_if = match security_flag {
+            SecurityFlag::NONE => CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE,
+            SecurityFlag::PIN => {
+                // pin_salt: u8[16]
+                let mut pin_salt = [0_u8; 16];
+                r.read_exact(&mut pin_salt).await?;
+
+                // pin_hash: u8[20]
+                let mut pin_hash = [0_u8; 20];
+                r.read_exact(&mut pin_hash).await?;
+
+                CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
+                    pin_salt,
+                    pin_hash,
+                }
+            }
+        };
+
+        Ok(Self {
+            client_public_key,
+            client_proof,
+            crc_hash,
+            telemetry_keys,
+            security_flag: security_flag_if,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+
+        // client_public_key: u8[32]
+        for i in self.client_public_key.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // client_proof: u8[20]
+        for i in self.client_proof.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // crc_hash: u8[20]
+        for i in self.crc_hash.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // number_of_telemetry_keys: u8
+        w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes()).await?;
+
+        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        for i in self.telemetry_keys.iter() {
+            i.astd_write(w).await?;
+        }
+
+        // security_flag: SecurityFlag
+        self.security_flag.astd_write(w).await?;
+
+        match &self.security_flag {
+            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
+            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
+                pin_salt,
+                pin_hash,
+            } => {
+                // pin_salt: u8[16]
+                for i in pin_salt.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+                // pin_hash: u8[20]
+                for i in pin_hash.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+            }
+        }
+
+        Ok(())
+    }
+
 }
 
 impl VariableSized for CMD_AUTH_LOGON_PROOF_Client {
@@ -345,6 +453,13 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write(w).await?;
+        Ok(())
+    }
+
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u16_le(w)
@@ -354,6 +469,12 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.tokio_write_u16_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u16_le(w).await
     }
 
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -367,6 +488,12 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         a.tokio_write_u16_be(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u16_be(w).await
+    }
+
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u32_le(w)
@@ -376,6 +503,12 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.tokio_write_u32_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u32_le(w).await
     }
 
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
@@ -389,6 +522,12 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         a.tokio_write_u32_be(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u32_be(w).await
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u64_le(w)
@@ -400,6 +539,12 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         a.tokio_write_u64_le(w).await
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u64_le(w).await
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.write_u64_be(w)
@@ -409,6 +554,12 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SecurityFlag = self.into();
         a.tokio_write_u64_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SecurityFlag = self.into();
+        a.astd_write_u64_be(w).await
     }
 
 }

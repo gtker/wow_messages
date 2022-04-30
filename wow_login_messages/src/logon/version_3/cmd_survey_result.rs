@@ -7,6 +7,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_SURVEY_RESULT {
@@ -98,6 +100,52 @@ impl AsyncReadWrite for CMD_SURVEY_RESULT {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+
+        // survey_id: u32
+        w.write_all(&self.survey_id.to_le_bytes()).await?;
+
+        // error: u8
+        w.write_all(&self.error.to_le_bytes()).await?;
+
+        // compressed_data_length: u16
+        w.write_all(&(self.data.len() as u16).to_le_bytes()).await?;
+
+        // data: u8[compressed_data_length]
+        for i in self.data.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // survey_id: u32
+        let survey_id = crate::util::astd_read_u32_le(r).await?;
+
+        // error: u8
+        let error = crate::util::astd_read_u8_le(r).await?;
+
+        // compressed_data_length: u16
+        let compressed_data_length = crate::util::astd_read_u16_le(r).await?;
+
+        // data: u8[compressed_data_length]
+        let mut data = Vec::with_capacity(compressed_data_length as usize);
+        for i in 0..compressed_data_length {
+            data.push(crate::util::astd_read_u8_le(r).await?);
+        }
+
+        Ok(Self {
+            survey_id,
+            error,
+            data,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 

@@ -10,6 +10,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Realm {
@@ -170,6 +172,79 @@ impl AsyncReadWrite for Realm {
 
         // category: RealmCategory
         self.category.tokio_write(w).await?;
+
+        // realm_id: u8
+        w.write_all(&self.realm_id.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // realm_type: RealmType
+        let realm_type = RealmType::astd_read(r).await?;
+
+        // flag: RealmFlag
+        let flag = RealmFlag::astd_read(r).await?;
+
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // address: CString
+        let address = crate::util::astd_read_c_string_to_vec(r).await?;
+        let address = String::from_utf8(address)?;
+
+        // population: Population
+        let population = Population::astd_read(r).await?;
+
+        // number_of_characters_on_realm: u8
+        let number_of_characters_on_realm = crate::util::astd_read_u8_le(r).await?;
+
+        // category: RealmCategory
+        let category = RealmCategory::astd_read(r).await?;
+
+        // realm_id: u8
+        let realm_id = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            realm_type,
+            flag,
+            name,
+            address,
+            population,
+            number_of_characters_on_realm,
+            category,
+            realm_id,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // realm_type: RealmType
+        self.realm_type.astd_write(w).await?;
+
+        // flag: RealmFlag
+        self.flag.astd_write(w).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // address: CString
+        w.write_all(self.address.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // population: Population
+        self.population.astd_write(w).await?;
+
+        // number_of_characters_on_realm: u8
+        w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
+
+        // category: RealmCategory
+        self.category.astd_write(w).await?;
 
         // realm_id: u8
         w.write_all(&self.realm_id.to_le_bytes()).await?;

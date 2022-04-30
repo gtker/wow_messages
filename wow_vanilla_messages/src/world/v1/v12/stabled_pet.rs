@@ -6,6 +6,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct StabledPet {
@@ -114,6 +116,62 @@ impl AsyncReadWrite for StabledPet {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_number: u32
+        w.write_all(&self.pet_number.to_le_bytes()).await?;
+
+        // entry: u32
+        w.write_all(&self.entry.to_le_bytes()).await?;
+
+        // level: u32
+        w.write_all(&self.level.to_le_bytes()).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // loyalty: u32
+        w.write_all(&self.loyalty.to_le_bytes()).await?;
+
+        // slot: u8
+        w.write_all(&self.slot.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // pet_number: u32
+        let pet_number = crate::util::astd_read_u32_le(r).await?;
+
+        // entry: u32
+        let entry = crate::util::astd_read_u32_le(r).await?;
+
+        // level: u32
+        let level = crate::util::astd_read_u32_le(r).await?;
+
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // loyalty: u32
+        let loyalty = crate::util::astd_read_u32_le(r).await?;
+
+        // slot: u8
+        let slot = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            pet_number,
+            entry,
+            level,
+            name,
+            loyalty,
+            slot,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes()).await?;
 

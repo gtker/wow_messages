@@ -7,6 +7,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -231,6 +233,115 @@ impl AsyncReadWrite for TradeSlot {
 
         // item_creator: Guid
         self.item_creator.tokio_write(w).await?;
+
+        // spell_charges: u32
+        w.write_all(&self.spell_charges.to_le_bytes()).await?;
+
+        // item_suffix_factor: u32
+        w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
+
+        // item_random_properties_id: u32
+        w.write_all(&self.item_random_properties_id.to_le_bytes()).await?;
+
+        // lock_id: u32
+        w.write_all(&self.lock_id.to_le_bytes()).await?;
+
+        // max_durability: u32
+        w.write_all(&self.max_durability.to_le_bytes()).await?;
+
+        // durability: u32
+        w.write_all(&self.durability.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // trade_slot_number: u8
+        let trade_slot_number = crate::util::astd_read_u8_le(r).await?;
+
+        // item_id: u32
+        let item_id = crate::util::astd_read_u32_le(r).await?;
+
+        // display_id: u32
+        let display_id = crate::util::astd_read_u32_le(r).await?;
+
+        // stack_count: u32
+        let stack_count = crate::util::astd_read_u32_le(r).await?;
+
+        // is_wrapped: u32
+        let is_wrapped = crate::util::astd_read_u32_le(r).await?;
+
+        // gift_wrapper: Guid
+        let gift_wrapper = Guid::astd_read(r).await?;
+
+        // enchantment: u32
+        let enchantment = crate::util::astd_read_u32_le(r).await?;
+
+        // item_creator: Guid
+        let item_creator = Guid::astd_read(r).await?;
+
+        // spell_charges: u32
+        let spell_charges = crate::util::astd_read_u32_le(r).await?;
+
+        // item_suffix_factor: u32
+        let item_suffix_factor = crate::util::astd_read_u32_le(r).await?;
+
+        // item_random_properties_id: u32
+        let item_random_properties_id = crate::util::astd_read_u32_le(r).await?;
+
+        // lock_id: u32
+        let lock_id = crate::util::astd_read_u32_le(r).await?;
+
+        // max_durability: u32
+        let max_durability = crate::util::astd_read_u32_le(r).await?;
+
+        // durability: u32
+        let durability = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            trade_slot_number,
+            item_id,
+            display_id,
+            stack_count,
+            is_wrapped,
+            gift_wrapper,
+            enchantment,
+            item_creator,
+            spell_charges,
+            item_suffix_factor,
+            item_random_properties_id,
+            lock_id,
+            max_durability,
+            durability,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // trade_slot_number: u8
+        w.write_all(&self.trade_slot_number.to_le_bytes()).await?;
+
+        // item_id: u32
+        w.write_all(&self.item_id.to_le_bytes()).await?;
+
+        // display_id: u32
+        w.write_all(&self.display_id.to_le_bytes()).await?;
+
+        // stack_count: u32
+        w.write_all(&self.stack_count.to_le_bytes()).await?;
+
+        // is_wrapped: u32
+        w.write_all(&self.is_wrapped.to_le_bytes()).await?;
+
+        // gift_wrapper: Guid
+        self.gift_wrapper.astd_write(w).await?;
+
+        // enchantment: u32
+        w.write_all(&self.enchantment.to_le_bytes()).await?;
+
+        // item_creator: Guid
+        self.item_creator.astd_write(w).await?;
 
         // spell_charges: u32
         w.write_all(&self.spell_charges.to_le_bytes()).await?;

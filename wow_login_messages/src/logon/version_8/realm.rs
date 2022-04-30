@@ -10,6 +10,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Realm {
@@ -232,6 +234,106 @@ impl AsyncReadWrite for Realm {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // realm_type: u8
+        let realm_type = crate::util::astd_read_u8_le(r).await?;
+
+        // locked: u8
+        let locked = crate::util::astd_read_u8_le(r).await?;
+
+        // flag: RealmFlag
+        let flag = RealmFlag::astd_read(r).await?;
+
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // address: CString
+        let address = crate::util::astd_read_c_string_to_vec(r).await?;
+        let address = String::from_utf8(address)?;
+
+        // population: Population
+        let population = Population::astd_read(r).await?;
+
+        // number_of_characters_on_realm: u8
+        let number_of_characters_on_realm = crate::util::astd_read_u8_le(r).await?;
+
+        // category: RealmCategory
+        let category = RealmCategory::astd_read(r).await?;
+
+        // realm_id: u8
+        let realm_id = crate::util::astd_read_u8_le(r).await?;
+
+        let flag_SPECIFY_BUILD = if flag.is_SPECIFY_BUILD() {
+            // version: Version
+            let version = Version::astd_read(r).await?;
+
+            Some(RealmRealmFlagSPECIFY_BUILD {
+                version,
+            })
+        } else {
+            None
+        };
+
+        let flag = RealmRealmFlag {
+            inner: flag.as_u8(),
+            specify_build: flag_SPECIFY_BUILD,
+        };
+
+        Ok(Self {
+            realm_type,
+            locked,
+            flag,
+            name,
+            address,
+            population,
+            number_of_characters_on_realm,
+            category,
+            realm_id,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // realm_type: u8
+        w.write_all(&self.realm_type.to_le_bytes()).await?;
+
+        // locked: u8
+        w.write_all(&self.locked.to_le_bytes()).await?;
+
+        // flag: RealmFlag
+        self.flag.astd_write(w).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // address: CString
+        w.write_all(self.address.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // population: Population
+        self.population.astd_write(w).await?;
+
+        // number_of_characters_on_realm: u8
+        w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
+
+        // category: RealmCategory
+        self.category.astd_write(w).await?;
+
+        // realm_id: u8
+        w.write_all(&self.realm_id.to_le_bytes()).await?;
+
+        if let Some(s) = &self.flag.specify_build {
+            s.astd_write(w).await?;
+        }
+
+        Ok(())
+    }
+
 }
 
 impl VariableSized for Realm {
@@ -321,6 +423,13 @@ impl RealmRealmFlag {
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: RealmFlag = self.into();
         a.tokio_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: RealmFlag = self.into();
+        a.astd_write(w).await?;
         Ok(())
     }
 
@@ -547,6 +656,14 @@ impl RealmRealmFlagSPECIFY_BUILD {
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.version.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        self.version.astd_write(w).await?;
 
         Ok(())
     }

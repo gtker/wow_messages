@@ -8,6 +8,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct NpcTextUpdate {
@@ -124,6 +126,58 @@ impl AsyncReadWrite for NpcTextUpdate {
         // emotes: NpcTextUpdateEmote[3]
         for i in self.emotes.iter() {
             i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // probability: f32
+        let probability = crate::util::astd_read_f32_le(r).await?;
+        // texts: CString[2]
+        let mut texts = Vec::with_capacity(2 as usize);
+        for i in 0..2 {
+            let s = crate::util::astd_read_c_string_to_vec(r).await?;
+            texts[i] = String::from_utf8(s)?;
+        }
+        let texts = texts.try_into().unwrap();
+
+        // language: Language
+        let language = Language::astd_read(r).await?;
+
+        // emotes: NpcTextUpdateEmote[3]
+        let mut emotes = Vec::with_capacity(3 as usize);
+        for i in 0..3 {
+            emotes.push(NpcTextUpdateEmote::astd_read(r).await?);
+        }
+        let emotes = emotes.try_into().unwrap();
+
+        Ok(Self {
+            probability,
+            texts,
+            language,
+            emotes,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // probability: f32
+        w.write_all(&self.probability.to_le_bytes()).await?;
+
+        // texts: CString[2]
+        for i in self.texts.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
+        }
+
+        // language: Language
+        self.language.astd_write(w).await?;
+
+        // emotes: NpcTextUpdateEmote[3]
+        for i in self.emotes.iter() {
+            i.astd_write(w).await?;
         }
 
         Ok(())

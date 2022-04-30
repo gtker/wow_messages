@@ -8,6 +8,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct WhoPlayer {
@@ -150,6 +152,72 @@ impl AsyncReadWrite for WhoPlayer {
 
         // race: Race
         self.race.tokio_write(w).await?;
+
+        // zone_id: u32
+        w.write_all(&self.zone_id.to_le_bytes()).await?;
+
+        // party_status: u32
+        w.write_all(&self.party_status.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // guild: CString
+        let guild = crate::util::astd_read_c_string_to_vec(r).await?;
+        let guild = String::from_utf8(guild)?;
+
+        // level: u32
+        let level = crate::util::astd_read_u32_le(r).await?;
+
+        // class: Class
+        let class = Class::astd_read(r).await?;
+
+        // race: Race
+        let race = Race::astd_read(r).await?;
+
+        // zone_id: u32
+        let zone_id = crate::util::astd_read_u32_le(r).await?;
+
+        // party_status: u32
+        let party_status = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            name,
+            guild,
+            level,
+            class,
+            race,
+            zone_id,
+            party_status,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // guild: CString
+        w.write_all(self.guild.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // level: u32
+        w.write_all(&self.level.to_le_bytes()).await?;
+
+        // class: Class
+        self.class.astd_write(w).await?;
+
+        // race: Race
+        self.race.astd_write(w).await?;
 
         // zone_id: u32
         w.write_all(&self.zone_id.to_le_bytes()).await?;

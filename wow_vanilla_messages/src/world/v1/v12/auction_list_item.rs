@@ -7,6 +7,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -246,6 +248,115 @@ impl AsyncReadWrite for AuctionListItem {
 
         // highest_bidder: Guid
         self.highest_bidder.tokio_write(w).await?;
+
+        // highest_bid: u32
+        w.write_all(&self.highest_bid.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // id: u32
+        let id = crate::util::astd_read_u32_le(r).await?;
+
+        // item_entry: u32
+        let item_entry = crate::util::astd_read_u32_le(r).await?;
+
+        // item_enchantment: u32
+        let item_enchantment = crate::util::astd_read_u32_le(r).await?;
+
+        // item_random_property_id: u32
+        let item_random_property_id = crate::util::astd_read_u32_le(r).await?;
+
+        // item_suffix_factor: u32
+        let item_suffix_factor = crate::util::astd_read_u32_le(r).await?;
+
+        // item_count: u32
+        let item_count = crate::util::astd_read_u32_le(r).await?;
+
+        // item_charges: u32
+        let item_charges = crate::util::astd_read_u32_le(r).await?;
+
+        // item_owner: Guid
+        let item_owner = Guid::astd_read(r).await?;
+
+        // start_bid: u32
+        let start_bid = crate::util::astd_read_u32_le(r).await?;
+
+        // minimum_bid: u32
+        let minimum_bid = crate::util::astd_read_u32_le(r).await?;
+
+        // buyout_amount: u32
+        let buyout_amount = crate::util::astd_read_u32_le(r).await?;
+
+        // time_left_in_msecs: u32
+        let time_left_in_msecs = crate::util::astd_read_u32_le(r).await?;
+
+        // highest_bidder: Guid
+        let highest_bidder = Guid::astd_read(r).await?;
+
+        // highest_bid: u32
+        let highest_bid = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            id,
+            item_entry,
+            item_enchantment,
+            item_random_property_id,
+            item_suffix_factor,
+            item_count,
+            item_charges,
+            item_owner,
+            start_bid,
+            minimum_bid,
+            buyout_amount,
+            time_left_in_msecs,
+            highest_bidder,
+            highest_bid,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // id: u32
+        w.write_all(&self.id.to_le_bytes()).await?;
+
+        // item_entry: u32
+        w.write_all(&self.item_entry.to_le_bytes()).await?;
+
+        // item_enchantment: u32
+        w.write_all(&self.item_enchantment.to_le_bytes()).await?;
+
+        // item_random_property_id: u32
+        w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
+
+        // item_suffix_factor: u32
+        w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
+
+        // item_count: u32
+        w.write_all(&self.item_count.to_le_bytes()).await?;
+
+        // item_charges: u32
+        w.write_all(&self.item_charges.to_le_bytes()).await?;
+
+        // item_owner: Guid
+        self.item_owner.astd_write(w).await?;
+
+        // start_bid: u32
+        w.write_all(&self.start_bid.to_le_bytes()).await?;
+
+        // minimum_bid: u32
+        w.write_all(&self.minimum_bid.to_le_bytes()).await?;
+
+        // buyout_amount: u32
+        w.write_all(&self.buyout_amount.to_le_bytes()).await?;
+
+        // time_left_in_msecs: u32
+        w.write_all(&self.time_left_in_msecs.to_le_bytes()).await?;
+
+        // highest_bidder: Guid
+        self.highest_bidder.astd_write(w).await?;
 
         // highest_bid: u32
         w.write_all(&self.highest_bid.to_le_bytes()).await?;

@@ -6,6 +6,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -99,6 +101,52 @@ impl AsyncReadWrite for CooldownSpell {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // spell_id: u16
+        w.write_all(&self.spell_id.to_le_bytes()).await?;
+
+        // item_id: u16
+        w.write_all(&self.item_id.to_le_bytes()).await?;
+
+        // spell_category: u16
+        w.write_all(&self.spell_category.to_le_bytes()).await?;
+
+        // cooldown_in_msecs: u32
+        w.write_all(&self.cooldown_in_msecs.to_le_bytes()).await?;
+
+        // category_cooldown_in_msecs: u32
+        w.write_all(&self.category_cooldown_in_msecs.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // spell_id: u16
+        let spell_id = crate::util::astd_read_u16_le(r).await?;
+
+        // item_id: u16
+        let item_id = crate::util::astd_read_u16_le(r).await?;
+
+        // spell_category: u16
+        let spell_category = crate::util::astd_read_u16_le(r).await?;
+
+        // cooldown_in_msecs: u32
+        let cooldown_in_msecs = crate::util::astd_read_u32_le(r).await?;
+
+        // category_cooldown_in_msecs: u32
+        let category_cooldown_in_msecs = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            spell_id,
+            item_id,
+            spell_category,
+            cooldown_in_msecs,
+            category_cooldown_in_msecs,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // spell_id: u16
         w.write_all(&self.spell_id.to_le_bytes()).await?;
 

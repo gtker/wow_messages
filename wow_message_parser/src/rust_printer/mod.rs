@@ -262,6 +262,18 @@ impl Writer {
         self.open_curly("async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
         write_function(self, ImplType::Tokio);
         self.closing_curly_newline();
+
+        self.wln(CFG_ASYNC_ASYNC_STD);
+        self.open_curly(
+            "async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error>",
+        );
+        read_function(self, ImplType::AsyncStd);
+        self.closing_curly_newline();
+
+        self.wln(CFG_ASYNC_ASYNC_STD);
+        self.open_curly("async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
+        write_function(self, ImplType::AsyncStd);
+        self.closing_curly_newline();
         self.closing_curly_newline();
     }
 
@@ -349,6 +361,7 @@ impl Writer {
         &mut self,
         name_and_args_sync: S,
         name_and_args_tokio: S,
+        name_and_args_astd: S,
         return_type: S1,
         f: F,
     ) {
@@ -370,6 +383,17 @@ impl Writer {
         ));
 
         f(self, ImplType::Tokio);
+
+        self.closing_curly_newline();
+
+        self.wln(CFG_ASYNC_ASYNC_STD);
+        self.open_curly(format!(
+            "{} -> {}",
+            name_and_args_astd.as_ref(),
+            return_type.as_ref()
+        ));
+
+        f(self, ImplType::AsyncStd);
 
         self.closing_curly_newline();
     }
@@ -537,10 +561,15 @@ impl Writer {
     pub fn write_async_includes(&mut self) {
         self.wln(CFG_ASYNC_ANY);
         self.wln(format!("use crate::{};", ASYNC_TRAIT));
+
         self.wln(CFG_ASYNC_ANY);
         self.wln(ASYNC_TRAIT_IMPORT);
+
         self.wln(CFG_ASYNC_TOKIO);
         self.wln(TOKIO_IMPORT);
+
+        self.wln(CFG_ASYNC_ASYNC_STD);
+        self.wln(ASYNC_STD_IMPORT);
     }
 
     pub fn metadata_comment<S: AsRef<str>>(&mut self, s: S) {

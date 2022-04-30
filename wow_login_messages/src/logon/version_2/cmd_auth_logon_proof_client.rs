@@ -8,6 +8,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client {
@@ -147,6 +149,68 @@ impl AsyncReadWrite for CMD_AUTH_LOGON_PROOF_Client {
         // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
         for i in self.telemetry_keys.iter() {
             i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        // client_public_key: u8[32]
+        let mut client_public_key = [0_u8; 32];
+        r.read_exact(&mut client_public_key).await?;
+
+        // client_proof: u8[20]
+        let mut client_proof = [0_u8; 20];
+        r.read_exact(&mut client_proof).await?;
+
+        // crc_hash: u8[20]
+        let mut crc_hash = [0_u8; 20];
+        r.read_exact(&mut crc_hash).await?;
+
+        // number_of_telemetry_keys: u8
+        let number_of_telemetry_keys = crate::util::astd_read_u8_le(r).await?;
+
+        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
+        for i in 0..number_of_telemetry_keys {
+            telemetry_keys.push(TelemetryKey::astd_read(r).await?);
+        }
+
+        Ok(Self {
+            client_public_key,
+            client_proof,
+            crc_hash,
+            telemetry_keys,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+
+        // client_public_key: u8[32]
+        for i in self.client_public_key.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // client_proof: u8[20]
+        for i in self.client_proof.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // crc_hash: u8[20]
+        for i in self.crc_hash.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // number_of_telemetry_keys: u8
+        w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes()).await?;
+
+        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        for i in self.telemetry_keys.iter() {
+            i.astd_write(w).await?;
         }
 
         Ok(())

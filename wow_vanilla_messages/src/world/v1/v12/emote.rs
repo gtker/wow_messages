@@ -6,6 +6,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Emote {
@@ -162,6 +164,19 @@ impl AsyncReadWrite for Emote {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
+    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+        let a = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(a.try_into()?)
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        w.write_all(&self.as_u32().to_le_bytes()).await?;
+        Ok(())
+    }
+
 }
 
 impl Emote {
@@ -176,6 +191,12 @@ impl Emote {
         Ok((a as u32).try_into()?)
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_read_u32_be<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, EmoteError> {
+        let a = crate::util::astd_read_u32_be(r).await?;
+        Ok((a as u32).try_into()?)
+    }
+
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u32_be(w, self.as_u32() as u32)?;
         Ok(())
@@ -184,6 +205,12 @@ impl Emote {
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::tokio_write_u32_be(w, self.as_u32() as u32).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::astd_write_u32_be(w, self.as_u32() as u32).await?;
         Ok(())
     }
 
@@ -198,6 +225,12 @@ impl Emote {
         Ok((a as u32).try_into()?)
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_read_u64_le<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, EmoteError> {
+        let a = crate::util::astd_read_u64_le(r).await?;
+        Ok((a as u32).try_into()?)
+    }
+
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u64_le(w, self.as_u32() as u64)?;
         Ok(())
@@ -206,6 +239,12 @@ impl Emote {
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::tokio_write_u64_le(w, self.as_u32() as u64).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::astd_write_u64_le(w, self.as_u32() as u64).await?;
         Ok(())
     }
 
@@ -220,6 +259,12 @@ impl Emote {
         Ok((a as u32).try_into()?)
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_read_u64_be<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, EmoteError> {
+        let a = crate::util::astd_read_u64_be(r).await?;
+        Ok((a as u32).try_into()?)
+    }
+
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u64_be(w, self.as_u32() as u64)?;
         Ok(())
@@ -228,6 +273,12 @@ impl Emote {
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::tokio_write_u64_be(w, self.as_u32() as u64).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::astd_write_u64_be(w, self.as_u32() as u64).await?;
         Ok(())
     }
 
