@@ -18,6 +18,7 @@ pub struct MSG_LIST_STABLED_PETS_Client {
 
 impl ClientMessageWrite for MSG_LIST_STABLED_PETS_Client {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_LIST_STABLED_PETS_Client {
     const OPCODE: u16 = 0x026f;
 
@@ -39,6 +40,42 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Client {
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // npc: Guid
         self.npc.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // npc: Guid
+        let npc = Guid::tokio_read(r).await?;
+
+        Ok(Self {
+            npc,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // npc: Guid
+        self.npc.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // npc: Guid
+        let npc = Guid::astd_read(r).await?;
+
+        Ok(Self {
+            npc,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // npc: Guid
+        self.npc.astd_write(w).await?;
 
         Ok(())
     }

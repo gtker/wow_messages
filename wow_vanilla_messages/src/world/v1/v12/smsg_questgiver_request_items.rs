@@ -31,6 +31,7 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
 
 impl ServerMessageWrite for SMSG_QUESTGIVER_REQUEST_ITEMS {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
     const OPCODE: u16 = 0x018b;
 
@@ -153,6 +154,244 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
         // flags3: u32
         w.write_all(&self.flags3.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // npc: Guid
+        let npc = Guid::tokio_read(r).await?;
+
+        // quest_id: u32
+        let quest_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // title: CString
+        let title = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let title = String::from_utf8(title)?;
+
+        // request_items_text: CString
+        let request_items_text = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let request_items_text = String::from_utf8(request_items_text)?;
+
+        // emote_delay: u32
+        let emote_delay = crate::util::tokio_read_u32_le(r).await?;
+
+        // emote: u32
+        let emote = crate::util::tokio_read_u32_le(r).await?;
+
+        // auto_finish: u32
+        let auto_finish = crate::util::tokio_read_u32_le(r).await?;
+
+        // required_money: u32
+        let required_money = crate::util::tokio_read_u32_le(r).await?;
+
+        // amount_of_required_items: u32
+        let amount_of_required_items = crate::util::tokio_read_u32_le(r).await?;
+
+        // required_items: QuestItemRequirement[amount_of_required_items]
+        let mut required_items = Vec::with_capacity(amount_of_required_items as usize);
+        for i in 0..amount_of_required_items {
+            required_items.push(QuestItemRequirement::tokio_read(r).await?);
+        }
+
+        // unknown1: u32
+        let unknown1 = crate::util::tokio_read_u32_le(r).await?;
+
+        // completable: QuestCompletable
+        let completable = QuestCompletable::tokio_read(r).await?;
+
+        // flags2: u32
+        let flags2 = crate::util::tokio_read_u32_le(r).await?;
+
+        // flags3: u32
+        let flags3 = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            npc,
+            quest_id,
+            title,
+            request_items_text,
+            emote_delay,
+            emote,
+            auto_finish,
+            required_money,
+            required_items,
+            unknown1,
+            completable,
+            flags2,
+            flags3,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // npc: Guid
+        self.npc.tokio_write(w).await?;
+
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // request_items_text: CString
+        w.write_all(self.request_items_text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // emote_delay: u32
+        w.write_all(&self.emote_delay.to_le_bytes()).await?;
+
+        // emote: u32
+        w.write_all(&self.emote.to_le_bytes()).await?;
+
+        // auto_finish: u32
+        w.write_all(&self.auto_finish.to_le_bytes()).await?;
+
+        // required_money: u32
+        w.write_all(&self.required_money.to_le_bytes()).await?;
+
+        // amount_of_required_items: u32
+        w.write_all(&(self.required_items.len() as u32).to_le_bytes()).await?;
+
+        // required_items: QuestItemRequirement[amount_of_required_items]
+        for i in self.required_items.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // completable: QuestCompletable
+        self.completable.tokio_write(w).await?;
+
+        // flags2: u32
+        w.write_all(&self.flags2.to_le_bytes()).await?;
+
+        // flags3: u32
+        w.write_all(&self.flags3.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // npc: Guid
+        let npc = Guid::astd_read(r).await?;
+
+        // quest_id: u32
+        let quest_id = crate::util::astd_read_u32_le(r).await?;
+
+        // title: CString
+        let title = crate::util::astd_read_c_string_to_vec(r).await?;
+        let title = String::from_utf8(title)?;
+
+        // request_items_text: CString
+        let request_items_text = crate::util::astd_read_c_string_to_vec(r).await?;
+        let request_items_text = String::from_utf8(request_items_text)?;
+
+        // emote_delay: u32
+        let emote_delay = crate::util::astd_read_u32_le(r).await?;
+
+        // emote: u32
+        let emote = crate::util::astd_read_u32_le(r).await?;
+
+        // auto_finish: u32
+        let auto_finish = crate::util::astd_read_u32_le(r).await?;
+
+        // required_money: u32
+        let required_money = crate::util::astd_read_u32_le(r).await?;
+
+        // amount_of_required_items: u32
+        let amount_of_required_items = crate::util::astd_read_u32_le(r).await?;
+
+        // required_items: QuestItemRequirement[amount_of_required_items]
+        let mut required_items = Vec::with_capacity(amount_of_required_items as usize);
+        for i in 0..amount_of_required_items {
+            required_items.push(QuestItemRequirement::astd_read(r).await?);
+        }
+
+        // unknown1: u32
+        let unknown1 = crate::util::astd_read_u32_le(r).await?;
+
+        // completable: QuestCompletable
+        let completable = QuestCompletable::astd_read(r).await?;
+
+        // flags2: u32
+        let flags2 = crate::util::astd_read_u32_le(r).await?;
+
+        // flags3: u32
+        let flags3 = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            npc,
+            quest_id,
+            title,
+            request_items_text,
+            emote_delay,
+            emote,
+            auto_finish,
+            required_money,
+            required_items,
+            unknown1,
+            completable,
+            flags2,
+            flags3,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // npc: Guid
+        self.npc.astd_write(w).await?;
+
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // request_items_text: CString
+        w.write_all(self.request_items_text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // emote_delay: u32
+        w.write_all(&self.emote_delay.to_le_bytes()).await?;
+
+        // emote: u32
+        w.write_all(&self.emote.to_le_bytes()).await?;
+
+        // auto_finish: u32
+        w.write_all(&self.auto_finish.to_le_bytes()).await?;
+
+        // required_money: u32
+        w.write_all(&self.required_money.to_le_bytes()).await?;
+
+        // amount_of_required_items: u32
+        w.write_all(&(self.required_items.len() as u32).to_le_bytes()).await?;
+
+        // required_items: QuestItemRequirement[amount_of_required_items]
+        for i in self.required_items.iter() {
+            i.astd_write(w).await?;
+        }
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // completable: QuestCompletable
+        self.completable.astd_write(w).await?;
+
+        // flags2: u32
+        w.write_all(&self.flags2.to_le_bytes()).await?;
+
+        // flags3: u32
+        w.write_all(&self.flags3.to_le_bytes()).await?;
 
         Ok(())
     }

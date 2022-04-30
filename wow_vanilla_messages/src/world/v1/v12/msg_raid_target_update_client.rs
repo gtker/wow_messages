@@ -18,6 +18,7 @@ pub struct MSG_RAID_TARGET_UPDATE_Client {
 
 impl ClientMessageWrite for MSG_RAID_TARGET_UPDATE_Client {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
     const OPCODE: u16 = 0x0321;
 
@@ -178,6 +179,328 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
             } => {
                 // target: Guid
                 target.write(w)?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS => {}
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // index: RaidTargetIndex
+        let index = RaidTargetIndex::tokio_read(r).await?;
+
+        let index_if = match index {
+            RaidTargetIndex::UNKNOWN0 => {
+                // target: Guid
+                let target = Guid::tokio_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN0 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN1 => {
+                // target: Guid
+                let target = Guid::tokio_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN1 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN2 => {
+                // target: Guid
+                let target = Guid::tokio_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN2 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN3 => {
+                // target: Guid
+                let target = Guid::tokio_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN3 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN4 => {
+                // target: Guid
+                let target = Guid::tokio_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN4 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN5 => {
+                // target: Guid
+                let target = Guid::tokio_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN5 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN6 => {
+                // target: Guid
+                let target = Guid::tokio_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN6 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN7 => {
+                // target: Guid
+                let target = Guid::tokio_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN7 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN8 => {
+                // target: Guid
+                let target = Guid::tokio_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN8 {
+                    target,
+                }
+            }
+            RaidTargetIndex::REQUEST_ICONS => MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS,
+        };
+
+        Ok(Self {
+            index: index_if,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // index: RaidTargetIndex
+        self.index.tokio_write(w).await?;
+
+        match &self.index {
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN0 {
+                target,
+            } => {
+                // target: Guid
+                target.tokio_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN1 {
+                target,
+            } => {
+                // target: Guid
+                target.tokio_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN2 {
+                target,
+            } => {
+                // target: Guid
+                target.tokio_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN3 {
+                target,
+            } => {
+                // target: Guid
+                target.tokio_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN4 {
+                target,
+            } => {
+                // target: Guid
+                target.tokio_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN5 {
+                target,
+            } => {
+                // target: Guid
+                target.tokio_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN6 {
+                target,
+            } => {
+                // target: Guid
+                target.tokio_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN7 {
+                target,
+            } => {
+                // target: Guid
+                target.tokio_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN8 {
+                target,
+            } => {
+                // target: Guid
+                target.tokio_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS => {}
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // index: RaidTargetIndex
+        let index = RaidTargetIndex::astd_read(r).await?;
+
+        let index_if = match index {
+            RaidTargetIndex::UNKNOWN0 => {
+                // target: Guid
+                let target = Guid::astd_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN0 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN1 => {
+                // target: Guid
+                let target = Guid::astd_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN1 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN2 => {
+                // target: Guid
+                let target = Guid::astd_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN2 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN3 => {
+                // target: Guid
+                let target = Guid::astd_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN3 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN4 => {
+                // target: Guid
+                let target = Guid::astd_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN4 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN5 => {
+                // target: Guid
+                let target = Guid::astd_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN5 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN6 => {
+                // target: Guid
+                let target = Guid::astd_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN6 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN7 => {
+                // target: Guid
+                let target = Guid::astd_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN7 {
+                    target,
+                }
+            }
+            RaidTargetIndex::UNKNOWN8 => {
+                // target: Guid
+                let target = Guid::astd_read(r).await?;
+
+                MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN8 {
+                    target,
+                }
+            }
+            RaidTargetIndex::REQUEST_ICONS => MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS,
+        };
+
+        Ok(Self {
+            index: index_if,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // index: RaidTargetIndex
+        self.index.astd_write(w).await?;
+
+        match &self.index {
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN0 {
+                target,
+            } => {
+                // target: Guid
+                target.astd_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN1 {
+                target,
+            } => {
+                // target: Guid
+                target.astd_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN2 {
+                target,
+            } => {
+                // target: Guid
+                target.astd_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN3 {
+                target,
+            } => {
+                // target: Guid
+                target.astd_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN4 {
+                target,
+            } => {
+                // target: Guid
+                target.astd_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN5 {
+                target,
+            } => {
+                // target: Guid
+                target.astd_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN6 {
+                target,
+            } => {
+                // target: Guid
+                target.astd_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN7 {
+                target,
+            } => {
+                // target: Guid
+                target.astd_write(w).await?;
+
+            }
+            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN8 {
+                target,
+            } => {
+                // target: Guid
+                target.astd_write(w).await?;
 
             }
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS => {}

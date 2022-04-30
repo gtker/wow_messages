@@ -18,6 +18,7 @@ pub struct CMSG_PING {
 
 impl ClientMessageWrite for CMSG_PING {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_PING {
     const OPCODE: u16 = 0x01dc;
 
@@ -46,6 +47,56 @@ impl MessageBody for CMSG_PING {
 
         // round_time_in_ms: u32
         w.write_all(&self.round_time_in_ms.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // sequence_id: u32
+        let sequence_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // round_time_in_ms: u32
+        let round_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            sequence_id,
+            round_time_in_ms,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // sequence_id: u32
+        w.write_all(&self.sequence_id.to_le_bytes()).await?;
+
+        // round_time_in_ms: u32
+        w.write_all(&self.round_time_in_ms.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // sequence_id: u32
+        let sequence_id = crate::util::astd_read_u32_le(r).await?;
+
+        // round_time_in_ms: u32
+        let round_time_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            sequence_id,
+            round_time_in_ms,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // sequence_id: u32
+        w.write_all(&self.sequence_id.to_le_bytes()).await?;
+
+        // round_time_in_ms: u32
+        w.write_all(&self.round_time_in_ms.to_le_bytes()).await?;
 
         Ok(())
     }

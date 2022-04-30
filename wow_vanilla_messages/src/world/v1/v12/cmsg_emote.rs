@@ -18,6 +18,7 @@ pub struct CMSG_EMOTE {
 
 impl ClientMessageWrite for CMSG_EMOTE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_EMOTE {
     const OPCODE: u16 = 0x0102;
 
@@ -39,6 +40,42 @@ impl MessageBody for CMSG_EMOTE {
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // emote: Emote
         self.emote.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // emote: Emote
+        let emote = Emote::tokio_read(r).await?;
+
+        Ok(Self {
+            emote,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // emote: Emote
+        self.emote.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // emote: Emote
+        let emote = Emote::astd_read(r).await?;
+
+        Ok(Self {
+            emote,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // emote: Emote
+        self.emote.astd_write(w).await?;
 
         Ok(())
     }

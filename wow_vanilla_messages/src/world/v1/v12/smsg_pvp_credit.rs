@@ -21,6 +21,7 @@ pub struct SMSG_PVP_CREDIT {
 
 impl ServerMessageWrite for SMSG_PVP_CREDIT {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_PVP_CREDIT {
     const OPCODE: u16 = 0x028c;
 
@@ -56,6 +57,70 @@ impl MessageBody for SMSG_PVP_CREDIT {
 
         // rank: PvpRank
         self.rank.write_u32_le(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // honor_points: u32
+        let honor_points = crate::util::tokio_read_u32_le(r).await?;
+
+        // victim: Guid
+        let victim = Guid::tokio_read(r).await?;
+
+        // rank: PvpRank
+        let rank = PvpRank::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            honor_points,
+            victim,
+            rank,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // honor_points: u32
+        w.write_all(&self.honor_points.to_le_bytes()).await?;
+
+        // victim: Guid
+        self.victim.tokio_write(w).await?;
+
+        // rank: PvpRank
+        self.rank.tokio_write_u32_le(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // honor_points: u32
+        let honor_points = crate::util::astd_read_u32_le(r).await?;
+
+        // victim: Guid
+        let victim = Guid::astd_read(r).await?;
+
+        // rank: PvpRank
+        let rank = PvpRank::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            honor_points,
+            victim,
+            rank,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // honor_points: u32
+        w.write_all(&self.honor_points.to_le_bytes()).await?;
+
+        // victim: Guid
+        self.victim.astd_write(w).await?;
+
+        // rank: PvpRank
+        self.rank.astd_write_u32_le(w).await?;
 
         Ok(())
     }

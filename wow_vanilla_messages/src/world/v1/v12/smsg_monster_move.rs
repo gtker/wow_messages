@@ -23,6 +23,7 @@ pub struct SMSG_MONSTER_MOVE {
 
 impl ServerMessageWrite for SMSG_MONSTER_MOVE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_MONSTER_MOVE {
     const OPCODE: u16 = 0x00dd;
 
@@ -76,6 +77,106 @@ impl MessageBody for SMSG_MONSTER_MOVE {
 
         // move_type: MonsterMoveType
         self.move_type.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: PackedGuid
+        let guid = Guid::tokio_read_packed(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::tokio_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::tokio_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::tokio_read_f32_le(r).await?;
+        // spline_id: u32
+        let spline_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // move_type: MonsterMoveType
+        let move_type = MonsterMoveType::tokio_read(r).await?;
+
+        Ok(Self {
+            guid,
+            position_x,
+            position_y,
+            position_z,
+            spline_id,
+            move_type,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: PackedGuid
+        self.guid.tokio_write_packed(w).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
+
+        // spline_id: u32
+        w.write_all(&self.spline_id.to_le_bytes()).await?;
+
+        // move_type: MonsterMoveType
+        self.move_type.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: PackedGuid
+        let guid = Guid::astd_read_packed(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::astd_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::astd_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::astd_read_f32_le(r).await?;
+        // spline_id: u32
+        let spline_id = crate::util::astd_read_u32_le(r).await?;
+
+        // move_type: MonsterMoveType
+        let move_type = MonsterMoveType::astd_read(r).await?;
+
+        Ok(Self {
+            guid,
+            position_x,
+            position_y,
+            position_z,
+            spline_id,
+            move_type,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: PackedGuid
+        self.guid.astd_write_packed(w).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
+
+        // spline_id: u32
+        w.write_all(&self.spline_id.to_le_bytes()).await?;
+
+        // move_type: MonsterMoveType
+        self.move_type.astd_write(w).await?;
 
         Ok(())
     }

@@ -23,6 +23,7 @@ pub struct CMSG_AUCTION_SELL_ITEM {
 
 impl ClientMessageWrite for CMSG_AUCTION_SELL_ITEM {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_AUCTION_SELL_ITEM {
     const OPCODE: u16 = 0x0256;
 
@@ -79,6 +80,112 @@ impl MessageBody for CMSG_AUCTION_SELL_ITEM {
 
         // auction_duration_in_minutes: u32
         w.write_all(&self.auction_duration_in_minutes.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // auctioneer_guid: Guid
+        let auctioneer_guid = Guid::tokio_read(r).await?;
+
+        // object_guid: Guid
+        let object_guid = Guid::tokio_read(r).await?;
+
+        // stack_size: u32
+        let stack_size = crate::util::tokio_read_u32_le(r).await?;
+
+        // starting_bid: u32
+        let starting_bid = crate::util::tokio_read_u32_le(r).await?;
+
+        // buyout: u32
+        let buyout = crate::util::tokio_read_u32_le(r).await?;
+
+        // auction_duration_in_minutes: u32
+        let auction_duration_in_minutes = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            auctioneer_guid,
+            object_guid,
+            stack_size,
+            starting_bid,
+            buyout,
+            auction_duration_in_minutes,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // auctioneer_guid: Guid
+        self.auctioneer_guid.tokio_write(w).await?;
+
+        // object_guid: Guid
+        self.object_guid.tokio_write(w).await?;
+
+        // stack_size: u32
+        w.write_all(&self.stack_size.to_le_bytes()).await?;
+
+        // starting_bid: u32
+        w.write_all(&self.starting_bid.to_le_bytes()).await?;
+
+        // buyout: u32
+        w.write_all(&self.buyout.to_le_bytes()).await?;
+
+        // auction_duration_in_minutes: u32
+        w.write_all(&self.auction_duration_in_minutes.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // auctioneer_guid: Guid
+        let auctioneer_guid = Guid::astd_read(r).await?;
+
+        // object_guid: Guid
+        let object_guid = Guid::astd_read(r).await?;
+
+        // stack_size: u32
+        let stack_size = crate::util::astd_read_u32_le(r).await?;
+
+        // starting_bid: u32
+        let starting_bid = crate::util::astd_read_u32_le(r).await?;
+
+        // buyout: u32
+        let buyout = crate::util::astd_read_u32_le(r).await?;
+
+        // auction_duration_in_minutes: u32
+        let auction_duration_in_minutes = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            auctioneer_guid,
+            object_guid,
+            stack_size,
+            starting_bid,
+            buyout,
+            auction_duration_in_minutes,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // auctioneer_guid: Guid
+        self.auctioneer_guid.astd_write(w).await?;
+
+        // object_guid: Guid
+        self.object_guid.astd_write(w).await?;
+
+        // stack_size: u32
+        w.write_all(&self.stack_size.to_le_bytes()).await?;
+
+        // starting_bid: u32
+        w.write_all(&self.starting_bid.to_le_bytes()).await?;
+
+        // buyout: u32
+        w.write_all(&self.buyout.to_le_bytes()).await?;
+
+        // auction_duration_in_minutes: u32
+        w.write_all(&self.auction_duration_in_minutes.to_le_bytes()).await?;
 
         Ok(())
     }

@@ -23,6 +23,7 @@ pub struct SMSG_PARTY_MEMBER_STATS {
 
 impl ServerMessageWrite for SMSG_PARTY_MEMBER_STATS {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_PARTY_MEMBER_STATS {
     const OPCODE: u16 = 0x007e;
 
@@ -347,6 +348,650 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
 
         if let Some(s) = &self.mask.flag_pet_auras {
             s.write(w)?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: PackedGuid
+        let guid = Guid::tokio_read_packed(r).await?;
+
+        // mask: GroupUpdateFlags
+        let mask = GroupUpdateFlags::tokio_read(r).await?;
+
+        let mask_FLAG_STATUS = if mask.is_FLAG_STATUS() {
+            // status: GroupMemberOnlineStatus
+            let status = GroupMemberOnlineStatus::tokio_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
+                status,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_CUR_HP = if mask.is_FLAG_CUR_HP() {
+            // current_health: u16
+            let current_health = crate::util::tokio_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_HP {
+                current_health,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_MAX_HP = if mask.is_FLAG_MAX_HP() {
+            // max_health: u16
+            let max_health = crate::util::tokio_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_HP {
+                max_health,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_POWER_TYPE = if mask.is_FLAG_POWER_TYPE() {
+            // power: Power
+            let power = Power::tokio_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE {
+                power,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_CUR_POWER = if mask.is_FLAG_CUR_POWER() {
+            // current_power: u16
+            let current_power = crate::util::tokio_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_POWER {
+                current_power,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_MAX_POWER = if mask.is_FLAG_MAX_POWER() {
+            // max_power: u16
+            let max_power = crate::util::tokio_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_POWER {
+                max_power,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_LEVEL = if mask.is_FLAG_LEVEL() {
+            // level: u16
+            let level = crate::util::tokio_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_LEVEL {
+                level,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_ZONE = if mask.is_FLAG_ZONE() {
+            // area: Area
+            let area = Area::tokio_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE {
+                area,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_POSITION = if mask.is_FLAG_POSITION() {
+            // position_x: u16
+            let position_x = crate::util::tokio_read_u16_le(r).await?;
+
+            // position_y: u16
+            let position_y = crate::util::tokio_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POSITION {
+                position_x,
+                position_y,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_AURAS = if mask.is_FLAG_AURAS() {
+            // auras: AuraMask
+            let auras = AuraMask::tokio_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_AURAS {
+                auras,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_NAME = if mask.is_FLAG_PET_NAME() {
+            // pet_name: CString
+            let pet_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let pet_name = String::from_utf8(pet_name)?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NAME {
+                pet_name,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_MODEL_ID = if mask.is_FLAG_PET_MODEL_ID() {
+            // pet_display_id: u16
+            let pet_display_id = crate::util::tokio_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MODEL_ID {
+                pet_display_id,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_CUR_HP = if mask.is_FLAG_PET_CUR_HP() {
+            // pet_current_health: u16
+            let pet_current_health = crate::util::tokio_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_HP {
+                pet_current_health,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_MAX_HP = if mask.is_FLAG_PET_MAX_HP() {
+            // pet_max_health: u16
+            let pet_max_health = crate::util::tokio_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_HP {
+                pet_max_health,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_POWER_TYPE = if mask.is_FLAG_PET_POWER_TYPE() {
+            // pet_power_type: Power
+            let pet_power_type = Power::tokio_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE {
+                pet_power_type,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_CUR_POWER = if mask.is_FLAG_PET_CUR_POWER() {
+            // pet_current_power: u16
+            let pet_current_power = crate::util::tokio_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_POWER {
+                pet_current_power,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_MAX_POWER = if mask.is_FLAG_PET_MAX_POWER() {
+            // pet_max_power: u16
+            let pet_max_power = crate::util::tokio_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_POWER {
+                pet_max_power,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_AURAS = if mask.is_FLAG_PET_AURAS() {
+            // pet_auras: AuraMask
+            let pet_auras = AuraMask::tokio_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_AURAS {
+                pet_auras,
+            })
+        } else {
+            None
+        };
+
+        let mask = SMSG_PARTY_MEMBER_STATSGroupUpdateFlags {
+            inner: mask.as_u32(),
+            flag_status: mask_FLAG_STATUS,
+            flag_cur_hp: mask_FLAG_CUR_HP,
+            flag_max_hp: mask_FLAG_MAX_HP,
+            flag_power_type: mask_FLAG_POWER_TYPE,
+            flag_cur_power: mask_FLAG_CUR_POWER,
+            flag_max_power: mask_FLAG_MAX_POWER,
+            flag_level: mask_FLAG_LEVEL,
+            flag_zone: mask_FLAG_ZONE,
+            flag_position: mask_FLAG_POSITION,
+            flag_auras: mask_FLAG_AURAS,
+            flag_pet_name: mask_FLAG_PET_NAME,
+            flag_pet_model_id: mask_FLAG_PET_MODEL_ID,
+            flag_pet_cur_hp: mask_FLAG_PET_CUR_HP,
+            flag_pet_max_hp: mask_FLAG_PET_MAX_HP,
+            flag_pet_power_type: mask_FLAG_PET_POWER_TYPE,
+            flag_pet_cur_power: mask_FLAG_PET_CUR_POWER,
+            flag_pet_max_power: mask_FLAG_PET_MAX_POWER,
+            flag_pet_auras: mask_FLAG_PET_AURAS,
+        };
+
+        Ok(Self {
+            guid,
+            mask,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: PackedGuid
+        self.guid.tokio_write_packed(w).await?;
+
+        // mask: GroupUpdateFlags
+        self.mask.tokio_write(w).await?;
+
+        if let Some(s) = &self.mask.flag_status {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_cur_hp {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_max_hp {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_power_type {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_cur_power {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_max_power {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_level {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_zone {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_position {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_auras {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_name {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_model_id {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_cur_hp {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_max_hp {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_power_type {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_cur_power {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_max_power {
+            s.tokio_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_auras {
+            s.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: PackedGuid
+        let guid = Guid::astd_read_packed(r).await?;
+
+        // mask: GroupUpdateFlags
+        let mask = GroupUpdateFlags::astd_read(r).await?;
+
+        let mask_FLAG_STATUS = if mask.is_FLAG_STATUS() {
+            // status: GroupMemberOnlineStatus
+            let status = GroupMemberOnlineStatus::astd_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
+                status,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_CUR_HP = if mask.is_FLAG_CUR_HP() {
+            // current_health: u16
+            let current_health = crate::util::astd_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_HP {
+                current_health,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_MAX_HP = if mask.is_FLAG_MAX_HP() {
+            // max_health: u16
+            let max_health = crate::util::astd_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_HP {
+                max_health,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_POWER_TYPE = if mask.is_FLAG_POWER_TYPE() {
+            // power: Power
+            let power = Power::astd_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE {
+                power,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_CUR_POWER = if mask.is_FLAG_CUR_POWER() {
+            // current_power: u16
+            let current_power = crate::util::astd_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_POWER {
+                current_power,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_MAX_POWER = if mask.is_FLAG_MAX_POWER() {
+            // max_power: u16
+            let max_power = crate::util::astd_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_POWER {
+                max_power,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_LEVEL = if mask.is_FLAG_LEVEL() {
+            // level: u16
+            let level = crate::util::astd_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_LEVEL {
+                level,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_ZONE = if mask.is_FLAG_ZONE() {
+            // area: Area
+            let area = Area::astd_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE {
+                area,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_POSITION = if mask.is_FLAG_POSITION() {
+            // position_x: u16
+            let position_x = crate::util::astd_read_u16_le(r).await?;
+
+            // position_y: u16
+            let position_y = crate::util::astd_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POSITION {
+                position_x,
+                position_y,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_AURAS = if mask.is_FLAG_AURAS() {
+            // auras: AuraMask
+            let auras = AuraMask::astd_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_AURAS {
+                auras,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_NAME = if mask.is_FLAG_PET_NAME() {
+            // pet_name: CString
+            let pet_name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let pet_name = String::from_utf8(pet_name)?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NAME {
+                pet_name,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_MODEL_ID = if mask.is_FLAG_PET_MODEL_ID() {
+            // pet_display_id: u16
+            let pet_display_id = crate::util::astd_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MODEL_ID {
+                pet_display_id,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_CUR_HP = if mask.is_FLAG_PET_CUR_HP() {
+            // pet_current_health: u16
+            let pet_current_health = crate::util::astd_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_HP {
+                pet_current_health,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_MAX_HP = if mask.is_FLAG_PET_MAX_HP() {
+            // pet_max_health: u16
+            let pet_max_health = crate::util::astd_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_HP {
+                pet_max_health,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_POWER_TYPE = if mask.is_FLAG_PET_POWER_TYPE() {
+            // pet_power_type: Power
+            let pet_power_type = Power::astd_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE {
+                pet_power_type,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_CUR_POWER = if mask.is_FLAG_PET_CUR_POWER() {
+            // pet_current_power: u16
+            let pet_current_power = crate::util::astd_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_POWER {
+                pet_current_power,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_MAX_POWER = if mask.is_FLAG_PET_MAX_POWER() {
+            // pet_max_power: u16
+            let pet_max_power = crate::util::astd_read_u16_le(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_POWER {
+                pet_max_power,
+            })
+        } else {
+            None
+        };
+
+        let mask_FLAG_PET_AURAS = if mask.is_FLAG_PET_AURAS() {
+            // pet_auras: AuraMask
+            let pet_auras = AuraMask::astd_read(r).await?;
+
+            Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_AURAS {
+                pet_auras,
+            })
+        } else {
+            None
+        };
+
+        let mask = SMSG_PARTY_MEMBER_STATSGroupUpdateFlags {
+            inner: mask.as_u32(),
+            flag_status: mask_FLAG_STATUS,
+            flag_cur_hp: mask_FLAG_CUR_HP,
+            flag_max_hp: mask_FLAG_MAX_HP,
+            flag_power_type: mask_FLAG_POWER_TYPE,
+            flag_cur_power: mask_FLAG_CUR_POWER,
+            flag_max_power: mask_FLAG_MAX_POWER,
+            flag_level: mask_FLAG_LEVEL,
+            flag_zone: mask_FLAG_ZONE,
+            flag_position: mask_FLAG_POSITION,
+            flag_auras: mask_FLAG_AURAS,
+            flag_pet_name: mask_FLAG_PET_NAME,
+            flag_pet_model_id: mask_FLAG_PET_MODEL_ID,
+            flag_pet_cur_hp: mask_FLAG_PET_CUR_HP,
+            flag_pet_max_hp: mask_FLAG_PET_MAX_HP,
+            flag_pet_power_type: mask_FLAG_PET_POWER_TYPE,
+            flag_pet_cur_power: mask_FLAG_PET_CUR_POWER,
+            flag_pet_max_power: mask_FLAG_PET_MAX_POWER,
+            flag_pet_auras: mask_FLAG_PET_AURAS,
+        };
+
+        Ok(Self {
+            guid,
+            mask,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: PackedGuid
+        self.guid.astd_write_packed(w).await?;
+
+        // mask: GroupUpdateFlags
+        self.mask.astd_write(w).await?;
+
+        if let Some(s) = &self.mask.flag_status {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_cur_hp {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_max_hp {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_power_type {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_cur_power {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_max_power {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_level {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_zone {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_position {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_auras {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_name {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_model_id {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_cur_hp {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_max_hp {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_power_type {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_cur_power {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_max_power {
+            s.astd_write(w).await?;
+        }
+
+        if let Some(s) = &self.mask.flag_pet_auras {
+            s.astd_write(w).await?;
         }
 
         Ok(())

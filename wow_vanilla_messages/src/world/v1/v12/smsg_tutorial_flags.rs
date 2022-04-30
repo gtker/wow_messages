@@ -24,6 +24,7 @@ pub struct SMSG_TUTORIAL_FLAGS {
 
 impl ServerMessageWrite for SMSG_TUTORIAL_FLAGS {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_TUTORIAL_FLAGS {
     const OPCODE: u16 = 0x00fd;
 
@@ -94,6 +95,140 @@ impl MessageBody for SMSG_TUTORIAL_FLAGS {
 
         // tutorial_data7: u32
         w.write_all(&self.tutorial_data7.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // tutorial_data0: u32
+        let tutorial_data0 = crate::util::tokio_read_u32_le(r).await?;
+
+        // tutorial_data1: u32
+        let tutorial_data1 = crate::util::tokio_read_u32_le(r).await?;
+
+        // tutorial_data2: u32
+        let tutorial_data2 = crate::util::tokio_read_u32_le(r).await?;
+
+        // tutorial_data3: u32
+        let tutorial_data3 = crate::util::tokio_read_u32_le(r).await?;
+
+        // tutorial_data4: u32
+        let tutorial_data4 = crate::util::tokio_read_u32_le(r).await?;
+
+        // tutorial_data5: u32
+        let tutorial_data5 = crate::util::tokio_read_u32_le(r).await?;
+
+        // tutorial_data6: u32
+        let tutorial_data6 = crate::util::tokio_read_u32_le(r).await?;
+
+        // tutorial_data7: u32
+        let tutorial_data7 = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            tutorial_data0,
+            tutorial_data1,
+            tutorial_data2,
+            tutorial_data3,
+            tutorial_data4,
+            tutorial_data5,
+            tutorial_data6,
+            tutorial_data7,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // tutorial_data0: u32
+        w.write_all(&self.tutorial_data0.to_le_bytes()).await?;
+
+        // tutorial_data1: u32
+        w.write_all(&self.tutorial_data1.to_le_bytes()).await?;
+
+        // tutorial_data2: u32
+        w.write_all(&self.tutorial_data2.to_le_bytes()).await?;
+
+        // tutorial_data3: u32
+        w.write_all(&self.tutorial_data3.to_le_bytes()).await?;
+
+        // tutorial_data4: u32
+        w.write_all(&self.tutorial_data4.to_le_bytes()).await?;
+
+        // tutorial_data5: u32
+        w.write_all(&self.tutorial_data5.to_le_bytes()).await?;
+
+        // tutorial_data6: u32
+        w.write_all(&self.tutorial_data6.to_le_bytes()).await?;
+
+        // tutorial_data7: u32
+        w.write_all(&self.tutorial_data7.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // tutorial_data0: u32
+        let tutorial_data0 = crate::util::astd_read_u32_le(r).await?;
+
+        // tutorial_data1: u32
+        let tutorial_data1 = crate::util::astd_read_u32_le(r).await?;
+
+        // tutorial_data2: u32
+        let tutorial_data2 = crate::util::astd_read_u32_le(r).await?;
+
+        // tutorial_data3: u32
+        let tutorial_data3 = crate::util::astd_read_u32_le(r).await?;
+
+        // tutorial_data4: u32
+        let tutorial_data4 = crate::util::astd_read_u32_le(r).await?;
+
+        // tutorial_data5: u32
+        let tutorial_data5 = crate::util::astd_read_u32_le(r).await?;
+
+        // tutorial_data6: u32
+        let tutorial_data6 = crate::util::astd_read_u32_le(r).await?;
+
+        // tutorial_data7: u32
+        let tutorial_data7 = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            tutorial_data0,
+            tutorial_data1,
+            tutorial_data2,
+            tutorial_data3,
+            tutorial_data4,
+            tutorial_data5,
+            tutorial_data6,
+            tutorial_data7,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // tutorial_data0: u32
+        w.write_all(&self.tutorial_data0.to_le_bytes()).await?;
+
+        // tutorial_data1: u32
+        w.write_all(&self.tutorial_data1.to_le_bytes()).await?;
+
+        // tutorial_data2: u32
+        w.write_all(&self.tutorial_data2.to_le_bytes()).await?;
+
+        // tutorial_data3: u32
+        w.write_all(&self.tutorial_data3.to_le_bytes()).await?;
+
+        // tutorial_data4: u32
+        w.write_all(&self.tutorial_data4.to_le_bytes()).await?;
+
+        // tutorial_data5: u32
+        w.write_all(&self.tutorial_data5.to_le_bytes()).await?;
+
+        // tutorial_data6: u32
+        w.write_all(&self.tutorial_data6.to_le_bytes()).await?;
+
+        // tutorial_data7: u32
+        w.write_all(&self.tutorial_data7.to_le_bytes()).await?;
 
         Ok(())
     }

@@ -21,6 +21,7 @@ pub struct SMSG_GOSSIP_POI {
 
 impl ServerMessageWrite for SMSG_GOSSIP_POI {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_GOSSIP_POI {
     const OPCODE: u16 = 0x0224;
 
@@ -78,6 +79,114 @@ impl MessageBody for SMSG_GOSSIP_POI {
         w.write_all(self.location_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // flags: u32
+        let flags = crate::util::tokio_read_u32_le(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::tokio_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::tokio_read_f32_le(r).await?;
+        // icon: u32
+        let icon = crate::util::tokio_read_u32_le(r).await?;
+
+        // data: u32
+        let data = crate::util::tokio_read_u32_le(r).await?;
+
+        // location_name: CString
+        let location_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let location_name = String::from_utf8(location_name)?;
+
+        Ok(Self {
+            flags,
+            position_x,
+            position_y,
+            icon,
+            data,
+            location_name,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // flags: u32
+        w.write_all(&self.flags.to_le_bytes()).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // icon: u32
+        w.write_all(&self.icon.to_le_bytes()).await?;
+
+        // data: u32
+        w.write_all(&self.data.to_le_bytes()).await?;
+
+        // location_name: CString
+        w.write_all(self.location_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // flags: u32
+        let flags = crate::util::astd_read_u32_le(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::astd_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::astd_read_f32_le(r).await?;
+        // icon: u32
+        let icon = crate::util::astd_read_u32_le(r).await?;
+
+        // data: u32
+        let data = crate::util::astd_read_u32_le(r).await?;
+
+        // location_name: CString
+        let location_name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let location_name = String::from_utf8(location_name)?;
+
+        Ok(Self {
+            flags,
+            position_x,
+            position_y,
+            icon,
+            data,
+            location_name,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // flags: u32
+        w.write_all(&self.flags.to_le_bytes()).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // icon: u32
+        w.write_all(&self.icon.to_le_bytes()).await?;
+
+        // data: u32
+        w.write_all(&self.data.to_le_bytes()).await?;
+
+        // location_name: CString
+        w.write_all(self.location_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
         Ok(())
     }

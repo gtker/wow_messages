@@ -18,6 +18,7 @@ pub struct CMSG_CHAR_RENAME {
 
 impl ClientMessageWrite for CMSG_CHAR_RENAME {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_CHAR_RENAME {
     const OPCODE: u16 = 0x02c7;
 
@@ -49,6 +50,62 @@ impl MessageBody for CMSG_CHAR_RENAME {
         w.write_all(self.name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        Ok(Self {
+            guid,
+            name,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        Ok(Self {
+            guid,
+            name,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
         Ok(())
     }

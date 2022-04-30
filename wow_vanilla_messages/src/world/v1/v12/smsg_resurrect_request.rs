@@ -21,6 +21,7 @@ pub struct SMSG_RESURRECT_REQUEST {
 
 impl ServerMessageWrite for SMSG_RESURRECT_REQUEST {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_RESURRECT_REQUEST {
     const OPCODE: u16 = 0x015b;
 
@@ -73,6 +74,104 @@ impl MessageBody for SMSG_RESURRECT_REQUEST {
 
         // respect_resurrection_timer: u8
         w.write_all(&self.respect_resurrection_timer.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // name_length: u32
+        let name_length = crate::util::tokio_read_u32_le(r).await?;
+
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // caster_is_spirit_healer: u8
+        let caster_is_spirit_healer = crate::util::tokio_read_u8_le(r).await?;
+
+        // respect_resurrection_timer: u8
+        let respect_resurrection_timer = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            guid,
+            name_length,
+            name,
+            caster_is_spirit_healer,
+            respect_resurrection_timer,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // name_length: u32
+        w.write_all(&self.name_length.to_le_bytes()).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // caster_is_spirit_healer: u8
+        w.write_all(&self.caster_is_spirit_healer.to_le_bytes()).await?;
+
+        // respect_resurrection_timer: u8
+        w.write_all(&self.respect_resurrection_timer.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // name_length: u32
+        let name_length = crate::util::astd_read_u32_le(r).await?;
+
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // caster_is_spirit_healer: u8
+        let caster_is_spirit_healer = crate::util::astd_read_u8_le(r).await?;
+
+        // respect_resurrection_timer: u8
+        let respect_resurrection_timer = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            guid,
+            name_length,
+            name,
+            caster_is_spirit_healer,
+            respect_resurrection_timer,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // name_length: u32
+        w.write_all(&self.name_length.to_le_bytes()).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // caster_is_spirit_healer: u8
+        w.write_all(&self.caster_is_spirit_healer.to_le_bytes()).await?;
+
+        // respect_resurrection_timer: u8
+        w.write_all(&self.respect_resurrection_timer.to_le_bytes()).await?;
 
         Ok(())
     }

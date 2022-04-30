@@ -18,6 +18,7 @@ pub struct SMSG_CHARACTER_LOGIN_FAILED {
 
 impl ServerMessageWrite for SMSG_CHARACTER_LOGIN_FAILED {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_CHARACTER_LOGIN_FAILED {
     const OPCODE: u16 = 0x0041;
 
@@ -39,6 +40,42 @@ impl MessageBody for SMSG_CHARACTER_LOGIN_FAILED {
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // result: WorldResult
         self.result.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // result: WorldResult
+        let result = WorldResult::tokio_read(r).await?;
+
+        Ok(Self {
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // result: WorldResult
+        self.result.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // result: WorldResult
+        let result = WorldResult::astd_read(r).await?;
+
+        Ok(Self {
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // result: WorldResult
+        self.result.astd_write(w).await?;
 
         Ok(())
     }

@@ -22,6 +22,7 @@ pub struct CMSG_LOOT_METHOD {
 
 impl ClientMessageWrite for CMSG_LOOT_METHOD {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_LOOT_METHOD {
     const OPCODE: u16 = 0x007a;
 
@@ -57,6 +58,70 @@ impl MessageBody for CMSG_LOOT_METHOD {
 
         // loot_threshold: ItemQuality
         self.loot_threshold.write_u32_le(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // loot_setting: GroupLootSetting
+        let loot_setting = GroupLootSetting::tokio_read_u32_le(r).await?;
+
+        // loot_master: Guid
+        let loot_master = Guid::tokio_read(r).await?;
+
+        // loot_threshold: ItemQuality
+        let loot_threshold = ItemQuality::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            loot_setting,
+            loot_master,
+            loot_threshold,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // loot_setting: GroupLootSetting
+        self.loot_setting.tokio_write_u32_le(w).await?;
+
+        // loot_master: Guid
+        self.loot_master.tokio_write(w).await?;
+
+        // loot_threshold: ItemQuality
+        self.loot_threshold.tokio_write_u32_le(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // loot_setting: GroupLootSetting
+        let loot_setting = GroupLootSetting::astd_read_u32_le(r).await?;
+
+        // loot_master: Guid
+        let loot_master = Guid::astd_read(r).await?;
+
+        // loot_threshold: ItemQuality
+        let loot_threshold = ItemQuality::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            loot_setting,
+            loot_master,
+            loot_threshold,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // loot_setting: GroupLootSetting
+        self.loot_setting.astd_write_u32_le(w).await?;
+
+        // loot_master: Guid
+        self.loot_master.astd_write(w).await?;
+
+        // loot_threshold: ItemQuality
+        self.loot_threshold.astd_write_u32_le(w).await?;
 
         Ok(())
     }

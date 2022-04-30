@@ -18,6 +18,7 @@ pub struct SMSG_GUILD_EVENT {
 
 impl ServerMessageWrite for SMSG_GUILD_EVENT {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_GUILD_EVENT {
     const OPCODE: u16 = 0x0092;
 
@@ -58,6 +59,82 @@ impl MessageBody for SMSG_GUILD_EVENT {
         for i in self.event_descriptions.iter() {
             w.write_all(&i.as_bytes())?;
             w.write_all(&[0])?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // event: GuildEvent
+        let event = GuildEvent::tokio_read(r).await?;
+
+        // amount_of_events: u8
+        let amount_of_events = crate::util::tokio_read_u8_le(r).await?;
+
+        // event_descriptions: CString[amount_of_events]
+        let mut event_descriptions = Vec::with_capacity(amount_of_events as usize);
+        for i in 0..amount_of_events {
+            let s = crate::util::tokio_read_c_string_to_vec(r).await?;
+            event_descriptions.push(String::from_utf8(s)?);
+        }
+
+        Ok(Self {
+            event,
+            event_descriptions,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // event: GuildEvent
+        self.event.tokio_write(w).await?;
+
+        // amount_of_events: u8
+        w.write_all(&(self.event_descriptions.len() as u8).to_le_bytes()).await?;
+
+        // event_descriptions: CString[amount_of_events]
+        for i in self.event_descriptions.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // event: GuildEvent
+        let event = GuildEvent::astd_read(r).await?;
+
+        // amount_of_events: u8
+        let amount_of_events = crate::util::astd_read_u8_le(r).await?;
+
+        // event_descriptions: CString[amount_of_events]
+        let mut event_descriptions = Vec::with_capacity(amount_of_events as usize);
+        for i in 0..amount_of_events {
+            let s = crate::util::astd_read_c_string_to_vec(r).await?;
+            event_descriptions.push(String::from_utf8(s)?);
+        }
+
+        Ok(Self {
+            event,
+            event_descriptions,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // event: GuildEvent
+        self.event.astd_write(w).await?;
+
+        // amount_of_events: u8
+        w.write_all(&(self.event_descriptions.len() as u8).to_le_bytes()).await?;
+
+        // event_descriptions: CString[amount_of_events]
+        for i in self.event_descriptions.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
         }
 
         Ok(())

@@ -20,6 +20,7 @@ pub struct SMSG_LOGOUT_RESPONSE {
 
 impl ServerMessageWrite for SMSG_LOGOUT_RESPONSE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_LOGOUT_RESPONSE {
     const OPCODE: u16 = 0x004c;
 
@@ -48,6 +49,56 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
 
         // speed: LogoutSpeed
         self.speed.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // reason: LogoutResult
+        let reason = LogoutResult::tokio_read(r).await?;
+
+        // speed: LogoutSpeed
+        let speed = LogoutSpeed::tokio_read(r).await?;
+
+        Ok(Self {
+            reason,
+            speed,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // reason: LogoutResult
+        self.reason.tokio_write(w).await?;
+
+        // speed: LogoutSpeed
+        self.speed.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // reason: LogoutResult
+        let reason = LogoutResult::astd_read(r).await?;
+
+        // speed: LogoutSpeed
+        let speed = LogoutSpeed::astd_read(r).await?;
+
+        Ok(Self {
+            reason,
+            speed,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // reason: LogoutResult
+        self.reason.astd_write(w).await?;
+
+        // speed: LogoutSpeed
+        self.speed.astd_write(w).await?;
 
         Ok(())
     }

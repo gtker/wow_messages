@@ -21,6 +21,7 @@ pub struct SMSG_SELL_ITEM {
 
 impl ServerMessageWrite for SMSG_SELL_ITEM {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_SELL_ITEM {
     const OPCODE: u16 = 0x01a1;
 
@@ -56,6 +57,70 @@ impl MessageBody for SMSG_SELL_ITEM {
 
         // result: SellItemResult
         self.result.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // item: Guid
+        let item = Guid::tokio_read(r).await?;
+
+        // result: SellItemResult
+        let result = SellItemResult::tokio_read(r).await?;
+
+        Ok(Self {
+            guid,
+            item,
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // item: Guid
+        self.item.tokio_write(w).await?;
+
+        // result: SellItemResult
+        self.result.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // item: Guid
+        let item = Guid::astd_read(r).await?;
+
+        // result: SellItemResult
+        let result = SellItemResult::astd_read(r).await?;
+
+        Ok(Self {
+            guid,
+            item,
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // item: Guid
+        self.item.astd_write(w).await?;
+
+        // result: SellItemResult
+        self.result.astd_write(w).await?;
 
         Ok(())
     }

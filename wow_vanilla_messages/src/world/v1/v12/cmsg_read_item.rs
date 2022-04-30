@@ -18,6 +18,7 @@ pub struct CMSG_READ_ITEM {
 
 impl ClientMessageWrite for CMSG_READ_ITEM {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_READ_ITEM {
     const OPCODE: u16 = 0x00ad;
 
@@ -46,6 +47,56 @@ impl MessageBody for CMSG_READ_ITEM {
 
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // bag_index: u8
+        let bag_index = crate::util::tokio_read_u8_le(r).await?;
+
+        // slot: u8
+        let slot = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            bag_index,
+            slot,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // bag_index: u8
+        w.write_all(&self.bag_index.to_le_bytes()).await?;
+
+        // slot: u8
+        w.write_all(&self.slot.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // bag_index: u8
+        let bag_index = crate::util::astd_read_u8_le(r).await?;
+
+        // slot: u8
+        let slot = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            bag_index,
+            slot,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // bag_index: u8
+        w.write_all(&self.bag_index.to_le_bytes()).await?;
+
+        // slot: u8
+        w.write_all(&self.slot.to_le_bytes()).await?;
 
         Ok(())
     }

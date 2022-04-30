@@ -19,6 +19,7 @@ pub struct CMSG_GROUP_ASSISTANT_LEADER {
 
 impl ClientMessageWrite for CMSG_GROUP_ASSISTANT_LEADER {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_GROUP_ASSISTANT_LEADER {
     const OPCODE: u16 = 0x028f;
 
@@ -47,6 +48,56 @@ impl MessageBody for CMSG_GROUP_ASSISTANT_LEADER {
 
         // set_assistant: u8
         w.write_all(&self.set_assistant.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // set_assistant: u8
+        let set_assistant = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            guid,
+            set_assistant,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // set_assistant: u8
+        w.write_all(&self.set_assistant.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // set_assistant: u8
+        let set_assistant = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            guid,
+            set_assistant,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // set_assistant: u8
+        w.write_all(&self.set_assistant.to_le_bytes()).await?;
 
         Ok(())
     }

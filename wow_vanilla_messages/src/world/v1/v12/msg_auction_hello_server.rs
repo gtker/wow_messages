@@ -19,6 +19,7 @@ pub struct MSG_AUCTION_HELLO_Server {
 
 impl ServerMessageWrite for MSG_AUCTION_HELLO_Server {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_AUCTION_HELLO_Server {
     const OPCODE: u16 = 0x0255;
 
@@ -47,6 +48,56 @@ impl MessageBody for MSG_AUCTION_HELLO_Server {
 
         // auction_house_id: u32
         w.write_all(&self.auction_house_id.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // auctioneer: Guid
+        let auctioneer = Guid::tokio_read(r).await?;
+
+        // auction_house_id: u32
+        let auction_house_id = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            auctioneer,
+            auction_house_id,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // auctioneer: Guid
+        self.auctioneer.tokio_write(w).await?;
+
+        // auction_house_id: u32
+        w.write_all(&self.auction_house_id.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // auctioneer: Guid
+        let auctioneer = Guid::astd_read(r).await?;
+
+        // auction_house_id: u32
+        let auction_house_id = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            auctioneer,
+            auction_house_id,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // auctioneer: Guid
+        self.auctioneer.astd_write(w).await?;
+
+        // auction_house_id: u32
+        w.write_all(&self.auction_house_id.to_le_bytes()).await?;
 
         Ok(())
     }

@@ -16,6 +16,7 @@ pub struct CMSG_WHOIS {
 
 impl ClientMessageWrite for CMSG_WHOIS {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_WHOIS {
     const OPCODE: u16 = 0x0064;
 
@@ -40,6 +41,48 @@ impl MessageBody for CMSG_WHOIS {
         w.write_all(self.character.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // character: CString
+        let character = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let character = String::from_utf8(character)?;
+
+        Ok(Self {
+            character,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // character: CString
+        w.write_all(self.character.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // character: CString
+        let character = crate::util::astd_read_c_string_to_vec(r).await?;
+        let character = String::from_utf8(character)?;
+
+        Ok(Self {
+            character,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // character: CString
+        w.write_all(self.character.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
         Ok(())
     }

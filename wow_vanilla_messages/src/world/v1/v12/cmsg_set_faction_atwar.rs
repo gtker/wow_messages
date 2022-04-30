@@ -18,6 +18,7 @@ pub struct CMSG_SET_FACTION_ATWAR {
 
 impl ClientMessageWrite for CMSG_SET_FACTION_ATWAR {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_SET_FACTION_ATWAR {
     const OPCODE: u16 = 0x0125;
 
@@ -46,6 +47,56 @@ impl MessageBody for CMSG_SET_FACTION_ATWAR {
 
         // flags: u8
         w.write_all(&self.flags.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // reputation_list_id: u32
+        let reputation_list_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // flags: u8
+        let flags = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            reputation_list_id,
+            flags,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // reputation_list_id: u32
+        w.write_all(&self.reputation_list_id.to_le_bytes()).await?;
+
+        // flags: u8
+        w.write_all(&self.flags.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // reputation_list_id: u32
+        let reputation_list_id = crate::util::astd_read_u32_le(r).await?;
+
+        // flags: u8
+        let flags = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            reputation_list_id,
+            flags,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // reputation_list_id: u32
+        w.write_all(&self.reputation_list_id.to_le_bytes()).await?;
+
+        // flags: u8
+        w.write_all(&self.flags.to_le_bytes()).await?;
 
         Ok(())
     }

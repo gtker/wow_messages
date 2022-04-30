@@ -17,6 +17,7 @@ pub struct SMSG_SET_FORCED_REACTIONS {
 
 impl ServerMessageWrite for SMSG_SET_FORCED_REACTIONS {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_SET_FORCED_REACTIONS {
     const OPCODE: u16 = 0x02a5;
 
@@ -48,6 +49,64 @@ impl MessageBody for SMSG_SET_FORCED_REACTIONS {
         // reactions: ForcedReaction[amount_of_reactions]
         for i in self.reactions.iter() {
             i.write(w)?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // amount_of_reactions: u32
+        let amount_of_reactions = crate::util::tokio_read_u32_le(r).await?;
+
+        // reactions: ForcedReaction[amount_of_reactions]
+        let mut reactions = Vec::with_capacity(amount_of_reactions as usize);
+        for i in 0..amount_of_reactions {
+            reactions.push(ForcedReaction::tokio_read(r).await?);
+        }
+
+        Ok(Self {
+            reactions,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // amount_of_reactions: u32
+        w.write_all(&(self.reactions.len() as u32).to_le_bytes()).await?;
+
+        // reactions: ForcedReaction[amount_of_reactions]
+        for i in self.reactions.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // amount_of_reactions: u32
+        let amount_of_reactions = crate::util::astd_read_u32_le(r).await?;
+
+        // reactions: ForcedReaction[amount_of_reactions]
+        let mut reactions = Vec::with_capacity(amount_of_reactions as usize);
+        for i in 0..amount_of_reactions {
+            reactions.push(ForcedReaction::astd_read(r).await?);
+        }
+
+        Ok(Self {
+            reactions,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // amount_of_reactions: u32
+        w.write_all(&(self.reactions.len() as u32).to_le_bytes()).await?;
+
+        // reactions: ForcedReaction[amount_of_reactions]
+        for i in self.reactions.iter() {
+            i.astd_write(w).await?;
         }
 
         Ok(())

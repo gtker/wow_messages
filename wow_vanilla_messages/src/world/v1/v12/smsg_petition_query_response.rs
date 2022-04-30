@@ -33,6 +33,7 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
 
 impl ServerMessageWrite for SMSG_PETITION_QUERY_RESPONSE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
     const OPCODE: u16 = 0x01c7;
 
@@ -172,6 +173,278 @@ impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
 
         // number_of_choices: u32
         w.write_all(&self.number_of_choices.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // petition_guid: Guid
+        let petition_guid = Guid::tokio_read(r).await?;
+
+        // charter_owner: Guid
+        let charter_owner = Guid::tokio_read(r).await?;
+
+        // guild_name: CString
+        let guild_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let guild_name = String::from_utf8(guild_name)?;
+
+        // body_text: CString
+        let body_text = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let body_text = String::from_utf8(body_text)?;
+
+        // unknown_flags: u32
+        let unknown_flags = crate::util::tokio_read_u32_le(r).await?;
+
+        // minimum_signatures: u32
+        let minimum_signatures = crate::util::tokio_read_u32_le(r).await?;
+
+        // maximum_signatures: u32
+        let maximum_signatures = crate::util::tokio_read_u32_le(r).await?;
+
+        // deadline: u32
+        let deadline = crate::util::tokio_read_u32_le(r).await?;
+
+        // issue_date: u32
+        let issue_date = crate::util::tokio_read_u32_le(r).await?;
+
+        // allowed_guild_id: u32
+        let allowed_guild_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // allowed_classes: u32
+        let allowed_classes = crate::util::tokio_read_u32_le(r).await?;
+
+        // allowed_races: u32
+        let allowed_races = crate::util::tokio_read_u32_le(r).await?;
+
+        // allowed_genders: u16
+        let allowed_genders = crate::util::tokio_read_u16_le(r).await?;
+
+        // allowed_minimum_level: u32
+        let allowed_minimum_level = crate::util::tokio_read_u32_le(r).await?;
+
+        // allowed_maximum_level: u32
+        let allowed_maximum_level = crate::util::tokio_read_u32_le(r).await?;
+
+        // todo_amount_of_signers: u32
+        let todo_amount_of_signers = crate::util::tokio_read_u32_le(r).await?;
+
+        // number_of_choices: u32
+        let number_of_choices = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            petition_guid,
+            charter_owner,
+            guild_name,
+            body_text,
+            unknown_flags,
+            minimum_signatures,
+            maximum_signatures,
+            deadline,
+            issue_date,
+            allowed_guild_id,
+            allowed_classes,
+            allowed_races,
+            allowed_genders,
+            allowed_minimum_level,
+            allowed_maximum_level,
+            todo_amount_of_signers,
+            number_of_choices,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // petition_guid: Guid
+        self.petition_guid.tokio_write(w).await?;
+
+        // charter_owner: Guid
+        self.charter_owner.tokio_write(w).await?;
+
+        // guild_name: CString
+        w.write_all(self.guild_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // body_text: CString
+        w.write_all(self.body_text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // unknown_flags: u32
+        w.write_all(&self.unknown_flags.to_le_bytes()).await?;
+
+        // minimum_signatures: u32
+        w.write_all(&self.minimum_signatures.to_le_bytes()).await?;
+
+        // maximum_signatures: u32
+        w.write_all(&self.maximum_signatures.to_le_bytes()).await?;
+
+        // deadline: u32
+        w.write_all(&self.deadline.to_le_bytes()).await?;
+
+        // issue_date: u32
+        w.write_all(&self.issue_date.to_le_bytes()).await?;
+
+        // allowed_guild_id: u32
+        w.write_all(&self.allowed_guild_id.to_le_bytes()).await?;
+
+        // allowed_classes: u32
+        w.write_all(&self.allowed_classes.to_le_bytes()).await?;
+
+        // allowed_races: u32
+        w.write_all(&self.allowed_races.to_le_bytes()).await?;
+
+        // allowed_genders: u16
+        w.write_all(&self.allowed_genders.to_le_bytes()).await?;
+
+        // allowed_minimum_level: u32
+        w.write_all(&self.allowed_minimum_level.to_le_bytes()).await?;
+
+        // allowed_maximum_level: u32
+        w.write_all(&self.allowed_maximum_level.to_le_bytes()).await?;
+
+        // todo_amount_of_signers: u32
+        w.write_all(&self.todo_amount_of_signers.to_le_bytes()).await?;
+
+        // number_of_choices: u32
+        w.write_all(&self.number_of_choices.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // petition_guid: Guid
+        let petition_guid = Guid::astd_read(r).await?;
+
+        // charter_owner: Guid
+        let charter_owner = Guid::astd_read(r).await?;
+
+        // guild_name: CString
+        let guild_name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let guild_name = String::from_utf8(guild_name)?;
+
+        // body_text: CString
+        let body_text = crate::util::astd_read_c_string_to_vec(r).await?;
+        let body_text = String::from_utf8(body_text)?;
+
+        // unknown_flags: u32
+        let unknown_flags = crate::util::astd_read_u32_le(r).await?;
+
+        // minimum_signatures: u32
+        let minimum_signatures = crate::util::astd_read_u32_le(r).await?;
+
+        // maximum_signatures: u32
+        let maximum_signatures = crate::util::astd_read_u32_le(r).await?;
+
+        // deadline: u32
+        let deadline = crate::util::astd_read_u32_le(r).await?;
+
+        // issue_date: u32
+        let issue_date = crate::util::astd_read_u32_le(r).await?;
+
+        // allowed_guild_id: u32
+        let allowed_guild_id = crate::util::astd_read_u32_le(r).await?;
+
+        // allowed_classes: u32
+        let allowed_classes = crate::util::astd_read_u32_le(r).await?;
+
+        // allowed_races: u32
+        let allowed_races = crate::util::astd_read_u32_le(r).await?;
+
+        // allowed_genders: u16
+        let allowed_genders = crate::util::astd_read_u16_le(r).await?;
+
+        // allowed_minimum_level: u32
+        let allowed_minimum_level = crate::util::astd_read_u32_le(r).await?;
+
+        // allowed_maximum_level: u32
+        let allowed_maximum_level = crate::util::astd_read_u32_le(r).await?;
+
+        // todo_amount_of_signers: u32
+        let todo_amount_of_signers = crate::util::astd_read_u32_le(r).await?;
+
+        // number_of_choices: u32
+        let number_of_choices = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            petition_guid,
+            charter_owner,
+            guild_name,
+            body_text,
+            unknown_flags,
+            minimum_signatures,
+            maximum_signatures,
+            deadline,
+            issue_date,
+            allowed_guild_id,
+            allowed_classes,
+            allowed_races,
+            allowed_genders,
+            allowed_minimum_level,
+            allowed_maximum_level,
+            todo_amount_of_signers,
+            number_of_choices,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // petition_guid: Guid
+        self.petition_guid.astd_write(w).await?;
+
+        // charter_owner: Guid
+        self.charter_owner.astd_write(w).await?;
+
+        // guild_name: CString
+        w.write_all(self.guild_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // body_text: CString
+        w.write_all(self.body_text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // unknown_flags: u32
+        w.write_all(&self.unknown_flags.to_le_bytes()).await?;
+
+        // minimum_signatures: u32
+        w.write_all(&self.minimum_signatures.to_le_bytes()).await?;
+
+        // maximum_signatures: u32
+        w.write_all(&self.maximum_signatures.to_le_bytes()).await?;
+
+        // deadline: u32
+        w.write_all(&self.deadline.to_le_bytes()).await?;
+
+        // issue_date: u32
+        w.write_all(&self.issue_date.to_le_bytes()).await?;
+
+        // allowed_guild_id: u32
+        w.write_all(&self.allowed_guild_id.to_le_bytes()).await?;
+
+        // allowed_classes: u32
+        w.write_all(&self.allowed_classes.to_le_bytes()).await?;
+
+        // allowed_races: u32
+        w.write_all(&self.allowed_races.to_le_bytes()).await?;
+
+        // allowed_genders: u16
+        w.write_all(&self.allowed_genders.to_le_bytes()).await?;
+
+        // allowed_minimum_level: u32
+        w.write_all(&self.allowed_minimum_level.to_le_bytes()).await?;
+
+        // allowed_maximum_level: u32
+        w.write_all(&self.allowed_maximum_level.to_le_bytes()).await?;
+
+        // todo_amount_of_signers: u32
+        w.write_all(&self.todo_amount_of_signers.to_le_bytes()).await?;
+
+        // number_of_choices: u32
+        w.write_all(&self.number_of_choices.to_le_bytes()).await?;
 
         Ok(())
     }

@@ -16,6 +16,7 @@ pub struct CMSG_GUILD_INFO_TEXT {
 
 impl ClientMessageWrite for CMSG_GUILD_INFO_TEXT {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_GUILD_INFO_TEXT {
     const OPCODE: u16 = 0x02fc;
 
@@ -40,6 +41,48 @@ impl MessageBody for CMSG_GUILD_INFO_TEXT {
         w.write_all(self.guild_info.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guild_info: CString
+        let guild_info = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let guild_info = String::from_utf8(guild_info)?;
+
+        Ok(Self {
+            guild_info,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guild_info: CString
+        w.write_all(self.guild_info.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guild_info: CString
+        let guild_info = crate::util::astd_read_c_string_to_vec(r).await?;
+        let guild_info = String::from_utf8(guild_info)?;
+
+        Ok(Self {
+            guild_info,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guild_info: CString
+        w.write_all(self.guild_info.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
         Ok(())
     }

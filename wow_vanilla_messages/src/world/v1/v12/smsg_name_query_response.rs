@@ -25,6 +25,7 @@ pub struct SMSG_NAME_QUERY_RESPONSE {
 
 impl ServerMessageWrite for SMSG_NAME_QUERY_RESPONSE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
     const OPCODE: u16 = 0x0051;
 
@@ -87,6 +88,124 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
 
         // class: Class
         self.class.write_u32_le(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // character_name: CString
+        let character_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let character_name = String::from_utf8(character_name)?;
+
+        // realm_name: CString
+        let realm_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let realm_name = String::from_utf8(realm_name)?;
+
+        // race: Race
+        let race = Race::tokio_read_u32_le(r).await?;
+
+        // gender: Gender
+        let gender = Gender::tokio_read_u32_le(r).await?;
+
+        // class: Class
+        let class = Class::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            guid,
+            character_name,
+            realm_name,
+            race,
+            gender,
+            class,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // character_name: CString
+        w.write_all(self.character_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // realm_name: CString
+        w.write_all(self.realm_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // race: Race
+        self.race.tokio_write_u32_le(w).await?;
+
+        // gender: Gender
+        self.gender.tokio_write_u32_le(w).await?;
+
+        // class: Class
+        self.class.tokio_write_u32_le(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // character_name: CString
+        let character_name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let character_name = String::from_utf8(character_name)?;
+
+        // realm_name: CString
+        let realm_name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let realm_name = String::from_utf8(realm_name)?;
+
+        // race: Race
+        let race = Race::astd_read_u32_le(r).await?;
+
+        // gender: Gender
+        let gender = Gender::astd_read_u32_le(r).await?;
+
+        // class: Class
+        let class = Class::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            guid,
+            character_name,
+            realm_name,
+            race,
+            gender,
+            class,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // character_name: CString
+        w.write_all(self.character_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // realm_name: CString
+        w.write_all(self.realm_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // race: Race
+        self.race.astd_write_u32_le(w).await?;
+
+        // gender: Gender
+        self.gender.astd_write_u32_le(w).await?;
+
+        // class: Class
+        self.class.astd_write_u32_le(w).await?;
 
         Ok(())
     }

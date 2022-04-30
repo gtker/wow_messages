@@ -20,6 +20,7 @@ pub struct CMSG_BUG {
 
 impl ClientMessageWrite for CMSG_BUG {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_BUG {
     const OPCODE: u16 = 0x01ca;
 
@@ -75,6 +76,110 @@ impl MessageBody for CMSG_BUG {
         w.write_all(self.bug_type.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // suggestion: u32
+        let suggestion = crate::util::tokio_read_u32_le(r).await?;
+
+        // content_length: u32
+        let content_length = crate::util::tokio_read_u32_le(r).await?;
+
+        // content: CString
+        let content = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let content = String::from_utf8(content)?;
+
+        // type_length: u32
+        let type_length = crate::util::tokio_read_u32_le(r).await?;
+
+        // bug_type: CString
+        let bug_type = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let bug_type = String::from_utf8(bug_type)?;
+
+        Ok(Self {
+            suggestion,
+            content_length,
+            content,
+            type_length,
+            bug_type,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // suggestion: u32
+        w.write_all(&self.suggestion.to_le_bytes()).await?;
+
+        // content_length: u32
+        w.write_all(&self.content_length.to_le_bytes()).await?;
+
+        // content: CString
+        w.write_all(self.content.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // type_length: u32
+        w.write_all(&self.type_length.to_le_bytes()).await?;
+
+        // bug_type: CString
+        w.write_all(self.bug_type.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // suggestion: u32
+        let suggestion = crate::util::astd_read_u32_le(r).await?;
+
+        // content_length: u32
+        let content_length = crate::util::astd_read_u32_le(r).await?;
+
+        // content: CString
+        let content = crate::util::astd_read_c_string_to_vec(r).await?;
+        let content = String::from_utf8(content)?;
+
+        // type_length: u32
+        let type_length = crate::util::astd_read_u32_le(r).await?;
+
+        // bug_type: CString
+        let bug_type = crate::util::astd_read_c_string_to_vec(r).await?;
+        let bug_type = String::from_utf8(bug_type)?;
+
+        Ok(Self {
+            suggestion,
+            content_length,
+            content,
+            type_length,
+            bug_type,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // suggestion: u32
+        w.write_all(&self.suggestion.to_le_bytes()).await?;
+
+        // content_length: u32
+        w.write_all(&self.content_length.to_le_bytes()).await?;
+
+        // content: CString
+        w.write_all(self.content.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // type_length: u32
+        w.write_all(&self.type_length.to_le_bytes()).await?;
+
+        // bug_type: CString
+        w.write_all(self.bug_type.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
         Ok(())
     }

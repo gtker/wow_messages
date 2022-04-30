@@ -18,6 +18,7 @@ pub struct SMSG_TRIGGER_CINEMATIC {
 
 impl ServerMessageWrite for SMSG_TRIGGER_CINEMATIC {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_TRIGGER_CINEMATIC {
     const OPCODE: u16 = 0x00fa;
 
@@ -39,6 +40,42 @@ impl MessageBody for SMSG_TRIGGER_CINEMATIC {
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // cinematic_sequence_id: CinematicSequenceId
         self.cinematic_sequence_id.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // cinematic_sequence_id: CinematicSequenceId
+        let cinematic_sequence_id = CinematicSequenceId::tokio_read(r).await?;
+
+        Ok(Self {
+            cinematic_sequence_id,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // cinematic_sequence_id: CinematicSequenceId
+        self.cinematic_sequence_id.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // cinematic_sequence_id: CinematicSequenceId
+        let cinematic_sequence_id = CinematicSequenceId::astd_read(r).await?;
+
+        Ok(Self {
+            cinematic_sequence_id,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // cinematic_sequence_id: CinematicSequenceId
+        self.cinematic_sequence_id.astd_write(w).await?;
 
         Ok(())
     }

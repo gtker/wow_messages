@@ -28,6 +28,7 @@ pub struct CMSG_CHAR_CREATE {
 
 impl ClientMessageWrite for CMSG_CHAR_CREATE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_CHAR_CREATE {
     const OPCODE: u16 = 0x0036;
 
@@ -115,6 +116,174 @@ impl MessageBody for CMSG_CHAR_CREATE {
 
         // outfit_id: u8
         w.write_all(&self.outfit_id.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // race: Race
+        let race = Race::tokio_read(r).await?;
+
+        // class: Class
+        let class = Class::tokio_read(r).await?;
+
+        // gender: Gender
+        let gender = Gender::tokio_read(r).await?;
+
+        // skin: u8
+        let skin = crate::util::tokio_read_u8_le(r).await?;
+
+        // face: u8
+        let face = crate::util::tokio_read_u8_le(r).await?;
+
+        // hairstyle: u8
+        let hairstyle = crate::util::tokio_read_u8_le(r).await?;
+
+        // haircolor: u8
+        let haircolor = crate::util::tokio_read_u8_le(r).await?;
+
+        // facialhair: u8
+        let facialhair = crate::util::tokio_read_u8_le(r).await?;
+
+        // outfit_id: u8
+        let outfit_id = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            name,
+            race,
+            class,
+            gender,
+            skin,
+            face,
+            hairstyle,
+            haircolor,
+            facialhair,
+            outfit_id,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // race: Race
+        self.race.tokio_write(w).await?;
+
+        // class: Class
+        self.class.tokio_write(w).await?;
+
+        // gender: Gender
+        self.gender.tokio_write(w).await?;
+
+        // skin: u8
+        w.write_all(&self.skin.to_le_bytes()).await?;
+
+        // face: u8
+        w.write_all(&self.face.to_le_bytes()).await?;
+
+        // hairstyle: u8
+        w.write_all(&self.hairstyle.to_le_bytes()).await?;
+
+        // haircolor: u8
+        w.write_all(&self.haircolor.to_le_bytes()).await?;
+
+        // facialhair: u8
+        w.write_all(&self.facialhair.to_le_bytes()).await?;
+
+        // outfit_id: u8
+        w.write_all(&self.outfit_id.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // race: Race
+        let race = Race::astd_read(r).await?;
+
+        // class: Class
+        let class = Class::astd_read(r).await?;
+
+        // gender: Gender
+        let gender = Gender::astd_read(r).await?;
+
+        // skin: u8
+        let skin = crate::util::astd_read_u8_le(r).await?;
+
+        // face: u8
+        let face = crate::util::astd_read_u8_le(r).await?;
+
+        // hairstyle: u8
+        let hairstyle = crate::util::astd_read_u8_le(r).await?;
+
+        // haircolor: u8
+        let haircolor = crate::util::astd_read_u8_le(r).await?;
+
+        // facialhair: u8
+        let facialhair = crate::util::astd_read_u8_le(r).await?;
+
+        // outfit_id: u8
+        let outfit_id = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            name,
+            race,
+            class,
+            gender,
+            skin,
+            face,
+            hairstyle,
+            haircolor,
+            facialhair,
+            outfit_id,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // race: Race
+        self.race.astd_write(w).await?;
+
+        // class: Class
+        self.class.astd_write(w).await?;
+
+        // gender: Gender
+        self.gender.astd_write(w).await?;
+
+        // skin: u8
+        w.write_all(&self.skin.to_le_bytes()).await?;
+
+        // face: u8
+        w.write_all(&self.face.to_le_bytes()).await?;
+
+        // hairstyle: u8
+        w.write_all(&self.hairstyle.to_le_bytes()).await?;
+
+        // haircolor: u8
+        w.write_all(&self.haircolor.to_le_bytes()).await?;
+
+        // facialhair: u8
+        w.write_all(&self.facialhair.to_le_bytes()).await?;
+
+        // outfit_id: u8
+        w.write_all(&self.outfit_id.to_le_bytes()).await?;
 
         Ok(())
     }

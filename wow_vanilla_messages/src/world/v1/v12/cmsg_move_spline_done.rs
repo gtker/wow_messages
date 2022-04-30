@@ -19,6 +19,7 @@ pub struct CMSG_MOVE_SPLINE_DONE {
 
 impl ClientMessageWrite for CMSG_MOVE_SPLINE_DONE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_MOVE_SPLINE_DONE {
     const OPCODE: u16 = 0x02c9;
 
@@ -54,6 +55,70 @@ impl MessageBody for CMSG_MOVE_SPLINE_DONE {
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // movement_info: MovementInfo
+        let movement_info = MovementInfo::tokio_read(r).await?;
+
+        // movement_counter: u32
+        let movement_counter = crate::util::tokio_read_u32_le(r).await?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            movement_info,
+            movement_counter,
+            unknown1,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // movement_info: MovementInfo
+        self.movement_info.tokio_write(w).await?;
+
+        // movement_counter: u32
+        w.write_all(&self.movement_counter.to_le_bytes()).await?;
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // movement_info: MovementInfo
+        let movement_info = MovementInfo::astd_read(r).await?;
+
+        // movement_counter: u32
+        let movement_counter = crate::util::astd_read_u32_le(r).await?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            movement_info,
+            movement_counter,
+            unknown1,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // movement_info: MovementInfo
+        self.movement_info.astd_write(w).await?;
+
+        // movement_counter: u32
+        w.write_all(&self.movement_counter.to_le_bytes()).await?;
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
 
         Ok(())
     }

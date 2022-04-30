@@ -21,6 +21,7 @@ pub struct SMSG_ITEM_ENCHANT_TIME_UPDATE {
 
 impl ServerMessageWrite for SMSG_ITEM_ENCHANT_TIME_UPDATE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_ITEM_ENCHANT_TIME_UPDATE {
     const OPCODE: u16 = 0x01eb;
 
@@ -63,6 +64,84 @@ impl MessageBody for SMSG_ITEM_ENCHANT_TIME_UPDATE {
 
         // player_guid: Guid
         self.player_guid.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // item_guid: Guid
+        let item_guid = Guid::tokio_read(r).await?;
+
+        // slot: u32
+        let slot = crate::util::tokio_read_u32_le(r).await?;
+
+        // duration: u32
+        let duration = crate::util::tokio_read_u32_le(r).await?;
+
+        // player_guid: Guid
+        let player_guid = Guid::tokio_read(r).await?;
+
+        Ok(Self {
+            item_guid,
+            slot,
+            duration,
+            player_guid,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // item_guid: Guid
+        self.item_guid.tokio_write(w).await?;
+
+        // slot: u32
+        w.write_all(&self.slot.to_le_bytes()).await?;
+
+        // duration: u32
+        w.write_all(&self.duration.to_le_bytes()).await?;
+
+        // player_guid: Guid
+        self.player_guid.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // item_guid: Guid
+        let item_guid = Guid::astd_read(r).await?;
+
+        // slot: u32
+        let slot = crate::util::astd_read_u32_le(r).await?;
+
+        // duration: u32
+        let duration = crate::util::astd_read_u32_le(r).await?;
+
+        // player_guid: Guid
+        let player_guid = Guid::astd_read(r).await?;
+
+        Ok(Self {
+            item_guid,
+            slot,
+            duration,
+            player_guid,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // item_guid: Guid
+        self.item_guid.astd_write(w).await?;
+
+        // slot: u32
+        w.write_all(&self.slot.to_le_bytes()).await?;
+
+        // duration: u32
+        w.write_all(&self.duration.to_le_bytes()).await?;
+
+        // player_guid: Guid
+        self.player_guid.astd_write(w).await?;
 
         Ok(())
     }

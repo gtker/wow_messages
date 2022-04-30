@@ -16,6 +16,7 @@ pub struct SMSG_NOTIFICATION {
 
 impl ServerMessageWrite for SMSG_NOTIFICATION {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_NOTIFICATION {
     const OPCODE: u16 = 0x01cb;
 
@@ -40,6 +41,48 @@ impl MessageBody for SMSG_NOTIFICATION {
         w.write_all(self.notification.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // notification: CString
+        let notification = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let notification = String::from_utf8(notification)?;
+
+        Ok(Self {
+            notification,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // notification: CString
+        w.write_all(self.notification.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // notification: CString
+        let notification = crate::util::astd_read_c_string_to_vec(r).await?;
+        let notification = String::from_utf8(notification)?;
+
+        Ok(Self {
+            notification,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // notification: CString
+        w.write_all(self.notification.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
         Ok(())
     }

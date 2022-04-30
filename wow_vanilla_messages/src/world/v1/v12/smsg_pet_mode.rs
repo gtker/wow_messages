@@ -24,6 +24,7 @@ pub struct SMSG_PET_MODE {
 
 impl ServerMessageWrite for SMSG_PET_MODE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_PET_MODE {
     const OPCODE: u16 = 0x017a;
 
@@ -73,6 +74,98 @@ impl MessageBody for SMSG_PET_MODE {
 
         // pet_enabled: u8
         w.write_all(&self.pet_enabled.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // react_state: PetReactState
+        let react_state = PetReactState::tokio_read(r).await?;
+
+        // command_state: PetCommandState
+        let command_state = PetCommandState::tokio_read(r).await?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::tokio_read_u8_le(r).await?;
+
+        // pet_enabled: u8
+        let pet_enabled = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            guid,
+            react_state,
+            command_state,
+            unknown1,
+            pet_enabled,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // react_state: PetReactState
+        self.react_state.tokio_write(w).await?;
+
+        // command_state: PetCommandState
+        self.command_state.tokio_write(w).await?;
+
+        // unknown1: u8
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // pet_enabled: u8
+        w.write_all(&self.pet_enabled.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // react_state: PetReactState
+        let react_state = PetReactState::astd_read(r).await?;
+
+        // command_state: PetCommandState
+        let command_state = PetCommandState::astd_read(r).await?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::astd_read_u8_le(r).await?;
+
+        // pet_enabled: u8
+        let pet_enabled = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            guid,
+            react_state,
+            command_state,
+            unknown1,
+            pet_enabled,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // react_state: PetReactState
+        self.react_state.astd_write(w).await?;
+
+        // command_state: PetCommandState
+        self.command_state.astd_write(w).await?;
+
+        // unknown1: u8
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // pet_enabled: u8
+        w.write_all(&self.pet_enabled.to_le_bytes()).await?;
 
         Ok(())
     }

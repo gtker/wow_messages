@@ -20,6 +20,7 @@ pub struct CMSG_AUCTION_PLACE_BID {
 
 impl ClientMessageWrite for CMSG_AUCTION_PLACE_BID {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_AUCTION_PLACE_BID {
     const OPCODE: u16 = 0x025a;
 
@@ -55,6 +56,70 @@ impl MessageBody for CMSG_AUCTION_PLACE_BID {
 
         // price: u32
         w.write_all(&self.price.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // auctioneer_guid: Guid
+        let auctioneer_guid = Guid::tokio_read(r).await?;
+
+        // auction_id: u32
+        let auction_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // price: u32
+        let price = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            auctioneer_guid,
+            auction_id,
+            price,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // auctioneer_guid: Guid
+        self.auctioneer_guid.tokio_write(w).await?;
+
+        // auction_id: u32
+        w.write_all(&self.auction_id.to_le_bytes()).await?;
+
+        // price: u32
+        w.write_all(&self.price.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // auctioneer_guid: Guid
+        let auctioneer_guid = Guid::astd_read(r).await?;
+
+        // auction_id: u32
+        let auction_id = crate::util::astd_read_u32_le(r).await?;
+
+        // price: u32
+        let price = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            auctioneer_guid,
+            auction_id,
+            price,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // auctioneer_guid: Guid
+        self.auctioneer_guid.astd_write(w).await?;
+
+        // auction_id: u32
+        w.write_all(&self.auction_id.to_le_bytes()).await?;
+
+        // price: u32
+        w.write_all(&self.price.to_le_bytes()).await?;
 
         Ok(())
     }

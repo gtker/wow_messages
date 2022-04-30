@@ -20,6 +20,7 @@ pub struct CMSG_PET_ACTION {
 
 impl ClientMessageWrite for CMSG_PET_ACTION {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_PET_ACTION {
     const OPCODE: u16 = 0x0175;
 
@@ -55,6 +56,70 @@ impl MessageBody for CMSG_PET_ACTION {
 
         // target_guid: Guid
         self.target_guid.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // pet_guid: Guid
+        let pet_guid = Guid::tokio_read(r).await?;
+
+        // data: u32
+        let data = crate::util::tokio_read_u32_le(r).await?;
+
+        // target_guid: Guid
+        let target_guid = Guid::tokio_read(r).await?;
+
+        Ok(Self {
+            pet_guid,
+            data,
+            target_guid,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_guid: Guid
+        self.pet_guid.tokio_write(w).await?;
+
+        // data: u32
+        w.write_all(&self.data.to_le_bytes()).await?;
+
+        // target_guid: Guid
+        self.target_guid.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // pet_guid: Guid
+        let pet_guid = Guid::astd_read(r).await?;
+
+        // data: u32
+        let data = crate::util::astd_read_u32_le(r).await?;
+
+        // target_guid: Guid
+        let target_guid = Guid::astd_read(r).await?;
+
+        Ok(Self {
+            pet_guid,
+            data,
+            target_guid,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_guid: Guid
+        self.pet_guid.astd_write(w).await?;
+
+        // data: u32
+        w.write_all(&self.data.to_le_bytes()).await?;
+
+        // target_guid: Guid
+        self.target_guid.astd_write(w).await?;
 
         Ok(())
     }

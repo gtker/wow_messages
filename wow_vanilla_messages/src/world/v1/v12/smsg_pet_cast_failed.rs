@@ -20,6 +20,7 @@ pub struct SMSG_PET_CAST_FAILED {
 
 impl ServerMessageWrite for SMSG_PET_CAST_FAILED {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_PET_CAST_FAILED {
     const OPCODE: u16 = 0x0138;
 
@@ -55,6 +56,70 @@ impl MessageBody for SMSG_PET_CAST_FAILED {
 
         // result: SpellCastResult
         self.result.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // id: u32
+        let id = crate::util::tokio_read_u32_le(r).await?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::tokio_read_u8_le(r).await?;
+
+        // result: SpellCastResult
+        let result = SpellCastResult::tokio_read(r).await?;
+
+        Ok(Self {
+            id,
+            unknown1,
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // id: u32
+        w.write_all(&self.id.to_le_bytes()).await?;
+
+        // unknown1: u8
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // result: SpellCastResult
+        self.result.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // id: u32
+        let id = crate::util::astd_read_u32_le(r).await?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::astd_read_u8_le(r).await?;
+
+        // result: SpellCastResult
+        let result = SpellCastResult::astd_read(r).await?;
+
+        Ok(Self {
+            id,
+            unknown1,
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // id: u32
+        w.write_all(&self.id.to_le_bytes()).await?;
+
+        // unknown1: u8
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // result: SpellCastResult
+        self.result.astd_write(w).await?;
 
         Ok(())
     }

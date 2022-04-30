@@ -20,6 +20,7 @@ pub struct CMSG_ACTIVATETAXIEXPRESS {
 
 impl ClientMessageWrite for CMSG_ACTIVATETAXIEXPRESS {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_ACTIVATETAXIEXPRESS {
     const OPCODE: u16 = 0x0312;
 
@@ -55,6 +56,70 @@ impl MessageBody for CMSG_ACTIVATETAXIEXPRESS {
 
         // node_count: u32
         w.write_all(&self.node_count.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // total_cost: u32
+        let total_cost = crate::util::tokio_read_u32_le(r).await?;
+
+        // node_count: u32
+        let node_count = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            guid,
+            total_cost,
+            node_count,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // total_cost: u32
+        w.write_all(&self.total_cost.to_le_bytes()).await?;
+
+        // node_count: u32
+        w.write_all(&self.node_count.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // total_cost: u32
+        let total_cost = crate::util::astd_read_u32_le(r).await?;
+
+        // node_count: u32
+        let node_count = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            guid,
+            total_cost,
+            node_count,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // total_cost: u32
+        w.write_all(&self.total_cost.to_le_bytes()).await?;
+
+        // node_count: u32
+        w.write_all(&self.node_count.to_le_bytes()).await?;
 
         Ok(())
     }

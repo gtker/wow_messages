@@ -18,6 +18,7 @@ pub struct MSG_CORPSE_QUERY_Server {
 
 impl ServerMessageWrite for MSG_CORPSE_QUERY_Server {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_CORPSE_QUERY_Server {
     const OPCODE: u16 = 0x0216;
 
@@ -88,6 +89,146 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
 
                 // corpse_map: Map
                 corpse_map.write(w)?;
+
+            }
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // result: CorpseQueryResult
+        let result = CorpseQueryResult::tokio_read(r).await?;
+
+        let result_if = match result {
+            CorpseQueryResult::NOT_FOUND => MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND,
+            CorpseQueryResult::FOUND => {
+                // map: Map
+                let map = Map::tokio_read(r).await?;
+
+                // position_x: f32
+                let position_x = crate::util::tokio_read_f32_le(r).await?;
+                // position_y: f32
+                let position_y = crate::util::tokio_read_f32_le(r).await?;
+                // position_z: f32
+                let position_z = crate::util::tokio_read_f32_le(r).await?;
+                // corpse_map: Map
+                let corpse_map = Map::tokio_read(r).await?;
+
+                MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                    map,
+                    position_x,
+                    position_y,
+                    position_z,
+                    corpse_map,
+                }
+            }
+        };
+
+        Ok(Self {
+            result: result_if,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // result: CorpseQueryResult
+        self.result.tokio_write(w).await?;
+
+        match &self.result {
+            MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
+            MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                map,
+                position_x,
+                position_y,
+                position_z,
+                corpse_map,
+            } => {
+                // map: Map
+                map.tokio_write(w).await?;
+
+                // position_x: f32
+                w.write_all(&position_x.to_le_bytes()).await?;
+
+                // position_y: f32
+                w.write_all(&position_y.to_le_bytes()).await?;
+
+                // position_z: f32
+                w.write_all(&position_z.to_le_bytes()).await?;
+
+                // corpse_map: Map
+                corpse_map.tokio_write(w).await?;
+
+            }
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // result: CorpseQueryResult
+        let result = CorpseQueryResult::astd_read(r).await?;
+
+        let result_if = match result {
+            CorpseQueryResult::NOT_FOUND => MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND,
+            CorpseQueryResult::FOUND => {
+                // map: Map
+                let map = Map::astd_read(r).await?;
+
+                // position_x: f32
+                let position_x = crate::util::astd_read_f32_le(r).await?;
+                // position_y: f32
+                let position_y = crate::util::astd_read_f32_le(r).await?;
+                // position_z: f32
+                let position_z = crate::util::astd_read_f32_le(r).await?;
+                // corpse_map: Map
+                let corpse_map = Map::astd_read(r).await?;
+
+                MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                    map,
+                    position_x,
+                    position_y,
+                    position_z,
+                    corpse_map,
+                }
+            }
+        };
+
+        Ok(Self {
+            result: result_if,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // result: CorpseQueryResult
+        self.result.astd_write(w).await?;
+
+        match &self.result {
+            MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
+            MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                map,
+                position_x,
+                position_y,
+                position_z,
+                corpse_map,
+            } => {
+                // map: Map
+                map.astd_write(w).await?;
+
+                // position_x: f32
+                w.write_all(&position_x.to_le_bytes()).await?;
+
+                // position_y: f32
+                w.write_all(&position_y.to_le_bytes()).await?;
+
+                // position_z: f32
+                w.write_all(&position_z.to_le_bytes()).await?;
+
+                // corpse_map: Map
+                corpse_map.astd_write(w).await?;
 
             }
         }

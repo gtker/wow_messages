@@ -19,6 +19,7 @@ pub struct SMSG_SPELL_DELAYED {
 
 impl ServerMessageWrite for SMSG_SPELL_DELAYED {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_SPELL_DELAYED {
     const OPCODE: u16 = 0x01e2;
 
@@ -47,6 +48,56 @@ impl MessageBody for SMSG_SPELL_DELAYED {
 
         // delay_time: u32
         w.write_all(&self.delay_time.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // delay_time: u32
+        let delay_time = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            guid,
+            delay_time,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // delay_time: u32
+        w.write_all(&self.delay_time.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // delay_time: u32
+        let delay_time = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            guid,
+            delay_time,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // delay_time: u32
+        w.write_all(&self.delay_time.to_le_bytes()).await?;
 
         Ok(())
     }

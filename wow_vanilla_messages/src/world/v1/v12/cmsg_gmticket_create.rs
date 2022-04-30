@@ -24,6 +24,7 @@ pub struct CMSG_GMTICKET_CREATE {
 
 impl ClientMessageWrite for CMSG_GMTICKET_CREATE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_GMTICKET_CREATE {
     const OPCODE: u16 = 0x0205;
 
@@ -148,6 +149,272 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
                 // compressed_chat_data: u8[-]
                 for i in compressed_chat_data.iter() {
                     w.write_all(&i.to_le_bytes())?;
+                }
+
+            }
+            CMSG_GMTICKET_CREATEGmTicketType::GUILD => {}
+            CMSG_GMTICKET_CREATEGmTicketType::ITEM => {}
+            CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL => {}
+            CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP => {}
+            CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC => {}
+            CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL => {}
+            CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING => {}
+            CMSG_GMTICKET_CREATEGmTicketType::CHARACTER => {}
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // category: GmTicketType
+        let category = GmTicketType::tokio_read(r).await?;
+
+        // map: Map
+        let map = Map::tokio_read(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::tokio_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::tokio_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::tokio_read_f32_le(r).await?;
+        // message: CString
+        let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let message = String::from_utf8(message)?;
+
+        // reserved_for_future_use: CString
+        let reserved_for_future_use = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let reserved_for_future_use = String::from_utf8(reserved_for_future_use)?;
+
+        let category_if = match category {
+            GmTicketType::STUCK => CMSG_GMTICKET_CREATEGmTicketType::STUCK,
+            GmTicketType::BEHAVIOR_HARASSMENT => {
+                // chat_data_line_count: u32
+                let chat_data_line_count = crate::util::tokio_read_u32_le(r).await?;
+
+                // chat_data_size_uncompressed: u32
+                let chat_data_size_uncompressed = crate::util::tokio_read_u32_le(r).await?;
+
+                // compressed_chat_data: u8[-]
+                let mut current_size = {
+                    GmTicketType::size() // category: GmTicketType
+                    + Map::size() // map: Map
+                    + 4 // position_x: f32
+                    + 4 // position_y: f32
+                    + 4 // position_z: f32
+                    + message.len() + 1 // message: CString and Null Terminator
+                    + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString and Null Terminator
+                };
+                let mut compressed_chat_data = Vec::with_capacity(body_size as usize - current_size);
+                while current_size < (body_size as usize) {
+                    compressed_chat_data.push(crate::util::tokio_read_u8_le(r).await?);
+                    current_size += 1;
+                }
+
+                CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT {
+                    chat_data_line_count,
+                    chat_data_size_uncompressed,
+                    compressed_chat_data,
+                }
+            }
+            GmTicketType::GUILD => CMSG_GMTICKET_CREATEGmTicketType::GUILD,
+            GmTicketType::ITEM => CMSG_GMTICKET_CREATEGmTicketType::ITEM,
+            GmTicketType::ENVIRONMENTAL => CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL,
+            GmTicketType::NONQUEST_CREEP => CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP,
+            GmTicketType::QUEST_QUESTNPC => CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC,
+            GmTicketType::TECHNICAL => CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL,
+            GmTicketType::ACCOUNT_BILLING => CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING,
+            GmTicketType::CHARACTER => CMSG_GMTICKET_CREATEGmTicketType::CHARACTER,
+        };
+
+        Ok(Self {
+            category: category_if,
+            map,
+            position_x,
+            position_y,
+            position_z,
+            message,
+            reserved_for_future_use,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // category: GmTicketType
+        self.category.tokio_write(w).await?;
+
+        // map: Map
+        self.map.tokio_write(w).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
+
+        // message: CString
+        w.write_all(self.message.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // reserved_for_future_use: CString
+        w.write_all(self.reserved_for_future_use.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        match &self.category {
+            CMSG_GMTICKET_CREATEGmTicketType::STUCK => {}
+            CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT {
+                chat_data_line_count,
+                chat_data_size_uncompressed,
+                compressed_chat_data,
+            } => {
+                // chat_data_line_count: u32
+                w.write_all(&chat_data_line_count.to_le_bytes()).await?;
+
+                // chat_data_size_uncompressed: u32
+                w.write_all(&chat_data_size_uncompressed.to_le_bytes()).await?;
+
+                // compressed_chat_data: u8[-]
+                for i in compressed_chat_data.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
+                }
+
+            }
+            CMSG_GMTICKET_CREATEGmTicketType::GUILD => {}
+            CMSG_GMTICKET_CREATEGmTicketType::ITEM => {}
+            CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL => {}
+            CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP => {}
+            CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC => {}
+            CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL => {}
+            CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING => {}
+            CMSG_GMTICKET_CREATEGmTicketType::CHARACTER => {}
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // category: GmTicketType
+        let category = GmTicketType::astd_read(r).await?;
+
+        // map: Map
+        let map = Map::astd_read(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::astd_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::astd_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::astd_read_f32_le(r).await?;
+        // message: CString
+        let message = crate::util::astd_read_c_string_to_vec(r).await?;
+        let message = String::from_utf8(message)?;
+
+        // reserved_for_future_use: CString
+        let reserved_for_future_use = crate::util::astd_read_c_string_to_vec(r).await?;
+        let reserved_for_future_use = String::from_utf8(reserved_for_future_use)?;
+
+        let category_if = match category {
+            GmTicketType::STUCK => CMSG_GMTICKET_CREATEGmTicketType::STUCK,
+            GmTicketType::BEHAVIOR_HARASSMENT => {
+                // chat_data_line_count: u32
+                let chat_data_line_count = crate::util::astd_read_u32_le(r).await?;
+
+                // chat_data_size_uncompressed: u32
+                let chat_data_size_uncompressed = crate::util::astd_read_u32_le(r).await?;
+
+                // compressed_chat_data: u8[-]
+                let mut current_size = {
+                    GmTicketType::size() // category: GmTicketType
+                    + Map::size() // map: Map
+                    + 4 // position_x: f32
+                    + 4 // position_y: f32
+                    + 4 // position_z: f32
+                    + message.len() + 1 // message: CString and Null Terminator
+                    + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString and Null Terminator
+                };
+                let mut compressed_chat_data = Vec::with_capacity(body_size as usize - current_size);
+                while current_size < (body_size as usize) {
+                    compressed_chat_data.push(crate::util::astd_read_u8_le(r).await?);
+                    current_size += 1;
+                }
+
+                CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT {
+                    chat_data_line_count,
+                    chat_data_size_uncompressed,
+                    compressed_chat_data,
+                }
+            }
+            GmTicketType::GUILD => CMSG_GMTICKET_CREATEGmTicketType::GUILD,
+            GmTicketType::ITEM => CMSG_GMTICKET_CREATEGmTicketType::ITEM,
+            GmTicketType::ENVIRONMENTAL => CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL,
+            GmTicketType::NONQUEST_CREEP => CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP,
+            GmTicketType::QUEST_QUESTNPC => CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC,
+            GmTicketType::TECHNICAL => CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL,
+            GmTicketType::ACCOUNT_BILLING => CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING,
+            GmTicketType::CHARACTER => CMSG_GMTICKET_CREATEGmTicketType::CHARACTER,
+        };
+
+        Ok(Self {
+            category: category_if,
+            map,
+            position_x,
+            position_y,
+            position_z,
+            message,
+            reserved_for_future_use,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // category: GmTicketType
+        self.category.astd_write(w).await?;
+
+        // map: Map
+        self.map.astd_write(w).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
+
+        // message: CString
+        w.write_all(self.message.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // reserved_for_future_use: CString
+        w.write_all(self.reserved_for_future_use.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        match &self.category {
+            CMSG_GMTICKET_CREATEGmTicketType::STUCK => {}
+            CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT {
+                chat_data_line_count,
+                chat_data_size_uncompressed,
+                compressed_chat_data,
+            } => {
+                // chat_data_line_count: u32
+                w.write_all(&chat_data_line_count.to_le_bytes()).await?;
+
+                // chat_data_size_uncompressed: u32
+                w.write_all(&chat_data_size_uncompressed.to_le_bytes()).await?;
+
+                // compressed_chat_data: u8[-]
+                for i in compressed_chat_data.iter() {
+                    w.write_all(&i.to_le_bytes()).await?;
                 }
 
             }

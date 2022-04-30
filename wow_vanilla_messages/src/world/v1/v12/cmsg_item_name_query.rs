@@ -19,6 +19,7 @@ pub struct CMSG_ITEM_NAME_QUERY {
 
 impl ClientMessageWrite for CMSG_ITEM_NAME_QUERY {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_ITEM_NAME_QUERY {
     const OPCODE: u16 = 0x02c4;
 
@@ -47,6 +48,56 @@ impl MessageBody for CMSG_ITEM_NAME_QUERY {
 
         // guid: Guid
         self.guid.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // item_id: u32
+        let item_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        Ok(Self {
+            item_id,
+            guid,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // item_id: u32
+        w.write_all(&self.item_id.to_le_bytes()).await?;
+
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // item_id: u32
+        let item_id = crate::util::astd_read_u32_le(r).await?;
+
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        Ok(Self {
+            item_id,
+            guid,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // item_id: u32
+        w.write_all(&self.item_id.to_le_bytes()).await?;
+
+        // guid: Guid
+        self.guid.astd_write(w).await?;
 
         Ok(())
     }

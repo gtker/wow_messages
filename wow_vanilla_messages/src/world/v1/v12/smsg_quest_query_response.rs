@@ -44,6 +44,7 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
 
 impl ServerMessageWrite for SMSG_QUEST_QUERY_RESPONSE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
     const OPCODE: u16 = 0x005d;
 
@@ -282,6 +283,478 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
         for i in self.objective_texts.iter() {
             w.write_all(&i.as_bytes())?;
             w.write_all(&[0])?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // quest_id: u32
+        let quest_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // quest_method: u32
+        let quest_method = crate::util::tokio_read_u32_le(r).await?;
+
+        // quest_level: u32
+        let quest_level = crate::util::tokio_read_u32_le(r).await?;
+
+        // zone_or_sort: u32
+        let zone_or_sort = crate::util::tokio_read_u32_le(r).await?;
+
+        // quest_type: u32
+        let quest_type = crate::util::tokio_read_u32_le(r).await?;
+
+        // reputation_objective_faction: u32
+        let reputation_objective_faction = crate::util::tokio_read_u32_le(r).await?;
+
+        // reputation_objective_value: u32
+        let reputation_objective_value = crate::util::tokio_read_u32_le(r).await?;
+
+        // required_opposite_faction: u32
+        let required_opposite_faction = crate::util::tokio_read_u32_le(r).await?;
+
+        // required_opposite_reputation_value: u32
+        let required_opposite_reputation_value = crate::util::tokio_read_u32_le(r).await?;
+
+        // next_quest_in_chain: u32
+        let next_quest_in_chain = crate::util::tokio_read_u32_le(r).await?;
+
+        // money_reward: u32
+        let money_reward = crate::util::tokio_read_u32_le(r).await?;
+
+        // max_level_money_reward: u32
+        let max_level_money_reward = crate::util::tokio_read_u32_le(r).await?;
+
+        // reward_spell: u32
+        let reward_spell = crate::util::tokio_read_u32_le(r).await?;
+
+        // source_item_id: u32
+        let source_item_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // quest_flags: u32
+        let quest_flags = crate::util::tokio_read_u32_le(r).await?;
+
+        // rewards: QuestItemReward[4]
+        let mut rewards = Vec::with_capacity(4 as usize);
+        for i in 0..4 {
+            rewards.push(QuestItemReward::tokio_read(r).await?);
+        }
+        let rewards = rewards.try_into().unwrap();
+
+        // choice_rewards: QuestItemReward[6]
+        let mut choice_rewards = Vec::with_capacity(6 as usize);
+        for i in 0..6 {
+            choice_rewards.push(QuestItemReward::tokio_read(r).await?);
+        }
+        let choice_rewards = choice_rewards.try_into().unwrap();
+
+        // point_map_id: u32
+        let point_map_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::tokio_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::tokio_read_f32_le(r).await?;
+        // point_opt: u32
+        let point_opt = crate::util::tokio_read_u32_le(r).await?;
+
+        // title: CString
+        let title = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let title = String::from_utf8(title)?;
+
+        // objective_text: CString
+        let objective_text = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let objective_text = String::from_utf8(objective_text)?;
+
+        // details: CString
+        let details = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let details = String::from_utf8(details)?;
+
+        // end_text: CString
+        let end_text = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let end_text = String::from_utf8(end_text)?;
+
+        // objectives: QuestObjective[4]
+        let mut objectives = Vec::with_capacity(4 as usize);
+        for i in 0..4 {
+            objectives.push(QuestObjective::tokio_read(r).await?);
+        }
+        let objectives = objectives.try_into().unwrap();
+
+        // objective_texts: CString[4]
+        let mut objective_texts = Vec::with_capacity(4 as usize);
+        for i in 0..4 {
+            let s = crate::util::tokio_read_c_string_to_vec(r).await?;
+            objective_texts[i] = String::from_utf8(s)?;
+        }
+        let objective_texts = objective_texts.try_into().unwrap();
+
+        Ok(Self {
+            quest_id,
+            quest_method,
+            quest_level,
+            zone_or_sort,
+            quest_type,
+            reputation_objective_faction,
+            reputation_objective_value,
+            required_opposite_faction,
+            required_opposite_reputation_value,
+            next_quest_in_chain,
+            money_reward,
+            max_level_money_reward,
+            reward_spell,
+            source_item_id,
+            quest_flags,
+            rewards,
+            choice_rewards,
+            point_map_id,
+            position_x,
+            position_y,
+            point_opt,
+            title,
+            objective_text,
+            details,
+            end_text,
+            objectives,
+            objective_texts,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+        // quest_method: u32
+        w.write_all(&self.quest_method.to_le_bytes()).await?;
+
+        // quest_level: u32
+        w.write_all(&self.quest_level.to_le_bytes()).await?;
+
+        // zone_or_sort: u32
+        w.write_all(&self.zone_or_sort.to_le_bytes()).await?;
+
+        // quest_type: u32
+        w.write_all(&self.quest_type.to_le_bytes()).await?;
+
+        // reputation_objective_faction: u32
+        w.write_all(&self.reputation_objective_faction.to_le_bytes()).await?;
+
+        // reputation_objective_value: u32
+        w.write_all(&self.reputation_objective_value.to_le_bytes()).await?;
+
+        // required_opposite_faction: u32
+        w.write_all(&self.required_opposite_faction.to_le_bytes()).await?;
+
+        // required_opposite_reputation_value: u32
+        w.write_all(&self.required_opposite_reputation_value.to_le_bytes()).await?;
+
+        // next_quest_in_chain: u32
+        w.write_all(&self.next_quest_in_chain.to_le_bytes()).await?;
+
+        // money_reward: u32
+        w.write_all(&self.money_reward.to_le_bytes()).await?;
+
+        // max_level_money_reward: u32
+        w.write_all(&self.max_level_money_reward.to_le_bytes()).await?;
+
+        // reward_spell: u32
+        w.write_all(&self.reward_spell.to_le_bytes()).await?;
+
+        // source_item_id: u32
+        w.write_all(&self.source_item_id.to_le_bytes()).await?;
+
+        // quest_flags: u32
+        w.write_all(&self.quest_flags.to_le_bytes()).await?;
+
+        // rewards: QuestItemReward[4]
+        for i in self.rewards.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // choice_rewards: QuestItemReward[6]
+        for i in self.choice_rewards.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // point_map_id: u32
+        w.write_all(&self.point_map_id.to_le_bytes()).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // point_opt: u32
+        w.write_all(&self.point_opt.to_le_bytes()).await?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // objective_text: CString
+        w.write_all(self.objective_text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // details: CString
+        w.write_all(self.details.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // end_text: CString
+        w.write_all(self.end_text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // objectives: QuestObjective[4]
+        for i in self.objectives.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // objective_texts: CString[4]
+        for i in self.objective_texts.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // quest_id: u32
+        let quest_id = crate::util::astd_read_u32_le(r).await?;
+
+        // quest_method: u32
+        let quest_method = crate::util::astd_read_u32_le(r).await?;
+
+        // quest_level: u32
+        let quest_level = crate::util::astd_read_u32_le(r).await?;
+
+        // zone_or_sort: u32
+        let zone_or_sort = crate::util::astd_read_u32_le(r).await?;
+
+        // quest_type: u32
+        let quest_type = crate::util::astd_read_u32_le(r).await?;
+
+        // reputation_objective_faction: u32
+        let reputation_objective_faction = crate::util::astd_read_u32_le(r).await?;
+
+        // reputation_objective_value: u32
+        let reputation_objective_value = crate::util::astd_read_u32_le(r).await?;
+
+        // required_opposite_faction: u32
+        let required_opposite_faction = crate::util::astd_read_u32_le(r).await?;
+
+        // required_opposite_reputation_value: u32
+        let required_opposite_reputation_value = crate::util::astd_read_u32_le(r).await?;
+
+        // next_quest_in_chain: u32
+        let next_quest_in_chain = crate::util::astd_read_u32_le(r).await?;
+
+        // money_reward: u32
+        let money_reward = crate::util::astd_read_u32_le(r).await?;
+
+        // max_level_money_reward: u32
+        let max_level_money_reward = crate::util::astd_read_u32_le(r).await?;
+
+        // reward_spell: u32
+        let reward_spell = crate::util::astd_read_u32_le(r).await?;
+
+        // source_item_id: u32
+        let source_item_id = crate::util::astd_read_u32_le(r).await?;
+
+        // quest_flags: u32
+        let quest_flags = crate::util::astd_read_u32_le(r).await?;
+
+        // rewards: QuestItemReward[4]
+        let mut rewards = Vec::with_capacity(4 as usize);
+        for i in 0..4 {
+            rewards.push(QuestItemReward::astd_read(r).await?);
+        }
+        let rewards = rewards.try_into().unwrap();
+
+        // choice_rewards: QuestItemReward[6]
+        let mut choice_rewards = Vec::with_capacity(6 as usize);
+        for i in 0..6 {
+            choice_rewards.push(QuestItemReward::astd_read(r).await?);
+        }
+        let choice_rewards = choice_rewards.try_into().unwrap();
+
+        // point_map_id: u32
+        let point_map_id = crate::util::astd_read_u32_le(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::astd_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::astd_read_f32_le(r).await?;
+        // point_opt: u32
+        let point_opt = crate::util::astd_read_u32_le(r).await?;
+
+        // title: CString
+        let title = crate::util::astd_read_c_string_to_vec(r).await?;
+        let title = String::from_utf8(title)?;
+
+        // objective_text: CString
+        let objective_text = crate::util::astd_read_c_string_to_vec(r).await?;
+        let objective_text = String::from_utf8(objective_text)?;
+
+        // details: CString
+        let details = crate::util::astd_read_c_string_to_vec(r).await?;
+        let details = String::from_utf8(details)?;
+
+        // end_text: CString
+        let end_text = crate::util::astd_read_c_string_to_vec(r).await?;
+        let end_text = String::from_utf8(end_text)?;
+
+        // objectives: QuestObjective[4]
+        let mut objectives = Vec::with_capacity(4 as usize);
+        for i in 0..4 {
+            objectives.push(QuestObjective::astd_read(r).await?);
+        }
+        let objectives = objectives.try_into().unwrap();
+
+        // objective_texts: CString[4]
+        let mut objective_texts = Vec::with_capacity(4 as usize);
+        for i in 0..4 {
+            let s = crate::util::astd_read_c_string_to_vec(r).await?;
+            objective_texts[i] = String::from_utf8(s)?;
+        }
+        let objective_texts = objective_texts.try_into().unwrap();
+
+        Ok(Self {
+            quest_id,
+            quest_method,
+            quest_level,
+            zone_or_sort,
+            quest_type,
+            reputation_objective_faction,
+            reputation_objective_value,
+            required_opposite_faction,
+            required_opposite_reputation_value,
+            next_quest_in_chain,
+            money_reward,
+            max_level_money_reward,
+            reward_spell,
+            source_item_id,
+            quest_flags,
+            rewards,
+            choice_rewards,
+            point_map_id,
+            position_x,
+            position_y,
+            point_opt,
+            title,
+            objective_text,
+            details,
+            end_text,
+            objectives,
+            objective_texts,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+        // quest_method: u32
+        w.write_all(&self.quest_method.to_le_bytes()).await?;
+
+        // quest_level: u32
+        w.write_all(&self.quest_level.to_le_bytes()).await?;
+
+        // zone_or_sort: u32
+        w.write_all(&self.zone_or_sort.to_le_bytes()).await?;
+
+        // quest_type: u32
+        w.write_all(&self.quest_type.to_le_bytes()).await?;
+
+        // reputation_objective_faction: u32
+        w.write_all(&self.reputation_objective_faction.to_le_bytes()).await?;
+
+        // reputation_objective_value: u32
+        w.write_all(&self.reputation_objective_value.to_le_bytes()).await?;
+
+        // required_opposite_faction: u32
+        w.write_all(&self.required_opposite_faction.to_le_bytes()).await?;
+
+        // required_opposite_reputation_value: u32
+        w.write_all(&self.required_opposite_reputation_value.to_le_bytes()).await?;
+
+        // next_quest_in_chain: u32
+        w.write_all(&self.next_quest_in_chain.to_le_bytes()).await?;
+
+        // money_reward: u32
+        w.write_all(&self.money_reward.to_le_bytes()).await?;
+
+        // max_level_money_reward: u32
+        w.write_all(&self.max_level_money_reward.to_le_bytes()).await?;
+
+        // reward_spell: u32
+        w.write_all(&self.reward_spell.to_le_bytes()).await?;
+
+        // source_item_id: u32
+        w.write_all(&self.source_item_id.to_le_bytes()).await?;
+
+        // quest_flags: u32
+        w.write_all(&self.quest_flags.to_le_bytes()).await?;
+
+        // rewards: QuestItemReward[4]
+        for i in self.rewards.iter() {
+            i.astd_write(w).await?;
+        }
+
+        // choice_rewards: QuestItemReward[6]
+        for i in self.choice_rewards.iter() {
+            i.astd_write(w).await?;
+        }
+
+        // point_map_id: u32
+        w.write_all(&self.point_map_id.to_le_bytes()).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // point_opt: u32
+        w.write_all(&self.point_opt.to_le_bytes()).await?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // objective_text: CString
+        w.write_all(self.objective_text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // details: CString
+        w.write_all(self.details.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // end_text: CString
+        w.write_all(self.end_text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // objectives: QuestObjective[4]
+        for i in self.objectives.iter() {
+            i.astd_write(w).await?;
+        }
+
+        // objective_texts: CString[4]
+        for i in self.objective_texts.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
         }
 
         Ok(())

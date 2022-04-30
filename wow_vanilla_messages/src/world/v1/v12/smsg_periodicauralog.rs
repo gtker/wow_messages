@@ -21,6 +21,7 @@ pub struct SMSG_PERIODICAURALOG {
 
 impl ServerMessageWrite for SMSG_PERIODICAURALOG {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_PERIODICAURALOG {
     const OPCODE: u16 = 0x024e;
 
@@ -73,6 +74,106 @@ impl MessageBody for SMSG_PERIODICAURALOG {
         // auras: AuraLog[amount_of_auras]
         for i in self.auras.iter() {
             i.write(w)?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // target: PackedGuid
+        let target = Guid::tokio_read_packed(r).await?;
+
+        // caster: PackedGuid
+        let caster = Guid::tokio_read_packed(r).await?;
+
+        // spell: u32
+        let spell = crate::util::tokio_read_u32_le(r).await?;
+
+        // amount_of_auras: u32
+        let amount_of_auras = crate::util::tokio_read_u32_le(r).await?;
+
+        // auras: AuraLog[amount_of_auras]
+        let mut auras = Vec::with_capacity(amount_of_auras as usize);
+        for i in 0..amount_of_auras {
+            auras.push(AuraLog::tokio_read(r).await?);
+        }
+
+        Ok(Self {
+            target,
+            caster,
+            spell,
+            auras,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // target: PackedGuid
+        self.target.tokio_write_packed(w).await?;
+
+        // caster: PackedGuid
+        self.caster.tokio_write_packed(w).await?;
+
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes()).await?;
+
+        // amount_of_auras: u32
+        w.write_all(&(self.auras.len() as u32).to_le_bytes()).await?;
+
+        // auras: AuraLog[amount_of_auras]
+        for i in self.auras.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // target: PackedGuid
+        let target = Guid::astd_read_packed(r).await?;
+
+        // caster: PackedGuid
+        let caster = Guid::astd_read_packed(r).await?;
+
+        // spell: u32
+        let spell = crate::util::astd_read_u32_le(r).await?;
+
+        // amount_of_auras: u32
+        let amount_of_auras = crate::util::astd_read_u32_le(r).await?;
+
+        // auras: AuraLog[amount_of_auras]
+        let mut auras = Vec::with_capacity(amount_of_auras as usize);
+        for i in 0..amount_of_auras {
+            auras.push(AuraLog::astd_read(r).await?);
+        }
+
+        Ok(Self {
+            target,
+            caster,
+            spell,
+            auras,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // target: PackedGuid
+        self.target.astd_write_packed(w).await?;
+
+        // caster: PackedGuid
+        self.caster.astd_write_packed(w).await?;
+
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes()).await?;
+
+        // amount_of_auras: u32
+        w.write_all(&(self.auras.len() as u32).to_le_bytes()).await?;
+
+        // auras: AuraLog[amount_of_auras]
+        for i in self.auras.iter() {
+            i.astd_write(w).await?;
         }
 
         Ok(())

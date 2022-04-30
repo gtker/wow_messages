@@ -16,6 +16,7 @@ pub struct SMSG_IGNORE_LIST {
 
 impl ServerMessageWrite for SMSG_IGNORE_LIST {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_IGNORE_LIST {
     const OPCODE: u16 = 0x006b;
 
@@ -47,6 +48,64 @@ impl MessageBody for SMSG_IGNORE_LIST {
         // ignored: u64[amount_of_ignored]
         for i in self.ignored.iter() {
             w.write_all(&i.to_le_bytes())?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // amount_of_ignored: u8
+        let amount_of_ignored = crate::util::tokio_read_u8_le(r).await?;
+
+        // ignored: u64[amount_of_ignored]
+        let mut ignored = Vec::with_capacity(amount_of_ignored as usize);
+        for i in 0..amount_of_ignored {
+            ignored.push(crate::util::tokio_read_u64_le(r).await?);
+        }
+
+        Ok(Self {
+            ignored,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // amount_of_ignored: u8
+        w.write_all(&(self.ignored.len() as u8).to_le_bytes()).await?;
+
+        // ignored: u64[amount_of_ignored]
+        for i in self.ignored.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // amount_of_ignored: u8
+        let amount_of_ignored = crate::util::astd_read_u8_le(r).await?;
+
+        // ignored: u64[amount_of_ignored]
+        let mut ignored = Vec::with_capacity(amount_of_ignored as usize);
+        for i in 0..amount_of_ignored {
+            ignored.push(crate::util::astd_read_u64_le(r).await?);
+        }
+
+        Ok(Self {
+            ignored,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // amount_of_ignored: u8
+        w.write_all(&(self.ignored.len() as u8).to_le_bytes()).await?;
+
+        // ignored: u64[amount_of_ignored]
+        for i in self.ignored.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
         }
 
         Ok(())

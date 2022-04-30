@@ -16,6 +16,7 @@ pub struct CMSG_TOGGLE_PVP {
 
 impl ClientMessageWrite for CMSG_TOGGLE_PVP {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_TOGGLE_PVP {
     const OPCODE: u16 = 0x0253;
 
@@ -51,6 +52,74 @@ impl MessageBody for CMSG_TOGGLE_PVP {
         if let Some(v) = &self.set {
             // enable_pvp: u8
             w.write_all(&v.enable_pvp.to_le_bytes())?;
+
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // optional set
+        let current_size = {
+            0 // If no fields are present, TODO remove when not needed
+        };
+        let set = if current_size < body_size as usize {
+            // enable_pvp: u8
+            let enable_pvp = crate::util::tokio_read_u8_le(r).await?;
+
+            Some(CMSG_TOGGLE_PVP_set {
+                enable_pvp,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            set,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // optional set
+        if let Some(v) = &self.set {
+            // enable_pvp: u8
+            w.write_all(&v.enable_pvp.to_le_bytes()).await?;
+
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // optional set
+        let current_size = {
+            0 // If no fields are present, TODO remove when not needed
+        };
+        let set = if current_size < body_size as usize {
+            // enable_pvp: u8
+            let enable_pvp = crate::util::astd_read_u8_le(r).await?;
+
+            Some(CMSG_TOGGLE_PVP_set {
+                enable_pvp,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            set,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // optional set
+        if let Some(v) = &self.set {
+            // enable_pvp: u8
+            w.write_all(&v.enable_pvp.to_le_bytes()).await?;
 
         }
 

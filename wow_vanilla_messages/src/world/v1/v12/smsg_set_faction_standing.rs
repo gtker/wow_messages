@@ -17,6 +17,7 @@ pub struct SMSG_SET_FACTION_STANDING {
 
 impl ServerMessageWrite for SMSG_SET_FACTION_STANDING {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_SET_FACTION_STANDING {
     const OPCODE: u16 = 0x0124;
 
@@ -48,6 +49,64 @@ impl MessageBody for SMSG_SET_FACTION_STANDING {
         // factions: Faction[amount_of_factions]
         for i in self.factions.iter() {
             i.write(w)?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // amount_of_factions: u32
+        let amount_of_factions = crate::util::tokio_read_u32_le(r).await?;
+
+        // factions: Faction[amount_of_factions]
+        let mut factions = Vec::with_capacity(amount_of_factions as usize);
+        for i in 0..amount_of_factions {
+            factions.push(Faction::tokio_read(r).await?);
+        }
+
+        Ok(Self {
+            factions,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // amount_of_factions: u32
+        w.write_all(&(self.factions.len() as u32).to_le_bytes()).await?;
+
+        // factions: Faction[amount_of_factions]
+        for i in self.factions.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // amount_of_factions: u32
+        let amount_of_factions = crate::util::astd_read_u32_le(r).await?;
+
+        // factions: Faction[amount_of_factions]
+        let mut factions = Vec::with_capacity(amount_of_factions as usize);
+        for i in 0..amount_of_factions {
+            factions.push(Faction::astd_read(r).await?);
+        }
+
+        Ok(Self {
+            factions,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // amount_of_factions: u32
+        w.write_all(&(self.factions.len() as u32).to_le_bytes()).await?;
+
+        // factions: Faction[amount_of_factions]
+        for i in self.factions.iter() {
+            i.astd_write(w).await?;
         }
 
         Ok(())

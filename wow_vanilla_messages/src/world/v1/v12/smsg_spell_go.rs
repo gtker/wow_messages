@@ -26,6 +26,7 @@ pub struct SMSG_SPELL_GO {
 
 impl ServerMessageWrite for SMSG_SPELL_GO {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_SPELL_GO {
     const OPCODE: u16 = 0x0132;
 
@@ -134,6 +135,218 @@ impl MessageBody for SMSG_SPELL_GO {
 
         if let Some(s) = &self.flags.ammo {
             s.write(w)?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // cast_item: PackedGuid
+        let cast_item = Guid::tokio_read_packed(r).await?;
+
+        // caster: PackedGuid
+        let caster = Guid::tokio_read_packed(r).await?;
+
+        // spell: u32
+        let spell = crate::util::tokio_read_u32_le(r).await?;
+
+        // flags: CastFlags
+        let flags = CastFlags::tokio_read(r).await?;
+
+        // amount_of_hits: u8
+        let amount_of_hits = crate::util::tokio_read_u8_le(r).await?;
+
+        // hits: Guid[amount_of_hits]
+        let mut hits = Vec::with_capacity(amount_of_hits as usize);
+        for i in 0..amount_of_hits {
+            hits.push(Guid::tokio_read(r).await?);
+        }
+
+        // amount_of_misses: u8
+        let amount_of_misses = crate::util::tokio_read_u8_le(r).await?;
+
+        // misses: SpellMiss[amount_of_misses]
+        let mut misses = Vec::with_capacity(amount_of_misses as usize);
+        for i in 0..amount_of_misses {
+            misses.push(SpellMiss::tokio_read(r).await?);
+        }
+
+        // targets: SpellCastTargets
+        let targets = SpellCastTargets::tokio_read(r).await?;
+
+        let flags_AMMO = if flags.is_AMMO() {
+            // ammo_display_id: u32
+            let ammo_display_id = crate::util::tokio_read_u32_le(r).await?;
+
+            // ammo_inventory_type: u32
+            let ammo_inventory_type = crate::util::tokio_read_u32_le(r).await?;
+
+            Some(SMSG_SPELL_GOCastFlagsAMMO {
+                ammo_display_id,
+                ammo_inventory_type,
+            })
+        } else {
+            None
+        };
+
+        let flags = SMSG_SPELL_GOCastFlags {
+            inner: flags.as_u16(),
+            ammo: flags_AMMO,
+        };
+
+        Ok(Self {
+            cast_item,
+            caster,
+            spell,
+            flags,
+            hits,
+            misses,
+            targets,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // cast_item: PackedGuid
+        self.cast_item.tokio_write_packed(w).await?;
+
+        // caster: PackedGuid
+        self.caster.tokio_write_packed(w).await?;
+
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes()).await?;
+
+        // flags: CastFlags
+        self.flags.tokio_write(w).await?;
+
+        // amount_of_hits: u8
+        w.write_all(&(self.hits.len() as u8).to_le_bytes()).await?;
+
+        // hits: Guid[amount_of_hits]
+        for i in self.hits.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // amount_of_misses: u8
+        w.write_all(&(self.misses.len() as u8).to_le_bytes()).await?;
+
+        // misses: SpellMiss[amount_of_misses]
+        for i in self.misses.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // targets: SpellCastTargets
+        self.targets.tokio_write(w).await?;
+
+        if let Some(s) = &self.flags.ammo {
+            s.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // cast_item: PackedGuid
+        let cast_item = Guid::astd_read_packed(r).await?;
+
+        // caster: PackedGuid
+        let caster = Guid::astd_read_packed(r).await?;
+
+        // spell: u32
+        let spell = crate::util::astd_read_u32_le(r).await?;
+
+        // flags: CastFlags
+        let flags = CastFlags::astd_read(r).await?;
+
+        // amount_of_hits: u8
+        let amount_of_hits = crate::util::astd_read_u8_le(r).await?;
+
+        // hits: Guid[amount_of_hits]
+        let mut hits = Vec::with_capacity(amount_of_hits as usize);
+        for i in 0..amount_of_hits {
+            hits.push(Guid::astd_read(r).await?);
+        }
+
+        // amount_of_misses: u8
+        let amount_of_misses = crate::util::astd_read_u8_le(r).await?;
+
+        // misses: SpellMiss[amount_of_misses]
+        let mut misses = Vec::with_capacity(amount_of_misses as usize);
+        for i in 0..amount_of_misses {
+            misses.push(SpellMiss::astd_read(r).await?);
+        }
+
+        // targets: SpellCastTargets
+        let targets = SpellCastTargets::astd_read(r).await?;
+
+        let flags_AMMO = if flags.is_AMMO() {
+            // ammo_display_id: u32
+            let ammo_display_id = crate::util::astd_read_u32_le(r).await?;
+
+            // ammo_inventory_type: u32
+            let ammo_inventory_type = crate::util::astd_read_u32_le(r).await?;
+
+            Some(SMSG_SPELL_GOCastFlagsAMMO {
+                ammo_display_id,
+                ammo_inventory_type,
+            })
+        } else {
+            None
+        };
+
+        let flags = SMSG_SPELL_GOCastFlags {
+            inner: flags.as_u16(),
+            ammo: flags_AMMO,
+        };
+
+        Ok(Self {
+            cast_item,
+            caster,
+            spell,
+            flags,
+            hits,
+            misses,
+            targets,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // cast_item: PackedGuid
+        self.cast_item.astd_write_packed(w).await?;
+
+        // caster: PackedGuid
+        self.caster.astd_write_packed(w).await?;
+
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes()).await?;
+
+        // flags: CastFlags
+        self.flags.astd_write(w).await?;
+
+        // amount_of_hits: u8
+        w.write_all(&(self.hits.len() as u8).to_le_bytes()).await?;
+
+        // hits: Guid[amount_of_hits]
+        for i in self.hits.iter() {
+            i.astd_write(w).await?;
+        }
+
+        // amount_of_misses: u8
+        w.write_all(&(self.misses.len() as u8).to_le_bytes()).await?;
+
+        // misses: SpellMiss[amount_of_misses]
+        for i in self.misses.iter() {
+            i.astd_write(w).await?;
+        }
+
+        // targets: SpellCastTargets
+        self.targets.astd_write(w).await?;
+
+        if let Some(s) = &self.flags.ammo {
+            s.astd_write(w).await?;
         }
 
         Ok(())

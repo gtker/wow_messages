@@ -23,6 +23,7 @@ pub struct SMSG_BATTLEFIELD_LIST {
 
 impl ServerMessageWrite for SMSG_BATTLEFIELD_LIST {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_BATTLEFIELD_LIST {
     const OPCODE: u16 = 0x023d;
 
@@ -89,6 +90,134 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
         // battlegrounds: u32[number_of_battlegrounds]
         for i in self.battlegrounds.iter() {
             w.write_all(&i.to_le_bytes())?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // battlemaster: Guid
+        let battlemaster = Guid::tokio_read(r).await?;
+
+        // map: Map
+        let map = Map::tokio_read(r).await?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::tokio_read_u8_le(r).await?;
+
+        // unknown2: u32
+        let unknown2 = crate::util::tokio_read_u32_le(r).await?;
+
+        // unknown3: u8
+        let unknown3 = crate::util::tokio_read_u8_le(r).await?;
+
+        // number_of_battlegrounds: u32
+        let number_of_battlegrounds = crate::util::tokio_read_u32_le(r).await?;
+
+        // battlegrounds: u32[number_of_battlegrounds]
+        let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
+        for i in 0..number_of_battlegrounds {
+            battlegrounds.push(crate::util::tokio_read_u32_le(r).await?);
+        }
+
+        Ok(Self {
+            battlemaster,
+            map,
+            unknown1,
+            unknown2,
+            unknown3,
+            battlegrounds,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // battlemaster: Guid
+        self.battlemaster.tokio_write(w).await?;
+
+        // map: Map
+        self.map.tokio_write(w).await?;
+
+        // unknown1: u8
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // unknown2: u32
+        w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+        // unknown3: u8
+        w.write_all(&self.unknown3.to_le_bytes()).await?;
+
+        // number_of_battlegrounds: u32
+        w.write_all(&(self.battlegrounds.len() as u32).to_le_bytes()).await?;
+
+        // battlegrounds: u32[number_of_battlegrounds]
+        for i in self.battlegrounds.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // battlemaster: Guid
+        let battlemaster = Guid::astd_read(r).await?;
+
+        // map: Map
+        let map = Map::astd_read(r).await?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::astd_read_u8_le(r).await?;
+
+        // unknown2: u32
+        let unknown2 = crate::util::astd_read_u32_le(r).await?;
+
+        // unknown3: u8
+        let unknown3 = crate::util::astd_read_u8_le(r).await?;
+
+        // number_of_battlegrounds: u32
+        let number_of_battlegrounds = crate::util::astd_read_u32_le(r).await?;
+
+        // battlegrounds: u32[number_of_battlegrounds]
+        let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
+        for i in 0..number_of_battlegrounds {
+            battlegrounds.push(crate::util::astd_read_u32_le(r).await?);
+        }
+
+        Ok(Self {
+            battlemaster,
+            map,
+            unknown1,
+            unknown2,
+            unknown3,
+            battlegrounds,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // battlemaster: Guid
+        self.battlemaster.astd_write(w).await?;
+
+        // map: Map
+        self.map.astd_write(w).await?;
+
+        // unknown1: u8
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // unknown2: u32
+        w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+        // unknown3: u8
+        w.write_all(&self.unknown3.to_le_bytes()).await?;
+
+        // number_of_battlegrounds: u32
+        w.write_all(&(self.battlegrounds.len() as u32).to_le_bytes()).await?;
+
+        // battlegrounds: u32[number_of_battlegrounds]
+        for i in self.battlegrounds.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
         }
 
         Ok(())

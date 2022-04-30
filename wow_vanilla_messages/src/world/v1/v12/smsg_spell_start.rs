@@ -24,6 +24,7 @@ pub struct SMSG_SPELL_START {
 
 impl ServerMessageWrite for SMSG_SPELL_START {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_SPELL_START {
     const OPCODE: u16 = 0x0131;
 
@@ -103,6 +104,160 @@ impl MessageBody for SMSG_SPELL_START {
 
         if let Some(s) = &self.flags.ammo {
             s.write(w)?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // cast_item: PackedGuid
+        let cast_item = Guid::tokio_read_packed(r).await?;
+
+        // caster: PackedGuid
+        let caster = Guid::tokio_read_packed(r).await?;
+
+        // spell: u32
+        let spell = crate::util::tokio_read_u32_le(r).await?;
+
+        // flags: CastFlags
+        let flags = CastFlags::tokio_read(r).await?;
+
+        // timer: u32
+        let timer = crate::util::tokio_read_u32_le(r).await?;
+
+        // targets: SpellCastTargets
+        let targets = SpellCastTargets::tokio_read(r).await?;
+
+        let flags_AMMO = if flags.is_AMMO() {
+            // ammo_display_id: u32
+            let ammo_display_id = crate::util::tokio_read_u32_le(r).await?;
+
+            // ammo_inventory_type: u32
+            let ammo_inventory_type = crate::util::tokio_read_u32_le(r).await?;
+
+            Some(SMSG_SPELL_STARTCastFlagsAMMO {
+                ammo_display_id,
+                ammo_inventory_type,
+            })
+        } else {
+            None
+        };
+
+        let flags = SMSG_SPELL_STARTCastFlags {
+            inner: flags.as_u16(),
+            ammo: flags_AMMO,
+        };
+
+        Ok(Self {
+            cast_item,
+            caster,
+            spell,
+            flags,
+            timer,
+            targets,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // cast_item: PackedGuid
+        self.cast_item.tokio_write_packed(w).await?;
+
+        // caster: PackedGuid
+        self.caster.tokio_write_packed(w).await?;
+
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes()).await?;
+
+        // flags: CastFlags
+        self.flags.tokio_write(w).await?;
+
+        // timer: u32
+        w.write_all(&self.timer.to_le_bytes()).await?;
+
+        // targets: SpellCastTargets
+        self.targets.tokio_write(w).await?;
+
+        if let Some(s) = &self.flags.ammo {
+            s.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // cast_item: PackedGuid
+        let cast_item = Guid::astd_read_packed(r).await?;
+
+        // caster: PackedGuid
+        let caster = Guid::astd_read_packed(r).await?;
+
+        // spell: u32
+        let spell = crate::util::astd_read_u32_le(r).await?;
+
+        // flags: CastFlags
+        let flags = CastFlags::astd_read(r).await?;
+
+        // timer: u32
+        let timer = crate::util::astd_read_u32_le(r).await?;
+
+        // targets: SpellCastTargets
+        let targets = SpellCastTargets::astd_read(r).await?;
+
+        let flags_AMMO = if flags.is_AMMO() {
+            // ammo_display_id: u32
+            let ammo_display_id = crate::util::astd_read_u32_le(r).await?;
+
+            // ammo_inventory_type: u32
+            let ammo_inventory_type = crate::util::astd_read_u32_le(r).await?;
+
+            Some(SMSG_SPELL_STARTCastFlagsAMMO {
+                ammo_display_id,
+                ammo_inventory_type,
+            })
+        } else {
+            None
+        };
+
+        let flags = SMSG_SPELL_STARTCastFlags {
+            inner: flags.as_u16(),
+            ammo: flags_AMMO,
+        };
+
+        Ok(Self {
+            cast_item,
+            caster,
+            spell,
+            flags,
+            timer,
+            targets,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // cast_item: PackedGuid
+        self.cast_item.astd_write_packed(w).await?;
+
+        // caster: PackedGuid
+        self.caster.astd_write_packed(w).await?;
+
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes()).await?;
+
+        // flags: CastFlags
+        self.flags.astd_write(w).await?;
+
+        // timer: u32
+        w.write_all(&self.timer.to_le_bytes()).await?;
+
+        // targets: SpellCastTargets
+        self.targets.astd_write(w).await?;
+
+        if let Some(s) = &self.flags.ammo {
+            s.astd_write(w).await?;
         }
 
         Ok(())

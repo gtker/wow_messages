@@ -24,6 +24,7 @@ pub struct SMSG_RESISTLOG {
 
 impl ServerMessageWrite for SMSG_RESISTLOG {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_RESISTLOG {
     const OPCODE: u16 = 0x01d6;
 
@@ -85,6 +86,122 @@ impl MessageBody for SMSG_RESISTLOG {
 
         // unknown5: u32
         w.write_all(&self.unknown5.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid1: Guid
+        let guid1 = Guid::tokio_read(r).await?;
+
+        // guid2: Guid
+        let guid2 = Guid::tokio_read(r).await?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::tokio_read_u32_le(r).await?;
+
+        // unknown2: f32
+        let unknown2 = crate::util::tokio_read_f32_le(r).await?;
+        // unknown3: f32
+        let unknown3 = crate::util::tokio_read_f32_le(r).await?;
+        // unknown4: u32
+        let unknown4 = crate::util::tokio_read_u32_le(r).await?;
+
+        // unknown5: u32
+        let unknown5 = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            guid1,
+            guid2,
+            unknown1,
+            unknown2,
+            unknown3,
+            unknown4,
+            unknown5,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid1: Guid
+        self.guid1.tokio_write(w).await?;
+
+        // guid2: Guid
+        self.guid2.tokio_write(w).await?;
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // unknown2: f32
+        w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+        // unknown3: f32
+        w.write_all(&self.unknown3.to_le_bytes()).await?;
+
+        // unknown4: u32
+        w.write_all(&self.unknown4.to_le_bytes()).await?;
+
+        // unknown5: u32
+        w.write_all(&self.unknown5.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid1: Guid
+        let guid1 = Guid::astd_read(r).await?;
+
+        // guid2: Guid
+        let guid2 = Guid::astd_read(r).await?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::astd_read_u32_le(r).await?;
+
+        // unknown2: f32
+        let unknown2 = crate::util::astd_read_f32_le(r).await?;
+        // unknown3: f32
+        let unknown3 = crate::util::astd_read_f32_le(r).await?;
+        // unknown4: u32
+        let unknown4 = crate::util::astd_read_u32_le(r).await?;
+
+        // unknown5: u32
+        let unknown5 = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            guid1,
+            guid2,
+            unknown1,
+            unknown2,
+            unknown3,
+            unknown4,
+            unknown5,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid1: Guid
+        self.guid1.astd_write(w).await?;
+
+        // guid2: Guid
+        self.guid2.astd_write(w).await?;
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // unknown2: f32
+        w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+        // unknown3: f32
+        w.write_all(&self.unknown3.to_le_bytes()).await?;
+
+        // unknown4: u32
+        w.write_all(&self.unknown4.to_le_bytes()).await?;
+
+        // unknown5: u32
+        w.write_all(&self.unknown5.to_le_bytes()).await?;
 
         Ok(())
     }

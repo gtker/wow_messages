@@ -23,6 +23,7 @@ impl ClientMessageWrite for MessageWithComplexTypes {}
 
 impl ServerMessageWrite for MessageWithComplexTypes {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MessageWithComplexTypes {
     const OPCODE: u16 = 0x0003;
 
@@ -58,6 +59,70 @@ impl MessageBody for MessageWithComplexTypes {
 
         // simple_struct: StructWithAllBuiltInTypes
         self.simple_struct.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // simple_enum: SimpleEnum
+        let simple_enum = SimpleEnum::tokio_read(r).await?;
+
+        // simple_flag: SimpleFlag
+        let simple_flag = SimpleFlag::tokio_read(r).await?;
+
+        // simple_struct: StructWithAllBuiltInTypes
+        let simple_struct = StructWithAllBuiltInTypes::tokio_read(r).await?;
+
+        Ok(Self {
+            simple_enum,
+            simple_flag,
+            simple_struct,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // simple_enum: SimpleEnum
+        self.simple_enum.tokio_write(w).await?;
+
+        // simple_flag: SimpleFlag
+        self.simple_flag.tokio_write(w).await?;
+
+        // simple_struct: StructWithAllBuiltInTypes
+        self.simple_struct.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // simple_enum: SimpleEnum
+        let simple_enum = SimpleEnum::astd_read(r).await?;
+
+        // simple_flag: SimpleFlag
+        let simple_flag = SimpleFlag::astd_read(r).await?;
+
+        // simple_struct: StructWithAllBuiltInTypes
+        let simple_struct = StructWithAllBuiltInTypes::astd_read(r).await?;
+
+        Ok(Self {
+            simple_enum,
+            simple_flag,
+            simple_struct,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // simple_enum: SimpleEnum
+        self.simple_enum.astd_write(w).await?;
+
+        // simple_flag: SimpleFlag
+        self.simple_flag.astd_write(w).await?;
+
+        // simple_struct: StructWithAllBuiltInTypes
+        self.simple_struct.astd_write(w).await?;
 
         Ok(())
     }

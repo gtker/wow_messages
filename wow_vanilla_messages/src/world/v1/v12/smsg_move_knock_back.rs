@@ -22,6 +22,7 @@ pub struct SMSG_MOVE_KNOCK_BACK {
 
 impl ServerMessageWrite for SMSG_MOVE_KNOCK_BACK {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_MOVE_KNOCK_BACK {
     const OPCODE: u16 = 0x00ef;
 
@@ -74,6 +75,104 @@ impl MessageBody for SMSG_MOVE_KNOCK_BACK {
 
         // vertical_speed: f32
         w.write_all(&self.vertical_speed.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: PackedGuid
+        let guid = Guid::tokio_read_packed(r).await?;
+
+        // movement_counter: u32
+        let movement_counter = crate::util::tokio_read_u32_le(r).await?;
+
+        // v_cos: f32
+        let v_cos = crate::util::tokio_read_f32_le(r).await?;
+        // v_sin: f32
+        let v_sin = crate::util::tokio_read_f32_le(r).await?;
+        // horizontal_speed: f32
+        let horizontal_speed = crate::util::tokio_read_f32_le(r).await?;
+        // vertical_speed: f32
+        let vertical_speed = crate::util::tokio_read_f32_le(r).await?;
+        Ok(Self {
+            guid,
+            movement_counter,
+            v_cos,
+            v_sin,
+            horizontal_speed,
+            vertical_speed,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: PackedGuid
+        self.guid.tokio_write_packed(w).await?;
+
+        // movement_counter: u32
+        w.write_all(&self.movement_counter.to_le_bytes()).await?;
+
+        // v_cos: f32
+        w.write_all(&self.v_cos.to_le_bytes()).await?;
+
+        // v_sin: f32
+        w.write_all(&self.v_sin.to_le_bytes()).await?;
+
+        // horizontal_speed: f32
+        w.write_all(&self.horizontal_speed.to_le_bytes()).await?;
+
+        // vertical_speed: f32
+        w.write_all(&self.vertical_speed.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: PackedGuid
+        let guid = Guid::astd_read_packed(r).await?;
+
+        // movement_counter: u32
+        let movement_counter = crate::util::astd_read_u32_le(r).await?;
+
+        // v_cos: f32
+        let v_cos = crate::util::astd_read_f32_le(r).await?;
+        // v_sin: f32
+        let v_sin = crate::util::astd_read_f32_le(r).await?;
+        // horizontal_speed: f32
+        let horizontal_speed = crate::util::astd_read_f32_le(r).await?;
+        // vertical_speed: f32
+        let vertical_speed = crate::util::astd_read_f32_le(r).await?;
+        Ok(Self {
+            guid,
+            movement_counter,
+            v_cos,
+            v_sin,
+            horizontal_speed,
+            vertical_speed,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: PackedGuid
+        self.guid.astd_write_packed(w).await?;
+
+        // movement_counter: u32
+        w.write_all(&self.movement_counter.to_le_bytes()).await?;
+
+        // v_cos: f32
+        w.write_all(&self.v_cos.to_le_bytes()).await?;
+
+        // v_sin: f32
+        w.write_all(&self.v_sin.to_le_bytes()).await?;
+
+        // horizontal_speed: f32
+        w.write_all(&self.horizontal_speed.to_le_bytes()).await?;
+
+        // vertical_speed: f32
+        w.write_all(&self.vertical_speed.to_le_bytes()).await?;
 
         Ok(())
     }

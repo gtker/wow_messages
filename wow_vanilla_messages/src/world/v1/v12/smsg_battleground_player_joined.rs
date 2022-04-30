@@ -18,6 +18,7 @@ pub struct SMSG_BATTLEGROUND_PLAYER_JOINED {
 
 impl ServerMessageWrite for SMSG_BATTLEGROUND_PLAYER_JOINED {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_BATTLEGROUND_PLAYER_JOINED {
     const OPCODE: u16 = 0x02ec;
 
@@ -39,6 +40,42 @@ impl MessageBody for SMSG_BATTLEGROUND_PLAYER_JOINED {
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player_guid: Guid
         self.player_guid.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // player_guid: Guid
+        let player_guid = Guid::tokio_read(r).await?;
+
+        Ok(Self {
+            player_guid,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // player_guid: Guid
+        self.player_guid.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // player_guid: Guid
+        let player_guid = Guid::astd_read(r).await?;
+
+        Ok(Self {
+            player_guid,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // player_guid: Guid
+        self.player_guid.astd_write(w).await?;
 
         Ok(())
     }

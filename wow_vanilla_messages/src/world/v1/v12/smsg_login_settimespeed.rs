@@ -18,6 +18,7 @@ pub struct SMSG_LOGIN_SETTIMESPEED {
 
 impl ServerMessageWrite for SMSG_LOGIN_SETTIMESPEED {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_LOGIN_SETTIMESPEED {
     const OPCODE: u16 = 0x0042;
 
@@ -45,6 +46,54 @@ impl MessageBody for SMSG_LOGIN_SETTIMESPEED {
 
         // game_speed: f32
         w.write_all(&self.game_speed.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // secs_to_time_bit_field: u32
+        let secs_to_time_bit_field = crate::util::tokio_read_u32_le(r).await?;
+
+        // game_speed: f32
+        let game_speed = crate::util::tokio_read_f32_le(r).await?;
+        Ok(Self {
+            secs_to_time_bit_field,
+            game_speed,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // secs_to_time_bit_field: u32
+        w.write_all(&self.secs_to_time_bit_field.to_le_bytes()).await?;
+
+        // game_speed: f32
+        w.write_all(&self.game_speed.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // secs_to_time_bit_field: u32
+        let secs_to_time_bit_field = crate::util::astd_read_u32_le(r).await?;
+
+        // game_speed: f32
+        let game_speed = crate::util::astd_read_f32_le(r).await?;
+        Ok(Self {
+            secs_to_time_bit_field,
+            game_speed,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // secs_to_time_bit_field: u32
+        w.write_all(&self.secs_to_time_bit_field.to_le_bytes()).await?;
+
+        // game_speed: f32
+        w.write_all(&self.game_speed.to_le_bytes()).await?;
 
         Ok(())
     }

@@ -21,6 +21,7 @@ pub struct SMSG_SPELL_FAILURE {
 
 impl ServerMessageWrite for SMSG_SPELL_FAILURE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_SPELL_FAILURE {
     const OPCODE: u16 = 0x0133;
 
@@ -56,6 +57,70 @@ impl MessageBody for SMSG_SPELL_FAILURE {
 
         // result: SpellCastResult
         self.result.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // id: u32
+        let id = crate::util::tokio_read_u32_le(r).await?;
+
+        // result: SpellCastResult
+        let result = SpellCastResult::tokio_read(r).await?;
+
+        Ok(Self {
+            guid,
+            id,
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // id: u32
+        w.write_all(&self.id.to_le_bytes()).await?;
+
+        // result: SpellCastResult
+        self.result.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // id: u32
+        let id = crate::util::astd_read_u32_le(r).await?;
+
+        // result: SpellCastResult
+        let result = SpellCastResult::astd_read(r).await?;
+
+        Ok(Self {
+            guid,
+            id,
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // id: u32
+        w.write_all(&self.id.to_le_bytes()).await?;
+
+        // result: SpellCastResult
+        self.result.astd_write(w).await?;
 
         Ok(())
     }

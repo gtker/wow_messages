@@ -18,6 +18,7 @@ pub struct CMSG_SET_ACTION_BUTTON {
 
 impl ClientMessageWrite for CMSG_SET_ACTION_BUTTON {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_SET_ACTION_BUTTON {
     const OPCODE: u16 = 0x0128;
 
@@ -46,6 +47,56 @@ impl MessageBody for CMSG_SET_ACTION_BUTTON {
 
         // action_type: u32
         w.write_all(&self.action_type.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // button: u8
+        let button = crate::util::tokio_read_u8_le(r).await?;
+
+        // action_type: u32
+        let action_type = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            button,
+            action_type,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // button: u8
+        w.write_all(&self.button.to_le_bytes()).await?;
+
+        // action_type: u32
+        w.write_all(&self.action_type.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // button: u8
+        let button = crate::util::astd_read_u8_le(r).await?;
+
+        // action_type: u32
+        let action_type = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            button,
+            action_type,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // button: u8
+        w.write_all(&self.button.to_le_bytes()).await?;
+
+        // action_type: u32
+        w.write_all(&self.action_type.to_le_bytes()).await?;
 
         Ok(())
     }

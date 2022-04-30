@@ -17,6 +17,7 @@ pub struct SMSG_FRIEND_LIST {
 
 impl ServerMessageWrite for SMSG_FRIEND_LIST {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_FRIEND_LIST {
     const OPCODE: u16 = 0x0067;
 
@@ -48,6 +49,64 @@ impl MessageBody for SMSG_FRIEND_LIST {
         // friends: Friend[amount_of_friends]
         for i in self.friends.iter() {
             i.write(w)?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // amount_of_friends: u8
+        let amount_of_friends = crate::util::tokio_read_u8_le(r).await?;
+
+        // friends: Friend[amount_of_friends]
+        let mut friends = Vec::with_capacity(amount_of_friends as usize);
+        for i in 0..amount_of_friends {
+            friends.push(Friend::tokio_read(r).await?);
+        }
+
+        Ok(Self {
+            friends,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // amount_of_friends: u8
+        w.write_all(&(self.friends.len() as u8).to_le_bytes()).await?;
+
+        // friends: Friend[amount_of_friends]
+        for i in self.friends.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // amount_of_friends: u8
+        let amount_of_friends = crate::util::astd_read_u8_le(r).await?;
+
+        // friends: Friend[amount_of_friends]
+        let mut friends = Vec::with_capacity(amount_of_friends as usize);
+        for i in 0..amount_of_friends {
+            friends.push(Friend::astd_read(r).await?);
+        }
+
+        Ok(Self {
+            friends,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // amount_of_friends: u8
+        w.write_all(&(self.friends.len() as u8).to_le_bytes()).await?;
+
+        // friends: Friend[amount_of_friends]
+        for i in self.friends.iter() {
+            i.astd_write(w).await?;
         }
 
         Ok(())

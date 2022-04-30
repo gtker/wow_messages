@@ -19,6 +19,7 @@ pub struct SMSG_FORCE_WALK_SPEED_CHANGE {
 
 impl ServerMessageWrite for SMSG_FORCE_WALK_SPEED_CHANGE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_FORCE_WALK_SPEED_CHANGE {
     const OPCODE: u16 = 0x02da;
 
@@ -53,6 +54,68 @@ impl MessageBody for SMSG_FORCE_WALK_SPEED_CHANGE {
 
         // speed: f32
         w.write_all(&self.speed.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: PackedGuid
+        let guid = Guid::tokio_read_packed(r).await?;
+
+        // move_event: u32
+        let move_event = crate::util::tokio_read_u32_le(r).await?;
+
+        // speed: f32
+        let speed = crate::util::tokio_read_f32_le(r).await?;
+        Ok(Self {
+            guid,
+            move_event,
+            speed,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: PackedGuid
+        self.guid.tokio_write_packed(w).await?;
+
+        // move_event: u32
+        w.write_all(&self.move_event.to_le_bytes()).await?;
+
+        // speed: f32
+        w.write_all(&self.speed.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: PackedGuid
+        let guid = Guid::astd_read_packed(r).await?;
+
+        // move_event: u32
+        let move_event = crate::util::astd_read_u32_le(r).await?;
+
+        // speed: f32
+        let speed = crate::util::astd_read_f32_le(r).await?;
+        Ok(Self {
+            guid,
+            move_event,
+            speed,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: PackedGuid
+        self.guid.astd_write_packed(w).await?;
+
+        // move_event: u32
+        w.write_all(&self.move_event.to_le_bytes()).await?;
+
+        // speed: f32
+        w.write_all(&self.speed.to_le_bytes()).await?;
 
         Ok(())
     }

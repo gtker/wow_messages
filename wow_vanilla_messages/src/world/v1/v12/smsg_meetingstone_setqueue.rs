@@ -20,6 +20,7 @@ pub struct SMSG_MEETINGSTONE_SETQUEUE {
 
 impl ServerMessageWrite for SMSG_MEETINGSTONE_SETQUEUE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
     const OPCODE: u16 = 0x0295;
 
@@ -48,6 +49,56 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
 
         // status: MeetingStoneStatus
         self.status.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // area: Area
+        let area = Area::tokio_read(r).await?;
+
+        // status: MeetingStoneStatus
+        let status = MeetingStoneStatus::tokio_read(r).await?;
+
+        Ok(Self {
+            area,
+            status,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // area: Area
+        self.area.tokio_write(w).await?;
+
+        // status: MeetingStoneStatus
+        self.status.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // area: Area
+        let area = Area::astd_read(r).await?;
+
+        // status: MeetingStoneStatus
+        let status = MeetingStoneStatus::astd_read(r).await?;
+
+        Ok(Self {
+            area,
+            status,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // area: Area
+        self.area.astd_write(w).await?;
+
+        // status: MeetingStoneStatus
+        self.status.astd_write(w).await?;
 
         Ok(())
     }

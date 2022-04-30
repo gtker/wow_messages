@@ -24,6 +24,7 @@ pub struct SMSG_MESSAGECHAT {
 
 impl ServerMessageWrite for SMSG_MESSAGECHAT {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_MESSAGECHAT {
     const OPCODE: u16 = 0x0096;
 
@@ -761,6 +762,1474 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
         // tag: PlayerChatTag
         self.tag.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // chat_type: ChatType
+        let chat_type = ChatType::tokio_read(r).await?;
+
+        // language: Language
+        let language = Language::tokio_read(r).await?;
+
+        let chat_type_if = match chat_type {
+            ChatType::SAY => {
+                // sender_guid1: Guid
+                let sender_guid1 = Guid::tokio_read(r).await?;
+
+                // sender_guid2: Guid
+                let sender_guid2 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::SAY {
+                    sender_guid1,
+                    sender_guid2,
+                }
+            }
+            ChatType::PARTY => {
+                // sender_guid1: Guid
+                let sender_guid1 = Guid::tokio_read(r).await?;
+
+                // sender_guid2: Guid
+                let sender_guid2 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::PARTY {
+                    sender_guid1,
+                    sender_guid2,
+                }
+            }
+            ChatType::RAID => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::RAID {
+                    sender_guid4,
+                }
+            }
+            ChatType::GUILD => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::GUILD {
+                    sender_guid4,
+                }
+            }
+            ChatType::OFFICER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::OFFICER {
+                    sender_guid4,
+                }
+            }
+            ChatType::YELL => {
+                // sender_guid1: Guid
+                let sender_guid1 = Guid::tokio_read(r).await?;
+
+                // sender_guid2: Guid
+                let sender_guid2 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::YELL {
+                    sender_guid1,
+                    sender_guid2,
+                }
+            }
+            ChatType::WHISPER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::WHISPER {
+                    sender_guid4,
+                }
+            }
+            ChatType::WHISPER_INFORM => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::WHISPER_INFORM {
+                    sender_guid4,
+                }
+            }
+            ChatType::EMOTE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::EMOTE {
+                    sender_guid4,
+                }
+            }
+            ChatType::TEXT_EMOTE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::TEXT_EMOTE {
+                    sender_guid4,
+                }
+            }
+            ChatType::SYSTEM => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::SYSTEM {
+                    sender_guid4,
+                }
+            }
+            ChatType::MONSTER_SAY => {
+                // sender_guid3: Guid
+                let sender_guid3 = Guid::tokio_read(r).await?;
+
+                // sender_name_length: u32
+                let sender_name_length = crate::util::tokio_read_u32_le(r).await?;
+
+                // sender_name: CString
+                let sender_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let sender_name = String::from_utf8(sender_name)?;
+
+                // target_guid: Guid
+                let target_guid = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::MONSTER_SAY {
+                    sender_guid3,
+                    sender_name_length,
+                    sender_name,
+                    target_guid,
+                }
+            }
+            ChatType::MONSTER_YELL => {
+                // sender_guid3: Guid
+                let sender_guid3 = Guid::tokio_read(r).await?;
+
+                // sender_name_length: u32
+                let sender_name_length = crate::util::tokio_read_u32_le(r).await?;
+
+                // sender_name: CString
+                let sender_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let sender_name = String::from_utf8(sender_name)?;
+
+                // target_guid: Guid
+                let target_guid = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::MONSTER_YELL {
+                    sender_guid3,
+                    sender_name_length,
+                    sender_name,
+                    target_guid,
+                }
+            }
+            ChatType::MONSTER_EMOTE => {
+                // name_length: u32
+                let name_length = crate::util::tokio_read_u32_le(r).await?;
+
+                // monster_name: CString
+                let monster_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let monster_name = String::from_utf8(monster_name)?;
+
+                // monster_guid: Guid
+                let monster_guid = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
+                    name_length,
+                    monster_name,
+                    monster_guid,
+                }
+            }
+            ChatType::CHANNEL => {
+                // channel_name: CString
+                let channel_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let channel_name = String::from_utf8(channel_name)?;
+
+                // player_rank: u32
+                let player_rank = crate::util::tokio_read_u32_le(r).await?;
+
+                // player_guid: Guid
+                let player_guid = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL {
+                    channel_name,
+                    player_rank,
+                    player_guid,
+                }
+            }
+            ChatType::CHANNEL_JOIN => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL_JOIN {
+                    sender_guid4,
+                }
+            }
+            ChatType::CHANNEL_LEAVE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL_LEAVE {
+                    sender_guid4,
+                }
+            }
+            ChatType::CHANNEL_LIST => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL_LIST {
+                    sender_guid4,
+                }
+            }
+            ChatType::CHANNEL_NOTICE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL_NOTICE {
+                    sender_guid4,
+                }
+            }
+            ChatType::CHANNEL_NOTICE_USER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER {
+                    sender_guid4,
+                }
+            }
+            ChatType::AFK => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::AFK {
+                    sender_guid4,
+                }
+            }
+            ChatType::DND => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::DND {
+                    sender_guid4,
+                }
+            }
+            ChatType::IGNORED => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::IGNORED {
+                    sender_guid4,
+                }
+            }
+            ChatType::SKILL => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::SKILL {
+                    sender_guid4,
+                }
+            }
+            ChatType::LOOT => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::LOOT {
+                    sender_guid4,
+                }
+            }
+            ChatType::MONSTER_WHISPER => {
+                // name_length: u32
+                let name_length = crate::util::tokio_read_u32_le(r).await?;
+
+                // monster_name: CString
+                let monster_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let monster_name = String::from_utf8(monster_name)?;
+
+                // monster_guid: Guid
+                let monster_guid = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
+                    name_length,
+                    monster_name,
+                    monster_guid,
+                }
+            }
+            ChatType::BG_SYSTEM_NEUTRAL => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL {
+                    sender_guid4,
+                }
+            }
+            ChatType::BG_SYSTEM_ALLIANCE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE {
+                    sender_guid4,
+                }
+            }
+            ChatType::BG_SYSTEM_HORDE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE {
+                    sender_guid4,
+                }
+            }
+            ChatType::RAID_LEADER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::RAID_LEADER {
+                    sender_guid4,
+                }
+            }
+            ChatType::RAID_WARNING => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::RAID_WARNING {
+                    sender_guid4,
+                }
+            }
+            ChatType::RAID_BOSS_WHISPER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER {
+                    sender_guid4,
+                }
+            }
+            ChatType::RAID_BOSS_EMOTE => {
+                // name_length: u32
+                let name_length = crate::util::tokio_read_u32_le(r).await?;
+
+                // monster_name: CString
+                let monster_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let monster_name = String::from_utf8(monster_name)?;
+
+                // monster_guid: Guid
+                let monster_guid = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
+                    name_length,
+                    monster_name,
+                    monster_guid,
+                }
+            }
+            ChatType::BATTLEGROUND => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::BATTLEGROUND {
+                    sender_guid4,
+                }
+            }
+            ChatType::BATTLEGROUND_LEADER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::tokio_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
+                    sender_guid4,
+                }
+            }
+        };
+
+        // message_length: u32
+        let message_length = crate::util::tokio_read_u32_le(r).await?;
+
+        // message: CString
+        let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let message = String::from_utf8(message)?;
+
+        // tag: PlayerChatTag
+        let tag = PlayerChatTag::tokio_read(r).await?;
+
+        Ok(Self {
+            chat_type: chat_type_if,
+            language,
+            message_length,
+            message,
+            tag,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // chat_type: ChatType
+        self.chat_type.tokio_write(w).await?;
+
+        // language: Language
+        self.language.tokio_write(w).await?;
+
+        match &self.chat_type {
+            SMSG_MESSAGECHATChatType::SAY {
+                sender_guid1,
+                sender_guid2,
+            } => {
+                // sender_guid1: Guid
+                sender_guid1.tokio_write(w).await?;
+
+                // sender_guid2: Guid
+                sender_guid2.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::PARTY {
+                sender_guid1,
+                sender_guid2,
+            } => {
+                // sender_guid1: Guid
+                sender_guid1.tokio_write(w).await?;
+
+                // sender_guid2: Guid
+                sender_guid2.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::GUILD {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::OFFICER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::YELL {
+                sender_guid1,
+                sender_guid2,
+            } => {
+                // sender_guid1: Guid
+                sender_guid1.tokio_write(w).await?;
+
+                // sender_guid2: Guid
+                sender_guid2.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::WHISPER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::WHISPER_INFORM {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::EMOTE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::TEXT_EMOTE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::SYSTEM {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_SAY {
+                sender_guid3,
+                sender_name_length,
+                sender_name,
+                target_guid,
+            } => {
+                // sender_guid3: Guid
+                sender_guid3.tokio_write(w).await?;
+
+                // sender_name_length: u32
+                w.write_all(&sender_name_length.to_le_bytes()).await?;
+
+                // sender_name: CString
+                w.write_all(sender_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // target_guid: Guid
+                target_guid.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_YELL {
+                sender_guid3,
+                sender_name_length,
+                sender_name,
+                target_guid,
+            } => {
+                // sender_guid3: Guid
+                sender_guid3.tokio_write(w).await?;
+
+                // sender_name_length: u32
+                w.write_all(&sender_name_length.to_le_bytes()).await?;
+
+                // sender_name: CString
+                w.write_all(sender_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // target_guid: Guid
+                target_guid.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
+                name_length,
+                monster_name,
+                monster_guid,
+            } => {
+                // name_length: u32
+                w.write_all(&name_length.to_le_bytes()).await?;
+
+                // monster_name: CString
+                w.write_all(monster_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // monster_guid: Guid
+                monster_guid.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL {
+                channel_name,
+                player_rank,
+                player_guid,
+            } => {
+                // channel_name: CString
+                w.write_all(channel_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // player_rank: u32
+                w.write_all(&player_rank.to_le_bytes()).await?;
+
+                // player_guid: Guid
+                player_guid.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_JOIN {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_LEAVE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_LIST {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_NOTICE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::AFK {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::DND {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::IGNORED {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::SKILL {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::LOOT {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
+                name_length,
+                monster_name,
+                monster_guid,
+            } => {
+                // name_length: u32
+                w.write_all(&name_length.to_le_bytes()).await?;
+
+                // monster_name: CString
+                w.write_all(monster_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // monster_guid: Guid
+                monster_guid.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_LEADER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_WARNING {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
+                name_length,
+                monster_name,
+                monster_guid,
+            } => {
+                // name_length: u32
+                w.write_all(&name_length.to_le_bytes()).await?;
+
+                // monster_name: CString
+                w.write_all(monster_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // monster_guid: Guid
+                monster_guid.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::BATTLEGROUND {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.tokio_write(w).await?;
+
+            }
+        }
+
+        // message_length: u32
+        w.write_all(&self.message_length.to_le_bytes()).await?;
+
+        // message: CString
+        w.write_all(self.message.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // tag: PlayerChatTag
+        self.tag.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // chat_type: ChatType
+        let chat_type = ChatType::astd_read(r).await?;
+
+        // language: Language
+        let language = Language::astd_read(r).await?;
+
+        let chat_type_if = match chat_type {
+            ChatType::SAY => {
+                // sender_guid1: Guid
+                let sender_guid1 = Guid::astd_read(r).await?;
+
+                // sender_guid2: Guid
+                let sender_guid2 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::SAY {
+                    sender_guid1,
+                    sender_guid2,
+                }
+            }
+            ChatType::PARTY => {
+                // sender_guid1: Guid
+                let sender_guid1 = Guid::astd_read(r).await?;
+
+                // sender_guid2: Guid
+                let sender_guid2 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::PARTY {
+                    sender_guid1,
+                    sender_guid2,
+                }
+            }
+            ChatType::RAID => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::RAID {
+                    sender_guid4,
+                }
+            }
+            ChatType::GUILD => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::GUILD {
+                    sender_guid4,
+                }
+            }
+            ChatType::OFFICER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::OFFICER {
+                    sender_guid4,
+                }
+            }
+            ChatType::YELL => {
+                // sender_guid1: Guid
+                let sender_guid1 = Guid::astd_read(r).await?;
+
+                // sender_guid2: Guid
+                let sender_guid2 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::YELL {
+                    sender_guid1,
+                    sender_guid2,
+                }
+            }
+            ChatType::WHISPER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::WHISPER {
+                    sender_guid4,
+                }
+            }
+            ChatType::WHISPER_INFORM => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::WHISPER_INFORM {
+                    sender_guid4,
+                }
+            }
+            ChatType::EMOTE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::EMOTE {
+                    sender_guid4,
+                }
+            }
+            ChatType::TEXT_EMOTE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::TEXT_EMOTE {
+                    sender_guid4,
+                }
+            }
+            ChatType::SYSTEM => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::SYSTEM {
+                    sender_guid4,
+                }
+            }
+            ChatType::MONSTER_SAY => {
+                // sender_guid3: Guid
+                let sender_guid3 = Guid::astd_read(r).await?;
+
+                // sender_name_length: u32
+                let sender_name_length = crate::util::astd_read_u32_le(r).await?;
+
+                // sender_name: CString
+                let sender_name = crate::util::astd_read_c_string_to_vec(r).await?;
+                let sender_name = String::from_utf8(sender_name)?;
+
+                // target_guid: Guid
+                let target_guid = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::MONSTER_SAY {
+                    sender_guid3,
+                    sender_name_length,
+                    sender_name,
+                    target_guid,
+                }
+            }
+            ChatType::MONSTER_YELL => {
+                // sender_guid3: Guid
+                let sender_guid3 = Guid::astd_read(r).await?;
+
+                // sender_name_length: u32
+                let sender_name_length = crate::util::astd_read_u32_le(r).await?;
+
+                // sender_name: CString
+                let sender_name = crate::util::astd_read_c_string_to_vec(r).await?;
+                let sender_name = String::from_utf8(sender_name)?;
+
+                // target_guid: Guid
+                let target_guid = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::MONSTER_YELL {
+                    sender_guid3,
+                    sender_name_length,
+                    sender_name,
+                    target_guid,
+                }
+            }
+            ChatType::MONSTER_EMOTE => {
+                // name_length: u32
+                let name_length = crate::util::astd_read_u32_le(r).await?;
+
+                // monster_name: CString
+                let monster_name = crate::util::astd_read_c_string_to_vec(r).await?;
+                let monster_name = String::from_utf8(monster_name)?;
+
+                // monster_guid: Guid
+                let monster_guid = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
+                    name_length,
+                    monster_name,
+                    monster_guid,
+                }
+            }
+            ChatType::CHANNEL => {
+                // channel_name: CString
+                let channel_name = crate::util::astd_read_c_string_to_vec(r).await?;
+                let channel_name = String::from_utf8(channel_name)?;
+
+                // player_rank: u32
+                let player_rank = crate::util::astd_read_u32_le(r).await?;
+
+                // player_guid: Guid
+                let player_guid = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL {
+                    channel_name,
+                    player_rank,
+                    player_guid,
+                }
+            }
+            ChatType::CHANNEL_JOIN => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL_JOIN {
+                    sender_guid4,
+                }
+            }
+            ChatType::CHANNEL_LEAVE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL_LEAVE {
+                    sender_guid4,
+                }
+            }
+            ChatType::CHANNEL_LIST => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL_LIST {
+                    sender_guid4,
+                }
+            }
+            ChatType::CHANNEL_NOTICE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL_NOTICE {
+                    sender_guid4,
+                }
+            }
+            ChatType::CHANNEL_NOTICE_USER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER {
+                    sender_guid4,
+                }
+            }
+            ChatType::AFK => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::AFK {
+                    sender_guid4,
+                }
+            }
+            ChatType::DND => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::DND {
+                    sender_guid4,
+                }
+            }
+            ChatType::IGNORED => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::IGNORED {
+                    sender_guid4,
+                }
+            }
+            ChatType::SKILL => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::SKILL {
+                    sender_guid4,
+                }
+            }
+            ChatType::LOOT => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::LOOT {
+                    sender_guid4,
+                }
+            }
+            ChatType::MONSTER_WHISPER => {
+                // name_length: u32
+                let name_length = crate::util::astd_read_u32_le(r).await?;
+
+                // monster_name: CString
+                let monster_name = crate::util::astd_read_c_string_to_vec(r).await?;
+                let monster_name = String::from_utf8(monster_name)?;
+
+                // monster_guid: Guid
+                let monster_guid = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
+                    name_length,
+                    monster_name,
+                    monster_guid,
+                }
+            }
+            ChatType::BG_SYSTEM_NEUTRAL => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL {
+                    sender_guid4,
+                }
+            }
+            ChatType::BG_SYSTEM_ALLIANCE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE {
+                    sender_guid4,
+                }
+            }
+            ChatType::BG_SYSTEM_HORDE => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE {
+                    sender_guid4,
+                }
+            }
+            ChatType::RAID_LEADER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::RAID_LEADER {
+                    sender_guid4,
+                }
+            }
+            ChatType::RAID_WARNING => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::RAID_WARNING {
+                    sender_guid4,
+                }
+            }
+            ChatType::RAID_BOSS_WHISPER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER {
+                    sender_guid4,
+                }
+            }
+            ChatType::RAID_BOSS_EMOTE => {
+                // name_length: u32
+                let name_length = crate::util::astd_read_u32_le(r).await?;
+
+                // monster_name: CString
+                let monster_name = crate::util::astd_read_c_string_to_vec(r).await?;
+                let monster_name = String::from_utf8(monster_name)?;
+
+                // monster_guid: Guid
+                let monster_guid = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
+                    name_length,
+                    monster_name,
+                    monster_guid,
+                }
+            }
+            ChatType::BATTLEGROUND => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::BATTLEGROUND {
+                    sender_guid4,
+                }
+            }
+            ChatType::BATTLEGROUND_LEADER => {
+                // sender_guid4: Guid
+                let sender_guid4 = Guid::astd_read(r).await?;
+
+                SMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
+                    sender_guid4,
+                }
+            }
+        };
+
+        // message_length: u32
+        let message_length = crate::util::astd_read_u32_le(r).await?;
+
+        // message: CString
+        let message = crate::util::astd_read_c_string_to_vec(r).await?;
+        let message = String::from_utf8(message)?;
+
+        // tag: PlayerChatTag
+        let tag = PlayerChatTag::astd_read(r).await?;
+
+        Ok(Self {
+            chat_type: chat_type_if,
+            language,
+            message_length,
+            message,
+            tag,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // chat_type: ChatType
+        self.chat_type.astd_write(w).await?;
+
+        // language: Language
+        self.language.astd_write(w).await?;
+
+        match &self.chat_type {
+            SMSG_MESSAGECHATChatType::SAY {
+                sender_guid1,
+                sender_guid2,
+            } => {
+                // sender_guid1: Guid
+                sender_guid1.astd_write(w).await?;
+
+                // sender_guid2: Guid
+                sender_guid2.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::PARTY {
+                sender_guid1,
+                sender_guid2,
+            } => {
+                // sender_guid1: Guid
+                sender_guid1.astd_write(w).await?;
+
+                // sender_guid2: Guid
+                sender_guid2.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::GUILD {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::OFFICER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::YELL {
+                sender_guid1,
+                sender_guid2,
+            } => {
+                // sender_guid1: Guid
+                sender_guid1.astd_write(w).await?;
+
+                // sender_guid2: Guid
+                sender_guid2.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::WHISPER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::WHISPER_INFORM {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::EMOTE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::TEXT_EMOTE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::SYSTEM {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_SAY {
+                sender_guid3,
+                sender_name_length,
+                sender_name,
+                target_guid,
+            } => {
+                // sender_guid3: Guid
+                sender_guid3.astd_write(w).await?;
+
+                // sender_name_length: u32
+                w.write_all(&sender_name_length.to_le_bytes()).await?;
+
+                // sender_name: CString
+                w.write_all(sender_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // target_guid: Guid
+                target_guid.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_YELL {
+                sender_guid3,
+                sender_name_length,
+                sender_name,
+                target_guid,
+            } => {
+                // sender_guid3: Guid
+                sender_guid3.astd_write(w).await?;
+
+                // sender_name_length: u32
+                w.write_all(&sender_name_length.to_le_bytes()).await?;
+
+                // sender_name: CString
+                w.write_all(sender_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // target_guid: Guid
+                target_guid.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
+                name_length,
+                monster_name,
+                monster_guid,
+            } => {
+                // name_length: u32
+                w.write_all(&name_length.to_le_bytes()).await?;
+
+                // monster_name: CString
+                w.write_all(monster_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // monster_guid: Guid
+                monster_guid.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL {
+                channel_name,
+                player_rank,
+                player_guid,
+            } => {
+                // channel_name: CString
+                w.write_all(channel_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // player_rank: u32
+                w.write_all(&player_rank.to_le_bytes()).await?;
+
+                // player_guid: Guid
+                player_guid.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_JOIN {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_LEAVE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_LIST {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_NOTICE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::AFK {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::DND {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::IGNORED {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::SKILL {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::LOOT {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
+                name_length,
+                monster_name,
+                monster_guid,
+            } => {
+                // name_length: u32
+                w.write_all(&name_length.to_le_bytes()).await?;
+
+                // monster_name: CString
+                w.write_all(monster_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // monster_guid: Guid
+                monster_guid.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_LEADER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_WARNING {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
+                name_length,
+                monster_name,
+                monster_guid,
+            } => {
+                // name_length: u32
+                w.write_all(&name_length.to_le_bytes()).await?;
+
+                // monster_name: CString
+                w.write_all(monster_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // monster_guid: Guid
+                monster_guid.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::BATTLEGROUND {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+            SMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
+                sender_guid4,
+            } => {
+                // sender_guid4: Guid
+                sender_guid4.astd_write(w).await?;
+
+            }
+        }
+
+        // message_length: u32
+        w.write_all(&self.message_length.to_le_bytes()).await?;
+
+        // message: CString
+        w.write_all(self.message.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // tag: PlayerChatTag
+        self.tag.astd_write(w).await?;
 
         Ok(())
     }

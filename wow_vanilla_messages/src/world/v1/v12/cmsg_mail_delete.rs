@@ -19,6 +19,7 @@ pub struct CMSG_MAIL_DELETE {
 
 impl ClientMessageWrite for CMSG_MAIL_DELETE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_MAIL_DELETE {
     const OPCODE: u16 = 0x0249;
 
@@ -47,6 +48,56 @@ impl MessageBody for CMSG_MAIL_DELETE {
 
         // mail_id: u32
         w.write_all(&self.mail_id.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // mailbox_id: Guid
+        let mailbox_id = Guid::tokio_read(r).await?;
+
+        // mail_id: u32
+        let mail_id = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            mailbox_id,
+            mail_id,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // mailbox_id: Guid
+        self.mailbox_id.tokio_write(w).await?;
+
+        // mail_id: u32
+        w.write_all(&self.mail_id.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // mailbox_id: Guid
+        let mailbox_id = Guid::astd_read(r).await?;
+
+        // mail_id: u32
+        let mail_id = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            mailbox_id,
+            mail_id,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // mailbox_id: Guid
+        self.mailbox_id.astd_write(w).await?;
+
+        // mail_id: u32
+        w.write_all(&self.mail_id.to_le_bytes()).await?;
 
         Ok(())
     }

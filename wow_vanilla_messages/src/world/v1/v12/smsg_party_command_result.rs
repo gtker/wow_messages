@@ -20,6 +20,7 @@ pub struct SMSG_PARTY_COMMAND_RESULT {
 
 impl ServerMessageWrite for SMSG_PARTY_COMMAND_RESULT {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
     const OPCODE: u16 = 0x007f;
 
@@ -58,6 +59,76 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
 
         // result: PartyResult
         self.result.write_u32_le(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // operation: PartyOperation
+        let operation = PartyOperation::tokio_read_u32_le(r).await?;
+
+        // member: CString
+        let member = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let member = String::from_utf8(member)?;
+
+        // result: PartyResult
+        let result = PartyResult::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            operation,
+            member,
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // operation: PartyOperation
+        self.operation.tokio_write_u32_le(w).await?;
+
+        // member: CString
+        w.write_all(self.member.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // result: PartyResult
+        self.result.tokio_write_u32_le(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // operation: PartyOperation
+        let operation = PartyOperation::astd_read_u32_le(r).await?;
+
+        // member: CString
+        let member = crate::util::astd_read_c_string_to_vec(r).await?;
+        let member = String::from_utf8(member)?;
+
+        // result: PartyResult
+        let result = PartyResult::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            operation,
+            member,
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // operation: PartyOperation
+        self.operation.astd_write_u32_le(w).await?;
+
+        // member: CString
+        w.write_all(self.member.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // result: PartyResult
+        self.result.astd_write_u32_le(w).await?;
 
         Ok(())
     }

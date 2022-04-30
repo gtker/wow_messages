@@ -18,6 +18,7 @@ pub struct SMSG_UPDATE_AURA_DURATION {
 
 impl ServerMessageWrite for SMSG_UPDATE_AURA_DURATION {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_UPDATE_AURA_DURATION {
     const OPCODE: u16 = 0x0137;
 
@@ -46,6 +47,56 @@ impl MessageBody for SMSG_UPDATE_AURA_DURATION {
 
         // aura_duration: u32
         w.write_all(&self.aura_duration.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // aura_slot: u8
+        let aura_slot = crate::util::tokio_read_u8_le(r).await?;
+
+        // aura_duration: u32
+        let aura_duration = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            aura_slot,
+            aura_duration,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // aura_slot: u8
+        w.write_all(&self.aura_slot.to_le_bytes()).await?;
+
+        // aura_duration: u32
+        w.write_all(&self.aura_duration.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // aura_slot: u8
+        let aura_slot = crate::util::astd_read_u8_le(r).await?;
+
+        // aura_duration: u32
+        let aura_duration = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            aura_slot,
+            aura_duration,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // aura_slot: u8
+        w.write_all(&self.aura_slot.to_le_bytes()).await?;
+
+        // aura_duration: u32
+        w.write_all(&self.aura_duration.to_le_bytes()).await?;
 
         Ok(())
     }

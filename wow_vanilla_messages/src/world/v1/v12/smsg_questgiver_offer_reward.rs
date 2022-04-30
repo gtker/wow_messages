@@ -29,6 +29,7 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
 
 impl ServerMessageWrite for SMSG_QUESTGIVER_OFFER_REWARD {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_QUESTGIVER_OFFER_REWARD {
     const OPCODE: u16 = 0x018d;
 
@@ -159,6 +160,260 @@ impl MessageBody for SMSG_QUESTGIVER_OFFER_REWARD {
 
         // reward_spell_cast: u32
         w.write_all(&self.reward_spell_cast.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // npc: Guid
+        let npc = Guid::tokio_read(r).await?;
+
+        // quest_id: u32
+        let quest_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // title: CString
+        let title = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let title = String::from_utf8(title)?;
+
+        // offer_reward_text: CString
+        let offer_reward_text = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let offer_reward_text = String::from_utf8(offer_reward_text)?;
+
+        // enable_next: u32
+        let enable_next = crate::util::tokio_read_u32_le(r).await?;
+
+        // amount_of_emotes: u32
+        let amount_of_emotes = crate::util::tokio_read_u32_le(r).await?;
+
+        // emotes: NpcTextUpdateEmote[amount_of_emotes]
+        let mut emotes = Vec::with_capacity(amount_of_emotes as usize);
+        for i in 0..amount_of_emotes {
+            emotes.push(NpcTextUpdateEmote::tokio_read(r).await?);
+        }
+
+        // amount_of_choice_item_rewards: u32
+        let amount_of_choice_item_rewards = crate::util::tokio_read_u32_le(r).await?;
+
+        // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
+        let mut choice_item_rewards = Vec::with_capacity(amount_of_choice_item_rewards as usize);
+        for i in 0..amount_of_choice_item_rewards {
+            choice_item_rewards.push(QuestItemReward::tokio_read(r).await?);
+        }
+
+        // amount_of_item_rewards: u32
+        let amount_of_item_rewards = crate::util::tokio_read_u32_le(r).await?;
+
+        // item_rewards: QuestItemReward[amount_of_item_rewards]
+        let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
+        for i in 0..amount_of_item_rewards {
+            item_rewards.push(QuestItemReward::tokio_read(r).await?);
+        }
+
+        // money_reward: u32
+        let money_reward = crate::util::tokio_read_u32_le(r).await?;
+
+        // reward_spell: u32
+        let reward_spell = crate::util::tokio_read_u32_le(r).await?;
+
+        // reward_spell_cast: u32
+        let reward_spell_cast = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            npc,
+            quest_id,
+            title,
+            offer_reward_text,
+            enable_next,
+            emotes,
+            choice_item_rewards,
+            item_rewards,
+            money_reward,
+            reward_spell,
+            reward_spell_cast,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // npc: Guid
+        self.npc.tokio_write(w).await?;
+
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // offer_reward_text: CString
+        w.write_all(self.offer_reward_text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // enable_next: u32
+        w.write_all(&self.enable_next.to_le_bytes()).await?;
+
+        // amount_of_emotes: u32
+        w.write_all(&(self.emotes.len() as u32).to_le_bytes()).await?;
+
+        // emotes: NpcTextUpdateEmote[amount_of_emotes]
+        for i in self.emotes.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // amount_of_choice_item_rewards: u32
+        w.write_all(&(self.choice_item_rewards.len() as u32).to_le_bytes()).await?;
+
+        // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
+        for i in self.choice_item_rewards.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // amount_of_item_rewards: u32
+        w.write_all(&(self.item_rewards.len() as u32).to_le_bytes()).await?;
+
+        // item_rewards: QuestItemReward[amount_of_item_rewards]
+        for i in self.item_rewards.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        // money_reward: u32
+        w.write_all(&self.money_reward.to_le_bytes()).await?;
+
+        // reward_spell: u32
+        w.write_all(&self.reward_spell.to_le_bytes()).await?;
+
+        // reward_spell_cast: u32
+        w.write_all(&self.reward_spell_cast.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // npc: Guid
+        let npc = Guid::astd_read(r).await?;
+
+        // quest_id: u32
+        let quest_id = crate::util::astd_read_u32_le(r).await?;
+
+        // title: CString
+        let title = crate::util::astd_read_c_string_to_vec(r).await?;
+        let title = String::from_utf8(title)?;
+
+        // offer_reward_text: CString
+        let offer_reward_text = crate::util::astd_read_c_string_to_vec(r).await?;
+        let offer_reward_text = String::from_utf8(offer_reward_text)?;
+
+        // enable_next: u32
+        let enable_next = crate::util::astd_read_u32_le(r).await?;
+
+        // amount_of_emotes: u32
+        let amount_of_emotes = crate::util::astd_read_u32_le(r).await?;
+
+        // emotes: NpcTextUpdateEmote[amount_of_emotes]
+        let mut emotes = Vec::with_capacity(amount_of_emotes as usize);
+        for i in 0..amount_of_emotes {
+            emotes.push(NpcTextUpdateEmote::astd_read(r).await?);
+        }
+
+        // amount_of_choice_item_rewards: u32
+        let amount_of_choice_item_rewards = crate::util::astd_read_u32_le(r).await?;
+
+        // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
+        let mut choice_item_rewards = Vec::with_capacity(amount_of_choice_item_rewards as usize);
+        for i in 0..amount_of_choice_item_rewards {
+            choice_item_rewards.push(QuestItemReward::astd_read(r).await?);
+        }
+
+        // amount_of_item_rewards: u32
+        let amount_of_item_rewards = crate::util::astd_read_u32_le(r).await?;
+
+        // item_rewards: QuestItemReward[amount_of_item_rewards]
+        let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
+        for i in 0..amount_of_item_rewards {
+            item_rewards.push(QuestItemReward::astd_read(r).await?);
+        }
+
+        // money_reward: u32
+        let money_reward = crate::util::astd_read_u32_le(r).await?;
+
+        // reward_spell: u32
+        let reward_spell = crate::util::astd_read_u32_le(r).await?;
+
+        // reward_spell_cast: u32
+        let reward_spell_cast = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            npc,
+            quest_id,
+            title,
+            offer_reward_text,
+            enable_next,
+            emotes,
+            choice_item_rewards,
+            item_rewards,
+            money_reward,
+            reward_spell,
+            reward_spell_cast,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // npc: Guid
+        self.npc.astd_write(w).await?;
+
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // offer_reward_text: CString
+        w.write_all(self.offer_reward_text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // enable_next: u32
+        w.write_all(&self.enable_next.to_le_bytes()).await?;
+
+        // amount_of_emotes: u32
+        w.write_all(&(self.emotes.len() as u32).to_le_bytes()).await?;
+
+        // emotes: NpcTextUpdateEmote[amount_of_emotes]
+        for i in self.emotes.iter() {
+            i.astd_write(w).await?;
+        }
+
+        // amount_of_choice_item_rewards: u32
+        w.write_all(&(self.choice_item_rewards.len() as u32).to_le_bytes()).await?;
+
+        // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
+        for i in self.choice_item_rewards.iter() {
+            i.astd_write(w).await?;
+        }
+
+        // amount_of_item_rewards: u32
+        w.write_all(&(self.item_rewards.len() as u32).to_le_bytes()).await?;
+
+        // item_rewards: QuestItemReward[amount_of_item_rewards]
+        for i in self.item_rewards.iter() {
+            i.astd_write(w).await?;
+        }
+
+        // money_reward: u32
+        w.write_all(&self.money_reward.to_le_bytes()).await?;
+
+        // reward_spell: u32
+        w.write_all(&self.reward_spell.to_le_bytes()).await?;
+
+        // reward_spell_cast: u32
+        w.write_all(&self.reward_spell_cast.to_le_bytes()).await?;
 
         Ok(())
     }

@@ -17,6 +17,7 @@ pub struct SMSG_ITEM_TEXT_QUERY_RESPONSE {
 
 impl ServerMessageWrite for SMSG_ITEM_TEXT_QUERY_RESPONSE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_ITEM_TEXT_QUERY_RESPONSE {
     const OPCODE: u16 = 0x0244;
 
@@ -48,6 +49,62 @@ impl MessageBody for SMSG_ITEM_TEXT_QUERY_RESPONSE {
         w.write_all(self.text.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // item_text_id: u32
+        let item_text_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // text: CString
+        let text = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let text = String::from_utf8(text)?;
+
+        Ok(Self {
+            item_text_id,
+            text,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // item_text_id: u32
+        w.write_all(&self.item_text_id.to_le_bytes()).await?;
+
+        // text: CString
+        w.write_all(self.text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // item_text_id: u32
+        let item_text_id = crate::util::astd_read_u32_le(r).await?;
+
+        // text: CString
+        let text = crate::util::astd_read_c_string_to_vec(r).await?;
+        let text = String::from_utf8(text)?;
+
+        Ok(Self {
+            item_text_id,
+            text,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // item_text_id: u32
+        w.write_all(&self.item_text_id.to_le_bytes()).await?;
+
+        // text: CString
+        w.write_all(self.text.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
         Ok(())
     }

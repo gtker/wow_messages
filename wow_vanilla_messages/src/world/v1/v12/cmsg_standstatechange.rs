@@ -18,6 +18,7 @@ pub struct CMSG_STANDSTATECHANGE {
 
 impl ClientMessageWrite for CMSG_STANDSTATECHANGE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_STANDSTATECHANGE {
     const OPCODE: u16 = 0x0101;
 
@@ -39,6 +40,42 @@ impl MessageBody for CMSG_STANDSTATECHANGE {
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // animation_state: UnitStandState
         self.animation_state.write_u32_le(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // animation_state: UnitStandState
+        let animation_state = UnitStandState::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            animation_state,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // animation_state: UnitStandState
+        self.animation_state.tokio_write_u32_le(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // animation_state: UnitStandState
+        let animation_state = UnitStandState::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            animation_state,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // animation_state: UnitStandState
+        self.animation_state.astd_write_u32_le(w).await?;
 
         Ok(())
     }

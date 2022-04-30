@@ -18,6 +18,7 @@ pub struct SMSG_SUPERCEDED_SPELL {
 
 impl ServerMessageWrite for SMSG_SUPERCEDED_SPELL {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_SUPERCEDED_SPELL {
     const OPCODE: u16 = 0x012c;
 
@@ -46,6 +47,56 @@ impl MessageBody for SMSG_SUPERCEDED_SPELL {
 
         // old_spell_id: u16
         w.write_all(&self.old_spell_id.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // new_spell_id: u16
+        let new_spell_id = crate::util::tokio_read_u16_le(r).await?;
+
+        // old_spell_id: u16
+        let old_spell_id = crate::util::tokio_read_u16_le(r).await?;
+
+        Ok(Self {
+            new_spell_id,
+            old_spell_id,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // new_spell_id: u16
+        w.write_all(&self.new_spell_id.to_le_bytes()).await?;
+
+        // old_spell_id: u16
+        w.write_all(&self.old_spell_id.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // new_spell_id: u16
+        let new_spell_id = crate::util::astd_read_u16_le(r).await?;
+
+        // old_spell_id: u16
+        let old_spell_id = crate::util::astd_read_u16_le(r).await?;
+
+        Ok(Self {
+            new_spell_id,
+            old_spell_id,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // new_spell_id: u16
+        w.write_all(&self.new_spell_id.to_le_bytes()).await?;
+
+        // old_spell_id: u16
+        w.write_all(&self.old_spell_id.to_le_bytes()).await?;
 
         Ok(())
     }

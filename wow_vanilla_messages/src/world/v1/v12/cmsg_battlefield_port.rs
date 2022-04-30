@@ -20,6 +20,7 @@ pub struct CMSG_BATTLEFIELD_PORT {
 
 impl ClientMessageWrite for CMSG_BATTLEFIELD_PORT {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_BATTLEFIELD_PORT {
     const OPCODE: u16 = 0x02d5;
 
@@ -48,6 +49,56 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
 
         // action: BattlefieldPortAction
         self.action.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // map: Map
+        let map = Map::tokio_read(r).await?;
+
+        // action: BattlefieldPortAction
+        let action = BattlefieldPortAction::tokio_read(r).await?;
+
+        Ok(Self {
+            map,
+            action,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // map: Map
+        self.map.tokio_write(w).await?;
+
+        // action: BattlefieldPortAction
+        self.action.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // map: Map
+        let map = Map::astd_read(r).await?;
+
+        // action: BattlefieldPortAction
+        let action = BattlefieldPortAction::astd_read(r).await?;
+
+        Ok(Self {
+            map,
+            action,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // map: Map
+        self.map.astd_write(w).await?;
+
+        // action: BattlefieldPortAction
+        self.action.astd_write(w).await?;
 
         Ok(())
     }

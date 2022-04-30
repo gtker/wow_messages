@@ -17,6 +17,7 @@ pub struct CMSG_GUILD_SET_OFFICER_NOTE {
 
 impl ClientMessageWrite for CMSG_GUILD_SET_OFFICER_NOTE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_GUILD_SET_OFFICER_NOTE {
     const OPCODE: u16 = 0x0235;
 
@@ -51,6 +52,68 @@ impl MessageBody for CMSG_GUILD_SET_OFFICER_NOTE {
         w.write_all(self.note.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // player_name: CString
+        let player_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let player_name = String::from_utf8(player_name)?;
+
+        // note: CString
+        let note = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let note = String::from_utf8(note)?;
+
+        Ok(Self {
+            player_name,
+            note,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // player_name: CString
+        w.write_all(self.player_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // note: CString
+        w.write_all(self.note.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // player_name: CString
+        let player_name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let player_name = String::from_utf8(player_name)?;
+
+        // note: CString
+        let note = crate::util::astd_read_c_string_to_vec(r).await?;
+        let note = String::from_utf8(note)?;
+
+        Ok(Self {
+            player_name,
+            note,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // player_name: CString
+        w.write_all(self.player_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // note: CString
+        w.write_all(self.note.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
         Ok(())
     }

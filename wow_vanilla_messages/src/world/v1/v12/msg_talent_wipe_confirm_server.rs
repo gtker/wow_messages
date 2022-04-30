@@ -19,6 +19,7 @@ pub struct MSG_TALENT_WIPE_CONFIRM_Server {
 
 impl ServerMessageWrite for MSG_TALENT_WIPE_CONFIRM_Server {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Server {
     const OPCODE: u16 = 0x02aa;
 
@@ -47,6 +48,56 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Server {
 
         // cost_in_copper: u32
         w.write_all(&self.cost_in_copper.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // wiping_npc: Guid
+        let wiping_npc = Guid::tokio_read(r).await?;
+
+        // cost_in_copper: u32
+        let cost_in_copper = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            wiping_npc,
+            cost_in_copper,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // wiping_npc: Guid
+        self.wiping_npc.tokio_write(w).await?;
+
+        // cost_in_copper: u32
+        w.write_all(&self.cost_in_copper.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // wiping_npc: Guid
+        let wiping_npc = Guid::astd_read(r).await?;
+
+        // cost_in_copper: u32
+        let cost_in_copper = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            wiping_npc,
+            cost_in_copper,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // wiping_npc: Guid
+        self.wiping_npc.astd_write(w).await?;
+
+        // cost_in_copper: u32
+        w.write_all(&self.cost_in_copper.to_le_bytes()).await?;
 
         Ok(())
     }

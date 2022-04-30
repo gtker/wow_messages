@@ -17,6 +17,7 @@ pub struct SMSG_RAID_INSTANCE_INFO {
 
 impl ServerMessageWrite for SMSG_RAID_INSTANCE_INFO {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_RAID_INSTANCE_INFO {
     const OPCODE: u16 = 0x02cc;
 
@@ -48,6 +49,64 @@ impl MessageBody for SMSG_RAID_INSTANCE_INFO {
         // raid_infos: RaidInfo[amount_of_raid_infos]
         for i in self.raid_infos.iter() {
             i.write(w)?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // amount_of_raid_infos: u32
+        let amount_of_raid_infos = crate::util::tokio_read_u32_le(r).await?;
+
+        // raid_infos: RaidInfo[amount_of_raid_infos]
+        let mut raid_infos = Vec::with_capacity(amount_of_raid_infos as usize);
+        for i in 0..amount_of_raid_infos {
+            raid_infos.push(RaidInfo::tokio_read(r).await?);
+        }
+
+        Ok(Self {
+            raid_infos,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // amount_of_raid_infos: u32
+        w.write_all(&(self.raid_infos.len() as u32).to_le_bytes()).await?;
+
+        // raid_infos: RaidInfo[amount_of_raid_infos]
+        for i in self.raid_infos.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // amount_of_raid_infos: u32
+        let amount_of_raid_infos = crate::util::astd_read_u32_le(r).await?;
+
+        // raid_infos: RaidInfo[amount_of_raid_infos]
+        let mut raid_infos = Vec::with_capacity(amount_of_raid_infos as usize);
+        for i in 0..amount_of_raid_infos {
+            raid_infos.push(RaidInfo::astd_read(r).await?);
+        }
+
+        Ok(Self {
+            raid_infos,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // amount_of_raid_infos: u32
+        w.write_all(&(self.raid_infos.len() as u32).to_le_bytes()).await?;
+
+        // raid_infos: RaidInfo[amount_of_raid_infos]
+        for i in self.raid_infos.iter() {
+            i.astd_write(w).await?;
         }
 
         Ok(())

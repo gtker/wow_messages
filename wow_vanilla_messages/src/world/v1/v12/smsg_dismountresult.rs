@@ -18,6 +18,7 @@ pub struct SMSG_DISMOUNTRESULT {
 
 impl ServerMessageWrite for SMSG_DISMOUNTRESULT {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_DISMOUNTRESULT {
     const OPCODE: u16 = 0x016f;
 
@@ -39,6 +40,42 @@ impl MessageBody for SMSG_DISMOUNTRESULT {
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // result: MountResult
         self.result.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // result: MountResult
+        let result = MountResult::tokio_read(r).await?;
+
+        Ok(Self {
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // result: MountResult
+        self.result.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // result: MountResult
+        let result = MountResult::astd_read(r).await?;
+
+        Ok(Self {
+            result,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // result: MountResult
+        self.result.astd_write(w).await?;
 
         Ok(())
     }

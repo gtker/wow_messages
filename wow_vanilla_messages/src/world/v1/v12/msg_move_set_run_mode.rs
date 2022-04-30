@@ -19,6 +19,7 @@ impl ClientMessageWrite for MSG_MOVE_SET_RUN_MODE {}
 
 impl ServerMessageWrite for MSG_MOVE_SET_RUN_MODE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_MOVE_SET_RUN_MODE {
     const OPCODE: u16 = 0x00c2;
 
@@ -40,6 +41,42 @@ impl MessageBody for MSG_MOVE_SET_RUN_MODE {
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // info: MovementInfo
         self.info.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // info: MovementInfo
+        let info = MovementInfo::tokio_read(r).await?;
+
+        Ok(Self {
+            info,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // info: MovementInfo
+        self.info.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // info: MovementInfo
+        let info = MovementInfo::astd_read(r).await?;
+
+        Ok(Self {
+            info,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // info: MovementInfo
+        self.info.astd_write(w).await?;
 
         Ok(())
     }

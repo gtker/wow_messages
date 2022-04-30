@@ -21,6 +21,7 @@ pub struct SMSG_INIT_WORLD_STATES {
 
 impl ServerMessageWrite for SMSG_INIT_WORLD_STATES {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_INIT_WORLD_STATES {
     const OPCODE: u16 = 0x02c2;
 
@@ -66,6 +67,92 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
         // states: WorldState[amount_of_states]
         for i in self.states.iter() {
             i.write(w)?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // map: Map
+        let map = Map::tokio_read(r).await?;
+
+        // area: Area
+        let area = Area::tokio_read(r).await?;
+
+        // amount_of_states: u16
+        let amount_of_states = crate::util::tokio_read_u16_le(r).await?;
+
+        // states: WorldState[amount_of_states]
+        let mut states = Vec::with_capacity(amount_of_states as usize);
+        for i in 0..amount_of_states {
+            states.push(WorldState::tokio_read(r).await?);
+        }
+
+        Ok(Self {
+            map,
+            area,
+            states,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // map: Map
+        self.map.tokio_write(w).await?;
+
+        // area: Area
+        self.area.tokio_write(w).await?;
+
+        // amount_of_states: u16
+        w.write_all(&(self.states.len() as u16).to_le_bytes()).await?;
+
+        // states: WorldState[amount_of_states]
+        for i in self.states.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // map: Map
+        let map = Map::astd_read(r).await?;
+
+        // area: Area
+        let area = Area::astd_read(r).await?;
+
+        // amount_of_states: u16
+        let amount_of_states = crate::util::astd_read_u16_le(r).await?;
+
+        // states: WorldState[amount_of_states]
+        let mut states = Vec::with_capacity(amount_of_states as usize);
+        for i in 0..amount_of_states {
+            states.push(WorldState::astd_read(r).await?);
+        }
+
+        Ok(Self {
+            map,
+            area,
+            states,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // map: Map
+        self.map.astd_write(w).await?;
+
+        // area: Area
+        self.area.astd_write(w).await?;
+
+        // amount_of_states: u16
+        w.write_all(&(self.states.len() as u16).to_le_bytes()).await?;
+
+        // states: WorldState[amount_of_states]
+        for i in self.states.iter() {
+            i.astd_write(w).await?;
         }
 
         Ok(())

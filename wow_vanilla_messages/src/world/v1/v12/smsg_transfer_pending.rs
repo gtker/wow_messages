@@ -18,6 +18,7 @@ pub struct SMSG_TRANSFER_PENDING {
 
 impl ServerMessageWrite for SMSG_TRANSFER_PENDING {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_TRANSFER_PENDING {
     const OPCODE: u16 = 0x003f;
 
@@ -68,6 +69,104 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
 
             // transport_map: Map
             v.transport_map.write(w)?;
+
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // map: Map
+        let map = Map::tokio_read(r).await?;
+
+        // optional has_transport
+        let current_size = {
+            0 // If no fields are present, TODO remove when not needed
+            + Map::size() // map: Map
+        };
+        let has_transport = if current_size < body_size as usize {
+            // transport: u32
+            let transport = crate::util::tokio_read_u32_le(r).await?;
+
+            // transport_map: Map
+            let transport_map = Map::tokio_read(r).await?;
+
+            Some(SMSG_TRANSFER_PENDING_has_transport {
+                transport,
+                transport_map,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            map,
+            has_transport,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // map: Map
+        self.map.tokio_write(w).await?;
+
+        // optional has_transport
+        if let Some(v) = &self.has_transport {
+            // transport: u32
+            w.write_all(&v.transport.to_le_bytes()).await?;
+
+            // transport_map: Map
+            v.transport_map.tokio_write(w).await?;
+
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // map: Map
+        let map = Map::astd_read(r).await?;
+
+        // optional has_transport
+        let current_size = {
+            0 // If no fields are present, TODO remove when not needed
+            + Map::size() // map: Map
+        };
+        let has_transport = if current_size < body_size as usize {
+            // transport: u32
+            let transport = crate::util::astd_read_u32_le(r).await?;
+
+            // transport_map: Map
+            let transport_map = Map::astd_read(r).await?;
+
+            Some(SMSG_TRANSFER_PENDING_has_transport {
+                transport,
+                transport_map,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            map,
+            has_transport,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // map: Map
+        self.map.astd_write(w).await?;
+
+        // optional has_transport
+        if let Some(v) = &self.has_transport {
+            // transport: u32
+            w.write_all(&v.transport.to_le_bytes()).await?;
+
+            // transport_map: Map
+            v.transport_map.astd_write(w).await?;
 
         }
 

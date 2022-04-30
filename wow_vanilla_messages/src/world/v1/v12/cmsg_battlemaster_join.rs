@@ -22,6 +22,7 @@ pub struct CMSG_BATTLEMASTER_JOIN {
 
 impl ClientMessageWrite for CMSG_BATTLEMASTER_JOIN {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_BATTLEMASTER_JOIN {
     const OPCODE: u16 = 0x02ee;
 
@@ -64,6 +65,84 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
 
         // join_as_group: u8
         w.write_all(&self.join_as_group.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // map: Map
+        let map = Map::tokio_read(r).await?;
+
+        // instance_id: u32
+        let instance_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // join_as_group: u8
+        let join_as_group = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            guid,
+            map,
+            instance_id,
+            join_as_group,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // map: Map
+        self.map.tokio_write(w).await?;
+
+        // instance_id: u32
+        w.write_all(&self.instance_id.to_le_bytes()).await?;
+
+        // join_as_group: u8
+        w.write_all(&self.join_as_group.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // map: Map
+        let map = Map::astd_read(r).await?;
+
+        // instance_id: u32
+        let instance_id = crate::util::astd_read_u32_le(r).await?;
+
+        // join_as_group: u8
+        let join_as_group = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            guid,
+            map,
+            instance_id,
+            join_as_group,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // map: Map
+        self.map.astd_write(w).await?;
+
+        // instance_id: u32
+        w.write_all(&self.instance_id.to_le_bytes()).await?;
+
+        // join_as_group: u8
+        w.write_all(&self.join_as_group.to_le_bytes()).await?;
 
         Ok(())
     }

@@ -21,6 +21,7 @@ pub struct CMSG_SPLIT_ITEM {
 
 impl ClientMessageWrite for CMSG_SPLIT_ITEM {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_SPLIT_ITEM {
     const OPCODE: u16 = 0x010e;
 
@@ -70,6 +71,98 @@ impl MessageBody for CMSG_SPLIT_ITEM {
 
         // amount: u8
         w.write_all(&self.amount.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // source_bag: u8
+        let source_bag = crate::util::tokio_read_u8_le(r).await?;
+
+        // source_slot: u8
+        let source_slot = crate::util::tokio_read_u8_le(r).await?;
+
+        // destination_bag: u8
+        let destination_bag = crate::util::tokio_read_u8_le(r).await?;
+
+        // destination_slot: u8
+        let destination_slot = crate::util::tokio_read_u8_le(r).await?;
+
+        // amount: u8
+        let amount = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            source_bag,
+            source_slot,
+            destination_bag,
+            destination_slot,
+            amount,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // source_bag: u8
+        w.write_all(&self.source_bag.to_le_bytes()).await?;
+
+        // source_slot: u8
+        w.write_all(&self.source_slot.to_le_bytes()).await?;
+
+        // destination_bag: u8
+        w.write_all(&self.destination_bag.to_le_bytes()).await?;
+
+        // destination_slot: u8
+        w.write_all(&self.destination_slot.to_le_bytes()).await?;
+
+        // amount: u8
+        w.write_all(&self.amount.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // source_bag: u8
+        let source_bag = crate::util::astd_read_u8_le(r).await?;
+
+        // source_slot: u8
+        let source_slot = crate::util::astd_read_u8_le(r).await?;
+
+        // destination_bag: u8
+        let destination_bag = crate::util::astd_read_u8_le(r).await?;
+
+        // destination_slot: u8
+        let destination_slot = crate::util::astd_read_u8_le(r).await?;
+
+        // amount: u8
+        let amount = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            source_bag,
+            source_slot,
+            destination_bag,
+            destination_slot,
+            amount,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // source_bag: u8
+        w.write_all(&self.source_bag.to_le_bytes()).await?;
+
+        // source_slot: u8
+        w.write_all(&self.source_slot.to_le_bytes()).await?;
+
+        // destination_bag: u8
+        w.write_all(&self.destination_bag.to_le_bytes()).await?;
+
+        // destination_slot: u8
+        w.write_all(&self.destination_slot.to_le_bytes()).await?;
+
+        // amount: u8
+        w.write_all(&self.amount.to_le_bytes()).await?;
 
         Ok(())
     }

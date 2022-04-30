@@ -23,6 +23,7 @@ pub struct SMSG_GUILD_QUERY_RESPONSE {
 
 impl ServerMessageWrite for SMSG_GUILD_QUERY_RESPONSE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_GUILD_QUERY_RESPONSE {
     const OPCODE: u16 = 0x0055;
 
@@ -104,6 +105,162 @@ impl MessageBody for SMSG_GUILD_QUERY_RESPONSE {
 
         // background_color: u32
         w.write_all(&self.background_color.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // id: u32
+        let id = crate::util::tokio_read_u32_le(r).await?;
+
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // rank_names: CString[10]
+        let mut rank_names = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            let s = crate::util::tokio_read_c_string_to_vec(r).await?;
+            rank_names[i] = String::from_utf8(s)?;
+        }
+        let rank_names = rank_names.try_into().unwrap();
+
+        // emblem_style: u32
+        let emblem_style = crate::util::tokio_read_u32_le(r).await?;
+
+        // emblem_color: u32
+        let emblem_color = crate::util::tokio_read_u32_le(r).await?;
+
+        // border_style: u32
+        let border_style = crate::util::tokio_read_u32_le(r).await?;
+
+        // border_color: u32
+        let border_color = crate::util::tokio_read_u32_le(r).await?;
+
+        // background_color: u32
+        let background_color = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            id,
+            name,
+            rank_names,
+            emblem_style,
+            emblem_color,
+            border_style,
+            border_color,
+            background_color,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // id: u32
+        w.write_all(&self.id.to_le_bytes()).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // rank_names: CString[10]
+        for i in self.rank_names.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
+        }
+
+        // emblem_style: u32
+        w.write_all(&self.emblem_style.to_le_bytes()).await?;
+
+        // emblem_color: u32
+        w.write_all(&self.emblem_color.to_le_bytes()).await?;
+
+        // border_style: u32
+        w.write_all(&self.border_style.to_le_bytes()).await?;
+
+        // border_color: u32
+        w.write_all(&self.border_color.to_le_bytes()).await?;
+
+        // background_color: u32
+        w.write_all(&self.background_color.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // id: u32
+        let id = crate::util::astd_read_u32_le(r).await?;
+
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // rank_names: CString[10]
+        let mut rank_names = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            let s = crate::util::astd_read_c_string_to_vec(r).await?;
+            rank_names[i] = String::from_utf8(s)?;
+        }
+        let rank_names = rank_names.try_into().unwrap();
+
+        // emblem_style: u32
+        let emblem_style = crate::util::astd_read_u32_le(r).await?;
+
+        // emblem_color: u32
+        let emblem_color = crate::util::astd_read_u32_le(r).await?;
+
+        // border_style: u32
+        let border_style = crate::util::astd_read_u32_le(r).await?;
+
+        // border_color: u32
+        let border_color = crate::util::astd_read_u32_le(r).await?;
+
+        // background_color: u32
+        let background_color = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            id,
+            name,
+            rank_names,
+            emblem_style,
+            emblem_color,
+            border_style,
+            border_color,
+            background_color,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // id: u32
+        w.write_all(&self.id.to_le_bytes()).await?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // rank_names: CString[10]
+        for i in self.rank_names.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
+        }
+
+        // emblem_style: u32
+        w.write_all(&self.emblem_style.to_le_bytes()).await?;
+
+        // emblem_color: u32
+        w.write_all(&self.emblem_color.to_le_bytes()).await?;
+
+        // border_style: u32
+        w.write_all(&self.border_style.to_le_bytes()).await?;
+
+        // border_color: u32
+        w.write_all(&self.border_color.to_le_bytes()).await?;
+
+        // background_color: u32
+        w.write_all(&self.background_color.to_le_bytes()).await?;
 
         Ok(())
     }

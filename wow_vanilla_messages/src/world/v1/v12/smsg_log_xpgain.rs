@@ -20,6 +20,7 @@ pub struct SMSG_LOG_XPGAIN {
 
 impl ServerMessageWrite for SMSG_LOG_XPGAIN {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_LOG_XPGAIN {
     const OPCODE: u16 = 0x01d0;
 
@@ -82,6 +83,130 @@ impl MessageBody for SMSG_LOG_XPGAIN {
 
                 // exp_group_bonus: f32
                 w.write_all(&exp_group_bonus.to_le_bytes())?;
+
+            }
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // target_guid: Guid
+        let target_guid = Guid::tokio_read(r).await?;
+
+        // total_exp: u32
+        let total_exp = crate::util::tokio_read_u32_le(r).await?;
+
+        // exp_type: ExperienceAwardType
+        let exp_type = ExperienceAwardType::tokio_read(r).await?;
+
+        let exp_type_if = match exp_type {
+            ExperienceAwardType::KILL => SMSG_LOG_XPGAINExperienceAwardType::KILL,
+            ExperienceAwardType::NON_KILL => {
+                // experience_without_rested: u32
+                let experience_without_rested = crate::util::tokio_read_u32_le(r).await?;
+
+                // exp_group_bonus: f32
+                let exp_group_bonus = crate::util::tokio_read_f32_le(r).await?;
+                SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
+                    experience_without_rested,
+                    exp_group_bonus,
+                }
+            }
+        };
+
+        Ok(Self {
+            target_guid,
+            total_exp,
+            exp_type: exp_type_if,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // target_guid: Guid
+        self.target_guid.tokio_write(w).await?;
+
+        // total_exp: u32
+        w.write_all(&self.total_exp.to_le_bytes()).await?;
+
+        // exp_type: ExperienceAwardType
+        self.exp_type.tokio_write(w).await?;
+
+        match &self.exp_type {
+            SMSG_LOG_XPGAINExperienceAwardType::KILL => {}
+            SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
+                experience_without_rested,
+                exp_group_bonus,
+            } => {
+                // experience_without_rested: u32
+                w.write_all(&experience_without_rested.to_le_bytes()).await?;
+
+                // exp_group_bonus: f32
+                w.write_all(&exp_group_bonus.to_le_bytes()).await?;
+
+            }
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // target_guid: Guid
+        let target_guid = Guid::astd_read(r).await?;
+
+        // total_exp: u32
+        let total_exp = crate::util::astd_read_u32_le(r).await?;
+
+        // exp_type: ExperienceAwardType
+        let exp_type = ExperienceAwardType::astd_read(r).await?;
+
+        let exp_type_if = match exp_type {
+            ExperienceAwardType::KILL => SMSG_LOG_XPGAINExperienceAwardType::KILL,
+            ExperienceAwardType::NON_KILL => {
+                // experience_without_rested: u32
+                let experience_without_rested = crate::util::astd_read_u32_le(r).await?;
+
+                // exp_group_bonus: f32
+                let exp_group_bonus = crate::util::astd_read_f32_le(r).await?;
+                SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
+                    experience_without_rested,
+                    exp_group_bonus,
+                }
+            }
+        };
+
+        Ok(Self {
+            target_guid,
+            total_exp,
+            exp_type: exp_type_if,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // target_guid: Guid
+        self.target_guid.astd_write(w).await?;
+
+        // total_exp: u32
+        w.write_all(&self.total_exp.to_le_bytes()).await?;
+
+        // exp_type: ExperienceAwardType
+        self.exp_type.astd_write(w).await?;
+
+        match &self.exp_type {
+            SMSG_LOG_XPGAINExperienceAwardType::KILL => {}
+            SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
+                experience_without_rested,
+                exp_group_bonus,
+            } => {
+                // experience_without_rested: u32
+                w.write_all(&experience_without_rested.to_le_bytes()).await?;
+
+                // exp_group_bonus: f32
+                w.write_all(&exp_group_bonus.to_le_bytes()).await?;
 
             }
         }

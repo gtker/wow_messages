@@ -20,6 +20,7 @@ pub struct CMSG_SELL_ITEM {
 
 impl ClientMessageWrite for CMSG_SELL_ITEM {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_SELL_ITEM {
     const OPCODE: u16 = 0x01a0;
 
@@ -55,6 +56,70 @@ impl MessageBody for CMSG_SELL_ITEM {
 
         // amount: u8
         w.write_all(&self.amount.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // vendor_guid: Guid
+        let vendor_guid = Guid::tokio_read(r).await?;
+
+        // item_guid: Guid
+        let item_guid = Guid::tokio_read(r).await?;
+
+        // amount: u8
+        let amount = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            vendor_guid,
+            item_guid,
+            amount,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // vendor_guid: Guid
+        self.vendor_guid.tokio_write(w).await?;
+
+        // item_guid: Guid
+        self.item_guid.tokio_write(w).await?;
+
+        // amount: u8
+        w.write_all(&self.amount.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // vendor_guid: Guid
+        let vendor_guid = Guid::astd_read(r).await?;
+
+        // item_guid: Guid
+        let item_guid = Guid::astd_read(r).await?;
+
+        // amount: u8
+        let amount = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            vendor_guid,
+            item_guid,
+            amount,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // vendor_guid: Guid
+        self.vendor_guid.astd_write(w).await?;
+
+        // item_guid: Guid
+        self.item_guid.astd_write(w).await?;
+
+        // amount: u8
+        w.write_all(&self.amount.to_le_bytes()).await?;
 
         Ok(())
     }

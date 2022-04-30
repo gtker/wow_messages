@@ -20,6 +20,7 @@ pub struct CMSG_MOVE_KNOCK_BACK_ACK {
 
 impl ClientMessageWrite for CMSG_MOVE_KNOCK_BACK_ACK {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_MOVE_KNOCK_BACK_ACK {
     const OPCODE: u16 = 0x00f0;
 
@@ -55,6 +56,70 @@ impl MessageBody for CMSG_MOVE_KNOCK_BACK_ACK {
 
         // movement_info: MovementInfo
         self.movement_info.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // counter: u32
+        let counter = crate::util::tokio_read_u32_le(r).await?;
+
+        // movement_info: MovementInfo
+        let movement_info = MovementInfo::tokio_read(r).await?;
+
+        Ok(Self {
+            guid,
+            counter,
+            movement_info,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // counter: u32
+        w.write_all(&self.counter.to_le_bytes()).await?;
+
+        // movement_info: MovementInfo
+        self.movement_info.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // counter: u32
+        let counter = crate::util::astd_read_u32_le(r).await?;
+
+        // movement_info: MovementInfo
+        let movement_info = MovementInfo::astd_read(r).await?;
+
+        Ok(Self {
+            guid,
+            counter,
+            movement_info,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // counter: u32
+        w.write_all(&self.counter.to_le_bytes()).await?;
+
+        // movement_info: MovementInfo
+        self.movement_info.astd_write(w).await?;
 
         Ok(())
     }

@@ -19,6 +19,7 @@ pub struct SMSG_PARTYKILLLOG {
 
 impl ServerMessageWrite for SMSG_PARTYKILLLOG {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_PARTYKILLLOG {
     const OPCODE: u16 = 0x01f5;
 
@@ -47,6 +48,56 @@ impl MessageBody for SMSG_PARTYKILLLOG {
 
         // victim: Guid
         self.victim.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // player_with_killing_blow: Guid
+        let player_with_killing_blow = Guid::tokio_read(r).await?;
+
+        // victim: Guid
+        let victim = Guid::tokio_read(r).await?;
+
+        Ok(Self {
+            player_with_killing_blow,
+            victim,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // player_with_killing_blow: Guid
+        self.player_with_killing_blow.tokio_write(w).await?;
+
+        // victim: Guid
+        self.victim.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // player_with_killing_blow: Guid
+        let player_with_killing_blow = Guid::astd_read(r).await?;
+
+        // victim: Guid
+        let victim = Guid::astd_read(r).await?;
+
+        Ok(Self {
+            player_with_killing_blow,
+            victim,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // player_with_killing_blow: Guid
+        self.player_with_killing_blow.astd_write(w).await?;
+
+        // victim: Guid
+        self.victim.astd_write(w).await?;
 
         Ok(())
     }

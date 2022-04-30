@@ -18,6 +18,7 @@ pub struct SMSG_CLIENT_CONTROL_UPDATE {
 
 impl ServerMessageWrite for SMSG_CLIENT_CONTROL_UPDATE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_CLIENT_CONTROL_UPDATE {
     const OPCODE: u16 = 0x0159;
 
@@ -46,6 +47,56 @@ impl MessageBody for SMSG_CLIENT_CONTROL_UPDATE {
 
         // allow_movement: u8
         w.write_all(&self.allow_movement.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: PackedGuid
+        let guid = Guid::tokio_read_packed(r).await?;
+
+        // allow_movement: u8
+        let allow_movement = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            guid,
+            allow_movement,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: PackedGuid
+        self.guid.tokio_write_packed(w).await?;
+
+        // allow_movement: u8
+        w.write_all(&self.allow_movement.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: PackedGuid
+        let guid = Guid::astd_read_packed(r).await?;
+
+        // allow_movement: u8
+        let allow_movement = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            guid,
+            allow_movement,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: PackedGuid
+        self.guid.astd_write_packed(w).await?;
+
+        // allow_movement: u8
+        w.write_all(&self.allow_movement.to_le_bytes()).await?;
 
         Ok(())
     }

@@ -18,6 +18,7 @@ pub struct MSG_RANDOM_ROLL_Client {
 
 impl ClientMessageWrite for MSG_RANDOM_ROLL_Client {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_RANDOM_ROLL_Client {
     const OPCODE: u16 = 0x01fb;
 
@@ -46,6 +47,56 @@ impl MessageBody for MSG_RANDOM_ROLL_Client {
 
         // maximum: u32
         w.write_all(&self.maximum.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // minimum: u32
+        let minimum = crate::util::tokio_read_u32_le(r).await?;
+
+        // maximum: u32
+        let maximum = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            minimum,
+            maximum,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // minimum: u32
+        w.write_all(&self.minimum.to_le_bytes()).await?;
+
+        // maximum: u32
+        w.write_all(&self.maximum.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // minimum: u32
+        let minimum = crate::util::astd_read_u32_le(r).await?;
+
+        // maximum: u32
+        let maximum = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            minimum,
+            maximum,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // minimum: u32
+        w.write_all(&self.minimum.to_le_bytes()).await?;
+
+        // maximum: u32
+        w.write_all(&self.maximum.to_le_bytes()).await?;
 
         Ok(())
     }

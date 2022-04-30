@@ -23,6 +23,7 @@ pub struct CMSG_WORLD_TELEPORT {
 
 impl ClientMessageWrite for CMSG_WORLD_TELEPORT {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_WORLD_TELEPORT {
     const OPCODE: u16 = 0x0008;
 
@@ -75,6 +76,104 @@ impl MessageBody for CMSG_WORLD_TELEPORT {
 
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // time_in_msec: u64
+        let time_in_msec = crate::util::tokio_read_u64_le(r).await?;
+
+        // map: Map
+        let map = Map::tokio_read(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::tokio_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::tokio_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::tokio_read_f32_le(r).await?;
+        // orientation: f32
+        let orientation = crate::util::tokio_read_f32_le(r).await?;
+        Ok(Self {
+            time_in_msec,
+            map,
+            position_x,
+            position_y,
+            position_z,
+            orientation,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // time_in_msec: u64
+        w.write_all(&self.time_in_msec.to_le_bytes()).await?;
+
+        // map: Map
+        self.map.tokio_write(w).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
+
+        // orientation: f32
+        w.write_all(&self.orientation.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // time_in_msec: u64
+        let time_in_msec = crate::util::astd_read_u64_le(r).await?;
+
+        // map: Map
+        let map = Map::astd_read(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::astd_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::astd_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::astd_read_f32_le(r).await?;
+        // orientation: f32
+        let orientation = crate::util::astd_read_f32_le(r).await?;
+        Ok(Self {
+            time_in_msec,
+            map,
+            position_x,
+            position_y,
+            position_z,
+            orientation,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // time_in_msec: u64
+        w.write_all(&self.time_in_msec.to_le_bytes()).await?;
+
+        // map: Map
+        self.map.astd_write(w).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
+
+        // orientation: f32
+        w.write_all(&self.orientation.to_le_bytes()).await?;
 
         Ok(())
     }

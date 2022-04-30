@@ -22,6 +22,7 @@ pub struct SMSG_WEATHER {
 
 impl ServerMessageWrite for SMSG_WEATHER {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_WEATHER {
     const OPCODE: u16 = 0x02f4;
 
@@ -63,6 +64,82 @@ impl MessageBody for SMSG_WEATHER {
 
         // change: WeatherChangeType
         self.change.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // weather_type: WeatherType
+        let weather_type = WeatherType::tokio_read(r).await?;
+
+        // grade: f32
+        let grade = crate::util::tokio_read_f32_le(r).await?;
+        // sound_id: u32
+        let sound_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // change: WeatherChangeType
+        let change = WeatherChangeType::tokio_read(r).await?;
+
+        Ok(Self {
+            weather_type,
+            grade,
+            sound_id,
+            change,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // weather_type: WeatherType
+        self.weather_type.tokio_write(w).await?;
+
+        // grade: f32
+        w.write_all(&self.grade.to_le_bytes()).await?;
+
+        // sound_id: u32
+        w.write_all(&self.sound_id.to_le_bytes()).await?;
+
+        // change: WeatherChangeType
+        self.change.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // weather_type: WeatherType
+        let weather_type = WeatherType::astd_read(r).await?;
+
+        // grade: f32
+        let grade = crate::util::astd_read_f32_le(r).await?;
+        // sound_id: u32
+        let sound_id = crate::util::astd_read_u32_le(r).await?;
+
+        // change: WeatherChangeType
+        let change = WeatherChangeType::astd_read(r).await?;
+
+        Ok(Self {
+            weather_type,
+            grade,
+            sound_id,
+            change,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // weather_type: WeatherType
+        self.weather_type.astd_write(w).await?;
+
+        // grade: f32
+        w.write_all(&self.grade.to_le_bytes()).await?;
+
+        // sound_id: u32
+        w.write_all(&self.sound_id.to_le_bytes()).await?;
+
+        // change: WeatherChangeType
+        self.change.astd_write(w).await?;
 
         Ok(())
     }

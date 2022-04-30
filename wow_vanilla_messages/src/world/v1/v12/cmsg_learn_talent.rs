@@ -18,6 +18,7 @@ pub struct CMSG_LEARN_TALENT {
 
 impl ClientMessageWrite for CMSG_LEARN_TALENT {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_LEARN_TALENT {
     const OPCODE: u16 = 0x0251;
 
@@ -46,6 +47,56 @@ impl MessageBody for CMSG_LEARN_TALENT {
 
         // requested_rank: u32
         w.write_all(&self.requested_rank.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // talent_id: u32
+        let talent_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // requested_rank: u32
+        let requested_rank = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            talent_id,
+            requested_rank,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // talent_id: u32
+        w.write_all(&self.talent_id.to_le_bytes()).await?;
+
+        // requested_rank: u32
+        w.write_all(&self.requested_rank.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // talent_id: u32
+        let talent_id = crate::util::astd_read_u32_le(r).await?;
+
+        // requested_rank: u32
+        let requested_rank = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            talent_id,
+            requested_rank,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // talent_id: u32
+        w.write_all(&self.talent_id.to_le_bytes()).await?;
+
+        // requested_rank: u32
+        w.write_all(&self.requested_rank.to_le_bytes()).await?;
 
         Ok(())
     }

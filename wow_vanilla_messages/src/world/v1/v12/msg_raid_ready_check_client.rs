@@ -16,6 +16,7 @@ pub struct MSG_RAID_READY_CHECK_Client {
 
 impl ClientMessageWrite for MSG_RAID_READY_CHECK_Client {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_RAID_READY_CHECK_Client {
     const OPCODE: u16 = 0x0322;
 
@@ -51,6 +52,74 @@ impl MessageBody for MSG_RAID_READY_CHECK_Client {
         if let Some(v) = &self.answer {
             // state: u8
             w.write_all(&v.state.to_le_bytes())?;
+
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // optional answer
+        let current_size = {
+            0 // If no fields are present, TODO remove when not needed
+        };
+        let answer = if current_size < body_size as usize {
+            // state: u8
+            let state = crate::util::tokio_read_u8_le(r).await?;
+
+            Some(MSG_RAID_READY_CHECK_Client_answer {
+                state,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            answer,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // optional answer
+        if let Some(v) = &self.answer {
+            // state: u8
+            w.write_all(&v.state.to_le_bytes()).await?;
+
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // optional answer
+        let current_size = {
+            0 // If no fields are present, TODO remove when not needed
+        };
+        let answer = if current_size < body_size as usize {
+            // state: u8
+            let state = crate::util::astd_read_u8_le(r).await?;
+
+            Some(MSG_RAID_READY_CHECK_Client_answer {
+                state,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            answer,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // optional answer
+        if let Some(v) = &self.answer {
+            // state: u8
+            w.write_all(&v.state.to_le_bytes()).await?;
 
         }
 

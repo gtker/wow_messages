@@ -19,6 +19,7 @@ pub struct SMSG_QUESTGIVER_QUEST_FAILED {
 
 impl ServerMessageWrite for SMSG_QUESTGIVER_QUEST_FAILED {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_QUESTGIVER_QUEST_FAILED {
     const OPCODE: u16 = 0x0192;
 
@@ -47,6 +48,56 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_FAILED {
 
         // reason: QuestFailedReason
         self.reason.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // quest_id: u32
+        let quest_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // reason: QuestFailedReason
+        let reason = QuestFailedReason::tokio_read(r).await?;
+
+        Ok(Self {
+            quest_id,
+            reason,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+        // reason: QuestFailedReason
+        self.reason.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // quest_id: u32
+        let quest_id = crate::util::astd_read_u32_le(r).await?;
+
+        // reason: QuestFailedReason
+        let reason = QuestFailedReason::astd_read(r).await?;
+
+        Ok(Self {
+            quest_id,
+            reason,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+        // reason: QuestFailedReason
+        self.reason.astd_write(w).await?;
 
         Ok(())
     }

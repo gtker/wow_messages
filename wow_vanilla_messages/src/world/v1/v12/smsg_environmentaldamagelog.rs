@@ -23,6 +23,7 @@ pub struct SMSG_ENVIRONMENTALDAMAGELOG {
 
 impl ServerMessageWrite for SMSG_ENVIRONMENTALDAMAGELOG {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
     const OPCODE: u16 = 0x01fc;
 
@@ -72,6 +73,98 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
 
         // resist: u32
         w.write_all(&self.resist.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // damage_type: EnvironmentalDamageType
+        let damage_type = EnvironmentalDamageType::tokio_read(r).await?;
+
+        // damage: u32
+        let damage = crate::util::tokio_read_u32_le(r).await?;
+
+        // absorb: u32
+        let absorb = crate::util::tokio_read_u32_le(r).await?;
+
+        // resist: u32
+        let resist = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            guid,
+            damage_type,
+            damage,
+            absorb,
+            resist,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // damage_type: EnvironmentalDamageType
+        self.damage_type.tokio_write(w).await?;
+
+        // damage: u32
+        w.write_all(&self.damage.to_le_bytes()).await?;
+
+        // absorb: u32
+        w.write_all(&self.absorb.to_le_bytes()).await?;
+
+        // resist: u32
+        w.write_all(&self.resist.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // damage_type: EnvironmentalDamageType
+        let damage_type = EnvironmentalDamageType::astd_read(r).await?;
+
+        // damage: u32
+        let damage = crate::util::astd_read_u32_le(r).await?;
+
+        // absorb: u32
+        let absorb = crate::util::astd_read_u32_le(r).await?;
+
+        // resist: u32
+        let resist = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            guid,
+            damage_type,
+            damage,
+            absorb,
+            resist,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // damage_type: EnvironmentalDamageType
+        self.damage_type.astd_write(w).await?;
+
+        // damage: u32
+        w.write_all(&self.damage.to_le_bytes()).await?;
+
+        // absorb: u32
+        w.write_all(&self.absorb.to_le_bytes()).await?;
+
+        // resist: u32
+        w.write_all(&self.resist.to_le_bytes()).await?;
 
         Ok(())
     }

@@ -21,6 +21,7 @@ pub struct SMSG_PETITION_SHOW_SIGNATURES {
 
 impl ServerMessageWrite for SMSG_PETITION_SHOW_SIGNATURES {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_PETITION_SHOW_SIGNATURES {
     const OPCODE: u16 = 0x01bf;
 
@@ -63,6 +64,84 @@ impl MessageBody for SMSG_PETITION_SHOW_SIGNATURES {
 
         // amount_of_signatures: u8
         w.write_all(&self.amount_of_signatures.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // item_guid: Guid
+        let item_guid = Guid::tokio_read(r).await?;
+
+        // owner_guid: Guid
+        let owner_guid = Guid::tokio_read(r).await?;
+
+        // petition_guid: Guid
+        let petition_guid = Guid::tokio_read(r).await?;
+
+        // amount_of_signatures: u8
+        let amount_of_signatures = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            item_guid,
+            owner_guid,
+            petition_guid,
+            amount_of_signatures,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // item_guid: Guid
+        self.item_guid.tokio_write(w).await?;
+
+        // owner_guid: Guid
+        self.owner_guid.tokio_write(w).await?;
+
+        // petition_guid: Guid
+        self.petition_guid.tokio_write(w).await?;
+
+        // amount_of_signatures: u8
+        w.write_all(&self.amount_of_signatures.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // item_guid: Guid
+        let item_guid = Guid::astd_read(r).await?;
+
+        // owner_guid: Guid
+        let owner_guid = Guid::astd_read(r).await?;
+
+        // petition_guid: Guid
+        let petition_guid = Guid::astd_read(r).await?;
+
+        // amount_of_signatures: u8
+        let amount_of_signatures = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            item_guid,
+            owner_guid,
+            petition_guid,
+            amount_of_signatures,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // item_guid: Guid
+        self.item_guid.astd_write(w).await?;
+
+        // owner_guid: Guid
+        self.owner_guid.astd_write(w).await?;
+
+        // petition_guid: Guid
+        self.petition_guid.astd_write(w).await?;
+
+        // amount_of_signatures: u8
+        w.write_all(&self.amount_of_signatures.to_le_bytes()).await?;
 
         Ok(())
     }

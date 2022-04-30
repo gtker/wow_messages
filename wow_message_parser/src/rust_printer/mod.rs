@@ -182,6 +182,7 @@ impl Writer {
         read_function: impl Fn(&mut Self, ImplType),
         write_function: impl Fn(&mut Self, ImplType),
     ) {
+        self.wln(ASYNC_TRAIT_MACRO);
         self.open_curly(format!(
             "impl {} for {}",
             WORLD_BODY_TRAIT_NAME,
@@ -217,9 +218,33 @@ impl Writer {
 
         self.open_curly("fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
         write_function(self, ImplType::Std);
+        self.closing_curly_newline();
+
+        self.wln(CFG_ASYNC_TOKIO);
+        self.open_curly(
+            "async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error>",
+        );
+        read_function(self, ImplType::Tokio);
+        self.closing_curly_newline();
+
+        self.wln(CFG_ASYNC_TOKIO);
+        self.open_curly("async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
+        write_function(self, ImplType::Tokio);
+        self.closing_curly_newline();
+
+        self.wln(CFG_ASYNC_ASYNC_STD);
+        self.open_curly(
+            "async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error>",
+        );
+        read_function(self, ImplType::AsyncStd);
+        self.closing_curly_newline();
+
+        self.wln(CFG_ASYNC_ASYNC_STD);
+        self.open_curly("async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
+        write_function(self, ImplType::AsyncStd);
         self.closing_curly();
 
-        self.closing_curly_newline();
+        self.closing_curly_newline(); // impl
     }
 
     pub fn impl_read_and_writable_with_error<

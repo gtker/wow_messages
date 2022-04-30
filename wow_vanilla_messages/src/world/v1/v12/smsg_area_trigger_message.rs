@@ -17,6 +17,7 @@ pub struct SMSG_AREA_TRIGGER_MESSAGE {
 
 impl ServerMessageWrite for SMSG_AREA_TRIGGER_MESSAGE {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_AREA_TRIGGER_MESSAGE {
     const OPCODE: u16 = 0x02b8;
 
@@ -48,6 +49,62 @@ impl MessageBody for SMSG_AREA_TRIGGER_MESSAGE {
         w.write_all(self.message.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // length: u32
+        let length = crate::util::tokio_read_u32_le(r).await?;
+
+        // message: CString
+        let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let message = String::from_utf8(message)?;
+
+        Ok(Self {
+            length,
+            message,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // length: u32
+        w.write_all(&self.length.to_le_bytes()).await?;
+
+        // message: CString
+        w.write_all(self.message.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // length: u32
+        let length = crate::util::astd_read_u32_le(r).await?;
+
+        // message: CString
+        let message = crate::util::astd_read_c_string_to_vec(r).await?;
+        let message = String::from_utf8(message)?;
+
+        Ok(Self {
+            length,
+            message,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // length: u32
+        w.write_all(&self.length.to_le_bytes()).await?;
+
+        // message: CString
+        w.write_all(self.message.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
         Ok(())
     }

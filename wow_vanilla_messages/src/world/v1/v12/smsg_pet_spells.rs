@@ -27,6 +27,7 @@ pub struct SMSG_PET_SPELLS {
 
 impl ServerMessageWrite for SMSG_PET_SPELLS {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_PET_SPELLS {
     const OPCODE: u16 = 0x0179;
 
@@ -124,6 +125,196 @@ impl MessageBody for SMSG_PET_SPELLS {
         // cooldowns: PetSpellCooldown[amount_of_cooldowns]
         for i in self.cooldowns.iter() {
             i.write(w)?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // pet: Guid
+        let pet = Guid::tokio_read(r).await?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::tokio_read_u32_le(r).await?;
+
+        // react: PetReactState
+        let react = PetReactState::tokio_read(r).await?;
+
+        // command: PetCommandState
+        let command = PetCommandState::tokio_read(r).await?;
+
+        // unknown2: u16
+        let unknown2 = crate::util::tokio_read_u16_le(r).await?;
+
+        // action_bars: u32[10]
+        let mut action_bars = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            action_bars.push(crate::util::tokio_read_u32_le(r).await?);
+        }
+        let action_bars = action_bars.try_into().unwrap();
+
+        // amount_of_spells: u8
+        let amount_of_spells = crate::util::tokio_read_u8_le(r).await?;
+
+        // spells: u32[amount_of_spells]
+        let mut spells = Vec::with_capacity(amount_of_spells as usize);
+        for i in 0..amount_of_spells {
+            spells.push(crate::util::tokio_read_u32_le(r).await?);
+        }
+
+        // amount_of_cooldowns: u8
+        let amount_of_cooldowns = crate::util::tokio_read_u8_le(r).await?;
+
+        // cooldowns: PetSpellCooldown[amount_of_cooldowns]
+        let mut cooldowns = Vec::with_capacity(amount_of_cooldowns as usize);
+        for i in 0..amount_of_cooldowns {
+            cooldowns.push(PetSpellCooldown::tokio_read(r).await?);
+        }
+
+        Ok(Self {
+            pet,
+            unknown1,
+            react,
+            command,
+            unknown2,
+            action_bars,
+            spells,
+            cooldowns,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet: Guid
+        self.pet.tokio_write(w).await?;
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // react: PetReactState
+        self.react.tokio_write(w).await?;
+
+        // command: PetCommandState
+        self.command.tokio_write(w).await?;
+
+        // unknown2: u16
+        w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+        // action_bars: u32[10]
+        for i in self.action_bars.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // amount_of_spells: u8
+        w.write_all(&(self.spells.len() as u8).to_le_bytes()).await?;
+
+        // spells: u32[amount_of_spells]
+        for i in self.spells.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // amount_of_cooldowns: u8
+        w.write_all(&(self.cooldowns.len() as u8).to_le_bytes()).await?;
+
+        // cooldowns: PetSpellCooldown[amount_of_cooldowns]
+        for i in self.cooldowns.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // pet: Guid
+        let pet = Guid::astd_read(r).await?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::astd_read_u32_le(r).await?;
+
+        // react: PetReactState
+        let react = PetReactState::astd_read(r).await?;
+
+        // command: PetCommandState
+        let command = PetCommandState::astd_read(r).await?;
+
+        // unknown2: u16
+        let unknown2 = crate::util::astd_read_u16_le(r).await?;
+
+        // action_bars: u32[10]
+        let mut action_bars = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            action_bars.push(crate::util::astd_read_u32_le(r).await?);
+        }
+        let action_bars = action_bars.try_into().unwrap();
+
+        // amount_of_spells: u8
+        let amount_of_spells = crate::util::astd_read_u8_le(r).await?;
+
+        // spells: u32[amount_of_spells]
+        let mut spells = Vec::with_capacity(amount_of_spells as usize);
+        for i in 0..amount_of_spells {
+            spells.push(crate::util::astd_read_u32_le(r).await?);
+        }
+
+        // amount_of_cooldowns: u8
+        let amount_of_cooldowns = crate::util::astd_read_u8_le(r).await?;
+
+        // cooldowns: PetSpellCooldown[amount_of_cooldowns]
+        let mut cooldowns = Vec::with_capacity(amount_of_cooldowns as usize);
+        for i in 0..amount_of_cooldowns {
+            cooldowns.push(PetSpellCooldown::astd_read(r).await?);
+        }
+
+        Ok(Self {
+            pet,
+            unknown1,
+            react,
+            command,
+            unknown2,
+            action_bars,
+            spells,
+            cooldowns,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet: Guid
+        self.pet.astd_write(w).await?;
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // react: PetReactState
+        self.react.astd_write(w).await?;
+
+        // command: PetCommandState
+        self.command.astd_write(w).await?;
+
+        // unknown2: u16
+        w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+        // action_bars: u32[10]
+        for i in self.action_bars.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // amount_of_spells: u8
+        w.write_all(&(self.spells.len() as u8).to_le_bytes()).await?;
+
+        // spells: u32[amount_of_spells]
+        for i in self.spells.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        // amount_of_cooldowns: u8
+        w.write_all(&(self.cooldowns.len() as u8).to_le_bytes()).await?;
+
+        // cooldowns: PetSpellCooldown[amount_of_cooldowns]
+        for i in self.cooldowns.iter() {
+            i.astd_write(w).await?;
         }
 
         Ok(())

@@ -23,6 +23,7 @@ pub struct SMSG_START_MIRROR_TIMER {
 
 impl ServerMessageWrite for SMSG_START_MIRROR_TIMER {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_START_MIRROR_TIMER {
     const OPCODE: u16 = 0x01d9;
 
@@ -79,6 +80,112 @@ impl MessageBody for SMSG_START_MIRROR_TIMER {
 
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // timer: TimerType
+        let timer = TimerType::tokio_read(r).await?;
+
+        // time_remaining: u32
+        let time_remaining = crate::util::tokio_read_u32_le(r).await?;
+
+        // duration: u32
+        let duration = crate::util::tokio_read_u32_le(r).await?;
+
+        // scale: u32
+        let scale = crate::util::tokio_read_u32_le(r).await?;
+
+        // is_frozen: u8
+        let is_frozen = crate::util::tokio_read_u8_le(r).await?;
+
+        // id: u32
+        let id = crate::util::tokio_read_u32_le(r).await?;
+
+        Ok(Self {
+            timer,
+            time_remaining,
+            duration,
+            scale,
+            is_frozen,
+            id,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // timer: TimerType
+        self.timer.tokio_write(w).await?;
+
+        // time_remaining: u32
+        w.write_all(&self.time_remaining.to_le_bytes()).await?;
+
+        // duration: u32
+        w.write_all(&self.duration.to_le_bytes()).await?;
+
+        // scale: u32
+        w.write_all(&self.scale.to_le_bytes()).await?;
+
+        // is_frozen: u8
+        w.write_all(&self.is_frozen.to_le_bytes()).await?;
+
+        // id: u32
+        w.write_all(&self.id.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // timer: TimerType
+        let timer = TimerType::astd_read(r).await?;
+
+        // time_remaining: u32
+        let time_remaining = crate::util::astd_read_u32_le(r).await?;
+
+        // duration: u32
+        let duration = crate::util::astd_read_u32_le(r).await?;
+
+        // scale: u32
+        let scale = crate::util::astd_read_u32_le(r).await?;
+
+        // is_frozen: u8
+        let is_frozen = crate::util::astd_read_u8_le(r).await?;
+
+        // id: u32
+        let id = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            timer,
+            time_remaining,
+            duration,
+            scale,
+            is_frozen,
+            id,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // timer: TimerType
+        self.timer.astd_write(w).await?;
+
+        // time_remaining: u32
+        w.write_all(&self.time_remaining.to_le_bytes()).await?;
+
+        // duration: u32
+        w.write_all(&self.duration.to_le_bytes()).await?;
+
+        // scale: u32
+        w.write_all(&self.scale.to_le_bytes()).await?;
+
+        // is_frozen: u8
+        w.write_all(&self.is_frozen.to_le_bytes()).await?;
+
+        // id: u32
+        w.write_all(&self.id.to_le_bytes()).await?;
 
         Ok(())
     }

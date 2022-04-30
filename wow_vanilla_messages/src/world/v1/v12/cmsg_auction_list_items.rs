@@ -26,6 +26,7 @@ pub struct CMSG_AUCTION_LIST_ITEMS {
 
 impl ClientMessageWrite for CMSG_AUCTION_LIST_ITEMS {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_AUCTION_LIST_ITEMS {
     const OPCODE: u16 = 0x0258;
 
@@ -113,6 +114,174 @@ impl MessageBody for CMSG_AUCTION_LIST_ITEMS {
 
         // usable: u8
         w.write_all(&self.usable.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // auctioneer_guid: Guid
+        let auctioneer_guid = Guid::tokio_read(r).await?;
+
+        // list_start_item: u32
+        let list_start_item = crate::util::tokio_read_u32_le(r).await?;
+
+        // searched_name: CString
+        let searched_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let searched_name = String::from_utf8(searched_name)?;
+
+        // minimum_level: u8
+        let minimum_level = crate::util::tokio_read_u8_le(r).await?;
+
+        // maximum_level: u8
+        let maximum_level = crate::util::tokio_read_u8_le(r).await?;
+
+        // auction_slot_id: u32
+        let auction_slot_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // auction_main_category: u32
+        let auction_main_category = crate::util::tokio_read_u32_le(r).await?;
+
+        // auction_sub_category: u32
+        let auction_sub_category = crate::util::tokio_read_u32_le(r).await?;
+
+        // auction_quality: u32
+        let auction_quality = crate::util::tokio_read_u32_le(r).await?;
+
+        // usable: u8
+        let usable = crate::util::tokio_read_u8_le(r).await?;
+
+        Ok(Self {
+            auctioneer_guid,
+            list_start_item,
+            searched_name,
+            minimum_level,
+            maximum_level,
+            auction_slot_id,
+            auction_main_category,
+            auction_sub_category,
+            auction_quality,
+            usable,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // auctioneer_guid: Guid
+        self.auctioneer_guid.tokio_write(w).await?;
+
+        // list_start_item: u32
+        w.write_all(&self.list_start_item.to_le_bytes()).await?;
+
+        // searched_name: CString
+        w.write_all(self.searched_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // minimum_level: u8
+        w.write_all(&self.minimum_level.to_le_bytes()).await?;
+
+        // maximum_level: u8
+        w.write_all(&self.maximum_level.to_le_bytes()).await?;
+
+        // auction_slot_id: u32
+        w.write_all(&self.auction_slot_id.to_le_bytes()).await?;
+
+        // auction_main_category: u32
+        w.write_all(&self.auction_main_category.to_le_bytes()).await?;
+
+        // auction_sub_category: u32
+        w.write_all(&self.auction_sub_category.to_le_bytes()).await?;
+
+        // auction_quality: u32
+        w.write_all(&self.auction_quality.to_le_bytes()).await?;
+
+        // usable: u8
+        w.write_all(&self.usable.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // auctioneer_guid: Guid
+        let auctioneer_guid = Guid::astd_read(r).await?;
+
+        // list_start_item: u32
+        let list_start_item = crate::util::astd_read_u32_le(r).await?;
+
+        // searched_name: CString
+        let searched_name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let searched_name = String::from_utf8(searched_name)?;
+
+        // minimum_level: u8
+        let minimum_level = crate::util::astd_read_u8_le(r).await?;
+
+        // maximum_level: u8
+        let maximum_level = crate::util::astd_read_u8_le(r).await?;
+
+        // auction_slot_id: u32
+        let auction_slot_id = crate::util::astd_read_u32_le(r).await?;
+
+        // auction_main_category: u32
+        let auction_main_category = crate::util::astd_read_u32_le(r).await?;
+
+        // auction_sub_category: u32
+        let auction_sub_category = crate::util::astd_read_u32_le(r).await?;
+
+        // auction_quality: u32
+        let auction_quality = crate::util::astd_read_u32_le(r).await?;
+
+        // usable: u8
+        let usable = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            auctioneer_guid,
+            list_start_item,
+            searched_name,
+            minimum_level,
+            maximum_level,
+            auction_slot_id,
+            auction_main_category,
+            auction_sub_category,
+            auction_quality,
+            usable,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // auctioneer_guid: Guid
+        self.auctioneer_guid.astd_write(w).await?;
+
+        // list_start_item: u32
+        w.write_all(&self.list_start_item.to_le_bytes()).await?;
+
+        // searched_name: CString
+        w.write_all(self.searched_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // minimum_level: u8
+        w.write_all(&self.minimum_level.to_le_bytes()).await?;
+
+        // maximum_level: u8
+        w.write_all(&self.maximum_level.to_le_bytes()).await?;
+
+        // auction_slot_id: u32
+        w.write_all(&self.auction_slot_id.to_le_bytes()).await?;
+
+        // auction_main_category: u32
+        w.write_all(&self.auction_main_category.to_le_bytes()).await?;
+
+        // auction_sub_category: u32
+        w.write_all(&self.auction_sub_category.to_le_bytes()).await?;
+
+        // auction_quality: u32
+        w.write_all(&self.auction_quality.to_le_bytes()).await?;
+
+        // usable: u8
+        w.write_all(&self.usable.to_le_bytes()).await?;
 
         Ok(())
     }

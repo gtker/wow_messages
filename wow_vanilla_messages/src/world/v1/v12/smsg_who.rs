@@ -18,6 +18,7 @@ pub struct SMSG_WHO {
 
 impl ServerMessageWrite for SMSG_WHO {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_WHO {
     const OPCODE: u16 = 0x0063;
 
@@ -56,6 +57,78 @@ impl MessageBody for SMSG_WHO {
         // players: WhoPlayer[listed_players]
         for i in self.players.iter() {
             i.write(w)?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // listed_players: u32
+        let listed_players = crate::util::tokio_read_u32_le(r).await?;
+
+        // online_players: u32
+        let online_players = crate::util::tokio_read_u32_le(r).await?;
+
+        // players: WhoPlayer[listed_players]
+        let mut players = Vec::with_capacity(listed_players as usize);
+        for i in 0..listed_players {
+            players.push(WhoPlayer::tokio_read(r).await?);
+        }
+
+        Ok(Self {
+            online_players,
+            players,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // listed_players: u32
+        w.write_all(&(self.players.len() as u32).to_le_bytes()).await?;
+
+        // online_players: u32
+        w.write_all(&self.online_players.to_le_bytes()).await?;
+
+        // players: WhoPlayer[listed_players]
+        for i in self.players.iter() {
+            i.tokio_write(w).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // listed_players: u32
+        let listed_players = crate::util::astd_read_u32_le(r).await?;
+
+        // online_players: u32
+        let online_players = crate::util::astd_read_u32_le(r).await?;
+
+        // players: WhoPlayer[listed_players]
+        let mut players = Vec::with_capacity(listed_players as usize);
+        for i in 0..listed_players {
+            players.push(WhoPlayer::astd_read(r).await?);
+        }
+
+        Ok(Self {
+            online_players,
+            players,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // listed_players: u32
+        w.write_all(&(self.players.len() as u32).to_le_bytes()).await?;
+
+        // online_players: u32
+        w.write_all(&self.online_players.to_le_bytes()).await?;
+
+        // players: WhoPlayer[listed_players]
+        for i in self.players.iter() {
+            i.astd_write(w).await?;
         }
 
         Ok(())

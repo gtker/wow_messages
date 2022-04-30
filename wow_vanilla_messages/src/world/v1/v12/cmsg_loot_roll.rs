@@ -21,6 +21,7 @@ pub struct CMSG_LOOT_ROLL {
 
 impl ClientMessageWrite for CMSG_LOOT_ROLL {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_LOOT_ROLL {
     const OPCODE: u16 = 0x02a0;
 
@@ -56,6 +57,70 @@ impl MessageBody for CMSG_LOOT_ROLL {
 
         // vote: RollVote
         self.vote.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // item_guid: Guid
+        let item_guid = Guid::tokio_read(r).await?;
+
+        // item_slot: u32
+        let item_slot = crate::util::tokio_read_u32_le(r).await?;
+
+        // vote: RollVote
+        let vote = RollVote::tokio_read(r).await?;
+
+        Ok(Self {
+            item_guid,
+            item_slot,
+            vote,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // item_guid: Guid
+        self.item_guid.tokio_write(w).await?;
+
+        // item_slot: u32
+        w.write_all(&self.item_slot.to_le_bytes()).await?;
+
+        // vote: RollVote
+        self.vote.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // item_guid: Guid
+        let item_guid = Guid::astd_read(r).await?;
+
+        // item_slot: u32
+        let item_slot = crate::util::astd_read_u32_le(r).await?;
+
+        // vote: RollVote
+        let vote = RollVote::astd_read(r).await?;
+
+        Ok(Self {
+            item_guid,
+            item_slot,
+            vote,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // item_guid: Guid
+        self.item_guid.astd_write(w).await?;
+
+        // item_slot: u32
+        w.write_all(&self.item_slot.to_le_bytes()).await?;
+
+        // vote: RollVote
+        self.vote.astd_write(w).await?;
 
         Ok(())
     }

@@ -17,6 +17,7 @@ pub struct CMSG_CHANNEL_PASSWORD {
 
 impl ClientMessageWrite for CMSG_CHANNEL_PASSWORD {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_CHANNEL_PASSWORD {
     const OPCODE: u16 = 0x009c;
 
@@ -51,6 +52,68 @@ impl MessageBody for CMSG_CHANNEL_PASSWORD {
         w.write_all(self.channel_password.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // channel_name: CString
+        let channel_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let channel_name = String::from_utf8(channel_name)?;
+
+        // channel_password: CString
+        let channel_password = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let channel_password = String::from_utf8(channel_password)?;
+
+        Ok(Self {
+            channel_name,
+            channel_password,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // channel_name: CString
+        w.write_all(self.channel_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // channel_password: CString
+        w.write_all(self.channel_password.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // channel_name: CString
+        let channel_name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let channel_name = String::from_utf8(channel_name)?;
+
+        // channel_password: CString
+        let channel_password = crate::util::astd_read_c_string_to_vec(r).await?;
+        let channel_password = String::from_utf8(channel_password)?;
+
+        Ok(Self {
+            channel_name,
+            channel_password,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // channel_name: CString
+        w.write_all(self.channel_name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
+
+        // channel_password: CString
+        w.write_all(self.channel_password.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
         Ok(())
     }

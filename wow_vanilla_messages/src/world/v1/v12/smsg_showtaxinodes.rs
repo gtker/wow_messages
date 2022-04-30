@@ -20,6 +20,7 @@ pub struct SMSG_SHOWTAXINODES {
 
 impl ServerMessageWrite for SMSG_SHOWTAXINODES {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_SHOWTAXINODES {
     const OPCODE: u16 = 0x01a9;
 
@@ -72,6 +73,106 @@ impl MessageBody for SMSG_SHOWTAXINODES {
         // nodes: u32[-]
         for i in self.nodes.iter() {
             w.write_all(&i.to_le_bytes())?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // unknown1: u32
+        let unknown1 = crate::util::tokio_read_u32_le(r).await?;
+
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        // nearest_node: u32
+        let nearest_node = crate::util::tokio_read_u32_le(r).await?;
+
+        // nodes: u32[-]
+        let mut current_size = {
+            4 // unknown1: u32
+            + 8 // guid: Guid
+            + 4 // nearest_node: u32
+        };
+        let mut nodes = Vec::with_capacity(body_size as usize - current_size);
+        while current_size < (body_size as usize) {
+            nodes.push(crate::util::tokio_read_u32_le(r).await?);
+            current_size += 1;
+        }
+
+        Ok(Self {
+            unknown1,
+            guid,
+            nearest_node,
+            nodes,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        // nearest_node: u32
+        w.write_all(&self.nearest_node.to_le_bytes()).await?;
+
+        // nodes: u32[-]
+        for i in self.nodes.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // unknown1: u32
+        let unknown1 = crate::util::astd_read_u32_le(r).await?;
+
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // nearest_node: u32
+        let nearest_node = crate::util::astd_read_u32_le(r).await?;
+
+        // nodes: u32[-]
+        let mut current_size = {
+            4 // unknown1: u32
+            + 8 // guid: Guid
+            + 4 // nearest_node: u32
+        };
+        let mut nodes = Vec::with_capacity(body_size as usize - current_size);
+        while current_size < (body_size as usize) {
+            nodes.push(crate::util::astd_read_u32_le(r).await?);
+            current_size += 1;
+        }
+
+        Ok(Self {
+            unknown1,
+            guid,
+            nearest_node,
+            nodes,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // nearest_node: u32
+        w.write_all(&self.nearest_node.to_le_bytes()).await?;
+
+        // nodes: u32[-]
+        for i in self.nodes.iter() {
+            w.write_all(&i.to_le_bytes()).await?;
         }
 
         Ok(())

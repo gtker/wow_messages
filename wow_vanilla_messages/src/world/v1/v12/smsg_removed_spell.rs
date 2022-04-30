@@ -17,6 +17,7 @@ pub struct SMSG_REMOVED_SPELL {
 
 impl ServerMessageWrite for SMSG_REMOVED_SPELL {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_REMOVED_SPELL {
     const OPCODE: u16 = 0x0203;
 
@@ -38,6 +39,42 @@ impl MessageBody for SMSG_REMOVED_SPELL {
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // spell_id: u16
         w.write_all(&self.spell_id.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // spell_id: u16
+        let spell_id = crate::util::tokio_read_u16_le(r).await?;
+
+        Ok(Self {
+            spell_id,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // spell_id: u16
+        w.write_all(&self.spell_id.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // spell_id: u16
+        let spell_id = crate::util::astd_read_u16_le(r).await?;
+
+        Ok(Self {
+            spell_id,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // spell_id: u16
+        w.write_all(&self.spell_id.to_le_bytes()).await?;
 
         Ok(())
     }

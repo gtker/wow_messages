@@ -22,6 +22,7 @@ pub struct SMSG_QUESTUPDATE_ADD_KILL {
 
 impl ServerMessageWrite for SMSG_QUESTUPDATE_ADD_KILL {}
 
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
     const OPCODE: u16 = 0x0199;
 
@@ -71,6 +72,98 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
 
         // guid: Guid
         self.guid.write(w)?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // quest_id: u32
+        let quest_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // create_id: u32
+        let create_id = crate::util::tokio_read_u32_le(r).await?;
+
+        // kill_count: u32
+        let kill_count = crate::util::tokio_read_u32_le(r).await?;
+
+        // required_kill_count: u32
+        let required_kill_count = crate::util::tokio_read_u32_le(r).await?;
+
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
+
+        Ok(Self {
+            quest_id,
+            create_id,
+            kill_count,
+            required_kill_count,
+            guid,
+        })
+    }
+
+    #[cfg(feature = "async_tokio")]
+    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+        // create_id: u32
+        w.write_all(&self.create_id.to_le_bytes()).await?;
+
+        // kill_count: u32
+        w.write_all(&self.kill_count.to_le_bytes()).await?;
+
+        // required_kill_count: u32
+        w.write_all(&self.required_kill_count.to_le_bytes()).await?;
+
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
+        // quest_id: u32
+        let quest_id = crate::util::astd_read_u32_le(r).await?;
+
+        // create_id: u32
+        let create_id = crate::util::astd_read_u32_le(r).await?;
+
+        // kill_count: u32
+        let kill_count = crate::util::astd_read_u32_le(r).await?;
+
+        // required_kill_count: u32
+        let required_kill_count = crate::util::astd_read_u32_le(r).await?;
+
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        Ok(Self {
+            quest_id,
+            create_id,
+            kill_count,
+            required_kill_count,
+            guid,
+        })
+    }
+
+    #[cfg(feature = "async_std")]
+    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+        // create_id: u32
+        w.write_all(&self.create_id.to_le_bytes()).await?;
+
+        // kill_count: u32
+        w.write_all(&self.kill_count.to_le_bytes()).await?;
+
+        // required_kill_count: u32
+        w.write_all(&self.required_kill_count.to_le_bytes()).await?;
+
+        // guid: Guid
+        self.guid.astd_write(w).await?;
 
         Ok(())
     }
