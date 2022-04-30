@@ -4,6 +4,7 @@ use crate::parser::enumerator::Definer;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::{Endianness, IntegerType};
 use crate::wowm_printer::{get_definer_wowm_definition, get_struct_wowm_definition};
+use crate::ContainerType;
 use std::fmt::Write;
 use std::fs::read_to_string;
 use std::path::Path;
@@ -196,7 +197,55 @@ pub fn print_docs_for_container(e: &Container) -> DocWriter {
     s.wln(get_struct_wowm_definition(e, ""));
     s.wln("```");
 
+    print_container_header(&mut s, e);
+
     s
+}
+
+fn print_container_header(s: &mut DocWriter, e: &Container) {
+    match e.container_type() {
+        ContainerType::Struct | ContainerType::CLogin(_) | ContainerType::SLogin(_) => return,
+        _ => {}
+    }
+
+    s.wln("### Header");
+
+    match e.container_type() {
+        ContainerType::Msg(_) => s.wln("MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 4 bytes if they are sent from the server (SMSG)."),
+        ContainerType::CMsg(_) => {
+            s.wln("CMSG have a header of 6 bytes.");
+        }
+        ContainerType::SMsg(_) => {
+            s.wln("SMSG have a header of 4 bytes.");
+        }
+        _ => panic!("unexpected container type"),
+    };
+
+    s.newline();
+
+    if matches!(
+        e.container_type(),
+        ContainerType::CMsg(_) | ContainerType::Msg(_)
+    ) {
+        s.wln("#### CMSG Header");
+
+        s.wln("| Offset | Size / Endianness | Type   | Name   | Description |");
+        s.wln("| ------ | ----------------- | ------ | ------ | ----------- |");
+        s.wln("| 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|");
+        s.wln("| 0x02   | 4 / Little        | uint32 | opcode | Opcode that determines which fields the message contains.|");
+    }
+
+    if matches!(
+        e.container_type(),
+        ContainerType::SMsg(_) | ContainerType::Msg(_)
+    ) {
+        s.wln("#### SMSG Header");
+
+        s.wln("| Offset | Size / Endianness | Type   | Name   | Description |");
+        s.wln("| ------ | ----------------- | ------ | ------ | ----------- |");
+        s.wln("| 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|");
+        s.wln("| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|");
+    }
 }
 
 fn print_definer_table(s: &mut DocWriter, e: &Definer) {
