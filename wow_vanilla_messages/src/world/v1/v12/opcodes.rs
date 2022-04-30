@@ -9,6 +9,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 use crate::world::v1::v12::MSG_MOVE_START_FORWARD;
 use crate::world::v1::v12::MSG_MOVE_START_BACKWARD;
 use crate::world::v1::v12::MSG_MOVE_STOP;

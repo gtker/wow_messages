@@ -41,9 +41,11 @@ pub const ASYNC_TRAIT_MACRO: &str = "#[async_trait]";
 pub const ASYNC_TRAIT_IMPORT: &str = "use async_trait::async_trait;";
 
 pub const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
+pub const ASYNC_STD_IMPORT: &str = "use async_std::io::{ReadExt, WriteExt};";
 
 const CFG_ASYNC_ANY: &str = "#[cfg(any(feature = \"async_tokio\", feature = \"async_std\"))]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"async_tokio\")]";
+const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async_std\")]";
 
 impl Writer {
     pub(crate) const INDENTATION: &'static str = "    ";

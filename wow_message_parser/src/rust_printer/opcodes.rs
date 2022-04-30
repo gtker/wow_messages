@@ -2,8 +2,9 @@ use crate::container::{Container, ContainerType};
 use crate::file_utils::{get_import_path, get_login_logon_version_path, get_world_version_path};
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
-    Writer, ASYNC_TRAIT, ASYNC_TRAIT_IMPORT, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO, TOKIO_IMPORT,
-    WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
+    Writer, ASYNC_STD_IMPORT, ASYNC_TRAIT, ASYNC_TRAIT_IMPORT, CFG_ASYNC_ANY, CFG_ASYNC_ASYNC_STD,
+    CFG_ASYNC_TOKIO, TOKIO_IMPORT, WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME,
+    WORLD_SERVER_HEADER_TRAIT_NAME,
 };
 
 const CLOGIN_NAME: &str = "Client";
@@ -65,13 +66,17 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
     match container_type {
         ContainerType::SLogin(_) => {
             s.wln("use crate::ReadableAndWritable;");
+
             s.newline();
+
             s.wln(CFG_ASYNC_ANY);
             s.wln(format!("use crate::{};", ASYNC_TRAIT));
             s.wln(CFG_ASYNC_ANY);
             s.wln(ASYNC_TRAIT_IMPORT);
             s.wln(CFG_ASYNC_TOKIO);
             s.wln(TOKIO_IMPORT);
+            s.wln(CFG_ASYNC_ASYNC_STD);
+            s.wln(ASYNC_STD_IMPORT);
         }
         ContainerType::CMsg(_) => {
             s.wln(format!("use crate::{};", WORLD_BODY_TRAIT_NAME));
@@ -81,13 +86,17 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
                 WORLD_SERVER_HEADER_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME,
             ));
             s.wln("use wow_srp::header_crypto::{Decrypter, Encrypter};");
+
             s.newline();
+
             s.wln(CFG_ASYNC_ANY);
             s.wln(format!("use crate::{};", ASYNC_TRAIT));
             s.wln(CFG_ASYNC_ANY);
             s.wln(ASYNC_TRAIT_IMPORT);
             s.wln(CFG_ASYNC_TOKIO);
             s.wln(TOKIO_IMPORT);
+            s.wln(CFG_ASYNC_ASYNC_STD);
+            s.wln(ASYNC_STD_IMPORT);
         }
         _ => {}
     }

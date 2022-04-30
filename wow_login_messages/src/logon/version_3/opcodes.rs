@@ -6,6 +6,8 @@ use crate::AsyncReadWrite;
 use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 use crate::logon::version_3::{CMD_AUTH_LOGON_CHALLENGE_Server, CMD_AUTH_LOGON_CHALLENGE_ServerError};
 use crate::logon::version_2::{CMD_AUTH_LOGON_PROOF_Server, CMD_AUTH_LOGON_PROOF_ServerError};
 use crate::logon::version_2::{CMD_REALM_LIST_Server, CMD_REALM_LIST_ServerError};
