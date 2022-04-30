@@ -9,3 +9,23 @@ categories = ["authentication", "network-programming", "game-development", "game
 readme = "README.md"
 authors = ["Gtker <github@gtker.com"]
 edition = "2018"
+
+[features]
+default = ["async_tokio", "async_std"]
+async_tokio = ["tokio", "async-trait"]
+async_std = ["async-std", "async-trait"]
+
+[dependencies.tokio]
+version = "1"
+default-features = false
+features = ["io-util"]
+optional = true
+
+[dependencies.async-trait]
+version = "0.1"
+optional = true
+
+[dependencies.async-std]
+version = "1.11"
+optional = true
+features = ["async-io"]

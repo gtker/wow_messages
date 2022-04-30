@@ -1,3 +1,15 @@
+#[cfg(feature = "async_tokio")]
+mod tokio_impl;
+
+#[cfg(feature = "async_std")]
+mod async_std_impl;
+
+#[cfg(feature = "async_std")]
+pub use async_std_impl::*;
+
+#[cfg(feature = "async_tokio")]
+pub use tokio_impl::*;
+
 use std::io::{Read, Write};
 
 pub fn read_fixed_string_to_vec<R: Read>(
