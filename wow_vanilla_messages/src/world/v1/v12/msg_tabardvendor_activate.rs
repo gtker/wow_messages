@@ -18,25 +18,17 @@ pub struct MSG_TABARDVENDOR_ACTIVATE {
     pub guid: Guid,
 }
 
-impl ClientMessageWrite for MSG_TABARDVENDOR_ACTIVATE {
-    const OPCODE: u16 = 0x1f2;
+impl ClientMessageWrite for MSG_TABARDVENDOR_ACTIVATE {}
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
-    }
-
-}
-
-impl ServerMessageWrite for MSG_TABARDVENDOR_ACTIVATE {
-    const OPCODE: u16 = 0x1f2;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
-    }
-
-}
+impl ServerMessageWrite for MSG_TABARDVENDOR_ACTIVATE {}
 
 impl MessageBody for MSG_TABARDVENDOR_ACTIVATE {
+    const OPCODE: u16 = 0x01f2;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        Self::size() as u16
+    }
+
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

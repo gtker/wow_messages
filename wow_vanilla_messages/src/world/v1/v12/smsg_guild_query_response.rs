@@ -23,16 +23,15 @@ pub struct SMSG_GUILD_QUERY_RESPONSE {
     pub background_color: u32,
 }
 
-impl ServerMessageWrite for SMSG_GUILD_QUERY_RESPONSE {
-    const OPCODE: u16 = 0x55;
+impl ServerMessageWrite for SMSG_GUILD_QUERY_RESPONSE {}
+
+impl MessageBody for SMSG_GUILD_QUERY_RESPONSE {
+    const OPCODE: u16 = 0x0055;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_GUILD_QUERY_RESPONSE {
     type Error = SMSG_GUILD_QUERY_RESPONSEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

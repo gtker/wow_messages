@@ -21,16 +21,15 @@ pub struct CMSG_LOOT_ROLL {
     pub vote: RollVote,
 }
 
-impl ClientMessageWrite for CMSG_LOOT_ROLL {
-    const OPCODE: u16 = 0x2a0;
+impl ClientMessageWrite for CMSG_LOOT_ROLL {}
+
+impl MessageBody for CMSG_LOOT_ROLL {
+    const OPCODE: u16 = 0x02a0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_LOOT_ROLL {
     type Error = CMSG_LOOT_ROLLError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -21,16 +21,15 @@ pub struct SMSG_RAID_INSTANCE_MESSAGE {
     pub time_left: u32,
 }
 
-impl ServerMessageWrite for SMSG_RAID_INSTANCE_MESSAGE {
-    const OPCODE: u16 = 0x2fa;
+impl ServerMessageWrite for SMSG_RAID_INSTANCE_MESSAGE {}
+
+impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
+    const OPCODE: u16 = 0x02fa;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
     type Error = SMSG_RAID_INSTANCE_MESSAGEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

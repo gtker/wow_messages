@@ -18,16 +18,15 @@ pub struct CMSG_CHAR_DELETE {
     pub guid: Guid,
 }
 
-impl ClientMessageWrite for CMSG_CHAR_DELETE {
-    const OPCODE: u16 = 0x38;
+impl ClientMessageWrite for CMSG_CHAR_DELETE {}
+
+impl MessageBody for CMSG_CHAR_DELETE {
+    const OPCODE: u16 = 0x0038;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_CHAR_DELETE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

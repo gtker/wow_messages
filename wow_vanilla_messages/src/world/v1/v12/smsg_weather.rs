@@ -22,16 +22,15 @@ pub struct SMSG_WEATHER {
     pub change: WeatherChangeType,
 }
 
-impl ServerMessageWrite for SMSG_WEATHER {
-    const OPCODE: u16 = 0x2f4;
+impl ServerMessageWrite for SMSG_WEATHER {}
+
+impl MessageBody for SMSG_WEATHER {
+    const OPCODE: u16 = 0x02f4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_WEATHER {
     type Error = SMSG_WEATHERError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

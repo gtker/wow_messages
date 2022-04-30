@@ -20,16 +20,15 @@ pub struct SMSG_LOOT_RESPONSE {
     pub loot_method: LootMethod,
 }
 
-impl ServerMessageWrite for SMSG_LOOT_RESPONSE {
-    const OPCODE: u16 = 0x160;
+impl ServerMessageWrite for SMSG_LOOT_RESPONSE {}
+
+impl MessageBody for SMSG_LOOT_RESPONSE {
+    const OPCODE: u16 = 0x0160;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_LOOT_RESPONSE {
     type Error = SMSG_LOOT_RESPONSEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

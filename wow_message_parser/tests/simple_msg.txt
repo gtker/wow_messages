@@ -17,25 +17,17 @@ pub struct SimpleMsg {
     pub basic: u8,
 }
 
-impl ClientMessageWrite for SimpleMsg {
-    const OPCODE: u16 = 0x02;
+impl ClientMessageWrite for SimpleMsg {}
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
-    }
-
-}
-
-impl ServerMessageWrite for SimpleMsg {
-    const OPCODE: u16 = 0x02;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
-    }
-
-}
+impl ServerMessageWrite for SimpleMsg {}
 
 impl MessageBody for SimpleMsg {
+    const OPCODE: u16 = 0x0002;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        Self::size() as u16
+    }
+
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

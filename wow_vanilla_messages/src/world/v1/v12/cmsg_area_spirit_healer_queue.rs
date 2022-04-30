@@ -18,16 +18,15 @@ pub struct CMSG_AREA_SPIRIT_HEALER_QUEUE {
     pub guid: Guid,
 }
 
-impl ClientMessageWrite for CMSG_AREA_SPIRIT_HEALER_QUEUE {
-    const OPCODE: u16 = 0x2e3;
+impl ClientMessageWrite for CMSG_AREA_SPIRIT_HEALER_QUEUE {}
+
+impl MessageBody for CMSG_AREA_SPIRIT_HEALER_QUEUE {
+    const OPCODE: u16 = 0x02e3;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_AREA_SPIRIT_HEALER_QUEUE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

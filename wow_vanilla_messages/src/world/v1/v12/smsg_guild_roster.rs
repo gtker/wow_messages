@@ -16,16 +16,15 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct SMSG_GUILD_ROSTER {
 }
 
-impl ServerMessageWrite for SMSG_GUILD_ROSTER {
-    const OPCODE: u16 = 0x8a;
+impl ServerMessageWrite for SMSG_GUILD_ROSTER {}
+
+impl MessageBody for SMSG_GUILD_ROSTER {
+    const OPCODE: u16 = 0x008a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_GUILD_ROSTER {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

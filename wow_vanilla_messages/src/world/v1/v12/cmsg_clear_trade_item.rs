@@ -17,16 +17,15 @@ pub struct CMSG_CLEAR_TRADE_ITEM {
     pub trade_slot: u8,
 }
 
-impl ClientMessageWrite for CMSG_CLEAR_TRADE_ITEM {
-    const OPCODE: u16 = 0x11e;
+impl ClientMessageWrite for CMSG_CLEAR_TRADE_ITEM {}
+
+impl MessageBody for CMSG_CLEAR_TRADE_ITEM {
+    const OPCODE: u16 = 0x011e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_CLEAR_TRADE_ITEM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

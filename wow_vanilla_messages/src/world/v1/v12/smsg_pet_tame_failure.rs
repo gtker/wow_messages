@@ -18,16 +18,15 @@ pub struct SMSG_PET_TAME_FAILURE {
     pub reason: PetTameFailureReason,
 }
 
-impl ServerMessageWrite for SMSG_PET_TAME_FAILURE {
-    const OPCODE: u16 = 0x173;
+impl ServerMessageWrite for SMSG_PET_TAME_FAILURE {}
+
+impl MessageBody for SMSG_PET_TAME_FAILURE {
+    const OPCODE: u16 = 0x0173;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_PET_TAME_FAILURE {
     type Error = SMSG_PET_TAME_FAILUREError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

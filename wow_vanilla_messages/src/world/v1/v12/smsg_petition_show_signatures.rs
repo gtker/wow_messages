@@ -21,16 +21,15 @@ pub struct SMSG_PETITION_SHOW_SIGNATURES {
     pub amount_of_signatures: u8,
 }
 
-impl ServerMessageWrite for SMSG_PETITION_SHOW_SIGNATURES {
-    const OPCODE: u16 = 0x1bf;
+impl ServerMessageWrite for SMSG_PETITION_SHOW_SIGNATURES {}
+
+impl MessageBody for SMSG_PETITION_SHOW_SIGNATURES {
+    const OPCODE: u16 = 0x01bf;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_PETITION_SHOW_SIGNATURES {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

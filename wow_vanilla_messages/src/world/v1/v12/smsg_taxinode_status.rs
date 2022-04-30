@@ -19,16 +19,15 @@ pub struct SMSG_TAXINODE_STATUS {
     pub taxi_mask_node_known: u8,
 }
 
-impl ServerMessageWrite for SMSG_TAXINODE_STATUS {
-    const OPCODE: u16 = 0x1ab;
+impl ServerMessageWrite for SMSG_TAXINODE_STATUS {}
+
+impl MessageBody for SMSG_TAXINODE_STATUS {
+    const OPCODE: u16 = 0x01ab;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_TAXINODE_STATUS {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

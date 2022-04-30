@@ -18,16 +18,15 @@ pub struct SMSG_MEETINGSTONE_JOINFAILED {
     pub reason: MeetingStoneFailure,
 }
 
-impl ServerMessageWrite for SMSG_MEETINGSTONE_JOINFAILED {
-    const OPCODE: u16 = 0x2bb;
+impl ServerMessageWrite for SMSG_MEETINGSTONE_JOINFAILED {}
+
+impl MessageBody for SMSG_MEETINGSTONE_JOINFAILED {
+    const OPCODE: u16 = 0x02bb;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_MEETINGSTONE_JOINFAILED {
     type Error = SMSG_MEETINGSTONE_JOINFAILEDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

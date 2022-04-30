@@ -18,16 +18,15 @@ pub struct SMSG_WHO {
     pub players: Vec<WhoPlayer>,
 }
 
-impl ServerMessageWrite for SMSG_WHO {
-    const OPCODE: u16 = 0x63;
+impl ServerMessageWrite for SMSG_WHO {}
+
+impl MessageBody for SMSG_WHO {
+    const OPCODE: u16 = 0x0063;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_WHO {
     type Error = SMSG_WHOError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -18,16 +18,15 @@ pub struct SMSG_TRANSFER_PENDING {
     pub has_transport: Option<SMSG_TRANSFER_PENDING_has_transport>,
 }
 
-impl ServerMessageWrite for SMSG_TRANSFER_PENDING {
-    const OPCODE: u16 = 0x3f;
+impl ServerMessageWrite for SMSG_TRANSFER_PENDING {}
+
+impl MessageBody for SMSG_TRANSFER_PENDING {
+    const OPCODE: u16 = 0x003f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_TRANSFER_PENDING {
     type Error = SMSG_TRANSFER_PENDINGError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

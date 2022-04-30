@@ -18,16 +18,15 @@ pub struct SMSG_UPDATE_AURA_DURATION {
     pub aura_duration: u32,
 }
 
-impl ServerMessageWrite for SMSG_UPDATE_AURA_DURATION {
-    const OPCODE: u16 = 0x137;
+impl ServerMessageWrite for SMSG_UPDATE_AURA_DURATION {}
+
+impl MessageBody for SMSG_UPDATE_AURA_DURATION {
+    const OPCODE: u16 = 0x0137;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_UPDATE_AURA_DURATION {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

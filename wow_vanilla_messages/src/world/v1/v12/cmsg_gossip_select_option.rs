@@ -19,16 +19,15 @@ pub struct CMSG_GOSSIP_SELECT_OPTION {
     pub unknown: Option<CMSG_GOSSIP_SELECT_OPTION_unknown>,
 }
 
-impl ClientMessageWrite for CMSG_GOSSIP_SELECT_OPTION {
-    const OPCODE: u16 = 0x17c;
+impl ClientMessageWrite for CMSG_GOSSIP_SELECT_OPTION {}
+
+impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
+    const OPCODE: u16 = 0x017c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
     type Error = CMSG_GOSSIP_SELECT_OPTIONError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

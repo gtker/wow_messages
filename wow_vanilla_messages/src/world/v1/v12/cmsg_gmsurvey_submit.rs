@@ -19,16 +19,15 @@ pub struct CMSG_GMSURVEY_SUBMIT {
     pub answer_comment: String,
 }
 
-impl ClientMessageWrite for CMSG_GMSURVEY_SUBMIT {
-    const OPCODE: u16 = 0x32a;
+impl ClientMessageWrite for CMSG_GMSURVEY_SUBMIT {}
+
+impl MessageBody for CMSG_GMSURVEY_SUBMIT {
+    const OPCODE: u16 = 0x032a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_GMSURVEY_SUBMIT {
     type Error = CMSG_GMSURVEY_SUBMITError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

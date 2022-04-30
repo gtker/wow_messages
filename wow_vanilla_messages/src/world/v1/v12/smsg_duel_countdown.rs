@@ -17,16 +17,15 @@ pub struct SMSG_DUEL_COUNTDOWN {
     pub time_in_seconds: u32,
 }
 
-impl ServerMessageWrite for SMSG_DUEL_COUNTDOWN {
-    const OPCODE: u16 = 0x2b7;
+impl ServerMessageWrite for SMSG_DUEL_COUNTDOWN {}
+
+impl MessageBody for SMSG_DUEL_COUNTDOWN {
+    const OPCODE: u16 = 0x02b7;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_DUEL_COUNTDOWN {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -18,16 +18,15 @@ pub struct SMSG_SPLINE_SET_RUN_SPEED {
     pub speed: f32,
 }
 
-impl ServerMessageWrite for SMSG_SPLINE_SET_RUN_SPEED {
-    const OPCODE: u16 = 0x2fe;
+impl ServerMessageWrite for SMSG_SPLINE_SET_RUN_SPEED {}
+
+impl MessageBody for SMSG_SPLINE_SET_RUN_SPEED {
+    const OPCODE: u16 = 0x02fe;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SPLINE_SET_RUN_SPEED {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

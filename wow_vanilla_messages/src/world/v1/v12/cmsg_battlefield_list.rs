@@ -18,16 +18,15 @@ pub struct CMSG_BATTLEFIELD_LIST {
     pub map: Map,
 }
 
-impl ClientMessageWrite for CMSG_BATTLEFIELD_LIST {
-    const OPCODE: u16 = 0x23c;
+impl ClientMessageWrite for CMSG_BATTLEFIELD_LIST {}
+
+impl MessageBody for CMSG_BATTLEFIELD_LIST {
+    const OPCODE: u16 = 0x023c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_BATTLEFIELD_LIST {
     type Error = CMSG_BATTLEFIELD_LISTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

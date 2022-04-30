@@ -22,16 +22,15 @@ pub struct CMSG_LOOT_METHOD {
     pub loot_threshold: ItemQuality,
 }
 
-impl ClientMessageWrite for CMSG_LOOT_METHOD {
-    const OPCODE: u16 = 0x7a;
+impl ClientMessageWrite for CMSG_LOOT_METHOD {}
+
+impl MessageBody for CMSG_LOOT_METHOD {
+    const OPCODE: u16 = 0x007a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_LOOT_METHOD {
     type Error = CMSG_LOOT_METHODError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

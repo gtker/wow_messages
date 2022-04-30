@@ -23,16 +23,15 @@ pub struct SMSG_START_MIRROR_TIMER {
     pub id: u32,
 }
 
-impl ServerMessageWrite for SMSG_START_MIRROR_TIMER {
-    const OPCODE: u16 = 0x1d9;
+impl ServerMessageWrite for SMSG_START_MIRROR_TIMER {}
+
+impl MessageBody for SMSG_START_MIRROR_TIMER {
+    const OPCODE: u16 = 0x01d9;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_START_MIRROR_TIMER {
     type Error = SMSG_START_MIRROR_TIMERError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

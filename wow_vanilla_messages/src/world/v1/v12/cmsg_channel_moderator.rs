@@ -17,16 +17,15 @@ pub struct CMSG_CHANNEL_MODERATOR {
     pub player_name: String,
 }
 
-impl ClientMessageWrite for CMSG_CHANNEL_MODERATOR {
-    const OPCODE: u16 = 0x9f;
+impl ClientMessageWrite for CMSG_CHANNEL_MODERATOR {}
+
+impl MessageBody for CMSG_CHANNEL_MODERATOR {
+    const OPCODE: u16 = 0x009f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_CHANNEL_MODERATOR {
     type Error = CMSG_CHANNEL_MODERATORError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

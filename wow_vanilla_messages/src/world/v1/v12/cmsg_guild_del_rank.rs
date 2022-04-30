@@ -16,16 +16,15 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct CMSG_GUILD_DEL_RANK {
 }
 
-impl ClientMessageWrite for CMSG_GUILD_DEL_RANK {
-    const OPCODE: u16 = 0x233;
+impl ClientMessageWrite for CMSG_GUILD_DEL_RANK {}
+
+impl MessageBody for CMSG_GUILD_DEL_RANK {
+    const OPCODE: u16 = 0x0233;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_GUILD_DEL_RANK {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

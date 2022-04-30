@@ -34,16 +34,15 @@ pub struct CMSG_PETITION_BUY {
     pub skip15: u32,
 }
 
-impl ClientMessageWrite for CMSG_PETITION_BUY {
-    const OPCODE: u16 = 0x1bd;
+impl ClientMessageWrite for CMSG_PETITION_BUY {}
+
+impl MessageBody for CMSG_PETITION_BUY {
+    const OPCODE: u16 = 0x01bd;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_PETITION_BUY {
     type Error = CMSG_PETITION_BUYError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

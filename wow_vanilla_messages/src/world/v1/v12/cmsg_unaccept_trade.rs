@@ -16,16 +16,15 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct CMSG_UNACCEPT_TRADE {
 }
 
-impl ClientMessageWrite for CMSG_UNACCEPT_TRADE {
-    const OPCODE: u16 = 0x11b;
+impl ClientMessageWrite for CMSG_UNACCEPT_TRADE {}
+
+impl MessageBody for CMSG_UNACCEPT_TRADE {
+    const OPCODE: u16 = 0x011b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_UNACCEPT_TRADE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

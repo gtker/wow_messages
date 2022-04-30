@@ -16,16 +16,15 @@ pub struct MSG_RAID_READY_CHECK_Client {
     pub answer: Option<MSG_RAID_READY_CHECK_Client_answer>,
 }
 
-impl ClientMessageWrite for MSG_RAID_READY_CHECK_Client {
-    const OPCODE: u16 = 0x322;
+impl ClientMessageWrite for MSG_RAID_READY_CHECK_Client {}
+
+impl MessageBody for MSG_RAID_READY_CHECK_Client {
+    const OPCODE: u16 = 0x0322;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for MSG_RAID_READY_CHECK_Client {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

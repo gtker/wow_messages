@@ -17,16 +17,15 @@ pub struct SMSG_LOOT_MASTER_LIST {
     pub guids: Vec<Guid>,
 }
 
-impl ServerMessageWrite for SMSG_LOOT_MASTER_LIST {
-    const OPCODE: u16 = 0x2a4;
+impl ServerMessageWrite for SMSG_LOOT_MASTER_LIST {}
+
+impl MessageBody for SMSG_LOOT_MASTER_LIST {
+    const OPCODE: u16 = 0x02a4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_LOOT_MASTER_LIST {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

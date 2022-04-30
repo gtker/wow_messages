@@ -19,16 +19,15 @@ pub struct SMSG_QUESTGIVER_QUEST_FAILED {
     pub reason: QuestFailedReason,
 }
 
-impl ServerMessageWrite for SMSG_QUESTGIVER_QUEST_FAILED {
-    const OPCODE: u16 = 0x192;
+impl ServerMessageWrite for SMSG_QUESTGIVER_QUEST_FAILED {}
+
+impl MessageBody for SMSG_QUESTGIVER_QUEST_FAILED {
+    const OPCODE: u16 = 0x0192;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_QUESTGIVER_QUEST_FAILED {
     type Error = SMSG_QUESTGIVER_QUEST_FAILEDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

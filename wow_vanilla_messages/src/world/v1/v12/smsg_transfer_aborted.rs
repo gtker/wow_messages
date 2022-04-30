@@ -20,14 +20,7 @@ pub struct SMSG_TRANSFER_ABORTED {
     pub reason: TransferAbortReason,
 }
 
-impl ServerMessageWrite for SMSG_TRANSFER_ABORTED {
-    const OPCODE: u16 = 0x40;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
-    }
-
-}
+impl ServerMessageWrite for SMSG_TRANSFER_ABORTED {}
 
 impl SMSG_TRANSFER_ABORTED {
     pub const PADDING_VALUE: u8 = 0x00;
@@ -35,6 +28,12 @@ impl SMSG_TRANSFER_ABORTED {
 }
 
 impl MessageBody for SMSG_TRANSFER_ABORTED {
+    const OPCODE: u16 = 0x0040;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        Self::size() as u16
+    }
+
     type Error = SMSG_TRANSFER_ABORTEDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

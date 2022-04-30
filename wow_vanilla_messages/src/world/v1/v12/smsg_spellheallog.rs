@@ -21,16 +21,15 @@ pub struct SMSG_SPELLHEALLOG {
     pub critical: u8,
 }
 
-impl ServerMessageWrite for SMSG_SPELLHEALLOG {
-    const OPCODE: u16 = 0x150;
+impl ServerMessageWrite for SMSG_SPELLHEALLOG {}
+
+impl MessageBody for SMSG_SPELLHEALLOG {
+    const OPCODE: u16 = 0x0150;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SPELLHEALLOG {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

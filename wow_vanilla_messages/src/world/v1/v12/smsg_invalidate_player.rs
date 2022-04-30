@@ -18,16 +18,15 @@ pub struct SMSG_INVALIDATE_PLAYER {
     pub guid: Guid,
 }
 
-impl ServerMessageWrite for SMSG_INVALIDATE_PLAYER {
-    const OPCODE: u16 = 0x31c;
+impl ServerMessageWrite for SMSG_INVALIDATE_PLAYER {}
+
+impl MessageBody for SMSG_INVALIDATE_PLAYER {
+    const OPCODE: u16 = 0x031c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_INVALIDATE_PLAYER {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

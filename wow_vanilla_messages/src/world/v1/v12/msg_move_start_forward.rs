@@ -17,25 +17,17 @@ pub struct MSG_MOVE_START_FORWARD {
     pub info: MovementInfo,
 }
 
-impl ClientMessageWrite for MSG_MOVE_START_FORWARD {
-    const OPCODE: u16 = 0xb5;
+impl ClientMessageWrite for MSG_MOVE_START_FORWARD {}
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
-
-impl ServerMessageWrite for MSG_MOVE_START_FORWARD {
-    const OPCODE: u16 = 0xb5;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
+impl ServerMessageWrite for MSG_MOVE_START_FORWARD {}
 
 impl MessageBody for MSG_MOVE_START_FORWARD {
+    const OPCODE: u16 = 0x00b5;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        self.size() as u16
+    }
+
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

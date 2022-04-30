@@ -16,25 +16,17 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct MSG_MOVE_WORLDPORT_ACK {
 }
 
-impl ClientMessageWrite for MSG_MOVE_WORLDPORT_ACK {
-    const OPCODE: u16 = 0xdc;
+impl ClientMessageWrite for MSG_MOVE_WORLDPORT_ACK {}
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
-    }
-
-}
-
-impl ServerMessageWrite for MSG_MOVE_WORLDPORT_ACK {
-    const OPCODE: u16 = 0xdc;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
-    }
-
-}
+impl ServerMessageWrite for MSG_MOVE_WORLDPORT_ACK {}
 
 impl MessageBody for MSG_MOVE_WORLDPORT_ACK {
+    const OPCODE: u16 = 0x00dc;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        Self::size() as u16
+    }
+
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

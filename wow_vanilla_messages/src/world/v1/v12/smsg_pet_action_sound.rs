@@ -20,16 +20,15 @@ pub struct SMSG_PET_ACTION_SOUND {
     pub reason: PetTalkReason,
 }
 
-impl ServerMessageWrite for SMSG_PET_ACTION_SOUND {
-    const OPCODE: u16 = 0x324;
+impl ServerMessageWrite for SMSG_PET_ACTION_SOUND {}
+
+impl MessageBody for SMSG_PET_ACTION_SOUND {
+    const OPCODE: u16 = 0x0324;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_PET_ACTION_SOUND {
     type Error = SMSG_PET_ACTION_SOUNDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

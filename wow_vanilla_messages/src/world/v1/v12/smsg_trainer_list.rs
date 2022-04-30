@@ -21,16 +21,15 @@ pub struct SMSG_TRAINER_LIST {
     pub greeting: String,
 }
 
-impl ServerMessageWrite for SMSG_TRAINER_LIST {
-    const OPCODE: u16 = 0x1b1;
+impl ServerMessageWrite for SMSG_TRAINER_LIST {}
+
+impl MessageBody for SMSG_TRAINER_LIST {
+    const OPCODE: u16 = 0x01b1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_TRAINER_LIST {
     type Error = SMSG_TRAINER_LISTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

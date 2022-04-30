@@ -19,16 +19,15 @@ pub struct SMSG_PET_UNLEARN_CONFIRM {
     pub talent_reset_cost: u32,
 }
 
-impl ServerMessageWrite for SMSG_PET_UNLEARN_CONFIRM {
-    const OPCODE: u16 = 0x2f1;
+impl ServerMessageWrite for SMSG_PET_UNLEARN_CONFIRM {}
+
+impl MessageBody for SMSG_PET_UNLEARN_CONFIRM {
+    const OPCODE: u16 = 0x02f1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_PET_UNLEARN_CONFIRM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

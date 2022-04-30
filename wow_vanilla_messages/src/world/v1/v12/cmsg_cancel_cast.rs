@@ -17,16 +17,15 @@ pub struct CMSG_CANCEL_CAST {
     pub id: u32,
 }
 
-impl ClientMessageWrite for CMSG_CANCEL_CAST {
-    const OPCODE: u16 = 0x12f;
+impl ClientMessageWrite for CMSG_CANCEL_CAST {}
+
+impl MessageBody for CMSG_CANCEL_CAST {
+    const OPCODE: u16 = 0x012f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_CANCEL_CAST {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

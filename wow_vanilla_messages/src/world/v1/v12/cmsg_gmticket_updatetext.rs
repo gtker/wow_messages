@@ -16,16 +16,15 @@ pub struct CMSG_GMTICKET_UPDATETEXT {
     pub message: String,
 }
 
-impl ClientMessageWrite for CMSG_GMTICKET_UPDATETEXT {
-    const OPCODE: u16 = 0x207;
+impl ClientMessageWrite for CMSG_GMTICKET_UPDATETEXT {}
+
+impl MessageBody for CMSG_GMTICKET_UPDATETEXT {
+    const OPCODE: u16 = 0x0207;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_GMTICKET_UPDATETEXT {
     type Error = CMSG_GMTICKET_UPDATETEXTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

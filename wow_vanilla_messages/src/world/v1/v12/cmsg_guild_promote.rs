@@ -16,16 +16,15 @@ pub struct CMSG_GUILD_PROMOTE {
     pub player_name: String,
 }
 
-impl ClientMessageWrite for CMSG_GUILD_PROMOTE {
-    const OPCODE: u16 = 0x8b;
+impl ClientMessageWrite for CMSG_GUILD_PROMOTE {}
+
+impl MessageBody for CMSG_GUILD_PROMOTE {
+    const OPCODE: u16 = 0x008b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_GUILD_PROMOTE {
     type Error = CMSG_GUILD_PROMOTEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

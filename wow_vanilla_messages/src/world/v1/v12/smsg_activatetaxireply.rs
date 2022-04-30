@@ -18,16 +18,15 @@ pub struct SMSG_ACTIVATETAXIREPLY {
     pub reply: ActivateTaxiReply,
 }
 
-impl ServerMessageWrite for SMSG_ACTIVATETAXIREPLY {
-    const OPCODE: u16 = 0x1ae;
+impl ServerMessageWrite for SMSG_ACTIVATETAXIREPLY {}
+
+impl MessageBody for SMSG_ACTIVATETAXIREPLY {
+    const OPCODE: u16 = 0x01ae;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_ACTIVATETAXIREPLY {
     type Error = SMSG_ACTIVATETAXIREPLYError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

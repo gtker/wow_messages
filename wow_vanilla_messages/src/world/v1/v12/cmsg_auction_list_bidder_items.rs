@@ -19,16 +19,15 @@ pub struct CMSG_AUCTION_LIST_BIDDER_ITEMS {
     pub outbid_item_ids: Vec<u32>,
 }
 
-impl ClientMessageWrite for CMSG_AUCTION_LIST_BIDDER_ITEMS {
-    const OPCODE: u16 = 0x264;
+impl ClientMessageWrite for CMSG_AUCTION_LIST_BIDDER_ITEMS {}
+
+impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
+    const OPCODE: u16 = 0x0264;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

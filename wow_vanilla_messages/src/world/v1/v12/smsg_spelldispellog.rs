@@ -19,16 +19,15 @@ pub struct SMSG_SPELLDISPELLOG {
     pub spells: Vec<u32>,
 }
 
-impl ServerMessageWrite for SMSG_SPELLDISPELLOG {
-    const OPCODE: u16 = 0x27b;
+impl ServerMessageWrite for SMSG_SPELLDISPELLOG {}
+
+impl MessageBody for SMSG_SPELLDISPELLOG {
+    const OPCODE: u16 = 0x027b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SPELLDISPELLOG {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

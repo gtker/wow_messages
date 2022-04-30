@@ -20,16 +20,15 @@ pub struct SMSG_PET_DISMISS_SOUND {
     pub position_z: f32,
 }
 
-impl ServerMessageWrite for SMSG_PET_DISMISS_SOUND {
-    const OPCODE: u16 = 0x325;
+impl ServerMessageWrite for SMSG_PET_DISMISS_SOUND {}
+
+impl MessageBody for SMSG_PET_DISMISS_SOUND {
+    const OPCODE: u16 = 0x0325;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_PET_DISMISS_SOUND {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

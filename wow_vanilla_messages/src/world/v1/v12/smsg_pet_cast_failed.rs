@@ -20,16 +20,15 @@ pub struct SMSG_PET_CAST_FAILED {
     pub result: SpellCastResult,
 }
 
-impl ServerMessageWrite for SMSG_PET_CAST_FAILED {
-    const OPCODE: u16 = 0x138;
+impl ServerMessageWrite for SMSG_PET_CAST_FAILED {}
+
+impl MessageBody for SMSG_PET_CAST_FAILED {
+    const OPCODE: u16 = 0x0138;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_PET_CAST_FAILED {
     type Error = SMSG_PET_CAST_FAILEDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

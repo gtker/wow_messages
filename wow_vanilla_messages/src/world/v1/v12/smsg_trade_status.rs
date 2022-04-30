@@ -19,16 +19,15 @@ pub struct SMSG_TRADE_STATUS {
     pub status: SMSG_TRADE_STATUSTradeStatus,
 }
 
-impl ServerMessageWrite for SMSG_TRADE_STATUS {
-    const OPCODE: u16 = 0x120;
+impl ServerMessageWrite for SMSG_TRADE_STATUS {}
+
+impl MessageBody for SMSG_TRADE_STATUS {
+    const OPCODE: u16 = 0x0120;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_TRADE_STATUS {
     type Error = SMSG_TRADE_STATUSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

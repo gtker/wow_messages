@@ -16,16 +16,15 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct SMSG_QUESTLOG_FULL {
 }
 
-impl ServerMessageWrite for SMSG_QUESTLOG_FULL {
-    const OPCODE: u16 = 0x195;
+impl ServerMessageWrite for SMSG_QUESTLOG_FULL {}
+
+impl MessageBody for SMSG_QUESTLOG_FULL {
+    const OPCODE: u16 = 0x0195;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_QUESTLOG_FULL {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

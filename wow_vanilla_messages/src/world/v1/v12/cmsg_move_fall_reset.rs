@@ -17,16 +17,15 @@ pub struct CMSG_MOVE_FALL_RESET {
     pub info: MovementInfo,
 }
 
-impl ClientMessageWrite for CMSG_MOVE_FALL_RESET {
-    const OPCODE: u16 = 0x2ca;
+impl ClientMessageWrite for CMSG_MOVE_FALL_RESET {}
+
+impl MessageBody for CMSG_MOVE_FALL_RESET {
+    const OPCODE: u16 = 0x02ca;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_MOVE_FALL_RESET {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

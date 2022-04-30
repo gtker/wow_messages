@@ -16,16 +16,15 @@ pub struct SMSG_CHAT_PLAYER_NOT_FOUND {
     pub name: String,
 }
 
-impl ServerMessageWrite for SMSG_CHAT_PLAYER_NOT_FOUND {
-    const OPCODE: u16 = 0x2a9;
+impl ServerMessageWrite for SMSG_CHAT_PLAYER_NOT_FOUND {}
+
+impl MessageBody for SMSG_CHAT_PLAYER_NOT_FOUND {
+    const OPCODE: u16 = 0x02a9;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_CHAT_PLAYER_NOT_FOUND {
     type Error = SMSG_CHAT_PLAYER_NOT_FOUNDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

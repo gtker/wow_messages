@@ -18,16 +18,15 @@ pub struct CMSG_STABLE_PET {
     pub npc_guid: Guid,
 }
 
-impl ClientMessageWrite for CMSG_STABLE_PET {
-    const OPCODE: u16 = 0x270;
+impl ClientMessageWrite for CMSG_STABLE_PET {}
+
+impl MessageBody for CMSG_STABLE_PET {
+    const OPCODE: u16 = 0x0270;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_STABLE_PET {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -18,16 +18,15 @@ pub struct SMSG_AUCTION_OWNER_LIST_RESULT {
     pub total_amount_of_auctions: u32,
 }
 
-impl ServerMessageWrite for SMSG_AUCTION_OWNER_LIST_RESULT {
-    const OPCODE: u16 = 0x25d;
+impl ServerMessageWrite for SMSG_AUCTION_OWNER_LIST_RESULT {}
+
+impl MessageBody for SMSG_AUCTION_OWNER_LIST_RESULT {
+    const OPCODE: u16 = 0x025d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_AUCTION_OWNER_LIST_RESULT {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

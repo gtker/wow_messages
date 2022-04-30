@@ -19,16 +19,15 @@ pub struct SMSG_RAID_GROUP_ONLY {
     pub error: RaidGroupError,
 }
 
-impl ServerMessageWrite for SMSG_RAID_GROUP_ONLY {
-    const OPCODE: u16 = 0x286;
+impl ServerMessageWrite for SMSG_RAID_GROUP_ONLY {}
+
+impl MessageBody for SMSG_RAID_GROUP_ONLY {
+    const OPCODE: u16 = 0x0286;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_RAID_GROUP_ONLY {
     type Error = SMSG_RAID_GROUP_ONLYError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

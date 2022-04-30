@@ -20,16 +20,15 @@ pub struct SMSG_MEETINGSTONE_SETQUEUE {
     pub status: MeetingStoneStatus,
 }
 
-impl ServerMessageWrite for SMSG_MEETINGSTONE_SETQUEUE {
-    const OPCODE: u16 = 0x295;
+impl ServerMessageWrite for SMSG_MEETINGSTONE_SETQUEUE {}
+
+impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
+    const OPCODE: u16 = 0x0295;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
     type Error = SMSG_MEETINGSTONE_SETQUEUEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

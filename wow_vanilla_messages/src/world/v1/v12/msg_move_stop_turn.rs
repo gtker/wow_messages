@@ -17,25 +17,17 @@ pub struct MSG_MOVE_STOP_TURN {
     pub info: MovementInfo,
 }
 
-impl ClientMessageWrite for MSG_MOVE_STOP_TURN {
-    const OPCODE: u16 = 0xbe;
+impl ClientMessageWrite for MSG_MOVE_STOP_TURN {}
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
-
-impl ServerMessageWrite for MSG_MOVE_STOP_TURN {
-    const OPCODE: u16 = 0xbe;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
+impl ServerMessageWrite for MSG_MOVE_STOP_TURN {}
 
 impl MessageBody for MSG_MOVE_STOP_TURN {
+    const OPCODE: u16 = 0x00be;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        self.size() as u16
+    }
+
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

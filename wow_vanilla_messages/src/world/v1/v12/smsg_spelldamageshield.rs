@@ -22,16 +22,15 @@ pub struct SMSG_SPELLDAMAGESHIELD {
     pub school: SpellSchool,
 }
 
-impl ServerMessageWrite for SMSG_SPELLDAMAGESHIELD {
-    const OPCODE: u16 = 0x24f;
+impl ServerMessageWrite for SMSG_SPELLDAMAGESHIELD {}
+
+impl MessageBody for SMSG_SPELLDAMAGESHIELD {
+    const OPCODE: u16 = 0x024f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SPELLDAMAGESHIELD {
     type Error = SMSG_SPELLDAMAGESHIELDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -19,16 +19,15 @@ pub struct SMSG_GMTICKET_GETTICKET {
     pub status: SMSG_GMTICKET_GETTICKETGmTicketStatus,
 }
 
-impl ServerMessageWrite for SMSG_GMTICKET_GETTICKET {
-    const OPCODE: u16 = 0x212;
+impl ServerMessageWrite for SMSG_GMTICKET_GETTICKET {}
+
+impl MessageBody for SMSG_GMTICKET_GETTICKET {
+    const OPCODE: u16 = 0x0212;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_GMTICKET_GETTICKET {
     type Error = SMSG_GMTICKET_GETTICKETError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

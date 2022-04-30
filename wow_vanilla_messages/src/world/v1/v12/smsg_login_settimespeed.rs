@@ -18,16 +18,15 @@ pub struct SMSG_LOGIN_SETTIMESPEED {
     pub game_speed: f32,
 }
 
-impl ServerMessageWrite for SMSG_LOGIN_SETTIMESPEED {
-    const OPCODE: u16 = 0x42;
+impl ServerMessageWrite for SMSG_LOGIN_SETTIMESPEED {}
+
+impl MessageBody for SMSG_LOGIN_SETTIMESPEED {
+    const OPCODE: u16 = 0x0042;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_LOGIN_SETTIMESPEED {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

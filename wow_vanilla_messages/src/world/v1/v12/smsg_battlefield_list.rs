@@ -23,16 +23,15 @@ pub struct SMSG_BATTLEFIELD_LIST {
     pub battlegrounds: Vec<u32>,
 }
 
-impl ServerMessageWrite for SMSG_BATTLEFIELD_LIST {
-    const OPCODE: u16 = 0x23d;
+impl ServerMessageWrite for SMSG_BATTLEFIELD_LIST {}
+
+impl MessageBody for SMSG_BATTLEFIELD_LIST {
+    const OPCODE: u16 = 0x023d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_BATTLEFIELD_LIST {
     type Error = SMSG_BATTLEFIELD_LISTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

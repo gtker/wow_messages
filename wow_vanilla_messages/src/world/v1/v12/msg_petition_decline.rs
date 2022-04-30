@@ -18,25 +18,17 @@ pub struct MSG_PETITION_DECLINE {
     pub petition: Guid,
 }
 
-impl ClientMessageWrite for MSG_PETITION_DECLINE {
-    const OPCODE: u16 = 0x1c2;
+impl ClientMessageWrite for MSG_PETITION_DECLINE {}
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
-    }
-
-}
-
-impl ServerMessageWrite for MSG_PETITION_DECLINE {
-    const OPCODE: u16 = 0x1c2;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
-    }
-
-}
+impl ServerMessageWrite for MSG_PETITION_DECLINE {}
 
 impl MessageBody for MSG_PETITION_DECLINE {
+    const OPCODE: u16 = 0x01c2;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        Self::size() as u16
+    }
+
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

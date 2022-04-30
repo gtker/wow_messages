@@ -18,16 +18,15 @@ pub struct SMSG_QUESTUPDATE_ADD_ITEM {
     pub items_required: u32,
 }
 
-impl ServerMessageWrite for SMSG_QUESTUPDATE_ADD_ITEM {
-    const OPCODE: u16 = 0x19a;
+impl ServerMessageWrite for SMSG_QUESTUPDATE_ADD_ITEM {}
+
+impl MessageBody for SMSG_QUESTUPDATE_ADD_ITEM {
+    const OPCODE: u16 = 0x019a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_QUESTUPDATE_ADD_ITEM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

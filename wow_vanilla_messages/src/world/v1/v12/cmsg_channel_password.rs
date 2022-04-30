@@ -17,16 +17,15 @@ pub struct CMSG_CHANNEL_PASSWORD {
     pub channel_password: String,
 }
 
-impl ClientMessageWrite for CMSG_CHANNEL_PASSWORD {
-    const OPCODE: u16 = 0x9c;
+impl ClientMessageWrite for CMSG_CHANNEL_PASSWORD {}
+
+impl MessageBody for CMSG_CHANNEL_PASSWORD {
+    const OPCODE: u16 = 0x009c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_CHANNEL_PASSWORD {
     type Error = CMSG_CHANNEL_PASSWORDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

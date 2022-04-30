@@ -18,16 +18,15 @@ pub struct SMSG_CHAR_CREATE {
     pub result: WorldResult,
 }
 
-impl ServerMessageWrite for SMSG_CHAR_CREATE {
-    const OPCODE: u16 = 0x3a;
+impl ServerMessageWrite for SMSG_CHAR_CREATE {}
+
+impl MessageBody for SMSG_CHAR_CREATE {
+    const OPCODE: u16 = 0x003a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_CHAR_CREATE {
     type Error = SMSG_CHAR_CREATEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

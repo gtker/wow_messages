@@ -31,16 +31,15 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub flags3: u32,
 }
 
-impl ServerMessageWrite for SMSG_QUESTGIVER_REQUEST_ITEMS {
-    const OPCODE: u16 = 0x18b;
+impl ServerMessageWrite for SMSG_QUESTGIVER_REQUEST_ITEMS {}
+
+impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
+    const OPCODE: u16 = 0x018b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
     type Error = SMSG_QUESTGIVER_REQUEST_ITEMSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -19,16 +19,15 @@ pub struct SMSG_LIST_INVENTORY {
     pub items: Vec<ListInventoryItem>,
 }
 
-impl ServerMessageWrite for SMSG_LIST_INVENTORY {
-    const OPCODE: u16 = 0x19f;
+impl ServerMessageWrite for SMSG_LIST_INVENTORY {}
+
+impl MessageBody for SMSG_LIST_INVENTORY {
+    const OPCODE: u16 = 0x019f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_LIST_INVENTORY {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

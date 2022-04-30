@@ -20,16 +20,15 @@ pub struct SMSG_NEW_WORLD {
     pub orientation: f32,
 }
 
-impl ServerMessageWrite for SMSG_NEW_WORLD {
-    const OPCODE: u16 = 0x3e;
+impl ServerMessageWrite for SMSG_NEW_WORLD {}
+
+impl MessageBody for SMSG_NEW_WORLD {
+    const OPCODE: u16 = 0x003e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_NEW_WORLD {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

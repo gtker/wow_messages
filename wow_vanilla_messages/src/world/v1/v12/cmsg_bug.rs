@@ -20,16 +20,15 @@ pub struct CMSG_BUG {
     pub bug_type: String,
 }
 
-impl ClientMessageWrite for CMSG_BUG {
-    const OPCODE: u16 = 0x1ca;
+impl ClientMessageWrite for CMSG_BUG {}
+
+impl MessageBody for CMSG_BUG {
+    const OPCODE: u16 = 0x01ca;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_BUG {
     type Error = CMSG_BUGError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

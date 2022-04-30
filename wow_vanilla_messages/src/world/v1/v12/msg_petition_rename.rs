@@ -18,25 +18,17 @@ pub struct MSG_PETITION_RENAME {
     pub new_name: String,
 }
 
-impl ClientMessageWrite for MSG_PETITION_RENAME {
-    const OPCODE: u16 = 0x2c1;
+impl ClientMessageWrite for MSG_PETITION_RENAME {}
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
-
-impl ServerMessageWrite for MSG_PETITION_RENAME {
-    const OPCODE: u16 = 0x2c1;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
+impl ServerMessageWrite for MSG_PETITION_RENAME {}
 
 impl MessageBody for MSG_PETITION_RENAME {
+    const OPCODE: u16 = 0x02c1;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        self.size() as u16
+    }
+
     type Error = MSG_PETITION_RENAMEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

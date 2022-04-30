@@ -16,16 +16,15 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct CMSG_QUESTGIVER_CANCEL {
 }
 
-impl ClientMessageWrite for CMSG_QUESTGIVER_CANCEL {
-    const OPCODE: u16 = 0x190;
+impl ClientMessageWrite for CMSG_QUESTGIVER_CANCEL {}
+
+impl MessageBody for CMSG_QUESTGIVER_CANCEL {
+    const OPCODE: u16 = 0x0190;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_QUESTGIVER_CANCEL {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

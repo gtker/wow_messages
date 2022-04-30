@@ -22,16 +22,15 @@ pub struct SMSG_TEXT_EMOTE {
     pub name: String,
 }
 
-impl ServerMessageWrite for SMSG_TEXT_EMOTE {
-    const OPCODE: u16 = 0x105;
+impl ServerMessageWrite for SMSG_TEXT_EMOTE {}
+
+impl MessageBody for SMSG_TEXT_EMOTE {
+    const OPCODE: u16 = 0x0105;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_TEXT_EMOTE {
     type Error = SMSG_TEXT_EMOTEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

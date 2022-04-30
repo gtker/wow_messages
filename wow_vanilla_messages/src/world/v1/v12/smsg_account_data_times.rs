@@ -17,16 +17,15 @@ pub struct SMSG_ACCOUNT_DATA_TIMES {
     pub data: [u32; 32],
 }
 
-impl ServerMessageWrite for SMSG_ACCOUNT_DATA_TIMES {
-    const OPCODE: u16 = 0x209;
+impl ServerMessageWrite for SMSG_ACCOUNT_DATA_TIMES {}
+
+impl MessageBody for SMSG_ACCOUNT_DATA_TIMES {
+    const OPCODE: u16 = 0x0209;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_ACCOUNT_DATA_TIMES {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

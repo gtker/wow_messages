@@ -18,16 +18,15 @@ pub struct SMSG_CHANNEL_NOTIFY {
     pub channel_name: String,
 }
 
-impl ServerMessageWrite for SMSG_CHANNEL_NOTIFY {
-    const OPCODE: u16 = 0x99;
+impl ServerMessageWrite for SMSG_CHANNEL_NOTIFY {}
+
+impl MessageBody for SMSG_CHANNEL_NOTIFY {
+    const OPCODE: u16 = 0x0099;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_CHANNEL_NOTIFY {
     type Error = SMSG_CHANNEL_NOTIFYError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -18,16 +18,15 @@ pub struct MSG_RAID_TARGET_UPDATE_Server {
     pub update_type: MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType,
 }
 
-impl ServerMessageWrite for MSG_RAID_TARGET_UPDATE_Server {
-    const OPCODE: u16 = 0x321;
+impl ServerMessageWrite for MSG_RAID_TARGET_UPDATE_Server {}
+
+impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
+    const OPCODE: u16 = 0x0321;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
     type Error = MSG_RAID_TARGET_UPDATE_ServerError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

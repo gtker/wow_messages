@@ -16,16 +16,15 @@ pub struct CMSG_ADD_FRIEND {
     pub friend_name: String,
 }
 
-impl ClientMessageWrite for CMSG_ADD_FRIEND {
-    const OPCODE: u16 = 0x69;
+impl ClientMessageWrite for CMSG_ADD_FRIEND {}
+
+impl MessageBody for CMSG_ADD_FRIEND {
+    const OPCODE: u16 = 0x0069;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_ADD_FRIEND {
     type Error = CMSG_ADD_FRIENDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

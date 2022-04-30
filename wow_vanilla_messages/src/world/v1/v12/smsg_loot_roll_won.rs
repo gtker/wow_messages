@@ -26,16 +26,15 @@ pub struct SMSG_LOOT_ROLL_WON {
     pub vote: RollVote,
 }
 
-impl ServerMessageWrite for SMSG_LOOT_ROLL_WON {
-    const OPCODE: u16 = 0x29f;
+impl ServerMessageWrite for SMSG_LOOT_ROLL_WON {}
+
+impl MessageBody for SMSG_LOOT_ROLL_WON {
+    const OPCODE: u16 = 0x029f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_LOOT_ROLL_WON {
     type Error = SMSG_LOOT_ROLL_WONError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

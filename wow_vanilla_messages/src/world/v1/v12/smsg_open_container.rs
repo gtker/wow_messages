@@ -18,16 +18,15 @@ pub struct SMSG_OPEN_CONTAINER {
     pub guid: Guid,
 }
 
-impl ServerMessageWrite for SMSG_OPEN_CONTAINER {
-    const OPCODE: u16 = 0x113;
+impl ServerMessageWrite for SMSG_OPEN_CONTAINER {}
+
+impl MessageBody for SMSG_OPEN_CONTAINER {
+    const OPCODE: u16 = 0x0113;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_OPEN_CONTAINER {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

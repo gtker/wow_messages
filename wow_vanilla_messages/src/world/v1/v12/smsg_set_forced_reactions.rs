@@ -17,16 +17,15 @@ pub struct SMSG_SET_FORCED_REACTIONS {
     pub reactions: Vec<ForcedReaction>,
 }
 
-impl ServerMessageWrite for SMSG_SET_FORCED_REACTIONS {
-    const OPCODE: u16 = 0x2a5;
+impl ServerMessageWrite for SMSG_SET_FORCED_REACTIONS {}
+
+impl MessageBody for SMSG_SET_FORCED_REACTIONS {
+    const OPCODE: u16 = 0x02a5;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SET_FORCED_REACTIONS {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

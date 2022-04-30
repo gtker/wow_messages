@@ -20,16 +20,15 @@ pub struct CMSG_USE_ITEM {
     pub targets: SpellCastTargets,
 }
 
-impl ClientMessageWrite for CMSG_USE_ITEM {
-    const OPCODE: u16 = 0xab;
+impl ClientMessageWrite for CMSG_USE_ITEM {}
+
+impl MessageBody for CMSG_USE_ITEM {
+    const OPCODE: u16 = 0x00ab;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_USE_ITEM {
     type Error = CMSG_USE_ITEMError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

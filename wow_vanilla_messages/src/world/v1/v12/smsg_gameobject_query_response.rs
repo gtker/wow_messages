@@ -17,16 +17,15 @@ pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE {
     pub found: Option<SMSG_GAMEOBJECT_QUERY_RESPONSE_found>,
 }
 
-impl ServerMessageWrite for SMSG_GAMEOBJECT_QUERY_RESPONSE {
-    const OPCODE: u16 = 0x5f;
+impl ServerMessageWrite for SMSG_GAMEOBJECT_QUERY_RESPONSE {}
+
+impl MessageBody for SMSG_GAMEOBJECT_QUERY_RESPONSE {
+    const OPCODE: u16 = 0x005f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_GAMEOBJECT_QUERY_RESPONSE {
     type Error = SMSG_GAMEOBJECT_QUERY_RESPONSEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

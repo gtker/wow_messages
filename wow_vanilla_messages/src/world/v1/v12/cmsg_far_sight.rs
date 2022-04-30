@@ -18,16 +18,15 @@ pub struct CMSG_FAR_SIGHT {
     pub operation: FarSightOperation,
 }
 
-impl ClientMessageWrite for CMSG_FAR_SIGHT {
-    const OPCODE: u16 = 0x27a;
+impl ClientMessageWrite for CMSG_FAR_SIGHT {}
+
+impl MessageBody for CMSG_FAR_SIGHT {
+    const OPCODE: u16 = 0x027a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_FAR_SIGHT {
     type Error = CMSG_FAR_SIGHTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

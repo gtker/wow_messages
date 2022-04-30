@@ -17,25 +17,17 @@ pub struct MSG_MOVE_START_TURN_LEFT {
     pub info: MovementInfo,
 }
 
-impl ClientMessageWrite for MSG_MOVE_START_TURN_LEFT {
-    const OPCODE: u16 = 0xbc;
+impl ClientMessageWrite for MSG_MOVE_START_TURN_LEFT {}
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
-
-impl ServerMessageWrite for MSG_MOVE_START_TURN_LEFT {
-    const OPCODE: u16 = 0xbc;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
+impl ServerMessageWrite for MSG_MOVE_START_TURN_LEFT {}
 
 impl MessageBody for MSG_MOVE_START_TURN_LEFT {
+    const OPCODE: u16 = 0x00bc;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        self.size() as u16
+    }
+
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

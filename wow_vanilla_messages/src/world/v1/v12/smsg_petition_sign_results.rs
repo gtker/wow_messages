@@ -21,16 +21,15 @@ pub struct SMSG_PETITION_SIGN_RESULTS {
     pub result: PetitionResult,
 }
 
-impl ServerMessageWrite for SMSG_PETITION_SIGN_RESULTS {
-    const OPCODE: u16 = 0x1c1;
+impl ServerMessageWrite for SMSG_PETITION_SIGN_RESULTS {}
+
+impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
+    const OPCODE: u16 = 0x01c1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
     type Error = SMSG_PETITION_SIGN_RESULTSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

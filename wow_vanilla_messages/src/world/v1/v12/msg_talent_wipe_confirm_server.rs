@@ -19,16 +19,15 @@ pub struct MSG_TALENT_WIPE_CONFIRM_Server {
     pub cost_in_copper: u32,
 }
 
-impl ServerMessageWrite for MSG_TALENT_WIPE_CONFIRM_Server {
-    const OPCODE: u16 = 0x2aa;
+impl ServerMessageWrite for MSG_TALENT_WIPE_CONFIRM_Server {}
+
+impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Server {
+    const OPCODE: u16 = 0x02aa;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Server {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

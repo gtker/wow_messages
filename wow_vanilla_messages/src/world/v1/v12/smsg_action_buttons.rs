@@ -17,16 +17,15 @@ pub struct SMSG_ACTION_BUTTONS {
     pub data: [u32; 120],
 }
 
-impl ServerMessageWrite for SMSG_ACTION_BUTTONS {
-    const OPCODE: u16 = 0x129;
+impl ServerMessageWrite for SMSG_ACTION_BUTTONS {}
+
+impl MessageBody for SMSG_ACTION_BUTTONS {
+    const OPCODE: u16 = 0x0129;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_ACTION_BUTTONS {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -19,16 +19,15 @@ pub struct SMSG_AREA_SPIRIT_HEALER_TIME {
     pub next_resurrect_time: u32,
 }
 
-impl ServerMessageWrite for SMSG_AREA_SPIRIT_HEALER_TIME {
-    const OPCODE: u16 = 0x2e4;
+impl ServerMessageWrite for SMSG_AREA_SPIRIT_HEALER_TIME {}
+
+impl MessageBody for SMSG_AREA_SPIRIT_HEALER_TIME {
+    const OPCODE: u16 = 0x02e4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_AREA_SPIRIT_HEALER_TIME {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

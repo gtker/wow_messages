@@ -17,16 +17,15 @@ pub struct SMSG_QUESTUPDATE_FAILEDTIMER {
     pub quest_id: u32,
 }
 
-impl ServerMessageWrite for SMSG_QUESTUPDATE_FAILEDTIMER {
-    const OPCODE: u16 = 0x197;
+impl ServerMessageWrite for SMSG_QUESTUPDATE_FAILEDTIMER {}
+
+impl MessageBody for SMSG_QUESTUPDATE_FAILEDTIMER {
+    const OPCODE: u16 = 0x0197;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_QUESTUPDATE_FAILEDTIMER {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

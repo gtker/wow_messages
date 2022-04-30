@@ -17,16 +17,15 @@ pub struct SMSG_AUTH_CHALLENGE {
     pub server_seed: u32,
 }
 
-impl ServerMessageWrite for SMSG_AUTH_CHALLENGE {
-    const OPCODE: u16 = 0x1ec;
+impl ServerMessageWrite for SMSG_AUTH_CHALLENGE {}
+
+impl MessageBody for SMSG_AUTH_CHALLENGE {
+    const OPCODE: u16 = 0x01ec;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_AUTH_CHALLENGE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

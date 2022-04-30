@@ -22,16 +22,15 @@ pub struct SMSG_LOGIN_VERIFY_WORLD {
     pub orientation: f32,
 }
 
-impl ServerMessageWrite for SMSG_LOGIN_VERIFY_WORLD {
-    const OPCODE: u16 = 0x236;
+impl ServerMessageWrite for SMSG_LOGIN_VERIFY_WORLD {}
+
+impl MessageBody for SMSG_LOGIN_VERIFY_WORLD {
+    const OPCODE: u16 = 0x0236;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_LOGIN_VERIFY_WORLD {
     type Error = SMSG_LOGIN_VERIFY_WORLDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -18,16 +18,15 @@ pub struct CMSG_DEL_FRIEND {
     pub guid: Guid,
 }
 
-impl ClientMessageWrite for CMSG_DEL_FRIEND {
-    const OPCODE: u16 = 0x6a;
+impl ClientMessageWrite for CMSG_DEL_FRIEND {}
+
+impl MessageBody for CMSG_DEL_FRIEND {
+    const OPCODE: u16 = 0x006a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_DEL_FRIEND {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

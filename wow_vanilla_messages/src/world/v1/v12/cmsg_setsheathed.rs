@@ -18,16 +18,15 @@ pub struct CMSG_SETSHEATHED {
     pub sheathed: SheathState,
 }
 
-impl ClientMessageWrite for CMSG_SETSHEATHED {
-    const OPCODE: u16 = 0x1e0;
+impl ClientMessageWrite for CMSG_SETSHEATHED {}
+
+impl MessageBody for CMSG_SETSHEATHED {
+    const OPCODE: u16 = 0x01e0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_SETSHEATHED {
     type Error = CMSG_SETSHEATHEDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

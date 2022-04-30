@@ -19,16 +19,15 @@ pub struct SMSG_QUEST_CONFIRM_ACCEPT {
     pub guid: Guid,
 }
 
-impl ServerMessageWrite for SMSG_QUEST_CONFIRM_ACCEPT {
-    const OPCODE: u16 = 0x19c;
+impl ServerMessageWrite for SMSG_QUEST_CONFIRM_ACCEPT {}
+
+impl MessageBody for SMSG_QUEST_CONFIRM_ACCEPT {
+    const OPCODE: u16 = 0x019c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_QUEST_CONFIRM_ACCEPT {
     type Error = SMSG_QUEST_CONFIRM_ACCEPTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

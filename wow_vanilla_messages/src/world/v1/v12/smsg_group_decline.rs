@@ -16,16 +16,15 @@ pub struct SMSG_GROUP_DECLINE {
     pub name: String,
 }
 
-impl ServerMessageWrite for SMSG_GROUP_DECLINE {
-    const OPCODE: u16 = 0x74;
+impl ServerMessageWrite for SMSG_GROUP_DECLINE {}
+
+impl MessageBody for SMSG_GROUP_DECLINE {
+    const OPCODE: u16 = 0x0074;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_GROUP_DECLINE {
     type Error = SMSG_GROUP_DECLINEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

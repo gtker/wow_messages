@@ -20,16 +20,15 @@ pub struct CMSG_FORCE_MOVE_UNROOT_ACK {
     pub movement_info: MovementInfo,
 }
 
-impl ClientMessageWrite for CMSG_FORCE_MOVE_UNROOT_ACK {
-    const OPCODE: u16 = 0xeb;
+impl ClientMessageWrite for CMSG_FORCE_MOVE_UNROOT_ACK {}
+
+impl MessageBody for CMSG_FORCE_MOVE_UNROOT_ACK {
+    const OPCODE: u16 = 0x00eb;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_FORCE_MOVE_UNROOT_ACK {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

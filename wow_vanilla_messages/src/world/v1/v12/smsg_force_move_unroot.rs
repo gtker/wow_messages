@@ -19,16 +19,15 @@ pub struct SMSG_FORCE_MOVE_UNROOT {
     pub counter: u32,
 }
 
-impl ServerMessageWrite for SMSG_FORCE_MOVE_UNROOT {
-    const OPCODE: u16 = 0xea;
+impl ServerMessageWrite for SMSG_FORCE_MOVE_UNROOT {}
+
+impl MessageBody for SMSG_FORCE_MOVE_UNROOT {
+    const OPCODE: u16 = 0x00ea;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_FORCE_MOVE_UNROOT {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

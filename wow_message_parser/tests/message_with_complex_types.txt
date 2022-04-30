@@ -21,25 +21,17 @@ pub struct MessageWithComplexTypes {
     pub simple_struct: StructWithAllBuiltInTypes,
 }
 
-impl ClientMessageWrite for MessageWithComplexTypes {
-    const OPCODE: u16 = 0x03;
+impl ClientMessageWrite for MessageWithComplexTypes {}
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
-
-impl ServerMessageWrite for MessageWithComplexTypes {
-    const OPCODE: u16 = 0x03;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
+impl ServerMessageWrite for MessageWithComplexTypes {}
 
 impl MessageBody for MessageWithComplexTypes {
+    const OPCODE: u16 = 0x0003;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        self.size() as u16
+    }
+
     type Error = MessageWithComplexTypesError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

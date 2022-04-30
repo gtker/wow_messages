@@ -24,16 +24,15 @@ pub struct SMSG_MESSAGECHAT {
     pub tag: PlayerChatTag,
 }
 
-impl ServerMessageWrite for SMSG_MESSAGECHAT {
-    const OPCODE: u16 = 0x96;
+impl ServerMessageWrite for SMSG_MESSAGECHAT {}
+
+impl MessageBody for SMSG_MESSAGECHAT {
+    const OPCODE: u16 = 0x0096;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_MESSAGECHAT {
     type Error = SMSG_MESSAGECHATError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

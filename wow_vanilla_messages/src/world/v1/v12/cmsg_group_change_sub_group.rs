@@ -17,16 +17,15 @@ pub struct CMSG_GROUP_CHANGE_SUB_GROUP {
     pub group_number: u8,
 }
 
-impl ClientMessageWrite for CMSG_GROUP_CHANGE_SUB_GROUP {
-    const OPCODE: u16 = 0x27e;
+impl ClientMessageWrite for CMSG_GROUP_CHANGE_SUB_GROUP {}
+
+impl MessageBody for CMSG_GROUP_CHANGE_SUB_GROUP {
+    const OPCODE: u16 = 0x027e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_GROUP_CHANGE_SUB_GROUP {
     type Error = CMSG_GROUP_CHANGE_SUB_GROUPError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

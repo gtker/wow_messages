@@ -20,16 +20,15 @@ pub struct MSG_LIST_STABLED_PETS_Server {
     pub pets: Vec<StabledPet>,
 }
 
-impl ServerMessageWrite for MSG_LIST_STABLED_PETS_Server {
-    const OPCODE: u16 = 0x26f;
+impl ServerMessageWrite for MSG_LIST_STABLED_PETS_Server {}
+
+impl MessageBody for MSG_LIST_STABLED_PETS_Server {
+    const OPCODE: u16 = 0x026f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for MSG_LIST_STABLED_PETS_Server {
     type Error = MSG_LIST_STABLED_PETS_ServerError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

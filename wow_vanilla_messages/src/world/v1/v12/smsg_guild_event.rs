@@ -18,16 +18,15 @@ pub struct SMSG_GUILD_EVENT {
     pub event_descriptions: Vec<String>,
 }
 
-impl ServerMessageWrite for SMSG_GUILD_EVENT {
-    const OPCODE: u16 = 0x92;
+impl ServerMessageWrite for SMSG_GUILD_EVENT {}
+
+impl MessageBody for SMSG_GUILD_EVENT {
+    const OPCODE: u16 = 0x0092;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_GUILD_EVENT {
     type Error = SMSG_GUILD_EVENTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

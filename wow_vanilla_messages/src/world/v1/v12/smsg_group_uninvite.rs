@@ -16,16 +16,15 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct SMSG_GROUP_UNINVITE {
 }
 
-impl ServerMessageWrite for SMSG_GROUP_UNINVITE {
-    const OPCODE: u16 = 0x77;
+impl ServerMessageWrite for SMSG_GROUP_UNINVITE {}
+
+impl MessageBody for SMSG_GROUP_UNINVITE {
+    const OPCODE: u16 = 0x0077;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_GROUP_UNINVITE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -23,16 +23,15 @@ pub struct CMSG_WHO {
     pub search_strings: Vec<String>,
 }
 
-impl ClientMessageWrite for CMSG_WHO {
-    const OPCODE: u16 = 0x62;
+impl ClientMessageWrite for CMSG_WHO {}
+
+impl MessageBody for CMSG_WHO {
+    const OPCODE: u16 = 0x0062;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_WHO {
     type Error = CMSG_WHOError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -23,16 +23,15 @@ pub struct CMSG_WORLD_TELEPORT {
     pub orientation: f32,
 }
 
-impl ClientMessageWrite for CMSG_WORLD_TELEPORT {
-    const OPCODE: u16 = 0x08;
+impl ClientMessageWrite for CMSG_WORLD_TELEPORT {}
+
+impl MessageBody for CMSG_WORLD_TELEPORT {
+    const OPCODE: u16 = 0x0008;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_WORLD_TELEPORT {
     type Error = CMSG_WORLD_TELEPORTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

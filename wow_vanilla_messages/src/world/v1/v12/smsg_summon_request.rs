@@ -20,16 +20,15 @@ pub struct SMSG_SUMMON_REQUEST {
     pub auto_decline_time_in_msecs: u32,
 }
 
-impl ServerMessageWrite for SMSG_SUMMON_REQUEST {
-    const OPCODE: u16 = 0x2ab;
+impl ServerMessageWrite for SMSG_SUMMON_REQUEST {}
+
+impl MessageBody for SMSG_SUMMON_REQUEST {
+    const OPCODE: u16 = 0x02ab;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SUMMON_REQUEST {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -23,16 +23,15 @@ pub struct SMSG_ENVIRONMENTALDAMAGELOG {
     pub resist: u32,
 }
 
-impl ServerMessageWrite for SMSG_ENVIRONMENTALDAMAGELOG {
-    const OPCODE: u16 = 0x1fc;
+impl ServerMessageWrite for SMSG_ENVIRONMENTALDAMAGELOG {}
+
+impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
+    const OPCODE: u16 = 0x01fc;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
     type Error = SMSG_ENVIRONMENTALDAMAGELOGError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

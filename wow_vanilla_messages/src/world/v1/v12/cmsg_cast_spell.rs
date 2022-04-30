@@ -18,16 +18,15 @@ pub struct CMSG_CAST_SPELL {
     pub targets: SpellCastTargets,
 }
 
-impl ClientMessageWrite for CMSG_CAST_SPELL {
-    const OPCODE: u16 = 0x12e;
+impl ClientMessageWrite for CMSG_CAST_SPELL {}
+
+impl MessageBody for CMSG_CAST_SPELL {
+    const OPCODE: u16 = 0x012e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_CAST_SPELL {
     type Error = CMSG_CAST_SPELLError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

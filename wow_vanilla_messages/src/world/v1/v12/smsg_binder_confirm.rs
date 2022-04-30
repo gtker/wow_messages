@@ -18,16 +18,15 @@ pub struct SMSG_BINDER_CONFIRM {
     pub guid: Guid,
 }
 
-impl ServerMessageWrite for SMSG_BINDER_CONFIRM {
-    const OPCODE: u16 = 0x2eb;
+impl ServerMessageWrite for SMSG_BINDER_CONFIRM {}
+
+impl MessageBody for SMSG_BINDER_CONFIRM {
+    const OPCODE: u16 = 0x02eb;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_BINDER_CONFIRM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -29,14 +29,10 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 const DEFAULT_PORT: u16 = 8085;
 
 pub trait ServerMessageWrite: MessageBody {
-    const OPCODE: u16;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16;
-
     fn write_unencrypted_server<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         // size: u16_be, and opcode: u16
         crate::util::write_u16_be(w, self.size_without_size_or_opcode_fields() + 2)?;
-        crate::util::write_u16_le(w, <Self as ServerMessageWrite>::OPCODE)?;
+        crate::util::write_u16_le(w, <Self as MessageBody>::OPCODE)?;
 
         self.write_body(w)?;
         Ok(())
@@ -51,7 +47,7 @@ pub trait ServerMessageWrite: MessageBody {
         e.write_encrypted_server_header(
             w,
             self.size_without_size_or_opcode_fields() + 2,
-            <Self as ServerMessageWrite>::OPCODE,
+            <Self as MessageBody>::OPCODE,
         )?;
 
         self.write_body(w)?;
@@ -60,14 +56,10 @@ pub trait ServerMessageWrite: MessageBody {
 }
 
 pub trait ClientMessageWrite: MessageBody {
-    const OPCODE: u16;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16;
-
     fn write_unencrypted_client<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         // size: u16_be, and opcode: u32
         crate::util::write_u16_be(w, (self.size_without_size_or_opcode_fields() + 4))?;
-        crate::util::write_u32_le(w, <Self as ClientMessageWrite>::OPCODE as u32)?;
+        crate::util::write_u32_le(w, <Self as MessageBody>::OPCODE as u32)?;
 
         self.write_body(w)?;
         Ok(())
@@ -82,7 +74,7 @@ pub trait ClientMessageWrite: MessageBody {
         e.write_encrypted_client_header(
             w,
             (self.size_without_size_or_opcode_fields() + 4),
-            <Self as ClientMessageWrite>::OPCODE as u32,
+            <Self as MessageBody>::OPCODE as u32,
         )?;
 
         self.write_body(w)?;
@@ -91,6 +83,10 @@ pub trait ClientMessageWrite: MessageBody {
 }
 
 pub trait MessageBody: Sized {
+    const OPCODE: u16;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16;
+
     type Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> Result<Self, Self::Error>;

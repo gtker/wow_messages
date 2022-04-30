@@ -20,16 +20,15 @@ pub struct MSG_PVP_LOG_DATA_Server {
     pub players: Vec<BattlegroundPlayer>,
 }
 
-impl ServerMessageWrite for MSG_PVP_LOG_DATA_Server {
-    const OPCODE: u16 = 0x2e0;
+impl ServerMessageWrite for MSG_PVP_LOG_DATA_Server {}
+
+impl MessageBody for MSG_PVP_LOG_DATA_Server {
+    const OPCODE: u16 = 0x02e0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for MSG_PVP_LOG_DATA_Server {
     type Error = MSG_PVP_LOG_DATA_ServerError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

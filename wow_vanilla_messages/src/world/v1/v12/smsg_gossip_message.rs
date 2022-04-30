@@ -22,16 +22,15 @@ pub struct SMSG_GOSSIP_MESSAGE {
     pub quests: Vec<QuestItem>,
 }
 
-impl ServerMessageWrite for SMSG_GOSSIP_MESSAGE {
-    const OPCODE: u16 = 0x17d;
+impl ServerMessageWrite for SMSG_GOSSIP_MESSAGE {}
+
+impl MessageBody for SMSG_GOSSIP_MESSAGE {
+    const OPCODE: u16 = 0x017d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_GOSSIP_MESSAGE {
     type Error = SMSG_GOSSIP_MESSAGEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

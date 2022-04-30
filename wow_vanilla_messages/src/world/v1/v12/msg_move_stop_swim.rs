@@ -17,25 +17,17 @@ pub struct MSG_MOVE_STOP_SWIM {
     pub info: MovementInfo,
 }
 
-impl ClientMessageWrite for MSG_MOVE_STOP_SWIM {
-    const OPCODE: u16 = 0xcb;
+impl ClientMessageWrite for MSG_MOVE_STOP_SWIM {}
 
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
-
-impl ServerMessageWrite for MSG_MOVE_STOP_SWIM {
-    const OPCODE: u16 = 0xcb;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
+impl ServerMessageWrite for MSG_MOVE_STOP_SWIM {}
 
 impl MessageBody for MSG_MOVE_STOP_SWIM {
+    const OPCODE: u16 = 0x00cb;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        self.size() as u16
+    }
+
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

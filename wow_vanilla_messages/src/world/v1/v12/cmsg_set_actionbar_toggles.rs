@@ -17,16 +17,15 @@ pub struct CMSG_SET_ACTIONBAR_TOGGLES {
     pub action_bar: u8,
 }
 
-impl ClientMessageWrite for CMSG_SET_ACTIONBAR_TOGGLES {
-    const OPCODE: u16 = 0x2bf;
+impl ClientMessageWrite for CMSG_SET_ACTIONBAR_TOGGLES {}
+
+impl MessageBody for CMSG_SET_ACTIONBAR_TOGGLES {
+    const OPCODE: u16 = 0x02bf;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_SET_ACTIONBAR_TOGGLES {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

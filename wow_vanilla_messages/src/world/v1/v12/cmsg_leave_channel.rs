@@ -16,16 +16,15 @@ pub struct CMSG_LEAVE_CHANNEL {
     pub channel_name: String,
 }
 
-impl ClientMessageWrite for CMSG_LEAVE_CHANNEL {
-    const OPCODE: u16 = 0x98;
+impl ClientMessageWrite for CMSG_LEAVE_CHANNEL {}
+
+impl MessageBody for CMSG_LEAVE_CHANNEL {
+    const OPCODE: u16 = 0x0098;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_LEAVE_CHANNEL {
     type Error = CMSG_LEAVE_CHANNELError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

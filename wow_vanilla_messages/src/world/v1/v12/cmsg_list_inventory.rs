@@ -18,16 +18,15 @@ pub struct CMSG_LIST_INVENTORY {
     pub guid: Guid,
 }
 
-impl ClientMessageWrite for CMSG_LIST_INVENTORY {
-    const OPCODE: u16 = 0x19e;
+impl ClientMessageWrite for CMSG_LIST_INVENTORY {}
+
+impl MessageBody for CMSG_LIST_INVENTORY {
+    const OPCODE: u16 = 0x019e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_LIST_INVENTORY {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

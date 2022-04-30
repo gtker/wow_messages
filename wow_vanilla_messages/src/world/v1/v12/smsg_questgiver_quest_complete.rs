@@ -21,16 +21,15 @@ pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
     pub item_rewards: Vec<QuestItemReward>,
 }
 
-impl ServerMessageWrite for SMSG_QUESTGIVER_QUEST_COMPLETE {
-    const OPCODE: u16 = 0x191;
+impl ServerMessageWrite for SMSG_QUESTGIVER_QUEST_COMPLETE {}
+
+impl MessageBody for SMSG_QUESTGIVER_QUEST_COMPLETE {
+    const OPCODE: u16 = 0x0191;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_QUESTGIVER_QUEST_COMPLETE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

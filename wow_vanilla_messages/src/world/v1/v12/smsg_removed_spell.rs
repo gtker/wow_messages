@@ -17,16 +17,15 @@ pub struct SMSG_REMOVED_SPELL {
     pub spell_id: u16,
 }
 
-impl ServerMessageWrite for SMSG_REMOVED_SPELL {
-    const OPCODE: u16 = 0x203;
+impl ServerMessageWrite for SMSG_REMOVED_SPELL {}
+
+impl MessageBody for SMSG_REMOVED_SPELL {
+    const OPCODE: u16 = 0x0203;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_REMOVED_SPELL {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

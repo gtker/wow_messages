@@ -17,16 +17,15 @@ pub struct SMSG_RAID_INSTANCE_INFO {
     pub raid_infos: Vec<RaidInfo>,
 }
 
-impl ServerMessageWrite for SMSG_RAID_INSTANCE_INFO {
-    const OPCODE: u16 = 0x2cc;
+impl ServerMessageWrite for SMSG_RAID_INSTANCE_INFO {}
+
+impl MessageBody for SMSG_RAID_INSTANCE_INFO {
+    const OPCODE: u16 = 0x02cc;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_RAID_INSTANCE_INFO {
     type Error = SMSG_RAID_INSTANCE_INFOError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -17,16 +17,15 @@ pub struct CMSG_CHANNEL_INVITE {
     pub player_name: String,
 }
 
-impl ClientMessageWrite for CMSG_CHANNEL_INVITE {
-    const OPCODE: u16 = 0xa3;
+impl ClientMessageWrite for CMSG_CHANNEL_INVITE {}
+
+impl MessageBody for CMSG_CHANNEL_INVITE {
+    const OPCODE: u16 = 0x00a3;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_CHANNEL_INVITE {
     type Error = CMSG_CHANNEL_INVITEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

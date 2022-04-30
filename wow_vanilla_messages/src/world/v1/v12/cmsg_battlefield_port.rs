@@ -20,16 +20,15 @@ pub struct CMSG_BATTLEFIELD_PORT {
     pub action: BattlefieldPortAction,
 }
 
-impl ClientMessageWrite for CMSG_BATTLEFIELD_PORT {
-    const OPCODE: u16 = 0x2d5;
+impl ClientMessageWrite for CMSG_BATTLEFIELD_PORT {}
+
+impl MessageBody for CMSG_BATTLEFIELD_PORT {
+    const OPCODE: u16 = 0x02d5;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_BATTLEFIELD_PORT {
     type Error = CMSG_BATTLEFIELD_PORTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

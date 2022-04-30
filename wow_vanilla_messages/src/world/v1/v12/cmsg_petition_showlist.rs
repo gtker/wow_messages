@@ -18,16 +18,15 @@ pub struct CMSG_PETITION_SHOWLIST {
     pub guid: Guid,
 }
 
-impl ClientMessageWrite for CMSG_PETITION_SHOWLIST {
-    const OPCODE: u16 = 0x1bb;
+impl ClientMessageWrite for CMSG_PETITION_SHOWLIST {}
+
+impl MessageBody for CMSG_PETITION_SHOWLIST {
+    const OPCODE: u16 = 0x01bb;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_PETITION_SHOWLIST {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

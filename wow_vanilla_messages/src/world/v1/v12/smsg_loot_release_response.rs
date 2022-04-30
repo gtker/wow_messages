@@ -19,16 +19,15 @@ pub struct SMSG_LOOT_RELEASE_RESPONSE {
     pub unknown1: u8,
 }
 
-impl ServerMessageWrite for SMSG_LOOT_RELEASE_RESPONSE {
-    const OPCODE: u16 = 0x161;
+impl ServerMessageWrite for SMSG_LOOT_RELEASE_RESPONSE {}
+
+impl MessageBody for SMSG_LOOT_RELEASE_RESPONSE {
+    const OPCODE: u16 = 0x0161;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_LOOT_RELEASE_RESPONSE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

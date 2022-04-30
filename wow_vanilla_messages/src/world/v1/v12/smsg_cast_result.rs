@@ -20,16 +20,15 @@ pub struct SMSG_CAST_RESULT {
     pub result: SMSG_CAST_RESULTSimpleSpellCastResult,
 }
 
-impl ServerMessageWrite for SMSG_CAST_RESULT {
-    const OPCODE: u16 = 0x130;
+impl ServerMessageWrite for SMSG_CAST_RESULT {}
+
+impl MessageBody for SMSG_CAST_RESULT {
+    const OPCODE: u16 = 0x0130;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_CAST_RESULT {
     type Error = SMSG_CAST_RESULTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

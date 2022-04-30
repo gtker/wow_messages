@@ -17,16 +17,15 @@ pub struct CMSG_UNLEARN_SKILL {
     pub skill_id: u32,
 }
 
-impl ClientMessageWrite for CMSG_UNLEARN_SKILL {
-    const OPCODE: u16 = 0x202;
+impl ClientMessageWrite for CMSG_UNLEARN_SKILL {}
+
+impl MessageBody for CMSG_UNLEARN_SKILL {
+    const OPCODE: u16 = 0x0202;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_UNLEARN_SKILL {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

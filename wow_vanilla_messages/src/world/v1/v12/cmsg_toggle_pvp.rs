@@ -16,16 +16,15 @@ pub struct CMSG_TOGGLE_PVP {
     pub set: Option<CMSG_TOGGLE_PVP_set>,
 }
 
-impl ClientMessageWrite for CMSG_TOGGLE_PVP {
-    const OPCODE: u16 = 0x253;
+impl ClientMessageWrite for CMSG_TOGGLE_PVP {}
+
+impl MessageBody for CMSG_TOGGLE_PVP {
+    const OPCODE: u16 = 0x0253;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_TOGGLE_PVP {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

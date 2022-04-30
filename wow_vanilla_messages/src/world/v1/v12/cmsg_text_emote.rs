@@ -21,16 +21,15 @@ pub struct CMSG_TEXT_EMOTE {
     pub guid: Guid,
 }
 
-impl ClientMessageWrite for CMSG_TEXT_EMOTE {
-    const OPCODE: u16 = 0x104;
+impl ClientMessageWrite for CMSG_TEXT_EMOTE {}
+
+impl MessageBody for CMSG_TEXT_EMOTE {
+    const OPCODE: u16 = 0x0104;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_TEXT_EMOTE {
     type Error = CMSG_TEXT_EMOTEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

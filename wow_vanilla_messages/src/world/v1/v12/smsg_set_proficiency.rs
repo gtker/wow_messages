@@ -19,16 +19,15 @@ pub struct SMSG_SET_PROFICIENCY {
     pub item_sub_class_mask: u32,
 }
 
-impl ServerMessageWrite for SMSG_SET_PROFICIENCY {
-    const OPCODE: u16 = 0x127;
+impl ServerMessageWrite for SMSG_SET_PROFICIENCY {}
+
+impl MessageBody for SMSG_SET_PROFICIENCY {
+    const OPCODE: u16 = 0x0127;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SET_PROFICIENCY {
     type Error = SMSG_SET_PROFICIENCYError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

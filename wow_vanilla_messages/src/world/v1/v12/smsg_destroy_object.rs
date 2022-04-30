@@ -18,16 +18,15 @@ pub struct SMSG_DESTROY_OBJECT {
     pub guid: Guid,
 }
 
-impl ServerMessageWrite for SMSG_DESTROY_OBJECT {
-    const OPCODE: u16 = 0xaa;
+impl ServerMessageWrite for SMSG_DESTROY_OBJECT {}
+
+impl MessageBody for SMSG_DESTROY_OBJECT {
+    const OPCODE: u16 = 0x00aa;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_DESTROY_OBJECT {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

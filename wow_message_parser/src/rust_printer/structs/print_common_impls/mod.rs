@@ -32,10 +32,12 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 },
             );
         }
-        ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
+        ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
             s.impl_world_read_and_writable_with_error(
                 e.name(),
                 error_ty,
+                opcode,
+                e.is_constant_sized(),
                 |s, it| {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
@@ -50,17 +52,22 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
 }
 
 fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
+    let empty_impl = |s: &mut Writer, t| {
+        s.wln(format!("impl {} for {} {{}}", t, e.name()));
+        s.newline();
+    };
+
     match e.container_type() {
         ContainerType::Struct => {}
-        ContainerType::CMsg(v) => {
-            print_client_message_header(s, e, v);
+        ContainerType::CMsg(_) => {
+            empty_impl(s, WORLD_CLIENT_HEADER_TRAIT_NAME);
         }
-        ContainerType::SMsg(v) => {
-            print_server_message_header(s, e, v);
+        ContainerType::SMsg(_) => {
+            empty_impl(s, WORLD_SERVER_HEADER_TRAIT_NAME);
         }
-        ContainerType::Msg(v) => {
-            print_client_message_header(s, e, v);
-            print_server_message_header(s, e, v);
+        ContainerType::Msg(_) => {
+            empty_impl(s, WORLD_CLIENT_HEADER_TRAIT_NAME);
+            empty_impl(s, WORLD_SERVER_HEADER_TRAIT_NAME);
         }
         ContainerType::CLogin(v) => {
             s.body(
@@ -110,45 +117,6 @@ fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
             }
         });
     }
-}
-
-fn print_client_message_header(s: &mut Writer, e: &Container, v: u16) {
-    s.bodyn(
-        format!("impl {} for {}", WORLD_CLIENT_HEADER_TRAIT_NAME, e.name()),
-        |s| {
-            s.wln(format!("const OPCODE: u16 = {:#04x};", v));
-            s.newline();
-
-            s.bodyn("fn size_without_size_or_opcode_fields(&self) -> u16", |s| {
-                s.wln(format!(
-                    "{}",
-                    match e.is_constant_sized() {
-                        true => "Self::size() as u16",
-                        false => "self.size() as u16",
-                    }
-                ))
-            });
-        },
-    );
-}
-
-fn print_server_message_header(s: &mut Writer, e: &Container, v: u16) {
-    s.bodyn(
-        format!("impl {} for {}", WORLD_SERVER_HEADER_TRAIT_NAME, e.name()),
-        |s| {
-            s.wln(format!("const OPCODE: u16 = {:#04x};", v));
-            s.newline();
-            s.bodyn("fn size_without_size_or_opcode_fields(&self) -> u16", |s| {
-                s.wln(format!(
-                    "{}",
-                    match e.is_constant_sized() {
-                        true => "Self::size() as u16",
-                        false => "self.size() as u16",
-                    }
-                ))
-            });
-        },
-    );
 }
 
 pub fn print_constant_member(

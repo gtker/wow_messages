@@ -16,16 +16,15 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {
 }
 
-impl ClientMessageWrite for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {
-    const OPCODE: u16 = 0x2e9;
+impl ClientMessageWrite for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {}
+
+impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {
+    const OPCODE: u16 = 0x02e9;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

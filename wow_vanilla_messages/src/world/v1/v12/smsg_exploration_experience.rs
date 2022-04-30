@@ -19,16 +19,15 @@ pub struct SMSG_EXPLORATION_EXPERIENCE {
     pub experience: u32,
 }
 
-impl ServerMessageWrite for SMSG_EXPLORATION_EXPERIENCE {
-    const OPCODE: u16 = 0x1f8;
+impl ServerMessageWrite for SMSG_EXPLORATION_EXPERIENCE {}
+
+impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
+    const OPCODE: u16 = 0x01f8;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
     type Error = SMSG_EXPLORATION_EXPERIENCEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

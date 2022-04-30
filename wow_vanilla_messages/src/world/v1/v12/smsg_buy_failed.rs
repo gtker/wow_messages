@@ -21,16 +21,15 @@ pub struct SMSG_BUY_FAILED {
     pub result: BuyResult,
 }
 
-impl ServerMessageWrite for SMSG_BUY_FAILED {
-    const OPCODE: u16 = 0x1a5;
+impl ServerMessageWrite for SMSG_BUY_FAILED {}
+
+impl MessageBody for SMSG_BUY_FAILED {
+    const OPCODE: u16 = 0x01a5;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_BUY_FAILED {
     type Error = SMSG_BUY_FAILEDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -18,16 +18,15 @@ pub struct CMSG_TURN_IN_PETITION {
     pub petition_guid: Guid,
 }
 
-impl ClientMessageWrite for CMSG_TURN_IN_PETITION {
-    const OPCODE: u16 = 0x1c4;
+impl ClientMessageWrite for CMSG_TURN_IN_PETITION {}
+
+impl MessageBody for CMSG_TURN_IN_PETITION {
+    const OPCODE: u16 = 0x01c4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_TURN_IN_PETITION {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -18,16 +18,15 @@ pub struct SMSG_INSTANCE_RESET {
     pub map: Map,
 }
 
-impl ServerMessageWrite for SMSG_INSTANCE_RESET {
-    const OPCODE: u16 = 0x31e;
+impl ServerMessageWrite for SMSG_INSTANCE_RESET {}
+
+impl MessageBody for SMSG_INSTANCE_RESET {
+    const OPCODE: u16 = 0x031e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_INSTANCE_RESET {
     type Error = SMSG_INSTANCE_RESETError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

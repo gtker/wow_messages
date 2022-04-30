@@ -18,16 +18,15 @@ pub struct SMSG_UPDATE_LAST_INSTANCE {
     pub map: Map,
 }
 
-impl ServerMessageWrite for SMSG_UPDATE_LAST_INSTANCE {
-    const OPCODE: u16 = 0x320;
+impl ServerMessageWrite for SMSG_UPDATE_LAST_INSTANCE {}
+
+impl MessageBody for SMSG_UPDATE_LAST_INSTANCE {
+    const OPCODE: u16 = 0x0320;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_UPDATE_LAST_INSTANCE {
     type Error = SMSG_UPDATE_LAST_INSTANCEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

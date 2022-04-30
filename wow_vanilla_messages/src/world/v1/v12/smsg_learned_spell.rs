@@ -17,16 +17,15 @@ pub struct SMSG_LEARNED_SPELL {
     pub id: u32,
 }
 
-impl ServerMessageWrite for SMSG_LEARNED_SPELL {
-    const OPCODE: u16 = 0x12b;
+impl ServerMessageWrite for SMSG_LEARNED_SPELL {}
+
+impl MessageBody for SMSG_LEARNED_SPELL {
+    const OPCODE: u16 = 0x012b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_LEARNED_SPELL {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

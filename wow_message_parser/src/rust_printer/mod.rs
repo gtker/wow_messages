@@ -182,6 +182,8 @@ impl Writer {
         &mut self,
         type_name: impl AsRef<str>,
         error_name: impl AsRef<str>,
+        opcode: u16,
+        is_constant_sized: bool,
         read_function: impl Fn(&mut Self, ImplType),
         write_function: impl Fn(&mut Self, ImplType),
     ) {
@@ -190,6 +192,22 @@ impl Writer {
             WORLD_BODY_TRAIT_NAME,
             type_name.as_ref()
         ));
+
+        self.wln(format!("const OPCODE: u16 = {:#06x};", opcode));
+
+        self.newline();
+
+        self.open_curly("fn size_without_size_or_opcode_fields(&self) -> u16");
+        self.wln(format!(
+            "{}size() as u16",
+            match is_constant_sized {
+                true => "Self::",
+                false => "self.",
+            }
+        ));
+        self.closing_curly();
+
+        self.newline();
         self.wln(format!(
             "type Error = {err_ty};",
             err_ty = error_name.as_ref()

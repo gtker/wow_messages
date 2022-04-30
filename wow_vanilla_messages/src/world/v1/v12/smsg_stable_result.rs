@@ -18,16 +18,15 @@ pub struct SMSG_STABLE_RESULT {
     pub result: StableResult,
 }
 
-impl ServerMessageWrite for SMSG_STABLE_RESULT {
-    const OPCODE: u16 = 0x273;
+impl ServerMessageWrite for SMSG_STABLE_RESULT {}
+
+impl MessageBody for SMSG_STABLE_RESULT {
+    const OPCODE: u16 = 0x0273;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_STABLE_RESULT {
     type Error = SMSG_STABLE_RESULTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

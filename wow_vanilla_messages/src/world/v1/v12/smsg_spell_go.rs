@@ -26,16 +26,15 @@ pub struct SMSG_SPELL_GO {
     pub targets: SpellCastTargets,
 }
 
-impl ServerMessageWrite for SMSG_SPELL_GO {
-    const OPCODE: u16 = 0x132;
+impl ServerMessageWrite for SMSG_SPELL_GO {}
+
+impl MessageBody for SMSG_SPELL_GO {
+    const OPCODE: u16 = 0x0132;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SPELL_GO {
     type Error = SMSG_SPELL_GOError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

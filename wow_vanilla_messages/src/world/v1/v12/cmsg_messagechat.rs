@@ -19,16 +19,15 @@ pub struct CMSG_MESSAGECHAT {
     pub language: Language,
 }
 
-impl ClientMessageWrite for CMSG_MESSAGECHAT {
-    const OPCODE: u16 = 0x95;
+impl ClientMessageWrite for CMSG_MESSAGECHAT {}
+
+impl MessageBody for CMSG_MESSAGECHAT {
+    const OPCODE: u16 = 0x0095;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_MESSAGECHAT {
     type Error = CMSG_MESSAGECHATError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -25,16 +25,15 @@ pub struct SMSG_GROUP_LIST {
     pub group_not_empty: Option<SMSG_GROUP_LIST_group_not_empty>,
 }
 
-impl ServerMessageWrite for SMSG_GROUP_LIST {
-    const OPCODE: u16 = 0x7d;
+impl ServerMessageWrite for SMSG_GROUP_LIST {}
+
+impl MessageBody for SMSG_GROUP_LIST {
+    const OPCODE: u16 = 0x007d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_GROUP_LIST {
     type Error = SMSG_GROUP_LISTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

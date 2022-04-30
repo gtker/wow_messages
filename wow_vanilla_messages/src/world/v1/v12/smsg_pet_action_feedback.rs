@@ -18,16 +18,15 @@ pub struct SMSG_PET_ACTION_FEEDBACK {
     pub feedback: PetFeedback,
 }
 
-impl ServerMessageWrite for SMSG_PET_ACTION_FEEDBACK {
-    const OPCODE: u16 = 0x2c6;
+impl ServerMessageWrite for SMSG_PET_ACTION_FEEDBACK {}
+
+impl MessageBody for SMSG_PET_ACTION_FEEDBACK {
+    const OPCODE: u16 = 0x02c6;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_PET_ACTION_FEEDBACK {
     type Error = SMSG_PET_ACTION_FEEDBACKError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

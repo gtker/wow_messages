@@ -20,16 +20,15 @@ pub struct SMSG_PLAYERBOUND {
     pub area: Area,
 }
 
-impl ServerMessageWrite for SMSG_PLAYERBOUND {
-    const OPCODE: u16 = 0x158;
+impl ServerMessageWrite for SMSG_PLAYERBOUND {}
+
+impl MessageBody for SMSG_PLAYERBOUND {
+    const OPCODE: u16 = 0x0158;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_PLAYERBOUND {
     type Error = SMSG_PLAYERBOUNDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

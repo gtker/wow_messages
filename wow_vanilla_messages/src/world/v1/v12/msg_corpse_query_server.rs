@@ -18,16 +18,15 @@ pub struct MSG_CORPSE_QUERY_Server {
     pub result: MSG_CORPSE_QUERY_ServerCorpseQueryResult,
 }
 
-impl ServerMessageWrite for MSG_CORPSE_QUERY_Server {
-    const OPCODE: u16 = 0x216;
+impl ServerMessageWrite for MSG_CORPSE_QUERY_Server {}
+
+impl MessageBody for MSG_CORPSE_QUERY_Server {
+    const OPCODE: u16 = 0x0216;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for MSG_CORPSE_QUERY_Server {
     type Error = MSG_CORPSE_QUERY_ServerError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

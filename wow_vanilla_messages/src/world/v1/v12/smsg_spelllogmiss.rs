@@ -21,16 +21,15 @@ pub struct SMSG_SPELLLOGMISS {
     pub targets: Vec<SpellMiss>,
 }
 
-impl ServerMessageWrite for SMSG_SPELLLOGMISS {
-    const OPCODE: u16 = 0x24b;
+impl ServerMessageWrite for SMSG_SPELLLOGMISS {}
+
+impl MessageBody for SMSG_SPELLLOGMISS {
+    const OPCODE: u16 = 0x024b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SPELLLOGMISS {
     type Error = SMSG_SPELLLOGMISSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

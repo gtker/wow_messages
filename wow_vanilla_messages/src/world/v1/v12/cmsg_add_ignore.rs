@@ -16,16 +16,15 @@ pub struct CMSG_ADD_IGNORE {
     pub ignore_name: String,
 }
 
-impl ClientMessageWrite for CMSG_ADD_IGNORE {
-    const OPCODE: u16 = 0x6c;
+impl ClientMessageWrite for CMSG_ADD_IGNORE {}
+
+impl MessageBody for CMSG_ADD_IGNORE {
+    const OPCODE: u16 = 0x006c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_ADD_IGNORE {
     type Error = CMSG_ADD_IGNOREError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

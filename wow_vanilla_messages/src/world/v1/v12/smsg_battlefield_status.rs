@@ -19,16 +19,15 @@ pub struct SMSG_BATTLEFIELD_STATUS {
     pub map: SMSG_BATTLEFIELD_STATUSMap,
 }
 
-impl ServerMessageWrite for SMSG_BATTLEFIELD_STATUS {
-    const OPCODE: u16 = 0x2d4;
+impl ServerMessageWrite for SMSG_BATTLEFIELD_STATUS {}
+
+impl MessageBody for SMSG_BATTLEFIELD_STATUS {
+    const OPCODE: u16 = 0x02d4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_BATTLEFIELD_STATUS {
     type Error = SMSG_BATTLEFIELD_STATUSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -21,16 +21,15 @@ pub struct SMSG_GOSSIP_POI {
     pub location_name: String,
 }
 
-impl ServerMessageWrite for SMSG_GOSSIP_POI {
-    const OPCODE: u16 = 0x224;
+impl ServerMessageWrite for SMSG_GOSSIP_POI {}
+
+impl MessageBody for SMSG_GOSSIP_POI {
+    const OPCODE: u16 = 0x0224;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_GOSSIP_POI {
     type Error = SMSG_GOSSIP_POIError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -19,16 +19,15 @@ pub struct SMSG_NPC_TEXT_UPDATE {
     pub texts: [NpcTextUpdate; 8],
 }
 
-impl ServerMessageWrite for SMSG_NPC_TEXT_UPDATE {
-    const OPCODE: u16 = 0x180;
+impl ServerMessageWrite for SMSG_NPC_TEXT_UPDATE {}
+
+impl MessageBody for SMSG_NPC_TEXT_UPDATE {
+    const OPCODE: u16 = 0x0180;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_NPC_TEXT_UPDATE {
     type Error = SMSG_NPC_TEXT_UPDATEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

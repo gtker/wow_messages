@@ -21,16 +21,15 @@ pub struct SMSG_RESURRECT_REQUEST {
     pub respect_resurrection_timer: u8,
 }
 
-impl ServerMessageWrite for SMSG_RESURRECT_REQUEST {
-    const OPCODE: u16 = 0x15b;
+impl ServerMessageWrite for SMSG_RESURRECT_REQUEST {}
+
+impl MessageBody for SMSG_RESURRECT_REQUEST {
+    const OPCODE: u16 = 0x015b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_RESURRECT_REQUEST {
     type Error = SMSG_RESURRECT_REQUESTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

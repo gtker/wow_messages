@@ -17,16 +17,15 @@ pub struct SMSG_QUERY_TIME_RESPONSE {
     pub time: u32,
 }
 
-impl ServerMessageWrite for SMSG_QUERY_TIME_RESPONSE {
-    const OPCODE: u16 = 0x1cf;
+impl ServerMessageWrite for SMSG_QUERY_TIME_RESPONSE {}
+
+impl MessageBody for SMSG_QUERY_TIME_RESPONSE {
+    const OPCODE: u16 = 0x01cf;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_QUERY_TIME_RESPONSE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -17,16 +17,15 @@ pub struct SMSG_AREA_TRIGGER_MESSAGE {
     pub message: String,
 }
 
-impl ServerMessageWrite for SMSG_AREA_TRIGGER_MESSAGE {
-    const OPCODE: u16 = 0x2b8;
+impl ServerMessageWrite for SMSG_AREA_TRIGGER_MESSAGE {}
+
+impl MessageBody for SMSG_AREA_TRIGGER_MESSAGE {
+    const OPCODE: u16 = 0x02b8;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_AREA_TRIGGER_MESSAGE {
     type Error = SMSG_AREA_TRIGGER_MESSAGEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

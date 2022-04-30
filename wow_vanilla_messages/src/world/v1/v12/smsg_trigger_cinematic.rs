@@ -18,16 +18,15 @@ pub struct SMSG_TRIGGER_CINEMATIC {
     pub cinematic_sequence_id: CinematicSequenceId,
 }
 
-impl ServerMessageWrite for SMSG_TRIGGER_CINEMATIC {
-    const OPCODE: u16 = 0xfa;
+impl ServerMessageWrite for SMSG_TRIGGER_CINEMATIC {}
+
+impl MessageBody for SMSG_TRIGGER_CINEMATIC {
+    const OPCODE: u16 = 0x00fa;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_TRIGGER_CINEMATIC {
     type Error = SMSG_TRIGGER_CINEMATICError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

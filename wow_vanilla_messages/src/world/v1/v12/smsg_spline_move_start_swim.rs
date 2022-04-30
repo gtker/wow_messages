@@ -17,16 +17,15 @@ pub struct SMSG_SPLINE_MOVE_START_SWIM {
     pub guid: Guid,
 }
 
-impl ServerMessageWrite for SMSG_SPLINE_MOVE_START_SWIM {
-    const OPCODE: u16 = 0x30b;
+impl ServerMessageWrite for SMSG_SPLINE_MOVE_START_SWIM {}
+
+impl MessageBody for SMSG_SPLINE_MOVE_START_SWIM {
+    const OPCODE: u16 = 0x030b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SPLINE_MOVE_START_SWIM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -18,16 +18,15 @@ pub struct CMSG_CHAR_RENAME {
     pub name: String,
 }
 
-impl ClientMessageWrite for CMSG_CHAR_RENAME {
-    const OPCODE: u16 = 0x2c7;
+impl ClientMessageWrite for CMSG_CHAR_RENAME {}
+
+impl MessageBody for CMSG_CHAR_RENAME {
+    const OPCODE: u16 = 0x02c7;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_CHAR_RENAME {
     type Error = CMSG_CHAR_RENAMEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

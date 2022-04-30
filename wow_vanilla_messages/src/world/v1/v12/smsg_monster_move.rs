@@ -23,16 +23,15 @@ pub struct SMSG_MONSTER_MOVE {
     pub move_type: MonsterMoveType,
 }
 
-impl ServerMessageWrite for SMSG_MONSTER_MOVE {
-    const OPCODE: u16 = 0xdd;
+impl ServerMessageWrite for SMSG_MONSTER_MOVE {}
+
+impl MessageBody for SMSG_MONSTER_MOVE {
+    const OPCODE: u16 = 0x00dd;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_MONSTER_MOVE {
     type Error = SMSG_MONSTER_MOVEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -18,16 +18,15 @@ pub struct CMSG_TEST_OPTIONAL {
     pub server: Option<CMSG_TEST_OPTIONAL_server>,
 }
 
-impl ClientMessageWrite for CMSG_TEST_OPTIONAL {
+impl ClientMessageWrite for CMSG_TEST_OPTIONAL {}
+
+impl MessageBody for CMSG_TEST_OPTIONAL {
     const OPCODE: u16 = 0x1137;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_TEST_OPTIONAL {
     type Error = CMSG_TEST_OPTIONALError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

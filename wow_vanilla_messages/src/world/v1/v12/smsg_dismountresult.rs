@@ -18,16 +18,15 @@ pub struct SMSG_DISMOUNTRESULT {
     pub result: MountResult,
 }
 
-impl ServerMessageWrite for SMSG_DISMOUNTRESULT {
-    const OPCODE: u16 = 0x16f;
+impl ServerMessageWrite for SMSG_DISMOUNTRESULT {}
+
+impl MessageBody for SMSG_DISMOUNTRESULT {
+    const OPCODE: u16 = 0x016f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_DISMOUNTRESULT {
     type Error = SMSG_DISMOUNTRESULTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

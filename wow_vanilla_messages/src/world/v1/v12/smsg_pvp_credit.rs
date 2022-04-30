@@ -21,16 +21,15 @@ pub struct SMSG_PVP_CREDIT {
     pub rank: PvpRank,
 }
 
-impl ServerMessageWrite for SMSG_PVP_CREDIT {
-    const OPCODE: u16 = 0x28c;
+impl ServerMessageWrite for SMSG_PVP_CREDIT {}
+
+impl MessageBody for SMSG_PVP_CREDIT {
+    const OPCODE: u16 = 0x028c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_PVP_CREDIT {
     type Error = SMSG_PVP_CREDITError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

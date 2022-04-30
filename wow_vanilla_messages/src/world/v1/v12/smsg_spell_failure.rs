@@ -21,16 +21,15 @@ pub struct SMSG_SPELL_FAILURE {
     pub result: SpellCastResult,
 }
 
-impl ServerMessageWrite for SMSG_SPELL_FAILURE {
-    const OPCODE: u16 = 0x133;
+impl ServerMessageWrite for SMSG_SPELL_FAILURE {}
+
+impl MessageBody for SMSG_SPELL_FAILURE {
+    const OPCODE: u16 = 0x0133;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SPELL_FAILURE {
     type Error = SMSG_SPELL_FAILUREError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

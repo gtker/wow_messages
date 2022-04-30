@@ -17,16 +17,15 @@ pub struct CMSG_GUILD_QUERY {
     pub guild_id: u32,
 }
 
-impl ClientMessageWrite for CMSG_GUILD_QUERY {
-    const OPCODE: u16 = 0x54;
+impl ClientMessageWrite for CMSG_GUILD_QUERY {}
+
+impl MessageBody for CMSG_GUILD_QUERY {
+    const OPCODE: u16 = 0x0054;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_GUILD_QUERY {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

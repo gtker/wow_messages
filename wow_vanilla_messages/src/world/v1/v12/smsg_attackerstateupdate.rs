@@ -20,16 +20,15 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
     pub total_damage: u32,
 }
 
-impl ServerMessageWrite for SMSG_ATTACKERSTATEUPDATE {
-    const OPCODE: u16 = 0x14a;
+impl ServerMessageWrite for SMSG_ATTACKERSTATEUPDATE {}
+
+impl MessageBody for SMSG_ATTACKERSTATEUPDATE {
+    const OPCODE: u16 = 0x014a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_ATTACKERSTATEUPDATE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

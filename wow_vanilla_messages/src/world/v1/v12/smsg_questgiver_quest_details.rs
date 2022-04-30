@@ -29,16 +29,15 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub emotes: Vec<QuestDetailsEmote>,
 }
 
-impl ServerMessageWrite for SMSG_QUESTGIVER_QUEST_DETAILS {
-    const OPCODE: u16 = 0x188;
+impl ServerMessageWrite for SMSG_QUESTGIVER_QUEST_DETAILS {}
+
+impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
+    const OPCODE: u16 = 0x0188;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
     type Error = SMSG_QUESTGIVER_QUEST_DETAILSError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

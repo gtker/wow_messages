@@ -16,16 +16,15 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct CMSG_GUILD_LEAVE {
 }
 
-impl ClientMessageWrite for CMSG_GUILD_LEAVE {
-    const OPCODE: u16 = 0x8d;
+impl ClientMessageWrite for CMSG_GUILD_LEAVE {}
+
+impl MessageBody for CMSG_GUILD_LEAVE {
+    const OPCODE: u16 = 0x008d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_GUILD_LEAVE {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -17,16 +17,15 @@ pub struct CMSG_GUILD_SET_PUBLIC_NOTE {
     pub note: String,
 }
 
-impl ClientMessageWrite for CMSG_GUILD_SET_PUBLIC_NOTE {
-    const OPCODE: u16 = 0x234;
+impl ClientMessageWrite for CMSG_GUILD_SET_PUBLIC_NOTE {}
+
+impl MessageBody for CMSG_GUILD_SET_PUBLIC_NOTE {
+    const OPCODE: u16 = 0x0234;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_GUILD_SET_PUBLIC_NOTE {
     type Error = CMSG_GUILD_SET_PUBLIC_NOTEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

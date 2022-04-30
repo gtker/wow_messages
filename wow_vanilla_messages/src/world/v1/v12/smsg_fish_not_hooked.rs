@@ -16,16 +16,15 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct SMSG_FISH_NOT_HOOKED {
 }
 
-impl ServerMessageWrite for SMSG_FISH_NOT_HOOKED {
-    const OPCODE: u16 = 0x1c8;
+impl ServerMessageWrite for SMSG_FISH_NOT_HOOKED {}
+
+impl MessageBody for SMSG_FISH_NOT_HOOKED {
+    const OPCODE: u16 = 0x01c8;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_FISH_NOT_HOOKED {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

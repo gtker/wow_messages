@@ -18,16 +18,15 @@ pub struct CMSG_BATTLEFIELD_JOIN {
     pub map: Map,
 }
 
-impl ClientMessageWrite for CMSG_BATTLEFIELD_JOIN {
-    const OPCODE: u16 = 0x23e;
+impl ClientMessageWrite for CMSG_BATTLEFIELD_JOIN {}
+
+impl MessageBody for CMSG_BATTLEFIELD_JOIN {
+    const OPCODE: u16 = 0x023e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_BATTLEFIELD_JOIN {
     type Error = CMSG_BATTLEFIELD_JOINError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

@@ -19,16 +19,15 @@ pub struct CMSG_AUTOEQUIP_ITEM_SLOT {
     pub destination_slot: u8,
 }
 
-impl ClientMessageWrite for CMSG_AUTOEQUIP_ITEM_SLOT {
-    const OPCODE: u16 = 0x10f;
+impl ClientMessageWrite for CMSG_AUTOEQUIP_ITEM_SLOT {}
+
+impl MessageBody for CMSG_AUTOEQUIP_ITEM_SLOT {
+    const OPCODE: u16 = 0x010f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_AUTOEQUIP_ITEM_SLOT {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

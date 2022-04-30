@@ -30,16 +30,15 @@ pub struct SMSG_ITEM_PUSH_RESULT {
     pub item_count: u32,
 }
 
-impl ServerMessageWrite for SMSG_ITEM_PUSH_RESULT {
-    const OPCODE: u16 = 0x166;
+impl ServerMessageWrite for SMSG_ITEM_PUSH_RESULT {}
+
+impl MessageBody for SMSG_ITEM_PUSH_RESULT {
+    const OPCODE: u16 = 0x0166;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_ITEM_PUSH_RESULT {
     type Error = SMSG_ITEM_PUSH_RESULTError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

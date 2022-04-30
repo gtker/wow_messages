@@ -16,16 +16,15 @@ pub struct CMSG_GUILD_ADD_RANK {
     pub rank_name: String,
 }
 
-impl ClientMessageWrite for CMSG_GUILD_ADD_RANK {
-    const OPCODE: u16 = 0x232;
+impl ClientMessageWrite for CMSG_GUILD_ADD_RANK {}
+
+impl MessageBody for CMSG_GUILD_ADD_RANK {
+    const OPCODE: u16 = 0x0232;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_GUILD_ADD_RANK {
     type Error = CMSG_GUILD_ADD_RANKError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

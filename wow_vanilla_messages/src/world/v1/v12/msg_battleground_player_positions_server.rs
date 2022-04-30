@@ -17,14 +17,7 @@ pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub flag_carriers: Vec<BattlegroundPlayerPosition>,
 }
 
-impl ServerMessageWrite for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
-    const OPCODE: u16 = 0x2e9;
-
-    fn size_without_size_or_opcode_fields(&self) -> u16 {
-        self.size() as u16
-    }
-
-}
+impl ServerMessageWrite for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
 
 impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub const AMOUNT_OF_CARRIERS_VALUE: u32 = 0x00;
@@ -32,6 +25,12 @@ impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 }
 
 impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
+    const OPCODE: u16 = 0x02e9;
+
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
+        self.size() as u16
+    }
+
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

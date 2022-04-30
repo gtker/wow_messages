@@ -17,16 +17,15 @@ pub struct CMSG_CHANNEL_KICK {
     pub player_name: String,
 }
 
-impl ClientMessageWrite for CMSG_CHANNEL_KICK {
-    const OPCODE: u16 = 0xa4;
+impl ClientMessageWrite for CMSG_CHANNEL_KICK {}
+
+impl MessageBody for CMSG_CHANNEL_KICK {
+    const OPCODE: u16 = 0x00a4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_CHANNEL_KICK {
     type Error = CMSG_CHANNEL_KICKError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

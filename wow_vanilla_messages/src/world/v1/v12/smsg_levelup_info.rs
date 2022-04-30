@@ -28,16 +28,15 @@ pub struct SMSG_LEVELUP_INFO {
     pub spirit: u32,
 }
 
-impl ServerMessageWrite for SMSG_LEVELUP_INFO {
-    const OPCODE: u16 = 0x1d4;
+impl ServerMessageWrite for SMSG_LEVELUP_INFO {}
+
+impl MessageBody for SMSG_LEVELUP_INFO {
+    const OPCODE: u16 = 0x01d4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_LEVELUP_INFO {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

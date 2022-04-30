@@ -18,16 +18,15 @@ pub struct SMSG_BATTLEGROUND_PLAYER_JOINED {
     pub player_guid: Guid,
 }
 
-impl ServerMessageWrite for SMSG_BATTLEGROUND_PLAYER_JOINED {
-    const OPCODE: u16 = 0x2ec;
+impl ServerMessageWrite for SMSG_BATTLEGROUND_PLAYER_JOINED {}
+
+impl MessageBody for SMSG_BATTLEGROUND_PLAYER_JOINED {
+    const OPCODE: u16 = 0x02ec;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_BATTLEGROUND_PLAYER_JOINED {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

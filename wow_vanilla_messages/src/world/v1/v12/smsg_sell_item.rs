@@ -21,16 +21,15 @@ pub struct SMSG_SELL_ITEM {
     pub result: SellItemResult,
 }
 
-impl ServerMessageWrite for SMSG_SELL_ITEM {
-    const OPCODE: u16 = 0x1a1;
+impl ServerMessageWrite for SMSG_SELL_ITEM {}
+
+impl MessageBody for SMSG_SELL_ITEM {
+    const OPCODE: u16 = 0x01a1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_SELL_ITEM {
     type Error = SMSG_SELL_ITEMError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

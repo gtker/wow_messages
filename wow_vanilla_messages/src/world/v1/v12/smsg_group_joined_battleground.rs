@@ -18,16 +18,15 @@ pub struct SMSG_GROUP_JOINED_BATTLEGROUND {
     pub id: BgTypeId,
 }
 
-impl ServerMessageWrite for SMSG_GROUP_JOINED_BATTLEGROUND {
-    const OPCODE: u16 = 0x2e8;
+impl ServerMessageWrite for SMSG_GROUP_JOINED_BATTLEGROUND {}
+
+impl MessageBody for SMSG_GROUP_JOINED_BATTLEGROUND {
+    const OPCODE: u16 = 0x02e8;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_GROUP_JOINED_BATTLEGROUND {
     type Error = SMSG_GROUP_JOINED_BATTLEGROUNDError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

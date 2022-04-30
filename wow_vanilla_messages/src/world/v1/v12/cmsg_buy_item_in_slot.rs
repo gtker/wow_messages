@@ -22,16 +22,15 @@ pub struct CMSG_BUY_ITEM_IN_SLOT {
     pub amount: u8,
 }
 
-impl ClientMessageWrite for CMSG_BUY_ITEM_IN_SLOT {
-    const OPCODE: u16 = 0x1a3;
+impl ClientMessageWrite for CMSG_BUY_ITEM_IN_SLOT {}
+
+impl MessageBody for CMSG_BUY_ITEM_IN_SLOT {
+    const OPCODE: u16 = 0x01a3;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_BUY_ITEM_IN_SLOT {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

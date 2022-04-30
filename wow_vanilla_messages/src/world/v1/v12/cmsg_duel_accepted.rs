@@ -18,16 +18,15 @@ pub struct CMSG_DUEL_ACCEPTED {
     pub guid: Guid,
 }
 
-impl ClientMessageWrite for CMSG_DUEL_ACCEPTED {
-    const OPCODE: u16 = 0x16c;
+impl ClientMessageWrite for CMSG_DUEL_ACCEPTED {}
+
+impl MessageBody for CMSG_DUEL_ACCEPTED {
+    const OPCODE: u16 = 0x016c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_DUEL_ACCEPTED {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

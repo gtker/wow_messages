@@ -17,16 +17,15 @@ pub struct SMSG_UPDATE_INSTANCE_OWNERSHIP {
     pub has_been_saved: u32,
 }
 
-impl ServerMessageWrite for SMSG_UPDATE_INSTANCE_OWNERSHIP {
-    const OPCODE: u16 = 0x32b;
+impl ServerMessageWrite for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
+
+impl MessageBody for SMSG_UPDATE_INSTANCE_OWNERSHIP {
+    const OPCODE: u16 = 0x032b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_UPDATE_INSTANCE_OWNERSHIP {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

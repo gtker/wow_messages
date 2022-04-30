@@ -18,16 +18,15 @@ pub struct SMSG_CHAR_RENAME {
     pub result: SMSG_CHAR_RENAMEWorldResult,
 }
 
-impl ServerMessageWrite for SMSG_CHAR_RENAME {
-    const OPCODE: u16 = 0x2c8;
+impl ServerMessageWrite for SMSG_CHAR_RENAME {}
+
+impl MessageBody for SMSG_CHAR_RENAME {
+    const OPCODE: u16 = 0x02c8;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_CHAR_RENAME {
     type Error = SMSG_CHAR_RENAMEError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

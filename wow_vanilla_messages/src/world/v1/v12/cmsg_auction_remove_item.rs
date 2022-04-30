@@ -19,16 +19,15 @@ pub struct CMSG_AUCTION_REMOVE_ITEM {
     pub auction_id: u32,
 }
 
-impl ClientMessageWrite for CMSG_AUCTION_REMOVE_ITEM {
-    const OPCODE: u16 = 0x257;
+impl ClientMessageWrite for CMSG_AUCTION_REMOVE_ITEM {}
+
+impl MessageBody for CMSG_AUCTION_REMOVE_ITEM {
+    const OPCODE: u16 = 0x0257;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_AUCTION_REMOVE_ITEM {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

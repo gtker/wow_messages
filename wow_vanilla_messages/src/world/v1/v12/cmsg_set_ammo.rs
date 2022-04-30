@@ -17,16 +17,15 @@ pub struct CMSG_SET_AMMO {
     pub item: u32,
 }
 
-impl ClientMessageWrite for CMSG_SET_AMMO {
-    const OPCODE: u16 = 0x268;
+impl ClientMessageWrite for CMSG_SET_AMMO {}
+
+impl MessageBody for CMSG_SET_AMMO {
+    const OPCODE: u16 = 0x0268;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for CMSG_SET_AMMO {
     type Error = std::io::Error;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {

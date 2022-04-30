@@ -20,16 +20,15 @@ pub struct SMSG_AI_REACTION {
     pub reaction: AiReaction,
 }
 
-impl ServerMessageWrite for SMSG_AI_REACTION {
-    const OPCODE: u16 = 0x13c;
+impl ServerMessageWrite for SMSG_AI_REACTION {}
+
+impl MessageBody for SMSG_AI_REACTION {
+    const OPCODE: u16 = 0x013c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
-}
-
-impl MessageBody for SMSG_AI_REACTION {
     type Error = SMSG_AI_REACTIONError;
 
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
