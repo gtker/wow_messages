@@ -466,7 +466,7 @@ fn print_container_example_member(
             s.wln("UNIMPLEMENTED_DOC_IF");
         }
         StructMember::OptionalStatement(_) => {
-            s.wln("UNIMPLEMENTED_DOC_OPTIONAL");
+            panic!("UNIMPLEMENTED_DOC_OPTIONAL");
         }
     }
 }
