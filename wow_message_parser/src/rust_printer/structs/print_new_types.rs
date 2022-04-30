@@ -476,9 +476,11 @@ fn print_write_for_new_flag_complex(
     s: &mut Writer,
     f: &Enumerator,
     function_header: &str,
-    prefix: &str,
-    postfix: &str,
+    it: ImplType,
 ) {
+    let prefix = it.prefix();
+    let postfix = it.postfix();
+
     s.bodyn(function_header, |s| {
         for sf in f.subfields() {
             match sf.ty() {
@@ -667,7 +669,7 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
                     }
                 }
 
-                print_write_for_new_flag_complex(s, f, "pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", "", "");
+                print_write_for_new_flag_complex(s, f, "pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", ImplType::Std);
             },
         );
 
@@ -680,7 +682,7 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
             ),
             |s| {
                 s.wln(CFG_ASYNC_TOKIO);
-                print_write_for_new_flag_complex(s, f, "async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", ImplType::Tokio.prefix(), ImplType::Tokio.postfix());
+                print_write_for_new_flag_complex(s, f, "async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", ImplType::Tokio);
             },
         );
     }
