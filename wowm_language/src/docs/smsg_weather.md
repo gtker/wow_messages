@@ -20,7 +20,7 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | WeatherType | weather_type |  |
+| 0x04 | ? / - | [WeatherType](weathertype.md) | weather_type |  |
 | - | 4 / Little | f32 | grade |  |
 | - | 4 / Little | u32 | sound_id |  |
-| - | ? / - | WeatherChangeType | change |  |
+| - | ? / - | [WeatherChangeType](weatherchangetype.md) | change |  |

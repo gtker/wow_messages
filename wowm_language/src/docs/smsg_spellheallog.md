@@ -21,8 +21,8 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | - / - | PackedGuid | victim_guid |  |
-| - | - / - | PackedGuid | caster_guid |  |
+| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | victim_guid |  |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | caster_guid |  |
 | - | 4 / Little | u32 | id |  |
 | - | 4 / Little | u32 | damage |  |
 | - | 1 / - | u8 | critical |  |

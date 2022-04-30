@@ -23,5 +23,5 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 8 / Little | Guid | petition_guid |  |
+| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | petition_guid |  |
 | 0x08 | - / - | CString | new_name |  |

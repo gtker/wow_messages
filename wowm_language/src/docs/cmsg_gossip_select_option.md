@@ -21,7 +21,7 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 8 / Little | Guid | guid |  |
+| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |
 | 0x0E | 4 / Little | u32 | gossip_list_id |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.

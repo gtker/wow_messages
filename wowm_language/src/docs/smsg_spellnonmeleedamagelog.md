@@ -28,11 +28,11 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | - / - | PackedGuid | target |  |
-| - | - / - | PackedGuid | attacker |  |
+| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | target |  |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | attacker |  |
 | - | 4 / Little | u32 | spell |  |
 | - | 4 / Little | u32 | damage |  |
-| - | ? / - | SpellSchool | school |  |
+| - | ? / - | [SpellSchool](spellschool.md) | school |  |
 | - | 4 / Little | u32 | absorbed_damage |  |
 | - | 4 / Little | u32 | resisted |  |
 | - | 1 / - | u8 | periodic_log |  |

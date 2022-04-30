@@ -19,6 +19,6 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | vendor |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | vendor |  |
 | 0x0C | 1 / - | u8 | amount_of_items |  |
-| 0x0D | ? / - | ListInventoryItem[amount_of_items] | items |  |
+| 0x0D | ? / - | [ListInventoryItem](listinventoryitem.md)[amount_of_items] | items |  |

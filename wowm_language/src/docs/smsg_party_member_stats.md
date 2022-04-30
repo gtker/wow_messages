@@ -73,14 +73,14 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | - / - | PackedGuid | guid |  |
-| - | ? / - | GroupUpdateFlags | mask |  |
+| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |
+| - | ? / - | [GroupUpdateFlags](groupupdateflags.md) | mask |  |
 
 If mask contains `FLAG_STATUS`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | GroupMemberOnlineStatus | status |  |
+| - | ? / - | [GroupMemberOnlineStatus](groupmemberonlinestatus.md) | status |  |
 
 If mask contains `FLAG_CUR_HP`:
 
@@ -98,7 +98,7 @@ If mask contains `FLAG_POWER_TYPE`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | Power | power |  |
+| - | ? / - | [Power](power.md) | power |  |
 
 If mask contains `FLAG_CUR_POWER`:
 
@@ -122,7 +122,7 @@ If mask contains `FLAG_ZONE`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | Area | area |  |
+| - | ? / - | [Area](area.md) | area |  |
 
 If mask contains `FLAG_POSITION`:
 
@@ -135,7 +135,7 @@ If mask contains `FLAG_AURAS`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | AuraMask | auras |  |
+| - | - / - | [AuraMask](../spec/aura-mask.md) | auras |  |
 
 If mask contains `FLAG_PET_NAME`:
 
@@ -165,7 +165,7 @@ If mask contains `FLAG_PET_POWER_TYPE`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | Power | pet_power_type |  |
+| - | ? / - | [Power](power.md) | pet_power_type |  |
 
 If mask contains `FLAG_PET_CUR_POWER`:
 
@@ -183,4 +183,4 @@ If mask contains `FLAG_PET_AURAS`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | AuraMask | pet_auras |  |
+| - | - / - | [AuraMask](../spec/aura-mask.md) | pet_auras |  |

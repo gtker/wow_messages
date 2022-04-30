@@ -22,12 +22,12 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | BattlegroundEndStatus | status |  |
+| 0x04 | ? / - | [BattlegroundEndStatus](battlegroundendstatus.md) | status |  |
 
 If status is equal to `ENDED`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | BattlegroundWinner | winner |  |
+| - | ? / - | [BattlegroundWinner](battlegroundwinner.md) | winner |  |
 | - | 4 / Little | u32 | amount_of_players |  |
-| - | ? / - | BattlegroundPlayer[amount_of_players] | players |  |
+| - | ? / - | [BattlegroundPlayer](battlegroundplayer.md)[amount_of_players] | players |  |

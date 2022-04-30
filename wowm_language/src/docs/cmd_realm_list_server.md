@@ -16,7 +16,7 @@ slogin CMD_REALM_LIST_Server = 0x10 {
 | 0x00 | 2 / Little | u16 | size |  |
 | 0x02 | 4 / Little | u32 | header_padding |  |
 | 0x06 | 1 / - | u8 | number_of_realms |  |
-| 0x07 | ? / - | Realm[number_of_realms] | realms |  |
+| 0x07 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |
 | - | 2 / Little | u16 | footer_padding |  |
 ## Protocol Version 8
 
@@ -36,5 +36,5 @@ slogin CMD_REALM_LIST_Server = 0x10 {
 | 0x00 | 2 / Little | u16 | size |  |
 | 0x02 | 4 / Little | u32 | header_padding |  |
 | 0x06 | 2 / Little | u16 | number_of_realms |  |
-| 0x08 | ? / - | Realm[number_of_realms] | realms |  |
+| 0x08 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |
 | - | 2 / Little | u16 | footer_padding |  |

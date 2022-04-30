@@ -19,6 +19,6 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 8 / Little | Guid | loot_guid |  |
+| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | loot_guid |  |
 | 0x0E | 1 / - | u8 | slot_id |  |
-| 0x0F | 8 / Little | Guid | target_player_guid |  |
+| 0x0F | 8 / Little | [Guid](../spec/packed-guid.md) | target_player_guid |  |

@@ -29,15 +29,15 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | - / - | PackedGuid | cast_item |  |
-| - | - / - | PackedGuid | caster |  |
+| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | cast_item |  |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | caster |  |
 | - | 4 / Little | u32 | spell |  |
-| - | ? / - | CastFlags | flags |  |
+| - | ? / - | [CastFlags](castflags.md) | flags |  |
 | - | 1 / - | u8 | amount_of_hits |  |
-| - | ? / - | Guid[amount_of_hits] | hits |  |
+| - | ? / - | [Guid](../spec/packed-guid.md)[amount_of_hits] | hits |  |
 | - | 1 / - | u8 | amount_of_misses |  |
-| - | ? / - | SpellMiss[amount_of_misses] | misses |  |
-| - | ? / - | SpellCastTargets | targets |  |
+| - | ? / - | [SpellMiss](spellmiss.md)[amount_of_misses] | misses |  |
+| - | ? / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 
 If flags contains `AMMO`:
 

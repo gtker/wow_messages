@@ -30,17 +30,17 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | npc |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |
 | 0x0C | 4 / Little | u32 | quest_id |  |
 | 0x10 | - / - | CString | title |  |
 | - | - / - | CString | offer_reward_text |  |
 | - | 4 / Little | u32 | enable_next |  |
 | - | 4 / Little | u32 | amount_of_emotes |  |
-| - | ? / - | NpcTextUpdateEmote[amount_of_emotes] | emotes |  |
+| - | ? / - | [NpcTextUpdateEmote](npctextupdateemote.md)[amount_of_emotes] | emotes |  |
 | - | 4 / Little | u32 | amount_of_choice_item_rewards |  |
-| - | ? / - | QuestItemReward[amount_of_choice_item_rewards] | choice_item_rewards |  |
+| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |
 | - | 4 / Little | u32 | amount_of_item_rewards |  |
-| - | ? / - | QuestItemReward[amount_of_item_rewards] | item_rewards |  |
+| - | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |
 | - | 4 / Little | u32 | money_reward |  |
 | - | 4 / Little | u32 | reward_spell |  |
 | - | 4 / Little | u32 | reward_spell_cast |  |

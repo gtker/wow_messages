@@ -20,5 +20,5 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 4 / Little | u32 | count |  |
-| 0x08 | ? / - | AuctionListItem[count] | auctions |  |
+| 0x08 | ? / - | [AuctionListItem](auctionlistitem.md)[count] | auctions |  |
 | - | 4 / Little | u32 | total_amount_of_auctions |  |

@@ -30,7 +30,7 @@ struct MovementInfo {
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | MovementFlags | flags |  |
+| 0x00 | ? / - | [MovementFlags](movementflags.md) | flags |  |
 | - | 4 / Little | u32 | timestamp |  |
 | - | 4 / Little | f32 | position_x |  |
 | - | 4 / Little | f32 | position_y |  |
@@ -41,7 +41,7 @@ If flags contains `ON_TRANSPORT`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | TransportInfo | transport |  |
+| - | ? / - | [TransportInfo](transportinfo.md) | transport |  |
 
 If flags contains `SWIMMING`:
 

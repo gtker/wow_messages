@@ -12,5 +12,5 @@ struct GroupListMember {
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x00 | - / - | CString | name |  |
-| - | 8 / Little | Guid | guid |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |
 | - | 1 / - | u8 | is_online |  |

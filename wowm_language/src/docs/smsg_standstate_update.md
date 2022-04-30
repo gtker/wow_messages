@@ -17,4 +17,4 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | UnitStandState | state |  |
+| 0x04 | ? / - | [UnitStandState](unitstandstate.md) | state |  |

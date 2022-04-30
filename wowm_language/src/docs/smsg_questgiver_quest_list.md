@@ -22,9 +22,9 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | npc |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |
 | 0x0C | - / - | CString | title |  |
 | - | 4 / Little | u32 | emote_delay |  |
 | - | 4 / Little | u32 | emote |  |
 | - | 1 / - | u8 | amount_of_entries |  |
-| - | ? / - | QuestItem[amount_of_entries] | quest_items |  |
+| - | ? / - | [QuestItem](questitem.md)[amount_of_entries] | quest_items |  |

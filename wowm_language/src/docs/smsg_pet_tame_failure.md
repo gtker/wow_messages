@@ -17,4 +17,4 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | PetTameFailureReason | reason |  |
+| 0x04 | ? / - | [PetTameFailureReason](pettamefailurereason.md) | reason |  |

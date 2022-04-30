@@ -19,6 +19,6 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | RaidInstanceMessage | message_type |  |
-| - | ? / - | Map | map |  |
+| 0x04 | ? / - | [RaidInstanceMessage](raidinstancemessage.md) | message_type |  |
+| - | ? / - | [Map](map.md) | map |  |
 | - | 4 / Little | u32 | time_left |  |

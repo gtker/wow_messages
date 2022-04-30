@@ -20,7 +20,7 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 8 / Little | Guid | vendor_guid |  |
+| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | vendor_guid |  |
 | 0x0E | 4 / Little | u32 | item_id |  |
 | 0x12 | 1 / - | u8 | amount |  |
 | 0x13 | 1 / - | u8 | unknown1 |  |

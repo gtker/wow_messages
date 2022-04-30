@@ -13,7 +13,7 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | LoginResult | login_result |  |
+| 0x00 | ? / - | [LoginResult](loginresult.md) | login_result |  |
 
 If login_result is equal to `SUCCESS`:
 
@@ -41,14 +41,14 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | LoginResult | login_result |  |
+| 0x00 | ? / - | [LoginResult](loginresult.md) | login_result |  |
 
 If login_result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | ? / - | u8[20] | server_proof |  |
-| - | ? / - | AccountFlag | account_flag |  |
+| - | ? / - | [AccountFlag](accountflag.md) | account_flag |  |
 | - | 4 / Little | u32 | hardware_survey_id |  |
 | - | 2 / Little | u16 | unknown_flags |  |
 

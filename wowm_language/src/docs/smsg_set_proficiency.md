@@ -18,5 +18,5 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | ItemClass | class |  |
+| 0x04 | ? / - | [ItemClass](itemclass.md) | class |  |
 | - | 4 / Little | u32 | item_sub_class_mask |  |

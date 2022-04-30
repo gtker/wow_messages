@@ -23,4 +23,4 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | minimum |  |
 | 0x08 | 4 / Little | u32 | maximum |  |
 | 0x0C | 4 / Little | u32 | actual_roll |  |
-| 0x10 | 8 / Little | Guid | guid |  |
+| 0x10 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |

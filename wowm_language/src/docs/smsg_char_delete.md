@@ -17,4 +17,4 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | WorldResult | result |  |
+| 0x04 | ? / - | [WorldResult](worldresult.md) | result |  |

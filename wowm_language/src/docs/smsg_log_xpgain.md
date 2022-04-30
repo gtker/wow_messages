@@ -23,9 +23,9 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | target_guid |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | target_guid |  |
 | 0x0C | 4 / Little | u32 | total_exp |  |
-| 0x10 | ? / - | ExperienceAwardType | exp_type |  |
+| 0x10 | ? / - | [ExperienceAwardType](experienceawardtype.md) | exp_type |  |
 
 If exp_type is equal to `NON_KILL`:
 

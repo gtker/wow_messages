@@ -22,7 +22,7 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | - / - | PackedGuid | guid |  |
+| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |
 | - | 4 / Little | u32 | movement_counter |  |
 | - | 4 / Little | f32 | v_cos |  |
 | - | 4 / Little | f32 | v_sin |  |

@@ -23,4 +23,4 @@ SMSG have a header of 4 bytes.
 | 0x04 | - / - | CString | channel_name |  |
 | - | 1 / - | u8 | channel_flags |  |
 | - | 4 / Little | u32 | amount_of_members |  |
-| - | ? / - | ChannelMember[amount_of_members] | members |  |
+| - | ? / - | [ChannelMember](channelmember.md)[amount_of_members] | members |  |

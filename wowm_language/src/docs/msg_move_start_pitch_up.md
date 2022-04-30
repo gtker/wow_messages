@@ -22,4 +22,4 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | MovementInfo | info |  |
+| 0x00 | ? / - | [MovementInfo](movementinfo.md) | info |  |

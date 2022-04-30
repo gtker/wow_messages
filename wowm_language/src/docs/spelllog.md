@@ -53,14 +53,14 @@ struct SpellLog {
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | SpellEffect | effect |  |
+| 0x00 | ? / - | [SpellEffect](spelleffect.md) | effect |  |
 | - | 4 / Little | u32 | amount_of_logs |  |
 
 If effect is equal to `POWER_DRAIN`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | Guid | target1 |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target1 |  |
 | - | 4 / Little | u32 | unknown1 |  |
 | - | 4 / Little | u32 | unknown2 |  |
 | - | 4 / Little | f32 | unknown3 |  |
@@ -69,21 +69,21 @@ Else If effect is equal to `ADD_EXTRA_ATTACKS`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | Guid | target2 |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target2 |  |
 | - | 4 / Little | u32 | unknown4 |  |
 
 Else If effect is equal to `INTERRUPT_CAST`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | Guid | target3 |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target3 |  |
 | - | 4 / Little | u32 | interrupted_spell |  |
 
 Else If effect is equal to `DURABILITY_DAMAGE`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | Guid | target4 |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target4 |  |
 | - | 4 / Little | u32 | unknown5 |  |
 | - | 4 / Little | u32 | unknown6 |  |
 
@@ -118,4 +118,4 @@ is equal to `INSTAKILL`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | Guid | target5 |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target5 |  |

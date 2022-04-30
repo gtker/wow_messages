@@ -11,4 +11,4 @@ struct CharacterGear {
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x00 | 4 / Little | u32 | equipment_display_id |  |
-| 0x04 | ? / - | InventoryType | inventory_type |  |
+| 0x04 | ? / - | [InventoryType](inventorytype.md) | inventory_type |  |

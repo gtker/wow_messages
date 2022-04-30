@@ -21,4 +21,4 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 4 / Little | u32 | text_id |  |
 | 0x08 | 4 / Little | f32 | probability |  |
-| 0x0C | ? / - | NpcTextUpdate[8] | texts |  |
+| 0x0C | ? / - | [NpcTextUpdate](npctextupdate.md)[8] | texts |  |

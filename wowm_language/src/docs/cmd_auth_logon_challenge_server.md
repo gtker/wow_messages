@@ -20,7 +20,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x00 | 1 / - | u8 | protocol_version |  |
-| 0x01 | ? / - | LoginResult | login_result |  |
+| 0x01 | ? / - | [LoginResult](loginresult.md) | login_result |  |
 
 If login_result is equal to `SUCCESS`:
 
@@ -60,7 +60,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x00 | 1 / - | u8 | protocol_version |  |
-| 0x01 | ? / - | LoginResult | login_result |  |
+| 0x01 | ? / - | [LoginResult](loginresult.md) | login_result |  |
 
 If login_result is equal to `SUCCESS`:
 
@@ -73,7 +73,7 @@ If login_result is equal to `SUCCESS`:
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |
 | - | ? / - | u8[32] | salt |  |
 | - | ? / - | u8[16] | crc_salt |  |
-| - | ? / - | SecurityFlag | security_flag |  |
+| - | ? / - | [SecurityFlag](securityflag.md) | security_flag |  |
 
 If security_flag is equal to `PIN`:
 
@@ -118,7 +118,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x00 | 1 / - | u8 | protocol_version |  |
-| 0x01 | ? / - | LoginResult | login_result |  |
+| 0x01 | ? / - | [LoginResult](loginresult.md) | login_result |  |
 
 If login_result is equal to `SUCCESS`:
 
@@ -131,7 +131,7 @@ If login_result is equal to `SUCCESS`:
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |
 | - | ? / - | u8[32] | salt |  |
 | - | ? / - | u8[16] | crc_salt |  |
-| - | ? / - | SecurityFlag | security_flag |  |
+| - | ? / - | [SecurityFlag](securityflag.md) | security_flag |  |
 
 If security_flag contains `PIN`:
 

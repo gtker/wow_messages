@@ -23,4 +23,4 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 4 / Little | u32 | sound_id |  |
-| 0x08 | 8 / Little | Guid | guid |  |
+| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |

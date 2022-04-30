@@ -20,7 +20,7 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | item_guid |  |
-| 0x0C | 8 / Little | Guid | owner_guid |  |
-| 0x14 | 8 / Little | Guid | petition_guid |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | item_guid |  |
+| 0x0C | 8 / Little | [Guid](../spec/packed-guid.md) | owner_guid |  |
+| 0x14 | 8 / Little | [Guid](../spec/packed-guid.md) | petition_guid |  |
 | 0x1C | 1 / - | u8 | amount_of_signatures |  |

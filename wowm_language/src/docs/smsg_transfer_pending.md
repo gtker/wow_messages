@@ -21,11 +21,11 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | Map | map |  |
+| 0x04 | ? / - | [Map](map.md) | map |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | 4 / Little | u32 | transport |  |
-| - | ? / - | Map | transport_map |  |
+| - | ? / - | [Map](map.md) | transport_map |  |

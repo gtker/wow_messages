@@ -27,13 +27,13 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 8 / Little | Guid | mailbox |  |
+| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | mailbox |  |
 | 0x0E | - / - | CString | receiver |  |
 | - | - / - | CString | subject |  |
 | - | - / - | CString | body |  |
 | - | 4 / Little | u32 | unknown1 |  |
 | - | 4 / Little | u32 | unknown2 |  |
-| - | 8 / Little | Guid | item |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |
 | - | 4 / Little | u32 | money |  |
 | - | 4 / Little | u32 | cash_on_delivery_amount |  |
 | - | 4 / Little | u32 | unknown3 |  |

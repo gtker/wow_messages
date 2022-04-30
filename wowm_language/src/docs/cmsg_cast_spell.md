@@ -19,4 +19,4 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x06 | 4 / Little | u32 | spell |  |
-| 0x0A | ? / - | SpellCastTargets | targets |  |
+| 0x0A | ? / - | [SpellCastTargets](spellcasttargets.md) | targets |  |

@@ -23,8 +23,8 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | battlemaster |  |
-| 0x0C | ? / - | Map | map |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | battlemaster |  |
+| 0x0C | ? / - | [Map](map.md) | map |  |
 | - | 1 / - | u8 | unknown1 |  |
 | - | 4 / Little | u32 | unknown2 |  |
 | - | 1 / - | u8 | unknown3 |  |

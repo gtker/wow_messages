@@ -3,7 +3,7 @@ use crate::file_utils::{create_or_append, write_string_to_file};
 use crate::parser::enumerator::Definer;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Endianness, IntegerType};
+use crate::parser::types::{ArrayType, Endianness, IntegerType};
 use crate::wowm_printer::{get_definer_wowm_definition, get_struct_wowm_definition};
 use crate::ContainerType;
 use std::fmt::Write;
@@ -253,6 +253,46 @@ fn print_container_if_statement(
 fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Option<usize>) {
     match m {
         StructMember::Definition(d) => {
+            let ty = match d.ty() {
+                Type::Identifier { s, .. } => {
+                    format!("[{}]({}.md)", d.ty().str(), s.to_lowercase())
+                }
+                Type::PackedGuid | Type::Guid => {
+                    format!("[{}](../spec/packed-guid.md)", d.ty().str())
+                }
+                Type::UpdateMask => {
+                    format!("[{}](../spec/update-mask.md)", d.ty().str())
+                }
+                Type::AuraMask => {
+                    format!("[{}](../spec/aura-mask.md)", d.ty().str())
+                }
+                Type::Array(array) => match array.ty() {
+                    ArrayType::CString | ArrayType::Integer(_) => d.ty().str(),
+                    ArrayType::Complex(identifier) => {
+                        format!(
+                            "[{ty}]({ty_path}.md)[{size}]",
+                            ty = identifier,
+                            ty_path = identifier.to_lowercase(),
+                            size = array.size().str(),
+                        )
+                    }
+                    ArrayType::Guid => {
+                        format!(
+                            "[Guid](../spec/packed-guid.md)[{size}]",
+                            size = array.size().str()
+                        )
+                    }
+                    ArrayType::PackedGuid => {
+                        format!(
+                            "[PackedGuid](../spec/packed-guid.md)[{size}]",
+                            size = array.size().str()
+                        )
+                    }
+                },
+                Type::CString | Type::String { .. } | Type::Integer(_) | Type::FloatingPoint(_) => {
+                    d.ty().str()
+                }
+            };
             s.wln(format!(
                 "| {offset} | {size} / {endian} | {ty} | {name} | {description} |",
                 offset = if let Some(offset) = offset {
@@ -262,7 +302,7 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                 },
                 size = d.ty().doc_size_of(),
                 endian = d.ty().doc_endian_str(),
-                ty = d.ty().str(),
+                ty = ty,
                 name = d.name(),
                 description = d.tags().description().unwrap_or(""),
             ));

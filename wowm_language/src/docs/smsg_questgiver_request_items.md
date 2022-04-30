@@ -34,7 +34,7 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | npc |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |
 | 0x0C | 4 / Little | u32 | quest_id |  |
 | 0x10 | - / - | CString | title |  |
 | - | - / - | CString | request_items_text |  |
@@ -43,8 +43,8 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | auto_finish |  |
 | - | 4 / Little | u32 | required_money |  |
 | - | 4 / Little | u32 | amount_of_required_items |  |
-| - | ? / - | QuestItemRequirement[amount_of_required_items] | required_items |  |
+| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_required_items] | required_items |  |
 | - | 4 / Little | u32 | unknown1 |  |
-| - | ? / - | QuestCompletable | completable |  |
+| - | ? / - | [QuestCompletable](questcompletable.md) | completable |  |
 | - | 4 / Little | u32 | flags2 |  |
 | - | 4 / Little | u32 | flags3 |  |

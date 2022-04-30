@@ -33,8 +33,8 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | petition_guid |  |
-| 0x0C | 8 / Little | Guid | charter_owner |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | petition_guid |  |
+| 0x0C | 8 / Little | [Guid](../spec/packed-guid.md) | charter_owner |  |
 | 0x14 | - / - | CString | guild_name |  |
 | - | - / - | CString | body_text |  |
 | - | 4 / Little | u32 | unknown_flags |  |

@@ -18,5 +18,5 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | Area | area |  |
-| - | ? / - | MeetingStoneStatus | status |  |
+| 0x04 | ? / - | [Area](area.md) | area |  |
+| - | ? / - | [MeetingStoneStatus](meetingstonestatus.md) | status |  |

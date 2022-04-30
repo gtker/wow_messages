@@ -26,4 +26,4 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 4 / Little | u32 | amount_of_carriers |  |
 | 0x08 | 4 / Little | u32 | amount_of_flag_carriers |  |
-| 0x0C | ? / - | BattlegroundPlayerPosition[amount_of_flag_carriers] | flag_carriers |  |
+| 0x0C | ? / - | [BattlegroundPlayerPosition](battlegroundplayerposition.md)[amount_of_flag_carriers] | flag_carriers |  |

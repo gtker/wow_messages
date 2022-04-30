@@ -80,18 +80,18 @@ Optionally the following fields can be present. This can only be detected by loo
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x08 | ? / - | ItemClass | item_class |  |
+| 0x08 | ? / - | [ItemClass](itemclass.md) | item_class |  |
 | - | 4 / Little | u32 | item_sub_class |  |
 | - | - / - | CString | name1 |  |
 | - | - / - | CString | name2 |  |
 | - | - / - | CString | name3 |  |
 | - | - / - | CString | name4 |  |
 | - | 4 / Little | u32 | item_display_info |  |
-| - | ? / - | ItemQuality | quality |  |
+| - | ? / - | [ItemQuality](itemquality.md) | quality |  |
 | - | 4 / Little | u32 | flags |  |
 | - | 8 / Little | f64 | buy_price |  |
 | - | 8 / Little | f64 | sell_price |  |
-| - | ? / - | InventoryType | inventory_type |  |
+| - | ? / - | [InventoryType](inventorytype.md) | inventory_type |  |
 | - | 4 / Little | u32 | allowed_class |  |
 | - | 4 / Little | u32 | allowed_race |  |
 | - | 4 / Little | u32 | item_level |  |
@@ -106,8 +106,8 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | max_count |  |
 | - | 4 / Little | u32 | stackable |  |
 | - | 4 / Little | u32 | container_slots |  |
-| - | ? / - | ItemStat[10] | stats |  |
-| - | ? / - | ItemDamageType[5] | damages |  |
+| - | ? / - | [ItemStat](itemstat.md)[10] | stats |  |
+| - | ? / - | [ItemDamageType](itemdamagetype.md)[5] | damages |  |
 | - | 4 / Little | u32 | armor |  |
 | - | 4 / Little | u32 | holy_resistance |  |
 | - | 4 / Little | u32 | fire_resistance |  |
@@ -118,7 +118,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | delay |  |
 | - | 4 / Little | u32 | ammo_type |  |
 | - | 4 / Little | f32 | ranged_range_modification |  |
-| - | ? / - | ItemSpells[5] | spells |  |
+| - | ? / - | [ItemSpells](itemspells.md)[5] | spells |  |
 | - | 4 / Little | u32 | bonding |  |
 | - | - / - | CString | description |  |
 | - | 4 / Little | u32 | page_text |  |
@@ -132,6 +132,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | block |  |
 | - | 4 / Little | u32 | item_set |  |
 | - | 4 / Little | u32 | max_durability |  |
-| - | ? / - | Area | area |  |
-| - | ? / - | Map | map |  |
+| - | ? / - | [Area](area.md) | area |  |
+| - | ? / - | [Map](map.md) | map |  |
 | - | 4 / Little | u32 | bag_family |  |

@@ -19,6 +19,6 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | ? / - | GroupLootSetting | loot_setting |  |
-| - | 8 / Little | Guid | loot_master |  |
-| - | ? / - | ItemQuality | loot_threshold |  |
+| 0x06 | ? / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | loot_master |  |
+| - | ? / - | [ItemQuality](itemquality.md) | loot_threshold |  |

@@ -15,13 +15,13 @@ struct Friend {
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 8 / Little | Guid | guid |  |
-| 0x08 | ? / - | FriendStatus | status |  |
+| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |
+| 0x08 | ? / - | [FriendStatus](friendstatus.md) | status |  |
 
 If status is not equal to `OFFLINE`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | Area | area |  |
+| - | ? / - | [Area](area.md) | area |  |
 | - | 4 / Little | u32 | level |  |
-| - | ? / - | Class | class |  |
+| - | ? / - | [Class](class.md) | class |  |

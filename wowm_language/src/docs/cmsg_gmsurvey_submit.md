@@ -20,5 +20,5 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x06 | 4 / Little | u32 | survey_id |  |
-| 0x0A | ? / - | GmSurveyQuestion[10] | questions |  |
+| 0x0A | ? / - | [GmSurveyQuestion](gmsurveyquestion.md)[10] | questions |  |
 | - | - / - | CString | answer_comment |  |

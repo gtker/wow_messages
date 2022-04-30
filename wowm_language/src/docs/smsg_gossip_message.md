@@ -22,9 +22,9 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | guid |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |
 | 0x0C | 4 / Little | u32 | title_text_id |  |
 | 0x10 | 4 / Little | u32 | amount_of_gossip_items |  |
-| 0x14 | ? / - | GossipItem[amount_of_gossip_items] | gossips |  |
+| 0x14 | ? / - | [GossipItem](gossipitem.md)[amount_of_gossip_items] | gossips |  |
 | - | 4 / Little | u32 | amount_of_quests |  |
-| - | ? / - | QuestItem[amount_of_quests] | quests |  |
+| - | ? / - | [QuestItem](questitem.md)[amount_of_quests] | quests |  |

@@ -19,6 +19,6 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | GuildEvent | event |  |
+| 0x04 | ? / - | [GuildEvent](guildevent.md) | event |  |
 | - | 1 / - | u8 | amount_of_events |  |
 | - | ? / - | CString[amount_of_events] | event_descriptions |  |

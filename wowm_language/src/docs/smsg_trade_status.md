@@ -29,19 +29,19 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | TradeStatus | status |  |
+| 0x04 | ? / - | [TradeStatus](tradestatus.md) | status |  |
 
 If status is equal to `BEGIN_TRADE`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | Guid | unknown1 |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | unknown1 |  |
 
 Else If status is equal to `CLOSE_WINDOW`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | InventoryResult | inventory_result |  |
+| - | ? / - | [InventoryResult](inventoryresult.md) | inventory_result |  |
 | - | 1 / - | u8 | target_error |  |
 | - | 4 / Little | u32 | item_limit_category_id |  |
 

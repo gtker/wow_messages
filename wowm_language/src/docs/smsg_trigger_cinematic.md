@@ -17,4 +17,4 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | CinematicSequenceId | cinematic_sequence_id |  |
+| 0x04 | ? / - | [CinematicSequenceId](cinematicsequenceid.md) | cinematic_sequence_id |  |

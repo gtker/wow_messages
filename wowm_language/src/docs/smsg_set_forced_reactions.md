@@ -19,4 +19,4 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 4 / Little | u32 | amount_of_reactions |  |
-| 0x08 | ? / - | ForcedReaction[amount_of_reactions] | reactions |  |
+| 0x08 | ? / - | [ForcedReaction](forcedreaction.md)[amount_of_reactions] | reactions |  |

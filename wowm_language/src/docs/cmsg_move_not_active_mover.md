@@ -18,5 +18,5 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 8 / Little | Guid | old_mover |  |
-| 0x0E | ? / - | MovementInfo | movement_info |  |
+| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | old_mover |  |
+| 0x0E | ? / - | [MovementInfo](movementinfo.md) | movement_info |  |

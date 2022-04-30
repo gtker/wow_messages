@@ -30,7 +30,7 @@ struct AuraLog {
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | AuraType | aura_type |  |
+| 0x00 | ? / - | [AuraType](auratype.md) | aura_type |  |
 
 If aura_type is equal to `PERIODIC_DAMAGE` **or** 
 is equal to `PERIODIC_DAMAGE_PERCENT`:
@@ -38,7 +38,7 @@ is equal to `PERIODIC_DAMAGE_PERCENT`:
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | 4 / Little | u32 | damage1 |  |
-| - | ? / - | SpellSchool | school |  |
+| - | ? / - | [SpellSchool](spellschool.md) | school |  |
 | - | 4 / Little | u32 | absorbed |  |
 | - | 4 / Little | u32 | resisted |  |
 

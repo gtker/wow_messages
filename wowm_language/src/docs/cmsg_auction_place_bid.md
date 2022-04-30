@@ -19,6 +19,6 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 8 / Little | Guid | auctioneer_guid |  |
+| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | auctioneer_guid |  |
 | 0x0E | 4 / Little | u32 | auction_id |  |
 | 0x12 | 4 / Little | u32 | price |  |

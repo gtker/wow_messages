@@ -58,8 +58,8 @@ SMSG have a header of 4 bytes.
 | 0x34 | 4 / Little | u32 | reward_spell |  |
 | 0x38 | 4 / Little | u32 | source_item_id |  |
 | 0x3C | 4 / Little | u32 | quest_flags |  |
-| 0x40 | ? / - | QuestItemReward[4] | rewards |  |
-| - | ? / - | QuestItemReward[6] | choice_rewards |  |
+| 0x40 | ? / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |
+| - | ? / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |
 | - | 4 / Little | u32 | point_map_id |  |
 | - | 4 / Little | f32 | position_x |  |
 | - | 4 / Little | f32 | position_y |  |
@@ -68,5 +68,5 @@ SMSG have a header of 4 bytes.
 | - | - / - | CString | objective_text |  |
 | - | - / - | CString | details |  |
 | - | - / - | CString | end_text |  |
-| - | ? / - | QuestObjective[4] | objectives |  |
+| - | ? / - | [QuestObjective](questobjective.md)[4] | objectives |  |
 | - | ? / - | CString[4] | objective_texts |  |

@@ -24,11 +24,11 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | looted_target_guid |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | looted_target_guid |  |
 | 0x0C | 4 / Little | u32 | loot_slot |  |
 | 0x10 | 4 / Little | u32 | item_id |  |
 | 0x14 | 4 / Little | u32 | item_random_suffix |  |
 | 0x18 | 4 / Little | u32 | item_random_property_id |  |
-| 0x1C | 8 / Little | Guid | winning_player_guid |  |
+| 0x1C | 8 / Little | [Guid](../spec/packed-guid.md) | winning_player_guid |  |
 | 0x24 | 1 / - | u8 | winning_roll |  |
-| 0x25 | ? / - | RollVote | vote |  |
+| 0x25 | ? / - | [RollVote](rollvote.md) | vote |  |

@@ -24,14 +24,14 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | CorpseQueryResult | result |  |
+| 0x04 | ? / - | [CorpseQueryResult](corpsequeryresult.md) | result |  |
 
 If result is equal to `FOUND`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | Map | map |  |
+| - | ? / - | [Map](map.md) | map |  |
 | - | 4 / Little | f32 | position_x |  |
 | - | 4 / Little | f32 | position_y |  |
 | - | 4 / Little | f32 | position_z |  |
-| - | ? / - | Map | corpse_map |  |
+| - | ? / - | [Map](map.md) | corpse_map |  |

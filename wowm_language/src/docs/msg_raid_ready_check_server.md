@@ -23,5 +23,5 @@ Optionally the following fields can be present. This can only be detected by loo
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | guid |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |
 | 0x0C | 1 / - | u8 | state |  |

@@ -21,11 +21,11 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | WorldResult | result |  |
+| 0x04 | ? / - | [WorldResult](worldresult.md) | result |  |
 
 If result is equal to `RESPONSE_SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | Guid | guid |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |
 | - | - / - | CString | name |  |

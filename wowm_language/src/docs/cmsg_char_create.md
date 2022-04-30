@@ -27,9 +27,9 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x06 | - / - | CString | name |  |
-| - | ? / - | Race | race |  |
-| - | ? / - | Class | class |  |
-| - | ? / - | Gender | gender |  |
+| - | ? / - | [Race](race.md) | race |  |
+| - | ? / - | [Class](class.md) | class |  |
+| - | ? / - | [Gender](gender.md) | gender |  |
 | - | 1 / - | u8 | skin |  |
 | - | 1 / - | u8 | face |  |
 | - | 1 / - | u8 | hairstyle |  |

@@ -19,6 +19,6 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 8 / Little | Guid | item_guid |  |
+| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | item_guid |  |
 | 0x0E | 4 / Little | u32 | item_slot |  |
-| 0x12 | ? / - | RollVote | vote |  |
+| 0x12 | ? / - | [RollVote](rollvote.md) | vote |  |

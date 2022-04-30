@@ -41,8 +41,8 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | ? / - | ChatType | chat_type |  |
-| - | ? / - | Language | language |  |
+| 0x06 | ? / - | [ChatType](chattype.md) | chat_type |  |
+| - | ? / - | [Language](language.md) | language |  |
 
 If chat_type is equal to `SAY` **or** 
 is equal to `EMOTE` **or** 

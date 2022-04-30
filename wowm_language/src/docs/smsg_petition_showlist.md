@@ -19,6 +19,6 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | npc |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |
 | 0x0C | 1 / - | u8 | amount_of_petitions |  |
-| 0x0D | ? / - | PetitionShowlist[amount_of_petitions] | petitions |  |
+| 0x0D | ? / - | [PetitionShowlist](petitionshowlist.md)[amount_of_petitions] | petitions |  |

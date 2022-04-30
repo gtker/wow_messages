@@ -17,7 +17,7 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
 | - | ? / - | u8[20] | client_proof |  |
 | - | ? / - | u8[20] | crc_hash |  |
 | - | 1 / - | u8 | number_of_telemetry_keys |  |
-| - | ? / - | TelemetryKey[number_of_telemetry_keys] | telemetry_keys |  |
+| - | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |
 ## Protocol Version 3
 
 ### Wowm Representation
@@ -42,8 +42,8 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
 | - | ? / - | u8[20] | client_proof |  |
 | - | ? / - | u8[20] | crc_hash |  |
 | - | 1 / - | u8 | number_of_telemetry_keys |  |
-| - | ? / - | TelemetryKey[number_of_telemetry_keys] | telemetry_keys |  |
-| - | ? / - | SecurityFlag | security_flag |  |
+| - | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |
+| - | ? / - | [SecurityFlag](securityflag.md) | security_flag |  |
 
 If security_flag is equal to `PIN`:
 
@@ -85,8 +85,8 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
 | - | ? / - | u8[20] | client_proof |  |
 | - | ? / - | u8[20] | crc_hash |  |
 | - | 1 / - | u8 | number_of_telemetry_keys |  |
-| - | ? / - | TelemetryKey[number_of_telemetry_keys] | telemetry_keys |  |
-| - | ? / - | SecurityFlag | security_flag |  |
+| - | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |
+| - | ? / - | [SecurityFlag](securityflag.md) | security_flag |  |
 
 If security_flag contains `PIN`:
 

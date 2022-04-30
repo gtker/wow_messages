@@ -19,4 +19,4 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 4 / Little | u32 | amount_of_factions |  |
-| 0x08 | ? / - | FactionInitializer[amount_of_factions] | factions |  |
+| 0x08 | ? / - | [FactionInitializer](factioninitializer.md)[amount_of_factions] | factions |  |

@@ -20,7 +20,7 @@ struct TrainerSpell {
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x00 | 4 / Little | u32 | spell |  |
-| 0x04 | ? / - | TrainerSpellState | state |  |
+| 0x04 | ? / - | [TrainerSpellState](trainerspellstate.md) | state |  |
 | - | 4 / Little | u32 | spell_cost |  |
 | - | 4 / Little | u32 | talent_point_cost |  |
 | - | 4 / Little | u32 | first_rank |  |

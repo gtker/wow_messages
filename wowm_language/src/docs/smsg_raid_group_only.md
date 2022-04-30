@@ -23,4 +23,4 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 4 / Little | u32 | homebind_timer |  |
-| 0x08 | ? / - | RaidGroupError | error |  |
+| 0x08 | ? / - | [RaidGroupError](raidgrouperror.md) | error |  |

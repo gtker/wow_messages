@@ -17,4 +17,4 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | ? / - | UnitStandState | animation_state |  |
+| 0x06 | ? / - | [UnitStandState](unitstandstate.md) | animation_state |  |

@@ -19,6 +19,6 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | summoner_guid |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | summoner_guid |  |
 | 0x0C | 4 / Little | u32 | zone_id |  |
 | 0x10 | 4 / Little | u32 | auto_decline_time_in_msecs |  |

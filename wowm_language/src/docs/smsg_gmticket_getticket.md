@@ -26,16 +26,16 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | GmTicketStatus | status |  |
+| 0x04 | ? / - | [GmTicketStatus](gmticketstatus.md) | status |  |
 
 If status is equal to `HASTEXT`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | - / - | CString | text |  |
-| - | ? / - | GmTicketType | ticket_type |  |
+| - | ? / - | [GmTicketType](gmtickettype.md) | ticket_type |  |
 | - | 4 / Little | f32 | days_since_ticket_creation |  |
 | - | 4 / Little | f32 | days_since_oldest_ticket_creation |  |
 | - | 4 / Little | f32 | days_since_last_updated |  |
-| - | ? / - | GmTicketEscalationStatus | escalation_status |  |
+| - | ? / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |
 | - | 1 / - | u8 | read_by_gm |  |

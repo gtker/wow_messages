@@ -27,4 +27,4 @@ SMSG have a header of 4 bytes.
 | 0x0C | 4 / Little | u32 | experience_reward |  |
 | 0x10 | 4 / Little | u32 | money_reward |  |
 | 0x14 | 4 / Little | u32 | amount_of_item_rewards |  |
-| 0x18 | ? / - | QuestItemReward[amount_of_item_rewards] | item_rewards |  |
+| 0x18 | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |

@@ -13,7 +13,7 @@ slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | LoginResult | result |  |
+| 0x00 | ? / - | [LoginResult](loginresult.md) | result |  |
 
 If result is equal to `SUCCESS`:
 
@@ -36,7 +36,7 @@ slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | LoginResult | result |  |
+| 0x00 | ? / - | [LoginResult](loginresult.md) | result |  |
 
 If result is equal to `SUCCESS`:
 

@@ -19,4 +19,4 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 1 / - | u8 | amount_of_mails |  |
-| 0x05 | ? / - | Mail[amount_of_mails] | mails |  |
+| 0x05 | ? / - | [Mail](mail.md)[amount_of_mails] | mails |  |

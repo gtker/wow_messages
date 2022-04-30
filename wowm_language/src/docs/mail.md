@@ -38,13 +38,13 @@ struct Mail {
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x00 | 4 / Little | u32 | message_id |  |
-| 0x04 | ? / - | MailType | message_type |  |
+| 0x04 | ? / - | [MailType](mailtype.md) | message_type |  |
 
 If message_type is equal to `NORMAL`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | Guid | sender |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender |  |
 
 Else If message_type is equal to `CREATURE` **or** 
 is equal to `GAMEOBJECT`:

@@ -26,12 +26,12 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | - / - | PackedGuid | cast_item |  |
-| - | - / - | PackedGuid | caster |  |
+| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | cast_item |  |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | caster |  |
 | - | 4 / Little | u32 | spell |  |
-| - | ? / - | CastFlags | flags |  |
+| - | ? / - | [CastFlags](castflags.md) | flags |  |
 | - | 4 / Little | u32 | timer |  |
-| - | ? / - | SpellCastTargets | targets |  |
+| - | ? / - | [SpellCastTargets](spellcasttargets.md) | targets |  |
 
 If flags contains `AMMO`:
 

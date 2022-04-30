@@ -32,8 +32,8 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | guid |  |
-| 0x0C | ? / - | PvpRank | highest_rank |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |
+| 0x0C | ? / - | [PvpRank](pvprank.md) | highest_rank |  |
 | - | 4 / Little | u32 | today_honorable_and_dishonorable |  |
 | - | 2 / Little | u16 | yesterday_honorable |  |
 | - | 2 / Little | u16 | unknown1 |  |
@@ -46,5 +46,5 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | yesterday_honor |  |
 | - | 4 / Little | u32 | last_week_honor |  |
 | - | 4 / Little | u32 | this_week_honor |  |
-| - | ? / - | PvpRank | last_week_standing |  |
+| - | ? / - | [PvpRank](pvprank.md) | last_week_standing |  |
 | - | 1 / - | u8 | rank_progress_bar |  |

@@ -27,4 +27,4 @@ SMSG have a header of 4 bytes.
 | 0x09 | 4 / Little | u32 | trade_slot_count2 |  |
 | 0x0D | 4 / Little | u32 | money_in_trade |  |
 | 0x11 | 4 / Little | u32 | spell_on_lowest_slot |  |
-| 0x15 | ? / - | TradeSlot[7] | trade_slots |  |
+| 0x15 | ? / - | [TradeSlot](tradeslot.md)[7] | trade_slots |  |

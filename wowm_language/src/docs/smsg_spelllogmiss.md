@@ -22,7 +22,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 4 / Little | u32 | id |  |
-| 0x08 | 8 / Little | Guid | caster_guid |  |
+| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | caster_guid |  |
 | 0x10 | 1 / - | u8 | unknown1 |  |
 | 0x11 | 4 / Little | u32 | amount_of_targets |  |
-| 0x15 | ? / - | SpellMiss[amount_of_targets] | targets |  |
+| 0x15 | ? / - | [SpellMiss](spellmiss.md)[amount_of_targets] | targets |  |

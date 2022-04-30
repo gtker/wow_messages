@@ -19,6 +19,6 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | ? / - | MovementInfo | movement_info |  |
+| 0x06 | ? / - | [MovementInfo](movementinfo.md) | movement_info |  |
 | - | 4 / Little | u32 | movement_counter |  |
 | - | 4 / Little | u32 | unknown1 |  |

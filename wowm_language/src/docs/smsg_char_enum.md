@@ -19,4 +19,4 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 1 / - | u8 | amount_of_characters |  |
-| 0x05 | ? / - | Character[amount_of_characters] | characters |  |
+| 0x05 | ? / - | [Character](character.md)[amount_of_characters] | characters |  |

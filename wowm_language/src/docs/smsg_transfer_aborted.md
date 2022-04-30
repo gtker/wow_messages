@@ -19,6 +19,6 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | Map | map |  |
-| - | ? / - | TransferAbortReason | reason |  |
+| 0x04 | ? / - | [Map](map.md) | map |  |
+| - | ? / - | [TransferAbortReason](transferabortreason.md) | reason |  |
 | - | 1 / - | u8 | padding |  |

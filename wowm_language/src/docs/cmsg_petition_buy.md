@@ -38,9 +38,9 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 8 / Little | Guid | npc |  |
+| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |
 | 0x0E | 4 / Little | u32 | skip1 |  |
-| 0x12 | 8 / Little | Guid | skip2 |  |
+| 0x12 | 8 / Little | [Guid](../spec/packed-guid.md) | skip2 |  |
 | 0x1A | - / - | CString | name |  |
 | - | 4 / Little | u32 | skip3 |  |
 | - | 4 / Little | u32 | skip4 |  |

@@ -22,7 +22,7 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | TimerType | timer |  |
+| 0x04 | ? / - | [TimerType](timertype.md) | timer |  |
 | - | 4 / Little | u32 | time_remaining |  |
 | - | 4 / Little | u32 | duration |  |
 | - | 4 / Little | u32 | scale |  |

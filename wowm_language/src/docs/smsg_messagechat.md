@@ -49,8 +49,8 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | ChatType | chat_type |  |
-| - | ? / - | Language | language |  |
+| 0x04 | ? / - | [ChatType](chattype.md) | chat_type |  |
+| - | ? / - | [Language](language.md) | language |  |
 
 If chat_type is equal to `MONSTER_WHISPER` **or** 
 is equal to `RAID_BOSS_EMOTE` **or** 
@@ -60,7 +60,7 @@ is equal to `MONSTER_EMOTE`:
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | 4 / Little | u32 | name_length |  |
 | - | - / - | CString | monster_name |  |
-| - | 8 / Little | Guid | monster_guid |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | monster_guid |  |
 
 Else If chat_type is equal to `SAY` **or** 
 is equal to `PARTY` **or** 
@@ -68,18 +68,18 @@ is equal to `YELL`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | Guid | sender_guid1 |  |
-| - | 8 / Little | Guid | sender_guid2 |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid1 |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid2 |  |
 
 Else If chat_type is equal to `MONSTER_SAY` **or** 
 is equal to `MONSTER_YELL`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | Guid | sender_guid3 |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid3 |  |
 | - | 4 / Little | u32 | sender_name_length |  |
 | - | - / - | CString | sender_name |  |
-| - | 8 / Little | Guid | target_guid |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target_guid |  |
 
 Else If chat_type is equal to `CHANNEL`:
 
@@ -87,10 +87,10 @@ Else If chat_type is equal to `CHANNEL`:
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | - / - | CString | channel_name |  |
 | - | 4 / Little | u32 | player_rank |  |
-| - | 8 / Little | Guid | player_guid |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | player_guid |  |
 
 Else: 
-| - | 8 / Little | Guid | sender_guid4 |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid4 |  |
 | - | 4 / Little | u32 | message_length |  |
 | - | - / - | CString | message |  |
-| - | ? / - | PlayerChatTag | tag |  |
+| - | ? / - | [PlayerChatTag](playerchattag.md) | tag |  |

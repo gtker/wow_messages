@@ -26,10 +26,10 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | guid |  |
-| 0x0C | ? / - | NewItemSource | source |  |
-| - | ? / - | NewItemCreationType | creation_type |  |
-| - | ? / - | NewItemChatAlert | alert_chat |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |
+| 0x0C | ? / - | [NewItemSource](newitemsource.md) | source |  |
+| - | ? / - | [NewItemCreationType](newitemcreationtype.md) | creation_type |  |
+| - | ? / - | [NewItemChatAlert](newitemchatalert.md) | alert_chat |  |
 | - | 1 / - | u8 | bag_slot |  |
 | - | 4 / Little | u32 | item_slot |  |
 | - | 4 / Little | u32 | item_id |  |

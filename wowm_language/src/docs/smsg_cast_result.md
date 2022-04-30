@@ -33,13 +33,13 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 4 / Little | u32 | spell |  |
-| 0x08 | ? / - | SimpleSpellCastResult | result |  |
+| 0x08 | ? / - | [SimpleSpellCastResult](simplespellcastresult.md) | result |  |
 
 If result is not equal to `FAILURE`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | CastFailureReason | reason |  |
+| - | ? / - | [CastFailureReason](castfailurereason.md) | reason |  |
 
 If reason is equal to `REQUIRES_SPELL_FOCUS`:
 
@@ -51,7 +51,7 @@ Else If reason is equal to `REQUIRES_AREA`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | Area | area |  |
+| - | ? / - | [Area](area.md) | area |  |
 
 Else If reason is equal to `EQUIPPED_ITEM_CLASS`:
 

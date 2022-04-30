@@ -19,4 +19,4 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 4 / Little | u32 | amount_of_raid_infos |  |
-| 0x08 | ? / - | RaidInfo[amount_of_raid_infos] | raid_infos |  |
+| 0x08 | ? / - | [RaidInfo](raidinfo.md)[amount_of_raid_infos] | raid_infos |  |

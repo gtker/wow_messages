@@ -23,16 +23,16 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | RaidTargetUpdateType | update_type |  |
+| 0x04 | ? / - | [RaidTargetUpdateType](raidtargetupdatetype.md) | update_type |  |
 
 If update_type is equal to `FULL`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | RaidTargetUpdate[8] | raid_targets |  |
+| - | ? / - | [RaidTargetUpdate](raidtargetupdate.md)[8] | raid_targets |  |
 
 Else If update_type is equal to `PARTIAL`:
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | RaidTargetUpdate | raid_target |  |
+| - | ? / - | [RaidTargetUpdate](raidtargetupdate.md) | raid_target |  |

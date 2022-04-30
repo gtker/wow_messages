@@ -11,6 +11,6 @@ struct RaidInfo {
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | Map | map |  |
+| 0x00 | ? / - | [Map](map.md) | map |  |
 | - | 4 / Little | u32 | reset_time |  |
 | - | 4 / Little | u32 | instance_id |  |

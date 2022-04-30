@@ -21,8 +21,8 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | 8 / Little | Guid | guid |  |
-| 0x0C | ? / - | PetReactState | react_state |  |
-| - | ? / - | PetCommandState | command_state |  |
+| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |
+| 0x0C | ? / - | [PetReactState](petreactstate.md) | react_state |  |
+| - | ? / - | [PetCommandState](petcommandstate.md) | command_state |  |
 | - | 1 / - | u8 | unknown1 |  |
 | - | 1 / - | u8 | pet_enabled |  |

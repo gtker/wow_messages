@@ -35,7 +35,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | 0x04 | 4 / Little | u32 | queue_slot |  |
-| 0x08 | ? / - | Map | map |  |
+| 0x08 | ? / - | [Map](map.md) | map |  |
 
 If map is not equal to `EASTERN_KINGDOMS`:
 
@@ -43,7 +43,7 @@ If map is not equal to `EASTERN_KINGDOMS`:
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | 1 / - | u8 | unknown0 |  |
 | - | 4 / Little | u32 | client_instance_id |  |
-| - | ? / - | StatusId | status_id |  |
+| - | ? / - | [StatusId](statusid.md) | status_id |  |
 
 If status_id is equal to `WAIT_QUEUE`:
 

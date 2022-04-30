@@ -20,7 +20,7 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | - / - | PackedGuid | caster |  |
+| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | caster |  |
 | - | 4 / Little | u32 | spell |  |
 | - | 4 / Little | u32 | amount_of_effects |  |
-| - | ? / - | SpellLog[amount_of_effects] | logs |  |
+| - | ? / - | [SpellLog](spelllog.md)[amount_of_effects] | logs |  |

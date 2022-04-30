@@ -26,16 +26,16 @@ SMSG have a header of 4 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | GroupType | group_type |  |
+| 0x04 | ? / - | [GroupType](grouptype.md) | group_type |  |
 | - | 1 / - | u8 | own_flags |  |
 | - | 4 / Little | u32 | amount_of_members |  |
-| - | ? / - | GroupListMember[amount_of_members] | members |  |
-| - | 8 / Little | Guid | leader |  |
+| - | ? / - | [GroupListMember](grouplistmember.md)[amount_of_members] | members |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | leader |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | GroupLootSetting | loot_setting |  |
-| - | 8 / Little | Guid | master_loot |  |
-| - | ? / - | ItemQuality | loot_threshold |  |
+| - | ? / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | master_loot |  |
+| - | ? / - | [ItemQuality](itemquality.md) | loot_threshold |  |

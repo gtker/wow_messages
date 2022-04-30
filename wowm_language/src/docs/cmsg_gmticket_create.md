@@ -28,8 +28,8 @@ CMSG have a header of 6 bytes.
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | ? / - | GmTicketType | category |  |
-| - | ? / - | Map | map |  |
+| 0x06 | ? / - | [GmTicketType](gmtickettype.md) | category |  |
+| - | ? / - | [Map](map.md) | map |  |
 | - | 4 / Little | f32 | position_x |  |
 | - | 4 / Little | f32 | position_y |  |
 | - | 4 / Little | f32 | position_z |  |
