@@ -26,7 +26,7 @@ use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
-const DEFAULT_PORT: u16 = 8085;
+pub const DEFAULT_PORT: u16 = 8085;
 
 pub trait ServerMessageWrite: MessageBody {
     fn write_unencrypted_server<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
