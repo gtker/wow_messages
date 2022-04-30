@@ -84,18 +84,19 @@ impl OpcodeMessage for WorldClientOpcodeMessage {
     }
 
     fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        let size = crate::util::read_u16_be(r)?;
+        let size = (crate::util::read_u16_be(r)? - 4) as u32;
         let opcode = crate::util::read_u32_le(r)?;
         match opcode {
-            0x37 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::read_body(r, (size - 4) as u32)?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::read_body(r, size)?)),
             _ => Err(Self::Error::InvalidOpcode(opcode)),
         }
     }
 
     fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error> {
         let header = d.read_and_decrypt_client_header(r)?;
+        let header_size = (header.size - 4) as u32;
         match header.opcode {
-            0x37 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::read_body(r, (header.size - 4) as u32)?)),
+            0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::read_body(r, header_size)?)),
             _ => Err(Self::Error::InvalidOpcode(header.opcode)),
         }
     }
@@ -220,20 +221,21 @@ impl OpcodeMessage for WorldServerOpcodeMessage {
     }
 
     fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        let size = crate::util::read_u16_be(r)?;
+        let size = (crate::util::read_u16_be(r)? - 2) as u32;
         let opcode = crate::util::read_u16_le(r)?;
         match opcode {
-            0x1ec => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::read_body(r, (size - 2) as u32)?)),
-            0x1ee => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::read_body(r, (size - 2) as u32)?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::read_body(r, size)?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::read_body(r, size)?)),
             _ => Err(Self::Error::InvalidOpcode(opcode)),
         }
     }
 
     fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error> {
         let header = d.read_and_decrypt_server_header(r)?;
+        let header_size = (header.size - 2) as u32;
         match header.opcode {
-            0x1ec => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::read_body(r, (header.size - 2) as u32)?)),
-            0x1ee => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::read_body(r, (header.size - 2) as u32)?)),
+            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::read_body(r, header_size)?)),
+            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::read_body(r, header_size)?)),
             _ => Err(Self::Error::InvalidOpcode(header.opcode)),
         }
     }

@@ -165,8 +165,10 @@ pub fn common_impls_world(
         });
 
         s.bodyn("fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error>", |s| {
-            s.wln(format!("let size = {path}::read_u16_be(r)?;",path = "crate::util"));
+            s.wln(format!("let size = ({path}::read_u16_be(r)? - {opcode_size}) as u32;",path = "crate::util", opcode_size = opcode_size));
+
             s.wln(format!("let opcode = {path}::read_{size}_le(r)?;",path = "crate::util", size = size));
+
             s.body("match opcode", |s| {
                 for &e in v {
                     let opcode = match e.container_type() {
@@ -175,9 +177,8 @@ pub fn common_impls_world(
                         ContainerType::Msg(i) => i,
                         _ => panic!(),
                     };
-                    s.wln(format!("{opcode:#04x} => Ok(Self::{enum_name}({name}::read_body(r, (size - {opcode_size}) as u32)?)),",
+                    s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({name}::read_body(r, size)?)),",
                                 opcode = opcode,
-                                opcode_size = opcode_size,
                                 name = e.name(),
                                 enum_name = get_enumerator_name(e.name())));
                 }
@@ -187,6 +188,7 @@ pub fn common_impls_world(
 
         s.bodyn("fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error>", |s| {
             s.wln(format!("let header = d.read_and_decrypt_{cd}_header(r)?;", cd = cd));
+            s.wln(format!("let header_size = (header.size - {opcode_size}) as u32;", opcode_size = opcode_size));
             s.body("match header.opcode", |s| {
                 for &e in v {
                     let opcode = match e.container_type() {
@@ -195,7 +197,8 @@ pub fn common_impls_world(
                         ContainerType::Msg(i) => i,
                         _ => panic!(),
                     };
-                    s.wln(format!("{opcode:#04x} => Ok(Self::{enum_name}({name}::read_body(r, (header.size - {opcode_size}) as u32)?)),", opcode = opcode, opcode_size = opcode_size, name = e.name(), enum_name = get_enumerator_name(e.name())));
+
+                    s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({name}::read_body(r, header_size)?)),", opcode = opcode, name = e.name(), enum_name = get_enumerator_name(e.name())));
                 }
                 s.wln("_ => Err(Self::Error::InvalidOpcode(header.opcode)),");
             });
