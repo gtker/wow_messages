@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_UPDATE_AURA_DURATION = 0x0137 {
     u8 aura_slot;    

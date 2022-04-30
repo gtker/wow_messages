@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum PetReactState : u8 {
     PASSIVE = 0;    
@@ -9,9 +9,9 @@ enum PetReactState : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `PASSIVE` | 0 (0x00) |  |  |

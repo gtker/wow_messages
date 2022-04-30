@@ -1,6 +1,6 @@
 ## Protocol Version 2, Protocol Version 3
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 struct Realm {
     RealmType realm_type;    
@@ -16,7 +16,7 @@ struct Realm {
 ```
 ## Protocol Version 8
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 struct Realm {
     u8 realm_type;    

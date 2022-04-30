@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum BgTypeId : u32 {
     NOT_ELIGIBLE = 0;    
@@ -11,9 +11,9 @@ enum BgTypeId : u32 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `NOT_ELIGIBLE` | 0 (0x00) |  | Your group has joined a battleground queue, but you are not eligible |

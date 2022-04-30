@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_OPEN_ITEM = 0x00AC {
     u8 bag_index;    

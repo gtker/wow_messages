@@ -1,6 +1,10 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Comment
+
+cmangos has one instance of this be u32, but both vmangos/mangoszero are u8
+
+### Wowm Representation
 ```rust,ignore
 enum QuestPartyMessage : u8 {
     SHARING_QUEST = 0;    
@@ -15,9 +19,9 @@ enum QuestPartyMessage : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `SHARING_QUEST` | 0 (0x00) |  | ERR_QUEST_PUSH_SUCCESS_S |

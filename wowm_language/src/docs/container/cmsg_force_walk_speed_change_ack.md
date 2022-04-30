@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_FORCE_WALK_SPEED_CHANGE_ACK = 0x02DB {
     Guid guid;    

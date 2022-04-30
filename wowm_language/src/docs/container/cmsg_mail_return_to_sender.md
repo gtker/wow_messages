@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_MAIL_RETURN_TO_SENDER = 0x0248 {
     Guid mailbox_id;    

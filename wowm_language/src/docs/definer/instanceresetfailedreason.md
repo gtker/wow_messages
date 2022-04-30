@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum InstanceResetFailedReason : u8 {
     GENERAL = 0;    
@@ -10,9 +10,9 @@ enum InstanceResetFailedReason : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `GENERAL` | 0 (0x00) |  | at least one player is in the instance |

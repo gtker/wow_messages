@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_AUTOBANK_ITEM = 0x0283 {
     u8 bag_index;    

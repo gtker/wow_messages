@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_INITIAL_SPELLS = 0x012A {
     u8 unknown1;    

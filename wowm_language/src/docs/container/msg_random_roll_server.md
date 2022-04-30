@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg MSG_RANDOM_ROLL_Server = 0x01FB {
     u32 minimum;    

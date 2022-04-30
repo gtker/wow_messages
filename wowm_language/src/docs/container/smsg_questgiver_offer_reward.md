@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     Guid npc;    

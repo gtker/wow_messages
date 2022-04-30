@@ -1,6 +1,9 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Description
+Sent by client when cinematic beings.
+
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_NEXT_CINEMATIC_CAMERA = 0x00FB {
 }

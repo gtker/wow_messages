@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_WHO = 0x0063 {
     u32 listed_players;    

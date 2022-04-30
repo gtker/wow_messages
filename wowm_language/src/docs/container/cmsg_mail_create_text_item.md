@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_MAIL_CREATE_TEXT_ITEM = 0x024A {
     Guid mailbox_guid;    

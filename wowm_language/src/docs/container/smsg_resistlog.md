@@ -1,6 +1,10 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Comment
+
+Structure as comment on https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525
+
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_RESISTLOG = 0x01D6 {
     Guid guid1;    

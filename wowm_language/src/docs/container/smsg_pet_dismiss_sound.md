@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_PET_DISMISS_SOUND = 0x0325 {
     u32 sound_id;    

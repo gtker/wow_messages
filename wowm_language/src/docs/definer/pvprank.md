@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum PvpRank : u8 {
     NO_RANK = 0;    
@@ -26,9 +26,9 @@ enum PvpRank : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `NO_RANK` | 0 (0x00) |  |  |

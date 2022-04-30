@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 flag CastFlags : u16 {
     NONE = 0x00000000;    
@@ -16,9 +16,9 @@ flag CastFlags : u16 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `NONE` | 0 (0x00) |  |  |

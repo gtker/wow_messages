@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum MountResult : u32 {
     INVALIDMOUNTEE = 0;    
@@ -17,9 +17,9 @@ enum MountResult : u32 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `INVALIDMOUNTEE` | 0 (0x00) |  | You can't mount that unit! |

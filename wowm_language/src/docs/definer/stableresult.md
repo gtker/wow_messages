@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum StableResult : u8 {
     ERR_MONEY = 0x01;    
@@ -11,9 +11,9 @@ enum StableResult : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `ERR_MONEY` | 1 (0x01) |  | you don't have enough money |

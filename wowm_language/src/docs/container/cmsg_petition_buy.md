@@ -1,6 +1,10 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Comment
+
+cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused
+
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_PETITION_BUY = 0x01BD {
     Guid npc;    

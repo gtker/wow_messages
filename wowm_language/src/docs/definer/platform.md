@@ -1,6 +1,6 @@
 ## Protocol Version *
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum Platform : u32 {
     X86 = "\0x86";    
@@ -9,9 +9,9 @@ enum Platform : u32 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `X86` | 7878710 (0x783836) |  |  |

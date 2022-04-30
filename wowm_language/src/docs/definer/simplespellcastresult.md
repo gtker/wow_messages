@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum SimpleSpellCastResult : u8 {
     SUCCESS = 0;    
@@ -8,9 +8,9 @@ enum SimpleSpellCastResult : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `SUCCESS` | 0 (0x00) |  |  |

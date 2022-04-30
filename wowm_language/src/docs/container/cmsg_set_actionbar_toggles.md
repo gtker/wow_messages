@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_SET_ACTIONBAR_TOGGLES = 0x02BF {
     u8 action_bar;    

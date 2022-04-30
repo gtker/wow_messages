@@ -1,6 +1,6 @@
 ## Protocol Version 2
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
     LoginResult result;    
@@ -9,7 +9,7 @@ slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
 ```
 ## Protocol Version 8
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
     LoginResult result;    

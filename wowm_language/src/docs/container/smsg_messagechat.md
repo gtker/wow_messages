@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_MESSAGECHAT = 0x0096 {
     ChatType chat_type;    

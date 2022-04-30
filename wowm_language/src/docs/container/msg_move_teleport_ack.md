@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 msg MSG_MOVE_TELEPORT_ACK = 0x00C7 {
     Guid guid;    

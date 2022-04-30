@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_PETITION_SHOWLIST = 0x01BC {
     Guid npc;    

@@ -1,6 +1,10 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Comment
+
+Also has UNIT_MINIPET = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which SpellCastTargets needs.
+
+### Wowm Representation
 ```rust,ignore
 flag SpellCastTargetFlags : u16 {
     SELF = 0x00000000;    
@@ -23,9 +27,9 @@ flag SpellCastTargetFlags : u16 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u16`, a 2 byte (16 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `SELF` | 0 (0x00) |  |  |

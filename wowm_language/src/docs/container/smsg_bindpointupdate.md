@@ -1,6 +1,9 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Description
+Set new hearthstone location.
+
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_BINDPOINTUPDATE = 0x0155 {
     f32 position_x;    

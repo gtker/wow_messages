@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_ITEM_TEXT_QUERY = 0x0243 {
     u32 item_text_id;    

@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg MSG_CORPSE_QUERY_Server = 0x0216 {
     CorpseQueryResult result;    

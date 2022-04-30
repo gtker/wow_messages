@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum BuybackSlot : u32 {
     SLOT1 = 69;    
@@ -19,9 +19,9 @@ enum BuybackSlot : u32 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `SLOT1` | 69 (0x45) |  |  |

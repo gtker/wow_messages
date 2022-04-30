@@ -1,6 +1,6 @@
 ## Protocol Version *
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum Os : u32 {
     WINDOWS = "\0Win";    
@@ -9,9 +9,9 @@ enum Os : u32 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `WINDOWS` | 5728622 (0x57696E) |  |  |

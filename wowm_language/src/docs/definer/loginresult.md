@@ -1,6 +1,6 @@
 ## Protocol Version 2, Protocol Version 3
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum LoginResult : u8 {
     SUCCESS = 0x00;    
@@ -22,9 +22,9 @@ enum LoginResult : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `SUCCESS` | 0 (0x00) |  |  |
@@ -45,7 +45,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `FAIL_PARENTALCONTROL` | 15 (0x0F) |  |  |
 ## Protocol Version 8
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum LoginResult : u8 {
     SUCCESS = 0x00;    
@@ -68,9 +68,9 @@ enum LoginResult : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `SUCCESS` | 0 (0x00) |  |  |

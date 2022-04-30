@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_MOVE_HOVER_ACK = 0x00F6 {
     Guid guid;    

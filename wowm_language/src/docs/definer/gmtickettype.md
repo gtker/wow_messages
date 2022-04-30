@@ -1,6 +1,10 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Comment
+
+vmangos: From GMTicketCategory.dbc
+
+### Wowm Representation
 ```rust,ignore
 enum GmTicketType : u8 {
     STUCK = 1;    
@@ -16,9 +20,9 @@ enum GmTicketType : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `STUCK` | 1 (0x01) |  |  |

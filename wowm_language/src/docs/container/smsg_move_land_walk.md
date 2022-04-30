@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_MOVE_LAND_WALK = 0x00DF {
     PackedGuid guid;    

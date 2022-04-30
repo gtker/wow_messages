@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum QuestFailedReason : u32 {
     DONT_HAVE_REQ = 0;    
@@ -16,9 +16,9 @@ enum QuestFailedReason : u32 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `DONT_HAVE_REQ` | 0 (0x00) |  | this is default case |

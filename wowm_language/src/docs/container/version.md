@@ -1,6 +1,6 @@
 ## Protocol Version *
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 struct Version {
     u8 major;    

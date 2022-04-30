@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_LEVELUP_INFO = 0x01D4 {
     u32 new_level;    

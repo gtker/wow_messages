@@ -1,6 +1,10 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Comment
+
+vmangos/cmangos/mangoszero: this [message] causes on client to display: 'Your auction sold'
+
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_AUCTION_OWNER_NOTIFICATION = 0x025F {
     u32 auction_id;    

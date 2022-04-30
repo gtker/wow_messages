@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_BATTLEFIELD_STATUS = 0x02D4 {
     u32 queue_slot;    

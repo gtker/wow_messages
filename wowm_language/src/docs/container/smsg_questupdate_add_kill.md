@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_QUESTUPDATE_ADD_KILL = 0x0199 {
     u32 quest_id;    

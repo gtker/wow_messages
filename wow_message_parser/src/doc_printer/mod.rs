@@ -116,7 +116,20 @@ fn common(s: &mut DocWriter, tags: &Tags) {
     print_metadata(s, tags);
 }
 
-fn print_metadata(s: &mut DocWriter, tags: &Tags) {}
+fn print_metadata(s: &mut DocWriter, tags: &Tags) {
+    if let Some(description) = tags.description() {
+        s.wln("### Description");
+        s.wln(description);
+        s.newline();
+    }
+
+    if let Some(comment) = tags.comment() {
+        s.wln("### Comment");
+        s.newline();
+        s.wln(comment);
+        s.newline();
+    }
+}
 
 fn print_versions(
     s: &mut DocWriter,
@@ -148,7 +161,7 @@ pub fn print_docs_for_enum(e: &Definer) -> DocWriter {
 
     common(&mut s, e.tags());
 
-    s.wln("## Wowm Representation");
+    s.wln("### Wowm Representation");
     s.wln("```rust,ignore");
     s.wln(get_definer_wowm_definition("enum", e, ""));
     s.wln("```");
@@ -163,7 +176,7 @@ pub fn print_docs_for_flag(e: &Definer) -> DocWriter {
 
     common(&mut s, e.tags());
 
-    s.wln("## Wowm Representation");
+    s.wln("### Wowm Representation");
     s.wln("```rust,ignore");
     s.wln(get_definer_wowm_definition("flag", e, ""));
     s.wln("```");
@@ -178,7 +191,7 @@ pub fn print_docs_for_container(e: &Container) -> DocWriter {
 
     common(&mut s, e.tags());
 
-    s.wln("## Wowm Representation");
+    s.wln("### Wowm Representation");
     s.wln("```rust,ignore");
     s.wln(get_struct_wowm_definition(e, ""));
     s.wln("```");
@@ -187,7 +200,7 @@ pub fn print_docs_for_container(e: &Container) -> DocWriter {
 }
 
 fn print_definer_table(s: &mut DocWriter, e: &Definer) {
-    s.wln("## Type");
+    s.wln("### Type");
     s.wln(format!(
         "The basic type is `{ty_str}`, a {byte} byte ({bit} bit){endian} integer.",
         ty_str = e.ty().str(),
@@ -205,7 +218,7 @@ fn print_definer_table(s: &mut DocWriter, e: &Definer) {
         }
     ));
 
-    s.wln("## Enumerators");
+    s.wln("### Enumerators");
 
     let any_fields_has_display = e.fields().iter().any(|f| f.tags().display().is_some());
 

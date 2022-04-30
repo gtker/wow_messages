@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_SPELL_UPDATE_CHAIN_TARGETS = 0x0330 {
     Guid caster;    

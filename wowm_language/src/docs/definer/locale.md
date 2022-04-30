@@ -1,6 +1,6 @@
 ## Protocol Version *
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum Locale : u32 {
     EN_GB = "enGB";    
@@ -21,9 +21,9 @@ enum Locale : u32 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `EN_GB` | 1701726018 (0x656E4742) |  |  |

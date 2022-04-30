@@ -1,6 +1,6 @@
 ## Protocol Version 2, Protocol Version 3
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 slogin CMD_REALM_LIST_Server = 0x10 {
     u16 size = self.size;    
@@ -13,7 +13,7 @@ slogin CMD_REALM_LIST_Server = 0x10 {
 ```
 ## Protocol Version 8
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 slogin CMD_REALM_LIST_Server = 0x10 {
     u16 size = self.size;    

@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_ACTIVATETAXIEXPRESS = 0x0312 {
     Guid guid;    

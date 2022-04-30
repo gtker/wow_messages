@@ -1,6 +1,10 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Comment
+
+mangoszero/vmangos: Quests that don't require items use the RequestItemsText field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.
+
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     Guid npc;    

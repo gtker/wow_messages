@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_CREATURE_QUERY_RESPONSE = 0x0061 {
     u32 creature_entry;    

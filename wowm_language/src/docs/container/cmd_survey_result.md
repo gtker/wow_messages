@@ -1,6 +1,6 @@
 ## Protocol Version 3
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 clogin CMD_SURVEY_RESULT = 0x04 {
     u32 survey_id;    

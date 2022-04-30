@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_AUCTION_SELL_ITEM = 0x0256 {
     Guid auctioneer_guid;    

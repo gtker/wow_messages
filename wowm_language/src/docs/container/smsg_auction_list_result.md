@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_AUCTION_LIST_RESULT = 0x025C {
     u32 count;    

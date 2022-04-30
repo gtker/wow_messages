@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 flag FactionFlag : u8 {
     VISIBLE = 0x01;    
@@ -13,9 +13,9 @@ flag FactionFlag : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `VISIBLE` | 1 (0x01) |  | makes visible in client (set or can be set at interaction with target of this faction) |

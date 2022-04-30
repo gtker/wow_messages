@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum Map : u32 {
     EASTERN_KINGDOMS = 0;    
@@ -50,9 +50,9 @@ enum Map : u32 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment | Display |
 | --------- | -------- | ----------- | ------- | ------- |
 | `EASTERN_KINGDOMS` | 0 (0x00) |  |  | Eastern Kingdoms |

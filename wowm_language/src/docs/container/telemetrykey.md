@@ -1,6 +1,6 @@
 ## Protocol Version 2, Protocol Version 3, Protocol Version 8
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 struct TelemetryKey {
     u16 unknown1;    

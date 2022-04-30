@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_LOG_XPGAIN = 0x01D0 {
     Guid target_guid;    

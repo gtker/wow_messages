@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_MAIL_DELETE = 0x0249 {
     Guid mailbox_id;    

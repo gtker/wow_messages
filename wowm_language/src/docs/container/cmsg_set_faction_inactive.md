@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_SET_FACTION_INACTIVE = 0x0317 {
     u32 reputation_list_id;    

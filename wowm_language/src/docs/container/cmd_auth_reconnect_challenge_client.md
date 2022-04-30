@@ -1,6 +1,6 @@
 ## Protocol Version *
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
     u8 protocol_version;    

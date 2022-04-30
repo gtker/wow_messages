@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_GROUP_CHANGE_SUB_GROUP = 0x027E {
     CString name;    

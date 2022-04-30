@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum GroupLootSetting : u8 {
     FREE_FOR_ALL = 0;    
@@ -11,9 +11,9 @@ enum GroupLootSetting : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `FREE_FOR_ALL` | 0 (0x00) |  |  |

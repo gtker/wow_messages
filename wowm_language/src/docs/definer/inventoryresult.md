@@ -1,6 +1,10 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Comment
+
+Any values greater than maximum enum value show as 'bag full'
+
+### Wowm Representation
 ```rust,ignore
 enum InventoryResult : u8 {
     OK = 0;    
@@ -73,9 +77,9 @@ enum InventoryResult : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `OK` | 0 (0x00) |  |  |

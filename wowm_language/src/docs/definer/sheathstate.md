@@ -1,6 +1,10 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Comment
+
+According to cmangos: byte value (UNIT_FIELD_BYTES_2,0)
+
+### Wowm Representation
 ```rust,ignore
 enum SheathState : u8 {
     UNARMED = 0;    
@@ -9,9 +13,9 @@ enum SheathState : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `UNARMED` | 0 (0x00) |  |  |

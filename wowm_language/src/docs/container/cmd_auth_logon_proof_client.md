@@ -1,6 +1,6 @@
 ## Protocol Version 2
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     u8[32] client_public_key;    
@@ -13,7 +13,7 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
 ```
 ## Protocol Version 3
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     u8[32] client_public_key;    
@@ -31,7 +31,7 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
 ```
 ## Protocol Version 8
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     u8[32] client_public_key;    

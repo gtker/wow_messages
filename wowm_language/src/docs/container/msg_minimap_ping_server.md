@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg MSG_MINIMAP_PING_Server = 0x01D5 {
     Guid guid;    

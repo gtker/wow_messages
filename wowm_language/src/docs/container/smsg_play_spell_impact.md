@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_PLAY_SPELL_IMPACT = 0x01F7 {
     Guid guid;    

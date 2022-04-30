@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_SPLINE_SET_WALK_SPEED = 0x0301 {
     PackedGuid guid;    

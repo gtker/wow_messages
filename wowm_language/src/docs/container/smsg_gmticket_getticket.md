@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
     GmTicketStatus status;    

@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_LOOT_ROLL = 0x02A2 {
     Guid creature_guid;    

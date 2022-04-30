@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_WORLD_TELEPORT = 0x0008 {
     Guid time_in_msec;    

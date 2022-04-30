@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum Area : u32 {
     DUN_MOROGH = 1;    
@@ -1087,9 +1087,9 @@ enum Area : u32 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment | Display |
 | --------- | -------- | ----------- | ------- | ------- |
 | `DUN_MOROGH` | 1 (0x01) |  |  | Dun Morogh |

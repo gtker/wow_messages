@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 flag GroupUpdateFlags : u32 {
     FLAG_NONE = 0x00000000;    
@@ -29,9 +29,9 @@ flag GroupUpdateFlags : u32 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `FLAG_NONE` | 0 (0x00) |  | nothing |

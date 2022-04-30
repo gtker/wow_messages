@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum GuildCommandResult : u8 {
     PLAYER_NO_MORE_IN_GUILD = 0x00;    
@@ -22,9 +22,9 @@ enum GuildCommandResult : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `PLAYER_NO_MORE_IN_GUILD` | 0 (0x00) |  |  |

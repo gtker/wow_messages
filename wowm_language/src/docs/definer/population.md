@@ -1,6 +1,6 @@
 ## Protocol Version 2, Protocol Version 3, Protocol Version 8
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum Population : u32 {
     GREEN_RECOMMENDED = 0x43480000;    
@@ -10,9 +10,9 @@ enum Population : u32 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u32`, a 4 byte (32 bit) little endian integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `GREEN_RECOMMENDED` | 1128792064 (0x43480000) |  |  |

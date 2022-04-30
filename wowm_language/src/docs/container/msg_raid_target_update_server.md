@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg MSG_RAID_TARGET_UPDATE_Server = 0x0321 {
     RaidTargetUpdateType update_type;    

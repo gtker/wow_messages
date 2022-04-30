@@ -1,6 +1,6 @@
 ## Protocol Version 2, Protocol Version 3, Protocol Version 8
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum RealmCategory : u8 {
     DEFAULT = 0x0;    
@@ -11,9 +11,9 @@ enum RealmCategory : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `DEFAULT` | 0 (0x00) |  |  |

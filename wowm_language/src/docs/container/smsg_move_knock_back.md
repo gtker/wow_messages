@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_MOVE_KNOCK_BACK = 0x00EF {
     PackedGuid guid;    

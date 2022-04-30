@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     Guid petition_guid;    

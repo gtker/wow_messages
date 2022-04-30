@@ -1,6 +1,6 @@
 ## Protocol Version 3
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 enum SecurityFlag : u8 {
     NONE = 0x0;    
@@ -8,16 +8,16 @@ enum SecurityFlag : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `NONE` | 0 (0x00) |  |  |
 | `PIN` | 1 (0x01) |  |  |
 ## Protocol Version 8
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 flag SecurityFlag : u8 {
     NONE = 0x00;    
@@ -27,9 +27,9 @@ flag SecurityFlag : u8 {
 }
 
 ```
-## Type
+### Type
 The basic type is `u8`, a 1 byte (8 bit) integer.
-## Enumerators
+### Enumerators
 | Enumerator | Original  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `NONE` | 0 (0x00) |  |  |

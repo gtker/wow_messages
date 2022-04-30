@@ -1,6 +1,6 @@
 ## Client Version 1.12
 
-## Wowm Representation
+### Wowm Representation
 ```rust,ignore
 cmsg CMSG_GUILD_SET_OFFICER_NOTE = 0x0235 {
     CString player_name;    
