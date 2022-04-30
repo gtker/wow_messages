@@ -17,7 +17,7 @@ pub struct CMSG_TUTORIAL_RESET {
 }
 
 impl ClientMessageWrite for CMSG_TUTORIAL_RESET {
-    const OPCODE: u32 = 0x100;
+    const OPCODE: u16 = 0x100;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

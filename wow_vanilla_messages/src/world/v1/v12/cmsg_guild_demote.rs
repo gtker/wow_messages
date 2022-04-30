@@ -17,7 +17,7 @@ pub struct CMSG_GUILD_DEMOTE {
 }
 
 impl ClientMessageWrite for CMSG_GUILD_DEMOTE {
-    const OPCODE: u32 = 0x8c;
+    const OPCODE: u16 = 0x8c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

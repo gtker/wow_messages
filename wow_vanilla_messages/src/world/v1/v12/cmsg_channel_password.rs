@@ -18,7 +18,7 @@ pub struct CMSG_CHANNEL_PASSWORD {
 }
 
 impl ClientMessageWrite for CMSG_CHANNEL_PASSWORD {
-    const OPCODE: u32 = 0x9c;
+    const OPCODE: u16 = 0x9c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

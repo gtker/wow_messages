@@ -19,7 +19,7 @@ pub struct CMSG_MEETINGSTONE_JOIN {
 }
 
 impl ClientMessageWrite for CMSG_MEETINGSTONE_JOIN {
-    const OPCODE: u32 = 0x292;
+    const OPCODE: u16 = 0x292;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

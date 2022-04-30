@@ -17,7 +17,7 @@ pub struct CMSG_GUILD_INFO {
 }
 
 impl ClientMessageWrite for CMSG_GUILD_INFO {
-    const OPCODE: u32 = 0x87;
+    const OPCODE: u16 = 0x87;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

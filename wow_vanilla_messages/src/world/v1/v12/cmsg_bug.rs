@@ -21,7 +21,7 @@ pub struct CMSG_BUG {
 }
 
 impl ClientMessageWrite for CMSG_BUG {
-    const OPCODE: u32 = 0x1ca;
+    const OPCODE: u16 = 0x1ca;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

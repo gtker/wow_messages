@@ -20,7 +20,7 @@ pub struct CMSG_RESURRECT_RESPONSE {
 }
 
 impl ClientMessageWrite for CMSG_RESURRECT_RESPONSE {
-    const OPCODE: u32 = 0x15c;
+    const OPCODE: u16 = 0x15c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

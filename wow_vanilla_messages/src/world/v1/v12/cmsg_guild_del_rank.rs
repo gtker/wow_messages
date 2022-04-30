@@ -17,7 +17,7 @@ pub struct CMSG_GUILD_DEL_RANK {
 }
 
 impl ClientMessageWrite for CMSG_GUILD_DEL_RANK {
-    const OPCODE: u32 = 0x233;
+    const OPCODE: u16 = 0x233;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

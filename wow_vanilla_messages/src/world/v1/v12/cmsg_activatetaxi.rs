@@ -20,7 +20,7 @@ pub struct CMSG_ACTIVATETAXI {
 }
 
 impl ClientMessageWrite for CMSG_ACTIVATETAXI {
-    const OPCODE: u32 = 0x1ad;
+    const OPCODE: u16 = 0x1ad;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

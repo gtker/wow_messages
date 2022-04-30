@@ -17,7 +17,7 @@ pub struct MSG_QUERY_NEXT_MAIL_TIME_Client {
 }
 
 impl ClientMessageWrite for MSG_QUERY_NEXT_MAIL_TIME_Client {
-    const OPCODE: u32 = 0x284;
+    const OPCODE: u16 = 0x284;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

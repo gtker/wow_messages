@@ -19,7 +19,7 @@ pub struct MSG_PETITION_DECLINE {
 }
 
 impl ClientMessageWrite for MSG_PETITION_DECLINE {
-    const OPCODE: u32 = 0x1c2;
+    const OPCODE: u16 = 0x1c2;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

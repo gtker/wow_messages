@@ -20,7 +20,7 @@ pub struct CMSG_AUCTION_LIST_BIDDER_ITEMS {
 }
 
 impl ClientMessageWrite for CMSG_AUCTION_LIST_BIDDER_ITEMS {
-    const OPCODE: u32 = 0x264;
+    const OPCODE: u16 = 0x264;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

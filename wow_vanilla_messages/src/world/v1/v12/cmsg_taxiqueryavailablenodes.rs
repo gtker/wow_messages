@@ -19,7 +19,7 @@ pub struct CMSG_TAXIQUERYAVAILABLENODES {
 }
 
 impl ClientMessageWrite for CMSG_TAXIQUERYAVAILABLENODES {
-    const OPCODE: u32 = 0x1ac;
+    const OPCODE: u16 = 0x1ac;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

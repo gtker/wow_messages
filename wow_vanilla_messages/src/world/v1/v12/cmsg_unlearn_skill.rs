@@ -18,7 +18,7 @@ pub struct CMSG_UNLEARN_SKILL {
 }
 
 impl ClientMessageWrite for CMSG_UNLEARN_SKILL {
-    const OPCODE: u32 = 0x202;
+    const OPCODE: u16 = 0x202;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

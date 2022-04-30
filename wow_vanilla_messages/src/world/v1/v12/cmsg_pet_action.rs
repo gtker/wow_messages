@@ -21,7 +21,7 @@ pub struct CMSG_PET_ACTION {
 }
 
 impl ClientMessageWrite for CMSG_PET_ACTION {
-    const OPCODE: u32 = 0x175;
+    const OPCODE: u16 = 0x175;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

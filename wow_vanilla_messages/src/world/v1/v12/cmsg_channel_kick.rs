@@ -18,7 +18,7 @@ pub struct CMSG_CHANNEL_KICK {
 }
 
 impl ClientMessageWrite for CMSG_CHANNEL_KICK {
-    const OPCODE: u32 = 0xa4;
+    const OPCODE: u16 = 0xa4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

@@ -18,7 +18,7 @@ pub struct CMSG_AUTOSTORE_LOOT_ITEM {
 }
 
 impl ClientMessageWrite for CMSG_AUTOSTORE_LOOT_ITEM {
-    const OPCODE: u32 = 0x108;
+    const OPCODE: u16 = 0x108;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

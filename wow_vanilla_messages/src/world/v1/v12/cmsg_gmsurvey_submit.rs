@@ -20,7 +20,7 @@ pub struct CMSG_GMSURVEY_SUBMIT {
 }
 
 impl ClientMessageWrite for CMSG_GMSURVEY_SUBMIT {
-    const OPCODE: u32 = 0x32a;
+    const OPCODE: u16 = 0x32a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

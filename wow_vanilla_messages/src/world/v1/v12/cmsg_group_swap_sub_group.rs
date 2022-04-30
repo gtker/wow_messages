@@ -18,7 +18,7 @@ pub struct CMSG_GROUP_SWAP_SUB_GROUP {
 }
 
 impl ClientMessageWrite for CMSG_GROUP_SWAP_SUB_GROUP {
-    const OPCODE: u32 = 0x280;
+    const OPCODE: u16 = 0x280;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

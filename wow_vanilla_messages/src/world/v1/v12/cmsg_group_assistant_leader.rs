@@ -20,7 +20,7 @@ pub struct CMSG_GROUP_ASSISTANT_LEADER {
 }
 
 impl ClientMessageWrite for CMSG_GROUP_ASSISTANT_LEADER {
-    const OPCODE: u32 = 0x28f;
+    const OPCODE: u16 = 0x28f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

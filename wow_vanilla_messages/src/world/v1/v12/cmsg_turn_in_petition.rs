@@ -19,7 +19,7 @@ pub struct CMSG_TURN_IN_PETITION {
 }
 
 impl ClientMessageWrite for CMSG_TURN_IN_PETITION {
-    const OPCODE: u32 = 0x1c4;
+    const OPCODE: u16 = 0x1c4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

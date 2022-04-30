@@ -18,7 +18,7 @@ pub struct MSG_MOVE_HEARTBEAT {
 }
 
 impl ClientMessageWrite for MSG_MOVE_HEARTBEAT {
-    const OPCODE: u32 = 0xee;
+    const OPCODE: u16 = 0xee;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

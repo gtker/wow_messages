@@ -20,7 +20,7 @@ pub struct CMSG_PET_CAST_SPELL {
 }
 
 impl ClientMessageWrite for CMSG_PET_CAST_SPELL {
-    const OPCODE: u32 = 0x1f0;
+    const OPCODE: u16 = 0x1f0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

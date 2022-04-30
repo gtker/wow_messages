@@ -21,7 +21,7 @@ pub struct CMSG_BATTLEFIELD_PORT {
 }
 
 impl ClientMessageWrite for CMSG_BATTLEFIELD_PORT {
-    const OPCODE: u32 = 0x2d5;
+    const OPCODE: u16 = 0x2d5;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

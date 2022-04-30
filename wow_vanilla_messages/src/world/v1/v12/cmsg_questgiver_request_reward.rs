@@ -20,7 +20,7 @@ pub struct CMSG_QUESTGIVER_REQUEST_REWARD {
 }
 
 impl ClientMessageWrite for CMSG_QUESTGIVER_REQUEST_REWARD {
-    const OPCODE: u32 = 0x18c;
+    const OPCODE: u16 = 0x18c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

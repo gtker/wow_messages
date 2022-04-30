@@ -21,7 +21,7 @@ pub struct CMSG_MOVE_KNOCK_BACK_ACK {
 }
 
 impl ClientMessageWrite for CMSG_MOVE_KNOCK_BACK_ACK {
-    const OPCODE: u32 = 0xf0;
+    const OPCODE: u16 = 0xf0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

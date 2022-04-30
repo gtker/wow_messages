@@ -60,14 +60,14 @@ pub trait ServerMessageWrite: MessageBody {
 }
 
 pub trait ClientMessageWrite: MessageBody {
-    const OPCODE: u32;
+    const OPCODE: u16;
 
     fn size_without_size_or_opcode_fields(&self) -> u16;
 
     fn write_unencrypted_client<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         // size: u16_be, and opcode: u32
         crate::util::write_u16_be(w, (self.size_without_size_or_opcode_fields() + 4))?;
-        crate::util::write_u32_le(w, <Self as ClientMessageWrite>::OPCODE)?;
+        crate::util::write_u32_le(w, <Self as ClientMessageWrite>::OPCODE as u32)?;
 
         self.write_body(w)?;
         Ok(())
@@ -82,7 +82,7 @@ pub trait ClientMessageWrite: MessageBody {
         e.write_encrypted_client_header(
             w,
             (self.size_without_size_or_opcode_fields() + 4),
-            <Self as ClientMessageWrite>::OPCODE,
+            <Self as ClientMessageWrite>::OPCODE as u32,
         )?;
 
         self.write_body(w)?;

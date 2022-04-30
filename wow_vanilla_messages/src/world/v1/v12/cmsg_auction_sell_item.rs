@@ -24,7 +24,7 @@ pub struct CMSG_AUCTION_SELL_ITEM {
 }
 
 impl ClientMessageWrite for CMSG_AUCTION_SELL_ITEM {
-    const OPCODE: u32 = 0x256;
+    const OPCODE: u16 = 0x256;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

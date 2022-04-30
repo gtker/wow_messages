@@ -17,7 +17,7 @@ pub struct CMSG_TOGGLE_HELM {
 }
 
 impl ClientMessageWrite for CMSG_TOGGLE_HELM {
-    const OPCODE: u32 = 0x2b9;
+    const OPCODE: u16 = 0x2b9;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

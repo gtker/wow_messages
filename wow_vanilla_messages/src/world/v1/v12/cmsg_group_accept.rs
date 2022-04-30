@@ -17,7 +17,7 @@ pub struct CMSG_GROUP_ACCEPT {
 }
 
 impl ClientMessageWrite for CMSG_GROUP_ACCEPT {
-    const OPCODE: u32 = 0x72;
+    const OPCODE: u16 = 0x72;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

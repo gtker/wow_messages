@@ -21,7 +21,7 @@ pub struct CMSG_MAIL_CREATE_TEXT_ITEM {
 }
 
 impl ClientMessageWrite for CMSG_MAIL_CREATE_TEXT_ITEM {
-    const OPCODE: u32 = 0x24a;
+    const OPCODE: u16 = 0x24a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

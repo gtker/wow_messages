@@ -19,7 +19,7 @@ pub struct CMSG_ATTACKSWING {
 }
 
 impl ClientMessageWrite for CMSG_ATTACKSWING {
-    const OPCODE: u32 = 0x141;
+    const OPCODE: u16 = 0x141;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

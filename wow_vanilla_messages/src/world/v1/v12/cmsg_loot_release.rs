@@ -19,7 +19,7 @@ pub struct CMSG_LOOT_RELEASE {
 }
 
 impl ClientMessageWrite for CMSG_LOOT_RELEASE {
-    const OPCODE: u32 = 0x15f;
+    const OPCODE: u16 = 0x15f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

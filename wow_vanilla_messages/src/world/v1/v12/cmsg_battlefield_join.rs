@@ -19,7 +19,7 @@ pub struct CMSG_BATTLEFIELD_JOIN {
 }
 
 impl ClientMessageWrite for CMSG_BATTLEFIELD_JOIN {
-    const OPCODE: u32 = 0x23e;
+    const OPCODE: u16 = 0x23e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

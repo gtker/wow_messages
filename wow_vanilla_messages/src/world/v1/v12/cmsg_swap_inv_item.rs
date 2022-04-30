@@ -19,7 +19,7 @@ pub struct CMSG_SWAP_INV_ITEM {
 }
 
 impl ClientMessageWrite for CMSG_SWAP_INV_ITEM {
-    const OPCODE: u32 = 0x10d;
+    const OPCODE: u16 = 0x10d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

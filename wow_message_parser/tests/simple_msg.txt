@@ -18,7 +18,7 @@ pub struct SimpleMsg {
 }
 
 impl ClientMessageWrite for SimpleMsg {
-    const OPCODE: u32 = 0x02;
+    const OPCODE: u16 = 0x02;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

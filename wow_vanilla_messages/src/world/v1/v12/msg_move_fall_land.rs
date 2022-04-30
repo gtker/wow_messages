@@ -18,7 +18,7 @@ pub struct MSG_MOVE_FALL_LAND {
 }
 
 impl ClientMessageWrite for MSG_MOVE_FALL_LAND {
-    const OPCODE: u32 = 0xc9;
+    const OPCODE: u16 = 0xc9;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

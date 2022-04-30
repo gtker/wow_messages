@@ -17,7 +17,7 @@ pub struct CMSG_QUERY_TIME {
 }
 
 impl ClientMessageWrite for CMSG_QUERY_TIME {
-    const OPCODE: u32 = 0x1ce;
+    const OPCODE: u16 = 0x1ce;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

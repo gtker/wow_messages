@@ -18,7 +18,7 @@ pub struct CMSG_SET_AMMO {
 }
 
 impl ClientMessageWrite for CMSG_SET_AMMO {
-    const OPCODE: u32 = 0x268;
+    const OPCODE: u16 = 0x268;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

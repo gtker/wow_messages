@@ -18,7 +18,7 @@ pub struct CMSG_QUEST_CONFIRM_ACCEPT {
 }
 
 impl ClientMessageWrite for CMSG_QUEST_CONFIRM_ACCEPT {
-    const OPCODE: u32 = 0x19b;
+    const OPCODE: u16 = 0x19b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

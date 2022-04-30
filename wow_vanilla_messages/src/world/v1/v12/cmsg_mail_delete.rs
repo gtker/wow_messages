@@ -20,7 +20,7 @@ pub struct CMSG_MAIL_DELETE {
 }
 
 impl ClientMessageWrite for CMSG_MAIL_DELETE {
-    const OPCODE: u32 = 0x249;
+    const OPCODE: u16 = 0x249;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

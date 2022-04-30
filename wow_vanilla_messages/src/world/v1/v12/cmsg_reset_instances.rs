@@ -17,7 +17,7 @@ pub struct CMSG_RESET_INSTANCES {
 }
 
 impl ClientMessageWrite for CMSG_RESET_INSTANCES {
-    const OPCODE: u32 = 0x31d;
+    const OPCODE: u16 = 0x31d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

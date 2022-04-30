@@ -20,7 +20,7 @@ pub struct CMSG_ITEM_NAME_QUERY {
 }
 
 impl ClientMessageWrite for CMSG_ITEM_NAME_QUERY {
-    const OPCODE: u32 = 0x2c4;
+    const OPCODE: u16 = 0x2c4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

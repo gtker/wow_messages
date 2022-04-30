@@ -17,7 +17,7 @@ pub struct CMSG_TOGGLE_PVP {
 }
 
 impl ClientMessageWrite for CMSG_TOGGLE_PVP {
-    const OPCODE: u32 = 0x253;
+    const OPCODE: u16 = 0x253;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

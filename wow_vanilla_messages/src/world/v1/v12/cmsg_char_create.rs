@@ -29,7 +29,7 @@ pub struct CMSG_CHAR_CREATE {
 }
 
 impl ClientMessageWrite for CMSG_CHAR_CREATE {
-    const OPCODE: u32 = 0x36;
+    const OPCODE: u16 = 0x36;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

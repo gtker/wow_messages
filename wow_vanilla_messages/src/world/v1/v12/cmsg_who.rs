@@ -24,7 +24,7 @@ pub struct CMSG_WHO {
 }
 
 impl ClientMessageWrite for CMSG_WHO {
-    const OPCODE: u32 = 0x62;
+    const OPCODE: u16 = 0x62;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

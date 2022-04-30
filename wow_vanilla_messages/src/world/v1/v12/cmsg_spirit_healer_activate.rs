@@ -19,7 +19,7 @@ pub struct CMSG_SPIRIT_HEALER_ACTIVATE {
 }
 
 impl ClientMessageWrite for CMSG_SPIRIT_HEALER_ACTIVATE {
-    const OPCODE: u32 = 0x21c;
+    const OPCODE: u16 = 0x21c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

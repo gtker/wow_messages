@@ -19,7 +19,7 @@ pub struct CMSG_TEST_OPTIONAL {
 }
 
 impl ClientMessageWrite for CMSG_TEST_OPTIONAL {
-    const OPCODE: u32 = 0x1137;
+    const OPCODE: u16 = 0x1137;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

@@ -19,7 +19,7 @@ pub struct CMSG_GAMEOBJ_USE {
 }
 
 impl ClientMessageWrite for CMSG_GAMEOBJ_USE {
-    const OPCODE: u32 = 0xb1;
+    const OPCODE: u16 = 0xb1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

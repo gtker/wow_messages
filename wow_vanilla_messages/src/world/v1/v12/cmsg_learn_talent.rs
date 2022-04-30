@@ -19,7 +19,7 @@ pub struct CMSG_LEARN_TALENT {
 }
 
 impl ClientMessageWrite for CMSG_LEARN_TALENT {
-    const OPCODE: u32 = 0x251;
+    const OPCODE: u16 = 0x251;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

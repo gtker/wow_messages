@@ -18,7 +18,7 @@ pub struct CMSG_AREATRIGGER {
 }
 
 impl ClientMessageWrite for CMSG_AREATRIGGER {
-    const OPCODE: u32 = 0xb4;
+    const OPCODE: u16 = 0xb4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

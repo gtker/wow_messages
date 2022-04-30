@@ -17,7 +17,7 @@ pub struct CMSG_GROUP_DISBAND {
 }
 
 impl ClientMessageWrite for CMSG_GROUP_DISBAND {
-    const OPCODE: u32 = 0x7b;
+    const OPCODE: u16 = 0x7b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

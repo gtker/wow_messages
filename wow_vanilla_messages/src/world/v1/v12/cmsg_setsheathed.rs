@@ -19,7 +19,7 @@ pub struct CMSG_SETSHEATHED {
 }
 
 impl ClientMessageWrite for CMSG_SETSHEATHED {
-    const OPCODE: u32 = 0x1e0;
+    const OPCODE: u16 = 0x1e0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

@@ -21,7 +21,7 @@ pub struct MSG_MOVE_TELEPORT_ACK {
 }
 
 impl ClientMessageWrite for MSG_MOVE_TELEPORT_ACK {
-    const OPCODE: u32 = 0xc7;
+    const OPCODE: u16 = 0xc7;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

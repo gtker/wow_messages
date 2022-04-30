@@ -19,7 +19,7 @@ pub struct CMSG_REQUEST_PARTY_MEMBER_STATS {
 }
 
 impl ClientMessageWrite for CMSG_REQUEST_PARTY_MEMBER_STATS {
-    const OPCODE: u32 = 0x27f;
+    const OPCODE: u16 = 0x27f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

@@ -20,7 +20,7 @@ pub struct CMSG_GOSSIP_SELECT_OPTION {
 }
 
 impl ClientMessageWrite for CMSG_GOSSIP_SELECT_OPTION {
-    const OPCODE: u32 = 0x17c;
+    const OPCODE: u16 = 0x17c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

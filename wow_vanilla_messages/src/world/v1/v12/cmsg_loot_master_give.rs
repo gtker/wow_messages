@@ -21,7 +21,7 @@ pub struct CMSG_LOOT_MASTER_GIVE {
 }
 
 impl ClientMessageWrite for CMSG_LOOT_MASTER_GIVE {
-    const OPCODE: u32 = 0x2a3;
+    const OPCODE: u16 = 0x2a3;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

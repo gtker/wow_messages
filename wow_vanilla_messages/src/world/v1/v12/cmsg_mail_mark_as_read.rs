@@ -20,7 +20,7 @@ pub struct CMSG_MAIL_MARK_AS_READ {
 }
 
 impl ClientMessageWrite for CMSG_MAIL_MARK_AS_READ {
-    const OPCODE: u32 = 0x247;
+    const OPCODE: u16 = 0x247;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

@@ -17,7 +17,7 @@ pub struct CMSG_CHANNEL_LIST {
 }
 
 impl ClientMessageWrite for CMSG_CHANNEL_LIST {
-    const OPCODE: u32 = 0x9a;
+    const OPCODE: u16 = 0x9a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

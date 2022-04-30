@@ -17,7 +17,7 @@ pub struct CMSG_CANCEL_GROWTH_AURA {
 }
 
 impl ClientMessageWrite for CMSG_CANCEL_GROWTH_AURA {
-    const OPCODE: u32 = 0x29b;
+    const OPCODE: u16 = 0x29b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

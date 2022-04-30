@@ -19,7 +19,7 @@ pub struct CMSG_INSPECT {
 }
 
 impl ClientMessageWrite for CMSG_INSPECT {
-    const OPCODE: u32 = 0x114;
+    const OPCODE: u16 = 0x114;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

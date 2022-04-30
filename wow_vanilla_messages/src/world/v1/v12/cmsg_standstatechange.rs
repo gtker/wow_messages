@@ -19,7 +19,7 @@ pub struct CMSG_STANDSTATECHANGE {
 }
 
 impl ClientMessageWrite for CMSG_STANDSTATECHANGE {
-    const OPCODE: u32 = 0x101;
+    const OPCODE: u16 = 0x101;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

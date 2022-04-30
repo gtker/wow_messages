@@ -17,7 +17,7 @@ pub struct CMSG_REQUEST_ACCOUNT_DATA {
 }
 
 impl ClientMessageWrite for CMSG_REQUEST_ACCOUNT_DATA {
-    const OPCODE: u32 = 0x20a;
+    const OPCODE: u16 = 0x20a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

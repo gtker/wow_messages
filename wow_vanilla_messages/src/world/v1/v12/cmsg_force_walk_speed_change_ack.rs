@@ -22,7 +22,7 @@ pub struct CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
 }
 
 impl ClientMessageWrite for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
-    const OPCODE: u32 = 0x2db;
+    const OPCODE: u16 = 0x2db;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

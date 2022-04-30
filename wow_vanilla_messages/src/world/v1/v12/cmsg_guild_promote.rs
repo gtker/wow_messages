@@ -17,7 +17,7 @@ pub struct CMSG_GUILD_PROMOTE {
 }
 
 impl ClientMessageWrite for CMSG_GUILD_PROMOTE {
-    const OPCODE: u32 = 0x8b;
+    const OPCODE: u16 = 0x8b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

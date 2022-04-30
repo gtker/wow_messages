@@ -20,7 +20,7 @@ pub struct CMSG_PETITION_SIGN {
 }
 
 impl ClientMessageWrite for CMSG_PETITION_SIGN {
-    const OPCODE: u32 = 0x1c0;
+    const OPCODE: u16 = 0x1c0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

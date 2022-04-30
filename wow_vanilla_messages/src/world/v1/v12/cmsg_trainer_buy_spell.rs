@@ -20,7 +20,7 @@ pub struct CMSG_TRAINER_BUY_SPELL {
 }
 
 impl ClientMessageWrite for CMSG_TRAINER_BUY_SPELL {
-    const OPCODE: u32 = 0x1b2;
+    const OPCODE: u16 = 0x1b2;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

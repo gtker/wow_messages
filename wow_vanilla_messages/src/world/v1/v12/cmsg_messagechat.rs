@@ -20,7 +20,7 @@ pub struct CMSG_MESSAGECHAT {
 }
 
 impl ClientMessageWrite for CMSG_MESSAGECHAT {
-    const OPCODE: u32 = 0x95;
+    const OPCODE: u16 = 0x95;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

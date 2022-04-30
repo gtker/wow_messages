@@ -19,7 +19,7 @@ pub struct CMSG_PET_STOP_ATTACK {
 }
 
 impl ClientMessageWrite for CMSG_PET_STOP_ATTACK {
-    const OPCODE: u32 = 0x2ea;
+    const OPCODE: u16 = 0x2ea;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

@@ -19,7 +19,7 @@ pub struct CMSG_SET_FACTION_ATWAR {
 }
 
 impl ClientMessageWrite for CMSG_SET_FACTION_ATWAR {
-    const OPCODE: u32 = 0x125;
+    const OPCODE: u16 = 0x125;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

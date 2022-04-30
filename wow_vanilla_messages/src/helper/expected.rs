@@ -10,7 +10,7 @@ pub fn read_expected_client_world_message<M: ClientMessageWrite + MessageBody, R
     let size = read_u16_le(r)?;
     let opcode = read_u32_le(r)?;
 
-    return if opcode == M::OPCODE {
+    return if opcode == M::OPCODE as u32 {
         let m = M::read_body(r, (size - 4) as u32);
         match m {
             Ok(m) => Ok(m),

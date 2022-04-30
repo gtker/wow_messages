@@ -17,7 +17,7 @@ pub struct MSG_RAID_READY_CHECK_Client {
 }
 
 impl ClientMessageWrite for MSG_RAID_READY_CHECK_Client {
-    const OPCODE: u32 = 0x322;
+    const OPCODE: u16 = 0x322;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

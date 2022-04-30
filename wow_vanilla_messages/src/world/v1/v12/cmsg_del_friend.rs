@@ -19,7 +19,7 @@ pub struct CMSG_DEL_FRIEND {
 }
 
 impl ClientMessageWrite for CMSG_DEL_FRIEND {
-    const OPCODE: u32 = 0x6a;
+    const OPCODE: u16 = 0x6a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

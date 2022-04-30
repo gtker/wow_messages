@@ -20,7 +20,7 @@ pub struct CMSG_MAIL_TAKE_MONEY {
 }
 
 impl ClientMessageWrite for CMSG_MAIL_TAKE_MONEY {
-    const OPCODE: u32 = 0x245;
+    const OPCODE: u16 = 0x245;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

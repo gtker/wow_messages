@@ -17,7 +17,7 @@ pub struct CMSG_REPOP_REQUEST {
 }
 
 impl ClientMessageWrite for CMSG_REPOP_REQUEST {
-    const OPCODE: u32 = 0x15a;
+    const OPCODE: u16 = 0x15a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

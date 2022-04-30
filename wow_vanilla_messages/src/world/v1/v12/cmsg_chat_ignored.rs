@@ -19,7 +19,7 @@ pub struct CMSG_CHAT_IGNORED {
 }
 
 impl ClientMessageWrite for CMSG_CHAT_IGNORED {
-    const OPCODE: u32 = 0x225;
+    const OPCODE: u16 = 0x225;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

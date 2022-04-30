@@ -17,7 +17,7 @@ pub struct CMSG_ADD_FRIEND {
 }
 
 impl ClientMessageWrite for CMSG_ADD_FRIEND {
-    const OPCODE: u32 = 0x69;
+    const OPCODE: u16 = 0x69;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

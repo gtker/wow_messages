@@ -17,7 +17,7 @@ pub struct CMSG_WHOIS {
 }
 
 impl ClientMessageWrite for CMSG_WHOIS {
-    const OPCODE: u32 = 0x64;
+    const OPCODE: u16 = 0x64;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

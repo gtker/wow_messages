@@ -19,7 +19,7 @@ pub struct CMSG_GET_MAIL_LIST {
 }
 
 impl ClientMessageWrite for CMSG_GET_MAIL_LIST {
-    const OPCODE: u32 = 0x23a;
+    const OPCODE: u16 = 0x23a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

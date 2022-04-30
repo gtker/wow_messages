@@ -17,7 +17,7 @@ pub struct CMSG_CHANNEL_MODERATE {
 }
 
 impl ClientMessageWrite for CMSG_CHANNEL_MODERATE {
-    const OPCODE: u32 = 0xa8;
+    const OPCODE: u16 = 0xa8;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

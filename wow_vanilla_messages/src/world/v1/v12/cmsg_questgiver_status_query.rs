@@ -19,7 +19,7 @@ pub struct CMSG_QUESTGIVER_STATUS_QUERY {
 }
 
 impl ClientMessageWrite for CMSG_QUESTGIVER_STATUS_QUERY {
-    const OPCODE: u32 = 0x182;
+    const OPCODE: u16 = 0x182;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

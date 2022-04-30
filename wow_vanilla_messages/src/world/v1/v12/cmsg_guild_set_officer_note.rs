@@ -18,7 +18,7 @@ pub struct CMSG_GUILD_SET_OFFICER_NOTE {
 }
 
 impl ClientMessageWrite for CMSG_GUILD_SET_OFFICER_NOTE {
-    const OPCODE: u32 = 0x235;
+    const OPCODE: u16 = 0x235;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

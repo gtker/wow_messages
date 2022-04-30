@@ -17,7 +17,7 @@ pub struct CMSG_BEGIN_TRADE {
 }
 
 impl ClientMessageWrite for CMSG_BEGIN_TRADE {
-    const OPCODE: u32 = 0x117;
+    const OPCODE: u16 = 0x117;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

@@ -17,7 +17,7 @@ pub struct CMSG_GMTICKET_DELETETICKET {
 }
 
 impl ClientMessageWrite for CMSG_GMTICKET_DELETETICKET {
-    const OPCODE: u32 = 0x217;
+    const OPCODE: u16 = 0x217;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

@@ -18,7 +18,7 @@ pub struct CMSG_CHANNEL_UNBAN {
 }
 
 impl ClientMessageWrite for CMSG_CHANNEL_UNBAN {
-    const OPCODE: u32 = 0xa6;
+    const OPCODE: u16 = 0xa6;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

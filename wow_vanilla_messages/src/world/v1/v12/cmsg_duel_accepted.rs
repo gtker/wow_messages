@@ -19,7 +19,7 @@ pub struct CMSG_DUEL_ACCEPTED {
 }
 
 impl ClientMessageWrite for CMSG_DUEL_ACCEPTED {
-    const OPCODE: u32 = 0x16c;
+    const OPCODE: u16 = 0x16c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

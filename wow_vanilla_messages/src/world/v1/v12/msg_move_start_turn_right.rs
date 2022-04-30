@@ -18,7 +18,7 @@ pub struct MSG_MOVE_START_TURN_RIGHT {
 }
 
 impl ClientMessageWrite for MSG_MOVE_START_TURN_RIGHT {
-    const OPCODE: u32 = 0xbd;
+    const OPCODE: u16 = 0xbd;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

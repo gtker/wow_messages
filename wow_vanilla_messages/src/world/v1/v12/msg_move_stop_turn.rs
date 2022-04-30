@@ -18,7 +18,7 @@ pub struct MSG_MOVE_STOP_TURN {
 }
 
 impl ClientMessageWrite for MSG_MOVE_STOP_TURN {
-    const OPCODE: u32 = 0xbe;
+    const OPCODE: u16 = 0xbe;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

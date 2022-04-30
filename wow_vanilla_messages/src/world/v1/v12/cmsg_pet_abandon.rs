@@ -19,7 +19,7 @@ pub struct CMSG_PET_ABANDON {
 }
 
 impl ClientMessageWrite for CMSG_PET_ABANDON {
-    const OPCODE: u32 = 0x176;
+    const OPCODE: u16 = 0x176;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

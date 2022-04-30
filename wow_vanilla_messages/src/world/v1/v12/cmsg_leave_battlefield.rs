@@ -20,7 +20,7 @@ pub struct CMSG_LEAVE_BATTLEFIELD {
 }
 
 impl ClientMessageWrite for CMSG_LEAVE_BATTLEFIELD {
-    const OPCODE: u32 = 0x2e1;
+    const OPCODE: u16 = 0x2e1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

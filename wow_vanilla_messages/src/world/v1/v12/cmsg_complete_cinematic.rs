@@ -17,7 +17,7 @@ pub struct CMSG_COMPLETE_CINEMATIC {
 }
 
 impl ClientMessageWrite for CMSG_COMPLETE_CINEMATIC {
-    const OPCODE: u32 = 0xfc;
+    const OPCODE: u16 = 0xfc;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

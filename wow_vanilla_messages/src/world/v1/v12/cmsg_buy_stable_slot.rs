@@ -19,7 +19,7 @@ pub struct CMSG_BUY_STABLE_SLOT {
 }
 
 impl ClientMessageWrite for CMSG_BUY_STABLE_SLOT {
-    const OPCODE: u32 = 0x272;
+    const OPCODE: u16 = 0x272;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

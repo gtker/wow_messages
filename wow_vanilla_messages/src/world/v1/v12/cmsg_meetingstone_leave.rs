@@ -17,7 +17,7 @@ pub struct CMSG_MEETINGSTONE_LEAVE {
 }
 
 impl ClientMessageWrite for CMSG_MEETINGSTONE_LEAVE {
-    const OPCODE: u32 = 0x293;
+    const OPCODE: u16 = 0x293;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

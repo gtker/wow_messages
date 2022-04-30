@@ -19,7 +19,7 @@ pub struct CMSG_BATTLEFIELD_LIST {
 }
 
 impl ClientMessageWrite for CMSG_BATTLEFIELD_LIST {
-    const OPCODE: u32 = 0x23c;
+    const OPCODE: u16 = 0x23c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

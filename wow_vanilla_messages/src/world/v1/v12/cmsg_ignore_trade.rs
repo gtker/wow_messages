@@ -17,7 +17,7 @@ pub struct CMSG_IGNORE_TRADE {
 }
 
 impl ClientMessageWrite for CMSG_IGNORE_TRADE {
-    const OPCODE: u32 = 0x119;
+    const OPCODE: u16 = 0x119;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

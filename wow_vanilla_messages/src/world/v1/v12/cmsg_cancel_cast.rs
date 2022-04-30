@@ -18,7 +18,7 @@ pub struct CMSG_CANCEL_CAST {
 }
 
 impl ClientMessageWrite for CMSG_CANCEL_CAST {
-    const OPCODE: u32 = 0x12f;
+    const OPCODE: u16 = 0x12f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

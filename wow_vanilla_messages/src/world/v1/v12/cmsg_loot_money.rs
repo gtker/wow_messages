@@ -17,7 +17,7 @@ pub struct CMSG_LOOT_MONEY {
 }
 
 impl ClientMessageWrite for CMSG_LOOT_MONEY {
-    const OPCODE: u32 = 0x15e;
+    const OPCODE: u16 = 0x15e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

@@ -21,7 +21,7 @@ pub struct CMSG_BUYBACK_ITEM {
 }
 
 impl ClientMessageWrite for CMSG_BUYBACK_ITEM {
-    const OPCODE: u32 = 0x290;
+    const OPCODE: u16 = 0x290;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

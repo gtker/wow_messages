@@ -23,7 +23,7 @@ pub struct CMSG_AUTH_SESSION {
 }
 
 impl ClientMessageWrite for CMSG_AUTH_SESSION {
-    const OPCODE: u32 = 0x1ed;
+    const OPCODE: u16 = 0x1ed;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

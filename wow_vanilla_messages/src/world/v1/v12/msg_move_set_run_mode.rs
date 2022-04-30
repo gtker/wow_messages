@@ -18,7 +18,7 @@ pub struct MSG_MOVE_SET_RUN_MODE {
 }
 
 impl ClientMessageWrite for MSG_MOVE_SET_RUN_MODE {
-    const OPCODE: u32 = 0xc2;
+    const OPCODE: u16 = 0xc2;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16

@@ -18,7 +18,7 @@ pub struct CMSG_PUSHQUESTTOPARTY {
 }
 
 impl ClientMessageWrite for CMSG_PUSHQUESTTOPARTY {
-    const OPCODE: u32 = 0x19d;
+    const OPCODE: u16 = 0x19d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

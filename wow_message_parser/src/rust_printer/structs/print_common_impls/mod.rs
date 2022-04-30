@@ -116,7 +116,7 @@ fn print_client_message_header(s: &mut Writer, e: &Container, v: u16) {
     s.bodyn(
         format!("impl {} for {}", WORLD_CLIENT_HEADER_TRAIT_NAME, e.name()),
         |s| {
-            s.wln(format!("const OPCODE: u32 = {:#04x};", v));
+            s.wln(format!("const OPCODE: u16 = {:#04x};", v));
             s.newline();
 
             s.bodyn("fn size_without_size_or_opcode_fields(&self) -> u16", |s| {

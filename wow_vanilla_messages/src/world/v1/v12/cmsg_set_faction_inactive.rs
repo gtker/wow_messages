@@ -19,7 +19,7 @@ pub struct CMSG_SET_FACTION_INACTIVE {
 }
 
 impl ClientMessageWrite for CMSG_SET_FACTION_INACTIVE {
-    const OPCODE: u32 = 0x317;
+    const OPCODE: u16 = 0x317;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16

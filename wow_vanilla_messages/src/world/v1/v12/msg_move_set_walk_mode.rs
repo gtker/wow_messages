@@ -18,7 +18,7 @@ pub struct MSG_MOVE_SET_WALK_MODE {
 }
 
 impl ClientMessageWrite for MSG_MOVE_SET_WALK_MODE {
-    const OPCODE: u32 = 0xc3;
+    const OPCODE: u16 = 0xc3;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
