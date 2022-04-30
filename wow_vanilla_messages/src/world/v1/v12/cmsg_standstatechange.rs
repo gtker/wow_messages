@@ -44,11 +44,7 @@ impl MessageBody for CMSG_STANDSTATECHANGE {
     }
 }
 
-impl ConstantSized for CMSG_STANDSTATECHANGE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_STANDSTATECHANGE {}
 
 impl MaximumPossibleSized for CMSG_STANDSTATECHANGE {
     fn maximum_possible_size() -> usize {

@@ -68,11 +68,7 @@ impl MessageBody for SMSG_WEATHER {
     }
 }
 
-impl ConstantSized for SMSG_WEATHER {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_WEATHER {}
 
 impl MaximumPossibleSized for SMSG_WEATHER {
     fn maximum_possible_size() -> usize {

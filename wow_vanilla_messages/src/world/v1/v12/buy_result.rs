@@ -288,11 +288,7 @@ impl BuyResult {
 
 }
 
-impl ConstantSized for BuyResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for BuyResult {}
 
 impl MaximumPossibleSized for BuyResult {
     fn maximum_possible_size() -> usize {

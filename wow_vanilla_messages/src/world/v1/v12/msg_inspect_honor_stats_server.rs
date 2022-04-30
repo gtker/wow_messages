@@ -165,11 +165,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
     }
 }
 
-impl ConstantSized for MSG_INSPECT_HONOR_STATS_Server {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_INSPECT_HONOR_STATS_Server {}
 
 impl MaximumPossibleSized for MSG_INSPECT_HONOR_STATS_Server {
     fn maximum_possible_size() -> usize {

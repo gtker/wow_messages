@@ -52,11 +52,7 @@ impl MessageBody for SMSG_ATTACKSTART {
     }
 }
 
-impl ConstantSized for SMSG_ATTACKSTART {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_ATTACKSTART {}
 
 impl MaximumPossibleSized for SMSG_ATTACKSTART {
     fn maximum_possible_size() -> usize {

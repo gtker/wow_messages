@@ -174,11 +174,7 @@ impl Platform {
 
 }
 
-impl ConstantSized for Platform {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Platform {}
 
 impl MaximumPossibleSized for Platform {
     fn maximum_possible_size() -> usize {

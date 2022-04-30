@@ -63,11 +63,7 @@ impl MessageBody for CMSG_MOVE_SET_RAW_POSITION {
     }
 }
 
-impl ConstantSized for CMSG_MOVE_SET_RAW_POSITION {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_MOVE_SET_RAW_POSITION {}
 
 impl MaximumPossibleSized for CMSG_MOVE_SET_RAW_POSITION {
     fn maximum_possible_size() -> usize {

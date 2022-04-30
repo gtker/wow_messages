@@ -35,11 +35,7 @@ impl MessageBody for CMSG_GUILD_DEL_RANK {
     }
 }
 
-impl ConstantSized for CMSG_GUILD_DEL_RANK {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_GUILD_DEL_RANK {}
 
 impl MaximumPossibleSized for CMSG_GUILD_DEL_RANK {
     fn maximum_possible_size() -> usize {

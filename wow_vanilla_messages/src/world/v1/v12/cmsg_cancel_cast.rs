@@ -43,11 +43,7 @@ impl MessageBody for CMSG_CANCEL_CAST {
     }
 }
 
-impl ConstantSized for CMSG_CANCEL_CAST {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_CANCEL_CAST {}
 
 impl MaximumPossibleSized for CMSG_CANCEL_CAST {
     fn maximum_possible_size() -> usize {

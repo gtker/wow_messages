@@ -44,11 +44,7 @@ impl MessageBody for SMSG_CHAR_CREATE {
     }
 }
 
-impl ConstantSized for SMSG_CHAR_CREATE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_CHAR_CREATE {}
 
 impl MaximumPossibleSized for SMSG_CHAR_CREATE {
     fn maximum_possible_size() -> usize {

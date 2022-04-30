@@ -43,11 +43,7 @@ impl MessageBody for SMSG_QUERY_TIME_RESPONSE {
     }
 }
 
-impl ConstantSized for SMSG_QUERY_TIME_RESPONSE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_QUERY_TIME_RESPONSE {}
 
 impl MaximumPossibleSized for SMSG_QUERY_TIME_RESPONSE {
     fn maximum_possible_size() -> usize {

@@ -35,11 +35,7 @@ impl MessageBody for SMSG_FEIGN_DEATH_RESISTED {
     }
 }
 
-impl ConstantSized for SMSG_FEIGN_DEATH_RESISTED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_FEIGN_DEATH_RESISTED {}
 
 impl MaximumPossibleSized for SMSG_FEIGN_DEATH_RESISTED {
     fn maximum_possible_size() -> usize {

@@ -292,11 +292,7 @@ impl ReadableAndWritable for TrainerSpell {
 
 }
 
-impl ConstantSized for TrainerSpell {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for TrainerSpell {}
 
 impl MaximumPossibleSized for TrainerSpell {
     fn maximum_possible_size() -> usize {

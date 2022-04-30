@@ -101,11 +101,7 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
     }
 }
 
-impl ConstantSized for SMSG_LOOT_ROLL_WON {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_LOOT_ROLL_WON {}
 
 impl MaximumPossibleSized for SMSG_LOOT_ROLL_WON {
     fn maximum_possible_size() -> usize {

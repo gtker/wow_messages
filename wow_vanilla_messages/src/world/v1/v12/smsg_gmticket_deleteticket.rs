@@ -44,11 +44,7 @@ impl MessageBody for SMSG_GMTICKET_DELETETICKET {
     }
 }
 
-impl ConstantSized for SMSG_GMTICKET_DELETETICKET {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_GMTICKET_DELETETICKET {}
 
 impl MaximumPossibleSized for SMSG_GMTICKET_DELETETICKET {
     fn maximum_possible_size() -> usize {

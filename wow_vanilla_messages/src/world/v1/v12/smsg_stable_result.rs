@@ -44,11 +44,7 @@ impl MessageBody for SMSG_STABLE_RESULT {
     }
 }
 
-impl ConstantSized for SMSG_STABLE_RESULT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_STABLE_RESULT {}
 
 impl MaximumPossibleSized for SMSG_STABLE_RESULT {
     fn maximum_possible_size() -> usize {

@@ -93,11 +93,7 @@ impl ReadableAndWritable for GmSurveyQuestion {
 
 }
 
-impl ConstantSized for GmSurveyQuestion {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for GmSurveyQuestion {}
 
 impl MaximumPossibleSized for GmSurveyQuestion {
     fn maximum_possible_size() -> usize {

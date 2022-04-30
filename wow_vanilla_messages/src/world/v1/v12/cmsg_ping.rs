@@ -51,11 +51,7 @@ impl MessageBody for CMSG_PING {
     }
 }
 
-impl ConstantSized for CMSG_PING {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_PING {}
 
 impl MaximumPossibleSized for CMSG_PING {
     fn maximum_possible_size() -> usize {

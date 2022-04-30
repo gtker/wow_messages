@@ -131,11 +131,7 @@ impl MessageBody for SMSG_LEVELUP_INFO {
     }
 }
 
-impl ConstantSized for SMSG_LEVELUP_INFO {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_LEVELUP_INFO {}
 
 impl MaximumPossibleSized for SMSG_LEVELUP_INFO {
     fn maximum_possible_size() -> usize {

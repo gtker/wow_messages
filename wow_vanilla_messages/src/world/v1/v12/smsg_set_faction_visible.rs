@@ -43,11 +43,7 @@ impl MessageBody for SMSG_SET_FACTION_VISIBLE {
     }
 }
 
-impl ConstantSized for SMSG_SET_FACTION_VISIBLE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_SET_FACTION_VISIBLE {}
 
 impl MaximumPossibleSized for SMSG_SET_FACTION_VISIBLE {
     fn maximum_possible_size() -> usize {

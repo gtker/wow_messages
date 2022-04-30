@@ -43,11 +43,7 @@ impl MessageBody for CMSG_TUTORIAL_FLAG {
     }
 }
 
-impl ConstantSized for CMSG_TUTORIAL_FLAG {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_TUTORIAL_FLAG {}
 
 impl MaximumPossibleSized for CMSG_TUTORIAL_FLAG {
     fn maximum_possible_size() -> usize {

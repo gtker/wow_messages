@@ -44,11 +44,7 @@ impl MessageBody for SMSG_ACTIVATETAXIREPLY {
     }
 }
 
-impl ConstantSized for SMSG_ACTIVATETAXIREPLY {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_ACTIVATETAXIREPLY {}
 
 impl MaximumPossibleSized for SMSG_ACTIVATETAXIREPLY {
     fn maximum_possible_size() -> usize {

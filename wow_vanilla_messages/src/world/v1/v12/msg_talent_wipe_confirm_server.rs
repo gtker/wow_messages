@@ -52,11 +52,7 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Server {
     }
 }
 
-impl ConstantSized for MSG_TALENT_WIPE_CONFIRM_Server {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_TALENT_WIPE_CONFIRM_Server {}
 
 impl MaximumPossibleSized for MSG_TALENT_WIPE_CONFIRM_Server {
     fn maximum_possible_size() -> usize {

@@ -52,11 +52,7 @@ impl MessageBody for CMSG_UNSTABLE_PET {
     }
 }
 
-impl ConstantSized for CMSG_UNSTABLE_PET {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_UNSTABLE_PET {}
 
 impl MaximumPossibleSized for CMSG_UNSTABLE_PET {
     fn maximum_possible_size() -> usize {

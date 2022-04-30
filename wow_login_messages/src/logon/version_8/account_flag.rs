@@ -135,11 +135,7 @@ impl AccountFlag {
 
 }
 
-impl ConstantSized for AccountFlag {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for AccountFlag {}
 
 impl MaximumPossibleSized for AccountFlag {
     fn maximum_possible_size() -> usize {

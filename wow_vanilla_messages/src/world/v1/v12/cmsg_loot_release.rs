@@ -44,11 +44,7 @@ impl MessageBody for CMSG_LOOT_RELEASE {
     }
 }
 
-impl ConstantSized for CMSG_LOOT_RELEASE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_LOOT_RELEASE {}
 
 impl MaximumPossibleSized for CMSG_LOOT_RELEASE {
     fn maximum_possible_size() -> usize {

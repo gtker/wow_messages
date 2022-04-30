@@ -288,11 +288,7 @@ impl Race {
 
 }
 
-impl ConstantSized for Race {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Race {}
 
 impl MaximumPossibleSized for Race {
     fn maximum_possible_size() -> usize {

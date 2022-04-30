@@ -44,11 +44,7 @@ impl MessageBody for CMSG_GROUP_SET_LEADER {
     }
 }
 
-impl ConstantSized for CMSG_GROUP_SET_LEADER {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_GROUP_SET_LEADER {}
 
 impl MaximumPossibleSized for CMSG_GROUP_SET_LEADER {
     fn maximum_possible_size() -> usize {

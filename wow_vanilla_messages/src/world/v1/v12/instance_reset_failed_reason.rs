@@ -278,11 +278,7 @@ impl InstanceResetFailedReason {
 
 }
 
-impl ConstantSized for InstanceResetFailedReason {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for InstanceResetFailedReason {}
 
 impl MaximumPossibleSized for InstanceResetFailedReason {
     fn maximum_possible_size() -> usize {

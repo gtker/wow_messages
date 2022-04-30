@@ -44,11 +44,7 @@ impl MessageBody for SMSG_UPDATE_LAST_INSTANCE {
     }
 }
 
-impl ConstantSized for SMSG_UPDATE_LAST_INSTANCE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_UPDATE_LAST_INSTANCE {}
 
 impl MaximumPossibleSized for SMSG_UPDATE_LAST_INSTANCE {
     fn maximum_possible_size() -> usize {

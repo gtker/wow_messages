@@ -43,11 +43,7 @@ impl MessageBody for SMSG_UPDATE_INSTANCE_OWNERSHIP {
     }
 }
 
-impl ConstantSized for SMSG_UPDATE_INSTANCE_OWNERSHIP {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
 
 impl MaximumPossibleSized for SMSG_UPDATE_INSTANCE_OWNERSHIP {
     fn maximum_possible_size() -> usize {

@@ -280,11 +280,7 @@ impl StatusId {
 
 }
 
-impl ConstantSized for StatusId {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for StatusId {}
 
 impl MaximumPossibleSized for StatusId {
     fn maximum_possible_size() -> usize {

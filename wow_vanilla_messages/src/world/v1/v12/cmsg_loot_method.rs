@@ -62,11 +62,7 @@ impl MessageBody for CMSG_LOOT_METHOD {
     }
 }
 
-impl ConstantSized for CMSG_LOOT_METHOD {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_LOOT_METHOD {}
 
 impl MaximumPossibleSized for CMSG_LOOT_METHOD {
     fn maximum_possible_size() -> usize {

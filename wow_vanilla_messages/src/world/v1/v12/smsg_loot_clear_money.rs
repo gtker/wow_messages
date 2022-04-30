@@ -35,11 +35,7 @@ impl MessageBody for SMSG_LOOT_CLEAR_MONEY {
     }
 }
 
-impl ConstantSized for SMSG_LOOT_CLEAR_MONEY {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_LOOT_CLEAR_MONEY {}
 
 impl MaximumPossibleSized for SMSG_LOOT_CLEAR_MONEY {
     fn maximum_possible_size() -> usize {

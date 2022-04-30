@@ -44,11 +44,7 @@ impl MessageBody for CMSG_REQUEST_PARTY_MEMBER_STATS {
     }
 }
 
-impl ConstantSized for CMSG_REQUEST_PARTY_MEMBER_STATS {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_REQUEST_PARTY_MEMBER_STATS {}
 
 impl MaximumPossibleSized for CMSG_REQUEST_PARTY_MEMBER_STATS {
     fn maximum_possible_size() -> usize {

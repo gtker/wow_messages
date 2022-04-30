@@ -136,7 +136,9 @@ pub trait ReadableAndWritable: Sized {
 }
 
 pub trait ConstantSized: MaximumPossibleSized {
-    fn size() -> usize;
+    fn size() -> usize {
+        Self::maximum_possible_size()
+    }
 }
 
 pub trait VariableSized: MaximumPossibleSized {

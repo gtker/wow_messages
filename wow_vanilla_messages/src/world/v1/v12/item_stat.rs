@@ -93,11 +93,7 @@ impl ReadableAndWritable for ItemStat {
 
 }
 
-impl ConstantSized for ItemStat {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for ItemStat {}
 
 impl MaximumPossibleSized for ItemStat {
     fn maximum_possible_size() -> usize {

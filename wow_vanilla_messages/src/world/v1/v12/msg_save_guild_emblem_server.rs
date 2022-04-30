@@ -44,11 +44,7 @@ impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Server {
     }
 }
 
-impl ConstantSized for MSG_SAVE_GUILD_EMBLEM_Server {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_SAVE_GUILD_EMBLEM_Server {}
 
 impl MaximumPossibleSized for MSG_SAVE_GUILD_EMBLEM_Server {
     fn maximum_possible_size() -> usize {

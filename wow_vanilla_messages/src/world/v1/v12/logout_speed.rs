@@ -274,11 +274,7 @@ impl LogoutSpeed {
 
 }
 
-impl ConstantSized for LogoutSpeed {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for LogoutSpeed {}
 
 impl MaximumPossibleSized for LogoutSpeed {
     fn maximum_possible_size() -> usize {

@@ -332,11 +332,7 @@ impl WorldResult {
 
 }
 
-impl ConstantSized for WorldResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for WorldResult {}
 
 impl MaximumPossibleSized for WorldResult {
     fn maximum_possible_size() -> usize {

@@ -43,11 +43,7 @@ impl MessageBody for SMSG_PLAY_MUSIC {
     }
 }
 
-impl ConstantSized for SMSG_PLAY_MUSIC {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PLAY_MUSIC {}
 
 impl MaximumPossibleSized for SMSG_PLAY_MUSIC {
     fn maximum_possible_size() -> usize {

@@ -136,11 +136,7 @@ impl SimpleFlag {
 
 }
 
-impl ConstantSized for SimpleFlag {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SimpleFlag {}
 
 impl MaximumPossibleSized for SimpleFlag {
     fn maximum_possible_size() -> usize {

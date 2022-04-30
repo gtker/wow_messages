@@ -35,11 +35,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Client {
     }
 }
 
-impl ConstantSized for MSG_CORPSE_QUERY_Client {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_CORPSE_QUERY_Client {}
 
 impl MaximumPossibleSized for MSG_CORPSE_QUERY_Client {
     fn maximum_possible_size() -> usize {

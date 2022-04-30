@@ -68,11 +68,7 @@ impl MessageBody for SMSG_PETITION_SHOW_SIGNATURES {
     }
 }
 
-impl ConstantSized for SMSG_PETITION_SHOW_SIGNATURES {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PETITION_SHOW_SIGNATURES {}
 
 impl MaximumPossibleSized for SMSG_PETITION_SHOW_SIGNATURES {
     fn maximum_possible_size() -> usize {

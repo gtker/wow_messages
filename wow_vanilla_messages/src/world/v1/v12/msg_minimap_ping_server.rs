@@ -58,11 +58,7 @@ impl MessageBody for MSG_MINIMAP_PING_Server {
     }
 }
 
-impl ConstantSized for MSG_MINIMAP_PING_Server {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_MINIMAP_PING_Server {}
 
 impl MaximumPossibleSized for MSG_MINIMAP_PING_Server {
     fn maximum_possible_size() -> usize {

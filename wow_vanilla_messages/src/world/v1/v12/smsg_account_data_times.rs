@@ -48,11 +48,7 @@ impl MessageBody for SMSG_ACCOUNT_DATA_TIMES {
     }
 }
 
-impl ConstantSized for SMSG_ACCOUNT_DATA_TIMES {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_ACCOUNT_DATA_TIMES {}
 
 impl MaximumPossibleSized for SMSG_ACCOUNT_DATA_TIMES {
     fn maximum_possible_size() -> usize {

@@ -119,11 +119,7 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
     }
 }
 
-impl ConstantSized for SMSG_ITEM_PUSH_RESULT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_ITEM_PUSH_RESULT {}
 
 impl MaximumPossibleSized for SMSG_ITEM_PUSH_RESULT {
     fn maximum_possible_size() -> usize {

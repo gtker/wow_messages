@@ -172,11 +172,7 @@ impl NewItemCreationType {
 
 }
 
-impl ConstantSized for NewItemCreationType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for NewItemCreationType {}
 
 impl MaximumPossibleSized for NewItemCreationType {
     fn maximum_possible_size() -> usize {

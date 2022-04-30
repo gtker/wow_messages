@@ -44,11 +44,7 @@ impl MessageBody for SMSG_GAMEOBJECT_SPAWN_ANIM {
     }
 }
 
-impl ConstantSized for SMSG_GAMEOBJECT_SPAWN_ANIM {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_GAMEOBJECT_SPAWN_ANIM {}
 
 impl MaximumPossibleSized for SMSG_GAMEOBJECT_SPAWN_ANIM {
     fn maximum_possible_size() -> usize {

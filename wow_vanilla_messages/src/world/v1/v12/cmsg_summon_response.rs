@@ -44,11 +44,7 @@ impl MessageBody for CMSG_SUMMON_RESPONSE {
     }
 }
 
-impl ConstantSized for CMSG_SUMMON_RESPONSE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_SUMMON_RESPONSE {}
 
 impl MaximumPossibleSized for CMSG_SUMMON_RESPONSE {
     fn maximum_possible_size() -> usize {

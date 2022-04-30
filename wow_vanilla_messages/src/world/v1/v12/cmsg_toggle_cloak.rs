@@ -35,11 +35,7 @@ impl MessageBody for CMSG_TOGGLE_CLOAK {
     }
 }
 
-impl ConstantSized for CMSG_TOGGLE_CLOAK {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_TOGGLE_CLOAK {}
 
 impl MaximumPossibleSized for CMSG_TOGGLE_CLOAK {
     fn maximum_possible_size() -> usize {

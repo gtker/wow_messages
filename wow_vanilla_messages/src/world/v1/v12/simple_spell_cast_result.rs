@@ -274,11 +274,7 @@ impl SimpleSpellCastResult {
 
 }
 
-impl ConstantSized for SimpleSpellCastResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SimpleSpellCastResult {}
 
 impl MaximumPossibleSized for SimpleSpellCastResult {
     fn maximum_possible_size() -> usize {

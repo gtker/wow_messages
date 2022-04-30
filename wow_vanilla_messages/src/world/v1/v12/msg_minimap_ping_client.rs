@@ -49,11 +49,7 @@ impl MessageBody for MSG_MINIMAP_PING_Client {
     }
 }
 
-impl ConstantSized for MSG_MINIMAP_PING_Client {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_MINIMAP_PING_Client {}
 
 impl MaximumPossibleSized for MSG_MINIMAP_PING_Client {
     fn maximum_possible_size() -> usize {

@@ -52,11 +52,7 @@ impl MessageBody for SMSG_PLAY_OBJECT_SOUND {
     }
 }
 
-impl ConstantSized for SMSG_PLAY_OBJECT_SOUND {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PLAY_OBJECT_SOUND {}
 
 impl MaximumPossibleSized for SMSG_PLAY_OBJECT_SOUND {
     fn maximum_possible_size() -> usize {

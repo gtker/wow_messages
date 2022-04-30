@@ -274,11 +274,7 @@ impl GroupType {
 
 }
 
-impl ConstantSized for GroupType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for GroupType {}
 
 impl MaximumPossibleSized for GroupType {
     fn maximum_possible_size() -> usize {

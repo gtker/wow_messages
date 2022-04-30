@@ -288,11 +288,7 @@ impl PartyResult {
 
 }
 
-impl ConstantSized for PartyResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for PartyResult {}
 
 impl MaximumPossibleSized for PartyResult {
     fn maximum_possible_size() -> usize {

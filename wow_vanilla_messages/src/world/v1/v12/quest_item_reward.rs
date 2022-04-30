@@ -93,11 +93,7 @@ impl ReadableAndWritable for QuestItemReward {
 
 }
 
-impl ConstantSized for QuestItemReward {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for QuestItemReward {}
 
 impl MaximumPossibleSized for QuestItemReward {
     fn maximum_possible_size() -> usize {

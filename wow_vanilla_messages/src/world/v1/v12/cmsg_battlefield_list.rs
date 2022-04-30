@@ -44,11 +44,7 @@ impl MessageBody for CMSG_BATTLEFIELD_LIST {
     }
 }
 
-impl ConstantSized for CMSG_BATTLEFIELD_LIST {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_BATTLEFIELD_LIST {}
 
 impl MaximumPossibleSized for CMSG_BATTLEFIELD_LIST {
     fn maximum_possible_size() -> usize {

@@ -35,11 +35,7 @@ impl MessageBody for CMSG_GROUP_DISBAND {
     }
 }
 
-impl ConstantSized for CMSG_GROUP_DISBAND {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_GROUP_DISBAND {}
 
 impl MaximumPossibleSized for CMSG_GROUP_DISBAND {
     fn maximum_possible_size() -> usize {

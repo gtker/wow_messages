@@ -256,11 +256,7 @@ impl GroupMemberOnlineStatus {
 
 }
 
-impl ConstantSized for GroupMemberOnlineStatus {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for GroupMemberOnlineStatus {}
 
 impl MaximumPossibleSized for GroupMemberOnlineStatus {
     fn maximum_possible_size() -> usize {

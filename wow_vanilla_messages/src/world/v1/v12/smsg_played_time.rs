@@ -51,11 +51,7 @@ impl MessageBody for SMSG_PLAYED_TIME {
     }
 }
 
-impl ConstantSized for SMSG_PLAYED_TIME {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PLAYED_TIME {}
 
 impl MaximumPossibleSized for SMSG_PLAYED_TIME {
     fn maximum_possible_size() -> usize {

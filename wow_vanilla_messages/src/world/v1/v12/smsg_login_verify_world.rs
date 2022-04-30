@@ -72,11 +72,7 @@ impl MessageBody for SMSG_LOGIN_VERIFY_WORLD {
     }
 }
 
-impl ConstantSized for SMSG_LOGIN_VERIFY_WORLD {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_LOGIN_VERIFY_WORLD {}
 
 impl MaximumPossibleSized for SMSG_LOGIN_VERIFY_WORLD {
     fn maximum_possible_size() -> usize {

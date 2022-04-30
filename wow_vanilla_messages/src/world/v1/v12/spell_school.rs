@@ -284,11 +284,7 @@ impl SpellSchool {
 
 }
 
-impl ConstantSized for SpellSchool {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SpellSchool {}
 
 impl MaximumPossibleSized for SpellSchool {
     fn maximum_possible_size() -> usize {

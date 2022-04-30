@@ -69,11 +69,7 @@ impl MessageBody for SMSG_PROCRESIST {
     }
 }
 
-impl ConstantSized for SMSG_PROCRESIST {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PROCRESIST {}
 
 impl MaximumPossibleSized for SMSG_PROCRESIST {
     fn maximum_possible_size() -> usize {

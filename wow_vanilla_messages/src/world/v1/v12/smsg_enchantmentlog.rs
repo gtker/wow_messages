@@ -76,11 +76,7 @@ impl MessageBody for SMSG_ENCHANTMENTLOG {
     }
 }
 
-impl ConstantSized for SMSG_ENCHANTMENTLOG {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_ENCHANTMENTLOG {}
 
 impl MaximumPossibleSized for SMSG_ENCHANTMENTLOG {
     fn maximum_possible_size() -> usize {

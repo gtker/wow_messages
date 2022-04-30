@@ -256,11 +256,7 @@ impl Map {
 
 }
 
-impl ConstantSized for Map {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Map {}
 
 impl MaximumPossibleSized for Map {
     fn maximum_possible_size() -> usize {

@@ -44,11 +44,7 @@ impl MessageBody for CMSG_GOSSIP_HELLO {
     }
 }
 
-impl ConstantSized for CMSG_GOSSIP_HELLO {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_GOSSIP_HELLO {}
 
 impl MaximumPossibleSized for CMSG_GOSSIP_HELLO {
     fn maximum_possible_size() -> usize {

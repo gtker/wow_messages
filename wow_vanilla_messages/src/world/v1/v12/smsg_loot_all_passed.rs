@@ -76,11 +76,7 @@ impl MessageBody for SMSG_LOOT_ALL_PASSED {
     }
 }
 
-impl ConstantSized for SMSG_LOOT_ALL_PASSED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_LOOT_ALL_PASSED {}
 
 impl MaximumPossibleSized for SMSG_LOOT_ALL_PASSED {
     fn maximum_possible_size() -> usize {

@@ -216,11 +216,7 @@ impl TradeStatus {
 
 }
 
-impl ConstantSized for TradeStatus {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for TradeStatus {}
 
 impl MaximumPossibleSized for TradeStatus {
     fn maximum_possible_size() -> usize {

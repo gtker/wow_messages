@@ -35,11 +35,7 @@ impl MessageBody for SMSG_ATTACKSWING_DEADTARGET {
     }
 }
 
-impl ConstantSized for SMSG_ATTACKSWING_DEADTARGET {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_ATTACKSWING_DEADTARGET {}
 
 impl MaximumPossibleSized for SMSG_ATTACKSWING_DEADTARGET {
     fn maximum_possible_size() -> usize {

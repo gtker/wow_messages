@@ -44,11 +44,7 @@ impl MessageBody for CMSG_DUEL_ACCEPTED {
     }
 }
 
-impl ConstantSized for CMSG_DUEL_ACCEPTED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_DUEL_ACCEPTED {}
 
 impl MaximumPossibleSized for CMSG_DUEL_ACCEPTED {
     fn maximum_possible_size() -> usize {

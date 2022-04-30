@@ -43,11 +43,7 @@ impl MessageBody for CMSG_SET_ACTIONBAR_TOGGLES {
     }
 }
 
-impl ConstantSized for CMSG_SET_ACTIONBAR_TOGGLES {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_SET_ACTIONBAR_TOGGLES {}
 
 impl MaximumPossibleSized for CMSG_SET_ACTIONBAR_TOGGLES {
     fn maximum_possible_size() -> usize {

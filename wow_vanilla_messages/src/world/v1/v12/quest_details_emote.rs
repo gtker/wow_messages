@@ -93,11 +93,7 @@ impl ReadableAndWritable for QuestDetailsEmote {
 
 }
 
-impl ConstantSized for QuestDetailsEmote {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for QuestDetailsEmote {}
 
 impl MaximumPossibleSized for QuestDetailsEmote {
     fn maximum_possible_size() -> usize {

@@ -302,11 +302,7 @@ impl GuildCommandResult {
 
 }
 
-impl ConstantSized for GuildCommandResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for GuildCommandResult {}
 
 impl MaximumPossibleSized for GuildCommandResult {
     fn maximum_possible_size() -> usize {

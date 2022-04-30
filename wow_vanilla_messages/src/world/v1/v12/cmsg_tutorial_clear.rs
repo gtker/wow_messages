@@ -35,11 +35,7 @@ impl MessageBody for CMSG_TUTORIAL_CLEAR {
     }
 }
 
-impl ConstantSized for CMSG_TUTORIAL_CLEAR {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_TUTORIAL_CLEAR {}
 
 impl MaximumPossibleSized for CMSG_TUTORIAL_CLEAR {
     fn maximum_possible_size() -> usize {

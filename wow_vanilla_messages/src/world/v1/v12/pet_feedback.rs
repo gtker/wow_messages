@@ -278,11 +278,7 @@ impl PetFeedback {
 
 }
 
-impl ConstantSized for PetFeedback {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for PetFeedback {}
 
 impl MaximumPossibleSized for PetFeedback {
     fn maximum_possible_size() -> usize {

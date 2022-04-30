@@ -35,11 +35,7 @@ impl MessageBody for CMSG_RESET_INSTANCES {
     }
 }
 
-impl ConstantSized for CMSG_RESET_INSTANCES {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_RESET_INSTANCES {}
 
 impl MaximumPossibleSized for CMSG_RESET_INSTANCES {
     fn maximum_possible_size() -> usize {

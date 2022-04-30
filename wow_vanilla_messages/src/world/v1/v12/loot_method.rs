@@ -286,11 +286,7 @@ impl LootMethod {
 
 }
 
-impl ConstantSized for LootMethod {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for LootMethod {}
 
 impl MaximumPossibleSized for LootMethod {
     fn maximum_possible_size() -> usize {

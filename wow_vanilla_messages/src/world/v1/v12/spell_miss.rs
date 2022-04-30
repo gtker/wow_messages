@@ -95,11 +95,7 @@ impl ReadableAndWritable for SpellMiss {
 
 }
 
-impl ConstantSized for SpellMiss {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SpellMiss {}
 
 impl MaximumPossibleSized for SpellMiss {
     fn maximum_possible_size() -> usize {

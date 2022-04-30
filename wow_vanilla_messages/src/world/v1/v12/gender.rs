@@ -276,11 +276,7 @@ impl Gender {
 
 }
 
-impl ConstantSized for Gender {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Gender {}
 
 impl MaximumPossibleSized for Gender {
     fn maximum_possible_size() -> usize {

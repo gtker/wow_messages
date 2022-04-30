@@ -43,11 +43,7 @@ impl MessageBody for SMSG_LOOT_REMOVED {
     }
 }
 
-impl ConstantSized for SMSG_LOOT_REMOVED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_LOOT_REMOVED {}
 
 impl MaximumPossibleSized for SMSG_LOOT_REMOVED {
     fn maximum_possible_size() -> usize {

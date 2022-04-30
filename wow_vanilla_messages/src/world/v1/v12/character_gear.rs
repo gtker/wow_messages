@@ -94,11 +94,7 @@ impl ReadableAndWritable for CharacterGear {
 
 }
 
-impl ConstantSized for CharacterGear {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CharacterGear {}
 
 impl MaximumPossibleSized for CharacterGear {
     fn maximum_possible_size() -> usize {

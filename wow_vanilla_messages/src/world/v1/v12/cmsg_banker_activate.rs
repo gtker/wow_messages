@@ -44,11 +44,7 @@ impl MessageBody for CMSG_BANKER_ACTIVATE {
     }
 }
 
-impl ConstantSized for CMSG_BANKER_ACTIVATE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_BANKER_ACTIVATE {}
 
 impl MaximumPossibleSized for CMSG_BANKER_ACTIVATE {
     fn maximum_possible_size() -> usize {

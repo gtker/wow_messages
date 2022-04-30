@@ -172,11 +172,7 @@ impl QuestCompletable {
 
 }
 
-impl ConstantSized for QuestCompletable {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for QuestCompletable {}
 
 impl MaximumPossibleSized for QuestCompletable {
     fn maximum_possible_size() -> usize {

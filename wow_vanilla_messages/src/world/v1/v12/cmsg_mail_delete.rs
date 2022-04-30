@@ -52,11 +52,7 @@ impl MessageBody for CMSG_MAIL_DELETE {
     }
 }
 
-impl ConstantSized for CMSG_MAIL_DELETE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_MAIL_DELETE {}
 
 impl MaximumPossibleSized for CMSG_MAIL_DELETE {
     fn maximum_possible_size() -> usize {

@@ -276,11 +276,7 @@ impl CastFlags {
 
 }
 
-impl ConstantSized for CastFlags {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CastFlags {}
 
 impl MaximumPossibleSized for CastFlags {
     fn maximum_possible_size() -> usize {

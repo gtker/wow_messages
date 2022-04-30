@@ -52,11 +52,7 @@ impl MessageBody for SMSG_LOOT_RELEASE_RESPONSE {
     }
 }
 
-impl ConstantSized for SMSG_LOOT_RELEASE_RESPONSE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_LOOT_RELEASE_RESPONSE {}
 
 impl MaximumPossibleSized for SMSG_LOOT_RELEASE_RESPONSE {
     fn maximum_possible_size() -> usize {

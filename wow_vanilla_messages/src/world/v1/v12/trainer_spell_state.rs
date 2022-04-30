@@ -276,11 +276,7 @@ impl TrainerSpellState {
 
 }
 
-impl ConstantSized for TrainerSpellState {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for TrainerSpellState {}
 
 impl MaximumPossibleSized for TrainerSpellState {
     fn maximum_possible_size() -> usize {

@@ -276,11 +276,7 @@ impl BattlegroundWinner {
 
 }
 
-impl ConstantSized for BattlegroundWinner {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for BattlegroundWinner {}
 
 impl MaximumPossibleSized for BattlegroundWinner {
     fn maximum_possible_size() -> usize {

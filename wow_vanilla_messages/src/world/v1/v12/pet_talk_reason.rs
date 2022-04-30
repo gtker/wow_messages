@@ -172,11 +172,7 @@ impl PetTalkReason {
 
 }
 
-impl ConstantSized for PetTalkReason {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for PetTalkReason {}
 
 impl MaximumPossibleSized for PetTalkReason {
     fn maximum_possible_size() -> usize {

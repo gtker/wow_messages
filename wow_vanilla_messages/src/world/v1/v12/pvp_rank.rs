@@ -310,11 +310,7 @@ impl PvpRank {
 
 }
 
-impl ConstantSized for PvpRank {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for PvpRank {}
 
 impl MaximumPossibleSized for PvpRank {
     fn maximum_possible_size() -> usize {

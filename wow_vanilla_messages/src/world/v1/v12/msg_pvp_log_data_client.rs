@@ -35,11 +35,7 @@ impl MessageBody for MSG_PVP_LOG_DATA_Client {
     }
 }
 
-impl ConstantSized for MSG_PVP_LOG_DATA_Client {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_PVP_LOG_DATA_Client {}
 
 impl MaximumPossibleSized for MSG_PVP_LOG_DATA_Client {
     fn maximum_possible_size() -> usize {

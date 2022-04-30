@@ -44,11 +44,7 @@ impl MessageBody for SMSG_GM_TICKET_STATUS_UPDATE {
     }
 }
 
-impl ConstantSized for SMSG_GM_TICKET_STATUS_UPDATE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_GM_TICKET_STATUS_UPDATE {}
 
 impl MaximumPossibleSized for SMSG_GM_TICKET_STATUS_UPDATE {
     fn maximum_possible_size() -> usize {

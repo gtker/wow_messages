@@ -215,11 +215,7 @@ impl FactionFlag {
 
 }
 
-impl ConstantSized for FactionFlag {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for FactionFlag {}
 
 impl MaximumPossibleSized for FactionFlag {
     fn maximum_possible_size() -> usize {

@@ -44,11 +44,7 @@ impl MessageBody for CMSG_TAXIQUERYAVAILABLENODES {
     }
 }
 
-impl ConstantSized for CMSG_TAXIQUERYAVAILABLENODES {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_TAXIQUERYAVAILABLENODES {}
 
 impl MaximumPossibleSized for CMSG_TAXIQUERYAVAILABLENODES {
     fn maximum_possible_size() -> usize {

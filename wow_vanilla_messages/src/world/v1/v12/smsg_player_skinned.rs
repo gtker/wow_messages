@@ -35,11 +35,7 @@ impl MessageBody for SMSG_PLAYER_SKINNED {
     }
 }
 
-impl ConstantSized for SMSG_PLAYER_SKINNED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PLAYER_SKINNED {}
 
 impl MaximumPossibleSized for SMSG_PLAYER_SKINNED {
     fn maximum_possible_size() -> usize {

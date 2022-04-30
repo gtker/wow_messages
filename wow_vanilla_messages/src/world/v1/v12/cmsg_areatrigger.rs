@@ -43,11 +43,7 @@ impl MessageBody for CMSG_AREATRIGGER {
     }
 }
 
-impl ConstantSized for CMSG_AREATRIGGER {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_AREATRIGGER {}
 
 impl MaximumPossibleSized for CMSG_AREATRIGGER {
     fn maximum_possible_size() -> usize {

@@ -44,11 +44,7 @@ impl MessageBody for CMSG_PET_UNLEARN {
     }
 }
 
-impl ConstantSized for CMSG_PET_UNLEARN {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_PET_UNLEARN {}
 
 impl MaximumPossibleSized for CMSG_PET_UNLEARN {
     fn maximum_possible_size() -> usize {

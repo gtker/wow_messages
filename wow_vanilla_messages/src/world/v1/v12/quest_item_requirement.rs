@@ -115,11 +115,7 @@ impl ReadableAndWritable for QuestItemRequirement {
 
 }
 
-impl ConstantSized for QuestItemRequirement {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for QuestItemRequirement {}
 
 impl MaximumPossibleSized for QuestItemRequirement {
     fn maximum_possible_size() -> usize {

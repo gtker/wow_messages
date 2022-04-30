@@ -52,11 +52,7 @@ impl MessageBody for CMSG_MOVE_TIME_SKIPPED {
     }
 }
 
-impl ConstantSized for CMSG_MOVE_TIME_SKIPPED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_MOVE_TIME_SKIPPED {}
 
 impl MaximumPossibleSized for CMSG_MOVE_TIME_SKIPPED {
     fn maximum_possible_size() -> usize {

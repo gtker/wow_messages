@@ -43,11 +43,7 @@ impl MessageBody for CMSG_UNLEARN_SKILL {
     }
 }
 
-impl ConstantSized for CMSG_UNLEARN_SKILL {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_UNLEARN_SKILL {}
 
 impl MaximumPossibleSized for CMSG_UNLEARN_SKILL {
     fn maximum_possible_size() -> usize {

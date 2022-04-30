@@ -51,11 +51,7 @@ impl MessageBody for SMSG_UPDATE_AURA_DURATION {
     }
 }
 
-impl ConstantSized for SMSG_UPDATE_AURA_DURATION {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_UPDATE_AURA_DURATION {}
 
 impl MaximumPossibleSized for SMSG_UPDATE_AURA_DURATION {
     fn maximum_possible_size() -> usize {

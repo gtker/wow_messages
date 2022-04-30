@@ -44,11 +44,7 @@ impl MessageBody for SMSG_CHARACTER_LOGIN_FAILED {
     }
 }
 
-impl ConstantSized for SMSG_CHARACTER_LOGIN_FAILED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_CHARACTER_LOGIN_FAILED {}
 
 impl MaximumPossibleSized for SMSG_CHARACTER_LOGIN_FAILED {
     fn maximum_possible_size() -> usize {

@@ -44,11 +44,7 @@ impl MessageBody for CMSG_PET_STOP_ATTACK {
     }
 }
 
-impl ConstantSized for CMSG_PET_STOP_ATTACK {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_PET_STOP_ATTACK {}
 
 impl MaximumPossibleSized for CMSG_PET_STOP_ATTACK {
     fn maximum_possible_size() -> usize {

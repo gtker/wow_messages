@@ -44,11 +44,7 @@ impl MessageBody for CMSG_DUEL_CANCELLED {
     }
 }
 
-impl ConstantSized for CMSG_DUEL_CANCELLED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_DUEL_CANCELLED {}
 
 impl MaximumPossibleSized for CMSG_DUEL_CANCELLED {
     fn maximum_possible_size() -> usize {

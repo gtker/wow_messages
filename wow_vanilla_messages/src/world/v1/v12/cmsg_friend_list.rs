@@ -35,11 +35,7 @@ impl MessageBody for CMSG_FRIEND_LIST {
     }
 }
 
-impl ConstantSized for CMSG_FRIEND_LIST {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_FRIEND_LIST {}
 
 impl MaximumPossibleSized for CMSG_FRIEND_LIST {
     fn maximum_possible_size() -> usize {

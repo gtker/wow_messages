@@ -44,11 +44,7 @@ impl MessageBody for SMSG_TRIGGER_CINEMATIC {
     }
 }
 
-impl ConstantSized for SMSG_TRIGGER_CINEMATIC {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_TRIGGER_CINEMATIC {}
 
 impl MaximumPossibleSized for SMSG_TRIGGER_CINEMATIC {
     fn maximum_possible_size() -> usize {

@@ -276,11 +276,7 @@ impl PetReactState {
 
 }
 
-impl ConstantSized for PetReactState {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for PetReactState {}
 
 impl MaximumPossibleSized for PetReactState {
     fn maximum_possible_size() -> usize {

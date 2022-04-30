@@ -35,11 +35,7 @@ impl MessageBody for CMSG_LOGOUT_REQUEST {
     }
 }
 
-impl ConstantSized for CMSG_LOGOUT_REQUEST {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_LOGOUT_REQUEST {}
 
 impl MaximumPossibleSized for CMSG_LOGOUT_REQUEST {
     fn maximum_possible_size() -> usize {

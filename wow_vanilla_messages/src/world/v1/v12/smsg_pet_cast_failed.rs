@@ -60,11 +60,7 @@ impl MessageBody for SMSG_PET_CAST_FAILED {
     }
 }
 
-impl ConstantSized for SMSG_PET_CAST_FAILED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PET_CAST_FAILED {}
 
 impl MaximumPossibleSized for SMSG_PET_CAST_FAILED {
     fn maximum_possible_size() -> usize {

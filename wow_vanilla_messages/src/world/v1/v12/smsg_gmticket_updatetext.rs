@@ -44,11 +44,7 @@ impl MessageBody for SMSG_GMTICKET_UPDATETEXT {
     }
 }
 
-impl ConstantSized for SMSG_GMTICKET_UPDATETEXT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_GMTICKET_UPDATETEXT {}
 
 impl MaximumPossibleSized for SMSG_GMTICKET_UPDATETEXT {
     fn maximum_possible_size() -> usize {

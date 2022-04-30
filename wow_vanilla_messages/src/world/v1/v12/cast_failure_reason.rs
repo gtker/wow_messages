@@ -562,11 +562,7 @@ impl CastFailureReason {
 
 }
 
-impl ConstantSized for CastFailureReason {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CastFailureReason {}
 
 impl MaximumPossibleSized for CastFailureReason {
     fn maximum_possible_size() -> usize {

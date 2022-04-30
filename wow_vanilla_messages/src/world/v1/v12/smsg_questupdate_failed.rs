@@ -43,11 +43,7 @@ impl MessageBody for SMSG_QUESTUPDATE_FAILED {
     }
 }
 
-impl ConstantSized for SMSG_QUESTUPDATE_FAILED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_QUESTUPDATE_FAILED {}
 
 impl MaximumPossibleSized for SMSG_QUESTUPDATE_FAILED {
     fn maximum_possible_size() -> usize {

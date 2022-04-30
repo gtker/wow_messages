@@ -93,11 +93,7 @@ impl ReadableAndWritable for SpellCooldownStatus {
 
 }
 
-impl ConstantSized for SpellCooldownStatus {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SpellCooldownStatus {}
 
 impl MaximumPossibleSized for SpellCooldownStatus {
     fn maximum_possible_size() -> usize {

@@ -44,11 +44,7 @@ impl MessageBody for SMSG_INVALIDATE_PLAYER {
     }
 }
 
-impl ConstantSized for SMSG_INVALIDATE_PLAYER {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_INVALIDATE_PLAYER {}
 
 impl MaximumPossibleSized for SMSG_INVALIDATE_PLAYER {
     fn maximum_possible_size() -> usize {

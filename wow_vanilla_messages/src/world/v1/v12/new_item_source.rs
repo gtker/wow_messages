@@ -172,11 +172,7 @@ impl NewItemSource {
 
 }
 
-impl ConstantSized for NewItemSource {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for NewItemSource {}
 
 impl MaximumPossibleSized for NewItemSource {
     fn maximum_possible_size() -> usize {

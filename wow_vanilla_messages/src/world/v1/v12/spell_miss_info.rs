@@ -192,11 +192,7 @@ impl SpellMissInfo {
 
 }
 
-impl ConstantSized for SpellMissInfo {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SpellMissInfo {}
 
 impl MaximumPossibleSized for SpellMissInfo {
     fn maximum_possible_size() -> usize {

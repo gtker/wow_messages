@@ -52,11 +52,7 @@ impl MessageBody for SMSG_SPELL_FAILED_OTHER {
     }
 }
 
-impl ConstantSized for SMSG_SPELL_FAILED_OTHER {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_SPELL_FAILED_OTHER {}
 
 impl MaximumPossibleSized for SMSG_SPELL_FAILED_OTHER {
     fn maximum_possible_size() -> usize {

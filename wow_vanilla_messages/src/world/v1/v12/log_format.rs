@@ -274,11 +274,7 @@ impl LogFormat {
 
 }
 
-impl ConstantSized for LogFormat {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for LogFormat {}
 
 impl MaximumPossibleSized for LogFormat {
     fn maximum_possible_size() -> usize {

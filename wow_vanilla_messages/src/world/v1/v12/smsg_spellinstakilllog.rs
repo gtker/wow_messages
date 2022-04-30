@@ -52,11 +52,7 @@ impl MessageBody for SMSG_SPELLINSTAKILLLOG {
     }
 }
 
-impl ConstantSized for SMSG_SPELLINSTAKILLLOG {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_SPELLINSTAKILLLOG {}
 
 impl MaximumPossibleSized for SMSG_SPELLINSTAKILLLOG {
     fn maximum_possible_size() -> usize {

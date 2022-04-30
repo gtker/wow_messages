@@ -44,11 +44,7 @@ impl MessageBody for CMSG_SET_ACTIVE_MOVER {
     }
 }
 
-impl ConstantSized for CMSG_SET_ACTIVE_MOVER {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_SET_ACTIVE_MOVER {}
 
 impl MaximumPossibleSized for CMSG_SET_ACTIVE_MOVER {
     fn maximum_possible_size() -> usize {

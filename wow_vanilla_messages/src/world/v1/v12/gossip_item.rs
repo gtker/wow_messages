@@ -115,11 +115,7 @@ impl ReadableAndWritable for GossipItem {
 
 }
 
-impl ConstantSized for GossipItem {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for GossipItem {}
 
 impl MaximumPossibleSized for GossipItem {
     fn maximum_possible_size() -> usize {

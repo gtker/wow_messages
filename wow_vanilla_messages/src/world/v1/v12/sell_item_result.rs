@@ -282,11 +282,7 @@ impl SellItemResult {
 
 }
 
-impl ConstantSized for SellItemResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SellItemResult {}
 
 impl MaximumPossibleSized for SellItemResult {
     fn maximum_possible_size() -> usize {

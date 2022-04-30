@@ -61,11 +61,7 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
     }
 }
 
-impl ConstantSized for SMSG_RAID_INSTANCE_MESSAGE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_RAID_INSTANCE_MESSAGE {}
 
 impl MaximumPossibleSized for SMSG_RAID_INSTANCE_MESSAGE {
     fn maximum_possible_size() -> usize {

@@ -196,11 +196,7 @@ impl RealmFlag {
 
 }
 
-impl ConstantSized for RealmFlag {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for RealmFlag {}
 
 impl MaximumPossibleSized for RealmFlag {
     fn maximum_possible_size() -> usize {

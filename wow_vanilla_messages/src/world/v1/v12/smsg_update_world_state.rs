@@ -44,11 +44,7 @@ impl MessageBody for SMSG_UPDATE_WORLD_STATE {
     }
 }
 
-impl ConstantSized for SMSG_UPDATE_WORLD_STATE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_UPDATE_WORLD_STATE {}
 
 impl MaximumPossibleSized for SMSG_UPDATE_WORLD_STATE {
     fn maximum_possible_size() -> usize {

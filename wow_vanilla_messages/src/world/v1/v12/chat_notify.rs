@@ -334,11 +334,7 @@ impl ChatNotify {
 
 }
 
-impl ConstantSized for ChatNotify {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for ChatNotify {}
 
 impl MaximumPossibleSized for ChatNotify {
     fn maximum_possible_size() -> usize {

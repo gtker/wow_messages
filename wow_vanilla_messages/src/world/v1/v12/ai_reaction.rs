@@ -178,11 +178,7 @@ impl AiReaction {
 
 }
 
-impl ConstantSized for AiReaction {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for AiReaction {}
 
 impl MaximumPossibleSized for AiReaction {
     fn maximum_possible_size() -> usize {

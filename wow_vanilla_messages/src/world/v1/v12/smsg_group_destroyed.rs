@@ -35,11 +35,7 @@ impl MessageBody for SMSG_GROUP_DESTROYED {
     }
 }
 
-impl ConstantSized for SMSG_GROUP_DESTROYED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_GROUP_DESTROYED {}
 
 impl MaximumPossibleSized for SMSG_GROUP_DESTROYED {
     fn maximum_possible_size() -> usize {

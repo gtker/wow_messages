@@ -35,11 +35,7 @@ impl MessageBody for CMSG_GROUP_ACCEPT {
     }
 }
 
-impl ConstantSized for CMSG_GROUP_ACCEPT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_GROUP_ACCEPT {}
 
 impl MaximumPossibleSized for CMSG_GROUP_ACCEPT {
     fn maximum_possible_size() -> usize {

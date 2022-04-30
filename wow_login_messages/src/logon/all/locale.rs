@@ -198,11 +198,7 @@ impl Locale {
 
 }
 
-impl ConstantSized for Locale {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Locale {}
 
 impl MaximumPossibleSized for Locale {
     fn maximum_possible_size() -> usize {

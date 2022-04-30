@@ -35,11 +35,7 @@ impl MessageBody for SMSG_DURABILITY_DAMAGE_DEATH {
     }
 }
 
-impl ConstantSized for SMSG_DURABILITY_DAMAGE_DEATH {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_DURABILITY_DAMAGE_DEATH {}
 
 impl MaximumPossibleSized for SMSG_DURABILITY_DAMAGE_DEATH {
     fn maximum_possible_size() -> usize {

@@ -52,11 +52,7 @@ impl MessageBody for CMSG_QUESTGIVER_REQUEST_REWARD {
     }
 }
 
-impl ConstantSized for CMSG_QUESTGIVER_REQUEST_REWARD {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_QUESTGIVER_REQUEST_REWARD {}
 
 impl MaximumPossibleSized for CMSG_QUESTGIVER_REQUEST_REWARD {
     fn maximum_possible_size() -> usize {

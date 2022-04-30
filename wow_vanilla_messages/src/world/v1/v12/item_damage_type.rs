@@ -115,11 +115,7 @@ impl ReadableAndWritable for ItemDamageType {
 
 }
 
-impl ConstantSized for ItemDamageType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for ItemDamageType {}
 
 impl MaximumPossibleSized for ItemDamageType {
     fn maximum_possible_size() -> usize {

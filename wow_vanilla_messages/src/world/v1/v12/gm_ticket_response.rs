@@ -182,11 +182,7 @@ impl GmTicketResponse {
 
 }
 
-impl ConstantSized for GmTicketResponse {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for GmTicketResponse {}
 
 impl MaximumPossibleSized for GmTicketResponse {
     fn maximum_possible_size() -> usize {

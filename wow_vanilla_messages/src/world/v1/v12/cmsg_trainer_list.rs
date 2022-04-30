@@ -44,11 +44,7 @@ impl MessageBody for CMSG_TRAINER_LIST {
     }
 }
 
-impl ConstantSized for CMSG_TRAINER_LIST {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_TRAINER_LIST {}
 
 impl MaximumPossibleSized for CMSG_TRAINER_LIST {
     fn maximum_possible_size() -> usize {

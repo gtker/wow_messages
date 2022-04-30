@@ -52,11 +52,7 @@ impl MessageBody for CMSG_MAIL_RETURN_TO_SENDER {
     }
 }
 
-impl ConstantSized for CMSG_MAIL_RETURN_TO_SENDER {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_MAIL_RETURN_TO_SENDER {}
 
 impl MaximumPossibleSized for CMSG_MAIL_RETURN_TO_SENDER {
     fn maximum_possible_size() -> usize {

@@ -196,11 +196,7 @@ impl CharacterFlags {
 
 }
 
-impl ConstantSized for CharacterFlags {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CharacterFlags {}
 
 impl MaximumPossibleSized for CharacterFlags {
     fn maximum_possible_size() -> usize {

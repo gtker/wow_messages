@@ -181,11 +181,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Client {
 
 }
 
-impl ConstantSized for CMD_AUTH_RECONNECT_PROOF_Client {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMD_AUTH_RECONNECT_PROOF_Client {}
 
 impl MaximumPossibleSized for CMD_AUTH_RECONNECT_PROOF_Client {
     fn maximum_possible_size() -> usize {

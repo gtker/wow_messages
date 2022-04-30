@@ -60,11 +60,7 @@ impl MessageBody for SMSG_SUMMON_REQUEST {
     }
 }
 
-impl ConstantSized for SMSG_SUMMON_REQUEST {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_SUMMON_REQUEST {}
 
 impl MaximumPossibleSized for SMSG_SUMMON_REQUEST {
     fn maximum_possible_size() -> usize {

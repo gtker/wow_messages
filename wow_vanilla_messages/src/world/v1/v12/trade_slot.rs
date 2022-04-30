@@ -358,11 +358,7 @@ impl ReadableAndWritable for TradeSlot {
 
 }
 
-impl ConstantSized for TradeSlot {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for TradeSlot {}
 
 impl MaximumPossibleSized for TradeSlot {
     fn maximum_possible_size() -> usize {

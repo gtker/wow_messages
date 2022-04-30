@@ -203,11 +203,7 @@ impl ReadableAndWritable for ListInventoryItem {
 
 }
 
-impl ConstantSized for ListInventoryItem {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for ListInventoryItem {}
 
 impl MaximumPossibleSized for ListInventoryItem {
     fn maximum_possible_size() -> usize {

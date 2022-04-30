@@ -52,11 +52,7 @@ impl MessageBody for SMSG_PLAY_SPELL_IMPACT {
     }
 }
 
-impl ConstantSized for SMSG_PLAY_SPELL_IMPACT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PLAY_SPELL_IMPACT {}
 
 impl MaximumPossibleSized for SMSG_PLAY_SPELL_IMPACT {
     fn maximum_possible_size() -> usize {

@@ -44,11 +44,7 @@ impl MessageBody for CMSG_GROUP_UNINVITE_GUID {
     }
 }
 
-impl ConstantSized for CMSG_GROUP_UNINVITE_GUID {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_GROUP_UNINVITE_GUID {}
 
 impl MaximumPossibleSized for CMSG_GROUP_UNINVITE_GUID {
     fn maximum_possible_size() -> usize {

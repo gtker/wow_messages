@@ -138,13 +138,8 @@ impl Writer {
     }
 
     pub fn constant_sized<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, name: S, f: F) {
-        self.open_curly(format!("impl ConstantSized for {}", name.as_ref()));
-        self.open_curly("fn size() -> usize");
-
-        self.wln("Self::maximum_possible_size()");
-
-        self.closing_curly();
-        self.closing_curly_newline();
+        self.wln(format!("impl ConstantSized for {} {{}}", name.as_ref()));
+        self.newline();
 
         self.open_curly(format!("impl MaximumPossibleSized for {}", name.as_ref()));
         self.open_curly("fn maximum_possible_size() -> usize");

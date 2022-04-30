@@ -43,11 +43,7 @@ impl MessageBody for CMSG_SET_AMMO {
     }
 }
 
-impl ConstantSized for CMSG_SET_AMMO {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_SET_AMMO {}
 
 impl MaximumPossibleSized for CMSG_SET_AMMO {
     fn maximum_possible_size() -> usize {

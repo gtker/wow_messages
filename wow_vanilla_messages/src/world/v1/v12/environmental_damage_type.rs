@@ -180,11 +180,7 @@ impl EnvironmentalDamageType {
 
 }
 
-impl ConstantSized for EnvironmentalDamageType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for EnvironmentalDamageType {}
 
 impl MaximumPossibleSized for EnvironmentalDamageType {
     fn maximum_possible_size() -> usize {

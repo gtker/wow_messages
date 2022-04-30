@@ -52,11 +52,7 @@ impl MessageBody for SMSG_DUEL_REQUESTED {
     }
 }
 
-impl ConstantSized for SMSG_DUEL_REQUESTED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_DUEL_REQUESTED {}
 
 impl MaximumPossibleSized for SMSG_DUEL_REQUESTED {
     fn maximum_possible_size() -> usize {

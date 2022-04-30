@@ -280,11 +280,7 @@ impl MailType {
 
 }
 
-impl ConstantSized for MailType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MailType {}
 
 impl MaximumPossibleSized for MailType {
     fn maximum_possible_size() -> usize {

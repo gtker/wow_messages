@@ -35,11 +35,7 @@ impl MessageBody for SMSG_CANCEL_COMBAT {
     }
 }
 
-impl ConstantSized for SMSG_CANCEL_COMBAT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_CANCEL_COMBAT {}
 
 impl MaximumPossibleSized for SMSG_CANCEL_COMBAT {
     fn maximum_possible_size() -> usize {

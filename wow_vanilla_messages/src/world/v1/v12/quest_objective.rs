@@ -137,11 +137,7 @@ impl ReadableAndWritable for QuestObjective {
 
 }
 
-impl ConstantSized for QuestObjective {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for QuestObjective {}
 
 impl MaximumPossibleSized for QuestObjective {
     fn maximum_possible_size() -> usize {

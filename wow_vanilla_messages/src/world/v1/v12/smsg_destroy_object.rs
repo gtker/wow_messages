@@ -44,11 +44,7 @@ impl MessageBody for SMSG_DESTROY_OBJECT {
     }
 }
 
-impl ConstantSized for SMSG_DESTROY_OBJECT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_DESTROY_OBJECT {}
 
 impl MaximumPossibleSized for SMSG_DESTROY_OBJECT {
     fn maximum_possible_size() -> usize {

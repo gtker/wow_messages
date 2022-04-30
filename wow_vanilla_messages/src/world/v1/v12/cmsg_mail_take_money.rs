@@ -52,11 +52,7 @@ impl MessageBody for CMSG_MAIL_TAKE_MONEY {
     }
 }
 
-impl ConstantSized for CMSG_MAIL_TAKE_MONEY {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_MAIL_TAKE_MONEY {}
 
 impl MaximumPossibleSized for CMSG_MAIL_TAKE_MONEY {
     fn maximum_possible_size() -> usize {

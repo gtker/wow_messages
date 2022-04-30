@@ -35,11 +35,7 @@ impl MessageBody for SMSG_DUEL_OUTOFBOUNDS {
     }
 }
 
-impl ConstantSized for SMSG_DUEL_OUTOFBOUNDS {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_DUEL_OUTOFBOUNDS {}
 
 impl MaximumPossibleSized for SMSG_DUEL_OUTOFBOUNDS {
     fn maximum_possible_size() -> usize {

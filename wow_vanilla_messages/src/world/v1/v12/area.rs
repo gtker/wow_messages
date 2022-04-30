@@ -2330,11 +2330,7 @@ impl Area {
 
 }
 
-impl ConstantSized for Area {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Area {}
 
 impl MaximumPossibleSized for Area {
     fn maximum_possible_size() -> usize {

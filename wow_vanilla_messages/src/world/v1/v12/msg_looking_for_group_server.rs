@@ -43,11 +43,7 @@ impl MessageBody for MSG_LOOKING_FOR_GROUP_Server {
     }
 }
 
-impl ConstantSized for MSG_LOOKING_FOR_GROUP_Server {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_LOOKING_FOR_GROUP_Server {}
 
 impl MaximumPossibleSized for MSG_LOOKING_FOR_GROUP_Server {
     fn maximum_possible_size() -> usize {

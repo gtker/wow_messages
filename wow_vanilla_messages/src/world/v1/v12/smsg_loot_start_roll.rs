@@ -84,11 +84,7 @@ impl MessageBody for SMSG_LOOT_START_ROLL {
     }
 }
 
-impl ConstantSized for SMSG_LOOT_START_ROLL {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_LOOT_START_ROLL {}
 
 impl MaximumPossibleSized for SMSG_LOOT_START_ROLL {
     fn maximum_possible_size() -> usize {

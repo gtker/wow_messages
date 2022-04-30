@@ -188,11 +188,7 @@ impl QuestFailedReason {
 
 }
 
-impl ConstantSized for QuestFailedReason {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for QuestFailedReason {}
 
 impl MaximumPossibleSized for QuestFailedReason {
     fn maximum_possible_size() -> usize {

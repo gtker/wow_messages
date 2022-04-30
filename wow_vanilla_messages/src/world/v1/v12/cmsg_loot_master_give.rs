@@ -60,11 +60,7 @@ impl MessageBody for CMSG_LOOT_MASTER_GIVE {
     }
 }
 
-impl ConstantSized for CMSG_LOOT_MASTER_GIVE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_LOOT_MASTER_GIVE {}
 
 impl MaximumPossibleSized for CMSG_LOOT_MASTER_GIVE {
     fn maximum_possible_size() -> usize {

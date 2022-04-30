@@ -35,11 +35,7 @@ impl MessageBody for MSG_QUERY_NEXT_MAIL_TIME_Client {
     }
 }
 
-impl ConstantSized for MSG_QUERY_NEXT_MAIL_TIME_Client {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_QUERY_NEXT_MAIL_TIME_Client {}
 
 impl MaximumPossibleSized for MSG_QUERY_NEXT_MAIL_TIME_Client {
     fn maximum_possible_size() -> usize {

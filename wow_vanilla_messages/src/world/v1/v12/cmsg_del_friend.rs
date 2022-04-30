@@ -44,11 +44,7 @@ impl MessageBody for CMSG_DEL_FRIEND {
     }
 }
 
-impl ConstantSized for CMSG_DEL_FRIEND {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_DEL_FRIEND {}
 
 impl MaximumPossibleSized for CMSG_DEL_FRIEND {
     fn maximum_possible_size() -> usize {

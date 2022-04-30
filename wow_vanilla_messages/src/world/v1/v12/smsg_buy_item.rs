@@ -68,11 +68,7 @@ impl MessageBody for SMSG_BUY_ITEM {
     }
 }
 
-impl ConstantSized for SMSG_BUY_ITEM {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_BUY_ITEM {}
 
 impl MaximumPossibleSized for SMSG_BUY_ITEM {
     fn maximum_possible_size() -> usize {

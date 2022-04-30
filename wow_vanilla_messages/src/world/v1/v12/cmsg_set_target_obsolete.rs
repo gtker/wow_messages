@@ -44,11 +44,7 @@ impl MessageBody for CMSG_SET_TARGET_OBSOLETE {
     }
 }
 
-impl ConstantSized for CMSG_SET_TARGET_OBSOLETE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_SET_TARGET_OBSOLETE {}
 
 impl MaximumPossibleSized for CMSG_SET_TARGET_OBSOLETE {
     fn maximum_possible_size() -> usize {

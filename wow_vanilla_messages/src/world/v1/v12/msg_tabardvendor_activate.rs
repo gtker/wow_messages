@@ -46,11 +46,7 @@ impl MessageBody for MSG_TABARDVENDOR_ACTIVATE {
     }
 }
 
-impl ConstantSized for MSG_TABARDVENDOR_ACTIVATE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_TABARDVENDOR_ACTIVATE {}
 
 impl MaximumPossibleSized for MSG_TABARDVENDOR_ACTIVATE {
     fn maximum_possible_size() -> usize {

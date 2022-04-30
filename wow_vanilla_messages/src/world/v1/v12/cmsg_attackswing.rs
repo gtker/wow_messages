@@ -44,11 +44,7 @@ impl MessageBody for CMSG_ATTACKSWING {
     }
 }
 
-impl ConstantSized for CMSG_ATTACKSWING {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_ATTACKSWING {}
 
 impl MaximumPossibleSized for CMSG_ATTACKSWING {
     fn maximum_possible_size() -> usize {

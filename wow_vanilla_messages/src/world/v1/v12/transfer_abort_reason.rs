@@ -280,11 +280,7 @@ impl TransferAbortReason {
 
 }
 
-impl ConstantSized for TransferAbortReason {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for TransferAbortReason {}
 
 impl MaximumPossibleSized for TransferAbortReason {
     fn maximum_possible_size() -> usize {

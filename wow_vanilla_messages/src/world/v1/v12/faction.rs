@@ -93,11 +93,7 @@ impl ReadableAndWritable for Faction {
 
 }
 
-impl ConstantSized for Faction {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Faction {}
 
 impl MaximumPossibleSized for Faction {
     fn maximum_possible_size() -> usize {

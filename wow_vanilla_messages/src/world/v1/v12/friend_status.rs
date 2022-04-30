@@ -280,11 +280,7 @@ impl FriendStatus {
 
 }
 
-impl ConstantSized for FriendStatus {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for FriendStatus {}
 
 impl MaximumPossibleSized for FriendStatus {
     fn maximum_possible_size() -> usize {

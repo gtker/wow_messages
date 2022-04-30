@@ -68,11 +68,7 @@ impl MessageBody for SMSG_SPELLORDAMAGE_IMMUNE {
     }
 }
 
-impl ConstantSized for SMSG_SPELLORDAMAGE_IMMUNE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_SPELLORDAMAGE_IMMUNE {}
 
 impl MaximumPossibleSized for SMSG_SPELLORDAMAGE_IMMUNE {
     fn maximum_possible_size() -> usize {

@@ -280,11 +280,7 @@ impl GroupLootSetting {
 
 }
 
-impl ConstantSized for GroupLootSetting {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for GroupLootSetting {}
 
 impl MaximumPossibleSized for GroupLootSetting {
     fn maximum_possible_size() -> usize {

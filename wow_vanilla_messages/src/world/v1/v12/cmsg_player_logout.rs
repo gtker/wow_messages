@@ -35,11 +35,7 @@ impl MessageBody for CMSG_PLAYER_LOGOUT {
     }
 }
 
-impl ConstantSized for CMSG_PLAYER_LOGOUT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_PLAYER_LOGOUT {}
 
 impl MaximumPossibleSized for CMSG_PLAYER_LOGOUT {
     fn maximum_possible_size() -> usize {

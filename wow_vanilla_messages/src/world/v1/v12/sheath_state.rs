@@ -276,11 +276,7 @@ impl SheathState {
 
 }
 
-impl ConstantSized for SheathState {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SheathState {}
 
 impl MaximumPossibleSized for SheathState {
     fn maximum_possible_size() -> usize {

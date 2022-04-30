@@ -159,11 +159,7 @@ impl ReadableAndWritable for CooldownSpell {
 
 }
 
-impl ConstantSized for CooldownSpell {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CooldownSpell {}
 
 impl MaximumPossibleSized for CooldownSpell {
     fn maximum_possible_size() -> usize {

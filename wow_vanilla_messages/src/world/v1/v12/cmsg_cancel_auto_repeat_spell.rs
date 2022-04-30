@@ -35,11 +35,7 @@ impl MessageBody for CMSG_CANCEL_AUTO_REPEAT_SPELL {
     }
 }
 
-impl ConstantSized for CMSG_CANCEL_AUTO_REPEAT_SPELL {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_CANCEL_AUTO_REPEAT_SPELL {}
 
 impl MaximumPossibleSized for CMSG_CANCEL_AUTO_REPEAT_SPELL {
     fn maximum_possible_size() -> usize {

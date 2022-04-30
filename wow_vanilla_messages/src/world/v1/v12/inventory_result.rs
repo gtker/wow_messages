@@ -404,11 +404,7 @@ impl InventoryResult {
 
 }
 
-impl ConstantSized for InventoryResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for InventoryResult {}
 
 impl MaximumPossibleSized for InventoryResult {
     fn maximum_possible_size() -> usize {

@@ -35,11 +35,7 @@ impl MessageBody for CMSG_GROUP_DECLINE {
     }
 }
 
-impl ConstantSized for CMSG_GROUP_DECLINE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_GROUP_DECLINE {}
 
 impl MaximumPossibleSized for CMSG_GROUP_DECLINE {
     fn maximum_possible_size() -> usize {

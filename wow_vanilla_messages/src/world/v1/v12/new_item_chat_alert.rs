@@ -172,11 +172,7 @@ impl NewItemChatAlert {
 
 }
 
-impl ConstantSized for NewItemChatAlert {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for NewItemChatAlert {}
 
 impl MaximumPossibleSized for NewItemChatAlert {
     fn maximum_possible_size() -> usize {

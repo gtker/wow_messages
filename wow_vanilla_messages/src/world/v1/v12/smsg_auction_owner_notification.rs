@@ -84,11 +84,7 @@ impl MessageBody for SMSG_AUCTION_OWNER_NOTIFICATION {
     }
 }
 
-impl ConstantSized for SMSG_AUCTION_OWNER_NOTIFICATION {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_AUCTION_OWNER_NOTIFICATION {}
 
 impl MaximumPossibleSized for SMSG_AUCTION_OWNER_NOTIFICATION {
     fn maximum_possible_size() -> usize {

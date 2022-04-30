@@ -43,11 +43,7 @@ impl MessageBody for SMSG_ZONE_UNDER_ATTACK {
     }
 }
 
-impl ConstantSized for SMSG_ZONE_UNDER_ATTACK {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_ZONE_UNDER_ATTACK {}
 
 impl MaximumPossibleSized for SMSG_ZONE_UNDER_ATTACK {
     fn maximum_possible_size() -> usize {

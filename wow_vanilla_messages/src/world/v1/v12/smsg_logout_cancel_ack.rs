@@ -35,11 +35,7 @@ impl MessageBody for SMSG_LOGOUT_CANCEL_ACK {
     }
 }
 
-impl ConstantSized for SMSG_LOGOUT_CANCEL_ACK {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_LOGOUT_CANCEL_ACK {}
 
 impl MaximumPossibleSized for SMSG_LOGOUT_CANCEL_ACK {
     fn maximum_possible_size() -> usize {

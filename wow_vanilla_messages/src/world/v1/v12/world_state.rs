@@ -93,11 +93,7 @@ impl ReadableAndWritable for WorldState {
 
 }
 
-impl ConstantSized for WorldState {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for WorldState {}
 
 impl MaximumPossibleSized for WorldState {
     fn maximum_possible_size() -> usize {

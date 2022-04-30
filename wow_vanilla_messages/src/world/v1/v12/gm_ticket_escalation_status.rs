@@ -276,11 +276,7 @@ impl GmTicketEscalationStatus {
 
 }
 
-impl ConstantSized for GmTicketEscalationStatus {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for GmTicketEscalationStatus {}
 
 impl MaximumPossibleSized for GmTicketEscalationStatus {
     fn maximum_possible_size() -> usize {

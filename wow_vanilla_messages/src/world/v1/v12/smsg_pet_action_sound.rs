@@ -53,11 +53,7 @@ impl MessageBody for SMSG_PET_ACTION_SOUND {
     }
 }
 
-impl ConstantSized for SMSG_PET_ACTION_SOUND {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PET_ACTION_SOUND {}
 
 impl MaximumPossibleSized for SMSG_PET_ACTION_SOUND {
     fn maximum_possible_size() -> usize {

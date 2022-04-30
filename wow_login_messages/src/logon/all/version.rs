@@ -137,11 +137,7 @@ impl ReadableAndWritable for Version {
 
 }
 
-impl ConstantSized for Version {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Version {}
 
 impl MaximumPossibleSized for Version {
     fn maximum_possible_size() -> usize {

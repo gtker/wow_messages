@@ -44,11 +44,7 @@ impl MessageBody for SMSG_STOP_MIRROR_TIMER {
     }
 }
 
-impl ConstantSized for SMSG_STOP_MIRROR_TIMER {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_STOP_MIRROR_TIMER {}
 
 impl MaximumPossibleSized for SMSG_STOP_MIRROR_TIMER {
     fn maximum_possible_size() -> usize {

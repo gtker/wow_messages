@@ -44,11 +44,7 @@ impl MessageBody for SMSG_GROUP_JOINED_BATTLEGROUND {
     }
 }
 
-impl ConstantSized for SMSG_GROUP_JOINED_BATTLEGROUND {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_GROUP_JOINED_BATTLEGROUND {}
 
 impl MaximumPossibleSized for SMSG_GROUP_JOINED_BATTLEGROUND {
     fn maximum_possible_size() -> usize {

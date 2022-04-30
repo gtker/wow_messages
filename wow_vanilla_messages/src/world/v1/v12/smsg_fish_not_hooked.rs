@@ -35,11 +35,7 @@ impl MessageBody for SMSG_FISH_NOT_HOOKED {
     }
 }
 
-impl ConstantSized for SMSG_FISH_NOT_HOOKED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_FISH_NOT_HOOKED {}
 
 impl MaximumPossibleSized for SMSG_FISH_NOT_HOOKED {
     fn maximum_possible_size() -> usize {

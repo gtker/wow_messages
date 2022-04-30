@@ -35,11 +35,7 @@ impl MessageBody for SMSG_QUESTLOG_FULL {
     }
 }
 
-impl ConstantSized for SMSG_QUESTLOG_FULL {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_QUESTLOG_FULL {}
 
 impl MaximumPossibleSized for SMSG_QUESTLOG_FULL {
     fn maximum_possible_size() -> usize {

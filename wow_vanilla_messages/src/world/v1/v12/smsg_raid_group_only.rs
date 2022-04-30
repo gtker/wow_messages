@@ -52,11 +52,7 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
     }
 }
 
-impl ConstantSized for SMSG_RAID_GROUP_ONLY {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_RAID_GROUP_ONLY {}
 
 impl MaximumPossibleSized for SMSG_RAID_GROUP_ONLY {
     fn maximum_possible_size() -> usize {

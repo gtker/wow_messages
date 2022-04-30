@@ -324,11 +324,7 @@ impl FriendResult {
 
 }
 
-impl ConstantSized for FriendResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for FriendResult {}
 
 impl MaximumPossibleSized for FriendResult {
     fn maximum_possible_size() -> usize {

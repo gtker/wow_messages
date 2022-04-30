@@ -44,11 +44,7 @@ impl MessageBody for CMSG_TURN_IN_PETITION {
     }
 }
 
-impl ConstantSized for CMSG_TURN_IN_PETITION {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_TURN_IN_PETITION {}
 
 impl MaximumPossibleSized for CMSG_TURN_IN_PETITION {
     fn maximum_possible_size() -> usize {

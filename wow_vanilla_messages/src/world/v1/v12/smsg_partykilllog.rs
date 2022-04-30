@@ -52,11 +52,7 @@ impl MessageBody for SMSG_PARTYKILLLOG {
     }
 }
 
-impl ConstantSized for SMSG_PARTYKILLLOG {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PARTYKILLLOG {}
 
 impl MaximumPossibleSized for SMSG_PARTYKILLLOG {
     fn maximum_possible_size() -> usize {

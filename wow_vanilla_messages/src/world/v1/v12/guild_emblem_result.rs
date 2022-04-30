@@ -180,11 +180,7 @@ impl GuildEmblemResult {
 
 }
 
-impl ConstantSized for GuildEmblemResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for GuildEmblemResult {}
 
 impl MaximumPossibleSized for GuildEmblemResult {
     fn maximum_possible_size() -> usize {

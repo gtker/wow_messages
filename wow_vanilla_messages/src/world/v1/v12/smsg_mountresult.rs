@@ -44,11 +44,7 @@ impl MessageBody for SMSG_MOUNTRESULT {
     }
 }
 
-impl ConstantSized for SMSG_MOUNTRESULT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_MOUNTRESULT {}
 
 impl MaximumPossibleSized for SMSG_MOUNTRESULT {
     fn maximum_possible_size() -> usize {

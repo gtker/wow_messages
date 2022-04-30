@@ -276,11 +276,7 @@ impl SimpleEnum {
 
 }
 
-impl ConstantSized for SimpleEnum {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SimpleEnum {}
 
 impl MaximumPossibleSized for SimpleEnum {
     fn maximum_possible_size() -> usize {

@@ -80,11 +80,7 @@ impl MessageBody for CMSG_WORLD_TELEPORT {
     }
 }
 
-impl ConstantSized for CMSG_WORLD_TELEPORT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_WORLD_TELEPORT {}
 
 impl MaximumPossibleSized for CMSG_WORLD_TELEPORT {
     fn maximum_possible_size() -> usize {

@@ -198,11 +198,7 @@ impl Language {
 
 }
 
-impl ConstantSized for Language {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Language {}
 
 impl MaximumPossibleSized for Language {
     fn maximum_possible_size() -> usize {

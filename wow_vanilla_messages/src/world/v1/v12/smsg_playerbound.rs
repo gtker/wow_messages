@@ -53,11 +53,7 @@ impl MessageBody for SMSG_PLAYERBOUND {
     }
 }
 
-impl ConstantSized for SMSG_PLAYERBOUND {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PLAYERBOUND {}
 
 impl MaximumPossibleSized for SMSG_PLAYERBOUND {
     fn maximum_possible_size() -> usize {

@@ -186,11 +186,7 @@ impl CinematicSequenceId {
 
 }
 
-impl ConstantSized for CinematicSequenceId {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CinematicSequenceId {}
 
 impl MaximumPossibleSized for CinematicSequenceId {
     fn maximum_possible_size() -> usize {

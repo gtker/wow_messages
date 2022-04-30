@@ -52,11 +52,7 @@ impl MessageBody for SMSG_SPELL_DELAYED {
     }
 }
 
-impl ConstantSized for SMSG_SPELL_DELAYED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_SPELL_DELAYED {}
 
 impl MaximumPossibleSized for SMSG_SPELL_DELAYED {
     fn maximum_possible_size() -> usize {

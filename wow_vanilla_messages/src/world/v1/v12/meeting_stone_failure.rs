@@ -276,11 +276,7 @@ impl MeetingStoneFailure {
 
 }
 
-impl ConstantSized for MeetingStoneFailure {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MeetingStoneFailure {}
 
 impl MaximumPossibleSized for MeetingStoneFailure {
     fn maximum_possible_size() -> usize {

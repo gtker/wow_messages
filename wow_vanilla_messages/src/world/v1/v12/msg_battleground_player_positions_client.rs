@@ -35,11 +35,7 @@ impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {
     }
 }
 
-impl ConstantSized for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {}
 
 impl MaximumPossibleSized for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {
     fn maximum_possible_size() -> usize {

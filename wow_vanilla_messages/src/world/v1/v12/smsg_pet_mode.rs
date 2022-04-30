@@ -78,11 +78,7 @@ impl MessageBody for SMSG_PET_MODE {
     }
 }
 
-impl ConstantSized for SMSG_PET_MODE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PET_MODE {}
 
 impl MaximumPossibleSized for SMSG_PET_MODE {
     fn maximum_possible_size() -> usize {

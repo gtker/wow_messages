@@ -53,11 +53,7 @@ impl MessageBody for SMSG_EMOTE {
     }
 }
 
-impl ConstantSized for SMSG_EMOTE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_EMOTE {}
 
 impl MaximumPossibleSized for SMSG_EMOTE {
     fn maximum_possible_size() -> usize {

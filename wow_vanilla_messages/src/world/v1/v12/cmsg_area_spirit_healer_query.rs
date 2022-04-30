@@ -44,11 +44,7 @@ impl MessageBody for CMSG_AREA_SPIRIT_HEALER_QUERY {
     }
 }
 
-impl ConstantSized for CMSG_AREA_SPIRIT_HEALER_QUERY {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_AREA_SPIRIT_HEALER_QUERY {}
 
 impl MaximumPossibleSized for CMSG_AREA_SPIRIT_HEALER_QUERY {
     fn maximum_possible_size() -> usize {

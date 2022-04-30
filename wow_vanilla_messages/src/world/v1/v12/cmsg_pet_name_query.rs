@@ -52,11 +52,7 @@ impl MessageBody for CMSG_PET_NAME_QUERY {
     }
 }
 
-impl ConstantSized for CMSG_PET_NAME_QUERY {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_PET_NAME_QUERY {}
 
 impl MaximumPossibleSized for CMSG_PET_NAME_QUERY {
     fn maximum_possible_size() -> usize {

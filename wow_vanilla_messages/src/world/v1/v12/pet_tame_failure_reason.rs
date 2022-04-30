@@ -294,11 +294,7 @@ impl PetTameFailureReason {
 
 }
 
-impl ConstantSized for PetTameFailureReason {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for PetTameFailureReason {}
 
 impl MaximumPossibleSized for PetTameFailureReason {
     fn maximum_possible_size() -> usize {

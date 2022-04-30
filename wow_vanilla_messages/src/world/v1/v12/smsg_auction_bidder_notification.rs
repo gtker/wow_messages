@@ -92,11 +92,7 @@ impl MessageBody for SMSG_AUCTION_BIDDER_NOTIFICATION {
     }
 }
 
-impl ConstantSized for SMSG_AUCTION_BIDDER_NOTIFICATION {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_AUCTION_BIDDER_NOTIFICATION {}
 
 impl MaximumPossibleSized for SMSG_AUCTION_BIDDER_NOTIFICATION {
     fn maximum_possible_size() -> usize {

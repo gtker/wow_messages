@@ -76,11 +76,7 @@ impl MessageBody for CMSG_BUY_ITEM_IN_SLOT {
     }
 }
 
-impl ConstantSized for CMSG_BUY_ITEM_IN_SLOT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_BUY_ITEM_IN_SLOT {}
 
 impl MaximumPossibleSized for CMSG_BUY_ITEM_IN_SLOT {
     fn maximum_possible_size() -> usize {

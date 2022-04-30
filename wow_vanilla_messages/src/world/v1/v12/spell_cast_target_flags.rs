@@ -416,11 +416,7 @@ impl SpellCastTargetFlags {
 
 }
 
-impl ConstantSized for SpellCastTargetFlags {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SpellCastTargetFlags {}
 
 impl MaximumPossibleSized for SpellCastTargetFlags {
     fn maximum_possible_size() -> usize {

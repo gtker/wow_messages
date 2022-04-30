@@ -274,11 +274,7 @@ impl FarSightOperation {
 
 }
 
-impl ConstantSized for FarSightOperation {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for FarSightOperation {}
 
 impl MaximumPossibleSized for FarSightOperation {
     fn maximum_possible_size() -> usize {

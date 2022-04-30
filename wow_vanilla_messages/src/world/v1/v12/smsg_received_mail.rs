@@ -43,11 +43,7 @@ impl MessageBody for SMSG_RECEIVED_MAIL {
     }
 }
 
-impl ConstantSized for SMSG_RECEIVED_MAIL {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_RECEIVED_MAIL {}
 
 impl MaximumPossibleSized for SMSG_RECEIVED_MAIL {
     fn maximum_possible_size() -> usize {

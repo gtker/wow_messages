@@ -60,11 +60,7 @@ impl MessageBody for CMSG_PET_ACTION {
     }
 }
 
-impl ConstantSized for CMSG_PET_ACTION {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_PET_ACTION {}
 
 impl MaximumPossibleSized for CMSG_PET_ACTION {
     fn maximum_possible_size() -> usize {

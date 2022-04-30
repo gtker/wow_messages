@@ -178,11 +178,7 @@ impl BgTypeId {
 
 }
 
-impl ConstantSized for BgTypeId {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for BgTypeId {}
 
 impl MaximumPossibleSized for BgTypeId {
     fn maximum_possible_size() -> usize {

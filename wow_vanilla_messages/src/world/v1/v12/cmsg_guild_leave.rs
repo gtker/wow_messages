@@ -35,11 +35,7 @@ impl MessageBody for CMSG_GUILD_LEAVE {
     }
 }
 
-impl ConstantSized for CMSG_GUILD_LEAVE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_GUILD_LEAVE {}
 
 impl MaximumPossibleSized for CMSG_GUILD_LEAVE {
     fn maximum_possible_size() -> usize {

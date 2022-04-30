@@ -44,11 +44,7 @@ impl MessageBody for CMSG_MEETINGSTONE_JOIN {
     }
 }
 
-impl ConstantSized for CMSG_MEETINGSTONE_JOIN {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_MEETINGSTONE_JOIN {}
 
 impl MaximumPossibleSized for CMSG_MEETINGSTONE_JOIN {
     fn maximum_possible_size() -> usize {

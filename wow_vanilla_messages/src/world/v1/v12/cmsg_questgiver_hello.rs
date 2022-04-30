@@ -44,11 +44,7 @@ impl MessageBody for CMSG_QUESTGIVER_HELLO {
     }
 }
 
-impl ConstantSized for CMSG_QUESTGIVER_HELLO {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_QUESTGIVER_HELLO {}
 
 impl MaximumPossibleSized for CMSG_QUESTGIVER_HELLO {
     fn maximum_possible_size() -> usize {

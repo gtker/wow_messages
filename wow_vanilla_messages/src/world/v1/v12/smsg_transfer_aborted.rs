@@ -65,11 +65,7 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
     }
 }
 
-impl ConstantSized for SMSG_TRANSFER_ABORTED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_TRANSFER_ABORTED {}
 
 impl MaximumPossibleSized for SMSG_TRANSFER_ABORTED {
     fn maximum_possible_size() -> usize {

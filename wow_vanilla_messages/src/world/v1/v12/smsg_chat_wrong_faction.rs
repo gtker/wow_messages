@@ -35,11 +35,7 @@ impl MessageBody for SMSG_CHAT_WRONG_FACTION {
     }
 }
 
-impl ConstantSized for SMSG_CHAT_WRONG_FACTION {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_CHAT_WRONG_FACTION {}
 
 impl MaximumPossibleSized for SMSG_CHAT_WRONG_FACTION {
     fn maximum_possible_size() -> usize {

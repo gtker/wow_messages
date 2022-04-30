@@ -46,11 +46,7 @@ impl MessageBody for MSG_PETITION_DECLINE {
     }
 }
 
-impl ConstantSized for MSG_PETITION_DECLINE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_PETITION_DECLINE {}
 
 impl MaximumPossibleSized for MSG_PETITION_DECLINE {
     fn maximum_possible_size() -> usize {

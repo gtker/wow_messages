@@ -178,11 +178,7 @@ impl ServerMessageType {
 
 }
 
-impl ConstantSized for ServerMessageType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for ServerMessageType {}
 
 impl MaximumPossibleSized for ServerMessageType {
     fn maximum_possible_size() -> usize {

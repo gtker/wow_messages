@@ -35,11 +35,7 @@ impl MessageBody for SMSG_MEETINGSTONE_IN_PROGRESS {
     }
 }
 
-impl ConstantSized for SMSG_MEETINGSTONE_IN_PROGRESS {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_MEETINGSTONE_IN_PROGRESS {}
 
 impl MaximumPossibleSized for SMSG_MEETINGSTONE_IN_PROGRESS {
     fn maximum_possible_size() -> usize {

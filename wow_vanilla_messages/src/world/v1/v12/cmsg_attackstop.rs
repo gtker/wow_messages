@@ -35,11 +35,7 @@ impl MessageBody for CMSG_ATTACKSTOP {
     }
 }
 
-impl ConstantSized for CMSG_ATTACKSTOP {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_ATTACKSTOP {}
 
 impl MaximumPossibleSized for CMSG_ATTACKSTOP {
     fn maximum_possible_size() -> usize {

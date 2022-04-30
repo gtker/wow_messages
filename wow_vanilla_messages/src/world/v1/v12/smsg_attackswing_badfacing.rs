@@ -35,11 +35,7 @@ impl MessageBody for SMSG_ATTACKSWING_BADFACING {
     }
 }
 
-impl ConstantSized for SMSG_ATTACKSWING_BADFACING {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_ATTACKSWING_BADFACING {}
 
 impl MaximumPossibleSized for SMSG_ATTACKSWING_BADFACING {
     fn maximum_possible_size() -> usize {

@@ -284,11 +284,7 @@ impl Power {
 
 }
 
-impl ConstantSized for Power {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Power {}
 
 impl MaximumPossibleSized for Power {
     fn maximum_possible_size() -> usize {

@@ -59,11 +59,7 @@ impl MessageBody for SMSG_AUCTION_REMOVED_NOTIFICATION {
     }
 }
 
-impl ConstantSized for SMSG_AUCTION_REMOVED_NOTIFICATION {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_AUCTION_REMOVED_NOTIFICATION {}
 
 impl MaximumPossibleSized for SMSG_AUCTION_REMOVED_NOTIFICATION {
     fn maximum_possible_size() -> usize {

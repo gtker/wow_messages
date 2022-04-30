@@ -84,11 +84,7 @@ impl ReadableAndWritable for SimpleSlogin {
 
 }
 
-impl ConstantSized for SimpleSlogin {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SimpleSlogin {}
 
 impl MaximumPossibleSized for SimpleSlogin {
     fn maximum_possible_size() -> usize {

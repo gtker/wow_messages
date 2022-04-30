@@ -69,11 +69,7 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
     }
 }
 
-impl ConstantSized for SMSG_SPELLDAMAGESHIELD {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_SPELLDAMAGESHIELD {}
 
 impl MaximumPossibleSized for SMSG_SPELLDAMAGESHIELD {
     fn maximum_possible_size() -> usize {

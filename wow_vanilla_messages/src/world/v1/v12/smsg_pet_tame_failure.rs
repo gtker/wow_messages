@@ -44,11 +44,7 @@ impl MessageBody for SMSG_PET_TAME_FAILURE {
     }
 }
 
-impl ConstantSized for SMSG_PET_TAME_FAILURE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PET_TAME_FAILURE {}
 
 impl MaximumPossibleSized for SMSG_PET_TAME_FAILURE {
     fn maximum_possible_size() -> usize {

@@ -69,11 +69,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
     }
 }
 
-impl ConstantSized for CMSG_BATTLEMASTER_JOIN {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_BATTLEMASTER_JOIN {}
 
 impl MaximumPossibleSized for CMSG_BATTLEMASTER_JOIN {
     fn maximum_possible_size() -> usize {

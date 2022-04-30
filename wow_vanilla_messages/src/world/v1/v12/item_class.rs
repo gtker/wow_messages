@@ -302,11 +302,7 @@ impl ItemClass {
 
 }
 
-impl ConstantSized for ItemClass {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for ItemClass {}
 
 impl MaximumPossibleSized for ItemClass {
     fn maximum_possible_size() -> usize {

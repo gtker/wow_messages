@@ -35,11 +35,7 @@ impl MessageBody for SMSG_PET_NAME_INVALID {
     }
 }
 
-impl ConstantSized for SMSG_PET_NAME_INVALID {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PET_NAME_INVALID {}
 
 impl MaximumPossibleSized for SMSG_PET_NAME_INVALID {
     fn maximum_possible_size() -> usize {

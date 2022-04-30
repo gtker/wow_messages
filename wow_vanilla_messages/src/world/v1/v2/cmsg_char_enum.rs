@@ -35,11 +35,7 @@ impl MessageBody for CMSG_CHAR_ENUM {
     }
 }
 
-impl ConstantSized for CMSG_CHAR_ENUM {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_CHAR_ENUM {}
 
 impl MaximumPossibleSized for CMSG_CHAR_ENUM {
     fn maximum_possible_size() -> usize {

@@ -44,11 +44,7 @@ impl MessageBody for CMSG_RECLAIM_CORPSE {
     }
 }
 
-impl ConstantSized for CMSG_RECLAIM_CORPSE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_RECLAIM_CORPSE {}
 
 impl MaximumPossibleSized for CMSG_RECLAIM_CORPSE {
     fn maximum_possible_size() -> usize {

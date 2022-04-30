@@ -43,11 +43,7 @@ impl MessageBody for SMSG_REMOVED_SPELL {
     }
 }
 
-impl ConstantSized for SMSG_REMOVED_SPELL {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_REMOVED_SPELL {}
 
 impl MaximumPossibleSized for SMSG_REMOVED_SPELL {
     fn maximum_possible_size() -> usize {

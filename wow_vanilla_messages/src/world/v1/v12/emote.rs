@@ -402,11 +402,7 @@ impl Emote {
 
 }
 
-impl ConstantSized for Emote {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Emote {}
 
 impl MaximumPossibleSized for Emote {
     fn maximum_possible_size() -> usize {

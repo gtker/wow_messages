@@ -93,11 +93,7 @@ impl ReadableAndWritable for InitialSpell {
 
 }
 
-impl ConstantSized for InitialSpell {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for InitialSpell {}
 
 impl MaximumPossibleSized for InitialSpell {
     fn maximum_possible_size() -> usize {

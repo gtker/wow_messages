@@ -35,11 +35,7 @@ impl MessageBody for CMSG_GUILD_DISBAND {
     }
 }
 
-impl ConstantSized for CMSG_GUILD_DISBAND {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_GUILD_DISBAND {}
 
 impl MaximumPossibleSized for CMSG_GUILD_DISBAND {
     fn maximum_possible_size() -> usize {

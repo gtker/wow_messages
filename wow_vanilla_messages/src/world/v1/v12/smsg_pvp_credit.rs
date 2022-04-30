@@ -61,11 +61,7 @@ impl MessageBody for SMSG_PVP_CREDIT {
     }
 }
 
-impl ConstantSized for SMSG_PVP_CREDIT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PVP_CREDIT {}
 
 impl MaximumPossibleSized for SMSG_PVP_CREDIT {
     fn maximum_possible_size() -> usize {

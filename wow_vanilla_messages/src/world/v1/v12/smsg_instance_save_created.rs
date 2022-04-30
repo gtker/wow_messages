@@ -43,11 +43,7 @@ impl MessageBody for SMSG_INSTANCE_SAVE_CREATED {
     }
 }
 
-impl ConstantSized for SMSG_INSTANCE_SAVE_CREATED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_INSTANCE_SAVE_CREATED {}
 
 impl MaximumPossibleSized for SMSG_INSTANCE_SAVE_CREATED {
     fn maximum_possible_size() -> usize {

@@ -53,11 +53,7 @@ impl MessageBody for SMSG_AI_REACTION {
     }
 }
 
-impl ConstantSized for SMSG_AI_REACTION {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_AI_REACTION {}
 
 impl MaximumPossibleSized for SMSG_AI_REACTION {
     fn maximum_possible_size() -> usize {

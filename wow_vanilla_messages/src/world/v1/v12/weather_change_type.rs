@@ -274,11 +274,7 @@ impl WeatherChangeType {
 
 }
 
-impl ConstantSized for WeatherChangeType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for WeatherChangeType {}
 
 impl MaximumPossibleSized for WeatherChangeType {
     fn maximum_possible_size() -> usize {

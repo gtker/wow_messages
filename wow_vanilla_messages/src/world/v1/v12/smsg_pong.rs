@@ -43,11 +43,7 @@ impl MessageBody for SMSG_PONG {
     }
 }
 
-impl ConstantSized for SMSG_PONG {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PONG {}
 
 impl MaximumPossibleSized for SMSG_PONG {
     fn maximum_possible_size() -> usize {

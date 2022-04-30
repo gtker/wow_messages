@@ -176,11 +176,7 @@ impl RealmType {
 
 }
 
-impl ConstantSized for RealmType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for RealmType {}
 
 impl MaximumPossibleSized for RealmType {
     fn maximum_possible_size() -> usize {

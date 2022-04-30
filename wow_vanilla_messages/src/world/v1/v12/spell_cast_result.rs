@@ -552,11 +552,7 @@ impl SpellCastResult {
 
 }
 
-impl ConstantSized for SpellCastResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SpellCastResult {}
 
 impl MaximumPossibleSized for SpellCastResult {
     fn maximum_possible_size() -> usize {

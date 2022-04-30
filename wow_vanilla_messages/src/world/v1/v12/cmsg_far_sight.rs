@@ -44,11 +44,7 @@ impl MessageBody for CMSG_FAR_SIGHT {
     }
 }
 
-impl ConstantSized for CMSG_FAR_SIGHT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_FAR_SIGHT {}
 
 impl MaximumPossibleSized for CMSG_FAR_SIGHT {
     fn maximum_possible_size() -> usize {

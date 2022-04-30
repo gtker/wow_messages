@@ -44,11 +44,7 @@ impl MessageBody for SMSG_MOUNTSPECIAL_ANIM {
     }
 }
 
-impl ConstantSized for SMSG_MOUNTSPECIAL_ANIM {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_MOUNTSPECIAL_ANIM {}
 
 impl MaximumPossibleSized for SMSG_MOUNTSPECIAL_ANIM {
     fn maximum_possible_size() -> usize {

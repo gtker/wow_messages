@@ -35,11 +35,7 @@ impl MessageBody for SMSG_DUEL_INBOUNDS {
     }
 }
 
-impl ConstantSized for SMSG_DUEL_INBOUNDS {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_DUEL_INBOUNDS {}
 
 impl MaximumPossibleSized for SMSG_DUEL_INBOUNDS {
     fn maximum_possible_size() -> usize {

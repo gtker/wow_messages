@@ -186,11 +186,7 @@ impl ReadableAndWritable for PetitionShowlist {
 
 }
 
-impl ConstantSized for PetitionShowlist {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for PetitionShowlist {}
 
 impl MaximumPossibleSized for PetitionShowlist {
     fn maximum_possible_size() -> usize {

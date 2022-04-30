@@ -62,11 +62,7 @@ impl ReadableAndWritable for CMD_XFER_CANCEL {
 
 }
 
-impl ConstantSized for CMD_XFER_CANCEL {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMD_XFER_CANCEL {}
 
 impl MaximumPossibleSized for CMD_XFER_CANCEL {
     fn maximum_possible_size() -> usize {

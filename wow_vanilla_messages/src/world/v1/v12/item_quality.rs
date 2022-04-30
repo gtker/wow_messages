@@ -284,11 +284,7 @@ impl ItemQuality {
 
 }
 
-impl ConstantSized for ItemQuality {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for ItemQuality {}
 
 impl MaximumPossibleSized for ItemQuality {
     fn maximum_possible_size() -> usize {

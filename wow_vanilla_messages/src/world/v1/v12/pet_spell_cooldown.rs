@@ -137,11 +137,7 @@ impl ReadableAndWritable for PetSpellCooldown {
 
 }
 
-impl ConstantSized for PetSpellCooldown {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for PetSpellCooldown {}
 
 impl MaximumPossibleSized for PetSpellCooldown {
     fn maximum_possible_size() -> usize {

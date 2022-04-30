@@ -278,11 +278,7 @@ impl PetCommandState {
 
 }
 
-impl ConstantSized for PetCommandState {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for PetCommandState {}
 
 impl MaximumPossibleSized for PetCommandState {
     fn maximum_possible_size() -> usize {

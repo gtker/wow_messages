@@ -53,11 +53,7 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
     }
 }
 
-impl ConstantSized for SMSG_MEETINGSTONE_SETQUEUE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_MEETINGSTONE_SETQUEUE {}
 
 impl MaximumPossibleSized for SMSG_MEETINGSTONE_SETQUEUE {
     fn maximum_possible_size() -> usize {

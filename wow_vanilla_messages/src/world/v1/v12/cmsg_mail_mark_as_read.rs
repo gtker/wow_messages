@@ -52,11 +52,7 @@ impl MessageBody for CMSG_MAIL_MARK_AS_READ {
     }
 }
 
-impl ConstantSized for CMSG_MAIL_MARK_AS_READ {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_MAIL_MARK_AS_READ {}
 
 impl MaximumPossibleSized for CMSG_MAIL_MARK_AS_READ {
     fn maximum_possible_size() -> usize {

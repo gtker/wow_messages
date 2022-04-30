@@ -99,11 +99,7 @@ impl MessageBody for SMSG_TUTORIAL_FLAGS {
     }
 }
 
-impl ConstantSized for SMSG_TUTORIAL_FLAGS {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_TUTORIAL_FLAGS {}
 
 impl MaximumPossibleSized for SMSG_TUTORIAL_FLAGS {
     fn maximum_possible_size() -> usize {

@@ -74,11 +74,7 @@ impl MessageBody for SMSG_BINDPOINTUPDATE {
     }
 }
 
-impl ConstantSized for SMSG_BINDPOINTUPDATE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_BINDPOINTUPDATE {}
 
 impl MaximumPossibleSized for SMSG_BINDPOINTUPDATE {
     fn maximum_possible_size() -> usize {

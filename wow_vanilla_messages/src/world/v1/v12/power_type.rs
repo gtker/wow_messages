@@ -180,11 +180,7 @@ impl PowerType {
 
 }
 
-impl ConstantSized for PowerType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for PowerType {}
 
 impl MaximumPossibleSized for PowerType {
     fn maximum_possible_size() -> usize {

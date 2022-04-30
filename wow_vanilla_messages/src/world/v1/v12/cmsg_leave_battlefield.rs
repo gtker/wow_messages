@@ -59,11 +59,7 @@ impl MessageBody for CMSG_LEAVE_BATTLEFIELD {
     }
 }
 
-impl ConstantSized for CMSG_LEAVE_BATTLEFIELD {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_LEAVE_BATTLEFIELD {}
 
 impl MaximumPossibleSized for CMSG_LEAVE_BATTLEFIELD {
     fn maximum_possible_size() -> usize {

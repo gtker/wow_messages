@@ -288,11 +288,7 @@ impl QuestPartyMessage {
 
 }
 
-impl ConstantSized for QuestPartyMessage {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for QuestPartyMessage {}
 
 impl MaximumPossibleSized for QuestPartyMessage {
     fn maximum_possible_size() -> usize {

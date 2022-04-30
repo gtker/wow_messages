@@ -50,11 +50,7 @@ impl MessageBody for SMSG_LOGIN_SETTIMESPEED {
     }
 }
 
-impl ConstantSized for SMSG_LOGIN_SETTIMESPEED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_LOGIN_SETTIMESPEED {}
 
 impl MaximumPossibleSized for SMSG_LOGIN_SETTIMESPEED {
     fn maximum_possible_size() -> usize {

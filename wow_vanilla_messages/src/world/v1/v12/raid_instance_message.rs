@@ -176,11 +176,7 @@ impl RaidInstanceMessage {
 
 }
 
-impl ConstantSized for RaidInstanceMessage {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for RaidInstanceMessage {}
 
 impl MaximumPossibleSized for RaidInstanceMessage {
     fn maximum_possible_size() -> usize {

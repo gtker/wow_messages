@@ -52,11 +52,7 @@ impl MessageBody for SMSG_TAXINODE_STATUS {
     }
 }
 
-impl ConstantSized for SMSG_TAXINODE_STATUS {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_TAXINODE_STATUS {}
 
 impl MaximumPossibleSized for SMSG_TAXINODE_STATUS {
     fn maximum_possible_size() -> usize {

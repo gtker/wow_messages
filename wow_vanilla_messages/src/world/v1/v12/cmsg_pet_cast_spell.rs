@@ -52,11 +52,7 @@ impl MessageBody for CMSG_PET_CAST_SPELL {
     }
 }
 
-impl ConstantSized for CMSG_PET_CAST_SPELL {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_PET_CAST_SPELL {}
 
 impl MaximumPossibleSized for CMSG_PET_CAST_SPELL {
     fn maximum_possible_size() -> usize {

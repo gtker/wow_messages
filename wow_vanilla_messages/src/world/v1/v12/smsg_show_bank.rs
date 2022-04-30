@@ -44,11 +44,7 @@ impl MessageBody for SMSG_SHOW_BANK {
     }
 }
 
-impl ConstantSized for SMSG_SHOW_BANK {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_SHOW_BANK {}
 
 impl MaximumPossibleSized for SMSG_SHOW_BANK {
     fn maximum_possible_size() -> usize {

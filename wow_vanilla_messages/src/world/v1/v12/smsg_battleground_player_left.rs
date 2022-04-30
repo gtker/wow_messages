@@ -44,11 +44,7 @@ impl MessageBody for SMSG_BATTLEGROUND_PLAYER_LEFT {
     }
 }
 
-impl ConstantSized for SMSG_BATTLEGROUND_PLAYER_LEFT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_BATTLEGROUND_PLAYER_LEFT {}
 
 impl MaximumPossibleSized for SMSG_BATTLEGROUND_PLAYER_LEFT {
     fn maximum_possible_size() -> usize {

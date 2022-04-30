@@ -44,11 +44,7 @@ impl MessageBody for CMSG_BATTLEMASTER_HELLO {
     }
 }
 
-impl ConstantSized for CMSG_BATTLEMASTER_HELLO {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_BATTLEMASTER_HELLO {}
 
 impl MaximumPossibleSized for CMSG_BATTLEMASTER_HELLO {
     fn maximum_possible_size() -> usize {

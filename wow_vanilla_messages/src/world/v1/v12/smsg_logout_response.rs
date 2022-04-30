@@ -53,11 +53,7 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
     }
 }
 
-impl ConstantSized for SMSG_LOGOUT_RESPONSE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_LOGOUT_RESPONSE {}
 
 impl MaximumPossibleSized for SMSG_LOGOUT_RESPONSE {
     fn maximum_possible_size() -> usize {

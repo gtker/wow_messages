@@ -63,11 +63,7 @@ impl MessageBody for SMSG_NEW_WORLD {
     }
 }
 
-impl ConstantSized for SMSG_NEW_WORLD {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_NEW_WORLD {}
 
 impl MaximumPossibleSized for SMSG_NEW_WORLD {
     fn maximum_possible_size() -> usize {

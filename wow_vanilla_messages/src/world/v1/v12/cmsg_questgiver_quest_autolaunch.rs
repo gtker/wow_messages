@@ -35,11 +35,7 @@ impl MessageBody for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
     }
 }
 
-impl ConstantSized for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {}
 
 impl MaximumPossibleSized for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
     fn maximum_possible_size() -> usize {

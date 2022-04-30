@@ -358,11 +358,7 @@ impl ReadableAndWritable for AuctionListItem {
 
 }
 
-impl ConstantSized for AuctionListItem {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for AuctionListItem {}
 
 impl MaximumPossibleSized for AuctionListItem {
     fn maximum_possible_size() -> usize {

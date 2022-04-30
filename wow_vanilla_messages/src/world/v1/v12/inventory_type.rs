@@ -326,11 +326,7 @@ impl InventoryType {
 
 }
 
-impl ConstantSized for InventoryType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for InventoryType {}
 
 impl MaximumPossibleSized for InventoryType {
     fn maximum_possible_size() -> usize {

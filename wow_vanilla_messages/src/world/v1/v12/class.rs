@@ -288,11 +288,7 @@ impl Class {
 
 }
 
-impl ConstantSized for Class {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Class {}
 
 impl MaximumPossibleSized for Class {
     fn maximum_possible_size() -> usize {

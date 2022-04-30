@@ -68,11 +68,7 @@ impl MessageBody for MSG_RANDOM_ROLL_Server {
     }
 }
 
-impl ConstantSized for MSG_RANDOM_ROLL_Server {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_RANDOM_ROLL_Server {}
 
 impl MaximumPossibleSized for MSG_RANDOM_ROLL_Server {
     fn maximum_possible_size() -> usize {

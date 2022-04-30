@@ -43,11 +43,7 @@ impl MessageBody for CMSG_QUEST_CONFIRM_ACCEPT {
     }
 }
 
-impl ConstantSized for CMSG_QUEST_CONFIRM_ACCEPT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_QUEST_CONFIRM_ACCEPT {}
 
 impl MaximumPossibleSized for CMSG_QUEST_CONFIRM_ACCEPT {
     fn maximum_possible_size() -> usize {

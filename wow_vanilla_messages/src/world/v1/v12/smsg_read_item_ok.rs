@@ -44,11 +44,7 @@ impl MessageBody for SMSG_READ_ITEM_OK {
     }
 }
 
-impl ConstantSized for SMSG_READ_ITEM_OK {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_READ_ITEM_OK {}
 
 impl MaximumPossibleSized for SMSG_READ_ITEM_OK {
     fn maximum_possible_size() -> usize {

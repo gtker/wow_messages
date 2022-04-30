@@ -174,11 +174,7 @@ impl TrainingFailureReason {
 
 }
 
-impl ConstantSized for TrainingFailureReason {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for TrainingFailureReason {}
 
 impl MaximumPossibleSized for TrainingFailureReason {
     fn maximum_possible_size() -> usize {

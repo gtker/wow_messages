@@ -51,11 +51,7 @@ impl MessageBody for CMSG_SET_FACTION_INACTIVE {
     }
 }
 
-impl ConstantSized for CMSG_SET_FACTION_INACTIVE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_SET_FACTION_INACTIVE {}
 
 impl MaximumPossibleSized for CMSG_SET_FACTION_INACTIVE {
     fn maximum_possible_size() -> usize {

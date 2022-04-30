@@ -43,11 +43,7 @@ impl MessageBody for SMSG_CORPSE_RECLAIM_DELAY {
     }
 }
 
-impl ConstantSized for SMSG_CORPSE_RECLAIM_DELAY {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_CORPSE_RECLAIM_DELAY {}
 
 impl MaximumPossibleSized for SMSG_CORPSE_RECLAIM_DELAY {
     fn maximum_possible_size() -> usize {

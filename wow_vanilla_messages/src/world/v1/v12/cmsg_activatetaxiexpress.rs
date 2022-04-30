@@ -60,11 +60,7 @@ impl MessageBody for CMSG_ACTIVATETAXIEXPRESS {
     }
 }
 
-impl ConstantSized for CMSG_ACTIVATETAXIEXPRESS {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_ACTIVATETAXIEXPRESS {}
 
 impl MaximumPossibleSized for CMSG_ACTIVATETAXIEXPRESS {
     fn maximum_possible_size() -> usize {

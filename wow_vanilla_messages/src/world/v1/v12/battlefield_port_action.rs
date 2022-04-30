@@ -274,11 +274,7 @@ impl BattlefieldPortAction {
 
 }
 
-impl ConstantSized for BattlefieldPortAction {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for BattlefieldPortAction {}
 
 impl MaximumPossibleSized for BattlefieldPortAction {
     fn maximum_possible_size() -> usize {

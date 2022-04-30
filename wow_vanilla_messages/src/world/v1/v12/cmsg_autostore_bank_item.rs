@@ -51,11 +51,7 @@ impl MessageBody for CMSG_AUTOSTORE_BANK_ITEM {
     }
 }
 
-impl ConstantSized for CMSG_AUTOSTORE_BANK_ITEM {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_AUTOSTORE_BANK_ITEM {}
 
 impl MaximumPossibleSized for CMSG_AUTOSTORE_BANK_ITEM {
     fn maximum_possible_size() -> usize {

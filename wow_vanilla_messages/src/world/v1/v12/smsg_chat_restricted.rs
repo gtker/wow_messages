@@ -35,11 +35,7 @@ impl MessageBody for SMSG_CHAT_RESTRICTED {
     }
 }
 
-impl ConstantSized for SMSG_CHAT_RESTRICTED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_CHAT_RESTRICTED {}
 
 impl MaximumPossibleSized for SMSG_CHAT_RESTRICTED {
     fn maximum_possible_size() -> usize {

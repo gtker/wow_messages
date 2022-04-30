@@ -95,11 +95,7 @@ impl ReadableAndWritable for RaidTargetUpdate {
 
 }
 
-impl ConstantSized for RaidTargetUpdate {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for RaidTargetUpdate {}
 
 impl MaximumPossibleSized for RaidTargetUpdate {
     fn maximum_possible_size() -> usize {

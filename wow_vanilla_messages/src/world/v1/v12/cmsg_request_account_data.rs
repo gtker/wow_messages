@@ -35,11 +35,7 @@ impl MessageBody for CMSG_REQUEST_ACCOUNT_DATA {
     }
 }
 
-impl ConstantSized for CMSG_REQUEST_ACCOUNT_DATA {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_REQUEST_ACCOUNT_DATA {}
 
 impl MaximumPossibleSized for CMSG_REQUEST_ACCOUNT_DATA {
     fn maximum_possible_size() -> usize {

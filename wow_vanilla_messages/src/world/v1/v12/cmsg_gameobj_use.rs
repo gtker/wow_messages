@@ -44,11 +44,7 @@ impl MessageBody for CMSG_GAMEOBJ_USE {
     }
 }
 
-impl ConstantSized for CMSG_GAMEOBJ_USE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_GAMEOBJ_USE {}
 
 impl MaximumPossibleSized for CMSG_GAMEOBJ_USE {
     fn maximum_possible_size() -> usize {

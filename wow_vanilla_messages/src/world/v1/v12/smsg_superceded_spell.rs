@@ -51,11 +51,7 @@ impl MessageBody for SMSG_SUPERCEDED_SPELL {
     }
 }
 
-impl ConstantSized for SMSG_SUPERCEDED_SPELL {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_SUPERCEDED_SPELL {}
 
 impl MaximumPossibleSized for SMSG_SUPERCEDED_SPELL {
     fn maximum_possible_size() -> usize {

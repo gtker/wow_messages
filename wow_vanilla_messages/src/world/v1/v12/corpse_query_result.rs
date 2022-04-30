@@ -274,11 +274,7 @@ impl CorpseQueryResult {
 
 }
 
-impl ConstantSized for CorpseQueryResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CorpseQueryResult {}
 
 impl MaximumPossibleSized for CorpseQueryResult {
     fn maximum_possible_size() -> usize {

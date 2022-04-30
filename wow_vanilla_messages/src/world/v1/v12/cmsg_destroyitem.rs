@@ -83,11 +83,7 @@ impl MessageBody for CMSG_DESTROYITEM {
     }
 }
 
-impl ConstantSized for CMSG_DESTROYITEM {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_DESTROYITEM {}
 
 impl MaximumPossibleSized for CMSG_DESTROYITEM {
     fn maximum_possible_size() -> usize {

@@ -44,11 +44,7 @@ impl MessageBody for CMSG_PET_ABANDON {
     }
 }
 
-impl ConstantSized for CMSG_PET_ABANDON {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_PET_ABANDON {}
 
 impl MaximumPossibleSized for CMSG_PET_ABANDON {
     fn maximum_possible_size() -> usize {

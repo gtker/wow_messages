@@ -43,11 +43,7 @@ impl MessageBody for CMSG_CANCEL_AURA {
     }
 }
 
-impl ConstantSized for CMSG_CANCEL_AURA {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_CANCEL_AURA {}
 
 impl MaximumPossibleSized for CMSG_CANCEL_AURA {
     fn maximum_possible_size() -> usize {

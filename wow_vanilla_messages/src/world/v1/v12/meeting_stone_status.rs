@@ -282,11 +282,7 @@ impl MeetingStoneStatus {
 
 }
 
-impl ConstantSized for MeetingStoneStatus {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MeetingStoneStatus {}
 
 impl MaximumPossibleSized for MeetingStoneStatus {
     fn maximum_possible_size() -> usize {

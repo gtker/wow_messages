@@ -52,11 +52,7 @@ impl MessageBody for CMSG_STABLE_SWAP_PET {
     }
 }
 
-impl ConstantSized for CMSG_STABLE_SWAP_PET {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_STABLE_SWAP_PET {}
 
 impl MaximumPossibleSized for CMSG_STABLE_SWAP_PET {
     fn maximum_possible_size() -> usize {

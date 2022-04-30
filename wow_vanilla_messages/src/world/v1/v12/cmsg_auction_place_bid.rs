@@ -60,11 +60,7 @@ impl MessageBody for CMSG_AUCTION_PLACE_BID {
     }
 }
 
-impl ConstantSized for CMSG_AUCTION_PLACE_BID {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_AUCTION_PLACE_BID {}
 
 impl MaximumPossibleSized for CMSG_AUCTION_PLACE_BID {
     fn maximum_possible_size() -> usize {

@@ -84,11 +84,7 @@ impl ReadableAndWritable for CMD_XFER_RESUME {
 
 }
 
-impl ConstantSized for CMD_XFER_RESUME {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMD_XFER_RESUME {}
 
 impl MaximumPossibleSized for CMD_XFER_RESUME {
     fn maximum_possible_size() -> usize {

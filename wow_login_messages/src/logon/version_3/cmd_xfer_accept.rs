@@ -62,11 +62,7 @@ impl ReadableAndWritable for CMD_XFER_ACCEPT {
 
 }
 
-impl ConstantSized for CMD_XFER_ACCEPT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMD_XFER_ACCEPT {}
 
 impl MaximumPossibleSized for CMD_XFER_ACCEPT {
     fn maximum_possible_size() -> usize {

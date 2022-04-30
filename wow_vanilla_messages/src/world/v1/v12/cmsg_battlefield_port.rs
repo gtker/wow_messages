@@ -53,11 +53,7 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
     }
 }
 
-impl ConstantSized for CMSG_BATTLEFIELD_PORT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_BATTLEFIELD_PORT {}
 
 impl MaximumPossibleSized for CMSG_BATTLEFIELD_PORT {
     fn maximum_possible_size() -> usize {

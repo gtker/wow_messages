@@ -44,11 +44,7 @@ impl MessageBody for SMSG_BINDER_CONFIRM {
     }
 }
 
-impl ConstantSized for SMSG_BINDER_CONFIRM {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_BINDER_CONFIRM {}
 
 impl MaximumPossibleSized for SMSG_BINDER_CONFIRM {
     fn maximum_possible_size() -> usize {

@@ -52,11 +52,7 @@ impl MessageBody for CMSG_PETITION_SIGN {
     }
 }
 
-impl ConstantSized for CMSG_PETITION_SIGN {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_PETITION_SIGN {}
 
 impl MaximumPossibleSized for CMSG_PETITION_SIGN {
     fn maximum_possible_size() -> usize {

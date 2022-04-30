@@ -44,11 +44,7 @@ impl MessageBody for CMSG_PLAYER_LOGIN {
     }
 }
 
-impl ConstantSized for CMSG_PLAYER_LOGIN {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_PLAYER_LOGIN {}
 
 impl MaximumPossibleSized for CMSG_PLAYER_LOGIN {
     fn maximum_possible_size() -> usize {

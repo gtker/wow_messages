@@ -44,11 +44,7 @@ impl MessageBody for SMSG_CHAR_DELETE {
     }
 }
 
-impl ConstantSized for SMSG_CHAR_DELETE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_CHAR_DELETE {}
 
 impl MaximumPossibleSized for SMSG_CHAR_DELETE {
     fn maximum_possible_size() -> usize {

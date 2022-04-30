@@ -43,11 +43,7 @@ impl MessageBody for SMSG_AUTH_CHALLENGE {
     }
 }
 
-impl ConstantSized for SMSG_AUTH_CHALLENGE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_AUTH_CHALLENGE {}
 
 impl MaximumPossibleSized for SMSG_AUTH_CHALLENGE {
     fn maximum_possible_size() -> usize {

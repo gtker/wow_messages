@@ -176,11 +176,7 @@ impl Population {
 
 }
 
-impl ConstantSized for Population {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Population {}
 
 impl MaximumPossibleSized for Population {
     fn maximum_possible_size() -> usize {

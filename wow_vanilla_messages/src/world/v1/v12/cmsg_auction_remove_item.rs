@@ -52,11 +52,7 @@ impl MessageBody for CMSG_AUCTION_REMOVE_ITEM {
     }
 }
 
-impl ConstantSized for CMSG_AUCTION_REMOVE_ITEM {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_AUCTION_REMOVE_ITEM {}
 
 impl MaximumPossibleSized for CMSG_AUCTION_REMOVE_ITEM {
     fn maximum_possible_size() -> usize {

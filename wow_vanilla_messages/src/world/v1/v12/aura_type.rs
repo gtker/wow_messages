@@ -552,11 +552,7 @@ impl AuraType {
 
 }
 
-impl ConstantSized for AuraType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for AuraType {}
 
 impl MaximumPossibleSized for AuraType {
     fn maximum_possible_size() -> usize {

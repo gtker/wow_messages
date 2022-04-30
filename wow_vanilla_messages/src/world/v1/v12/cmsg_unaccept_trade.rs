@@ -35,11 +35,7 @@ impl MessageBody for CMSG_UNACCEPT_TRADE {
     }
 }
 
-impl ConstantSized for CMSG_UNACCEPT_TRADE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_UNACCEPT_TRADE {}
 
 impl MaximumPossibleSized for CMSG_UNACCEPT_TRADE {
     fn maximum_possible_size() -> usize {

@@ -180,11 +180,7 @@ impl PetitionTurnInResult {
 
 }
 
-impl ConstantSized for PetitionTurnInResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for PetitionTurnInResult {}
 
 impl MaximumPossibleSized for PetitionTurnInResult {
     fn maximum_possible_size() -> usize {

@@ -52,11 +52,7 @@ impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
     }
 }
 
-impl ConstantSized for SMSG_EXPLORATION_EXPERIENCE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_EXPLORATION_EXPERIENCE {}
 
 impl MaximumPossibleSized for SMSG_EXPLORATION_EXPERIENCE {
     fn maximum_possible_size() -> usize {

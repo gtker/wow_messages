@@ -94,11 +94,7 @@ impl ReadableAndWritable for ChannelMember {
 
 }
 
-impl ConstantSized for ChannelMember {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for ChannelMember {}
 
 impl MaximumPossibleSized for ChannelMember {
     fn maximum_possible_size() -> usize {

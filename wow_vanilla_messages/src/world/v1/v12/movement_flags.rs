@@ -576,11 +576,7 @@ impl MovementFlags {
 
 }
 
-impl ConstantSized for MovementFlags {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MovementFlags {}
 
 impl MaximumPossibleSized for MovementFlags {
     fn maximum_possible_size() -> usize {

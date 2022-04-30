@@ -536,11 +536,7 @@ impl GroupUpdateFlags {
 
 }
 
-impl ConstantSized for GroupUpdateFlags {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for GroupUpdateFlags {}
 
 impl MaximumPossibleSized for GroupUpdateFlags {
     fn maximum_possible_size() -> usize {

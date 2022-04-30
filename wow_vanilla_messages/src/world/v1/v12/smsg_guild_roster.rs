@@ -35,11 +35,7 @@ impl MessageBody for SMSG_GUILD_ROSTER {
     }
 }
 
-impl ConstantSized for SMSG_GUILD_ROSTER {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_GUILD_ROSTER {}
 
 impl MaximumPossibleSized for SMSG_GUILD_ROSTER {
     fn maximum_possible_size() -> usize {

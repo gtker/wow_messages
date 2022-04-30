@@ -43,11 +43,7 @@ impl MessageBody for CMSG_QUESTLOG_REMOVE_QUEST {
     }
 }
 
-impl ConstantSized for CMSG_QUESTLOG_REMOVE_QUEST {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_QUESTLOG_REMOVE_QUEST {}
 
 impl MaximumPossibleSized for CMSG_QUESTLOG_REMOVE_QUEST {
     fn maximum_possible_size() -> usize {

@@ -176,11 +176,7 @@ impl BuyBankSlotResult {
 
 }
 
-impl ConstantSized for BuyBankSlotResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for BuyBankSlotResult {}
 
 impl MaximumPossibleSized for BuyBankSlotResult {
     fn maximum_possible_size() -> usize {

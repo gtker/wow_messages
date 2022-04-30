@@ -181,11 +181,7 @@ impl ReadableAndWritable for ItemSpells {
 
 }
 
-impl ConstantSized for ItemSpells {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for ItemSpells {}
 
 impl MaximumPossibleSized for ItemSpells {
     fn maximum_possible_size() -> usize {

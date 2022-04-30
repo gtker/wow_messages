@@ -52,11 +52,7 @@ impl MessageBody for SMSG_PET_UNLEARN_CONFIRM {
     }
 }
 
-impl ConstantSized for SMSG_PET_UNLEARN_CONFIRM {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PET_UNLEARN_CONFIRM {}
 
 impl MaximumPossibleSized for SMSG_PET_UNLEARN_CONFIRM {
     fn maximum_possible_size() -> usize {

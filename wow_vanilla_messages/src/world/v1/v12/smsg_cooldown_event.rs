@@ -52,11 +52,7 @@ impl MessageBody for SMSG_COOLDOWN_EVENT {
     }
 }
 
-impl ConstantSized for SMSG_COOLDOWN_EVENT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_COOLDOWN_EVENT {}
 
 impl MaximumPossibleSized for SMSG_COOLDOWN_EVENT {
     fn maximum_possible_size() -> usize {

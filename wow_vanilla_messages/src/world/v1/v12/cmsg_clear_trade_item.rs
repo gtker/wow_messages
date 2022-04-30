@@ -43,11 +43,7 @@ impl MessageBody for CMSG_CLEAR_TRADE_ITEM {
     }
 }
 
-impl ConstantSized for CMSG_CLEAR_TRADE_ITEM {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_CLEAR_TRADE_ITEM {}
 
 impl MaximumPossibleSized for CMSG_CLEAR_TRADE_ITEM {
     fn maximum_possible_size() -> usize {

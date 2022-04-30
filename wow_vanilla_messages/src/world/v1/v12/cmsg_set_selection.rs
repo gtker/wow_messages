@@ -44,11 +44,7 @@ impl MessageBody for CMSG_SET_SELECTION {
     }
 }
 
-impl ConstantSized for CMSG_SET_SELECTION {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_SET_SELECTION {}
 
 impl MaximumPossibleSized for CMSG_SET_SELECTION {
     fn maximum_possible_size() -> usize {

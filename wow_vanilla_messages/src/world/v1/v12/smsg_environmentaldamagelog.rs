@@ -77,11 +77,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
     }
 }
 
-impl ConstantSized for SMSG_ENVIRONMENTALDAMAGELOG {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_ENVIRONMENTALDAMAGELOG {}
 
 impl MaximumPossibleSized for SMSG_ENVIRONMENTALDAMAGELOG {
     fn maximum_possible_size() -> usize {

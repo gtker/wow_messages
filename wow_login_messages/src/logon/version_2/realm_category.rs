@@ -280,11 +280,7 @@ impl RealmCategory {
 
 }
 
-impl ConstantSized for RealmCategory {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for RealmCategory {}
 
 impl MaximumPossibleSized for RealmCategory {
     fn maximum_possible_size() -> usize {

@@ -44,11 +44,7 @@ impl MessageBody for CMSG_CHAT_IGNORED {
     }
 }
 
-impl ConstantSized for CMSG_CHAT_IGNORED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_CHAT_IGNORED {}
 
 impl MaximumPossibleSized for CMSG_CHAT_IGNORED {
     fn maximum_possible_size() -> usize {

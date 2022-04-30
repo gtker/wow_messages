@@ -44,11 +44,7 @@ impl MessageBody for SMSG_SPIRIT_HEALER_CONFIRM {
     }
 }
 
-impl ConstantSized for SMSG_SPIRIT_HEALER_CONFIRM {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_SPIRIT_HEALER_CONFIRM {}
 
 impl MaximumPossibleSized for SMSG_SPIRIT_HEALER_CONFIRM {
     fn maximum_possible_size() -> usize {

@@ -35,11 +35,7 @@ impl MessageBody for SMSG_ATTACKSWING_NOTINRANGE {
     }
 }
 
-impl ConstantSized for SMSG_ATTACKSWING_NOTINRANGE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_ATTACKSWING_NOTINRANGE {}
 
 impl MaximumPossibleSized for SMSG_ATTACKSWING_NOTINRANGE {
     fn maximum_possible_size() -> usize {

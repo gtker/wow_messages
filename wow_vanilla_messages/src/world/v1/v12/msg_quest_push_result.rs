@@ -55,11 +55,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
     }
 }
 
-impl ConstantSized for MSG_QUEST_PUSH_RESULT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_QUEST_PUSH_RESULT {}
 
 impl MaximumPossibleSized for MSG_QUEST_PUSH_RESULT {
     fn maximum_possible_size() -> usize {

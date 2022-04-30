@@ -35,11 +35,7 @@ impl MessageBody for CMSG_NEXT_CINEMATIC_CAMERA {
     }
 }
 
-impl ConstantSized for CMSG_NEXT_CINEMATIC_CAMERA {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_NEXT_CINEMATIC_CAMERA {}
 
 impl MaximumPossibleSized for CMSG_NEXT_CINEMATIC_CAMERA {
     fn maximum_possible_size() -> usize {

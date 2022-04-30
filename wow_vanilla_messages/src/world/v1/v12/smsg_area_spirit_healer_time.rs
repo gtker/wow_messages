@@ -52,11 +52,7 @@ impl MessageBody for SMSG_AREA_SPIRIT_HEALER_TIME {
     }
 }
 
-impl ConstantSized for SMSG_AREA_SPIRIT_HEALER_TIME {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_AREA_SPIRIT_HEALER_TIME {}
 
 impl MaximumPossibleSized for SMSG_AREA_SPIRIT_HEALER_TIME {
     fn maximum_possible_size() -> usize {

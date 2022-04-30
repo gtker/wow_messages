@@ -37,11 +37,7 @@ impl MessageBody for MSG_MOVE_WORLDPORT_ACK {
     }
 }
 
-impl ConstantSized for MSG_MOVE_WORLDPORT_ACK {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_MOVE_WORLDPORT_ACK {}
 
 impl MaximumPossibleSized for MSG_MOVE_WORLDPORT_ACK {
     fn maximum_possible_size() -> usize {

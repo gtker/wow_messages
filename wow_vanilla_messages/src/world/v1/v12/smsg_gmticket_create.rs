@@ -44,11 +44,7 @@ impl MessageBody for SMSG_GMTICKET_CREATE {
     }
 }
 
-impl ConstantSized for SMSG_GMTICKET_CREATE {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_GMTICKET_CREATE {}
 
 impl MaximumPossibleSized for SMSG_GMTICKET_CREATE {
     fn maximum_possible_size() -> usize {

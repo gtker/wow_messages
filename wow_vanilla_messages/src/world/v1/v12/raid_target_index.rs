@@ -290,11 +290,7 @@ impl RaidTargetIndex {
 
 }
 
-impl ConstantSized for RaidTargetIndex {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for RaidTargetIndex {}
 
 impl MaximumPossibleSized for RaidTargetIndex {
     fn maximum_possible_size() -> usize {

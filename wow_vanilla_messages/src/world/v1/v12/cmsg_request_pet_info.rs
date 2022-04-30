@@ -35,11 +35,7 @@ impl MessageBody for CMSG_REQUEST_PET_INFO {
     }
 }
 
-impl ConstantSized for CMSG_REQUEST_PET_INFO {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_REQUEST_PET_INFO {}
 
 impl MaximumPossibleSized for CMSG_REQUEST_PET_INFO {
     fn maximum_possible_size() -> usize {

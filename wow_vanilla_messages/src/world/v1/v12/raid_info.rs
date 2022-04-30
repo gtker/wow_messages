@@ -116,11 +116,7 @@ impl ReadableAndWritable for RaidInfo {
 
 }
 
-impl ConstantSized for RaidInfo {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for RaidInfo {}
 
 impl MaximumPossibleSized for RaidInfo {
     fn maximum_possible_size() -> usize {

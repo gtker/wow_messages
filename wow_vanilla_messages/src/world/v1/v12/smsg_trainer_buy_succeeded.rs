@@ -52,11 +52,7 @@ impl MessageBody for SMSG_TRAINER_BUY_SUCCEEDED {
     }
 }
 
-impl ConstantSized for SMSG_TRAINER_BUY_SUCCEEDED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_TRAINER_BUY_SUCCEEDED {}
 
 impl MaximumPossibleSized for SMSG_TRAINER_BUY_SUCCEEDED {
     fn maximum_possible_size() -> usize {

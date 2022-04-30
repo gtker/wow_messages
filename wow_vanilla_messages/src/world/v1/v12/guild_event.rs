@@ -298,11 +298,7 @@ impl GuildEvent {
 
 }
 
-impl ConstantSized for GuildEvent {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for GuildEvent {}
 
 impl MaximumPossibleSized for GuildEvent {
     fn maximum_possible_size() -> usize {

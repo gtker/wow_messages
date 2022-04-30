@@ -45,11 +45,7 @@ impl MessageBody for SimpleMsg {
     }
 }
 
-impl ConstantSized for SimpleMsg {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SimpleMsg {}
 
 impl MaximumPossibleSized for SimpleMsg {
     fn maximum_possible_size() -> usize {

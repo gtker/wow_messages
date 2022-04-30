@@ -44,11 +44,7 @@ impl MessageBody for SMSG_OPEN_CONTAINER {
     }
 }
 
-impl ConstantSized for SMSG_OPEN_CONTAINER {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_OPEN_CONTAINER {}
 
 impl MaximumPossibleSized for SMSG_OPEN_CONTAINER {
     fn maximum_possible_size() -> usize {

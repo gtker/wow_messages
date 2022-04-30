@@ -52,11 +52,7 @@ impl MessageBody for SMSG_FORCE_MOVE_UNROOT {
     }
 }
 
-impl ConstantSized for SMSG_FORCE_MOVE_UNROOT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_FORCE_MOVE_UNROOT {}
 
 impl MaximumPossibleSized for SMSG_FORCE_MOVE_UNROOT {
     fn maximum_possible_size() -> usize {

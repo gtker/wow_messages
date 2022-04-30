@@ -48,11 +48,7 @@ impl MessageBody for SMSG_ACTION_BUTTONS {
     }
 }
 
-impl ConstantSized for SMSG_ACTION_BUTTONS {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_ACTION_BUTTONS {}
 
 impl MaximumPossibleSized for SMSG_ACTION_BUTTONS {
     fn maximum_possible_size() -> usize {

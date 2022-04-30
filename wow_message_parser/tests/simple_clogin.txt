@@ -84,11 +84,7 @@ impl ReadableAndWritable for SimpleClogin {
 
 }
 
-impl ConstantSized for SimpleClogin {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SimpleClogin {}
 
 impl MaximumPossibleSized for SimpleClogin {
     fn maximum_possible_size() -> usize {

@@ -93,11 +93,7 @@ impl ReadableAndWritable for ForcedReaction {
 
 }
 
-impl ConstantSized for ForcedReaction {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for ForcedReaction {}
 
 impl MaximumPossibleSized for ForcedReaction {
     fn maximum_possible_size() -> usize {

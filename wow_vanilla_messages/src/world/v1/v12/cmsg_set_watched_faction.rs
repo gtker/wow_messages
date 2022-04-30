@@ -43,11 +43,7 @@ impl MessageBody for CMSG_SET_WATCHED_FACTION {
     }
 }
 
-impl ConstantSized for CMSG_SET_WATCHED_FACTION {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_SET_WATCHED_FACTION {}
 
 impl MaximumPossibleSized for CMSG_SET_WATCHED_FACTION {
     fn maximum_possible_size() -> usize {

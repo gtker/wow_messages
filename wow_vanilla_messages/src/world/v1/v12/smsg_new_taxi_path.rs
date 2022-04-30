@@ -35,11 +35,7 @@ impl MessageBody for SMSG_NEW_TAXI_PATH {
     }
 }
 
-impl ConstantSized for SMSG_NEW_TAXI_PATH {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_NEW_TAXI_PATH {}
 
 impl MaximumPossibleSized for SMSG_NEW_TAXI_PATH {
     fn maximum_possible_size() -> usize {

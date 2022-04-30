@@ -35,11 +35,7 @@ impl MessageBody for CMSG_REQUEST_RAID_INFO {
     }
 }
 
-impl ConstantSized for CMSG_REQUEST_RAID_INFO {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_REQUEST_RAID_INFO {}
 
 impl MaximumPossibleSized for CMSG_REQUEST_RAID_INFO {
     fn maximum_possible_size() -> usize {

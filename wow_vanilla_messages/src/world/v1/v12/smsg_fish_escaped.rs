@@ -35,11 +35,7 @@ impl MessageBody for SMSG_FISH_ESCAPED {
     }
 }
 
-impl ConstantSized for SMSG_FISH_ESCAPED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_FISH_ESCAPED {}
 
 impl MaximumPossibleSized for SMSG_FISH_ESCAPED {
     fn maximum_possible_size() -> usize {

@@ -44,11 +44,7 @@ impl MessageBody for CMSG_SETSHEATHED {
     }
 }
 
-impl ConstantSized for CMSG_SETSHEATHED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_SETSHEATHED {}
 
 impl MaximumPossibleSized for CMSG_SETSHEATHED {
     fn maximum_possible_size() -> usize {

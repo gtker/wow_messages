@@ -44,11 +44,7 @@ impl MessageBody for SMSG_GAMEOBJECT_PAGETEXT {
     }
 }
 
-impl ConstantSized for SMSG_GAMEOBJECT_PAGETEXT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_GAMEOBJECT_PAGETEXT {}
 
 impl MaximumPossibleSized for SMSG_GAMEOBJECT_PAGETEXT {
     fn maximum_possible_size() -> usize {

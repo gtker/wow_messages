@@ -176,11 +176,7 @@ impl TimerType {
 
 }
 
-impl ConstantSized for TimerType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for TimerType {}
 
 impl MaximumPossibleSized for TimerType {
     fn maximum_possible_size() -> usize {

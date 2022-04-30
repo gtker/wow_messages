@@ -172,11 +172,7 @@ impl RaidGroupError {
 
 }
 
-impl ConstantSized for RaidGroupError {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for RaidGroupError {}
 
 impl MaximumPossibleSized for RaidGroupError {
     fn maximum_possible_size() -> usize {

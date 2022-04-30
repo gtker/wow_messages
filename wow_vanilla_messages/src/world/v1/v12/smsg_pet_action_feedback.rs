@@ -44,11 +44,7 @@ impl MessageBody for SMSG_PET_ACTION_FEEDBACK {
     }
 }
 
-impl ConstantSized for SMSG_PET_ACTION_FEEDBACK {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_PET_ACTION_FEEDBACK {}
 
 impl MaximumPossibleSized for SMSG_PET_ACTION_FEEDBACK {
     fn maximum_possible_size() -> usize {

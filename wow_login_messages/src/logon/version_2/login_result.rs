@@ -302,11 +302,7 @@ impl LoginResult {
 
 }
 
-impl ConstantSized for LoginResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for LoginResult {}
 
 impl MaximumPossibleSized for LoginResult {
     fn maximum_possible_size() -> usize {

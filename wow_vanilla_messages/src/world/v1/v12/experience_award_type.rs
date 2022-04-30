@@ -274,11 +274,7 @@ impl ExperienceAwardType {
 
 }
 
-impl ConstantSized for ExperienceAwardType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for ExperienceAwardType {}
 
 impl MaximumPossibleSized for ExperienceAwardType {
     fn maximum_possible_size() -> usize {

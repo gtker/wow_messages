@@ -155,11 +155,7 @@ impl ReadableAndWritable for TelemetryKey {
 
 }
 
-impl ConstantSized for TelemetryKey {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for TelemetryKey {}
 
 impl MaximumPossibleSized for TelemetryKey {
     fn maximum_possible_size() -> usize {

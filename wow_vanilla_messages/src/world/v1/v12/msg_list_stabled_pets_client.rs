@@ -44,11 +44,7 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Client {
     }
 }
 
-impl ConstantSized for MSG_LIST_STABLED_PETS_Client {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_LIST_STABLED_PETS_Client {}
 
 impl MaximumPossibleSized for MSG_LIST_STABLED_PETS_Client {
     fn maximum_possible_size() -> usize {

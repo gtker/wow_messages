@@ -280,11 +280,7 @@ impl StableResult {
 
 }
 
-impl ConstantSized for StableResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for StableResult {}
 
 impl MaximumPossibleSized for StableResult {
     fn maximum_possible_size() -> usize {

@@ -94,11 +94,7 @@ impl ReadableAndWritable for FactionInitializer {
 
 }
 
-impl ConstantSized for FactionInitializer {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for FactionInitializer {}
 
 impl MaximumPossibleSized for FactionInitializer {
     fn maximum_possible_size() -> usize {

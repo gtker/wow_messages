@@ -176,11 +176,7 @@ impl LogoutResult {
 
 }
 
-impl ConstantSized for LogoutResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for LogoutResult {}
 
 impl MaximumPossibleSized for LogoutResult {
     fn maximum_possible_size() -> usize {

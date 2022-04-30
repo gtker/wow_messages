@@ -274,11 +274,7 @@ impl RaidTargetUpdateType {
 
 }
 
-impl ConstantSized for RaidTargetUpdateType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for RaidTargetUpdateType {}
 
 impl MaximumPossibleSized for RaidTargetUpdateType {
     fn maximum_possible_size() -> usize {

@@ -93,11 +93,7 @@ impl ReadableAndWritable for NpcTextUpdateEmote {
 
 }
 
-impl ConstantSized for NpcTextUpdateEmote {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for NpcTextUpdateEmote {}
 
 impl MaximumPossibleSized for NpcTextUpdateEmote {
     fn maximum_possible_size() -> usize {

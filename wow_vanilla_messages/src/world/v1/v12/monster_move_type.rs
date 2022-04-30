@@ -280,11 +280,7 @@ impl MonsterMoveType {
 
 }
 
-impl ConstantSized for MonsterMoveType {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MonsterMoveType {}
 
 impl MaximumPossibleSized for MonsterMoveType {
     fn maximum_possible_size() -> usize {

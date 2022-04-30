@@ -76,11 +76,7 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
     }
 }
 
-impl ConstantSized for SMSG_QUESTUPDATE_ADD_KILL {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_QUESTUPDATE_ADD_KILL {}
 
 impl MaximumPossibleSized for SMSG_QUESTUPDATE_ADD_KILL {
     fn maximum_possible_size() -> usize {

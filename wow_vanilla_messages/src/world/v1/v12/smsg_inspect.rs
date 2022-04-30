@@ -44,11 +44,7 @@ impl MessageBody for SMSG_INSPECT {
     }
 }
 
-impl ConstantSized for SMSG_INSPECT {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_INSPECT {}
 
 impl MaximumPossibleSized for SMSG_INSPECT {
     fn maximum_possible_size() -> usize {

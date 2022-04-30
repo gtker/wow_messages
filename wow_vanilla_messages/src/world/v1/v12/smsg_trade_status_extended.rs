@@ -89,11 +89,7 @@ impl MessageBody for SMSG_TRADE_STATUS_EXTENDED {
     }
 }
 
-impl ConstantSized for SMSG_TRADE_STATUS_EXTENDED {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_TRADE_STATUS_EXTENDED {}
 
 impl MaximumPossibleSized for SMSG_TRADE_STATUS_EXTENDED {
     fn maximum_possible_size() -> usize {

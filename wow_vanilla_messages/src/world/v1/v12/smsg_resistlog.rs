@@ -90,11 +90,7 @@ impl MessageBody for SMSG_RESISTLOG {
     }
 }
 
-impl ConstantSized for SMSG_RESISTLOG {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for SMSG_RESISTLOG {}
 
 impl MaximumPossibleSized for SMSG_RESISTLOG {
     fn maximum_possible_size() -> usize {

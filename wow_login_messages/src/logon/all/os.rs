@@ -174,11 +174,7 @@ impl Os {
 
 }
 
-impl ConstantSized for Os {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for Os {}
 
 impl MaximumPossibleSized for Os {
     fn maximum_possible_size() -> usize {

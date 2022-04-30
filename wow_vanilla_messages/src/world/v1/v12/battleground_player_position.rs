@@ -110,11 +110,7 @@ impl ReadableAndWritable for BattlegroundPlayerPosition {
 
 }
 
-impl ConstantSized for BattlegroundPlayerPosition {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for BattlegroundPlayerPosition {}
 
 impl MaximumPossibleSized for BattlegroundPlayerPosition {
     fn maximum_possible_size() -> usize {

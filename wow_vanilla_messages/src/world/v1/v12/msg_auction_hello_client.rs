@@ -44,11 +44,7 @@ impl MessageBody for MSG_AUCTION_HELLO_Client {
     }
 }
 
-impl ConstantSized for MSG_AUCTION_HELLO_Client {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MSG_AUCTION_HELLO_Client {}
 
 impl MaximumPossibleSized for MSG_AUCTION_HELLO_Client {
     fn maximum_possible_size() -> usize {

@@ -190,11 +190,7 @@ impl MountResult {
 
 }
 
-impl ConstantSized for MountResult {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for MountResult {}
 
 impl MaximumPossibleSized for MountResult {
     fn maximum_possible_size() -> usize {

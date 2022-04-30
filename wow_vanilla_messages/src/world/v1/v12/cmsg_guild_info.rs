@@ -35,11 +35,7 @@ impl MessageBody for CMSG_GUILD_INFO {
     }
 }
 
-impl ConstantSized for CMSG_GUILD_INFO {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
+impl ConstantSized for CMSG_GUILD_INFO {}
 
 impl MaximumPossibleSized for CMSG_GUILD_INFO {
     fn maximum_possible_size() -> usize {
