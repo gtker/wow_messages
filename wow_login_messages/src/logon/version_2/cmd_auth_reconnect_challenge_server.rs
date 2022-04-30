@@ -155,6 +155,9 @@ impl AsyncReadWrite for CMD_AUTH_RECONNECT_CHALLENGE_Server {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+
         // result: LoginResult
         self.result.tokio_write(w).await?;
 

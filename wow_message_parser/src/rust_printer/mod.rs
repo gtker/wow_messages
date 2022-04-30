@@ -211,8 +211,8 @@ impl Writer {
     pub fn impl_read_and_writable_with_error<
         S: AsRef<str>,
         S1: AsRef<str>,
-        F: Fn(&mut Self),
-        F2: Fn(&mut Self),
+        F: Fn(&mut Self, ImplType),
+        F2: Fn(&mut Self, ImplType),
     >(
         &mut self,
         type_name: S,
@@ -233,11 +233,34 @@ impl Writer {
         self.open_curly(
             "fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error>",
         );
-        read_function(self);
+        read_function(self, ImplType::Std);
         self.closing_curly_newline();
 
         self.open_curly("fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
-        write_function(self);
+        write_function(self, ImplType::Std);
+        self.closing_curly_newline();
+        self.closing_curly_newline();
+
+        self.wln(CFG_ASYNC_ANY);
+        self.wln(ASYNC_TRAIT_MACRO);
+        self.open_curly(format!("impl {} for {}", ASYNC_TRAIT, type_name.as_ref()));
+
+        self.wln(format!(
+            "type Error = {err_ty};",
+            err_ty = error_name.as_ref()
+        ));
+        self.newline();
+
+        self.wln(CFG_ASYNC_TOKIO);
+        self.open_curly(
+            "async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error>",
+        );
+        read_function(self, ImplType::Tokio);
+        self.closing_curly_newline();
+
+        self.wln(CFG_ASYNC_TOKIO);
+        self.open_curly("async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>");
+        write_function(self, ImplType::Tokio);
         self.closing_curly_newline();
         self.closing_curly_newline();
     }
@@ -287,7 +310,11 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn impl_readable_and_writable<S: AsRef<str>, F: Fn(&mut Self), F2: Fn(&mut Self)>(
+    pub fn impl_readable_and_writable<
+        S: AsRef<str>,
+        F: Fn(&mut Self, ImplType),
+        F2: Fn(&mut Self, ImplType),
+    >(
         &mut self,
         type_name: S,
         read_function: F,

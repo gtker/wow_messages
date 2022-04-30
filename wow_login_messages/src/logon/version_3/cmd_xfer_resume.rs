@@ -58,6 +58,9 @@ impl AsyncReadWrite for CMD_XFER_RESUME {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+
         // offset: u64
         w.write_all(&self.offset.to_le_bytes()).await?;
 

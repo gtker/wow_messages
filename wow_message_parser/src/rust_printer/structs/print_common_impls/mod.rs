@@ -8,7 +8,6 @@ use crate::rust_printer::{
 };
 use crate::CSTRING_LARGEST_ALLOWED;
 
-pub mod print_async;
 pub mod print_read;
 pub mod print_write;
 
@@ -26,16 +25,14 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
             s.impl_read_and_writable_with_error(
                 e.name(),
                 &error_ty,
-                |s| {
-                    print_read::print_read(s, e, o, no_fixes, no_fixes);
+                |s, it| {
+                    print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
-                |s| {
-                    print_write::print_unencrypted_write_header(s, e);
-                    print_write::print_write(s, e, o, no_fixes, no_fixes);
+                |s, it| {
+                    print_write::print_unencrypted_write_header(s, e, it.prefix(), it.postfix());
+                    print_write::print_write(s, e, o, it.prefix(), it.postfix());
                 },
             );
-
-            print_async::print_async(s, e, o, &error_ty);
         }
         ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
             s.impl_world_read_and_writable_with_error(

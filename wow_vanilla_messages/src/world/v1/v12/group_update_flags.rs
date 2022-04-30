@@ -37,17 +37,21 @@ impl ReadableAndWritable for GroupUpdateFlags {
 #[async_trait]
 impl AsyncReadWrite for GroupUpdateFlags {
     type Error = std::io::Error;
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let inner = crate::util::tokio_read_u32_le(r).await?;
         Ok(Self { inner })
     }
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
+
 }
+
 impl GroupUpdateFlags {
     pub const FLAG_NONE: u32 = 0x00;
     pub const FLAG_STATUS: u32 = 0x01;

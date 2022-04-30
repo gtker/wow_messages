@@ -216,58 +216,30 @@ pub fn common_impls_world(
 pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
     s.impl_readable_and_writable(
         format!("{t}OpcodeMessage", t = ty),
-        |s| {
-            s.wln(format!("let opcode = {t}Opcode::read(r)?;", t = ty));
+        |s, it| {
+            s.wln(format!("let opcode = {t}Opcode::{prefix}read(r){postfix}?;", t = ty, prefix = it.prefix(), postfix = it.postfix()));
 
             s.body("match opcode", |s| {
                 for e in v {
                     s.wln(format!(
-                        "{t}Opcode::{enum_name} => Ok(Self::{enum_name}({name}::read(r)?)),",
+                        "{t}Opcode::{enum_name} => Ok(Self::{enum_name}({name}::{prefix}read(r){postfix}?)),",
                         name = e.name(),
                         enum_name = get_enumerator_name(e.name()),
                         t = ty,
+                        prefix = it.prefix(),
+                        postfix = it.postfix(),
                     ));
                 }
             });
         },
-        |s| {
-            s.wln(format!("{t}Opcode::from(self).write(w)?;\n", t = ty));
+        |s, it| {
+            s.wln(format!("{t}Opcode::from(self).{prefix}write(w){postfix}?;\n", t = ty, prefix = it.prefix(), postfix = it.postfix()));
             s.bodyn("match self", |s| {
                 for e in v {
                     s.wln(format!(
-                        "Self::{enum_name}(e) => e.write(w)?,",
+                        "Self::{enum_name}(e) => e.{prefix}write(w){postfix}?,",
                         enum_name = get_enumerator_name(e.name()),
-                    ));
-                }
-            });
-
-            s.wln("Ok(())");
-        },
-    );
-
-    s.impl_async_readable_and_writable(
-        format!("{t}OpcodeMessage", t = ty),
-        |s| {
-            s.wln(format!("let opcode = {t}Opcode::tokio_read(r).await?;", t = ty));
-
-            s.body("match opcode", |s| {
-                for e in v {
-                    s.wln(format!(
-                        "{t}Opcode::{enum_name} => Ok(Self::{enum_name}({name}::tokio_read(r).await?)),",
-                        name = e.name(),
-                        enum_name = get_enumerator_name(e.name()),
-                        t = ty,
-                    ));
-                }
-            });
-        },
-        |s| {
-            s.wln(format!("{t}Opcode::from(self).tokio_write(w).await?;\n", t = ty));
-            s.bodyn("match self", |s| {
-                for e in v {
-                    s.wln(format!(
-                        "Self::{enum_name}(e) => e.tokio_write(w).await?,",
-                        enum_name = get_enumerator_name(e.name()),
+                        prefix = it.prefix(), postfix = it.postfix(),
                     ));
                 }
             });
@@ -518,8 +490,12 @@ pub fn opcode_enum_login(s: &mut Writer, v: &[&Container], ty: &str) {
 
     s.impl_readable_and_writable(
         &format!("{t}Opcode", t = ty),
-        |s| {
-            s.wln("let opcode = crate::util::read_u8_le(r)?;\n");
+        |s, it| {
+            s.wln(format!(
+                "let opcode = crate::util::{prefix}read_u8_le(r){postfix}?;\n",
+                prefix = it.prefix(),
+                postfix = it.postfix()
+            ));
 
             s.body("match opcode", |s| {
                 for e in v {
@@ -540,38 +516,12 @@ pub fn opcode_enum_login(s: &mut Writer, v: &[&Container], ty: &str) {
                 ));
             });
         },
-        |s| {
-            s.wln("crate::util::write_u8_le(w, self.as_u8())?;");
-            s.wln("Ok(())");
-        },
-    );
-
-    s.impl_async_readable_and_writable(
-        &format!("{t}Opcode", t = ty),
-        |s| {
-            s.wln("let opcode = crate::util::tokio_read_u8_le(r).await?;\n");
-
-            s.body("match opcode", |s| {
-                for e in v {
-                    s.wln(format!(
-                        "{value:#04x} => Ok(Self::{enum_name}),",
-                        enum_name = get_enumerator_name(e.name()),
-                        value = match e.container_type() {
-                            ContainerType::CLogin(i) | ContainerType::SLogin(i) => i,
-                            ContainerType::SMsg(i) | ContainerType::CMsg(i) => i,
-                            _ => panic!("invalid type for opcode enum"),
-                        }
-                    ));
-                }
-
-                s.wln(format!(
-                    "opcode => Err({t}OpcodeError::InvalidOpcode(opcode)),",
-                    t = ty
-                ));
-            });
-        },
-        |s| {
-            s.wln("crate::util::tokio_write_u8_le(w, self.as_u8()).await?;");
+        |s, it| {
+            s.wln(format!(
+                "crate::util::{prefix}write_u8_le(w, self.as_u8()){postfix}?;",
+                prefix = it.prefix(),
+                postfix = it.postfix()
+            ));
             s.wln("Ok(())");
         },
     );

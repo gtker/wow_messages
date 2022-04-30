@@ -10,19 +10,24 @@ use crate::rust_printer::new_enums::{
 };
 use crate::rust_printer::Writer;
 
-pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container) {
+pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container, prefix: &str, postfix: &str) {
     match e.container_type() {
         ContainerType::Struct => {}
         ContainerType::SLogin(_) | ContainerType::CLogin(_) => {
             s.wln("// opcode: u8");
-            s.wln("w.write_all(&Self::OPCODE.to_le_bytes())?;");
+            s.wln(format!(
+                "w.write_all(&Self::OPCODE.to_le_bytes()){postfix}?;",
+                postfix = postfix
+            ));
             s.newline();
         }
         ContainerType::Msg(_) => panic!("msg opcode not handled"),
         ContainerType::CMsg(_) => {
             s.wln("// size: u16_be, and opcode: u32");
             s.wln(format!(
-                "{import_path}::write_u16_be(w, ({size}size() + 4) as u16)?;",
+                "{import_path}::{prefix}write_u16_be(w, ({size}size() + 4) as u16){postfix}?;",
+                prefix = prefix,
+                postfix = postfix,
                 import_path = "crate::util",
                 size = match e.is_constant_sized() {
                     true => "Self::",
@@ -30,24 +35,30 @@ pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container) {
                 }
             ));
             s.wln(format!(
-                "{import_path}::write_u32_le(w, Self::OPCODE)?;",
+                "{import_path}::{prefix}write_u32_le(w, Self::OPCODE){postfix}?;",
                 import_path = "crate::util",
+                prefix = prefix,
+                postfix = postfix,
             ));
             s.newline();
         }
         ContainerType::SMsg(_) => {
             s.wln("// size: u16_be, and opcode: u16");
             s.wln(format!(
-                "{import_path}::write_u16_be(w, ({size}size() + 2) as u16)?;",
+                "{import_path}::{prefix}write_u16_be(w, ({size}size() + 2) as u16){postfix}?;",
                 import_path = "crate::util",
                 size = match e.is_constant_sized() {
                     true => "Self::",
                     false => "self.",
-                }
+                },
+                prefix = prefix,
+                postfix = postfix,
             ));
             s.wln(format!(
-                "{import_path}::write_u16_le(w, Self::OPCODE)?;",
+                "{import_path}::{prefix}write_u16_le(w, Self::OPCODE){postfix}?;",
                 import_path = "crate::util",
+                prefix = prefix,
+                postfix = postfix,
             ));
             s.newline();
         }

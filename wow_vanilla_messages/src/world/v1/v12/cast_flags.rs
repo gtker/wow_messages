@@ -37,17 +37,21 @@ impl ReadableAndWritable for CastFlags {
 #[async_trait]
 impl AsyncReadWrite for CastFlags {
     type Error = std::io::Error;
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error> {
+    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let inner = crate::util::tokio_read_u16_le(r).await?;
         Ok(Self { inner })
     }
+
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
+
 }
+
 impl CastFlags {
     pub const NONE: u16 = 0x00;
     pub const HIDDEN_COMBATLOG: u16 = 0x01;

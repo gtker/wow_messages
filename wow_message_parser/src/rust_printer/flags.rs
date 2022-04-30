@@ -1,7 +1,7 @@
 use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
 use crate::rust_printer::enums::print_wowm_definition;
-use crate::rust_printer::{Writer, ASYNC_TRAIT, ASYNC_TRAIT_MACRO, CFG_ASYNC_ANY, CFG_ASYNC_TOKIO};
+use crate::rust_printer::Writer;
 use crate::UTILITY_PATH;
 
 pub fn print_flag(e: &Definer) -> Writer {
@@ -43,49 +43,26 @@ fn common_impls(s: &mut Writer, e: &Definer) {
     s.impl_read_and_writable_with_error(
         e.name(),
         "std::io::Error",
-        |s| {
+        |s, it| {
             s.wln(format!(
-                "let inner = {module}::read_{ty}_{endian}(r)?;",
+                "let inner = {module}::{prefix}read_{ty}_{endian}(r){postfix}?;",
                 module = UTILITY_PATH,
                 ty = e.ty().rust_str(),
-                endian = e.ty().rust_endian_str()
+                endian = e.ty().rust_endian_str(),
+                prefix = it.prefix(),
+                postfix = it.postfix(),
             ));
             s.wln("Ok(Self { inner })");
         },
-        |s| {
+        |s, it| {
             s.wln(format!(
-                "w.write_all(&self.inner.to_{endian}_bytes())?;",
-                endian = e.ty().rust_endian_str()
+                "w.write_all(&self.inner.to_{endian}_bytes()){postfix}?;",
+                endian = e.ty().rust_endian_str(),
+                postfix = it.postfix(),
             ));
             s.wln("Ok(())");
         },
     );
-
-    s.wln(CFG_ASYNC_ANY);
-    s.wln(ASYNC_TRAIT_MACRO);
-    s.body(format!("impl {} for {}", ASYNC_TRAIT, e.name()), |s| {
-        s.wln("type Error = std::io::Error;");
-
-        s.wln(CFG_ASYNC_TOKIO);
-        s.body("async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>", |s| {
-            s.wln(format!(
-                "let inner = {module}::tokio_read_{ty}_{endian}(r).await?;",
-                module = UTILITY_PATH,
-                ty = e.ty().rust_str(),
-                endian = e.ty().rust_endian_str()
-            ));
-            s.wln("Ok(Self { inner })");
-        });
-
-        s.wln(CFG_ASYNC_TOKIO);
-        s.body("async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error>", |s| {
-            s.wln(format!(
-                "w.write_all(&self.inner.to_{endian}_bytes()).await?;",
-                endian = e.ty().rust_endian_str(),
-            ));
-            s.wln("Ok(())");
-        });
-    });
 
     s.bodyn(format!("impl {name}", name = e.name()), |s| {
         print_fields(s, e);
