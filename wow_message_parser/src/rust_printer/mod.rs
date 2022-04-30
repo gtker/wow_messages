@@ -38,7 +38,8 @@ pub const WORLD_SERVER_HEADER_TRAIT_NAME: &str = "ServerMessageWrite";
 pub const OPCODE_MESSAGE_TRAIT_NAME: &str = "OpcodeMessage";
 
 pub const ASYNC_TRAIT: &str = "AsyncReadWrite";
-pub const ASYNC_TRAIT_MACRO: &str = "#[async_trait]";
+pub const ASYNC_TRAIT_MACRO: &str =
+    "#[cfg_attr(any(feature = \"async_tokio\", feature = \"async_std\"), async_trait)]";
 pub const ASYNC_TRAIT_IMPORT: &str = "use async_trait::async_trait;";
 
 pub const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";

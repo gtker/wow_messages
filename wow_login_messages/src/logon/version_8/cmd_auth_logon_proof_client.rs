@@ -171,7 +171,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for CMD_AUTH_LOGON_PROOF_Client {
     type Error = std::io::Error;
 

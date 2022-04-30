@@ -36,7 +36,7 @@ impl ReadableAndWritable for GuildCommand {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for GuildCommand {
     type Error = GuildCommandError;
 

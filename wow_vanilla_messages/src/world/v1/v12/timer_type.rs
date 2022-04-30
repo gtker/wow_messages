@@ -34,7 +34,7 @@ impl ReadableAndWritable for TimerType {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for TimerType {
     type Error = TimerTypeError;
 

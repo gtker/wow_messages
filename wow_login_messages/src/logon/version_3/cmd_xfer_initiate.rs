@@ -36,7 +36,7 @@ impl ReadableAndWritable for CMD_XFER_INITIATE {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for CMD_XFER_INITIATE {
     type Error = std::io::Error;
 

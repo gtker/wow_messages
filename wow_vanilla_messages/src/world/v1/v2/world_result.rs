@@ -112,7 +112,7 @@ impl ReadableAndWritable for WorldResult {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for WorldResult {
     type Error = WorldResultError;
 

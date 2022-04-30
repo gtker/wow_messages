@@ -48,7 +48,7 @@ impl ReadableAndWritable for CMD_REALM_LIST_Client {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for CMD_REALM_LIST_Client {
     type Error = std::io::Error;
 

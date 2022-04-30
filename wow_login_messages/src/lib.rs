@@ -133,7 +133,7 @@ pub trait MaximumPossibleSized {
     fn maximum_possible_size() -> usize;
 }
 
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
 pub trait AsyncReadWrite: Sized {
     type Error;

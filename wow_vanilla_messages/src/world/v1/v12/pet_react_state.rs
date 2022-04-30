@@ -33,7 +33,7 @@ impl ReadableAndWritable for PetReactState {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for PetReactState {
     type Error = PetReactStateError;
 

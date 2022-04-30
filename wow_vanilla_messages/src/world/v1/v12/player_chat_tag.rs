@@ -34,7 +34,7 @@ impl ReadableAndWritable for PlayerChatTag {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for PlayerChatTag {
     type Error = PlayerChatTagError;
 

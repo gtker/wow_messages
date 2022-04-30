@@ -35,7 +35,7 @@ impl ReadableAndWritable for BgTypeId {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for BgTypeId {
     type Error = BgTypeIdError;
 

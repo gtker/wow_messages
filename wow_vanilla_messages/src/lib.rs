@@ -119,7 +119,7 @@ pub trait ReadableAndWritable: Sized {
     fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 }
 
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
 pub trait AsyncReadWrite: Sized {
     type Error;

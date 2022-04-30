@@ -45,7 +45,7 @@ impl ReadableAndWritable for QuestItemReward {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for QuestItemReward {
     type Error = std::io::Error;
 

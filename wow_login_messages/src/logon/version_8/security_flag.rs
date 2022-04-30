@@ -36,7 +36,7 @@ impl ReadableAndWritable for SecurityFlag {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for SecurityFlag {
     type Error = std::io::Error;
 

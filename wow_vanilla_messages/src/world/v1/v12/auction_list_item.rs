@@ -142,7 +142,7 @@ impl ReadableAndWritable for AuctionListItem {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for AuctionListItem {
     type Error = std::io::Error;
 

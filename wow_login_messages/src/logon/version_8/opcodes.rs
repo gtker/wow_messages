@@ -54,7 +54,7 @@ impl ReadableAndWritable for ServerOpcodeMessage {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for ServerOpcodeMessage {
     type Error = ServerOpcodeMessageError;
 
@@ -246,7 +246,7 @@ impl ReadableAndWritable for ServerOpcode {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for ServerOpcode {
     type Error = ServerOpcodeError;
 
@@ -374,7 +374,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for ClientOpcodeMessage {
     type Error = ClientOpcodeMessageError;
 
@@ -533,7 +533,7 @@ impl ReadableAndWritable for ClientOpcode {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for ClientOpcode {
     type Error = ClientOpcodeError;
 

@@ -53,7 +53,7 @@ impl ReadableAndWritable for GossipItem {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for GossipItem {
     type Error = std::io::Error;
 

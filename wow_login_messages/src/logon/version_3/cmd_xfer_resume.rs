@@ -44,7 +44,7 @@ impl ReadableAndWritable for CMD_XFER_RESUME {
 }
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
-#[async_trait]
+#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl AsyncReadWrite for CMD_XFER_RESUME {
     type Error = std::io::Error;
 
