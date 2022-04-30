@@ -17,3 +17,17 @@ struct TrainerSpell {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | 4 / Little | u32 | spell |  |
+| 0x04 | ? / - | TrainerSpellState | state |  |
+| - | 4 / Little | u32 | spell_cost |  |
+| - | 4 / Little | u32 | talent_point_cost |  |
+| - | 4 / Little | u32 | first_rank |  |
+| - | 1 / - | u8 | required_level |  |
+| - | 4 / Little | u32 | required_skill |  |
+| - | 4 / Little | u32 | required_skill_value |  |
+| - | 4 / Little | u32 | spell_chain_required |  |
+| - | 4 / Little | u32 | spell_chain_previous |  |
+| - | 4 / Little | u32 | unknown1 |  |

@@ -8,3 +8,8 @@ slogin CMD_XFER_DATA = 0x31 {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | 2 / Little | u16 | size |  |
+| 0x02 | ? / - | u8[size] | data |  |

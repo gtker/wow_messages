@@ -10,3 +10,10 @@ clogin CMD_SURVEY_RESULT = 0x04 {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | 4 / Little | u32 | survey_id |  |
+| 0x04 | 1 / - | u8 | error |  |
+| 0x05 | 2 / Little | u16 | compressed_data_length |  |
+| 0x07 | ? / - | u8[compressed_data_length] | data |  |

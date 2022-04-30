@@ -12,3 +12,12 @@ struct PetitionShowlist {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | 4 / Little | u32 | index |  |
+| 0x04 | 4 / Little | u32 | charter_entry |  |
+| 0x08 | 4 / Little | u32 | charter_display_id |  |
+| 0x0C | 4 / Little | u32 | guild_charter_cost |  |
+| 0x10 | 4 / Little | u32 | unknown1 |  |
+| 0x14 | 4 / Little | u32 | unknown2 |  |

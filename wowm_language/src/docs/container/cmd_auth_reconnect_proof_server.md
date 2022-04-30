@@ -7,6 +7,10 @@ slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | ? / - | LoginResult | result |  |
 ## Protocol Version 8
 
 ### Wowm Representation
@@ -17,3 +21,8 @@ slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | ? / - | LoginResult | result |  |
+| - | 2 / Little | u16 | padding |  |

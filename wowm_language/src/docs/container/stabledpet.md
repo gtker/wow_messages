@@ -12,3 +12,12 @@ struct StabledPet {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | 4 / Little | u32 | pet_number |  |
+| 0x04 | 4 / Little | u32 | entry |  |
+| 0x08 | 4 / Little | u32 | level |  |
+| 0x0C | - / - | CString | name |  |
+| - | 4 / Little | u32 | loyalty |  |
+| - | 1 / - | u8 | slot |  |

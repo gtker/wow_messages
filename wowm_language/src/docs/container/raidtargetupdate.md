@@ -8,3 +8,8 @@ struct RaidTargetUpdate {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | ? / - | RaidTargetIndex | index |  |
+| - | 8 / Little | Guid | guid |  |

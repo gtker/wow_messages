@@ -10,3 +10,10 @@ struct Version {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | 1 / - | u8 | major |  |
+| 0x01 | 1 / - | u8 | minor |  |
+| 0x02 | 1 / - | u8 | patch |  |
+| 0x03 | 2 / Little | u16 | build |  |

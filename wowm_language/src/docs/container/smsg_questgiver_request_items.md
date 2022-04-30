@@ -32,3 +32,20 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x04 | 8 / Little | Guid | npc |  |
+| 0x0C | 4 / Little | u32 | quest_id |  |
+| 0x10 | - / - | CString | title |  |
+| - | - / - | CString | request_items_text |  |
+| - | 4 / Little | u32 | emote_delay |  |
+| - | 4 / Little | u32 | emote |  |
+| - | 4 / Little | u32 | auto_finish |  |
+| - | 4 / Little | u32 | required_money |  |
+| - | 4 / Little | u32 | amount_of_required_items |  |
+| - | ? / - | QuestItemRequirement[amount_of_required_items] | required_items |  |
+| - | 4 / Little | u32 | unknown1 |  |
+| - | ? / - | QuestCompletable | completable |  |
+| - | 4 / Little | u32 | flags2 |  |
+| - | 4 / Little | u32 | flags3 |  |

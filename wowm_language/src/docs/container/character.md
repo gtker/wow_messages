@@ -31,3 +31,31 @@ struct Character {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | 8 / Little | Guid | guid |  |
+| 0x08 | - / - | CString | name |  |
+| - | ? / - | Race | race |  |
+| - | ? / - | Class | class |  |
+| - | ? / - | Gender | gender |  |
+| - | 1 / - | u8 | skin |  |
+| - | 1 / - | u8 | face |  |
+| - | 1 / - | u8 | hairstyle |  |
+| - | 1 / - | u8 | haircolor |  |
+| - | 1 / - | u8 | facialhair |  |
+| - | 1 / - | u8 | level |  |
+| - | ? / - | Area | area |  |
+| - | ? / - | Map | map |  |
+| - | 4 / Little | f32 | position_x |  |
+| - | 4 / Little | f32 | position_y |  |
+| - | 4 / Little | f32 | position_z |  |
+| - | 4 / Little | u32 | guild_id |  |
+| - | ? / - | CharacterFlags | flags |  |
+| - | 1 / - | u8 | first_login |  |
+| - | 4 / Little | u32 | pet_display_id |  |
+| - | 4 / Little | u32 | pet_level |  |
+| - | 4 / Little | u32 | pet_familiy |  |
+| - | ? / - | CharacterGear[19] | equipment |  |
+| - | 4 / Little | u32 | first_bag_display_id |  |
+| - | 1 / - | u8 | first_bag_inventory_id |  |

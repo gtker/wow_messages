@@ -23,3 +23,21 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x04 | ? / - | WorldResult | result |  |
+
+If result is equal to `AUTH_OK`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 4 / Little | u32 | billing_time |  |
+| - | 1 / - | u8 | billing_flags |  |
+| - | 4 / Little | u32 | billing_rested |  |
+
+Else If result is equal to `AUTH_WAIT_QUEUE`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 4 / Little | u32 | queue_position |  |

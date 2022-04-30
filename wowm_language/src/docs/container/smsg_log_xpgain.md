@@ -21,3 +21,16 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x04 | 8 / Little | Guid | target_guid |  |
+| 0x0C | 4 / Little | u32 | total_exp |  |
+| 0x10 | ? / - | ExperienceAwardType | exp_type |  |
+
+If exp_type is equal to `NON_KILL`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 4 / Little | u32 | experience_without_rested |  |
+| - | 4 / Little | f32 | exp_group_bonus |  |

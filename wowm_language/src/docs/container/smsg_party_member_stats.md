@@ -71,3 +71,117 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x04 | - / - | PackedGuid | guid |  |
+| - | ? / - | GroupUpdateFlags | mask |  |
+
+If mask contains `FLAG_STATUS`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | ? / - | GroupMemberOnlineStatus | status |  |
+
+If mask contains `FLAG_CUR_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 2 / Little | u16 | current_health |  |
+
+If mask contains `FLAG_MAX_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 2 / Little | u16 | max_health |  |
+
+If mask contains `FLAG_POWER_TYPE`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | ? / - | Power | power |  |
+
+If mask contains `FLAG_CUR_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 2 / Little | u16 | current_power |  |
+
+If mask contains `FLAG_MAX_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 2 / Little | u16 | max_power |  |
+
+If mask contains `FLAG_LEVEL`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 2 / Little | u16 | level |  |
+
+If mask contains `FLAG_ZONE`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | ? / - | Area | area |  |
+
+If mask contains `FLAG_POSITION`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 2 / Little | u16 | position_x |  |
+| - | 2 / Little | u16 | position_y |  |
+
+If mask contains `FLAG_AURAS`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | - / - | AuraMask | auras |  |
+
+If mask contains `FLAG_PET_NAME`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | - / - | CString | pet_name |  |
+
+If mask contains `FLAG_PET_MODEL_ID`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 2 / Little | u16 | pet_display_id |  |
+
+If mask contains `FLAG_PET_CUR_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 2 / Little | u16 | pet_current_health |  |
+
+If mask contains `FLAG_PET_MAX_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 2 / Little | u16 | pet_max_health |  |
+
+If mask contains `FLAG_PET_POWER_TYPE`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | ? / - | Power | pet_power_type |  |
+
+If mask contains `FLAG_PET_CUR_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 2 / Little | u16 | pet_current_power |  |
+
+If mask contains `FLAG_PET_MAX_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 2 / Little | u16 | pet_max_power |  |
+
+If mask contains `FLAG_PET_AURAS`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | - / - | AuraMask | pet_auras |  |

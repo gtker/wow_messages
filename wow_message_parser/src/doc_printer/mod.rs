@@ -1,7 +1,8 @@
-use crate::container::Container;
+use crate::container::{Container, Equation, IfStatement, StructMember};
 use crate::file_utils::{append_string_to_file, create_or_append, write_string_to_file};
 use crate::parser::enumerator::Definer;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
+use crate::parser::types::ty::Type;
 use crate::parser::types::{Endianness, IntegerType};
 use crate::wowm_printer::{get_definer_wowm_definition, get_struct_wowm_definition};
 use crate::ContainerType;
@@ -198,8 +199,140 @@ pub fn print_docs_for_container(e: &Container) -> DocWriter {
     s.wln("```");
 
     print_container_header(&mut s, e);
+    print_container_body(&mut s, e);
 
     s
+}
+
+fn print_container_if_statement(
+    s: &mut DocWriter,
+    statement: &IfStatement,
+    offset: &mut Option<usize>,
+) {
+    s.w(format!("If {variable} ", variable = statement.name()));
+    for (i, e) in statement.get_conditional().equations().iter().enumerate() {
+        if i != 0 {
+            s.wln(" **or** ");
+        }
+        s.w(format!(
+            "{}",
+            match e {
+                Equation::Equals { value } => format!("is equal to `{}`", value),
+                Equation::NotEquals { value } => format!("is not equal to `{}`", value),
+                Equation::BitwiseAnd { value } => format!("contains `{}`", value),
+            }
+        ))
+    }
+    s.wln(":");
+    s.newline();
+
+    print_container_item_header(s);
+
+    for m in statement.members() {
+        print_container_field(s, m, offset);
+    }
+
+    if !statement.else_ifs().is_empty() {
+        for elseif in statement.else_ifs() {
+            s.newline();
+            s.w(format!("Else "));
+            print_container_if_statement(s, elseif, offset);
+        }
+    }
+
+    if !statement.else_statement_members.is_empty() {
+        s.newline();
+        s.wln("Else: ");
+
+        for m in &statement.else_statement_members {
+            print_container_field(s, m, offset);
+        }
+    }
+}
+
+fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Option<usize>) {
+    match m {
+        StructMember::Definition(d) => {
+            s.wln(format!(
+                "| {offset} | {size} / {endian} | {ty} | {name} | {description} |",
+                offset = if let Some(offset) = offset {
+                    format!("0x{:02X}", offset)
+                } else {
+                    "-".to_string()
+                },
+                size = d.ty().doc_size_of(),
+                endian = d.ty().doc_endian_str(),
+                ty = d.ty().str(),
+                name = d.name(),
+                description = d.tags().description().unwrap_or(""),
+            ));
+
+            if let Some(_) = offset {
+                *offset = match d.ty() {
+                    Type::Integer(t) => Some(offset.unwrap() + t.size() as usize),
+                    Type::Guid => Some(offset.unwrap() + 8),
+                    Type::FloatingPoint(f) => Some(offset.unwrap() + f.size() as usize),
+                    Type::CString
+                    | Type::String { .. }
+                    | Type::Identifier { .. }
+                    | Type::Array(_)
+                    | Type::PackedGuid
+                    | Type::UpdateMask
+                    | Type::AuraMask => None,
+                };
+            }
+        }
+        StructMember::IfStatement(statement) => {
+            s.newline();
+
+            print_container_if_statement(s, statement, offset);
+        }
+        StructMember::OptionalStatement(_) => {}
+    }
+}
+
+fn print_container_item_header(s: &mut DocWriter) {
+    s.wln("| Offset | Size / Endianness | Type | Name | Description |");
+    s.wln("| ------ | ----------------- | ---- | ---- | ----------- |");
+}
+
+fn print_container_body(s: &mut DocWriter, e: &Container) {
+    s.wln("### Body");
+
+    let mut offset = Some(match e.container_type() {
+        ContainerType::Msg(_) => 0,
+        ContainerType::CMsg(_) => 6,
+        ContainerType::SMsg(_) => 4,
+        ContainerType::Struct | ContainerType::CLogin(_) | ContainerType::SLogin(_) => 0,
+    });
+
+    if !(e.fields().len() == 1 && matches!(&e.fields()[0], &StructMember::OptionalStatement(_))) {
+        print_container_item_header(s);
+    }
+
+    for m in e.fields() {
+        print_container_field(s, m, &mut offset);
+    }
+
+    if let Some(_) = e.rust_object().optional() {
+        s.newline();
+        s.wln("Optionally the following fields can be present. This can only be detected by looking at the size of the message.");
+        s.newline();
+
+        print_container_item_header(s);
+
+        for m in e.fields() {
+            match m {
+                StructMember::Definition(_) => {}
+                StructMember::IfStatement(_) => {}
+                StructMember::OptionalStatement(optional) => {
+                    for m in optional.members() {
+                        print_container_field(s, m, &mut offset);
+                    }
+                }
+            }
+        }
+    }
 }
 
 fn print_container_header(s: &mut DocWriter, e: &Container) {

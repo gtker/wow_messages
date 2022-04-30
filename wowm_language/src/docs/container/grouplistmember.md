@@ -9,3 +9,9 @@ struct GroupListMember {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | - / - | CString | name |  |
+| - | 8 / Little | Guid | guid |  |
+| - | 1 / - | u8 | is_online |  |

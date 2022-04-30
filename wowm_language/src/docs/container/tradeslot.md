@@ -20,3 +20,20 @@ struct TradeSlot {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | 1 / - | u8 | trade_slot_number |  |
+| 0x01 | 4 / Little | u32 | item_id |  |
+| 0x05 | 4 / Little | u32 | display_id |  |
+| 0x09 | 4 / Little | u32 | stack_count |  |
+| 0x0D | 4 / Little | u32 | is_wrapped |  |
+| 0x11 | 8 / Little | Guid | gift_wrapper |  |
+| 0x19 | 4 / Little | u32 | enchantment |  |
+| 0x1D | 8 / Little | Guid | item_creator |  |
+| 0x25 | 4 / Little | u32 | spell_charges |  |
+| 0x29 | 4 / Little | u32 | item_suffix_factor |  |
+| 0x2D | 4 / Little | u32 | item_random_properties_id |  |
+| 0x31 | 4 / Little | u32 | lock_id |  |
+| 0x35 | 4 / Little | u32 | max_durability |  |
+| 0x39 | 4 / Little | u32 | durability |  |

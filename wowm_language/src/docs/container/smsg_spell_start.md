@@ -24,3 +24,19 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x04 | - / - | PackedGuid | cast_item |  |
+| - | - / - | PackedGuid | caster |  |
+| - | 4 / Little | u32 | spell |  |
+| - | ? / - | CastFlags | flags |  |
+| - | 4 / Little | u32 | timer |  |
+| - | ? / - | SpellCastTargets | targets |  |
+
+If flags contains `AMMO`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 4 / Little | u32 | ammo_display_id |  |
+| - | 4 / Little | u32 | ammo_inventory_type |  |

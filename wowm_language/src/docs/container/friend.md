@@ -13,3 +13,16 @@ struct Friend {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | 8 / Little | Guid | guid |  |
+| 0x08 | ? / - | FriendStatus | status |  |
+
+If status is not equal to `OFFLINE`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | ? / - | Area | area |  |
+| - | 4 / Little | u32 | level |  |
+| - | ? / - | Class | class |  |

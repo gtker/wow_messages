@@ -11,6 +11,14 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | ? / - | u8[32] | client_public_key |  |
+| - | ? / - | u8[20] | client_proof |  |
+| - | ? / - | u8[20] | crc_hash |  |
+| - | 1 / - | u8 | number_of_telemetry_keys |  |
+| - | ? / - | TelemetryKey[number_of_telemetry_keys] | telemetry_keys |  |
 ## Protocol Version 3
 
 ### Wowm Representation
@@ -29,6 +37,22 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | ? / - | u8[32] | client_public_key |  |
+| - | ? / - | u8[20] | client_proof |  |
+| - | ? / - | u8[20] | crc_hash |  |
+| - | 1 / - | u8 | number_of_telemetry_keys |  |
+| - | ? / - | TelemetryKey[number_of_telemetry_keys] | telemetry_keys |  |
+| - | ? / - | SecurityFlag | security_flag |  |
+
+If security_flag is equal to `PIN`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | ? / - | u8[16] | pin_salt |  |
+| - | ? / - | u8[20] | pin_hash |  |
 ## Protocol Version 8
 
 ### Wowm Representation
@@ -57,3 +81,35 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | ? / - | u8[32] | client_public_key |  |
+| - | ? / - | u8[20] | client_proof |  |
+| - | ? / - | u8[20] | crc_hash |  |
+| - | 1 / - | u8 | number_of_telemetry_keys |  |
+| - | ? / - | TelemetryKey[number_of_telemetry_keys] | telemetry_keys |  |
+| - | ? / - | SecurityFlag | security_flag |  |
+
+If security_flag contains `PIN`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | ? / - | u8[16] | pin_salt |  |
+| - | ? / - | u8[20] | pin_hash |  |
+
+If security_flag contains `UNKNOWN0`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 1 / - | u8 | unknown0 |  |
+| - | 1 / - | u8 | unknown1 |  |
+| - | 1 / - | u8 | unknown2 |  |
+| - | 1 / - | u8 | unknown3 |  |
+| - | 8 / Little | u64 | unknown4 |  |
+
+If security_flag contains `AUTHENTICATOR`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 1 / - | u8 | unknown5 |  |

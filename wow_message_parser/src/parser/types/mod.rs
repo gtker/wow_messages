@@ -66,6 +66,15 @@ impl FloatingPointType {
             FloatingPointType::F32(e) | FloatingPointType::F64(e) => e.rust_str(),
         }
     }
+
+    pub fn doc_endian_str(&self) -> &str {
+        match self {
+            FloatingPointType::F32(e) | FloatingPointType::F64(e) => match e {
+                Endianness::Little => "Little",
+                Endianness::Big => "Big",
+            },
+        }
+    }
 }
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
@@ -117,6 +126,16 @@ impl IntegerType {
         match self {
             IntegerType::U8 => "le",
             IntegerType::U16(i) | IntegerType::U32(i) | IntegerType::U64(i) => i.rust_str(),
+        }
+    }
+
+    pub fn doc_endian_str(&self) -> &str {
+        match self {
+            IntegerType::U8 => "-",
+            IntegerType::U16(e) | IntegerType::U32(e) | IntegerType::U64(e) => match e {
+                Endianness::Little => "Little",
+                Endianness::Big => "Big",
+            },
         }
     }
 }

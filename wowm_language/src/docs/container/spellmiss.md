@@ -8,3 +8,8 @@ struct SpellMiss {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | 8 / Little | Guid | target_guid |  |
+| 0x08 | ? / - | SpellMissInfo | miss_info |  |

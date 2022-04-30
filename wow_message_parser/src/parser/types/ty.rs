@@ -60,10 +60,36 @@ impl Type {
         }
     }
 
+    pub fn doc_size_of(&self) -> String {
+        match self {
+            Type::Integer(i) => i.size().to_string(),
+            Type::Guid => 8.to_string(),
+            Type::FloatingPoint(f) => f.size().to_string(),
+            Type::String { length } => length.clone(),
+            Type::Identifier { .. } | Type::Array(_) => "?".to_string(),
+            Type::CString | Type::UpdateMask | Type::AuraMask | Type::PackedGuid => "-".to_string(),
+        }
+    }
+
     pub fn rust_endian_str(&self) -> &str {
         match self {
             Type::Integer(i) => i.rust_endian_str(),
             _ => panic!("endianness attempted for complex type"),
+        }
+    }
+
+    pub fn doc_endian_str(&self) -> String {
+        match self {
+            Type::Integer(i) => i.doc_endian_str().to_string(),
+            Type::Guid => "Little".to_string(),
+            Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
+            Type::String { .. }
+            | Type::Array(_)
+            | Type::Identifier { .. }
+            | Type::UpdateMask
+            | Type::AuraMask
+            | Type::CString
+            | Type::PackedGuid => "-".to_string(),
         }
     }
 

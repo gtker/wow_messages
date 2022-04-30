@@ -27,3 +27,28 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x04 | ? / - | TradeStatus | status |  |
+
+If status is equal to `BEGIN_TRADE`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 8 / Little | Guid | unknown1 |  |
+
+Else If status is equal to `CLOSE_WINDOW`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | ? / - | InventoryResult | inventory_result |  |
+| - | 1 / - | u8 | target_error |  |
+| - | 4 / Little | u32 | item_limit_category_id |  |
+
+Else If status is equal to `ONLY_CONJURED` **or** 
+is equal to `NOT_ON_TAPLIST`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 1 / - | u8 | slot |  |

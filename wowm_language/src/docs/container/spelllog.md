@@ -51,3 +51,72 @@ struct SpellLog {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | ? / - | SpellEffect | effect |  |
+| - | 4 / Little | u32 | amount_of_logs |  |
+
+If effect is equal to `POWER_DRAIN`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 8 / Little | Guid | target1 |  |
+| - | 4 / Little | u32 | unknown1 |  |
+| - | 4 / Little | u32 | unknown2 |  |
+| - | 4 / Little | f32 | unknown3 |  |
+
+Else If effect is equal to `ADD_EXTRA_ATTACKS`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 8 / Little | Guid | target2 |  |
+| - | 4 / Little | u32 | unknown4 |  |
+
+Else If effect is equal to `INTERRUPT_CAST`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 8 / Little | Guid | target3 |  |
+| - | 4 / Little | u32 | interrupted_spell |  |
+
+Else If effect is equal to `DURABILITY_DAMAGE`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 8 / Little | Guid | target4 |  |
+| - | 4 / Little | u32 | unknown5 |  |
+| - | 4 / Little | u32 | unknown6 |  |
+
+Else If effect is equal to `CREATE_ITEM`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 4 / Little | u32 | spell_effect_item_type |  |
+
+Else If effect is equal to `FEED_PET`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 4 / Little | u32 | item_target_entry |  |
+
+Else If effect is equal to `RESURRECT` **or** 
+is equal to `DISPEL` **or** 
+is equal to `THREAT` **or** 
+is equal to `DISTRACT` **or** 
+is equal to `SANCTUARY` **or** 
+is equal to `THREAT_ALL` **or** 
+is equal to `DISPEL_MECHANIC` **or** 
+is equal to `RESURRECT_NEW` **or** 
+is equal to `ATTACK_ME` **or** 
+is equal to `SKIN_PLAYER_CORPSE` **or** 
+is equal to `MODIFY_THREAT_PERCENT` **or** 
+is equal to `UNKNOWN126` **or** 
+is equal to `DISMISS_PET` **or** 
+is equal to `OPEN_LOCK` **or** 
+is equal to `OPEN_LOCK_ITEM` **or** 
+is equal to `INSTAKILL`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 8 / Little | Guid | target5 |  |

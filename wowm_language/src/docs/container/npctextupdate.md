@@ -10,3 +10,10 @@ struct NpcTextUpdate {
 }
 
 ```
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x00 | 4 / Little | f32 | probability |  |
+| 0x04 | ? / - | CString[2] | texts |  |
+| - | ? / - | Language | language |  |
+| - | ? / - | NpcTextUpdateEmote[3] | emotes |  |

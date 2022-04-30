@@ -26,3 +26,18 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+### Body
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| 0x04 | 4 / Little | u32 | new_level |  |
+| 0x08 | 4 / Little | u32 | health |  |
+| 0x0C | 4 / Little | u32 | mana |  |
+| 0x10 | 4 / Little | u32 | rage |  |
+| 0x14 | 4 / Little | u32 | focus |  |
+| 0x18 | 4 / Little | u32 | energy |  |
+| 0x1C | 4 / Little | u32 | happiness |  |
+| 0x20 | 4 / Little | u32 | strength |  |
+| 0x24 | 4 / Little | u32 | agility |  |
+| 0x28 | 4 / Little | u32 | stamina |  |
+| 0x2C | 4 / Little | u32 | intellect |  |
+| 0x30 | 4 / Little | u32 | spirit |  |
