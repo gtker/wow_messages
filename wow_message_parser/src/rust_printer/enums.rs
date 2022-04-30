@@ -157,45 +157,27 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
                 Some(_) => "std::io::Error".to_string(),
             },
         );
-        s.funcn_pub(
+
+        s.async_funcn_pub(
             format!(
-                "read_{ty}_{endian}<R: std::io::Read>(r: &mut R)",
+                "pub fn read_{ty}_{endian}<R: std::io::Read>(r: &mut R)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str(),
             ),
-            &return_type,
-            |s| {
-                s.wln(format!(
-                    "let a = {util_path}::read_{ty}_{endian}(r)?;",
-                    util_path = "crate::util",
-                    ty = t.rust_str(),
-                    endian = t.rust_endian_str()
-                ));
-                s.wln(format!(
-                    "Ok((a as {original_ty}).{from})",
-                    original_ty = e.ty().rust_str(),
-                    from = match e.self_value() {
-                        None => "try_into()?",
-                        Some(_) => "into()",
-                    }
-                ));
-            },
-        );
-
-        s.wln(CFG_ASYNC_TOKIO);
-        s.async_funcn_pub(
             format!(
-                "tokio_read_{ty}_{endian}<R: AsyncReadExt + Unpin + Send>(r: &mut R)",
+                "pub async fn tokio_read_{ty}_{endian}<R: AsyncReadExt + Unpin + Send>(r: &mut R)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
             ),
             &return_type,
-            |s| {
+            |s, it| {
                 s.wln(format!(
-                    "let a = {util_path}::tokio_read_{ty}_{endian}(r).await?;",
+                    "let a = {util_path}::{prefix}read_{ty}_{endian}(r){postfix}?;",
                     util_path = "crate::util",
                     ty = t.rust_str(),
                     endian = t.rust_endian_str(),
+                    prefix = it.prefix(),
+                    postfix = it.postfix(),
                 ));
                 s.wln(format!(
                     "Ok((a as {original_ty}).{from})",
@@ -209,40 +191,26 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
         );
 
         let return_type = "std::result::Result<(), std::io::Error>";
-        s.funcn_pub(
-            format!(
-                "write_{ty}_{endian}<W: std::io::Write>(&self, w: &mut W)",
-                ty = t.rust_str(),
-                endian = t.rust_endian_str()
-            ),
-            &return_type,
-            |s| {
-                s.wln(format!(
-                    "{util_path}::write_{ty}_{endian}(w, self.as_{original_ty}() as {ty})?;",
-                    util_path = "crate::util",
-                    ty = t.rust_str(),
-                    endian = t.rust_endian_str(),
-                    original_ty = e.ty().rust_str(),
-                ));
-                s.wln("Ok(())");
-            },
-        );
-
-        s.wln(CFG_ASYNC_TOKIO);
         s.async_funcn_pub(
             format!(
-                "tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
+                "pub fn write_{ty}_{endian}<W: std::io::Write>(&self, w: &mut W)",
+                ty = t.rust_str(),
+                endian = t.rust_endian_str()
+            ),
+            format!(
+                "pub async fn tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
             ),
             &return_type,
-            |s| {
+            |s, it| {
                 s.wln(format!(
-                    "{util_path}::tokio_write_{ty}_{endian}(w, self.as_{original_ty}() as {ty}).await?;",
-                    util_path = "crate::util",
+                    "crate::util::{prefix}write_{ty}_{endian}(w, self.as_{original_ty}() as {ty}){postfix}?;",
                     ty = t.rust_str(),
                     endian = t.rust_endian_str(),
                     original_ty = e.ty().rust_str(),
+                    prefix = it.prefix(),
+                    postfix = it.postfix(),
                 ));
                 s.wln("Ok(())");
             },

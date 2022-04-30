@@ -345,19 +345,31 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn async_funcn_pub<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self)>(
+    pub fn async_funcn_pub<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self, ImplType)>(
         &mut self,
-        name_and_args: S,
+        name_and_args_sync: S,
+        name_and_args_tokio: S,
         return_type: S1,
         f: F,
     ) {
         self.open_curly(format!(
-            "pub async fn {} -> {}",
-            name_and_args.as_ref(),
+            "{} -> {}",
+            name_and_args_sync.as_ref(),
             return_type.as_ref()
         ));
 
-        f(self);
+        f(self, ImplType::Std);
+
+        self.closing_curly_newline();
+
+        self.wln(CFG_ASYNC_TOKIO);
+        self.open_curly(format!(
+            "{} -> {}",
+            name_and_args_tokio.as_ref(),
+            return_type.as_ref()
+        ));
+
+        f(self, ImplType::Tokio);
 
         self.closing_curly_newline();
     }
