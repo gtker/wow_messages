@@ -23,7 +23,7 @@ pub struct MSG_LIST_STABLED_PETS_Server {
 impl ServerMessageWrite for MSG_LIST_STABLED_PETS_Server {
     const OPCODE: u16 = 0x26f;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

@@ -27,7 +27,7 @@ pub struct SMSG_AUCTION_BIDDER_NOTIFICATION {
 impl ServerMessageWrite for SMSG_AUCTION_BIDDER_NOTIFICATION {
     const OPCODE: u16 = 0x25e;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

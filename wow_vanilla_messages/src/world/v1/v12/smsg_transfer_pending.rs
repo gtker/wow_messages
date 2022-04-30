@@ -21,7 +21,7 @@ pub struct SMSG_TRANSFER_PENDING {
 impl ServerMessageWrite for SMSG_TRANSFER_PENDING {
     const OPCODE: u16 = 0x3f;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

@@ -37,7 +37,7 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
 impl ServerMessageWrite for MSG_INSPECT_HONOR_STATS_Server {
     const OPCODE: u16 = 0x2d6;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

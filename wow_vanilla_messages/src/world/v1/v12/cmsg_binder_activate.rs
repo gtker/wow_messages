@@ -21,7 +21,7 @@ pub struct CMSG_BINDER_ACTIVATE {
 impl ClientMessageWrite for CMSG_BINDER_ACTIVATE {
     const OPCODE: u32 = 0x1b5;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

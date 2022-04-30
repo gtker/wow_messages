@@ -22,7 +22,7 @@ pub struct SMSG_EXPLORATION_EXPERIENCE {
 impl ServerMessageWrite for SMSG_EXPLORATION_EXPERIENCE {
     const OPCODE: u16 = 0x1f8;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

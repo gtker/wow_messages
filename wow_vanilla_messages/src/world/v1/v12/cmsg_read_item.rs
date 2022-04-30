@@ -21,7 +21,7 @@ pub struct CMSG_READ_ITEM {
 impl ClientMessageWrite for CMSG_READ_ITEM {
     const OPCODE: u32 = 0xad;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

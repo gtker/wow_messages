@@ -21,7 +21,7 @@ pub struct CMSG_AUTOEQUIP_ITEM {
 impl ClientMessageWrite for CMSG_AUTOEQUIP_ITEM {
     const OPCODE: u32 = 0x10a;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

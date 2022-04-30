@@ -20,7 +20,7 @@ pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE {
 impl ServerMessageWrite for SMSG_GAMEOBJECT_QUERY_RESPONSE {
     const OPCODE: u16 = 0x5f;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

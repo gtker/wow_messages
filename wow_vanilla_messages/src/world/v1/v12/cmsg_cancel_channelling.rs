@@ -20,7 +20,7 @@ pub struct CMSG_CANCEL_CHANNELLING {
 impl ClientMessageWrite for CMSG_CANCEL_CHANNELLING {
     const OPCODE: u32 = 0x13b;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

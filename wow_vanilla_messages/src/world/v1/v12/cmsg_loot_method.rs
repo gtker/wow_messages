@@ -25,7 +25,7 @@ pub struct CMSG_LOOT_METHOD {
 impl ClientMessageWrite for CMSG_LOOT_METHOD {
     const OPCODE: u32 = 0x7a;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

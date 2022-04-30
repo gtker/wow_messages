@@ -37,7 +37,7 @@ pub struct CMSG_PETITION_BUY {
 impl ClientMessageWrite for CMSG_PETITION_BUY {
     const OPCODE: u32 = 0x1bd;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

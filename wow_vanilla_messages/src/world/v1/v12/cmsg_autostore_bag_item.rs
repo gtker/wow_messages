@@ -22,7 +22,7 @@ pub struct CMSG_AUTOSTORE_BAG_ITEM {
 impl ClientMessageWrite for CMSG_AUTOSTORE_BAG_ITEM {
     const OPCODE: u32 = 0x10b;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -20,7 +20,7 @@ pub struct SMSG_LOOT_REMOVED {
 impl ServerMessageWrite for SMSG_LOOT_REMOVED {
     const OPCODE: u16 = 0x162;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

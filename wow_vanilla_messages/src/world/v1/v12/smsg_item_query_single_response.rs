@@ -28,7 +28,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 impl ServerMessageWrite for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     const OPCODE: u16 = 0x58;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

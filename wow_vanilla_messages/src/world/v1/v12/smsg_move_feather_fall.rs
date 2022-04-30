@@ -21,7 +21,7 @@ pub struct SMSG_MOVE_FEATHER_FALL {
 impl ServerMessageWrite for SMSG_MOVE_FEATHER_FALL {
     const OPCODE: u16 = 0xf2;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

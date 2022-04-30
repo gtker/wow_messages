@@ -21,7 +21,7 @@ pub struct CMSG_SET_ACTIVE_MOVER {
 impl ClientMessageWrite for CMSG_SET_ACTIVE_MOVER {
     const OPCODE: u32 = 0x26a;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

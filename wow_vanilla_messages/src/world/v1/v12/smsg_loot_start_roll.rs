@@ -26,7 +26,7 @@ pub struct SMSG_LOOT_START_ROLL {
 impl ServerMessageWrite for SMSG_LOOT_START_ROLL {
     const OPCODE: u16 = 0x2a1;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

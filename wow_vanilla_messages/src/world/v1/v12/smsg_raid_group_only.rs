@@ -22,7 +22,7 @@ pub struct SMSG_RAID_GROUP_ONLY {
 impl ServerMessageWrite for SMSG_RAID_GROUP_ONLY {
     const OPCODE: u16 = 0x286;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

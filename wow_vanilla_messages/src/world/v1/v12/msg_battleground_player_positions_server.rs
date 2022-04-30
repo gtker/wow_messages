@@ -20,7 +20,7 @@ pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 impl ServerMessageWrite for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     const OPCODE: u16 = 0x2e9;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

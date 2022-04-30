@@ -21,7 +21,7 @@ pub struct SMSG_INVALIDATE_PLAYER {
 impl ServerMessageWrite for SMSG_INVALIDATE_PLAYER {
     const OPCODE: u16 = 0x31c;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

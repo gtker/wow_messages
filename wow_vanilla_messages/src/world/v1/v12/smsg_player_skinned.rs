@@ -19,7 +19,7 @@ pub struct SMSG_PLAYER_SKINNED {
 impl ServerMessageWrite for SMSG_PLAYER_SKINNED {
     const OPCODE: u16 = 0x2bc;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

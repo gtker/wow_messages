@@ -21,7 +21,7 @@ pub struct SMSG_PAGE_TEXT_QUERY_RESPONSE {
 impl ServerMessageWrite for SMSG_PAGE_TEXT_QUERY_RESPONSE {
     const OPCODE: u16 = 0x5b;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

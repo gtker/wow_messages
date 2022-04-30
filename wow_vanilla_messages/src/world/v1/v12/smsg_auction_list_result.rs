@@ -21,7 +21,7 @@ pub struct SMSG_AUCTION_LIST_RESULT {
 impl ServerMessageWrite for SMSG_AUCTION_LIST_RESULT {
     const OPCODE: u16 = 0x25c;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

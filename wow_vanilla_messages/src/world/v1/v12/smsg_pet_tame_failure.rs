@@ -21,7 +21,7 @@ pub struct SMSG_PET_TAME_FAILURE {
 impl ServerMessageWrite for SMSG_PET_TAME_FAILURE {
     const OPCODE: u16 = 0x173;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

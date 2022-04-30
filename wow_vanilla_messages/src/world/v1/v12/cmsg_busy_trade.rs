@@ -19,7 +19,7 @@ pub struct CMSG_BUSY_TRADE {
 impl ClientMessageWrite for CMSG_BUSY_TRADE {
     const OPCODE: u32 = 0x118;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

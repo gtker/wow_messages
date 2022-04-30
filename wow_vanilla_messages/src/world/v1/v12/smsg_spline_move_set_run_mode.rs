@@ -20,7 +20,7 @@ pub struct SMSG_SPLINE_MOVE_SET_RUN_MODE {
 impl ServerMessageWrite for SMSG_SPLINE_MOVE_SET_RUN_MODE {
     const OPCODE: u16 = 0x30d;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

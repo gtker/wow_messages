@@ -24,7 +24,7 @@ pub struct SMSG_SPELLLOGMISS {
 impl ServerMessageWrite for SMSG_SPELLLOGMISS {
     const OPCODE: u16 = 0x24b;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

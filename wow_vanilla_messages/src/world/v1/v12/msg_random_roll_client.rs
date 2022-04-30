@@ -21,7 +21,7 @@ pub struct MSG_RANDOM_ROLL_Client {
 impl ClientMessageWrite for MSG_RANDOM_ROLL_Client {
     const OPCODE: u32 = 0x1fb;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

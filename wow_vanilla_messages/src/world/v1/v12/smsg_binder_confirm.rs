@@ -21,7 +21,7 @@ pub struct SMSG_BINDER_CONFIRM {
 impl ServerMessageWrite for SMSG_BINDER_CONFIRM {
     const OPCODE: u16 = 0x2eb;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

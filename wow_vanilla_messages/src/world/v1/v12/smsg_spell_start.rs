@@ -27,7 +27,7 @@ pub struct SMSG_SPELL_START {
 impl ServerMessageWrite for SMSG_SPELL_START {
     const OPCODE: u16 = 0x131;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

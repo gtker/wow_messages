@@ -19,7 +19,7 @@ pub struct SMSG_FEIGN_DEATH_RESISTED {
 impl ServerMessageWrite for SMSG_FEIGN_DEATH_RESISTED {
     const OPCODE: u16 = 0x2b4;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

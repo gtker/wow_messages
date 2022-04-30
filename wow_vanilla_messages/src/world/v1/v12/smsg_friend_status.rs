@@ -23,7 +23,7 @@ pub struct SMSG_FRIEND_STATUS {
 impl ServerMessageWrite for SMSG_FRIEND_STATUS {
     const OPCODE: u16 = 0x68;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

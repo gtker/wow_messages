@@ -21,7 +21,7 @@ pub struct SMSG_OPEN_CONTAINER {
 impl ServerMessageWrite for SMSG_OPEN_CONTAINER {
     const OPCODE: u16 = 0x113;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

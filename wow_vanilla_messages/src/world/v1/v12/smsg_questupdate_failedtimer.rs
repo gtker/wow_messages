@@ -20,7 +20,7 @@ pub struct SMSG_QUESTUPDATE_FAILEDTIMER {
 impl ServerMessageWrite for SMSG_QUESTUPDATE_FAILEDTIMER {
     const OPCODE: u16 = 0x197;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

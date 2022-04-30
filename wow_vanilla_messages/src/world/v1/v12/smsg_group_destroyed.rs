@@ -19,7 +19,7 @@ pub struct SMSG_GROUP_DESTROYED {
 impl ServerMessageWrite for SMSG_GROUP_DESTROYED {
     const OPCODE: u16 = 0x7c;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

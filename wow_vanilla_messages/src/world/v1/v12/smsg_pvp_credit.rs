@@ -24,7 +24,7 @@ pub struct SMSG_PVP_CREDIT {
 impl ServerMessageWrite for SMSG_PVP_CREDIT {
     const OPCODE: u16 = 0x28c;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

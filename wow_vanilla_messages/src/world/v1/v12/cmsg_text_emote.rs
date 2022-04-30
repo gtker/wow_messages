@@ -24,7 +24,7 @@ pub struct CMSG_TEXT_EMOTE {
 impl ClientMessageWrite for CMSG_TEXT_EMOTE {
     const OPCODE: u32 = 0x104;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -25,7 +25,7 @@ pub struct SMSG_WEATHER {
 impl ServerMessageWrite for SMSG_WEATHER {
     const OPCODE: u16 = 0x2f4;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

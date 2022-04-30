@@ -21,7 +21,7 @@ pub struct MSG_TABARDVENDOR_ACTIVATE {
 impl ClientMessageWrite for MSG_TABARDVENDOR_ACTIVATE {
     const OPCODE: u32 = 0x1f2;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
@@ -30,7 +30,7 @@ impl ClientMessageWrite for MSG_TABARDVENDOR_ACTIVATE {
 impl ServerMessageWrite for MSG_TABARDVENDOR_ACTIVATE {
     const OPCODE: u16 = 0x1f2;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

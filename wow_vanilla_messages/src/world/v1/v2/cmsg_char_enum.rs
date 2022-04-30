@@ -19,7 +19,7 @@ pub struct CMSG_CHAR_ENUM {
 impl ClientMessageWrite for CMSG_CHAR_ENUM {
     const OPCODE: u32 = 0x37;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

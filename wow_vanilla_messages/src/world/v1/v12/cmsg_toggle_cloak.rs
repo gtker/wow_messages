@@ -19,7 +19,7 @@ pub struct CMSG_TOGGLE_CLOAK {
 impl ClientMessageWrite for CMSG_TOGGLE_CLOAK {
     const OPCODE: u32 = 0x2ba;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

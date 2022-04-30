@@ -21,7 +21,7 @@ pub struct SMSG_CHAR_CREATE {
 impl ServerMessageWrite for SMSG_CHAR_CREATE {
     const OPCODE: u16 = 0x3a;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

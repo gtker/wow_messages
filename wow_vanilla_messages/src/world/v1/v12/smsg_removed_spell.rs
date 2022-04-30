@@ -20,7 +20,7 @@ pub struct SMSG_REMOVED_SPELL {
 impl ServerMessageWrite for SMSG_REMOVED_SPELL {
     const OPCODE: u16 = 0x203;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

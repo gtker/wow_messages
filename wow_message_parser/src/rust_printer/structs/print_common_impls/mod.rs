@@ -119,7 +119,7 @@ fn print_client_message_header(s: &mut Writer, e: &Container, v: u16) {
             s.wln(format!("const OPCODE: u32 = {:#04x};", v));
             s.newline();
 
-            s.bodyn("fn size_without_size_field(&self) -> u16", |s| {
+            s.bodyn("fn size_without_size_or_opcode_fields(&self) -> u16", |s| {
                 s.wln(format!(
                     "{}",
                     match e.is_constant_sized() {
@@ -138,7 +138,7 @@ fn print_server_message_header(s: &mut Writer, e: &Container, v: u16) {
         |s| {
             s.wln(format!("const OPCODE: u16 = {:#04x};", v));
             s.newline();
-            s.bodyn("fn size_without_size_field(&self) -> u16", |s| {
+            s.bodyn("fn size_without_size_or_opcode_fields(&self) -> u16", |s| {
                 s.wln(format!(
                     "{}",
                     match e.is_constant_sized() {

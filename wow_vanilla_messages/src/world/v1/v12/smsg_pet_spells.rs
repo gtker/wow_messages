@@ -30,7 +30,7 @@ pub struct SMSG_PET_SPELLS {
 impl ServerMessageWrite for SMSG_PET_SPELLS {
     const OPCODE: u16 = 0x179;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

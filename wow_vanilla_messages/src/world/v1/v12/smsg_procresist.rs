@@ -25,7 +25,7 @@ pub struct SMSG_PROCRESIST {
 impl ServerMessageWrite for SMSG_PROCRESIST {
     const OPCODE: u16 = 0x260;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

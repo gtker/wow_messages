@@ -24,7 +24,7 @@ pub struct MessageWithComplexTypes {
 impl ClientMessageWrite for MessageWithComplexTypes {
     const OPCODE: u32 = 0x03;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
@@ -33,7 +33,7 @@ impl ClientMessageWrite for MessageWithComplexTypes {
 impl ServerMessageWrite for MessageWithComplexTypes {
     const OPCODE: u16 = 0x03;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

@@ -22,7 +22,7 @@ pub struct CMSG_AUCTION_LIST_OWNER_ITEMS {
 impl ClientMessageWrite for CMSG_AUCTION_LIST_OWNER_ITEMS {
     const OPCODE: u32 = 0x259;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -21,7 +21,7 @@ pub struct CMSG_CHAR_RENAME {
 impl ClientMessageWrite for CMSG_CHAR_RENAME {
     const OPCODE: u32 = 0x2c7;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

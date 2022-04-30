@@ -21,7 +21,7 @@ pub struct SMSG_WHO {
 impl ServerMessageWrite for SMSG_WHO {
     const OPCODE: u16 = 0x63;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

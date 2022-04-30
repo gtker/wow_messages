@@ -22,7 +22,7 @@ pub struct SMSG_SET_PROFICIENCY {
 impl ServerMessageWrite for SMSG_SET_PROFICIENCY {
     const OPCODE: u16 = 0x127;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

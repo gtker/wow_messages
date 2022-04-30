@@ -21,7 +21,7 @@ pub struct CMSG_GROUP_UNINVITE_GUID {
 impl ClientMessageWrite for CMSG_GROUP_UNINVITE_GUID {
     const OPCODE: u32 = 0x76;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

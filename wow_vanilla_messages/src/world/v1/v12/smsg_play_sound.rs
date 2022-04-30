@@ -20,7 +20,7 @@ pub struct SMSG_PLAY_SOUND {
 impl ServerMessageWrite for SMSG_PLAY_SOUND {
     const OPCODE: u16 = 0x2d2;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

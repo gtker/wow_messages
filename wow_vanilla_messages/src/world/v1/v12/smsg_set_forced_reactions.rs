@@ -20,7 +20,7 @@ pub struct SMSG_SET_FORCED_REACTIONS {
 impl ServerMessageWrite for SMSG_SET_FORCED_REACTIONS {
     const OPCODE: u16 = 0x2a5;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

@@ -26,7 +26,7 @@ pub struct SMSG_TRADE_STATUS_EXTENDED {
 impl ServerMessageWrite for SMSG_TRADE_STATUS_EXTENDED {
     const OPCODE: u16 = 0x121;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

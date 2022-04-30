@@ -22,7 +22,7 @@ pub struct SMSG_CHANNEL_LIST {
 impl ServerMessageWrite for SMSG_CHANNEL_LIST {
     const OPCODE: u16 = 0x9b;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

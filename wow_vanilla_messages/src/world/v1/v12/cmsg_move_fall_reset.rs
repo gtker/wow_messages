@@ -20,7 +20,7 @@ pub struct CMSG_MOVE_FALL_RESET {
 impl ClientMessageWrite for CMSG_MOVE_FALL_RESET {
     const OPCODE: u32 = 0x2ca;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

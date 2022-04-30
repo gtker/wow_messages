@@ -20,7 +20,7 @@ pub struct CMSG_QUESTLOG_REMOVE_QUEST {
 impl ClientMessageWrite for CMSG_QUESTLOG_REMOVE_QUEST {
     const OPCODE: u32 = 0x194;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

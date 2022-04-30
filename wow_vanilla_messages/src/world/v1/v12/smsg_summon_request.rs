@@ -23,7 +23,7 @@ pub struct SMSG_SUMMON_REQUEST {
 impl ServerMessageWrite for SMSG_SUMMON_REQUEST {
     const OPCODE: u16 = 0x2ab;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

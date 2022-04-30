@@ -26,7 +26,7 @@ pub struct SMSG_PARTY_MEMBER_STATS {
 impl ServerMessageWrite for SMSG_PARTY_MEMBER_STATS {
     const OPCODE: u16 = 0x7e;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

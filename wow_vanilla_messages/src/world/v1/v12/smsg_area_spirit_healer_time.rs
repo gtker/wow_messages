@@ -22,7 +22,7 @@ pub struct SMSG_AREA_SPIRIT_HEALER_TIME {
 impl ServerMessageWrite for SMSG_AREA_SPIRIT_HEALER_TIME {
     const OPCODE: u16 = 0x2e4;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

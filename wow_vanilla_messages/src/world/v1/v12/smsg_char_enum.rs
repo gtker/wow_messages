@@ -20,7 +20,7 @@ pub struct SMSG_CHAR_ENUM {
 impl ServerMessageWrite for SMSG_CHAR_ENUM {
     const OPCODE: u16 = 0x3b;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

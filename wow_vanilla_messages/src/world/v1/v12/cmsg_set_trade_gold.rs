@@ -20,7 +20,7 @@ pub struct CMSG_SET_TRADE_GOLD {
 impl ClientMessageWrite for CMSG_SET_TRADE_GOLD {
     const OPCODE: u32 = 0x11f;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

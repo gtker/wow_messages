@@ -21,7 +21,7 @@ pub struct CMSG_AREA_SPIRIT_HEALER_QUEUE {
 impl ClientMessageWrite for CMSG_AREA_SPIRIT_HEALER_QUEUE {
     const OPCODE: u32 = 0x2e3;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -24,7 +24,7 @@ pub struct SMSG_PETITION_SIGN_RESULTS {
 impl ServerMessageWrite for SMSG_PETITION_SIGN_RESULTS {
     const OPCODE: u16 = 0x1c1;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

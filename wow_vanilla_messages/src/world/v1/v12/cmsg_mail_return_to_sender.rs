@@ -22,7 +22,7 @@ pub struct CMSG_MAIL_RETURN_TO_SENDER {
 impl ClientMessageWrite for CMSG_MAIL_RETURN_TO_SENDER {
     const OPCODE: u32 = 0x248;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

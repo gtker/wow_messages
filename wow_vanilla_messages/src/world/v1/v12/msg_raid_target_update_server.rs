@@ -21,7 +21,7 @@ pub struct MSG_RAID_TARGET_UPDATE_Server {
 impl ServerMessageWrite for MSG_RAID_TARGET_UPDATE_Server {
     const OPCODE: u16 = 0x321;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

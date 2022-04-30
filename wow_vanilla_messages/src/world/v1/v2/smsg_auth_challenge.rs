@@ -20,7 +20,7 @@ pub struct SMSG_AUTH_CHALLENGE {
 impl ServerMessageWrite for SMSG_AUTH_CHALLENGE {
     const OPCODE: u16 = 0x1ec;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

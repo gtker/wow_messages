@@ -21,7 +21,7 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Server {
 impl ServerMessageWrite for MSG_SAVE_GUILD_EMBLEM_Server {
     const OPCODE: u16 = 0x1f1;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

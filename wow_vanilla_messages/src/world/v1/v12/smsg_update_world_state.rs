@@ -21,7 +21,7 @@ pub struct SMSG_UPDATE_WORLD_STATE {
 impl ServerMessageWrite for SMSG_UPDATE_WORLD_STATE {
     const OPCODE: u16 = 0x2c3;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

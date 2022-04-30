@@ -21,7 +21,7 @@ pub struct SMSG_BATTLEGROUND_PLAYER_LEFT {
 impl ServerMessageWrite for SMSG_BATTLEGROUND_PLAYER_LEFT {
     const OPCODE: u16 = 0x2ed;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

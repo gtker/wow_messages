@@ -19,7 +19,7 @@ pub struct SMSG_MEETINGSTONE_IN_PROGRESS {
 impl ServerMessageWrite for SMSG_MEETINGSTONE_IN_PROGRESS {
     const OPCODE: u16 = 0x298;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

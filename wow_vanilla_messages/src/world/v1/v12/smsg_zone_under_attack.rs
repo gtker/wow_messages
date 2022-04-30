@@ -20,7 +20,7 @@ pub struct SMSG_ZONE_UNDER_ATTACK {
 impl ServerMessageWrite for SMSG_ZONE_UNDER_ATTACK {
     const OPCODE: u16 = 0x254;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

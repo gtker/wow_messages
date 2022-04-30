@@ -20,7 +20,7 @@ pub struct SMSG_AREA_TRIGGER_MESSAGE {
 impl ServerMessageWrite for SMSG_AREA_TRIGGER_MESSAGE {
     const OPCODE: u16 = 0x2b8;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

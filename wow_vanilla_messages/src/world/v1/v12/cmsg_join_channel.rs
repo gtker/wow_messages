@@ -20,7 +20,7 @@ pub struct CMSG_JOIN_CHANNEL {
 impl ClientMessageWrite for CMSG_JOIN_CHANNEL {
     const OPCODE: u32 = 0x97;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

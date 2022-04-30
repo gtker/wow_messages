@@ -21,7 +21,7 @@ pub struct CMSG_GOSSIP_HELLO {
 impl ClientMessageWrite for CMSG_GOSSIP_HELLO {
     const OPCODE: u32 = 0x17b;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -19,7 +19,7 @@ pub struct CMSG_TUTORIAL_CLEAR {
 impl ClientMessageWrite for CMSG_TUTORIAL_CLEAR {
     const OPCODE: u32 = 0xff;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

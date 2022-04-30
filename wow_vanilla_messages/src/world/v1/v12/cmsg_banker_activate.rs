@@ -21,7 +21,7 @@ pub struct CMSG_BANKER_ACTIVATE {
 impl ClientMessageWrite for CMSG_BANKER_ACTIVATE {
     const OPCODE: u32 = 0x1b7;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

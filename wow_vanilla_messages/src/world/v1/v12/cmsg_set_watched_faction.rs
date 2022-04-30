@@ -20,7 +20,7 @@ pub struct CMSG_SET_WATCHED_FACTION {
 impl ClientMessageWrite for CMSG_SET_WATCHED_FACTION {
     const OPCODE: u32 = 0x318;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -22,7 +22,7 @@ pub struct SMSG_FORCE_MOVE_UNROOT {
 impl ServerMessageWrite for SMSG_FORCE_MOVE_UNROOT {
     const OPCODE: u16 = 0xea;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -19,7 +19,7 @@ pub struct CMSG_ATTACKSTOP {
 impl ClientMessageWrite for CMSG_ATTACKSTOP {
     const OPCODE: u32 = 0x142;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

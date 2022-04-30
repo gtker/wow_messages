@@ -19,7 +19,7 @@ pub struct CMSG_GMTICKET_UPDATETEXT {
 impl ClientMessageWrite for CMSG_GMTICKET_UPDATETEXT {
     const OPCODE: u32 = 0x207;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

@@ -20,7 +20,7 @@ pub struct SMSG_SPLINE_MOVE_NORMAL_FALL {
 impl ServerMessageWrite for SMSG_SPLINE_MOVE_NORMAL_FALL {
     const OPCODE: u16 = 0x306;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

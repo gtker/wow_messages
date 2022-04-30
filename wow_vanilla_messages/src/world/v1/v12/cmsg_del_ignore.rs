@@ -21,7 +21,7 @@ pub struct CMSG_DEL_IGNORE {
 impl ClientMessageWrite for CMSG_DEL_IGNORE {
     const OPCODE: u32 = 0x6d;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -20,7 +20,7 @@ pub struct MSG_MOVE_START_PITCH_DOWN {
 impl ClientMessageWrite for MSG_MOVE_START_PITCH_DOWN {
     const OPCODE: u32 = 0xc0;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
@@ -29,7 +29,7 @@ impl ClientMessageWrite for MSG_MOVE_START_PITCH_DOWN {
 impl ServerMessageWrite for MSG_MOVE_START_PITCH_DOWN {
     const OPCODE: u16 = 0xc0;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

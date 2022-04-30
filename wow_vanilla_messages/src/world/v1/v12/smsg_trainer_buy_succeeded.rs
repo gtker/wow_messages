@@ -22,7 +22,7 @@ pub struct SMSG_TRAINER_BUY_SUCCEEDED {
 impl ServerMessageWrite for SMSG_TRAINER_BUY_SUCCEEDED {
     const OPCODE: u16 = 0x1b3;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

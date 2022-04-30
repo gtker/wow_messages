@@ -19,7 +19,7 @@ pub struct CMSG_REQUEST_PET_INFO {
 impl ClientMessageWrite for CMSG_REQUEST_PET_INFO {
     const OPCODE: u32 = 0x279;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

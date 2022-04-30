@@ -25,7 +25,7 @@ pub struct CMSG_BUY_ITEM_IN_SLOT {
 impl ClientMessageWrite for CMSG_BUY_ITEM_IN_SLOT {
     const OPCODE: u32 = 0x1a3;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

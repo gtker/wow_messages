@@ -25,7 +25,7 @@ pub struct SMSG_LOOT_ALL_PASSED {
 impl ServerMessageWrite for SMSG_LOOT_ALL_PASSED {
     const OPCODE: u16 = 0x29e;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

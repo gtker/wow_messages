@@ -22,7 +22,7 @@ pub struct SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 impl ServerMessageWrite for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     const OPCODE: u16 = 0x330;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

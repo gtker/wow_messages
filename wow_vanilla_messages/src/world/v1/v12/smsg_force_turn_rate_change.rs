@@ -22,7 +22,7 @@ pub struct SMSG_FORCE_TURN_RATE_CHANGE {
 impl ServerMessageWrite for SMSG_FORCE_TURN_RATE_CHANGE {
     const OPCODE: u16 = 0x2de;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

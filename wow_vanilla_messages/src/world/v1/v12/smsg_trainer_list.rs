@@ -24,7 +24,7 @@ pub struct SMSG_TRAINER_LIST {
 impl ServerMessageWrite for SMSG_TRAINER_LIST {
     const OPCODE: u16 = 0x1b1;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

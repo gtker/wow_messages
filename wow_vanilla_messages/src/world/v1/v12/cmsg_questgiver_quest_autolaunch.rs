@@ -19,7 +19,7 @@ pub struct CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
 impl ClientMessageWrite for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
     const OPCODE: u32 = 0x187;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

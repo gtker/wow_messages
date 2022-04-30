@@ -20,7 +20,7 @@ pub struct SMSG_GMTICKET_SYSTEMSTATUS {
 impl ServerMessageWrite for SMSG_GMTICKET_SYSTEMSTATUS {
     const OPCODE: u16 = 0x21b;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

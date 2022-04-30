@@ -22,7 +22,7 @@ pub struct SMSG_TAXINODE_STATUS {
 impl ServerMessageWrite for SMSG_TAXINODE_STATUS {
     const OPCODE: u16 = 0x1ab;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

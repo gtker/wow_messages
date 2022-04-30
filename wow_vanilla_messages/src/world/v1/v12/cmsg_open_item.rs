@@ -21,7 +21,7 @@ pub struct CMSG_OPEN_ITEM {
 impl ClientMessageWrite for CMSG_OPEN_ITEM {
     const OPCODE: u32 = 0xac;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

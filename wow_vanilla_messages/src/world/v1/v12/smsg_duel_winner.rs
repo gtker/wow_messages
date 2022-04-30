@@ -22,7 +22,7 @@ pub struct SMSG_DUEL_WINNER {
 impl ServerMessageWrite for SMSG_DUEL_WINNER {
     const OPCODE: u16 = 0x16b;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

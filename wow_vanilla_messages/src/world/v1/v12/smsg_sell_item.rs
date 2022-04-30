@@ -24,7 +24,7 @@ pub struct SMSG_SELL_ITEM {
 impl ServerMessageWrite for SMSG_SELL_ITEM {
     const OPCODE: u16 = 0x1a1;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

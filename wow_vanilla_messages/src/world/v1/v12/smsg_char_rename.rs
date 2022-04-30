@@ -21,7 +21,7 @@ pub struct SMSG_CHAR_RENAME {
 impl ServerMessageWrite for SMSG_CHAR_RENAME {
     const OPCODE: u16 = 0x2c8;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

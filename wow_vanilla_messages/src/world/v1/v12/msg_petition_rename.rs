@@ -21,7 +21,7 @@ pub struct MSG_PETITION_RENAME {
 impl ClientMessageWrite for MSG_PETITION_RENAME {
     const OPCODE: u32 = 0x2c1;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
@@ -30,7 +30,7 @@ impl ClientMessageWrite for MSG_PETITION_RENAME {
 impl ServerMessageWrite for MSG_PETITION_RENAME {
     const OPCODE: u16 = 0x2c1;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

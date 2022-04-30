@@ -26,7 +26,7 @@ pub struct SMSG_START_MIRROR_TIMER {
 impl ServerMessageWrite for SMSG_START_MIRROR_TIMER {
     const OPCODE: u16 = 0x1d9;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

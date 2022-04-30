@@ -19,7 +19,7 @@ pub struct SMSG_CHAT_WRONG_FACTION {
 impl ServerMessageWrite for SMSG_CHAT_WRONG_FACTION {
     const OPCODE: u16 = 0x219;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

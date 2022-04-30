@@ -21,7 +21,7 @@ pub struct SMSG_SPLINE_SET_SWIM_BACK_SPEED {
 impl ServerMessageWrite for SMSG_SPLINE_SET_SWIM_BACK_SPEED {
     const OPCODE: u16 = 0x302;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

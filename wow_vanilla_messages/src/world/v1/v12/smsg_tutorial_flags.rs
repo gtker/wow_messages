@@ -27,7 +27,7 @@ pub struct SMSG_TUTORIAL_FLAGS {
 impl ServerMessageWrite for SMSG_TUTORIAL_FLAGS {
     const OPCODE: u16 = 0xfd;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

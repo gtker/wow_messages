@@ -21,7 +21,7 @@ pub struct MSG_LIST_STABLED_PETS_Client {
 impl ClientMessageWrite for MSG_LIST_STABLED_PETS_Client {
     const OPCODE: u32 = 0x26f;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -24,7 +24,7 @@ pub struct SMSG_RAID_INSTANCE_MESSAGE {
 impl ServerMessageWrite for SMSG_RAID_INSTANCE_MESSAGE {
     const OPCODE: u16 = 0x2fa;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

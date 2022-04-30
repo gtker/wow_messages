@@ -23,7 +23,7 @@ pub struct SMSG_EMOTE {
 impl ServerMessageWrite for SMSG_EMOTE {
     const OPCODE: u16 = 0x103;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

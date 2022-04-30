@@ -20,7 +20,7 @@ pub struct SMSG_INSTANCE_SAVE_CREATED {
 impl ServerMessageWrite for SMSG_INSTANCE_SAVE_CREATED {
     const OPCODE: u16 = 0x2cb;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

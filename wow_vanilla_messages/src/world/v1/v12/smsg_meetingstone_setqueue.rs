@@ -23,7 +23,7 @@ pub struct SMSG_MEETINGSTONE_SETQUEUE {
 impl ServerMessageWrite for SMSG_MEETINGSTONE_SETQUEUE {
     const OPCODE: u16 = 0x295;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

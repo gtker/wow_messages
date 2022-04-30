@@ -21,7 +21,7 @@ pub struct CMSG_RECLAIM_CORPSE {
 impl ClientMessageWrite for CMSG_RECLAIM_CORPSE {
     const OPCODE: u32 = 0x1d2;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

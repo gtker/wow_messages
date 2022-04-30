@@ -21,7 +21,7 @@ pub struct SMSG_UPDATE_AURA_DURATION {
 impl ServerMessageWrite for SMSG_UPDATE_AURA_DURATION {
     const OPCODE: u16 = 0x137;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

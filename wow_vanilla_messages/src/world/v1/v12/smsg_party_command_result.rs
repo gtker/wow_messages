@@ -23,7 +23,7 @@ pub struct SMSG_PARTY_COMMAND_RESULT {
 impl ServerMessageWrite for SMSG_PARTY_COMMAND_RESULT {
     const OPCODE: u16 = 0x7f;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

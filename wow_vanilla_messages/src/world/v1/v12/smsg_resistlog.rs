@@ -27,7 +27,7 @@ pub struct SMSG_RESISTLOG {
 impl ServerMessageWrite for SMSG_RESISTLOG {
     const OPCODE: u16 = 0x1d6;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

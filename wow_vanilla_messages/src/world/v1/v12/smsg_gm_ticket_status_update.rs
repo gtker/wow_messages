@@ -21,7 +21,7 @@ pub struct SMSG_GM_TICKET_STATUS_UPDATE {
 impl ServerMessageWrite for SMSG_GM_TICKET_STATUS_UPDATE {
     const OPCODE: u16 = 0x328;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

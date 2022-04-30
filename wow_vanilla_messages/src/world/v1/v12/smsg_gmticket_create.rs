@@ -21,7 +21,7 @@ pub struct SMSG_GMTICKET_CREATE {
 impl ServerMessageWrite for SMSG_GMTICKET_CREATE {
     const OPCODE: u16 = 0x206;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

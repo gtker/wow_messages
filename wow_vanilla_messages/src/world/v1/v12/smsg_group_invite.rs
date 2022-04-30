@@ -19,7 +19,7 @@ pub struct SMSG_GROUP_INVITE {
 impl ServerMessageWrite for SMSG_GROUP_INVITE {
     const OPCODE: u16 = 0x6f;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

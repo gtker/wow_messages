@@ -21,7 +21,7 @@ pub struct MSG_INSPECT_HONOR_STATS_Client {
 impl ClientMessageWrite for MSG_INSPECT_HONOR_STATS_Client {
     const OPCODE: u32 = 0x2d6;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

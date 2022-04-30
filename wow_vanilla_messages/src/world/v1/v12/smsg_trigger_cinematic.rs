@@ -21,7 +21,7 @@ pub struct SMSG_TRIGGER_CINEMATIC {
 impl ServerMessageWrite for SMSG_TRIGGER_CINEMATIC {
     const OPCODE: u16 = 0xfa;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

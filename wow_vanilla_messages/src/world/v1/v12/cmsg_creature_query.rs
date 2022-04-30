@@ -22,7 +22,7 @@ pub struct CMSG_CREATURE_QUERY {
 impl ClientMessageWrite for CMSG_CREATURE_QUERY {
     const OPCODE: u32 = 0x60;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

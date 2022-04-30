@@ -19,7 +19,7 @@ pub struct SMSG_LOGOUT_CANCEL_ACK {
 impl ServerMessageWrite for SMSG_LOGOUT_CANCEL_ACK {
     const OPCODE: u16 = 0x4f;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

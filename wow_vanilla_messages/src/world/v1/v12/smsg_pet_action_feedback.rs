@@ -21,7 +21,7 @@ pub struct SMSG_PET_ACTION_FEEDBACK {
 impl ServerMessageWrite for SMSG_PET_ACTION_FEEDBACK {
     const OPCODE: u16 = 0x2c6;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -23,7 +23,7 @@ pub struct CMSG_MOVE_SET_RAW_POSITION {
 impl ClientMessageWrite for CMSG_MOVE_SET_RAW_POSITION {
     const OPCODE: u32 = 0xe1;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

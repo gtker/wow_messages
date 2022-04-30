@@ -19,7 +19,7 @@ pub struct CMSG_FRIEND_LIST {
 impl ClientMessageWrite for CMSG_FRIEND_LIST {
     const OPCODE: u32 = 0x66;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

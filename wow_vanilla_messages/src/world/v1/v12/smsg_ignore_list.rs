@@ -19,7 +19,7 @@ pub struct SMSG_IGNORE_LIST {
 impl ServerMessageWrite for SMSG_IGNORE_LIST {
     const OPCODE: u16 = 0x6b;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

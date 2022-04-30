@@ -23,7 +23,7 @@ pub struct CMSG_AUCTION_PLACE_BID {
 impl ClientMessageWrite for CMSG_AUCTION_PLACE_BID {
     const OPCODE: u32 = 0x25a;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

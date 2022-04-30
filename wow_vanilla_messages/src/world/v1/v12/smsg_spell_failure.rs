@@ -24,7 +24,7 @@ pub struct SMSG_SPELL_FAILURE {
 impl ServerMessageWrite for SMSG_SPELL_FAILURE {
     const OPCODE: u16 = 0x133;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -20,7 +20,7 @@ pub struct MSG_MOVE_START_FORWARD {
 impl ClientMessageWrite for MSG_MOVE_START_FORWARD {
     const OPCODE: u32 = 0xb5;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 
@@ -29,7 +29,7 @@ impl ClientMessageWrite for MSG_MOVE_START_FORWARD {
 impl ServerMessageWrite for MSG_MOVE_START_FORWARD {
     const OPCODE: u16 = 0xb5;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

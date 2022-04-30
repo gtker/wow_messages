@@ -21,7 +21,7 @@ pub struct CMSG_LIST_INVENTORY {
 impl ClientMessageWrite for CMSG_LIST_INVENTORY {
     const OPCODE: u32 = 0x19e;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

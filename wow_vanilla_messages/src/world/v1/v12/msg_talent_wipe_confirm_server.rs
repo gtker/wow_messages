@@ -22,7 +22,7 @@ pub struct MSG_TALENT_WIPE_CONFIRM_Server {
 impl ServerMessageWrite for MSG_TALENT_WIPE_CONFIRM_Server {
     const OPCODE: u16 = 0x2aa;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

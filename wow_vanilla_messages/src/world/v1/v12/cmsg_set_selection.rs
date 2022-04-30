@@ -21,7 +21,7 @@ pub struct CMSG_SET_SELECTION {
 impl ClientMessageWrite for CMSG_SET_SELECTION {
     const OPCODE: u32 = 0x13d;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

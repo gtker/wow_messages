@@ -19,7 +19,7 @@ pub struct CMSG_PLAYED_TIME {
 impl ClientMessageWrite for CMSG_PLAYED_TIME {
     const OPCODE: u32 = 0x1cc;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

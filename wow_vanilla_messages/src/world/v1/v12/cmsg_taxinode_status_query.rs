@@ -21,7 +21,7 @@ pub struct CMSG_TAXINODE_STATUS_QUERY {
 impl ClientMessageWrite for CMSG_TAXINODE_STATUS_QUERY {
     const OPCODE: u32 = 0x1aa;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

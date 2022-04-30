@@ -21,7 +21,7 @@ pub struct SMSG_DESTROY_OBJECT {
 impl ServerMessageWrite for SMSG_DESTROY_OBJECT {
     const OPCODE: u16 = 0xaa;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

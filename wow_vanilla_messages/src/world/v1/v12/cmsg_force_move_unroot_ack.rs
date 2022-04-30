@@ -23,7 +23,7 @@ pub struct CMSG_FORCE_MOVE_UNROOT_ACK {
 impl ClientMessageWrite for CMSG_FORCE_MOVE_UNROOT_ACK {
     const OPCODE: u32 = 0xeb;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

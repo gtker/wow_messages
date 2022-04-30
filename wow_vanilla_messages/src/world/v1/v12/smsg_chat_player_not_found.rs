@@ -19,7 +19,7 @@ pub struct SMSG_CHAT_PLAYER_NOT_FOUND {
 impl ServerMessageWrite for SMSG_CHAT_PLAYER_NOT_FOUND {
     const OPCODE: u16 = 0x2a9;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         self.size() as u16
     }
 

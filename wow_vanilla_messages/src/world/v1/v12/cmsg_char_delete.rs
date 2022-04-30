@@ -21,7 +21,7 @@ pub struct CMSG_CHAR_DELETE {
 impl ClientMessageWrite for CMSG_CHAR_DELETE {
     const OPCODE: u32 = 0x38;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

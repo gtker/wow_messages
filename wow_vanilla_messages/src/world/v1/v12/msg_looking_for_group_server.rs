@@ -20,7 +20,7 @@ pub struct MSG_LOOKING_FOR_GROUP_Server {
 impl ServerMessageWrite for MSG_LOOKING_FOR_GROUP_Server {
     const OPCODE: u16 = 0x1ff;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

@@ -19,7 +19,7 @@ pub struct SMSG_GROUP_UNINVITE {
 impl ServerMessageWrite for SMSG_GROUP_UNINVITE {
     const OPCODE: u16 = 0x77;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 

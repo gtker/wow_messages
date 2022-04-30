@@ -19,7 +19,7 @@ pub struct CMSG_GROUP_RAID_CONVERT {
 impl ClientMessageWrite for CMSG_GROUP_RAID_CONVERT {
     const OPCODE: u32 = 0x28e;
 
-    fn size_without_size_field(&self) -> u16 {
+    fn size_without_size_or_opcode_fields(&self) -> u16 {
         Self::size() as u16
     }
 
