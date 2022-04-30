@@ -78,6 +78,7 @@ impl MessageBody for CMSG_PAGE_TEXT_QUERY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_PAGE_TEXT_QUERY {}

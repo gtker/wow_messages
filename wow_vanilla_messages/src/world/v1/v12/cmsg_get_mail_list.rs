@@ -79,6 +79,7 @@ impl MessageBody for CMSG_GET_MAIL_LIST {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_GET_MAIL_LIST {}

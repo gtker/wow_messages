@@ -78,6 +78,7 @@ impl MessageBody for CMSG_QUEST_CONFIRM_ACCEPT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_QUEST_CONFIRM_ACCEPT {}

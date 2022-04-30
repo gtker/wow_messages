@@ -177,6 +177,7 @@ impl MessageBody for SMSG_SHOWTAXINODES {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SHOWTAXINODES {

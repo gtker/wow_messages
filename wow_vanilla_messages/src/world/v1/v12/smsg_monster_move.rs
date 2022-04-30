@@ -180,6 +180,7 @@ impl MessageBody for SMSG_MONSTER_MOVE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_MONSTER_MOVE {

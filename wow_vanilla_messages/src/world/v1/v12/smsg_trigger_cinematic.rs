@@ -79,6 +79,7 @@ impl MessageBody for SMSG_TRIGGER_CINEMATIC {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_TRIGGER_CINEMATIC {}

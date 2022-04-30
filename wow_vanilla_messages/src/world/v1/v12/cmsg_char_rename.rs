@@ -109,6 +109,7 @@ impl MessageBody for CMSG_CHAR_RENAME {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_CHAR_RENAME {

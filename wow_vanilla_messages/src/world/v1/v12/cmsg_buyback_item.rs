@@ -102,6 +102,7 @@ impl MessageBody for CMSG_BUYBACK_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_BUYBACK_ITEM {}

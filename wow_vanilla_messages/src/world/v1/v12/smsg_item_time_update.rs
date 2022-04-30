@@ -101,6 +101,7 @@ impl MessageBody for SMSG_ITEM_TIME_UPDATE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_ITEM_TIME_UPDATE {}

@@ -235,6 +235,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_CORPSE_QUERY_Server {

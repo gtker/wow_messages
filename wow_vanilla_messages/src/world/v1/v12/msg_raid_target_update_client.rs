@@ -508,6 +508,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_RAID_TARGET_UPDATE_Client {

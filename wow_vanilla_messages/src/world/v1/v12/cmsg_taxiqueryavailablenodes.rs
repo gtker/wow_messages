@@ -79,6 +79,7 @@ impl MessageBody for CMSG_TAXIQUERYAVAILABLENODES {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_TAXIQUERYAVAILABLENODES {}

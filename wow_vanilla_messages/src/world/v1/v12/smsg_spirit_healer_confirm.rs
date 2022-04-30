@@ -79,6 +79,7 @@ impl MessageBody for SMSG_SPIRIT_HEALER_CONFIRM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SPIRIT_HEALER_CONFIRM {}

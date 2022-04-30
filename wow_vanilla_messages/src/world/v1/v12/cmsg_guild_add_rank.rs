@@ -86,6 +86,7 @@ impl MessageBody for CMSG_GUILD_ADD_RANK {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_GUILD_ADD_RANK {

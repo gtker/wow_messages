@@ -101,6 +101,7 @@ impl MessageBody for SMSG_PLAY_SPELL_VISUAL {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PLAY_SPELL_VISUAL {}

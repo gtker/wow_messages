@@ -101,6 +101,7 @@ impl MessageBody for SMSG_TAXINODE_STATUS {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_TAXINODE_STATUS {}

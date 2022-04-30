@@ -101,6 +101,7 @@ impl MessageBody for CMSG_ITEM_QUERY_SINGLE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_ITEM_QUERY_SINGLE {}

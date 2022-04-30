@@ -100,6 +100,7 @@ impl MessageBody for CMSG_SET_FACTION_ATWAR {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_SET_FACTION_ATWAR {}

@@ -79,6 +79,7 @@ impl MessageBody for SMSG_ACTIVATETAXIREPLY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_ACTIVATETAXIREPLY {}

@@ -80,6 +80,7 @@ impl MessageBody for MSG_MOVE_STOP_TURN {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_MOVE_STOP_TURN {

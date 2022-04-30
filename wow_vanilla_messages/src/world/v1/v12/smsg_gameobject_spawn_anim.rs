@@ -79,6 +79,7 @@ impl MessageBody for SMSG_GAMEOBJECT_SPAWN_ANIM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_GAMEOBJECT_SPAWN_ANIM {}

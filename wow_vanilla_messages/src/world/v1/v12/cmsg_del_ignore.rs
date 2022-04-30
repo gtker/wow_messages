@@ -79,6 +79,7 @@ impl MessageBody for CMSG_DEL_IGNORE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_DEL_IGNORE {}

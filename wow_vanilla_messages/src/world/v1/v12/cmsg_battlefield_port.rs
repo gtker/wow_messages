@@ -102,6 +102,7 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_BATTLEFIELD_PORT {}

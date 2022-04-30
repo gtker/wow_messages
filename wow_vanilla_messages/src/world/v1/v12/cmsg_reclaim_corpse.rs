@@ -79,6 +79,7 @@ impl MessageBody for CMSG_RECLAIM_CORPSE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_RECLAIM_CORPSE {}

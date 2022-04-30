@@ -101,6 +101,7 @@ impl MessageBody for CMSG_AUTOEQUIP_ITEM_SLOT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_AUTOEQUIP_ITEM_SLOT {}

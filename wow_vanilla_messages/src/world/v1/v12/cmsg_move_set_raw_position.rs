@@ -132,6 +132,7 @@ impl MessageBody for CMSG_MOVE_SET_RAW_POSITION {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_MOVE_SET_RAW_POSITION {}

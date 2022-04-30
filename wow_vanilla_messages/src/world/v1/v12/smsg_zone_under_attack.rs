@@ -78,6 +78,7 @@ impl MessageBody for SMSG_ZONE_UNDER_ATTACK {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_ZONE_UNDER_ATTACK {}

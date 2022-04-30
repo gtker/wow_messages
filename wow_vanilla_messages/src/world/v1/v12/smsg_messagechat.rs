@@ -2233,6 +2233,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_MESSAGECHAT {

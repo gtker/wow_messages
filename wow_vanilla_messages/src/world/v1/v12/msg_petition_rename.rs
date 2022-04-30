@@ -111,6 +111,7 @@ impl MessageBody for MSG_PETITION_RENAME {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_PETITION_RENAME {

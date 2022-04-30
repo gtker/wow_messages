@@ -101,6 +101,7 @@ impl MessageBody for CMSG_PET_CANCEL_AURA {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_PET_CANCEL_AURA {}

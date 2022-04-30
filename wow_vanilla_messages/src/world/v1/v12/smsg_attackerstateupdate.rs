@@ -144,6 +144,7 @@ impl MessageBody for SMSG_ATTACKERSTATEUPDATE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_ATTACKERSTATEUPDATE {

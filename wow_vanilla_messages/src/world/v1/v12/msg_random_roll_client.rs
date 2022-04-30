@@ -100,6 +100,7 @@ impl MessageBody for MSG_RANDOM_ROLL_Client {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_RANDOM_ROLL_Client {}

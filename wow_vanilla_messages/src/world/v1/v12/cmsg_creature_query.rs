@@ -101,6 +101,7 @@ impl MessageBody for CMSG_CREATURE_QUERY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_CREATURE_QUERY {}

@@ -172,6 +172,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_TRANSFER_PENDING {

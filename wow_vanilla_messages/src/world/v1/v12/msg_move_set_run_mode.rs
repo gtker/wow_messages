@@ -80,6 +80,7 @@ impl MessageBody for MSG_MOVE_SET_RUN_MODE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_MOVE_SET_RUN_MODE {

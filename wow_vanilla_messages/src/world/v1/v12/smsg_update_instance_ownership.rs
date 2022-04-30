@@ -78,6 +78,7 @@ impl MessageBody for SMSG_UPDATE_INSTANCE_OWNERSHIP {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_UPDATE_INSTANCE_OWNERSHIP {}

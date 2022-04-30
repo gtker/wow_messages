@@ -78,6 +78,7 @@ impl MessageBody for SMSG_REMOVED_SPELL {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_REMOVED_SPELL {}

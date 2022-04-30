@@ -101,6 +101,7 @@ impl MessageBody for SMSG_FORCE_MOVE_ROOT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_FORCE_MOVE_ROOT {}

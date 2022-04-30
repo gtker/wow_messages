@@ -101,6 +101,7 @@ impl MessageBody for CMSG_RESURRECT_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_RESURRECT_RESPONSE {}

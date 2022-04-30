@@ -75,6 +75,7 @@ impl MessageBody for MSG_QUERY_NEXT_MAIL_TIME_Server {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_QUERY_NEXT_MAIL_TIME_Server {}

@@ -124,6 +124,7 @@ impl MessageBody for SMSG_SPELL_FAILURE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SPELL_FAILURE {}

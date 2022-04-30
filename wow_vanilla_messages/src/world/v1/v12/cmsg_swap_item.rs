@@ -144,6 +144,7 @@ impl MessageBody for CMSG_SWAP_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_SWAP_ITEM {}

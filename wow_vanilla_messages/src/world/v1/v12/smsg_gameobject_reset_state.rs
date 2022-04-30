@@ -79,6 +79,7 @@ impl MessageBody for SMSG_GAMEOBJECT_RESET_STATE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_GAMEOBJECT_RESET_STATE {}

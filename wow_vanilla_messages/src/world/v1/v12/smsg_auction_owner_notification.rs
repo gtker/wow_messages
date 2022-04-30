@@ -189,6 +189,7 @@ impl MessageBody for SMSG_AUCTION_OWNER_NOTIFICATION {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_AUCTION_OWNER_NOTIFICATION {}

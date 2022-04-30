@@ -101,6 +101,7 @@ impl MessageBody for SMSG_PLAY_SPELL_IMPACT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PLAY_SPELL_IMPACT {}

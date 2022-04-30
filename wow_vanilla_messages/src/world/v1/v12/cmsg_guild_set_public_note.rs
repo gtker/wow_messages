@@ -117,6 +117,7 @@ impl MessageBody for CMSG_GUILD_SET_PUBLIC_NOTE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_GUILD_SET_PUBLIC_NOTE {

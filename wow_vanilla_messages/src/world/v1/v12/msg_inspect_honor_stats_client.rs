@@ -79,6 +79,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Client {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_INSPECT_HONOR_STATS_Client {}

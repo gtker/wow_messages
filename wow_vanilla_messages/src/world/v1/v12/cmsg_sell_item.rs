@@ -123,6 +123,7 @@ impl MessageBody for CMSG_SELL_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_SELL_ITEM {}

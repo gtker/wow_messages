@@ -111,6 +111,7 @@ impl MessageBody for SMSG_SET_FACTION_STANDING {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SET_FACTION_STANDING {

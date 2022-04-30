@@ -79,6 +79,7 @@ impl MessageBody for SMSG_INSTANCE_RESET {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_INSTANCE_RESET {}

@@ -145,6 +145,7 @@ impl MessageBody for CMSG_MOVE_FEATHER_FALL_ACK {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_MOVE_FEATHER_FALL_ACK {

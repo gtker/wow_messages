@@ -102,6 +102,7 @@ impl MessageBody for SMSG_PET_ACTION_SOUND {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PET_ACTION_SOUND {}

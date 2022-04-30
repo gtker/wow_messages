@@ -101,6 +101,7 @@ impl MessageBody for CMSG_TRAINER_BUY_SPELL {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_TRAINER_BUY_SPELL {}

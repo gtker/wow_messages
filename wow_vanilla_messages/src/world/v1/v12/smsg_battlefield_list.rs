@@ -222,6 +222,7 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_BATTLEFIELD_LIST {

@@ -178,6 +178,7 @@ impl MessageBody for SMSG_SPELLLOGMISS {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPELLLOGMISS {

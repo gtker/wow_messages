@@ -79,6 +79,7 @@ impl MessageBody for CMSG_GOSSIP_HELLO {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_GOSSIP_HELLO {}

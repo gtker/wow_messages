@@ -79,6 +79,7 @@ impl MessageBody for SMSG_MOUNTRESULT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_MOUNTRESULT {}

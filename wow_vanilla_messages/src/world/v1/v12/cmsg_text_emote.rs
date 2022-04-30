@@ -124,6 +124,7 @@ impl MessageBody for CMSG_TEXT_EMOTE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_TEXT_EMOTE {}

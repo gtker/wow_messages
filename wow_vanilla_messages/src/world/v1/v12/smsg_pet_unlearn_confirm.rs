@@ -101,6 +101,7 @@ impl MessageBody for SMSG_PET_UNLEARN_CONFIRM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PET_UNLEARN_CONFIRM {}

@@ -156,6 +156,7 @@ impl MessageBody for SMSG_SPELLLOGEXECUTE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPELLLOGEXECUTE {

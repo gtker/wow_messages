@@ -145,6 +145,7 @@ impl MessageBody for CMSG_MOVE_WATER_WALK_ACK {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_MOVE_WATER_WALK_ACK {

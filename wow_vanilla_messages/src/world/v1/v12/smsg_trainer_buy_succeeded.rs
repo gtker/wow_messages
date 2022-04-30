@@ -101,6 +101,7 @@ impl MessageBody for SMSG_TRAINER_BUY_SUCCEEDED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_TRAINER_BUY_SUCCEEDED {}

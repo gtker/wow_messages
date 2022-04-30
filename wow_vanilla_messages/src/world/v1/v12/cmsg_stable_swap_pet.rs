@@ -101,6 +101,7 @@ impl MessageBody for CMSG_STABLE_SWAP_PET {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_STABLE_SWAP_PET {}

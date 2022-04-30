@@ -124,6 +124,7 @@ impl MessageBody for SMSG_PVP_CREDIT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PVP_CREDIT {}

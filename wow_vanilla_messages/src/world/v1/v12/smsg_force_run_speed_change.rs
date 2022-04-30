@@ -119,6 +119,7 @@ impl MessageBody for SMSG_FORCE_RUN_SPEED_CHANGE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_FORCE_RUN_SPEED_CHANGE {

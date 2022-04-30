@@ -79,6 +79,7 @@ impl MessageBody for CMSG_PLAYER_LOGIN {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_PLAYER_LOGIN {}

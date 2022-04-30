@@ -137,6 +137,7 @@ impl MessageBody for SMSG_NPC_TEXT_UPDATE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_NPC_TEXT_UPDATE {

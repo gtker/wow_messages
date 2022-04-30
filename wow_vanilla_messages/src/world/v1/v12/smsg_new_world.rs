@@ -132,6 +132,7 @@ impl MessageBody for SMSG_NEW_WORLD {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_NEW_WORLD {}

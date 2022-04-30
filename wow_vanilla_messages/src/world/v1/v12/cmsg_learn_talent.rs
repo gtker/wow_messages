@@ -100,6 +100,7 @@ impl MessageBody for CMSG_LEARN_TALENT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_LEARN_TALENT {}

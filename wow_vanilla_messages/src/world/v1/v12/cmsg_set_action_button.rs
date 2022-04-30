@@ -100,6 +100,7 @@ impl MessageBody for CMSG_SET_ACTION_BUTTON {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_SET_ACTION_BUTTON {}

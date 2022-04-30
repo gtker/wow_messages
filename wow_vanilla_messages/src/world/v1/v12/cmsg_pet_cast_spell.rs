@@ -101,6 +101,7 @@ impl MessageBody for CMSG_PET_CAST_SPELL {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_PET_CAST_SPELL {}

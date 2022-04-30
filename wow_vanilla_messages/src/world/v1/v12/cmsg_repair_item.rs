@@ -101,6 +101,7 @@ impl MessageBody for CMSG_REPAIR_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_REPAIR_ITEM {}

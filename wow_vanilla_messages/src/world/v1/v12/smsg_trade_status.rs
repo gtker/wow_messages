@@ -446,6 +446,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_TRADE_STATUS {

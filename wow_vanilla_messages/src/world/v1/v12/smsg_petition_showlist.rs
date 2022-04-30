@@ -134,6 +134,7 @@ impl MessageBody for SMSG_PETITION_SHOWLIST {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_PETITION_SHOWLIST {

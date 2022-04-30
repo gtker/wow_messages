@@ -79,6 +79,7 @@ impl MessageBody for SMSG_CHARACTER_LOGIN_FAILED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_CHARACTER_LOGIN_FAILED {}

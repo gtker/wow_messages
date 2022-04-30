@@ -125,6 +125,7 @@ impl MessageBody for CMSG_LOOT_METHOD {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_LOOT_METHOD {}

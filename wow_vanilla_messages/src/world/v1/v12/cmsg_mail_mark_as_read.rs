@@ -101,6 +101,7 @@ impl MessageBody for CMSG_MAIL_MARK_AS_READ {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_MAIL_MARK_AS_READ {}

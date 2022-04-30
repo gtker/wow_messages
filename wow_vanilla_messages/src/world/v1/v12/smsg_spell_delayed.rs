@@ -101,6 +101,7 @@ impl MessageBody for SMSG_SPELL_DELAYED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SPELL_DELAYED {}

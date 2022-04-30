@@ -189,6 +189,7 @@ impl MessageBody for CMSG_AUCTION_SELL_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_AUCTION_SELL_ITEM {}

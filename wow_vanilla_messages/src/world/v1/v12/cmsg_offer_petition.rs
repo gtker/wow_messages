@@ -101,6 +101,7 @@ impl MessageBody for CMSG_OFFER_PETITION {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_OFFER_PETITION {}

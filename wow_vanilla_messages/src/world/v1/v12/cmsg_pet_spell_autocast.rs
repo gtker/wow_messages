@@ -123,6 +123,7 @@ impl MessageBody for CMSG_PET_SPELL_AUTOCAST {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_PET_SPELL_AUTOCAST {}

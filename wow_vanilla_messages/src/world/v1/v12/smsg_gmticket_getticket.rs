@@ -299,6 +299,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_GMTICKET_GETTICKET {

@@ -78,6 +78,7 @@ impl MessageBody for SMSG_RECEIVED_MAIL {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_RECEIVED_MAIL {}

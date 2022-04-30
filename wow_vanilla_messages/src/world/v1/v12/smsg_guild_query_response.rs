@@ -264,6 +264,7 @@ impl MessageBody for SMSG_GUILD_QUERY_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_GUILD_QUERY_RESPONSE {

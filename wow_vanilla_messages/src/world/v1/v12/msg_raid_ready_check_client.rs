@@ -125,6 +125,7 @@ impl MessageBody for MSG_RAID_READY_CHECK_Client {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_RAID_READY_CHECK_Client {

@@ -196,6 +196,7 @@ impl MessageBody for SMSG_GUILD_INFO {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_GUILD_INFO {

@@ -164,6 +164,7 @@ impl MessageBody for SMSG_CHANNEL_LIST {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_CHANNEL_LIST {

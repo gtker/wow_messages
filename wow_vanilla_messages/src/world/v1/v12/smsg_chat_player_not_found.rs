@@ -86,6 +86,7 @@ impl MessageBody for SMSG_CHAT_PLAYER_NOT_FOUND {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_CHAT_PLAYER_NOT_FOUND {

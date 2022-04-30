@@ -78,6 +78,7 @@ impl MessageBody for CMSG_ACCEPT_TRADE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_ACCEPT_TRADE {}

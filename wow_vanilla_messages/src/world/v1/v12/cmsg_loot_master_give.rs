@@ -123,6 +123,7 @@ impl MessageBody for CMSG_LOOT_MASTER_GIVE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_LOOT_MASTER_GIVE {}

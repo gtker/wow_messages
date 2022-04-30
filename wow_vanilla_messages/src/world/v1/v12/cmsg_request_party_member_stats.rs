@@ -79,6 +79,7 @@ impl MessageBody for CMSG_REQUEST_PARTY_MEMBER_STATS {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_REQUEST_PARTY_MEMBER_STATS {}

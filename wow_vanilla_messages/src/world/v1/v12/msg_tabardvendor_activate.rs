@@ -81,6 +81,7 @@ impl MessageBody for MSG_TABARDVENDOR_ACTIVATE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_TABARDVENDOR_ACTIVATE {}

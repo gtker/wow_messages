@@ -78,6 +78,7 @@ impl MessageBody for SMSG_SPLINE_MOVE_FEATHER_FALL {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPLINE_MOVE_FEATHER_FALL {

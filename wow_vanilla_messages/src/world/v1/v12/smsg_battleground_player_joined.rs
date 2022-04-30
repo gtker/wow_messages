@@ -79,6 +79,7 @@ impl MessageBody for SMSG_BATTLEGROUND_PLAYER_JOINED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_BATTLEGROUND_PLAYER_JOINED {}

@@ -184,6 +184,7 @@ impl MessageBody for CMSG_TEST_OPTIONAL {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_TEST_OPTIONAL {

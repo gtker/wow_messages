@@ -101,6 +101,7 @@ impl MessageBody for SMSG_PARTYKILLLOG {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PARTYKILLLOG {}

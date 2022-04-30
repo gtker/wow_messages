@@ -93,6 +93,7 @@ impl MessageBody for SMSG_ACTION_BUTTONS {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_ACTION_BUTTONS {}

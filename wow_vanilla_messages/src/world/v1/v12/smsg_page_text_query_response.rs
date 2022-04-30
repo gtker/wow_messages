@@ -130,6 +130,7 @@ impl MessageBody for SMSG_PAGE_TEXT_QUERY_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_PAGE_TEXT_QUERY_RESPONSE {

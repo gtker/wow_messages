@@ -111,6 +111,7 @@ impl MessageBody for SMSG_LOOT_MASTER_LIST {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_LOOT_MASTER_LIST {

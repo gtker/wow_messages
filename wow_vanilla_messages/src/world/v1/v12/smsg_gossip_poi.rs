@@ -190,6 +190,7 @@ impl MessageBody for SMSG_GOSSIP_POI {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_GOSSIP_POI {

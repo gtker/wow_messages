@@ -97,6 +97,7 @@ impl MessageBody for SMSG_LOGIN_SETTIMESPEED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_LOGIN_SETTIMESPEED {}

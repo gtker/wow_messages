@@ -117,6 +117,7 @@ impl MessageBody for SMSG_GUILD_INVITE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_GUILD_INVITE {

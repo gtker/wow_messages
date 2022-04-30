@@ -79,6 +79,7 @@ impl MessageBody for CMSG_BINDER_ACTIVATE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_BINDER_ACTIVATE {}

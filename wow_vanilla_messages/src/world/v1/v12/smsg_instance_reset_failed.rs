@@ -102,6 +102,7 @@ impl MessageBody for SMSG_INSTANCE_RESET_FAILED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_INSTANCE_RESET_FAILED {}

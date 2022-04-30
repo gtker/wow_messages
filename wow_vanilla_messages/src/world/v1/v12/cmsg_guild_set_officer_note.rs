@@ -117,6 +117,7 @@ impl MessageBody for CMSG_GUILD_SET_OFFICER_NOTE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_GUILD_SET_OFFICER_NOTE {

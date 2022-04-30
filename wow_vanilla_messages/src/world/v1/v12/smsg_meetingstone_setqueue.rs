@@ -102,6 +102,7 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_MEETINGSTONE_SETQUEUE {}

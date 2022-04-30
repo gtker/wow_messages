@@ -143,6 +143,7 @@ impl MessageBody for SMSG_WEATHER {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_WEATHER {}

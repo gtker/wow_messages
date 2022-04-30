@@ -79,6 +79,7 @@ impl MessageBody for SMSG_SHOW_BANK {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SHOW_BANK {}

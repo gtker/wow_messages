@@ -101,6 +101,7 @@ impl MessageBody for CMSG_GROUP_ASSISTANT_LEADER {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_GROUP_ASSISTANT_LEADER {}

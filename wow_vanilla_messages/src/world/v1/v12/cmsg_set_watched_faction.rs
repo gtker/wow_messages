@@ -78,6 +78,7 @@ impl MessageBody for CMSG_SET_WATCHED_FACTION {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_SET_WATCHED_FACTION {}

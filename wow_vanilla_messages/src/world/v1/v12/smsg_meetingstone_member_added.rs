@@ -79,6 +79,7 @@ impl MessageBody for SMSG_MEETINGSTONE_MEMBER_ADDED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_MEETINGSTONE_MEMBER_ADDED {}

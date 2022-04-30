@@ -79,6 +79,7 @@ impl MessageBody for CMSG_EMOTE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_EMOTE {}

@@ -144,6 +144,7 @@ impl MessageBody for CMSG_USE_ITEM {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_USE_ITEM {

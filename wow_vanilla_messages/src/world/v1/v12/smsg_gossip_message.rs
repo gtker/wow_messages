@@ -212,6 +212,7 @@ impl MessageBody for SMSG_GOSSIP_MESSAGE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_GOSSIP_MESSAGE {

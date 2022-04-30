@@ -123,6 +123,7 @@ impl MessageBody for CMSG_MOVE_KNOCK_BACK_ACK {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_MOVE_KNOCK_BACK_ACK {

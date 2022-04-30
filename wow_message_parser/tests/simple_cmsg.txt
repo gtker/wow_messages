@@ -78,6 +78,7 @@ impl MessageBody for SimpleCmsg {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SimpleCmsg {}

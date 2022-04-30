@@ -122,6 +122,7 @@ impl MessageBody for SMSG_ATTACKSTOP {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_ATTACKSTOP {

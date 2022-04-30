@@ -101,6 +101,7 @@ impl MessageBody for SMSG_SPELLINSTAKILLLOG {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SPELLINSTAKILLLOG {}

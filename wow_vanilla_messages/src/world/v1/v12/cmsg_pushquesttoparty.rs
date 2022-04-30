@@ -78,6 +78,7 @@ impl MessageBody for CMSG_PUSHQUESTTOPARTY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_PUSHQUESTTOPARTY {}

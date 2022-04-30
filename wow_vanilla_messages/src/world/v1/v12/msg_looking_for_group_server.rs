@@ -78,6 +78,7 @@ impl MessageBody for MSG_LOOKING_FOR_GROUP_Server {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_LOOKING_FOR_GROUP_Server {}

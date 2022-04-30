@@ -78,6 +78,7 @@ impl MessageBody for SMSG_AUTH_CHALLENGE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_AUTH_CHALLENGE {}

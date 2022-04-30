@@ -166,6 +166,7 @@ impl MessageBody for SMSG_SPELLHEALLOG {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPELLHEALLOG {

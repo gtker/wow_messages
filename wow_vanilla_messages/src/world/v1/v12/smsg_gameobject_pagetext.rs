@@ -79,6 +79,7 @@ impl MessageBody for SMSG_GAMEOBJECT_PAGETEXT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_GAMEOBJECT_PAGETEXT {}

@@ -116,6 +116,7 @@ impl MessageBody for SMSG_EXPECTED_SPAM_RECORDS {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_EXPECTED_SPAM_RECORDS {

@@ -714,6 +714,7 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_AUTH_RESPONSE {

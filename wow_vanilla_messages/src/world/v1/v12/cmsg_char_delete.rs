@@ -79,6 +79,7 @@ impl MessageBody for CMSG_CHAR_DELETE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_CHAR_DELETE {}

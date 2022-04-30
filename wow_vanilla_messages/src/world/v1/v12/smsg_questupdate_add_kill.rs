@@ -167,6 +167,7 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_QUESTUPDATE_ADD_KILL {}

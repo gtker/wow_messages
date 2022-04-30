@@ -86,6 +86,7 @@ impl MessageBody for CMSG_GUILD_PROMOTE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_GUILD_PROMOTE {

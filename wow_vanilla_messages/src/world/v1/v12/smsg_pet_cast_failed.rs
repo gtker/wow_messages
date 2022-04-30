@@ -123,6 +123,7 @@ impl MessageBody for SMSG_PET_CAST_FAILED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PET_CAST_FAILED {}

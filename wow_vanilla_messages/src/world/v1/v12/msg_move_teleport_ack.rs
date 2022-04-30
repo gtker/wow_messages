@@ -125,6 +125,7 @@ impl MessageBody for MSG_MOVE_TELEPORT_ACK {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_MOVE_TELEPORT_ACK {}

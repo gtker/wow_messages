@@ -137,6 +137,7 @@ impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {

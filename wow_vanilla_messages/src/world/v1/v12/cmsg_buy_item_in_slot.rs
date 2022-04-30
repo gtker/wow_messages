@@ -167,6 +167,7 @@ impl MessageBody for CMSG_BUY_ITEM_IN_SLOT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_BUY_ITEM_IN_SLOT {}

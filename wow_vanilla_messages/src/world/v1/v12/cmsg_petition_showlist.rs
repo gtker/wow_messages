@@ -79,6 +79,7 @@ impl MessageBody for CMSG_PETITION_SHOWLIST {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_PETITION_SHOWLIST {}

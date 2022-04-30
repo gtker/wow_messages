@@ -124,6 +124,7 @@ impl MessageBody for CMSG_LOOT_ROLL {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_LOOT_ROLL {}

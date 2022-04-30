@@ -430,6 +430,7 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_GMTICKET_CREATE {

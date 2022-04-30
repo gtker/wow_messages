@@ -123,6 +123,7 @@ impl MessageBody for CMSG_PET_ACTION {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_PET_ACTION {}

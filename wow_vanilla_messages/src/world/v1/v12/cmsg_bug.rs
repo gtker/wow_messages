@@ -183,6 +183,7 @@ impl MessageBody for CMSG_BUG {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_BUG {

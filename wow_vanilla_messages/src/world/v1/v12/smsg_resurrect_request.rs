@@ -175,6 +175,7 @@ impl MessageBody for SMSG_RESURRECT_REQUEST {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_RESURRECT_REQUEST {

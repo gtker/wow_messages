@@ -461,6 +461,7 @@ impl MessageBody for CMSG_PETITION_BUY {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_PETITION_BUY {

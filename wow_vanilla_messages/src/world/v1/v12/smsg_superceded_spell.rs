@@ -100,6 +100,7 @@ impl MessageBody for SMSG_SUPERCEDED_SPELL {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SUPERCEDED_SPELL {}

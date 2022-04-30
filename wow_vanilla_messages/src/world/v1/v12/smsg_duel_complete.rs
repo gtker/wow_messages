@@ -78,6 +78,7 @@ impl MessageBody for SMSG_DUEL_COMPLETE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_DUEL_COMPLETE {}

@@ -205,6 +205,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_RAID_TARGET_UPDATE_Server {

@@ -110,6 +110,7 @@ impl MessageBody for SMSG_IGNORE_LIST {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_IGNORE_LIST {

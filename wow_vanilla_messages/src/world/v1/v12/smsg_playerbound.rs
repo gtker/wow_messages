@@ -102,6 +102,7 @@ impl MessageBody for SMSG_PLAYERBOUND {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PLAYERBOUND {}

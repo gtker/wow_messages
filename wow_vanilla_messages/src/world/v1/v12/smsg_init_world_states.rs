@@ -157,6 +157,7 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_INIT_WORLD_STATES {

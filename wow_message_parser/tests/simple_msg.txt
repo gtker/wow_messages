@@ -80,6 +80,7 @@ impl MessageBody for SimpleMsg {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SimpleMsg {}

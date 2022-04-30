@@ -280,6 +280,7 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_ITEM_PUSH_RESULT {}

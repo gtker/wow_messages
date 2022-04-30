@@ -152,6 +152,7 @@ impl MessageBody for SMSG_DISPEL_FAILED {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_DISPEL_FAILED {

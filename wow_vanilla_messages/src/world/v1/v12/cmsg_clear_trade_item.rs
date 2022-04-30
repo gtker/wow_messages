@@ -78,6 +78,7 @@ impl MessageBody for CMSG_CLEAR_TRADE_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_CLEAR_TRADE_ITEM {}

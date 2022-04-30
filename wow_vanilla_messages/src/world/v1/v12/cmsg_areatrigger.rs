@@ -78,6 +78,7 @@ impl MessageBody for CMSG_AREATRIGGER {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_AREATRIGGER {}

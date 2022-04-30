@@ -100,6 +100,7 @@ impl MessageBody for CMSG_CAST_SPELL {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_CAST_SPELL {

@@ -101,6 +101,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_FAILED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_QUESTGIVER_QUEST_FAILED {}

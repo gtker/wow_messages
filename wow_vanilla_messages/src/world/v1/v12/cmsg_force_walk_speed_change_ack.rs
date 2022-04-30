@@ -142,6 +142,7 @@ impl MessageBody for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {

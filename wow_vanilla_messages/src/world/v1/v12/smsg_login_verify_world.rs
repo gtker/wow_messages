@@ -155,6 +155,7 @@ impl MessageBody for SMSG_LOGIN_VERIFY_WORLD {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_LOGIN_VERIFY_WORLD {}

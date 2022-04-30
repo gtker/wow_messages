@@ -160,6 +160,7 @@ impl MessageBody for CMSG_TEST_ENDLESS_U8 {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_TEST_ENDLESS_U8 {

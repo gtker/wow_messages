@@ -79,6 +79,7 @@ impl MessageBody for CMSG_TAXINODE_STATUS_QUERY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_TAXINODE_STATUS_QUERY {}

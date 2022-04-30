@@ -159,6 +159,7 @@ impl MessageBody for SMSG_BINDPOINTUPDATE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_BINDPOINTUPDATE {}

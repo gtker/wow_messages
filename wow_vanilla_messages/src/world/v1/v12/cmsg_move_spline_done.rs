@@ -122,6 +122,7 @@ impl MessageBody for CMSG_MOVE_SPLINE_DONE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_MOVE_SPLINE_DONE {

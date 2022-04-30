@@ -79,6 +79,7 @@ impl MessageBody for CMSG_CHAT_IGNORED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_CHAT_IGNORED {}

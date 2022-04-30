@@ -122,6 +122,7 @@ impl MessageBody for SMSG_AUCTION_REMOVED_NOTIFICATION {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_AUCTION_REMOVED_NOTIFICATION {}

@@ -135,6 +135,7 @@ impl MessageBody for SMSG_PET_DISMISS_SOUND {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PET_DISMISS_SOUND {}

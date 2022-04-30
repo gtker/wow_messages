@@ -321,6 +321,7 @@ impl MessageBody for SMSG_SPELLNONMELEEDAMAGELOG {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPELLNONMELEEDAMAGELOG {

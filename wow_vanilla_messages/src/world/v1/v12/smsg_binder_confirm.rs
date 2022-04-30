@@ -79,6 +79,7 @@ impl MessageBody for SMSG_BINDER_CONFIRM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_BINDER_CONFIRM {}

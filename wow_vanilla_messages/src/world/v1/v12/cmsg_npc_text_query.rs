@@ -101,6 +101,7 @@ impl MessageBody for CMSG_NPC_TEXT_QUERY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_NPC_TEXT_QUERY {}

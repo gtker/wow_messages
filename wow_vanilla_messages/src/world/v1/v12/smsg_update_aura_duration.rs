@@ -100,6 +100,7 @@ impl MessageBody for SMSG_UPDATE_AURA_DURATION {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_UPDATE_AURA_DURATION {}

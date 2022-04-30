@@ -285,6 +285,7 @@ impl MessageBody for CMSG_AUCTION_LIST_ITEMS {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_AUCTION_LIST_ITEMS {

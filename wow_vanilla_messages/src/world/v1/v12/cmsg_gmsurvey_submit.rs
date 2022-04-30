@@ -149,6 +149,7 @@ impl MessageBody for CMSG_GMSURVEY_SUBMIT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_GMSURVEY_SUBMIT {

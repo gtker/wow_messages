@@ -168,6 +168,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_ENVIRONMENTALDAMAGELOG {}

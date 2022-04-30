@@ -117,6 +117,7 @@ impl MessageBody for CMSG_CHANNEL_INVITE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_CHANNEL_INVITE {

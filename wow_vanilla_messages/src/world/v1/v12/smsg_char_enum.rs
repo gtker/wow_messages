@@ -111,6 +111,7 @@ impl MessageBody for SMSG_CHAR_ENUM {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_CHAR_ENUM {

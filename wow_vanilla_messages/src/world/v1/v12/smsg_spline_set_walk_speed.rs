@@ -97,6 +97,7 @@ impl MessageBody for SMSG_SPLINE_SET_WALK_SPEED {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPLINE_SET_WALK_SPEED {

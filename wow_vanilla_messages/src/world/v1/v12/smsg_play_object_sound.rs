@@ -101,6 +101,7 @@ impl MessageBody for SMSG_PLAY_OBJECT_SOUND {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PLAY_OBJECT_SOUND {}

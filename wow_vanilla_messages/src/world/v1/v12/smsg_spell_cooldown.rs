@@ -128,6 +128,7 @@ impl MessageBody for SMSG_SPELL_COOLDOWN {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPELL_COOLDOWN {

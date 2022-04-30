@@ -417,6 +417,7 @@ impl MessageBody for SMSG_QUESTGIVER_OFFER_REWARD {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_QUESTGIVER_OFFER_REWARD {

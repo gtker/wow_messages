@@ -86,6 +86,7 @@ impl MessageBody for CMSG_ADD_IGNORE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_ADD_IGNORE {

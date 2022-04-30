@@ -78,6 +78,7 @@ impl MessageBody for CMSG_CANCEL_CAST {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_CANCEL_CAST {}

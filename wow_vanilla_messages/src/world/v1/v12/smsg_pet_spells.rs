@@ -319,6 +319,7 @@ impl MessageBody for SMSG_PET_SPELLS {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_PET_SPELLS {

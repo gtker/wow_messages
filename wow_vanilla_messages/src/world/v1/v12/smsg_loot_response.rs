@@ -102,6 +102,7 @@ impl MessageBody for SMSG_LOOT_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_LOOT_RESPONSE {}

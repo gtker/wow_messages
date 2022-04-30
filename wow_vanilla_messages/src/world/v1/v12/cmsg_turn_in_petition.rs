@@ -79,6 +79,7 @@ impl MessageBody for CMSG_TURN_IN_PETITION {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_TURN_IN_PETITION {}

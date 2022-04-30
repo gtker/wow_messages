@@ -78,6 +78,7 @@ impl MessageBody for CMSG_UNLEARN_SKILL {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_UNLEARN_SKILL {}

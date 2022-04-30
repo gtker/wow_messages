@@ -101,6 +101,7 @@ impl MessageBody for CMSG_QUESTGIVER_QUERY_QUEST {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_QUESTGIVER_QUERY_QUEST {}

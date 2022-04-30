@@ -79,6 +79,7 @@ impl MessageBody for SMSG_GMTICKET_UPDATETEXT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_GMTICKET_UPDATETEXT {}

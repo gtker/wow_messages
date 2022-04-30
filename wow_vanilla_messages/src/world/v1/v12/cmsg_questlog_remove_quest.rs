@@ -78,6 +78,7 @@ impl MessageBody for CMSG_QUESTLOG_REMOVE_QUEST {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_QUESTLOG_REMOVE_QUEST {}

@@ -320,6 +320,7 @@ impl MessageBody for SMSG_LEVELUP_INFO {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_LEVELUP_INFO {}

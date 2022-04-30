@@ -176,6 +176,7 @@ impl MessageBody for SMSG_TEXT_EMOTE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_TEXT_EMOTE {

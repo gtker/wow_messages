@@ -108,6 +108,7 @@ impl MessageBody for SMSG_AREA_TRIGGER_MESSAGE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_AREA_TRIGGER_MESSAGE {

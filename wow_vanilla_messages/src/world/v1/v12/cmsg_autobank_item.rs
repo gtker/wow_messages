@@ -100,6 +100,7 @@ impl MessageBody for CMSG_AUTOBANK_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_AUTOBANK_ITEM {}

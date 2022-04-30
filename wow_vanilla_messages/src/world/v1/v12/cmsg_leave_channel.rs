@@ -86,6 +86,7 @@ impl MessageBody for CMSG_LEAVE_CHANNEL {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_LEAVE_CHANNEL {

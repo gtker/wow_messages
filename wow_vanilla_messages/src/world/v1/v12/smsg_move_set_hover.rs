@@ -100,6 +100,7 @@ impl MessageBody for SMSG_MOVE_SET_HOVER {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_MOVE_SET_HOVER {

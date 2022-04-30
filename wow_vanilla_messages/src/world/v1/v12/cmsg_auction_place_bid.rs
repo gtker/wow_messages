@@ -123,6 +123,7 @@ impl MessageBody for CMSG_AUCTION_PLACE_BID {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_AUCTION_PLACE_BID {}

@@ -119,6 +119,7 @@ impl MessageBody for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {

@@ -101,6 +101,7 @@ impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_EXPLORATION_EXPERIENCE {}

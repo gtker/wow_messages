@@ -79,6 +79,7 @@ impl MessageBody for CMSG_SUMMON_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_SUMMON_RESPONSE {}

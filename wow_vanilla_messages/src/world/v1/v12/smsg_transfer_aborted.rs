@@ -128,6 +128,7 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_TRANSFER_ABORTED {}

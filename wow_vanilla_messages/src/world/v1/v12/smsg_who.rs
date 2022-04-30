@@ -133,6 +133,7 @@ impl MessageBody for SMSG_WHO {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_WHO {

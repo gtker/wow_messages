@@ -78,6 +78,7 @@ impl MessageBody for CMSG_TUTORIAL_FLAG {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_TUTORIAL_FLAG {}

@@ -109,6 +109,7 @@ impl MessageBody for SMSG_SERVER_MESSAGE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SERVER_MESSAGE {

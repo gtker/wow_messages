@@ -78,6 +78,7 @@ impl MessageBody for SMSG_QUESTUPDATE_FAILED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_QUESTUPDATE_FAILED {}

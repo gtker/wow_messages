@@ -78,6 +78,7 @@ impl MessageBody for CMSG_SET_TRADE_GOLD {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_SET_TRADE_GOLD {}

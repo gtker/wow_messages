@@ -185,6 +185,7 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_GOSSIP_SELECT_OPTION {

@@ -78,6 +78,7 @@ impl MessageBody for SMSG_INSTANCE_SAVE_CREATED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_INSTANCE_SAVE_CREATED {}

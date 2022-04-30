@@ -111,6 +111,7 @@ impl MessageBody for SMSG_RAID_INSTANCE_INFO {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_RAID_INSTANCE_INFO {

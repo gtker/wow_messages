@@ -102,6 +102,7 @@ impl MessageBody for SMSG_FRIEND_STATUS {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_FRIEND_STATUS {}

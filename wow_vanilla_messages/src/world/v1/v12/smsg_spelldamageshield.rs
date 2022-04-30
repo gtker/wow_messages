@@ -146,6 +146,7 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SPELLDAMAGESHIELD {}

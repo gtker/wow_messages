@@ -78,6 +78,7 @@ impl MessageBody for CMSG_MOVE_FALL_RESET {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_MOVE_FALL_RESET {

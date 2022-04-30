@@ -448,6 +448,7 @@ impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_PETITION_QUERY_RESPONSE {

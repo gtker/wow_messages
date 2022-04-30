@@ -156,6 +156,7 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Server {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_LIST_STABLED_PETS_Server {

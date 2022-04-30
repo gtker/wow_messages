@@ -79,6 +79,7 @@ impl MessageBody for SMSG_MOUNTSPECIAL_ANIM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_MOUNTSPECIAL_ANIM {}

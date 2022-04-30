@@ -79,6 +79,7 @@ impl MessageBody for CMSG_FAR_SIGHT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_FAR_SIGHT {}

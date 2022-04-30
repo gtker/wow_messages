@@ -100,6 +100,7 @@ impl MessageBody for SMSG_PLAYED_TIME {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PLAYED_TIME {}

@@ -101,6 +101,7 @@ impl MessageBody for SMSG_ATTACKSTART {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_ATTACKSTART {}

@@ -123,6 +123,7 @@ impl MessageBody for CMSG_MAIL_CREATE_TEXT_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_MAIL_CREATE_TEXT_ITEM {}

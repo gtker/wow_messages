@@ -124,6 +124,7 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_RAID_INSTANCE_MESSAGE {}

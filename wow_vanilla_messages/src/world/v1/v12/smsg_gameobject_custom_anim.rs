@@ -101,6 +101,7 @@ impl MessageBody for SMSG_GAMEOBJECT_CUSTOM_ANIM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_GAMEOBJECT_CUSTOM_ANIM {}

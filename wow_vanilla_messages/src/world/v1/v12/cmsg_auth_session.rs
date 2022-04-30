@@ -269,6 +269,7 @@ impl MessageBody for CMSG_AUTH_SESSION {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_AUTH_SESSION {

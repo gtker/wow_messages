@@ -167,6 +167,7 @@ impl MessageBody for SMSG_LOOT_ALL_PASSED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_LOOT_ALL_PASSED {}

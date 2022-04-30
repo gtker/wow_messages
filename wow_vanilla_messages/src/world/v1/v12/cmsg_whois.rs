@@ -86,6 +86,7 @@ impl MessageBody for CMSG_WHOIS {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_WHOIS {

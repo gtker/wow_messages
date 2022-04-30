@@ -79,6 +79,7 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Client {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_TALENT_WIPE_CONFIRM_Client {}

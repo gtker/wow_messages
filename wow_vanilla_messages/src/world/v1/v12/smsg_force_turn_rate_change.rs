@@ -119,6 +119,7 @@ impl MessageBody for SMSG_FORCE_TURN_RATE_CHANGE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_FORCE_TURN_RATE_CHANGE {

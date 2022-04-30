@@ -101,6 +101,7 @@ impl MessageBody for SMSG_AREA_SPIRIT_HEALER_TIME {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_AREA_SPIRIT_HEALER_TIME {}

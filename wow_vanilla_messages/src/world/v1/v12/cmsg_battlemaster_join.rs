@@ -146,6 +146,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_BATTLEMASTER_JOIN {}

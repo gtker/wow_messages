@@ -104,6 +104,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_QUEST_PUSH_RESULT {}

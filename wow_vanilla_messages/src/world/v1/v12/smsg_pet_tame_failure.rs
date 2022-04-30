@@ -79,6 +79,7 @@ impl MessageBody for SMSG_PET_TAME_FAILURE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PET_TAME_FAILURE {}

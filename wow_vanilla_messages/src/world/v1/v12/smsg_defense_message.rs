@@ -131,6 +131,7 @@ impl MessageBody for SMSG_DEFENSE_MESSAGE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_DEFENSE_MESSAGE {

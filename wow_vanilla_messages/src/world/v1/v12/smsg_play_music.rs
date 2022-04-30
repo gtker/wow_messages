@@ -78,6 +78,7 @@ impl MessageBody for SMSG_PLAY_MUSIC {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PLAY_MUSIC {}

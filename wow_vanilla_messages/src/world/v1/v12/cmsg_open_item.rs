@@ -100,6 +100,7 @@ impl MessageBody for CMSG_OPEN_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_OPEN_ITEM {}

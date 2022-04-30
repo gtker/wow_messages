@@ -169,6 +169,7 @@ impl MessageBody for SMSG_PET_MODE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PET_MODE {}

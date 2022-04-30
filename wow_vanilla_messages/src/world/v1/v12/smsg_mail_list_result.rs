@@ -111,6 +111,7 @@ impl MessageBody for SMSG_MAIL_LIST_RESULT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_MAIL_LIST_RESULT {

@@ -101,6 +101,7 @@ impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_MOVE_NOT_ACTIVE_MOVER {

@@ -100,6 +100,7 @@ impl MessageBody for SMSG_CLIENT_CONTROL_UPDATE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_CLIENT_CONTROL_UPDATE {

@@ -111,6 +111,7 @@ impl MessageBody for SMSG_SET_FORCED_REACTIONS {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SET_FORCED_REACTIONS {

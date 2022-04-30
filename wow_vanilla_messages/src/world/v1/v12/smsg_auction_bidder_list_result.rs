@@ -133,6 +133,7 @@ impl MessageBody for SMSG_AUCTION_BIDDER_LIST_RESULT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_AUCTION_BIDDER_LIST_RESULT {

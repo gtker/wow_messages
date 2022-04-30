@@ -78,6 +78,7 @@ impl MessageBody for CMSG_GUILD_QUERY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_GUILD_QUERY {}

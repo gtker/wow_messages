@@ -79,6 +79,7 @@ impl MessageBody for CMSG_SET_TARGET_OBSOLETE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_SET_TARGET_OBSOLETE {}

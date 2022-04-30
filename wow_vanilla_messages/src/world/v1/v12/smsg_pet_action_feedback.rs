@@ -79,6 +79,7 @@ impl MessageBody for SMSG_PET_ACTION_FEEDBACK {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PET_ACTION_FEEDBACK {}

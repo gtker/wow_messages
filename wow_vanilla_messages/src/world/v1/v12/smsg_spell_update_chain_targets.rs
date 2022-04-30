@@ -155,6 +155,7 @@ impl MessageBody for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPELL_UPDATE_CHAIN_TARGETS {

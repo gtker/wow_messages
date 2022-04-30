@@ -86,6 +86,7 @@ impl MessageBody for CMSG_CHANNEL_LIST {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_CHANNEL_LIST {

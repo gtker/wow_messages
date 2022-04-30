@@ -101,6 +101,7 @@ impl MessageBody for SMSG_FORCE_MOVE_UNROOT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_FORCE_MOVE_UNROOT {}

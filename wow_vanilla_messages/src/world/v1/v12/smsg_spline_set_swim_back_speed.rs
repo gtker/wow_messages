@@ -97,6 +97,7 @@ impl MessageBody for SMSG_SPLINE_SET_SWIM_BACK_SPEED {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPLINE_SET_SWIM_BACK_SPEED {

@@ -145,6 +145,7 @@ impl MessageBody for SMSG_ITEM_ENCHANT_TIME_UPDATE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_ITEM_ENCHANT_TIME_UPDATE {}

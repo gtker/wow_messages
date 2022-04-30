@@ -100,6 +100,7 @@ impl MessageBody for SMSG_MOVE_WATER_WALK {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_MOVE_WATER_WALK {

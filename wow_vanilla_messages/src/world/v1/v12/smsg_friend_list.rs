@@ -111,6 +111,7 @@ impl MessageBody for SMSG_FRIEND_LIST {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_FRIEND_LIST {

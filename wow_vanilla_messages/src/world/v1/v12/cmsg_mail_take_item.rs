@@ -101,6 +101,7 @@ impl MessageBody for CMSG_MAIL_TAKE_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_MAIL_TAKE_ITEM {}

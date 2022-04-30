@@ -102,6 +102,7 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_LOGOUT_RESPONSE {}

@@ -78,6 +78,7 @@ impl MessageBody for SMSG_LOOT_MONEY_NOTIFY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_LOOT_MONEY_NOTIFY {}

@@ -79,6 +79,7 @@ impl MessageBody for SMSG_DESTROY_OBJECT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_DESTROY_OBJECT {}

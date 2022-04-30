@@ -360,6 +360,7 @@ impl MessageBody for SMSG_GAMEOBJECT_QUERY_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_GAMEOBJECT_QUERY_RESPONSE {

@@ -123,6 +123,7 @@ impl MessageBody for SMSG_SUMMON_REQUEST {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SUMMON_REQUEST {}

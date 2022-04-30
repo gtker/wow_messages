@@ -167,6 +167,7 @@ impl MessageBody for SMSG_SPELLENERGIZELOG {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPELLENERGIZELOG {

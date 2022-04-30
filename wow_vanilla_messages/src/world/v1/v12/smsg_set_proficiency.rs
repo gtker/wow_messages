@@ -101,6 +101,7 @@ impl MessageBody for SMSG_SET_PROFICIENCY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SET_PROFICIENCY {}

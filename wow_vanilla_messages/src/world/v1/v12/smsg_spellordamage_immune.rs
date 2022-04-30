@@ -145,6 +145,7 @@ impl MessageBody for SMSG_SPELLORDAMAGE_IMMUNE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SPELLORDAMAGE_IMMUNE {}

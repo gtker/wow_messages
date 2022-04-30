@@ -78,6 +78,7 @@ impl MessageBody for CMSG_AUTOSTORE_LOOT_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_AUTOSTORE_LOOT_ITEM {}

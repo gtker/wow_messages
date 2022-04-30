@@ -144,6 +144,7 @@ impl MessageBody for CMSG_WRAP_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_WRAP_ITEM {}

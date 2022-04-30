@@ -79,6 +79,7 @@ impl MessageBody for CMSG_INITIATE_TRADE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_INITIATE_TRADE {}

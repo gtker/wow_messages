@@ -79,6 +79,7 @@ impl MessageBody for CMSG_LOOT_RELEASE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_LOOT_RELEASE {}

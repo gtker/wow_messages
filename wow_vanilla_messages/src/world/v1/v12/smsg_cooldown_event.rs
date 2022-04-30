@@ -101,6 +101,7 @@ impl MessageBody for SMSG_COOLDOWN_EVENT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_COOLDOWN_EVENT {}

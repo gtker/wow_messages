@@ -308,6 +308,7 @@ impl MessageBody for SMSG_GROUP_LIST {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_GROUP_LIST {

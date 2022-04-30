@@ -167,6 +167,7 @@ impl MessageBody for SMSG_ENCHANTMENTLOG {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_ENCHANTMENTLOG {}

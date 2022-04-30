@@ -56,6 +56,7 @@ impl MessageBody for CMSG_ATTACKSTOP {
     async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_ATTACKSTOP {}

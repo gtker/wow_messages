@@ -80,6 +80,7 @@ impl MessageBody for MSG_MOVE_START_TURN_RIGHT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_MOVE_START_TURN_RIGHT {

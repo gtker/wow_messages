@@ -124,6 +124,7 @@ impl MessageBody for SMSG_BUY_FAILED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_BUY_FAILED {}

@@ -661,6 +661,7 @@ impl MessageBody for SMSG_CHAR_RENAME {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_CHAR_RENAME {

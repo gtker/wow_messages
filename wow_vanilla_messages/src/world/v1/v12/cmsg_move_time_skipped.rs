@@ -101,6 +101,7 @@ impl MessageBody for CMSG_MOVE_TIME_SKIPPED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_MOVE_TIME_SKIPPED {}

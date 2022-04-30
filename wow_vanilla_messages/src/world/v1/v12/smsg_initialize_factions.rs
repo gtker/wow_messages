@@ -111,6 +111,7 @@ impl MessageBody for SMSG_INITIALIZE_FACTIONS {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_INITIALIZE_FACTIONS {

@@ -140,6 +140,7 @@ impl MessageBody for SMSG_DUEL_WINNER {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_DUEL_WINNER {

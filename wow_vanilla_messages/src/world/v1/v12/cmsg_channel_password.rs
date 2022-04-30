@@ -117,6 +117,7 @@ impl MessageBody for CMSG_CHANNEL_PASSWORD {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_CHANNEL_PASSWORD {

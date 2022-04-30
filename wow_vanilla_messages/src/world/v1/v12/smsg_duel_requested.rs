@@ -101,6 +101,7 @@ impl MessageBody for SMSG_DUEL_REQUESTED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_DUEL_REQUESTED {}

@@ -78,6 +78,7 @@ impl MessageBody for SMSG_QUERY_TIME_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_QUERY_TIME_RESPONSE {}

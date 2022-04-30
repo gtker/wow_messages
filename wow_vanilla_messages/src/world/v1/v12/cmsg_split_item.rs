@@ -166,6 +166,7 @@ impl MessageBody for CMSG_SPLIT_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_SPLIT_ITEM {}

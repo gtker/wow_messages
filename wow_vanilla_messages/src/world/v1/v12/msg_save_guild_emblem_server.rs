@@ -79,6 +79,7 @@ impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Server {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_SAVE_GUILD_EMBLEM_Server {}

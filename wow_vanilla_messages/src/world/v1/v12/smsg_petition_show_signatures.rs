@@ -145,6 +145,7 @@ impl MessageBody for SMSG_PETITION_SHOW_SIGNATURES {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PETITION_SHOW_SIGNATURES {}

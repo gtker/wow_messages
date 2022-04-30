@@ -79,6 +79,7 @@ impl MessageBody for SMSG_INVALIDATE_PLAYER {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_INVALIDATE_PLAYER {}

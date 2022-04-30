@@ -79,6 +79,7 @@ impl MessageBody for CMSG_GAMEOBJ_USE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_GAMEOBJ_USE {}

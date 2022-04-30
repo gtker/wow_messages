@@ -204,6 +204,7 @@ impl MessageBody for SMSG_TRADE_STATUS_EXTENDED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_TRADE_STATUS_EXTENDED {}

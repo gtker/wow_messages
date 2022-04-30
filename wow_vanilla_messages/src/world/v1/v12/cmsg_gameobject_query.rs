@@ -101,6 +101,7 @@ impl MessageBody for CMSG_GAMEOBJECT_QUERY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_GAMEOBJECT_QUERY {}

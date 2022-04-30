@@ -79,6 +79,7 @@ impl MessageBody for CMSG_MEETINGSTONE_JOIN {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_MEETINGSTONE_JOIN {}

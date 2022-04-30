@@ -117,6 +117,7 @@ impl MessageBody for CMSG_CHANNEL_KICK {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_CHANNEL_KICK {

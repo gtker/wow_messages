@@ -134,6 +134,7 @@ impl MessageBody for SMSG_LIST_INVENTORY {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_LIST_INVENTORY {

@@ -101,6 +101,7 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Server {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_TALENT_WIPE_CONFIRM_Server {}

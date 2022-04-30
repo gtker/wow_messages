@@ -79,6 +79,7 @@ impl MessageBody for SMSG_READ_ITEM_OK {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_READ_ITEM_OK {}

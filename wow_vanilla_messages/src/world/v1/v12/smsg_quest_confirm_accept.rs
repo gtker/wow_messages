@@ -131,6 +131,7 @@ impl MessageBody for SMSG_QUEST_CONFIRM_ACCEPT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_QUEST_CONFIRM_ACCEPT {

@@ -86,6 +86,7 @@ impl MessageBody for SMSG_NOTIFICATION {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_NOTIFICATION {

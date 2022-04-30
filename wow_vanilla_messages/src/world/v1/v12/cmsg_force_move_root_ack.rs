@@ -123,6 +123,7 @@ impl MessageBody for CMSG_FORCE_MOVE_ROOT_ACK {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_FORCE_MOVE_ROOT_ACK {

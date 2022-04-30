@@ -287,6 +287,7 @@ impl MessageBody for CMSG_CHAR_CREATE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_CHAR_CREATE {

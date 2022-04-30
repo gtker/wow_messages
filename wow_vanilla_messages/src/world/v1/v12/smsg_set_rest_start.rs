@@ -78,6 +78,7 @@ impl MessageBody for SMSG_SET_REST_START {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SET_REST_START {}

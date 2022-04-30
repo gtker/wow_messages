@@ -80,6 +80,7 @@ impl MessageBody for MSG_MOVE_START_FORWARD {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_MOVE_START_FORWARD {

@@ -122,6 +122,7 @@ impl MessageBody for SMSG_SET_PCT_SPELL_MODIFIER {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SET_PCT_SPELL_MODIFIER {}

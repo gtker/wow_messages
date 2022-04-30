@@ -78,6 +78,7 @@ impl MessageBody for SMSG_CORPSE_RECLAIM_DELAY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_CORPSE_RECLAIM_DELAY {}

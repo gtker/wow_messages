@@ -13283,6 +13283,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_BATTLEFIELD_STATUS {

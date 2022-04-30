@@ -117,6 +117,7 @@ impl MessageBody for CMSG_CHANNEL_BAN {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_CHANNEL_BAN {

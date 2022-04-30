@@ -102,6 +102,7 @@ impl MessageBody for SMSG_AI_REACTION {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_AI_REACTION {}

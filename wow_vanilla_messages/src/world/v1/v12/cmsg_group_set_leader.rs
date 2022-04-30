@@ -79,6 +79,7 @@ impl MessageBody for CMSG_GROUP_SET_LEADER {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_GROUP_SET_LEADER {}

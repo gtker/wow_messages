@@ -79,6 +79,7 @@ impl MessageBody for SMSG_SPLINE_MOVE_ROOT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SPLINE_MOVE_ROOT {}

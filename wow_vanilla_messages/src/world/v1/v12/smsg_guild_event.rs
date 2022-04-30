@@ -139,6 +139,7 @@ impl MessageBody for SMSG_GUILD_EVENT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_GUILD_EVENT {

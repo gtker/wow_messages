@@ -124,6 +124,7 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PETITION_SIGN_RESULTS {}

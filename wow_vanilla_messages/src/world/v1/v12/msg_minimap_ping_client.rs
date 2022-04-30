@@ -94,6 +94,7 @@ impl MessageBody for MSG_MINIMAP_PING_Client {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_MINIMAP_PING_Client {}

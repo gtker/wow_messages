@@ -410,6 +410,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_INSPECT_HONOR_STATS_Server {}

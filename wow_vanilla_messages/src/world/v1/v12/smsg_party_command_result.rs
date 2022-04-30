@@ -132,6 +132,7 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_PARTY_COMMAND_RESULT {

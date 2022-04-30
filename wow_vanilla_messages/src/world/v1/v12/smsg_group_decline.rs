@@ -86,6 +86,7 @@ impl MessageBody for SMSG_GROUP_DECLINE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_GROUP_DECLINE {

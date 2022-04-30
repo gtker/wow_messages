@@ -209,6 +209,7 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_NAME_QUERY_RESPONSE {

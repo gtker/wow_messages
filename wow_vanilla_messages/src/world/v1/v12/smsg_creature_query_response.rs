@@ -468,6 +468,7 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_CREATURE_QUERY_RESPONSE {

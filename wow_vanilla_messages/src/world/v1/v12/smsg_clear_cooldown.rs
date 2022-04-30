@@ -101,6 +101,7 @@ impl MessageBody for SMSG_CLEAR_COOLDOWN {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_CLEAR_COOLDOWN {}

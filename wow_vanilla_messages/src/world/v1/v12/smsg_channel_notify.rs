@@ -109,6 +109,7 @@ impl MessageBody for SMSG_CHANNEL_NOTIFY {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_CHANNEL_NOTIFY {

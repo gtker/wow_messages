@@ -178,6 +178,7 @@ impl MessageBody for SMSG_PERIODICAURALOG {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_PERIODICAURALOG {

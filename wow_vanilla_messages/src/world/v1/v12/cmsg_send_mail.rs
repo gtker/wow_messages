@@ -325,6 +325,7 @@ impl MessageBody for CMSG_SEND_MAIL {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_SEND_MAIL {

@@ -996,6 +996,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULL {

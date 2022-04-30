@@ -78,6 +78,7 @@ impl MessageBody for CMSG_SET_ACTIONBAR_TOGGLES {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_SET_ACTIONBAR_TOGGLES {}

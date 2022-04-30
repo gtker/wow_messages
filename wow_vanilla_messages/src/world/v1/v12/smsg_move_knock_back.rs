@@ -176,6 +176,7 @@ impl MessageBody for SMSG_MOVE_KNOCK_BACK {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_MOVE_KNOCK_BACK {

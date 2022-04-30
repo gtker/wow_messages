@@ -79,6 +79,7 @@ impl MessageBody for CMSG_AREA_SPIRIT_HEALER_QUERY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_AREA_SPIRIT_HEALER_QUERY {}

@@ -79,6 +79,7 @@ impl MessageBody for SMSG_UPDATE_LAST_INSTANCE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_UPDATE_LAST_INSTANCE {}

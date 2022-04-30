@@ -1230,6 +1230,7 @@ impl MessageBody for SMSG_CAST_RESULT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_CAST_RESULT {

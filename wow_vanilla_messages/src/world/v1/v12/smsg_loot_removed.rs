@@ -78,6 +78,7 @@ impl MessageBody for SMSG_LOOT_REMOVED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_LOOT_REMOVED {}

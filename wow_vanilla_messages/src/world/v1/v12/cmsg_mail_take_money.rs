@@ -101,6 +101,7 @@ impl MessageBody for CMSG_MAIL_TAKE_MONEY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_MAIL_TAKE_MONEY {}

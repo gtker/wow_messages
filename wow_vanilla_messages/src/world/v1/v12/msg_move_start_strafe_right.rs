@@ -80,6 +80,7 @@ impl MessageBody for MSG_MOVE_START_STRAFE_RIGHT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_MOVE_START_STRAFE_RIGHT {

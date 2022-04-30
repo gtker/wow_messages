@@ -79,6 +79,7 @@ impl MessageBody for SMSG_UPDATE_WORLD_STATE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_UPDATE_WORLD_STATE {}

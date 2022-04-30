@@ -101,6 +101,7 @@ impl MessageBody for MSG_AUCTION_HELLO_Server {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_AUCTION_HELLO_Server {}

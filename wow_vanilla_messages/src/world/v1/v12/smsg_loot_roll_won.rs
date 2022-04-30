@@ -234,6 +234,7 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_LOOT_ROLL_WON {}

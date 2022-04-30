@@ -122,6 +122,7 @@ impl MessageBody for CMSG_LEAVE_BATTLEFIELD {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_LEAVE_BATTLEFIELD {}

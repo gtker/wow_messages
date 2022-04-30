@@ -126,6 +126,7 @@ impl MessageBody for MessageWithComplexTypes {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MessageWithComplexTypes {

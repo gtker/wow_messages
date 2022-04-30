@@ -145,6 +145,7 @@ impl MessageBody for CMSG_BUY_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_BUY_ITEM {}

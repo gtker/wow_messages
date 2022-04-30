@@ -79,6 +79,7 @@ impl MessageBody for CMSG_BATTLEFIELD_LIST {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_BATTLEFIELD_LIST {}

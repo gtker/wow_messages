@@ -146,6 +146,7 @@ impl MessageBody for SMSG_PROCRESIST {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PROCRESIST {}

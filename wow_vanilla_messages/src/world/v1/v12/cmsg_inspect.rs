@@ -79,6 +79,7 @@ impl MessageBody for CMSG_INSPECT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_INSPECT {}

@@ -232,6 +232,7 @@ impl MessageBody for SMSG_TUTORIAL_FLAGS {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_TUTORIAL_FLAGS {}

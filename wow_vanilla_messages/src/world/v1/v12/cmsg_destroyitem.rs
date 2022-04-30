@@ -188,6 +188,7 @@ impl MessageBody for CMSG_DESTROYITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_DESTROYITEM {}

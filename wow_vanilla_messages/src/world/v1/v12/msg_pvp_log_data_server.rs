@@ -204,6 +204,7 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_PVP_LOG_DATA_Server {

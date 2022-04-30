@@ -79,6 +79,7 @@ impl MessageBody for CMSG_BANKER_ACTIVATE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_BANKER_ACTIVATE {}

@@ -101,6 +101,7 @@ impl MessageBody for SMSG_LOOT_RELEASE_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_LOOT_RELEASE_RESPONSE {}

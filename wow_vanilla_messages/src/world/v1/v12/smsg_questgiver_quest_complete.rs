@@ -199,6 +199,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_QUESTGIVER_QUEST_COMPLETE {

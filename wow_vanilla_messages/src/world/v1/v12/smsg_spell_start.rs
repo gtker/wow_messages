@@ -262,6 +262,7 @@ impl MessageBody for SMSG_SPELL_START {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPELL_START {

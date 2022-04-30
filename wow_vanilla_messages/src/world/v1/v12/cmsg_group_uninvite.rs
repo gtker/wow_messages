@@ -86,6 +86,7 @@ impl MessageBody for CMSG_GROUP_UNINVITE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_GROUP_UNINVITE {

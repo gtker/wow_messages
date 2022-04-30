@@ -79,6 +79,7 @@ impl MessageBody for CMSG_DUEL_CANCELLED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_DUEL_CANCELLED {}

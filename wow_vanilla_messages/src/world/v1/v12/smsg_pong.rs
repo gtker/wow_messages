@@ -78,6 +78,7 @@ impl MessageBody for SMSG_PONG {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_PONG {}

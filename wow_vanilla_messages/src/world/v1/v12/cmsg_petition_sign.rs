@@ -101,6 +101,7 @@ impl MessageBody for CMSG_PETITION_SIGN {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_PETITION_SIGN {}

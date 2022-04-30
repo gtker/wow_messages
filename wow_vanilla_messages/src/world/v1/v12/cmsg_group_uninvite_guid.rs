@@ -79,6 +79,7 @@ impl MessageBody for CMSG_GROUP_UNINVITE_GUID {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_GROUP_UNINVITE_GUID {}

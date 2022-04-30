@@ -78,6 +78,7 @@ impl MessageBody for SMSG_GMTICKET_SYSTEMSTATUS {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_GMTICKET_SYSTEMSTATUS {}

@@ -78,6 +78,7 @@ impl MessageBody for CMSG_QUEST_QUERY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_QUEST_QUERY {}

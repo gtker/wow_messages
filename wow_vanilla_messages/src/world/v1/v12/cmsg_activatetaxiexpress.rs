@@ -123,6 +123,7 @@ impl MessageBody for CMSG_ACTIVATETAXIEXPRESS {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_ACTIVATETAXIEXPRESS {}

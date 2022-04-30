@@ -177,6 +177,7 @@ impl MessageBody for CMSG_WORLD_TELEPORT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_WORLD_TELEPORT {}

@@ -125,6 +125,7 @@ impl MessageBody for CMSG_TOGGLE_PVP {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_TOGGLE_PVP {

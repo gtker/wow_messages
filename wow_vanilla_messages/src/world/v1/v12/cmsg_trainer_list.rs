@@ -79,6 +79,7 @@ impl MessageBody for CMSG_TRAINER_LIST {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_TRAINER_LIST {}

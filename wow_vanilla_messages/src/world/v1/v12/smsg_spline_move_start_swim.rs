@@ -78,6 +78,7 @@ impl MessageBody for SMSG_SPLINE_MOVE_START_SWIM {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPLINE_MOVE_START_SWIM {

@@ -102,6 +102,7 @@ impl MessageBody for SMSG_EMOTE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_EMOTE {}

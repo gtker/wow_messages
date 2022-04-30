@@ -79,6 +79,7 @@ impl MessageBody for SMSG_STOP_MIRROR_TIMER {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_STOP_MIRROR_TIMER {}

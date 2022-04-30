@@ -101,6 +101,7 @@ impl MessageBody for CMSG_MAIL_DELETE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_MAIL_DELETE {}

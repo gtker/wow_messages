@@ -123,6 +123,7 @@ impl MessageBody for CMSG_QUESTGIVER_CHOOSE_REWARD {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_QUESTGIVER_CHOOSE_REWARD {}

@@ -79,6 +79,7 @@ impl MessageBody for CMSG_PET_UNLEARN {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_PET_UNLEARN {}

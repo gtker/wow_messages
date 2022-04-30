@@ -189,6 +189,7 @@ impl MessageBody for SMSG_LOOT_START_ROLL {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_LOOT_START_ROLL {}

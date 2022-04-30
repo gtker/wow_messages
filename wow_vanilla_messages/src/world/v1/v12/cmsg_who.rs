@@ -321,6 +321,7 @@ impl MessageBody for CMSG_WHO {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_WHO {

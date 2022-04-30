@@ -205,6 +205,7 @@ impl MessageBody for SMSG_RESISTLOG {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_RESISTLOG {}

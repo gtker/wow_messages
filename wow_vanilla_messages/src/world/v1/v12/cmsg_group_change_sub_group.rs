@@ -108,6 +108,7 @@ impl MessageBody for CMSG_GROUP_CHANGE_SUB_GROUP {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_GROUP_CHANGE_SUB_GROUP {

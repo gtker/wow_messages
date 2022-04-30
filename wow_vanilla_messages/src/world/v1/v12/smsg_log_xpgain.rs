@@ -213,6 +213,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_LOG_XPGAIN {

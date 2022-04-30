@@ -145,6 +145,7 @@ impl MessageBody for MSG_RANDOM_ROLL_Server {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_RANDOM_ROLL_Server {}

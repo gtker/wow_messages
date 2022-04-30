@@ -79,6 +79,7 @@ impl MessageBody for CMSG_BUY_STABLE_SLOT {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_BUY_STABLE_SLOT {}

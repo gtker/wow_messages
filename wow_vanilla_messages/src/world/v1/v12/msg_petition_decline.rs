@@ -81,6 +81,7 @@ impl MessageBody for MSG_PETITION_DECLINE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_PETITION_DECLINE {}

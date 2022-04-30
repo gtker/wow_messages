@@ -1115,6 +1115,7 @@ impl MessageBody for CMSG_MESSAGECHAT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_MESSAGECHAT {

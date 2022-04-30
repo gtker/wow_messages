@@ -130,6 +130,7 @@ impl MessageBody for SMSG_PET_NAME_QUERY_RESPONSE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_PET_NAME_QUERY_RESPONSE {

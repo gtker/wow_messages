@@ -100,6 +100,7 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_ITEM {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_QUESTUPDATE_ADD_ITEM {}

@@ -79,6 +79,7 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Client {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_LIST_STABLED_PETS_Client {}

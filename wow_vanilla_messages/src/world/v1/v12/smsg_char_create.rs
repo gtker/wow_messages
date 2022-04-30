@@ -79,6 +79,7 @@ impl MessageBody for SMSG_CHAR_CREATE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_CHAR_CREATE {}

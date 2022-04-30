@@ -78,6 +78,7 @@ impl MessageBody for SMSG_DUEL_COUNTDOWN {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_DUEL_COUNTDOWN {}

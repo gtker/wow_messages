@@ -101,6 +101,7 @@ impl MessageBody for CMSG_AUCTION_LIST_OWNER_ITEMS {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_AUCTION_LIST_OWNER_ITEMS {}

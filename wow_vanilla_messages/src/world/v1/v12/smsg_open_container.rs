@@ -79,6 +79,7 @@ impl MessageBody for SMSG_OPEN_CONTAINER {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_OPEN_CONTAINER {}

@@ -79,6 +79,7 @@ impl MessageBody for CMSG_LIST_INVENTORY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_LIST_INVENTORY {}

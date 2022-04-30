@@ -80,6 +80,7 @@ impl MessageBody for MSG_MOVE_FALL_LAND {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_MOVE_FALL_LAND {

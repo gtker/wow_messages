@@ -101,6 +101,7 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_RAID_GROUP_ONLY {}

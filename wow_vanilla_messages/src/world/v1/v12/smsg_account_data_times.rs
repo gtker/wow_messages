@@ -93,6 +93,7 @@ impl MessageBody for SMSG_ACCOUNT_DATA_TIMES {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_ACCOUNT_DATA_TIMES {}

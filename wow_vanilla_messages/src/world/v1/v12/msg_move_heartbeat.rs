@@ -80,6 +80,7 @@ impl MessageBody for MSG_MOVE_HEARTBEAT {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_MOVE_HEARTBEAT {

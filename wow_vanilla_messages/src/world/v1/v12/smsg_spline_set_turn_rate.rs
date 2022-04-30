@@ -97,6 +97,7 @@ impl MessageBody for SMSG_SPLINE_SET_TURN_RATE {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_SPLINE_SET_TURN_RATE {

@@ -79,6 +79,7 @@ impl MessageBody for CMSG_BATTLEMASTER_HELLO {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_BATTLEMASTER_HELLO {}

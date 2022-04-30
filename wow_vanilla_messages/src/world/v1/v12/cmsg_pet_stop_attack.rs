@@ -79,6 +79,7 @@ impl MessageBody for CMSG_PET_STOP_ATTACK {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_PET_STOP_ATTACK {}

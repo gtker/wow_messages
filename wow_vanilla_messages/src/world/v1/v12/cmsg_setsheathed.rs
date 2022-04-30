@@ -79,6 +79,7 @@ impl MessageBody for CMSG_SETSHEATHED {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_SETSHEATHED {}

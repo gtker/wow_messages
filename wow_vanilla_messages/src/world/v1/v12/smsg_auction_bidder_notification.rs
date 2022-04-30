@@ -211,6 +211,7 @@ impl MessageBody for SMSG_AUCTION_BIDDER_NOTIFICATION {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_AUCTION_BIDDER_NOTIFICATION {}

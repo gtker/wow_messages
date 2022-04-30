@@ -187,6 +187,7 @@ impl MessageBody for SMSG_TRAINER_LIST {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_TRAINER_LIST {

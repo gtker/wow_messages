@@ -79,6 +79,7 @@ impl MessageBody for CMSG_STANDSTATECHANGE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_STANDSTATECHANGE {}

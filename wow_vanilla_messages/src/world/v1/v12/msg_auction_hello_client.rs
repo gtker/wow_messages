@@ -79,6 +79,7 @@ impl MessageBody for MSG_AUCTION_HELLO_Client {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for MSG_AUCTION_HELLO_Client {}

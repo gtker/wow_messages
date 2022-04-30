@@ -101,6 +101,7 @@ impl MessageBody for CMSG_MAIL_RETURN_TO_SENDER {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for CMSG_MAIL_RETURN_TO_SENDER {}

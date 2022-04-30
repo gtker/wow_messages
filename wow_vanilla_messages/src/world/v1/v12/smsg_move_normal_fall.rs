@@ -100,6 +100,7 @@ impl MessageBody for SMSG_MOVE_NORMAL_FALL {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for SMSG_MOVE_NORMAL_FALL {

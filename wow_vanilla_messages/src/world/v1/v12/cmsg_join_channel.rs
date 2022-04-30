@@ -117,6 +117,7 @@ impl MessageBody for CMSG_JOIN_CHANNEL {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for CMSG_JOIN_CHANNEL {

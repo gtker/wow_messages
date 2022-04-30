@@ -80,6 +80,7 @@ impl MessageBody for MSG_MOVE_START_PITCH_UP {
 
         Ok(())
     }
+
 }
 
 impl VariableSized for MSG_MOVE_START_PITCH_UP {

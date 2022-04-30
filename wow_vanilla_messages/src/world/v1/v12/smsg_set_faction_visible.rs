@@ -78,6 +78,7 @@ impl MessageBody for SMSG_SET_FACTION_VISIBLE {
 
         Ok(())
     }
+
 }
 
 impl ConstantSized for SMSG_SET_FACTION_VISIBLE {}
