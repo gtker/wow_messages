@@ -810,69 +810,50 @@ fn print_default_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
 }
 
 fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
-    s.funcn_pub(
-        "write<W: std::io::Write>(&self, w: &mut W)",
+    s.async_funcn_pub(
+        "pub fn write<W: std::io::Write>(&self, w: &mut W)",
+        "pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
         "std::result::Result<(), std::io::Error>",
-        |s| {
+        |s, it| {
             s.wln(format!(
                 "let a: {ty} = self.into();",
                 ty = ce.original_ty_name(),
             ));
-            s.wln("a.write(w)?;");
+            s.wln(format!(
+                "a.{prefix}write(w){postfix}?;",
+                prefix = it.prefix(),
+                postfix = it.postfix()
+            ));
             s.wln("Ok(())");
         },
     );
 
-    s.wln(CFG_ASYNC_TOKIO);
-    s.bodyn("pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", |s| {
-        s.wln(format!(
-            "let a: {ty} = self.into();",
-            ty = ce.original_ty_name(),
-        ));
-        s.wln("a.tokio_write(w).await?;");
-        s.wln("Ok(())");
-    });
-
     let types = get_upcast_types(ce.ty());
 
     for t in types {
-        s.funcn_pub(
+        s.async_funcn_pub(
             format!(
-                "write_{ty}_{endian}<W: std::io::Write>(&self, w: &mut W)",
+                "pub fn write_{ty}_{endian}<W: std::io::Write>(&self, w: &mut W)",
                 ty = t.rust_str(),
                 endian = t.rust_endian_str()
-            ),
+            ),format!(
+                "pub async fn tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
+                ty = t.rust_str(),
+                endian = t.rust_endian_str()),
             "std::result::Result<(), std::io::Error>",
-            |s| {
+            |s, it| {
                 s.wln(format!(
                     "let a: {ty} = self.into();",
                     ty = ce.original_ty_name(),
                 ));
                 s.wln(format!(
-                    "a.write_{ty}_{endian}(w)",
+                    "a.{prefix}write_{ty}_{endian}(w){postfix}",
                     ty = t.rust_str(),
-                    endian = t.rust_endian_str()
+                    endian = t.rust_endian_str(),
+                    prefix = it.prefix(), postfix = it.postfix(),
                 ));
             },
         );
-
-        s.wln(CFG_ASYNC_TOKIO);
-        s.bodyn(
-            format!(
-                "pub async fn tokio_write_{ty}_{endian}<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
-                ty = t.rust_str(),
-                endian = t.rust_endian_str()),
-            |s| {
-            s.wln(format!(
-                "let a: {ty} = self.into();",
-                ty = ce.original_ty_name(),
-            ));
-            s.wln(format!(
-                "a.tokio_write_{ty}_{endian}(w).await",
-                ty = t.rust_str(),
-                endian = t.rust_endian_str()
-            ));
-        });
     }
 }
 
