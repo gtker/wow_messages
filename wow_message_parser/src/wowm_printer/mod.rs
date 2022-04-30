@@ -1,7 +1,7 @@
 use crate::container::{Container, ContainerType, Equation, IfStatement, StructMember};
 use crate::parser::enumerator::Definer;
 use crate::rust_printer::Writer;
-use crate::{ENUM_SELF_VALUE_FIELD, LOGIN_MESSAGES_GITHUB_REPO, WORLD_MESSAGES_GITHUB_REPO};
+use crate::ENUM_SELF_VALUE_FIELD;
 use std::fmt::Write;
 
 struct WowmWriter {

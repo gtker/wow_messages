@@ -442,31 +442,6 @@ impl Writer {
         self.newline();
     }
 
-    pub fn docc_w<S: AsRef<str>>(&mut self, s: S) {
-        if !Self::METADATA {
-            return;
-        }
-        self.w("/// ");
-        for _ in 0..self.docc_indentation_level {
-            self.w(Self::INDENTATION);
-        }
-        self.w_no_indent(s.as_ref());
-    }
-
-    pub fn docc_dec(&mut self) {
-        if self.docc_indentation_level == 0 {
-            panic!("attmpted to underflow docc level")
-        }
-        self.docc_indentation_level -= 1;
-    }
-
-    pub fn docc_inc(&mut self) {
-        if self.docc_indentation_level == 0xff {
-            panic!("attempted to overflow docc level");
-        }
-        self.docc_indentation_level += 1;
-    }
-
     pub fn docc_wowm(&mut self, f: impl Fn(&mut Self), repo: impl AsRef<str>, fileinfo: &FileInfo) {
         if !Self::METADATA {
             return;

@@ -3,9 +3,7 @@ use crate::parser::enumerator::Definer;
 use crate::parser::types::{Endianness, IntegerType};
 use crate::rust_printer::Writer;
 use crate::wowm_printer::get_definer_wowm_definition;
-use crate::{
-    DISPLAY_STR, ENUM_SELF_VALUE_FIELD, LOGIN_MESSAGES_GITHUB_REPO, WORLD_MESSAGES_GITHUB_REPO,
-};
+use crate::{DISPLAY_STR, LOGIN_MESSAGES_GITHUB_REPO};
 
 pub fn print_enum(e: &Definer) -> Writer {
     let mut s = Writer::new(&get_import_path(e.tags()));

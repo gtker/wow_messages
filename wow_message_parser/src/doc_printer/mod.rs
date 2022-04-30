@@ -1,5 +1,5 @@
 use crate::container::{Container, Equation, IfStatement, StructMember};
-use crate::file_utils::{append_string_to_file, create_or_append, write_string_to_file};
+use crate::file_utils::{create_or_append, write_string_to_file};
 use crate::parser::enumerator::Definer;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::ty::Type;

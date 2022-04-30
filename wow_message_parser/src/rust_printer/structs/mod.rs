@@ -1,4 +1,4 @@
-use crate::container::{Container, ContainerType, Equation, IfStatement, StructMember};
+use crate::container::{Container, ContainerType, StructMember};
 use crate::file_utils::get_import_path;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
@@ -8,7 +8,7 @@ use crate::rust_printer::{
     WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
 use crate::wowm_printer::get_struct_wowm_definition;
-use crate::{LOGIN_MESSAGES_GITHUB_REPO, WORLD_MESSAGES_GITHUB_REPO};
+use crate::LOGIN_MESSAGES_GITHUB_REPO;
 
 mod print_common_impls;
 mod print_new_types;
