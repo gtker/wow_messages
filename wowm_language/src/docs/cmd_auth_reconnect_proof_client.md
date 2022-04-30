@@ -19,11 +19,10 @@ clogin CMD_AUTH_RECONNECT_PROOF_Client = 0x03 {
 ### Examples
 ```c
 3, // opcode (3)
-UNIMPLEMENTED_DOC_ARRAY
-// proof_data: u8[16]
-UNIMPLEMENTED_DOC_ARRAY
-// client_proof: u8[20]
-UNIMPLEMENTED_DOC_ARRAY
-// client_checksum: u8[20]
-234, // key_count: u8
+234, 250, 185, 198, 24, 21, 11, 242, 249, 50, 206, 39, 98, 121, 150, 153, // proof_data: u8[16]
+107, 109, 26, 13, 243, 165, 158, 106, 56, 2, 231, 11, 225, 47, 5, 113, 186, 71, 140, 
+163, // client_proof: u8[20]
+40, 167, 158, 154, 36, 40, 230, 130, 237, 236, 199, 201, 232, 110, 241, 59, 123, 
+225, 224, 245, // client_checksum: u8[20]
+0, // key_count: u8
 ```

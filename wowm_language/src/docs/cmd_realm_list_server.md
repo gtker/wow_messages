@@ -24,7 +24,14 @@ slogin CMD_REALM_LIST_Server = 0x10 {
 23, 0, // size: u16
 0, 0, 0, 0, // header_padding: u32
 1, // number_of_realms: u8
-UNIMPLEMENTED_DOC_ARRAY
+0, 0, 0, 0, // [0].Realm.realm_type: RealmType PLAYER_VS_ENVIRONMENT (0)
+0, // [1].Realm.flag: RealmFlag  NONE (0)
+65, 0, // [2].Realm.name: CString
+65, 0, // [3].Realm.address: CString
+0, 0, 200, 67, // [4].Realm.population: Population RED_FULL (0x43c80000)
+1, // [5].Realm.number_of_characters_on_realm: u8
+0, // [6].Realm.category: RealmCategory DEFAULT (0x0)
+2, // [7].Realm.realm_id: u8
 // realms: Realm[number_of_realms]
 0, 0, // footer_padding: u16
 ```
@@ -33,7 +40,14 @@ UNIMPLEMENTED_DOC_ARRAY
 23, 0, // size: u16
 0, 0, 0, 0, // header_padding: u32
 1, // number_of_realms: u8
-UNIMPLEMENTED_DOC_ARRAY
+0, 0, 0, 0, // [0].Realm.realm_type: RealmType PLAYER_VS_ENVIRONMENT (0)
+3, // [1].Realm.flag: RealmFlag  INVALID| OFFLINE (3)
+65, 0, // [2].Realm.name: CString
+65, 0, // [3].Realm.address: CString
+0, 0, 200, 67, // [4].Realm.population: Population RED_FULL (0x43c80000)
+1, // [5].Realm.number_of_characters_on_realm: u8
+0, // [6].Realm.category: RealmCategory DEFAULT (0x0)
+2, // [7].Realm.realm_id: u8
 // realms: Realm[number_of_realms]
 0, 0, // footer_padding: u16
 ```
@@ -63,7 +77,16 @@ slogin CMD_REALM_LIST_Server = 0x10 {
 22, 0, // size: u16
 0, 0, 0, 0, // header_padding: u32
 1, 0, // number_of_realms: u16
-UNIMPLEMENTED_DOC_ARRAY
+0, // [0].Realm.realm_type: u8
+0, // [1].Realm.locked: u8
+3, // [2].Realm.flag: RealmFlag  INVALID| OFFLINE (3)
+65, 0, // [3].Realm.name: CString
+65, 0, // [4].Realm.address: CString
+0, 0, 200, 67, // [5].Realm.population: Population RED_FULL (0x43c80000)
+1, // [6].Realm.number_of_characters_on_realm: u8
+0, // [7].Realm.category: RealmCategory DEFAULT (0x0)
+2, // [8].Realm.realm_id: u8
+UNIMPLEMENTED_DOC_IF
 // realms: Realm[number_of_realms]
 0, 0, // footer_padding: u16
 ```
@@ -72,7 +95,16 @@ UNIMPLEMENTED_DOC_ARRAY
 27, 0, // size: u16
 0, 0, 0, 0, // header_padding: u32
 1, 0, // number_of_realms: u16
-UNIMPLEMENTED_DOC_ARRAY
+0, // [0].Realm.realm_type: u8
+0, // [1].Realm.locked: u8
+4, // [2].Realm.flag: RealmFlag  SPECIFY_BUILD (4)
+65, 0, // [3].Realm.name: CString
+65, 0, // [4].Realm.address: CString
+0, 0, 200, 67, // [5].Realm.population: Population RED_FULL (0x43c80000)
+1, // [6].Realm.number_of_characters_on_realm: u8
+0, // [7].Realm.category: RealmCategory DEFAULT (0x0)
+2, // [8].Realm.realm_id: u8
+UNIMPLEMENTED_DOC_IF
 // realms: Realm[number_of_realms]
-0, 0, // footer_padding: u16
+1, 12, // footer_padding: u16
 ```

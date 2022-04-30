@@ -16,12 +16,10 @@ slogin CMD_XFER_DATA = 0x31 {
 ```c
 49, // opcode (49)
 1, 0, // size: u16
-UNIMPLEMENTED_DOC_ARRAY
-// data: u8[size]
+255, // data: u8[size]
 ```
 ```c
 49, // opcode (49)
 0, 0, // size: u16
-UNIMPLEMENTED_DOC_ARRAY
 // data: u8[size]
 ```

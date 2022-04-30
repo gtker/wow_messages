@@ -4,7 +4,7 @@ use crate::parser::enumerator::Definer;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArrayType, Endianness, IntegerType, ObjectType};
+use crate::parser::types::{Array, ArraySize, ArrayType, Endianness, IntegerType, ObjectType};
 use crate::wowm_printer::{get_definer_wowm_definition, get_struct_wowm_definition};
 use crate::ContainerType;
 use std::collections::HashMap;
@@ -17,6 +17,7 @@ use std::slice::Iter;
 pub struct DocWriter {
     name: String,
     inner: String,
+    column: usize,
 }
 
 impl DocWriter {
@@ -32,15 +33,25 @@ impl DocWriter {
         Self {
             name: name.to_string(),
             inner: String::with_capacity(8000),
+            column: 0,
         }
     }
 
     pub fn w(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
+        self.column += s.as_ref().len();
+    }
+
+    pub fn w_break_at(&mut self, s: impl AsRef<str>) {
+        self.w(s);
+        if self.column > 80 {
+            self.newline();
+        }
     }
 
     pub fn newline(&mut self) {
         self.w("\n");
+        self.column = 0;
     }
 
     pub fn wln(&mut self, s: impl AsRef<str>) {
@@ -50,7 +61,9 @@ impl DocWriter {
 
     pub fn bytes<'a>(&mut self, bytes: impl Iterator<Item = &'a u8>) {
         for b in bytes {
-            self.w(format!("{}, ", b));
+            let text = format!("{}, ", b);
+            self.w(&text);
+            self.column += text.len();
         }
     }
 }
@@ -243,6 +256,74 @@ fn get_integer_value(t: &IntegerType, value: &[u8]) -> usize {
     }
 }
 
+fn print_container_example_array(
+    s: &mut DocWriter,
+    array: &Array,
+    bytes: &mut Iter<u8>,
+    values: &mut HashMap<String, usize>,
+    o: &Objects,
+    tags: &Tags,
+    prefix: &str,
+) {
+    let size = match array.size() {
+        ArraySize::Fixed(size) => size as usize,
+        ArraySize::Variable(length) => *values.get(&length).unwrap(),
+        ArraySize::Endless => {
+            let size = bytes.size_hint();
+            assert_eq!(size.0, size.1.unwrap());
+            size.0
+        }
+    };
+
+    for _ in 0..size {
+        match array.ty() {
+            ArrayType::Integer(t) => {
+                let bytes = bytes.take(t.size() as usize);
+
+                for b in bytes {
+                    s.w_break_at(format!("{}, ", b));
+                }
+            }
+            ArrayType::CString => {
+                let mut b = bytes.next().unwrap();
+                while *b != 0 {
+                    s.w_break_at(format!("{}, ", b));
+                    b = bytes.next().unwrap();
+                }
+                s.w_break_at(format!("{}, ", b));
+            }
+            ArrayType::Guid => {
+                let bytes = bytes.take(core::mem::size_of::<u64>());
+
+                for b in bytes {
+                    s.w_break_at(format!("{}, ", b));
+                }
+            }
+            ArrayType::PackedGuid => {
+                let mask = bytes.next().unwrap();
+                let bytes = bytes.take(mask.count_ones() as _);
+                for b in bytes {
+                    s.w_break_at(format!("{}, ", b));
+                }
+            }
+            ArrayType::Complex(identifier) => {
+                let type_of = o.get_object_type_of(identifier, tags);
+                match type_of {
+                    ObjectType::Struct => {}
+                    _ => panic!(),
+                }
+
+                let c = o.get_container(identifier, tags);
+
+                for (i, m) in c.fields().iter().enumerate() {
+                    let prefix = format!("{}[{}].{}", prefix, i, c.name());
+                    print_container_example_member(s, m, bytes, values, o, tags, &prefix);
+                }
+            }
+        }
+    }
+}
+
 fn print_container_example_definition(
     s: &mut DocWriter,
     d: &StructMemberDefinition,
@@ -297,8 +378,8 @@ fn print_container_example_definition(
             };
             s.bytes(bytes.take(length).into_iter());
         }
-        Type::Array(_) => {
-            s.wln("UNIMPLEMENTED_DOC_ARRAY");
+        Type::Array(array) => {
+            print_container_example_array(s, array, bytes, values, o, tags, prefix);
         }
         Type::Identifier {
             s: identifier,

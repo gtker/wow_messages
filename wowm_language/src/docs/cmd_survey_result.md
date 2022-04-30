@@ -22,6 +22,5 @@ clogin CMD_SURVEY_RESULT = 0x04 {
 222, 250, 0, 0, // survey_id: u32
 0, // error: u8
 1, 0, // compressed_data_length: u16
-UNIMPLEMENTED_DOC_ARRAY
-// data: u8[compressed_data_length]
+255, // data: u8[compressed_data_length]
 ```
