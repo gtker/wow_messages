@@ -10,10 +10,17 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     TelemetryKey[number_of_telemetry_keys] telemetry_keys;
 }
 ```
+### Header
+Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.
+
+#### Login Header
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | u8[32] | client_public_key |  |
+| 0x01 | ? / - | u8[32] | client_public_key |  |
 | - | ? / - | u8[20] | client_proof |  |
 | - | ? / - | u8[20] | crc_hash |  |
 | - | 1 / - | u8 | number_of_telemetry_keys |  |
@@ -81,10 +88,17 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     }
 }
 ```
+### Header
+Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.
+
+#### Login Header
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | u8[32] | client_public_key |  |
+| 0x01 | ? / - | u8[32] | client_public_key |  |
 | - | ? / - | u8[20] | client_proof |  |
 | - | ? / - | u8[20] | crc_hash |  |
 | - | 1 / - | u8 | number_of_telemetry_keys |  |
@@ -187,10 +201,17 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
     }
 }
 ```
+### Header
+Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.
+
+#### Login Header
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | u8[32] | client_public_key |  |
+| 0x01 | ? / - | u8[32] | client_public_key |  |
 | - | ? / - | u8[20] | client_proof |  |
 | - | ? / - | u8[20] | crc_hash |  |
 | - | 1 / - | u8 | number_of_telemetry_keys |  |

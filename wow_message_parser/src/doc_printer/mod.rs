@@ -755,7 +755,8 @@ fn print_container_body(s: &mut DocWriter, e: &Container) {
         ContainerType::Msg(_) => 0,
         ContainerType::CMsg(_) => 6,
         ContainerType::SMsg(_) => 4,
-        ContainerType::Struct | ContainerType::CLogin(_) | ContainerType::SLogin(_) => 0,
+        ContainerType::CLogin(_) | ContainerType::SLogin(_) => 1,
+        ContainerType::Struct => 0,
     });
 
     if !(e.fields().len() == 1 && matches!(&e.fields()[0], &StructMember::OptionalStatement(_))) {
@@ -789,7 +790,7 @@ fn print_container_body(s: &mut DocWriter, e: &Container) {
 
 fn print_container_header(s: &mut DocWriter, e: &Container) {
     match e.container_type() {
-        ContainerType::Struct | ContainerType::CLogin(_) | ContainerType::SLogin(_) => return,
+        ContainerType::Struct => return,
         _ => {}
     }
 
@@ -802,6 +803,9 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
         }
         ContainerType::SMsg(_) => {
             s.wln("SMSG have a header of 4 bytes.");
+        }
+        ContainerType::SLogin(_) | ContainerType::CLogin(_) => {
+            s.wln("Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.")
         }
         _ => panic!("unexpected container type"),
     };
@@ -830,6 +834,17 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
         s.wln("| ------ | ----------------- | ------ | ------ | ----------- |");
         s.wln("| 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|");
         s.wln("| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|");
+    }
+
+    if matches!(
+        e.container_type(),
+        ContainerType::SLogin(_) | ContainerType::CLogin(_)
+    ) {
+        s.wln("#### Login Header");
+
+        s.wln("| Offset | Size / Endianness | Type   | Name   | Description |");
+        s.wln("| ------ | ----------------- | ------ | ------ | ----------- |");
+        s.wln("| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|");
     }
 }
 

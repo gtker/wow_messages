@@ -9,10 +9,17 @@ clogin CMD_AUTH_RECONNECT_PROOF_Client = 0x03 {
     u8 key_count = 0;
 }
 ```
+### Header
+Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.
+
+#### Login Header
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | u8[16] | proof_data |  |
+| 0x01 | ? / - | u8[16] | proof_data |  |
 | - | ? / - | u8[20] | client_proof |  |
 | - | ? / - | u8[20] | client_checksum |  |
 | - | 1 / - | u8 | key_count |  |

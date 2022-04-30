@@ -10,10 +10,17 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
     }
 }
 ```
+### Header
+Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.
+
+#### Login Header
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | [LoginResult](loginresult.md) | login_result |  |
+| 0x01 | ? / - | [LoginResult](loginresult.md) | login_result |  |
 
 If login_result is equal to `SUCCESS`:
 
@@ -45,10 +52,17 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
     }
 }
 ```
+### Header
+Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.
+
+#### Login Header
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | [LoginResult](loginresult.md) | login_result |  |
+| 0x01 | ? / - | [LoginResult](loginresult.md) | login_result |  |
 
 If login_result is equal to `SUCCESS`:
 

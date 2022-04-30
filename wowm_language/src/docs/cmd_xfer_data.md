@@ -7,11 +7,18 @@ slogin CMD_XFER_DATA = 0x31 {
     u8[size] data;
 }
 ```
+### Header
+Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.
+
+#### Login Header
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 2 / Little | u16 | size |  |
-| 0x02 | ? / - | u8[size] | data |  |
+| 0x01 | 2 / Little | u16 | size |  |
+| 0x03 | ? / - | u8[size] | data |  |
 ### Examples
 ```c
 49, // opcode (49)

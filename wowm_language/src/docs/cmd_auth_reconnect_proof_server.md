@@ -6,10 +6,17 @@ slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
     LoginResult result;
 }
 ```
+### Header
+Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.
+
+#### Login Header
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | [LoginResult](loginresult.md) | result |  |
+| 0x01 | ? / - | [LoginResult](loginresult.md) | result |  |
 ### Examples
 ```c
 3, // opcode (3)
@@ -32,10 +39,17 @@ slogin CMD_AUTH_RECONNECT_PROOF_Server = 0x03 {
     u16 padding = 0;
 }
 ```
+### Header
+Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.
+
+#### Login Header
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | [LoginResult](loginresult.md) | result |  |
+| 0x01 | ? / - | [LoginResult](loginresult.md) | result |  |
 | - | 2 / Little | u16 | padding |  |
 ### Examples
 ```c

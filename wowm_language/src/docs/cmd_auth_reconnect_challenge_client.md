@@ -16,13 +16,20 @@ clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
     String[account_name_length] account_name;
 }
 ```
+### Header
+Login messages have a header of 1 byte with an opcode. Some messages also have a size field but this is not considered part of the header.
+
+#### Login Header
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 1 / - | u8 | protocol_version |  |
-| 0x01 | 2 / Little | u16 | size |  |
-| 0x03 | 4 / Little | u32 | game_name |  |
-| 0x07 | ? / - | [Version](version.md) | version |  |
+| 0x01 | 1 / - | u8 | protocol_version |  |
+| 0x02 | 2 / Little | u16 | size |  |
+| 0x04 | 4 / Little | u32 | game_name |  |
+| 0x08 | ? / - | [Version](version.md) | version |  |
 | - | ? / - | [Platform](platform.md) | platform |  |
 | - | ? / - | [Os](os.md) | os |  |
 | - | ? / - | [Locale](locale.md) | locale |  |
