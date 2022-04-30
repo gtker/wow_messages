@@ -46,7 +46,7 @@ pub trait MaximumPossibleSized {
     fn maximum_possible_size() -> usize;
 }
 
-pub trait WorldServerMessageWrite: MessageBody {
+pub trait ServerMessageWrite: MessageBody {
     const OPCODE: u16;
 
     fn write_unencrypted_server<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
@@ -58,7 +58,7 @@ pub trait WorldServerMessageWrite: MessageBody {
     ) -> Result<(), std::io::Error>;
 }
 
-pub trait WorldClientMessageWrite: MessageBody {
+pub trait ClientMessageWrite: MessageBody {
     const OPCODE: u32;
 
     fn write_unencrypted_client<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error>;

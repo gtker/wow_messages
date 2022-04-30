@@ -1,6 +1,6 @@
 use crate::MessageBody;
 use crate::OpcodeMessage;
-use crate::{WorldServerMessageWrite, WorldClientMessageWrite};
+use crate::{ServerMessageWrite, ClientMessageWrite};
 use wow_srp::header_crypto::{Decrypter, Encrypter};
 
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]

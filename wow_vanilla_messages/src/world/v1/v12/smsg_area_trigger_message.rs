@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{WorldServerMessageWrite, MessageBody};
+use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -17,13 +17,13 @@ pub struct SMSG_AREA_TRIGGER_MESSAGE {
     pub message: String,
 }
 
-impl WorldServerMessageWrite for SMSG_AREA_TRIGGER_MESSAGE {
+impl ServerMessageWrite for SMSG_AREA_TRIGGER_MESSAGE {
     const OPCODE: u16 = 0x2b8;
 
     fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // size: u16_be, and opcode: u16
         crate::util::write_u16_be(w, (self.size() + 2) as u16)?;
-        crate::util::write_u16_le(w, <Self as WorldServerMessageWrite>::OPCODE)?;
+        crate::util::write_u16_le(w, <Self as ServerMessageWrite>::OPCODE)?;
 
         self.write_body(w)?;
         Ok(())
@@ -31,7 +31,7 @@ impl WorldServerMessageWrite for SMSG_AREA_TRIGGER_MESSAGE {
 
     fn write_encrypted_server<W: std::io::Write, E: Encrypter>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error> {
         // size: u16_be, and opcode: u16
-        e.write_encrypted_server_header(w, (self.size() + 2) as u16, <Self as WorldServerMessageWrite>::OPCODE)?;
+        e.write_encrypted_server_header(w, (self.size() + 2) as u16, <Self as ServerMessageWrite>::OPCODE)?;
 
         self.write_body(w)?;
         Ok(())

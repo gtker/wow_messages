@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{ChatType, ChatTypeError};
 use crate::world::v1::v12::{Language, LanguageError};
-use crate::{WorldClientMessageWrite, MessageBody};
+use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(any(feature = "async_tokio", feature = "async_std"))]
@@ -19,13 +19,13 @@ pub struct CMSG_MESSAGECHAT {
     pub language: Language,
 }
 
-impl WorldClientMessageWrite for CMSG_MESSAGECHAT {
+impl ClientMessageWrite for CMSG_MESSAGECHAT {
     const OPCODE: u32 = 0x95;
 
     fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // size: u16_be, and opcode: u32
         crate::util::write_u16_be(w, (self.size() + 4) as u16)?;
-        crate::util::write_u32_le(w, <Self as WorldClientMessageWrite>::OPCODE)?;
+        crate::util::write_u32_le(w, <Self as ClientMessageWrite>::OPCODE)?;
 
         self.write_body(w)?;
         Ok(())
@@ -33,7 +33,7 @@ impl WorldClientMessageWrite for CMSG_MESSAGECHAT {
 
     fn write_encrypted_client<W: std::io::Write, E: Encrypter>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error> {
         // size: u16_be, and opcode: u32
-        e.write_encrypted_client_header(w, (self.size() + 4) as u16, <Self as WorldClientMessageWrite>::OPCODE)?;
+        e.write_encrypted_client_header(w, (self.size() + 4) as u16, <Self as ClientMessageWrite>::OPCODE)?;
 
         self.write_body(w)?;
         Ok(())
