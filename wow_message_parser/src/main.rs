@@ -42,7 +42,7 @@ const CSTRING_LARGEST_ALLOWED: usize = 256;
 // Also used in auth.pest
 const ENUM_SELF_VALUE_FIELD: &str = "self.value";
 
-const LOGIN_MESSAGES_GITHUB_REPO: &str = "https://github.com/gtker/wow_messages";
+const GITHUB_REPO_URL: &str = "https://github.com/gtker/wow_messages";
 
 fn main() {
     let mut o = Objects::empty();

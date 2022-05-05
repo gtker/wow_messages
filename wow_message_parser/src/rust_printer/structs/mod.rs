@@ -8,7 +8,6 @@ use crate::rust_printer::{
     WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
 use crate::wowm_printer::get_struct_wowm_definition;
-use crate::LOGIN_MESSAGES_GITHUB_REPO;
 
 mod print_common_impls;
 mod print_new_types;
@@ -190,7 +189,6 @@ fn print_struct_wowm_definition(s: &mut Writer, e: &Container) {
         |s| {
             s.w(get_struct_wowm_definition(e, "/// "));
         },
-        LOGIN_MESSAGES_GITHUB_REPO,
         e.file_info(),
     );
 }

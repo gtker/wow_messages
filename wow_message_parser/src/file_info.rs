@@ -1,3 +1,5 @@
+use crate::GITHUB_REPO_URL;
+
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct FileInfo {
     file_name: String,
@@ -18,5 +20,14 @@ impl FileInfo {
 
     pub fn start_line(&self) -> usize {
         self.start_position.0
+    }
+
+    pub fn original_file_github_link(&self) -> String {
+        format!(
+            "[`{name}:{line}`]({github_repo}/tree/main/{name}#L{line})",
+            name = self.name(),
+            line = self.start_line(),
+            github_repo = GITHUB_REPO_URL,
+        )
     }
 }
