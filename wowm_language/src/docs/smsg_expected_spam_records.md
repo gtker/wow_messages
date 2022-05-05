@@ -1,3 +1,4 @@
+# SMSG_EXPECTED_SPAM_RECORDS
 ## Client Version 1.12
 
 ### Wowm Representation

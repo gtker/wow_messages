@@ -1,3 +1,4 @@
+# CMSG_GUILD_SET_PUBLIC_NOTE
 ## Client Version 1.12
 
 ### Wowm Representation

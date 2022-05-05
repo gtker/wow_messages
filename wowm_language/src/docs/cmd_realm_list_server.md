@@ -1,3 +1,4 @@
+# CMD_REALM_LIST_Server
 ## Protocol Version 2, Protocol Version 3
 
 ### Wowm Representation

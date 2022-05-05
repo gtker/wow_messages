@@ -1,3 +1,4 @@
+# SMSG_AREA_SPIRIT_HEALER_TIME
 ## Client Version 1.12
 
 ### Wowm Representation

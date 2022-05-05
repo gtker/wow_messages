@@ -238,6 +238,15 @@ pub fn print_docs_for_enum(e: &Definer) -> DocWriter {
 
     print_definer_table(&mut s, e);
 
+    s.wln("Used in:");
+    for c in e.objects_used_in() {
+        s.wln(format!(
+            "* [{ty}]({ty_path}.md)",
+            ty = c.0,
+            ty_path = c.0.to_lowercase(),
+        ));
+    }
+
     s
 }
 
@@ -907,4 +916,6 @@ fn print_definer_table(s: &mut DocWriter, e: &Definer) {
             s.newline();
         }
     }
+
+    s.newline();
 }

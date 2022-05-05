@@ -1,3 +1,4 @@
+# SMSG_INITIALIZE_FACTIONS
 ## Client Version 1.12
 
 ### Wowm Representation

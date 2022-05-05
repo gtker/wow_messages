@@ -1,3 +1,4 @@
+# SMSG_SET_FACTION_STANDING
 ## Client Version 1.12
 
 ### Wowm Representation

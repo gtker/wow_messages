@@ -1,3 +1,4 @@
+# CMSG_GROUP_UNINVITE_GUID
 ## Client Version 1.12
 
 ### Wowm Representation

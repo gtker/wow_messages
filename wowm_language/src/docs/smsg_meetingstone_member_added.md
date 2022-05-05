@@ -1,3 +1,4 @@
+# SMSG_MEETINGSTONE_MEMBER_ADDED
 ## Client Version 1.12
 
 ### Wowm Representation

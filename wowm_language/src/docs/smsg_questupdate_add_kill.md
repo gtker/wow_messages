@@ -1,3 +1,4 @@
+# SMSG_QUESTUPDATE_ADD_KILL
 ## Client Version 1.12
 
 ### Wowm Representation

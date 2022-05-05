@@ -1,3 +1,4 @@
+# SMSG_PETITION_SHOW_SIGNATURES
 ## Client Version 1.12
 
 ### Wowm Representation

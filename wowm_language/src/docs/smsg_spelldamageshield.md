@@ -1,3 +1,4 @@
+# SMSG_SPELLDAMAGESHIELD
 ## Client Version 1.12
 
 ### Wowm Representation

@@ -1,3 +1,4 @@
+# CMSG_LOOT
 ## Client Version 1.12
 
 ### Wowm Representation

@@ -320,7 +320,7 @@ impl Objects {
                 DefinerUsage::InIf => DefinerUsage::InIf,
             };
 
-            v.push((e.name().to_string(), ty));
+            v.push((c.name().to_string(), ty));
         }
 
         v

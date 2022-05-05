@@ -1,3 +1,4 @@
+# SMSG_PARTY_MEMBER_STATS_FULL
 ## Client Version 1.12
 
 ### Wowm Representation

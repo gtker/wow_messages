@@ -1,3 +1,4 @@
+# SMSG_DURABILITY_DAMAGE_DEATH
 ## Client Version 1.12
 
 ### Wowm Representation

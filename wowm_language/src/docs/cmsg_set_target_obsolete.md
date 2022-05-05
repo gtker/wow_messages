@@ -1,3 +1,4 @@
+# CMSG_SET_TARGET_OBSOLETE
 ## Client Version 1.12
 
 ### Wowm Representation
