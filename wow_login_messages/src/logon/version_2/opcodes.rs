@@ -39,8 +39,6 @@ impl ReadableAndWritable for ServerOpcodeMessage {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        ServerOpcode::from(self).write(w)?;
-
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.write(w)?,
             Self::CMD_AUTH_LOGON_PROOF(e) => e.write(w)?,
@@ -66,8 +64,6 @@ impl ReadableAndWritable for ServerOpcodeMessage {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        ServerOpcode::from(self).tokio_write(w).await?;
-
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.tokio_write(w).await?,
             Self::CMD_AUTH_LOGON_PROOF(e) => e.tokio_write(w).await?,
@@ -93,8 +89,6 @@ impl ReadableAndWritable for ServerOpcodeMessage {
 
     #[cfg(feature = "async_std")]
     async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        ServerOpcode::from(self).astd_write(w).await?;
-
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.astd_write(w).await?,
             Self::CMD_AUTH_LOGON_PROOF(e) => e.astd_write(w).await?,
@@ -351,8 +345,6 @@ impl ReadableAndWritable for ClientOpcodeMessage {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        ClientOpcode::from(self).write(w)?;
-
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.write(w)?,
             Self::CMD_AUTH_LOGON_PROOF(e) => e.write(w)?,
@@ -378,8 +370,6 @@ impl ReadableAndWritable for ClientOpcodeMessage {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        ClientOpcode::from(self).tokio_write(w).await?;
-
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.tokio_write(w).await?,
             Self::CMD_AUTH_LOGON_PROOF(e) => e.tokio_write(w).await?,
@@ -405,8 +395,6 @@ impl ReadableAndWritable for ClientOpcodeMessage {
 
     #[cfg(feature = "async_std")]
     async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        ClientOpcode::from(self).astd_write(w).await?;
-
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.astd_write(w).await?,
             Self::CMD_AUTH_LOGON_PROOF(e) => e.astd_write(w).await?,

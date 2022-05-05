@@ -258,7 +258,6 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
             });
         },
         |s, it| {
-            s.wln(format!("{t}Opcode::from(self).{prefix}write(w){postfix}?;\n", t = ty, prefix = it.prefix(), postfix = it.postfix()));
             s.bodyn("match self", |s| {
                 for e in v {
                     s.wln(format!(
