@@ -21,13 +21,13 @@
 
 * MaximumPossibleSize for derived enums
 * Workable Intermediate Representation for World
-* cfg options for `wow_srp`
 * More tests/definitions
 * Add derives for all types
   * Add Eq and Hash for structs?
+* Error on invalid flag/enumerator used
+* Error out on using == for flags and vice versa
 * MSRV test
   * Login
   * World
-* Error on invalid flag enumerator used
-* Error out on using == for flags and vice versa
+* cfg options for `wow_srp`
 * Function to Write objects (eg strings) by reference
