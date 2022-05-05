@@ -10,6 +10,7 @@
 //!
 //! In each version module there is an [`opcodes`](version_2::opcodes) module that contains
 //! enums for possible client and server messages.
+//! As well as utility functions for reading/writing the correct message.
 //!
 //! Notice that the same game version _may_ use different protocol versions for login/reconnecting.
 //! See the
