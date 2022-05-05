@@ -2,9 +2,9 @@ use crate::container::{Container, ContainerType};
 use crate::file_utils::{get_import_path, get_login_logon_version_path, get_world_version_path};
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
-    ImplType, Writer, ASYNC_STD_IMPORT, ASYNC_TRAIT_IMPORT, CFG_ASYNC_ANY, CFG_ASYNC_ASYNC_STD,
-    CFG_ASYNC_TOKIO, OPCODE_MESSAGE_TRAIT_NAME, TOKIO_IMPORT, WORLD_BODY_TRAIT_NAME,
-    WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
+    ImplType, Writer, ASYNC_STD_IMPORT, ASYNC_TRAIT_IMPORT, ASYNC_TRAIT_MACRO, CFG_ASYNC_ANY,
+    CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO, OPCODE_MESSAGE_TRAIT_NAME, TOKIO_IMPORT,
+    WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
 
 const CLOGIN_NAME: &str = "Client";
@@ -144,6 +144,9 @@ fn world_common_impls_read_write(
     opcode_size: i32,
     it: ImplType,
 ) {
+    if it != ImplType::Std {
+        s.wln(format!("{}", it.cfg()));
+    }
     s.bodyn(format!("{func}fn {prefix}write_unencrypted<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", func = it.func(), prefix = it.prefix(), write = it.write() ), |s| {
         s.body("match self", |s| {
             for &e in v {
@@ -155,6 +158,9 @@ fn world_common_impls_read_write(
         s.wln("Ok(())");
     });
 
+    if it != ImplType::Std {
+        s.wln(format!("{}", it.cfg()));
+    }
     s.bodyn(format!("{func}fn {prefix}read_unencrypted<R: {read}>(r: &mut R) -> std::result::Result<Self, Self::Error>", func = it.func(), prefix = it.prefix(), read = it.read()), |s| {
         s.wln(format!("let size = ({path}::{prefix}read_u16_be(r){postfix}? - {opcode_size}) as u32;", path = "crate::util", opcode_size = opcode_size, prefix = it.prefix(), postfix = it.postfix()));
 
@@ -179,8 +185,13 @@ fn world_common_impls_read_write(
         });
     });
 
+    if it != ImplType::Std {
+        s.wln(format!("{}", it.cfg()));
+    }
     s.bodyn(format!("{func}fn {prefix}read_encrypted<R: {read}, D: Decrypter{decrypter}>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error>", func = it.func(), prefix = it.prefix(), read = it.read(), decrypter = it.decrypter()), |s| {
-        s.wln(format!("let header = d.read_and_decrypt_{cd}_header(r)?;", cd = cd));
+        s.wln(format!("let mut header = [0u8; {header_size}];", header_size = opcode_size + 2));
+        s.wln(format!("r.read_exact(&mut header){postfix}?;", postfix = it.postfix()));
+        s.wln(format!("let header = d.decrypt_{cd}_header(header);", cd = cd));
         s.wln(format!("let header_size = (header.size - {opcode_size}) as u32;", opcode_size = opcode_size));
         s.body("match header.opcode", |s| {
             for &e in v {
@@ -197,6 +208,9 @@ fn world_common_impls_read_write(
         });
     });
 
+    if it != ImplType::Std {
+        s.wln(format!("{}", it.cfg()));
+    }
     s.bodyn(format!("{func}fn {prefix}write_encrypted<W: {write}, E: Encrypter{decrypter}>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error>", decrypter = it.decrypter(), prefix = it.prefix(), func = it.func(), write = it.write()), |s| {
         s.body("match self", |s| {
             for &e in v {
@@ -218,13 +232,16 @@ pub fn common_impls_world(
         ContainerType::SMsg(_) => ("server", "u16", 2),
         _ => panic!(),
     };
+    s.wln(ASYNC_TRAIT_MACRO);
     s.impl_for(
         OPCODE_MESSAGE_TRAIT_NAME,
         format!("{t}OpcodeMessage", t = ty),
         |s| {
             s.wln(format!("type Error = {t}OpcodeMessageError;", t = ty));
 
-            world_common_impls_read_write(s, v, cd, size, opcode_size, ImplType::Std);
+            for it in ImplType::types() {
+                world_common_impls_read_write(s, v, cd, size, opcode_size, it);
+            }
         },
     );
 }
