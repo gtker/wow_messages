@@ -1454,20 +1454,15 @@ impl SpellCastTargetsSpellCastTargetFlagsUNIT {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SpellCastTargetsSpellCastTargetFlagsUNIT {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.unit_target1.tokio_write_packed(w).await?;
 
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.unit_target1.astd_write_packed(w).await?;
 
         Ok(())
@@ -1499,20 +1494,15 @@ impl SpellCastTargetsSpellCastTargetFlagsITEM {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SpellCastTargetsSpellCastTargetFlagsITEM {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.item_target1.tokio_write_packed(w).await?;
 
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.item_target1.astd_write_packed(w).await?;
 
         Ok(())
@@ -1554,12 +1544,8 @@ impl SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.position_x1.to_le_bytes()).await?;
 
         w.write_all(&self.position_y1.to_le_bytes()).await?;
@@ -1569,9 +1555,8 @@ impl SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.position_x1.to_le_bytes()).await?;
 
         w.write_all(&self.position_y1.to_le_bytes()).await?;
@@ -1617,12 +1602,8 @@ impl SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.position_x2.to_le_bytes()).await?;
 
         w.write_all(&self.position_y2.to_le_bytes()).await?;
@@ -1632,9 +1613,8 @@ impl SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.position_x2.to_le_bytes()).await?;
 
         w.write_all(&self.position_y2.to_le_bytes()).await?;
@@ -1670,20 +1650,15 @@ impl SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.unit_target2.tokio_write_packed(w).await?;
 
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.unit_target2.astd_write_packed(w).await?;
 
         Ok(())
@@ -1715,20 +1690,15 @@ impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.corpse_target2.tokio_write_packed(w).await?;
 
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.corpse_target2.astd_write_packed(w).await?;
 
         Ok(())
@@ -1760,20 +1730,15 @@ impl SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.object_target1.tokio_write_packed(w).await?;
 
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.object_target1.astd_write_packed(w).await?;
 
         Ok(())
@@ -1805,20 +1770,15 @@ impl SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.item_target2.tokio_write_packed(w).await?;
 
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.item_target2.astd_write_packed(w).await?;
 
         Ok(())
@@ -1852,12 +1812,8 @@ impl SpellCastTargetsSpellCastTargetFlagsSTRING {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SpellCastTargetsSpellCastTargetFlagsSTRING {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(self.target_string.as_bytes()).await?;
         // Null terminator
         w.write_all(&[0]).await?;
@@ -1865,9 +1821,8 @@ impl SpellCastTargetsSpellCastTargetFlagsSTRING {
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(self.target_string.as_bytes()).await?;
         // Null terminator
         w.write_all(&[0]).await?;
@@ -1901,20 +1856,15 @@ impl SpellCastTargetsSpellCastTargetFlagsLOCKED {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SpellCastTargetsSpellCastTargetFlagsLOCKED {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.object_target2.tokio_write_packed(w).await?;
 
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.object_target2.astd_write_packed(w).await?;
 
         Ok(())
@@ -1946,20 +1896,15 @@ impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.corpse_target1.tokio_write_packed(w).await?;
 
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.corpse_target1.astd_write_packed(w).await?;
 
         Ok(())

@@ -1,4 +1,3 @@
-# SMSG_QUESTGIVER_QUEST_FAILED
 ## Client Version 1.12
 
 ### Wowm Representation

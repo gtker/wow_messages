@@ -1,4 +1,3 @@
-# Platform
 ## Protocol Version *
 
 ### Wowm Representation

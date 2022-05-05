@@ -1,4 +1,3 @@
-# CMD_AUTH_LOGON_PROOF_Server
 ## Protocol Version 2, Protocol Version 3
 
 ### Wowm Representation

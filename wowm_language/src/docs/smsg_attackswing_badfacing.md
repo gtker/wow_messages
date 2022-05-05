@@ -1,4 +1,3 @@
-# SMSG_ATTACKSWING_BADFACING
 ## Client Version 1.12
 
 ### Wowm Representation

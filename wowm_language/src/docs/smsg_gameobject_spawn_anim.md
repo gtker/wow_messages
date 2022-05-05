@@ -1,4 +1,3 @@
-# SMSG_GAMEOBJECT_SPAWN_ANIM
 ## Client Version 1.12
 
 ### Wowm Representation

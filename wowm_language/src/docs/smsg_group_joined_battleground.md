@@ -1,4 +1,3 @@
-# SMSG_GROUP_JOINED_BATTLEGROUND
 ## Client Version 1.12
 
 ### Wowm Representation

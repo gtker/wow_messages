@@ -1,4 +1,3 @@
-# SecurityFlag
 ## Protocol Version 3
 
 ### Wowm Representation

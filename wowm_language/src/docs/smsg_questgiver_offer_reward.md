@@ -1,4 +1,3 @@
-# SMSG_QUESTGIVER_OFFER_REWARD
 ## Client Version 1.12
 
 ### Wowm Representation

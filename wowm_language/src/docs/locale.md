@@ -1,4 +1,3 @@
-# Locale
 ## Protocol Version *
 
 ### Wowm Representation

@@ -1,4 +1,3 @@
-# SMSG_CORPSE_RECLAIM_DELAY
 ## Client Version 1.12
 
 ### Wowm Representation

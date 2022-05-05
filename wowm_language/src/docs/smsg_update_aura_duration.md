@@ -1,4 +1,3 @@
-# SMSG_UPDATE_AURA_DURATION
 ## Client Version 1.12
 
 ### Wowm Representation

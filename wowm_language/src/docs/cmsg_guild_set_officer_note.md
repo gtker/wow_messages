@@ -1,4 +1,3 @@
-# CMSG_GUILD_SET_OFFICER_NOTE
 ## Client Version 1.12
 
 ### Wowm Representation

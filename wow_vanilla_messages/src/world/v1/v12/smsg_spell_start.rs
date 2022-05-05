@@ -638,12 +638,8 @@ impl SMSG_SPELL_STARTCastFlagsAMMO {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl SMSG_SPELL_STARTCastFlagsAMMO {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.ammo_display_id.to_le_bytes()).await?;
 
         w.write_all(&self.ammo_inventory_type.to_le_bytes()).await?;
@@ -651,9 +647,8 @@ impl SMSG_SPELL_STARTCastFlagsAMMO {
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.ammo_display_id.to_le_bytes()).await?;
 
         w.write_all(&self.ammo_inventory_type.to_le_bytes()).await?;

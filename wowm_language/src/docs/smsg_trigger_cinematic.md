@@ -1,4 +1,3 @@
-# SMSG_TRIGGER_CINEMATIC
 ## Client Version 1.12
 
 ### Wowm Representation

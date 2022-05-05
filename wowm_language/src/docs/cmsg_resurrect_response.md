@@ -1,4 +1,3 @@
-# CMSG_RESURRECT_RESPONSE
 ## Client Version 1.12
 
 ### Wowm Representation

@@ -963,12 +963,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.pin_grid_seed.to_le_bytes()).await?;
 
         for i in self.pin_salt.iter() {
@@ -978,9 +974,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.pin_grid_seed.to_le_bytes()).await?;
 
         for i in self.pin_salt.iter() {
@@ -1036,12 +1031,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.unknown0.to_le_bytes()).await?;
 
         w.write_all(&self.unknown1.to_le_bytes()).await?;
@@ -1055,9 +1046,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.unknown0.to_le_bytes()).await?;
 
         w.write_all(&self.unknown1.to_le_bytes()).await?;
@@ -1097,20 +1087,15 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.unknown5.to_le_bytes()).await?;
 
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.unknown5.to_le_bytes()).await?;
 
         Ok(())

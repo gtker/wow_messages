@@ -1,4 +1,3 @@
-# CMSG_CANCEL_AURA
 ## Client Version 1.12
 
 ### Wowm Representation

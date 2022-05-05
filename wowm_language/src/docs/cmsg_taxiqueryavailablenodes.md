@@ -1,4 +1,3 @@
-# CMSG_TAXIQUERYAVAILABLENODES
 ## Client Version 1.12
 
 ### Wowm Representation

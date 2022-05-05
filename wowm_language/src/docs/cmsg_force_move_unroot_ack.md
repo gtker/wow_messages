@@ -1,4 +1,3 @@
-# CMSG_FORCE_MOVE_UNROOT_ACK
 ## Client Version 1.12
 
 ### Wowm Representation

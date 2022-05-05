@@ -1,4 +1,3 @@
-# CMSG_QUESTLOG_REMOVE_QUEST
 ## Client Version 1.12
 
 ### Wowm Representation

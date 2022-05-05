@@ -641,20 +641,15 @@ impl RealmRealmFlagSPECIFY_BUILD {
         Ok(())
     }
 
-}
-
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-impl RealmRealmFlagSPECIFY_BUILD {
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.version.tokio_write(w).await?;
 
         Ok(())
     }
 
-
     #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.version.astd_write(w).await?;
 
         Ok(())

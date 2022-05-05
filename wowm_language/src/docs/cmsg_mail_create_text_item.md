@@ -1,4 +1,3 @@
-# CMSG_MAIL_CREATE_TEXT_ITEM
 ## Client Version 1.12
 
 ### Wowm Representation

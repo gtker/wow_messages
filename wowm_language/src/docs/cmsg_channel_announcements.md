@@ -1,4 +1,3 @@
-# CMSG_CHANNEL_ANNOUNCEMENTS
 ## Client Version 1.12
 
 ### Wowm Representation

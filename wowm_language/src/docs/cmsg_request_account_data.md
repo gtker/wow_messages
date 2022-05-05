@@ -1,4 +1,3 @@
-# CMSG_REQUEST_ACCOUNT_DATA
 ## Client Version 1.12
 
 ### Wowm Representation

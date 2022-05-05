@@ -1,4 +1,3 @@
-# SMSG_FEIGN_DEATH_RESISTED
 ## Client Version 1.12
 
 ### Wowm Representation

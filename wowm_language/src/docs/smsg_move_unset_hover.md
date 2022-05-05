@@ -1,4 +1,3 @@
-# SMSG_MOVE_UNSET_HOVER
 ## Client Version 1.12
 
 ### Wowm Representation

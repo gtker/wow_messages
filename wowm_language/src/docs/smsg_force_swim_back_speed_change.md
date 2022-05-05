@@ -1,4 +1,3 @@
-# SMSG_FORCE_SWIM_BACK_SPEED_CHANGE
 ## Client Version 1.12
 
 ### Wowm Representation

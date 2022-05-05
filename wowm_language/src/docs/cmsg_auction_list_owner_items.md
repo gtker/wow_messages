@@ -1,4 +1,3 @@
-# CMSG_AUCTION_LIST_OWNER_ITEMS
 ## Client Version 1.12
 
 ### Wowm Representation
