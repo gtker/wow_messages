@@ -98,7 +98,6 @@ pub struct RustOptional {
     name: String,
     ty: String,
     members: Vec<RustMember>,
-    constant_sized: bool,
 }
 
 impl RustOptional {
@@ -112,7 +111,7 @@ impl RustOptional {
         &self.members
     }
     pub fn constant_sized(&self) -> bool {
-        self.constant_sized
+        self.members().iter().all(|a| a.constant_sized())
     }
 }
 
@@ -121,7 +120,6 @@ pub struct RustObject {
     name: String,
     members: Vec<RustMember>,
     optional: Option<RustOptional>,
-    constant_sized: bool,
 
     tests: Vec<TestCase>,
 
@@ -149,7 +147,7 @@ impl RustObject {
         &self.file_info
     }
     pub fn constant_sized(&self) -> bool {
-        self.constant_sized
+        self.members().iter().all(|a| a.constant_sized())
     }
 }
 
@@ -183,7 +181,6 @@ pub fn create_if_statement(
             &mut if_enumerator_members,
             current_scope,
             &mut None,
-            &mut false,
         );
     }
 
@@ -197,7 +194,6 @@ pub fn create_if_statement(
             &mut else_enumerator_members,
             current_scope,
             &mut None,
-            &mut false,
         );
     }
 
@@ -283,7 +279,6 @@ pub fn create_struct_member(
     current_scope: &mut Vec<RustMember>,
     parent_scope: &mut Vec<RustMember>,
     optional: &mut Option<RustOptional>,
-    constant_sized: &mut bool,
 ) {
     match m {
         StructMember::Definition(d) => {
@@ -300,13 +295,11 @@ pub fn create_struct_member(
                 }
                 Type::Guid => RustType::BuiltIn("Guid".to_string()),
                 Type::PackedGuid => {
-                    *constant_sized = false;
                     definition_constantly_sized = false;
                     RustType::BuiltIn("Guid".to_string())
                 }
                 Type::FloatingPoint(f) => RustType::Floating(f.clone()),
                 Type::CString | Type::String { .. } => {
-                    *constant_sized = false;
                     definition_constantly_sized = false;
                     RustType::String
                 }
@@ -314,7 +307,6 @@ pub fn create_struct_member(
                     match array.size() {
                         ArraySize::Fixed(_) => {}
                         ArraySize::Variable(_) | ArraySize::Endless => {
-                            *constant_sized = false;
                             definition_constantly_sized = false;
                         }
                     }
@@ -324,12 +316,10 @@ pub fn create_struct_member(
                         ArrayType::Complex(complex) => {
                             let c = o.get_container(complex, tags);
                             if !c.has_constant_size(o) {
-                                *constant_sized = false;
                                 definition_constantly_sized = false;
                             }
                         }
                         ArrayType::PackedGuid | ArrayType::CString => {
-                            *constant_sized = false;
                             definition_constantly_sized = false;
                         }
                     }
@@ -374,7 +364,6 @@ pub fn create_struct_member(
                         ObjectType::Struct => {
                             let c = o.get_container(s, tags);
                             if !c.has_constant_size(o) {
-                                *constant_sized = false;
                                 definition_constantly_sized = false;
                             }
 
@@ -386,12 +375,10 @@ pub fn create_struct_member(
                     }
                 }
                 Type::UpdateMask => {
-                    *constant_sized = false;
                     definition_constantly_sized = false;
                     RustType::BuiltIn("UpdateMask".to_string())
                 }
                 Type::AuraMask => {
-                    *constant_sized = false;
                     definition_constantly_sized = false;
                     RustType::BuiltIn("AuraMask".to_string())
                 }
@@ -408,7 +395,6 @@ pub fn create_struct_member(
             });
         }
         StructMember::IfStatement(statement) => {
-            *constant_sized = false;
             create_if_statement(
                 statement,
                 struct_ty_name,
@@ -419,11 +405,8 @@ pub fn create_struct_member(
             );
         }
         StructMember::OptionalStatement(option) => {
-            *constant_sized = false;
-
             let mut members = Vec::new();
 
-            let mut constant_sized = true;
             for i in option.members() {
                 create_struct_member(
                     i,
@@ -433,7 +416,6 @@ pub fn create_struct_member(
                     &mut members,
                     current_scope,
                     &mut None,
-                    &mut constant_sized,
                 );
             }
 
@@ -445,7 +427,6 @@ pub fn create_struct_member(
                     ty = option.name()
                 ),
                 members,
-                constant_sized,
             });
         }
     }
@@ -455,19 +436,8 @@ pub fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
     let mut v = Vec::new();
     let mut optional = None;
 
-    let mut constant_sized = true;
-
     for m in e.fields() {
-        create_struct_member(
-            m,
-            e.name(),
-            e.tags(),
-            o,
-            &mut v,
-            &mut vec![],
-            &mut optional,
-            &mut constant_sized,
-        );
+        create_struct_member(m, e.name(), e.tags(), o, &mut v, &mut vec![], &mut optional);
     }
 
     for m in &mut v {
@@ -478,7 +448,6 @@ pub fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
         name: e.name().to_string(),
         members: v,
         optional,
-        constant_sized,
         tests: e.tests().to_vec(),
         tags: e.tags().clone(),
         file_info: e.file_info().clone(),
