@@ -8,7 +8,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub enum AuraType {
+pub(crate) enum AuraType {
     NONE,
     BIND_SIGHT,
     MOD_POSSESS,

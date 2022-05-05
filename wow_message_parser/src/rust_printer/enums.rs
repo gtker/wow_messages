@@ -38,7 +38,11 @@ fn declaration(s: &mut Writer, e: &Definer) {
     print_wowm_definition("enum", s, e);
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]");
-    s.new_enum(e.name(), |s| {
+    let visibility = match e.only_used_in_if() {
+        true => "pub(crate)",
+        false => "pub",
+    };
+    s.new_enum(visibility, e.name(), |s| {
         for field in e.fields() {
             s.wln(format!("{},", field.name()));
         }
@@ -380,7 +384,7 @@ fn print_errors(s: &mut Writer, e: &Definer) {
     });
 
     s.wln("#[derive(Debug)]");
-    s.new_enum(format!("{}Error", e.name()), |s| {
+    s.new_enum("pub", format!("{}Error", e.name()), |s| {
         s.wln("Read(std::io::Error),");
         s.wln(format!("TryFrom(TryFrom{}Error),", e.name()));
     });

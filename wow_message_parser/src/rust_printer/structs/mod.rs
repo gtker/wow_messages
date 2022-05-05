@@ -203,7 +203,7 @@ fn print_errors(s: &mut Writer, e: &Container, o: &Objects) {
 
 fn print_general_error(s: &mut Writer, e: &Container, o: &Objects) {
     s.wln("#[derive(Debug)]");
-    s.new_enum(format!("{name}Error", name = e.name()), |s| {
+    s.new_enum("pub", format!("{name}Error", name = e.name()), |s| {
         s.wln("Io(std::io::Error),");
         if e.contains_string_or_cstring() {
             s.wln("String(std::string::FromUtf8Error),");

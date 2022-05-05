@@ -307,6 +307,7 @@ fn print_types_for_new_flag_flag_elseif(
 
     s.wln("#[derive(Debug, PartialEq, Clone)]");
     s.new_enum(
+        "pub",
         format!(
             "{new_ty_name}{enumerator}",
             new_ty_name = ne.new_ty_name(),
@@ -697,7 +698,7 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
 
 fn print_new_enum_declaration(s: &mut Writer, ce: &ComplexEnum) {
     s.wln("#[derive(Debug, PartialEq, Clone)]");
-    s.new_enum(ce.name(), |s| {
+    s.new_enum("pub", ce.name(), |s| {
         for f in ce.fields() {
             s.wln(format!(
                 "{field_name}{extra}",

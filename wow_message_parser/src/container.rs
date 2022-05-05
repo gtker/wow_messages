@@ -54,7 +54,123 @@ pub struct Container {
     rust_object_view: Option<RustObject>,
 }
 
+#[derive(Debug, Eq, PartialEq, Clone)]
+pub enum DefinerUsage {
+    NotUsed,
+    NotInIf,
+    InIf,
+}
+
 impl Container {
+    pub fn get_variable_name_of_definer_ty(&self, ty_name: &str) -> Option<String> {
+        fn inner(m: &StructMember, ty_name: &str) -> Option<String> {
+            match m {
+                StructMember::Definition(d) => match d.ty() {
+                    Type::Identifier { s, .. } => {
+                        if s == ty_name {
+                            return Some(d.name().to_string());
+                        }
+                    }
+                    _ => {}
+                },
+                StructMember::IfStatement(statement) => {
+                    for m in statement.all_members() {
+                        if let Some(t) = inner(m, ty_name) {
+                            return Some(t);
+                        }
+                    }
+                }
+                StructMember::OptionalStatement(optional) => {
+                    for m in optional.members() {
+                        if let Some(t) = inner(m, ty_name) {
+                            return Some(t);
+                        }
+                    }
+                }
+            }
+
+            None
+        }
+
+        for m in self.fields() {
+            if let Some(t) = inner(m, ty_name) {
+                return Some(t);
+            }
+        }
+
+        None
+    }
+
+    pub fn contains_definer(&self, ty_name: &str) -> DefinerUsage {
+        fn inner(m: &StructMember, ty_name: &str, variable_name: &str) -> DefinerUsage {
+            match m {
+                StructMember::Definition(d) => match d.ty() {
+                    Type::Identifier { s, .. } => {
+                        if s == ty_name {
+                            return DefinerUsage::NotInIf;
+                        }
+                    }
+                    _ => {}
+                },
+                StructMember::IfStatement(statement) => {
+                    if statement.name() == variable_name {
+                        return DefinerUsage::InIf;
+                    }
+
+                    let mut not_in_if = false;
+                    for m in statement.all_members() {
+                        match inner(m, ty_name, variable_name) {
+                            DefinerUsage::NotUsed => {}
+                            DefinerUsage::NotInIf => not_in_if = true,
+                            DefinerUsage::InIf => return DefinerUsage::InIf,
+                        }
+                    }
+
+                    if not_in_if {
+                        return DefinerUsage::NotInIf;
+                    }
+                }
+                StructMember::OptionalStatement(optional) => {
+                    let mut not_in_if = false;
+
+                    for m in optional.members() {
+                        match inner(m, ty_name, variable_name) {
+                            DefinerUsage::NotUsed => {}
+                            DefinerUsage::NotInIf => not_in_if = true,
+                            DefinerUsage::InIf => return DefinerUsage::InIf,
+                        }
+                    }
+
+                    if not_in_if {
+                        return DefinerUsage::NotInIf;
+                    }
+                }
+            }
+
+            DefinerUsage::NotUsed
+        }
+
+        let variable_name = self.get_variable_name_of_definer_ty(ty_name);
+
+        if let Some(variable_name) = variable_name {
+            let mut not_in_if = false;
+
+            for m in self.fields() {
+                match inner(m, ty_name, &variable_name) {
+                    DefinerUsage::NotUsed => {}
+                    DefinerUsage::NotInIf => not_in_if = true,
+                    DefinerUsage::InIf => return DefinerUsage::InIf,
+                }
+            }
+
+            if not_in_if {
+                return DefinerUsage::NotInIf;
+            }
+        }
+
+        DefinerUsage::NotUsed
+    }
+
     pub fn append_tests(&mut self, mut t: Vec<TestCase>) {
         self.tests.append(&mut t);
     }

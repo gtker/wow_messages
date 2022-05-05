@@ -8,7 +8,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub enum SimpleSpellCastResult {
+pub(crate) enum SimpleSpellCastResult {
     SUCCESS,
     FAILURE,
 }

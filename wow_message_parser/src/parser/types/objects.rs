@@ -1,4 +1,4 @@
-use crate::container::{Container, StructMember};
+use crate::container::{Container, DefinerUsage, StructMember};
 use crate::file_info::FileInfo;
 use crate::parser::enumerator::Definer;
 use crate::parser::stats::stats_for_1_12;
@@ -303,6 +303,29 @@ impl Objects {
         }
     }
 
+    fn get_definer_objects_used_in(
+        containers: &[Container],
+        e: &Definer,
+    ) -> Vec<(String, DefinerUsage)> {
+        let mut v = Vec::new();
+
+        for c in containers {
+            if !e.tags().has_version_intersections(c.tags()) {
+                continue;
+            }
+
+            let ty = match c.contains_definer(e.name()) {
+                DefinerUsage::NotUsed => continue,
+                DefinerUsage::NotInIf => DefinerUsage::NotInIf,
+                DefinerUsage::InIf => DefinerUsage::InIf,
+            };
+
+            v.push((e.name().to_string(), ty));
+        }
+
+        v
+    }
+
     pub fn check_values(&mut self) {
         let c = self.clone();
         for s in &mut self.tests {
@@ -316,6 +339,12 @@ impl Objects {
 
             let t = Self::get_tests_for_object(&mut tests, s.name(), s.tags());
             s.append_tests(t);
+        }
+
+        let containers = self.all_containers().cloned().collect::<Vec<_>>();
+        for e in self.all_definers_mut() {
+            let objects_used_in = Self::get_definer_objects_used_in(&containers, e);
+            e.set_objects_used_in(objects_used_in);
         }
 
         Self::check_versions(self.all_containers(), self.all_definers());

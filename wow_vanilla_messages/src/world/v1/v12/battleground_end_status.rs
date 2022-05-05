@@ -8,7 +8,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub enum BattlegroundEndStatus {
+pub(crate) enum BattlegroundEndStatus {
     NOT_ENDED,
     ENDED,
 }

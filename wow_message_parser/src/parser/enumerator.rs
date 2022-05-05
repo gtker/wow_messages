@@ -1,3 +1,4 @@
+use crate::container::DefinerUsage;
 use crate::file_info::FileInfo;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::IntegerType;
@@ -100,6 +101,7 @@ pub struct Definer {
     self_value: Option<SelfValueDefinerField>,
     basic_type: IntegerType,
     extra_key_value: Tags,
+    objects_used_in: Option<Vec<(String, DefinerUsage)>>,
     file_info: FileInfo,
 }
 
@@ -118,8 +120,29 @@ impl Definer {
             self_value,
             basic_type,
             extra_key_value: extras,
+            objects_used_in: None,
             file_info,
         }
+    }
+
+    pub fn only_used_in_if(&self) -> bool {
+        for v in self.objects_used_in() {
+            match v.1 {
+                DefinerUsage::NotInIf => return false,
+                DefinerUsage::InIf => {}
+                _ => unreachable!(),
+            }
+        }
+
+        true
+    }
+
+    pub fn objects_used_in(&self) -> &[(String, DefinerUsage)] {
+        self.objects_used_in.as_ref().unwrap()
+    }
+
+    pub fn set_objects_used_in(&mut self, objects_used_in: Vec<(String, DefinerUsage)>) {
+        self.objects_used_in = Some(objects_used_in);
     }
 
     pub fn name(&self) -> &str {

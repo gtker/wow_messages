@@ -8,7 +8,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub enum CastFailureReason {
+pub(crate) enum CastFailureReason {
     AFFECTING_COMBAT,
     ALREADY_AT_FULL_HEALTH,
     ALREADY_AT_FULL_POWER,

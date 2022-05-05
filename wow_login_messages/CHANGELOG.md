@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+* BREAKING: `SecurifyFlag` enum. This was never used except in the `CMD_AUTH_LOGON_PROOF_ClientSecurityFlag` version.
+
 ### Fixed
 
 ### Security

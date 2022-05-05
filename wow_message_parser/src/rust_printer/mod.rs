@@ -110,10 +110,19 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn new_enum<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, name: S, f: F) {
+    pub fn new_enum(
+        &mut self,
+        visibility: impl AsRef<str>,
+        name: impl AsRef<str>,
+        f: impl Fn(&mut Self),
+    ) {
         self.add_import(&name);
 
-        self.open_curly(format!("pub enum {}", name.as_ref()));
+        self.open_curly(format!(
+            "{visibility} enum {name}",
+            visibility = visibility.as_ref(),
+            name = name.as_ref()
+        ));
 
         f(self);
 

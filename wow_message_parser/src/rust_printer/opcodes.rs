@@ -125,7 +125,7 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
 
 pub fn definition(s: &mut Writer, v: &[&Container], ty: &str) {
     s.wln("#[derive(Debug)]");
-    s.new_enum(format!("{t}OpcodeMessage", t = ty), |s| {
+    s.new_enum("pub", format!("{t}OpcodeMessage", t = ty), |s| {
         for &e in v {
             s.wln(format!(
                 "{enum_name}({name}),",
@@ -284,7 +284,7 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
 
 pub fn print_error(s: &mut Writer, v: &[&Container], ty: &str, int_ty: &str) {
     s.wln("#[derive(Debug)]");
-    s.new_enum(format!("{t}OpcodeMessageError", t = ty), |s| {
+    s.new_enum("pub", format!("{t}OpcodeMessageError", t = ty), |s| {
         s.wln("Io(std::io::Error),");
         s.wln(format!("InvalidOpcode({int_ty}),", int_ty = int_ty));
         for e in v {
@@ -375,7 +375,7 @@ pub fn opcode_enum_world(
     container_type: ContainerType,
 ) {
     s.wln("#[derive(Debug)]");
-    s.new_enum(format!("{t}Opcode", t = ty), |s| {
+    s.new_enum("pub", format!("{t}Opcode", t = ty), |s| {
         for e in v {
             s.wln(format!(
                 "{enum_name},",
@@ -460,7 +460,7 @@ pub fn opcode_enum_world(
     );
 
     s.wln("#[derive(Debug)]");
-    s.new_enum(format!("{t}OpcodeError", t = ty), |s| {
+    s.new_enum("pub", format!("{t}OpcodeError", t = ty), |s| {
         s.wln("Io(std::io::Error),");
         s.wln(format!("InvalidOpcode({int_ty}),", int_ty = int_ty));
     });
@@ -494,7 +494,7 @@ pub fn opcode_enum_world(
 
 pub fn opcode_enum_login(s: &mut Writer, v: &[&Container], ty: &str) {
     s.wln("#[derive(Debug)]");
-    s.new_enum(format!("{t}Opcode", t = ty), |s| {
+    s.new_enum("pub", format!("{t}Opcode", t = ty), |s| {
         for e in v {
             s.wln(format!(
                 "{enum_name},",
@@ -576,7 +576,7 @@ pub fn opcode_enum_login(s: &mut Writer, v: &[&Container], ty: &str) {
     );
 
     s.wln("#[derive(Debug)]");
-    s.new_enum(format!("{t}OpcodeError", t = ty), |s| {
+    s.new_enum("pub", format!("{t}OpcodeError", t = ty), |s| {
         s.wln("Io(std::io::Error),");
         s.wln("InvalidOpcode(u8),");
     });
