@@ -28,6 +28,7 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Client {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // wiping_npc: Guid
         let wiping_npc = Guid::read(r)?;
@@ -37,6 +38,7 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Client {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // wiping_npc: Guid
         self.wiping_npc.write(w)?;

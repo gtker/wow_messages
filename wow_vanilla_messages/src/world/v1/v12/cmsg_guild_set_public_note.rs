@@ -27,6 +27,7 @@ impl MessageBody for CMSG_GUILD_SET_PUBLIC_NOTE {
 
     type Error = CMSG_GUILD_SET_PUBLIC_NOTEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // player_name: CString
         let player_name = crate::util::read_c_string_to_vec(r)?;
@@ -42,6 +43,7 @@ impl MessageBody for CMSG_GUILD_SET_PUBLIC_NOTE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player_name: CString
         w.write_all(self.player_name.as_bytes())?;

@@ -26,11 +26,13 @@ impl MessageBody for CMSG_PLAYER_LOGOUT {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         Ok(Self {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         Ok(())
     }
@@ -79,6 +81,7 @@ mod test {
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMSG_PLAYER_LOGOUT0() {
         let raw: Vec<u8> = vec![ 0x00, 0x04, 0x4A, 0x00, 0x00, 0x00, ];
 

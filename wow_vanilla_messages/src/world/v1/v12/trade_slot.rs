@@ -31,6 +31,7 @@ pub struct TradeSlot {
 impl ReadableAndWritable for TradeSlot {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // trade_slot_number: u8
         let trade_slot_number = crate::util::read_u8_le(r)?;
@@ -92,6 +93,7 @@ impl ReadableAndWritable for TradeSlot {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // trade_slot_number: u8
         w.write_all(&self.trade_slot_number.to_le_bytes())?;

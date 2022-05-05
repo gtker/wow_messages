@@ -20,6 +20,7 @@ pub struct RaidInfo {
 impl ReadableAndWritable for RaidInfo {
     type Error = RaidInfoError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // map: Map
         let map = Map::read(r)?;
@@ -37,6 +38,7 @@ impl ReadableAndWritable for RaidInfo {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
         self.map.write(w)?;

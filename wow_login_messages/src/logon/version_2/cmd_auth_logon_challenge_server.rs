@@ -26,6 +26,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
     type Error = CMD_AUTH_LOGON_CHALLENGE_ServerError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // protocol_version: u8
         let _protocol_version = crate::util::read_u8_le(r)?;
@@ -96,6 +97,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
@@ -586,6 +588,7 @@ impl Default for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write(w)?;
@@ -606,6 +609,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u16_le(w)
@@ -623,6 +627,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
         a.astd_write_u16_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u16_be(w)
@@ -640,6 +645,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
         a.astd_write_u16_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u32_le(w)
@@ -657,6 +663,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
         a.astd_write_u32_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u32_be(w)
@@ -674,6 +681,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u64_le(w)
@@ -691,6 +699,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: LoginResult = self.into();
         a.write_u64_be(w)
@@ -796,6 +805,7 @@ mod test {
     use crate::logon::version_2::opcodes::ServerOpcodeMessage;
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_AUTH_LOGON_CHALLENGE_Server0() {
         let raw: Vec<u8> = vec![ 0x00, 0x00, 0x00, 0x49, 0xD8, 0xC2, 0xBC, 0x68,
              0x5C, 0x2B, 0xCE, 0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58,

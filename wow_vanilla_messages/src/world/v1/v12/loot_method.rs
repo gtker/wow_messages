@@ -23,12 +23,14 @@ pub enum LootMethod {
 impl ReadableAndWritable for LootMethod {
     type Error = LootMethodError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let a = crate::util::read_u8_le(r)?;
 
         Ok(a.try_into()?)
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.as_u8().to_le_bytes())?;
         Ok(())
@@ -63,6 +65,7 @@ impl ReadableAndWritable for LootMethod {
 }
 
 impl LootMethod {
+    #[cfg(feature = "sync")]
     pub fn read_u16_le<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, LootMethodError> {
         let a = crate::util::read_u16_le(r)?;
         Ok((a as u8).try_into()?)
@@ -80,6 +83,7 @@ impl LootMethod {
         Ok((a as u8).try_into()?)
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u16_le(w, self.as_u8() as u16)?;
         Ok(())
@@ -97,6 +101,7 @@ impl LootMethod {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn read_u16_be<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, LootMethodError> {
         let a = crate::util::read_u16_be(r)?;
         Ok((a as u8).try_into()?)
@@ -114,6 +119,7 @@ impl LootMethod {
         Ok((a as u8).try_into()?)
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u16_be(w, self.as_u8() as u16)?;
         Ok(())
@@ -131,6 +137,7 @@ impl LootMethod {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn read_u32_le<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, LootMethodError> {
         let a = crate::util::read_u32_le(r)?;
         Ok((a as u8).try_into()?)
@@ -148,6 +155,7 @@ impl LootMethod {
         Ok((a as u8).try_into()?)
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u32_le(w, self.as_u8() as u32)?;
         Ok(())
@@ -165,6 +173,7 @@ impl LootMethod {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn read_u32_be<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, LootMethodError> {
         let a = crate::util::read_u32_be(r)?;
         Ok((a as u8).try_into()?)
@@ -182,6 +191,7 @@ impl LootMethod {
         Ok((a as u8).try_into()?)
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u32_be(w, self.as_u8() as u32)?;
         Ok(())
@@ -199,6 +209,7 @@ impl LootMethod {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn read_u64_le<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, LootMethodError> {
         let a = crate::util::read_u64_le(r)?;
         Ok((a as u8).try_into()?)
@@ -216,6 +227,7 @@ impl LootMethod {
         Ok((a as u8).try_into()?)
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u64_le(w, self.as_u8() as u64)?;
         Ok(())
@@ -233,6 +245,7 @@ impl LootMethod {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn read_u64_be<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, LootMethodError> {
         let a = crate::util::read_u64_be(r)?;
         Ok((a as u8).try_into()?)
@@ -250,6 +263,7 @@ impl LootMethod {
         Ok((a as u8).try_into()?)
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u64_be(w, self.as_u8() as u64)?;
         Ok(())

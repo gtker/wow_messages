@@ -18,6 +18,7 @@ pub struct QuestDetailsEmote {
 impl ReadableAndWritable for QuestDetailsEmote {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // emote: u32
         let emote = crate::util::read_u32_le(r)?;
@@ -31,6 +32,7 @@ impl ReadableAndWritable for QuestDetailsEmote {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // emote: u32
         w.write_all(&self.emote.to_le_bytes())?;

@@ -30,6 +30,7 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
 
     type Error = SMSG_LOGOUT_RESPONSEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // reason: LogoutResult
         let reason = LogoutResult::read(r)?;
@@ -43,6 +44,7 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // reason: LogoutResult
         self.reason.write(w)?;
@@ -164,6 +166,7 @@ mod test {
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
     #[test]
+    #[cfg(feature = "sync")]
     fn SMSG_LOGOUT_RESPONSE0() {
         let raw: Vec<u8> = vec![ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00,
              0x01, ];

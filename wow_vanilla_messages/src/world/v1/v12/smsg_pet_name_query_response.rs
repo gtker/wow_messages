@@ -28,6 +28,7 @@ impl MessageBody for SMSG_PET_NAME_QUERY_RESPONSE {
 
     type Error = SMSG_PET_NAME_QUERY_RESPONSEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // pet_number: u32
         let pet_number = crate::util::read_u32_le(r)?;
@@ -46,6 +47,7 @@ impl MessageBody for SMSG_PET_NAME_QUERY_RESPONSE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;
@@ -189,6 +191,7 @@ mod test {
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
     #[test]
+    #[cfg(feature = "sync")]
     fn SMSG_PET_NAME_QUERY_RESPONSE0() {
         let raw: Vec<u8> = vec![ 0x00, 0x11, 0x53, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
              0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x00, 0xDE, 0xCA, 0xFA, 0x00, ];

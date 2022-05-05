@@ -27,6 +27,7 @@ impl MessageBody for MSG_QUERY_NEXT_MAIL_TIME_Server {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // unread_mails: f32
         let unread_mails = crate::util::read_f32_le(r)?;
@@ -35,6 +36,7 @@ impl MessageBody for MSG_QUERY_NEXT_MAIL_TIME_Server {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // unread_mails: f32
         w.write_all(&self.unread_mails.to_le_bytes())?;

@@ -30,6 +30,7 @@ impl MessageBody for SMSG_INSTANCE_RESET_FAILED {
 
     type Error = SMSG_INSTANCE_RESET_FAILEDError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // reason: InstanceResetFailedReason
         let reason = InstanceResetFailedReason::read(r)?;
@@ -43,6 +44,7 @@ impl MessageBody for SMSG_INSTANCE_RESET_FAILED {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // reason: InstanceResetFailedReason
         self.reason.write(w)?;

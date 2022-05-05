@@ -27,6 +27,7 @@ impl MessageBody for MSG_RAID_READY_CHECK_Server {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // optional state_check
         let current_size = {
@@ -52,6 +53,7 @@ impl MessageBody for MSG_RAID_READY_CHECK_Server {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // optional state_check
         if let Some(v) = &self.state_check {

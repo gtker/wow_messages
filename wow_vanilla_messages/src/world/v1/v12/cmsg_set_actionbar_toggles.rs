@@ -27,6 +27,7 @@ impl MessageBody for CMSG_SET_ACTIONBAR_TOGGLES {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // action_bar: u8
         let action_bar = crate::util::read_u8_le(r)?;
@@ -36,6 +37,7 @@ impl MessageBody for CMSG_SET_ACTIONBAR_TOGGLES {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // action_bar: u8
         w.write_all(&self.action_bar.to_le_bytes())?;

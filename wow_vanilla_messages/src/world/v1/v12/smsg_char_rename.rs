@@ -28,6 +28,7 @@ impl MessageBody for SMSG_CHAR_RENAME {
 
     type Error = SMSG_CHAR_RENAMEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // result: WorldResult
         let result = WorldResult::read(r)?;
@@ -134,6 +135,7 @@ impl MessageBody for SMSG_CHAR_RENAME {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // result: WorldResult
         self.result.write(w)?;
@@ -993,6 +995,7 @@ impl Default for SMSG_CHAR_RENAMEWorldResult {
 }
 
 impl SMSG_CHAR_RENAMEWorldResult {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: WorldResult = self.into();
         a.write(w)?;
@@ -1013,6 +1016,7 @@ impl SMSG_CHAR_RENAMEWorldResult {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: WorldResult = self.into();
         a.write_u32_be(w)
@@ -1030,6 +1034,7 @@ impl SMSG_CHAR_RENAMEWorldResult {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: WorldResult = self.into();
         a.write_u64_le(w)
@@ -1047,6 +1052,7 @@ impl SMSG_CHAR_RENAMEWorldResult {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: WorldResult = self.into();
         a.write_u64_be(w)

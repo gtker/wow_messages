@@ -21,6 +21,7 @@ pub struct NpcTextUpdate {
 impl ReadableAndWritable for NpcTextUpdate {
     type Error = NpcTextUpdateError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // probability: f32
         let probability = crate::util::read_f32_le(r)?;
@@ -50,6 +51,7 @@ impl ReadableAndWritable for NpcTextUpdate {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // probability: f32
         w.write_all(&self.probability.to_le_bytes())?;

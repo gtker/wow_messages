@@ -19,6 +19,7 @@ pub struct ChannelMember {
 impl ReadableAndWritable for ChannelMember {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -32,6 +33,7 @@ impl ReadableAndWritable for ChannelMember {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
         self.guid.write(w)?;

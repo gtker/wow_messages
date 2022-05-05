@@ -29,6 +29,7 @@ impl MessageBody for CMSG_SET_TRADE_ITEM {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // trade_slot: u8
         let trade_slot = crate::util::read_u8_le(r)?;
@@ -46,6 +47,7 @@ impl MessageBody for CMSG_SET_TRADE_ITEM {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // trade_slot: u8
         w.write_all(&self.trade_slot.to_le_bytes())?;

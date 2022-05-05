@@ -24,6 +24,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // client_public_key: u8[32]
         let mut client_public_key = [0_u8; 32];
@@ -54,6 +55,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
@@ -242,6 +244,7 @@ mod test {
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_AUTH_LOGON_PROOF_Client0() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
@@ -306,6 +309,7 @@ mod test {
     }
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_AUTH_LOGON_PROOF_Client1() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
@@ -359,6 +363,7 @@ mod test {
     }
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_AUTH_LOGON_PROOF_Client2() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,

@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+* BREAKING: The synchronous Read/Write functions are now behind the `sync` feature flag. This is in order to reduce compile times when only using `tokio`/`async_std`. If using either of those it's highly unlikely that the synchronous versions will be needed.
 * `unknown5` for `CMD_AUTH_LOGON_CHALLENGE_Server` is no longer constantly set to 1. For data that is not 100% known it is better for the emulators themselves to experiment and constantly set values.
 
 ### Deprecated

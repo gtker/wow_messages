@@ -27,6 +27,7 @@ impl MessageBody for SMSG_LOOT_MONEY_NOTIFY {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // amount: u32
         let amount = crate::util::read_u32_le(r)?;
@@ -36,6 +37,7 @@ impl MessageBody for SMSG_LOOT_MONEY_NOTIFY {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // amount: u32
         w.write_all(&self.amount.to_le_bytes())?;

@@ -28,6 +28,7 @@ impl MessageBody for CMSG_STANDSTATECHANGE {
 
     type Error = CMSG_STANDSTATECHANGEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // animation_state: UnitStandState
         let animation_state = UnitStandState::read_u32_le(r)?;
@@ -37,6 +38,7 @@ impl MessageBody for CMSG_STANDSTATECHANGE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // animation_state: UnitStandState
         self.animation_state.write_u32_le(w)?;

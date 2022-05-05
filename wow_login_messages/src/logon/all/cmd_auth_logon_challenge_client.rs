@@ -36,6 +36,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
 impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
     type Error = CMD_AUTH_LOGON_CHALLENGE_ClientError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // protocol_version: u8
         let protocol_version = crate::util::read_u8_le(r)?;
@@ -85,6 +86,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
@@ -384,6 +386,7 @@ mod test {
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_AUTH_LOGON_CHALLENGE_Client0() {
         let raw: Vec<u8> = vec![ 0x00, 0x03, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,
              0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,

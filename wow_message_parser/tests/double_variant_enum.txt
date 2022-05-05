@@ -17,6 +17,7 @@ pub struct DoubleVariantEnum {
 impl ReadableAndWritable for DoubleVariantEnum {
     type Error = DoubleVariantEnumError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // enum: SimpleEnum
         let enum = SimpleEnum::read(r)?;
@@ -46,6 +47,7 @@ impl ReadableAndWritable for DoubleVariantEnum {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // enum: SimpleEnum
         self.enum.write(w)?;
@@ -270,6 +272,7 @@ impl Default for DoubleVariantEnumSimpleEnum {
 }
 
 impl DoubleVariantEnumSimpleEnum {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.write(w)?;
@@ -290,6 +293,7 @@ impl DoubleVariantEnumSimpleEnum {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.write_u16_le(w)
@@ -307,6 +311,7 @@ impl DoubleVariantEnumSimpleEnum {
         a.astd_write_u16_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.write_u16_be(w)
@@ -324,6 +329,7 @@ impl DoubleVariantEnumSimpleEnum {
         a.astd_write_u16_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.write_u32_le(w)
@@ -341,6 +347,7 @@ impl DoubleVariantEnumSimpleEnum {
         a.astd_write_u32_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.write_u32_be(w)
@@ -358,6 +365,7 @@ impl DoubleVariantEnumSimpleEnum {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.write_u64_le(w)
@@ -375,6 +383,7 @@ impl DoubleVariantEnumSimpleEnum {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleEnum = self.into();
         a.write_u64_be(w)

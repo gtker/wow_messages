@@ -20,6 +20,7 @@ pub struct TelemetryKey {
 impl ReadableAndWritable for TelemetryKey {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // unknown1: u16
         let unknown1 = crate::util::read_u16_le(r)?;
@@ -43,6 +44,7 @@ impl ReadableAndWritable for TelemetryKey {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // unknown1: u16
         w.write_all(&self.unknown1.to_le_bytes())?;

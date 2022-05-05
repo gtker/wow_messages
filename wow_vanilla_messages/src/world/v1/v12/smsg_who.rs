@@ -28,6 +28,7 @@ impl MessageBody for SMSG_WHO {
 
     type Error = SMSG_WHOError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // listed_players: u32
         let listed_players = crate::util::read_u32_le(r)?;
@@ -47,6 +48,7 @@ impl MessageBody for SMSG_WHO {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // listed_players: u32
         w.write_all(&(self.players.len() as u32).to_le_bytes())?;

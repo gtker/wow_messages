@@ -44,6 +44,7 @@ pub const ASYNC_TRAIT_IMPORT: &str = "use async_trait::async_trait;";
 pub const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
 pub const ASYNC_STD_IMPORT: &str = "use async_std::io::{ReadExt, WriteExt};";
 
+const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_ANY: &str = "#[cfg(any(feature = \"async_tokio\", feature = \"async_std\"))]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"async_tokio\")]";
 const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async_std\")]";
@@ -220,9 +221,7 @@ impl Writer {
         self.newline();
 
         for it in ImplType::types() {
-            if it != ImplType::Std {
-                self.wln(it.cfg());
-            }
+            self.wln(it.cfg());
             self.open_curly(
                 format!("{func}fn {prefix}read_body<R: {read}>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error>",
                         func = it.func(),
@@ -232,9 +231,7 @@ impl Writer {
             read_function(self, it);
             self.closing_curly_newline();
 
-            if it != ImplType::Std {
-                self.wln(it.cfg());
-            }
+            self.wln(it.cfg());
             self.open_curly(format!("{func}fn {prefix}write_body<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", func = it.func(), prefix = it.prefix(), write = it.write()));
             write_function(self, it);
             self.closing_curly_newline();
@@ -267,9 +264,7 @@ impl Writer {
         self.newline();
 
         for it in ImplType::types() {
-            if it != ImplType::Std {
-                self.wln(it.cfg());
-            }
+            self.wln(it.cfg());
             self.open_curly(format!(
                 "{func}fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, Self::Error>",
                 func = it.func(),
@@ -279,9 +274,7 @@ impl Writer {
             read_function(self, it);
             self.closing_curly_newline();
 
-            if it != ImplType::Std {
-                self.wln(it.cfg());
-            }
+            self.wln(it.cfg());
             self.open_curly(format!("{func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
                                     func = it.func(),
                                     prefix = it.prefix(),
@@ -338,6 +331,7 @@ impl Writer {
         return_type: S1,
         f: F,
     ) {
+        self.wln(CFG_SYNC);
         self.open_curly(format!(
             "pub fn {}{} -> {}",
             name.as_ref(),
@@ -679,7 +673,7 @@ impl ImplType {
 
     pub fn cfg(&self) -> &str {
         match self {
-            ImplType::Std => "",
+            ImplType::Std => CFG_SYNC,
             ImplType::Tokio => CFG_ASYNC_TOKIO,
             ImplType::AsyncStd => CFG_ASYNC_ASYNC_STD,
         }

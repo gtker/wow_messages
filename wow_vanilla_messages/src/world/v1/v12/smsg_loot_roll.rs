@@ -36,6 +36,7 @@ impl MessageBody for SMSG_LOOT_ROLL {
 
     type Error = SMSG_LOOT_ROLLError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // creature_guid: Guid
         let creature_guid = Guid::read(r)?;
@@ -73,6 +74,7 @@ impl MessageBody for SMSG_LOOT_ROLL {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // creature_guid: Guid
         self.creature_guid.write(w)?;

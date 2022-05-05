@@ -29,6 +29,7 @@ impl MessageBody for SMSG_SET_PCT_SPELL_MODIFIER {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // eff: u8
         let eff = crate::util::read_u8_le(r)?;
@@ -46,6 +47,7 @@ impl MessageBody for SMSG_SET_PCT_SPELL_MODIFIER {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // eff: u8
         w.write_all(&self.eff.to_le_bytes())?;

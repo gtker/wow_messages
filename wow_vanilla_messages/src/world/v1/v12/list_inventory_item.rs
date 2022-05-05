@@ -23,6 +23,7 @@ pub struct ListInventoryItem {
 impl ReadableAndWritable for ListInventoryItem {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // item_stack_count: u32
         let item_stack_count = crate::util::read_u32_le(r)?;
@@ -56,6 +57,7 @@ impl ReadableAndWritable for ListInventoryItem {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // item_stack_count: u32
         w.write_all(&self.item_stack_count.to_le_bytes())?;

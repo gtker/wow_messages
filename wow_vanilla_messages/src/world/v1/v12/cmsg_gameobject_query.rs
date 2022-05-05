@@ -29,6 +29,7 @@ impl MessageBody for CMSG_GAMEOBJECT_QUERY {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // entry_id: u32
         let entry_id = crate::util::read_u32_le(r)?;
@@ -42,6 +43,7 @@ impl MessageBody for CMSG_GAMEOBJECT_QUERY {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // entry_id: u32
         w.write_all(&self.entry_id.to_le_bytes())?;

@@ -31,6 +31,7 @@ impl MessageBody for SMSG_PVP_CREDIT {
 
     type Error = SMSG_PVP_CREDITError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // honor_points: u32
         let honor_points = crate::util::read_u32_le(r)?;
@@ -48,6 +49,7 @@ impl MessageBody for SMSG_PVP_CREDIT {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // honor_points: u32
         w.write_all(&self.honor_points.to_le_bytes())?;

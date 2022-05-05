@@ -30,6 +30,7 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
 
     type Error = MSG_PVP_LOG_DATA_ServerError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // status: BattlegroundEndStatus
         let status = BattlegroundEndStatus::read(r)?;
@@ -61,6 +62,7 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // status: BattlegroundEndStatus
         self.status.write(w)?;
@@ -303,6 +305,7 @@ impl Default for MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
 }
 
 impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.write(w)?;
@@ -323,6 +326,7 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.write_u16_le(w)
@@ -340,6 +344,7 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
         a.astd_write_u16_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.write_u16_be(w)
@@ -357,6 +362,7 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
         a.astd_write_u16_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.write_u32_le(w)
@@ -374,6 +380,7 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
         a.astd_write_u32_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.write_u32_be(w)
@@ -391,6 +398,7 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.write_u64_le(w)
@@ -408,6 +416,7 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: BattlegroundEndStatus = self.into();
         a.write_u64_be(w)

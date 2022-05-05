@@ -30,6 +30,7 @@ impl MessageBody for CMSG_BUG {
 
     type Error = CMSG_BUGError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // suggestion: u32
         let suggestion = crate::util::read_u32_le(r)?;
@@ -57,6 +58,7 @@ impl MessageBody for CMSG_BUG {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // suggestion: u32
         w.write_all(&self.suggestion.to_le_bytes())?;

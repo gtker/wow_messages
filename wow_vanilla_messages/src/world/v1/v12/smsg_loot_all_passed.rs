@@ -32,6 +32,7 @@ impl MessageBody for SMSG_LOOT_ALL_PASSED {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // looted_target_guid: Guid
         let looted_target_guid = Guid::read(r)?;
@@ -57,6 +58,7 @@ impl MessageBody for SMSG_LOOT_ALL_PASSED {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // looted_target_guid: Guid
         self.looted_target_guid.write(w)?;

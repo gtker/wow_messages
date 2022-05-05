@@ -19,6 +19,7 @@ pub struct GroupListMember {
 impl ReadableAndWritable for GroupListMember {
     type Error = GroupListMemberError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
@@ -37,6 +38,7 @@ impl ReadableAndWritable for GroupListMember {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;

@@ -19,6 +19,7 @@ pub struct GossipItem {
 impl ReadableAndWritable for GossipItem {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // id: u32
         let id = crate::util::read_u32_le(r)?;
@@ -36,6 +37,7 @@ impl ReadableAndWritable for GossipItem {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;

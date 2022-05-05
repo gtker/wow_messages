@@ -27,6 +27,7 @@ impl MessageBody for SMSG_MAIL_LIST_RESULT {
 
     type Error = SMSG_MAIL_LIST_RESULTError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // amount_of_mails: u8
         let amount_of_mails = crate::util::read_u8_le(r)?;
@@ -42,6 +43,7 @@ impl MessageBody for SMSG_MAIL_LIST_RESULT {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // amount_of_mails: u8
         w.write_all(&(self.mails.len() as u8).to_le_bytes())?;

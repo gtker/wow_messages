@@ -38,6 +38,7 @@ impl MessageBody for SMSG_LEVELUP_INFO {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // new_level: u32
         let new_level = crate::util::read_u32_le(r)?;
@@ -91,6 +92,7 @@ impl MessageBody for SMSG_LEVELUP_INFO {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // new_level: u32
         w.write_all(&self.new_level.to_le_bytes())?;

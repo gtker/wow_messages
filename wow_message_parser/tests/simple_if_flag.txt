@@ -17,6 +17,7 @@ pub struct SimpleIfFlag {
 impl ReadableAndWritable for SimpleIfFlag {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // flag: SimpleFlag
         let flag = SimpleFlag::read(r)?;
@@ -42,6 +43,7 @@ impl ReadableAndWritable for SimpleIfFlag {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // flag: SimpleFlag
         self.flag.write(w)?;
@@ -156,6 +158,7 @@ impl From<&SimpleIfFlagSimpleFlag> for SimpleFlag {
 }
 
 impl SimpleIfFlagSimpleFlag {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleFlag = self.into();
         a.write(w)?;
@@ -293,6 +296,7 @@ impl MaximumPossibleSized for SimpleIfFlagSimpleFlagZERO {
 }
 
 impl SimpleIfFlagSimpleFlagZERO {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.basic.to_le_bytes())?;
 

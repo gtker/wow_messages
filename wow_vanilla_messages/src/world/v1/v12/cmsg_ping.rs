@@ -28,6 +28,7 @@ impl MessageBody for CMSG_PING {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // sequence_id: u32
         let sequence_id = crate::util::read_u32_le(r)?;
@@ -41,6 +42,7 @@ impl MessageBody for CMSG_PING {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // sequence_id: u32
         w.write_all(&self.sequence_id.to_le_bytes())?;
@@ -124,6 +126,7 @@ mod test {
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMSG_PING0() {
         let raw: Vec<u8> = vec![ 0x00, 0x0C, 0xDC, 0x01, 0x00, 0x00, 0xEF, 0xBE,
              0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];

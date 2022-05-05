@@ -34,6 +34,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
     type Error = SMSG_MESSAGECHATError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // chat_type: ChatType
         let chat_type = ChatType::read(r)?;
@@ -417,6 +418,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // chat_type: ChatType
         self.chat_type.write(w)?;
@@ -2616,6 +2618,7 @@ impl Default for SMSG_MESSAGECHATChatType {
 }
 
 impl SMSG_MESSAGECHATChatType {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ChatType = self.into();
         a.write(w)?;
@@ -2636,6 +2639,7 @@ impl SMSG_MESSAGECHATChatType {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ChatType = self.into();
         a.write_u16_le(w)
@@ -2653,6 +2657,7 @@ impl SMSG_MESSAGECHATChatType {
         a.astd_write_u16_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ChatType = self.into();
         a.write_u16_be(w)
@@ -2670,6 +2675,7 @@ impl SMSG_MESSAGECHATChatType {
         a.astd_write_u16_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ChatType = self.into();
         a.write_u32_le(w)
@@ -2687,6 +2693,7 @@ impl SMSG_MESSAGECHATChatType {
         a.astd_write_u32_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ChatType = self.into();
         a.write_u32_be(w)
@@ -2704,6 +2711,7 @@ impl SMSG_MESSAGECHATChatType {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ChatType = self.into();
         a.write_u64_le(w)
@@ -2721,6 +2729,7 @@ impl SMSG_MESSAGECHATChatType {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ChatType = self.into();
         a.write_u64_be(w)

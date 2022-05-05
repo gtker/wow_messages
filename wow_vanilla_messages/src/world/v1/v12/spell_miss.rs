@@ -20,6 +20,7 @@ pub struct SpellMiss {
 impl ReadableAndWritable for SpellMiss {
     type Error = SpellMissError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // target_guid: Guid
         let target_guid = Guid::read(r)?;
@@ -33,6 +34,7 @@ impl ReadableAndWritable for SpellMiss {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
         self.target_guid.write(w)?;

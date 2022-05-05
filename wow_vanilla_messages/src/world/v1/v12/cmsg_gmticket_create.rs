@@ -34,6 +34,7 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
 
     type Error = CMSG_GMTICKET_CREATEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // category: GmTicketType
         let category = GmTicketType::read(r)?;
@@ -107,6 +108,7 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // category: GmTicketType
         self.category.write(w)?;
@@ -565,6 +567,7 @@ impl Default for CMSG_GMTICKET_CREATEGmTicketType {
 }
 
 impl CMSG_GMTICKET_CREATEGmTicketType {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GmTicketType = self.into();
         a.write(w)?;
@@ -585,6 +588,7 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GmTicketType = self.into();
         a.write_u16_le(w)
@@ -602,6 +606,7 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
         a.astd_write_u16_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GmTicketType = self.into();
         a.write_u16_be(w)
@@ -619,6 +624,7 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
         a.astd_write_u16_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GmTicketType = self.into();
         a.write_u32_le(w)
@@ -636,6 +642,7 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
         a.astd_write_u32_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GmTicketType = self.into();
         a.write_u32_be(w)
@@ -653,6 +660,7 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GmTicketType = self.into();
         a.write_u64_le(w)
@@ -670,6 +678,7 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GmTicketType = self.into();
         a.write_u64_be(w)

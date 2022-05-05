@@ -22,6 +22,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
 impl ReadableAndWritable for CMD_SURVEY_RESULT {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // survey_id: u32
         let survey_id = crate::util::read_u32_le(r)?;
@@ -45,6 +46,7 @@ impl ReadableAndWritable for CMD_SURVEY_RESULT {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
@@ -189,6 +191,7 @@ mod test {
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_SURVEY_RESULT0() {
         let raw: Vec<u8> = vec![ 0x04, 0xDE, 0xFA, 0x00, 0x00, 0x00, 0x01, 0x00,
              0xFF, ];

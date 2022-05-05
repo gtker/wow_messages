@@ -33,6 +33,7 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
 
     type Error = SMSG_BATTLEFIELD_LISTError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // battlemaster: Guid
         let battlemaster = Guid::read(r)?;
@@ -68,6 +69,7 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // battlemaster: Guid
         self.battlemaster.write(w)?;

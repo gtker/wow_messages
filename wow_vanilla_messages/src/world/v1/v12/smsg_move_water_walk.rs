@@ -28,6 +28,7 @@ impl MessageBody for SMSG_MOVE_WATER_WALK {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
@@ -41,6 +42,7 @@ impl MessageBody for SMSG_MOVE_WATER_WALK {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: PackedGuid
         self.guid.write_packed(w)?;

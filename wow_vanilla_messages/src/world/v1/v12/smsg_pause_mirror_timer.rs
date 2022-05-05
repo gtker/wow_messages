@@ -29,6 +29,7 @@ impl MessageBody for SMSG_PAUSE_MIRROR_TIMER {
 
     type Error = SMSG_PAUSE_MIRROR_TIMERError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // timer: TimerType
         let timer = TimerType::read(r)?;
@@ -42,6 +43,7 @@ impl MessageBody for SMSG_PAUSE_MIRROR_TIMER {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // timer: TimerType
         self.timer.write(w)?;

@@ -28,6 +28,7 @@ impl MessageBody for SMSG_GMTICKET_DELETETICKET {
 
     type Error = SMSG_GMTICKET_DELETETICKETError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // response: GmTicketResponse
         let response = GmTicketResponse::read(r)?;
@@ -37,6 +38,7 @@ impl MessageBody for SMSG_GMTICKET_DELETETICKET {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // response: GmTicketResponse
         self.response.write(w)?;

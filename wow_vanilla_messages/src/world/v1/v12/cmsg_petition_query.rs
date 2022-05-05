@@ -29,6 +29,7 @@ impl MessageBody for CMSG_PETITION_QUERY {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // guild_guid: u32
         let guild_guid = crate::util::read_u32_le(r)?;
@@ -42,6 +43,7 @@ impl MessageBody for CMSG_PETITION_QUERY {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guild_guid: u32
         w.write_all(&self.guild_guid.to_le_bytes())?;

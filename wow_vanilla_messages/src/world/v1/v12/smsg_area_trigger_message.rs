@@ -27,6 +27,7 @@ impl MessageBody for SMSG_AREA_TRIGGER_MESSAGE {
 
     type Error = SMSG_AREA_TRIGGER_MESSAGEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // length: u32
         let length = crate::util::read_u32_le(r)?;
@@ -41,6 +42,7 @@ impl MessageBody for SMSG_AREA_TRIGGER_MESSAGE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // length: u32
         w.write_all(&self.length.to_le_bytes())?;

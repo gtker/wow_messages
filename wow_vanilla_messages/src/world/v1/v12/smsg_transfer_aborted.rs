@@ -35,6 +35,7 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
 
     type Error = SMSG_TRANSFER_ABORTEDError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // map: Map
         let map = Map::read(r)?;
@@ -52,6 +53,7 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
         self.map.write(w)?;

@@ -35,6 +35,7 @@ impl MessageBody for SMSG_GROUP_LIST {
 
     type Error = SMSG_GROUP_LISTError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // group_type: GroupType
         let group_type = GroupType::read(r)?;
@@ -91,6 +92,7 @@ impl MessageBody for SMSG_GROUP_LIST {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // group_type: GroupType
         self.group_type.write(w)?;

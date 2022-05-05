@@ -29,6 +29,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
 
     type Error = SMSG_TRADE_STATUSError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // status: TradeStatus
         let status = TradeStatus::read(r)?;
@@ -101,6 +102,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // status: TradeStatus
         self.status.write(w)?;
@@ -615,6 +617,7 @@ impl Default for SMSG_TRADE_STATUSTradeStatus {
 }
 
 impl SMSG_TRADE_STATUSTradeStatus {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: TradeStatus = self.into();
         a.write(w)?;
@@ -635,6 +638,7 @@ impl SMSG_TRADE_STATUSTradeStatus {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: TradeStatus = self.into();
         a.write_u32_be(w)
@@ -652,6 +656,7 @@ impl SMSG_TRADE_STATUSTradeStatus {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: TradeStatus = self.into();
         a.write_u64_le(w)
@@ -669,6 +674,7 @@ impl SMSG_TRADE_STATUSTradeStatus {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: TradeStatus = self.into();
         a.write_u64_be(w)

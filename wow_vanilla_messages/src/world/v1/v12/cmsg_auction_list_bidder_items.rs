@@ -29,6 +29,7 @@ impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // auctioneer: Guid
         let auctioneer = Guid::read(r)?;
@@ -52,6 +53,7 @@ impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // auctioneer: Guid
         self.auctioneer.write(w)?;

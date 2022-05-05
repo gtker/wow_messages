@@ -32,6 +32,7 @@ impl MessageBody for SMSG_ENCHANTMENTLOG {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // target_guid: Guid
         let target_guid = Guid::read(r)?;
@@ -57,6 +58,7 @@ impl MessageBody for SMSG_ENCHANTMENTLOG {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
         self.target_guid.write(w)?;

@@ -32,6 +32,7 @@ impl MessageBody for SMSG_WEATHER {
 
     type Error = SMSG_WEATHERError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // weather_type: WeatherType
         let weather_type = WeatherType::read(r)?;
@@ -52,6 +53,7 @@ impl MessageBody for SMSG_WEATHER {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // weather_type: WeatherType
         self.weather_type.write(w)?;

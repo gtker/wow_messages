@@ -27,6 +27,7 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
 
     type Error = SMSG_CREATURE_QUERY_RESPONSEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // creature_entry: u32
         let creature_entry = crate::util::read_u32_le(r)?;
@@ -110,6 +111,7 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // creature_entry: u32
         w.write_all(&self.creature_entry.to_le_bytes())?;

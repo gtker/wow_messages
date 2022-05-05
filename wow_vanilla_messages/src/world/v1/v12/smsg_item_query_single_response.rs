@@ -35,6 +35,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
     type Error = SMSG_ITEM_QUERY_SINGLE_RESPONSEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // item: u32
         let item = crate::util::read_u32_le(r)?;
@@ -291,6 +292,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // item: u32
         w.write_all(&self.item.to_le_bytes())?;

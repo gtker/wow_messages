@@ -36,6 +36,7 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
 
     type Error = SMSG_LOOT_ROLL_WONError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // looted_target_guid: Guid
         let looted_target_guid = Guid::read(r)?;
@@ -73,6 +74,7 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // looted_target_guid: Guid
         self.looted_target_guid.write(w)?;

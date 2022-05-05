@@ -28,6 +28,7 @@ impl MessageBody for MSG_AUCTION_HELLO_Client {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // auctioneer: Guid
         let auctioneer = Guid::read(r)?;
@@ -37,6 +38,7 @@ impl MessageBody for MSG_AUCTION_HELLO_Client {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // auctioneer: Guid
         self.auctioneer.write(w)?;
@@ -102,6 +104,7 @@ mod test {
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
     #[test]
+    #[cfg(feature = "sync")]
     fn MSG_AUCTION_HELLO_Client0() {
         let raw: Vec<u8> = vec![ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE,
              0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];

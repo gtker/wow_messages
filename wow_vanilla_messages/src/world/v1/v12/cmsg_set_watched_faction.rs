@@ -27,6 +27,7 @@ impl MessageBody for CMSG_SET_WATCHED_FACTION {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // reputation_id: u32
         let reputation_id = crate::util::read_u32_le(r)?;
@@ -36,6 +37,7 @@ impl MessageBody for CMSG_SET_WATCHED_FACTION {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // reputation_id: u32
         w.write_all(&self.reputation_id.to_le_bytes())?;

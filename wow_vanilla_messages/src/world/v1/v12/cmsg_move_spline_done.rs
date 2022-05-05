@@ -29,6 +29,7 @@ impl MessageBody for CMSG_MOVE_SPLINE_DONE {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // movement_info: MovementInfo
         let movement_info = MovementInfo::read(r)?;
@@ -46,6 +47,7 @@ impl MessageBody for CMSG_MOVE_SPLINE_DONE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // movement_info: MovementInfo
         self.movement_info.write(w)?;

@@ -36,6 +36,7 @@ pub struct Mail {
 impl ReadableAndWritable for Mail {
     type Error = MailError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // message_id: u32
         let message_id = crate::util::read_u32_le(r)?;
@@ -153,6 +154,7 @@ impl ReadableAndWritable for Mail {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // message_id: u32
         w.write_all(&self.message_id.to_le_bytes())?;
@@ -821,6 +823,7 @@ impl Default for MailMailType {
 }
 
 impl MailMailType {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: MailType = self.into();
         a.write(w)?;
@@ -841,6 +844,7 @@ impl MailMailType {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: MailType = self.into();
         a.write_u16_le(w)
@@ -858,6 +862,7 @@ impl MailMailType {
         a.astd_write_u16_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: MailType = self.into();
         a.write_u16_be(w)
@@ -875,6 +880,7 @@ impl MailMailType {
         a.astd_write_u16_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: MailType = self.into();
         a.write_u32_le(w)
@@ -892,6 +898,7 @@ impl MailMailType {
         a.astd_write_u32_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: MailType = self.into();
         a.write_u32_be(w)
@@ -909,6 +916,7 @@ impl MailMailType {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: MailType = self.into();
         a.write_u64_le(w)
@@ -926,6 +934,7 @@ impl MailMailType {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: MailType = self.into();
         a.write_u64_be(w)

@@ -28,6 +28,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
 
     type Error = MSG_CORPSE_QUERY_ServerError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // result: CorpseQueryResult
         let result = CorpseQueryResult::read(r)?;
@@ -62,6 +63,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // result: CorpseQueryResult
         self.result.write(w)?;
@@ -330,6 +332,7 @@ impl Default for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
 }
 
 impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: CorpseQueryResult = self.into();
         a.write(w)?;
@@ -350,6 +353,7 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: CorpseQueryResult = self.into();
         a.write_u16_le(w)
@@ -367,6 +371,7 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
         a.astd_write_u16_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: CorpseQueryResult = self.into();
         a.write_u16_be(w)
@@ -384,6 +389,7 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
         a.astd_write_u16_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: CorpseQueryResult = self.into();
         a.write_u32_le(w)
@@ -401,6 +407,7 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
         a.astd_write_u32_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: CorpseQueryResult = self.into();
         a.write_u32_be(w)
@@ -418,6 +425,7 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: CorpseQueryResult = self.into();
         a.write_u64_le(w)
@@ -435,6 +443,7 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: CorpseQueryResult = self.into();
         a.write_u64_be(w)

@@ -26,6 +26,7 @@ impl MessageBody for CMSG_GUILD_INVITE {
 
     type Error = CMSG_GUILD_INVITEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // invited_player: CString
         let invited_player = crate::util::read_c_string_to_vec(r)?;
@@ -36,6 +37,7 @@ impl MessageBody for CMSG_GUILD_INVITE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // invited_player: CString
         w.write_all(self.invited_player.as_bytes())?;

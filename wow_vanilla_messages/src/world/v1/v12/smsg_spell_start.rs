@@ -34,6 +34,7 @@ impl MessageBody for SMSG_SPELL_START {
 
     type Error = SMSG_SPELL_STARTError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // cast_item: PackedGuid
         let cast_item = Guid::read_packed(r)?;
@@ -83,6 +84,7 @@ impl MessageBody for SMSG_SPELL_START {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // cast_item: PackedGuid
         self.cast_item.write_packed(w)?;
@@ -328,6 +330,7 @@ impl From<&SMSG_SPELL_STARTCastFlags> for CastFlags {
 }
 
 impl SMSG_SPELL_STARTCastFlags {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: CastFlags = self.into();
         a.write(w)?;
@@ -630,6 +633,7 @@ impl MaximumPossibleSized for SMSG_SPELL_STARTCastFlagsAMMO {
 }
 
 impl SMSG_SPELL_STARTCastFlagsAMMO {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.ammo_display_id.to_le_bytes())?;
 

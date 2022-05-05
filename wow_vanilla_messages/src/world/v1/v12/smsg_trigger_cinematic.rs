@@ -28,6 +28,7 @@ impl MessageBody for SMSG_TRIGGER_CINEMATIC {
 
     type Error = SMSG_TRIGGER_CINEMATICError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // cinematic_sequence_id: CinematicSequenceId
         let cinematic_sequence_id = CinematicSequenceId::read(r)?;
@@ -37,6 +38,7 @@ impl MessageBody for SMSG_TRIGGER_CINEMATIC {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // cinematic_sequence_id: CinematicSequenceId
         self.cinematic_sequence_id.write(w)?;

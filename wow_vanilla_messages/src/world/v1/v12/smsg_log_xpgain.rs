@@ -30,6 +30,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
 
     type Error = SMSG_LOG_XPGAINError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // target_guid: Guid
         let target_guid = Guid::read(r)?;
@@ -62,6 +63,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
         self.target_guid.write(w)?;
@@ -298,6 +300,7 @@ impl Default for SMSG_LOG_XPGAINExperienceAwardType {
 }
 
 impl SMSG_LOG_XPGAINExperienceAwardType {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ExperienceAwardType = self.into();
         a.write(w)?;
@@ -318,6 +321,7 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ExperienceAwardType = self.into();
         a.write_u16_le(w)
@@ -335,6 +339,7 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
         a.astd_write_u16_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ExperienceAwardType = self.into();
         a.write_u16_be(w)
@@ -352,6 +357,7 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
         a.astd_write_u16_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ExperienceAwardType = self.into();
         a.write_u32_le(w)
@@ -369,6 +375,7 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
         a.astd_write_u32_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ExperienceAwardType = self.into();
         a.write_u32_be(w)
@@ -386,6 +393,7 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ExperienceAwardType = self.into();
         a.write_u64_le(w)
@@ -403,6 +411,7 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: ExperienceAwardType = self.into();
         a.write_u64_be(w)

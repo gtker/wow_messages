@@ -27,6 +27,7 @@ pub struct Realm {
 impl ReadableAndWritable for Realm {
     type Error = RealmError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // realm_type: RealmType
         let realm_type = RealmType::read(r)?;
@@ -66,6 +67,7 @@ impl ReadableAndWritable for Realm {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // realm_type: RealmType
         self.realm_type.write(w)?;

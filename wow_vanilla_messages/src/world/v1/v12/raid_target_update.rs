@@ -20,6 +20,7 @@ pub struct RaidTargetUpdate {
 impl ReadableAndWritable for RaidTargetUpdate {
     type Error = RaidTargetUpdateError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // index: RaidTargetIndex
         let index = RaidTargetIndex::read(r)?;
@@ -33,6 +34,7 @@ impl ReadableAndWritable for RaidTargetUpdate {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // index: RaidTargetIndex
         self.index.write(w)?;

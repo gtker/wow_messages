@@ -22,6 +22,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
 impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
     type Error = CMD_AUTH_RECONNECT_PROOF_ServerError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // result: LoginResult
         let result = LoginResult::read(r)?;
@@ -31,6 +32,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
@@ -133,6 +135,7 @@ mod test {
     use crate::logon::version_2::opcodes::ServerOpcodeMessage;
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_AUTH_RECONNECT_PROOF_Server0() {
         let raw: Vec<u8> = vec![ 0x03, 0x00, ];
 
@@ -158,6 +161,7 @@ mod test {
     }
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_AUTH_RECONNECT_PROOF_Server1() {
         let raw: Vec<u8> = vec![ 0x03, 0x0E, ];
 
@@ -183,6 +187,7 @@ mod test {
     }
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_AUTH_RECONNECT_PROOF_Server2() {
         let raw: Vec<u8> = vec![ 0x03, 0x0E, ];
 

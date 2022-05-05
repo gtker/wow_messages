@@ -9,9 +9,10 @@ edition = "2018"
 version = "0.4.0"
 
 [features]
-default = ["async_tokio", "async_std"]
+default = []
 async_tokio = ["tokio", "async-trait"]
 async_std = ["async-std", "async-trait"]
+sync = []
 
 [dependencies.tokio]
 version = "1"

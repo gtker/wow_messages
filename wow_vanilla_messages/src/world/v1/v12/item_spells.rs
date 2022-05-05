@@ -22,6 +22,7 @@ pub struct ItemSpells {
 impl ReadableAndWritable for ItemSpells {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // spell: u32
         let spell = crate::util::read_u32_le(r)?;
@@ -51,6 +52,7 @@ impl ReadableAndWritable for ItemSpells {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;

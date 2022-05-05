@@ -18,6 +18,7 @@ pub struct FlagIfElseIf {
 impl ReadableAndWritable for FlagIfElseIf {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // flags: UpdateFlag
         let flags = UpdateFlag::read(r)?;
@@ -83,6 +84,7 @@ impl ReadableAndWritable for FlagIfElseIf {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // flags: UpdateFlag
         self.flags.write(w)?;
@@ -289,6 +291,7 @@ impl From<&FlagIfElseIfSimpleFlag> for SimpleFlag {
 }
 
 impl FlagIfElseIfSimpleFlag {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SimpleFlag = self.into();
         a.write(w)?;
@@ -427,6 +430,7 @@ impl MaximumPossibleSized for FlagIfElseIfSimpleFlagONE {
 }
 
 impl FlagIfElseIfSimpleFlagONE {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.if_one.to_le_bytes())?;
 
@@ -463,6 +467,7 @@ impl From<&FlagIfElseIfUpdateFlag> for UpdateFlag {
 }
 
 impl FlagIfElseIfUpdateFlag {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: UpdateFlag = self.into();
         a.write(w)?;
@@ -738,6 +743,7 @@ impl MaximumPossibleSized for FlagIfElseIfUpdateFlagEIGHT_IF {
 }
 
 impl FlagIfElseIfUpdateFlagEIGHT_IF {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.last_if.to_le_bytes())?;
 

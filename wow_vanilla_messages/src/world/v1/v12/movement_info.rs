@@ -24,6 +24,7 @@ pub struct MovementInfo {
 impl ReadableAndWritable for MovementInfo {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // flags: MovementFlags
         let flags = MovementFlags::read(r)?;
@@ -110,6 +111,7 @@ impl ReadableAndWritable for MovementInfo {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // flags: MovementFlags
         self.flags.write(w)?;
@@ -451,6 +453,7 @@ impl From<&MovementInfoMovementFlags> for MovementFlags {
 }
 
 impl MovementInfoMovementFlags {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: MovementFlags = self.into();
         a.write(w)?;
@@ -1203,6 +1206,7 @@ impl MaximumPossibleSized for MovementInfoMovementFlagsON_TRANSPORT {
 }
 
 impl MovementInfoMovementFlagsON_TRANSPORT {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.transport.write(w)?;
 
@@ -1252,6 +1256,7 @@ impl MaximumPossibleSized for MovementInfoMovementFlagsJUMPING {
 }
 
 impl MovementInfoMovementFlagsJUMPING {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.z_speed.to_le_bytes())?;
 
@@ -1310,6 +1315,7 @@ impl MaximumPossibleSized for MovementInfoMovementFlagsSWIMMING {
 }
 
 impl MovementInfoMovementFlagsSWIMMING {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.pitch.to_le_bytes())?;
 
@@ -1350,6 +1356,7 @@ impl MaximumPossibleSized for MovementInfoMovementFlagsSPLINE_ELEVATION {
 }
 
 impl MovementInfoMovementFlagsSPLINE_ELEVATION {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.spline_elevation.to_le_bytes())?;
 

@@ -28,6 +28,7 @@ impl MessageBody for SMSG_UPDATE_AURA_DURATION {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // aura_slot: u8
         let aura_slot = crate::util::read_u8_le(r)?;
@@ -41,6 +42,7 @@ impl MessageBody for SMSG_UPDATE_AURA_DURATION {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // aura_slot: u8
         w.write_all(&self.aura_slot.to_le_bytes())?;

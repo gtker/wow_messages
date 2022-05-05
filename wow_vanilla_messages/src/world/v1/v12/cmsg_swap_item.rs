@@ -30,6 +30,7 @@ impl MessageBody for CMSG_SWAP_ITEM {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // destination_bag: u8
         let destination_bag = crate::util::read_u8_le(r)?;
@@ -51,6 +52,7 @@ impl MessageBody for CMSG_SWAP_ITEM {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // destination_bag: u8
         w.write_all(&self.destination_bag.to_le_bytes())?;

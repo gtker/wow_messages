@@ -33,6 +33,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
     type Error = SMSG_PARTY_MEMBER_STATS_FULLError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // player: PackedGuid
         let player = Guid::read_packed(r)?;
@@ -271,6 +272,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player: PackedGuid
         self.player.write_packed(w)?;
@@ -1087,6 +1089,7 @@ impl From<&SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags> for GroupUpdateFlags {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: GroupUpdateFlags = self.into();
         a.write(w)?;
@@ -2263,6 +2266,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_S
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.status.write(w)?;
 
@@ -2303,6 +2307,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_C
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.current_health.to_le_bytes())?;
 
@@ -2343,6 +2348,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_M
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.max_health.to_le_bytes())?;
 
@@ -2383,6 +2389,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.power.write(w)?;
 
@@ -2423,6 +2430,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_C
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_POWER {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.current_power.to_le_bytes())?;
 
@@ -2463,6 +2471,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_M
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.max_power.to_le_bytes())?;
 
@@ -2503,6 +2512,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_L
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_LEVEL {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.level.to_le_bytes())?;
 
@@ -2543,6 +2553,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_Z
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.area.write(w)?;
 
@@ -2586,6 +2597,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POSITION {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.position_x.to_le_bytes())?;
 
@@ -2632,6 +2644,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_A
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.auras.write(w)?;
 
@@ -2672,6 +2685,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_NAME {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(self.pet_name.as_bytes())?;
         // Null terminator
@@ -2718,6 +2732,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.pet_display_id.to_le_bytes())?;
 
@@ -2758,6 +2773,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_HP {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.pet_current_health.to_le_bytes())?;
 
@@ -2798,6 +2814,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.pet_max_health.to_le_bytes())?;
 
@@ -2838,6 +2855,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.pet_power_type.write(w)?;
 
@@ -2878,6 +2896,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.pet_current_power.to_le_bytes())?;
 
@@ -2918,6 +2937,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_POWER {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.pet_max_power.to_le_bytes())?;
 
@@ -2958,6 +2978,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.pet_auras.write(w)?;
 

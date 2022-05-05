@@ -37,6 +37,7 @@ impl MessageBody for CMSG_SEND_MAIL {
 
     type Error = CMSG_SEND_MAILError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // mailbox: Guid
         let mailbox = Guid::read(r)?;
@@ -89,6 +90,7 @@ impl MessageBody for CMSG_SEND_MAIL {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // mailbox: Guid
         self.mailbox.write(w)?;

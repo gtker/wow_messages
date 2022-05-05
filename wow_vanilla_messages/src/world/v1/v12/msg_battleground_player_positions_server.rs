@@ -32,6 +32,7 @@ impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // amount_of_carriers: u32
         let _amount_of_carriers = crate::util::read_u32_le(r)?;
@@ -51,6 +52,7 @@ impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // amount_of_carriers: u32
         w.write_all(&Self::AMOUNT_OF_CARRIERS_VALUE.to_le_bytes())?;

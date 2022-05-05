@@ -4,6 +4,7 @@ use std::io::{Error, Read};
 use crate::util::{read_u16_le, read_u32_le};
 use crate::{ClientMessageWrite, MessageBody, ServerMessageWrite};
 
+#[cfg(feature = "sync")]
 pub fn read_expected_client_world_message<M: ClientMessageWrite + MessageBody, R: Read>(
     r: &mut R,
 ) -> Result<M, ExpectedClientWorldMessageError> {
@@ -50,6 +51,7 @@ impl From<std::io::Error> for ExpectedClientWorldMessageError {
     }
 }
 
+#[cfg(feature = "sync")]
 pub fn read_expected_server_world_message<M: ServerMessageWrite + MessageBody, R: Read>(
     r: &mut R,
 ) -> Result<M, ExpectedServerWorldMessageError> {

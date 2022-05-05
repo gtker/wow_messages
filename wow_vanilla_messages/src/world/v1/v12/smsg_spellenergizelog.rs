@@ -32,6 +32,7 @@ impl MessageBody for SMSG_SPELLENERGIZELOG {
 
     type Error = SMSG_SPELLENERGIZELOGError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // victim_guid: PackedGuid
         let victim_guid = Guid::read_packed(r)?;
@@ -57,6 +58,7 @@ impl MessageBody for SMSG_SPELLENERGIZELOG {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // victim_guid: PackedGuid
         self.victim_guid.write_packed(w)?;

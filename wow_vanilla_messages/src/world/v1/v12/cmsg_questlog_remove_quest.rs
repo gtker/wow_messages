@@ -27,6 +27,7 @@ impl MessageBody for CMSG_QUESTLOG_REMOVE_QUEST {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // slot: u8
         let slot = crate::util::read_u8_le(r)?;
@@ -36,6 +37,7 @@ impl MessageBody for CMSG_QUESTLOG_REMOVE_QUEST {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;

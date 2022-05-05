@@ -27,6 +27,7 @@ pub struct StructWithAllBuiltInTypes {
 impl ReadableAndWritable for StructWithAllBuiltInTypes {
     type Error = StructWithAllBuiltInTypesError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // basic8: u8
         let basic8 = crate::util::read_u8_le(r)?;
@@ -81,6 +82,7 @@ impl ReadableAndWritable for StructWithAllBuiltInTypes {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // basic8: u8
         w.write_all(&(self.simple_string.len() as u8).to_le_bytes())?;

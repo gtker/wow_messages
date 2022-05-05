@@ -26,6 +26,7 @@ impl MessageBody for SMSG_EXPECTED_SPAM_RECORDS {
 
     type Error = SMSG_EXPECTED_SPAM_RECORDSError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // amount_of_records: u32
         let amount_of_records = crate::util::read_u32_le(r)?;
@@ -42,6 +43,7 @@ impl MessageBody for SMSG_EXPECTED_SPAM_RECORDS {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // amount_of_records: u32
         w.write_all(&(self.records.len() as u32).to_le_bytes())?;

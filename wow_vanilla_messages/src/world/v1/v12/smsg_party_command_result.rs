@@ -30,6 +30,7 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
 
     type Error = SMSG_PARTY_COMMAND_RESULTError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // operation: PartyOperation
         let operation = PartyOperation::read_u32_le(r)?;
@@ -48,6 +49,7 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // operation: PartyOperation
         self.operation.write_u32_le(w)?;

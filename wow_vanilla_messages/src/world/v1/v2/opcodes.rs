@@ -75,6 +75,7 @@ pub enum ClientOpcodeMessage {
 #[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl OpcodeMessage for ClientOpcodeMessage {
     type Error = ClientOpcodeMessageError;
+    #[cfg(feature = "sync")]
     fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         match self {
             Self::CMSG_CHAR_ENUM(i) => i.write_body(w)?,
@@ -82,6 +83,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let size = (crate::util::read_u16_be(r)? - 4) as u32;
         let opcode = crate::util::read_u32_le(r)?;
@@ -91,6 +93,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "sync")]
     fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error> {
         let mut header = [0u8; 6];
         r.read_exact(&mut header)?;
@@ -102,6 +105,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "sync")]
     fn write_encrypted<W: std::io::Write, E: Encrypter>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error> {
         match self {
             Self::CMSG_CHAR_ENUM(i) => i.write_encrypted_client(w, e)?,
@@ -290,6 +294,7 @@ pub enum ServerOpcodeMessage {
 #[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl OpcodeMessage for ServerOpcodeMessage {
     type Error = ServerOpcodeMessageError;
+    #[cfg(feature = "sync")]
     fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         match self {
             Self::SMSG_AUTH_CHALLENGE(i) => i.write_body(w)?,
@@ -298,6 +303,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     fn read_unencrypted<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let size = (crate::util::read_u16_be(r)? - 2) as u32;
         let opcode = crate::util::read_u16_le(r)?;
@@ -308,6 +314,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "sync")]
     fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error> {
         let mut header = [0u8; 4];
         r.read_exact(&mut header)?;
@@ -320,6 +327,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "sync")]
     fn write_encrypted<W: std::io::Write, E: Encrypter>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error> {
         match self {
             Self::SMSG_AUTH_CHALLENGE(i) => i.write_encrypted_server(w, e)?,

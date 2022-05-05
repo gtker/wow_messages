@@ -25,6 +25,7 @@ impl CMD_REALM_LIST_Client {
 impl ReadableAndWritable for CMD_REALM_LIST_Client {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // padding: u32
         let _padding = crate::util::read_u32_le(r)?;
@@ -34,6 +35,7 @@ impl ReadableAndWritable for CMD_REALM_LIST_Client {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
@@ -107,6 +109,7 @@ mod test {
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_REALM_LIST_Client0() {
         let raw: Vec<u8> = vec![ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 

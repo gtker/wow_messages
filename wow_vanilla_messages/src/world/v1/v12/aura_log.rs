@@ -18,6 +18,7 @@ pub struct AuraLog {
 impl ReadableAndWritable for AuraLog {
     type Error = AuraLogError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // aura_type: AuraType
         let aura_type = AuraType::read(r)?;
@@ -310,6 +311,7 @@ impl ReadableAndWritable for AuraLog {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // aura_type: AuraType
         self.aura_type.write(w)?;
@@ -2450,6 +2452,7 @@ impl Default for AuraLogAuraType {
 }
 
 impl AuraLogAuraType {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: AuraType = self.into();
         a.write(w)?;
@@ -2470,6 +2473,7 @@ impl AuraLogAuraType {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: AuraType = self.into();
         a.write_u32_be(w)
@@ -2487,6 +2491,7 @@ impl AuraLogAuraType {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: AuraType = self.into();
         a.write_u64_le(w)
@@ -2504,6 +2509,7 @@ impl AuraLogAuraType {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: AuraType = self.into();
         a.write_u64_be(w)

@@ -27,6 +27,7 @@ impl MessageBody for SMSG_PLAY_MUSIC {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // sound_id: u32
         let sound_id = crate::util::read_u32_le(r)?;
@@ -36,6 +37,7 @@ impl MessageBody for SMSG_PLAY_MUSIC {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // sound_id: u32
         w.write_all(&self.sound_id.to_le_bytes())?;

@@ -31,6 +31,7 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
 
     type Error = SMSG_RAID_INSTANCE_MESSAGEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // message_type: RaidInstanceMessage
         let message_type = RaidInstanceMessage::read(r)?;
@@ -48,6 +49,7 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // message_type: RaidInstanceMessage
         self.message_type.write(w)?;

@@ -18,6 +18,7 @@ pub struct NpcTextUpdateEmote {
 impl ReadableAndWritable for NpcTextUpdateEmote {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // delay: u32
         let delay = crate::util::read_u32_le(r)?;
@@ -31,6 +32,7 @@ impl ReadableAndWritable for NpcTextUpdateEmote {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // delay: u32
         w.write_all(&self.delay.to_le_bytes())?;

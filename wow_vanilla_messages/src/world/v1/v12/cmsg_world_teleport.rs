@@ -33,6 +33,7 @@ impl MessageBody for CMSG_WORLD_TELEPORT {
 
     type Error = CMSG_WORLD_TELEPORTError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // time_in_msec: u64
         let time_in_msec = crate::util::read_u64_le(r)?;
@@ -58,6 +59,7 @@ impl MessageBody for CMSG_WORLD_TELEPORT {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // time_in_msec: u64
         w.write_all(&self.time_in_msec.to_le_bytes())?;
@@ -234,6 +236,7 @@ mod test {
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMSG_WORLD_TELEPORT0() {
         let raw: Vec<u8> = vec![ 0x00, 0x20, 0x08, 0x00, 0x00, 0x00, 0xEF, 0xBE,
              0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,

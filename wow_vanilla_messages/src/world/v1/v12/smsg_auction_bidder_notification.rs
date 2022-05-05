@@ -34,6 +34,7 @@ impl MessageBody for SMSG_AUCTION_BIDDER_NOTIFICATION {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // auction_house_id: u32
         let auction_house_id = crate::util::read_u32_le(r)?;
@@ -67,6 +68,7 @@ impl MessageBody for SMSG_AUCTION_BIDDER_NOTIFICATION {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // auction_house_id: u32
         w.write_all(&self.auction_house_id.to_le_bytes())?;

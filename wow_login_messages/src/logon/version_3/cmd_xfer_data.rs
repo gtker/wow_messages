@@ -20,6 +20,7 @@ impl ServerMessage for CMD_XFER_DATA {
 impl ReadableAndWritable for CMD_XFER_DATA {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // size: u16
         let size = crate::util::read_u16_le(r)?;
@@ -35,6 +36,7 @@ impl ReadableAndWritable for CMD_XFER_DATA {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
@@ -141,6 +143,7 @@ mod test {
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_XFER_DATA0() {
         let raw: Vec<u8> = vec![ 0x31, 0x01, 0x00, 0xFF, ];
 
@@ -166,6 +169,7 @@ mod test {
     }
 
     #[test]
+    #[cfg(feature = "sync")]
     fn CMD_XFER_DATA1() {
         let raw: Vec<u8> = vec![ 0x31, 0x00, 0x00, ];
 

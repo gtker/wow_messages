@@ -23,6 +23,7 @@ impl SpellLog {
 impl ReadableAndWritable for SpellLog {
     type Error = SpellLogError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // effect: SpellEffect
         let effect = SpellEffect::read(r)?;
@@ -348,6 +349,7 @@ impl ReadableAndWritable for SpellLog {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // effect: SpellEffect
         self.effect.write(w)?;
@@ -2461,6 +2463,7 @@ impl Default for SpellLogSpellEffect {
 }
 
 impl SpellLogSpellEffect {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SpellEffect = self.into();
         a.write(w)?;
@@ -2481,6 +2484,7 @@ impl SpellLogSpellEffect {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SpellEffect = self.into();
         a.write_u32_be(w)
@@ -2498,6 +2502,7 @@ impl SpellLogSpellEffect {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SpellEffect = self.into();
         a.write_u64_le(w)
@@ -2515,6 +2520,7 @@ impl SpellLogSpellEffect {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SpellEffect = self.into();
         a.write_u64_be(w)

@@ -28,6 +28,7 @@ impl MessageBody for SMSG_GM_TICKET_STATUS_UPDATE {
 
     type Error = SMSG_GM_TICKET_STATUS_UPDATEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // response: GmTicketStatusResponse
         let response = GmTicketStatusResponse::read(r)?;
@@ -37,6 +38,7 @@ impl MessageBody for SMSG_GM_TICKET_STATUS_UPDATE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // response: GmTicketStatusResponse
         self.response.write(w)?;

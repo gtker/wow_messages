@@ -32,6 +32,7 @@ pub const DEFAULT_PORT: u16 = 8085;
 pub trait ServerMessageWrite: MessageBody {
     const OPCODE_LENGTH: u16 = 2;
 
+    #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         crate::util::write_u16_be(
             w,
@@ -43,6 +44,7 @@ pub trait ServerMessageWrite: MessageBody {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     fn write_encrypted_server<W: Write, E: Encrypter>(
         &self,
         w: &mut W,
@@ -127,6 +129,7 @@ pub trait ServerMessageWrite: MessageBody {
 pub trait ClientMessageWrite: MessageBody {
     const OPCODE_LENGTH: u16 = 4;
 
+    #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         crate::util::write_u16_be(
             w,
@@ -138,6 +141,7 @@ pub trait ClientMessageWrite: MessageBody {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     fn write_encrypted_client<W: Write, E: Encrypter>(
         &self,
         w: &mut W,
@@ -222,8 +226,10 @@ pub trait MessageBody: Sized {
 
     type Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> Result<Self, Self::Error>;
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 
     #[cfg(feature = "async_std")]
@@ -254,15 +260,19 @@ pub trait MessageBody: Sized {
 pub trait OpcodeMessage: Sized {
     type Error;
 
+    #[cfg(feature = "sync")]
     fn read_unencrypted<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
 
+    #[cfg(feature = "sync")]
     fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 
+    #[cfg(feature = "sync")]
     fn read_encrypted<R: std::io::Read, D: Decrypter>(
         r: &mut R,
         d: &mut D,
     ) -> std::result::Result<Self, Self::Error>;
 
+    #[cfg(feature = "sync")]
     fn write_encrypted<W: std::io::Write, E: Encrypter>(
         &self,
         w: &mut W,
@@ -321,11 +331,16 @@ pub trait OpcodeMessage: Sized {
 #[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 pub trait ReadableAndWritable: Sized {
     type Error;
+
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> Result<Self, Self::Error>;
+
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, Self::Error>;
+
     #[cfg(feature = "async_std")]
     async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W)
         -> Result<(), std::io::Error>;

@@ -21,6 +21,7 @@ pub struct StabledPet {
 impl ReadableAndWritable for StabledPet {
     type Error = StabledPetError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // pet_number: u32
         let pet_number = crate::util::read_u32_le(r)?;
@@ -51,6 +52,7 @@ impl ReadableAndWritable for StabledPet {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;

@@ -18,6 +18,7 @@ pub struct SpellCastTargets {
 impl ReadableAndWritable for SpellCastTargets {
     type Error = SpellCastTargetsError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // target_flags: SpellCastTargetFlags
         let target_flags = SpellCastTargetFlags::read(r)?;
@@ -174,6 +175,7 @@ impl ReadableAndWritable for SpellCastTargets {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
         self.target_flags.write(w)?;
@@ -708,6 +710,7 @@ impl From<&SpellCastTargetsSpellCastTargetFlags> for SpellCastTargetFlags {
 }
 
 impl SpellCastTargetsSpellCastTargetFlags {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: SpellCastTargetFlags = self.into();
         a.write(w)?;
@@ -1448,6 +1451,7 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsUNIT {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsUNIT {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.unit_target1.write_packed(w)?;
 
@@ -1488,6 +1492,7 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsITEM {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsITEM {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.item_target1.write_packed(w)?;
 
@@ -1534,6 +1539,7 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATIO
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.position_x1.to_le_bytes())?;
 
@@ -1592,6 +1598,7 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION 
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.position_x2.to_le_bytes())?;
 
@@ -1644,6 +1651,7 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.unit_target2.write_packed(w)?;
 
@@ -1684,6 +1692,7 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.corpse_target2.write_packed(w)?;
 
@@ -1724,6 +1733,7 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.object_target1.write_packed(w)?;
 
@@ -1764,6 +1774,7 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.item_target2.write_packed(w)?;
 
@@ -1804,6 +1815,7 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsSTRING {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsSTRING {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(self.target_string.as_bytes())?;
         // Null terminator
@@ -1850,6 +1862,7 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsLOCKED {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsLOCKED {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.object_target2.write_packed(w)?;
 
@@ -1890,6 +1903,7 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
 }
 
 impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.corpse_target1.write_packed(w)?;
 

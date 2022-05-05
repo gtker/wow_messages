@@ -17,12 +17,14 @@ pub enum PetTalkReason {
 impl ReadableAndWritable for PetTalkReason {
     type Error = PetTalkReasonError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let a = crate::util::read_u32_le(r)?;
 
         Ok(a.try_into()?)
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.as_u32().to_le_bytes())?;
         Ok(())
@@ -57,6 +59,7 @@ impl ReadableAndWritable for PetTalkReason {
 }
 
 impl PetTalkReason {
+    #[cfg(feature = "sync")]
     pub fn read_u32_be<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, PetTalkReasonError> {
         let a = crate::util::read_u32_be(r)?;
         Ok((a as u32).try_into()?)
@@ -74,6 +77,7 @@ impl PetTalkReason {
         Ok((a as u32).try_into()?)
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u32_be(w, self.as_u32() as u32)?;
         Ok(())
@@ -91,6 +95,7 @@ impl PetTalkReason {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn read_u64_le<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, PetTalkReasonError> {
         let a = crate::util::read_u64_le(r)?;
         Ok((a as u32).try_into()?)
@@ -108,6 +113,7 @@ impl PetTalkReason {
         Ok((a as u32).try_into()?)
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u64_le(w, self.as_u32() as u64)?;
         Ok(())
@@ -125,6 +131,7 @@ impl PetTalkReason {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn read_u64_be<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, PetTalkReasonError> {
         let a = crate::util::read_u64_be(r)?;
         Ok((a as u32).try_into()?)
@@ -142,6 +149,7 @@ impl PetTalkReason {
         Ok((a as u32).try_into()?)
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u64_be(w, self.as_u32() as u64)?;
         Ok(())

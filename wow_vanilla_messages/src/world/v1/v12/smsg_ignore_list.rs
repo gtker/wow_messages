@@ -26,6 +26,7 @@ impl MessageBody for SMSG_IGNORE_LIST {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // amount_of_ignored: u8
         let amount_of_ignored = crate::util::read_u8_le(r)?;
@@ -41,6 +42,7 @@ impl MessageBody for SMSG_IGNORE_LIST {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // amount_of_ignored: u8
         w.write_all(&(self.ignored.len() as u8).to_le_bytes())?;
@@ -139,6 +141,7 @@ mod test {
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
     #[test]
+    #[cfg(feature = "sync")]
     fn SMSG_IGNORE_LIST0() {
         let raw: Vec<u8> = vec![ 0x00, 0x0B, 0x6B, 0x00, 0x01, 0xEF, 0xBE, 0xAD,
              0xDE, 0xFE, 0x0F, 0xDC, 0xBA, ];
@@ -165,6 +168,7 @@ mod test {
     }
 
     #[test]
+    #[cfg(feature = "sync")]
     fn SMSG_IGNORE_LIST1() {
         let raw: Vec<u8> = vec![ 0x00, 0x13, 0x6B, 0x00, 0x02, 0xEF, 0xBE, 0xAD,
              0xDE, 0xFE, 0x0F, 0xDC, 0xBA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00,

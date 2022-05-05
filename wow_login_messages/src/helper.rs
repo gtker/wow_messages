@@ -15,6 +15,7 @@ use crate::logon::all::{
 use crate::util::read_u8_le;
 use crate::{ClientMessage, ReadableAndWritable, ServerMessage};
 use std::fmt::{Display, Formatter};
+#[cfg(feature = "sync")]
 use std::io::Read;
 
 /// Read a complete message _from_ the **client** or return an error otherwise.
@@ -32,6 +33,7 @@ use std::io::Read;
 /// # Ok(())
 /// # }
 /// ```
+#[cfg(feature = "sync")]
 pub fn read_expect_client_login_message<M: ClientMessage, R: Read>(
     r: &mut R,
 ) -> Result<M, ExpectedServerLoginMessageError> {
@@ -90,6 +92,7 @@ impl From<std::io::Error> for ExpectedClientLoginMessageError {
 /// # Ok(())
 /// # }
 /// ```
+#[cfg(feature = "sync")]
 pub fn read_expect_server_login_message<M: ServerMessage, R: Read>(
     r: &mut R,
 ) -> Result<M, ExpectedServerLoginMessageError> {
@@ -163,6 +166,7 @@ impl From<std::io::Error> for ExpectedServerLoginMessageError {
 /// ```
 ///
 ///
+#[cfg(feature = "sync")]
 pub fn read_initial_opcode<R: Read>(
     r: &mut R,
 ) -> Result<InitialLoginOpcode, InitialLoginOpcodeError> {

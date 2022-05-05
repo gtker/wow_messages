@@ -28,6 +28,7 @@ pub struct Realm {
 impl ReadableAndWritable for Realm {
     type Error = RealmError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // realm_type: u8
         let realm_type = crate::util::read_u8_le(r)?;
@@ -87,6 +88,7 @@ impl ReadableAndWritable for Realm {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // realm_type: u8
         w.write_all(&self.realm_type.to_le_bytes())?;
@@ -405,6 +407,7 @@ impl From<&RealmRealmFlag> for RealmFlag {
 }
 
 impl RealmRealmFlag {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: RealmFlag = self.into();
         a.write(w)?;
@@ -635,6 +638,7 @@ impl MaximumPossibleSized for RealmRealmFlagSPECIFY_BUILD {
 }
 
 impl RealmRealmFlagSPECIFY_BUILD {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         self.version.write(w)?;
 

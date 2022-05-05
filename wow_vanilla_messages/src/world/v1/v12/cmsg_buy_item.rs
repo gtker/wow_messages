@@ -31,6 +31,7 @@ impl MessageBody for CMSG_BUY_ITEM {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // vendor_guid: Guid
         let vendor_guid = Guid::read(r)?;
@@ -52,6 +53,7 @@ impl MessageBody for CMSG_BUY_ITEM {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // vendor_guid: Guid
         self.vendor_guid.write(w)?;

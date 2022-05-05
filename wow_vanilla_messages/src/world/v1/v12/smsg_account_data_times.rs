@@ -27,6 +27,7 @@ impl MessageBody for SMSG_ACCOUNT_DATA_TIMES {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // data: u32[32]
         let mut data = [u32::default(); 32];
@@ -39,6 +40,7 @@ impl MessageBody for SMSG_ACCOUNT_DATA_TIMES {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // data: u32[32]
         for i in self.data.iter() {

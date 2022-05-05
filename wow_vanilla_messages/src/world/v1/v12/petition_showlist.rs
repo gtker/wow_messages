@@ -27,6 +27,7 @@ impl PetitionShowlist {
 impl ReadableAndWritable for PetitionShowlist {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // index: u32
         let index = crate::util::read_u32_le(r)?;
@@ -56,6 +57,7 @@ impl ReadableAndWritable for PetitionShowlist {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // index: u32
         w.write_all(&self.index.to_le_bytes())?;

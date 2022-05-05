@@ -25,6 +25,7 @@ pub enum ServerOpcodeMessage {
 impl ReadableAndWritable for ServerOpcodeMessage {
     type Error = ServerOpcodeMessageError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let opcode = ServerOpcode::read(r)?;
         match opcode {
@@ -36,6 +37,7 @@ impl ReadableAndWritable for ServerOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         ServerOpcode::from(self).write(w)?;
 
@@ -218,6 +220,7 @@ impl ServerOpcode {
 impl ReadableAndWritable for ServerOpcode {
     type Error = ServerOpcodeError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let opcode = crate::util::read_u8_le(r)?;
 
@@ -231,6 +234,7 @@ impl ReadableAndWritable for ServerOpcode {
         }
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u8_le(w, self.as_u8())?;
         Ok(())
@@ -333,6 +337,7 @@ pub enum ClientOpcodeMessage {
 impl ReadableAndWritable for ClientOpcodeMessage {
     type Error = ClientOpcodeMessageError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let opcode = ClientOpcode::read(r)?;
         match opcode {
@@ -344,6 +349,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         ClientOpcode::from(self).write(w)?;
 
@@ -493,6 +499,7 @@ impl ClientOpcode {
 impl ReadableAndWritable for ClientOpcode {
     type Error = ClientOpcodeError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let opcode = crate::util::read_u8_le(r)?;
 
@@ -506,6 +513,7 @@ impl ReadableAndWritable for ClientOpcode {
         }
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         crate::util::write_u8_le(w, self.as_u8())?;
         Ok(())

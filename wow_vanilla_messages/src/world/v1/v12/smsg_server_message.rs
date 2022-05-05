@@ -28,6 +28,7 @@ impl MessageBody for SMSG_SERVER_MESSAGE {
 
     type Error = SMSG_SERVER_MESSAGEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // message_type: ServerMessageType
         let message_type = ServerMessageType::read(r)?;
@@ -42,6 +43,7 @@ impl MessageBody for SMSG_SERVER_MESSAGE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // message_type: ServerMessageType
         self.message_type.write(w)?;

@@ -675,9 +675,7 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
                 for it in ImplType::types() {
 
                     let header = format!("pub {func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", func = it.func(), prefix = it.prefix(), write = it.write());
-                    if it != ImplType::Std {
-                        s.wln(it.cfg());
-                    }
+                    s.wln(it.cfg());
                     print_write_for_new_flag_complex(s, f, &header, it);
                 }
             },

@@ -29,6 +29,7 @@ impl MessageBody for CMSG_UNSTABLE_PET {
 
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // npc_guid: Guid
         let npc_guid = Guid::read(r)?;
@@ -42,6 +43,7 @@ impl MessageBody for CMSG_UNSTABLE_PET {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // npc_guid: Guid
         self.npc_guid.write(w)?;

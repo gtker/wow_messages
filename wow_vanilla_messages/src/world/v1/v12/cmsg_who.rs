@@ -33,6 +33,7 @@ impl MessageBody for CMSG_WHO {
 
     type Error = CMSG_WHOError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // minimum_level: u32
         let minimum_level = crate::util::read_u32_le(r)?;
@@ -85,6 +86,7 @@ impl MessageBody for CMSG_WHO {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // minimum_level: u32
         w.write_all(&self.minimum_level.to_le_bytes())?;

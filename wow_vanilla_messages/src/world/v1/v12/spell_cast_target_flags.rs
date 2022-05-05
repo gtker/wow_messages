@@ -22,11 +22,13 @@ impl SpellCastTargetFlags {
 impl ReadableAndWritable for SpellCastTargetFlags {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let inner = crate::util::read_u16_le(r)?;
         Ok(Self { inner })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         w.write_all(&self.inner.to_le_bytes())?;
         Ok(())

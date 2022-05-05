@@ -29,6 +29,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
     type Error = SMSG_BATTLEFIELD_STATUSError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // queue_slot: u32
         let queue_slot = crate::util::read_u32_le(r)?;
@@ -2325,6 +2326,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // queue_slot: u32
         w.write_all(&self.queue_slot.to_le_bytes())?;
@@ -13393,6 +13395,7 @@ impl Default for SMSG_BATTLEFIELD_STATUSStatusId {
 }
 
 impl SMSG_BATTLEFIELD_STATUSStatusId {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: StatusId = self.into();
         a.write(w)?;
@@ -13413,6 +13416,7 @@ impl SMSG_BATTLEFIELD_STATUSStatusId {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: StatusId = self.into();
         a.write_u16_le(w)
@@ -13430,6 +13434,7 @@ impl SMSG_BATTLEFIELD_STATUSStatusId {
         a.astd_write_u16_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: StatusId = self.into();
         a.write_u16_be(w)
@@ -13447,6 +13452,7 @@ impl SMSG_BATTLEFIELD_STATUSStatusId {
         a.astd_write_u16_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: StatusId = self.into();
         a.write_u32_le(w)
@@ -13464,6 +13470,7 @@ impl SMSG_BATTLEFIELD_STATUSStatusId {
         a.astd_write_u32_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: StatusId = self.into();
         a.write_u32_be(w)
@@ -13481,6 +13488,7 @@ impl SMSG_BATTLEFIELD_STATUSStatusId {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: StatusId = self.into();
         a.write_u64_le(w)
@@ -13498,6 +13506,7 @@ impl SMSG_BATTLEFIELD_STATUSStatusId {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: StatusId = self.into();
         a.write_u64_be(w)
@@ -14060,6 +14069,7 @@ impl Default for SMSG_BATTLEFIELD_STATUSMap {
 }
 
 impl SMSG_BATTLEFIELD_STATUSMap {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: Map = self.into();
         a.write(w)?;
@@ -14080,6 +14090,7 @@ impl SMSG_BATTLEFIELD_STATUSMap {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: Map = self.into();
         a.write_u32_be(w)
@@ -14097,6 +14108,7 @@ impl SMSG_BATTLEFIELD_STATUSMap {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: Map = self.into();
         a.write_u64_le(w)
@@ -14114,6 +14126,7 @@ impl SMSG_BATTLEFIELD_STATUSMap {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: Map = self.into();
         a.write_u64_be(w)

@@ -38,6 +38,7 @@ impl MessageBody for CMSG_CHAR_CREATE {
 
     type Error = CMSG_CHAR_CREATEError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
@@ -84,6 +85,7 @@ impl MessageBody for CMSG_CHAR_CREATE {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;

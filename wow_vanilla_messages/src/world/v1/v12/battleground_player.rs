@@ -24,6 +24,7 @@ pub struct BattlegroundPlayer {
 impl ReadableAndWritable for BattlegroundPlayer {
     type Error = BattlegroundPlayerError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // player: Guid
         let player = Guid::read(r)?;
@@ -63,6 +64,7 @@ impl ReadableAndWritable for BattlegroundPlayer {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player: Guid
         self.player.write(w)?;

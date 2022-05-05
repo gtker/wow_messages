@@ -19,6 +19,7 @@ pub struct ItemDamageType {
 impl ReadableAndWritable for ItemDamageType {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // damage_minimum: u32
         let damage_minimum = crate::util::read_u32_le(r)?;
@@ -36,6 +37,7 @@ impl ReadableAndWritable for ItemDamageType {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // damage_minimum: u32
         w.write_all(&self.damage_minimum.to_le_bytes())?;

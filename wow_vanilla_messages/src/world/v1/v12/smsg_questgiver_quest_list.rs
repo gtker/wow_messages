@@ -32,6 +32,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_LIST {
 
     type Error = SMSG_QUESTGIVER_QUEST_LISTError;
 
+    #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // npc: Guid
         let npc = Guid::read(r)?;
@@ -64,6 +65,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_LIST {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // npc: Guid
         self.npc.write(w)?;

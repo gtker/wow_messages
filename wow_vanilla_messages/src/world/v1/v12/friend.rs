@@ -21,6 +21,7 @@ pub struct Friend {
 impl ReadableAndWritable for Friend {
     type Error = FriendError;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -102,6 +103,7 @@ impl ReadableAndWritable for Friend {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
         self.guid.write(w)?;
@@ -623,6 +625,7 @@ impl Default for FriendFriendStatus {
 }
 
 impl FriendFriendStatus {
+    #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: FriendStatus = self.into();
         a.write(w)?;
@@ -643,6 +646,7 @@ impl FriendFriendStatus {
         Ok(())
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: FriendStatus = self.into();
         a.write_u16_le(w)
@@ -660,6 +664,7 @@ impl FriendFriendStatus {
         a.astd_write_u16_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: FriendStatus = self.into();
         a.write_u16_be(w)
@@ -677,6 +682,7 @@ impl FriendFriendStatus {
         a.astd_write_u16_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: FriendStatus = self.into();
         a.write_u32_le(w)
@@ -694,6 +700,7 @@ impl FriendFriendStatus {
         a.astd_write_u32_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: FriendStatus = self.into();
         a.write_u32_be(w)
@@ -711,6 +718,7 @@ impl FriendFriendStatus {
         a.astd_write_u32_be(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: FriendStatus = self.into();
         a.write_u64_le(w)
@@ -728,6 +736,7 @@ impl FriendFriendStatus {
         a.astd_write_u64_le(w).await
     }
 
+    #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         let a: FriendStatus = self.into();
         a.write_u64_be(w)

@@ -22,6 +22,7 @@ pub struct TransportInfo {
 impl ReadableAndWritable for TransportInfo {
     type Error = std::io::Error;
 
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
@@ -47,6 +48,7 @@ impl ReadableAndWritable for TransportInfo {
         })
     }
 
+    #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: PackedGuid
         self.guid.write_packed(w)?;
