@@ -621,7 +621,6 @@ impl Writer {
 pub enum ImplType {
     Std,
     Tokio,
-    #[allow(unused)]
     AsyncStd,
 }
 

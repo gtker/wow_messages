@@ -31,4 +31,3 @@
 * Error on invalid flag enumerator used
 * Error out on using == for flags and vice versa
 * Function to Write objects (eg strings) by reference
-* Tokio support
