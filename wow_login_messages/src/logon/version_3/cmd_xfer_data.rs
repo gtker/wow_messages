@@ -120,15 +120,15 @@ impl ReadableAndWritable for CMD_XFER_DATA {
 
 impl VariableSized for CMD_XFER_DATA {
     fn size(&self) -> usize {
-        2 // size: u16
+        0
+        + 2 // size: u16
         + self.data.len() * core::mem::size_of::<u8>() // data: u8[size]
     }
 }
 
 impl MaximumPossibleSized for CMD_XFER_DATA {
     fn maximum_possible_size() -> usize {
-        2 // size: u16
-        + 65535 * core::mem::size_of::<u8>() // data: u8[size]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -90,7 +90,8 @@ impl ConstantSized for MSG_PETITION_DECLINE {}
 
 impl MaximumPossibleSized for MSG_PETITION_DECLINE {
     fn maximum_possible_size() -> usize {
-        8 // petition: Guid
+        0
+        + 8 // petition: Guid
     }
 }
 

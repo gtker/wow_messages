@@ -102,7 +102,8 @@ impl ConstantSized for SMSG_ACTION_BUTTONS {}
 
 impl MaximumPossibleSized for SMSG_ACTION_BUTTONS {
     fn maximum_possible_size() -> usize {
-        120 * core::mem::size_of::<u32>() // data: u32[120]
+        0
+        + 480 // data: u32[120]
     }
 }
 

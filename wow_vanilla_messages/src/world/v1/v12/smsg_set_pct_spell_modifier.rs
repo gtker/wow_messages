@@ -131,7 +131,8 @@ impl ConstantSized for SMSG_SET_PCT_SPELL_MODIFIER {}
 
 impl MaximumPossibleSized for SMSG_SET_PCT_SPELL_MODIFIER {
     fn maximum_possible_size() -> usize {
-        1 // eff: u8
+        0
+        + 1 // eff: u8
         + 1 // op: u8
         + 4 // value: u32
     }

@@ -128,7 +128,8 @@ impl ReadableAndWritable for GroupListMember {
 
 impl VariableSized for GroupListMember {
     fn size(&self) -> usize {
-        self.name.len() + 1 // name: CString and Null Terminator
+        0
+        + self.name.len() + 1 // name: CString
         + 8 // guid: Guid
         + 1 // is_online: u8
     }
@@ -136,7 +137,8 @@ impl VariableSized for GroupListMember {
 
 impl MaximumPossibleSized for GroupListMember {
     fn maximum_possible_size() -> usize {
-        256 // name: CString
+        0
+        + 256 // name: CString
         + 8 // guid: Guid
         + 1 // is_online: u8
     }

@@ -56,5 +56,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [BattlegroundPlayer](battlegroundplayer.md)
-* [SMSG_PVP_CREDIT](smsg_pvp_credit.md)
 * [MSG_INSPECT_HONOR_STATS_Server](msg_inspect_honor_stats_server.md)
+* [SMSG_PVP_CREDIT](smsg_pvp_credit.md)

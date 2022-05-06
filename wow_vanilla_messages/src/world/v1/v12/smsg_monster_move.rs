@@ -187,23 +187,25 @@ impl MessageBody for SMSG_MONSTER_MOVE {
 
 impl VariableSized for SMSG_MONSTER_MOVE {
     fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        0
+        + self.guid.size() // guid: Guid
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32
         + 4 // spline_id: u32
-        + MonsterMoveType::size() // move_type: MonsterMoveType
+        + 1 // move_type: MonsterMoveType
     }
 }
 
 impl MaximumPossibleSized for SMSG_MONSTER_MOVE {
     fn maximum_possible_size() -> usize {
-        9 // guid: PackedGuid
+        0
+        + 9 // guid: Guid
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32
         + 4 // spline_id: u32
-        + MonsterMoveType::maximum_possible_size() // move_type: MonsterMoveType
+        + 1 // move_type: MonsterMoveType
     }
 }
 

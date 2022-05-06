@@ -118,15 +118,15 @@ impl MessageBody for SMSG_MAIL_LIST_RESULT {
 
 impl VariableSized for SMSG_MAIL_LIST_RESULT {
     fn size(&self) -> usize {
-        1 // amount_of_mails: u8
+        0
+        + 1 // amount_of_mails: u8
         + self.mails.iter().fold(0, |acc, x| acc + x.size()) // mails: Mail[amount_of_mails]
     }
 }
 
 impl MaximumPossibleSized for SMSG_MAIL_LIST_RESULT {
     fn maximum_possible_size() -> usize {
-        1 // amount_of_mails: u8
-        + 255 * Mail::maximum_possible_size() // mails: Mail[amount_of_mails]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

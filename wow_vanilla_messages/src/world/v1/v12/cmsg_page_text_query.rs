@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_PAGE_TEXT_QUERY {}
 
 impl MaximumPossibleSized for CMSG_PAGE_TEXT_QUERY {
     fn maximum_possible_size() -> usize {
-        4 // page_id: u32
+        0
+        + 4 // page_id: u32
     }
 }
 

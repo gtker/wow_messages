@@ -187,7 +187,8 @@ impl ConstantSized for ItemSpells {}
 
 impl MaximumPossibleSized for ItemSpells {
     fn maximum_possible_size() -> usize {
-        4 // spell: u32
+        0
+        + 4 // spell: u32
         + 4 // spell_trigger: u32
         + 4 // spell_charges: u32
         + 4 // spell_cooldown: u32

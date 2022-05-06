@@ -133,17 +133,19 @@ impl MessageBody for MessageWithComplexTypes {
 
 impl VariableSized for MessageWithComplexTypes {
     fn size(&self) -> usize {
-        SimpleEnum::size() // simple_enum: SimpleEnum
-        + SimpleFlag::size() // simple_flag: SimpleFlag
+        0
+        + 1 // simple_enum: SimpleEnum
+        + 1 // simple_flag: SimpleFlag
         + self.simple_struct.size() // simple_struct: StructWithAllBuiltInTypes
     }
 }
 
 impl MaximumPossibleSized for MessageWithComplexTypes {
     fn maximum_possible_size() -> usize {
-        SimpleEnum::maximum_possible_size() // simple_enum: SimpleEnum
-        + SimpleFlag::maximum_possible_size() // simple_flag: SimpleFlag
-        + StructWithAllBuiltInTypes::maximum_possible_size() // simple_struct: StructWithAllBuiltInTypes
+        0
+        + 1 // simple_enum: SimpleEnum
+        + 1 // simple_flag: SimpleFlag
+        + 565 // simple_struct: StructWithAllBuiltInTypes
     }
 }
 

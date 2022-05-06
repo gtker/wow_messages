@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_AUCTION_LIST_OWNER_ITEMS {}
 
 impl MaximumPossibleSized for CMSG_AUCTION_LIST_OWNER_ITEMS {
     fn maximum_possible_size() -> usize {
-        8 // auctioneer_guid: Guid
+        0
+        + 8 // auctioneer_guid: Guid
         + 4 // list_from: u32
     }
 }

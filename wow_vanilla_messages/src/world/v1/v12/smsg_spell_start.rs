@@ -269,10 +269,11 @@ impl MessageBody for SMSG_SPELL_START {
 
 impl VariableSized for SMSG_SPELL_START {
     fn size(&self) -> usize {
-        self.cast_item.size() // cast_item: PackedGuid
-        + self.caster.size() // caster: PackedGuid
+        0
+        + self.cast_item.size() // cast_item: Guid
+        + self.caster.size() // caster: Guid
         + 4 // spell: u32
-        + self.flags.size() // flags: CastFlags and subfields
+        + self.flags.size() // flags: SMSG_SPELL_STARTCastFlags
         + 4 // timer: u32
         + self.targets.size() // targets: SpellCastTargets
     }
@@ -280,12 +281,13 @@ impl VariableSized for SMSG_SPELL_START {
 
 impl MaximumPossibleSized for SMSG_SPELL_START {
     fn maximum_possible_size() -> usize {
-        9 // cast_item: PackedGuid
-        + 9 // caster: PackedGuid
+        0
+        + 9 // cast_item: Guid
+        + 9 // caster: Guid
         + 4 // spell: u32
-        + CastFlags::maximum_possible_size() // flags: CastFlags
+        + 10 // flags: SMSG_SPELL_STARTCastFlags
         + 4 // timer: u32
-        + SpellCastTargets::maximum_possible_size() // targets: SpellCastTargets
+        + 354 // targets: SpellCastTargets
     }
 }
 

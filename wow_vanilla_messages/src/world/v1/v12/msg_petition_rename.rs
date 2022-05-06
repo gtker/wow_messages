@@ -118,14 +118,16 @@ impl MessageBody for MSG_PETITION_RENAME {
 
 impl VariableSized for MSG_PETITION_RENAME {
     fn size(&self) -> usize {
-        8 // petition_guid: Guid
-        + self.new_name.len() + 1 // new_name: CString and Null Terminator
+        0
+        + 8 // petition_guid: Guid
+        + self.new_name.len() + 1 // new_name: CString
     }
 }
 
 impl MaximumPossibleSized for MSG_PETITION_RENAME {
     fn maximum_possible_size() -> usize {
-        8 // petition_guid: Guid
+        0
+        + 8 // petition_guid: Guid
         + 256 // new_name: CString
     }
 }

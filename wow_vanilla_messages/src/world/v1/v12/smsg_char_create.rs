@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_CHAR_CREATE {}
 
 impl MaximumPossibleSized for SMSG_CHAR_CREATE {
     fn maximum_possible_size() -> usize {
-        WorldResult::size() // result: WorldResult
+        0
+        + 4 // result: WorldResult
     }
 }
 

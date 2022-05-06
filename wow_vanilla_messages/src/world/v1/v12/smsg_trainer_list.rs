@@ -194,21 +194,18 @@ impl MessageBody for SMSG_TRAINER_LIST {
 
 impl VariableSized for SMSG_TRAINER_LIST {
     fn size(&self) -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // trainer_type: u32
         + 4 // amount_of_spells: u32
         + self.spells.iter().fold(0, |acc, x| acc + TrainerSpell::size()) // spells: TrainerSpell[amount_of_spells]
-        + self.greeting.len() + 1 // greeting: CString and Null Terminator
+        + self.greeting.len() + 1 // greeting: CString
     }
 }
 
 impl MaximumPossibleSized for SMSG_TRAINER_LIST {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + 4 // trainer_type: u32
-        + 4 // amount_of_spells: u32
-        + 4294967295 * TrainerSpell::maximum_possible_size() // spells: TrainerSpell[amount_of_spells]
-        + 256 // greeting: CString
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

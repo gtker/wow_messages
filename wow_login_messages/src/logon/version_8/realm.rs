@@ -332,28 +332,30 @@ impl ReadableAndWritable for Realm {
 
 impl VariableSized for Realm {
     fn size(&self) -> usize {
-        1 // realm_type: u8
+        0
+        + 1 // realm_type: u8
         + 1 // locked: u8
-        + self.flag.size() // flag: RealmFlag and subfields
-        + self.name.len() + 1 // name: CString and Null Terminator
-        + self.address.len() + 1 // address: CString and Null Terminator
-        + Population::size() // population: Population
+        + self.flag.size() // flag: RealmRealmFlag
+        + self.name.len() + 1 // name: CString
+        + self.address.len() + 1 // address: CString
+        + 4 // population: Population
         + 1 // number_of_characters_on_realm: u8
-        + RealmCategory::size() // category: RealmCategory
+        + 1 // category: RealmCategory
         + 1 // realm_id: u8
     }
 }
 
 impl MaximumPossibleSized for Realm {
     fn maximum_possible_size() -> usize {
-        1 // realm_type: u8
+        0
+        + 1 // realm_type: u8
         + 1 // locked: u8
-        + RealmFlag::maximum_possible_size() // flag: RealmFlag
+        + 6 // flag: RealmRealmFlag
         + 256 // name: CString
         + 256 // address: CString
-        + Population::maximum_possible_size() // population: Population
+        + 4 // population: Population
         + 1 // number_of_characters_on_realm: u8
-        + RealmCategory::maximum_possible_size() // category: RealmCategory
+        + 1 // category: RealmCategory
         + 1 // realm_id: u8
     }
 }

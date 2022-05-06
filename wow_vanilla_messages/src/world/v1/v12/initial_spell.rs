@@ -99,7 +99,8 @@ impl ConstantSized for InitialSpell {}
 
 impl MaximumPossibleSized for InitialSpell {
     fn maximum_possible_size() -> usize {
-        2 // spell_id: u16
+        0
+        + 2 // spell_id: u16
         + 2 // unknown1: u16
     }
 }

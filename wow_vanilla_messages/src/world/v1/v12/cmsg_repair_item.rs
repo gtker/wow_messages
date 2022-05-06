@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_REPAIR_ITEM {}
 
 impl MaximumPossibleSized for CMSG_REPAIR_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // npc_guid: Guid
+        0
+        + 8 // npc_guid: Guid
         + 8 // item_guid: Guid
     }
 }

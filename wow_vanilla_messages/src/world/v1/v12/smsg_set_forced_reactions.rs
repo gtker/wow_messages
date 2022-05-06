@@ -118,15 +118,15 @@ impl MessageBody for SMSG_SET_FORCED_REACTIONS {
 
 impl VariableSized for SMSG_SET_FORCED_REACTIONS {
     fn size(&self) -> usize {
-        4 // amount_of_reactions: u32
+        0
+        + 4 // amount_of_reactions: u32
         + self.reactions.iter().fold(0, |acc, x| acc + ForcedReaction::size()) // reactions: ForcedReaction[amount_of_reactions]
     }
 }
 
 impl MaximumPossibleSized for SMSG_SET_FORCED_REACTIONS {
     fn maximum_possible_size() -> usize {
-        4 // amount_of_reactions: u32
-        + 4294967295 * ForcedReaction::maximum_possible_size() // reactions: ForcedReaction[amount_of_reactions]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

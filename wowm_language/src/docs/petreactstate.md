@@ -21,5 +21,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `AGGRESSIVE` | 2 (0x02) |  |  |
 
 Used in:
-* [SMSG_PET_MODE](smsg_pet_mode.md)
 * [SMSG_PET_SPELLS](smsg_pet_spells.md)
+* [SMSG_PET_MODE](smsg_pet_mode.md)

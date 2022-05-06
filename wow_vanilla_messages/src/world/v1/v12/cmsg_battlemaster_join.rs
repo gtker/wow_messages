@@ -155,8 +155,9 @@ impl ConstantSized for CMSG_BATTLEMASTER_JOIN {}
 
 impl MaximumPossibleSized for CMSG_BATTLEMASTER_JOIN {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + Map::size() // map: Map
+        0
+        + 8 // guid: Guid
+        + 4 // map: Map
         + 4 // instance_id: u32
         + 1 // join_as_group: u8
     }

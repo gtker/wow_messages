@@ -141,7 +141,8 @@ impl MessageBody for SMSG_PETITION_SHOWLIST {
 
 impl VariableSized for SMSG_PETITION_SHOWLIST {
     fn size(&self) -> usize {
-        8 // npc: Guid
+        0
+        + 8 // npc: Guid
         + 1 // amount_of_petitions: u8
         + self.petitions.iter().fold(0, |acc, x| acc + PetitionShowlist::size()) // petitions: PetitionShowlist[amount_of_petitions]
     }
@@ -149,9 +150,10 @@ impl VariableSized for SMSG_PETITION_SHOWLIST {
 
 impl MaximumPossibleSized for SMSG_PETITION_SHOWLIST {
     fn maximum_possible_size() -> usize {
-        8 // npc: Guid
+        0
+        + 8 // npc: Guid
         + 1 // amount_of_petitions: u8
-        + 255 * PetitionShowlist::maximum_possible_size() // petitions: PetitionShowlist[amount_of_petitions]
+        + 6144 // petitions: PetitionShowlist[amount_of_petitions]
     }
 }
 

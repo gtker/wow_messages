@@ -109,7 +109,8 @@ impl ConstantSized for SMSG_SUPERCEDED_SPELL {}
 
 impl MaximumPossibleSized for SMSG_SUPERCEDED_SPELL {
     fn maximum_possible_size() -> usize {
-        2 // new_spell_id: u16
+        0
+        + 2 // new_spell_id: u16
         + 2 // old_spell_id: u16
     }
 }

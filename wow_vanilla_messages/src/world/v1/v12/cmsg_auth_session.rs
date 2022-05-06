@@ -276,9 +276,10 @@ impl MessageBody for CMSG_AUTH_SESSION {
 
 impl VariableSized for CMSG_AUTH_SESSION {
     fn size(&self) -> usize {
-        4 // build: u32
+        0
+        + 4 // build: u32
         + 4 // server_id: u32
-        + self.username.len() + 1 // username: CString and Null Terminator
+        + self.username.len() + 1 // username: CString
         + 4 // client_seed: u32
         + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
         + 4 // decompressed_addon_info_size: u32
@@ -288,13 +289,7 @@ impl VariableSized for CMSG_AUTH_SESSION {
 
 impl MaximumPossibleSized for CMSG_AUTH_SESSION {
     fn maximum_possible_size() -> usize {
-        4 // build: u32
-        + 4 // server_id: u32
-        + 256 // username: CString
-        + 4 // client_seed: u32
-        + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
-        + 4 // decompressed_addon_info_size: u32
-        + 65536 // compressed_addon_info: u8[-]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

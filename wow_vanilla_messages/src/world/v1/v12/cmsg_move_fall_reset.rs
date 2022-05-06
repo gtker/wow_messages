@@ -85,13 +85,15 @@ impl MessageBody for CMSG_MOVE_FALL_RESET {
 
 impl VariableSized for CMSG_MOVE_FALL_RESET {
     fn size(&self) -> usize {
-        self.info.size() // info: MovementInfo
+        0
+        + self.info.size() // info: MovementInfo
     }
 }
 
 impl MaximumPossibleSized for CMSG_MOVE_FALL_RESET {
     fn maximum_possible_size() -> usize {
-        MovementInfo::maximum_possible_size() // info: MovementInfo
+        0
+        + 81 // info: MovementInfo
     }
 }
 

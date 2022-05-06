@@ -213,12 +213,13 @@ impl ConstantSized for SMSG_TRADE_STATUS_EXTENDED {}
 
 impl MaximumPossibleSized for SMSG_TRADE_STATUS_EXTENDED {
     fn maximum_possible_size() -> usize {
-        1 // self_player: u8
+        0
+        + 1 // self_player: u8
         + 4 // trade_slot_count1: u32
         + 4 // trade_slot_count2: u32
         + 4 // money_in_trade: u32
         + 4 // spell_on_lowest_slot: u32
-        + 7 * TradeSlot::size() // trade_slots: TradeSlot[7]
+        + 427 // trade_slots: TradeSlot[7]
     }
 }
 

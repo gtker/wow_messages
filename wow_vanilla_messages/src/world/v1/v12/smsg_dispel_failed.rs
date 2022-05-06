@@ -159,7 +159,8 @@ impl MessageBody for SMSG_DISPEL_FAILED {
 
 impl VariableSized for SMSG_DISPEL_FAILED {
     fn size(&self) -> usize {
-        8 // caster_guid: Guid
+        0
+        + 8 // caster_guid: Guid
         + 8 // target_guid: Guid
         + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[-]
     }
@@ -167,9 +168,7 @@ impl VariableSized for SMSG_DISPEL_FAILED {
 
 impl MaximumPossibleSized for SMSG_DISPEL_FAILED {
     fn maximum_possible_size() -> usize {
-        8 // caster_guid: Guid
-        + 8 // target_guid: Guid
-        + 65536 // spells: u32[-]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

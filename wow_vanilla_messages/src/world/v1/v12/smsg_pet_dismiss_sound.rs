@@ -144,7 +144,8 @@ impl ConstantSized for SMSG_PET_DISMISS_SOUND {}
 
 impl MaximumPossibleSized for SMSG_PET_DISMISS_SOUND {
     fn maximum_possible_size() -> usize {
-        4 // sound_id: u32
+        0
+        + 4 // sound_id: u32
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32

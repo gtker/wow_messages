@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_DISMOUNTRESULT {}
 
 impl MaximumPossibleSized for SMSG_DISMOUNTRESULT {
     fn maximum_possible_size() -> usize {
-        MountResult::size() // result: MountResult
+        0
+        + 4 // result: MountResult
     }
 }
 

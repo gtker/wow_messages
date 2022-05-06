@@ -229,25 +229,26 @@ impl MessageBody for CMSG_PET_SET_ACTION {
 
 impl VariableSized for CMSG_PET_SET_ACTION {
     fn size(&self) -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // position1: u32
         + 4 // data1: u32
-        + {
-            if let Some(v) = &self.extra {
-                v.size()
-            } else {
-                0
-            }
-        } // optional extra
+        + if let Some(extra) = &self.extra {
+            0
+            + 4 // position2: u32
+            + 4 // data2: u32
+        } else {
+            0
+        }
     }
 }
 
 impl MaximumPossibleSized for CMSG_PET_SET_ACTION {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // position1: u32
         + 4 // data1: u32
-        + 65536 // optional extra
     }
 }
 

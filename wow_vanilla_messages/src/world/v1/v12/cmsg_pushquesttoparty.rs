@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_PUSHQUESTTOPARTY {}
 
 impl MaximumPossibleSized for CMSG_PUSHQUESTTOPARTY {
     fn maximum_possible_size() -> usize {
-        4 // quest_id: u32
+        0
+        + 4 // quest_id: u32
     }
 }
 

@@ -33,7 +33,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `GOBLIN` | 9 (0x09) |  |  |
 
 Used in:
-* [Character](character.md)
 * [WhoPlayer](whoplayer.md)
+* [Character](character.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
 * [CMSG_CHAR_CREATE](cmsg_char_create.md)

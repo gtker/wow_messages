@@ -106,7 +106,8 @@ impl ConstantSized for SMSG_LOGIN_SETTIMESPEED {}
 
 impl MaximumPossibleSized for SMSG_LOGIN_SETTIMESPEED {
     fn maximum_possible_size() -> usize {
-        4 // secs_to_time_bit_field: u32
+        0
+        + 4 // secs_to_time_bit_field: u32
         + 4 // game_speed: f32
     }
 }

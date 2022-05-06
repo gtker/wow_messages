@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_PONG {}
 
 impl MaximumPossibleSized for SMSG_PONG {
     fn maximum_possible_size() -> usize {
-        4 // sequence_id: u32
+        0
+        + 4 // sequence_id: u32
     }
 }
 

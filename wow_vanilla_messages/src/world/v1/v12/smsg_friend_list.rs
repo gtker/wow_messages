@@ -118,15 +118,17 @@ impl MessageBody for SMSG_FRIEND_LIST {
 
 impl VariableSized for SMSG_FRIEND_LIST {
     fn size(&self) -> usize {
-        1 // amount_of_friends: u8
+        0
+        + 1 // amount_of_friends: u8
         + self.friends.iter().fold(0, |acc, x| acc + x.size()) // friends: Friend[amount_of_friends]
     }
 }
 
 impl MaximumPossibleSized for SMSG_FRIEND_LIST {
     fn maximum_possible_size() -> usize {
-        1 // amount_of_friends: u8
-        + 255 * Friend::maximum_possible_size() // friends: Friend[amount_of_friends]
+        0
+        + 1 // amount_of_friends: u8
+        + 4608 // friends: Friend[amount_of_friends]
     }
 }
 

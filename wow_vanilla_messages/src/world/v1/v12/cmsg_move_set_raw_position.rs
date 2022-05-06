@@ -141,7 +141,8 @@ impl ConstantSized for CMSG_MOVE_SET_RAW_POSITION {}
 
 impl MaximumPossibleSized for CMSG_MOVE_SET_RAW_POSITION {
     fn maximum_possible_size() -> usize {
-        4 // position_x: f32
+        0
+        + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32
         + 4 // orientation: f32

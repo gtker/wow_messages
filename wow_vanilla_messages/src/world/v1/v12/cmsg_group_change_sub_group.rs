@@ -115,14 +115,16 @@ impl MessageBody for CMSG_GROUP_CHANGE_SUB_GROUP {
 
 impl VariableSized for CMSG_GROUP_CHANGE_SUB_GROUP {
     fn size(&self) -> usize {
-        self.name.len() + 1 // name: CString and Null Terminator
+        0
+        + self.name.len() + 1 // name: CString
         + 1 // group_number: u8
     }
 }
 
 impl MaximumPossibleSized for CMSG_GROUP_CHANGE_SUB_GROUP {
     fn maximum_possible_size() -> usize {
-        256 // name: CString
+        0
+        + 256 // name: CString
         + 1 // group_number: u8
     }
 }

@@ -121,7 +121,8 @@ impl ConstantSized for ItemDamageType {}
 
 impl MaximumPossibleSized for ItemDamageType {
     fn maximum_possible_size() -> usize {
-        4 // damage_minimum: u32
+        0
+        + 4 // damage_minimum: u32
         + 4 // damage_maximum: u32
         + 4 // damage_type: u32
     }

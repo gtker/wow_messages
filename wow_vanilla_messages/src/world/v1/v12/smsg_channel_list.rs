@@ -171,7 +171,8 @@ impl MessageBody for SMSG_CHANNEL_LIST {
 
 impl VariableSized for SMSG_CHANNEL_LIST {
     fn size(&self) -> usize {
-        self.channel_name.len() + 1 // channel_name: CString and Null Terminator
+        0
+        + self.channel_name.len() + 1 // channel_name: CString
         + 1 // channel_flags: u8
         + 4 // amount_of_members: u32
         + self.members.iter().fold(0, |acc, x| acc + ChannelMember::size()) // members: ChannelMember[amount_of_members]
@@ -180,10 +181,7 @@ impl VariableSized for SMSG_CHANNEL_LIST {
 
 impl MaximumPossibleSized for SMSG_CHANNEL_LIST {
     fn maximum_possible_size() -> usize {
-        256 // channel_name: CString
-        + 1 // channel_flags: u8
-        + 4 // amount_of_members: u32
-        + 4294967295 * ChannelMember::maximum_possible_size() // members: ChannelMember[amount_of_members]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

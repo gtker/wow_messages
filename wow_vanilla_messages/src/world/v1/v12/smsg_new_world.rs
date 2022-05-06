@@ -141,7 +141,8 @@ impl ConstantSized for SMSG_NEW_WORLD {}
 
 impl MaximumPossibleSized for SMSG_NEW_WORLD {
     fn maximum_possible_size() -> usize {
-        4 // position_x: f32
+        0
+        + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32
         + 4 // orientation: f32

@@ -682,9 +682,10 @@ impl ReadableAndWritable for Mail {
 
 impl VariableSized for Mail {
     fn size(&self) -> usize {
-        4 // message_id: u32
-        + self.message_type.size() // message_type: MailType and subfields
-        + self.subject.len() + 1 // subject: CString and Null Terminator
+        0
+        + 4 // message_id: u32
+        + self.message_type.size() // message_type: MailMailType
+        + self.subject.len() + 1 // subject: CString
         + 4 // item_text_id: u32
         + 4 // unknown1: u32
         + 4 // stationery: u32
@@ -706,8 +707,9 @@ impl VariableSized for Mail {
 
 impl MaximumPossibleSized for Mail {
     fn maximum_possible_size() -> usize {
-        4 // message_id: u32
-        + MailType::maximum_possible_size() // message_type: MailType
+        0
+        + 4 // message_id: u32
+        + 9 // message_type: MailMailType
         + 256 // subject: CString
         + 4 // item_text_id: u32
         + 4 // unknown1: u32

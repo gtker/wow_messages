@@ -99,7 +99,8 @@ impl ConstantSized for SpellCooldownStatus {}
 
 impl MaximumPossibleSized for SpellCooldownStatus {
     fn maximum_possible_size() -> usize {
-        4 // id: u32
+        0
+        + 4 // id: u32
         + 4 // cooldown_time_in_msecs: u32
     }
 }

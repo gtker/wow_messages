@@ -93,13 +93,15 @@ impl MessageBody for SMSG_NOTIFICATION {
 
 impl VariableSized for SMSG_NOTIFICATION {
     fn size(&self) -> usize {
-        self.notification.len() + 1 // notification: CString and Null Terminator
+        0
+        + self.notification.len() + 1 // notification: CString
     }
 }
 
 impl MaximumPossibleSized for SMSG_NOTIFICATION {
     fn maximum_possible_size() -> usize {
-        256 // notification: CString
+        0
+        + 256 // notification: CString
     }
 }
 

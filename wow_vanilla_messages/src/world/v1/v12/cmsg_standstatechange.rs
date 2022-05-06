@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_STANDSTATECHANGE {}
 
 impl MaximumPossibleSized for CMSG_STANDSTATECHANGE {
     fn maximum_possible_size() -> usize {
-        4 // animation_state: UnitStandState upcasted to u32
+        0
+        + 1 // animation_state: UnitStandState
     }
 }
 

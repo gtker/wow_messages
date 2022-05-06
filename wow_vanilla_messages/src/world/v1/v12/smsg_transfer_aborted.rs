@@ -137,8 +137,9 @@ impl ConstantSized for SMSG_TRANSFER_ABORTED {}
 
 impl MaximumPossibleSized for SMSG_TRANSFER_ABORTED {
     fn maximum_possible_size() -> usize {
-        Map::size() // map: Map
-        + TransferAbortReason::size() // reason: TransferAbortReason
+        0
+        + 4 // map: Map
+        + 1 // reason: TransferAbortReason
         + 1 // padding: u8
     }
 }

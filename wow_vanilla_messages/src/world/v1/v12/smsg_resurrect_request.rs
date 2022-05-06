@@ -182,9 +182,10 @@ impl MessageBody for SMSG_RESURRECT_REQUEST {
 
 impl VariableSized for SMSG_RESURRECT_REQUEST {
     fn size(&self) -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // name_length: u32
-        + self.name.len() + 1 // name: CString and Null Terminator
+        + self.name.len() + 1 // name: CString
         + 1 // caster_is_spirit_healer: u8
         + 1 // respect_resurrection_timer: u8
     }
@@ -192,7 +193,8 @@ impl VariableSized for SMSG_RESURRECT_REQUEST {
 
 impl MaximumPossibleSized for SMSG_RESURRECT_REQUEST {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // name_length: u32
         + 256 // name: CString
         + 1 // caster_is_spirit_healer: u8

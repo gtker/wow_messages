@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_COOLDOWN_EVENT {}
 
 impl MaximumPossibleSized for SMSG_COOLDOWN_EVENT {
     fn maximum_possible_size() -> usize {
-        4 // id: u32
+        0
+        + 4 // id: u32
         + 8 // guid: Guid
     }
 }

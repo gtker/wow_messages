@@ -133,9 +133,10 @@ impl ConstantSized for SMSG_SPELL_FAILURE {}
 
 impl MaximumPossibleSized for SMSG_SPELL_FAILURE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // id: u32
-        + SpellCastResult::size() // result: SpellCastResult
+        + 1 // result: SpellCastResult
     }
 }
 

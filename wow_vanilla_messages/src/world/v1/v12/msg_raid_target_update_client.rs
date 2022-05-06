@@ -515,13 +515,15 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
 
 impl VariableSized for MSG_RAID_TARGET_UPDATE_Client {
     fn size(&self) -> usize {
-        self.index.size() // index: RaidTargetIndex and subfields
+        0
+        + self.index.size() // index: MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex
     }
 }
 
 impl MaximumPossibleSized for MSG_RAID_TARGET_UPDATE_Client {
     fn maximum_possible_size() -> usize {
-        RaidTargetIndex::maximum_possible_size() // index: RaidTargetIndex
+        0
+        + 9 // index: MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex
     }
 }
 

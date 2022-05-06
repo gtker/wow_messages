@@ -132,19 +132,19 @@ impl MessageBody for CMSG_TOGGLE_PVP {
 
 impl VariableSized for CMSG_TOGGLE_PVP {
     fn size(&self) -> usize {
-        {
-            if let Some(v) = &self.set {
-                v.size()
-            } else {
-                0
-            }
-        } // optional set
+        0
+        + if let Some(set) = &self.set {
+            0
+            + 1 // enable_pvp: u8
+        } else {
+            0
+        }
     }
 }
 
 impl MaximumPossibleSized for CMSG_TOGGLE_PVP {
     fn maximum_possible_size() -> usize {
-        65536 // optional set
+        0
     }
 }
 

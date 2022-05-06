@@ -328,10 +328,11 @@ impl MessageBody for CMSG_WHO {
 
 impl VariableSized for CMSG_WHO {
     fn size(&self) -> usize {
-        4 // minimum_level: u32
+        0
+        + 4 // minimum_level: u32
         + 4 // maximum_level: u32
-        + self.player_name.len() + 1 // player_name: CString and Null Terminator
-        + self.guild_name.len() + 1 // guild_name: CString and Null Terminator
+        + self.player_name.len() + 1 // player_name: CString
+        + self.guild_name.len() + 1 // guild_name: CString
         + 4 // race_mask: u32
         + 4 // class_mask: u32
         + 4 // amount_of_zones: u32
@@ -343,16 +344,7 @@ impl VariableSized for CMSG_WHO {
 
 impl MaximumPossibleSized for CMSG_WHO {
     fn maximum_possible_size() -> usize {
-        4 // minimum_level: u32
-        + 4 // maximum_level: u32
-        + 256 // player_name: CString
-        + 256 // guild_name: CString
-        + 4 // race_mask: u32
-        + 4 // class_mask: u32
-        + 4 // amount_of_zones: u32
-        + 4294967295 * core::mem::size_of::<u32>() // zones: u32[amount_of_zones]
-        + 4 // amount_of_strings: u32
-        + 4294967295 * 256 // search_strings: CString[amount_of_strings]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

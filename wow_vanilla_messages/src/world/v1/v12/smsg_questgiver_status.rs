@@ -111,8 +111,9 @@ impl ConstantSized for SMSG_QUESTGIVER_STATUS {}
 
 impl MaximumPossibleSized for SMSG_QUESTGIVER_STATUS {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + 4 // status: QuestGiverStatus upcasted to u32
+        0
+        + 8 // guid: Guid
+        + 1 // status: QuestGiverStatus
     }
 }
 

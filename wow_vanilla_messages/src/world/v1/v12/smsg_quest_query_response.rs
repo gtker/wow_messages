@@ -766,7 +766,8 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
 
 impl VariableSized for SMSG_QUEST_QUERY_RESPONSE {
     fn size(&self) -> usize {
-        4 // quest_id: u32
+        0
+        + 4 // quest_id: u32
         + 4 // quest_method: u32
         + 4 // quest_level: u32
         + 4 // zone_or_sort: u32
@@ -787,10 +788,10 @@ impl VariableSized for SMSG_QUEST_QUERY_RESPONSE {
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // point_opt: u32
-        + self.title.len() + 1 // title: CString and Null Terminator
-        + self.objective_text.len() + 1 // objective_text: CString and Null Terminator
-        + self.details.len() + 1 // details: CString and Null Terminator
-        + self.end_text.len() + 1 // end_text: CString and Null Terminator
+        + self.title.len() + 1 // title: CString
+        + self.objective_text.len() + 1 // objective_text: CString
+        + self.details.len() + 1 // details: CString
+        + self.end_text.len() + 1 // end_text: CString
         + 4 * QuestObjective::size() // objectives: QuestObjective[4]
         + self.objective_texts.iter().fold(0, |acc, x| acc + x.len() + 1) // objective_texts: CString[4]
     }
@@ -798,7 +799,8 @@ impl VariableSized for SMSG_QUEST_QUERY_RESPONSE {
 
 impl MaximumPossibleSized for SMSG_QUEST_QUERY_RESPONSE {
     fn maximum_possible_size() -> usize {
-        4 // quest_id: u32
+        0
+        + 4 // quest_id: u32
         + 4 // quest_method: u32
         + 4 // quest_level: u32
         + 4 // zone_or_sort: u32
@@ -813,8 +815,8 @@ impl MaximumPossibleSized for SMSG_QUEST_QUERY_RESPONSE {
         + 4 // reward_spell: u32
         + 4 // source_item_id: u32
         + 4 // quest_flags: u32
-        + 4 * QuestItemReward::maximum_possible_size() // rewards: QuestItemReward[4]
-        + 6 * QuestItemReward::maximum_possible_size() // choice_rewards: QuestItemReward[6]
+        + 32 // rewards: QuestItemReward[4]
+        + 48 // choice_rewards: QuestItemReward[6]
         + 4 // point_map_id: u32
         + 4 // position_x: f32
         + 4 // position_y: f32
@@ -823,8 +825,8 @@ impl MaximumPossibleSized for SMSG_QUEST_QUERY_RESPONSE {
         + 256 // objective_text: CString
         + 256 // details: CString
         + 256 // end_text: CString
-        + 4 * QuestObjective::maximum_possible_size() // objectives: QuestObjective[4]
-        + 4 * 256 // objective_texts: CString[4]
+        + 64 // objectives: QuestObjective[4]
+        + 1024 // objective_texts: CString[4]
     }
 }
 

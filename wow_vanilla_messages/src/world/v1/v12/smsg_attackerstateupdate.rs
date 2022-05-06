@@ -151,18 +151,20 @@ impl MessageBody for SMSG_ATTACKERSTATEUPDATE {
 
 impl VariableSized for SMSG_ATTACKERSTATEUPDATE {
     fn size(&self) -> usize {
-        4 // hit_info: u32
-        + self.attacker.size() // attacker: PackedGuid
-        + self.target.size() // target: PackedGuid
+        0
+        + 4 // hit_info: u32
+        + self.attacker.size() // attacker: Guid
+        + self.target.size() // target: Guid
         + 4 // total_damage: u32
     }
 }
 
 impl MaximumPossibleSized for SMSG_ATTACKERSTATEUPDATE {
     fn maximum_possible_size() -> usize {
-        4 // hit_info: u32
-        + 9 // attacker: PackedGuid
-        + 9 // target: PackedGuid
+        0
+        + 4 // hit_info: u32
+        + 9 // attacker: Guid
+        + 9 // target: Guid
         + 4 // total_damage: u32
     }
 }

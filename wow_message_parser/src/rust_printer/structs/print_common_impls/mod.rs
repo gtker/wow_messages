@@ -1,7 +1,8 @@
-use crate::container::{Container, ContainerType, StructMember};
+use crate::container::{Container, ContainerType, StructMember, GUID_SIZE};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType, IntegerType};
+use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
 use crate::rust_printer::{
     Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
     WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
@@ -37,7 +38,7 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 e.name(),
                 error_ty,
                 opcode,
-                e.is_constant_sized(),
+                e.rust_object().constant_sized(),
                 |s, it| {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
@@ -48,7 +49,8 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         }
     }
 
-    print_size(s, e, o);
+    //print_size(s, e, o);
+    print_size_rust_view(s, e.rust_object(), "self.");
 }
 
 fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
@@ -310,110 +312,195 @@ fn print_comment_for_size_of_ty(
     s.wln_no_indent("");
 }
 
-fn print_size(s: &mut Writer, e: &Container, o: &Objects) {
-    let size_func = |s: &mut Writer| {
-        if e.fields().is_empty() {
-            s.wln("0");
-            return;
-        }
-        let types = e.nested_types().declarations();
-        for (i, d) in types.iter().enumerate() {
-            match i != 0 {
-                true => s.w("+ "),
-                false => s.w(""),
-            }
-
-            let array_inner_constant = match d.ty() {
-                Type::Array(array) => match array.ty() {
-                    ArrayType::Integer(_) => true,
-                    ArrayType::Complex(ident) => o.type_has_constant_size(&Type::Identifier {
-                        s: ident.clone(),
-                        upcast: None,
-                    }),
-                    ArrayType::CString => false,
-                    ArrayType::Guid => true,
-                    ArrayType::PackedGuid => false,
-                },
-                _ => false,
-            };
-
-            print_size_of_ty(
-                s,
-                d.ty(),
-                d.name(),
-                d.does_not_have_subvariables(),
-                o.type_has_constant_size(d.ty()),
-                array_inner_constant,
-                "self.",
-                &d.ty().str(),
-            );
-        }
-
-        if let Some(optional) = e.rust_object().optional() {
-            if e.nested_types().declarations().is_empty() {
-                s.w("");
+fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) {
+    let str = match m.ty() {
+        RustType::Integer(i) => i.size().to_string(),
+        RustType::Floating(f) => f.size().to_string(),
+        RustType::Guid => GUID_SIZE.to_string(),
+        RustType::String => format!("{prefix}{name}.len()", name = m.name(), prefix = prefix),
+        RustType::CString => format!("{prefix}{name}.len() + 1", name = m.name(), prefix = prefix),
+        RustType::Struct(_) | RustType::PackedGuid | RustType::UpdateMask | RustType::AuraMask => {
+            let prefixes = if m.constant_sized() {
+                format!("{ty_name}::", ty_name = m.ty())
             } else {
-                s.w("+ ");
+                format!("{prefix}{name}.", name = m.name(), prefix = prefix,)
+            };
+            format!("{prefixes}size()", prefixes = prefixes,)
+        }
+        RustType::Enum {
+            upcast,
+            is_simple,
+            int_ty,
+            ..
+        } => {
+            if !is_simple {
+                format!("{prefix}{name}.size()", name = m.name(), prefix = prefix)
+            } else {
+                let ty = if let Some(upcast) = upcast {
+                    upcast
+                } else {
+                    int_ty
+                };
+
+                ty.size().to_string()
             }
-
-            s.wln_no_indent("{");
-            s.inc_indent();
-
-            s.body_else(
-                format!("if let Some(v) = &self.{name}", name = optional.name()),
-                |s| {
-                    s.wln("v.size()");
+        }
+        RustType::Flag {
+            is_simple, int_ty, ..
+        } => {
+            if !is_simple {
+                format!("{prefix}{name}.size()", name = m.name(), prefix = prefix)
+            } else {
+                int_ty.size().to_string()
+            }
+        }
+        RustType::Array {
+            array,
+            inner_is_constant,
+        } => match array.ty() {
+            ArrayType::Integer(integer_type) => match array.size() {
+                ArraySize::Fixed(fixed_value) => format!(
+                    "{array_size} * core::mem::size_of::<{ty}>()",
+                    array_size = fixed_value,
+                    ty = integer_type.rust_str(),
+                ),
+                ArraySize::Variable(_) | ArraySize::Endless => {
+                    format!(
+                        "{prefix}{name}.len() * core::mem::size_of::<{ty}>()",
+                        name = m.name(),
+                        prefix = prefix,
+                        ty = integer_type.rust_str(),
+                    )
+                }
+            },
+            ArrayType::Complex(complex_type) => match array.size() {
+                ArraySize::Fixed(fixed_value) => match m.constant_sized() {
+                    true => format!(
+                        "{fixed_value} * {inner_type_name}::size()",
+                        inner_type_name = complex_type,
+                        fixed_value = fixed_value,
+                    ),
+                    false => format!(
+                        "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
+                        name = m.name(),
+                        prefix = prefix,
+                    ),
                 },
-                |s| {
-                    s.wln("0");
-                },
-            );
-            s.closing_curly_with(format!(" // optional {name}", name = optional.name()));
+                ArraySize::Variable(_) | ArraySize::Endless => {
+                    format!(
+                        "{prefix}{name}.iter().fold(0, |acc, x| acc + {size_function})",
+                        name = m.name(),
+                        prefix = prefix,
+                        size_function = match inner_is_constant {
+                            true => format!("{type_name}::size()", type_name = complex_type),
+                            false => "x.size()".to_string(),
+                        },
+                    )
+                }
+            },
+            ArrayType::CString => {
+                format!(
+                    "{prefix}{name}.iter().fold(0, |acc, x| acc + x.len() + 1)",
+                    name = m.name(),
+                    prefix = prefix,
+                )
+            }
+            ArrayType::Guid => {
+                format!(
+                    "{prefix}{name}.iter().fold(0, |acc, _| acc + 8)",
+                    name = m.name(),
+                    prefix = prefix,
+                )
+            }
+            ArrayType::PackedGuid => {
+                format!(
+                    "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
+                    name = m.name(),
+                    prefix = prefix,
+                )
+            }
+        },
+    };
+    s.w_no_indent(str);
+}
+
+fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
+    let maximum_possible_size = |s: &mut Writer| {
+        if r.sizes().maximum() > u16::MAX.into() {
+            s.wln(format!(
+                "{} // Capped at u16::MAX due to size field.",
+                u16::MAX
+            ));
+        } else {
+            s.wln("0");
+
+            for m in r.members() {
+                s.w("+ ");
+
+                s.w_no_indent(format!("{}", m.sizes().maximum()));
+
+                s.wln_no_indent(format!(
+                    " // {name}: {ty}",
+                    name = m.name(),
+                    ty = m.ty().str()
+                ));
+            }
         }
     };
 
-    match o.type_has_constant_size(&Type::Identifier {
-        s: e.name().to_owned(),
-        upcast: None,
-    }) {
-        true => s.constant_sized(e.name(), size_func),
-        false => {
-            s.variable_size(e.name(), size_func, |s| {
-                for (i, d) in e.nested_types().declarations().iter().enumerate() {
-                    match i != 0 {
-                        true => s.w("+ "),
-                        false => s.w(""),
-                    }
-                    let array_type_largest_possible_size =
-                        get_array_type_largest_possible_value(d.ty(), e);
-                    print_maximum_size_of_type(
-                        s,
-                        d.ty(),
-                        d.name(),
-                        array_type_largest_possible_size,
+    if r.constant_sized() {
+        s.constant_sized(r.name(), |s| {
+            maximum_possible_size(s);
+        });
+    } else {
+        s.variable_size(
+            r.name(),
+            |s| {
+                s.wln("0");
+
+                for m in r.members() {
+                    s.w("+ ");
+
+                    print_size_of_ty_rust_view(s, m, prefix);
+
+                    s.wln_no_indent(format!(
+                        " // {name}: {ty}",
+                        name = m.name(),
+                        ty = m.ty().str(),
+                    ));
+                }
+
+                if let Some(optional) = r.optional() {
+                    s.body_else(
+                        format!(
+                            "+ if let Some({name}) = &{prefix}{name}",
+                            name = optional.name(),
+                            prefix = prefix
+                        ),
+                        |s| {
+                            s.wln("0");
+
+                            let prefix = format!("{}.", optional.name());
+                            for m in optional.members_in_struct() {
+                                s.w("+ ");
+
+                                print_size_of_ty_rust_view(s, m, &prefix);
+
+                                s.wln_no_indent(format!(
+                                    " // {name}: {ty}",
+                                    name = m.name(),
+                                    ty = m.ty().str(),
+                                ));
+                            }
+                        },
+                        |s| {
+                            s.wln("0");
+                        },
                     );
                 }
-
-                for m in e.fields() {
-                    match m {
-                        StructMember::Definition(_) => {}
-                        StructMember::IfStatement(_) => {}
-                        StructMember::OptionalStatement(optional) => {
-                            if e.nested_types().declarations().is_empty() {
-                                s.w("");
-                            } else {
-                                s.w("+ ");
-                            }
-
-                            s.wln_no_indent(format!(
-                                "65536 // optional {name}",
-                                name = optional.name()
-                            ));
-                        }
-                    }
-                }
-            });
-        }
+            },
+            maximum_possible_size,
+        );
     }
 }
 

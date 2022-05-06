@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_TRAINER_BUY_SPELL {}
 
 impl MaximumPossibleSized for CMSG_TRAINER_BUY_SPELL {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // id: u32
     }
 }

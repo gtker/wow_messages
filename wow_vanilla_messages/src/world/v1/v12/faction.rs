@@ -99,7 +99,8 @@ impl ConstantSized for Faction {}
 
 impl MaximumPossibleSized for Faction {
     fn maximum_possible_size() -> usize {
-        4 // reputation_list_id: u32
+        0
+        + 4 // reputation_list_id: u32
         + 4 // standing: u32
     }
 }

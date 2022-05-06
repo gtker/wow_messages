@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_SETSHEATHED {}
 
 impl MaximumPossibleSized for CMSG_SETSHEATHED {
     fn maximum_possible_size() -> usize {
-        4 // sheathed: SheathState upcasted to u32
+        0
+        + 1 // sheathed: SheathState
     }
 }
 

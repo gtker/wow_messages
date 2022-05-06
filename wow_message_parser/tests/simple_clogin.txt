@@ -90,7 +90,8 @@ impl ConstantSized for SimpleClogin {}
 
 impl MaximumPossibleSized for SimpleClogin {
     fn maximum_possible_size() -> usize {
-        1 // basic: u8
+        0
+        + 1 // basic: u8
     }
 }
 

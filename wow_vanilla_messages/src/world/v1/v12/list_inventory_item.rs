@@ -209,7 +209,8 @@ impl ConstantSized for ListInventoryItem {}
 
 impl MaximumPossibleSized for ListInventoryItem {
     fn maximum_possible_size() -> usize {
-        4 // item_stack_count: u32
+        0
+        + 4 // item_stack_count: u32
         + 4 // item_id: u32
         + 4 // item_display_id: u32
         + 4 // max_items: u32

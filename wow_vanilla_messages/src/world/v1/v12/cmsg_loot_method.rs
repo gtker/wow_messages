@@ -134,9 +134,10 @@ impl ConstantSized for CMSG_LOOT_METHOD {}
 
 impl MaximumPossibleSized for CMSG_LOOT_METHOD {
     fn maximum_possible_size() -> usize {
-        4 // loot_setting: GroupLootSetting upcasted to u32
+        0
+        + 1 // loot_setting: GroupLootSetting
         + 8 // loot_master: Guid
-        + 4 // loot_threshold: ItemQuality upcasted to u32
+        + 1 // loot_threshold: ItemQuality
     }
 }
 

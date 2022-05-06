@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_EXPLORATION_EXPERIENCE {}
 
 impl MaximumPossibleSized for SMSG_EXPLORATION_EXPERIENCE {
     fn maximum_possible_size() -> usize {
-        Area::size() // area: Area
+        0
+        + 4 // area: Area
         + 4 // experience: u32
     }
 }

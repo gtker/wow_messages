@@ -133,9 +133,10 @@ impl ConstantSized for SMSG_TRAINER_BUY_FAILED {}
 
 impl MaximumPossibleSized for SMSG_TRAINER_BUY_FAILED {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // id: u32
-        + TrainingFailureReason::size() // error: TrainingFailureReason
+        + 4 // error: TrainingFailureReason
     }
 }
 

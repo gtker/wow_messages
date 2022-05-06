@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_GMTICKET_SYSTEMSTATUS {}
 
 impl MaximumPossibleSized for SMSG_GMTICKET_SYSTEMSTATUS {
     fn maximum_possible_size() -> usize {
-        4 // will_accept_tickets: u32
+        0
+        + 4 // will_accept_tickets: u32
     }
 }
 

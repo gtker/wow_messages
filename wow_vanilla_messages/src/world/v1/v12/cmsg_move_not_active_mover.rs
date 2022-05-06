@@ -108,15 +108,17 @@ impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
 
 impl VariableSized for CMSG_MOVE_NOT_ACTIVE_MOVER {
     fn size(&self) -> usize {
-        8 // old_mover: Guid
+        0
+        + 8 // old_mover: Guid
         + self.movement_info.size() // movement_info: MovementInfo
     }
 }
 
 impl MaximumPossibleSized for CMSG_MOVE_NOT_ACTIVE_MOVER {
     fn maximum_possible_size() -> usize {
-        8 // old_mover: Guid
-        + MovementInfo::maximum_possible_size() // movement_info: MovementInfo
+        0
+        + 8 // old_mover: Guid
+        + 81 // movement_info: MovementInfo
     }
 }
 

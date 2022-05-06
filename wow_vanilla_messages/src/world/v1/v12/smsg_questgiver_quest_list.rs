@@ -216,8 +216,9 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_LIST {
 
 impl VariableSized for SMSG_QUESTGIVER_QUEST_LIST {
     fn size(&self) -> usize {
-        8 // npc: Guid
-        + self.title.len() + 1 // title: CString and Null Terminator
+        0
+        + 8 // npc: Guid
+        + self.title.len() + 1 // title: CString
         + 4 // emote_delay: u32
         + 4 // emote: u32
         + 1 // amount_of_entries: u8
@@ -227,12 +228,7 @@ impl VariableSized for SMSG_QUESTGIVER_QUEST_LIST {
 
 impl MaximumPossibleSized for SMSG_QUESTGIVER_QUEST_LIST {
     fn maximum_possible_size() -> usize {
-        8 // npc: Guid
-        + 256 // title: CString
-        + 4 // emote_delay: u32
-        + 4 // emote: u32
-        + 1 // amount_of_entries: u8
-        + 255 * QuestItem::maximum_possible_size() // quest_items: QuestItem[amount_of_entries]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -334,7 +334,8 @@ impl ReadableAndWritable for StructWithAllBuiltInTypes {
 
 impl VariableSized for StructWithAllBuiltInTypes {
     fn size(&self) -> usize {
-        1 // basic8: u8
+        0
+        + 1 // basic8: u8
         + 2 // basic16: u16
         + 4 // basic32: u32
         + 8 // basic64: u64
@@ -345,14 +346,15 @@ impl VariableSized for StructWithAllBuiltInTypes {
         + 4 // decimal32_be: f32_be
         + 8 // decimal64: f64
         + 8 // decimal64_be: f64_be
-        + self.simple_cstring.len() + 1 // simple_cstring: CString and Null Terminator
-        + self.simple_string.len() // simple_string: String[basic8]
+        + self.simple_cstring.len() + 1 // simple_cstring: CString
+        + self.simple_string.len() // simple_string: String
     }
 }
 
 impl MaximumPossibleSized for StructWithAllBuiltInTypes {
     fn maximum_possible_size() -> usize {
-        1 // basic8: u8
+        0
+        + 1 // basic8: u8
         + 2 // basic16: u16
         + 4 // basic32: u32
         + 8 // basic64: u64
@@ -364,7 +366,7 @@ impl MaximumPossibleSized for StructWithAllBuiltInTypes {
         + 8 // decimal64: f64
         + 8 // decimal64_be: f64_be
         + 256 // simple_cstring: CString
-        + 255 // simple_string: String[basic8]
+        + 256 // simple_string: String
     }
 }
 

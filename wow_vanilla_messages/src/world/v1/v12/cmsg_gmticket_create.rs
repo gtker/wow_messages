@@ -437,25 +437,20 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
 
 impl VariableSized for CMSG_GMTICKET_CREATE {
     fn size(&self) -> usize {
-        self.category.size() // category: GmTicketType and subfields
-        + Map::size() // map: Map
+        0
+        + self.category.size() // category: CMSG_GMTICKET_CREATEGmTicketType
+        + 4 // map: Map
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32
-        + self.message.len() + 1 // message: CString and Null Terminator
-        + self.reserved_for_future_use.len() + 1 // reserved_for_future_use: CString and Null Terminator
+        + self.message.len() + 1 // message: CString
+        + self.reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GMTICKET_CREATE {
     fn maximum_possible_size() -> usize {
-        GmTicketType::maximum_possible_size() // category: GmTicketType
-        + Map::maximum_possible_size() // map: Map
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
-        + 256 // message: CString
-        + 256 // reserved_for_future_use: CString
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

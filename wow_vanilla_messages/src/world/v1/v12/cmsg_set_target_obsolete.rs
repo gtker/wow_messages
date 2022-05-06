@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_SET_TARGET_OBSOLETE {}
 
 impl MaximumPossibleSized for CMSG_SET_TARGET_OBSOLETE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

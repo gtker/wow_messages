@@ -197,7 +197,8 @@ impl ConstantSized for CMSG_DESTROYITEM {}
 
 impl MaximumPossibleSized for CMSG_DESTROYITEM {
     fn maximum_possible_size() -> usize {
-        1 // bag: u8
+        0
+        + 1 // bag: u8
         + 1 // slot: u8
         + 1 // amount: u8
         + 1 // unknown1: u8

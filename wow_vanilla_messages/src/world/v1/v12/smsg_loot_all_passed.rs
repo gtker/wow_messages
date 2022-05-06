@@ -176,7 +176,8 @@ impl ConstantSized for SMSG_LOOT_ALL_PASSED {}
 
 impl MaximumPossibleSized for SMSG_LOOT_ALL_PASSED {
     fn maximum_possible_size() -> usize {
-        8 // looted_target_guid: Guid
+        0
+        + 8 // looted_target_guid: Guid
         + 4 // loot_slot: u32
         + 4 // item_id: u32
         + 4 // item_random_property_id: u32

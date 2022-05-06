@@ -111,8 +111,9 @@ impl ConstantSized for SMSG_AI_REACTION {}
 
 impl MaximumPossibleSized for SMSG_AI_REACTION {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + AiReaction::size() // reaction: AiReaction
+        0
+        + 8 // guid: Guid
+        + 4 // reaction: AiReaction
     }
 }
 

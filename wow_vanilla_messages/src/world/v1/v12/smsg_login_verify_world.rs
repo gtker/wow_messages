@@ -164,7 +164,8 @@ impl ConstantSized for SMSG_LOGIN_VERIFY_WORLD {}
 
 impl MaximumPossibleSized for SMSG_LOGIN_VERIFY_WORLD {
     fn maximum_possible_size() -> usize {
-        Map::size() // map: Map
+        0
+        + 4 // map: Map
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32

@@ -110,8 +110,9 @@ impl ConstantSized for SMSG_RAID_GROUP_ONLY {}
 
 impl MaximumPossibleSized for SMSG_RAID_GROUP_ONLY {
     fn maximum_possible_size() -> usize {
-        4 // homebind_timer: u32
-        + RaidGroupError::size() // error: RaidGroupError
+        0
+        + 4 // homebind_timer: u32
+        + 4 // error: RaidGroupError
     }
 }
 

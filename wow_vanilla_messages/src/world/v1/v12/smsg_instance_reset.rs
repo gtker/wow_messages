@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_INSTANCE_RESET {}
 
 impl MaximumPossibleSized for SMSG_INSTANCE_RESET {
     fn maximum_possible_size() -> usize {
-        Map::size() // map: Map
+        0
+        + 4 // map: Map
     }
 }
 

@@ -133,9 +133,10 @@ impl ConstantSized for SMSG_SELL_ITEM {}
 
 impl MaximumPossibleSized for SMSG_SELL_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 8 // item: Guid
-        + SellItemResult::size() // result: SellItemResult
+        + 1 // result: SellItemResult
     }
 }
 

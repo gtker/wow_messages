@@ -315,29 +315,26 @@ impl MessageBody for SMSG_GROUP_LIST {
 
 impl VariableSized for SMSG_GROUP_LIST {
     fn size(&self) -> usize {
-        GroupType::size() // group_type: GroupType
+        0
+        + 1 // group_type: GroupType
         + 1 // own_flags: u8
         + 4 // amount_of_members: u32
         + self.members.iter().fold(0, |acc, x| acc + x.size()) // members: GroupListMember[amount_of_members]
         + 8 // leader: Guid
-        + {
-            if let Some(v) = &self.group_not_empty {
-                v.size()
-            } else {
-                0
-            }
-        } // optional group_not_empty
+        + if let Some(group_not_empty) = &self.group_not_empty {
+            0
+            + 1 // loot_setting: GroupLootSetting
+            + 8 // master_loot: Guid
+            + 1 // loot_threshold: ItemQuality
+        } else {
+            0
+        }
     }
 }
 
 impl MaximumPossibleSized for SMSG_GROUP_LIST {
     fn maximum_possible_size() -> usize {
-        GroupType::maximum_possible_size() // group_type: GroupType
-        + 1 // own_flags: u8
-        + 4 // amount_of_members: u32
-        + 4294967295 * GroupListMember::maximum_possible_size() // members: GroupListMember[amount_of_members]
-        + 8 // leader: Guid
-        + 65536 // optional group_not_empty
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

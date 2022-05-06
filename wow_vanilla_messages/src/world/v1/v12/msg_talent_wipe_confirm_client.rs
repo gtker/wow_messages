@@ -88,7 +88,8 @@ impl ConstantSized for MSG_TALENT_WIPE_CONFIRM_Client {}
 
 impl MaximumPossibleSized for MSG_TALENT_WIPE_CONFIRM_Client {
     fn maximum_possible_size() -> usize {
-        8 // wiping_npc: Guid
+        0
+        + 8 // wiping_npc: Guid
     }
 }
 

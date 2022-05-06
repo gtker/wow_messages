@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_AUTOEQUIP_ITEM_SLOT {}
 
 impl MaximumPossibleSized for CMSG_AUTOEQUIP_ITEM_SLOT {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 1 // destination_slot: u8
     }
 }

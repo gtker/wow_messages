@@ -197,18 +197,20 @@ impl MessageBody for SMSG_GOSSIP_POI {
 
 impl VariableSized for SMSG_GOSSIP_POI {
     fn size(&self) -> usize {
-        4 // flags: u32
+        0
+        + 4 // flags: u32
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // icon: u32
         + 4 // data: u32
-        + self.location_name.len() + 1 // location_name: CString and Null Terminator
+        + self.location_name.len() + 1 // location_name: CString
     }
 }
 
 impl MaximumPossibleSized for SMSG_GOSSIP_POI {
     fn maximum_possible_size() -> usize {
-        4 // flags: u32
+        0
+        + 4 // flags: u32
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // icon: u32

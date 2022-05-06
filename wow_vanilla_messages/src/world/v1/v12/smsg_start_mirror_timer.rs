@@ -198,7 +198,8 @@ impl ConstantSized for SMSG_START_MIRROR_TIMER {}
 
 impl MaximumPossibleSized for SMSG_START_MIRROR_TIMER {
     fn maximum_possible_size() -> usize {
-        TimerType::size() // timer: TimerType
+        0
+        + 4 // timer: TimerType
         + 4 // time_remaining: u32
         + 4 // duration: u32
         + 4 // scale: u32

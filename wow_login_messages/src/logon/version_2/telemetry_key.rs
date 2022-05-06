@@ -161,10 +161,11 @@ impl ConstantSized for TelemetryKey {}
 
 impl MaximumPossibleSized for TelemetryKey {
     fn maximum_possible_size() -> usize {
-        2 // unknown1: u16
+        0
+        + 2 // unknown1: u16
         + 4 // unknown2: u32
-        + 4 * core::mem::size_of::<u8>() // unknown3: u8[4]
-        + 20 * core::mem::size_of::<u8>() // unknown4: u8[20]
+        + 4 // unknown3: u8[4]
+        + 20 // unknown4: u8[20]
     }
 }
 

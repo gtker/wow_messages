@@ -123,15 +123,15 @@ impl MessageBody for SMSG_EXPECTED_SPAM_RECORDS {
 
 impl VariableSized for SMSG_EXPECTED_SPAM_RECORDS {
     fn size(&self) -> usize {
-        4 // amount_of_records: u32
+        0
+        + 4 // amount_of_records: u32
         + self.records.iter().fold(0, |acc, x| acc + x.len() + 1) // records: CString[amount_of_records]
     }
 }
 
 impl MaximumPossibleSized for SMSG_EXPECTED_SPAM_RECORDS {
     fn maximum_possible_size() -> usize {
-        4 // amount_of_records: u32
-        + 4294967295 * 256 // records: CString[amount_of_records]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -121,7 +121,8 @@ impl ConstantSized for QuestItemRequirement {}
 
 impl MaximumPossibleSized for QuestItemRequirement {
     fn maximum_possible_size() -> usize {
-        4 // item: u32
+        0
+        + 4 // item: u32
         + 4 // item_count: u32
         + 4 // item_display_id: u32
     }

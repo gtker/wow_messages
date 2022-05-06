@@ -93,13 +93,15 @@ impl MessageBody for CMSG_LEAVE_CHANNEL {
 
 impl VariableSized for CMSG_LEAVE_CHANNEL {
     fn size(&self) -> usize {
-        self.channel_name.len() + 1 // channel_name: CString and Null Terminator
+        0
+        + self.channel_name.len() + 1 // channel_name: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_LEAVE_CHANNEL {
     fn maximum_possible_size() -> usize {
-        256 // channel_name: CString
+        0
+        + 256 // channel_name: CString
     }
 }
 

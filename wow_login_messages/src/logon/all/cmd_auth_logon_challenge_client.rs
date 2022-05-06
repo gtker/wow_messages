@@ -313,33 +313,35 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
 
 impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_Client {
     fn size(&self) -> usize {
-        1 // protocol_version: u8
+        0
+        + 1 // protocol_version: u8
         + 2 // size: u16
         + 4 // game_name: u32
         + Version::size() // version: Version
-        + Platform::size() // platform: Platform
-        + Os::size() // os: Os
-        + Locale::size() // locale: Locale
+        + 4 // platform: Platform
+        + 4 // os: Os
+        + 4 // locale: Locale
         + 4 // utc_timezone_offset: u32
         + 4 // client_ip_address: u32_be
         + 1 // account_name_length: u8
-        + self.account_name.len() // account_name: String[account_name_length]
+        + self.account_name.len() // account_name: String
     }
 }
 
 impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_Client {
     fn maximum_possible_size() -> usize {
-        1 // protocol_version: u8
+        0
+        + 1 // protocol_version: u8
         + 2 // size: u16
         + 4 // game_name: u32
-        + Version::maximum_possible_size() // version: Version
-        + Platform::maximum_possible_size() // platform: Platform
-        + Os::maximum_possible_size() // os: Os
-        + Locale::maximum_possible_size() // locale: Locale
+        + 5 // version: Version
+        + 4 // platform: Platform
+        + 4 // os: Os
+        + 4 // locale: Locale
         + 4 // utc_timezone_offset: u32
         + 4 // client_ip_address: u32_be
         + 1 // account_name_length: u8
-        + 255 // account_name: String[account_name_length]
+        + 256 // account_name: String
     }
 }
 

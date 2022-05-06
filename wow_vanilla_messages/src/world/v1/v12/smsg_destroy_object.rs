@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_DESTROY_OBJECT {}
 
 impl MaximumPossibleSized for SMSG_DESTROY_OBJECT {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

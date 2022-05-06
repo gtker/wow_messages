@@ -2240,21 +2240,23 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
 impl VariableSized for SMSG_MESSAGECHAT {
     fn size(&self) -> usize {
-        self.chat_type.size() // chat_type: ChatType and subfields
-        + Language::size() // language: Language
+        0
+        + self.chat_type.size() // chat_type: SMSG_MESSAGECHATChatType
+        + 4 // language: Language
         + 4 // message_length: u32
-        + self.message.len() + 1 // message: CString and Null Terminator
-        + PlayerChatTag::size() // tag: PlayerChatTag
+        + self.message.len() + 1 // message: CString
+        + 1 // tag: PlayerChatTag
     }
 }
 
 impl MaximumPossibleSized for SMSG_MESSAGECHAT {
     fn maximum_possible_size() -> usize {
-        ChatType::maximum_possible_size() // chat_type: ChatType
-        + Language::maximum_possible_size() // language: Language
+        0
+        + 277 // chat_type: SMSG_MESSAGECHATChatType
+        + 4 // language: Language
         + 4 // message_length: u32
         + 256 // message: CString
-        + PlayerChatTag::maximum_possible_size() // tag: PlayerChatTag
+        + 1 // tag: PlayerChatTag
     }
 }
 

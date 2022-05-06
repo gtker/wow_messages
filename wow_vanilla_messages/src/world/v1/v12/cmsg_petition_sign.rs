@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_PETITION_SIGN {}
 
 impl MaximumPossibleSized for CMSG_PETITION_SIGN {
     fn maximum_possible_size() -> usize {
-        8 // petition_guid: Guid
+        0
+        + 8 // petition_guid: Guid
         + 1 // unknown1: u8
     }
 }

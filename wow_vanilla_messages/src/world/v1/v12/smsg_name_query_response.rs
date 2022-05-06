@@ -216,23 +216,25 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
 
 impl VariableSized for SMSG_NAME_QUERY_RESPONSE {
     fn size(&self) -> usize {
-        8 // guid: Guid
-        + self.character_name.len() + 1 // character_name: CString and Null Terminator
-        + self.realm_name.len() + 1 // realm_name: CString and Null Terminator
-        + 4 // race: Race upcasted to u32
-        + 4 // gender: Gender upcasted to u32
-        + 4 // class: Class upcasted to u32
+        0
+        + 8 // guid: Guid
+        + self.character_name.len() + 1 // character_name: CString
+        + self.realm_name.len() + 1 // realm_name: CString
+        + 4 // race: Race
+        + 4 // gender: Gender
+        + 4 // class: Class
     }
 }
 
 impl MaximumPossibleSized for SMSG_NAME_QUERY_RESPONSE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 256 // character_name: CString
         + 256 // realm_name: CString
-        + Race::maximum_possible_size() // race: Race
-        + Gender::maximum_possible_size() // gender: Gender
-        + Class::maximum_possible_size() // class: Class
+        + 1 // race: Race
+        + 1 // gender: Gender
+        + 1 // class: Class
     }
 }
 

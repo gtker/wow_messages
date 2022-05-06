@@ -167,7 +167,8 @@ impl MessageBody for CMSG_TEST_ENDLESS_U8 {
 
 impl VariableSized for CMSG_TEST_ENDLESS_U8 {
     fn size(&self) -> usize {
-        self.c_string.len() + 1 // c_string: CString and Null Terminator
+        0
+        + self.c_string.len() + 1 // c_string: CString
         + 1 // b_u8: u8
         + self.endless.len() * core::mem::size_of::<u8>() // endless: u8[-]
     }
@@ -175,9 +176,7 @@ impl VariableSized for CMSG_TEST_ENDLESS_U8 {
 
 impl MaximumPossibleSized for CMSG_TEST_ENDLESS_U8 {
     fn maximum_possible_size() -> usize {
-        256 // c_string: CString
-        + 1 // b_u8: u8
-        + 65536 // endless: u8[-]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

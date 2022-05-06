@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_FORCE_MOVE_ROOT {}
 
 impl MaximumPossibleSized for SMSG_FORCE_MOVE_ROOT {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // counter: u32
     }
 }

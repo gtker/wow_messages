@@ -1389,21 +1389,75 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
 impl VariableSized for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     fn size(&self) -> usize {
-        4 // item: u32
-        + {
-            if let Some(v) = &self.found {
-                v.size()
-            } else {
-                0
-            }
-        } // optional found
+        0
+        + 4 // item: u32
+        + if let Some(found) = &self.found {
+            0
+            + 4 // item_class: ItemClass
+            + 4 // item_sub_class: u32
+            + found.name1.len() + 1 // name1: CString
+            + found.name2.len() + 1 // name2: CString
+            + found.name3.len() + 1 // name3: CString
+            + found.name4.len() + 1 // name4: CString
+            + 4 // item_display_info: u32
+            + 4 // quality: ItemQuality
+            + 4 // flags: u32
+            + 8 // buy_price: f64
+            + 8 // sell_price: f64
+            + 1 // inventory_type: InventoryType
+            + 4 // allowed_class: u32
+            + 4 // allowed_race: u32
+            + 4 // item_level: u32
+            + 4 // required_level: u32
+            + 4 // required_skill: u32
+            + 4 // required_skill_rank: u32
+            + 4 // required_spell: u32
+            + 4 // required_honor_rank: u32
+            + 4 // required_city_rank: u32
+            + 4 // required_reputation_faction: u32
+            + 4 // required_reputation_rank: u32
+            + 4 // max_count: u32
+            + 4 // stackable: u32
+            + 4 // container_slots: u32
+            + 10 * ItemStat::size() // stats: ItemStat[10]
+            + 5 * ItemDamageType::size() // damages: ItemDamageType[5]
+            + 4 // armor: u32
+            + 4 // holy_resistance: u32
+            + 4 // fire_resistance: u32
+            + 4 // nature_resistance: u32
+            + 4 // frost_resistance: u32
+            + 4 // shadow_resistance: u32
+            + 4 // arcane_resistance: u32
+            + 4 // delay: u32
+            + 4 // ammo_type: u32
+            + 4 // ranged_range_modification: f32
+            + 5 * ItemSpells::size() // spells: ItemSpells[5]
+            + 4 // bonding: u32
+            + found.description.len() + 1 // description: CString
+            + 4 // page_text: u32
+            + 4 // language_id: u32
+            + 4 // page_material: u32
+            + 4 // start_quest: u32
+            + 4 // lock_id: u32
+            + 4 // material: u32
+            + 4 // sheath: u32
+            + 4 // random_property: u32
+            + 4 // block: u32
+            + 4 // item_set: u32
+            + 4 // max_durability: u32
+            + 4 // area: Area
+            + 4 // map: Map
+            + 4 // bag_family: u32
+        } else {
+            0
+        }
     }
 }
 
 impl MaximumPossibleSized for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     fn maximum_possible_size() -> usize {
-        4 // item: u32
-        + 65536 // optional found
+        0
+        + 4 // item: u32
     }
 }
 

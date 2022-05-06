@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_ACTIVATETAXIREPLY {}
 
 impl MaximumPossibleSized for SMSG_ACTIVATETAXIREPLY {
     fn maximum_possible_size() -> usize {
-        ActivateTaxiReply::size() // reply: ActivateTaxiReply
+        0
+        + 4 // reply: ActivateTaxiReply
     }
 }
 

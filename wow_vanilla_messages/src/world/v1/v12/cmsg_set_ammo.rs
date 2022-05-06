@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_SET_AMMO {}
 
 impl MaximumPossibleSized for CMSG_SET_AMMO {
     fn maximum_possible_size() -> usize {
-        4 // item: u32
+        0
+        + 4 // item: u32
     }
 }
 

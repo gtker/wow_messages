@@ -138,15 +138,17 @@ impl MessageBody for SMSG_DEFENSE_MESSAGE {
 
 impl VariableSized for SMSG_DEFENSE_MESSAGE {
     fn size(&self) -> usize {
-        Map::size() // map: Map
+        0
+        + 4 // map: Map
         + 4 // message_length: u32
-        + self.message.len() + 1 // message: CString and Null Terminator
+        + self.message.len() + 1 // message: CString
     }
 }
 
 impl MaximumPossibleSized for SMSG_DEFENSE_MESSAGE {
     fn maximum_possible_size() -> usize {
-        Map::maximum_possible_size() // map: Map
+        0
+        + 4 // map: Map
         + 4 // message_length: u32
         + 256 // message: CString
     }

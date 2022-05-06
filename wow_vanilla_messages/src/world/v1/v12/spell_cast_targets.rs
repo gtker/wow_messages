@@ -649,13 +649,15 @@ impl ReadableAndWritable for SpellCastTargets {
 
 impl VariableSized for SpellCastTargets {
     fn size(&self) -> usize {
-        self.target_flags.size() // target_flags: SpellCastTargetFlags and subfields
+        0
+        + self.target_flags.size() // target_flags: SpellCastTargetsSpellCastTargetFlags
     }
 }
 
 impl MaximumPossibleSized for SpellCastTargets {
     fn maximum_possible_size() -> usize {
-        SpellCastTargetFlags::maximum_possible_size() // target_flags: SpellCastTargetFlags
+        0
+        + 354 // target_flags: SpellCastTargetsSpellCastTargetFlags
     }
 }
 

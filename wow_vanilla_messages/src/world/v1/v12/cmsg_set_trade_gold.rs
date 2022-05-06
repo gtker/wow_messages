@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_SET_TRADE_GOLD {}
 
 impl MaximumPossibleSized for CMSG_SET_TRADE_GOLD {
     fn maximum_possible_size() -> usize {
-        4 // gold: u32
+        0
+        + 4 // gold: u32
     }
 }
 

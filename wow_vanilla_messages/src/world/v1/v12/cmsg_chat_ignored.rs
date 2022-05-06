@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_CHAT_IGNORED {}
 
 impl MaximumPossibleSized for CMSG_CHAT_IGNORED {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

@@ -143,7 +143,8 @@ impl ConstantSized for Version {}
 
 impl MaximumPossibleSized for Version {
     fn maximum_possible_size() -> usize {
-        1 // major: u8
+        0
+        + 1 // major: u8
         + 1 // minor: u8
         + 1 // patch: u8
         + 2 // build: u16

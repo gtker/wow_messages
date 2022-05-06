@@ -124,14 +124,16 @@ impl MessageBody for CMSG_GROUP_SWAP_SUB_GROUP {
 
 impl VariableSized for CMSG_GROUP_SWAP_SUB_GROUP {
     fn size(&self) -> usize {
-        self.name.len() + 1 // name: CString and Null Terminator
-        + self.swap_with_name.len() + 1 // swap_with_name: CString and Null Terminator
+        0
+        + self.name.len() + 1 // name: CString
+        + self.swap_with_name.len() + 1 // swap_with_name: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GROUP_SWAP_SUB_GROUP {
     fn maximum_possible_size() -> usize {
-        256 // name: CString
+        0
+        + 256 // name: CString
         + 256 // swap_with_name: CString
     }
 }

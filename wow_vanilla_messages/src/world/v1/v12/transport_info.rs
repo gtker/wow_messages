@@ -173,7 +173,8 @@ impl ReadableAndWritable for TransportInfo {
 
 impl VariableSized for TransportInfo {
     fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        0
+        + self.guid.size() // guid: Guid
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32
@@ -184,7 +185,8 @@ impl VariableSized for TransportInfo {
 
 impl MaximumPossibleSized for TransportInfo {
     fn maximum_possible_size() -> usize {
-        9 // guid: PackedGuid
+        0
+        + 9 // guid: Guid
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32

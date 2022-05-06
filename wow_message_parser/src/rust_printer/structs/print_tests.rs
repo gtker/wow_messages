@@ -83,7 +83,7 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects) {
     s.body_closing_with(
         format!("let expected = {}", t.subject()),
         |s| {
-            for m in e.rust_object().members() {
+            for m in e.rust_object().members_in_struct() {
                 print_value(s, m, t.members(), e, o);
             }
         },
@@ -141,7 +141,7 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects) {
     );
 
     // Better error reporting when something is wrong.
-    for m in e.rust_object().members() {
+    for m in e.rust_object().members_in_struct() {
         s.wln(format!(
             "assert_eq!(t.{field}, expected.{field});",
             field = m.name()
@@ -217,7 +217,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                 s.wln(format!("{} {{", ty_name));
                 s.inc_indent();
 
-                for m in array_container.rust_object().members() {
+                for m in array_container.rust_object().members_in_struct() {
                     print_value(s, m, multiple, array_container, o);
                 }
 
@@ -258,7 +258,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                             }
                             _ => panic!("{} is not a flag", m.ty()),
                         };
-                        for sf in subvars.members() {
+                        for sf in subvars.members_in_struct() {
                             print_value(s, sf, t, e, o);
                         }
 
@@ -300,7 +300,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                     .iter()
                     .find(|a| a.name() == i.original_string())
                     .unwrap()
-                    .members(),
+                    .members_in_struct(),
                 _ => panic!("{} is not an enum", m.ty()),
             };
             if subvars.is_empty() {

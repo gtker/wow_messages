@@ -99,7 +99,8 @@ impl ConstantSized for NpcTextUpdateEmote {}
 
 impl MaximumPossibleSized for NpcTextUpdateEmote {
     fn maximum_possible_size() -> usize {
-        4 // delay: u32
+        0
+        + 4 // delay: u32
         + 4 // emote: u32
     }
 }

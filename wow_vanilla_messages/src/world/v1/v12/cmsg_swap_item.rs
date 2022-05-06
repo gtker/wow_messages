@@ -153,7 +153,8 @@ impl ConstantSized for CMSG_SWAP_ITEM {}
 
 impl MaximumPossibleSized for CMSG_SWAP_ITEM {
     fn maximum_possible_size() -> usize {
-        1 // destination_bag: u8
+        0
+        + 1 // destination_bag: u8
         + 1 // destionation_slot: u8
         + 1 // source_bag: u8
         + 1 // source_slot: u8

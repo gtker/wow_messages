@@ -155,10 +155,11 @@ impl ConstantSized for SMSG_SPELLDAMAGESHIELD {}
 
 impl MaximumPossibleSized for SMSG_SPELLDAMAGESHIELD {
     fn maximum_possible_size() -> usize {
-        8 // victim_guid: Guid
+        0
+        + 8 // victim_guid: Guid
         + 8 // caster_guid: Guid
         + 4 // damage: u32
-        + 4 // school: SpellSchool upcasted to u32
+        + 1 // school: SpellSchool
     }
 }
 

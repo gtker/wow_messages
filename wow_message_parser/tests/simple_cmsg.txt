@@ -87,7 +87,8 @@ impl ConstantSized for SimpleCmsg {}
 
 impl MaximumPossibleSized for SimpleCmsg {
     fn maximum_possible_size() -> usize {
-        1 // basic: u8
+        0
+        + 1 // basic: u8
     }
 }
 

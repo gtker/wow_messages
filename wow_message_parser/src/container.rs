@@ -549,67 +549,76 @@ impl Container {
         &self.kvs
     }
 
-    pub fn sizes(&self, o: &Objects) -> Sizes {
-        fn inner(e: &Container, m: &StructMember, o: &Objects, sizes: &mut Sizes) {
-            match m {
-                StructMember::Definition(d) => *sizes += d.ty().sizes(e, o),
-                StructMember::OptionalStatement(optional) => {
-                    let minimum = sizes.minimum;
+    pub fn get_complex_sizes(statement: &IfStatement, e: &Container, o: &Objects) -> Sizes {
+        let mut if_sizes = Sizes::new();
 
-                    for m in optional.members() {
-                        inner(e, m, o, sizes);
-                    }
+        for m in statement.members() {
+            Container::add_sizes_values(e, m, o, &mut if_sizes);
+        }
 
-                    // The optional statement doesn't have be be here, so the minimum doesn't get incremented
-                    sizes.set_minimum(minimum);
-                }
-                StructMember::IfStatement(statement) => {
-                    let mut if_sizes = Sizes::new();
+        let mut smallest_sizes = if_sizes;
+        let mut largest_sizes = if_sizes;
 
-                    for m in statement.members() {
-                        inner(e, m, o, &mut if_sizes);
-                    }
+        let mut else_if_sizes;
 
-                    let mut smallest_sizes = if_sizes;
-                    let mut largest_sizes = if_sizes;
+        for elseif in statement.else_ifs() {
+            else_if_sizes = Sizes::new();
 
-                    let mut else_if_sizes;
+            for m in elseif.members() {
+                Container::add_sizes_values(e, m, o, &mut else_if_sizes);
+            }
 
-                    for elseif in statement.else_ifs() {
-                        else_if_sizes = Sizes::new();
-
-                        for m in elseif.members() {
-                            inner(e, m, o, &mut else_if_sizes);
-                        }
-
-                        if else_if_sizes.minimum() < smallest_sizes.minimum() {
-                            smallest_sizes = else_if_sizes;
-                        }
-                        if else_if_sizes.maximum() > largest_sizes.maximum() {
-                            largest_sizes = else_if_sizes;
-                        }
-                    }
-
-                    else_if_sizes = Sizes::new();
-                    for m in &statement.else_statement_members {
-                        inner(e, m, o, &mut else_if_sizes);
-                    }
-
-                    if else_if_sizes.minimum() < smallest_sizes.minimum() {
-                        smallest_sizes = else_if_sizes;
-                    }
-                    if else_if_sizes.maximum() > largest_sizes.maximum() {
-                        largest_sizes = else_if_sizes;
-                    }
-
-                    sizes.inc(smallest_sizes.minimum(), largest_sizes.maximum());
-                }
+            if else_if_sizes.minimum() < smallest_sizes.minimum() {
+                smallest_sizes = else_if_sizes;
+            }
+            if else_if_sizes.maximum() > largest_sizes.maximum() {
+                largest_sizes = else_if_sizes;
             }
         }
 
+        else_if_sizes = Sizes::new();
+        for m in &statement.else_statement_members {
+            Container::add_sizes_values(e, m, o, &mut else_if_sizes);
+        }
+
+        if else_if_sizes.minimum() < smallest_sizes.minimum() {
+            smallest_sizes = else_if_sizes;
+        }
+        if else_if_sizes.maximum() > largest_sizes.maximum() {
+            largest_sizes = else_if_sizes;
+        }
+
+        let mut sizes = Sizes::new();
+        sizes.set_minimum(smallest_sizes.minimum());
+        sizes.set_maximum(largest_sizes.maximum());
+        sizes
+    }
+
+    fn add_sizes_values(e: &Container, m: &StructMember, o: &Objects, sizes: &mut Sizes) {
+        match m {
+            StructMember::Definition(d) => *sizes += d.ty().sizes(e, o),
+            StructMember::OptionalStatement(optional) => {
+                let minimum = sizes.minimum;
+
+                for m in optional.members() {
+                    Container::add_sizes_values(e, m, o, sizes);
+                }
+
+                // The optional statement doesn't have be be here, so the minimum doesn't get incremented
+                sizes.set_minimum(minimum);
+            }
+            StructMember::IfStatement(statement) => {
+                let statement_sizes = Container::get_complex_sizes(statement, e, o);
+
+                *sizes += statement_sizes;
+            }
+        }
+    }
+
+    pub fn sizes(&self, o: &Objects) -> Sizes {
         let mut sizes = Sizes::new();
         for m in self.fields() {
-            inner(self, m, o, &mut sizes);
+            Container::add_sizes_values(self, m, o, &mut sizes);
         }
 
         sizes
@@ -1173,8 +1182,18 @@ pub struct Sizes {
 
 pub const AURA_MASK_MAX_SIZE: u8 = 4 + 32 * 4;
 pub const AURA_MASK_MIN_SIZE: u8 = 4;
-// TODO AuraMask/UpdateMask sizes
-pub const UPDATE_MASK_MAX_SIZE: u8 = 1;
+const fn update_mask_max() -> u16 {
+    let amount_of_bytes_for_data = 0x501; // PLAYER_END
+    let amount_of_mask_blocks_size = core::mem::size_of::<u32>() as i32;
+
+    let mut max_mask_blocks = amount_of_bytes_for_data / 8;
+    if (amount_of_bytes_for_data % 8) > 0 {
+        max_mask_blocks += 1;
+    }
+
+    (amount_of_mask_blocks_size + max_mask_blocks + amount_of_bytes_for_data) as u16
+}
+pub const UPDATE_MASK_MAX_SIZE: u16 = update_mask_max();
 pub const UPDATE_MASK_MIN_SIZE: u8 = 1;
 pub const PACKED_GUID_MAX_SIZE: u8 = 9;
 pub const PACKED_GUID_MIN_SIZE: u8 = 2;
@@ -1205,8 +1224,16 @@ impl Sizes {
         self.maximum
     }
 
+    pub fn set_maximum(&mut self, maximum: usize) {
+        self.maximum = maximum;
+    }
+
     pub fn set_minimum(&mut self, minimum: usize) {
         self.minimum = minimum;
+    }
+
+    pub fn is_constant(&self) -> bool {
+        self.minimum == self.maximum
     }
 }
 

@@ -100,8 +100,9 @@ impl ConstantSized for CharacterGear {}
 
 impl MaximumPossibleSized for CharacterGear {
     fn maximum_possible_size() -> usize {
-        4 // equipment_display_id: u32
-        + InventoryType::size() // inventory_type: InventoryType
+        0
+        + 4 // equipment_display_id: u32
+        + 1 // inventory_type: InventoryType
     }
 }
 

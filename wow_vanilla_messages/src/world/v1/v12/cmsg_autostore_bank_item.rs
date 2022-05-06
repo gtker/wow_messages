@@ -109,7 +109,8 @@ impl ConstantSized for CMSG_AUTOSTORE_BANK_ITEM {}
 
 impl MaximumPossibleSized for CMSG_AUTOSTORE_BANK_ITEM {
     fn maximum_possible_size() -> usize {
-        1 // bag_index: u8
+        0
+        + 1 // bag_index: u8
         + 1 // slot_index: u8
     }
 }

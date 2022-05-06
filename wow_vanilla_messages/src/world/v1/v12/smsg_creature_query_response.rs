@@ -475,21 +475,34 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
 
 impl VariableSized for SMSG_CREATURE_QUERY_RESPONSE {
     fn size(&self) -> usize {
-        4 // creature_entry: u32
-        + {
-            if let Some(v) = &self.found {
-                v.size()
-            } else {
-                0
-            }
-        } // optional found
+        0
+        + 4 // creature_entry: u32
+        + if let Some(found) = &self.found {
+            0
+            + found.name1.len() + 1 // name1: CString
+            + found.name2.len() + 1 // name2: CString
+            + found.name3.len() + 1 // name3: CString
+            + found.name4.len() + 1 // name4: CString
+            + found.sub_name.len() + 1 // sub_name: CString
+            + 4 // type_flags: u32
+            + 4 // creature_type: u32
+            + 4 // creature_family: u32
+            + 4 // creature_rank: u32
+            + 4 // unknown0: u32
+            + 4 // spell_data_id: u32
+            + 4 // display_id: u32
+            + 1 // civilian: u8
+            + 1 // racial_leader: u8
+        } else {
+            0
+        }
     }
 }
 
 impl MaximumPossibleSized for SMSG_CREATURE_QUERY_RESPONSE {
     fn maximum_possible_size() -> usize {
-        4 // creature_entry: u32
-        + 65536 // optional found
+        0
+        + 4 // creature_entry: u32
     }
 }
 

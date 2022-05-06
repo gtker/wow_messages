@@ -126,7 +126,8 @@ impl MessageBody for SMSG_FORCE_TURN_RATE_CHANGE {
 
 impl VariableSized for SMSG_FORCE_TURN_RATE_CHANGE {
     fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        0
+        + self.guid.size() // guid: Guid
         + 4 // move_event: u32
         + 4 // speed: f32
     }
@@ -134,7 +135,8 @@ impl VariableSized for SMSG_FORCE_TURN_RATE_CHANGE {
 
 impl MaximumPossibleSized for SMSG_FORCE_TURN_RATE_CHANGE {
     fn maximum_possible_size() -> usize {
-        9 // guid: PackedGuid
+        0
+        + 9 // guid: Guid
         + 4 // move_event: u32
         + 4 // speed: f32
     }

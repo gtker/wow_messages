@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_UPDATE_WORLD_STATE {}
 
 impl MaximumPossibleSized for SMSG_UPDATE_WORLD_STATE {
     fn maximum_possible_size() -> usize {
-        WorldState::size() // state: WorldState
+        0
+        + 8 // state: WorldState
     }
 }
 

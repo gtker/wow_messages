@@ -1122,15 +1122,17 @@ impl MessageBody for CMSG_MESSAGECHAT {
 
 impl VariableSized for CMSG_MESSAGECHAT {
     fn size(&self) -> usize {
-        4 // chat_type: ChatType upcasted to u32
-        + Language::size() // language: Language
+        0
+        + self.chat_type.size() // chat_type: CMSG_MESSAGECHATChatType
+        + 4 // language: Language
     }
 }
 
 impl MaximumPossibleSized for CMSG_MESSAGECHAT {
     fn maximum_possible_size() -> usize {
-        ChatType::maximum_possible_size() // chat_type: ChatType
-        + Language::maximum_possible_size() // language: Language
+        0
+        + 513 // chat_type: CMSG_MESSAGECHATChatType
+        + 4 // language: Language
     }
 }
 

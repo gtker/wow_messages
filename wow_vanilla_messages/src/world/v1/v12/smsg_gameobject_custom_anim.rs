@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_GAMEOBJECT_CUSTOM_ANIM {}
 
 impl MaximumPossibleSized for SMSG_GAMEOBJECT_CUSTOM_ANIM {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // animation_id: u32
     }
 }

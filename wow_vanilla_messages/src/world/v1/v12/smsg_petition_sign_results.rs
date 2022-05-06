@@ -133,9 +133,10 @@ impl ConstantSized for SMSG_PETITION_SIGN_RESULTS {}
 
 impl MaximumPossibleSized for SMSG_PETITION_SIGN_RESULTS {
     fn maximum_possible_size() -> usize {
-        8 // petition_guid: Guid
+        0
+        + 8 // petition_guid: Guid
         + 8 // owner_guid: Guid
-        + PetitionResult::size() // result: PetitionResult
+        + 4 // result: PetitionResult
     }
 }
 

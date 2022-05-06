@@ -93,13 +93,15 @@ impl MessageBody for CMSG_GMTICKET_UPDATETEXT {
 
 impl VariableSized for CMSG_GMTICKET_UPDATETEXT {
     fn size(&self) -> usize {
-        self.message.len() + 1 // message: CString and Null Terminator
+        0
+        + self.message.len() + 1 // message: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GMTICKET_UPDATETEXT {
     fn maximum_possible_size() -> usize {
-        256 // message: CString
+        0
+        + 256 // message: CString
     }
 }
 

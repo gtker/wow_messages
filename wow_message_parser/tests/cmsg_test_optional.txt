@@ -191,23 +191,23 @@ impl MessageBody for CMSG_TEST_OPTIONAL {
 
 impl VariableSized for CMSG_TEST_OPTIONAL {
     fn size(&self) -> usize {
-        self.c_string.len() + 1 // c_string: CString and Null Terminator
+        0
+        + self.c_string.len() + 1 // c_string: CString
         + 1 // b_u8: u8
-        + {
-            if let Some(v) = &self.server {
-                v.size()
-            } else {
-                0
-            }
-        } // optional server
+        + if let Some(server) = &self.server {
+            0
+            + 1 // optional_u8: u8
+        } else {
+            0
+        }
     }
 }
 
 impl MaximumPossibleSized for CMSG_TEST_OPTIONAL {
     fn maximum_possible_size() -> usize {
-        256 // c_string: CString
+        0
+        + 256 // c_string: CString
         + 1 // b_u8: u8
-        + 65536 // optional server
     }
 }
 

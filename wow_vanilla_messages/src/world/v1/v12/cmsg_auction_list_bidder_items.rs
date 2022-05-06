@@ -162,7 +162,8 @@ impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
 
 impl VariableSized for CMSG_AUCTION_LIST_BIDDER_ITEMS {
     fn size(&self) -> usize {
-        8 // auctioneer: Guid
+        0
+        + 8 // auctioneer: Guid
         + 4 // start_from_page: u32
         + 4 // amount_of_outbidded_items: u32
         + self.outbid_item_ids.len() * core::mem::size_of::<u32>() // outbid_item_ids: u32[amount_of_outbidded_items]
@@ -171,10 +172,7 @@ impl VariableSized for CMSG_AUCTION_LIST_BIDDER_ITEMS {
 
 impl MaximumPossibleSized for CMSG_AUCTION_LIST_BIDDER_ITEMS {
     fn maximum_possible_size() -> usize {
-        8 // auctioneer: Guid
-        + 4 // start_from_page: u32
-        + 4 // amount_of_outbidded_items: u32
-        + 4294967295 * core::mem::size_of::<u32>() // outbid_item_ids: u32[amount_of_outbidded_items]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

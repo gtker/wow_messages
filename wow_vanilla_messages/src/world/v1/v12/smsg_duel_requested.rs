@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_DUEL_REQUESTED {}
 
 impl MaximumPossibleSized for SMSG_DUEL_REQUESTED {
     fn maximum_possible_size() -> usize {
-        8 // initiator_guid: Guid
+        0
+        + 8 // initiator_guid: Guid
         + 8 // target_guid: Guid
     }
 }

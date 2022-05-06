@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_STABLE_SWAP_PET {}
 
 impl MaximumPossibleSized for CMSG_STABLE_SWAP_PET {
     fn maximum_possible_size() -> usize {
-        8 // npc: Guid
+        0
+        + 8 // npc: Guid
         + 4 // pet_slot: u32
     }
 }

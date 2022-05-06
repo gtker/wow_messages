@@ -132,7 +132,8 @@ impl ConstantSized for CMSG_SELL_ITEM {}
 
 impl MaximumPossibleSized for CMSG_SELL_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // vendor_guid: Guid
+        0
+        + 8 // vendor_guid: Guid
         + 8 // item_guid: Guid
         + 1 // amount: u8
     }

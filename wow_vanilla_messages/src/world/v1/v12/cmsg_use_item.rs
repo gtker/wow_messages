@@ -151,7 +151,8 @@ impl MessageBody for CMSG_USE_ITEM {
 
 impl VariableSized for CMSG_USE_ITEM {
     fn size(&self) -> usize {
-        1 // bag_index: u8
+        0
+        + 1 // bag_index: u8
         + 1 // bag_slot: u8
         + 1 // spell_index: u8
         + self.targets.size() // targets: SpellCastTargets
@@ -160,10 +161,11 @@ impl VariableSized for CMSG_USE_ITEM {
 
 impl MaximumPossibleSized for CMSG_USE_ITEM {
     fn maximum_possible_size() -> usize {
-        1 // bag_index: u8
+        0
+        + 1 // bag_index: u8
         + 1 // bag_slot: u8
         + 1 // spell_index: u8
-        + SpellCastTargets::maximum_possible_size() // targets: SpellCastTargets
+        + 354 // targets: SpellCastTargets
     }
 }
 

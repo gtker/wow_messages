@@ -124,14 +124,16 @@ impl MessageBody for CMSG_CHANNEL_PASSWORD {
 
 impl VariableSized for CMSG_CHANNEL_PASSWORD {
     fn size(&self) -> usize {
-        self.channel_name.len() + 1 // channel_name: CString and Null Terminator
-        + self.channel_password.len() + 1 // channel_password: CString and Null Terminator
+        0
+        + self.channel_name.len() + 1 // channel_name: CString
+        + self.channel_password.len() + 1 // channel_password: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_CHANNEL_PASSWORD {
     fn maximum_possible_size() -> usize {
-        256 // channel_name: CString
+        0
+        + 256 // channel_name: CString
         + 256 // channel_password: CString
     }
 }

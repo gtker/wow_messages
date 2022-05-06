@@ -292,9 +292,10 @@ impl MessageBody for CMSG_AUCTION_LIST_ITEMS {
 
 impl VariableSized for CMSG_AUCTION_LIST_ITEMS {
     fn size(&self) -> usize {
-        8 // auctioneer_guid: Guid
+        0
+        + 8 // auctioneer_guid: Guid
         + 4 // list_start_item: u32
-        + self.searched_name.len() + 1 // searched_name: CString and Null Terminator
+        + self.searched_name.len() + 1 // searched_name: CString
         + 1 // minimum_level: u8
         + 1 // maximum_level: u8
         + 4 // auction_slot_id: u32
@@ -307,7 +308,8 @@ impl VariableSized for CMSG_AUCTION_LIST_ITEMS {
 
 impl MaximumPossibleSized for CMSG_AUCTION_LIST_ITEMS {
     fn maximum_possible_size() -> usize {
-        8 // auctioneer_guid: Guid
+        0
+        + 8 // auctioneer_guid: Guid
         + 4 // list_start_item: u32
         + 256 // searched_name: CString
         + 1 // minimum_level: u8

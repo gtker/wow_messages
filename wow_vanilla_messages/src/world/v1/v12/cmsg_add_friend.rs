@@ -93,13 +93,15 @@ impl MessageBody for CMSG_ADD_FRIEND {
 
 impl VariableSized for CMSG_ADD_FRIEND {
     fn size(&self) -> usize {
-        self.friend_name.len() + 1 // friend_name: CString and Null Terminator
+        0
+        + self.friend_name.len() + 1 // friend_name: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_ADD_FRIEND {
     fn maximum_possible_size() -> usize {
-        256 // friend_name: CString
+        0
+        + 256 // friend_name: CString
     }
 }
 

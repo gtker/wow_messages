@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_AREA_SPIRIT_HEALER_TIME {}
 
 impl MaximumPossibleSized for SMSG_AREA_SPIRIT_HEALER_TIME {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // next_resurrect_time: u32
     }
 }

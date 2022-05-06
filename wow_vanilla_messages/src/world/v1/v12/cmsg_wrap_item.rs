@@ -153,7 +153,8 @@ impl ConstantSized for CMSG_WRAP_ITEM {}
 
 impl MaximumPossibleSized for CMSG_WRAP_ITEM {
     fn maximum_possible_size() -> usize {
-        1 // gift_bag_index: u8
+        0
+        + 1 // gift_bag_index: u8
         + 1 // gift_slot: u8
         + 1 // item_bag_index: u8
         + 1 // item_slot: u8

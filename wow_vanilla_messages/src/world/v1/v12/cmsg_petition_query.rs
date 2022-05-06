@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_PETITION_QUERY {}
 
 impl MaximumPossibleSized for CMSG_PETITION_QUERY {
     fn maximum_possible_size() -> usize {
-        4 // guild_guid: u32
+        0
+        + 4 // guild_guid: u32
         + 8 // petition_guid: Guid
     }
 }

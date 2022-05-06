@@ -140,7 +140,8 @@ impl MessageBody for SMSG_AUCTION_LIST_RESULT {
 
 impl VariableSized for SMSG_AUCTION_LIST_RESULT {
     fn size(&self) -> usize {
-        4 // count: u32
+        0
+        + 4 // count: u32
         + self.auctions.iter().fold(0, |acc, x| acc + AuctionListItem::size()) // auctions: AuctionListItem[count]
         + 4 // total_amount_of_auctions: u32
     }
@@ -148,9 +149,7 @@ impl VariableSized for SMSG_AUCTION_LIST_RESULT {
 
 impl MaximumPossibleSized for SMSG_AUCTION_LIST_RESULT {
     fn maximum_possible_size() -> usize {
-        4 // count: u32
-        + 4294967295 * AuctionListItem::maximum_possible_size() // auctions: AuctionListItem[count]
-        + 4 // total_amount_of_auctions: u32
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_BATTLEGROUND_PLAYER_JOINED {}
 
 impl MaximumPossibleSized for SMSG_BATTLEGROUND_PLAYER_JOINED {
     fn maximum_possible_size() -> usize {
-        8 // player_guid: Guid
+        0
+        + 8 // player_guid: Guid
     }
 }
 

@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_STABLE_RESULT {}
 
 impl MaximumPossibleSized for SMSG_STABLE_RESULT {
     fn maximum_possible_size() -> usize {
-        StableResult::size() // result: StableResult
+        0
+        + 1 // result: StableResult
     }
 }
 

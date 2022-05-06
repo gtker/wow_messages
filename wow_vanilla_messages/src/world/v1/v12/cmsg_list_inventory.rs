@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_LIST_INVENTORY {}
 
 impl MaximumPossibleSized for CMSG_LIST_INVENTORY {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

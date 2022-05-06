@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_PET_UNLEARN_CONFIRM {}
 
 impl MaximumPossibleSized for SMSG_PET_UNLEARN_CONFIRM {
     fn maximum_possible_size() -> usize {
-        8 // pet_guid: Guid
+        0
+        + 8 // pet_guid: Guid
         + 4 // talent_reset_cost: u32
     }
 }

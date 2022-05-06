@@ -133,9 +133,10 @@ impl ConstantSized for SMSG_PVP_CREDIT {}
 
 impl MaximumPossibleSized for SMSG_PVP_CREDIT {
     fn maximum_possible_size() -> usize {
-        4 // honor_points: u32
+        0
+        + 4 // honor_points: u32
         + 8 // victim: Guid
-        + 4 // rank: PvpRank upcasted to u32
+        + 1 // rank: PvpRank
     }
 }
 

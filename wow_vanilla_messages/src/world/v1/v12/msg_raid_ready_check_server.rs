@@ -154,19 +154,20 @@ impl MessageBody for MSG_RAID_READY_CHECK_Server {
 
 impl VariableSized for MSG_RAID_READY_CHECK_Server {
     fn size(&self) -> usize {
-        {
-            if let Some(v) = &self.state_check {
-                v.size()
-            } else {
-                0
-            }
-        } // optional state_check
+        0
+        + if let Some(state_check) = &self.state_check {
+            0
+            + 8 // guid: Guid
+            + 1 // state: u8
+        } else {
+            0
+        }
     }
 }
 
 impl MaximumPossibleSized for MSG_RAID_READY_CHECK_Server {
     fn maximum_possible_size() -> usize {
-        65536 // optional state_check
+        0
     }
 }
 

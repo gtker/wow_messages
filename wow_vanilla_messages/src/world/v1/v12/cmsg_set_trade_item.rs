@@ -131,7 +131,8 @@ impl ConstantSized for CMSG_SET_TRADE_ITEM {}
 
 impl MaximumPossibleSized for CMSG_SET_TRADE_ITEM {
     fn maximum_possible_size() -> usize {
-        1 // trade_slot: u8
+        0
+        + 1 // trade_slot: u8
         + 1 // bag: u8
         + 1 // slot: u8
     }

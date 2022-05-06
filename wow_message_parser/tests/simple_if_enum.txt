@@ -150,13 +150,15 @@ impl ReadableAndWritable for SimpleIfEnum {
 
 impl VariableSized for SimpleIfEnum {
     fn size(&self) -> usize {
-        self.enum.size() // enum: SimpleEnum and subfields
+        0
+        + self.enum.size() // enum: SimpleIfEnumSimpleEnum
     }
 }
 
 impl MaximumPossibleSized for SimpleIfEnum {
     fn maximum_possible_size() -> usize {
-        SimpleEnum::maximum_possible_size() // enum: SimpleEnum
+        0
+        + 2 // enum: SimpleIfEnumSimpleEnum
     }
 }
 

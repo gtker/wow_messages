@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_TRIGGER_CINEMATIC {}
 
 impl MaximumPossibleSized for SMSG_TRIGGER_CINEMATIC {
     fn maximum_possible_size() -> usize {
-        CinematicSequenceId::size() // cinematic_sequence_id: CinematicSequenceId
+        0
+        + 4 // cinematic_sequence_id: CinematicSequenceId
     }
 }
 

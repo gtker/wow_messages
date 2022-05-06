@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_CHAR_DELETE {}
 
 impl MaximumPossibleSized for SMSG_CHAR_DELETE {
     fn maximum_possible_size() -> usize {
-        WorldResult::size() // result: WorldResult
+        0
+        + 4 // result: WorldResult
     }
 }
 

@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_ATTACKSTART {}
 
 impl MaximumPossibleSized for SMSG_ATTACKSTART {
     fn maximum_possible_size() -> usize {
-        8 // attacker_guid: Guid
+        0
+        + 8 // attacker_guid: Guid
         + 8 // victim_guid: Guid
     }
 }

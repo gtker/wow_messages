@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_SET_ACTIONBAR_TOGGLES {}
 
 impl MaximumPossibleSized for CMSG_SET_ACTIONBAR_TOGGLES {
     fn maximum_possible_size() -> usize {
-        1 // action_bar: u8
+        0
+        + 1 // action_bar: u8
     }
 }
 

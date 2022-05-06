@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_BATTLEFIELD_LIST {}
 
 impl MaximumPossibleSized for CMSG_BATTLEFIELD_LIST {
     fn maximum_possible_size() -> usize {
-        Map::size() // map: Map
+        0
+        + 4 // map: Map
     }
 }
 

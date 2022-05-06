@@ -99,7 +99,8 @@ impl ConstantSized for QuestItemReward {}
 
 impl MaximumPossibleSized for QuestItemReward {
     fn maximum_possible_size() -> usize {
-        4 // item: u32
+        0
+        + 4 // item: u32
         + 4 // item_count: u32
     }
 }

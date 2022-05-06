@@ -451,15 +451,12 @@ impl ReadableAndWritable for IfEdgeCases {
 
 }
 
-impl VariableSized for IfEdgeCases {
-    fn size(&self) -> usize {
-        self.t.size() // t: TEnum and subfields
-    }
-}
+impl ConstantSized for IfEdgeCases {}
 
 impl MaximumPossibleSized for IfEdgeCases {
     fn maximum_possible_size() -> usize {
-        TEnum::maximum_possible_size() // t: TEnum
+        0
+        + 2 // t: IfEdgeCasesTEnum
     }
 }
 

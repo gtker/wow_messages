@@ -1237,15 +1237,17 @@ impl MessageBody for SMSG_CAST_RESULT {
 
 impl VariableSized for SMSG_CAST_RESULT {
     fn size(&self) -> usize {
-        4 // spell: u32
-        + self.result.size() // result: SimpleSpellCastResult and subfields
+        0
+        + 4 // spell: u32
+        + self.result.size() // result: SMSG_CAST_RESULTSimpleSpellCastResult
     }
 }
 
 impl MaximumPossibleSized for SMSG_CAST_RESULT {
     fn maximum_possible_size() -> usize {
-        4 // spell: u32
-        + SimpleSpellCastResult::maximum_possible_size() // result: SimpleSpellCastResult
+        0
+        + 4 // spell: u32
+        + 14 // result: SMSG_CAST_RESULTSimpleSpellCastResult
     }
 }
 

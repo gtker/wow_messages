@@ -100,7 +100,8 @@ impl ConstantSized for FactionInitializer {}
 
 impl MaximumPossibleSized for FactionInitializer {
     fn maximum_possible_size() -> usize {
-        FactionFlag::size() // flag: FactionFlag
+        0
+        + 1 // flag: FactionFlag
         + 4 // standing: u32
     }
 }

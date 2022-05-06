@@ -332,10 +332,11 @@ impl MessageBody for CMSG_SEND_MAIL {
 
 impl VariableSized for CMSG_SEND_MAIL {
     fn size(&self) -> usize {
-        8 // mailbox: Guid
-        + self.receiver.len() + 1 // receiver: CString and Null Terminator
-        + self.subject.len() + 1 // subject: CString and Null Terminator
-        + self.body.len() + 1 // body: CString and Null Terminator
+        0
+        + 8 // mailbox: Guid
+        + self.receiver.len() + 1 // receiver: CString
+        + self.subject.len() + 1 // subject: CString
+        + self.body.len() + 1 // body: CString
         + 4 // unknown1: u32
         + 4 // unknown2: u32
         + 8 // item: Guid
@@ -348,7 +349,8 @@ impl VariableSized for CMSG_SEND_MAIL {
 
 impl MaximumPossibleSized for CMSG_SEND_MAIL {
     fn maximum_possible_size() -> usize {
-        8 // mailbox: Guid
+        0
+        + 8 // mailbox: Guid
         + 256 // receiver: CString
         + 256 // subject: CString
         + 256 // body: CString

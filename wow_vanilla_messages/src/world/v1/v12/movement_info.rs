@@ -415,7 +415,8 @@ impl ReadableAndWritable for MovementInfo {
 
 impl VariableSized for MovementInfo {
     fn size(&self) -> usize {
-        self.flags.size() // flags: MovementFlags and subfields
+        0
+        + self.flags.size() // flags: MovementInfoMovementFlags
         + 4 // timestamp: u32
         + 4 // position_x: f32
         + 4 // position_y: f32
@@ -427,7 +428,8 @@ impl VariableSized for MovementInfo {
 
 impl MaximumPossibleSized for MovementInfo {
     fn maximum_possible_size() -> usize {
-        MovementFlags::maximum_possible_size() // flags: MovementFlags
+        0
+        + 57 // flags: MovementInfoMovementFlags
         + 4 // timestamp: u32
         + 4 // position_x: f32
         + 4 // position_y: f32

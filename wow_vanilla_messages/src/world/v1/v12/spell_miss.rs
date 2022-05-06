@@ -101,8 +101,9 @@ impl ConstantSized for SpellMiss {}
 
 impl MaximumPossibleSized for SpellMiss {
     fn maximum_possible_size() -> usize {
-        8 // target_guid: Guid
-        + SpellMissInfo::size() // miss_info: SpellMissInfo
+        0
+        + 8 // target_guid: Guid
+        + 4 // miss_info: SpellMissInfo
     }
 }
 

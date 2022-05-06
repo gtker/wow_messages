@@ -132,7 +132,8 @@ impl ConstantSized for CMSG_QUESTGIVER_CHOOSE_REWARD {}
 
 impl MaximumPossibleSized for CMSG_QUESTGIVER_CHOOSE_REWARD {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // quest_id: u32
         + 4 // reward: u32
     }

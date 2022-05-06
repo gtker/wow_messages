@@ -1756,13 +1756,15 @@ impl ReadableAndWritable for AuraLog {
 
 impl VariableSized for AuraLog {
     fn size(&self) -> usize {
-        self.aura_type.size() // aura_type: AuraType and subfields
+        0
+        + self.aura_type.size() // aura_type: AuraLogAuraType
     }
 }
 
 impl MaximumPossibleSized for AuraLog {
     fn maximum_possible_size() -> usize {
-        AuraType::maximum_possible_size() // aura_type: AuraType
+        0
+        + 17 // aura_type: AuraLogAuraType
     }
 }
 

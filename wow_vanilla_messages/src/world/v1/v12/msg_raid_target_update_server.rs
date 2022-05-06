@@ -212,13 +212,15 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
 
 impl VariableSized for MSG_RAID_TARGET_UPDATE_Server {
     fn size(&self) -> usize {
-        self.update_type.size() // update_type: RaidTargetUpdateType and subfields
+        0
+        + self.update_type.size() // update_type: MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType
     }
 }
 
 impl MaximumPossibleSized for MSG_RAID_TARGET_UPDATE_Server {
     fn maximum_possible_size() -> usize {
-        RaidTargetUpdateType::maximum_possible_size() // update_type: RaidTargetUpdateType
+        0
+        + 73 // update_type: MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType
     }
 }
 

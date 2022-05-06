@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_NPC_TEXT_QUERY {}
 
 impl MaximumPossibleSized for CMSG_NPC_TEXT_QUERY {
     fn maximum_possible_size() -> usize {
-        4 // text_id: u32
+        0
+        + 4 // text_id: u32
         + 8 // guid: Guid
     }
 }

@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_GET_MAIL_LIST {}
 
 impl MaximumPossibleSized for CMSG_GET_MAIL_LIST {
     fn maximum_possible_size() -> usize {
-        8 // mailbox_guid: Guid
+        0
+        + 8 // mailbox_guid: Guid
     }
 }
 

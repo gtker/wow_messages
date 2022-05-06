@@ -101,7 +101,8 @@ impl ConstantSized for RaidTargetUpdate {}
 
 impl MaximumPossibleSized for RaidTargetUpdate {
     fn maximum_possible_size() -> usize {
-        RaidTargetIndex::size() // index: RaidTargetIndex
+        0
+        + 1 // index: RaidTargetIndex
         + 8 // guid: Guid
     }
 }

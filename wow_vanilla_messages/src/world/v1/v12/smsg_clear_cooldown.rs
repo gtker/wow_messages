@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_CLEAR_COOLDOWN {}
 
 impl MaximumPossibleSized for SMSG_CLEAR_COOLDOWN {
     fn maximum_possible_size() -> usize {
-        4 // id: u32
+        0
+        + 4 // id: u32
         + 8 // target_guid: Guid
     }
 }

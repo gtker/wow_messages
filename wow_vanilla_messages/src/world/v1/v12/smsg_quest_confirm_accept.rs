@@ -138,15 +138,17 @@ impl MessageBody for SMSG_QUEST_CONFIRM_ACCEPT {
 
 impl VariableSized for SMSG_QUEST_CONFIRM_ACCEPT {
     fn size(&self) -> usize {
-        4 // quest_id: u32
-        + self.quest_title.len() + 1 // quest_title: CString and Null Terminator
+        0
+        + 4 // quest_id: u32
+        + self.quest_title.len() + 1 // quest_title: CString
         + 8 // guid: Guid
     }
 }
 
 impl MaximumPossibleSized for SMSG_QUEST_CONFIRM_ACCEPT {
     fn maximum_possible_size() -> usize {
-        4 // quest_id: u32
+        0
+        + 4 // quest_id: u32
         + 256 // quest_title: CString
         + 8 // guid: Guid
     }

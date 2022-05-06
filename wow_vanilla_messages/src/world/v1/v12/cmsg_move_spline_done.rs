@@ -129,7 +129,8 @@ impl MessageBody for CMSG_MOVE_SPLINE_DONE {
 
 impl VariableSized for CMSG_MOVE_SPLINE_DONE {
     fn size(&self) -> usize {
-        self.movement_info.size() // movement_info: MovementInfo
+        0
+        + self.movement_info.size() // movement_info: MovementInfo
         + 4 // movement_counter: u32
         + 4 // unknown1: u32
     }
@@ -137,7 +138,8 @@ impl VariableSized for CMSG_MOVE_SPLINE_DONE {
 
 impl MaximumPossibleSized for CMSG_MOVE_SPLINE_DONE {
     fn maximum_possible_size() -> usize {
-        MovementInfo::maximum_possible_size() // movement_info: MovementInfo
+        0
+        + 81 // movement_info: MovementInfo
         + 4 // movement_counter: u32
         + 4 // unknown1: u32
     }

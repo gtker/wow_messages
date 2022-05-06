@@ -1066,13 +1066,15 @@ impl ReadableAndWritable for NestedNotIf {
 
 impl VariableSized for NestedNotIf {
     fn size(&self) -> usize {
-        self.t.size() // t: TEnum and subfields
+        0
+        + self.t.size() // t: NestedNotIfTEnum
     }
 }
 
 impl MaximumPossibleSized for NestedNotIf {
     fn maximum_possible_size() -> usize {
-        TEnum::maximum_possible_size() // t: TEnum
+        0
+        + 4 // t: NestedNotIfTEnum
     }
 }
 

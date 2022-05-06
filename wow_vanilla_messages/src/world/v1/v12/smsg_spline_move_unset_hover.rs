@@ -85,13 +85,15 @@ impl MessageBody for SMSG_SPLINE_MOVE_UNSET_HOVER {
 
 impl VariableSized for SMSG_SPLINE_MOVE_UNSET_HOVER {
     fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        0
+        + self.guid.size() // guid: Guid
     }
 }
 
 impl MaximumPossibleSized for SMSG_SPLINE_MOVE_UNSET_HOVER {
     fn maximum_possible_size() -> usize {
-        9 // guid: PackedGuid
+        0
+        + 9 // guid: Guid
     }
 }
 

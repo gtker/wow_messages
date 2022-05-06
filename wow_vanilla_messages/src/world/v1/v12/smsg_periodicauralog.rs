@@ -185,8 +185,9 @@ impl MessageBody for SMSG_PERIODICAURALOG {
 
 impl VariableSized for SMSG_PERIODICAURALOG {
     fn size(&self) -> usize {
-        self.target.size() // target: PackedGuid
-        + self.caster.size() // caster: PackedGuid
+        0
+        + self.target.size() // target: Guid
+        + self.caster.size() // caster: Guid
         + 4 // spell: u32
         + 4 // amount_of_auras: u32
         + self.auras.iter().fold(0, |acc, x| acc + x.size()) // auras: AuraLog[amount_of_auras]
@@ -195,11 +196,7 @@ impl VariableSized for SMSG_PERIODICAURALOG {
 
 impl MaximumPossibleSized for SMSG_PERIODICAURALOG {
     fn maximum_possible_size() -> usize {
-        9 // target: PackedGuid
-        + 9 // caster: PackedGuid
-        + 4 // spell: u32
-        + 4 // amount_of_auras: u32
-        + 4294967295 * AuraLog::maximum_possible_size() // auras: AuraLog[amount_of_auras]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_QUESTLOG_REMOVE_QUEST {}
 
 impl MaximumPossibleSized for CMSG_QUESTLOG_REMOVE_QUEST {
     fn maximum_possible_size() -> usize {
-        1 // slot: u8
+        0
+        + 1 // slot: u8
     }
 }
 

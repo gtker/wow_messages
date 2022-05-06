@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_LOOT_RELEASE_RESPONSE {}
 
 impl MaximumPossibleSized for SMSG_LOOT_RELEASE_RESPONSE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 1 // unknown1: u8
     }
 }

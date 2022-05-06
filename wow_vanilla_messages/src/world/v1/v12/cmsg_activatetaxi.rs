@@ -125,8 +125,9 @@ impl ConstantSized for CMSG_ACTIVATETAXI {}
 
 impl MaximumPossibleSized for CMSG_ACTIVATETAXI {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + 2 * core::mem::size_of::<u32>() // nodes: u32[2]
+        0
+        + 8 // guid: Guid
+        + 8 // nodes: u32[2]
     }
 }
 

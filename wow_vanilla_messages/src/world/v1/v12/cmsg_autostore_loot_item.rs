@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_AUTOSTORE_LOOT_ITEM {}
 
 impl MaximumPossibleSized for CMSG_AUTOSTORE_LOOT_ITEM {
     fn maximum_possible_size() -> usize {
-        1 // item_slot: u8
+        0
+        + 1 // item_slot: u8
     }
 }
 

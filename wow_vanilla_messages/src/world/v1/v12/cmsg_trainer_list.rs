@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_TRAINER_LIST {}
 
 impl MaximumPossibleSized for CMSG_TRAINER_LIST {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

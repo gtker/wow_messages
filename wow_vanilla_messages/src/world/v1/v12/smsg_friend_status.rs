@@ -111,7 +111,8 @@ impl ConstantSized for SMSG_FRIEND_STATUS {}
 
 impl MaximumPossibleSized for SMSG_FRIEND_STATUS {
     fn maximum_possible_size() -> usize {
-        FriendResult::size() // result: FriendResult
+        0
+        + 1 // result: FriendResult
         + 8 // guid: Guid
     }
 }

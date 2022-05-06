@@ -84,7 +84,8 @@ impl ConstantSized for MSG_QUERY_NEXT_MAIL_TIME_Server {}
 
 impl MaximumPossibleSized for MSG_QUERY_NEXT_MAIL_TIME_Server {
     fn maximum_possible_size() -> usize {
-        4 // unread_mails: f32
+        0
+        + 4 // unread_mails: f32
     }
 }
 

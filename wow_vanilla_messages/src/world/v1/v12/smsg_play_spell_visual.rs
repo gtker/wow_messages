@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_PLAY_SPELL_VISUAL {}
 
 impl MaximumPossibleSized for SMSG_PLAY_SPELL_VISUAL {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // spell_art_kit: u32
     }
 }

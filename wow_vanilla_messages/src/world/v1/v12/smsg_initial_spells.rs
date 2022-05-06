@@ -196,7 +196,8 @@ impl MessageBody for SMSG_INITIAL_SPELLS {
 
 impl VariableSized for SMSG_INITIAL_SPELLS {
     fn size(&self) -> usize {
-        1 // unknown1: u8
+        0
+        + 1 // unknown1: u8
         + 2 // spell_count: u16
         + self.initial_spells.iter().fold(0, |acc, x| acc + InitialSpell::size()) // initial_spells: InitialSpell[spell_count]
         + 2 // cooldown_count: u16
@@ -206,11 +207,7 @@ impl VariableSized for SMSG_INITIAL_SPELLS {
 
 impl MaximumPossibleSized for SMSG_INITIAL_SPELLS {
     fn maximum_possible_size() -> usize {
-        1 // unknown1: u8
-        + 2 // spell_count: u16
-        + 65535 * InitialSpell::maximum_possible_size() // initial_spells: InitialSpell[spell_count]
-        + 2 // cooldown_count: u16
-        + 65535 * CooldownSpell::maximum_possible_size() // cooldowns: CooldownSpell[cooldown_count]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

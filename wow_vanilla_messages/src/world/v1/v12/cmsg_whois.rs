@@ -93,13 +93,15 @@ impl MessageBody for CMSG_WHOIS {
 
 impl VariableSized for CMSG_WHOIS {
     fn size(&self) -> usize {
-        self.character.len() + 1 // character: CString and Null Terminator
+        0
+        + self.character.len() + 1 // character: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_WHOIS {
     fn maximum_possible_size() -> usize {
-        256 // character: CString
+        0
+        + 256 // character: CString
     }
 }
 

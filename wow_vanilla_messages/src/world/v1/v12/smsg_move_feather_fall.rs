@@ -107,14 +107,16 @@ impl MessageBody for SMSG_MOVE_FEATHER_FALL {
 
 impl VariableSized for SMSG_MOVE_FEATHER_FALL {
     fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        0
+        + self.guid.size() // guid: Guid
         + 4 // counter: u32
     }
 }
 
 impl MaximumPossibleSized for SMSG_MOVE_FEATHER_FALL {
     fn maximum_possible_size() -> usize {
-        9 // guid: PackedGuid
+        0
+        + 9 // guid: Guid
         + 4 // counter: u32
     }
 }

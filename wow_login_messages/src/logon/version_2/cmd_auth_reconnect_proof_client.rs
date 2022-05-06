@@ -187,9 +187,10 @@ impl ConstantSized for CMD_AUTH_RECONNECT_PROOF_Client {}
 
 impl MaximumPossibleSized for CMD_AUTH_RECONNECT_PROOF_Client {
     fn maximum_possible_size() -> usize {
-        16 * core::mem::size_of::<u8>() // proof_data: u8[16]
-        + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
-        + 20 * core::mem::size_of::<u8>() // client_checksum: u8[20]
+        0
+        + 16 // proof_data: u8[16]
+        + 20 // client_proof: u8[20]
+        + 20 // client_checksum: u8[20]
         + 1 // key_count: u8
     }
 }

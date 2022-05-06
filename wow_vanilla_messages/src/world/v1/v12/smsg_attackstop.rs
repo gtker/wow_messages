@@ -129,16 +129,18 @@ impl MessageBody for SMSG_ATTACKSTOP {
 
 impl VariableSized for SMSG_ATTACKSTOP {
     fn size(&self) -> usize {
-        self.player.size() // player: PackedGuid
-        + self.enemy.size() // enemy: PackedGuid
+        0
+        + self.player.size() // player: Guid
+        + self.enemy.size() // enemy: Guid
         + 4 // unknown1: u32
     }
 }
 
 impl MaximumPossibleSized for SMSG_ATTACKSTOP {
     fn maximum_possible_size() -> usize {
-        9 // player: PackedGuid
-        + 9 // enemy: PackedGuid
+        0
+        + 9 // player: Guid
+        + 9 // enemy: Guid
         + 4 // unknown1: u32
     }
 }

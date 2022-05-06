@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_SET_FACTION_VISIBLE {}
 
 impl MaximumPossibleSized for SMSG_SET_FACTION_VISIBLE {
     fn maximum_possible_size() -> usize {
-        4 // reputation_list_id: u32
+        0
+        + 4 // reputation_list_id: u32
     }
 }
 

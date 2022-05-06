@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_PLAY_SOUND {}
 
 impl MaximumPossibleSized for SMSG_PLAY_SOUND {
     fn maximum_possible_size() -> usize {
-        4 // sound_id: u32
+        0
+        + 4 // sound_id: u32
     }
 }
 

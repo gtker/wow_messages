@@ -109,7 +109,8 @@ impl ConstantSized for CMSG_SET_ACTION_BUTTON {}
 
 impl MaximumPossibleSized for CMSG_SET_ACTION_BUTTON {
     fn maximum_possible_size() -> usize {
-        1 // button: u8
+        0
+        + 1 // button: u8
         + 4 // action_type: u32
     }
 }

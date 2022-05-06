@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_MAIL_DELETE {}
 
 impl MaximumPossibleSized for CMSG_MAIL_DELETE {
     fn maximum_possible_size() -> usize {
-        8 // mailbox_id: Guid
+        0
+        + 8 // mailbox_id: Guid
         + 4 // mail_id: u32
     }
 }

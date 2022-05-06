@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_ZONEUPDATE {}
 
 impl MaximumPossibleSized for CMSG_ZONEUPDATE {
     fn maximum_possible_size() -> usize {
-        4 // zone_id: u32
+        0
+        + 4 // zone_id: u32
     }
 }
 

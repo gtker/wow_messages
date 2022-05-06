@@ -152,10 +152,11 @@ impl ConstantSized for SMSG_WEATHER {}
 
 impl MaximumPossibleSized for SMSG_WEATHER {
     fn maximum_possible_size() -> usize {
-        WeatherType::size() // weather_type: WeatherType
+        0
+        + 4 // weather_type: WeatherType
         + 4 // grade: f32
         + 4 // sound_id: u32
-        + WeatherChangeType::size() // change: WeatherChangeType
+        + 1 // change: WeatherChangeType
     }
 }
 

@@ -111,8 +111,9 @@ impl ConstantSized for SMSG_LOGOUT_RESPONSE {}
 
 impl MaximumPossibleSized for SMSG_LOGOUT_RESPONSE {
     fn maximum_possible_size() -> usize {
-        LogoutResult::size() // reason: LogoutResult
-        + LogoutSpeed::size() // speed: LogoutSpeed
+        0
+        + 4 // reason: LogoutResult
+        + 1 // speed: LogoutSpeed
     }
 }
 

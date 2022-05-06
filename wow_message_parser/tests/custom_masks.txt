@@ -98,15 +98,17 @@ impl ReadableAndWritable for CustomMasks {
 
 impl VariableSized for CustomMasks {
     fn size(&self) -> usize {
-        self.update_mask.size() // update_mask: UpdateMask
+        0
+        + self.update_mask.size() // update_mask: UpdateMask
         + self.aura_mask.size() // aura_mask: AuraMask
     }
 }
 
 impl MaximumPossibleSized for CustomMasks {
     fn maximum_possible_size() -> usize {
-        65536 // update_mask: UpdateMask
-        + 65536 // aura_mask: AuraMask
+        0
+        + 1446 // update_mask: UpdateMask
+        + 132 // aura_mask: AuraMask
     }
 }
 

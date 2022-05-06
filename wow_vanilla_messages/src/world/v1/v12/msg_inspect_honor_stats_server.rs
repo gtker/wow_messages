@@ -419,8 +419,9 @@ impl ConstantSized for MSG_INSPECT_HONOR_STATS_Server {}
 
 impl MaximumPossibleSized for MSG_INSPECT_HONOR_STATS_Server {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + PvpRank::size() // highest_rank: PvpRank
+        0
+        + 8 // guid: Guid
+        + 1 // highest_rank: PvpRank
         + 4 // today_honorable_and_dishonorable: u32
         + 2 // yesterday_honorable: u16
         + 2 // unknown1: u16
@@ -433,7 +434,7 @@ impl MaximumPossibleSized for MSG_INSPECT_HONOR_STATS_Server {
         + 4 // yesterday_honor: u32
         + 4 // last_week_honor: u32
         + 4 // this_week_honor: u32
-        + 4 // last_week_standing: PvpRank upcasted to u32
+        + 1 // last_week_standing: PvpRank
         + 1 // rank_progress_bar: u8
     }
 }

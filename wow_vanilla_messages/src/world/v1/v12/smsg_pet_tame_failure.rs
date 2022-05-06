@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_PET_TAME_FAILURE {}
 
 impl MaximumPossibleSized for SMSG_PET_TAME_FAILURE {
     fn maximum_possible_size() -> usize {
-        PetTameFailureReason::size() // reason: PetTameFailureReason
+        0
+        + 1 // reason: PetTameFailureReason
     }
 }
 

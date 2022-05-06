@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_QUEST_CONFIRM_ACCEPT {}
 
 impl MaximumPossibleSized for CMSG_QUEST_CONFIRM_ACCEPT {
     fn maximum_possible_size() -> usize {
-        4 // quest_id: u32
+        0
+        + 4 // quest_id: u32
     }
 }
 

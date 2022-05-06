@@ -721,13 +721,15 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
 
 impl VariableSized for SMSG_AUTH_RESPONSE {
     fn size(&self) -> usize {
-        self.result.size() // result: WorldResult and subfields
+        0
+        + self.result.size() // result: SMSG_AUTH_RESPONSEWorldResult
     }
 }
 
 impl MaximumPossibleSized for SMSG_AUTH_RESPONSE {
     fn maximum_possible_size() -> usize {
-        WorldResult::maximum_possible_size() // result: WorldResult
+        0
+        + 13 // result: SMSG_AUTH_RESPONSEWorldResult
     }
 }
 

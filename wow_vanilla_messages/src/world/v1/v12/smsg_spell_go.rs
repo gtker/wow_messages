@@ -358,10 +358,11 @@ impl MessageBody for SMSG_SPELL_GO {
 
 impl VariableSized for SMSG_SPELL_GO {
     fn size(&self) -> usize {
-        self.cast_item.size() // cast_item: PackedGuid
-        + self.caster.size() // caster: PackedGuid
+        0
+        + self.cast_item.size() // cast_item: Guid
+        + self.caster.size() // caster: Guid
         + 4 // spell: u32
-        + self.flags.size() // flags: CastFlags and subfields
+        + self.flags.size() // flags: SMSG_SPELL_GOCastFlags
         + 1 // amount_of_hits: u8
         + self.hits.iter().fold(0, |acc, _| acc + 8) // hits: Guid[amount_of_hits]
         + 1 // amount_of_misses: u8
@@ -372,15 +373,16 @@ impl VariableSized for SMSG_SPELL_GO {
 
 impl MaximumPossibleSized for SMSG_SPELL_GO {
     fn maximum_possible_size() -> usize {
-        9 // cast_item: PackedGuid
-        + 9 // caster: PackedGuid
+        0
+        + 9 // cast_item: Guid
+        + 9 // caster: Guid
         + 4 // spell: u32
-        + CastFlags::maximum_possible_size() // flags: CastFlags
+        + 10 // flags: SMSG_SPELL_GOCastFlags
         + 1 // amount_of_hits: u8
-        + 255 * 8 // hits: Guid[amount_of_hits]
+        + 2048 // hits: Guid[amount_of_hits]
         + 1 // amount_of_misses: u8
-        + 255 * SpellMiss::maximum_possible_size() // misses: SpellMiss[amount_of_misses]
-        + SpellCastTargets::maximum_possible_size() // targets: SpellCastTargets
+        + 3072 // misses: SpellMiss[amount_of_misses]
+        + 354 // targets: SpellCastTargets
     }
 }
 

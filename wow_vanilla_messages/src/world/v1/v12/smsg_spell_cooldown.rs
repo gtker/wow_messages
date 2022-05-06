@@ -135,15 +135,15 @@ impl MessageBody for SMSG_SPELL_COOLDOWN {
 
 impl VariableSized for SMSG_SPELL_COOLDOWN {
     fn size(&self) -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + self.cooldowns.iter().fold(0, |acc, x| acc + SpellCooldownStatus::size()) // cooldowns: SpellCooldownStatus[-]
     }
 }
 
 impl MaximumPossibleSized for SMSG_SPELL_COOLDOWN {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + 65536 // cooldowns: SpellCooldownStatus[-]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -141,7 +141,8 @@ impl MessageBody for SMSG_LIST_INVENTORY {
 
 impl VariableSized for SMSG_LIST_INVENTORY {
     fn size(&self) -> usize {
-        8 // vendor: Guid
+        0
+        + 8 // vendor: Guid
         + 1 // amount_of_items: u8
         + self.items.iter().fold(0, |acc, x| acc + ListInventoryItem::size()) // items: ListInventoryItem[amount_of_items]
     }
@@ -149,9 +150,10 @@ impl VariableSized for SMSG_LIST_INVENTORY {
 
 impl MaximumPossibleSized for SMSG_LIST_INVENTORY {
     fn maximum_possible_size() -> usize {
-        8 // vendor: Guid
+        0
+        + 8 // vendor: Guid
         + 1 // amount_of_items: u8
-        + 255 * ListInventoryItem::maximum_possible_size() // items: ListInventoryItem[amount_of_items]
+        + 7168 // items: ListInventoryItem[amount_of_items]
     }
 }
 

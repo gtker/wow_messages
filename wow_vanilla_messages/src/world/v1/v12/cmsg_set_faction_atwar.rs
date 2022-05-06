@@ -109,7 +109,8 @@ impl ConstantSized for CMSG_SET_FACTION_ATWAR {}
 
 impl MaximumPossibleSized for CMSG_SET_FACTION_ATWAR {
     fn maximum_possible_size() -> usize {
-        4 // reputation_list_id: u32
+        0
+        + 4 // reputation_list_id: u32
         + 1 // flags: u8
     }
 }

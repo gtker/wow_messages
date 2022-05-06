@@ -154,7 +154,8 @@ impl ConstantSized for SMSG_SPELLORDAMAGE_IMMUNE {}
 
 impl MaximumPossibleSized for SMSG_SPELLORDAMAGE_IMMUNE {
     fn maximum_possible_size() -> usize {
-        8 // caster_guid: Guid
+        0
+        + 8 // caster_guid: Guid
         + 8 // target_guid: Guid
         + 4 // id: u32
         + 1 // unknown1: u8

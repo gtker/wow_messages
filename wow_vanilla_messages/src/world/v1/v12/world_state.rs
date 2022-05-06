@@ -99,7 +99,8 @@ impl ConstantSized for WorldState {}
 
 impl MaximumPossibleSized for WorldState {
     fn maximum_possible_size() -> usize {
-        4 // state: u32
+        0
+        + 4 // state: u32
         + 4 // value: u32
     }
 }

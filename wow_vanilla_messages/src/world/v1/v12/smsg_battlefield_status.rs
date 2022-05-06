@@ -13290,15 +13290,17 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
 impl VariableSized for SMSG_BATTLEFIELD_STATUS {
     fn size(&self) -> usize {
-        4 // queue_slot: u32
-        + self.map.size() // map: Map and subfields
+        0
+        + 4 // queue_slot: u32
+        + self.map.size() // map: SMSG_BATTLEFIELD_STATUSMap
     }
 }
 
 impl MaximumPossibleSized for SMSG_BATTLEFIELD_STATUS {
     fn maximum_possible_size() -> usize {
-        4 // queue_slot: u32
-        + Map::maximum_possible_size() // map: Map
+        0
+        + 4 // queue_slot: u32
+        + 18 // map: SMSG_BATTLEFIELD_STATUSMap
     }
 }
 

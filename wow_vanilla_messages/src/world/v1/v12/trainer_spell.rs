@@ -298,8 +298,9 @@ impl ConstantSized for TrainerSpell {}
 
 impl MaximumPossibleSized for TrainerSpell {
     fn maximum_possible_size() -> usize {
-        4 // spell: u32
-        + TrainerSpellState::size() // state: TrainerSpellState
+        0
+        + 4 // spell: u32
+        + 1 // state: TrainerSpellState
         + 4 // spell_cost: u32
         + 4 // talent_point_cost: u32
         + 4 // first_rank: u32

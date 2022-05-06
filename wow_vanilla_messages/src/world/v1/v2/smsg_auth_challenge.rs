@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_AUTH_CHALLENGE {}
 
 impl MaximumPossibleSized for SMSG_AUTH_CHALLENGE {
     fn maximum_possible_size() -> usize {
-        4 // server_seed: u32
+        0
+        + 4 // server_seed: u32
     }
 }
 

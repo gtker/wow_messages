@@ -152,7 +152,8 @@ impl MessageBody for CMSG_MOVE_WATER_WALK_ACK {
 
 impl VariableSized for CMSG_MOVE_WATER_WALK_ACK {
     fn size(&self) -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // movement_counter: u32
         + self.movement_info.size() // movement_info: MovementInfo
         + 4 // apply: u32
@@ -161,9 +162,10 @@ impl VariableSized for CMSG_MOVE_WATER_WALK_ACK {
 
 impl MaximumPossibleSized for CMSG_MOVE_WATER_WALK_ACK {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // movement_counter: u32
-        + MovementInfo::maximum_possible_size() // movement_info: MovementInfo
+        + 81 // movement_info: MovementInfo
         + 4 // apply: u32
     }
 }

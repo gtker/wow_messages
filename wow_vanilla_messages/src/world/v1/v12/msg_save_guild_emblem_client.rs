@@ -198,7 +198,8 @@ impl ConstantSized for MSG_SAVE_GUILD_EMBLEM_Client {}
 
 impl MaximumPossibleSized for MSG_SAVE_GUILD_EMBLEM_Client {
     fn maximum_possible_size() -> usize {
-        8 // vendor: Guid
+        0
+        + 8 // vendor: Guid
         + 4 // emblem_style: u32
         + 4 // emblem_color: u32
         + 4 // border_style: u32

@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_GUILD_QUERY {}
 
 impl MaximumPossibleSized for CMSG_GUILD_QUERY {
     fn maximum_possible_size() -> usize {
-        4 // guild_id: u32
+        0
+        + 4 // guild_id: u32
     }
 }
 

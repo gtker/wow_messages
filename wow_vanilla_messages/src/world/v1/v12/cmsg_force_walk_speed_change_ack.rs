@@ -149,7 +149,8 @@ impl MessageBody for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
 
 impl VariableSized for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
     fn size(&self) -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // counter: u32
         + self.movement_info.size() // movement_info: MovementInfo
         + 4 // new_speed: f32
@@ -158,9 +159,10 @@ impl VariableSized for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
 
 impl MaximumPossibleSized for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // counter: u32
-        + MovementInfo::maximum_possible_size() // movement_info: MovementInfo
+        + 81 // movement_info: MovementInfo
         + 4 // new_speed: f32
     }
 }

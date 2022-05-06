@@ -103,7 +103,8 @@ impl ConstantSized for MSG_MINIMAP_PING_Client {}
 
 impl MaximumPossibleSized for MSG_MINIMAP_PING_Client {
     fn maximum_possible_size() -> usize {
-        4 // position_x: f32
+        0
+        + 4 // position_x: f32
         + 4 // position_y: f32
     }
 }

@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_ZONE_UNDER_ATTACK {}
 
 impl MaximumPossibleSized for SMSG_ZONE_UNDER_ATTACK {
     fn maximum_possible_size() -> usize {
-        4 // zone_id: u32
+        0
+        + 4 // zone_id: u32
     }
 }
 

@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_GAMEOBJ_USE {}
 
 impl MaximumPossibleSized for CMSG_GAMEOBJ_USE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

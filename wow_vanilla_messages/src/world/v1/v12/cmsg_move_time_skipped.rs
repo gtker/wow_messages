@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_MOVE_TIME_SKIPPED {}
 
 impl MaximumPossibleSized for CMSG_MOVE_TIME_SKIPPED {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // lag: u32
     }
 }

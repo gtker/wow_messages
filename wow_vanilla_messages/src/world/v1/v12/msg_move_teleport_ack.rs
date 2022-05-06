@@ -134,7 +134,8 @@ impl ConstantSized for MSG_MOVE_TELEPORT_ACK {}
 
 impl MaximumPossibleSized for MSG_MOVE_TELEPORT_ACK {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // movement_counter: u32
         + 4 // time_in_msecs: u32
     }

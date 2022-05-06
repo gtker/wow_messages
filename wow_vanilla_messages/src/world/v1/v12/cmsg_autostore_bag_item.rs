@@ -131,7 +131,8 @@ impl ConstantSized for CMSG_AUTOSTORE_BAG_ITEM {}
 
 impl MaximumPossibleSized for CMSG_AUTOSTORE_BAG_ITEM {
     fn maximum_possible_size() -> usize {
-        1 // source_bag: u8
+        0
+        + 1 // source_bag: u8
         + 1 // source_slot: u8
         + 1 // destination_bag: u8
     }

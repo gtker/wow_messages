@@ -633,24 +633,25 @@ impl ReadableAndWritable for Character {
 
 impl VariableSized for Character {
     fn size(&self) -> usize {
-        8 // guid: Guid
-        + self.name.len() + 1 // name: CString and Null Terminator
-        + Race::size() // race: Race
-        + Class::size() // class: Class
-        + Gender::size() // gender: Gender
+        0
+        + 8 // guid: Guid
+        + self.name.len() + 1 // name: CString
+        + 1 // race: Race
+        + 1 // class: Class
+        + 1 // gender: Gender
         + 1 // skin: u8
         + 1 // face: u8
         + 1 // hairstyle: u8
         + 1 // haircolor: u8
         + 1 // facialhair: u8
         + 1 // level: u8
-        + Area::size() // area: Area
-        + Map::size() // map: Map
+        + 4 // area: Area
+        + 4 // map: Map
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32
         + 4 // guild_id: u32
-        + CharacterFlags::size() // flags: CharacterFlags
+        + 4 // flags: CharacterFlags
         + 1 // first_login: u8
         + 4 // pet_display_id: u32
         + 4 // pet_level: u32
@@ -663,29 +664,30 @@ impl VariableSized for Character {
 
 impl MaximumPossibleSized for Character {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 256 // name: CString
-        + Race::maximum_possible_size() // race: Race
-        + Class::maximum_possible_size() // class: Class
-        + Gender::maximum_possible_size() // gender: Gender
+        + 1 // race: Race
+        + 1 // class: Class
+        + 1 // gender: Gender
         + 1 // skin: u8
         + 1 // face: u8
         + 1 // hairstyle: u8
         + 1 // haircolor: u8
         + 1 // facialhair: u8
         + 1 // level: u8
-        + Area::maximum_possible_size() // area: Area
-        + Map::maximum_possible_size() // map: Map
+        + 4 // area: Area
+        + 4 // map: Map
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32
         + 4 // guild_id: u32
-        + CharacterFlags::maximum_possible_size() // flags: CharacterFlags
+        + 4 // flags: CharacterFlags
         + 1 // first_login: u8
         + 4 // pet_display_id: u32
         + 4 // pet_level: u32
         + 4 // pet_familiy: u32
-        + 19 * CharacterGear::maximum_possible_size() // equipment: CharacterGear[19]
+        + 95 // equipment: CharacterGear[19]
         + 4 // first_bag_display_id: u32
         + 1 // first_bag_inventory_id: u8
     }

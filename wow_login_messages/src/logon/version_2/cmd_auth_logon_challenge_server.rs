@@ -456,15 +456,17 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
 
 impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_Server {
     fn size(&self) -> usize {
-        1 // protocol_version: u8
-        + self.login_result.size() // login_result: LoginResult and subfields
+        0
+        + 1 // protocol_version: u8
+        + self.login_result.size() // login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult
     }
 }
 
 impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_Server {
     fn maximum_possible_size() -> usize {
-        1 // protocol_version: u8
-        + LoginResult::maximum_possible_size() // login_result: LoginResult
+        0
+        + 1 // protocol_version: u8
+        + 595 // login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult
     }
 }
 

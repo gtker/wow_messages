@@ -132,9 +132,10 @@ impl ConstantSized for SMSG_PET_CAST_FAILED {}
 
 impl MaximumPossibleSized for SMSG_PET_CAST_FAILED {
     fn maximum_possible_size() -> usize {
-        4 // id: u32
+        0
+        + 4 // id: u32
         + 1 // unknown1: u8
-        + SpellCastResult::size() // result: SpellCastResult
+        + 1 // result: SpellCastResult
     }
 }
 

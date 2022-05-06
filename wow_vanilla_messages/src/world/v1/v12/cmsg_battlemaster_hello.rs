@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_BATTLEMASTER_HELLO {}
 
 impl MaximumPossibleSized for CMSG_BATTLEMASTER_HELLO {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

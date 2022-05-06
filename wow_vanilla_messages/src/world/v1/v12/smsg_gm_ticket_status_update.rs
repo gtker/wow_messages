@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_GM_TICKET_STATUS_UPDATE {}
 
 impl MaximumPossibleSized for SMSG_GM_TICKET_STATUS_UPDATE {
     fn maximum_possible_size() -> usize {
-        GmTicketStatusResponse::size() // response: GmTicketStatusResponse
+        0
+        + 4 // response: GmTicketStatusResponse
     }
 }
 

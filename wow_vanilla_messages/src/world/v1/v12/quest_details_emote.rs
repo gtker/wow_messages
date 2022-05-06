@@ -99,7 +99,8 @@ impl ConstantSized for QuestDetailsEmote {}
 
 impl MaximumPossibleSized for QuestDetailsEmote {
     fn maximum_possible_size() -> usize {
-        4 // emote: u32
+        0
+        + 4 // emote: u32
         + 4 // emote_delay_in_msecs: u32
     }
 }

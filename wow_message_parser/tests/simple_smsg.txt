@@ -87,7 +87,8 @@ impl ConstantSized for SimpleSmsg {}
 
 impl MaximumPossibleSized for SimpleSmsg {
     fn maximum_possible_size() -> usize {
-        1 // basic: u8
+        0
+        + 1 // basic: u8
     }
 }
 

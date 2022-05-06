@@ -110,8 +110,9 @@ impl ConstantSized for SMSG_QUESTGIVER_QUEST_FAILED {}
 
 impl MaximumPossibleSized for SMSG_QUESTGIVER_QUEST_FAILED {
     fn maximum_possible_size() -> usize {
-        4 // quest_id: u32
-        + QuestFailedReason::size() // reason: QuestFailedReason
+        0
+        + 4 // quest_id: u32
+        + 4 // reason: QuestFailedReason
     }
 }
 

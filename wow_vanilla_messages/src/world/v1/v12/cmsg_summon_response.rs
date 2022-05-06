@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_SUMMON_RESPONSE {}
 
 impl MaximumPossibleSized for CMSG_SUMMON_RESPONSE {
     fn maximum_possible_size() -> usize {
-        8 // summoner_guid: Guid
+        0
+        + 8 // summoner_guid: Guid
     }
 }
 

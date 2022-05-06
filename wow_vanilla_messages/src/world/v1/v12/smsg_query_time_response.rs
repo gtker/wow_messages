@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_QUERY_TIME_RESPONSE {}
 
 impl MaximumPossibleSized for SMSG_QUERY_TIME_RESPONSE {
     fn maximum_possible_size() -> usize {
-        4 // time: u32
+        0
+        + 4 // time: u32
     }
 }
 

@@ -198,7 +198,8 @@ impl ConstantSized for SMSG_LOOT_START_ROLL {}
 
 impl MaximumPossibleSized for SMSG_LOOT_START_ROLL {
     fn maximum_possible_size() -> usize {
-        8 // creature_guid: Guid
+        0
+        + 8 // creature_guid: Guid
         + 4 // loot_slot: u32
         + 4 // item_id: u32
         + 4 // item_random_suffix: u32

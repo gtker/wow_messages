@@ -496,15 +496,17 @@ impl ReadableAndWritable for Friend {
 
 impl VariableSized for Friend {
     fn size(&self) -> usize {
-        8 // guid: Guid
-        + self.status.size() // status: FriendStatus and subfields
+        0
+        + 8 // guid: Guid
+        + self.status.size() // status: FriendFriendStatus
     }
 }
 
 impl MaximumPossibleSized for Friend {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + FriendStatus::maximum_possible_size() // status: FriendStatus
+        0
+        + 8 // guid: Guid
+        + 10 // status: FriendFriendStatus
     }
 }
 

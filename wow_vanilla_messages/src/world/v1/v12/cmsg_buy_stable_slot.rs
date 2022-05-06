@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_BUY_STABLE_SLOT {}
 
 impl MaximumPossibleSized for CMSG_BUY_STABLE_SLOT {
     fn maximum_possible_size() -> usize {
-        8 // npc_guid: Guid
+        0
+        + 8 // npc_guid: Guid
     }
 }
 

@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_GROUP_JOINED_BATTLEGROUND {}
 
 impl MaximumPossibleSized for SMSG_GROUP_JOINED_BATTLEGROUND {
     fn maximum_possible_size() -> usize {
-        BgTypeId::size() // id: BgTypeId
+        0
+        + 4 // id: BgTypeId
     }
 }
 

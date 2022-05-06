@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_SET_PROFICIENCY {}
 
 impl MaximumPossibleSized for SMSG_SET_PROFICIENCY {
     fn maximum_possible_size() -> usize {
-        ItemClass::size() // class: ItemClass
+        0
+        + 1 // class: ItemClass
         + 4 // item_sub_class_mask: u32
     }
 }

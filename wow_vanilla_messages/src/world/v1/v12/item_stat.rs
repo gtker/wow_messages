@@ -99,7 +99,8 @@ impl ConstantSized for ItemStat {}
 
 impl MaximumPossibleSized for ItemStat {
     fn maximum_possible_size() -> usize {
-        4 // item_stat_type: u32
+        0
+        + 4 // item_stat_type: u32
         + 4 // item_stat_value: u32
     }
 }

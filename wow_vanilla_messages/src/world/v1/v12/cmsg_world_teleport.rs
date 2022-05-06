@@ -186,8 +186,9 @@ impl ConstantSized for CMSG_WORLD_TELEPORT {}
 
 impl MaximumPossibleSized for CMSG_WORLD_TELEPORT {
     fn maximum_possible_size() -> usize {
-        8 // time_in_msec: u64
-        + Map::size() // map: Map
+        0
+        + 8 // time_in_msec: u64
+        + 4 // map: Map
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32

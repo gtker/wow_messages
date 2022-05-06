@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_CHARACTER_LOGIN_FAILED {}
 
 impl MaximumPossibleSized for SMSG_CHARACTER_LOGIN_FAILED {
     fn maximum_possible_size() -> usize {
-        WorldResult::size() // result: WorldResult
+        0
+        + 4 // result: WorldResult
     }
 }
 

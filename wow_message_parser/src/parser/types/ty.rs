@@ -60,6 +60,7 @@ impl Type {
         s
     }
 
+    // NOTE: Definers used in if statements do count if statement contents
     pub fn sizes(&self, e: &Container, o: &Objects) -> Sizes {
         let mut sizes = Sizes::new();
 
@@ -135,12 +136,8 @@ impl Type {
                         ObjectType::Struct => {
                             let c = o.get_container(s, e.tags()).sizes(o);
 
-                            for _ in 0..min {
-                                sizes.inc(c.minimum(), 0);
-                            }
-                            for _ in 0..max {
-                                sizes.inc(0, c.maximum());
-                            }
+                            sizes.inc(min * c.minimum(), 0);
+                            sizes.inc(0, max.saturating_mul(c.maximum()));
                         }
                         _ => unreachable!(),
                     },

@@ -116,7 +116,8 @@ impl ConstantSized for BattlegroundPlayerPosition {}
 
 impl MaximumPossibleSized for BattlegroundPlayerPosition {
     fn maximum_possible_size() -> usize {
-        8 // player: Guid
+        0
+        + 8 // player: Guid
         + 4 // position_x: f32
         + 4 // position_y: f32
     }

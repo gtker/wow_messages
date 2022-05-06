@@ -109,7 +109,8 @@ impl ConstantSized for SMSG_QUESTUPDATE_ADD_ITEM {}
 
 impl MaximumPossibleSized for SMSG_QUESTUPDATE_ADD_ITEM {
     fn maximum_possible_size() -> usize {
-        4 // required_item_id: u32
+        0
+        + 4 // required_item_id: u32
         + 4 // items_required: u32
     }
 }

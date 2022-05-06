@@ -111,8 +111,9 @@ impl ConstantSized for SMSG_PLAYERBOUND {}
 
 impl MaximumPossibleSized for SMSG_PLAYERBOUND {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + Area::size() // area: Area
+        0
+        + 8 // guid: Guid
+        + 4 // area: Area
     }
 }
 

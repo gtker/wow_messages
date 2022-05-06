@@ -364,7 +364,8 @@ impl ConstantSized for TradeSlot {}
 
 impl MaximumPossibleSized for TradeSlot {
     fn maximum_possible_size() -> usize {
-        1 // trade_slot_number: u8
+        0
+        + 1 // trade_slot_number: u8
         + 4 // item_id: u32
         + 4 // display_id: u32
         + 4 // stack_count: u32

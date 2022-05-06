@@ -118,15 +118,15 @@ impl MessageBody for SMSG_CHAR_ENUM {
 
 impl VariableSized for SMSG_CHAR_ENUM {
     fn size(&self) -> usize {
-        1 // amount_of_characters: u8
+        0
+        + 1 // amount_of_characters: u8
         + self.characters.iter().fold(0, |acc, x| acc + x.size()) // characters: Character[amount_of_characters]
     }
 }
 
 impl MaximumPossibleSized for SMSG_CHAR_ENUM {
     fn maximum_possible_size() -> usize {
-        1 // amount_of_characters: u8
-        + 255 * Character::maximum_possible_size() // characters: Character[amount_of_characters]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

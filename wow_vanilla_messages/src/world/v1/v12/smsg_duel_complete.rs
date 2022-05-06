@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_DUEL_COMPLETE {}
 
 impl MaximumPossibleSized for SMSG_DUEL_COMPLETE {
     fn maximum_possible_size() -> usize {
-        1 // ended_without_interruption: u8
+        0
+        + 1 // ended_without_interruption: u8
     }
 }
 

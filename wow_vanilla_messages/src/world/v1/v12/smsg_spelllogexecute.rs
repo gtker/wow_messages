@@ -163,7 +163,8 @@ impl MessageBody for SMSG_SPELLLOGEXECUTE {
 
 impl VariableSized for SMSG_SPELLLOGEXECUTE {
     fn size(&self) -> usize {
-        self.caster.size() // caster: PackedGuid
+        0
+        + self.caster.size() // caster: Guid
         + 4 // spell: u32
         + 4 // amount_of_effects: u32
         + self.logs.iter().fold(0, |acc, x| acc + x.size()) // logs: SpellLog[amount_of_effects]
@@ -172,10 +173,7 @@ impl VariableSized for SMSG_SPELLLOGEXECUTE {
 
 impl MaximumPossibleSized for SMSG_SPELLLOGEXECUTE {
     fn maximum_possible_size() -> usize {
-        9 // caster: PackedGuid
-        + 4 // spell: u32
-        + 4 // amount_of_effects: u32
-        + 4294967295 * SpellLog::maximum_possible_size() // logs: SpellLog[amount_of_effects]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

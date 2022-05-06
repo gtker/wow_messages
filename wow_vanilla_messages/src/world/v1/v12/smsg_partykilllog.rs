@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_PARTYKILLLOG {}
 
 impl MaximumPossibleSized for SMSG_PARTYKILLLOG {
     fn maximum_possible_size() -> usize {
-        8 // player_with_killing_blow: Guid
+        0
+        + 8 // player_with_killing_blow: Guid
         + 8 // victim: Guid
     }
 }

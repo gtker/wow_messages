@@ -109,7 +109,8 @@ impl ConstantSized for CMSG_LEARN_TALENT {}
 
 impl MaximumPossibleSized for CMSG_LEARN_TALENT {
     fn maximum_possible_size() -> usize {
-        4 // talent_id: u32
+        0
+        + 4 // talent_id: u32
         + 4 // requested_rank: u32
     }
 }

@@ -294,10 +294,11 @@ impl MessageBody for CMSG_CHAR_CREATE {
 
 impl VariableSized for CMSG_CHAR_CREATE {
     fn size(&self) -> usize {
-        self.name.len() + 1 // name: CString and Null Terminator
-        + Race::size() // race: Race
-        + Class::size() // class: Class
-        + Gender::size() // gender: Gender
+        0
+        + self.name.len() + 1 // name: CString
+        + 1 // race: Race
+        + 1 // class: Class
+        + 1 // gender: Gender
         + 1 // skin: u8
         + 1 // face: u8
         + 1 // hairstyle: u8
@@ -309,10 +310,11 @@ impl VariableSized for CMSG_CHAR_CREATE {
 
 impl MaximumPossibleSized for CMSG_CHAR_CREATE {
     fn maximum_possible_size() -> usize {
-        256 // name: CString
-        + Race::maximum_possible_size() // race: Race
-        + Class::maximum_possible_size() // class: Class
-        + Gender::maximum_possible_size() // gender: Gender
+        0
+        + 256 // name: CString
+        + 1 // race: Race
+        + 1 // class: Class
+        + 1 // gender: Gender
         + 1 // skin: u8
         + 1 // face: u8
         + 1 // hairstyle: u8

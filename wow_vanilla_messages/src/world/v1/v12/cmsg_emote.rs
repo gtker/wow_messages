@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_EMOTE {}
 
 impl MaximumPossibleSized for CMSG_EMOTE {
     fn maximum_possible_size() -> usize {
-        Emote::size() // emote: Emote
+        0
+        + 4 // emote: Emote
     }
 }
 

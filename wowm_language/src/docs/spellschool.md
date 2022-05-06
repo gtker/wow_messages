@@ -30,5 +30,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [AuraLog](auralog.md)
-* [SMSG_SPELLDAMAGESHIELD](smsg_spelldamageshield.md)
 * [SMSG_SPELLNONMELEEDAMAGELOG](smsg_spellnonmeleedamagelog.md)
+* [SMSG_SPELLDAMAGESHIELD](smsg_spelldamageshield.md)

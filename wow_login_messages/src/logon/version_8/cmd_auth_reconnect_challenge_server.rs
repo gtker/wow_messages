@@ -289,13 +289,15 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Server {
 
 impl VariableSized for CMD_AUTH_RECONNECT_CHALLENGE_Server {
     fn size(&self) -> usize {
-        self.result.size() // result: LoginResult and subfields
+        0
+        + self.result.size() // result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult
     }
 }
 
 impl MaximumPossibleSized for CMD_AUTH_RECONNECT_CHALLENGE_Server {
     fn maximum_possible_size() -> usize {
-        LoginResult::maximum_possible_size() // result: LoginResult
+        0
+        + 33 // result: CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult
     }
 }
 

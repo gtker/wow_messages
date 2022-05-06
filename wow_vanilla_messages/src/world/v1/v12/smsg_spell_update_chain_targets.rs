@@ -162,7 +162,8 @@ impl MessageBody for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 
 impl VariableSized for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     fn size(&self) -> usize {
-        8 // caster: Guid
+        0
+        + 8 // caster: Guid
         + 4 // spell: u32
         + 4 // amount_of_targets: u32
         + self.targets.iter().fold(0, |acc, _| acc + 8) // targets: Guid[amount_of_targets]
@@ -171,10 +172,7 @@ impl VariableSized for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 
 impl MaximumPossibleSized for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     fn maximum_possible_size() -> usize {
-        8 // caster: Guid
-        + 4 // spell: u32
-        + 4 // amount_of_targets: u32
-        + 4294967295 * 8 // targets: Guid[amount_of_targets]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

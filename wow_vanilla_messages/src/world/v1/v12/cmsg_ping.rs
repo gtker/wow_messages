@@ -109,7 +109,8 @@ impl ConstantSized for CMSG_PING {}
 
 impl MaximumPossibleSized for CMSG_PING {
     fn maximum_possible_size() -> usize {
-        4 // sequence_id: u32
+        0
+        + 4 // sequence_id: u32
         + 4 // round_time_in_ms: u32
     }
 }

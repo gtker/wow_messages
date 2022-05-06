@@ -173,8 +173,9 @@ impl MessageBody for SMSG_SPELLHEALLOG {
 
 impl VariableSized for SMSG_SPELLHEALLOG {
     fn size(&self) -> usize {
-        self.victim_guid.size() // victim_guid: PackedGuid
-        + self.caster_guid.size() // caster_guid: PackedGuid
+        0
+        + self.victim_guid.size() // victim_guid: Guid
+        + self.caster_guid.size() // caster_guid: Guid
         + 4 // id: u32
         + 4 // damage: u32
         + 1 // critical: u8
@@ -183,8 +184,9 @@ impl VariableSized for SMSG_SPELLHEALLOG {
 
 impl MaximumPossibleSized for SMSG_SPELLHEALLOG {
     fn maximum_possible_size() -> usize {
-        9 // victim_guid: PackedGuid
-        + 9 // caster_guid: PackedGuid
+        0
+        + 9 // victim_guid: Guid
+        + 9 // caster_guid: Guid
         + 4 // id: u32
         + 4 // damage: u32
         + 1 // critical: u8

@@ -107,14 +107,16 @@ impl MessageBody for SMSG_CLIENT_CONTROL_UPDATE {
 
 impl VariableSized for SMSG_CLIENT_CONTROL_UPDATE {
     fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        0
+        + self.guid.size() // guid: Guid
         + 1 // allow_movement: u8
     }
 }
 
 impl MaximumPossibleSized for SMSG_CLIENT_CONTROL_UPDATE {
     fn maximum_possible_size() -> usize {
-        9 // guid: PackedGuid
+        0
+        + 9 // guid: Guid
         + 1 // allow_movement: u8
     }
 }

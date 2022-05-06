@@ -140,7 +140,8 @@ impl MessageBody for SMSG_WHO {
 
 impl VariableSized for SMSG_WHO {
     fn size(&self) -> usize {
-        4 // listed_players: u32
+        0
+        + 4 // listed_players: u32
         + 4 // online_players: u32
         + self.players.iter().fold(0, |acc, x| acc + x.size()) // players: WhoPlayer[listed_players]
     }
@@ -148,9 +149,7 @@ impl VariableSized for SMSG_WHO {
 
 impl MaximumPossibleSized for SMSG_WHO {
     fn maximum_possible_size() -> usize {
-        4 // listed_players: u32
-        + 4 // online_players: u32
-        + 4294967295 * WhoPlayer::maximum_possible_size() // players: WhoPlayer[listed_players]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

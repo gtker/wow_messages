@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
 
 impl MaximumPossibleSized for SMSG_UPDATE_INSTANCE_OWNERSHIP {
     fn maximum_possible_size() -> usize {
-        4 // has_been_saved: u32
+        0
+        + 4 // has_been_saved: u32
     }
 }
 

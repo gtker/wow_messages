@@ -155,10 +155,11 @@ impl ConstantSized for SMSG_PROCRESIST {}
 
 impl MaximumPossibleSized for SMSG_PROCRESIST {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 8 // target_guid: Guid
         + 4 // id: u32
-        + LogFormat::size() // log_format: LogFormat
+        + 1 // log_format: LogFormat
     }
 }
 

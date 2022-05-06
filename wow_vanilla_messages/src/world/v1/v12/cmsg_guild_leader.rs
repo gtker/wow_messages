@@ -93,13 +93,15 @@ impl MessageBody for CMSG_GUILD_LEADER {
 
 impl VariableSized for CMSG_GUILD_LEADER {
     fn size(&self) -> usize {
-        self.new_guild_leader_name.len() + 1 // new_guild_leader_name: CString and Null Terminator
+        0
+        + self.new_guild_leader_name.len() + 1 // new_guild_leader_name: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GUILD_LEADER {
     fn maximum_possible_size() -> usize {
-        256 // new_guild_leader_name: CString
+        0
+        + 256 // new_guild_leader_name: CString
     }
 }
 

@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_MAIL_RETURN_TO_SENDER {}
 
 impl MaximumPossibleSized for CMSG_MAIL_RETURN_TO_SENDER {
     fn maximum_possible_size() -> usize {
-        8 // mailbox_id: Guid
+        0
+        + 8 // mailbox_id: Guid
         + 4 // mail_id: u32
     }
 }

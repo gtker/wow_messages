@@ -144,7 +144,8 @@ impl MessageBody for SMSG_NPC_TEXT_UPDATE {
 
 impl VariableSized for SMSG_NPC_TEXT_UPDATE {
     fn size(&self) -> usize {
-        4 // text_id: u32
+        0
+        + 4 // text_id: u32
         + 4 // probability: f32
         + self.texts.iter().fold(0, |acc, x| acc + x.size()) // texts: NpcTextUpdate[8]
     }
@@ -152,9 +153,10 @@ impl VariableSized for SMSG_NPC_TEXT_UPDATE {
 
 impl MaximumPossibleSized for SMSG_NPC_TEXT_UPDATE {
     fn maximum_possible_size() -> usize {
-        4 // text_id: u32
+        0
+        + 4 // text_id: u32
         + 4 // probability: f32
-        + 8 * NpcTextUpdate::maximum_possible_size() // texts: NpcTextUpdate[8]
+        + 4352 // texts: NpcTextUpdate[8]
     }
 }
 

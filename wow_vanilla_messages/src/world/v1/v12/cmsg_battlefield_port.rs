@@ -111,8 +111,9 @@ impl ConstantSized for CMSG_BATTLEFIELD_PORT {}
 
 impl MaximumPossibleSized for CMSG_BATTLEFIELD_PORT {
     fn maximum_possible_size() -> usize {
-        Map::size() // map: Map
-        + BattlefieldPortAction::size() // action: BattlefieldPortAction
+        0
+        + 4 // map: Map
+        + 1 // action: BattlefieldPortAction
     }
 }
 

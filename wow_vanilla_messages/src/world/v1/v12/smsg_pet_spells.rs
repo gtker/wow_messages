@@ -326,10 +326,11 @@ impl MessageBody for SMSG_PET_SPELLS {
 
 impl VariableSized for SMSG_PET_SPELLS {
     fn size(&self) -> usize {
-        8 // pet: Guid
+        0
+        + 8 // pet: Guid
         + 4 // unknown1: u32
-        + PetReactState::size() // react: PetReactState
-        + PetCommandState::size() // command: PetCommandState
+        + 1 // react: PetReactState
+        + 1 // command: PetCommandState
         + 2 // unknown2: u16
         + 10 * core::mem::size_of::<u32>() // action_bars: u32[10]
         + 1 // amount_of_spells: u8
@@ -341,16 +342,17 @@ impl VariableSized for SMSG_PET_SPELLS {
 
 impl MaximumPossibleSized for SMSG_PET_SPELLS {
     fn maximum_possible_size() -> usize {
-        8 // pet: Guid
+        0
+        + 8 // pet: Guid
         + 4 // unknown1: u32
-        + PetReactState::maximum_possible_size() // react: PetReactState
-        + PetCommandState::maximum_possible_size() // command: PetCommandState
+        + 1 // react: PetReactState
+        + 1 // command: PetCommandState
         + 2 // unknown2: u16
-        + 10 * core::mem::size_of::<u32>() // action_bars: u32[10]
+        + 40 // action_bars: u32[10]
         + 1 // amount_of_spells: u8
-        + 255 * core::mem::size_of::<u32>() // spells: u32[amount_of_spells]
+        + 1024 // spells: u32[amount_of_spells]
         + 1 // amount_of_cooldowns: u8
-        + 255 * PetSpellCooldown::maximum_possible_size() // cooldowns: PetSpellCooldown[amount_of_cooldowns]
+        + 3072 // cooldowns: PetSpellCooldown[amount_of_cooldowns]
     }
 }
 

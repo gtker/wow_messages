@@ -87,13 +87,15 @@ impl MessageBody for MSG_MOVE_START_FORWARD {
 
 impl VariableSized for MSG_MOVE_START_FORWARD {
     fn size(&self) -> usize {
-        self.info.size() // info: MovementInfo
+        0
+        + self.info.size() // info: MovementInfo
     }
 }
 
 impl MaximumPossibleSized for MSG_MOVE_START_FORWARD {
     fn maximum_possible_size() -> usize {
-        MovementInfo::maximum_possible_size() // info: MovementInfo
+        0
+        + 81 // info: MovementInfo
     }
 }
 

@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_TURN_IN_PETITION_RESULTS {}
 
 impl MaximumPossibleSized for SMSG_TURN_IN_PETITION_RESULTS {
     fn maximum_possible_size() -> usize {
-        PetitionTurnInResult::size() // result: PetitionTurnInResult
+        0
+        + 4 // result: PetitionTurnInResult
     }
 }
 

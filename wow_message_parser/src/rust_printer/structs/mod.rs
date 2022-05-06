@@ -166,7 +166,7 @@ fn print_declaration(s: &mut Writer, e: &Container) {
     print_struct_wowm_definition(s, e);
 
     s.new_struct(e.name(), |s| {
-        for member in e.rust_object().members() {
+        for member in e.rust_object().members_in_struct() {
             s.wln(format!(
                 "pub {name}: {ty},",
                 name = member.name(),

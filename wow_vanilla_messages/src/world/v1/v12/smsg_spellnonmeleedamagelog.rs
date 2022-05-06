@@ -328,11 +328,12 @@ impl MessageBody for SMSG_SPELLNONMELEEDAMAGELOG {
 
 impl VariableSized for SMSG_SPELLNONMELEEDAMAGELOG {
     fn size(&self) -> usize {
-        self.target.size() // target: PackedGuid
-        + self.attacker.size() // attacker: PackedGuid
+        0
+        + self.target.size() // target: Guid
+        + self.attacker.size() // attacker: Guid
         + 4 // spell: u32
         + 4 // damage: u32
-        + SpellSchool::size() // school: SpellSchool
+        + 1 // school: SpellSchool
         + 4 // absorbed_damage: u32
         + 4 // resisted: u32
         + 1 // periodic_log: u8
@@ -345,11 +346,12 @@ impl VariableSized for SMSG_SPELLNONMELEEDAMAGELOG {
 
 impl MaximumPossibleSized for SMSG_SPELLNONMELEEDAMAGELOG {
     fn maximum_possible_size() -> usize {
-        9 // target: PackedGuid
-        + 9 // attacker: PackedGuid
+        0
+        + 9 // target: Guid
+        + 9 // attacker: Guid
         + 4 // spell: u32
         + 4 // damage: u32
-        + SpellSchool::maximum_possible_size() // school: SpellSchool
+        + 1 // school: SpellSchool
         + 4 // absorbed_damage: u32
         + 4 // resisted: u32
         + 1 // periodic_log: u8

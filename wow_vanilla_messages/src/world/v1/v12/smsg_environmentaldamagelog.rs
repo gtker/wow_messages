@@ -177,8 +177,9 @@ impl ConstantSized for SMSG_ENVIRONMENTALDAMAGELOG {}
 
 impl MaximumPossibleSized for SMSG_ENVIRONMENTALDAMAGELOG {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + EnvironmentalDamageType::size() // damage_type: EnvironmentalDamageType
+        0
+        + 8 // guid: Guid
+        + 4 // damage_type: EnvironmentalDamageType
         + 4 // damage: u32
         + 4 // absorb: u32
         + 4 // resist: u32

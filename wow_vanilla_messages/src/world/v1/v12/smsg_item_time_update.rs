@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_ITEM_TIME_UPDATE {}
 
 impl MaximumPossibleSized for SMSG_ITEM_TIME_UPDATE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // duration: u32
     }
 }

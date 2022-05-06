@@ -226,11 +226,12 @@ impl ReadableAndWritable for WhoPlayer {
 
 impl VariableSized for WhoPlayer {
     fn size(&self) -> usize {
-        self.name.len() + 1 // name: CString and Null Terminator
-        + self.guild.len() + 1 // guild: CString and Null Terminator
+        0
+        + self.name.len() + 1 // name: CString
+        + self.guild.len() + 1 // guild: CString
         + 4 // level: u32
-        + Class::size() // class: Class
-        + Race::size() // race: Race
+        + 1 // class: Class
+        + 1 // race: Race
         + 4 // zone_id: u32
         + 4 // party_status: u32
     }
@@ -238,11 +239,12 @@ impl VariableSized for WhoPlayer {
 
 impl MaximumPossibleSized for WhoPlayer {
     fn maximum_possible_size() -> usize {
-        256 // name: CString
+        0
+        + 256 // name: CString
         + 256 // guild: CString
         + 4 // level: u32
-        + Class::maximum_possible_size() // class: Class
-        + Race::maximum_possible_size() // race: Race
+        + 1 // class: Class
+        + 1 // race: Race
         + 4 // zone_id: u32
         + 4 // party_status: u32
     }

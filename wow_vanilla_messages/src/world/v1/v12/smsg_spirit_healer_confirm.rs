@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_SPIRIT_HEALER_CONFIRM {}
 
 impl MaximumPossibleSized for SMSG_SPIRIT_HEALER_CONFIRM {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

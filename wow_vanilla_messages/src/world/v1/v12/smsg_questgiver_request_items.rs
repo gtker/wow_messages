@@ -402,10 +402,11 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
 impl VariableSized for SMSG_QUESTGIVER_REQUEST_ITEMS {
     fn size(&self) -> usize {
-        8 // npc: Guid
+        0
+        + 8 // npc: Guid
         + 4 // quest_id: u32
-        + self.title.len() + 1 // title: CString and Null Terminator
-        + self.request_items_text.len() + 1 // request_items_text: CString and Null Terminator
+        + self.title.len() + 1 // title: CString
+        + self.request_items_text.len() + 1 // request_items_text: CString
         + 4 // emote_delay: u32
         + 4 // emote: u32
         + 4 // auto_finish: u32
@@ -413,7 +414,7 @@ impl VariableSized for SMSG_QUESTGIVER_REQUEST_ITEMS {
         + 4 // amount_of_required_items: u32
         + self.required_items.iter().fold(0, |acc, x| acc + QuestItemRequirement::size()) // required_items: QuestItemRequirement[amount_of_required_items]
         + 4 // unknown1: u32
-        + QuestCompletable::size() // completable: QuestCompletable
+        + 4 // completable: QuestCompletable
         + 4 // flags2: u32
         + 4 // flags3: u32
     }
@@ -421,20 +422,7 @@ impl VariableSized for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
 impl MaximumPossibleSized for SMSG_QUESTGIVER_REQUEST_ITEMS {
     fn maximum_possible_size() -> usize {
-        8 // npc: Guid
-        + 4 // quest_id: u32
-        + 256 // title: CString
-        + 256 // request_items_text: CString
-        + 4 // emote_delay: u32
-        + 4 // emote: u32
-        + 4 // auto_finish: u32
-        + 4 // required_money: u32
-        + 4 // amount_of_required_items: u32
-        + 4294967295 * QuestItemRequirement::maximum_possible_size() // required_items: QuestItemRequirement[amount_of_required_items]
-        + 4 // unknown1: u32
-        + QuestCompletable::maximum_possible_size() // completable: QuestCompletable
-        + 4 // flags2: u32
-        + 4 // flags3: u32
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

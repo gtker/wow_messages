@@ -184,7 +184,8 @@ impl MessageBody for SMSG_SHOWTAXINODES {
 
 impl VariableSized for SMSG_SHOWTAXINODES {
     fn size(&self) -> usize {
-        4 // unknown1: u32
+        0
+        + 4 // unknown1: u32
         + 8 // guid: Guid
         + 4 // nearest_node: u32
         + self.nodes.len() * core::mem::size_of::<u32>() // nodes: u32[-]
@@ -193,10 +194,7 @@ impl VariableSized for SMSG_SHOWTAXINODES {
 
 impl MaximumPossibleSized for SMSG_SHOWTAXINODES {
     fn maximum_possible_size() -> usize {
-        4 // unknown1: u32
-        + 8 // guid: Guid
-        + 4 // nearest_node: u32
-        + 65536 // nodes: u32[-]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

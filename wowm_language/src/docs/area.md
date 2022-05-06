@@ -2177,14 +2177,14 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `RAVENHOLDT_MANOR` | 3486 (0xD9E) |  |  | Ravenholdt Manor |
 
 Used in:
-* [Character](character.md)
 * [Friend](friend.md)
+* [Character](character.md)
+* [SMSG_CAST_RESULT](smsg_cast_result.md)
+* [SMSG_MEETINGSTONE_SETQUEUE](smsg_meetingstone_setqueue.md)
+* [SMSG_EXPLORATION_EXPERIENCE](smsg_exploration_experience.md)
 * [SMSG_PLAYERBOUND](smsg_playerbound.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
-* [SMSG_CAST_RESULT](smsg_cast_result.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_INIT_WORLD_STATES](smsg_init_world_states.md)
-* [SMSG_EXPLORATION_EXPERIENCE](smsg_exploration_experience.md)
-* [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
-* [SMSG_MEETINGSTONE_SETQUEUE](smsg_meetingstone_setqueue.md)
+* [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)

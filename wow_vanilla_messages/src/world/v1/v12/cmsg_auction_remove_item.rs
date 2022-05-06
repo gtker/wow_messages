@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_AUCTION_REMOVE_ITEM {}
 
 impl MaximumPossibleSized for CMSG_AUCTION_REMOVE_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // auctioneer_guid: Guid
+        0
+        + 8 // auctioneer_guid: Guid
         + 4 // auction_id: u32
     }
 }

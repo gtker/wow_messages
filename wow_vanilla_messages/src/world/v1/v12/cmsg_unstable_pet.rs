@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_UNSTABLE_PET {}
 
 impl MaximumPossibleSized for CMSG_UNSTABLE_PET {
     fn maximum_possible_size() -> usize {
-        8 // npc_guid: Guid
+        0
+        + 8 // npc_guid: Guid
         + 4 // pet_number: u32
     }
 }

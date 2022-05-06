@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_SPELLINSTAKILLLOG {}
 
 impl MaximumPossibleSized for SMSG_SPELLINSTAKILLLOG {
     fn maximum_possible_size() -> usize {
-        8 // target_guid: Guid
+        0
+        + 8 // target_guid: Guid
         + 4 // spell: u32
     }
 }

@@ -132,7 +132,8 @@ impl ConstantSized for CMSG_PET_ACTION {}
 
 impl MaximumPossibleSized for CMSG_PET_ACTION {
     fn maximum_possible_size() -> usize {
-        8 // pet_guid: Guid
+        0
+        + 8 // pet_guid: Guid
         + 4 // data: u32
         + 8 // target_guid: Guid
     }

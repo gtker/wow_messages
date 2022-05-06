@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_CREATURE_QUERY {}
 
 impl MaximumPossibleSized for CMSG_CREATURE_QUERY {
     fn maximum_possible_size() -> usize {
-        4 // creature: u32
+        0
+        + 4 // creature: u32
         + 8 // guid: Guid
     }
 }

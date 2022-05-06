@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_STANDSTATE_UPDATE {}
 
 impl MaximumPossibleSized for SMSG_STANDSTATE_UPDATE {
     fn maximum_possible_size() -> usize {
-        UnitStandState::size() // state: UnitStandState
+        0
+        + 1 // state: UnitStandState
     }
 }
 

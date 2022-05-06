@@ -243,14 +243,15 @@ impl ConstantSized for SMSG_LOOT_ROLL_WON {}
 
 impl MaximumPossibleSized for SMSG_LOOT_ROLL_WON {
     fn maximum_possible_size() -> usize {
-        8 // looted_target_guid: Guid
+        0
+        + 8 // looted_target_guid: Guid
         + 4 // loot_slot: u32
         + 4 // item_id: u32
         + 4 // item_random_suffix: u32
         + 4 // item_random_property_id: u32
         + 8 // winning_player_guid: Guid
         + 1 // winning_roll: u8
-        + RollVote::size() // vote: RollVote
+        + 1 // vote: RollVote
     }
 }
 

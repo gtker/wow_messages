@@ -214,7 +214,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
 
 impl VariableSized for CMD_AUTH_LOGON_PROOF_Client {
     fn size(&self) -> usize {
-        32 * core::mem::size_of::<u8>() // client_public_key: u8[32]
+        0
+        + 32 * core::mem::size_of::<u8>() // client_public_key: u8[32]
         + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
         + 20 * core::mem::size_of::<u8>() // crc_hash: u8[20]
         + 1 // number_of_telemetry_keys: u8
@@ -224,11 +225,12 @@ impl VariableSized for CMD_AUTH_LOGON_PROOF_Client {
 
 impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_Client {
     fn maximum_possible_size() -> usize {
-        32 * core::mem::size_of::<u8>() // client_public_key: u8[32]
-        + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
-        + 20 * core::mem::size_of::<u8>() // crc_hash: u8[20]
+        0
+        + 32 // client_public_key: u8[32]
+        + 20 // client_proof: u8[20]
+        + 20 // crc_hash: u8[20]
         + 1 // number_of_telemetry_keys: u8
-        + 255 * TelemetryKey::maximum_possible_size() // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        + 7680 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
     }
 }
 

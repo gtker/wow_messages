@@ -214,7 +214,8 @@ impl ConstantSized for SMSG_RESISTLOG {}
 
 impl MaximumPossibleSized for SMSG_RESISTLOG {
     fn maximum_possible_size() -> usize {
-        8 // guid1: Guid
+        0
+        + 8 // guid1: Guid
         + 8 // guid2: Guid
         + 4 // unknown1: u32
         + 4 // unknown2: f32

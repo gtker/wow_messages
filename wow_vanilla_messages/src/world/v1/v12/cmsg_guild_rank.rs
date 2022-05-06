@@ -137,15 +137,17 @@ impl MessageBody for CMSG_GUILD_RANK {
 
 impl VariableSized for CMSG_GUILD_RANK {
     fn size(&self) -> usize {
-        4 // rank_id: u32
+        0
+        + 4 // rank_id: u32
         + 4 // rights: u32
-        + self.rank_name.len() + 1 // rank_name: CString and Null Terminator
+        + self.rank_name.len() + 1 // rank_name: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GUILD_RANK {
     fn maximum_possible_size() -> usize {
-        4 // rank_id: u32
+        0
+        + 4 // rank_id: u32
         + 4 // rights: u32
         + 256 // rank_name: CString
     }

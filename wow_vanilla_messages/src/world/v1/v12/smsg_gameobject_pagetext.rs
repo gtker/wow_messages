@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_GAMEOBJECT_PAGETEXT {}
 
 impl MaximumPossibleSized for SMSG_GAMEOBJECT_PAGETEXT {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

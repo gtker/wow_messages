@@ -93,13 +93,15 @@ impl MessageBody for CMSG_GUILD_MOTD {
 
 impl VariableSized for CMSG_GUILD_MOTD {
     fn size(&self) -> usize {
-        self.message_of_the_day.len() + 1 // message_of_the_day: CString and Null Terminator
+        0
+        + self.message_of_the_day.len() + 1 // message_of_the_day: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GUILD_MOTD {
     fn maximum_possible_size() -> usize {
-        256 // message_of_the_day: CString
+        0
+        + 256 // message_of_the_day: CString
     }
 }
 

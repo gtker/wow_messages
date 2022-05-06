@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_OPEN_CONTAINER {}
 
 impl MaximumPossibleSized for SMSG_OPEN_CONTAINER {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

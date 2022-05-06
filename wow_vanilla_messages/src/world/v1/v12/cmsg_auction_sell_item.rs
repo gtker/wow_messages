@@ -198,7 +198,8 @@ impl ConstantSized for CMSG_AUCTION_SELL_ITEM {}
 
 impl MaximumPossibleSized for CMSG_AUCTION_SELL_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // auctioneer_guid: Guid
+        0
+        + 8 // auctioneer_guid: Guid
         + 8 // object_guid: Guid
         + 4 // stack_size: u32
         + 4 // starting_bid: u32

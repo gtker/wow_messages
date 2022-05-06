@@ -116,14 +116,16 @@ impl MessageBody for CMSG_CHAR_RENAME {
 
 impl VariableSized for CMSG_CHAR_RENAME {
     fn size(&self) -> usize {
-        8 // guid: Guid
-        + self.name.len() + 1 // name: CString and Null Terminator
+        0
+        + 8 // guid: Guid
+        + self.name.len() + 1 // name: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_CHAR_RENAME {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 256 // name: CString
     }
 }

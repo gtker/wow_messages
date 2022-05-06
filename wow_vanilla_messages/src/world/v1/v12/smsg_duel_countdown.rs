@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_DUEL_COUNTDOWN {}
 
 impl MaximumPossibleSized for SMSG_DUEL_COUNTDOWN {
     fn maximum_possible_size() -> usize {
-        4 // time_in_seconds: u32
+        0
+        + 4 // time_in_seconds: u32
     }
 }
 

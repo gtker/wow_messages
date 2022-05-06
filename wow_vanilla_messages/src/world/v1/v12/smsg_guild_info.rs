@@ -203,7 +203,8 @@ impl MessageBody for SMSG_GUILD_INFO {
 
 impl VariableSized for SMSG_GUILD_INFO {
     fn size(&self) -> usize {
-        self.guild_name.len() + 1 // guild_name: CString and Null Terminator
+        0
+        + self.guild_name.len() + 1 // guild_name: CString
         + 4 // created_day: u32
         + 4 // created_month: u32
         + 4 // created_year: u32
@@ -214,7 +215,8 @@ impl VariableSized for SMSG_GUILD_INFO {
 
 impl MaximumPossibleSized for SMSG_GUILD_INFO {
     fn maximum_possible_size() -> usize {
-        256 // guild_name: CString
+        0
+        + 256 // guild_name: CString
         + 4 // created_day: u32
         + 4 // created_month: u32
         + 4 // created_year: u32

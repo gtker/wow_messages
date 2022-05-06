@@ -111,8 +111,9 @@ impl ConstantSized for SMSG_PET_ACTION_SOUND {}
 
 impl MaximumPossibleSized for SMSG_PET_ACTION_SOUND {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + PetTalkReason::size() // reason: PetTalkReason
+        0
+        + 8 // guid: Guid
+        + 4 // reason: PetTalkReason
     }
 }
 

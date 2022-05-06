@@ -102,7 +102,8 @@ impl ConstantSized for SMSG_ACCOUNT_DATA_TIMES {}
 
 impl MaximumPossibleSized for SMSG_ACCOUNT_DATA_TIMES {
     fn maximum_possible_size() -> usize {
-        32 * core::mem::size_of::<u32>() // data: u32[32]
+        0
+        + 128 // data: u32[32]
     }
 }
 

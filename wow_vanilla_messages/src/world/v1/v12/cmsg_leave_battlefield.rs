@@ -131,7 +131,8 @@ impl ConstantSized for CMSG_LEAVE_BATTLEFIELD {}
 
 impl MaximumPossibleSized for CMSG_LEAVE_BATTLEFIELD {
     fn maximum_possible_size() -> usize {
-        1 // unknown1: u8
+        0
+        + 1 // unknown1: u8
         + 1 // battle_ground_type_id: u8
         + 2 // unknown2: u16
     }

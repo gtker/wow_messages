@@ -185,7 +185,8 @@ impl MessageBody for SMSG_SPELLLOGMISS {
 
 impl VariableSized for SMSG_SPELLLOGMISS {
     fn size(&self) -> usize {
-        4 // id: u32
+        0
+        + 4 // id: u32
         + 8 // caster_guid: Guid
         + 1 // unknown1: u8
         + 4 // amount_of_targets: u32
@@ -195,11 +196,7 @@ impl VariableSized for SMSG_SPELLLOGMISS {
 
 impl MaximumPossibleSized for SMSG_SPELLLOGMISS {
     fn maximum_possible_size() -> usize {
-        4 // id: u32
-        + 8 // caster_guid: Guid
-        + 1 // unknown1: u8
-        + 4 // amount_of_targets: u32
-        + 4294967295 * SpellMiss::maximum_possible_size() // targets: SpellMiss[amount_of_targets]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

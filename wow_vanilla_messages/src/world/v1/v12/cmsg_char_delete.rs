@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_CHAR_DELETE {}
 
 impl MaximumPossibleSized for CMSG_CHAR_DELETE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

@@ -168,11 +168,12 @@ impl ConstantSized for SMSG_BINDPOINTUPDATE {}
 
 impl MaximumPossibleSized for SMSG_BINDPOINTUPDATE {
     fn maximum_possible_size() -> usize {
-        4 // position_x: f32
+        0
+        + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32
-        + Map::size() // map: Map
-        + Area::size() // area: Area
+        + 4 // map: Map
+        + 4 // area: Area
     }
 }
 

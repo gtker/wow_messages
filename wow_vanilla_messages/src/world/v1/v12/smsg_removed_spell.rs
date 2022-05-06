@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_REMOVED_SPELL {}
 
 impl MaximumPossibleSized for SMSG_REMOVED_SPELL {
     fn maximum_possible_size() -> usize {
-        2 // spell_id: u16
+        0
+        + 2 // spell_id: u16
     }
 }
 

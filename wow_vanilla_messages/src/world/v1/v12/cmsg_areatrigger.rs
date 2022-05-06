@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_AREATRIGGER {}
 
 impl MaximumPossibleSized for CMSG_AREATRIGGER {
     fn maximum_possible_size() -> usize {
-        4 // trigger_id: u32
+        0
+        + 4 // trigger_id: u32
     }
 }
 

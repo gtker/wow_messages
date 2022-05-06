@@ -453,13 +453,15 @@ impl MessageBody for SMSG_TRADE_STATUS {
 
 impl VariableSized for SMSG_TRADE_STATUS {
     fn size(&self) -> usize {
-        self.status.size() // status: TradeStatus and subfields
+        0
+        + self.status.size() // status: SMSG_TRADE_STATUSTradeStatus
     }
 }
 
 impl MaximumPossibleSized for SMSG_TRADE_STATUS {
     fn maximum_possible_size() -> usize {
-        TradeStatus::maximum_possible_size() // status: TradeStatus
+        0
+        + 12 // status: SMSG_TRADE_STATUSTradeStatus
     }
 }
 

@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_GAMEOBJECT_QUERY {}
 
 impl MaximumPossibleSized for CMSG_GAMEOBJECT_QUERY {
     fn maximum_possible_size() -> usize {
-        4 // entry_id: u32
+        0
+        + 4 // entry_id: u32
         + 8 // guid: Guid
     }
 }

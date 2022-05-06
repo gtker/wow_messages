@@ -179,21 +179,22 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
 
 impl VariableSized for SMSG_TRANSFER_PENDING {
     fn size(&self) -> usize {
-        Map::size() // map: Map
-        + {
-            if let Some(v) = &self.has_transport {
-                v.size()
-            } else {
-                0
-            }
-        } // optional has_transport
+        0
+        + 4 // map: Map
+        + if let Some(has_transport) = &self.has_transport {
+            0
+            + 4 // transport: u32
+            + 4 // transport_map: Map
+        } else {
+            0
+        }
     }
 }
 
 impl MaximumPossibleSized for SMSG_TRANSFER_PENDING {
     fn maximum_possible_size() -> usize {
-        Map::maximum_possible_size() // map: Map
-        + 65536 // optional has_transport
+        0
+        + 4 // map: Map
     }
 }
 

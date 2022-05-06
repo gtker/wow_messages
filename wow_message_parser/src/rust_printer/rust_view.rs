@@ -16,6 +16,7 @@ pub struct RustMember {
     ty: RustType,
     original_ty: String,
 
+    in_rust_type: bool,
     constant_sized: bool,
     sizes: Sizes,
 
@@ -33,7 +34,10 @@ impl RustMember {
         &self.tags
     }
     pub fn constant_sized(&self) -> bool {
-        self.constant_sized
+        self.sizes.is_constant()
+    }
+    pub fn sizes(&self) -> Sizes {
+        self.sizes
     }
     pub fn original_ty(&self) -> &str {
         &self.original_ty
@@ -57,27 +61,56 @@ impl RustEnumerator {
     pub fn members(&self) -> &[RustMember] {
         &self.members
     }
+    pub fn members_in_struct(&self) -> Vec<&RustMember> {
+        self.members.iter().filter(|m| m.in_rust_type).collect()
+    }
 }
 
 #[derive(Debug, Clone)]
 pub enum RustType {
     Integer(IntegerType),
     Floating(FloatingPointType),
-    BuiltIn(String),
+    UpdateMask,
+    AuraMask,
+    Guid,
+    PackedGuid,
     String,
-    Array(Array),
+    CString,
+    Array {
+        array: Array,
+        inner_is_constant: bool,
+    },
     Enum {
         ty_name: String,
         enumerators: Vec<RustEnumerator>,
+        int_ty: IntegerType,
         upcast: Option<IntegerType>,
         is_simple: bool,
     },
     Flag {
         ty_name: String,
+        int_ty: IntegerType,
         enumerators: Vec<RustEnumerator>,
         is_simple: bool,
     },
     Struct(String),
+}
+
+impl RustType {
+    pub fn str(&self) -> String {
+        match self {
+            RustType::Integer(i) => i.str().to_string(),
+            RustType::Floating(f) => f.str().to_string(),
+            RustType::String => "String".to_string(),
+            RustType::Array { array, .. } => array.str(),
+            RustType::Flag { ty_name, .. } | RustType::Enum { ty_name, .. } => ty_name.clone(),
+            RustType::Struct(s) => s.clone(),
+            RustType::CString => "CString".to_string(),
+            RustType::UpdateMask => "UpdateMask".to_string(),
+            RustType::AuraMask => "AuraMask".to_string(),
+            RustType::PackedGuid | RustType::Guid => "Guid".to_string(),
+        }
+    }
 }
 
 impl Display for RustType {
@@ -85,11 +118,13 @@ impl Display for RustType {
         match self {
             RustType::Integer(i) => f.write_str(i.rust_str()),
             RustType::Floating(i) => f.write_str(i.rust_str()),
-            RustType::BuiltIn(builtin) => f.write_str(builtin),
-            RustType::String => f.write_str("String"),
-            RustType::Array(array) => f.write_str(&array.rust_str()),
+            RustType::String | RustType::CString => f.write_str("String"),
+            RustType::Array { array, .. } => f.write_str(&array.rust_str()),
             RustType::Enum { ty_name, .. } | RustType::Flag { ty_name, .. } => f.write_str(ty_name),
             RustType::Struct(name) => f.write_str(name),
+            RustType::UpdateMask => f.write_str("UpdateMask"),
+            RustType::AuraMask => f.write_str("AuraMask"),
+            RustType::PackedGuid | RustType::Guid => f.write_str("Guid"),
         }
     }
 }
@@ -108,8 +143,11 @@ impl RustOptional {
     pub fn ty(&self) -> &str {
         &self.ty
     }
-    pub fn members(&self) -> &Vec<RustMember> {
+    pub fn members(&self) -> &[RustMember] {
         &self.members
+    }
+    pub fn members_in_struct(&self) -> Vec<&RustMember> {
+        self.members.iter().filter(|a| a.in_rust_type).collect()
     }
     pub fn constant_sized(&self) -> bool {
         self.members().iter().all(|a| a.constant_sized())
@@ -136,6 +174,9 @@ impl RustObject {
     pub fn members(&self) -> &[RustMember] {
         &self.members
     }
+    pub fn members_in_struct(&self) -> impl Iterator<Item = &RustMember> {
+        self.members.iter().filter(|a| a.in_rust_type)
+    }
     pub fn optional(&self) -> Option<&RustOptional> {
         self.optional.as_ref()
     }
@@ -149,7 +190,10 @@ impl RustObject {
         &self.file_info
     }
     pub fn constant_sized(&self) -> bool {
-        self.members().iter().all(|a| a.constant_sized())
+        self.sizes().is_constant()
+    }
+    pub fn sizes(&self) -> Sizes {
+        self.sizes
     }
 }
 
@@ -289,24 +333,26 @@ pub fn create_struct_member(
 ) {
     match m {
         StructMember::Definition(d) => {
+            let mut in_rust_type = true;
             let mut definition_constantly_sized = true;
             let ty = match d.ty() {
                 Type::Integer(i) => {
-                    if let Some(_) = d.used_as_size_in() {
-                        return;
-                    }
-                    if let Some(_) = d.verified_value() {
-                        return;
+                    if d.used_as_size_in().is_some() || d.verified_value().is_some() {
+                        in_rust_type = false;
                     }
                     RustType::Integer(i.clone())
                 }
-                Type::Guid => RustType::BuiltIn("Guid".to_string()),
+                Type::Guid => RustType::Guid,
                 Type::PackedGuid => {
                     definition_constantly_sized = false;
-                    RustType::BuiltIn("Guid".to_string())
+                    RustType::PackedGuid
                 }
                 Type::FloatingPoint(f) => RustType::Floating(f.clone()),
-                Type::CString | Type::String { .. } => {
+                Type::CString => {
+                    definition_constantly_sized = false;
+                    RustType::CString
+                }
+                Type::String { .. } => {
                     definition_constantly_sized = false;
                     RustType::String
                 }
@@ -318,12 +364,14 @@ pub fn create_struct_member(
                         }
                     }
 
+                    let mut inner_is_constant = true;
                     match array.ty() {
                         ArrayType::Integer(_) | ArrayType::Guid => {}
                         ArrayType::Complex(complex) => {
                             let c = o.get_container(complex, tags);
                             if !c.has_constant_size(o) {
                                 definition_constantly_sized = false;
+                                inner_is_constant = false;
                             }
                         }
                         ArrayType::PackedGuid | ArrayType::CString => {
@@ -331,7 +379,10 @@ pub fn create_struct_member(
                         }
                     }
 
-                    RustType::Array(array.clone())
+                    RustType::Array {
+                        array: array.clone(),
+                        inner_is_constant,
+                    }
                 }
                 Type::Identifier { s, upcast } => {
                     let add_types = || -> Vec<RustEnumerator> {
@@ -355,6 +406,7 @@ pub fn create_struct_member(
                             RustType::Enum {
                                 ty_name: s.clone(),
                                 enumerators,
+                                int_ty: o.get_definer(s, tags).ty().clone(),
                                 upcast: upcast.clone(),
                                 is_simple: true,
                             }
@@ -364,6 +416,7 @@ pub fn create_struct_member(
 
                             RustType::Flag {
                                 ty_name: s.clone(),
+                                int_ty: o.get_definer(s, tags).ty().clone(),
                                 enumerators,
                                 is_simple: true,
                             }
@@ -383,22 +436,39 @@ pub fn create_struct_member(
                 }
                 Type::UpdateMask => {
                     definition_constantly_sized = false;
-                    RustType::BuiltIn("UpdateMask".to_string())
+                    RustType::UpdateMask
                 }
                 Type::AuraMask => {
                     definition_constantly_sized = false;
-                    RustType::BuiltIn("AuraMask".to_string())
+                    RustType::AuraMask
                 }
             };
 
             let name = d.name().to_string();
+            let mut sizes = d.ty().sizes(e, o);
+
+            for m in e.fields() {
+                match m {
+                    StructMember::Definition(_) => {}
+                    StructMember::IfStatement(statement) => {
+                        if !(statement.name() == name) {
+                            continue;
+                        }
+
+                        let complex_sizes = Container::get_complex_sizes(statement, e, o);
+                        sizes += complex_sizes;
+                    }
+                    StructMember::OptionalStatement(_) => {}
+                }
+            }
 
             current_scope.push(RustMember {
                 name,
                 ty,
                 original_ty: d.ty().str(),
+                in_rust_type,
                 constant_sized: definition_constantly_sized,
-                sizes: d.ty().sizes(e, o),
+                sizes,
                 tags: tags.clone(),
             });
         }

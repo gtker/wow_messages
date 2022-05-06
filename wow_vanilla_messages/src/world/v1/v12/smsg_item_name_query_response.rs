@@ -115,14 +115,16 @@ impl MessageBody for SMSG_ITEM_NAME_QUERY_RESPONSE {
 
 impl VariableSized for SMSG_ITEM_NAME_QUERY_RESPONSE {
     fn size(&self) -> usize {
-        4 // item_id: u32
-        + self.item_name.len() + 1 // item_name: CString and Null Terminator
+        0
+        + 4 // item_id: u32
+        + self.item_name.len() + 1 // item_name: CString
     }
 }
 
 impl MaximumPossibleSized for SMSG_ITEM_NAME_QUERY_RESPONSE {
     fn maximum_possible_size() -> usize {
-        4 // item_id: u32
+        0
+        + 4 // item_id: u32
         + 256 // item_name: CString
     }
 }

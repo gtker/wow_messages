@@ -183,19 +183,21 @@ impl MessageBody for SMSG_TEXT_EMOTE {
 
 impl VariableSized for SMSG_TEXT_EMOTE {
     fn size(&self) -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // text_emote: u32
-        + Emote::size() // emote: Emote
+        + 4 // emote: Emote
         + 4 // name_length: u32
-        + self.name.len() + 1 // name: CString and Null Terminator
+        + self.name.len() + 1 // name: CString
     }
 }
 
 impl MaximumPossibleSized for SMSG_TEXT_EMOTE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // text_emote: u32
-        + Emote::maximum_possible_size() // emote: Emote
+        + 4 // emote: Emote
         + 4 // name_length: u32
         + 256 // name: CString
     }

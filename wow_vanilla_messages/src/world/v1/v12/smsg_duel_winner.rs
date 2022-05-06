@@ -147,15 +147,17 @@ impl MessageBody for SMSG_DUEL_WINNER {
 
 impl VariableSized for SMSG_DUEL_WINNER {
     fn size(&self) -> usize {
-        DuelWinnerReason::size() // reason: DuelWinnerReason
-        + self.opponent_name.len() + 1 // opponent_name: CString and Null Terminator
-        + self.initiator_name.len() + 1 // initiator_name: CString and Null Terminator
+        0
+        + 1 // reason: DuelWinnerReason
+        + self.opponent_name.len() + 1 // opponent_name: CString
+        + self.initiator_name.len() + 1 // initiator_name: CString
     }
 }
 
 impl MaximumPossibleSized for SMSG_DUEL_WINNER {
     fn maximum_possible_size() -> usize {
-        DuelWinnerReason::maximum_possible_size() // reason: DuelWinnerReason
+        0
+        + 1 // reason: DuelWinnerReason
         + 256 // opponent_name: CString
         + 256 // initiator_name: CString
     }

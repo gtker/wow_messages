@@ -1911,14 +1911,16 @@ impl ReadableAndWritable for SpellLog {
 
 impl VariableSized for SpellLog {
     fn size(&self) -> usize {
-        self.effect.size() // effect: SpellEffect and subfields
+        0
+        + self.effect.size() // effect: SpellLogSpellEffect
         + 4 // amount_of_logs: u32
     }
 }
 
 impl MaximumPossibleSized for SpellLog {
     fn maximum_possible_size() -> usize {
-        SpellEffect::maximum_possible_size() // effect: SpellEffect
+        0
+        + 24 // effect: SpellLogSpellEffect
         + 4 // amount_of_logs: u32
     }
 }

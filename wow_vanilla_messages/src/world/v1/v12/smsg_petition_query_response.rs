@@ -455,10 +455,11 @@ impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
 
 impl VariableSized for SMSG_PETITION_QUERY_RESPONSE {
     fn size(&self) -> usize {
-        8 // petition_guid: Guid
+        0
+        + 8 // petition_guid: Guid
         + 8 // charter_owner: Guid
-        + self.guild_name.len() + 1 // guild_name: CString and Null Terminator
-        + self.body_text.len() + 1 // body_text: CString and Null Terminator
+        + self.guild_name.len() + 1 // guild_name: CString
+        + self.body_text.len() + 1 // body_text: CString
         + 4 // unknown_flags: u32
         + 4 // minimum_signatures: u32
         + 4 // maximum_signatures: u32
@@ -477,7 +478,8 @@ impl VariableSized for SMSG_PETITION_QUERY_RESPONSE {
 
 impl MaximumPossibleSized for SMSG_PETITION_QUERY_RESPONSE {
     fn maximum_possible_size() -> usize {
-        8 // petition_guid: Guid
+        0
+        + 8 // petition_guid: Guid
         + 8 // charter_owner: Guid
         + 256 // guild_name: CString
         + 256 // body_text: CString

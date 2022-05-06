@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_ITEM_QUERY_SINGLE {}
 
 impl MaximumPossibleSized for CMSG_ITEM_QUERY_SINGLE {
     fn maximum_possible_size() -> usize {
-        4 // item: u32
+        0
+        + 4 // item: u32
         + 8 // guid: Guid
     }
 }

@@ -116,14 +116,16 @@ impl MessageBody for SMSG_CHANNEL_NOTIFY {
 
 impl VariableSized for SMSG_CHANNEL_NOTIFY {
     fn size(&self) -> usize {
-        ChatNotify::size() // notify_type: ChatNotify
-        + self.channel_name.len() + 1 // channel_name: CString and Null Terminator
+        0
+        + 1 // notify_type: ChatNotify
+        + self.channel_name.len() + 1 // channel_name: CString
     }
 }
 
 impl MaximumPossibleSized for SMSG_CHANNEL_NOTIFY {
     fn maximum_possible_size() -> usize {
-        ChatNotify::maximum_possible_size() // notify_type: ChatNotify
+        0
+        + 1 // notify_type: ChatNotify
         + 256 // channel_name: CString
     }
 }

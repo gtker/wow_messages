@@ -113,8 +113,9 @@ impl ConstantSized for MSG_QUEST_PUSH_RESULT {}
 
 impl MaximumPossibleSized for MSG_QUEST_PUSH_RESULT {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + QuestPartyMessage::size() // message: QuestPartyMessage
+        0
+        + 8 // guid: Guid
+        + 1 // message: QuestPartyMessage
     }
 }
 

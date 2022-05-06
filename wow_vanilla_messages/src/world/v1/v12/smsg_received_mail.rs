@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_RECEIVED_MAIL {}
 
 impl MaximumPossibleSized for SMSG_RECEIVED_MAIL {
     fn maximum_possible_size() -> usize {
-        4 // unknown1: u32
+        0
+        + 4 // unknown1: u32
     }
 }
 

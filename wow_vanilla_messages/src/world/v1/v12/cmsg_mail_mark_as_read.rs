@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_MAIL_MARK_AS_READ {}
 
 impl MaximumPossibleSized for CMSG_MAIL_MARK_AS_READ {
     fn maximum_possible_size() -> usize {
-        8 // mailbox_guid: Guid
+        0
+        + 8 // mailbox_guid: Guid
         + 4 // mail_id: u32
     }
 }

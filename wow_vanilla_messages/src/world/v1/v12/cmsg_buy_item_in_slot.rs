@@ -176,7 +176,8 @@ impl ConstantSized for CMSG_BUY_ITEM_IN_SLOT {}
 
 impl MaximumPossibleSized for CMSG_BUY_ITEM_IN_SLOT {
     fn maximum_possible_size() -> usize {
-        8 // vendor_guid: Guid
+        0
+        + 8 // vendor_guid: Guid
         + 4 // item_id: u32
         + 8 // bag_guid: Guid
         + 1 // bag_slot: u8

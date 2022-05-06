@@ -176,7 +176,8 @@ impl ConstantSized for SMSG_QUESTUPDATE_ADD_KILL {}
 
 impl MaximumPossibleSized for SMSG_QUESTUPDATE_ADD_KILL {
     fn maximum_possible_size() -> usize {
-        4 // quest_id: u32
+        0
+        + 4 // quest_id: u32
         + 4 // create_id: u32
         + 4 // kill_count: u32
         + 4 // required_kill_count: u32

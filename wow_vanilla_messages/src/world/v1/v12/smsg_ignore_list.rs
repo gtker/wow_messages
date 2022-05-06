@@ -117,15 +117,17 @@ impl MessageBody for SMSG_IGNORE_LIST {
 
 impl VariableSized for SMSG_IGNORE_LIST {
     fn size(&self) -> usize {
-        1 // amount_of_ignored: u8
+        0
+        + 1 // amount_of_ignored: u8
         + self.ignored.len() * core::mem::size_of::<u64>() // ignored: u64[amount_of_ignored]
     }
 }
 
 impl MaximumPossibleSized for SMSG_IGNORE_LIST {
     fn maximum_possible_size() -> usize {
-        1 // amount_of_ignored: u8
-        + 255 * core::mem::size_of::<u64>() // ignored: u64[amount_of_ignored]
+        0
+        + 1 // amount_of_ignored: u8
+        + 2048 // ignored: u64[amount_of_ignored]
     }
 }
 

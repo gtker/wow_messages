@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_UNLEARN_SKILL {}
 
 impl MaximumPossibleSized for CMSG_UNLEARN_SKILL {
     fn maximum_possible_size() -> usize {
-        4 // skill_id: u32
+        0
+        + 4 // skill_id: u32
     }
 }
 

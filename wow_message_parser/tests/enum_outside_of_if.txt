@@ -251,15 +251,17 @@ impl ReadableAndWritable for EnumOutsideOfIf {
 
 impl VariableSized for EnumOutsideOfIf {
     fn size(&self) -> usize {
-        self.t.size() // t: TEnum and subfields
-        + self.n.size() // n: NestedEnum and subfields
+        0
+        + 1 // t: TEnum
+        + self.n.size() // n: EnumOutsideOfIfNestedEnum
     }
 }
 
 impl MaximumPossibleSized for EnumOutsideOfIf {
     fn maximum_possible_size() -> usize {
-        TEnum::maximum_possible_size() // t: TEnum
-        + NestedEnum::maximum_possible_size() // n: NestedEnum
+        0
+        + 2 // t: TEnum
+        + 1 // n: EnumOutsideOfIfNestedEnum
     }
 }
 

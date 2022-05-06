@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_MEETINGSTONE_MEMBER_ADDED {}
 
 impl MaximumPossibleSized for SMSG_MEETINGSTONE_MEMBER_ADDED {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

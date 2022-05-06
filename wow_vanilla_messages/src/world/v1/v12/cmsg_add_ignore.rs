@@ -93,13 +93,15 @@ impl MessageBody for CMSG_ADD_IGNORE {
 
 impl VariableSized for CMSG_ADD_IGNORE {
     fn size(&self) -> usize {
-        self.ignore_name.len() + 1 // ignore_name: CString and Null Terminator
+        0
+        + self.ignore_name.len() + 1 // ignore_name: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_ADD_IGNORE {
     fn maximum_possible_size() -> usize {
-        256 // ignore_name: CString
+        0
+        + 256 // ignore_name: CString
     }
 }
 

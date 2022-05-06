@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_GMTICKET_DELETETICKET {}
 
 impl MaximumPossibleSized for SMSG_GMTICKET_DELETETICKET {
     fn maximum_possible_size() -> usize {
-        GmTicketResponse::size() // response: GmTicketResponse
+        0
+        + 4 // response: GmTicketResponse
     }
 }
 

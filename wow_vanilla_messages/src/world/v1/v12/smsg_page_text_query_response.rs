@@ -137,15 +137,17 @@ impl MessageBody for SMSG_PAGE_TEXT_QUERY_RESPONSE {
 
 impl VariableSized for SMSG_PAGE_TEXT_QUERY_RESPONSE {
     fn size(&self) -> usize {
-        4 // page_id: u32
-        + self.text.len() + 1 // text: CString and Null Terminator
+        0
+        + 4 // page_id: u32
+        + self.text.len() + 1 // text: CString
         + 4 // next_page_id: u32
     }
 }
 
 impl MaximumPossibleSized for SMSG_PAGE_TEXT_QUERY_RESPONSE {
     fn maximum_possible_size() -> usize {
-        4 // page_id: u32
+        0
+        + 4 // page_id: u32
         + 256 // text: CString
         + 4 // next_page_id: u32
     }

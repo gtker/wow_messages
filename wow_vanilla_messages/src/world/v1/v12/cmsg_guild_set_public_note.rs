@@ -124,14 +124,16 @@ impl MessageBody for CMSG_GUILD_SET_PUBLIC_NOTE {
 
 impl VariableSized for CMSG_GUILD_SET_PUBLIC_NOTE {
     fn size(&self) -> usize {
-        self.player_name.len() + 1 // player_name: CString and Null Terminator
-        + self.note.len() + 1 // note: CString and Null Terminator
+        0
+        + self.player_name.len() + 1 // player_name: CString
+        + self.note.len() + 1 // note: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GUILD_SET_PUBLIC_NOTE {
     fn maximum_possible_size() -> usize {
-        256 // player_name: CString
+        0
+        + 256 // player_name: CString
         + 256 // note: CString
     }
 }

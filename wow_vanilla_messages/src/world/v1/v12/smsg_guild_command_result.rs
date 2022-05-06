@@ -139,17 +139,19 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
 
 impl VariableSized for SMSG_GUILD_COMMAND_RESULT {
     fn size(&self) -> usize {
-        4 // command: GuildCommand upcasted to u32
-        + self.string.len() + 1 // string: CString and Null Terminator
-        + 4 // result: GuildCommandResult upcasted to u32
+        0
+        + 4 // command: GuildCommand
+        + self.string.len() + 1 // string: CString
+        + 4 // result: GuildCommandResult
     }
 }
 
 impl MaximumPossibleSized for SMSG_GUILD_COMMAND_RESULT {
     fn maximum_possible_size() -> usize {
-        GuildCommand::maximum_possible_size() // command: GuildCommand
+        0
+        + 1 // command: GuildCommand
         + 256 // string: CString
-        + GuildCommandResult::maximum_possible_size() // result: GuildCommandResult
+        + 1 // result: GuildCommandResult
     }
 }
 

@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_LEARNED_SPELL {}
 
 impl MaximumPossibleSized for SMSG_LEARNED_SPELL {
     fn maximum_possible_size() -> usize {
-        4 // id: u32
+        0
+        + 4 // id: u32
     }
 }
 

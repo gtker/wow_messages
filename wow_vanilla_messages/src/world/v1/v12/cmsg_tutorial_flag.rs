@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_TUTORIAL_FLAG {}
 
 impl MaximumPossibleSized for CMSG_TUTORIAL_FLAG {
     fn maximum_possible_size() -> usize {
-        4 // tutorial_flag: u32
+        0
+        + 4 // tutorial_flag: u32
     }
 }
 

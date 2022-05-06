@@ -133,9 +133,10 @@ impl ConstantSized for CMSG_LOOT_ROLL {}
 
 impl MaximumPossibleSized for CMSG_LOOT_ROLL {
     fn maximum_possible_size() -> usize {
-        8 // item_guid: Guid
+        0
+        + 8 // item_guid: Guid
         + 4 // item_slot: u32
-        + RollVote::size() // vote: RollVote
+        + 1 // vote: RollVote
     }
 }
 

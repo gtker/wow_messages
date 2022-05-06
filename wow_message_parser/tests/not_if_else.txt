@@ -228,13 +228,15 @@ impl ReadableAndWritable for SimpleIfNotEnumElse {
 
 impl VariableSized for SimpleIfNotEnumElse {
     fn size(&self) -> usize {
-        self.enum.size() // enum: SimpleEnum and subfields
+        0
+        + self.enum.size() // enum: SimpleIfNotEnumElseSimpleEnum
     }
 }
 
 impl MaximumPossibleSized for SimpleIfNotEnumElse {
     fn maximum_possible_size() -> usize {
-        SimpleEnum::maximum_possible_size() // enum: SimpleEnum
+        0
+        + 3 // enum: SimpleIfNotEnumElseSimpleEnum
     }
 }
 

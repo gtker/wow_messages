@@ -111,8 +111,9 @@ impl ConstantSized for SMSG_MEETINGSTONE_SETQUEUE {}
 
 impl MaximumPossibleSized for SMSG_MEETINGSTONE_SETQUEUE {
     fn maximum_possible_size() -> usize {
-        Area::size() // area: Area
-        + MeetingStoneStatus::size() // status: MeetingStoneStatus
+        0
+        + 4 // area: Area
+        + 1 // status: MeetingStoneStatus
     }
 }
 

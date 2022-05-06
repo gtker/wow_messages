@@ -163,7 +163,8 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Server {
 
 impl VariableSized for MSG_LIST_STABLED_PETS_Server {
     fn size(&self) -> usize {
-        8 // npc: Guid
+        0
+        + 8 // npc: Guid
         + 1 // amount_of_pets: u8
         + 1 // stable_slots: u8
         + self.pets.iter().fold(0, |acc, x| acc + x.size()) // pets: StabledPet[amount_of_pets]
@@ -172,10 +173,7 @@ impl VariableSized for MSG_LIST_STABLED_PETS_Server {
 
 impl MaximumPossibleSized for MSG_LIST_STABLED_PETS_Server {
     fn maximum_possible_size() -> usize {
-        8 // npc: Guid
-        + 1 // amount_of_pets: u8
-        + 1 // stable_slots: u8
-        + 255 * StabledPet::maximum_possible_size() // pets: StabledPet[amount_of_pets]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

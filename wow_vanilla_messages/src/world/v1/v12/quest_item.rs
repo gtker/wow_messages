@@ -149,16 +149,18 @@ impl ReadableAndWritable for QuestItem {
 
 impl VariableSized for QuestItem {
     fn size(&self) -> usize {
-        4 // quest_id: u32
+        0
+        + 4 // quest_id: u32
         + 4 // quest_icon: u32
         + 4 // level: u32
-        + self.title.len() + 1 // title: CString and Null Terminator
+        + self.title.len() + 1 // title: CString
     }
 }
 
 impl MaximumPossibleSized for QuestItem {
     fn maximum_possible_size() -> usize {
-        4 // quest_id: u32
+        0
+        + 4 // quest_id: u32
         + 4 // quest_icon: u32
         + 4 // level: u32
         + 256 // title: CString

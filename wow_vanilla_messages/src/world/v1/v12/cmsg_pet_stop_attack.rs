@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_PET_STOP_ATTACK {}
 
 impl MaximumPossibleSized for CMSG_PET_STOP_ATTACK {
     fn maximum_possible_size() -> usize {
-        8 // pet_guid: Guid
+        0
+        + 8 // pet_guid: Guid
     }
 }
 

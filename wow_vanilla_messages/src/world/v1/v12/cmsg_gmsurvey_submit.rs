@@ -156,16 +156,18 @@ impl MessageBody for CMSG_GMSURVEY_SUBMIT {
 
 impl VariableSized for CMSG_GMSURVEY_SUBMIT {
     fn size(&self) -> usize {
-        4 // survey_id: u32
+        0
+        + 4 // survey_id: u32
         + 10 * GmSurveyQuestion::size() // questions: GmSurveyQuestion[10]
-        + self.answer_comment.len() + 1 // answer_comment: CString and Null Terminator
+        + self.answer_comment.len() + 1 // answer_comment: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GMSURVEY_SUBMIT {
     fn maximum_possible_size() -> usize {
-        4 // survey_id: u32
-        + 10 * GmSurveyQuestion::maximum_possible_size() // questions: GmSurveyQuestion[10]
+        0
+        + 4 // survey_id: u32
+        + 50 // questions: GmSurveyQuestion[10]
         + 256 // answer_comment: CString
     }
 }

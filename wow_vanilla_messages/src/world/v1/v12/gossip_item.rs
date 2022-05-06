@@ -121,7 +121,8 @@ impl ConstantSized for GossipItem {}
 
 impl MaximumPossibleSized for GossipItem {
     fn maximum_possible_size() -> usize {
-        4 // id: u32
+        0
+        + 4 // id: u32
         + 1 // item_icon: u8
         + 1 // coded: u8
     }

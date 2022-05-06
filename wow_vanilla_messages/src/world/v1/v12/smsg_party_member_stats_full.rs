@@ -1003,15 +1003,17 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
 impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULL {
     fn size(&self) -> usize {
-        self.player.size() // player: PackedGuid
-        + self.mask.size() // mask: GroupUpdateFlags and subfields
+        0
+        + self.player.size() // player: Guid
+        + self.mask.size() // mask: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags
     }
 }
 
 impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULL {
     fn maximum_possible_size() -> usize {
-        9 // player: PackedGuid
-        + GroupUpdateFlags::maximum_possible_size() // mask: GroupUpdateFlags
+        0
+        + 9 // player: Guid
+        + 555 // mask: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags
     }
 }
 

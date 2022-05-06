@@ -329,7 +329,8 @@ impl ConstantSized for SMSG_LEVELUP_INFO {}
 
 impl MaximumPossibleSized for SMSG_LEVELUP_INFO {
     fn maximum_possible_size() -> usize {
-        4 // new_level: u32
+        0
+        + 4 // new_level: u32
         + 4 // health: u32
         + 4 // mana: u32
         + 4 // rage: u32

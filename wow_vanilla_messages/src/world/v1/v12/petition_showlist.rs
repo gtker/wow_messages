@@ -192,7 +192,8 @@ impl ConstantSized for PetitionShowlist {}
 
 impl MaximumPossibleSized for PetitionShowlist {
     fn maximum_possible_size() -> usize {
-        4 // index: u32
+        0
+        + 4 // index: u32
         + 4 // charter_entry: u32
         + 4 // charter_display_id: u32
         + 4 // guild_charter_cost: u32

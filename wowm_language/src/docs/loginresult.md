@@ -47,11 +47,11 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `FAIL_PARENTALCONTROL` | 15 (0x0F) |  |  |
 
 Used in:
-* [CMD_AUTH_LOGON_PROOF_Server](cmd_auth_logon_proof_server.md)
-* [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)
-* [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)
-* [CMD_AUTH_RECONNECT_PROOF_Server](cmd_auth_reconnect_proof_server.md)
 * [CMD_AUTH_RECONNECT_CHALLENGE_Server](cmd_auth_reconnect_challenge_server.md)
+* [CMD_AUTH_RECONNECT_PROOF_Server](cmd_auth_reconnect_proof_server.md)
+* [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)
+* [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)
+* [CMD_AUTH_LOGON_PROOF_Server](cmd_auth_logon_proof_server.md)
 ## Protocol Version 8
 
 ### Wowm Representation
@@ -103,7 +103,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `FAIL_LOCKED_ENFORCED` | 16 (0x10) |  |  |
 
 Used in:
-* [CMD_AUTH_LOGON_PROOF_Server](cmd_auth_logon_proof_server.md)
-* [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)
-* [CMD_AUTH_RECONNECT_PROOF_Server](cmd_auth_reconnect_proof_server.md)
 * [CMD_AUTH_RECONNECT_CHALLENGE_Server](cmd_auth_reconnect_challenge_server.md)
+* [CMD_AUTH_RECONNECT_PROOF_Server](cmd_auth_reconnect_proof_server.md)
+* [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)
+* [CMD_AUTH_LOGON_PROOF_Server](cmd_auth_logon_proof_server.md)

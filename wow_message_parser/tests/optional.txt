@@ -77,7 +77,8 @@ impl ConstantSized for Optional {}
 
 impl MaximumPossibleSized for Optional {
     fn maximum_possible_size() -> usize {
-        1 // basic: u8
+        0
+        + 1 // basic: u8
     }
 }
 

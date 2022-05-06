@@ -433,11 +433,12 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
 impl VariableSized for SMSG_QUESTGIVER_QUEST_DETAILS {
     fn size(&self) -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // quest_id: u32
-        + self.title.len() + 1 // title: CString and Null Terminator
-        + self.details.len() + 1 // details: CString and Null Terminator
-        + self.objectives.len() + 1 // objectives: CString and Null Terminator
+        + self.title.len() + 1 // title: CString
+        + self.details.len() + 1 // details: CString
+        + self.objectives.len() + 1 // objectives: CString
         + 4 // auto_finish: u32
         + 4 // amount_of_choice_item_rewards: u32
         + self.choice_item_rewards.iter().fold(0, |acc, x| acc + QuestItemReward::size()) // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
@@ -452,20 +453,7 @@ impl VariableSized for SMSG_QUESTGIVER_QUEST_DETAILS {
 
 impl MaximumPossibleSized for SMSG_QUESTGIVER_QUEST_DETAILS {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + 4 // quest_id: u32
-        + 256 // title: CString
-        + 256 // details: CString
-        + 256 // objectives: CString
-        + 4 // auto_finish: u32
-        + 4 // amount_of_choice_item_rewards: u32
-        + 4294967295 * QuestItemReward::maximum_possible_size() // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
-        + 4 // amount_of_item_rewards: u32
-        + 4294967295 * QuestItemReward::maximum_possible_size() // item_rewards: QuestItemReward[amount_of_item_rewards]
-        + 4 // money_reward: u32
-        + 4 // reward_spell: u32
-        + 4 // amount_of_emotes: u32
-        + 4294967295 * QuestDetailsEmote::maximum_possible_size() // emotes: QuestDetailsEmote[amount_of_emotes]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -181,19 +181,21 @@ impl ReadableAndWritable for NpcTextUpdate {
 
 impl VariableSized for NpcTextUpdate {
     fn size(&self) -> usize {
-        4 // probability: f32
+        0
+        + 4 // probability: f32
         + self.texts.iter().fold(0, |acc, x| acc + x.len() + 1) // texts: CString[2]
-        + Language::size() // language: Language
+        + 4 // language: Language
         + 3 * NpcTextUpdateEmote::size() // emotes: NpcTextUpdateEmote[3]
     }
 }
 
 impl MaximumPossibleSized for NpcTextUpdate {
     fn maximum_possible_size() -> usize {
-        4 // probability: f32
-        + 2 * 256 // texts: CString[2]
-        + Language::maximum_possible_size() // language: Language
-        + 3 * NpcTextUpdateEmote::maximum_possible_size() // emotes: NpcTextUpdateEmote[3]
+        0
+        + 4 // probability: f32
+        + 512 // texts: CString[2]
+        + 4 // language: Language
+        + 24 // emotes: NpcTextUpdateEmote[3]
     }
 }
 

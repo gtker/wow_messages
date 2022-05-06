@@ -139,17 +139,19 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
 
 impl VariableSized for SMSG_PARTY_COMMAND_RESULT {
     fn size(&self) -> usize {
-        4 // operation: PartyOperation upcasted to u32
-        + self.member.len() + 1 // member: CString and Null Terminator
-        + 4 // result: PartyResult upcasted to u32
+        0
+        + 4 // operation: PartyOperation
+        + self.member.len() + 1 // member: CString
+        + 4 // result: PartyResult
     }
 }
 
 impl MaximumPossibleSized for SMSG_PARTY_COMMAND_RESULT {
     fn maximum_possible_size() -> usize {
-        PartyOperation::maximum_possible_size() // operation: PartyOperation
+        0
+        + 1 // operation: PartyOperation
         + 256 // member: CString
-        + PartyResult::maximum_possible_size() // result: PartyResult
+        + 1 // result: PartyResult
     }
 }
 

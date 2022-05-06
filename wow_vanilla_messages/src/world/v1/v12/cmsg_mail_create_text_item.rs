@@ -132,7 +132,8 @@ impl ConstantSized for CMSG_MAIL_CREATE_TEXT_ITEM {}
 
 impl MaximumPossibleSized for CMSG_MAIL_CREATE_TEXT_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // mailbox_guid: Guid
+        0
+        + 8 // mailbox_guid: Guid
         + 4 // mail_id: u32
         + 4 // mail_template_id: u32
     }

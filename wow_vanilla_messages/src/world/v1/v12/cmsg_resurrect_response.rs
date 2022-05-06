@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_RESURRECT_RESPONSE {}
 
 impl MaximumPossibleSized for CMSG_RESURRECT_RESPONSE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 1 // status: u8
     }
 }

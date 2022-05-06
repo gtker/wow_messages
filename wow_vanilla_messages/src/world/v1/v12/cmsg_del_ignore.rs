@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_DEL_IGNORE {}
 
 impl MaximumPossibleSized for CMSG_DEL_IGNORE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

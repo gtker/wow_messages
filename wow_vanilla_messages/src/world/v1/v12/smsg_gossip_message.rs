@@ -219,7 +219,8 @@ impl MessageBody for SMSG_GOSSIP_MESSAGE {
 
 impl VariableSized for SMSG_GOSSIP_MESSAGE {
     fn size(&self) -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // title_text_id: u32
         + 4 // amount_of_gossip_items: u32
         + self.gossips.iter().fold(0, |acc, x| acc + GossipItem::size()) // gossips: GossipItem[amount_of_gossip_items]
@@ -230,12 +231,7 @@ impl VariableSized for SMSG_GOSSIP_MESSAGE {
 
 impl MaximumPossibleSized for SMSG_GOSSIP_MESSAGE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + 4 // title_text_id: u32
-        + 4 // amount_of_gossip_items: u32
-        + 4294967295 * GossipItem::maximum_possible_size() // gossips: GossipItem[amount_of_gossip_items]
-        + 4 // amount_of_quests: u32
-        + 4294967295 * QuestItem::maximum_possible_size() // quests: QuestItem[amount_of_quests]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

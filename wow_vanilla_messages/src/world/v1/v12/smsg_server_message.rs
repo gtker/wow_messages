@@ -116,14 +116,16 @@ impl MessageBody for SMSG_SERVER_MESSAGE {
 
 impl VariableSized for SMSG_SERVER_MESSAGE {
     fn size(&self) -> usize {
-        ServerMessageType::size() // message_type: ServerMessageType
-        + self.message.len() + 1 // message: CString and Null Terminator
+        0
+        + 4 // message_type: ServerMessageType
+        + self.message.len() + 1 // message: CString
     }
 }
 
 impl MaximumPossibleSized for SMSG_SERVER_MESSAGE {
     fn maximum_possible_size() -> usize {
-        ServerMessageType::maximum_possible_size() // message_type: ServerMessageType
+        0
+        + 4 // message_type: ServerMessageType
         + 256 // message: CString
     }
 }

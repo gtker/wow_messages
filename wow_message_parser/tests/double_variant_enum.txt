@@ -189,13 +189,15 @@ impl ReadableAndWritable for DoubleVariantEnum {
 
 impl VariableSized for DoubleVariantEnum {
     fn size(&self) -> usize {
-        self.enum.size() // enum: SimpleEnum and subfields
+        0
+        + self.enum.size() // enum: DoubleVariantEnumSimpleEnum
     }
 }
 
 impl MaximumPossibleSized for DoubleVariantEnum {
     fn maximum_possible_size() -> usize {
-        SimpleEnum::maximum_possible_size() // enum: SimpleEnum
+        0
+        + 2 // enum: DoubleVariantEnumSimpleEnum
     }
 }
 

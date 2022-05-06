@@ -135,13 +135,15 @@ impl ReadableAndWritable for SimpleIfFlag {
 
 impl VariableSized for SimpleIfFlag {
     fn size(&self) -> usize {
-        self.flag.size() // flag: SimpleFlag and subfields
+        0
+        + self.flag.size() // flag: SimpleIfFlagSimpleFlag
     }
 }
 
 impl MaximumPossibleSized for SimpleIfFlag {
     fn maximum_possible_size() -> usize {
-        SimpleFlag::maximum_possible_size() // flag: SimpleFlag
+        0
+        + 2 // flag: SimpleIfFlagSimpleFlag
     }
 }
 

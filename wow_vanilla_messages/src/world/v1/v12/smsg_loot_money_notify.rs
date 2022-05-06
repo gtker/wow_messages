@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_LOOT_MONEY_NOTIFY {}
 
 impl MaximumPossibleSized for SMSG_LOOT_MONEY_NOTIFY {
     fn maximum_possible_size() -> usize {
-        4 // amount: u32
+        0
+        + 4 // amount: u32
     }
 }
 

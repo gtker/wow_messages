@@ -93,13 +93,15 @@ impl MessageBody for CMSG_GUILD_CREATE {
 
 impl VariableSized for CMSG_GUILD_CREATE {
     fn size(&self) -> usize {
-        self.guild_name.len() + 1 // guild_name: CString and Null Terminator
+        0
+        + self.guild_name.len() + 1 // guild_name: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GUILD_CREATE {
     fn maximum_possible_size() -> usize {
-        256 // guild_name: CString
+        0
+        + 256 // guild_name: CString
     }
 }
 

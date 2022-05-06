@@ -99,7 +99,8 @@ impl ConstantSized for GmSurveyQuestion {}
 
 impl MaximumPossibleSized for GmSurveyQuestion {
     fn maximum_possible_size() -> usize {
-        4 // question_id: u32
+        0
+        + 4 // question_id: u32
         + 1 // answer: u8
     }
 }

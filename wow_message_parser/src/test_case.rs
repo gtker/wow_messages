@@ -52,7 +52,9 @@ impl TestCase {
     }
 
     pub fn get_member<'a>(t: &'a [TestCaseMember], member: &str) -> &'a TestCaseMember {
-        t.iter().find(|a| a.name() == member).unwrap()
+        t.iter()
+            .find(|a| a.name() == member)
+            .expect(&format!("{} not found", member))
     }
 
     pub fn verify(&mut self, o: &Objects) {

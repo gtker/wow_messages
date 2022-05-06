@@ -289,10 +289,11 @@ impl ConstantSized for SMSG_ITEM_PUSH_RESULT {}
 
 impl MaximumPossibleSized for SMSG_ITEM_PUSH_RESULT {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + NewItemSource::size() // source: NewItemSource
-        + NewItemCreationType::size() // creation_type: NewItemCreationType
-        + NewItemChatAlert::size() // alert_chat: NewItemChatAlert
+        0
+        + 8 // guid: Guid
+        + 4 // source: NewItemSource
+        + 4 // creation_type: NewItemCreationType
+        + 4 // alert_chat: NewItemChatAlert
         + 1 // bag_slot: u8
         + 4 // item_slot: u32
         + 4 // item_id: u32

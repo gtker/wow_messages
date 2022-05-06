@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_MEETINGSTONE_JOINFAILED {}
 
 impl MaximumPossibleSized for SMSG_MEETINGSTONE_JOINFAILED {
     fn maximum_possible_size() -> usize {
-        MeetingStoneFailure::size() // reason: MeetingStoneFailure
+        0
+        + 1 // reason: MeetingStoneFailure
     }
 }
 

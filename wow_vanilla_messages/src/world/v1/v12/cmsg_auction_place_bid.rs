@@ -132,7 +132,8 @@ impl ConstantSized for CMSG_AUCTION_PLACE_BID {}
 
 impl MaximumPossibleSized for CMSG_AUCTION_PLACE_BID {
     fn maximum_possible_size() -> usize {
-        8 // auctioneer_guid: Guid
+        0
+        + 8 // auctioneer_guid: Guid
         + 4 // auction_id: u32
         + 4 // price: u32
     }

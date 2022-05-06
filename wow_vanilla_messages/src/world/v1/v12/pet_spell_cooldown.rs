@@ -143,7 +143,8 @@ impl ConstantSized for PetSpellCooldown {}
 
 impl MaximumPossibleSized for PetSpellCooldown {
     fn maximum_possible_size() -> usize {
-        2 // spell_id: u16
+        0
+        + 2 // spell_id: u16
         + 2 // spell_category: u16
         + 4 // cooldown_in_msecs: u32
         + 4 // category_cooldown_in_msecs: u32

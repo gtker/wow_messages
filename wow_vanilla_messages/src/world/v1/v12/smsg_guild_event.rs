@@ -146,7 +146,8 @@ impl MessageBody for SMSG_GUILD_EVENT {
 
 impl VariableSized for SMSG_GUILD_EVENT {
     fn size(&self) -> usize {
-        GuildEvent::size() // event: GuildEvent
+        0
+        + 1 // event: GuildEvent
         + 1 // amount_of_events: u8
         + self.event_descriptions.iter().fold(0, |acc, x| acc + x.len() + 1) // event_descriptions: CString[amount_of_events]
     }
@@ -154,9 +155,7 @@ impl VariableSized for SMSG_GUILD_EVENT {
 
 impl MaximumPossibleSized for SMSG_GUILD_EVENT {
     fn maximum_possible_size() -> usize {
-        GuildEvent::maximum_possible_size() // event: GuildEvent
-        + 1 // amount_of_events: u8
-        + 255 * 256 // event_descriptions: CString[amount_of_events]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

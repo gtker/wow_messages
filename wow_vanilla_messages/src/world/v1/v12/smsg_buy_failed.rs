@@ -133,9 +133,10 @@ impl ConstantSized for SMSG_BUY_FAILED {}
 
 impl MaximumPossibleSized for SMSG_BUY_FAILED {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // item_id: u32
-        + BuyResult::size() // result: BuyResult
+        + 1 // result: BuyResult
     }
 }
 

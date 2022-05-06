@@ -468,10 +468,11 @@ impl MessageBody for CMSG_PETITION_BUY {
 
 impl VariableSized for CMSG_PETITION_BUY {
     fn size(&self) -> usize {
-        8 // npc: Guid
+        0
+        + 8 // npc: Guid
         + 4 // skip1: u32
         + 8 // skip2: Guid
-        + self.name.len() + 1 // name: CString and Null Terminator
+        + self.name.len() + 1 // name: CString
         + 4 // skip3: u32
         + 4 // skip4: u32
         + 4 // skip5: u32
@@ -491,7 +492,8 @@ impl VariableSized for CMSG_PETITION_BUY {
 
 impl MaximumPossibleSized for CMSG_PETITION_BUY {
     fn maximum_possible_size() -> usize {
-        8 // npc: Guid
+        0
+        + 8 // npc: Guid
         + 4 // skip1: u32
         + 8 // skip2: Guid
         + 256 // name: CString

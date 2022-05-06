@@ -133,8 +133,9 @@ impl ConstantSized for SMSG_RAID_INSTANCE_MESSAGE {}
 
 impl MaximumPossibleSized for SMSG_RAID_INSTANCE_MESSAGE {
     fn maximum_possible_size() -> usize {
-        RaidInstanceMessage::size() // message_type: RaidInstanceMessage
-        + Map::size() // map: Map
+        0
+        + 4 // message_type: RaidInstanceMessage
+        + 4 // map: Map
         + 4 // time_left: u32
     }
 }

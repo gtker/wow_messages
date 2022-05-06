@@ -241,7 +241,8 @@ impl ConstantSized for SMSG_TUTORIAL_FLAGS {}
 
 impl MaximumPossibleSized for SMSG_TUTORIAL_FLAGS {
     fn maximum_possible_size() -> usize {
-        4 // tutorial_data0: u32
+        0
+        + 4 // tutorial_data0: u32
         + 4 // tutorial_data1: u32
         + 4 // tutorial_data2: u32
         + 4 // tutorial_data3: u32

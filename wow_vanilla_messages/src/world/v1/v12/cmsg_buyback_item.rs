@@ -111,8 +111,9 @@ impl ConstantSized for CMSG_BUYBACK_ITEM {}
 
 impl MaximumPossibleSized for CMSG_BUYBACK_ITEM {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + BuybackSlot::size() // slot: BuybackSlot
+        0
+        + 8 // guid: Guid
+        + 4 // slot: BuybackSlot
     }
 }
 

@@ -242,13 +242,15 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
 
 impl VariableSized for MSG_CORPSE_QUERY_Server {
     fn size(&self) -> usize {
-        self.result.size() // result: CorpseQueryResult and subfields
+        0
+        + self.result.size() // result: MSG_CORPSE_QUERY_ServerCorpseQueryResult
     }
 }
 
 impl MaximumPossibleSized for MSG_CORPSE_QUERY_Server {
     fn maximum_possible_size() -> usize {
-        CorpseQueryResult::maximum_possible_size() // result: CorpseQueryResult
+        0
+        + 21 // result: MSG_CORPSE_QUERY_ServerCorpseQueryResult
     }
 }
 

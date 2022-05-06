@@ -190,17 +190,19 @@ impl MessageBody for CMSG_BUG {
 
 impl VariableSized for CMSG_BUG {
     fn size(&self) -> usize {
-        4 // suggestion: u32
+        0
+        + 4 // suggestion: u32
         + 4 // content_length: u32
-        + self.content.len() + 1 // content: CString and Null Terminator
+        + self.content.len() + 1 // content: CString
         + 4 // type_length: u32
-        + self.bug_type.len() + 1 // bug_type: CString and Null Terminator
+        + self.bug_type.len() + 1 // bug_type: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_BUG {
     fn maximum_possible_size() -> usize {
-        4 // suggestion: u32
+        0
+        + 4 // suggestion: u32
         + 4 // content_length: u32
         + 256 // content: CString
         + 4 // type_length: u32

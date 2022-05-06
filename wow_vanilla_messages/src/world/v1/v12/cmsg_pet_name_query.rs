@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_PET_NAME_QUERY {}
 
 impl MaximumPossibleSized for CMSG_PET_NAME_QUERY {
     fn maximum_possible_size() -> usize {
-        4 // pet_number: u32
+        0
+        + 4 // pet_number: u32
         + 8 // guid: Guid
     }
 }

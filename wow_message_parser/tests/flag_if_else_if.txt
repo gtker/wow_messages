@@ -268,13 +268,15 @@ impl ReadableAndWritable for FlagIfElseIf {
 
 impl VariableSized for FlagIfElseIf {
     fn size(&self) -> usize {
-        self.flags.size() // flags: UpdateFlag and subfields
+        0
+        + self.flags.size() // flags: FlagIfElseIfUpdateFlag
     }
 }
 
 impl MaximumPossibleSized for FlagIfElseIf {
     fn maximum_possible_size() -> usize {
-        UpdateFlag::maximum_possible_size() // flags: UpdateFlag
+        0
+        + 4 // flags: FlagIfElseIfUpdateFlag
     }
 }
 

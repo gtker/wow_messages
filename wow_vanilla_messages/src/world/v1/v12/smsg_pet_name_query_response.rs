@@ -137,15 +137,17 @@ impl MessageBody for SMSG_PET_NAME_QUERY_RESPONSE {
 
 impl VariableSized for SMSG_PET_NAME_QUERY_RESPONSE {
     fn size(&self) -> usize {
-        4 // pet_number: u32
-        + self.name.len() + 1 // name: CString and Null Terminator
+        0
+        + 4 // pet_number: u32
+        + self.name.len() + 1 // name: CString
         + 4 // pet_name_timestamp: u32
     }
 }
 
 impl MaximumPossibleSized for SMSG_PET_NAME_QUERY_RESPONSE {
     fn maximum_possible_size() -> usize {
-        4 // pet_number: u32
+        0
+        + 4 // pet_number: u32
         + 256 // name: CString
         + 4 // pet_name_timestamp: u32
     }

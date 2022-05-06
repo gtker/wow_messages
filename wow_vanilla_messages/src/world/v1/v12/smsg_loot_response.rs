@@ -111,8 +111,9 @@ impl ConstantSized for SMSG_LOOT_RESPONSE {}
 
 impl MaximumPossibleSized for SMSG_LOOT_RESPONSE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + LootMethod::size() // loot_method: LootMethod
+        0
+        + 8 // guid: Guid
+        + 1 // loot_method: LootMethod
     }
 }
 

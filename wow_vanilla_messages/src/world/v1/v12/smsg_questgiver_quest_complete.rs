@@ -206,7 +206,8 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
 impl VariableSized for SMSG_QUESTGIVER_QUEST_COMPLETE {
     fn size(&self) -> usize {
-        4 // quest_id: u32
+        0
+        + 4 // quest_id: u32
         + 4 // unknown: u32
         + 4 // experience_reward: u32
         + 4 // money_reward: u32
@@ -217,12 +218,7 @@ impl VariableSized for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
 impl MaximumPossibleSized for SMSG_QUESTGIVER_QUEST_COMPLETE {
     fn maximum_possible_size() -> usize {
-        4 // quest_id: u32
-        + 4 // unknown: u32
-        + 4 // experience_reward: u32
-        + 4 // money_reward: u32
-        + 4 // amount_of_item_rewards: u32
-        + 4294967295 * QuestItemReward::maximum_possible_size() // item_rewards: QuestItemReward[amount_of_item_rewards]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

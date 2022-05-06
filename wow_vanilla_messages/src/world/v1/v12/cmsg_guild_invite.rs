@@ -93,13 +93,15 @@ impl MessageBody for CMSG_GUILD_INVITE {
 
 impl VariableSized for CMSG_GUILD_INVITE {
     fn size(&self) -> usize {
-        self.invited_player.len() + 1 // invited_player: CString and Null Terminator
+        0
+        + self.invited_player.len() + 1 // invited_player: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GUILD_INVITE {
     fn maximum_possible_size() -> usize {
-        256 // invited_player: CString
+        0
+        + 256 // invited_player: CString
     }
 }
 

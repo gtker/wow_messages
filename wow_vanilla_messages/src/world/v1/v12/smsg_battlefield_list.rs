@@ -229,8 +229,9 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
 
 impl VariableSized for SMSG_BATTLEFIELD_LIST {
     fn size(&self) -> usize {
-        8 // battlemaster: Guid
-        + Map::size() // map: Map
+        0
+        + 8 // battlemaster: Guid
+        + 4 // map: Map
         + 1 // unknown1: u8
         + 4 // unknown2: u32
         + 1 // unknown3: u8
@@ -241,13 +242,7 @@ impl VariableSized for SMSG_BATTLEFIELD_LIST {
 
 impl MaximumPossibleSized for SMSG_BATTLEFIELD_LIST {
     fn maximum_possible_size() -> usize {
-        8 // battlemaster: Guid
-        + Map::maximum_possible_size() // map: Map
-        + 1 // unknown1: u8
-        + 4 // unknown2: u32
-        + 1 // unknown3: u8
-        + 4 // number_of_battlegrounds: u32
-        + 4294967295 * core::mem::size_of::<u32>() // battlegrounds: u32[number_of_battlegrounds]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

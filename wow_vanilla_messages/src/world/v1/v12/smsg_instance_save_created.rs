@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_INSTANCE_SAVE_CREATED {}
 
 impl MaximumPossibleSized for SMSG_INSTANCE_SAVE_CREATED {
     fn maximum_possible_size() -> usize {
-        4 // unknown: u32
+        0
+        + 4 // unknown: u32
     }
 }
 

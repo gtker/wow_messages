@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_ACCEPT_TRADE {}
 
 impl MaximumPossibleSized for CMSG_ACCEPT_TRADE {
     fn maximum_possible_size() -> usize {
-        4 // unknown1: u32
+        0
+        + 4 // unknown1: u32
     }
 }
 

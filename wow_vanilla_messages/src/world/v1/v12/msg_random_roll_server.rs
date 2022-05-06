@@ -154,7 +154,8 @@ impl ConstantSized for MSG_RANDOM_ROLL_Server {}
 
 impl MaximumPossibleSized for MSG_RANDOM_ROLL_Server {
     fn maximum_possible_size() -> usize {
-        4 // minimum: u32
+        0
+        + 4 // minimum: u32
         + 4 // maximum: u32
         + 4 // actual_roll: u32
         + 8 // guid: Guid

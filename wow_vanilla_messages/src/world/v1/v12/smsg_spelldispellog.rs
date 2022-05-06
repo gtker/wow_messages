@@ -162,7 +162,8 @@ impl MessageBody for SMSG_SPELLDISPELLOG {
 
 impl VariableSized for SMSG_SPELLDISPELLOG {
     fn size(&self) -> usize {
-        8 // victim: Guid
+        0
+        + 8 // victim: Guid
         + 8 // caster: Guid
         + 4 // amount_of_spells: u32
         + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[amount_of_spells]
@@ -171,10 +172,7 @@ impl VariableSized for SMSG_SPELLDISPELLOG {
 
 impl MaximumPossibleSized for SMSG_SPELLDISPELLOG {
     fn maximum_possible_size() -> usize {
-        8 // victim: Guid
-        + 8 // caster: Guid
-        + 4 // amount_of_spells: u32
-        + 4294967295 * core::mem::size_of::<u32>() // spells: u32[amount_of_spells]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

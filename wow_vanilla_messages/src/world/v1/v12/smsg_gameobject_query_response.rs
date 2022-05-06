@@ -367,21 +367,28 @@ impl MessageBody for SMSG_GAMEOBJECT_QUERY_RESPONSE {
 
 impl VariableSized for SMSG_GAMEOBJECT_QUERY_RESPONSE {
     fn size(&self) -> usize {
-        4 // entry_id: u32
-        + {
-            if let Some(v) = &self.found {
-                v.size()
-            } else {
-                0
-            }
-        } // optional found
+        0
+        + 4 // entry_id: u32
+        + if let Some(found) = &self.found {
+            0
+            + 4 // info_type: u32
+            + 4 // display_id: u32
+            + found.name1.len() + 1 // name1: CString
+            + found.name2.len() + 1 // name2: CString
+            + found.name3.len() + 1 // name3: CString
+            + found.name4.len() + 1 // name4: CString
+            + found.name5.len() + 1 // name5: CString
+            + 6 * core::mem::size_of::<u32>() // raw_data: u32[6]
+        } else {
+            0
+        }
     }
 }
 
 impl MaximumPossibleSized for SMSG_GAMEOBJECT_QUERY_RESPONSE {
     fn maximum_possible_size() -> usize {
-        4 // entry_id: u32
-        + 65536 // optional found
+        0
+        + 4 // entry_id: u32
     }
 }
 

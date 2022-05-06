@@ -88,7 +88,8 @@ impl ConstantSized for MSG_SAVE_GUILD_EMBLEM_Server {}
 
 impl MaximumPossibleSized for MSG_SAVE_GUILD_EMBLEM_Server {
     fn maximum_possible_size() -> usize {
-        GuildEmblemResult::size() // result: GuildEmblemResult
+        0
+        + 4 // result: GuildEmblemResult
     }
 }
 

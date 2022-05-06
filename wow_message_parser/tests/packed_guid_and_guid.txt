@@ -287,7 +287,8 @@ impl ReadableAndWritable for PackedGuidAndGuid {
 
 impl VariableSized for PackedGuidAndGuid {
     fn size(&self) -> usize {
-        self.packed.size() // packed: PackedGuid
+        0
+        + self.packed.size() // packed: Guid
         + 8 // guid: Guid
         + self.static_packed.iter().fold(0, |acc, x| acc + x.size()) // static_packed: PackedGuid[10]
         + self.static_guid.iter().fold(0, |acc, _| acc + 8) // static_guid: Guid[10]
@@ -300,14 +301,15 @@ impl VariableSized for PackedGuidAndGuid {
 
 impl MaximumPossibleSized for PackedGuidAndGuid {
     fn maximum_possible_size() -> usize {
-        9 // packed: PackedGuid
+        0
+        + 9 // packed: Guid
         + 8 // guid: Guid
-        + 10 * 9 // static_packed: PackedGuid[10]
-        + 10 * 8 // static_guid: Guid[10]
+        + 90 // static_packed: PackedGuid[10]
+        + 80 // static_guid: Guid[10]
         + 1 // basic1: u8
         + 1 // basic2: u8
-        + 255 * 9 // variable_packed: PackedGuid[basic1]
-        + 255 * 8 // variable_guid: Guid[basic2]
+        + 2304 // variable_packed: PackedGuid[basic1]
+        + 2048 // variable_guid: Guid[basic2]
     }
 }
 

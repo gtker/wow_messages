@@ -110,7 +110,8 @@ impl ConstantSized for CMSG_GROUP_ASSISTANT_LEADER {}
 
 impl MaximumPossibleSized for CMSG_GROUP_ASSISTANT_LEADER {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 1 // set_assistant: u8
     }
 }

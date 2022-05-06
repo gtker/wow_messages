@@ -306,13 +306,15 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
 
 impl VariableSized for SMSG_GMTICKET_GETTICKET {
     fn size(&self) -> usize {
-        self.status.size() // status: GmTicketStatus and subfields
+        0
+        + self.status.size() // status: SMSG_GMTICKET_GETTICKETGmTicketStatus
     }
 }
 
 impl MaximumPossibleSized for SMSG_GMTICKET_GETTICKET {
     fn maximum_possible_size() -> usize {
-        GmTicketStatus::maximum_possible_size() // status: GmTicketStatus
+        0
+        + 275 // status: SMSG_GMTICKET_GETTICKETGmTicketStatus
     }
 }
 

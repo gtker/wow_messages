@@ -109,7 +109,8 @@ impl ConstantSized for CMSG_QUESTLOG_SWAP_QUEST {}
 
 impl MaximumPossibleSized for CMSG_QUESTLOG_SWAP_QUEST {
     fn maximum_possible_size() -> usize {
-        1 // slot1: u8
+        0
+        + 1 // slot1: u8
         + 1 // slot2: u8
     }
 }

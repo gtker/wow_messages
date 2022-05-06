@@ -191,7 +191,8 @@ impl ReadableAndWritable for CMD_REALM_LIST_Server {
 
 impl VariableSized for CMD_REALM_LIST_Server {
     fn size(&self) -> usize {
-        2 // size: u16
+        0
+        + 2 // size: u16
         + 4 // header_padding: u32
         + 1 // number_of_realms: u8
         + self.realms.iter().fold(0, |acc, x| acc + x.size()) // realms: Realm[number_of_realms]
@@ -201,11 +202,7 @@ impl VariableSized for CMD_REALM_LIST_Server {
 
 impl MaximumPossibleSized for CMD_REALM_LIST_Server {
     fn maximum_possible_size() -> usize {
-        2 // size: u16
-        + 4 // header_padding: u32
-        + 1 // number_of_realms: u8
-        + 255 * Realm::maximum_possible_size() // realms: Realm[number_of_realms]
-        + 2 // footer_padding: u16
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

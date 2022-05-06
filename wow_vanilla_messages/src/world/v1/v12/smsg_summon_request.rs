@@ -132,7 +132,8 @@ impl ConstantSized for SMSG_SUMMON_REQUEST {}
 
 impl MaximumPossibleSized for SMSG_SUMMON_REQUEST {
     fn maximum_possible_size() -> usize {
-        8 // summoner_guid: Guid
+        0
+        + 8 // summoner_guid: Guid
         + 4 // zone_id: u32
         + 4 // auto_decline_time_in_msecs: u32
     }

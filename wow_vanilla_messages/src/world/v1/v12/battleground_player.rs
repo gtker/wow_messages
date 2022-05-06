@@ -241,8 +241,9 @@ impl ReadableAndWritable for BattlegroundPlayer {
 
 impl VariableSized for BattlegroundPlayer {
     fn size(&self) -> usize {
-        8 // player: Guid
-        + 4 // rank: PvpRank upcasted to u32
+        0
+        + 8 // player: Guid
+        + 4 // rank: PvpRank
         + 4 // killing_blows: u32
         + 4 // honorable_kills: u32
         + 4 // deaths: u32
@@ -254,14 +255,7 @@ impl VariableSized for BattlegroundPlayer {
 
 impl MaximumPossibleSized for BattlegroundPlayer {
     fn maximum_possible_size() -> usize {
-        8 // player: Guid
-        + PvpRank::maximum_possible_size() // rank: PvpRank
-        + 4 // killing_blows: u32
-        + 4 // honorable_kills: u32
-        + 4 // deaths: u32
-        + 4 // bonus_honor: u32
-        + 4 // amount_of_extra_fields: u32
-        + 4294967295 * core::mem::size_of::<u32>() // fields: u32[amount_of_extra_fields]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

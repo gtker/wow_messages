@@ -109,7 +109,8 @@ impl ConstantSized for SMSG_PLAYED_TIME {}
 
 impl MaximumPossibleSized for SMSG_PLAYED_TIME {
     fn maximum_possible_size() -> usize {
-        4 // total_played_time: u32
+        0
+        + 4 // total_played_time: u32
         + 4 // level_played_time: u32
     }
 }

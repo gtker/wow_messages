@@ -111,8 +111,9 @@ impl ConstantSized for SMSG_INSTANCE_RESET_FAILED {}
 
 impl MaximumPossibleSized for SMSG_INSTANCE_RESET_FAILED {
     fn maximum_possible_size() -> usize {
-        InstanceResetFailedReason::size() // reason: InstanceResetFailedReason
-        + Map::size() // map: Map
+        0
+        + 1 // reason: InstanceResetFailedReason
+        + 4 // map: Map
     }
 }
 

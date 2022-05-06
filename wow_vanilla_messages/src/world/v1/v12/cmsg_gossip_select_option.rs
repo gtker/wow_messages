@@ -192,23 +192,23 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
 
 impl VariableSized for CMSG_GOSSIP_SELECT_OPTION {
     fn size(&self) -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // gossip_list_id: u32
-        + {
-            if let Some(v) = &self.unknown {
-                v.size()
-            } else {
-                0
-            }
-        } // optional unknown
+        + if let Some(unknown) = &self.unknown {
+            0
+            + unknown.code.len() + 1 // code: CString
+        } else {
+            0
+        }
     }
 }
 
 impl MaximumPossibleSized for CMSG_GOSSIP_SELECT_OPTION {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // gossip_list_id: u32
-        + 65536 // optional unknown
     }
 }
 

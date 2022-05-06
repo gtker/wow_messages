@@ -274,13 +274,15 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
 
 impl VariableSized for CMD_AUTH_LOGON_PROOF_Server {
     fn size(&self) -> usize {
-        self.login_result.size() // login_result: LoginResult and subfields
+        0
+        + self.login_result.size() // login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult
     }
 }
 
 impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_Server {
     fn maximum_possible_size() -> usize {
-        LoginResult::maximum_possible_size() // login_result: LoginResult
+        0
+        + 25 // login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult
     }
 }
 

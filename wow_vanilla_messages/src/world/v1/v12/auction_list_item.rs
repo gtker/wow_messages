@@ -364,7 +364,8 @@ impl ConstantSized for AuctionListItem {}
 
 impl MaximumPossibleSized for AuctionListItem {
     fn maximum_possible_size() -> usize {
-        4 // id: u32
+        0
+        + 4 // id: u32
         + 4 // item_entry: u32
         + 4 // item_enchantment: u32
         + 4 // item_random_property_id: u32

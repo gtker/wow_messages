@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_QUESTUPDATE_FAILED {}
 
 impl MaximumPossibleSized for SMSG_QUESTUPDATE_FAILED {
     fn maximum_possible_size() -> usize {
-        4 // quest_id: u32
+        0
+        + 4 // quest_id: u32
     }
 }
 

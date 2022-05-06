@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_SPELL_FAILED_OTHER {}
 
 impl MaximumPossibleSized for SMSG_SPELL_FAILED_OTHER {
     fn maximum_possible_size() -> usize {
-        8 // caster_guid: Guid
+        0
+        + 8 // caster_guid: Guid
         + 4 // id: u32
     }
 }

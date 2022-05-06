@@ -118,15 +118,15 @@ impl MessageBody for SMSG_RAID_INSTANCE_INFO {
 
 impl VariableSized for SMSG_RAID_INSTANCE_INFO {
     fn size(&self) -> usize {
-        4 // amount_of_raid_infos: u32
+        0
+        + 4 // amount_of_raid_infos: u32
         + self.raid_infos.iter().fold(0, |acc, x| acc + RaidInfo::size()) // raid_infos: RaidInfo[amount_of_raid_infos]
     }
 }
 
 impl MaximumPossibleSized for SMSG_RAID_INSTANCE_INFO {
     fn maximum_possible_size() -> usize {
-        4 // amount_of_raid_infos: u32
-        + 4294967295 * RaidInfo::maximum_possible_size() // raid_infos: RaidInfo[amount_of_raid_infos]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -164,8 +164,9 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
 
 impl VariableSized for SMSG_INIT_WORLD_STATES {
     fn size(&self) -> usize {
-        Map::size() // map: Map
-        + Area::size() // area: Area
+        0
+        + 4 // map: Map
+        + 4 // area: Area
         + 2 // amount_of_states: u16
         + self.states.iter().fold(0, |acc, x| acc + WorldState::size()) // states: WorldState[amount_of_states]
     }
@@ -173,10 +174,7 @@ impl VariableSized for SMSG_INIT_WORLD_STATES {
 
 impl MaximumPossibleSized for SMSG_INIT_WORLD_STATES {
     fn maximum_possible_size() -> usize {
-        Map::maximum_possible_size() // map: Map
-        + Area::maximum_possible_size() // area: Area
-        + 2 // amount_of_states: u16
-        + 65535 * WorldState::maximum_possible_size() // states: WorldState[amount_of_states]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

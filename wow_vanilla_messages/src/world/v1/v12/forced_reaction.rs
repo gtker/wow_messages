@@ -99,7 +99,8 @@ impl ConstantSized for ForcedReaction {}
 
 impl MaximumPossibleSized for ForcedReaction {
     fn maximum_possible_size() -> usize {
-        4 // faction_id: u32
+        0
+        + 4 // faction_id: u32
         + 4 // reputation_rank: u32
     }
 }

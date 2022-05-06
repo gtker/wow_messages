@@ -154,7 +154,8 @@ impl ConstantSized for SMSG_PETITION_SHOW_SIGNATURES {}
 
 impl MaximumPossibleSized for SMSG_PETITION_SHOW_SIGNATURES {
     fn maximum_possible_size() -> usize {
-        8 // item_guid: Guid
+        0
+        + 8 // item_guid: Guid
         + 8 // owner_guid: Guid
         + 8 // petition_guid: Guid
         + 1 // amount_of_signatures: u8

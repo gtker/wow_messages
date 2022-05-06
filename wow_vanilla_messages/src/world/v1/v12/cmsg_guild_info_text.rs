@@ -93,13 +93,15 @@ impl MessageBody for CMSG_GUILD_INFO_TEXT {
 
 impl VariableSized for CMSG_GUILD_INFO_TEXT {
     fn size(&self) -> usize {
-        self.guild_info.len() + 1 // guild_info: CString and Null Terminator
+        0
+        + self.guild_info.len() + 1 // guild_info: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GUILD_INFO_TEXT {
     fn maximum_possible_size() -> usize {
-        256 // guild_info: CString
+        0
+        + 256 // guild_info: CString
     }
 }
 

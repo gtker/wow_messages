@@ -109,7 +109,8 @@ impl ConstantSized for MSG_RANDOM_ROLL_Client {}
 
 impl MaximumPossibleSized for MSG_RANDOM_ROLL_Client {
     fn maximum_possible_size() -> usize {
-        4 // minimum: u32
+        0
+        + 4 // minimum: u32
         + 4 // maximum: u32
     }
 }

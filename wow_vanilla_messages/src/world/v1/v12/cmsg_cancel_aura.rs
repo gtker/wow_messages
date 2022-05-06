@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_CANCEL_AURA {}
 
 impl MaximumPossibleSized for CMSG_CANCEL_AURA {
     fn maximum_possible_size() -> usize {
-        4 // id: u32
+        0
+        + 4 // id: u32
     }
 }
 

@@ -143,7 +143,8 @@ impl ConstantSized for QuestObjective {}
 
 impl MaximumPossibleSized for QuestObjective {
     fn maximum_possible_size() -> usize {
-        4 // creature_id: u32
+        0
+        + 4 // creature_id: u32
         + 4 // kill_count: u32
         + 4 // required_item_id: u32
         + 4 // required_item_count: u32

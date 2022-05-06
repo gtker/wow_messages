@@ -109,7 +109,8 @@ impl ConstantSized for CMSG_SET_FACTION_INACTIVE {}
 
 impl MaximumPossibleSized for CMSG_SET_FACTION_INACTIVE {
     fn maximum_possible_size() -> usize {
-        4 // reputation_list_id: u32
+        0
+        + 4 // reputation_list_id: u32
         + 1 // inactive: u8
     }
 }

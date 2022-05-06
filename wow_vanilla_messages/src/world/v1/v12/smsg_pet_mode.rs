@@ -178,9 +178,10 @@ impl ConstantSized for SMSG_PET_MODE {}
 
 impl MaximumPossibleSized for SMSG_PET_MODE {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
-        + PetReactState::size() // react_state: PetReactState
-        + PetCommandState::size() // command_state: PetCommandState
+        0
+        + 8 // guid: Guid
+        + 1 // react_state: PetReactState
+        + 1 // command_state: PetCommandState
         + 1 // unknown1: u8
         + 1 // pet_enabled: u8
     }

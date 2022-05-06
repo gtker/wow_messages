@@ -220,17 +220,19 @@ impl MessageBody for SMSG_LOG_XPGAIN {
 
 impl VariableSized for SMSG_LOG_XPGAIN {
     fn size(&self) -> usize {
-        8 // target_guid: Guid
+        0
+        + 8 // target_guid: Guid
         + 4 // total_exp: u32
-        + self.exp_type.size() // exp_type: ExperienceAwardType and subfields
+        + self.exp_type.size() // exp_type: SMSG_LOG_XPGAINExperienceAwardType
     }
 }
 
 impl MaximumPossibleSized for SMSG_LOG_XPGAIN {
     fn maximum_possible_size() -> usize {
-        8 // target_guid: Guid
+        0
+        + 8 // target_guid: Guid
         + 4 // total_exp: u32
-        + ExperienceAwardType::maximum_possible_size() // exp_type: ExperienceAwardType
+        + 9 // exp_type: SMSG_LOG_XPGAINExperienceAwardType
     }
 }
 

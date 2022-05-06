@@ -110,7 +110,8 @@ impl ConstantSized for SMSG_SPELL_DELAYED {}
 
 impl MaximumPossibleSized for SMSG_SPELL_DELAYED {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
         + 4 // delay_time: u32
     }
 }

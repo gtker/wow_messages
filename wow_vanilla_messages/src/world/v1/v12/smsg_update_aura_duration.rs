@@ -109,7 +109,8 @@ impl ConstantSized for SMSG_UPDATE_AURA_DURATION {}
 
 impl MaximumPossibleSized for SMSG_UPDATE_AURA_DURATION {
     fn maximum_possible_size() -> usize {
-        1 // aura_slot: u8
+        0
+        + 1 // aura_slot: u8
         + 4 // aura_duration: u32
     }
 }

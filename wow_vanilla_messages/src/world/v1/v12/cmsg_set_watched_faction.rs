@@ -87,7 +87,8 @@ impl ConstantSized for CMSG_SET_WATCHED_FACTION {}
 
 impl MaximumPossibleSized for CMSG_SET_WATCHED_FACTION {
     fn maximum_possible_size() -> usize {
-        4 // reputation_id: u32
+        0
+        + 4 // reputation_id: u32
     }
 }
 

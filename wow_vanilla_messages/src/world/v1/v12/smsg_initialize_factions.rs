@@ -118,15 +118,15 @@ impl MessageBody for SMSG_INITIALIZE_FACTIONS {
 
 impl VariableSized for SMSG_INITIALIZE_FACTIONS {
     fn size(&self) -> usize {
-        4 // amount_of_factions: u32
+        0
+        + 4 // amount_of_factions: u32
         + self.factions.iter().fold(0, |acc, x| acc + FactionInitializer::size()) // factions: FactionInitializer[amount_of_factions]
     }
 }
 
 impl MaximumPossibleSized for SMSG_INITIALIZE_FACTIONS {
     fn maximum_possible_size() -> usize {
-        4 // amount_of_factions: u32
-        + 4294967295 * FactionInitializer::maximum_possible_size() // factions: FactionInitializer[amount_of_factions]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

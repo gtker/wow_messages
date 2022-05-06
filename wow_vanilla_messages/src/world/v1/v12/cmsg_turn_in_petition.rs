@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_TURN_IN_PETITION {}
 
 impl MaximumPossibleSized for CMSG_TURN_IN_PETITION {
     fn maximum_possible_size() -> usize {
-        8 // petition_guid: Guid
+        0
+        + 8 // petition_guid: Guid
     }
 }
 

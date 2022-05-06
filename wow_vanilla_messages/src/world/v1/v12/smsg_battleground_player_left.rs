@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_BATTLEGROUND_PLAYER_LEFT {}
 
 impl MaximumPossibleSized for SMSG_BATTLEGROUND_PLAYER_LEFT {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_FAR_SIGHT {}
 
 impl MaximumPossibleSized for CMSG_FAR_SIGHT {
     fn maximum_possible_size() -> usize {
-        FarSightOperation::size() // operation: FarSightOperation
+        0
+        + 1 // operation: FarSightOperation
     }
 }
 

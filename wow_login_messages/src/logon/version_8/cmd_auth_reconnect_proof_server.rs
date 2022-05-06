@@ -117,7 +117,8 @@ impl ConstantSized for CMD_AUTH_RECONNECT_PROOF_Server {}
 
 impl MaximumPossibleSized for CMD_AUTH_RECONNECT_PROOF_Server {
     fn maximum_possible_size() -> usize {
-        LoginResult::size() // result: LoginResult
+        0
+        + 1 // result: LoginResult
         + 2 // padding: u16
     }
 }

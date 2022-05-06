@@ -668,13 +668,15 @@ impl MessageBody for SMSG_CHAR_RENAME {
 
 impl VariableSized for SMSG_CHAR_RENAME {
     fn size(&self) -> usize {
-        self.result.size() // result: WorldResult and subfields
+        0
+        + self.result.size() // result: SMSG_CHAR_RENAMEWorldResult
     }
 }
 
 impl MaximumPossibleSized for SMSG_CHAR_RENAME {
     fn maximum_possible_size() -> usize {
-        WorldResult::maximum_possible_size() // result: WorldResult
+        0
+        + 268 // result: SMSG_CHAR_RENAMEWorldResult
     }
 }
 

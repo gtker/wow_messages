@@ -211,7 +211,8 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
 
 impl VariableSized for MSG_PVP_LOG_DATA_Server {
     fn size(&self) -> usize {
-        self.status.size() // status: BattlegroundEndStatus and subfields
+        0
+        + self.status.size() // status: MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus
         + 4 // amount_of_players: u32
         + self.players.iter().fold(0, |acc, x| acc + x.size()) // players: BattlegroundPlayer[amount_of_players]
     }
@@ -219,9 +220,7 @@ impl VariableSized for MSG_PVP_LOG_DATA_Server {
 
 impl MaximumPossibleSized for MSG_PVP_LOG_DATA_Server {
     fn maximum_possible_size() -> usize {
-        BattlegroundEndStatus::maximum_possible_size() // status: BattlegroundEndStatus
-        + 4 // amount_of_players: u32
-        + 4294967295 * BattlegroundPlayer::maximum_possible_size() // players: BattlegroundPlayer[amount_of_players]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

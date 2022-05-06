@@ -122,7 +122,8 @@ impl ConstantSized for RaidInfo {}
 
 impl MaximumPossibleSized for RaidInfo {
     fn maximum_possible_size() -> usize {
-        Map::size() // map: Map
+        0
+        + 4 // map: Map
         + 4 // reset_time: u32
         + 4 // instance_id: u32
     }

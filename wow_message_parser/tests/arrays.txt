@@ -539,7 +539,8 @@ impl ReadableAndWritable for Arrays {
 
 impl VariableSized for Arrays {
     fn size(&self) -> usize {
-        1 // index: u8
+        0
+        + 1 // index: u8
         + 20 * core::mem::size_of::<u8>() // basic_fixed_array: u8[20]
         + 16 * core::mem::size_of::<u16>() // simple_2byte_fixed_array: u16[16]
         + 16 * core::mem::size_of::<u16>() // simple_2byte_be_fixed_array: u16_be[16]
@@ -557,19 +558,7 @@ impl VariableSized for Arrays {
 
 impl MaximumPossibleSized for Arrays {
     fn maximum_possible_size() -> usize {
-        1 // index: u8
-        + 20 * core::mem::size_of::<u8>() // basic_fixed_array: u8[20]
-        + 16 * core::mem::size_of::<u16>() // simple_2byte_fixed_array: u16[16]
-        + 16 * core::mem::size_of::<u16>() // simple_2byte_be_fixed_array: u16_be[16]
-        + 255 * core::mem::size_of::<u16>() // simple_2byte_variable_array: u16[index]
-        + 16 * core::mem::size_of::<u32>() // simple_4byte_be_fixed_array: u32_be[16]
-        + 255 * core::mem::size_of::<u32>() // simple_4byte_variable_array: u32[index]
-        + 16 * core::mem::size_of::<u64>() // simple_8byte_be_fixed_array: u64_be[16]
-        + 255 * core::mem::size_of::<u64>() // simple_8byte_variable_array: u64[index]
-        + 10 * StructWithAllBuiltInTypes::maximum_possible_size() // complex_fixed_array: StructWithAllBuiltInTypes[10]
-        + 255 * StructWithAllBuiltInTypes::maximum_possible_size() // complex_variable_array: StructWithAllBuiltInTypes[index]
-        + 10 * 256 // fixed_cstring_array: CString[10]
-        + 255 * 256 // variable_cstring_array: CString[index]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

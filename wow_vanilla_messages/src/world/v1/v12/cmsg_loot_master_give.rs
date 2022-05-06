@@ -132,7 +132,8 @@ impl ConstantSized for CMSG_LOOT_MASTER_GIVE {}
 
 impl MaximumPossibleSized for CMSG_LOOT_MASTER_GIVE {
     fn maximum_possible_size() -> usize {
-        8 // loot_guid: Guid
+        0
+        + 8 // loot_guid: Guid
         + 1 // slot_id: u8
         + 8 // target_player_guid: Guid
     }

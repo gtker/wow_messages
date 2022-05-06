@@ -110,7 +110,8 @@ impl ConstantSized for MSG_AUCTION_HELLO_Server {}
 
 impl MaximumPossibleSized for MSG_AUCTION_HELLO_Server {
     fn maximum_possible_size() -> usize {
-        8 // auctioneer: Guid
+        0
+        + 8 // auctioneer: Guid
         + 4 // auction_house_id: u32
     }
 }

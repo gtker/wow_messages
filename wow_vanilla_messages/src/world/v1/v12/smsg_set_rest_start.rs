@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_SET_REST_START {}
 
 impl MaximumPossibleSized for SMSG_SET_REST_START {
     fn maximum_possible_size() -> usize {
-        4 // unknown1: u32
+        0
+        + 4 // unknown1: u32
     }
 }
 

@@ -87,7 +87,8 @@ impl ConstantSized for MSG_LOOKING_FOR_GROUP_Server {}
 
 impl MaximumPossibleSized for MSG_LOOKING_FOR_GROUP_Server {
     fn maximum_possible_size() -> usize {
-        4 // unknown1: u32
+        0
+        + 4 // unknown1: u32
     }
 }
 

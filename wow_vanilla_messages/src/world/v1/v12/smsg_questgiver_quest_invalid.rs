@@ -88,7 +88,8 @@ impl ConstantSized for SMSG_QUESTGIVER_QUEST_INVALID {}
 
 impl MaximumPossibleSized for SMSG_QUESTGIVER_QUEST_INVALID {
     fn maximum_possible_size() -> usize {
-        QuestFailedReason::size() // msg: QuestFailedReason
+        0
+        + 4 // msg: QuestFailedReason
     }
 }
 

@@ -220,7 +220,8 @@ impl ConstantSized for SMSG_AUCTION_BIDDER_NOTIFICATION {}
 
 impl MaximumPossibleSized for SMSG_AUCTION_BIDDER_NOTIFICATION {
     fn maximum_possible_size() -> usize {
-        4 // auction_house_id: u32
+        0
+        + 4 // auction_house_id: u32
         + 4 // auction_id: u32
         + 8 // bidder: Guid
         + 4 // won: u32

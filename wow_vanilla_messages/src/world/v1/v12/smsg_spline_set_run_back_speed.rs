@@ -104,14 +104,16 @@ impl MessageBody for SMSG_SPLINE_SET_RUN_BACK_SPEED {
 
 impl VariableSized for SMSG_SPLINE_SET_RUN_BACK_SPEED {
     fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        0
+        + self.guid.size() // guid: Guid
         + 4 // speed: f32
     }
 }
 
 impl MaximumPossibleSized for SMSG_SPLINE_SET_RUN_BACK_SPEED {
     fn maximum_possible_size() -> usize {
-        9 // guid: PackedGuid
+        0
+        + 9 // guid: Guid
         + 4 // speed: f32
     }
 }

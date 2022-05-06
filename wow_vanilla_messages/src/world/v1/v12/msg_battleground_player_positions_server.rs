@@ -144,7 +144,8 @@ impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
 impl VariableSized for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     fn size(&self) -> usize {
-        4 // amount_of_carriers: u32
+        0
+        + 4 // amount_of_carriers: u32
         + 4 // amount_of_flag_carriers: u32
         + self.flag_carriers.iter().fold(0, |acc, x| acc + BattlegroundPlayerPosition::size()) // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
     }
@@ -152,9 +153,7 @@ impl VariableSized for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
 impl MaximumPossibleSized for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     fn maximum_possible_size() -> usize {
-        4 // amount_of_carriers: u32
-        + 4 // amount_of_flag_carriers: u32
-        + 4294967295 * BattlegroundPlayerPosition::maximum_possible_size() // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

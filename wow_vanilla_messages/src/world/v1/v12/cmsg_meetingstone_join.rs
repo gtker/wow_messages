@@ -88,7 +88,8 @@ impl ConstantSized for CMSG_MEETINGSTONE_JOIN {}
 
 impl MaximumPossibleSized for CMSG_MEETINGSTONE_JOIN {
     fn maximum_possible_size() -> usize {
-        8 // guid: Guid
+        0
+        + 8 // guid: Guid
     }
 }
 

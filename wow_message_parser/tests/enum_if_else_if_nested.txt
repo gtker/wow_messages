@@ -347,15 +347,17 @@ impl ReadableAndWritable for EnumIfElseIfNested {
 
 impl VariableSized for EnumIfElseIfNested {
     fn size(&self) -> usize {
-        self.e.size() // e: SimpleEnum and subfields
-        + self.n.size() // n: NestedEnum and subfields
+        0
+        + self.e.size() // e: EnumIfElseIfNestedSimpleEnum
+        + self.n.size() // n: EnumIfElseIfNestedNestedEnum
     }
 }
 
 impl MaximumPossibleSized for EnumIfElseIfNested {
     fn maximum_possible_size() -> usize {
-        SimpleEnum::maximum_possible_size() // e: SimpleEnum
-        + NestedEnum::maximum_possible_size() // n: NestedEnum
+        0
+        + 2 // e: EnumIfElseIfNestedSimpleEnum
+        + 1 // n: EnumIfElseIfNestedNestedEnum
     }
 }
 

@@ -93,13 +93,15 @@ impl MessageBody for CMSG_GUILD_PROMOTE {
 
 impl VariableSized for CMSG_GUILD_PROMOTE {
     fn size(&self) -> usize {
-        self.player_name.len() + 1 // player_name: CString and Null Terminator
+        0
+        + self.player_name.len() + 1 // player_name: CString
     }
 }
 
 impl MaximumPossibleSized for CMSG_GUILD_PROMOTE {
     fn maximum_possible_size() -> usize {
-        256 // player_name: CString
+        0
+        + 256 // player_name: CString
     }
 }
 

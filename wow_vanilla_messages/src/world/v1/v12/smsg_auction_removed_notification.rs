@@ -131,7 +131,8 @@ impl ConstantSized for SMSG_AUCTION_REMOVED_NOTIFICATION {}
 
 impl MaximumPossibleSized for SMSG_AUCTION_REMOVED_NOTIFICATION {
     fn maximum_possible_size() -> usize {
-        4 // item_id: u32
+        0
+        + 4 // item_id: u32
         + 4 // item_template: u32
         + 4 // random_property_id: u32
     }

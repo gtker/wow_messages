@@ -131,7 +131,8 @@ impl ConstantSized for CMSG_ITEM_TEXT_QUERY {}
 
 impl MaximumPossibleSized for CMSG_ITEM_TEXT_QUERY {
     fn maximum_possible_size() -> usize {
-        4 // item_text_id: u32
+        0
+        + 4 // item_text_id: u32
         + 4 // mail_id: u32
         + 4 // unknown1: u32
     }

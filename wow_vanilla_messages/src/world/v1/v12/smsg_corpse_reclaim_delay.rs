@@ -87,7 +87,8 @@ impl ConstantSized for SMSG_CORPSE_RECLAIM_DELAY {}
 
 impl MaximumPossibleSized for SMSG_CORPSE_RECLAIM_DELAY {
     fn maximum_possible_size() -> usize {
-        4 // delay_in_seconds: u32
+        0
+        + 4 // delay_in_seconds: u32
     }
 }
 

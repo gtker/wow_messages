@@ -90,7 +90,8 @@ impl ConstantSized for CMD_XFER_RESUME {}
 
 impl MaximumPossibleSized for CMD_XFER_RESUME {
     fn maximum_possible_size() -> usize {
-        8 // offset: u64
+        0
+        + 8 // offset: u64
     }
 }
 
