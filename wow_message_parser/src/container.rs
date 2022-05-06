@@ -572,7 +572,7 @@ impl Container {
                                 }
                             }
                             ArrayType::CString => return false,
-                            ArrayType::Guid => return true,
+                            ArrayType::Guid => {}
                             ArrayType::PackedGuid => return false,
                         },
                         ArraySize::Variable(_) => return false,
