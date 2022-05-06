@@ -1,4 +1,4 @@
-use crate::container::{Container, Equation, IfStatement, StructMember};
+use crate::container::{Container, Equation, IfStatement, Sizes, StructMember};
 use crate::file_info::FileInfo;
 use crate::parser::enumerator::DefinerValue;
 use crate::parser::types::objects::Objects;
@@ -17,6 +17,7 @@ pub struct RustMember {
     original_ty: String,
 
     constant_sized: bool,
+    sizes: Sizes,
 
     tags: Tags,
 }
@@ -120,6 +121,7 @@ pub struct RustObject {
     name: String,
     members: Vec<RustMember>,
     optional: Option<RustOptional>,
+    sizes: Sizes,
 
     tests: Vec<TestCase>,
 
@@ -156,6 +158,7 @@ pub fn create_if_statement(
     struct_ty_name: &str,
     tags: &Tags,
     o: &Objects,
+    e: &Container,
     current_scope: &mut Vec<RustMember>,
     parent_scope: &mut Vec<RustMember>,
 ) {
@@ -178,6 +181,7 @@ pub fn create_if_statement(
             struct_ty_name,
             tags,
             o,
+            e,
             &mut if_enumerator_members,
             current_scope,
             &mut None,
@@ -191,6 +195,7 @@ pub fn create_if_statement(
             struct_ty_name,
             tags,
             o,
+            e,
             &mut else_enumerator_members,
             current_scope,
             &mut None,
@@ -265,6 +270,7 @@ pub fn create_if_statement(
             struct_ty_name,
             tags,
             o,
+            e,
             current_scope,
             parent_scope,
         );
@@ -276,6 +282,7 @@ pub fn create_struct_member(
     struct_ty_name: &str,
     tags: &Tags,
     o: &Objects,
+    e: &Container,
     current_scope: &mut Vec<RustMember>,
     parent_scope: &mut Vec<RustMember>,
     optional: &mut Option<RustOptional>,
@@ -391,6 +398,7 @@ pub fn create_struct_member(
                 ty,
                 original_ty: d.ty().str(),
                 constant_sized: definition_constantly_sized,
+                sizes: d.ty().sizes(e, o),
                 tags: tags.clone(),
             });
         }
@@ -400,6 +408,7 @@ pub fn create_struct_member(
                 struct_ty_name,
                 tags,
                 o,
+                e,
                 current_scope,
                 parent_scope,
             );
@@ -413,6 +422,7 @@ pub fn create_struct_member(
                     struct_ty_name,
                     tags,
                     o,
+                    e,
                     &mut members,
                     current_scope,
                     &mut None,
@@ -437,7 +447,16 @@ pub fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
     let mut optional = None;
 
     for m in e.fields() {
-        create_struct_member(m, e.name(), e.tags(), o, &mut v, &mut vec![], &mut optional);
+        create_struct_member(
+            m,
+            e.name(),
+            e.tags(),
+            o,
+            e,
+            &mut v,
+            &mut vec![],
+            &mut optional,
+        );
     }
 
     for m in &mut v {
@@ -448,6 +467,7 @@ pub fn create_rust_object(e: &Container, o: &Objects) -> RustObject {
         name: e.name().to_string(),
         members: v,
         optional,
+        sizes: e.sizes(o),
         tests: e.tests().to_vec(),
         tags: e.tags().clone(),
         file_info: e.file_info().clone(),
