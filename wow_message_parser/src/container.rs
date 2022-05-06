@@ -553,8 +553,17 @@ impl Container {
         fn inner(e: &Container, m: &StructMember, o: &Objects, sizes: &mut Sizes) {
             match m {
                 StructMember::Definition(d) => *sizes += d.ty().sizes(e, o),
+                StructMember::OptionalStatement(optional) => {
+                    let minimum = *sizes.minimum;
+
+                    for m in optional.members() {
+                        inner(e, m, o, sizes);
+                    }
+
+                    // The optional statement doesn't have be be here, so the minimum doesn't get incremented
+                    sizes.set_minimum(minimum);
+                }
                 StructMember::IfStatement(_) => {}
-                StructMember::OptionalStatement(_) => {}
             }
         }
 
@@ -1153,6 +1162,10 @@ impl Sizes {
 
     pub fn maximum(&self) -> usize {
         self.maximum
+    }
+
+    pub fn set_minimum(&mut self, minimum: usize) {
+        self.minimum = minimum;
     }
 }
 
