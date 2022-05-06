@@ -95,6 +95,14 @@ impl IntegerType {
         }
     }
 
+    pub fn smallest_value(&self) -> usize {
+        0
+    }
+
+    pub fn largest_value(&self) -> usize {
+        2_usize.pow(8 * self.size() as u32)
+    }
+
     pub fn str(&self) -> &str {
         match self {
             IntegerType::U8 => "u8",

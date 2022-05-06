@@ -16,6 +16,7 @@ use crate::rust_printer::{
 };
 use crate::test_case::TestCase;
 use crate::LOGIN_LOGON_VERSIONS;
+use std::ops::AddAssign;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd)]
 pub enum ContainerType {
@@ -546,6 +547,23 @@ impl Container {
 
     pub fn tags(&self) -> &Tags {
         &self.kvs
+    }
+
+    pub fn sizes(&self, o: &Objects) -> Sizes {
+        fn inner(e: &Container, m: &StructMember, o: &Objects, sizes: &mut Sizes) {
+            match m {
+                StructMember::Definition(d) => *sizes += d.ty().sizes(e, o),
+                StructMember::IfStatement(_) => {}
+                StructMember::OptionalStatement(_) => {}
+            }
+        }
+
+        let mut sizes = Sizes::new();
+        for m in self.fields() {
+            inner(self, m, o, &mut sizes);
+        }
+
+        sizes
     }
 
     pub fn has_constant_size(&self, o: &Objects) -> bool {
@@ -1095,6 +1113,52 @@ impl Container {
 
     fn add_nested_types(&mut self, nested_types: RustStructComplexTree) {
         self.nested_types = Some(nested_types);
+    }
+}
+
+pub struct Sizes {
+    minimum: usize,
+    maximum: usize,
+}
+
+pub const AURA_MASK_MAX_SIZE: u8 = 4 + 32 * 4;
+pub const AURA_MASK_MIN_SIZE: u8 = 4;
+// TODO AuraMask/UpdateMask sizes
+pub const UPDATE_MASK_MAX_SIZE: u8 = 1;
+pub const UPDATE_MASK_MIN_SIZE: u8 = 1;
+pub const PACKED_GUID_MAX_SIZE: u8 = 9;
+pub const PACKED_GUID_MIN_SIZE: u8 = 2;
+pub const GUID_SIZE: u8 = core::mem::size_of::<u64>() as u8;
+
+impl Sizes {
+    pub fn new() -> Self {
+        Self {
+            minimum: 0,
+            maximum: 0,
+        }
+    }
+
+    pub fn inc(&mut self, minimum: usize, maximum: usize) {
+        self.minimum = self.minimum.saturating_add(minimum);
+        self.maximum = self.maximum.saturating_add(maximum);
+    }
+
+    pub fn inc_both(&mut self, v: usize) {
+        self.inc(v, v);
+    }
+
+    pub fn minimum(&self) -> usize {
+        self.minimum
+    }
+
+    pub fn maximum(&self) -> usize {
+        self.maximum
+    }
+}
+
+impl AddAssign for Sizes {
+    fn add_assign(&mut self, rhs: Self) {
+        self.inc(rhs.minimum, rhs.maximum);
     }
 }
 

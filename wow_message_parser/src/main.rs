@@ -37,6 +37,7 @@ const SKIP_STR: &str = "skip_codegen";
 const LOGIN_LOGON_VERSIONS: &str = "login_logon_versions";
 
 // Also used in /utils.rs
+const CSTRING_SMALLEST_ALLOWED: usize = 1;
 const CSTRING_LARGEST_ALLOWED: usize = 256;
 
 // Also used in auth.pest
