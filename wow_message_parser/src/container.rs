@@ -554,7 +554,7 @@ impl Container {
             match m {
                 StructMember::Definition(d) => *sizes += d.ty().sizes(e, o),
                 StructMember::OptionalStatement(optional) => {
-                    let minimum = *sizes.minimum;
+                    let minimum = sizes.minimum;
 
                     for m in optional.members() {
                         inner(e, m, o, sizes);
@@ -563,7 +563,47 @@ impl Container {
                     // The optional statement doesn't have be be here, so the minimum doesn't get incremented
                     sizes.set_minimum(minimum);
                 }
-                StructMember::IfStatement(_) => {}
+                StructMember::IfStatement(statement) => {
+                    let mut if_sizes = Sizes::new();
+
+                    for m in statement.members() {
+                        inner(e, m, o, &mut if_sizes);
+                    }
+
+                    let mut smallest_sizes = if_sizes;
+                    let mut largest_sizes = if_sizes;
+
+                    let mut else_if_sizes;
+
+                    for elseif in statement.else_ifs() {
+                        else_if_sizes = Sizes::new();
+
+                        for m in elseif.members() {
+                            inner(e, m, o, &mut else_if_sizes);
+                        }
+
+                        if else_if_sizes.minimum() < smallest_sizes.minimum() {
+                            smallest_sizes = else_if_sizes;
+                        }
+                        if else_if_sizes.maximum() > largest_sizes.maximum() {
+                            largest_sizes = else_if_sizes;
+                        }
+                    }
+
+                    else_if_sizes = Sizes::new();
+                    for m in &statement.else_statement_members {
+                        inner(e, m, o, &mut else_if_sizes);
+                    }
+
+                    if else_if_sizes.minimum() < smallest_sizes.minimum() {
+                        smallest_sizes = else_if_sizes;
+                    }
+                    if else_if_sizes.maximum() > largest_sizes.maximum() {
+                        largest_sizes = else_if_sizes;
+                    }
+
+                    sizes.inc(smallest_sizes.minimum(), largest_sizes.maximum());
+                }
             }
         }
 
@@ -1125,6 +1165,7 @@ impl Container {
     }
 }
 
+#[derive(Debug, Copy, Clone)]
 pub struct Sizes {
     minimum: usize,
     maximum: usize,
