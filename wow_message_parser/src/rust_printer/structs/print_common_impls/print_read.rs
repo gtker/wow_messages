@@ -9,7 +9,9 @@ use crate::rust_printer::new_enums::{
     IfStatementType, NewEnumStructMember, NewEnumerator, NewIfStatement,
 };
 use crate::rust_printer::rust_view::RustType;
-use crate::rust_printer::structs::print_common_impls::print_size_of_ty;
+use crate::rust_printer::structs::print_common_impls::{
+    print_size_of_ty, print_size_of_ty_rust_view,
+};
 use crate::rust_printer::Writer;
 use crate::UTILITY_PATH;
 
@@ -18,7 +20,6 @@ fn print_read_array(
     array: &Array,
     e: &Container,
     d: &StructMemberDefinition,
-    o: &Objects,
     prefix: &str,
     postfix: &str,
 ) {
@@ -212,7 +213,7 @@ fn print_read_array(
             s.closing_curly_newline()
         }
         ArraySize::Endless => {
-            print_current_size(s, e, d, o);
+            print_current_size(s, e, d);
 
             s.wln(format!(
                 "let mut {name} = Vec::with_capacity(body_size as usize - current_size);",
@@ -275,44 +276,57 @@ fn print_read_array(
     }
 }
 
-fn print_current_size(s: &mut Writer, e: &Container, d: &StructMemberDefinition, o: &Objects) {
+fn print_current_size(s: &mut Writer, e: &Container, d: &StructMemberDefinition) {
     s.body_closing_with(
         "let mut current_size =",
         |s| {
-            for (i, size) in e.nested_types().declarations().iter().enumerate() {
-                if size.name() == d.name() {
+            for (i, m) in e.rust_object().members().iter().enumerate() {
+                if m.name() == d.name() {
+                    // Fields after the endless array should not be counted here
                     break;
                 }
+
                 if i != 0 {
                     s.w("+ ");
                 } else {
                     s.w("");
                 }
 
-                let array_inner_constant = match d.ty() {
-                    Type::Array(array) => match array.ty() {
-                        ArrayType::Integer(_) => true,
-                        ArrayType::Complex(ident) => o.type_has_constant_size(&Type::Identifier {
-                            s: ident.clone(),
-                            upcast: None,
-                        }),
-                        ArrayType::CString => false,
-                        ArrayType::Guid => true,
-                        ArrayType::PackedGuid => false,
-                    },
-                    _ => false,
-                };
+                // Complex enums are not fully formed yet so they do not have a .size()
+                // method and they can't have one because enums can be upcast
+                match m.ty() {
+                    RustType::Enum {
+                        is_simple,
+                        upcast,
+                        int_ty,
+                        ..
+                    } => {
+                        if !is_simple {
+                            let int_ty = if let Some(upcast) = upcast {
+                                upcast
+                            } else {
+                                int_ty
+                            };
+                            s.w_no_indent(int_ty.size().to_string());
+                            s.wln_no_indent(format!(" // {}: {}", m.name(), m.ty().str()));
+                            continue;
+                        }
+                    }
+                    RustType::Flag {
+                        is_simple, int_ty, ..
+                    } => {
+                        if !is_simple {
+                            s.w_no_indent(int_ty.size().to_string());
+                            s.wln_no_indent(format!(" // {}: {}", m.name(), m.ty().str()));
+                            continue;
+                        }
+                    }
+                    _ => {}
+                }
 
-                print_size_of_ty(
-                    s,
-                    size.ty(),
-                    size.name(),
-                    true,
-                    true,
-                    array_inner_constant,
-                    "",
-                    &size.ty().str(),
-                );
+                print_size_of_ty_rust_view(s, m, "");
+
+                s.wln_no_indent(format!(" // {}: {}", m.name(), m.ty().str()));
             }
         },
         ";",
@@ -398,7 +412,7 @@ fn print_read_definition(
             s.newline();
         }
         Type::Array(array) => {
-            print_read_array(s, array, e, d, o, prefix, postfix);
+            print_read_array(s, array, e, d, prefix, postfix);
         }
         Type::Identifier { s: ty, upcast } => {
             if o.get_object_type_of(ty, e.tags()) == ObjectType::Enum {

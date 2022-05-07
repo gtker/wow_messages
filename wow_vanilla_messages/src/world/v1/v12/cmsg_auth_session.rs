@@ -58,7 +58,7 @@ impl MessageBody for CMSG_AUTH_SESSION {
         let mut current_size = {
             4 // build: u32
             + 4 // server_id: u32
-            + username.len() + 1 // username: CString and Null Terminator
+            + username.len() + 1 // username: CString
             + 4 // client_seed: u32
             + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
             + 4 // decompressed_addon_info_size: u32
@@ -138,7 +138,7 @@ impl MessageBody for CMSG_AUTH_SESSION {
         let mut current_size = {
             4 // build: u32
             + 4 // server_id: u32
-            + username.len() + 1 // username: CString and Null Terminator
+            + username.len() + 1 // username: CString
             + 4 // client_seed: u32
             + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
             + 4 // decompressed_addon_info_size: u32
@@ -218,7 +218,7 @@ impl MessageBody for CMSG_AUTH_SESSION {
         let mut current_size = {
             4 // build: u32
             + 4 // server_id: u32
-            + username.len() + 1 // username: CString and Null Terminator
+            + username.len() + 1 // username: CString
             + 4 // client_seed: u32
             + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
             + 4 // decompressed_addon_info_size: u32

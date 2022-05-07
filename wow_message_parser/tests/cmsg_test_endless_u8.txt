@@ -39,7 +39,7 @@ impl MessageBody for CMSG_TEST_ENDLESS_U8 {
 
         // endless: u8[-]
         let mut current_size = {
-            c_string.len() + 1 // c_string: CString and Null Terminator
+            c_string.len() + 1 // c_string: CString
             + 1 // b_u8: u8
         };
         let mut endless = Vec::with_capacity(body_size as usize - current_size);
@@ -84,7 +84,7 @@ impl MessageBody for CMSG_TEST_ENDLESS_U8 {
 
         // endless: u8[-]
         let mut current_size = {
-            c_string.len() + 1 // c_string: CString and Null Terminator
+            c_string.len() + 1 // c_string: CString
             + 1 // b_u8: u8
         };
         let mut endless = Vec::with_capacity(body_size as usize - current_size);
@@ -129,7 +129,7 @@ impl MessageBody for CMSG_TEST_ENDLESS_U8 {
 
         // endless: u8[-]
         let mut current_size = {
-            c_string.len() + 1 // c_string: CString and Null Terminator
+            c_string.len() + 1 // c_string: CString
             + 1 // b_u8: u8
         };
         let mut endless = Vec::with_capacity(body_size as usize - current_size);

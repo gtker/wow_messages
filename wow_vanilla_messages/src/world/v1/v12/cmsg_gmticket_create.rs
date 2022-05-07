@@ -67,13 +67,13 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
 
                 // compressed_chat_data: u8[-]
                 let mut current_size = {
-                    GmTicketType::size() // category: GmTicketType
-                    + Map::size() // map: Map
+                    1 // category: CMSG_GMTICKET_CREATEGmTicketType
+                    + 4 // map: Map
                     + 4 // position_x: f32
                     + 4 // position_y: f32
                     + 4 // position_z: f32
-                    + message.len() + 1 // message: CString and Null Terminator
-                    + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString and Null Terminator
+                    + message.len() + 1 // message: CString
+                    + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
                 };
                 let mut compressed_chat_data = Vec::with_capacity(body_size as usize - current_size);
                 while current_size < (body_size as usize) {
@@ -200,13 +200,13 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
 
                 // compressed_chat_data: u8[-]
                 let mut current_size = {
-                    GmTicketType::size() // category: GmTicketType
-                    + Map::size() // map: Map
+                    1 // category: CMSG_GMTICKET_CREATEGmTicketType
+                    + 4 // map: Map
                     + 4 // position_x: f32
                     + 4 // position_y: f32
                     + 4 // position_z: f32
-                    + message.len() + 1 // message: CString and Null Terminator
-                    + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString and Null Terminator
+                    + message.len() + 1 // message: CString
+                    + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
                 };
                 let mut compressed_chat_data = Vec::with_capacity(body_size as usize - current_size);
                 while current_size < (body_size as usize) {
@@ -333,13 +333,13 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
 
                 // compressed_chat_data: u8[-]
                 let mut current_size = {
-                    GmTicketType::size() // category: GmTicketType
-                    + Map::size() // map: Map
+                    1 // category: CMSG_GMTICKET_CREATEGmTicketType
+                    + 4 // map: Map
                     + 4 // position_x: f32
                     + 4 // position_y: f32
                     + 4 // position_z: f32
-                    + message.len() + 1 // message: CString and Null Terminator
-                    + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString and Null Terminator
+                    + message.len() + 1 // message: CString
+                    + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
                 };
                 let mut compressed_chat_data = Vec::with_capacity(body_size as usize - current_size);
                 while current_size < (body_size as usize) {
