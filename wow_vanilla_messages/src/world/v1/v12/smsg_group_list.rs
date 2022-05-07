@@ -57,8 +57,8 @@ impl MessageBody for SMSG_GROUP_LIST {
 
         // optional group_not_empty
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
-            + GroupType::size() // group_type: GroupType
+            0
+            + 1 // group_type: GroupType
             + 1 // own_flags: u8
             + 4 // amount_of_members: u32
             + members.iter().fold(0, |acc, x| acc + x.size()) // members: GroupListMember[amount_of_members]
@@ -149,8 +149,8 @@ impl MessageBody for SMSG_GROUP_LIST {
 
         // optional group_not_empty
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
-            + GroupType::size() // group_type: GroupType
+            0
+            + 1 // group_type: GroupType
             + 1 // own_flags: u8
             + 4 // amount_of_members: u32
             + members.iter().fold(0, |acc, x| acc + x.size()) // members: GroupListMember[amount_of_members]
@@ -241,8 +241,8 @@ impl MessageBody for SMSG_GROUP_LIST {
 
         // optional group_not_empty
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
-            + GroupType::size() // group_type: GroupType
+            0
+            + 1 // group_type: GroupType
             + 1 // own_flags: u8
             + 4 // amount_of_members: u32
             + members.iter().fold(0, |acc, x| acc + x.size()) // members: GroupListMember[amount_of_members]

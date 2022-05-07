@@ -35,8 +35,8 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
 
         // optional has_transport
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
-            + Map::size() // map: Map
+            0
+            + 4 // map: Map
         };
         let has_transport = if current_size < body_size as usize {
             // transport: u32
@@ -84,8 +84,8 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
 
         // optional has_transport
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
-            + Map::size() // map: Map
+            0
+            + 4 // map: Map
         };
         let has_transport = if current_size < body_size as usize {
             // transport: u32
@@ -133,8 +133,8 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
 
         // optional has_transport
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
-            + Map::size() // map: Map
+            0
+            + 4 // map: Map
         };
         let has_transport = if current_size < body_size as usize {
             // transport: u32

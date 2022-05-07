@@ -39,7 +39,7 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
 
         // optional unknown
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
             + 8 // guid: Guid
             + 4 // gossip_list_id: u32
         };
@@ -92,7 +92,7 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
 
         // optional unknown
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
             + 8 // guid: Guid
             + 4 // gossip_list_id: u32
         };
@@ -145,7 +145,7 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
 
         // optional unknown
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
             + 8 // guid: Guid
             + 4 // gossip_list_id: u32
         };

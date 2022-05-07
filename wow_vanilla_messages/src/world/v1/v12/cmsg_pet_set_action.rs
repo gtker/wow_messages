@@ -43,7 +43,7 @@ impl MessageBody for CMSG_PET_SET_ACTION {
 
         // optional extra
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
             + 8 // guid: Guid
             + 4 // position1: u32
             + 4 // data1: u32
@@ -108,7 +108,7 @@ impl MessageBody for CMSG_PET_SET_ACTION {
 
         // optional extra
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
             + 8 // guid: Guid
             + 4 // position1: u32
             + 4 // data1: u32
@@ -173,7 +173,7 @@ impl MessageBody for CMSG_PET_SET_ACTION {
 
         // optional extra
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
             + 8 // guid: Guid
             + 4 // position1: u32
             + 4 // data1: u32

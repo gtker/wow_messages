@@ -34,7 +34,7 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
 
         // optional found
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
             + 4 // creature_entry: u32
         };
         let found = if current_size < body_size as usize {
@@ -182,7 +182,7 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
 
         // optional found
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
             + 4 // creature_entry: u32
         };
         let found = if current_size < body_size as usize {
@@ -330,7 +330,7 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
 
         // optional found
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
             + 4 // creature_entry: u32
         };
         let found = if current_size < body_size as usize {

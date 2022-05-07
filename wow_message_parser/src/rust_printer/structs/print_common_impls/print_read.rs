@@ -9,9 +9,7 @@ use crate::rust_printer::new_enums::{
     IfStatementType, NewEnumStructMember, NewEnumerator, NewIfStatement,
 };
 use crate::rust_printer::rust_view::RustType;
-use crate::rust_printer::structs::print_common_impls::{
-    print_size_of_ty, print_size_of_ty_rust_view,
-};
+use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
 use crate::rust_printer::Writer;
 use crate::UTILITY_PATH;
 
@@ -517,51 +515,12 @@ fn print_read_field(
             s.body_closing_with(
                 "let current_size =",
                 |s| {
-                    // TODO: Make this only show up when no fields are present
-                    s.wln("0 // If no fields are present, TODO remove when not needed");
+                    s.wln("0");
 
-                    for size in e.fields() {
-                        let size = match size {
-                            StructMember::Definition(d) => d,
-                            StructMember::IfStatement(_) => panic!(),
-                            StructMember::OptionalStatement(opt) => {
-                                if opt.name() == optional.name() {
-                                    break;
-                                }
-                                panic!()
-                            }
-                        };
-                        if size.name() == optional.name() {
-                            break;
-                        }
+                    for m in e.rust_object().members() {
                         s.w("+ ");
 
-                        let array_inner_constant = match size.ty() {
-                            Type::Array(array) => match array.ty() {
-                                ArrayType::Integer(_) => true,
-                                ArrayType::Complex(ident) => {
-                                    o.type_has_constant_size(&Type::Identifier {
-                                        s: ident.clone(),
-                                        upcast: None,
-                                    })
-                                }
-                                ArrayType::CString => false,
-                                ArrayType::Guid => true,
-                                ArrayType::PackedGuid => false,
-                            },
-                            _ => false,
-                        };
-
-                        print_size_of_ty(
-                            s,
-                            size.ty(),
-                            size.name(),
-                            true,
-                            true,
-                            array_inner_constant,
-                            "",
-                            &size.ty().str(),
-                        );
+                        print_size_of_ty_rust_view(s, m, "");
                     }
                 },
                 ";",

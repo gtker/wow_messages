@@ -39,8 +39,8 @@ impl MessageBody for CMSG_TEST_OPTIONAL {
 
         // optional server
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
-            + c_string.len() + 1 // c_string: CString and Null Terminator
+            0
+            + c_string.len() + 1 // c_string: CString
             + 1 // b_u8: u8
         };
         let server = if current_size < body_size as usize {
@@ -92,8 +92,8 @@ impl MessageBody for CMSG_TEST_OPTIONAL {
 
         // optional server
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
-            + c_string.len() + 1 // c_string: CString and Null Terminator
+            0
+            + c_string.len() + 1 // c_string: CString
             + 1 // b_u8: u8
         };
         let server = if current_size < body_size as usize {
@@ -145,8 +145,8 @@ impl MessageBody for CMSG_TEST_OPTIONAL {
 
         // optional server
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
-            + c_string.len() + 1 // c_string: CString and Null Terminator
+            0
+            + c_string.len() + 1 // c_string: CString
             + 1 // b_u8: u8
         };
         let server = if current_size < body_size as usize {

@@ -30,7 +30,7 @@ impl MessageBody for CMSG_TOGGLE_PVP {
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // optional set
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
         };
         let set = if current_size < body_size as usize {
             // enable_pvp: u8
@@ -64,7 +64,7 @@ impl MessageBody for CMSG_TOGGLE_PVP {
     async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // optional set
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
         };
         let set = if current_size < body_size as usize {
             // enable_pvp: u8
@@ -98,7 +98,7 @@ impl MessageBody for CMSG_TOGGLE_PVP {
     async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // optional set
         let current_size = {
-            0 // If no fields are present, TODO remove when not needed
+            0
         };
         let set = if current_size < body_size as usize {
             // enable_pvp: u8
