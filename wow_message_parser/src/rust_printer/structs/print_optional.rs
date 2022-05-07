@@ -30,8 +30,6 @@ fn print_impls(s: &mut Writer, optional: &RustOptional) {
             }
 
             print_size_of_ty_rust_view(s, m, "self.");
-
-            s.wln_no_indent(m.size_comment());
         }
     });
 

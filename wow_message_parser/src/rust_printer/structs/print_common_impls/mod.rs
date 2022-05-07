@@ -407,6 +407,7 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
         },
     };
     s.w_no_indent(str);
+    s.wln_no_indent(m.size_comment());
 }
 
 fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
@@ -447,12 +448,6 @@ fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
                     s.w("+ ");
 
                     print_size_of_ty_rust_view(s, m, prefix);
-
-                    s.wln_no_indent(format!(
-                        " // {name}: {ty}",
-                        name = m.name(),
-                        ty = m.ty().str(),
-                    ));
                 }
 
                 if let Some(optional) = r.optional() {
@@ -470,12 +465,6 @@ fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
                                 s.w("+ ");
 
                                 print_size_of_ty_rust_view(s, m, &prefix);
-
-                                s.wln_no_indent(format!(
-                                    " // {name}: {ty}",
-                                    name = m.name(),
-                                    ty = m.ty().str(),
-                                ));
                             }
                         },
                         |s| {

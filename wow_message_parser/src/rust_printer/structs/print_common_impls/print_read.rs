@@ -311,8 +311,6 @@ fn print_size_before_variable(s: &mut Writer, e: &Container, variable_name: &str
                 }
 
                 print_size_of_ty_rust_view(s, m, "");
-
-                s.wln_no_indent(m.size_comment());
             }
         },
         ";",
