@@ -213,7 +213,7 @@ fn print_read_array(
             s.closing_curly_newline()
         }
         ArraySize::Endless => {
-            print_current_size(s, e, d);
+            print_size_before_variable(s, e, d.name());
 
             s.wln(format!(
                 "let mut {name} = Vec::with_capacity(body_size as usize - current_size);",
@@ -276,12 +276,12 @@ fn print_read_array(
     }
 }
 
-fn print_current_size(s: &mut Writer, e: &Container, d: &StructMemberDefinition) {
+fn print_size_before_variable(s: &mut Writer, e: &Container, variable_name: &str) {
     s.body_closing_with(
         "let mut current_size =",
         |s| {
             for (i, m) in e.rust_object().members().iter().enumerate() {
-                if m.name() == d.name() {
+                if m.name() == variable_name {
                     // Fields after the endless array should not be counted here
                     break;
                 }
