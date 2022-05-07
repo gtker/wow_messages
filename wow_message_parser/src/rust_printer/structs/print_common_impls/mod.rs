@@ -312,7 +312,7 @@ fn print_comment_for_size_of_ty(
     s.wln_no_indent("");
 }
 
-fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) {
+pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) {
     let str = match m.ty() {
         RustType::Integer(i) => i.size().to_string(),
         RustType::Floating(f) => f.size().to_string(),

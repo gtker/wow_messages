@@ -247,7 +247,7 @@ pub struct CMSG_GOSSIP_SELECT_OPTION_unknown {
 
 impl CMSG_GOSSIP_SELECT_OPTION_unknown {
     pub fn size(&self) -> usize {
-        self.code.len() + 1 // code: CString and Null Terminator
+        self.code.len() + 1 // code: CString
     }
 }
 

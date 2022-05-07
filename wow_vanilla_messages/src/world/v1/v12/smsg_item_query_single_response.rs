@@ -1590,18 +1590,18 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub fn size(&self) -> usize {
-        4 // item_class: ItemClass upcasted to u32
+        4 // item_class: ItemClass
         + 4 // item_sub_class: u32
-        + self.name1.len() + 1 // name1: CString and Null Terminator
-        + self.name2.len() + 1 // name2: CString and Null Terminator
-        + self.name3.len() + 1 // name3: CString and Null Terminator
-        + self.name4.len() + 1 // name4: CString and Null Terminator
+        + self.name1.len() + 1 // name1: CString
+        + self.name2.len() + 1 // name2: CString
+        + self.name3.len() + 1 // name3: CString
+        + self.name4.len() + 1 // name4: CString
         + 4 // item_display_info: u32
-        + 4 // quality: ItemQuality upcasted to u32
+        + 4 // quality: ItemQuality
         + 4 // flags: u32
         + 8 // buy_price: f64
         + 8 // sell_price: f64
-        + InventoryType::size() // inventory_type: InventoryType
+        + 1 // inventory_type: InventoryType
         + 4 // allowed_class: u32
         + 4 // allowed_race: u32
         + 4 // item_level: u32
@@ -1630,7 +1630,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // ranged_range_modification: f32
         + 5 * ItemSpells::size() // spells: ItemSpells[5]
         + 4 // bonding: u32
-        + self.description.len() + 1 // description: CString and Null Terminator
+        + self.description.len() + 1 // description: CString
         + 4 // page_text: u32
         + 4 // language_id: u32
         + 4 // page_material: u32
@@ -1642,8 +1642,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // block: u32
         + 4 // item_set: u32
         + 4 // max_durability: u32
-        + Area::size() // area: Area
-        + Map::size() // map: Map
+        + 4 // area: Area
+        + 4 // map: Map
         + 4 // bag_family: u32
     }
 }

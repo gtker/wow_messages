@@ -436,11 +436,11 @@ impl SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
     pub fn size(&self) -> usize {
         4 // info_type: u32
         + 4 // display_id: u32
-        + self.name1.len() + 1 // name1: CString and Null Terminator
-        + self.name2.len() + 1 // name2: CString and Null Terminator
-        + self.name3.len() + 1 // name3: CString and Null Terminator
-        + self.name4.len() + 1 // name4: CString and Null Terminator
-        + self.name5.len() + 1 // name5: CString and Null Terminator
+        + self.name1.len() + 1 // name1: CString
+        + self.name2.len() + 1 // name2: CString
+        + self.name3.len() + 1 // name3: CString
+        + self.name4.len() + 1 // name4: CString
+        + self.name5.len() + 1 // name5: CString
         + 6 * core::mem::size_of::<u32>() // raw_data: u32[6]
     }
 }

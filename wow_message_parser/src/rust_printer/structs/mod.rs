@@ -29,14 +29,8 @@ pub fn print_struct(e: &Container, o: &Objects) -> Writer {
 
     print_tests::print_tests(&mut s, e, o);
 
-    for field in e.fields() {
-        match field {
-            StructMember::Definition(_) => {}
-            StructMember::IfStatement(_) => {}
-            StructMember::OptionalStatement(optional) => {
-                print_optional::print_optional(&mut s, e, optional, o);
-            }
-        }
+    if let Some(optional) = e.rust_object().optional() {
+        print_optional::print_optional(&mut s, optional);
     }
 
     s
