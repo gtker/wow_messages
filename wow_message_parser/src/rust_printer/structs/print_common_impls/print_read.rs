@@ -296,23 +296,9 @@ fn print_current_size(s: &mut Writer, e: &Container, d: &StructMemberDefinition)
                 // method and they can't have one because enums can be upcast
                 match m.ty() {
                     RustType::Enum {
-                        is_simple,
-                        upcast,
-                        int_ty,
-                        ..
-                    } => {
-                        if !is_simple {
-                            let int_ty = if let Some(upcast) = upcast {
-                                upcast
-                            } else {
-                                int_ty
-                            };
-                            s.w_no_indent(int_ty.size().to_string());
-                            s.wln_no_indent(format!(" // {}: {}", m.name(), m.ty().str()));
-                            continue;
-                        }
+                        is_simple, int_ty, ..
                     }
-                    RustType::Flag {
+                    | RustType::Flag {
                         is_simple, int_ty, ..
                     } => {
                         if !is_simple {

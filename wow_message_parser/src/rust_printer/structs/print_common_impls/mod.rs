@@ -328,24 +328,9 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
             format!("{prefixes}size()", prefixes = prefixes,)
         }
         RustType::Enum {
-            upcast,
-            is_simple,
-            int_ty,
-            ..
-        } => {
-            if !is_simple {
-                format!("{prefix}{name}.size()", name = m.name(), prefix = prefix)
-            } else {
-                let ty = if let Some(upcast) = upcast {
-                    upcast
-                } else {
-                    int_ty
-                };
-
-                ty.size().to_string()
-            }
+            is_simple, int_ty, ..
         }
-        RustType::Flag {
+        | RustType::Flag {
             is_simple, int_ty, ..
         } => {
             if !is_simple {

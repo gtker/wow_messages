@@ -84,7 +84,6 @@ pub enum RustType {
         ty_name: String,
         enumerators: Vec<RustEnumerator>,
         int_ty: IntegerType,
-        upcast: Option<IntegerType>,
         is_simple: bool,
     },
     Flag {
@@ -402,12 +401,16 @@ pub fn create_struct_member(
                     match o.get_object_type_of(s, tags) {
                         ObjectType::Enum => {
                             let enumerators = add_types();
+                            let int_ty = if let Some(upcast) = upcast {
+                                upcast.clone()
+                            } else {
+                                o.get_definer(s, tags).ty().clone()
+                            };
 
                             RustType::Enum {
                                 ty_name: s.clone(),
                                 enumerators,
-                                int_ty: o.get_definer(s, tags).ty().clone(),
-                                upcast: upcast.clone(),
+                                int_ty,
                                 is_simple: true,
                             }
                         }
