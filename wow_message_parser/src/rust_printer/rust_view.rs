@@ -42,6 +42,10 @@ impl RustMember {
     pub fn original_ty(&self) -> &str {
         &self.original_ty
     }
+
+    pub fn size_comment(&self) -> String {
+        format!(" // {}: {}", self.name(), self.ty().str())
+    }
 }
 
 #[derive(Debug, Clone)]

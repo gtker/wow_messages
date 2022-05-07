@@ -303,7 +303,7 @@ fn print_current_size(s: &mut Writer, e: &Container, d: &StructMemberDefinition)
                     } => {
                         if !is_simple {
                             s.w_no_indent(int_ty.size().to_string());
-                            s.wln_no_indent(format!(" // {}: {}", m.name(), m.ty().str()));
+                            s.wln_no_indent(m.size_comment());
                             continue;
                         }
                     }
@@ -312,7 +312,7 @@ fn print_current_size(s: &mut Writer, e: &Container, d: &StructMemberDefinition)
 
                 print_size_of_ty_rust_view(s, m, "");
 
-                s.wln_no_indent(format!(" // {}: {}", m.name(), m.ty().str()));
+                s.wln_no_indent(m.size_comment());
             }
         },
         ";",
