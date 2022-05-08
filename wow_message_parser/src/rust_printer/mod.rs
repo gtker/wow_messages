@@ -274,10 +274,6 @@ impl Writer {
         self.open_curly("Box::pin(async move");
     }
 
-    fn print_async_impl_readable_and_writable_write_closing(&mut self) {
-        self.closing_curly_with(")"); // Box::pin
-    }
-
     fn print_async_impl_readable_and_writable_read_header(&mut self, it: ImplType) {
         self.wln(format!("fn {}read<'life0, 'async_trait, R>(", it.prefix()));
 
@@ -305,10 +301,6 @@ impl Writer {
 
         self.open_curly("");
         self.open_curly("Box::pin(async move");
-    }
-
-    fn print_async_impl_readable_and_writable_read_closing(&mut self) {
-        self.closing_curly_with(")"); // Box::pin
     }
 
     pub fn impl_read_and_writable_with_error<
@@ -348,7 +340,7 @@ impl Writer {
 
             read_function(self, it);
             if it.is_async() {
-                self.print_async_impl_readable_and_writable_read_closing();
+                self.closing_curly_with(")"); // Box::pin
             }
             self.closing_curly_newline();
 
@@ -366,7 +358,7 @@ impl Writer {
             write_function(self, it);
 
             if it.is_async() {
-                self.print_async_impl_readable_and_writable_write_closing();
+                self.closing_curly_with(")"); // Box::pin
             }
 
             self.closing_curly_newline(); // Write Function
