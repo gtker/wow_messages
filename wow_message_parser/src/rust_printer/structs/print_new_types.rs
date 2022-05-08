@@ -51,7 +51,17 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
                     print_constructors_for_new_flag(s, ce);
                 });
 
-                print_size_for_new_flag(s, ce);
+                let en = e.rust_object().get_complex_definer_ty(ce.name());
+                match en.ty() {
+                    RustType::Flag {
+                        int_ty,
+                        enumerators,
+                        ..
+                    } => {
+                        print_size_for_new_flag(s, ce.name(), enumerators, int_ty);
+                    }
+                    _ => unreachable!(),
+                }
 
                 print_types_for_new_flag(s, ce, e, o);
             }
@@ -253,18 +263,19 @@ fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
     }
 }
 
-fn print_size_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
+fn print_size_for_new_flag(
+    s: &mut Writer,
+    ty_name: &str,
+    enumerators: &[RustEnumerator],
+    int_ty: &IntegerType,
+) {
     s.variable_size(
-        ce.name(),
+        ty_name,
         |s| {
-            s.wln(format!(
-                "{size} // inner: {ty_name} ({ty})",
-                size = ce.ty().size(),
-                ty_name = ce.original_ty_name(),
-                ty = ce.ty().str()
-            ));
-            for f in ce.fields() {
-                if f.should_not_be_in_type() {
+            s.wln(format!("{size} // inner", size = int_ty.size(),));
+
+            for enumerator in enumerators {
+                if enumerator.should_not_be_in_flag_types() {
                     continue;
                 }
 
@@ -272,7 +283,7 @@ fn print_size_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
                     s.body_else(
                         format!(
                             "if let Some(s) = &self.{name}",
-                            name = f.name().to_lowercase()
+                            name = enumerator.name().to_lowercase()
                         ),
                         |s| {
                             s.wln("s.size()");
@@ -285,21 +296,17 @@ fn print_size_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
             }
         },
         |s| {
-            s.wln(format!(
-                "{size} // inner: {ty_name} ({ty})",
-                size = ce.ty().size(),
-                ty_name = ce.original_ty_name(),
-                ty = ce.ty().str()
-            ));
-            for f in ce.fields() {
-                if f.should_not_be_in_type() {
+            s.wln(format!("{size} // inner", size = int_ty.size(),));
+
+            for enumerator in enumerators {
+                if enumerator.should_not_be_in_flag_types() {
                     continue;
                 }
 
                 s.wln(format!(
                     "+ {ce}{f}::maximum_possible_size() // {f} enumerator",
-                    ce = ce.name(),
-                    f = f.name()
+                    ce = ty_name,
+                    f = enumerator.name()
                 ));
             }
         },

@@ -1337,7 +1337,7 @@ impl SpellCastTargetsSpellCastTargetFlags {
 }
 impl VariableSized for SpellCastTargetsSpellCastTargetFlags {
     fn size(&self) -> usize {
-        2 // inner: SpellCastTargetFlags (u16)
+        2 // inner
         + {
             if let Some(s) = &self.unit {
                 s.size()
@@ -1420,7 +1420,7 @@ impl VariableSized for SpellCastTargetsSpellCastTargetFlags {
 
 impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlags {
     fn maximum_possible_size() -> usize {
-        2 // inner: SpellCastTargetFlags (u16)
+        2 // inner
         + SpellCastTargetsSpellCastTargetFlagsUNIT::maximum_possible_size() // UNIT enumerator
         + SpellCastTargetsSpellCastTargetFlagsITEM::maximum_possible_size() // ITEM enumerator
         + SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION::maximum_possible_size() // SOURCE_LOCATION enumerator

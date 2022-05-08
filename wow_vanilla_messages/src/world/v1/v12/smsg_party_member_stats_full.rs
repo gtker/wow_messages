@@ -2096,7 +2096,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
 }
 impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
     fn size(&self) -> usize {
-        4 // inner: GroupUpdateFlags (u32)
+        4 // inner
         + {
             if let Some(s) = &self.flag_status {
                 s.size()
@@ -2228,7 +2228,7 @@ impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
 
 impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
     fn maximum_possible_size() -> usize {
-        4 // inner: GroupUpdateFlags (u32)
+        4 // inner
         + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS::maximum_possible_size() // FLAG_STATUS enumerator
         + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP::maximum_possible_size() // FLAG_CUR_HP enumerator
         + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP::maximum_possible_size() // FLAG_MAX_HP enumerator

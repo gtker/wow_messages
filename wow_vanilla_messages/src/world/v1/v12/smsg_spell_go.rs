@@ -699,7 +699,7 @@ impl SMSG_SPELL_GOCastFlags {
 }
 impl VariableSized for SMSG_SPELL_GOCastFlags {
     fn size(&self) -> usize {
-        2 // inner: CastFlags (u16)
+        2 // inner
         + {
             if let Some(s) = &self.ammo {
                 s.size()
@@ -712,7 +712,7 @@ impl VariableSized for SMSG_SPELL_GOCastFlags {
 
 impl MaximumPossibleSized for SMSG_SPELL_GOCastFlags {
     fn maximum_possible_size() -> usize {
-        2 // inner: CastFlags (u16)
+        2 // inner
         + SMSG_SPELL_GOCastFlagsAMMO::maximum_possible_size() // AMMO enumerator
     }
 }

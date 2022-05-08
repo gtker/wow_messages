@@ -262,7 +262,7 @@ impl SimpleIfFlagSimpleFlag {
 }
 impl VariableSized for SimpleIfFlagSimpleFlag {
     fn size(&self) -> usize {
-        1 // inner: SimpleFlag (u8)
+        1 // inner
         + {
             if let Some(s) = &self.zero {
                 s.size()
@@ -275,7 +275,7 @@ impl VariableSized for SimpleIfFlagSimpleFlag {
 
 impl MaximumPossibleSized for SimpleIfFlagSimpleFlag {
     fn maximum_possible_size() -> usize {
-        1 // inner: SimpleFlag (u8)
+        1 // inner
         + SimpleIfFlagSimpleFlagZERO::maximum_possible_size() // ZERO enumerator
     }
 }

@@ -636,7 +636,7 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
 }
 impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     fn size(&self) -> usize {
-        1 // inner: SecurityFlag (u8)
+        1 // inner
         + {
             if let Some(s) = &self.pin {
                 s.size()
@@ -663,7 +663,7 @@ impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
 
 impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     fn maximum_possible_size() -> usize {
-        1 // inner: SecurityFlag (u8)
+        1 // inner
         + CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN::maximum_possible_size() // PIN enumerator
         + CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0::maximum_possible_size() // UNKNOWN0 enumerator
         + CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR::maximum_possible_size() // AUTHENTICATOR enumerator

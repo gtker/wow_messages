@@ -1148,7 +1148,7 @@ impl MovementInfoMovementFlags {
 }
 impl VariableSized for MovementInfoMovementFlags {
     fn size(&self) -> usize {
-        4 // inner: MovementFlags (u32)
+        4 // inner
         + {
             if let Some(s) = &self.on_transport {
                 s.size()
@@ -1182,7 +1182,7 @@ impl VariableSized for MovementInfoMovementFlags {
 
 impl MaximumPossibleSized for MovementInfoMovementFlags {
     fn maximum_possible_size() -> usize {
-        4 // inner: MovementFlags (u32)
+        4 // inner
         + MovementInfoMovementFlagsON_TRANSPORT::maximum_possible_size() // ON_TRANSPORT enumerator
         + MovementInfoMovementFlagsJUMPING::maximum_possible_size() // JUMPING enumerator
         + MovementInfoMovementFlagsSWIMMING::maximum_possible_size() // SWIMMING enumerator

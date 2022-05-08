@@ -47,6 +47,18 @@ impl RustMember {
         format!(" // {}: {}", self.name(), self.ty().str())
     }
 
+    fn set_main_enumerators(&mut self, enumerator_names: &[&String]) {
+        let enums = match &mut self.ty {
+            RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => enumerators,
+            _ => unreachable!(),
+        };
+
+        for &name in enumerator_names {
+            let e = enums.iter_mut().find(|a| a.name() == name).unwrap();
+            e.is_main_enumerator = true;
+        }
+    }
+
     fn append_members_to_enumerator_not_equal_range(
         &mut self,
         enumerator_name: &[&String],
@@ -155,6 +167,7 @@ pub struct RustEnumerator {
     name: String,
     value: DefinerValue,
     members: Vec<RustMember>,
+    is_main_enumerator: bool,
 }
 
 impl RustEnumerator {
@@ -169,6 +182,10 @@ impl RustEnumerator {
     }
     pub fn members_in_struct(&self) -> Vec<&RustMember> {
         self.members.iter().filter(|m| m.in_rust_type).collect()
+    }
+
+    pub fn should_not_be_in_flag_types(&self) -> bool {
+        self.members.is_empty() || !self.is_main_enumerator
     }
 
     pub fn has_members(&self) -> bool {
@@ -419,6 +436,7 @@ pub fn create_if_statement(
         subject
     }
 
+    find_subject(current_scope, parent_scope, statement).set_main_enumerators(&main_enumerators);
     if reversed {
         // Apply main to all except main_enumerators
         for i in &main_enumerators {
@@ -553,6 +571,7 @@ pub fn create_struct_member(
                                 name: field.name().to_string(),
                                 value: field.value().clone(),
                                 members: vec![],
+                                is_main_enumerator: false,
                             });
                         }
                         enumerators

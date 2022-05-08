@@ -604,7 +604,7 @@ impl RealmRealmFlag {
 }
 impl VariableSized for RealmRealmFlag {
     fn size(&self) -> usize {
-        1 // inner: RealmFlag (u8)
+        1 // inner
         + {
             if let Some(s) = &self.specify_build {
                 s.size()
@@ -617,7 +617,7 @@ impl VariableSized for RealmRealmFlag {
 
 impl MaximumPossibleSized for RealmRealmFlag {
     fn maximum_possible_size() -> usize {
-        1 // inner: RealmFlag (u8)
+        1 // inner
         + RealmRealmFlagSPECIFY_BUILD::maximum_possible_size() // SPECIFY_BUILD enumerator
     }
 }
