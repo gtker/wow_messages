@@ -585,23 +585,23 @@ impl From<&FriendStatus> for FriendFriendStatus {
             FriendStatus::OFFLINE => Self::OFFLINE,
             FriendStatus::ONLINE => Self::ONLINE {
                 area: Default::default(),
-                level: Default::default(),
                 class: Default::default(),
+                level: Default::default(),
             },
             FriendStatus::AFK => Self::AFK {
                 area: Default::default(),
-                level: Default::default(),
                 class: Default::default(),
+                level: Default::default(),
             },
             FriendStatus::UNKNOWN3 => Self::UNKNOWN3 {
                 area: Default::default(),
-                level: Default::default(),
                 class: Default::default(),
+                level: Default::default(),
             },
             FriendStatus::DND => Self::DND {
                 area: Default::default(),
-                level: Default::default(),
                 class: Default::default(),
+                level: Default::default(),
             },
         }
     }

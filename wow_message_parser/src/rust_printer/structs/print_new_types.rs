@@ -21,7 +21,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
 
                 print_new_enum_declaration(s, &rd);
 
-                print_from_new_enum_to_old(s, ce);
+                print_from_new_enum_to_old(s, &rd);
 
                 print_from_old_enum_to_new(s, ce);
 
@@ -700,34 +700,32 @@ fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner) {
     });
 }
 
-fn print_from_new_enum_to_old(s: &mut Writer, ce: &ComplexEnum) {
-    s.impl_from(format!("&{}", ce.original_ty_name()), ce.name(), |s| {
+fn print_from_new_enum_to_old(s: &mut Writer, rd: &RustDefiner) {
+    s.impl_from(format!("&{}", rd.original_ty_name()), rd.ty_name(), |s| {
         s.body("match &e", |s| {
-            for f in ce.fields() {
-                if f.is_simple_or_subfields_const() {
+            for enumerator in rd.enumerators() {
+                if !enumerator.has_members_in_struct() {
                     s.wln(format!(
                         "{original}::{field} => Self::{field},",
-                        original = ce.original_ty_name(),
-                        field = f.name(),
+                        original = rd.original_ty_name(),
+                        field = enumerator.name(),
                     ));
-                } else {
-                    s.body_closing_with(
-                        format!(
-                            "{original}::{field} => Self::{field}",
-                            original = ce.original_ty_name(),
-                            field = f.name(),
-                        ),
-                        |s| {
-                            for sf in f.subfields() {
-                                if sf.used_as_size_in().is_some() || sf.constant_value().is_some() {
-                                    continue;
-                                }
-                                s.wln(format!("{name}: Default::default(),", name = sf.name()))
-                            }
-                        },
-                        ",",
-                    );
+                    continue;
                 }
+
+                s.body_closing_with(
+                    format!(
+                        "{original}::{field} => Self::{field}",
+                        original = rd.original_ty_name(),
+                        field = enumerator.name(),
+                    ),
+                    |s| {
+                        for m in enumerator.members_in_struct() {
+                            s.wln(format!("{name}: Default::default(),", name = m.name()))
+                        }
+                    },
+                    ",",
+                );
             }
         });
     });

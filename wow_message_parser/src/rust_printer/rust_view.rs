@@ -350,6 +350,7 @@ impl RustObject {
             ty_name: ty_name.clone(),
             int_ty,
             is_simple,
+            original_ty_name: ty_name.replacen(&self.name, "", 1),
         }
     }
 
@@ -401,6 +402,7 @@ pub struct RustDefiner {
     ty_name: String,
     int_ty: IntegerType,
     is_simple: bool,
+    original_ty_name: String,
 }
 
 impl RustDefiner {
@@ -418,6 +420,9 @@ impl RustDefiner {
     }
     pub fn is_simple(&self) -> bool {
         self.is_simple
+    }
+    pub fn original_ty_name(&self) -> &str {
+        &self.original_ty_name
     }
 }
 

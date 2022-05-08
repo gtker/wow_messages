@@ -390,13 +390,13 @@ impl From<&GmTicketStatus> for SMSG_GMTICKET_GETTICKETGmTicketStatus {
         match &e {
             GmTicketStatus::DBERROR => Self::DBERROR,
             GmTicketStatus::HASTEXT => Self::HASTEXT {
-                text: Default::default(),
-                ticket_type: Default::default(),
-                days_since_ticket_creation: Default::default(),
-                days_since_oldest_ticket_creation: Default::default(),
                 days_since_last_updated: Default::default(),
+                days_since_oldest_ticket_creation: Default::default(),
+                days_since_ticket_creation: Default::default(),
                 escalation_status: Default::default(),
                 read_by_gm: Default::default(),
+                text: Default::default(),
+                ticket_type: Default::default(),
             },
             GmTicketStatus::DEFAULT => Self::DEFAULT,
         }

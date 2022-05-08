@@ -2479,25 +2479,25 @@ impl From<&ChatType> for SMSG_MESSAGECHATChatType {
             },
             ChatType::MONSTER_SAY => Self::MONSTER_SAY {
                 sender_guid3: Default::default(),
-                sender_name_length: Default::default(),
                 sender_name: Default::default(),
+                sender_name_length: Default::default(),
                 target_guid: Default::default(),
             },
             ChatType::MONSTER_YELL => Self::MONSTER_YELL {
                 sender_guid3: Default::default(),
-                sender_name_length: Default::default(),
                 sender_name: Default::default(),
+                sender_name_length: Default::default(),
                 target_guid: Default::default(),
             },
             ChatType::MONSTER_EMOTE => Self::MONSTER_EMOTE {
-                name_length: Default::default(),
-                monster_name: Default::default(),
                 monster_guid: Default::default(),
+                monster_name: Default::default(),
+                name_length: Default::default(),
             },
             ChatType::CHANNEL => Self::CHANNEL {
                 channel_name: Default::default(),
-                player_rank: Default::default(),
                 player_guid: Default::default(),
+                player_rank: Default::default(),
             },
             ChatType::CHANNEL_JOIN => Self::CHANNEL_JOIN {
                 sender_guid4: Default::default(),
@@ -2530,9 +2530,9 @@ impl From<&ChatType> for SMSG_MESSAGECHATChatType {
                 sender_guid4: Default::default(),
             },
             ChatType::MONSTER_WHISPER => Self::MONSTER_WHISPER {
-                name_length: Default::default(),
-                monster_name: Default::default(),
                 monster_guid: Default::default(),
+                monster_name: Default::default(),
+                name_length: Default::default(),
             },
             ChatType::BG_SYSTEM_NEUTRAL => Self::BG_SYSTEM_NEUTRAL {
                 sender_guid4: Default::default(),
@@ -2553,9 +2553,9 @@ impl From<&ChatType> for SMSG_MESSAGECHATChatType {
                 sender_guid4: Default::default(),
             },
             ChatType::RAID_BOSS_EMOTE => Self::RAID_BOSS_EMOTE {
-                name_length: Default::default(),
-                monster_name: Default::default(),
                 monster_guid: Default::default(),
+                monster_name: Default::default(),
+                name_length: Default::default(),
             },
             ChatType::BATTLEGROUND => Self::BATTLEGROUND {
                 sender_guid4: Default::default(),

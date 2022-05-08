@@ -412,8 +412,8 @@ impl From<&SecurityFlag> for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         match &e {
             SecurityFlag::NONE => Self::NONE,
             SecurityFlag::PIN => Self::PIN {
-                pin_salt: Default::default(),
                 pin_hash: Default::default(),
+                pin_salt: Default::default(),
             },
         }
     }

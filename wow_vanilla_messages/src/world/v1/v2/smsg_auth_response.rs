@@ -869,9 +869,9 @@ impl From<&WorldResult> for SMSG_AUTH_RESPONSEWorldResult {
             WorldResult::CSTATUS_NEGOTIATION_FAILED => Self::CSTATUS_NEGOTIATION_FAILED,
             WorldResult::CSTATUS_AUTHENTICATING => Self::CSTATUS_AUTHENTICATING,
             WorldResult::AUTH_OK => Self::AUTH_OK {
-                billing_time: Default::default(),
                 billing_flags: Default::default(),
                 billing_rested: Default::default(),
+                billing_time: Default::default(),
             },
             WorldResult::AUTH_FAILED => Self::AUTH_FAILED,
             WorldResult::AUTH_REJECT => Self::AUTH_REJECT,

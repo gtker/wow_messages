@@ -1483,8 +1483,8 @@ impl From<&CastFailureReason> for SMSG_CAST_RESULTCastFailureReason {
             CastFailureReason::EQUIPPED_ITEM => Self::EQUIPPED_ITEM,
             CastFailureReason::EQUIPPED_ITEM_CLASS => Self::EQUIPPED_ITEM_CLASS {
                 equipped_item_class: Default::default(),
-                equipped_item_subclass_mask: Default::default(),
                 equipped_item_inventory_type_mask: Default::default(),
+                equipped_item_subclass_mask: Default::default(),
             },
             CastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND => Self::EQUIPPED_ITEM_CLASS_MAINHAND,
             CastFailureReason::EQUIPPED_ITEM_CLASS_OFFHAND => Self::EQUIPPED_ITEM_CLASS_OFFHAND,

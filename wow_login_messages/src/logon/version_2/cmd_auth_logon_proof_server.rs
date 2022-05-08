@@ -341,8 +341,8 @@ impl From<&LoginResult> for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
     fn from(e: &LoginResult) -> Self {
         match &e {
             LoginResult::SUCCESS => Self::SUCCESS {
-                server_proof: Default::default(),
                 hardware_survey_id: Default::default(),
+                server_proof: Default::default(),
             },
             LoginResult::FAIL_UNKNOWN0 => Self::FAIL_UNKNOWN0,
             LoginResult::FAIL_UNKNOWN1 => Self::FAIL_UNKNOWN1,

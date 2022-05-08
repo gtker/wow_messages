@@ -528,11 +528,11 @@ impl From<&LoginResult> for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     fn from(e: &LoginResult) -> Self {
         match &e {
             LoginResult::SUCCESS => Self::SUCCESS {
-                server_public_key: Default::default(),
+                crc_salt: Default::default(),
                 generator: Default::default(),
                 large_safe_prime: Default::default(),
                 salt: Default::default(),
-                crc_salt: Default::default(),
+                server_public_key: Default::default(),
             },
             LoginResult::FAIL_UNKNOWN0 => Self::FAIL_UNKNOWN0,
             LoginResult::FAIL_UNKNOWN1 => Self::FAIL_UNKNOWN1,

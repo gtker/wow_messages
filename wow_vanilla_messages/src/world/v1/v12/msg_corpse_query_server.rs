@@ -307,11 +307,11 @@ impl From<&CorpseQueryResult> for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
         match &e {
             CorpseQueryResult::NOT_FOUND => Self::NOT_FOUND,
             CorpseQueryResult::FOUND => Self::FOUND {
+                corpse_map: Default::default(),
                 map: Default::default(),
                 position_x: Default::default(),
                 position_y: Default::default(),
                 position_z: Default::default(),
-                corpse_map: Default::default(),
             },
         }
     }

@@ -1343,32 +1343,32 @@ impl From<&TEnum> for NestedNotIfTEnum {
         match &e {
             TEnum::ZERO => Self::ZERO,
             TEnum::ONE => Self::ONE {
-                not_zero: Default::default(),
                 e: Default::default(),
+                not_zero: Default::default(),
             },
             TEnum::TWO => Self::TWO {
-                not_zero: Default::default(),
                 e: Default::default(),
+                not_zero: Default::default(),
             },
             TEnum::THREE => Self::THREE {
-                not_zero: Default::default(),
                 e: Default::default(),
+                not_zero: Default::default(),
             },
             TEnum::FOUR => Self::FOUR {
-                not_zero: Default::default(),
                 e: Default::default(),
+                not_zero: Default::default(),
             },
             TEnum::FIVE => Self::FIVE {
-                not_zero: Default::default(),
                 e: Default::default(),
+                not_zero: Default::default(),
             },
             TEnum::SIX => Self::SIX {
-                not_zero: Default::default(),
                 e: Default::default(),
+                not_zero: Default::default(),
             },
             TEnum::REST => Self::REST {
-                not_zero: Default::default(),
                 e: Default::default(),
+                not_zero: Default::default(),
             },
         }
     }

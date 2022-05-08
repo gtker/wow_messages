@@ -558,8 +558,8 @@ impl From<&TradeStatus> for SMSG_TRADE_STATUSTradeStatus {
             TradeStatus::WRONG_FACTION => Self::WRONG_FACTION,
             TradeStatus::CLOSE_WINDOW => Self::CLOSE_WINDOW {
                 inventory_result: Default::default(),
-                target_error: Default::default(),
                 item_limit_category_id: Default::default(),
+                target_error: Default::default(),
             },
             TradeStatus::UNKNOWN_13 => Self::UNKNOWN_13,
             TradeStatus::IGNORE_YOU => Self::IGNORE_YOU,

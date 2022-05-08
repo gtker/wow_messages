@@ -278,8 +278,8 @@ impl From<&ExperienceAwardType> for SMSG_LOG_XPGAINExperienceAwardType {
         match &e {
             ExperienceAwardType::KILL => Self::KILL,
             ExperienceAwardType::NON_KILL => Self::NON_KILL {
-                experience_without_rested: Default::default(),
                 exp_group_bonus: Default::default(),
+                experience_without_rested: Default::default(),
             },
         }
     }

@@ -2230,8 +2230,8 @@ impl From<&SpellEffect> for SpellLogSpellEffect {
             SpellEffect::POWER_FUNNEL => Self::POWER_FUNNEL,
             SpellEffect::HEAL_MAX_HEALTH => Self::HEAL_MAX_HEALTH,
             SpellEffect::INTERRUPT_CAST => Self::INTERRUPT_CAST {
-                target3: Default::default(),
                 interrupted_spell: Default::default(),
+                target3: Default::default(),
             },
             SpellEffect::DISTRACT => Self::DISTRACT {
                 target5: Default::default(),
