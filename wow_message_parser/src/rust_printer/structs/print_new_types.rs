@@ -299,8 +299,6 @@ fn print_types_for_new_flag_flag_elseif(
     f: &Enumerator,
 ) {
     let new_ty_name = format!("{}{}", ne.new_ty_name(), f.name());
-    let prefix = "";
-    let postfix = "";
 
     s.wln("#[derive(Debug, PartialEq, Clone)]");
     s.new_enum(
@@ -411,10 +409,13 @@ fn print_types_for_new_flag_flag_elseif(
     );
 
     s.open_curly(format!("impl {new_ty_name}", new_ty_name = &new_ty_name));
-    s.func_pub(
-        "write<W: std::io::Write>(&self, w: &mut W)",
+    s.async_funcn_pub(
+        "write",
+        "<W: std::io::Write>(&self, w: &mut W)",
+        "<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
+        "<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
         "std::result::Result<(), std::io::Error>",
-        |s| {
+        |s, it| {
             s.open_curly("match &self");
             for enumerator in ne.enumerators() {
                 if enumerator.fields().is_empty() {
@@ -441,18 +442,28 @@ fn print_types_for_new_flag_flag_elseif(
                 for f in enumerator.fields() {
                     match f {
                         NewEnumStructMember::Definition(d) => {
-                            print_write_definition(s, e, o, "", d, prefix, postfix);
+                            print_write_definition(s, e, o, "", d, it.prefix(), it.postfix());
                         }
                         NewEnumStructMember::IfStatement(statement) => {
                             match statement.enum_or_flag() {
                                 IfStatementType::Enum => {
                                     print_enum_if_statement_new(
-                                        s, e, o, "", statement, prefix, postfix,
+                                        s,
+                                        e,
+                                        o,
+                                        "",
+                                        statement,
+                                        it.prefix(),
+                                        it.postfix(),
                                     );
                                 }
-                                IfStatementType::Flag => {
-                                    print_flag_if_statement(s, "", statement, prefix, postfix)
-                                }
+                                IfStatementType::Flag => print_flag_if_statement(
+                                    s,
+                                    "",
+                                    statement,
+                                    it.prefix(),
+                                    it.postfix(),
+                                ),
                             }
                         }
                     }
