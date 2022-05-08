@@ -40,7 +40,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
                 print_from_new_flag_to_old(s, &rd);
 
                 s.body(format!("impl {name}", name = ce.name()), |s| {
-                    print_write_for_new_flag(s, ce);
+                    print_write_for_new_flag(s, &rd);
                     print_constructors_for_new_flag(s, ce);
                 });
                 print_size_for_new_flag(s, &rd);
@@ -73,7 +73,7 @@ fn print_from_new_flag_to_old(s: &mut Writer, rd: &RustDefiner) {
     });
 }
 
-fn print_write_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
+fn print_write_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
     s.async_funcn_pub(
         "write",
         "<W: std::io::Write>(&self, w: &mut W)",
@@ -83,7 +83,7 @@ fn print_write_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
         |s, it| {
             s.wln(format!(
                 "let a: {ty} = self.into();",
-                ty = ce.original_ty_name(),
+                ty = rd.original_ty_name(),
             ));
             s.wln(format!(
                 "a.{prefix}write(w){postfix}?;",
