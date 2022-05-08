@@ -412,6 +412,12 @@ impl RustDefiner {
     pub fn enumerators(&self) -> &[RustEnumerator] {
         &self.enumerators
     }
+    pub fn complex_flag_enumerators(&self) -> Vec<&RustEnumerator> {
+        self.enumerators
+            .iter()
+            .filter(|a| !a.should_not_be_in_flag_types())
+            .collect()
+    }
     pub fn ty_name(&self) -> &str {
         &self.ty_name
     }
@@ -711,7 +717,7 @@ pub fn create_struct_member(
                 in_rust_type,
                 constant_sized: definition_constantly_sized,
                 sizes,
-                tags: tags.clone(),
+                tags: d.tags().clone(),
             });
         }
         StructMember::IfStatement(statement) => {

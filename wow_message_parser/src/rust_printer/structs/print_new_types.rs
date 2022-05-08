@@ -41,7 +41,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
 
                 s.body(format!("impl {name}", name = ce.name()), |s| {
                     print_write_for_new_flag(s, &rd);
-                    print_constructors_for_new_flag(s, ce);
+                    print_constructors_for_new_flag(s, &rd);
                 });
                 print_size_for_new_flag(s, &rd);
 
@@ -95,77 +95,75 @@ fn print_write_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
     );
 }
 
-fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
+fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
     s.funcn_pub_const("empty()", "Self", |s| {
         s.body("Self", |s| {
             s.wln("inner: 0,");
-            for f in ce.fields() {
-                if !f.should_not_be_in_type() {
-                    s.wln(format!("{name}: None,", name = f.name().to_lowercase()))
-                }
+            for enumerator in rd.complex_flag_enumerators() {
+                s.wln(format!(
+                    "{name}: None,",
+                    name = enumerator.name().to_lowercase()
+                ))
             }
         });
     });
 
-    for f in ce.fields() {
-        if f.is_simple() {
-            s.funcn_pub_const(format!("new_{}()", f.name()), "Self", |s| {
+    for enumerator in rd.enumerators() {
+        if !enumerator.has_members_in_struct() {
+            s.funcn_pub_const(format!("new_{}()", enumerator.name()), "Self", |s| {
                 s.body("Self", |s| {
                     s.wln(format!(
                         "inner: {parent}::{name},",
-                        parent = ce.original_ty_name(),
-                        name = f.name()
+                        parent = rd.original_ty_name(),
+                        name = enumerator.name()
                     ));
 
-                    for inner_f in ce.fields() {
-                        if !inner_f.should_not_be_in_type() {
-                            s.wln(format!(
-                                "{name}: None,",
-                                name = inner_f.name().to_lowercase()
-                            ))
-                        }
+                    for inner_enumerator in rd.complex_flag_enumerators() {
+                        s.wln(format!(
+                            "{name}: None,",
+                            name = inner_enumerator.name().to_lowercase()
+                        ));
                     }
                 });
             });
 
-            s.funcn_pub(format!("set_{}(&mut self)", f.name()), "Self", |s| {
-                s.wln(format!(
-                    "self.inner |= {ty}::{name};",
-                    ty = ce.original_ty_name(),
-                    name = f.name()
-                ));
+            s.funcn_pub(
+                format!("set_{}(&mut self)", enumerator.name()),
+                "Self",
+                |s| {
+                    s.wln(format!(
+                        "self.inner |= {ty}::{name};",
+                        ty = rd.original_ty_name(),
+                        name = enumerator.name()
+                    ));
 
-                s.wln("self.clone()");
-            });
+                    s.wln("self.clone()");
+                },
+            );
 
-            s.funcn_pub_const(format!("get_{}(&self)", f.name()), "bool", |s| {
-                if f.value().int() == 0 {
+            s.funcn_pub_const(format!("get_{}(&self)", enumerator.name()), "bool", |s| {
+                if enumerator.value().int() == 0 {
                     s.wln("// Underlying value is 0");
                     s.wln(format!(
                         "self.inner == {ty}::{name}",
-                        ty = ce.original_ty_name(),
-                        name = f.name()
+                        ty = rd.original_ty_name(),
+                        name = enumerator.name()
                     ));
                 } else {
                     s.wln(format!(
                         "(self.inner & {ty}::{name}) != 0",
-                        ty = ce.original_ty_name(),
-                        name = f.name()
+                        ty = rd.original_ty_name(),
+                        name = enumerator.name()
                     ));
                 }
             });
         } else {
-            let new_ty = format!(
-                "{}{}{}",
-                ce.original_struct_name(),
-                ce.original_ty_name(),
-                f.name()
-            );
+            let new_ty = format!("{}{}", rd.ty_name(), enumerator.name());
             s.funcn_pub_const(
                 format!(
                     "new_{upper_name}({lower_name}: {new_ty})",
-                    upper_name = f.name(),
-                    lower_name = f.name().to_lowercase(),
+                    upper_name = enumerator.name(),
+                    lower_name = enumerator.name().to_lowercase(),
                     new_ty = new_ty,
                 ),
                 "Self",
@@ -173,23 +171,21 @@ fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
                     s.body("Self", |s| {
                         s.wln(format!(
                             "inner: {parent}::{name},",
-                            parent = ce.original_ty_name(),
-                            name = f.name()
+                            parent = rd.original_ty_name(),
+                            name = enumerator.name()
                         ));
 
-                        for inner_f in ce.fields() {
-                            if !inner_f.should_not_be_in_type() {
-                                if inner_f.name() == f.name() {
-                                    s.wln(format!(
-                                        "{name}: Some({name}),",
-                                        name = inner_f.name().to_lowercase()
-                                    ))
-                                } else {
-                                    s.wln(format!(
-                                        "{name}: None,",
-                                        name = inner_f.name().to_lowercase()
-                                    ))
-                                }
+                        for inner_enumerator in rd.complex_flag_enumerators() {
+                            if inner_enumerator.name() == enumerator.name() {
+                                s.wln(format!(
+                                    "{name}: Some({name}),",
+                                    name = inner_enumerator.name().to_lowercase()
+                                ));
+                            } else {
+                                s.wln(format!(
+                                    "{name}: None,",
+                                    name = inner_enumerator.name().to_lowercase()
+                                ));
                             }
                         }
                     });
@@ -199,21 +195,21 @@ fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
             s.funcn_pub(
                 format!(
                     "set_{upper_name}(&mut self, {lower_name}: {new_ty})",
-                    upper_name = f.name(),
-                    lower_name = f.name().to_lowercase(),
+                    upper_name = enumerator.name(),
+                    lower_name = enumerator.name().to_lowercase(),
                     new_ty = new_ty,
                 ),
                 "Self",
                 |s| {
                     s.wln(format!(
                         "self.inner |= {ty}::{name};",
-                        ty = ce.original_ty_name(),
-                        name = f.name()
+                        ty = rd.original_ty_name(),
+                        name = enumerator.name()
                     ));
 
                     s.wln(format!(
                         "self.{name_lower} = Some({name_lower});",
-                        name_lower = f.name().to_lowercase()
+                        name_lower = enumerator.name().to_lowercase()
                     ));
 
                     s.wln("self.clone()");
@@ -221,27 +217,33 @@ fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
             );
 
             s.funcn_pub_const(
-                format!("get_{}(&self)", f.name()),
+                format!("get_{}(&self)", enumerator.name()),
                 format!("Option<&{new_ty}>", new_ty = new_ty),
                 |s| {
-                    s.wln(format!("self.{}.as_ref()", f.name().to_lowercase()));
+                    s.wln(format!(
+                        "self.{}.as_ref()",
+                        enumerator.name().to_lowercase()
+                    ));
                 },
             );
         }
-
-        s.funcn_pub(format!("clear_{}(&mut self)", f.name()), "Self", |s| {
-            s.wln(format!(
-                "self.inner &= {ty}::{name}.reverse_bits();",
-                ty = ce.original_ty_name(),
-                name = f.name()
-            ));
-            if !f.is_simple() {
-                s.wln(format!("self.{} = None;", f.name().to_lowercase()));
-            }
-            s.wln("// TODO: Cloning like this is not conductive to good performance but it is");
-            s.wln("// temporarily necessary due to test syntax");
-            s.wln("self.clone()");
-        });
+        s.funcn_pub(
+            format!("clear_{}(&mut self)", enumerator.name()),
+            "Self",
+            |s| {
+                s.wln(format!(
+                    "self.inner &= {ty}::{name}.reverse_bits();",
+                    ty = rd.original_ty_name(),
+                    name = enumerator.name()
+                ));
+                if enumerator.has_members_in_struct() {
+                    s.wln(format!("self.{} = None;", enumerator.name().to_lowercase()));
+                }
+                s.wln("// TODO: Cloning like this is not conductive to good performance but it is");
+                s.wln("// temporarily necessary due to test syntax");
+                s.wln("self.clone()");
+            },
+        );
     }
 }
 
