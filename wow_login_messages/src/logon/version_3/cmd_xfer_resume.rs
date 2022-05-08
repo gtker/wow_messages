@@ -17,7 +17,6 @@ pub struct CMD_XFER_RESUME {
 impl ClientMessage for CMD_XFER_RESUME {
     const OPCODE: u8 = 0x33;
 }
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CMD_XFER_RESUME {
     type Error = std::io::Error;
 
@@ -42,13 +41,23 @@ impl ReadableAndWritable for CMD_XFER_RESUME {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // offset: u64
-        let offset = crate::util::tokio_read_u64_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // offset: u64
+            let offset = crate::util::tokio_read_u64_le(r).await?;
 
-        Ok(Self {
-            offset,
+            Ok(Self {
+                offset,
+            })
         })
     }
 
@@ -74,13 +83,24 @@ impl ReadableAndWritable for CMD_XFER_RESUME {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // offset: u64
-        let offset = crate::util::astd_read_u64_le(r).await?;
 
-        Ok(Self {
-            offset,
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // offset: u64
+            let offset = crate::util::astd_read_u64_le(r).await?;
+
+            Ok(Self {
+                offset,
+            })
         })
     }
 
@@ -106,6 +126,7 @@ impl ReadableAndWritable for CMD_XFER_RESUME {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for CMD_XFER_RESUME {}

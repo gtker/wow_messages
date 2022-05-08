@@ -16,7 +16,6 @@ pub struct BattlegroundPlayerPosition {
     pub position_y: f32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for BattlegroundPlayerPosition {
     type Error = std::io::Error;
 
@@ -50,19 +49,29 @@ impl ReadableAndWritable for BattlegroundPlayerPosition {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // player: Guid
-        let player = Guid::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // player: Guid
+            let player = Guid::tokio_read(r).await?;
 
-        // position_x: f32
-        let position_x = crate::util::tokio_read_f32_le(r).await?;
-        // position_y: f32
-        let position_y = crate::util::tokio_read_f32_le(r).await?;
-        Ok(Self {
-            player,
-            position_x,
-            position_y,
+            // position_x: f32
+            let position_x = crate::util::tokio_read_f32_le(r).await?;
+            // position_y: f32
+            let position_y = crate::util::tokio_read_f32_le(r).await?;
+            Ok(Self {
+                player,
+                position_x,
+                position_y,
+            })
         })
     }
 
@@ -91,19 +100,30 @@ impl ReadableAndWritable for BattlegroundPlayerPosition {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // player: Guid
-        let player = Guid::astd_read(r).await?;
 
-        // position_x: f32
-        let position_x = crate::util::astd_read_f32_le(r).await?;
-        // position_y: f32
-        let position_y = crate::util::astd_read_f32_le(r).await?;
-        Ok(Self {
-            player,
-            position_x,
-            position_y,
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // player: Guid
+            let player = Guid::astd_read(r).await?;
+
+            // position_x: f32
+            let position_x = crate::util::astd_read_f32_le(r).await?;
+            // position_y: f32
+            let position_y = crate::util::astd_read_f32_le(r).await?;
+            Ok(Self {
+                player,
+                position_x,
+                position_y,
+            })
         })
     }
 
@@ -132,6 +152,7 @@ impl ReadableAndWritable for BattlegroundPlayerPosition {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for BattlegroundPlayerPosition {}

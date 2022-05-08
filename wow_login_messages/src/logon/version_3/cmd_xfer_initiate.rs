@@ -16,7 +16,6 @@ pub struct CMD_XFER_INITIATE {
 impl ServerMessage for CMD_XFER_INITIATE {
     const OPCODE: u8 = 0x30;
 }
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CMD_XFER_INITIATE {
     type Error = std::io::Error;
 
@@ -34,9 +33,19 @@ impl ReadableAndWritable for CMD_XFER_INITIATE {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        Ok(Self {
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            Ok(Self {
+            })
         })
     }
 
@@ -59,9 +68,20 @@ impl ReadableAndWritable for CMD_XFER_INITIATE {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        Ok(Self {
+
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            Ok(Self {
+            })
         })
     }
 
@@ -84,6 +104,7 @@ impl ReadableAndWritable for CMD_XFER_INITIATE {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for CMD_XFER_INITIATE {}

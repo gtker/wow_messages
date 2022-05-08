@@ -22,7 +22,6 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
     type Error = CMD_AUTH_LOGON_CHALLENGE_ServerError;
 
@@ -168,74 +167,84 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // protocol_version: u8
-        let _protocol_version = crate::util::tokio_read_u8_le(r).await?;
-        // protocol_version is expected to always be 0 (0)
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // protocol_version: u8
+            let _protocol_version = crate::util::tokio_read_u8_le(r).await?;
+            // protocol_version is expected to always be 0 (0)
 
-        // login_result: LoginResult
-        let login_result = LoginResult::tokio_read(r).await?;
+            // login_result: LoginResult
+            let login_result = LoginResult::tokio_read(r).await?;
 
-        let login_result_if = match login_result {
-            LoginResult::SUCCESS => {
-                // server_public_key: u8[32]
-                let mut server_public_key = [0_u8; 32];
-                r.read_exact(&mut server_public_key).await?;
+            let login_result_if = match login_result {
+                LoginResult::SUCCESS => {
+                    // server_public_key: u8[32]
+                    let mut server_public_key = [0_u8; 32];
+                    r.read_exact(&mut server_public_key).await?;
 
-                // generator_length: u8
-                let generator_length = crate::util::tokio_read_u8_le(r).await?;
+                    // generator_length: u8
+                    let generator_length = crate::util::tokio_read_u8_le(r).await?;
 
-                // generator: u8[generator_length]
-                let mut generator = Vec::with_capacity(generator_length as usize);
-                for i in 0..generator_length {
-                    generator.push(crate::util::tokio_read_u8_le(r).await?);
+                    // generator: u8[generator_length]
+                    let mut generator = Vec::with_capacity(generator_length as usize);
+                    for i in 0..generator_length {
+                        generator.push(crate::util::tokio_read_u8_le(r).await?);
+                    }
+
+                    // large_safe_prime_length: u8
+                    let large_safe_prime_length = crate::util::tokio_read_u8_le(r).await?;
+
+                    // large_safe_prime: u8[large_safe_prime_length]
+                    let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
+                    for i in 0..large_safe_prime_length {
+                        large_safe_prime.push(crate::util::tokio_read_u8_le(r).await?);
+                    }
+
+                    // salt: u8[32]
+                    let mut salt = [0_u8; 32];
+                    r.read_exact(&mut salt).await?;
+
+                    // crc_salt: u8[16]
+                    let mut crc_salt = [0_u8; 16];
+                    r.read_exact(&mut crc_salt).await?;
+
+                    CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+                        server_public_key,
+                        generator,
+                        large_safe_prime,
+                        salt,
+                        crc_salt,
+                    }
                 }
+                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
+                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1,
+                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED,
+                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
+                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE,
+                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME,
+                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY,
+                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID,
+                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
+                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER,
+                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED,
+                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS,
+                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY,
+                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL,
+            };
 
-                // large_safe_prime_length: u8
-                let large_safe_prime_length = crate::util::tokio_read_u8_le(r).await?;
-
-                // large_safe_prime: u8[large_safe_prime_length]
-                let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
-                for i in 0..large_safe_prime_length {
-                    large_safe_prime.push(crate::util::tokio_read_u8_le(r).await?);
-                }
-
-                // salt: u8[32]
-                let mut salt = [0_u8; 32];
-                r.read_exact(&mut salt).await?;
-
-                // crc_salt: u8[16]
-                let mut crc_salt = [0_u8; 16];
-                r.read_exact(&mut crc_salt).await?;
-
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                    server_public_key,
-                    generator,
-                    large_safe_prime,
-                    salt,
-                    crc_salt,
-                }
-            }
-            LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
-            LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1,
-            LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED,
-            LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
-            LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
-            LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE,
-            LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME,
-            LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY,
-            LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID,
-            LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
-            LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER,
-            LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED,
-            LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS,
-            LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY,
-            LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL,
-        };
-
-        Ok(Self {
-            login_result: login_result_if,
+            Ok(Self {
+                login_result: login_result_if,
+            })
         })
     }
 
@@ -321,74 +330,85 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // protocol_version: u8
-        let _protocol_version = crate::util::astd_read_u8_le(r).await?;
-        // protocol_version is expected to always be 0 (0)
 
-        // login_result: LoginResult
-        let login_result = LoginResult::astd_read(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // protocol_version: u8
+            let _protocol_version = crate::util::astd_read_u8_le(r).await?;
+            // protocol_version is expected to always be 0 (0)
 
-        let login_result_if = match login_result {
-            LoginResult::SUCCESS => {
-                // server_public_key: u8[32]
-                let mut server_public_key = [0_u8; 32];
-                r.read_exact(&mut server_public_key).await?;
+            // login_result: LoginResult
+            let login_result = LoginResult::astd_read(r).await?;
 
-                // generator_length: u8
-                let generator_length = crate::util::astd_read_u8_le(r).await?;
+            let login_result_if = match login_result {
+                LoginResult::SUCCESS => {
+                    // server_public_key: u8[32]
+                    let mut server_public_key = [0_u8; 32];
+                    r.read_exact(&mut server_public_key).await?;
 
-                // generator: u8[generator_length]
-                let mut generator = Vec::with_capacity(generator_length as usize);
-                for i in 0..generator_length {
-                    generator.push(crate::util::astd_read_u8_le(r).await?);
+                    // generator_length: u8
+                    let generator_length = crate::util::astd_read_u8_le(r).await?;
+
+                    // generator: u8[generator_length]
+                    let mut generator = Vec::with_capacity(generator_length as usize);
+                    for i in 0..generator_length {
+                        generator.push(crate::util::astd_read_u8_le(r).await?);
+                    }
+
+                    // large_safe_prime_length: u8
+                    let large_safe_prime_length = crate::util::astd_read_u8_le(r).await?;
+
+                    // large_safe_prime: u8[large_safe_prime_length]
+                    let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
+                    for i in 0..large_safe_prime_length {
+                        large_safe_prime.push(crate::util::astd_read_u8_le(r).await?);
+                    }
+
+                    // salt: u8[32]
+                    let mut salt = [0_u8; 32];
+                    r.read_exact(&mut salt).await?;
+
+                    // crc_salt: u8[16]
+                    let mut crc_salt = [0_u8; 16];
+                    r.read_exact(&mut crc_salt).await?;
+
+                    CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
+                        server_public_key,
+                        generator,
+                        large_safe_prime,
+                        salt,
+                        crc_salt,
+                    }
                 }
+                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
+                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1,
+                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED,
+                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
+                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE,
+                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME,
+                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY,
+                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID,
+                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
+                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER,
+                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED,
+                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS,
+                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY,
+                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL,
+            };
 
-                // large_safe_prime_length: u8
-                let large_safe_prime_length = crate::util::astd_read_u8_le(r).await?;
-
-                // large_safe_prime: u8[large_safe_prime_length]
-                let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
-                for i in 0..large_safe_prime_length {
-                    large_safe_prime.push(crate::util::astd_read_u8_le(r).await?);
-                }
-
-                // salt: u8[32]
-                let mut salt = [0_u8; 32];
-                r.read_exact(&mut salt).await?;
-
-                // crc_salt: u8[16]
-                let mut crc_salt = [0_u8; 16];
-                r.read_exact(&mut crc_salt).await?;
-
-                CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                    server_public_key,
-                    generator,
-                    large_safe_prime,
-                    salt,
-                    crc_salt,
-                }
-            }
-            LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
-            LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1,
-            LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED,
-            LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
-            LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
-            LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE,
-            LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME,
-            LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY,
-            LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID,
-            LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
-            LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER,
-            LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED,
-            LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS,
-            LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY,
-            LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL,
-        };
-
-        Ok(Self {
-            login_result: login_result_if,
+            Ok(Self {
+                login_result: login_result_if,
+            })
         })
     }
 
@@ -474,6 +494,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_Server {

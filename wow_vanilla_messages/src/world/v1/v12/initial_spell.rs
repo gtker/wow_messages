@@ -14,7 +14,6 @@ pub struct InitialSpell {
     pub unknown1: u16,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for InitialSpell {
     type Error = std::io::Error;
 
@@ -43,17 +42,27 @@ impl ReadableAndWritable for InitialSpell {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // spell_id: u16
-        let spell_id = crate::util::tokio_read_u16_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // spell_id: u16
+            let spell_id = crate::util::tokio_read_u16_le(r).await?;
 
-        // unknown1: u16
-        let unknown1 = crate::util::tokio_read_u16_le(r).await?;
+            // unknown1: u16
+            let unknown1 = crate::util::tokio_read_u16_le(r).await?;
 
-        Ok(Self {
-            spell_id,
-            unknown1,
+            Ok(Self {
+                spell_id,
+                unknown1,
+            })
         })
     }
 
@@ -79,17 +88,28 @@ impl ReadableAndWritable for InitialSpell {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // spell_id: u16
-        let spell_id = crate::util::astd_read_u16_le(r).await?;
 
-        // unknown1: u16
-        let unknown1 = crate::util::astd_read_u16_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // spell_id: u16
+            let spell_id = crate::util::astd_read_u16_le(r).await?;
 
-        Ok(Self {
-            spell_id,
-            unknown1,
+            // unknown1: u16
+            let unknown1 = crate::util::astd_read_u16_le(r).await?;
+
+            Ok(Self {
+                spell_id,
+                unknown1,
+            })
         })
     }
 
@@ -115,6 +135,7 @@ impl ReadableAndWritable for InitialSpell {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for InitialSpell {}

@@ -14,7 +14,6 @@ pub struct WorldState {
     pub value: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for WorldState {
     type Error = std::io::Error;
 
@@ -43,17 +42,27 @@ impl ReadableAndWritable for WorldState {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // state: u32
-        let state = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // state: u32
+            let state = crate::util::tokio_read_u32_le(r).await?;
 
-        // value: u32
-        let value = crate::util::tokio_read_u32_le(r).await?;
+            // value: u32
+            let value = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            state,
-            value,
+            Ok(Self {
+                state,
+                value,
+            })
         })
     }
 
@@ -79,17 +88,28 @@ impl ReadableAndWritable for WorldState {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // state: u32
-        let state = crate::util::astd_read_u32_le(r).await?;
 
-        // value: u32
-        let value = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // state: u32
+            let state = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            state,
-            value,
+            // value: u32
+            let value = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                state,
+                value,
+            })
         })
     }
 
@@ -115,6 +135,7 @@ impl ReadableAndWritable for WorldState {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for WorldState {}

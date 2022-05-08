@@ -24,7 +24,6 @@ pub struct TrainerSpell {
     pub unknown1: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for TrainerSpell {
     type Error = TrainerSpellError;
 
@@ -116,53 +115,63 @@ impl ReadableAndWritable for TrainerSpell {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // spell: u32
-        let spell = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // spell: u32
+            let spell = crate::util::tokio_read_u32_le(r).await?;
 
-        // state: TrainerSpellState
-        let state = TrainerSpellState::tokio_read(r).await?;
+            // state: TrainerSpellState
+            let state = TrainerSpellState::tokio_read(r).await?;
 
-        // spell_cost: u32
-        let spell_cost = crate::util::tokio_read_u32_le(r).await?;
+            // spell_cost: u32
+            let spell_cost = crate::util::tokio_read_u32_le(r).await?;
 
-        // talent_point_cost: u32
-        let talent_point_cost = crate::util::tokio_read_u32_le(r).await?;
+            // talent_point_cost: u32
+            let talent_point_cost = crate::util::tokio_read_u32_le(r).await?;
 
-        // first_rank: u32
-        let first_rank = crate::util::tokio_read_u32_le(r).await?;
+            // first_rank: u32
+            let first_rank = crate::util::tokio_read_u32_le(r).await?;
 
-        // required_level: u8
-        let required_level = crate::util::tokio_read_u8_le(r).await?;
+            // required_level: u8
+            let required_level = crate::util::tokio_read_u8_le(r).await?;
 
-        // required_skill: u32
-        let required_skill = crate::util::tokio_read_u32_le(r).await?;
+            // required_skill: u32
+            let required_skill = crate::util::tokio_read_u32_le(r).await?;
 
-        // required_skill_value: u32
-        let required_skill_value = crate::util::tokio_read_u32_le(r).await?;
+            // required_skill_value: u32
+            let required_skill_value = crate::util::tokio_read_u32_le(r).await?;
 
-        // spell_chain_required: u32
-        let spell_chain_required = crate::util::tokio_read_u32_le(r).await?;
+            // spell_chain_required: u32
+            let spell_chain_required = crate::util::tokio_read_u32_le(r).await?;
 
-        // spell_chain_previous: u32
-        let spell_chain_previous = crate::util::tokio_read_u32_le(r).await?;
+            // spell_chain_previous: u32
+            let spell_chain_previous = crate::util::tokio_read_u32_le(r).await?;
 
-        // unknown1: u32
-        let unknown1 = crate::util::tokio_read_u32_le(r).await?;
+            // unknown1: u32
+            let unknown1 = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            spell,
-            state,
-            spell_cost,
-            talent_point_cost,
-            first_rank,
-            required_level,
-            required_skill,
-            required_skill_value,
-            spell_chain_required,
-            spell_chain_previous,
-            unknown1,
+            Ok(Self {
+                spell,
+                state,
+                spell_cost,
+                talent_point_cost,
+                first_rank,
+                required_level,
+                required_skill,
+                required_skill_value,
+                spell_chain_required,
+                spell_chain_previous,
+                unknown1,
+            })
         })
     }
 
@@ -215,53 +224,64 @@ impl ReadableAndWritable for TrainerSpell {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // spell: u32
-        let spell = crate::util::astd_read_u32_le(r).await?;
 
-        // state: TrainerSpellState
-        let state = TrainerSpellState::astd_read(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // spell: u32
+            let spell = crate::util::astd_read_u32_le(r).await?;
 
-        // spell_cost: u32
-        let spell_cost = crate::util::astd_read_u32_le(r).await?;
+            // state: TrainerSpellState
+            let state = TrainerSpellState::astd_read(r).await?;
 
-        // talent_point_cost: u32
-        let talent_point_cost = crate::util::astd_read_u32_le(r).await?;
+            // spell_cost: u32
+            let spell_cost = crate::util::astd_read_u32_le(r).await?;
 
-        // first_rank: u32
-        let first_rank = crate::util::astd_read_u32_le(r).await?;
+            // talent_point_cost: u32
+            let talent_point_cost = crate::util::astd_read_u32_le(r).await?;
 
-        // required_level: u8
-        let required_level = crate::util::astd_read_u8_le(r).await?;
+            // first_rank: u32
+            let first_rank = crate::util::astd_read_u32_le(r).await?;
 
-        // required_skill: u32
-        let required_skill = crate::util::astd_read_u32_le(r).await?;
+            // required_level: u8
+            let required_level = crate::util::astd_read_u8_le(r).await?;
 
-        // required_skill_value: u32
-        let required_skill_value = crate::util::astd_read_u32_le(r).await?;
+            // required_skill: u32
+            let required_skill = crate::util::astd_read_u32_le(r).await?;
 
-        // spell_chain_required: u32
-        let spell_chain_required = crate::util::astd_read_u32_le(r).await?;
+            // required_skill_value: u32
+            let required_skill_value = crate::util::astd_read_u32_le(r).await?;
 
-        // spell_chain_previous: u32
-        let spell_chain_previous = crate::util::astd_read_u32_le(r).await?;
+            // spell_chain_required: u32
+            let spell_chain_required = crate::util::astd_read_u32_le(r).await?;
 
-        // unknown1: u32
-        let unknown1 = crate::util::astd_read_u32_le(r).await?;
+            // spell_chain_previous: u32
+            let spell_chain_previous = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            spell,
-            state,
-            spell_cost,
-            talent_point_cost,
-            first_rank,
-            required_level,
-            required_skill,
-            required_skill_value,
-            spell_chain_required,
-            spell_chain_previous,
-            unknown1,
+            // unknown1: u32
+            let unknown1 = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                spell,
+                state,
+                spell_cost,
+                talent_point_cost,
+                first_rank,
+                required_level,
+                required_skill,
+                required_skill_value,
+                spell_chain_required,
+                spell_chain_previous,
+                unknown1,
+            })
         })
     }
 
@@ -314,6 +334,7 @@ impl ReadableAndWritable for TrainerSpell {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for TrainerSpell {}

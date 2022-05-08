@@ -16,7 +16,6 @@ pub struct Version {
     pub build: u16,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for Version {
     type Error = std::io::Error;
 
@@ -59,25 +58,35 @@ impl ReadableAndWritable for Version {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // major: u8
-        let major = crate::util::tokio_read_u8_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // major: u8
+            let major = crate::util::tokio_read_u8_le(r).await?;
 
-        // minor: u8
-        let minor = crate::util::tokio_read_u8_le(r).await?;
+            // minor: u8
+            let minor = crate::util::tokio_read_u8_le(r).await?;
 
-        // patch: u8
-        let patch = crate::util::tokio_read_u8_le(r).await?;
+            // patch: u8
+            let patch = crate::util::tokio_read_u8_le(r).await?;
 
-        // build: u16
-        let build = crate::util::tokio_read_u16_le(r).await?;
+            // build: u16
+            let build = crate::util::tokio_read_u16_le(r).await?;
 
-        Ok(Self {
-            major,
-            minor,
-            patch,
-            build,
+            Ok(Self {
+                major,
+                minor,
+                patch,
+                build,
+            })
         })
     }
 
@@ -109,25 +118,36 @@ impl ReadableAndWritable for Version {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // major: u8
-        let major = crate::util::astd_read_u8_le(r).await?;
 
-        // minor: u8
-        let minor = crate::util::astd_read_u8_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // major: u8
+            let major = crate::util::astd_read_u8_le(r).await?;
 
-        // patch: u8
-        let patch = crate::util::astd_read_u8_le(r).await?;
+            // minor: u8
+            let minor = crate::util::astd_read_u8_le(r).await?;
 
-        // build: u16
-        let build = crate::util::astd_read_u16_le(r).await?;
+            // patch: u8
+            let patch = crate::util::astd_read_u8_le(r).await?;
 
-        Ok(Self {
-            major,
-            minor,
-            patch,
-            build,
+            // build: u16
+            let build = crate::util::astd_read_u16_le(r).await?;
+
+            Ok(Self {
+                major,
+                minor,
+                patch,
+                build,
+            })
         })
     }
 
@@ -159,6 +179,7 @@ impl ReadableAndWritable for Version {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for Version {}

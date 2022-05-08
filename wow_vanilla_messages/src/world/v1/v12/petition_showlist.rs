@@ -23,7 +23,6 @@ impl PetitionShowlist {
 
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for PetitionShowlist {
     type Error = std::io::Error;
 
@@ -80,33 +79,43 @@ impl ReadableAndWritable for PetitionShowlist {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // index: u32
-        let index = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // index: u32
+            let index = crate::util::tokio_read_u32_le(r).await?;
 
-        // charter_entry: u32
-        let _charter_entry = crate::util::tokio_read_u32_le(r).await?;
-        // charter_entry is expected to always be 5863 (5863)
+            // charter_entry: u32
+            let _charter_entry = crate::util::tokio_read_u32_le(r).await?;
+            // charter_entry is expected to always be 5863 (5863)
 
-        // charter_display_id: u32
-        let _charter_display_id = crate::util::tokio_read_u32_le(r).await?;
-        // charter_display_id is expected to always be 16161 (16161)
+            // charter_display_id: u32
+            let _charter_display_id = crate::util::tokio_read_u32_le(r).await?;
+            // charter_display_id is expected to always be 16161 (16161)
 
-        // guild_charter_cost: u32
-        let guild_charter_cost = crate::util::tokio_read_u32_le(r).await?;
+            // guild_charter_cost: u32
+            let guild_charter_cost = crate::util::tokio_read_u32_le(r).await?;
 
-        // unknown1: u32
-        let unknown1 = crate::util::tokio_read_u32_le(r).await?;
+            // unknown1: u32
+            let unknown1 = crate::util::tokio_read_u32_le(r).await?;
 
-        // unknown2: u32
-        let unknown2 = crate::util::tokio_read_u32_le(r).await?;
+            // unknown2: u32
+            let unknown2 = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            index,
-            guild_charter_cost,
-            unknown1,
-            unknown2,
+            Ok(Self {
+                index,
+                guild_charter_cost,
+                unknown1,
+                unknown2,
+            })
         })
     }
 
@@ -144,33 +153,44 @@ impl ReadableAndWritable for PetitionShowlist {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // index: u32
-        let index = crate::util::astd_read_u32_le(r).await?;
 
-        // charter_entry: u32
-        let _charter_entry = crate::util::astd_read_u32_le(r).await?;
-        // charter_entry is expected to always be 5863 (5863)
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // index: u32
+            let index = crate::util::astd_read_u32_le(r).await?;
 
-        // charter_display_id: u32
-        let _charter_display_id = crate::util::astd_read_u32_le(r).await?;
-        // charter_display_id is expected to always be 16161 (16161)
+            // charter_entry: u32
+            let _charter_entry = crate::util::astd_read_u32_le(r).await?;
+            // charter_entry is expected to always be 5863 (5863)
 
-        // guild_charter_cost: u32
-        let guild_charter_cost = crate::util::astd_read_u32_le(r).await?;
+            // charter_display_id: u32
+            let _charter_display_id = crate::util::astd_read_u32_le(r).await?;
+            // charter_display_id is expected to always be 16161 (16161)
 
-        // unknown1: u32
-        let unknown1 = crate::util::astd_read_u32_le(r).await?;
+            // guild_charter_cost: u32
+            let guild_charter_cost = crate::util::astd_read_u32_le(r).await?;
 
-        // unknown2: u32
-        let unknown2 = crate::util::astd_read_u32_le(r).await?;
+            // unknown1: u32
+            let unknown1 = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            index,
-            guild_charter_cost,
-            unknown1,
-            unknown2,
+            // unknown2: u32
+            let unknown2 = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                index,
+                guild_charter_cost,
+                unknown1,
+                unknown2,
+            })
         })
     }
 
@@ -208,6 +228,7 @@ impl ReadableAndWritable for PetitionShowlist {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for PetitionShowlist {}

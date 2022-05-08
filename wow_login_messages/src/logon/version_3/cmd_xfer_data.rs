@@ -16,7 +16,6 @@ pub struct CMD_XFER_DATA {
 impl ServerMessage for CMD_XFER_DATA {
     const OPCODE: u8 = 0x31;
 }
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CMD_XFER_DATA {
     type Error = std::io::Error;
 
@@ -52,19 +51,29 @@ impl ReadableAndWritable for CMD_XFER_DATA {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // size: u16
-        let size = crate::util::tokio_read_u16_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // size: u16
+            let size = crate::util::tokio_read_u16_le(r).await?;
 
-        // data: u8[size]
-        let mut data = Vec::with_capacity(size as usize);
-        for i in 0..size {
-            data.push(crate::util::tokio_read_u8_le(r).await?);
-        }
+            // data: u8[size]
+            let mut data = Vec::with_capacity(size as usize);
+            for i in 0..size {
+                data.push(crate::util::tokio_read_u8_le(r).await?);
+            }
 
-        Ok(Self {
-            data,
+            Ok(Self {
+                data,
+            })
         })
     }
 
@@ -95,19 +104,30 @@ impl ReadableAndWritable for CMD_XFER_DATA {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // size: u16
-        let size = crate::util::astd_read_u16_le(r).await?;
 
-        // data: u8[size]
-        let mut data = Vec::with_capacity(size as usize);
-        for i in 0..size {
-            data.push(crate::util::astd_read_u8_le(r).await?);
-        }
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // size: u16
+            let size = crate::util::astd_read_u16_le(r).await?;
 
-        Ok(Self {
-            data,
+            // data: u8[size]
+            let mut data = Vec::with_capacity(size as usize);
+            for i in 0..size {
+                data.push(crate::util::astd_read_u8_le(r).await?);
+            }
+
+            Ok(Self {
+                data,
+            })
         })
     }
 
@@ -138,6 +158,7 @@ impl ReadableAndWritable for CMD_XFER_DATA {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for CMD_XFER_DATA {

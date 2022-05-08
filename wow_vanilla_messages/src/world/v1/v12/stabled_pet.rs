@@ -17,7 +17,6 @@ pub struct StabledPet {
     pub slot: u8,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for StabledPet {
     type Error = StabledPetError;
 
@@ -77,34 +76,44 @@ impl ReadableAndWritable for StabledPet {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // pet_number: u32
-        let pet_number = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // pet_number: u32
+            let pet_number = crate::util::tokio_read_u32_le(r).await?;
 
-        // entry: u32
-        let entry = crate::util::tokio_read_u32_le(r).await?;
+            // entry: u32
+            let entry = crate::util::tokio_read_u32_le(r).await?;
 
-        // level: u32
-        let level = crate::util::tokio_read_u32_le(r).await?;
+            // level: u32
+            let level = crate::util::tokio_read_u32_le(r).await?;
 
-        // name: CString
-        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
+            // name: CString
+            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // loyalty: u32
-        let loyalty = crate::util::tokio_read_u32_le(r).await?;
+            // loyalty: u32
+            let loyalty = crate::util::tokio_read_u32_le(r).await?;
 
-        // slot: u8
-        let slot = crate::util::tokio_read_u8_le(r).await?;
+            // slot: u8
+            let slot = crate::util::tokio_read_u8_le(r).await?;
 
-        Ok(Self {
-            pet_number,
-            entry,
-            level,
-            name,
-            loyalty,
-            slot,
+            Ok(Self {
+                pet_number,
+                entry,
+                level,
+                name,
+                loyalty,
+                slot,
+            })
         })
     }
 
@@ -144,34 +153,45 @@ impl ReadableAndWritable for StabledPet {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // pet_number: u32
-        let pet_number = crate::util::astd_read_u32_le(r).await?;
 
-        // entry: u32
-        let entry = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // pet_number: u32
+            let pet_number = crate::util::astd_read_u32_le(r).await?;
 
-        // level: u32
-        let level = crate::util::astd_read_u32_le(r).await?;
+            // entry: u32
+            let entry = crate::util::astd_read_u32_le(r).await?;
 
-        // name: CString
-        let name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
+            // level: u32
+            let level = crate::util::astd_read_u32_le(r).await?;
 
-        // loyalty: u32
-        let loyalty = crate::util::astd_read_u32_le(r).await?;
+            // name: CString
+            let name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // slot: u8
-        let slot = crate::util::astd_read_u8_le(r).await?;
+            // loyalty: u32
+            let loyalty = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            pet_number,
-            entry,
-            level,
-            name,
-            loyalty,
-            slot,
+            // slot: u8
+            let slot = crate::util::astd_read_u8_le(r).await?;
+
+            Ok(Self {
+                pet_number,
+                entry,
+                level,
+                name,
+                loyalty,
+                slot,
+            })
         })
     }
 
@@ -211,6 +231,7 @@ impl ReadableAndWritable for StabledPet {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for StabledPet {

@@ -17,7 +17,6 @@ pub struct NpcTextUpdate {
     pub emotes: [NpcTextUpdateEmote; 3],
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for NpcTextUpdate {
     type Error = NpcTextUpdateError;
 
@@ -73,33 +72,43 @@ impl ReadableAndWritable for NpcTextUpdate {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // probability: f32
-        let probability = crate::util::tokio_read_f32_le(r).await?;
-        // texts: CString[2]
-        let mut texts = Vec::with_capacity(2 as usize);
-        for i in 0..2 {
-            let s = crate::util::tokio_read_c_string_to_vec(r).await?;
-            texts[i] = String::from_utf8(s)?;
-        }
-        let texts = texts.try_into().unwrap();
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // probability: f32
+            let probability = crate::util::tokio_read_f32_le(r).await?;
+            // texts: CString[2]
+            let mut texts = Vec::with_capacity(2 as usize);
+            for i in 0..2 {
+                let s = crate::util::tokio_read_c_string_to_vec(r).await?;
+                texts[i] = String::from_utf8(s)?;
+            }
+            let texts = texts.try_into().unwrap();
 
-        // language: Language
-        let language = Language::tokio_read(r).await?;
+            // language: Language
+            let language = Language::tokio_read(r).await?;
 
-        // emotes: NpcTextUpdateEmote[3]
-        let mut emotes = Vec::with_capacity(3 as usize);
-        for i in 0..3 {
-            emotes.push(NpcTextUpdateEmote::tokio_read(r).await?);
-        }
-        let emotes = emotes.try_into().unwrap();
+            // emotes: NpcTextUpdateEmote[3]
+            let mut emotes = Vec::with_capacity(3 as usize);
+            for i in 0..3 {
+                emotes.push(NpcTextUpdateEmote::tokio_read(r).await?);
+            }
+            let emotes = emotes.try_into().unwrap();
 
-        Ok(Self {
-            probability,
-            texts,
-            language,
-            emotes,
+            Ok(Self {
+                probability,
+                texts,
+                language,
+                emotes,
+            })
         })
     }
 
@@ -136,33 +145,44 @@ impl ReadableAndWritable for NpcTextUpdate {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // probability: f32
-        let probability = crate::util::astd_read_f32_le(r).await?;
-        // texts: CString[2]
-        let mut texts = Vec::with_capacity(2 as usize);
-        for i in 0..2 {
-            let s = crate::util::astd_read_c_string_to_vec(r).await?;
-            texts[i] = String::from_utf8(s)?;
-        }
-        let texts = texts.try_into().unwrap();
 
-        // language: Language
-        let language = Language::astd_read(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // probability: f32
+            let probability = crate::util::astd_read_f32_le(r).await?;
+            // texts: CString[2]
+            let mut texts = Vec::with_capacity(2 as usize);
+            for i in 0..2 {
+                let s = crate::util::astd_read_c_string_to_vec(r).await?;
+                texts[i] = String::from_utf8(s)?;
+            }
+            let texts = texts.try_into().unwrap();
 
-        // emotes: NpcTextUpdateEmote[3]
-        let mut emotes = Vec::with_capacity(3 as usize);
-        for i in 0..3 {
-            emotes.push(NpcTextUpdateEmote::astd_read(r).await?);
-        }
-        let emotes = emotes.try_into().unwrap();
+            // language: Language
+            let language = Language::astd_read(r).await?;
 
-        Ok(Self {
-            probability,
-            texts,
-            language,
-            emotes,
+            // emotes: NpcTextUpdateEmote[3]
+            let mut emotes = Vec::with_capacity(3 as usize);
+            for i in 0..3 {
+                emotes.push(NpcTextUpdateEmote::astd_read(r).await?);
+            }
+            let emotes = emotes.try_into().unwrap();
+
+            Ok(Self {
+                probability,
+                texts,
+                language,
+                emotes,
+            })
         })
     }
 
@@ -199,6 +219,7 @@ impl ReadableAndWritable for NpcTextUpdate {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for NpcTextUpdate {

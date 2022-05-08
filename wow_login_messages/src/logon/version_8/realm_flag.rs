@@ -18,7 +18,6 @@ impl RealmFlag {
 
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for RealmFlag {
     type Error = std::io::Error;
 
@@ -34,10 +33,20 @@ impl ReadableAndWritable for RealmFlag {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        let inner = crate::util::tokio_read_u8_le(r).await?;
-        Ok(Self { inner })
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            let inner = crate::util::tokio_read_u8_le(r).await?;
+            Ok(Self { inner })
+        })
     }
 
     fn tokio_write<'life0, 'life1, 'async_trait, W>(
@@ -57,10 +66,21 @@ impl ReadableAndWritable for RealmFlag {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        let inner = crate::util::astd_read_u8_le(r).await?;
-        Ok(Self { inner })
+
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            let inner = crate::util::astd_read_u8_le(r).await?;
+            Ok(Self { inner })
+        })
     }
 
     fn astd_write<'life0, 'life1, 'async_trait, W>(
@@ -80,6 +100,7 @@ impl ReadableAndWritable for RealmFlag {
             Ok(())
         })
     }
+
 }
 
 impl RealmFlag {

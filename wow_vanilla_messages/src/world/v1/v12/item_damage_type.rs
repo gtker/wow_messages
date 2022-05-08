@@ -15,7 +15,6 @@ pub struct ItemDamageType {
     pub damage_type: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for ItemDamageType {
     type Error = std::io::Error;
 
@@ -51,21 +50,31 @@ impl ReadableAndWritable for ItemDamageType {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // damage_minimum: u32
-        let damage_minimum = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // damage_minimum: u32
+            let damage_minimum = crate::util::tokio_read_u32_le(r).await?;
 
-        // damage_maximum: u32
-        let damage_maximum = crate::util::tokio_read_u32_le(r).await?;
+            // damage_maximum: u32
+            let damage_maximum = crate::util::tokio_read_u32_le(r).await?;
 
-        // damage_type: u32
-        let damage_type = crate::util::tokio_read_u32_le(r).await?;
+            // damage_type: u32
+            let damage_type = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            damage_minimum,
-            damage_maximum,
-            damage_type,
+            Ok(Self {
+                damage_minimum,
+                damage_maximum,
+                damage_type,
+            })
         })
     }
 
@@ -94,21 +103,32 @@ impl ReadableAndWritable for ItemDamageType {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // damage_minimum: u32
-        let damage_minimum = crate::util::astd_read_u32_le(r).await?;
 
-        // damage_maximum: u32
-        let damage_maximum = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // damage_minimum: u32
+            let damage_minimum = crate::util::astd_read_u32_le(r).await?;
 
-        // damage_type: u32
-        let damage_type = crate::util::astd_read_u32_le(r).await?;
+            // damage_maximum: u32
+            let damage_maximum = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            damage_minimum,
-            damage_maximum,
-            damage_type,
+            // damage_type: u32
+            let damage_type = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                damage_minimum,
+                damage_maximum,
+                damage_type,
+            })
         })
     }
 
@@ -137,6 +157,7 @@ impl ReadableAndWritable for ItemDamageType {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for ItemDamageType {}

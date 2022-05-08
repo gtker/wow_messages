@@ -27,7 +27,6 @@ pub struct AuctionListItem {
     pub highest_bid: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for AuctionListItem {
     type Error = std::io::Error;
 
@@ -140,65 +139,75 @@ impl ReadableAndWritable for AuctionListItem {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // id: u32
-        let id = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // id: u32
+            let id = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_entry: u32
-        let item_entry = crate::util::tokio_read_u32_le(r).await?;
+            // item_entry: u32
+            let item_entry = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_enchantment: u32
-        let item_enchantment = crate::util::tokio_read_u32_le(r).await?;
+            // item_enchantment: u32
+            let item_enchantment = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_random_property_id: u32
-        let item_random_property_id = crate::util::tokio_read_u32_le(r).await?;
+            // item_random_property_id: u32
+            let item_random_property_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_suffix_factor: u32
-        let item_suffix_factor = crate::util::tokio_read_u32_le(r).await?;
+            // item_suffix_factor: u32
+            let item_suffix_factor = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_count: u32
-        let item_count = crate::util::tokio_read_u32_le(r).await?;
+            // item_count: u32
+            let item_count = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_charges: u32
-        let item_charges = crate::util::tokio_read_u32_le(r).await?;
+            // item_charges: u32
+            let item_charges = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_owner: Guid
-        let item_owner = Guid::tokio_read(r).await?;
+            // item_owner: Guid
+            let item_owner = Guid::tokio_read(r).await?;
 
-        // start_bid: u32
-        let start_bid = crate::util::tokio_read_u32_le(r).await?;
+            // start_bid: u32
+            let start_bid = crate::util::tokio_read_u32_le(r).await?;
 
-        // minimum_bid: u32
-        let minimum_bid = crate::util::tokio_read_u32_le(r).await?;
+            // minimum_bid: u32
+            let minimum_bid = crate::util::tokio_read_u32_le(r).await?;
 
-        // buyout_amount: u32
-        let buyout_amount = crate::util::tokio_read_u32_le(r).await?;
+            // buyout_amount: u32
+            let buyout_amount = crate::util::tokio_read_u32_le(r).await?;
 
-        // time_left_in_msecs: u32
-        let time_left_in_msecs = crate::util::tokio_read_u32_le(r).await?;
+            // time_left_in_msecs: u32
+            let time_left_in_msecs = crate::util::tokio_read_u32_le(r).await?;
 
-        // highest_bidder: Guid
-        let highest_bidder = Guid::tokio_read(r).await?;
+            // highest_bidder: Guid
+            let highest_bidder = Guid::tokio_read(r).await?;
 
-        // highest_bid: u32
-        let highest_bid = crate::util::tokio_read_u32_le(r).await?;
+            // highest_bid: u32
+            let highest_bid = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            id,
-            item_entry,
-            item_enchantment,
-            item_random_property_id,
-            item_suffix_factor,
-            item_count,
-            item_charges,
-            item_owner,
-            start_bid,
-            minimum_bid,
-            buyout_amount,
-            time_left_in_msecs,
-            highest_bidder,
-            highest_bid,
+            Ok(Self {
+                id,
+                item_entry,
+                item_enchantment,
+                item_random_property_id,
+                item_suffix_factor,
+                item_count,
+                item_charges,
+                item_owner,
+                start_bid,
+                minimum_bid,
+                buyout_amount,
+                time_left_in_msecs,
+                highest_bidder,
+                highest_bid,
+            })
         })
     }
 
@@ -260,65 +269,76 @@ impl ReadableAndWritable for AuctionListItem {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // id: u32
-        let id = crate::util::astd_read_u32_le(r).await?;
 
-        // item_entry: u32
-        let item_entry = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // id: u32
+            let id = crate::util::astd_read_u32_le(r).await?;
 
-        // item_enchantment: u32
-        let item_enchantment = crate::util::astd_read_u32_le(r).await?;
+            // item_entry: u32
+            let item_entry = crate::util::astd_read_u32_le(r).await?;
 
-        // item_random_property_id: u32
-        let item_random_property_id = crate::util::astd_read_u32_le(r).await?;
+            // item_enchantment: u32
+            let item_enchantment = crate::util::astd_read_u32_le(r).await?;
 
-        // item_suffix_factor: u32
-        let item_suffix_factor = crate::util::astd_read_u32_le(r).await?;
+            // item_random_property_id: u32
+            let item_random_property_id = crate::util::astd_read_u32_le(r).await?;
 
-        // item_count: u32
-        let item_count = crate::util::astd_read_u32_le(r).await?;
+            // item_suffix_factor: u32
+            let item_suffix_factor = crate::util::astd_read_u32_le(r).await?;
 
-        // item_charges: u32
-        let item_charges = crate::util::astd_read_u32_le(r).await?;
+            // item_count: u32
+            let item_count = crate::util::astd_read_u32_le(r).await?;
 
-        // item_owner: Guid
-        let item_owner = Guid::astd_read(r).await?;
+            // item_charges: u32
+            let item_charges = crate::util::astd_read_u32_le(r).await?;
 
-        // start_bid: u32
-        let start_bid = crate::util::astd_read_u32_le(r).await?;
+            // item_owner: Guid
+            let item_owner = Guid::astd_read(r).await?;
 
-        // minimum_bid: u32
-        let minimum_bid = crate::util::astd_read_u32_le(r).await?;
+            // start_bid: u32
+            let start_bid = crate::util::astd_read_u32_le(r).await?;
 
-        // buyout_amount: u32
-        let buyout_amount = crate::util::astd_read_u32_le(r).await?;
+            // minimum_bid: u32
+            let minimum_bid = crate::util::astd_read_u32_le(r).await?;
 
-        // time_left_in_msecs: u32
-        let time_left_in_msecs = crate::util::astd_read_u32_le(r).await?;
+            // buyout_amount: u32
+            let buyout_amount = crate::util::astd_read_u32_le(r).await?;
 
-        // highest_bidder: Guid
-        let highest_bidder = Guid::astd_read(r).await?;
+            // time_left_in_msecs: u32
+            let time_left_in_msecs = crate::util::astd_read_u32_le(r).await?;
 
-        // highest_bid: u32
-        let highest_bid = crate::util::astd_read_u32_le(r).await?;
+            // highest_bidder: Guid
+            let highest_bidder = Guid::astd_read(r).await?;
 
-        Ok(Self {
-            id,
-            item_entry,
-            item_enchantment,
-            item_random_property_id,
-            item_suffix_factor,
-            item_count,
-            item_charges,
-            item_owner,
-            start_bid,
-            minimum_bid,
-            buyout_amount,
-            time_left_in_msecs,
-            highest_bidder,
-            highest_bid,
+            // highest_bid: u32
+            let highest_bid = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                id,
+                item_entry,
+                item_enchantment,
+                item_random_property_id,
+                item_suffix_factor,
+                item_count,
+                item_charges,
+                item_owner,
+                start_bid,
+                minimum_bid,
+                buyout_amount,
+                time_left_in_msecs,
+                highest_bidder,
+                highest_bid,
+            })
         })
     }
 
@@ -380,6 +400,7 @@ impl ReadableAndWritable for AuctionListItem {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for AuctionListItem {}

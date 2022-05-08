@@ -13,7 +13,6 @@ pub struct SimpleIfFlag {
     pub flag: SimpleIfFlagSimpleFlag,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for SimpleIfFlag {
     type Error = std::io::Error;
 
@@ -55,29 +54,39 @@ impl ReadableAndWritable for SimpleIfFlag {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // flag: SimpleFlag
-        let flag = SimpleFlag::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // flag: SimpleFlag
+            let flag = SimpleFlag::tokio_read(r).await?;
 
-        let flag_ZERO = if flag.is_ZERO() {
-            // basic: u8
-            let basic = crate::util::tokio_read_u8_le(r).await?;
+            let flag_ZERO = if flag.is_ZERO() {
+                // basic: u8
+                let basic = crate::util::tokio_read_u8_le(r).await?;
 
-            Some(SimpleIfFlagSimpleFlagZERO {
-                basic,
+                Some(SimpleIfFlagSimpleFlagZERO {
+                    basic,
+                })
+            } else {
+                None
+            };
+
+            let flag = SimpleIfFlagSimpleFlag {
+                inner: flag.as_int(),
+                zero: flag_ZERO,
+            };
+
+            Ok(Self {
+                flag,
             })
-        } else {
-            None
-        };
-
-        let flag = SimpleIfFlagSimpleFlag {
-            inner: flag.as_int(),
-            zero: flag_ZERO,
-        };
-
-        Ok(Self {
-            flag,
         })
     }
 
@@ -104,29 +113,40 @@ impl ReadableAndWritable for SimpleIfFlag {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // flag: SimpleFlag
-        let flag = SimpleFlag::astd_read(r).await?;
 
-        let flag_ZERO = if flag.is_ZERO() {
-            // basic: u8
-            let basic = crate::util::astd_read_u8_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // flag: SimpleFlag
+            let flag = SimpleFlag::astd_read(r).await?;
 
-            Some(SimpleIfFlagSimpleFlagZERO {
-                basic,
+            let flag_ZERO = if flag.is_ZERO() {
+                // basic: u8
+                let basic = crate::util::astd_read_u8_le(r).await?;
+
+                Some(SimpleIfFlagSimpleFlagZERO {
+                    basic,
+                })
+            } else {
+                None
+            };
+
+            let flag = SimpleIfFlagSimpleFlag {
+                inner: flag.as_int(),
+                zero: flag_ZERO,
+            };
+
+            Ok(Self {
+                flag,
             })
-        } else {
-            None
-        };
-
-        let flag = SimpleIfFlagSimpleFlag {
-            inner: flag.as_int(),
-            zero: flag_ZERO,
-        };
-
-        Ok(Self {
-            flag,
         })
     }
 
@@ -153,6 +173,7 @@ impl ReadableAndWritable for SimpleIfFlag {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for SimpleIfFlag {

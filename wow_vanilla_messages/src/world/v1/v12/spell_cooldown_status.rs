@@ -14,7 +14,6 @@ pub struct SpellCooldownStatus {
     pub cooldown_time_in_msecs: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for SpellCooldownStatus {
     type Error = std::io::Error;
 
@@ -43,17 +42,27 @@ impl ReadableAndWritable for SpellCooldownStatus {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // id: u32
-        let id = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // id: u32
+            let id = crate::util::tokio_read_u32_le(r).await?;
 
-        // cooldown_time_in_msecs: u32
-        let cooldown_time_in_msecs = crate::util::tokio_read_u32_le(r).await?;
+            // cooldown_time_in_msecs: u32
+            let cooldown_time_in_msecs = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            id,
-            cooldown_time_in_msecs,
+            Ok(Self {
+                id,
+                cooldown_time_in_msecs,
+            })
         })
     }
 
@@ -79,17 +88,28 @@ impl ReadableAndWritable for SpellCooldownStatus {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // id: u32
-        let id = crate::util::astd_read_u32_le(r).await?;
 
-        // cooldown_time_in_msecs: u32
-        let cooldown_time_in_msecs = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // id: u32
+            let id = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            id,
-            cooldown_time_in_msecs,
+            // cooldown_time_in_msecs: u32
+            let cooldown_time_in_msecs = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                id,
+                cooldown_time_in_msecs,
+            })
         })
     }
 
@@ -115,6 +135,7 @@ impl ReadableAndWritable for SpellCooldownStatus {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for SpellCooldownStatus {}

@@ -15,7 +15,6 @@ pub struct ChannelMember {
     pub member_flags: u8,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for ChannelMember {
     type Error = std::io::Error;
 
@@ -44,17 +43,27 @@ impl ReadableAndWritable for ChannelMember {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::tokio_read(r).await?;
 
-        // member_flags: u8
-        let member_flags = crate::util::tokio_read_u8_le(r).await?;
+            // member_flags: u8
+            let member_flags = crate::util::tokio_read_u8_le(r).await?;
 
-        Ok(Self {
-            guid,
-            member_flags,
+            Ok(Self {
+                guid,
+                member_flags,
+            })
         })
     }
 
@@ -80,17 +89,28 @@ impl ReadableAndWritable for ChannelMember {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::astd_read(r).await?;
 
-        // member_flags: u8
-        let member_flags = crate::util::astd_read_u8_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::astd_read(r).await?;
 
-        Ok(Self {
-            guid,
-            member_flags,
+            // member_flags: u8
+            let member_flags = crate::util::astd_read_u8_le(r).await?;
+
+            Ok(Self {
+                guid,
+                member_flags,
+            })
         })
     }
 
@@ -116,6 +136,7 @@ impl ReadableAndWritable for ChannelMember {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for ChannelMember {}

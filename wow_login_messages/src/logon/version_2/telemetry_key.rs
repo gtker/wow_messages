@@ -16,7 +16,6 @@ pub struct TelemetryKey {
     pub unknown4: [u8; 20],
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for TelemetryKey {
     type Error = std::io::Error;
 
@@ -65,27 +64,37 @@ impl ReadableAndWritable for TelemetryKey {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // unknown1: u16
-        let unknown1 = crate::util::tokio_read_u16_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // unknown1: u16
+            let unknown1 = crate::util::tokio_read_u16_le(r).await?;
 
-        // unknown2: u32
-        let unknown2 = crate::util::tokio_read_u32_le(r).await?;
+            // unknown2: u32
+            let unknown2 = crate::util::tokio_read_u32_le(r).await?;
 
-        // unknown3: u8[4]
-        let mut unknown3 = [0_u8; 4];
-        r.read_exact(&mut unknown3).await?;
+            // unknown3: u8[4]
+            let mut unknown3 = [0_u8; 4];
+            r.read_exact(&mut unknown3).await?;
 
-        // unknown4: u8[20]
-        let mut unknown4 = [0_u8; 20];
-        r.read_exact(&mut unknown4).await?;
+            // unknown4: u8[20]
+            let mut unknown4 = [0_u8; 20];
+            r.read_exact(&mut unknown4).await?;
 
-        Ok(Self {
-            unknown1,
-            unknown2,
-            unknown3,
-            unknown4,
+            Ok(Self {
+                unknown1,
+                unknown2,
+                unknown3,
+                unknown4,
+            })
         })
     }
 
@@ -121,27 +130,38 @@ impl ReadableAndWritable for TelemetryKey {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // unknown1: u16
-        let unknown1 = crate::util::astd_read_u16_le(r).await?;
 
-        // unknown2: u32
-        let unknown2 = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // unknown1: u16
+            let unknown1 = crate::util::astd_read_u16_le(r).await?;
 
-        // unknown3: u8[4]
-        let mut unknown3 = [0_u8; 4];
-        r.read_exact(&mut unknown3).await?;
+            // unknown2: u32
+            let unknown2 = crate::util::astd_read_u32_le(r).await?;
 
-        // unknown4: u8[20]
-        let mut unknown4 = [0_u8; 20];
-        r.read_exact(&mut unknown4).await?;
+            // unknown3: u8[4]
+            let mut unknown3 = [0_u8; 4];
+            r.read_exact(&mut unknown3).await?;
 
-        Ok(Self {
-            unknown1,
-            unknown2,
-            unknown3,
-            unknown4,
+            // unknown4: u8[20]
+            let mut unknown4 = [0_u8; 20];
+            r.read_exact(&mut unknown4).await?;
+
+            Ok(Self {
+                unknown1,
+                unknown2,
+                unknown3,
+                unknown4,
+            })
         })
     }
 
@@ -177,6 +197,7 @@ impl ReadableAndWritable for TelemetryKey {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for TelemetryKey {}

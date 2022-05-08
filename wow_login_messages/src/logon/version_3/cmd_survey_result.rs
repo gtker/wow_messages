@@ -18,7 +18,6 @@ pub struct CMD_SURVEY_RESULT {
 impl ClientMessage for CMD_SURVEY_RESULT {
     const OPCODE: u8 = 0x04;
 }
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CMD_SURVEY_RESULT {
     type Error = std::io::Error;
 
@@ -68,27 +67,37 @@ impl ReadableAndWritable for CMD_SURVEY_RESULT {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // survey_id: u32
-        let survey_id = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // survey_id: u32
+            let survey_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // error: u8
-        let error = crate::util::tokio_read_u8_le(r).await?;
+            // error: u8
+            let error = crate::util::tokio_read_u8_le(r).await?;
 
-        // compressed_data_length: u16
-        let compressed_data_length = crate::util::tokio_read_u16_le(r).await?;
+            // compressed_data_length: u16
+            let compressed_data_length = crate::util::tokio_read_u16_le(r).await?;
 
-        // data: u8[compressed_data_length]
-        let mut data = Vec::with_capacity(compressed_data_length as usize);
-        for i in 0..compressed_data_length {
-            data.push(crate::util::tokio_read_u8_le(r).await?);
-        }
+            // data: u8[compressed_data_length]
+            let mut data = Vec::with_capacity(compressed_data_length as usize);
+            for i in 0..compressed_data_length {
+                data.push(crate::util::tokio_read_u8_le(r).await?);
+            }
 
-        Ok(Self {
-            survey_id,
-            error,
-            data,
+            Ok(Self {
+                survey_id,
+                error,
+                data,
+            })
         })
     }
 
@@ -125,27 +134,38 @@ impl ReadableAndWritable for CMD_SURVEY_RESULT {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // survey_id: u32
-        let survey_id = crate::util::astd_read_u32_le(r).await?;
 
-        // error: u8
-        let error = crate::util::astd_read_u8_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // survey_id: u32
+            let survey_id = crate::util::astd_read_u32_le(r).await?;
 
-        // compressed_data_length: u16
-        let compressed_data_length = crate::util::astd_read_u16_le(r).await?;
+            // error: u8
+            let error = crate::util::astd_read_u8_le(r).await?;
 
-        // data: u8[compressed_data_length]
-        let mut data = Vec::with_capacity(compressed_data_length as usize);
-        for i in 0..compressed_data_length {
-            data.push(crate::util::astd_read_u8_le(r).await?);
-        }
+            // compressed_data_length: u16
+            let compressed_data_length = crate::util::astd_read_u16_le(r).await?;
 
-        Ok(Self {
-            survey_id,
-            error,
-            data,
+            // data: u8[compressed_data_length]
+            let mut data = Vec::with_capacity(compressed_data_length as usize);
+            for i in 0..compressed_data_length {
+                data.push(crate::util::astd_read_u8_le(r).await?);
+            }
+
+            Ok(Self {
+                survey_id,
+                error,
+                data,
+            })
         })
     }
 
@@ -182,6 +202,7 @@ impl ReadableAndWritable for CMD_SURVEY_RESULT {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for CMD_SURVEY_RESULT {

@@ -23,7 +23,6 @@ pub struct Realm {
     pub realm_id: u8,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for Realm {
     type Error = RealmError;
 
@@ -100,43 +99,53 @@ impl ReadableAndWritable for Realm {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // realm_type: RealmType
-        let realm_type = RealmType::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // realm_type: RealmType
+            let realm_type = RealmType::tokio_read(r).await?;
 
-        // flag: RealmFlag
-        let flag = RealmFlag::tokio_read(r).await?;
+            // flag: RealmFlag
+            let flag = RealmFlag::tokio_read(r).await?;
 
-        // name: CString
-        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
+            // name: CString
+            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // address: CString
-        let address = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let address = String::from_utf8(address)?;
+            // address: CString
+            let address = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let address = String::from_utf8(address)?;
 
-        // population: Population
-        let population = Population::tokio_read(r).await?;
+            // population: Population
+            let population = Population::tokio_read(r).await?;
 
-        // number_of_characters_on_realm: u8
-        let number_of_characters_on_realm = crate::util::tokio_read_u8_le(r).await?;
+            // number_of_characters_on_realm: u8
+            let number_of_characters_on_realm = crate::util::tokio_read_u8_le(r).await?;
 
-        // category: RealmCategory
-        let category = RealmCategory::tokio_read(r).await?;
+            // category: RealmCategory
+            let category = RealmCategory::tokio_read(r).await?;
 
-        // realm_id: u8
-        let realm_id = crate::util::tokio_read_u8_le(r).await?;
+            // realm_id: u8
+            let realm_id = crate::util::tokio_read_u8_le(r).await?;
 
-        Ok(Self {
-            realm_type,
-            flag,
-            name,
-            address,
-            population,
-            number_of_characters_on_realm,
-            category,
-            realm_id,
+            Ok(Self {
+                realm_type,
+                flag,
+                name,
+                address,
+                population,
+                number_of_characters_on_realm,
+                category,
+                realm_id,
+            })
         })
     }
 
@@ -184,43 +193,54 @@ impl ReadableAndWritable for Realm {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // realm_type: RealmType
-        let realm_type = RealmType::astd_read(r).await?;
 
-        // flag: RealmFlag
-        let flag = RealmFlag::astd_read(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // realm_type: RealmType
+            let realm_type = RealmType::astd_read(r).await?;
 
-        // name: CString
-        let name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
+            // flag: RealmFlag
+            let flag = RealmFlag::astd_read(r).await?;
 
-        // address: CString
-        let address = crate::util::astd_read_c_string_to_vec(r).await?;
-        let address = String::from_utf8(address)?;
+            // name: CString
+            let name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // population: Population
-        let population = Population::astd_read(r).await?;
+            // address: CString
+            let address = crate::util::astd_read_c_string_to_vec(r).await?;
+            let address = String::from_utf8(address)?;
 
-        // number_of_characters_on_realm: u8
-        let number_of_characters_on_realm = crate::util::astd_read_u8_le(r).await?;
+            // population: Population
+            let population = Population::astd_read(r).await?;
 
-        // category: RealmCategory
-        let category = RealmCategory::astd_read(r).await?;
+            // number_of_characters_on_realm: u8
+            let number_of_characters_on_realm = crate::util::astd_read_u8_le(r).await?;
 
-        // realm_id: u8
-        let realm_id = crate::util::astd_read_u8_le(r).await?;
+            // category: RealmCategory
+            let category = RealmCategory::astd_read(r).await?;
 
-        Ok(Self {
-            realm_type,
-            flag,
-            name,
-            address,
-            population,
-            number_of_characters_on_realm,
-            category,
-            realm_id,
+            // realm_id: u8
+            let realm_id = crate::util::astd_read_u8_le(r).await?;
+
+            Ok(Self {
+                realm_type,
+                flag,
+                name,
+                address,
+                population,
+                number_of_characters_on_realm,
+                category,
+                realm_id,
+            })
         })
     }
 
@@ -268,6 +288,7 @@ impl ReadableAndWritable for Realm {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for Realm {

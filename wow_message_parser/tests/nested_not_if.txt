@@ -14,7 +14,6 @@ pub struct NestedNotIf {
     pub t: NestedNotIfTEnum,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for NestedNotIf {
     type Error = NestedNotIfError;
 
@@ -366,185 +365,195 @@ impl ReadableAndWritable for NestedNotIf {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // t: TEnum
-        let t = TEnum::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // t: TEnum
+            let t = TEnum::tokio_read(r).await?;
 
-        let t_if = match t {
-            TEnum::ZERO => NestedNotIfTEnum::ZERO,
-            TEnum::ONE => {
-                // not_zero: u8
-                let not_zero = crate::util::tokio_read_u8_le(r).await?;
+            let t_if = match t {
+                TEnum::ZERO => NestedNotIfTEnum::ZERO,
+                TEnum::ONE => {
+                    // not_zero: u8
+                    let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::tokio_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::tokio_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::tokio_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::tokio_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::ONE {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::ONE {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::TWO => {
-                // not_zero: u8
-                let not_zero = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::TWO => {
+                    // not_zero: u8
+                    let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::tokio_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::tokio_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::tokio_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::tokio_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::TWO {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::TWO {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::THREE => {
-                // not_zero: u8
-                let not_zero = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::THREE => {
+                    // not_zero: u8
+                    let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::tokio_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::tokio_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::tokio_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::tokio_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::THREE {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::THREE {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::FOUR => {
-                // not_zero: u8
-                let not_zero = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::FOUR => {
+                    // not_zero: u8
+                    let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::tokio_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::tokio_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::tokio_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::tokio_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::FOUR {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::FOUR {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::FIVE => {
-                // not_zero: u8
-                let not_zero = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::FIVE => {
+                    // not_zero: u8
+                    let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::tokio_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::tokio_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::tokio_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::tokio_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::FIVE {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::FIVE {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::SIX => {
-                // not_zero: u8
-                let not_zero = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::SIX => {
+                    // not_zero: u8
+                    let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::tokio_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::tokio_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::tokio_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::tokio_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::SIX {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::SIX {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::REST => {
-                // not_zero: u8
-                let not_zero = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::REST => {
+                    // not_zero: u8
+                    let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::tokio_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::tokio_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::tokio_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::tokio_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::REST {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::REST {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-        };
+            };
 
-        Ok(Self {
-            t: t_if,
+            Ok(Self {
+                t: t_if,
+            })
         })
     }
 
@@ -725,185 +734,196 @@ impl ReadableAndWritable for NestedNotIf {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // t: TEnum
-        let t = TEnum::astd_read(r).await?;
 
-        let t_if = match t {
-            TEnum::ZERO => NestedNotIfTEnum::ZERO,
-            TEnum::ONE => {
-                // not_zero: u8
-                let not_zero = crate::util::astd_read_u8_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // t: TEnum
+            let t = TEnum::astd_read(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::astd_read(r).await?;
+            let t_if = match t {
+                TEnum::ZERO => NestedNotIfTEnum::ZERO,
+                TEnum::ONE => {
+                    // not_zero: u8
+                    let not_zero = crate::util::astd_read_u8_le(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::astd_read_u8_le(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::astd_read(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::astd_read_u8_le(r).await?;
+
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::ONE {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::ONE {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::TWO => {
-                // not_zero: u8
-                let not_zero = crate::util::astd_read_u8_le(r).await?;
+                TEnum::TWO => {
+                    // not_zero: u8
+                    let not_zero = crate::util::astd_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::astd_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::astd_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::astd_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::astd_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::TWO {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::TWO {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::THREE => {
-                // not_zero: u8
-                let not_zero = crate::util::astd_read_u8_le(r).await?;
+                TEnum::THREE => {
+                    // not_zero: u8
+                    let not_zero = crate::util::astd_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::astd_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::astd_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::astd_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::astd_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::THREE {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::THREE {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::FOUR => {
-                // not_zero: u8
-                let not_zero = crate::util::astd_read_u8_le(r).await?;
+                TEnum::FOUR => {
+                    // not_zero: u8
+                    let not_zero = crate::util::astd_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::astd_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::astd_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::astd_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::astd_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::FOUR {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::FOUR {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::FIVE => {
-                // not_zero: u8
-                let not_zero = crate::util::astd_read_u8_le(r).await?;
+                TEnum::FIVE => {
+                    // not_zero: u8
+                    let not_zero = crate::util::astd_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::astd_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::astd_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::astd_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::astd_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::FIVE {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::FIVE {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::SIX => {
-                // not_zero: u8
-                let not_zero = crate::util::astd_read_u8_le(r).await?;
+                TEnum::SIX => {
+                    // not_zero: u8
+                    let not_zero = crate::util::astd_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::astd_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::astd_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::astd_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::astd_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::SIX {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::SIX {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-            TEnum::REST => {
-                // not_zero: u8
-                let not_zero = crate::util::astd_read_u8_le(r).await?;
+                TEnum::REST => {
+                    // not_zero: u8
+                    let not_zero = crate::util::astd_read_u8_le(r).await?;
 
-                // e: NestedEnum
-                let e = NestedEnum::astd_read(r).await?;
+                    // e: NestedEnum
+                    let e = NestedEnum::astd_read(r).await?;
 
-                let e_if = match e {
-                    NestedEnum::NESTED => {
-                        // one: u8
-                        let one = crate::util::astd_read_u8_le(r).await?;
+                    let e_if = match e {
+                        NestedEnum::NESTED => {
+                            // one: u8
+                            let one = crate::util::astd_read_u8_le(r).await?;
 
-                        NestedNotIfNestedEnum::NESTED {
-                            one,
+                            NestedNotIfNestedEnum::NESTED {
+                                one,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
+                    };
+
+                    NestedNotIfTEnum::REST {
+                        not_zero,
+                        e: e_if,
                     }
-                    NestedEnum::NOT_NESTED => NestedNotIfNestedEnum::NOT_NESTED,
-                };
-
-                NestedNotIfTEnum::REST {
-                    not_zero,
-                    e: e_if,
                 }
-            }
-        };
+            };
 
-        Ok(Self {
-            t: t_if,
+            Ok(Self {
+                t: t_if,
+            })
         })
     }
 
@@ -1084,6 +1104,7 @@ impl ReadableAndWritable for NestedNotIf {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for NestedNotIf {

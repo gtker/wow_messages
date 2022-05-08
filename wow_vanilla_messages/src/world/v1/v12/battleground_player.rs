@@ -20,7 +20,6 @@ pub struct BattlegroundPlayer {
     pub fields: Vec<u32>,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for BattlegroundPlayer {
     type Error = BattlegroundPlayerError;
 
@@ -95,43 +94,53 @@ impl ReadableAndWritable for BattlegroundPlayer {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // player: Guid
-        let player = Guid::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // player: Guid
+            let player = Guid::tokio_read(r).await?;
 
-        // rank: PvpRank
-        let rank = PvpRank::tokio_read_u32_le(r).await?;
+            // rank: PvpRank
+            let rank = PvpRank::tokio_read_u32_le(r).await?;
 
-        // killing_blows: u32
-        let killing_blows = crate::util::tokio_read_u32_le(r).await?;
+            // killing_blows: u32
+            let killing_blows = crate::util::tokio_read_u32_le(r).await?;
 
-        // honorable_kills: u32
-        let honorable_kills = crate::util::tokio_read_u32_le(r).await?;
+            // honorable_kills: u32
+            let honorable_kills = crate::util::tokio_read_u32_le(r).await?;
 
-        // deaths: u32
-        let deaths = crate::util::tokio_read_u32_le(r).await?;
+            // deaths: u32
+            let deaths = crate::util::tokio_read_u32_le(r).await?;
 
-        // bonus_honor: u32
-        let bonus_honor = crate::util::tokio_read_u32_le(r).await?;
+            // bonus_honor: u32
+            let bonus_honor = crate::util::tokio_read_u32_le(r).await?;
 
-        // amount_of_extra_fields: u32
-        let amount_of_extra_fields = crate::util::tokio_read_u32_le(r).await?;
+            // amount_of_extra_fields: u32
+            let amount_of_extra_fields = crate::util::tokio_read_u32_le(r).await?;
 
-        // fields: u32[amount_of_extra_fields]
-        let mut fields = Vec::with_capacity(amount_of_extra_fields as usize);
-        for i in 0..amount_of_extra_fields {
-            fields.push(crate::util::tokio_read_u32_le(r).await?);
-        }
+            // fields: u32[amount_of_extra_fields]
+            let mut fields = Vec::with_capacity(amount_of_extra_fields as usize);
+            for i in 0..amount_of_extra_fields {
+                fields.push(crate::util::tokio_read_u32_le(r).await?);
+            }
 
-        Ok(Self {
-            player,
-            rank,
-            killing_blows,
-            honorable_kills,
-            deaths,
-            bonus_honor,
-            fields,
+            Ok(Self {
+                player,
+                rank,
+                killing_blows,
+                honorable_kills,
+                deaths,
+                bonus_honor,
+                fields,
+            })
         })
     }
 
@@ -177,43 +186,54 @@ impl ReadableAndWritable for BattlegroundPlayer {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // player: Guid
-        let player = Guid::astd_read(r).await?;
 
-        // rank: PvpRank
-        let rank = PvpRank::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // player: Guid
+            let player = Guid::astd_read(r).await?;
 
-        // killing_blows: u32
-        let killing_blows = crate::util::astd_read_u32_le(r).await?;
+            // rank: PvpRank
+            let rank = PvpRank::astd_read_u32_le(r).await?;
 
-        // honorable_kills: u32
-        let honorable_kills = crate::util::astd_read_u32_le(r).await?;
+            // killing_blows: u32
+            let killing_blows = crate::util::astd_read_u32_le(r).await?;
 
-        // deaths: u32
-        let deaths = crate::util::astd_read_u32_le(r).await?;
+            // honorable_kills: u32
+            let honorable_kills = crate::util::astd_read_u32_le(r).await?;
 
-        // bonus_honor: u32
-        let bonus_honor = crate::util::astd_read_u32_le(r).await?;
+            // deaths: u32
+            let deaths = crate::util::astd_read_u32_le(r).await?;
 
-        // amount_of_extra_fields: u32
-        let amount_of_extra_fields = crate::util::astd_read_u32_le(r).await?;
+            // bonus_honor: u32
+            let bonus_honor = crate::util::astd_read_u32_le(r).await?;
 
-        // fields: u32[amount_of_extra_fields]
-        let mut fields = Vec::with_capacity(amount_of_extra_fields as usize);
-        for i in 0..amount_of_extra_fields {
-            fields.push(crate::util::astd_read_u32_le(r).await?);
-        }
+            // amount_of_extra_fields: u32
+            let amount_of_extra_fields = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            player,
-            rank,
-            killing_blows,
-            honorable_kills,
-            deaths,
-            bonus_honor,
-            fields,
+            // fields: u32[amount_of_extra_fields]
+            let mut fields = Vec::with_capacity(amount_of_extra_fields as usize);
+            for i in 0..amount_of_extra_fields {
+                fields.push(crate::util::astd_read_u32_le(r).await?);
+            }
+
+            Ok(Self {
+                player,
+                rank,
+                killing_blows,
+                honorable_kills,
+                deaths,
+                bonus_honor,
+                fields,
+            })
         })
     }
 
@@ -259,6 +279,7 @@ impl ReadableAndWritable for BattlegroundPlayer {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for BattlegroundPlayer {

@@ -18,7 +18,6 @@ pub struct CMD_AUTH_RECONNECT_PROOF_Server {
 impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
     const OPCODE: u8 = 0x03;
 }
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
     type Error = CMD_AUTH_RECONNECT_PROOF_ServerError;
 
@@ -43,13 +42,23 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // result: LoginResult
-        let result = LoginResult::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // result: LoginResult
+            let result = LoginResult::tokio_read(r).await?;
 
-        Ok(Self {
-            result,
+            Ok(Self {
+                result,
+            })
         })
     }
 
@@ -75,13 +84,24 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // result: LoginResult
-        let result = LoginResult::astd_read(r).await?;
 
-        Ok(Self {
-            result,
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // result: LoginResult
+            let result = LoginResult::astd_read(r).await?;
+
+            Ok(Self {
+                result,
+            })
         })
     }
 
@@ -107,6 +127,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for CMD_AUTH_RECONNECT_PROOF_Server {}

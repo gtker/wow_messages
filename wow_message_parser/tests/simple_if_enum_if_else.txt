@@ -13,7 +13,6 @@ pub struct SimpleIfEnumIfElse {
     pub enum: SimpleIfEnumIfElseSimpleEnum,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for SimpleIfEnumIfElse {
     type Error = SimpleIfEnumIfElseError;
 
@@ -86,40 +85,50 @@ impl ReadableAndWritable for SimpleIfEnumIfElse {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // enum: SimpleEnum
-        let enum = SimpleEnum::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // enum: SimpleEnum
+            let enum = SimpleEnum::tokio_read(r).await?;
 
-        let enum_if = match enum {
-            SimpleEnum::ZERO => {
-                // basic: u8
-                let basic = crate::util::tokio_read_u8_le(r).await?;
+            let enum_if = match enum {
+                SimpleEnum::ZERO => {
+                    // basic: u8
+                    let basic = crate::util::tokio_read_u8_le(r).await?;
 
-                SimpleIfEnumIfElseSimpleEnum::ZERO {
-                    basic,
+                    SimpleIfEnumIfElseSimpleEnum::ZERO {
+                        basic,
+                    }
                 }
-            }
-            SimpleEnum::ONE => {
-                // basic: u8
-                let basic = crate::util::tokio_read_u8_le(r).await?;
+                SimpleEnum::ONE => {
+                    // basic: u8
+                    let basic = crate::util::tokio_read_u8_le(r).await?;
 
-                SimpleIfEnumIfElseSimpleEnum::ONE {
-                    basic,
+                    SimpleIfEnumIfElseSimpleEnum::ONE {
+                        basic,
+                    }
                 }
-            }
-            SimpleEnum::TWO => {
-                // other: u16
-                let other = crate::util::tokio_read_u16_le(r).await?;
+                SimpleEnum::TWO => {
+                    // other: u16
+                    let other = crate::util::tokio_read_u16_le(r).await?;
 
-                SimpleIfEnumIfElseSimpleEnum::TWO {
-                    other,
+                    SimpleIfEnumIfElseSimpleEnum::TWO {
+                        other,
+                    }
                 }
-            }
-        };
+            };
 
-        Ok(Self {
-            enum: enum_if,
+            Ok(Self {
+                enum: enum_if,
+            })
         })
     }
 
@@ -166,40 +175,51 @@ impl ReadableAndWritable for SimpleIfEnumIfElse {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // enum: SimpleEnum
-        let enum = SimpleEnum::astd_read(r).await?;
 
-        let enum_if = match enum {
-            SimpleEnum::ZERO => {
-                // basic: u8
-                let basic = crate::util::astd_read_u8_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // enum: SimpleEnum
+            let enum = SimpleEnum::astd_read(r).await?;
 
-                SimpleIfEnumIfElseSimpleEnum::ZERO {
-                    basic,
+            let enum_if = match enum {
+                SimpleEnum::ZERO => {
+                    // basic: u8
+                    let basic = crate::util::astd_read_u8_le(r).await?;
+
+                    SimpleIfEnumIfElseSimpleEnum::ZERO {
+                        basic,
+                    }
                 }
-            }
-            SimpleEnum::ONE => {
-                // basic: u8
-                let basic = crate::util::astd_read_u8_le(r).await?;
+                SimpleEnum::ONE => {
+                    // basic: u8
+                    let basic = crate::util::astd_read_u8_le(r).await?;
 
-                SimpleIfEnumIfElseSimpleEnum::ONE {
-                    basic,
+                    SimpleIfEnumIfElseSimpleEnum::ONE {
+                        basic,
+                    }
                 }
-            }
-            SimpleEnum::TWO => {
-                // other: u16
-                let other = crate::util::astd_read_u16_le(r).await?;
+                SimpleEnum::TWO => {
+                    // other: u16
+                    let other = crate::util::astd_read_u16_le(r).await?;
 
-                SimpleIfEnumIfElseSimpleEnum::TWO {
-                    other,
+                    SimpleIfEnumIfElseSimpleEnum::TWO {
+                        other,
+                    }
                 }
-            }
-        };
+            };
 
-        Ok(Self {
-            enum: enum_if,
+            Ok(Self {
+                enum: enum_if,
+            })
         })
     }
 
@@ -246,6 +266,7 @@ impl ReadableAndWritable for SimpleIfEnumIfElse {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for SimpleIfEnumIfElse {

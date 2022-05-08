@@ -16,7 +16,6 @@ pub struct RaidInfo {
     pub instance_id: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for RaidInfo {
     type Error = RaidInfoError;
 
@@ -52,21 +51,31 @@ impl ReadableAndWritable for RaidInfo {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // map: Map
-        let map = Map::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // map: Map
+            let map = Map::tokio_read(r).await?;
 
-        // reset_time: u32
-        let reset_time = crate::util::tokio_read_u32_le(r).await?;
+            // reset_time: u32
+            let reset_time = crate::util::tokio_read_u32_le(r).await?;
 
-        // instance_id: u32
-        let instance_id = crate::util::tokio_read_u32_le(r).await?;
+            // instance_id: u32
+            let instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            map,
-            reset_time,
-            instance_id,
+            Ok(Self {
+                map,
+                reset_time,
+                instance_id,
+            })
         })
     }
 
@@ -95,21 +104,32 @@ impl ReadableAndWritable for RaidInfo {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // map: Map
-        let map = Map::astd_read(r).await?;
 
-        // reset_time: u32
-        let reset_time = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // map: Map
+            let map = Map::astd_read(r).await?;
 
-        // instance_id: u32
-        let instance_id = crate::util::astd_read_u32_le(r).await?;
+            // reset_time: u32
+            let reset_time = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            map,
-            reset_time,
-            instance_id,
+            // instance_id: u32
+            let instance_id = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                map,
+                reset_time,
+                instance_id,
+            })
         })
     }
 
@@ -138,6 +158,7 @@ impl ReadableAndWritable for RaidInfo {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for RaidInfo {}

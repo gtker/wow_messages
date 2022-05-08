@@ -17,7 +17,6 @@ pub struct Friend {
     pub status: FriendFriendStatus,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for Friend {
     type Error = FriendError;
 
@@ -178,85 +177,95 @@ impl ReadableAndWritable for Friend {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::tokio_read(r).await?;
 
-        // status: FriendStatus
-        let status = FriendStatus::tokio_read(r).await?;
+            // status: FriendStatus
+            let status = FriendStatus::tokio_read(r).await?;
 
-        let status_if = match status {
-            FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
-            FriendStatus::ONLINE => {
-                // area: Area
-                let area = Area::tokio_read(r).await?;
+            let status_if = match status {
+                FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
+                FriendStatus::ONLINE => {
+                    // area: Area
+                    let area = Area::tokio_read(r).await?;
 
-                // level: u32
-                let level = crate::util::tokio_read_u32_le(r).await?;
+                    // level: u32
+                    let level = crate::util::tokio_read_u32_le(r).await?;
 
-                // class: Class
-                let class = Class::tokio_read_u32_le(r).await?;
+                    // class: Class
+                    let class = Class::tokio_read_u32_le(r).await?;
 
-                FriendFriendStatus::ONLINE {
-                    area,
-                    level,
-                    class,
+                    FriendFriendStatus::ONLINE {
+                        area,
+                        level,
+                        class,
+                    }
                 }
-            }
-            FriendStatus::AFK => {
-                // area: Area
-                let area = Area::tokio_read(r).await?;
+                FriendStatus::AFK => {
+                    // area: Area
+                    let area = Area::tokio_read(r).await?;
 
-                // level: u32
-                let level = crate::util::tokio_read_u32_le(r).await?;
+                    // level: u32
+                    let level = crate::util::tokio_read_u32_le(r).await?;
 
-                // class: Class
-                let class = Class::tokio_read_u32_le(r).await?;
+                    // class: Class
+                    let class = Class::tokio_read_u32_le(r).await?;
 
-                FriendFriendStatus::AFK {
-                    area,
-                    level,
-                    class,
+                    FriendFriendStatus::AFK {
+                        area,
+                        level,
+                        class,
+                    }
                 }
-            }
-            FriendStatus::UNKNOWN3 => {
-                // area: Area
-                let area = Area::tokio_read(r).await?;
+                FriendStatus::UNKNOWN3 => {
+                    // area: Area
+                    let area = Area::tokio_read(r).await?;
 
-                // level: u32
-                let level = crate::util::tokio_read_u32_le(r).await?;
+                    // level: u32
+                    let level = crate::util::tokio_read_u32_le(r).await?;
 
-                // class: Class
-                let class = Class::tokio_read_u32_le(r).await?;
+                    // class: Class
+                    let class = Class::tokio_read_u32_le(r).await?;
 
-                FriendFriendStatus::UNKNOWN3 {
-                    area,
-                    level,
-                    class,
+                    FriendFriendStatus::UNKNOWN3 {
+                        area,
+                        level,
+                        class,
+                    }
                 }
-            }
-            FriendStatus::DND => {
-                // area: Area
-                let area = Area::tokio_read(r).await?;
+                FriendStatus::DND => {
+                    // area: Area
+                    let area = Area::tokio_read(r).await?;
 
-                // level: u32
-                let level = crate::util::tokio_read_u32_le(r).await?;
+                    // level: u32
+                    let level = crate::util::tokio_read_u32_le(r).await?;
 
-                // class: Class
-                let class = Class::tokio_read_u32_le(r).await?;
+                    // class: Class
+                    let class = Class::tokio_read_u32_le(r).await?;
 
-                FriendFriendStatus::DND {
-                    area,
-                    level,
-                    class,
+                    FriendFriendStatus::DND {
+                        area,
+                        level,
+                        class,
+                    }
                 }
-            }
-        };
+            };
 
-        Ok(Self {
-            guid,
-            status: status_if,
+            Ok(Self {
+                guid,
+                status: status_if,
+            })
         })
     }
 
@@ -346,85 +355,96 @@ impl ReadableAndWritable for Friend {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::astd_read(r).await?;
 
-        // status: FriendStatus
-        let status = FriendStatus::astd_read(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::astd_read(r).await?;
 
-        let status_if = match status {
-            FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
-            FriendStatus::ONLINE => {
-                // area: Area
-                let area = Area::astd_read(r).await?;
+            // status: FriendStatus
+            let status = FriendStatus::astd_read(r).await?;
 
-                // level: u32
-                let level = crate::util::astd_read_u32_le(r).await?;
+            let status_if = match status {
+                FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
+                FriendStatus::ONLINE => {
+                    // area: Area
+                    let area = Area::astd_read(r).await?;
 
-                // class: Class
-                let class = Class::astd_read_u32_le(r).await?;
+                    // level: u32
+                    let level = crate::util::astd_read_u32_le(r).await?;
 
-                FriendFriendStatus::ONLINE {
-                    area,
-                    level,
-                    class,
+                    // class: Class
+                    let class = Class::astd_read_u32_le(r).await?;
+
+                    FriendFriendStatus::ONLINE {
+                        area,
+                        level,
+                        class,
+                    }
                 }
-            }
-            FriendStatus::AFK => {
-                // area: Area
-                let area = Area::astd_read(r).await?;
+                FriendStatus::AFK => {
+                    // area: Area
+                    let area = Area::astd_read(r).await?;
 
-                // level: u32
-                let level = crate::util::astd_read_u32_le(r).await?;
+                    // level: u32
+                    let level = crate::util::astd_read_u32_le(r).await?;
 
-                // class: Class
-                let class = Class::astd_read_u32_le(r).await?;
+                    // class: Class
+                    let class = Class::astd_read_u32_le(r).await?;
 
-                FriendFriendStatus::AFK {
-                    area,
-                    level,
-                    class,
+                    FriendFriendStatus::AFK {
+                        area,
+                        level,
+                        class,
+                    }
                 }
-            }
-            FriendStatus::UNKNOWN3 => {
-                // area: Area
-                let area = Area::astd_read(r).await?;
+                FriendStatus::UNKNOWN3 => {
+                    // area: Area
+                    let area = Area::astd_read(r).await?;
 
-                // level: u32
-                let level = crate::util::astd_read_u32_le(r).await?;
+                    // level: u32
+                    let level = crate::util::astd_read_u32_le(r).await?;
 
-                // class: Class
-                let class = Class::astd_read_u32_le(r).await?;
+                    // class: Class
+                    let class = Class::astd_read_u32_le(r).await?;
 
-                FriendFriendStatus::UNKNOWN3 {
-                    area,
-                    level,
-                    class,
+                    FriendFriendStatus::UNKNOWN3 {
+                        area,
+                        level,
+                        class,
+                    }
                 }
-            }
-            FriendStatus::DND => {
-                // area: Area
-                let area = Area::astd_read(r).await?;
+                FriendStatus::DND => {
+                    // area: Area
+                    let area = Area::astd_read(r).await?;
 
-                // level: u32
-                let level = crate::util::astd_read_u32_le(r).await?;
+                    // level: u32
+                    let level = crate::util::astd_read_u32_le(r).await?;
 
-                // class: Class
-                let class = Class::astd_read_u32_le(r).await?;
+                    // class: Class
+                    let class = Class::astd_read_u32_le(r).await?;
 
-                FriendFriendStatus::DND {
-                    area,
-                    level,
-                    class,
+                    FriendFriendStatus::DND {
+                        area,
+                        level,
+                        class,
+                    }
                 }
-            }
-        };
+            };
 
-        Ok(Self {
-            guid,
-            status: status_if,
+            Ok(Self {
+                guid,
+                status: status_if,
+            })
         })
     }
 
@@ -514,6 +534,7 @@ impl ReadableAndWritable for Friend {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for Friend {

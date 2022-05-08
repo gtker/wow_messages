@@ -49,7 +49,6 @@ impl Character {
 
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for Character {
     type Error = CharacterError;
 
@@ -245,111 +244,121 @@ impl ReadableAndWritable for Character {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::tokio_read(r).await?;
 
-        // name: CString
-        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
+            // name: CString
+            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // race: Race
-        let race = Race::tokio_read(r).await?;
+            // race: Race
+            let race = Race::tokio_read(r).await?;
 
-        // class: Class
-        let class = Class::tokio_read(r).await?;
+            // class: Class
+            let class = Class::tokio_read(r).await?;
 
-        // gender: Gender
-        let gender = Gender::tokio_read(r).await?;
+            // gender: Gender
+            let gender = Gender::tokio_read(r).await?;
 
-        // skin: u8
-        let skin = crate::util::tokio_read_u8_le(r).await?;
+            // skin: u8
+            let skin = crate::util::tokio_read_u8_le(r).await?;
 
-        // face: u8
-        let face = crate::util::tokio_read_u8_le(r).await?;
+            // face: u8
+            let face = crate::util::tokio_read_u8_le(r).await?;
 
-        // hairstyle: u8
-        let hairstyle = crate::util::tokio_read_u8_le(r).await?;
+            // hairstyle: u8
+            let hairstyle = crate::util::tokio_read_u8_le(r).await?;
 
-        // haircolor: u8
-        let haircolor = crate::util::tokio_read_u8_le(r).await?;
+            // haircolor: u8
+            let haircolor = crate::util::tokio_read_u8_le(r).await?;
 
-        // facialhair: u8
-        let facialhair = crate::util::tokio_read_u8_le(r).await?;
+            // facialhair: u8
+            let facialhair = crate::util::tokio_read_u8_le(r).await?;
 
-        // level: u8
-        let level = crate::util::tokio_read_u8_le(r).await?;
+            // level: u8
+            let level = crate::util::tokio_read_u8_le(r).await?;
 
-        // area: Area
-        let area = Area::tokio_read(r).await?;
+            // area: Area
+            let area = Area::tokio_read(r).await?;
 
-        // map: Map
-        let map = Map::tokio_read(r).await?;
+            // map: Map
+            let map = Map::tokio_read(r).await?;
 
-        // position_x: f32
-        let position_x = crate::util::tokio_read_f32_le(r).await?;
-        // position_y: f32
-        let position_y = crate::util::tokio_read_f32_le(r).await?;
-        // position_z: f32
-        let position_z = crate::util::tokio_read_f32_le(r).await?;
-        // guild_id: u32
-        let guild_id = crate::util::tokio_read_u32_le(r).await?;
+            // position_x: f32
+            let position_x = crate::util::tokio_read_f32_le(r).await?;
+            // position_y: f32
+            let position_y = crate::util::tokio_read_f32_le(r).await?;
+            // position_z: f32
+            let position_z = crate::util::tokio_read_f32_le(r).await?;
+            // guild_id: u32
+            let guild_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // flags: CharacterFlags
-        let flags = CharacterFlags::tokio_read(r).await?;
+            // flags: CharacterFlags
+            let flags = CharacterFlags::tokio_read(r).await?;
 
-        // first_login: u8
-        let first_login = crate::util::tokio_read_u8_le(r).await?;
+            // first_login: u8
+            let first_login = crate::util::tokio_read_u8_le(r).await?;
 
-        // pet_display_id: u32
-        let pet_display_id = crate::util::tokio_read_u32_le(r).await?;
+            // pet_display_id: u32
+            let pet_display_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // pet_level: u32
-        let pet_level = crate::util::tokio_read_u32_le(r).await?;
+            // pet_level: u32
+            let pet_level = crate::util::tokio_read_u32_le(r).await?;
 
-        // pet_familiy: u32
-        let pet_familiy = crate::util::tokio_read_u32_le(r).await?;
+            // pet_familiy: u32
+            let pet_familiy = crate::util::tokio_read_u32_le(r).await?;
 
-        // equipment: CharacterGear[19]
-        let mut equipment = Vec::with_capacity(19 as usize);
-        for i in 0..19 {
-            equipment.push(CharacterGear::tokio_read(r).await?);
-        }
-        let equipment = equipment.try_into().unwrap();
+            // equipment: CharacterGear[19]
+            let mut equipment = Vec::with_capacity(19 as usize);
+            for i in 0..19 {
+                equipment.push(CharacterGear::tokio_read(r).await?);
+            }
+            let equipment = equipment.try_into().unwrap();
 
-        // first_bag_display_id: u32
-        let _first_bag_display_id = crate::util::tokio_read_u32_le(r).await?;
-        // first_bag_display_id is expected to always be 0 (0)
+            // first_bag_display_id: u32
+            let _first_bag_display_id = crate::util::tokio_read_u32_le(r).await?;
+            // first_bag_display_id is expected to always be 0 (0)
 
-        // first_bag_inventory_id: u8
-        let _first_bag_inventory_id = crate::util::tokio_read_u8_le(r).await?;
-        // first_bag_inventory_id is expected to always be 0 (0)
+            // first_bag_inventory_id: u8
+            let _first_bag_inventory_id = crate::util::tokio_read_u8_le(r).await?;
+            // first_bag_inventory_id is expected to always be 0 (0)
 
-        Ok(Self {
-            guid,
-            name,
-            race,
-            class,
-            gender,
-            skin,
-            face,
-            hairstyle,
-            haircolor,
-            facialhair,
-            level,
-            area,
-            map,
-            position_x,
-            position_y,
-            position_z,
-            guild_id,
-            flags,
-            first_login,
-            pet_display_id,
-            pet_level,
-            pet_familiy,
-            equipment,
+            Ok(Self {
+                guid,
+                name,
+                race,
+                class,
+                gender,
+                skin,
+                face,
+                hairstyle,
+                haircolor,
+                facialhair,
+                level,
+                area,
+                map,
+                position_x,
+                position_y,
+                position_z,
+                guild_id,
+                flags,
+                first_login,
+                pet_display_id,
+                pet_level,
+                pet_familiy,
+                equipment,
+            })
         })
     }
 
@@ -448,111 +457,122 @@ impl ReadableAndWritable for Character {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::astd_read(r).await?;
 
-        // name: CString
-        let name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::astd_read(r).await?;
 
-        // race: Race
-        let race = Race::astd_read(r).await?;
+            // name: CString
+            let name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // class: Class
-        let class = Class::astd_read(r).await?;
+            // race: Race
+            let race = Race::astd_read(r).await?;
 
-        // gender: Gender
-        let gender = Gender::astd_read(r).await?;
+            // class: Class
+            let class = Class::astd_read(r).await?;
 
-        // skin: u8
-        let skin = crate::util::astd_read_u8_le(r).await?;
+            // gender: Gender
+            let gender = Gender::astd_read(r).await?;
 
-        // face: u8
-        let face = crate::util::astd_read_u8_le(r).await?;
+            // skin: u8
+            let skin = crate::util::astd_read_u8_le(r).await?;
 
-        // hairstyle: u8
-        let hairstyle = crate::util::astd_read_u8_le(r).await?;
+            // face: u8
+            let face = crate::util::astd_read_u8_le(r).await?;
 
-        // haircolor: u8
-        let haircolor = crate::util::astd_read_u8_le(r).await?;
+            // hairstyle: u8
+            let hairstyle = crate::util::astd_read_u8_le(r).await?;
 
-        // facialhair: u8
-        let facialhair = crate::util::astd_read_u8_le(r).await?;
+            // haircolor: u8
+            let haircolor = crate::util::astd_read_u8_le(r).await?;
 
-        // level: u8
-        let level = crate::util::astd_read_u8_le(r).await?;
+            // facialhair: u8
+            let facialhair = crate::util::astd_read_u8_le(r).await?;
 
-        // area: Area
-        let area = Area::astd_read(r).await?;
+            // level: u8
+            let level = crate::util::astd_read_u8_le(r).await?;
 
-        // map: Map
-        let map = Map::astd_read(r).await?;
+            // area: Area
+            let area = Area::astd_read(r).await?;
 
-        // position_x: f32
-        let position_x = crate::util::astd_read_f32_le(r).await?;
-        // position_y: f32
-        let position_y = crate::util::astd_read_f32_le(r).await?;
-        // position_z: f32
-        let position_z = crate::util::astd_read_f32_le(r).await?;
-        // guild_id: u32
-        let guild_id = crate::util::astd_read_u32_le(r).await?;
+            // map: Map
+            let map = Map::astd_read(r).await?;
 
-        // flags: CharacterFlags
-        let flags = CharacterFlags::astd_read(r).await?;
+            // position_x: f32
+            let position_x = crate::util::astd_read_f32_le(r).await?;
+            // position_y: f32
+            let position_y = crate::util::astd_read_f32_le(r).await?;
+            // position_z: f32
+            let position_z = crate::util::astd_read_f32_le(r).await?;
+            // guild_id: u32
+            let guild_id = crate::util::astd_read_u32_le(r).await?;
 
-        // first_login: u8
-        let first_login = crate::util::astd_read_u8_le(r).await?;
+            // flags: CharacterFlags
+            let flags = CharacterFlags::astd_read(r).await?;
 
-        // pet_display_id: u32
-        let pet_display_id = crate::util::astd_read_u32_le(r).await?;
+            // first_login: u8
+            let first_login = crate::util::astd_read_u8_le(r).await?;
 
-        // pet_level: u32
-        let pet_level = crate::util::astd_read_u32_le(r).await?;
+            // pet_display_id: u32
+            let pet_display_id = crate::util::astd_read_u32_le(r).await?;
 
-        // pet_familiy: u32
-        let pet_familiy = crate::util::astd_read_u32_le(r).await?;
+            // pet_level: u32
+            let pet_level = crate::util::astd_read_u32_le(r).await?;
 
-        // equipment: CharacterGear[19]
-        let mut equipment = Vec::with_capacity(19 as usize);
-        for i in 0..19 {
-            equipment.push(CharacterGear::astd_read(r).await?);
-        }
-        let equipment = equipment.try_into().unwrap();
+            // pet_familiy: u32
+            let pet_familiy = crate::util::astd_read_u32_le(r).await?;
 
-        // first_bag_display_id: u32
-        let _first_bag_display_id = crate::util::astd_read_u32_le(r).await?;
-        // first_bag_display_id is expected to always be 0 (0)
+            // equipment: CharacterGear[19]
+            let mut equipment = Vec::with_capacity(19 as usize);
+            for i in 0..19 {
+                equipment.push(CharacterGear::astd_read(r).await?);
+            }
+            let equipment = equipment.try_into().unwrap();
 
-        // first_bag_inventory_id: u8
-        let _first_bag_inventory_id = crate::util::astd_read_u8_le(r).await?;
-        // first_bag_inventory_id is expected to always be 0 (0)
+            // first_bag_display_id: u32
+            let _first_bag_display_id = crate::util::astd_read_u32_le(r).await?;
+            // first_bag_display_id is expected to always be 0 (0)
 
-        Ok(Self {
-            guid,
-            name,
-            race,
-            class,
-            gender,
-            skin,
-            face,
-            hairstyle,
-            haircolor,
-            facialhair,
-            level,
-            area,
-            map,
-            position_x,
-            position_y,
-            position_z,
-            guild_id,
-            flags,
-            first_login,
-            pet_display_id,
-            pet_level,
-            pet_familiy,
-            equipment,
+            // first_bag_inventory_id: u8
+            let _first_bag_inventory_id = crate::util::astd_read_u8_le(r).await?;
+            // first_bag_inventory_id is expected to always be 0 (0)
+
+            Ok(Self {
+                guid,
+                name,
+                race,
+                class,
+                gender,
+                skin,
+                face,
+                hairstyle,
+                haircolor,
+                facialhair,
+                level,
+                area,
+                map,
+                position_x,
+                position_y,
+                position_z,
+                guild_id,
+                flags,
+                first_login,
+                pet_display_id,
+                pet_level,
+                pet_familiy,
+                equipment,
+            })
         })
     }
 
@@ -651,6 +671,7 @@ impl ReadableAndWritable for Character {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for Character {

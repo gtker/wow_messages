@@ -21,7 +21,6 @@ impl CMD_REALM_LIST_Client {
 
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CMD_REALM_LIST_Client {
     type Error = std::io::Error;
 
@@ -46,13 +45,23 @@ impl ReadableAndWritable for CMD_REALM_LIST_Client {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // padding: u32
-        let _padding = crate::util::tokio_read_u32_le(r).await?;
-        // padding is expected to always be 0 (0)
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // padding: u32
+            let _padding = crate::util::tokio_read_u32_le(r).await?;
+            // padding is expected to always be 0 (0)
 
-        Ok(Self {
+            Ok(Self {
+            })
         })
     }
 
@@ -78,13 +87,24 @@ impl ReadableAndWritable for CMD_REALM_LIST_Client {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // padding: u32
-        let _padding = crate::util::astd_read_u32_le(r).await?;
-        // padding is expected to always be 0 (0)
 
-        Ok(Self {
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // padding: u32
+            let _padding = crate::util::astd_read_u32_le(r).await?;
+            // padding is expected to always be 0 (0)
+
+            Ok(Self {
+            })
         })
     }
 
@@ -110,6 +130,7 @@ impl ReadableAndWritable for CMD_REALM_LIST_Client {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for CMD_REALM_LIST_Client {}

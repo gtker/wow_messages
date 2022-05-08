@@ -27,7 +27,6 @@ pub struct TradeSlot {
     pub durability: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for TradeSlot {
     type Error = std::io::Error;
 
@@ -140,65 +139,75 @@ impl ReadableAndWritable for TradeSlot {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // trade_slot_number: u8
-        let trade_slot_number = crate::util::tokio_read_u8_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // trade_slot_number: u8
+            let trade_slot_number = crate::util::tokio_read_u8_le(r).await?;
 
-        // item_id: u32
-        let item_id = crate::util::tokio_read_u32_le(r).await?;
+            // item_id: u32
+            let item_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // display_id: u32
-        let display_id = crate::util::tokio_read_u32_le(r).await?;
+            // display_id: u32
+            let display_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // stack_count: u32
-        let stack_count = crate::util::tokio_read_u32_le(r).await?;
+            // stack_count: u32
+            let stack_count = crate::util::tokio_read_u32_le(r).await?;
 
-        // is_wrapped: u32
-        let is_wrapped = crate::util::tokio_read_u32_le(r).await?;
+            // is_wrapped: u32
+            let is_wrapped = crate::util::tokio_read_u32_le(r).await?;
 
-        // gift_wrapper: Guid
-        let gift_wrapper = Guid::tokio_read(r).await?;
+            // gift_wrapper: Guid
+            let gift_wrapper = Guid::tokio_read(r).await?;
 
-        // enchantment: u32
-        let enchantment = crate::util::tokio_read_u32_le(r).await?;
+            // enchantment: u32
+            let enchantment = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_creator: Guid
-        let item_creator = Guid::tokio_read(r).await?;
+            // item_creator: Guid
+            let item_creator = Guid::tokio_read(r).await?;
 
-        // spell_charges: u32
-        let spell_charges = crate::util::tokio_read_u32_le(r).await?;
+            // spell_charges: u32
+            let spell_charges = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_suffix_factor: u32
-        let item_suffix_factor = crate::util::tokio_read_u32_le(r).await?;
+            // item_suffix_factor: u32
+            let item_suffix_factor = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_random_properties_id: u32
-        let item_random_properties_id = crate::util::tokio_read_u32_le(r).await?;
+            // item_random_properties_id: u32
+            let item_random_properties_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // lock_id: u32
-        let lock_id = crate::util::tokio_read_u32_le(r).await?;
+            // lock_id: u32
+            let lock_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // max_durability: u32
-        let max_durability = crate::util::tokio_read_u32_le(r).await?;
+            // max_durability: u32
+            let max_durability = crate::util::tokio_read_u32_le(r).await?;
 
-        // durability: u32
-        let durability = crate::util::tokio_read_u32_le(r).await?;
+            // durability: u32
+            let durability = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            trade_slot_number,
-            item_id,
-            display_id,
-            stack_count,
-            is_wrapped,
-            gift_wrapper,
-            enchantment,
-            item_creator,
-            spell_charges,
-            item_suffix_factor,
-            item_random_properties_id,
-            lock_id,
-            max_durability,
-            durability,
+            Ok(Self {
+                trade_slot_number,
+                item_id,
+                display_id,
+                stack_count,
+                is_wrapped,
+                gift_wrapper,
+                enchantment,
+                item_creator,
+                spell_charges,
+                item_suffix_factor,
+                item_random_properties_id,
+                lock_id,
+                max_durability,
+                durability,
+            })
         })
     }
 
@@ -260,65 +269,76 @@ impl ReadableAndWritable for TradeSlot {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // trade_slot_number: u8
-        let trade_slot_number = crate::util::astd_read_u8_le(r).await?;
 
-        // item_id: u32
-        let item_id = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // trade_slot_number: u8
+            let trade_slot_number = crate::util::astd_read_u8_le(r).await?;
 
-        // display_id: u32
-        let display_id = crate::util::astd_read_u32_le(r).await?;
+            // item_id: u32
+            let item_id = crate::util::astd_read_u32_le(r).await?;
 
-        // stack_count: u32
-        let stack_count = crate::util::astd_read_u32_le(r).await?;
+            // display_id: u32
+            let display_id = crate::util::astd_read_u32_le(r).await?;
 
-        // is_wrapped: u32
-        let is_wrapped = crate::util::astd_read_u32_le(r).await?;
+            // stack_count: u32
+            let stack_count = crate::util::astd_read_u32_le(r).await?;
 
-        // gift_wrapper: Guid
-        let gift_wrapper = Guid::astd_read(r).await?;
+            // is_wrapped: u32
+            let is_wrapped = crate::util::astd_read_u32_le(r).await?;
 
-        // enchantment: u32
-        let enchantment = crate::util::astd_read_u32_le(r).await?;
+            // gift_wrapper: Guid
+            let gift_wrapper = Guid::astd_read(r).await?;
 
-        // item_creator: Guid
-        let item_creator = Guid::astd_read(r).await?;
+            // enchantment: u32
+            let enchantment = crate::util::astd_read_u32_le(r).await?;
 
-        // spell_charges: u32
-        let spell_charges = crate::util::astd_read_u32_le(r).await?;
+            // item_creator: Guid
+            let item_creator = Guid::astd_read(r).await?;
 
-        // item_suffix_factor: u32
-        let item_suffix_factor = crate::util::astd_read_u32_le(r).await?;
+            // spell_charges: u32
+            let spell_charges = crate::util::astd_read_u32_le(r).await?;
 
-        // item_random_properties_id: u32
-        let item_random_properties_id = crate::util::astd_read_u32_le(r).await?;
+            // item_suffix_factor: u32
+            let item_suffix_factor = crate::util::astd_read_u32_le(r).await?;
 
-        // lock_id: u32
-        let lock_id = crate::util::astd_read_u32_le(r).await?;
+            // item_random_properties_id: u32
+            let item_random_properties_id = crate::util::astd_read_u32_le(r).await?;
 
-        // max_durability: u32
-        let max_durability = crate::util::astd_read_u32_le(r).await?;
+            // lock_id: u32
+            let lock_id = crate::util::astd_read_u32_le(r).await?;
 
-        // durability: u32
-        let durability = crate::util::astd_read_u32_le(r).await?;
+            // max_durability: u32
+            let max_durability = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            trade_slot_number,
-            item_id,
-            display_id,
-            stack_count,
-            is_wrapped,
-            gift_wrapper,
-            enchantment,
-            item_creator,
-            spell_charges,
-            item_suffix_factor,
-            item_random_properties_id,
-            lock_id,
-            max_durability,
-            durability,
+            // durability: u32
+            let durability = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                trade_slot_number,
+                item_id,
+                display_id,
+                stack_count,
+                is_wrapped,
+                gift_wrapper,
+                enchantment,
+                item_creator,
+                spell_charges,
+                item_suffix_factor,
+                item_random_properties_id,
+                lock_id,
+                max_durability,
+                durability,
+            })
         })
     }
 
@@ -380,6 +400,7 @@ impl ReadableAndWritable for TradeSlot {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for TradeSlot {}

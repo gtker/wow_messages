@@ -16,7 +16,6 @@ pub struct QuestObjective {
     pub required_item_count: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for QuestObjective {
     type Error = std::io::Error;
 
@@ -59,25 +58,35 @@ impl ReadableAndWritable for QuestObjective {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // creature_id: u32
-        let creature_id = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // creature_id: u32
+            let creature_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // kill_count: u32
-        let kill_count = crate::util::tokio_read_u32_le(r).await?;
+            // kill_count: u32
+            let kill_count = crate::util::tokio_read_u32_le(r).await?;
 
-        // required_item_id: u32
-        let required_item_id = crate::util::tokio_read_u32_le(r).await?;
+            // required_item_id: u32
+            let required_item_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // required_item_count: u32
-        let required_item_count = crate::util::tokio_read_u32_le(r).await?;
+            // required_item_count: u32
+            let required_item_count = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            creature_id,
-            kill_count,
-            required_item_id,
-            required_item_count,
+            Ok(Self {
+                creature_id,
+                kill_count,
+                required_item_id,
+                required_item_count,
+            })
         })
     }
 
@@ -109,25 +118,36 @@ impl ReadableAndWritable for QuestObjective {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // creature_id: u32
-        let creature_id = crate::util::astd_read_u32_le(r).await?;
 
-        // kill_count: u32
-        let kill_count = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // creature_id: u32
+            let creature_id = crate::util::astd_read_u32_le(r).await?;
 
-        // required_item_id: u32
-        let required_item_id = crate::util::astd_read_u32_le(r).await?;
+            // kill_count: u32
+            let kill_count = crate::util::astd_read_u32_le(r).await?;
 
-        // required_item_count: u32
-        let required_item_count = crate::util::astd_read_u32_le(r).await?;
+            // required_item_id: u32
+            let required_item_id = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            creature_id,
-            kill_count,
-            required_item_id,
-            required_item_count,
+            // required_item_count: u32
+            let required_item_count = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                creature_id,
+                kill_count,
+                required_item_id,
+                required_item_count,
+            })
         })
     }
 
@@ -159,6 +179,7 @@ impl ReadableAndWritable for QuestObjective {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for QuestObjective {}

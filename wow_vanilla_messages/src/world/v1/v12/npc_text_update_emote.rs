@@ -14,7 +14,6 @@ pub struct NpcTextUpdateEmote {
     pub emote: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for NpcTextUpdateEmote {
     type Error = std::io::Error;
 
@@ -43,17 +42,27 @@ impl ReadableAndWritable for NpcTextUpdateEmote {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // delay: u32
-        let delay = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // delay: u32
+            let delay = crate::util::tokio_read_u32_le(r).await?;
 
-        // emote: u32
-        let emote = crate::util::tokio_read_u32_le(r).await?;
+            // emote: u32
+            let emote = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            delay,
-            emote,
+            Ok(Self {
+                delay,
+                emote,
+            })
         })
     }
 
@@ -79,17 +88,28 @@ impl ReadableAndWritable for NpcTextUpdateEmote {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // delay: u32
-        let delay = crate::util::astd_read_u32_le(r).await?;
 
-        // emote: u32
-        let emote = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // delay: u32
+            let delay = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            delay,
-            emote,
+            // emote: u32
+            let emote = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                delay,
+                emote,
+            })
         })
     }
 
@@ -115,6 +135,7 @@ impl ReadableAndWritable for NpcTextUpdateEmote {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for NpcTextUpdateEmote {}

@@ -18,7 +18,6 @@ pub struct ItemSpells {
     pub spell_category_cooldown: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for ItemSpells {
     type Error = std::io::Error;
 
@@ -75,33 +74,43 @@ impl ReadableAndWritable for ItemSpells {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // spell: u32
-        let spell = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // spell: u32
+            let spell = crate::util::tokio_read_u32_le(r).await?;
 
-        // spell_trigger: u32
-        let spell_trigger = crate::util::tokio_read_u32_le(r).await?;
+            // spell_trigger: u32
+            let spell_trigger = crate::util::tokio_read_u32_le(r).await?;
 
-        // spell_charges: u32
-        let spell_charges = crate::util::tokio_read_u32_le(r).await?;
+            // spell_charges: u32
+            let spell_charges = crate::util::tokio_read_u32_le(r).await?;
 
-        // spell_cooldown: u32
-        let spell_cooldown = crate::util::tokio_read_u32_le(r).await?;
+            // spell_cooldown: u32
+            let spell_cooldown = crate::util::tokio_read_u32_le(r).await?;
 
-        // spell_category: u32
-        let spell_category = crate::util::tokio_read_u32_le(r).await?;
+            // spell_category: u32
+            let spell_category = crate::util::tokio_read_u32_le(r).await?;
 
-        // spell_category_cooldown: u32
-        let spell_category_cooldown = crate::util::tokio_read_u32_le(r).await?;
+            // spell_category_cooldown: u32
+            let spell_category_cooldown = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            spell,
-            spell_trigger,
-            spell_charges,
-            spell_cooldown,
-            spell_category,
-            spell_category_cooldown,
+            Ok(Self {
+                spell,
+                spell_trigger,
+                spell_charges,
+                spell_cooldown,
+                spell_category,
+                spell_category_cooldown,
+            })
         })
     }
 
@@ -139,33 +148,44 @@ impl ReadableAndWritable for ItemSpells {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // spell: u32
-        let spell = crate::util::astd_read_u32_le(r).await?;
 
-        // spell_trigger: u32
-        let spell_trigger = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // spell: u32
+            let spell = crate::util::astd_read_u32_le(r).await?;
 
-        // spell_charges: u32
-        let spell_charges = crate::util::astd_read_u32_le(r).await?;
+            // spell_trigger: u32
+            let spell_trigger = crate::util::astd_read_u32_le(r).await?;
 
-        // spell_cooldown: u32
-        let spell_cooldown = crate::util::astd_read_u32_le(r).await?;
+            // spell_charges: u32
+            let spell_charges = crate::util::astd_read_u32_le(r).await?;
 
-        // spell_category: u32
-        let spell_category = crate::util::astd_read_u32_le(r).await?;
+            // spell_cooldown: u32
+            let spell_cooldown = crate::util::astd_read_u32_le(r).await?;
 
-        // spell_category_cooldown: u32
-        let spell_category_cooldown = crate::util::astd_read_u32_le(r).await?;
+            // spell_category: u32
+            let spell_category = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            spell,
-            spell_trigger,
-            spell_charges,
-            spell_cooldown,
-            spell_category,
-            spell_category_cooldown,
+            // spell_category_cooldown: u32
+            let spell_category_cooldown = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                spell,
+                spell_trigger,
+                spell_charges,
+                spell_cooldown,
+                spell_category,
+                spell_category_cooldown,
+            })
         })
     }
 
@@ -203,6 +223,7 @@ impl ReadableAndWritable for ItemSpells {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for ItemSpells {}

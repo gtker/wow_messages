@@ -15,7 +15,6 @@ pub struct EnumOutsideOfIf {
     pub n: EnumOutsideOfIfNestedEnum,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for EnumOutsideOfIf {
     type Error = EnumOutsideOfIfError;
 
@@ -95,44 +94,54 @@ impl ReadableAndWritable for EnumOutsideOfIf {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // t: TEnum
-        let t = TEnum::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // t: TEnum
+            let t = TEnum::tokio_read(r).await?;
 
-        // n: NestedEnum
-        let n = NestedEnum::tokio_read(r).await?;
+            // n: NestedEnum
+            let n = NestedEnum::tokio_read(r).await?;
 
-        let t_if = match t {
-            TEnum::ZERO => {
-                let n_if = match n {
-                    NestedEnum::NESTED => {
-                        // nested: u8
-                        let nested = crate::util::tokio_read_u8_le(r).await?;
+            let t_if = match t {
+                TEnum::ZERO => {
+                    let n_if = match n {
+                        NestedEnum::NESTED => {
+                            // nested: u8
+                            let nested = crate::util::tokio_read_u8_le(r).await?;
 
-                        EnumOutsideOfIfNestedEnum::NESTED {
-                            nested,
+                            EnumOutsideOfIfNestedEnum::NESTED {
+                                nested,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => EnumOutsideOfIfNestedEnum::NOT_NESTED,
+                    };
+
+                    EnumOutsideOfIfTEnum::ZERO {
+                        n: n_if,
                     }
-                    NestedEnum::NOT_NESTED => EnumOutsideOfIfNestedEnum::NOT_NESTED,
-                };
-
-                EnumOutsideOfIfTEnum::ZERO {
-                    n: n_if,
                 }
-            }
-            TEnum::ONE => EnumOutsideOfIfTEnum::ONE,
-            TEnum::TWO => EnumOutsideOfIfTEnum::TWO,
-            TEnum::THREE => EnumOutsideOfIfTEnum::THREE,
-            TEnum::FOUR => EnumOutsideOfIfTEnum::FOUR,
-            TEnum::FIVE => EnumOutsideOfIfTEnum::FIVE,
-            TEnum::SIX => EnumOutsideOfIfTEnum::SIX,
-            TEnum::REST => EnumOutsideOfIfTEnum::REST,
-        };
+                TEnum::ONE => EnumOutsideOfIfTEnum::ONE,
+                TEnum::TWO => EnumOutsideOfIfTEnum::TWO,
+                TEnum::THREE => EnumOutsideOfIfTEnum::THREE,
+                TEnum::FOUR => EnumOutsideOfIfTEnum::FOUR,
+                TEnum::FIVE => EnumOutsideOfIfTEnum::FIVE,
+                TEnum::SIX => EnumOutsideOfIfTEnum::SIX,
+                TEnum::REST => EnumOutsideOfIfTEnum::REST,
+            };
 
-        Ok(Self {
-            t: t_if,
-            n: n_if,
+            Ok(Self {
+                t: t_if,
+                n: n_if,
+            })
         })
     }
 
@@ -182,44 +191,55 @@ impl ReadableAndWritable for EnumOutsideOfIf {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // t: TEnum
-        let t = TEnum::astd_read(r).await?;
 
-        // n: NestedEnum
-        let n = NestedEnum::astd_read(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // t: TEnum
+            let t = TEnum::astd_read(r).await?;
 
-        let t_if = match t {
-            TEnum::ZERO => {
-                let n_if = match n {
-                    NestedEnum::NESTED => {
-                        // nested: u8
-                        let nested = crate::util::astd_read_u8_le(r).await?;
+            // n: NestedEnum
+            let n = NestedEnum::astd_read(r).await?;
 
-                        EnumOutsideOfIfNestedEnum::NESTED {
-                            nested,
+            let t_if = match t {
+                TEnum::ZERO => {
+                    let n_if = match n {
+                        NestedEnum::NESTED => {
+                            // nested: u8
+                            let nested = crate::util::astd_read_u8_le(r).await?;
+
+                            EnumOutsideOfIfNestedEnum::NESTED {
+                                nested,
+                            }
                         }
+                        NestedEnum::NOT_NESTED => EnumOutsideOfIfNestedEnum::NOT_NESTED,
+                    };
+
+                    EnumOutsideOfIfTEnum::ZERO {
+                        n: n_if,
                     }
-                    NestedEnum::NOT_NESTED => EnumOutsideOfIfNestedEnum::NOT_NESTED,
-                };
-
-                EnumOutsideOfIfTEnum::ZERO {
-                    n: n_if,
                 }
-            }
-            TEnum::ONE => EnumOutsideOfIfTEnum::ONE,
-            TEnum::TWO => EnumOutsideOfIfTEnum::TWO,
-            TEnum::THREE => EnumOutsideOfIfTEnum::THREE,
-            TEnum::FOUR => EnumOutsideOfIfTEnum::FOUR,
-            TEnum::FIVE => EnumOutsideOfIfTEnum::FIVE,
-            TEnum::SIX => EnumOutsideOfIfTEnum::SIX,
-            TEnum::REST => EnumOutsideOfIfTEnum::REST,
-        };
+                TEnum::ONE => EnumOutsideOfIfTEnum::ONE,
+                TEnum::TWO => EnumOutsideOfIfTEnum::TWO,
+                TEnum::THREE => EnumOutsideOfIfTEnum::THREE,
+                TEnum::FOUR => EnumOutsideOfIfTEnum::FOUR,
+                TEnum::FIVE => EnumOutsideOfIfTEnum::FIVE,
+                TEnum::SIX => EnumOutsideOfIfTEnum::SIX,
+                TEnum::REST => EnumOutsideOfIfTEnum::REST,
+            };
 
-        Ok(Self {
-            t: t_if,
-            n: n_if,
+            Ok(Self {
+                t: t_if,
+                n: n_if,
+            })
         })
     }
 
@@ -269,6 +289,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for EnumOutsideOfIf {

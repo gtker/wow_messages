@@ -20,7 +20,6 @@ pub struct WhoPlayer {
     pub party_status: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for WhoPlayer {
     type Error = WhoPlayerError;
 
@@ -90,39 +89,49 @@ impl ReadableAndWritable for WhoPlayer {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // name: CString
-        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // name: CString
+            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // guild: CString
-        let guild = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let guild = String::from_utf8(guild)?;
+            // guild: CString
+            let guild = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let guild = String::from_utf8(guild)?;
 
-        // level: u32
-        let level = crate::util::tokio_read_u32_le(r).await?;
+            // level: u32
+            let level = crate::util::tokio_read_u32_le(r).await?;
 
-        // class: Class
-        let class = Class::tokio_read(r).await?;
+            // class: Class
+            let class = Class::tokio_read(r).await?;
 
-        // race: Race
-        let race = Race::tokio_read(r).await?;
+            // race: Race
+            let race = Race::tokio_read(r).await?;
 
-        // zone_id: u32
-        let zone_id = crate::util::tokio_read_u32_le(r).await?;
+            // zone_id: u32
+            let zone_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // party_status: u32
-        let party_status = crate::util::tokio_read_u32_le(r).await?;
+            // party_status: u32
+            let party_status = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            name,
-            guild,
-            level,
-            class,
-            race,
-            zone_id,
-            party_status,
+            Ok(Self {
+                name,
+                guild,
+                level,
+                class,
+                race,
+                zone_id,
+                party_status,
+            })
         })
     }
 
@@ -167,39 +176,50 @@ impl ReadableAndWritable for WhoPlayer {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // name: CString
-        let name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
 
-        // guild: CString
-        let guild = crate::util::astd_read_c_string_to_vec(r).await?;
-        let guild = String::from_utf8(guild)?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // name: CString
+            let name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // level: u32
-        let level = crate::util::astd_read_u32_le(r).await?;
+            // guild: CString
+            let guild = crate::util::astd_read_c_string_to_vec(r).await?;
+            let guild = String::from_utf8(guild)?;
 
-        // class: Class
-        let class = Class::astd_read(r).await?;
+            // level: u32
+            let level = crate::util::astd_read_u32_le(r).await?;
 
-        // race: Race
-        let race = Race::astd_read(r).await?;
+            // class: Class
+            let class = Class::astd_read(r).await?;
 
-        // zone_id: u32
-        let zone_id = crate::util::astd_read_u32_le(r).await?;
+            // race: Race
+            let race = Race::astd_read(r).await?;
 
-        // party_status: u32
-        let party_status = crate::util::astd_read_u32_le(r).await?;
+            // zone_id: u32
+            let zone_id = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            name,
-            guild,
-            level,
-            class,
-            race,
-            zone_id,
-            party_status,
+            // party_status: u32
+            let party_status = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                name,
+                guild,
+                level,
+                class,
+                race,
+                zone_id,
+                party_status,
+            })
         })
     }
 
@@ -244,6 +264,7 @@ impl ReadableAndWritable for WhoPlayer {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for WhoPlayer {

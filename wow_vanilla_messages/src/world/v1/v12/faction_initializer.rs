@@ -15,7 +15,6 @@ pub struct FactionInitializer {
     pub standing: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for FactionInitializer {
     type Error = std::io::Error;
 
@@ -44,17 +43,27 @@ impl ReadableAndWritable for FactionInitializer {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // flag: FactionFlag
-        let flag = FactionFlag::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // flag: FactionFlag
+            let flag = FactionFlag::tokio_read(r).await?;
 
-        // standing: u32
-        let standing = crate::util::tokio_read_u32_le(r).await?;
+            // standing: u32
+            let standing = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            flag,
-            standing,
+            Ok(Self {
+                flag,
+                standing,
+            })
         })
     }
 
@@ -80,17 +89,28 @@ impl ReadableAndWritable for FactionInitializer {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // flag: FactionFlag
-        let flag = FactionFlag::astd_read(r).await?;
 
-        // standing: u32
-        let standing = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // flag: FactionFlag
+            let flag = FactionFlag::astd_read(r).await?;
 
-        Ok(Self {
-            flag,
-            standing,
+            // standing: u32
+            let standing = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                flag,
+                standing,
+            })
         })
     }
 
@@ -116,6 +136,7 @@ impl ReadableAndWritable for FactionInitializer {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for FactionInitializer {}

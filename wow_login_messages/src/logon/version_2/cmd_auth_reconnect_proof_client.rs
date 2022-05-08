@@ -24,7 +24,6 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
 
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Client {
     type Error = std::io::Error;
 
@@ -79,28 +78,38 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Client {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // proof_data: u8[16]
-        let mut proof_data = [0_u8; 16];
-        r.read_exact(&mut proof_data).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // proof_data: u8[16]
+            let mut proof_data = [0_u8; 16];
+            r.read_exact(&mut proof_data).await?;
 
-        // client_proof: u8[20]
-        let mut client_proof = [0_u8; 20];
-        r.read_exact(&mut client_proof).await?;
+            // client_proof: u8[20]
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof).await?;
 
-        // client_checksum: u8[20]
-        let mut client_checksum = [0_u8; 20];
-        r.read_exact(&mut client_checksum).await?;
+            // client_checksum: u8[20]
+            let mut client_checksum = [0_u8; 20];
+            r.read_exact(&mut client_checksum).await?;
 
-        // key_count: u8
-        let _key_count = crate::util::tokio_read_u8_le(r).await?;
-        // key_count is expected to always be 0 (0)
+            // key_count: u8
+            let _key_count = crate::util::tokio_read_u8_le(r).await?;
+            // key_count is expected to always be 0 (0)
 
-        Ok(Self {
-            proof_data,
-            client_proof,
-            client_checksum,
+            Ok(Self {
+                proof_data,
+                client_proof,
+                client_checksum,
+            })
         })
     }
 
@@ -141,28 +150,39 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Client {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // proof_data: u8[16]
-        let mut proof_data = [0_u8; 16];
-        r.read_exact(&mut proof_data).await?;
 
-        // client_proof: u8[20]
-        let mut client_proof = [0_u8; 20];
-        r.read_exact(&mut client_proof).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // proof_data: u8[16]
+            let mut proof_data = [0_u8; 16];
+            r.read_exact(&mut proof_data).await?;
 
-        // client_checksum: u8[20]
-        let mut client_checksum = [0_u8; 20];
-        r.read_exact(&mut client_checksum).await?;
+            // client_proof: u8[20]
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof).await?;
 
-        // key_count: u8
-        let _key_count = crate::util::astd_read_u8_le(r).await?;
-        // key_count is expected to always be 0 (0)
+            // client_checksum: u8[20]
+            let mut client_checksum = [0_u8; 20];
+            r.read_exact(&mut client_checksum).await?;
 
-        Ok(Self {
-            proof_data,
-            client_proof,
-            client_checksum,
+            // key_count: u8
+            let _key_count = crate::util::astd_read_u8_le(r).await?;
+            // key_count is expected to always be 0 (0)
+
+            Ok(Self {
+                proof_data,
+                client_proof,
+                client_checksum,
+            })
         })
     }
 
@@ -203,6 +223,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Client {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for CMD_AUTH_RECONNECT_PROOF_Client {}

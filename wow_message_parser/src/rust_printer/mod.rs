@@ -279,7 +279,36 @@ impl Writer {
     }
 
     fn print_async_impl_readable_and_writable_read_header(&mut self, it: ImplType) {
-        self.wln("{}write<")
+        self.wln(format!("fn {}read<'life0, 'async_trait, R>(", it.prefix()));
+
+        self.inc_indent();
+        self.wln("r: &'life0 mut R,");
+        self.dec_indent();
+
+        self.wln(") -> core::pin::Pin<Box<");
+
+        self.inc_indent();
+        self.wln("dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>");
+        self.inc_indent();
+
+        self.wln("+ Send + 'async_trait,");
+        self.dec_indent();
+        self.dec_indent();
+
+        self.wln(">> where");
+
+        self.inc_indent();
+        self.wln(format!("R: 'async_trait + {},", it.read()));
+        self.wln("'life0: 'async_trait,");
+        self.wln("Self: 'async_trait,");
+        self.dec_indent();
+
+        self.open_curly("");
+        self.open_curly("Box::pin(async move");
+    }
+
+    fn print_async_impl_readable_and_writable_read_closing(&mut self) {
+        self.closing_curly_with(")"); // Box::pin
     }
 
     pub fn impl_read_and_writable_with_error<
@@ -294,7 +323,6 @@ impl Writer {
         read_function: F,
         write_function: F2,
     ) {
-        self.wln(ASYNC_TRAIT_MACRO);
         self.open_curly(format!(
             "impl ReadableAndWritable for {}",
             type_name.as_ref()
@@ -306,7 +334,7 @@ impl Writer {
         self.newline();
 
         for it in ImplType::types() {
-            if false {
+            if it.is_async() {
                 self.print_async_impl_readable_and_writable_read_header(it);
             } else {
                 self.wln(it.cfg());
@@ -319,11 +347,10 @@ impl Writer {
             }
 
             read_function(self, it);
-            if false {
-                self.print_async_impl_readable_and_writable_write_closing();
-            } else {
-                self.closing_curly_newline();
+            if it.is_async() {
+                self.print_async_impl_readable_and_writable_read_closing();
             }
+            self.closing_curly_newline();
 
             if it.is_async() {
                 self.print_async_impl_readable_and_writable_write_decl(it);

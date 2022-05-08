@@ -14,7 +14,6 @@ pub struct GmSurveyQuestion {
     pub answer: u8,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for GmSurveyQuestion {
     type Error = std::io::Error;
 
@@ -43,17 +42,27 @@ impl ReadableAndWritable for GmSurveyQuestion {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // question_id: u32
-        let question_id = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // question_id: u32
+            let question_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // answer: u8
-        let answer = crate::util::tokio_read_u8_le(r).await?;
+            // answer: u8
+            let answer = crate::util::tokio_read_u8_le(r).await?;
 
-        Ok(Self {
-            question_id,
-            answer,
+            Ok(Self {
+                question_id,
+                answer,
+            })
         })
     }
 
@@ -79,17 +88,28 @@ impl ReadableAndWritable for GmSurveyQuestion {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // question_id: u32
-        let question_id = crate::util::astd_read_u32_le(r).await?;
 
-        // answer: u8
-        let answer = crate::util::astd_read_u8_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // question_id: u32
+            let question_id = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            question_id,
-            answer,
+            // answer: u8
+            let answer = crate::util::astd_read_u8_le(r).await?;
+
+            Ok(Self {
+                question_id,
+                answer,
+            })
         })
     }
 
@@ -115,6 +135,7 @@ impl ReadableAndWritable for GmSurveyQuestion {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for GmSurveyQuestion {}

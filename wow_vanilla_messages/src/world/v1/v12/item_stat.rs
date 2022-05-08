@@ -14,7 +14,6 @@ pub struct ItemStat {
     pub item_stat_value: u32,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for ItemStat {
     type Error = std::io::Error;
 
@@ -43,17 +42,27 @@ impl ReadableAndWritable for ItemStat {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // item_stat_type: u32
-        let item_stat_type = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // item_stat_type: u32
+            let item_stat_type = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_stat_value: u32
-        let item_stat_value = crate::util::tokio_read_u32_le(r).await?;
+            // item_stat_value: u32
+            let item_stat_value = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            item_stat_type,
-            item_stat_value,
+            Ok(Self {
+                item_stat_type,
+                item_stat_value,
+            })
         })
     }
 
@@ -79,17 +88,28 @@ impl ReadableAndWritable for ItemStat {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // item_stat_type: u32
-        let item_stat_type = crate::util::astd_read_u32_le(r).await?;
 
-        // item_stat_value: u32
-        let item_stat_value = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // item_stat_type: u32
+            let item_stat_type = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            item_stat_type,
-            item_stat_value,
+            // item_stat_value: u32
+            let item_stat_value = crate::util::astd_read_u32_le(r).await?;
+
+            Ok(Self {
+                item_stat_type,
+                item_stat_value,
+            })
         })
     }
 
@@ -115,6 +135,7 @@ impl ReadableAndWritable for ItemStat {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for ItemStat {}

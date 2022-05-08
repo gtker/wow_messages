@@ -15,7 +15,6 @@ pub struct QuestItem {
     pub title: String,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for QuestItem {
     type Error = QuestItemError;
 
@@ -61,26 +60,36 @@ impl ReadableAndWritable for QuestItem {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // quest_id: u32
-        let quest_id = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // quest_id: u32
+            let quest_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // quest_icon: u32
-        let quest_icon = crate::util::tokio_read_u32_le(r).await?;
+            // quest_icon: u32
+            let quest_icon = crate::util::tokio_read_u32_le(r).await?;
 
-        // level: u32
-        let level = crate::util::tokio_read_u32_le(r).await?;
+            // level: u32
+            let level = crate::util::tokio_read_u32_le(r).await?;
 
-        // title: CString
-        let title = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let title = String::from_utf8(title)?;
+            // title: CString
+            let title = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let title = String::from_utf8(title)?;
 
-        Ok(Self {
-            quest_id,
-            quest_icon,
-            level,
-            title,
+            Ok(Self {
+                quest_id,
+                quest_icon,
+                level,
+                title,
+            })
         })
     }
 
@@ -114,26 +123,37 @@ impl ReadableAndWritable for QuestItem {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // quest_id: u32
-        let quest_id = crate::util::astd_read_u32_le(r).await?;
 
-        // quest_icon: u32
-        let quest_icon = crate::util::astd_read_u32_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // quest_id: u32
+            let quest_id = crate::util::astd_read_u32_le(r).await?;
 
-        // level: u32
-        let level = crate::util::astd_read_u32_le(r).await?;
+            // quest_icon: u32
+            let quest_icon = crate::util::astd_read_u32_le(r).await?;
 
-        // title: CString
-        let title = crate::util::astd_read_c_string_to_vec(r).await?;
-        let title = String::from_utf8(title)?;
+            // level: u32
+            let level = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            quest_id,
-            quest_icon,
-            level,
-            title,
+            // title: CString
+            let title = crate::util::astd_read_c_string_to_vec(r).await?;
+            let title = String::from_utf8(title)?;
+
+            Ok(Self {
+                quest_id,
+                quest_icon,
+                level,
+                title,
+            })
         })
     }
 
@@ -167,6 +187,7 @@ impl ReadableAndWritable for QuestItem {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for QuestItem {

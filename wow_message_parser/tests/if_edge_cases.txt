@@ -13,7 +13,6 @@ pub struct IfEdgeCases {
     pub t: IfEdgeCasesTEnum,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for IfEdgeCases {
     type Error = IfEdgeCasesError;
 
@@ -161,80 +160,90 @@ impl ReadableAndWritable for IfEdgeCases {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // t: TEnum
-        let t = TEnum::tokio_read(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // t: TEnum
+            let t = TEnum::tokio_read(r).await?;
 
-        let t_if = match t {
-            TEnum::ZERO => {
-                // basic1: u8
-                let basic1 = crate::util::tokio_read_u8_le(r).await?;
+            let t_if = match t {
+                TEnum::ZERO => {
+                    // basic1: u8
+                    let basic1 = crate::util::tokio_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::ZERO {
-                    basic1,
+                    IfEdgeCasesTEnum::ZERO {
+                        basic1,
+                    }
                 }
-            }
-            TEnum::ONE => {
-                // basic1: u8
-                let basic1 = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::ONE => {
+                    // basic1: u8
+                    let basic1 = crate::util::tokio_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::ONE {
-                    basic1,
+                    IfEdgeCasesTEnum::ONE {
+                        basic1,
+                    }
                 }
-            }
-            TEnum::TWO => {
-                // basic1: u8
-                let basic1 = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::TWO => {
+                    // basic1: u8
+                    let basic1 = crate::util::tokio_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::TWO {
-                    basic1,
+                    IfEdgeCasesTEnum::TWO {
+                        basic1,
+                    }
                 }
-            }
-            TEnum::THREE => {
-                // basic3: u8
-                let basic3 = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::THREE => {
+                    // basic3: u8
+                    let basic3 = crate::util::tokio_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::THREE {
-                    basic3,
+                    IfEdgeCasesTEnum::THREE {
+                        basic3,
+                    }
                 }
-            }
-            TEnum::FOUR => {
-                // basic3: u8
-                let basic3 = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::FOUR => {
+                    // basic3: u8
+                    let basic3 = crate::util::tokio_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::FOUR {
-                    basic3,
+                    IfEdgeCasesTEnum::FOUR {
+                        basic3,
+                    }
                 }
-            }
-            TEnum::FIVE => {
-                // basic5: u8
-                let basic5 = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::FIVE => {
+                    // basic5: u8
+                    let basic5 = crate::util::tokio_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::FIVE {
-                    basic5,
+                    IfEdgeCasesTEnum::FIVE {
+                        basic5,
+                    }
                 }
-            }
-            TEnum::SIX => {
-                // basic5: u8
-                let basic5 = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::SIX => {
+                    // basic5: u8
+                    let basic5 = crate::util::tokio_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::SIX {
-                    basic5,
+                    IfEdgeCasesTEnum::SIX {
+                        basic5,
+                    }
                 }
-            }
-            TEnum::REST => {
-                // rest: u8
-                let rest = crate::util::tokio_read_u8_le(r).await?;
+                TEnum::REST => {
+                    // rest: u8
+                    let rest = crate::util::tokio_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::REST {
-                    rest,
+                    IfEdgeCasesTEnum::REST {
+                        rest,
+                    }
                 }
-            }
-        };
+            };
 
-        Ok(Self {
-            t: t_if,
+            Ok(Self {
+                t: t_if,
+            })
         })
     }
 
@@ -316,80 +325,91 @@ impl ReadableAndWritable for IfEdgeCases {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // t: TEnum
-        let t = TEnum::astd_read(r).await?;
 
-        let t_if = match t {
-            TEnum::ZERO => {
-                // basic1: u8
-                let basic1 = crate::util::astd_read_u8_le(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // t: TEnum
+            let t = TEnum::astd_read(r).await?;
 
-                IfEdgeCasesTEnum::ZERO {
-                    basic1,
+            let t_if = match t {
+                TEnum::ZERO => {
+                    // basic1: u8
+                    let basic1 = crate::util::astd_read_u8_le(r).await?;
+
+                    IfEdgeCasesTEnum::ZERO {
+                        basic1,
+                    }
                 }
-            }
-            TEnum::ONE => {
-                // basic1: u8
-                let basic1 = crate::util::astd_read_u8_le(r).await?;
+                TEnum::ONE => {
+                    // basic1: u8
+                    let basic1 = crate::util::astd_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::ONE {
-                    basic1,
+                    IfEdgeCasesTEnum::ONE {
+                        basic1,
+                    }
                 }
-            }
-            TEnum::TWO => {
-                // basic1: u8
-                let basic1 = crate::util::astd_read_u8_le(r).await?;
+                TEnum::TWO => {
+                    // basic1: u8
+                    let basic1 = crate::util::astd_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::TWO {
-                    basic1,
+                    IfEdgeCasesTEnum::TWO {
+                        basic1,
+                    }
                 }
-            }
-            TEnum::THREE => {
-                // basic3: u8
-                let basic3 = crate::util::astd_read_u8_le(r).await?;
+                TEnum::THREE => {
+                    // basic3: u8
+                    let basic3 = crate::util::astd_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::THREE {
-                    basic3,
+                    IfEdgeCasesTEnum::THREE {
+                        basic3,
+                    }
                 }
-            }
-            TEnum::FOUR => {
-                // basic3: u8
-                let basic3 = crate::util::astd_read_u8_le(r).await?;
+                TEnum::FOUR => {
+                    // basic3: u8
+                    let basic3 = crate::util::astd_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::FOUR {
-                    basic3,
+                    IfEdgeCasesTEnum::FOUR {
+                        basic3,
+                    }
                 }
-            }
-            TEnum::FIVE => {
-                // basic5: u8
-                let basic5 = crate::util::astd_read_u8_le(r).await?;
+                TEnum::FIVE => {
+                    // basic5: u8
+                    let basic5 = crate::util::astd_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::FIVE {
-                    basic5,
+                    IfEdgeCasesTEnum::FIVE {
+                        basic5,
+                    }
                 }
-            }
-            TEnum::SIX => {
-                // basic5: u8
-                let basic5 = crate::util::astd_read_u8_le(r).await?;
+                TEnum::SIX => {
+                    // basic5: u8
+                    let basic5 = crate::util::astd_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::SIX {
-                    basic5,
+                    IfEdgeCasesTEnum::SIX {
+                        basic5,
+                    }
                 }
-            }
-            TEnum::REST => {
-                // rest: u8
-                let rest = crate::util::astd_read_u8_le(r).await?;
+                TEnum::REST => {
+                    // rest: u8
+                    let rest = crate::util::astd_read_u8_le(r).await?;
 
-                IfEdgeCasesTEnum::REST {
-                    rest,
+                    IfEdgeCasesTEnum::REST {
+                        rest,
+                    }
                 }
-            }
-        };
+            };
 
-        Ok(Self {
-            t: t_if,
+            Ok(Self {
+                t: t_if,
+            })
         })
     }
 
@@ -471,6 +491,7 @@ impl ReadableAndWritable for IfEdgeCases {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for IfEdgeCases {}

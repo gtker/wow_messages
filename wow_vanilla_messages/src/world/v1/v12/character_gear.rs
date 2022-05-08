@@ -15,7 +15,6 @@ pub struct CharacterGear {
     pub inventory_type: InventoryType,
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CharacterGear {
     type Error = CharacterGearError;
 
@@ -44,17 +43,27 @@ impl ReadableAndWritable for CharacterGear {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // equipment_display_id: u32
-        let equipment_display_id = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // equipment_display_id: u32
+            let equipment_display_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // inventory_type: InventoryType
-        let inventory_type = InventoryType::tokio_read(r).await?;
+            // inventory_type: InventoryType
+            let inventory_type = InventoryType::tokio_read(r).await?;
 
-        Ok(Self {
-            equipment_display_id,
-            inventory_type,
+            Ok(Self {
+                equipment_display_id,
+                inventory_type,
+            })
         })
     }
 
@@ -80,17 +89,28 @@ impl ReadableAndWritable for CharacterGear {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // equipment_display_id: u32
-        let equipment_display_id = crate::util::astd_read_u32_le(r).await?;
 
-        // inventory_type: InventoryType
-        let inventory_type = InventoryType::astd_read(r).await?;
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // equipment_display_id: u32
+            let equipment_display_id = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(Self {
-            equipment_display_id,
-            inventory_type,
+            // inventory_type: InventoryType
+            let inventory_type = InventoryType::astd_read(r).await?;
+
+            Ok(Self {
+                equipment_display_id,
+                inventory_type,
+            })
         })
     }
 
@@ -116,6 +136,7 @@ impl ReadableAndWritable for CharacterGear {
             Ok(())
         })
     }
+
 }
 
 impl ConstantSized for CharacterGear {}

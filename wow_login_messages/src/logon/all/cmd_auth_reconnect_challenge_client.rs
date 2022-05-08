@@ -32,7 +32,6 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
 
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
     type Error = CMD_AUTH_RECONNECT_CHALLENGE_ClientError;
 
@@ -127,53 +126,63 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // protocol_version: u8
-        let protocol_version = crate::util::tokio_read_u8_le(r).await?;
+    fn tokio_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // protocol_version: u8
+            let protocol_version = crate::util::tokio_read_u8_le(r).await?;
 
-        // size: u16
-        let _size = crate::util::tokio_read_u16_le(r).await?;
-        // size is expected to always be self.size (0)
+            // size: u16
+            let _size = crate::util::tokio_read_u16_le(r).await?;
+            // size is expected to always be self.size (0)
 
-        // game_name: u32
-        let _game_name = crate::util::tokio_read_u32_le(r).await?;
-        // game_name is expected to always be "\0WoW" (5730135)
+            // game_name: u32
+            let _game_name = crate::util::tokio_read_u32_le(r).await?;
+            // game_name is expected to always be "\0WoW" (5730135)
 
-        // version: Version
-        let version = Version::tokio_read(r).await?;
+            // version: Version
+            let version = Version::tokio_read(r).await?;
 
-        // platform: Platform
-        let platform = Platform::tokio_read(r).await?;
+            // platform: Platform
+            let platform = Platform::tokio_read(r).await?;
 
-        // os: Os
-        let os = Os::tokio_read(r).await?;
+            // os: Os
+            let os = Os::tokio_read(r).await?;
 
-        // locale: Locale
-        let locale = Locale::tokio_read(r).await?;
+            // locale: Locale
+            let locale = Locale::tokio_read(r).await?;
 
-        // utc_timezone_offset: u32
-        let utc_timezone_offset = crate::util::tokio_read_u32_le(r).await?;
+            // utc_timezone_offset: u32
+            let utc_timezone_offset = crate::util::tokio_read_u32_le(r).await?;
 
-        // client_ip_address: u32_be
-        let client_ip_address = crate::util::tokio_read_u32_be(r).await?;
+            // client_ip_address: u32_be
+            let client_ip_address = crate::util::tokio_read_u32_be(r).await?;
 
-        // account_name_length: u8
-        let account_name_length = crate::util::tokio_read_u8_le(r).await?;
+            // account_name_length: u8
+            let account_name_length = crate::util::tokio_read_u8_le(r).await?;
 
-        // account_name: String[account_name_length]
-        let account_name = crate::util::tokio_read_fixed_string_to_vec(r, account_name_length as usize).await?;
-        let account_name = String::from_utf8(account_name)?;
+            // account_name: String[account_name_length]
+            let account_name = crate::util::tokio_read_fixed_string_to_vec(r, account_name_length as usize).await?;
+            let account_name = String::from_utf8(account_name)?;
 
-        Ok(Self {
-            protocol_version,
-            version,
-            platform,
-            os,
-            locale,
-            utc_timezone_offset,
-            client_ip_address,
-            account_name,
+            Ok(Self {
+                protocol_version,
+                version,
+                platform,
+                os,
+                locale,
+                utc_timezone_offset,
+                client_ip_address,
+                account_name,
+            })
         })
     }
 
@@ -229,53 +238,64 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
             Ok(())
         })
     }
-    #[cfg(feature = "async_std")]
-    async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        // protocol_version: u8
-        let protocol_version = crate::util::astd_read_u8_le(r).await?;
 
-        // size: u16
-        let _size = crate::util::astd_read_u16_le(r).await?;
-        // size is expected to always be self.size (0)
+    fn astd_read<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // protocol_version: u8
+            let protocol_version = crate::util::astd_read_u8_le(r).await?;
 
-        // game_name: u32
-        let _game_name = crate::util::astd_read_u32_le(r).await?;
-        // game_name is expected to always be "\0WoW" (5730135)
+            // size: u16
+            let _size = crate::util::astd_read_u16_le(r).await?;
+            // size is expected to always be self.size (0)
 
-        // version: Version
-        let version = Version::astd_read(r).await?;
+            // game_name: u32
+            let _game_name = crate::util::astd_read_u32_le(r).await?;
+            // game_name is expected to always be "\0WoW" (5730135)
 
-        // platform: Platform
-        let platform = Platform::astd_read(r).await?;
+            // version: Version
+            let version = Version::astd_read(r).await?;
 
-        // os: Os
-        let os = Os::astd_read(r).await?;
+            // platform: Platform
+            let platform = Platform::astd_read(r).await?;
 
-        // locale: Locale
-        let locale = Locale::astd_read(r).await?;
+            // os: Os
+            let os = Os::astd_read(r).await?;
 
-        // utc_timezone_offset: u32
-        let utc_timezone_offset = crate::util::astd_read_u32_le(r).await?;
+            // locale: Locale
+            let locale = Locale::astd_read(r).await?;
 
-        // client_ip_address: u32_be
-        let client_ip_address = crate::util::astd_read_u32_be(r).await?;
+            // utc_timezone_offset: u32
+            let utc_timezone_offset = crate::util::astd_read_u32_le(r).await?;
 
-        // account_name_length: u8
-        let account_name_length = crate::util::astd_read_u8_le(r).await?;
+            // client_ip_address: u32_be
+            let client_ip_address = crate::util::astd_read_u32_be(r).await?;
 
-        // account_name: String[account_name_length]
-        let account_name = crate::util::astd_read_fixed_string_to_vec(r, account_name_length as usize).await?;
-        let account_name = String::from_utf8(account_name)?;
+            // account_name_length: u8
+            let account_name_length = crate::util::astd_read_u8_le(r).await?;
 
-        Ok(Self {
-            protocol_version,
-            version,
-            platform,
-            os,
-            locale,
-            utc_timezone_offset,
-            client_ip_address,
-            account_name,
+            // account_name: String[account_name_length]
+            let account_name = crate::util::astd_read_fixed_string_to_vec(r, account_name_length as usize).await?;
+            let account_name = String::from_utf8(account_name)?;
+
+            Ok(Self {
+                protocol_version,
+                version,
+                platform,
+                os,
+                locale,
+                utc_timezone_offset,
+                client_ip_address,
+                account_name,
+            })
         })
     }
 
@@ -331,6 +351,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
             Ok(())
         })
     }
+
 }
 
 impl VariableSized for CMD_AUTH_RECONNECT_CHALLENGE_Client {
