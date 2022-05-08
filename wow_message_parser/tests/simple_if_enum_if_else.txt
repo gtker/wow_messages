@@ -451,19 +451,19 @@ impl SimpleIfEnumIfElseSimpleEnum {
 impl VariableSized for SimpleIfEnumIfElseSimpleEnum {
     fn size(&self) -> usize {
         match self {
-            Self::ZERO  {
+            Self::ZERO {
                 basic,
             } => {
                 1
                 + 1 // basic: u8
             }
-            Self::ONE  {
+            Self::ONE {
                 basic,
             } => {
                 1
                 + 1 // basic: u8
             }
-            Self::TWO  {
+            Self::TWO {
                 other,
             } => {
                 1

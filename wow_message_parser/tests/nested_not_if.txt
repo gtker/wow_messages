@@ -1286,13 +1286,13 @@ impl NestedNotIfNestedEnum {
 impl VariableSized for NestedNotIfNestedEnum {
     fn size(&self) -> usize {
         match self {
-            Self::NESTED  {
+            Self::NESTED {
                 one,
             } => {
                 1
                 + 1 // one: u8
             }
-            Self::NOT_NESTED =>  {
+            Self::NOT_NESTED => {
                 1
             }
         }
@@ -1531,10 +1531,10 @@ impl NestedNotIfTEnum {
 impl VariableSized for NestedNotIfTEnum {
     fn size(&self) -> usize {
         match self {
-            Self::ZERO =>  {
+            Self::ZERO => {
                 1
             }
-            Self::ONE  {
+            Self::ONE {
                 e,
                 not_zero,
             } => {
@@ -1542,7 +1542,7 @@ impl VariableSized for NestedNotIfTEnum {
                 + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
             }
-            Self::TWO  {
+            Self::TWO {
                 e,
                 not_zero,
             } => {
@@ -1550,7 +1550,7 @@ impl VariableSized for NestedNotIfTEnum {
                 + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
             }
-            Self::THREE  {
+            Self::THREE {
                 e,
                 not_zero,
             } => {
@@ -1558,7 +1558,7 @@ impl VariableSized for NestedNotIfTEnum {
                 + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
             }
-            Self::FOUR  {
+            Self::FOUR {
                 e,
                 not_zero,
             } => {
@@ -1566,7 +1566,7 @@ impl VariableSized for NestedNotIfTEnum {
                 + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
             }
-            Self::FIVE  {
+            Self::FIVE {
                 e,
                 not_zero,
             } => {
@@ -1574,7 +1574,7 @@ impl VariableSized for NestedNotIfTEnum {
                 + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
             }
-            Self::SIX  {
+            Self::SIX {
                 e,
                 not_zero,
             } => {
@@ -1582,7 +1582,7 @@ impl VariableSized for NestedNotIfTEnum {
                 + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
             }
-            Self::REST  {
+            Self::REST {
                 e,
                 not_zero,
             } => {

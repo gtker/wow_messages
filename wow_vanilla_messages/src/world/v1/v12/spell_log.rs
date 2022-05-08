@@ -2545,34 +2545,34 @@ impl SpellLogSpellEffect {
 impl VariableSized for SpellLogSpellEffect {
     fn size(&self) -> usize {
         match self {
-            Self::NONE =>  {
+            Self::NONE => {
                 4
             }
-            Self::INSTAKILL  {
+            Self::INSTAKILL {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::SCHOOL_DAMAGE =>  {
+            Self::SCHOOL_DAMAGE => {
                 4
             }
-            Self::DUMMY =>  {
+            Self::DUMMY => {
                 4
             }
-            Self::PORTAL_TELEPORT =>  {
+            Self::PORTAL_TELEPORT => {
                 4
             }
-            Self::TELEPORT_UNITS =>  {
+            Self::TELEPORT_UNITS => {
                 4
             }
-            Self::APPLY_AURA =>  {
+            Self::APPLY_AURA => {
                 4
             }
-            Self::ENVIRONMENTAL_DAMAGE =>  {
+            Self::ENVIRONMENTAL_DAMAGE => {
                 4
             }
-            Self::POWER_DRAIN  {
+            Self::POWER_DRAIN {
                 target1,
                 unknown1,
                 unknown2,
@@ -2584,40 +2584,40 @@ impl VariableSized for SpellLogSpellEffect {
                 + 4 // unknown2: u32
                 + 4 // unknown3: f32
             }
-            Self::HEALTH_LEECH =>  {
+            Self::HEALTH_LEECH => {
                 4
             }
-            Self::HEAL =>  {
+            Self::HEAL => {
                 4
             }
-            Self::BIND =>  {
+            Self::BIND => {
                 4
             }
-            Self::PORTAL =>  {
+            Self::PORTAL => {
                 4
             }
-            Self::RITUAL_BASE =>  {
+            Self::RITUAL_BASE => {
                 4
             }
-            Self::RITUAL_SPECIALIZE =>  {
+            Self::RITUAL_SPECIALIZE => {
                 4
             }
-            Self::RITUAL_ACTIVATE_PORTAL =>  {
+            Self::RITUAL_ACTIVATE_PORTAL => {
                 4
             }
-            Self::QUEST_COMPLETE =>  {
+            Self::QUEST_COMPLETE => {
                 4
             }
-            Self::WEAPON_DAMAGE_NOSCHOOL =>  {
+            Self::WEAPON_DAMAGE_NOSCHOOL => {
                 4
             }
-            Self::RESURRECT  {
+            Self::RESURRECT {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::ADD_EXTRA_ATTACKS  {
+            Self::ADD_EXTRA_ATTACKS {
                 target2,
                 unknown4,
             } => {
@@ -2625,166 +2625,166 @@ impl VariableSized for SpellLogSpellEffect {
                 + 8 // target2: Guid
                 + 4 // unknown4: u32
             }
-            Self::DODGE =>  {
+            Self::DODGE => {
                 4
             }
-            Self::EVADE =>  {
+            Self::EVADE => {
                 4
             }
-            Self::PARRY =>  {
+            Self::PARRY => {
                 4
             }
-            Self::BLOCK =>  {
+            Self::BLOCK => {
                 4
             }
-            Self::CREATE_ITEM  {
+            Self::CREATE_ITEM {
                 spell_effect_item_type,
             } => {
                 4
                 + 4 // spell_effect_item_type: u32
             }
-            Self::WEAPON =>  {
+            Self::WEAPON => {
                 4
             }
-            Self::DEFENSE =>  {
+            Self::DEFENSE => {
                 4
             }
-            Self::PERSISTENT_AREA_AURA =>  {
+            Self::PERSISTENT_AREA_AURA => {
                 4
             }
-            Self::SUMMON =>  {
+            Self::SUMMON => {
                 4
             }
-            Self::LEAP =>  {
+            Self::LEAP => {
                 4
             }
-            Self::ENERGIZE =>  {
+            Self::ENERGIZE => {
                 4
             }
-            Self::WEAPON_PERCENT_DAMAGE =>  {
+            Self::WEAPON_PERCENT_DAMAGE => {
                 4
             }
-            Self::TRIGGER_MISSILE =>  {
+            Self::TRIGGER_MISSILE => {
                 4
             }
-            Self::OPEN_LOCK  {
+            Self::OPEN_LOCK {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::SUMMON_CHANGE_ITEM =>  {
+            Self::SUMMON_CHANGE_ITEM => {
                 4
             }
-            Self::APPLY_AREA_AURA_PARTY =>  {
+            Self::APPLY_AREA_AURA_PARTY => {
                 4
             }
-            Self::LEARN_SPELL =>  {
+            Self::LEARN_SPELL => {
                 4
             }
-            Self::SPELL_DEFENSE =>  {
+            Self::SPELL_DEFENSE => {
                 4
             }
-            Self::DISPEL  {
+            Self::DISPEL {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::LANGUAGE =>  {
+            Self::LANGUAGE => {
                 4
             }
-            Self::DUAL_WIELD =>  {
+            Self::DUAL_WIELD => {
                 4
             }
-            Self::SUMMON_WILD =>  {
+            Self::SUMMON_WILD => {
                 4
             }
-            Self::SUMMON_GUARDIAN =>  {
+            Self::SUMMON_GUARDIAN => {
                 4
             }
-            Self::TELEPORT_UNITS_FACE_CASTER =>  {
+            Self::TELEPORT_UNITS_FACE_CASTER => {
                 4
             }
-            Self::SKILL_STEP =>  {
+            Self::SKILL_STEP => {
                 4
             }
-            Self::ADD_HONOR =>  {
+            Self::ADD_HONOR => {
                 4
             }
-            Self::SPAWN =>  {
+            Self::SPAWN => {
                 4
             }
-            Self::TRADE_SKILL =>  {
+            Self::TRADE_SKILL => {
                 4
             }
-            Self::STEALTH =>  {
+            Self::STEALTH => {
                 4
             }
-            Self::DETECT =>  {
+            Self::DETECT => {
                 4
             }
-            Self::TRANS_DOOR =>  {
+            Self::TRANS_DOOR => {
                 4
             }
-            Self::FORCE_CRITICAL_HIT =>  {
+            Self::FORCE_CRITICAL_HIT => {
                 4
             }
-            Self::GUARANTEE_HIT =>  {
+            Self::GUARANTEE_HIT => {
                 4
             }
-            Self::ENCHANT_ITEM =>  {
+            Self::ENCHANT_ITEM => {
                 4
             }
-            Self::ENCHANT_ITEM_TEMPORARY =>  {
+            Self::ENCHANT_ITEM_TEMPORARY => {
                 4
             }
-            Self::TAMECREATURE =>  {
+            Self::TAMECREATURE => {
                 4
             }
-            Self::SUMMON_PET =>  {
+            Self::SUMMON_PET => {
                 4
             }
-            Self::LEARN_PET_SPELL =>  {
+            Self::LEARN_PET_SPELL => {
                 4
             }
-            Self::WEAPON_DAMAGE =>  {
+            Self::WEAPON_DAMAGE => {
                 4
             }
-            Self::OPEN_LOCK_ITEM  {
+            Self::OPEN_LOCK_ITEM {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::PROFICIENCY =>  {
+            Self::PROFICIENCY => {
                 4
             }
-            Self::SEND_EVENT =>  {
+            Self::SEND_EVENT => {
                 4
             }
-            Self::POWER_BURN =>  {
+            Self::POWER_BURN => {
                 4
             }
-            Self::THREAT  {
+            Self::THREAT {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::TRIGGER_SPELL =>  {
+            Self::TRIGGER_SPELL => {
                 4
             }
-            Self::HEALTH_FUNNEL =>  {
+            Self::HEALTH_FUNNEL => {
                 4
             }
-            Self::POWER_FUNNEL =>  {
+            Self::POWER_FUNNEL => {
                 4
             }
-            Self::HEAL_MAX_HEALTH =>  {
+            Self::HEAL_MAX_HEALTH => {
                 4
             }
-            Self::INTERRUPT_CAST  {
+            Self::INTERRUPT_CAST {
                 interrupted_spell,
                 target3,
             } => {
@@ -2792,151 +2792,151 @@ impl VariableSized for SpellLogSpellEffect {
                 + 4 // interrupted_spell: u32
                 + 8 // target3: Guid
             }
-            Self::DISTRACT  {
+            Self::DISTRACT {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::PULL =>  {
+            Self::PULL => {
                 4
             }
-            Self::PICKPOCKET =>  {
+            Self::PICKPOCKET => {
                 4
             }
-            Self::ADD_FARSIGHT =>  {
+            Self::ADD_FARSIGHT => {
                 4
             }
-            Self::SUMMON_POSSESSED =>  {
+            Self::SUMMON_POSSESSED => {
                 4
             }
-            Self::SUMMON_TOTEM =>  {
+            Self::SUMMON_TOTEM => {
                 4
             }
-            Self::HEAL_MECHANICAL =>  {
+            Self::HEAL_MECHANICAL => {
                 4
             }
-            Self::SUMMON_OBJECT_WILD =>  {
+            Self::SUMMON_OBJECT_WILD => {
                 4
             }
-            Self::SCRIPT_EFFECT =>  {
+            Self::SCRIPT_EFFECT => {
                 4
             }
-            Self::ATTACK =>  {
+            Self::ATTACK => {
                 4
             }
-            Self::SANCTUARY  {
+            Self::SANCTUARY {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::ADD_COMBO_POINTS =>  {
+            Self::ADD_COMBO_POINTS => {
                 4
             }
-            Self::CREATE_HOUSE =>  {
+            Self::CREATE_HOUSE => {
                 4
             }
-            Self::BIND_SIGHT =>  {
+            Self::BIND_SIGHT => {
                 4
             }
-            Self::DUEL =>  {
+            Self::DUEL => {
                 4
             }
-            Self::STUCK =>  {
+            Self::STUCK => {
                 4
             }
-            Self::SUMMON_PLAYER =>  {
+            Self::SUMMON_PLAYER => {
                 4
             }
-            Self::ACTIVATE_OBJECT =>  {
+            Self::ACTIVATE_OBJECT => {
                 4
             }
-            Self::SUMMON_TOTEM_SLOT1 =>  {
+            Self::SUMMON_TOTEM_SLOT1 => {
                 4
             }
-            Self::SUMMON_TOTEM_SLOT2 =>  {
+            Self::SUMMON_TOTEM_SLOT2 => {
                 4
             }
-            Self::SUMMON_TOTEM_SLOT3 =>  {
+            Self::SUMMON_TOTEM_SLOT3 => {
                 4
             }
-            Self::SUMMON_TOTEM_SLOT4 =>  {
+            Self::SUMMON_TOTEM_SLOT4 => {
                 4
             }
-            Self::THREAT_ALL  {
+            Self::THREAT_ALL {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::ENCHANT_HELD_ITEM =>  {
+            Self::ENCHANT_HELD_ITEM => {
                 4
             }
-            Self::SUMMON_PHANTASM =>  {
+            Self::SUMMON_PHANTASM => {
                 4
             }
-            Self::SELF_RESURRECT =>  {
+            Self::SELF_RESURRECT => {
                 4
             }
-            Self::SKINNING =>  {
+            Self::SKINNING => {
                 4
             }
-            Self::CHARGE =>  {
+            Self::CHARGE => {
                 4
             }
-            Self::SUMMON_CRITTER =>  {
+            Self::SUMMON_CRITTER => {
                 4
             }
-            Self::KNOCK_BACK =>  {
+            Self::KNOCK_BACK => {
                 4
             }
-            Self::DISENCHANT =>  {
+            Self::DISENCHANT => {
                 4
             }
-            Self::INEBRIATE =>  {
+            Self::INEBRIATE => {
                 4
             }
-            Self::FEED_PET  {
+            Self::FEED_PET {
                 item_target_entry,
             } => {
                 4
                 + 4 // item_target_entry: u32
             }
-            Self::DISMISS_PET  {
+            Self::DISMISS_PET {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::REPUTATION =>  {
+            Self::REPUTATION => {
                 4
             }
-            Self::SUMMON_OBJECT_SLOT1 =>  {
+            Self::SUMMON_OBJECT_SLOT1 => {
                 4
             }
-            Self::SUMMON_OBJECT_SLOT2 =>  {
+            Self::SUMMON_OBJECT_SLOT2 => {
                 4
             }
-            Self::SUMMON_OBJECT_SLOT3 =>  {
+            Self::SUMMON_OBJECT_SLOT3 => {
                 4
             }
-            Self::SUMMON_OBJECT_SLOT4 =>  {
+            Self::SUMMON_OBJECT_SLOT4 => {
                 4
             }
-            Self::DISPEL_MECHANIC  {
+            Self::DISPEL_MECHANIC {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::SUMMON_DEAD_PET =>  {
+            Self::SUMMON_DEAD_PET => {
                 4
             }
-            Self::DESTROY_ALL_TOTEMS =>  {
+            Self::DESTROY_ALL_TOTEMS => {
                 4
             }
-            Self::DURABILITY_DAMAGE  {
+            Self::DURABILITY_DAMAGE {
                 target4,
                 unknown5,
                 unknown6,
@@ -2946,67 +2946,67 @@ impl VariableSized for SpellLogSpellEffect {
                 + 4 // unknown5: u32
                 + 4 // unknown6: u32
             }
-            Self::SUMMON_DEMON =>  {
+            Self::SUMMON_DEMON => {
                 4
             }
-            Self::RESURRECT_NEW  {
+            Self::RESURRECT_NEW {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::ATTACK_ME  {
+            Self::ATTACK_ME {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::DURABILITY_DAMAGE_PCT =>  {
+            Self::DURABILITY_DAMAGE_PCT => {
                 4
             }
-            Self::SKIN_PLAYER_CORPSE  {
+            Self::SKIN_PLAYER_CORPSE {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::SPIRIT_HEAL =>  {
+            Self::SPIRIT_HEAL => {
                 4
             }
-            Self::SKILL =>  {
+            Self::SKILL => {
                 4
             }
-            Self::APPLY_AREA_AURA_PET =>  {
+            Self::APPLY_AREA_AURA_PET => {
                 4
             }
-            Self::TELEPORT_GRAVEYARD =>  {
+            Self::TELEPORT_GRAVEYARD => {
                 4
             }
-            Self::NORMALIZED_WEAPON_DMG =>  {
+            Self::NORMALIZED_WEAPON_DMG => {
                 4
             }
-            Self::UNKNOWN122 =>  {
+            Self::UNKNOWN122 => {
                 4
             }
-            Self::SEND_TAXI =>  {
+            Self::SEND_TAXI => {
                 4
             }
-            Self::PLAYER_PULL =>  {
+            Self::PLAYER_PULL => {
                 4
             }
-            Self::MODIFY_THREAT_PERCENT  {
+            Self::MODIFY_THREAT_PERCENT {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::UNKNOWN126  {
+            Self::UNKNOWN126 {
                 target5,
             } => {
                 4
                 + 8 // target5: Guid
             }
-            Self::UNKNOWN127 =>  {
+            Self::UNKNOWN127 => {
                 4
             }
         }

@@ -501,10 +501,10 @@ impl SMSG_GMTICKET_GETTICKETGmTicketStatus {
 impl VariableSized for SMSG_GMTICKET_GETTICKETGmTicketStatus {
     fn size(&self) -> usize {
         match self {
-            Self::DBERROR =>  {
+            Self::DBERROR => {
                 4
             }
-            Self::HASTEXT  {
+            Self::HASTEXT {
                 days_since_last_updated,
                 days_since_oldest_ticket_creation,
                 days_since_ticket_creation,
@@ -522,7 +522,7 @@ impl VariableSized for SMSG_GMTICKET_GETTICKETGmTicketStatus {
                 + text.len() + 1 // text: CString
                 + 1 // ticket_type: GmTicketType
             }
-            Self::DEFAULT =>  {
+            Self::DEFAULT => {
                 4
             }
         }

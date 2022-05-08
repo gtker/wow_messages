@@ -436,13 +436,13 @@ impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
 impl VariableSized for MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
     fn size(&self) -> usize {
         match self {
-            Self::PARTIAL  {
+            Self::PARTIAL {
                 raid_target,
             } => {
                 1
                 + RaidTargetUpdate::size() // raid_target: RaidTargetUpdate
             }
-            Self::FULL  {
+            Self::FULL {
                 raid_targets,
             } => {
                 1

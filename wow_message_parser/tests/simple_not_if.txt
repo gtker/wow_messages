@@ -406,16 +406,16 @@ impl SimpleIfEnumNotSimpleEnum {
 impl VariableSized for SimpleIfEnumNotSimpleEnum {
     fn size(&self) -> usize {
         match self {
-            Self::ZERO =>  {
+            Self::ZERO => {
                 1
             }
-            Self::ONE  {
+            Self::ONE {
                 others,
             } => {
                 1
                 + 1 // others: u8
             }
-            Self::TWO  {
+            Self::TWO {
                 others,
             } => {
                 1

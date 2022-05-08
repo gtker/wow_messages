@@ -436,10 +436,10 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
 impl VariableSized for SMSG_LOG_XPGAINExperienceAwardType {
     fn size(&self) -> usize {
         match self {
-            Self::KILL =>  {
+            Self::KILL => {
                 1
             }
-            Self::NON_KILL  {
+            Self::NON_KILL {
                 exp_group_bonus,
                 experience_without_rested,
             } => {

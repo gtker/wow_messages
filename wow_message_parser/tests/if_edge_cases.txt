@@ -706,49 +706,49 @@ impl IfEdgeCasesTEnum {
 impl VariableSized for IfEdgeCasesTEnum {
     fn size(&self) -> usize {
         match self {
-            Self::ZERO  {
+            Self::ZERO {
                 basic1,
             } => {
                 1
                 + 1 // basic1: u8
             }
-            Self::ONE  {
+            Self::ONE {
                 basic1,
             } => {
                 1
                 + 1 // basic1: u8
             }
-            Self::TWO  {
+            Self::TWO {
                 basic1,
             } => {
                 1
                 + 1 // basic1: u8
             }
-            Self::THREE  {
+            Self::THREE {
                 basic3,
             } => {
                 1
                 + 1 // basic3: u8
             }
-            Self::FOUR  {
+            Self::FOUR {
                 basic3,
             } => {
                 1
                 + 1 // basic3: u8
             }
-            Self::FIVE  {
+            Self::FIVE {
                 basic5,
             } => {
                 1
                 + 1 // basic5: u8
             }
-            Self::SIX  {
+            Self::SIX {
                 basic5,
             } => {
                 1
                 + 1 // basic5: u8
             }
-            Self::REST  {
+            Self::REST {
                 rest,
             } => {
                 1

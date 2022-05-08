@@ -761,10 +761,10 @@ impl FriendFriendStatus {
 impl VariableSized for FriendFriendStatus {
     fn size(&self) -> usize {
         match self {
-            Self::OFFLINE =>  {
+            Self::OFFLINE => {
                 1
             }
-            Self::ONLINE  {
+            Self::ONLINE {
                 area,
                 class,
                 level,
@@ -774,7 +774,7 @@ impl VariableSized for FriendFriendStatus {
                 + 4 // class: Class
                 + 4 // level: u32
             }
-            Self::AFK  {
+            Self::AFK {
                 area,
                 class,
                 level,
@@ -784,7 +784,7 @@ impl VariableSized for FriendFriendStatus {
                 + 4 // class: Class
                 + 4 // level: u32
             }
-            Self::UNKNOWN3  {
+            Self::UNKNOWN3 {
                 area,
                 class,
                 level,
@@ -794,7 +794,7 @@ impl VariableSized for FriendFriendStatus {
                 + 4 // class: Class
                 + 4 // level: u32
             }
-            Self::DND  {
+            Self::DND {
                 area,
                 class,
                 level,

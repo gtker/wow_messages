@@ -2534,16 +2534,16 @@ impl AuraLogAuraType {
 impl VariableSized for AuraLogAuraType {
     fn size(&self) -> usize {
         match self {
-            Self::NONE =>  {
+            Self::NONE => {
                 4
             }
-            Self::BIND_SIGHT =>  {
+            Self::BIND_SIGHT => {
                 4
             }
-            Self::MOD_POSSESS =>  {
+            Self::MOD_POSSESS => {
                 4
             }
-            Self::PERIODIC_DAMAGE  {
+            Self::PERIODIC_DAMAGE {
                 absorbed,
                 damage1,
                 resisted,
@@ -2555,64 +2555,64 @@ impl VariableSized for AuraLogAuraType {
                 + 4 // resisted: u32
                 + 1 // school: SpellSchool
             }
-            Self::DUMMY =>  {
+            Self::DUMMY => {
                 4
             }
-            Self::MOD_CONFUSE =>  {
+            Self::MOD_CONFUSE => {
                 4
             }
-            Self::MOD_CHARM =>  {
+            Self::MOD_CHARM => {
                 4
             }
-            Self::MOD_FEAR =>  {
+            Self::MOD_FEAR => {
                 4
             }
-            Self::PERIODIC_HEAL  {
+            Self::PERIODIC_HEAL {
                 damage2,
             } => {
                 4
                 + 4 // damage2: u32
             }
-            Self::MOD_ATTACKSPEED =>  {
+            Self::MOD_ATTACKSPEED => {
                 4
             }
-            Self::MOD_THREAT =>  {
+            Self::MOD_THREAT => {
                 4
             }
-            Self::MOD_TAUNT =>  {
+            Self::MOD_TAUNT => {
                 4
             }
-            Self::MOD_STUN =>  {
+            Self::MOD_STUN => {
                 4
             }
-            Self::MOD_DAMAGE_DONE =>  {
+            Self::MOD_DAMAGE_DONE => {
                 4
             }
-            Self::MOD_DAMAGE_TAKEN =>  {
+            Self::MOD_DAMAGE_TAKEN => {
                 4
             }
-            Self::DAMAGE_SHIELD =>  {
+            Self::DAMAGE_SHIELD => {
                 4
             }
-            Self::MOD_STEALTH =>  {
+            Self::MOD_STEALTH => {
                 4
             }
-            Self::MOD_STEALTH_DETECT =>  {
+            Self::MOD_STEALTH_DETECT => {
                 4
             }
-            Self::MOD_INVISIBILITY =>  {
+            Self::MOD_INVISIBILITY => {
                 4
             }
-            Self::MOD_INVISIBILITY_DETECTION =>  {
+            Self::MOD_INVISIBILITY_DETECTION => {
                 4
             }
-            Self::OBS_MOD_HEALTH  {
+            Self::OBS_MOD_HEALTH {
                 damage2,
             } => {
                 4
                 + 4 // damage2: u32
             }
-            Self::OBS_MOD_MANA  {
+            Self::OBS_MOD_MANA {
                 damage3,
                 misc_value1,
             } => {
@@ -2620,13 +2620,13 @@ impl VariableSized for AuraLogAuraType {
                 + 4 // damage3: u32
                 + 4 // misc_value1: u32
             }
-            Self::MOD_RESISTANCE =>  {
+            Self::MOD_RESISTANCE => {
                 4
             }
-            Self::PERIODIC_TRIGGER_SPELL =>  {
+            Self::PERIODIC_TRIGGER_SPELL => {
                 4
             }
-            Self::PERIODIC_ENERGIZE  {
+            Self::PERIODIC_ENERGIZE {
                 damage3,
                 misc_value1,
             } => {
@@ -2634,124 +2634,124 @@ impl VariableSized for AuraLogAuraType {
                 + 4 // damage3: u32
                 + 4 // misc_value1: u32
             }
-            Self::MOD_PACIFY =>  {
+            Self::MOD_PACIFY => {
                 4
             }
-            Self::MOD_ROOT =>  {
+            Self::MOD_ROOT => {
                 4
             }
-            Self::MOD_SILENCE =>  {
+            Self::MOD_SILENCE => {
                 4
             }
-            Self::REFLECT_SPELLS =>  {
+            Self::REFLECT_SPELLS => {
                 4
             }
-            Self::MOD_STAT =>  {
+            Self::MOD_STAT => {
                 4
             }
-            Self::MOD_SKILL =>  {
+            Self::MOD_SKILL => {
                 4
             }
-            Self::MOD_INCREASE_SPEED =>  {
+            Self::MOD_INCREASE_SPEED => {
                 4
             }
-            Self::MOD_INCREASE_MOUNTED_SPEED =>  {
+            Self::MOD_INCREASE_MOUNTED_SPEED => {
                 4
             }
-            Self::MOD_DECREASE_SPEED =>  {
+            Self::MOD_DECREASE_SPEED => {
                 4
             }
-            Self::MOD_INCREASE_HEALTH =>  {
+            Self::MOD_INCREASE_HEALTH => {
                 4
             }
-            Self::MOD_INCREASE_ENERGY =>  {
+            Self::MOD_INCREASE_ENERGY => {
                 4
             }
-            Self::MOD_SHAPESHIFT =>  {
+            Self::MOD_SHAPESHIFT => {
                 4
             }
-            Self::EFFECT_IMMUNITY =>  {
+            Self::EFFECT_IMMUNITY => {
                 4
             }
-            Self::STATE_IMMUNITY =>  {
+            Self::STATE_IMMUNITY => {
                 4
             }
-            Self::SCHOOL_IMMUNITY =>  {
+            Self::SCHOOL_IMMUNITY => {
                 4
             }
-            Self::DAMAGE_IMMUNITY =>  {
+            Self::DAMAGE_IMMUNITY => {
                 4
             }
-            Self::DISPEL_IMMUNITY =>  {
+            Self::DISPEL_IMMUNITY => {
                 4
             }
-            Self::PROC_TRIGGER_SPELL =>  {
+            Self::PROC_TRIGGER_SPELL => {
                 4
             }
-            Self::PROC_TRIGGER_DAMAGE =>  {
+            Self::PROC_TRIGGER_DAMAGE => {
                 4
             }
-            Self::TRACK_CREATURES =>  {
+            Self::TRACK_CREATURES => {
                 4
             }
-            Self::TRACK_RESOURCES =>  {
+            Self::TRACK_RESOURCES => {
                 4
             }
-            Self::UNKNOWN46 =>  {
+            Self::UNKNOWN46 => {
                 4
             }
-            Self::MOD_PARRY_PERCENT =>  {
+            Self::MOD_PARRY_PERCENT => {
                 4
             }
-            Self::UNKNOWN48 =>  {
+            Self::UNKNOWN48 => {
                 4
             }
-            Self::MOD_DODGE_PERCENT =>  {
+            Self::MOD_DODGE_PERCENT => {
                 4
             }
-            Self::MOD_BLOCK_SKILL =>  {
+            Self::MOD_BLOCK_SKILL => {
                 4
             }
-            Self::MOD_BLOCK_PERCENT =>  {
+            Self::MOD_BLOCK_PERCENT => {
                 4
             }
-            Self::MOD_CRIT_PERCENT =>  {
+            Self::MOD_CRIT_PERCENT => {
                 4
             }
-            Self::PERIODIC_LEECH =>  {
+            Self::PERIODIC_LEECH => {
                 4
             }
-            Self::MOD_HIT_CHANCE =>  {
+            Self::MOD_HIT_CHANCE => {
                 4
             }
-            Self::MOD_SPELL_HIT_CHANCE =>  {
+            Self::MOD_SPELL_HIT_CHANCE => {
                 4
             }
-            Self::TRANSFORM =>  {
+            Self::TRANSFORM => {
                 4
             }
-            Self::MOD_SPELL_CRIT_CHANCE =>  {
+            Self::MOD_SPELL_CRIT_CHANCE => {
                 4
             }
-            Self::MOD_INCREASE_SWIM_SPEED =>  {
+            Self::MOD_INCREASE_SWIM_SPEED => {
                 4
             }
-            Self::MOD_DAMAGE_DONE_CREATURE =>  {
+            Self::MOD_DAMAGE_DONE_CREATURE => {
                 4
             }
-            Self::MOD_PACIFY_SILENCE =>  {
+            Self::MOD_PACIFY_SILENCE => {
                 4
             }
-            Self::MOD_SCALE =>  {
+            Self::MOD_SCALE => {
                 4
             }
-            Self::PERIODIC_HEALTH_FUNNEL =>  {
+            Self::PERIODIC_HEALTH_FUNNEL => {
                 4
             }
-            Self::PERIODIC_MANA_FUNNEL =>  {
+            Self::PERIODIC_MANA_FUNNEL => {
                 4
             }
-            Self::PERIODIC_MANA_LEECH  {
+            Self::PERIODIC_MANA_LEECH {
                 damage,
                 gain_multiplier,
                 misc_value2,
@@ -2761,79 +2761,79 @@ impl VariableSized for AuraLogAuraType {
                 + 4 // gain_multiplier: f32
                 + 4 // misc_value2: u32
             }
-            Self::MOD_CASTING_SPEED_NOT_STACK =>  {
+            Self::MOD_CASTING_SPEED_NOT_STACK => {
                 4
             }
-            Self::FEIGN_DEATH =>  {
+            Self::FEIGN_DEATH => {
                 4
             }
-            Self::MOD_DISARM =>  {
+            Self::MOD_DISARM => {
                 4
             }
-            Self::MOD_STALKED =>  {
+            Self::MOD_STALKED => {
                 4
             }
-            Self::SCHOOL_ABSORB =>  {
+            Self::SCHOOL_ABSORB => {
                 4
             }
-            Self::EXTRA_ATTACKS =>  {
+            Self::EXTRA_ATTACKS => {
                 4
             }
-            Self::MOD_SPELL_CRIT_CHANCE_SCHOOL =>  {
+            Self::MOD_SPELL_CRIT_CHANCE_SCHOOL => {
                 4
             }
-            Self::MOD_POWER_COST_SCHOOL_PCT =>  {
+            Self::MOD_POWER_COST_SCHOOL_PCT => {
                 4
             }
-            Self::MOD_POWER_COST_SCHOOL =>  {
+            Self::MOD_POWER_COST_SCHOOL => {
                 4
             }
-            Self::REFLECT_SPELLS_SCHOOL =>  {
+            Self::REFLECT_SPELLS_SCHOOL => {
                 4
             }
-            Self::MOD_LANGUAGE =>  {
+            Self::MOD_LANGUAGE => {
                 4
             }
-            Self::FAR_SIGHT =>  {
+            Self::FAR_SIGHT => {
                 4
             }
-            Self::MECHANIC_IMMUNITY =>  {
+            Self::MECHANIC_IMMUNITY => {
                 4
             }
-            Self::MOUNTED =>  {
+            Self::MOUNTED => {
                 4
             }
-            Self::MOD_DAMAGE_PERCENT_DONE =>  {
+            Self::MOD_DAMAGE_PERCENT_DONE => {
                 4
             }
-            Self::MOD_PERCENT_STAT =>  {
+            Self::MOD_PERCENT_STAT => {
                 4
             }
-            Self::SPLIT_DAMAGE_PCT =>  {
+            Self::SPLIT_DAMAGE_PCT => {
                 4
             }
-            Self::WATER_BREATHING =>  {
+            Self::WATER_BREATHING => {
                 4
             }
-            Self::MOD_BASE_RESISTANCE =>  {
+            Self::MOD_BASE_RESISTANCE => {
                 4
             }
-            Self::MOD_REGEN =>  {
+            Self::MOD_REGEN => {
                 4
             }
-            Self::MOD_POWER_REGEN =>  {
+            Self::MOD_POWER_REGEN => {
                 4
             }
-            Self::CHANNEL_DEATH_ITEM =>  {
+            Self::CHANNEL_DEATH_ITEM => {
                 4
             }
-            Self::MOD_DAMAGE_PERCENT_TAKEN =>  {
+            Self::MOD_DAMAGE_PERCENT_TAKEN => {
                 4
             }
-            Self::MOD_HEALTH_REGEN_PERCENT =>  {
+            Self::MOD_HEALTH_REGEN_PERCENT => {
                 4
             }
-            Self::PERIODIC_DAMAGE_PERCENT  {
+            Self::PERIODIC_DAMAGE_PERCENT {
                 absorbed,
                 damage1,
                 resisted,
@@ -2845,310 +2845,310 @@ impl VariableSized for AuraLogAuraType {
                 + 4 // resisted: u32
                 + 1 // school: SpellSchool
             }
-            Self::MOD_RESIST_CHANCE =>  {
+            Self::MOD_RESIST_CHANCE => {
                 4
             }
-            Self::MOD_DETECT_RANGE =>  {
+            Self::MOD_DETECT_RANGE => {
                 4
             }
-            Self::PREVENTS_FLEEING =>  {
+            Self::PREVENTS_FLEEING => {
                 4
             }
-            Self::MOD_UNATTACKABLE =>  {
+            Self::MOD_UNATTACKABLE => {
                 4
             }
-            Self::INTERRUPT_REGEN =>  {
+            Self::INTERRUPT_REGEN => {
                 4
             }
-            Self::GHOST =>  {
+            Self::GHOST => {
                 4
             }
-            Self::SPELL_MAGNET =>  {
+            Self::SPELL_MAGNET => {
                 4
             }
-            Self::MANA_SHIELD =>  {
+            Self::MANA_SHIELD => {
                 4
             }
-            Self::MOD_SKILL_TALENT =>  {
+            Self::MOD_SKILL_TALENT => {
                 4
             }
-            Self::MOD_ATTACK_POWER =>  {
+            Self::MOD_ATTACK_POWER => {
                 4
             }
-            Self::AURAS_VISIBLE =>  {
+            Self::AURAS_VISIBLE => {
                 4
             }
-            Self::MOD_RESISTANCE_PCT =>  {
+            Self::MOD_RESISTANCE_PCT => {
                 4
             }
-            Self::MOD_MELEE_ATTACK_POWER_VERSUS =>  {
+            Self::MOD_MELEE_ATTACK_POWER_VERSUS => {
                 4
             }
-            Self::MOD_TOTAL_THREAT =>  {
+            Self::MOD_TOTAL_THREAT => {
                 4
             }
-            Self::WATER_WALK =>  {
+            Self::WATER_WALK => {
                 4
             }
-            Self::FEATHER_FALL =>  {
+            Self::FEATHER_FALL => {
                 4
             }
-            Self::HOVER =>  {
+            Self::HOVER => {
                 4
             }
-            Self::ADD_FLAT_MODIFIER =>  {
+            Self::ADD_FLAT_MODIFIER => {
                 4
             }
-            Self::ADD_PCT_MODIFIER =>  {
+            Self::ADD_PCT_MODIFIER => {
                 4
             }
-            Self::ADD_TARGET_TRIGGER =>  {
+            Self::ADD_TARGET_TRIGGER => {
                 4
             }
-            Self::MOD_POWER_REGEN_PERCENT =>  {
+            Self::MOD_POWER_REGEN_PERCENT => {
                 4
             }
-            Self::ADD_CASTER_HIT_TRIGGER =>  {
+            Self::ADD_CASTER_HIT_TRIGGER => {
                 4
             }
-            Self::OVERRIDE_CLASS_SCRIPTS =>  {
+            Self::OVERRIDE_CLASS_SCRIPTS => {
                 4
             }
-            Self::MOD_RANGED_DAMAGE_TAKEN =>  {
+            Self::MOD_RANGED_DAMAGE_TAKEN => {
                 4
             }
-            Self::MOD_RANGED_DAMAGE_TAKEN_PCT =>  {
+            Self::MOD_RANGED_DAMAGE_TAKEN_PCT => {
                 4
             }
-            Self::MOD_HEALING =>  {
+            Self::MOD_HEALING => {
                 4
             }
-            Self::MOD_REGEN_DURING_COMBAT =>  {
+            Self::MOD_REGEN_DURING_COMBAT => {
                 4
             }
-            Self::MOD_MECHANIC_RESISTANCE =>  {
+            Self::MOD_MECHANIC_RESISTANCE => {
                 4
             }
-            Self::MOD_HEALING_PCT =>  {
+            Self::MOD_HEALING_PCT => {
                 4
             }
-            Self::SHARE_PET_TRACKING =>  {
+            Self::SHARE_PET_TRACKING => {
                 4
             }
-            Self::UNTRACKABLE =>  {
+            Self::UNTRACKABLE => {
                 4
             }
-            Self::EMPATHY =>  {
+            Self::EMPATHY => {
                 4
             }
-            Self::MOD_OFFHAND_DAMAGE_PCT =>  {
+            Self::MOD_OFFHAND_DAMAGE_PCT => {
                 4
             }
-            Self::MOD_TARGET_RESISTANCE =>  {
+            Self::MOD_TARGET_RESISTANCE => {
                 4
             }
-            Self::MOD_RANGED_ATTACK_POWER =>  {
+            Self::MOD_RANGED_ATTACK_POWER => {
                 4
             }
-            Self::MOD_MELEE_DAMAGE_TAKEN =>  {
+            Self::MOD_MELEE_DAMAGE_TAKEN => {
                 4
             }
-            Self::MOD_MELEE_DAMAGE_TAKEN_PCT =>  {
+            Self::MOD_MELEE_DAMAGE_TAKEN_PCT => {
                 4
             }
-            Self::RANGED_ATTACK_POWER_ATTACKER_BONUS =>  {
+            Self::RANGED_ATTACK_POWER_ATTACKER_BONUS => {
                 4
             }
-            Self::MOD_POSSESS_PET =>  {
+            Self::MOD_POSSESS_PET => {
                 4
             }
-            Self::MOD_SPEED_ALWAYS =>  {
+            Self::MOD_SPEED_ALWAYS => {
                 4
             }
-            Self::MOD_MOUNTED_SPEED_ALWAYS =>  {
+            Self::MOD_MOUNTED_SPEED_ALWAYS => {
                 4
             }
-            Self::MOD_RANGED_ATTACK_POWER_VERSUS =>  {
+            Self::MOD_RANGED_ATTACK_POWER_VERSUS => {
                 4
             }
-            Self::MOD_INCREASE_ENERGY_PERCENT =>  {
+            Self::MOD_INCREASE_ENERGY_PERCENT => {
                 4
             }
-            Self::MOD_INCREASE_HEALTH_PERCENT =>  {
+            Self::MOD_INCREASE_HEALTH_PERCENT => {
                 4
             }
-            Self::MOD_MANA_REGEN_INTERRUPT =>  {
+            Self::MOD_MANA_REGEN_INTERRUPT => {
                 4
             }
-            Self::MOD_HEALING_DONE =>  {
+            Self::MOD_HEALING_DONE => {
                 4
             }
-            Self::MOD_HEALING_DONE_PERCENT =>  {
+            Self::MOD_HEALING_DONE_PERCENT => {
                 4
             }
-            Self::MOD_TOTAL_STAT_PERCENTAGE =>  {
+            Self::MOD_TOTAL_STAT_PERCENTAGE => {
                 4
             }
-            Self::MOD_MELEE_HASTE =>  {
+            Self::MOD_MELEE_HASTE => {
                 4
             }
-            Self::FORCE_REACTION =>  {
+            Self::FORCE_REACTION => {
                 4
             }
-            Self::MOD_RANGED_HASTE =>  {
+            Self::MOD_RANGED_HASTE => {
                 4
             }
-            Self::MOD_RANGED_AMMO_HASTE =>  {
+            Self::MOD_RANGED_AMMO_HASTE => {
                 4
             }
-            Self::MOD_BASE_RESISTANCE_PCT =>  {
+            Self::MOD_BASE_RESISTANCE_PCT => {
                 4
             }
-            Self::MOD_RESISTANCE_EXCLUSIVE =>  {
+            Self::MOD_RESISTANCE_EXCLUSIVE => {
                 4
             }
-            Self::SAFE_FALL =>  {
+            Self::SAFE_FALL => {
                 4
             }
-            Self::CHARISMA =>  {
+            Self::CHARISMA => {
                 4
             }
-            Self::PERSUADED =>  {
+            Self::PERSUADED => {
                 4
             }
-            Self::MECHANIC_IMMUNITY_MASK =>  {
+            Self::MECHANIC_IMMUNITY_MASK => {
                 4
             }
-            Self::RETAIN_COMBO_POINTS =>  {
+            Self::RETAIN_COMBO_POINTS => {
                 4
             }
-            Self::RESIST_PUSHBACK =>  {
+            Self::RESIST_PUSHBACK => {
                 4
             }
-            Self::MOD_SHIELD_BLOCKVALUE_PCT =>  {
+            Self::MOD_SHIELD_BLOCKVALUE_PCT => {
                 4
             }
-            Self::TRACK_STEALTHED =>  {
+            Self::TRACK_STEALTHED => {
                 4
             }
-            Self::MOD_DETECTED_RANGE =>  {
+            Self::MOD_DETECTED_RANGE => {
                 4
             }
-            Self::SPLIT_DAMAGE_FLAT =>  {
+            Self::SPLIT_DAMAGE_FLAT => {
                 4
             }
-            Self::MOD_STEALTH_LEVEL =>  {
+            Self::MOD_STEALTH_LEVEL => {
                 4
             }
-            Self::MOD_WATER_BREATHING =>  {
+            Self::MOD_WATER_BREATHING => {
                 4
             }
-            Self::MOD_REPUTATION_GAIN =>  {
+            Self::MOD_REPUTATION_GAIN => {
                 4
             }
-            Self::PET_DAMAGE_MULTI =>  {
+            Self::PET_DAMAGE_MULTI => {
                 4
             }
-            Self::MOD_SHIELD_BLOCKVALUE =>  {
+            Self::MOD_SHIELD_BLOCKVALUE => {
                 4
             }
-            Self::NO_PVP_CREDIT =>  {
+            Self::NO_PVP_CREDIT => {
                 4
             }
-            Self::MOD_AOE_AVOIDANCE =>  {
+            Self::MOD_AOE_AVOIDANCE => {
                 4
             }
-            Self::MOD_HEALTH_REGEN_IN_COMBAT =>  {
+            Self::MOD_HEALTH_REGEN_IN_COMBAT => {
                 4
             }
-            Self::POWER_BURN_MANA =>  {
+            Self::POWER_BURN_MANA => {
                 4
             }
-            Self::MOD_CRIT_DAMAGE_BONUS =>  {
+            Self::MOD_CRIT_DAMAGE_BONUS => {
                 4
             }
-            Self::UNKNOWN164 =>  {
+            Self::UNKNOWN164 => {
                 4
             }
-            Self::MELEE_ATTACK_POWER_ATTACKER_BONUS =>  {
+            Self::MELEE_ATTACK_POWER_ATTACKER_BONUS => {
                 4
             }
-            Self::MOD_ATTACK_POWER_PCT =>  {
+            Self::MOD_ATTACK_POWER_PCT => {
                 4
             }
-            Self::MOD_RANGED_ATTACK_POWER_PCT =>  {
+            Self::MOD_RANGED_ATTACK_POWER_PCT => {
                 4
             }
-            Self::MOD_DAMAGE_DONE_VERSUS =>  {
+            Self::MOD_DAMAGE_DONE_VERSUS => {
                 4
             }
-            Self::MOD_CRIT_PERCENT_VERSUS =>  {
+            Self::MOD_CRIT_PERCENT_VERSUS => {
                 4
             }
-            Self::DETECT_AMORE =>  {
+            Self::DETECT_AMORE => {
                 4
             }
-            Self::MOD_SPEED_NOT_STACK =>  {
+            Self::MOD_SPEED_NOT_STACK => {
                 4
             }
-            Self::MOD_MOUNTED_SPEED_NOT_STACK =>  {
+            Self::MOD_MOUNTED_SPEED_NOT_STACK => {
                 4
             }
-            Self::ALLOW_CHAMPION_SPELLS =>  {
+            Self::ALLOW_CHAMPION_SPELLS => {
                 4
             }
-            Self::MOD_SPELL_DAMAGE_OF_STAT_PERCENT =>  {
+            Self::MOD_SPELL_DAMAGE_OF_STAT_PERCENT => {
                 4
             }
-            Self::MOD_SPELL_HEALING_OF_STAT_PERCENT =>  {
+            Self::MOD_SPELL_HEALING_OF_STAT_PERCENT => {
                 4
             }
-            Self::SPIRIT_OF_REDEMPTION =>  {
+            Self::SPIRIT_OF_REDEMPTION => {
                 4
             }
-            Self::AOE_CHARM =>  {
+            Self::AOE_CHARM => {
                 4
             }
-            Self::MOD_DEBUFF_RESISTANCE =>  {
+            Self::MOD_DEBUFF_RESISTANCE => {
                 4
             }
-            Self::MOD_ATTACKER_SPELL_CRIT_CHANCE =>  {
+            Self::MOD_ATTACKER_SPELL_CRIT_CHANCE => {
                 4
             }
-            Self::MOD_FLAT_SPELL_DAMAGE_VERSUS =>  {
+            Self::MOD_FLAT_SPELL_DAMAGE_VERSUS => {
                 4
             }
-            Self::MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS =>  {
+            Self::MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS => {
                 4
             }
-            Self::MOD_RESISTANCE_OF_STAT_PERCENT =>  {
+            Self::MOD_RESISTANCE_OF_STAT_PERCENT => {
                 4
             }
-            Self::MOD_CRITICAL_THREAT =>  {
+            Self::MOD_CRITICAL_THREAT => {
                 4
             }
-            Self::MOD_ATTACKER_MELEE_HIT_CHANCE =>  {
+            Self::MOD_ATTACKER_MELEE_HIT_CHANCE => {
                 4
             }
-            Self::MOD_ATTACKER_RANGED_HIT_CHANCE =>  {
+            Self::MOD_ATTACKER_RANGED_HIT_CHANCE => {
                 4
             }
-            Self::MOD_ATTACKER_SPELL_HIT_CHANCE =>  {
+            Self::MOD_ATTACKER_SPELL_HIT_CHANCE => {
                 4
             }
-            Self::MOD_ATTACKER_MELEE_CRIT_CHANCE =>  {
+            Self::MOD_ATTACKER_MELEE_CRIT_CHANCE => {
                 4
             }
-            Self::MOD_ATTACKER_RANGED_CRIT_CHANCE =>  {
+            Self::MOD_ATTACKER_RANGED_CRIT_CHANCE => {
                 4
             }
-            Self::MOD_RATING =>  {
+            Self::MOD_RATING => {
                 4
             }
-            Self::MOD_FACTION_REPUTATION_GAIN =>  {
+            Self::MOD_FACTION_REPUTATION_GAIN => {
                 4
             }
-            Self::USE_NORMAL_MOVEMENT_SPEED =>  {
+            Self::USE_NORMAL_MOVEMENT_SPEED => {
                 4
             }
         }

@@ -1511,43 +1511,43 @@ impl CMSG_MESSAGECHATChatType {
 impl VariableSized for CMSG_MESSAGECHATChatType {
     fn size(&self) -> usize {
         match self {
-            Self::SAY  {
+            Self::SAY {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::PARTY  {
+            Self::PARTY {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::RAID  {
+            Self::RAID {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::GUILD  {
+            Self::GUILD {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::OFFICER  {
+            Self::OFFICER {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::YELL  {
+            Self::YELL {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::WHISPER  {
+            Self::WHISPER {
                 target_player,
                 whisper_message,
             } => {
@@ -1555,31 +1555,31 @@ impl VariableSized for CMSG_MESSAGECHATChatType {
                 + target_player.len() + 1 // target_player: CString
                 + whisper_message.len() + 1 // whisper_message: CString
             }
-            Self::WHISPER_INFORM =>  {
+            Self::WHISPER_INFORM => {
                 4
             }
-            Self::EMOTE  {
+            Self::EMOTE {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::TEXT_EMOTE =>  {
+            Self::TEXT_EMOTE => {
                 4
             }
-            Self::SYSTEM =>  {
+            Self::SYSTEM => {
                 4
             }
-            Self::MONSTER_SAY =>  {
+            Self::MONSTER_SAY => {
                 4
             }
-            Self::MONSTER_YELL =>  {
+            Self::MONSTER_YELL => {
                 4
             }
-            Self::MONSTER_EMOTE =>  {
+            Self::MONSTER_EMOTE => {
                 4
             }
-            Self::CHANNEL  {
+            Self::CHANNEL {
                 channel,
                 channel_message,
             } => {
@@ -1587,79 +1587,79 @@ impl VariableSized for CMSG_MESSAGECHATChatType {
                 + channel.len() + 1 // channel: CString
                 + channel_message.len() + 1 // channel_message: CString
             }
-            Self::CHANNEL_JOIN =>  {
+            Self::CHANNEL_JOIN => {
                 4
             }
-            Self::CHANNEL_LEAVE =>  {
+            Self::CHANNEL_LEAVE => {
                 4
             }
-            Self::CHANNEL_LIST =>  {
+            Self::CHANNEL_LIST => {
                 4
             }
-            Self::CHANNEL_NOTICE =>  {
+            Self::CHANNEL_NOTICE => {
                 4
             }
-            Self::CHANNEL_NOTICE_USER =>  {
+            Self::CHANNEL_NOTICE_USER => {
                 4
             }
-            Self::AFK  {
+            Self::AFK {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::DND  {
+            Self::DND {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::IGNORED =>  {
+            Self::IGNORED => {
                 4
             }
-            Self::SKILL =>  {
+            Self::SKILL => {
                 4
             }
-            Self::LOOT =>  {
+            Self::LOOT => {
                 4
             }
-            Self::MONSTER_WHISPER =>  {
+            Self::MONSTER_WHISPER => {
                 4
             }
-            Self::BG_SYSTEM_NEUTRAL =>  {
+            Self::BG_SYSTEM_NEUTRAL => {
                 4
             }
-            Self::BG_SYSTEM_ALLIANCE =>  {
+            Self::BG_SYSTEM_ALLIANCE => {
                 4
             }
-            Self::BG_SYSTEM_HORDE =>  {
+            Self::BG_SYSTEM_HORDE => {
                 4
             }
-            Self::RAID_LEADER  {
+            Self::RAID_LEADER {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::RAID_WARNING  {
+            Self::RAID_WARNING {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::RAID_BOSS_WHISPER =>  {
+            Self::RAID_BOSS_WHISPER => {
                 4
             }
-            Self::RAID_BOSS_EMOTE =>  {
+            Self::RAID_BOSS_EMOTE => {
                 4
             }
-            Self::BATTLEGROUND  {
+            Self::BATTLEGROUND {
                 message,
             } => {
                 4
                 + message.len() + 1 // message: CString
             }
-            Self::BATTLEGROUND_LEADER  {
+            Self::BATTLEGROUND_LEADER {
                 message,
             } => {
                 4

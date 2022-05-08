@@ -408,19 +408,19 @@ impl DoubleVariantEnumSimpleEnum {
 impl VariableSized for DoubleVariantEnumSimpleEnum {
     fn size(&self) -> usize {
         match self {
-            Self::ZERO  {
+            Self::ZERO {
                 basic,
             } => {
                 1
                 + 1 // basic: u8
             }
-            Self::ONE  {
+            Self::ONE {
                 basic,
             } => {
                 1
                 + 1 // basic: u8
             }
-            Self::TWO =>  {
+            Self::TWO => {
                 1
             }
         }

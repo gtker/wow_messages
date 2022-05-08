@@ -1909,82 +1909,82 @@ impl SMSG_CAST_RESULTCastFailureReason {
 impl VariableSized for SMSG_CAST_RESULTCastFailureReason {
     fn size(&self) -> usize {
         match self {
-            Self::AFFECTING_COMBAT =>  {
+            Self::AFFECTING_COMBAT => {
                 1
             }
-            Self::ALREADY_AT_FULL_HEALTH =>  {
+            Self::ALREADY_AT_FULL_HEALTH => {
                 1
             }
-            Self::ALREADY_AT_FULL_POWER =>  {
+            Self::ALREADY_AT_FULL_POWER => {
                 1
             }
-            Self::ALREADY_BEING_TAMED =>  {
+            Self::ALREADY_BEING_TAMED => {
                 1
             }
-            Self::ALREADY_HAVE_CHARM =>  {
+            Self::ALREADY_HAVE_CHARM => {
                 1
             }
-            Self::ALREADY_HAVE_SUMMON =>  {
+            Self::ALREADY_HAVE_SUMMON => {
                 1
             }
-            Self::ALREADY_OPEN =>  {
+            Self::ALREADY_OPEN => {
                 1
             }
-            Self::AURA_BOUNCED =>  {
+            Self::AURA_BOUNCED => {
                 1
             }
-            Self::AUTOTRACK_INTERRUPTED =>  {
+            Self::AUTOTRACK_INTERRUPTED => {
                 1
             }
-            Self::BAD_IMPLICIT_TARGETS =>  {
+            Self::BAD_IMPLICIT_TARGETS => {
                 1
             }
-            Self::BAD_TARGETS =>  {
+            Self::BAD_TARGETS => {
                 1
             }
-            Self::CANT_BE_CHARMED =>  {
+            Self::CANT_BE_CHARMED => {
                 1
             }
-            Self::CANT_BE_DISENCHANTED =>  {
+            Self::CANT_BE_DISENCHANTED => {
                 1
             }
-            Self::CANT_BE_PROSPECTED =>  {
+            Self::CANT_BE_PROSPECTED => {
                 1
             }
-            Self::CANT_CAST_ON_TAPPED =>  {
+            Self::CANT_CAST_ON_TAPPED => {
                 1
             }
-            Self::CANT_DUEL_WHILE_INVISIBLE =>  {
+            Self::CANT_DUEL_WHILE_INVISIBLE => {
                 1
             }
-            Self::CANT_DUEL_WHILE_STEALTHED =>  {
+            Self::CANT_DUEL_WHILE_STEALTHED => {
                 1
             }
-            Self::CANT_STEALTH =>  {
+            Self::CANT_STEALTH => {
                 1
             }
-            Self::CASTER_AURASTATE =>  {
+            Self::CASTER_AURASTATE => {
                 1
             }
-            Self::CASTER_DEAD =>  {
+            Self::CASTER_DEAD => {
                 1
             }
-            Self::CHARMED =>  {
+            Self::CHARMED => {
                 1
             }
-            Self::CHEST_IN_USE =>  {
+            Self::CHEST_IN_USE => {
                 1
             }
-            Self::CONFUSED =>  {
+            Self::CONFUSED => {
                 1
             }
-            Self::DONT_REPORT =>  {
+            Self::DONT_REPORT => {
                 1
             }
-            Self::EQUIPPED_ITEM =>  {
+            Self::EQUIPPED_ITEM => {
                 1
             }
-            Self::EQUIPPED_ITEM_CLASS  {
+            Self::EQUIPPED_ITEM_CLASS {
                 equipped_item_class,
                 equipped_item_inventory_type_mask,
                 equipped_item_subclass_mask,
@@ -1994,370 +1994,370 @@ impl VariableSized for SMSG_CAST_RESULTCastFailureReason {
                 + 4 // equipped_item_inventory_type_mask: u32
                 + 4 // equipped_item_subclass_mask: u32
             }
-            Self::EQUIPPED_ITEM_CLASS_MAINHAND =>  {
+            Self::EQUIPPED_ITEM_CLASS_MAINHAND => {
                 1
             }
-            Self::EQUIPPED_ITEM_CLASS_OFFHAND =>  {
+            Self::EQUIPPED_ITEM_CLASS_OFFHAND => {
                 1
             }
-            Self::ERROR =>  {
+            Self::ERROR => {
                 1
             }
-            Self::FIZZLE =>  {
+            Self::FIZZLE => {
                 1
             }
-            Self::FLEEING =>  {
+            Self::FLEEING => {
                 1
             }
-            Self::FOOD_LOWLEVEL =>  {
+            Self::FOOD_LOWLEVEL => {
                 1
             }
-            Self::HIGHLEVEL =>  {
+            Self::HIGHLEVEL => {
                 1
             }
-            Self::HUNGER_SATIATED =>  {
+            Self::HUNGER_SATIATED => {
                 1
             }
-            Self::IMMUNE =>  {
+            Self::IMMUNE => {
                 1
             }
-            Self::INTERRUPTED =>  {
+            Self::INTERRUPTED => {
                 1
             }
-            Self::INTERRUPTED_COMBAT =>  {
+            Self::INTERRUPTED_COMBAT => {
                 1
             }
-            Self::ITEM_ALREADY_ENCHANTED =>  {
+            Self::ITEM_ALREADY_ENCHANTED => {
                 1
             }
-            Self::ITEM_GONE =>  {
+            Self::ITEM_GONE => {
                 1
             }
-            Self::ITEM_NOT_FOUND =>  {
+            Self::ITEM_NOT_FOUND => {
                 1
             }
-            Self::ITEM_NOT_READY =>  {
+            Self::ITEM_NOT_READY => {
                 1
             }
-            Self::LEVEL_REQUIREMENT =>  {
+            Self::LEVEL_REQUIREMENT => {
                 1
             }
-            Self::LINE_OF_SIGHT =>  {
+            Self::LINE_OF_SIGHT => {
                 1
             }
-            Self::LOWLEVEL =>  {
+            Self::LOWLEVEL => {
                 1
             }
-            Self::LOW_CASTLEVEL =>  {
+            Self::LOW_CASTLEVEL => {
                 1
             }
-            Self::MAINHAND_EMPTY =>  {
+            Self::MAINHAND_EMPTY => {
                 1
             }
-            Self::MOVING =>  {
+            Self::MOVING => {
                 1
             }
-            Self::NEED_AMMO =>  {
+            Self::NEED_AMMO => {
                 1
             }
-            Self::NEED_AMMO_POUCH =>  {
+            Self::NEED_AMMO_POUCH => {
                 1
             }
-            Self::NEED_EXOTIC_AMMO =>  {
+            Self::NEED_EXOTIC_AMMO => {
                 1
             }
-            Self::NOPATH =>  {
+            Self::NOPATH => {
                 1
             }
-            Self::NOT_BEHIND =>  {
+            Self::NOT_BEHIND => {
                 1
             }
-            Self::NOT_FISHABLE =>  {
+            Self::NOT_FISHABLE => {
                 1
             }
-            Self::NOT_HERE =>  {
+            Self::NOT_HERE => {
                 1
             }
-            Self::NOT_INFRONT =>  {
+            Self::NOT_INFRONT => {
                 1
             }
-            Self::NOT_IN_CONTROL =>  {
+            Self::NOT_IN_CONTROL => {
                 1
             }
-            Self::NOT_KNOWN =>  {
+            Self::NOT_KNOWN => {
                 1
             }
-            Self::NOT_MOUNTED =>  {
+            Self::NOT_MOUNTED => {
                 1
             }
-            Self::NOT_ON_TAXI =>  {
+            Self::NOT_ON_TAXI => {
                 1
             }
-            Self::NOT_ON_TRANSPORT =>  {
+            Self::NOT_ON_TRANSPORT => {
                 1
             }
-            Self::NOT_READY =>  {
+            Self::NOT_READY => {
                 1
             }
-            Self::NOT_SHAPESHIFT =>  {
+            Self::NOT_SHAPESHIFT => {
                 1
             }
-            Self::NOT_STANDING =>  {
+            Self::NOT_STANDING => {
                 1
             }
-            Self::NOT_TRADEABLE =>  {
+            Self::NOT_TRADEABLE => {
                 1
             }
-            Self::NOT_TRADING =>  {
+            Self::NOT_TRADING => {
                 1
             }
-            Self::NOT_UNSHEATHED =>  {
+            Self::NOT_UNSHEATHED => {
                 1
             }
-            Self::NOT_WHILE_GHOST =>  {
+            Self::NOT_WHILE_GHOST => {
                 1
             }
-            Self::NO_AMMO =>  {
+            Self::NO_AMMO => {
                 1
             }
-            Self::NO_CHARGES_REMAIN =>  {
+            Self::NO_CHARGES_REMAIN => {
                 1
             }
-            Self::NO_CHAMPION =>  {
+            Self::NO_CHAMPION => {
                 1
             }
-            Self::NO_COMBO_POINTS =>  {
+            Self::NO_COMBO_POINTS => {
                 1
             }
-            Self::NO_DUELING =>  {
+            Self::NO_DUELING => {
                 1
             }
-            Self::NO_ENDURANCE =>  {
+            Self::NO_ENDURANCE => {
                 1
             }
-            Self::NO_FISH =>  {
+            Self::NO_FISH => {
                 1
             }
-            Self::NO_ITEMS_WHILE_SHAPESHIFTED =>  {
+            Self::NO_ITEMS_WHILE_SHAPESHIFTED => {
                 1
             }
-            Self::NO_MOUNTS_ALLOWED =>  {
+            Self::NO_MOUNTS_ALLOWED => {
                 1
             }
-            Self::NO_PET =>  {
+            Self::NO_PET => {
                 1
             }
-            Self::NO_POWER =>  {
+            Self::NO_POWER => {
                 1
             }
-            Self::NOTHING_TO_DISPEL =>  {
+            Self::NOTHING_TO_DISPEL => {
                 1
             }
-            Self::NOTHING_TO_STEAL =>  {
+            Self::NOTHING_TO_STEAL => {
                 1
             }
-            Self::ONLY_ABOVEWATER =>  {
+            Self::ONLY_ABOVEWATER => {
                 1
             }
-            Self::ONLY_DAYTIME =>  {
+            Self::ONLY_DAYTIME => {
                 1
             }
-            Self::ONLY_INDOORS =>  {
+            Self::ONLY_INDOORS => {
                 1
             }
-            Self::ONLY_MOUNTED =>  {
+            Self::ONLY_MOUNTED => {
                 1
             }
-            Self::ONLY_NIGHTTIME =>  {
+            Self::ONLY_NIGHTTIME => {
                 1
             }
-            Self::ONLY_OUTDOORS =>  {
+            Self::ONLY_OUTDOORS => {
                 1
             }
-            Self::ONLY_SHAPESHIFT =>  {
+            Self::ONLY_SHAPESHIFT => {
                 1
             }
-            Self::ONLY_STEALTHED =>  {
+            Self::ONLY_STEALTHED => {
                 1
             }
-            Self::ONLY_UNDERWATER =>  {
+            Self::ONLY_UNDERWATER => {
                 1
             }
-            Self::OUT_OF_RANGE =>  {
+            Self::OUT_OF_RANGE => {
                 1
             }
-            Self::PACIFIED =>  {
+            Self::PACIFIED => {
                 1
             }
-            Self::POSSESSED =>  {
+            Self::POSSESSED => {
                 1
             }
-            Self::REAGENTS =>  {
+            Self::REAGENTS => {
                 1
             }
-            Self::REQUIRES_AREA  {
+            Self::REQUIRES_AREA {
                 area,
             } => {
                 1
                 + 4 // area: Area
             }
-            Self::REQUIRES_SPELL_FOCUS  {
+            Self::REQUIRES_SPELL_FOCUS {
                 required_spell_focus,
             } => {
                 1
                 + 4 // required_spell_focus: u32
             }
-            Self::ROOTED =>  {
+            Self::ROOTED => {
                 1
             }
-            Self::SILENCED =>  {
+            Self::SILENCED => {
                 1
             }
-            Self::SPELL_IN_PROGRESS =>  {
+            Self::SPELL_IN_PROGRESS => {
                 1
             }
-            Self::SPELL_LEARNED =>  {
+            Self::SPELL_LEARNED => {
                 1
             }
-            Self::SPELL_UNAVAILABLE =>  {
+            Self::SPELL_UNAVAILABLE => {
                 1
             }
-            Self::STUNNED =>  {
+            Self::STUNNED => {
                 1
             }
-            Self::TARGETS_DEAD =>  {
+            Self::TARGETS_DEAD => {
                 1
             }
-            Self::TARGET_AFFECTING_COMBAT =>  {
+            Self::TARGET_AFFECTING_COMBAT => {
                 1
             }
-            Self::TARGET_AURASTATE =>  {
+            Self::TARGET_AURASTATE => {
                 1
             }
-            Self::TARGET_DUELING =>  {
+            Self::TARGET_DUELING => {
                 1
             }
-            Self::TARGET_ENEMY =>  {
+            Self::TARGET_ENEMY => {
                 1
             }
-            Self::TARGET_ENRAGED =>  {
+            Self::TARGET_ENRAGED => {
                 1
             }
-            Self::TARGET_FRIENDLY =>  {
+            Self::TARGET_FRIENDLY => {
                 1
             }
-            Self::TARGET_IN_COMBAT =>  {
+            Self::TARGET_IN_COMBAT => {
                 1
             }
-            Self::TARGET_IS_PLAYER =>  {
+            Self::TARGET_IS_PLAYER => {
                 1
             }
-            Self::TARGET_NOT_DEAD =>  {
+            Self::TARGET_NOT_DEAD => {
                 1
             }
-            Self::TARGET_NOT_IN_PARTY =>  {
+            Self::TARGET_NOT_IN_PARTY => {
                 1
             }
-            Self::TARGET_NOT_LOOTED =>  {
+            Self::TARGET_NOT_LOOTED => {
                 1
             }
-            Self::TARGET_NOT_PLAYER =>  {
+            Self::TARGET_NOT_PLAYER => {
                 1
             }
-            Self::TARGET_NO_POCKETS =>  {
+            Self::TARGET_NO_POCKETS => {
                 1
             }
-            Self::TARGET_NO_WEAPONS =>  {
+            Self::TARGET_NO_WEAPONS => {
                 1
             }
-            Self::TARGET_UNSKINNABLE =>  {
+            Self::TARGET_UNSKINNABLE => {
                 1
             }
-            Self::THIRST_SATIATED =>  {
+            Self::THIRST_SATIATED => {
                 1
             }
-            Self::TOO_CLOSE =>  {
+            Self::TOO_CLOSE => {
                 1
             }
-            Self::TOO_MANY_OF_ITEM =>  {
+            Self::TOO_MANY_OF_ITEM => {
                 1
             }
-            Self::TOTEMS =>  {
+            Self::TOTEMS => {
                 1
             }
-            Self::TRAINING_POINTS =>  {
+            Self::TRAINING_POINTS => {
                 1
             }
-            Self::TRY_AGAIN =>  {
+            Self::TRY_AGAIN => {
                 1
             }
-            Self::UNIT_NOT_BEHIND =>  {
+            Self::UNIT_NOT_BEHIND => {
                 1
             }
-            Self::UNIT_NOT_INFRONT =>  {
+            Self::UNIT_NOT_INFRONT => {
                 1
             }
-            Self::WRONG_PET_FOOD =>  {
+            Self::WRONG_PET_FOOD => {
                 1
             }
-            Self::NOT_WHILE_FATIGUED =>  {
+            Self::NOT_WHILE_FATIGUED => {
                 1
             }
-            Self::TARGET_NOT_IN_INSTANCE =>  {
+            Self::TARGET_NOT_IN_INSTANCE => {
                 1
             }
-            Self::NOT_WHILE_TRADING =>  {
+            Self::NOT_WHILE_TRADING => {
                 1
             }
-            Self::TARGET_NOT_IN_RAID =>  {
+            Self::TARGET_NOT_IN_RAID => {
                 1
             }
-            Self::DISENCHANT_WHILE_LOOTING =>  {
+            Self::DISENCHANT_WHILE_LOOTING => {
                 1
             }
-            Self::PROSPECT_WHILE_LOOTING =>  {
+            Self::PROSPECT_WHILE_LOOTING => {
                 1
             }
-            Self::PROSPECT_NEED_MORE =>  {
+            Self::PROSPECT_NEED_MORE => {
                 1
             }
-            Self::TARGET_FREEFORALL =>  {
+            Self::TARGET_FREEFORALL => {
                 1
             }
-            Self::NO_EDIBLE_CORPSES =>  {
+            Self::NO_EDIBLE_CORPSES => {
                 1
             }
-            Self::ONLY_BATTLEGROUNDS =>  {
+            Self::ONLY_BATTLEGROUNDS => {
                 1
             }
-            Self::TARGET_NOT_GHOST =>  {
+            Self::TARGET_NOT_GHOST => {
                 1
             }
-            Self::TOO_MANY_SKILLS =>  {
+            Self::TOO_MANY_SKILLS => {
                 1
             }
-            Self::TRANSFORM_UNUSABLE =>  {
+            Self::TRANSFORM_UNUSABLE => {
                 1
             }
-            Self::WRONG_WEATHER =>  {
+            Self::WRONG_WEATHER => {
                 1
             }
-            Self::DAMAGE_IMMUNE =>  {
+            Self::DAMAGE_IMMUNE => {
                 1
             }
-            Self::PREVENTED_BY_MECHANIC =>  {
+            Self::PREVENTED_BY_MECHANIC => {
                 1
             }
-            Self::PLAY_TIME =>  {
+            Self::PLAY_TIME => {
                 1
             }
-            Self::REPUTATION =>  {
+            Self::REPUTATION => {
                 1
             }
-            Self::MIN_SKILL =>  {
+            Self::MIN_SKILL => {
                 1
             }
-            Self::UNKNOWN =>  {
+            Self::UNKNOWN => {
                 1
             }
         }
@@ -2542,13 +2542,13 @@ impl SMSG_CAST_RESULTSimpleSpellCastResult {
 impl VariableSized for SMSG_CAST_RESULTSimpleSpellCastResult {
     fn size(&self) -> usize {
         match self {
-            Self::SUCCESS  {
+            Self::SUCCESS {
                 reason,
             } => {
                 1
                 + reason.size() // reason: SMSG_CAST_RESULTCastFailureReason
             }
-            Self::FAILURE =>  {
+            Self::FAILURE => {
                 1
             }
         }

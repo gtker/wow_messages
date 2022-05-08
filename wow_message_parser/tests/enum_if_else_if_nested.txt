@@ -572,16 +572,16 @@ impl EnumIfElseIfNestedSimpleEnum {
 impl VariableSized for EnumIfElseIfNestedSimpleEnum {
     fn size(&self) -> usize {
         match self {
-            Self::ZERO  {
+            Self::ZERO {
                 zero,
             } => {
                 1
                 + 1 // zero: u8
             }
-            Self::ONE =>  {
+            Self::ONE => {
                 1
             }
-            Self::TWO =>  {
+            Self::TWO => {
                 1
             }
         }
@@ -766,13 +766,13 @@ impl EnumIfElseIfNestedNestedEnum {
 impl VariableSized for EnumIfElseIfNestedNestedEnum {
     fn size(&self) -> usize {
         match self {
-            Self::NESTED  {
+            Self::NESTED {
                 nested,
             } => {
                 1
                 + 1 // nested: u8
             }
-            Self::NOT_NESTED =>  {
+            Self::NOT_NESTED => {
                 1
             }
         }

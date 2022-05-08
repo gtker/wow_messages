@@ -1176,7 +1176,7 @@ impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
 impl VariableSized for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
     fn size(&self) -> usize {
         match self {
-            Self::SUCCESS  {
+            Self::SUCCESS {
                 account_flag,
                 hardware_survey_id,
                 server_proof,
@@ -1188,67 +1188,67 @@ impl VariableSized for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
                 + 20 * core::mem::size_of::<u8>() // server_proof: u8[20]
                 + 2 // unknown_flags: u16
             }
-            Self::FAIL_UNKNOWN0 =>  {
+            Self::FAIL_UNKNOWN0 => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_UNKNOWN1 =>  {
+            Self::FAIL_UNKNOWN1 => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_BANNED =>  {
+            Self::FAIL_BANNED => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_UNKNOWN_ACCOUNT =>  {
+            Self::FAIL_UNKNOWN_ACCOUNT => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_INCORRECT_PASSWORD =>  {
+            Self::FAIL_INCORRECT_PASSWORD => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_ALREADY_ONLINE =>  {
+            Self::FAIL_ALREADY_ONLINE => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_NO_TIME =>  {
+            Self::FAIL_NO_TIME => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_DB_BUSY =>  {
+            Self::FAIL_DB_BUSY => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_VERSION_INVALID =>  {
+            Self::FAIL_VERSION_INVALID => {
                 1
                 + 2 // padding: u16
             }
-            Self::LOGIN_DOWNLOAD_FILE =>  {
+            Self::LOGIN_DOWNLOAD_FILE => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_INVALID_SERVER =>  {
+            Self::FAIL_INVALID_SERVER => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_SUSPENDED =>  {
+            Self::FAIL_SUSPENDED => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_NO_ACCESS =>  {
+            Self::FAIL_NO_ACCESS => {
                 1
                 + 2 // padding: u16
             }
-            Self::SUCCESS_SURVEY =>  {
+            Self::SUCCESS_SURVEY => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_PARENTALCONTROL =>  {
+            Self::FAIL_PARENTALCONTROL => {
                 1
                 + 2 // padding: u16
             }
-            Self::FAIL_LOCKED_ENFORCED =>  {
+            Self::FAIL_LOCKED_ENFORCED => {
                 1
                 + 2 // padding: u16
             }

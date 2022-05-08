@@ -570,10 +570,10 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
 impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     fn size(&self) -> usize {
         match self {
-            Self::NONE =>  {
+            Self::NONE => {
                 1
             }
-            Self::PIN  {
+            Self::PIN {
                 pin_hash,
                 pin_salt,
             } => {

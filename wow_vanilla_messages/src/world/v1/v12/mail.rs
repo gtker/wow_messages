@@ -959,31 +959,31 @@ impl MailMailType {
 impl VariableSized for MailMailType {
     fn size(&self) -> usize {
         match self {
-            Self::NORMAL  {
+            Self::NORMAL {
                 sender,
             } => {
                 1
                 + 8 // sender: Guid
             }
-            Self::AUCTION  {
+            Self::AUCTION {
                 auction_id,
             } => {
                 1
                 + 4 // auction_id: u32
             }
-            Self::CREATURE  {
+            Self::CREATURE {
                 sender_id,
             } => {
                 1
                 + 4 // sender_id: u32
             }
-            Self::GAMEOBJECT  {
+            Self::GAMEOBJECT {
                 sender_id,
             } => {
                 1
                 + 4 // sender_id: u32
             }
-            Self::ITEM =>  {
+            Self::ITEM => {
                 1
             }
         }

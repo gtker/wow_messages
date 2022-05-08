@@ -438,10 +438,10 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
 impl VariableSized for MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
     fn size(&self) -> usize {
         match self {
-            Self::NOT_ENDED =>  {
+            Self::NOT_ENDED => {
                 1
             }
-            Self::ENDED  {
+            Self::ENDED {
                 winner,
             } => {
                 1

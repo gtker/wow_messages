@@ -468,10 +468,10 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
 impl VariableSized for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
     fn size(&self) -> usize {
         match self {
-            Self::NOT_FOUND =>  {
+            Self::NOT_FOUND => {
                 1
             }
-            Self::FOUND  {
+            Self::FOUND {
                 corpse_map,
                 map,
                 position_x,

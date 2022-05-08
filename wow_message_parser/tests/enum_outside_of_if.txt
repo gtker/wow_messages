@@ -485,28 +485,28 @@ impl EnumOutsideOfIfTEnum {
 impl VariableSized for EnumOutsideOfIfTEnum {
     fn size(&self) -> usize {
         match self {
-            Self::ZERO =>  {
+            Self::ZERO => {
                 1
             }
-            Self::ONE =>  {
+            Self::ONE => {
                 1
             }
-            Self::TWO =>  {
+            Self::TWO => {
                 1
             }
-            Self::THREE =>  {
+            Self::THREE => {
                 1
             }
-            Self::FOUR =>  {
+            Self::FOUR => {
                 1
             }
-            Self::FIVE =>  {
+            Self::FIVE => {
                 1
             }
-            Self::SIX =>  {
+            Self::SIX => {
                 1
             }
-            Self::REST =>  {
+            Self::REST => {
                 1
             }
         }
@@ -691,13 +691,13 @@ impl EnumOutsideOfIfNestedEnum {
 impl VariableSized for EnumOutsideOfIfNestedEnum {
     fn size(&self) -> usize {
         match self {
-            Self::NESTED  {
+            Self::NESTED {
                 nested,
             } => {
                 1
                 + 1 // nested: u8
             }
-            Self::NOT_NESTED =>  {
+            Self::NOT_NESTED => {
                 1
             }
         }

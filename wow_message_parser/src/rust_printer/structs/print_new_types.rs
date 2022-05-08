@@ -880,14 +880,14 @@ fn print_size_for_new_enum(
             s.body("match self", |s| {
                 for enumerator in enumerators {
                     if enumerator.has_members_in_struct() {
-                        s.open_curly(format!("Self::{name} ", name = enumerator.name()));
+                        s.open_curly(format!("Self::{name}", name = enumerator.name()));
                         for m in enumerator.members_in_struct() {
                             s.wln(format!("{},", m.name()));
                         }
                         s.closing_curly_with(" => {");
                         s.inc_indent();
                     } else {
-                        s.open_curly(format!("Self::{name} => ", name = enumerator.name()));
+                        s.open_curly(format!("Self::{name} =>", name = enumerator.name()));
                     }
 
                     s.wln(format!("{}", int_ty.size()));

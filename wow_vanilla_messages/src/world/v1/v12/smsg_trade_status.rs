@@ -699,46 +699,46 @@ impl SMSG_TRADE_STATUSTradeStatus {
 impl VariableSized for SMSG_TRADE_STATUSTradeStatus {
     fn size(&self) -> usize {
         match self {
-            Self::BUSY =>  {
+            Self::BUSY => {
                 4
             }
-            Self::BEGIN_TRADE  {
+            Self::BEGIN_TRADE {
                 unknown1,
             } => {
                 4
                 + 8 // unknown1: Guid
             }
-            Self::OPEN_WINDOW =>  {
+            Self::OPEN_WINDOW => {
                 4
             }
-            Self::TRADE_CANCELED =>  {
+            Self::TRADE_CANCELED => {
                 4
             }
-            Self::TRADE_ACCEPT =>  {
+            Self::TRADE_ACCEPT => {
                 4
             }
-            Self::BUSY_2 =>  {
+            Self::BUSY_2 => {
                 4
             }
-            Self::NO_TARGET =>  {
+            Self::NO_TARGET => {
                 4
             }
-            Self::BACK_TO_TRADE =>  {
+            Self::BACK_TO_TRADE => {
                 4
             }
-            Self::TRADE_COMPLETE =>  {
+            Self::TRADE_COMPLETE => {
                 4
             }
-            Self::TRADE_REJECTED =>  {
+            Self::TRADE_REJECTED => {
                 4
             }
-            Self::TARGET_TO_FAR =>  {
+            Self::TARGET_TO_FAR => {
                 4
             }
-            Self::WRONG_FACTION =>  {
+            Self::WRONG_FACTION => {
                 4
             }
-            Self::CLOSE_WINDOW  {
+            Self::CLOSE_WINDOW {
                 inventory_result,
                 item_limit_category_id,
                 target_error,
@@ -748,40 +748,40 @@ impl VariableSized for SMSG_TRADE_STATUSTradeStatus {
                 + 4 // item_limit_category_id: u32
                 + 1 // target_error: u8
             }
-            Self::UNKNOWN_13 =>  {
+            Self::UNKNOWN_13 => {
                 4
             }
-            Self::IGNORE_YOU =>  {
+            Self::IGNORE_YOU => {
                 4
             }
-            Self::YOU_STUNNED =>  {
+            Self::YOU_STUNNED => {
                 4
             }
-            Self::TARGET_STUNNED =>  {
+            Self::TARGET_STUNNED => {
                 4
             }
-            Self::YOU_DEAD =>  {
+            Self::YOU_DEAD => {
                 4
             }
-            Self::TARGET_DEAD =>  {
+            Self::TARGET_DEAD => {
                 4
             }
-            Self::YOU_LOGOUT =>  {
+            Self::YOU_LOGOUT => {
                 4
             }
-            Self::TARGET_LOGOUT =>  {
+            Self::TARGET_LOGOUT => {
                 4
             }
-            Self::TRIAL_ACCOUNT =>  {
+            Self::TRIAL_ACCOUNT => {
                 4
             }
-            Self::ONLY_CONJURED  {
+            Self::ONLY_CONJURED {
                 slot,
             } => {
                 4
                 + 1 // slot: u8
             }
-            Self::NOT_ON_TAPLIST  {
+            Self::NOT_ON_TAPLIST {
                 slot,
             } => {
                 4

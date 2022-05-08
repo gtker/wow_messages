@@ -696,10 +696,10 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
 impl VariableSized for CMSG_GMTICKET_CREATEGmTicketType {
     fn size(&self) -> usize {
         match self {
-            Self::STUCK =>  {
+            Self::STUCK => {
                 1
             }
-            Self::BEHAVIOR_HARASSMENT  {
+            Self::BEHAVIOR_HARASSMENT {
                 chat_data_line_count,
                 chat_data_size_uncompressed,
                 compressed_chat_data,
@@ -709,28 +709,28 @@ impl VariableSized for CMSG_GMTICKET_CREATEGmTicketType {
                 + 4 // chat_data_size_uncompressed: u32
                 + compressed_chat_data.len() * core::mem::size_of::<u8>() // compressed_chat_data: u8[-]
             }
-            Self::GUILD =>  {
+            Self::GUILD => {
                 1
             }
-            Self::ITEM =>  {
+            Self::ITEM => {
                 1
             }
-            Self::ENVIRONMENTAL =>  {
+            Self::ENVIRONMENTAL => {
                 1
             }
-            Self::NONQUEST_CREEP =>  {
+            Self::NONQUEST_CREEP => {
                 1
             }
-            Self::QUEST_QUESTNPC =>  {
+            Self::QUEST_QUESTNPC => {
                 1
             }
-            Self::TECHNICAL =>  {
+            Self::TECHNICAL => {
                 1
             }
-            Self::ACCOUNT_BILLING =>  {
+            Self::ACCOUNT_BILLING => {
                 1
             }
-            Self::CHARACTER =>  {
+            Self::CHARACTER => {
                 1
             }
         }

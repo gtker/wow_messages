@@ -783,61 +783,61 @@ impl MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
 impl VariableSized for MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
     fn size(&self) -> usize {
         match self {
-            Self::UNKNOWN0  {
+            Self::UNKNOWN0 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN1  {
+            Self::UNKNOWN1 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN2  {
+            Self::UNKNOWN2 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN3  {
+            Self::UNKNOWN3 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN4  {
+            Self::UNKNOWN4 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN5  {
+            Self::UNKNOWN5 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN6  {
+            Self::UNKNOWN6 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN7  {
+            Self::UNKNOWN7 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::UNKNOWN8  {
+            Self::UNKNOWN8 {
                 target,
             } => {
                 1
                 + 8 // target: Guid
             }
-            Self::REQUEST_ICONS =>  {
+            Self::REQUEST_ICONS => {
                 1
             }
         }

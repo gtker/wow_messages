@@ -2754,7 +2754,7 @@ impl SMSG_MESSAGECHATChatType {
 impl VariableSized for SMSG_MESSAGECHATChatType {
     fn size(&self) -> usize {
         match self {
-            Self::SAY  {
+            Self::SAY {
                 sender_guid1,
                 sender_guid2,
             } => {
@@ -2762,7 +2762,7 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + 8 // sender_guid1: Guid
                 + 8 // sender_guid2: Guid
             }
-            Self::PARTY  {
+            Self::PARTY {
                 sender_guid1,
                 sender_guid2,
             } => {
@@ -2770,25 +2770,25 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + 8 // sender_guid1: Guid
                 + 8 // sender_guid2: Guid
             }
-            Self::RAID  {
+            Self::RAID {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::GUILD  {
+            Self::GUILD {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::OFFICER  {
+            Self::OFFICER {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::YELL  {
+            Self::YELL {
                 sender_guid1,
                 sender_guid2,
             } => {
@@ -2796,37 +2796,37 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + 8 // sender_guid1: Guid
                 + 8 // sender_guid2: Guid
             }
-            Self::WHISPER  {
+            Self::WHISPER {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::WHISPER_INFORM  {
+            Self::WHISPER_INFORM {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::EMOTE  {
+            Self::EMOTE {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::TEXT_EMOTE  {
+            Self::TEXT_EMOTE {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::SYSTEM  {
+            Self::SYSTEM {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::MONSTER_SAY  {
+            Self::MONSTER_SAY {
                 sender_guid3,
                 sender_name,
                 sender_name_length,
@@ -2838,7 +2838,7 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + 4 // sender_name_length: u32
                 + 8 // target_guid: Guid
             }
-            Self::MONSTER_YELL  {
+            Self::MONSTER_YELL {
                 sender_guid3,
                 sender_name,
                 sender_name_length,
@@ -2850,7 +2850,7 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + 4 // sender_name_length: u32
                 + 8 // target_guid: Guid
             }
-            Self::MONSTER_EMOTE  {
+            Self::MONSTER_EMOTE {
                 monster_guid,
                 monster_name,
                 name_length,
@@ -2860,7 +2860,7 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + monster_name.len() + 1 // monster_name: CString
                 + 4 // name_length: u32
             }
-            Self::CHANNEL  {
+            Self::CHANNEL {
                 channel_name,
                 player_guid,
                 player_rank,
@@ -2870,67 +2870,67 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + 8 // player_guid: Guid
                 + 4 // player_rank: u32
             }
-            Self::CHANNEL_JOIN  {
+            Self::CHANNEL_JOIN {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::CHANNEL_LEAVE  {
+            Self::CHANNEL_LEAVE {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::CHANNEL_LIST  {
+            Self::CHANNEL_LIST {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::CHANNEL_NOTICE  {
+            Self::CHANNEL_NOTICE {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::CHANNEL_NOTICE_USER  {
+            Self::CHANNEL_NOTICE_USER {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::AFK  {
+            Self::AFK {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::DND  {
+            Self::DND {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::IGNORED  {
+            Self::IGNORED {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::SKILL  {
+            Self::SKILL {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::LOOT  {
+            Self::LOOT {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::MONSTER_WHISPER  {
+            Self::MONSTER_WHISPER {
                 monster_guid,
                 monster_name,
                 name_length,
@@ -2940,43 +2940,43 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + monster_name.len() + 1 // monster_name: CString
                 + 4 // name_length: u32
             }
-            Self::BG_SYSTEM_NEUTRAL  {
+            Self::BG_SYSTEM_NEUTRAL {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::BG_SYSTEM_ALLIANCE  {
+            Self::BG_SYSTEM_ALLIANCE {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::BG_SYSTEM_HORDE  {
+            Self::BG_SYSTEM_HORDE {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::RAID_LEADER  {
+            Self::RAID_LEADER {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::RAID_WARNING  {
+            Self::RAID_WARNING {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::RAID_BOSS_WHISPER  {
+            Self::RAID_BOSS_WHISPER {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::RAID_BOSS_EMOTE  {
+            Self::RAID_BOSS_EMOTE {
                 monster_guid,
                 monster_name,
                 name_length,
@@ -2986,13 +2986,13 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + monster_name.len() + 1 // monster_name: CString
                 + 4 // name_length: u32
             }
-            Self::BATTLEGROUND  {
+            Self::BATTLEGROUND {
                 sender_guid4,
             } => {
                 1
                 + 8 // sender_guid4: Guid
             }
-            Self::BATTLEGROUND_LEADER  {
+            Self::BATTLEGROUND_LEADER {
                 sender_guid4,
             } => {
                 1

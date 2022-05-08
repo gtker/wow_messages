@@ -1125,43 +1125,43 @@ impl SMSG_AUTH_RESPONSEWorldResult {
 impl VariableSized for SMSG_AUTH_RESPONSEWorldResult {
     fn size(&self) -> usize {
         match self {
-            Self::RESPONSE_SUCCESS =>  {
+            Self::RESPONSE_SUCCESS => {
                 4
             }
-            Self::RESPONSE_FAILURE =>  {
+            Self::RESPONSE_FAILURE => {
                 4
             }
-            Self::RESPONSE_CANCELLED =>  {
+            Self::RESPONSE_CANCELLED => {
                 4
             }
-            Self::RESPONSE_DISCONNECTED =>  {
+            Self::RESPONSE_DISCONNECTED => {
                 4
             }
-            Self::RESPONSE_FAILED_TO_CONNECT =>  {
+            Self::RESPONSE_FAILED_TO_CONNECT => {
                 4
             }
-            Self::RESPONSE_CONNECTED =>  {
+            Self::RESPONSE_CONNECTED => {
                 4
             }
-            Self::RESPONSE_VERSION_MISMATCH =>  {
+            Self::RESPONSE_VERSION_MISMATCH => {
                 4
             }
-            Self::CSTATUS_CONNECTING =>  {
+            Self::CSTATUS_CONNECTING => {
                 4
             }
-            Self::CSTATUS_NEGOTIATING_SECURITY =>  {
+            Self::CSTATUS_NEGOTIATING_SECURITY => {
                 4
             }
-            Self::CSTATUS_NEGOTIATION_COMPLETE =>  {
+            Self::CSTATUS_NEGOTIATION_COMPLETE => {
                 4
             }
-            Self::CSTATUS_NEGOTIATION_FAILED =>  {
+            Self::CSTATUS_NEGOTIATION_FAILED => {
                 4
             }
-            Self::CSTATUS_AUTHENTICATING =>  {
+            Self::CSTATUS_AUTHENTICATING => {
                 4
             }
-            Self::AUTH_OK  {
+            Self::AUTH_OK {
                 billing_flags,
                 billing_rested,
                 billing_time,
@@ -1171,214 +1171,214 @@ impl VariableSized for SMSG_AUTH_RESPONSEWorldResult {
                 + 4 // billing_rested: u32
                 + 4 // billing_time: u32
             }
-            Self::AUTH_FAILED =>  {
+            Self::AUTH_FAILED => {
                 4
             }
-            Self::AUTH_REJECT =>  {
+            Self::AUTH_REJECT => {
                 4
             }
-            Self::AUTH_BAD_SERVER_PROOF =>  {
+            Self::AUTH_BAD_SERVER_PROOF => {
                 4
             }
-            Self::AUTH_UNAVAILABLE =>  {
+            Self::AUTH_UNAVAILABLE => {
                 4
             }
-            Self::AUTH_SYSTEM_ERROR =>  {
+            Self::AUTH_SYSTEM_ERROR => {
                 4
             }
-            Self::AUTH_BILLING_ERROR =>  {
+            Self::AUTH_BILLING_ERROR => {
                 4
             }
-            Self::AUTH_BILLING_EXPIRED =>  {
+            Self::AUTH_BILLING_EXPIRED => {
                 4
             }
-            Self::AUTH_VERSION_MISMATCH =>  {
+            Self::AUTH_VERSION_MISMATCH => {
                 4
             }
-            Self::AUTH_UNKNOWN_ACCOUNT =>  {
+            Self::AUTH_UNKNOWN_ACCOUNT => {
                 4
             }
-            Self::AUTH_INCORRECT_PASSWORD =>  {
+            Self::AUTH_INCORRECT_PASSWORD => {
                 4
             }
-            Self::AUTH_SESSION_EXPIRED =>  {
+            Self::AUTH_SESSION_EXPIRED => {
                 4
             }
-            Self::AUTH_SERVER_SHUTTING_DOWN =>  {
+            Self::AUTH_SERVER_SHUTTING_DOWN => {
                 4
             }
-            Self::AUTH_ALREADY_LOGGING_IN =>  {
+            Self::AUTH_ALREADY_LOGGING_IN => {
                 4
             }
-            Self::AUTH_LOGIN_SERVER_NOT_FOUND =>  {
+            Self::AUTH_LOGIN_SERVER_NOT_FOUND => {
                 4
             }
-            Self::AUTH_WAIT_QUEUE  {
+            Self::AUTH_WAIT_QUEUE {
                 queue_position,
             } => {
                 4
                 + 4 // queue_position: u32
             }
-            Self::AUTH_BANNED =>  {
+            Self::AUTH_BANNED => {
                 4
             }
-            Self::AUTH_ALREADY_ONLINE =>  {
+            Self::AUTH_ALREADY_ONLINE => {
                 4
             }
-            Self::AUTH_NO_TIME =>  {
+            Self::AUTH_NO_TIME => {
                 4
             }
-            Self::AUTH_DB_BUSY =>  {
+            Self::AUTH_DB_BUSY => {
                 4
             }
-            Self::AUTH_SUSPENDED =>  {
+            Self::AUTH_SUSPENDED => {
                 4
             }
-            Self::AUTH_PARENTAL_CONTROL =>  {
+            Self::AUTH_PARENTAL_CONTROL => {
                 4
             }
-            Self::REALM_LIST_IN_PROGRESS =>  {
+            Self::REALM_LIST_IN_PROGRESS => {
                 4
             }
-            Self::REALM_LIST_SUCCESS =>  {
+            Self::REALM_LIST_SUCCESS => {
                 4
             }
-            Self::REALM_LIST_FAILED =>  {
+            Self::REALM_LIST_FAILED => {
                 4
             }
-            Self::REALM_LIST_INVALID =>  {
+            Self::REALM_LIST_INVALID => {
                 4
             }
-            Self::REALM_LIST_REALM_NOT_FOUND =>  {
+            Self::REALM_LIST_REALM_NOT_FOUND => {
                 4
             }
-            Self::ACCOUNT_CREATE_IN_PROGRESS =>  {
+            Self::ACCOUNT_CREATE_IN_PROGRESS => {
                 4
             }
-            Self::ACCOUNT_CREATE_SUCCESS =>  {
+            Self::ACCOUNT_CREATE_SUCCESS => {
                 4
             }
-            Self::ACCOUNT_CREATE_FAILED =>  {
+            Self::ACCOUNT_CREATE_FAILED => {
                 4
             }
-            Self::CHAR_LIST_RETRIEVING =>  {
+            Self::CHAR_LIST_RETRIEVING => {
                 4
             }
-            Self::CHAR_LIST_RETRIEVED =>  {
+            Self::CHAR_LIST_RETRIEVED => {
                 4
             }
-            Self::CHAR_LIST_FAILED =>  {
+            Self::CHAR_LIST_FAILED => {
                 4
             }
-            Self::CHAR_CREATE_IN_PROGRESS =>  {
+            Self::CHAR_CREATE_IN_PROGRESS => {
                 4
             }
-            Self::CHAR_CREATE_SUCCESS =>  {
+            Self::CHAR_CREATE_SUCCESS => {
                 4
             }
-            Self::CHAR_CREATE_ERROR =>  {
+            Self::CHAR_CREATE_ERROR => {
                 4
             }
-            Self::CHAR_CREATE_FAILED =>  {
+            Self::CHAR_CREATE_FAILED => {
                 4
             }
-            Self::CHAR_CREATE_NAME_IN_USE =>  {
+            Self::CHAR_CREATE_NAME_IN_USE => {
                 4
             }
-            Self::CHAR_CREATE_DISABLED =>  {
+            Self::CHAR_CREATE_DISABLED => {
                 4
             }
-            Self::CHAR_CREATE_PVP_TEAMS_VIOLATION =>  {
+            Self::CHAR_CREATE_PVP_TEAMS_VIOLATION => {
                 4
             }
-            Self::CHAR_CREATE_SERVER_LIMIT =>  {
+            Self::CHAR_CREATE_SERVER_LIMIT => {
                 4
             }
-            Self::CHAR_CREATE_ACCOUNT_LIMIT =>  {
+            Self::CHAR_CREATE_ACCOUNT_LIMIT => {
                 4
             }
-            Self::CHAR_CREATE_SERVER_QUEUE =>  {
+            Self::CHAR_CREATE_SERVER_QUEUE => {
                 4
             }
-            Self::CHAR_CREATE_ONLY_EXISTING =>  {
+            Self::CHAR_CREATE_ONLY_EXISTING => {
                 4
             }
-            Self::CHAR_DELETE_IN_PROGRESS =>  {
+            Self::CHAR_DELETE_IN_PROGRESS => {
                 4
             }
-            Self::CHAR_DELETE_SUCCESS =>  {
+            Self::CHAR_DELETE_SUCCESS => {
                 4
             }
-            Self::CHAR_DELETE_FAILED =>  {
+            Self::CHAR_DELETE_FAILED => {
                 4
             }
-            Self::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER =>  {
+            Self::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {
                 4
             }
-            Self::CHAR_LOGIN_IN_PROGRESS =>  {
+            Self::CHAR_LOGIN_IN_PROGRESS => {
                 4
             }
-            Self::CHAR_LOGIN_SUCCESS =>  {
+            Self::CHAR_LOGIN_SUCCESS => {
                 4
             }
-            Self::CHAR_LOGIN_NO_WORLD =>  {
+            Self::CHAR_LOGIN_NO_WORLD => {
                 4
             }
-            Self::CHAR_LOGIN_DUPLICATE_CHARACTER =>  {
+            Self::CHAR_LOGIN_DUPLICATE_CHARACTER => {
                 4
             }
-            Self::CHAR_LOGIN_NO_INSTANCES =>  {
+            Self::CHAR_LOGIN_NO_INSTANCES => {
                 4
             }
-            Self::CHAR_LOGIN_FAILED =>  {
+            Self::CHAR_LOGIN_FAILED => {
                 4
             }
-            Self::CHAR_LOGIN_DISABLED =>  {
+            Self::CHAR_LOGIN_DISABLED => {
                 4
             }
-            Self::CHAR_LOGIN_NO_CHARACTER =>  {
+            Self::CHAR_LOGIN_NO_CHARACTER => {
                 4
             }
-            Self::CHAR_LOGIN_LOCKED_FOR_TRANSFER =>  {
+            Self::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {
                 4
             }
-            Self::CHAR_NAME_NO_NAME =>  {
+            Self::CHAR_NAME_NO_NAME => {
                 4
             }
-            Self::CHAR_NAME_TOO_SHORT =>  {
+            Self::CHAR_NAME_TOO_SHORT => {
                 4
             }
-            Self::CHAR_NAME_TOO_LONG =>  {
+            Self::CHAR_NAME_TOO_LONG => {
                 4
             }
-            Self::CHAR_NAME_ONLY_LETTERS =>  {
+            Self::CHAR_NAME_ONLY_LETTERS => {
                 4
             }
-            Self::CHAR_NAME_MIXED_LANGUAGES =>  {
+            Self::CHAR_NAME_MIXED_LANGUAGES => {
                 4
             }
-            Self::CHAR_NAME_PROFANE =>  {
+            Self::CHAR_NAME_PROFANE => {
                 4
             }
-            Self::CHAR_NAME_RESERVED =>  {
+            Self::CHAR_NAME_RESERVED => {
                 4
             }
-            Self::CHAR_NAME_INVALID_APOSTROPHE =>  {
+            Self::CHAR_NAME_INVALID_APOSTROPHE => {
                 4
             }
-            Self::CHAR_NAME_MULTIPLE_APOSTROPHES =>  {
+            Self::CHAR_NAME_MULTIPLE_APOSTROPHES => {
                 4
             }
-            Self::CHAR_NAME_THREE_CONSECUTIVE =>  {
+            Self::CHAR_NAME_THREE_CONSECUTIVE => {
                 4
             }
-            Self::CHAR_NAME_INVALID_SPACE =>  {
+            Self::CHAR_NAME_INVALID_SPACE => {
                 4
             }
-            Self::CHAR_NAME_SUCCESS =>  {
+            Self::CHAR_NAME_SUCCESS => {
                 4
             }
-            Self::CHAR_NAME_FAILURE =>  {
+            Self::CHAR_NAME_FAILURE => {
                 4
             }
         }

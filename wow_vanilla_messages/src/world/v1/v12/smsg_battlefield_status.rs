@@ -13531,10 +13531,10 @@ impl SMSG_BATTLEFIELD_STATUSStatusId {
 impl VariableSized for SMSG_BATTLEFIELD_STATUSStatusId {
     fn size(&self) -> usize {
         match self {
-            Self::NONE =>  {
+            Self::NONE => {
                 1
             }
-            Self::WAIT_QUEUE  {
+            Self::WAIT_QUEUE {
                 average_wait_time_in_ms,
                 time_in_queue_in_ms,
             } => {
@@ -13542,13 +13542,13 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSStatusId {
                 + 4 // average_wait_time_in_ms: u32
                 + 4 // time_in_queue_in_ms: u32
             }
-            Self::WAIT_JOIN  {
+            Self::WAIT_JOIN {
                 time_to_remove_in_queue_in_ms,
             } => {
                 1
                 + 4 // time_to_remove_in_queue_in_ms: u32
             }
-            Self::IN_PROGRESS  {
+            Self::IN_PROGRESS {
                 time_to_bg_autoleave_in_ms,
                 time_to_bg_start_in_ms,
             } => {
@@ -13556,7 +13556,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSStatusId {
                 + 4 // time_to_bg_autoleave_in_ms: u32
                 + 4 // time_to_bg_start_in_ms: u32
             }
-            Self::WAIT_LEAVE =>  {
+            Self::WAIT_LEAVE => {
                 1
             }
         }
@@ -14151,10 +14151,10 @@ impl SMSG_BATTLEFIELD_STATUSMap {
 impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
     fn size(&self) -> usize {
         match self {
-            Self::EASTERN_KINGDOMS =>  {
+            Self::EASTERN_KINGDOMS => {
                 4
             }
-            Self::KALIMDOR  {
+            Self::KALIMDOR {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14164,7 +14164,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::TESTING  {
+            Self::TESTING {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14174,7 +14174,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::SCOTT_TEST  {
+            Self::SCOTT_TEST {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14184,7 +14184,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::CASH_TEST  {
+            Self::CASH_TEST {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14194,7 +14194,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::ALTERAC_VALLEY  {
+            Self::ALTERAC_VALLEY {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14204,7 +14204,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::SHADOWFANG_KEEP  {
+            Self::SHADOWFANG_KEEP {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14214,7 +14214,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::STORMWIND_STOCKADE  {
+            Self::STORMWIND_STOCKADE {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14224,7 +14224,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::STORMWIND_PRISON  {
+            Self::STORMWIND_PRISON {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14234,7 +14234,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::DEADMINES  {
+            Self::DEADMINES {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14244,7 +14244,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::AZSHARA_CRATER  {
+            Self::AZSHARA_CRATER {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14254,7 +14254,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::COLLINS_TEST  {
+            Self::COLLINS_TEST {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14264,7 +14264,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::WAILING_CAVERNS  {
+            Self::WAILING_CAVERNS {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14274,7 +14274,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::MONASTERY  {
+            Self::MONASTERY {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14284,7 +14284,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::RAZORFEN_KRAUL  {
+            Self::RAZORFEN_KRAUL {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14294,7 +14294,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::BLACKFATHOM_DEEPS  {
+            Self::BLACKFATHOM_DEEPS {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14304,7 +14304,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::ULDAMAN  {
+            Self::ULDAMAN {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14314,7 +14314,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::GNOMERAGON  {
+            Self::GNOMERAGON {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14324,7 +14324,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::SUNKEN_TEMPLE  {
+            Self::SUNKEN_TEMPLE {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14334,7 +14334,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::RAZORFEN_DOWNS  {
+            Self::RAZORFEN_DOWNS {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14344,7 +14344,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::EMERALD_DREAM  {
+            Self::EMERALD_DREAM {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14354,7 +14354,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::SCARLET_MONASTERY  {
+            Self::SCARLET_MONASTERY {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14364,7 +14364,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::ZUL_FARRAK  {
+            Self::ZUL_FARRAK {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14374,7 +14374,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::BLACKROCK_SPIRE  {
+            Self::BLACKROCK_SPIRE {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14384,7 +14384,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::BLACKROCK_DEPTHS  {
+            Self::BLACKROCK_DEPTHS {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14394,7 +14394,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::ONYXIAS_LAIR  {
+            Self::ONYXIAS_LAIR {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14404,7 +14404,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::CAVERNS_OF_TIME  {
+            Self::CAVERNS_OF_TIME {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14414,7 +14414,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::SCHOLOMANCE  {
+            Self::SCHOLOMANCE {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14424,7 +14424,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::ZUL_GURUB  {
+            Self::ZUL_GURUB {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14434,7 +14434,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::STRATHOLME  {
+            Self::STRATHOLME {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14444,7 +14444,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::MAURADON  {
+            Self::MAURADON {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14454,7 +14454,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::DEEPRUN_TRAM  {
+            Self::DEEPRUN_TRAM {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14464,7 +14464,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::RAGEFIRE_CHASM  {
+            Self::RAGEFIRE_CHASM {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14474,7 +14474,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::MOLTEN_CORE  {
+            Self::MOLTEN_CORE {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14484,7 +14484,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::DIRE_MAUL  {
+            Self::DIRE_MAUL {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14494,7 +14494,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::ALLIANCE_PVP_BARRACKS  {
+            Self::ALLIANCE_PVP_BARRACKS {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14504,7 +14504,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::HORDE_PVP_BARRACKS  {
+            Self::HORDE_PVP_BARRACKS {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14514,7 +14514,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::DEVELOPMENT_LAND  {
+            Self::DEVELOPMENT_LAND {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14524,7 +14524,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::BLACKWING_LAIR  {
+            Self::BLACKWING_LAIR {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14534,7 +14534,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::WARSONG_GULCH  {
+            Self::WARSONG_GULCH {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14544,7 +14544,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::RUINS_OF_AHN_QIRAJ  {
+            Self::RUINS_OF_AHN_QIRAJ {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14554,7 +14554,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::ARATHI_BASIN  {
+            Self::ARATHI_BASIN {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14564,7 +14564,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::AHN_QIRAJ_TEMPLE  {
+            Self::AHN_QIRAJ_TEMPLE {
                 client_instance_id,
                 status_id,
                 unknown0,
@@ -14574,7 +14574,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
                 + 1 // unknown0: u8
             }
-            Self::NAXXRAMAS  {
+            Self::NAXXRAMAS {
                 client_instance_id,
                 status_id,
                 unknown0,
