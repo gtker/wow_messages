@@ -203,36 +203,60 @@ fn world_common_impls_read_write(
     }
     s.closing_curly();
 
-    s.wln(format!("{}", it.cfg()));
-    s.bodyn(format!("{func}fn {prefix}read_encrypted<R: {read}, D: Decrypter{decrypter}>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error>", func = it.func(), prefix = it.prefix(), read = it.read(), decrypter = it.decrypter()), |s| {
-        s.wln(format!("let mut header = [0u8; {header_size}];", header_size = opcode_size + 2));
-        s.wln(format!("r.read_exact(&mut header){postfix}?;", postfix = it.postfix()));
-        s.wln(format!("let header = d.decrypt_{cd}_header(header);", cd = cd));
-        s.wln(format!("let header_size = (header.size - {opcode_size}) as u32;", opcode_size = opcode_size));
-        s.body("match header.opcode", |s| {
-            for &e in v {
-                let opcode = match e.container_type() {
-                    ContainerType::CMsg(i) => i,
-                    ContainerType::SMsg(i) => i,
-                    ContainerType::Msg(i) => i,
-                    _ => panic!(),
-                };
+    s.print_read_encrypted(it);
 
-                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({name}::{prefix}read_body(r, header_size){postfix}?)),", prefix = it.prefix(), postfix = it.postfix(), opcode = opcode, name = e.name(), enum_name = get_enumerator_name(e.name())));
-            }
-            s.wln("_ => Err(Self::Error::InvalidOpcode(header.opcode)),");
-        });
-    });
+    s.wln(format!(
+        "let mut header = [0u8; {header_size}];",
+        header_size = opcode_size + 2
+    ));
+    s.wln(format!(
+        "r.read_exact(&mut header){postfix}?;",
+        postfix = it.postfix()
+    ));
+    s.wln(format!(
+        "let header = d.decrypt_{cd}_header(header);",
+        cd = cd
+    ));
+    s.wln(format!(
+        "let header_size = (header.size - {opcode_size}) as u32;",
+        opcode_size = opcode_size
+    ));
+    s.body("match header.opcode", |s| {
+        for &e in v {
+            let opcode = match e.container_type() {
+                ContainerType::CMsg(i) => i,
+                ContainerType::SMsg(i) => i,
+                ContainerType::Msg(i) => i,
+                _ => panic!(),
+            };
 
-    s.wln(format!("{}", it.cfg()));
-    s.bodyn(format!("{func}fn {prefix}write_encrypted<W: {write}, E: Encrypter{decrypter}>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error>", decrypter = it.decrypter(), prefix = it.prefix(), func = it.func(), write = it.write()), |s| {
-        s.body("match self", |s| {
-            for &e in v {
-                s.wln(format!("Self::{name}(i) => i.{prefix}write_encrypted_{cd}(w, e){postfix}?,", prefix = it.prefix(), postfix = it.postfix(), name = get_enumerator_name(e.name()), cd = cd));
-            }
-        });
-        s.wln("Ok(())");
+            s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({name}::{prefix}read_body(r, header_size){postfix}?)),", prefix = it.prefix(), postfix = it.postfix(), opcode = opcode, name = e.name(), enum_name = get_enumerator_name(e.name())));
+        }
+        s.wln("_ => Err(Self::Error::InvalidOpcode(header.opcode)),");
     });
+    if it.is_async() {
+        s.closing_curly_with(")");
+    }
+    s.closing_curly_newline();
+
+    s.print_write_encrypted(it);
+
+    s.body("match self", |s| {
+        for &e in v {
+            s.wln(format!(
+                "Self::{name}(i) => i.{prefix}write_encrypted_{cd}(w, e){postfix}?,",
+                prefix = it.prefix(),
+                postfix = it.postfix(),
+                name = get_enumerator_name(e.name()),
+                cd = cd
+            ));
+        }
+    });
+    s.wln("Ok(())");
+    if it.is_async() {
+        s.closing_curly_with(")");
+    }
+    s.closing_curly_newline();
 }
 
 pub fn common_impls_world(
