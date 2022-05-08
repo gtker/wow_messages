@@ -296,76 +296,87 @@ impl ReadableAndWritable for Arrays {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // index: u8
-        w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes()).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // index: u8
+            w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes()).await?;
 
-        // basic_fixed_array: u8[20]
-        for i in self.basic_fixed_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // basic_fixed_array: u8[20]
+            for i in self.basic_fixed_array.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // simple_2byte_fixed_array: u16[16]
-        for i in self.simple_2byte_fixed_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // simple_2byte_fixed_array: u16[16]
+            for i in self.simple_2byte_fixed_array.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // simple_2byte_be_fixed_array: u16_be[16]
-        for i in self.simple_2byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
+            // simple_2byte_be_fixed_array: u16_be[16]
+            for i in self.simple_2byte_be_fixed_array.iter() {
+                w.write_all(&i.to_be_bytes()).await?;
+            }
 
-        // simple_2byte_variable_array: u16[index]
-        for i in self.simple_2byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // simple_2byte_variable_array: u16[index]
+            for i in self.simple_2byte_variable_array.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // simple_4byte_be_fixed_array: u32_be[16]
-        for i in self.simple_4byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
+            // simple_4byte_be_fixed_array: u32_be[16]
+            for i in self.simple_4byte_be_fixed_array.iter() {
+                w.write_all(&i.to_be_bytes()).await?;
+            }
 
-        // simple_4byte_variable_array: u32[index]
-        for i in self.simple_4byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // simple_4byte_variable_array: u32[index]
+            for i in self.simple_4byte_variable_array.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // simple_8byte_be_fixed_array: u64_be[16]
-        for i in self.simple_8byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
+            // simple_8byte_be_fixed_array: u64_be[16]
+            for i in self.simple_8byte_be_fixed_array.iter() {
+                w.write_all(&i.to_be_bytes()).await?;
+            }
 
-        // simple_8byte_variable_array: u64[index]
-        for i in self.simple_8byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // simple_8byte_variable_array: u64[index]
+            for i in self.simple_8byte_variable_array.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // complex_fixed_array: StructWithAllBuiltInTypes[10]
-        for i in self.complex_fixed_array.iter() {
-            i.tokio_write(w).await?;
-        }
+            // complex_fixed_array: StructWithAllBuiltInTypes[10]
+            for i in self.complex_fixed_array.iter() {
+                i.tokio_write(w).await?;
+            }
 
-        // complex_variable_array: StructWithAllBuiltInTypes[index]
-        for i in self.complex_variable_array.iter() {
-            i.tokio_write(w).await?;
-        }
+            // complex_variable_array: StructWithAllBuiltInTypes[index]
+            for i in self.complex_variable_array.iter() {
+                i.tokio_write(w).await?;
+            }
 
-        // fixed_cstring_array: CString[10]
-        for i in self.fixed_cstring_array.iter() {
-            w.write_all(&i.as_bytes()).await?;
-            w.write_all(&[0]).await?;
-        }
+            // fixed_cstring_array: CString[10]
+            for i in self.fixed_cstring_array.iter() {
+                w.write_all(&i.as_bytes()).await?;
+                w.write_all(&[0]).await?;
+            }
 
-        // variable_cstring_array: CString[index]
-        for i in self.variable_cstring_array.iter() {
-            w.write_all(&i.as_bytes()).await?;
-            w.write_all(&[0]).await?;
-        }
+            // variable_cstring_array: CString[index]
+            for i in self.variable_cstring_array.iter() {
+                w.write_all(&i.as_bytes()).await?;
+                w.write_all(&[0]).await?;
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // index: u8
@@ -465,76 +476,87 @@ impl ReadableAndWritable for Arrays {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // index: u8
-        w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes()).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // index: u8
+            w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes()).await?;
 
-        // basic_fixed_array: u8[20]
-        for i in self.basic_fixed_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // basic_fixed_array: u8[20]
+            for i in self.basic_fixed_array.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // simple_2byte_fixed_array: u16[16]
-        for i in self.simple_2byte_fixed_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // simple_2byte_fixed_array: u16[16]
+            for i in self.simple_2byte_fixed_array.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // simple_2byte_be_fixed_array: u16_be[16]
-        for i in self.simple_2byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
+            // simple_2byte_be_fixed_array: u16_be[16]
+            for i in self.simple_2byte_be_fixed_array.iter() {
+                w.write_all(&i.to_be_bytes()).await?;
+            }
 
-        // simple_2byte_variable_array: u16[index]
-        for i in self.simple_2byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // simple_2byte_variable_array: u16[index]
+            for i in self.simple_2byte_variable_array.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // simple_4byte_be_fixed_array: u32_be[16]
-        for i in self.simple_4byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
+            // simple_4byte_be_fixed_array: u32_be[16]
+            for i in self.simple_4byte_be_fixed_array.iter() {
+                w.write_all(&i.to_be_bytes()).await?;
+            }
 
-        // simple_4byte_variable_array: u32[index]
-        for i in self.simple_4byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // simple_4byte_variable_array: u32[index]
+            for i in self.simple_4byte_variable_array.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // simple_8byte_be_fixed_array: u64_be[16]
-        for i in self.simple_8byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
+            // simple_8byte_be_fixed_array: u64_be[16]
+            for i in self.simple_8byte_be_fixed_array.iter() {
+                w.write_all(&i.to_be_bytes()).await?;
+            }
 
-        // simple_8byte_variable_array: u64[index]
-        for i in self.simple_8byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // simple_8byte_variable_array: u64[index]
+            for i in self.simple_8byte_variable_array.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // complex_fixed_array: StructWithAllBuiltInTypes[10]
-        for i in self.complex_fixed_array.iter() {
-            i.astd_write(w).await?;
-        }
+            // complex_fixed_array: StructWithAllBuiltInTypes[10]
+            for i in self.complex_fixed_array.iter() {
+                i.astd_write(w).await?;
+            }
 
-        // complex_variable_array: StructWithAllBuiltInTypes[index]
-        for i in self.complex_variable_array.iter() {
-            i.astd_write(w).await?;
-        }
+            // complex_variable_array: StructWithAllBuiltInTypes[index]
+            for i in self.complex_variable_array.iter() {
+                i.astd_write(w).await?;
+            }
 
-        // fixed_cstring_array: CString[10]
-        for i in self.fixed_cstring_array.iter() {
-            w.write_all(&i.as_bytes()).await?;
-            w.write_all(&[0]).await?;
-        }
+            // fixed_cstring_array: CString[10]
+            for i in self.fixed_cstring_array.iter() {
+                w.write_all(&i.as_bytes()).await?;
+                w.write_all(&[0]).await?;
+            }
 
-        // variable_cstring_array: CString[index]
-        for i in self.variable_cstring_array.iter() {
-            w.write_all(&i.as_bytes()).await?;
-            w.write_all(&[0]).await?;
-        }
+            // variable_cstring_array: CString[index]
+            for i in self.variable_cstring_array.iter() {
+                w.write_all(&i.as_bytes()).await?;
+                w.write_all(&[0]).await?;
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for Arrays {

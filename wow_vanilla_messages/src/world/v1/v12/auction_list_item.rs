@@ -202,53 +202,64 @@ impl ReadableAndWritable for AuctionListItem {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // id: u32
-        w.write_all(&self.id.to_le_bytes()).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // id: u32
+            w.write_all(&self.id.to_le_bytes()).await?;
 
-        // item_entry: u32
-        w.write_all(&self.item_entry.to_le_bytes()).await?;
+            // item_entry: u32
+            w.write_all(&self.item_entry.to_le_bytes()).await?;
 
-        // item_enchantment: u32
-        w.write_all(&self.item_enchantment.to_le_bytes()).await?;
+            // item_enchantment: u32
+            w.write_all(&self.item_enchantment.to_le_bytes()).await?;
 
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
+            // item_random_property_id: u32
+            w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
 
-        // item_suffix_factor: u32
-        w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
+            // item_suffix_factor: u32
+            w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
 
-        // item_count: u32
-        w.write_all(&self.item_count.to_le_bytes()).await?;
+            // item_count: u32
+            w.write_all(&self.item_count.to_le_bytes()).await?;
 
-        // item_charges: u32
-        w.write_all(&self.item_charges.to_le_bytes()).await?;
+            // item_charges: u32
+            w.write_all(&self.item_charges.to_le_bytes()).await?;
 
-        // item_owner: Guid
-        self.item_owner.tokio_write(w).await?;
+            // item_owner: Guid
+            self.item_owner.tokio_write(w).await?;
 
-        // start_bid: u32
-        w.write_all(&self.start_bid.to_le_bytes()).await?;
+            // start_bid: u32
+            w.write_all(&self.start_bid.to_le_bytes()).await?;
 
-        // minimum_bid: u32
-        w.write_all(&self.minimum_bid.to_le_bytes()).await?;
+            // minimum_bid: u32
+            w.write_all(&self.minimum_bid.to_le_bytes()).await?;
 
-        // buyout_amount: u32
-        w.write_all(&self.buyout_amount.to_le_bytes()).await?;
+            // buyout_amount: u32
+            w.write_all(&self.buyout_amount.to_le_bytes()).await?;
 
-        // time_left_in_msecs: u32
-        w.write_all(&self.time_left_in_msecs.to_le_bytes()).await?;
+            // time_left_in_msecs: u32
+            w.write_all(&self.time_left_in_msecs.to_le_bytes()).await?;
 
-        // highest_bidder: Guid
-        self.highest_bidder.tokio_write(w).await?;
+            // highest_bidder: Guid
+            self.highest_bidder.tokio_write(w).await?;
 
-        // highest_bid: u32
-        w.write_all(&self.highest_bid.to_le_bytes()).await?;
+            // highest_bid: u32
+            w.write_all(&self.highest_bid.to_le_bytes()).await?;
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // id: u32
@@ -311,53 +322,64 @@ impl ReadableAndWritable for AuctionListItem {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // id: u32
-        w.write_all(&self.id.to_le_bytes()).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // id: u32
+            w.write_all(&self.id.to_le_bytes()).await?;
 
-        // item_entry: u32
-        w.write_all(&self.item_entry.to_le_bytes()).await?;
+            // item_entry: u32
+            w.write_all(&self.item_entry.to_le_bytes()).await?;
 
-        // item_enchantment: u32
-        w.write_all(&self.item_enchantment.to_le_bytes()).await?;
+            // item_enchantment: u32
+            w.write_all(&self.item_enchantment.to_le_bytes()).await?;
 
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
+            // item_random_property_id: u32
+            w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
 
-        // item_suffix_factor: u32
-        w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
+            // item_suffix_factor: u32
+            w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
 
-        // item_count: u32
-        w.write_all(&self.item_count.to_le_bytes()).await?;
+            // item_count: u32
+            w.write_all(&self.item_count.to_le_bytes()).await?;
 
-        // item_charges: u32
-        w.write_all(&self.item_charges.to_le_bytes()).await?;
+            // item_charges: u32
+            w.write_all(&self.item_charges.to_le_bytes()).await?;
 
-        // item_owner: Guid
-        self.item_owner.astd_write(w).await?;
+            // item_owner: Guid
+            self.item_owner.astd_write(w).await?;
 
-        // start_bid: u32
-        w.write_all(&self.start_bid.to_le_bytes()).await?;
+            // start_bid: u32
+            w.write_all(&self.start_bid.to_le_bytes()).await?;
 
-        // minimum_bid: u32
-        w.write_all(&self.minimum_bid.to_le_bytes()).await?;
+            // minimum_bid: u32
+            w.write_all(&self.minimum_bid.to_le_bytes()).await?;
 
-        // buyout_amount: u32
-        w.write_all(&self.buyout_amount.to_le_bytes()).await?;
+            // buyout_amount: u32
+            w.write_all(&self.buyout_amount.to_le_bytes()).await?;
 
-        // time_left_in_msecs: u32
-        w.write_all(&self.time_left_in_msecs.to_le_bytes()).await?;
+            // time_left_in_msecs: u32
+            w.write_all(&self.time_left_in_msecs.to_le_bytes()).await?;
 
-        // highest_bidder: Guid
-        self.highest_bidder.astd_write(w).await?;
+            // highest_bidder: Guid
+            self.highest_bidder.astd_write(w).await?;
 
-        // highest_bid: u32
-        w.write_all(&self.highest_bid.to_le_bytes()).await?;
+            // highest_bid: u32
+            w.write_all(&self.highest_bid.to_le_bytes()).await?;
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl ConstantSized for AuctionListItem {}

@@ -240,6 +240,48 @@ impl Writer {
         self.closing_curly_newline(); // impl
     }
 
+    fn print_async_impl_readable_and_writable_write_decl(&mut self, it: ImplType) {
+        self.wln(format!(
+            "fn {}write<'life0, 'life1, 'async_trait, W>(",
+            it.prefix()
+        ));
+        self.inc_indent();
+
+        self.wln("&'life0 self,");
+        self.wln("w: &'life1 mut W,");
+        self.dec_indent();
+
+        self.wln(") -> core::pin::Pin<Box<");
+        self.inc_indent();
+
+        self.wln("dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>");
+        self.inc_indent();
+
+        self.wln("+ Send + 'async_trait");
+        self.dec_indent();
+        self.dec_indent();
+
+        self.wln(">> where");
+
+        self.inc_indent();
+        self.wln(format!("W: 'async_trait + {},", it.write()));
+        self.wln("'life0: 'async_trait,");
+        self.wln("'life1: 'async_trait,");
+        self.wln("Self: 'async_trait,");
+        self.dec_indent();
+
+        self.open_curly("");
+        self.open_curly("Box::pin(async move");
+    }
+
+    fn print_async_impl_readable_and_writable_write_closing(&mut self) {
+        self.closing_curly_with(")"); // Box::pin
+    }
+
+    fn print_async_impl_readable_and_writable_read_header(&mut self, it: ImplType) {
+        self.wln("{}write<")
+    }
+
     pub fn impl_read_and_writable_with_error<
         S: AsRef<str>,
         S1: AsRef<str>,
@@ -264,24 +306,43 @@ impl Writer {
         self.newline();
 
         for it in ImplType::types() {
-            self.wln(it.cfg());
-            self.open_curly(format!(
-                "{func}fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, Self::Error>",
-                func = it.func(),
-                prefix = it.prefix(),
-                read = it.read()
-            ));
-            read_function(self, it);
-            self.closing_curly_newline();
+            if false {
+                self.print_async_impl_readable_and_writable_read_header(it);
+            } else {
+                self.wln(it.cfg());
+                self.open_curly(format!(
+                    "{func}fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, Self::Error>",
+                    func = it.func(),
+                    prefix = it.prefix(),
+                    read = it.read()
+                ));
+            }
 
-            self.wln(it.cfg());
-            self.open_curly(format!("{func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
-                                    func = it.func(),
-                                    prefix = it.prefix(),
-                                    write = it.write()
-            ));
+            read_function(self, it);
+            if false {
+                self.print_async_impl_readable_and_writable_write_closing();
+            } else {
+                self.closing_curly_newline();
+            }
+
+            if it.is_async() {
+                self.print_async_impl_readable_and_writable_write_decl(it);
+            } else {
+                self.wln(it.cfg());
+                self.open_curly(format!("{func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
+                                        func = it.func(),
+                                        prefix = it.prefix(),
+                                        write = it.write()
+                ));
+            }
+
             write_function(self, it);
-            self.closing_curly_newline();
+
+            if it.is_async() {
+                self.print_async_impl_readable_and_writable_write_closing();
+            }
+
+            self.closing_curly_newline(); // Write Function
         }
 
         self.closing_curly_newline(); // impl
@@ -684,6 +745,13 @@ impl ImplType {
             ImplType::Std => "#[cfg_attr(feature = \"sync\", test)]",
             ImplType::Tokio => "#[cfg_attr(feature = \"async_tokio\", async_std::test)]",
             ImplType::AsyncStd => "#[cfg_attr(feature = \"async_std\", tokio::test)]",
+        }
+    }
+
+    pub fn is_async(&self) -> bool {
+        match self {
+            ImplType::Std => false,
+            _ => true,
         }
     }
 

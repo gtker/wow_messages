@@ -977,308 +977,319 @@ impl ReadableAndWritable for SpellLog {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // effect: SpellEffect
-        self.effect.tokio_write(w).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // effect: SpellEffect
+            self.effect.tokio_write(w).await?;
 
-        // amount_of_logs: u32
-        w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes()).await?;
+            // amount_of_logs: u32
+            w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes()).await?;
 
-        match &self.effect {
-            SpellLogSpellEffect::NONE => {}
-            SpellLogSpellEffect::INSTAKILL {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
+            match &self.effect {
+                SpellLogSpellEffect::NONE => {}
+                SpellLogSpellEffect::INSTAKILL {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
 
+                }
+                SpellLogSpellEffect::SCHOOL_DAMAGE => {}
+                SpellLogSpellEffect::DUMMY => {}
+                SpellLogSpellEffect::PORTAL_TELEPORT => {}
+                SpellLogSpellEffect::TELEPORT_UNITS => {}
+                SpellLogSpellEffect::APPLY_AURA => {}
+                SpellLogSpellEffect::ENVIRONMENTAL_DAMAGE => {}
+                SpellLogSpellEffect::POWER_DRAIN {
+                    target1,
+                    unknown1,
+                    unknown2,
+                    unknown3,
+                } => {
+                    // target1: Guid
+                    target1.tokio_write(w).await?;
+
+                    // unknown1: u32
+                    w.write_all(&unknown1.to_le_bytes()).await?;
+
+                    // unknown2: u32
+                    w.write_all(&unknown2.to_le_bytes()).await?;
+
+                    // unknown3: f32
+                    w.write_all(&unknown3.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::HEALTH_LEECH => {}
+                SpellLogSpellEffect::HEAL => {}
+                SpellLogSpellEffect::BIND => {}
+                SpellLogSpellEffect::PORTAL => {}
+                SpellLogSpellEffect::RITUAL_BASE => {}
+                SpellLogSpellEffect::RITUAL_SPECIALIZE => {}
+                SpellLogSpellEffect::RITUAL_ACTIVATE_PORTAL => {}
+                SpellLogSpellEffect::QUEST_COMPLETE => {}
+                SpellLogSpellEffect::WEAPON_DAMAGE_NOSCHOOL => {}
+                SpellLogSpellEffect::RESURRECT {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::ADD_EXTRA_ATTACKS {
+                    target2,
+                    unknown4,
+                } => {
+                    // target2: Guid
+                    target2.tokio_write(w).await?;
+
+                    // unknown4: u32
+                    w.write_all(&unknown4.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::DODGE => {}
+                SpellLogSpellEffect::EVADE => {}
+                SpellLogSpellEffect::PARRY => {}
+                SpellLogSpellEffect::BLOCK => {}
+                SpellLogSpellEffect::CREATE_ITEM {
+                    spell_effect_item_type,
+                } => {
+                    // spell_effect_item_type: u32
+                    w.write_all(&spell_effect_item_type.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::WEAPON => {}
+                SpellLogSpellEffect::DEFENSE => {}
+                SpellLogSpellEffect::PERSISTENT_AREA_AURA => {}
+                SpellLogSpellEffect::SUMMON => {}
+                SpellLogSpellEffect::LEAP => {}
+                SpellLogSpellEffect::ENERGIZE => {}
+                SpellLogSpellEffect::WEAPON_PERCENT_DAMAGE => {}
+                SpellLogSpellEffect::TRIGGER_MISSILE => {}
+                SpellLogSpellEffect::OPEN_LOCK {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::SUMMON_CHANGE_ITEM => {}
+                SpellLogSpellEffect::APPLY_AREA_AURA_PARTY => {}
+                SpellLogSpellEffect::LEARN_SPELL => {}
+                SpellLogSpellEffect::SPELL_DEFENSE => {}
+                SpellLogSpellEffect::DISPEL {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::LANGUAGE => {}
+                SpellLogSpellEffect::DUAL_WIELD => {}
+                SpellLogSpellEffect::SUMMON_WILD => {}
+                SpellLogSpellEffect::SUMMON_GUARDIAN => {}
+                SpellLogSpellEffect::TELEPORT_UNITS_FACE_CASTER => {}
+                SpellLogSpellEffect::SKILL_STEP => {}
+                SpellLogSpellEffect::ADD_HONOR => {}
+                SpellLogSpellEffect::SPAWN => {}
+                SpellLogSpellEffect::TRADE_SKILL => {}
+                SpellLogSpellEffect::STEALTH => {}
+                SpellLogSpellEffect::DETECT => {}
+                SpellLogSpellEffect::TRANS_DOOR => {}
+                SpellLogSpellEffect::FORCE_CRITICAL_HIT => {}
+                SpellLogSpellEffect::GUARANTEE_HIT => {}
+                SpellLogSpellEffect::ENCHANT_ITEM => {}
+                SpellLogSpellEffect::ENCHANT_ITEM_TEMPORARY => {}
+                SpellLogSpellEffect::TAMECREATURE => {}
+                SpellLogSpellEffect::SUMMON_PET => {}
+                SpellLogSpellEffect::LEARN_PET_SPELL => {}
+                SpellLogSpellEffect::WEAPON_DAMAGE => {}
+                SpellLogSpellEffect::OPEN_LOCK_ITEM {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::PROFICIENCY => {}
+                SpellLogSpellEffect::SEND_EVENT => {}
+                SpellLogSpellEffect::POWER_BURN => {}
+                SpellLogSpellEffect::THREAT {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::TRIGGER_SPELL => {}
+                SpellLogSpellEffect::HEALTH_FUNNEL => {}
+                SpellLogSpellEffect::POWER_FUNNEL => {}
+                SpellLogSpellEffect::HEAL_MAX_HEALTH => {}
+                SpellLogSpellEffect::INTERRUPT_CAST {
+                    target3,
+                    interrupted_spell,
+                } => {
+                    // target3: Guid
+                    target3.tokio_write(w).await?;
+
+                    // interrupted_spell: u32
+                    w.write_all(&interrupted_spell.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::DISTRACT {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::PULL => {}
+                SpellLogSpellEffect::PICKPOCKET => {}
+                SpellLogSpellEffect::ADD_FARSIGHT => {}
+                SpellLogSpellEffect::SUMMON_POSSESSED => {}
+                SpellLogSpellEffect::SUMMON_TOTEM => {}
+                SpellLogSpellEffect::HEAL_MECHANICAL => {}
+                SpellLogSpellEffect::SUMMON_OBJECT_WILD => {}
+                SpellLogSpellEffect::SCRIPT_EFFECT => {}
+                SpellLogSpellEffect::ATTACK => {}
+                SpellLogSpellEffect::SANCTUARY {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::ADD_COMBO_POINTS => {}
+                SpellLogSpellEffect::CREATE_HOUSE => {}
+                SpellLogSpellEffect::BIND_SIGHT => {}
+                SpellLogSpellEffect::DUEL => {}
+                SpellLogSpellEffect::STUCK => {}
+                SpellLogSpellEffect::SUMMON_PLAYER => {}
+                SpellLogSpellEffect::ACTIVATE_OBJECT => {}
+                SpellLogSpellEffect::SUMMON_TOTEM_SLOT1 => {}
+                SpellLogSpellEffect::SUMMON_TOTEM_SLOT2 => {}
+                SpellLogSpellEffect::SUMMON_TOTEM_SLOT3 => {}
+                SpellLogSpellEffect::SUMMON_TOTEM_SLOT4 => {}
+                SpellLogSpellEffect::THREAT_ALL {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::ENCHANT_HELD_ITEM => {}
+                SpellLogSpellEffect::SUMMON_PHANTASM => {}
+                SpellLogSpellEffect::SELF_RESURRECT => {}
+                SpellLogSpellEffect::SKINNING => {}
+                SpellLogSpellEffect::CHARGE => {}
+                SpellLogSpellEffect::SUMMON_CRITTER => {}
+                SpellLogSpellEffect::KNOCK_BACK => {}
+                SpellLogSpellEffect::DISENCHANT => {}
+                SpellLogSpellEffect::INEBRIATE => {}
+                SpellLogSpellEffect::FEED_PET {
+                    item_target_entry,
+                } => {
+                    // item_target_entry: u32
+                    w.write_all(&item_target_entry.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::DISMISS_PET {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::REPUTATION => {}
+                SpellLogSpellEffect::SUMMON_OBJECT_SLOT1 => {}
+                SpellLogSpellEffect::SUMMON_OBJECT_SLOT2 => {}
+                SpellLogSpellEffect::SUMMON_OBJECT_SLOT3 => {}
+                SpellLogSpellEffect::SUMMON_OBJECT_SLOT4 => {}
+                SpellLogSpellEffect::DISPEL_MECHANIC {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::SUMMON_DEAD_PET => {}
+                SpellLogSpellEffect::DESTROY_ALL_TOTEMS => {}
+                SpellLogSpellEffect::DURABILITY_DAMAGE {
+                    target4,
+                    unknown5,
+                    unknown6,
+                } => {
+                    // target4: Guid
+                    target4.tokio_write(w).await?;
+
+                    // unknown5: u32
+                    w.write_all(&unknown5.to_le_bytes()).await?;
+
+                    // unknown6: u32
+                    w.write_all(&unknown6.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::SUMMON_DEMON => {}
+                SpellLogSpellEffect::RESURRECT_NEW {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::ATTACK_ME {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::DURABILITY_DAMAGE_PCT => {}
+                SpellLogSpellEffect::SKIN_PLAYER_CORPSE {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::SPIRIT_HEAL => {}
+                SpellLogSpellEffect::SKILL => {}
+                SpellLogSpellEffect::APPLY_AREA_AURA_PET => {}
+                SpellLogSpellEffect::TELEPORT_GRAVEYARD => {}
+                SpellLogSpellEffect::NORMALIZED_WEAPON_DMG => {}
+                SpellLogSpellEffect::UNKNOWN122 => {}
+                SpellLogSpellEffect::SEND_TAXI => {}
+                SpellLogSpellEffect::PLAYER_PULL => {}
+                SpellLogSpellEffect::MODIFY_THREAT_PERCENT {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::UNKNOWN126 {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.tokio_write(w).await?;
+
+                }
+                SpellLogSpellEffect::UNKNOWN127 => {}
             }
-            SpellLogSpellEffect::SCHOOL_DAMAGE => {}
-            SpellLogSpellEffect::DUMMY => {}
-            SpellLogSpellEffect::PORTAL_TELEPORT => {}
-            SpellLogSpellEffect::TELEPORT_UNITS => {}
-            SpellLogSpellEffect::APPLY_AURA => {}
-            SpellLogSpellEffect::ENVIRONMENTAL_DAMAGE => {}
-            SpellLogSpellEffect::POWER_DRAIN {
-                target1,
-                unknown1,
-                unknown2,
-                unknown3,
-            } => {
-                // target1: Guid
-                target1.tokio_write(w).await?;
 
-                // unknown1: u32
-                w.write_all(&unknown1.to_le_bytes()).await?;
-
-                // unknown2: u32
-                w.write_all(&unknown2.to_le_bytes()).await?;
-
-                // unknown3: f32
-                w.write_all(&unknown3.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::HEALTH_LEECH => {}
-            SpellLogSpellEffect::HEAL => {}
-            SpellLogSpellEffect::BIND => {}
-            SpellLogSpellEffect::PORTAL => {}
-            SpellLogSpellEffect::RITUAL_BASE => {}
-            SpellLogSpellEffect::RITUAL_SPECIALIZE => {}
-            SpellLogSpellEffect::RITUAL_ACTIVATE_PORTAL => {}
-            SpellLogSpellEffect::QUEST_COMPLETE => {}
-            SpellLogSpellEffect::WEAPON_DAMAGE_NOSCHOOL => {}
-            SpellLogSpellEffect::RESURRECT {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::ADD_EXTRA_ATTACKS {
-                target2,
-                unknown4,
-            } => {
-                // target2: Guid
-                target2.tokio_write(w).await?;
-
-                // unknown4: u32
-                w.write_all(&unknown4.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::DODGE => {}
-            SpellLogSpellEffect::EVADE => {}
-            SpellLogSpellEffect::PARRY => {}
-            SpellLogSpellEffect::BLOCK => {}
-            SpellLogSpellEffect::CREATE_ITEM {
-                spell_effect_item_type,
-            } => {
-                // spell_effect_item_type: u32
-                w.write_all(&spell_effect_item_type.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::WEAPON => {}
-            SpellLogSpellEffect::DEFENSE => {}
-            SpellLogSpellEffect::PERSISTENT_AREA_AURA => {}
-            SpellLogSpellEffect::SUMMON => {}
-            SpellLogSpellEffect::LEAP => {}
-            SpellLogSpellEffect::ENERGIZE => {}
-            SpellLogSpellEffect::WEAPON_PERCENT_DAMAGE => {}
-            SpellLogSpellEffect::TRIGGER_MISSILE => {}
-            SpellLogSpellEffect::OPEN_LOCK {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::SUMMON_CHANGE_ITEM => {}
-            SpellLogSpellEffect::APPLY_AREA_AURA_PARTY => {}
-            SpellLogSpellEffect::LEARN_SPELL => {}
-            SpellLogSpellEffect::SPELL_DEFENSE => {}
-            SpellLogSpellEffect::DISPEL {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::LANGUAGE => {}
-            SpellLogSpellEffect::DUAL_WIELD => {}
-            SpellLogSpellEffect::SUMMON_WILD => {}
-            SpellLogSpellEffect::SUMMON_GUARDIAN => {}
-            SpellLogSpellEffect::TELEPORT_UNITS_FACE_CASTER => {}
-            SpellLogSpellEffect::SKILL_STEP => {}
-            SpellLogSpellEffect::ADD_HONOR => {}
-            SpellLogSpellEffect::SPAWN => {}
-            SpellLogSpellEffect::TRADE_SKILL => {}
-            SpellLogSpellEffect::STEALTH => {}
-            SpellLogSpellEffect::DETECT => {}
-            SpellLogSpellEffect::TRANS_DOOR => {}
-            SpellLogSpellEffect::FORCE_CRITICAL_HIT => {}
-            SpellLogSpellEffect::GUARANTEE_HIT => {}
-            SpellLogSpellEffect::ENCHANT_ITEM => {}
-            SpellLogSpellEffect::ENCHANT_ITEM_TEMPORARY => {}
-            SpellLogSpellEffect::TAMECREATURE => {}
-            SpellLogSpellEffect::SUMMON_PET => {}
-            SpellLogSpellEffect::LEARN_PET_SPELL => {}
-            SpellLogSpellEffect::WEAPON_DAMAGE => {}
-            SpellLogSpellEffect::OPEN_LOCK_ITEM {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::PROFICIENCY => {}
-            SpellLogSpellEffect::SEND_EVENT => {}
-            SpellLogSpellEffect::POWER_BURN => {}
-            SpellLogSpellEffect::THREAT {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::TRIGGER_SPELL => {}
-            SpellLogSpellEffect::HEALTH_FUNNEL => {}
-            SpellLogSpellEffect::POWER_FUNNEL => {}
-            SpellLogSpellEffect::HEAL_MAX_HEALTH => {}
-            SpellLogSpellEffect::INTERRUPT_CAST {
-                target3,
-                interrupted_spell,
-            } => {
-                // target3: Guid
-                target3.tokio_write(w).await?;
-
-                // interrupted_spell: u32
-                w.write_all(&interrupted_spell.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::DISTRACT {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::PULL => {}
-            SpellLogSpellEffect::PICKPOCKET => {}
-            SpellLogSpellEffect::ADD_FARSIGHT => {}
-            SpellLogSpellEffect::SUMMON_POSSESSED => {}
-            SpellLogSpellEffect::SUMMON_TOTEM => {}
-            SpellLogSpellEffect::HEAL_MECHANICAL => {}
-            SpellLogSpellEffect::SUMMON_OBJECT_WILD => {}
-            SpellLogSpellEffect::SCRIPT_EFFECT => {}
-            SpellLogSpellEffect::ATTACK => {}
-            SpellLogSpellEffect::SANCTUARY {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::ADD_COMBO_POINTS => {}
-            SpellLogSpellEffect::CREATE_HOUSE => {}
-            SpellLogSpellEffect::BIND_SIGHT => {}
-            SpellLogSpellEffect::DUEL => {}
-            SpellLogSpellEffect::STUCK => {}
-            SpellLogSpellEffect::SUMMON_PLAYER => {}
-            SpellLogSpellEffect::ACTIVATE_OBJECT => {}
-            SpellLogSpellEffect::SUMMON_TOTEM_SLOT1 => {}
-            SpellLogSpellEffect::SUMMON_TOTEM_SLOT2 => {}
-            SpellLogSpellEffect::SUMMON_TOTEM_SLOT3 => {}
-            SpellLogSpellEffect::SUMMON_TOTEM_SLOT4 => {}
-            SpellLogSpellEffect::THREAT_ALL {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::ENCHANT_HELD_ITEM => {}
-            SpellLogSpellEffect::SUMMON_PHANTASM => {}
-            SpellLogSpellEffect::SELF_RESURRECT => {}
-            SpellLogSpellEffect::SKINNING => {}
-            SpellLogSpellEffect::CHARGE => {}
-            SpellLogSpellEffect::SUMMON_CRITTER => {}
-            SpellLogSpellEffect::KNOCK_BACK => {}
-            SpellLogSpellEffect::DISENCHANT => {}
-            SpellLogSpellEffect::INEBRIATE => {}
-            SpellLogSpellEffect::FEED_PET {
-                item_target_entry,
-            } => {
-                // item_target_entry: u32
-                w.write_all(&item_target_entry.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::DISMISS_PET {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::REPUTATION => {}
-            SpellLogSpellEffect::SUMMON_OBJECT_SLOT1 => {}
-            SpellLogSpellEffect::SUMMON_OBJECT_SLOT2 => {}
-            SpellLogSpellEffect::SUMMON_OBJECT_SLOT3 => {}
-            SpellLogSpellEffect::SUMMON_OBJECT_SLOT4 => {}
-            SpellLogSpellEffect::DISPEL_MECHANIC {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::SUMMON_DEAD_PET => {}
-            SpellLogSpellEffect::DESTROY_ALL_TOTEMS => {}
-            SpellLogSpellEffect::DURABILITY_DAMAGE {
-                target4,
-                unknown5,
-                unknown6,
-            } => {
-                // target4: Guid
-                target4.tokio_write(w).await?;
-
-                // unknown5: u32
-                w.write_all(&unknown5.to_le_bytes()).await?;
-
-                // unknown6: u32
-                w.write_all(&unknown6.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::SUMMON_DEMON => {}
-            SpellLogSpellEffect::RESURRECT_NEW {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::ATTACK_ME {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::DURABILITY_DAMAGE_PCT => {}
-            SpellLogSpellEffect::SKIN_PLAYER_CORPSE {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::SPIRIT_HEAL => {}
-            SpellLogSpellEffect::SKILL => {}
-            SpellLogSpellEffect::APPLY_AREA_AURA_PET => {}
-            SpellLogSpellEffect::TELEPORT_GRAVEYARD => {}
-            SpellLogSpellEffect::NORMALIZED_WEAPON_DMG => {}
-            SpellLogSpellEffect::UNKNOWN122 => {}
-            SpellLogSpellEffect::SEND_TAXI => {}
-            SpellLogSpellEffect::PLAYER_PULL => {}
-            SpellLogSpellEffect::MODIFY_THREAT_PERCENT {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::UNKNOWN126 {
-                target5,
-            } => {
-                // target5: Guid
-                target5.tokio_write(w).await?;
-
-            }
-            SpellLogSpellEffect::UNKNOWN127 => {}
-        }
-
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // effect: SpellEffect
@@ -1605,308 +1616,319 @@ impl ReadableAndWritable for SpellLog {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // effect: SpellEffect
-        self.effect.astd_write(w).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // effect: SpellEffect
+            self.effect.astd_write(w).await?;
 
-        // amount_of_logs: u32
-        w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes()).await?;
+            // amount_of_logs: u32
+            w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes()).await?;
 
-        match &self.effect {
-            SpellLogSpellEffect::NONE => {}
-            SpellLogSpellEffect::INSTAKILL {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
+            match &self.effect {
+                SpellLogSpellEffect::NONE => {}
+                SpellLogSpellEffect::INSTAKILL {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
 
+                }
+                SpellLogSpellEffect::SCHOOL_DAMAGE => {}
+                SpellLogSpellEffect::DUMMY => {}
+                SpellLogSpellEffect::PORTAL_TELEPORT => {}
+                SpellLogSpellEffect::TELEPORT_UNITS => {}
+                SpellLogSpellEffect::APPLY_AURA => {}
+                SpellLogSpellEffect::ENVIRONMENTAL_DAMAGE => {}
+                SpellLogSpellEffect::POWER_DRAIN {
+                    target1,
+                    unknown1,
+                    unknown2,
+                    unknown3,
+                } => {
+                    // target1: Guid
+                    target1.astd_write(w).await?;
+
+                    // unknown1: u32
+                    w.write_all(&unknown1.to_le_bytes()).await?;
+
+                    // unknown2: u32
+                    w.write_all(&unknown2.to_le_bytes()).await?;
+
+                    // unknown3: f32
+                    w.write_all(&unknown3.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::HEALTH_LEECH => {}
+                SpellLogSpellEffect::HEAL => {}
+                SpellLogSpellEffect::BIND => {}
+                SpellLogSpellEffect::PORTAL => {}
+                SpellLogSpellEffect::RITUAL_BASE => {}
+                SpellLogSpellEffect::RITUAL_SPECIALIZE => {}
+                SpellLogSpellEffect::RITUAL_ACTIVATE_PORTAL => {}
+                SpellLogSpellEffect::QUEST_COMPLETE => {}
+                SpellLogSpellEffect::WEAPON_DAMAGE_NOSCHOOL => {}
+                SpellLogSpellEffect::RESURRECT {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::ADD_EXTRA_ATTACKS {
+                    target2,
+                    unknown4,
+                } => {
+                    // target2: Guid
+                    target2.astd_write(w).await?;
+
+                    // unknown4: u32
+                    w.write_all(&unknown4.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::DODGE => {}
+                SpellLogSpellEffect::EVADE => {}
+                SpellLogSpellEffect::PARRY => {}
+                SpellLogSpellEffect::BLOCK => {}
+                SpellLogSpellEffect::CREATE_ITEM {
+                    spell_effect_item_type,
+                } => {
+                    // spell_effect_item_type: u32
+                    w.write_all(&spell_effect_item_type.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::WEAPON => {}
+                SpellLogSpellEffect::DEFENSE => {}
+                SpellLogSpellEffect::PERSISTENT_AREA_AURA => {}
+                SpellLogSpellEffect::SUMMON => {}
+                SpellLogSpellEffect::LEAP => {}
+                SpellLogSpellEffect::ENERGIZE => {}
+                SpellLogSpellEffect::WEAPON_PERCENT_DAMAGE => {}
+                SpellLogSpellEffect::TRIGGER_MISSILE => {}
+                SpellLogSpellEffect::OPEN_LOCK {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::SUMMON_CHANGE_ITEM => {}
+                SpellLogSpellEffect::APPLY_AREA_AURA_PARTY => {}
+                SpellLogSpellEffect::LEARN_SPELL => {}
+                SpellLogSpellEffect::SPELL_DEFENSE => {}
+                SpellLogSpellEffect::DISPEL {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::LANGUAGE => {}
+                SpellLogSpellEffect::DUAL_WIELD => {}
+                SpellLogSpellEffect::SUMMON_WILD => {}
+                SpellLogSpellEffect::SUMMON_GUARDIAN => {}
+                SpellLogSpellEffect::TELEPORT_UNITS_FACE_CASTER => {}
+                SpellLogSpellEffect::SKILL_STEP => {}
+                SpellLogSpellEffect::ADD_HONOR => {}
+                SpellLogSpellEffect::SPAWN => {}
+                SpellLogSpellEffect::TRADE_SKILL => {}
+                SpellLogSpellEffect::STEALTH => {}
+                SpellLogSpellEffect::DETECT => {}
+                SpellLogSpellEffect::TRANS_DOOR => {}
+                SpellLogSpellEffect::FORCE_CRITICAL_HIT => {}
+                SpellLogSpellEffect::GUARANTEE_HIT => {}
+                SpellLogSpellEffect::ENCHANT_ITEM => {}
+                SpellLogSpellEffect::ENCHANT_ITEM_TEMPORARY => {}
+                SpellLogSpellEffect::TAMECREATURE => {}
+                SpellLogSpellEffect::SUMMON_PET => {}
+                SpellLogSpellEffect::LEARN_PET_SPELL => {}
+                SpellLogSpellEffect::WEAPON_DAMAGE => {}
+                SpellLogSpellEffect::OPEN_LOCK_ITEM {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::PROFICIENCY => {}
+                SpellLogSpellEffect::SEND_EVENT => {}
+                SpellLogSpellEffect::POWER_BURN => {}
+                SpellLogSpellEffect::THREAT {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::TRIGGER_SPELL => {}
+                SpellLogSpellEffect::HEALTH_FUNNEL => {}
+                SpellLogSpellEffect::POWER_FUNNEL => {}
+                SpellLogSpellEffect::HEAL_MAX_HEALTH => {}
+                SpellLogSpellEffect::INTERRUPT_CAST {
+                    target3,
+                    interrupted_spell,
+                } => {
+                    // target3: Guid
+                    target3.astd_write(w).await?;
+
+                    // interrupted_spell: u32
+                    w.write_all(&interrupted_spell.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::DISTRACT {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::PULL => {}
+                SpellLogSpellEffect::PICKPOCKET => {}
+                SpellLogSpellEffect::ADD_FARSIGHT => {}
+                SpellLogSpellEffect::SUMMON_POSSESSED => {}
+                SpellLogSpellEffect::SUMMON_TOTEM => {}
+                SpellLogSpellEffect::HEAL_MECHANICAL => {}
+                SpellLogSpellEffect::SUMMON_OBJECT_WILD => {}
+                SpellLogSpellEffect::SCRIPT_EFFECT => {}
+                SpellLogSpellEffect::ATTACK => {}
+                SpellLogSpellEffect::SANCTUARY {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::ADD_COMBO_POINTS => {}
+                SpellLogSpellEffect::CREATE_HOUSE => {}
+                SpellLogSpellEffect::BIND_SIGHT => {}
+                SpellLogSpellEffect::DUEL => {}
+                SpellLogSpellEffect::STUCK => {}
+                SpellLogSpellEffect::SUMMON_PLAYER => {}
+                SpellLogSpellEffect::ACTIVATE_OBJECT => {}
+                SpellLogSpellEffect::SUMMON_TOTEM_SLOT1 => {}
+                SpellLogSpellEffect::SUMMON_TOTEM_SLOT2 => {}
+                SpellLogSpellEffect::SUMMON_TOTEM_SLOT3 => {}
+                SpellLogSpellEffect::SUMMON_TOTEM_SLOT4 => {}
+                SpellLogSpellEffect::THREAT_ALL {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::ENCHANT_HELD_ITEM => {}
+                SpellLogSpellEffect::SUMMON_PHANTASM => {}
+                SpellLogSpellEffect::SELF_RESURRECT => {}
+                SpellLogSpellEffect::SKINNING => {}
+                SpellLogSpellEffect::CHARGE => {}
+                SpellLogSpellEffect::SUMMON_CRITTER => {}
+                SpellLogSpellEffect::KNOCK_BACK => {}
+                SpellLogSpellEffect::DISENCHANT => {}
+                SpellLogSpellEffect::INEBRIATE => {}
+                SpellLogSpellEffect::FEED_PET {
+                    item_target_entry,
+                } => {
+                    // item_target_entry: u32
+                    w.write_all(&item_target_entry.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::DISMISS_PET {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::REPUTATION => {}
+                SpellLogSpellEffect::SUMMON_OBJECT_SLOT1 => {}
+                SpellLogSpellEffect::SUMMON_OBJECT_SLOT2 => {}
+                SpellLogSpellEffect::SUMMON_OBJECT_SLOT3 => {}
+                SpellLogSpellEffect::SUMMON_OBJECT_SLOT4 => {}
+                SpellLogSpellEffect::DISPEL_MECHANIC {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::SUMMON_DEAD_PET => {}
+                SpellLogSpellEffect::DESTROY_ALL_TOTEMS => {}
+                SpellLogSpellEffect::DURABILITY_DAMAGE {
+                    target4,
+                    unknown5,
+                    unknown6,
+                } => {
+                    // target4: Guid
+                    target4.astd_write(w).await?;
+
+                    // unknown5: u32
+                    w.write_all(&unknown5.to_le_bytes()).await?;
+
+                    // unknown6: u32
+                    w.write_all(&unknown6.to_le_bytes()).await?;
+
+                }
+                SpellLogSpellEffect::SUMMON_DEMON => {}
+                SpellLogSpellEffect::RESURRECT_NEW {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::ATTACK_ME {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::DURABILITY_DAMAGE_PCT => {}
+                SpellLogSpellEffect::SKIN_PLAYER_CORPSE {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::SPIRIT_HEAL => {}
+                SpellLogSpellEffect::SKILL => {}
+                SpellLogSpellEffect::APPLY_AREA_AURA_PET => {}
+                SpellLogSpellEffect::TELEPORT_GRAVEYARD => {}
+                SpellLogSpellEffect::NORMALIZED_WEAPON_DMG => {}
+                SpellLogSpellEffect::UNKNOWN122 => {}
+                SpellLogSpellEffect::SEND_TAXI => {}
+                SpellLogSpellEffect::PLAYER_PULL => {}
+                SpellLogSpellEffect::MODIFY_THREAT_PERCENT {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::UNKNOWN126 {
+                    target5,
+                } => {
+                    // target5: Guid
+                    target5.astd_write(w).await?;
+
+                }
+                SpellLogSpellEffect::UNKNOWN127 => {}
             }
-            SpellLogSpellEffect::SCHOOL_DAMAGE => {}
-            SpellLogSpellEffect::DUMMY => {}
-            SpellLogSpellEffect::PORTAL_TELEPORT => {}
-            SpellLogSpellEffect::TELEPORT_UNITS => {}
-            SpellLogSpellEffect::APPLY_AURA => {}
-            SpellLogSpellEffect::ENVIRONMENTAL_DAMAGE => {}
-            SpellLogSpellEffect::POWER_DRAIN {
-                target1,
-                unknown1,
-                unknown2,
-                unknown3,
-            } => {
-                // target1: Guid
-                target1.astd_write(w).await?;
 
-                // unknown1: u32
-                w.write_all(&unknown1.to_le_bytes()).await?;
-
-                // unknown2: u32
-                w.write_all(&unknown2.to_le_bytes()).await?;
-
-                // unknown3: f32
-                w.write_all(&unknown3.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::HEALTH_LEECH => {}
-            SpellLogSpellEffect::HEAL => {}
-            SpellLogSpellEffect::BIND => {}
-            SpellLogSpellEffect::PORTAL => {}
-            SpellLogSpellEffect::RITUAL_BASE => {}
-            SpellLogSpellEffect::RITUAL_SPECIALIZE => {}
-            SpellLogSpellEffect::RITUAL_ACTIVATE_PORTAL => {}
-            SpellLogSpellEffect::QUEST_COMPLETE => {}
-            SpellLogSpellEffect::WEAPON_DAMAGE_NOSCHOOL => {}
-            SpellLogSpellEffect::RESURRECT {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::ADD_EXTRA_ATTACKS {
-                target2,
-                unknown4,
-            } => {
-                // target2: Guid
-                target2.astd_write(w).await?;
-
-                // unknown4: u32
-                w.write_all(&unknown4.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::DODGE => {}
-            SpellLogSpellEffect::EVADE => {}
-            SpellLogSpellEffect::PARRY => {}
-            SpellLogSpellEffect::BLOCK => {}
-            SpellLogSpellEffect::CREATE_ITEM {
-                spell_effect_item_type,
-            } => {
-                // spell_effect_item_type: u32
-                w.write_all(&spell_effect_item_type.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::WEAPON => {}
-            SpellLogSpellEffect::DEFENSE => {}
-            SpellLogSpellEffect::PERSISTENT_AREA_AURA => {}
-            SpellLogSpellEffect::SUMMON => {}
-            SpellLogSpellEffect::LEAP => {}
-            SpellLogSpellEffect::ENERGIZE => {}
-            SpellLogSpellEffect::WEAPON_PERCENT_DAMAGE => {}
-            SpellLogSpellEffect::TRIGGER_MISSILE => {}
-            SpellLogSpellEffect::OPEN_LOCK {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::SUMMON_CHANGE_ITEM => {}
-            SpellLogSpellEffect::APPLY_AREA_AURA_PARTY => {}
-            SpellLogSpellEffect::LEARN_SPELL => {}
-            SpellLogSpellEffect::SPELL_DEFENSE => {}
-            SpellLogSpellEffect::DISPEL {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::LANGUAGE => {}
-            SpellLogSpellEffect::DUAL_WIELD => {}
-            SpellLogSpellEffect::SUMMON_WILD => {}
-            SpellLogSpellEffect::SUMMON_GUARDIAN => {}
-            SpellLogSpellEffect::TELEPORT_UNITS_FACE_CASTER => {}
-            SpellLogSpellEffect::SKILL_STEP => {}
-            SpellLogSpellEffect::ADD_HONOR => {}
-            SpellLogSpellEffect::SPAWN => {}
-            SpellLogSpellEffect::TRADE_SKILL => {}
-            SpellLogSpellEffect::STEALTH => {}
-            SpellLogSpellEffect::DETECT => {}
-            SpellLogSpellEffect::TRANS_DOOR => {}
-            SpellLogSpellEffect::FORCE_CRITICAL_HIT => {}
-            SpellLogSpellEffect::GUARANTEE_HIT => {}
-            SpellLogSpellEffect::ENCHANT_ITEM => {}
-            SpellLogSpellEffect::ENCHANT_ITEM_TEMPORARY => {}
-            SpellLogSpellEffect::TAMECREATURE => {}
-            SpellLogSpellEffect::SUMMON_PET => {}
-            SpellLogSpellEffect::LEARN_PET_SPELL => {}
-            SpellLogSpellEffect::WEAPON_DAMAGE => {}
-            SpellLogSpellEffect::OPEN_LOCK_ITEM {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::PROFICIENCY => {}
-            SpellLogSpellEffect::SEND_EVENT => {}
-            SpellLogSpellEffect::POWER_BURN => {}
-            SpellLogSpellEffect::THREAT {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::TRIGGER_SPELL => {}
-            SpellLogSpellEffect::HEALTH_FUNNEL => {}
-            SpellLogSpellEffect::POWER_FUNNEL => {}
-            SpellLogSpellEffect::HEAL_MAX_HEALTH => {}
-            SpellLogSpellEffect::INTERRUPT_CAST {
-                target3,
-                interrupted_spell,
-            } => {
-                // target3: Guid
-                target3.astd_write(w).await?;
-
-                // interrupted_spell: u32
-                w.write_all(&interrupted_spell.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::DISTRACT {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::PULL => {}
-            SpellLogSpellEffect::PICKPOCKET => {}
-            SpellLogSpellEffect::ADD_FARSIGHT => {}
-            SpellLogSpellEffect::SUMMON_POSSESSED => {}
-            SpellLogSpellEffect::SUMMON_TOTEM => {}
-            SpellLogSpellEffect::HEAL_MECHANICAL => {}
-            SpellLogSpellEffect::SUMMON_OBJECT_WILD => {}
-            SpellLogSpellEffect::SCRIPT_EFFECT => {}
-            SpellLogSpellEffect::ATTACK => {}
-            SpellLogSpellEffect::SANCTUARY {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::ADD_COMBO_POINTS => {}
-            SpellLogSpellEffect::CREATE_HOUSE => {}
-            SpellLogSpellEffect::BIND_SIGHT => {}
-            SpellLogSpellEffect::DUEL => {}
-            SpellLogSpellEffect::STUCK => {}
-            SpellLogSpellEffect::SUMMON_PLAYER => {}
-            SpellLogSpellEffect::ACTIVATE_OBJECT => {}
-            SpellLogSpellEffect::SUMMON_TOTEM_SLOT1 => {}
-            SpellLogSpellEffect::SUMMON_TOTEM_SLOT2 => {}
-            SpellLogSpellEffect::SUMMON_TOTEM_SLOT3 => {}
-            SpellLogSpellEffect::SUMMON_TOTEM_SLOT4 => {}
-            SpellLogSpellEffect::THREAT_ALL {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::ENCHANT_HELD_ITEM => {}
-            SpellLogSpellEffect::SUMMON_PHANTASM => {}
-            SpellLogSpellEffect::SELF_RESURRECT => {}
-            SpellLogSpellEffect::SKINNING => {}
-            SpellLogSpellEffect::CHARGE => {}
-            SpellLogSpellEffect::SUMMON_CRITTER => {}
-            SpellLogSpellEffect::KNOCK_BACK => {}
-            SpellLogSpellEffect::DISENCHANT => {}
-            SpellLogSpellEffect::INEBRIATE => {}
-            SpellLogSpellEffect::FEED_PET {
-                item_target_entry,
-            } => {
-                // item_target_entry: u32
-                w.write_all(&item_target_entry.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::DISMISS_PET {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::REPUTATION => {}
-            SpellLogSpellEffect::SUMMON_OBJECT_SLOT1 => {}
-            SpellLogSpellEffect::SUMMON_OBJECT_SLOT2 => {}
-            SpellLogSpellEffect::SUMMON_OBJECT_SLOT3 => {}
-            SpellLogSpellEffect::SUMMON_OBJECT_SLOT4 => {}
-            SpellLogSpellEffect::DISPEL_MECHANIC {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::SUMMON_DEAD_PET => {}
-            SpellLogSpellEffect::DESTROY_ALL_TOTEMS => {}
-            SpellLogSpellEffect::DURABILITY_DAMAGE {
-                target4,
-                unknown5,
-                unknown6,
-            } => {
-                // target4: Guid
-                target4.astd_write(w).await?;
-
-                // unknown5: u32
-                w.write_all(&unknown5.to_le_bytes()).await?;
-
-                // unknown6: u32
-                w.write_all(&unknown6.to_le_bytes()).await?;
-
-            }
-            SpellLogSpellEffect::SUMMON_DEMON => {}
-            SpellLogSpellEffect::RESURRECT_NEW {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::ATTACK_ME {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::DURABILITY_DAMAGE_PCT => {}
-            SpellLogSpellEffect::SKIN_PLAYER_CORPSE {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::SPIRIT_HEAL => {}
-            SpellLogSpellEffect::SKILL => {}
-            SpellLogSpellEffect::APPLY_AREA_AURA_PET => {}
-            SpellLogSpellEffect::TELEPORT_GRAVEYARD => {}
-            SpellLogSpellEffect::NORMALIZED_WEAPON_DMG => {}
-            SpellLogSpellEffect::UNKNOWN122 => {}
-            SpellLogSpellEffect::SEND_TAXI => {}
-            SpellLogSpellEffect::PLAYER_PULL => {}
-            SpellLogSpellEffect::MODIFY_THREAT_PERCENT {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::UNKNOWN126 {
-                target5,
-            } => {
-                // target5: Guid
-                target5.astd_write(w).await?;
-
-            }
-            SpellLogSpellEffect::UNKNOWN127 => {}
-        }
-
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for SpellLog {

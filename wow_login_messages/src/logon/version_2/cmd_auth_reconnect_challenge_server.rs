@@ -149,50 +149,61 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Server {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // opcode: u8
+            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
-        // result: LoginResult
-        self.result.tokio_write(w).await?;
+            // result: LoginResult
+            self.result.tokio_write(w).await?;
 
-        match &self.result {
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS {
-                challenge_data,
-                checksum_salt,
-            } => {
-                // challenge_data: u8[16]
-                for i in challenge_data.iter() {
-                    w.write_all(&i.to_le_bytes()).await?;
+            match &self.result {
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS {
+                    challenge_data,
+                    checksum_salt,
+                } => {
+                    // challenge_data: u8[16]
+                    for i in challenge_data.iter() {
+                        w.write_all(&i.to_le_bytes()).await?;
+                    }
+
+                    // checksum_salt: u8[16]
+                    for i in checksum_salt.iter() {
+                        w.write_all(&i.to_le_bytes()).await?;
+                    }
+
                 }
-
-                // checksum_salt: u8[16]
-                for i in checksum_salt.iter() {
-                    w.write_all(&i.to_le_bytes()).await?;
-                }
-
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_BANNED => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => {}
             }
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_BANNED => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => {}
-        }
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // result: LoginResult
@@ -235,50 +246,61 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Server {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // opcode: u8
+            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
-        // result: LoginResult
-        self.result.astd_write(w).await?;
+            // result: LoginResult
+            self.result.astd_write(w).await?;
 
-        match &self.result {
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS {
-                challenge_data,
-                checksum_salt,
-            } => {
-                // challenge_data: u8[16]
-                for i in challenge_data.iter() {
-                    w.write_all(&i.to_le_bytes()).await?;
+            match &self.result {
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS {
+                    challenge_data,
+                    checksum_salt,
+                } => {
+                    // challenge_data: u8[16]
+                    for i in challenge_data.iter() {
+                        w.write_all(&i.to_le_bytes()).await?;
+                    }
+
+                    // checksum_salt: u8[16]
+                    for i in checksum_salt.iter() {
+                        w.write_all(&i.to_le_bytes()).await?;
+                    }
+
                 }
-
-                // checksum_salt: u8[16]
-                for i in checksum_salt.iter() {
-                    w.write_all(&i.to_le_bytes()).await?;
-                }
-
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_BANNED => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => {}
+                CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => {}
             }
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_BANNED => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => {}
-            CMD_AUTH_RECONNECT_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => {}
-        }
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for CMD_AUTH_RECONNECT_CHALLENGE_Server {

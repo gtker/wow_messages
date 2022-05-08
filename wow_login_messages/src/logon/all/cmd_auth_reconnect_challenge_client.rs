@@ -177,47 +177,58 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // opcode: u8
+            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
-        // protocol_version: u8
-        w.write_all(&self.protocol_version.to_le_bytes()).await?;
+            // protocol_version: u8
+            w.write_all(&self.protocol_version.to_le_bytes()).await?;
 
-        // size: u16
-        w.write_all(&((self.size() - 3) as u16).to_le_bytes()).await?;
+            // size: u16
+            w.write_all(&((self.size() - 3) as u16).to_le_bytes()).await?;
 
-        // game_name: u32
-        w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes()).await?;
+            // game_name: u32
+            w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes()).await?;
 
-        // version: Version
-        self.version.tokio_write(w).await?;
+            // version: Version
+            self.version.tokio_write(w).await?;
 
-        // platform: Platform
-        self.platform.tokio_write(w).await?;
+            // platform: Platform
+            self.platform.tokio_write(w).await?;
 
-        // os: Os
-        self.os.tokio_write(w).await?;
+            // os: Os
+            self.os.tokio_write(w).await?;
 
-        // locale: Locale
-        self.locale.tokio_write(w).await?;
+            // locale: Locale
+            self.locale.tokio_write(w).await?;
 
-        // utc_timezone_offset: u32
-        w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;
+            // utc_timezone_offset: u32
+            w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;
 
-        // client_ip_address: u32_be
-        w.write_all(&self.client_ip_address.to_be_bytes()).await?;
+            // client_ip_address: u32_be
+            w.write_all(&self.client_ip_address.to_be_bytes()).await?;
 
-        // account_name_length: u8
-        w.write_all(&(self.account_name.len() as u8).to_le_bytes()).await?;
+            // account_name_length: u8
+            w.write_all(&(self.account_name.len() as u8).to_le_bytes()).await?;
 
-        // account_name: String[account_name_length]
-        w.write_all(self.account_name.as_bytes()).await?;
+            // account_name: String[account_name_length]
+            w.write_all(self.account_name.as_bytes()).await?;
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // protocol_version: u8
@@ -268,47 +279,58 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // opcode: u8
+            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
-        // protocol_version: u8
-        w.write_all(&self.protocol_version.to_le_bytes()).await?;
+            // protocol_version: u8
+            w.write_all(&self.protocol_version.to_le_bytes()).await?;
 
-        // size: u16
-        w.write_all(&((self.size() - 3) as u16).to_le_bytes()).await?;
+            // size: u16
+            w.write_all(&((self.size() - 3) as u16).to_le_bytes()).await?;
 
-        // game_name: u32
-        w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes()).await?;
+            // game_name: u32
+            w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes()).await?;
 
-        // version: Version
-        self.version.astd_write(w).await?;
+            // version: Version
+            self.version.astd_write(w).await?;
 
-        // platform: Platform
-        self.platform.astd_write(w).await?;
+            // platform: Platform
+            self.platform.astd_write(w).await?;
 
-        // os: Os
-        self.os.astd_write(w).await?;
+            // os: Os
+            self.os.astd_write(w).await?;
 
-        // locale: Locale
-        self.locale.astd_write(w).await?;
+            // locale: Locale
+            self.locale.astd_write(w).await?;
 
-        // utc_timezone_offset: u32
-        w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;
+            // utc_timezone_offset: u32
+            w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;
 
-        // client_ip_address: u32_be
-        w.write_all(&self.client_ip_address.to_be_bytes()).await?;
+            // client_ip_address: u32_be
+            w.write_all(&self.client_ip_address.to_be_bytes()).await?;
 
-        // account_name_length: u8
-        w.write_all(&(self.account_name.len() as u8).to_le_bytes()).await?;
+            // account_name_length: u8
+            w.write_all(&(self.account_name.len() as u8).to_le_bytes()).await?;
 
-        // account_name: String[account_name_length]
-        w.write_all(self.account_name.as_bytes()).await?;
+            // account_name: String[account_name_length]
+            w.write_all(self.account_name.as_bytes()).await?;
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for CMD_AUTH_RECONNECT_CHALLENGE_Client {

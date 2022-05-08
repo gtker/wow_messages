@@ -368,102 +368,113 @@ impl ReadableAndWritable for Mail {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // message_id: u32
-        w.write_all(&self.message_id.to_le_bytes()).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // message_id: u32
+            w.write_all(&self.message_id.to_le_bytes()).await?;
 
-        // message_type: MailType
-        self.message_type.tokio_write(w).await?;
+            // message_type: MailType
+            self.message_type.tokio_write(w).await?;
 
-        match &self.message_type {
-            MailMailType::NORMAL {
-                sender,
-            } => {
-                // sender: Guid
-                sender.tokio_write(w).await?;
+            match &self.message_type {
+                MailMailType::NORMAL {
+                    sender,
+                } => {
+                    // sender: Guid
+                    sender.tokio_write(w).await?;
 
+                }
+                MailMailType::AUCTION {
+                    auction_id,
+                } => {
+                    // auction_id: u32
+                    w.write_all(&auction_id.to_le_bytes()).await?;
+
+                }
+                MailMailType::CREATURE {
+                    sender_id,
+                } => {
+                    // sender_id: u32
+                    w.write_all(&sender_id.to_le_bytes()).await?;
+
+                }
+                MailMailType::GAMEOBJECT {
+                    sender_id,
+                } => {
+                    // sender_id: u32
+                    w.write_all(&sender_id.to_le_bytes()).await?;
+
+                }
+                MailMailType::ITEM => {}
             }
-            MailMailType::AUCTION {
-                auction_id,
-            } => {
-                // auction_id: u32
-                w.write_all(&auction_id.to_le_bytes()).await?;
 
-            }
-            MailMailType::CREATURE {
-                sender_id,
-            } => {
-                // sender_id: u32
-                w.write_all(&sender_id.to_le_bytes()).await?;
+            // subject: CString
+            w.write_all(self.subject.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-            }
-            MailMailType::GAMEOBJECT {
-                sender_id,
-            } => {
-                // sender_id: u32
-                w.write_all(&sender_id.to_le_bytes()).await?;
+            // item_text_id: u32
+            w.write_all(&self.item_text_id.to_le_bytes()).await?;
 
-            }
-            MailMailType::ITEM => {}
-        }
+            // unknown1: u32
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
 
-        // subject: CString
-        w.write_all(self.subject.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // stationery: u32
+            w.write_all(&self.stationery.to_le_bytes()).await?;
 
-        // item_text_id: u32
-        w.write_all(&self.item_text_id.to_le_bytes()).await?;
+            // item_id: u32
+            w.write_all(&self.item_id.to_le_bytes()).await?;
 
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+            // item_enchant_id: u32
+            w.write_all(&self.item_enchant_id.to_le_bytes()).await?;
 
-        // stationery: u32
-        w.write_all(&self.stationery.to_le_bytes()).await?;
+            // item_random_property_id: u32
+            w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes()).await?;
+            // item_suffix_factor: u32
+            w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
 
-        // item_enchant_id: u32
-        w.write_all(&self.item_enchant_id.to_le_bytes()).await?;
+            // item_stack_size: u8
+            w.write_all(&self.item_stack_size.to_le_bytes()).await?;
 
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
+            // item_spell_charges: u32
+            w.write_all(&self.item_spell_charges.to_le_bytes()).await?;
 
-        // item_suffix_factor: u32
-        w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
+            // max_durability: u32
+            w.write_all(&self.max_durability.to_le_bytes()).await?;
 
-        // item_stack_size: u8
-        w.write_all(&self.item_stack_size.to_le_bytes()).await?;
+            // durability: u32
+            w.write_all(&self.durability.to_le_bytes()).await?;
 
-        // item_spell_charges: u32
-        w.write_all(&self.item_spell_charges.to_le_bytes()).await?;
+            // money: u32
+            w.write_all(&self.money.to_le_bytes()).await?;
 
-        // max_durability: u32
-        w.write_all(&self.max_durability.to_le_bytes()).await?;
+            // cash_on_delivery_amount: u32
+            w.write_all(&self.cash_on_delivery_amount.to_le_bytes()).await?;
 
-        // durability: u32
-        w.write_all(&self.durability.to_le_bytes()).await?;
+            // checked_timestamp: u32
+            w.write_all(&self.checked_timestamp.to_le_bytes()).await?;
 
-        // money: u32
-        w.write_all(&self.money.to_le_bytes()).await?;
+            // expiration_time: f32
+            w.write_all(&self.expiration_time.to_le_bytes()).await?;
 
-        // cash_on_delivery_amount: u32
-        w.write_all(&self.cash_on_delivery_amount.to_le_bytes()).await?;
+            // mail_template_id: u32
+            w.write_all(&self.mail_template_id.to_le_bytes()).await?;
 
-        // checked_timestamp: u32
-        w.write_all(&self.checked_timestamp.to_le_bytes()).await?;
-
-        // expiration_time: f32
-        w.write_all(&self.expiration_time.to_le_bytes()).await?;
-
-        // mail_template_id: u32
-        w.write_all(&self.mail_template_id.to_le_bytes()).await?;
-
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // message_id: u32
@@ -582,102 +593,113 @@ impl ReadableAndWritable for Mail {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // message_id: u32
-        w.write_all(&self.message_id.to_le_bytes()).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // message_id: u32
+            w.write_all(&self.message_id.to_le_bytes()).await?;
 
-        // message_type: MailType
-        self.message_type.astd_write(w).await?;
+            // message_type: MailType
+            self.message_type.astd_write(w).await?;
 
-        match &self.message_type {
-            MailMailType::NORMAL {
-                sender,
-            } => {
-                // sender: Guid
-                sender.astd_write(w).await?;
+            match &self.message_type {
+                MailMailType::NORMAL {
+                    sender,
+                } => {
+                    // sender: Guid
+                    sender.astd_write(w).await?;
 
+                }
+                MailMailType::AUCTION {
+                    auction_id,
+                } => {
+                    // auction_id: u32
+                    w.write_all(&auction_id.to_le_bytes()).await?;
+
+                }
+                MailMailType::CREATURE {
+                    sender_id,
+                } => {
+                    // sender_id: u32
+                    w.write_all(&sender_id.to_le_bytes()).await?;
+
+                }
+                MailMailType::GAMEOBJECT {
+                    sender_id,
+                } => {
+                    // sender_id: u32
+                    w.write_all(&sender_id.to_le_bytes()).await?;
+
+                }
+                MailMailType::ITEM => {}
             }
-            MailMailType::AUCTION {
-                auction_id,
-            } => {
-                // auction_id: u32
-                w.write_all(&auction_id.to_le_bytes()).await?;
 
-            }
-            MailMailType::CREATURE {
-                sender_id,
-            } => {
-                // sender_id: u32
-                w.write_all(&sender_id.to_le_bytes()).await?;
+            // subject: CString
+            w.write_all(self.subject.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-            }
-            MailMailType::GAMEOBJECT {
-                sender_id,
-            } => {
-                // sender_id: u32
-                w.write_all(&sender_id.to_le_bytes()).await?;
+            // item_text_id: u32
+            w.write_all(&self.item_text_id.to_le_bytes()).await?;
 
-            }
-            MailMailType::ITEM => {}
-        }
+            // unknown1: u32
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
 
-        // subject: CString
-        w.write_all(self.subject.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // stationery: u32
+            w.write_all(&self.stationery.to_le_bytes()).await?;
 
-        // item_text_id: u32
-        w.write_all(&self.item_text_id.to_le_bytes()).await?;
+            // item_id: u32
+            w.write_all(&self.item_id.to_le_bytes()).await?;
 
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+            // item_enchant_id: u32
+            w.write_all(&self.item_enchant_id.to_le_bytes()).await?;
 
-        // stationery: u32
-        w.write_all(&self.stationery.to_le_bytes()).await?;
+            // item_random_property_id: u32
+            w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes()).await?;
+            // item_suffix_factor: u32
+            w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
 
-        // item_enchant_id: u32
-        w.write_all(&self.item_enchant_id.to_le_bytes()).await?;
+            // item_stack_size: u8
+            w.write_all(&self.item_stack_size.to_le_bytes()).await?;
 
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
+            // item_spell_charges: u32
+            w.write_all(&self.item_spell_charges.to_le_bytes()).await?;
 
-        // item_suffix_factor: u32
-        w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
+            // max_durability: u32
+            w.write_all(&self.max_durability.to_le_bytes()).await?;
 
-        // item_stack_size: u8
-        w.write_all(&self.item_stack_size.to_le_bytes()).await?;
+            // durability: u32
+            w.write_all(&self.durability.to_le_bytes()).await?;
 
-        // item_spell_charges: u32
-        w.write_all(&self.item_spell_charges.to_le_bytes()).await?;
+            // money: u32
+            w.write_all(&self.money.to_le_bytes()).await?;
 
-        // max_durability: u32
-        w.write_all(&self.max_durability.to_le_bytes()).await?;
+            // cash_on_delivery_amount: u32
+            w.write_all(&self.cash_on_delivery_amount.to_le_bytes()).await?;
 
-        // durability: u32
-        w.write_all(&self.durability.to_le_bytes()).await?;
+            // checked_timestamp: u32
+            w.write_all(&self.checked_timestamp.to_le_bytes()).await?;
 
-        // money: u32
-        w.write_all(&self.money.to_le_bytes()).await?;
+            // expiration_time: f32
+            w.write_all(&self.expiration_time.to_le_bytes()).await?;
 
-        // cash_on_delivery_amount: u32
-        w.write_all(&self.cash_on_delivery_amount.to_le_bytes()).await?;
+            // mail_template_id: u32
+            w.write_all(&self.mail_template_id.to_le_bytes()).await?;
 
-        // checked_timestamp: u32
-        w.write_all(&self.checked_timestamp.to_le_bytes()).await?;
-
-        // expiration_time: f32
-        w.write_all(&self.expiration_time.to_le_bytes()).await?;
-
-        // mail_template_id: u32
-        w.write_all(&self.mail_template_id.to_le_bytes()).await?;
-
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for Mail {

@@ -188,46 +188,57 @@ impl ReadableAndWritable for Realm {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // realm_type: u8
-        w.write_all(&self.realm_type.to_le_bytes()).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // realm_type: u8
+            w.write_all(&self.realm_type.to_le_bytes()).await?;
 
-        // locked: u8
-        w.write_all(&self.locked.to_le_bytes()).await?;
+            // locked: u8
+            w.write_all(&self.locked.to_le_bytes()).await?;
 
-        // flag: RealmFlag
-        self.flag.tokio_write(w).await?;
+            // flag: RealmFlag
+            self.flag.tokio_write(w).await?;
 
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // name: CString
+            w.write_all(self.name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // address: CString
-        w.write_all(self.address.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // address: CString
+            w.write_all(self.address.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // population: Population
-        self.population.tokio_write(w).await?;
+            // population: Population
+            self.population.tokio_write(w).await?;
 
-        // number_of_characters_on_realm: u8
-        w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
+            // number_of_characters_on_realm: u8
+            w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
 
-        // category: RealmCategory
-        self.category.tokio_write(w).await?;
+            // category: RealmCategory
+            self.category.tokio_write(w).await?;
 
-        // realm_id: u8
-        w.write_all(&self.realm_id.to_le_bytes()).await?;
+            // realm_id: u8
+            w.write_all(&self.realm_id.to_le_bytes()).await?;
 
-        if let Some(s) = &self.flag.specify_build {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.flag.specify_build {
+                s.tokio_write(w).await?;
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // realm_type: u8
@@ -288,46 +299,57 @@ impl ReadableAndWritable for Realm {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // realm_type: u8
-        w.write_all(&self.realm_type.to_le_bytes()).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // realm_type: u8
+            w.write_all(&self.realm_type.to_le_bytes()).await?;
 
-        // locked: u8
-        w.write_all(&self.locked.to_le_bytes()).await?;
+            // locked: u8
+            w.write_all(&self.locked.to_le_bytes()).await?;
 
-        // flag: RealmFlag
-        self.flag.astd_write(w).await?;
+            // flag: RealmFlag
+            self.flag.astd_write(w).await?;
 
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // name: CString
+            w.write_all(self.name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // address: CString
-        w.write_all(self.address.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // address: CString
+            w.write_all(self.address.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // population: Population
-        self.population.astd_write(w).await?;
+            // population: Population
+            self.population.astd_write(w).await?;
 
-        // number_of_characters_on_realm: u8
-        w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
+            // number_of_characters_on_realm: u8
+            w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
 
-        // category: RealmCategory
-        self.category.astd_write(w).await?;
+            // category: RealmCategory
+            self.category.astd_write(w).await?;
 
-        // realm_id: u8
-        w.write_all(&self.realm_id.to_le_bytes()).await?;
+            // realm_id: u8
+            w.write_all(&self.realm_id.to_le_bytes()).await?;
 
-        if let Some(s) = &self.flag.specify_build {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.flag.specify_build {
+                s.astd_write(w).await?;
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for Realm {

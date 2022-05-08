@@ -238,73 +238,84 @@ impl ReadableAndWritable for IfEdgeCases {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // t: TEnum
-        self.t.tokio_write(w).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // t: TEnum
+            self.t.tokio_write(w).await?;
 
-        match &self.t {
-            IfEdgeCasesTEnum::ZERO {
-                basic1,
-            } => {
-                // basic1: u8
-                w.write_all(&basic1.to_le_bytes()).await?;
+            match &self.t {
+                IfEdgeCasesTEnum::ZERO {
+                    basic1,
+                } => {
+                    // basic1: u8
+                    w.write_all(&basic1.to_le_bytes()).await?;
 
+                }
+                IfEdgeCasesTEnum::ONE {
+                    basic1,
+                } => {
+                    // basic1: u8
+                    w.write_all(&basic1.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::TWO {
+                    basic1,
+                } => {
+                    // basic1: u8
+                    w.write_all(&basic1.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::THREE {
+                    basic3,
+                } => {
+                    // basic3: u8
+                    w.write_all(&basic3.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::FOUR {
+                    basic3,
+                } => {
+                    // basic3: u8
+                    w.write_all(&basic3.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::FIVE {
+                    basic5,
+                } => {
+                    // basic5: u8
+                    w.write_all(&basic5.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::SIX {
+                    basic5,
+                } => {
+                    // basic5: u8
+                    w.write_all(&basic5.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::REST {
+                    rest,
+                } => {
+                    // rest: u8
+                    w.write_all(&rest.to_le_bytes()).await?;
+
+                }
             }
-            IfEdgeCasesTEnum::ONE {
-                basic1,
-            } => {
-                // basic1: u8
-                w.write_all(&basic1.to_le_bytes()).await?;
 
-            }
-            IfEdgeCasesTEnum::TWO {
-                basic1,
-            } => {
-                // basic1: u8
-                w.write_all(&basic1.to_le_bytes()).await?;
-
-            }
-            IfEdgeCasesTEnum::THREE {
-                basic3,
-            } => {
-                // basic3: u8
-                w.write_all(&basic3.to_le_bytes()).await?;
-
-            }
-            IfEdgeCasesTEnum::FOUR {
-                basic3,
-            } => {
-                // basic3: u8
-                w.write_all(&basic3.to_le_bytes()).await?;
-
-            }
-            IfEdgeCasesTEnum::FIVE {
-                basic5,
-            } => {
-                // basic5: u8
-                w.write_all(&basic5.to_le_bytes()).await?;
-
-            }
-            IfEdgeCasesTEnum::SIX {
-                basic5,
-            } => {
-                // basic5: u8
-                w.write_all(&basic5.to_le_bytes()).await?;
-
-            }
-            IfEdgeCasesTEnum::REST {
-                rest,
-            } => {
-                // rest: u8
-                w.write_all(&rest.to_le_bytes()).await?;
-
-            }
-        }
-
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // t: TEnum
@@ -382,73 +393,84 @@ impl ReadableAndWritable for IfEdgeCases {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // t: TEnum
-        self.t.astd_write(w).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // t: TEnum
+            self.t.astd_write(w).await?;
 
-        match &self.t {
-            IfEdgeCasesTEnum::ZERO {
-                basic1,
-            } => {
-                // basic1: u8
-                w.write_all(&basic1.to_le_bytes()).await?;
+            match &self.t {
+                IfEdgeCasesTEnum::ZERO {
+                    basic1,
+                } => {
+                    // basic1: u8
+                    w.write_all(&basic1.to_le_bytes()).await?;
 
+                }
+                IfEdgeCasesTEnum::ONE {
+                    basic1,
+                } => {
+                    // basic1: u8
+                    w.write_all(&basic1.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::TWO {
+                    basic1,
+                } => {
+                    // basic1: u8
+                    w.write_all(&basic1.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::THREE {
+                    basic3,
+                } => {
+                    // basic3: u8
+                    w.write_all(&basic3.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::FOUR {
+                    basic3,
+                } => {
+                    // basic3: u8
+                    w.write_all(&basic3.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::FIVE {
+                    basic5,
+                } => {
+                    // basic5: u8
+                    w.write_all(&basic5.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::SIX {
+                    basic5,
+                } => {
+                    // basic5: u8
+                    w.write_all(&basic5.to_le_bytes()).await?;
+
+                }
+                IfEdgeCasesTEnum::REST {
+                    rest,
+                } => {
+                    // rest: u8
+                    w.write_all(&rest.to_le_bytes()).await?;
+
+                }
             }
-            IfEdgeCasesTEnum::ONE {
-                basic1,
-            } => {
-                // basic1: u8
-                w.write_all(&basic1.to_le_bytes()).await?;
 
-            }
-            IfEdgeCasesTEnum::TWO {
-                basic1,
-            } => {
-                // basic1: u8
-                w.write_all(&basic1.to_le_bytes()).await?;
-
-            }
-            IfEdgeCasesTEnum::THREE {
-                basic3,
-            } => {
-                // basic3: u8
-                w.write_all(&basic3.to_le_bytes()).await?;
-
-            }
-            IfEdgeCasesTEnum::FOUR {
-                basic3,
-            } => {
-                // basic3: u8
-                w.write_all(&basic3.to_le_bytes()).await?;
-
-            }
-            IfEdgeCasesTEnum::FIVE {
-                basic5,
-            } => {
-                // basic5: u8
-                w.write_all(&basic5.to_le_bytes()).await?;
-
-            }
-            IfEdgeCasesTEnum::SIX {
-                basic5,
-            } => {
-                // basic5: u8
-                w.write_all(&basic5.to_le_bytes()).await?;
-
-            }
-            IfEdgeCasesTEnum::REST {
-                rest,
-            } => {
-                // rest: u8
-                w.write_all(&rest.to_le_bytes()).await?;
-
-            }
-        }
-
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl ConstantSized for IfEdgeCases {}

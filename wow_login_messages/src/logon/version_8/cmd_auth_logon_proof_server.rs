@@ -482,137 +482,148 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // opcode: u8
+            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
-        // login_result: LoginResult
-        self.login_result.tokio_write(w).await?;
+            // login_result: LoginResult
+            self.login_result.tokio_write(w).await?;
 
-        match &self.login_result {
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                server_proof,
-                account_flag,
-                hardware_survey_id,
-                unknown_flags,
-            } => {
-                // server_proof: u8[20]
-                for i in server_proof.iter() {
-                    w.write_all(&i.to_le_bytes()).await?;
+            match &self.login_result {
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+                    server_proof,
+                    account_flag,
+                    hardware_survey_id,
+                    unknown_flags,
+                } => {
+                    // server_proof: u8[20]
+                    for i in server_proof.iter() {
+                        w.write_all(&i.to_le_bytes()).await?;
+                    }
+
+                    // account_flag: AccountFlag
+                    account_flag.tokio_write(w).await?;
+
+                    // hardware_survey_id: u32
+                    w.write_all(&hardware_survey_id.to_le_bytes()).await?;
+
+                    // unknown_flags: u16
+                    w.write_all(&unknown_flags.to_le_bytes()).await?;
+
                 }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
 
-                // account_flag: AccountFlag
-                account_flag.tokio_write(w).await?;
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
 
-                // hardware_survey_id: u32
-                w.write_all(&hardware_survey_id.to_le_bytes()).await?;
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
 
-                // unknown_flags: u16
-                w.write_all(&unknown_flags.to_le_bytes()).await?;
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
 
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
 
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-        }
-
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // login_result: LoginResult
@@ -775,137 +786,148 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // opcode: u8
+            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
-        // login_result: LoginResult
-        self.login_result.astd_write(w).await?;
+            // login_result: LoginResult
+            self.login_result.astd_write(w).await?;
 
-        match &self.login_result {
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                server_proof,
-                account_flag,
-                hardware_survey_id,
-                unknown_flags,
-            } => {
-                // server_proof: u8[20]
-                for i in server_proof.iter() {
-                    w.write_all(&i.to_le_bytes()).await?;
+            match &self.login_result {
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+                    server_proof,
+                    account_flag,
+                    hardware_survey_id,
+                    unknown_flags,
+                } => {
+                    // server_proof: u8[20]
+                    for i in server_proof.iter() {
+                        w.write_all(&i.to_le_bytes()).await?;
+                    }
+
+                    // account_flag: AccountFlag
+                    account_flag.astd_write(w).await?;
+
+                    // hardware_survey_id: u32
+                    w.write_all(&hardware_survey_id.to_le_bytes()).await?;
+
+                    // unknown_flags: u16
+                    w.write_all(&unknown_flags.to_le_bytes()).await?;
+
                 }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
 
-                // account_flag: AccountFlag
-                account_flag.astd_write(w).await?;
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
 
-                // hardware_survey_id: u32
-                w.write_all(&hardware_survey_id.to_le_bytes()).await?;
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
 
-                // unknown_flags: u16
-                w.write_all(&unknown_flags.to_le_bytes()).await?;
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
 
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
+                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
+                } => {
+                    // padding: u16
+                    w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
+
+                }
             }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
 
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-            CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
-            } => {
-                // padding: u16
-                w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
-
-            }
-        }
-
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for CMD_AUTH_LOGON_PROOF_Server {

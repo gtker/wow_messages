@@ -62,19 +62,30 @@ impl ReadableAndWritable for ServerOpcodeMessage {
         }
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        match self {
-            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.tokio_write(w).await?,
-            Self::CMD_AUTH_LOGON_PROOF(e) => e.tokio_write(w).await?,
-            Self::CMD_REALM_LIST(e) => e.tokio_write(w).await?,
-            Self::CMD_XFER_INITIATE(e) => e.tokio_write(w).await?,
-            Self::CMD_XFER_DATA(e) => e.tokio_write(w).await?,
-        }
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            match self {
+                Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.tokio_write(w).await?,
+                Self::CMD_AUTH_LOGON_PROOF(e) => e.tokio_write(w).await?,
+                Self::CMD_REALM_LIST(e) => e.tokio_write(w).await?,
+                Self::CMD_XFER_INITIATE(e) => e.tokio_write(w).await?,
+                Self::CMD_XFER_DATA(e) => e.tokio_write(w).await?,
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let opcode = ServerOpcode::astd_read(r).await?;
@@ -87,19 +98,30 @@ impl ReadableAndWritable for ServerOpcodeMessage {
         }
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        match self {
-            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.astd_write(w).await?,
-            Self::CMD_AUTH_LOGON_PROOF(e) => e.astd_write(w).await?,
-            Self::CMD_REALM_LIST(e) => e.astd_write(w).await?,
-            Self::CMD_XFER_INITIATE(e) => e.astd_write(w).await?,
-            Self::CMD_XFER_DATA(e) => e.astd_write(w).await?,
-        }
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            match self {
+                Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.astd_write(w).await?,
+                Self::CMD_AUTH_LOGON_PROOF(e) => e.astd_write(w).await?,
+                Self::CMD_REALM_LIST(e) => e.astd_write(w).await?,
+                Self::CMD_XFER_INITIATE(e) => e.astd_write(w).await?,
+                Self::CMD_XFER_DATA(e) => e.astd_write(w).await?,
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 #[derive(Debug)]
@@ -226,12 +248,23 @@ impl ReadableAndWritable for ServerOpcode {
         }
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::tokio_write_u8_le(w, self.as_u8()).await?;
-        Ok(())
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            crate::util::tokio_write_u8_le(w, self.as_u8()).await?;
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let opcode = crate::util::astd_read_u8_le(r).await?;
@@ -246,12 +279,23 @@ impl ReadableAndWritable for ServerOpcode {
         }
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::astd_write_u8_le(w, self.as_u8()).await?;
-        Ok(())
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            crate::util::astd_write_u8_le(w, self.as_u8()).await?;
+            Ok(())
+        })
     }
-
 }
 
 impl From<&ServerOpcodeMessage> for ServerOpcode {
@@ -361,22 +405,33 @@ impl ReadableAndWritable for ClientOpcodeMessage {
         }
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        match self {
-            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.tokio_write(w).await?,
-            Self::CMD_AUTH_LOGON_PROOF(e) => e.tokio_write(w).await?,
-            Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.tokio_write(w).await?,
-            Self::CMD_SURVEY_RESULT(e) => e.tokio_write(w).await?,
-            Self::CMD_REALM_LIST(e) => e.tokio_write(w).await?,
-            Self::CMD_XFER_ACCEPT(e) => e.tokio_write(w).await?,
-            Self::CMD_XFER_RESUME(e) => e.tokio_write(w).await?,
-            Self::CMD_XFER_CANCEL(e) => e.tokio_write(w).await?,
-        }
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            match self {
+                Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.tokio_write(w).await?,
+                Self::CMD_AUTH_LOGON_PROOF(e) => e.tokio_write(w).await?,
+                Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.tokio_write(w).await?,
+                Self::CMD_SURVEY_RESULT(e) => e.tokio_write(w).await?,
+                Self::CMD_REALM_LIST(e) => e.tokio_write(w).await?,
+                Self::CMD_XFER_ACCEPT(e) => e.tokio_write(w).await?,
+                Self::CMD_XFER_RESUME(e) => e.tokio_write(w).await?,
+                Self::CMD_XFER_CANCEL(e) => e.tokio_write(w).await?,
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let opcode = ClientOpcode::astd_read(r).await?;
@@ -392,22 +447,33 @@ impl ReadableAndWritable for ClientOpcodeMessage {
         }
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        match self {
-            Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.astd_write(w).await?,
-            Self::CMD_AUTH_LOGON_PROOF(e) => e.astd_write(w).await?,
-            Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.astd_write(w).await?,
-            Self::CMD_SURVEY_RESULT(e) => e.astd_write(w).await?,
-            Self::CMD_REALM_LIST(e) => e.astd_write(w).await?,
-            Self::CMD_XFER_ACCEPT(e) => e.astd_write(w).await?,
-            Self::CMD_XFER_RESUME(e) => e.astd_write(w).await?,
-            Self::CMD_XFER_CANCEL(e) => e.astd_write(w).await?,
-        }
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            match self {
+                Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.astd_write(w).await?,
+                Self::CMD_AUTH_LOGON_PROOF(e) => e.astd_write(w).await?,
+                Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.astd_write(w).await?,
+                Self::CMD_SURVEY_RESULT(e) => e.astd_write(w).await?,
+                Self::CMD_REALM_LIST(e) => e.astd_write(w).await?,
+                Self::CMD_XFER_ACCEPT(e) => e.astd_write(w).await?,
+                Self::CMD_XFER_RESUME(e) => e.astd_write(w).await?,
+                Self::CMD_XFER_CANCEL(e) => e.astd_write(w).await?,
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 #[derive(Debug)]
@@ -546,12 +612,23 @@ impl ReadableAndWritable for ClientOpcode {
         }
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::tokio_write_u8_le(w, self.as_u8()).await?;
-        Ok(())
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            crate::util::tokio_write_u8_le(w, self.as_u8()).await?;
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         let opcode = crate::util::astd_read_u8_le(r).await?;
@@ -569,12 +646,23 @@ impl ReadableAndWritable for ClientOpcode {
         }
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::astd_write_u8_le(w, self.as_u8()).await?;
-        Ok(())
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            crate::util::astd_write_u8_le(w, self.as_u8()).await?;
+            Ok(())
+        })
     }
-
 }
 
 impl From<&ClientOpcodeMessage> for ClientOpcode {

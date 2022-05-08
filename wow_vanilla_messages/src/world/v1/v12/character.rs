@@ -353,90 +353,101 @@ impl ReadableAndWritable for Character {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        self.guid.tokio_write(w).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            self.guid.tokio_write(w).await?;
 
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // name: CString
+            w.write_all(self.name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // race: Race
-        self.race.tokio_write(w).await?;
+            // race: Race
+            self.race.tokio_write(w).await?;
 
-        // class: Class
-        self.class.tokio_write(w).await?;
+            // class: Class
+            self.class.tokio_write(w).await?;
 
-        // gender: Gender
-        self.gender.tokio_write(w).await?;
+            // gender: Gender
+            self.gender.tokio_write(w).await?;
 
-        // skin: u8
-        w.write_all(&self.skin.to_le_bytes()).await?;
+            // skin: u8
+            w.write_all(&self.skin.to_le_bytes()).await?;
 
-        // face: u8
-        w.write_all(&self.face.to_le_bytes()).await?;
+            // face: u8
+            w.write_all(&self.face.to_le_bytes()).await?;
 
-        // hairstyle: u8
-        w.write_all(&self.hairstyle.to_le_bytes()).await?;
+            // hairstyle: u8
+            w.write_all(&self.hairstyle.to_le_bytes()).await?;
 
-        // haircolor: u8
-        w.write_all(&self.haircolor.to_le_bytes()).await?;
+            // haircolor: u8
+            w.write_all(&self.haircolor.to_le_bytes()).await?;
 
-        // facialhair: u8
-        w.write_all(&self.facialhair.to_le_bytes()).await?;
+            // facialhair: u8
+            w.write_all(&self.facialhair.to_le_bytes()).await?;
 
-        // level: u8
-        w.write_all(&self.level.to_le_bytes()).await?;
+            // level: u8
+            w.write_all(&self.level.to_le_bytes()).await?;
 
-        // area: Area
-        self.area.tokio_write(w).await?;
+            // area: Area
+            self.area.tokio_write(w).await?;
 
-        // map: Map
-        self.map.tokio_write(w).await?;
+            // map: Map
+            self.map.tokio_write(w).await?;
 
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes()).await?;
+            // position_x: f32
+            w.write_all(&self.position_x.to_le_bytes()).await?;
 
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes()).await?;
+            // position_y: f32
+            w.write_all(&self.position_y.to_le_bytes()).await?;
 
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes()).await?;
+            // position_z: f32
+            w.write_all(&self.position_z.to_le_bytes()).await?;
 
-        // guild_id: u32
-        w.write_all(&self.guild_id.to_le_bytes()).await?;
+            // guild_id: u32
+            w.write_all(&self.guild_id.to_le_bytes()).await?;
 
-        // flags: CharacterFlags
-        self.flags.tokio_write(w).await?;
+            // flags: CharacterFlags
+            self.flags.tokio_write(w).await?;
 
-        // first_login: u8
-        w.write_all(&self.first_login.to_le_bytes()).await?;
+            // first_login: u8
+            w.write_all(&self.first_login.to_le_bytes()).await?;
 
-        // pet_display_id: u32
-        w.write_all(&self.pet_display_id.to_le_bytes()).await?;
+            // pet_display_id: u32
+            w.write_all(&self.pet_display_id.to_le_bytes()).await?;
 
-        // pet_level: u32
-        w.write_all(&self.pet_level.to_le_bytes()).await?;
+            // pet_level: u32
+            w.write_all(&self.pet_level.to_le_bytes()).await?;
 
-        // pet_familiy: u32
-        w.write_all(&self.pet_familiy.to_le_bytes()).await?;
+            // pet_familiy: u32
+            w.write_all(&self.pet_familiy.to_le_bytes()).await?;
 
-        // equipment: CharacterGear[19]
-        for i in self.equipment.iter() {
-            i.tokio_write(w).await?;
-        }
+            // equipment: CharacterGear[19]
+            for i in self.equipment.iter() {
+                i.tokio_write(w).await?;
+            }
 
-        // first_bag_display_id: u32
-        w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes()).await?;
+            // first_bag_display_id: u32
+            w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes()).await?;
 
-        // first_bag_inventory_id: u8
-        w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes()).await?;
+            // first_bag_inventory_id: u8
+            w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes()).await?;
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
@@ -545,90 +556,101 @@ impl ReadableAndWritable for Character {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        self.guid.astd_write(w).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            self.guid.astd_write(w).await?;
 
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // name: CString
+            w.write_all(self.name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // race: Race
-        self.race.astd_write(w).await?;
+            // race: Race
+            self.race.astd_write(w).await?;
 
-        // class: Class
-        self.class.astd_write(w).await?;
+            // class: Class
+            self.class.astd_write(w).await?;
 
-        // gender: Gender
-        self.gender.astd_write(w).await?;
+            // gender: Gender
+            self.gender.astd_write(w).await?;
 
-        // skin: u8
-        w.write_all(&self.skin.to_le_bytes()).await?;
+            // skin: u8
+            w.write_all(&self.skin.to_le_bytes()).await?;
 
-        // face: u8
-        w.write_all(&self.face.to_le_bytes()).await?;
+            // face: u8
+            w.write_all(&self.face.to_le_bytes()).await?;
 
-        // hairstyle: u8
-        w.write_all(&self.hairstyle.to_le_bytes()).await?;
+            // hairstyle: u8
+            w.write_all(&self.hairstyle.to_le_bytes()).await?;
 
-        // haircolor: u8
-        w.write_all(&self.haircolor.to_le_bytes()).await?;
+            // haircolor: u8
+            w.write_all(&self.haircolor.to_le_bytes()).await?;
 
-        // facialhair: u8
-        w.write_all(&self.facialhair.to_le_bytes()).await?;
+            // facialhair: u8
+            w.write_all(&self.facialhair.to_le_bytes()).await?;
 
-        // level: u8
-        w.write_all(&self.level.to_le_bytes()).await?;
+            // level: u8
+            w.write_all(&self.level.to_le_bytes()).await?;
 
-        // area: Area
-        self.area.astd_write(w).await?;
+            // area: Area
+            self.area.astd_write(w).await?;
 
-        // map: Map
-        self.map.astd_write(w).await?;
+            // map: Map
+            self.map.astd_write(w).await?;
 
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes()).await?;
+            // position_x: f32
+            w.write_all(&self.position_x.to_le_bytes()).await?;
 
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes()).await?;
+            // position_y: f32
+            w.write_all(&self.position_y.to_le_bytes()).await?;
 
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes()).await?;
+            // position_z: f32
+            w.write_all(&self.position_z.to_le_bytes()).await?;
 
-        // guild_id: u32
-        w.write_all(&self.guild_id.to_le_bytes()).await?;
+            // guild_id: u32
+            w.write_all(&self.guild_id.to_le_bytes()).await?;
 
-        // flags: CharacterFlags
-        self.flags.astd_write(w).await?;
+            // flags: CharacterFlags
+            self.flags.astd_write(w).await?;
 
-        // first_login: u8
-        w.write_all(&self.first_login.to_le_bytes()).await?;
+            // first_login: u8
+            w.write_all(&self.first_login.to_le_bytes()).await?;
 
-        // pet_display_id: u32
-        w.write_all(&self.pet_display_id.to_le_bytes()).await?;
+            // pet_display_id: u32
+            w.write_all(&self.pet_display_id.to_le_bytes()).await?;
 
-        // pet_level: u32
-        w.write_all(&self.pet_level.to_le_bytes()).await?;
+            // pet_level: u32
+            w.write_all(&self.pet_level.to_le_bytes()).await?;
 
-        // pet_familiy: u32
-        w.write_all(&self.pet_familiy.to_le_bytes()).await?;
+            // pet_familiy: u32
+            w.write_all(&self.pet_familiy.to_le_bytes()).await?;
 
-        // equipment: CharacterGear[19]
-        for i in self.equipment.iter() {
-            i.astd_write(w).await?;
-        }
+            // equipment: CharacterGear[19]
+            for i in self.equipment.iter() {
+                i.astd_write(w).await?;
+            }
 
-        // first_bag_display_id: u32
-        w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes()).await?;
+            // first_bag_display_id: u32
+            w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes()).await?;
 
-        // first_bag_inventory_id: u8
-        w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes()).await?;
+            // first_bag_inventory_id: u8
+            w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes()).await?;
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for Character {

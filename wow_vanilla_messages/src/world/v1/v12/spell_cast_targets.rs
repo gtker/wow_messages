@@ -384,58 +384,69 @@ impl ReadableAndWritable for SpellCastTargets {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // target_flags: SpellCastTargetFlags
-        self.target_flags.tokio_write(w).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // target_flags: SpellCastTargetFlags
+            self.target_flags.tokio_write(w).await?;
 
-        if let Some(s) = &self.target_flags.unit {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.unit {
+                s.tokio_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.unit_enemy {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.unit_enemy {
+                s.tokio_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.gameobject {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.gameobject {
+                s.tokio_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.locked {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.locked {
+                s.tokio_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.item {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.item {
+                s.tokio_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.trade_item {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.trade_item {
+                s.tokio_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.source_location {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.source_location {
+                s.tokio_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.dest_location {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.dest_location {
+                s.tokio_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.string {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.string {
+                s.tokio_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.corpse_ally {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.corpse_ally {
+                s.tokio_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.corpse_enemy {
-            s.tokio_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.corpse_enemy {
+                s.tokio_write(w).await?;
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // target_flags: SpellCastTargetFlags
@@ -593,58 +604,69 @@ impl ReadableAndWritable for SpellCastTargets {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // target_flags: SpellCastTargetFlags
-        self.target_flags.astd_write(w).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // target_flags: SpellCastTargetFlags
+            self.target_flags.astd_write(w).await?;
 
-        if let Some(s) = &self.target_flags.unit {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.unit {
+                s.astd_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.unit_enemy {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.unit_enemy {
+                s.astd_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.gameobject {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.gameobject {
+                s.astd_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.locked {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.locked {
+                s.astd_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.item {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.item {
+                s.astd_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.trade_item {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.trade_item {
+                s.astd_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.source_location {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.source_location {
+                s.astd_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.dest_location {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.dest_location {
+                s.astd_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.string {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.string {
+                s.astd_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.corpse_ally {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.corpse_ally {
+                s.astd_write(w).await?;
+            }
 
-        if let Some(s) = &self.target_flags.corpse_enemy {
-            s.astd_write(w).await?;
-        }
+            if let Some(s) = &self.target_flags.corpse_enemy {
+                s.astd_write(w).await?;
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for SpellCastTargets {

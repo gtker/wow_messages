@@ -135,37 +135,48 @@ impl ReadableAndWritable for BattlegroundPlayer {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // player: Guid
-        self.player.tokio_write(w).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // player: Guid
+            self.player.tokio_write(w).await?;
 
-        // rank: PvpRank
-        self.rank.tokio_write_u32_le(w).await?;
+            // rank: PvpRank
+            self.rank.tokio_write_u32_le(w).await?;
 
-        // killing_blows: u32
-        w.write_all(&self.killing_blows.to_le_bytes()).await?;
+            // killing_blows: u32
+            w.write_all(&self.killing_blows.to_le_bytes()).await?;
 
-        // honorable_kills: u32
-        w.write_all(&self.honorable_kills.to_le_bytes()).await?;
+            // honorable_kills: u32
+            w.write_all(&self.honorable_kills.to_le_bytes()).await?;
 
-        // deaths: u32
-        w.write_all(&self.deaths.to_le_bytes()).await?;
+            // deaths: u32
+            w.write_all(&self.deaths.to_le_bytes()).await?;
 
-        // bonus_honor: u32
-        w.write_all(&self.bonus_honor.to_le_bytes()).await?;
+            // bonus_honor: u32
+            w.write_all(&self.bonus_honor.to_le_bytes()).await?;
 
-        // amount_of_extra_fields: u32
-        w.write_all(&(self.fields.len() as u32).to_le_bytes()).await?;
+            // amount_of_extra_fields: u32
+            w.write_all(&(self.fields.len() as u32).to_le_bytes()).await?;
 
-        // fields: u32[amount_of_extra_fields]
-        for i in self.fields.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // fields: u32[amount_of_extra_fields]
+            for i in self.fields.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // player: Guid
@@ -206,37 +217,48 @@ impl ReadableAndWritable for BattlegroundPlayer {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // player: Guid
-        self.player.astd_write(w).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // player: Guid
+            self.player.astd_write(w).await?;
 
-        // rank: PvpRank
-        self.rank.astd_write_u32_le(w).await?;
+            // rank: PvpRank
+            self.rank.astd_write_u32_le(w).await?;
 
-        // killing_blows: u32
-        w.write_all(&self.killing_blows.to_le_bytes()).await?;
+            // killing_blows: u32
+            w.write_all(&self.killing_blows.to_le_bytes()).await?;
 
-        // honorable_kills: u32
-        w.write_all(&self.honorable_kills.to_le_bytes()).await?;
+            // honorable_kills: u32
+            w.write_all(&self.honorable_kills.to_le_bytes()).await?;
 
-        // deaths: u32
-        w.write_all(&self.deaths.to_le_bytes()).await?;
+            // deaths: u32
+            w.write_all(&self.deaths.to_le_bytes()).await?;
 
-        // bonus_honor: u32
-        w.write_all(&self.bonus_honor.to_le_bytes()).await?;
+            // bonus_honor: u32
+            w.write_all(&self.bonus_honor.to_le_bytes()).await?;
 
-        // amount_of_extra_fields: u32
-        w.write_all(&(self.fields.len() as u32).to_le_bytes()).await?;
+            // amount_of_extra_fields: u32
+            w.write_all(&(self.fields.len() as u32).to_le_bytes()).await?;
 
-        // fields: u32[amount_of_extra_fields]
-        for i in self.fields.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // fields: u32[amount_of_extra_fields]
+            for i in self.fields.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for BattlegroundPlayer {

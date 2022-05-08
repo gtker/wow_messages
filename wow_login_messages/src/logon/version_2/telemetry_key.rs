@@ -89,27 +89,38 @@ impl ReadableAndWritable for TelemetryKey {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // unknown1: u16
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // unknown1: u16
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
 
-        // unknown2: u32
-        w.write_all(&self.unknown2.to_le_bytes()).await?;
+            // unknown2: u32
+            w.write_all(&self.unknown2.to_le_bytes()).await?;
 
-        // unknown3: u8[4]
-        for i in self.unknown3.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // unknown3: u8[4]
+            for i in self.unknown3.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // unknown4: u8[20]
-        for i in self.unknown4.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // unknown4: u8[20]
+            for i in self.unknown4.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // unknown1: u16
@@ -134,27 +145,38 @@ impl ReadableAndWritable for TelemetryKey {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // unknown1: u16
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // unknown1: u16
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
 
-        // unknown2: u32
-        w.write_all(&self.unknown2.to_le_bytes()).await?;
+            // unknown2: u32
+            w.write_all(&self.unknown2.to_le_bytes()).await?;
 
-        // unknown3: u8[4]
-        for i in self.unknown3.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // unknown3: u8[4]
+            for i in self.unknown3.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // unknown4: u8[20]
-        for i in self.unknown4.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // unknown4: u8[20]
+            for i in self.unknown4.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl ConstantSized for TelemetryKey {}

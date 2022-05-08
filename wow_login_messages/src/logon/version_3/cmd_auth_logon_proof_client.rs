@@ -185,59 +185,70 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // opcode: u8
+            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
-        // client_public_key: u8[32]
-        for i in self.client_public_key.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // client_proof: u8[20]
-        for i in self.client_proof.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // crc_hash: u8[20]
-        for i in self.crc_hash.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // number_of_telemetry_keys: u8
-        w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes()).await?;
-
-        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-        for i in self.telemetry_keys.iter() {
-            i.tokio_write(w).await?;
-        }
-
-        // security_flag: SecurityFlag
-        self.security_flag.tokio_write(w).await?;
-
-        match &self.security_flag {
-            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
-            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                pin_salt,
-                pin_hash,
-            } => {
-                // pin_salt: u8[16]
-                for i in pin_salt.iter() {
-                    w.write_all(&i.to_le_bytes()).await?;
-                }
-
-                // pin_hash: u8[20]
-                for i in pin_hash.iter() {
-                    w.write_all(&i.to_le_bytes()).await?;
-                }
-
+            // client_public_key: u8[32]
+            for i in self.client_public_key.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
             }
-        }
 
-        Ok(())
+            // client_proof: u8[20]
+            for i in self.client_proof.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
+
+            // crc_hash: u8[20]
+            for i in self.crc_hash.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
+
+            // number_of_telemetry_keys: u8
+            w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes()).await?;
+
+            // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+            for i in self.telemetry_keys.iter() {
+                i.tokio_write(w).await?;
+            }
+
+            // security_flag: SecurityFlag
+            self.security_flag.tokio_write(w).await?;
+
+            match &self.security_flag {
+                CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
+                CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
+                    pin_salt,
+                    pin_hash,
+                } => {
+                    // pin_salt: u8[16]
+                    for i in pin_salt.iter() {
+                        w.write_all(&i.to_le_bytes()).await?;
+                    }
+
+                    // pin_hash: u8[20]
+                    for i in pin_hash.iter() {
+                        w.write_all(&i.to_le_bytes()).await?;
+                    }
+
+                }
+            }
+
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // client_public_key: u8[32]
@@ -291,59 +302,70 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes()).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // opcode: u8
+            w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
-        // client_public_key: u8[32]
-        for i in self.client_public_key.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // client_proof: u8[20]
-        for i in self.client_proof.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // crc_hash: u8[20]
-        for i in self.crc_hash.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // number_of_telemetry_keys: u8
-        w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes()).await?;
-
-        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-        for i in self.telemetry_keys.iter() {
-            i.astd_write(w).await?;
-        }
-
-        // security_flag: SecurityFlag
-        self.security_flag.astd_write(w).await?;
-
-        match &self.security_flag {
-            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
-            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                pin_salt,
-                pin_hash,
-            } => {
-                // pin_salt: u8[16]
-                for i in pin_salt.iter() {
-                    w.write_all(&i.to_le_bytes()).await?;
-                }
-
-                // pin_hash: u8[20]
-                for i in pin_hash.iter() {
-                    w.write_all(&i.to_le_bytes()).await?;
-                }
-
+            // client_public_key: u8[32]
+            for i in self.client_public_key.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
             }
-        }
 
-        Ok(())
+            // client_proof: u8[20]
+            for i in self.client_proof.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
+
+            // crc_hash: u8[20]
+            for i in self.crc_hash.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
+
+            // number_of_telemetry_keys: u8
+            w.write_all(&(self.telemetry_keys.len() as u8).to_le_bytes()).await?;
+
+            // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+            for i in self.telemetry_keys.iter() {
+                i.astd_write(w).await?;
+            }
+
+            // security_flag: SecurityFlag
+            self.security_flag.astd_write(w).await?;
+
+            match &self.security_flag {
+                CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
+                CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
+                    pin_salt,
+                    pin_hash,
+                } => {
+                    // pin_salt: u8[16]
+                    for i in pin_salt.iter() {
+                        w.write_all(&i.to_le_bytes()).await?;
+                    }
+
+                    // pin_hash: u8[20]
+                    for i in pin_hash.iter() {
+                        w.write_all(&i.to_le_bytes()).await?;
+                    }
+
+                }
+            }
+
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for CMD_AUTH_LOGON_PROOF_Client {

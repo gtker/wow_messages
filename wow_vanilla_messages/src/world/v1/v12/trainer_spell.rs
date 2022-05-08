@@ -166,44 +166,55 @@ impl ReadableAndWritable for TrainerSpell {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes()).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // spell: u32
+            w.write_all(&self.spell.to_le_bytes()).await?;
 
-        // state: TrainerSpellState
-        self.state.tokio_write(w).await?;
+            // state: TrainerSpellState
+            self.state.tokio_write(w).await?;
 
-        // spell_cost: u32
-        w.write_all(&self.spell_cost.to_le_bytes()).await?;
+            // spell_cost: u32
+            w.write_all(&self.spell_cost.to_le_bytes()).await?;
 
-        // talent_point_cost: u32
-        w.write_all(&self.talent_point_cost.to_le_bytes()).await?;
+            // talent_point_cost: u32
+            w.write_all(&self.talent_point_cost.to_le_bytes()).await?;
 
-        // first_rank: u32
-        w.write_all(&self.first_rank.to_le_bytes()).await?;
+            // first_rank: u32
+            w.write_all(&self.first_rank.to_le_bytes()).await?;
 
-        // required_level: u8
-        w.write_all(&self.required_level.to_le_bytes()).await?;
+            // required_level: u8
+            w.write_all(&self.required_level.to_le_bytes()).await?;
 
-        // required_skill: u32
-        w.write_all(&self.required_skill.to_le_bytes()).await?;
+            // required_skill: u32
+            w.write_all(&self.required_skill.to_le_bytes()).await?;
 
-        // required_skill_value: u32
-        w.write_all(&self.required_skill_value.to_le_bytes()).await?;
+            // required_skill_value: u32
+            w.write_all(&self.required_skill_value.to_le_bytes()).await?;
 
-        // spell_chain_required: u32
-        w.write_all(&self.spell_chain_required.to_le_bytes()).await?;
+            // spell_chain_required: u32
+            w.write_all(&self.spell_chain_required.to_le_bytes()).await?;
 
-        // spell_chain_previous: u32
-        w.write_all(&self.spell_chain_previous.to_le_bytes()).await?;
+            // spell_chain_previous: u32
+            w.write_all(&self.spell_chain_previous.to_le_bytes()).await?;
 
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+            // unknown1: u32
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // spell: u32
@@ -254,44 +265,55 @@ impl ReadableAndWritable for TrainerSpell {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes()).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // spell: u32
+            w.write_all(&self.spell.to_le_bytes()).await?;
 
-        // state: TrainerSpellState
-        self.state.astd_write(w).await?;
+            // state: TrainerSpellState
+            self.state.astd_write(w).await?;
 
-        // spell_cost: u32
-        w.write_all(&self.spell_cost.to_le_bytes()).await?;
+            // spell_cost: u32
+            w.write_all(&self.spell_cost.to_le_bytes()).await?;
 
-        // talent_point_cost: u32
-        w.write_all(&self.talent_point_cost.to_le_bytes()).await?;
+            // talent_point_cost: u32
+            w.write_all(&self.talent_point_cost.to_le_bytes()).await?;
 
-        // first_rank: u32
-        w.write_all(&self.first_rank.to_le_bytes()).await?;
+            // first_rank: u32
+            w.write_all(&self.first_rank.to_le_bytes()).await?;
 
-        // required_level: u8
-        w.write_all(&self.required_level.to_le_bytes()).await?;
+            // required_level: u8
+            w.write_all(&self.required_level.to_le_bytes()).await?;
 
-        // required_skill: u32
-        w.write_all(&self.required_skill.to_le_bytes()).await?;
+            // required_skill: u32
+            w.write_all(&self.required_skill.to_le_bytes()).await?;
 
-        // required_skill_value: u32
-        w.write_all(&self.required_skill_value.to_le_bytes()).await?;
+            // required_skill_value: u32
+            w.write_all(&self.required_skill_value.to_le_bytes()).await?;
 
-        // spell_chain_required: u32
-        w.write_all(&self.spell_chain_required.to_le_bytes()).await?;
+            // spell_chain_required: u32
+            w.write_all(&self.spell_chain_required.to_le_bytes()).await?;
 
-        // spell_chain_previous: u32
-        w.write_all(&self.spell_chain_previous.to_le_bytes()).await?;
+            // spell_chain_previous: u32
+            w.write_all(&self.spell_chain_previous.to_le_bytes()).await?;
 
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+            // unknown1: u32
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl ConstantSized for TrainerSpell {}

@@ -136,41 +136,52 @@ impl ReadableAndWritable for EnumOutsideOfIf {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // t: TEnum
-        self.t.tokio_write(w).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // t: TEnum
+            self.t.tokio_write(w).await?;
 
-        // n: NestedEnum
-        self.n.tokio_write(w).await?;
+            // n: NestedEnum
+            self.n.tokio_write(w).await?;
 
-        match &self.t {
-            EnumOutsideOfIfTEnum::ZERO {
-            } => {
-                match &self.n {
-                    EnumOutsideOfIfNestedEnum::NESTED {
-                        nested,
-                    } => {
-                        // nested: u8
-                        w.write_all(&nested.to_le_bytes()).await?;
+            match &self.t {
+                EnumOutsideOfIfTEnum::ZERO {
+                } => {
+                    match &self.n {
+                        EnumOutsideOfIfNestedEnum::NESTED {
+                            nested,
+                        } => {
+                            // nested: u8
+                            w.write_all(&nested.to_le_bytes()).await?;
 
+                        }
+                        EnumOutsideOfIfNestedEnum::NOT_NESTED => {}
                     }
-                    EnumOutsideOfIfNestedEnum::NOT_NESTED => {}
+
                 }
-
+                EnumOutsideOfIfTEnum::ONE => {}
+                EnumOutsideOfIfTEnum::TWO => {}
+                EnumOutsideOfIfTEnum::THREE => {}
+                EnumOutsideOfIfTEnum::FOUR => {}
+                EnumOutsideOfIfTEnum::FIVE => {}
+                EnumOutsideOfIfTEnum::SIX => {}
+                EnumOutsideOfIfTEnum::REST => {}
             }
-            EnumOutsideOfIfTEnum::ONE => {}
-            EnumOutsideOfIfTEnum::TWO => {}
-            EnumOutsideOfIfTEnum::THREE => {}
-            EnumOutsideOfIfTEnum::FOUR => {}
-            EnumOutsideOfIfTEnum::FIVE => {}
-            EnumOutsideOfIfTEnum::SIX => {}
-            EnumOutsideOfIfTEnum::REST => {}
-        }
 
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // t: TEnum
@@ -212,41 +223,52 @@ impl ReadableAndWritable for EnumOutsideOfIf {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // t: TEnum
-        self.t.astd_write(w).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // t: TEnum
+            self.t.astd_write(w).await?;
 
-        // n: NestedEnum
-        self.n.astd_write(w).await?;
+            // n: NestedEnum
+            self.n.astd_write(w).await?;
 
-        match &self.t {
-            EnumOutsideOfIfTEnum::ZERO {
-            } => {
-                match &self.n {
-                    EnumOutsideOfIfNestedEnum::NESTED {
-                        nested,
-                    } => {
-                        // nested: u8
-                        w.write_all(&nested.to_le_bytes()).await?;
+            match &self.t {
+                EnumOutsideOfIfTEnum::ZERO {
+                } => {
+                    match &self.n {
+                        EnumOutsideOfIfNestedEnum::NESTED {
+                            nested,
+                        } => {
+                            // nested: u8
+                            w.write_all(&nested.to_le_bytes()).await?;
 
+                        }
+                        EnumOutsideOfIfNestedEnum::NOT_NESTED => {}
                     }
-                    EnumOutsideOfIfNestedEnum::NOT_NESTED => {}
+
                 }
-
+                EnumOutsideOfIfTEnum::ONE => {}
+                EnumOutsideOfIfTEnum::TWO => {}
+                EnumOutsideOfIfTEnum::THREE => {}
+                EnumOutsideOfIfTEnum::FOUR => {}
+                EnumOutsideOfIfTEnum::FIVE => {}
+                EnumOutsideOfIfTEnum::SIX => {}
+                EnumOutsideOfIfTEnum::REST => {}
             }
-            EnumOutsideOfIfTEnum::ONE => {}
-            EnumOutsideOfIfTEnum::TWO => {}
-            EnumOutsideOfIfTEnum::THREE => {}
-            EnumOutsideOfIfTEnum::FOUR => {}
-            EnumOutsideOfIfTEnum::FIVE => {}
-            EnumOutsideOfIfTEnum::SIX => {}
-            EnumOutsideOfIfTEnum::REST => {}
-        }
 
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for EnumOutsideOfIf {

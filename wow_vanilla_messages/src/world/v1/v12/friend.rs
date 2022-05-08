@@ -260,81 +260,92 @@ impl ReadableAndWritable for Friend {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        self.guid.tokio_write(w).await?;
+    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            self.guid.tokio_write(w).await?;
 
-        // status: FriendStatus
-        self.status.tokio_write(w).await?;
+            // status: FriendStatus
+            self.status.tokio_write(w).await?;
 
-        match &self.status {
-            FriendFriendStatus::OFFLINE => {}
-            FriendFriendStatus::ONLINE {
-                area,
-                level,
-                class,
-            } => {
-                // area: Area
-                area.tokio_write(w).await?;
+            match &self.status {
+                FriendFriendStatus::OFFLINE => {}
+                FriendFriendStatus::ONLINE {
+                    area,
+                    level,
+                    class,
+                } => {
+                    // area: Area
+                    area.tokio_write(w).await?;
 
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
+                    // level: u32
+                    w.write_all(&level.to_le_bytes()).await?;
 
-                // class: Class
-                class.tokio_write_u32_le(w).await?;
+                    // class: Class
+                    class.tokio_write_u32_le(w).await?;
 
+                }
+                FriendFriendStatus::AFK {
+                    area,
+                    level,
+                    class,
+                } => {
+                    // area: Area
+                    area.tokio_write(w).await?;
+
+                    // level: u32
+                    w.write_all(&level.to_le_bytes()).await?;
+
+                    // class: Class
+                    class.tokio_write_u32_le(w).await?;
+
+                }
+                FriendFriendStatus::UNKNOWN3 {
+                    area,
+                    level,
+                    class,
+                } => {
+                    // area: Area
+                    area.tokio_write(w).await?;
+
+                    // level: u32
+                    w.write_all(&level.to_le_bytes()).await?;
+
+                    // class: Class
+                    class.tokio_write_u32_le(w).await?;
+
+                }
+                FriendFriendStatus::DND {
+                    area,
+                    level,
+                    class,
+                } => {
+                    // area: Area
+                    area.tokio_write(w).await?;
+
+                    // level: u32
+                    w.write_all(&level.to_le_bytes()).await?;
+
+                    // class: Class
+                    class.tokio_write_u32_le(w).await?;
+
+                }
             }
-            FriendFriendStatus::AFK {
-                area,
-                level,
-                class,
-            } => {
-                // area: Area
-                area.tokio_write(w).await?;
 
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                class.tokio_write_u32_le(w).await?;
-
-            }
-            FriendFriendStatus::UNKNOWN3 {
-                area,
-                level,
-                class,
-            } => {
-                // area: Area
-                area.tokio_write(w).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                class.tokio_write_u32_le(w).await?;
-
-            }
-            FriendFriendStatus::DND {
-                area,
-                level,
-                class,
-            } => {
-                // area: Area
-                area.tokio_write(w).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                class.tokio_write_u32_le(w).await?;
-
-            }
-        }
-
-        Ok(())
+            Ok(())
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // guid: Guid
@@ -417,81 +428,92 @@ impl ReadableAndWritable for Friend {
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        self.guid.astd_write(w).await?;
+    fn astd_write<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            self.guid.astd_write(w).await?;
 
-        // status: FriendStatus
-        self.status.astd_write(w).await?;
+            // status: FriendStatus
+            self.status.astd_write(w).await?;
 
-        match &self.status {
-            FriendFriendStatus::OFFLINE => {}
-            FriendFriendStatus::ONLINE {
-                area,
-                level,
-                class,
-            } => {
-                // area: Area
-                area.astd_write(w).await?;
+            match &self.status {
+                FriendFriendStatus::OFFLINE => {}
+                FriendFriendStatus::ONLINE {
+                    area,
+                    level,
+                    class,
+                } => {
+                    // area: Area
+                    area.astd_write(w).await?;
 
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
+                    // level: u32
+                    w.write_all(&level.to_le_bytes()).await?;
 
-                // class: Class
-                class.astd_write_u32_le(w).await?;
+                    // class: Class
+                    class.astd_write_u32_le(w).await?;
 
+                }
+                FriendFriendStatus::AFK {
+                    area,
+                    level,
+                    class,
+                } => {
+                    // area: Area
+                    area.astd_write(w).await?;
+
+                    // level: u32
+                    w.write_all(&level.to_le_bytes()).await?;
+
+                    // class: Class
+                    class.astd_write_u32_le(w).await?;
+
+                }
+                FriendFriendStatus::UNKNOWN3 {
+                    area,
+                    level,
+                    class,
+                } => {
+                    // area: Area
+                    area.astd_write(w).await?;
+
+                    // level: u32
+                    w.write_all(&level.to_le_bytes()).await?;
+
+                    // class: Class
+                    class.astd_write_u32_le(w).await?;
+
+                }
+                FriendFriendStatus::DND {
+                    area,
+                    level,
+                    class,
+                } => {
+                    // area: Area
+                    area.astd_write(w).await?;
+
+                    // level: u32
+                    w.write_all(&level.to_le_bytes()).await?;
+
+                    // class: Class
+                    class.astd_write_u32_le(w).await?;
+
+                }
             }
-            FriendFriendStatus::AFK {
-                area,
-                level,
-                class,
-            } => {
-                // area: Area
-                area.astd_write(w).await?;
 
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                class.astd_write_u32_le(w).await?;
-
-            }
-            FriendFriendStatus::UNKNOWN3 {
-                area,
-                level,
-                class,
-            } => {
-                // area: Area
-                area.astd_write(w).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                class.astd_write_u32_le(w).await?;
-
-            }
-            FriendFriendStatus::DND {
-                area,
-                level,
-                class,
-            } => {
-                // area: Area
-                area.astd_write(w).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                class.astd_write_u32_le(w).await?;
-
-            }
-        }
-
-        Ok(())
+            Ok(())
+        })
     }
-
 }
 
 impl VariableSized for Friend {
