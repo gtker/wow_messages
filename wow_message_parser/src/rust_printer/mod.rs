@@ -238,8 +238,8 @@ impl Writer {
     }
 
     fn print_read_encrypted(&mut self, it: ImplType) {
+        self.wln(it.cfg());
         if !it.is_async() {
-            self.wln(format!("{}", it.cfg()));
             self.open_curly(format!("{func}fn {prefix}read_encrypted<R: {read}, D: Decrypter{decrypter}>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error>", func = it.func(), prefix = it.prefix(), read = it.read(), decrypter = it.decrypter()));
 
             return;
@@ -280,8 +280,8 @@ impl Writer {
     }
 
     fn print_write_encrypted(&mut self, it: ImplType) {
+        self.wln(it.cfg());
         if !it.is_async() {
-            self.wln(format!("{}", it.cfg()));
             self.open_curly(format!("{func}fn {prefix}write_encrypted<W: {write}, E: Encrypter{decrypter}>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error>", decrypter = it.decrypter(), prefix = it.prefix(), func = it.func(), write = it.write()));
 
             return;
@@ -324,8 +324,9 @@ impl Writer {
     }
 
     fn print_write_decl(&mut self, it: ImplType, world_text: &str) {
+        self.wln(it.cfg());
+
         if !it.is_async() {
-            self.wln(it.cfg());
             self.open_curly(format!("fn {prefix}write{world_text}<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
                                     prefix = it.prefix(),
                                     write = it.write(),
@@ -370,8 +371,8 @@ impl Writer {
     }
 
     fn print_read_decl(&mut self, it: ImplType, world_text: &str) {
+        self.wln(it.cfg());
         if !it.is_async() {
-            self.wln(it.cfg());
             let body_size = if world_text == "_body" {
                 ", body_size: u32"
             } else {

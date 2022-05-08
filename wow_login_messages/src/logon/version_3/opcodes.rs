@@ -47,6 +47,7 @@ impl ReadableAndWritable for ServerOpcodeMessage {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -69,6 +70,7 @@ impl ReadableAndWritable for ServerOpcodeMessage {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -94,6 +96,7 @@ impl ReadableAndWritable for ServerOpcodeMessage {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -116,6 +119,7 @@ impl ReadableAndWritable for ServerOpcodeMessage {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -252,6 +256,7 @@ impl ReadableAndWritable for ServerOpcode {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -276,6 +281,7 @@ impl ReadableAndWritable for ServerOpcode {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -294,6 +300,7 @@ impl ReadableAndWritable for ServerOpcode {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -318,6 +325,7 @@ impl ReadableAndWritable for ServerOpcode {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -429,6 +437,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -454,6 +463,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -482,6 +492,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -507,6 +518,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -655,6 +667,7 @@ impl ReadableAndWritable for ClientOpcode {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -682,6 +695,7 @@ impl ReadableAndWritable for ClientOpcode {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -700,6 +714,7 @@ impl ReadableAndWritable for ClientOpcode {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -727,6 +742,7 @@ impl ReadableAndWritable for ClientOpcode {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,

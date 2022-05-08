@@ -176,6 +176,7 @@ impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
         body_size: u32,
@@ -263,6 +264,7 @@ impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -335,6 +337,7 @@ impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
         body_size: u32,
@@ -422,6 +425,7 @@ impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_write_body<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,

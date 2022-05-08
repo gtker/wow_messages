@@ -58,6 +58,7 @@ impl ReadableAndWritable for QuestItem {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -91,6 +92,7 @@ impl ReadableAndWritable for QuestItem {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     fn tokio_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -122,6 +124,7 @@ impl ReadableAndWritable for QuestItem {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -155,6 +158,7 @@ impl ReadableAndWritable for QuestItem {
         })
     }
 
+    #[cfg(feature = "async_std")]
     fn astd_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,

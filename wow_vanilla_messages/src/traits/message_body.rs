@@ -39,7 +39,7 @@ pub trait MessageBody: Sized {
         'life1: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async_tokio")]
     fn tokio_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
         body_size: u32,
