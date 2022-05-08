@@ -118,7 +118,6 @@ impl MaximumPossibleSized for CMSG_PING {
 #[cfg(test)]
 mod test {
     use crate::ReadableAndWritable;
-    use std::io::Cursor;
     use super::CMSG_PING;
     use crate::ConstantSized;
     use super::*;
@@ -126,8 +125,8 @@ mod test {
     use crate::world::v1::v12::opcodes::ClientOpcodeMessage;
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
-    #[test]
     #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
     fn CMSG_PING0() {
         let raw: Vec<u8> = vec![ 0x00, 0x0C, 0xDC, 0x01, 0x00, 0x00, 0xEF, 0xBE,
              0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
@@ -138,7 +137,7 @@ mod test {
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&raw)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_PING(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
@@ -150,7 +149,65 @@ mod test {
         assert_eq!(CMSG_PING::size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write_unencrypted_client(&mut Cursor::new(&mut dest));
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    async fn tokio_CMSG_PING0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x0C, 0xDC, 0x01, 0x00, 0x00, 0xEF, 0xBE,
+             0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
+
+        let expected = CMSG_PING {
+            sequence_id: 0xDEADBEEF,
+            round_time_in_ms: 0xFACADE,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_PING(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
+
+        assert_eq!(CMSG_PING::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", tokio::test)]
+    async fn astd_CMSG_PING0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x0C, 0xDC, 0x01, 0x00, 0x00, 0xEF, 0xBE,
+             0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
+
+        let expected = CMSG_PING {
+            sequence_id: 0xDEADBEEF,
+            round_time_in_ms: 0xFACADE,
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_PING(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.sequence_id, expected.sequence_id);
+        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
+
+        assert_eq!(CMSG_PING::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await;
 
         assert_eq!(dest, raw);
     }

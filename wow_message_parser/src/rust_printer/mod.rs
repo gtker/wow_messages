@@ -679,6 +679,14 @@ impl ImplType {
         }
     }
 
+    pub fn test_macro(&self) -> &str {
+        match self {
+            ImplType::Std => "#[cfg_attr(feature = \"sync\", test)]",
+            ImplType::Tokio => "#[cfg_attr(feature = \"async_tokio\", async_std::test)]",
+            ImplType::AsyncStd => "#[cfg_attr(feature = \"async_std\", tokio::test)]",
+        }
+    }
+
     pub fn types() -> Vec<Self> {
         vec![ImplType::Std, ImplType::Tokio, ImplType::AsyncStd]
     }

@@ -376,7 +376,6 @@ impl From<std::string::FromUtf8Error> for CMD_AUTH_RECONNECT_CHALLENGE_ClientErr
 #[cfg(test)]
 mod test {
     use crate::ReadableAndWritable;
-    use std::io::Cursor;
     use super::CMD_AUTH_RECONNECT_CHALLENGE_Client;
     use crate::VariableSized;
     use crate::logon::all::Locale;
@@ -387,8 +386,8 @@ mod test {
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
-    #[test]
     #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
         let raw: Vec<u8> = vec![ 0x02, 0x02, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,
              0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
@@ -412,7 +411,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -430,13 +429,109 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write(&mut Cursor::new(&mut dest));
+        expected.write(&mut std::io::Cursor::new(&mut dest));
 
         assert_eq!(dest, raw);
     }
 
-    #[test]
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
+        let raw: Vec<u8> = vec![ 0x02, 0x02, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,
+             0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
+             0x00, 0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00,
+             0x01, 0x01, 0x41, ];
+
+        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Client {
+            protocol_version: 0x2,
+            version: Version {
+                major: 1,
+                minor: 12,
+                patch: 1,
+                build: 5875,
+            },
+            platform: Platform::X86,
+            os: Os::WINDOWS,
+            locale: Locale::EN_GB,
+            utc_timezone_offset: 0x3C,
+            client_ip_address: 0x7F000001,
+            account_name: String::from("A"),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.protocol_version, expected.protocol_version);
+        assert_eq!(t.version, expected.version);
+        assert_eq!(t.platform, expected.platform);
+        assert_eq!(t.os, expected.os);
+        assert_eq!(t.locale, expected.locale);
+        assert_eq!(t.utc_timezone_offset, expected.utc_timezone_offset);
+        assert_eq!(t.client_ip_address, expected.client_ip_address);
+        assert_eq!(t.account_name, expected.account_name);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", tokio::test)]
+    async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
+        let raw: Vec<u8> = vec![ 0x02, 0x02, 0x1F, 0x00, 0x57, 0x6F, 0x57, 0x00,
+             0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
+             0x00, 0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00,
+             0x01, 0x01, 0x41, ];
+
+        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Client {
+            protocol_version: 0x2,
+            version: Version {
+                major: 1,
+                minor: 12,
+                patch: 1,
+                build: 5875,
+            },
+            platform: Platform::X86,
+            os: Os::WINDOWS,
+            locale: Locale::EN_GB,
+            utc_timezone_offset: 0x3C,
+            client_ip_address: 0x7F000001,
+            account_name: String::from("A"),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.protocol_version, expected.protocol_version);
+        assert_eq!(t.version, expected.version);
+        assert_eq!(t.platform, expected.platform);
+        assert_eq!(t.os, expected.os);
+        assert_eq!(t.locale, expected.locale);
+        assert_eq!(t.utc_timezone_offset, expected.utc_timezone_offset);
+        assert_eq!(t.client_ip_address, expected.client_ip_address);
+        assert_eq!(t.account_name, expected.account_name);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
     #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
         let raw: Vec<u8> = vec![ 0x02, 0x02, 0x2E, 0x00, 0x57, 0x6F, 0x57, 0x00,
              0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
@@ -461,7 +556,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
@@ -479,7 +574,105 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write(&mut Cursor::new(&mut dest));
+        expected.write(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
+        let raw: Vec<u8> = vec![ 0x02, 0x02, 0x2E, 0x00, 0x57, 0x6F, 0x57, 0x00,
+             0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
+             0x00, 0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00,
+             0x01, 0x10, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A,
+             0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50, ];
+
+        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Client {
+            protocol_version: 0x2,
+            version: Version {
+                major: 1,
+                minor: 12,
+                patch: 1,
+                build: 5875,
+            },
+            platform: Platform::X86,
+            os: Os::WINDOWS,
+            locale: Locale::EN_GB,
+            utc_timezone_offset: 0x3C,
+            client_ip_address: 0x7F000001,
+            account_name: String::from("ABCDEFGHIJKLMNOP"),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.protocol_version, expected.protocol_version);
+        assert_eq!(t.version, expected.version);
+        assert_eq!(t.platform, expected.platform);
+        assert_eq!(t.os, expected.os);
+        assert_eq!(t.locale, expected.locale);
+        assert_eq!(t.utc_timezone_offset, expected.utc_timezone_offset);
+        assert_eq!(t.client_ip_address, expected.client_ip_address);
+        assert_eq!(t.account_name, expected.account_name);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", tokio::test)]
+    async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
+        let raw: Vec<u8> = vec![ 0x02, 0x02, 0x2E, 0x00, 0x57, 0x6F, 0x57, 0x00,
+             0x01, 0x0C, 0x01, 0xF3, 0x16, 0x36, 0x38, 0x78, 0x00, 0x6E, 0x69, 0x57,
+             0x00, 0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00,
+             0x01, 0x10, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A,
+             0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50, ];
+
+        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Client {
+            protocol_version: 0x2,
+            version: Version {
+                major: 1,
+                minor: 12,
+                patch: 1,
+                build: 5875,
+            },
+            platform: Platform::X86,
+            os: Os::WINDOWS,
+            locale: Locale::EN_GB,
+            utc_timezone_offset: 0x3C,
+            client_ip_address: 0x7F000001,
+            account_name: String::from("ABCDEFGHIJKLMNOP"),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.protocol_version, expected.protocol_version);
+        assert_eq!(t.version, expected.version);
+        assert_eq!(t.platform, expected.platform);
+        assert_eq!(t.os, expected.os);
+        assert_eq!(t.locale, expected.locale);
+        assert_eq!(t.utc_timezone_offset, expected.utc_timezone_offset);
+        assert_eq!(t.client_ip_address, expected.client_ip_address);
+        assert_eq!(t.account_name, expected.account_name);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
 
         assert_eq!(dest, raw);
     }

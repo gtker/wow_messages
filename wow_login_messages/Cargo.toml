@@ -32,6 +32,16 @@ optional = true
 default-features = false
 features = ["async-io", "std"]
 
+[dev-dependencies.async-std]
+version = "1.11"
+default-features = false
+features = ["attributes"]
+
+[dev-dependencies.tokio]
+version = "1"
+default-features = false
+features = ["macros", "rt"]
+
 [package.metadata.docs.rs]
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]

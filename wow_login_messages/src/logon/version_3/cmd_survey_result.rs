@@ -181,15 +181,14 @@ impl MaximumPossibleSized for CMD_SURVEY_RESULT {
 #[cfg(test)]
 mod test {
     use crate::ReadableAndWritable;
-    use std::io::Cursor;
     use super::CMD_SURVEY_RESULT;
     use crate::VariableSized;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
-    #[test]
     #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
     fn CMD_SURVEY_RESULT0() {
         let raw: Vec<u8> = vec![ 0x04, 0xDE, 0xFA, 0x00, 0x00, 0x00, 0x01, 0x00,
              0xFF, ];
@@ -201,7 +200,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_SURVEY_RESULT(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_SURVEY_RESULT, got {opcode:#?}", opcode = opcode),
@@ -214,7 +213,69 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write(&mut Cursor::new(&mut dest));
+        expected.write(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    async fn tokio_CMD_SURVEY_RESULT0() {
+        let raw: Vec<u8> = vec![ 0x04, 0xDE, 0xFA, 0x00, 0x00, 0x00, 0x01, 0x00,
+             0xFF, ];
+
+        let expected = CMD_SURVEY_RESULT {
+            survey_id: 0xFADE,
+            error: 0x0,
+            data: vec![ 0xFF, ],
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_SURVEY_RESULT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_SURVEY_RESULT, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.survey_id, expected.survey_id);
+        assert_eq!(t.error, expected.error);
+        assert_eq!(t.data, expected.data);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", tokio::test)]
+    async fn astd_CMD_SURVEY_RESULT0() {
+        let raw: Vec<u8> = vec![ 0x04, 0xDE, 0xFA, 0x00, 0x00, 0x00, 0x01, 0x00,
+             0xFF, ];
+
+        let expected = CMD_SURVEY_RESULT {
+            survey_id: 0xFADE,
+            error: 0x0,
+            data: vec![ 0xFF, ],
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_SURVEY_RESULT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_SURVEY_RESULT, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.survey_id, expected.survey_id);
+        assert_eq!(t.error, expected.error);
+        assert_eq!(t.data, expected.data);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
 
         assert_eq!(dest, raw);
     }

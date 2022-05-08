@@ -134,7 +134,6 @@ impl MaximumPossibleSized for SMSG_IGNORE_LIST {
 #[cfg(test)]
 mod test {
     use crate::ReadableAndWritable;
-    use std::io::Cursor;
     use super::SMSG_IGNORE_LIST;
     use crate::VariableSized;
     use super::*;
@@ -142,8 +141,8 @@ mod test {
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
-    #[test]
     #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
     fn SMSG_IGNORE_LIST0() {
         let raw: Vec<u8> = vec![ 0x00, 0x0B, 0x6B, 0x00, 0x01, 0xEF, 0xBE, 0xAD,
              0xDE, 0xFE, 0x0F, 0xDC, 0xBA, ];
@@ -153,7 +152,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&raw)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_IGNORE_LIST(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}", opcode = opcode),
@@ -164,13 +163,67 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write_unencrypted_server(&mut Cursor::new(&mut dest));
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest));
 
         assert_eq!(dest, raw);
     }
 
-    #[test]
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    async fn tokio_SMSG_IGNORE_LIST0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x0B, 0x6B, 0x00, 0x01, 0xEF, 0xBE, 0xAD,
+             0xDE, 0xFE, 0x0F, 0xDC, 0xBA, ];
+
+        let expected = SMSG_IGNORE_LIST {
+            ignored: vec![ 0xBADC0FFEDEADBEEF, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_IGNORE_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.ignored, expected.ignored);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", tokio::test)]
+    async fn astd_SMSG_IGNORE_LIST0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x0B, 0x6B, 0x00, 0x01, 0xEF, 0xBE, 0xAD,
+             0xDE, 0xFE, 0x0F, 0xDC, 0xBA, ];
+
+        let expected = SMSG_IGNORE_LIST {
+            ignored: vec![ 0xBADC0FFEDEADBEEF, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_IGNORE_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.ignored, expected.ignored);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
     #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
     fn SMSG_IGNORE_LIST1() {
         let raw: Vec<u8> = vec![ 0x00, 0x13, 0x6B, 0x00, 0x02, 0xEF, 0xBE, 0xAD,
              0xDE, 0xFE, 0x0F, 0xDC, 0xBA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00,
@@ -181,7 +234,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&raw)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_IGNORE_LIST(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}", opcode = opcode),
@@ -192,7 +245,63 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write_unencrypted_server(&mut Cursor::new(&mut dest));
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    async fn tokio_SMSG_IGNORE_LIST1() {
+        let raw: Vec<u8> = vec![ 0x00, 0x13, 0x6B, 0x00, 0x02, 0xEF, 0xBE, 0xAD,
+             0xDE, 0xFE, 0x0F, 0xDC, 0xBA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00,
+             0x00, ];
+
+        let expected = SMSG_IGNORE_LIST {
+            ignored: vec![ 0xBADC0FFEDEADBEEF, 0xDEADBEEF, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_IGNORE_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.ignored, expected.ignored);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", tokio::test)]
+    async fn astd_SMSG_IGNORE_LIST1() {
+        let raw: Vec<u8> = vec![ 0x00, 0x13, 0x6B, 0x00, 0x02, 0xEF, 0xBE, 0xAD,
+             0xDE, 0xFE, 0x0F, 0xDC, 0xBA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00,
+             0x00, ];
+
+        let expected = SMSG_IGNORE_LIST {
+            ignored: vec![ 0xBADC0FFEDEADBEEF, 0xDEADBEEF, ],
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_IGNORE_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_IGNORE_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.ignored, expected.ignored);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await;
 
         assert_eq!(dest, raw);
     }

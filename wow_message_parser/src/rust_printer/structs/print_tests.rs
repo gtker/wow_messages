@@ -5,7 +5,7 @@ use crate::parser::types::ArraySize;
 use crate::rust_printer::opcodes::get_enumerator_name;
 use crate::rust_printer::rust_view::{RustMember, RustType};
 use crate::rust_printer::{
-    Writer, CFG_SYNC, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
+    ImplType, Writer, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
     OPCODE_MESSAGE_TRAIT_NAME, WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME,
     WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_HEADER_TRAIT_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
@@ -19,7 +19,6 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
     s.wln("#[cfg(test)]");
     s.body("mod test", |s| {
         s.wln("use crate::ReadableAndWritable;");
-        s.wln("use std::io::Cursor;");
         s.wln(format!("use super::{};", e.name()));
 
         match e.is_constant_sized() {
@@ -54,24 +53,32 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
         s.newline();
 
         for (i, t) in e.tests().iter().enumerate() {
-            s.metadata_comment(format!(
-                "Generated from `{filename}` line {line}.",
-                filename = t.file_info().name(),
-                line = t.file_info().start_line()
-            ));
-            s.wln("#[test]");
-            s.wln(CFG_SYNC);
-            s.bodyn(
-                format!("fn {subject}{number}()", subject = t.subject(), number = i,),
-                |s| {
-                    print_test_case(s, t, e, o);
-                },
-            );
+            for it in ImplType::types() {
+                s.metadata_comment(format!(
+                    "Generated from `{filename}` line {line}.",
+                    filename = t.file_info().name(),
+                    line = t.file_info().start_line()
+                ));
+                s.wln(it.cfg());
+                s.wln(it.test_macro());
+                s.bodyn(
+                    format!(
+                        "{func}fn {prefix}{subject}{number}()",
+                        func = it.func(),
+                        prefix = it.prefix(),
+                        subject = t.subject(),
+                        number = i,
+                    ),
+                    |s| {
+                        print_test_case(s, t, e, o, it);
+                    },
+                );
+            }
         }
     });
 }
 
-fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects) {
+fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects, it: ImplType) {
     s.w("let raw: Vec<u8> = vec![");
     s.inc_indent();
     for i in t.raw_bytes() {
@@ -93,35 +100,48 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects) {
     let (opcode, read_text, write_text) = match e.container_type() {
         ContainerType::CLogin(_) => {
             s.wln("let header_size = 1;");
-            (LOGIN_CLIENT_MESSAGE_ENUM_NAME, "read", "write")
+            (
+                LOGIN_CLIENT_MESSAGE_ENUM_NAME,
+                format!("{}read", it.prefix()),
+                format!("{}write", it.prefix()),
+            )
         }
         ContainerType::SLogin(_) => {
             s.wln("let header_size = 1;");
-            (LOGIN_SERVER_MESSAGE_ENUM_NAME, "read", "write")
+            (
+                LOGIN_SERVER_MESSAGE_ENUM_NAME,
+                format!("{}read", it.prefix()),
+                format!("{}write", it.prefix()),
+            )
         }
         ContainerType::SMsg(_) => {
             s.wln("let header_size = 2 + 2;");
             (
                 WORLD_SERVER_MESSAGE_ENUM_NAME,
-                "read_unencrypted",
-                "write_unencrypted_server",
+                format!("{}read_unencrypted", it.prefix()),
+                format!("{}write_unencrypted_server", it.prefix()),
             )
         }
         ContainerType::CMsg(_) => {
             s.wln("let header_size = 2 + 4;");
             (
                 WORLD_CLIENT_MESSAGE_ENUM_NAME,
-                "read_unencrypted",
-                "write_unencrypted_client",
+                format!("{}read_unencrypted", it.prefix()),
+                format!("{}write_unencrypted_client", it.prefix()),
             )
         }
         _ => unimplemented!(),
     };
 
     s.wln(format!(
-        "let t = {opcode}::{read_text}(&mut Cursor::new(&raw)).unwrap();",
+        "let t = {opcode}::{read_text}(&mut {cursor}Cursor::new(&raw)){postfix}.unwrap();",
         opcode = opcode,
         read_text = read_text,
+        postfix = it.postfix(),
+        cursor = match it {
+            ImplType::Std | ImplType::Tokio => "std::io::",
+            ImplType::AsyncStd => "async_std::io::",
+        },
     ));
 
     s.body_closing_with(
@@ -165,8 +185,13 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects) {
 
     s.wln("let mut dest = Vec::with_capacity(raw.len());");
     s.wln(format!(
-        "expected.{write_text}(&mut Cursor::new(&mut dest));",
-        write_text = write_text
+        "expected.{write_text}(&mut {cursor}Cursor::new(&mut dest)){postfix};",
+        write_text = write_text,
+        postfix = it.postfix(),
+        cursor = match it {
+            ImplType::Std | ImplType::Tokio => "std::io::",
+            ImplType::AsyncStd => "async_std::io::",
+        },
     ));
     s.newline();
 

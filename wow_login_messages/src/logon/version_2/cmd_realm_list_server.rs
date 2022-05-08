@@ -237,7 +237,6 @@ impl From<RealmError> for CMD_REALM_LIST_ServerError {
 #[cfg(test)]
 mod test {
     use crate::ReadableAndWritable;
-    use std::io::Cursor;
     use super::CMD_REALM_LIST_Server;
     use crate::VariableSized;
     use crate::logon::version_2::Population;
@@ -249,8 +248,8 @@ mod test {
     use super::super::*;
     use crate::logon::version_2::opcodes::ServerOpcodeMessage;
 
-    #[test]
     #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Server0() {
         let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
              0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
@@ -273,7 +272,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
@@ -284,13 +283,93 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write(&mut Cursor::new(&mut dest));
+        expected.write(&mut std::io::Cursor::new(&mut dest));
 
         assert_eq!(dest, raw);
     }
 
-    #[test]
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    async fn tokio_CMD_REALM_LIST_Server0() {
+        let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+             0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
+             0x43, 0x01, 0x00, 0x02, 0x00, 0x00, ];
+
+        let expected = CMD_REALM_LIST_Server {
+            realms: vec![
+                Realm {
+                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                    flag: RealmFlag::empty()
+                        .set_NONE(),
+                    name: String::from("A"),
+                    address: String::from("A"),
+                    population: Population::RED_FULL,
+                    number_of_characters_on_realm: 0x1,
+                    category: RealmCategory::DEFAULT,
+                    realm_id: 0x2,
+                },
+            ],
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.realms, expected.realms);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", tokio::test)]
+    async fn astd_CMD_REALM_LIST_Server0() {
+        let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+             0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
+             0x43, 0x01, 0x00, 0x02, 0x00, 0x00, ];
+
+        let expected = CMD_REALM_LIST_Server {
+            realms: vec![
+                Realm {
+                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                    flag: RealmFlag::empty()
+                        .set_NONE(),
+                    name: String::from("A"),
+                    address: String::from("A"),
+                    population: Population::RED_FULL,
+                    number_of_characters_on_realm: 0x1,
+                    category: RealmCategory::DEFAULT,
+                    realm_id: 0x2,
+                },
+            ],
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.realms, expected.realms);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
     #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Server1() {
         let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
              0x00, 0x00, 0x00, 0x00, 0x03, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
@@ -313,7 +392,7 @@ mod test {
         };
 
         let header_size = 1;
-        let t = ServerOpcodeMessage::read(&mut Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
@@ -324,7 +403,87 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write(&mut Cursor::new(&mut dest));
+        expected.write(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    async fn tokio_CMD_REALM_LIST_Server1() {
+        let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+             0x00, 0x00, 0x00, 0x00, 0x03, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
+             0x43, 0x01, 0x00, 0x02, 0x00, 0x00, ];
+
+        let expected = CMD_REALM_LIST_Server {
+            realms: vec![
+                Realm {
+                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                    flag: RealmFlag::empty()
+                        .set_INVALID().set_OFFLINE(),
+                    name: String::from("A"),
+                    address: String::from("A"),
+                    population: Population::RED_FULL,
+                    number_of_characters_on_realm: 0x1,
+                    category: RealmCategory::DEFAULT,
+                    realm_id: 0x2,
+                },
+            ],
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.realms, expected.realms);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", tokio::test)]
+    async fn astd_CMD_REALM_LIST_Server1() {
+        let raw: Vec<u8> = vec![ 0x10, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+             0x00, 0x00, 0x00, 0x00, 0x03, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8,
+             0x43, 0x01, 0x00, 0x02, 0x00, 0x00, ];
+
+        let expected = CMD_REALM_LIST_Server {
+            realms: vec![
+                Realm {
+                    realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
+                    flag: RealmFlag::empty()
+                        .set_INVALID().set_OFFLINE(),
+                    name: String::from("A"),
+                    address: String::from("A"),
+                    population: Population::RED_FULL,
+                    number_of_characters_on_realm: 0x1,
+                    category: RealmCategory::DEFAULT,
+                    realm_id: 0x2,
+                },
+            ],
+        };
+
+        let header_size = 1;
+        let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::CMD_REALM_LIST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.realms, expected.realms);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
 
         assert_eq!(dest, raw);
     }

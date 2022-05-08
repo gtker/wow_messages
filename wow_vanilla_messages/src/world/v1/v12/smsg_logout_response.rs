@@ -156,7 +156,6 @@ impl From<LogoutSpeedError> for SMSG_LOGOUT_RESPONSEError {
 #[cfg(test)]
 mod test {
     use crate::ReadableAndWritable;
-    use std::io::Cursor;
     use super::SMSG_LOGOUT_RESPONSE;
     use crate::ConstantSized;
     use crate::world::v1::v12::LogoutResult;
@@ -166,8 +165,8 @@ mod test {
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
-    #[test]
     #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGOUT_RESPONSE0() {
         let raw: Vec<u8> = vec![ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00,
              0x01, ];
@@ -178,7 +177,7 @@ mod test {
         };
 
         let header_size = 2 + 2;
-        let t = ServerOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&raw)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_LOGOUT_RESPONSE(t) => t,
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_RESPONSE, got {opcode:#?}", opcode = opcode),
@@ -190,7 +189,65 @@ mod test {
         assert_eq!(SMSG_LOGOUT_RESPONSE::size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write_unencrypted_server(&mut Cursor::new(&mut dest));
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    async fn tokio_SMSG_LOGOUT_RESPONSE0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00,
+             0x01, ];
+
+        let expected = SMSG_LOGOUT_RESPONSE {
+            reason: LogoutResult::SUCCESS,
+            speed: LogoutSpeed::INSTANT,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_LOGOUT_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_RESPONSE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.reason, expected.reason);
+        assert_eq!(t.speed, expected.speed);
+
+        assert_eq!(SMSG_LOGOUT_RESPONSE::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", tokio::test)]
+    async fn astd_SMSG_LOGOUT_RESPONSE0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00,
+             0x01, ];
+
+        let expected = SMSG_LOGOUT_RESPONSE {
+            reason: LogoutResult::SUCCESS,
+            speed: LogoutSpeed::INSTANT,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_LOGOUT_RESPONSE(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_RESPONSE, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.reason, expected.reason);
+        assert_eq!(t.speed, expected.speed);
+
+        assert_eq!(SMSG_LOGOUT_RESPONSE::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await;
 
         assert_eq!(dest, raw);
     }

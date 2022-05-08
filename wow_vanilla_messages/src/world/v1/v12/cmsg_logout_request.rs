@@ -72,7 +72,6 @@ impl MaximumPossibleSized for CMSG_LOGOUT_REQUEST {
 #[cfg(test)]
 mod test {
     use crate::ReadableAndWritable;
-    use std::io::Cursor;
     use super::CMSG_LOGOUT_REQUEST;
     use crate::ConstantSized;
     use super::*;
@@ -80,8 +79,8 @@ mod test {
     use crate::world::v1::v12::opcodes::ClientOpcodeMessage;
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
-    #[test]
     #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
     fn CMSG_LOGOUT_REQUEST0() {
         let raw: Vec<u8> = vec![ 0x00, 0x04, 0x4B, 0x00, 0x00, 0x00, ];
 
@@ -89,7 +88,7 @@ mod test {
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&raw)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_LOGOUT_REQUEST(t) => t,
             opcode => panic!("incorrect opcode. Expected CMSG_LOGOUT_REQUEST, got {opcode:#?}", opcode = opcode),
@@ -99,7 +98,55 @@ mod test {
         assert_eq!(CMSG_LOGOUT_REQUEST::size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write_unencrypted_client(&mut Cursor::new(&mut dest));
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    async fn tokio_CMSG_LOGOUT_REQUEST0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x04, 0x4B, 0x00, 0x00, 0x00, ];
+
+        let expected = CMSG_LOGOUT_REQUEST {
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_LOGOUT_REQUEST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_LOGOUT_REQUEST, got {opcode:#?}", opcode = opcode),
+        };
+
+
+        assert_eq!(CMSG_LOGOUT_REQUEST::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", tokio::test)]
+    async fn astd_CMSG_LOGOUT_REQUEST0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x04, 0x4B, 0x00, 0x00, 0x00, ];
+
+        let expected = CMSG_LOGOUT_REQUEST {
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_LOGOUT_REQUEST(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_LOGOUT_REQUEST, got {opcode:#?}", opcode = opcode),
+        };
+
+
+        assert_eq!(CMSG_LOGOUT_REQUEST::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await;
 
         assert_eq!(dest, raw);
     }

@@ -96,7 +96,6 @@ impl MaximumPossibleSized for MSG_AUCTION_HELLO_Client {
 #[cfg(test)]
 mod test {
     use crate::ReadableAndWritable;
-    use std::io::Cursor;
     use super::MSG_AUCTION_HELLO_Client;
     use crate::ConstantSized;
     use super::*;
@@ -104,8 +103,8 @@ mod test {
     use crate::world::v1::v12::opcodes::ClientOpcodeMessage;
     use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
 
-    #[test]
     #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
     fn MSG_AUCTION_HELLO_Client0() {
         let raw: Vec<u8> = vec![ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE,
              0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
@@ -115,7 +114,7 @@ mod test {
         };
 
         let header_size = 2 + 4;
-        let t = ClientOpcodeMessage::read_unencrypted(&mut Cursor::new(&raw)).unwrap();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&raw)).unwrap();
         let t = match t {
             ClientOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
             opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
@@ -126,7 +125,61 @@ mod test {
         assert_eq!(MSG_AUCTION_HELLO_Client::size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write_unencrypted_client(&mut Cursor::new(&mut dest));
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    async fn tokio_MSG_AUCTION_HELLO_Client0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE,
+             0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
+
+        let expected = MSG_AUCTION_HELLO_Client {
+            auctioneer: Guid::new(0xDEADBEEF),
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.auctioneer, expected.auctioneer);
+
+        assert_eq!(MSG_AUCTION_HELLO_Client::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", tokio::test)]
+    async fn astd_MSG_AUCTION_HELLO_Client0() {
+        let raw: Vec<u8> = vec![ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE,
+             0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
+
+        let expected = MSG_AUCTION_HELLO_Client {
+            auctioneer: Guid::new(0xDEADBEEF),
+        };
+
+        let header_size = 2 + 4;
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
+            opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.auctioneer, expected.auctioneer);
+
+        assert_eq!(MSG_AUCTION_HELLO_Client::size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await;
 
         assert_eq!(dest, raw);
     }
