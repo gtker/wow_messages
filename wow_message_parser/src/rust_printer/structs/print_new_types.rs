@@ -27,8 +27,8 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
 
                 print_default_for_new_enum(s, &rd);
 
-                s.bodyn(format!("impl {name}", name = ce.name()), |s| {
-                    print_write_for_new_enum(s, ce);
+                s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
+                    print_write_for_new_enum(s, &rd);
                 });
                 print_size_for_new_enum(s, &rd);
             }
@@ -788,7 +788,7 @@ fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
     );
 }
 
-fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
+fn print_write_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
     s.async_funcn_pub(
         "write",
         "<W: std::io::Write>(&self, w: &mut W)",
@@ -798,7 +798,7 @@ fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
         |s, it| {
             s.wln(format!(
                 "let a: {ty} = self.into();",
-                ty = ce.original_ty_name(),
+                ty = rd.original_ty_name(),
             ));
             s.wln(format!(
                 "a.{prefix}write(w){postfix}?;",
@@ -809,7 +809,7 @@ fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
         },
     );
 
-    let types = get_upcast_types(ce.ty());
+    let types = get_upcast_types(&rd.int_ty());
 
     for t in types {
         s.async_funcn_pub(
@@ -825,7 +825,7 @@ fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
             |s, it| {
                 s.wln(format!(
                     "let a: {ty} = self.into();",
-                    ty = ce.original_ty_name(),
+                    ty = rd.original_ty_name(),
                 ));
                 s.wln(format!(
                     "a.{prefix}write_{ty}_{endian}(w){postfix}",

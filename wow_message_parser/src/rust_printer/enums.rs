@@ -104,33 +104,29 @@ pub fn get_upcast_types(ty: &IntegerType) -> Vec<IntegerType> {
             IntegerType::U64(Endianness::Little),
             IntegerType::U64(Endianness::Big),
         ],
-        IntegerType::U16(e) => {
+        IntegerType::U16(_) => {
             vec![
-                match e {
-                    Endianness::Little => IntegerType::U16(Endianness::Big),
-                    Endianness::Big => IntegerType::U16(Endianness::Little),
-                },
+                IntegerType::U16(Endianness::Big),
+                IntegerType::U16(Endianness::Little),
                 IntegerType::U32(Endianness::Little),
                 IntegerType::U32(Endianness::Big),
                 IntegerType::U64(Endianness::Little),
                 IntegerType::U64(Endianness::Big),
             ]
         }
-        IntegerType::U32(e) => {
+        IntegerType::U32(_) => {
             vec![
-                match e {
-                    Endianness::Little => IntegerType::U32(Endianness::Big),
-                    Endianness::Big => IntegerType::U32(Endianness::Little),
-                },
+                IntegerType::U32(Endianness::Big),
+                IntegerType::U32(Endianness::Little),
                 IntegerType::U64(Endianness::Little),
                 IntegerType::U64(Endianness::Big),
             ]
         }
-        IntegerType::U64(e) => {
-            vec![match e {
-                Endianness::Little => IntegerType::U64(Endianness::Big),
-                Endianness::Big => IntegerType::U64(Endianness::Little),
-            }]
+        IntegerType::U64(_) => {
+            vec![
+                IntegerType::U64(Endianness::Big),
+                IntegerType::U64(Endianness::Little),
+            ]
         }
     }
 }

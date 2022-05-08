@@ -96,6 +96,42 @@ impl QuestCompletable {
     }
 
     #[cfg(feature = "sync")]
+    pub fn read_u32_le<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, QuestCompletableError> {
+        let a = crate::util::read_u32_le(r)?;
+        Ok((a as u32).try_into()?)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_read_u32_le<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, QuestCompletableError> {
+        let a = crate::util::tokio_read_u32_le(r).await?;
+        Ok((a as u32).try_into()?)
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_read_u32_le<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, QuestCompletableError> {
+        let a = crate::util::astd_read_u32_le(r).await?;
+        Ok((a as u32).try_into()?)
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::write_u32_le(w, self.as_u32() as u32)?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::tokio_write_u32_le(w, self.as_u32() as u32).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        crate::util::astd_write_u32_le(w, self.as_u32() as u32).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "sync")]
     pub fn read_u64_le<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, QuestCompletableError> {
         let a = crate::util::read_u64_le(r)?;
         Ok((a as u32).try_into()?)
