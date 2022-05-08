@@ -35,7 +35,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
             DefinerType::Flag => {
                 let rd = e.rust_object().get_rust_definer(ce.name());
 
-                print_new_flag_declaration(s, ce);
+                print_new_flag_declaration(s, &rd);
 
                 print_from_new_flag_to_old(s, ce);
 
@@ -51,16 +51,16 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
     }
 }
 
-fn print_new_flag_declaration(s: &mut Writer, ce: &ComplexEnum) {
+fn print_new_flag_declaration(s: &mut Writer, rd: &RustDefiner) {
     s.wln("#[derive(Default, Debug, PartialEq, Clone)]");
-    s.new_flag(ce.name(), ce.ty().rust_str(), |s| {
-        for f in ce.fields() {
-            if !f.should_not_be_in_type() {
+    s.new_flag(rd.ty_name(), rd.int_ty().rust_str(), |s| {
+        for enumerator in rd.enumerators() {
+            if !enumerator.should_not_be_in_flag_types() {
                 s.wln(format!(
                     "{variable_name}: Option<{ce_name}{f_name}>,",
-                    variable_name = f.name().to_lowercase(),
-                    ce_name = ce.name(),
-                    f_name = f.name()
+                    variable_name = enumerator.name().to_lowercase(),
+                    ce_name = rd.ty_name(),
+                    f_name = enumerator.name(),
                 ));
             }
         }
