@@ -20,7 +20,6 @@ pub struct SMSG_MEETINGSTONE_SETQUEUE {
 
 impl ServerMessageWrite for SMSG_MEETINGSTONE_SETQUEUE {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
     const OPCODE: u16 = 0x0295;
 
@@ -55,54 +54,100 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // area: Area
-        let area = Area::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // area: Area
+            let area = Area::tokio_read(r).await?;
 
-        // status: MeetingStoneStatus
-        let status = MeetingStoneStatus::tokio_read(r).await?;
+            // status: MeetingStoneStatus
+            let status = MeetingStoneStatus::tokio_read(r).await?;
 
-        Ok(Self {
-            area,
-            status,
+            Ok(Self {
+                area,
+                status,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // area: Area
-        self.area.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // area: Area
+            self.area.tokio_write(w).await?;
 
-        // status: MeetingStoneStatus
-        self.status.tokio_write(w).await?;
+            // status: MeetingStoneStatus
+            self.status.tokio_write(w).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // area: Area
-        let area = Area::astd_read(r).await?;
-
-        // status: MeetingStoneStatus
-        let status = MeetingStoneStatus::astd_read(r).await?;
-
-        Ok(Self {
-            area,
-            status,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // area: Area
-        self.area.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // area: Area
+            let area = Area::astd_read(r).await?;
 
-        // status: MeetingStoneStatus
-        self.status.astd_write(w).await?;
+            // status: MeetingStoneStatus
+            let status = MeetingStoneStatus::astd_read(r).await?;
 
-        Ok(())
+            Ok(Self {
+                area,
+                status,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // area: Area
+            self.area.astd_write(w).await?;
+
+            // status: MeetingStoneStatus
+            self.status.astd_write(w).await?;
+
+            Ok(())
+        })
     }
 
 }

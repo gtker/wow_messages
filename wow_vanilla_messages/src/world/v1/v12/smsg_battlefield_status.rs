@@ -19,7 +19,6 @@ pub struct SMSG_BATTLEFIELD_STATUS {
 
 impl ServerMessageWrite for SMSG_BATTLEFIELD_STATUS {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_BATTLEFIELD_STATUS {
     const OPCODE: u16 = 0x02d4;
 
@@ -4448,8842 +4447,8888 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // queue_slot: u32
-        let queue_slot = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // queue_slot: u32
+            let queue_slot = crate::util::tokio_read_u32_le(r).await?;
 
-        // map: Map
-        let map = Map::tokio_read(r).await?;
+            // map: Map
+            let map = Map::tokio_read(r).await?;
 
-        let map_if = match map {
-            Map::EASTERN_KINGDOMS => SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS,
-            Map::KALIMDOR => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+            let map_if = match map {
+                Map::EASTERN_KINGDOMS => SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS,
+                Map::KALIMDOR => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::TESTING => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::TESTING => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::TESTING {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::TESTING {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::SCOTT_TEST => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::SCOTT_TEST => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::CASH_TEST => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::CASH_TEST => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::ALTERAC_VALLEY => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::ALTERAC_VALLEY => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::SHADOWFANG_KEEP => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::SHADOWFANG_KEEP => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::STORMWIND_STOCKADE => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::STORMWIND_STOCKADE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::STORMWIND_PRISON => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::STORMWIND_PRISON => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::DEADMINES => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::DEADMINES => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::AZSHARA_CRATER => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::AZSHARA_CRATER => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::COLLINS_TEST => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::COLLINS_TEST => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::WAILING_CAVERNS => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::WAILING_CAVERNS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::MONASTERY => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::MONASTERY => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::RAZORFEN_KRAUL => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::RAZORFEN_KRAUL => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::BLACKFATHOM_DEEPS => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::BLACKFATHOM_DEEPS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::ULDAMAN => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::ULDAMAN => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::GNOMERAGON => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::GNOMERAGON => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::SUNKEN_TEMPLE => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::SUNKEN_TEMPLE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::RAZORFEN_DOWNS => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::RAZORFEN_DOWNS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::EMERALD_DREAM => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::EMERALD_DREAM => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::SCARLET_MONASTERY => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::SCARLET_MONASTERY => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::ZUL_FARRAK => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::ZUL_FARRAK => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::BLACKROCK_SPIRE => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::BLACKROCK_SPIRE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::BLACKROCK_DEPTHS => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::BLACKROCK_DEPTHS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::ONYXIAS_LAIR => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::ONYXIAS_LAIR => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::CAVERNS_OF_TIME => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::CAVERNS_OF_TIME => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::SCHOLOMANCE => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::SCHOLOMANCE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::ZUL_GURUB => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::ZUL_GURUB => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::STRATHOLME => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::STRATHOLME => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::MAURADON => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::MAURADON => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::MAURADON {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::MAURADON {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::DEEPRUN_TRAM => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::DEEPRUN_TRAM => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::RAGEFIRE_CHASM => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::RAGEFIRE_CHASM => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::MOLTEN_CORE => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::MOLTEN_CORE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::DIRE_MAUL => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::DIRE_MAUL => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::ALLIANCE_PVP_BARRACKS => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::ALLIANCE_PVP_BARRACKS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::HORDE_PVP_BARRACKS => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::HORDE_PVP_BARRACKS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::DEVELOPMENT_LAND => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::DEVELOPMENT_LAND => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::BLACKWING_LAIR => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::BLACKWING_LAIR => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::WARSONG_GULCH => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::WARSONG_GULCH => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::RUINS_OF_AHN_QIRAJ => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::RUINS_OF_AHN_QIRAJ => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::ARATHI_BASIN => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::ARATHI_BASIN => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::AHN_QIRAJ_TEMPLE => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::AHN_QIRAJ_TEMPLE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-            Map::NAXXRAMAS => {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                Map::NAXXRAMAS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::tokio_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::tokio_read(r).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::tokio_read(r).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
                         }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
 
-                SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
-                    unknown0,
-                    client_instance_id,
-                    status_id: status_id_if,
+                    SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
+                    }
                 }
-            }
-        };
+            };
 
-        Ok(Self {
-            queue_slot,
-            map: map_if,
+            Ok(Self {
+                queue_slot,
+                map: map_if,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // queue_slot: u32
-        w.write_all(&self.queue_slot.to_le_bytes()).await?;
-
-        // map: Map
-        self.map.tokio_write(w).await?;
-
-        match &self.map {
-            SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS => {}
-            SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::TESTING {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::MAURADON {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-            SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
-
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
-
-                // status_id: StatusId
-                status_id.tokio_write(w).await?;
-
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
-
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
-                }
-
-            }
-        }
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // queue_slot: u32
-        let queue_slot = crate::util::astd_read_u32_le(r).await?;
-
-        // map: Map
-        let map = Map::astd_read(r).await?;
-
-        let map_if = match map {
-            Map::EASTERN_KINGDOMS => SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS,
-            Map::KALIMDOR => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
-
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
-
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
-
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // queue_slot: u32
+            w.write_all(&self.queue_slot.to_le_bytes()).await?;
+
+            // map: Map
+            self.map.tokio_write(w).await?;
+
+            match &self.map {
+                SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS => {}
                 SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::TESTING => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::TESTING {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::SCOTT_TEST => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::CASH_TEST => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ALTERAC_VALLEY => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::SHADOWFANG_KEEP => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::STORMWIND_STOCKADE => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::STORMWIND_PRISON => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::DEADMINES => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::AZSHARA_CRATER => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::COLLINS_TEST => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::WAILING_CAVERNS => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::MONASTERY => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::RAZORFEN_KRAUL => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::BLACKFATHOM_DEEPS => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ULDAMAN => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::GNOMERAGON => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::SUNKEN_TEMPLE => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::RAZORFEN_DOWNS => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::EMERALD_DREAM => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::SCARLET_MONASTERY => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ZUL_FARRAK => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::BLACKROCK_SPIRE => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::BLACKROCK_DEPTHS => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ONYXIAS_LAIR => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::CAVERNS_OF_TIME => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::SCHOLOMANCE => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ZUL_GURUB => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::STRATHOLME => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::MAURADON => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::MAURADON {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::DEEPRUN_TRAM => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::RAGEFIRE_CHASM => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::MOLTEN_CORE => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::DIRE_MAUL => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ALLIANCE_PVP_BARRACKS => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::HORDE_PVP_BARRACKS => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::DEVELOPMENT_LAND => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::BLACKWING_LAIR => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::WARSONG_GULCH => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::RUINS_OF_AHN_QIRAJ => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ARATHI_BASIN => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::AHN_QIRAJ_TEMPLE => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::NAXXRAMAS => {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
 
-                // client_instance_id: u32
-                let client_instance_id = crate::util::astd_read_u32_le(r).await?;
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
 
-                // status_id: StatusId
-                let status_id = StatusId::astd_read(r).await?;
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
 
-                let status_id_if = match status_id {
-                    StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
-                    StatusId::WAIT_QUEUE => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
-
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
                             average_wait_time_in_ms,
                             time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_JOIN => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
 
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
                         SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
                             time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
                         }
-                    }
-                    StatusId::IN_PROGRESS => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
-
                         SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
                             time_to_bg_autoleave_in_ms,
                             time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
-                };
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
 
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
                 SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
                     unknown0,
                     client_instance_id,
-                    status_id: status_id_if,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.tokio_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
                 }
             }
-        };
 
-        Ok(Self {
-            queue_slot,
-            map: map_if,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // queue_slot: u32
-        w.write_all(&self.queue_slot.to_le_bytes()).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // queue_slot: u32
+            let queue_slot = crate::util::astd_read_u32_le(r).await?;
 
-        // map: Map
-        self.map.astd_write(w).await?;
+            // map: Map
+            let map = Map::astd_read(r).await?;
 
-        match &self.map {
-            SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS => {}
-            SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+            let map_if = match map {
+                Map::EASTERN_KINGDOMS => SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS,
+                Map::KALIMDOR => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::TESTING => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::TESTING {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::TESTING {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::SCOTT_TEST => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::CASH_TEST => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::ALTERAC_VALLEY => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::SHADOWFANG_KEEP => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::STORMWIND_STOCKADE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::STORMWIND_PRISON => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::DEADMINES => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::AZSHARA_CRATER => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::COLLINS_TEST => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::WAILING_CAVERNS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::MONASTERY => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::RAZORFEN_KRAUL => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::BLACKFATHOM_DEEPS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::ULDAMAN => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::GNOMERAGON => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::SUNKEN_TEMPLE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::RAZORFEN_DOWNS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::EMERALD_DREAM => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::SCARLET_MONASTERY => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::ZUL_FARRAK => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::BLACKROCK_SPIRE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::BLACKROCK_DEPTHS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::ONYXIAS_LAIR => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::CAVERNS_OF_TIME => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::SCHOLOMANCE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::ZUL_GURUB => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::STRATHOLME => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::MAURADON => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::MAURADON {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::MAURADON {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::DEEPRUN_TRAM => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::RAGEFIRE_CHASM => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::MOLTEN_CORE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::DIRE_MAUL => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::ALLIANCE_PVP_BARRACKS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::HORDE_PVP_BARRACKS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::DEVELOPMENT_LAND => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::BLACKWING_LAIR => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::WARSONG_GULCH => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::RUINS_OF_AHN_QIRAJ => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::ARATHI_BASIN => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::AHN_QIRAJ_TEMPLE => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+                Map::NAXXRAMAS => {
+                    // unknown0: u8
+                    let unknown0 = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
-                unknown0,
-                client_instance_id,
-                status_id,
-            } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes()).await?;
+                    // client_instance_id: u32
+                    let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
-                // client_instance_id: u32
-                w.write_all(&client_instance_id.to_le_bytes()).await?;
+                    // status_id: StatusId
+                    let status_id = StatusId::astd_read(r).await?;
 
-                // status_id: StatusId
-                status_id.astd_write(w).await?;
+                    let status_id_if = match status_id {
+                        StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
+                        StatusId::WAIT_QUEUE => {
+                            // average_wait_time_in_ms: u32
+                            let average_wait_time_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                match &status_id {
-                    SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
-                        average_wait_time_in_ms,
-                        time_in_queue_in_ms,
-                    } => {
-                        // average_wait_time_in_ms: u32
-                        w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+                            // time_in_queue_in_ms: u32
+                            let time_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
-                        // time_in_queue_in_ms: u32
-                        w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                                average_wait_time_in_ms,
+                                time_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_JOIN => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            let time_to_remove_in_queue_in_ms = crate::util::astd_read_u32_le(r).await?;
 
+                            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                                time_to_remove_in_queue_in_ms,
+                            }
+                        }
+                        StatusId::IN_PROGRESS => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            let time_to_bg_autoleave_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            let time_to_bg_start_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+                            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                                time_to_bg_autoleave_in_ms,
+                                time_to_bg_start_in_ms,
+                            }
+                        }
+                        StatusId::WAIT_LEAVE => SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE,
+                    };
+
+                    SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
+                        unknown0,
+                        client_instance_id,
+                        status_id: status_id_if,
                     }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
-                        time_to_remove_in_queue_in_ms,
-                    } => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
-                        time_to_bg_autoleave_in_ms,
-                        time_to_bg_start_in_ms,
-                    } => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
-
-                        // time_to_bg_start_in_ms: u32
-                        w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
-
-                    }
-                    SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
                 }
+            };
 
+            Ok(Self {
+                queue_slot,
+                map: map_if,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // queue_slot: u32
+            w.write_all(&self.queue_slot.to_le_bytes()).await?;
+
+            // map: Map
+            self.map.astd_write(w).await?;
+
+            match &self.map {
+                SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS => {}
+                SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::TESTING {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::MAURADON {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
+                SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
+                    unknown0,
+                    client_instance_id,
+                    status_id,
+                } => {
+                    // unknown0: u8
+                    w.write_all(&unknown0.to_le_bytes()).await?;
+
+                    // client_instance_id: u32
+                    w.write_all(&client_instance_id.to_le_bytes()).await?;
+
+                    // status_id: StatusId
+                    status_id.astd_write(w).await?;
+
+                    match &status_id {
+                        SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        } => {
+                            // average_wait_time_in_ms: u32
+                            w.write_all(&average_wait_time_in_ms.to_le_bytes()).await?;
+
+                            // time_in_queue_in_ms: u32
+                            w.write_all(&time_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN {
+                            time_to_remove_in_queue_in_ms,
+                        } => {
+                            // time_to_remove_in_queue_in_ms: u32
+                            w.write_all(&time_to_remove_in_queue_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        } => {
+                            // time_to_bg_autoleave_in_ms: u32
+                            w.write_all(&time_to_bg_autoleave_in_ms.to_le_bytes()).await?;
+
+                            // time_to_bg_start_in_ms: u32
+                            w.write_all(&time_to_bg_start_in_ms.to_le_bytes()).await?;
+
+                        }
+                        SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => {}
+                    }
+
+                }
             }
-        }
 
-        Ok(())
+            Ok(())
+        })
     }
 
 }

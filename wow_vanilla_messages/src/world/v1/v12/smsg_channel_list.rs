@@ -19,7 +19,6 @@ pub struct SMSG_CHANNEL_LIST {
 
 impl ServerMessageWrite for SMSG_CHANNEL_LIST {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_CHANNEL_LIST {
     const OPCODE: u16 = 0x009b;
 
@@ -75,96 +74,142 @@ impl MessageBody for SMSG_CHANNEL_LIST {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // channel_name: CString
-        let channel_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let channel_name = String::from_utf8(channel_name)?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // channel_name: CString
+            let channel_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let channel_name = String::from_utf8(channel_name)?;
 
-        // channel_flags: u8
-        let channel_flags = crate::util::tokio_read_u8_le(r).await?;
+            // channel_flags: u8
+            let channel_flags = crate::util::tokio_read_u8_le(r).await?;
 
-        // amount_of_members: u32
-        let amount_of_members = crate::util::tokio_read_u32_le(r).await?;
+            // amount_of_members: u32
+            let amount_of_members = crate::util::tokio_read_u32_le(r).await?;
 
-        // members: ChannelMember[amount_of_members]
-        let mut members = Vec::with_capacity(amount_of_members as usize);
-        for i in 0..amount_of_members {
-            members.push(ChannelMember::tokio_read(r).await?);
-        }
+            // members: ChannelMember[amount_of_members]
+            let mut members = Vec::with_capacity(amount_of_members as usize);
+            for i in 0..amount_of_members {
+                members.push(ChannelMember::tokio_read(r).await?);
+            }
 
-        Ok(Self {
-            channel_name,
-            channel_flags,
-            members,
+            Ok(Self {
+                channel_name,
+                channel_flags,
+                members,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // channel_name: CString
-        w.write_all(self.channel_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // channel_name: CString
+            w.write_all(self.channel_name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // channel_flags: u8
-        w.write_all(&self.channel_flags.to_le_bytes()).await?;
+            // channel_flags: u8
+            w.write_all(&self.channel_flags.to_le_bytes()).await?;
 
-        // amount_of_members: u32
-        w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
+            // amount_of_members: u32
+            w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
 
-        // members: ChannelMember[amount_of_members]
-        for i in self.members.iter() {
-            i.tokio_write(w).await?;
-        }
+            // members: ChannelMember[amount_of_members]
+            for i in self.members.iter() {
+                i.tokio_write(w).await?;
+            }
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // channel_name: CString
-        let channel_name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let channel_name = String::from_utf8(channel_name)?;
-
-        // channel_flags: u8
-        let channel_flags = crate::util::astd_read_u8_le(r).await?;
-
-        // amount_of_members: u32
-        let amount_of_members = crate::util::astd_read_u32_le(r).await?;
-
-        // members: ChannelMember[amount_of_members]
-        let mut members = Vec::with_capacity(amount_of_members as usize);
-        for i in 0..amount_of_members {
-            members.push(ChannelMember::astd_read(r).await?);
-        }
-
-        Ok(Self {
-            channel_name,
-            channel_flags,
-            members,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // channel_name: CString
-        w.write_all(self.channel_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // channel_name: CString
+            let channel_name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let channel_name = String::from_utf8(channel_name)?;
 
-        // channel_flags: u8
-        w.write_all(&self.channel_flags.to_le_bytes()).await?;
+            // channel_flags: u8
+            let channel_flags = crate::util::astd_read_u8_le(r).await?;
 
-        // amount_of_members: u32
-        w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
+            // amount_of_members: u32
+            let amount_of_members = crate::util::astd_read_u32_le(r).await?;
 
-        // members: ChannelMember[amount_of_members]
-        for i in self.members.iter() {
-            i.astd_write(w).await?;
-        }
+            // members: ChannelMember[amount_of_members]
+            let mut members = Vec::with_capacity(amount_of_members as usize);
+            for i in 0..amount_of_members {
+                members.push(ChannelMember::astd_read(r).await?);
+            }
 
-        Ok(())
+            Ok(Self {
+                channel_name,
+                channel_flags,
+                members,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // channel_name: CString
+            w.write_all(self.channel_name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // channel_flags: u8
+            w.write_all(&self.channel_flags.to_le_bytes()).await?;
+
+            // amount_of_members: u32
+            w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
+
+            // members: ChannelMember[amount_of_members]
+            for i in self.members.iter() {
+                i.astd_write(w).await?;
+            }
+
+            Ok(())
+        })
     }
 
 }

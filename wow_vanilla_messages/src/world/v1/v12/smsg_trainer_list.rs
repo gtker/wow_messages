@@ -21,7 +21,6 @@ pub struct SMSG_TRAINER_LIST {
 
 impl ServerMessageWrite for SMSG_TRAINER_LIST {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_TRAINER_LIST {
     const OPCODE: u16 = 0x01b1;
 
@@ -84,110 +83,156 @@ impl MessageBody for SMSG_TRAINER_LIST {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::tokio_read(r).await?;
 
-        // trainer_type: u32
-        let trainer_type = crate::util::tokio_read_u32_le(r).await?;
+            // trainer_type: u32
+            let trainer_type = crate::util::tokio_read_u32_le(r).await?;
 
-        // amount_of_spells: u32
-        let amount_of_spells = crate::util::tokio_read_u32_le(r).await?;
+            // amount_of_spells: u32
+            let amount_of_spells = crate::util::tokio_read_u32_le(r).await?;
 
-        // spells: TrainerSpell[amount_of_spells]
-        let mut spells = Vec::with_capacity(amount_of_spells as usize);
-        for i in 0..amount_of_spells {
-            spells.push(TrainerSpell::tokio_read(r).await?);
-        }
+            // spells: TrainerSpell[amount_of_spells]
+            let mut spells = Vec::with_capacity(amount_of_spells as usize);
+            for i in 0..amount_of_spells {
+                spells.push(TrainerSpell::tokio_read(r).await?);
+            }
 
-        // greeting: CString
-        let greeting = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let greeting = String::from_utf8(greeting)?;
+            // greeting: CString
+            let greeting = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let greeting = String::from_utf8(greeting)?;
 
-        Ok(Self {
-            guid,
-            trainer_type,
-            spells,
-            greeting,
+            Ok(Self {
+                guid,
+                trainer_type,
+                spells,
+                greeting,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        self.guid.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            self.guid.tokio_write(w).await?;
 
-        // trainer_type: u32
-        w.write_all(&self.trainer_type.to_le_bytes()).await?;
+            // trainer_type: u32
+            w.write_all(&self.trainer_type.to_le_bytes()).await?;
 
-        // amount_of_spells: u32
-        w.write_all(&(self.spells.len() as u32).to_le_bytes()).await?;
+            // amount_of_spells: u32
+            w.write_all(&(self.spells.len() as u32).to_le_bytes()).await?;
 
-        // spells: TrainerSpell[amount_of_spells]
-        for i in self.spells.iter() {
-            i.tokio_write(w).await?;
-        }
+            // spells: TrainerSpell[amount_of_spells]
+            for i in self.spells.iter() {
+                i.tokio_write(w).await?;
+            }
 
-        // greeting: CString
-        w.write_all(self.greeting.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // greeting: CString
+            w.write_all(self.greeting.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::astd_read(r).await?;
-
-        // trainer_type: u32
-        let trainer_type = crate::util::astd_read_u32_le(r).await?;
-
-        // amount_of_spells: u32
-        let amount_of_spells = crate::util::astd_read_u32_le(r).await?;
-
-        // spells: TrainerSpell[amount_of_spells]
-        let mut spells = Vec::with_capacity(amount_of_spells as usize);
-        for i in 0..amount_of_spells {
-            spells.push(TrainerSpell::astd_read(r).await?);
-        }
-
-        // greeting: CString
-        let greeting = crate::util::astd_read_c_string_to_vec(r).await?;
-        let greeting = String::from_utf8(greeting)?;
-
-        Ok(Self {
-            guid,
-            trainer_type,
-            spells,
-            greeting,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        self.guid.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::astd_read(r).await?;
 
-        // trainer_type: u32
-        w.write_all(&self.trainer_type.to_le_bytes()).await?;
+            // trainer_type: u32
+            let trainer_type = crate::util::astd_read_u32_le(r).await?;
 
-        // amount_of_spells: u32
-        w.write_all(&(self.spells.len() as u32).to_le_bytes()).await?;
+            // amount_of_spells: u32
+            let amount_of_spells = crate::util::astd_read_u32_le(r).await?;
 
-        // spells: TrainerSpell[amount_of_spells]
-        for i in self.spells.iter() {
-            i.astd_write(w).await?;
-        }
+            // spells: TrainerSpell[amount_of_spells]
+            let mut spells = Vec::with_capacity(amount_of_spells as usize);
+            for i in 0..amount_of_spells {
+                spells.push(TrainerSpell::astd_read(r).await?);
+            }
 
-        // greeting: CString
-        w.write_all(self.greeting.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // greeting: CString
+            let greeting = crate::util::astd_read_c_string_to_vec(r).await?;
+            let greeting = String::from_utf8(greeting)?;
 
-        Ok(())
+            Ok(Self {
+                guid,
+                trainer_type,
+                spells,
+                greeting,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            self.guid.astd_write(w).await?;
+
+            // trainer_type: u32
+            w.write_all(&self.trainer_type.to_le_bytes()).await?;
+
+            // amount_of_spells: u32
+            w.write_all(&(self.spells.len() as u32).to_le_bytes()).await?;
+
+            // spells: TrainerSpell[amount_of_spells]
+            for i in self.spells.iter() {
+                i.astd_write(w).await?;
+            }
+
+            // greeting: CString
+            w.write_all(self.greeting.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            Ok(())
+        })
     }
 
 }

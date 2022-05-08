@@ -17,7 +17,6 @@ pub struct SMSG_CREATURE_QUERY_RESPONSE {
 
 impl ServerMessageWrite for SMSG_CREATURE_QUERY_RESPONSE {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
     const OPCODE: u16 = 0x0061;
 
@@ -175,300 +174,346 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // creature_entry: u32
-        let creature_entry = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // creature_entry: u32
+            let creature_entry = crate::util::tokio_read_u32_le(r).await?;
 
-        // optional found
-        let current_size = {
-            0
-            + 4 // creature_entry: u32
-        };
-        let found = if current_size < body_size as usize {
-            // name1: CString
-            let name1 = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name1 = String::from_utf8(name1)?;
+            // optional found
+            let current_size = {
+                0
+                + 4 // creature_entry: u32
+            };
+            let found = if current_size < body_size as usize {
+                // name1: CString
+                let name1 = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let name1 = String::from_utf8(name1)?;
 
-            // name2: CString
-            let name2 = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name2 = String::from_utf8(name2)?;
+                // name2: CString
+                let name2 = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let name2 = String::from_utf8(name2)?;
 
-            // name3: CString
-            let name3 = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name3 = String::from_utf8(name3)?;
+                // name3: CString
+                let name3 = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let name3 = String::from_utf8(name3)?;
 
-            // name4: CString
-            let name4 = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name4 = String::from_utf8(name4)?;
+                // name4: CString
+                let name4 = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let name4 = String::from_utf8(name4)?;
 
-            // sub_name: CString
-            let sub_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let sub_name = String::from_utf8(sub_name)?;
+                // sub_name: CString
+                let sub_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let sub_name = String::from_utf8(sub_name)?;
 
-            // type_flags: u32
-            let type_flags = crate::util::tokio_read_u32_le(r).await?;
+                // type_flags: u32
+                let type_flags = crate::util::tokio_read_u32_le(r).await?;
 
-            // creature_type: u32
-            let creature_type = crate::util::tokio_read_u32_le(r).await?;
+                // creature_type: u32
+                let creature_type = crate::util::tokio_read_u32_le(r).await?;
 
-            // creature_family: u32
-            let creature_family = crate::util::tokio_read_u32_le(r).await?;
+                // creature_family: u32
+                let creature_family = crate::util::tokio_read_u32_le(r).await?;
 
-            // creature_rank: u32
-            let creature_rank = crate::util::tokio_read_u32_le(r).await?;
+                // creature_rank: u32
+                let creature_rank = crate::util::tokio_read_u32_le(r).await?;
 
-            // unknown0: u32
-            let unknown0 = crate::util::tokio_read_u32_le(r).await?;
+                // unknown0: u32
+                let unknown0 = crate::util::tokio_read_u32_le(r).await?;
 
-            // spell_data_id: u32
-            let spell_data_id = crate::util::tokio_read_u32_le(r).await?;
+                // spell_data_id: u32
+                let spell_data_id = crate::util::tokio_read_u32_le(r).await?;
 
-            // display_id: u32
-            let display_id = crate::util::tokio_read_u32_le(r).await?;
+                // display_id: u32
+                let display_id = crate::util::tokio_read_u32_le(r).await?;
 
-            // civilian: u8
-            let civilian = crate::util::tokio_read_u8_le(r).await?;
+                // civilian: u8
+                let civilian = crate::util::tokio_read_u8_le(r).await?;
 
-            // racial_leader: u8
-            let racial_leader = crate::util::tokio_read_u8_le(r).await?;
+                // racial_leader: u8
+                let racial_leader = crate::util::tokio_read_u8_le(r).await?;
 
-            Some(SMSG_CREATURE_QUERY_RESPONSE_found {
-                name1,
-                name2,
-                name3,
-                name4,
-                sub_name,
-                type_flags,
-                creature_type,
-                creature_family,
-                creature_rank,
-                unknown0,
-                spell_data_id,
-                display_id,
-                civilian,
-                racial_leader,
+                Some(SMSG_CREATURE_QUERY_RESPONSE_found {
+                    name1,
+                    name2,
+                    name3,
+                    name4,
+                    sub_name,
+                    type_flags,
+                    creature_type,
+                    creature_family,
+                    creature_rank,
+                    unknown0,
+                    spell_data_id,
+                    display_id,
+                    civilian,
+                    racial_leader,
+                })
+            } else {
+                None
+            };
+
+            Ok(Self {
+                creature_entry,
+                found,
             })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            creature_entry,
-            found,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // creature_entry: u32
-        w.write_all(&self.creature_entry.to_le_bytes()).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // creature_entry: u32
+            w.write_all(&self.creature_entry.to_le_bytes()).await?;
 
-        // optional found
-        if let Some(v) = &self.found {
-            // name1: CString
-            w.write_all(v.name1.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+            // optional found
+            if let Some(v) = &self.found {
+                // name1: CString
+                w.write_all(v.name1.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
 
-            // name2: CString
-            w.write_all(v.name2.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name2: CString
+                w.write_all(v.name2.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
 
-            // name3: CString
-            w.write_all(v.name3.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name3: CString
+                w.write_all(v.name3.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
 
-            // name4: CString
-            w.write_all(v.name4.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name4: CString
+                w.write_all(v.name4.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
 
-            // sub_name: CString
-            w.write_all(v.sub_name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // sub_name: CString
+                w.write_all(v.sub_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
 
-            // type_flags: u32
-            w.write_all(&v.type_flags.to_le_bytes()).await?;
+                // type_flags: u32
+                w.write_all(&v.type_flags.to_le_bytes()).await?;
 
-            // creature_type: u32
-            w.write_all(&v.creature_type.to_le_bytes()).await?;
+                // creature_type: u32
+                w.write_all(&v.creature_type.to_le_bytes()).await?;
 
-            // creature_family: u32
-            w.write_all(&v.creature_family.to_le_bytes()).await?;
+                // creature_family: u32
+                w.write_all(&v.creature_family.to_le_bytes()).await?;
 
-            // creature_rank: u32
-            w.write_all(&v.creature_rank.to_le_bytes()).await?;
+                // creature_rank: u32
+                w.write_all(&v.creature_rank.to_le_bytes()).await?;
 
-            // unknown0: u32
-            w.write_all(&v.unknown0.to_le_bytes()).await?;
+                // unknown0: u32
+                w.write_all(&v.unknown0.to_le_bytes()).await?;
 
-            // spell_data_id: u32
-            w.write_all(&v.spell_data_id.to_le_bytes()).await?;
+                // spell_data_id: u32
+                w.write_all(&v.spell_data_id.to_le_bytes()).await?;
 
-            // display_id: u32
-            w.write_all(&v.display_id.to_le_bytes()).await?;
+                // display_id: u32
+                w.write_all(&v.display_id.to_le_bytes()).await?;
 
-            // civilian: u8
-            w.write_all(&v.civilian.to_le_bytes()).await?;
+                // civilian: u8
+                w.write_all(&v.civilian.to_le_bytes()).await?;
 
-            // racial_leader: u8
-            w.write_all(&v.racial_leader.to_le_bytes()).await?;
+                // racial_leader: u8
+                w.write_all(&v.racial_leader.to_le_bytes()).await?;
 
-        }
+            }
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // creature_entry: u32
-        let creature_entry = crate::util::astd_read_u32_le(r).await?;
-
-        // optional found
-        let current_size = {
-            0
-            + 4 // creature_entry: u32
-        };
-        let found = if current_size < body_size as usize {
-            // name1: CString
-            let name1 = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name1 = String::from_utf8(name1)?;
-
-            // name2: CString
-            let name2 = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name2 = String::from_utf8(name2)?;
-
-            // name3: CString
-            let name3 = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name3 = String::from_utf8(name3)?;
-
-            // name4: CString
-            let name4 = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name4 = String::from_utf8(name4)?;
-
-            // sub_name: CString
-            let sub_name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let sub_name = String::from_utf8(sub_name)?;
-
-            // type_flags: u32
-            let type_flags = crate::util::astd_read_u32_le(r).await?;
-
-            // creature_type: u32
-            let creature_type = crate::util::astd_read_u32_le(r).await?;
-
-            // creature_family: u32
-            let creature_family = crate::util::astd_read_u32_le(r).await?;
-
-            // creature_rank: u32
-            let creature_rank = crate::util::astd_read_u32_le(r).await?;
-
-            // unknown0: u32
-            let unknown0 = crate::util::astd_read_u32_le(r).await?;
-
-            // spell_data_id: u32
-            let spell_data_id = crate::util::astd_read_u32_le(r).await?;
-
-            // display_id: u32
-            let display_id = crate::util::astd_read_u32_le(r).await?;
-
-            // civilian: u8
-            let civilian = crate::util::astd_read_u8_le(r).await?;
-
-            // racial_leader: u8
-            let racial_leader = crate::util::astd_read_u8_le(r).await?;
-
-            Some(SMSG_CREATURE_QUERY_RESPONSE_found {
-                name1,
-                name2,
-                name3,
-                name4,
-                sub_name,
-                type_flags,
-                creature_type,
-                creature_family,
-                creature_rank,
-                unknown0,
-                spell_data_id,
-                display_id,
-                civilian,
-                racial_leader,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            creature_entry,
-            found,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // creature_entry: u32
-        w.write_all(&self.creature_entry.to_le_bytes()).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // creature_entry: u32
+            let creature_entry = crate::util::astd_read_u32_le(r).await?;
 
-        // optional found
-        if let Some(v) = &self.found {
-            // name1: CString
-            w.write_all(v.name1.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+            // optional found
+            let current_size = {
+                0
+                + 4 // creature_entry: u32
+            };
+            let found = if current_size < body_size as usize {
+                // name1: CString
+                let name1 = crate::util::astd_read_c_string_to_vec(r).await?;
+                let name1 = String::from_utf8(name1)?;
 
-            // name2: CString
-            w.write_all(v.name2.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name2: CString
+                let name2 = crate::util::astd_read_c_string_to_vec(r).await?;
+                let name2 = String::from_utf8(name2)?;
 
-            // name3: CString
-            w.write_all(v.name3.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name3: CString
+                let name3 = crate::util::astd_read_c_string_to_vec(r).await?;
+                let name3 = String::from_utf8(name3)?;
 
-            // name4: CString
-            w.write_all(v.name4.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name4: CString
+                let name4 = crate::util::astd_read_c_string_to_vec(r).await?;
+                let name4 = String::from_utf8(name4)?;
 
-            // sub_name: CString
-            w.write_all(v.sub_name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // sub_name: CString
+                let sub_name = crate::util::astd_read_c_string_to_vec(r).await?;
+                let sub_name = String::from_utf8(sub_name)?;
 
-            // type_flags: u32
-            w.write_all(&v.type_flags.to_le_bytes()).await?;
+                // type_flags: u32
+                let type_flags = crate::util::astd_read_u32_le(r).await?;
 
-            // creature_type: u32
-            w.write_all(&v.creature_type.to_le_bytes()).await?;
+                // creature_type: u32
+                let creature_type = crate::util::astd_read_u32_le(r).await?;
 
-            // creature_family: u32
-            w.write_all(&v.creature_family.to_le_bytes()).await?;
+                // creature_family: u32
+                let creature_family = crate::util::astd_read_u32_le(r).await?;
 
-            // creature_rank: u32
-            w.write_all(&v.creature_rank.to_le_bytes()).await?;
+                // creature_rank: u32
+                let creature_rank = crate::util::astd_read_u32_le(r).await?;
 
-            // unknown0: u32
-            w.write_all(&v.unknown0.to_le_bytes()).await?;
+                // unknown0: u32
+                let unknown0 = crate::util::astd_read_u32_le(r).await?;
 
-            // spell_data_id: u32
-            w.write_all(&v.spell_data_id.to_le_bytes()).await?;
+                // spell_data_id: u32
+                let spell_data_id = crate::util::astd_read_u32_le(r).await?;
 
-            // display_id: u32
-            w.write_all(&v.display_id.to_le_bytes()).await?;
+                // display_id: u32
+                let display_id = crate::util::astd_read_u32_le(r).await?;
 
-            // civilian: u8
-            w.write_all(&v.civilian.to_le_bytes()).await?;
+                // civilian: u8
+                let civilian = crate::util::astd_read_u8_le(r).await?;
 
-            // racial_leader: u8
-            w.write_all(&v.racial_leader.to_le_bytes()).await?;
+                // racial_leader: u8
+                let racial_leader = crate::util::astd_read_u8_le(r).await?;
 
-        }
+                Some(SMSG_CREATURE_QUERY_RESPONSE_found {
+                    name1,
+                    name2,
+                    name3,
+                    name4,
+                    sub_name,
+                    type_flags,
+                    creature_type,
+                    creature_family,
+                    creature_rank,
+                    unknown0,
+                    spell_data_id,
+                    display_id,
+                    civilian,
+                    racial_leader,
+                })
+            } else {
+                None
+            };
 
-        Ok(())
+            Ok(Self {
+                creature_entry,
+                found,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // creature_entry: u32
+            w.write_all(&self.creature_entry.to_le_bytes()).await?;
+
+            // optional found
+            if let Some(v) = &self.found {
+                // name1: CString
+                w.write_all(v.name1.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // name2: CString
+                w.write_all(v.name2.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // name3: CString
+                w.write_all(v.name3.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // name4: CString
+                w.write_all(v.name4.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // sub_name: CString
+                w.write_all(v.sub_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // type_flags: u32
+                w.write_all(&v.type_flags.to_le_bytes()).await?;
+
+                // creature_type: u32
+                w.write_all(&v.creature_type.to_le_bytes()).await?;
+
+                // creature_family: u32
+                w.write_all(&v.creature_family.to_le_bytes()).await?;
+
+                // creature_rank: u32
+                w.write_all(&v.creature_rank.to_le_bytes()).await?;
+
+                // unknown0: u32
+                w.write_all(&v.unknown0.to_le_bytes()).await?;
+
+                // spell_data_id: u32
+                w.write_all(&v.spell_data_id.to_le_bytes()).await?;
+
+                // display_id: u32
+                w.write_all(&v.display_id.to_le_bytes()).await?;
+
+                // civilian: u8
+                w.write_all(&v.civilian.to_le_bytes()).await?;
+
+                // racial_leader: u8
+                w.write_all(&v.racial_leader.to_le_bytes()).await?;
+
+            }
+
+            Ok(())
+        })
     }
 
 }

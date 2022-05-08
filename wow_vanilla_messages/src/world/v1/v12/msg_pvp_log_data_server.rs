@@ -20,7 +20,6 @@ pub struct MSG_PVP_LOG_DATA_Server {
 
 impl ServerMessageWrite for MSG_PVP_LOG_DATA_Server {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_PVP_LOG_DATA_Server {
     const OPCODE: u16 = 0x02e0;
 
@@ -89,122 +88,168 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // status: BattlegroundEndStatus
-        let status = BattlegroundEndStatus::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // status: BattlegroundEndStatus
+            let status = BattlegroundEndStatus::tokio_read(r).await?;
 
-        let status_if = match status {
-            BattlegroundEndStatus::NOT_ENDED => MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED,
-            BattlegroundEndStatus::ENDED => {
-                // winner: BattlegroundWinner
-                let winner = BattlegroundWinner::tokio_read(r).await?;
+            let status_if = match status {
+                BattlegroundEndStatus::NOT_ENDED => MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED,
+                BattlegroundEndStatus::ENDED => {
+                    // winner: BattlegroundWinner
+                    let winner = BattlegroundWinner::tokio_read(r).await?;
 
-                MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED {
-                    winner,
+                    MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED {
+                        winner,
+                    }
                 }
+            };
+
+            // amount_of_players: u32
+            let amount_of_players = crate::util::tokio_read_u32_le(r).await?;
+
+            // players: BattlegroundPlayer[amount_of_players]
+            let mut players = Vec::with_capacity(amount_of_players as usize);
+            for i in 0..amount_of_players {
+                players.push(BattlegroundPlayer::tokio_read(r).await?);
             }
-        };
 
-        // amount_of_players: u32
-        let amount_of_players = crate::util::tokio_read_u32_le(r).await?;
-
-        // players: BattlegroundPlayer[amount_of_players]
-        let mut players = Vec::with_capacity(amount_of_players as usize);
-        for i in 0..amount_of_players {
-            players.push(BattlegroundPlayer::tokio_read(r).await?);
-        }
-
-        Ok(Self {
-            status: status_if,
-            players,
+            Ok(Self {
+                status: status_if,
+                players,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // status: BattlegroundEndStatus
-        self.status.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // status: BattlegroundEndStatus
+            self.status.tokio_write(w).await?;
 
-        match &self.status {
-            MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED => {}
-            MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED {
-                winner,
-            } => {
-                // winner: BattlegroundWinner
-                winner.tokio_write(w).await?;
-
-            }
-        }
-
-        // amount_of_players: u32
-        w.write_all(&(self.players.len() as u32).to_le_bytes()).await?;
-
-        // players: BattlegroundPlayer[amount_of_players]
-        for i in self.players.iter() {
-            i.tokio_write(w).await?;
-        }
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // status: BattlegroundEndStatus
-        let status = BattlegroundEndStatus::astd_read(r).await?;
-
-        let status_if = match status {
-            BattlegroundEndStatus::NOT_ENDED => MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED,
-            BattlegroundEndStatus::ENDED => {
-                // winner: BattlegroundWinner
-                let winner = BattlegroundWinner::astd_read(r).await?;
-
+            match &self.status {
+                MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED => {}
                 MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED {
                     winner,
+                } => {
+                    // winner: BattlegroundWinner
+                    winner.tokio_write(w).await?;
+
                 }
             }
-        };
 
-        // amount_of_players: u32
-        let amount_of_players = crate::util::astd_read_u32_le(r).await?;
+            // amount_of_players: u32
+            w.write_all(&(self.players.len() as u32).to_le_bytes()).await?;
 
-        // players: BattlegroundPlayer[amount_of_players]
-        let mut players = Vec::with_capacity(amount_of_players as usize);
-        for i in 0..amount_of_players {
-            players.push(BattlegroundPlayer::astd_read(r).await?);
-        }
+            // players: BattlegroundPlayer[amount_of_players]
+            for i in self.players.iter() {
+                i.tokio_write(w).await?;
+            }
 
-        Ok(Self {
-            status: status_if,
-            players,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // status: BattlegroundEndStatus
-        self.status.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // status: BattlegroundEndStatus
+            let status = BattlegroundEndStatus::astd_read(r).await?;
 
-        match &self.status {
-            MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED => {}
-            MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED {
-                winner,
-            } => {
-                // winner: BattlegroundWinner
-                winner.astd_write(w).await?;
+            let status_if = match status {
+                BattlegroundEndStatus::NOT_ENDED => MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED,
+                BattlegroundEndStatus::ENDED => {
+                    // winner: BattlegroundWinner
+                    let winner = BattlegroundWinner::astd_read(r).await?;
 
+                    MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED {
+                        winner,
+                    }
+                }
+            };
+
+            // amount_of_players: u32
+            let amount_of_players = crate::util::astd_read_u32_le(r).await?;
+
+            // players: BattlegroundPlayer[amount_of_players]
+            let mut players = Vec::with_capacity(amount_of_players as usize);
+            for i in 0..amount_of_players {
+                players.push(BattlegroundPlayer::astd_read(r).await?);
             }
-        }
 
-        // amount_of_players: u32
-        w.write_all(&(self.players.len() as u32).to_le_bytes()).await?;
+            Ok(Self {
+                status: status_if,
+                players,
+            })
+        })
+    }
 
-        // players: BattlegroundPlayer[amount_of_players]
-        for i in self.players.iter() {
-            i.astd_write(w).await?;
-        }
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // status: BattlegroundEndStatus
+            self.status.astd_write(w).await?;
 
-        Ok(())
+            match &self.status {
+                MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED => {}
+                MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED {
+                    winner,
+                } => {
+                    // winner: BattlegroundWinner
+                    winner.astd_write(w).await?;
+
+                }
+            }
+
+            // amount_of_players: u32
+            w.write_all(&(self.players.len() as u32).to_le_bytes()).await?;
+
+            // players: BattlegroundPlayer[amount_of_players]
+            for i in self.players.iter() {
+                i.astd_write(w).await?;
+            }
+
+            Ok(())
+        })
     }
 
 }

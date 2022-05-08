@@ -18,7 +18,6 @@ pub struct CMSG_LEARN_TALENT {
 
 impl ClientMessageWrite for CMSG_LEARN_TALENT {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_LEARN_TALENT {
     const OPCODE: u16 = 0x0251;
 
@@ -53,54 +52,100 @@ impl MessageBody for CMSG_LEARN_TALENT {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // talent_id: u32
-        let talent_id = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // talent_id: u32
+            let talent_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // requested_rank: u32
-        let requested_rank = crate::util::tokio_read_u32_le(r).await?;
+            // requested_rank: u32
+            let requested_rank = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            talent_id,
-            requested_rank,
+            Ok(Self {
+                talent_id,
+                requested_rank,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // talent_id: u32
-        w.write_all(&self.talent_id.to_le_bytes()).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // talent_id: u32
+            w.write_all(&self.talent_id.to_le_bytes()).await?;
 
-        // requested_rank: u32
-        w.write_all(&self.requested_rank.to_le_bytes()).await?;
+            // requested_rank: u32
+            w.write_all(&self.requested_rank.to_le_bytes()).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // talent_id: u32
-        let talent_id = crate::util::astd_read_u32_le(r).await?;
-
-        // requested_rank: u32
-        let requested_rank = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            talent_id,
-            requested_rank,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // talent_id: u32
-        w.write_all(&self.talent_id.to_le_bytes()).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // talent_id: u32
+            let talent_id = crate::util::astd_read_u32_le(r).await?;
 
-        // requested_rank: u32
-        w.write_all(&self.requested_rank.to_le_bytes()).await?;
+            // requested_rank: u32
+            let requested_rank = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(())
+            Ok(Self {
+                talent_id,
+                requested_rank,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // talent_id: u32
+            w.write_all(&self.talent_id.to_le_bytes()).await?;
+
+            // requested_rank: u32
+            w.write_all(&self.requested_rank.to_le_bytes()).await?;
+
+            Ok(())
+        })
     }
 
 }

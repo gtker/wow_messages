@@ -23,7 +23,6 @@ pub struct SMSG_BATTLEFIELD_LIST {
 
 impl ServerMessageWrite for SMSG_BATTLEFIELD_LIST {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_BATTLEFIELD_LIST {
     const OPCODE: u16 = 0x023d;
 
@@ -97,132 +96,178 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // battlemaster: Guid
-        let battlemaster = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // battlemaster: Guid
+            let battlemaster = Guid::tokio_read(r).await?;
 
-        // map: Map
-        let map = Map::tokio_read(r).await?;
+            // map: Map
+            let map = Map::tokio_read(r).await?;
 
-        // unknown1: u8
-        let unknown1 = crate::util::tokio_read_u8_le(r).await?;
+            // unknown1: u8
+            let unknown1 = crate::util::tokio_read_u8_le(r).await?;
 
-        // unknown2: u32
-        let unknown2 = crate::util::tokio_read_u32_le(r).await?;
+            // unknown2: u32
+            let unknown2 = crate::util::tokio_read_u32_le(r).await?;
 
-        // unknown3: u8
-        let unknown3 = crate::util::tokio_read_u8_le(r).await?;
+            // unknown3: u8
+            let unknown3 = crate::util::tokio_read_u8_le(r).await?;
 
-        // number_of_battlegrounds: u32
-        let number_of_battlegrounds = crate::util::tokio_read_u32_le(r).await?;
+            // number_of_battlegrounds: u32
+            let number_of_battlegrounds = crate::util::tokio_read_u32_le(r).await?;
 
-        // battlegrounds: u32[number_of_battlegrounds]
-        let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
-        for i in 0..number_of_battlegrounds {
-            battlegrounds.push(crate::util::tokio_read_u32_le(r).await?);
-        }
+            // battlegrounds: u32[number_of_battlegrounds]
+            let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
+            for i in 0..number_of_battlegrounds {
+                battlegrounds.push(crate::util::tokio_read_u32_le(r).await?);
+            }
 
-        Ok(Self {
-            battlemaster,
-            map,
-            unknown1,
-            unknown2,
-            unknown3,
-            battlegrounds,
+            Ok(Self {
+                battlemaster,
+                map,
+                unknown1,
+                unknown2,
+                unknown3,
+                battlegrounds,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // battlemaster: Guid
-        self.battlemaster.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // battlemaster: Guid
+            self.battlemaster.tokio_write(w).await?;
 
-        // map: Map
-        self.map.tokio_write(w).await?;
+            // map: Map
+            self.map.tokio_write(w).await?;
 
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+            // unknown1: u8
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
 
-        // unknown2: u32
-        w.write_all(&self.unknown2.to_le_bytes()).await?;
+            // unknown2: u32
+            w.write_all(&self.unknown2.to_le_bytes()).await?;
 
-        // unknown3: u8
-        w.write_all(&self.unknown3.to_le_bytes()).await?;
+            // unknown3: u8
+            w.write_all(&self.unknown3.to_le_bytes()).await?;
 
-        // number_of_battlegrounds: u32
-        w.write_all(&(self.battlegrounds.len() as u32).to_le_bytes()).await?;
+            // number_of_battlegrounds: u32
+            w.write_all(&(self.battlegrounds.len() as u32).to_le_bytes()).await?;
 
-        // battlegrounds: u32[number_of_battlegrounds]
-        for i in self.battlegrounds.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // battlegrounds: u32[number_of_battlegrounds]
+            for i in self.battlegrounds.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // battlemaster: Guid
-        let battlemaster = Guid::astd_read(r).await?;
-
-        // map: Map
-        let map = Map::astd_read(r).await?;
-
-        // unknown1: u8
-        let unknown1 = crate::util::astd_read_u8_le(r).await?;
-
-        // unknown2: u32
-        let unknown2 = crate::util::astd_read_u32_le(r).await?;
-
-        // unknown3: u8
-        let unknown3 = crate::util::astd_read_u8_le(r).await?;
-
-        // number_of_battlegrounds: u32
-        let number_of_battlegrounds = crate::util::astd_read_u32_le(r).await?;
-
-        // battlegrounds: u32[number_of_battlegrounds]
-        let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
-        for i in 0..number_of_battlegrounds {
-            battlegrounds.push(crate::util::astd_read_u32_le(r).await?);
-        }
-
-        Ok(Self {
-            battlemaster,
-            map,
-            unknown1,
-            unknown2,
-            unknown3,
-            battlegrounds,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // battlemaster: Guid
-        self.battlemaster.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // battlemaster: Guid
+            let battlemaster = Guid::astd_read(r).await?;
 
-        // map: Map
-        self.map.astd_write(w).await?;
+            // map: Map
+            let map = Map::astd_read(r).await?;
 
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+            // unknown1: u8
+            let unknown1 = crate::util::astd_read_u8_le(r).await?;
 
-        // unknown2: u32
-        w.write_all(&self.unknown2.to_le_bytes()).await?;
+            // unknown2: u32
+            let unknown2 = crate::util::astd_read_u32_le(r).await?;
 
-        // unknown3: u8
-        w.write_all(&self.unknown3.to_le_bytes()).await?;
+            // unknown3: u8
+            let unknown3 = crate::util::astd_read_u8_le(r).await?;
 
-        // number_of_battlegrounds: u32
-        w.write_all(&(self.battlegrounds.len() as u32).to_le_bytes()).await?;
+            // number_of_battlegrounds: u32
+            let number_of_battlegrounds = crate::util::astd_read_u32_le(r).await?;
 
-        // battlegrounds: u32[number_of_battlegrounds]
-        for i in self.battlegrounds.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // battlegrounds: u32[number_of_battlegrounds]
+            let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
+            for i in 0..number_of_battlegrounds {
+                battlegrounds.push(crate::util::astd_read_u32_le(r).await?);
+            }
 
-        Ok(())
+            Ok(Self {
+                battlemaster,
+                map,
+                unknown1,
+                unknown2,
+                unknown3,
+                battlegrounds,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // battlemaster: Guid
+            self.battlemaster.astd_write(w).await?;
+
+            // map: Map
+            self.map.astd_write(w).await?;
+
+            // unknown1: u8
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+            // unknown2: u32
+            w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+            // unknown3: u8
+            w.write_all(&self.unknown3.to_le_bytes()).await?;
+
+            // number_of_battlegrounds: u32
+            w.write_all(&(self.battlegrounds.len() as u32).to_le_bytes()).await?;
+
+            // battlegrounds: u32[number_of_battlegrounds]
+            for i in self.battlegrounds.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
+
+            Ok(())
+        })
     }
 
 }

@@ -17,7 +17,6 @@ pub struct CMSG_GROUP_CHANGE_SUB_GROUP {
 
 impl ClientMessageWrite for CMSG_GROUP_CHANGE_SUB_GROUP {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_GROUP_CHANGE_SUB_GROUP {
     const OPCODE: u16 = 0x027e;
 
@@ -55,60 +54,106 @@ impl MessageBody for CMSG_GROUP_CHANGE_SUB_GROUP {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // name: CString
-        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // name: CString
+            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // group_number: u8
-        let group_number = crate::util::tokio_read_u8_le(r).await?;
+            // group_number: u8
+            let group_number = crate::util::tokio_read_u8_le(r).await?;
 
-        Ok(Self {
-            name,
-            group_number,
+            Ok(Self {
+                name,
+                group_number,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // name: CString
+            w.write_all(self.name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // group_number: u8
-        w.write_all(&self.group_number.to_le_bytes()).await?;
+            // group_number: u8
+            w.write_all(&self.group_number.to_le_bytes()).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // name: CString
-        let name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
-
-        // group_number: u8
-        let group_number = crate::util::astd_read_u8_le(r).await?;
-
-        Ok(Self {
-            name,
-            group_number,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // name: CString
+            let name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // group_number: u8
-        w.write_all(&self.group_number.to_le_bytes()).await?;
+            // group_number: u8
+            let group_number = crate::util::astd_read_u8_le(r).await?;
 
-        Ok(())
+            Ok(Self {
+                name,
+                group_number,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // name: CString
+            w.write_all(self.name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // group_number: u8
+            w.write_all(&self.group_number.to_le_bytes()).await?;
+
+            Ok(())
+        })
     }
 
 }

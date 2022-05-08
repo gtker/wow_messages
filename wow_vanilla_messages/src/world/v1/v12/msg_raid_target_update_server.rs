@@ -18,7 +18,6 @@ pub struct MSG_RAID_TARGET_UPDATE_Server {
 
 impl ServerMessageWrite for MSG_RAID_TARGET_UPDATE_Server {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
     const OPCODE: u16 = 0x0321;
 
@@ -88,124 +87,170 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // update_type: RaidTargetUpdateType
-        let update_type = RaidTargetUpdateType::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // update_type: RaidTargetUpdateType
+            let update_type = RaidTargetUpdateType::tokio_read(r).await?;
 
-        let update_type_if = match update_type {
-            RaidTargetUpdateType::PARTIAL => {
-                // raid_target: RaidTargetUpdate
-                let raid_target = RaidTargetUpdate::tokio_read(r).await?;
+            let update_type_if = match update_type {
+                RaidTargetUpdateType::PARTIAL => {
+                    // raid_target: RaidTargetUpdate
+                    let raid_target = RaidTargetUpdate::tokio_read(r).await?;
 
-                MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
-                    raid_target,
+                    MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
+                        raid_target,
+                    }
                 }
-            }
-            RaidTargetUpdateType::FULL => {
-                // raid_targets: RaidTargetUpdate[8]
-                let mut raid_targets = Vec::with_capacity(8 as usize);
-                for i in 0..8 {
-                    raid_targets.push(RaidTargetUpdate::tokio_read(r).await?);
-                }
-                let raid_targets = raid_targets.try_into().unwrap();
+                RaidTargetUpdateType::FULL => {
+                    // raid_targets: RaidTargetUpdate[8]
+                    let mut raid_targets = Vec::with_capacity(8 as usize);
+                    for i in 0..8 {
+                        raid_targets.push(RaidTargetUpdate::tokio_read(r).await?);
+                    }
+                    let raid_targets = raid_targets.try_into().unwrap();
 
-                MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
-                    raid_targets,
+                    MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
+                        raid_targets,
+                    }
                 }
-            }
-        };
+            };
 
-        Ok(Self {
-            update_type: update_type_if,
+            Ok(Self {
+                update_type: update_type_if,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // update_type: RaidTargetUpdateType
-        self.update_type.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // update_type: RaidTargetUpdateType
+            self.update_type.tokio_write(w).await?;
 
-        match &self.update_type {
-            MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
-                raid_target,
-            } => {
-                // raid_target: RaidTargetUpdate
-                raid_target.tokio_write(w).await?;
-
-            }
-            MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
-                raid_targets,
-            } => {
-                // raid_targets: RaidTargetUpdate[8]
-                for i in raid_targets.iter() {
-                    i.tokio_write(w).await?;
-                }
-
-            }
-        }
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // update_type: RaidTargetUpdateType
-        let update_type = RaidTargetUpdateType::astd_read(r).await?;
-
-        let update_type_if = match update_type {
-            RaidTargetUpdateType::PARTIAL => {
-                // raid_target: RaidTargetUpdate
-                let raid_target = RaidTargetUpdate::astd_read(r).await?;
-
+            match &self.update_type {
                 MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
                     raid_target,
-                }
-            }
-            RaidTargetUpdateType::FULL => {
-                // raid_targets: RaidTargetUpdate[8]
-                let mut raid_targets = Vec::with_capacity(8 as usize);
-                for i in 0..8 {
-                    raid_targets.push(RaidTargetUpdate::astd_read(r).await?);
-                }
-                let raid_targets = raid_targets.try_into().unwrap();
+                } => {
+                    // raid_target: RaidTargetUpdate
+                    raid_target.tokio_write(w).await?;
 
+                }
                 MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
                     raid_targets,
+                } => {
+                    // raid_targets: RaidTargetUpdate[8]
+                    for i in raid_targets.iter() {
+                        i.tokio_write(w).await?;
+                    }
+
                 }
             }
-        };
 
-        Ok(Self {
-            update_type: update_type_if,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // update_type: RaidTargetUpdateType
-        self.update_type.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // update_type: RaidTargetUpdateType
+            let update_type = RaidTargetUpdateType::astd_read(r).await?;
 
-        match &self.update_type {
-            MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
-                raid_target,
-            } => {
-                // raid_target: RaidTargetUpdate
-                raid_target.astd_write(w).await?;
+            let update_type_if = match update_type {
+                RaidTargetUpdateType::PARTIAL => {
+                    // raid_target: RaidTargetUpdate
+                    let raid_target = RaidTargetUpdate::astd_read(r).await?;
 
-            }
-            MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
-                raid_targets,
-            } => {
-                // raid_targets: RaidTargetUpdate[8]
-                for i in raid_targets.iter() {
-                    i.astd_write(w).await?;
+                    MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
+                        raid_target,
+                    }
                 }
+                RaidTargetUpdateType::FULL => {
+                    // raid_targets: RaidTargetUpdate[8]
+                    let mut raid_targets = Vec::with_capacity(8 as usize);
+                    for i in 0..8 {
+                        raid_targets.push(RaidTargetUpdate::astd_read(r).await?);
+                    }
+                    let raid_targets = raid_targets.try_into().unwrap();
 
+                    MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
+                        raid_targets,
+                    }
+                }
+            };
+
+            Ok(Self {
+                update_type: update_type_if,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // update_type: RaidTargetUpdateType
+            self.update_type.astd_write(w).await?;
+
+            match &self.update_type {
+                MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
+                    raid_target,
+                } => {
+                    // raid_target: RaidTargetUpdate
+                    raid_target.astd_write(w).await?;
+
+                }
+                MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
+                    raid_targets,
+                } => {
+                    // raid_targets: RaidTargetUpdate[8]
+                    for i in raid_targets.iter() {
+                        i.astd_write(w).await?;
+                    }
+
+                }
             }
-        }
 
-        Ok(())
+            Ok(())
+        })
     }
 
 }

@@ -25,7 +25,6 @@ pub struct SMSG_GROUP_LIST {
 
 impl ServerMessageWrite for SMSG_GROUP_LIST {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_GROUP_LIST {
     const OPCODE: u16 = 0x007d;
 
@@ -127,188 +126,234 @@ impl MessageBody for SMSG_GROUP_LIST {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // group_type: GroupType
-        let group_type = GroupType::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // group_type: GroupType
+            let group_type = GroupType::tokio_read(r).await?;
 
-        // own_flags: u8
-        let own_flags = crate::util::tokio_read_u8_le(r).await?;
+            // own_flags: u8
+            let own_flags = crate::util::tokio_read_u8_le(r).await?;
 
-        // amount_of_members: u32
-        let amount_of_members = crate::util::tokio_read_u32_le(r).await?;
+            // amount_of_members: u32
+            let amount_of_members = crate::util::tokio_read_u32_le(r).await?;
 
-        // members: GroupListMember[amount_of_members]
-        let mut members = Vec::with_capacity(amount_of_members as usize);
-        for i in 0..amount_of_members {
-            members.push(GroupListMember::tokio_read(r).await?);
-        }
+            // members: GroupListMember[amount_of_members]
+            let mut members = Vec::with_capacity(amount_of_members as usize);
+            for i in 0..amount_of_members {
+                members.push(GroupListMember::tokio_read(r).await?);
+            }
 
-        // leader: Guid
-        let leader = Guid::tokio_read(r).await?;
+            // leader: Guid
+            let leader = Guid::tokio_read(r).await?;
 
-        // optional group_not_empty
-        let current_size = {
-            0
-            + 1 // group_type: GroupType
-            + 1 // own_flags: u8
-            + 4 // amount_of_members: u32
-            + members.iter().fold(0, |acc, x| acc + x.size()) // members: GroupListMember[amount_of_members]
-            + 8 // leader: Guid
-        };
-        let group_not_empty = if current_size < body_size as usize {
-            // loot_setting: GroupLootSetting
-            let loot_setting = GroupLootSetting::tokio_read(r).await?;
+            // optional group_not_empty
+            let current_size = {
+                0
+                + 1 // group_type: GroupType
+                + 1 // own_flags: u8
+                + 4 // amount_of_members: u32
+                + members.iter().fold(0, |acc, x| acc + x.size()) // members: GroupListMember[amount_of_members]
+                + 8 // leader: Guid
+            };
+            let group_not_empty = if current_size < body_size as usize {
+                // loot_setting: GroupLootSetting
+                let loot_setting = GroupLootSetting::tokio_read(r).await?;
 
-            // master_loot: Guid
-            let master_loot = Guid::tokio_read(r).await?;
+                // master_loot: Guid
+                let master_loot = Guid::tokio_read(r).await?;
 
-            // loot_threshold: ItemQuality
-            let loot_threshold = ItemQuality::tokio_read(r).await?;
+                // loot_threshold: ItemQuality
+                let loot_threshold = ItemQuality::tokio_read(r).await?;
 
-            Some(SMSG_GROUP_LIST_group_not_empty {
-                loot_setting,
-                master_loot,
-                loot_threshold,
+                Some(SMSG_GROUP_LIST_group_not_empty {
+                    loot_setting,
+                    master_loot,
+                    loot_threshold,
+                })
+            } else {
+                None
+            };
+
+            Ok(Self {
+                group_type,
+                own_flags,
+                members,
+                leader,
+                group_not_empty,
             })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            group_type,
-            own_flags,
-            members,
-            leader,
-            group_not_empty,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // group_type: GroupType
-        self.group_type.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // group_type: GroupType
+            self.group_type.tokio_write(w).await?;
 
-        // own_flags: u8
-        w.write_all(&self.own_flags.to_le_bytes()).await?;
+            // own_flags: u8
+            w.write_all(&self.own_flags.to_le_bytes()).await?;
 
-        // amount_of_members: u32
-        w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
+            // amount_of_members: u32
+            w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
 
-        // members: GroupListMember[amount_of_members]
-        for i in self.members.iter() {
-            i.tokio_write(w).await?;
-        }
+            // members: GroupListMember[amount_of_members]
+            for i in self.members.iter() {
+                i.tokio_write(w).await?;
+            }
 
-        // leader: Guid
-        self.leader.tokio_write(w).await?;
+            // leader: Guid
+            self.leader.tokio_write(w).await?;
 
-        // optional group_not_empty
-        if let Some(v) = &self.group_not_empty {
-            // loot_setting: GroupLootSetting
-            v.loot_setting.tokio_write(w).await?;
+            // optional group_not_empty
+            if let Some(v) = &self.group_not_empty {
+                // loot_setting: GroupLootSetting
+                v.loot_setting.tokio_write(w).await?;
 
-            // master_loot: Guid
-            v.master_loot.tokio_write(w).await?;
+                // master_loot: Guid
+                v.master_loot.tokio_write(w).await?;
 
-            // loot_threshold: ItemQuality
-            v.loot_threshold.tokio_write(w).await?;
+                // loot_threshold: ItemQuality
+                v.loot_threshold.tokio_write(w).await?;
 
-        }
+            }
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // group_type: GroupType
-        let group_type = GroupType::astd_read(r).await?;
-
-        // own_flags: u8
-        let own_flags = crate::util::astd_read_u8_le(r).await?;
-
-        // amount_of_members: u32
-        let amount_of_members = crate::util::astd_read_u32_le(r).await?;
-
-        // members: GroupListMember[amount_of_members]
-        let mut members = Vec::with_capacity(amount_of_members as usize);
-        for i in 0..amount_of_members {
-            members.push(GroupListMember::astd_read(r).await?);
-        }
-
-        // leader: Guid
-        let leader = Guid::astd_read(r).await?;
-
-        // optional group_not_empty
-        let current_size = {
-            0
-            + 1 // group_type: GroupType
-            + 1 // own_flags: u8
-            + 4 // amount_of_members: u32
-            + members.iter().fold(0, |acc, x| acc + x.size()) // members: GroupListMember[amount_of_members]
-            + 8 // leader: Guid
-        };
-        let group_not_empty = if current_size < body_size as usize {
-            // loot_setting: GroupLootSetting
-            let loot_setting = GroupLootSetting::astd_read(r).await?;
-
-            // master_loot: Guid
-            let master_loot = Guid::astd_read(r).await?;
-
-            // loot_threshold: ItemQuality
-            let loot_threshold = ItemQuality::astd_read(r).await?;
-
-            Some(SMSG_GROUP_LIST_group_not_empty {
-                loot_setting,
-                master_loot,
-                loot_threshold,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            group_type,
-            own_flags,
-            members,
-            leader,
-            group_not_empty,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // group_type: GroupType
-        self.group_type.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // group_type: GroupType
+            let group_type = GroupType::astd_read(r).await?;
 
-        // own_flags: u8
-        w.write_all(&self.own_flags.to_le_bytes()).await?;
+            // own_flags: u8
+            let own_flags = crate::util::astd_read_u8_le(r).await?;
 
-        // amount_of_members: u32
-        w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
+            // amount_of_members: u32
+            let amount_of_members = crate::util::astd_read_u32_le(r).await?;
 
-        // members: GroupListMember[amount_of_members]
-        for i in self.members.iter() {
-            i.astd_write(w).await?;
-        }
+            // members: GroupListMember[amount_of_members]
+            let mut members = Vec::with_capacity(amount_of_members as usize);
+            for i in 0..amount_of_members {
+                members.push(GroupListMember::astd_read(r).await?);
+            }
 
-        // leader: Guid
-        self.leader.astd_write(w).await?;
+            // leader: Guid
+            let leader = Guid::astd_read(r).await?;
 
-        // optional group_not_empty
-        if let Some(v) = &self.group_not_empty {
-            // loot_setting: GroupLootSetting
-            v.loot_setting.astd_write(w).await?;
+            // optional group_not_empty
+            let current_size = {
+                0
+                + 1 // group_type: GroupType
+                + 1 // own_flags: u8
+                + 4 // amount_of_members: u32
+                + members.iter().fold(0, |acc, x| acc + x.size()) // members: GroupListMember[amount_of_members]
+                + 8 // leader: Guid
+            };
+            let group_not_empty = if current_size < body_size as usize {
+                // loot_setting: GroupLootSetting
+                let loot_setting = GroupLootSetting::astd_read(r).await?;
 
-            // master_loot: Guid
-            v.master_loot.astd_write(w).await?;
+                // master_loot: Guid
+                let master_loot = Guid::astd_read(r).await?;
 
-            // loot_threshold: ItemQuality
-            v.loot_threshold.astd_write(w).await?;
+                // loot_threshold: ItemQuality
+                let loot_threshold = ItemQuality::astd_read(r).await?;
 
-        }
+                Some(SMSG_GROUP_LIST_group_not_empty {
+                    loot_setting,
+                    master_loot,
+                    loot_threshold,
+                })
+            } else {
+                None
+            };
 
-        Ok(())
+            Ok(Self {
+                group_type,
+                own_flags,
+                members,
+                leader,
+                group_not_empty,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // group_type: GroupType
+            self.group_type.astd_write(w).await?;
+
+            // own_flags: u8
+            w.write_all(&self.own_flags.to_le_bytes()).await?;
+
+            // amount_of_members: u32
+            w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
+
+            // members: GroupListMember[amount_of_members]
+            for i in self.members.iter() {
+                i.astd_write(w).await?;
+            }
+
+            // leader: Guid
+            self.leader.astd_write(w).await?;
+
+            // optional group_not_empty
+            if let Some(v) = &self.group_not_empty {
+                // loot_setting: GroupLootSetting
+                v.loot_setting.astd_write(w).await?;
+
+                // master_loot: Guid
+                v.master_loot.astd_write(w).await?;
+
+                // loot_threshold: ItemQuality
+                v.loot_threshold.astd_write(w).await?;
+
+            }
+
+            Ok(())
+        })
     }
 
 }

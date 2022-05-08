@@ -18,7 +18,6 @@ pub struct SMSG_TRANSFER_PENDING {
 
 impl ServerMessageWrite for SMSG_TRANSFER_PENDING {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_TRANSFER_PENDING {
     const OPCODE: u16 = 0x003f;
 
@@ -77,102 +76,148 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // map: Map
-        let map = Map::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // map: Map
+            let map = Map::tokio_read(r).await?;
 
-        // optional has_transport
-        let current_size = {
-            0
-            + 4 // map: Map
-        };
-        let has_transport = if current_size < body_size as usize {
-            // transport: u32
-            let transport = crate::util::tokio_read_u32_le(r).await?;
+            // optional has_transport
+            let current_size = {
+                0
+                + 4 // map: Map
+            };
+            let has_transport = if current_size < body_size as usize {
+                // transport: u32
+                let transport = crate::util::tokio_read_u32_le(r).await?;
 
-            // transport_map: Map
-            let transport_map = Map::tokio_read(r).await?;
+                // transport_map: Map
+                let transport_map = Map::tokio_read(r).await?;
 
-            Some(SMSG_TRANSFER_PENDING_has_transport {
-                transport,
-                transport_map,
+                Some(SMSG_TRANSFER_PENDING_has_transport {
+                    transport,
+                    transport_map,
+                })
+            } else {
+                None
+            };
+
+            Ok(Self {
+                map,
+                has_transport,
             })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            map,
-            has_transport,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // map: Map
-        self.map.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // map: Map
+            self.map.tokio_write(w).await?;
 
-        // optional has_transport
-        if let Some(v) = &self.has_transport {
-            // transport: u32
-            w.write_all(&v.transport.to_le_bytes()).await?;
+            // optional has_transport
+            if let Some(v) = &self.has_transport {
+                // transport: u32
+                w.write_all(&v.transport.to_le_bytes()).await?;
 
-            // transport_map: Map
-            v.transport_map.tokio_write(w).await?;
+                // transport_map: Map
+                v.transport_map.tokio_write(w).await?;
 
-        }
+            }
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // map: Map
-        let map = Map::astd_read(r).await?;
-
-        // optional has_transport
-        let current_size = {
-            0
-            + 4 // map: Map
-        };
-        let has_transport = if current_size < body_size as usize {
-            // transport: u32
-            let transport = crate::util::astd_read_u32_le(r).await?;
-
-            // transport_map: Map
-            let transport_map = Map::astd_read(r).await?;
-
-            Some(SMSG_TRANSFER_PENDING_has_transport {
-                transport,
-                transport_map,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            map,
-            has_transport,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // map: Map
-        self.map.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // map: Map
+            let map = Map::astd_read(r).await?;
 
-        // optional has_transport
-        if let Some(v) = &self.has_transport {
-            // transport: u32
-            w.write_all(&v.transport.to_le_bytes()).await?;
+            // optional has_transport
+            let current_size = {
+                0
+                + 4 // map: Map
+            };
+            let has_transport = if current_size < body_size as usize {
+                // transport: u32
+                let transport = crate::util::astd_read_u32_le(r).await?;
 
-            // transport_map: Map
-            v.transport_map.astd_write(w).await?;
+                // transport_map: Map
+                let transport_map = Map::astd_read(r).await?;
 
-        }
+                Some(SMSG_TRANSFER_PENDING_has_transport {
+                    transport,
+                    transport_map,
+                })
+            } else {
+                None
+            };
 
-        Ok(())
+            Ok(Self {
+                map,
+                has_transport,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // map: Map
+            self.map.astd_write(w).await?;
+
+            // optional has_transport
+            if let Some(v) = &self.has_transport {
+                // transport: u32
+                w.write_all(&v.transport.to_le_bytes()).await?;
+
+                // transport_map: Map
+                v.transport_map.astd_write(w).await?;
+
+            }
+
+            Ok(())
+        })
     }
 
 }

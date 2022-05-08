@@ -23,7 +23,6 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Client {
 
 impl ClientMessageWrite for MSG_SAVE_GUILD_EMBLEM_Client {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Client {
     const OPCODE: u16 = 0x01f1;
 
@@ -86,110 +85,156 @@ impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Client {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // vendor: Guid
-        let vendor = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // vendor: Guid
+            let vendor = Guid::tokio_read(r).await?;
 
-        // emblem_style: u32
-        let emblem_style = crate::util::tokio_read_u32_le(r).await?;
+            // emblem_style: u32
+            let emblem_style = crate::util::tokio_read_u32_le(r).await?;
 
-        // emblem_color: u32
-        let emblem_color = crate::util::tokio_read_u32_le(r).await?;
+            // emblem_color: u32
+            let emblem_color = crate::util::tokio_read_u32_le(r).await?;
 
-        // border_style: u32
-        let border_style = crate::util::tokio_read_u32_le(r).await?;
+            // border_style: u32
+            let border_style = crate::util::tokio_read_u32_le(r).await?;
 
-        // border_color: u32
-        let border_color = crate::util::tokio_read_u32_le(r).await?;
+            // border_color: u32
+            let border_color = crate::util::tokio_read_u32_le(r).await?;
 
-        // background_color: u32
-        let background_color = crate::util::tokio_read_u32_le(r).await?;
+            // background_color: u32
+            let background_color = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            vendor,
-            emblem_style,
-            emblem_color,
-            border_style,
-            border_color,
-            background_color,
+            Ok(Self {
+                vendor,
+                emblem_style,
+                emblem_color,
+                border_style,
+                border_color,
+                background_color,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // vendor: Guid
-        self.vendor.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // vendor: Guid
+            self.vendor.tokio_write(w).await?;
 
-        // emblem_style: u32
-        w.write_all(&self.emblem_style.to_le_bytes()).await?;
+            // emblem_style: u32
+            w.write_all(&self.emblem_style.to_le_bytes()).await?;
 
-        // emblem_color: u32
-        w.write_all(&self.emblem_color.to_le_bytes()).await?;
+            // emblem_color: u32
+            w.write_all(&self.emblem_color.to_le_bytes()).await?;
 
-        // border_style: u32
-        w.write_all(&self.border_style.to_le_bytes()).await?;
+            // border_style: u32
+            w.write_all(&self.border_style.to_le_bytes()).await?;
 
-        // border_color: u32
-        w.write_all(&self.border_color.to_le_bytes()).await?;
+            // border_color: u32
+            w.write_all(&self.border_color.to_le_bytes()).await?;
 
-        // background_color: u32
-        w.write_all(&self.background_color.to_le_bytes()).await?;
+            // background_color: u32
+            w.write_all(&self.background_color.to_le_bytes()).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // vendor: Guid
-        let vendor = Guid::astd_read(r).await?;
-
-        // emblem_style: u32
-        let emblem_style = crate::util::astd_read_u32_le(r).await?;
-
-        // emblem_color: u32
-        let emblem_color = crate::util::astd_read_u32_le(r).await?;
-
-        // border_style: u32
-        let border_style = crate::util::astd_read_u32_le(r).await?;
-
-        // border_color: u32
-        let border_color = crate::util::astd_read_u32_le(r).await?;
-
-        // background_color: u32
-        let background_color = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            vendor,
-            emblem_style,
-            emblem_color,
-            border_style,
-            border_color,
-            background_color,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // vendor: Guid
-        self.vendor.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // vendor: Guid
+            let vendor = Guid::astd_read(r).await?;
 
-        // emblem_style: u32
-        w.write_all(&self.emblem_style.to_le_bytes()).await?;
+            // emblem_style: u32
+            let emblem_style = crate::util::astd_read_u32_le(r).await?;
 
-        // emblem_color: u32
-        w.write_all(&self.emblem_color.to_le_bytes()).await?;
+            // emblem_color: u32
+            let emblem_color = crate::util::astd_read_u32_le(r).await?;
 
-        // border_style: u32
-        w.write_all(&self.border_style.to_le_bytes()).await?;
+            // border_style: u32
+            let border_style = crate::util::astd_read_u32_le(r).await?;
 
-        // border_color: u32
-        w.write_all(&self.border_color.to_le_bytes()).await?;
+            // border_color: u32
+            let border_color = crate::util::astd_read_u32_le(r).await?;
 
-        // background_color: u32
-        w.write_all(&self.background_color.to_le_bytes()).await?;
+            // background_color: u32
+            let background_color = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(())
+            Ok(Self {
+                vendor,
+                emblem_style,
+                emblem_color,
+                border_style,
+                border_color,
+                background_color,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // vendor: Guid
+            self.vendor.astd_write(w).await?;
+
+            // emblem_style: u32
+            w.write_all(&self.emblem_style.to_le_bytes()).await?;
+
+            // emblem_color: u32
+            w.write_all(&self.emblem_color.to_le_bytes()).await?;
+
+            // border_style: u32
+            w.write_all(&self.border_style.to_le_bytes()).await?;
+
+            // border_color: u32
+            w.write_all(&self.border_color.to_le_bytes()).await?;
+
+            // background_color: u32
+            w.write_all(&self.background_color.to_le_bytes()).await?;
+
+            Ok(())
+        })
     }
 
 }

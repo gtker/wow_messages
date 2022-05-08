@@ -19,7 +19,6 @@ pub struct CMSG_MOVE_NOT_ACTIVE_MOVER {
 
 impl ClientMessageWrite for CMSG_MOVE_NOT_ACTIVE_MOVER {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
     const OPCODE: u16 = 0x02d1;
 
@@ -54,54 +53,100 @@ impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // old_mover: Guid
-        let old_mover = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // old_mover: Guid
+            let old_mover = Guid::tokio_read(r).await?;
 
-        // movement_info: MovementInfo
-        let movement_info = MovementInfo::tokio_read(r).await?;
+            // movement_info: MovementInfo
+            let movement_info = MovementInfo::tokio_read(r).await?;
 
-        Ok(Self {
-            old_mover,
-            movement_info,
+            Ok(Self {
+                old_mover,
+                movement_info,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // old_mover: Guid
-        self.old_mover.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // old_mover: Guid
+            self.old_mover.tokio_write(w).await?;
 
-        // movement_info: MovementInfo
-        self.movement_info.tokio_write(w).await?;
+            // movement_info: MovementInfo
+            self.movement_info.tokio_write(w).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // old_mover: Guid
-        let old_mover = Guid::astd_read(r).await?;
-
-        // movement_info: MovementInfo
-        let movement_info = MovementInfo::astd_read(r).await?;
-
-        Ok(Self {
-            old_mover,
-            movement_info,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // old_mover: Guid
-        self.old_mover.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // old_mover: Guid
+            let old_mover = Guid::astd_read(r).await?;
 
-        // movement_info: MovementInfo
-        self.movement_info.astd_write(w).await?;
+            // movement_info: MovementInfo
+            let movement_info = MovementInfo::astd_read(r).await?;
 
-        Ok(())
+            Ok(Self {
+                old_mover,
+                movement_info,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // old_mover: Guid
+            self.old_mover.astd_write(w).await?;
+
+            // movement_info: MovementInfo
+            self.movement_info.astd_write(w).await?;
+
+            Ok(())
+        })
     }
 
 }

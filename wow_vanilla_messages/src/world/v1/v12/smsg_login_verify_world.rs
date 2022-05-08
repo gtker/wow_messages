@@ -22,7 +22,6 @@ pub struct SMSG_LOGIN_VERIFY_WORLD {
 
 impl ServerMessageWrite for SMSG_LOGIN_VERIFY_WORLD {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_LOGIN_VERIFY_WORLD {
     const OPCODE: u16 = 0x0236;
 
@@ -74,88 +73,134 @@ impl MessageBody for SMSG_LOGIN_VERIFY_WORLD {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // map: Map
-        let map = Map::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // map: Map
+            let map = Map::tokio_read(r).await?;
 
-        // position_x: f32
-        let position_x = crate::util::tokio_read_f32_le(r).await?;
-        // position_y: f32
-        let position_y = crate::util::tokio_read_f32_le(r).await?;
-        // position_z: f32
-        let position_z = crate::util::tokio_read_f32_le(r).await?;
-        // orientation: f32
-        let orientation = crate::util::tokio_read_f32_le(r).await?;
-        Ok(Self {
-            map,
-            position_x,
-            position_y,
-            position_z,
-            orientation,
+            // position_x: f32
+            let position_x = crate::util::tokio_read_f32_le(r).await?;
+            // position_y: f32
+            let position_y = crate::util::tokio_read_f32_le(r).await?;
+            // position_z: f32
+            let position_z = crate::util::tokio_read_f32_le(r).await?;
+            // orientation: f32
+            let orientation = crate::util::tokio_read_f32_le(r).await?;
+            Ok(Self {
+                map,
+                position_x,
+                position_y,
+                position_z,
+                orientation,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // map: Map
-        self.map.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // map: Map
+            self.map.tokio_write(w).await?;
 
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes()).await?;
+            // position_x: f32
+            w.write_all(&self.position_x.to_le_bytes()).await?;
 
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes()).await?;
+            // position_y: f32
+            w.write_all(&self.position_y.to_le_bytes()).await?;
 
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes()).await?;
+            // position_z: f32
+            w.write_all(&self.position_z.to_le_bytes()).await?;
 
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes()).await?;
+            // orientation: f32
+            w.write_all(&self.orientation.to_le_bytes()).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // map: Map
-        let map = Map::astd_read(r).await?;
-
-        // position_x: f32
-        let position_x = crate::util::astd_read_f32_le(r).await?;
-        // position_y: f32
-        let position_y = crate::util::astd_read_f32_le(r).await?;
-        // position_z: f32
-        let position_z = crate::util::astd_read_f32_le(r).await?;
-        // orientation: f32
-        let orientation = crate::util::astd_read_f32_le(r).await?;
-        Ok(Self {
-            map,
-            position_x,
-            position_y,
-            position_z,
-            orientation,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // map: Map
-        self.map.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // map: Map
+            let map = Map::astd_read(r).await?;
 
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes()).await?;
+            // position_x: f32
+            let position_x = crate::util::astd_read_f32_le(r).await?;
+            // position_y: f32
+            let position_y = crate::util::astd_read_f32_le(r).await?;
+            // position_z: f32
+            let position_z = crate::util::astd_read_f32_le(r).await?;
+            // orientation: f32
+            let orientation = crate::util::astd_read_f32_le(r).await?;
+            Ok(Self {
+                map,
+                position_x,
+                position_y,
+                position_z,
+                orientation,
+            })
+        })
+    }
 
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes()).await?;
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // map: Map
+            self.map.astd_write(w).await?;
 
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes()).await?;
+            // position_x: f32
+            w.write_all(&self.position_x.to_le_bytes()).await?;
 
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes()).await?;
+            // position_y: f32
+            w.write_all(&self.position_y.to_le_bytes()).await?;
 
-        Ok(())
+            // position_z: f32
+            w.write_all(&self.position_z.to_le_bytes()).await?;
+
+            // orientation: f32
+            w.write_all(&self.orientation.to_le_bytes()).await?;
+
+            Ok(())
+        })
     }
 
 }

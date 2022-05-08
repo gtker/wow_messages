@@ -20,7 +20,6 @@ pub struct CMSG_PET_SET_ACTION {
 
 impl ClientMessageWrite for CMSG_PET_SET_ACTION {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_PET_SET_ACTION {
     const OPCODE: u16 = 0x0174;
 
@@ -95,134 +94,180 @@ impl MessageBody for CMSG_PET_SET_ACTION {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::tokio_read(r).await?;
 
-        // position1: u32
-        let position1 = crate::util::tokio_read_u32_le(r).await?;
+            // position1: u32
+            let position1 = crate::util::tokio_read_u32_le(r).await?;
 
-        // data1: u32
-        let data1 = crate::util::tokio_read_u32_le(r).await?;
+            // data1: u32
+            let data1 = crate::util::tokio_read_u32_le(r).await?;
 
-        // optional extra
-        let current_size = {
-            0
-            + 8 // guid: Guid
-            + 4 // position1: u32
-            + 4 // data1: u32
-        };
-        let extra = if current_size < body_size as usize {
-            // position2: u32
-            let position2 = crate::util::tokio_read_u32_le(r).await?;
+            // optional extra
+            let current_size = {
+                0
+                + 8 // guid: Guid
+                + 4 // position1: u32
+                + 4 // data1: u32
+            };
+            let extra = if current_size < body_size as usize {
+                // position2: u32
+                let position2 = crate::util::tokio_read_u32_le(r).await?;
 
-            // data2: u32
-            let data2 = crate::util::tokio_read_u32_le(r).await?;
+                // data2: u32
+                let data2 = crate::util::tokio_read_u32_le(r).await?;
 
-            Some(CMSG_PET_SET_ACTION_extra {
-                position2,
-                data2,
+                Some(CMSG_PET_SET_ACTION_extra {
+                    position2,
+                    data2,
+                })
+            } else {
+                None
+            };
+
+            Ok(Self {
+                guid,
+                position1,
+                data1,
+                extra,
             })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            guid,
-            position1,
-            data1,
-            extra,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        self.guid.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            self.guid.tokio_write(w).await?;
 
-        // position1: u32
-        w.write_all(&self.position1.to_le_bytes()).await?;
+            // position1: u32
+            w.write_all(&self.position1.to_le_bytes()).await?;
 
-        // data1: u32
-        w.write_all(&self.data1.to_le_bytes()).await?;
+            // data1: u32
+            w.write_all(&self.data1.to_le_bytes()).await?;
 
-        // optional extra
-        if let Some(v) = &self.extra {
-            // position2: u32
-            w.write_all(&v.position2.to_le_bytes()).await?;
+            // optional extra
+            if let Some(v) = &self.extra {
+                // position2: u32
+                w.write_all(&v.position2.to_le_bytes()).await?;
 
-            // data2: u32
-            w.write_all(&v.data2.to_le_bytes()).await?;
+                // data2: u32
+                w.write_all(&v.data2.to_le_bytes()).await?;
 
-        }
+            }
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::astd_read(r).await?;
-
-        // position1: u32
-        let position1 = crate::util::astd_read_u32_le(r).await?;
-
-        // data1: u32
-        let data1 = crate::util::astd_read_u32_le(r).await?;
-
-        // optional extra
-        let current_size = {
-            0
-            + 8 // guid: Guid
-            + 4 // position1: u32
-            + 4 // data1: u32
-        };
-        let extra = if current_size < body_size as usize {
-            // position2: u32
-            let position2 = crate::util::astd_read_u32_le(r).await?;
-
-            // data2: u32
-            let data2 = crate::util::astd_read_u32_le(r).await?;
-
-            Some(CMSG_PET_SET_ACTION_extra {
-                position2,
-                data2,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            guid,
-            position1,
-            data1,
-            extra,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        self.guid.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::astd_read(r).await?;
 
-        // position1: u32
-        w.write_all(&self.position1.to_le_bytes()).await?;
+            // position1: u32
+            let position1 = crate::util::astd_read_u32_le(r).await?;
 
-        // data1: u32
-        w.write_all(&self.data1.to_le_bytes()).await?;
+            // data1: u32
+            let data1 = crate::util::astd_read_u32_le(r).await?;
 
-        // optional extra
-        if let Some(v) = &self.extra {
-            // position2: u32
-            w.write_all(&v.position2.to_le_bytes()).await?;
+            // optional extra
+            let current_size = {
+                0
+                + 8 // guid: Guid
+                + 4 // position1: u32
+                + 4 // data1: u32
+            };
+            let extra = if current_size < body_size as usize {
+                // position2: u32
+                let position2 = crate::util::astd_read_u32_le(r).await?;
 
-            // data2: u32
-            w.write_all(&v.data2.to_le_bytes()).await?;
+                // data2: u32
+                let data2 = crate::util::astd_read_u32_le(r).await?;
 
-        }
+                Some(CMSG_PET_SET_ACTION_extra {
+                    position2,
+                    data2,
+                })
+            } else {
+                None
+            };
 
-        Ok(())
+            Ok(Self {
+                guid,
+                position1,
+                data1,
+                extra,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            self.guid.astd_write(w).await?;
+
+            // position1: u32
+            w.write_all(&self.position1.to_le_bytes()).await?;
+
+            // data1: u32
+            w.write_all(&self.data1.to_le_bytes()).await?;
+
+            // optional extra
+            if let Some(v) = &self.extra {
+                // position2: u32
+                w.write_all(&v.position2.to_le_bytes()).await?;
+
+                // data2: u32
+                w.write_all(&v.data2.to_le_bytes()).await?;
+
+            }
+
+            Ok(())
+        })
     }
 
 }

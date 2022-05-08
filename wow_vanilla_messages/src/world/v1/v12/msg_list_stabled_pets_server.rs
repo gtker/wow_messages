@@ -20,7 +20,6 @@ pub struct MSG_LIST_STABLED_PETS_Server {
 
 impl ServerMessageWrite for MSG_LIST_STABLED_PETS_Server {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_LIST_STABLED_PETS_Server {
     const OPCODE: u16 = 0x026f;
 
@@ -73,90 +72,136 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Server {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // npc: Guid
-        let npc = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            let npc = Guid::tokio_read(r).await?;
 
-        // amount_of_pets: u8
-        let amount_of_pets = crate::util::tokio_read_u8_le(r).await?;
+            // amount_of_pets: u8
+            let amount_of_pets = crate::util::tokio_read_u8_le(r).await?;
 
-        // stable_slots: u8
-        let stable_slots = crate::util::tokio_read_u8_le(r).await?;
+            // stable_slots: u8
+            let stable_slots = crate::util::tokio_read_u8_le(r).await?;
 
-        // pets: StabledPet[amount_of_pets]
-        let mut pets = Vec::with_capacity(amount_of_pets as usize);
-        for i in 0..amount_of_pets {
-            pets.push(StabledPet::tokio_read(r).await?);
-        }
+            // pets: StabledPet[amount_of_pets]
+            let mut pets = Vec::with_capacity(amount_of_pets as usize);
+            for i in 0..amount_of_pets {
+                pets.push(StabledPet::tokio_read(r).await?);
+            }
 
-        Ok(Self {
-            npc,
-            stable_slots,
-            pets,
+            Ok(Self {
+                npc,
+                stable_slots,
+                pets,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // npc: Guid
-        self.npc.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            self.npc.tokio_write(w).await?;
 
-        // amount_of_pets: u8
-        w.write_all(&(self.pets.len() as u8).to_le_bytes()).await?;
+            // amount_of_pets: u8
+            w.write_all(&(self.pets.len() as u8).to_le_bytes()).await?;
 
-        // stable_slots: u8
-        w.write_all(&self.stable_slots.to_le_bytes()).await?;
+            // stable_slots: u8
+            w.write_all(&self.stable_slots.to_le_bytes()).await?;
 
-        // pets: StabledPet[amount_of_pets]
-        for i in self.pets.iter() {
-            i.tokio_write(w).await?;
-        }
+            // pets: StabledPet[amount_of_pets]
+            for i in self.pets.iter() {
+                i.tokio_write(w).await?;
+            }
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // npc: Guid
-        let npc = Guid::astd_read(r).await?;
-
-        // amount_of_pets: u8
-        let amount_of_pets = crate::util::astd_read_u8_le(r).await?;
-
-        // stable_slots: u8
-        let stable_slots = crate::util::astd_read_u8_le(r).await?;
-
-        // pets: StabledPet[amount_of_pets]
-        let mut pets = Vec::with_capacity(amount_of_pets as usize);
-        for i in 0..amount_of_pets {
-            pets.push(StabledPet::astd_read(r).await?);
-        }
-
-        Ok(Self {
-            npc,
-            stable_slots,
-            pets,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // npc: Guid
-        self.npc.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            let npc = Guid::astd_read(r).await?;
 
-        // amount_of_pets: u8
-        w.write_all(&(self.pets.len() as u8).to_le_bytes()).await?;
+            // amount_of_pets: u8
+            let amount_of_pets = crate::util::astd_read_u8_le(r).await?;
 
-        // stable_slots: u8
-        w.write_all(&self.stable_slots.to_le_bytes()).await?;
+            // stable_slots: u8
+            let stable_slots = crate::util::astd_read_u8_le(r).await?;
 
-        // pets: StabledPet[amount_of_pets]
-        for i in self.pets.iter() {
-            i.astd_write(w).await?;
-        }
+            // pets: StabledPet[amount_of_pets]
+            let mut pets = Vec::with_capacity(amount_of_pets as usize);
+            for i in 0..amount_of_pets {
+                pets.push(StabledPet::astd_read(r).await?);
+            }
 
-        Ok(())
+            Ok(Self {
+                npc,
+                stable_slots,
+                pets,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            self.npc.astd_write(w).await?;
+
+            // amount_of_pets: u8
+            w.write_all(&(self.pets.len() as u8).to_le_bytes()).await?;
+
+            // stable_slots: u8
+            w.write_all(&self.stable_slots.to_le_bytes()).await?;
+
+            // pets: StabledPet[amount_of_pets]
+            for i in self.pets.iter() {
+                i.astd_write(w).await?;
+            }
+
+            Ok(())
+        })
     }
 
 }

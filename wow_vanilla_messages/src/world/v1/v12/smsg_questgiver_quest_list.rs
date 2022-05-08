@@ -22,7 +22,6 @@ pub struct SMSG_QUESTGIVER_QUEST_LIST {
 
 impl ServerMessageWrite for SMSG_QUESTGIVER_QUEST_LIST {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_QUESTGIVER_QUEST_LIST {
     const OPCODE: u16 = 0x0185;
 
@@ -92,124 +91,170 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_LIST {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // npc: Guid
-        let npc = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            let npc = Guid::tokio_read(r).await?;
 
-        // title: CString
-        let title = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let title = String::from_utf8(title)?;
+            // title: CString
+            let title = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let title = String::from_utf8(title)?;
 
-        // emote_delay: u32
-        let emote_delay = crate::util::tokio_read_u32_le(r).await?;
+            // emote_delay: u32
+            let emote_delay = crate::util::tokio_read_u32_le(r).await?;
 
-        // emote: u32
-        let emote = crate::util::tokio_read_u32_le(r).await?;
+            // emote: u32
+            let emote = crate::util::tokio_read_u32_le(r).await?;
 
-        // amount_of_entries: u8
-        let amount_of_entries = crate::util::tokio_read_u8_le(r).await?;
+            // amount_of_entries: u8
+            let amount_of_entries = crate::util::tokio_read_u8_le(r).await?;
 
-        // quest_items: QuestItem[amount_of_entries]
-        let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
-        for i in 0..amount_of_entries {
-            quest_items.push(QuestItem::tokio_read(r).await?);
-        }
+            // quest_items: QuestItem[amount_of_entries]
+            let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
+            for i in 0..amount_of_entries {
+                quest_items.push(QuestItem::tokio_read(r).await?);
+            }
 
-        Ok(Self {
-            npc,
-            title,
-            emote_delay,
-            emote,
-            quest_items,
+            Ok(Self {
+                npc,
+                title,
+                emote_delay,
+                emote,
+                quest_items,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // npc: Guid
-        self.npc.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            self.npc.tokio_write(w).await?;
 
-        // title: CString
-        w.write_all(self.title.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // title: CString
+            w.write_all(self.title.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // emote_delay: u32
-        w.write_all(&self.emote_delay.to_le_bytes()).await?;
+            // emote_delay: u32
+            w.write_all(&self.emote_delay.to_le_bytes()).await?;
 
-        // emote: u32
-        w.write_all(&self.emote.to_le_bytes()).await?;
+            // emote: u32
+            w.write_all(&self.emote.to_le_bytes()).await?;
 
-        // amount_of_entries: u8
-        w.write_all(&(self.quest_items.len() as u8).to_le_bytes()).await?;
+            // amount_of_entries: u8
+            w.write_all(&(self.quest_items.len() as u8).to_le_bytes()).await?;
 
-        // quest_items: QuestItem[amount_of_entries]
-        for i in self.quest_items.iter() {
-            i.tokio_write(w).await?;
-        }
+            // quest_items: QuestItem[amount_of_entries]
+            for i in self.quest_items.iter() {
+                i.tokio_write(w).await?;
+            }
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // npc: Guid
-        let npc = Guid::astd_read(r).await?;
-
-        // title: CString
-        let title = crate::util::astd_read_c_string_to_vec(r).await?;
-        let title = String::from_utf8(title)?;
-
-        // emote_delay: u32
-        let emote_delay = crate::util::astd_read_u32_le(r).await?;
-
-        // emote: u32
-        let emote = crate::util::astd_read_u32_le(r).await?;
-
-        // amount_of_entries: u8
-        let amount_of_entries = crate::util::astd_read_u8_le(r).await?;
-
-        // quest_items: QuestItem[amount_of_entries]
-        let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
-        for i in 0..amount_of_entries {
-            quest_items.push(QuestItem::astd_read(r).await?);
-        }
-
-        Ok(Self {
-            npc,
-            title,
-            emote_delay,
-            emote,
-            quest_items,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // npc: Guid
-        self.npc.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            let npc = Guid::astd_read(r).await?;
 
-        // title: CString
-        w.write_all(self.title.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // title: CString
+            let title = crate::util::astd_read_c_string_to_vec(r).await?;
+            let title = String::from_utf8(title)?;
 
-        // emote_delay: u32
-        w.write_all(&self.emote_delay.to_le_bytes()).await?;
+            // emote_delay: u32
+            let emote_delay = crate::util::astd_read_u32_le(r).await?;
 
-        // emote: u32
-        w.write_all(&self.emote.to_le_bytes()).await?;
+            // emote: u32
+            let emote = crate::util::astd_read_u32_le(r).await?;
 
-        // amount_of_entries: u8
-        w.write_all(&(self.quest_items.len() as u8).to_le_bytes()).await?;
+            // amount_of_entries: u8
+            let amount_of_entries = crate::util::astd_read_u8_le(r).await?;
 
-        // quest_items: QuestItem[amount_of_entries]
-        for i in self.quest_items.iter() {
-            i.astd_write(w).await?;
-        }
+            // quest_items: QuestItem[amount_of_entries]
+            let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
+            for i in 0..amount_of_entries {
+                quest_items.push(QuestItem::astd_read(r).await?);
+            }
 
-        Ok(())
+            Ok(Self {
+                npc,
+                title,
+                emote_delay,
+                emote,
+                quest_items,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            self.npc.astd_write(w).await?;
+
+            // title: CString
+            w.write_all(self.title.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // emote_delay: u32
+            w.write_all(&self.emote_delay.to_le_bytes()).await?;
+
+            // emote: u32
+            w.write_all(&self.emote.to_le_bytes()).await?;
+
+            // amount_of_entries: u8
+            w.write_all(&(self.quest_items.len() as u8).to_le_bytes()).await?;
+
+            // quest_items: QuestItem[amount_of_entries]
+            for i in self.quest_items.iter() {
+                i.astd_write(w).await?;
+            }
+
+            Ok(())
+        })
     }
 
 }

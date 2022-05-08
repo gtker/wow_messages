@@ -34,7 +34,6 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
 
 impl ServerMessageWrite for MSG_INSPECT_HONOR_STATS_Server {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
     const OPCODE: u16 = 0x02d6;
 
@@ -167,250 +166,296 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::tokio_read(r).await?;
 
-        // highest_rank: PvpRank
-        let highest_rank = PvpRank::tokio_read(r).await?;
+            // highest_rank: PvpRank
+            let highest_rank = PvpRank::tokio_read(r).await?;
 
-        // today_honorable_and_dishonorable: u32
-        let today_honorable_and_dishonorable = crate::util::tokio_read_u32_le(r).await?;
+            // today_honorable_and_dishonorable: u32
+            let today_honorable_and_dishonorable = crate::util::tokio_read_u32_le(r).await?;
 
-        // yesterday_honorable: u16
-        let yesterday_honorable = crate::util::tokio_read_u16_le(r).await?;
+            // yesterday_honorable: u16
+            let yesterday_honorable = crate::util::tokio_read_u16_le(r).await?;
 
-        // unknown1: u16
-        let unknown1 = crate::util::tokio_read_u16_le(r).await?;
+            // unknown1: u16
+            let unknown1 = crate::util::tokio_read_u16_le(r).await?;
 
-        // last_week_honorable: u16
-        let last_week_honorable = crate::util::tokio_read_u16_le(r).await?;
+            // last_week_honorable: u16
+            let last_week_honorable = crate::util::tokio_read_u16_le(r).await?;
 
-        // unknown2: u16
-        let unknown2 = crate::util::tokio_read_u16_le(r).await?;
+            // unknown2: u16
+            let unknown2 = crate::util::tokio_read_u16_le(r).await?;
 
-        // this_week_honorable: u16
-        let this_week_honorable = crate::util::tokio_read_u16_le(r).await?;
+            // this_week_honorable: u16
+            let this_week_honorable = crate::util::tokio_read_u16_le(r).await?;
 
-        // unknown3: u16
-        let unknown3 = crate::util::tokio_read_u16_le(r).await?;
+            // unknown3: u16
+            let unknown3 = crate::util::tokio_read_u16_le(r).await?;
 
-        // lifetime_honorable: u32
-        let lifetime_honorable = crate::util::tokio_read_u32_le(r).await?;
+            // lifetime_honorable: u32
+            let lifetime_honorable = crate::util::tokio_read_u32_le(r).await?;
 
-        // lifetime_dishonorable: u32
-        let lifetime_dishonorable = crate::util::tokio_read_u32_le(r).await?;
+            // lifetime_dishonorable: u32
+            let lifetime_dishonorable = crate::util::tokio_read_u32_le(r).await?;
 
-        // yesterday_honor: u32
-        let yesterday_honor = crate::util::tokio_read_u32_le(r).await?;
+            // yesterday_honor: u32
+            let yesterday_honor = crate::util::tokio_read_u32_le(r).await?;
 
-        // last_week_honor: u32
-        let last_week_honor = crate::util::tokio_read_u32_le(r).await?;
+            // last_week_honor: u32
+            let last_week_honor = crate::util::tokio_read_u32_le(r).await?;
 
-        // this_week_honor: u32
-        let this_week_honor = crate::util::tokio_read_u32_le(r).await?;
+            // this_week_honor: u32
+            let this_week_honor = crate::util::tokio_read_u32_le(r).await?;
 
-        // last_week_standing: PvpRank
-        let last_week_standing = PvpRank::tokio_read_u32_le(r).await?;
+            // last_week_standing: PvpRank
+            let last_week_standing = PvpRank::tokio_read_u32_le(r).await?;
 
-        // rank_progress_bar: u8
-        let rank_progress_bar = crate::util::tokio_read_u8_le(r).await?;
+            // rank_progress_bar: u8
+            let rank_progress_bar = crate::util::tokio_read_u8_le(r).await?;
 
-        Ok(Self {
-            guid,
-            highest_rank,
-            today_honorable_and_dishonorable,
-            yesterday_honorable,
-            unknown1,
-            last_week_honorable,
-            unknown2,
-            this_week_honorable,
-            unknown3,
-            lifetime_honorable,
-            lifetime_dishonorable,
-            yesterday_honor,
-            last_week_honor,
-            this_week_honor,
-            last_week_standing,
-            rank_progress_bar,
+            Ok(Self {
+                guid,
+                highest_rank,
+                today_honorable_and_dishonorable,
+                yesterday_honorable,
+                unknown1,
+                last_week_honorable,
+                unknown2,
+                this_week_honorable,
+                unknown3,
+                lifetime_honorable,
+                lifetime_dishonorable,
+                yesterday_honor,
+                last_week_honor,
+                this_week_honor,
+                last_week_standing,
+                rank_progress_bar,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        self.guid.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            self.guid.tokio_write(w).await?;
 
-        // highest_rank: PvpRank
-        self.highest_rank.tokio_write(w).await?;
+            // highest_rank: PvpRank
+            self.highest_rank.tokio_write(w).await?;
 
-        // today_honorable_and_dishonorable: u32
-        w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes()).await?;
+            // today_honorable_and_dishonorable: u32
+            w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes()).await?;
 
-        // yesterday_honorable: u16
-        w.write_all(&self.yesterday_honorable.to_le_bytes()).await?;
+            // yesterday_honorable: u16
+            w.write_all(&self.yesterday_honorable.to_le_bytes()).await?;
 
-        // unknown1: u16
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+            // unknown1: u16
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
 
-        // last_week_honorable: u16
-        w.write_all(&self.last_week_honorable.to_le_bytes()).await?;
+            // last_week_honorable: u16
+            w.write_all(&self.last_week_honorable.to_le_bytes()).await?;
 
-        // unknown2: u16
-        w.write_all(&self.unknown2.to_le_bytes()).await?;
+            // unknown2: u16
+            w.write_all(&self.unknown2.to_le_bytes()).await?;
 
-        // this_week_honorable: u16
-        w.write_all(&self.this_week_honorable.to_le_bytes()).await?;
+            // this_week_honorable: u16
+            w.write_all(&self.this_week_honorable.to_le_bytes()).await?;
 
-        // unknown3: u16
-        w.write_all(&self.unknown3.to_le_bytes()).await?;
+            // unknown3: u16
+            w.write_all(&self.unknown3.to_le_bytes()).await?;
 
-        // lifetime_honorable: u32
-        w.write_all(&self.lifetime_honorable.to_le_bytes()).await?;
+            // lifetime_honorable: u32
+            w.write_all(&self.lifetime_honorable.to_le_bytes()).await?;
 
-        // lifetime_dishonorable: u32
-        w.write_all(&self.lifetime_dishonorable.to_le_bytes()).await?;
+            // lifetime_dishonorable: u32
+            w.write_all(&self.lifetime_dishonorable.to_le_bytes()).await?;
 
-        // yesterday_honor: u32
-        w.write_all(&self.yesterday_honor.to_le_bytes()).await?;
+            // yesterday_honor: u32
+            w.write_all(&self.yesterday_honor.to_le_bytes()).await?;
 
-        // last_week_honor: u32
-        w.write_all(&self.last_week_honor.to_le_bytes()).await?;
+            // last_week_honor: u32
+            w.write_all(&self.last_week_honor.to_le_bytes()).await?;
 
-        // this_week_honor: u32
-        w.write_all(&self.this_week_honor.to_le_bytes()).await?;
+            // this_week_honor: u32
+            w.write_all(&self.this_week_honor.to_le_bytes()).await?;
 
-        // last_week_standing: PvpRank
-        self.last_week_standing.tokio_write_u32_le(w).await?;
+            // last_week_standing: PvpRank
+            self.last_week_standing.tokio_write_u32_le(w).await?;
 
-        // rank_progress_bar: u8
-        w.write_all(&self.rank_progress_bar.to_le_bytes()).await?;
+            // rank_progress_bar: u8
+            w.write_all(&self.rank_progress_bar.to_le_bytes()).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // guid: Guid
-        let guid = Guid::astd_read(r).await?;
-
-        // highest_rank: PvpRank
-        let highest_rank = PvpRank::astd_read(r).await?;
-
-        // today_honorable_and_dishonorable: u32
-        let today_honorable_and_dishonorable = crate::util::astd_read_u32_le(r).await?;
-
-        // yesterday_honorable: u16
-        let yesterday_honorable = crate::util::astd_read_u16_le(r).await?;
-
-        // unknown1: u16
-        let unknown1 = crate::util::astd_read_u16_le(r).await?;
-
-        // last_week_honorable: u16
-        let last_week_honorable = crate::util::astd_read_u16_le(r).await?;
-
-        // unknown2: u16
-        let unknown2 = crate::util::astd_read_u16_le(r).await?;
-
-        // this_week_honorable: u16
-        let this_week_honorable = crate::util::astd_read_u16_le(r).await?;
-
-        // unknown3: u16
-        let unknown3 = crate::util::astd_read_u16_le(r).await?;
-
-        // lifetime_honorable: u32
-        let lifetime_honorable = crate::util::astd_read_u32_le(r).await?;
-
-        // lifetime_dishonorable: u32
-        let lifetime_dishonorable = crate::util::astd_read_u32_le(r).await?;
-
-        // yesterday_honor: u32
-        let yesterday_honor = crate::util::astd_read_u32_le(r).await?;
-
-        // last_week_honor: u32
-        let last_week_honor = crate::util::astd_read_u32_le(r).await?;
-
-        // this_week_honor: u32
-        let this_week_honor = crate::util::astd_read_u32_le(r).await?;
-
-        // last_week_standing: PvpRank
-        let last_week_standing = PvpRank::astd_read_u32_le(r).await?;
-
-        // rank_progress_bar: u8
-        let rank_progress_bar = crate::util::astd_read_u8_le(r).await?;
-
-        Ok(Self {
-            guid,
-            highest_rank,
-            today_honorable_and_dishonorable,
-            yesterday_honorable,
-            unknown1,
-            last_week_honorable,
-            unknown2,
-            this_week_honorable,
-            unknown3,
-            lifetime_honorable,
-            lifetime_dishonorable,
-            yesterday_honor,
-            last_week_honor,
-            this_week_honor,
-            last_week_standing,
-            rank_progress_bar,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        self.guid.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            let guid = Guid::astd_read(r).await?;
 
-        // highest_rank: PvpRank
-        self.highest_rank.astd_write(w).await?;
+            // highest_rank: PvpRank
+            let highest_rank = PvpRank::astd_read(r).await?;
 
-        // today_honorable_and_dishonorable: u32
-        w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes()).await?;
+            // today_honorable_and_dishonorable: u32
+            let today_honorable_and_dishonorable = crate::util::astd_read_u32_le(r).await?;
 
-        // yesterday_honorable: u16
-        w.write_all(&self.yesterday_honorable.to_le_bytes()).await?;
+            // yesterday_honorable: u16
+            let yesterday_honorable = crate::util::astd_read_u16_le(r).await?;
 
-        // unknown1: u16
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+            // unknown1: u16
+            let unknown1 = crate::util::astd_read_u16_le(r).await?;
 
-        // last_week_honorable: u16
-        w.write_all(&self.last_week_honorable.to_le_bytes()).await?;
+            // last_week_honorable: u16
+            let last_week_honorable = crate::util::astd_read_u16_le(r).await?;
 
-        // unknown2: u16
-        w.write_all(&self.unknown2.to_le_bytes()).await?;
+            // unknown2: u16
+            let unknown2 = crate::util::astd_read_u16_le(r).await?;
 
-        // this_week_honorable: u16
-        w.write_all(&self.this_week_honorable.to_le_bytes()).await?;
+            // this_week_honorable: u16
+            let this_week_honorable = crate::util::astd_read_u16_le(r).await?;
 
-        // unknown3: u16
-        w.write_all(&self.unknown3.to_le_bytes()).await?;
+            // unknown3: u16
+            let unknown3 = crate::util::astd_read_u16_le(r).await?;
 
-        // lifetime_honorable: u32
-        w.write_all(&self.lifetime_honorable.to_le_bytes()).await?;
+            // lifetime_honorable: u32
+            let lifetime_honorable = crate::util::astd_read_u32_le(r).await?;
 
-        // lifetime_dishonorable: u32
-        w.write_all(&self.lifetime_dishonorable.to_le_bytes()).await?;
+            // lifetime_dishonorable: u32
+            let lifetime_dishonorable = crate::util::astd_read_u32_le(r).await?;
 
-        // yesterday_honor: u32
-        w.write_all(&self.yesterday_honor.to_le_bytes()).await?;
+            // yesterday_honor: u32
+            let yesterday_honor = crate::util::astd_read_u32_le(r).await?;
 
-        // last_week_honor: u32
-        w.write_all(&self.last_week_honor.to_le_bytes()).await?;
+            // last_week_honor: u32
+            let last_week_honor = crate::util::astd_read_u32_le(r).await?;
 
-        // this_week_honor: u32
-        w.write_all(&self.this_week_honor.to_le_bytes()).await?;
+            // this_week_honor: u32
+            let this_week_honor = crate::util::astd_read_u32_le(r).await?;
 
-        // last_week_standing: PvpRank
-        self.last_week_standing.astd_write_u32_le(w).await?;
+            // last_week_standing: PvpRank
+            let last_week_standing = PvpRank::astd_read_u32_le(r).await?;
 
-        // rank_progress_bar: u8
-        w.write_all(&self.rank_progress_bar.to_le_bytes()).await?;
+            // rank_progress_bar: u8
+            let rank_progress_bar = crate::util::astd_read_u8_le(r).await?;
 
-        Ok(())
+            Ok(Self {
+                guid,
+                highest_rank,
+                today_honorable_and_dishonorable,
+                yesterday_honorable,
+                unknown1,
+                last_week_honorable,
+                unknown2,
+                this_week_honorable,
+                unknown3,
+                lifetime_honorable,
+                lifetime_dishonorable,
+                yesterday_honor,
+                last_week_honor,
+                this_week_honor,
+                last_week_standing,
+                rank_progress_bar,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // guid: Guid
+            self.guid.astd_write(w).await?;
+
+            // highest_rank: PvpRank
+            self.highest_rank.astd_write(w).await?;
+
+            // today_honorable_and_dishonorable: u32
+            w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes()).await?;
+
+            // yesterday_honorable: u16
+            w.write_all(&self.yesterday_honorable.to_le_bytes()).await?;
+
+            // unknown1: u16
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+            // last_week_honorable: u16
+            w.write_all(&self.last_week_honorable.to_le_bytes()).await?;
+
+            // unknown2: u16
+            w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+            // this_week_honorable: u16
+            w.write_all(&self.this_week_honorable.to_le_bytes()).await?;
+
+            // unknown3: u16
+            w.write_all(&self.unknown3.to_le_bytes()).await?;
+
+            // lifetime_honorable: u32
+            w.write_all(&self.lifetime_honorable.to_le_bytes()).await?;
+
+            // lifetime_dishonorable: u32
+            w.write_all(&self.lifetime_dishonorable.to_le_bytes()).await?;
+
+            // yesterday_honor: u32
+            w.write_all(&self.yesterday_honor.to_le_bytes()).await?;
+
+            // last_week_honor: u32
+            w.write_all(&self.last_week_honor.to_le_bytes()).await?;
+
+            // this_week_honor: u32
+            w.write_all(&self.this_week_honor.to_le_bytes()).await?;
+
+            // last_week_standing: PvpRank
+            self.last_week_standing.astd_write_u32_le(w).await?;
+
+            // rank_progress_bar: u8
+            w.write_all(&self.rank_progress_bar.to_le_bytes()).await?;
+
+            Ok(())
+        })
     }
 
 }

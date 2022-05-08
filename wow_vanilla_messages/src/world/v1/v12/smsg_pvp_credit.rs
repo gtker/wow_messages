@@ -21,7 +21,6 @@ pub struct SMSG_PVP_CREDIT {
 
 impl ServerMessageWrite for SMSG_PVP_CREDIT {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_PVP_CREDIT {
     const OPCODE: u16 = 0x028c;
 
@@ -63,68 +62,114 @@ impl MessageBody for SMSG_PVP_CREDIT {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // honor_points: u32
-        let honor_points = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // honor_points: u32
+            let honor_points = crate::util::tokio_read_u32_le(r).await?;
 
-        // victim: Guid
-        let victim = Guid::tokio_read(r).await?;
+            // victim: Guid
+            let victim = Guid::tokio_read(r).await?;
 
-        // rank: PvpRank
-        let rank = PvpRank::tokio_read_u32_le(r).await?;
+            // rank: PvpRank
+            let rank = PvpRank::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            honor_points,
-            victim,
-            rank,
+            Ok(Self {
+                honor_points,
+                victim,
+                rank,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // honor_points: u32
-        w.write_all(&self.honor_points.to_le_bytes()).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // honor_points: u32
+            w.write_all(&self.honor_points.to_le_bytes()).await?;
 
-        // victim: Guid
-        self.victim.tokio_write(w).await?;
+            // victim: Guid
+            self.victim.tokio_write(w).await?;
 
-        // rank: PvpRank
-        self.rank.tokio_write_u32_le(w).await?;
+            // rank: PvpRank
+            self.rank.tokio_write_u32_le(w).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // honor_points: u32
-        let honor_points = crate::util::astd_read_u32_le(r).await?;
-
-        // victim: Guid
-        let victim = Guid::astd_read(r).await?;
-
-        // rank: PvpRank
-        let rank = PvpRank::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            honor_points,
-            victim,
-            rank,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // honor_points: u32
-        w.write_all(&self.honor_points.to_le_bytes()).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // honor_points: u32
+            let honor_points = crate::util::astd_read_u32_le(r).await?;
 
-        // victim: Guid
-        self.victim.astd_write(w).await?;
+            // victim: Guid
+            let victim = Guid::astd_read(r).await?;
 
-        // rank: PvpRank
-        self.rank.astd_write_u32_le(w).await?;
+            // rank: PvpRank
+            let rank = PvpRank::astd_read_u32_le(r).await?;
 
-        Ok(())
+            Ok(Self {
+                honor_points,
+                victim,
+                rank,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // honor_points: u32
+            w.write_all(&self.honor_points.to_le_bytes()).await?;
+
+            // victim: Guid
+            self.victim.astd_write(w).await?;
+
+            // rank: PvpRank
+            self.rank.astd_write_u32_le(w).await?;
+
+            Ok(())
+        })
     }
 
 }

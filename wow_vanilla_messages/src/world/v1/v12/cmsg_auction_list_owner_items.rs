@@ -19,7 +19,6 @@ pub struct CMSG_AUCTION_LIST_OWNER_ITEMS {
 
 impl ClientMessageWrite for CMSG_AUCTION_LIST_OWNER_ITEMS {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_AUCTION_LIST_OWNER_ITEMS {
     const OPCODE: u16 = 0x0259;
 
@@ -54,54 +53,100 @@ impl MessageBody for CMSG_AUCTION_LIST_OWNER_ITEMS {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // auctioneer_guid: Guid
-        let auctioneer_guid = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // auctioneer_guid: Guid
+            let auctioneer_guid = Guid::tokio_read(r).await?;
 
-        // list_from: u32
-        let list_from = crate::util::tokio_read_u32_le(r).await?;
+            // list_from: u32
+            let list_from = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            auctioneer_guid,
-            list_from,
+            Ok(Self {
+                auctioneer_guid,
+                list_from,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // auctioneer_guid: Guid
-        self.auctioneer_guid.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // auctioneer_guid: Guid
+            self.auctioneer_guid.tokio_write(w).await?;
 
-        // list_from: u32
-        w.write_all(&self.list_from.to_le_bytes()).await?;
+            // list_from: u32
+            w.write_all(&self.list_from.to_le_bytes()).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // auctioneer_guid: Guid
-        let auctioneer_guid = Guid::astd_read(r).await?;
-
-        // list_from: u32
-        let list_from = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            auctioneer_guid,
-            list_from,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // auctioneer_guid: Guid
-        self.auctioneer_guid.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // auctioneer_guid: Guid
+            let auctioneer_guid = Guid::astd_read(r).await?;
 
-        // list_from: u32
-        w.write_all(&self.list_from.to_le_bytes()).await?;
+            // list_from: u32
+            let list_from = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(())
+            Ok(Self {
+                auctioneer_guid,
+                list_from,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // auctioneer_guid: Guid
+            self.auctioneer_guid.astd_write(w).await?;
+
+            // list_from: u32
+            w.write_all(&self.list_from.to_le_bytes()).await?;
+
+            Ok(())
+        })
     }
 
 }

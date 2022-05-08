@@ -20,7 +20,6 @@ pub struct SMSG_GUILD_COMMAND_RESULT {
 
 impl ServerMessageWrite for SMSG_GUILD_COMMAND_RESULT {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
     const OPCODE: u16 = 0x0093;
 
@@ -65,74 +64,120 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // command: GuildCommand
-        let command = GuildCommand::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // command: GuildCommand
+            let command = GuildCommand::tokio_read_u32_le(r).await?;
 
-        // string: CString
-        let string = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let string = String::from_utf8(string)?;
+            // string: CString
+            let string = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let string = String::from_utf8(string)?;
 
-        // result: GuildCommandResult
-        let result = GuildCommandResult::tokio_read_u32_le(r).await?;
+            // result: GuildCommandResult
+            let result = GuildCommandResult::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            command,
-            string,
-            result,
+            Ok(Self {
+                command,
+                string,
+                result,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // command: GuildCommand
-        self.command.tokio_write_u32_le(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // command: GuildCommand
+            self.command.tokio_write_u32_le(w).await?;
 
-        // string: CString
-        w.write_all(self.string.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // string: CString
+            w.write_all(self.string.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // result: GuildCommandResult
-        self.result.tokio_write_u32_le(w).await?;
+            // result: GuildCommandResult
+            self.result.tokio_write_u32_le(w).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // command: GuildCommand
-        let command = GuildCommand::astd_read_u32_le(r).await?;
-
-        // string: CString
-        let string = crate::util::astd_read_c_string_to_vec(r).await?;
-        let string = String::from_utf8(string)?;
-
-        // result: GuildCommandResult
-        let result = GuildCommandResult::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            command,
-            string,
-            result,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // command: GuildCommand
-        self.command.astd_write_u32_le(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // command: GuildCommand
+            let command = GuildCommand::astd_read_u32_le(r).await?;
 
-        // string: CString
-        w.write_all(self.string.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // string: CString
+            let string = crate::util::astd_read_c_string_to_vec(r).await?;
+            let string = String::from_utf8(string)?;
 
-        // result: GuildCommandResult
-        self.result.astd_write_u32_le(w).await?;
+            // result: GuildCommandResult
+            let result = GuildCommandResult::astd_read_u32_le(r).await?;
 
-        Ok(())
+            Ok(Self {
+                command,
+                string,
+                result,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // command: GuildCommand
+            self.command.astd_write_u32_le(w).await?;
+
+            // string: CString
+            w.write_all(self.string.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // result: GuildCommandResult
+            self.result.astd_write_u32_le(w).await?;
+
+            Ok(())
+        })
     }
 
 }

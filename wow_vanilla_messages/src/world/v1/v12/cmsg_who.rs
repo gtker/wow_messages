@@ -23,7 +23,6 @@ pub struct CMSG_WHO {
 
 impl ClientMessageWrite for CMSG_WHO {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_WHO {
     const OPCODE: u16 = 0x0062;
 
@@ -130,198 +129,244 @@ impl MessageBody for CMSG_WHO {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // minimum_level: u32
-        let minimum_level = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // minimum_level: u32
+            let minimum_level = crate::util::tokio_read_u32_le(r).await?;
 
-        // maximum_level: u32
-        let maximum_level = crate::util::tokio_read_u32_le(r).await?;
+            // maximum_level: u32
+            let maximum_level = crate::util::tokio_read_u32_le(r).await?;
 
-        // player_name: CString
-        let player_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let player_name = String::from_utf8(player_name)?;
+            // player_name: CString
+            let player_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let player_name = String::from_utf8(player_name)?;
 
-        // guild_name: CString
-        let guild_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let guild_name = String::from_utf8(guild_name)?;
+            // guild_name: CString
+            let guild_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let guild_name = String::from_utf8(guild_name)?;
 
-        // race_mask: u32
-        let race_mask = crate::util::tokio_read_u32_le(r).await?;
+            // race_mask: u32
+            let race_mask = crate::util::tokio_read_u32_le(r).await?;
 
-        // class_mask: u32
-        let class_mask = crate::util::tokio_read_u32_le(r).await?;
+            // class_mask: u32
+            let class_mask = crate::util::tokio_read_u32_le(r).await?;
 
-        // amount_of_zones: u32
-        let amount_of_zones = crate::util::tokio_read_u32_le(r).await?;
+            // amount_of_zones: u32
+            let amount_of_zones = crate::util::tokio_read_u32_le(r).await?;
 
-        // zones: u32[amount_of_zones]
-        let mut zones = Vec::with_capacity(amount_of_zones as usize);
-        for i in 0..amount_of_zones {
-            zones.push(crate::util::tokio_read_u32_le(r).await?);
-        }
+            // zones: u32[amount_of_zones]
+            let mut zones = Vec::with_capacity(amount_of_zones as usize);
+            for i in 0..amount_of_zones {
+                zones.push(crate::util::tokio_read_u32_le(r).await?);
+            }
 
-        // amount_of_strings: u32
-        let amount_of_strings = crate::util::tokio_read_u32_le(r).await?;
+            // amount_of_strings: u32
+            let amount_of_strings = crate::util::tokio_read_u32_le(r).await?;
 
-        // search_strings: CString[amount_of_strings]
-        let mut search_strings = Vec::with_capacity(amount_of_strings as usize);
-        for i in 0..amount_of_strings {
-            let s = crate::util::tokio_read_c_string_to_vec(r).await?;
-            search_strings.push(String::from_utf8(s)?);
-        }
+            // search_strings: CString[amount_of_strings]
+            let mut search_strings = Vec::with_capacity(amount_of_strings as usize);
+            for i in 0..amount_of_strings {
+                let s = crate::util::tokio_read_c_string_to_vec(r).await?;
+                search_strings.push(String::from_utf8(s)?);
+            }
 
-        Ok(Self {
-            minimum_level,
-            maximum_level,
-            player_name,
-            guild_name,
-            race_mask,
-            class_mask,
-            zones,
-            search_strings,
+            Ok(Self {
+                minimum_level,
+                maximum_level,
+                player_name,
+                guild_name,
+                race_mask,
+                class_mask,
+                zones,
+                search_strings,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // minimum_level: u32
-        w.write_all(&self.minimum_level.to_le_bytes()).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // minimum_level: u32
+            w.write_all(&self.minimum_level.to_le_bytes()).await?;
 
-        // maximum_level: u32
-        w.write_all(&self.maximum_level.to_le_bytes()).await?;
+            // maximum_level: u32
+            w.write_all(&self.maximum_level.to_le_bytes()).await?;
 
-        // player_name: CString
-        w.write_all(self.player_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // guild_name: CString
-        w.write_all(self.guild_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // race_mask: u32
-        w.write_all(&self.race_mask.to_le_bytes()).await?;
-
-        // class_mask: u32
-        w.write_all(&self.class_mask.to_le_bytes()).await?;
-
-        // amount_of_zones: u32
-        w.write_all(&(self.zones.len() as u32).to_le_bytes()).await?;
-
-        // zones: u32[amount_of_zones]
-        for i in self.zones.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // amount_of_strings: u32
-        w.write_all(&(self.search_strings.len() as u32).to_le_bytes()).await?;
-
-        // search_strings: CString[amount_of_strings]
-        for i in self.search_strings.iter() {
-            w.write_all(&i.as_bytes()).await?;
+            // player_name: CString
+            w.write_all(self.player_name.as_bytes()).await?;
+            // Null terminator
             w.write_all(&[0]).await?;
-        }
 
-        Ok(())
-    }
+            // guild_name: CString
+            w.write_all(self.guild_name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // minimum_level: u32
-        let minimum_level = crate::util::astd_read_u32_le(r).await?;
+            // race_mask: u32
+            w.write_all(&self.race_mask.to_le_bytes()).await?;
 
-        // maximum_level: u32
-        let maximum_level = crate::util::astd_read_u32_le(r).await?;
+            // class_mask: u32
+            w.write_all(&self.class_mask.to_le_bytes()).await?;
 
-        // player_name: CString
-        let player_name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let player_name = String::from_utf8(player_name)?;
+            // amount_of_zones: u32
+            w.write_all(&(self.zones.len() as u32).to_le_bytes()).await?;
 
-        // guild_name: CString
-        let guild_name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let guild_name = String::from_utf8(guild_name)?;
+            // zones: u32[amount_of_zones]
+            for i in self.zones.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // race_mask: u32
-        let race_mask = crate::util::astd_read_u32_le(r).await?;
+            // amount_of_strings: u32
+            w.write_all(&(self.search_strings.len() as u32).to_le_bytes()).await?;
 
-        // class_mask: u32
-        let class_mask = crate::util::astd_read_u32_le(r).await?;
+            // search_strings: CString[amount_of_strings]
+            for i in self.search_strings.iter() {
+                w.write_all(&i.as_bytes()).await?;
+                w.write_all(&[0]).await?;
+            }
 
-        // amount_of_zones: u32
-        let amount_of_zones = crate::util::astd_read_u32_le(r).await?;
-
-        // zones: u32[amount_of_zones]
-        let mut zones = Vec::with_capacity(amount_of_zones as usize);
-        for i in 0..amount_of_zones {
-            zones.push(crate::util::astd_read_u32_le(r).await?);
-        }
-
-        // amount_of_strings: u32
-        let amount_of_strings = crate::util::astd_read_u32_le(r).await?;
-
-        // search_strings: CString[amount_of_strings]
-        let mut search_strings = Vec::with_capacity(amount_of_strings as usize);
-        for i in 0..amount_of_strings {
-            let s = crate::util::astd_read_c_string_to_vec(r).await?;
-            search_strings.push(String::from_utf8(s)?);
-        }
-
-        Ok(Self {
-            minimum_level,
-            maximum_level,
-            player_name,
-            guild_name,
-            race_mask,
-            class_mask,
-            zones,
-            search_strings,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // minimum_level: u32
-        w.write_all(&self.minimum_level.to_le_bytes()).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // minimum_level: u32
+            let minimum_level = crate::util::astd_read_u32_le(r).await?;
 
-        // maximum_level: u32
-        w.write_all(&self.maximum_level.to_le_bytes()).await?;
+            // maximum_level: u32
+            let maximum_level = crate::util::astd_read_u32_le(r).await?;
 
-        // player_name: CString
-        w.write_all(self.player_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // player_name: CString
+            let player_name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let player_name = String::from_utf8(player_name)?;
 
-        // guild_name: CString
-        w.write_all(self.guild_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // guild_name: CString
+            let guild_name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let guild_name = String::from_utf8(guild_name)?;
 
-        // race_mask: u32
-        w.write_all(&self.race_mask.to_le_bytes()).await?;
+            // race_mask: u32
+            let race_mask = crate::util::astd_read_u32_le(r).await?;
 
-        // class_mask: u32
-        w.write_all(&self.class_mask.to_le_bytes()).await?;
+            // class_mask: u32
+            let class_mask = crate::util::astd_read_u32_le(r).await?;
 
-        // amount_of_zones: u32
-        w.write_all(&(self.zones.len() as u32).to_le_bytes()).await?;
+            // amount_of_zones: u32
+            let amount_of_zones = crate::util::astd_read_u32_le(r).await?;
 
-        // zones: u32[amount_of_zones]
-        for i in self.zones.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // zones: u32[amount_of_zones]
+            let mut zones = Vec::with_capacity(amount_of_zones as usize);
+            for i in 0..amount_of_zones {
+                zones.push(crate::util::astd_read_u32_le(r).await?);
+            }
 
-        // amount_of_strings: u32
-        w.write_all(&(self.search_strings.len() as u32).to_le_bytes()).await?;
+            // amount_of_strings: u32
+            let amount_of_strings = crate::util::astd_read_u32_le(r).await?;
 
-        // search_strings: CString[amount_of_strings]
-        for i in self.search_strings.iter() {
-            w.write_all(&i.as_bytes()).await?;
+            // search_strings: CString[amount_of_strings]
+            let mut search_strings = Vec::with_capacity(amount_of_strings as usize);
+            for i in 0..amount_of_strings {
+                let s = crate::util::astd_read_c_string_to_vec(r).await?;
+                search_strings.push(String::from_utf8(s)?);
+            }
+
+            Ok(Self {
+                minimum_level,
+                maximum_level,
+                player_name,
+                guild_name,
+                race_mask,
+                class_mask,
+                zones,
+                search_strings,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // minimum_level: u32
+            w.write_all(&self.minimum_level.to_le_bytes()).await?;
+
+            // maximum_level: u32
+            w.write_all(&self.maximum_level.to_le_bytes()).await?;
+
+            // player_name: CString
+            w.write_all(self.player_name.as_bytes()).await?;
+            // Null terminator
             w.write_all(&[0]).await?;
-        }
 
-        Ok(())
+            // guild_name: CString
+            w.write_all(self.guild_name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // race_mask: u32
+            w.write_all(&self.race_mask.to_le_bytes()).await?;
+
+            // class_mask: u32
+            w.write_all(&self.class_mask.to_le_bytes()).await?;
+
+            // amount_of_zones: u32
+            w.write_all(&(self.zones.len() as u32).to_le_bytes()).await?;
+
+            // zones: u32[amount_of_zones]
+            for i in self.zones.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
+
+            // amount_of_strings: u32
+            w.write_all(&(self.search_strings.len() as u32).to_le_bytes()).await?;
+
+            // search_strings: CString[amount_of_strings]
+            for i in self.search_strings.iter() {
+                w.write_all(&i.as_bytes()).await?;
+                w.write_all(&[0]).await?;
+            }
+
+            Ok(())
+        })
     }
 
 }

@@ -19,7 +19,6 @@ pub struct SMSG_TRADE_STATUS {
 
 impl ServerMessageWrite for SMSG_TRADE_STATUS {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_TRADE_STATUS {
     const OPCODE: u16 = 0x0120;
 
@@ -169,284 +168,330 @@ impl MessageBody for SMSG_TRADE_STATUS {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // status: TradeStatus
-        let status = TradeStatus::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // status: TradeStatus
+            let status = TradeStatus::tokio_read(r).await?;
 
-        let status_if = match status {
-            TradeStatus::BUSY => SMSG_TRADE_STATUSTradeStatus::BUSY,
-            TradeStatus::BEGIN_TRADE => {
-                // unknown1: Guid
-                let unknown1 = Guid::tokio_read(r).await?;
+            let status_if = match status {
+                TradeStatus::BUSY => SMSG_TRADE_STATUSTradeStatus::BUSY,
+                TradeStatus::BEGIN_TRADE => {
+                    // unknown1: Guid
+                    let unknown1 = Guid::tokio_read(r).await?;
 
+                    SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE {
+                        unknown1,
+                    }
+                }
+                TradeStatus::OPEN_WINDOW => SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW,
+                TradeStatus::TRADE_CANCELED => SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED,
+                TradeStatus::TRADE_ACCEPT => SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT,
+                TradeStatus::BUSY_2 => SMSG_TRADE_STATUSTradeStatus::BUSY_2,
+                TradeStatus::NO_TARGET => SMSG_TRADE_STATUSTradeStatus::NO_TARGET,
+                TradeStatus::BACK_TO_TRADE => SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE,
+                TradeStatus::TRADE_COMPLETE => SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE,
+                TradeStatus::TRADE_REJECTED => SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED,
+                TradeStatus::TARGET_TO_FAR => SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR,
+                TradeStatus::WRONG_FACTION => SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION,
+                TradeStatus::CLOSE_WINDOW => {
+                    // inventory_result: InventoryResult
+                    let inventory_result = InventoryResult::tokio_read_u32_le(r).await?;
+
+                    // target_error: u8
+                    let target_error = crate::util::tokio_read_u8_le(r).await?;
+
+                    // item_limit_category_id: u32
+                    let item_limit_category_id = crate::util::tokio_read_u32_le(r).await?;
+
+                    SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
+                        inventory_result,
+                        target_error,
+                        item_limit_category_id,
+                    }
+                }
+                TradeStatus::UNKNOWN_13 => SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13,
+                TradeStatus::IGNORE_YOU => SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU,
+                TradeStatus::YOU_STUNNED => SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED,
+                TradeStatus::TARGET_STUNNED => SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED,
+                TradeStatus::YOU_DEAD => SMSG_TRADE_STATUSTradeStatus::YOU_DEAD,
+                TradeStatus::TARGET_DEAD => SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD,
+                TradeStatus::YOU_LOGOUT => SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT,
+                TradeStatus::TARGET_LOGOUT => SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT,
+                TradeStatus::TRIAL_ACCOUNT => SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT,
+                TradeStatus::ONLY_CONJURED => {
+                    // slot: u8
+                    let slot = crate::util::tokio_read_u8_le(r).await?;
+
+                    SMSG_TRADE_STATUSTradeStatus::ONLY_CONJURED {
+                        slot,
+                    }
+                }
+                TradeStatus::NOT_ON_TAPLIST => {
+                    // slot: u8
+                    let slot = crate::util::tokio_read_u8_le(r).await?;
+
+                    SMSG_TRADE_STATUSTradeStatus::NOT_ON_TAPLIST {
+                        slot,
+                    }
+                }
+            };
+
+            Ok(Self {
+                status: status_if,
+            })
+        })
+    }
+
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // status: TradeStatus
+            self.status.tokio_write(w).await?;
+
+            match &self.status {
+                SMSG_TRADE_STATUSTradeStatus::BUSY => {}
                 SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE {
                     unknown1,
+                } => {
+                    // unknown1: Guid
+                    unknown1.tokio_write(w).await?;
+
                 }
-            }
-            TradeStatus::OPEN_WINDOW => SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW,
-            TradeStatus::TRADE_CANCELED => SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED,
-            TradeStatus::TRADE_ACCEPT => SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT,
-            TradeStatus::BUSY_2 => SMSG_TRADE_STATUSTradeStatus::BUSY_2,
-            TradeStatus::NO_TARGET => SMSG_TRADE_STATUSTradeStatus::NO_TARGET,
-            TradeStatus::BACK_TO_TRADE => SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE,
-            TradeStatus::TRADE_COMPLETE => SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE,
-            TradeStatus::TRADE_REJECTED => SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED,
-            TradeStatus::TARGET_TO_FAR => SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR,
-            TradeStatus::WRONG_FACTION => SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION,
-            TradeStatus::CLOSE_WINDOW => {
-                // inventory_result: InventoryResult
-                let inventory_result = InventoryResult::tokio_read_u32_le(r).await?;
-
-                // target_error: u8
-                let target_error = crate::util::tokio_read_u8_le(r).await?;
-
-                // item_limit_category_id: u32
-                let item_limit_category_id = crate::util::tokio_read_u32_le(r).await?;
-
+                SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW => {}
+                SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED => {}
+                SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT => {}
+                SMSG_TRADE_STATUSTradeStatus::BUSY_2 => {}
+                SMSG_TRADE_STATUSTradeStatus::NO_TARGET => {}
+                SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE => {}
+                SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE => {}
+                SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED => {}
+                SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR => {}
+                SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION => {}
                 SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
                     inventory_result,
                     target_error,
                     item_limit_category_id,
-                }
-            }
-            TradeStatus::UNKNOWN_13 => SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13,
-            TradeStatus::IGNORE_YOU => SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU,
-            TradeStatus::YOU_STUNNED => SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED,
-            TradeStatus::TARGET_STUNNED => SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED,
-            TradeStatus::YOU_DEAD => SMSG_TRADE_STATUSTradeStatus::YOU_DEAD,
-            TradeStatus::TARGET_DEAD => SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD,
-            TradeStatus::YOU_LOGOUT => SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT,
-            TradeStatus::TARGET_LOGOUT => SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT,
-            TradeStatus::TRIAL_ACCOUNT => SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT,
-            TradeStatus::ONLY_CONJURED => {
-                // slot: u8
-                let slot = crate::util::tokio_read_u8_le(r).await?;
+                } => {
+                    // inventory_result: InventoryResult
+                    inventory_result.tokio_write_u32_le(w).await?;
 
+                    // target_error: u8
+                    w.write_all(&target_error.to_le_bytes()).await?;
+
+                    // item_limit_category_id: u32
+                    w.write_all(&item_limit_category_id.to_le_bytes()).await?;
+
+                }
+                SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13 => {}
+                SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU => {}
+                SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED => {}
+                SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED => {}
+                SMSG_TRADE_STATUSTradeStatus::YOU_DEAD => {}
+                SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD => {}
+                SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT => {}
+                SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT => {}
+                SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT => {}
                 SMSG_TRADE_STATUSTradeStatus::ONLY_CONJURED {
                     slot,
-                }
-            }
-            TradeStatus::NOT_ON_TAPLIST => {
-                // slot: u8
-                let slot = crate::util::tokio_read_u8_le(r).await?;
+                } => {
+                    // slot: u8
+                    w.write_all(&slot.to_le_bytes()).await?;
 
+                }
                 SMSG_TRADE_STATUSTradeStatus::NOT_ON_TAPLIST {
                     slot,
+                } => {
+                    // slot: u8
+                    w.write_all(&slot.to_le_bytes()).await?;
+
                 }
             }
-        };
 
-        Ok(Self {
-            status: status_if,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // status: TradeStatus
-        self.status.tokio_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // status: TradeStatus
+            let status = TradeStatus::astd_read(r).await?;
 
-        match &self.status {
-            SMSG_TRADE_STATUSTradeStatus::BUSY => {}
-            SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE {
-                unknown1,
-            } => {
-                // unknown1: Guid
-                unknown1.tokio_write(w).await?;
+            let status_if = match status {
+                TradeStatus::BUSY => SMSG_TRADE_STATUSTradeStatus::BUSY,
+                TradeStatus::BEGIN_TRADE => {
+                    // unknown1: Guid
+                    let unknown1 = Guid::astd_read(r).await?;
 
-            }
-            SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT => {}
-            SMSG_TRADE_STATUSTradeStatus::BUSY_2 => {}
-            SMSG_TRADE_STATUSTradeStatus::NO_TARGET => {}
-            SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR => {}
-            SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION => {}
-            SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
-                inventory_result,
-                target_error,
-                item_limit_category_id,
-            } => {
-                // inventory_result: InventoryResult
-                inventory_result.tokio_write_u32_le(w).await?;
+                    SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE {
+                        unknown1,
+                    }
+                }
+                TradeStatus::OPEN_WINDOW => SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW,
+                TradeStatus::TRADE_CANCELED => SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED,
+                TradeStatus::TRADE_ACCEPT => SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT,
+                TradeStatus::BUSY_2 => SMSG_TRADE_STATUSTradeStatus::BUSY_2,
+                TradeStatus::NO_TARGET => SMSG_TRADE_STATUSTradeStatus::NO_TARGET,
+                TradeStatus::BACK_TO_TRADE => SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE,
+                TradeStatus::TRADE_COMPLETE => SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE,
+                TradeStatus::TRADE_REJECTED => SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED,
+                TradeStatus::TARGET_TO_FAR => SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR,
+                TradeStatus::WRONG_FACTION => SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION,
+                TradeStatus::CLOSE_WINDOW => {
+                    // inventory_result: InventoryResult
+                    let inventory_result = InventoryResult::astd_read_u32_le(r).await?;
 
-                // target_error: u8
-                w.write_all(&target_error.to_le_bytes()).await?;
+                    // target_error: u8
+                    let target_error = crate::util::astd_read_u8_le(r).await?;
 
-                // item_limit_category_id: u32
-                w.write_all(&item_limit_category_id.to_le_bytes()).await?;
+                    // item_limit_category_id: u32
+                    let item_limit_category_id = crate::util::astd_read_u32_le(r).await?;
 
-            }
-            SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13 => {}
-            SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU => {}
-            SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED => {}
-            SMSG_TRADE_STATUSTradeStatus::YOU_DEAD => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD => {}
-            SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT => {}
-            SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT => {}
-            SMSG_TRADE_STATUSTradeStatus::ONLY_CONJURED {
-                slot,
-            } => {
-                // slot: u8
-                w.write_all(&slot.to_le_bytes()).await?;
+                    SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
+                        inventory_result,
+                        target_error,
+                        item_limit_category_id,
+                    }
+                }
+                TradeStatus::UNKNOWN_13 => SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13,
+                TradeStatus::IGNORE_YOU => SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU,
+                TradeStatus::YOU_STUNNED => SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED,
+                TradeStatus::TARGET_STUNNED => SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED,
+                TradeStatus::YOU_DEAD => SMSG_TRADE_STATUSTradeStatus::YOU_DEAD,
+                TradeStatus::TARGET_DEAD => SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD,
+                TradeStatus::YOU_LOGOUT => SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT,
+                TradeStatus::TARGET_LOGOUT => SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT,
+                TradeStatus::TRIAL_ACCOUNT => SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT,
+                TradeStatus::ONLY_CONJURED => {
+                    // slot: u8
+                    let slot = crate::util::astd_read_u8_le(r).await?;
 
-            }
-            SMSG_TRADE_STATUSTradeStatus::NOT_ON_TAPLIST {
-                slot,
-            } => {
-                // slot: u8
-                w.write_all(&slot.to_le_bytes()).await?;
+                    SMSG_TRADE_STATUSTradeStatus::ONLY_CONJURED {
+                        slot,
+                    }
+                }
+                TradeStatus::NOT_ON_TAPLIST => {
+                    // slot: u8
+                    let slot = crate::util::astd_read_u8_le(r).await?;
 
-            }
-        }
+                    SMSG_TRADE_STATUSTradeStatus::NOT_ON_TAPLIST {
+                        slot,
+                    }
+                }
+            };
 
-        Ok(())
+            Ok(Self {
+                status: status_if,
+            })
+        })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // status: TradeStatus
-        let status = TradeStatus::astd_read(r).await?;
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // status: TradeStatus
+            self.status.astd_write(w).await?;
 
-        let status_if = match status {
-            TradeStatus::BUSY => SMSG_TRADE_STATUSTradeStatus::BUSY,
-            TradeStatus::BEGIN_TRADE => {
-                // unknown1: Guid
-                let unknown1 = Guid::astd_read(r).await?;
-
+            match &self.status {
+                SMSG_TRADE_STATUSTradeStatus::BUSY => {}
                 SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE {
                     unknown1,
+                } => {
+                    // unknown1: Guid
+                    unknown1.astd_write(w).await?;
+
                 }
-            }
-            TradeStatus::OPEN_WINDOW => SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW,
-            TradeStatus::TRADE_CANCELED => SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED,
-            TradeStatus::TRADE_ACCEPT => SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT,
-            TradeStatus::BUSY_2 => SMSG_TRADE_STATUSTradeStatus::BUSY_2,
-            TradeStatus::NO_TARGET => SMSG_TRADE_STATUSTradeStatus::NO_TARGET,
-            TradeStatus::BACK_TO_TRADE => SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE,
-            TradeStatus::TRADE_COMPLETE => SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE,
-            TradeStatus::TRADE_REJECTED => SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED,
-            TradeStatus::TARGET_TO_FAR => SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR,
-            TradeStatus::WRONG_FACTION => SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION,
-            TradeStatus::CLOSE_WINDOW => {
-                // inventory_result: InventoryResult
-                let inventory_result = InventoryResult::astd_read_u32_le(r).await?;
-
-                // target_error: u8
-                let target_error = crate::util::astd_read_u8_le(r).await?;
-
-                // item_limit_category_id: u32
-                let item_limit_category_id = crate::util::astd_read_u32_le(r).await?;
-
+                SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW => {}
+                SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED => {}
+                SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT => {}
+                SMSG_TRADE_STATUSTradeStatus::BUSY_2 => {}
+                SMSG_TRADE_STATUSTradeStatus::NO_TARGET => {}
+                SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE => {}
+                SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE => {}
+                SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED => {}
+                SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR => {}
+                SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION => {}
                 SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
                     inventory_result,
                     target_error,
                     item_limit_category_id,
-                }
-            }
-            TradeStatus::UNKNOWN_13 => SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13,
-            TradeStatus::IGNORE_YOU => SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU,
-            TradeStatus::YOU_STUNNED => SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED,
-            TradeStatus::TARGET_STUNNED => SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED,
-            TradeStatus::YOU_DEAD => SMSG_TRADE_STATUSTradeStatus::YOU_DEAD,
-            TradeStatus::TARGET_DEAD => SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD,
-            TradeStatus::YOU_LOGOUT => SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT,
-            TradeStatus::TARGET_LOGOUT => SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT,
-            TradeStatus::TRIAL_ACCOUNT => SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT,
-            TradeStatus::ONLY_CONJURED => {
-                // slot: u8
-                let slot = crate::util::astd_read_u8_le(r).await?;
+                } => {
+                    // inventory_result: InventoryResult
+                    inventory_result.astd_write_u32_le(w).await?;
 
+                    // target_error: u8
+                    w.write_all(&target_error.to_le_bytes()).await?;
+
+                    // item_limit_category_id: u32
+                    w.write_all(&item_limit_category_id.to_le_bytes()).await?;
+
+                }
+                SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13 => {}
+                SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU => {}
+                SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED => {}
+                SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED => {}
+                SMSG_TRADE_STATUSTradeStatus::YOU_DEAD => {}
+                SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD => {}
+                SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT => {}
+                SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT => {}
+                SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT => {}
                 SMSG_TRADE_STATUSTradeStatus::ONLY_CONJURED {
                     slot,
-                }
-            }
-            TradeStatus::NOT_ON_TAPLIST => {
-                // slot: u8
-                let slot = crate::util::astd_read_u8_le(r).await?;
+                } => {
+                    // slot: u8
+                    w.write_all(&slot.to_le_bytes()).await?;
 
+                }
                 SMSG_TRADE_STATUSTradeStatus::NOT_ON_TAPLIST {
                     slot,
+                } => {
+                    // slot: u8
+                    w.write_all(&slot.to_le_bytes()).await?;
+
                 }
             }
-        };
 
-        Ok(Self {
-            status: status_if,
+            Ok(())
         })
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // status: TradeStatus
-        self.status.astd_write(w).await?;
-
-        match &self.status {
-            SMSG_TRADE_STATUSTradeStatus::BUSY => {}
-            SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE {
-                unknown1,
-            } => {
-                // unknown1: Guid
-                unknown1.astd_write(w).await?;
-
-            }
-            SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT => {}
-            SMSG_TRADE_STATUSTradeStatus::BUSY_2 => {}
-            SMSG_TRADE_STATUSTradeStatus::NO_TARGET => {}
-            SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE => {}
-            SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR => {}
-            SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION => {}
-            SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
-                inventory_result,
-                target_error,
-                item_limit_category_id,
-            } => {
-                // inventory_result: InventoryResult
-                inventory_result.astd_write_u32_le(w).await?;
-
-                // target_error: u8
-                w.write_all(&target_error.to_le_bytes()).await?;
-
-                // item_limit_category_id: u32
-                w.write_all(&item_limit_category_id.to_le_bytes()).await?;
-
-            }
-            SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13 => {}
-            SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU => {}
-            SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED => {}
-            SMSG_TRADE_STATUSTradeStatus::YOU_DEAD => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD => {}
-            SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT => {}
-            SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT => {}
-            SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT => {}
-            SMSG_TRADE_STATUSTradeStatus::ONLY_CONJURED {
-                slot,
-            } => {
-                // slot: u8
-                w.write_all(&slot.to_le_bytes()).await?;
-
-            }
-            SMSG_TRADE_STATUSTradeStatus::NOT_ON_TAPLIST {
-                slot,
-            } => {
-                // slot: u8
-                w.write_all(&slot.to_le_bytes()).await?;
-
-            }
-        }
-
-        Ok(())
     }
 
 }

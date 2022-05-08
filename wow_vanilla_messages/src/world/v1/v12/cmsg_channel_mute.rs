@@ -17,7 +17,6 @@ pub struct CMSG_CHANNEL_MUTE {
 
 impl ClientMessageWrite for CMSG_CHANNEL_MUTE {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_CHANNEL_MUTE {
     const OPCODE: u16 = 0x00a1;
 
@@ -58,66 +57,112 @@ impl MessageBody for CMSG_CHANNEL_MUTE {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // channel_name: CString
-        let channel_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let channel_name = String::from_utf8(channel_name)?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // channel_name: CString
+            let channel_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let channel_name = String::from_utf8(channel_name)?;
 
-        // player_name: CString
-        let player_name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let player_name = String::from_utf8(player_name)?;
+            // player_name: CString
+            let player_name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let player_name = String::from_utf8(player_name)?;
 
-        Ok(Self {
-            channel_name,
-            player_name,
+            Ok(Self {
+                channel_name,
+                player_name,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // channel_name: CString
-        w.write_all(self.channel_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // channel_name: CString
+            w.write_all(self.channel_name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // player_name: CString
-        w.write_all(self.player_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // player_name: CString
+            w.write_all(self.player_name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // channel_name: CString
-        let channel_name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let channel_name = String::from_utf8(channel_name)?;
-
-        // player_name: CString
-        let player_name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let player_name = String::from_utf8(player_name)?;
-
-        Ok(Self {
-            channel_name,
-            player_name,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // channel_name: CString
-        w.write_all(self.channel_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // channel_name: CString
+            let channel_name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let channel_name = String::from_utf8(channel_name)?;
 
-        // player_name: CString
-        w.write_all(self.player_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // player_name: CString
+            let player_name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let player_name = String::from_utf8(player_name)?;
 
-        Ok(())
+            Ok(Self {
+                channel_name,
+                player_name,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // channel_name: CString
+            w.write_all(self.channel_name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // player_name: CString
+            w.write_all(self.player_name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            Ok(())
+        })
     }
 
 }

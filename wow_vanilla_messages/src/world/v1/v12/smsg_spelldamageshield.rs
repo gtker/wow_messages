@@ -22,7 +22,6 @@ pub struct SMSG_SPELLDAMAGESHIELD {
 
 impl ServerMessageWrite for SMSG_SPELLDAMAGESHIELD {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_SPELLDAMAGESHIELD {
     const OPCODE: u16 = 0x024f;
 
@@ -71,82 +70,128 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // victim_guid: Guid
-        let victim_guid = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // victim_guid: Guid
+            let victim_guid = Guid::tokio_read(r).await?;
 
-        // caster_guid: Guid
-        let caster_guid = Guid::tokio_read(r).await?;
+            // caster_guid: Guid
+            let caster_guid = Guid::tokio_read(r).await?;
 
-        // damage: u32
-        let damage = crate::util::tokio_read_u32_le(r).await?;
+            // damage: u32
+            let damage = crate::util::tokio_read_u32_le(r).await?;
 
-        // school: SpellSchool
-        let school = SpellSchool::tokio_read_u32_le(r).await?;
+            // school: SpellSchool
+            let school = SpellSchool::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            victim_guid,
-            caster_guid,
-            damage,
-            school,
+            Ok(Self {
+                victim_guid,
+                caster_guid,
+                damage,
+                school,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // victim_guid: Guid
-        self.victim_guid.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // victim_guid: Guid
+            self.victim_guid.tokio_write(w).await?;
 
-        // caster_guid: Guid
-        self.caster_guid.tokio_write(w).await?;
+            // caster_guid: Guid
+            self.caster_guid.tokio_write(w).await?;
 
-        // damage: u32
-        w.write_all(&self.damage.to_le_bytes()).await?;
+            // damage: u32
+            w.write_all(&self.damage.to_le_bytes()).await?;
 
-        // school: SpellSchool
-        self.school.tokio_write_u32_le(w).await?;
+            // school: SpellSchool
+            self.school.tokio_write_u32_le(w).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // victim_guid: Guid
-        let victim_guid = Guid::astd_read(r).await?;
-
-        // caster_guid: Guid
-        let caster_guid = Guid::astd_read(r).await?;
-
-        // damage: u32
-        let damage = crate::util::astd_read_u32_le(r).await?;
-
-        // school: SpellSchool
-        let school = SpellSchool::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            victim_guid,
-            caster_guid,
-            damage,
-            school,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // victim_guid: Guid
-        self.victim_guid.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // victim_guid: Guid
+            let victim_guid = Guid::astd_read(r).await?;
 
-        // caster_guid: Guid
-        self.caster_guid.astd_write(w).await?;
+            // caster_guid: Guid
+            let caster_guid = Guid::astd_read(r).await?;
 
-        // damage: u32
-        w.write_all(&self.damage.to_le_bytes()).await?;
+            // damage: u32
+            let damage = crate::util::astd_read_u32_le(r).await?;
 
-        // school: SpellSchool
-        self.school.astd_write_u32_le(w).await?;
+            // school: SpellSchool
+            let school = SpellSchool::astd_read_u32_le(r).await?;
 
-        Ok(())
+            Ok(Self {
+                victim_guid,
+                caster_guid,
+                damage,
+                school,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // victim_guid: Guid
+            self.victim_guid.astd_write(w).await?;
+
+            // caster_guid: Guid
+            self.caster_guid.astd_write(w).await?;
+
+            // damage: u32
+            w.write_all(&self.damage.to_le_bytes()).await?;
+
+            // school: SpellSchool
+            self.school.astd_write_u32_le(w).await?;
+
+            Ok(())
+        })
     }
 
 }

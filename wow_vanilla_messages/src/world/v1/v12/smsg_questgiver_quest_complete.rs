@@ -21,7 +21,6 @@ pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
 
 impl ServerMessageWrite for SMSG_QUESTGIVER_QUEST_COMPLETE {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_QUESTGIVER_QUEST_COMPLETE {
     const OPCODE: u16 = 0x0191;
 
@@ -88,118 +87,164 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_COMPLETE {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // quest_id: u32
-        let quest_id = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // quest_id: u32
+            let quest_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // unknown: u32
-        let unknown = crate::util::tokio_read_u32_le(r).await?;
+            // unknown: u32
+            let unknown = crate::util::tokio_read_u32_le(r).await?;
 
-        // experience_reward: u32
-        let experience_reward = crate::util::tokio_read_u32_le(r).await?;
+            // experience_reward: u32
+            let experience_reward = crate::util::tokio_read_u32_le(r).await?;
 
-        // money_reward: u32
-        let money_reward = crate::util::tokio_read_u32_le(r).await?;
+            // money_reward: u32
+            let money_reward = crate::util::tokio_read_u32_le(r).await?;
 
-        // amount_of_item_rewards: u32
-        let amount_of_item_rewards = crate::util::tokio_read_u32_le(r).await?;
+            // amount_of_item_rewards: u32
+            let amount_of_item_rewards = crate::util::tokio_read_u32_le(r).await?;
 
-        // item_rewards: QuestItemReward[amount_of_item_rewards]
-        let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
-        for i in 0..amount_of_item_rewards {
-            item_rewards.push(QuestItemReward::tokio_read(r).await?);
-        }
+            // item_rewards: QuestItemReward[amount_of_item_rewards]
+            let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
+            for i in 0..amount_of_item_rewards {
+                item_rewards.push(QuestItemReward::tokio_read(r).await?);
+            }
 
-        Ok(Self {
-            quest_id,
-            unknown,
-            experience_reward,
-            money_reward,
-            item_rewards,
+            Ok(Self {
+                quest_id,
+                unknown,
+                experience_reward,
+                money_reward,
+                item_rewards,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes()).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // quest_id: u32
+            w.write_all(&self.quest_id.to_le_bytes()).await?;
 
-        // unknown: u32
-        w.write_all(&self.unknown.to_le_bytes()).await?;
+            // unknown: u32
+            w.write_all(&self.unknown.to_le_bytes()).await?;
 
-        // experience_reward: u32
-        w.write_all(&self.experience_reward.to_le_bytes()).await?;
+            // experience_reward: u32
+            w.write_all(&self.experience_reward.to_le_bytes()).await?;
 
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes()).await?;
+            // money_reward: u32
+            w.write_all(&self.money_reward.to_le_bytes()).await?;
 
-        // amount_of_item_rewards: u32
-        w.write_all(&(self.item_rewards.len() as u32).to_le_bytes()).await?;
+            // amount_of_item_rewards: u32
+            w.write_all(&(self.item_rewards.len() as u32).to_le_bytes()).await?;
 
-        // item_rewards: QuestItemReward[amount_of_item_rewards]
-        for i in self.item_rewards.iter() {
-            i.tokio_write(w).await?;
-        }
+            // item_rewards: QuestItemReward[amount_of_item_rewards]
+            for i in self.item_rewards.iter() {
+                i.tokio_write(w).await?;
+            }
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // quest_id: u32
-        let quest_id = crate::util::astd_read_u32_le(r).await?;
-
-        // unknown: u32
-        let unknown = crate::util::astd_read_u32_le(r).await?;
-
-        // experience_reward: u32
-        let experience_reward = crate::util::astd_read_u32_le(r).await?;
-
-        // money_reward: u32
-        let money_reward = crate::util::astd_read_u32_le(r).await?;
-
-        // amount_of_item_rewards: u32
-        let amount_of_item_rewards = crate::util::astd_read_u32_le(r).await?;
-
-        // item_rewards: QuestItemReward[amount_of_item_rewards]
-        let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
-        for i in 0..amount_of_item_rewards {
-            item_rewards.push(QuestItemReward::astd_read(r).await?);
-        }
-
-        Ok(Self {
-            quest_id,
-            unknown,
-            experience_reward,
-            money_reward,
-            item_rewards,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes()).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // quest_id: u32
+            let quest_id = crate::util::astd_read_u32_le(r).await?;
 
-        // unknown: u32
-        w.write_all(&self.unknown.to_le_bytes()).await?;
+            // unknown: u32
+            let unknown = crate::util::astd_read_u32_le(r).await?;
 
-        // experience_reward: u32
-        w.write_all(&self.experience_reward.to_le_bytes()).await?;
+            // experience_reward: u32
+            let experience_reward = crate::util::astd_read_u32_le(r).await?;
 
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes()).await?;
+            // money_reward: u32
+            let money_reward = crate::util::astd_read_u32_le(r).await?;
 
-        // amount_of_item_rewards: u32
-        w.write_all(&(self.item_rewards.len() as u32).to_le_bytes()).await?;
+            // amount_of_item_rewards: u32
+            let amount_of_item_rewards = crate::util::astd_read_u32_le(r).await?;
 
-        // item_rewards: QuestItemReward[amount_of_item_rewards]
-        for i in self.item_rewards.iter() {
-            i.astd_write(w).await?;
-        }
+            // item_rewards: QuestItemReward[amount_of_item_rewards]
+            let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
+            for i in 0..amount_of_item_rewards {
+                item_rewards.push(QuestItemReward::astd_read(r).await?);
+            }
 
-        Ok(())
+            Ok(Self {
+                quest_id,
+                unknown,
+                experience_reward,
+                money_reward,
+                item_rewards,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // quest_id: u32
+            w.write_all(&self.quest_id.to_le_bytes()).await?;
+
+            // unknown: u32
+            w.write_all(&self.unknown.to_le_bytes()).await?;
+
+            // experience_reward: u32
+            w.write_all(&self.experience_reward.to_le_bytes()).await?;
+
+            // money_reward: u32
+            w.write_all(&self.money_reward.to_le_bytes()).await?;
+
+            // amount_of_item_rewards: u32
+            w.write_all(&(self.item_rewards.len() as u32).to_le_bytes()).await?;
+
+            // item_rewards: QuestItemReward[amount_of_item_rewards]
+            for i in self.item_rewards.iter() {
+                i.astd_write(w).await?;
+            }
+
+            Ok(())
+        })
     }
 
 }

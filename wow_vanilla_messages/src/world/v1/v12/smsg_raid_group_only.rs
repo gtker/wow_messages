@@ -19,7 +19,6 @@ pub struct SMSG_RAID_GROUP_ONLY {
 
 impl ServerMessageWrite for SMSG_RAID_GROUP_ONLY {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_RAID_GROUP_ONLY {
     const OPCODE: u16 = 0x0286;
 
@@ -54,54 +53,100 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // homebind_timer: u32
-        let homebind_timer = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // homebind_timer: u32
+            let homebind_timer = crate::util::tokio_read_u32_le(r).await?;
 
-        // error: RaidGroupError
-        let error = RaidGroupError::tokio_read(r).await?;
+            // error: RaidGroupError
+            let error = RaidGroupError::tokio_read(r).await?;
 
-        Ok(Self {
-            homebind_timer,
-            error,
+            Ok(Self {
+                homebind_timer,
+                error,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // homebind_timer: u32
-        w.write_all(&self.homebind_timer.to_le_bytes()).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // homebind_timer: u32
+            w.write_all(&self.homebind_timer.to_le_bytes()).await?;
 
-        // error: RaidGroupError
-        self.error.tokio_write(w).await?;
+            // error: RaidGroupError
+            self.error.tokio_write(w).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // homebind_timer: u32
-        let homebind_timer = crate::util::astd_read_u32_le(r).await?;
-
-        // error: RaidGroupError
-        let error = RaidGroupError::astd_read(r).await?;
-
-        Ok(Self {
-            homebind_timer,
-            error,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // homebind_timer: u32
-        w.write_all(&self.homebind_timer.to_le_bytes()).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // homebind_timer: u32
+            let homebind_timer = crate::util::astd_read_u32_le(r).await?;
 
-        // error: RaidGroupError
-        self.error.astd_write(w).await?;
+            // error: RaidGroupError
+            let error = RaidGroupError::astd_read(r).await?;
 
-        Ok(())
+            Ok(Self {
+                homebind_timer,
+                error,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // homebind_timer: u32
+            w.write_all(&self.homebind_timer.to_le_bytes()).await?;
+
+            // error: RaidGroupError
+            self.error.astd_write(w).await?;
+
+            Ok(())
+        })
     }
 
 }

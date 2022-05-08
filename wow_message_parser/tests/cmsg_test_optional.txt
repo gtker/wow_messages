@@ -18,7 +18,6 @@ pub struct CMSG_TEST_OPTIONAL {
 
 impl ClientMessageWrite for CMSG_TEST_OPTIONAL {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_TEST_OPTIONAL {
     const OPCODE: u16 = 0x1137;
 
@@ -81,110 +80,156 @@ impl MessageBody for CMSG_TEST_OPTIONAL {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // c_string: CString
-        let c_string = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let c_string = String::from_utf8(c_string)?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // c_string: CString
+            let c_string = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let c_string = String::from_utf8(c_string)?;
 
-        // b_u8: u8
-        let b_u8 = crate::util::tokio_read_u8_le(r).await?;
+            // b_u8: u8
+            let b_u8 = crate::util::tokio_read_u8_le(r).await?;
 
-        // optional server
-        let current_size = {
-            0
-            + c_string.len() + 1 // c_string: CString
-            + 1 // b_u8: u8
-        };
-        let server = if current_size < body_size as usize {
-            // optional_u8: u8
-            let optional_u8 = crate::util::tokio_read_u8_le(r).await?;
+            // optional server
+            let current_size = {
+                0
+                + c_string.len() + 1 // c_string: CString
+                + 1 // b_u8: u8
+            };
+            let server = if current_size < body_size as usize {
+                // optional_u8: u8
+                let optional_u8 = crate::util::tokio_read_u8_le(r).await?;
 
-            Some(CMSG_TEST_OPTIONAL_server {
-                optional_u8,
+                Some(CMSG_TEST_OPTIONAL_server {
+                    optional_u8,
+                })
+            } else {
+                None
+            };
+
+            Ok(Self {
+                c_string,
+                b_u8,
+                server,
             })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            c_string,
-            b_u8,
-            server,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // c_string: CString
-        w.write_all(self.c_string.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // c_string: CString
+            w.write_all(self.c_string.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // b_u8: u8
-        w.write_all(&self.b_u8.to_le_bytes()).await?;
+            // b_u8: u8
+            w.write_all(&self.b_u8.to_le_bytes()).await?;
 
-        // optional server
-        if let Some(v) = &self.server {
-            // optional_u8: u8
-            w.write_all(&v.optional_u8.to_le_bytes()).await?;
+            // optional server
+            if let Some(v) = &self.server {
+                // optional_u8: u8
+                w.write_all(&v.optional_u8.to_le_bytes()).await?;
 
-        }
+            }
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // c_string: CString
-        let c_string = crate::util::astd_read_c_string_to_vec(r).await?;
-        let c_string = String::from_utf8(c_string)?;
-
-        // b_u8: u8
-        let b_u8 = crate::util::astd_read_u8_le(r).await?;
-
-        // optional server
-        let current_size = {
-            0
-            + c_string.len() + 1 // c_string: CString
-            + 1 // b_u8: u8
-        };
-        let server = if current_size < body_size as usize {
-            // optional_u8: u8
-            let optional_u8 = crate::util::astd_read_u8_le(r).await?;
-
-            Some(CMSG_TEST_OPTIONAL_server {
-                optional_u8,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            c_string,
-            b_u8,
-            server,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // c_string: CString
-        w.write_all(self.c_string.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // c_string: CString
+            let c_string = crate::util::astd_read_c_string_to_vec(r).await?;
+            let c_string = String::from_utf8(c_string)?;
 
-        // b_u8: u8
-        w.write_all(&self.b_u8.to_le_bytes()).await?;
+            // b_u8: u8
+            let b_u8 = crate::util::astd_read_u8_le(r).await?;
 
-        // optional server
-        if let Some(v) = &self.server {
-            // optional_u8: u8
-            w.write_all(&v.optional_u8.to_le_bytes()).await?;
+            // optional server
+            let current_size = {
+                0
+                + c_string.len() + 1 // c_string: CString
+                + 1 // b_u8: u8
+            };
+            let server = if current_size < body_size as usize {
+                // optional_u8: u8
+                let optional_u8 = crate::util::astd_read_u8_le(r).await?;
 
-        }
+                Some(CMSG_TEST_OPTIONAL_server {
+                    optional_u8,
+                })
+            } else {
+                None
+            };
 
-        Ok(())
+            Ok(Self {
+                c_string,
+                b_u8,
+                server,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // c_string: CString
+            w.write_all(self.c_string.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // b_u8: u8
+            w.write_all(&self.b_u8.to_le_bytes()).await?;
+
+            // optional server
+            if let Some(v) = &self.server {
+                // optional_u8: u8
+                w.write_all(&v.optional_u8.to_le_bytes()).await?;
+
+            }
+
+            Ok(())
+        })
     }
 
 }

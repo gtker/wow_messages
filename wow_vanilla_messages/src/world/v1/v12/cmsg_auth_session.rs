@@ -22,7 +22,6 @@ pub struct CMSG_AUTH_SESSION {
 
 impl ClientMessageWrite for CMSG_AUTH_SESSION {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_AUTH_SESSION {
     const OPCODE: u16 = 0x01ed;
 
@@ -112,164 +111,210 @@ impl MessageBody for CMSG_AUTH_SESSION {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // build: u32
-        let build = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // build: u32
+            let build = crate::util::tokio_read_u32_le(r).await?;
 
-        // server_id: u32
-        let server_id = crate::util::tokio_read_u32_le(r).await?;
+            // server_id: u32
+            let server_id = crate::util::tokio_read_u32_le(r).await?;
 
-        // username: CString
-        let username = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let username = String::from_utf8(username)?;
+            // username: CString
+            let username = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let username = String::from_utf8(username)?;
 
-        // client_seed: u32
-        let client_seed = crate::util::tokio_read_u32_le(r).await?;
+            // client_seed: u32
+            let client_seed = crate::util::tokio_read_u32_le(r).await?;
 
-        // client_proof: u8[20]
-        let mut client_proof = [0_u8; 20];
-        r.read_exact(&mut client_proof).await?;
+            // client_proof: u8[20]
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof).await?;
 
-        // decompressed_addon_info_size: u32
-        let decompressed_addon_info_size = crate::util::tokio_read_u32_le(r).await?;
+            // decompressed_addon_info_size: u32
+            let decompressed_addon_info_size = crate::util::tokio_read_u32_le(r).await?;
 
-        // compressed_addon_info: u8[-]
-        let mut current_size = {
-            4 // build: u32
-            + 4 // server_id: u32
-            + username.len() + 1 // username: CString
-            + 4 // client_seed: u32
-            + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
-            + 4 // decompressed_addon_info_size: u32
-        };
-        let mut compressed_addon_info = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            compressed_addon_info.push(crate::util::tokio_read_u8_le(r).await?);
-            current_size += 1;
-        }
+            // compressed_addon_info: u8[-]
+            let mut current_size = {
+                4 // build: u32
+                + 4 // server_id: u32
+                + username.len() + 1 // username: CString
+                + 4 // client_seed: u32
+                + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
+                + 4 // decompressed_addon_info_size: u32
+            };
+            let mut compressed_addon_info = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                compressed_addon_info.push(crate::util::tokio_read_u8_le(r).await?);
+                current_size += 1;
+            }
 
-        Ok(Self {
-            build,
-            server_id,
-            username,
-            client_seed,
-            client_proof,
-            decompressed_addon_info_size,
-            compressed_addon_info,
+            Ok(Self {
+                build,
+                server_id,
+                username,
+                client_seed,
+                client_proof,
+                decompressed_addon_info_size,
+                compressed_addon_info,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // build: u32
-        w.write_all(&self.build.to_le_bytes()).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // build: u32
+            w.write_all(&self.build.to_le_bytes()).await?;
 
-        // server_id: u32
-        w.write_all(&self.server_id.to_le_bytes()).await?;
+            // server_id: u32
+            w.write_all(&self.server_id.to_le_bytes()).await?;
 
-        // username: CString
-        w.write_all(self.username.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // username: CString
+            w.write_all(self.username.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // client_seed: u32
-        w.write_all(&self.client_seed.to_le_bytes()).await?;
+            // client_seed: u32
+            w.write_all(&self.client_seed.to_le_bytes()).await?;
 
-        // client_proof: u8[20]
-        for i in self.client_proof.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // client_proof: u8[20]
+            for i in self.client_proof.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        // decompressed_addon_info_size: u32
-        w.write_all(&self.decompressed_addon_info_size.to_le_bytes()).await?;
+            // decompressed_addon_info_size: u32
+            w.write_all(&self.decompressed_addon_info_size.to_le_bytes()).await?;
 
-        // compressed_addon_info: u8[-]
-        for i in self.compressed_addon_info.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // compressed_addon_info: u8[-]
+            for i in self.compressed_addon_info.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // build: u32
-        let build = crate::util::astd_read_u32_le(r).await?;
-
-        // server_id: u32
-        let server_id = crate::util::astd_read_u32_le(r).await?;
-
-        // username: CString
-        let username = crate::util::astd_read_c_string_to_vec(r).await?;
-        let username = String::from_utf8(username)?;
-
-        // client_seed: u32
-        let client_seed = crate::util::astd_read_u32_le(r).await?;
-
-        // client_proof: u8[20]
-        let mut client_proof = [0_u8; 20];
-        r.read_exact(&mut client_proof).await?;
-
-        // decompressed_addon_info_size: u32
-        let decompressed_addon_info_size = crate::util::astd_read_u32_le(r).await?;
-
-        // compressed_addon_info: u8[-]
-        let mut current_size = {
-            4 // build: u32
-            + 4 // server_id: u32
-            + username.len() + 1 // username: CString
-            + 4 // client_seed: u32
-            + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
-            + 4 // decompressed_addon_info_size: u32
-        };
-        let mut compressed_addon_info = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            compressed_addon_info.push(crate::util::astd_read_u8_le(r).await?);
-            current_size += 1;
-        }
-
-        Ok(Self {
-            build,
-            server_id,
-            username,
-            client_seed,
-            client_proof,
-            decompressed_addon_info_size,
-            compressed_addon_info,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // build: u32
-        w.write_all(&self.build.to_le_bytes()).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // build: u32
+            let build = crate::util::astd_read_u32_le(r).await?;
 
-        // server_id: u32
-        w.write_all(&self.server_id.to_le_bytes()).await?;
+            // server_id: u32
+            let server_id = crate::util::astd_read_u32_le(r).await?;
 
-        // username: CString
-        w.write_all(self.username.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // username: CString
+            let username = crate::util::astd_read_c_string_to_vec(r).await?;
+            let username = String::from_utf8(username)?;
 
-        // client_seed: u32
-        w.write_all(&self.client_seed.to_le_bytes()).await?;
+            // client_seed: u32
+            let client_seed = crate::util::astd_read_u32_le(r).await?;
 
-        // client_proof: u8[20]
-        for i in self.client_proof.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // client_proof: u8[20]
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof).await?;
 
-        // decompressed_addon_info_size: u32
-        w.write_all(&self.decompressed_addon_info_size.to_le_bytes()).await?;
+            // decompressed_addon_info_size: u32
+            let decompressed_addon_info_size = crate::util::astd_read_u32_le(r).await?;
 
-        // compressed_addon_info: u8[-]
-        for i in self.compressed_addon_info.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
+            // compressed_addon_info: u8[-]
+            let mut current_size = {
+                4 // build: u32
+                + 4 // server_id: u32
+                + username.len() + 1 // username: CString
+                + 4 // client_seed: u32
+                + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
+                + 4 // decompressed_addon_info_size: u32
+            };
+            let mut compressed_addon_info = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                compressed_addon_info.push(crate::util::astd_read_u8_le(r).await?);
+                current_size += 1;
+            }
 
-        Ok(())
+            Ok(Self {
+                build,
+                server_id,
+                username,
+                client_seed,
+                client_proof,
+                decompressed_addon_info_size,
+                compressed_addon_info,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // build: u32
+            w.write_all(&self.build.to_le_bytes()).await?;
+
+            // server_id: u32
+            w.write_all(&self.server_id.to_le_bytes()).await?;
+
+            // username: CString
+            w.write_all(self.username.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // client_seed: u32
+            w.write_all(&self.client_seed.to_le_bytes()).await?;
+
+            // client_proof: u8[20]
+            for i in self.client_proof.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
+
+            // decompressed_addon_info_size: u32
+            w.write_all(&self.decompressed_addon_info_size.to_le_bytes()).await?;
+
+            // compressed_addon_info: u8[-]
+            for i in self.compressed_addon_info.iter() {
+                w.write_all(&i.to_le_bytes()).await?;
+            }
+
+            Ok(())
+        })
     }
 
 }

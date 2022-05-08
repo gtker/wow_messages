@@ -34,7 +34,6 @@ pub struct CMSG_PETITION_BUY {
 
 impl ClientMessageWrite for CMSG_PETITION_BUY {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_PETITION_BUY {
     const OPCODE: u16 = 0x01bd;
 
@@ -184,284 +183,330 @@ impl MessageBody for CMSG_PETITION_BUY {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // npc: Guid
-        let npc = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            let npc = Guid::tokio_read(r).await?;
 
-        // skip1: u32
-        let skip1 = crate::util::tokio_read_u32_le(r).await?;
+            // skip1: u32
+            let skip1 = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip2: Guid
-        let skip2 = Guid::tokio_read(r).await?;
+            // skip2: Guid
+            let skip2 = Guid::tokio_read(r).await?;
 
-        // name: CString
-        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
+            // name: CString
+            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // skip3: u32
-        let skip3 = crate::util::tokio_read_u32_le(r).await?;
+            // skip3: u32
+            let skip3 = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip4: u32
-        let skip4 = crate::util::tokio_read_u32_le(r).await?;
+            // skip4: u32
+            let skip4 = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip5: u32
-        let skip5 = crate::util::tokio_read_u32_le(r).await?;
+            // skip5: u32
+            let skip5 = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip6: u32
-        let skip6 = crate::util::tokio_read_u32_le(r).await?;
+            // skip6: u32
+            let skip6 = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip7: u32
-        let skip7 = crate::util::tokio_read_u32_le(r).await?;
+            // skip7: u32
+            let skip7 = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip8: u32
-        let skip8 = crate::util::tokio_read_u32_le(r).await?;
+            // skip8: u32
+            let skip8 = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip9: u32
-        let skip9 = crate::util::tokio_read_u32_le(r).await?;
+            // skip9: u32
+            let skip9 = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip10: u32
-        let skip10 = crate::util::tokio_read_u32_le(r).await?;
+            // skip10: u32
+            let skip10 = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip11: u32
-        let skip11 = crate::util::tokio_read_u32_le(r).await?;
+            // skip11: u32
+            let skip11 = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip12: u32
-        let skip12 = crate::util::tokio_read_u32_le(r).await?;
+            // skip12: u32
+            let skip12 = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip13: u16
-        let skip13 = crate::util::tokio_read_u16_le(r).await?;
+            // skip13: u16
+            let skip13 = crate::util::tokio_read_u16_le(r).await?;
 
-        // skip14: u8
-        let skip14 = crate::util::tokio_read_u8_le(r).await?;
+            // skip14: u8
+            let skip14 = crate::util::tokio_read_u8_le(r).await?;
 
-        // index: u32
-        let index = crate::util::tokio_read_u32_le(r).await?;
+            // index: u32
+            let index = crate::util::tokio_read_u32_le(r).await?;
 
-        // skip15: u32
-        let skip15 = crate::util::tokio_read_u32_le(r).await?;
+            // skip15: u32
+            let skip15 = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            npc,
-            skip1,
-            skip2,
-            name,
-            skip3,
-            skip4,
-            skip5,
-            skip6,
-            skip7,
-            skip8,
-            skip9,
-            skip10,
-            skip11,
-            skip12,
-            skip13,
-            skip14,
-            index,
-            skip15,
+            Ok(Self {
+                npc,
+                skip1,
+                skip2,
+                name,
+                skip3,
+                skip4,
+                skip5,
+                skip6,
+                skip7,
+                skip8,
+                skip9,
+                skip10,
+                skip11,
+                skip12,
+                skip13,
+                skip14,
+                index,
+                skip15,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // npc: Guid
-        self.npc.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            self.npc.tokio_write(w).await?;
 
-        // skip1: u32
-        w.write_all(&self.skip1.to_le_bytes()).await?;
+            // skip1: u32
+            w.write_all(&self.skip1.to_le_bytes()).await?;
 
-        // skip2: Guid
-        self.skip2.tokio_write(w).await?;
+            // skip2: Guid
+            self.skip2.tokio_write(w).await?;
 
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // name: CString
+            w.write_all(self.name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // skip3: u32
-        w.write_all(&self.skip3.to_le_bytes()).await?;
+            // skip3: u32
+            w.write_all(&self.skip3.to_le_bytes()).await?;
 
-        // skip4: u32
-        w.write_all(&self.skip4.to_le_bytes()).await?;
+            // skip4: u32
+            w.write_all(&self.skip4.to_le_bytes()).await?;
 
-        // skip5: u32
-        w.write_all(&self.skip5.to_le_bytes()).await?;
+            // skip5: u32
+            w.write_all(&self.skip5.to_le_bytes()).await?;
 
-        // skip6: u32
-        w.write_all(&self.skip6.to_le_bytes()).await?;
+            // skip6: u32
+            w.write_all(&self.skip6.to_le_bytes()).await?;
 
-        // skip7: u32
-        w.write_all(&self.skip7.to_le_bytes()).await?;
+            // skip7: u32
+            w.write_all(&self.skip7.to_le_bytes()).await?;
 
-        // skip8: u32
-        w.write_all(&self.skip8.to_le_bytes()).await?;
+            // skip8: u32
+            w.write_all(&self.skip8.to_le_bytes()).await?;
 
-        // skip9: u32
-        w.write_all(&self.skip9.to_le_bytes()).await?;
+            // skip9: u32
+            w.write_all(&self.skip9.to_le_bytes()).await?;
 
-        // skip10: u32
-        w.write_all(&self.skip10.to_le_bytes()).await?;
+            // skip10: u32
+            w.write_all(&self.skip10.to_le_bytes()).await?;
 
-        // skip11: u32
-        w.write_all(&self.skip11.to_le_bytes()).await?;
+            // skip11: u32
+            w.write_all(&self.skip11.to_le_bytes()).await?;
 
-        // skip12: u32
-        w.write_all(&self.skip12.to_le_bytes()).await?;
+            // skip12: u32
+            w.write_all(&self.skip12.to_le_bytes()).await?;
 
-        // skip13: u16
-        w.write_all(&self.skip13.to_le_bytes()).await?;
+            // skip13: u16
+            w.write_all(&self.skip13.to_le_bytes()).await?;
 
-        // skip14: u8
-        w.write_all(&self.skip14.to_le_bytes()).await?;
+            // skip14: u8
+            w.write_all(&self.skip14.to_le_bytes()).await?;
 
-        // index: u32
-        w.write_all(&self.index.to_le_bytes()).await?;
+            // index: u32
+            w.write_all(&self.index.to_le_bytes()).await?;
 
-        // skip15: u32
-        w.write_all(&self.skip15.to_le_bytes()).await?;
+            // skip15: u32
+            w.write_all(&self.skip15.to_le_bytes()).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // npc: Guid
-        let npc = Guid::astd_read(r).await?;
-
-        // skip1: u32
-        let skip1 = crate::util::astd_read_u32_le(r).await?;
-
-        // skip2: Guid
-        let skip2 = Guid::astd_read(r).await?;
-
-        // name: CString
-        let name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
-
-        // skip3: u32
-        let skip3 = crate::util::astd_read_u32_le(r).await?;
-
-        // skip4: u32
-        let skip4 = crate::util::astd_read_u32_le(r).await?;
-
-        // skip5: u32
-        let skip5 = crate::util::astd_read_u32_le(r).await?;
-
-        // skip6: u32
-        let skip6 = crate::util::astd_read_u32_le(r).await?;
-
-        // skip7: u32
-        let skip7 = crate::util::astd_read_u32_le(r).await?;
-
-        // skip8: u32
-        let skip8 = crate::util::astd_read_u32_le(r).await?;
-
-        // skip9: u32
-        let skip9 = crate::util::astd_read_u32_le(r).await?;
-
-        // skip10: u32
-        let skip10 = crate::util::astd_read_u32_le(r).await?;
-
-        // skip11: u32
-        let skip11 = crate::util::astd_read_u32_le(r).await?;
-
-        // skip12: u32
-        let skip12 = crate::util::astd_read_u32_le(r).await?;
-
-        // skip13: u16
-        let skip13 = crate::util::astd_read_u16_le(r).await?;
-
-        // skip14: u8
-        let skip14 = crate::util::astd_read_u8_le(r).await?;
-
-        // index: u32
-        let index = crate::util::astd_read_u32_le(r).await?;
-
-        // skip15: u32
-        let skip15 = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            npc,
-            skip1,
-            skip2,
-            name,
-            skip3,
-            skip4,
-            skip5,
-            skip6,
-            skip7,
-            skip8,
-            skip9,
-            skip10,
-            skip11,
-            skip12,
-            skip13,
-            skip14,
-            index,
-            skip15,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // npc: Guid
-        self.npc.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            let npc = Guid::astd_read(r).await?;
 
-        // skip1: u32
-        w.write_all(&self.skip1.to_le_bytes()).await?;
+            // skip1: u32
+            let skip1 = crate::util::astd_read_u32_le(r).await?;
 
-        // skip2: Guid
-        self.skip2.astd_write(w).await?;
+            // skip2: Guid
+            let skip2 = Guid::astd_read(r).await?;
 
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // name: CString
+            let name = crate::util::astd_read_c_string_to_vec(r).await?;
+            let name = String::from_utf8(name)?;
 
-        // skip3: u32
-        w.write_all(&self.skip3.to_le_bytes()).await?;
+            // skip3: u32
+            let skip3 = crate::util::astd_read_u32_le(r).await?;
 
-        // skip4: u32
-        w.write_all(&self.skip4.to_le_bytes()).await?;
+            // skip4: u32
+            let skip4 = crate::util::astd_read_u32_le(r).await?;
 
-        // skip5: u32
-        w.write_all(&self.skip5.to_le_bytes()).await?;
+            // skip5: u32
+            let skip5 = crate::util::astd_read_u32_le(r).await?;
 
-        // skip6: u32
-        w.write_all(&self.skip6.to_le_bytes()).await?;
+            // skip6: u32
+            let skip6 = crate::util::astd_read_u32_le(r).await?;
 
-        // skip7: u32
-        w.write_all(&self.skip7.to_le_bytes()).await?;
+            // skip7: u32
+            let skip7 = crate::util::astd_read_u32_le(r).await?;
 
-        // skip8: u32
-        w.write_all(&self.skip8.to_le_bytes()).await?;
+            // skip8: u32
+            let skip8 = crate::util::astd_read_u32_le(r).await?;
 
-        // skip9: u32
-        w.write_all(&self.skip9.to_le_bytes()).await?;
+            // skip9: u32
+            let skip9 = crate::util::astd_read_u32_le(r).await?;
 
-        // skip10: u32
-        w.write_all(&self.skip10.to_le_bytes()).await?;
+            // skip10: u32
+            let skip10 = crate::util::astd_read_u32_le(r).await?;
 
-        // skip11: u32
-        w.write_all(&self.skip11.to_le_bytes()).await?;
+            // skip11: u32
+            let skip11 = crate::util::astd_read_u32_le(r).await?;
 
-        // skip12: u32
-        w.write_all(&self.skip12.to_le_bytes()).await?;
+            // skip12: u32
+            let skip12 = crate::util::astd_read_u32_le(r).await?;
 
-        // skip13: u16
-        w.write_all(&self.skip13.to_le_bytes()).await?;
+            // skip13: u16
+            let skip13 = crate::util::astd_read_u16_le(r).await?;
 
-        // skip14: u8
-        w.write_all(&self.skip14.to_le_bytes()).await?;
+            // skip14: u8
+            let skip14 = crate::util::astd_read_u8_le(r).await?;
 
-        // index: u32
-        w.write_all(&self.index.to_le_bytes()).await?;
+            // index: u32
+            let index = crate::util::astd_read_u32_le(r).await?;
 
-        // skip15: u32
-        w.write_all(&self.skip15.to_le_bytes()).await?;
+            // skip15: u32
+            let skip15 = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(())
+            Ok(Self {
+                npc,
+                skip1,
+                skip2,
+                name,
+                skip3,
+                skip4,
+                skip5,
+                skip6,
+                skip7,
+                skip8,
+                skip9,
+                skip10,
+                skip11,
+                skip12,
+                skip13,
+                skip14,
+                index,
+                skip15,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // npc: Guid
+            self.npc.astd_write(w).await?;
+
+            // skip1: u32
+            w.write_all(&self.skip1.to_le_bytes()).await?;
+
+            // skip2: Guid
+            self.skip2.astd_write(w).await?;
+
+            // name: CString
+            w.write_all(self.name.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // skip3: u32
+            w.write_all(&self.skip3.to_le_bytes()).await?;
+
+            // skip4: u32
+            w.write_all(&self.skip4.to_le_bytes()).await?;
+
+            // skip5: u32
+            w.write_all(&self.skip5.to_le_bytes()).await?;
+
+            // skip6: u32
+            w.write_all(&self.skip6.to_le_bytes()).await?;
+
+            // skip7: u32
+            w.write_all(&self.skip7.to_le_bytes()).await?;
+
+            // skip8: u32
+            w.write_all(&self.skip8.to_le_bytes()).await?;
+
+            // skip9: u32
+            w.write_all(&self.skip9.to_le_bytes()).await?;
+
+            // skip10: u32
+            w.write_all(&self.skip10.to_le_bytes()).await?;
+
+            // skip11: u32
+            w.write_all(&self.skip11.to_le_bytes()).await?;
+
+            // skip12: u32
+            w.write_all(&self.skip12.to_le_bytes()).await?;
+
+            // skip13: u16
+            w.write_all(&self.skip13.to_le_bytes()).await?;
+
+            // skip14: u8
+            w.write_all(&self.skip14.to_le_bytes()).await?;
+
+            // index: u32
+            w.write_all(&self.index.to_le_bytes()).await?;
+
+            // skip15: u32
+            w.write_all(&self.skip15.to_le_bytes()).await?;
+
+            Ok(())
+        })
     }
 
 }

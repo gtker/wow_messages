@@ -20,7 +20,6 @@ pub struct CMSG_PET_ACTION {
 
 impl ClientMessageWrite for CMSG_PET_ACTION {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_PET_ACTION {
     const OPCODE: u16 = 0x0175;
 
@@ -62,68 +61,114 @@ impl MessageBody for CMSG_PET_ACTION {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // pet_guid: Guid
-        let pet_guid = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // pet_guid: Guid
+            let pet_guid = Guid::tokio_read(r).await?;
 
-        // data: u32
-        let data = crate::util::tokio_read_u32_le(r).await?;
+            // data: u32
+            let data = crate::util::tokio_read_u32_le(r).await?;
 
-        // target_guid: Guid
-        let target_guid = Guid::tokio_read(r).await?;
+            // target_guid: Guid
+            let target_guid = Guid::tokio_read(r).await?;
 
-        Ok(Self {
-            pet_guid,
-            data,
-            target_guid,
+            Ok(Self {
+                pet_guid,
+                data,
+                target_guid,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_guid: Guid
-        self.pet_guid.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // pet_guid: Guid
+            self.pet_guid.tokio_write(w).await?;
 
-        // data: u32
-        w.write_all(&self.data.to_le_bytes()).await?;
+            // data: u32
+            w.write_all(&self.data.to_le_bytes()).await?;
 
-        // target_guid: Guid
-        self.target_guid.tokio_write(w).await?;
+            // target_guid: Guid
+            self.target_guid.tokio_write(w).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // pet_guid: Guid
-        let pet_guid = Guid::astd_read(r).await?;
-
-        // data: u32
-        let data = crate::util::astd_read_u32_le(r).await?;
-
-        // target_guid: Guid
-        let target_guid = Guid::astd_read(r).await?;
-
-        Ok(Self {
-            pet_guid,
-            data,
-            target_guid,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_guid: Guid
-        self.pet_guid.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // pet_guid: Guid
+            let pet_guid = Guid::astd_read(r).await?;
 
-        // data: u32
-        w.write_all(&self.data.to_le_bytes()).await?;
+            // data: u32
+            let data = crate::util::astd_read_u32_le(r).await?;
 
-        // target_guid: Guid
-        self.target_guid.astd_write(w).await?;
+            // target_guid: Guid
+            let target_guid = Guid::astd_read(r).await?;
 
-        Ok(())
+            Ok(Self {
+                pet_guid,
+                data,
+                target_guid,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // pet_guid: Guid
+            self.pet_guid.astd_write(w).await?;
+
+            // data: u32
+            w.write_all(&self.data.to_le_bytes()).await?;
+
+            // target_guid: Guid
+            self.target_guid.astd_write(w).await?;
+
+            Ok(())
+        })
     }
 
 }

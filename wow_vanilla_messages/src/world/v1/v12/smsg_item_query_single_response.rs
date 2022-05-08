@@ -25,7 +25,6 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
 impl ServerMessageWrite for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     const OPCODE: u16 = 0x0058;
 
@@ -485,904 +484,950 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // item: u32
-        let item = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // item: u32
+            let item = crate::util::tokio_read_u32_le(r).await?;
 
-        // optional found
-        let current_size = {
-            0
-            + 4 // item: u32
-        };
-        let found = if current_size < body_size as usize {
-            // item_class: ItemClass
-            let item_class = ItemClass::tokio_read_u32_le(r).await?;
+            // optional found
+            let current_size = {
+                0
+                + 4 // item: u32
+            };
+            let found = if current_size < body_size as usize {
+                // item_class: ItemClass
+                let item_class = ItemClass::tokio_read_u32_le(r).await?;
 
-            // item_sub_class: u32
-            let item_sub_class = crate::util::tokio_read_u32_le(r).await?;
+                // item_sub_class: u32
+                let item_sub_class = crate::util::tokio_read_u32_le(r).await?;
 
-            // name1: CString
-            let name1 = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name1 = String::from_utf8(name1)?;
+                // name1: CString
+                let name1 = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let name1 = String::from_utf8(name1)?;
 
-            // name2: CString
-            let name2 = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name2 = String::from_utf8(name2)?;
+                // name2: CString
+                let name2 = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let name2 = String::from_utf8(name2)?;
 
-            // name3: CString
-            let name3 = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name3 = String::from_utf8(name3)?;
+                // name3: CString
+                let name3 = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let name3 = String::from_utf8(name3)?;
 
-            // name4: CString
-            let name4 = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name4 = String::from_utf8(name4)?;
+                // name4: CString
+                let name4 = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let name4 = String::from_utf8(name4)?;
 
-            // item_display_info: u32
-            let item_display_info = crate::util::tokio_read_u32_le(r).await?;
+                // item_display_info: u32
+                let item_display_info = crate::util::tokio_read_u32_le(r).await?;
 
-            // quality: ItemQuality
-            let quality = ItemQuality::tokio_read_u32_le(r).await?;
+                // quality: ItemQuality
+                let quality = ItemQuality::tokio_read_u32_le(r).await?;
 
-            // flags: u32
-            let flags = crate::util::tokio_read_u32_le(r).await?;
+                // flags: u32
+                let flags = crate::util::tokio_read_u32_le(r).await?;
 
-            // buy_price: f64
-            let buy_price = crate::util::tokio_read_f64_le(r).await?;
-            // sell_price: f64
-            let sell_price = crate::util::tokio_read_f64_le(r).await?;
-            // inventory_type: InventoryType
-            let inventory_type = InventoryType::tokio_read(r).await?;
+                // buy_price: f64
+                let buy_price = crate::util::tokio_read_f64_le(r).await?;
+                // sell_price: f64
+                let sell_price = crate::util::tokio_read_f64_le(r).await?;
+                // inventory_type: InventoryType
+                let inventory_type = InventoryType::tokio_read(r).await?;
 
-            // allowed_class: u32
-            let allowed_class = crate::util::tokio_read_u32_le(r).await?;
+                // allowed_class: u32
+                let allowed_class = crate::util::tokio_read_u32_le(r).await?;
 
-            // allowed_race: u32
-            let allowed_race = crate::util::tokio_read_u32_le(r).await?;
+                // allowed_race: u32
+                let allowed_race = crate::util::tokio_read_u32_le(r).await?;
 
-            // item_level: u32
-            let item_level = crate::util::tokio_read_u32_le(r).await?;
+                // item_level: u32
+                let item_level = crate::util::tokio_read_u32_le(r).await?;
 
-            // required_level: u32
-            let required_level = crate::util::tokio_read_u32_le(r).await?;
+                // required_level: u32
+                let required_level = crate::util::tokio_read_u32_le(r).await?;
 
-            // required_skill: u32
-            let required_skill = crate::util::tokio_read_u32_le(r).await?;
+                // required_skill: u32
+                let required_skill = crate::util::tokio_read_u32_le(r).await?;
 
-            // required_skill_rank: u32
-            let required_skill_rank = crate::util::tokio_read_u32_le(r).await?;
+                // required_skill_rank: u32
+                let required_skill_rank = crate::util::tokio_read_u32_le(r).await?;
 
-            // required_spell: u32
-            let required_spell = crate::util::tokio_read_u32_le(r).await?;
+                // required_spell: u32
+                let required_spell = crate::util::tokio_read_u32_le(r).await?;
 
-            // required_honor_rank: u32
-            let required_honor_rank = crate::util::tokio_read_u32_le(r).await?;
+                // required_honor_rank: u32
+                let required_honor_rank = crate::util::tokio_read_u32_le(r).await?;
 
-            // required_city_rank: u32
-            let required_city_rank = crate::util::tokio_read_u32_le(r).await?;
+                // required_city_rank: u32
+                let required_city_rank = crate::util::tokio_read_u32_le(r).await?;
 
-            // required_reputation_faction: u32
-            let required_reputation_faction = crate::util::tokio_read_u32_le(r).await?;
+                // required_reputation_faction: u32
+                let required_reputation_faction = crate::util::tokio_read_u32_le(r).await?;
 
-            // required_reputation_rank: u32
-            let required_reputation_rank = crate::util::tokio_read_u32_le(r).await?;
+                // required_reputation_rank: u32
+                let required_reputation_rank = crate::util::tokio_read_u32_le(r).await?;
 
-            // max_count: u32
-            let max_count = crate::util::tokio_read_u32_le(r).await?;
+                // max_count: u32
+                let max_count = crate::util::tokio_read_u32_le(r).await?;
 
-            // stackable: u32
-            let stackable = crate::util::tokio_read_u32_le(r).await?;
+                // stackable: u32
+                let stackable = crate::util::tokio_read_u32_le(r).await?;
 
-            // container_slots: u32
-            let container_slots = crate::util::tokio_read_u32_le(r).await?;
+                // container_slots: u32
+                let container_slots = crate::util::tokio_read_u32_le(r).await?;
 
-            // stats: ItemStat[10]
-            let mut stats = Vec::with_capacity(10 as usize);
-            for i in 0..10 {
-                stats.push(ItemStat::tokio_read(r).await?);
-            }
-            let stats = stats.try_into().unwrap();
+                // stats: ItemStat[10]
+                let mut stats = Vec::with_capacity(10 as usize);
+                for i in 0..10 {
+                    stats.push(ItemStat::tokio_read(r).await?);
+                }
+                let stats = stats.try_into().unwrap();
 
-            // damages: ItemDamageType[5]
-            let mut damages = Vec::with_capacity(5 as usize);
-            for i in 0..5 {
-                damages.push(ItemDamageType::tokio_read(r).await?);
-            }
-            let damages = damages.try_into().unwrap();
+                // damages: ItemDamageType[5]
+                let mut damages = Vec::with_capacity(5 as usize);
+                for i in 0..5 {
+                    damages.push(ItemDamageType::tokio_read(r).await?);
+                }
+                let damages = damages.try_into().unwrap();
 
-            // armor: u32
-            let armor = crate::util::tokio_read_u32_le(r).await?;
+                // armor: u32
+                let armor = crate::util::tokio_read_u32_le(r).await?;
 
-            // holy_resistance: u32
-            let holy_resistance = crate::util::tokio_read_u32_le(r).await?;
+                // holy_resistance: u32
+                let holy_resistance = crate::util::tokio_read_u32_le(r).await?;
 
-            // fire_resistance: u32
-            let fire_resistance = crate::util::tokio_read_u32_le(r).await?;
+                // fire_resistance: u32
+                let fire_resistance = crate::util::tokio_read_u32_le(r).await?;
 
-            // nature_resistance: u32
-            let nature_resistance = crate::util::tokio_read_u32_le(r).await?;
+                // nature_resistance: u32
+                let nature_resistance = crate::util::tokio_read_u32_le(r).await?;
 
-            // frost_resistance: u32
-            let frost_resistance = crate::util::tokio_read_u32_le(r).await?;
+                // frost_resistance: u32
+                let frost_resistance = crate::util::tokio_read_u32_le(r).await?;
 
-            // shadow_resistance: u32
-            let shadow_resistance = crate::util::tokio_read_u32_le(r).await?;
+                // shadow_resistance: u32
+                let shadow_resistance = crate::util::tokio_read_u32_le(r).await?;
 
-            // arcane_resistance: u32
-            let arcane_resistance = crate::util::tokio_read_u32_le(r).await?;
+                // arcane_resistance: u32
+                let arcane_resistance = crate::util::tokio_read_u32_le(r).await?;
 
-            // delay: u32
-            let delay = crate::util::tokio_read_u32_le(r).await?;
+                // delay: u32
+                let delay = crate::util::tokio_read_u32_le(r).await?;
 
-            // ammo_type: u32
-            let ammo_type = crate::util::tokio_read_u32_le(r).await?;
+                // ammo_type: u32
+                let ammo_type = crate::util::tokio_read_u32_le(r).await?;
 
-            // ranged_range_modification: f32
-            let ranged_range_modification = crate::util::tokio_read_f32_le(r).await?;
-            // spells: ItemSpells[5]
-            let mut spells = Vec::with_capacity(5 as usize);
-            for i in 0..5 {
-                spells.push(ItemSpells::tokio_read(r).await?);
-            }
-            let spells = spells.try_into().unwrap();
+                // ranged_range_modification: f32
+                let ranged_range_modification = crate::util::tokio_read_f32_le(r).await?;
+                // spells: ItemSpells[5]
+                let mut spells = Vec::with_capacity(5 as usize);
+                for i in 0..5 {
+                    spells.push(ItemSpells::tokio_read(r).await?);
+                }
+                let spells = spells.try_into().unwrap();
 
-            // bonding: u32
-            let bonding = crate::util::tokio_read_u32_le(r).await?;
+                // bonding: u32
+                let bonding = crate::util::tokio_read_u32_le(r).await?;
 
-            // description: CString
-            let description = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let description = String::from_utf8(description)?;
+                // description: CString
+                let description = crate::util::tokio_read_c_string_to_vec(r).await?;
+                let description = String::from_utf8(description)?;
 
-            // page_text: u32
-            let page_text = crate::util::tokio_read_u32_le(r).await?;
+                // page_text: u32
+                let page_text = crate::util::tokio_read_u32_le(r).await?;
 
-            // language_id: u32
-            let language_id = crate::util::tokio_read_u32_le(r).await?;
+                // language_id: u32
+                let language_id = crate::util::tokio_read_u32_le(r).await?;
 
-            // page_material: u32
-            let page_material = crate::util::tokio_read_u32_le(r).await?;
+                // page_material: u32
+                let page_material = crate::util::tokio_read_u32_le(r).await?;
 
-            // start_quest: u32
-            let start_quest = crate::util::tokio_read_u32_le(r).await?;
+                // start_quest: u32
+                let start_quest = crate::util::tokio_read_u32_le(r).await?;
 
-            // lock_id: u32
-            let lock_id = crate::util::tokio_read_u32_le(r).await?;
+                // lock_id: u32
+                let lock_id = crate::util::tokio_read_u32_le(r).await?;
 
-            // material: u32
-            let material = crate::util::tokio_read_u32_le(r).await?;
+                // material: u32
+                let material = crate::util::tokio_read_u32_le(r).await?;
 
-            // sheath: u32
-            let sheath = crate::util::tokio_read_u32_le(r).await?;
+                // sheath: u32
+                let sheath = crate::util::tokio_read_u32_le(r).await?;
 
-            // random_property: u32
-            let random_property = crate::util::tokio_read_u32_le(r).await?;
+                // random_property: u32
+                let random_property = crate::util::tokio_read_u32_le(r).await?;
 
-            // block: u32
-            let block = crate::util::tokio_read_u32_le(r).await?;
+                // block: u32
+                let block = crate::util::tokio_read_u32_le(r).await?;
 
-            // item_set: u32
-            let item_set = crate::util::tokio_read_u32_le(r).await?;
+                // item_set: u32
+                let item_set = crate::util::tokio_read_u32_le(r).await?;
 
-            // max_durability: u32
-            let max_durability = crate::util::tokio_read_u32_le(r).await?;
+                // max_durability: u32
+                let max_durability = crate::util::tokio_read_u32_le(r).await?;
 
-            // area: Area
-            let area = Area::tokio_read(r).await?;
+                // area: Area
+                let area = Area::tokio_read(r).await?;
 
-            // map: Map
-            let map = Map::tokio_read(r).await?;
+                // map: Map
+                let map = Map::tokio_read(r).await?;
 
-            // bag_family: u32
-            let bag_family = crate::util::tokio_read_u32_le(r).await?;
+                // bag_family: u32
+                let bag_family = crate::util::tokio_read_u32_le(r).await?;
 
-            Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
-                item_class,
-                item_sub_class,
-                name1,
-                name2,
-                name3,
-                name4,
-                item_display_info,
-                quality,
-                flags,
-                buy_price,
-                sell_price,
-                inventory_type,
-                allowed_class,
-                allowed_race,
-                item_level,
-                required_level,
-                required_skill,
-                required_skill_rank,
-                required_spell,
-                required_honor_rank,
-                required_city_rank,
-                required_reputation_faction,
-                required_reputation_rank,
-                max_count,
-                stackable,
-                container_slots,
-                stats,
-                damages,
-                armor,
-                holy_resistance,
-                fire_resistance,
-                nature_resistance,
-                frost_resistance,
-                shadow_resistance,
-                arcane_resistance,
-                delay,
-                ammo_type,
-                ranged_range_modification,
-                spells,
-                bonding,
-                description,
-                page_text,
-                language_id,
-                page_material,
-                start_quest,
-                lock_id,
-                material,
-                sheath,
-                random_property,
-                block,
-                item_set,
-                max_durability,
-                area,
-                map,
-                bag_family,
+                Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
+                    item_class,
+                    item_sub_class,
+                    name1,
+                    name2,
+                    name3,
+                    name4,
+                    item_display_info,
+                    quality,
+                    flags,
+                    buy_price,
+                    sell_price,
+                    inventory_type,
+                    allowed_class,
+                    allowed_race,
+                    item_level,
+                    required_level,
+                    required_skill,
+                    required_skill_rank,
+                    required_spell,
+                    required_honor_rank,
+                    required_city_rank,
+                    required_reputation_faction,
+                    required_reputation_rank,
+                    max_count,
+                    stackable,
+                    container_slots,
+                    stats,
+                    damages,
+                    armor,
+                    holy_resistance,
+                    fire_resistance,
+                    nature_resistance,
+                    frost_resistance,
+                    shadow_resistance,
+                    arcane_resistance,
+                    delay,
+                    ammo_type,
+                    ranged_range_modification,
+                    spells,
+                    bonding,
+                    description,
+                    page_text,
+                    language_id,
+                    page_material,
+                    start_quest,
+                    lock_id,
+                    material,
+                    sheath,
+                    random_property,
+                    block,
+                    item_set,
+                    max_durability,
+                    area,
+                    map,
+                    bag_family,
+                })
+            } else {
+                None
+            };
+
+            Ok(Self {
+                item,
+                found,
             })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            item,
-            found,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item: u32
-        w.write_all(&self.item.to_le_bytes()).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // item: u32
+            w.write_all(&self.item.to_le_bytes()).await?;
 
-        // optional found
-        if let Some(v) = &self.found {
-            // item_class: ItemClass
-            v.item_class.tokio_write_u32_le(w).await?;
+            // optional found
+            if let Some(v) = &self.found {
+                // item_class: ItemClass
+                v.item_class.tokio_write_u32_le(w).await?;
 
-            // item_sub_class: u32
-            w.write_all(&v.item_sub_class.to_le_bytes()).await?;
+                // item_sub_class: u32
+                w.write_all(&v.item_sub_class.to_le_bytes()).await?;
 
-            // name1: CString
-            w.write_all(v.name1.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name1: CString
+                w.write_all(v.name1.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
 
-            // name2: CString
-            w.write_all(v.name2.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name2: CString
+                w.write_all(v.name2.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
 
-            // name3: CString
-            w.write_all(v.name3.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name3: CString
+                w.write_all(v.name3.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
 
-            // name4: CString
-            w.write_all(v.name4.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name4: CString
+                w.write_all(v.name4.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
 
-            // item_display_info: u32
-            w.write_all(&v.item_display_info.to_le_bytes()).await?;
+                // item_display_info: u32
+                w.write_all(&v.item_display_info.to_le_bytes()).await?;
 
-            // quality: ItemQuality
-            v.quality.tokio_write_u32_le(w).await?;
+                // quality: ItemQuality
+                v.quality.tokio_write_u32_le(w).await?;
 
-            // flags: u32
-            w.write_all(&v.flags.to_le_bytes()).await?;
+                // flags: u32
+                w.write_all(&v.flags.to_le_bytes()).await?;
 
-            // buy_price: f64
-            w.write_all(&v.buy_price.to_le_bytes()).await?;
+                // buy_price: f64
+                w.write_all(&v.buy_price.to_le_bytes()).await?;
 
-            // sell_price: f64
-            w.write_all(&v.sell_price.to_le_bytes()).await?;
+                // sell_price: f64
+                w.write_all(&v.sell_price.to_le_bytes()).await?;
 
-            // inventory_type: InventoryType
-            v.inventory_type.tokio_write(w).await?;
+                // inventory_type: InventoryType
+                v.inventory_type.tokio_write(w).await?;
 
-            // allowed_class: u32
-            w.write_all(&v.allowed_class.to_le_bytes()).await?;
+                // allowed_class: u32
+                w.write_all(&v.allowed_class.to_le_bytes()).await?;
 
-            // allowed_race: u32
-            w.write_all(&v.allowed_race.to_le_bytes()).await?;
+                // allowed_race: u32
+                w.write_all(&v.allowed_race.to_le_bytes()).await?;
 
-            // item_level: u32
-            w.write_all(&v.item_level.to_le_bytes()).await?;
+                // item_level: u32
+                w.write_all(&v.item_level.to_le_bytes()).await?;
 
-            // required_level: u32
-            w.write_all(&v.required_level.to_le_bytes()).await?;
+                // required_level: u32
+                w.write_all(&v.required_level.to_le_bytes()).await?;
 
-            // required_skill: u32
-            w.write_all(&v.required_skill.to_le_bytes()).await?;
+                // required_skill: u32
+                w.write_all(&v.required_skill.to_le_bytes()).await?;
 
-            // required_skill_rank: u32
-            w.write_all(&v.required_skill_rank.to_le_bytes()).await?;
+                // required_skill_rank: u32
+                w.write_all(&v.required_skill_rank.to_le_bytes()).await?;
 
-            // required_spell: u32
-            w.write_all(&v.required_spell.to_le_bytes()).await?;
+                // required_spell: u32
+                w.write_all(&v.required_spell.to_le_bytes()).await?;
 
-            // required_honor_rank: u32
-            w.write_all(&v.required_honor_rank.to_le_bytes()).await?;
+                // required_honor_rank: u32
+                w.write_all(&v.required_honor_rank.to_le_bytes()).await?;
 
-            // required_city_rank: u32
-            w.write_all(&v.required_city_rank.to_le_bytes()).await?;
+                // required_city_rank: u32
+                w.write_all(&v.required_city_rank.to_le_bytes()).await?;
 
-            // required_reputation_faction: u32
-            w.write_all(&v.required_reputation_faction.to_le_bytes()).await?;
+                // required_reputation_faction: u32
+                w.write_all(&v.required_reputation_faction.to_le_bytes()).await?;
 
-            // required_reputation_rank: u32
-            w.write_all(&v.required_reputation_rank.to_le_bytes()).await?;
+                // required_reputation_rank: u32
+                w.write_all(&v.required_reputation_rank.to_le_bytes()).await?;
 
-            // max_count: u32
-            w.write_all(&v.max_count.to_le_bytes()).await?;
+                // max_count: u32
+                w.write_all(&v.max_count.to_le_bytes()).await?;
 
-            // stackable: u32
-            w.write_all(&v.stackable.to_le_bytes()).await?;
+                // stackable: u32
+                w.write_all(&v.stackable.to_le_bytes()).await?;
 
-            // container_slots: u32
-            w.write_all(&v.container_slots.to_le_bytes()).await?;
+                // container_slots: u32
+                w.write_all(&v.container_slots.to_le_bytes()).await?;
 
-            // stats: ItemStat[10]
-            for i in v.stats.iter() {
-                i.tokio_write(w).await?;
+                // stats: ItemStat[10]
+                for i in v.stats.iter() {
+                    i.tokio_write(w).await?;
+                }
+
+                // damages: ItemDamageType[5]
+                for i in v.damages.iter() {
+                    i.tokio_write(w).await?;
+                }
+
+                // armor: u32
+                w.write_all(&v.armor.to_le_bytes()).await?;
+
+                // holy_resistance: u32
+                w.write_all(&v.holy_resistance.to_le_bytes()).await?;
+
+                // fire_resistance: u32
+                w.write_all(&v.fire_resistance.to_le_bytes()).await?;
+
+                // nature_resistance: u32
+                w.write_all(&v.nature_resistance.to_le_bytes()).await?;
+
+                // frost_resistance: u32
+                w.write_all(&v.frost_resistance.to_le_bytes()).await?;
+
+                // shadow_resistance: u32
+                w.write_all(&v.shadow_resistance.to_le_bytes()).await?;
+
+                // arcane_resistance: u32
+                w.write_all(&v.arcane_resistance.to_le_bytes()).await?;
+
+                // delay: u32
+                w.write_all(&v.delay.to_le_bytes()).await?;
+
+                // ammo_type: u32
+                w.write_all(&v.ammo_type.to_le_bytes()).await?;
+
+                // ranged_range_modification: f32
+                w.write_all(&v.ranged_range_modification.to_le_bytes()).await?;
+
+                // spells: ItemSpells[5]
+                for i in v.spells.iter() {
+                    i.tokio_write(w).await?;
+                }
+
+                // bonding: u32
+                w.write_all(&v.bonding.to_le_bytes()).await?;
+
+                // description: CString
+                w.write_all(v.description.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // page_text: u32
+                w.write_all(&v.page_text.to_le_bytes()).await?;
+
+                // language_id: u32
+                w.write_all(&v.language_id.to_le_bytes()).await?;
+
+                // page_material: u32
+                w.write_all(&v.page_material.to_le_bytes()).await?;
+
+                // start_quest: u32
+                w.write_all(&v.start_quest.to_le_bytes()).await?;
+
+                // lock_id: u32
+                w.write_all(&v.lock_id.to_le_bytes()).await?;
+
+                // material: u32
+                w.write_all(&v.material.to_le_bytes()).await?;
+
+                // sheath: u32
+                w.write_all(&v.sheath.to_le_bytes()).await?;
+
+                // random_property: u32
+                w.write_all(&v.random_property.to_le_bytes()).await?;
+
+                // block: u32
+                w.write_all(&v.block.to_le_bytes()).await?;
+
+                // item_set: u32
+                w.write_all(&v.item_set.to_le_bytes()).await?;
+
+                // max_durability: u32
+                w.write_all(&v.max_durability.to_le_bytes()).await?;
+
+                // area: Area
+                v.area.tokio_write(w).await?;
+
+                // map: Map
+                v.map.tokio_write(w).await?;
+
+                // bag_family: u32
+                w.write_all(&v.bag_family.to_le_bytes()).await?;
+
             }
 
-            // damages: ItemDamageType[5]
-            for i in v.damages.iter() {
-                i.tokio_write(w).await?;
-            }
-
-            // armor: u32
-            w.write_all(&v.armor.to_le_bytes()).await?;
-
-            // holy_resistance: u32
-            w.write_all(&v.holy_resistance.to_le_bytes()).await?;
-
-            // fire_resistance: u32
-            w.write_all(&v.fire_resistance.to_le_bytes()).await?;
-
-            // nature_resistance: u32
-            w.write_all(&v.nature_resistance.to_le_bytes()).await?;
-
-            // frost_resistance: u32
-            w.write_all(&v.frost_resistance.to_le_bytes()).await?;
-
-            // shadow_resistance: u32
-            w.write_all(&v.shadow_resistance.to_le_bytes()).await?;
-
-            // arcane_resistance: u32
-            w.write_all(&v.arcane_resistance.to_le_bytes()).await?;
-
-            // delay: u32
-            w.write_all(&v.delay.to_le_bytes()).await?;
-
-            // ammo_type: u32
-            w.write_all(&v.ammo_type.to_le_bytes()).await?;
-
-            // ranged_range_modification: f32
-            w.write_all(&v.ranged_range_modification.to_le_bytes()).await?;
-
-            // spells: ItemSpells[5]
-            for i in v.spells.iter() {
-                i.tokio_write(w).await?;
-            }
-
-            // bonding: u32
-            w.write_all(&v.bonding.to_le_bytes()).await?;
-
-            // description: CString
-            w.write_all(v.description.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // page_text: u32
-            w.write_all(&v.page_text.to_le_bytes()).await?;
-
-            // language_id: u32
-            w.write_all(&v.language_id.to_le_bytes()).await?;
-
-            // page_material: u32
-            w.write_all(&v.page_material.to_le_bytes()).await?;
-
-            // start_quest: u32
-            w.write_all(&v.start_quest.to_le_bytes()).await?;
-
-            // lock_id: u32
-            w.write_all(&v.lock_id.to_le_bytes()).await?;
-
-            // material: u32
-            w.write_all(&v.material.to_le_bytes()).await?;
-
-            // sheath: u32
-            w.write_all(&v.sheath.to_le_bytes()).await?;
-
-            // random_property: u32
-            w.write_all(&v.random_property.to_le_bytes()).await?;
-
-            // block: u32
-            w.write_all(&v.block.to_le_bytes()).await?;
-
-            // item_set: u32
-            w.write_all(&v.item_set.to_le_bytes()).await?;
-
-            // max_durability: u32
-            w.write_all(&v.max_durability.to_le_bytes()).await?;
-
-            // area: Area
-            v.area.tokio_write(w).await?;
-
-            // map: Map
-            v.map.tokio_write(w).await?;
-
-            // bag_family: u32
-            w.write_all(&v.bag_family.to_le_bytes()).await?;
-
-        }
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // item: u32
-        let item = crate::util::astd_read_u32_le(r).await?;
-
-        // optional found
-        let current_size = {
-            0
-            + 4 // item: u32
-        };
-        let found = if current_size < body_size as usize {
-            // item_class: ItemClass
-            let item_class = ItemClass::astd_read_u32_le(r).await?;
-
-            // item_sub_class: u32
-            let item_sub_class = crate::util::astd_read_u32_le(r).await?;
-
-            // name1: CString
-            let name1 = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name1 = String::from_utf8(name1)?;
-
-            // name2: CString
-            let name2 = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name2 = String::from_utf8(name2)?;
-
-            // name3: CString
-            let name3 = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name3 = String::from_utf8(name3)?;
-
-            // name4: CString
-            let name4 = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name4 = String::from_utf8(name4)?;
-
-            // item_display_info: u32
-            let item_display_info = crate::util::astd_read_u32_le(r).await?;
-
-            // quality: ItemQuality
-            let quality = ItemQuality::astd_read_u32_le(r).await?;
-
-            // flags: u32
-            let flags = crate::util::astd_read_u32_le(r).await?;
-
-            // buy_price: f64
-            let buy_price = crate::util::astd_read_f64_le(r).await?;
-            // sell_price: f64
-            let sell_price = crate::util::astd_read_f64_le(r).await?;
-            // inventory_type: InventoryType
-            let inventory_type = InventoryType::astd_read(r).await?;
-
-            // allowed_class: u32
-            let allowed_class = crate::util::astd_read_u32_le(r).await?;
-
-            // allowed_race: u32
-            let allowed_race = crate::util::astd_read_u32_le(r).await?;
-
-            // item_level: u32
-            let item_level = crate::util::astd_read_u32_le(r).await?;
-
-            // required_level: u32
-            let required_level = crate::util::astd_read_u32_le(r).await?;
-
-            // required_skill: u32
-            let required_skill = crate::util::astd_read_u32_le(r).await?;
-
-            // required_skill_rank: u32
-            let required_skill_rank = crate::util::astd_read_u32_le(r).await?;
-
-            // required_spell: u32
-            let required_spell = crate::util::astd_read_u32_le(r).await?;
-
-            // required_honor_rank: u32
-            let required_honor_rank = crate::util::astd_read_u32_le(r).await?;
-
-            // required_city_rank: u32
-            let required_city_rank = crate::util::astd_read_u32_le(r).await?;
-
-            // required_reputation_faction: u32
-            let required_reputation_faction = crate::util::astd_read_u32_le(r).await?;
-
-            // required_reputation_rank: u32
-            let required_reputation_rank = crate::util::astd_read_u32_le(r).await?;
-
-            // max_count: u32
-            let max_count = crate::util::astd_read_u32_le(r).await?;
-
-            // stackable: u32
-            let stackable = crate::util::astd_read_u32_le(r).await?;
-
-            // container_slots: u32
-            let container_slots = crate::util::astd_read_u32_le(r).await?;
-
-            // stats: ItemStat[10]
-            let mut stats = Vec::with_capacity(10 as usize);
-            for i in 0..10 {
-                stats.push(ItemStat::astd_read(r).await?);
-            }
-            let stats = stats.try_into().unwrap();
-
-            // damages: ItemDamageType[5]
-            let mut damages = Vec::with_capacity(5 as usize);
-            for i in 0..5 {
-                damages.push(ItemDamageType::astd_read(r).await?);
-            }
-            let damages = damages.try_into().unwrap();
-
-            // armor: u32
-            let armor = crate::util::astd_read_u32_le(r).await?;
-
-            // holy_resistance: u32
-            let holy_resistance = crate::util::astd_read_u32_le(r).await?;
-
-            // fire_resistance: u32
-            let fire_resistance = crate::util::astd_read_u32_le(r).await?;
-
-            // nature_resistance: u32
-            let nature_resistance = crate::util::astd_read_u32_le(r).await?;
-
-            // frost_resistance: u32
-            let frost_resistance = crate::util::astd_read_u32_le(r).await?;
-
-            // shadow_resistance: u32
-            let shadow_resistance = crate::util::astd_read_u32_le(r).await?;
-
-            // arcane_resistance: u32
-            let arcane_resistance = crate::util::astd_read_u32_le(r).await?;
-
-            // delay: u32
-            let delay = crate::util::astd_read_u32_le(r).await?;
-
-            // ammo_type: u32
-            let ammo_type = crate::util::astd_read_u32_le(r).await?;
-
-            // ranged_range_modification: f32
-            let ranged_range_modification = crate::util::astd_read_f32_le(r).await?;
-            // spells: ItemSpells[5]
-            let mut spells = Vec::with_capacity(5 as usize);
-            for i in 0..5 {
-                spells.push(ItemSpells::astd_read(r).await?);
-            }
-            let spells = spells.try_into().unwrap();
-
-            // bonding: u32
-            let bonding = crate::util::astd_read_u32_le(r).await?;
-
-            // description: CString
-            let description = crate::util::astd_read_c_string_to_vec(r).await?;
-            let description = String::from_utf8(description)?;
-
-            // page_text: u32
-            let page_text = crate::util::astd_read_u32_le(r).await?;
-
-            // language_id: u32
-            let language_id = crate::util::astd_read_u32_le(r).await?;
-
-            // page_material: u32
-            let page_material = crate::util::astd_read_u32_le(r).await?;
-
-            // start_quest: u32
-            let start_quest = crate::util::astd_read_u32_le(r).await?;
-
-            // lock_id: u32
-            let lock_id = crate::util::astd_read_u32_le(r).await?;
-
-            // material: u32
-            let material = crate::util::astd_read_u32_le(r).await?;
-
-            // sheath: u32
-            let sheath = crate::util::astd_read_u32_le(r).await?;
-
-            // random_property: u32
-            let random_property = crate::util::astd_read_u32_le(r).await?;
-
-            // block: u32
-            let block = crate::util::astd_read_u32_le(r).await?;
-
-            // item_set: u32
-            let item_set = crate::util::astd_read_u32_le(r).await?;
-
-            // max_durability: u32
-            let max_durability = crate::util::astd_read_u32_le(r).await?;
-
-            // area: Area
-            let area = Area::astd_read(r).await?;
-
-            // map: Map
-            let map = Map::astd_read(r).await?;
-
-            // bag_family: u32
-            let bag_family = crate::util::astd_read_u32_le(r).await?;
-
-            Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
-                item_class,
-                item_sub_class,
-                name1,
-                name2,
-                name3,
-                name4,
-                item_display_info,
-                quality,
-                flags,
-                buy_price,
-                sell_price,
-                inventory_type,
-                allowed_class,
-                allowed_race,
-                item_level,
-                required_level,
-                required_skill,
-                required_skill_rank,
-                required_spell,
-                required_honor_rank,
-                required_city_rank,
-                required_reputation_faction,
-                required_reputation_rank,
-                max_count,
-                stackable,
-                container_slots,
-                stats,
-                damages,
-                armor,
-                holy_resistance,
-                fire_resistance,
-                nature_resistance,
-                frost_resistance,
-                shadow_resistance,
-                arcane_resistance,
-                delay,
-                ammo_type,
-                ranged_range_modification,
-                spells,
-                bonding,
-                description,
-                page_text,
-                language_id,
-                page_material,
-                start_quest,
-                lock_id,
-                material,
-                sheath,
-                random_property,
-                block,
-                item_set,
-                max_durability,
-                area,
-                map,
-                bag_family,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            item,
-            found,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item: u32
-        w.write_all(&self.item.to_le_bytes()).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // item: u32
+            let item = crate::util::astd_read_u32_le(r).await?;
 
-        // optional found
-        if let Some(v) = &self.found {
-            // item_class: ItemClass
-            v.item_class.astd_write_u32_le(w).await?;
+            // optional found
+            let current_size = {
+                0
+                + 4 // item: u32
+            };
+            let found = if current_size < body_size as usize {
+                // item_class: ItemClass
+                let item_class = ItemClass::astd_read_u32_le(r).await?;
 
-            // item_sub_class: u32
-            w.write_all(&v.item_sub_class.to_le_bytes()).await?;
+                // item_sub_class: u32
+                let item_sub_class = crate::util::astd_read_u32_le(r).await?;
 
-            // name1: CString
-            w.write_all(v.name1.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name1: CString
+                let name1 = crate::util::astd_read_c_string_to_vec(r).await?;
+                let name1 = String::from_utf8(name1)?;
 
-            // name2: CString
-            w.write_all(v.name2.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name2: CString
+                let name2 = crate::util::astd_read_c_string_to_vec(r).await?;
+                let name2 = String::from_utf8(name2)?;
 
-            // name3: CString
-            w.write_all(v.name3.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name3: CString
+                let name3 = crate::util::astd_read_c_string_to_vec(r).await?;
+                let name3 = String::from_utf8(name3)?;
 
-            // name4: CString
-            w.write_all(v.name4.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+                // name4: CString
+                let name4 = crate::util::astd_read_c_string_to_vec(r).await?;
+                let name4 = String::from_utf8(name4)?;
 
-            // item_display_info: u32
-            w.write_all(&v.item_display_info.to_le_bytes()).await?;
+                // item_display_info: u32
+                let item_display_info = crate::util::astd_read_u32_le(r).await?;
 
-            // quality: ItemQuality
-            v.quality.astd_write_u32_le(w).await?;
+                // quality: ItemQuality
+                let quality = ItemQuality::astd_read_u32_le(r).await?;
 
-            // flags: u32
-            w.write_all(&v.flags.to_le_bytes()).await?;
+                // flags: u32
+                let flags = crate::util::astd_read_u32_le(r).await?;
 
-            // buy_price: f64
-            w.write_all(&v.buy_price.to_le_bytes()).await?;
+                // buy_price: f64
+                let buy_price = crate::util::astd_read_f64_le(r).await?;
+                // sell_price: f64
+                let sell_price = crate::util::astd_read_f64_le(r).await?;
+                // inventory_type: InventoryType
+                let inventory_type = InventoryType::astd_read(r).await?;
 
-            // sell_price: f64
-            w.write_all(&v.sell_price.to_le_bytes()).await?;
+                // allowed_class: u32
+                let allowed_class = crate::util::astd_read_u32_le(r).await?;
 
-            // inventory_type: InventoryType
-            v.inventory_type.astd_write(w).await?;
+                // allowed_race: u32
+                let allowed_race = crate::util::astd_read_u32_le(r).await?;
 
-            // allowed_class: u32
-            w.write_all(&v.allowed_class.to_le_bytes()).await?;
+                // item_level: u32
+                let item_level = crate::util::astd_read_u32_le(r).await?;
 
-            // allowed_race: u32
-            w.write_all(&v.allowed_race.to_le_bytes()).await?;
+                // required_level: u32
+                let required_level = crate::util::astd_read_u32_le(r).await?;
 
-            // item_level: u32
-            w.write_all(&v.item_level.to_le_bytes()).await?;
+                // required_skill: u32
+                let required_skill = crate::util::astd_read_u32_le(r).await?;
 
-            // required_level: u32
-            w.write_all(&v.required_level.to_le_bytes()).await?;
+                // required_skill_rank: u32
+                let required_skill_rank = crate::util::astd_read_u32_le(r).await?;
 
-            // required_skill: u32
-            w.write_all(&v.required_skill.to_le_bytes()).await?;
+                // required_spell: u32
+                let required_spell = crate::util::astd_read_u32_le(r).await?;
 
-            // required_skill_rank: u32
-            w.write_all(&v.required_skill_rank.to_le_bytes()).await?;
+                // required_honor_rank: u32
+                let required_honor_rank = crate::util::astd_read_u32_le(r).await?;
 
-            // required_spell: u32
-            w.write_all(&v.required_spell.to_le_bytes()).await?;
+                // required_city_rank: u32
+                let required_city_rank = crate::util::astd_read_u32_le(r).await?;
 
-            // required_honor_rank: u32
-            w.write_all(&v.required_honor_rank.to_le_bytes()).await?;
+                // required_reputation_faction: u32
+                let required_reputation_faction = crate::util::astd_read_u32_le(r).await?;
 
-            // required_city_rank: u32
-            w.write_all(&v.required_city_rank.to_le_bytes()).await?;
+                // required_reputation_rank: u32
+                let required_reputation_rank = crate::util::astd_read_u32_le(r).await?;
 
-            // required_reputation_faction: u32
-            w.write_all(&v.required_reputation_faction.to_le_bytes()).await?;
+                // max_count: u32
+                let max_count = crate::util::astd_read_u32_le(r).await?;
 
-            // required_reputation_rank: u32
-            w.write_all(&v.required_reputation_rank.to_le_bytes()).await?;
+                // stackable: u32
+                let stackable = crate::util::astd_read_u32_le(r).await?;
 
-            // max_count: u32
-            w.write_all(&v.max_count.to_le_bytes()).await?;
+                // container_slots: u32
+                let container_slots = crate::util::astd_read_u32_le(r).await?;
 
-            // stackable: u32
-            w.write_all(&v.stackable.to_le_bytes()).await?;
+                // stats: ItemStat[10]
+                let mut stats = Vec::with_capacity(10 as usize);
+                for i in 0..10 {
+                    stats.push(ItemStat::astd_read(r).await?);
+                }
+                let stats = stats.try_into().unwrap();
 
-            // container_slots: u32
-            w.write_all(&v.container_slots.to_le_bytes()).await?;
+                // damages: ItemDamageType[5]
+                let mut damages = Vec::with_capacity(5 as usize);
+                for i in 0..5 {
+                    damages.push(ItemDamageType::astd_read(r).await?);
+                }
+                let damages = damages.try_into().unwrap();
 
-            // stats: ItemStat[10]
-            for i in v.stats.iter() {
-                i.astd_write(w).await?;
+                // armor: u32
+                let armor = crate::util::astd_read_u32_le(r).await?;
+
+                // holy_resistance: u32
+                let holy_resistance = crate::util::astd_read_u32_le(r).await?;
+
+                // fire_resistance: u32
+                let fire_resistance = crate::util::astd_read_u32_le(r).await?;
+
+                // nature_resistance: u32
+                let nature_resistance = crate::util::astd_read_u32_le(r).await?;
+
+                // frost_resistance: u32
+                let frost_resistance = crate::util::astd_read_u32_le(r).await?;
+
+                // shadow_resistance: u32
+                let shadow_resistance = crate::util::astd_read_u32_le(r).await?;
+
+                // arcane_resistance: u32
+                let arcane_resistance = crate::util::astd_read_u32_le(r).await?;
+
+                // delay: u32
+                let delay = crate::util::astd_read_u32_le(r).await?;
+
+                // ammo_type: u32
+                let ammo_type = crate::util::astd_read_u32_le(r).await?;
+
+                // ranged_range_modification: f32
+                let ranged_range_modification = crate::util::astd_read_f32_le(r).await?;
+                // spells: ItemSpells[5]
+                let mut spells = Vec::with_capacity(5 as usize);
+                for i in 0..5 {
+                    spells.push(ItemSpells::astd_read(r).await?);
+                }
+                let spells = spells.try_into().unwrap();
+
+                // bonding: u32
+                let bonding = crate::util::astd_read_u32_le(r).await?;
+
+                // description: CString
+                let description = crate::util::astd_read_c_string_to_vec(r).await?;
+                let description = String::from_utf8(description)?;
+
+                // page_text: u32
+                let page_text = crate::util::astd_read_u32_le(r).await?;
+
+                // language_id: u32
+                let language_id = crate::util::astd_read_u32_le(r).await?;
+
+                // page_material: u32
+                let page_material = crate::util::astd_read_u32_le(r).await?;
+
+                // start_quest: u32
+                let start_quest = crate::util::astd_read_u32_le(r).await?;
+
+                // lock_id: u32
+                let lock_id = crate::util::astd_read_u32_le(r).await?;
+
+                // material: u32
+                let material = crate::util::astd_read_u32_le(r).await?;
+
+                // sheath: u32
+                let sheath = crate::util::astd_read_u32_le(r).await?;
+
+                // random_property: u32
+                let random_property = crate::util::astd_read_u32_le(r).await?;
+
+                // block: u32
+                let block = crate::util::astd_read_u32_le(r).await?;
+
+                // item_set: u32
+                let item_set = crate::util::astd_read_u32_le(r).await?;
+
+                // max_durability: u32
+                let max_durability = crate::util::astd_read_u32_le(r).await?;
+
+                // area: Area
+                let area = Area::astd_read(r).await?;
+
+                // map: Map
+                let map = Map::astd_read(r).await?;
+
+                // bag_family: u32
+                let bag_family = crate::util::astd_read_u32_le(r).await?;
+
+                Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
+                    item_class,
+                    item_sub_class,
+                    name1,
+                    name2,
+                    name3,
+                    name4,
+                    item_display_info,
+                    quality,
+                    flags,
+                    buy_price,
+                    sell_price,
+                    inventory_type,
+                    allowed_class,
+                    allowed_race,
+                    item_level,
+                    required_level,
+                    required_skill,
+                    required_skill_rank,
+                    required_spell,
+                    required_honor_rank,
+                    required_city_rank,
+                    required_reputation_faction,
+                    required_reputation_rank,
+                    max_count,
+                    stackable,
+                    container_slots,
+                    stats,
+                    damages,
+                    armor,
+                    holy_resistance,
+                    fire_resistance,
+                    nature_resistance,
+                    frost_resistance,
+                    shadow_resistance,
+                    arcane_resistance,
+                    delay,
+                    ammo_type,
+                    ranged_range_modification,
+                    spells,
+                    bonding,
+                    description,
+                    page_text,
+                    language_id,
+                    page_material,
+                    start_quest,
+                    lock_id,
+                    material,
+                    sheath,
+                    random_property,
+                    block,
+                    item_set,
+                    max_durability,
+                    area,
+                    map,
+                    bag_family,
+                })
+            } else {
+                None
+            };
+
+            Ok(Self {
+                item,
+                found,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // item: u32
+            w.write_all(&self.item.to_le_bytes()).await?;
+
+            // optional found
+            if let Some(v) = &self.found {
+                // item_class: ItemClass
+                v.item_class.astd_write_u32_le(w).await?;
+
+                // item_sub_class: u32
+                w.write_all(&v.item_sub_class.to_le_bytes()).await?;
+
+                // name1: CString
+                w.write_all(v.name1.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // name2: CString
+                w.write_all(v.name2.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // name3: CString
+                w.write_all(v.name3.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // name4: CString
+                w.write_all(v.name4.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // item_display_info: u32
+                w.write_all(&v.item_display_info.to_le_bytes()).await?;
+
+                // quality: ItemQuality
+                v.quality.astd_write_u32_le(w).await?;
+
+                // flags: u32
+                w.write_all(&v.flags.to_le_bytes()).await?;
+
+                // buy_price: f64
+                w.write_all(&v.buy_price.to_le_bytes()).await?;
+
+                // sell_price: f64
+                w.write_all(&v.sell_price.to_le_bytes()).await?;
+
+                // inventory_type: InventoryType
+                v.inventory_type.astd_write(w).await?;
+
+                // allowed_class: u32
+                w.write_all(&v.allowed_class.to_le_bytes()).await?;
+
+                // allowed_race: u32
+                w.write_all(&v.allowed_race.to_le_bytes()).await?;
+
+                // item_level: u32
+                w.write_all(&v.item_level.to_le_bytes()).await?;
+
+                // required_level: u32
+                w.write_all(&v.required_level.to_le_bytes()).await?;
+
+                // required_skill: u32
+                w.write_all(&v.required_skill.to_le_bytes()).await?;
+
+                // required_skill_rank: u32
+                w.write_all(&v.required_skill_rank.to_le_bytes()).await?;
+
+                // required_spell: u32
+                w.write_all(&v.required_spell.to_le_bytes()).await?;
+
+                // required_honor_rank: u32
+                w.write_all(&v.required_honor_rank.to_le_bytes()).await?;
+
+                // required_city_rank: u32
+                w.write_all(&v.required_city_rank.to_le_bytes()).await?;
+
+                // required_reputation_faction: u32
+                w.write_all(&v.required_reputation_faction.to_le_bytes()).await?;
+
+                // required_reputation_rank: u32
+                w.write_all(&v.required_reputation_rank.to_le_bytes()).await?;
+
+                // max_count: u32
+                w.write_all(&v.max_count.to_le_bytes()).await?;
+
+                // stackable: u32
+                w.write_all(&v.stackable.to_le_bytes()).await?;
+
+                // container_slots: u32
+                w.write_all(&v.container_slots.to_le_bytes()).await?;
+
+                // stats: ItemStat[10]
+                for i in v.stats.iter() {
+                    i.astd_write(w).await?;
+                }
+
+                // damages: ItemDamageType[5]
+                for i in v.damages.iter() {
+                    i.astd_write(w).await?;
+                }
+
+                // armor: u32
+                w.write_all(&v.armor.to_le_bytes()).await?;
+
+                // holy_resistance: u32
+                w.write_all(&v.holy_resistance.to_le_bytes()).await?;
+
+                // fire_resistance: u32
+                w.write_all(&v.fire_resistance.to_le_bytes()).await?;
+
+                // nature_resistance: u32
+                w.write_all(&v.nature_resistance.to_le_bytes()).await?;
+
+                // frost_resistance: u32
+                w.write_all(&v.frost_resistance.to_le_bytes()).await?;
+
+                // shadow_resistance: u32
+                w.write_all(&v.shadow_resistance.to_le_bytes()).await?;
+
+                // arcane_resistance: u32
+                w.write_all(&v.arcane_resistance.to_le_bytes()).await?;
+
+                // delay: u32
+                w.write_all(&v.delay.to_le_bytes()).await?;
+
+                // ammo_type: u32
+                w.write_all(&v.ammo_type.to_le_bytes()).await?;
+
+                // ranged_range_modification: f32
+                w.write_all(&v.ranged_range_modification.to_le_bytes()).await?;
+
+                // spells: ItemSpells[5]
+                for i in v.spells.iter() {
+                    i.astd_write(w).await?;
+                }
+
+                // bonding: u32
+                w.write_all(&v.bonding.to_le_bytes()).await?;
+
+                // description: CString
+                w.write_all(v.description.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
+                // page_text: u32
+                w.write_all(&v.page_text.to_le_bytes()).await?;
+
+                // language_id: u32
+                w.write_all(&v.language_id.to_le_bytes()).await?;
+
+                // page_material: u32
+                w.write_all(&v.page_material.to_le_bytes()).await?;
+
+                // start_quest: u32
+                w.write_all(&v.start_quest.to_le_bytes()).await?;
+
+                // lock_id: u32
+                w.write_all(&v.lock_id.to_le_bytes()).await?;
+
+                // material: u32
+                w.write_all(&v.material.to_le_bytes()).await?;
+
+                // sheath: u32
+                w.write_all(&v.sheath.to_le_bytes()).await?;
+
+                // random_property: u32
+                w.write_all(&v.random_property.to_le_bytes()).await?;
+
+                // block: u32
+                w.write_all(&v.block.to_le_bytes()).await?;
+
+                // item_set: u32
+                w.write_all(&v.item_set.to_le_bytes()).await?;
+
+                // max_durability: u32
+                w.write_all(&v.max_durability.to_le_bytes()).await?;
+
+                // area: Area
+                v.area.astd_write(w).await?;
+
+                // map: Map
+                v.map.astd_write(w).await?;
+
+                // bag_family: u32
+                w.write_all(&v.bag_family.to_le_bytes()).await?;
+
             }
 
-            // damages: ItemDamageType[5]
-            for i in v.damages.iter() {
-                i.astd_write(w).await?;
-            }
-
-            // armor: u32
-            w.write_all(&v.armor.to_le_bytes()).await?;
-
-            // holy_resistance: u32
-            w.write_all(&v.holy_resistance.to_le_bytes()).await?;
-
-            // fire_resistance: u32
-            w.write_all(&v.fire_resistance.to_le_bytes()).await?;
-
-            // nature_resistance: u32
-            w.write_all(&v.nature_resistance.to_le_bytes()).await?;
-
-            // frost_resistance: u32
-            w.write_all(&v.frost_resistance.to_le_bytes()).await?;
-
-            // shadow_resistance: u32
-            w.write_all(&v.shadow_resistance.to_le_bytes()).await?;
-
-            // arcane_resistance: u32
-            w.write_all(&v.arcane_resistance.to_le_bytes()).await?;
-
-            // delay: u32
-            w.write_all(&v.delay.to_le_bytes()).await?;
-
-            // ammo_type: u32
-            w.write_all(&v.ammo_type.to_le_bytes()).await?;
-
-            // ranged_range_modification: f32
-            w.write_all(&v.ranged_range_modification.to_le_bytes()).await?;
-
-            // spells: ItemSpells[5]
-            for i in v.spells.iter() {
-                i.astd_write(w).await?;
-            }
-
-            // bonding: u32
-            w.write_all(&v.bonding.to_le_bytes()).await?;
-
-            // description: CString
-            w.write_all(v.description.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // page_text: u32
-            w.write_all(&v.page_text.to_le_bytes()).await?;
-
-            // language_id: u32
-            w.write_all(&v.language_id.to_le_bytes()).await?;
-
-            // page_material: u32
-            w.write_all(&v.page_material.to_le_bytes()).await?;
-
-            // start_quest: u32
-            w.write_all(&v.start_quest.to_le_bytes()).await?;
-
-            // lock_id: u32
-            w.write_all(&v.lock_id.to_le_bytes()).await?;
-
-            // material: u32
-            w.write_all(&v.material.to_le_bytes()).await?;
-
-            // sheath: u32
-            w.write_all(&v.sheath.to_le_bytes()).await?;
-
-            // random_property: u32
-            w.write_all(&v.random_property.to_le_bytes()).await?;
-
-            // block: u32
-            w.write_all(&v.block.to_le_bytes()).await?;
-
-            // item_set: u32
-            w.write_all(&v.item_set.to_le_bytes()).await?;
-
-            // max_durability: u32
-            w.write_all(&v.max_durability.to_le_bytes()).await?;
-
-            // area: Area
-            v.area.astd_write(w).await?;
-
-            // map: Map
-            v.map.astd_write(w).await?;
-
-            // bag_family: u32
-            w.write_all(&v.bag_family.to_le_bytes()).await?;
-
-        }
-
-        Ok(())
+            Ok(())
+        })
     }
 
 }

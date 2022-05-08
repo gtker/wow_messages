@@ -19,7 +19,6 @@ pub struct CMSG_MESSAGECHAT {
 
 impl ClientMessageWrite for CMSG_MESSAGECHAT {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_MESSAGECHAT {
     const OPCODE: u16 = 0x0095;
 
@@ -392,730 +391,776 @@ impl MessageBody for CMSG_MESSAGECHAT {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // chat_type: ChatType
-        let chat_type = ChatType::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // chat_type: ChatType
+            let chat_type = ChatType::tokio_read_u32_le(r).await?;
 
-        // language: Language
-        let language = Language::tokio_read(r).await?;
+            // language: Language
+            let language = Language::tokio_read(r).await?;
 
-        let chat_type_if = match chat_type {
-            ChatType::SAY => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+            let chat_type_if = match chat_type {
+                ChatType::SAY => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::SAY {
-                    message,
+                    CMSG_MESSAGECHATChatType::SAY {
+                        message,
+                    }
                 }
-            }
-            ChatType::PARTY => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::PARTY => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::PARTY {
-                    message,
+                    CMSG_MESSAGECHATChatType::PARTY {
+                        message,
+                    }
                 }
-            }
-            ChatType::RAID => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::RAID => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::RAID {
-                    message,
+                    CMSG_MESSAGECHATChatType::RAID {
+                        message,
+                    }
                 }
-            }
-            ChatType::GUILD => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::GUILD => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::GUILD {
-                    message,
+                    CMSG_MESSAGECHATChatType::GUILD {
+                        message,
+                    }
                 }
-            }
-            ChatType::OFFICER => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::OFFICER => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::OFFICER {
-                    message,
+                    CMSG_MESSAGECHATChatType::OFFICER {
+                        message,
+                    }
                 }
-            }
-            ChatType::YELL => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::YELL => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::YELL {
-                    message,
+                    CMSG_MESSAGECHATChatType::YELL {
+                        message,
+                    }
                 }
-            }
-            ChatType::WHISPER => {
-                // target_player: CString
-                let target_player = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let target_player = String::from_utf8(target_player)?;
+                ChatType::WHISPER => {
+                    // target_player: CString
+                    let target_player = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let target_player = String::from_utf8(target_player)?;
 
-                // whisper_message: CString
-                let whisper_message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let whisper_message = String::from_utf8(whisper_message)?;
+                    // whisper_message: CString
+                    let whisper_message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let whisper_message = String::from_utf8(whisper_message)?;
 
-                CMSG_MESSAGECHATChatType::WHISPER {
-                    target_player,
-                    whisper_message,
+                    CMSG_MESSAGECHATChatType::WHISPER {
+                        target_player,
+                        whisper_message,
+                    }
                 }
-            }
-            ChatType::WHISPER_INFORM => CMSG_MESSAGECHATChatType::WHISPER_INFORM,
-            ChatType::EMOTE => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::WHISPER_INFORM => CMSG_MESSAGECHATChatType::WHISPER_INFORM,
+                ChatType::EMOTE => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::EMOTE {
-                    message,
+                    CMSG_MESSAGECHATChatType::EMOTE {
+                        message,
+                    }
                 }
-            }
-            ChatType::TEXT_EMOTE => CMSG_MESSAGECHATChatType::TEXT_EMOTE,
-            ChatType::SYSTEM => CMSG_MESSAGECHATChatType::SYSTEM,
-            ChatType::MONSTER_SAY => CMSG_MESSAGECHATChatType::MONSTER_SAY,
-            ChatType::MONSTER_YELL => CMSG_MESSAGECHATChatType::MONSTER_YELL,
-            ChatType::MONSTER_EMOTE => CMSG_MESSAGECHATChatType::MONSTER_EMOTE,
-            ChatType::CHANNEL => {
-                // channel: CString
-                let channel = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let channel = String::from_utf8(channel)?;
+                ChatType::TEXT_EMOTE => CMSG_MESSAGECHATChatType::TEXT_EMOTE,
+                ChatType::SYSTEM => CMSG_MESSAGECHATChatType::SYSTEM,
+                ChatType::MONSTER_SAY => CMSG_MESSAGECHATChatType::MONSTER_SAY,
+                ChatType::MONSTER_YELL => CMSG_MESSAGECHATChatType::MONSTER_YELL,
+                ChatType::MONSTER_EMOTE => CMSG_MESSAGECHATChatType::MONSTER_EMOTE,
+                ChatType::CHANNEL => {
+                    // channel: CString
+                    let channel = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let channel = String::from_utf8(channel)?;
 
-                // channel_message: CString
-                let channel_message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let channel_message = String::from_utf8(channel_message)?;
+                    // channel_message: CString
+                    let channel_message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let channel_message = String::from_utf8(channel_message)?;
 
-                CMSG_MESSAGECHATChatType::CHANNEL {
-                    channel,
-                    channel_message,
+                    CMSG_MESSAGECHATChatType::CHANNEL {
+                        channel,
+                        channel_message,
+                    }
                 }
-            }
-            ChatType::CHANNEL_JOIN => CMSG_MESSAGECHATChatType::CHANNEL_JOIN,
-            ChatType::CHANNEL_LEAVE => CMSG_MESSAGECHATChatType::CHANNEL_LEAVE,
-            ChatType::CHANNEL_LIST => CMSG_MESSAGECHATChatType::CHANNEL_LIST,
-            ChatType::CHANNEL_NOTICE => CMSG_MESSAGECHATChatType::CHANNEL_NOTICE,
-            ChatType::CHANNEL_NOTICE_USER => CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER,
-            ChatType::AFK => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::CHANNEL_JOIN => CMSG_MESSAGECHATChatType::CHANNEL_JOIN,
+                ChatType::CHANNEL_LEAVE => CMSG_MESSAGECHATChatType::CHANNEL_LEAVE,
+                ChatType::CHANNEL_LIST => CMSG_MESSAGECHATChatType::CHANNEL_LIST,
+                ChatType::CHANNEL_NOTICE => CMSG_MESSAGECHATChatType::CHANNEL_NOTICE,
+                ChatType::CHANNEL_NOTICE_USER => CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER,
+                ChatType::AFK => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::AFK {
-                    message,
+                    CMSG_MESSAGECHATChatType::AFK {
+                        message,
+                    }
                 }
-            }
-            ChatType::DND => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::DND => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::DND {
-                    message,
+                    CMSG_MESSAGECHATChatType::DND {
+                        message,
+                    }
                 }
-            }
-            ChatType::IGNORED => CMSG_MESSAGECHATChatType::IGNORED,
-            ChatType::SKILL => CMSG_MESSAGECHATChatType::SKILL,
-            ChatType::LOOT => CMSG_MESSAGECHATChatType::LOOT,
-            ChatType::MONSTER_WHISPER => CMSG_MESSAGECHATChatType::MONSTER_WHISPER,
-            ChatType::BG_SYSTEM_NEUTRAL => CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL,
-            ChatType::BG_SYSTEM_ALLIANCE => CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE,
-            ChatType::BG_SYSTEM_HORDE => CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE,
-            ChatType::RAID_LEADER => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::IGNORED => CMSG_MESSAGECHATChatType::IGNORED,
+                ChatType::SKILL => CMSG_MESSAGECHATChatType::SKILL,
+                ChatType::LOOT => CMSG_MESSAGECHATChatType::LOOT,
+                ChatType::MONSTER_WHISPER => CMSG_MESSAGECHATChatType::MONSTER_WHISPER,
+                ChatType::BG_SYSTEM_NEUTRAL => CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL,
+                ChatType::BG_SYSTEM_ALLIANCE => CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE,
+                ChatType::BG_SYSTEM_HORDE => CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE,
+                ChatType::RAID_LEADER => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::RAID_LEADER {
-                    message,
+                    CMSG_MESSAGECHATChatType::RAID_LEADER {
+                        message,
+                    }
                 }
-            }
-            ChatType::RAID_WARNING => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::RAID_WARNING => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::RAID_WARNING {
-                    message,
+                    CMSG_MESSAGECHATChatType::RAID_WARNING {
+                        message,
+                    }
                 }
-            }
-            ChatType::RAID_BOSS_WHISPER => CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER,
-            ChatType::RAID_BOSS_EMOTE => CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE,
-            ChatType::BATTLEGROUND => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::RAID_BOSS_WHISPER => CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER,
+                ChatType::RAID_BOSS_EMOTE => CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE,
+                ChatType::BATTLEGROUND => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::BATTLEGROUND {
-                    message,
+                    CMSG_MESSAGECHATChatType::BATTLEGROUND {
+                        message,
+                    }
                 }
-            }
-            ChatType::BATTLEGROUND_LEADER => {
-                // message: CString
-                let message = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                ChatType::BATTLEGROUND_LEADER => {
+                    // message: CString
+                    let message = crate::util::tokio_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
-                CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
-                    message,
+                    CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
+                        message,
+                    }
                 }
-            }
-        };
+            };
 
-        Ok(Self {
-            chat_type: chat_type_if,
-            language,
+            Ok(Self {
+                chat_type: chat_type_if,
+                language,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // chat_type: ChatType
-        self.chat_type.tokio_write_u32_le(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // chat_type: ChatType
+            self.chat_type.tokio_write_u32_le(w).await?;
 
-        // language: Language
-        self.language.tokio_write(w).await?;
+            // language: Language
+            self.language.tokio_write(w).await?;
 
-        match &self.chat_type {
-            CMSG_MESSAGECHATChatType::SAY {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::PARTY {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::RAID {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::GUILD {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::OFFICER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::YELL {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::WHISPER {
-                target_player,
-                whisper_message,
-            } => {
-                // target_player: CString
-                w.write_all(target_player.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // whisper_message: CString
-                w.write_all(whisper_message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::WHISPER_INFORM => {}
-            CMSG_MESSAGECHATChatType::EMOTE {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::TEXT_EMOTE => {}
-            CMSG_MESSAGECHATChatType::SYSTEM => {}
-            CMSG_MESSAGECHATChatType::MONSTER_SAY => {}
-            CMSG_MESSAGECHATChatType::MONSTER_YELL => {}
-            CMSG_MESSAGECHATChatType::MONSTER_EMOTE => {}
-            CMSG_MESSAGECHATChatType::CHANNEL {
-                channel,
-                channel_message,
-            } => {
-                // channel: CString
-                w.write_all(channel.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // channel_message: CString
-                w.write_all(channel_message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::CHANNEL_JOIN => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_LEAVE => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_LIST => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_NOTICE => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER => {}
-            CMSG_MESSAGECHATChatType::AFK {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::DND {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::IGNORED => {}
-            CMSG_MESSAGECHATChatType::SKILL => {}
-            CMSG_MESSAGECHATChatType::LOOT => {}
-            CMSG_MESSAGECHATChatType::MONSTER_WHISPER => {}
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL => {}
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE => {}
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE => {}
-            CMSG_MESSAGECHATChatType::RAID_LEADER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::RAID_WARNING {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER => {}
-            CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE => {}
-            CMSG_MESSAGECHATChatType::BATTLEGROUND {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-        }
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // chat_type: ChatType
-        let chat_type = ChatType::astd_read_u32_le(r).await?;
-
-        // language: Language
-        let language = Language::astd_read(r).await?;
-
-        let chat_type_if = match chat_type {
-            ChatType::SAY => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
-
+            match &self.chat_type {
                 CMSG_MESSAGECHATChatType::SAY {
                     message,
-                }
-            }
-            ChatType::PARTY => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                }
                 CMSG_MESSAGECHATChatType::PARTY {
                     message,
-                }
-            }
-            ChatType::RAID => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                }
                 CMSG_MESSAGECHATChatType::RAID {
                     message,
-                }
-            }
-            ChatType::GUILD => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                }
                 CMSG_MESSAGECHATChatType::GUILD {
                     message,
-                }
-            }
-            ChatType::OFFICER => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                }
                 CMSG_MESSAGECHATChatType::OFFICER {
                     message,
-                }
-            }
-            ChatType::YELL => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                }
                 CMSG_MESSAGECHATChatType::YELL {
                     message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
                 }
-            }
-            ChatType::WHISPER => {
-                // target_player: CString
-                let target_player = crate::util::astd_read_c_string_to_vec(r).await?;
-                let target_player = String::from_utf8(target_player)?;
-
-                // whisper_message: CString
-                let whisper_message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let whisper_message = String::from_utf8(whisper_message)?;
-
                 CMSG_MESSAGECHATChatType::WHISPER {
                     target_player,
                     whisper_message,
-                }
-            }
-            ChatType::WHISPER_INFORM => CMSG_MESSAGECHATChatType::WHISPER_INFORM,
-            ChatType::EMOTE => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // target_player: CString
+                    w.write_all(target_player.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                    // whisper_message: CString
+                    w.write_all(whisper_message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::WHISPER_INFORM => {}
                 CMSG_MESSAGECHATChatType::EMOTE {
                     message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
                 }
-            }
-            ChatType::TEXT_EMOTE => CMSG_MESSAGECHATChatType::TEXT_EMOTE,
-            ChatType::SYSTEM => CMSG_MESSAGECHATChatType::SYSTEM,
-            ChatType::MONSTER_SAY => CMSG_MESSAGECHATChatType::MONSTER_SAY,
-            ChatType::MONSTER_YELL => CMSG_MESSAGECHATChatType::MONSTER_YELL,
-            ChatType::MONSTER_EMOTE => CMSG_MESSAGECHATChatType::MONSTER_EMOTE,
-            ChatType::CHANNEL => {
-                // channel: CString
-                let channel = crate::util::astd_read_c_string_to_vec(r).await?;
-                let channel = String::from_utf8(channel)?;
-
-                // channel_message: CString
-                let channel_message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let channel_message = String::from_utf8(channel_message)?;
-
+                CMSG_MESSAGECHATChatType::TEXT_EMOTE => {}
+                CMSG_MESSAGECHATChatType::SYSTEM => {}
+                CMSG_MESSAGECHATChatType::MONSTER_SAY => {}
+                CMSG_MESSAGECHATChatType::MONSTER_YELL => {}
+                CMSG_MESSAGECHATChatType::MONSTER_EMOTE => {}
                 CMSG_MESSAGECHATChatType::CHANNEL {
                     channel,
                     channel_message,
-                }
-            }
-            ChatType::CHANNEL_JOIN => CMSG_MESSAGECHATChatType::CHANNEL_JOIN,
-            ChatType::CHANNEL_LEAVE => CMSG_MESSAGECHATChatType::CHANNEL_LEAVE,
-            ChatType::CHANNEL_LIST => CMSG_MESSAGECHATChatType::CHANNEL_LIST,
-            ChatType::CHANNEL_NOTICE => CMSG_MESSAGECHATChatType::CHANNEL_NOTICE,
-            ChatType::CHANNEL_NOTICE_USER => CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER,
-            ChatType::AFK => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // channel: CString
+                    w.write_all(channel.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                    // channel_message: CString
+                    w.write_all(channel_message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::CHANNEL_JOIN => {}
+                CMSG_MESSAGECHATChatType::CHANNEL_LEAVE => {}
+                CMSG_MESSAGECHATChatType::CHANNEL_LIST => {}
+                CMSG_MESSAGECHATChatType::CHANNEL_NOTICE => {}
+                CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER => {}
                 CMSG_MESSAGECHATChatType::AFK {
                     message,
-                }
-            }
-            ChatType::DND => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                }
                 CMSG_MESSAGECHATChatType::DND {
                     message,
-                }
-            }
-            ChatType::IGNORED => CMSG_MESSAGECHATChatType::IGNORED,
-            ChatType::SKILL => CMSG_MESSAGECHATChatType::SKILL,
-            ChatType::LOOT => CMSG_MESSAGECHATChatType::LOOT,
-            ChatType::MONSTER_WHISPER => CMSG_MESSAGECHATChatType::MONSTER_WHISPER,
-            ChatType::BG_SYSTEM_NEUTRAL => CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL,
-            ChatType::BG_SYSTEM_ALLIANCE => CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE,
-            ChatType::BG_SYSTEM_HORDE => CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE,
-            ChatType::RAID_LEADER => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                }
+                CMSG_MESSAGECHATChatType::IGNORED => {}
+                CMSG_MESSAGECHATChatType::SKILL => {}
+                CMSG_MESSAGECHATChatType::LOOT => {}
+                CMSG_MESSAGECHATChatType::MONSTER_WHISPER => {}
+                CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL => {}
+                CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE => {}
+                CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE => {}
                 CMSG_MESSAGECHATChatType::RAID_LEADER {
                     message,
-                }
-            }
-            ChatType::RAID_WARNING => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                }
                 CMSG_MESSAGECHATChatType::RAID_WARNING {
                     message,
-                }
-            }
-            ChatType::RAID_BOSS_WHISPER => CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER,
-            ChatType::RAID_BOSS_EMOTE => CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE,
-            ChatType::BATTLEGROUND => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                }
+                CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER => {}
+                CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE => {}
                 CMSG_MESSAGECHATChatType::BATTLEGROUND {
                     message,
-                }
-            }
-            ChatType::BATTLEGROUND_LEADER => {
-                // message: CString
-                let message = crate::util::astd_read_c_string_to_vec(r).await?;
-                let message = String::from_utf8(message)?;
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
 
+                }
                 CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
                     message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
                 }
             }
-        };
 
-        Ok(Self {
-            chat_type: chat_type_if,
-            language,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // chat_type: ChatType
-        self.chat_type.astd_write_u32_le(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // chat_type: ChatType
+            let chat_type = ChatType::astd_read_u32_le(r).await?;
 
-        // language: Language
-        self.language.astd_write(w).await?;
+            // language: Language
+            let language = Language::astd_read(r).await?;
 
-        match &self.chat_type {
-            CMSG_MESSAGECHATChatType::SAY {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
+            let chat_type_if = match chat_type {
+                ChatType::SAY => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
 
+                    CMSG_MESSAGECHATChatType::SAY {
+                        message,
+                    }
+                }
+                ChatType::PARTY => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::PARTY {
+                        message,
+                    }
+                }
+                ChatType::RAID => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::RAID {
+                        message,
+                    }
+                }
+                ChatType::GUILD => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::GUILD {
+                        message,
+                    }
+                }
+                ChatType::OFFICER => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::OFFICER {
+                        message,
+                    }
+                }
+                ChatType::YELL => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::YELL {
+                        message,
+                    }
+                }
+                ChatType::WHISPER => {
+                    // target_player: CString
+                    let target_player = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let target_player = String::from_utf8(target_player)?;
+
+                    // whisper_message: CString
+                    let whisper_message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let whisper_message = String::from_utf8(whisper_message)?;
+
+                    CMSG_MESSAGECHATChatType::WHISPER {
+                        target_player,
+                        whisper_message,
+                    }
+                }
+                ChatType::WHISPER_INFORM => CMSG_MESSAGECHATChatType::WHISPER_INFORM,
+                ChatType::EMOTE => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::EMOTE {
+                        message,
+                    }
+                }
+                ChatType::TEXT_EMOTE => CMSG_MESSAGECHATChatType::TEXT_EMOTE,
+                ChatType::SYSTEM => CMSG_MESSAGECHATChatType::SYSTEM,
+                ChatType::MONSTER_SAY => CMSG_MESSAGECHATChatType::MONSTER_SAY,
+                ChatType::MONSTER_YELL => CMSG_MESSAGECHATChatType::MONSTER_YELL,
+                ChatType::MONSTER_EMOTE => CMSG_MESSAGECHATChatType::MONSTER_EMOTE,
+                ChatType::CHANNEL => {
+                    // channel: CString
+                    let channel = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let channel = String::from_utf8(channel)?;
+
+                    // channel_message: CString
+                    let channel_message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let channel_message = String::from_utf8(channel_message)?;
+
+                    CMSG_MESSAGECHATChatType::CHANNEL {
+                        channel,
+                        channel_message,
+                    }
+                }
+                ChatType::CHANNEL_JOIN => CMSG_MESSAGECHATChatType::CHANNEL_JOIN,
+                ChatType::CHANNEL_LEAVE => CMSG_MESSAGECHATChatType::CHANNEL_LEAVE,
+                ChatType::CHANNEL_LIST => CMSG_MESSAGECHATChatType::CHANNEL_LIST,
+                ChatType::CHANNEL_NOTICE => CMSG_MESSAGECHATChatType::CHANNEL_NOTICE,
+                ChatType::CHANNEL_NOTICE_USER => CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER,
+                ChatType::AFK => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::AFK {
+                        message,
+                    }
+                }
+                ChatType::DND => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::DND {
+                        message,
+                    }
+                }
+                ChatType::IGNORED => CMSG_MESSAGECHATChatType::IGNORED,
+                ChatType::SKILL => CMSG_MESSAGECHATChatType::SKILL,
+                ChatType::LOOT => CMSG_MESSAGECHATChatType::LOOT,
+                ChatType::MONSTER_WHISPER => CMSG_MESSAGECHATChatType::MONSTER_WHISPER,
+                ChatType::BG_SYSTEM_NEUTRAL => CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL,
+                ChatType::BG_SYSTEM_ALLIANCE => CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE,
+                ChatType::BG_SYSTEM_HORDE => CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE,
+                ChatType::RAID_LEADER => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::RAID_LEADER {
+                        message,
+                    }
+                }
+                ChatType::RAID_WARNING => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::RAID_WARNING {
+                        message,
+                    }
+                }
+                ChatType::RAID_BOSS_WHISPER => CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER,
+                ChatType::RAID_BOSS_EMOTE => CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE,
+                ChatType::BATTLEGROUND => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::BATTLEGROUND {
+                        message,
+                    }
+                }
+                ChatType::BATTLEGROUND_LEADER => {
+                    // message: CString
+                    let message = crate::util::astd_read_c_string_to_vec(r).await?;
+                    let message = String::from_utf8(message)?;
+
+                    CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
+                        message,
+                    }
+                }
+            };
+
+            Ok(Self {
+                chat_type: chat_type_if,
+                language,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // chat_type: ChatType
+            self.chat_type.astd_write_u32_le(w).await?;
+
+            // language: Language
+            self.language.astd_write(w).await?;
+
+            match &self.chat_type {
+                CMSG_MESSAGECHATChatType::SAY {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::PARTY {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::RAID {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::GUILD {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::OFFICER {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::YELL {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::WHISPER {
+                    target_player,
+                    whisper_message,
+                } => {
+                    // target_player: CString
+                    w.write_all(target_player.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                    // whisper_message: CString
+                    w.write_all(whisper_message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::WHISPER_INFORM => {}
+                CMSG_MESSAGECHATChatType::EMOTE {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::TEXT_EMOTE => {}
+                CMSG_MESSAGECHATChatType::SYSTEM => {}
+                CMSG_MESSAGECHATChatType::MONSTER_SAY => {}
+                CMSG_MESSAGECHATChatType::MONSTER_YELL => {}
+                CMSG_MESSAGECHATChatType::MONSTER_EMOTE => {}
+                CMSG_MESSAGECHATChatType::CHANNEL {
+                    channel,
+                    channel_message,
+                } => {
+                    // channel: CString
+                    w.write_all(channel.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                    // channel_message: CString
+                    w.write_all(channel_message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::CHANNEL_JOIN => {}
+                CMSG_MESSAGECHATChatType::CHANNEL_LEAVE => {}
+                CMSG_MESSAGECHATChatType::CHANNEL_LIST => {}
+                CMSG_MESSAGECHATChatType::CHANNEL_NOTICE => {}
+                CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER => {}
+                CMSG_MESSAGECHATChatType::AFK {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::DND {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::IGNORED => {}
+                CMSG_MESSAGECHATChatType::SKILL => {}
+                CMSG_MESSAGECHATChatType::LOOT => {}
+                CMSG_MESSAGECHATChatType::MONSTER_WHISPER => {}
+                CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL => {}
+                CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE => {}
+                CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE => {}
+                CMSG_MESSAGECHATChatType::RAID_LEADER {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::RAID_WARNING {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER => {}
+                CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE => {}
+                CMSG_MESSAGECHATChatType::BATTLEGROUND {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
+                CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
+                    message,
+                } => {
+                    // message: CString
+                    w.write_all(message.as_bytes()).await?;
+                    // Null terminator
+                    w.write_all(&[0]).await?;
+
+                }
             }
-            CMSG_MESSAGECHATChatType::PARTY {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
 
-            }
-            CMSG_MESSAGECHATChatType::RAID {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::GUILD {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::OFFICER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::YELL {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::WHISPER {
-                target_player,
-                whisper_message,
-            } => {
-                // target_player: CString
-                w.write_all(target_player.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // whisper_message: CString
-                w.write_all(whisper_message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::WHISPER_INFORM => {}
-            CMSG_MESSAGECHATChatType::EMOTE {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::TEXT_EMOTE => {}
-            CMSG_MESSAGECHATChatType::SYSTEM => {}
-            CMSG_MESSAGECHATChatType::MONSTER_SAY => {}
-            CMSG_MESSAGECHATChatType::MONSTER_YELL => {}
-            CMSG_MESSAGECHATChatType::MONSTER_EMOTE => {}
-            CMSG_MESSAGECHATChatType::CHANNEL {
-                channel,
-                channel_message,
-            } => {
-                // channel: CString
-                w.write_all(channel.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // channel_message: CString
-                w.write_all(channel_message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::CHANNEL_JOIN => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_LEAVE => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_LIST => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_NOTICE => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER => {}
-            CMSG_MESSAGECHATChatType::AFK {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::DND {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::IGNORED => {}
-            CMSG_MESSAGECHATChatType::SKILL => {}
-            CMSG_MESSAGECHATChatType::LOOT => {}
-            CMSG_MESSAGECHATChatType::MONSTER_WHISPER => {}
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL => {}
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE => {}
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE => {}
-            CMSG_MESSAGECHATChatType::RAID_LEADER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::RAID_WARNING {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER => {}
-            CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE => {}
-            CMSG_MESSAGECHATChatType::BATTLEGROUND {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-            CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-        }
-
-        Ok(())
+            Ok(())
+        })
     }
 
 }

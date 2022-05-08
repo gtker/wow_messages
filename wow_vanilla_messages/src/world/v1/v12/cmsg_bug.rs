@@ -20,7 +20,6 @@ pub struct CMSG_BUG {
 
 impl ClientMessageWrite for CMSG_BUG {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_BUG {
     const OPCODE: u16 = 0x01ca;
 
@@ -82,108 +81,154 @@ impl MessageBody for CMSG_BUG {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // suggestion: u32
-        let suggestion = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // suggestion: u32
+            let suggestion = crate::util::tokio_read_u32_le(r).await?;
 
-        // content_length: u32
-        let content_length = crate::util::tokio_read_u32_le(r).await?;
+            // content_length: u32
+            let content_length = crate::util::tokio_read_u32_le(r).await?;
 
-        // content: CString
-        let content = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let content = String::from_utf8(content)?;
+            // content: CString
+            let content = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let content = String::from_utf8(content)?;
 
-        // type_length: u32
-        let type_length = crate::util::tokio_read_u32_le(r).await?;
+            // type_length: u32
+            let type_length = crate::util::tokio_read_u32_le(r).await?;
 
-        // bug_type: CString
-        let bug_type = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let bug_type = String::from_utf8(bug_type)?;
+            // bug_type: CString
+            let bug_type = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let bug_type = String::from_utf8(bug_type)?;
 
-        Ok(Self {
-            suggestion,
-            content_length,
-            content,
-            type_length,
-            bug_type,
+            Ok(Self {
+                suggestion,
+                content_length,
+                content,
+                type_length,
+                bug_type,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // suggestion: u32
-        w.write_all(&self.suggestion.to_le_bytes()).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // suggestion: u32
+            w.write_all(&self.suggestion.to_le_bytes()).await?;
 
-        // content_length: u32
-        w.write_all(&self.content_length.to_le_bytes()).await?;
+            // content_length: u32
+            w.write_all(&self.content_length.to_le_bytes()).await?;
 
-        // content: CString
-        w.write_all(self.content.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // content: CString
+            w.write_all(self.content.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // type_length: u32
-        w.write_all(&self.type_length.to_le_bytes()).await?;
+            // type_length: u32
+            w.write_all(&self.type_length.to_le_bytes()).await?;
 
-        // bug_type: CString
-        w.write_all(self.bug_type.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // bug_type: CString
+            w.write_all(self.bug_type.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // suggestion: u32
-        let suggestion = crate::util::astd_read_u32_le(r).await?;
-
-        // content_length: u32
-        let content_length = crate::util::astd_read_u32_le(r).await?;
-
-        // content: CString
-        let content = crate::util::astd_read_c_string_to_vec(r).await?;
-        let content = String::from_utf8(content)?;
-
-        // type_length: u32
-        let type_length = crate::util::astd_read_u32_le(r).await?;
-
-        // bug_type: CString
-        let bug_type = crate::util::astd_read_c_string_to_vec(r).await?;
-        let bug_type = String::from_utf8(bug_type)?;
-
-        Ok(Self {
-            suggestion,
-            content_length,
-            content,
-            type_length,
-            bug_type,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // suggestion: u32
-        w.write_all(&self.suggestion.to_le_bytes()).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // suggestion: u32
+            let suggestion = crate::util::astd_read_u32_le(r).await?;
 
-        // content_length: u32
-        w.write_all(&self.content_length.to_le_bytes()).await?;
+            // content_length: u32
+            let content_length = crate::util::astd_read_u32_le(r).await?;
 
-        // content: CString
-        w.write_all(self.content.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // content: CString
+            let content = crate::util::astd_read_c_string_to_vec(r).await?;
+            let content = String::from_utf8(content)?;
 
-        // type_length: u32
-        w.write_all(&self.type_length.to_le_bytes()).await?;
+            // type_length: u32
+            let type_length = crate::util::astd_read_u32_le(r).await?;
 
-        // bug_type: CString
-        w.write_all(self.bug_type.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // bug_type: CString
+            let bug_type = crate::util::astd_read_c_string_to_vec(r).await?;
+            let bug_type = String::from_utf8(bug_type)?;
 
-        Ok(())
+            Ok(Self {
+                suggestion,
+                content_length,
+                content,
+                type_length,
+                bug_type,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // suggestion: u32
+            w.write_all(&self.suggestion.to_le_bytes()).await?;
+
+            // content_length: u32
+            w.write_all(&self.content_length.to_le_bytes()).await?;
+
+            // content: CString
+            w.write_all(self.content.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // type_length: u32
+            w.write_all(&self.type_length.to_le_bytes()).await?;
+
+            // bug_type: CString
+            w.write_all(self.bug_type.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            Ok(())
+        })
     }
 
 }

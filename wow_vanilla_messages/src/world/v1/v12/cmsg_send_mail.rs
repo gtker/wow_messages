@@ -27,7 +27,6 @@ pub struct CMSG_SEND_MAIL {
 
 impl ClientMessageWrite for CMSG_SEND_MAIL {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for CMSG_SEND_MAIL {
     const OPCODE: u16 = 0x0238;
 
@@ -134,198 +133,244 @@ impl MessageBody for CMSG_SEND_MAIL {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // mailbox: Guid
-        let mailbox = Guid::tokio_read(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // mailbox: Guid
+            let mailbox = Guid::tokio_read(r).await?;
 
-        // receiver: CString
-        let receiver = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let receiver = String::from_utf8(receiver)?;
+            // receiver: CString
+            let receiver = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let receiver = String::from_utf8(receiver)?;
 
-        // subject: CString
-        let subject = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let subject = String::from_utf8(subject)?;
+            // subject: CString
+            let subject = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let subject = String::from_utf8(subject)?;
 
-        // body: CString
-        let body = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let body = String::from_utf8(body)?;
+            // body: CString
+            let body = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let body = String::from_utf8(body)?;
 
-        // unknown1: u32
-        let unknown1 = crate::util::tokio_read_u32_le(r).await?;
+            // unknown1: u32
+            let unknown1 = crate::util::tokio_read_u32_le(r).await?;
 
-        // unknown2: u32
-        let unknown2 = crate::util::tokio_read_u32_le(r).await?;
+            // unknown2: u32
+            let unknown2 = crate::util::tokio_read_u32_le(r).await?;
 
-        // item: Guid
-        let item = Guid::tokio_read(r).await?;
+            // item: Guid
+            let item = Guid::tokio_read(r).await?;
 
-        // money: u32
-        let money = crate::util::tokio_read_u32_le(r).await?;
+            // money: u32
+            let money = crate::util::tokio_read_u32_le(r).await?;
 
-        // cash_on_delivery_amount: u32
-        let cash_on_delivery_amount = crate::util::tokio_read_u32_le(r).await?;
+            // cash_on_delivery_amount: u32
+            let cash_on_delivery_amount = crate::util::tokio_read_u32_le(r).await?;
 
-        // unknown3: u32
-        let unknown3 = crate::util::tokio_read_u32_le(r).await?;
+            // unknown3: u32
+            let unknown3 = crate::util::tokio_read_u32_le(r).await?;
 
-        // unknown4: u32
-        let unknown4 = crate::util::tokio_read_u32_le(r).await?;
+            // unknown4: u32
+            let unknown4 = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            mailbox,
-            receiver,
-            subject,
-            body,
-            unknown1,
-            unknown2,
-            item,
-            money,
-            cash_on_delivery_amount,
-            unknown3,
-            unknown4,
+            Ok(Self {
+                mailbox,
+                receiver,
+                subject,
+                body,
+                unknown1,
+                unknown2,
+                item,
+                money,
+                cash_on_delivery_amount,
+                unknown3,
+                unknown4,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // mailbox: Guid
-        self.mailbox.tokio_write(w).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // mailbox: Guid
+            self.mailbox.tokio_write(w).await?;
 
-        // receiver: CString
-        w.write_all(self.receiver.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // receiver: CString
+            w.write_all(self.receiver.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // subject: CString
-        w.write_all(self.subject.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // subject: CString
+            w.write_all(self.subject.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // body: CString
-        w.write_all(self.body.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // body: CString
+            w.write_all(self.body.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+            // unknown1: u32
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
 
-        // unknown2: u32
-        w.write_all(&self.unknown2.to_le_bytes()).await?;
+            // unknown2: u32
+            w.write_all(&self.unknown2.to_le_bytes()).await?;
 
-        // item: Guid
-        self.item.tokio_write(w).await?;
+            // item: Guid
+            self.item.tokio_write(w).await?;
 
-        // money: u32
-        w.write_all(&self.money.to_le_bytes()).await?;
+            // money: u32
+            w.write_all(&self.money.to_le_bytes()).await?;
 
-        // cash_on_delivery_amount: u32
-        w.write_all(&self.cash_on_delivery_amount.to_le_bytes()).await?;
+            // cash_on_delivery_amount: u32
+            w.write_all(&self.cash_on_delivery_amount.to_le_bytes()).await?;
 
-        // unknown3: u32
-        w.write_all(&self.unknown3.to_le_bytes()).await?;
+            // unknown3: u32
+            w.write_all(&self.unknown3.to_le_bytes()).await?;
 
-        // unknown4: u32
-        w.write_all(&self.unknown4.to_le_bytes()).await?;
+            // unknown4: u32
+            w.write_all(&self.unknown4.to_le_bytes()).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // mailbox: Guid
-        let mailbox = Guid::astd_read(r).await?;
-
-        // receiver: CString
-        let receiver = crate::util::astd_read_c_string_to_vec(r).await?;
-        let receiver = String::from_utf8(receiver)?;
-
-        // subject: CString
-        let subject = crate::util::astd_read_c_string_to_vec(r).await?;
-        let subject = String::from_utf8(subject)?;
-
-        // body: CString
-        let body = crate::util::astd_read_c_string_to_vec(r).await?;
-        let body = String::from_utf8(body)?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::astd_read_u32_le(r).await?;
-
-        // unknown2: u32
-        let unknown2 = crate::util::astd_read_u32_le(r).await?;
-
-        // item: Guid
-        let item = Guid::astd_read(r).await?;
-
-        // money: u32
-        let money = crate::util::astd_read_u32_le(r).await?;
-
-        // cash_on_delivery_amount: u32
-        let cash_on_delivery_amount = crate::util::astd_read_u32_le(r).await?;
-
-        // unknown3: u32
-        let unknown3 = crate::util::astd_read_u32_le(r).await?;
-
-        // unknown4: u32
-        let unknown4 = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            mailbox,
-            receiver,
-            subject,
-            body,
-            unknown1,
-            unknown2,
-            item,
-            money,
-            cash_on_delivery_amount,
-            unknown3,
-            unknown4,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // mailbox: Guid
-        self.mailbox.astd_write(w).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // mailbox: Guid
+            let mailbox = Guid::astd_read(r).await?;
 
-        // receiver: CString
-        w.write_all(self.receiver.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // receiver: CString
+            let receiver = crate::util::astd_read_c_string_to_vec(r).await?;
+            let receiver = String::from_utf8(receiver)?;
 
-        // subject: CString
-        w.write_all(self.subject.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // subject: CString
+            let subject = crate::util::astd_read_c_string_to_vec(r).await?;
+            let subject = String::from_utf8(subject)?;
 
-        // body: CString
-        w.write_all(self.body.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
+            // body: CString
+            let body = crate::util::astd_read_c_string_to_vec(r).await?;
+            let body = String::from_utf8(body)?;
 
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
+            // unknown1: u32
+            let unknown1 = crate::util::astd_read_u32_le(r).await?;
 
-        // unknown2: u32
-        w.write_all(&self.unknown2.to_le_bytes()).await?;
+            // unknown2: u32
+            let unknown2 = crate::util::astd_read_u32_le(r).await?;
 
-        // item: Guid
-        self.item.astd_write(w).await?;
+            // item: Guid
+            let item = Guid::astd_read(r).await?;
 
-        // money: u32
-        w.write_all(&self.money.to_le_bytes()).await?;
+            // money: u32
+            let money = crate::util::astd_read_u32_le(r).await?;
 
-        // cash_on_delivery_amount: u32
-        w.write_all(&self.cash_on_delivery_amount.to_le_bytes()).await?;
+            // cash_on_delivery_amount: u32
+            let cash_on_delivery_amount = crate::util::astd_read_u32_le(r).await?;
 
-        // unknown3: u32
-        w.write_all(&self.unknown3.to_le_bytes()).await?;
+            // unknown3: u32
+            let unknown3 = crate::util::astd_read_u32_le(r).await?;
 
-        // unknown4: u32
-        w.write_all(&self.unknown4.to_le_bytes()).await?;
+            // unknown4: u32
+            let unknown4 = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(())
+            Ok(Self {
+                mailbox,
+                receiver,
+                subject,
+                body,
+                unknown1,
+                unknown2,
+                item,
+                money,
+                cash_on_delivery_amount,
+                unknown3,
+                unknown4,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // mailbox: Guid
+            self.mailbox.astd_write(w).await?;
+
+            // receiver: CString
+            w.write_all(self.receiver.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // subject: CString
+            w.write_all(self.subject.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // body: CString
+            w.write_all(self.body.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+            // unknown1: u32
+            w.write_all(&self.unknown1.to_le_bytes()).await?;
+
+            // unknown2: u32
+            w.write_all(&self.unknown2.to_le_bytes()).await?;
+
+            // item: Guid
+            self.item.astd_write(w).await?;
+
+            // money: u32
+            w.write_all(&self.money.to_le_bytes()).await?;
+
+            // cash_on_delivery_amount: u32
+            w.write_all(&self.cash_on_delivery_amount.to_le_bytes()).await?;
+
+            // unknown3: u32
+            w.write_all(&self.unknown3.to_le_bytes()).await?;
+
+            // unknown4: u32
+            w.write_all(&self.unknown4.to_le_bytes()).await?;
+
+            Ok(())
+        })
     }
 
 }

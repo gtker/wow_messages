@@ -28,7 +28,6 @@ pub struct SMSG_LEVELUP_INFO {
 
 impl ServerMessageWrite for SMSG_LEVELUP_INFO {}
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl MessageBody for SMSG_LEVELUP_INFO {
     const OPCODE: u16 = 0x01d4;
 
@@ -133,194 +132,240 @@ impl MessageBody for SMSG_LEVELUP_INFO {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_body<R: AsyncReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // new_level: u32
-        let new_level = crate::util::tokio_read_u32_le(r).await?;
+    fn tokio_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // new_level: u32
+            let new_level = crate::util::tokio_read_u32_le(r).await?;
 
-        // health: u32
-        let health = crate::util::tokio_read_u32_le(r).await?;
+            // health: u32
+            let health = crate::util::tokio_read_u32_le(r).await?;
 
-        // mana: u32
-        let mana = crate::util::tokio_read_u32_le(r).await?;
+            // mana: u32
+            let mana = crate::util::tokio_read_u32_le(r).await?;
 
-        // rage: u32
-        let rage = crate::util::tokio_read_u32_le(r).await?;
+            // rage: u32
+            let rage = crate::util::tokio_read_u32_le(r).await?;
 
-        // focus: u32
-        let focus = crate::util::tokio_read_u32_le(r).await?;
+            // focus: u32
+            let focus = crate::util::tokio_read_u32_le(r).await?;
 
-        // energy: u32
-        let energy = crate::util::tokio_read_u32_le(r).await?;
+            // energy: u32
+            let energy = crate::util::tokio_read_u32_le(r).await?;
 
-        // happiness: u32
-        let happiness = crate::util::tokio_read_u32_le(r).await?;
+            // happiness: u32
+            let happiness = crate::util::tokio_read_u32_le(r).await?;
 
-        // strength: u32
-        let strength = crate::util::tokio_read_u32_le(r).await?;
+            // strength: u32
+            let strength = crate::util::tokio_read_u32_le(r).await?;
 
-        // agility: u32
-        let agility = crate::util::tokio_read_u32_le(r).await?;
+            // agility: u32
+            let agility = crate::util::tokio_read_u32_le(r).await?;
 
-        // stamina: u32
-        let stamina = crate::util::tokio_read_u32_le(r).await?;
+            // stamina: u32
+            let stamina = crate::util::tokio_read_u32_le(r).await?;
 
-        // intellect: u32
-        let intellect = crate::util::tokio_read_u32_le(r).await?;
+            // intellect: u32
+            let intellect = crate::util::tokio_read_u32_le(r).await?;
 
-        // spirit: u32
-        let spirit = crate::util::tokio_read_u32_le(r).await?;
+            // spirit: u32
+            let spirit = crate::util::tokio_read_u32_le(r).await?;
 
-        Ok(Self {
-            new_level,
-            health,
-            mana,
-            rage,
-            focus,
-            energy,
-            happiness,
-            strength,
-            agility,
-            stamina,
-            intellect,
-            spirit,
+            Ok(Self {
+                new_level,
+                health,
+                mana,
+                rage,
+                focus,
+                energy,
+                happiness,
+                strength,
+                agility,
+                stamina,
+                intellect,
+                spirit,
+            })
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_body<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // new_level: u32
-        w.write_all(&self.new_level.to_le_bytes()).await?;
+    fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // new_level: u32
+            w.write_all(&self.new_level.to_le_bytes()).await?;
 
-        // health: u32
-        w.write_all(&self.health.to_le_bytes()).await?;
+            // health: u32
+            w.write_all(&self.health.to_le_bytes()).await?;
 
-        // mana: u32
-        w.write_all(&self.mana.to_le_bytes()).await?;
+            // mana: u32
+            w.write_all(&self.mana.to_le_bytes()).await?;
 
-        // rage: u32
-        w.write_all(&self.rage.to_le_bytes()).await?;
+            // rage: u32
+            w.write_all(&self.rage.to_le_bytes()).await?;
 
-        // focus: u32
-        w.write_all(&self.focus.to_le_bytes()).await?;
+            // focus: u32
+            w.write_all(&self.focus.to_le_bytes()).await?;
 
-        // energy: u32
-        w.write_all(&self.energy.to_le_bytes()).await?;
+            // energy: u32
+            w.write_all(&self.energy.to_le_bytes()).await?;
 
-        // happiness: u32
-        w.write_all(&self.happiness.to_le_bytes()).await?;
+            // happiness: u32
+            w.write_all(&self.happiness.to_le_bytes()).await?;
 
-        // strength: u32
-        w.write_all(&self.strength.to_le_bytes()).await?;
+            // strength: u32
+            w.write_all(&self.strength.to_le_bytes()).await?;
 
-        // agility: u32
-        w.write_all(&self.agility.to_le_bytes()).await?;
+            // agility: u32
+            w.write_all(&self.agility.to_le_bytes()).await?;
 
-        // stamina: u32
-        w.write_all(&self.stamina.to_le_bytes()).await?;
+            // stamina: u32
+            w.write_all(&self.stamina.to_le_bytes()).await?;
 
-        // intellect: u32
-        w.write_all(&self.intellect.to_le_bytes()).await?;
+            // intellect: u32
+            w.write_all(&self.intellect.to_le_bytes()).await?;
 
-        // spirit: u32
-        w.write_all(&self.spirit.to_le_bytes()).await?;
+            // spirit: u32
+            w.write_all(&self.spirit.to_le_bytes()).await?;
 
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    async fn astd_read_body<R: ReadExt + Unpin + Send>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
-        // new_level: u32
-        let new_level = crate::util::astd_read_u32_le(r).await?;
-
-        // health: u32
-        let health = crate::util::astd_read_u32_le(r).await?;
-
-        // mana: u32
-        let mana = crate::util::astd_read_u32_le(r).await?;
-
-        // rage: u32
-        let rage = crate::util::astd_read_u32_le(r).await?;
-
-        // focus: u32
-        let focus = crate::util::astd_read_u32_le(r).await?;
-
-        // energy: u32
-        let energy = crate::util::astd_read_u32_le(r).await?;
-
-        // happiness: u32
-        let happiness = crate::util::astd_read_u32_le(r).await?;
-
-        // strength: u32
-        let strength = crate::util::astd_read_u32_le(r).await?;
-
-        // agility: u32
-        let agility = crate::util::astd_read_u32_le(r).await?;
-
-        // stamina: u32
-        let stamina = crate::util::astd_read_u32_le(r).await?;
-
-        // intellect: u32
-        let intellect = crate::util::astd_read_u32_le(r).await?;
-
-        // spirit: u32
-        let spirit = crate::util::astd_read_u32_le(r).await?;
-
-        Ok(Self {
-            new_level,
-            health,
-            mana,
-            rage,
-            focus,
-            energy,
-            happiness,
-            strength,
-            agility,
-            stamina,
-            intellect,
-            spirit,
+            Ok(())
         })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_body<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // new_level: u32
-        w.write_all(&self.new_level.to_le_bytes()).await?;
+    fn astd_read_body<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+        body_size: u32,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // new_level: u32
+            let new_level = crate::util::astd_read_u32_le(r).await?;
 
-        // health: u32
-        w.write_all(&self.health.to_le_bytes()).await?;
+            // health: u32
+            let health = crate::util::astd_read_u32_le(r).await?;
 
-        // mana: u32
-        w.write_all(&self.mana.to_le_bytes()).await?;
+            // mana: u32
+            let mana = crate::util::astd_read_u32_le(r).await?;
 
-        // rage: u32
-        w.write_all(&self.rage.to_le_bytes()).await?;
+            // rage: u32
+            let rage = crate::util::astd_read_u32_le(r).await?;
 
-        // focus: u32
-        w.write_all(&self.focus.to_le_bytes()).await?;
+            // focus: u32
+            let focus = crate::util::astd_read_u32_le(r).await?;
 
-        // energy: u32
-        w.write_all(&self.energy.to_le_bytes()).await?;
+            // energy: u32
+            let energy = crate::util::astd_read_u32_le(r).await?;
 
-        // happiness: u32
-        w.write_all(&self.happiness.to_le_bytes()).await?;
+            // happiness: u32
+            let happiness = crate::util::astd_read_u32_le(r).await?;
 
-        // strength: u32
-        w.write_all(&self.strength.to_le_bytes()).await?;
+            // strength: u32
+            let strength = crate::util::astd_read_u32_le(r).await?;
 
-        // agility: u32
-        w.write_all(&self.agility.to_le_bytes()).await?;
+            // agility: u32
+            let agility = crate::util::astd_read_u32_le(r).await?;
 
-        // stamina: u32
-        w.write_all(&self.stamina.to_le_bytes()).await?;
+            // stamina: u32
+            let stamina = crate::util::astd_read_u32_le(r).await?;
 
-        // intellect: u32
-        w.write_all(&self.intellect.to_le_bytes()).await?;
+            // intellect: u32
+            let intellect = crate::util::astd_read_u32_le(r).await?;
 
-        // spirit: u32
-        w.write_all(&self.spirit.to_le_bytes()).await?;
+            // spirit: u32
+            let spirit = crate::util::astd_read_u32_le(r).await?;
 
-        Ok(())
+            Ok(Self {
+                new_level,
+                health,
+                mana,
+                rage,
+                focus,
+                energy,
+                happiness,
+                strength,
+                agility,
+                stamina,
+                intellect,
+                spirit,
+            })
+        })
+    }
+
+    fn astd_write_body<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // new_level: u32
+            w.write_all(&self.new_level.to_le_bytes()).await?;
+
+            // health: u32
+            w.write_all(&self.health.to_le_bytes()).await?;
+
+            // mana: u32
+            w.write_all(&self.mana.to_le_bytes()).await?;
+
+            // rage: u32
+            w.write_all(&self.rage.to_le_bytes()).await?;
+
+            // focus: u32
+            w.write_all(&self.focus.to_le_bytes()).await?;
+
+            // energy: u32
+            w.write_all(&self.energy.to_le_bytes()).await?;
+
+            // happiness: u32
+            w.write_all(&self.happiness.to_le_bytes()).await?;
+
+            // strength: u32
+            w.write_all(&self.strength.to_le_bytes()).await?;
+
+            // agility: u32
+            w.write_all(&self.agility.to_le_bytes()).await?;
+
+            // stamina: u32
+            w.write_all(&self.stamina.to_le_bytes()).await?;
+
+            // intellect: u32
+            w.write_all(&self.intellect.to_le_bytes()).await?;
+
+            // spirit: u32
+            w.write_all(&self.spirit.to_le_bytes()).await?;
+
+            Ok(())
+        })
     }
 
 }
