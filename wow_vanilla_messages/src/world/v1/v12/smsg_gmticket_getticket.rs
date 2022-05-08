@@ -374,13 +374,13 @@ impl From<GmTicketTypeError> for SMSG_GMTICKET_GETTICKETError {
 pub enum SMSG_GMTICKET_GETTICKETGmTicketStatus {
     DBERROR,
     HASTEXT {
-        text: String,
-        ticket_type: GmTicketType,
-        days_since_ticket_creation: f32,
-        days_since_oldest_ticket_creation: f32,
         days_since_last_updated: f32,
+        days_since_oldest_ticket_creation: f32,
+        days_since_ticket_creation: f32,
         escalation_status: GmTicketEscalationStatus,
         read_by_gm: u8,
+        text: String,
+        ticket_type: GmTicketType,
     },
     DEFAULT,
 }

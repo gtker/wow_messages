@@ -317,8 +317,8 @@ impl From<LoginResultError> for CMD_AUTH_LOGON_PROOF_ServerError {
 #[derive(Debug, PartialEq, Clone)]
 pub enum CMD_AUTH_LOGON_PROOF_ServerLoginResult {
     SUCCESS {
-        server_proof: [u8; 20],
         hardware_survey_id: u32,
+        server_proof: [u8; 20],
     },
     FAIL_UNKNOWN0,
     FAIL_UNKNOWN1,

@@ -1324,8 +1324,8 @@ pub enum SMSG_CAST_RESULTCastFailureReason {
     EQUIPPED_ITEM,
     EQUIPPED_ITEM_CLASS {
         equipped_item_class: u32,
-        equipped_item_subclass_mask: u32,
         equipped_item_inventory_type_mask: u32,
+        equipped_item_subclass_mask: u32,
     },
     EQUIPPED_ITEM_CLASS_MAINHAND,
     EQUIPPED_ITEM_CLASS_OFFHAND,

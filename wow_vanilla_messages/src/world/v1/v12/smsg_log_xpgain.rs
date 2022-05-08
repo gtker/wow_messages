@@ -268,8 +268,8 @@ impl From<ExperienceAwardTypeError> for SMSG_LOG_XPGAINError {
 pub enum SMSG_LOG_XPGAINExperienceAwardType {
     KILL,
     NON_KILL {
-        experience_without_rested: u32,
         exp_group_bonus: f32,
+        experience_without_rested: u32,
     },
 }
 

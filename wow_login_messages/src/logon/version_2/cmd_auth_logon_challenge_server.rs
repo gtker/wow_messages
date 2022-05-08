@@ -501,11 +501,11 @@ impl From<LoginResultError> for CMD_AUTH_LOGON_CHALLENGE_ServerError {
 #[derive(Debug, PartialEq, Clone)]
 pub enum CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     SUCCESS {
-        server_public_key: [u8; 32],
+        crc_salt: [u8; 16],
         generator: Vec<u8>,
         large_safe_prime: Vec<u8>,
         salt: [u8; 32],
-        crc_salt: [u8; 16],
+        server_public_key: [u8; 32],
     },
     FAIL_UNKNOWN0,
     FAIL_UNKNOWN1,

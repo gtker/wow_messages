@@ -559,23 +559,23 @@ pub enum FriendFriendStatus {
     OFFLINE,
     ONLINE {
         area: Area,
-        level: u32,
         class: Class,
+        level: u32,
     },
     AFK {
         area: Area,
-        level: u32,
         class: Class,
+        level: u32,
     },
     UNKNOWN3 {
         area: Area,
-        level: u32,
         class: Class,
+        level: u32,
     },
     DND {
         area: Area,
-        level: u32,
         class: Class,
+        level: u32,
     },
 }
 

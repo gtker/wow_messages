@@ -519,8 +519,8 @@ pub enum SMSG_TRADE_STATUSTradeStatus {
     WRONG_FACTION,
     CLOSE_WINDOW {
         inventory_result: InventoryResult,
-        target_error: u8,
         item_limit_category_id: u32,
+        target_error: u8,
     },
     UNKNOWN_13,
     IGNORE_YOU,

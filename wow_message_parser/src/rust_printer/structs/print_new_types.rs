@@ -19,7 +19,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
             DefinerType::Enum => {
                 let rd = e.rust_object().get_rust_definer(ce.name());
 
-                print_new_enum_declaration(s, ce);
+                print_new_enum_declaration(s, &rd);
 
                 print_from_new_enum_to_old(s, ce);
 
@@ -678,35 +678,24 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
     }
 }
 
-fn print_new_enum_declaration(s: &mut Writer, ce: &ComplexEnum) {
+fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner) {
     s.wln("#[derive(Debug, PartialEq, Clone)]");
-    s.new_enum("pub", ce.name(), |s| {
-        for f in ce.fields() {
-            s.wln(format!(
-                "{field_name}{extra}",
-                field_name = f.name(),
-                extra = match f.is_simple_or_subfields_const() {
-                    true => ",",
-                    false => " {",
-                }
-            ));
+    s.new_enum("pub", rd.ty_name(), |s| {
+        for enumerator in rd.enumerators() {
+            s.w(format!("{}", enumerator.name()));
 
-            if f.is_simple_or_subfields_const() {
+            if !enumerator.has_members_in_struct() {
+                s.wln_no_indent(",");
                 continue;
-            } else {
-                s.inc_indent();
-                for sf in f.subfields() {
-                    if sf.used_as_size_in().is_some() {
-                        continue;
-                    }
-                    s.wln(format!(
-                        "{name}: {type_name},",
-                        name = sf.name(),
-                        type_name = sf.ty().rust_str(),
-                    ));
-                }
-                s.closing_curly_with(",");
             }
+
+            s.wln_no_indent(" {");
+            s.inc_indent();
+
+            for m in enumerator.members_in_struct() {
+                s.wln(format!("{name}: {ty},", name = m.name(), ty = m.ty()));
+            }
+            s.closing_curly_with(",")
         }
     });
 }

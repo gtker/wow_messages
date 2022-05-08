@@ -953,9 +953,9 @@ impl From<LoginResultError> for CMD_AUTH_LOGON_PROOF_ServerError {
 #[derive(Debug, PartialEq, Clone)]
 pub enum CMD_AUTH_LOGON_PROOF_ServerLoginResult {
     SUCCESS {
-        server_proof: [u8; 20],
         account_flag: AccountFlag,
         hardware_survey_id: u32,
+        server_proof: [u8; 20],
         unknown_flags: u16,
     },
     FAIL_UNKNOWN0,

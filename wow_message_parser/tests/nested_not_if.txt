@@ -1309,32 +1309,32 @@ impl MaximumPossibleSized for NestedNotIfNestedEnum {
 pub enum NestedNotIfTEnum {
     ZERO,
     ONE {
-        not_zero: u8,
         e: NestedNotIfNestedEnum,
+        not_zero: u8,
     },
     TWO {
-        not_zero: u8,
         e: NestedNotIfNestedEnum,
+        not_zero: u8,
     },
     THREE {
-        not_zero: u8,
         e: NestedNotIfNestedEnum,
+        not_zero: u8,
     },
     FOUR {
-        not_zero: u8,
         e: NestedNotIfNestedEnum,
+        not_zero: u8,
     },
     FIVE {
-        not_zero: u8,
         e: NestedNotIfNestedEnum,
+        not_zero: u8,
     },
     SIX {
-        not_zero: u8,
         e: NestedNotIfNestedEnum,
+        not_zero: u8,
     },
     REST {
-        not_zero: u8,
         e: NestedNotIfNestedEnum,
+        not_zero: u8,
     },
 }
 

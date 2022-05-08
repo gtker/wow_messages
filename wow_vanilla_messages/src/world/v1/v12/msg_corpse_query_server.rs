@@ -294,11 +294,11 @@ impl From<MapError> for MSG_CORPSE_QUERY_ServerError {
 pub enum MSG_CORPSE_QUERY_ServerCorpseQueryResult {
     NOT_FOUND,
     FOUND {
+        corpse_map: Map,
         map: Map,
         position_x: f32,
         position_y: f32,
         position_z: f32,
-        corpse_map: Map,
     },
 }
 

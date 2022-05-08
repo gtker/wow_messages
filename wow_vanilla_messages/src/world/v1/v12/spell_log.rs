@@ -2046,8 +2046,8 @@ pub enum SpellLogSpellEffect {
     POWER_FUNNEL,
     HEAL_MAX_HEALTH,
     INTERRUPT_CAST {
-        target3: Guid,
         interrupted_spell: u32,
+        target3: Guid,
     },
     DISTRACT {
         target5: Guid,

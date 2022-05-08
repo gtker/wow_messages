@@ -402,8 +402,8 @@ impl From<SecurityFlagError> for CMD_AUTH_LOGON_PROOF_ClientError {
 pub enum CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     NONE,
     PIN {
-        pin_salt: [u8; 16],
         pin_hash: [u8; 20],
+        pin_salt: [u8; 16],
     },
 }
 

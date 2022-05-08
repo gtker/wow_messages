@@ -2352,25 +2352,25 @@ pub enum SMSG_MESSAGECHATChatType {
     },
     MONSTER_SAY {
         sender_guid3: Guid,
-        sender_name_length: u32,
         sender_name: String,
+        sender_name_length: u32,
         target_guid: Guid,
     },
     MONSTER_YELL {
         sender_guid3: Guid,
-        sender_name_length: u32,
         sender_name: String,
+        sender_name_length: u32,
         target_guid: Guid,
     },
     MONSTER_EMOTE {
-        name_length: u32,
-        monster_name: String,
         monster_guid: Guid,
+        monster_name: String,
+        name_length: u32,
     },
     CHANNEL {
         channel_name: String,
-        player_rank: u32,
         player_guid: Guid,
+        player_rank: u32,
     },
     CHANNEL_JOIN {
         sender_guid4: Guid,
@@ -2403,9 +2403,9 @@ pub enum SMSG_MESSAGECHATChatType {
         sender_guid4: Guid,
     },
     MONSTER_WHISPER {
-        name_length: u32,
-        monster_name: String,
         monster_guid: Guid,
+        monster_name: String,
+        name_length: u32,
     },
     BG_SYSTEM_NEUTRAL {
         sender_guid4: Guid,
@@ -2426,9 +2426,9 @@ pub enum SMSG_MESSAGECHATChatType {
         sender_guid4: Guid,
     },
     RAID_BOSS_EMOTE {
-        name_length: u32,
-        monster_name: String,
         monster_guid: Guid,
+        monster_name: String,
+        name_length: u32,
     },
     BATTLEGROUND {
         sender_guid4: Guid,

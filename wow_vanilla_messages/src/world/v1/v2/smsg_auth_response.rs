@@ -776,9 +776,9 @@ pub enum SMSG_AUTH_RESPONSEWorldResult {
     CSTATUS_NEGOTIATION_FAILED,
     CSTATUS_AUTHENTICATING,
     AUTH_OK {
-        billing_time: u32,
         billing_flags: u8,
         billing_rested: u32,
+        billing_time: u32,
     },
     AUTH_FAILED,
     AUTH_REJECT,
