@@ -30,16 +30,15 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
                 });
 
                 let en = e.rust_object().get_complex_definer_ty(ce.name());
-                match en.ty() {
+                let (int_ty, enumerators) = match en.ty() {
                     RustType::Enum {
                         int_ty,
                         enumerators,
                         ..
-                    } => {
-                        print_size_for_new_enum(s, ce.name(), enumerators, int_ty);
-                    }
+                    } => (int_ty, enumerators),
                     _ => unreachable!(),
-                }
+                };
+                print_size_for_new_enum(s, ce.name(), enumerators, int_ty);
             }
             DefinerType::Flag => {
                 print_new_flag_declaration(s, ce);
@@ -52,16 +51,15 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
                 });
 
                 let en = e.rust_object().get_complex_definer_ty(ce.name());
-                match en.ty() {
+                let (int_ty, enumerators) = match en.ty() {
                     RustType::Flag {
                         int_ty,
                         enumerators,
                         ..
-                    } => {
-                        print_size_for_new_flag(s, ce.name(), enumerators, int_ty);
-                    }
+                    } => (int_ty, enumerators),
                     _ => unreachable!(),
-                }
+                };
+                print_size_for_new_flag(s, ce.name(), enumerators, int_ty);
 
                 print_types_for_new_flag(s, ce, e, o);
             }
