@@ -725,20 +725,20 @@ impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     fn size(&self) -> usize {
         match self {
             Self::SUCCESS  {
-                server_public_key,
+                crc_salt,
                 generator,
                 large_safe_prime,
                 salt,
-                crc_salt,
+                server_public_key,
             } => {
                 1
-                + 32 * core::mem::size_of::<u8>() // server_public_key: u8[32]
-                + 1 // generator_length: u8
-                + generator.len() * core::mem::size_of::<u8>() // generator: u8[generator_length]
-                + 1 // large_safe_prime_length: u8
-                + large_safe_prime.len() * core::mem::size_of::<u8>() // large_safe_prime: u8[large_safe_prime_length]
-                + 32 * core::mem::size_of::<u8>() // salt: u8[32]
                 + 16 * core::mem::size_of::<u8>() // crc_salt: u8[16]
+                + generator.len() * core::mem::size_of::<u8>() // generator: u8[generator_length]
+                + 1 // generator_length: u8
+                + large_safe_prime.len() * core::mem::size_of::<u8>() // large_safe_prime: u8[large_safe_prime_length]
+                + 1 // large_safe_prime_length: u8
+                + 32 * core::mem::size_of::<u8>() // salt: u8[32]
+                + 32 * core::mem::size_of::<u8>() // server_public_key: u8[32]
             }
             Self::FAIL_UNKNOWN0 =>  {
                 1
@@ -823,10 +823,8 @@ mod test {
 
         let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
             login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
-                     0xCE, 0xDA, 0x34, 0x46, ],
+                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
+                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
                 generator: vec![ 0x07, ],
                 large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
                      0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
@@ -836,8 +834,10 @@ mod test {
                      0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
-                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
-                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
+                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
+                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
+                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
+                     0xCE, 0xDA, 0x34, 0x46, ],
             },
         };
 

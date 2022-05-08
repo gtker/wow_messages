@@ -1986,13 +1986,13 @@ impl VariableSized for SMSG_CAST_RESULTCastFailureReason {
             }
             Self::EQUIPPED_ITEM_CLASS  {
                 equipped_item_class,
-                equipped_item_subclass_mask,
                 equipped_item_inventory_type_mask,
+                equipped_item_subclass_mask,
             } => {
                 1
                 + 4 // equipped_item_class: u32
-                + 4 // equipped_item_subclass_mask: u32
                 + 4 // equipped_item_inventory_type_mask: u32
+                + 4 // equipped_item_subclass_mask: u32
             }
             Self::EQUIPPED_ITEM_CLASS_MAINHAND =>  {
                 1
@@ -2199,7 +2199,7 @@ impl VariableSized for SMSG_CAST_RESULTCastFailureReason {
                 area,
             } => {
                 1
-                + Area::size() // area: Area
+                + 4 // area: Area
             }
             Self::REQUIRES_SPELL_FOCUS  {
                 required_spell_focus,
@@ -2546,7 +2546,7 @@ impl VariableSized for SMSG_CAST_RESULTSimpleSpellCastResult {
                 reason,
             } => {
                 1
-                + reason.size() // reason: SMSG_CAST_RESULTCastFailureReason and subfields
+                + reason.size() // reason: SMSG_CAST_RESULTCastFailureReason
             }
             Self::FAILURE =>  {
                 1

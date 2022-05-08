@@ -1514,156 +1514,156 @@ impl VariableSized for CMSG_MESSAGECHATChatType {
             Self::SAY  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::PARTY  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::RAID  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::GUILD  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::OFFICER  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::YELL  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::WHISPER  {
                 target_player,
                 whisper_message,
             } => {
-                1
-                + target_player.len() + 1 // target_player: CString and Null Terminator
-                + whisper_message.len() + 1 // whisper_message: CString and Null Terminator
+                4
+                + target_player.len() + 1 // target_player: CString
+                + whisper_message.len() + 1 // whisper_message: CString
             }
             Self::WHISPER_INFORM =>  {
-                1
+                4
             }
             Self::EMOTE  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::TEXT_EMOTE =>  {
-                1
+                4
             }
             Self::SYSTEM =>  {
-                1
+                4
             }
             Self::MONSTER_SAY =>  {
-                1
+                4
             }
             Self::MONSTER_YELL =>  {
-                1
+                4
             }
             Self::MONSTER_EMOTE =>  {
-                1
+                4
             }
             Self::CHANNEL  {
                 channel,
                 channel_message,
             } => {
-                1
-                + channel.len() + 1 // channel: CString and Null Terminator
-                + channel_message.len() + 1 // channel_message: CString and Null Terminator
+                4
+                + channel.len() + 1 // channel: CString
+                + channel_message.len() + 1 // channel_message: CString
             }
             Self::CHANNEL_JOIN =>  {
-                1
+                4
             }
             Self::CHANNEL_LEAVE =>  {
-                1
+                4
             }
             Self::CHANNEL_LIST =>  {
-                1
+                4
             }
             Self::CHANNEL_NOTICE =>  {
-                1
+                4
             }
             Self::CHANNEL_NOTICE_USER =>  {
-                1
+                4
             }
             Self::AFK  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::DND  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::IGNORED =>  {
-                1
+                4
             }
             Self::SKILL =>  {
-                1
+                4
             }
             Self::LOOT =>  {
-                1
+                4
             }
             Self::MONSTER_WHISPER =>  {
-                1
+                4
             }
             Self::BG_SYSTEM_NEUTRAL =>  {
-                1
+                4
             }
             Self::BG_SYSTEM_ALLIANCE =>  {
-                1
+                4
             }
             Self::BG_SYSTEM_HORDE =>  {
-                1
+                4
             }
             Self::RAID_LEADER  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::RAID_WARNING  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::RAID_BOSS_WHISPER =>  {
-                1
+                4
             }
             Self::RAID_BOSS_EMOTE =>  {
-                1
+                4
             }
             Self::BATTLEGROUND  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
             Self::BATTLEGROUND_LEADER  {
                 message,
             } => {
-                1
-                + message.len() + 1 // message: CString and Null Terminator
+                4
+                + message.len() + 1 // message: CString
             }
         }
     }

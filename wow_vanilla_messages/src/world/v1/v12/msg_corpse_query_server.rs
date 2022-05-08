@@ -472,18 +472,18 @@ impl VariableSized for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
                 1
             }
             Self::FOUND  {
+                corpse_map,
                 map,
                 position_x,
                 position_y,
                 position_z,
-                corpse_map,
             } => {
                 1
-                + Map::size() // map: Map
+                + 4 // corpse_map: Map
+                + 4 // map: Map
                 + 4 // position_x: f32
                 + 4 // position_y: f32
                 + 4 // position_z: f32
-                + Map::size() // corpse_map: Map
             }
         }
     }

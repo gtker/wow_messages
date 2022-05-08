@@ -1072,12 +1072,12 @@ mod test {
                         telemetry_keys: vec![ ],
                         security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
                             .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
-                                     0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D,
-                                     0x0E, 0x0F, ],
                                 pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
                                      0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D,
                                      0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, ],
+                                pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
+                                     0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D,
+                                     0x0E, 0x0F, ],
                             })
 ,
                         };
@@ -1136,12 +1136,12 @@ mod test {
                             telemetry_keys: vec![ ],
                             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
                                 .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
-                                         0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
-                                         0x0D, 0x0E, 0x0F, ],
                                     pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
                                          0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
                                          0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, ],
+                                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
+                                         0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
+                                         0x0D, 0x0E, 0x0F, ],
                                 })
                                 .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
                                     unknown0: 0x10,
@@ -1209,13 +1209,13 @@ mod test {
                                 telemetry_keys: vec![ ],
                                 security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
                                     .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                        pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04,
-                                             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A,
-                                             0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                                         pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04,
                                              0x05, 0x06, 0x07, 0x08, 0x09, 0x0A,
                                              0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10,
                                              0x11, 0x12, 0x13, ],
+                                        pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04,
+                                             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A,
+                                             0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                                     })
                                     .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
                                         unknown0: 0x10,

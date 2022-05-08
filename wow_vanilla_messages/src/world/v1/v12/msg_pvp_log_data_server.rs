@@ -445,7 +445,7 @@ impl VariableSized for MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
                 winner,
             } => {
                 1
-                + BattlegroundWinner::size() // winner: BattlegroundWinner
+                + 1 // winner: BattlegroundWinner
             }
         }
     }

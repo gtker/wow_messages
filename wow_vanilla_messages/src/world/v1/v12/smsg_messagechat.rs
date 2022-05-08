@@ -2828,47 +2828,47 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
             }
             Self::MONSTER_SAY  {
                 sender_guid3,
-                sender_name_length,
                 sender_name,
+                sender_name_length,
                 target_guid,
             } => {
                 1
                 + 8 // sender_guid3: Guid
+                + sender_name.len() + 1 // sender_name: CString
                 + 4 // sender_name_length: u32
-                + sender_name.len() + 1 // sender_name: CString and Null Terminator
                 + 8 // target_guid: Guid
             }
             Self::MONSTER_YELL  {
                 sender_guid3,
-                sender_name_length,
                 sender_name,
+                sender_name_length,
                 target_guid,
             } => {
                 1
                 + 8 // sender_guid3: Guid
+                + sender_name.len() + 1 // sender_name: CString
                 + 4 // sender_name_length: u32
-                + sender_name.len() + 1 // sender_name: CString and Null Terminator
                 + 8 // target_guid: Guid
             }
             Self::MONSTER_EMOTE  {
-                name_length,
-                monster_name,
                 monster_guid,
+                monster_name,
+                name_length,
             } => {
                 1
-                + 4 // name_length: u32
-                + monster_name.len() + 1 // monster_name: CString and Null Terminator
                 + 8 // monster_guid: Guid
+                + monster_name.len() + 1 // monster_name: CString
+                + 4 // name_length: u32
             }
             Self::CHANNEL  {
                 channel_name,
-                player_rank,
                 player_guid,
+                player_rank,
             } => {
                 1
-                + channel_name.len() + 1 // channel_name: CString and Null Terminator
-                + 4 // player_rank: u32
+                + channel_name.len() + 1 // channel_name: CString
                 + 8 // player_guid: Guid
+                + 4 // player_rank: u32
             }
             Self::CHANNEL_JOIN  {
                 sender_guid4,
@@ -2931,14 +2931,14 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + 8 // sender_guid4: Guid
             }
             Self::MONSTER_WHISPER  {
-                name_length,
-                monster_name,
                 monster_guid,
+                monster_name,
+                name_length,
             } => {
                 1
-                + 4 // name_length: u32
-                + monster_name.len() + 1 // monster_name: CString and Null Terminator
                 + 8 // monster_guid: Guid
+                + monster_name.len() + 1 // monster_name: CString
+                + 4 // name_length: u32
             }
             Self::BG_SYSTEM_NEUTRAL  {
                 sender_guid4,
@@ -2977,14 +2977,14 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + 8 // sender_guid4: Guid
             }
             Self::RAID_BOSS_EMOTE  {
-                name_length,
-                monster_name,
                 monster_guid,
+                monster_name,
+                name_length,
             } => {
                 1
-                + 4 // name_length: u32
-                + monster_name.len() + 1 // monster_name: CString and Null Terminator
                 + 8 // monster_guid: Guid
+                + monster_name.len() + 1 // monster_name: CString
+                + 4 // name_length: u32
             }
             Self::BATTLEGROUND  {
                 sender_guid4,

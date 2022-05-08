@@ -14155,434 +14155,434 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 4
             }
             Self::KALIMDOR  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::TESTING  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::SCOTT_TEST  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::CASH_TEST  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::ALTERAC_VALLEY  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::SHADOWFANG_KEEP  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::STORMWIND_STOCKADE  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::STORMWIND_PRISON  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::DEADMINES  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::AZSHARA_CRATER  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::COLLINS_TEST  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::WAILING_CAVERNS  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::MONASTERY  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::RAZORFEN_KRAUL  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::BLACKFATHOM_DEEPS  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::ULDAMAN  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::GNOMERAGON  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::SUNKEN_TEMPLE  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::RAZORFEN_DOWNS  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::EMERALD_DREAM  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::SCARLET_MONASTERY  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::ZUL_FARRAK  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::BLACKROCK_SPIRE  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::BLACKROCK_DEPTHS  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::ONYXIAS_LAIR  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::CAVERNS_OF_TIME  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::SCHOLOMANCE  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::ZUL_GURUB  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::STRATHOLME  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::MAURADON  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::DEEPRUN_TRAM  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::RAGEFIRE_CHASM  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::MOLTEN_CORE  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::DIRE_MAUL  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::ALLIANCE_PVP_BARRACKS  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::HORDE_PVP_BARRACKS  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::DEVELOPMENT_LAND  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::BLACKWING_LAIR  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::WARSONG_GULCH  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::RUINS_OF_AHN_QIRAJ  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::ARATHI_BASIN  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::AHN_QIRAJ_TEMPLE  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
             Self::NAXXRAMAS  {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 4
-                + 1 // unknown0: u8
                 + 4 // client_instance_id: u32
-                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId and subfields
+                + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUSStatusId
+                + 1 // unknown0: u8
             }
         }
     }

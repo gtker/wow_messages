@@ -532,12 +532,12 @@ impl VariableSized for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
     fn size(&self) -> usize {
         match self {
             Self::SUCCESS  {
-                server_proof,
                 hardware_survey_id,
+                server_proof,
             } => {
                 1
-                + 20 * core::mem::size_of::<u8>() // server_proof: u8[20]
                 + 4 // hardware_survey_id: u32
+                + 20 * core::mem::size_of::<u8>() // server_proof: u8[20]
             }
             Self::FAIL_UNKNOWN0 =>  {
                 1
@@ -614,10 +614,10 @@ mod test {
 
         let expected = CMD_AUTH_LOGON_PROOF_Server {
             login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
+                hardware_survey_id: 0xDEADBEEF,
                 server_proof: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                      0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
                      0x12, 0x13, ],
-                hardware_survey_id: 0xDEADBEEF,
             },
         };
 

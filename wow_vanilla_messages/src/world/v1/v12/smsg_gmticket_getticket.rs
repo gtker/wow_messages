@@ -505,22 +505,22 @@ impl VariableSized for SMSG_GMTICKET_GETTICKETGmTicketStatus {
                 4
             }
             Self::HASTEXT  {
-                text,
-                ticket_type,
-                days_since_ticket_creation,
-                days_since_oldest_ticket_creation,
                 days_since_last_updated,
+                days_since_oldest_ticket_creation,
+                days_since_ticket_creation,
                 escalation_status,
                 read_by_gm,
+                text,
+                ticket_type,
             } => {
                 4
-                + text.len() + 1 // text: CString and Null Terminator
-                + GmTicketType::size() // ticket_type: GmTicketType
-                + 4 // days_since_ticket_creation: f32
-                + 4 // days_since_oldest_ticket_creation: f32
                 + 4 // days_since_last_updated: f32
-                + GmTicketEscalationStatus::size() // escalation_status: GmTicketEscalationStatus
+                + 4 // days_since_oldest_ticket_creation: f32
+                + 4 // days_since_ticket_creation: f32
+                + 1 // escalation_status: GmTicketEscalationStatus
                 + 1 // read_by_gm: u8
+                + text.len() + 1 // text: CString
+                + 1 // ticket_type: GmTicketType
             }
             Self::DEFAULT =>  {
                 4

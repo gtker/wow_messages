@@ -46,6 +46,108 @@ impl RustMember {
     pub fn size_comment(&self) -> String {
         format!(" // {}: {}", self.name(), self.ty().str())
     }
+
+    fn append_members_to_enumerator_not_equal_range(
+        &mut self,
+        enumerator_name: &[&String],
+        members: &[RustMember],
+    ) {
+        let enums = match &mut self.ty {
+            RustType::Enum {
+                is_simple,
+                enumerators,
+                ..
+            }
+            | RustType::Flag {
+                is_simple,
+                enumerators,
+                ..
+            } => {
+                *is_simple = false;
+                self.constant_sized = false;
+                enumerators
+            }
+            _ => unreachable!(),
+        };
+
+        let enums = enums.iter_mut().filter(|a| {
+            let mut equal = false;
+            for &name in enumerator_name {
+                if a.name() == name {
+                    equal = true;
+                }
+            }
+
+            !equal
+        });
+        for e in enums {
+            e.members.append(&mut members.to_vec());
+            e.members.sort_by(|a, b| a.name.cmp(&b.name));
+            e.members.dedup_by(|a, b| a.name.eq(&b.name));
+        }
+    }
+
+    fn append_members_to_enumerator_not_equal(
+        &mut self,
+        enumerator_name: &str,
+        members: &[RustMember],
+    ) {
+        let enums = match &mut self.ty {
+            RustType::Enum {
+                is_simple,
+                enumerators,
+                ..
+            }
+            | RustType::Flag {
+                is_simple,
+                enumerators,
+                ..
+            } => {
+                *is_simple = false;
+                self.constant_sized = false;
+                enumerators
+            }
+            _ => unreachable!(),
+        };
+
+        let enums = enums.iter_mut().filter(|a| a.name() != enumerator_name);
+        for e in enums {
+            e.members.append(&mut members.to_vec());
+            e.members.sort_by(|a, b| a.name.cmp(&b.name));
+            e.members.dedup_by(|a, b| a.name.eq(&b.name));
+        }
+    }
+
+    fn append_members_to_enumerator_equal(
+        &mut self,
+        enumerator_name: &str,
+        members: &[RustMember],
+    ) {
+        let enums = match &mut self.ty {
+            RustType::Enum {
+                is_simple,
+                enumerators,
+                ..
+            }
+            | RustType::Flag {
+                is_simple,
+                enumerators,
+                ..
+            } => {
+                *is_simple = false;
+                self.constant_sized = false;
+                enumerators
+            }
+            _ => unreachable!(),
+        };
+
+        let enums = enums.iter_mut().filter(|a| a.name() == enumerator_name);
+        for e in enums {
+            e.members.append(&mut members.to_vec());
+            e.members.sort_by(|a, b| a.name.cmp(&b.name));
+            e.members.dedup_by(|a, b| a.name.eq(&b.name));
+        }
+    }
 }
 
 #[derive(Debug, Clone)]
@@ -67,6 +169,14 @@ impl RustEnumerator {
     }
     pub fn members_in_struct(&self) -> Vec<&RustMember> {
         self.members.iter().filter(|m| m.in_rust_type).collect()
+    }
+
+    pub fn has_members(&self) -> bool {
+        !self.members().is_empty()
+    }
+
+    pub fn has_members_in_struct(&self) -> bool {
+        !self.members_in_struct().is_empty()
     }
 }
 
@@ -198,6 +308,45 @@ impl RustObject {
     pub fn sizes(&self) -> Sizes {
         self.sizes
     }
+    pub fn get_complex_definer_ty(&self, name: &str) -> &RustMember {
+        fn inner<'a>(m: &'a RustMember, name: &str) -> Option<&'a RustMember> {
+            match m.ty() {
+                RustType::Enum {
+                    ty_name,
+                    enumerators,
+                    ..
+                }
+                | RustType::Flag {
+                    ty_name,
+                    enumerators,
+                    ..
+                } => {
+                    if ty_name == name {
+                        return Some(m);
+                    }
+
+                    for e in enumerators {
+                        for m in e.members() {
+                            if let Some(m) = inner(m, name) {
+                                return Some(m);
+                            }
+                        }
+                    }
+
+                    None
+                }
+                _ => None,
+            }
+        }
+
+        for m in self.members() {
+            if let Some(m) = inner(m, name) {
+                return m;
+            }
+        }
+
+        unreachable!()
+    }
 }
 
 pub fn create_if_statement(
@@ -209,19 +358,22 @@ pub fn create_if_statement(
     current_scope: &mut Vec<RustMember>,
     parent_scope: &mut Vec<RustMember>,
 ) {
-    let mut if_enumerators = Vec::new();
-    let mut not_enumerators = Vec::new();
+    let mut reversed = false;
+    let mut main_enumerators = Vec::new();
 
     for i in statement.get_conditional().equations() {
         match i {
             Equation::BitwiseAnd { value } | Equation::Equals { value } => {
-                if_enumerators.push(value)
+                main_enumerators.push(value)
             }
-            Equation::NotEquals { value } => not_enumerators.push(value),
+            Equation::NotEquals { value } => {
+                main_enumerators.push(value);
+                reversed = true;
+            }
         }
     }
 
-    let mut if_enumerator_members = Vec::new();
+    let mut main_enumerator_members = Vec::new();
     for m in statement.members() {
         create_struct_member(
             m,
@@ -229,7 +381,7 @@ pub fn create_if_statement(
             tags,
             o,
             e,
-            &mut if_enumerator_members,
+            &mut main_enumerator_members,
             current_scope,
             &mut None,
         );
@@ -249,78 +401,82 @@ pub fn create_if_statement(
         );
     }
 
-    let subject = current_scope
-        .iter_mut()
-        .find(|a| statement.name() == a.name);
-    let subject = match subject {
-        None => parent_scope
+    fn find_subject<'a>(
+        current_scope: &'a mut Vec<RustMember>,
+        parent_scope: &'a mut Vec<RustMember>,
+        statement: &IfStatement,
+    ) -> &'a mut RustMember {
+        let subject = current_scope
             .iter_mut()
-            .find(|a| statement.name() == a.name)
-            .unwrap(),
-        Some(s) => s,
-    };
+            .find(|a| statement.name() == a.name);
+        let subject = match subject {
+            None => parent_scope
+                .iter_mut()
+                .find(|a| statement.name() == a.name)
+                .unwrap(),
+            Some(s) => s,
+        };
+        subject
+    }
 
-    if !if_enumerator_members.is_empty() {
-        match &mut subject.ty {
-            RustType::Enum { is_simple, .. } | RustType::Flag { is_simple, .. } => {
-                *is_simple = false;
-                subject.constant_sized = false;
-            }
-            _ => panic!("{} is not a definer", subject.name),
+    if reversed {
+        // Apply main to all except main_enumerators
+        for i in &main_enumerators {
+            find_subject(current_scope, parent_scope, statement)
+                .append_members_to_enumerator_not_equal(i, &main_enumerator_members);
         }
-    }
 
-    let enums = match &mut subject.ty {
-        RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => enumerators,
-        _ => panic!(),
-    };
+        // Apply other to main_enumerator
+        for i in &main_enumerators {
+            find_subject(current_scope, parent_scope, statement)
+                .append_members_to_enumerator_equal(i, &else_enumerator_members);
+        }
+    } else {
+        // Apply main to main_enumerator
+        for i in &main_enumerators {
+            find_subject(current_scope, parent_scope, statement)
+                .append_members_to_enumerator_equal(i, &main_enumerator_members);
+        }
 
-    for i in &if_enumerators {
-        enums
-            .iter_mut()
-            .find(|a| &&a.name == i)
-            .unwrap()
-            .members
-            .append(&mut if_enumerator_members.clone());
-    }
+        // Apply else_if to else_if, ..
+        for else_if in statement.else_ifs() {
+            let mut else_if_enumerators = Vec::new();
+            for i in else_if.get_conditional().equations() {
+                match i {
+                    Equation::BitwiseAnd { value } | Equation::Equals { value } => {
+                        main_enumerators.push(value);
+                        else_if_enumerators.push(value);
+                    }
+                    Equation::NotEquals { .. } => unreachable!(),
+                }
+            }
 
-    for i in &not_enumerators {
-        enums
-            .iter_mut()
-            .find(|a| &&a.name != i)
-            .unwrap()
-            .members
-            .append(&mut if_enumerator_members.clone());
-    }
+            let mut else_if_enumerator_members = Vec::new();
+            for m in else_if.members() {
+                create_struct_member(
+                    m,
+                    struct_ty_name,
+                    tags,
+                    o,
+                    e,
+                    &mut else_if_enumerator_members,
+                    current_scope,
+                    &mut None,
+                );
+            }
 
-    for i in &if_enumerators {
-        enums
-            .iter_mut()
-            .find(|a| &&a.name != i)
-            .unwrap()
-            .members
-            .append(&mut else_enumerator_members.clone());
-    }
+            for i in &else_if_enumerators {
+                find_subject(current_scope, parent_scope, statement)
+                    .append_members_to_enumerator_equal(i, &else_if_enumerator_members);
+            }
+        }
 
-    for i in &not_enumerators {
-        enums
-            .iter_mut()
-            .find(|a| &&a.name == i)
-            .unwrap()
-            .members
-            .append(&mut if_enumerator_members.clone());
-    }
-
-    for else_if in statement.else_ifs() {
-        create_if_statement(
-            else_if,
-            struct_ty_name,
-            tags,
-            o,
-            e,
-            current_scope,
-            parent_scope,
-        );
+        // Apply other to other_enumerators
+        find_subject(current_scope, parent_scope, statement)
+            .append_members_to_enumerator_not_equal_range(
+                &main_enumerators,
+                &else_enumerator_members,
+            );
     }
 }
 

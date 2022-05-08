@@ -1083,7 +1083,7 @@ impl VariableSized for SMSG_CHAR_RENAMEWorldResult {
             } => {
                 4
                 + 8 // guid: Guid
-                + name.len() + 1 // name: CString and Null Terminator
+                + name.len() + 1 // name: CString
             }
             Self::RESPONSE_FAILURE =>  {
                 4

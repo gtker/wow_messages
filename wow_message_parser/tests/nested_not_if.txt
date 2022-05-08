@@ -1535,60 +1535,60 @@ impl VariableSized for NestedNotIfTEnum {
                 1
             }
             Self::ONE  {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 1
+                + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
-                + e.size() // e: NestedNotIfNestedEnum and subfields
             }
             Self::TWO  {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 1
+                + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
-                + e.size() // e: NestedNotIfNestedEnum and subfields
             }
             Self::THREE  {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 1
+                + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
-                + e.size() // e: NestedNotIfNestedEnum and subfields
             }
             Self::FOUR  {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 1
+                + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
-                + e.size() // e: NestedNotIfNestedEnum and subfields
             }
             Self::FIVE  {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 1
+                + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
-                + e.size() // e: NestedNotIfNestedEnum and subfields
             }
             Self::SIX  {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 1
+                + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
-                + e.size() // e: NestedNotIfNestedEnum and subfields
             }
             Self::REST  {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 1
+                + e.size() // e: NestedNotIfNestedEnum
                 + 1 // not_zero: u8
-                + e.size() // e: NestedNotIfNestedEnum and subfields
             }
         }
     }

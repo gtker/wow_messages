@@ -740,13 +740,13 @@ impl VariableSized for SMSG_TRADE_STATUSTradeStatus {
             }
             Self::CLOSE_WINDOW  {
                 inventory_result,
-                target_error,
                 item_limit_category_id,
+                target_error,
             } => {
                 4
-                + 4 // inventory_result: InventoryResult upcasted to u32
-                + 1 // target_error: u8
+                + 4 // inventory_result: InventoryResult
                 + 4 // item_limit_category_id: u32
+                + 1 // target_error: u8
             }
             Self::UNKNOWN_13 =>  {
                 4

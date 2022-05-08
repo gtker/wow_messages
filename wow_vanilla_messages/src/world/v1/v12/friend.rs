@@ -766,43 +766,43 @@ impl VariableSized for FriendFriendStatus {
             }
             Self::ONLINE  {
                 area,
-                level,
                 class,
+                level,
             } => {
                 1
-                + Area::size() // area: Area
+                + 4 // area: Area
+                + 4 // class: Class
                 + 4 // level: u32
-                + 4 // class: Class upcasted to u32
             }
             Self::AFK  {
                 area,
-                level,
                 class,
+                level,
             } => {
                 1
-                + Area::size() // area: Area
+                + 4 // area: Area
+                + 4 // class: Class
                 + 4 // level: u32
-                + 4 // class: Class upcasted to u32
             }
             Self::UNKNOWN3  {
                 area,
-                level,
                 class,
+                level,
             } => {
                 1
-                + Area::size() // area: Area
+                + 4 // area: Area
+                + 4 // class: Class
                 + 4 // level: u32
-                + 4 // class: Class upcasted to u32
             }
             Self::DND  {
                 area,
-                level,
                 class,
+                level,
             } => {
                 1
-                + Area::size() // area: Area
+                + 4 // area: Area
+                + 4 // class: Class
                 + 4 // level: u32
-                + 4 // class: Class upcasted to u32
             }
         }
     }

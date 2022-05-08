@@ -1,15 +1,16 @@
 use crate::container::Container;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArrayType, VerifiedContainerValue};
+use crate::parser::types::{ArrayType, IntegerType, VerifiedContainerValue};
 use crate::rust_printer::complex_print::{ComplexEnum, DefinerType, Enumerator};
 use crate::rust_printer::enums::get_upcast_types;
 use crate::rust_printer::new_enums::{IfStatementType, NewEnumStructMember, NewIfStatement};
+use crate::rust_printer::rust_view::{RustEnumerator, RustType};
 use crate::rust_printer::structs::print_common_impls;
-use crate::rust_printer::structs::print_common_impls::print_write;
 use crate::rust_printer::structs::print_common_impls::print_write::{
     print_enum_if_statement_new, print_flag_if_statement, print_write_definition,
 };
+use crate::rust_printer::structs::print_common_impls::{print_size_of_ty_rust_view, print_write};
 use crate::rust_printer::{ImplType, Writer};
 
 pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
@@ -28,7 +29,17 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
                     print_write_for_new_enum(s, ce);
                 });
 
-                print_size_for_new_enum(s, ce, e, o);
+                let en = e.rust_object().get_complex_definer_ty(ce.name());
+                match en.ty() {
+                    RustType::Enum {
+                        int_ty,
+                        enumerators,
+                        ..
+                    } => {
+                        print_size_for_new_enum(s, ce.name(), enumerators, int_ty);
+                    }
+                    _ => unreachable!(),
+                }
             }
             DefinerType::Flag => {
                 print_new_flag_declaration(s, ce);
@@ -857,71 +868,35 @@ fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
     }
 }
 
-fn print_size_for_new_enum(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: &Objects) {
+fn print_size_for_new_enum(
+    s: &mut Writer,
+    ty_name: &str,
+    enumerators: &[RustEnumerator],
+    int_ty: &IntegerType,
+) {
     s.variable_size(
-        ce.name(),
+        ty_name,
         |s| {
             s.body("match self", |s| {
-                for field in ce.fields() {
-                    if !field.is_simple_or_subfields_const() {
-                        s.open_curly(format!("Self::{name} ", name = field.name()));
-                        for sf in field.subfields() {
-                            if sf.used_as_size_in().is_some() {
-                                continue;
-                            }
-                            s.wln(format!("{name},", name = sf.name()));
+                for enumerator in enumerators {
+                    if enumerator.has_members_in_struct() {
+                        s.open_curly(format!("Self::{name} ", name = enumerator.name()));
+                        for m in enumerator.members_in_struct() {
+                            s.wln(format!("{},", m.name()));
                         }
                         s.closing_curly_with(" => {");
                         s.inc_indent();
                     } else {
-                        s.open_curly(format!("Self::{name} => ", name = field.name()));
+                        s.open_curly(format!("Self::{name} => ", name = enumerator.name()));
                     }
 
-                    s.wln(format!("{self_size}", self_size = ce.ty().size()));
+                    s.wln(format!("{}", int_ty.size()));
 
-                    for sf in field.subfields() {
-                        let array_inner_is_constant = match sf.ty() {
-                            Type::Array(array) => match array.ty() {
-                                ArrayType::Integer(_) => true,
-                                ArrayType::Complex(ident) => {
-                                    o.type_has_constant_size(&Type::Identifier {
-                                        s: ident.clone(),
-                                        upcast: None,
-                                    })
-                                }
-                                ArrayType::CString => false,
-                                ArrayType::Guid => true,
-                                ArrayType::PackedGuid => false,
-                            },
-                            _ => false,
-                        };
-
-                        let does_not_have_subvariables = match sf.ty() {
-                            Type::Identifier {
-                                s: identifier,
-                                upcast: None,
-                            } => !e
-                                .nested_types()
-                                .new_enums()
-                                .iter()
-                                .any(|a| a.name() == identifier),
-                            _ => false,
-                        };
-
+                    for m in enumerator.members() {
                         s.w("+ ");
 
-                        print_common_impls::print_size_of_ty(
-                            s,
-                            sf.ty(),
-                            sf.name(),
-                            does_not_have_subvariables,
-                            o.type_has_constant_size(sf.ty()),
-                            array_inner_is_constant,
-                            "",
-                            &sf.ty().str(),
-                        );
+                        print_size_of_ty_rust_view(s, m, "");
                     }
-
                     s.closing_curly();
                 }
             });

@@ -440,12 +440,12 @@ impl VariableSized for SMSG_LOG_XPGAINExperienceAwardType {
                 1
             }
             Self::NON_KILL  {
-                experience_without_rested,
                 exp_group_bonus,
+                experience_without_rested,
             } => {
                 1
-                + 4 // experience_without_rested: u32
                 + 4 // exp_group_bonus: f32
+                + 4 // experience_without_rested: u32
             }
         }
     }

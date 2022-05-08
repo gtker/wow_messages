@@ -1177,15 +1177,15 @@ impl VariableSized for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
     fn size(&self) -> usize {
         match self {
             Self::SUCCESS  {
-                server_proof,
                 account_flag,
                 hardware_survey_id,
+                server_proof,
                 unknown_flags,
             } => {
                 1
-                + 20 * core::mem::size_of::<u8>() // server_proof: u8[20]
-                + AccountFlag::size() // account_flag: AccountFlag
+                + 4 // account_flag: AccountFlag
                 + 4 // hardware_survey_id: u32
+                + 20 * core::mem::size_of::<u8>() // server_proof: u8[20]
                 + 2 // unknown_flags: u16
             }
             Self::FAIL_UNKNOWN0 =>  {

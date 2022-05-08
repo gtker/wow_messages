@@ -11,7 +11,7 @@ use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct EnumOutsideOfIf {
-    pub t: TEnum,
+    pub t: EnumOutsideOfIfTEnum,
     pub n: EnumOutsideOfIfNestedEnum,
 }
 
@@ -55,7 +55,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
         };
 
         Ok(Self {
-            t,
+            t: t_if,
             n: n_if,
         })
     }
@@ -131,7 +131,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
         };
 
         Ok(Self {
-            t,
+            t: t_if,
             n: n_if,
         })
     }
@@ -207,7 +207,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
         };
 
         Ok(Self {
-            t,
+            t: t_if,
             n: n_if,
         })
     }
@@ -252,7 +252,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
 impl VariableSized for EnumOutsideOfIf {
     fn size(&self) -> usize {
         0
-        + 1 // t: TEnum
+        + self.t.size() // t: EnumOutsideOfIfTEnum
         + self.n.size() // n: EnumOutsideOfIfNestedEnum
     }
 }
@@ -260,7 +260,7 @@ impl VariableSized for EnumOutsideOfIf {
 impl MaximumPossibleSized for EnumOutsideOfIf {
     fn maximum_possible_size() -> usize {
         0
-        + 2 // t: TEnum
+        + 2 // t: EnumOutsideOfIfTEnum
         + 1 // n: EnumOutsideOfIfNestedEnum
     }
 }

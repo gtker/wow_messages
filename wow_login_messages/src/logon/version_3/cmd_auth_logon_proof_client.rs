@@ -574,12 +574,12 @@ impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
                 1
             }
             Self::PIN  {
-                pin_salt,
                 pin_hash,
+                pin_salt,
             } => {
                 1
-                + 16 * core::mem::size_of::<u8>() // pin_salt: u8[16]
                 + 20 * core::mem::size_of::<u8>() // pin_hash: u8[20]
+                + 16 * core::mem::size_of::<u8>() // pin_salt: u8[16]
             }
         }
     }
@@ -797,11 +797,11 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-                     0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                 pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
                      0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
                      0x13, ],
+                pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
+                     0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
             },
         };
 

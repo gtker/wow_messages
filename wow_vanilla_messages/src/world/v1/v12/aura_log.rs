@@ -2544,16 +2544,16 @@ impl VariableSized for AuraLogAuraType {
                 4
             }
             Self::PERIODIC_DAMAGE  {
-                damage1,
-                school,
                 absorbed,
+                damage1,
                 resisted,
+                school,
             } => {
                 4
-                + 4 // damage1: u32
-                + SpellSchool::size() // school: SpellSchool
                 + 4 // absorbed: u32
+                + 4 // damage1: u32
                 + 4 // resisted: u32
+                + 1 // school: SpellSchool
             }
             Self::DUMMY =>  {
                 4
@@ -2613,12 +2613,12 @@ impl VariableSized for AuraLogAuraType {
                 + 4 // damage2: u32
             }
             Self::OBS_MOD_MANA  {
-                misc_value1,
                 damage3,
+                misc_value1,
             } => {
                 4
-                + 4 // misc_value1: u32
                 + 4 // damage3: u32
+                + 4 // misc_value1: u32
             }
             Self::MOD_RESISTANCE =>  {
                 4
@@ -2627,12 +2627,12 @@ impl VariableSized for AuraLogAuraType {
                 4
             }
             Self::PERIODIC_ENERGIZE  {
-                misc_value1,
                 damage3,
+                misc_value1,
             } => {
                 4
-                + 4 // misc_value1: u32
                 + 4 // damage3: u32
+                + 4 // misc_value1: u32
             }
             Self::MOD_PACIFY =>  {
                 4
@@ -2752,14 +2752,14 @@ impl VariableSized for AuraLogAuraType {
                 4
             }
             Self::PERIODIC_MANA_LEECH  {
-                misc_value2,
                 damage,
                 gain_multiplier,
+                misc_value2,
             } => {
                 4
-                + 4 // misc_value2: u32
                 + 4 // damage: u32
                 + 4 // gain_multiplier: f32
+                + 4 // misc_value2: u32
             }
             Self::MOD_CASTING_SPEED_NOT_STACK =>  {
                 4
@@ -2834,16 +2834,16 @@ impl VariableSized for AuraLogAuraType {
                 4
             }
             Self::PERIODIC_DAMAGE_PERCENT  {
-                damage1,
-                school,
                 absorbed,
+                damage1,
                 resisted,
+                school,
             } => {
                 4
-                + 4 // damage1: u32
-                + SpellSchool::size() // school: SpellSchool
                 + 4 // absorbed: u32
+                + 4 // damage1: u32
                 + 4 // resisted: u32
+                + 1 // school: SpellSchool
             }
             Self::MOD_RESIST_CHANCE =>  {
                 4

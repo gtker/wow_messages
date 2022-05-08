@@ -2785,12 +2785,12 @@ impl VariableSized for SpellLogSpellEffect {
                 4
             }
             Self::INTERRUPT_CAST  {
-                target3,
                 interrupted_spell,
+                target3,
             } => {
                 4
-                + 8 // target3: Guid
                 + 4 // interrupted_spell: u32
+                + 8 // target3: Guid
             }
             Self::DISTRACT  {
                 target5,

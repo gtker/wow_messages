@@ -1162,14 +1162,14 @@ impl VariableSized for SMSG_AUTH_RESPONSEWorldResult {
                 4
             }
             Self::AUTH_OK  {
-                billing_time,
                 billing_flags,
                 billing_rested,
+                billing_time,
             } => {
                 4
-                + 4 // billing_time: u32
                 + 1 // billing_flags: u8
                 + 4 // billing_rested: u32
+                + 4 // billing_time: u32
             }
             Self::AUTH_FAILED =>  {
                 4
