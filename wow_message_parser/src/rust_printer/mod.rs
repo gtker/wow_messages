@@ -220,17 +220,7 @@ impl Writer {
         self.newline();
 
         for it in ImplType::types() {
-            if it.is_async() {
-                self.print_async_impl_readable_and_writable_read_header(it, "_body");
-            } else {
-                self.wln(it.cfg());
-                self.open_curly(
-                    format!("{func}fn {prefix}read_body<R: {read}>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error>",
-                            func = it.func(),
-                            prefix = it.prefix(),
-                            read = it.read()),
-                );
-            }
+            self.print_read_decl(it, "_body");
 
             read_function(self, it);
 
@@ -239,12 +229,7 @@ impl Writer {
             }
             self.closing_curly_newline();
 
-            if it.is_async() {
-                self.print_async_impl_readable_and_writable_write_decl(it, "_body");
-            } else {
-                self.wln(it.cfg());
-                self.open_curly(format!("{func}fn {prefix}write_body<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", func = it.func(), prefix = it.prefix(), write = it.write()));
-            }
+            self.print_write_decl(it, "_body");
 
             write_function(self, it);
 
@@ -257,11 +242,18 @@ impl Writer {
         self.closing_curly_newline(); // impl
     }
 
-    fn print_async_impl_readable_and_writable_write_decl(
-        &mut self,
-        it: ImplType,
-        world_text: &str,
-    ) {
+    fn print_write_decl(&mut self, it: ImplType, world_text: &str) {
+        if !it.is_async() {
+            self.wln(it.cfg());
+            self.open_curly(format!("fn {prefix}write{world_text}<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
+                                    prefix = it.prefix(),
+                                    write = it.write(),
+                                    world_text = world_text,
+            ));
+
+            return;
+        }
+
         self.wln(format!(
             "fn {prefix}write{world_text}<'life0, 'life1, 'async_trait, W>(",
             prefix = it.prefix(),
@@ -296,11 +288,25 @@ impl Writer {
         self.open_curly("Box::pin(async move");
     }
 
-    fn print_async_impl_readable_and_writable_read_header(
-        &mut self,
-        it: ImplType,
-        world_text: &str,
-    ) {
+    fn print_read_decl(&mut self, it: ImplType, world_text: &str) {
+        if !it.is_async() {
+            self.wln(it.cfg());
+            let body_size = if world_text == "_body" {
+                ", body_size: u32"
+            } else {
+                ""
+            };
+            self.open_curly(format!(
+                "fn {prefix}read{world_text}<R: {read}>(r: &mut R{body_size}) -> std::result::Result<Self, Self::Error>",
+                world_text = world_text,
+                prefix = it.prefix(),
+                read = it.read(),
+                body_size = body_size,
+            ));
+
+            return;
+        }
+
         self.wln(format!(
             "fn {}read{}<'life0, 'async_trait, R>(",
             it.prefix(),
@@ -309,7 +315,7 @@ impl Writer {
 
         self.inc_indent();
         self.wln("r: &'life0 mut R,");
-        if !world_text.is_empty() {
+        if world_text == "_body" {
             self.wln("body_size: u32,");
         }
         self.dec_indent();
@@ -359,17 +365,7 @@ impl Writer {
         self.newline();
 
         for it in ImplType::types() {
-            if it.is_async() {
-                self.print_async_impl_readable_and_writable_read_header(it, "");
-            } else {
-                self.wln(it.cfg());
-                self.open_curly(format!(
-                    "{func}fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, Self::Error>",
-                    func = it.func(),
-                    prefix = it.prefix(),
-                    read = it.read()
-                ));
-            }
+            self.print_read_decl(it, "");
 
             read_function(self, it);
             if it.is_async() {
@@ -377,16 +373,7 @@ impl Writer {
             }
             self.closing_curly_newline();
 
-            if it.is_async() {
-                self.print_async_impl_readable_and_writable_write_decl(it, "");
-            } else {
-                self.wln(it.cfg());
-                self.open_curly(format!("{func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
-                                        func = it.func(),
-                                        prefix = it.prefix(),
-                                        write = it.write()
-                ));
-            }
+            self.print_write_decl(it, "");
 
             write_function(self, it);
 

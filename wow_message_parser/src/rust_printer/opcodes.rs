@@ -144,25 +144,42 @@ fn world_common_impls_read_write(
     opcode_size: i32,
     it: ImplType,
 ) {
-    s.wln(format!("{}", it.cfg()));
-    s.bodyn(format!("{func}fn {prefix}write_unencrypted<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", func = it.func(), prefix = it.prefix(), write = it.write() ), |s| {
-        s.body("match self", |s| {
-            for &e in v {
-                s.wln(format!("Self::{name}(i) => i.{prefix}write_body(w){postfix}?,",
-                    prefix = it.prefix(), postfix = it.postfix(),
-                      name = get_enumerator_name(e.name())));
-            }
-        });
-        s.wln("Ok(())");
+    s.newline();
+    s.print_write_decl(it, "_unencrypted");
+    s.body("match self", |s| {
+        for &e in v {
+            s.wln(format!(
+                "Self::{name}(i) => i.{prefix}write_body(w){postfix}?,",
+                prefix = it.prefix(),
+                postfix = it.postfix(),
+                name = get_enumerator_name(e.name())
+            ));
+        }
     });
+    s.wln("Ok(())");
+    if it.is_async() {
+        s.closing_curly_with(")"); // Box::pin
+    }
+    s.closing_curly_newline();
 
-    s.wln(format!("{}", it.cfg()));
-    s.bodyn(format!("{func}fn {prefix}read_unencrypted<R: {read}>(r: &mut R) -> std::result::Result<Self, Self::Error>", func = it.func(), prefix = it.prefix(), read = it.read()), |s| {
-        s.wln(format!("let size = ({path}::{prefix}read_u16_be(r){postfix}? - {opcode_size}) as u32;", path = "crate::util", opcode_size = opcode_size, prefix = it.prefix(), postfix = it.postfix()));
+    s.print_read_decl(it, "_unencrypted");
+    s.wln(format!(
+        "let size = ({path}::{prefix}read_u16_be(r){postfix}? - {opcode_size}) as u32;",
+        path = "crate::util",
+        opcode_size = opcode_size,
+        prefix = it.prefix(),
+        postfix = it.postfix()
+    ));
 
-        s.wln(format!("let opcode = {path}::{prefix}read_{size}_le(r){postfix}?;",path = "crate::util", size = size, prefix = it.prefix(), postfix = it.postfix()));
+    s.wln(format!(
+        "let opcode = {path}::{prefix}read_{size}_le(r){postfix}?;",
+        path = "crate::util",
+        size = size,
+        prefix = it.prefix(),
+        postfix = it.postfix()
+    ));
 
-        s.body("match opcode", |s| {
+    s.body("match opcode", |s| {
             for &e in v {
                 let opcode = match e.container_type() {
                     ContainerType::CMsg(i) => i,
@@ -178,8 +195,13 @@ fn world_common_impls_read_write(
                               enum_name = get_enumerator_name(e.name())));
             }
             s.wln("_ => Err(Self::Error::InvalidOpcode(opcode)),");
-        });
-    });
+        }
+    );
+
+    if it.is_async() {
+        s.closing_curly_with(")"); // Box::pin
+    }
+    s.closing_curly();
 
     s.wln(format!("{}", it.cfg()));
     s.bodyn(format!("{func}fn {prefix}read_encrypted<R: {read}, D: Decrypter{decrypter}>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error>", func = it.func(), prefix = it.prefix(), read = it.read(), decrypter = it.decrypter()), |s| {

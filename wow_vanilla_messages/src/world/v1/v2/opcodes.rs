@@ -75,6 +75,7 @@ pub enum ClientOpcodeMessage {
 #[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl OpcodeMessage for ClientOpcodeMessage {
     type Error = ClientOpcodeMessageError;
+
     #[cfg(feature = "sync")]
     fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         match self {
@@ -92,7 +93,6 @@ impl OpcodeMessage for ClientOpcodeMessage {
             _ => Err(Self::Error::InvalidOpcode(opcode)),
         }
     }
-
     #[cfg(feature = "sync")]
     fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error> {
         let mut header = [0u8; 6];
@@ -113,24 +113,46 @@ impl OpcodeMessage for ClientOpcodeMessage {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_unencrypted<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        match self {
-            Self::CMSG_CHAR_ENUM(i) => i.tokio_write_body(w).await?,
-        }
-        Ok(())
+
+    fn tokio_write_unencrypted<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            match self {
+                Self::CMSG_CHAR_ENUM(i) => i.tokio_write_body(w).await?,
+            }
+            Ok(())
+        })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_unencrypted<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        let size = (crate::util::tokio_read_u16_be(r).await? - 4) as u32;
-        let opcode = crate::util::tokio_read_u32_le(r).await?;
-        match opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::tokio_read_body(r, size).await?)),
-            _ => Err(Self::Error::InvalidOpcode(opcode)),
-        }
+    fn tokio_read_unencrypted<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            let size = (crate::util::tokio_read_u16_be(r).await? - 4) as u32;
+            let opcode = crate::util::tokio_read_u32_le(r).await?;
+            match opcode {
+                0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::tokio_read_body(r, size).await?)),
+                _ => Err(Self::Error::InvalidOpcode(opcode)),
+            }
+        })
     }
-
     #[cfg(feature = "async_tokio")]
     async fn tokio_read_encrypted<R: AsyncReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error> {
         let mut header = [0u8; 6];
@@ -151,24 +173,46 @@ impl OpcodeMessage for ClientOpcodeMessage {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_unencrypted<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        match self {
-            Self::CMSG_CHAR_ENUM(i) => i.astd_write_body(w).await?,
-        }
-        Ok(())
+
+    fn astd_write_unencrypted<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            match self {
+                Self::CMSG_CHAR_ENUM(i) => i.astd_write_body(w).await?,
+            }
+            Ok(())
+        })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_read_unencrypted<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        let size = (crate::util::astd_read_u16_be(r).await? - 4) as u32;
-        let opcode = crate::util::astd_read_u32_le(r).await?;
-        match opcode {
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::astd_read_body(r, size).await?)),
-            _ => Err(Self::Error::InvalidOpcode(opcode)),
-        }
+    fn astd_read_unencrypted<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            let size = (crate::util::astd_read_u16_be(r).await? - 4) as u32;
+            let opcode = crate::util::astd_read_u32_le(r).await?;
+            match opcode {
+                0x0037 => Ok(Self::CMSG_CHAR_ENUM(CMSG_CHAR_ENUM::astd_read_body(r, size).await?)),
+                _ => Err(Self::Error::InvalidOpcode(opcode)),
+            }
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read_encrypted<R: ReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error> {
         let mut header = [0u8; 6];
@@ -294,6 +338,7 @@ pub enum ServerOpcodeMessage {
 #[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl OpcodeMessage for ServerOpcodeMessage {
     type Error = ServerOpcodeMessageError;
+
     #[cfg(feature = "sync")]
     fn write_unencrypted<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         match self {
@@ -313,7 +358,6 @@ impl OpcodeMessage for ServerOpcodeMessage {
             _ => Err(Self::Error::InvalidOpcode(opcode)),
         }
     }
-
     #[cfg(feature = "sync")]
     fn read_encrypted<R: std::io::Read, D: Decrypter>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error> {
         let mut header = [0u8; 4];
@@ -336,26 +380,48 @@ impl OpcodeMessage for ServerOpcodeMessage {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_write_unencrypted<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        match self {
-            Self::SMSG_AUTH_CHALLENGE(i) => i.tokio_write_body(w).await?,
-            Self::SMSG_AUTH_RESPONSE(i) => i.tokio_write_body(w).await?,
-        }
-        Ok(())
+
+    fn tokio_write_unencrypted<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            match self {
+                Self::SMSG_AUTH_CHALLENGE(i) => i.tokio_write_body(w).await?,
+                Self::SMSG_AUTH_RESPONSE(i) => i.tokio_write_body(w).await?,
+            }
+            Ok(())
+        })
     }
 
-    #[cfg(feature = "async_tokio")]
-    async fn tokio_read_unencrypted<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        let size = (crate::util::tokio_read_u16_be(r).await? - 2) as u32;
-        let opcode = crate::util::tokio_read_u16_le(r).await?;
-        match opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::tokio_read_body(r, size).await?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::tokio_read_body(r, size).await?)),
-            _ => Err(Self::Error::InvalidOpcode(opcode)),
-        }
+    fn tokio_read_unencrypted<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            let size = (crate::util::tokio_read_u16_be(r).await? - 2) as u32;
+            let opcode = crate::util::tokio_read_u16_le(r).await?;
+            match opcode {
+                0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::tokio_read_body(r, size).await?)),
+                0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::tokio_read_body(r, size).await?)),
+                _ => Err(Self::Error::InvalidOpcode(opcode)),
+            }
+        })
     }
-
     #[cfg(feature = "async_tokio")]
     async fn tokio_read_encrypted<R: AsyncReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error> {
         let mut header = [0u8; 4];
@@ -378,26 +444,48 @@ impl OpcodeMessage for ServerOpcodeMessage {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_write_unencrypted<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        match self {
-            Self::SMSG_AUTH_CHALLENGE(i) => i.astd_write_body(w).await?,
-            Self::SMSG_AUTH_RESPONSE(i) => i.astd_write_body(w).await?,
-        }
-        Ok(())
+
+    fn astd_write_unencrypted<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            match self {
+                Self::SMSG_AUTH_CHALLENGE(i) => i.astd_write_body(w).await?,
+                Self::SMSG_AUTH_RESPONSE(i) => i.astd_write_body(w).await?,
+            }
+            Ok(())
+        })
     }
 
-    #[cfg(feature = "async_std")]
-    async fn astd_read_unencrypted<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        let size = (crate::util::astd_read_u16_be(r).await? - 2) as u32;
-        let opcode = crate::util::astd_read_u16_le(r).await?;
-        match opcode {
-            0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::astd_read_body(r, size).await?)),
-            0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::astd_read_body(r, size).await?)),
-            _ => Err(Self::Error::InvalidOpcode(opcode)),
-        }
+    fn astd_read_unencrypted<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            let size = (crate::util::astd_read_u16_be(r).await? - 2) as u32;
+            let opcode = crate::util::astd_read_u16_le(r).await?;
+            match opcode {
+                0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE::astd_read_body(r, size).await?)),
+                0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE::astd_read_body(r, size).await?)),
+                _ => Err(Self::Error::InvalidOpcode(opcode)),
+            }
+        })
     }
-
     #[cfg(feature = "async_std")]
     async fn astd_read_encrypted<R: ReadExt + Unpin + Send, D: Decrypter + Send>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error> {
         let mut header = [0u8; 4];
