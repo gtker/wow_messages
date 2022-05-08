@@ -325,6 +325,34 @@ impl RustObject {
     pub fn sizes(&self) -> Sizes {
         self.sizes
     }
+    pub fn get_rust_definer(&self, name: &str) -> RustDefiner {
+        let member = self.get_complex_definer_ty(name);
+
+        let (ty_name, enumerators, int_ty, is_simple) = match member.ty() {
+            RustType::Enum {
+                ty_name,
+                enumerators,
+                int_ty,
+                is_simple,
+            }
+            | RustType::Flag {
+                ty_name,
+                int_ty,
+                enumerators,
+                is_simple,
+            } => (ty_name, enumerators, *int_ty, *is_simple),
+            _ => unreachable!(),
+        };
+
+        RustDefiner {
+            inner: member.clone(),
+            enumerators: enumerators.clone(),
+            ty_name: ty_name.clone(),
+            int_ty,
+            is_simple,
+        }
+    }
+
     pub fn get_complex_definer_ty(&self, name: &str) -> &RustMember {
         fn inner<'a>(m: &'a RustMember, name: &str) -> Option<&'a RustMember> {
             match m.ty() {
@@ -363,6 +391,33 @@ impl RustObject {
         }
 
         unreachable!()
+    }
+}
+
+#[derive(Debug, Clone)]
+pub struct RustDefiner {
+    inner: RustMember,
+    enumerators: Vec<RustEnumerator>,
+    ty_name: String,
+    int_ty: IntegerType,
+    is_simple: bool,
+}
+
+impl RustDefiner {
+    pub fn inner(&self) -> &RustMember {
+        &self.inner
+    }
+    pub fn enumerators(&self) -> &[RustEnumerator] {
+        &self.enumerators
+    }
+    pub fn ty_name(&self) -> &str {
+        &self.ty_name
+    }
+    pub fn int_ty(&self) -> IntegerType {
+        self.int_ty
+    }
+    pub fn is_simple(&self) -> bool {
+        self.is_simple
     }
 }
 

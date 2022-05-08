@@ -1,11 +1,11 @@
 use crate::container::Container;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArrayType, IntegerType, VerifiedContainerValue};
+use crate::parser::types::{ArrayType, VerifiedContainerValue};
 use crate::rust_printer::complex_print::{ComplexEnum, DefinerType, Enumerator};
 use crate::rust_printer::enums::get_upcast_types;
 use crate::rust_printer::new_enums::{IfStatementType, NewEnumStructMember, NewIfStatement};
-use crate::rust_printer::rust_view::{RustEnumerator, RustType};
+use crate::rust_printer::rust_view::RustDefiner;
 use crate::rust_printer::structs::print_common_impls;
 use crate::rust_printer::structs::print_common_impls::print_write::{
     print_enum_if_statement_new, print_flag_if_statement, print_write_definition,
@@ -17,6 +17,8 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
     for ce in e.nested_types().new_enums() {
         match ce.definer_ty() {
             DefinerType::Enum => {
+                let rd = e.rust_object().get_rust_definer(ce.name());
+
                 print_new_enum_declaration(s, ce);
 
                 print_from_new_enum_to_old(s, ce);
@@ -28,19 +30,11 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
                 s.bodyn(format!("impl {name}", name = ce.name()), |s| {
                     print_write_for_new_enum(s, ce);
                 });
-
-                let en = e.rust_object().get_complex_definer_ty(ce.name());
-                let (int_ty, enumerators) = match en.ty() {
-                    RustType::Enum {
-                        int_ty,
-                        enumerators,
-                        ..
-                    } => (int_ty, enumerators),
-                    _ => unreachable!(),
-                };
-                print_size_for_new_enum(s, ce.name(), enumerators, int_ty);
+                print_size_for_new_enum(s, &rd);
             }
             DefinerType::Flag => {
+                let rd = e.rust_object().get_rust_definer(ce.name());
+
                 print_new_flag_declaration(s, ce);
 
                 print_from_new_flag_to_old(s, ce);
@@ -49,17 +43,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
                     print_write_for_new_flag(s, ce);
                     print_constructors_for_new_flag(s, ce);
                 });
-
-                let en = e.rust_object().get_complex_definer_ty(ce.name());
-                let (int_ty, enumerators) = match en.ty() {
-                    RustType::Flag {
-                        int_ty,
-                        enumerators,
-                        ..
-                    } => (int_ty, enumerators),
-                    _ => unreachable!(),
-                };
-                print_size_for_new_flag(s, ce.name(), enumerators, int_ty);
+                print_size_for_new_flag(s, &rd);
 
                 print_types_for_new_flag(s, ce, e, o);
             }
@@ -261,18 +245,13 @@ fn print_constructors_for_new_flag(s: &mut Writer, ce: &ComplexEnum) {
     }
 }
 
-fn print_size_for_new_flag(
-    s: &mut Writer,
-    ty_name: &str,
-    enumerators: &[RustEnumerator],
-    int_ty: &IntegerType,
-) {
+fn print_size_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
     s.variable_size(
-        ty_name,
+        rd.ty_name(),
         |s| {
-            s.wln(format!("{size} // inner", size = int_ty.size(),));
+            s.wln(format!("{size} // inner", size = rd.int_ty().size(),));
 
-            for enumerator in enumerators {
+            for enumerator in rd.enumerators() {
                 if enumerator.should_not_be_in_flag_types() {
                     continue;
                 }
@@ -294,16 +273,16 @@ fn print_size_for_new_flag(
             }
         },
         |s| {
-            s.wln(format!("{size} // inner", size = int_ty.size(),));
+            s.wln(format!("{size} // inner", size = rd.int_ty().size(),));
 
-            for enumerator in enumerators {
+            for enumerator in rd.enumerators() {
                 if enumerator.should_not_be_in_flag_types() {
                     continue;
                 }
 
                 s.wln(format!(
                     "+ {ce}{f}::maximum_possible_size() // {f} enumerator",
-                    ce = ty_name,
+                    ce = rd.ty_name(),
                     f = enumerator.name()
                 ));
             }
@@ -873,17 +852,12 @@ fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
     }
 }
 
-fn print_size_for_new_enum(
-    s: &mut Writer,
-    ty_name: &str,
-    enumerators: &[RustEnumerator],
-    int_ty: &IntegerType,
-) {
+fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
     s.variable_size(
-        ty_name,
+        re.ty_name(),
         |s| {
             s.body("match self", |s| {
-                for enumerator in enumerators {
+                for enumerator in re.enumerators() {
                     if enumerator.has_members_in_struct() {
                         s.open_curly(format!("Self::{name}", name = enumerator.name()));
                         for m in enumerator.members_in_struct() {
@@ -895,7 +869,7 @@ fn print_size_for_new_enum(
                         s.open_curly(format!("Self::{name} =>", name = enumerator.name()));
                     }
 
-                    s.wln(format!("{}", int_ty.size()));
+                    s.wln(format!("{}", re.int_ty().size()));
 
                     for m in enumerator.members() {
                         s.w("+ ");
