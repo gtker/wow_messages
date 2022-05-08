@@ -37,7 +37,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
 
                 print_new_flag_declaration(s, &rd);
 
-                print_from_new_flag_to_old(s, ce);
+                print_from_new_flag_to_old(s, &rd);
 
                 s.body(format!("impl {name}", name = ce.name()), |s| {
                     print_write_for_new_flag(s, ce);
@@ -67,8 +67,8 @@ fn print_new_flag_declaration(s: &mut Writer, rd: &RustDefiner) {
     });
 }
 
-fn print_from_new_flag_to_old(s: &mut Writer, ce: &ComplexEnum) {
-    s.impl_from(format!("&{}", ce.name()), ce.original_ty_name(), |s| {
+fn print_from_new_flag_to_old(s: &mut Writer, rd: &RustDefiner) {
+    s.impl_from(format!("&{}", rd.ty_name()), rd.original_ty_name(), |s| {
         s.wln("Self::new(e.inner)");
     });
 }
