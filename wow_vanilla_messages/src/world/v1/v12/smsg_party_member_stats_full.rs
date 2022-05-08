@@ -245,7 +245,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
         };
 
         let mask = SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
-            inner: mask.as_u32(),
+            inner: mask.as_int(),
             flag_status: mask_FLAG_STATUS,
             flag_cur_hp: mask_FLAG_CUR_HP,
             flag_max_hp: mask_FLAG_MAX_HP,
@@ -567,7 +567,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
         };
 
         let mask = SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
-            inner: mask.as_u32(),
+            inner: mask.as_int(),
             flag_status: mask_FLAG_STATUS,
             flag_cur_hp: mask_FLAG_CUR_HP,
             flag_max_hp: mask_FLAG_MAX_HP,
@@ -889,7 +889,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
         };
 
         let mask = SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
-            inner: mask.as_u32(),
+            inner: mask.as_int(),
             flag_status: mask_FLAG_STATUS,
             flag_cur_hp: mask_FLAG_CUR_HP,
             flag_max_hp: mask_FLAG_MAX_HP,

@@ -93,7 +93,7 @@ impl ReadableAndWritable for MovementInfo {
         };
 
         let flags = MovementInfoMovementFlags {
-            inner: flags.as_u32(),
+            inner: flags.as_int(),
             on_transport: flags_ON_TRANSPORT,
             jumping: flags_JUMPING,
             swimming: flags_SWIMMING,
@@ -222,7 +222,7 @@ impl ReadableAndWritable for MovementInfo {
         };
 
         let flags = MovementInfoMovementFlags {
-            inner: flags.as_u32(),
+            inner: flags.as_int(),
             on_transport: flags_ON_TRANSPORT,
             jumping: flags_JUMPING,
             swimming: flags_SWIMMING,
@@ -351,7 +351,7 @@ impl ReadableAndWritable for MovementInfo {
         };
 
         let flags = MovementInfoMovementFlags {
-            inner: flags.as_u32(),
+            inner: flags.as_int(),
             on_transport: flags_ON_TRANSPORT,
             jumping: flags_JUMPING,
             swimming: flags_SWIMMING,

@@ -74,7 +74,7 @@ impl ReadableAndWritable for FlagIfElseIf {
         };
 
         let flags = FlagIfElseIfUpdateFlag {
-            inner: flags.as_u8(),
+            inner: flags.as_int(),
             one_if: flags_ONE_IF,
             eight_if: flags_EIGHT_IF,
         };
@@ -156,7 +156,7 @@ impl ReadableAndWritable for FlagIfElseIf {
         };
 
         let flags = FlagIfElseIfUpdateFlag {
-            inner: flags.as_u8(),
+            inner: flags.as_int(),
             one_if: flags_ONE_IF,
             eight_if: flags_EIGHT_IF,
         };
@@ -238,7 +238,7 @@ impl ReadableAndWritable for FlagIfElseIf {
         };
 
         let flags = FlagIfElseIfUpdateFlag {
-            inner: flags.as_u8(),
+            inner: flags.as_int(),
             one_if: flags_ONE_IF,
             eight_if: flags_EIGHT_IF,
         };

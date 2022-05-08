@@ -70,7 +70,7 @@ impl MessageBody for SMSG_SPELL_START {
         };
 
         let flags = SMSG_SPELL_STARTCastFlags {
-            inner: flags.as_u16(),
+            inner: flags.as_int(),
             ammo: flags_AMMO,
         };
 
@@ -147,7 +147,7 @@ impl MessageBody for SMSG_SPELL_START {
         };
 
         let flags = SMSG_SPELL_STARTCastFlags {
-            inner: flags.as_u16(),
+            inner: flags.as_int(),
             ammo: flags_AMMO,
         };
 
@@ -224,7 +224,7 @@ impl MessageBody for SMSG_SPELL_START {
         };
 
         let flags = SMSG_SPELL_STARTCastFlags {
-            inner: flags.as_u16(),
+            inner: flags.as_int(),
             ammo: flags_AMMO,
         };
 

@@ -845,9 +845,8 @@ fn print_read_final_flag(s: &mut Writer, nested_types: &[ComplexEnum]) {
                     ty_name = c.original_ty_name(),
                 ));
                 s.wln(format!(
-                    "inner: {var_name}.as_{ty}(),",
+                    "inner: {var_name}.as_int(),",
                     var_name = c.variable_name(),
-                    ty = c.ty().rust_str()
                 ));
 
                 for f in c.fields() {

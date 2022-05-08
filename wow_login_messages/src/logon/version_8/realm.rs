@@ -71,7 +71,7 @@ impl ReadableAndWritable for Realm {
         };
 
         let flag = RealmRealmFlag {
-            inner: flag.as_u8(),
+            inner: flag.as_int(),
             specify_build: flag_SPECIFY_BUILD,
         };
 
@@ -171,7 +171,7 @@ impl ReadableAndWritable for Realm {
         };
 
         let flag = RealmRealmFlag {
-            inner: flag.as_u8(),
+            inner: flag.as_int(),
             specify_build: flag_SPECIFY_BUILD,
         };
 
@@ -271,7 +271,7 @@ impl ReadableAndWritable for Realm {
         };
 
         let flag = RealmRealmFlag {
-            inner: flag.as_u8(),
+            inner: flag.as_int(),
             specify_build: flag_SPECIFY_BUILD,
         };
 

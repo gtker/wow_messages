@@ -192,7 +192,7 @@ impl CharacterFlags {
         *self
     }
 
-    pub const fn as_u32(&self) -> u32 {
+    pub const fn as_int(&self) -> u32 {
         self.inner
     }
 

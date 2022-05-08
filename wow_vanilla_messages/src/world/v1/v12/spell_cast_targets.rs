@@ -156,7 +156,7 @@ impl ReadableAndWritable for SpellCastTargets {
         };
 
         let target_flags = SpellCastTargetsSpellCastTargetFlags {
-            inner: target_flags.as_u16(),
+            inner: target_flags.as_int(),
             unit: target_flags_UNIT,
             item: target_flags_ITEM,
             source_location: target_flags_SOURCE_LOCATION,
@@ -365,7 +365,7 @@ impl ReadableAndWritable for SpellCastTargets {
         };
 
         let target_flags = SpellCastTargetsSpellCastTargetFlags {
-            inner: target_flags.as_u16(),
+            inner: target_flags.as_int(),
             unit: target_flags_UNIT,
             item: target_flags_ITEM,
             source_location: target_flags_SOURCE_LOCATION,
@@ -574,7 +574,7 @@ impl ReadableAndWritable for SpellCastTargets {
         };
 
         let target_flags = SpellCastTargetsSpellCastTargetFlags {
-            inner: target_flags.as_u16(),
+            inner: target_flags.as_int(),
             unit: target_flags_UNIT,
             item: target_flags_ITEM,
             source_location: target_flags_SOURCE_LOCATION,

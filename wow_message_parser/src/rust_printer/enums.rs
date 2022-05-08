@@ -187,10 +187,9 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
             &return_type,
             |s, it| {
                 s.wln(format!(
-                    "crate::util::{prefix}write_{ty}_{endian}(w, self.as_{original_ty}() as {ty}){postfix}?;",
+                    "crate::util::{prefix}write_{ty}_{endian}(w, self.as_int() as {ty}){postfix}?;",
                     ty = t.rust_str(),
                     endian = t.rust_endian_str(),
-                    original_ty = e.ty().rust_str(),
                     prefix = it.prefix(),
                     postfix = it.postfix(),
                 ));
@@ -201,27 +200,23 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
 }
 
 fn as_type(s: &mut Writer, e: &Definer) {
-    s.funcn_pub_const(
-        format!("as_{type_name}(&self)", type_name = e.ty().rust_str()).as_str(),
-        e.ty().rust_str(),
-        |s| {
-            s.body("match self", |s| {
-                for field in e.fields() {
-                    s.wln(format!(
-                        "Self::{} => 0x{:x},",
-                        field.name(),
-                        field.value().int()
-                    ));
+    s.funcn_pub_const("as_int(&self)", e.ty().rust_str(), |s| {
+        s.body("match self", |s| {
+            for field in e.fields() {
+                s.wln(format!(
+                    "Self::{} => 0x{:x},",
+                    field.name(),
+                    field.value().int()
+                ));
+            }
+            match e.self_value() {
+                None => {}
+                Some(self_value) => {
+                    s.wln(format!("Self::{}(v) => *v,", self_value.name()));
                 }
-                match e.self_value() {
-                    None => {}
-                    Some(self_value) => {
-                        s.wln(format!("Self::{}(v) => *v,", self_value.name()));
-                    }
-                }
-            });
-        },
-    );
+            }
+        });
+    });
 }
 
 fn print_new(s: &mut Writer, e: &Definer) {
@@ -252,8 +247,7 @@ fn print_read(s: &mut Writer, e: &Definer, it: ImplType) {
 
 fn print_write(s: &mut Writer, e: &Definer, it: ImplType) {
     s.wln(format!(
-        "w.write_all(&self.as_{}().to_{}_bytes()){}?;",
-        e.ty().rust_str(),
+        "w.write_all(&self.as_int().to_{}_bytes()){}?;",
         e.ty().rust_endian_str(),
         it.postfix(),
     ));

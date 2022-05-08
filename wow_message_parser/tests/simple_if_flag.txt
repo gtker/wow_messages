@@ -34,7 +34,7 @@ impl ReadableAndWritable for SimpleIfFlag {
         };
 
         let flag = SimpleIfFlagSimpleFlag {
-            inner: flag.as_u8(),
+            inner: flag.as_int(),
             zero: flag_ZERO,
         };
 
@@ -72,7 +72,7 @@ impl ReadableAndWritable for SimpleIfFlag {
         };
 
         let flag = SimpleIfFlagSimpleFlag {
-            inner: flag.as_u8(),
+            inner: flag.as_int(),
             zero: flag_ZERO,
         };
 
@@ -110,7 +110,7 @@ impl ReadableAndWritable for SimpleIfFlag {
         };
 
         let flag = SimpleIfFlagSimpleFlag {
-            inner: flag.as_u8(),
+            inner: flag.as_int(),
             zero: flag_ZERO,
         };
 

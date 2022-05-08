@@ -87,7 +87,7 @@ impl MessageBody for SMSG_SPELL_GO {
         };
 
         let flags = SMSG_SPELL_GOCastFlags {
-            inner: flags.as_u16(),
+            inner: flags.as_int(),
             ammo: flags_AMMO,
         };
 
@@ -193,7 +193,7 @@ impl MessageBody for SMSG_SPELL_GO {
         };
 
         let flags = SMSG_SPELL_GOCastFlags {
-            inner: flags.as_u16(),
+            inner: flags.as_int(),
             ammo: flags_AMMO,
         };
 
@@ -299,7 +299,7 @@ impl MessageBody for SMSG_SPELL_GO {
         };
 
         let flags = SMSG_SPELL_GOCastFlags {
-            inner: flags.as_u16(),
+            inner: flags.as_int(),
             ammo: flags_AMMO,
         };
 

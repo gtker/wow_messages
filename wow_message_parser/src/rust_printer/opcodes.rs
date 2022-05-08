@@ -381,26 +381,22 @@ pub fn opcode_enum_world(
     };
 
     s.bodyn(format!("impl {t}Opcode", t = ty), |s| {
-        s.funcn_pub_const(
-            format!("as_{int_ty}(&self)", int_ty = int_ty).as_str(),
-            int_ty,
-            |s| {
-                s.body("match self", |s| {
-                    for e in v {
-                        s.wln(format!(
-                            "Self::{enum_name} => {value:#04x},",
-                            enum_name = get_enumerator_name(e.name()),
-                            value = match e.container_type() {
-                                ContainerType::SMsg(i)
-                                | ContainerType::CMsg(i)
-                                | ContainerType::Msg(i) => i,
-                                _ => panic!("invalid type for opcode enum"),
-                            }
-                        ))
-                    }
-                });
-            },
-        );
+        s.funcn_pub_const("as_int(&self)", int_ty, |s| {
+            s.body("match self", |s| {
+                for e in v {
+                    s.wln(format!(
+                        "Self::{enum_name} => {value:#04x},",
+                        enum_name = get_enumerator_name(e.name()),
+                        value = match e.container_type() {
+                            ContainerType::SMsg(i)
+                            | ContainerType::CMsg(i)
+                            | ContainerType::Msg(i) => i,
+                            _ => panic!("invalid type for opcode enum"),
+                        }
+                    ))
+                }
+            });
+        });
     });
 
     s.bodyn(&format!("impl {t}Opcode", t = ty), |s| {

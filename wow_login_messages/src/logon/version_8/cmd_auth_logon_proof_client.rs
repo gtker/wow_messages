@@ -108,7 +108,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         };
 
         let security_flag = CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
-            inner: security_flag.as_u8(),
+            inner: security_flag.as_int(),
             pin: security_flag_PIN,
             unknown0: security_flag_UNKNOWN0,
             authenticator: security_flag_AUTHENTICATOR,
@@ -251,7 +251,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         };
 
         let security_flag = CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
-            inner: security_flag.as_u8(),
+            inner: security_flag.as_int(),
             pin: security_flag_PIN,
             unknown0: security_flag_UNKNOWN0,
             authenticator: security_flag_AUTHENTICATOR,
@@ -394,7 +394,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         };
 
         let security_flag = CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
-            inner: security_flag.as_u8(),
+            inner: security_flag.as_int(),
             pin: security_flag_PIN,
             unknown0: security_flag_UNKNOWN0,
             authenticator: security_flag_AUTHENTICATOR,

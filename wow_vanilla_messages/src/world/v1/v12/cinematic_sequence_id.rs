@@ -33,7 +33,7 @@ impl ReadableAndWritable for CinematicSequenceId {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_u32().to_le_bytes())?;
+        w.write_all(&self.as_int().to_le_bytes())?;
         Ok(())
     }
 
@@ -46,7 +46,7 @@ impl ReadableAndWritable for CinematicSequenceId {
 
     #[cfg(feature = "async_tokio")]
     async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_u32().to_le_bytes()).await?;
+        w.write_all(&self.as_int().to_le_bytes()).await?;
         Ok(())
     }
 
@@ -59,7 +59,7 @@ impl ReadableAndWritable for CinematicSequenceId {
 
     #[cfg(feature = "async_std")]
     async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_u32().to_le_bytes()).await?;
+        w.write_all(&self.as_int().to_le_bytes()).await?;
         Ok(())
     }
 
@@ -86,19 +86,19 @@ impl CinematicSequenceId {
 
     #[cfg(feature = "sync")]
     pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::write_u32_be(w, self.as_u32() as u32)?;
+        crate::util::write_u32_be(w, self.as_int() as u32)?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::tokio_write_u32_be(w, self.as_u32() as u32).await?;
+        crate::util::tokio_write_u32_be(w, self.as_int() as u32).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::astd_write_u32_be(w, self.as_u32() as u32).await?;
+        crate::util::astd_write_u32_be(w, self.as_int() as u32).await?;
         Ok(())
     }
 
@@ -122,19 +122,19 @@ impl CinematicSequenceId {
 
     #[cfg(feature = "sync")]
     pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::write_u32_le(w, self.as_u32() as u32)?;
+        crate::util::write_u32_le(w, self.as_int() as u32)?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::tokio_write_u32_le(w, self.as_u32() as u32).await?;
+        crate::util::tokio_write_u32_le(w, self.as_int() as u32).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::astd_write_u32_le(w, self.as_u32() as u32).await?;
+        crate::util::astd_write_u32_le(w, self.as_int() as u32).await?;
         Ok(())
     }
 
@@ -158,19 +158,19 @@ impl CinematicSequenceId {
 
     #[cfg(feature = "sync")]
     pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::write_u64_le(w, self.as_u32() as u64)?;
+        crate::util::write_u64_le(w, self.as_int() as u64)?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::tokio_write_u64_le(w, self.as_u32() as u64).await?;
+        crate::util::tokio_write_u64_le(w, self.as_int() as u64).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::astd_write_u64_le(w, self.as_u32() as u64).await?;
+        crate::util::astd_write_u64_le(w, self.as_int() as u64).await?;
         Ok(())
     }
 
@@ -194,23 +194,23 @@ impl CinematicSequenceId {
 
     #[cfg(feature = "sync")]
     pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::write_u64_be(w, self.as_u32() as u64)?;
+        crate::util::write_u64_be(w, self.as_int() as u64)?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::tokio_write_u64_be(w, self.as_u32() as u64).await?;
+        crate::util::tokio_write_u64_be(w, self.as_int() as u64).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::astd_write_u64_be(w, self.as_u32() as u64).await?;
+        crate::util::astd_write_u64_be(w, self.as_int() as u64).await?;
         Ok(())
     }
 
-    pub const fn as_u32(&self) -> u32 {
+    pub const fn as_int(&self) -> u32 {
         match self {
             Self::HUMAN => 0x51,
             Self::ORC => 0x15,

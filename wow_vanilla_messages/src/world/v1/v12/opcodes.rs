@@ -615,7 +615,7 @@ pub enum ClientOpcode {
 }
 
 impl ClientOpcode {
-    pub const fn as_u32(&self) -> u32 {
+    pub const fn as_int(&self) -> u32 {
         match self {
             Self::MSG_MOVE_START_FORWARD => 0xb5,
             Self::MSG_MOVE_START_BACKWARD => 0xb6,
@@ -6994,7 +6994,7 @@ pub enum ServerOpcode {
 }
 
 impl ServerOpcode {
-    pub const fn as_u16(&self) -> u16 {
+    pub const fn as_int(&self) -> u16 {
         match self {
             Self::MSG_MOVE_START_FORWARD => 0xb5,
             Self::MSG_MOVE_START_BACKWARD => 0xb6,

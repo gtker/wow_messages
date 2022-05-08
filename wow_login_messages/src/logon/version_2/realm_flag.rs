@@ -192,7 +192,7 @@ impl RealmFlag {
         *self
     }
 
-    pub const fn as_u8(&self) -> u8 {
+    pub const fn as_int(&self) -> u8 {
         self.inner
     }
 
