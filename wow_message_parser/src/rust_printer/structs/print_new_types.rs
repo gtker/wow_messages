@@ -23,7 +23,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
 
                 print_from_new_enum_to_old(s, &rd);
 
-                print_from_old_enum_to_new(s, ce);
+                print_from_old_enum_to_new(s, &rd);
 
                 print_default_for_new_enum(s, ce);
 
@@ -731,30 +731,30 @@ fn print_from_new_enum_to_old(s: &mut Writer, rd: &RustDefiner) {
     });
 }
 
-fn print_from_old_enum_to_new(s: &mut Writer, ce: &ComplexEnum) {
+fn print_from_old_enum_to_new(s: &mut Writer, rd: &RustDefiner) {
     s.bodyn(
         format!(
             "impl From<&{new}> for {original}",
-            new = ce.name(),
-            original = ce.original_ty_name(),
+            new = rd.ty_name(),
+            original = rd.original_ty_name(),
         ),
         |s| {
             s.body(
-                format!("fn from(v: &{new}) -> Self", new = ce.name()),
+                format!("fn from(v: &{new}) -> Self", new = rd.ty_name()),
                 |s| {
                     s.body("match &v", |s| {
-                        for f in ce.fields() {
-                            if f.is_simple_or_subfields_const() {
+                        for enumerator in rd.enumerators() {
+                            if enumerator.has_members_in_struct() {
                                 s.wln(format!(
-                                    "{new}::{field} => Self::{field},",
-                                    new = ce.name(),
-                                    field = f.name(),
+                                    "{new}::{field} {{ .. }} => Self::{field},",
+                                    new = rd.ty_name(),
+                                    field = enumerator.name(),
                                 ));
                             } else {
                                 s.wln(format!(
-                                    "{new}::{field} {{ .. }} => Self::{field},",
-                                    new = ce.name(),
-                                    field = f.name(),
+                                    "{new}::{field} => Self::{field},",
+                                    new = rd.ty_name(),
+                                    field = enumerator.name(),
                                 ));
                             }
                         }
