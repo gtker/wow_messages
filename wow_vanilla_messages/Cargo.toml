@@ -10,8 +10,8 @@ version = "0.4.0"
 
 [features]
 default = []
-async_tokio = ["tokio", "async-trait"]
-async_std = ["async-std", "async-trait"]
+async_tokio = ["tokio"]
+async_std = ["async-std"]
 sync = []
 
 [dependencies.tokio]
@@ -20,11 +20,18 @@ default-features = false
 features = ["io-util"]
 optional = true
 
-[dependencies.async-trait]
-version = "0.1"
-optional = true
-
 [dependencies.async-std]
 version = "1.11"
+default-features = false
 optional = true
 features = ["async-io"]
+
+[dev-dependencies.async-std]
+version = "1.11"
+default-features = false
+features = ["attributes", "default"]
+
+[dev-dependencies.tokio]
+version = "1"
+default-features = false
+features = ["macros", "rt"]

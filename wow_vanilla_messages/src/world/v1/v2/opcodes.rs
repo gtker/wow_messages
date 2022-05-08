@@ -3,8 +3,6 @@ use crate::OpcodeMessage;
 use crate::{ServerMessageWrite, ClientMessageWrite};
 use wow_srp::header_crypto::{Decrypter, Encrypter};
 
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -72,7 +70,6 @@ pub enum ClientOpcodeMessage {
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl OpcodeMessage for ClientOpcodeMessage {
     type Error = ClientOpcodeMessageError;
 
@@ -391,7 +388,6 @@ pub enum ServerOpcodeMessage {
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
 }
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 impl OpcodeMessage for ServerOpcodeMessage {
     type Error = ServerOpcodeMessageError;
 

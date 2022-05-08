@@ -2,9 +2,9 @@ use crate::container::{Container, ContainerType};
 use crate::file_utils::{get_import_path, get_login_logon_version_path, get_world_version_path};
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
-    ImplType, Writer, ASYNC_STD_IMPORT, ASYNC_TRAIT_IMPORT, ASYNC_TRAIT_MACRO, CFG_ASYNC_ANY,
-    CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO, OPCODE_MESSAGE_TRAIT_NAME, TOKIO_IMPORT,
-    WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
+    ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
+    OPCODE_MESSAGE_TRAIT_NAME, TOKIO_IMPORT, WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME,
+    WORLD_SERVER_HEADER_TRAIT_NAME,
 };
 
 const CLOGIN_NAME: &str = "Client";
@@ -69,8 +69,6 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
 
             s.newline();
 
-            s.wln(CFG_ASYNC_ANY);
-            s.wln(ASYNC_TRAIT_IMPORT);
             s.wln(CFG_ASYNC_TOKIO);
             s.wln(TOKIO_IMPORT);
             s.wln(CFG_ASYNC_ASYNC_STD);
@@ -87,8 +85,6 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
 
             s.newline();
 
-            s.wln(CFG_ASYNC_ANY);
-            s.wln(ASYNC_TRAIT_IMPORT);
             s.wln(CFG_ASYNC_TOKIO);
             s.wln(TOKIO_IMPORT);
             s.wln(CFG_ASYNC_ASYNC_STD);
@@ -270,7 +266,6 @@ pub fn common_impls_world(
         ContainerType::SMsg(_) => ("server", "u16", 2),
         _ => panic!(),
     };
-    s.wln(ASYNC_TRAIT_MACRO);
     s.impl_for(
         OPCODE_MESSAGE_TRAIT_NAME,
         format!("{t}OpcodeMessage", t = ty),

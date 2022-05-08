@@ -6,8 +6,6 @@ use crate::world::v1::v12::{Race, RaceError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -387,7 +385,7 @@ mod test {
     }
 
     #[cfg(feature = "async_tokio")]
-    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    #[cfg_attr(feature = "async_tokio", tokio::test)]
     async fn tokio_SMSG_NAME_QUERY_RESPONSE0() {
         let raw: Vec<u8> = vec![ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
              0x00, 0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x00, 0x01, 0x00,
@@ -425,7 +423,7 @@ mod test {
     }
 
     #[cfg(feature = "async_std")]
-    #[cfg_attr(feature = "async_std", tokio::test)]
+    #[cfg_attr(feature = "async_std", async_std::test)]
     async fn astd_SMSG_NAME_QUERY_RESPONSE0() {
         let raw: Vec<u8> = vec![ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
              0x00, 0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x00, 0x01, 0x00,
@@ -501,7 +499,7 @@ mod test {
     }
 
     #[cfg(feature = "async_tokio")]
-    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    #[cfg_attr(feature = "async_tokio", tokio::test)]
     async fn tokio_SMSG_NAME_QUERY_RESPONSE1() {
         let raw: Vec<u8> = vec![ 0x00, 0x1D, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
              0x00, 0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x41, 0x00, 0x01,
@@ -539,7 +537,7 @@ mod test {
     }
 
     #[cfg(feature = "async_std")]
-    #[cfg_attr(feature = "async_std", tokio::test)]
+    #[cfg_attr(feature = "async_std", async_std::test)]
     async fn astd_SMSG_NAME_QUERY_RESPONSE1() {
         let raw: Vec<u8> = vec![ 0x00, 0x1D, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
              0x00, 0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x41, 0x00, 0x01,

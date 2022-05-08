@@ -2,8 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -174,7 +172,7 @@ mod test {
     }
 
     #[cfg(feature = "async_tokio")]
-    #[cfg_attr(feature = "async_tokio", async_std::test)]
+    #[cfg_attr(feature = "async_tokio", tokio::test)]
     async fn tokio_SMSG_PONG0() {
         let raw: Vec<u8> = vec![ 0x00, 0x06, 0xDD, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, ];
 
@@ -200,7 +198,7 @@ mod test {
     }
 
     #[cfg(feature = "async_std")]
-    #[cfg_attr(feature = "async_std", tokio::test)]
+    #[cfg_attr(feature = "async_std", async_std::test)]
     async fn astd_SMSG_PONG0() {
         let raw: Vec<u8> = vec![ 0x00, 0x06, 0xDD, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, ];
 

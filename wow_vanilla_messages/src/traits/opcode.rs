@@ -1,12 +1,11 @@
 #[cfg(feature = "async_std")]
 use async_std::io::{ReadExt, WriteExt};
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use async_trait::async_trait;
+use std::future::Future;
+use std::pin::Pin;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use wow_srp::header_crypto::{Decrypter, Encrypter};
 
-#[cfg_attr(any(feature = "async_tokio", feature = "async_std"), async_trait)]
 pub trait OpcodeMessage: Sized {
     type Error;
 
@@ -30,50 +29,94 @@ pub trait OpcodeMessage: Sized {
     ) -> std::result::Result<(), std::io::Error>;
 
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read_unencrypted<R: AsyncReadExt + Unpin + Send>(
-        r: &mut R,
-    ) -> Result<Self, Self::Error>;
+    fn tokio_read_unencrypted<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> Pin<Box<dyn Future<Output = Result<Self, Self::Error>> + Send + 'async_trait>>
+    where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait;
 
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write_unencrypted<W: AsyncWriteExt + Unpin + Send>(
-        &self,
-        w: &mut W,
-    ) -> Result<(), std::io::Error>;
+    fn tokio_write_unencrypted<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait;
 
     #[cfg(feature = "async_tokio")]
-    async fn tokio_read_encrypted<R: AsyncReadExt + Unpin + Send, D: Decrypter + Send>(
-        r: &mut R,
-        d: &mut D,
-    ) -> std::result::Result<Self, Self::Error>;
+    fn tokio_read_encrypted<'life0, 'life1, 'async_trait, R, D>(
+        r: &'life0 mut R,
+        d: &'life1 mut D,
+    ) -> Pin<Box<dyn Future<Output = std::result::Result<Self, Self::Error>> + Send + 'async_trait>>
+    where
+        R: 'async_trait + AsyncReadExt + Unpin + Send,
+        D: 'async_trait + Decrypter + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait;
 
     #[cfg(feature = "async_tokio")]
-    async fn tokio_write_encrypted<W: AsyncWriteExt + Unpin + Send, E: Encrypter + Send>(
-        &self,
-        w: &mut W,
-        e: &mut E,
-    ) -> std::result::Result<(), std::io::Error>;
+    fn tokio_write_encrypted<'life0, 'life1, 'life2, 'async_trait, W, E>(
+        &'life0 self,
+        w: &'life1 mut W,
+        e: &'life2 mut E,
+    ) -> Pin<Box<dyn Future<Output = std::result::Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        E: 'async_trait + Encrypter + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        'life2: 'async_trait,
+        Self: 'async_trait;
 
     #[cfg(feature = "async_std")]
-    async fn astd_read_unencrypted<R: ReadExt + Unpin + Send>(
-        r: &mut R,
-    ) -> Result<Self, Self::Error>;
+    fn astd_read_unencrypted<'life0, 'async_trait, R>(
+        r: &'life0 mut R,
+    ) -> Pin<Box<dyn Future<Output = Result<Self, Self::Error>> + Send + 'async_trait>>
+    where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait;
 
     #[cfg(feature = "async_std")]
-    async fn astd_write_unencrypted<W: WriteExt + Unpin + Send>(
-        &self,
-        w: &mut W,
-    ) -> Result<(), std::io::Error>;
+    fn astd_write_unencrypted<'life0, 'life1, 'async_trait, W>(
+        &'life0 self,
+        w: &'life1 mut W,
+    ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait;
 
     #[cfg(feature = "async_std")]
-    async fn astd_read_encrypted<R: ReadExt + Unpin + Send, D: Decrypter + Send>(
-        r: &mut R,
-        d: &mut D,
-    ) -> std::result::Result<Self, Self::Error>;
+    fn astd_read_encrypted<'life0, 'life1, 'async_trait, R, D>(
+        r: &'life0 mut R,
+        d: &'life1 mut D,
+    ) -> Pin<Box<dyn Future<Output = std::result::Result<Self, Self::Error>> + Send + 'async_trait>>
+    where
+        R: 'async_trait + ReadExt + Unpin + Send,
+        D: 'async_trait + Decrypter + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        Self: 'async_trait;
 
     #[cfg(feature = "async_std")]
-    async fn astd_write_encrypted<W: WriteExt + Unpin + Send, E: Encrypter + Send>(
-        &self,
-        w: &mut W,
-        e: &mut E,
-    ) -> std::result::Result<(), std::io::Error>;
+    fn astd_write_encrypted<'life0, 'life1, 'life2, 'async_trait, W, E>(
+        &'life0 self,
+        w: &'life1 mut W,
+        e: &'life2 mut E,
+    ) -> Pin<Box<dyn Future<Output = std::result::Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + WriteExt + Unpin + Send,
+        E: 'async_trait + Encrypter + Send,
+        'life0: 'async_trait,
+        'life1: 'async_trait,
+        'life2: 'async_trait,
+        Self: 'async_trait;
 }

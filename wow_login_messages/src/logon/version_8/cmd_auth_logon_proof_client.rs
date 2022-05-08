@@ -3,8 +3,6 @@ use crate::logon::version_8::{SecurityFlag};
 use crate::logon::version_2::TelemetryKey;
 use crate::ClientMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -974,7 +972,7 @@ mod test {
         }
 
         #[cfg(feature = "async_tokio")]
-        #[cfg_attr(feature = "async_tokio", async_std::test)]
+        #[cfg_attr(feature = "async_tokio", tokio::test)]
         async fn tokio_CMD_AUTH_LOGON_PROOF_Client0() {
             let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
                  0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45,
@@ -1046,7 +1044,7 @@ mod test {
             }
 
             #[cfg(feature = "async_std")]
-            #[cfg_attr(feature = "async_std", tokio::test)]
+            #[cfg_attr(feature = "async_std", async_std::test)]
             async fn astd_CMD_AUTH_LOGON_PROOF_Client0() {
                 let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4,
                      0xC8, 0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E,
@@ -1181,7 +1179,7 @@ mod test {
                     }
 
                     #[cfg(feature = "async_tokio")]
-                    #[cfg_attr(feature = "async_tokio", async_std::test)]
+                    #[cfg_attr(feature = "async_tokio", tokio::test)]
                     async fn tokio_CMD_AUTH_LOGON_PROOF_Client1() {
                         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83,
                              0xC4, 0xC8, 0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A,
@@ -1245,7 +1243,7 @@ mod test {
                         }
 
                         #[cfg(feature = "async_std")]
-                        #[cfg_attr(feature = "async_std", tokio::test)]
+                        #[cfg_attr(feature = "async_std", async_std::test)]
                         async fn astd_CMD_AUTH_LOGON_PROOF_Client1() {
                             let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1,
                                  0x83, 0xC4, 0xC8, 0xA9, 0x50, 0x0E, 0x3F, 0x5A,
@@ -1366,7 +1364,7 @@ mod test {
                                 }
 
                                 #[cfg(feature = "async_tokio")]
-                                #[cfg_attr(feature = "async_tokio", async_std::test)]
+                                #[cfg_attr(feature = "async_tokio", tokio::test)]
                                 async fn tokio_CMD_AUTH_LOGON_PROOF_Client2() {
                                     let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5,
                                          0xD1, 0x83, 0xC4, 0xC8, 0xA9, 0x50, 0x0E,
@@ -1424,7 +1422,7 @@ mod test {
                                     }
 
                                     #[cfg(feature = "async_std")]
-                                    #[cfg_attr(feature = "async_std", tokio::test)]
+                                    #[cfg_attr(feature = "async_std", async_std::test)]
                                     async fn astd_CMD_AUTH_LOGON_PROOF_Client2() {
                                         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E,
                                              0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
@@ -1564,7 +1562,7 @@ mod test {
                                             }
 
                                             #[cfg(feature = "async_tokio")]
-                                            #[cfg_attr(feature = "async_tokio", async_std::test)]
+                                            #[cfg_attr(feature = "async_tokio", tokio::test)]
                                             async fn tokio_CMD_AUTH_LOGON_PROOF_Client3() {
                                                 let raw: Vec<u8> = vec![ 0x01, 0xF1,
                                                      0x3E, 0xE5, 0xD1, 0x83, 0xC4,
@@ -1654,7 +1652,7 @@ mod test {
                                                 }
 
                                                 #[cfg(feature = "async_std")]
-                                                #[cfg_attr(feature = "async_std", tokio::test)]
+                                                #[cfg_attr(feature = "async_std", async_std::test)]
                                                 async fn astd_CMD_AUTH_LOGON_PROOF_Client3() {
                                                     let raw: Vec<u8> = vec![ 0x01,
                                                          0xF1, 0x3E, 0xE5, 0xD1,
@@ -1876,7 +1874,7 @@ mod test {
                                                         }
 
                                                         #[cfg(feature = "async_tokio")]
-                                                        #[cfg_attr(feature = "async_tokio", async_std::test)]
+                                                        #[cfg_attr(feature = "async_tokio", tokio::test)]
                                                         async fn tokio_CMD_AUTH_LOGON_PROOF_Client4() {
                                                             let raw: Vec<u8> = vec![
                                                                  0x01, 0xF1, 0x3E,
@@ -2035,7 +2033,7 @@ mod test {
                                                             }
 
                                                             #[cfg(feature = "async_std")]
-                                                            #[cfg_attr(feature = "async_std", tokio::test)]
+                                                            #[cfg_attr(feature = "async_std", async_std::test)]
                                                             async fn astd_CMD_AUTH_LOGON_PROOF_Client4() {
                                                                 let raw: Vec<u8> = vec![
                                                                      0x01, 0xF1,
@@ -2434,7 +2432,7 @@ mod test {
                                                                     }
 
                                                                     #[cfg(feature = "async_tokio")]
-                                                                    #[cfg_attr(feature = "async_tokio", async_std::test)]
+                                                                    #[cfg_attr(feature = "async_tokio", tokio::test)]
                                                                     async fn tokio_CMD_AUTH_LOGON_PROOF_Client5() {
                                                                         let raw: Vec<u8> = vec![
                                                                              0x01,
@@ -2715,7 +2713,7 @@ mod test {
                                                                         }
 
                                                                         #[cfg(feature = "async_std")]
-                                                                        #[cfg_attr(feature = "async_std", tokio::test)]
+                                                                        #[cfg_attr(feature = "async_std", async_std::test)]
                                                                         async fn astd_CMD_AUTH_LOGON_PROOF_Client5() {
                                                                             let raw: Vec<u8> = vec![
                                                                                  0x01,

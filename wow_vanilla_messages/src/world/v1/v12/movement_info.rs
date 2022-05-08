@@ -2,8 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{MovementFlags};
 use crate::world::v1::v12::TransportInfo;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]

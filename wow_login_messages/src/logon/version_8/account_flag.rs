@@ -1,7 +1,5 @@
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};
 
-#[cfg(any(feature = "async_tokio", feature = "async_std"))]
-use async_trait::async_trait;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]

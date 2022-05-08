@@ -37,15 +37,10 @@ pub const WORLD_CLIENT_HEADER_TRAIT_NAME: &str = "ClientMessageWrite";
 pub const WORLD_SERVER_HEADER_TRAIT_NAME: &str = "ServerMessageWrite";
 pub const OPCODE_MESSAGE_TRAIT_NAME: &str = "OpcodeMessage";
 
-pub const ASYNC_TRAIT_MACRO: &str =
-    "#[cfg_attr(any(feature = \"async_tokio\", feature = \"async_std\"), async_trait)]";
-pub const ASYNC_TRAIT_IMPORT: &str = "use async_trait::async_trait;";
-
 pub const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
 pub const ASYNC_STD_IMPORT: &str = "use async_std::io::{ReadExt, WriteExt};";
 
 const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
-const CFG_ASYNC_ANY: &str = "#[cfg(any(feature = \"async_tokio\", feature = \"async_std\"))]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"async_tokio\")]";
 const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async_std\")]";
 
@@ -717,9 +712,6 @@ impl Writer {
     }
 
     pub fn write_async_includes(&mut self) {
-        self.wln(CFG_ASYNC_ANY);
-        self.wln(ASYNC_TRAIT_IMPORT);
-
         self.wln(CFG_ASYNC_TOKIO);
         self.wln(TOKIO_IMPORT);
 
@@ -868,8 +860,8 @@ impl ImplType {
     pub fn test_macro(&self) -> &str {
         match self {
             ImplType::Std => "#[cfg_attr(feature = \"sync\", test)]",
-            ImplType::Tokio => "#[cfg_attr(feature = \"async_tokio\", async_std::test)]",
-            ImplType::AsyncStd => "#[cfg_attr(feature = \"async_std\", tokio::test)]",
+            ImplType::Tokio => "#[cfg_attr(feature = \"async_tokio\", tokio::test)]",
+            ImplType::AsyncStd => "#[cfg_attr(feature = \"async_std\", async_std::test)]",
         }
     }
 
