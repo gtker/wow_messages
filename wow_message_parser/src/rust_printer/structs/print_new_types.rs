@@ -25,7 +25,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
 
                 print_from_old_enum_to_new(s, &rd);
 
-                print_default_for_new_enum(s, ce);
+                print_default_for_new_enum(s, &rd);
 
                 s.bodyn(format!("impl {name}", name = ce.name()), |s| {
                     print_write_for_new_enum(s, ce);
@@ -765,27 +765,27 @@ fn print_from_old_enum_to_new(s: &mut Writer, rd: &RustDefiner) {
     );
 }
 
-fn print_default_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {
-    s.bodyn(format!("impl Default for {name}", name = ce.name()), |s| {
-        s.body("fn default() -> Self", |s| {
-            s.wln("// First enumerator without any fields");
-            let f = ce.fields().first().unwrap();
-            if f.is_simple_or_subfields_const() {
-                s.wln(format!("Self::{variant}", variant = f.name()));
-            } else {
-                s.open_curly(format!("Self::{variant}", variant = f.name()));
+fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
+    s.bodyn(
+        format!("impl Default for {name}", name = rd.ty_name()),
+        |s| {
+            s.body("fn default() -> Self", |s| {
+                s.wln("// First enumerator without any fields");
+                let enumerator = rd.enumerators().first().unwrap();
+                if enumerator.has_members_in_struct() {
+                    s.open_curly(format!("Self::{}", enumerator.name()));
 
-                for sf in f.subfields() {
-                    if sf.used_as_size_in().is_some() || sf.constant_value().is_some() {
-                        continue;
+                    for m in enumerator.members_in_struct() {
+                        s.wln(format!("{name}: Default::default(),", name = m.name()));
                     }
-                    s.wln(format!("{name}: Default::default(),", name = sf.name()));
-                }
 
-                s.closing_curly();
-            }
-        });
-    });
+                    s.closing_curly();
+                } else {
+                    s.wln(format!("Self::{}", enumerator.name()));
+                }
+            });
+        },
+    );
 }
 
 fn print_write_for_new_enum(s: &mut Writer, ce: &ComplexEnum) {

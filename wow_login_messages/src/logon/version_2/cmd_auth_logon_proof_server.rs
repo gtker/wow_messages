@@ -390,8 +390,8 @@ impl Default for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
     fn default() -> Self {
         // First enumerator without any fields
         Self::SUCCESS {
-            server_proof: Default::default(),
             hardware_survey_id: Default::default(),
+            server_proof: Default::default(),
         }
     }
 }

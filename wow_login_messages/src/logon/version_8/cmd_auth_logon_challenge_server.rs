@@ -1198,12 +1198,12 @@ impl Default for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     fn default() -> Self {
         // First enumerator without any fields
         Self::SUCCESS {
-            server_public_key: Default::default(),
+            crc_salt: Default::default(),
             generator: Default::default(),
             large_safe_prime: Default::default(),
             salt: Default::default(),
-            crc_salt: Default::default(),
             security_flag: Default::default(),
+            server_public_key: Default::default(),
         }
     }
 }
