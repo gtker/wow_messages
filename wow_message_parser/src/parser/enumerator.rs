@@ -10,7 +10,7 @@ use crate::ENUM_SELF_VALUE_FIELD;
 pub struct DefinerField {
     name: String,
     value: DefinerValue,
-    kv: Tags,
+    tags: Tags,
 }
 
 impl DefinerField {
@@ -18,11 +18,11 @@ impl DefinerField {
         Self::key_value(name, value, Tags::new())
     }
 
-    pub fn key_value(name: &str, value: DefinerValue, kv: Tags) -> Self {
+    pub fn key_value(name: &str, value: DefinerValue, tags: Tags) -> Self {
         Self {
             name: name.to_string(),
             value,
-            kv,
+            tags,
         }
     }
 
@@ -35,7 +35,7 @@ impl DefinerField {
     }
 
     pub fn tags(&self) -> &Tags {
-        &self.kv
+        &self.tags
     }
 }
 
@@ -75,14 +75,14 @@ impl From<&str> for DefinerValue {
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct SelfValueDefinerField {
     name: String,
-    kv: Tags,
+    tags: Tags,
 }
 
 impl SelfValueDefinerField {
-    pub fn new(name: &str, kv: Tags) -> Self {
+    pub fn new(name: &str, tags: Tags) -> Self {
         Self {
             name: name.to_string(),
-            kv,
+            tags,
         }
     }
 
@@ -90,8 +90,8 @@ impl SelfValueDefinerField {
         &self.name
     }
 
-    pub fn kvs(&self) -> &Tags {
-        &self.kv
+    pub fn tags(&self) -> &Tags {
+        &self.tags
     }
 }
 
@@ -102,7 +102,7 @@ pub struct Definer {
     fields: Vec<DefinerField>,
     self_value: Option<SelfValueDefinerField>,
     basic_type: IntegerType,
-    extra_key_value: Tags,
+    tags: Tags,
     objects_used_in: Option<Vec<(String, DefinerUsage)>>,
     file_info: FileInfo,
 }
@@ -114,7 +114,7 @@ impl Definer {
         fields: Vec<DefinerField>,
         basic_type: IntegerType,
         self_value: Option<SelfValueDefinerField>,
-        extras: Tags,
+        tags: Tags,
         file_info: FileInfo,
     ) -> Self {
         Self {
@@ -123,7 +123,7 @@ impl Definer {
             fields,
             self_value,
             basic_type,
-            extra_key_value: extras,
+            tags,
             objects_used_in: None,
             file_info,
         }
@@ -171,7 +171,7 @@ impl Definer {
     }
 
     pub fn tags(&self) -> &Tags {
-        &self.extra_key_value
+        &self.tags
     }
 
     pub fn file_info(&self) -> &FileInfo {

@@ -46,7 +46,7 @@ pub struct Container {
     object_type: ContainerType,
     constant: Option<bool>,
     members: Vec<StructMember>,
-    kvs: Tags,
+    tags: Tags,
     tests: Vec<TestCase>,
     file_info: FileInfo,
     only_has_io_error: Option<bool>,
@@ -535,7 +535,7 @@ impl Container {
     }
 
     pub fn tags(&self) -> &Tags {
-        &self.kvs
+        &self.tags
     }
 
     pub fn get_complex_sizes(statement: &IfStatement, e: &Container, o: &Objects) -> Sizes {
@@ -904,7 +904,7 @@ impl Container {
     pub fn new(
         name: &str,
         members: Vec<StructMember>,
-        kvs: Tags,
+        tags: Tags,
         object_type: ContainerType,
         file_info: FileInfo,
     ) -> Self {
@@ -913,7 +913,7 @@ impl Container {
             object_type,
             constant: None,
             members,
-            kvs,
+            tags,
             tests: vec![],
             file_info,
             only_has_io_error: None,
@@ -1311,7 +1311,7 @@ fn get_type(variable_name: &str, m: &StructMember) -> Option<Type> {
 pub struct OptionalStatement {
     name: String,
     members: Vec<StructMember>,
-    kvs: Tags,
+    tags: Tags,
 }
 
 impl PartialEq for OptionalStatement {
@@ -1325,7 +1325,7 @@ impl OptionalStatement {
         Self {
             name: name.to_string(),
             members,
-            kvs: Tags::new(),
+            tags: Tags::new(),
         }
     }
 
@@ -1338,7 +1338,7 @@ impl OptionalStatement {
     }
 
     pub fn tags(&self) -> &Tags {
-        &self.kvs
+        &self.tags
     }
 }
 
@@ -1503,7 +1503,7 @@ pub struct StructMemberDefinition {
     verified_value: Option<VerifiedContainerValue>,
     used_as_size_in: Option<String>,
     used_in_if: Option<bool>,
-    kvs: Tags,
+    tags: Tags,
 }
 
 impl StructMemberDefinition {
@@ -1519,7 +1519,7 @@ impl StructMemberDefinition {
         self.used_in_if = Some(used);
     }
 
-    pub fn new(name: &str, struct_type: Type, value: Option<ContainerValue>, kvs: Tags) -> Self {
+    pub fn new(name: &str, struct_type: Type, value: Option<ContainerValue>, tags: Tags) -> Self {
         Self {
             name: name.to_string(),
             struct_type,
@@ -1527,7 +1527,7 @@ impl StructMemberDefinition {
             verified_value: None,
             used_as_size_in: None,
             used_in_if: None,
-            kvs,
+            tags,
         }
     }
 
@@ -1559,7 +1559,7 @@ impl StructMemberDefinition {
                     ))
                 } else {
                     let value = if v.identifier() != CONTAINER_SELF_SIZE_FIELD {
-                        o.get_definer_field_value(&self.ty().rust_str(), v.identifier(), &self.kvs)
+                        o.get_definer_field_value(&self.ty().rust_str(), v.identifier(), &self.tags)
                     } else {
                         0
                     };
@@ -1573,7 +1573,7 @@ impl StructMemberDefinition {
     }
 
     pub fn tags(&self) -> &Tags {
-        &self.kvs
+        &self.tags
     }
 }
 
