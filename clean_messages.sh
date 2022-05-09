@@ -7,3 +7,4 @@ rm $(pwd)/wow_vanilla_messages/src/world/mod.rs || true
 
 rm -r $(pwd)/wowm_language/src/docs || true
 
+rm intermediate_representation.json || true

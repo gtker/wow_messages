@@ -315,7 +315,7 @@ impl Objects {
             }
 
             let ty = match c.contains_definer(e.name()) {
-                DefinerUsage::NotUsed => continue,
+                DefinerUsage::Unused => continue,
                 DefinerUsage::NotInIf => DefinerUsage::NotInIf,
                 DefinerUsage::InIf => DefinerUsage::InIf,
             };

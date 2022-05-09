@@ -13,6 +13,7 @@ use crate::doc_printer::{
 use crate::file_utils::{
     append_string_to_file, get_world_version_file_path, write_string_to_file, ModFiles, LOGIN_DIR,
 };
+use crate::ir_printer::write_intermediate_representation;
 use crate::rust_printer::{print_enum, print_flag, print_login_opcodes, print_world_opcodes};
 use parser::types::tags::Tags;
 
@@ -21,6 +22,7 @@ mod doc_printer;
 pub(crate) mod file_info;
 mod file_utils;
 pub mod impl_features;
+mod ir_printer;
 pub mod parser;
 mod rust_printer;
 mod test_case;
@@ -99,6 +101,8 @@ fn main() {
     write_login_opcodes(&o);
 
     write_world_opcodes(&o);
+
+    write_intermediate_representation(&o);
 
     o.print_stats_for_1_12();
 }

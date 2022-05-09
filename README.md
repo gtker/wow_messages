@@ -10,6 +10,7 @@ The project is split into the subdirectories:
 * `wow_vanilla_messages`: **UNRELEASED** Rust library for the world server for WoW version 1.x.y.
 * `wow_simple_auth`: Test binary that uses the authentication library.
 * `wowm_language`: [mdbook](https://github.com/rust-lang/mdBook) of language specification.
+* `intermediate_representation.json` contains a machine readable version of the `wowm` files.
 
 ## License
 

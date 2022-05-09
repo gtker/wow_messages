@@ -53,9 +53,9 @@ pub struct Container {
     rust_object_view: Option<RustObject>,
 }
 
-#[derive(Debug, Eq, PartialEq, Clone)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy)]
 pub enum DefinerUsage {
-    NotUsed,
+    Unused,
     NotInIf,
     InIf,
 }
@@ -119,7 +119,7 @@ impl Container {
                     let mut not_in_if = false;
                     for m in statement.all_members() {
                         match inner(m, ty_name, variable_name) {
-                            DefinerUsage::NotUsed => {}
+                            DefinerUsage::Unused => {}
                             DefinerUsage::NotInIf => not_in_if = true,
                             DefinerUsage::InIf => return DefinerUsage::InIf,
                         }
@@ -134,7 +134,7 @@ impl Container {
 
                     for m in optional.members() {
                         match inner(m, ty_name, variable_name) {
-                            DefinerUsage::NotUsed => {}
+                            DefinerUsage::Unused => {}
                             DefinerUsage::NotInIf => not_in_if = true,
                             DefinerUsage::InIf => return DefinerUsage::InIf,
                         }
@@ -146,7 +146,7 @@ impl Container {
                 }
             }
 
-            DefinerUsage::NotUsed
+            DefinerUsage::Unused
         }
 
         let variable_name = self.get_variable_name_of_definer_ty(ty_name);
@@ -156,7 +156,7 @@ impl Container {
 
             for m in self.fields() {
                 match inner(m, ty_name, &variable_name) {
-                    DefinerUsage::NotUsed => {}
+                    DefinerUsage::Unused => {}
                     DefinerUsage::NotInIf => not_in_if = true,
                     DefinerUsage::InIf => return DefinerUsage::InIf,
                 }
@@ -167,7 +167,7 @@ impl Container {
             }
         }
 
-        DefinerUsage::NotUsed
+        DefinerUsage::Unused
     }
 
     pub fn append_tests(&mut self, mut t: Vec<TestCase>) {
@@ -1057,8 +1057,20 @@ impl Container {
                         c,
                         o,
                     );
+
+                    for else_if in &mut statement.else_ifs {
+                        else_if.set_original_ty(c.get_type_of_variable(else_if.name()));
+                    }
+
+                    for m in statement.all_members_mut() {
+                        inner(m, c, o);
+                    }
                 }
-                StructMember::OptionalStatement(_) => {}
+                StructMember::OptionalStatement(optional) => {
+                    for m in &mut optional.members {
+                        inner(m, c, o);
+                    }
+                }
             }
         }
 
@@ -1107,7 +1119,18 @@ impl Container {
 
                     Some(statement.name())
                 }
-                StructMember::OptionalStatement(_) => None,
+                StructMember::OptionalStatement(optional) => {
+                    let mut used_in_if = Vec::new();
+                    for m in &mut optional.members {
+                        if let Some(name) = inner(m) {
+                            used_in_if.push(name.to_string());
+                        }
+                    }
+                    for m in &mut optional.members {
+                        set(m, &used_in_if);
+                    }
+                    None
+                }
             }
         }
         let mut used_in_if = Vec::new();
