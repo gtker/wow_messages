@@ -1,4 +1,5 @@
 use crate::container::DefinerUsage;
+use crate::impl_features::{get_impl_features_for_definer, Feature};
 use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::enumerator::{Definer, DefinerField};
 use crate::rust_printer::DefinerType;
@@ -35,6 +36,7 @@ fn definer_to_ir(e: &Definer) -> IrDefiner {
             file_name: e.file_info().name().to_string(),
             start_position: e.file_info().start_line(),
         },
+        features: get_impl_features_for_definer(e).to_array(),
     }
 }
 
@@ -111,4 +113,5 @@ pub struct IrDefiner {
     tags: IrTags,
     objects_used_in: Vec<(String, IrDefinerUsage)>,
     file_info: IrFileInfo,
+    features: Vec<Feature>,
 }

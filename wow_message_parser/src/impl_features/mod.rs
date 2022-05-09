@@ -5,8 +5,9 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{ArraySize, ArrayType};
 use crate::rust_printer::DefinerType;
 use crate::CONTAINER_SELF_SIZE_FIELD;
+use serde::Serialize;
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize)]
 pub enum Feature {
     Struct,
     CLogin,
@@ -82,6 +83,10 @@ impl ImplFeatures {
 
     pub fn contains(&self, f: Feature) -> bool {
         self.inner.contains(&f)
+    }
+
+    pub fn to_array(&self) -> Vec<Feature> {
+        self.inner.clone()
     }
 }
 

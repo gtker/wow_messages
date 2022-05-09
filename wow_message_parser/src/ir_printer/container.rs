@@ -2,6 +2,7 @@ use crate::container::{
     Conditional, Container, ContainerType, Equation, IfStatement, OptionalStatement, StructMember,
     StructMemberDefinition,
 };
+use crate::impl_features::{get_impl_features_for_container, Feature};
 use crate::ir_printer::{IrEndianness, IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{
@@ -49,6 +50,7 @@ fn container_to_ir(e: &Container) -> IrContainer {
             start_position: e.file_info().start_line(),
         },
         only_has_io_error: e.only_has_io_errors(),
+        features: get_impl_features_for_container(e).to_array(),
     }
 }
 
@@ -86,6 +88,7 @@ pub struct IrContainer {
     tests: Vec<IrTestCase>,
     file_info: IrFileInfo,
     only_has_io_error: bool,
+    features: Vec<Feature>,
 }
 
 #[derive(Debug, Serialize)]
