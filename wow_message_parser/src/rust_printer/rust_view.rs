@@ -44,6 +44,51 @@ impl RustMember {
         &self.original_ty
     }
 
+    pub fn is_elseif_flag(&self) -> bool {
+        match self.ty() {
+            RustType::Flag { is_elseif, .. } => *is_elseif,
+            _ => false,
+        }
+    }
+
+    pub fn clear_flag_enumerator(&mut self, enumerator: &str) {
+        match &mut self.ty {
+            RustType::Flag { enumerators, .. } => enumerators
+                .iter_mut()
+                .find(|a| a.name() == enumerator)
+                .unwrap()
+                .members
+                .clear(),
+            _ => unreachable!(),
+        }
+    }
+
+    pub fn get_flag_enumerator(&self, enumerator: &str) -> RustEnumerator {
+        match self.ty() {
+            RustType::Flag { enumerators, .. } => {
+                let enumerator = enumerators.iter().find(|a| a.name() == enumerator).unwrap();
+                enumerator.clone()
+            }
+            _ => unreachable!(),
+        }
+    }
+
+    pub fn pop_flag_enumerator(&mut self, enumerator: &str) -> RustEnumerator {
+        match &mut self.ty {
+            RustType::Flag { enumerators, .. } => {
+                let (index, _) = enumerators
+                    .iter()
+                    .enumerate()
+                    .find(|a| a.1.name() == enumerator)
+                    .expect(&format!("{}", enumerator));
+                let enumerator = enumerators[index].clone();
+                enumerators.remove(index);
+                enumerator
+            }
+            _ => unreachable!(),
+        }
+    }
+
     pub fn size_comment(&self) -> String {
         format!(" // {}: {}", self.name(), self.ty().str())
     }
@@ -245,6 +290,7 @@ pub enum RustType {
         int_ty: IntegerType,
         enumerators: Vec<RustEnumerator>,
         is_simple: bool,
+        is_elseif: bool,
     },
     Struct(String),
 }
@@ -376,6 +422,7 @@ impl RustObject {
                 enumerators,
                 int_ty,
                 is_simple,
+                ..
             } => (ty_name, enumerators, int_ty, is_simple, DefinerType::Flag),
             _ => return None,
         };
@@ -536,6 +583,82 @@ impl RustDefiner {
     }
 }
 
+fn create_else_if_flag(
+    statement: &IfStatement,
+    struct_ty_name: &str,
+    current_scope: &mut Vec<RustMember>,
+    parent_scope: &mut Vec<RustMember>,
+) {
+    assert_eq!(statement.get_conditional().equations().len(), 1);
+    assert!(statement.else_members().is_empty());
+
+    let enumerator = match &statement.get_conditional().equations()[0] {
+        Equation::BitwiseAnd { value } => value.as_str(),
+        _ => unreachable!(),
+    };
+
+    // Move enumerators into new RustMember
+    let main_enum =
+        find_subject(current_scope, parent_scope, statement).get_flag_enumerator(enumerator);
+    find_subject(current_scope, parent_scope, statement).clear_flag_enumerator(enumerator);
+
+    // Push enumerators
+    let mut enumerators = Vec::new();
+    enumerators.push(main_enum);
+
+    // Append elseifs
+    for elseif in statement.else_ifs() {
+        let name = match &elseif.get_conditional().equations()[0] {
+            Equation::BitwiseAnd { value } => value.to_string(),
+            _ => unreachable!(),
+        };
+        let enumerator =
+            find_subject(current_scope, parent_scope, elseif).pop_flag_enumerator(&name);
+        enumerators.push(enumerator);
+    }
+
+    // Create new Enum RustMember
+    let rm = RustMember {
+        name: enumerator.to_string(),
+        ty: RustType::Enum {
+            ty_name: format!("{}{}", struct_ty_name, enumerator),
+            enumerators,
+            int_ty: IntegerType::U8, // TODO should not matter?
+            is_simple: false,
+        },
+        original_ty: struct_ty_name.to_string(),
+        in_rust_type: true,
+        constant_sized: false,
+        sizes: Sizes::new(), // TODO Make real?
+        tags: Tags::new(),   // TODO Which tags should go in here?
+    };
+
+    // Move RustMember into
+    find_subject(current_scope, parent_scope, statement).append_members_to_enumerator_equal(
+        enumerator,
+        &[rm],
+        &[StructMember::IfStatement(statement.clone())],
+    );
+}
+
+fn find_subject<'a>(
+    current_scope: &'a mut Vec<RustMember>,
+    parent_scope: &'a mut Vec<RustMember>,
+    statement: &IfStatement,
+) -> &'a mut RustMember {
+    let subject = current_scope
+        .iter_mut()
+        .find(|a| statement.name() == a.name);
+    let subject = match subject {
+        None => parent_scope
+            .iter_mut()
+            .find(|a| statement.name() == a.name)
+            .unwrap(),
+        Some(s) => s,
+    };
+    subject
+}
+
 pub fn create_if_statement(
     statement: &IfStatement,
     struct_ty_name: &str,
@@ -592,24 +715,6 @@ pub fn create_if_statement(
         );
 
         else_enumerator_originals.push(m.clone());
-    }
-
-    fn find_subject<'a>(
-        current_scope: &'a mut Vec<RustMember>,
-        parent_scope: &'a mut Vec<RustMember>,
-        statement: &IfStatement,
-    ) -> &'a mut RustMember {
-        let subject = current_scope
-            .iter_mut()
-            .find(|a| statement.name() == a.name);
-        let subject = match subject {
-            None => parent_scope
-                .iter_mut()
-                .find(|a| statement.name() == a.name)
-                .unwrap(),
-            Some(s) => s,
-        };
-        subject
     }
 
     find_subject(current_scope, parent_scope, statement).set_main_enumerators(&main_enumerators);
@@ -690,6 +795,10 @@ pub fn create_if_statement(
                 &else_enumerator_members,
                 &else_enumerator_originals,
             );
+    }
+
+    if statement.is_elseif_flag() {
+        create_else_if_flag(statement, struct_ty_name, current_scope, parent_scope);
     }
 }
 
@@ -797,6 +906,7 @@ pub fn create_struct_member(
                                 int_ty: o.get_definer(s, tags).ty().clone(),
                                 enumerators,
                                 is_simple: true,
+                                is_elseif: false,
                             }
                         }
                         ObjectType::Struct => {

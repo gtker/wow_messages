@@ -503,6 +503,114 @@ impl FlagIfElseIfSimpleFlagONE {
 
 }
 
+#[derive(Debug, PartialEq, Clone)]
+pub enum FlagIfElseIfFlagIfElseIfONE_IF {
+    ONE_IF {
+        b_if: u8,
+    },
+    TWO_ELSEIF {
+        s: FlagIfElseIfSimpleFlag,
+    },
+    FOUR_ELSEIF {
+        elseif2: u8,
+    },
+}
+
+impl From<&FlagIfElseIfONE_IF> for FlagIfElseIfFlagIfElseIfONE_IF {
+    fn from(e: &FlagIfElseIfONE_IF) -> Self {
+        match &e {
+            FlagIfElseIfONE_IF::ONE_IF => Self::ONE_IF {
+                b_if: Default::default(),
+            },
+            FlagIfElseIfONE_IF::TWO_ELSEIF => Self::TWO_ELSEIF {
+                s: Default::default(),
+            },
+            FlagIfElseIfONE_IF::FOUR_ELSEIF => Self::FOUR_ELSEIF {
+                elseif2: Default::default(),
+            },
+        }
+    }
+}
+
+impl From<&FlagIfElseIfFlagIfElseIfONE_IF> for FlagIfElseIfONE_IF {
+    fn from(v: &FlagIfElseIfFlagIfElseIfONE_IF) -> Self {
+        match &v {
+            FlagIfElseIfFlagIfElseIfONE_IF::ONE_IF { .. } => Self::ONE_IF,
+            FlagIfElseIfFlagIfElseIfONE_IF::TWO_ELSEIF { .. } => Self::TWO_ELSEIF,
+            FlagIfElseIfFlagIfElseIfONE_IF::FOUR_ELSEIF { .. } => Self::FOUR_ELSEIF,
+        }
+    }
+}
+
+impl Default for FlagIfElseIfFlagIfElseIfONE_IF {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::ONE_IF {
+            b_if: Default::default(),
+        }
+    }
+}
+
+impl FlagIfElseIfFlagIfElseIfONE_IF {
+    #[cfg(feature = "sync")]
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: FlagIfElseIfONE_IF = self.into();
+        a.write(w)?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: FlagIfElseIfONE_IF = self.into();
+        a.tokio_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: FlagIfElseIfONE_IF = self.into();
+        a.astd_write(w).await?;
+        Ok(())
+    }
+
+    pub(crate) fn as_int(&self) -> u8 {
+        let a: FlagIfElseIfONE_IF = self.into();
+        a.as_int() as u8
+    }
+
+}
+
+impl VariableSized for FlagIfElseIfFlagIfElseIfONE_IF {
+    fn size(&self) -> usize {
+        match self {
+            Self::ONE_IF {
+                b_if,
+            } => {
+                1
+                + 1 // b_if: u8
+            }
+            Self::TWO_ELSEIF {
+                s,
+            } => {
+                1
+                + s.size() // s: FlagIfElseIfSimpleFlag
+            }
+            Self::FOUR_ELSEIF {
+                elseif2,
+            } => {
+                1
+                + 1 // elseif2: u8
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for FlagIfElseIfFlagIfElseIfONE_IF {
+    fn maximum_possible_size() -> usize {
+        0
+    }
+}
+
 #[derive(Default, Debug, PartialEq, Clone)]
 pub struct FlagIfElseIfUpdateFlag {
     inner: u8,
@@ -592,58 +700,6 @@ impl FlagIfElseIfUpdateFlag {
     pub fn clear_ONE_IF(&mut self) -> Self {
         self.inner &= UpdateFlag::ONE_IF.reverse_bits();
         self.one_if = None;
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
-    }
-
-    pub const fn new_TWO_ELSEIF(two_elseif: FlagIfElseIfUpdateFlagTWO_ELSEIF) -> Self {
-        Self {
-            inner: UpdateFlag::TWO_ELSEIF,
-            one_if: None,
-            eight_if: None,
-        }
-    }
-
-    pub fn set_TWO_ELSEIF(&mut self, two_elseif: FlagIfElseIfUpdateFlagTWO_ELSEIF) -> Self {
-        self.inner |= UpdateFlag::TWO_ELSEIF;
-        self.two_elseif = Some(two_elseif);
-        self.clone()
-    }
-
-    pub const fn get_TWO_ELSEIF(&self) -> Option<&FlagIfElseIfUpdateFlagTWO_ELSEIF> {
-        self.two_elseif.as_ref()
-    }
-
-    pub fn clear_TWO_ELSEIF(&mut self) -> Self {
-        self.inner &= UpdateFlag::TWO_ELSEIF.reverse_bits();
-        self.two_elseif = None;
-        // TODO: Cloning like this is not conductive to good performance but it is
-        // temporarily necessary due to test syntax
-        self.clone()
-    }
-
-    pub const fn new_FOUR_ELSEIF(four_elseif: FlagIfElseIfUpdateFlagFOUR_ELSEIF) -> Self {
-        Self {
-            inner: UpdateFlag::FOUR_ELSEIF,
-            one_if: None,
-            eight_if: None,
-        }
-    }
-
-    pub fn set_FOUR_ELSEIF(&mut self, four_elseif: FlagIfElseIfUpdateFlagFOUR_ELSEIF) -> Self {
-        self.inner |= UpdateFlag::FOUR_ELSEIF;
-        self.four_elseif = Some(four_elseif);
-        self.clone()
-    }
-
-    pub const fn get_FOUR_ELSEIF(&self) -> Option<&FlagIfElseIfUpdateFlagFOUR_ELSEIF> {
-        self.four_elseif.as_ref()
-    }
-
-    pub fn clear_FOUR_ELSEIF(&mut self) -> Self {
-        self.inner &= UpdateFlag::FOUR_ELSEIF.reverse_bits();
-        self.four_elseif = None;
         // TODO: Cloning like this is not conductive to good performance but it is
         // temporarily necessary due to test syntax
         self.clone()

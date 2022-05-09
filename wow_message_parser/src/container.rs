@@ -1391,6 +1391,13 @@ impl IfStatement {
         }
     }
 
+    pub fn is_elseif_flag(&self) -> bool {
+        match self.conditional.equations[0] {
+            Equation::BitwiseAnd { .. } => !self.else_ifs().is_empty(),
+            _ => false,
+        }
+    }
+
     pub fn members(&self) -> &[StructMember] {
         &self.members
     }
