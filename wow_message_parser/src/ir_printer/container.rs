@@ -16,27 +16,7 @@ pub fn containers_to_ir(containers: &[&Container]) -> Vec<IrContainer> {
 }
 
 fn container_to_ir(e: &Container) -> IrContainer {
-    let optional = e
-        .fields()
-        .iter()
-        .find(|a| matches!(a, StructMember::OptionalStatement(_)));
-    let optional = match optional {
-        None => None,
-        Some(m) => match m {
-            StructMember::OptionalStatement(optional) => Some(optional.clone().into()),
-            _ => unreachable!(),
-        },
-    };
-
-    let members = e
-        .fields()
-        .iter()
-        .filter(|a| match a {
-            StructMember::OptionalStatement(_) => false,
-            _ => true,
-        })
-        .map(|a| a.into())
-        .collect();
+    let members = e.fields().iter().map(|a| a.into()).collect();
 
     let tests = e.tests().iter().map(|a| a.into()).collect();
 
@@ -45,7 +25,6 @@ fn container_to_ir(e: &Container) -> IrContainer {
         object_type: e.container_type().into(),
         constant: e.is_constant_sized(),
         members,
-        optional,
         tags: IrTags::from_tags(e.tags()),
         tests,
         file_info: IrFileInfo {
@@ -86,7 +65,6 @@ pub struct IrContainer {
     object_type: IrContainerType,
     constant: bool,
     members: Vec<IrStructMember>,
-    optional: Option<IrOptionalStatement>,
     tags: IrTags,
     tests: Vec<IrTestCase>,
     file_info: IrFileInfo,
@@ -101,17 +79,9 @@ pub struct IrOptionalStatement {
     tags: IrTags,
 }
 
-impl From<OptionalStatement> for IrOptionalStatement {
-    fn from(v: OptionalStatement) -> Self {
-        let members = v
-            .members()
-            .iter()
-            .filter(|a| match a {
-                StructMember::OptionalStatement(_) => false,
-                _ => true,
-            })
-            .map(|a| a.into())
-            .collect();
+impl From<&OptionalStatement> for IrOptionalStatement {
+    fn from(v: &OptionalStatement) -> Self {
+        let members = v.members().iter().map(|a| a.into()).collect();
 
         Self {
             name: v.name().to_string(),
@@ -125,6 +95,7 @@ impl From<OptionalStatement> for IrOptionalStatement {
 pub enum IrStructMember {
     Definition(IrStructMemberDefinition),
     IfStatement(IrIfStatement),
+    Optional(IrOptionalStatement),
 }
 
 impl From<&StructMember> for IrStructMember {
@@ -132,7 +103,7 @@ impl From<&StructMember> for IrStructMember {
         match v {
             StructMember::Definition(d) => Self::Definition(d.into()),
             StructMember::IfStatement(statement) => Self::IfStatement(statement.into()),
-            _ => unreachable!(),
+            StructMember::OptionalStatement(optional) => Self::Optional(optional.into()),
         }
     }
 }
