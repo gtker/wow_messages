@@ -613,16 +613,17 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn TestStruct0() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x05, 0x00, 0x00, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
-                .set_A(TestStructTestFlagA::A {
-                    b_A1: 0x0,
+                .set_A(TestStructTestFlagA::B {
+                    b_B1: 0x1,
                 })
                 .set_C(TestStructTestFlagC {
-                    b_C1: 0x0,
+                    b_C1: 0x2,
                 })
+                .set_D()
                 ,
         };
 
@@ -646,16 +647,17 @@ mod test {
     #[cfg(feature = "async_tokio")]
     #[cfg_attr(feature = "async_tokio", tokio::test)]
     async fn tokio_TestStruct0() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x05, 0x00, 0x00, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
-                .set_A(TestStructTestFlagA::A {
-                    b_A1: 0x0,
+                .set_A(TestStructTestFlagA::B {
+                    b_B1: 0x1,
                 })
                 .set_C(TestStructTestFlagC {
-                    b_C1: 0x0,
+                    b_C1: 0x2,
                 })
+                .set_D()
                 ,
         };
 
@@ -679,16 +681,119 @@ mod test {
     #[cfg(feature = "async_std")]
     #[cfg_attr(feature = "async_std", async_std::test)]
     async fn astd_TestStruct0() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x05, 0x00, 0x00, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x01, 0x02, ];
+
+        let expected = TestStruct {
+            f: TestStructTestFlag::empty()
+                .set_A(TestStructTestFlagA::B {
+                    b_B1: 0x1,
+                })
+                .set_C(TestStructTestFlagC {
+                    b_C1: 0x2,
+                })
+                .set_D()
+                ,
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::TestStruct(t) => t,
+            opcode => panic!("incorrect opcode. Expected TestStruct, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.f, expected.f);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn TestStruct1() {
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
                 .set_A(TestStructTestFlagA::A {
-                    b_A1: 0x0,
+                    b_A1: 0x1,
                 })
                 .set_C(TestStructTestFlagC {
-                    b_C1: 0x0,
+                    b_C1: 0x2,
                 })
+                .set_D()
+                ,
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::TestStruct(t) => t,
+            opcode => panic!("incorrect opcode. Expected TestStruct, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.f, expected.f);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    async fn tokio_TestStruct1() {
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x01, 0x02, ];
+
+        let expected = TestStruct {
+            f: TestStructTestFlag::empty()
+                .set_A(TestStructTestFlagA::A {
+                    b_A1: 0x1,
+                })
+                .set_C(TestStructTestFlagC {
+                    b_C1: 0x2,
+                })
+                .set_D()
+                ,
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::TestStruct(t) => t,
+            opcode => panic!("incorrect opcode. Expected TestStruct, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.f, expected.f);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", async_std::test)]
+    async fn astd_TestStruct1() {
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x01, 0x02, ];
+
+        let expected = TestStruct {
+            f: TestStructTestFlag::empty()
+                .set_A(TestStructTestFlagA::A {
+                    b_A1: 0x1,
+                })
+                .set_C(TestStructTestFlagC {
+                    b_C1: 0x2,
+                })
+                .set_D()
                 ,
         };
 

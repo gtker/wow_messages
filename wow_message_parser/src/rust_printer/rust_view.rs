@@ -195,6 +195,39 @@ impl RustMember {
         }
     }
 
+    fn append_members_to_enumerator_equal_and_set_elseif(
+        &mut self,
+        enumerator_name: &str,
+        members: &[RustMember],
+        original_fields: &[StructMember],
+    ) {
+        self.append_members_to_enumerator_equal(enumerator_name, members, original_fields);
+
+        let enums = match &mut self.ty {
+            RustType::Enum {
+                is_simple,
+                enumerators,
+                ..
+            }
+            | RustType::Flag {
+                is_simple,
+                enumerators,
+                ..
+            } => {
+                *is_simple = false;
+                self.constant_sized = false;
+                enumerators
+            }
+            _ => unreachable!(),
+        };
+
+        let enums = enums
+            .iter_mut()
+            .find(|a| a.name() == enumerator_name)
+            .unwrap();
+        enums.contains_elseif = true;
+    }
+
     fn append_members_to_enumerator_equal(
         &mut self,
         enumerator_name: &str,
@@ -240,6 +273,7 @@ pub struct RustEnumerator {
     members: Vec<RustMember>,
     is_main_enumerator: bool,
     original_fields: Vec<StructMember>,
+    contains_elseif: bool,
 }
 
 impl RustEnumerator {
@@ -254,6 +288,9 @@ impl RustEnumerator {
     }
     pub fn members_in_struct(&self) -> Vec<&RustMember> {
         self.members.iter().filter(|m| m.in_rust_type).collect()
+    }
+    pub fn contains_elseif(&self) -> bool {
+        self.contains_elseif
     }
 
     pub fn should_not_be_in_flag_types(&self) -> bool {
@@ -671,11 +708,12 @@ fn create_else_if_flag(
     };
 
     // Move RustMember into
-    find_subject(current_scope, parent_scope, statement).append_members_to_enumerator_equal(
-        enumerator,
-        &[rm],
-        &[StructMember::IfStatement(statement.clone())],
-    );
+    find_subject(current_scope, parent_scope, statement)
+        .append_members_to_enumerator_equal_and_set_elseif(
+            enumerator,
+            &[rm],
+            &[StructMember::IfStatement(statement.clone())],
+        );
 }
 
 fn find_subject<'a>(
@@ -914,6 +952,7 @@ pub fn create_struct_member(
                                 members: vec![],
                                 is_main_enumerator: false,
                                 original_fields: vec![],
+                                contains_elseif: false,
                             });
                         }
                         enumerators

@@ -306,7 +306,9 @@ mod test {
                     realm_type: 0x0,
                     locked: 0x0,
                     flag: RealmRealmFlag::empty()
-                        .set_INVALID()                        .set_OFFLINE(),
+                        .set_INVALID()
+                        .set_OFFLINE()
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,
@@ -347,7 +349,9 @@ mod test {
                     realm_type: 0x0,
                     locked: 0x0,
                     flag: RealmRealmFlag::empty()
-                        .set_INVALID()                        .set_OFFLINE(),
+                        .set_INVALID()
+                        .set_OFFLINE()
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,
@@ -388,7 +392,9 @@ mod test {
                     realm_type: 0x0,
                     locked: 0x0,
                     flag: RealmRealmFlag::empty()
-                        .set_INVALID()                        .set_OFFLINE(),
+                        .set_INVALID()
+                        .set_OFFLINE()
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,
@@ -437,7 +443,7 @@ mod test {
                                 build: 5875,
                             },
                         })
-,
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,
@@ -486,7 +492,7 @@ mod test {
                                 build: 5875,
                             },
                         })
-,
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,
@@ -535,7 +541,7 @@ mod test {
                                 build: 5875,
                             },
                         })
-,
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,

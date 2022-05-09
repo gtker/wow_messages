@@ -974,7 +974,8 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                .set_NONE(),
+                .set_NONE()
+                ,
         };
 
         let header_size = 1;
@@ -1042,7 +1043,8 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                .set_NONE(),
+                .set_NONE()
+                ,
         };
 
         let header_size = 1;
@@ -1110,7 +1112,8 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                .set_NONE(),
+                .set_NONE()
+                ,
         };
 
         let header_size = 1;
@@ -1168,7 +1171,8 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                .set_NONE(),
+                .set_NONE()
+                ,
         };
 
         let header_size = 1;
@@ -1226,7 +1230,8 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                .set_NONE(),
+                .set_NONE()
+                ,
         };
 
         let header_size = 1;
@@ -1284,7 +1289,8 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                .set_NONE(),
+                .set_NONE()
+                ,
         };
 
         let header_size = 1;
@@ -1330,7 +1336,8 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                .set_NONE(),
+                .set_NONE()
+                ,
         };
 
         let header_size = 1;
@@ -1376,7 +1383,8 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                .set_NONE(),
+                .set_NONE()
+                ,
         };
 
         let header_size = 1;
@@ -1422,7 +1430,8 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                .set_NONE(),
+                .set_NONE()
+                ,
         };
 
         let header_size = 1;
@@ -1478,7 +1487,7 @@ mod test {
                     pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                 })
-,
+                ,
         };
 
         let header_size = 1;
@@ -1534,7 +1543,7 @@ mod test {
                     pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                 })
-,
+                ,
         };
 
         let header_size = 1;
@@ -1590,7 +1599,7 @@ mod test {
                     pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                          0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
                 })
-,
+                ,
         };
 
         let header_size = 1;
@@ -1654,7 +1663,7 @@ mod test {
                     unknown3: 0x40,
                     unknown4: 0xDEADBEEF,
                 })
-,
+                ,
         };
 
         let header_size = 1;
@@ -1718,7 +1727,7 @@ mod test {
                     unknown3: 0x40,
                     unknown4: 0xDEADBEEF,
                 })
-,
+                ,
         };
 
         let header_size = 1;
@@ -1782,7 +1791,7 @@ mod test {
                     unknown3: 0x40,
                     unknown4: 0xDEADBEEF,
                 })
-,
+                ,
         };
 
         let header_size = 1;
@@ -1849,7 +1858,7 @@ mod test {
                 .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
                     unknown5: 0x1,
                 })
-,
+                ,
         };
 
         let header_size = 1;
@@ -1916,7 +1925,7 @@ mod test {
                 .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
                     unknown5: 0x1,
                 })
-,
+                ,
         };
 
         let header_size = 1;
@@ -1983,7 +1992,7 @@ mod test {
                 .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
                     unknown5: 0x1,
                 })
-,
+                ,
         };
 
         let header_size = 1;

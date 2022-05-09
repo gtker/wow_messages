@@ -47,7 +47,13 @@ If f contains `C`:
 ### Examples
 ```c
 255, // opcode (255)
-5, // f: TestFlag  A| C (5)
-0, // b_A1: u8
-0, // b_C1: u8
+14, // f: TestFlag  B| C| D (14)
+1, // b_B1: u8
+2, // b_C1: u8
+```
+```c
+255, // opcode (255)
+13, // f: TestFlag  A| C| D (13)
+1, // b_A1: u8
+2, // b_C1: u8
 ```

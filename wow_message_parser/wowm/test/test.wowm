@@ -21,12 +21,23 @@ clogin TestStruct = 0xFF {
 }
 
 test TestStruct {
-    f = A | C;   
-    b_A1 = 0;
-    b_C1 = 0;
+    f = B | C | D;
+    b_B1 = 1;
+    b_C1 = 2;
 } [
     0xFF, /* opcode */
-    0x05, /* TestFlag */
-    0x00, /* b_A1 */
-    0x00, /* b_C1 */
+    0x0E, /* TestFlag */
+    0x01, /* b_B1 */
+    0x02, /* b_C1 */
+]
+
+test TestStruct {
+    f = A | C | D;
+    b_A1 = 1;
+    b_C1 = 2;
+} [
+    0xFF, /* opcode */
+    0x0D, /* TestFlag */
+    0x01, /* b_A1 */
+    0x02, /* b_C1 */
 ]

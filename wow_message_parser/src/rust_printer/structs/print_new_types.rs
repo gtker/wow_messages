@@ -1,10 +1,7 @@
 use crate::container::Container;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::ty::Type;
-use crate::parser::types::ArrayType;
 use crate::rust_printer::new_enums::{IfStatementType, NewEnumStructMember, NewIfStatement};
 use crate::rust_printer::rust_view::RustDefiner;
-use crate::rust_printer::structs::print_common_impls;
 use crate::rust_printer::structs::print_common_impls::print_write::{
     print_enum_if_statement_new, print_flag_if_statement, print_write_definition, print_write_field,
 };

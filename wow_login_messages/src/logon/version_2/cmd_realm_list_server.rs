@@ -305,7 +305,8 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     flag: RealmFlag::empty()
-                        .set_NONE(),
+                        .set_NONE()
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,
@@ -345,7 +346,8 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     flag: RealmFlag::empty()
-                        .set_NONE(),
+                        .set_NONE()
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,
@@ -385,7 +387,8 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     flag: RealmFlag::empty()
-                        .set_NONE(),
+                        .set_NONE()
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,
@@ -425,7 +428,9 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     flag: RealmFlag::empty()
-                        .set_INVALID().set_OFFLINE(),
+                        .set_INVALID()
+                        .set_OFFLINE()
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,
@@ -465,7 +470,9 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     flag: RealmFlag::empty()
-                        .set_INVALID().set_OFFLINE(),
+                        .set_INVALID()
+                        .set_OFFLINE()
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,
@@ -505,7 +512,9 @@ mod test {
                 Realm {
                     realm_type: RealmType::PLAYER_VS_ENVIRONMENT,
                     flag: RealmFlag::empty()
-                        .set_INVALID().set_OFFLINE(),
+                        .set_INVALID()
+                        .set_OFFLINE()
+                        ,
                     name: String::from("A"),
                     address: String::from("A"),
                     population: Population::RED_FULL,
