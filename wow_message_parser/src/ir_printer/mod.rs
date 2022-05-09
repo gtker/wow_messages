@@ -86,9 +86,12 @@ struct IrObjects {
 
 impl IrObjects {
     fn from_regular_objects(o: &Objects) -> Self {
-        let flags = definers_to_ir(o.flags());
-        let enums = definers_to_ir(o.enums());
-        let containers = containers_to_ir(&o.all_containers().collect::<Vec<_>>());
+        let mut flags = definers_to_ir(o.flags());
+        flags.sort_by(|a, b| a.name().cmp(b.name()));
+        let mut enums = definers_to_ir(o.enums());
+        enums.sort_by(|a, b| a.name().cmp(b.name()));
+        let mut containers = containers_to_ir(&o.all_containers().collect::<Vec<_>>());
+        containers.sort_by(|a, b| a.name().cmp(b.name()));
 
         Self {
             version: IrVersion {

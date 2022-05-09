@@ -62,7 +62,8 @@ impl MessageBody for SMSG_SPELL_START {
                 ammo_display_id,
                 ammo_inventory_type,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -150,7 +151,8 @@ impl MessageBody for SMSG_SPELL_START {
                     ammo_display_id,
                     ammo_inventory_type,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -252,7 +254,8 @@ impl MessageBody for SMSG_SPELL_START {
                     ammo_display_id,
                     ammo_inventory_type,
                 })
-            } else {
+            }
+            else {
                 None
             };
 

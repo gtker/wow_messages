@@ -39,7 +39,8 @@ impl ReadableAndWritable for FlagIfElseIf {
                 Some(FlagIfElseIfSimpleFlagONE {
                     if_one,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -71,7 +72,8 @@ impl ReadableAndWritable for FlagIfElseIf {
             Some(FlagIfElseIfUpdateFlagEIGHT_IF {
                 last_if,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -136,7 +138,8 @@ impl ReadableAndWritable for FlagIfElseIf {
                     Some(FlagIfElseIfSimpleFlagONE {
                         if_one,
                     })
-                } else {
+                }
+                else {
                     None
                 };
 
@@ -168,7 +171,8 @@ impl ReadableAndWritable for FlagIfElseIf {
                 Some(FlagIfElseIfUpdateFlagEIGHT_IF {
                     last_if,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -247,7 +251,8 @@ impl ReadableAndWritable for FlagIfElseIf {
                     Some(FlagIfElseIfSimpleFlagONE {
                         if_one,
                     })
-                } else {
+                }
+                else {
                     None
                 };
 
@@ -279,7 +284,8 @@ impl ReadableAndWritable for FlagIfElseIf {
                 Some(FlagIfElseIfUpdateFlagEIGHT_IF {
                     last_if,
                 })
-            } else {
+            }
+            else {
                 None
             };
 

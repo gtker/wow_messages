@@ -115,3 +115,9 @@ pub struct IrDefiner {
     file_info: IrFileInfo,
     features: Vec<Feature>,
 }
+
+impl IrDefiner {
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+}

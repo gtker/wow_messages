@@ -63,7 +63,8 @@ impl ReadableAndWritable for Realm {
             Some(RealmRealmFlagSPECIFY_BUILD {
                 version,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -173,7 +174,8 @@ impl ReadableAndWritable for Realm {
                 Some(RealmRealmFlagSPECIFY_BUILD {
                     version,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -297,7 +299,8 @@ impl ReadableAndWritable for Realm {
                 Some(RealmRealmFlagSPECIFY_BUILD {
                     version,
                 })
-            } else {
+            }
+            else {
                 None
             };
 

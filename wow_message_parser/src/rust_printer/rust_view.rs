@@ -622,6 +622,59 @@ impl RustObject {
         v
     }
 
+    pub fn rust_definer_with_variable_name_and_enumerator(
+        &self,
+        variable_name: &str,
+        enumerator_name: &str,
+    ) -> RustDefiner {
+        fn inner(
+            m: &RustMember,
+            variable_name: &str,
+            enumerator_name: &str,
+            container_name: &str,
+        ) -> Option<RustDefiner> {
+            if let Some(rd) = RustObject::get_rust_definer_from_ty(m, container_name) {
+                for enumerator in rd.enumerators() {
+                    if enumerator.contains_elseif() {
+                        match enumerator.members()[0].ty() {
+                            RustType::Enum { enumerators, .. } => {
+                                for enumerator in enumerators {
+                                    for m in enumerator.members() {
+                                        if let Some(rd) =
+                                            inner(m, variable_name, enumerator_name, container_name)
+                                        {
+                                            return Some(rd);
+                                        }
+                                    }
+                                }
+                            }
+                            _ => unreachable!(),
+                        }
+                    }
+
+                    for m in enumerator.members() {
+                        if let Some(rd) = inner(m, variable_name, enumerator_name, container_name) {
+                            return Some(rd);
+                        }
+                    }
+                }
+
+                if rd.variable_name() == variable_name && rd.contains_enumerator(enumerator_name) {
+                    return Some(rd);
+                }
+            }
+            None
+        }
+
+        for m in self.members() {
+            if let Some(rd) = inner(m, variable_name, enumerator_name, self.name()) {
+                return rd;
+            }
+        }
+
+        unreachable!()
+    }
+
     pub fn get_rust_definer(&self, name: &str) -> RustDefiner {
         let member = self.get_complex_definer_ty(name);
 
@@ -714,6 +767,51 @@ impl RustDefiner {
     }
     pub fn definer_type(&self) -> DefinerType {
         self.definer_type
+    }
+    pub fn get_enumerator(&self, enumerator_name: &str) -> &RustEnumerator {
+        for enumerator in self.enumerators() {
+            if enumerator.contains_elseif() {
+                match enumerator.members()[0].ty() {
+                    RustType::Enum { enumerators, .. } => {
+                        for enumerator in enumerators {
+                            if enumerator.name() == enumerator_name {
+                                return enumerator;
+                            }
+                        }
+                    }
+                    _ => unreachable!(),
+                }
+            }
+
+            if enumerator.name() == enumerator_name {
+                return enumerator;
+            }
+        }
+
+        unreachable!()
+    }
+
+    pub fn contains_enumerator(&self, enumerator_name: &str) -> bool {
+        for enumerator in self.enumerators() {
+            if enumerator.contains_elseif() {
+                match enumerator.members()[0].ty() {
+                    RustType::Enum { enumerators, .. } => {
+                        for enumerator in enumerators {
+                            if enumerator.name() == enumerator_name {
+                                return true;
+                            }
+                        }
+                    }
+                    _ => unreachable!(),
+                }
+            }
+
+            if enumerator.name() == enumerator_name {
+                return true;
+            }
+        }
+
+        false
     }
 }
 

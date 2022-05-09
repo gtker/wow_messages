@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::container::{Container, StructMember, StructMemberDefinition};
+use crate::container::{Container, IfStatement, StructMember, StructMemberDefinition};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, ObjectType};
@@ -489,6 +489,105 @@ fn print_read_definition(
     }
 }
 
+fn print_read_if_statement_flag(
+    s: &mut Writer,
+    e: &Container,
+    o: &Objects,
+    statement: &IfStatement,
+    prefix: &str,
+    postfix: &str,
+) {
+    s.open_curly(format!(
+        "let {var_name}_{enumerator_name} = if {var_name}.is_{enumerator_name}()",
+        var_name = statement.name(),
+        enumerator_name = statement.flag_get_enumerator(),
+    ));
+
+    for m in statement.members() {
+        print_read_field(s, e, o, m, prefix, postfix);
+    }
+
+    print_read_final_flag(
+        s,
+        &e.rust_object()
+            .rust_definers_in_enumerator(&statement.flag_get_enumerator()),
+    );
+
+    let new_ty_name = format!(
+        "{container_name}{definer_ty_name}{enumerator}",
+        container_name = e.name(),
+        definer_ty_name = statement.original_ty().rust_str(),
+        enumerator = statement.flag_get_enumerator(),
+    );
+
+    if statement.else_ifs().is_empty() {
+        s.open_curly(format!("Some({new_ty_name}",));
+    } else {
+        s.open_curly(format!(
+            "Some({new_ty_name}::{enumerator}",
+            enumerator = statement.flag_get_enumerator(),
+        ));
+    }
+
+    let rd = e
+        .rust_object()
+        .rust_definer_with_variable_name_and_enumerator(
+            statement.name(),
+            &statement.flag_get_enumerator(),
+        );
+    let enumerator = rd.get_enumerator(&statement.flag_get_enumerator());
+    for m in enumerator.members_in_struct() {
+        s.wln(format!("{},", m.name()));
+    }
+
+    s.closing_curly_with(")"); // Some(
+    s.closing_curly(); // if
+
+    for elseif in statement.else_ifs() {
+        s.open_curly(format!(
+            "else if {var_name}.is_{enumerator_name}()",
+            var_name = elseif.name(),
+            enumerator_name = elseif.flag_get_enumerator(),
+        ));
+
+        for m in elseif.members() {
+            print_read_field(s, e, o, m, prefix, postfix);
+        }
+
+        print_read_final_flag(
+            s,
+            &e.rust_object()
+                .rust_definers_in_enumerator(&elseif.flag_get_enumerator()),
+        );
+
+        s.open_curly(format!(
+            "Some({new_ty_name}::{enumerator}",
+            enumerator = elseif.flag_get_enumerator(),
+        ));
+
+        let rd = e
+            .rust_object()
+            .rust_definer_with_variable_name_and_enumerator(
+                elseif.name(),
+                &elseif.flag_get_enumerator(),
+            );
+        let enumerator = rd.get_enumerator(&elseif.flag_get_enumerator());
+
+        for m in enumerator.members_in_struct() {
+            s.wln(format!("{},", m.name()));
+        }
+
+        s.closing_curly_with(")"); // Some(
+
+        s.closing_curly(); // elseif
+    }
+
+    s.open_curly("else");
+    s.wln("None");
+    s.closing_curly_with(";"); // else
+    s.newline();
+}
+
 fn print_read_field(
     s: &mut Writer,
     e: &Container,
@@ -506,7 +605,7 @@ fn print_read_field(
                 print_read_if_statement_enum_new(s, e, o, statement.new_enum(), prefix, postfix);
             }
             DefinerType::Flag => {
-                print_read_if_statement_flag_new(s, e, o, statement.new_enum(), prefix, postfix);
+                print_read_if_statement_flag(s, e, o, statement, prefix, postfix);
             }
         },
         StructMember::OptionalStatement(optional) => {

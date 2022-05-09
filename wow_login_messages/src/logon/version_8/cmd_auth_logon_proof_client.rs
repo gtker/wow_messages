@@ -59,10 +59,11 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             r.read_exact(&mut pin_hash)?;
 
             Some(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                pin_salt,
                 pin_hash,
+                pin_salt,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -89,7 +90,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
                 unknown3,
                 unknown4,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -100,7 +102,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             Some(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
                 unknown5,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -212,10 +215,11 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
                 r.read_exact(&mut pin_hash).await?;
 
                 Some(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                    pin_salt,
                     pin_hash,
+                    pin_salt,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -242,7 +246,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
                     unknown3,
                     unknown4,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -253,7 +258,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
                 Some(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
                     unknown5,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -379,10 +385,11 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
                 r.read_exact(&mut pin_hash).await?;
 
                 Some(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                    pin_salt,
                     pin_hash,
+                    pin_salt,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -409,7 +416,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
                     unknown3,
                     unknown4,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -420,7 +428,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
                 Some(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
                     unknown5,
                 })
-            } else {
+            }
+            else {
                 None
             };
 

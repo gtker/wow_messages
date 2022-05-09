@@ -72,6 +72,12 @@ pub struct IrContainer {
     features: Vec<Feature>,
 }
 
+impl IrContainer {
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+}
+
 #[derive(Debug, Serialize)]
 pub struct IrOptionalStatement {
     name: String,

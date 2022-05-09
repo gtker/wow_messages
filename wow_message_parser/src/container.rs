@@ -1411,6 +1411,15 @@ impl IfStatement {
         }
     }
 
+    pub fn flag_get_enumerator(&self) -> String {
+        assert_eq!(self.get_conditional().equations.len(), 1);
+
+        match &self.get_conditional().equations[0] {
+            Equation::BitwiseAnd { value } => value.to_string(),
+            _ => unreachable!(),
+        }
+    }
+
     pub fn is_elseif_flag(&self) -> bool {
         match self.conditional.equations[0] {
             Equation::BitwiseAnd { .. } => !self.else_ifs().is_empty(),

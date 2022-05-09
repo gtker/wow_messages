@@ -45,7 +45,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
                 status,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -56,7 +57,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_HP {
                 current_health,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -67,7 +69,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_HP {
                 max_health,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -78,7 +81,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE {
                 power,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -89,7 +93,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_POWER {
                 current_power,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -100,7 +105,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_POWER {
                 max_power,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -111,7 +117,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_LEVEL {
                 level,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -122,7 +129,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE {
                 area,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -137,7 +145,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 position_x,
                 position_y,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -148,7 +157,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_AURAS {
                 auras,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -160,7 +170,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NAME {
                 pet_name,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -171,7 +182,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MODEL_ID {
                 pet_display_id,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -182,7 +194,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_HP {
                 pet_current_health,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -193,7 +206,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_HP {
                 pet_max_health,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -204,7 +218,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE {
                 pet_power_type,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -215,7 +230,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_POWER {
                 pet_current_power,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -226,7 +242,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_POWER {
                 pet_max_power,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -237,7 +254,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_AURAS {
                 pet_auras,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -378,7 +396,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
                     status,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -389,7 +408,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_HP {
                     current_health,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -400,7 +420,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_HP {
                     max_health,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -411,7 +432,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE {
                     power,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -422,7 +444,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_POWER {
                     current_power,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -433,7 +456,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_POWER {
                     max_power,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -444,7 +468,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_LEVEL {
                     level,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -455,7 +480,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE {
                     area,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -470,7 +496,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                     position_x,
                     position_y,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -481,7 +508,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_AURAS {
                     auras,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -493,7 +521,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NAME {
                     pet_name,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -504,7 +533,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MODEL_ID {
                     pet_display_id,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -515,7 +545,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_HP {
                     pet_current_health,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -526,7 +557,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_HP {
                     pet_max_health,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -537,7 +569,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE {
                     pet_power_type,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -548,7 +581,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_POWER {
                     pet_current_power,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -559,7 +593,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_POWER {
                     pet_max_power,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -570,7 +605,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_AURAS {
                     pet_auras,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -725,7 +761,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
                     status,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -736,7 +773,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_HP {
                     current_health,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -747,7 +785,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_HP {
                     max_health,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -758,7 +797,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE {
                     power,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -769,7 +809,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_POWER {
                     current_power,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -780,7 +821,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_POWER {
                     max_power,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -791,7 +833,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_LEVEL {
                     level,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -802,7 +845,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE {
                     area,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -817,7 +861,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                     position_x,
                     position_y,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -828,7 +873,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_AURAS {
                     auras,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -840,7 +886,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NAME {
                     pet_name,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -851,7 +898,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MODEL_ID {
                     pet_display_id,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -862,7 +910,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_HP {
                     pet_current_health,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -873,7 +922,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_HP {
                     pet_max_health,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -884,7 +934,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE {
                     pet_power_type,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -895,7 +946,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_POWER {
                     pet_current_power,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -906,7 +958,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_POWER {
                     pet_max_power,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -917,7 +970,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_AURAS {
                     pet_auras,
                 })
-            } else {
+            }
+            else {
                 None
             };
 

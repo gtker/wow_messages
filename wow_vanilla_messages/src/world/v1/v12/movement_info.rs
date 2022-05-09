@@ -44,7 +44,8 @@ impl ReadableAndWritable for MovementInfo {
             Some(MovementInfoMovementFlagsON_TRANSPORT {
                 transport,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -54,7 +55,8 @@ impl ReadableAndWritable for MovementInfo {
             Some(MovementInfoMovementFlagsSWIMMING {
                 pitch,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -70,12 +72,13 @@ impl ReadableAndWritable for MovementInfo {
             // xy_speed: f32
             let xy_speed = crate::util::read_f32_le(r)?;
             Some(MovementInfoMovementFlagsJUMPING {
-                z_speed,
                 cos_angle,
                 sin_angle,
                 xy_speed,
+                z_speed,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -85,7 +88,8 @@ impl ReadableAndWritable for MovementInfo {
             Some(MovementInfoMovementFlagsSPLINE_ELEVATION {
                 spline_elevation,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -183,7 +187,8 @@ impl ReadableAndWritable for MovementInfo {
                 Some(MovementInfoMovementFlagsON_TRANSPORT {
                     transport,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -193,7 +198,8 @@ impl ReadableAndWritable for MovementInfo {
                 Some(MovementInfoMovementFlagsSWIMMING {
                     pitch,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -209,12 +215,13 @@ impl ReadableAndWritable for MovementInfo {
                 // xy_speed: f32
                 let xy_speed = crate::util::tokio_read_f32_le(r).await?;
                 Some(MovementInfoMovementFlagsJUMPING {
-                    z_speed,
                     cos_angle,
                     sin_angle,
                     xy_speed,
+                    z_speed,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -224,7 +231,8 @@ impl ReadableAndWritable for MovementInfo {
                 Some(MovementInfoMovementFlagsSPLINE_ELEVATION {
                     spline_elevation,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -336,7 +344,8 @@ impl ReadableAndWritable for MovementInfo {
                 Some(MovementInfoMovementFlagsON_TRANSPORT {
                     transport,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -346,7 +355,8 @@ impl ReadableAndWritable for MovementInfo {
                 Some(MovementInfoMovementFlagsSWIMMING {
                     pitch,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -362,12 +372,13 @@ impl ReadableAndWritable for MovementInfo {
                 // xy_speed: f32
                 let xy_speed = crate::util::astd_read_f32_le(r).await?;
                 Some(MovementInfoMovementFlagsJUMPING {
-                    z_speed,
                     cos_angle,
                     sin_angle,
                     xy_speed,
+                    z_speed,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -377,7 +388,8 @@ impl ReadableAndWritable for MovementInfo {
                 Some(MovementInfoMovementFlagsSPLINE_ELEVATION {
                     spline_elevation,
                 })
-            } else {
+            }
+            else {
                 None
             };
 

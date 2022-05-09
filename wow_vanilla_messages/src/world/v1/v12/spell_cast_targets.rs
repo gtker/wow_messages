@@ -27,7 +27,8 @@ impl ReadableAndWritable for SpellCastTargets {
             Some(SpellCastTargetsSpellCastTargetFlagsUNIT {
                 unit_target1,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -38,7 +39,8 @@ impl ReadableAndWritable for SpellCastTargets {
             Some(SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
                 unit_target2,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -49,7 +51,8 @@ impl ReadableAndWritable for SpellCastTargets {
             Some(SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
                 object_target1,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -60,7 +63,8 @@ impl ReadableAndWritable for SpellCastTargets {
             Some(SpellCastTargetsSpellCastTargetFlagsLOCKED {
                 object_target2,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -71,7 +75,8 @@ impl ReadableAndWritable for SpellCastTargets {
             Some(SpellCastTargetsSpellCastTargetFlagsITEM {
                 item_target1,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -82,7 +87,8 @@ impl ReadableAndWritable for SpellCastTargets {
             Some(SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
                 item_target2,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -98,7 +104,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 position_y1,
                 position_z1,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -114,7 +121,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 position_y2,
                 position_z2,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -126,7 +134,8 @@ impl ReadableAndWritable for SpellCastTargets {
             Some(SpellCastTargetsSpellCastTargetFlagsSTRING {
                 target_string,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -137,7 +146,8 @@ impl ReadableAndWritable for SpellCastTargets {
             Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
                 corpse_target1,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -148,7 +158,8 @@ impl ReadableAndWritable for SpellCastTargets {
             Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
                 corpse_target2,
             })
-        } else {
+        }
+        else {
             None
         };
 
@@ -246,7 +257,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsUNIT {
                     unit_target1,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -257,7 +269,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
                     unit_target2,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -268,7 +281,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
                     object_target1,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -279,7 +293,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsLOCKED {
                     object_target2,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -290,7 +305,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsITEM {
                     item_target1,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -301,7 +317,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
                     item_target2,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -317,7 +334,8 @@ impl ReadableAndWritable for SpellCastTargets {
                     position_y1,
                     position_z1,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -333,7 +351,8 @@ impl ReadableAndWritable for SpellCastTargets {
                     position_y2,
                     position_z2,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -345,7 +364,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsSTRING {
                     target_string,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -356,7 +376,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
                     corpse_target1,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -367,7 +388,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
                     corpse_target2,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -479,7 +501,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsUNIT {
                     unit_target1,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -490,7 +513,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
                     unit_target2,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -501,7 +525,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
                     object_target1,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -512,7 +537,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsLOCKED {
                     object_target2,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -523,7 +549,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsITEM {
                     item_target1,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -534,7 +561,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
                     item_target2,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -550,7 +578,8 @@ impl ReadableAndWritable for SpellCastTargets {
                     position_y1,
                     position_z1,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -566,7 +595,8 @@ impl ReadableAndWritable for SpellCastTargets {
                     position_y2,
                     position_z2,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -578,7 +608,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsSTRING {
                     target_string,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -589,7 +620,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
                     corpse_target1,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
@@ -600,7 +632,8 @@ impl ReadableAndWritable for SpellCastTargets {
                 Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
                     corpse_target2,
                 })
-            } else {
+            }
+            else {
                 None
             };
 
