@@ -19,7 +19,6 @@
 
 # Low Priority
 
-* MaximumPossibleSize for derived enums
 * Workable Intermediate Representation for World
 * More tests/definitions
 * Add derives for all types
