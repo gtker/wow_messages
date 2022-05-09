@@ -104338,26 +104338,12 @@
                 "comment": null,
                 "display": null
               }
-            },
-            {
-              "variable_name": "i",
-              "verified_value": {
-                "Flag": [
-                  "I"
-                ]
-              },
-              "tags": {
-                "description": null,
-                "comment": null,
-                "display": null
-              }
             }
           ],
           "raw_bytes": [
             255,
             13,
             0,
-            2,
             1,
             2
           ],

@@ -50,6 +50,11 @@ impl ReadableAndWritable for TestStruct {
             // b_B1: u8
             let b_B1 = crate::util::read_u8_le(r)?;
 
+            let i = TestStructInnerFlag {
+                inner: i.as_int(),
+                h: i_H,
+            };
+
             Some(TestStructTestFlagA::B {
                 i,
                 b_B1,
@@ -156,6 +161,11 @@ impl ReadableAndWritable for TestStruct {
 
                 // b_B1: u8
                 let b_B1 = crate::util::tokio_read_u8_le(r).await?;
+
+                let i = TestStructInnerFlag {
+                    inner: i.as_int(),
+                    h: i_H,
+                };
 
                 Some(TestStructTestFlagA::B {
                     i,
@@ -277,6 +287,11 @@ impl ReadableAndWritable for TestStruct {
 
                 // b_B1: u8
                 let b_B1 = crate::util::astd_read_u8_le(r).await?;
+
+                let i = TestStructInnerFlag {
+                    inner: i.as_int(),
+                    h: i_H,
+                };
 
                 Some(TestStructTestFlagA::B {
                     i,
@@ -1139,7 +1154,7 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn TestStruct1() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x02, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
@@ -1173,7 +1188,7 @@ mod test {
     #[cfg(feature = "async_tokio")]
     #[cfg_attr(feature = "async_tokio", tokio::test)]
     async fn tokio_TestStruct1() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x02, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
@@ -1207,7 +1222,7 @@ mod test {
     #[cfg(feature = "async_std")]
     #[cfg_attr(feature = "async_std", async_std::test)]
     async fn astd_TestStruct1() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x02, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()

@@ -75,6 +75,6 @@ If f contains `E`:
 ```c
 255, // opcode (255)
 13, 0, // f: TestFlag  A| C| D (13)
-2, // b_A1: u8
-1, // b_C1: u8
+1, // b_A1: u8
+2, // b_C1: u8
 ```

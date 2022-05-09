@@ -52,11 +52,9 @@ test TestStruct {
     f = A | C | D;
     b_A1 = 1;
     b_C1 = 2;
-    i = I;
 } [
     0xFF, /* opcode */
     0x0D, 0x00, /* TestFlag */
-    0x02, /* InnerFlag */
     0x01, /* b_A1 */
     0x02, /* b_C1 */
 ]

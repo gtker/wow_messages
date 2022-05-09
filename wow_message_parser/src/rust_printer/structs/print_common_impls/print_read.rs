@@ -620,6 +620,12 @@ fn print_read_if_statement_flag_multiple(
             }
         }
 
+        print_read_final_flag(
+            s,
+            &e.rust_object()
+                .rust_definers_in_enumerator(enumerator.name()),
+        );
+
         s.body_closing_with(
             format!(
                 "Some({new_ty_name}{original_enumerator}::{enumerator}",
