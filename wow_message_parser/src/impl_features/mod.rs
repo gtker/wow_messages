@@ -77,6 +77,10 @@ impl ImplFeatures {
             self.inner.push(f);
         }
     }
+
+    pub fn contains(&self, f: Feature) -> bool {
+        self.inner.contains(&f)
+    }
 }
 
 pub fn get_impl_features_for_definer(e: &Definer) -> ImplFeatures {

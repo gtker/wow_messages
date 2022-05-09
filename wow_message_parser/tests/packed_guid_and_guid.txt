@@ -50,7 +50,7 @@ impl ReadableAndWritable for PackedGuidAndGuid {
         // variable_packed: PackedGuid[basic1]
         let mut variable_packed = Vec::with_capacity(basic1 as usize);
         for i in 0..basic1 {
-            variable_packed.push(Guid::read_packed(r)?;
+            variable_packed.push(Guid::read_packed(r)?);
         }
 
         // variable_guid: Guid[basic2]
@@ -147,7 +147,7 @@ impl ReadableAndWritable for PackedGuidAndGuid {
             // variable_packed: PackedGuid[basic1]
             let mut variable_packed = Vec::with_capacity(basic1 as usize);
             for i in 0..basic1 {
-                variable_packed.push(Guid::tokio_read_packed(r).await?;
+                variable_packed.push(Guid::tokio_read_packed(r).await?);
             }
 
             // variable_guid: Guid[basic2]
@@ -258,7 +258,7 @@ impl ReadableAndWritable for PackedGuidAndGuid {
             // variable_packed: PackedGuid[basic1]
             let mut variable_packed = Vec::with_capacity(basic1 as usize);
             for i in 0..basic1 {
-                variable_packed.push(Guid::astd_read_packed(r).await?;
+                variable_packed.push(Guid::astd_read_packed(r).await?);
             }
 
             // variable_guid: Guid[basic2]

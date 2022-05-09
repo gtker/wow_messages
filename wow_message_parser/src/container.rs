@@ -327,12 +327,7 @@ impl Container {
                     }
                 }
                 StructMember::IfStatement(statement) => {
-                    for member in &statement.members {
-                        if let Some(v) = f(member, field_name) {
-                            return Some(v);
-                        }
-                    }
-                    for member in &statement.else_statement_members {
+                    for member in statement.all_members() {
                         if let Some(v) = f(member, field_name) {
                             return Some(v);
                         }
@@ -355,7 +350,7 @@ impl Container {
             }
         }
 
-        panic!("unable to find field")
+        panic!("unable to find field: '{}'", field_name)
     }
 
     pub fn has_overlapping_version(&self, tags: &Tags) -> bool {

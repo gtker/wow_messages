@@ -200,7 +200,7 @@ fn print_read_array(
                 }
                 ArrayType::PackedGuid => {
                     s.wln(format!(
-                        "{name}.push(Guid::{prefix}read_packed(r){postfix}?;",
+                        "{name}.push(Guid::{prefix}read_packed(r){postfix}?);",
                         name = d.name(),
                         prefix = prefix,
                         postfix = postfix,
@@ -260,7 +260,7 @@ fn print_read_array(
                     }
                     ArrayType::PackedGuid => {
                         s.wln(format!(
-                            "{name}.push(Guid::{prefix}read_packed(r){postfix}?;",
+                            "{name}.push(Guid::{prefix}read_packed(r){postfix}?);",
                             name = d.name(),
                             prefix = prefix,
                             postfix = postfix,
