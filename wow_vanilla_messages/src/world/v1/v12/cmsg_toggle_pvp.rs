@@ -201,7 +201,7 @@ pub struct CMSG_TOGGLE_PVP_set {
 }
 
 impl CMSG_TOGGLE_PVP_set {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         1 // enable_pvp: u8
     }
 

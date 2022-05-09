@@ -363,7 +363,7 @@ impl Emote {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::ONESHOT_NONE => 0x0,
             Self::ONESHOT_TALK => 0x1,

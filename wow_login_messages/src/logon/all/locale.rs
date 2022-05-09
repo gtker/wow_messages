@@ -261,7 +261,7 @@ impl Locale {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::EN_GB => 0x656e4742,
             Self::EN_US => 0x656e5553,

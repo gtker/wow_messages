@@ -335,7 +335,7 @@ impl LoginResult {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::SUCCESS => 0x0,
             Self::FAIL_UNKNOWN0 => 0x1,

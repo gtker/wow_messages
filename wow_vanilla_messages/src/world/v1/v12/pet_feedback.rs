@@ -322,7 +322,7 @@ impl PetFeedback {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::PET_DEAD => 0x1,
             Self::NOTHING_TO_EAT => 0x2,

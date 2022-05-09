@@ -320,7 +320,7 @@ impl SimpleSpellCastResult {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::SUCCESS => 0x0,
             Self::FAILURE => 0x2,

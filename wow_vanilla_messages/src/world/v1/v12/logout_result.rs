@@ -250,7 +250,7 @@ impl LogoutResult {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::SUCCESS => 0x0,
             Self::FAILURE_IN_COMBAT => 0x1,

@@ -292,7 +292,7 @@ pub struct CMSG_TEST_OPTIONAL_server {
 }
 
 impl CMSG_TEST_OPTIONAL_server {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         1 // optional_u8: u8
     }
 

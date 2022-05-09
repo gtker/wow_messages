@@ -353,7 +353,7 @@ impl ChatType {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::SAY => 0x0,
             Self::PARTY => 0x1,

@@ -445,7 +445,7 @@ pub struct SMSG_GROUP_LIST_group_not_empty {
 }
 
 impl SMSG_GROUP_LIST_group_not_empty {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         1 // loot_setting: GroupLootSetting
         + 8 // master_loot: Guid
         + 1 // loot_threshold: ItemQuality

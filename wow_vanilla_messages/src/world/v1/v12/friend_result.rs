@@ -345,7 +345,7 @@ impl FriendResult {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::DB_ERROR => 0x0,
             Self::LIST_FULL => 0x1,

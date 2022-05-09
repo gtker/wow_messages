@@ -259,7 +259,7 @@ impl BuybackSlot {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::SLOT1 => 0x45,
             Self::SLOT2 => 0x46,

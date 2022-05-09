@@ -67,7 +67,7 @@ fn common_impls(s: &mut Writer, e: &Definer) {
     s.bodyn(format!("impl {name}", name = e.name()), |s| {
         print_fields(s, e);
 
-        s.funcn_pub_const("as_int(&self)", e.ty().rust_str(), |s| {
+        s.funcn_const("as_int(&self)", e.ty().rust_str(), |s| {
             s.wln("self.inner");
         });
     });

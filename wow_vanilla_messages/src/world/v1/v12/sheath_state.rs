@@ -321,7 +321,7 @@ impl SheathState {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::UNARMED => 0x0,
             Self::MELEE => 0x1,

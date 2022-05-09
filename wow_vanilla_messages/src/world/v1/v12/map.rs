@@ -290,7 +290,7 @@ impl Map {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::EASTERN_KINGDOMS => 0x0,
             Self::KALIMDOR => 0x1,

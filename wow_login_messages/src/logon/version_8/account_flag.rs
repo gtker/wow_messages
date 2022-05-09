@@ -176,7 +176,7 @@ impl AccountFlag {
         *self
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         self.inner
     }
 

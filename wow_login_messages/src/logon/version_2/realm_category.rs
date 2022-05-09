@@ -323,7 +323,7 @@ impl RealmCategory {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::DEFAULT => 0x0,
             Self::ONE => 0x1,

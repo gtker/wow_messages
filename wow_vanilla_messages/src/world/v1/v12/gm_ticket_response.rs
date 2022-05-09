@@ -253,7 +253,7 @@ impl GmTicketResponse {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::NOT_EXIST => 0x0,
             Self::ALREADY_EXIST => 0x1,

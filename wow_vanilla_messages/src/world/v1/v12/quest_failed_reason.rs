@@ -256,7 +256,7 @@ impl QuestFailedReason {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::DONT_HAVE_REQ => 0x0,
             Self::QUEST_FAILED_LOW_LEVEL => 0x1,

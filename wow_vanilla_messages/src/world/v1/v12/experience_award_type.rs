@@ -320,7 +320,7 @@ impl ExperienceAwardType {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::KILL => 0x0,
             Self::NON_KILL => 0x1,

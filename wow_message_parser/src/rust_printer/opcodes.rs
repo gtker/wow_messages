@@ -422,7 +422,7 @@ pub fn opcode_enum_world(
     };
 
     s.bodyn(format!("impl {t}Opcode", t = ty), |s| {
-        s.funcn_pub_const("as_int(&self)", int_ty, |s| {
+        s.funcn_const("as_int(&self)", int_ty, |s| {
             s.body("match self", |s| {
                 for e in v {
                     s.wln(format!(
@@ -532,7 +532,7 @@ pub fn opcode_enum_login(s: &mut Writer, v: &[&Container], ty: &str) {
     });
 
     s.bodyn(format!("impl {t}Opcode", t = ty), |s| {
-        s.funcn_pub_const("as_u8(&self)", "u8", |s| {
+        s.funcn_const("as_u8(&self)", "u8", |s| {
             s.body("match self", |s| {
                 for e in v {
                     s.wln(format!(

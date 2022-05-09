@@ -334,7 +334,7 @@ impl ItemClass {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::CONSUMABLE => 0x0,
             Self::CONTAINER => 0x1,

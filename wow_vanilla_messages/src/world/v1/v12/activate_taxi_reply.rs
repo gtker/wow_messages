@@ -259,7 +259,7 @@ impl ActivateTaxiReply {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::OK => 0x0,
             Self::UNSPECIFIEDSERVERERROR => 0x1,

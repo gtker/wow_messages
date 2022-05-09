@@ -1636,7 +1636,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
 }
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // item_class: ItemClass
         + 4 // item_sub_class: u32
         + self.name1.len() + 1 // name1: CString

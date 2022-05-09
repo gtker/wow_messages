@@ -248,7 +248,7 @@ impl QuestCompletable {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::NOT_COMPLETABLE => 0x0,
             Self::COMPLETEABLE => 0x3,

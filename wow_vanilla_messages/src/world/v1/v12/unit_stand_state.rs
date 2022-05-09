@@ -328,7 +328,7 @@ impl UnitStandState {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::STAND => 0x0,
             Self::SIT => 0x1,

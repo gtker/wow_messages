@@ -20,7 +20,7 @@ fn print_declaration(s: &mut Writer, optional: &RustOptional) {
 fn print_impls(s: &mut Writer, optional: &RustOptional) {
     s.open_curly(format!("impl {ty}", ty = optional.ty(),));
 
-    s.funcn_pub("size(&self)", "usize", |s| {
+    s.funcn("size(&self)", "usize", |s| {
         for (i, m) in optional.members().iter().enumerate() {
             // Optional can never be empty so we don't need a 0 for empty cases
             if i == 0 {

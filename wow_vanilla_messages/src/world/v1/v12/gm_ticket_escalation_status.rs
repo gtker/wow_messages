@@ -321,7 +321,7 @@ impl GmTicketEscalationStatus {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED => 0x0,
             Self::GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED => 0x1,

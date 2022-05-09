@@ -249,7 +249,7 @@ impl GmTicketStatus {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::DBERROR => 0x0,
             Self::HASTEXT => 0x6,

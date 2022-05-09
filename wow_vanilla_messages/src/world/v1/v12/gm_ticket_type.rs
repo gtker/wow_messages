@@ -328,7 +328,7 @@ impl GmTicketType {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::STUCK => 0x1,
             Self::BEHAVIOR_HARASSMENT => 0x2,

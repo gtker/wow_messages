@@ -255,7 +255,7 @@ impl CinematicSequenceId {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::HUMAN => 0x51,
             Self::ORC => 0x15,

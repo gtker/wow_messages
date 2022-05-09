@@ -321,7 +321,7 @@ impl MeetingStoneFailure {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::MEETINGSTONE_FAIL_PARTYLEADER => 0x1,
             Self::MEETINGSTONE_FAIL_FULL_GROUP => 0x2,

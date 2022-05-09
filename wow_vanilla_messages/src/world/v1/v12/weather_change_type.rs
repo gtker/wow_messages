@@ -320,7 +320,7 @@ impl WeatherChangeType {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::SMOOTH => 0x0,
             Self::INSTANT => 0x1,

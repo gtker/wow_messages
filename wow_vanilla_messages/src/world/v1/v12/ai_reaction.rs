@@ -251,7 +251,7 @@ impl AiReaction {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::ALERT => 0x0,
             Self::FRIENDLY => 0x1,

@@ -328,7 +328,7 @@ impl WorldResult {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::RESPONSE_SUCCESS => 0x0,
             Self::RESPONSE_FAILURE => 0x1,

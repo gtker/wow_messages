@@ -251,7 +251,7 @@ impl BgTypeId {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::NOT_ELIGIBLE => 0x0,
             Self::QUEUED_FOR_AV => 0x1,

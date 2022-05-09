@@ -248,7 +248,7 @@ impl PetTalkReason {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::SPECIAL_SPELL => 0x0,
             Self::ATTACK => 0x1,

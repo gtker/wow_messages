@@ -486,6 +486,23 @@ impl Writer {
         );
     }
 
+    pub fn funcn_const<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self)>(
+        &mut self,
+        name_and_args: S,
+        return_type: S1,
+        f: F,
+    ) {
+        self.open_curly(format!(
+            "pub(crate) const fn {} -> {}",
+            name_and_args.as_ref(),
+            return_type.as_ref()
+        ));
+
+        f(self);
+
+        self.closing_curly_newline();
+    }
+
     pub fn funcn_pub_const<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self)>(
         &mut self,
         name_and_args: S,
@@ -547,6 +564,23 @@ impl Writer {
         ));
 
         f(self, ImplType::AsyncStd);
+
+        self.closing_curly_newline();
+    }
+
+    pub fn funcn(
+        &mut self,
+        name_and_args: impl AsRef<str>,
+        return_type: impl AsRef<str>,
+        f: impl Fn(&mut Self),
+    ) {
+        self.open_curly(format!(
+            "pub(crate) fn {} -> {}",
+            name_and_args.as_ref(),
+            return_type.as_ref()
+        ));
+
+        f(self);
 
         self.closing_curly_newline();
     }

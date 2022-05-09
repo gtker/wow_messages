@@ -464,7 +464,7 @@ impl CastFailureReason {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::AFFECTING_COMBAT => 0x0,
             Self::ALREADY_AT_FULL_HEALTH => 0x1,

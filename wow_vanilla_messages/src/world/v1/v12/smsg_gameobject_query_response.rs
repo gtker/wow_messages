@@ -480,7 +480,7 @@ pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
 }
 
 impl SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // info_type: u32
         + 4 // display_id: u32
         + self.name1.len() + 1 // name1: CString

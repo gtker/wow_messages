@@ -317,7 +317,7 @@ impl CastFlags {
         *self
     }
 
-    pub const fn as_int(&self) -> u16 {
+    pub(crate) const fn as_int(&self) -> u16 {
         self.inner
     }
 

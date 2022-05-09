@@ -249,7 +249,7 @@ impl TrainingFailureReason {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::UNAVAILABLE => 0x0,
             Self::NOT_ENOUGH_MONEY => 0x1,

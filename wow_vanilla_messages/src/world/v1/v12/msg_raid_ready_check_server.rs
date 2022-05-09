@@ -225,7 +225,7 @@ pub struct MSG_RAID_READY_CHECK_Server_state_check {
 }
 
 impl MSG_RAID_READY_CHECK_Server_state_check {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
         + 1 // state: u8
     }

@@ -325,7 +325,7 @@ impl SpellSchool {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::NORMAL => 0x0,
             Self::HOLY => 0x1,

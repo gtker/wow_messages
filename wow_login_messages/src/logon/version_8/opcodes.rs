@@ -243,7 +243,7 @@ pub enum ServerOpcode {
 }
 
 impl ServerOpcode {
-    pub const fn as_u8(&self) -> u8 {
+    pub(crate) const fn as_u8(&self) -> u8 {
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE => 0x00,
             Self::CMD_AUTH_LOGON_PROOF => 0x01,
@@ -610,7 +610,7 @@ pub enum ClientOpcode {
 }
 
 impl ClientOpcode {
-    pub const fn as_u8(&self) -> u8 {
+    pub(crate) const fn as_u8(&self) -> u8 {
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE => 0x00,
             Self::CMD_AUTH_LOGON_PROOF => 0x01,

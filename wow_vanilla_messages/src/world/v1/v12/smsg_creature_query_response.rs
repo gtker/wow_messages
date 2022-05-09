@@ -600,7 +600,7 @@ pub struct SMSG_CREATURE_QUERY_RESPONSE_found {
 }
 
 impl SMSG_CREATURE_QUERY_RESPONSE_found {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         self.name1.len() + 1 // name1: CString
         + self.name2.len() + 1 // name2: CString
         + self.name3.len() + 1 // name3: CString

@@ -257,7 +257,7 @@ impl MountResult {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::INVALIDMOUNTEE => 0x0,
             Self::TOOFARAWAY => 0x1,

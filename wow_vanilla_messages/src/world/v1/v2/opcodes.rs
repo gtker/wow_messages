@@ -15,7 +15,7 @@ pub enum ClientOpcode {
 }
 
 impl ClientOpcode {
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::CMSG_CHAR_ENUM => 0x37,
         }
@@ -337,7 +337,7 @@ pub enum ServerOpcode {
 }
 
 impl ServerOpcode {
-    pub const fn as_int(&self) -> u16 {
+    pub(crate) const fn as_int(&self) -> u16 {
         match self {
             Self::SMSG_AUTH_CHALLENGE => 0x1ec,
             Self::SMSG_AUTH_RESPONSE => 0x1ee,

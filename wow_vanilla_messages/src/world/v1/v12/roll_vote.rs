@@ -321,7 +321,7 @@ impl RollVote {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::PASS => 0x0,
             Self::NEED => 0x1,

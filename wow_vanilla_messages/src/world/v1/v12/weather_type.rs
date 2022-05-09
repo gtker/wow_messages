@@ -250,7 +250,7 @@ impl WeatherType {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::FINE => 0x0,
             Self::RAIN => 0x1,

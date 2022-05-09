@@ -334,7 +334,7 @@ impl GuildCommandResult {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::PLAYER_NO_MORE_IN_GUILD => 0x0,
             Self::GUILD_INTERNAL => 0x1,

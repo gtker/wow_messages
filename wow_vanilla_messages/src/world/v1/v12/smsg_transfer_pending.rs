@@ -280,7 +280,7 @@ pub struct SMSG_TRANSFER_PENDING_has_transport {
 }
 
 impl SMSG_TRANSFER_PENDING_has_transport {
-    pub fn size(&self) -> usize {
+    pub(crate) fn size(&self) -> usize {
         4 // transport: u32
         + 4 // transport_map: Map
     }

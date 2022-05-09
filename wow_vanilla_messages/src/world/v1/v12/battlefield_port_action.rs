@@ -320,7 +320,7 @@ impl BattlefieldPortAction {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::LEAVE_QUEUE => 0x0,
             Self::ENTER_BATTLE => 0x1,

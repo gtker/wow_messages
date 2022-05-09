@@ -327,7 +327,7 @@ impl BuyResult {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::CANT_FIND_ITEM => 0x0,
             Self::ITEM_ALREADY_SOLD => 0x1,

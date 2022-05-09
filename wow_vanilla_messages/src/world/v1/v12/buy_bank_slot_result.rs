@@ -250,7 +250,7 @@ impl BuyBankSlotResult {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::FAILED_TOO_MANY => 0x0,
             Self::INSUFFICIENT_FUNDS => 0x1,

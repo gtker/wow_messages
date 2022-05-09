@@ -249,7 +249,7 @@ impl Os {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::WINDOWS => 0x57696e,
             Self::OSX => 0x4f5358,

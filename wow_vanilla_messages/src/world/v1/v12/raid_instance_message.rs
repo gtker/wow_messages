@@ -250,7 +250,7 @@ impl RaidInstanceMessage {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::WARNING_HOURS => 0x1,
             Self::WARNING_MIN => 0x2,

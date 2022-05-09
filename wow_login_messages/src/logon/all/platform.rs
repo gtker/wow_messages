@@ -249,7 +249,7 @@ impl Platform {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::X86 => 0x783836,
             Self::PPC => 0x505043,

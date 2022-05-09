@@ -200,7 +200,7 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
 }
 
 fn as_type(s: &mut Writer, e: &Definer) {
-    s.funcn_pub_const("as_int(&self)", e.ty().rust_str(), |s| {
+    s.funcn_const("as_int(&self)", e.ty().rust_str(), |s| {
         s.body("match self", |s| {
             for field in e.fields() {
                 s.wln(format!(

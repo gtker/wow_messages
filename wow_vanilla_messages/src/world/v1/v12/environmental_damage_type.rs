@@ -252,7 +252,7 @@ impl EnvironmentalDamageType {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::EXHAUSTED => 0x0,
             Self::DROWNING => 0x1,

@@ -252,7 +252,7 @@ impl GuildEmblemResult {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::SUCCESS => 0x0,
             Self::INVALID_TABARD_COLORS => 0x1,

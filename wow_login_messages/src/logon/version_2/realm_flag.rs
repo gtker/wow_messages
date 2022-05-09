@@ -237,7 +237,7 @@ impl RealmFlag {
         *self
     }
 
-    pub const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         self.inner
     }
 

@@ -250,7 +250,7 @@ impl Population {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::GREEN_RECOMMENDED => 0x43480000,
             Self::RED_FULL => 0x43c80000,

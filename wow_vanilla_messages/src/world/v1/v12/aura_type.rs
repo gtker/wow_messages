@@ -438,7 +438,7 @@ impl AuraType {
         Ok(())
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::NONE => 0x0,
             Self::BIND_SIGHT => 0x1,
