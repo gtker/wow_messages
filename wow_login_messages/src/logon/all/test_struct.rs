@@ -1,6 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::logon::all::{InnerFlag};
 use crate::logon::all::{TestFlag};
+use crate::logon::all::{ThirdFlag};
 use crate::ClientMessage;
 use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
 #[cfg(feature = "async_tokio")]
@@ -28,11 +29,6 @@ impl ReadableAndWritable for TestStruct {
             // b_A1: u8
             let b_A1 = crate::util::read_u8_le(r)?;
 
-            Some(TestStructTestFlagA::A {
-                b_A1,
-            })
-        }
-        else if f.is_B() {
             // i: InnerFlag
             let i = InnerFlag::read(r)?;
 
@@ -48,24 +44,70 @@ impl ReadableAndWritable for TestStruct {
                 // b_I1: u8
                 let b_I1 = crate::util::read_u8_le(r)?;
 
+                // t: ThirdFlag
+                let t = ThirdFlag::read(r)?;
+
+                let t_W = if t.is_W() {
+                    // b_W1: u8
+                    let b_W1 = crate::util::read_u8_le(r)?;
+
+                    Some(TestStructThirdFlagW {
+                        b_W1,
+                    })
+                } else {
+                    None
+                };
+
+                let t_X = if t.is_X() {
+                    // b_X1: u8
+                    let b_X1 = crate::util::read_u8_le(r)?;
+
+                    Some(TestStructThirdFlagX::X {
+                        b_X1,
+                    })
+                }
+                else if t.is_Z() {
+                    // b_Z1: u8
+                    let b_Z1 = crate::util::read_u8_le(r)?;
+
+                    Some(TestStructThirdFlagX::Z {
+                        b_Z1,
+                    })
+                }
+                else {
+                    None
+                };
+
+                let t = TestStructThirdFlag {
+                    inner: t.as_int(),
+                    x: t_X,
+                    w: t_W,
+                };
+
                 Some(TestStructInnerFlagH::I {
                     b_I1,
+                    t,
                 })
             }
             else {
                 None
             };
 
-            // b_B1: u8
-            let b_B1 = crate::util::read_u8_le(r)?;
-
             let i = TestStructInnerFlag {
                 inner: i.as_int(),
                 h: i_H,
             };
 
-            Some(TestStructTestFlagA::B {
+            Some(TestStructTestFlagA::A {
+                b_A1,
                 i,
+            })
+        }
+        else if f.is_B() {
+            // b_B1: u8
+            let b_B1 = crate::util::read_u8_le(r)?;
+
+            Some(TestStructTestFlagA::B {
                 b_B1,
             })
         }
@@ -149,11 +191,6 @@ impl ReadableAndWritable for TestStruct {
                 // b_A1: u8
                 let b_A1 = crate::util::tokio_read_u8_le(r).await?;
 
-                Some(TestStructTestFlagA::A {
-                    b_A1,
-                })
-            }
-            else if f.is_B() {
                 // i: InnerFlag
                 let i = InnerFlag::tokio_read(r).await?;
 
@@ -169,24 +206,70 @@ impl ReadableAndWritable for TestStruct {
                     // b_I1: u8
                     let b_I1 = crate::util::tokio_read_u8_le(r).await?;
 
+                    // t: ThirdFlag
+                    let t = ThirdFlag::tokio_read(r).await?;
+
+                    let t_W = if t.is_W() {
+                        // b_W1: u8
+                        let b_W1 = crate::util::tokio_read_u8_le(r).await?;
+
+                        Some(TestStructThirdFlagW {
+                            b_W1,
+                        })
+                    } else {
+                        None
+                    };
+
+                    let t_X = if t.is_X() {
+                        // b_X1: u8
+                        let b_X1 = crate::util::tokio_read_u8_le(r).await?;
+
+                        Some(TestStructThirdFlagX::X {
+                            b_X1,
+                        })
+                    }
+                    else if t.is_Z() {
+                        // b_Z1: u8
+                        let b_Z1 = crate::util::tokio_read_u8_le(r).await?;
+
+                        Some(TestStructThirdFlagX::Z {
+                            b_Z1,
+                        })
+                    }
+                    else {
+                        None
+                    };
+
+                    let t = TestStructThirdFlag {
+                        inner: t.as_int(),
+                        x: t_X,
+                        w: t_W,
+                    };
+
                     Some(TestStructInnerFlagH::I {
                         b_I1,
+                        t,
                     })
                 }
                 else {
                     None
                 };
 
-                // b_B1: u8
-                let b_B1 = crate::util::tokio_read_u8_le(r).await?;
-
                 let i = TestStructInnerFlag {
                     inner: i.as_int(),
                     h: i_H,
                 };
 
-                Some(TestStructTestFlagA::B {
+                Some(TestStructTestFlagA::A {
+                    b_A1,
                     i,
+                })
+            }
+            else if f.is_B() {
+                // b_B1: u8
+                let b_B1 = crate::util::tokio_read_u8_le(r).await?;
+
+                Some(TestStructTestFlagA::B {
                     b_B1,
                 })
             }
@@ -284,11 +367,6 @@ impl ReadableAndWritable for TestStruct {
                 // b_A1: u8
                 let b_A1 = crate::util::astd_read_u8_le(r).await?;
 
-                Some(TestStructTestFlagA::A {
-                    b_A1,
-                })
-            }
-            else if f.is_B() {
                 // i: InnerFlag
                 let i = InnerFlag::astd_read(r).await?;
 
@@ -304,24 +382,70 @@ impl ReadableAndWritable for TestStruct {
                     // b_I1: u8
                     let b_I1 = crate::util::astd_read_u8_le(r).await?;
 
+                    // t: ThirdFlag
+                    let t = ThirdFlag::astd_read(r).await?;
+
+                    let t_W = if t.is_W() {
+                        // b_W1: u8
+                        let b_W1 = crate::util::astd_read_u8_le(r).await?;
+
+                        Some(TestStructThirdFlagW {
+                            b_W1,
+                        })
+                    } else {
+                        None
+                    };
+
+                    let t_X = if t.is_X() {
+                        // b_X1: u8
+                        let b_X1 = crate::util::astd_read_u8_le(r).await?;
+
+                        Some(TestStructThirdFlagX::X {
+                            b_X1,
+                        })
+                    }
+                    else if t.is_Z() {
+                        // b_Z1: u8
+                        let b_Z1 = crate::util::astd_read_u8_le(r).await?;
+
+                        Some(TestStructThirdFlagX::Z {
+                            b_Z1,
+                        })
+                    }
+                    else {
+                        None
+                    };
+
+                    let t = TestStructThirdFlag {
+                        inner: t.as_int(),
+                        x: t_X,
+                        w: t_W,
+                    };
+
                     Some(TestStructInnerFlagH::I {
                         b_I1,
+                        t,
                     })
                 }
                 else {
                     None
                 };
 
-                // b_B1: u8
-                let b_B1 = crate::util::astd_read_u8_le(r).await?;
-
                 let i = TestStructInnerFlag {
                     inner: i.as_int(),
                     h: i_H,
                 };
 
-                Some(TestStructTestFlagA::B {
+                Some(TestStructTestFlagA::A {
+                    b_A1,
                     i,
+                })
+            }
+            else if f.is_B() {
+                // b_B1: u8
+                let b_B1 = crate::util::astd_read_u8_le(r).await?;
+
+                Some(TestStructTestFlagA::B {
                     b_B1,
                 })
             }
@@ -412,8 +536,314 @@ impl VariableSized for TestStruct {
 impl MaximumPossibleSized for TestStruct {
     fn maximum_possible_size() -> usize {
         0
-        + 7 // f: TestStructTestFlag
+        + 10 // f: TestStructTestFlag
     }
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum TestStructThirdFlagX {
+    X {
+        b_X1: u8,
+    },
+    Z {
+        b_Z1: u8,
+    },
+}
+
+impl TestStructThirdFlagX {
+    pub(crate) const fn as_flag_value(&self) -> u8 {
+        match self {
+            Self::X { .. } => 1,
+            Self::Z { .. } => 4,
+        }
+    }
+
+}
+
+impl VariableSized for TestStructThirdFlagX {
+    fn size(&self) -> usize {
+        match self {
+            Self::X {
+                b_X1,
+            } => {
+                0 // Not an actual enum sent over the wire
+                + 1 // b_X1: u8
+            }
+            Self::Z {
+                b_Z1,
+            } => {
+                0 // Not an actual enum sent over the wire
+                + 1 // b_Z1: u8
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for TestStructThirdFlagX {
+    fn maximum_possible_size() -> usize {
+        0
+    }
+}
+
+#[derive(Default, Debug, PartialEq, Clone)]
+pub struct TestStructThirdFlag {
+    inner: u8,
+    x: Option<TestStructThirdFlagX>,
+    w: Option<TestStructThirdFlagW>,
+}
+
+impl From<&TestStructThirdFlag> for ThirdFlag {
+    fn from(e: &TestStructThirdFlag) -> Self {
+        Self::new(e.inner)
+    }
+}
+
+impl TestStructThirdFlag {
+    #[cfg(feature = "sync")]
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: ThirdFlag = self.into();
+        a.write(w)?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: ThirdFlag = self.into();
+        a.tokio_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: ThirdFlag = self.into();
+        a.astd_write(w).await?;
+        Ok(())
+    }
+
+    pub const fn empty() -> Self {
+        Self {
+            inner: 0,
+            x: None,
+            w: None,
+        }
+    }
+
+    pub const fn new_X(x: TestStructThirdFlagX) -> Self {
+        Self {
+            inner: x.as_flag_value(),
+            x: Some(x),
+            w: None,
+        }
+    }
+
+    pub fn set_X(&mut self, x: TestStructThirdFlagX) -> Self {
+        self.inner |= x.as_flag_value();
+        self.x = Some(x);
+        self.clone()
+    }
+
+    pub const fn get_X(&self) -> Option<&TestStructThirdFlagX> {
+        self.x.as_ref()
+    }
+
+    pub fn clear_X(&mut self) -> Self {
+        self.inner &= ThirdFlag::X.reverse_bits();
+        self.x = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
+    pub const fn new_Y() -> Self {
+        Self {
+            inner: ThirdFlag::Y,
+            x: None,
+            w: None,
+        }
+    }
+
+    pub fn set_Y(&mut self) -> Self {
+        self.inner |= ThirdFlag::Y;
+        self.clone()
+    }
+
+    pub const fn get_Y(&self) -> bool {
+        (self.inner & ThirdFlag::Y) != 0
+    }
+
+    pub fn clear_Y(&mut self) -> Self {
+        self.inner &= ThirdFlag::Y.reverse_bits();
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
+    pub const fn new_W(w: TestStructThirdFlagW) -> Self {
+        Self {
+            inner: ThirdFlag::W,
+            x: None,
+            w: Some(w),
+        }
+    }
+
+    pub fn set_W(&mut self, w: TestStructThirdFlagW) -> Self {
+        self.inner |= ThirdFlag::W;
+        self.w = Some(w);
+        self.clone()
+    }
+
+    pub const fn get_W(&self) -> Option<&TestStructThirdFlagW> {
+        self.w.as_ref()
+    }
+
+    pub fn clear_W(&mut self) -> Self {
+        self.inner &= ThirdFlag::W.reverse_bits();
+        self.w = None;
+        // TODO: Cloning like this is not conductive to good performance but it is
+        // temporarily necessary due to test syntax
+        self.clone()
+    }
+
+}
+impl VariableSized for TestStructThirdFlag {
+    fn size(&self) -> usize {
+        1 // inner
+        + {
+            if let Some(s) = &self.x {
+                s.size()
+            } else {
+                0
+            }
+        }
+        + {
+            if let Some(s) = &self.w {
+                s.size()
+            } else {
+                0
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for TestStructThirdFlag {
+    fn maximum_possible_size() -> usize {
+        1 // inner
+        + TestStructThirdFlagX::maximum_possible_size() // X enumerator
+        + TestStructThirdFlagW::maximum_possible_size() // W enumerator
+    }
+}
+
+impl TestStructThirdFlagX {
+    #[cfg(feature = "sync")]
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        match &self {
+            Self::X {
+                b_X1,
+            } => {
+                // b_X1: u8
+                w.write_all(&b_X1.to_le_bytes())?;
+
+            }
+            Self::Z {
+                b_Z1,
+            } => {
+                // b_Z1: u8
+                w.write_all(&b_Z1.to_le_bytes())?;
+
+            }
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        match &self {
+            Self::X {
+                b_X1,
+            } => {
+                // b_X1: u8
+                w.write_all(&b_X1.to_le_bytes()).await?;
+
+            }
+            Self::Z {
+                b_Z1,
+            } => {
+                // b_Z1: u8
+                w.write_all(&b_Z1.to_le_bytes()).await?;
+
+            }
+        }
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        match &self {
+            Self::X {
+                b_X1,
+            } => {
+                // b_X1: u8
+                w.write_all(&b_X1.to_le_bytes()).await?;
+
+            }
+            Self::Z {
+                b_Z1,
+            } => {
+                // b_Z1: u8
+                w.write_all(&b_Z1.to_le_bytes()).await?;
+
+            }
+        }
+
+        Ok(())
+    }
+
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub struct TestStructThirdFlagW {
+    pub b_W1: u8,
+}
+
+impl VariableSized for TestStructThirdFlagW {
+    fn size(&self) -> usize {
+        1 // b_W1: u8
+    }
+}
+
+impl MaximumPossibleSized for TestStructThirdFlagW {
+    fn maximum_possible_size() -> usize {
+        1 // b_W1: u8
+    }
+}
+
+impl TestStructThirdFlagW {
+    #[cfg(feature = "sync")]
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // b_W1: u8
+        w.write_all(&self.b_W1.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // b_W1: u8
+        w.write_all(&self.b_W1.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // b_W1: u8
+        w.write_all(&self.b_W1.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -423,6 +853,7 @@ pub enum TestStructInnerFlagH {
     },
     I {
         b_I1: u8,
+        t: TestStructThirdFlag,
     },
 }
 
@@ -447,9 +878,11 @@ impl VariableSized for TestStructInnerFlagH {
             }
             Self::I {
                 b_I1,
+                t,
             } => {
                 0 // Not an actual enum sent over the wire
                 + 1 // b_I1: u8
+                + t.size() // t: TestStructThirdFlag
             }
         }
     }
@@ -630,9 +1063,21 @@ impl TestStructInnerFlagH {
             }
             Self::I {
                 b_I1,
+                t,
             } => {
                 // b_I1: u8
                 w.write_all(&b_I1.to_le_bytes())?;
+
+                // t: ThirdFlag
+                t.write(w)?;
+
+                if let Some(s) = &t.w {
+                    s.write(w)?;
+                }
+
+                if let Some(s) = &t.x {
+                    s.write(w)?;
+                }
 
             }
         }
@@ -652,9 +1097,21 @@ impl TestStructInnerFlagH {
             }
             Self::I {
                 b_I1,
+                t,
             } => {
                 // b_I1: u8
                 w.write_all(&b_I1.to_le_bytes()).await?;
+
+                // t: ThirdFlag
+                t.tokio_write(w).await?;
+
+                if let Some(s) = &t.w {
+                    s.tokio_write(w).await?;
+                }
+
+                if let Some(s) = &t.x {
+                    s.tokio_write(w).await?;
+                }
 
             }
         }
@@ -674,9 +1131,21 @@ impl TestStructInnerFlagH {
             }
             Self::I {
                 b_I1,
+                t,
             } => {
                 // b_I1: u8
                 w.write_all(&b_I1.to_le_bytes()).await?;
+
+                // t: ThirdFlag
+                t.astd_write(w).await?;
+
+                if let Some(s) = &t.w {
+                    s.astd_write(w).await?;
+                }
+
+                if let Some(s) = &t.x {
+                    s.astd_write(w).await?;
+                }
 
             }
         }
@@ -690,10 +1159,10 @@ impl TestStructInnerFlagH {
 pub enum TestStructTestFlagA {
     A {
         b_A1: u8,
+        i: TestStructInnerFlag,
     },
     B {
         b_B1: u8,
-        i: TestStructInnerFlag,
     },
 }
 
@@ -712,17 +1181,17 @@ impl VariableSized for TestStructTestFlagA {
         match self {
             Self::A {
                 b_A1,
-            } => {
-                0 // Not an actual enum sent over the wire
-                + 1 // b_A1: u8
-            }
-            Self::B {
-                b_B1,
                 i,
             } => {
                 0 // Not an actual enum sent over the wire
-                + 1 // b_B1: u8
+                + 1 // b_A1: u8
                 + i.size() // i: TestStructInnerFlag
+            }
+            Self::B {
+                b_B1,
+            } => {
+                0 // Not an actual enum sent over the wire
+                + 1 // b_B1: u8
             }
         }
     }
@@ -928,15 +1397,11 @@ impl TestStructTestFlagA {
         match &self {
             Self::A {
                 b_A1,
+                i,
             } => {
                 // b_A1: u8
                 w.write_all(&b_A1.to_le_bytes())?;
 
-            }
-            Self::B {
-                b_B1,
-                i,
-            } => {
                 // i: InnerFlag
                 i.write(w)?;
 
@@ -944,6 +1409,10 @@ impl TestStructTestFlagA {
                     s.write(w)?;
                 }
 
+            }
+            Self::B {
+                b_B1,
+            } => {
                 // b_B1: u8
                 w.write_all(&b_B1.to_le_bytes())?;
 
@@ -958,15 +1427,11 @@ impl TestStructTestFlagA {
         match &self {
             Self::A {
                 b_A1,
+                i,
             } => {
                 // b_A1: u8
                 w.write_all(&b_A1.to_le_bytes()).await?;
 
-            }
-            Self::B {
-                b_B1,
-                i,
-            } => {
                 // i: InnerFlag
                 i.tokio_write(w).await?;
 
@@ -974,6 +1439,10 @@ impl TestStructTestFlagA {
                     s.tokio_write(w).await?;
                 }
 
+            }
+            Self::B {
+                b_B1,
+            } => {
                 // b_B1: u8
                 w.write_all(&b_B1.to_le_bytes()).await?;
 
@@ -988,15 +1457,11 @@ impl TestStructTestFlagA {
         match &self {
             Self::A {
                 b_A1,
+                i,
             } => {
                 // b_A1: u8
                 w.write_all(&b_A1.to_le_bytes()).await?;
 
-            }
-            Self::B {
-                b_B1,
-                i,
-            } => {
                 // i: InnerFlag
                 i.astd_write(w).await?;
 
@@ -1004,6 +1469,10 @@ impl TestStructTestFlagA {
                     s.astd_write(w).await?;
                 }
 
+            }
+            Self::B {
+                b_B1,
+            } => {
                 // b_B1: u8
                 w.write_all(&b_B1.to_le_bytes()).await?;
 
@@ -1110,6 +1579,7 @@ mod test {
     use crate::VariableSized;
     use crate::logon::all::InnerFlag;
     use crate::logon::all::TestFlag;
+    use crate::logon::all::ThirdFlag;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
@@ -1117,15 +1587,18 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn TestStruct0() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x00, 0x02, 0x03, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, 0x03, 0x02, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
-                .set_A(TestStructTestFlagA::B {
-                    b_B1: 0x1,
+                .set_A(TestStructTestFlagA::A {
+                    b_A1: 0x1,
                     i: TestStructInnerFlag::empty()
                         .set_H(TestStructInnerFlagH::I {
                             b_I1: 0x3,
+                            t: TestStructThirdFlag::empty()
+                                .set_Y()
+                                ,
                         })
                         ,
                 })
@@ -1156,15 +1629,18 @@ mod test {
     #[cfg(feature = "async_tokio")]
     #[cfg_attr(feature = "async_tokio", tokio::test)]
     async fn tokio_TestStruct0() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x00, 0x02, 0x03, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, 0x03, 0x02, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
-                .set_A(TestStructTestFlagA::B {
-                    b_B1: 0x1,
+                .set_A(TestStructTestFlagA::A {
+                    b_A1: 0x1,
                     i: TestStructInnerFlag::empty()
                         .set_H(TestStructInnerFlagH::I {
                             b_I1: 0x3,
+                            t: TestStructThirdFlag::empty()
+                                .set_Y()
+                                ,
                         })
                         ,
                 })
@@ -1195,15 +1671,18 @@ mod test {
     #[cfg(feature = "async_std")]
     #[cfg_attr(feature = "async_std", async_std::test)]
     async fn astd_TestStruct0() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x00, 0x02, 0x03, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, 0x03, 0x02, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
-                .set_A(TestStructTestFlagA::B {
-                    b_B1: 0x1,
+                .set_A(TestStructTestFlagA::A {
+                    b_A1: 0x1,
                     i: TestStructInnerFlag::empty()
                         .set_H(TestStructInnerFlagH::I {
                             b_I1: 0x3,
+                            t: TestStructThirdFlag::empty()
+                                .set_Y()
+                                ,
                         })
                         ,
                 })
@@ -1234,12 +1713,12 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn TestStruct1() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
-                .set_A(TestStructTestFlagA::A {
-                    b_A1: 0x1,
+                .set_A(TestStructTestFlagA::B {
+                    b_B1: 0x1,
                 })
                 .set_C(TestStructTestFlagC {
                     b_C1: 0x2,
@@ -1268,12 +1747,12 @@ mod test {
     #[cfg(feature = "async_tokio")]
     #[cfg_attr(feature = "async_tokio", tokio::test)]
     async fn tokio_TestStruct1() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
-                .set_A(TestStructTestFlagA::A {
-                    b_A1: 0x1,
+                .set_A(TestStructTestFlagA::B {
+                    b_B1: 0x1,
                 })
                 .set_C(TestStructTestFlagC {
                     b_C1: 0x2,
@@ -1302,12 +1781,12 @@ mod test {
     #[cfg(feature = "async_std")]
     #[cfg_attr(feature = "async_std", async_std::test)]
     async fn astd_TestStruct1() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
-                .set_A(TestStructTestFlagA::A {
-                    b_A1: 0x1,
+                .set_A(TestStructTestFlagA::B {
+                    b_B1: 0x1,
                 })
                 .set_C(TestStructTestFlagC {
                     b_C1: 0x2,

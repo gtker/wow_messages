@@ -14,5 +14,7 @@ mod test_flag;
 pub use test_flag::*;
 mod test_struct;
 pub use test_struct::*;
+mod third_flag;
+pub use third_flag::*;
 mod version;
 pub use version::*;

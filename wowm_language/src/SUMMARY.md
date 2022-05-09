@@ -30,6 +30,7 @@
 - [RealmType](docs/realmtype.md)
 - [SecurityFlag](docs/securityflag.md)
 - [TestFlag](docs/testflag.md)
+- [ThirdFlag](docs/thirdflag.md)
 
 # World Definers
 - [ActivateTaxiReply](docs/activatetaxireply.md)

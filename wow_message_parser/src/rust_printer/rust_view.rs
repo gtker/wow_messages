@@ -528,13 +528,37 @@ impl RustObject {
             if let Some(rd) = RustObject::get_rust_definer_from_ty(m, container_name) {
                 for enumerator in rd.enumerators() {
                     if enumerator.name() == enumerator_name {
-                        for m in enumerator.members_in_struct() {
-                            if let Some(rd) =
-                                RustObject::get_rust_definer_from_ty(m, container_name)
-                            {
-                                v.push(rd);
-                            } else {
-                                inner(m, enumerator_name, v, container_name);
+                        if enumerator.contains_elseif() {
+                            match enumerator.members()[0].ty() {
+                                RustType::Enum { enumerators, .. } => {
+                                    for enumerator in enumerators {
+                                        if enumerator.name() == enumerator_name {
+                                            for m in enumerator.members_in_struct() {
+                                                if let Some(rd) =
+                                                    RustObject::get_rust_definer_from_ty(
+                                                        m,
+                                                        container_name,
+                                                    )
+                                                {
+                                                    v.push(rd);
+                                                } else {
+                                                    inner(m, enumerator_name, v, container_name);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                _ => unreachable!(),
+                            }
+                        } else {
+                            for m in enumerator.members_in_struct() {
+                                if let Some(rd) =
+                                    RustObject::get_rust_definer_from_ty(m, container_name)
+                                {
+                                    v.push(rd);
+                                } else {
+                                    inner(m, enumerator_name, v, container_name);
+                                }
                             }
                         }
                     } else {

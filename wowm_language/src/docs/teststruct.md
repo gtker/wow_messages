@@ -6,15 +6,25 @@ clogin TestStruct = 0xFF {
     TestFlag f;
     if (f & A) {
         u8 b_A1;
-    }
-    else if (f & B) {
         InnerFlag i;
         if (i & H) {
             u8 b_H1;
         }
         else if (i & I) {
             u8 b_I1;
+            ThirdFlag t;
+            if (t & W) {
+                u8 b_W1;
+            }
+            if (t & X) {
+                u8 b_X1;
+            }
+            else if (t & Z) {
+                u8 b_Z1;
+            }
         }
+    }
+    else if (f & B) {
         u8 b_B1;
     }
     if (f & C) {
@@ -42,11 +52,6 @@ If f contains `A`:
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | 1 / - | u8 | b_A1 |  |
-
-Else If f contains `B`:
-
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
 | - | ? / - | [InnerFlag](innerflag.md) | i |  |
 
 If i contains `H`:
@@ -60,6 +65,30 @@ Else If i contains `I`:
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | 1 / - | u8 | b_I1 |  |
+| - | ? / - | [ThirdFlag](thirdflag.md) | t |  |
+
+If t contains `W`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 1 / - | u8 | b_W1 |  |
+
+If t contains `X`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 1 / - | u8 | b_X1 |  |
+
+Else If t contains `Z`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 1 / - | u8 | b_Z1 |  |
+
+Else If f contains `B`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
 | - | 1 / - | u8 | b_B1 |  |
 
 If f contains `C`:
@@ -76,15 +105,16 @@ If f contains `E`:
 ### Examples
 ```c
 255, // opcode (255)
-14, 0, // f: TestFlag  B| C| D (14)
+13, 0, // f: TestFlag  A| C| D (13)
+1, // b_A1: u8
 2, // i: InnerFlag  I (2)
 3, // b_I1: u8
-1, // b_B1: u8
+2, // t: ThirdFlag  Y (2)
 2, // b_C1: u8
 ```
 ```c
 255, // opcode (255)
-13, 0, // f: TestFlag  A| C| D (13)
-1, // b_A1: u8
+14, 0, // f: TestFlag  B| C| D (14)
+1, // b_B1: u8
 2, // b_C1: u8
 ```

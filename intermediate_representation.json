@@ -2447,6 +2447,81 @@
         "Flag",
         "LoginVersion"
       ]
+    },
+    {
+      "name": "ThirdFlag",
+      "definer_ty": "Flag",
+      "enumerators": [
+        {
+          "name": "X",
+          "value": {
+            "int": 1,
+            "original": "1"
+          },
+          "tags": {
+            "description": null,
+            "comment": null,
+            "display": null
+          }
+        },
+        {
+          "name": "Y",
+          "value": {
+            "int": 2,
+            "original": "2"
+          },
+          "tags": {
+            "description": null,
+            "comment": null,
+            "display": null
+          }
+        },
+        {
+          "name": "Z",
+          "value": {
+            "int": 4,
+            "original": "4"
+          },
+          "tags": {
+            "description": null,
+            "comment": null,
+            "display": null
+          }
+        },
+        {
+          "name": "W",
+          "value": {
+            "int": 8,
+            "original": "8"
+          },
+          "tags": {
+            "description": null,
+            "comment": null,
+            "display": null
+          }
+        }
+      ],
+      "self_value": null,
+      "integer_type": "u8",
+      "tags": {
+        "description": null,
+        "comment": null,
+        "display": null
+      },
+      "objects_used_in": [
+        [
+          "TestStruct",
+          "InIf"
+        ]
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/test/test.wowm",
+        "start_position": 19
+      },
+      "features": [
+        "Flag",
+        "LoginVersion"
+      ]
     }
   ],
   "enums": [
@@ -104018,6 +104093,242 @@
                     "display": null
                   }
                 }
+              },
+              {
+                "Definition": {
+                  "name": "i",
+                  "member_type": {
+                    "Identifier": {
+                      "s": "InnerFlag",
+                      "upcast": null
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": true,
+                  "tags": {
+                    "description": null,
+                    "comment": null,
+                    "display": null
+                  }
+                }
+              },
+              {
+                "IfStatement": {
+                  "conditional": {
+                    "variable_name": "i",
+                    "equations": [
+                      {
+                        "BitwiseAnd": {
+                          "value": "H"
+                        }
+                      }
+                    ]
+                  },
+                  "members": [
+                    {
+                      "Definition": {
+                        "name": "b_H1",
+                        "member_type": {
+                          "Integer": "u8"
+                        },
+                        "constant_value": null,
+                        "used_as_size_in": null,
+                        "used_in_if": false,
+                        "tags": {
+                          "description": null,
+                          "comment": null,
+                          "display": null
+                        }
+                      }
+                    }
+                  ],
+                  "else_ifs": [
+                    {
+                      "conditional": {
+                        "variable_name": "i",
+                        "equations": [
+                          {
+                            "BitwiseAnd": {
+                              "value": "I"
+                            }
+                          }
+                        ]
+                      },
+                      "members": [
+                        {
+                          "Definition": {
+                            "name": "b_I1",
+                            "member_type": {
+                              "Integer": "u8"
+                            },
+                            "constant_value": null,
+                            "used_as_size_in": null,
+                            "used_in_if": false,
+                            "tags": {
+                              "description": null,
+                              "comment": null,
+                              "display": null
+                            }
+                          }
+                        },
+                        {
+                          "Definition": {
+                            "name": "t",
+                            "member_type": {
+                              "Identifier": {
+                                "s": "ThirdFlag",
+                                "upcast": null
+                              }
+                            },
+                            "constant_value": null,
+                            "used_as_size_in": null,
+                            "used_in_if": true,
+                            "tags": {
+                              "description": null,
+                              "comment": null,
+                              "display": null
+                            }
+                          }
+                        },
+                        {
+                          "IfStatement": {
+                            "conditional": {
+                              "variable_name": "t",
+                              "equations": [
+                                {
+                                  "BitwiseAnd": {
+                                    "value": "W"
+                                  }
+                                }
+                              ]
+                            },
+                            "members": [
+                              {
+                                "Definition": {
+                                  "name": "b_W1",
+                                  "member_type": {
+                                    "Integer": "u8"
+                                  },
+                                  "constant_value": null,
+                                  "used_as_size_in": null,
+                                  "used_in_if": false,
+                                  "tags": {
+                                    "description": null,
+                                    "comment": null,
+                                    "display": null
+                                  }
+                                }
+                              }
+                            ],
+                            "else_ifs": [],
+                            "else_statement_members": [],
+                            "original_ty": {
+                              "Identifier": {
+                                "s": "ThirdFlag",
+                                "upcast": null
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "IfStatement": {
+                            "conditional": {
+                              "variable_name": "t",
+                              "equations": [
+                                {
+                                  "BitwiseAnd": {
+                                    "value": "X"
+                                  }
+                                }
+                              ]
+                            },
+                            "members": [
+                              {
+                                "Definition": {
+                                  "name": "b_X1",
+                                  "member_type": {
+                                    "Integer": "u8"
+                                  },
+                                  "constant_value": null,
+                                  "used_as_size_in": null,
+                                  "used_in_if": false,
+                                  "tags": {
+                                    "description": null,
+                                    "comment": null,
+                                    "display": null
+                                  }
+                                }
+                              }
+                            ],
+                            "else_ifs": [
+                              {
+                                "conditional": {
+                                  "variable_name": "t",
+                                  "equations": [
+                                    {
+                                      "BitwiseAnd": {
+                                        "value": "Z"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "members": [
+                                  {
+                                    "Definition": {
+                                      "name": "b_Z1",
+                                      "member_type": {
+                                        "Integer": "u8"
+                                      },
+                                      "constant_value": null,
+                                      "used_as_size_in": null,
+                                      "used_in_if": false,
+                                      "tags": {
+                                        "description": null,
+                                        "comment": null,
+                                        "display": null
+                                      }
+                                    }
+                                  }
+                                ],
+                                "else_ifs": [],
+                                "else_statement_members": [],
+                                "original_ty": {
+                                  "Identifier": {
+                                    "s": "ThirdFlag",
+                                    "upcast": null
+                                  }
+                                }
+                              }
+                            ],
+                            "else_statement_members": [],
+                            "original_ty": {
+                              "Identifier": {
+                                "s": "ThirdFlag",
+                                "upcast": null
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "else_ifs": [],
+                      "else_statement_members": [],
+                      "original_ty": {
+                        "Identifier": {
+                          "s": "InnerFlag",
+                          "upcast": null
+                        }
+                      }
+                    }
+                  ],
+                  "else_statement_members": [],
+                  "original_ty": {
+                    "Identifier": {
+                      "s": "InnerFlag",
+                      "upcast": null
+                    }
+                  }
+                }
               }
             ],
             "else_ifs": [
@@ -104033,104 +104344,6 @@
                   ]
                 },
                 "members": [
-                  {
-                    "Definition": {
-                      "name": "i",
-                      "member_type": {
-                        "Identifier": {
-                          "s": "InnerFlag",
-                          "upcast": null
-                        }
-                      },
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": true,
-                      "tags": {
-                        "description": null,
-                        "comment": null,
-                        "display": null
-                      }
-                    }
-                  },
-                  {
-                    "IfStatement": {
-                      "conditional": {
-                        "variable_name": "i",
-                        "equations": [
-                          {
-                            "BitwiseAnd": {
-                              "value": "H"
-                            }
-                          }
-                        ]
-                      },
-                      "members": [
-                        {
-                          "Definition": {
-                            "name": "b_H1",
-                            "member_type": {
-                              "Integer": "u8"
-                            },
-                            "constant_value": null,
-                            "used_as_size_in": null,
-                            "used_in_if": false,
-                            "tags": {
-                              "description": null,
-                              "comment": null,
-                              "display": null
-                            }
-                          }
-                        }
-                      ],
-                      "else_ifs": [
-                        {
-                          "conditional": {
-                            "variable_name": "i",
-                            "equations": [
-                              {
-                                "BitwiseAnd": {
-                                  "value": "I"
-                                }
-                              }
-                            ]
-                          },
-                          "members": [
-                            {
-                              "Definition": {
-                                "name": "b_I1",
-                                "member_type": {
-                                  "Integer": "u8"
-                                },
-                                "constant_value": null,
-                                "used_as_size_in": null,
-                                "used_in_if": false,
-                                "tags": {
-                                  "description": null,
-                                  "comment": null,
-                                  "display": null
-                                }
-                              }
-                            }
-                          ],
-                          "else_ifs": [],
-                          "else_statement_members": [],
-                          "original_ty": {
-                            "Identifier": {
-                              "s": "InnerFlag",
-                              "upcast": null
-                            }
-                          }
-                        }
-                      ],
-                      "else_statement_members": [],
-                      "original_ty": {
-                        "Identifier": {
-                          "s": "InnerFlag",
-                          "upcast": null
-                        }
-                      }
-                    }
-                  },
                   {
                     "Definition": {
                       "name": "b_B1",
@@ -104261,7 +104474,7 @@
               "variable_name": "f",
               "verified_value": {
                 "Flag": [
-                  "B",
+                  "A",
                   "C",
                   "D"
                 ]
@@ -104273,7 +104486,7 @@
               }
             },
             {
-              "variable_name": "b_B1",
+              "variable_name": "b_A1",
               "verified_value": {
                 "Number": {
                   "value": 1,
@@ -104314,6 +104527,19 @@
               }
             },
             {
+              "variable_name": "t",
+              "verified_value": {
+                "Flag": [
+                  "Y"
+                ]
+              },
+              "tags": {
+                "description": null,
+                "comment": null,
+                "display": null
+              }
+            },
+            {
               "variable_name": "b_I1",
               "verified_value": {
                 "Number": {
@@ -104330,11 +104556,12 @@
           ],
           "raw_bytes": [
             255,
-            14,
+            13,
             0,
+            1,
             2,
             3,
-            1,
+            2,
             2
           ],
           "tags": {
@@ -104344,7 +104571,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/test/test.wowm",
-            "start_position": 41
+            "start_position": 134
           }
         },
         {
@@ -104354,7 +104581,7 @@
               "variable_name": "f",
               "verified_value": {
                 "Flag": [
-                  "A",
+                  "B",
                   "C",
                   "D"
                 ]
@@ -104366,7 +104593,7 @@
               }
             },
             {
-              "variable_name": "b_A1",
+              "variable_name": "b_B1",
               "verified_value": {
                 "Number": {
                   "value": 1,
@@ -104396,7 +104623,7 @@
           ],
           "raw_bytes": [
             255,
-            13,
+            14,
             0,
             1,
             2
@@ -104408,13 +104635,13 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/test/test.wowm",
-            "start_position": 56
+            "start_position": 151
           }
         }
       ],
       "file_info": {
         "file_name": "wow_message_parser/wowm/test/test.wowm",
-        "start_position": 19
+        "start_position": 102
       },
       "only_has_io_error": true,
       "features": [
