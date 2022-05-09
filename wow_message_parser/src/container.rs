@@ -6,13 +6,13 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{
     ArraySize, ArrayType, ContainerValue, ObjectType, VerifiedContainerValue,
 };
-use crate::rust_printer::complex_print::{DefinerType, RustStructComplexTree};
+use crate::rust_printer::complex_print::RustStructComplexTree;
 use crate::rust_printer::new_enums::parse::add_to_statement;
 use crate::rust_printer::new_enums::NewIfStatement;
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
-    LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
-    WORLD_SERVER_MESSAGE_ENUM_NAME,
+    DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
+    WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::test_case::TestCase;
 use crate::LOGIN_LOGON_VERSIONS;

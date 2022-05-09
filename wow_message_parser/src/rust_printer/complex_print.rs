@@ -6,17 +6,12 @@ use crate::parser::types::tags::Tags;
 use crate::parser::types::ty::Type;
 use crate::parser::types::ty::Type::Identifier;
 use crate::parser::types::{ContainerValue, IntegerType};
+use crate::rust_printer::DefinerType;
 
 #[derive(Debug, Clone)]
 pub struct RustStructComplexTree {
     tree: OrderedMap,
     new_enums: Vec<ComplexEnum>,
-}
-
-#[derive(Debug, Copy, Clone)]
-pub enum DefinerType {
-    Enum,
-    Flag,
 }
 
 #[derive(Debug, Clone)]

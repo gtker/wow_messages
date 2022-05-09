@@ -4,10 +4,10 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{
     Array, ArrayType, FloatingPointType, IntegerType, VerifiedContainerValue,
 };
-use crate::rust_printer::complex_print::DefinerType;
 use crate::rust_printer::new_enums::{
     IfStatementType, NewEnumStructMember, NewEnumerator, NewIfStatement,
 };
+use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 
 pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container, prefix: &str, postfix: &str) {

@@ -877,3 +877,9 @@ impl ImplType {
         vec![ImplType::Std, ImplType::Tokio, ImplType::AsyncStd]
     }
 }
+
+#[derive(Debug, Copy, Clone)]
+pub enum DefinerType {
+    Enum,
+    Flag,
+}

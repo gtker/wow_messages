@@ -7,7 +7,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{
     Array, ArraySize, ArrayType, FloatingPointType, IntegerType, ObjectType,
 };
-use crate::rust_printer::complex_print::DefinerType;
+use crate::rust_printer::DefinerType;
 use crate::test_case::TestCase;
 use std::fmt::{Display, Formatter};
 
