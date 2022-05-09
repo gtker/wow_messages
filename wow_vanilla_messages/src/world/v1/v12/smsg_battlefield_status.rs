@@ -13388,6 +13388,235 @@ impl From<StatusIdError> for SMSG_BATTLEFIELD_STATUSError {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+pub enum SMSG_BATTLEFIELD_STATUSStatusId {
+    NONE,
+    WAIT_QUEUE {
+        average_wait_time_in_ms: u32,
+        time_in_queue_in_ms: u32,
+    },
+    WAIT_JOIN {
+        time_to_remove_in_queue_in_ms: u32,
+    },
+    IN_PROGRESS {
+        time_to_bg_autoleave_in_ms: u32,
+        time_to_bg_start_in_ms: u32,
+    },
+    WAIT_LEAVE,
+}
+
+impl From<&StatusId> for SMSG_BATTLEFIELD_STATUSStatusId {
+    fn from(e: &StatusId) -> Self {
+        match &e {
+            StatusId::NONE => Self::NONE,
+            StatusId::WAIT_QUEUE => Self::WAIT_QUEUE {
+                average_wait_time_in_ms: Default::default(),
+                time_in_queue_in_ms: Default::default(),
+            },
+            StatusId::WAIT_JOIN => Self::WAIT_JOIN {
+                time_to_remove_in_queue_in_ms: Default::default(),
+            },
+            StatusId::IN_PROGRESS => Self::IN_PROGRESS {
+                time_to_bg_autoleave_in_ms: Default::default(),
+                time_to_bg_start_in_ms: Default::default(),
+            },
+            StatusId::WAIT_LEAVE => Self::WAIT_LEAVE,
+        }
+    }
+}
+
+impl From<&SMSG_BATTLEFIELD_STATUSStatusId> for StatusId {
+    fn from(v: &SMSG_BATTLEFIELD_STATUSStatusId) -> Self {
+        match &v {
+            SMSG_BATTLEFIELD_STATUSStatusId::NONE => Self::NONE,
+            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE { .. } => Self::WAIT_QUEUE,
+            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN { .. } => Self::WAIT_JOIN,
+            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS { .. } => Self::IN_PROGRESS,
+            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => Self::WAIT_LEAVE,
+        }
+    }
+}
+
+impl Default for SMSG_BATTLEFIELD_STATUSStatusId {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::NONE
+    }
+}
+
+impl SMSG_BATTLEFIELD_STATUSStatusId {
+    #[cfg(feature = "sync")]
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.write(w)?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.tokio_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.astd_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.write_u16_le(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.tokio_write_u16_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.astd_write_u16_le(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.write_u16_be(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.tokio_write_u16_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.astd_write_u16_be(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.write_u32_le(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.tokio_write_u32_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.astd_write_u32_le(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.write_u32_be(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.tokio_write_u32_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.astd_write_u32_be(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.write_u64_le(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.tokio_write_u64_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.astd_write_u64_le(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.write_u64_be(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.tokio_write_u64_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: StatusId = self.into();
+        a.astd_write_u64_be(w).await
+    }
+
+}
+
+impl VariableSized for SMSG_BATTLEFIELD_STATUSStatusId {
+    fn size(&self) -> usize {
+        match self {
+            Self::NONE => {
+                1
+            }
+            Self::WAIT_QUEUE {
+                average_wait_time_in_ms,
+                time_in_queue_in_ms,
+            } => {
+                1
+                + 4 // average_wait_time_in_ms: u32
+                + 4 // time_in_queue_in_ms: u32
+            }
+            Self::WAIT_JOIN {
+                time_to_remove_in_queue_in_ms,
+            } => {
+                1
+                + 4 // time_to_remove_in_queue_in_ms: u32
+            }
+            Self::IN_PROGRESS {
+                time_to_bg_autoleave_in_ms,
+                time_to_bg_start_in_ms,
+            } => {
+                1
+                + 4 // time_to_bg_autoleave_in_ms: u32
+                + 4 // time_to_bg_start_in_ms: u32
+            }
+            Self::WAIT_LEAVE => {
+                1
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for SMSG_BATTLEFIELD_STATUSStatusId {
+    fn maximum_possible_size() -> usize {
+        1
+    }
+}
+
+#[derive(Debug, PartialEq, Clone)]
 pub enum SMSG_BATTLEFIELD_STATUSMap {
     EASTERN_KINGDOMS,
     KALIMDOR {
@@ -14427,235 +14656,6 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
 impl MaximumPossibleSized for SMSG_BATTLEFIELD_STATUSMap {
     fn maximum_possible_size() -> usize {
         18
-    }
-}
-
-#[derive(Debug, PartialEq, Clone)]
-pub enum SMSG_BATTLEFIELD_STATUSStatusId {
-    NONE,
-    WAIT_QUEUE {
-        average_wait_time_in_ms: u32,
-        time_in_queue_in_ms: u32,
-    },
-    WAIT_JOIN {
-        time_to_remove_in_queue_in_ms: u32,
-    },
-    IN_PROGRESS {
-        time_to_bg_autoleave_in_ms: u32,
-        time_to_bg_start_in_ms: u32,
-    },
-    WAIT_LEAVE,
-}
-
-impl From<&StatusId> for SMSG_BATTLEFIELD_STATUSStatusId {
-    fn from(e: &StatusId) -> Self {
-        match &e {
-            StatusId::NONE => Self::NONE,
-            StatusId::WAIT_QUEUE => Self::WAIT_QUEUE {
-                average_wait_time_in_ms: Default::default(),
-                time_in_queue_in_ms: Default::default(),
-            },
-            StatusId::WAIT_JOIN => Self::WAIT_JOIN {
-                time_to_remove_in_queue_in_ms: Default::default(),
-            },
-            StatusId::IN_PROGRESS => Self::IN_PROGRESS {
-                time_to_bg_autoleave_in_ms: Default::default(),
-                time_to_bg_start_in_ms: Default::default(),
-            },
-            StatusId::WAIT_LEAVE => Self::WAIT_LEAVE,
-        }
-    }
-}
-
-impl From<&SMSG_BATTLEFIELD_STATUSStatusId> for StatusId {
-    fn from(v: &SMSG_BATTLEFIELD_STATUSStatusId) -> Self {
-        match &v {
-            SMSG_BATTLEFIELD_STATUSStatusId::NONE => Self::NONE,
-            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE { .. } => Self::WAIT_QUEUE,
-            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN { .. } => Self::WAIT_JOIN,
-            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS { .. } => Self::IN_PROGRESS,
-            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => Self::WAIT_LEAVE,
-        }
-    }
-}
-
-impl Default for SMSG_BATTLEFIELD_STATUSStatusId {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::NONE
-    }
-}
-
-impl SMSG_BATTLEFIELD_STATUSStatusId {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.write(w)?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.tokio_write(w).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.astd_write(w).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.write_u16_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.tokio_write_u16_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u16_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.astd_write_u16_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.write_u16_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.tokio_write_u16_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u16_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.astd_write_u16_be(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.write_u32_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.tokio_write_u32_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.astd_write_u32_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.write_u32_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.tokio_write_u32_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.astd_write_u32_be(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.write_u64_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.tokio_write_u64_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.astd_write_u64_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.write_u64_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.tokio_write_u64_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.astd_write_u64_be(w).await
-    }
-
-}
-
-impl VariableSized for SMSG_BATTLEFIELD_STATUSStatusId {
-    fn size(&self) -> usize {
-        match self {
-            Self::NONE => {
-                1
-            }
-            Self::WAIT_QUEUE {
-                average_wait_time_in_ms,
-                time_in_queue_in_ms,
-            } => {
-                1
-                + 4 // average_wait_time_in_ms: u32
-                + 4 // time_in_queue_in_ms: u32
-            }
-            Self::WAIT_JOIN {
-                time_to_remove_in_queue_in_ms,
-            } => {
-                1
-                + 4 // time_to_remove_in_queue_in_ms: u32
-            }
-            Self::IN_PROGRESS {
-                time_to_bg_autoleave_in_ms,
-                time_to_bg_start_in_ms,
-            } => {
-                1
-                + 4 // time_to_bg_autoleave_in_ms: u32
-                + 4 // time_to_bg_start_in_ms: u32
-            }
-            Self::WAIT_LEAVE => {
-                1
-            }
-        }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_BATTLEFIELD_STATUSStatusId {
-    fn maximum_possible_size() -> usize {
-        1
     }
 }
 

@@ -1,7 +1,6 @@
 pub mod parse;
 
 use crate::container::StructMemberDefinition;
-use crate::rust_printer::complex_print::ComplexEnum;
 
 #[derive(Debug, Clone)]
 pub enum NewEnumStructMember {

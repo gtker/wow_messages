@@ -363,41 +363,51 @@ impl RustObject {
         self.sizes
     }
 
+    fn get_rust_definer_from_ty(m: &RustMember, container_name: &str) -> Option<RustDefiner> {
+        let (ty_name, enumerators, int_ty, is_simple, definer_type) = match m.ty().clone() {
+            RustType::Enum {
+                ty_name,
+                enumerators,
+                int_ty,
+                is_simple,
+            } => (ty_name, enumerators, int_ty, is_simple, DefinerType::Enum),
+            RustType::Flag {
+                ty_name,
+                enumerators,
+                int_ty,
+                is_simple,
+            } => (ty_name, enumerators, int_ty, is_simple, DefinerType::Flag),
+            _ => return None,
+        };
+
+        Some(RustDefiner {
+            inner: m.clone(),
+            enumerators: enumerators.clone(),
+            ty_name: ty_name.clone(),
+            int_ty,
+            is_simple,
+            original_ty_name: ty_name.replacen(container_name, "", 1),
+            definer_type,
+        })
+    }
+
+    pub fn rust_definers_in_global_scope(&self) -> Vec<RustDefiner> {
+        unimplemented!()
+    }
+
     pub fn get_rust_definers(&self) -> Vec<RustDefiner> {
         fn inner(m: &RustMember, v: &mut Vec<RustDefiner>, container_name: &str) {
-            let (ty_name, enumerators, int_ty, is_simple, definer_type) = match m.ty().clone() {
-                RustType::Enum {
-                    ty_name,
-                    enumerators,
-                    int_ty,
-                    is_simple,
-                } => (ty_name, enumerators, int_ty, is_simple, DefinerType::Enum),
-                RustType::Flag {
-                    ty_name,
-                    enumerators,
-                    int_ty,
-                    is_simple,
-                } => (ty_name, enumerators, int_ty, is_simple, DefinerType::Flag),
-                _ => return,
-            };
+            let rd = RustObject::get_rust_definer_from_ty(m, container_name);
 
-            if !is_simple && !v.iter().any(|a| a.ty_name() == ty_name) {
-                let rd = RustDefiner {
-                    inner: m.clone(),
-                    enumerators: enumerators.clone(),
-                    ty_name: ty_name.clone(),
-                    int_ty,
-                    is_simple,
-                    original_ty_name: ty_name.replacen(container_name, "", 1),
-                    definer_type,
-                };
+            if let Some(rd) = rd {
+                for enumerator in rd.enumerators() {
+                    for m in enumerator.members_in_struct() {
+                        inner(m, v, container_name);
+                    }
+                }
 
-                v.push(rd);
-            }
-
-            for enumerator in enumerators {
-                for m in enumerator.members_in_struct() {
-                    inner(m, v, container_name);
+                if !rd.is_simple() && !v.iter().any(|a| a.ty_name() == rd.ty_name()) {
+                    v.push(rd);
                 }
             }
         }
@@ -414,31 +424,7 @@ impl RustObject {
     pub fn get_rust_definer(&self, name: &str) -> RustDefiner {
         let member = self.get_complex_definer_ty(name);
 
-        let (ty_name, enumerators, int_ty, is_simple, definer_type) = match member.ty() {
-            RustType::Enum {
-                ty_name,
-                enumerators,
-                int_ty,
-                is_simple,
-            } => (ty_name, enumerators, *int_ty, *is_simple, DefinerType::Enum),
-            RustType::Flag {
-                ty_name,
-                int_ty,
-                enumerators,
-                is_simple,
-            } => (ty_name, enumerators, *int_ty, *is_simple, DefinerType::Flag),
-            _ => unreachable!(),
-        };
-
-        RustDefiner {
-            inner: member.clone(),
-            definer_type,
-            enumerators: enumerators.clone(),
-            ty_name: ty_name.clone(),
-            int_ty,
-            is_simple,
-            original_ty_name: ty_name.replacen(&self.name, "", 1),
-        }
+        Self::get_rust_definer_from_ty(member, &self.name).unwrap()
     }
 
     pub fn get_complex_definer_ty(&self, name: &str) -> &RustMember {

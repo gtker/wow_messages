@@ -793,314 +793,6 @@ impl From<LoginResultError> for CMD_AUTH_LOGON_CHALLENGE_ServerError {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
-pub enum CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
-    SUCCESS {
-        crc_salt: [u8; 16],
-        generator: Vec<u8>,
-        large_safe_prime: Vec<u8>,
-        salt: [u8; 32],
-        security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag,
-        server_public_key: [u8; 32],
-    },
-    FAIL_UNKNOWN0,
-    FAIL_UNKNOWN1,
-    FAIL_BANNED,
-    FAIL_UNKNOWN_ACCOUNT,
-    FAIL_INCORRECT_PASSWORD,
-    FAIL_ALREADY_ONLINE,
-    FAIL_NO_TIME,
-    FAIL_DB_BUSY,
-    FAIL_VERSION_INVALID,
-    LOGIN_DOWNLOAD_FILE,
-    FAIL_INVALID_SERVER,
-    FAIL_SUSPENDED,
-    FAIL_NO_ACCESS,
-    SUCCESS_SURVEY,
-    FAIL_PARENTALCONTROL,
-    FAIL_LOCKED_ENFORCED,
-}
-
-impl From<&LoginResult> for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
-    fn from(e: &LoginResult) -> Self {
-        match &e {
-            LoginResult::SUCCESS => Self::SUCCESS {
-                crc_salt: Default::default(),
-                generator: Default::default(),
-                large_safe_prime: Default::default(),
-                salt: Default::default(),
-                security_flag: Default::default(),
-                server_public_key: Default::default(),
-            },
-            LoginResult::FAIL_UNKNOWN0 => Self::FAIL_UNKNOWN0,
-            LoginResult::FAIL_UNKNOWN1 => Self::FAIL_UNKNOWN1,
-            LoginResult::FAIL_BANNED => Self::FAIL_BANNED,
-            LoginResult::FAIL_UNKNOWN_ACCOUNT => Self::FAIL_UNKNOWN_ACCOUNT,
-            LoginResult::FAIL_INCORRECT_PASSWORD => Self::FAIL_INCORRECT_PASSWORD,
-            LoginResult::FAIL_ALREADY_ONLINE => Self::FAIL_ALREADY_ONLINE,
-            LoginResult::FAIL_NO_TIME => Self::FAIL_NO_TIME,
-            LoginResult::FAIL_DB_BUSY => Self::FAIL_DB_BUSY,
-            LoginResult::FAIL_VERSION_INVALID => Self::FAIL_VERSION_INVALID,
-            LoginResult::LOGIN_DOWNLOAD_FILE => Self::LOGIN_DOWNLOAD_FILE,
-            LoginResult::FAIL_INVALID_SERVER => Self::FAIL_INVALID_SERVER,
-            LoginResult::FAIL_SUSPENDED => Self::FAIL_SUSPENDED,
-            LoginResult::FAIL_NO_ACCESS => Self::FAIL_NO_ACCESS,
-            LoginResult::SUCCESS_SURVEY => Self::SUCCESS_SURVEY,
-            LoginResult::FAIL_PARENTALCONTROL => Self::FAIL_PARENTALCONTROL,
-            LoginResult::FAIL_LOCKED_ENFORCED => Self::FAIL_LOCKED_ENFORCED,
-        }
-    }
-}
-
-impl From<&CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult> for LoginResult {
-    fn from(v: &CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult) -> Self {
-        match &v {
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS { .. } => Self::SUCCESS,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => Self::FAIL_UNKNOWN0,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => Self::FAIL_UNKNOWN1,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED => Self::FAIL_BANNED,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => Self::FAIL_UNKNOWN_ACCOUNT,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => Self::FAIL_INCORRECT_PASSWORD,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => Self::FAIL_ALREADY_ONLINE,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => Self::FAIL_NO_TIME,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => Self::FAIL_DB_BUSY,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => Self::FAIL_VERSION_INVALID,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => Self::LOGIN_DOWNLOAD_FILE,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => Self::FAIL_INVALID_SERVER,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => Self::FAIL_SUSPENDED,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => Self::FAIL_NO_ACCESS,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => Self::SUCCESS_SURVEY,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => Self::FAIL_PARENTALCONTROL,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_LOCKED_ENFORCED => Self::FAIL_LOCKED_ENFORCED,
-        }
-    }
-}
-
-impl Default for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::SUCCESS {
-            crc_salt: Default::default(),
-            generator: Default::default(),
-            large_safe_prime: Default::default(),
-            salt: Default::default(),
-            security_flag: Default::default(),
-            server_public_key: Default::default(),
-        }
-    }
-}
-
-impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.write(w)?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.tokio_write(w).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.astd_write(w).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.write_u16_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.tokio_write_u16_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u16_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.astd_write_u16_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.write_u16_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.tokio_write_u16_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u16_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.astd_write_u16_be(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.write_u32_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.tokio_write_u32_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.astd_write_u32_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.write_u32_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.tokio_write_u32_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.astd_write_u32_be(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.write_u64_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.tokio_write_u64_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.astd_write_u64_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.write_u64_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.tokio_write_u64_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.astd_write_u64_be(w).await
-    }
-
-}
-
-impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
-    fn size(&self) -> usize {
-        match self {
-            Self::SUCCESS {
-                crc_salt,
-                generator,
-                large_safe_prime,
-                salt,
-                security_flag,
-                server_public_key,
-            } => {
-                1
-                + 16 * core::mem::size_of::<u8>() // crc_salt: u8[16]
-                + generator.len() * core::mem::size_of::<u8>() // generator: u8[generator_length]
-                + 1 // generator_length: u8
-                + large_safe_prime.len() * core::mem::size_of::<u8>() // large_safe_prime: u8[large_safe_prime_length]
-                + 1 // large_safe_prime_length: u8
-                + 32 * core::mem::size_of::<u8>() // salt: u8[32]
-                + security_flag.size() // security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag
-                + 32 * core::mem::size_of::<u8>() // server_public_key: u8[32]
-            }
-            Self::FAIL_UNKNOWN0 => {
-                1
-            }
-            Self::FAIL_UNKNOWN1 => {
-                1
-            }
-            Self::FAIL_BANNED => {
-                1
-            }
-            Self::FAIL_UNKNOWN_ACCOUNT => {
-                1
-            }
-            Self::FAIL_INCORRECT_PASSWORD => {
-                1
-            }
-            Self::FAIL_ALREADY_ONLINE => {
-                1
-            }
-            Self::FAIL_NO_TIME => {
-                1
-            }
-            Self::FAIL_DB_BUSY => {
-                1
-            }
-            Self::FAIL_VERSION_INVALID => {
-                1
-            }
-            Self::LOGIN_DOWNLOAD_FILE => {
-                1
-            }
-            Self::FAIL_INVALID_SERVER => {
-                1
-            }
-            Self::FAIL_SUSPENDED => {
-                1
-            }
-            Self::FAIL_NO_ACCESS => {
-                1
-            }
-            Self::SUCCESS_SURVEY => {
-                1
-            }
-            Self::FAIL_PARENTALCONTROL => {
-                1
-            }
-            Self::FAIL_LOCKED_ENFORCED => {
-                1
-            }
-        }
-    }
-}
-
-impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
-    fn maximum_possible_size() -> usize {
-        629
-    }
-}
-
 #[derive(Default, Debug, PartialEq, Clone)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
     inner: u8,
@@ -1486,6 +1178,314 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
         Ok(())
     }
 
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+    SUCCESS {
+        crc_salt: [u8; 16],
+        generator: Vec<u8>,
+        large_safe_prime: Vec<u8>,
+        salt: [u8; 32],
+        security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag,
+        server_public_key: [u8; 32],
+    },
+    FAIL_UNKNOWN0,
+    FAIL_UNKNOWN1,
+    FAIL_BANNED,
+    FAIL_UNKNOWN_ACCOUNT,
+    FAIL_INCORRECT_PASSWORD,
+    FAIL_ALREADY_ONLINE,
+    FAIL_NO_TIME,
+    FAIL_DB_BUSY,
+    FAIL_VERSION_INVALID,
+    LOGIN_DOWNLOAD_FILE,
+    FAIL_INVALID_SERVER,
+    FAIL_SUSPENDED,
+    FAIL_NO_ACCESS,
+    SUCCESS_SURVEY,
+    FAIL_PARENTALCONTROL,
+    FAIL_LOCKED_ENFORCED,
+}
+
+impl From<&LoginResult> for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+    fn from(e: &LoginResult) -> Self {
+        match &e {
+            LoginResult::SUCCESS => Self::SUCCESS {
+                crc_salt: Default::default(),
+                generator: Default::default(),
+                large_safe_prime: Default::default(),
+                salt: Default::default(),
+                security_flag: Default::default(),
+                server_public_key: Default::default(),
+            },
+            LoginResult::FAIL_UNKNOWN0 => Self::FAIL_UNKNOWN0,
+            LoginResult::FAIL_UNKNOWN1 => Self::FAIL_UNKNOWN1,
+            LoginResult::FAIL_BANNED => Self::FAIL_BANNED,
+            LoginResult::FAIL_UNKNOWN_ACCOUNT => Self::FAIL_UNKNOWN_ACCOUNT,
+            LoginResult::FAIL_INCORRECT_PASSWORD => Self::FAIL_INCORRECT_PASSWORD,
+            LoginResult::FAIL_ALREADY_ONLINE => Self::FAIL_ALREADY_ONLINE,
+            LoginResult::FAIL_NO_TIME => Self::FAIL_NO_TIME,
+            LoginResult::FAIL_DB_BUSY => Self::FAIL_DB_BUSY,
+            LoginResult::FAIL_VERSION_INVALID => Self::FAIL_VERSION_INVALID,
+            LoginResult::LOGIN_DOWNLOAD_FILE => Self::LOGIN_DOWNLOAD_FILE,
+            LoginResult::FAIL_INVALID_SERVER => Self::FAIL_INVALID_SERVER,
+            LoginResult::FAIL_SUSPENDED => Self::FAIL_SUSPENDED,
+            LoginResult::FAIL_NO_ACCESS => Self::FAIL_NO_ACCESS,
+            LoginResult::SUCCESS_SURVEY => Self::SUCCESS_SURVEY,
+            LoginResult::FAIL_PARENTALCONTROL => Self::FAIL_PARENTALCONTROL,
+            LoginResult::FAIL_LOCKED_ENFORCED => Self::FAIL_LOCKED_ENFORCED,
+        }
+    }
+}
+
+impl From<&CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult> for LoginResult {
+    fn from(v: &CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult) -> Self {
+        match &v {
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS { .. } => Self::SUCCESS,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => Self::FAIL_UNKNOWN0,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => Self::FAIL_UNKNOWN1,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED => Self::FAIL_BANNED,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => Self::FAIL_UNKNOWN_ACCOUNT,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => Self::FAIL_INCORRECT_PASSWORD,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => Self::FAIL_ALREADY_ONLINE,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => Self::FAIL_NO_TIME,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => Self::FAIL_DB_BUSY,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => Self::FAIL_VERSION_INVALID,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => Self::LOGIN_DOWNLOAD_FILE,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => Self::FAIL_INVALID_SERVER,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => Self::FAIL_SUSPENDED,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => Self::FAIL_NO_ACCESS,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => Self::SUCCESS_SURVEY,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => Self::FAIL_PARENTALCONTROL,
+            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_LOCKED_ENFORCED => Self::FAIL_LOCKED_ENFORCED,
+        }
+    }
+}
+
+impl Default for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::SUCCESS {
+            crc_salt: Default::default(),
+            generator: Default::default(),
+            large_safe_prime: Default::default(),
+            salt: Default::default(),
+            security_flag: Default::default(),
+            server_public_key: Default::default(),
+        }
+    }
+}
+
+impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+    #[cfg(feature = "sync")]
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.write(w)?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.write_u16_le(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u16_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u16_le(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.write_u16_be(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u16_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u16_be(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.write_u32_le(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u32_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u32_le(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.write_u32_be(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u32_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u32_be(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.write_u64_le(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u64_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u64_le(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.write_u64_be(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.tokio_write_u64_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: LoginResult = self.into();
+        a.astd_write_u64_be(w).await
+    }
+
+}
+
+impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+    fn size(&self) -> usize {
+        match self {
+            Self::SUCCESS {
+                crc_salt,
+                generator,
+                large_safe_prime,
+                salt,
+                security_flag,
+                server_public_key,
+            } => {
+                1
+                + 16 * core::mem::size_of::<u8>() // crc_salt: u8[16]
+                + generator.len() * core::mem::size_of::<u8>() // generator: u8[generator_length]
+                + 1 // generator_length: u8
+                + large_safe_prime.len() * core::mem::size_of::<u8>() // large_safe_prime: u8[large_safe_prime_length]
+                + 1 // large_safe_prime_length: u8
+                + 32 * core::mem::size_of::<u8>() // salt: u8[32]
+                + security_flag.size() // security_flag: CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag
+                + 32 * core::mem::size_of::<u8>() // server_public_key: u8[32]
+            }
+            Self::FAIL_UNKNOWN0 => {
+                1
+            }
+            Self::FAIL_UNKNOWN1 => {
+                1
+            }
+            Self::FAIL_BANNED => {
+                1
+            }
+            Self::FAIL_UNKNOWN_ACCOUNT => {
+                1
+            }
+            Self::FAIL_INCORRECT_PASSWORD => {
+                1
+            }
+            Self::FAIL_ALREADY_ONLINE => {
+                1
+            }
+            Self::FAIL_NO_TIME => {
+                1
+            }
+            Self::FAIL_DB_BUSY => {
+                1
+            }
+            Self::FAIL_VERSION_INVALID => {
+                1
+            }
+            Self::LOGIN_DOWNLOAD_FILE => {
+                1
+            }
+            Self::FAIL_INVALID_SERVER => {
+                1
+            }
+            Self::FAIL_SUSPENDED => {
+                1
+            }
+            Self::FAIL_NO_ACCESS => {
+                1
+            }
+            Self::SUCCESS_SURVEY => {
+                1
+            }
+            Self::FAIL_PARENTALCONTROL => {
+                1
+            }
+            Self::FAIL_LOCKED_ENFORCED => {
+                1
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+    fn maximum_possible_size() -> usize {
+        629
+    }
 }
 
 #[cfg(test)]
