@@ -45,6 +45,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `ADDON` | 4294967295 (0xFFFFFFFF) |  |  |
 
 Used in:
+* [CMSG_MESSAGECHAT](cmsg_messagechat.md)
 * [NpcTextUpdate](npctextupdate.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
-* [CMSG_MESSAGECHAT](cmsg_messagechat.md)

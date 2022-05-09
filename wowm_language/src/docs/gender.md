@@ -21,6 +21,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `NONE` | 2 (0x02) |  |  |
 
 Used in:
+* [CMSG_CHAR_CREATE](cmsg_char_create.md)
 * [Character](character.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
-* [CMSG_CHAR_CREATE](cmsg_char_create.md)

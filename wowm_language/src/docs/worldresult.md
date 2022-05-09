@@ -179,8 +179,8 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `CHAR_NAME_FAILURE` | 81 (0x51) |  |  |
 
 Used in:
-* [SMSG_CHAR_RENAME](smsg_char_rename.md)
-* [SMSG_CHAR_CREATE](smsg_char_create.md)
-* [SMSG_CHAR_DELETE](smsg_char_delete.md)
 * [SMSG_AUTH_RESPONSE](smsg_auth_response.md)
 * [SMSG_CHARACTER_LOGIN_FAILED](smsg_character_login_failed.md)
+* [SMSG_CHAR_CREATE](smsg_char_create.md)
+* [SMSG_CHAR_DELETE](smsg_char_delete.md)
+* [SMSG_CHAR_RENAME](smsg_char_rename.md)

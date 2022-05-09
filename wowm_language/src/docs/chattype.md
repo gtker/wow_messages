@@ -85,5 +85,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `BATTLEGROUND_LEADER` | 93 (0x5D) |  |  |
 
 Used in:
-* [SMSG_MESSAGECHAT](smsg_messagechat.md)
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)
+* [SMSG_MESSAGECHAT](smsg_messagechat.md)

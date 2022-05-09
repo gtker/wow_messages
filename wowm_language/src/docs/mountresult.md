@@ -37,5 +37,5 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `OK` | 10 (0x0A) |  | no error |
 
 Used in:
-* [SMSG_MOUNTRESULT](smsg_mountresult.md)
 * [SMSG_DISMOUNTRESULT](smsg_dismountresult.md)
+* [SMSG_MOUNTRESULT](smsg_mountresult.md)

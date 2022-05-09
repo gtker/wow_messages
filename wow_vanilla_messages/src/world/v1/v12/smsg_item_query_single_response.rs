@@ -1693,5 +1693,6 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // map: Map
         + 4 // bag_family: u32
     }
+
 }
 

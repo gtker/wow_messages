@@ -616,5 +616,6 @@ impl SMSG_CREATURE_QUERY_RESPONSE_found {
         + 1 // civilian: u8
         + 1 // racial_leader: u8
     }
+
 }
 

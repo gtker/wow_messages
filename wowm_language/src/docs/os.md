@@ -20,5 +20,5 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `OSX` | 5198680 (0x4F5358) |  |  |
 
 Used in:
-* [CMD_AUTH_RECONNECT_CHALLENGE_Client](cmd_auth_reconnect_challenge_client.md)
 * [CMD_AUTH_LOGON_CHALLENGE_Client](cmd_auth_logon_challenge_client.md)
+* [CMD_AUTH_RECONNECT_CHALLENGE_Client](cmd_auth_reconnect_challenge_client.md)

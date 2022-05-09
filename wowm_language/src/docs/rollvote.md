@@ -21,6 +21,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `GREED` | 2 (0x02) |  |  |
 
 Used in:
-* [SMSG_LOOT_ROLL_WON](smsg_loot_roll_won.md)
 * [CMSG_LOOT_ROLL](cmsg_loot_roll.md)
 * [SMSG_LOOT_ROLL](smsg_loot_roll.md)
+* [SMSG_LOOT_ROLL_WON](smsg_loot_roll_won.md)

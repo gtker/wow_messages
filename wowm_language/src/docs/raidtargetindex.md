@@ -35,5 +35,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `REQUEST_ICONS` | 255 (0xFF) |  |  |
 
 Used in:
-* [RaidTargetUpdate](raidtargetupdate.md)
 * [MSG_RAID_TARGET_UPDATE_Client](msg_raid_target_update_client.md)
+* [RaidTargetUpdate](raidtargetupdate.md)

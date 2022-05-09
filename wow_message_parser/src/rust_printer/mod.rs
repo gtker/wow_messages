@@ -568,23 +568,6 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn func_pub<S: AsRef<str>, F: Fn(&mut Self)>(
-        &mut self,
-        name_and_args: S,
-        return_type: impl AsRef<str>,
-        f: F,
-    ) {
-        self.open_curly(format!(
-            "pub fn {} -> {}",
-            name_and_args.as_ref(),
-            return_type.as_ref()
-        ));
-
-        f(self);
-
-        self.closing_curly();
-    }
-
     pub fn impl_for<S: AsRef<str>, S2: AsRef<str>, F: Fn(&mut Self)>(
         &mut self,
         s: S,

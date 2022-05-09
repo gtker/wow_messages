@@ -490,5 +490,6 @@ impl SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
         + self.name5.len() + 1 // name5: CString
         + 6 * core::mem::size_of::<u32>() // raw_data: u32[6]
     }
+
 }
 

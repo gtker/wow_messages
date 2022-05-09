@@ -204,5 +204,6 @@ impl MSG_RAID_READY_CHECK_Client_answer {
     pub fn size(&self) -> usize {
         1 // state: u8
     }
+
 }
 

@@ -204,5 +204,6 @@ impl CMSG_TOGGLE_PVP_set {
     pub fn size(&self) -> usize {
         1 // enable_pvp: u8
     }
+
 }
 

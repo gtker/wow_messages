@@ -284,5 +284,6 @@ impl SMSG_TRANSFER_PENDING_has_transport {
         4 // transport: u32
         + 4 // transport_map: Map
     }
+
 }
 

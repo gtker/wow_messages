@@ -229,5 +229,6 @@ impl MSG_RAID_READY_CHECK_Server_state_check {
         8 // guid: Guid
         + 1 // state: u8
     }
+
 }
 

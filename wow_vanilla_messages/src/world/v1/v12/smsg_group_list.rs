@@ -450,5 +450,6 @@ impl SMSG_GROUP_LIST_group_not_empty {
         + 8 // master_loot: Guid
         + 1 // loot_threshold: ItemQuality
     }
+
 }
 
