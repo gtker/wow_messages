@@ -43,6 +43,8 @@ pub enum Feature {
     NotElseEnum,
     ElseEnum,
 
+    IfInDifferentScope,
+
     IfFlag,
     IfElseFlag,
     ElseFlag,
@@ -115,8 +117,9 @@ pub fn get_impl_features_for_container(e: &Container) -> ImplFeatures {
         f.add(Feature::EmptyContainer);
     }
 
+    let mut current_scope = Vec::new();
     for m in e.fields() {
-        features_for_struct_member(&mut f, m);
+        features_for_struct_member(&mut f, m, &mut current_scope);
     }
 
     add_version(e.tags(), &mut f);
@@ -124,7 +127,11 @@ pub fn get_impl_features_for_container(e: &Container) -> ImplFeatures {
     f
 }
 
-fn features_for_struct_member(f: &mut ImplFeatures, m: &StructMember) {
+fn features_for_struct_member(
+    f: &mut ImplFeatures,
+    m: &StructMember,
+    variables_in_current_scope: &mut Vec<String>,
+) {
     match m {
         StructMember::Definition(d) => features_for_definition(f, d),
         StructMember::IfStatement(statement) => {
@@ -145,7 +152,7 @@ fn features_for_struct_member(f: &mut ImplFeatures, m: &StructMember) {
             }
 
             for m in statement.members() {
-                features_for_struct_member(f, m);
+                features_for_struct_member(f, m, variables_in_current_scope);
             }
 
             for elseif in statement.else_ifs() {
@@ -153,11 +160,13 @@ fn features_for_struct_member(f: &mut ImplFeatures, m: &StructMember) {
                     DefinerType::Enum => Feature::IfElseEnum,
                     DefinerType::Flag => Feature::IfElseFlag,
                 });
+                let mut current_scope = Vec::new();
                 for m in elseif.members() {
-                    features_for_struct_member(f, m);
+                    features_for_struct_member(f, m, &mut current_scope);
                 }
             }
 
+            let mut current_scope = Vec::new();
             for m in statement.else_members() {
                 f.add(match ty {
                     DefinerType::Enum => {
@@ -170,14 +179,15 @@ fn features_for_struct_member(f: &mut ImplFeatures, m: &StructMember) {
                     DefinerType::Flag => Feature::ElseFlag,
                 });
 
-                features_for_struct_member(f, m);
+                features_for_struct_member(f, m, &mut current_scope);
             }
         }
         StructMember::OptionalStatement(optional) => {
             f.add(Feature::Optional);
 
+            let mut current_scope = Vec::new();
             for m in optional.members() {
-                features_for_struct_member(f, m);
+                features_for_struct_member(f, m, &mut current_scope);
             }
         }
     }
