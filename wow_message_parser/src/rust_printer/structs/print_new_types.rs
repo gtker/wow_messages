@@ -721,7 +721,11 @@ fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
                         s.open_curly(format!("Self::{name} =>", name = enumerator.name()));
                     }
 
-                    s.wln(format!("{}", re.int_ty().size()));
+                    if re.is_elseif() {
+                        s.wln("0 // Not an actual enum sent over the wire");
+                    } else {
+                        s.wln(format!("{}", re.int_ty().size()));
+                    }
 
                     for m in enumerator.members() {
                         s.w("+ ");

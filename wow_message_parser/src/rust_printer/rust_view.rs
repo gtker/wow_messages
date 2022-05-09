@@ -105,6 +105,13 @@ impl RustMember {
         }
     }
 
+    fn set_is_elseif(&mut self) {
+        match &mut self.ty {
+            RustType::Flag { is_elseif, .. } => *is_elseif = true,
+            _ => unreachable!(),
+        };
+    }
+
     fn append_members_to_enumerator_not_equal_range(
         &mut self,
         enumerator_name: &[&String],
@@ -284,6 +291,7 @@ pub enum RustType {
         enumerators: Vec<RustEnumerator>,
         int_ty: IntegerType,
         is_simple: bool,
+        is_elseif: bool,
     },
     Flag {
         ty_name: String,
@@ -410,22 +418,38 @@ impl RustObject {
     }
 
     fn get_rust_definer_from_ty(m: &RustMember, container_name: &str) -> Option<RustDefiner> {
-        let (ty_name, enumerators, int_ty, is_simple, definer_type) = match m.ty().clone() {
-            RustType::Enum {
-                ty_name,
-                enumerators,
-                int_ty,
-                is_simple,
-            } => (ty_name, enumerators, int_ty, is_simple, DefinerType::Enum),
-            RustType::Flag {
-                ty_name,
-                enumerators,
-                int_ty,
-                is_simple,
-                ..
-            } => (ty_name, enumerators, int_ty, is_simple, DefinerType::Flag),
-            _ => return None,
-        };
+        let (ty_name, enumerators, int_ty, is_simple, definer_type, is_elseif) =
+            match m.ty().clone() {
+                RustType::Enum {
+                    ty_name,
+                    enumerators,
+                    int_ty,
+                    is_simple,
+                    is_elseif,
+                } => (
+                    ty_name,
+                    enumerators,
+                    int_ty,
+                    is_simple,
+                    DefinerType::Enum,
+                    is_elseif,
+                ),
+                RustType::Flag {
+                    ty_name,
+                    enumerators,
+                    int_ty,
+                    is_simple,
+                    is_elseif,
+                } => (
+                    ty_name,
+                    enumerators,
+                    int_ty,
+                    is_simple,
+                    DefinerType::Flag,
+                    is_elseif,
+                ),
+                _ => return None,
+            };
 
         Some(RustDefiner {
             inner: m.clone(),
@@ -433,6 +457,7 @@ impl RustObject {
             ty_name: ty_name.clone(),
             int_ty,
             is_simple,
+            is_elseif,
             original_ty_name: ty_name.replacen(container_name, "", 1),
             definer_type,
         })
@@ -547,6 +572,7 @@ pub struct RustDefiner {
     ty_name: String,
     int_ty: IntegerType,
     is_simple: bool,
+    is_elseif: bool,
     original_ty_name: String,
 }
 
@@ -575,6 +601,9 @@ impl RustDefiner {
     pub fn is_simple(&self) -> bool {
         self.is_simple
     }
+    pub fn is_elseif(&self) -> bool {
+        self.is_elseif
+    }
     pub fn original_ty_name(&self) -> &str {
         &self.original_ty_name
     }
@@ -601,6 +630,7 @@ fn create_else_if_flag(
     let main_enum =
         find_subject(current_scope, parent_scope, statement).get_flag_enumerator(enumerator);
     find_subject(current_scope, parent_scope, statement).clear_flag_enumerator(enumerator);
+    find_subject(current_scope, parent_scope, statement).set_is_elseif();
 
     // Push enumerators
     let mut enumerators = Vec::new();
@@ -623,8 +653,9 @@ fn create_else_if_flag(
         ty: RustType::Enum {
             ty_name: format!("{}{}", struct_ty_name, enumerator),
             enumerators,
-            int_ty: IntegerType::U8, // TODO should not matter?
+            int_ty: IntegerType::U8, // Does not matter
             is_simple: false,
+            is_elseif: true,
         },
         original_ty: struct_ty_name.to_string(),
         in_rust_type: true,
@@ -896,6 +927,7 @@ pub fn create_struct_member(
                                 enumerators,
                                 int_ty,
                                 is_simple: true,
+                                is_elseif: false,
                             }
                         }
                         ObjectType::Flag => {

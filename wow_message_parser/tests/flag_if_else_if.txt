@@ -586,19 +586,19 @@ impl VariableSized for FlagIfElseIfFlagIfElseIfONE_IF {
             Self::ONE_IF {
                 b_if,
             } => {
-                1
+                0 // Not an actual enum sent over the wire
                 + 1 // b_if: u8
             }
             Self::TWO_ELSEIF {
                 s,
             } => {
-                1
+                0 // Not an actual enum sent over the wire
                 + s.size() // s: FlagIfElseIfSimpleFlag
             }
             Self::FOUR_ELSEIF {
                 elseif2,
             } => {
-                1
+                0 // Not an actual enum sent over the wire
                 + 1 // elseif2: u8
             }
         }
