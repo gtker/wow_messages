@@ -64,8 +64,6 @@ pub struct NewIfStatement {
     original_ty_name: String,
     new_ty_name: String,
     enumerators: Vec<NewEnumerator>,
-    global_enums: Vec<ComplexEnum>,
-    global_flags: Vec<ComplexEnum>,
 }
 
 impl NewIfStatement {
@@ -82,8 +80,6 @@ impl NewIfStatement {
             original_ty_name: original_ty_name.to_string(),
             new_ty_name: new_ty_name.to_string(),
             enumerators,
-            global_enums: vec![],
-            global_flags: vec![],
         }
     }
 
@@ -93,14 +89,6 @@ impl NewIfStatement {
 
     pub fn enum_or_flag(&self) -> IfStatementType {
         self.enum_or_flag
-    }
-
-    pub fn global_flags(&self) -> &[ComplexEnum] {
-        &self.global_flags
-    }
-
-    pub fn global_enums(&self) -> &[ComplexEnum] {
-        &self.global_enums
     }
 
     pub fn single_enumerator_with_fields(&self) -> &NewEnumerator {
