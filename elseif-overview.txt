@@ -1,0 +1,78 @@
+flag A B C D E
+
+if a & A
+else if a & B
+else if a & C
+if a & D
+
+Flag {
+    enumerators: {
+        RustEnumerator A {
+            members: {
+                RustMember {
+                    name
+                    ty: Enum {
+                        A {
+
+                        }
+                        B {
+                        }
+                        C {
+                        }
+                    }
+                    original_ty
+                    in_rust_type
+                    constant_sized
+                    sizes
+                }
+            }
+            is_main
+            original_fields
+            value
+            name
+        },
+        D {
+            members: {
+
+            }
+            is_main
+            original_fields
+            value
+            name
+        }
+        E {
+            members
+            is_main
+            original_fields
+            value
+            name
+        }
+    }
+}
+
+Flag {
+    enumerators: {
+        A {
+        }
+        B {
+        }
+        C {
+        }
+        D {
+            members: {
+
+            }
+            is_main
+            original_fields
+            value
+            name
+        }
+        E {
+            members
+            is_main
+            original_fields
+            value
+            name
+        }
+    }
+}

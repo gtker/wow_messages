@@ -54,10 +54,22 @@ impl ReadableAndWritable for TestStruct {
             None
         };
 
+        let f_E = if f.is_E() {
+            // b_E1: u8
+            let b_E1 = crate::util::read_u8_le(r)?;
+
+            Some(TestStructTestFlagE {
+                b_E1,
+            })
+        } else {
+            None
+        };
+
         let f = TestStructTestFlag {
             inner: f.as_int(),
             a: f_A,
             c: f_C,
+            e: f_E,
         };
 
         Ok(Self {
@@ -78,6 +90,10 @@ impl ReadableAndWritable for TestStruct {
         }
 
         if let Some(s) = &self.f.c {
+            s.write(w)?;
+        }
+
+        if let Some(s) = &self.f.e {
             s.write(w)?;
         }
 
@@ -130,10 +146,22 @@ impl ReadableAndWritable for TestStruct {
                 None
             };
 
+            let f_E = if f.is_E() {
+                // b_E1: u8
+                let b_E1 = crate::util::tokio_read_u8_le(r).await?;
+
+                Some(TestStructTestFlagE {
+                    b_E1,
+                })
+            } else {
+                None
+            };
+
             let f = TestStructTestFlag {
                 inner: f.as_int(),
                 a: f_A,
                 c: f_C,
+                e: f_E,
             };
 
             Ok(Self {
@@ -167,6 +195,10 @@ impl ReadableAndWritable for TestStruct {
             }
 
             if let Some(s) = &self.f.c {
+                s.tokio_write(w).await?;
+            }
+
+            if let Some(s) = &self.f.e {
                 s.tokio_write(w).await?;
             }
 
@@ -220,10 +252,22 @@ impl ReadableAndWritable for TestStruct {
                 None
             };
 
+            let f_E = if f.is_E() {
+                // b_E1: u8
+                let b_E1 = crate::util::astd_read_u8_le(r).await?;
+
+                Some(TestStructTestFlagE {
+                    b_E1,
+                })
+            } else {
+                None
+            };
+
             let f = TestStructTestFlag {
                 inner: f.as_int(),
                 a: f_A,
                 c: f_C,
+                e: f_E,
             };
 
             Ok(Self {
@@ -260,6 +304,10 @@ impl ReadableAndWritable for TestStruct {
                 s.astd_write(w).await?;
             }
 
+            if let Some(s) = &self.f.e {
+                s.astd_write(w).await?;
+            }
+
             Ok(())
         })
     }
@@ -276,7 +324,7 @@ impl VariableSized for TestStruct {
 impl MaximumPossibleSized for TestStruct {
     fn maximum_possible_size() -> usize {
         0
-        + 3 // f: TestStructTestFlag
+        + 5 // f: TestStructTestFlag
     }
 }
 
@@ -291,7 +339,7 @@ pub enum TestStructTestFlagA {
 }
 
 impl TestStructTestFlagA {
-    pub(crate) const fn as_flag_value(&self) -> u8 {
+    pub(crate) const fn as_flag_value(&self) -> u16 {
         match self {
             Self::A { .. } => 1,
             Self::B { .. } => 2,
@@ -327,9 +375,10 @@ impl MaximumPossibleSized for TestStructTestFlagA {
 
 #[derive(Default, Debug, PartialEq, Clone)]
 pub struct TestStructTestFlag {
-    inner: u8,
+    inner: u16,
     a: Option<TestStructTestFlagA>,
     c: Option<TestStructTestFlagC>,
+    e: Option<TestStructTestFlagE>,
 }
 
 impl From<&TestStructTestFlag> for TestFlag {
@@ -365,6 +414,7 @@ impl TestStructTestFlag {
             inner: 0,
             a: None,
             c: None,
+            e: None,
         }
     }
 
@@ -373,6 +423,7 @@ impl TestStructTestFlag {
             inner: a.as_flag_value(),
             a: Some(a),
             c: None,
+            e: None,
         }
     }
 
@@ -399,6 +450,7 @@ impl TestStructTestFlag {
             inner: TestFlag::C,
             a: None,
             c: Some(c),
+            e: None,
         }
     }
 
@@ -425,6 +477,7 @@ impl TestStructTestFlag {
             inner: TestFlag::D,
             a: None,
             c: None,
+            e: None,
         }
     }
 
@@ -444,25 +497,28 @@ impl TestStructTestFlag {
         self.clone()
     }
 
-    pub const fn new_E() -> Self {
+    pub const fn new_E(e: TestStructTestFlagE) -> Self {
         Self {
             inner: TestFlag::E,
             a: None,
             c: None,
+            e: Some(e),
         }
     }
 
-    pub fn set_E(&mut self) -> Self {
+    pub fn set_E(&mut self, e: TestStructTestFlagE) -> Self {
         self.inner |= TestFlag::E;
+        self.e = Some(e);
         self.clone()
     }
 
-    pub const fn get_E(&self) -> bool {
-        (self.inner & TestFlag::E) != 0
+    pub const fn get_E(&self) -> Option<&TestStructTestFlagE> {
+        self.e.as_ref()
     }
 
     pub fn clear_E(&mut self) -> Self {
         self.inner &= TestFlag::E.reverse_bits();
+        self.e = None;
         // TODO: Cloning like this is not conductive to good performance but it is
         // temporarily necessary due to test syntax
         self.clone()
@@ -471,7 +527,7 @@ impl TestStructTestFlag {
 }
 impl VariableSized for TestStructTestFlag {
     fn size(&self) -> usize {
-        1 // inner
+        2 // inner
         + {
             if let Some(s) = &self.a {
                 s.size()
@@ -486,14 +542,22 @@ impl VariableSized for TestStructTestFlag {
                 0
             }
         }
+        + {
+            if let Some(s) = &self.e {
+                s.size()
+            } else {
+                0
+            }
+        }
     }
 }
 
 impl MaximumPossibleSized for TestStructTestFlag {
     fn maximum_possible_size() -> usize {
-        1 // inner
+        2 // inner
         + TestStructTestFlagA::maximum_possible_size() // A enumerator
         + TestStructTestFlagC::maximum_possible_size() // C enumerator
+        + TestStructTestFlagE::maximum_possible_size() // E enumerator
     }
 }
 
@@ -610,6 +674,50 @@ impl TestStructTestFlagC {
 
 }
 
+#[derive(Debug, PartialEq, Clone)]
+pub struct TestStructTestFlagE {
+    pub b_E1: u8,
+}
+
+impl VariableSized for TestStructTestFlagE {
+    fn size(&self) -> usize {
+        1 // b_E1: u8
+    }
+}
+
+impl MaximumPossibleSized for TestStructTestFlagE {
+    fn maximum_possible_size() -> usize {
+        1 // b_E1: u8
+    }
+}
+
+impl TestStructTestFlagE {
+    #[cfg(feature = "sync")]
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // b_E1: u8
+        w.write_all(&self.b_E1.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // b_E1: u8
+        w.write_all(&self.b_E1.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // b_E1: u8
+        w.write_all(&self.b_E1.to_le_bytes()).await?;
+
+        Ok(())
+    }
+
+}
+
 #[cfg(test)]
 mod test {
     use crate::ReadableAndWritable;
@@ -623,7 +731,7 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn TestStruct0() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
@@ -657,7 +765,7 @@ mod test {
     #[cfg(feature = "async_tokio")]
     #[cfg_attr(feature = "async_tokio", tokio::test)]
     async fn tokio_TestStruct0() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
@@ -691,7 +799,7 @@ mod test {
     #[cfg(feature = "async_std")]
     #[cfg_attr(feature = "async_std", async_std::test)]
     async fn astd_TestStruct0() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0E, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
@@ -725,7 +833,7 @@ mod test {
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn TestStruct1() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
@@ -759,7 +867,7 @@ mod test {
     #[cfg(feature = "async_tokio")]
     #[cfg_attr(feature = "async_tokio", tokio::test)]
     async fn tokio_TestStruct1() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()
@@ -793,7 +901,7 @@ mod test {
     #[cfg(feature = "async_std")]
     #[cfg_attr(feature = "async_std", async_std::test)]
     async fn astd_TestStruct1() {
-        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x01, 0x02, ];
+        let raw: Vec<u8> = vec![ 0xFF, 0x0D, 0x00, 0x01, 0x02, ];
 
         let expected = TestStruct {
             f: TestStructTestFlag::empty()

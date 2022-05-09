@@ -6,11 +6,11 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use async_std::io::{ReadExt, WriteExt};
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone, Default)]
 pub struct TestFlag {
-    inner: u8,
+    inner: u16,
 }
 
 impl TestFlag {
-    pub const fn new(inner: u8) -> Self {
+    pub const fn new(inner: u16) -> Self {
         Self { inner }
     }
 
@@ -21,7 +21,7 @@ impl ReadableAndWritable for TestFlag {
 
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
-        let inner = crate::util::read_u8_le(r)?;
+        let inner = crate::util::read_u16_le(r)?;
         Ok(Self { inner })
     }
 
@@ -43,7 +43,7 @@ impl ReadableAndWritable for TestFlag {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let inner = crate::util::tokio_read_u8_le(r).await?;
+            let inner = crate::util::tokio_read_u16_le(r).await?;
             Ok(Self { inner })
         })
     }
@@ -79,7 +79,7 @@ impl ReadableAndWritable for TestFlag {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            let inner = crate::util::astd_read_u8_le(r).await?;
+            let inner = crate::util::astd_read_u16_le(r).await?;
             Ok(Self { inner })
         })
     }
@@ -106,11 +106,11 @@ impl ReadableAndWritable for TestFlag {
 }
 
 impl TestFlag {
-    pub const A: u8 = 0x01;
-    pub const B: u8 = 0x02;
-    pub const C: u8 = 0x04;
-    pub const D: u8 = 0x08;
-    pub const E: u8 = 0x10;
+    pub const A: u16 = 0x01;
+    pub const B: u16 = 0x02;
+    pub const C: u16 = 0x04;
+    pub const D: u16 = 0x08;
+    pub const E: u16 = 0x10;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -216,7 +216,7 @@ impl TestFlag {
         *self
     }
 
-    pub(crate) const fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u16 {
         self.inner
     }
 
@@ -226,7 +226,7 @@ impl ConstantSized for TestFlag {}
 
 impl MaximumPossibleSized for TestFlag {
     fn maximum_possible_size() -> usize {
-        1
+        2
     }
 }
 

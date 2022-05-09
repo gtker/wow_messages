@@ -2338,7 +2338,9 @@
         }
       ],
       "self_value": null,
-      "integer_type": "u8",
+      "integer_type": {
+        "u16": "Little"
+      },
       "tags": {
         "description": null,
         "comment": null,
@@ -104019,6 +104021,46 @@
               }
             }
           }
+        },
+        {
+          "IfStatement": {
+            "conditional": {
+              "variable_name": "f",
+              "equations": [
+                {
+                  "BitwiseAnd": {
+                    "value": "E"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "Definition": {
+                  "name": "b_E1",
+                  "member_type": {
+                    "Integer": "u8"
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {
+                    "description": null,
+                    "comment": null,
+                    "display": null
+                  }
+                }
+              }
+            ],
+            "else_ifs": [],
+            "else_statement_members": [],
+            "original_ty": {
+              "Identifier": {
+                "s": "TestFlag",
+                "upcast": null
+              }
+            }
+          }
         }
       ],
       "tags": {
@@ -104077,6 +104119,7 @@
           "raw_bytes": [
             255,
             14,
+            0,
             1,
             2
           ],
@@ -104087,7 +104130,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/test/test.wowm",
-            "start_position": 23
+            "start_position": 26
           }
         },
         {
@@ -104140,6 +104183,7 @@
           "raw_bytes": [
             255,
             13,
+            0,
             1,
             2
           ],
@@ -104150,7 +104194,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/test/test.wowm",
-            "start_position": 34
+            "start_position": 37
           }
         }
       ],
