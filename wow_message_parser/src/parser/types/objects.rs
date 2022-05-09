@@ -435,23 +435,12 @@ version 2: {:#?} in {} line {}",
         }
 
         for s in self.all_containers() {
-            if let Some(ce) = s
-                .nested_types()
-                .new_enums()
-                .iter()
-                .find(|&a| a.name() == type_name)
-            {
-                for f in ce.fields() {
-                    for sf in f.subfields() {
-                        match self.type_has_constant_size(sf.ty()) {
-                            true => {}
-                            false => return false,
-                        }
-                    }
-                }
-
-                return true;
-            }
+            return s
+                .rust_object()
+                .get_rust_definer(type_name)
+                .inner()
+                .sizes()
+                .is_constant();
         }
 
         panic!(
