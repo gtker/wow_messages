@@ -14426,7 +14426,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
 
 impl MaximumPossibleSized for SMSG_BATTLEFIELD_STATUSMap {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        18
     }
 }
 
@@ -14655,7 +14655,7 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSStatusId {
 
 impl MaximumPossibleSized for SMSG_BATTLEFIELD_STATUSStatusId {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        1
     }
 }
 

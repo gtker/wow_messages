@@ -1399,7 +1399,7 @@ impl VariableSized for SMSG_CHAR_RENAMEWorldResult {
 
 impl MaximumPossibleSized for SMSG_CHAR_RENAMEWorldResult {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        268
     }
 }
 

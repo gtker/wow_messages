@@ -596,7 +596,7 @@ impl VariableSized for SMSG_GMTICKET_GETTICKETGmTicketStatus {
 
 impl MaximumPossibleSized for SMSG_GMTICKET_GETTICKETGmTicketStatus {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        275
     }
 }
 

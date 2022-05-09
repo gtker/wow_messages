@@ -746,6 +746,16 @@ fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
                 }
             });
         },
-        |s| s.wln("65536 // maximum possible u16 size. TODO value."),
+        |s| {
+            let sizes = re.inner().sizes();
+            if sizes.maximum() > u16::MAX.into() {
+                s.wln(format!(
+                    "{} // Capped at u16::MAX due to size field.",
+                    u16::MAX
+                ));
+            } else {
+                s.wln(format!("{}", sizes.maximum()))
+            }
+        },
     );
 }

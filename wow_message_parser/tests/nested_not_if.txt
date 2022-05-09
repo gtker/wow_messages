@@ -1450,7 +1450,7 @@ impl VariableSized for NestedNotIfTEnum {
 
 impl MaximumPossibleSized for NestedNotIfTEnum {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        4
     }
 }
 
@@ -1641,7 +1641,7 @@ impl VariableSized for NestedNotIfNestedEnum {
 
 impl MaximumPossibleSized for NestedNotIfNestedEnum {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        1
     }
 }
 

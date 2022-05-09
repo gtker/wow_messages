@@ -1682,7 +1682,7 @@ impl VariableSized for CMSG_MESSAGECHATChatType {
 
 impl MaximumPossibleSized for CMSG_MESSAGECHATChatType {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        513
     }
 }
 

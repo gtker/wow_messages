@@ -786,7 +786,7 @@ impl VariableSized for CMSG_GMTICKET_CREATEGmTicketType {
 
 impl MaximumPossibleSized for CMSG_GMTICKET_CREATEGmTicketType {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -500,7 +500,7 @@ impl VariableSized for MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
 
 impl MaximumPossibleSized for MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        2
     }
 }
 

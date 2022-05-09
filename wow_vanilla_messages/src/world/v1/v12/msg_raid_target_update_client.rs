@@ -893,7 +893,7 @@ impl VariableSized for MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
 
 impl MaximumPossibleSized for MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        9
     }
 }
 

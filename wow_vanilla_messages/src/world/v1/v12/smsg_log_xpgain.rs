@@ -500,7 +500,7 @@ impl VariableSized for SMSG_LOG_XPGAINExperienceAwardType {
 
 impl MaximumPossibleSized for SMSG_LOG_XPGAINExperienceAwardType {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        9
     }
 }
 

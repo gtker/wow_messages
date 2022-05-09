@@ -538,7 +538,7 @@ impl VariableSized for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
 
 impl MaximumPossibleSized for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        21
     }
 }
 

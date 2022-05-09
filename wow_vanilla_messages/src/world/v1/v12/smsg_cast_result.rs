@@ -1529,7 +1529,7 @@ impl VariableSized for SMSG_CAST_RESULTSimpleSpellCastResult {
 
 impl MaximumPossibleSized for SMSG_CAST_RESULTSimpleSpellCastResult {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        14
     }
 }
 
@@ -2604,7 +2604,7 @@ impl VariableSized for SMSG_CAST_RESULTCastFailureReason {
 
 impl MaximumPossibleSized for SMSG_CAST_RESULTCastFailureReason {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        1
     }
 }
 

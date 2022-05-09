@@ -3220,7 +3220,7 @@ impl VariableSized for AuraLogAuraType {
 
 impl MaximumPossibleSized for AuraLogAuraType {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        17
     }
 }
 

@@ -1452,7 +1452,7 @@ impl VariableSized for SMSG_AUTH_RESPONSEWorldResult {
 
 impl MaximumPossibleSized for SMSG_AUTH_RESPONSEWorldResult {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        13
     }
 }
 

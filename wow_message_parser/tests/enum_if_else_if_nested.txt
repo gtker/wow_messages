@@ -635,7 +635,7 @@ impl VariableSized for EnumIfElseIfNestedSimpleEnum {
 
 impl MaximumPossibleSized for EnumIfElseIfNestedSimpleEnum {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        2
     }
 }
 
@@ -826,7 +826,7 @@ impl VariableSized for EnumIfElseIfNestedNestedEnum {
 
 impl MaximumPossibleSized for EnumIfElseIfNestedNestedEnum {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        1
     }
 }
 

@@ -3078,7 +3078,7 @@ impl VariableSized for SpellLogSpellEffect {
 
 impl MaximumPossibleSized for SpellLogSpellEffect {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        24
     }
 }
 

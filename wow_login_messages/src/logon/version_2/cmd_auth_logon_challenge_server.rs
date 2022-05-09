@@ -836,7 +836,7 @@ impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
 
 impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        595
     }
 }
 

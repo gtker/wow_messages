@@ -858,7 +858,7 @@ impl VariableSized for SMSG_TRADE_STATUSTradeStatus {
 
 impl MaximumPossibleSized for SMSG_TRADE_STATUSTradeStatus {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        12
     }
 }
 

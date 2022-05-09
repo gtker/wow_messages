@@ -632,7 +632,7 @@ impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
 
 impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        37
     }
 }
 

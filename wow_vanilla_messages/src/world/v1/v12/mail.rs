@@ -1037,7 +1037,7 @@ impl VariableSized for MailMailType {
 
 impl MaximumPossibleSized for MailMailType {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        9
     }
 }
 

@@ -520,7 +520,7 @@ impl VariableSized for SimpleIfEnumElseSimpleEnum {
 
 impl MaximumPossibleSized for SimpleIfEnumElseSimpleEnum {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        3
     }
 }
 

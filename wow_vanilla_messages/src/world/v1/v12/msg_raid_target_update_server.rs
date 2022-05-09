@@ -501,7 +501,7 @@ impl VariableSized for MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
 
 impl MaximumPossibleSized for MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
     fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
+        73
     }
 }
 
