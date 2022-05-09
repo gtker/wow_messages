@@ -104082,7 +104082,46 @@
                           }
                         }
                       ],
-                      "else_ifs": [],
+                      "else_ifs": [
+                        {
+                          "conditional": {
+                            "variable_name": "i",
+                            "equations": [
+                              {
+                                "BitwiseAnd": {
+                                  "value": "I"
+                                }
+                              }
+                            ]
+                          },
+                          "members": [
+                            {
+                              "Definition": {
+                                "name": "b_I1",
+                                "member_type": {
+                                  "Integer": "u8"
+                                },
+                                "constant_value": null,
+                                "used_as_size_in": null,
+                                "used_in_if": false,
+                                "tags": {
+                                  "description": null,
+                                  "comment": null,
+                                  "display": null
+                                }
+                              }
+                            }
+                          ],
+                          "else_ifs": [],
+                          "else_statement_members": [],
+                          "original_ty": {
+                            "Identifier": {
+                              "s": "InnerFlag",
+                              "upcast": null
+                            }
+                          }
+                        }
+                      ],
                       "else_statement_members": [],
                       "original_ty": {
                         "Identifier": {
@@ -104273,6 +104312,20 @@
                 "comment": null,
                 "display": null
               }
+            },
+            {
+              "variable_name": "b_I1",
+              "verified_value": {
+                "Number": {
+                  "value": 3,
+                  "original_string": "3"
+                }
+              },
+              "tags": {
+                "description": null,
+                "comment": null,
+                "display": null
+              }
             }
           ],
           "raw_bytes": [
@@ -104280,6 +104333,7 @@
             14,
             0,
             2,
+            3,
             1,
             2
           ],
@@ -104290,7 +104344,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/test/test.wowm",
-            "start_position": 38
+            "start_position": 41
           }
         },
         {
@@ -104354,7 +104408,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/test/test.wowm",
-            "start_position": 51
+            "start_position": 56
           }
         }
       ],

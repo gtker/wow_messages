@@ -9,7 +9,7 @@ use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_TOGGLE_PVP {
-    pub set: Option<CMSG_TOGGLE_PVP_set>,
+    pub set: Option<CMSG_TOGGLE_PVPset>,
 }
 
 impl ClientMessageWrite for CMSG_TOGGLE_PVP {}
@@ -196,11 +196,11 @@ impl MaximumPossibleSized for CMSG_TOGGLE_PVP {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct CMSG_TOGGLE_PVP_set {
+pub struct CMSG_TOGGLE_PVPset {
     pub enable_pvp: u8,
 }
 
-impl CMSG_TOGGLE_PVP_set {
+impl CMSG_TOGGLE_PVPset {
     pub(crate) fn size(&self) -> usize {
         1 // enable_pvp: u8
     }

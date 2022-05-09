@@ -25,6 +25,9 @@ clogin TestStruct = 0xFF {
         if (i & H) {
             u8 b_H1;
         }
+        else if (i & I) {
+            u8 b_I1;
+        }
         u8 b_B1;
     }
     if (f & C) {
@@ -40,10 +43,12 @@ test TestStruct {
     b_B1 = 1;
     b_C1 = 2;
     i = I;
+    b_I1 = 3;
 } [
     0xFF, /* opcode */
     0x0E, 0x00, /* TestFlag */
     0x02, /* InnerFlag */
+    0x03, /* b_I1 */
     0x01, /* b_B1 */
     0x02, /* b_C1 */
 ]

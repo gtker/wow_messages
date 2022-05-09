@@ -412,7 +412,7 @@ impl Container {
     }
 
     pub fn complex_enum_enumerator_has_else_if(&self, name: &str) -> Option<&NewIfStatement> {
-        for m in &self.members {
+        fn inner<'a>(m: &'a StructMember, name: &str) -> Option<&'a NewIfStatement> {
             match m {
                 StructMember::Definition(_) => {}
                 StructMember::IfStatement(statement) => {
@@ -426,8 +426,28 @@ impl Container {
                             return Some(statement.new_enum());
                         }
                     }
+
+                    for m in statement.all_members() {
+                        if let Some(m) = inner(m, name) {
+                            return Some(m);
+                        }
+                    }
                 }
-                StructMember::OptionalStatement(_) => {}
+                StructMember::OptionalStatement(optional) => {
+                    for m in optional.members() {
+                        if let Some(m) = inner(m, name) {
+                            return Some(m);
+                        }
+                    }
+                }
+            }
+
+            None
+        }
+
+        for m in &self.members {
+            if let Some(m) = inner(m, name) {
+                return Some(m);
             }
         }
 

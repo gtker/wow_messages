@@ -18,7 +18,7 @@ pub struct SMSG_GROUP_LIST {
     pub own_flags: u8,
     pub members: Vec<GroupListMember>,
     pub leader: Guid,
-    pub group_not_empty: Option<SMSG_GROUP_LIST_group_not_empty>,
+    pub group_not_empty: Option<SMSG_GROUP_LISTgroup_not_empty>,
 }
 
 impl ServerMessageWrite for SMSG_GROUP_LIST {}
@@ -438,13 +438,13 @@ impl From<ItemQualityError> for SMSG_GROUP_LISTError {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct SMSG_GROUP_LIST_group_not_empty {
+pub struct SMSG_GROUP_LISTgroup_not_empty {
     pub loot_setting: GroupLootSetting,
     pub master_loot: Guid,
     pub loot_threshold: ItemQuality,
 }
 
-impl SMSG_GROUP_LIST_group_not_empty {
+impl SMSG_GROUP_LISTgroup_not_empty {
     pub(crate) fn size(&self) -> usize {
         1 // loot_setting: GroupLootSetting
         + 8 // master_loot: Guid

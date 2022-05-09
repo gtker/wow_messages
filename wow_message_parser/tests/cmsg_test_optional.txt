@@ -11,7 +11,7 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct CMSG_TEST_OPTIONAL {
     pub c_string: String,
     pub b_u8: u8,
-    pub server: Option<CMSG_TEST_OPTIONAL_server>,
+    pub server: Option<CMSG_TEST_OPTIONALserver>,
 }
 
 impl ClientMessageWrite for CMSG_TEST_OPTIONAL {}
@@ -44,7 +44,7 @@ impl MessageBody for CMSG_TEST_OPTIONAL {
             // optional_u8: u8
             let optional_u8 = crate::util::read_u8_le(r)?;
 
-            Some(CMSG_TEST_OPTIONAL_server {
+            Some(CMSG_TEST_OPTIONALserver {
                 optional_u8,
             })
         } else {
@@ -108,7 +108,7 @@ impl MessageBody for CMSG_TEST_OPTIONAL {
                 // optional_u8: u8
                 let optional_u8 = crate::util::tokio_read_u8_le(r).await?;
 
-                Some(CMSG_TEST_OPTIONAL_server {
+                Some(CMSG_TEST_OPTIONALserver {
                     optional_u8,
                 })
             } else {
@@ -186,7 +186,7 @@ impl MessageBody for CMSG_TEST_OPTIONAL {
                 // optional_u8: u8
                 let optional_u8 = crate::util::astd_read_u8_le(r).await?;
 
-                Some(CMSG_TEST_OPTIONAL_server {
+                Some(CMSG_TEST_OPTIONALserver {
                     optional_u8,
                 })
             } else {
@@ -287,11 +287,11 @@ impl From<std::string::FromUtf8Error> for CMSG_TEST_OPTIONALError {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct CMSG_TEST_OPTIONAL_server {
+pub struct CMSG_TEST_OPTIONALserver {
     pub optional_u8: u8,
 }
 
-impl CMSG_TEST_OPTIONAL_server {
+impl CMSG_TEST_OPTIONALserver {
     pub(crate) fn size(&self) -> usize {
         1 // optional_u8: u8
     }

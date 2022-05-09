@@ -12,7 +12,7 @@ use async_std::io::{ReadExt, WriteExt};
 pub struct CMSG_GOSSIP_SELECT_OPTION {
     pub guid: Guid,
     pub gossip_list_id: u32,
-    pub unknown: Option<CMSG_GOSSIP_SELECT_OPTION_unknown>,
+    pub unknown: Option<CMSG_GOSSIP_SELECT_OPTIONunknown>,
 }
 
 impl ClientMessageWrite for CMSG_GOSSIP_SELECT_OPTION {}
@@ -288,11 +288,11 @@ impl From<std::string::FromUtf8Error> for CMSG_GOSSIP_SELECT_OPTIONError {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct CMSG_GOSSIP_SELECT_OPTION_unknown {
+pub struct CMSG_GOSSIP_SELECT_OPTIONunknown {
     pub code: String,
 }
 
-impl CMSG_GOSSIP_SELECT_OPTION_unknown {
+impl CMSG_GOSSIP_SELECT_OPTIONunknown {
     pub(crate) fn size(&self) -> usize {
         self.code.len() + 1 // code: CString
     }

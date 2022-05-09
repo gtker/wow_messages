@@ -12,6 +12,9 @@ clogin TestStruct = 0xFF {
         if (i & H) {
             u8 b_H1;
         }
+        else if (i & I) {
+            u8 b_I1;
+        }
         u8 b_B1;
     }
     if (f & C) {
@@ -51,6 +54,12 @@ If i contains `H`:
 | Offset | Size / Endianness | Type | Name | Description |
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | 1 / - | u8 | b_H1 |  |
+
+Else If i contains `I`:
+
+| Offset | Size / Endianness | Type | Name | Description |
+| ------ | ----------------- | ---- | ---- | ----------- |
+| - | 1 / - | u8 | b_I1 |  |
 | - | 1 / - | u8 | b_B1 |  |
 
 If f contains `C`:
@@ -69,6 +78,7 @@ If f contains `E`:
 255, // opcode (255)
 14, 0, // f: TestFlag  B| C| D (14)
 2, // i: InnerFlag  I (2)
+3, // b_I1: u8
 1, // b_B1: u8
 2, // b_C1: u8
 ```

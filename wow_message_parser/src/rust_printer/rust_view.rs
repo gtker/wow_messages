@@ -1111,7 +1111,7 @@ pub fn create_struct_member(
             *optional = Some(RustOptional {
                 name: option.name().to_string(),
                 ty: format!(
-                    "{original_ty}_{ty}",
+                    "{original_ty}{ty}",
                     original_ty = struct_ty_name,
                     ty = option.name()
                 ),

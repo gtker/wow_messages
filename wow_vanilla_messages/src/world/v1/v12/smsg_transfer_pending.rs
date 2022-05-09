@@ -11,7 +11,7 @@ use async_std::io::{ReadExt, WriteExt};
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_TRANSFER_PENDING {
     pub map: Map,
-    pub has_transport: Option<SMSG_TRANSFER_PENDING_has_transport>,
+    pub has_transport: Option<SMSG_TRANSFER_PENDINGhas_transport>,
 }
 
 impl ServerMessageWrite for SMSG_TRANSFER_PENDING {}
@@ -274,12 +274,12 @@ impl From<MapError> for SMSG_TRANSFER_PENDINGError {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct SMSG_TRANSFER_PENDING_has_transport {
+pub struct SMSG_TRANSFER_PENDINGhas_transport {
     pub transport: u32,
     pub transport_map: Map,
 }
 
-impl SMSG_TRANSFER_PENDING_has_transport {
+impl SMSG_TRANSFER_PENDINGhas_transport {
     pub(crate) fn size(&self) -> usize {
         4 // transport: u32
         + 4 // transport_map: Map

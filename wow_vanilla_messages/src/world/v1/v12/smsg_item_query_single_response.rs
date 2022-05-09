@@ -18,7 +18,7 @@ use async_std::io::{ReadExt, WriteExt};
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub item: u32,
-    pub found: Option<SMSG_ITEM_QUERY_SINGLE_RESPONSE_found>,
+    pub found: Option<SMSG_ITEM_QUERY_SINGLE_RESPONSEfound>,
 }
 
 impl ServerMessageWrite for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
@@ -1577,7 +1577,7 @@ impl From<MapError> for SMSG_ITEM_QUERY_SINGLE_RESPONSEError {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
+pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSEfound {
     pub item_class: ItemClass,
     pub item_sub_class: u32,
     pub name1: String,
@@ -1635,7 +1635,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub bag_family: u32,
 }
 
-impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
+impl SMSG_ITEM_QUERY_SINGLE_RESPONSEfound {
     pub(crate) fn size(&self) -> usize {
         4 // item_class: ItemClass
         + 4 // item_sub_class: u32

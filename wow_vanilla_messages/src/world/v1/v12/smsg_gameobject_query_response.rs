@@ -10,7 +10,7 @@ use async_std::io::{ReadExt, WriteExt};
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE {
     pub entry_id: u32,
-    pub found: Option<SMSG_GAMEOBJECT_QUERY_RESPONSE_found>,
+    pub found: Option<SMSG_GAMEOBJECT_QUERY_RESPONSEfound>,
 }
 
 impl ServerMessageWrite for SMSG_GAMEOBJECT_QUERY_RESPONSE {}
@@ -468,7 +468,7 @@ impl From<std::string::FromUtf8Error> for SMSG_GAMEOBJECT_QUERY_RESPONSEError {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
+pub struct SMSG_GAMEOBJECT_QUERY_RESPONSEfound {
     pub info_type: u32,
     pub display_id: u32,
     pub name1: String,
@@ -479,7 +479,7 @@ pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
     pub raw_data: [u32; 6],
 }
 
-impl SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
+impl SMSG_GAMEOBJECT_QUERY_RESPONSEfound {
     pub(crate) fn size(&self) -> usize {
         4 // info_type: u32
         + 4 // display_id: u32

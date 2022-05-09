@@ -13,7 +13,7 @@ pub struct CMSG_PET_SET_ACTION {
     pub guid: Guid,
     pub position1: u32,
     pub data1: u32,
-    pub extra: Option<CMSG_PET_SET_ACTION_extra>,
+    pub extra: Option<CMSG_PET_SET_ACTIONextra>,
 }
 
 impl ClientMessageWrite for CMSG_PET_SET_ACTION {}
@@ -300,12 +300,12 @@ impl MaximumPossibleSized for CMSG_PET_SET_ACTION {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct CMSG_PET_SET_ACTION_extra {
+pub struct CMSG_PET_SET_ACTIONextra {
     pub position2: u32,
     pub data2: u32,
 }
 
-impl CMSG_PET_SET_ACTION_extra {
+impl CMSG_PET_SET_ACTIONextra {
     pub(crate) fn size(&self) -> usize {
         4 // position2: u32
         + 4 // data2: u32

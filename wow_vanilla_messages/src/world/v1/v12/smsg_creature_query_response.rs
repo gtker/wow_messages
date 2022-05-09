@@ -10,7 +10,7 @@ use async_std::io::{ReadExt, WriteExt};
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_CREATURE_QUERY_RESPONSE {
     pub creature_entry: u32,
-    pub found: Option<SMSG_CREATURE_QUERY_RESPONSE_found>,
+    pub found: Option<SMSG_CREATURE_QUERY_RESPONSEfound>,
 }
 
 impl ServerMessageWrite for SMSG_CREATURE_QUERY_RESPONSE {}
@@ -582,7 +582,7 @@ impl From<std::string::FromUtf8Error> for SMSG_CREATURE_QUERY_RESPONSEError {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct SMSG_CREATURE_QUERY_RESPONSE_found {
+pub struct SMSG_CREATURE_QUERY_RESPONSEfound {
     pub name1: String,
     pub name2: String,
     pub name3: String,
@@ -599,7 +599,7 @@ pub struct SMSG_CREATURE_QUERY_RESPONSE_found {
     pub racial_leader: u8,
 }
 
-impl SMSG_CREATURE_QUERY_RESPONSE_found {
+impl SMSG_CREATURE_QUERY_RESPONSEfound {
     pub(crate) fn size(&self) -> usize {
         self.name1.len() + 1 // name1: CString
         + self.name2.len() + 1 // name2: CString

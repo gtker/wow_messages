@@ -10,7 +10,7 @@ use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MSG_RAID_READY_CHECK_Server {
-    pub state_check: Option<MSG_RAID_READY_CHECK_Server_state_check>,
+    pub state_check: Option<MSG_RAID_READY_CHECK_Serverstate_check>,
 }
 
 impl ServerMessageWrite for MSG_RAID_READY_CHECK_Server {}
@@ -219,12 +219,12 @@ impl MaximumPossibleSized for MSG_RAID_READY_CHECK_Server {
 }
 
 #[derive(Debug, Clone, PartialEq, Default)]
-pub struct MSG_RAID_READY_CHECK_Server_state_check {
+pub struct MSG_RAID_READY_CHECK_Serverstate_check {
     pub guid: Guid,
     pub state: u8,
 }
 
-impl MSG_RAID_READY_CHECK_Server_state_check {
+impl MSG_RAID_READY_CHECK_Serverstate_check {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
         + 1 // state: u8
