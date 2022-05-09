@@ -67,7 +67,7 @@ impl ReadableAndWritable for BattlegroundPlayer {
         self.player.write(w)?;
 
         // rank: PvpRank
-        self.rank.write_u32_le(w)?;
+        crate::util::write_u32_le(w, self.rank.as_int() as u32)?;
 
         // killing_blows: u32
         w.write_all(&self.killing_blows.to_le_bytes())?;
@@ -161,7 +161,7 @@ impl ReadableAndWritable for BattlegroundPlayer {
             self.player.tokio_write(w).await?;
 
             // rank: PvpRank
-            self.rank.tokio_write_u32_le(w).await?;
+            crate::util::tokio_write_u32_le(w, self.rank.as_int() as u32).await?;
 
             // killing_blows: u32
             w.write_all(&self.killing_blows.to_le_bytes()).await?;
@@ -256,7 +256,7 @@ impl ReadableAndWritable for BattlegroundPlayer {
             self.player.astd_write(w).await?;
 
             // rank: PvpRank
-            self.rank.astd_write_u32_le(w).await?;
+            crate::util::astd_write_u32_le(w, self.rank.as_int() as u32).await?;
 
             // killing_blows: u32
             w.write_all(&self.killing_blows.to_le_bytes()).await?;

@@ -1202,24 +1202,6 @@ impl Area {
     }
 
     #[cfg(feature = "sync")]
-    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::write_u32_be(w, self.as_int() as u32)?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::tokio_write_u32_be(w, self.as_int() as u32).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::astd_write_u32_be(w, self.as_int() as u32).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "sync")]
     pub fn read_u32_le<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, AreaError> {
         let a = crate::util::read_u32_le(r)?;
         Ok((a as u32).try_into()?)
@@ -1235,24 +1217,6 @@ impl Area {
     pub async fn astd_read_u32_le<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, AreaError> {
         let a = crate::util::astd_read_u32_le(r).await?;
         Ok((a as u32).try_into()?)
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::write_u32_le(w, self.as_int() as u32)?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::tokio_write_u32_le(w, self.as_int() as u32).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::astd_write_u32_le(w, self.as_int() as u32).await?;
-        Ok(())
     }
 
     #[cfg(feature = "sync")]
@@ -1274,24 +1238,6 @@ impl Area {
     }
 
     #[cfg(feature = "sync")]
-    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::write_u64_le(w, self.as_int() as u64)?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::tokio_write_u64_le(w, self.as_int() as u64).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::astd_write_u64_le(w, self.as_int() as u64).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "sync")]
     pub fn read_u64_be<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, AreaError> {
         let a = crate::util::read_u64_be(r)?;
         Ok((a as u32).try_into()?)
@@ -1307,24 +1253,6 @@ impl Area {
     pub async fn astd_read_u64_be<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, AreaError> {
         let a = crate::util::astd_read_u64_be(r).await?;
         Ok((a as u32).try_into()?)
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::write_u64_be(w, self.as_int() as u64)?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::tokio_write_u64_be(w, self.as_int() as u64).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        crate::util::astd_write_u64_be(w, self.as_int() as u64).await?;
-        Ok(())
     }
 
     pub(crate) const fn as_int(&self) -> u32 {

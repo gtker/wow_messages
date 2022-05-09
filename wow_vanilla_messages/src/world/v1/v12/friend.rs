@@ -122,7 +122,7 @@ impl ReadableAndWritable for Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                class.write_u32_le(w)?;
+                crate::util::write_u32_le(w, class.as_int() as u32)?;
 
             }
             FriendFriendStatus::AFK {
@@ -137,7 +137,7 @@ impl ReadableAndWritable for Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                class.write_u32_le(w)?;
+                crate::util::write_u32_le(w, class.as_int() as u32)?;
 
             }
             FriendFriendStatus::UNKNOWN3 {
@@ -152,7 +152,7 @@ impl ReadableAndWritable for Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                class.write_u32_le(w)?;
+                crate::util::write_u32_le(w, class.as_int() as u32)?;
 
             }
             FriendFriendStatus::DND {
@@ -167,7 +167,7 @@ impl ReadableAndWritable for Friend {
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                class.write_u32_le(w)?;
+                crate::util::write_u32_le(w, class.as_int() as u32)?;
 
             }
         }
@@ -302,7 +302,7 @@ impl ReadableAndWritable for Friend {
                     w.write_all(&level.to_le_bytes()).await?;
 
                     // class: Class
-                    class.tokio_write_u32_le(w).await?;
+                    crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
 
                 }
                 FriendFriendStatus::AFK {
@@ -317,7 +317,7 @@ impl ReadableAndWritable for Friend {
                     w.write_all(&level.to_le_bytes()).await?;
 
                     // class: Class
-                    class.tokio_write_u32_le(w).await?;
+                    crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
 
                 }
                 FriendFriendStatus::UNKNOWN3 {
@@ -332,7 +332,7 @@ impl ReadableAndWritable for Friend {
                     w.write_all(&level.to_le_bytes()).await?;
 
                     // class: Class
-                    class.tokio_write_u32_le(w).await?;
+                    crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
 
                 }
                 FriendFriendStatus::DND {
@@ -347,7 +347,7 @@ impl ReadableAndWritable for Friend {
                     w.write_all(&level.to_le_bytes()).await?;
 
                     // class: Class
-                    class.tokio_write_u32_le(w).await?;
+                    crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
 
                 }
             }
@@ -483,7 +483,7 @@ impl ReadableAndWritable for Friend {
                     w.write_all(&level.to_le_bytes()).await?;
 
                     // class: Class
-                    class.astd_write_u32_le(w).await?;
+                    crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
 
                 }
                 FriendFriendStatus::AFK {
@@ -498,7 +498,7 @@ impl ReadableAndWritable for Friend {
                     w.write_all(&level.to_le_bytes()).await?;
 
                     // class: Class
-                    class.astd_write_u32_le(w).await?;
+                    crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
 
                 }
                 FriendFriendStatus::UNKNOWN3 {
@@ -513,7 +513,7 @@ impl ReadableAndWritable for Friend {
                     w.write_all(&level.to_le_bytes()).await?;
 
                     // class: Class
-                    class.astd_write_u32_le(w).await?;
+                    crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
 
                 }
                 FriendFriendStatus::DND {
@@ -528,7 +528,7 @@ impl ReadableAndWritable for Friend {
                     w.write_all(&level.to_le_bytes()).await?;
 
                     // class: Class
-                    class.astd_write_u32_le(w).await?;
+                    crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
 
                 }
             }
@@ -693,112 +693,9 @@ impl FriendFriendStatus {
         Ok(())
     }
 
-    #[cfg(feature = "sync")]
-    pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn as_int(&self) -> u8 {
         let a: FriendStatus = self.into();
-        a.write_u16_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.tokio_write_u16_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u16_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.astd_write_u16_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.write_u16_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.tokio_write_u16_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u16_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.astd_write_u16_be(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.write_u32_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.tokio_write_u32_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.astd_write_u32_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.write_u32_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.tokio_write_u32_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.astd_write_u32_be(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.write_u64_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.tokio_write_u64_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.astd_write_u64_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.write_u64_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.tokio_write_u64_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FriendStatus = self.into();
-        a.astd_write_u64_be(w).await
+        a.as_int() as u8
     }
 
 }

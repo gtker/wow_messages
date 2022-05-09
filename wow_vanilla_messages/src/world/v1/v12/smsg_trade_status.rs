@@ -129,7 +129,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
                 item_limit_category_id,
             } => {
                 // inventory_result: InventoryResult
-                inventory_result.write_u32_le(w)?;
+                crate::util::write_u32_le(w, inventory_result.as_int() as u32)?;
 
                 // target_error: u8
                 w.write_all(&target_error.to_le_bytes())?;
@@ -293,7 +293,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
                     item_limit_category_id,
                 } => {
                     // inventory_result: InventoryResult
-                    inventory_result.tokio_write_u32_le(w).await?;
+                    crate::util::tokio_write_u32_le(w, inventory_result.as_int() as u32).await?;
 
                     // target_error: u8
                     w.write_all(&target_error.to_le_bytes()).await?;
@@ -458,7 +458,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
                     item_limit_category_id,
                 } => {
                     // inventory_result: InventoryResult
-                    inventory_result.astd_write_u32_le(w).await?;
+                    crate::util::astd_write_u32_le(w, inventory_result.as_int() as u32).await?;
 
                     // target_error: u8
                     w.write_all(&target_error.to_le_bytes()).await?;
@@ -687,76 +687,9 @@ impl SMSG_TRADE_STATUSTradeStatus {
         Ok(())
     }
 
-    #[cfg(feature = "sync")]
-    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn as_int(&self) -> u32 {
         let a: TradeStatus = self.into();
-        a.write_u32_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: TradeStatus = self.into();
-        a.tokio_write_u32_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: TradeStatus = self.into();
-        a.astd_write_u32_be(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: TradeStatus = self.into();
-        a.write_u32_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: TradeStatus = self.into();
-        a.tokio_write_u32_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: TradeStatus = self.into();
-        a.astd_write_u32_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: TradeStatus = self.into();
-        a.write_u64_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: TradeStatus = self.into();
-        a.tokio_write_u64_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: TradeStatus = self.into();
-        a.astd_write_u64_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: TradeStatus = self.into();
-        a.write_u64_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: TradeStatus = self.into();
-        a.tokio_write_u64_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: TradeStatus = self.into();
-        a.astd_write_u64_be(w).await
+        a.as_int() as u32
     }
 
 }

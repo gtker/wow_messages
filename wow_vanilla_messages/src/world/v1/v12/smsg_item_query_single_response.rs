@@ -297,7 +297,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         // optional found
         if let Some(v) = &self.found {
             // item_class: ItemClass
-            v.item_class.write_u32_le(w)?;
+            crate::util::write_u32_le(w, v.item_class.as_int() as u32)?;
 
             // item_sub_class: u32
             w.write_all(&v.item_sub_class.to_le_bytes())?;
@@ -326,7 +326,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.item_display_info.to_le_bytes())?;
 
             // quality: ItemQuality
-            v.quality.write_u32_le(w)?;
+            crate::util::write_u32_le(w, v.quality.as_int() as u32)?;
 
             // flags: u32
             w.write_all(&v.flags.to_le_bytes())?;
@@ -771,7 +771,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // optional found
             if let Some(v) = &self.found {
                 // item_class: ItemClass
-                v.item_class.tokio_write_u32_le(w).await?;
+                crate::util::tokio_write_u32_le(w, v.item_class.as_int() as u32).await?;
 
                 // item_sub_class: u32
                 w.write_all(&v.item_sub_class.to_le_bytes()).await?;
@@ -800,7 +800,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 w.write_all(&v.item_display_info.to_le_bytes()).await?;
 
                 // quality: ItemQuality
-                v.quality.tokio_write_u32_le(w).await?;
+                crate::util::tokio_write_u32_le(w, v.quality.as_int() as u32).await?;
 
                 // flags: u32
                 w.write_all(&v.flags.to_le_bytes()).await?;
@@ -1246,7 +1246,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // optional found
             if let Some(v) = &self.found {
                 // item_class: ItemClass
-                v.item_class.astd_write_u32_le(w).await?;
+                crate::util::astd_write_u32_le(w, v.item_class.as_int() as u32).await?;
 
                 // item_sub_class: u32
                 w.write_all(&v.item_sub_class.to_le_bytes()).await?;
@@ -1275,7 +1275,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 w.write_all(&v.item_display_info.to_le_bytes()).await?;
 
                 // quality: ItemQuality
-                v.quality.astd_write_u32_le(w).await?;
+                crate::util::astd_write_u32_le(w, v.quality.as_int() as u32).await?;
 
                 // flags: u32
                 w.write_all(&v.flags.to_le_bytes()).await?;

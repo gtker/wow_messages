@@ -173,29 +173,6 @@ fn read_write_as(s: &mut Writer, e: &Definer) {
                 ));
             },
         );
-
-        let return_type = "std::result::Result<(), std::io::Error>";
-        s.async_funcn_pub(
-            format!(
-                "write_{ty}_{endian}",
-                ty = t.rust_str(),
-                endian = t.rust_endian_str()
-            ),
-            "<W: std::io::Write>(&self, w: &mut W)",
-            "<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
-            "<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
-            &return_type,
-            |s, it| {
-                s.wln(format!(
-                    "crate::util::{prefix}write_{ty}_{endian}(w, self.as_int() as {ty}){postfix}?;",
-                    ty = t.rust_str(),
-                    endian = t.rust_endian_str(),
-                    prefix = it.prefix(),
-                    postfix = it.postfix(),
-                ));
-                s.wln("Ok(())");
-            },
-        );
     }
 }
 

@@ -299,7 +299,7 @@ pub fn print_write_definition(
                 None => {}
                 Some(integer) => {
                     s.wln(format!(
-                        "{variable_prefix}{name}.{prefix}write_{ty}_{endian}(w){postfix}?;",
+                        "crate::util::{prefix}write_{ty}_{endian}(w, {variable_prefix}{name}.as_int() as {ty}){postfix}?;",
                         variable_prefix = variable_prefix,
                         prefix = prefix,
                         postfix = postfix,

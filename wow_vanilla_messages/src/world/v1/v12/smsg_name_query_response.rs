@@ -80,13 +80,13 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
         w.write_all(&[0])?;
 
         // race: Race
-        self.race.write_u32_le(w)?;
+        crate::util::write_u32_le(w, self.race.as_int() as u32)?;
 
         // gender: Gender
-        self.gender.write_u32_le(w)?;
+        crate::util::write_u32_le(w, self.gender.as_int() as u32)?;
 
         // class: Class
-        self.class.write_u32_le(w)?;
+        crate::util::write_u32_le(w, self.class.as_int() as u32)?;
 
         Ok(())
     }
@@ -163,13 +163,13 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
             w.write_all(&[0]).await?;
 
             // race: Race
-            self.race.tokio_write_u32_le(w).await?;
+            crate::util::tokio_write_u32_le(w, self.race.as_int() as u32).await?;
 
             // gender: Gender
-            self.gender.tokio_write_u32_le(w).await?;
+            crate::util::tokio_write_u32_le(w, self.gender.as_int() as u32).await?;
 
             // class: Class
-            self.class.tokio_write_u32_le(w).await?;
+            crate::util::tokio_write_u32_le(w, self.class.as_int() as u32).await?;
 
             Ok(())
         })
@@ -247,13 +247,13 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
             w.write_all(&[0]).await?;
 
             // race: Race
-            self.race.astd_write_u32_le(w).await?;
+            crate::util::astd_write_u32_le(w, self.race.as_int() as u32).await?;
 
             // gender: Gender
-            self.gender.astd_write_u32_le(w).await?;
+            crate::util::astd_write_u32_le(w, self.gender.as_int() as u32).await?;
 
             // class: Class
-            self.class.astd_write_u32_le(w).await?;
+            crate::util::astd_write_u32_le(w, self.class.as_int() as u32).await?;
 
             Ok(())
         })

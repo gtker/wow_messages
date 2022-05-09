@@ -50,13 +50,13 @@ impl MessageBody for CMSG_LOOT_METHOD {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // loot_setting: GroupLootSetting
-        self.loot_setting.write_u32_le(w)?;
+        crate::util::write_u32_le(w, self.loot_setting.as_int() as u32)?;
 
         // loot_master: Guid
         self.loot_master.write(w)?;
 
         // loot_threshold: ItemQuality
-        self.loot_threshold.write_u32_le(w)?;
+        crate::util::write_u32_le(w, self.loot_threshold.as_int() as u32)?;
 
         Ok(())
     }
@@ -106,13 +106,13 @@ impl MessageBody for CMSG_LOOT_METHOD {
      {
         Box::pin(async move {
             // loot_setting: GroupLootSetting
-            self.loot_setting.tokio_write_u32_le(w).await?;
+            crate::util::tokio_write_u32_le(w, self.loot_setting.as_int() as u32).await?;
 
             // loot_master: Guid
             self.loot_master.tokio_write(w).await?;
 
             // loot_threshold: ItemQuality
-            self.loot_threshold.tokio_write_u32_le(w).await?;
+            crate::util::tokio_write_u32_le(w, self.loot_threshold.as_int() as u32).await?;
 
             Ok(())
         })
@@ -163,13 +163,13 @@ impl MessageBody for CMSG_LOOT_METHOD {
      {
         Box::pin(async move {
             // loot_setting: GroupLootSetting
-            self.loot_setting.astd_write_u32_le(w).await?;
+            crate::util::astd_write_u32_le(w, self.loot_setting.as_int() as u32).await?;
 
             // loot_master: Guid
             self.loot_master.astd_write(w).await?;
 
             // loot_threshold: ItemQuality
-            self.loot_threshold.astd_write_u32_le(w).await?;
+            crate::util::astd_write_u32_le(w, self.loot_threshold.as_int() as u32).await?;
 
             Ok(())
         })

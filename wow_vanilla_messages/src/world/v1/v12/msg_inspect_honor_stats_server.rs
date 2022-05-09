@@ -156,7 +156,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
         w.write_all(&self.this_week_honor.to_le_bytes())?;
 
         // last_week_standing: PvpRank
-        self.last_week_standing.write_u32_le(w)?;
+        crate::util::write_u32_le(w, self.last_week_standing.as_int() as u32)?;
 
         // rank_progress_bar: u8
         w.write_all(&self.rank_progress_bar.to_le_bytes())?;
@@ -303,7 +303,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             w.write_all(&self.this_week_honor.to_le_bytes()).await?;
 
             // last_week_standing: PvpRank
-            self.last_week_standing.tokio_write_u32_le(w).await?;
+            crate::util::tokio_write_u32_le(w, self.last_week_standing.as_int() as u32).await?;
 
             // rank_progress_bar: u8
             w.write_all(&self.rank_progress_bar.to_le_bytes()).await?;
@@ -451,7 +451,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             w.write_all(&self.this_week_honor.to_le_bytes()).await?;
 
             // last_week_standing: PvpRank
-            self.last_week_standing.astd_write_u32_le(w).await?;
+            crate::util::astd_write_u32_le(w, self.last_week_standing.as_int() as u32).await?;
 
             // rank_progress_bar: u8
             w.write_all(&self.rank_progress_bar.to_le_bytes()).await?;

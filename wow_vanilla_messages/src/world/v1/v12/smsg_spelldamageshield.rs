@@ -63,7 +63,7 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
         w.write_all(&self.damage.to_le_bytes())?;
 
         // school: SpellSchool
-        self.school.write_u32_le(w)?;
+        crate::util::write_u32_le(w, self.school.as_int() as u32)?;
 
         Ok(())
     }
@@ -126,7 +126,7 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
             w.write_all(&self.damage.to_le_bytes()).await?;
 
             // school: SpellSchool
-            self.school.tokio_write_u32_le(w).await?;
+            crate::util::tokio_write_u32_le(w, self.school.as_int() as u32).await?;
 
             Ok(())
         })
@@ -190,7 +190,7 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
             w.write_all(&self.damage.to_le_bytes()).await?;
 
             // school: SpellSchool
-            self.school.astd_write_u32_le(w).await?;
+            crate::util::astd_write_u32_le(w, self.school.as_int() as u32).await?;
 
             Ok(())
         })

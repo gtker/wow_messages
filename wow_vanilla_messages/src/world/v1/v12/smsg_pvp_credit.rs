@@ -55,7 +55,7 @@ impl MessageBody for SMSG_PVP_CREDIT {
         self.victim.write(w)?;
 
         // rank: PvpRank
-        self.rank.write_u32_le(w)?;
+        crate::util::write_u32_le(w, self.rank.as_int() as u32)?;
 
         Ok(())
     }
@@ -111,7 +111,7 @@ impl MessageBody for SMSG_PVP_CREDIT {
             self.victim.tokio_write(w).await?;
 
             // rank: PvpRank
-            self.rank.tokio_write_u32_le(w).await?;
+            crate::util::tokio_write_u32_le(w, self.rank.as_int() as u32).await?;
 
             Ok(())
         })
@@ -168,7 +168,7 @@ impl MessageBody for SMSG_PVP_CREDIT {
             self.victim.astd_write(w).await?;
 
             // rank: PvpRank
-            self.rank.astd_write_u32_le(w).await?;
+            crate::util::astd_write_u32_le(w, self.rank.as_int() as u32).await?;
 
             Ok(())
         })

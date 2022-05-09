@@ -47,7 +47,7 @@ impl MessageBody for SMSG_QUESTGIVER_STATUS {
         self.guid.write(w)?;
 
         // status: QuestGiverStatus
-        self.status.write_u32_le(w)?;
+        crate::util::write_u32_le(w, self.status.as_int() as u32)?;
 
         Ok(())
     }
@@ -96,7 +96,7 @@ impl MessageBody for SMSG_QUESTGIVER_STATUS {
             self.guid.tokio_write(w).await?;
 
             // status: QuestGiverStatus
-            self.status.tokio_write_u32_le(w).await?;
+            crate::util::tokio_write_u32_le(w, self.status.as_int() as u32).await?;
 
             Ok(())
         })
@@ -146,7 +146,7 @@ impl MessageBody for SMSG_QUESTGIVER_STATUS {
             self.guid.astd_write(w).await?;
 
             // status: QuestGiverStatus
-            self.status.astd_write_u32_le(w).await?;
+            crate::util::astd_write_u32_le(w, self.status.as_int() as u32).await?;
 
             Ok(())
         })

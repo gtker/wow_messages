@@ -2,7 +2,6 @@ use crate::container::Container;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::ArrayType;
-use crate::rust_printer::enums::get_upcast_types;
 use crate::rust_printer::new_enums::{IfStatementType, NewEnumStructMember, NewIfStatement};
 use crate::rust_printer::rust_view::RustDefiner;
 use crate::rust_printer::structs::print_common_impls;
@@ -688,34 +687,13 @@ fn print_write_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
         },
     );
 
-    let types = get_upcast_types(&rd.int_ty());
-
-    for t in types {
-        s.async_funcn_pub(
-            format!(
-                "write_{ty}_{endian}",
-                ty = t.rust_str(),
-                endian = t.rust_endian_str()
-            ),
-            "<W: std::io::Write>(&self, w: &mut W)",
-            "<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
-            "<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
-            "std::result::Result<(), std::io::Error>",
-            |s, it| {
-                s.wln(format!(
-                    "let a: {ty} = self.into();",
-                    ty = rd.original_ty_name(),
-                ));
-                s.wln(format!(
-                    "a.{prefix}write_{ty}_{endian}(w){postfix}",
-                    ty = t.rust_str(),
-                    endian = t.rust_endian_str(),
-                    prefix = it.prefix(),
-                    postfix = it.postfix(),
-                ));
-            },
-        );
-    }
+    s.funcn("as_int(&self)", rd.int_ty().rust_str(), |s| {
+        s.wln(format!(
+            "let a: {ty} = self.into();",
+            ty = rd.original_ty_name(),
+        ));
+        s.wln(format!("a.as_int() as {ty}", ty = rd.int_ty().rust_str()));
+    });
 }
 
 fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
