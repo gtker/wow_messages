@@ -288,6 +288,7 @@ fn print_size_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
         },
     );
 }
+
 fn print_types_for_new_flag_flag_elseif(
     s: &mut Writer,
     e: &Container,
@@ -356,17 +357,24 @@ fn print_types_for_new_flag_flag_elseif(
                             }
                             printed_statements.push(statement.variable_name());
 
-                            s.wln(format!(
+                            match i != 0 {
+                                true => s.w("+ "),
+                                false => s.w(""),
+                            }
+
+                            s.wln_no_indent(format!(
                                 "{name}.size() // {name}",
                                 name = statement.variable_name()
                             ));
                             continue;
                         }
                     };
+
                     match i != 0 {
                         true => s.w("+ "),
                         false => s.w(""),
                     }
+
                     let array_inner_constant = match sf.ty() {
                         Type::Array(array) => match array.ty() {
                             ArrayType::Integer(_) => true,
@@ -429,7 +437,7 @@ fn print_types_for_new_flag_flag_elseif(
                             s.wln(format!("{name},", name = d.name()));
                         }
                         NewEnumStructMember::IfStatement(statement) => {
-                            s.wln(format!("{name}", name = statement.variable_name()));
+                            s.wln(format!("{name},", name = statement.variable_name()));
                         }
                     }
                 }

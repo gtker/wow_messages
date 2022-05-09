@@ -725,7 +725,7 @@ impl VariableSized for FlagIfElseIfUpdateFlagONE_IF {
             }
             Self::TWO_ELSEIF => {
                 SimpleFlag::size() // s: SimpleFlag
-                s.size() // s
+                + s.size() // s
             }
             Self::FOUR_ELSEIF => {
                 1 // elseif2: u8
@@ -753,7 +753,7 @@ impl FlagIfElseIfUpdateFlagONE_IF {
             }
             Self::TWO_ELSEIF {
                 s,
-                s
+                s,
             } => {
                 // s: SimpleFlag
                 s.write(w)?;
@@ -787,7 +787,7 @@ impl FlagIfElseIfUpdateFlagONE_IF {
             }
             Self::TWO_ELSEIF {
                 s,
-                s
+                s,
             } => {
                 // s: SimpleFlag
                 s.tokio_write(w).await?;
@@ -821,7 +821,7 @@ impl FlagIfElseIfUpdateFlagONE_IF {
             }
             Self::TWO_ELSEIF {
                 s,
-                s
+                s,
             } => {
                 // s: SimpleFlag
                 s.astd_write(w).await?;
