@@ -1,82 +1,5 @@
 #tag_all versions "1.12";
 
-enum UpdateType : u8 {
-    VALUES = 0;
-    MOVEMENT = 1;
-    CREATE_OBJECT = 2;
-    CREATE_OBJECT2 = 3;
-    OUT_OF_RANGE_OBJECTS = 4;
-    NEAR_OBJECTS = 5;
-}
-
-flag UpdateFlag : u8 {
-    NONE = 0x00;
-    SELF = 0x01;
-    TRANSPORT = 0x02;
-    MELEE_ATTACKING = 0x04;
-    HIGH_GUID = 0x08;
-    ALL = 0x10;
-    LIVING = 0x20;
-    HAS_POSITION = 0x40;
-}
-
-
-flag SplineFlag : u32 {
-    NONE = 0x00000000;
-    DONE = 0x00000001;
-    FALLING = 0x00000002 {
-        comment = "vmangos: Affects elevation computation";
-    }
-    UNKNOWN3 = 0x00000004;
-    UNKNOWN4 = 0x00000008;
-    UNKNOWN5 = 0x00000010;
-    UNKNOWN6 = 0x00000020;
-    UNKNOWN7 = 0x00000040;
-    UNKNOWN8 = 0x00000080;
-    RUNMODE = 0x00000100;
-    FLYING = 0x00000200 {
-        comment = "vmangos: Smooth movement(Catmullrom interpolation mode), flying animation";
-    }
-    NO_SPLINE = 0x00000400;
-    UNKNOWN12 = 0x00000800;
-    UNKNOWN13 = 0x00001000;
-    UNKNOWN14 = 0x00002000;
-    UNKNOWN15 = 0x00004000;
-    UNKNOWN16 = 0x00008000;
-    FINAL_POINT = 0x00010000;
-    FINAL_TARGET = 0x00020000;
-    FINAL_ANGLE = 0x00040000;
-    UNKNOWN19 = 0x00080000 {
-        comment = "vmangos: exists, but unknown what it does";
-    }
-    CYCLIC = 0x00100000 {
-        comment = "vmangos: Movement by cycled spline";
-    }
-    ENTER_CYCLE = 0x00200000 {
-        comment = "vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done";
-    }
-    FROZEN = 0x00400000 {
-        comment = "vmangos: Will never arrive";
-    }
-    UNKNOWN23 = 0x00800000;
-    UNKNOWN24 = 0x01000000;
-    UNKNOWN25 = 0x02000000 {
-        comment = "vmangos: exists, but unknown what it does";
-    }
-    UNKNOWN26 = 0x04000000;
-    UNKNOWN27 = 0x08000000;
-    UNKNOWN28 = 0x10000000;
-    UNKNOWN29 = 0x20000000;
-    UNKNOWN30 = 0x40000000;
-    UNKNOWN31 = 0x80000000;
-}
-
-struct Vector3d {
-    f32 x;
-    f32 y;
-    f32 z;
-}
-
 struct MovementBlock {
     UpdateFlag update_flag;
     if (update_flag & LIVING) {
@@ -149,17 +72,6 @@ struct MovementBlock {
     if (update_flag & TRANSPORT) {
         u32 transport_progress_in_ms;
     }
-}
-
-enum ObjectType : u8 {
-    OBJECT = 0;
-    ITEM = 1;
-    CONTAINER = 2;
-    UNIT = 3;
-    PLAYER = 4;
-    GAME_OBJECT = 5;
-    DYNAMIC_OBJECT = 6;
-    CORPSE = 7;
 }
 
 struct Object {
