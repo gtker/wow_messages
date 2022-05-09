@@ -46,7 +46,7 @@ impl RustMember {
 
     pub fn is_elseif_flag(&self) -> bool {
         match self.ty() {
-            RustType::Flag { is_elseif, .. } => *is_elseif,
+            RustType::Flag { is_elseif, .. } | RustType::Enum { is_elseif, .. } => *is_elseif,
             _ => false,
         }
     }
@@ -258,6 +258,10 @@ impl RustEnumerator {
 
     pub fn should_not_be_in_flag_types(&self) -> bool {
         self.members.is_empty() || !self.is_main_enumerator
+    }
+
+    pub fn is_main_enumerator(&self) -> bool {
+        self.is_main_enumerator
     }
 
     pub fn has_members(&self) -> bool {
@@ -599,7 +603,7 @@ impl RustDefiner {
         self.int_ty
     }
     pub fn is_simple(&self) -> bool {
-        self.is_simple
+        self.is_simple && !self.is_elseif
     }
     pub fn is_elseif(&self) -> bool {
         self.is_elseif
@@ -647,11 +651,13 @@ fn create_else_if_flag(
         enumerators.push(enumerator);
     }
 
+    let flag_ty_name = &find_subject(current_scope, parent_scope, statement).original_ty;
+
     // Create new Enum RustMember
     let rm = RustMember {
-        name: enumerator.to_string(),
+        name: statement.name().to_string(),
         ty: RustType::Enum {
-            ty_name: format!("{}_{}", struct_ty_name, enumerator),
+            ty_name: format!("{}{}", flag_ty_name, enumerator),
             enumerators,
             int_ty: IntegerType::U8, // Does not matter
             is_simple: false,

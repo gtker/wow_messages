@@ -33,7 +33,7 @@ impl MessageBody for CMSG_TOGGLE_PVP {
             // enable_pvp: u8
             let enable_pvp = crate::util::read_u8_le(r)?;
 
-            Some(CMSG_TOGGLE_PVP_set {
+            Some(CMSG_TOGGLE_PVPset {
                 enable_pvp,
             })
         } else {
@@ -78,7 +78,7 @@ impl MessageBody for CMSG_TOGGLE_PVP {
                 // enable_pvp: u8
                 let enable_pvp = crate::util::tokio_read_u8_le(r).await?;
 
-                Some(CMSG_TOGGLE_PVP_set {
+                Some(CMSG_TOGGLE_PVPset {
                     enable_pvp,
                 })
             } else {
@@ -137,7 +137,7 @@ impl MessageBody for CMSG_TOGGLE_PVP {
                 // enable_pvp: u8
                 let enable_pvp = crate::util::astd_read_u8_le(r).await?;
 
-                Some(CMSG_TOGGLE_PVP_set {
+                Some(CMSG_TOGGLE_PVPset {
                     enable_pvp,
                 })
             } else {

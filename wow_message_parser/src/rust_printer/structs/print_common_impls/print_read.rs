@@ -539,7 +539,7 @@ fn print_read_field(
 
                     s.body_closing_with(
                         format!(
-                            "Some({original_name}_{name}",
+                            "Some({original_name}{name}",
                             original_name = e.name(),
                             name = optional.name()
                         ),
@@ -622,7 +622,7 @@ fn print_read_if_statement_flag_multiple(
 
         s.body_closing_with(
             format!(
-                "Some({new_ty_name}_{original_enumerator}::{enumerator}",
+                "Some({new_ty_name}{original_enumerator}::{enumerator}",
                 new_ty_name = ne.new_ty_name(),
                 original_enumerator = original_enumerator,
                 enumerator = enumerator.name(),

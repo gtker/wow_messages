@@ -71,7 +71,7 @@ impl MessageBody for SMSG_GROUP_LIST {
             // loot_threshold: ItemQuality
             let loot_threshold = ItemQuality::read(r)?;
 
-            Some(SMSG_GROUP_LIST_group_not_empty {
+            Some(SMSG_GROUP_LISTgroup_not_empty {
                 loot_setting,
                 master_loot,
                 loot_threshold,
@@ -174,7 +174,7 @@ impl MessageBody for SMSG_GROUP_LIST {
                 // loot_threshold: ItemQuality
                 let loot_threshold = ItemQuality::tokio_read(r).await?;
 
-                Some(SMSG_GROUP_LIST_group_not_empty {
+                Some(SMSG_GROUP_LISTgroup_not_empty {
                     loot_setting,
                     master_loot,
                     loot_threshold,
@@ -291,7 +291,7 @@ impl MessageBody for SMSG_GROUP_LIST {
                 // loot_threshold: ItemQuality
                 let loot_threshold = ItemQuality::astd_read(r).await?;
 
-                Some(SMSG_GROUP_LIST_group_not_empty {
+                Some(SMSG_GROUP_LISTgroup_not_empty {
                     loot_setting,
                     master_loot,
                     loot_threshold,

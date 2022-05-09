@@ -390,6 +390,7 @@ use crate::logon::version_2::CMD_REALM_LIST_Client;
 use crate::logon::version_3::CMD_XFER_ACCEPT;
 use crate::logon::version_3::CMD_XFER_RESUME;
 use crate::logon::version_3::CMD_XFER_CANCEL;
+use crate::logon::all::TestStruct;
 
 #[derive(Debug)]
 pub enum ClientOpcodeMessage {
@@ -401,6 +402,7 @@ pub enum ClientOpcodeMessage {
     CMD_XFER_ACCEPT(CMD_XFER_ACCEPT),
     CMD_XFER_RESUME(CMD_XFER_RESUME),
     CMD_XFER_CANCEL(CMD_XFER_CANCEL),
+    TestStruct(TestStruct),
 }
 
 impl ReadableAndWritable for ClientOpcodeMessage {
@@ -418,6 +420,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
             ClientOpcode::CMD_XFER_ACCEPT => Ok(Self::CMD_XFER_ACCEPT(CMD_XFER_ACCEPT::read(r)?)),
             ClientOpcode::CMD_XFER_RESUME => Ok(Self::CMD_XFER_RESUME(CMD_XFER_RESUME::read(r)?)),
             ClientOpcode::CMD_XFER_CANCEL => Ok(Self::CMD_XFER_CANCEL(CMD_XFER_CANCEL::read(r)?)),
+            ClientOpcode::TestStruct => Ok(Self::TestStruct(TestStruct::read(r)?)),
         }
     }
 
@@ -432,6 +435,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
             Self::CMD_XFER_ACCEPT(e) => e.write(w)?,
             Self::CMD_XFER_RESUME(e) => e.write(w)?,
             Self::CMD_XFER_CANCEL(e) => e.write(w)?,
+            Self::TestStruct(e) => e.write(w)?,
         }
 
         Ok(())
@@ -459,6 +463,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
                 ClientOpcode::CMD_XFER_ACCEPT => Ok(Self::CMD_XFER_ACCEPT(CMD_XFER_ACCEPT::tokio_read(r).await?)),
                 ClientOpcode::CMD_XFER_RESUME => Ok(Self::CMD_XFER_RESUME(CMD_XFER_RESUME::tokio_read(r).await?)),
                 ClientOpcode::CMD_XFER_CANCEL => Ok(Self::CMD_XFER_CANCEL(CMD_XFER_CANCEL::tokio_read(r).await?)),
+                ClientOpcode::TestStruct => Ok(Self::TestStruct(TestStruct::tokio_read(r).await?)),
             }
         })
     }
@@ -486,6 +491,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
                 Self::CMD_XFER_ACCEPT(e) => e.tokio_write(w).await?,
                 Self::CMD_XFER_RESUME(e) => e.tokio_write(w).await?,
                 Self::CMD_XFER_CANCEL(e) => e.tokio_write(w).await?,
+                Self::TestStruct(e) => e.tokio_write(w).await?,
             }
 
             Ok(())
@@ -514,6 +520,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
                 ClientOpcode::CMD_XFER_ACCEPT => Ok(Self::CMD_XFER_ACCEPT(CMD_XFER_ACCEPT::astd_read(r).await?)),
                 ClientOpcode::CMD_XFER_RESUME => Ok(Self::CMD_XFER_RESUME(CMD_XFER_RESUME::astd_read(r).await?)),
                 ClientOpcode::CMD_XFER_CANCEL => Ok(Self::CMD_XFER_CANCEL(CMD_XFER_CANCEL::astd_read(r).await?)),
+                ClientOpcode::TestStruct => Ok(Self::TestStruct(TestStruct::astd_read(r).await?)),
             }
         })
     }
@@ -541,6 +548,7 @@ impl ReadableAndWritable for ClientOpcodeMessage {
                 Self::CMD_XFER_ACCEPT(e) => e.astd_write(w).await?,
                 Self::CMD_XFER_RESUME(e) => e.astd_write(w).await?,
                 Self::CMD_XFER_CANCEL(e) => e.astd_write(w).await?,
+                Self::TestStruct(e) => e.astd_write(w).await?,
             }
 
             Ok(())
@@ -623,6 +631,7 @@ pub enum ClientOpcode {
     CMD_XFER_ACCEPT,
     CMD_XFER_RESUME,
     CMD_XFER_CANCEL,
+    TestStruct,
 }
 
 impl ClientOpcode {
@@ -636,6 +645,7 @@ impl ClientOpcode {
             Self::CMD_XFER_ACCEPT => 0x32,
             Self::CMD_XFER_RESUME => 0x33,
             Self::CMD_XFER_CANCEL => 0x34,
+            Self::TestStruct => 0xff,
         }
     }
 
@@ -657,6 +667,7 @@ impl ReadableAndWritable for ClientOpcode {
             0x32 => Ok(Self::CMD_XFER_ACCEPT),
             0x33 => Ok(Self::CMD_XFER_RESUME),
             0x34 => Ok(Self::CMD_XFER_CANCEL),
+            0xff => Ok(Self::TestStruct),
             opcode => Err(ClientOpcodeError::InvalidOpcode(opcode)),
         }
     }
@@ -690,6 +701,7 @@ impl ReadableAndWritable for ClientOpcode {
                 0x32 => Ok(Self::CMD_XFER_ACCEPT),
                 0x33 => Ok(Self::CMD_XFER_RESUME),
                 0x34 => Ok(Self::CMD_XFER_CANCEL),
+                0xff => Ok(Self::TestStruct),
                 opcode => Err(ClientOpcodeError::InvalidOpcode(opcode)),
             }
         })
@@ -737,6 +749,7 @@ impl ReadableAndWritable for ClientOpcode {
                 0x32 => Ok(Self::CMD_XFER_ACCEPT),
                 0x33 => Ok(Self::CMD_XFER_RESUME),
                 0x34 => Ok(Self::CMD_XFER_CANCEL),
+                0xff => Ok(Self::TestStruct),
                 opcode => Err(ClientOpcodeError::InvalidOpcode(opcode)),
             }
         })
@@ -774,6 +787,7 @@ impl From<&ClientOpcodeMessage> for ClientOpcode {
             ClientOpcodeMessage::CMD_XFER_ACCEPT(_) => Self::CMD_XFER_ACCEPT,
             ClientOpcodeMessage::CMD_XFER_RESUME(_) => Self::CMD_XFER_RESUME,
             ClientOpcodeMessage::CMD_XFER_CANCEL(_) => Self::CMD_XFER_CANCEL,
+            ClientOpcodeMessage::TestStruct(_) => Self::TestStruct,
         }
     }
 }

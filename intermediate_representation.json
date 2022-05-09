@@ -2271,6 +2271,93 @@
         "Flag",
         "WorldVersion"
       ]
+    },
+    {
+      "name": "TestFlag",
+      "definer_ty": "Flag",
+      "enumerators": [
+        {
+          "name": "A",
+          "value": {
+            "int": 1,
+            "original": "1"
+          },
+          "tags": {
+            "description": null,
+            "comment": null,
+            "display": null
+          }
+        },
+        {
+          "name": "B",
+          "value": {
+            "int": 2,
+            "original": "2"
+          },
+          "tags": {
+            "description": null,
+            "comment": null,
+            "display": null
+          }
+        },
+        {
+          "name": "C",
+          "value": {
+            "int": 4,
+            "original": "4"
+          },
+          "tags": {
+            "description": null,
+            "comment": null,
+            "display": null
+          }
+        },
+        {
+          "name": "D",
+          "value": {
+            "int": 8,
+            "original": "8"
+          },
+          "tags": {
+            "description": null,
+            "comment": null,
+            "display": null
+          }
+        },
+        {
+          "name": "E",
+          "value": {
+            "int": 16,
+            "original": "16"
+          },
+          "tags": {
+            "description": null,
+            "comment": null,
+            "display": null
+          }
+        }
+      ],
+      "self_value": null,
+      "integer_type": "u8",
+      "tags": {
+        "description": null,
+        "comment": null,
+        "display": null
+      },
+      "objects_used_in": [
+        [
+          "TestStruct",
+          "InIf"
+        ]
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/test/test.wowm",
+        "start_position": 3
+      },
+      "features": [
+        "Flag",
+        "LoginVersion"
+      ]
     }
   ],
   "enums": [
@@ -103786,6 +103873,235 @@
         "ComplexBuiltInTypes",
         "SimpleBuiltInTypes",
         "WorldVersion"
+      ]
+    },
+    {
+      "name": "TestStruct",
+      "object_type": {
+        "CLogin": 255
+      },
+      "constant": false,
+      "members": [
+        {
+          "Definition": {
+            "name": "f",
+            "member_type": {
+              "Identifier": {
+                "s": "TestFlag",
+                "upcast": null
+              }
+            },
+            "constant_value": null,
+            "used_as_size_in": null,
+            "used_in_if": true,
+            "tags": {
+              "description": null,
+              "comment": null,
+              "display": null
+            }
+          }
+        },
+        {
+          "IfStatement": {
+            "conditional": {
+              "variable_name": "f",
+              "equations": [
+                {
+                  "BitwiseAnd": {
+                    "value": "A"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "Definition": {
+                  "name": "b_A1",
+                  "member_type": {
+                    "Integer": "u8"
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {
+                    "description": null,
+                    "comment": null,
+                    "display": null
+                  }
+                }
+              }
+            ],
+            "else_ifs": [
+              {
+                "conditional": {
+                  "variable_name": "f",
+                  "equations": [
+                    {
+                      "BitwiseAnd": {
+                        "value": "B"
+                      }
+                    }
+                  ]
+                },
+                "members": [
+                  {
+                    "Definition": {
+                      "name": "b_B1",
+                      "member_type": {
+                        "Integer": "u8"
+                      },
+                      "constant_value": null,
+                      "used_as_size_in": null,
+                      "used_in_if": false,
+                      "tags": {
+                        "description": null,
+                        "comment": null,
+                        "display": null
+                      }
+                    }
+                  }
+                ],
+                "else_ifs": [],
+                "else_statement_members": [],
+                "original_ty": {
+                  "Identifier": {
+                    "s": "TestFlag",
+                    "upcast": null
+                  }
+                }
+              }
+            ],
+            "else_statement_members": [],
+            "original_ty": {
+              "Identifier": {
+                "s": "TestFlag",
+                "upcast": null
+              }
+            }
+          }
+        },
+        {
+          "IfStatement": {
+            "conditional": {
+              "variable_name": "f",
+              "equations": [
+                {
+                  "BitwiseAnd": {
+                    "value": "C"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "Definition": {
+                  "name": "b_C1",
+                  "member_type": {
+                    "Integer": "u8"
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {
+                    "description": null,
+                    "comment": null,
+                    "display": null
+                  }
+                }
+              }
+            ],
+            "else_ifs": [],
+            "else_statement_members": [],
+            "original_ty": {
+              "Identifier": {
+                "s": "TestFlag",
+                "upcast": null
+              }
+            }
+          }
+        }
+      ],
+      "tags": {
+        "description": null,
+        "comment": null,
+        "display": null
+      },
+      "tests": [
+        {
+          "subject": "TestStruct",
+          "members": [
+            {
+              "variable_name": "f",
+              "verified_value": {
+                "Flag": [
+                  "A",
+                  "C"
+                ]
+              },
+              "tags": {
+                "description": null,
+                "comment": null,
+                "display": null
+              }
+            },
+            {
+              "variable_name": "b_A1",
+              "verified_value": {
+                "Number": {
+                  "value": 0,
+                  "original_string": "0"
+                }
+              },
+              "tags": {
+                "description": null,
+                "comment": null,
+                "display": null
+              }
+            },
+            {
+              "variable_name": "b_C1",
+              "verified_value": {
+                "Number": {
+                  "value": 0,
+                  "original_string": "0"
+                }
+              },
+              "tags": {
+                "description": null,
+                "comment": null,
+                "display": null
+              }
+            }
+          ],
+          "raw_bytes": [
+            255,
+            5,
+            0,
+            0
+          ],
+          "tags": {
+            "description": null,
+            "comment": null,
+            "display": null
+          },
+          "file_info": {
+            "file_name": "wow_message_parser/wowm/test/test.wowm",
+            "start_position": 23
+          }
+        }
+      ],
+      "file_info": {
+        "file_name": "wow_message_parser/wowm/test/test.wowm",
+        "start_position": 11
+      },
+      "only_has_io_error": true,
+      "features": [
+        "CLogin",
+        "SubObjects",
+        "IfFlag",
+        "SimpleBuiltInTypes",
+        "IfElseFlag",
+        "LoginVersion"
       ]
     }
   ]

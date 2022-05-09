@@ -42,7 +42,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
             // transport_map: Map
             let transport_map = Map::read(r)?;
 
-            Some(SMSG_TRANSFER_PENDING_has_transport {
+            Some(SMSG_TRANSFER_PENDINGhas_transport {
                 transport,
                 transport_map,
             })
@@ -102,7 +102,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
                 // transport_map: Map
                 let transport_map = Map::tokio_read(r).await?;
 
-                Some(SMSG_TRANSFER_PENDING_has_transport {
+                Some(SMSG_TRANSFER_PENDINGhas_transport {
                     transport,
                     transport_map,
                 })
@@ -176,7 +176,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
                 // transport_map: Map
                 let transport_map = Map::astd_read(r).await?;
 
-                Some(SMSG_TRANSFER_PENDING_has_transport {
+                Some(SMSG_TRANSFER_PENDINGhas_transport {
                     transport,
                     transport_map,
                 })

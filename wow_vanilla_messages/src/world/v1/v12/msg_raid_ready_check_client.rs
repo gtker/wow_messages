@@ -33,7 +33,7 @@ impl MessageBody for MSG_RAID_READY_CHECK_Client {
             // state: u8
             let state = crate::util::read_u8_le(r)?;
 
-            Some(MSG_RAID_READY_CHECK_Client_answer {
+            Some(MSG_RAID_READY_CHECK_Clientanswer {
                 state,
             })
         } else {
@@ -78,7 +78,7 @@ impl MessageBody for MSG_RAID_READY_CHECK_Client {
                 // state: u8
                 let state = crate::util::tokio_read_u8_le(r).await?;
 
-                Some(MSG_RAID_READY_CHECK_Client_answer {
+                Some(MSG_RAID_READY_CHECK_Clientanswer {
                     state,
                 })
             } else {
@@ -137,7 +137,7 @@ impl MessageBody for MSG_RAID_READY_CHECK_Client {
                 // state: u8
                 let state = crate::util::astd_read_u8_le(r).await?;
 
-                Some(MSG_RAID_READY_CHECK_Client_answer {
+                Some(MSG_RAID_READY_CHECK_Clientanswer {
                     state,
                 })
             } else {

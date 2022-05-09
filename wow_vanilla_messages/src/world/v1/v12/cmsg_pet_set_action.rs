@@ -52,7 +52,7 @@ impl MessageBody for CMSG_PET_SET_ACTION {
             // data2: u32
             let data2 = crate::util::read_u32_le(r)?;
 
-            Some(CMSG_PET_SET_ACTION_extra {
+            Some(CMSG_PET_SET_ACTIONextra {
                 position2,
                 data2,
             })
@@ -128,7 +128,7 @@ impl MessageBody for CMSG_PET_SET_ACTION {
                 // data2: u32
                 let data2 = crate::util::tokio_read_u32_le(r).await?;
 
-                Some(CMSG_PET_SET_ACTION_extra {
+                Some(CMSG_PET_SET_ACTIONextra {
                     position2,
                     data2,
                 })
@@ -218,7 +218,7 @@ impl MessageBody for CMSG_PET_SET_ACTION {
                 // data2: u32
                 let data2 = crate::util::astd_read_u32_le(r).await?;
 
-                Some(CMSG_PET_SET_ACTION_extra {
+                Some(CMSG_PET_SET_ACTIONextra {
                     position2,
                     data2,
                 })

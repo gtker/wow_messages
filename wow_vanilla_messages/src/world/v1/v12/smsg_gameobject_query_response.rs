@@ -68,7 +68,7 @@ impl MessageBody for SMSG_GAMEOBJECT_QUERY_RESPONSE {
             }
             let raw_data = raw_data.try_into().unwrap();
 
-            Some(SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
+            Some(SMSG_GAMEOBJECT_QUERY_RESPONSEfound {
                 info_type,
                 display_id,
                 name1,
@@ -191,7 +191,7 @@ impl MessageBody for SMSG_GAMEOBJECT_QUERY_RESPONSE {
                 }
                 let raw_data = raw_data.try_into().unwrap();
 
-                Some(SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
+                Some(SMSG_GAMEOBJECT_QUERY_RESPONSEfound {
                     info_type,
                     display_id,
                     name1,
@@ -328,7 +328,7 @@ impl MessageBody for SMSG_GAMEOBJECT_QUERY_RESPONSE {
                 }
                 let raw_data = raw_data.try_into().unwrap();
 
-                Some(SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
+                Some(SMSG_GAMEOBJECT_QUERY_RESPONSEfound {
                     info_type,
                     display_id,
                     name1,

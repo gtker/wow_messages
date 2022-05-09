@@ -222,7 +222,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // bag_family: u32
             let bag_family = crate::util::read_u32_le(r)?;
 
-            Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
+            Some(SMSG_ITEM_QUERY_SINGLE_RESPONSEfound {
                 item_class,
                 item_sub_class,
                 name1,
@@ -683,7 +683,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 // bag_family: u32
                 let bag_family = crate::util::tokio_read_u32_le(r).await?;
 
-                Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
+                Some(SMSG_ITEM_QUERY_SINGLE_RESPONSEfound {
                     item_class,
                     item_sub_class,
                     name1,
@@ -1158,7 +1158,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 // bag_family: u32
                 let bag_family = crate::util::astd_read_u32_le(r).await?;
 
-                Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
+                Some(SMSG_ITEM_QUERY_SINGLE_RESPONSEfound {
                     item_class,
                     item_sub_class,
                     name1,

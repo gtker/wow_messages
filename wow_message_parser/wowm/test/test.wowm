@@ -1,0 +1,32 @@
+#tag_all login_logon_versions "*";
+
+flag TestFlag : u8 {
+    A = 1;
+    B = 2;
+    C = 4;
+    D = 8;
+    E = 16;
+}
+
+clogin TestStruct = 0xFF {
+    TestFlag f;
+    if (f & A) {
+        u8 b_A1;
+    } elseif (f & B) {
+        u8 b_B1;
+    }
+    if (f & C) {
+        u8 b_C1;
+    }
+}
+
+test TestStruct {
+    f = A | C;   
+    b_A1 = 0;
+    b_C1 = 0;
+} [
+    0xFF, /* opcode */
+    0x05, /* TestFlag */
+    0x00, /* b_A1 */
+    0x00, /* b_C1 */
+]

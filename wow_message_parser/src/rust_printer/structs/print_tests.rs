@@ -257,7 +257,44 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
         }
         TestValue::Flag(flags) => {
             let rd = e.rust_object().get_rust_definer(&m.ty().str());
-            if !rd.is_simple() {
+            if rd.is_elseif() {
+                s.wln_no_indent(format!("{ty}::empty()", ty = m.ty()));
+                s.inc_indent();
+
+                for enumerator in rd.enumerators() {
+                    if !flags.contains(&enumerator.name().to_string()) {
+                        continue;
+                    }
+                    if !enumerator.has_members_in_struct() {
+                        s.wln(format!(".set_{}()", enumerator.name()));
+                        continue;
+                    }
+                    let inner_enum = enumerator.members().first().unwrap();
+                    let (inner, ty) = match inner_enum.ty() {
+                        RustType::Enum { enumerators, .. } => (
+                            enumerators
+                                .iter()
+                                .find(|a| a.name() == enumerator.name())
+                                .unwrap()
+                                .members_in_struct(),
+                            format!("{}::{}", inner_enum.ty().rust_str(), enumerator.name()),
+                        ),
+                        _ => (
+                            enumerator.members_in_struct(),
+                            format!("{}{}", m.ty(), enumerator.name()),
+                        ),
+                    };
+                    s.open_curly(format!(".set_{}({}", enumerator.name(), ty));
+
+                    for m in inner {
+                        print_value(s, m, t, e, o);
+                    }
+
+                    s.closing_curly_with(")");
+                }
+                s.wln(",");
+                s.dec_indent();
+            } else if !rd.is_simple() {
                 s.wln_no_indent(format!("{ty}::empty()", ty = m.ty()));
                 s.inc_indent();
 
@@ -269,14 +306,16 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                         }
                         s.w(format!(".set_{variable_name}(", variable_name = f.name(),));
 
-                        s.wln_no_indent(format!("{}{} {{", m.ty(), f.name()));
-                        s.inc_indent();
-                        let subvars = match m.ty() {
+                        let subvars = match rd.inner().ty() {
                             RustType::Flag { enumerators, .. } => {
+                                s.wln_no_indent(format!("{}{} {{", m.ty(), f.name()));
+                                s.inc_indent();
+
                                 enumerators.iter().find(|a| a.name() == f.name()).unwrap()
                             }
                             _ => panic!("{} is not a flag", m.ty()),
                         };
+
                         for sf in subvars.members_in_struct() {
                             print_value(s, sf, t, e, o);
                         }

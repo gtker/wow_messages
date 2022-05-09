@@ -20,15 +20,17 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
             DefinerType::Enum => {
                 print_new_enum_declaration(s, &rd);
 
-                print_from_new_enum_to_old(s, &rd);
+                if !rd.is_elseif() {
+                    print_from_new_enum_to_old(s, &rd);
 
-                print_from_old_enum_to_new(s, &rd);
+                    print_from_old_enum_to_new(s, &rd);
 
-                print_default_for_new_enum(s, &rd);
+                    print_default_for_new_enum(s, &rd);
 
-                s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
-                    print_write_for_new_enum(s, &rd);
-                });
+                    s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
+                        print_write_for_new_enum(s, &rd);
+                    });
+                }
                 print_size_for_new_enum(s, &rd);
             }
             DefinerType::Flag => {
@@ -297,121 +299,6 @@ fn print_types_for_new_flag_flag_elseif(
     enumerator_name: &str,
 ) {
     let new_ty_name = format!("{}{}", ne.new_ty_name(), enumerator_name);
-
-    s.wln("#[derive(Debug, PartialEq, Clone)]");
-    s.new_enum(
-        "pub",
-        format!(
-            "{new_ty_name}{enumerator}",
-            new_ty_name = ne.new_ty_name(),
-            enumerator = enumerator_name
-        ),
-        |s| {
-            for enumerator in ne.enumerators() {
-                if enumerator.fields().is_empty() {
-                    continue;
-                }
-
-                s.open_curly(enumerator.name());
-                for d in enumerator.get_variable_names_for_members() {
-                    if d.used_as_size_in().is_some() {
-                        continue;
-                    }
-                    if d.verified_value().is_some() {
-                        continue;
-                    } else {
-                        s.wln(format!(
-                            "{name}: {ty},",
-                            name = d.name(),
-                            ty = d.ty().rust_str()
-                        ));
-                    };
-                }
-                s.closing_curly_with(",");
-            }
-        },
-    );
-
-    s.variable_size(
-        &new_ty_name,
-        |s| {
-            s.open_curly("match self");
-
-            for enumerator in ne.enumerators() {
-                if enumerator.fields().is_empty() {
-                    continue;
-                }
-
-                s.open_curly(format!(
-                    "Self::{enumerator} =>",
-                    enumerator = enumerator.name()
-                ));
-
-                let mut printed_statements = Vec::new();
-                for (i, sf) in enumerator.fields().iter().enumerate() {
-                    let sf = match sf {
-                        NewEnumStructMember::Definition(d) => d,
-                        NewEnumStructMember::IfStatement(statement) => {
-                            if printed_statements.contains(&statement.variable_name()) {
-                                continue;
-                            }
-                            printed_statements.push(statement.variable_name());
-
-                            match i != 0 {
-                                true => s.w("+ "),
-                                false => s.w(""),
-                            }
-
-                            s.wln_no_indent(format!(
-                                "{name}.size() // {name}",
-                                name = statement.variable_name()
-                            ));
-                            continue;
-                        }
-                    };
-
-                    match i != 0 {
-                        true => s.w("+ "),
-                        false => s.w(""),
-                    }
-
-                    let array_inner_constant = match sf.ty() {
-                        Type::Array(array) => match array.ty() {
-                            ArrayType::Integer(_) => true,
-                            ArrayType::Complex(ident) => {
-                                o.type_has_constant_size(&Type::Identifier {
-                                    s: ident.clone(),
-                                    upcast: None,
-                                })
-                            }
-                            ArrayType::CString => false,
-                            ArrayType::Guid => true,
-                            ArrayType::PackedGuid => false,
-                        },
-                        _ => false,
-                    };
-
-                    print_common_impls::print_size_of_ty(
-                        s,
-                        sf.ty(),
-                        sf.name(),
-                        true,
-                        o.type_has_constant_size(sf.ty()),
-                        array_inner_constant,
-                        "self.",
-                        &sf.ty().str(),
-                    );
-                }
-
-                s.closing_curly();
-            }
-
-            s.closing_curly();
-        },
-        |s| {
-            s.wln("65536 // TODO Flag elseif");
-        },
-    );
 
     s.open_curly(format!("impl {new_ty_name}", new_ty_name = &new_ty_name));
     s.async_funcn_pub(

@@ -45,7 +45,7 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
             let code = crate::util::read_c_string_to_vec(r)?;
             let code = String::from_utf8(code)?;
 
-            Some(CMSG_GOSSIP_SELECT_OPTION_unknown {
+            Some(CMSG_GOSSIP_SELECT_OPTIONunknown {
                 code,
             })
         } else {
@@ -109,7 +109,7 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
                 let code = crate::util::tokio_read_c_string_to_vec(r).await?;
                 let code = String::from_utf8(code)?;
 
-                Some(CMSG_GOSSIP_SELECT_OPTION_unknown {
+                Some(CMSG_GOSSIP_SELECT_OPTIONunknown {
                     code,
                 })
             } else {
@@ -187,7 +187,7 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
                 let code = crate::util::astd_read_c_string_to_vec(r).await?;
                 let code = String::from_utf8(code)?;
 
-                Some(CMSG_GOSSIP_SELECT_OPTION_unknown {
+                Some(CMSG_GOSSIP_SELECT_OPTIONunknown {
                     code,
                 })
             } else {

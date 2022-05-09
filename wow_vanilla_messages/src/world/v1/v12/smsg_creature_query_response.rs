@@ -82,7 +82,7 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
             // racial_leader: u8
             let racial_leader = crate::util::read_u8_le(r)?;
 
-            Some(SMSG_CREATURE_QUERY_RESPONSE_found {
+            Some(SMSG_CREATURE_QUERY_RESPONSEfound {
                 name1,
                 name2,
                 name3,
@@ -241,7 +241,7 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
                 // racial_leader: u8
                 let racial_leader = crate::util::tokio_read_u8_le(r).await?;
 
-                Some(SMSG_CREATURE_QUERY_RESPONSE_found {
+                Some(SMSG_CREATURE_QUERY_RESPONSEfound {
                     name1,
                     name2,
                     name3,
@@ -414,7 +414,7 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
                 // racial_leader: u8
                 let racial_leader = crate::util::astd_read_u8_le(r).await?;
 
-                Some(SMSG_CREATURE_QUERY_RESPONSE_found {
+                Some(SMSG_CREATURE_QUERY_RESPONSEfound {
                     name1,
                     name2,
                     name3,
