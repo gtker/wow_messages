@@ -706,6 +706,12 @@ fn print_read_if_statement_flag_new(
                 }
             }
 
+            print_read_final_flag(
+                s,
+                &e.rust_object()
+                    .rust_definers_in_enumerator(enumerator.name()),
+            );
+
             s.open_curly(format!(
                 "Some({}{}{}",
                 e.name(),

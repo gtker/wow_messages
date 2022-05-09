@@ -120,8 +120,6 @@ clogin TestStruct = 0xFF {
                 u8 b_Z1;
             }
         }
-    } elseif (f & B) {
-        u8 b_B1;
     }
     if (f & C) {
         u8 b_C1;
@@ -149,12 +147,10 @@ test TestStruct {
 ]
 
 test TestStruct {
-    f = B | C | D;
-    b_B1 = 1;
+    f = C | D;
     b_C1 = 2;
 } [
     0xFF, /* opcode */
-    0x0E, 0x00, /* TestFlag */
-    0x01, /* b_B1 */
+    0x0C, 0x00, /* TestFlag */
     0x02, /* b_C1 */
 ]

@@ -104331,46 +104331,7 @@
                 }
               }
             ],
-            "else_ifs": [
-              {
-                "conditional": {
-                  "variable_name": "f",
-                  "equations": [
-                    {
-                      "BitwiseAnd": {
-                        "value": "B"
-                      }
-                    }
-                  ]
-                },
-                "members": [
-                  {
-                    "Definition": {
-                      "name": "b_B1",
-                      "member_type": {
-                        "Integer": "u8"
-                      },
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": false,
-                      "tags": {
-                        "description": null,
-                        "comment": null,
-                        "display": null
-                      }
-                    }
-                  }
-                ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
-                  "Identifier": {
-                    "s": "TestFlag",
-                    "upcast": null
-                  }
-                }
-              }
-            ],
+            "else_ifs": [],
             "else_statement_members": [],
             "original_ty": {
               "Identifier": {
@@ -104571,7 +104532,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/test/test.wowm",
-            "start_position": 134
+            "start_position": 132
           }
         },
         {
@@ -104581,24 +104542,9 @@
               "variable_name": "f",
               "verified_value": {
                 "Flag": [
-                  "B",
                   "C",
                   "D"
                 ]
-              },
-              "tags": {
-                "description": null,
-                "comment": null,
-                "display": null
-              }
-            },
-            {
-              "variable_name": "b_B1",
-              "verified_value": {
-                "Number": {
-                  "value": 1,
-                  "original_string": "1"
-                }
               },
               "tags": {
                 "description": null,
@@ -104623,9 +104569,8 @@
           ],
           "raw_bytes": [
             255,
-            14,
+            12,
             0,
-            1,
             2
           ],
           "tags": {
@@ -104635,7 +104580,7 @@
           },
           "file_info": {
             "file_name": "wow_message_parser/wowm/test/test.wowm",
-            "start_position": 151
+            "start_position": 149
           }
         }
       ],

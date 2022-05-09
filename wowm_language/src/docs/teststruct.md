@@ -24,9 +24,6 @@ clogin TestStruct = 0xFF {
             }
         }
     }
-    else if (f & B) {
-        u8 b_B1;
-    }
     if (f & C) {
         u8 b_C1;
     }
@@ -85,12 +82,6 @@ Else If t contains `Z`:
 | ------ | ----------------- | ---- | ---- | ----------- |
 | - | 1 / - | u8 | b_Z1 |  |
 
-Else If f contains `B`:
-
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 1 / - | u8 | b_B1 |  |
-
 If f contains `C`:
 
 | Offset | Size / Endianness | Type | Name | Description |
@@ -114,7 +105,6 @@ If f contains `E`:
 ```
 ```c
 255, // opcode (255)
-14, 0, // f: TestFlag  B| C| D (14)
-1, // b_B1: u8
+12, 0, // f: TestFlag  C| D (12)
 2, // b_C1: u8
 ```
