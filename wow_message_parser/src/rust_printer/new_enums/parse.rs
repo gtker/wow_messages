@@ -90,7 +90,7 @@ pub fn get_enumerators(
         }
 
         let mut v = Vec::new();
-        for m in &mut statement.else_statement_members {
+        for m in statement.else_members_mut() {
             inner(m, &mut v, o, c);
         }
         for eq in statement.member_enumerators() {
@@ -130,7 +130,7 @@ pub fn get_enumerators(
     }
 
     let mut v = Vec::new();
-    for m in &mut statement.else_statement_members {
+    for m in statement.else_members_mut() {
         inner(m, &mut v, o, c);
     }
     for eq in d.fields() {

@@ -573,7 +573,7 @@ fn print_container_example_member(
                     }
                 }
             } else {
-                for m in &statement.else_statement_members {
+                for m in statement.else_members() {
                     print_container_example_member(s, e, m, bytes, values, o, tags, prefix);
                 }
             }
@@ -668,11 +668,11 @@ fn print_container_if_statement(
         }
     }
 
-    if !statement.else_statement_members.is_empty() {
+    if !statement.else_members().is_empty() {
         s.newline();
         s.wln("Else: ");
 
-        for m in &statement.else_statement_members {
+        for m in statement.else_members() {
             print_container_field(s, m, offset);
         }
     }

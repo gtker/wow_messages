@@ -151,11 +151,11 @@ fn print_members(s: &mut WowmWriter, e: &Container, field: &StructMember) {
                 }
             }
 
-            if !statement.else_statement_members.is_empty() {
+            if !statement.else_members().is_empty() {
                 s.wln("else {");
                 s.inc();
 
-                for f in &statement.else_statement_members {
+                for f in statement.else_members() {
                     print_members(s, e, f);
                 }
 

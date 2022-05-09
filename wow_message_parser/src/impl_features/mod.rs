@@ -154,7 +154,7 @@ fn features_for_struct_member(f: &mut ImplFeatures, m: &StructMember) {
                 }
             }
 
-            for m in &statement.else_statement_members {
+            for m in statement.else_members() {
                 f.add(match ty {
                     DefinerType::Enum => {
                         if statement.is_not_enum() {

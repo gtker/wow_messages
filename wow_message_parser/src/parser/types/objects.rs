@@ -484,7 +484,7 @@ version 2: {:#?} in {} line {}",
                 for member in statement.members() {
                     self.check_value(member, tags);
                 }
-                for member in &statement.else_statement_members {
+                for member in statement.else_members() {
                     self.check_value(member, tags);
                 }
             }

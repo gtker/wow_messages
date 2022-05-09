@@ -579,7 +579,7 @@ pub fn create_if_statement(
 
     let mut else_enumerator_members = Vec::new();
     let mut else_enumerator_originals = Vec::new();
-    for m in &statement.else_statement_members {
+    for m in statement.else_members() {
         create_struct_member(
             m,
             struct_ty_name,

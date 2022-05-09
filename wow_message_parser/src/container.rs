@@ -1336,7 +1336,7 @@ pub struct IfStatement {
     pub conditional: Conditional,
     members: Vec<StructMember>,
     else_ifs: Vec<IfStatement>,
-    pub else_statement_members: Vec<StructMember>,
+    else_statement_members: Vec<StructMember>,
     new_enum: Option<NewIfStatement>,
     original_ty: Option<Type>,
 }
@@ -1395,6 +1395,14 @@ impl IfStatement {
         }
 
         v
+    }
+
+    pub fn else_members(&self) -> &[StructMember] {
+        &self.else_statement_members
+    }
+
+    pub fn else_members_mut(&mut self) -> &mut [StructMember] {
+        &mut self.else_statement_members
     }
 
     pub fn original_ty(&self) -> &Type {
