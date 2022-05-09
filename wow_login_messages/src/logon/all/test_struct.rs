@@ -290,6 +290,16 @@ pub enum TestStructTestFlagA {
     },
 }
 
+impl TestStructTestFlagA {
+    pub(crate) const fn as_flag_value(&self) -> u8 {
+        match self {
+            Self::A { .. } => 1,
+            Self::B { .. } => 2,
+        }
+    }
+
+}
+
 impl VariableSized for TestStructTestFlagA {
     fn size(&self) -> usize {
         match self {
@@ -360,14 +370,14 @@ impl TestStructTestFlag {
 
     pub const fn new_A(a: TestStructTestFlagA) -> Self {
         Self {
-            inner: TestFlag::A,
+            inner: a.as_flag_value(),
             a: Some(a),
             c: None,
         }
     }
 
     pub fn set_A(&mut self, a: TestStructTestFlagA) -> Self {
-        self.inner |= TestFlag::A;
+        self.inner |= a.as_flag_value();
         self.a = Some(a);
         self.clone()
     }

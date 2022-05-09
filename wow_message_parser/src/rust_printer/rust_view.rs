@@ -688,6 +688,10 @@ fn create_else_if_flag(
         enumerators.push(enumerator);
     }
 
+    let flag_int_ty = match find_subject(current_scope, parent_scope, statement).ty() {
+        RustType::Flag { int_ty, .. } => int_ty.clone(),
+        _ => unreachable!(),
+    };
     let flag_ty_name = &find_subject(current_scope, parent_scope, statement).original_ty;
 
     // Create new Enum RustMember
@@ -696,7 +700,7 @@ fn create_else_if_flag(
         ty: RustType::Enum {
             ty_name: format!("{}{}", flag_ty_name, enumerator),
             enumerators,
-            int_ty: IntegerType::U8, // Does not matter
+            int_ty: flag_int_ty,
             is_simple: false,
             is_elseif: true,
         },

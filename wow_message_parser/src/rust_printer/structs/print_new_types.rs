@@ -11,6 +11,20 @@ use crate::rust_printer::structs::print_common_impls::{
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::{ImplType, Writer};
 
+fn print_as_flag_value(s: &mut Writer, rd: &RustDefiner) {
+    s.funcn_const("as_flag_value(&self)", rd.int_ty().rust_str(), |s| {
+        s.body("match self", |s| {
+            for enumerator in rd.enumerators() {
+                s.wln(format!(
+                    "Self::{enumerator} {{ .. }} => {value},",
+                    enumerator = enumerator.name(),
+                    value = enumerator.value().int()
+                ));
+            }
+        });
+    })
+}
+
 pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
     for rd in e.rust_object().get_rust_definers() {
         match rd.definer_type() {
@@ -26,6 +40,14 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
 
                     s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
                         print_write_for_new_enum(s, &rd);
+
+                        if rd.is_elseif() {
+                            print_as_flag_value(s, &rd);
+                        }
+                    });
+                } else {
+                    s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
+                        print_as_flag_value(s, &rd);
                     });
                 }
                 print_size_for_new_enum(s, &rd);
@@ -165,11 +187,18 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                 "Self",
                 |s| {
                     s.body("Self", |s| {
-                        s.wln(format!(
-                            "inner: {parent}::{name},",
-                            parent = rd.original_ty_name(),
-                            name = enumerator.name()
-                        ));
+                        if enumerator.contains_elseif() {
+                            s.wln(format!(
+                                "inner: {lower_name}.as_flag_value(),",
+                                lower_name = enumerator.name().to_lowercase(),
+                            ));
+                        } else {
+                            s.wln(format!(
+                                "inner: {parent}::{name},",
+                                parent = rd.original_ty_name(),
+                                name = enumerator.name()
+                            ));
+                        }
 
                         for inner_enumerator in rd.complex_flag_enumerators() {
                             if inner_enumerator.name() == enumerator.name() {
@@ -197,11 +226,18 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                 ),
                 "Self",
                 |s| {
-                    s.wln(format!(
-                        "self.inner |= {ty}::{name};",
-                        ty = rd.original_ty_name(),
-                        name = enumerator.name()
-                    ));
+                    if enumerator.contains_elseif() {
+                        s.wln(format!(
+                            "self.inner |= {lower_name}.as_flag_value();",
+                            lower_name = enumerator.name().to_lowercase(),
+                        ));
+                    } else {
+                        s.wln(format!(
+                            "self.inner |= {ty}::{name};",
+                            ty = rd.original_ty_name(),
+                            name = enumerator.name()
+                        ));
+                    }
 
                     s.wln(format!(
                         "self.{name_lower} = Some({name_lower});",
