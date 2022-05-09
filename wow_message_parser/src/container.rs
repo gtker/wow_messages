@@ -6,7 +6,6 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{
     ArraySize, ArrayType, ContainerValue, ObjectType, VerifiedContainerValue,
 };
-use crate::rust_printer::complex_print::RustStructComplexTree;
 use crate::rust_printer::new_enums::parse::add_to_statement;
 use crate::rust_printer::new_enums::NewIfStatement;
 use crate::rust_printer::rust_view::RustObject;
@@ -48,7 +47,6 @@ pub struct Container {
     constant: Option<bool>,
     members: Vec<StructMember>,
     kvs: Tags,
-    nested_types: Option<RustStructComplexTree>,
     tests: Vec<TestCase>,
     file_info: FileInfo,
     only_has_io_error: Option<bool>,
@@ -455,10 +453,6 @@ impl Container {
 
     pub fn file_info(&self) -> &FileInfo {
         &self.file_info
-    }
-
-    pub fn nested_types(&self) -> &RustStructComplexTree {
-        self.nested_types.as_ref().unwrap()
     }
 
     pub fn rust_object(&self) -> &RustObject {
@@ -925,7 +919,6 @@ impl Container {
             constant: None,
             members,
             kvs,
-            nested_types: None,
             tests: vec![],
             file_info,
             only_has_io_error: None,
@@ -1155,7 +1148,6 @@ impl Container {
 
         self.set_io_errors(o);
 
-        self.add_nested_types(RustStructComplexTree::new(self, o.enums(), o.flags()));
         self.set_all_values_to_verified(o);
 
         for m in &self.members.clone() {
@@ -1167,10 +1159,6 @@ impl Container {
 
     pub fn fields_mut(&mut self) -> &mut [StructMember] {
         &mut self.members
-    }
-
-    fn add_nested_types(&mut self, nested_types: RustStructComplexTree) {
-        self.nested_types = Some(nested_types);
     }
 }
 
