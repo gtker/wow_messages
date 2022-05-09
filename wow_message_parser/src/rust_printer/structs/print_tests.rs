@@ -256,20 +256,14 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
             s.wln_no_indent(format!(r#"String::from("{}"),"#, value,));
         }
         TestValue::Flag(flags) => {
-            if !e.nested_types().new_enums().is_empty() {
+            let rd = e.rust_object().get_rust_definer(&m.ty().str());
+            if !rd.is_simple() {
                 s.wln_no_indent(format!("{ty}::empty()", ty = m.ty()));
                 s.inc_indent();
 
-                let set_flags = e
-                    .nested_types()
-                    .new_enums()
-                    .iter()
-                    .find(|a| a.variable_name() == m.name())
-                    .unwrap()
-                    .fields();
-                for f in set_flags {
+                for f in rd.enumerators() {
                     if let Some(_) = flags.iter().find(|a| a.as_str() == f.name()) {
-                        if f.is_simple() {
+                        if !f.has_members_in_struct() {
                             s.wln(format!(".set_{variable_name}()", variable_name = f.name()));
                             continue;
                         }

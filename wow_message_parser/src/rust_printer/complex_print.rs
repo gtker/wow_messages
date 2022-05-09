@@ -313,10 +313,6 @@ fn add_new_enums(
 }
 
 impl RustStructComplexTree {
-    pub fn new_enums(&self) -> &[ComplexEnum] {
-        &self.new_enums
-    }
-
     pub fn new(s: &Container, enums: &[Definer], flags: &[Definer]) -> Self {
         let mut tree = OrderedMap::new();
 
