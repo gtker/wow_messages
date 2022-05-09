@@ -76,7 +76,7 @@ pub fn get_enumerators(
     if let Equation::NotEquals { value } = &statement.conditional.equations()[0] {
         enumerators_that_arent_else.push(value.clone());
         let mut v = Vec::new();
-        for m in &mut statement.members {
+        for m in statement.members_mut() {
             inner(m, &mut v, o, c);
         }
         for eq in d.fields() {
@@ -105,7 +105,7 @@ pub fn get_enumerators(
     }
 
     let mut v = Vec::new();
-    for m in &mut statement.members {
+    for m in statement.members_mut() {
         inner(m, &mut v, o, c);
     }
     for eq in statement.member_enumerators() {
@@ -119,7 +119,7 @@ pub fn get_enumerators(
 
     for is in statement.else_ifs_mut() {
         let mut v = Vec::new();
-        for m in &mut is.members {
+        for m in is.members_mut() {
             inner(m, &mut v, o, c);
         }
         for eq in is.member_enumerators() {

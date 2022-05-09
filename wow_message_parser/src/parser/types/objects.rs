@@ -481,7 +481,7 @@ version 2: {:#?} in {} line {}",
                 Type::AuraMask => {}
             },
             StructMember::IfStatement(statement) => {
-                for member in &statement.members {
+                for member in statement.members() {
                     self.check_value(member, tags);
                 }
                 for member in &statement.else_statement_members {

@@ -1334,7 +1334,7 @@ pub enum StructMember {
 #[derive(Debug, Clone)]
 pub struct IfStatement {
     pub conditional: Conditional,
-    pub members: Vec<StructMember>,
+    members: Vec<StructMember>,
     else_ifs: Vec<IfStatement>,
     pub else_statement_members: Vec<StructMember>,
     new_enum: Option<NewIfStatement>,
