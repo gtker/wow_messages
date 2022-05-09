@@ -207,7 +207,7 @@ pub enum EnumeratorType {
     },
 }
 
-fn get_enumerator<'a>(
+pub fn get_enumerator<'a>(
     enumerators: &'a [RustEnumerator],
     enumerator_name: &str,
 ) -> Option<(&'a RustEnumerator, EnumeratorType)> {

@@ -2,6 +2,8 @@ mod cmd_auth_logon_challenge_client;
 pub use cmd_auth_logon_challenge_client::*;
 mod cmd_auth_reconnect_challenge_client;
 pub use cmd_auth_reconnect_challenge_client::*;
+mod inner_flag;
+pub use inner_flag::*;
 mod locale;
 pub use locale::*;
 mod os;

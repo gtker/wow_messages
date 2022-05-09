@@ -19,6 +19,7 @@
 
 # Login Definers
 - [AccountFlag](docs/accountflag.md)
+- [InnerFlag](docs/innerflag.md)
 - [Locale](docs/locale.md)
 - [LoginResult](docs/loginresult.md)
 - [Os](docs/os.md)

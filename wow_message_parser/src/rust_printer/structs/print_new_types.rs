@@ -8,6 +8,7 @@ use crate::rust_printer::structs::print_common_impls::print_write::{
 use crate::rust_printer::structs::print_common_impls::{
     print_constant, print_size_of_ty_rust_view,
 };
+use crate::rust_printer::structs::print_tests::get_enumerator;
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::{ImplType, Writer};
 
@@ -330,6 +331,7 @@ fn print_types_for_new_flag_flag_elseif(
     o: &Objects,
     ne: &NewIfStatement,
     enumerator_name: &str,
+    rd: &RustDefiner,
 ) {
     let new_ty_name = format!("{}{}", ne.new_ty_name(), enumerator_name);
 
@@ -351,15 +353,11 @@ fn print_types_for_new_flag_flag_elseif(
                     "Self::{enumerator}",
                     enumerator = enumerator.name()
                 ));
-                for f in enumerator.fields() {
-                    match f {
-                        NewEnumStructMember::Definition(d) => {
-                            s.wln(format!("{name},", name = d.name()));
-                        }
-                        NewEnumStructMember::IfStatement(statement) => {
-                            s.wln(format!("{name},", name = statement.variable_name()));
-                        }
-                    }
+                let members = get_enumerator(rd.enumerators(), enumerator.name())
+                    .unwrap()
+                    .0;
+                for m in members.members_in_struct() {
+                    s.wln(format!("{},", m.name()));
                 }
                 s.closing_curly_with(" => {");
                 s.inc_indent();
@@ -411,7 +409,7 @@ fn print_types_for_new_flag_flag_elseif(
 fn print_types_for_new_flag(s: &mut Writer, e: &Container, o: &Objects, rd: &RustDefiner) {
     for enumerator in rd.complex_flag_enumerators() {
         if let Some(ne) = e.complex_enum_enumerator_has_else_if(enumerator.name()) {
-            print_types_for_new_flag_flag_elseif(s, e, o, ne, enumerator.name());
+            print_types_for_new_flag_flag_elseif(s, e, o, ne, enumerator.name(), rd);
             continue;
         }
 
