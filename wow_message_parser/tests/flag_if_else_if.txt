@@ -504,7 +504,7 @@ impl FlagIfElseIfSimpleFlagONE {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub enum FlagIfElseIfFlagIfElseIfONE_IF {
+pub enum FlagIfElseIfFlagIfElseIf_ONE_IF {
     ONE_IF {
         b_if: u8,
     },
@@ -516,33 +516,33 @@ pub enum FlagIfElseIfFlagIfElseIfONE_IF {
     },
 }
 
-impl From<&FlagIfElseIfONE_IF> for FlagIfElseIfFlagIfElseIfONE_IF {
-    fn from(e: &FlagIfElseIfONE_IF) -> Self {
+impl From<&FlagIfElseIf_ONE_IF> for FlagIfElseIfFlagIfElseIf_ONE_IF {
+    fn from(e: &FlagIfElseIf_ONE_IF) -> Self {
         match &e {
-            FlagIfElseIfONE_IF::ONE_IF => Self::ONE_IF {
+            FlagIfElseIf_ONE_IF::ONE_IF => Self::ONE_IF {
                 b_if: Default::default(),
             },
-            FlagIfElseIfONE_IF::TWO_ELSEIF => Self::TWO_ELSEIF {
+            FlagIfElseIf_ONE_IF::TWO_ELSEIF => Self::TWO_ELSEIF {
                 s: Default::default(),
             },
-            FlagIfElseIfONE_IF::FOUR_ELSEIF => Self::FOUR_ELSEIF {
+            FlagIfElseIf_ONE_IF::FOUR_ELSEIF => Self::FOUR_ELSEIF {
                 elseif2: Default::default(),
             },
         }
     }
 }
 
-impl From<&FlagIfElseIfFlagIfElseIfONE_IF> for FlagIfElseIfONE_IF {
-    fn from(v: &FlagIfElseIfFlagIfElseIfONE_IF) -> Self {
+impl From<&FlagIfElseIfFlagIfElseIf_ONE_IF> for FlagIfElseIf_ONE_IF {
+    fn from(v: &FlagIfElseIfFlagIfElseIf_ONE_IF) -> Self {
         match &v {
-            FlagIfElseIfFlagIfElseIfONE_IF::ONE_IF { .. } => Self::ONE_IF,
-            FlagIfElseIfFlagIfElseIfONE_IF::TWO_ELSEIF { .. } => Self::TWO_ELSEIF,
-            FlagIfElseIfFlagIfElseIfONE_IF::FOUR_ELSEIF { .. } => Self::FOUR_ELSEIF,
+            FlagIfElseIfFlagIfElseIf_ONE_IF::ONE_IF { .. } => Self::ONE_IF,
+            FlagIfElseIfFlagIfElseIf_ONE_IF::TWO_ELSEIF { .. } => Self::TWO_ELSEIF,
+            FlagIfElseIfFlagIfElseIf_ONE_IF::FOUR_ELSEIF { .. } => Self::FOUR_ELSEIF,
         }
     }
 }
 
-impl Default for FlagIfElseIfFlagIfElseIfONE_IF {
+impl Default for FlagIfElseIfFlagIfElseIf_ONE_IF {
     fn default() -> Self {
         // First enumerator without any fields
         Self::ONE_IF {
@@ -551,36 +551,36 @@ impl Default for FlagIfElseIfFlagIfElseIfONE_IF {
     }
 }
 
-impl FlagIfElseIfFlagIfElseIfONE_IF {
+impl FlagIfElseIfFlagIfElseIf_ONE_IF {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FlagIfElseIfONE_IF = self.into();
+        let a: FlagIfElseIf_ONE_IF = self.into();
         a.write(w)?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FlagIfElseIfONE_IF = self.into();
+        let a: FlagIfElseIf_ONE_IF = self.into();
         a.tokio_write(w).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: FlagIfElseIfONE_IF = self.into();
+        let a: FlagIfElseIf_ONE_IF = self.into();
         a.astd_write(w).await?;
         Ok(())
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: FlagIfElseIfONE_IF = self.into();
+        let a: FlagIfElseIf_ONE_IF = self.into();
         a.as_int() as u8
     }
 
 }
 
-impl VariableSized for FlagIfElseIfFlagIfElseIfONE_IF {
+impl VariableSized for FlagIfElseIfFlagIfElseIf_ONE_IF {
     fn size(&self) -> usize {
         match self {
             Self::ONE_IF {
@@ -605,7 +605,7 @@ impl VariableSized for FlagIfElseIfFlagIfElseIfONE_IF {
     }
 }
 
-impl MaximumPossibleSized for FlagIfElseIfFlagIfElseIfONE_IF {
+impl MaximumPossibleSized for FlagIfElseIfFlagIfElseIf_ONE_IF {
     fn maximum_possible_size() -> usize {
         0
     }

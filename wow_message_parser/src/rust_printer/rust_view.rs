@@ -651,7 +651,7 @@ fn create_else_if_flag(
     let rm = RustMember {
         name: enumerator.to_string(),
         ty: RustType::Enum {
-            ty_name: format!("{}{}", struct_ty_name, enumerator),
+            ty_name: format!("{}_{}", struct_ty_name, enumerator),
             enumerators,
             int_ty: IntegerType::U8, // Does not matter
             is_simple: false,
