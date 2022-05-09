@@ -8,6 +8,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{
     Array, ArraySize, ArrayType, FloatingPointType, VerifiedContainerValue,
 };
+use crate::test_case::{TestCase, TestCaseMember, TestValue};
 use serde::Serialize;
 
 pub fn containers_to_ir(containers: &[&Container]) -> Vec<IrContainer> {
@@ -37,6 +38,8 @@ fn container_to_ir(e: &Container) -> IrContainer {
         .map(|a| a.into())
         .collect();
 
+    let tests = e.tests().iter().map(|a| a.into()).collect();
+
     IrContainer {
         name: e.name().to_string(),
         object_type: e.container_type().into(),
@@ -44,7 +47,7 @@ fn container_to_ir(e: &Container) -> IrContainer {
         members,
         optional,
         tags: IrTags::from_tags(e.tags()),
-        tests: vec![],
+        tests,
         file_info: IrFileInfo {
             file_name: e.file_info().name().to_string(),
             start_position: e.file_info().start_line(),
@@ -356,11 +359,38 @@ pub struct IrTestCase {
     file_info: IrFileInfo,
 }
 
+impl From<&TestCase> for IrTestCase {
+    fn from(v: &TestCase) -> Self {
+        let members = v.members().iter().map(|a| a.into()).collect();
+
+        Self {
+            subject: v.subject().to_string(),
+            members,
+            raw_bytes: v.raw_bytes().to_vec(),
+            tags: IrTags::from_tags(v.tags()),
+            file_info: IrFileInfo {
+                file_name: v.file_info().name().to_string(),
+                start_position: v.file_info().start_line(),
+            },
+        }
+    }
+}
+
 #[derive(Debug, Serialize)]
 pub struct IrTestCaseMember {
     variable_name: String,
     verified_value: IrTestValue,
     tags: IrTags,
+}
+
+impl From<&TestCaseMember> for IrTestCaseMember {
+    fn from(v: &TestCaseMember) -> Self {
+        Self {
+            variable_name: v.name().to_string(),
+            verified_value: v.value().into(),
+            tags: IrTags::from_tags(v.tags()),
+        }
+    }
 }
 
 #[derive(Debug, Serialize)]
@@ -383,4 +413,37 @@ pub enum IrTestValue {
         members: Vec<IrTestCaseMember>,
     },
     ArrayOfSubObject(String, Vec<Vec<IrTestCaseMember>>),
+}
+
+impl From<&TestValue> for IrTestValue {
+    fn from(v: &TestValue) -> Self {
+        match v {
+            TestValue::Number(i) => Self::Number(i.into()),
+            TestValue::Guid(i) => Self::Guid(i.into()),
+            TestValue::FloatingNumber {
+                value,
+                original_string,
+            } => Self::FloatingNumber {
+                value: *value,
+                original_string: original_string.to_string(),
+            },
+            TestValue::Array { values, size } => Self::Array {
+                values: values.to_vec(),
+                size: size.clone().into(),
+            },
+            TestValue::String(s) => Self::String(s.to_string()),
+            TestValue::Flag(f) => Self::Flag(f.to_vec()),
+            TestValue::Enum(e) => Self::Enum(e.into()),
+            TestValue::SubObject { ty_name, members } => Self::SubObject {
+                ty_name: ty_name.to_string(),
+                members: members.iter().map(|a| a.into()).collect(),
+            },
+            TestValue::ArrayOfSubObject(s, t) => Self::ArrayOfSubObject(
+                s.to_string(),
+                t.iter()
+                    .map(|a| a.iter().map(|a| a.into()).collect::<Vec<_>>())
+                    .collect(),
+            ),
+        }
+    }
 }
