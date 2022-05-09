@@ -123,24 +123,6 @@ impl NewItemSource {
     }
 
     #[cfg(feature = "sync")]
-    pub fn read_u32_le<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, NewItemSourceError> {
-        let a = crate::util::read_u32_le(r)?;
-        Ok((a as u32).try_into()?)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_read_u32_le<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, NewItemSourceError> {
-        let a = crate::util::tokio_read_u32_le(r).await?;
-        Ok((a as u32).try_into()?)
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_read_u32_le<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, NewItemSourceError> {
-        let a = crate::util::astd_read_u32_le(r).await?;
-        Ok((a as u32).try_into()?)
-    }
-
-    #[cfg(feature = "sync")]
     pub fn read_u64_le<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, NewItemSourceError> {
         let a = crate::util::read_u64_le(r)?;
         Ok((a as u32).try_into()?)
