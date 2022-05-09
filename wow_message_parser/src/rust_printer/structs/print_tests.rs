@@ -264,7 +264,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                 for f in rd.enumerators() {
                     if let Some(_) = flags.iter().find(|a| a.as_str() == f.name()) {
                         if !f.has_members_in_struct() {
-                            s.wln(format!(".set_{variable_name}()", variable_name = f.name()));
+                            s.w(format!(".set_{variable_name}()", variable_name = f.name()));
                             continue;
                         }
                         s.w(format!(".set_{variable_name}(", variable_name = f.name(),));
@@ -286,6 +286,7 @@ fn print_value(s: &mut Writer, m: &RustMember, t: &[TestCaseMember], e: &Contain
                 }
 
                 s.wln_no_indent(",");
+                s.dec_indent();
             } else {
                 s.wln_no_indent(format!("{ty}::empty()", ty = m.ty()));
                 s.inc_indent();

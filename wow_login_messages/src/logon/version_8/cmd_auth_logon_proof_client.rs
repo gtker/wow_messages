@@ -974,2051 +974,1037 @@ mod test {
                 },
             ],
             security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                .set_NONE()
+                .set_NONE(),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    async fn tokio_CMD_AUTH_LOGON_PROOF_Client0() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x02, 0xFF, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+             0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+             0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13,
+             0xFE, 0x00, 0xEE, 0xBE, 0xAD, 0xDE, 0x00, 0x01, 0x02, 0x03, 0x01, 0x02,
+             0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E,
+             0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x00, ];
+
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![
+                TelemetryKey {
+                    unknown1: 0xFF,
+                    unknown2: 0xDEADBEEF,
+                    unknown3: [ 0x01, 0x02, 0x03, 0x04, ],
+                    unknown4: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                },
+                TelemetryKey {
+                    unknown1: 0xFE,
+                    unknown2: 0xDEADBEEE,
+                    unknown3: [ 0x00, 0x01, 0x02, 0x03, ],
+                    unknown4: [ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
+                         0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
+                         0x13, 0x14, ],
+                },
+            ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_NONE(),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", async_std::test)]
+    async fn astd_CMD_AUTH_LOGON_PROOF_Client0() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x02, 0xFF, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+             0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+             0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13,
+             0xFE, 0x00, 0xEE, 0xBE, 0xAD, 0xDE, 0x00, 0x01, 0x02, 0x03, 0x01, 0x02,
+             0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E,
+             0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x00, ];
+
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![
+                TelemetryKey {
+                    unknown1: 0xFF,
+                    unknown2: 0xDEADBEEF,
+                    unknown3: [ 0x01, 0x02, 0x03, 0x04, ],
+                    unknown4: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                },
+                TelemetryKey {
+                    unknown1: 0xFE,
+                    unknown2: 0xDEADBEEE,
+                    unknown3: [ 0x00, 0x01, 0x02, 0x03, ],
+                    unknown4: [ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
+                         0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
+                         0x13, 0x14, ],
+                },
+            ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_NONE(),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_LOGON_PROOF_Client1() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x01, 0xFF, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+             0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+             0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13,
+             0x00, ];
+
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![
+                TelemetryKey {
+                    unknown1: 0xFF,
+                    unknown2: 0xDEADBEEF,
+                    unknown3: [ 0x01, 0x02, 0x03, 0x04, ],
+                    unknown4: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                },
+            ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_NONE(),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    async fn tokio_CMD_AUTH_LOGON_PROOF_Client1() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x01, 0xFF, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+             0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+             0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13,
+             0x00, ];
+
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![
+                TelemetryKey {
+                    unknown1: 0xFF,
+                    unknown2: 0xDEADBEEF,
+                    unknown3: [ 0x01, 0x02, 0x03, 0x04, ],
+                    unknown4: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                },
+            ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_NONE(),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", async_std::test)]
+    async fn astd_CMD_AUTH_LOGON_PROOF_Client1() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x01, 0xFF, 0x00, 0xEF, 0xBE, 0xAD, 0xDE,
+             0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+             0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13,
+             0x00, ];
+
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![
+                TelemetryKey {
+                    unknown1: 0xFF,
+                    unknown2: 0xDEADBEEF,
+                    unknown3: [ 0x01, 0x02, 0x03, 0x04, ],
+                    unknown4: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                },
+            ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_NONE(),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_LOGON_PROOF_Client2() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x00, ];
+
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_NONE(),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest));
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    async fn tokio_CMD_AUTH_LOGON_PROOF_Client2() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x00, ];
+
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_NONE(),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", async_std::test)]
+    async fn astd_CMD_AUTH_LOGON_PROOF_Client2() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x00, ];
+
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_NONE(),
+        };
+
+        let header_size = 1;
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
+
+        assert_eq!(t.size() + header_size, raw.len());
+
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
+
+        assert_eq!(dest, raw);
+    }
+
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_LOGON_PROOF_Client3() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x01, 0x00, 0x01, 0x02, 0x03, 0x04,
+             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00,
+             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
+             0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, ];
+
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
+                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
+                })
 ,
-            };
+        };
 
-            let header_size = 1;
-            let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
-            let t = match t {
-                ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-            };
+        let header_size = 1;
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
 
-            assert_eq!(t.client_public_key, expected.client_public_key);
-            assert_eq!(t.client_proof, expected.client_proof);
-            assert_eq!(t.crc_hash, expected.crc_hash);
-            assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-            assert_eq!(t.security_flag, expected.security_flag);
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
 
-            assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, raw.len());
 
-            let mut dest = Vec::with_capacity(raw.len());
-            expected.write(&mut std::io::Cursor::new(&mut dest));
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest));
 
-            assert_eq!(dest, raw);
-        }
+        assert_eq!(dest, raw);
+    }
 
-        #[cfg(feature = "async_tokio")]
-        #[cfg_attr(feature = "async_tokio", tokio::test)]
-        async fn tokio_CMD_AUTH_LOGON_PROOF_Client0() {
-            let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
-                 0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45,
-                 0xE1, 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3,
-                 0x1D, 0xD7, 0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18,
-                 0xD8, 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC,
-                 0x3E, 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
-                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x02,
-                 0xFF, 0x00, 0xEF, 0xBE, 0xAD, 0xDE, 0x01, 0x02, 0x03, 0x04, 0x00,
-                 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B,
-                 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0xFE, 0x00, 0xEE,
-                 0xBE, 0xAD, 0xDE, 0x00, 0x01, 0x02, 0x03, 0x01, 0x02, 0x03, 0x04,
-                 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
-                 0x10, 0x11, 0x12, 0x13, 0x14, 0x00, ];
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    async fn tokio_CMD_AUTH_LOGON_PROOF_Client3() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x01, 0x00, 0x01, 0x02, 0x03, 0x04,
+             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00,
+             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
+             0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, ];
 
-            let expected = CMD_AUTH_LOGON_PROOF_Client {
-                client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
-                     0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45,
-                     0xE1, 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE,
-                     0xD3, 0x1D, 0xD7, 0x08, ],
-                client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18,
-                     0xD8, 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65,
-                     0xEC, 0x3E, ],
-                crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15,
-                     0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00,
-                     0xD0, ],
-                telemetry_keys: vec![
-                    TelemetryKey {
-                        unknown1: 0xFF,
-                        unknown2: 0xDEADBEEF,
-                        unknown3: [ 0x01, 0x02, 0x03, 0x04, ],
-                        unknown4: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                             0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10,
-                             0x11, 0x12, 0x13, ],
-                    },
-                    TelemetryKey {
-                        unknown1: 0xFE,
-                        unknown2: 0xDEADBEEE,
-                        unknown3: [ 0x00, 0x01, 0x02, 0x03, ],
-                        unknown4: [ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-                             0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
-                             0x12, 0x13, 0x14, ],
-                    },
-                ],
-                security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                    .set_NONE()
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
+                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
+                })
 ,
-                };
+        };
 
-                let header_size = 1;
-                let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
-                let t = match t {
-                    ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                    opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                };
+        let header_size = 1;
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
 
-                assert_eq!(t.client_public_key, expected.client_public_key);
-                assert_eq!(t.client_proof, expected.client_proof);
-                assert_eq!(t.crc_hash, expected.crc_hash);
-                assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                assert_eq!(t.security_flag, expected.security_flag);
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
 
-                assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, raw.len());
 
-                let mut dest = Vec::with_capacity(raw.len());
-                expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
 
-                assert_eq!(dest, raw);
-            }
+        assert_eq!(dest, raw);
+    }
 
-            #[cfg(feature = "async_std")]
-            #[cfg_attr(feature = "async_std", async_std::test)]
-            async fn astd_CMD_AUTH_LOGON_PROOF_Client0() {
-                let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4,
-                     0xC8, 0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E,
-                     0x2E, 0x45, 0xE1, 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E,
-                     0x11, 0xCE, 0xD3, 0x1D, 0xD7, 0x08, 0x6B, 0x1E, 0x48, 0x1B,
-                     0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE, 0x5C, 0x59, 0xD5,
-                     0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D, 0xE1,
-                     0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8,
-                     0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x02, 0xFF, 0x00, 0xEF,
-                     0xBE, 0xAD, 0xDE, 0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02,
-                     0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
-                     0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0xFE, 0x00, 0xEE,
-                     0xBE, 0xAD, 0xDE, 0x00, 0x01, 0x02, 0x03, 0x01, 0x02, 0x03,
-                     0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D,
-                     0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x00, ];
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", async_std::test)]
+    async fn astd_CMD_AUTH_LOGON_PROOF_Client3() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x01, 0x00, 0x01, 0x02, 0x03, 0x04,
+             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00,
+             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
+             0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, ];
 
-                let expected = CMD_AUTH_LOGON_PROOF_Client {
-                    client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
-                         0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E,
-                         0x45, 0xE1, 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11,
-                         0xCE, 0xD3, 0x1D, 0xD7, 0x08, ],
-                    client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18,
-                         0xD8, 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65,
-                         0xEC, 0x3E, ],
-                    crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67,
-                         0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB,
-                         0x00, 0xD0, ],
-                    telemetry_keys: vec![
-                        TelemetryKey {
-                            unknown1: 0xFF,
-                            unknown2: 0xDEADBEEF,
-                            unknown3: [ 0x01, 0x02, 0x03, 0x04, ],
-                            unknown4: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
-                                 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E,
-                                 0x0F, 0x10, 0x11, 0x12, 0x13, ],
-                        },
-                        TelemetryKey {
-                            unknown1: 0xFE,
-                            unknown2: 0xDEADBEEE,
-                            unknown3: [ 0x00, 0x01, 0x02, 0x03, ],
-                            unknown4: [ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                                 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
-                                 0x10, 0x11, 0x12, 0x13, 0x14, ],
-                        },
-                    ],
-                    security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                        .set_NONE()
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
+                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
+                })
 ,
-                    };
+        };
 
-                    let header_size = 1;
-                    let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
-                    let t = match t {
-                        ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                        opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                    };
+        let header_size = 1;
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
 
-                    assert_eq!(t.client_public_key, expected.client_public_key);
-                    assert_eq!(t.client_proof, expected.client_proof);
-                    assert_eq!(t.crc_hash, expected.crc_hash);
-                    assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                    assert_eq!(t.security_flag, expected.security_flag);
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
 
-                    assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, raw.len());
 
-                    let mut dest = Vec::with_capacity(raw.len());
-                    expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
 
-                    assert_eq!(dest, raw);
-                }
+        assert_eq!(dest, raw);
+    }
 
-                #[cfg(feature = "sync")]
-                #[cfg_attr(feature = "sync", test)]
-                fn CMD_AUTH_LOGON_PROOF_Client1() {
-                    let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83,
-                         0xC4, 0xC8, 0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE,
-                         0x4E, 0x2E, 0x45, 0xE1, 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE,
-                         0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7, 0x08, 0x6B, 0x1E, 0x48,
-                         0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE, 0x5C, 0x59,
-                         0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
-                         0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE,
-                         0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x01, 0xFF, 0x00,
-                         0xEF, 0xBE, 0xAD, 0xDE, 0x01, 0x02, 0x03, 0x04, 0x00, 0x01,
-                         0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B,
-                         0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x00, ];
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_LOGON_PROOF_Client4() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x03, 0x00, 0x01, 0x02, 0x03, 0x04,
+             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00,
+             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
+             0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x10, 0x20, 0x30, 0x40, 0xEF,
+             0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
 
-                    let expected = CMD_AUTH_LOGON_PROOF_Client {
-                        client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4,
-                             0xC8, 0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE,
-                             0x4E, 0x2E, 0x45, 0xE1, 0xF7, 0xCC, 0x8F, 0x1C, 0xF5,
-                             0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7, 0x08, ],
-                        client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1,
-                             0x18, 0xD8, 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81,
-                             0x2E, 0x65, 0xEC, 0x3E, ],
-                        crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67,
-                             0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58,
-                             0xBB, 0x00, 0xD0, ],
-                        telemetry_keys: vec![
-                            TelemetryKey {
-                                unknown1: 0xFF,
-                                unknown2: 0xDEADBEEF,
-                                unknown3: [ 0x01, 0x02, 0x03, 0x04, ],
-                                unknown4: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
-                                     0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D,
-                                     0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, ],
-                            },
-                        ],
-                        security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                            .set_NONE()
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
+                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
+                })
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
+                    unknown0: 0x10,
+                    unknown1: 0x20,
+                    unknown2: 0x30,
+                    unknown3: 0x40,
+                    unknown4: 0xDEADBEEF,
+                })
 ,
-                        };
+        };
 
-                        let header_size = 1;
-                        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
-                        let t = match t {
-                            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                        };
+        let header_size = 1;
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
 
-                        assert_eq!(t.client_public_key, expected.client_public_key);
-                        assert_eq!(t.client_proof, expected.client_proof);
-                        assert_eq!(t.crc_hash, expected.crc_hash);
-                        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                        assert_eq!(t.security_flag, expected.security_flag);
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
 
-                        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, raw.len());
 
-                        let mut dest = Vec::with_capacity(raw.len());
-                        expected.write(&mut std::io::Cursor::new(&mut dest));
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest));
 
-                        assert_eq!(dest, raw);
-                    }
+        assert_eq!(dest, raw);
+    }
 
-                    #[cfg(feature = "async_tokio")]
-                    #[cfg_attr(feature = "async_tokio", tokio::test)]
-                    async fn tokio_CMD_AUTH_LOGON_PROOF_Client1() {
-                        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83,
-                             0xC4, 0xC8, 0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A,
-                             0xEE, 0x4E, 0x2E, 0x45, 0xE1, 0xF7, 0xCC, 0x8F, 0x1C,
-                             0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7, 0x08,
-                             0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
-                             0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65,
-                             0xEC, 0x3E, 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A,
-                             0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A,
-                             0x58, 0xBB, 0x00, 0xD0, 0x01, 0xFF, 0x00, 0xEF, 0xBE,
-                             0xAD, 0xDE, 0x01, 0x02, 0x03, 0x04, 0x00, 0x01, 0x02,
-                             0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B,
-                             0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x00, ];
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    async fn tokio_CMD_AUTH_LOGON_PROOF_Client4() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x03, 0x00, 0x01, 0x02, 0x03, 0x04,
+             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00,
+             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
+             0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x10, 0x20, 0x30, 0x40, 0xEF,
+             0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
 
-                        let expected = CMD_AUTH_LOGON_PROOF_Client {
-                            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4,
-                                 0xC8, 0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A,
-                                 0xEE, 0x4E, 0x2E, 0x45, 0xE1, 0xF7, 0xCC, 0x8F,
-                                 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
-                                 0xD7, 0x08, ],
-                            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04,
-                                 0xA1, 0x18, 0xD8, 0xF2, 0xDE, 0x5C, 0x59, 0xD5,
-                                 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
-                            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A,
-                                 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
-                                 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
-                            telemetry_keys: vec![
-                                TelemetryKey {
-                                    unknown1: 0xFF,
-                                    unknown2: 0xDEADBEEF,
-                                    unknown3: [ 0x01, 0x02, 0x03, 0x04, ],
-                                    unknown4: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
-                                         0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
-                                         0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, ],
-                                },
-                            ],
-                            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                .set_NONE()
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
+                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
+                })
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
+                    unknown0: 0x10,
+                    unknown1: 0x20,
+                    unknown2: 0x30,
+                    unknown3: 0x40,
+                    unknown4: 0xDEADBEEF,
+                })
 ,
-                            };
+        };
 
-                            let header_size = 1;
-                            let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
-                            let t = match t {
-                                ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                            };
+        let header_size = 1;
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
 
-                            assert_eq!(t.client_public_key, expected.client_public_key);
-                            assert_eq!(t.client_proof, expected.client_proof);
-                            assert_eq!(t.crc_hash, expected.crc_hash);
-                            assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                            assert_eq!(t.security_flag, expected.security_flag);
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
 
-                            assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, raw.len());
 
-                            let mut dest = Vec::with_capacity(raw.len());
-                            expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
 
-                            assert_eq!(dest, raw);
-                        }
+        assert_eq!(dest, raw);
+    }
 
-                        #[cfg(feature = "async_std")]
-                        #[cfg_attr(feature = "async_std", async_std::test)]
-                        async fn astd_CMD_AUTH_LOGON_PROOF_Client1() {
-                            let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1,
-                                 0x83, 0xC4, 0xC8, 0xA9, 0x50, 0x0E, 0x3F, 0x5A,
-                                 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1, 0xF7,
-                                 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE,
-                                 0xD3, 0x1D, 0xD7, 0x08, 0x6B, 0x1E, 0x48, 0x1B,
-                                 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE, 0x5C,
-                                 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E,
-                                 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67,
-                                 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A,
-                                 0x58, 0xBB, 0x00, 0xD0, 0x01, 0xFF, 0x00, 0xEF,
-                                 0xBE, 0xAD, 0xDE, 0x01, 0x02, 0x03, 0x04, 0x00,
-                                 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-                                 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10,
-                                 0x11, 0x12, 0x13, 0x00, ];
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", async_std::test)]
+    async fn astd_CMD_AUTH_LOGON_PROOF_Client4() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x03, 0x00, 0x01, 0x02, 0x03, 0x04,
+             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00,
+             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
+             0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x10, 0x20, 0x30, 0x40, 0xEF,
+             0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
 
-                            let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83,
-                                     0xC4, 0xC8, 0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D,
-                                     0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1, 0xF7, 0xCC,
-                                     0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3,
-                                     0x1D, 0xD7, 0x08, ],
-                                client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04,
-                                     0xA1, 0x18, 0xD8, 0xF2, 0xDE, 0x5C, 0x59, 0xD5,
-                                     0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
-                                crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E,
-                                     0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8,
-                                     0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
-                                telemetry_keys: vec![
-                                    TelemetryKey {
-                                        unknown1: 0xFF,
-                                        unknown2: 0xDEADBEEF,
-                                        unknown3: [ 0x01, 0x02, 0x03, 0x04, ],
-                                        unknown4: [ 0x00, 0x01, 0x02, 0x03, 0x04,
-                                             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A,
-                                             0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10,
-                                             0x11, 0x12, 0x13, ],
-                                    },
-                                ],
-                                security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                    .set_NONE()
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
+                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
+                })
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
+                    unknown0: 0x10,
+                    unknown1: 0x20,
+                    unknown2: 0x30,
+                    unknown3: 0x40,
+                    unknown4: 0xDEADBEEF,
+                })
 ,
-                                };
+        };
 
-                                let header_size = 1;
-                                let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
-                                let t = match t {
-                                    ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                    opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                };
+        let header_size = 1;
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
 
-                                assert_eq!(t.client_public_key, expected.client_public_key);
-                                assert_eq!(t.client_proof, expected.client_proof);
-                                assert_eq!(t.crc_hash, expected.crc_hash);
-                                assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                assert_eq!(t.security_flag, expected.security_flag);
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
 
-                                assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, raw.len());
 
-                                let mut dest = Vec::with_capacity(raw.len());
-                                expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
 
-                                assert_eq!(dest, raw);
-                            }
+        assert_eq!(dest, raw);
+    }
 
-                            #[cfg(feature = "sync")]
-                            #[cfg_attr(feature = "sync", test)]
-                            fn CMD_AUTH_LOGON_PROOF_Client2() {
-                                let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5,
-                                     0xD1, 0x83, 0xC4, 0xC8, 0xA9, 0x50, 0x0E, 0x3F,
-                                     0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
-                                     0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11,
-                                     0xCE, 0xD3, 0x1D, 0xD7, 0x08, 0x6B, 0x1E, 0x48,
-                                     0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
-                                     0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC,
-                                     0x3E, 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A,
-                                     0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
-                                     0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x00, ];
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_LOGON_PROOF_Client5() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x07, 0x00, 0x01, 0x02, 0x03, 0x04,
+             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00,
+             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
+             0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x10, 0x20, 0x30, 0x40, 0xEF,
+             0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, 0x01, ];
 
-                                let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                    client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1,
-                                         0x83, 0xC4, 0xC8, 0xA9, 0x50, 0x0E, 0x3F,
-                                         0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45,
-                                         0xE1, 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE,
-                                         0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7, 0x08, ],
-                                    client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D,
-                                         0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE, 0x5C,
-                                         0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC,
-                                         0x3E, ],
-                                    crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E,
-                                         0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE,
-                                         0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
-                                    telemetry_keys: vec![ ],
-                                    security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                        .set_NONE()
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
+                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
+                })
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
+                    unknown0: 0x10,
+                    unknown1: 0x20,
+                    unknown2: 0x30,
+                    unknown3: 0x40,
+                    unknown4: 0xDEADBEEF,
+                })
+                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
+                    unknown5: 0x1,
+                })
 ,
-                                    };
+        };
 
-                                    let header_size = 1;
-                                    let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
-                                    let t = match t {
-                                        ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                        opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                    };
+        let header_size = 1;
+        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
 
-                                    assert_eq!(t.client_public_key, expected.client_public_key);
-                                    assert_eq!(t.client_proof, expected.client_proof);
-                                    assert_eq!(t.crc_hash, expected.crc_hash);
-                                    assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                    assert_eq!(t.security_flag, expected.security_flag);
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
 
-                                    assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, raw.len());
 
-                                    let mut dest = Vec::with_capacity(raw.len());
-                                    expected.write(&mut std::io::Cursor::new(&mut dest));
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.write(&mut std::io::Cursor::new(&mut dest));
 
-                                    assert_eq!(dest, raw);
-                                }
+        assert_eq!(dest, raw);
+    }
 
-                                #[cfg(feature = "async_tokio")]
-                                #[cfg_attr(feature = "async_tokio", tokio::test)]
-                                async fn tokio_CMD_AUTH_LOGON_PROOF_Client2() {
-                                    let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5,
-                                         0xD1, 0x83, 0xC4, 0xC8, 0xA9, 0x50, 0x0E,
-                                         0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E,
-                                         0x45, 0xE1, 0xF7, 0xCC, 0x8F, 0x1C, 0xF5,
-                                         0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
-                                         0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04,
-                                         0xA1, 0x18, 0xD8, 0xF2, 0xDE, 0x5C, 0x59,
-                                         0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E,
-                                         0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A,
-                                         0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8,
-                                         0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00,
-                                         0x00, ];
+    #[cfg(feature = "async_tokio")]
+    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    async fn tokio_CMD_AUTH_LOGON_PROOF_Client5() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x07, 0x00, 0x01, 0x02, 0x03, 0x04,
+             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00,
+             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
+             0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x10, 0x20, 0x30, 0x40, 0xEF,
+             0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, 0x01, ];
 
-                                    let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                        client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1,
-                                             0x83, 0xC4, 0xC8, 0xA9, 0x50, 0x0E,
-                                             0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E,
-                                             0x2E, 0x45, 0xE1, 0xF7, 0xCC, 0x8F,
-                                             0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE,
-                                             0xD3, 0x1D, 0xD7, 0x08, ],
-                                        client_proof: [ 0x6B, 0x1E, 0x48, 0x1B,
-                                             0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2,
-                                             0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81,
-                                             0x2E, 0x65, 0xEC, 0x3E, ],
-                                        crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80,
-                                             0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8,
-                                             0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58,
-                                             0xBB, 0x00, 0xD0, ],
-                                        telemetry_keys: vec![ ],
-                                        security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                            .set_NONE()
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
+                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
+                })
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
+                    unknown0: 0x10,
+                    unknown1: 0x20,
+                    unknown2: 0x30,
+                    unknown3: 0x40,
+                    unknown4: 0xDEADBEEF,
+                })
+                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
+                    unknown5: 0x1,
+                })
 ,
-                                        };
+        };
 
-                                        let header_size = 1;
-                                        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
-                                        let t = match t {
-                                            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                        };
+        let header_size = 1;
+        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
 
-                                        assert_eq!(t.client_public_key, expected.client_public_key);
-                                        assert_eq!(t.client_proof, expected.client_proof);
-                                        assert_eq!(t.crc_hash, expected.crc_hash);
-                                        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                        assert_eq!(t.security_flag, expected.security_flag);
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
 
-                                        assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, raw.len());
 
-                                        let mut dest = Vec::with_capacity(raw.len());
-                                        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
 
-                                        assert_eq!(dest, raw);
-                                    }
+        assert_eq!(dest, raw);
+    }
 
-                                    #[cfg(feature = "async_std")]
-                                    #[cfg_attr(feature = "async_std", async_std::test)]
-                                    async fn astd_CMD_AUTH_LOGON_PROOF_Client2() {
-                                        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E,
-                                             0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
-                                             0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A,
-                                             0xEE, 0x4E, 0x2E, 0x45, 0xE1, 0xF7,
-                                             0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E,
-                                             0x11, 0xCE, 0xD3, 0x1D, 0xD7, 0x08,
-                                             0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04,
-                                             0xA1, 0x18, 0xD8, 0xF2, 0xDE, 0x5C,
-                                             0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65,
-                                             0xEC, 0x3E, 0x4E, 0xF5, 0x2D, 0xE1,
-                                             0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
-                                             0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A,
-                                             0x58, 0xBB, 0x00, 0xD0, 0x00, 0x00, ];
+    #[cfg(feature = "async_std")]
+    #[cfg_attr(feature = "async_std", async_std::test)]
+    async fn astd_CMD_AUTH_LOGON_PROOF_Client5() {
+        let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
+             0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+             0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
+             0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
+             0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
+             0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
+             0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00, 0x07, 0x00, 0x01, 0x02, 0x03, 0x04,
+             0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00,
+             0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
+             0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x10, 0x20, 0x30, 0x40, 0xEF,
+             0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, 0x01, ];
 
-                                        let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                            client_public_key: [ 0xF1, 0x3E, 0xE5,
-                                                 0xD1, 0x83, 0xC4, 0xC8, 0xA9, 0x50,
-                                                 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE,
-                                                 0x4E, 0x2E, 0x45, 0xE1, 0xF7, 0xCC,
-                                                 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11,
-                                                 0xCE, 0xD3, 0x1D, 0xD7, 0x08, ],
-                                            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B,
-                                                 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2,
-                                                 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81,
-                                                 0x2E, 0x65, 0xEC, 0x3E, ],
-                                            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1,
-                                                 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
-                                                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A,
-                                                 0x58, 0xBB, 0x00, 0xD0, ],
-                                            telemetry_keys: vec![ ],
-                                            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                                .set_NONE()
+        let expected = CMD_AUTH_LOGON_PROOF_Client {
+            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
+                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
+                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
+                 0xD7, 0x08, ],
+            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
+                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
+            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
+                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
+            telemetry_keys: vec![ ],
+            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
+                .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
+                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
+                         0x12, 0x13, ],
+                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
+                })
+                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
+                    unknown0: 0x10,
+                    unknown1: 0x20,
+                    unknown2: 0x30,
+                    unknown3: 0x40,
+                    unknown4: 0xDEADBEEF,
+                })
+                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
+                    unknown5: 0x1,
+                })
 ,
-                                            };
+        };
 
-                                            let header_size = 1;
-                                            let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
-                                            let t = match t {
-                                                ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                                opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                            };
+        let header_size = 1;
+        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+        };
 
-                                            assert_eq!(t.client_public_key, expected.client_public_key);
-                                            assert_eq!(t.client_proof, expected.client_proof);
-                                            assert_eq!(t.crc_hash, expected.crc_hash);
-                                            assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                            assert_eq!(t.security_flag, expected.security_flag);
+        assert_eq!(t.client_public_key, expected.client_public_key);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.crc_hash, expected.crc_hash);
+        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
+        assert_eq!(t.security_flag, expected.security_flag);
 
-                                            assert_eq!(t.size() + header_size, raw.len());
+        assert_eq!(t.size() + header_size, raw.len());
 
-                                            let mut dest = Vec::with_capacity(raw.len());
-                                            expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
+        let mut dest = Vec::with_capacity(raw.len());
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
 
-                                            assert_eq!(dest, raw);
-                                        }
+        assert_eq!(dest, raw);
+    }
 
-                                        #[cfg(feature = "sync")]
-                                        #[cfg_attr(feature = "sync", test)]
-                                        fn CMD_AUTH_LOGON_PROOF_Client3() {
-                                            let raw: Vec<u8> = vec![ 0x01, 0xF1,
-                                                 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
-                                                 0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D,
-                                                 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
-                                                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE,
-                                                 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7,
-                                                 0x08, 0x6B, 0x1E, 0x48, 0x1B, 0x4D,
-                                                 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE,
-                                                 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E,
-                                                 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D,
-                                                 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15,
-                                                 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90,
-                                                 0x8A, 0x58, 0xBB, 0x00, 0xD0, 0x00,
-                                                 0x01, 0x00, 0x01, 0x02, 0x03, 0x04,
-                                                 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A,
-                                                 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00,
-                                                 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
-                                                 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C,
-                                                 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
-                                                 0x13, ];
-
-                                            let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                                client_public_key: [ 0xF1, 0x3E,
-                                                     0xE5, 0xD1, 0x83, 0xC4, 0xC8,
-                                                     0xA9, 0x50, 0x0E, 0x3F, 0x5A,
-                                                     0x5D, 0x8A, 0xEE, 0x4E, 0x2E,
-                                                     0x45, 0xE1, 0xF7, 0xCC, 0x8F,
-                                                     0x1C, 0xF5, 0xEE, 0x8E, 0x11,
-                                                     0xCE, 0xD3, 0x1D, 0xD7, 0x08, ],
-                                                client_proof: [ 0x6B, 0x1E, 0x48,
-                                                     0x1B, 0x4D, 0x04, 0xA1, 0x18,
-                                                     0xD8, 0xF2, 0xDE, 0x5C, 0x59,
-                                                     0xD5, 0x5C, 0x81, 0x2E, 0x65,
-                                                     0xEC, 0x3E, ],
-                                                crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1,
-                                                     0x80, 0x5E, 0x1A, 0x67, 0x15,
-                                                     0xEC, 0xC8, 0x41, 0xEE, 0xB8,
-                                                     0x90, 0x8A, 0x58, 0xBB, 0x00,
-                                                     0xD0, ],
-                                                telemetry_keys: vec![ ],
-                                                security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                                    .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                                        pin_hash: [ 0x00, 0x01,
-                                                             0x02, 0x03, 0x04, 0x05,
-                                                             0x06, 0x07, 0x08, 0x09,
-                                                             0x0A, 0x0B, 0x0C, 0x0D,
-                                                             0x0E, 0x0F, 0x10, 0x11,
-                                                             0x12, 0x13, ],
-                                                        pin_salt: [ 0x00, 0x01,
-                                                             0x02, 0x03, 0x04, 0x05,
-                                                             0x06, 0x07, 0x08, 0x09,
-                                                             0x0A, 0x0B, 0x0C, 0x0D,
-                                                             0x0E, 0x0F, ],
-                                                    })
-,
-                                                };
-
-                                                let header_size = 1;
-                                                let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
-                                                let t = match t {
-                                                    ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                                    opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                                };
-
-                                                assert_eq!(t.client_public_key, expected.client_public_key);
-                                                assert_eq!(t.client_proof, expected.client_proof);
-                                                assert_eq!(t.crc_hash, expected.crc_hash);
-                                                assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                                assert_eq!(t.security_flag, expected.security_flag);
-
-                                                assert_eq!(t.size() + header_size, raw.len());
-
-                                                let mut dest = Vec::with_capacity(raw.len());
-                                                expected.write(&mut std::io::Cursor::new(&mut dest));
-
-                                                assert_eq!(dest, raw);
-                                            }
-
-                                            #[cfg(feature = "async_tokio")]
-                                            #[cfg_attr(feature = "async_tokio", tokio::test)]
-                                            async fn tokio_CMD_AUTH_LOGON_PROOF_Client3() {
-                                                let raw: Vec<u8> = vec![ 0x01, 0xF1,
-                                                     0x3E, 0xE5, 0xD1, 0x83, 0xC4,
-                                                     0xC8, 0xA9, 0x50, 0x0E, 0x3F,
-                                                     0x5A, 0x5D, 0x8A, 0xEE, 0x4E,
-                                                     0x2E, 0x45, 0xE1, 0xF7, 0xCC,
-                                                     0x8F, 0x1C, 0xF5, 0xEE, 0x8E,
-                                                     0x11, 0xCE, 0xD3, 0x1D, 0xD7,
-                                                     0x08, 0x6B, 0x1E, 0x48, 0x1B,
-                                                     0x4D, 0x04, 0xA1, 0x18, 0xD8,
-                                                     0xF2, 0xDE, 0x5C, 0x59, 0xD5,
-                                                     0x5C, 0x81, 0x2E, 0x65, 0xEC,
-                                                     0x3E, 0x4E, 0xF5, 0x2D, 0xE1,
-                                                     0x80, 0x5E, 0x1A, 0x67, 0x15,
-                                                     0xEC, 0xC8, 0x41, 0xEE, 0xB8,
-                                                     0x90, 0x8A, 0x58, 0xBB, 0x00,
-                                                     0xD0, 0x00, 0x01, 0x00, 0x01,
-                                                     0x02, 0x03, 0x04, 0x05, 0x06,
-                                                     0x07, 0x08, 0x09, 0x0A, 0x0B,
-                                                     0x0C, 0x0D, 0x0E, 0x0F, 0x00,
-                                                     0x01, 0x02, 0x03, 0x04, 0x05,
-                                                     0x06, 0x07, 0x08, 0x09, 0x0A,
-                                                     0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
-                                                     0x10, 0x11, 0x12, 0x13, ];
-
-                                                let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                                    client_public_key: [ 0xF1, 0x3E,
-                                                         0xE5, 0xD1, 0x83, 0xC4,
-                                                         0xC8, 0xA9, 0x50, 0x0E,
-                                                         0x3F, 0x5A, 0x5D, 0x8A,
-                                                         0xEE, 0x4E, 0x2E, 0x45,
-                                                         0xE1, 0xF7, 0xCC, 0x8F,
-                                                         0x1C, 0xF5, 0xEE, 0x8E,
-                                                         0x11, 0xCE, 0xD3, 0x1D,
-                                                         0xD7, 0x08, ],
-                                                    client_proof: [ 0x6B, 0x1E,
-                                                         0x48, 0x1B, 0x4D, 0x04,
-                                                         0xA1, 0x18, 0xD8, 0xF2,
-                                                         0xDE, 0x5C, 0x59, 0xD5,
-                                                         0x5C, 0x81, 0x2E, 0x65,
-                                                         0xEC, 0x3E, ],
-                                                    crc_hash: [ 0x4E, 0xF5, 0x2D,
-                                                         0xE1, 0x80, 0x5E, 0x1A,
-                                                         0x67, 0x15, 0xEC, 0xC8,
-                                                         0x41, 0xEE, 0xB8, 0x90,
-                                                         0x8A, 0x58, 0xBB, 0x00,
-                                                         0xD0, ],
-                                                    telemetry_keys: vec![ ],
-                                                    security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                                        .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                                            pin_hash: [ 0x00, 0x01,
-                                                                 0x02, 0x03, 0x04,
-                                                                 0x05, 0x06, 0x07,
-                                                                 0x08, 0x09, 0x0A,
-                                                                 0x0B, 0x0C, 0x0D,
-                                                                 0x0E, 0x0F, 0x10,
-                                                                 0x11, 0x12, 0x13, ],
-                                                            pin_salt: [ 0x00, 0x01,
-                                                                 0x02, 0x03, 0x04,
-                                                                 0x05, 0x06, 0x07,
-                                                                 0x08, 0x09, 0x0A,
-                                                                 0x0B, 0x0C, 0x0D,
-                                                                 0x0E, 0x0F, ],
-                                                        })
-,
-                                                    };
-
-                                                    let header_size = 1;
-                                                    let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
-                                                    let t = match t {
-                                                        ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                                        opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                                    };
-
-                                                    assert_eq!(t.client_public_key, expected.client_public_key);
-                                                    assert_eq!(t.client_proof, expected.client_proof);
-                                                    assert_eq!(t.crc_hash, expected.crc_hash);
-                                                    assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                                    assert_eq!(t.security_flag, expected.security_flag);
-
-                                                    assert_eq!(t.size() + header_size, raw.len());
-
-                                                    let mut dest = Vec::with_capacity(raw.len());
-                                                    expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
-
-                                                    assert_eq!(dest, raw);
-                                                }
-
-                                                #[cfg(feature = "async_std")]
-                                                #[cfg_attr(feature = "async_std", async_std::test)]
-                                                async fn astd_CMD_AUTH_LOGON_PROOF_Client3() {
-                                                    let raw: Vec<u8> = vec![ 0x01,
-                                                         0xF1, 0x3E, 0xE5, 0xD1,
-                                                         0x83, 0xC4, 0xC8, 0xA9,
-                                                         0x50, 0x0E, 0x3F, 0x5A,
-                                                         0x5D, 0x8A, 0xEE, 0x4E,
-                                                         0x2E, 0x45, 0xE1, 0xF7,
-                                                         0xCC, 0x8F, 0x1C, 0xF5,
-                                                         0xEE, 0x8E, 0x11, 0xCE,
-                                                         0xD3, 0x1D, 0xD7, 0x08,
-                                                         0x6B, 0x1E, 0x48, 0x1B,
-                                                         0x4D, 0x04, 0xA1, 0x18,
-                                                         0xD8, 0xF2, 0xDE, 0x5C,
-                                                         0x59, 0xD5, 0x5C, 0x81,
-                                                         0x2E, 0x65, 0xEC, 0x3E,
-                                                         0x4E, 0xF5, 0x2D, 0xE1,
-                                                         0x80, 0x5E, 0x1A, 0x67,
-                                                         0x15, 0xEC, 0xC8, 0x41,
-                                                         0xEE, 0xB8, 0x90, 0x8A,
-                                                         0x58, 0xBB, 0x00, 0xD0,
-                                                         0x00, 0x01, 0x00, 0x01,
-                                                         0x02, 0x03, 0x04, 0x05,
-                                                         0x06, 0x07, 0x08, 0x09,
-                                                         0x0A, 0x0B, 0x0C, 0x0D,
-                                                         0x0E, 0x0F, 0x00, 0x01,
-                                                         0x02, 0x03, 0x04, 0x05,
-                                                         0x06, 0x07, 0x08, 0x09,
-                                                         0x0A, 0x0B, 0x0C, 0x0D,
-                                                         0x0E, 0x0F, 0x10, 0x11,
-                                                         0x12, 0x13, ];
-
-                                                    let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                                        client_public_key: [ 0xF1,
-                                                             0x3E, 0xE5, 0xD1, 0x83,
-                                                             0xC4, 0xC8, 0xA9, 0x50,
-                                                             0x0E, 0x3F, 0x5A, 0x5D,
-                                                             0x8A, 0xEE, 0x4E, 0x2E,
-                                                             0x45, 0xE1, 0xF7, 0xCC,
-                                                             0x8F, 0x1C, 0xF5, 0xEE,
-                                                             0x8E, 0x11, 0xCE, 0xD3,
-                                                             0x1D, 0xD7, 0x08, ],
-                                                        client_proof: [ 0x6B, 0x1E,
-                                                             0x48, 0x1B, 0x4D, 0x04,
-                                                             0xA1, 0x18, 0xD8, 0xF2,
-                                                             0xDE, 0x5C, 0x59, 0xD5,
-                                                             0x5C, 0x81, 0x2E, 0x65,
-                                                             0xEC, 0x3E, ],
-                                                        crc_hash: [ 0x4E, 0xF5,
-                                                             0x2D, 0xE1, 0x80, 0x5E,
-                                                             0x1A, 0x67, 0x15, 0xEC,
-                                                             0xC8, 0x41, 0xEE, 0xB8,
-                                                             0x90, 0x8A, 0x58, 0xBB,
-                                                             0x00, 0xD0, ],
-                                                        telemetry_keys: vec![ ],
-                                                        security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                                            .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                                                pin_hash: [ 0x00,
-                                                                     0x01, 0x02,
-                                                                     0x03, 0x04,
-                                                                     0x05, 0x06,
-                                                                     0x07, 0x08,
-                                                                     0x09, 0x0A,
-                                                                     0x0B, 0x0C,
-                                                                     0x0D, 0x0E,
-                                                                     0x0F, 0x10,
-                                                                     0x11, 0x12,
-                                                                     0x13, ],
-                                                                pin_salt: [ 0x00,
-                                                                     0x01, 0x02,
-                                                                     0x03, 0x04,
-                                                                     0x05, 0x06,
-                                                                     0x07, 0x08,
-                                                                     0x09, 0x0A,
-                                                                     0x0B, 0x0C,
-                                                                     0x0D, 0x0E,
-                                                                     0x0F, ],
-                                                            })
-,
-                                                        };
-
-                                                        let header_size = 1;
-                                                        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
-                                                        let t = match t {
-                                                            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                                            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                                        };
-
-                                                        assert_eq!(t.client_public_key, expected.client_public_key);
-                                                        assert_eq!(t.client_proof, expected.client_proof);
-                                                        assert_eq!(t.crc_hash, expected.crc_hash);
-                                                        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                                        assert_eq!(t.security_flag, expected.security_flag);
-
-                                                        assert_eq!(t.size() + header_size, raw.len());
-
-                                                        let mut dest = Vec::with_capacity(raw.len());
-                                                        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
-
-                                                        assert_eq!(dest, raw);
-                                                    }
-
-                                                    #[cfg(feature = "sync")]
-                                                    #[cfg_attr(feature = "sync", test)]
-                                                    fn CMD_AUTH_LOGON_PROOF_Client4() {
-                                                        let raw: Vec<u8> = vec![
-                                                             0x01, 0xF1, 0x3E, 0xE5,
-                                                             0xD1, 0x83, 0xC4, 0xC8,
-                                                             0xA9, 0x50, 0x0E, 0x3F,
-                                                             0x5A, 0x5D, 0x8A, 0xEE,
-                                                             0x4E, 0x2E, 0x45, 0xE1,
-                                                             0xF7, 0xCC, 0x8F, 0x1C,
-                                                             0xF5, 0xEE, 0x8E, 0x11,
-                                                             0xCE, 0xD3, 0x1D, 0xD7,
-                                                             0x08, 0x6B, 0x1E, 0x48,
-                                                             0x1B, 0x4D, 0x04, 0xA1,
-                                                             0x18, 0xD8, 0xF2, 0xDE,
-                                                             0x5C, 0x59, 0xD5, 0x5C,
-                                                             0x81, 0x2E, 0x65, 0xEC,
-                                                             0x3E, 0x4E, 0xF5, 0x2D,
-                                                             0xE1, 0x80, 0x5E, 0x1A,
-                                                             0x67, 0x15, 0xEC, 0xC8,
-                                                             0x41, 0xEE, 0xB8, 0x90,
-                                                             0x8A, 0x58, 0xBB, 0x00,
-                                                             0xD0, 0x00, 0x03, 0x00,
-                                                             0x01, 0x02, 0x03, 0x04,
-                                                             0x05, 0x06, 0x07, 0x08,
-                                                             0x09, 0x0A, 0x0B, 0x0C,
-                                                             0x0D, 0x0E, 0x0F, 0x00,
-                                                             0x01, 0x02, 0x03, 0x04,
-                                                             0x05, 0x06, 0x07, 0x08,
-                                                             0x09, 0x0A, 0x0B, 0x0C,
-                                                             0x0D, 0x0E, 0x0F, 0x10,
-                                                             0x11, 0x12, 0x13, 0x10,
-                                                             0x20, 0x30, 0x40, 0xEF,
-                                                             0xBE, 0xAD, 0xDE, 0x00,
-                                                             0x00, 0x00, 0x00, ];
-
-                                                        let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                                            client_public_key: [
-                                                                 0xF1, 0x3E, 0xE5,
-                                                                 0xD1, 0x83, 0xC4,
-                                                                 0xC8, 0xA9, 0x50,
-                                                                 0x0E, 0x3F, 0x5A,
-                                                                 0x5D, 0x8A, 0xEE,
-                                                                 0x4E, 0x2E, 0x45,
-                                                                 0xE1, 0xF7, 0xCC,
-                                                                 0x8F, 0x1C, 0xF5,
-                                                                 0xEE, 0x8E, 0x11,
-                                                                 0xCE, 0xD3, 0x1D,
-                                                                 0xD7, 0x08, ],
-                                                            client_proof: [ 0x6B,
-                                                                 0x1E, 0x48, 0x1B,
-                                                                 0x4D, 0x04, 0xA1,
-                                                                 0x18, 0xD8, 0xF2,
-                                                                 0xDE, 0x5C, 0x59,
-                                                                 0xD5, 0x5C, 0x81,
-                                                                 0x2E, 0x65, 0xEC,
-                                                                 0x3E, ],
-                                                            crc_hash: [ 0x4E, 0xF5,
-                                                                 0x2D, 0xE1, 0x80,
-                                                                 0x5E, 0x1A, 0x67,
-                                                                 0x15, 0xEC, 0xC8,
-                                                                 0x41, 0xEE, 0xB8,
-                                                                 0x90, 0x8A, 0x58,
-                                                                 0xBB, 0x00, 0xD0, ],
-                                                            telemetry_keys: vec![ ],
-                                                            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                                                .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                                                    pin_hash: [
-                                                                         0x00, 0x01,
-                                                                         0x02, 0x03,
-                                                                         0x04, 0x05,
-                                                                         0x06, 0x07,
-                                                                         0x08, 0x09,
-                                                                         0x0A, 0x0B,
-                                                                         0x0C, 0x0D,
-                                                                         0x0E, 0x0F,
-                                                                         0x10, 0x11,
-                                                                         0x12, 0x13, ],
-                                                                    pin_salt: [
-                                                                         0x00, 0x01,
-                                                                         0x02, 0x03,
-                                                                         0x04, 0x05,
-                                                                         0x06, 0x07,
-                                                                         0x08, 0x09,
-                                                                         0x0A, 0x0B,
-                                                                         0x0C, 0x0D,
-                                                                         0x0E, 0x0F, ],
-                                                                })
-                                                                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
-                                                                    unknown0: 0x10,
-                                                                    unknown1: 0x20,
-                                                                    unknown2: 0x30,
-                                                                    unknown3: 0x40,
-                                                                    unknown4: 0xDEADBEEF,
-                                                                })
-,
-                                                            };
-
-                                                            let header_size = 1;
-                                                            let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
-                                                            let t = match t {
-                                                                ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                                                opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                                            };
-
-                                                            assert_eq!(t.client_public_key, expected.client_public_key);
-                                                            assert_eq!(t.client_proof, expected.client_proof);
-                                                            assert_eq!(t.crc_hash, expected.crc_hash);
-                                                            assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                                            assert_eq!(t.security_flag, expected.security_flag);
-
-                                                            assert_eq!(t.size() + header_size, raw.len());
-
-                                                            let mut dest = Vec::with_capacity(raw.len());
-                                                            expected.write(&mut std::io::Cursor::new(&mut dest));
-
-                                                            assert_eq!(dest, raw);
-                                                        }
-
-                                                        #[cfg(feature = "async_tokio")]
-                                                        #[cfg_attr(feature = "async_tokio", tokio::test)]
-                                                        async fn tokio_CMD_AUTH_LOGON_PROOF_Client4() {
-                                                            let raw: Vec<u8> = vec![
-                                                                 0x01, 0xF1, 0x3E,
-                                                                 0xE5, 0xD1, 0x83,
-                                                                 0xC4, 0xC8, 0xA9,
-                                                                 0x50, 0x0E, 0x3F,
-                                                                 0x5A, 0x5D, 0x8A,
-                                                                 0xEE, 0x4E, 0x2E,
-                                                                 0x45, 0xE1, 0xF7,
-                                                                 0xCC, 0x8F, 0x1C,
-                                                                 0xF5, 0xEE, 0x8E,
-                                                                 0x11, 0xCE, 0xD3,
-                                                                 0x1D, 0xD7, 0x08,
-                                                                 0x6B, 0x1E, 0x48,
-                                                                 0x1B, 0x4D, 0x04,
-                                                                 0xA1, 0x18, 0xD8,
-                                                                 0xF2, 0xDE, 0x5C,
-                                                                 0x59, 0xD5, 0x5C,
-                                                                 0x81, 0x2E, 0x65,
-                                                                 0xEC, 0x3E, 0x4E,
-                                                                 0xF5, 0x2D, 0xE1,
-                                                                 0x80, 0x5E, 0x1A,
-                                                                 0x67, 0x15, 0xEC,
-                                                                 0xC8, 0x41, 0xEE,
-                                                                 0xB8, 0x90, 0x8A,
-                                                                 0x58, 0xBB, 0x00,
-                                                                 0xD0, 0x00, 0x03,
-                                                                 0x00, 0x01, 0x02,
-                                                                 0x03, 0x04, 0x05,
-                                                                 0x06, 0x07, 0x08,
-                                                                 0x09, 0x0A, 0x0B,
-                                                                 0x0C, 0x0D, 0x0E,
-                                                                 0x0F, 0x00, 0x01,
-                                                                 0x02, 0x03, 0x04,
-                                                                 0x05, 0x06, 0x07,
-                                                                 0x08, 0x09, 0x0A,
-                                                                 0x0B, 0x0C, 0x0D,
-                                                                 0x0E, 0x0F, 0x10,
-                                                                 0x11, 0x12, 0x13,
-                                                                 0x10, 0x20, 0x30,
-                                                                 0x40, 0xEF, 0xBE,
-                                                                 0xAD, 0xDE, 0x00,
-                                                                 0x00, 0x00, 0x00, ];
-
-                                                            let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                                                client_public_key: [
-                                                                     0xF1, 0x3E,
-                                                                     0xE5, 0xD1,
-                                                                     0x83, 0xC4,
-                                                                     0xC8, 0xA9,
-                                                                     0x50, 0x0E,
-                                                                     0x3F, 0x5A,
-                                                                     0x5D, 0x8A,
-                                                                     0xEE, 0x4E,
-                                                                     0x2E, 0x45,
-                                                                     0xE1, 0xF7,
-                                                                     0xCC, 0x8F,
-                                                                     0x1C, 0xF5,
-                                                                     0xEE, 0x8E,
-                                                                     0x11, 0xCE,
-                                                                     0xD3, 0x1D,
-                                                                     0xD7, 0x08, ],
-                                                                client_proof: [
-                                                                     0x6B, 0x1E,
-                                                                     0x48, 0x1B,
-                                                                     0x4D, 0x04,
-                                                                     0xA1, 0x18,
-                                                                     0xD8, 0xF2,
-                                                                     0xDE, 0x5C,
-                                                                     0x59, 0xD5,
-                                                                     0x5C, 0x81,
-                                                                     0x2E, 0x65,
-                                                                     0xEC, 0x3E, ],
-                                                                crc_hash: [ 0x4E,
-                                                                     0xF5, 0x2D,
-                                                                     0xE1, 0x80,
-                                                                     0x5E, 0x1A,
-                                                                     0x67, 0x15,
-                                                                     0xEC, 0xC8,
-                                                                     0x41, 0xEE,
-                                                                     0xB8, 0x90,
-                                                                     0x8A, 0x58,
-                                                                     0xBB, 0x00,
-                                                                     0xD0, ],
-                                                                telemetry_keys: vec![ ],
-                                                                security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                                                    .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                                                        pin_hash: [
-                                                                             0x00,
-                                                                             0x01,
-                                                                             0x02,
-                                                                             0x03,
-                                                                             0x04,
-                                                                             0x05,
-                                                                             0x06,
-                                                                             0x07,
-                                                                             0x08,
-                                                                             0x09,
-                                                                             0x0A,
-                                                                             0x0B,
-                                                                             0x0C,
-                                                                             0x0D,
-                                                                             0x0E,
-                                                                             0x0F,
-                                                                             0x10,
-                                                                             0x11,
-                                                                             0x12,
-                                                                             0x13, ],
-                                                                        pin_salt: [
-                                                                             0x00,
-                                                                             0x01,
-                                                                             0x02,
-                                                                             0x03,
-                                                                             0x04,
-                                                                             0x05,
-                                                                             0x06,
-                                                                             0x07,
-                                                                             0x08,
-                                                                             0x09,
-                                                                             0x0A,
-                                                                             0x0B,
-                                                                             0x0C,
-                                                                             0x0D,
-                                                                             0x0E,
-                                                                             0x0F, ],
-                                                                    })
-                                                                    .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
-                                                                        unknown0: 0x10,
-                                                                        unknown1: 0x20,
-                                                                        unknown2: 0x30,
-                                                                        unknown3: 0x40,
-                                                                        unknown4: 0xDEADBEEF,
-                                                                    })
-,
-                                                                };
-
-                                                                let header_size = 1;
-                                                                let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
-                                                                let t = match t {
-                                                                    ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                                                    opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                                                };
-
-                                                                assert_eq!(t.client_public_key, expected.client_public_key);
-                                                                assert_eq!(t.client_proof, expected.client_proof);
-                                                                assert_eq!(t.crc_hash, expected.crc_hash);
-                                                                assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                                                assert_eq!(t.security_flag, expected.security_flag);
-
-                                                                assert_eq!(t.size() + header_size, raw.len());
-
-                                                                let mut dest = Vec::with_capacity(raw.len());
-                                                                expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
-
-                                                                assert_eq!(dest, raw);
-                                                            }
-
-                                                            #[cfg(feature = "async_std")]
-                                                            #[cfg_attr(feature = "async_std", async_std::test)]
-                                                            async fn astd_CMD_AUTH_LOGON_PROOF_Client4() {
-                                                                let raw: Vec<u8> = vec![
-                                                                     0x01, 0xF1,
-                                                                     0x3E, 0xE5,
-                                                                     0xD1, 0x83,
-                                                                     0xC4, 0xC8,
-                                                                     0xA9, 0x50,
-                                                                     0x0E, 0x3F,
-                                                                     0x5A, 0x5D,
-                                                                     0x8A, 0xEE,
-                                                                     0x4E, 0x2E,
-                                                                     0x45, 0xE1,
-                                                                     0xF7, 0xCC,
-                                                                     0x8F, 0x1C,
-                                                                     0xF5, 0xEE,
-                                                                     0x8E, 0x11,
-                                                                     0xCE, 0xD3,
-                                                                     0x1D, 0xD7,
-                                                                     0x08, 0x6B,
-                                                                     0x1E, 0x48,
-                                                                     0x1B, 0x4D,
-                                                                     0x04, 0xA1,
-                                                                     0x18, 0xD8,
-                                                                     0xF2, 0xDE,
-                                                                     0x5C, 0x59,
-                                                                     0xD5, 0x5C,
-                                                                     0x81, 0x2E,
-                                                                     0x65, 0xEC,
-                                                                     0x3E, 0x4E,
-                                                                     0xF5, 0x2D,
-                                                                     0xE1, 0x80,
-                                                                     0x5E, 0x1A,
-                                                                     0x67, 0x15,
-                                                                     0xEC, 0xC8,
-                                                                     0x41, 0xEE,
-                                                                     0xB8, 0x90,
-                                                                     0x8A, 0x58,
-                                                                     0xBB, 0x00,
-                                                                     0xD0, 0x00,
-                                                                     0x03, 0x00,
-                                                                     0x01, 0x02,
-                                                                     0x03, 0x04,
-                                                                     0x05, 0x06,
-                                                                     0x07, 0x08,
-                                                                     0x09, 0x0A,
-                                                                     0x0B, 0x0C,
-                                                                     0x0D, 0x0E,
-                                                                     0x0F, 0x00,
-                                                                     0x01, 0x02,
-                                                                     0x03, 0x04,
-                                                                     0x05, 0x06,
-                                                                     0x07, 0x08,
-                                                                     0x09, 0x0A,
-                                                                     0x0B, 0x0C,
-                                                                     0x0D, 0x0E,
-                                                                     0x0F, 0x10,
-                                                                     0x11, 0x12,
-                                                                     0x13, 0x10,
-                                                                     0x20, 0x30,
-                                                                     0x40, 0xEF,
-                                                                     0xBE, 0xAD,
-                                                                     0xDE, 0x00,
-                                                                     0x00, 0x00,
-                                                                     0x00, ];
-
-                                                                let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                                                    client_public_key: [
-                                                                         0xF1, 0x3E,
-                                                                         0xE5, 0xD1,
-                                                                         0x83, 0xC4,
-                                                                         0xC8, 0xA9,
-                                                                         0x50, 0x0E,
-                                                                         0x3F, 0x5A,
-                                                                         0x5D, 0x8A,
-                                                                         0xEE, 0x4E,
-                                                                         0x2E, 0x45,
-                                                                         0xE1, 0xF7,
-                                                                         0xCC, 0x8F,
-                                                                         0x1C, 0xF5,
-                                                                         0xEE, 0x8E,
-                                                                         0x11, 0xCE,
-                                                                         0xD3, 0x1D,
-                                                                         0xD7, 0x08, ],
-                                                                    client_proof: [
-                                                                         0x6B, 0x1E,
-                                                                         0x48, 0x1B,
-                                                                         0x4D, 0x04,
-                                                                         0xA1, 0x18,
-                                                                         0xD8, 0xF2,
-                                                                         0xDE, 0x5C,
-                                                                         0x59, 0xD5,
-                                                                         0x5C, 0x81,
-                                                                         0x2E, 0x65,
-                                                                         0xEC, 0x3E, ],
-                                                                    crc_hash: [
-                                                                         0x4E, 0xF5,
-                                                                         0x2D, 0xE1,
-                                                                         0x80, 0x5E,
-                                                                         0x1A, 0x67,
-                                                                         0x15, 0xEC,
-                                                                         0xC8, 0x41,
-                                                                         0xEE, 0xB8,
-                                                                         0x90, 0x8A,
-                                                                         0x58, 0xBB,
-                                                                         0x00, 0xD0, ],
-                                                                    telemetry_keys: vec![ ],
-                                                                    security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                                                        .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                                                            pin_hash: [
-                                                                                 0x00,
-                                                                                 0x01,
-                                                                                 0x02,
-                                                                                 0x03,
-                                                                                 0x04,
-                                                                                 0x05,
-                                                                                 0x06,
-                                                                                 0x07,
-                                                                                 0x08,
-                                                                                 0x09,
-                                                                                 0x0A,
-                                                                                 0x0B,
-                                                                                 0x0C,
-                                                                                 0x0D,
-                                                                                 0x0E,
-                                                                                 0x0F,
-                                                                                 0x10,
-                                                                                 0x11,
-                                                                                 0x12,
-                                                                                 0x13, ],
-                                                                            pin_salt: [
-                                                                                 0x00,
-                                                                                 0x01,
-                                                                                 0x02,
-                                                                                 0x03,
-                                                                                 0x04,
-                                                                                 0x05,
-                                                                                 0x06,
-                                                                                 0x07,
-                                                                                 0x08,
-                                                                                 0x09,
-                                                                                 0x0A,
-                                                                                 0x0B,
-                                                                                 0x0C,
-                                                                                 0x0D,
-                                                                                 0x0E,
-                                                                                 0x0F, ],
-                                                                        })
-                                                                        .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
-                                                                            unknown0: 0x10,
-                                                                            unknown1: 0x20,
-                                                                            unknown2: 0x30,
-                                                                            unknown3: 0x40,
-                                                                            unknown4: 0xDEADBEEF,
-                                                                        })
-,
-                                                                    };
-
-                                                                    let header_size = 1;
-                                                                    let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
-                                                                    let t = match t {
-                                                                        ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                                                        opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                                                    };
-
-                                                                    assert_eq!(t.client_public_key, expected.client_public_key);
-                                                                    assert_eq!(t.client_proof, expected.client_proof);
-                                                                    assert_eq!(t.crc_hash, expected.crc_hash);
-                                                                    assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                                                    assert_eq!(t.security_flag, expected.security_flag);
-
-                                                                    assert_eq!(t.size() + header_size, raw.len());
-
-                                                                    let mut dest = Vec::with_capacity(raw.len());
-                                                                    expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
-
-                                                                    assert_eq!(dest, raw);
-                                                                }
-
-                                                                #[cfg(feature = "sync")]
-                                                                #[cfg_attr(feature = "sync", test)]
-                                                                fn CMD_AUTH_LOGON_PROOF_Client5() {
-                                                                    let raw: Vec<u8> = vec![
-                                                                         0x01, 0xF1,
-                                                                         0x3E, 0xE5,
-                                                                         0xD1, 0x83,
-                                                                         0xC4, 0xC8,
-                                                                         0xA9, 0x50,
-                                                                         0x0E, 0x3F,
-                                                                         0x5A, 0x5D,
-                                                                         0x8A, 0xEE,
-                                                                         0x4E, 0x2E,
-                                                                         0x45, 0xE1,
-                                                                         0xF7, 0xCC,
-                                                                         0x8F, 0x1C,
-                                                                         0xF5, 0xEE,
-                                                                         0x8E, 0x11,
-                                                                         0xCE, 0xD3,
-                                                                         0x1D, 0xD7,
-                                                                         0x08, 0x6B,
-                                                                         0x1E, 0x48,
-                                                                         0x1B, 0x4D,
-                                                                         0x04, 0xA1,
-                                                                         0x18, 0xD8,
-                                                                         0xF2, 0xDE,
-                                                                         0x5C, 0x59,
-                                                                         0xD5, 0x5C,
-                                                                         0x81, 0x2E,
-                                                                         0x65, 0xEC,
-                                                                         0x3E, 0x4E,
-                                                                         0xF5, 0x2D,
-                                                                         0xE1, 0x80,
-                                                                         0x5E, 0x1A,
-                                                                         0x67, 0x15,
-                                                                         0xEC, 0xC8,
-                                                                         0x41, 0xEE,
-                                                                         0xB8, 0x90,
-                                                                         0x8A, 0x58,
-                                                                         0xBB, 0x00,
-                                                                         0xD0, 0x00,
-                                                                         0x07, 0x00,
-                                                                         0x01, 0x02,
-                                                                         0x03, 0x04,
-                                                                         0x05, 0x06,
-                                                                         0x07, 0x08,
-                                                                         0x09, 0x0A,
-                                                                         0x0B, 0x0C,
-                                                                         0x0D, 0x0E,
-                                                                         0x0F, 0x00,
-                                                                         0x01, 0x02,
-                                                                         0x03, 0x04,
-                                                                         0x05, 0x06,
-                                                                         0x07, 0x08,
-                                                                         0x09, 0x0A,
-                                                                         0x0B, 0x0C,
-                                                                         0x0D, 0x0E,
-                                                                         0x0F, 0x10,
-                                                                         0x11, 0x12,
-                                                                         0x13, 0x10,
-                                                                         0x20, 0x30,
-                                                                         0x40, 0xEF,
-                                                                         0xBE, 0xAD,
-                                                                         0xDE, 0x00,
-                                                                         0x00, 0x00,
-                                                                         0x00, 0x01, ];
-
-                                                                    let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                                                        client_public_key: [
-                                                                             0xF1,
-                                                                             0x3E,
-                                                                             0xE5,
-                                                                             0xD1,
-                                                                             0x83,
-                                                                             0xC4,
-                                                                             0xC8,
-                                                                             0xA9,
-                                                                             0x50,
-                                                                             0x0E,
-                                                                             0x3F,
-                                                                             0x5A,
-                                                                             0x5D,
-                                                                             0x8A,
-                                                                             0xEE,
-                                                                             0x4E,
-                                                                             0x2E,
-                                                                             0x45,
-                                                                             0xE1,
-                                                                             0xF7,
-                                                                             0xCC,
-                                                                             0x8F,
-                                                                             0x1C,
-                                                                             0xF5,
-                                                                             0xEE,
-                                                                             0x8E,
-                                                                             0x11,
-                                                                             0xCE,
-                                                                             0xD3,
-                                                                             0x1D,
-                                                                             0xD7,
-                                                                             0x08, ],
-                                                                        client_proof: [
-                                                                             0x6B,
-                                                                             0x1E,
-                                                                             0x48,
-                                                                             0x1B,
-                                                                             0x4D,
-                                                                             0x04,
-                                                                             0xA1,
-                                                                             0x18,
-                                                                             0xD8,
-                                                                             0xF2,
-                                                                             0xDE,
-                                                                             0x5C,
-                                                                             0x59,
-                                                                             0xD5,
-                                                                             0x5C,
-                                                                             0x81,
-                                                                             0x2E,
-                                                                             0x65,
-                                                                             0xEC,
-                                                                             0x3E, ],
-                                                                        crc_hash: [
-                                                                             0x4E,
-                                                                             0xF5,
-                                                                             0x2D,
-                                                                             0xE1,
-                                                                             0x80,
-                                                                             0x5E,
-                                                                             0x1A,
-                                                                             0x67,
-                                                                             0x15,
-                                                                             0xEC,
-                                                                             0xC8,
-                                                                             0x41,
-                                                                             0xEE,
-                                                                             0xB8,
-                                                                             0x90,
-                                                                             0x8A,
-                                                                             0x58,
-                                                                             0xBB,
-                                                                             0x00,
-                                                                             0xD0, ],
-                                                                        telemetry_keys: vec![ ],
-                                                                        security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                                                            .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                                                                pin_hash: [
-                                                                                     0x00,
-                                                                                     0x01,
-                                                                                     0x02,
-                                                                                     0x03,
-                                                                                     0x04,
-                                                                                     0x05,
-                                                                                     0x06,
-                                                                                     0x07,
-                                                                                     0x08,
-                                                                                     0x09,
-                                                                                     0x0A,
-                                                                                     0x0B,
-                                                                                     0x0C,
-                                                                                     0x0D,
-                                                                                     0x0E,
-                                                                                     0x0F,
-                                                                                     0x10,
-                                                                                     0x11,
-                                                                                     0x12,
-                                                                                     0x13, ],
-                                                                                pin_salt: [
-                                                                                     0x00,
-                                                                                     0x01,
-                                                                                     0x02,
-                                                                                     0x03,
-                                                                                     0x04,
-                                                                                     0x05,
-                                                                                     0x06,
-                                                                                     0x07,
-                                                                                     0x08,
-                                                                                     0x09,
-                                                                                     0x0A,
-                                                                                     0x0B,
-                                                                                     0x0C,
-                                                                                     0x0D,
-                                                                                     0x0E,
-                                                                                     0x0F, ],
-                                                                            })
-                                                                            .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
-                                                                                unknown0: 0x10,
-                                                                                unknown1: 0x20,
-                                                                                unknown2: 0x30,
-                                                                                unknown3: 0x40,
-                                                                                unknown4: 0xDEADBEEF,
-                                                                            })
-                                                                            .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
-                                                                                unknown5: 0x1,
-                                                                            })
-,
-                                                                        };
-
-                                                                        let header_size = 1;
-                                                                        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&raw)).unwrap();
-                                                                        let t = match t {
-                                                                            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                                                            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                                                        };
-
-                                                                        assert_eq!(t.client_public_key, expected.client_public_key);
-                                                                        assert_eq!(t.client_proof, expected.client_proof);
-                                                                        assert_eq!(t.crc_hash, expected.crc_hash);
-                                                                        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                                                        assert_eq!(t.security_flag, expected.security_flag);
-
-                                                                        assert_eq!(t.size() + header_size, raw.len());
-
-                                                                        let mut dest = Vec::with_capacity(raw.len());
-                                                                        expected.write(&mut std::io::Cursor::new(&mut dest));
-
-                                                                        assert_eq!(dest, raw);
-                                                                    }
-
-                                                                    #[cfg(feature = "async_tokio")]
-                                                                    #[cfg_attr(feature = "async_tokio", tokio::test)]
-                                                                    async fn tokio_CMD_AUTH_LOGON_PROOF_Client5() {
-                                                                        let raw: Vec<u8> = vec![
-                                                                             0x01,
-                                                                             0xF1,
-                                                                             0x3E,
-                                                                             0xE5,
-                                                                             0xD1,
-                                                                             0x83,
-                                                                             0xC4,
-                                                                             0xC8,
-                                                                             0xA9,
-                                                                             0x50,
-                                                                             0x0E,
-                                                                             0x3F,
-                                                                             0x5A,
-                                                                             0x5D,
-                                                                             0x8A,
-                                                                             0xEE,
-                                                                             0x4E,
-                                                                             0x2E,
-                                                                             0x45,
-                                                                             0xE1,
-                                                                             0xF7,
-                                                                             0xCC,
-                                                                             0x8F,
-                                                                             0x1C,
-                                                                             0xF5,
-                                                                             0xEE,
-                                                                             0x8E,
-                                                                             0x11,
-                                                                             0xCE,
-                                                                             0xD3,
-                                                                             0x1D,
-                                                                             0xD7,
-                                                                             0x08,
-                                                                             0x6B,
-                                                                             0x1E,
-                                                                             0x48,
-                                                                             0x1B,
-                                                                             0x4D,
-                                                                             0x04,
-                                                                             0xA1,
-                                                                             0x18,
-                                                                             0xD8,
-                                                                             0xF2,
-                                                                             0xDE,
-                                                                             0x5C,
-                                                                             0x59,
-                                                                             0xD5,
-                                                                             0x5C,
-                                                                             0x81,
-                                                                             0x2E,
-                                                                             0x65,
-                                                                             0xEC,
-                                                                             0x3E,
-                                                                             0x4E,
-                                                                             0xF5,
-                                                                             0x2D,
-                                                                             0xE1,
-                                                                             0x80,
-                                                                             0x5E,
-                                                                             0x1A,
-                                                                             0x67,
-                                                                             0x15,
-                                                                             0xEC,
-                                                                             0xC8,
-                                                                             0x41,
-                                                                             0xEE,
-                                                                             0xB8,
-                                                                             0x90,
-                                                                             0x8A,
-                                                                             0x58,
-                                                                             0xBB,
-                                                                             0x00,
-                                                                             0xD0,
-                                                                             0x00,
-                                                                             0x07,
-                                                                             0x00,
-                                                                             0x01,
-                                                                             0x02,
-                                                                             0x03,
-                                                                             0x04,
-                                                                             0x05,
-                                                                             0x06,
-                                                                             0x07,
-                                                                             0x08,
-                                                                             0x09,
-                                                                             0x0A,
-                                                                             0x0B,
-                                                                             0x0C,
-                                                                             0x0D,
-                                                                             0x0E,
-                                                                             0x0F,
-                                                                             0x00,
-                                                                             0x01,
-                                                                             0x02,
-                                                                             0x03,
-                                                                             0x04,
-                                                                             0x05,
-                                                                             0x06,
-                                                                             0x07,
-                                                                             0x08,
-                                                                             0x09,
-                                                                             0x0A,
-                                                                             0x0B,
-                                                                             0x0C,
-                                                                             0x0D,
-                                                                             0x0E,
-                                                                             0x0F,
-                                                                             0x10,
-                                                                             0x11,
-                                                                             0x12,
-                                                                             0x13,
-                                                                             0x10,
-                                                                             0x20,
-                                                                             0x30,
-                                                                             0x40,
-                                                                             0xEF,
-                                                                             0xBE,
-                                                                             0xAD,
-                                                                             0xDE,
-                                                                             0x00,
-                                                                             0x00,
-                                                                             0x00,
-                                                                             0x00,
-                                                                             0x01, ];
-
-                                                                        let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                                                            client_public_key: [
-                                                                                 0xF1,
-                                                                                 0x3E,
-                                                                                 0xE5,
-                                                                                 0xD1,
-                                                                                 0x83,
-                                                                                 0xC4,
-                                                                                 0xC8,
-                                                                                 0xA9,
-                                                                                 0x50,
-                                                                                 0x0E,
-                                                                                 0x3F,
-                                                                                 0x5A,
-                                                                                 0x5D,
-                                                                                 0x8A,
-                                                                                 0xEE,
-                                                                                 0x4E,
-                                                                                 0x2E,
-                                                                                 0x45,
-                                                                                 0xE1,
-                                                                                 0xF7,
-                                                                                 0xCC,
-                                                                                 0x8F,
-                                                                                 0x1C,
-                                                                                 0xF5,
-                                                                                 0xEE,
-                                                                                 0x8E,
-                                                                                 0x11,
-                                                                                 0xCE,
-                                                                                 0xD3,
-                                                                                 0x1D,
-                                                                                 0xD7,
-                                                                                 0x08, ],
-                                                                            client_proof: [
-                                                                                 0x6B,
-                                                                                 0x1E,
-                                                                                 0x48,
-                                                                                 0x1B,
-                                                                                 0x4D,
-                                                                                 0x04,
-                                                                                 0xA1,
-                                                                                 0x18,
-                                                                                 0xD8,
-                                                                                 0xF2,
-                                                                                 0xDE,
-                                                                                 0x5C,
-                                                                                 0x59,
-                                                                                 0xD5,
-                                                                                 0x5C,
-                                                                                 0x81,
-                                                                                 0x2E,
-                                                                                 0x65,
-                                                                                 0xEC,
-                                                                                 0x3E, ],
-                                                                            crc_hash: [
-                                                                                 0x4E,
-                                                                                 0xF5,
-                                                                                 0x2D,
-                                                                                 0xE1,
-                                                                                 0x80,
-                                                                                 0x5E,
-                                                                                 0x1A,
-                                                                                 0x67,
-                                                                                 0x15,
-                                                                                 0xEC,
-                                                                                 0xC8,
-                                                                                 0x41,
-                                                                                 0xEE,
-                                                                                 0xB8,
-                                                                                 0x90,
-                                                                                 0x8A,
-                                                                                 0x58,
-                                                                                 0xBB,
-                                                                                 0x00,
-                                                                                 0xD0, ],
-                                                                            telemetry_keys: vec![ ],
-                                                                            security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                                                                .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                                                                    pin_hash: [
-                                                                                         0x00,
-                                                                                         0x01,
-                                                                                         0x02,
-                                                                                         0x03,
-                                                                                         0x04,
-                                                                                         0x05,
-                                                                                         0x06,
-                                                                                         0x07,
-                                                                                         0x08,
-                                                                                         0x09,
-                                                                                         0x0A,
-                                                                                         0x0B,
-                                                                                         0x0C,
-                                                                                         0x0D,
-                                                                                         0x0E,
-                                                                                         0x0F,
-                                                                                         0x10,
-                                                                                         0x11,
-                                                                                         0x12,
-                                                                                         0x13, ],
-                                                                                    pin_salt: [
-                                                                                         0x00,
-                                                                                         0x01,
-                                                                                         0x02,
-                                                                                         0x03,
-                                                                                         0x04,
-                                                                                         0x05,
-                                                                                         0x06,
-                                                                                         0x07,
-                                                                                         0x08,
-                                                                                         0x09,
-                                                                                         0x0A,
-                                                                                         0x0B,
-                                                                                         0x0C,
-                                                                                         0x0D,
-                                                                                         0x0E,
-                                                                                         0x0F, ],
-                                                                                })
-                                                                                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
-                                                                                    unknown0: 0x10,
-                                                                                    unknown1: 0x20,
-                                                                                    unknown2: 0x30,
-                                                                                    unknown3: 0x40,
-                                                                                    unknown4: 0xDEADBEEF,
-                                                                                })
-                                                                                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
-                                                                                    unknown5: 0x1,
-                                                                                })
-,
-                                                                            };
-
-                                                                            let header_size = 1;
-                                                                            let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&raw)).await.unwrap();
-                                                                            let t = match t {
-                                                                                ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                                                                opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                                                            };
-
-                                                                            assert_eq!(t.client_public_key, expected.client_public_key);
-                                                                            assert_eq!(t.client_proof, expected.client_proof);
-                                                                            assert_eq!(t.crc_hash, expected.crc_hash);
-                                                                            assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                                                            assert_eq!(t.security_flag, expected.security_flag);
-
-                                                                            assert_eq!(t.size() + header_size, raw.len());
-
-                                                                            let mut dest = Vec::with_capacity(raw.len());
-                                                                            expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
-
-                                                                            assert_eq!(dest, raw);
-                                                                        }
-
-                                                                        #[cfg(feature = "async_std")]
-                                                                        #[cfg_attr(feature = "async_std", async_std::test)]
-                                                                        async fn astd_CMD_AUTH_LOGON_PROOF_Client5() {
-                                                                            let raw: Vec<u8> = vec![
-                                                                                 0x01,
-                                                                                 0xF1,
-                                                                                 0x3E,
-                                                                                 0xE5,
-                                                                                 0xD1,
-                                                                                 0x83,
-                                                                                 0xC4,
-                                                                                 0xC8,
-                                                                                 0xA9,
-                                                                                 0x50,
-                                                                                 0x0E,
-                                                                                 0x3F,
-                                                                                 0x5A,
-                                                                                 0x5D,
-                                                                                 0x8A,
-                                                                                 0xEE,
-                                                                                 0x4E,
-                                                                                 0x2E,
-                                                                                 0x45,
-                                                                                 0xE1,
-                                                                                 0xF7,
-                                                                                 0xCC,
-                                                                                 0x8F,
-                                                                                 0x1C,
-                                                                                 0xF5,
-                                                                                 0xEE,
-                                                                                 0x8E,
-                                                                                 0x11,
-                                                                                 0xCE,
-                                                                                 0xD3,
-                                                                                 0x1D,
-                                                                                 0xD7,
-                                                                                 0x08,
-                                                                                 0x6B,
-                                                                                 0x1E,
-                                                                                 0x48,
-                                                                                 0x1B,
-                                                                                 0x4D,
-                                                                                 0x04,
-                                                                                 0xA1,
-                                                                                 0x18,
-                                                                                 0xD8,
-                                                                                 0xF2,
-                                                                                 0xDE,
-                                                                                 0x5C,
-                                                                                 0x59,
-                                                                                 0xD5,
-                                                                                 0x5C,
-                                                                                 0x81,
-                                                                                 0x2E,
-                                                                                 0x65,
-                                                                                 0xEC,
-                                                                                 0x3E,
-                                                                                 0x4E,
-                                                                                 0xF5,
-                                                                                 0x2D,
-                                                                                 0xE1,
-                                                                                 0x80,
-                                                                                 0x5E,
-                                                                                 0x1A,
-                                                                                 0x67,
-                                                                                 0x15,
-                                                                                 0xEC,
-                                                                                 0xC8,
-                                                                                 0x41,
-                                                                                 0xEE,
-                                                                                 0xB8,
-                                                                                 0x90,
-                                                                                 0x8A,
-                                                                                 0x58,
-                                                                                 0xBB,
-                                                                                 0x00,
-                                                                                 0xD0,
-                                                                                 0x00,
-                                                                                 0x07,
-                                                                                 0x00,
-                                                                                 0x01,
-                                                                                 0x02,
-                                                                                 0x03,
-                                                                                 0x04,
-                                                                                 0x05,
-                                                                                 0x06,
-                                                                                 0x07,
-                                                                                 0x08,
-                                                                                 0x09,
-                                                                                 0x0A,
-                                                                                 0x0B,
-                                                                                 0x0C,
-                                                                                 0x0D,
-                                                                                 0x0E,
-                                                                                 0x0F,
-                                                                                 0x00,
-                                                                                 0x01,
-                                                                                 0x02,
-                                                                                 0x03,
-                                                                                 0x04,
-                                                                                 0x05,
-                                                                                 0x06,
-                                                                                 0x07,
-                                                                                 0x08,
-                                                                                 0x09,
-                                                                                 0x0A,
-                                                                                 0x0B,
-                                                                                 0x0C,
-                                                                                 0x0D,
-                                                                                 0x0E,
-                                                                                 0x0F,
-                                                                                 0x10,
-                                                                                 0x11,
-                                                                                 0x12,
-                                                                                 0x13,
-                                                                                 0x10,
-                                                                                 0x20,
-                                                                                 0x30,
-                                                                                 0x40,
-                                                                                 0xEF,
-                                                                                 0xBE,
-                                                                                 0xAD,
-                                                                                 0xDE,
-                                                                                 0x00,
-                                                                                 0x00,
-                                                                                 0x00,
-                                                                                 0x00,
-                                                                                 0x01, ];
-
-                                                                            let expected = CMD_AUTH_LOGON_PROOF_Client {
-                                                                                client_public_key: [
-                                                                                     0xF1,
-                                                                                     0x3E,
-                                                                                     0xE5,
-                                                                                     0xD1,
-                                                                                     0x83,
-                                                                                     0xC4,
-                                                                                     0xC8,
-                                                                                     0xA9,
-                                                                                     0x50,
-                                                                                     0x0E,
-                                                                                     0x3F,
-                                                                                     0x5A,
-                                                                                     0x5D,
-                                                                                     0x8A,
-                                                                                     0xEE,
-                                                                                     0x4E,
-                                                                                     0x2E,
-                                                                                     0x45,
-                                                                                     0xE1,
-                                                                                     0xF7,
-                                                                                     0xCC,
-                                                                                     0x8F,
-                                                                                     0x1C,
-                                                                                     0xF5,
-                                                                                     0xEE,
-                                                                                     0x8E,
-                                                                                     0x11,
-                                                                                     0xCE,
-                                                                                     0xD3,
-                                                                                     0x1D,
-                                                                                     0xD7,
-                                                                                     0x08, ],
-                                                                                client_proof: [
-                                                                                     0x6B,
-                                                                                     0x1E,
-                                                                                     0x48,
-                                                                                     0x1B,
-                                                                                     0x4D,
-                                                                                     0x04,
-                                                                                     0xA1,
-                                                                                     0x18,
-                                                                                     0xD8,
-                                                                                     0xF2,
-                                                                                     0xDE,
-                                                                                     0x5C,
-                                                                                     0x59,
-                                                                                     0xD5,
-                                                                                     0x5C,
-                                                                                     0x81,
-                                                                                     0x2E,
-                                                                                     0x65,
-                                                                                     0xEC,
-                                                                                     0x3E, ],
-                                                                                crc_hash: [
-                                                                                     0x4E,
-                                                                                     0xF5,
-                                                                                     0x2D,
-                                                                                     0xE1,
-                                                                                     0x80,
-                                                                                     0x5E,
-                                                                                     0x1A,
-                                                                                     0x67,
-                                                                                     0x15,
-                                                                                     0xEC,
-                                                                                     0xC8,
-                                                                                     0x41,
-                                                                                     0xEE,
-                                                                                     0xB8,
-                                                                                     0x90,
-                                                                                     0x8A,
-                                                                                     0x58,
-                                                                                     0xBB,
-                                                                                     0x00,
-                                                                                     0xD0, ],
-                                                                                telemetry_keys: vec![ ],
-                                                                                security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::empty()
-                                                                                    .set_PIN(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-                                                                                        pin_hash: [
-                                                                                             0x00,
-                                                                                             0x01,
-                                                                                             0x02,
-                                                                                             0x03,
-                                                                                             0x04,
-                                                                                             0x05,
-                                                                                             0x06,
-                                                                                             0x07,
-                                                                                             0x08,
-                                                                                             0x09,
-                                                                                             0x0A,
-                                                                                             0x0B,
-                                                                                             0x0C,
-                                                                                             0x0D,
-                                                                                             0x0E,
-                                                                                             0x0F,
-                                                                                             0x10,
-                                                                                             0x11,
-                                                                                             0x12,
-                                                                                             0x13, ],
-                                                                                        pin_salt: [
-                                                                                             0x00,
-                                                                                             0x01,
-                                                                                             0x02,
-                                                                                             0x03,
-                                                                                             0x04,
-                                                                                             0x05,
-                                                                                             0x06,
-                                                                                             0x07,
-                                                                                             0x08,
-                                                                                             0x09,
-                                                                                             0x0A,
-                                                                                             0x0B,
-                                                                                             0x0C,
-                                                                                             0x0D,
-                                                                                             0x0E,
-                                                                                             0x0F, ],
-                                                                                    })
-                                                                                    .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
-                                                                                        unknown0: 0x10,
-                                                                                        unknown1: 0x20,
-                                                                                        unknown2: 0x30,
-                                                                                        unknown3: 0x40,
-                                                                                        unknown4: 0xDEADBEEF,
-                                                                                    })
-                                                                                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
-                                                                                        unknown5: 0x1,
-                                                                                    })
-,
-                                                                                };
-
-                                                                                let header_size = 1;
-                                                                                let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&raw)).await.unwrap();
-                                                                                let t = match t {
-                                                                                    ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-                                                                                    opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-                                                                                };
-
-                                                                                assert_eq!(t.client_public_key, expected.client_public_key);
-                                                                                assert_eq!(t.client_proof, expected.client_proof);
-                                                                                assert_eq!(t.crc_hash, expected.crc_hash);
-                                                                                assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-                                                                                assert_eq!(t.security_flag, expected.security_flag);
-
-                                                                                assert_eq!(t.size() + header_size, raw.len());
-
-                                                                                let mut dest = Vec::with_capacity(raw.len());
-                                                                                expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
-
-                                                                                assert_eq!(dest, raw);
-                                                                            }
-
-                                                                        }
+}
