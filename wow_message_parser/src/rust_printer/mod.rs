@@ -894,7 +894,7 @@ impl ImplType {
     }
 }
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub enum DefinerType {
     Enum,
     Flag,

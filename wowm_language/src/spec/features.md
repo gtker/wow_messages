@@ -1,6 +1,22 @@
 # Implementation Features
 
-## Declarations
+## Definers
+
+### Enums
+#### `Enum`
+
+Any enumerator with and without a `self.value` field.
+
+### `EnumSelf`
+
+Any enumerator with a `self.value` field.
+
+### Flags
+#### `Flag`
+
+Any flag.
+
+## Containers
 
 ### `SimpleBuiltInTypes`
 
@@ -17,11 +33,20 @@ struct BuiltInTypes {
     f64 b_f64;
     f32_be b_f32_be;
     f64_be b_f64_be;
-    CString c_string;
-    String[10] fixed_string;
-    String[b_u8] variable_string;
 }
 /* This also uses feature STRUCT */
+```
+
+### `ComplexBuiltInTypes`
+
+```rust,ignore
+struct ComplexBuiltInTypes {
+    CString c_string;
+    String[10] fixed_string;
+    u8 b_u8;
+    String[b_u8] variable_string;
+    Guid guid;
+}
 ```
 
 ### `SimpleDefinerTypes`
@@ -54,6 +79,8 @@ struct SimpleDefinerTypes {
 }
 /* This also uses feature STRUCT */
 ```
+
+### `SubObjects`
 
 ### `PackedGuidTypes`
 
@@ -137,10 +164,6 @@ struct SimpleArrays {
     f64_be[10] fixed_f64_be;
     f64_be[i_f64_be] variable_f64_be;
 
-    u8 i_cstring;
-    CString[10] fixed_cstring;
-    CString[i_cstring] variable_cstring;
-
     /* No String[] arrays */
 }
 /* This also uses feature STRUCT and SIMPLE_BUILT_IN_TYPES */
@@ -149,16 +172,6 @@ struct SimpleArrays {
 ### `ComplexArrays`
 
 ```rust,ignore
-flag SimpleFlag : u8 {
-    NONE = 0;
-    SOME = 1;
-}
-
-enum SimpleEnum : u8 {
-    ZERO = 0;
-    ONE = 1;
-}
-
 struct InnerStruct {
     u8 b_u8;
 }
@@ -168,31 +181,26 @@ struct ComplexArrays {
     InnerStruct[10] fixed_struct;
     InnerStruct[i_struct] variable_struct;
 
-    u8 i_flag;
-    SimpleFlag[10] fixed_flag;
-    SimpleFlag[i_flag] variable_flag;
-
-    u8 i_enum;
-    SimpleEnum[10] fixed_enum;
-    SimpleEnum[i_enum] variable_enum;
-
     u8 i_packed_guid;
     PackedGuid[10] fixed_packed_guid;
     PackedGuid[i_packed_guid] variable_packed_guid;
 
-    u8 i_update_mask;
-    UpdateMask[10] fixed_update_mask;
-    UpdateMask[i_update_mask] variable_update_mask;
+    u8 i_guid;
+    Guid[10] fixed_guid;
+    Guid[i_guid] variable_guid;
 
-    u8 i_aura_mask;
-    AuraMask[10] fixed_aura_mask;
-    AuraMask[i_aura_mask] variable_aura_mask;
+    u8 i_cstring;
+    CString[10] fixed_cstring;
+    CString[i_cstring] variable_cstring;
 }
 /* This also uses feature STRUCT, SIMPLE_BUILT_IN_TYPES
-    PACKED_GUID_TYPES, AURA_MASK_TYPES and UPDATE_MASK_TYPES, 
-    COMPLEX_TYPES.
+    PACKED_GUID_TYPES, COMPLEX_TYPES.
 */
 ```
+
+### `FixedArrays`
+
+### `VariableArrays`
 
 ### `EndlessArrays`
 
@@ -202,22 +210,6 @@ struct EndlessArrays {
 }
 /* This also uses feature STRUCT, SIMPLE_BUILT_IN_TYPES */
 ```
-
-## Objects
-
-### Enums
-#### `Enum`
-
-Any enumerator without a `self.value` field.
-
-### `EnumSelf`
-
-Any enumerator with a `self.value` field.
-
-### Flags
-#### `Flag`
-
-Any flag.
 
 ### Structs
 #### `Struct`
@@ -241,5 +233,5 @@ Any object with a world version (`versions` [tag](tags.md)).
 
 ### `LoginVersion`
 
-Any object with a login version (`logon_login_versions` [tag](tags.md)).
+Any object with a login version (`login_logon_versions` [tag](tags.md)).
 

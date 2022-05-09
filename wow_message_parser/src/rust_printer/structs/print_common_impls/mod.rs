@@ -7,6 +7,7 @@ use crate::rust_printer::{
     Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
     WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
+use crate::CONTAINER_SELF_SIZE_FIELD;
 
 pub mod print_read;
 pub mod print_write;
@@ -56,7 +57,7 @@ pub fn print_constant(s: &mut Writer, m: &StructMember) {
     match m {
         StructMember::Definition(d) => {
             if let Some(v) = d.verified_value() {
-                if v.original_string() == "self.size" {
+                if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
                     return;
                 }
                 print_constant_member(s, d.name(), d.ty(), v.original_string(), v.value());

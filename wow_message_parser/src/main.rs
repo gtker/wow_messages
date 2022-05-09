@@ -20,10 +20,14 @@ mod container;
 mod doc_printer;
 pub(crate) mod file_info;
 mod file_utils;
+pub mod impl_features;
 pub mod parser;
 mod rust_printer;
 mod test_case;
 mod wowm_printer;
+
+#[cfg(test)]
+mod test;
 
 const UTILITY_PATH: &str = "crate::util";
 
@@ -42,6 +46,7 @@ const CSTRING_LARGEST_ALLOWED: usize = 256;
 
 // Also used in auth.pest
 const ENUM_SELF_VALUE_FIELD: &str = "self.value";
+const CONTAINER_SELF_SIZE_FIELD: &str = "self.size";
 
 const GITHUB_REPO_URL: &str = "https://github.com/gtker/wow_messages";
 
@@ -184,6 +189,3 @@ fn load_files(dir: &Path, components: &mut Objects) {
 fn should_not_write_object(t: &Tags) -> bool {
     t.contains(TEST_STR) || t.contains(SKIP_STR)
 }
-
-#[cfg(test)]
-mod test;

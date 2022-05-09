@@ -3,6 +3,7 @@ use crate::file_info::FileInfo;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::IntegerType;
 use crate::parser::utility;
+use crate::rust_printer::DefinerType;
 use crate::ENUM_SELF_VALUE_FIELD;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
@@ -97,6 +98,7 @@ impl SelfValueDefinerField {
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct Definer {
     name: String,
+    definer_ty: DefinerType,
     fields: Vec<DefinerField>,
     self_value: Option<SelfValueDefinerField>,
     basic_type: IntegerType,
@@ -108,6 +110,7 @@ pub struct Definer {
 impl Definer {
     pub fn new(
         name: &str,
+        definer_ty: DefinerType,
         fields: Vec<DefinerField>,
         basic_type: IntegerType,
         self_value: Option<SelfValueDefinerField>,
@@ -116,6 +119,7 @@ impl Definer {
     ) -> Self {
         Self {
             name: name.to_string(),
+            definer_ty,
             fields,
             self_value,
             basic_type,
@@ -148,6 +152,10 @@ impl Definer {
 
     pub fn name(&self) -> &str {
         &self.name
+    }
+
+    pub fn definer_ty(&self) -> DefinerType {
+        self.definer_ty
     }
 
     pub fn ty(&self) -> &IntegerType {

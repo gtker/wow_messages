@@ -9,6 +9,7 @@ use crate::rust_printer::new_enums::{
 };
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
+use crate::CONTAINER_SELF_SIZE_FIELD;
 
 pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container, prefix: &str, postfix: &str) {
     match e.container_type() {
@@ -161,7 +162,7 @@ pub fn print_write_field_integer(
     postfix: &str,
 ) {
     if let Some(value) = verified_value {
-        if value.original_string() == "self.size" {
+        if value.original_string() == CONTAINER_SELF_SIZE_FIELD {
             s.wln(format!("w.write_all(&((self.size() - {minus_value}) as {basic_type}).to_{endian}_bytes()){postfix}?;",
                           minus_value = size_of_fields_before_size,
                           endian = int_type.rust_endian_str(),
@@ -259,7 +260,7 @@ pub fn print_write_definition(
     match d.ty() {
         Type::Integer(int_type) => {
             let size = if let Some(v) = d.verified_value() {
-                if v.original_string() == "self.size" {
+                if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
                     e.size_of_fields_before_size(o)
                 } else {
                     0

@@ -17,6 +17,7 @@ use crate::container::{
 use crate::file_info::FileInfo;
 use crate::parser::enumerator::{Definer, SelfValueDefinerField};
 use crate::parser::utility::parse_value;
+use crate::rust_printer::DefinerType;
 use crate::test_case::{TestCase, TestCaseMember, TestCaseValueInitial};
 use crate::ENUM_SELF_VALUE_FIELD;
 use types::ty::Type;
@@ -111,8 +112,18 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, filename: &str) -
                 let keyword = statement.next().unwrap().as_str();
 
                 match keyword {
-                    "enum" => enums.push(parse_enum(&mut statement, tags, file_info)),
-                    "flag" => flags.push(parse_enum(&mut statement, tags, file_info)),
+                    "enum" => enums.push(parse_enum(
+                        &mut statement,
+                        tags,
+                        file_info,
+                        DefinerType::Enum,
+                    )),
+                    "flag" => flags.push(parse_enum(
+                        &mut statement,
+                        tags,
+                        file_info,
+                        DefinerType::Flag,
+                    )),
                     _ => panic!("invalid keyword for definer"),
                 }
             }
@@ -450,7 +461,12 @@ fn parse_if_statement(f: &mut Pairs<Rule>) -> (Vec<Condition>, Vec<StructMember>
     (conditions, members)
 }
 
-pub fn parse_enum(t: &mut Pairs<Rule>, tags: &Tags, file_info: FileInfo) -> Definer {
+pub fn parse_enum(
+    t: &mut Pairs<Rule>,
+    tags: &Tags,
+    file_info: FileInfo,
+    definer_ty: DefinerType,
+) -> Definer {
     let ident = t.next().unwrap();
     assert_eq!(ident.as_rule(), Rule::identifier);
 
@@ -503,6 +519,7 @@ pub fn parse_enum(t: &mut Pairs<Rule>, tags: &Tags, file_info: FileInfo) -> Defi
 
     Definer::new(
         ident.as_str(),
+        definer_ty,
         fields,
         basic_type.as_str().into(),
         self_value,

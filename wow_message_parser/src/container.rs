@@ -14,7 +14,7 @@ use crate::rust_printer::{
     WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::test_case::TestCase;
-use crate::LOGIN_LOGON_VERSIONS;
+use crate::{CONTAINER_SELF_SIZE_FIELD, LOGIN_LOGON_VERSIONS};
 use std::ops::AddAssign;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd)]
@@ -487,7 +487,7 @@ impl Container {
                         Type::AuraMask => panic!(),
                     }
                     if let Some(v) = &d.verified_value {
-                        if v.original_string() == "self.size" {
+                        if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
                             return sum;
                         }
                     }
@@ -1366,6 +1366,13 @@ impl IfStatement {
         }
     }
 
+    pub fn is_not_enum(&self) -> bool {
+        match self.conditional.equations[0] {
+            Equation::NotEquals { .. } => true,
+            _ => false,
+        }
+    }
+
     pub fn members(&self) -> &[StructMember] {
         &self.members
     }
@@ -1525,7 +1532,7 @@ impl StructMemberDefinition {
                         v.identifier().to_string(),
                     ))
                 } else {
-                    let value = if v.identifier() != "self.size" {
+                    let value = if v.identifier() != CONTAINER_SELF_SIZE_FIELD {
                         o.get_definer_field_value(&self.ty().rust_str(), v.identifier(), &self.kvs)
                     } else {
                         0
