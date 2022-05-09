@@ -343,7 +343,7 @@ pub fn print_write_definition(
     }
 }
 
-fn print_write_field(
+pub fn print_write_field(
     s: &mut Writer,
     e: &Container,
     o: &Objects,

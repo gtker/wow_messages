@@ -680,13 +680,14 @@ impl VariableSized for RealmRealmFlagSPECIFY_BUILD {
 
 impl MaximumPossibleSized for RealmRealmFlagSPECIFY_BUILD {
     fn maximum_possible_size() -> usize {
-        Version::maximum_possible_size() // version: Version
+        5 // version: Version
     }
 }
 
 impl RealmRealmFlagSPECIFY_BUILD {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // version: Version
         self.version.write(w)?;
 
         Ok(())
@@ -694,6 +695,7 @@ impl RealmRealmFlagSPECIFY_BUILD {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // version: Version
         self.version.tokio_write(w).await?;
 
         Ok(())
@@ -701,6 +703,7 @@ impl RealmRealmFlagSPECIFY_BUILD {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // version: Version
         self.version.astd_write(w).await?;
 
         Ok(())

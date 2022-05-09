@@ -2304,19 +2304,20 @@ pub struct SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
 
 impl VariableSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
     fn size(&self) -> usize {
-        GroupMemberOnlineStatus::size() // status: GroupMemberOnlineStatus
+        1 // status: GroupMemberOnlineStatus
     }
 }
 
 impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
     fn maximum_possible_size() -> usize {
-        GroupMemberOnlineStatus::maximum_possible_size() // status: GroupMemberOnlineStatus
+        1 // status: GroupMemberOnlineStatus
     }
 }
 
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // status: GroupMemberOnlineStatus
         self.status.write(w)?;
 
         Ok(())
@@ -2324,6 +2325,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // status: GroupMemberOnlineStatus
         self.status.tokio_write(w).await?;
 
         Ok(())
@@ -2331,6 +2333,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // status: GroupMemberOnlineStatus
         self.status.astd_write(w).await?;
 
         Ok(())
@@ -2358,6 +2361,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_HP
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_HP {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // current_health: u16
         w.write_all(&self.current_health.to_le_bytes())?;
 
         Ok(())
@@ -2365,6 +2369,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_HP {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // current_health: u16
         w.write_all(&self.current_health.to_le_bytes()).await?;
 
         Ok(())
@@ -2372,6 +2377,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_HP {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // current_health: u16
         w.write_all(&self.current_health.to_le_bytes()).await?;
 
         Ok(())
@@ -2399,6 +2405,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_HP
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_HP {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // max_health: u16
         w.write_all(&self.max_health.to_le_bytes())?;
 
         Ok(())
@@ -2406,6 +2413,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_HP {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // max_health: u16
         w.write_all(&self.max_health.to_le_bytes()).await?;
 
         Ok(())
@@ -2413,6 +2421,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_HP {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // max_health: u16
         w.write_all(&self.max_health.to_le_bytes()).await?;
 
         Ok(())
@@ -2427,19 +2436,20 @@ pub struct SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE {
 
 impl VariableSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE {
     fn size(&self) -> usize {
-        Power::size() // power: Power
+        1 // power: Power
     }
 }
 
 impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE {
     fn maximum_possible_size() -> usize {
-        Power::maximum_possible_size() // power: Power
+        1 // power: Power
     }
 }
 
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // power: Power
         self.power.write(w)?;
 
         Ok(())
@@ -2447,6 +2457,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // power: Power
         self.power.tokio_write(w).await?;
 
         Ok(())
@@ -2454,6 +2465,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POWER_TYPE {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // power: Power
         self.power.astd_write(w).await?;
 
         Ok(())
@@ -2481,6 +2493,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_PO
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_POWER {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // current_power: u16
         w.write_all(&self.current_power.to_le_bytes())?;
 
         Ok(())
@@ -2488,6 +2501,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_POWER {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // current_power: u16
         w.write_all(&self.current_power.to_le_bytes()).await?;
 
         Ok(())
@@ -2495,6 +2509,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_CUR_POWER {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // current_power: u16
         w.write_all(&self.current_power.to_le_bytes()).await?;
 
         Ok(())
@@ -2522,6 +2537,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_PO
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_POWER {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // max_power: u16
         w.write_all(&self.max_power.to_le_bytes())?;
 
         Ok(())
@@ -2529,6 +2545,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_POWER {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // max_power: u16
         w.write_all(&self.max_power.to_le_bytes()).await?;
 
         Ok(())
@@ -2536,6 +2553,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_MAX_POWER {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // max_power: u16
         w.write_all(&self.max_power.to_le_bytes()).await?;
 
         Ok(())
@@ -2563,6 +2581,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_LEVEL 
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_LEVEL {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // level: u16
         w.write_all(&self.level.to_le_bytes())?;
 
         Ok(())
@@ -2570,6 +2589,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_LEVEL {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // level: u16
         w.write_all(&self.level.to_le_bytes()).await?;
 
         Ok(())
@@ -2577,6 +2597,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_LEVEL {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // level: u16
         w.write_all(&self.level.to_le_bytes()).await?;
 
         Ok(())
@@ -2591,19 +2612,20 @@ pub struct SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE {
 
 impl VariableSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE {
     fn size(&self) -> usize {
-        Area::size() // area: Area
+        4 // area: Area
     }
 }
 
 impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE {
     fn maximum_possible_size() -> usize {
-        Area::maximum_possible_size() // area: Area
+        4 // area: Area
     }
 }
 
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // area: Area
         self.area.write(w)?;
 
         Ok(())
@@ -2611,6 +2633,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // area: Area
         self.area.tokio_write(w).await?;
 
         Ok(())
@@ -2618,6 +2641,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_ZONE {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // area: Area
         self.area.astd_write(w).await?;
 
         Ok(())
@@ -2648,8 +2672,10 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POSITI
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POSITION {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // position_x: u16
         w.write_all(&self.position_x.to_le_bytes())?;
 
+        // position_y: u16
         w.write_all(&self.position_y.to_le_bytes())?;
 
         Ok(())
@@ -2657,8 +2683,10 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POSITION {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // position_x: u16
         w.write_all(&self.position_x.to_le_bytes()).await?;
 
+        // position_y: u16
         w.write_all(&self.position_y.to_le_bytes()).await?;
 
         Ok(())
@@ -2666,8 +2694,10 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_POSITION {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // position_x: u16
         w.write_all(&self.position_x.to_le_bytes()).await?;
 
+        // position_y: u16
         w.write_all(&self.position_y.to_le_bytes()).await?;
 
         Ok(())
@@ -2688,13 +2718,14 @@ impl VariableSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_AURAS {
 
 impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_AURAS {
     fn maximum_possible_size() -> usize {
-        65536 // auras: AuraMask
+        132 // auras: AuraMask
     }
 }
 
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_AURAS {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // auras: AuraMask
         self.auras.write(w)?;
 
         Ok(())
@@ -2702,6 +2733,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_AURAS {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // auras: AuraMask
         self.auras.tokio_write(w).await?;
 
         Ok(())
@@ -2709,6 +2741,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_AURAS {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // auras: AuraMask
         self.auras.astd_write(w).await?;
 
         Ok(())
@@ -2723,7 +2756,7 @@ pub struct SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NAME {
 
 impl VariableSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NAME {
     fn size(&self) -> usize {
-        self.pet_name.len() + 1 // pet_name: CString and Null Terminator
+        self.pet_name.len() + 1 // pet_name: CString
     }
 }
 
@@ -2736,6 +2769,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NA
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NAME {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_name: CString
         w.write_all(self.pet_name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
@@ -2745,6 +2779,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NAME {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_name: CString
         w.write_all(self.pet_name.as_bytes()).await?;
         // Null terminator
         w.write_all(&[0]).await?;
@@ -2754,6 +2789,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_NAME {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_name: CString
         w.write_all(self.pet_name.as_bytes()).await?;
         // Null terminator
         w.write_all(&[0]).await?;
@@ -2783,6 +2819,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MO
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MODEL_ID {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_display_id: u16
         w.write_all(&self.pet_display_id.to_le_bytes())?;
 
         Ok(())
@@ -2790,6 +2827,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MODEL_ID {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_display_id: u16
         w.write_all(&self.pet_display_id.to_le_bytes()).await?;
 
         Ok(())
@@ -2797,6 +2835,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MODEL_ID {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_display_id: u16
         w.write_all(&self.pet_display_id.to_le_bytes()).await?;
 
         Ok(())
@@ -2824,6 +2863,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CU
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_HP {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_current_health: u16
         w.write_all(&self.pet_current_health.to_le_bytes())?;
 
         Ok(())
@@ -2831,6 +2871,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_HP {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_current_health: u16
         w.write_all(&self.pet_current_health.to_le_bytes()).await?;
 
         Ok(())
@@ -2838,6 +2879,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_HP {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_current_health: u16
         w.write_all(&self.pet_current_health.to_le_bytes()).await?;
 
         Ok(())
@@ -2865,6 +2907,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MA
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_HP {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_max_health: u16
         w.write_all(&self.pet_max_health.to_le_bytes())?;
 
         Ok(())
@@ -2872,6 +2915,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_HP {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_max_health: u16
         w.write_all(&self.pet_max_health.to_le_bytes()).await?;
 
         Ok(())
@@ -2879,6 +2923,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_HP {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_max_health: u16
         w.write_all(&self.pet_max_health.to_le_bytes()).await?;
 
         Ok(())
@@ -2893,19 +2938,20 @@ pub struct SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE {
 
 impl VariableSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE {
     fn size(&self) -> usize {
-        Power::size() // pet_power_type: Power
+        1 // pet_power_type: Power
     }
 }
 
 impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE {
     fn maximum_possible_size() -> usize {
-        Power::maximum_possible_size() // pet_power_type: Power
+        1 // pet_power_type: Power
     }
 }
 
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_power_type: Power
         self.pet_power_type.write(w)?;
 
         Ok(())
@@ -2913,6 +2959,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_power_type: Power
         self.pet_power_type.tokio_write(w).await?;
 
         Ok(())
@@ -2920,6 +2967,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_POWER_TYPE {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_power_type: Power
         self.pet_power_type.astd_write(w).await?;
 
         Ok(())
@@ -2947,6 +2995,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CU
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_POWER {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_current_power: u16
         w.write_all(&self.pet_current_power.to_le_bytes())?;
 
         Ok(())
@@ -2954,6 +3003,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_POWER {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_current_power: u16
         w.write_all(&self.pet_current_power.to_le_bytes()).await?;
 
         Ok(())
@@ -2961,6 +3011,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_CUR_POWER {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_current_power: u16
         w.write_all(&self.pet_current_power.to_le_bytes()).await?;
 
         Ok(())
@@ -2988,6 +3039,7 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MA
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_POWER {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_max_power: u16
         w.write_all(&self.pet_max_power.to_le_bytes())?;
 
         Ok(())
@@ -2995,6 +3047,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_POWER {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_max_power: u16
         w.write_all(&self.pet_max_power.to_le_bytes()).await?;
 
         Ok(())
@@ -3002,6 +3055,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_MAX_POWER {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_max_power: u16
         w.write_all(&self.pet_max_power.to_le_bytes()).await?;
 
         Ok(())
@@ -3022,13 +3076,14 @@ impl VariableSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_AURAS {
 
 impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_AURAS {
     fn maximum_possible_size() -> usize {
-        65536 // pet_auras: AuraMask
+        132 // pet_auras: AuraMask
     }
 }
 
 impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_AURAS {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_auras: AuraMask
         self.pet_auras.write(w)?;
 
         Ok(())
@@ -3036,6 +3091,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_AURAS {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_auras: AuraMask
         self.pet_auras.tokio_write(w).await?;
 
         Ok(())
@@ -3043,6 +3099,7 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_PET_AURAS {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_auras: AuraMask
         self.pet_auras.astd_write(w).await?;
 
         Ok(())

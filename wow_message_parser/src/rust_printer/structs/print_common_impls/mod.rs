@@ -1,13 +1,12 @@
 use crate::container::{Container, ContainerType, StructMember, GUID_SIZE};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArraySize, ArrayType, IntegerType};
+use crate::parser::types::{ArraySize, ArrayType};
 use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
 use crate::rust_printer::{
     Writer, LOGIN_CLIENT_MESSAGE_TRAIT_NAME, LOGIN_SERVER_MESSAGE_TRAIT_NAME,
     WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
-use crate::CSTRING_LARGEST_ALLOWED;
 
 pub mod print_read;
 pub mod print_write;
@@ -53,6 +52,29 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     print_size_rust_view(s, e.rust_object(), "self.");
 }
 
+pub fn print_constant(s: &mut Writer, m: &StructMember) {
+    match m {
+        StructMember::Definition(d) => {
+            if let Some(v) = d.verified_value() {
+                if v.original_string() == "self.size" {
+                    return;
+                }
+                print_constant_member(s, d.name(), d.ty(), v.original_string(), v.value());
+            }
+        }
+        StructMember::IfStatement(statement) => {
+            for member in statement.all_members() {
+                print_constant(s, member);
+            }
+        }
+        StructMember::OptionalStatement(optional) => {
+            for member in optional.members() {
+                print_constant(s, member);
+            }
+        }
+    }
+}
+
 fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
     let empty_impl = |s: &mut Writer, t| {
         s.wln(format!("impl {} for {} {{}}", t, e.name()));
@@ -86,29 +108,6 @@ fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
                     s.wln(format!("const OPCODE: u8 = {:#04x};", v));
                 },
             );
-        }
-    }
-
-    fn print_constant(s: &mut Writer, m: &StructMember) {
-        match m {
-            StructMember::Definition(d) => {
-                if let Some(v) = d.verified_value() {
-                    if v.original_string() == "self.size" {
-                        return;
-                    }
-                    print_constant_member(s, d.name(), d.ty(), v.original_string(), v.value());
-                }
-            }
-            StructMember::IfStatement(statement) => {
-                for member in statement.all_members() {
-                    print_constant(s, member);
-                }
-            }
-            StructMember::OptionalStatement(optional) => {
-                for member in optional.members() {
-                    print_constant(s, member);
-                }
-            }
         }
     }
 
@@ -410,33 +409,33 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
     s.wln_no_indent(m.size_comment());
 }
 
-fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
-    let maximum_possible_size = |s: &mut Writer| {
-        if r.sizes().maximum() > u16::MAX.into() {
-            s.wln(format!(
-                "{} // Capped at u16::MAX due to size field.",
-                u16::MAX
+fn print_maximum_possible_size(s: &mut Writer, r: &RustObject) {
+    if r.sizes().maximum() > u16::MAX.into() {
+        s.wln(format!(
+            "{} // Capped at u16::MAX due to size field.",
+            u16::MAX
+        ));
+    } else {
+        s.wln("0");
+
+        for m in r.members() {
+            s.w("+ ");
+
+            s.w_no_indent(format!("{}", m.sizes().maximum()));
+
+            s.wln_no_indent(format!(
+                " // {name}: {ty}",
+                name = m.name(),
+                ty = m.ty().str()
             ));
-        } else {
-            s.wln("0");
-
-            for m in r.members() {
-                s.w("+ ");
-
-                s.w_no_indent(format!("{}", m.sizes().maximum()));
-
-                s.wln_no_indent(format!(
-                    " // {name}: {ty}",
-                    name = m.name(),
-                    ty = m.ty().str()
-                ));
-            }
         }
-    };
+    }
+}
 
+pub fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
     if r.constant_sized() {
         s.constant_sized(r.name(), |s| {
-            maximum_possible_size(s);
+            print_maximum_possible_size(s, r);
         });
     } else {
         s.variable_size(
@@ -473,131 +472,9 @@ fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
                     );
                 }
             },
-            maximum_possible_size,
+            |s| {
+                print_maximum_possible_size(s, r);
+            },
         );
     }
-}
-
-pub fn get_array_type_largest_possible_value(ty: &Type, e: &Container) -> usize {
-    match ty {
-        Type::String { length } => {
-            if let Ok(v) = length.parse::<usize>() {
-                v
-            } else {
-                match e.get_type_of_variable(length) {
-                    Type::Integer(i) => match i {
-                        IntegerType::U8 => u8::MAX as usize,
-                        IntegerType::U16(_) => u16::MAX as usize,
-                        IntegerType::U32(_) => u32::MAX as usize,
-                        IntegerType::U64(_) => u64::MAX as usize,
-                    },
-                    _ => panic!("non int used as size for string"),
-                }
-            }
-        }
-        Type::Array(array) => match array.size() {
-            ArraySize::Fixed(_) => 0,
-            ArraySize::Variable(v) => match e.get_type_of_variable(&v) {
-                Type::Integer(i) => match i {
-                    IntegerType::U8 => u8::MAX as usize,
-                    IntegerType::U16(_) => u16::MAX as usize,
-                    IntegerType::U32(_) => u32::MAX as usize,
-                    IntegerType::U64(_) => u64::MAX as usize,
-                },
-                _ => panic!("non int used as size for array"),
-            },
-            ArraySize::Endless => 0,
-        },
-        _ => 0,
-    }
-}
-
-pub fn print_maximum_size_of_type(
-    s: &mut Writer,
-    ty: &Type,
-    d_name: &str,
-    array_type_largest_possible_value: usize,
-) {
-    let size = match ty {
-        Type::Integer(integer) => integer.size().to_string(),
-        Type::FloatingPoint(floating) => floating.size().to_string(),
-        Type::CString => CSTRING_LARGEST_ALLOWED.to_string(),
-        Type::String { .. } => array_type_largest_possible_value.to_string(),
-        Type::Array(array) => match array.size() {
-            ArraySize::Fixed(v) => match array.ty() {
-                ArrayType::Integer(i) => {
-                    format!(
-                        "{size} * core::mem::size_of::<{ty}>()",
-                        size = v,
-                        ty = i.rust_str()
-                    )
-                }
-                ArrayType::Complex(i) => {
-                    format!("{size} * {ty}::maximum_possible_size()", size = v, ty = i)
-                }
-                ArrayType::CString => {
-                    format!("{size} * {ty}", size = v, ty = CSTRING_LARGEST_ALLOWED)
-                }
-                ArrayType::Guid => {
-                    format!("{size} * 8", size = v)
-                }
-                ArrayType::PackedGuid => {
-                    format!("{size} * 9", size = v)
-                }
-            },
-            ArraySize::Variable(_) => match array.ty() {
-                ArrayType::Integer(i) => {
-                    format!(
-                        "{size} * core::mem::size_of::<{ty}>()",
-                        size = array_type_largest_possible_value,
-                        ty = i.rust_str(),
-                    )
-                }
-                ArrayType::Complex(i) => {
-                    format!(
-                        "{size} * {ty}::maximum_possible_size()",
-                        size = array_type_largest_possible_value,
-                        ty = i
-                    )
-                }
-                ArrayType::CString => {
-                    format!(
-                        "{size} * {ty}",
-                        size = array_type_largest_possible_value,
-                        ty = CSTRING_LARGEST_ALLOWED,
-                    )
-                }
-                ArrayType::Guid => {
-                    format!("{size} * 8", size = array_type_largest_possible_value,)
-                }
-                ArrayType::PackedGuid => {
-                    format!("{size} * 9", size = array_type_largest_possible_value,)
-                }
-            },
-            ArraySize::Endless => {
-                // TODO: Not incorrect
-                65536.to_string()
-            }
-        },
-        Type::Identifier { .. } => {
-            format!("{ident}::maximum_possible_size()", ident = ty.str())
-        }
-        Type::PackedGuid => 9.to_string(),
-        Type::Guid => 8.to_string(),
-        Type::UpdateMask => {
-            // TODO: Not inCorrect?
-            65536.to_string()
-        }
-        Type::AuraMask => {
-            // TODO: Not inCorrect?
-            65536.to_string()
-        }
-    };
-
-    s.wln_no_indent(format!(
-        "{size} // {name}: {ty}",
-        size = size,
-        name = d_name,
-        ty = ty.str()
-    ));
 }

@@ -1248,13 +1248,14 @@ impl VariableSized for MovementInfoMovementFlagsON_TRANSPORT {
 
 impl MaximumPossibleSized for MovementInfoMovementFlagsON_TRANSPORT {
     fn maximum_possible_size() -> usize {
-        TransportInfo::maximum_possible_size() // transport: TransportInfo
+        29 // transport: TransportInfo
     }
 }
 
 impl MovementInfoMovementFlagsON_TRANSPORT {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // transport: TransportInfo
         self.transport.write(w)?;
 
         Ok(())
@@ -1262,6 +1263,7 @@ impl MovementInfoMovementFlagsON_TRANSPORT {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // transport: TransportInfo
         self.transport.tokio_write(w).await?;
 
         Ok(())
@@ -1269,6 +1271,7 @@ impl MovementInfoMovementFlagsON_TRANSPORT {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // transport: TransportInfo
         self.transport.astd_write(w).await?;
 
         Ok(())
@@ -1278,39 +1281,43 @@ impl MovementInfoMovementFlagsON_TRANSPORT {
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct MovementInfoMovementFlagsJUMPING {
-    pub z_speed: f32,
     pub cos_angle: f32,
     pub sin_angle: f32,
     pub xy_speed: f32,
+    pub z_speed: f32,
 }
 
 impl VariableSized for MovementInfoMovementFlagsJUMPING {
     fn size(&self) -> usize {
-        4 // z_speed: f32
-        + 4 // cos_angle: f32
+        4 // cos_angle: f32
         + 4 // sin_angle: f32
         + 4 // xy_speed: f32
+        + 4 // z_speed: f32
     }
 }
 
 impl MaximumPossibleSized for MovementInfoMovementFlagsJUMPING {
     fn maximum_possible_size() -> usize {
-        4 // z_speed: f32
-        + 4 // cos_angle: f32
+        4 // cos_angle: f32
         + 4 // sin_angle: f32
         + 4 // xy_speed: f32
+        + 4 // z_speed: f32
     }
 }
 
 impl MovementInfoMovementFlagsJUMPING {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // z_speed: f32
         w.write_all(&self.z_speed.to_le_bytes())?;
 
+        // cos_angle: f32
         w.write_all(&self.cos_angle.to_le_bytes())?;
 
+        // sin_angle: f32
         w.write_all(&self.sin_angle.to_le_bytes())?;
 
+        // xy_speed: f32
         w.write_all(&self.xy_speed.to_le_bytes())?;
 
         Ok(())
@@ -1318,12 +1325,16 @@ impl MovementInfoMovementFlagsJUMPING {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // z_speed: f32
         w.write_all(&self.z_speed.to_le_bytes()).await?;
 
+        // cos_angle: f32
         w.write_all(&self.cos_angle.to_le_bytes()).await?;
 
+        // sin_angle: f32
         w.write_all(&self.sin_angle.to_le_bytes()).await?;
 
+        // xy_speed: f32
         w.write_all(&self.xy_speed.to_le_bytes()).await?;
 
         Ok(())
@@ -1331,12 +1342,16 @@ impl MovementInfoMovementFlagsJUMPING {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // z_speed: f32
         w.write_all(&self.z_speed.to_le_bytes()).await?;
 
+        // cos_angle: f32
         w.write_all(&self.cos_angle.to_le_bytes()).await?;
 
+        // sin_angle: f32
         w.write_all(&self.sin_angle.to_le_bytes()).await?;
 
+        // xy_speed: f32
         w.write_all(&self.xy_speed.to_le_bytes()).await?;
 
         Ok(())
@@ -1364,6 +1379,7 @@ impl MaximumPossibleSized for MovementInfoMovementFlagsSWIMMING {
 impl MovementInfoMovementFlagsSWIMMING {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pitch: f32
         w.write_all(&self.pitch.to_le_bytes())?;
 
         Ok(())
@@ -1371,6 +1387,7 @@ impl MovementInfoMovementFlagsSWIMMING {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pitch: f32
         w.write_all(&self.pitch.to_le_bytes()).await?;
 
         Ok(())
@@ -1378,6 +1395,7 @@ impl MovementInfoMovementFlagsSWIMMING {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pitch: f32
         w.write_all(&self.pitch.to_le_bytes()).await?;
 
         Ok(())
@@ -1405,6 +1423,7 @@ impl MaximumPossibleSized for MovementInfoMovementFlagsSPLINE_ELEVATION {
 impl MovementInfoMovementFlagsSPLINE_ELEVATION {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // spline_elevation: f32
         w.write_all(&self.spline_elevation.to_le_bytes())?;
 
         Ok(())
@@ -1412,6 +1431,7 @@ impl MovementInfoMovementFlagsSPLINE_ELEVATION {
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // spline_elevation: f32
         w.write_all(&self.spline_elevation.to_le_bytes()).await?;
 
         Ok(())
@@ -1419,6 +1439,7 @@ impl MovementInfoMovementFlagsSPLINE_ELEVATION {
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // spline_elevation: f32
         w.write_all(&self.spline_elevation.to_le_bytes()).await?;
 
         Ok(())

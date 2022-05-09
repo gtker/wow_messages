@@ -63,6 +63,7 @@ impl RustMember {
         &mut self,
         enumerator_name: &[&String],
         members: &[RustMember],
+        original_fields: &[StructMember],
     ) {
         let enums = match &mut self.ty {
             RustType::Enum {
@@ -93,6 +94,11 @@ impl RustMember {
             !equal
         });
         for e in enums {
+            for f in original_fields {
+                if !e.original_fields().contains(f) {
+                    e.original_fields.push(f.clone());
+                }
+            }
             e.members.append(&mut members.to_vec());
             e.members.sort_by(|a, b| a.name.cmp(&b.name));
             e.members.dedup_by(|a, b| a.name.eq(&b.name));
@@ -103,6 +109,7 @@ impl RustMember {
         &mut self,
         enumerator_name: &str,
         members: &[RustMember],
+        original_fields: &[StructMember],
     ) {
         let enums = match &mut self.ty {
             RustType::Enum {
@@ -124,6 +131,11 @@ impl RustMember {
 
         let enums = enums.iter_mut().filter(|a| a.name() != enumerator_name);
         for e in enums {
+            for f in original_fields {
+                if !e.original_fields().contains(f) {
+                    e.original_fields.push(f.clone());
+                }
+            }
             e.members.append(&mut members.to_vec());
             e.members.sort_by(|a, b| a.name.cmp(&b.name));
             e.members.dedup_by(|a, b| a.name.eq(&b.name));
@@ -134,6 +146,7 @@ impl RustMember {
         &mut self,
         enumerator_name: &str,
         members: &[RustMember],
+        original_fields: &[StructMember],
     ) {
         let enums = match &mut self.ty {
             RustType::Enum {
@@ -155,6 +168,11 @@ impl RustMember {
 
         let enums = enums.iter_mut().filter(|a| a.name() == enumerator_name);
         for e in enums {
+            for f in original_fields {
+                if !e.original_fields().contains(f) {
+                    e.original_fields.push(f.clone());
+                }
+            }
             e.members.append(&mut members.to_vec());
             e.members.sort_by(|a, b| a.name.cmp(&b.name));
             e.members.dedup_by(|a, b| a.name.eq(&b.name));
@@ -168,6 +186,7 @@ pub struct RustEnumerator {
     value: DefinerValue,
     members: Vec<RustMember>,
     is_main_enumerator: bool,
+    original_fields: Vec<StructMember>,
 }
 
 impl RustEnumerator {
@@ -194,6 +213,9 @@ impl RustEnumerator {
 
     pub fn has_members_in_struct(&self) -> bool {
         !self.members_in_struct().is_empty()
+    }
+    pub fn original_fields(&self) -> &[StructMember] {
+        &self.original_fields
     }
 }
 
@@ -239,6 +261,20 @@ impl RustType {
             RustType::UpdateMask => "UpdateMask".to_string(),
             RustType::AuraMask => "AuraMask".to_string(),
             RustType::PackedGuid | RustType::Guid => "Guid".to_string(),
+        }
+    }
+
+    pub fn rust_str(&self) -> String {
+        match self {
+            RustType::Integer(i) => i.rust_str().to_string(),
+            RustType::Floating(f) => f.rust_str().to_string(),
+            RustType::UpdateMask => "UpdateMask".to_string(),
+            RustType::AuraMask => "AuraMask".to_string(),
+            RustType::Guid | RustType::PackedGuid => "Guid".to_string(),
+            RustType::CString | RustType::String => "String".to_string(),
+            RustType::Array { array, .. } => array.rust_str(),
+            RustType::Flag { ty_name, .. } | RustType::Enum { ty_name, .. } => ty_name.clone(),
+            RustType::Struct(s) => s.clone(),
         }
     }
 }
@@ -457,6 +493,7 @@ pub fn create_if_statement(
     }
 
     let mut main_enumerator_members = Vec::new();
+    let mut main_enumerator_originals = Vec::new();
     for m in statement.members() {
         create_struct_member(
             m,
@@ -468,9 +505,12 @@ pub fn create_if_statement(
             current_scope,
             &mut None,
         );
+
+        main_enumerator_originals.push(m.clone());
     }
 
     let mut else_enumerator_members = Vec::new();
+    let mut else_enumerator_originals = Vec::new();
     for m in &statement.else_statement_members {
         create_struct_member(
             m,
@@ -482,6 +522,8 @@ pub fn create_if_statement(
             current_scope,
             &mut None,
         );
+
+        else_enumerator_originals.push(m.clone());
     }
 
     fn find_subject<'a>(
@@ -507,19 +549,31 @@ pub fn create_if_statement(
         // Apply main to all except main_enumerators
         for i in &main_enumerators {
             find_subject(current_scope, parent_scope, statement)
-                .append_members_to_enumerator_not_equal(i, &main_enumerator_members);
+                .append_members_to_enumerator_not_equal(
+                    i,
+                    &main_enumerator_members,
+                    &main_enumerator_originals,
+                );
         }
 
         // Apply other to main_enumerator
         for i in &main_enumerators {
             find_subject(current_scope, parent_scope, statement)
-                .append_members_to_enumerator_equal(i, &else_enumerator_members);
+                .append_members_to_enumerator_equal(
+                    i,
+                    &else_enumerator_members,
+                    &else_enumerator_originals,
+                );
         }
     } else {
         // Apply main to main_enumerator
         for i in &main_enumerators {
             find_subject(current_scope, parent_scope, statement)
-                .append_members_to_enumerator_equal(i, &main_enumerator_members);
+                .append_members_to_enumerator_equal(
+                    i,
+                    &main_enumerator_members,
+                    &main_enumerator_originals,
+                );
         }
 
         // Apply else_if to else_if, ..
@@ -536,6 +590,7 @@ pub fn create_if_statement(
             }
 
             let mut else_if_enumerator_members = Vec::new();
+            let mut else_if_originals = Vec::new();
             for m in else_if.members() {
                 create_struct_member(
                     m,
@@ -547,11 +602,16 @@ pub fn create_if_statement(
                     current_scope,
                     &mut None,
                 );
+                else_if_originals.push(m.clone());
             }
 
             for i in &else_if_enumerators {
                 find_subject(current_scope, parent_scope, statement)
-                    .append_members_to_enumerator_equal(i, &else_if_enumerator_members);
+                    .append_members_to_enumerator_equal(
+                        i,
+                        &else_if_enumerator_members,
+                        &else_if_originals,
+                    );
             }
         }
 
@@ -560,6 +620,7 @@ pub fn create_if_statement(
             .append_members_to_enumerator_not_equal_range(
                 &main_enumerators,
                 &else_enumerator_members,
+                &else_enumerator_originals,
             );
     }
 }
@@ -638,6 +699,7 @@ pub fn create_struct_member(
                                 value: field.value().clone(),
                                 members: vec![],
                                 is_main_enumerator: false,
+                                original_fields: vec![],
                             });
                         }
                         enumerators

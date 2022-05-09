@@ -1301,11 +1301,17 @@ fn get_type(variable_name: &str, m: &StructMember) -> Option<Type> {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq)]
 pub struct OptionalStatement {
     name: String,
     members: Vec<StructMember>,
     kvs: Tags,
+}
+
+impl PartialEq for OptionalStatement {
+    fn eq(&self, other: &Self) -> bool {
+        self.name == other.name
+    }
 }
 
 impl OptionalStatement {
@@ -1330,7 +1336,7 @@ impl OptionalStatement {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub enum StructMember {
     Definition(StructMemberDefinition),
     IfStatement(IfStatement),
@@ -1345,6 +1351,14 @@ pub struct IfStatement {
     pub else_statement_members: Vec<StructMember>,
     new_enum: Option<NewIfStatement>,
     original_ty: Option<Type>,
+}
+
+impl Eq for IfStatement {}
+
+impl PartialEq for IfStatement {
+    fn eq(&self, other: &Self) -> bool {
+        self.members.first().unwrap() == other.members.first().unwrap()
+    }
 }
 
 impl IfStatement {
@@ -1460,7 +1474,7 @@ impl IfStatement {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub struct StructMemberDefinition {
     name: String,
     struct_type: Type,

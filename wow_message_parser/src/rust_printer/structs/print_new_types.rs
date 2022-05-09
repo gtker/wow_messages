@@ -1,16 +1,18 @@
 use crate::container::Container;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ArrayType, VerifiedContainerValue};
-use crate::rust_printer::complex_print::{ComplexEnum, DefinerType, Enumerator};
+use crate::parser::types::ArrayType;
+use crate::rust_printer::complex_print::DefinerType;
 use crate::rust_printer::enums::get_upcast_types;
 use crate::rust_printer::new_enums::{IfStatementType, NewEnumStructMember, NewIfStatement};
 use crate::rust_printer::rust_view::RustDefiner;
 use crate::rust_printer::structs::print_common_impls;
 use crate::rust_printer::structs::print_common_impls::print_write::{
-    print_enum_if_statement_new, print_flag_if_statement, print_write_definition,
+    print_enum_if_statement_new, print_flag_if_statement, print_write_definition, print_write_field,
 };
-use crate::rust_printer::structs::print_common_impls::{print_size_of_ty_rust_view, print_write};
+use crate::rust_printer::structs::print_common_impls::{
+    print_constant, print_size_of_ty_rust_view,
+};
 use crate::rust_printer::{ImplType, Writer};
 
 pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
@@ -45,7 +47,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
                 });
                 print_size_for_new_flag(s, &rd);
 
-                print_types_for_new_flag(s, ce, e, o);
+                print_types_for_new_flag(s, e, o, &rd);
             }
         }
     }
@@ -296,9 +298,9 @@ fn print_types_for_new_flag_flag_elseif(
     e: &Container,
     o: &Objects,
     ne: &NewIfStatement,
-    f: &Enumerator,
+    enumerator_name: &str,
 ) {
-    let new_ty_name = format!("{}{}", ne.new_ty_name(), f.name());
+    let new_ty_name = format!("{}{}", ne.new_ty_name(), enumerator_name);
 
     s.wln("#[derive(Debug, PartialEq, Clone)]");
     s.new_enum(
@@ -306,7 +308,7 @@ fn print_types_for_new_flag_flag_elseif(
         format!(
             "{new_ty_name}{enumerator}",
             new_ty_name = ne.new_ty_name(),
-            enumerator = f.name()
+            enumerator = enumerator_name
         ),
         |s| {
             for enumerator in ne.enumerators() {
@@ -483,125 +485,21 @@ fn print_types_for_new_flag_flag_elseif(
     s.newline();
 }
 
-fn print_write_for_new_flag_complex(
-    s: &mut Writer,
-    f: &Enumerator,
-    function_header: &str,
-    it: ImplType,
-) {
-    let prefix = it.prefix();
-    let postfix = it.postfix();
-
-    s.bodyn(function_header, |s| {
-        for sf in f.subfields() {
-            match sf.ty() {
-                Type::Integer(int_type) => {
-                    let verified = match sf.constant_value() {
-                        None => None,
-                        Some(v) => {
-                            let parsed_value = crate::parser::utility::parse_value(v);
-                            if let Ok(v) = parsed_value {
-                                Some(VerifiedContainerValue::new(
-                                    v,
-                                    sf.constant_value().as_ref().unwrap().clone(),
-                                ))
-                            } else {
-                                None
-                            }
-                        }
-                    };
-                    print_write::print_write_field_integer(
-                        s,
-                        sf.name(),
-                        "self.",
-                        &int_type,
-                        sf.used_as_size_in(),
-                        &verified,
-                        0,
-                        postfix,
-                    );
-                }
-                Type::FloatingPoint(floating) => {
-                    print_write::print_write_field_floating(
-                        s,
-                        sf.name(),
-                        "self.",
-                        &floating,
-                        postfix,
-                    );
-                }
-                Type::CString => {
-                    print_write::print_write_field_cstring(s, sf.name(), "self.", postfix);
-                }
-                Type::String { .. } => {
-                    print_write::print_write_field_string(s, sf.name(), "self.", postfix);
-                }
-                Type::Array(array) => {
-                    print_write::print_write_field_array(
-                        s,
-                        sf.name(),
-                        "self.",
-                        array,
-                        prefix,
-                        postfix,
-                    );
-                }
-                Type::Identifier { s: identifier, .. } => {
-                    print_write::print_write_field_identifier(
-                        s,
-                        sf.name(),
-                        "self.",
-                        &None,
-                        identifier,
-                        prefix,
-                        postfix,
-                    )
-                }
-                Type::PackedGuid => {
-                    s.wln(format!(
-                        "{variable_prefix}{name}.{prefix}write_packed(w){postfix}?;",
-                        variable_prefix = "self.",
-                        name = sf.name(),
-                        prefix = prefix,
-                        postfix = postfix,
-                    ));
-                    s.newline();
-                }
-                Type::Guid | Type::UpdateMask | Type::AuraMask => {
-                    s.wln(format!(
-                        "{variable_prefix}{name}.{prefix}write(w){postfix}?;",
-                        variable_prefix = "self.",
-                        name = sf.name(),
-                        prefix = prefix,
-                        postfix = postfix,
-                    ));
-                    s.newline();
-                }
-            }
-        }
-        s.wln("Ok(())");
-    });
-}
-
-fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: &Objects) {
-    for f in ce.fields() {
-        if f.should_not_be_in_type() {
+fn print_types_for_new_flag(s: &mut Writer, e: &Container, o: &Objects, rd: &RustDefiner) {
+    for enumerator in rd.complex_flag_enumerators() {
+        if let Some(ne) = e.complex_enum_enumerator_has_else_if(enumerator.name()) {
+            print_types_for_new_flag_flag_elseif(s, e, o, ne, enumerator.name());
             continue;
         }
 
-        if let Some(ne) = e.complex_enum_enumerator_has_else_if(f.name()) {
-            print_types_for_new_flag_flag_elseif(s, e, o, ne, f);
-            continue;
-        }
-
-        let new_type_name = format!("{}{}", ce.name(), f.name());
+        let new_type_name = format!("{}{}", rd.ty_name(), enumerator.name());
         s.wln("#[derive(Debug, PartialEq, Clone)]");
         s.new_struct(&new_type_name, |s| {
-            for sf in f.subfields() {
+            for m in enumerator.members_in_struct() {
                 s.wln(format!(
                     "pub {name}: {ty},",
-                    name = sf.name(),
-                    ty = sf.ty().rust_str()
+                    name = m.name(),
+                    ty = m.ty().rust_str(),
                 ));
             }
         });
@@ -609,82 +507,54 @@ fn print_types_for_new_flag(s: &mut Writer, ce: &ComplexEnum, e: &Container, o: 
         s.variable_size(
             &new_type_name,
             |s| {
-                for (i, sf) in f.subfields().iter().enumerate() {
-                    match i != 0 {
-                        true => s.w("+ "),
-                        false => s.w(""),
+                for (i, m) in enumerator.members().iter().enumerate() {
+                    if i != 0 {
+                        s.w("+ ");
+                    } else {
+                        s.w("");
                     }
-                    let array_inner_constant = match sf.ty() {
-                        Type::Array(array) => match array.ty() {
-                            ArrayType::Integer(_) => true,
-                            ArrayType::Complex(ident) => {
-                                o.type_has_constant_size(&Type::Identifier {
-                                    s: ident.clone(),
-                                    upcast: None,
-                                })
-                            }
-                            ArrayType::CString => false,
-                            ArrayType::Guid => true,
-                            ArrayType::PackedGuid => false,
-                        },
-                        _ => false,
-                    };
 
-                    print_common_impls::print_size_of_ty(
-                        s,
-                        sf.ty(),
-                        sf.name(),
-                        true,
-                        o.type_has_constant_size(sf.ty()),
-                        array_inner_constant,
-                        "self.",
-                        &sf.ty().str(),
-                    );
+                    print_size_of_ty_rust_view(s, m, "self.");
                 }
             },
             |s| {
-                for (i, sf) in f.subfields().iter().enumerate() {
-                    match i != 0 {
-                        true => s.w("+ "),
-                        false => s.w(""),
+                for (i, m) in enumerator.members().iter().enumerate() {
+                    if i != 0 {
+                        s.w("+ ");
+                    } else {
+                        s.w("");
                     }
-                    let array_type_largest_possible_value =
-                        print_common_impls::get_array_type_largest_possible_value(sf.ty(), e);
 
-                    print_common_impls::print_maximum_size_of_type(
-                        s,
-                        sf.ty(),
-                        sf.name(),
-                        array_type_largest_possible_value,
-                    );
+                    s.w_no_indent(format!("{}", m.sizes().maximum()));
+
+                    s.wln_no_indent(format!(
+                        " // {name}: {ty}",
+                        name = m.name(),
+                        ty = m.ty().str()
+                    ));
                 }
             },
         );
 
         s.bodyn(
-            format!(
-                "impl {c_name}{f_name}",
-                c_name = ce.name(),
-                f_name = f.name()
-            ),
+            format!("impl {}", new_type_name),
             |s| {
-                for sf in f.subfields() {
-                    if let Some(v) = sf.constant_value() {
-                        print_common_impls::print_constant_member(
-                            s,
-                            sf.name(),
-                            sf.ty(),
-                            v.as_str(),
-                            v.parse().unwrap(),
-                        );
-                    }
+
+                for m in enumerator.original_fields() {
+                    print_constant(s, m);
                 }
 
                 for it in ImplType::types() {
 
-                    let header = format!("pub {func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", func = it.func(), prefix = it.prefix(), write = it.write());
                     s.wln(it.cfg());
-                    print_write_for_new_flag_complex(s, f, &header, it);
+                    let header = format!("pub {func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", func = it.func(), prefix = it.prefix(), write = it.write());
+                    s.bodyn(header, |s| {
+                        for m in enumerator.original_fields() {
+                            print_write_field(s, e, o, m, "self.", it.prefix(), it.postfix());
+                        }
+
+                        s.wln("Ok(())");
+                    });
                 }
             },
         );
