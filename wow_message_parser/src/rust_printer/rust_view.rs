@@ -7,6 +7,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{
     Array, ArraySize, ArrayType, FloatingPointType, IntegerType, ObjectType,
 };
+use crate::rust_printer::complex_print::DefinerType;
 use crate::test_case::TestCase;
 use std::fmt::{Display, Formatter};
 
@@ -361,27 +362,77 @@ impl RustObject {
     pub fn sizes(&self) -> Sizes {
         self.sizes
     }
+
+    pub fn get_rust_definers(&self) -> Vec<RustDefiner> {
+        fn inner(m: &RustMember, v: &mut Vec<RustDefiner>, container_name: &str) {
+            let (ty_name, enumerators, int_ty, is_simple, definer_type) = match m.ty().clone() {
+                RustType::Enum {
+                    ty_name,
+                    enumerators,
+                    int_ty,
+                    is_simple,
+                } => (ty_name, enumerators, int_ty, is_simple, DefinerType::Enum),
+                RustType::Flag {
+                    ty_name,
+                    enumerators,
+                    int_ty,
+                    is_simple,
+                } => (ty_name, enumerators, int_ty, is_simple, DefinerType::Flag),
+                _ => return,
+            };
+
+            if !is_simple && !v.iter().any(|a| a.ty_name() == ty_name) {
+                let rd = RustDefiner {
+                    inner: m.clone(),
+                    enumerators: enumerators.clone(),
+                    ty_name: ty_name.clone(),
+                    int_ty,
+                    is_simple,
+                    original_ty_name: ty_name.replacen(container_name, "", 1),
+                    definer_type,
+                };
+
+                v.push(rd);
+            }
+
+            for enumerator in enumerators {
+                for m in enumerator.members_in_struct() {
+                    inner(m, v, container_name);
+                }
+            }
+        }
+
+        let mut v = Vec::new();
+
+        for m in self.members_in_struct() {
+            inner(m, &mut v, self.name());
+        }
+
+        v
+    }
+
     pub fn get_rust_definer(&self, name: &str) -> RustDefiner {
         let member = self.get_complex_definer_ty(name);
 
-        let (ty_name, enumerators, int_ty, is_simple) = match member.ty() {
+        let (ty_name, enumerators, int_ty, is_simple, definer_type) = match member.ty() {
             RustType::Enum {
                 ty_name,
                 enumerators,
                 int_ty,
                 is_simple,
-            }
-            | RustType::Flag {
+            } => (ty_name, enumerators, *int_ty, *is_simple, DefinerType::Enum),
+            RustType::Flag {
                 ty_name,
                 int_ty,
                 enumerators,
                 is_simple,
-            } => (ty_name, enumerators, *int_ty, *is_simple),
+            } => (ty_name, enumerators, *int_ty, *is_simple, DefinerType::Flag),
             _ => unreachable!(),
         };
 
         RustDefiner {
             inner: member.clone(),
+            definer_type,
             enumerators: enumerators.clone(),
             ty_name: ty_name.clone(),
             int_ty,
@@ -434,6 +485,7 @@ impl RustObject {
 #[derive(Debug, Clone)]
 pub struct RustDefiner {
     inner: RustMember,
+    definer_type: DefinerType,
     enumerators: Vec<RustEnumerator>,
     ty_name: String,
     int_ty: IntegerType,
@@ -465,6 +517,9 @@ impl RustDefiner {
     }
     pub fn original_ty_name(&self) -> &str {
         &self.original_ty_name
+    }
+    pub fn definer_type(&self) -> DefinerType {
+        self.definer_type
     }
 }
 

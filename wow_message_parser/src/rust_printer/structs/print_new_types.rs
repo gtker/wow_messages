@@ -16,11 +16,9 @@ use crate::rust_printer::structs::print_common_impls::{
 use crate::rust_printer::{ImplType, Writer};
 
 pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
-    for ce in e.nested_types().new_enums() {
-        match ce.definer_ty() {
+    for rd in e.rust_object().get_rust_definers() {
+        match rd.definer_type() {
             DefinerType::Enum => {
-                let rd = e.rust_object().get_rust_definer(ce.name());
-
                 print_new_enum_declaration(s, &rd);
 
                 print_from_new_enum_to_old(s, &rd);
@@ -35,13 +33,11 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
                 print_size_for_new_enum(s, &rd);
             }
             DefinerType::Flag => {
-                let rd = e.rust_object().get_rust_definer(ce.name());
-
                 print_new_flag_declaration(s, &rd);
 
                 print_from_new_flag_to_old(s, &rd);
 
-                s.body(format!("impl {name}", name = ce.name()), |s| {
+                s.body(format!("impl {name}", name = rd.ty_name()), |s| {
                     print_write_for_new_flag(s, &rd);
                     print_constructors_for_new_flag(s, &rd);
                 });

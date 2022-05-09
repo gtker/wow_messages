@@ -1343,6 +1343,197 @@ impl From<SimpleSpellCastResultError> for SMSG_CAST_RESULTError {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+pub enum SMSG_CAST_RESULTSimpleSpellCastResult {
+    SUCCESS {
+        reason: SMSG_CAST_RESULTCastFailureReason,
+    },
+    FAILURE,
+}
+
+impl From<&SimpleSpellCastResult> for SMSG_CAST_RESULTSimpleSpellCastResult {
+    fn from(e: &SimpleSpellCastResult) -> Self {
+        match &e {
+            SimpleSpellCastResult::SUCCESS => Self::SUCCESS {
+                reason: Default::default(),
+            },
+            SimpleSpellCastResult::FAILURE => Self::FAILURE,
+        }
+    }
+}
+
+impl From<&SMSG_CAST_RESULTSimpleSpellCastResult> for SimpleSpellCastResult {
+    fn from(v: &SMSG_CAST_RESULTSimpleSpellCastResult) -> Self {
+        match &v {
+            SMSG_CAST_RESULTSimpleSpellCastResult::SUCCESS { .. } => Self::SUCCESS,
+            SMSG_CAST_RESULTSimpleSpellCastResult::FAILURE => Self::FAILURE,
+        }
+    }
+}
+
+impl Default for SMSG_CAST_RESULTSimpleSpellCastResult {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::SUCCESS {
+            reason: Default::default(),
+        }
+    }
+}
+
+impl SMSG_CAST_RESULTSimpleSpellCastResult {
+    #[cfg(feature = "sync")]
+    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.write(w)?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.tokio_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.astd_write(w).await?;
+        Ok(())
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.write_u16_le(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.tokio_write_u16_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.astd_write_u16_le(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.write_u16_be(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.tokio_write_u16_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u16_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.astd_write_u16_be(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.write_u32_le(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.tokio_write_u32_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.astd_write_u32_le(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.write_u32_be(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.tokio_write_u32_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.astd_write_u32_be(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.write_u64_le(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.tokio_write_u64_le(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.astd_write_u64_le(w).await
+    }
+
+    #[cfg(feature = "sync")]
+    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.write_u64_be(w)
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.tokio_write_u64_be(w).await
+    }
+
+    #[cfg(feature = "async_std")]
+    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        let a: SimpleSpellCastResult = self.into();
+        a.astd_write_u64_be(w).await
+    }
+
+}
+
+impl VariableSized for SMSG_CAST_RESULTSimpleSpellCastResult {
+    fn size(&self) -> usize {
+        match self {
+            Self::SUCCESS {
+                reason,
+            } => {
+                1
+                + reason.size() // reason: SMSG_CAST_RESULTCastFailureReason
+            }
+            Self::FAILURE => {
+                1
+            }
+        }
+    }
+}
+
+impl MaximumPossibleSized for SMSG_CAST_RESULTSimpleSpellCastResult {
+    fn maximum_possible_size() -> usize {
+        65536 // maximum possible u16 size. TODO value.
+    }
+}
+
+#[derive(Debug, PartialEq, Clone)]
 pub enum SMSG_CAST_RESULTCastFailureReason {
     AFFECTING_COMBAT,
     ALREADY_AT_FULL_HEALTH,
@@ -2412,197 +2603,6 @@ impl VariableSized for SMSG_CAST_RESULTCastFailureReason {
 }
 
 impl MaximumPossibleSized for SMSG_CAST_RESULTCastFailureReason {
-    fn maximum_possible_size() -> usize {
-        65536 // maximum possible u16 size. TODO value.
-    }
-}
-
-#[derive(Debug, PartialEq, Clone)]
-pub enum SMSG_CAST_RESULTSimpleSpellCastResult {
-    SUCCESS {
-        reason: SMSG_CAST_RESULTCastFailureReason,
-    },
-    FAILURE,
-}
-
-impl From<&SimpleSpellCastResult> for SMSG_CAST_RESULTSimpleSpellCastResult {
-    fn from(e: &SimpleSpellCastResult) -> Self {
-        match &e {
-            SimpleSpellCastResult::SUCCESS => Self::SUCCESS {
-                reason: Default::default(),
-            },
-            SimpleSpellCastResult::FAILURE => Self::FAILURE,
-        }
-    }
-}
-
-impl From<&SMSG_CAST_RESULTSimpleSpellCastResult> for SimpleSpellCastResult {
-    fn from(v: &SMSG_CAST_RESULTSimpleSpellCastResult) -> Self {
-        match &v {
-            SMSG_CAST_RESULTSimpleSpellCastResult::SUCCESS { .. } => Self::SUCCESS,
-            SMSG_CAST_RESULTSimpleSpellCastResult::FAILURE => Self::FAILURE,
-        }
-    }
-}
-
-impl Default for SMSG_CAST_RESULTSimpleSpellCastResult {
-    fn default() -> Self {
-        // First enumerator without any fields
-        Self::SUCCESS {
-            reason: Default::default(),
-        }
-    }
-}
-
-impl SMSG_CAST_RESULTSimpleSpellCastResult {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.write(w)?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.tokio_write(w).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.astd_write(w).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u16_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.write_u16_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.tokio_write_u16_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u16_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.astd_write_u16_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u16_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.write_u16_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.tokio_write_u16_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u16_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.astd_write_u16_be(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u32_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.write_u32_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.tokio_write_u32_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.astd_write_u32_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u32_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.write_u32_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.tokio_write_u32_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u32_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.astd_write_u32_be(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u64_le<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.write_u64_le(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.tokio_write_u64_le(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_le<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.astd_write_u64_le(w).await
-    }
-
-    #[cfg(feature = "sync")]
-    pub fn write_u64_be<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.write_u64_be(w)
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.tokio_write_u64_be(w).await
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write_u64_be<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SimpleSpellCastResult = self.into();
-        a.astd_write_u64_be(w).await
-    }
-
-}
-
-impl VariableSized for SMSG_CAST_RESULTSimpleSpellCastResult {
-    fn size(&self) -> usize {
-        match self {
-            Self::SUCCESS {
-                reason,
-            } => {
-                1
-                + reason.size() // reason: SMSG_CAST_RESULTCastFailureReason
-            }
-            Self::FAILURE => {
-                1
-            }
-        }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_CAST_RESULTSimpleSpellCastResult {
     fn maximum_possible_size() -> usize {
         65536 // maximum possible u16 size. TODO value.
     }
