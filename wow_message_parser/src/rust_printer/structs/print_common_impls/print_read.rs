@@ -4,11 +4,11 @@ use crate::container::{Container, StructMember, StructMemberDefinition};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Array, ArraySize, ArrayType, ObjectType};
-use crate::rust_printer::complex_print::{ComplexEnum, DefinerType};
+use crate::rust_printer::complex_print::DefinerType;
 use crate::rust_printer::new_enums::{
     IfStatementType, NewEnumStructMember, NewEnumerator, NewIfStatement,
 };
-use crate::rust_printer::rust_view::RustType;
+use crate::rust_printer::rust_view::{RustDefiner, RustType};
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
 use crate::rust_printer::Writer;
 use crate::UTILITY_PATH;
@@ -774,20 +774,10 @@ fn print_read_if_statement_enum_new(
             }
         }
 
-        let mut nested_enums = Vec::new();
-        for n in e.nested_types().new_enums() {
-            for f in en.fields() {
-                if n.variable_name()
-                    == match f {
-                        NewEnumStructMember::Definition(d) => d.name(),
-                        NewEnumStructMember::IfStatement(_) => continue,
-                    }
-                {
-                    nested_enums.push(n.clone());
-                }
-            }
-        }
-        print_read_final_flag(s, nested_enums.as_slice());
+        print_read_final_flag(
+            s,
+            &e.rust_object().rust_definers_in_namespace(ne.new_ty_name()),
+        );
 
         s.open_curly(format!(
             "{new_enum}::{enumerator}",
@@ -833,32 +823,31 @@ fn print_read_if_statement_enum_new(
     s.newline();
 }
 
-fn print_read_final_flag(s: &mut Writer, nested_types: &[ComplexEnum]) {
-    for c in nested_types {
-        match c.definer_ty() {
+fn print_read_final_flag(s: &mut Writer, rds: &[RustDefiner]) {
+    for rd in rds {
+        if rd.is_simple() {
+            continue;
+        }
+
+        match rd.definer_type() {
             DefinerType::Enum => {}
             DefinerType::Flag => {
                 s.open_curly(format!(
-                    "let {var_name} = {struct_name}{ty_name}",
-                    var_name = c.variable_name(),
-                    struct_name = c.original_struct_name(),
-                    ty_name = c.original_ty_name(),
+                    "let {var_name} = {ty_name}",
+                    var_name = rd.variable_name(),
+                    ty_name = rd.ty_name(),
                 ));
                 s.wln(format!(
                     "inner: {var_name}.as_int(),",
-                    var_name = c.variable_name(),
+                    var_name = rd.variable_name()
                 ));
 
-                for f in c.fields() {
-                    if f.should_not_be_in_type() {
-                        continue;
-                    }
-
+                for enumerator in rd.complex_flag_enumerators() {
                     s.wln(format!(
                         "{field_name}: {c_var_name}_{f_name},",
-                        field_name = f.name().to_lowercase(),
-                        c_var_name = c.variable_name(),
-                        f_name = f.name(),
+                        field_name = enumerator.name().to_lowercase(),
+                        c_var_name = rd.variable_name(),
+                        f_name = enumerator.name(),
                     ));
                 }
 
@@ -873,16 +862,7 @@ pub fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, post
         print_read_field(s, e, o, field, prefix, postfix);
     }
 
-    let mut nested_types = Vec::new();
-    for n in e.nested_types().new_enums() {
-        for d in e.nested_types().declarations() {
-            if n.variable_name() == d.name() {
-                nested_types.push(n.clone());
-            }
-        }
-    }
-
-    print_read_final_flag(s, &nested_types);
+    print_read_final_flag(s, &e.rust_object().rust_definers_in_global_scope());
 
     s.open_curly("Ok(Self");
 

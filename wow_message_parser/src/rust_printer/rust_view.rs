@@ -392,7 +392,31 @@ impl RustObject {
     }
 
     pub fn rust_definers_in_global_scope(&self) -> Vec<RustDefiner> {
-        unimplemented!()
+        let mut v = Vec::new();
+
+        for m in self.members_in_struct() {
+            if let Some(rd) = Self::get_rust_definer_from_ty(m, self.name()) {
+                v.push(rd);
+            }
+        }
+
+        v
+    }
+
+    pub fn rust_definers_in_namespace(&self, ty_name: &str) -> Vec<RustDefiner> {
+        let rd = self.get_rust_definer(ty_name);
+
+        let mut v = Vec::new();
+
+        for enumerator in rd.enumerators {
+            for m in enumerator.members_in_struct() {
+                if let Some(rd) = Self::get_rust_definer_from_ty(m, self.name()) {
+                    v.push(rd);
+                }
+            }
+        }
+
+        v
     }
 
     pub fn get_rust_definers(&self) -> Vec<RustDefiner> {
@@ -480,6 +504,9 @@ pub struct RustDefiner {
 }
 
 impl RustDefiner {
+    pub fn variable_name(&self) -> &str {
+        self.inner().name()
+    }
     pub fn inner(&self) -> &RustMember {
         &self.inner
     }
