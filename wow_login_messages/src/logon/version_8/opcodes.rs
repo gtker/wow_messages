@@ -409,7 +409,6 @@ use crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Client;
 use crate::logon::all::{CMD_AUTH_RECONNECT_CHALLENGE_Client, CMD_AUTH_RECONNECT_CHALLENGE_ClientError};
 use crate::logon::version_2::CMD_AUTH_RECONNECT_PROOF_Client;
 use crate::logon::version_2::CMD_REALM_LIST_Client;
-use crate::logon::all::TestStruct;
 
 #[derive(Debug)]
 pub enum ClientOpcodeMessage {
@@ -418,7 +417,6 @@ pub enum ClientOpcodeMessage {
     CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client),
     CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client),
     CMD_REALM_LIST(CMD_REALM_LIST_Client),
-    TestStruct(TestStruct),
 }
 
 impl ReadableAndWritable for ClientOpcodeMessage {
@@ -433,7 +431,6 @@ impl ReadableAndWritable for ClientOpcodeMessage {
             ClientOpcode::CMD_AUTH_RECONNECT_CHALLENGE => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::read(r)?)),
             ClientOpcode::CMD_AUTH_RECONNECT_PROOF => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::read(r)?)),
             ClientOpcode::CMD_REALM_LIST => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::read(r)?)),
-            ClientOpcode::TestStruct => Ok(Self::TestStruct(TestStruct::read(r)?)),
         }
     }
 
@@ -445,7 +442,6 @@ impl ReadableAndWritable for ClientOpcodeMessage {
             Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.write(w)?,
             Self::CMD_AUTH_RECONNECT_PROOF(e) => e.write(w)?,
             Self::CMD_REALM_LIST(e) => e.write(w)?,
-            Self::TestStruct(e) => e.write(w)?,
         }
 
         Ok(())
@@ -470,7 +466,6 @@ impl ReadableAndWritable for ClientOpcodeMessage {
                 ClientOpcode::CMD_AUTH_RECONNECT_CHALLENGE => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::tokio_read(r).await?)),
                 ClientOpcode::CMD_AUTH_RECONNECT_PROOF => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::tokio_read(r).await?)),
                 ClientOpcode::CMD_REALM_LIST => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::tokio_read(r).await?)),
-                ClientOpcode::TestStruct => Ok(Self::TestStruct(TestStruct::tokio_read(r).await?)),
             }
         })
     }
@@ -495,7 +490,6 @@ impl ReadableAndWritable for ClientOpcodeMessage {
                 Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.tokio_write(w).await?,
                 Self::CMD_AUTH_RECONNECT_PROOF(e) => e.tokio_write(w).await?,
                 Self::CMD_REALM_LIST(e) => e.tokio_write(w).await?,
-                Self::TestStruct(e) => e.tokio_write(w).await?,
             }
 
             Ok(())
@@ -521,7 +515,6 @@ impl ReadableAndWritable for ClientOpcodeMessage {
                 ClientOpcode::CMD_AUTH_RECONNECT_CHALLENGE => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE(CMD_AUTH_RECONNECT_CHALLENGE_Client::astd_read(r).await?)),
                 ClientOpcode::CMD_AUTH_RECONNECT_PROOF => Ok(Self::CMD_AUTH_RECONNECT_PROOF(CMD_AUTH_RECONNECT_PROOF_Client::astd_read(r).await?)),
                 ClientOpcode::CMD_REALM_LIST => Ok(Self::CMD_REALM_LIST(CMD_REALM_LIST_Client::astd_read(r).await?)),
-                ClientOpcode::TestStruct => Ok(Self::TestStruct(TestStruct::astd_read(r).await?)),
             }
         })
     }
@@ -546,7 +539,6 @@ impl ReadableAndWritable for ClientOpcodeMessage {
                 Self::CMD_AUTH_RECONNECT_CHALLENGE(e) => e.astd_write(w).await?,
                 Self::CMD_AUTH_RECONNECT_PROOF(e) => e.astd_write(w).await?,
                 Self::CMD_REALM_LIST(e) => e.astd_write(w).await?,
-                Self::TestStruct(e) => e.astd_write(w).await?,
             }
 
             Ok(())
@@ -615,7 +607,6 @@ pub enum ClientOpcode {
     CMD_AUTH_RECONNECT_CHALLENGE,
     CMD_AUTH_RECONNECT_PROOF,
     CMD_REALM_LIST,
-    TestStruct,
 }
 
 impl ClientOpcode {
@@ -626,7 +617,6 @@ impl ClientOpcode {
             Self::CMD_AUTH_RECONNECT_CHALLENGE => 0x02,
             Self::CMD_AUTH_RECONNECT_PROOF => 0x03,
             Self::CMD_REALM_LIST => 0x10,
-            Self::TestStruct => 0xff,
         }
     }
 
@@ -645,7 +635,6 @@ impl ReadableAndWritable for ClientOpcode {
             0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE),
             0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF),
             0x10 => Ok(Self::CMD_REALM_LIST),
-            0xff => Ok(Self::TestStruct),
             opcode => Err(ClientOpcodeError::InvalidOpcode(opcode)),
         }
     }
@@ -676,7 +665,6 @@ impl ReadableAndWritable for ClientOpcode {
                 0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE),
                 0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF),
                 0x10 => Ok(Self::CMD_REALM_LIST),
-                0xff => Ok(Self::TestStruct),
                 opcode => Err(ClientOpcodeError::InvalidOpcode(opcode)),
             }
         })
@@ -721,7 +709,6 @@ impl ReadableAndWritable for ClientOpcode {
                 0x02 => Ok(Self::CMD_AUTH_RECONNECT_CHALLENGE),
                 0x03 => Ok(Self::CMD_AUTH_RECONNECT_PROOF),
                 0x10 => Ok(Self::CMD_REALM_LIST),
-                0xff => Ok(Self::TestStruct),
                 opcode => Err(ClientOpcodeError::InvalidOpcode(opcode)),
             }
         })
@@ -756,7 +743,6 @@ impl From<&ClientOpcodeMessage> for ClientOpcode {
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_CHALLENGE(_) => Self::CMD_AUTH_RECONNECT_CHALLENGE,
             ClientOpcodeMessage::CMD_AUTH_RECONNECT_PROOF(_) => Self::CMD_AUTH_RECONNECT_PROOF,
             ClientOpcodeMessage::CMD_REALM_LIST(_) => Self::CMD_REALM_LIST,
-            ClientOpcodeMessage::TestStruct(_) => Self::TestStruct,
         }
     }
 }

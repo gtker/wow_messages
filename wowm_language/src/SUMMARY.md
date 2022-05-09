@@ -19,7 +19,6 @@
 
 # Login Definers
 - [AccountFlag](docs/accountflag.md)
-- [InnerFlag](docs/innerflag.md)
 - [Locale](docs/locale.md)
 - [LoginResult](docs/loginresult.md)
 - [Os](docs/os.md)
@@ -29,8 +28,6 @@
 - [RealmFlag](docs/realmflag.md)
 - [RealmType](docs/realmtype.md)
 - [SecurityFlag](docs/securityflag.md)
-- [TestFlag](docs/testflag.md)
-- [ThirdFlag](docs/thirdflag.md)
 
 # World Definers
 - [ActivateTaxiReply](docs/activatetaxireply.md)
@@ -161,7 +158,6 @@
 - [CMD_XFER_RESUME](docs/cmd_xfer_resume.md)
 - [Realm](docs/realm.md)
 - [TelemetryKey](docs/telemetrykey.md)
-- [TestStruct](docs/teststruct.md)
 - [Version](docs/version.md)
 
 # Login Containers

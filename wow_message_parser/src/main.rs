@@ -57,7 +57,7 @@ fn main() {
 
     load_files(Path::new("wow_message_parser/wowm/login"), &mut o);
     load_files(Path::new("wow_message_parser/wowm/world"), &mut o);
-    load_files(Path::new("wow_message_parser/wowm/test"), &mut o);
+    //load_files(Path::new("wow_message_parser/wowm/test"), &mut o);
 
     let mut m = ModFiles::new();
 
