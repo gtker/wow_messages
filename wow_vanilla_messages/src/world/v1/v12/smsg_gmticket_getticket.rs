@@ -54,13 +54,13 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                 let read_by_gm = crate::util::read_u8_le(r)?;
 
                 SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                    text,
-                    ticket_type,
-                    days_since_ticket_creation,
-                    days_since_oldest_ticket_creation,
                     days_since_last_updated,
+                    days_since_oldest_ticket_creation,
+                    days_since_ticket_creation,
                     escalation_status,
                     read_by_gm,
+                    text,
+                    ticket_type,
                 }
             }
             GmTicketStatus::DEFAULT => SMSG_GMTICKET_GETTICKETGmTicketStatus::DEFAULT,
@@ -156,13 +156,13 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                     let read_by_gm = crate::util::tokio_read_u8_le(r).await?;
 
                     SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                        text,
-                        ticket_type,
-                        days_since_ticket_creation,
-                        days_since_oldest_ticket_creation,
                         days_since_last_updated,
+                        days_since_oldest_ticket_creation,
+                        days_since_ticket_creation,
                         escalation_status,
                         read_by_gm,
+                        text,
+                        ticket_type,
                     }
                 }
                 GmTicketStatus::DEFAULT => SMSG_GMTICKET_GETTICKETGmTicketStatus::DEFAULT,
@@ -272,13 +272,13 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                     let read_by_gm = crate::util::astd_read_u8_le(r).await?;
 
                     SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                        text,
-                        ticket_type,
-                        days_since_ticket_creation,
-                        days_since_oldest_ticket_creation,
                         days_since_last_updated,
+                        days_since_oldest_ticket_creation,
+                        days_since_ticket_creation,
                         escalation_status,
                         read_by_gm,
+                        text,
+                        ticket_type,
                     }
                 }
                 GmTicketStatus::DEFAULT => SMSG_GMTICKET_GETTICKETGmTicketStatus::DEFAULT,

@@ -38,10 +38,10 @@ impl ReadableAndWritable for AuraLog {
                 let resisted = crate::util::read_u32_le(r)?;
 
                 AuraLogAuraType::PERIODIC_DAMAGE {
-                    damage1,
-                    school,
                     absorbed,
+                    damage1,
                     resisted,
+                    school,
                 }
             }
             AuraType::DUMMY => AuraLogAuraType::DUMMY,
@@ -83,8 +83,8 @@ impl ReadableAndWritable for AuraLog {
                 let damage3 = crate::util::read_u32_le(r)?;
 
                 AuraLogAuraType::OBS_MOD_MANA {
-                    misc_value1,
                     damage3,
+                    misc_value1,
                 }
             }
             AuraType::MOD_RESISTANCE => AuraLogAuraType::MOD_RESISTANCE,
@@ -97,8 +97,8 @@ impl ReadableAndWritable for AuraLog {
                 let damage3 = crate::util::read_u32_le(r)?;
 
                 AuraLogAuraType::PERIODIC_ENERGIZE {
-                    misc_value1,
                     damage3,
+                    misc_value1,
                 }
             }
             AuraType::MOD_PACIFY => AuraLogAuraType::MOD_PACIFY,
@@ -150,9 +150,9 @@ impl ReadableAndWritable for AuraLog {
                 // gain_multiplier: f32
                 let gain_multiplier = crate::util::read_f32_le(r)?;
                 AuraLogAuraType::PERIODIC_MANA_LEECH {
-                    misc_value2,
                     damage,
                     gain_multiplier,
+                    misc_value2,
                 }
             }
             AuraType::MOD_CASTING_SPEED_NOT_STACK => AuraLogAuraType::MOD_CASTING_SPEED_NOT_STACK,
@@ -193,10 +193,10 @@ impl ReadableAndWritable for AuraLog {
                 let resisted = crate::util::read_u32_le(r)?;
 
                 AuraLogAuraType::PERIODIC_DAMAGE_PERCENT {
-                    damage1,
-                    school,
                     absorbed,
+                    damage1,
                     resisted,
+                    school,
                 }
             }
             AuraType::MOD_RESIST_CHANCE => AuraLogAuraType::MOD_RESIST_CHANCE,
@@ -626,10 +626,10 @@ impl ReadableAndWritable for AuraLog {
                     let resisted = crate::util::tokio_read_u32_le(r).await?;
 
                     AuraLogAuraType::PERIODIC_DAMAGE {
-                        damage1,
-                        school,
                         absorbed,
+                        damage1,
                         resisted,
+                        school,
                     }
                 }
                 AuraType::DUMMY => AuraLogAuraType::DUMMY,
@@ -671,8 +671,8 @@ impl ReadableAndWritable for AuraLog {
                     let damage3 = crate::util::tokio_read_u32_le(r).await?;
 
                     AuraLogAuraType::OBS_MOD_MANA {
-                        misc_value1,
                         damage3,
+                        misc_value1,
                     }
                 }
                 AuraType::MOD_RESISTANCE => AuraLogAuraType::MOD_RESISTANCE,
@@ -685,8 +685,8 @@ impl ReadableAndWritable for AuraLog {
                     let damage3 = crate::util::tokio_read_u32_le(r).await?;
 
                     AuraLogAuraType::PERIODIC_ENERGIZE {
-                        misc_value1,
                         damage3,
+                        misc_value1,
                     }
                 }
                 AuraType::MOD_PACIFY => AuraLogAuraType::MOD_PACIFY,
@@ -738,9 +738,9 @@ impl ReadableAndWritable for AuraLog {
                     // gain_multiplier: f32
                     let gain_multiplier = crate::util::tokio_read_f32_le(r).await?;
                     AuraLogAuraType::PERIODIC_MANA_LEECH {
-                        misc_value2,
                         damage,
                         gain_multiplier,
+                        misc_value2,
                     }
                 }
                 AuraType::MOD_CASTING_SPEED_NOT_STACK => AuraLogAuraType::MOD_CASTING_SPEED_NOT_STACK,
@@ -781,10 +781,10 @@ impl ReadableAndWritable for AuraLog {
                     let resisted = crate::util::tokio_read_u32_le(r).await?;
 
                     AuraLogAuraType::PERIODIC_DAMAGE_PERCENT {
-                        damage1,
-                        school,
                         absorbed,
+                        damage1,
                         resisted,
+                        school,
                     }
                 }
                 AuraType::MOD_RESIST_CHANCE => AuraLogAuraType::MOD_RESIST_CHANCE,
@@ -1228,10 +1228,10 @@ impl ReadableAndWritable for AuraLog {
                     let resisted = crate::util::astd_read_u32_le(r).await?;
 
                     AuraLogAuraType::PERIODIC_DAMAGE {
-                        damage1,
-                        school,
                         absorbed,
+                        damage1,
                         resisted,
+                        school,
                     }
                 }
                 AuraType::DUMMY => AuraLogAuraType::DUMMY,
@@ -1273,8 +1273,8 @@ impl ReadableAndWritable for AuraLog {
                     let damage3 = crate::util::astd_read_u32_le(r).await?;
 
                     AuraLogAuraType::OBS_MOD_MANA {
-                        misc_value1,
                         damage3,
+                        misc_value1,
                     }
                 }
                 AuraType::MOD_RESISTANCE => AuraLogAuraType::MOD_RESISTANCE,
@@ -1287,8 +1287,8 @@ impl ReadableAndWritable for AuraLog {
                     let damage3 = crate::util::astd_read_u32_le(r).await?;
 
                     AuraLogAuraType::PERIODIC_ENERGIZE {
-                        misc_value1,
                         damage3,
+                        misc_value1,
                     }
                 }
                 AuraType::MOD_PACIFY => AuraLogAuraType::MOD_PACIFY,
@@ -1340,9 +1340,9 @@ impl ReadableAndWritable for AuraLog {
                     // gain_multiplier: f32
                     let gain_multiplier = crate::util::astd_read_f32_le(r).await?;
                     AuraLogAuraType::PERIODIC_MANA_LEECH {
-                        misc_value2,
                         damage,
                         gain_multiplier,
+                        misc_value2,
                     }
                 }
                 AuraType::MOD_CASTING_SPEED_NOT_STACK => AuraLogAuraType::MOD_CASTING_SPEED_NOT_STACK,
@@ -1383,10 +1383,10 @@ impl ReadableAndWritable for AuraLog {
                     let resisted = crate::util::astd_read_u32_le(r).await?;
 
                     AuraLogAuraType::PERIODIC_DAMAGE_PERCENT {
-                        damage1,
-                        school,
                         absorbed,
+                        damage1,
                         resisted,
+                        school,
                     }
                 }
                 AuraType::MOD_RESIST_CHANCE => AuraLogAuraType::MOD_RESIST_CHANCE,

@@ -45,140 +45,28 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                 let unknown_flags = crate::util::read_u16_le(r)?;
 
                 CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                    server_proof,
                     account_flag,
                     hardware_survey_id,
+                    server_proof,
                     unknown_flags,
                 }
             }
-            LoginResult::FAIL_UNKNOWN0 => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
-                }
-            }
-            LoginResult::FAIL_UNKNOWN1 => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
-                }
-            }
-            LoginResult::FAIL_BANNED => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
-                }
-            }
-            LoginResult::FAIL_UNKNOWN_ACCOUNT => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
-                }
-            }
-            LoginResult::FAIL_INCORRECT_PASSWORD => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
-                }
-            }
-            LoginResult::FAIL_ALREADY_ONLINE => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
-                }
-            }
-            LoginResult::FAIL_NO_TIME => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
-                }
-            }
-            LoginResult::FAIL_DB_BUSY => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
-                }
-            }
-            LoginResult::FAIL_VERSION_INVALID => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
-                }
-            }
-            LoginResult::LOGIN_DOWNLOAD_FILE => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
-                }
-            }
-            LoginResult::FAIL_INVALID_SERVER => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
-                }
-            }
-            LoginResult::FAIL_SUSPENDED => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
-                }
-            }
-            LoginResult::FAIL_NO_ACCESS => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
-                }
-            }
-            LoginResult::SUCCESS_SURVEY => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
-                }
-            }
-            LoginResult::FAIL_PARENTALCONTROL => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
-                }
-            }
-            LoginResult::FAIL_LOCKED_ENFORCED => {
-                // padding: u16
-                let _padding = crate::util::read_u16_le(r)?;
-                // padding is expected to always be 0 (0)
-
-                CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
-                }
-            }
+            LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0,
+            LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1,
+            LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED,
+            LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
+            LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+            LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE,
+            LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
+            LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
+            LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID,
+            LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
+            LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER,
+            LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED,
+            LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS,
+            LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY,
+            LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL,
+            LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED,
         };
 
         Ok(Self {
@@ -348,140 +236,28 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                     let unknown_flags = crate::util::tokio_read_u16_le(r).await?;
 
                     CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                        server_proof,
                         account_flag,
                         hardware_survey_id,
+                        server_proof,
                         unknown_flags,
                     }
                 }
-                LoginResult::FAIL_UNKNOWN0 => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
-                    }
-                }
-                LoginResult::FAIL_UNKNOWN1 => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
-                    }
-                }
-                LoginResult::FAIL_BANNED => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
-                    }
-                }
-                LoginResult::FAIL_UNKNOWN_ACCOUNT => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
-                    }
-                }
-                LoginResult::FAIL_INCORRECT_PASSWORD => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
-                    }
-                }
-                LoginResult::FAIL_ALREADY_ONLINE => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
-                    }
-                }
-                LoginResult::FAIL_NO_TIME => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
-                    }
-                }
-                LoginResult::FAIL_DB_BUSY => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
-                    }
-                }
-                LoginResult::FAIL_VERSION_INVALID => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
-                    }
-                }
-                LoginResult::LOGIN_DOWNLOAD_FILE => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
-                    }
-                }
-                LoginResult::FAIL_INVALID_SERVER => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
-                    }
-                }
-                LoginResult::FAIL_SUSPENDED => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
-                    }
-                }
-                LoginResult::FAIL_NO_ACCESS => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
-                    }
-                }
-                LoginResult::SUCCESS_SURVEY => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
-                    }
-                }
-                LoginResult::FAIL_PARENTALCONTROL => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
-                    }
-                }
-                LoginResult::FAIL_LOCKED_ENFORCED => {
-                    // padding: u16
-                    let _padding = crate::util::tokio_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
-                    }
-                }
+                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0,
+                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1,
+                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED,
+                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
+                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE,
+                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
+                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
+                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID,
+                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
+                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER,
+                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED,
+                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS,
+                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY,
+                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL,
+                LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED,
             };
 
             Ok(Self {
@@ -665,140 +441,28 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                     let unknown_flags = crate::util::astd_read_u16_le(r).await?;
 
                     CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                        server_proof,
                         account_flag,
                         hardware_survey_id,
+                        server_proof,
                         unknown_flags,
                     }
                 }
-                LoginResult::FAIL_UNKNOWN0 => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0 {
-                    }
-                }
-                LoginResult::FAIL_UNKNOWN1 => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1 {
-                    }
-                }
-                LoginResult::FAIL_BANNED => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED {
-                    }
-                }
-                LoginResult::FAIL_UNKNOWN_ACCOUNT => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT {
-                    }
-                }
-                LoginResult::FAIL_INCORRECT_PASSWORD => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD {
-                    }
-                }
-                LoginResult::FAIL_ALREADY_ONLINE => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE {
-                    }
-                }
-                LoginResult::FAIL_NO_TIME => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME {
-                    }
-                }
-                LoginResult::FAIL_DB_BUSY => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY {
-                    }
-                }
-                LoginResult::FAIL_VERSION_INVALID => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID {
-                    }
-                }
-                LoginResult::LOGIN_DOWNLOAD_FILE => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE {
-                    }
-                }
-                LoginResult::FAIL_INVALID_SERVER => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER {
-                    }
-                }
-                LoginResult::FAIL_SUSPENDED => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED {
-                    }
-                }
-                LoginResult::FAIL_NO_ACCESS => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS {
-                    }
-                }
-                LoginResult::SUCCESS_SURVEY => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY {
-                    }
-                }
-                LoginResult::FAIL_PARENTALCONTROL => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL {
-                    }
-                }
-                LoginResult::FAIL_LOCKED_ENFORCED => {
-                    // padding: u16
-                    let _padding = crate::util::astd_read_u16_le(r).await?;
-                    // padding is expected to always be 0 (0)
-
-                    CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED {
-                    }
-                }
+                LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0,
+                LoginResult::FAIL_UNKNOWN1 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN1,
+                LoginResult::FAIL_BANNED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_BANNED,
+                LoginResult::FAIL_UNKNOWN_ACCOUNT => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT,
+                LoginResult::FAIL_INCORRECT_PASSWORD => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INCORRECT_PASSWORD,
+                LoginResult::FAIL_ALREADY_ONLINE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_ALREADY_ONLINE,
+                LoginResult::FAIL_NO_TIME => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_TIME,
+                LoginResult::FAIL_DB_BUSY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_DB_BUSY,
+                LoginResult::FAIL_VERSION_INVALID => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_VERSION_INVALID,
+                LoginResult::LOGIN_DOWNLOAD_FILE => CMD_AUTH_LOGON_PROOF_ServerLoginResult::LOGIN_DOWNLOAD_FILE,
+                LoginResult::FAIL_INVALID_SERVER => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_INVALID_SERVER,
+                LoginResult::FAIL_SUSPENDED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_SUSPENDED,
+                LoginResult::FAIL_NO_ACCESS => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_NO_ACCESS,
+                LoginResult::SUCCESS_SURVEY => CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS_SURVEY,
+                LoginResult::FAIL_PARENTALCONTROL => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_PARENTALCONTROL,
+                LoginResult::FAIL_LOCKED_ENFORCED => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_LOCKED_ENFORCED,
             };
 
             Ok(Self {

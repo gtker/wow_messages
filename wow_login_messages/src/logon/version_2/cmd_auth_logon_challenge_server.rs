@@ -65,11 +65,11 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                 r.read_exact(&mut crc_salt)?;
 
                 CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                    server_public_key,
+                    crc_salt,
                     generator,
                     large_safe_prime,
                     salt,
-                    crc_salt,
+                    server_public_key,
                 }
             }
             LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
@@ -217,11 +217,11 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                     r.read_exact(&mut crc_salt).await?;
 
                     CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                        server_public_key,
+                        crc_salt,
                         generator,
                         large_safe_prime,
                         salt,
-                        crc_salt,
+                        server_public_key,
                     }
                 }
                 LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
@@ -383,11 +383,11 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                     r.read_exact(&mut crc_salt).await?;
 
                     CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                        server_public_key,
+                        crc_salt,
                         generator,
                         large_safe_prime,
                         salt,
-                        crc_salt,
+                        server_public_key,
                     }
                 }
                 LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,

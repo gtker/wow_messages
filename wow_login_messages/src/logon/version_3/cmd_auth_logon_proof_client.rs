@@ -61,8 +61,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
                 r.read_exact(&mut pin_hash)?;
 
                 CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                    pin_salt,
                     pin_hash,
+                    pin_salt,
                 }
             }
         };
@@ -177,8 +177,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
                     r.read_exact(&mut pin_hash).await?;
 
                     CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                        pin_salt,
                         pin_hash,
+                        pin_salt,
                     }
                 }
             };
@@ -307,8 +307,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
                     r.read_exact(&mut pin_hash).await?;
 
                     CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                        pin_salt,
                         pin_hash,
+                        pin_salt,
                     }
                 }
             };

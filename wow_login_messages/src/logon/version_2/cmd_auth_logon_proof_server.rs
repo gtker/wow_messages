@@ -33,8 +33,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                 let hardware_survey_id = crate::util::read_u32_le(r)?;
 
                 CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                    server_proof,
                     hardware_survey_id,
+                    server_proof,
                 }
             }
             LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0,
@@ -126,8 +126,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                     let hardware_survey_id = crate::util::tokio_read_u32_le(r).await?;
 
                     CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                        server_proof,
                         hardware_survey_id,
+                        server_proof,
                     }
                 }
                 LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0,
@@ -233,8 +233,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                     let hardware_survey_id = crate::util::astd_read_u32_le(r).await?;
 
                     CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                        server_proof,
                         hardware_survey_id,
+                        server_proof,
                     }
                 }
                 LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_PROOF_ServerLoginResult::FAIL_UNKNOWN0,

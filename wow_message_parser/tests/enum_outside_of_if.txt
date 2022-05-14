@@ -25,23 +25,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
         let n = NestedEnum::read(r)?;
 
         let t_if = match t {
-            TEnum::ZERO => {
-                let n_if = match n {
-                    NestedEnum::NESTED => {
-                        // nested: u8
-                        let nested = crate::util::read_u8_le(r)?;
-
-                        EnumOutsideOfIfNestedEnum::NESTED {
-                            nested,
-                        }
-                    }
-                    NestedEnum::NOT_NESTED => EnumOutsideOfIfNestedEnum::NOT_NESTED,
-                };
-
-                EnumOutsideOfIfTEnum::ZERO {
-                    n: n_if,
-                }
-            }
+            TEnum::ZERO => EnumOutsideOfIfTEnum::ZERO,
             TEnum::ONE => EnumOutsideOfIfTEnum::ONE,
             TEnum::TWO => EnumOutsideOfIfTEnum::TWO,
             TEnum::THREE => EnumOutsideOfIfTEnum::THREE,
@@ -111,23 +95,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
             let n = NestedEnum::tokio_read(r).await?;
 
             let t_if = match t {
-                TEnum::ZERO => {
-                    let n_if = match n {
-                        NestedEnum::NESTED => {
-                            // nested: u8
-                            let nested = crate::util::tokio_read_u8_le(r).await?;
-
-                            EnumOutsideOfIfNestedEnum::NESTED {
-                                nested,
-                            }
-                        }
-                        NestedEnum::NOT_NESTED => EnumOutsideOfIfNestedEnum::NOT_NESTED,
-                    };
-
-                    EnumOutsideOfIfTEnum::ZERO {
-                        n: n_if,
-                    }
-                }
+                TEnum::ZERO => EnumOutsideOfIfTEnum::ZERO,
                 TEnum::ONE => EnumOutsideOfIfTEnum::ONE,
                 TEnum::TWO => EnumOutsideOfIfTEnum::TWO,
                 TEnum::THREE => EnumOutsideOfIfTEnum::THREE,
@@ -211,23 +179,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
             let n = NestedEnum::astd_read(r).await?;
 
             let t_if = match t {
-                TEnum::ZERO => {
-                    let n_if = match n {
-                        NestedEnum::NESTED => {
-                            // nested: u8
-                            let nested = crate::util::astd_read_u8_le(r).await?;
-
-                            EnumOutsideOfIfNestedEnum::NESTED {
-                                nested,
-                            }
-                        }
-                        NestedEnum::NOT_NESTED => EnumOutsideOfIfNestedEnum::NOT_NESTED,
-                    };
-
-                    EnumOutsideOfIfTEnum::ZERO {
-                        n: n_if,
-                    }
-                }
+                TEnum::ZERO => EnumOutsideOfIfTEnum::ZERO,
                 TEnum::ONE => EnumOutsideOfIfTEnum::ONE,
                 TEnum::TWO => EnumOutsideOfIfTEnum::TWO,
                 TEnum::THREE => EnumOutsideOfIfTEnum::THREE,

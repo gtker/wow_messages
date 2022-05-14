@@ -42,8 +42,8 @@ impl ReadableAndWritable for NestedNotIf {
                 };
 
                 NestedNotIfTEnum::ONE {
-                    not_zero,
                     e: e_if,
+                    not_zero,
                 }
             }
             TEnum::TWO => {
@@ -66,8 +66,8 @@ impl ReadableAndWritable for NestedNotIf {
                 };
 
                 NestedNotIfTEnum::TWO {
-                    not_zero,
                     e: e_if,
+                    not_zero,
                 }
             }
             TEnum::THREE => {
@@ -90,8 +90,8 @@ impl ReadableAndWritable for NestedNotIf {
                 };
 
                 NestedNotIfTEnum::THREE {
-                    not_zero,
                     e: e_if,
+                    not_zero,
                 }
             }
             TEnum::FOUR => {
@@ -114,8 +114,8 @@ impl ReadableAndWritable for NestedNotIf {
                 };
 
                 NestedNotIfTEnum::FOUR {
-                    not_zero,
                     e: e_if,
+                    not_zero,
                 }
             }
             TEnum::FIVE => {
@@ -138,8 +138,8 @@ impl ReadableAndWritable for NestedNotIf {
                 };
 
                 NestedNotIfTEnum::FIVE {
-                    not_zero,
                     e: e_if,
+                    not_zero,
                 }
             }
             TEnum::SIX => {
@@ -162,8 +162,8 @@ impl ReadableAndWritable for NestedNotIf {
                 };
 
                 NestedNotIfTEnum::SIX {
-                    not_zero,
                     e: e_if,
+                    not_zero,
                 }
             }
             TEnum::REST => {
@@ -186,8 +186,8 @@ impl ReadableAndWritable for NestedNotIf {
                 };
 
                 NestedNotIfTEnum::REST {
-                    not_zero,
                     e: e_if,
+                    not_zero,
                 }
             }
         };
@@ -400,8 +400,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::ONE {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::TWO => {
@@ -424,8 +424,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::TWO {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::THREE => {
@@ -448,8 +448,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::THREE {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::FOUR => {
@@ -472,8 +472,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::FOUR {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::FIVE => {
@@ -496,8 +496,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::FIVE {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::SIX => {
@@ -520,8 +520,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::SIX {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::REST => {
@@ -544,8 +544,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::REST {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
             };
@@ -772,8 +772,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::ONE {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::TWO => {
@@ -796,8 +796,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::TWO {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::THREE => {
@@ -820,8 +820,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::THREE {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::FOUR => {
@@ -844,8 +844,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::FOUR {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::FIVE => {
@@ -868,8 +868,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::FIVE {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::SIX => {
@@ -892,8 +892,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::SIX {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
                 TEnum::REST => {
@@ -916,8 +916,8 @@ impl ReadableAndWritable for NestedNotIf {
                     };
 
                     NestedNotIfTEnum::REST {
-                        not_zero,
                         e: e_if,
+                        not_zero,
                     }
                 }
             };

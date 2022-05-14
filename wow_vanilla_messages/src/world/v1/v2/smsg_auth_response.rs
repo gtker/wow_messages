@@ -53,9 +53,9 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
                 let billing_rested = crate::util::read_u32_le(r)?;
 
                 SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
-                    billing_time,
                     billing_flags,
                     billing_rested,
+                    billing_time,
                 }
             }
             WorldResult::AUTH_FAILED => SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED,
@@ -294,9 +294,9 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
                     let billing_rested = crate::util::tokio_read_u32_le(r).await?;
 
                     SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
-                        billing_time,
                         billing_flags,
                         billing_rested,
+                        billing_time,
                     }
                 }
                 WorldResult::AUTH_FAILED => SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED,
@@ -549,9 +549,9 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
                     let billing_rested = crate::util::astd_read_u32_le(r).await?;
 
                     SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
-                        billing_time,
                         billing_flags,
                         billing_rested,
+                        billing_time,
                     }
                 }
                 WorldResult::AUTH_FAILED => SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED,

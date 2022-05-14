@@ -86,12 +86,12 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                 };
 
                 CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                    server_public_key,
+                    crc_salt,
                     generator,
                     large_safe_prime,
                     salt,
-                    crc_salt,
                     security_flag: security_flag_if,
+                    server_public_key,
                 }
             }
             LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
@@ -280,12 +280,12 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                     };
 
                     CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                        server_public_key,
+                        crc_salt,
                         generator,
                         large_safe_prime,
                         salt,
-                        crc_salt,
                         security_flag: security_flag_if,
+                        server_public_key,
                     }
                 }
                 LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
@@ -488,12 +488,12 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                     };
 
                     CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                        server_public_key,
+                        crc_salt,
                         generator,
                         large_safe_prime,
                         salt,
-                        crc_salt,
                         security_flag: security_flag_if,
+                        server_public_key,
                     }
                 }
                 LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,

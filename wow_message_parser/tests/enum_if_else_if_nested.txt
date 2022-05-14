@@ -33,40 +33,8 @@ impl ReadableAndWritable for EnumIfElseIfNested {
                     zero,
                 }
             }
-            SimpleEnum::ONE => {
-                let n_if = match n {
-                    NestedEnum::NESTED => {
-                        // nested: u8
-                        let nested = crate::util::read_u8_le(r)?;
-
-                        EnumIfElseIfNestedNestedEnum::NESTED {
-                            nested,
-                        }
-                    }
-                    NestedEnum::NOT_NESTED => EnumIfElseIfNestedNestedEnum::NOT_NESTED,
-                };
-
-                EnumIfElseIfNestedSimpleEnum::ONE {
-                    n: n_if,
-                }
-            }
-            SimpleEnum::TWO => {
-                let n_if = match n {
-                    NestedEnum::NESTED => {
-                        // nested: u8
-                        let nested = crate::util::read_u8_le(r)?;
-
-                        EnumIfElseIfNestedNestedEnum::NESTED {
-                            nested,
-                        }
-                    }
-                    NestedEnum::NOT_NESTED => EnumIfElseIfNestedNestedEnum::NOT_NESTED,
-                };
-
-                EnumIfElseIfNestedSimpleEnum::TWO {
-                    n: n_if,
-                }
-            }
+            SimpleEnum::ONE => EnumIfElseIfNestedSimpleEnum::ONE,
+            SimpleEnum::TWO => EnumIfElseIfNestedSimpleEnum::TWO,
         };
 
         Ok(Self {
@@ -151,40 +119,8 @@ impl ReadableAndWritable for EnumIfElseIfNested {
                         zero,
                     }
                 }
-                SimpleEnum::ONE => {
-                    let n_if = match n {
-                        NestedEnum::NESTED => {
-                            // nested: u8
-                            let nested = crate::util::tokio_read_u8_le(r).await?;
-
-                            EnumIfElseIfNestedNestedEnum::NESTED {
-                                nested,
-                            }
-                        }
-                        NestedEnum::NOT_NESTED => EnumIfElseIfNestedNestedEnum::NOT_NESTED,
-                    };
-
-                    EnumIfElseIfNestedSimpleEnum::ONE {
-                        n: n_if,
-                    }
-                }
-                SimpleEnum::TWO => {
-                    let n_if = match n {
-                        NestedEnum::NESTED => {
-                            // nested: u8
-                            let nested = crate::util::tokio_read_u8_le(r).await?;
-
-                            EnumIfElseIfNestedNestedEnum::NESTED {
-                                nested,
-                            }
-                        }
-                        NestedEnum::NOT_NESTED => EnumIfElseIfNestedNestedEnum::NOT_NESTED,
-                    };
-
-                    EnumIfElseIfNestedSimpleEnum::TWO {
-                        n: n_if,
-                    }
-                }
+                SimpleEnum::ONE => EnumIfElseIfNestedSimpleEnum::ONE,
+                SimpleEnum::TWO => EnumIfElseIfNestedSimpleEnum::TWO,
             };
 
             Ok(Self {
@@ -283,40 +219,8 @@ impl ReadableAndWritable for EnumIfElseIfNested {
                         zero,
                     }
                 }
-                SimpleEnum::ONE => {
-                    let n_if = match n {
-                        NestedEnum::NESTED => {
-                            // nested: u8
-                            let nested = crate::util::astd_read_u8_le(r).await?;
-
-                            EnumIfElseIfNestedNestedEnum::NESTED {
-                                nested,
-                            }
-                        }
-                        NestedEnum::NOT_NESTED => EnumIfElseIfNestedNestedEnum::NOT_NESTED,
-                    };
-
-                    EnumIfElseIfNestedSimpleEnum::ONE {
-                        n: n_if,
-                    }
-                }
-                SimpleEnum::TWO => {
-                    let n_if = match n {
-                        NestedEnum::NESTED => {
-                            // nested: u8
-                            let nested = crate::util::astd_read_u8_le(r).await?;
-
-                            EnumIfElseIfNestedNestedEnum::NESTED {
-                                nested,
-                            }
-                        }
-                        NestedEnum::NOT_NESTED => EnumIfElseIfNestedNestedEnum::NOT_NESTED,
-                    };
-
-                    EnumIfElseIfNestedSimpleEnum::TWO {
-                        n: n_if,
-                    }
-                }
+                SimpleEnum::ONE => EnumIfElseIfNestedSimpleEnum::ONE,
+                SimpleEnum::TWO => EnumIfElseIfNestedSimpleEnum::TWO,
             };
 
             Ok(Self {

@@ -46,11 +46,11 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                 let corpse_map = Map::read(r)?;
 
                 MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                    corpse_map,
                     map,
                     position_x,
                     position_y,
                     position_z,
-                    corpse_map,
                 }
             }
         };
@@ -127,11 +127,11 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     let corpse_map = Map::tokio_read(r).await?;
 
                     MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                        corpse_map,
                         map,
                         position_x,
                         position_y,
                         position_z,
-                        corpse_map,
                     }
                 }
             };
@@ -222,11 +222,11 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     let corpse_map = Map::astd_read(r).await?;
 
                     MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                        corpse_map,
                         map,
                         position_x,
                         position_y,
                         position_z,
-                        corpse_map,
                     }
                 }
             };

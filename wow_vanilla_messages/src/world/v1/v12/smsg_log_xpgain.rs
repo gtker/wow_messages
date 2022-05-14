@@ -47,8 +47,8 @@ impl MessageBody for SMSG_LOG_XPGAIN {
                 // exp_group_bonus: f32
                 let exp_group_bonus = crate::util::read_f32_le(r)?;
                 SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
-                    experience_without_rested,
                     exp_group_bonus,
+                    experience_without_rested,
                 }
             }
         };
@@ -120,8 +120,8 @@ impl MessageBody for SMSG_LOG_XPGAIN {
                     // exp_group_bonus: f32
                     let exp_group_bonus = crate::util::tokio_read_f32_le(r).await?;
                     SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
-                        experience_without_rested,
                         exp_group_bonus,
+                        experience_without_rested,
                     }
                 }
             };
@@ -207,8 +207,8 @@ impl MessageBody for SMSG_LOG_XPGAIN {
                     // exp_group_bonus: f32
                     let exp_group_bonus = crate::util::astd_read_f32_le(r).await?;
                     SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
-                        experience_without_rested,
                         exp_group_bonus,
+                        experience_without_rested,
                     }
                 }
             };

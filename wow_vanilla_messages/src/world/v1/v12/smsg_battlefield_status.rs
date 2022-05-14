@@ -84,9 +84,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::TESTING => {
@@ -137,9 +137,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::TESTING {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::SCOTT_TEST => {
@@ -190,9 +190,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::CASH_TEST => {
@@ -243,9 +243,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::ALTERAC_VALLEY => {
@@ -296,9 +296,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::SHADOWFANG_KEEP => {
@@ -349,9 +349,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::STORMWIND_STOCKADE => {
@@ -402,9 +402,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::STORMWIND_PRISON => {
@@ -455,9 +455,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::DEADMINES => {
@@ -508,9 +508,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::AZSHARA_CRATER => {
@@ -561,9 +561,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::COLLINS_TEST => {
@@ -614,9 +614,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::WAILING_CAVERNS => {
@@ -667,9 +667,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::MONASTERY => {
@@ -720,9 +720,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::RAZORFEN_KRAUL => {
@@ -773,9 +773,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::BLACKFATHOM_DEEPS => {
@@ -826,9 +826,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::ULDAMAN => {
@@ -879,9 +879,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::GNOMERAGON => {
@@ -932,9 +932,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::SUNKEN_TEMPLE => {
@@ -985,9 +985,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::RAZORFEN_DOWNS => {
@@ -1038,9 +1038,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::EMERALD_DREAM => {
@@ -1091,9 +1091,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::SCARLET_MONASTERY => {
@@ -1144,9 +1144,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::ZUL_FARRAK => {
@@ -1197,9 +1197,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::BLACKROCK_SPIRE => {
@@ -1250,9 +1250,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::BLACKROCK_DEPTHS => {
@@ -1303,9 +1303,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::ONYXIAS_LAIR => {
@@ -1356,9 +1356,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::CAVERNS_OF_TIME => {
@@ -1409,9 +1409,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::SCHOLOMANCE => {
@@ -1462,9 +1462,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::ZUL_GURUB => {
@@ -1515,9 +1515,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::STRATHOLME => {
@@ -1568,9 +1568,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::MAURADON => {
@@ -1621,9 +1621,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::MAURADON {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::DEEPRUN_TRAM => {
@@ -1674,9 +1674,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::RAGEFIRE_CHASM => {
@@ -1727,9 +1727,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::MOLTEN_CORE => {
@@ -1780,9 +1780,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::DIRE_MAUL => {
@@ -1833,9 +1833,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::ALLIANCE_PVP_BARRACKS => {
@@ -1886,9 +1886,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::HORDE_PVP_BARRACKS => {
@@ -1939,9 +1939,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::DEVELOPMENT_LAND => {
@@ -1992,9 +1992,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::BLACKWING_LAIR => {
@@ -2045,9 +2045,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::WARSONG_GULCH => {
@@ -2098,9 +2098,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::RUINS_OF_AHN_QIRAJ => {
@@ -2151,9 +2151,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::ARATHI_BASIN => {
@@ -2204,9 +2204,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::AHN_QIRAJ_TEMPLE => {
@@ -2257,9 +2257,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
             Map::NAXXRAMAS => {
@@ -2310,9 +2310,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
-                    unknown0,
                     client_instance_id,
                     status_id: status_id_if,
+                    unknown0,
                 }
             }
         };
@@ -4514,9 +4514,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::TESTING => {
@@ -4567,9 +4567,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::TESTING {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::SCOTT_TEST => {
@@ -4620,9 +4620,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::CASH_TEST => {
@@ -4673,9 +4673,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ALTERAC_VALLEY => {
@@ -4726,9 +4726,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::SHADOWFANG_KEEP => {
@@ -4779,9 +4779,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::STORMWIND_STOCKADE => {
@@ -4832,9 +4832,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::STORMWIND_PRISON => {
@@ -4885,9 +4885,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::DEADMINES => {
@@ -4938,9 +4938,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::AZSHARA_CRATER => {
@@ -4991,9 +4991,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::COLLINS_TEST => {
@@ -5044,9 +5044,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::WAILING_CAVERNS => {
@@ -5097,9 +5097,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::MONASTERY => {
@@ -5150,9 +5150,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::RAZORFEN_KRAUL => {
@@ -5203,9 +5203,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::BLACKFATHOM_DEEPS => {
@@ -5256,9 +5256,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ULDAMAN => {
@@ -5309,9 +5309,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::GNOMERAGON => {
@@ -5362,9 +5362,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::SUNKEN_TEMPLE => {
@@ -5415,9 +5415,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::RAZORFEN_DOWNS => {
@@ -5468,9 +5468,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::EMERALD_DREAM => {
@@ -5521,9 +5521,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::SCARLET_MONASTERY => {
@@ -5574,9 +5574,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ZUL_FARRAK => {
@@ -5627,9 +5627,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::BLACKROCK_SPIRE => {
@@ -5680,9 +5680,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::BLACKROCK_DEPTHS => {
@@ -5733,9 +5733,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ONYXIAS_LAIR => {
@@ -5786,9 +5786,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::CAVERNS_OF_TIME => {
@@ -5839,9 +5839,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::SCHOLOMANCE => {
@@ -5892,9 +5892,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ZUL_GURUB => {
@@ -5945,9 +5945,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::STRATHOLME => {
@@ -5998,9 +5998,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::MAURADON => {
@@ -6051,9 +6051,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::MAURADON {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::DEEPRUN_TRAM => {
@@ -6104,9 +6104,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::RAGEFIRE_CHASM => {
@@ -6157,9 +6157,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::MOLTEN_CORE => {
@@ -6210,9 +6210,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::DIRE_MAUL => {
@@ -6263,9 +6263,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ALLIANCE_PVP_BARRACKS => {
@@ -6316,9 +6316,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::HORDE_PVP_BARRACKS => {
@@ -6369,9 +6369,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::DEVELOPMENT_LAND => {
@@ -6422,9 +6422,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::BLACKWING_LAIR => {
@@ -6475,9 +6475,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::WARSONG_GULCH => {
@@ -6528,9 +6528,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::RUINS_OF_AHN_QIRAJ => {
@@ -6581,9 +6581,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ARATHI_BASIN => {
@@ -6634,9 +6634,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::AHN_QIRAJ_TEMPLE => {
@@ -6687,9 +6687,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::NAXXRAMAS => {
@@ -6740,9 +6740,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
             };
@@ -8958,9 +8958,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::TESTING => {
@@ -9011,9 +9011,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::TESTING {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::SCOTT_TEST => {
@@ -9064,9 +9064,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::CASH_TEST => {
@@ -9117,9 +9117,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ALTERAC_VALLEY => {
@@ -9170,9 +9170,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::SHADOWFANG_KEEP => {
@@ -9223,9 +9223,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::STORMWIND_STOCKADE => {
@@ -9276,9 +9276,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::STORMWIND_PRISON => {
@@ -9329,9 +9329,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::DEADMINES => {
@@ -9382,9 +9382,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::AZSHARA_CRATER => {
@@ -9435,9 +9435,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::COLLINS_TEST => {
@@ -9488,9 +9488,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::WAILING_CAVERNS => {
@@ -9541,9 +9541,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::MONASTERY => {
@@ -9594,9 +9594,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::RAZORFEN_KRAUL => {
@@ -9647,9 +9647,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::BLACKFATHOM_DEEPS => {
@@ -9700,9 +9700,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ULDAMAN => {
@@ -9753,9 +9753,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::GNOMERAGON => {
@@ -9806,9 +9806,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::SUNKEN_TEMPLE => {
@@ -9859,9 +9859,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::RAZORFEN_DOWNS => {
@@ -9912,9 +9912,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::EMERALD_DREAM => {
@@ -9965,9 +9965,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::SCARLET_MONASTERY => {
@@ -10018,9 +10018,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ZUL_FARRAK => {
@@ -10071,9 +10071,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::BLACKROCK_SPIRE => {
@@ -10124,9 +10124,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::BLACKROCK_DEPTHS => {
@@ -10177,9 +10177,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ONYXIAS_LAIR => {
@@ -10230,9 +10230,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::CAVERNS_OF_TIME => {
@@ -10283,9 +10283,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::SCHOLOMANCE => {
@@ -10336,9 +10336,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ZUL_GURUB => {
@@ -10389,9 +10389,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::STRATHOLME => {
@@ -10442,9 +10442,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::MAURADON => {
@@ -10495,9 +10495,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::MAURADON {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::DEEPRUN_TRAM => {
@@ -10548,9 +10548,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::RAGEFIRE_CHASM => {
@@ -10601,9 +10601,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::MOLTEN_CORE => {
@@ -10654,9 +10654,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::DIRE_MAUL => {
@@ -10707,9 +10707,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ALLIANCE_PVP_BARRACKS => {
@@ -10760,9 +10760,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::HORDE_PVP_BARRACKS => {
@@ -10813,9 +10813,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::DEVELOPMENT_LAND => {
@@ -10866,9 +10866,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::BLACKWING_LAIR => {
@@ -10919,9 +10919,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::WARSONG_GULCH => {
@@ -10972,9 +10972,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::RUINS_OF_AHN_QIRAJ => {
@@ -11025,9 +11025,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::ARATHI_BASIN => {
@@ -11078,9 +11078,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::AHN_QIRAJ_TEMPLE => {
@@ -11131,9 +11131,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
                 Map::NAXXRAMAS => {
@@ -11184,9 +11184,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     };
 
                     SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
-                        unknown0,
                         client_instance_id,
                         status_id: status_id_if,
+                        unknown0,
                     }
                 }
             };

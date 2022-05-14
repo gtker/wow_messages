@@ -156,8 +156,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                 SMSG_MESSAGECHATChatType::MONSTER_SAY {
                     sender_guid3,
-                    sender_name_length,
                     sender_name,
+                    sender_name_length,
                     target_guid,
                 }
             }
@@ -177,8 +177,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                 SMSG_MESSAGECHATChatType::MONSTER_YELL {
                     sender_guid3,
-                    sender_name_length,
                     sender_name,
+                    sender_name_length,
                     target_guid,
                 }
             }
@@ -194,9 +194,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 let monster_guid = Guid::read(r)?;
 
                 SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
-                    name_length,
-                    monster_name,
                     monster_guid,
+                    monster_name,
+                    name_length,
                 }
             }
             ChatType::CHANNEL => {
@@ -212,8 +212,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                 SMSG_MESSAGECHATChatType::CHANNEL {
                     channel_name,
-                    player_rank,
                     player_guid,
+                    player_rank,
                 }
             }
             ChatType::CHANNEL_JOIN => {
@@ -308,9 +308,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 let monster_guid = Guid::read(r)?;
 
                 SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
-                    name_length,
-                    monster_name,
                     monster_guid,
+                    monster_name,
+                    name_length,
                 }
             }
             ChatType::BG_SYSTEM_NEUTRAL => {
@@ -373,9 +373,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 let monster_guid = Guid::read(r)?;
 
                 SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
-                    name_length,
-                    monster_name,
                     monster_guid,
+                    monster_name,
+                    name_length,
                 }
             }
             ChatType::BATTLEGROUND => {
@@ -901,8 +901,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                     SMSG_MESSAGECHATChatType::MONSTER_SAY {
                         sender_guid3,
-                        sender_name_length,
                         sender_name,
+                        sender_name_length,
                         target_guid,
                     }
                 }
@@ -922,8 +922,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                     SMSG_MESSAGECHATChatType::MONSTER_YELL {
                         sender_guid3,
-                        sender_name_length,
                         sender_name,
+                        sender_name_length,
                         target_guid,
                     }
                 }
@@ -939,9 +939,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     let monster_guid = Guid::tokio_read(r).await?;
 
                     SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
-                        name_length,
-                        monster_name,
                         monster_guid,
+                        monster_name,
+                        name_length,
                     }
                 }
                 ChatType::CHANNEL => {
@@ -957,8 +957,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                     SMSG_MESSAGECHATChatType::CHANNEL {
                         channel_name,
-                        player_rank,
                         player_guid,
+                        player_rank,
                     }
                 }
                 ChatType::CHANNEL_JOIN => {
@@ -1053,9 +1053,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     let monster_guid = Guid::tokio_read(r).await?;
 
                     SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
-                        name_length,
-                        monster_name,
                         monster_guid,
+                        monster_name,
+                        name_length,
                     }
                 }
                 ChatType::BG_SYSTEM_NEUTRAL => {
@@ -1118,9 +1118,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     let monster_guid = Guid::tokio_read(r).await?;
 
                     SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
-                        name_length,
-                        monster_name,
                         monster_guid,
+                        monster_name,
+                        name_length,
                     }
                 }
                 ChatType::BATTLEGROUND => {
@@ -1660,8 +1660,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                     SMSG_MESSAGECHATChatType::MONSTER_SAY {
                         sender_guid3,
-                        sender_name_length,
                         sender_name,
+                        sender_name_length,
                         target_guid,
                     }
                 }
@@ -1681,8 +1681,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                     SMSG_MESSAGECHATChatType::MONSTER_YELL {
                         sender_guid3,
-                        sender_name_length,
                         sender_name,
+                        sender_name_length,
                         target_guid,
                     }
                 }
@@ -1698,9 +1698,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     let monster_guid = Guid::astd_read(r).await?;
 
                     SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
-                        name_length,
-                        monster_name,
                         monster_guid,
+                        monster_name,
+                        name_length,
                     }
                 }
                 ChatType::CHANNEL => {
@@ -1716,8 +1716,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                     SMSG_MESSAGECHATChatType::CHANNEL {
                         channel_name,
-                        player_rank,
                         player_guid,
+                        player_rank,
                     }
                 }
                 ChatType::CHANNEL_JOIN => {
@@ -1812,9 +1812,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     let monster_guid = Guid::astd_read(r).await?;
 
                     SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
-                        name_length,
-                        monster_name,
                         monster_guid,
+                        monster_name,
+                        name_length,
                     }
                 }
                 ChatType::BG_SYSTEM_NEUTRAL => {
@@ -1877,9 +1877,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     let monster_guid = Guid::astd_read(r).await?;
 
                     SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
-                        name_length,
-                        monster_name,
                         monster_guid,
+                        monster_name,
+                        name_length,
                     }
                 }
                 ChatType::BATTLEGROUND => {

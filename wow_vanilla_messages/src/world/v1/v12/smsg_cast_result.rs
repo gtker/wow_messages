@@ -78,8 +78,8 @@ impl MessageBody for SMSG_CAST_RESULT {
 
                         SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS {
                             equipped_item_class,
-                            equipped_item_subclass_mask,
                             equipped_item_inventory_type_mask,
+                            equipped_item_subclass_mask,
                         }
                     }
                     CastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND => SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND,
@@ -490,8 +490,8 @@ impl MessageBody for SMSG_CAST_RESULT {
 
                             SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS {
                                 equipped_item_class,
-                                equipped_item_subclass_mask,
                                 equipped_item_inventory_type_mask,
+                                equipped_item_subclass_mask,
                             }
                         }
                         CastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND => SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND,
@@ -916,8 +916,8 @@ impl MessageBody for SMSG_CAST_RESULT {
 
                             SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS {
                                 equipped_item_class,
-                                equipped_item_subclass_mask,
                                 equipped_item_inventory_type_mask,
+                                equipped_item_subclass_mask,
                             }
                         }
                         CastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND => SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS_MAINHAND,

@@ -184,8 +184,8 @@ impl ReadableAndWritable for SpellLog {
                 let interrupted_spell = crate::util::read_u32_le(r)?;
 
                 SpellLogSpellEffect::INTERRUPT_CAST {
-                    target3,
                     interrupted_spell,
+                    target3,
                 }
             }
             SpellEffect::DISTRACT => {
@@ -822,8 +822,8 @@ impl ReadableAndWritable for SpellLog {
                     let interrupted_spell = crate::util::tokio_read_u32_le(r).await?;
 
                     SpellLogSpellEffect::INTERRUPT_CAST {
-                        target3,
                         interrupted_spell,
+                        target3,
                     }
                 }
                 SpellEffect::DISTRACT => {
@@ -1474,8 +1474,8 @@ impl ReadableAndWritable for SpellLog {
                     let interrupted_spell = crate::util::astd_read_u32_le(r).await?;
 
                     SpellLogSpellEffect::INTERRUPT_CAST {
-                        target3,
                         interrupted_spell,
+                        target3,
                     }
                 }
                 SpellEffect::DISTRACT => {

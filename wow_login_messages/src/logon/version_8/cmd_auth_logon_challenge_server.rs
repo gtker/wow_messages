@@ -80,7 +80,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                         pin_grid_seed,
                         pin_salt,
                     })
-                } else {
+                }
+                else {
                     None
                 };
 
@@ -107,7 +108,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                         unknown3,
                         unknown4,
                     })
-                } else {
+                }
+                else {
                     None
                 };
 
@@ -118,7 +120,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                     Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
                         unknown5,
                     })
-                } else {
+                }
+                else {
                     None
                 };
 
@@ -130,12 +133,12 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                 };
 
                 CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                    server_public_key,
+                    crc_salt,
                     generator,
                     large_safe_prime,
                     salt,
-                    crc_salt,
                     security_flag,
+                    server_public_key,
                 }
             }
             LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
@@ -315,7 +318,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                             pin_grid_seed,
                             pin_salt,
                         })
-                    } else {
+                    }
+                    else {
                         None
                     };
 
@@ -342,7 +346,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                             unknown3,
                             unknown4,
                         })
-                    } else {
+                    }
+                    else {
                         None
                     };
 
@@ -353,7 +358,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                         Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
                             unknown5,
                         })
-                    } else {
+                    }
+                    else {
                         None
                     };
 
@@ -365,12 +371,12 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                     };
 
                     CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                        server_public_key,
+                        crc_salt,
                         generator,
                         large_safe_prime,
                         salt,
-                        crc_salt,
                         security_flag,
+                        server_public_key,
                     }
                 }
                 LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,
@@ -564,7 +570,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                             pin_grid_seed,
                             pin_salt,
                         })
-                    } else {
+                    }
+                    else {
                         None
                     };
 
@@ -591,7 +598,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                             unknown3,
                             unknown4,
                         })
-                    } else {
+                    }
+                    else {
                         None
                     };
 
@@ -602,7 +610,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                         Some(CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
                             unknown5,
                         })
-                    } else {
+                    }
+                    else {
                         None
                     };
 
@@ -614,12 +623,12 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                     };
 
                     CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                        server_public_key,
+                        crc_salt,
                         generator,
                         large_safe_prime,
                         salt,
-                        crc_salt,
                         security_flag,
+                        server_public_key,
                     }
                 }
                 LoginResult::FAIL_UNKNOWN0 => CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0,

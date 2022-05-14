@@ -40,8 +40,8 @@ impl ReadableAndWritable for Friend {
 
                 FriendFriendStatus::ONLINE {
                     area,
-                    level,
                     class,
+                    level,
                 }
             }
             FriendStatus::AFK => {
@@ -56,8 +56,8 @@ impl ReadableAndWritable for Friend {
 
                 FriendFriendStatus::AFK {
                     area,
-                    level,
                     class,
+                    level,
                 }
             }
             FriendStatus::UNKNOWN3 => {
@@ -72,8 +72,8 @@ impl ReadableAndWritable for Friend {
 
                 FriendFriendStatus::UNKNOWN3 {
                     area,
-                    level,
                     class,
+                    level,
                 }
             }
             FriendStatus::DND => {
@@ -88,8 +88,8 @@ impl ReadableAndWritable for Friend {
 
                 FriendFriendStatus::DND {
                     area,
-                    level,
                     class,
+                    level,
                 }
             }
         };
@@ -207,8 +207,8 @@ impl ReadableAndWritable for Friend {
 
                     FriendFriendStatus::ONLINE {
                         area,
-                        level,
                         class,
+                        level,
                     }
                 }
                 FriendStatus::AFK => {
@@ -223,8 +223,8 @@ impl ReadableAndWritable for Friend {
 
                     FriendFriendStatus::AFK {
                         area,
-                        level,
                         class,
+                        level,
                     }
                 }
                 FriendStatus::UNKNOWN3 => {
@@ -239,8 +239,8 @@ impl ReadableAndWritable for Friend {
 
                     FriendFriendStatus::UNKNOWN3 {
                         area,
-                        level,
                         class,
+                        level,
                     }
                 }
                 FriendStatus::DND => {
@@ -255,8 +255,8 @@ impl ReadableAndWritable for Friend {
 
                     FriendFriendStatus::DND {
                         area,
-                        level,
                         class,
+                        level,
                     }
                 }
             };
@@ -388,8 +388,8 @@ impl ReadableAndWritable for Friend {
 
                     FriendFriendStatus::ONLINE {
                         area,
-                        level,
                         class,
+                        level,
                     }
                 }
                 FriendStatus::AFK => {
@@ -404,8 +404,8 @@ impl ReadableAndWritable for Friend {
 
                     FriendFriendStatus::AFK {
                         area,
-                        level,
                         class,
+                        level,
                     }
                 }
                 FriendStatus::UNKNOWN3 => {
@@ -420,8 +420,8 @@ impl ReadableAndWritable for Friend {
 
                     FriendFriendStatus::UNKNOWN3 {
                         area,
-                        level,
                         class,
+                        level,
                     }
                 }
                 FriendStatus::DND => {
@@ -436,8 +436,8 @@ impl ReadableAndWritable for Friend {
 
                     FriendFriendStatus::DND {
                         area,
-                        level,
                         class,
+                        level,
                     }
                 }
             };
