@@ -1578,31 +1578,22 @@ pub struct MovementBlockSplineFlag {
     final_angle: Option<MovementBlockSplineFlagFINAL_ANGLE>,
 }
 
-impl From<&MovementBlockSplineFlag> for SplineFlag {
-    fn from(e: &MovementBlockSplineFlag) -> Self {
-        Self::new(e.inner)
-    }
-}
-
 impl MovementBlockSplineFlag {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SplineFlag = self.into();
-        a.write(w)?;
+        w.write_all(&self.inner.to_le_bytes())?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SplineFlag = self.into();
-        a.tokio_write(w).await?;
+        w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SplineFlag = self.into();
-        a.astd_write(w).await?;
+        w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
 
@@ -2360,31 +2351,22 @@ pub struct MovementBlockMovementFlags {
     spline_elevation: Option<MovementBlockMovementFlagsSPLINE_ELEVATION>,
 }
 
-impl From<&MovementBlockMovementFlags> for MovementFlags {
-    fn from(e: &MovementBlockMovementFlags) -> Self {
-        Self::new(e.inner)
-    }
-}
-
 impl MovementBlockMovementFlags {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: MovementFlags = self.into();
-        a.write(w)?;
+        w.write_all(&self.inner.to_le_bytes())?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: MovementFlags = self.into();
-        a.tokio_write(w).await?;
+        w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: MovementFlags = self.into();
-        a.astd_write(w).await?;
+        w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
 
@@ -3349,31 +3331,22 @@ pub struct MovementBlockUpdateFlag {
     living: Option<MovementBlockUpdateFlagLIVING>,
 }
 
-impl From<&MovementBlockUpdateFlag> for UpdateFlag {
-    fn from(e: &MovementBlockUpdateFlag) -> Self {
-        Self::new(e.inner)
-    }
-}
-
 impl MovementBlockUpdateFlag {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: UpdateFlag = self.into();
-        a.write(w)?;
+        w.write_all(&self.inner.to_le_bytes())?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: UpdateFlag = self.into();
-        a.tokio_write(w).await?;
+        w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: UpdateFlag = self.into();
-        a.astd_write(w).await?;
+        w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
 

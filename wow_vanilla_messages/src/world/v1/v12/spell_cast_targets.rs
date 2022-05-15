@@ -891,31 +891,22 @@ pub struct SpellCastTargetsSpellCastTargetFlags {
     corpse_ally: Option<SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY>,
 }
 
-impl From<&SpellCastTargetsSpellCastTargetFlags> for SpellCastTargetFlags {
-    fn from(e: &SpellCastTargetsSpellCastTargetFlags) -> Self {
-        Self::new(e.inner)
-    }
-}
-
 impl SpellCastTargetsSpellCastTargetFlags {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SpellCastTargetFlags = self.into();
-        a.write(w)?;
+        w.write_all(&self.inner.to_le_bytes())?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SpellCastTargetFlags = self.into();
-        a.tokio_write(w).await?;
+        w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: SpellCastTargetFlags = self.into();
-        a.astd_write(w).await?;
+        w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
 

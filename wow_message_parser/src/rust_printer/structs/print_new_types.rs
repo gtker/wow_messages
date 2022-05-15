@@ -45,8 +45,6 @@ pub fn print_new_types(s: &mut Writer, e: &Container) {
             DefinerType::Flag => {
                 print_new_flag_declaration(s, &rd);
 
-                print_from_new_flag_to_old(s, &rd);
-
                 s.body(format!("impl {name}", name = rd.ty_name()), |s| {
                     print_write_for_new_flag(s, &rd);
                     print_constructors_for_new_flag(s, &rd);
@@ -75,12 +73,6 @@ fn print_new_flag_declaration(s: &mut Writer, rd: &RustDefiner) {
     });
 }
 
-fn print_from_new_flag_to_old(s: &mut Writer, rd: &RustDefiner) {
-    s.impl_from(format!("&{}", rd.ty_name()), rd.original_ty_name(), |s| {
-        s.wln("Self::new(e.inner)");
-    });
-}
-
 fn print_write_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
     s.async_funcn_pub(
         "write",
@@ -90,14 +82,11 @@ fn print_write_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
         "std::result::Result<(), std::io::Error>",
         |s, it| {
             s.wln(format!(
-                "let a: {ty} = self.into();",
-                ty = rd.original_ty_name(),
-            ));
-            s.wln(format!(
-                "a.{prefix}write(w){postfix}?;",
-                prefix = it.prefix(),
+                "w.write_all(&self.inner.to_{endian}_bytes()){postfix}?;",
+                endian = rd.int_ty().rust_endian_str(),
                 postfix = it.postfix()
             ));
+
             s.wln("Ok(())");
         },
     );

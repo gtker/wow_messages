@@ -456,31 +456,22 @@ pub struct RealmRealmFlag {
     specify_build: Option<RealmRealmFlagSPECIFY_BUILD>,
 }
 
-impl From<&RealmRealmFlag> for RealmFlag {
-    fn from(e: &RealmRealmFlag) -> Self {
-        Self::new(e.inner)
-    }
-}
-
 impl RealmRealmFlag {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: RealmFlag = self.into();
-        a.write(w)?;
+        w.write_all(&self.inner.to_le_bytes())?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: RealmFlag = self.into();
-        a.tokio_write(w).await?;
+        w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: RealmFlag = self.into();
-        a.astd_write(w).await?;
+        w.write_all(&self.inner.to_le_bytes()).await?;
         Ok(())
     }
 
