@@ -20,7 +20,19 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     };
 
     match e.container_type() {
-        ContainerType::Struct | ContainerType::CLogin(_) | ContainerType::SLogin(_) => {
+        ContainerType::Struct => {
+            s.impl_read_write_non_trait(
+                e.name(),
+                error_ty,
+                |s, it| {
+                    print_read::print_read(s, e, o, it.prefix(), it.postfix());
+                },
+                |s, it| {
+                    print_write::print_write(s, e, o, it.prefix(), it.postfix());
+                },
+            );
+        }
+        ContainerType::CLogin(_) | ContainerType::SLogin(_) => {
             s.impl_read_and_writable_with_error(
                 e.name(),
                 &error_ty,

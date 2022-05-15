@@ -15,11 +15,8 @@ pub struct Object {
     pub update_type: ObjectUpdateType,
 }
 
-impl ReadableAndWritable for Object {
-    type Error = ObjectError;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl Object {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ObjectError> {
         // update_type: UpdateType
         let update_type: UpdateType = crate::util::read_u8_le(r)?.try_into()?;
 
@@ -125,8 +122,7 @@ impl ReadableAndWritable for Object {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_type: UpdateType
         crate::util::write_u8_le(w, self.update_type.as_int() as u8)?;
 
@@ -222,460 +218,408 @@ impl ReadableAndWritable for Object {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // update_type: UpdateType
-            let update_type: UpdateType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ObjectError> {
+        // update_type: UpdateType
+        let update_type: UpdateType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            let update_type_if = match update_type {
-                UpdateType::VALUES => {
-                    // guid1: PackedGuid
-                    let guid1 = Guid::tokio_read_packed(r).await?;
+        let update_type_if = match update_type {
+            UpdateType::VALUES => {
+                // guid1: PackedGuid
+                let guid1 = Guid::tokio_read_packed(r).await?;
 
-                    // mask1: UpdateMask
-                    let mask1 = UpdateMask::tokio_read(r).await?;
+                // mask1: UpdateMask
+                let mask1 = UpdateMask::tokio_read(r).await?;
 
-                    ObjectUpdateType::VALUES {
-                        guid1,
-                        mask1,
-                    }
-                }
-                UpdateType::MOVEMENT => {
-                    // guid2: PackedGuid
-                    let guid2 = Guid::tokio_read_packed(r).await?;
-
-                    // movement1: MovementBlock
-                    let movement1 = MovementBlock::tokio_read(r).await?;
-
-                    ObjectUpdateType::MOVEMENT {
-                        guid2,
-                        movement1,
-                    }
-                }
-                UpdateType::CREATE_OBJECT => {
-                    // guid3: PackedGuid
-                    let guid3 = Guid::tokio_read_packed(r).await?;
-
-                    // object_type: ObjectType
-                    let object_type: ObjectType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-                    // movement2: MovementBlock
-                    let movement2 = MovementBlock::tokio_read(r).await?;
-
-                    // mask2: UpdateMask
-                    let mask2 = UpdateMask::tokio_read(r).await?;
-
-                    ObjectUpdateType::CREATE_OBJECT {
-                        guid3,
-                        mask2,
-                        movement2,
-                        object_type,
-                    }
-                }
-                UpdateType::CREATE_OBJECT2 => {
-                    // guid3: PackedGuid
-                    let guid3 = Guid::tokio_read_packed(r).await?;
-
-                    // object_type: ObjectType
-                    let object_type: ObjectType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
-
-                    // movement2: MovementBlock
-                    let movement2 = MovementBlock::tokio_read(r).await?;
-
-                    // mask2: UpdateMask
-                    let mask2 = UpdateMask::tokio_read(r).await?;
-
-                    ObjectUpdateType::CREATE_OBJECT2 {
-                        guid3,
-                        mask2,
-                        movement2,
-                        object_type,
-                    }
-                }
-                UpdateType::OUT_OF_RANGE_OBJECTS => {
-                    // count: u32
-                    let count = crate::util::tokio_read_u32_le(r).await?;
-
-                    // guids: PackedGuid[count]
-                    let mut guids = Vec::with_capacity(count as usize);
-                    for i in 0..count {
-                        guids.push(Guid::tokio_read_packed(r).await?);
-                    }
-
-                    ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
-                        count,
-                        guids,
-                    }
-                }
-                UpdateType::NEAR_OBJECTS => {
-                    // count: u32
-                    let count = crate::util::tokio_read_u32_le(r).await?;
-
-                    // guids: PackedGuid[count]
-                    let mut guids = Vec::with_capacity(count as usize);
-                    for i in 0..count {
-                        guids.push(Guid::tokio_read_packed(r).await?);
-                    }
-
-                    ObjectUpdateType::NEAR_OBJECTS {
-                        count,
-                        guids,
-                    }
-                }
-            };
-
-            Ok(Self {
-                update_type: update_type_if,
-            })
-        })
-    }
-
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // update_type: UpdateType
-            crate::util::tokio_write_u8_le(w, self.update_type.as_int() as u8).await?;
-
-            match &self.update_type {
                 ObjectUpdateType::VALUES {
                     guid1,
                     mask1,
-                } => {
-                    // guid1: PackedGuid
-                    guid1.tokio_write_packed(w).await?;
-
-                    // mask1: UpdateMask
-                    mask1.tokio_write(w).await?;
-
                 }
+            }
+            UpdateType::MOVEMENT => {
+                // guid2: PackedGuid
+                let guid2 = Guid::tokio_read_packed(r).await?;
+
+                // movement1: MovementBlock
+                let movement1 = MovementBlock::tokio_read(r).await?;
+
                 ObjectUpdateType::MOVEMENT {
                     guid2,
                     movement1,
-                } => {
-                    // guid2: PackedGuid
-                    guid2.tokio_write_packed(w).await?;
-
-                    // movement1: MovementBlock
-                    movement1.tokio_write(w).await?;
-
                 }
+            }
+            UpdateType::CREATE_OBJECT => {
+                // guid3: PackedGuid
+                let guid3 = Guid::tokio_read_packed(r).await?;
+
+                // object_type: ObjectType
+                let object_type: ObjectType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+
+                // movement2: MovementBlock
+                let movement2 = MovementBlock::tokio_read(r).await?;
+
+                // mask2: UpdateMask
+                let mask2 = UpdateMask::tokio_read(r).await?;
+
                 ObjectUpdateType::CREATE_OBJECT {
                     guid3,
                     mask2,
                     movement2,
                     object_type,
-                } => {
-                    // guid3: PackedGuid
-                    guid3.tokio_write_packed(w).await?;
-
-                    // object_type: ObjectType
-                    crate::util::tokio_write_u8_le(w, object_type.as_int() as u8).await?;
-
-                    // movement2: MovementBlock
-                    movement2.tokio_write(w).await?;
-
-                    // mask2: UpdateMask
-                    mask2.tokio_write(w).await?;
-
                 }
+            }
+            UpdateType::CREATE_OBJECT2 => {
+                // guid3: PackedGuid
+                let guid3 = Guid::tokio_read_packed(r).await?;
+
+                // object_type: ObjectType
+                let object_type: ObjectType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+
+                // movement2: MovementBlock
+                let movement2 = MovementBlock::tokio_read(r).await?;
+
+                // mask2: UpdateMask
+                let mask2 = UpdateMask::tokio_read(r).await?;
+
                 ObjectUpdateType::CREATE_OBJECT2 {
                     guid3,
                     mask2,
                     movement2,
                     object_type,
-                } => {
-                    // guid3: PackedGuid
-                    guid3.tokio_write_packed(w).await?;
-
-                    // object_type: ObjectType
-                    crate::util::tokio_write_u8_le(w, object_type.as_int() as u8).await?;
-
-                    // movement2: MovementBlock
-                    movement2.tokio_write(w).await?;
-
-                    // mask2: UpdateMask
-                    mask2.tokio_write(w).await?;
-
                 }
+            }
+            UpdateType::OUT_OF_RANGE_OBJECTS => {
+                // count: u32
+                let count = crate::util::tokio_read_u32_le(r).await?;
+
+                // guids: PackedGuid[count]
+                let mut guids = Vec::with_capacity(count as usize);
+                for i in 0..count {
+                    guids.push(Guid::tokio_read_packed(r).await?);
+                }
+
                 ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
                     count,
                     guids,
-                } => {
-                    // count: u32
-                    w.write_all(&count.to_le_bytes()).await?;
-
-                    // guids: PackedGuid[count]
-                    for i in guids.iter() {
-                        i.tokio_write_packed(w).await?;
-                    }
-
                 }
+            }
+            UpdateType::NEAR_OBJECTS => {
+                // count: u32
+                let count = crate::util::tokio_read_u32_le(r).await?;
+
+                // guids: PackedGuid[count]
+                let mut guids = Vec::with_capacity(count as usize);
+                for i in 0..count {
+                    guids.push(Guid::tokio_read_packed(r).await?);
+                }
+
                 ObjectUpdateType::NEAR_OBJECTS {
                     count,
                     guids,
-                } => {
-                    // count: u32
-                    w.write_all(&count.to_le_bytes()).await?;
-
-                    // guids: PackedGuid[count]
-                    for i in guids.iter() {
-                        i.tokio_write_packed(w).await?;
-                    }
-
                 }
             }
+        };
 
-            Ok(())
+        Ok(Self {
+            update_type: update_type_if,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // update_type: UpdateType
-            let update_type: UpdateType = crate::util::astd_read_u8_le(r).await?.try_into()?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // update_type: UpdateType
+        crate::util::tokio_write_u8_le(w, self.update_type.as_int() as u8).await?;
 
-            let update_type_if = match update_type {
-                UpdateType::VALUES => {
-                    // guid1: PackedGuid
-                    let guid1 = Guid::astd_read_packed(r).await?;
+        match &self.update_type {
+            ObjectUpdateType::VALUES {
+                guid1,
+                mask1,
+            } => {
+                // guid1: PackedGuid
+                guid1.tokio_write_packed(w).await?;
 
-                    // mask1: UpdateMask
-                    let mask1 = UpdateMask::astd_read(r).await?;
+                // mask1: UpdateMask
+                mask1.tokio_write(w).await?;
 
-                    ObjectUpdateType::VALUES {
-                        guid1,
-                        mask1,
-                    }
+            }
+            ObjectUpdateType::MOVEMENT {
+                guid2,
+                movement1,
+            } => {
+                // guid2: PackedGuid
+                guid2.tokio_write_packed(w).await?;
+
+                // movement1: MovementBlock
+                movement1.tokio_write(w).await?;
+
+            }
+            ObjectUpdateType::CREATE_OBJECT {
+                guid3,
+                mask2,
+                movement2,
+                object_type,
+            } => {
+                // guid3: PackedGuid
+                guid3.tokio_write_packed(w).await?;
+
+                // object_type: ObjectType
+                crate::util::tokio_write_u8_le(w, object_type.as_int() as u8).await?;
+
+                // movement2: MovementBlock
+                movement2.tokio_write(w).await?;
+
+                // mask2: UpdateMask
+                mask2.tokio_write(w).await?;
+
+            }
+            ObjectUpdateType::CREATE_OBJECT2 {
+                guid3,
+                mask2,
+                movement2,
+                object_type,
+            } => {
+                // guid3: PackedGuid
+                guid3.tokio_write_packed(w).await?;
+
+                // object_type: ObjectType
+                crate::util::tokio_write_u8_le(w, object_type.as_int() as u8).await?;
+
+                // movement2: MovementBlock
+                movement2.tokio_write(w).await?;
+
+                // mask2: UpdateMask
+                mask2.tokio_write(w).await?;
+
+            }
+            ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
+                count,
+                guids,
+            } => {
+                // count: u32
+                w.write_all(&count.to_le_bytes()).await?;
+
+                // guids: PackedGuid[count]
+                for i in guids.iter() {
+                    i.tokio_write_packed(w).await?;
                 }
-                UpdateType::MOVEMENT => {
-                    // guid2: PackedGuid
-                    let guid2 = Guid::astd_read_packed(r).await?;
 
-                    // movement1: MovementBlock
-                    let movement1 = MovementBlock::astd_read(r).await?;
+            }
+            ObjectUpdateType::NEAR_OBJECTS {
+                count,
+                guids,
+            } => {
+                // count: u32
+                w.write_all(&count.to_le_bytes()).await?;
 
-                    ObjectUpdateType::MOVEMENT {
-                        guid2,
-                        movement1,
-                    }
+                // guids: PackedGuid[count]
+                for i in guids.iter() {
+                    i.tokio_write_packed(w).await?;
                 }
-                UpdateType::CREATE_OBJECT => {
-                    // guid3: PackedGuid
-                    let guid3 = Guid::astd_read_packed(r).await?;
 
-                    // object_type: ObjectType
-                    let object_type: ObjectType = crate::util::astd_read_u8_le(r).await?.try_into()?;
+            }
+        }
 
-                    // movement2: MovementBlock
-                    let movement2 = MovementBlock::astd_read(r).await?;
-
-                    // mask2: UpdateMask
-                    let mask2 = UpdateMask::astd_read(r).await?;
-
-                    ObjectUpdateType::CREATE_OBJECT {
-                        guid3,
-                        mask2,
-                        movement2,
-                        object_type,
-                    }
-                }
-                UpdateType::CREATE_OBJECT2 => {
-                    // guid3: PackedGuid
-                    let guid3 = Guid::astd_read_packed(r).await?;
-
-                    // object_type: ObjectType
-                    let object_type: ObjectType = crate::util::astd_read_u8_le(r).await?.try_into()?;
-
-                    // movement2: MovementBlock
-                    let movement2 = MovementBlock::astd_read(r).await?;
-
-                    // mask2: UpdateMask
-                    let mask2 = UpdateMask::astd_read(r).await?;
-
-                    ObjectUpdateType::CREATE_OBJECT2 {
-                        guid3,
-                        mask2,
-                        movement2,
-                        object_type,
-                    }
-                }
-                UpdateType::OUT_OF_RANGE_OBJECTS => {
-                    // count: u32
-                    let count = crate::util::astd_read_u32_le(r).await?;
-
-                    // guids: PackedGuid[count]
-                    let mut guids = Vec::with_capacity(count as usize);
-                    for i in 0..count {
-                        guids.push(Guid::astd_read_packed(r).await?);
-                    }
-
-                    ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
-                        count,
-                        guids,
-                    }
-                }
-                UpdateType::NEAR_OBJECTS => {
-                    // count: u32
-                    let count = crate::util::astd_read_u32_le(r).await?;
-
-                    // guids: PackedGuid[count]
-                    let mut guids = Vec::with_capacity(count as usize);
-                    for i in 0..count {
-                        guids.push(Guid::astd_read_packed(r).await?);
-                    }
-
-                    ObjectUpdateType::NEAR_OBJECTS {
-                        count,
-                        guids,
-                    }
-                }
-            };
-
-            Ok(Self {
-                update_type: update_type_if,
-            })
-        })
+        Ok(())
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // update_type: UpdateType
-            crate::util::astd_write_u8_le(w, self.update_type.as_int() as u8).await?;
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ObjectError> {
+        // update_type: UpdateType
+        let update_type: UpdateType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
-            match &self.update_type {
+        let update_type_if = match update_type {
+            UpdateType::VALUES => {
+                // guid1: PackedGuid
+                let guid1 = Guid::astd_read_packed(r).await?;
+
+                // mask1: UpdateMask
+                let mask1 = UpdateMask::astd_read(r).await?;
+
                 ObjectUpdateType::VALUES {
                     guid1,
                     mask1,
-                } => {
-                    // guid1: PackedGuid
-                    guid1.astd_write_packed(w).await?;
-
-                    // mask1: UpdateMask
-                    mask1.astd_write(w).await?;
-
                 }
+            }
+            UpdateType::MOVEMENT => {
+                // guid2: PackedGuid
+                let guid2 = Guid::astd_read_packed(r).await?;
+
+                // movement1: MovementBlock
+                let movement1 = MovementBlock::astd_read(r).await?;
+
                 ObjectUpdateType::MOVEMENT {
                     guid2,
                     movement1,
-                } => {
-                    // guid2: PackedGuid
-                    guid2.astd_write_packed(w).await?;
-
-                    // movement1: MovementBlock
-                    movement1.astd_write(w).await?;
-
                 }
+            }
+            UpdateType::CREATE_OBJECT => {
+                // guid3: PackedGuid
+                let guid3 = Guid::astd_read_packed(r).await?;
+
+                // object_type: ObjectType
+                let object_type: ObjectType = crate::util::astd_read_u8_le(r).await?.try_into()?;
+
+                // movement2: MovementBlock
+                let movement2 = MovementBlock::astd_read(r).await?;
+
+                // mask2: UpdateMask
+                let mask2 = UpdateMask::astd_read(r).await?;
+
                 ObjectUpdateType::CREATE_OBJECT {
                     guid3,
                     mask2,
                     movement2,
                     object_type,
-                } => {
-                    // guid3: PackedGuid
-                    guid3.astd_write_packed(w).await?;
-
-                    // object_type: ObjectType
-                    crate::util::astd_write_u8_le(w, object_type.as_int() as u8).await?;
-
-                    // movement2: MovementBlock
-                    movement2.astd_write(w).await?;
-
-                    // mask2: UpdateMask
-                    mask2.astd_write(w).await?;
-
                 }
+            }
+            UpdateType::CREATE_OBJECT2 => {
+                // guid3: PackedGuid
+                let guid3 = Guid::astd_read_packed(r).await?;
+
+                // object_type: ObjectType
+                let object_type: ObjectType = crate::util::astd_read_u8_le(r).await?.try_into()?;
+
+                // movement2: MovementBlock
+                let movement2 = MovementBlock::astd_read(r).await?;
+
+                // mask2: UpdateMask
+                let mask2 = UpdateMask::astd_read(r).await?;
+
                 ObjectUpdateType::CREATE_OBJECT2 {
                     guid3,
                     mask2,
                     movement2,
                     object_type,
-                } => {
-                    // guid3: PackedGuid
-                    guid3.astd_write_packed(w).await?;
-
-                    // object_type: ObjectType
-                    crate::util::astd_write_u8_le(w, object_type.as_int() as u8).await?;
-
-                    // movement2: MovementBlock
-                    movement2.astd_write(w).await?;
-
-                    // mask2: UpdateMask
-                    mask2.astd_write(w).await?;
-
                 }
+            }
+            UpdateType::OUT_OF_RANGE_OBJECTS => {
+                // count: u32
+                let count = crate::util::astd_read_u32_le(r).await?;
+
+                // guids: PackedGuid[count]
+                let mut guids = Vec::with_capacity(count as usize);
+                for i in 0..count {
+                    guids.push(Guid::astd_read_packed(r).await?);
+                }
+
                 ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
                     count,
                     guids,
-                } => {
-                    // count: u32
-                    w.write_all(&count.to_le_bytes()).await?;
-
-                    // guids: PackedGuid[count]
-                    for i in guids.iter() {
-                        i.astd_write_packed(w).await?;
-                    }
-
                 }
+            }
+            UpdateType::NEAR_OBJECTS => {
+                // count: u32
+                let count = crate::util::astd_read_u32_le(r).await?;
+
+                // guids: PackedGuid[count]
+                let mut guids = Vec::with_capacity(count as usize);
+                for i in 0..count {
+                    guids.push(Guid::astd_read_packed(r).await?);
+                }
+
                 ObjectUpdateType::NEAR_OBJECTS {
                     count,
                     guids,
-                } => {
-                    // count: u32
-                    w.write_all(&count.to_le_bytes()).await?;
-
-                    // guids: PackedGuid[count]
-                    for i in guids.iter() {
-                        i.astd_write_packed(w).await?;
-                    }
-
                 }
             }
+        };
 
-            Ok(())
+        Ok(Self {
+            update_type: update_type_if,
         })
+    }
+
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // update_type: UpdateType
+        crate::util::astd_write_u8_le(w, self.update_type.as_int() as u8).await?;
+
+        match &self.update_type {
+            ObjectUpdateType::VALUES {
+                guid1,
+                mask1,
+            } => {
+                // guid1: PackedGuid
+                guid1.astd_write_packed(w).await?;
+
+                // mask1: UpdateMask
+                mask1.astd_write(w).await?;
+
+            }
+            ObjectUpdateType::MOVEMENT {
+                guid2,
+                movement1,
+            } => {
+                // guid2: PackedGuid
+                guid2.astd_write_packed(w).await?;
+
+                // movement1: MovementBlock
+                movement1.astd_write(w).await?;
+
+            }
+            ObjectUpdateType::CREATE_OBJECT {
+                guid3,
+                mask2,
+                movement2,
+                object_type,
+            } => {
+                // guid3: PackedGuid
+                guid3.astd_write_packed(w).await?;
+
+                // object_type: ObjectType
+                crate::util::astd_write_u8_le(w, object_type.as_int() as u8).await?;
+
+                // movement2: MovementBlock
+                movement2.astd_write(w).await?;
+
+                // mask2: UpdateMask
+                mask2.astd_write(w).await?;
+
+            }
+            ObjectUpdateType::CREATE_OBJECT2 {
+                guid3,
+                mask2,
+                movement2,
+                object_type,
+            } => {
+                // guid3: PackedGuid
+                guid3.astd_write_packed(w).await?;
+
+                // object_type: ObjectType
+                crate::util::astd_write_u8_le(w, object_type.as_int() as u8).await?;
+
+                // movement2: MovementBlock
+                movement2.astd_write(w).await?;
+
+                // mask2: UpdateMask
+                mask2.astd_write(w).await?;
+
+            }
+            ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
+                count,
+                guids,
+            } => {
+                // count: u32
+                w.write_all(&count.to_le_bytes()).await?;
+
+                // guids: PackedGuid[count]
+                for i in guids.iter() {
+                    i.astd_write_packed(w).await?;
+                }
+
+            }
+            ObjectUpdateType::NEAR_OBJECTS {
+                count,
+                guids,
+            } => {
+                // count: u32
+                w.write_all(&count.to_le_bytes()).await?;
+
+                // guids: PackedGuid[count]
+                for i in guids.iter() {
+                    i.astd_write_packed(w).await?;
+                }
+
+            }
+        }
+
+        Ok(())
     }
 
 }

@@ -406,6 +406,44 @@ impl Writer {
         self.open_curly("Box::pin(async move");
     }
 
+    pub fn impl_read_write_non_trait<
+        S: AsRef<str>,
+        S1: AsRef<str>,
+        F: Fn(&mut Self, ImplType),
+        F2: Fn(&mut Self, ImplType),
+    >(
+        &mut self,
+        type_name: S,
+        error_name: S1,
+        read_function: F,
+        write_function: F2,
+    ) {
+        self.open_curly(format!("impl {}", type_name.as_ref()));
+
+        for it in ImplType::types() {
+            self.open_curly(format!(
+                "pub(crate) {func}fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, {error}>",
+                prefix = it.prefix(),
+                read = it.read(),
+                error = error_name.as_ref(),
+                func = it.func(),
+            ));
+            read_function(self, it);
+            self.closing_curly_newline();
+
+            self.open_curly(
+                format!("pub(crate) {func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
+                prefix = it.prefix(),
+                write = it.write(),
+                func = it.func(),
+            ));
+            write_function(self, it);
+            self.closing_curly_newline(); // Write Function
+        }
+
+        self.closing_curly_newline(); // impl
+    }
+
     pub fn impl_read_and_writable_with_error<
         S: AsRef<str>,
         S1: AsRef<str>,

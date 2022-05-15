@@ -12,11 +12,8 @@ pub struct SpellCastTargets {
     pub target_flags: SpellCastTargetsSpellCastTargetFlags,
 }
 
-impl ReadableAndWritable for SpellCastTargets {
-    type Error = SpellCastTargetsError;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl SpellCastTargets {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, SpellCastTargetsError> {
         // target_flags: SpellCastTargetFlags
         let target_flags = SpellCastTargetFlags::new(crate::util::read_u16_le(r)?);
 
@@ -183,8 +180,7 @@ impl ReadableAndWritable for SpellCastTargets {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
         crate::util::write_u16_le(w, self.target_flags.as_int() as u16)?;
 
@@ -271,564 +267,512 @@ impl ReadableAndWritable for SpellCastTargets {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // target_flags: SpellCastTargetFlags
-            let target_flags = SpellCastTargetFlags::new(crate::util::tokio_read_u16_le(r).await?);
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellCastTargetsError> {
+        // target_flags: SpellCastTargetFlags
+        let target_flags = SpellCastTargetFlags::new(crate::util::tokio_read_u16_le(r).await?);
 
-            let target_flags_UNIT = if target_flags.is_UNIT() {
-                // unit_target1: PackedGuid
-                let unit_target1 = Guid::tokio_read_packed(r).await?;
+        let target_flags_UNIT = if target_flags.is_UNIT() {
+            // unit_target1: PackedGuid
+            let unit_target1 = Guid::tokio_read_packed(r).await?;
 
-                Some(SpellCastTargetsSpellCastTargetFlagsUNIT {
-                    unit_target1,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_UNIT_ENEMY = if target_flags.is_UNIT_ENEMY() {
-                // unit_target2: PackedGuid
-                let unit_target2 = Guid::tokio_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
-                    unit_target2,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_GAMEOBJECT = if target_flags.is_GAMEOBJECT() {
-                // object_target1: PackedGuid
-                let object_target1 = Guid::tokio_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
-                    object_target1,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_LOCKED = if target_flags.is_LOCKED() {
-                // object_target2: PackedGuid
-                let object_target2 = Guid::tokio_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsLOCKED {
-                    object_target2,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_ITEM = if target_flags.is_ITEM() {
-                // item_target1: PackedGuid
-                let item_target1 = Guid::tokio_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsITEM {
-                    item_target1,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_TRADE_ITEM = if target_flags.is_TRADE_ITEM() {
-                // item_target2: PackedGuid
-                let item_target2 = Guid::tokio_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
-                    item_target2,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_SOURCE_LOCATION = if target_flags.is_SOURCE_LOCATION() {
-                // position_x1: f32
-                let position_x1 = crate::util::tokio_read_f32_le(r).await?;
-                // position_y1: f32
-                let position_y1 = crate::util::tokio_read_f32_le(r).await?;
-                // position_z1: f32
-                let position_z1 = crate::util::tokio_read_f32_le(r).await?;
-                Some(SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
-                    position_x1,
-                    position_y1,
-                    position_z1,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_DEST_LOCATION = if target_flags.is_DEST_LOCATION() {
-                // position_x2: f32
-                let position_x2 = crate::util::tokio_read_f32_le(r).await?;
-                // position_y2: f32
-                let position_y2 = crate::util::tokio_read_f32_le(r).await?;
-                // position_z2: f32
-                let position_z2 = crate::util::tokio_read_f32_le(r).await?;
-                Some(SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
-                    position_x2,
-                    position_y2,
-                    position_z2,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_STRING = if target_flags.is_STRING() {
-                // target_string: CString
-                let target_string = crate::util::tokio_read_c_string_to_vec(r).await?;
-                let target_string = String::from_utf8(target_string)?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsSTRING {
-                    target_string,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_CORPSE_ALLY = if target_flags.is_CORPSE_ALLY() {
-                // corpse_target1: PackedGuid
-                let corpse_target1 = Guid::tokio_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
-                    corpse_target1,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_CORPSE_ENEMY = if target_flags.is_CORPSE_ENEMY() {
-                // corpse_target2: PackedGuid
-                let corpse_target2 = Guid::tokio_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
-                    corpse_target2,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags = SpellCastTargetsSpellCastTargetFlags {
-                inner: target_flags.as_int(),
-                unit: target_flags_UNIT,
-                item: target_flags_ITEM,
-                source_location: target_flags_SOURCE_LOCATION,
-                dest_location: target_flags_DEST_LOCATION,
-                unit_enemy: target_flags_UNIT_ENEMY,
-                corpse_enemy: target_flags_CORPSE_ENEMY,
-                gameobject: target_flags_GAMEOBJECT,
-                trade_item: target_flags_TRADE_ITEM,
-                string: target_flags_STRING,
-                locked: target_flags_LOCKED,
-                corpse_ally: target_flags_CORPSE_ALLY,
-            };
-
-            Ok(Self {
-                target_flags,
+            Some(SpellCastTargetsSpellCastTargetFlagsUNIT {
+                unit_target1,
             })
-        })
-    }
+        }
+        else {
+            None
+        };
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // target_flags: SpellCastTargetFlags
-            crate::util::tokio_write_u16_le(w, self.target_flags.as_int() as u16).await?;
+        let target_flags_UNIT_ENEMY = if target_flags.is_UNIT_ENEMY() {
+            // unit_target2: PackedGuid
+            let unit_target2 = Guid::tokio_read_packed(r).await?;
 
-            if let Some(if_statement) = &self.target_flags.unit {
-                // unit_target1: PackedGuid
-                if_statement.unit_target1.tokio_write_packed(w).await?;
-
-            }
-
-            if let Some(if_statement) = &self.target_flags.unit_enemy {
-                // unit_target2: PackedGuid
-                if_statement.unit_target2.tokio_write_packed(w).await?;
-
-            }
-
-            if let Some(if_statement) = &self.target_flags.gameobject {
-                // object_target1: PackedGuid
-                if_statement.object_target1.tokio_write_packed(w).await?;
-
-            }
-
-            if let Some(if_statement) = &self.target_flags.locked {
-                // object_target2: PackedGuid
-                if_statement.object_target2.tokio_write_packed(w).await?;
-
-            }
-
-            if let Some(if_statement) = &self.target_flags.item {
-                // item_target1: PackedGuid
-                if_statement.item_target1.tokio_write_packed(w).await?;
-
-            }
-
-            if let Some(if_statement) = &self.target_flags.trade_item {
-                // item_target2: PackedGuid
-                if_statement.item_target2.tokio_write_packed(w).await?;
-
-            }
-
-            if let Some(if_statement) = &self.target_flags.source_location {
-                // position_x1: f32
-                w.write_all(&if_statement.position_x1.to_le_bytes()).await?;
-
-                // position_y1: f32
-                w.write_all(&if_statement.position_y1.to_le_bytes()).await?;
-
-                // position_z1: f32
-                w.write_all(&if_statement.position_z1.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.target_flags.dest_location {
-                // position_x2: f32
-                w.write_all(&if_statement.position_x2.to_le_bytes()).await?;
-
-                // position_y2: f32
-                w.write_all(&if_statement.position_y2.to_le_bytes()).await?;
-
-                // position_z2: f32
-                w.write_all(&if_statement.position_z2.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.target_flags.string {
-                // target_string: CString
-                w.write_all(if_statement.target_string.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-
-            if let Some(if_statement) = &self.target_flags.corpse_ally {
-                // corpse_target1: PackedGuid
-                if_statement.corpse_target1.tokio_write_packed(w).await?;
-
-            }
-
-            if let Some(if_statement) = &self.target_flags.corpse_enemy {
-                // corpse_target2: PackedGuid
-                if_statement.corpse_target2.tokio_write_packed(w).await?;
-
-            }
-
-            Ok(())
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // target_flags: SpellCastTargetFlags
-            let target_flags = SpellCastTargetFlags::new(crate::util::astd_read_u16_le(r).await?);
-
-            let target_flags_UNIT = if target_flags.is_UNIT() {
-                // unit_target1: PackedGuid
-                let unit_target1 = Guid::astd_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsUNIT {
-                    unit_target1,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_UNIT_ENEMY = if target_flags.is_UNIT_ENEMY() {
-                // unit_target2: PackedGuid
-                let unit_target2 = Guid::astd_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
-                    unit_target2,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_GAMEOBJECT = if target_flags.is_GAMEOBJECT() {
-                // object_target1: PackedGuid
-                let object_target1 = Guid::astd_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
-                    object_target1,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_LOCKED = if target_flags.is_LOCKED() {
-                // object_target2: PackedGuid
-                let object_target2 = Guid::astd_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsLOCKED {
-                    object_target2,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_ITEM = if target_flags.is_ITEM() {
-                // item_target1: PackedGuid
-                let item_target1 = Guid::astd_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsITEM {
-                    item_target1,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_TRADE_ITEM = if target_flags.is_TRADE_ITEM() {
-                // item_target2: PackedGuid
-                let item_target2 = Guid::astd_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
-                    item_target2,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_SOURCE_LOCATION = if target_flags.is_SOURCE_LOCATION() {
-                // position_x1: f32
-                let position_x1 = crate::util::astd_read_f32_le(r).await?;
-                // position_y1: f32
-                let position_y1 = crate::util::astd_read_f32_le(r).await?;
-                // position_z1: f32
-                let position_z1 = crate::util::astd_read_f32_le(r).await?;
-                Some(SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
-                    position_x1,
-                    position_y1,
-                    position_z1,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_DEST_LOCATION = if target_flags.is_DEST_LOCATION() {
-                // position_x2: f32
-                let position_x2 = crate::util::astd_read_f32_le(r).await?;
-                // position_y2: f32
-                let position_y2 = crate::util::astd_read_f32_le(r).await?;
-                // position_z2: f32
-                let position_z2 = crate::util::astd_read_f32_le(r).await?;
-                Some(SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
-                    position_x2,
-                    position_y2,
-                    position_z2,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_STRING = if target_flags.is_STRING() {
-                // target_string: CString
-                let target_string = crate::util::astd_read_c_string_to_vec(r).await?;
-                let target_string = String::from_utf8(target_string)?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsSTRING {
-                    target_string,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_CORPSE_ALLY = if target_flags.is_CORPSE_ALLY() {
-                // corpse_target1: PackedGuid
-                let corpse_target1 = Guid::astd_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
-                    corpse_target1,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags_CORPSE_ENEMY = if target_flags.is_CORPSE_ENEMY() {
-                // corpse_target2: PackedGuid
-                let corpse_target2 = Guid::astd_read_packed(r).await?;
-
-                Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
-                    corpse_target2,
-                })
-            }
-            else {
-                None
-            };
-
-            let target_flags = SpellCastTargetsSpellCastTargetFlags {
-                inner: target_flags.as_int(),
-                unit: target_flags_UNIT,
-                item: target_flags_ITEM,
-                source_location: target_flags_SOURCE_LOCATION,
-                dest_location: target_flags_DEST_LOCATION,
-                unit_enemy: target_flags_UNIT_ENEMY,
-                corpse_enemy: target_flags_CORPSE_ENEMY,
-                gameobject: target_flags_GAMEOBJECT,
-                trade_item: target_flags_TRADE_ITEM,
-                string: target_flags_STRING,
-                locked: target_flags_LOCKED,
-                corpse_ally: target_flags_CORPSE_ALLY,
-            };
-
-            Ok(Self {
-                target_flags,
+            Some(SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
+                unit_target2,
             })
+        }
+        else {
+            None
+        };
+
+        let target_flags_GAMEOBJECT = if target_flags.is_GAMEOBJECT() {
+            // object_target1: PackedGuid
+            let object_target1 = Guid::tokio_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
+                object_target1,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_LOCKED = if target_flags.is_LOCKED() {
+            // object_target2: PackedGuid
+            let object_target2 = Guid::tokio_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsLOCKED {
+                object_target2,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_ITEM = if target_flags.is_ITEM() {
+            // item_target1: PackedGuid
+            let item_target1 = Guid::tokio_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsITEM {
+                item_target1,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_TRADE_ITEM = if target_flags.is_TRADE_ITEM() {
+            // item_target2: PackedGuid
+            let item_target2 = Guid::tokio_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
+                item_target2,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_SOURCE_LOCATION = if target_flags.is_SOURCE_LOCATION() {
+            // position_x1: f32
+            let position_x1 = crate::util::tokio_read_f32_le(r).await?;
+            // position_y1: f32
+            let position_y1 = crate::util::tokio_read_f32_le(r).await?;
+            // position_z1: f32
+            let position_z1 = crate::util::tokio_read_f32_le(r).await?;
+            Some(SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
+                position_x1,
+                position_y1,
+                position_z1,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_DEST_LOCATION = if target_flags.is_DEST_LOCATION() {
+            // position_x2: f32
+            let position_x2 = crate::util::tokio_read_f32_le(r).await?;
+            // position_y2: f32
+            let position_y2 = crate::util::tokio_read_f32_le(r).await?;
+            // position_z2: f32
+            let position_z2 = crate::util::tokio_read_f32_le(r).await?;
+            Some(SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
+                position_x2,
+                position_y2,
+                position_z2,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_STRING = if target_flags.is_STRING() {
+            // target_string: CString
+            let target_string = crate::util::tokio_read_c_string_to_vec(r).await?;
+            let target_string = String::from_utf8(target_string)?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsSTRING {
+                target_string,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_CORPSE_ALLY = if target_flags.is_CORPSE_ALLY() {
+            // corpse_target1: PackedGuid
+            let corpse_target1 = Guid::tokio_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
+                corpse_target1,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_CORPSE_ENEMY = if target_flags.is_CORPSE_ENEMY() {
+            // corpse_target2: PackedGuid
+            let corpse_target2 = Guid::tokio_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
+                corpse_target2,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags = SpellCastTargetsSpellCastTargetFlags {
+            inner: target_flags.as_int(),
+            unit: target_flags_UNIT,
+            item: target_flags_ITEM,
+            source_location: target_flags_SOURCE_LOCATION,
+            dest_location: target_flags_DEST_LOCATION,
+            unit_enemy: target_flags_UNIT_ENEMY,
+            corpse_enemy: target_flags_CORPSE_ENEMY,
+            gameobject: target_flags_GAMEOBJECT,
+            trade_item: target_flags_TRADE_ITEM,
+            string: target_flags_STRING,
+            locked: target_flags_LOCKED,
+            corpse_ally: target_flags_CORPSE_ALLY,
+        };
+
+        Ok(Self {
+            target_flags,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // target_flags: SpellCastTargetFlags
-            crate::util::astd_write_u16_le(w, self.target_flags.as_int() as u16).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // target_flags: SpellCastTargetFlags
+        crate::util::tokio_write_u16_le(w, self.target_flags.as_int() as u16).await?;
 
-            if let Some(if_statement) = &self.target_flags.unit {
-                // unit_target1: PackedGuid
-                if_statement.unit_target1.astd_write_packed(w).await?;
+        if let Some(if_statement) = &self.target_flags.unit {
+            // unit_target1: PackedGuid
+            if_statement.unit_target1.tokio_write_packed(w).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.target_flags.unit_enemy {
-                // unit_target2: PackedGuid
-                if_statement.unit_target2.astd_write_packed(w).await?;
+        if let Some(if_statement) = &self.target_flags.unit_enemy {
+            // unit_target2: PackedGuid
+            if_statement.unit_target2.tokio_write_packed(w).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.target_flags.gameobject {
-                // object_target1: PackedGuid
-                if_statement.object_target1.astd_write_packed(w).await?;
+        if let Some(if_statement) = &self.target_flags.gameobject {
+            // object_target1: PackedGuid
+            if_statement.object_target1.tokio_write_packed(w).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.target_flags.locked {
-                // object_target2: PackedGuid
-                if_statement.object_target2.astd_write_packed(w).await?;
+        if let Some(if_statement) = &self.target_flags.locked {
+            // object_target2: PackedGuid
+            if_statement.object_target2.tokio_write_packed(w).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.target_flags.item {
-                // item_target1: PackedGuid
-                if_statement.item_target1.astd_write_packed(w).await?;
+        if let Some(if_statement) = &self.target_flags.item {
+            // item_target1: PackedGuid
+            if_statement.item_target1.tokio_write_packed(w).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.target_flags.trade_item {
-                // item_target2: PackedGuid
-                if_statement.item_target2.astd_write_packed(w).await?;
+        if let Some(if_statement) = &self.target_flags.trade_item {
+            // item_target2: PackedGuid
+            if_statement.item_target2.tokio_write_packed(w).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.target_flags.source_location {
-                // position_x1: f32
-                w.write_all(&if_statement.position_x1.to_le_bytes()).await?;
+        if let Some(if_statement) = &self.target_flags.source_location {
+            // position_x1: f32
+            w.write_all(&if_statement.position_x1.to_le_bytes()).await?;
 
-                // position_y1: f32
-                w.write_all(&if_statement.position_y1.to_le_bytes()).await?;
+            // position_y1: f32
+            w.write_all(&if_statement.position_y1.to_le_bytes()).await?;
 
-                // position_z1: f32
-                w.write_all(&if_statement.position_z1.to_le_bytes()).await?;
+            // position_z1: f32
+            w.write_all(&if_statement.position_z1.to_le_bytes()).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.target_flags.dest_location {
-                // position_x2: f32
-                w.write_all(&if_statement.position_x2.to_le_bytes()).await?;
+        if let Some(if_statement) = &self.target_flags.dest_location {
+            // position_x2: f32
+            w.write_all(&if_statement.position_x2.to_le_bytes()).await?;
 
-                // position_y2: f32
-                w.write_all(&if_statement.position_y2.to_le_bytes()).await?;
+            // position_y2: f32
+            w.write_all(&if_statement.position_y2.to_le_bytes()).await?;
 
-                // position_z2: f32
-                w.write_all(&if_statement.position_z2.to_le_bytes()).await?;
+            // position_z2: f32
+            w.write_all(&if_statement.position_z2.to_le_bytes()).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.target_flags.string {
-                // target_string: CString
-                w.write_all(if_statement.target_string.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
+        if let Some(if_statement) = &self.target_flags.string {
+            // target_string: CString
+            w.write_all(if_statement.target_string.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.target_flags.corpse_ally {
-                // corpse_target1: PackedGuid
-                if_statement.corpse_target1.astd_write_packed(w).await?;
+        if let Some(if_statement) = &self.target_flags.corpse_ally {
+            // corpse_target1: PackedGuid
+            if_statement.corpse_target1.tokio_write_packed(w).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.target_flags.corpse_enemy {
-                // corpse_target2: PackedGuid
-                if_statement.corpse_target2.astd_write_packed(w).await?;
+        if let Some(if_statement) = &self.target_flags.corpse_enemy {
+            // corpse_target2: PackedGuid
+            if_statement.corpse_target2.tokio_write_packed(w).await?;
 
-            }
+        }
 
-            Ok(())
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellCastTargetsError> {
+        // target_flags: SpellCastTargetFlags
+        let target_flags = SpellCastTargetFlags::new(crate::util::astd_read_u16_le(r).await?);
+
+        let target_flags_UNIT = if target_flags.is_UNIT() {
+            // unit_target1: PackedGuid
+            let unit_target1 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsUNIT {
+                unit_target1,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_UNIT_ENEMY = if target_flags.is_UNIT_ENEMY() {
+            // unit_target2: PackedGuid
+            let unit_target2 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
+                unit_target2,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_GAMEOBJECT = if target_flags.is_GAMEOBJECT() {
+            // object_target1: PackedGuid
+            let object_target1 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
+                object_target1,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_LOCKED = if target_flags.is_LOCKED() {
+            // object_target2: PackedGuid
+            let object_target2 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsLOCKED {
+                object_target2,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_ITEM = if target_flags.is_ITEM() {
+            // item_target1: PackedGuid
+            let item_target1 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsITEM {
+                item_target1,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_TRADE_ITEM = if target_flags.is_TRADE_ITEM() {
+            // item_target2: PackedGuid
+            let item_target2 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
+                item_target2,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_SOURCE_LOCATION = if target_flags.is_SOURCE_LOCATION() {
+            // position_x1: f32
+            let position_x1 = crate::util::astd_read_f32_le(r).await?;
+            // position_y1: f32
+            let position_y1 = crate::util::astd_read_f32_le(r).await?;
+            // position_z1: f32
+            let position_z1 = crate::util::astd_read_f32_le(r).await?;
+            Some(SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
+                position_x1,
+                position_y1,
+                position_z1,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_DEST_LOCATION = if target_flags.is_DEST_LOCATION() {
+            // position_x2: f32
+            let position_x2 = crate::util::astd_read_f32_le(r).await?;
+            // position_y2: f32
+            let position_y2 = crate::util::astd_read_f32_le(r).await?;
+            // position_z2: f32
+            let position_z2 = crate::util::astd_read_f32_le(r).await?;
+            Some(SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
+                position_x2,
+                position_y2,
+                position_z2,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_STRING = if target_flags.is_STRING() {
+            // target_string: CString
+            let target_string = crate::util::astd_read_c_string_to_vec(r).await?;
+            let target_string = String::from_utf8(target_string)?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsSTRING {
+                target_string,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_CORPSE_ALLY = if target_flags.is_CORPSE_ALLY() {
+            // corpse_target1: PackedGuid
+            let corpse_target1 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
+                corpse_target1,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags_CORPSE_ENEMY = if target_flags.is_CORPSE_ENEMY() {
+            // corpse_target2: PackedGuid
+            let corpse_target2 = Guid::astd_read_packed(r).await?;
+
+            Some(SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
+                corpse_target2,
+            })
+        }
+        else {
+            None
+        };
+
+        let target_flags = SpellCastTargetsSpellCastTargetFlags {
+            inner: target_flags.as_int(),
+            unit: target_flags_UNIT,
+            item: target_flags_ITEM,
+            source_location: target_flags_SOURCE_LOCATION,
+            dest_location: target_flags_DEST_LOCATION,
+            unit_enemy: target_flags_UNIT_ENEMY,
+            corpse_enemy: target_flags_CORPSE_ENEMY,
+            gameobject: target_flags_GAMEOBJECT,
+            trade_item: target_flags_TRADE_ITEM,
+            string: target_flags_STRING,
+            locked: target_flags_LOCKED,
+            corpse_ally: target_flags_CORPSE_ALLY,
+        };
+
+        Ok(Self {
+            target_flags,
         })
+    }
+
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // target_flags: SpellCastTargetFlags
+        crate::util::astd_write_u16_le(w, self.target_flags.as_int() as u16).await?;
+
+        if let Some(if_statement) = &self.target_flags.unit {
+            // unit_target1: PackedGuid
+            if_statement.unit_target1.astd_write_packed(w).await?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.unit_enemy {
+            // unit_target2: PackedGuid
+            if_statement.unit_target2.astd_write_packed(w).await?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.gameobject {
+            // object_target1: PackedGuid
+            if_statement.object_target1.astd_write_packed(w).await?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.locked {
+            // object_target2: PackedGuid
+            if_statement.object_target2.astd_write_packed(w).await?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.item {
+            // item_target1: PackedGuid
+            if_statement.item_target1.astd_write_packed(w).await?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.trade_item {
+            // item_target2: PackedGuid
+            if_statement.item_target2.astd_write_packed(w).await?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.source_location {
+            // position_x1: f32
+            w.write_all(&if_statement.position_x1.to_le_bytes()).await?;
+
+            // position_y1: f32
+            w.write_all(&if_statement.position_y1.to_le_bytes()).await?;
+
+            // position_z1: f32
+            w.write_all(&if_statement.position_z1.to_le_bytes()).await?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.dest_location {
+            // position_x2: f32
+            w.write_all(&if_statement.position_x2.to_le_bytes()).await?;
+
+            // position_y2: f32
+            w.write_all(&if_statement.position_y2.to_le_bytes()).await?;
+
+            // position_z2: f32
+            w.write_all(&if_statement.position_z2.to_le_bytes()).await?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.string {
+            // target_string: CString
+            w.write_all(if_statement.target_string.as_bytes()).await?;
+            // Null terminator
+            w.write_all(&[0]).await?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.corpse_ally {
+            // corpse_target1: PackedGuid
+            if_statement.corpse_target1.astd_write_packed(w).await?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.corpse_enemy {
+            // corpse_target2: PackedGuid
+            if_statement.corpse_target2.astd_write_packed(w).await?;
+
+        }
+
+        Ok(())
     }
 
 }

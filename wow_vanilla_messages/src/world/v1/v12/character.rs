@@ -47,11 +47,8 @@ impl Character {
 
 }
 
-impl ReadableAndWritable for Character {
-    type Error = CharacterError;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl Character {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, CharacterError> {
         // guid: Guid
         let guid = Guid::read(r)?;
 
@@ -158,8 +155,7 @@ impl ReadableAndWritable for Character {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
         self.guid.write(w)?;
 
@@ -242,436 +238,384 @@ impl ReadableAndWritable for Character {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, CharacterError> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
 
-            // name: CString
-            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
 
-            // race: Race
-            let race: Race = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+        // race: Race
+        let race: Race = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            // class: Class
-            let class: Class = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+        // class: Class
+        let class: Class = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            // gender: Gender
-            let gender: Gender = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+        // gender: Gender
+        let gender: Gender = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            // skin: u8
-            let skin = crate::util::tokio_read_u8_le(r).await?;
+        // skin: u8
+        let skin = crate::util::tokio_read_u8_le(r).await?;
 
-            // face: u8
-            let face = crate::util::tokio_read_u8_le(r).await?;
+        // face: u8
+        let face = crate::util::tokio_read_u8_le(r).await?;
 
-            // hairstyle: u8
-            let hairstyle = crate::util::tokio_read_u8_le(r).await?;
+        // hairstyle: u8
+        let hairstyle = crate::util::tokio_read_u8_le(r).await?;
 
-            // haircolor: u8
-            let haircolor = crate::util::tokio_read_u8_le(r).await?;
+        // haircolor: u8
+        let haircolor = crate::util::tokio_read_u8_le(r).await?;
 
-            // facialhair: u8
-            let facialhair = crate::util::tokio_read_u8_le(r).await?;
+        // facialhair: u8
+        let facialhair = crate::util::tokio_read_u8_le(r).await?;
 
-            // level: u8
-            let level = crate::util::tokio_read_u8_le(r).await?;
+        // level: u8
+        let level = crate::util::tokio_read_u8_le(r).await?;
 
-            // area: Area
-            let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
+        // area: Area
+        let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
-            // map: Map
-            let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
+        // map: Map
+        let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
-            // position_x: f32
-            let position_x = crate::util::tokio_read_f32_le(r).await?;
-            // position_y: f32
-            let position_y = crate::util::tokio_read_f32_le(r).await?;
-            // position_z: f32
-            let position_z = crate::util::tokio_read_f32_le(r).await?;
-            // guild_id: u32
-            let guild_id = crate::util::tokio_read_u32_le(r).await?;
+        // position_x: f32
+        let position_x = crate::util::tokio_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::tokio_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::tokio_read_f32_le(r).await?;
+        // guild_id: u32
+        let guild_id = crate::util::tokio_read_u32_le(r).await?;
 
-            // flags: CharacterFlags
-            let flags = CharacterFlags::new(crate::util::tokio_read_u32_le(r).await?);
+        // flags: CharacterFlags
+        let flags = CharacterFlags::new(crate::util::tokio_read_u32_le(r).await?);
 
-            // first_login: u8
-            let first_login = crate::util::tokio_read_u8_le(r).await?;
+        // first_login: u8
+        let first_login = crate::util::tokio_read_u8_le(r).await?;
 
-            // pet_display_id: u32
-            let pet_display_id = crate::util::tokio_read_u32_le(r).await?;
+        // pet_display_id: u32
+        let pet_display_id = crate::util::tokio_read_u32_le(r).await?;
 
-            // pet_level: u32
-            let pet_level = crate::util::tokio_read_u32_le(r).await?;
+        // pet_level: u32
+        let pet_level = crate::util::tokio_read_u32_le(r).await?;
 
-            // pet_familiy: u32
-            let pet_familiy = crate::util::tokio_read_u32_le(r).await?;
+        // pet_familiy: u32
+        let pet_familiy = crate::util::tokio_read_u32_le(r).await?;
 
-            // equipment: CharacterGear[19]
-            let mut equipment = Vec::with_capacity(19 as usize);
-            for i in 0..19 {
-                equipment.push(CharacterGear::tokio_read(r).await?);
-            }
-            let equipment = equipment.try_into().unwrap();
+        // equipment: CharacterGear[19]
+        let mut equipment = Vec::with_capacity(19 as usize);
+        for i in 0..19 {
+            equipment.push(CharacterGear::tokio_read(r).await?);
+        }
+        let equipment = equipment.try_into().unwrap();
 
-            // first_bag_display_id: u32
-            let _first_bag_display_id = crate::util::tokio_read_u32_le(r).await?;
-            // first_bag_display_id is expected to always be 0 (0)
+        // first_bag_display_id: u32
+        let _first_bag_display_id = crate::util::tokio_read_u32_le(r).await?;
+        // first_bag_display_id is expected to always be 0 (0)
 
-            // first_bag_inventory_id: u8
-            let _first_bag_inventory_id = crate::util::tokio_read_u8_le(r).await?;
-            // first_bag_inventory_id is expected to always be 0 (0)
+        // first_bag_inventory_id: u8
+        let _first_bag_inventory_id = crate::util::tokio_read_u8_le(r).await?;
+        // first_bag_inventory_id is expected to always be 0 (0)
 
-            Ok(Self {
-                guid,
-                name,
-                race,
-                class,
-                gender,
-                skin,
-                face,
-                hairstyle,
-                haircolor,
-                facialhair,
-                level,
-                area,
-                map,
-                position_x,
-                position_y,
-                position_z,
-                guild_id,
-                flags,
-                first_login,
-                pet_display_id,
-                pet_level,
-                pet_familiy,
-                equipment,
-            })
+        Ok(Self {
+            guid,
+            name,
+            race,
+            class,
+            gender,
+            skin,
+            face,
+            hairstyle,
+            haircolor,
+            facialhair,
+            level,
+            area,
+            map,
+            position_x,
+            position_y,
+            position_z,
+            guild_id,
+            flags,
+            first_login,
+            pet_display_id,
+            pet_level,
+            pet_familiy,
+            equipment,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            self.guid.tokio_write(w).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
 
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // race: Race
-            crate::util::tokio_write_u8_le(w, self.race.as_int() as u8).await?;
+        // race: Race
+        crate::util::tokio_write_u8_le(w, self.race.as_int() as u8).await?;
 
-            // class: Class
-            crate::util::tokio_write_u8_le(w, self.class.as_int() as u8).await?;
+        // class: Class
+        crate::util::tokio_write_u8_le(w, self.class.as_int() as u8).await?;
 
-            // gender: Gender
-            crate::util::tokio_write_u8_le(w, self.gender.as_int() as u8).await?;
+        // gender: Gender
+        crate::util::tokio_write_u8_le(w, self.gender.as_int() as u8).await?;
 
-            // skin: u8
-            w.write_all(&self.skin.to_le_bytes()).await?;
+        // skin: u8
+        w.write_all(&self.skin.to_le_bytes()).await?;
 
-            // face: u8
-            w.write_all(&self.face.to_le_bytes()).await?;
+        // face: u8
+        w.write_all(&self.face.to_le_bytes()).await?;
 
-            // hairstyle: u8
-            w.write_all(&self.hairstyle.to_le_bytes()).await?;
+        // hairstyle: u8
+        w.write_all(&self.hairstyle.to_le_bytes()).await?;
 
-            // haircolor: u8
-            w.write_all(&self.haircolor.to_le_bytes()).await?;
+        // haircolor: u8
+        w.write_all(&self.haircolor.to_le_bytes()).await?;
 
-            // facialhair: u8
-            w.write_all(&self.facialhair.to_le_bytes()).await?;
+        // facialhair: u8
+        w.write_all(&self.facialhair.to_le_bytes()).await?;
 
-            // level: u8
-            w.write_all(&self.level.to_le_bytes()).await?;
+        // level: u8
+        w.write_all(&self.level.to_le_bytes()).await?;
 
-            // area: Area
-            crate::util::tokio_write_u32_le(w, self.area.as_int() as u32).await?;
+        // area: Area
+        crate::util::tokio_write_u32_le(w, self.area.as_int() as u32).await?;
 
-            // map: Map
-            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
+        // map: Map
+        crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
 
-            // position_x: f32
-            w.write_all(&self.position_x.to_le_bytes()).await?;
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
 
-            // position_y: f32
-            w.write_all(&self.position_y.to_le_bytes()).await?;
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
 
-            // position_z: f32
-            w.write_all(&self.position_z.to_le_bytes()).await?;
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
 
-            // guild_id: u32
-            w.write_all(&self.guild_id.to_le_bytes()).await?;
+        // guild_id: u32
+        w.write_all(&self.guild_id.to_le_bytes()).await?;
 
-            // flags: CharacterFlags
-            crate::util::tokio_write_u32_le(w, self.flags.as_int() as u32).await?;
+        // flags: CharacterFlags
+        crate::util::tokio_write_u32_le(w, self.flags.as_int() as u32).await?;
 
-            // first_login: u8
-            w.write_all(&self.first_login.to_le_bytes()).await?;
+        // first_login: u8
+        w.write_all(&self.first_login.to_le_bytes()).await?;
 
-            // pet_display_id: u32
-            w.write_all(&self.pet_display_id.to_le_bytes()).await?;
+        // pet_display_id: u32
+        w.write_all(&self.pet_display_id.to_le_bytes()).await?;
 
-            // pet_level: u32
-            w.write_all(&self.pet_level.to_le_bytes()).await?;
+        // pet_level: u32
+        w.write_all(&self.pet_level.to_le_bytes()).await?;
 
-            // pet_familiy: u32
-            w.write_all(&self.pet_familiy.to_le_bytes()).await?;
+        // pet_familiy: u32
+        w.write_all(&self.pet_familiy.to_le_bytes()).await?;
 
-            // equipment: CharacterGear[19]
-            for i in self.equipment.iter() {
-                i.tokio_write(w).await?;
-            }
+        // equipment: CharacterGear[19]
+        for i in self.equipment.iter() {
+            i.tokio_write(w).await?;
+        }
 
-            // first_bag_display_id: u32
-            w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes()).await?;
+        // first_bag_display_id: u32
+        w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes()).await?;
 
-            // first_bag_inventory_id: u8
-            w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes()).await?;
+        // first_bag_inventory_id: u8
+        w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes()).await?;
 
-            Ok(())
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, CharacterError> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // race: Race
+        let race: Race = crate::util::astd_read_u8_le(r).await?.try_into()?;
+
+        // class: Class
+        let class: Class = crate::util::astd_read_u8_le(r).await?.try_into()?;
+
+        // gender: Gender
+        let gender: Gender = crate::util::astd_read_u8_le(r).await?.try_into()?;
+
+        // skin: u8
+        let skin = crate::util::astd_read_u8_le(r).await?;
+
+        // face: u8
+        let face = crate::util::astd_read_u8_le(r).await?;
+
+        // hairstyle: u8
+        let hairstyle = crate::util::astd_read_u8_le(r).await?;
+
+        // haircolor: u8
+        let haircolor = crate::util::astd_read_u8_le(r).await?;
+
+        // facialhair: u8
+        let facialhair = crate::util::astd_read_u8_le(r).await?;
+
+        // level: u8
+        let level = crate::util::astd_read_u8_le(r).await?;
+
+        // area: Area
+        let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
+
+        // map: Map
+        let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
+
+        // position_x: f32
+        let position_x = crate::util::astd_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::astd_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::astd_read_f32_le(r).await?;
+        // guild_id: u32
+        let guild_id = crate::util::astd_read_u32_le(r).await?;
+
+        // flags: CharacterFlags
+        let flags = CharacterFlags::new(crate::util::astd_read_u32_le(r).await?);
+
+        // first_login: u8
+        let first_login = crate::util::astd_read_u8_le(r).await?;
+
+        // pet_display_id: u32
+        let pet_display_id = crate::util::astd_read_u32_le(r).await?;
+
+        // pet_level: u32
+        let pet_level = crate::util::astd_read_u32_le(r).await?;
+
+        // pet_familiy: u32
+        let pet_familiy = crate::util::astd_read_u32_le(r).await?;
+
+        // equipment: CharacterGear[19]
+        let mut equipment = Vec::with_capacity(19 as usize);
+        for i in 0..19 {
+            equipment.push(CharacterGear::astd_read(r).await?);
+        }
+        let equipment = equipment.try_into().unwrap();
+
+        // first_bag_display_id: u32
+        let _first_bag_display_id = crate::util::astd_read_u32_le(r).await?;
+        // first_bag_display_id is expected to always be 0 (0)
+
+        // first_bag_inventory_id: u8
+        let _first_bag_inventory_id = crate::util::astd_read_u8_le(r).await?;
+        // first_bag_inventory_id is expected to always be 0 (0)
+
+        Ok(Self {
+            guid,
+            name,
+            race,
+            class,
+            gender,
+            skin,
+            face,
+            hairstyle,
+            haircolor,
+            facialhair,
+            level,
+            area,
+            map,
+            position_x,
+            position_y,
+            position_z,
+            guild_id,
+            flags,
+            first_login,
+            pet_display_id,
+            pet_level,
+            pet_familiy,
+            equipment,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
 
-            // name: CString
-            let name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // race: Race
-            let race: Race = crate::util::astd_read_u8_le(r).await?.try_into()?;
+        // race: Race
+        crate::util::astd_write_u8_le(w, self.race.as_int() as u8).await?;
 
-            // class: Class
-            let class: Class = crate::util::astd_read_u8_le(r).await?.try_into()?;
+        // class: Class
+        crate::util::astd_write_u8_le(w, self.class.as_int() as u8).await?;
 
-            // gender: Gender
-            let gender: Gender = crate::util::astd_read_u8_le(r).await?.try_into()?;
+        // gender: Gender
+        crate::util::astd_write_u8_le(w, self.gender.as_int() as u8).await?;
 
-            // skin: u8
-            let skin = crate::util::astd_read_u8_le(r).await?;
+        // skin: u8
+        w.write_all(&self.skin.to_le_bytes()).await?;
 
-            // face: u8
-            let face = crate::util::astd_read_u8_le(r).await?;
+        // face: u8
+        w.write_all(&self.face.to_le_bytes()).await?;
 
-            // hairstyle: u8
-            let hairstyle = crate::util::astd_read_u8_le(r).await?;
+        // hairstyle: u8
+        w.write_all(&self.hairstyle.to_le_bytes()).await?;
 
-            // haircolor: u8
-            let haircolor = crate::util::astd_read_u8_le(r).await?;
+        // haircolor: u8
+        w.write_all(&self.haircolor.to_le_bytes()).await?;
 
-            // facialhair: u8
-            let facialhair = crate::util::astd_read_u8_le(r).await?;
+        // facialhair: u8
+        w.write_all(&self.facialhair.to_le_bytes()).await?;
 
-            // level: u8
-            let level = crate::util::astd_read_u8_le(r).await?;
+        // level: u8
+        w.write_all(&self.level.to_le_bytes()).await?;
 
-            // area: Area
-            let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
+        // area: Area
+        crate::util::astd_write_u32_le(w, self.area.as_int() as u32).await?;
 
-            // map: Map
-            let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
+        // map: Map
+        crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
 
-            // position_x: f32
-            let position_x = crate::util::astd_read_f32_le(r).await?;
-            // position_y: f32
-            let position_y = crate::util::astd_read_f32_le(r).await?;
-            // position_z: f32
-            let position_z = crate::util::astd_read_f32_le(r).await?;
-            // guild_id: u32
-            let guild_id = crate::util::astd_read_u32_le(r).await?;
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
 
-            // flags: CharacterFlags
-            let flags = CharacterFlags::new(crate::util::astd_read_u32_le(r).await?);
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
 
-            // first_login: u8
-            let first_login = crate::util::astd_read_u8_le(r).await?;
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
 
-            // pet_display_id: u32
-            let pet_display_id = crate::util::astd_read_u32_le(r).await?;
+        // guild_id: u32
+        w.write_all(&self.guild_id.to_le_bytes()).await?;
 
-            // pet_level: u32
-            let pet_level = crate::util::astd_read_u32_le(r).await?;
+        // flags: CharacterFlags
+        crate::util::astd_write_u32_le(w, self.flags.as_int() as u32).await?;
 
-            // pet_familiy: u32
-            let pet_familiy = crate::util::astd_read_u32_le(r).await?;
+        // first_login: u8
+        w.write_all(&self.first_login.to_le_bytes()).await?;
 
-            // equipment: CharacterGear[19]
-            let mut equipment = Vec::with_capacity(19 as usize);
-            for i in 0..19 {
-                equipment.push(CharacterGear::astd_read(r).await?);
-            }
-            let equipment = equipment.try_into().unwrap();
+        // pet_display_id: u32
+        w.write_all(&self.pet_display_id.to_le_bytes()).await?;
 
-            // first_bag_display_id: u32
-            let _first_bag_display_id = crate::util::astd_read_u32_le(r).await?;
-            // first_bag_display_id is expected to always be 0 (0)
+        // pet_level: u32
+        w.write_all(&self.pet_level.to_le_bytes()).await?;
 
-            // first_bag_inventory_id: u8
-            let _first_bag_inventory_id = crate::util::astd_read_u8_le(r).await?;
-            // first_bag_inventory_id is expected to always be 0 (0)
+        // pet_familiy: u32
+        w.write_all(&self.pet_familiy.to_le_bytes()).await?;
 
-            Ok(Self {
-                guid,
-                name,
-                race,
-                class,
-                gender,
-                skin,
-                face,
-                hairstyle,
-                haircolor,
-                facialhair,
-                level,
-                area,
-                map,
-                position_x,
-                position_y,
-                position_z,
-                guild_id,
-                flags,
-                first_login,
-                pet_display_id,
-                pet_level,
-                pet_familiy,
-                equipment,
-            })
-        })
-    }
+        // equipment: CharacterGear[19]
+        for i in self.equipment.iter() {
+            i.astd_write(w).await?;
+        }
 
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            self.guid.astd_write(w).await?;
+        // first_bag_display_id: u32
+        w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes()).await?;
 
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+        // first_bag_inventory_id: u8
+        w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes()).await?;
 
-            // race: Race
-            crate::util::astd_write_u8_le(w, self.race.as_int() as u8).await?;
-
-            // class: Class
-            crate::util::astd_write_u8_le(w, self.class.as_int() as u8).await?;
-
-            // gender: Gender
-            crate::util::astd_write_u8_le(w, self.gender.as_int() as u8).await?;
-
-            // skin: u8
-            w.write_all(&self.skin.to_le_bytes()).await?;
-
-            // face: u8
-            w.write_all(&self.face.to_le_bytes()).await?;
-
-            // hairstyle: u8
-            w.write_all(&self.hairstyle.to_le_bytes()).await?;
-
-            // haircolor: u8
-            w.write_all(&self.haircolor.to_le_bytes()).await?;
-
-            // facialhair: u8
-            w.write_all(&self.facialhair.to_le_bytes()).await?;
-
-            // level: u8
-            w.write_all(&self.level.to_le_bytes()).await?;
-
-            // area: Area
-            crate::util::astd_write_u32_le(w, self.area.as_int() as u32).await?;
-
-            // map: Map
-            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
-
-            // position_x: f32
-            w.write_all(&self.position_x.to_le_bytes()).await?;
-
-            // position_y: f32
-            w.write_all(&self.position_y.to_le_bytes()).await?;
-
-            // position_z: f32
-            w.write_all(&self.position_z.to_le_bytes()).await?;
-
-            // guild_id: u32
-            w.write_all(&self.guild_id.to_le_bytes()).await?;
-
-            // flags: CharacterFlags
-            crate::util::astd_write_u32_le(w, self.flags.as_int() as u32).await?;
-
-            // first_login: u8
-            w.write_all(&self.first_login.to_le_bytes()).await?;
-
-            // pet_display_id: u32
-            w.write_all(&self.pet_display_id.to_le_bytes()).await?;
-
-            // pet_level: u32
-            w.write_all(&self.pet_level.to_le_bytes()).await?;
-
-            // pet_familiy: u32
-            w.write_all(&self.pet_familiy.to_le_bytes()).await?;
-
-            // equipment: CharacterGear[19]
-            for i in self.equipment.iter() {
-                i.astd_write(w).await?;
-            }
-
-            // first_bag_display_id: u32
-            w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes()).await?;
-
-            // first_bag_inventory_id: u8
-            w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes()).await?;
-
-            Ok(())
-        })
+        Ok(())
     }
 
 }

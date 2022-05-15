@@ -15,11 +15,8 @@ pub struct Friend {
     pub status: FriendFriendStatus,
 }
 
-impl ReadableAndWritable for Friend {
-    type Error = FriendError;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl Friend {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, FriendError> {
         // guid: Guid
         let guid = Guid::read(r)?;
 
@@ -100,8 +97,7 @@ impl ReadableAndWritable for Friend {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
         self.guid.write(w)?;
 
@@ -175,366 +171,314 @@ impl ReadableAndWritable for Friend {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, FriendError> {
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
 
-            // status: FriendStatus
-            let status: FriendStatus = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+        // status: FriendStatus
+        let status: FriendStatus = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            let status_if = match status {
-                FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
-                FriendStatus::ONLINE => {
-                    // area: Area
-                    let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
+        let status_if = match status {
+            FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
+            FriendStatus::ONLINE => {
+                // area: Area
+                let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
-                    // level: u32
-                    let level = crate::util::tokio_read_u32_le(r).await?;
+                // level: u32
+                let level = crate::util::tokio_read_u32_le(r).await?;
 
-                    // class: Class
-                    let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
+                // class: Class
+                let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
-                    FriendFriendStatus::ONLINE {
-                        area,
-                        class,
-                        level,
-                    }
-                }
-                FriendStatus::AFK => {
-                    // area: Area
-                    let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-                    // level: u32
-                    let level = crate::util::tokio_read_u32_le(r).await?;
-
-                    // class: Class
-                    let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
-
-                    FriendFriendStatus::AFK {
-                        area,
-                        class,
-                        level,
-                    }
-                }
-                FriendStatus::UNKNOWN3 => {
-                    // area: Area
-                    let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-                    // level: u32
-                    let level = crate::util::tokio_read_u32_le(r).await?;
-
-                    // class: Class
-                    let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
-
-                    FriendFriendStatus::UNKNOWN3 {
-                        area,
-                        class,
-                        level,
-                    }
-                }
-                FriendStatus::DND => {
-                    // area: Area
-                    let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
-
-                    // level: u32
-                    let level = crate::util::tokio_read_u32_le(r).await?;
-
-                    // class: Class
-                    let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
-
-                    FriendFriendStatus::DND {
-                        area,
-                        class,
-                        level,
-                    }
-                }
-            };
-
-            Ok(Self {
-                guid,
-                status: status_if,
-            })
-        })
-    }
-
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            self.guid.tokio_write(w).await?;
-
-            // status: FriendStatus
-            crate::util::tokio_write_u8_le(w, self.status.as_int() as u8).await?;
-
-            match &self.status {
-                FriendFriendStatus::OFFLINE => {}
                 FriendFriendStatus::ONLINE {
                     area,
                     class,
                     level,
-                } => {
-                    // area: Area
-                    crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
-
-                    // level: u32
-                    w.write_all(&level.to_le_bytes()).await?;
-
-                    // class: Class
-                    crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
-
                 }
+            }
+            FriendStatus::AFK => {
+                // area: Area
+                let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
+
+                // level: u32
+                let level = crate::util::tokio_read_u32_le(r).await?;
+
+                // class: Class
+                let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
+
                 FriendFriendStatus::AFK {
                     area,
                     class,
                     level,
-                } => {
-                    // area: Area
-                    crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
-
-                    // level: u32
-                    w.write_all(&level.to_le_bytes()).await?;
-
-                    // class: Class
-                    crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
-
                 }
+            }
+            FriendStatus::UNKNOWN3 => {
+                // area: Area
+                let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
+
+                // level: u32
+                let level = crate::util::tokio_read_u32_le(r).await?;
+
+                // class: Class
+                let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
+
                 FriendFriendStatus::UNKNOWN3 {
                     area,
                     class,
                     level,
-                } => {
-                    // area: Area
-                    crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
-
-                    // level: u32
-                    w.write_all(&level.to_le_bytes()).await?;
-
-                    // class: Class
-                    crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
-
                 }
+            }
+            FriendStatus::DND => {
+                // area: Area
+                let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
+
+                // level: u32
+                let level = crate::util::tokio_read_u32_le(r).await?;
+
+                // class: Class
+                let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
+
                 FriendFriendStatus::DND {
                     area,
                     class,
                     level,
-                } => {
-                    // area: Area
-                    crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
-
-                    // level: u32
-                    w.write_all(&level.to_le_bytes()).await?;
-
-                    // class: Class
-                    crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
-
                 }
             }
+        };
 
-            Ok(())
+        Ok(Self {
+            guid,
+            status: status_if,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
 
-            // status: FriendStatus
-            let status: FriendStatus = crate::util::astd_read_u8_le(r).await?.try_into()?;
+        // status: FriendStatus
+        crate::util::tokio_write_u8_le(w, self.status.as_int() as u8).await?;
 
-            let status_if = match status {
-                FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
-                FriendStatus::ONLINE => {
-                    // area: Area
-                    let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
+        match &self.status {
+            FriendFriendStatus::OFFLINE => {}
+            FriendFriendStatus::ONLINE {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
 
-                    // level: u32
-                    let level = crate::util::astd_read_u32_le(r).await?;
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
 
-                    // class: Class
-                    let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
+                // class: Class
+                crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
 
-                    FriendFriendStatus::ONLINE {
-                        area,
-                        class,
-                        level,
-                    }
-                }
-                FriendStatus::AFK => {
-                    // area: Area
-                    let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
+            }
+            FriendFriendStatus::AFK {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
 
-                    // level: u32
-                    let level = crate::util::astd_read_u32_le(r).await?;
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
 
-                    // class: Class
-                    let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
+                // class: Class
+                crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
 
-                    FriendFriendStatus::AFK {
-                        area,
-                        class,
-                        level,
-                    }
-                }
-                FriendStatus::UNKNOWN3 => {
-                    // area: Area
-                    let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
+            }
+            FriendFriendStatus::UNKNOWN3 {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
 
-                    // level: u32
-                    let level = crate::util::astd_read_u32_le(r).await?;
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
 
-                    // class: Class
-                    let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
+                // class: Class
+                crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
 
-                    FriendFriendStatus::UNKNOWN3 {
-                        area,
-                        class,
-                        level,
-                    }
-                }
-                FriendStatus::DND => {
-                    // area: Area
-                    let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
+            }
+            FriendFriendStatus::DND {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
 
-                    // level: u32
-                    let level = crate::util::astd_read_u32_le(r).await?;
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
 
-                    // class: Class
-                    let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
+                // class: Class
+                crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
 
-                    FriendFriendStatus::DND {
-                        area,
-                        class,
-                        level,
-                    }
-                }
-            };
+            }
+        }
 
-            Ok(Self {
-                guid,
-                status: status_if,
-            })
-        })
+        Ok(())
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // guid: Guid
-            self.guid.astd_write(w).await?;
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, FriendError> {
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
 
-            // status: FriendStatus
-            crate::util::astd_write_u8_le(w, self.status.as_int() as u8).await?;
+        // status: FriendStatus
+        let status: FriendStatus = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
-            match &self.status {
-                FriendFriendStatus::OFFLINE => {}
+        let status_if = match status {
+            FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
+            FriendStatus::ONLINE => {
+                // area: Area
+                let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
+
+                // level: u32
+                let level = crate::util::astd_read_u32_le(r).await?;
+
+                // class: Class
+                let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
+
                 FriendFriendStatus::ONLINE {
                     area,
                     class,
                     level,
-                } => {
-                    // area: Area
-                    crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
-
-                    // level: u32
-                    w.write_all(&level.to_le_bytes()).await?;
-
-                    // class: Class
-                    crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
-
                 }
+            }
+            FriendStatus::AFK => {
+                // area: Area
+                let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
+
+                // level: u32
+                let level = crate::util::astd_read_u32_le(r).await?;
+
+                // class: Class
+                let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
+
                 FriendFriendStatus::AFK {
                     area,
                     class,
                     level,
-                } => {
-                    // area: Area
-                    crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
-
-                    // level: u32
-                    w.write_all(&level.to_le_bytes()).await?;
-
-                    // class: Class
-                    crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
-
                 }
+            }
+            FriendStatus::UNKNOWN3 => {
+                // area: Area
+                let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
+
+                // level: u32
+                let level = crate::util::astd_read_u32_le(r).await?;
+
+                // class: Class
+                let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
+
                 FriendFriendStatus::UNKNOWN3 {
                     area,
                     class,
                     level,
-                } => {
-                    // area: Area
-                    crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
-
-                    // level: u32
-                    w.write_all(&level.to_le_bytes()).await?;
-
-                    // class: Class
-                    crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
-
                 }
+            }
+            FriendStatus::DND => {
+                // area: Area
+                let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
+
+                // level: u32
+                let level = crate::util::astd_read_u32_le(r).await?;
+
+                // class: Class
+                let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
+
                 FriendFriendStatus::DND {
                     area,
                     class,
                     level,
-                } => {
-                    // area: Area
-                    crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
-
-                    // level: u32
-                    w.write_all(&level.to_le_bytes()).await?;
-
-                    // class: Class
-                    crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
-
                 }
             }
+        };
 
-            Ok(())
+        Ok(Self {
+            guid,
+            status: status_if,
         })
+    }
+
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // guid: Guid
+        self.guid.astd_write(w).await?;
+
+        // status: FriendStatus
+        crate::util::astd_write_u8_le(w, self.status.as_int() as u8).await?;
+
+        match &self.status {
+            FriendFriendStatus::OFFLINE => {}
+            FriendFriendStatus::ONLINE {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
+
+                // class: Class
+                crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
+
+            }
+            FriendFriendStatus::AFK {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
+
+                // class: Class
+                crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
+
+            }
+            FriendFriendStatus::UNKNOWN3 {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
+
+                // class: Class
+                crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
+
+            }
+            FriendFriendStatus::DND {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes()).await?;
+
+                // class: Class
+                crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
+
+            }
+        }
+
+        Ok(())
     }
 
 }

@@ -15,11 +15,8 @@ pub struct NpcTextUpdate {
     pub emotes: [NpcTextUpdateEmote; 3],
 }
 
-impl ReadableAndWritable for NpcTextUpdate {
-    type Error = NpcTextUpdateError;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl NpcTextUpdate {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, NpcTextUpdateError> {
         // probability: f32
         let probability = crate::util::read_f32_le(r)?;
         // texts: CString[2]
@@ -48,8 +45,7 @@ impl ReadableAndWritable for NpcTextUpdate {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // probability: f32
         w.write_all(&self.probability.to_le_bytes())?;
 
@@ -70,156 +66,104 @@ impl ReadableAndWritable for NpcTextUpdate {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // probability: f32
-            let probability = crate::util::tokio_read_f32_le(r).await?;
-            // texts: CString[2]
-            let mut texts = Vec::with_capacity(2 as usize);
-            for i in 0..2 {
-                let s = crate::util::tokio_read_c_string_to_vec(r).await?;
-                texts[i] = String::from_utf8(s)?;
-            }
-            let texts = texts.try_into().unwrap();
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, NpcTextUpdateError> {
+        // probability: f32
+        let probability = crate::util::tokio_read_f32_le(r).await?;
+        // texts: CString[2]
+        let mut texts = Vec::with_capacity(2 as usize);
+        for i in 0..2 {
+            let s = crate::util::tokio_read_c_string_to_vec(r).await?;
+            texts[i] = String::from_utf8(s)?;
+        }
+        let texts = texts.try_into().unwrap();
 
-            // language: Language
-            let language: Language = crate::util::tokio_read_u32_le(r).await?.try_into()?;
+        // language: Language
+        let language: Language = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
-            // emotes: NpcTextUpdateEmote[3]
-            let mut emotes = Vec::with_capacity(3 as usize);
-            for i in 0..3 {
-                emotes.push(NpcTextUpdateEmote::tokio_read(r).await?);
-            }
-            let emotes = emotes.try_into().unwrap();
+        // emotes: NpcTextUpdateEmote[3]
+        let mut emotes = Vec::with_capacity(3 as usize);
+        for i in 0..3 {
+            emotes.push(NpcTextUpdateEmote::tokio_read(r).await?);
+        }
+        let emotes = emotes.try_into().unwrap();
 
-            Ok(Self {
-                probability,
-                texts,
-                language,
-                emotes,
-            })
+        Ok(Self {
+            probability,
+            texts,
+            language,
+            emotes,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // probability: f32
-            w.write_all(&self.probability.to_le_bytes()).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // probability: f32
+        w.write_all(&self.probability.to_le_bytes()).await?;
 
-            // texts: CString[2]
-            for i in self.texts.iter() {
-                w.write_all(&i.as_bytes()).await?;
-                w.write_all(&[0]).await?;
-            }
+        // texts: CString[2]
+        for i in self.texts.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
+        }
 
-            // language: Language
-            crate::util::tokio_write_u32_le(w, self.language.as_int() as u32).await?;
+        // language: Language
+        crate::util::tokio_write_u32_le(w, self.language.as_int() as u32).await?;
 
-            // emotes: NpcTextUpdateEmote[3]
-            for i in self.emotes.iter() {
-                i.tokio_write(w).await?;
-            }
+        // emotes: NpcTextUpdateEmote[3]
+        for i in self.emotes.iter() {
+            i.tokio_write(w).await?;
+        }
 
-            Ok(())
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, NpcTextUpdateError> {
+        // probability: f32
+        let probability = crate::util::astd_read_f32_le(r).await?;
+        // texts: CString[2]
+        let mut texts = Vec::with_capacity(2 as usize);
+        for i in 0..2 {
+            let s = crate::util::astd_read_c_string_to_vec(r).await?;
+            texts[i] = String::from_utf8(s)?;
+        }
+        let texts = texts.try_into().unwrap();
+
+        // language: Language
+        let language: Language = crate::util::astd_read_u32_le(r).await?.try_into()?;
+
+        // emotes: NpcTextUpdateEmote[3]
+        let mut emotes = Vec::with_capacity(3 as usize);
+        for i in 0..3 {
+            emotes.push(NpcTextUpdateEmote::astd_read(r).await?);
+        }
+        let emotes = emotes.try_into().unwrap();
+
+        Ok(Self {
+            probability,
+            texts,
+            language,
+            emotes,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // probability: f32
-            let probability = crate::util::astd_read_f32_le(r).await?;
-            // texts: CString[2]
-            let mut texts = Vec::with_capacity(2 as usize);
-            for i in 0..2 {
-                let s = crate::util::astd_read_c_string_to_vec(r).await?;
-                texts[i] = String::from_utf8(s)?;
-            }
-            let texts = texts.try_into().unwrap();
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // probability: f32
+        w.write_all(&self.probability.to_le_bytes()).await?;
 
-            // language: Language
-            let language: Language = crate::util::astd_read_u32_le(r).await?.try_into()?;
+        // texts: CString[2]
+        for i in self.texts.iter() {
+            w.write_all(&i.as_bytes()).await?;
+            w.write_all(&[0]).await?;
+        }
 
-            // emotes: NpcTextUpdateEmote[3]
-            let mut emotes = Vec::with_capacity(3 as usize);
-            for i in 0..3 {
-                emotes.push(NpcTextUpdateEmote::astd_read(r).await?);
-            }
-            let emotes = emotes.try_into().unwrap();
+        // language: Language
+        crate::util::astd_write_u32_le(w, self.language.as_int() as u32).await?;
 
-            Ok(Self {
-                probability,
-                texts,
-                language,
-                emotes,
-            })
-        })
-    }
+        // emotes: NpcTextUpdateEmote[3]
+        for i in self.emotes.iter() {
+            i.astd_write(w).await?;
+        }
 
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // probability: f32
-            w.write_all(&self.probability.to_le_bytes()).await?;
-
-            // texts: CString[2]
-            for i in self.texts.iter() {
-                w.write_all(&i.as_bytes()).await?;
-                w.write_all(&[0]).await?;
-            }
-
-            // language: Language
-            crate::util::astd_write_u32_le(w, self.language.as_int() as u32).await?;
-
-            // emotes: NpcTextUpdateEmote[3]
-            for i in self.emotes.iter() {
-                i.astd_write(w).await?;
-            }
-
-            Ok(())
-        })
+        Ok(())
     }
 
 }

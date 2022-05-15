@@ -25,11 +25,8 @@ pub struct AuctionListItem {
     pub highest_bid: u32,
 }
 
-impl ReadableAndWritable for AuctionListItem {
-    type Error = std::io::Error;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl AuctionListItem {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // id: u32
         let id = crate::util::read_u32_le(r)?;
 
@@ -90,8 +87,7 @@ impl ReadableAndWritable for AuctionListItem {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
@@ -137,270 +133,218 @@ impl ReadableAndWritable for AuctionListItem {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // id: u32
-            let id = crate::util::tokio_read_u32_le(r).await?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // id: u32
+        let id = crate::util::tokio_read_u32_le(r).await?;
 
-            // item_entry: u32
-            let item_entry = crate::util::tokio_read_u32_le(r).await?;
+        // item_entry: u32
+        let item_entry = crate::util::tokio_read_u32_le(r).await?;
 
-            // item_enchantment: u32
-            let item_enchantment = crate::util::tokio_read_u32_le(r).await?;
+        // item_enchantment: u32
+        let item_enchantment = crate::util::tokio_read_u32_le(r).await?;
 
-            // item_random_property_id: u32
-            let item_random_property_id = crate::util::tokio_read_u32_le(r).await?;
+        // item_random_property_id: u32
+        let item_random_property_id = crate::util::tokio_read_u32_le(r).await?;
 
-            // item_suffix_factor: u32
-            let item_suffix_factor = crate::util::tokio_read_u32_le(r).await?;
+        // item_suffix_factor: u32
+        let item_suffix_factor = crate::util::tokio_read_u32_le(r).await?;
 
-            // item_count: u32
-            let item_count = crate::util::tokio_read_u32_le(r).await?;
+        // item_count: u32
+        let item_count = crate::util::tokio_read_u32_le(r).await?;
 
-            // item_charges: u32
-            let item_charges = crate::util::tokio_read_u32_le(r).await?;
+        // item_charges: u32
+        let item_charges = crate::util::tokio_read_u32_le(r).await?;
 
-            // item_owner: Guid
-            let item_owner = Guid::tokio_read(r).await?;
+        // item_owner: Guid
+        let item_owner = Guid::tokio_read(r).await?;
 
-            // start_bid: u32
-            let start_bid = crate::util::tokio_read_u32_le(r).await?;
+        // start_bid: u32
+        let start_bid = crate::util::tokio_read_u32_le(r).await?;
 
-            // minimum_bid: u32
-            let minimum_bid = crate::util::tokio_read_u32_le(r).await?;
+        // minimum_bid: u32
+        let minimum_bid = crate::util::tokio_read_u32_le(r).await?;
 
-            // buyout_amount: u32
-            let buyout_amount = crate::util::tokio_read_u32_le(r).await?;
+        // buyout_amount: u32
+        let buyout_amount = crate::util::tokio_read_u32_le(r).await?;
 
-            // time_left_in_msecs: u32
-            let time_left_in_msecs = crate::util::tokio_read_u32_le(r).await?;
+        // time_left_in_msecs: u32
+        let time_left_in_msecs = crate::util::tokio_read_u32_le(r).await?;
 
-            // highest_bidder: Guid
-            let highest_bidder = Guid::tokio_read(r).await?;
+        // highest_bidder: Guid
+        let highest_bidder = Guid::tokio_read(r).await?;
 
-            // highest_bid: u32
-            let highest_bid = crate::util::tokio_read_u32_le(r).await?;
+        // highest_bid: u32
+        let highest_bid = crate::util::tokio_read_u32_le(r).await?;
 
-            Ok(Self {
-                id,
-                item_entry,
-                item_enchantment,
-                item_random_property_id,
-                item_suffix_factor,
-                item_count,
-                item_charges,
-                item_owner,
-                start_bid,
-                minimum_bid,
-                buyout_amount,
-                time_left_in_msecs,
-                highest_bidder,
-                highest_bid,
-            })
+        Ok(Self {
+            id,
+            item_entry,
+            item_enchantment,
+            item_random_property_id,
+            item_suffix_factor,
+            item_count,
+            item_charges,
+            item_owner,
+            start_bid,
+            minimum_bid,
+            buyout_amount,
+            time_left_in_msecs,
+            highest_bidder,
+            highest_bid,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // id: u32
-            w.write_all(&self.id.to_le_bytes()).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // id: u32
+        w.write_all(&self.id.to_le_bytes()).await?;
 
-            // item_entry: u32
-            w.write_all(&self.item_entry.to_le_bytes()).await?;
+        // item_entry: u32
+        w.write_all(&self.item_entry.to_le_bytes()).await?;
 
-            // item_enchantment: u32
-            w.write_all(&self.item_enchantment.to_le_bytes()).await?;
+        // item_enchantment: u32
+        w.write_all(&self.item_enchantment.to_le_bytes()).await?;
 
-            // item_random_property_id: u32
-            w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
+        // item_random_property_id: u32
+        w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
 
-            // item_suffix_factor: u32
-            w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
+        // item_suffix_factor: u32
+        w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
 
-            // item_count: u32
-            w.write_all(&self.item_count.to_le_bytes()).await?;
+        // item_count: u32
+        w.write_all(&self.item_count.to_le_bytes()).await?;
 
-            // item_charges: u32
-            w.write_all(&self.item_charges.to_le_bytes()).await?;
+        // item_charges: u32
+        w.write_all(&self.item_charges.to_le_bytes()).await?;
 
-            // item_owner: Guid
-            self.item_owner.tokio_write(w).await?;
+        // item_owner: Guid
+        self.item_owner.tokio_write(w).await?;
 
-            // start_bid: u32
-            w.write_all(&self.start_bid.to_le_bytes()).await?;
+        // start_bid: u32
+        w.write_all(&self.start_bid.to_le_bytes()).await?;
 
-            // minimum_bid: u32
-            w.write_all(&self.minimum_bid.to_le_bytes()).await?;
+        // minimum_bid: u32
+        w.write_all(&self.minimum_bid.to_le_bytes()).await?;
 
-            // buyout_amount: u32
-            w.write_all(&self.buyout_amount.to_le_bytes()).await?;
+        // buyout_amount: u32
+        w.write_all(&self.buyout_amount.to_le_bytes()).await?;
 
-            // time_left_in_msecs: u32
-            w.write_all(&self.time_left_in_msecs.to_le_bytes()).await?;
+        // time_left_in_msecs: u32
+        w.write_all(&self.time_left_in_msecs.to_le_bytes()).await?;
 
-            // highest_bidder: Guid
-            self.highest_bidder.tokio_write(w).await?;
+        // highest_bidder: Guid
+        self.highest_bidder.tokio_write(w).await?;
 
-            // highest_bid: u32
-            w.write_all(&self.highest_bid.to_le_bytes()).await?;
+        // highest_bid: u32
+        w.write_all(&self.highest_bid.to_le_bytes()).await?;
 
-            Ok(())
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // id: u32
+        let id = crate::util::astd_read_u32_le(r).await?;
+
+        // item_entry: u32
+        let item_entry = crate::util::astd_read_u32_le(r).await?;
+
+        // item_enchantment: u32
+        let item_enchantment = crate::util::astd_read_u32_le(r).await?;
+
+        // item_random_property_id: u32
+        let item_random_property_id = crate::util::astd_read_u32_le(r).await?;
+
+        // item_suffix_factor: u32
+        let item_suffix_factor = crate::util::astd_read_u32_le(r).await?;
+
+        // item_count: u32
+        let item_count = crate::util::astd_read_u32_le(r).await?;
+
+        // item_charges: u32
+        let item_charges = crate::util::astd_read_u32_le(r).await?;
+
+        // item_owner: Guid
+        let item_owner = Guid::astd_read(r).await?;
+
+        // start_bid: u32
+        let start_bid = crate::util::astd_read_u32_le(r).await?;
+
+        // minimum_bid: u32
+        let minimum_bid = crate::util::astd_read_u32_le(r).await?;
+
+        // buyout_amount: u32
+        let buyout_amount = crate::util::astd_read_u32_le(r).await?;
+
+        // time_left_in_msecs: u32
+        let time_left_in_msecs = crate::util::astd_read_u32_le(r).await?;
+
+        // highest_bidder: Guid
+        let highest_bidder = Guid::astd_read(r).await?;
+
+        // highest_bid: u32
+        let highest_bid = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            id,
+            item_entry,
+            item_enchantment,
+            item_random_property_id,
+            item_suffix_factor,
+            item_count,
+            item_charges,
+            item_owner,
+            start_bid,
+            minimum_bid,
+            buyout_amount,
+            time_left_in_msecs,
+            highest_bidder,
+            highest_bid,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // id: u32
-            let id = crate::util::astd_read_u32_le(r).await?;
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // id: u32
+        w.write_all(&self.id.to_le_bytes()).await?;
 
-            // item_entry: u32
-            let item_entry = crate::util::astd_read_u32_le(r).await?;
+        // item_entry: u32
+        w.write_all(&self.item_entry.to_le_bytes()).await?;
 
-            // item_enchantment: u32
-            let item_enchantment = crate::util::astd_read_u32_le(r).await?;
+        // item_enchantment: u32
+        w.write_all(&self.item_enchantment.to_le_bytes()).await?;
 
-            // item_random_property_id: u32
-            let item_random_property_id = crate::util::astd_read_u32_le(r).await?;
+        // item_random_property_id: u32
+        w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
 
-            // item_suffix_factor: u32
-            let item_suffix_factor = crate::util::astd_read_u32_le(r).await?;
+        // item_suffix_factor: u32
+        w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
 
-            // item_count: u32
-            let item_count = crate::util::astd_read_u32_le(r).await?;
+        // item_count: u32
+        w.write_all(&self.item_count.to_le_bytes()).await?;
 
-            // item_charges: u32
-            let item_charges = crate::util::astd_read_u32_le(r).await?;
+        // item_charges: u32
+        w.write_all(&self.item_charges.to_le_bytes()).await?;
 
-            // item_owner: Guid
-            let item_owner = Guid::astd_read(r).await?;
+        // item_owner: Guid
+        self.item_owner.astd_write(w).await?;
 
-            // start_bid: u32
-            let start_bid = crate::util::astd_read_u32_le(r).await?;
+        // start_bid: u32
+        w.write_all(&self.start_bid.to_le_bytes()).await?;
 
-            // minimum_bid: u32
-            let minimum_bid = crate::util::astd_read_u32_le(r).await?;
+        // minimum_bid: u32
+        w.write_all(&self.minimum_bid.to_le_bytes()).await?;
 
-            // buyout_amount: u32
-            let buyout_amount = crate::util::astd_read_u32_le(r).await?;
+        // buyout_amount: u32
+        w.write_all(&self.buyout_amount.to_le_bytes()).await?;
 
-            // time_left_in_msecs: u32
-            let time_left_in_msecs = crate::util::astd_read_u32_le(r).await?;
+        // time_left_in_msecs: u32
+        w.write_all(&self.time_left_in_msecs.to_le_bytes()).await?;
 
-            // highest_bidder: Guid
-            let highest_bidder = Guid::astd_read(r).await?;
+        // highest_bidder: Guid
+        self.highest_bidder.astd_write(w).await?;
 
-            // highest_bid: u32
-            let highest_bid = crate::util::astd_read_u32_le(r).await?;
+        // highest_bid: u32
+        w.write_all(&self.highest_bid.to_le_bytes()).await?;
 
-            Ok(Self {
-                id,
-                item_entry,
-                item_enchantment,
-                item_random_property_id,
-                item_suffix_factor,
-                item_count,
-                item_charges,
-                item_owner,
-                start_bid,
-                minimum_bid,
-                buyout_amount,
-                time_left_in_msecs,
-                highest_bidder,
-                highest_bid,
-            })
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // id: u32
-            w.write_all(&self.id.to_le_bytes()).await?;
-
-            // item_entry: u32
-            w.write_all(&self.item_entry.to_le_bytes()).await?;
-
-            // item_enchantment: u32
-            w.write_all(&self.item_enchantment.to_le_bytes()).await?;
-
-            // item_random_property_id: u32
-            w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
-
-            // item_suffix_factor: u32
-            w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
-
-            // item_count: u32
-            w.write_all(&self.item_count.to_le_bytes()).await?;
-
-            // item_charges: u32
-            w.write_all(&self.item_charges.to_le_bytes()).await?;
-
-            // item_owner: Guid
-            self.item_owner.astd_write(w).await?;
-
-            // start_bid: u32
-            w.write_all(&self.start_bid.to_le_bytes()).await?;
-
-            // minimum_bid: u32
-            w.write_all(&self.minimum_bid.to_le_bytes()).await?;
-
-            // buyout_amount: u32
-            w.write_all(&self.buyout_amount.to_le_bytes()).await?;
-
-            // time_left_in_msecs: u32
-            w.write_all(&self.time_left_in_msecs.to_le_bytes()).await?;
-
-            // highest_bidder: Guid
-            self.highest_bidder.astd_write(w).await?;
-
-            // highest_bid: u32
-            w.write_all(&self.highest_bid.to_le_bytes()).await?;
-
-            Ok(())
-        })
+        Ok(())
     }
 
 }

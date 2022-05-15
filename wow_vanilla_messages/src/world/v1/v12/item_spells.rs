@@ -16,11 +16,8 @@ pub struct ItemSpells {
     pub spell_category_cooldown: u32,
 }
 
-impl ReadableAndWritable for ItemSpells {
-    type Error = std::io::Error;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl ItemSpells {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // spell: u32
         let spell = crate::util::read_u32_le(r)?;
 
@@ -49,8 +46,7 @@ impl ReadableAndWritable for ItemSpells {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 
@@ -72,158 +68,106 @@ impl ReadableAndWritable for ItemSpells {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // spell: u32
-            let spell = crate::util::tokio_read_u32_le(r).await?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // spell: u32
+        let spell = crate::util::tokio_read_u32_le(r).await?;
 
-            // spell_trigger: u32
-            let spell_trigger = crate::util::tokio_read_u32_le(r).await?;
+        // spell_trigger: u32
+        let spell_trigger = crate::util::tokio_read_u32_le(r).await?;
 
-            // spell_charges: u32
-            let spell_charges = crate::util::tokio_read_u32_le(r).await?;
+        // spell_charges: u32
+        let spell_charges = crate::util::tokio_read_u32_le(r).await?;
 
-            // spell_cooldown: u32
-            let spell_cooldown = crate::util::tokio_read_u32_le(r).await?;
+        // spell_cooldown: u32
+        let spell_cooldown = crate::util::tokio_read_u32_le(r).await?;
 
-            // spell_category: u32
-            let spell_category = crate::util::tokio_read_u32_le(r).await?;
+        // spell_category: u32
+        let spell_category = crate::util::tokio_read_u32_le(r).await?;
 
-            // spell_category_cooldown: u32
-            let spell_category_cooldown = crate::util::tokio_read_u32_le(r).await?;
+        // spell_category_cooldown: u32
+        let spell_category_cooldown = crate::util::tokio_read_u32_le(r).await?;
 
-            Ok(Self {
-                spell,
-                spell_trigger,
-                spell_charges,
-                spell_cooldown,
-                spell_category,
-                spell_category_cooldown,
-            })
+        Ok(Self {
+            spell,
+            spell_trigger,
+            spell_charges,
+            spell_cooldown,
+            spell_category,
+            spell_category_cooldown,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // spell: u32
-            w.write_all(&self.spell.to_le_bytes()).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes()).await?;
 
-            // spell_trigger: u32
-            w.write_all(&self.spell_trigger.to_le_bytes()).await?;
+        // spell_trigger: u32
+        w.write_all(&self.spell_trigger.to_le_bytes()).await?;
 
-            // spell_charges: u32
-            w.write_all(&self.spell_charges.to_le_bytes()).await?;
+        // spell_charges: u32
+        w.write_all(&self.spell_charges.to_le_bytes()).await?;
 
-            // spell_cooldown: u32
-            w.write_all(&self.spell_cooldown.to_le_bytes()).await?;
+        // spell_cooldown: u32
+        w.write_all(&self.spell_cooldown.to_le_bytes()).await?;
 
-            // spell_category: u32
-            w.write_all(&self.spell_category.to_le_bytes()).await?;
+        // spell_category: u32
+        w.write_all(&self.spell_category.to_le_bytes()).await?;
 
-            // spell_category_cooldown: u32
-            w.write_all(&self.spell_category_cooldown.to_le_bytes()).await?;
+        // spell_category_cooldown: u32
+        w.write_all(&self.spell_category_cooldown.to_le_bytes()).await?;
 
-            Ok(())
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // spell: u32
+        let spell = crate::util::astd_read_u32_le(r).await?;
+
+        // spell_trigger: u32
+        let spell_trigger = crate::util::astd_read_u32_le(r).await?;
+
+        // spell_charges: u32
+        let spell_charges = crate::util::astd_read_u32_le(r).await?;
+
+        // spell_cooldown: u32
+        let spell_cooldown = crate::util::astd_read_u32_le(r).await?;
+
+        // spell_category: u32
+        let spell_category = crate::util::astd_read_u32_le(r).await?;
+
+        // spell_category_cooldown: u32
+        let spell_category_cooldown = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            spell,
+            spell_trigger,
+            spell_charges,
+            spell_cooldown,
+            spell_category,
+            spell_category_cooldown,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // spell: u32
-            let spell = crate::util::astd_read_u32_le(r).await?;
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes()).await?;
 
-            // spell_trigger: u32
-            let spell_trigger = crate::util::astd_read_u32_le(r).await?;
+        // spell_trigger: u32
+        w.write_all(&self.spell_trigger.to_le_bytes()).await?;
 
-            // spell_charges: u32
-            let spell_charges = crate::util::astd_read_u32_le(r).await?;
+        // spell_charges: u32
+        w.write_all(&self.spell_charges.to_le_bytes()).await?;
 
-            // spell_cooldown: u32
-            let spell_cooldown = crate::util::astd_read_u32_le(r).await?;
+        // spell_cooldown: u32
+        w.write_all(&self.spell_cooldown.to_le_bytes()).await?;
 
-            // spell_category: u32
-            let spell_category = crate::util::astd_read_u32_le(r).await?;
+        // spell_category: u32
+        w.write_all(&self.spell_category.to_le_bytes()).await?;
 
-            // spell_category_cooldown: u32
-            let spell_category_cooldown = crate::util::astd_read_u32_le(r).await?;
+        // spell_category_cooldown: u32
+        w.write_all(&self.spell_category_cooldown.to_le_bytes()).await?;
 
-            Ok(Self {
-                spell,
-                spell_trigger,
-                spell_charges,
-                spell_cooldown,
-                spell_category,
-                spell_category_cooldown,
-            })
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // spell: u32
-            w.write_all(&self.spell.to_le_bytes()).await?;
-
-            // spell_trigger: u32
-            w.write_all(&self.spell_trigger.to_le_bytes()).await?;
-
-            // spell_charges: u32
-            w.write_all(&self.spell_charges.to_le_bytes()).await?;
-
-            // spell_cooldown: u32
-            w.write_all(&self.spell_cooldown.to_le_bytes()).await?;
-
-            // spell_category: u32
-            w.write_all(&self.spell_category.to_le_bytes()).await?;
-
-            // spell_category_cooldown: u32
-            w.write_all(&self.spell_category_cooldown.to_le_bytes()).await?;
-
-            Ok(())
-        })
+        Ok(())
     }
 
 }

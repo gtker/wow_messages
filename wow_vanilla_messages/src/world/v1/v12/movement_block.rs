@@ -23,11 +23,8 @@ impl MovementBlock {
 
 }
 
-impl ReadableAndWritable for MovementBlock {
-    type Error = std::io::Error;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl MovementBlock {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // update_flag: UpdateFlag
         let update_flag = UpdateFlag::new(crate::util::read_u8_le(r)?);
 
@@ -296,8 +293,7 @@ impl ReadableAndWritable for MovementBlock {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_flag: UpdateFlag
         crate::util::write_u8_le(w, self.update_flag.as_int() as u8)?;
 
@@ -500,189 +496,282 @@ impl ReadableAndWritable for MovementBlock {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // update_flag: UpdateFlag
-            let update_flag = UpdateFlag::new(crate::util::tokio_read_u8_le(r).await?);
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // update_flag: UpdateFlag
+        let update_flag = UpdateFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
-            let update_flag_LIVING = if update_flag.is_LIVING() {
-                // flags: MovementFlags
-                let flags = MovementFlags::new(crate::util::tokio_read_u32_le(r).await?);
+        let update_flag_LIVING = if update_flag.is_LIVING() {
+            // flags: MovementFlags
+            let flags = MovementFlags::new(crate::util::tokio_read_u32_le(r).await?);
 
-                // timestamp: u32
-                let timestamp = crate::util::tokio_read_u32_le(r).await?;
+            // timestamp: u32
+            let timestamp = crate::util::tokio_read_u32_le(r).await?;
 
-                // living_position_x: f32
-                let living_position_x = crate::util::tokio_read_f32_le(r).await?;
-                // living_position_y: f32
-                let living_position_y = crate::util::tokio_read_f32_le(r).await?;
-                // living_position_z: f32
-                let living_position_z = crate::util::tokio_read_f32_le(r).await?;
-                // living_orientation: f32
-                let living_orientation = crate::util::tokio_read_f32_le(r).await?;
-                let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
-                    // transport: TransportInfo
-                    let transport = TransportInfo::tokio_read(r).await?;
+            // living_position_x: f32
+            let living_position_x = crate::util::tokio_read_f32_le(r).await?;
+            // living_position_y: f32
+            let living_position_y = crate::util::tokio_read_f32_le(r).await?;
+            // living_position_z: f32
+            let living_position_z = crate::util::tokio_read_f32_le(r).await?;
+            // living_orientation: f32
+            let living_orientation = crate::util::tokio_read_f32_le(r).await?;
+            let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
+                // transport: TransportInfo
+                let transport = TransportInfo::tokio_read(r).await?;
 
-                    Some(MovementBlockMovementFlagsON_TRANSPORT {
-                        transport,
+                Some(MovementBlockMovementFlagsON_TRANSPORT {
+                    transport,
+                })
+            }
+            else {
+                None
+            };
+
+            let flags_SWIMMING = if flags.is_SWIMMING() {
+                // pitch: f32
+                let pitch = crate::util::tokio_read_f32_le(r).await?;
+                Some(MovementBlockMovementFlagsSWIMMING {
+                    pitch,
+                })
+            }
+            else {
+                None
+            };
+
+            // fall_time: f32
+            let fall_time = crate::util::tokio_read_f32_le(r).await?;
+            let flags_JUMPING = if flags.is_JUMPING() {
+                // z_speed: f32
+                let z_speed = crate::util::tokio_read_f32_le(r).await?;
+                // cos_angle: f32
+                let cos_angle = crate::util::tokio_read_f32_le(r).await?;
+                // sin_angle: f32
+                let sin_angle = crate::util::tokio_read_f32_le(r).await?;
+                // xy_speed: f32
+                let xy_speed = crate::util::tokio_read_f32_le(r).await?;
+                Some(MovementBlockMovementFlagsJUMPING {
+                    cos_angle,
+                    sin_angle,
+                    xy_speed,
+                    z_speed,
+                })
+            }
+            else {
+                None
+            };
+
+            let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
+                // spline_elevation: f32
+                let spline_elevation = crate::util::tokio_read_f32_le(r).await?;
+                Some(MovementBlockMovementFlagsSPLINE_ELEVATION {
+                    spline_elevation,
+                })
+            }
+            else {
+                None
+            };
+
+            // walking_speed: f32
+            let walking_speed = crate::util::tokio_read_f32_le(r).await?;
+            // running_speed: f32
+            let running_speed = crate::util::tokio_read_f32_le(r).await?;
+            // backwards_running_speed: f32
+            let backwards_running_speed = crate::util::tokio_read_f32_le(r).await?;
+            // swimming_speed: f32
+            let swimming_speed = crate::util::tokio_read_f32_le(r).await?;
+            // backwards_swimming_speed: f32
+            let backwards_swimming_speed = crate::util::tokio_read_f32_le(r).await?;
+            // turn_rate: f32
+            let turn_rate = crate::util::tokio_read_f32_le(r).await?;
+            let flags_SPLINE_ENABLED = if flags.is_SPLINE_ENABLED() {
+                // spline_flags: SplineFlag
+                let spline_flags = SplineFlag::new(crate::util::tokio_read_u32_le(r).await?);
+
+                let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
+                    // angle: f32
+                    let angle = crate::util::tokio_read_f32_le(r).await?;
+                    Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
+                        angle,
+                    })
+                }
+                else if spline_flags.is_FINAL_TARGET() {
+                    // target: u64
+                    let target = crate::util::tokio_read_u64_le(r).await?;
+
+                    Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
+                        target,
+                    })
+                }
+                else if spline_flags.is_FINAL_POINT() {
+                    // spline_final_point_x: f32
+                    let spline_final_point_x = crate::util::tokio_read_f32_le(r).await?;
+                    // spline_final_point_y: f32
+                    let spline_final_point_y = crate::util::tokio_read_f32_le(r).await?;
+                    // spline_final_point_z: f32
+                    let spline_final_point_z = crate::util::tokio_read_f32_le(r).await?;
+                    Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
+                        spline_final_point_x,
+                        spline_final_point_y,
+                        spline_final_point_z,
                     })
                 }
                 else {
                     None
                 };
 
-                let flags_SWIMMING = if flags.is_SWIMMING() {
-                    // pitch: f32
-                    let pitch = crate::util::tokio_read_f32_le(r).await?;
-                    Some(MovementBlockMovementFlagsSWIMMING {
-                        pitch,
-                    })
+                // time_passed: u32
+                let time_passed = crate::util::tokio_read_u32_le(r).await?;
+
+                // duration: u32
+                let duration = crate::util::tokio_read_u32_le(r).await?;
+
+                // id: u32
+                let id = crate::util::tokio_read_u32_le(r).await?;
+
+                // amount_of_nodes: u32
+                let amount_of_nodes = crate::util::tokio_read_u32_le(r).await?;
+
+                // nodes: Vector3d[amount_of_nodes]
+                let mut nodes = Vec::with_capacity(amount_of_nodes as usize);
+                for i in 0..amount_of_nodes {
+                    nodes.push(Vector3d::tokio_read(r).await?);
                 }
-                else {
-                    None
+
+                // final_node: Vector3d
+                let final_node = Vector3d::tokio_read(r).await?;
+
+                let spline_flags = MovementBlockSplineFlag {
+                    inner: spline_flags.as_int(),
+                    final_angle: spline_flags_FINAL_ANGLE,
                 };
 
-                // fall_time: f32
-                let fall_time = crate::util::tokio_read_f32_le(r).await?;
-                let flags_JUMPING = if flags.is_JUMPING() {
-                    // z_speed: f32
-                    let z_speed = crate::util::tokio_read_f32_le(r).await?;
-                    // cos_angle: f32
-                    let cos_angle = crate::util::tokio_read_f32_le(r).await?;
-                    // sin_angle: f32
-                    let sin_angle = crate::util::tokio_read_f32_le(r).await?;
-                    // xy_speed: f32
-                    let xy_speed = crate::util::tokio_read_f32_le(r).await?;
-                    Some(MovementBlockMovementFlagsJUMPING {
-                        cos_angle,
-                        sin_angle,
-                        xy_speed,
-                        z_speed,
-                    })
-                }
-                else {
-                    None
-                };
+                Some(MovementBlockMovementFlagsSPLINE_ENABLED {
+                    duration,
+                    final_node,
+                    id,
+                    nodes,
+                    spline_flags,
+                    time_passed,
+                })
+            }
+            else {
+                None
+            };
 
-                let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
-                    // spline_elevation: f32
-                    let spline_elevation = crate::util::tokio_read_f32_le(r).await?;
-                    Some(MovementBlockMovementFlagsSPLINE_ELEVATION {
-                        spline_elevation,
-                    })
-                }
-                else {
-                    None
-                };
+            let flags = MovementBlockMovementFlags {
+                inner: flags.as_int(),
+                on_transport: flags_ON_TRANSPORT,
+                jumping: flags_JUMPING,
+                swimming: flags_SWIMMING,
+                spline_enabled: flags_SPLINE_ENABLED,
+                spline_elevation: flags_SPLINE_ELEVATION,
+            };
 
-                // walking_speed: f32
-                let walking_speed = crate::util::tokio_read_f32_le(r).await?;
-                // running_speed: f32
-                let running_speed = crate::util::tokio_read_f32_le(r).await?;
-                // backwards_running_speed: f32
-                let backwards_running_speed = crate::util::tokio_read_f32_le(r).await?;
-                // swimming_speed: f32
-                let swimming_speed = crate::util::tokio_read_f32_le(r).await?;
-                // backwards_swimming_speed: f32
-                let backwards_swimming_speed = crate::util::tokio_read_f32_le(r).await?;
-                // turn_rate: f32
-                let turn_rate = crate::util::tokio_read_f32_le(r).await?;
-                let flags_SPLINE_ENABLED = if flags.is_SPLINE_ENABLED() {
-                    // spline_flags: SplineFlag
-                    let spline_flags = SplineFlag::new(crate::util::tokio_read_u32_le(r).await?);
+            Some(MovementBlockUpdateFlagLIVING::LIVING {
+                backwards_running_speed,
+                backwards_swimming_speed,
+                fall_time,
+                flags,
+                living_orientation,
+                living_position_x,
+                living_position_y,
+                living_position_z,
+                running_speed,
+                swimming_speed,
+                timestamp,
+                turn_rate,
+                walking_speed,
+            })
+        }
+        else if update_flag.is_HAS_POSITION() {
+            // position_x: f32
+            let position_x = crate::util::tokio_read_f32_le(r).await?;
+            // position_y: f32
+            let position_y = crate::util::tokio_read_f32_le(r).await?;
+            // position_z: f32
+            let position_z = crate::util::tokio_read_f32_le(r).await?;
+            // orientation: f32
+            let orientation = crate::util::tokio_read_f32_le(r).await?;
+            Some(MovementBlockUpdateFlagLIVING::HAS_POSITION {
+                orientation,
+                position_x,
+                position_y,
+                position_z,
+            })
+        }
+        else {
+            None
+        };
 
-                    let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
-                        // angle: f32
-                        let angle = crate::util::tokio_read_f32_le(r).await?;
-                        Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
-                            angle,
-                        })
-                    }
-                    else if spline_flags.is_FINAL_TARGET() {
-                        // target: u64
-                        let target = crate::util::tokio_read_u64_le(r).await?;
+        let update_flag_HIGH_GUID = if update_flag.is_HIGH_GUID() {
+            // unknown0: u32
+            let _unknown0 = crate::util::tokio_read_u32_le(r).await?;
+            // unknown0 is expected to always be 0 (0)
 
-                        Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
-                            target,
-                        })
-                    }
-                    else if spline_flags.is_FINAL_POINT() {
-                        // spline_final_point_x: f32
-                        let spline_final_point_x = crate::util::tokio_read_f32_le(r).await?;
-                        // spline_final_point_y: f32
-                        let spline_final_point_y = crate::util::tokio_read_f32_le(r).await?;
-                        // spline_final_point_z: f32
-                        let spline_final_point_z = crate::util::tokio_read_f32_le(r).await?;
-                        Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
-                            spline_final_point_x,
-                            spline_final_point_y,
-                            spline_final_point_z,
-                        })
-                    }
-                    else {
-                        None
-                    };
+            Some(MovementBlockUpdateFlagHIGH_GUID {
+            })
+        }
+        else {
+            None
+        };
 
-                    // time_passed: u32
-                    let time_passed = crate::util::tokio_read_u32_le(r).await?;
+        let update_flag_ALL = if update_flag.is_ALL() {
+            // unknown1: u32
+            let _unknown1 = crate::util::tokio_read_u32_le(r).await?;
+            // unknown1 is expected to always be 1 (1)
 
-                    // duration: u32
-                    let duration = crate::util::tokio_read_u32_le(r).await?;
+            Some(MovementBlockUpdateFlagALL {
+            })
+        }
+        else {
+            None
+        };
 
-                    // id: u32
-                    let id = crate::util::tokio_read_u32_le(r).await?;
+        let update_flag_MELEE_ATTACKING = if update_flag.is_MELEE_ATTACKING() {
+            // guid: PackedGuid
+            let guid = Guid::tokio_read_packed(r).await?;
 
-                    // amount_of_nodes: u32
-                    let amount_of_nodes = crate::util::tokio_read_u32_le(r).await?;
+            Some(MovementBlockUpdateFlagMELEE_ATTACKING {
+                guid,
+            })
+        }
+        else {
+            None
+        };
 
-                    // nodes: Vector3d[amount_of_nodes]
-                    let mut nodes = Vec::with_capacity(amount_of_nodes as usize);
-                    for i in 0..amount_of_nodes {
-                        nodes.push(Vector3d::tokio_read(r).await?);
-                    }
+        let update_flag_TRANSPORT = if update_flag.is_TRANSPORT() {
+            // transport_progress_in_ms: u32
+            let transport_progress_in_ms = crate::util::tokio_read_u32_le(r).await?;
 
-                    // final_node: Vector3d
-                    let final_node = Vector3d::tokio_read(r).await?;
+            Some(MovementBlockUpdateFlagTRANSPORT {
+                transport_progress_in_ms,
+            })
+        }
+        else {
+            None
+        };
 
-                    let spline_flags = MovementBlockSplineFlag {
-                        inner: spline_flags.as_int(),
-                        final_angle: spline_flags_FINAL_ANGLE,
-                    };
+        let update_flag = MovementBlockUpdateFlag {
+            inner: update_flag.as_int(),
+            transport: update_flag_TRANSPORT,
+            melee_attacking: update_flag_MELEE_ATTACKING,
+            high_guid: update_flag_HIGH_GUID,
+            all: update_flag_ALL,
+            living: update_flag_LIVING,
+        };
 
-                    Some(MovementBlockMovementFlagsSPLINE_ENABLED {
-                        duration,
-                        final_node,
-                        id,
-                        nodes,
-                        spline_flags,
-                        time_passed,
-                    })
-                }
-                else {
-                    None
-                };
+        Ok(Self {
+            update_flag,
+        })
+    }
 
-                let flags = MovementBlockMovementFlags {
-                    inner: flags.as_int(),
-                    on_transport: flags_ON_TRANSPORT,
-                    jumping: flags_JUMPING,
-                    swimming: flags_SWIMMING,
-                    spline_enabled: flags_SPLINE_ENABLED,
-                    spline_elevation: flags_SPLINE_ELEVATION,
-                };
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // update_flag: UpdateFlag
+        crate::util::tokio_write_u8_le(w, self.update_flag.as_int() as u8).await?;
 
-                Some(MovementBlockUpdateFlagLIVING::LIVING {
+        if let Some(if_statement) = &self.update_flag.living {
+            match if_statement {
+                MovementBlockUpdateFlagLIVING::LIVING {
                     backwards_running_speed,
                     backwards_swimming_speed,
                     fall_time,
@@ -696,491 +785,465 @@ impl ReadableAndWritable for MovementBlock {
                     timestamp,
                     turn_rate,
                     walking_speed,
-                })
-            }
-            else if update_flag.is_HAS_POSITION() {
-                // position_x: f32
-                let position_x = crate::util::tokio_read_f32_le(r).await?;
-                // position_y: f32
-                let position_y = crate::util::tokio_read_f32_le(r).await?;
-                // position_z: f32
-                let position_z = crate::util::tokio_read_f32_le(r).await?;
-                // orientation: f32
-                let orientation = crate::util::tokio_read_f32_le(r).await?;
-                Some(MovementBlockUpdateFlagLIVING::HAS_POSITION {
+                } => {
+                    // flags: MovementFlags
+                    crate::util::tokio_write_u32_le(w, flags.as_int() as u32).await?;
+
+                    // timestamp: u32
+                    w.write_all(&timestamp.to_le_bytes()).await?;
+
+                    // living_position_x: f32
+                    w.write_all(&living_position_x.to_le_bytes()).await?;
+
+                    // living_position_y: f32
+                    w.write_all(&living_position_y.to_le_bytes()).await?;
+
+                    // living_position_z: f32
+                    w.write_all(&living_position_z.to_le_bytes()).await?;
+
+                    // living_orientation: f32
+                    w.write_all(&living_orientation.to_le_bytes()).await?;
+
+                    if let Some(if_statement) = &flags.on_transport {
+                        // transport: TransportInfo
+                        if_statement.transport.tokio_write(w).await?;
+
+                    }
+
+                    if let Some(if_statement) = &flags.swimming {
+                        // pitch: f32
+                        w.write_all(&if_statement.pitch.to_le_bytes()).await?;
+
+                    }
+
+                    // fall_time: f32
+                    w.write_all(&fall_time.to_le_bytes()).await?;
+
+                    if let Some(if_statement) = &flags.jumping {
+                        // z_speed: f32
+                        w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
+
+                        // cos_angle: f32
+                        w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
+
+                        // sin_angle: f32
+                        w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
+
+                        // xy_speed: f32
+                        w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
+
+                    }
+
+                    if let Some(if_statement) = &flags.spline_elevation {
+                        // spline_elevation: f32
+                        w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
+
+                    }
+
+                    // walking_speed: f32
+                    w.write_all(&walking_speed.to_le_bytes()).await?;
+
+                    // running_speed: f32
+                    w.write_all(&running_speed.to_le_bytes()).await?;
+
+                    // backwards_running_speed: f32
+                    w.write_all(&backwards_running_speed.to_le_bytes()).await?;
+
+                    // swimming_speed: f32
+                    w.write_all(&swimming_speed.to_le_bytes()).await?;
+
+                    // backwards_swimming_speed: f32
+                    w.write_all(&backwards_swimming_speed.to_le_bytes()).await?;
+
+                    // turn_rate: f32
+                    w.write_all(&turn_rate.to_le_bytes()).await?;
+
+                    if let Some(if_statement) = &flags.spline_enabled {
+                        // spline_flags: SplineFlag
+                        crate::util::tokio_write_u32_le(w, if_statement.spline_flags.as_int() as u32).await?;
+
+                        if let Some(if_statement) = &if_statement.spline_flags.final_angle {
+                            match if_statement {
+                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
+                                    angle,
+                                } => {
+                                    // angle: f32
+                                    w.write_all(&angle.to_le_bytes()).await?;
+
+                                }
+                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
+                                    target,
+                                } => {
+                                    // target: u64
+                                    w.write_all(&target.to_le_bytes()).await?;
+
+                                }
+                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
+                                    spline_final_point_x,
+                                    spline_final_point_y,
+                                    spline_final_point_z,
+                                } => {
+                                    // spline_final_point_x: f32
+                                    w.write_all(&spline_final_point_x.to_le_bytes()).await?;
+
+                                    // spline_final_point_y: f32
+                                    w.write_all(&spline_final_point_y.to_le_bytes()).await?;
+
+                                    // spline_final_point_z: f32
+                                    w.write_all(&spline_final_point_z.to_le_bytes()).await?;
+
+                                }
+                            }
+                        }
+
+                        // time_passed: u32
+                        w.write_all(&if_statement.time_passed.to_le_bytes()).await?;
+
+                        // duration: u32
+                        w.write_all(&if_statement.duration.to_le_bytes()).await?;
+
+                        // id: u32
+                        w.write_all(&if_statement.id.to_le_bytes()).await?;
+
+                        // amount_of_nodes: u32
+                        w.write_all(&(if_statement.nodes.len() as u32).to_le_bytes()).await?;
+
+                        // nodes: Vector3d[amount_of_nodes]
+                        for i in if_statement.nodes.iter() {
+                            i.tokio_write(w).await?;
+                        }
+
+                        // final_node: Vector3d
+                        if_statement.final_node.tokio_write(w).await?;
+
+                    }
+
+                }
+                MovementBlockUpdateFlagLIVING::HAS_POSITION {
                     orientation,
                     position_x,
                     position_y,
                     position_z,
+                } => {
+                    // position_x: f32
+                    w.write_all(&position_x.to_le_bytes()).await?;
+
+                    // position_y: f32
+                    w.write_all(&position_y.to_le_bytes()).await?;
+
+                    // position_z: f32
+                    w.write_all(&position_z.to_le_bytes()).await?;
+
+                    // orientation: f32
+                    w.write_all(&orientation.to_le_bytes()).await?;
+
+                }
+            }
+        }
+
+        if let Some(if_statement) = &self.update_flag.high_guid {
+            // unknown0: u32
+            w.write_all(&Self::UNKNOWN0_VALUE.to_le_bytes()).await?;
+
+        }
+
+        if let Some(if_statement) = &self.update_flag.all {
+            // unknown1: u32
+            w.write_all(&Self::UNKNOWN1_VALUE.to_le_bytes()).await?;
+
+        }
+
+        if let Some(if_statement) = &self.update_flag.melee_attacking {
+            // guid: PackedGuid
+            if_statement.guid.tokio_write_packed(w).await?;
+
+        }
+
+        if let Some(if_statement) = &self.update_flag.transport {
+            // transport_progress_in_ms: u32
+            w.write_all(&if_statement.transport_progress_in_ms.to_le_bytes()).await?;
+
+        }
+
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // update_flag: UpdateFlag
+        let update_flag = UpdateFlag::new(crate::util::astd_read_u8_le(r).await?);
+
+        let update_flag_LIVING = if update_flag.is_LIVING() {
+            // flags: MovementFlags
+            let flags = MovementFlags::new(crate::util::astd_read_u32_le(r).await?);
+
+            // timestamp: u32
+            let timestamp = crate::util::astd_read_u32_le(r).await?;
+
+            // living_position_x: f32
+            let living_position_x = crate::util::astd_read_f32_le(r).await?;
+            // living_position_y: f32
+            let living_position_y = crate::util::astd_read_f32_le(r).await?;
+            // living_position_z: f32
+            let living_position_z = crate::util::astd_read_f32_le(r).await?;
+            // living_orientation: f32
+            let living_orientation = crate::util::astd_read_f32_le(r).await?;
+            let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
+                // transport: TransportInfo
+                let transport = TransportInfo::astd_read(r).await?;
+
+                Some(MovementBlockMovementFlagsON_TRANSPORT {
+                    transport,
                 })
             }
             else {
                 None
             };
 
-            let update_flag_HIGH_GUID = if update_flag.is_HIGH_GUID() {
-                // unknown0: u32
-                let _unknown0 = crate::util::tokio_read_u32_le(r).await?;
-                // unknown0 is expected to always be 0 (0)
-
-                Some(MovementBlockUpdateFlagHIGH_GUID {
+            let flags_SWIMMING = if flags.is_SWIMMING() {
+                // pitch: f32
+                let pitch = crate::util::astd_read_f32_le(r).await?;
+                Some(MovementBlockMovementFlagsSWIMMING {
+                    pitch,
                 })
             }
             else {
                 None
             };
 
-            let update_flag_ALL = if update_flag.is_ALL() {
-                // unknown1: u32
-                let _unknown1 = crate::util::tokio_read_u32_le(r).await?;
-                // unknown1 is expected to always be 1 (1)
-
-                Some(MovementBlockUpdateFlagALL {
+            // fall_time: f32
+            let fall_time = crate::util::astd_read_f32_le(r).await?;
+            let flags_JUMPING = if flags.is_JUMPING() {
+                // z_speed: f32
+                let z_speed = crate::util::astd_read_f32_le(r).await?;
+                // cos_angle: f32
+                let cos_angle = crate::util::astd_read_f32_le(r).await?;
+                // sin_angle: f32
+                let sin_angle = crate::util::astd_read_f32_le(r).await?;
+                // xy_speed: f32
+                let xy_speed = crate::util::astd_read_f32_le(r).await?;
+                Some(MovementBlockMovementFlagsJUMPING {
+                    cos_angle,
+                    sin_angle,
+                    xy_speed,
+                    z_speed,
                 })
             }
             else {
                 None
             };
 
-            let update_flag_MELEE_ATTACKING = if update_flag.is_MELEE_ATTACKING() {
-                // guid: PackedGuid
-                let guid = Guid::tokio_read_packed(r).await?;
-
-                Some(MovementBlockUpdateFlagMELEE_ATTACKING {
-                    guid,
+            let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
+                // spline_elevation: f32
+                let spline_elevation = crate::util::astd_read_f32_le(r).await?;
+                Some(MovementBlockMovementFlagsSPLINE_ELEVATION {
+                    spline_elevation,
                 })
             }
             else {
                 None
             };
 
-            let update_flag_TRANSPORT = if update_flag.is_TRANSPORT() {
-                // transport_progress_in_ms: u32
-                let transport_progress_in_ms = crate::util::tokio_read_u32_le(r).await?;
+            // walking_speed: f32
+            let walking_speed = crate::util::astd_read_f32_le(r).await?;
+            // running_speed: f32
+            let running_speed = crate::util::astd_read_f32_le(r).await?;
+            // backwards_running_speed: f32
+            let backwards_running_speed = crate::util::astd_read_f32_le(r).await?;
+            // swimming_speed: f32
+            let swimming_speed = crate::util::astd_read_f32_le(r).await?;
+            // backwards_swimming_speed: f32
+            let backwards_swimming_speed = crate::util::astd_read_f32_le(r).await?;
+            // turn_rate: f32
+            let turn_rate = crate::util::astd_read_f32_le(r).await?;
+            let flags_SPLINE_ENABLED = if flags.is_SPLINE_ENABLED() {
+                // spline_flags: SplineFlag
+                let spline_flags = SplineFlag::new(crate::util::astd_read_u32_le(r).await?);
 
-                Some(MovementBlockUpdateFlagTRANSPORT {
-                    transport_progress_in_ms,
+                let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
+                    // angle: f32
+                    let angle = crate::util::astd_read_f32_le(r).await?;
+                    Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
+                        angle,
+                    })
+                }
+                else if spline_flags.is_FINAL_TARGET() {
+                    // target: u64
+                    let target = crate::util::astd_read_u64_le(r).await?;
+
+                    Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
+                        target,
+                    })
+                }
+                else if spline_flags.is_FINAL_POINT() {
+                    // spline_final_point_x: f32
+                    let spline_final_point_x = crate::util::astd_read_f32_le(r).await?;
+                    // spline_final_point_y: f32
+                    let spline_final_point_y = crate::util::astd_read_f32_le(r).await?;
+                    // spline_final_point_z: f32
+                    let spline_final_point_z = crate::util::astd_read_f32_le(r).await?;
+                    Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
+                        spline_final_point_x,
+                        spline_final_point_y,
+                        spline_final_point_z,
+                    })
+                }
+                else {
+                    None
+                };
+
+                // time_passed: u32
+                let time_passed = crate::util::astd_read_u32_le(r).await?;
+
+                // duration: u32
+                let duration = crate::util::astd_read_u32_le(r).await?;
+
+                // id: u32
+                let id = crate::util::astd_read_u32_le(r).await?;
+
+                // amount_of_nodes: u32
+                let amount_of_nodes = crate::util::astd_read_u32_le(r).await?;
+
+                // nodes: Vector3d[amount_of_nodes]
+                let mut nodes = Vec::with_capacity(amount_of_nodes as usize);
+                for i in 0..amount_of_nodes {
+                    nodes.push(Vector3d::astd_read(r).await?);
+                }
+
+                // final_node: Vector3d
+                let final_node = Vector3d::astd_read(r).await?;
+
+                let spline_flags = MovementBlockSplineFlag {
+                    inner: spline_flags.as_int(),
+                    final_angle: spline_flags_FINAL_ANGLE,
+                };
+
+                Some(MovementBlockMovementFlagsSPLINE_ENABLED {
+                    duration,
+                    final_node,
+                    id,
+                    nodes,
+                    spline_flags,
+                    time_passed,
                 })
             }
             else {
                 None
             };
 
-            let update_flag = MovementBlockUpdateFlag {
-                inner: update_flag.as_int(),
-                transport: update_flag_TRANSPORT,
-                melee_attacking: update_flag_MELEE_ATTACKING,
-                high_guid: update_flag_HIGH_GUID,
-                all: update_flag_ALL,
-                living: update_flag_LIVING,
+            let flags = MovementBlockMovementFlags {
+                inner: flags.as_int(),
+                on_transport: flags_ON_TRANSPORT,
+                jumping: flags_JUMPING,
+                swimming: flags_SWIMMING,
+                spline_enabled: flags_SPLINE_ENABLED,
+                spline_elevation: flags_SPLINE_ELEVATION,
             };
 
-            Ok(Self {
-                update_flag,
+            Some(MovementBlockUpdateFlagLIVING::LIVING {
+                backwards_running_speed,
+                backwards_swimming_speed,
+                fall_time,
+                flags,
+                living_orientation,
+                living_position_x,
+                living_position_y,
+                living_position_z,
+                running_speed,
+                swimming_speed,
+                timestamp,
+                turn_rate,
+                walking_speed,
             })
+        }
+        else if update_flag.is_HAS_POSITION() {
+            // position_x: f32
+            let position_x = crate::util::astd_read_f32_le(r).await?;
+            // position_y: f32
+            let position_y = crate::util::astd_read_f32_le(r).await?;
+            // position_z: f32
+            let position_z = crate::util::astd_read_f32_le(r).await?;
+            // orientation: f32
+            let orientation = crate::util::astd_read_f32_le(r).await?;
+            Some(MovementBlockUpdateFlagLIVING::HAS_POSITION {
+                orientation,
+                position_x,
+                position_y,
+                position_z,
+            })
+        }
+        else {
+            None
+        };
+
+        let update_flag_HIGH_GUID = if update_flag.is_HIGH_GUID() {
+            // unknown0: u32
+            let _unknown0 = crate::util::astd_read_u32_le(r).await?;
+            // unknown0 is expected to always be 0 (0)
+
+            Some(MovementBlockUpdateFlagHIGH_GUID {
+            })
+        }
+        else {
+            None
+        };
+
+        let update_flag_ALL = if update_flag.is_ALL() {
+            // unknown1: u32
+            let _unknown1 = crate::util::astd_read_u32_le(r).await?;
+            // unknown1 is expected to always be 1 (1)
+
+            Some(MovementBlockUpdateFlagALL {
+            })
+        }
+        else {
+            None
+        };
+
+        let update_flag_MELEE_ATTACKING = if update_flag.is_MELEE_ATTACKING() {
+            // guid: PackedGuid
+            let guid = Guid::astd_read_packed(r).await?;
+
+            Some(MovementBlockUpdateFlagMELEE_ATTACKING {
+                guid,
+            })
+        }
+        else {
+            None
+        };
+
+        let update_flag_TRANSPORT = if update_flag.is_TRANSPORT() {
+            // transport_progress_in_ms: u32
+            let transport_progress_in_ms = crate::util::astd_read_u32_le(r).await?;
+
+            Some(MovementBlockUpdateFlagTRANSPORT {
+                transport_progress_in_ms,
+            })
+        }
+        else {
+            None
+        };
+
+        let update_flag = MovementBlockUpdateFlag {
+            inner: update_flag.as_int(),
+            transport: update_flag_TRANSPORT,
+            melee_attacking: update_flag_MELEE_ATTACKING,
+            high_guid: update_flag_HIGH_GUID,
+            all: update_flag_ALL,
+            living: update_flag_LIVING,
+        };
+
+        Ok(Self {
+            update_flag,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // update_flag: UpdateFlag
-            crate::util::tokio_write_u8_le(w, self.update_flag.as_int() as u8).await?;
-
-            if let Some(if_statement) = &self.update_flag.living {
-                match if_statement {
-                    MovementBlockUpdateFlagLIVING::LIVING {
-                        backwards_running_speed,
-                        backwards_swimming_speed,
-                        fall_time,
-                        flags,
-                        living_orientation,
-                        living_position_x,
-                        living_position_y,
-                        living_position_z,
-                        running_speed,
-                        swimming_speed,
-                        timestamp,
-                        turn_rate,
-                        walking_speed,
-                    } => {
-                        // flags: MovementFlags
-                        crate::util::tokio_write_u32_le(w, flags.as_int() as u32).await?;
-
-                        // timestamp: u32
-                        w.write_all(&timestamp.to_le_bytes()).await?;
-
-                        // living_position_x: f32
-                        w.write_all(&living_position_x.to_le_bytes()).await?;
-
-                        // living_position_y: f32
-                        w.write_all(&living_position_y.to_le_bytes()).await?;
-
-                        // living_position_z: f32
-                        w.write_all(&living_position_z.to_le_bytes()).await?;
-
-                        // living_orientation: f32
-                        w.write_all(&living_orientation.to_le_bytes()).await?;
-
-                        if let Some(if_statement) = &flags.on_transport {
-                            // transport: TransportInfo
-                            if_statement.transport.tokio_write(w).await?;
-
-                        }
-
-                        if let Some(if_statement) = &flags.swimming {
-                            // pitch: f32
-                            w.write_all(&if_statement.pitch.to_le_bytes()).await?;
-
-                        }
-
-                        // fall_time: f32
-                        w.write_all(&fall_time.to_le_bytes()).await?;
-
-                        if let Some(if_statement) = &flags.jumping {
-                            // z_speed: f32
-                            w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
-
-                            // cos_angle: f32
-                            w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
-
-                            // sin_angle: f32
-                            w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
-
-                            // xy_speed: f32
-                            w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
-
-                        }
-
-                        if let Some(if_statement) = &flags.spline_elevation {
-                            // spline_elevation: f32
-                            w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
-
-                        }
-
-                        // walking_speed: f32
-                        w.write_all(&walking_speed.to_le_bytes()).await?;
-
-                        // running_speed: f32
-                        w.write_all(&running_speed.to_le_bytes()).await?;
-
-                        // backwards_running_speed: f32
-                        w.write_all(&backwards_running_speed.to_le_bytes()).await?;
-
-                        // swimming_speed: f32
-                        w.write_all(&swimming_speed.to_le_bytes()).await?;
-
-                        // backwards_swimming_speed: f32
-                        w.write_all(&backwards_swimming_speed.to_le_bytes()).await?;
-
-                        // turn_rate: f32
-                        w.write_all(&turn_rate.to_le_bytes()).await?;
-
-                        if let Some(if_statement) = &flags.spline_enabled {
-                            // spline_flags: SplineFlag
-                            crate::util::tokio_write_u32_le(w, if_statement.spline_flags.as_int() as u32).await?;
-
-                            if let Some(if_statement) = &if_statement.spline_flags.final_angle {
-                                match if_statement {
-                                    MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
-                                        angle,
-                                    } => {
-                                        // angle: f32
-                                        w.write_all(&angle.to_le_bytes()).await?;
-
-                                    }
-                                    MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
-                                        target,
-                                    } => {
-                                        // target: u64
-                                        w.write_all(&target.to_le_bytes()).await?;
-
-                                    }
-                                    MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
-                                        spline_final_point_x,
-                                        spline_final_point_y,
-                                        spline_final_point_z,
-                                    } => {
-                                        // spline_final_point_x: f32
-                                        w.write_all(&spline_final_point_x.to_le_bytes()).await?;
-
-                                        // spline_final_point_y: f32
-                                        w.write_all(&spline_final_point_y.to_le_bytes()).await?;
-
-                                        // spline_final_point_z: f32
-                                        w.write_all(&spline_final_point_z.to_le_bytes()).await?;
-
-                                    }
-                                }
-                            }
-
-                            // time_passed: u32
-                            w.write_all(&if_statement.time_passed.to_le_bytes()).await?;
-
-                            // duration: u32
-                            w.write_all(&if_statement.duration.to_le_bytes()).await?;
-
-                            // id: u32
-                            w.write_all(&if_statement.id.to_le_bytes()).await?;
-
-                            // amount_of_nodes: u32
-                            w.write_all(&(if_statement.nodes.len() as u32).to_le_bytes()).await?;
-
-                            // nodes: Vector3d[amount_of_nodes]
-                            for i in if_statement.nodes.iter() {
-                                i.tokio_write(w).await?;
-                            }
-
-                            // final_node: Vector3d
-                            if_statement.final_node.tokio_write(w).await?;
-
-                        }
-
-                    }
-                    MovementBlockUpdateFlagLIVING::HAS_POSITION {
-                        orientation,
-                        position_x,
-                        position_y,
-                        position_z,
-                    } => {
-                        // position_x: f32
-                        w.write_all(&position_x.to_le_bytes()).await?;
-
-                        // position_y: f32
-                        w.write_all(&position_y.to_le_bytes()).await?;
-
-                        // position_z: f32
-                        w.write_all(&position_z.to_le_bytes()).await?;
-
-                        // orientation: f32
-                        w.write_all(&orientation.to_le_bytes()).await?;
-
-                    }
-                }
-            }
-
-            if let Some(if_statement) = &self.update_flag.high_guid {
-                // unknown0: u32
-                w.write_all(&Self::UNKNOWN0_VALUE.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.update_flag.all {
-                // unknown1: u32
-                w.write_all(&Self::UNKNOWN1_VALUE.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.update_flag.melee_attacking {
-                // guid: PackedGuid
-                if_statement.guid.tokio_write_packed(w).await?;
-
-            }
-
-            if let Some(if_statement) = &self.update_flag.transport {
-                // transport_progress_in_ms: u32
-                w.write_all(&if_statement.transport_progress_in_ms.to_le_bytes()).await?;
-
-            }
-
-            Ok(())
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // update_flag: UpdateFlag
-            let update_flag = UpdateFlag::new(crate::util::astd_read_u8_le(r).await?);
-
-            let update_flag_LIVING = if update_flag.is_LIVING() {
-                // flags: MovementFlags
-                let flags = MovementFlags::new(crate::util::astd_read_u32_le(r).await?);
-
-                // timestamp: u32
-                let timestamp = crate::util::astd_read_u32_le(r).await?;
-
-                // living_position_x: f32
-                let living_position_x = crate::util::astd_read_f32_le(r).await?;
-                // living_position_y: f32
-                let living_position_y = crate::util::astd_read_f32_le(r).await?;
-                // living_position_z: f32
-                let living_position_z = crate::util::astd_read_f32_le(r).await?;
-                // living_orientation: f32
-                let living_orientation = crate::util::astd_read_f32_le(r).await?;
-                let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
-                    // transport: TransportInfo
-                    let transport = TransportInfo::astd_read(r).await?;
-
-                    Some(MovementBlockMovementFlagsON_TRANSPORT {
-                        transport,
-                    })
-                }
-                else {
-                    None
-                };
-
-                let flags_SWIMMING = if flags.is_SWIMMING() {
-                    // pitch: f32
-                    let pitch = crate::util::astd_read_f32_le(r).await?;
-                    Some(MovementBlockMovementFlagsSWIMMING {
-                        pitch,
-                    })
-                }
-                else {
-                    None
-                };
-
-                // fall_time: f32
-                let fall_time = crate::util::astd_read_f32_le(r).await?;
-                let flags_JUMPING = if flags.is_JUMPING() {
-                    // z_speed: f32
-                    let z_speed = crate::util::astd_read_f32_le(r).await?;
-                    // cos_angle: f32
-                    let cos_angle = crate::util::astd_read_f32_le(r).await?;
-                    // sin_angle: f32
-                    let sin_angle = crate::util::astd_read_f32_le(r).await?;
-                    // xy_speed: f32
-                    let xy_speed = crate::util::astd_read_f32_le(r).await?;
-                    Some(MovementBlockMovementFlagsJUMPING {
-                        cos_angle,
-                        sin_angle,
-                        xy_speed,
-                        z_speed,
-                    })
-                }
-                else {
-                    None
-                };
-
-                let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
-                    // spline_elevation: f32
-                    let spline_elevation = crate::util::astd_read_f32_le(r).await?;
-                    Some(MovementBlockMovementFlagsSPLINE_ELEVATION {
-                        spline_elevation,
-                    })
-                }
-                else {
-                    None
-                };
-
-                // walking_speed: f32
-                let walking_speed = crate::util::astd_read_f32_le(r).await?;
-                // running_speed: f32
-                let running_speed = crate::util::astd_read_f32_le(r).await?;
-                // backwards_running_speed: f32
-                let backwards_running_speed = crate::util::astd_read_f32_le(r).await?;
-                // swimming_speed: f32
-                let swimming_speed = crate::util::astd_read_f32_le(r).await?;
-                // backwards_swimming_speed: f32
-                let backwards_swimming_speed = crate::util::astd_read_f32_le(r).await?;
-                // turn_rate: f32
-                let turn_rate = crate::util::astd_read_f32_le(r).await?;
-                let flags_SPLINE_ENABLED = if flags.is_SPLINE_ENABLED() {
-                    // spline_flags: SplineFlag
-                    let spline_flags = SplineFlag::new(crate::util::astd_read_u32_le(r).await?);
-
-                    let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
-                        // angle: f32
-                        let angle = crate::util::astd_read_f32_le(r).await?;
-                        Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
-                            angle,
-                        })
-                    }
-                    else if spline_flags.is_FINAL_TARGET() {
-                        // target: u64
-                        let target = crate::util::astd_read_u64_le(r).await?;
-
-                        Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
-                            target,
-                        })
-                    }
-                    else if spline_flags.is_FINAL_POINT() {
-                        // spline_final_point_x: f32
-                        let spline_final_point_x = crate::util::astd_read_f32_le(r).await?;
-                        // spline_final_point_y: f32
-                        let spline_final_point_y = crate::util::astd_read_f32_le(r).await?;
-                        // spline_final_point_z: f32
-                        let spline_final_point_z = crate::util::astd_read_f32_le(r).await?;
-                        Some(MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
-                            spline_final_point_x,
-                            spline_final_point_y,
-                            spline_final_point_z,
-                        })
-                    }
-                    else {
-                        None
-                    };
-
-                    // time_passed: u32
-                    let time_passed = crate::util::astd_read_u32_le(r).await?;
-
-                    // duration: u32
-                    let duration = crate::util::astd_read_u32_le(r).await?;
-
-                    // id: u32
-                    let id = crate::util::astd_read_u32_le(r).await?;
-
-                    // amount_of_nodes: u32
-                    let amount_of_nodes = crate::util::astd_read_u32_le(r).await?;
-
-                    // nodes: Vector3d[amount_of_nodes]
-                    let mut nodes = Vec::with_capacity(amount_of_nodes as usize);
-                    for i in 0..amount_of_nodes {
-                        nodes.push(Vector3d::astd_read(r).await?);
-                    }
-
-                    // final_node: Vector3d
-                    let final_node = Vector3d::astd_read(r).await?;
-
-                    let spline_flags = MovementBlockSplineFlag {
-                        inner: spline_flags.as_int(),
-                        final_angle: spline_flags_FINAL_ANGLE,
-                    };
-
-                    Some(MovementBlockMovementFlagsSPLINE_ENABLED {
-                        duration,
-                        final_node,
-                        id,
-                        nodes,
-                        spline_flags,
-                        time_passed,
-                    })
-                }
-                else {
-                    None
-                };
-
-                let flags = MovementBlockMovementFlags {
-                    inner: flags.as_int(),
-                    on_transport: flags_ON_TRANSPORT,
-                    jumping: flags_JUMPING,
-                    swimming: flags_SWIMMING,
-                    spline_enabled: flags_SPLINE_ENABLED,
-                    spline_elevation: flags_SPLINE_ELEVATION,
-                };
-
-                Some(MovementBlockUpdateFlagLIVING::LIVING {
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // update_flag: UpdateFlag
+        crate::util::astd_write_u8_le(w, self.update_flag.as_int() as u8).await?;
+
+        if let Some(if_statement) = &self.update_flag.living {
+            match if_statement {
+                MovementBlockUpdateFlagLIVING::LIVING {
                     backwards_running_speed,
                     backwards_swimming_speed,
                     fall_time,
@@ -1194,306 +1257,187 @@ impl ReadableAndWritable for MovementBlock {
                     timestamp,
                     turn_rate,
                     walking_speed,
-                })
-            }
-            else if update_flag.is_HAS_POSITION() {
-                // position_x: f32
-                let position_x = crate::util::astd_read_f32_le(r).await?;
-                // position_y: f32
-                let position_y = crate::util::astd_read_f32_le(r).await?;
-                // position_z: f32
-                let position_z = crate::util::astd_read_f32_le(r).await?;
-                // orientation: f32
-                let orientation = crate::util::astd_read_f32_le(r).await?;
-                Some(MovementBlockUpdateFlagLIVING::HAS_POSITION {
+                } => {
+                    // flags: MovementFlags
+                    crate::util::astd_write_u32_le(w, flags.as_int() as u32).await?;
+
+                    // timestamp: u32
+                    w.write_all(&timestamp.to_le_bytes()).await?;
+
+                    // living_position_x: f32
+                    w.write_all(&living_position_x.to_le_bytes()).await?;
+
+                    // living_position_y: f32
+                    w.write_all(&living_position_y.to_le_bytes()).await?;
+
+                    // living_position_z: f32
+                    w.write_all(&living_position_z.to_le_bytes()).await?;
+
+                    // living_orientation: f32
+                    w.write_all(&living_orientation.to_le_bytes()).await?;
+
+                    if let Some(if_statement) = &flags.on_transport {
+                        // transport: TransportInfo
+                        if_statement.transport.astd_write(w).await?;
+
+                    }
+
+                    if let Some(if_statement) = &flags.swimming {
+                        // pitch: f32
+                        w.write_all(&if_statement.pitch.to_le_bytes()).await?;
+
+                    }
+
+                    // fall_time: f32
+                    w.write_all(&fall_time.to_le_bytes()).await?;
+
+                    if let Some(if_statement) = &flags.jumping {
+                        // z_speed: f32
+                        w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
+
+                        // cos_angle: f32
+                        w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
+
+                        // sin_angle: f32
+                        w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
+
+                        // xy_speed: f32
+                        w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
+
+                    }
+
+                    if let Some(if_statement) = &flags.spline_elevation {
+                        // spline_elevation: f32
+                        w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
+
+                    }
+
+                    // walking_speed: f32
+                    w.write_all(&walking_speed.to_le_bytes()).await?;
+
+                    // running_speed: f32
+                    w.write_all(&running_speed.to_le_bytes()).await?;
+
+                    // backwards_running_speed: f32
+                    w.write_all(&backwards_running_speed.to_le_bytes()).await?;
+
+                    // swimming_speed: f32
+                    w.write_all(&swimming_speed.to_le_bytes()).await?;
+
+                    // backwards_swimming_speed: f32
+                    w.write_all(&backwards_swimming_speed.to_le_bytes()).await?;
+
+                    // turn_rate: f32
+                    w.write_all(&turn_rate.to_le_bytes()).await?;
+
+                    if let Some(if_statement) = &flags.spline_enabled {
+                        // spline_flags: SplineFlag
+                        crate::util::astd_write_u32_le(w, if_statement.spline_flags.as_int() as u32).await?;
+
+                        if let Some(if_statement) = &if_statement.spline_flags.final_angle {
+                            match if_statement {
+                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
+                                    angle,
+                                } => {
+                                    // angle: f32
+                                    w.write_all(&angle.to_le_bytes()).await?;
+
+                                }
+                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
+                                    target,
+                                } => {
+                                    // target: u64
+                                    w.write_all(&target.to_le_bytes()).await?;
+
+                                }
+                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
+                                    spline_final_point_x,
+                                    spline_final_point_y,
+                                    spline_final_point_z,
+                                } => {
+                                    // spline_final_point_x: f32
+                                    w.write_all(&spline_final_point_x.to_le_bytes()).await?;
+
+                                    // spline_final_point_y: f32
+                                    w.write_all(&spline_final_point_y.to_le_bytes()).await?;
+
+                                    // spline_final_point_z: f32
+                                    w.write_all(&spline_final_point_z.to_le_bytes()).await?;
+
+                                }
+                            }
+                        }
+
+                        // time_passed: u32
+                        w.write_all(&if_statement.time_passed.to_le_bytes()).await?;
+
+                        // duration: u32
+                        w.write_all(&if_statement.duration.to_le_bytes()).await?;
+
+                        // id: u32
+                        w.write_all(&if_statement.id.to_le_bytes()).await?;
+
+                        // amount_of_nodes: u32
+                        w.write_all(&(if_statement.nodes.len() as u32).to_le_bytes()).await?;
+
+                        // nodes: Vector3d[amount_of_nodes]
+                        for i in if_statement.nodes.iter() {
+                            i.astd_write(w).await?;
+                        }
+
+                        // final_node: Vector3d
+                        if_statement.final_node.astd_write(w).await?;
+
+                    }
+
+                }
+                MovementBlockUpdateFlagLIVING::HAS_POSITION {
                     orientation,
                     position_x,
                     position_y,
                     position_z,
-                })
-            }
-            else {
-                None
-            };
+                } => {
+                    // position_x: f32
+                    w.write_all(&position_x.to_le_bytes()).await?;
 
-            let update_flag_HIGH_GUID = if update_flag.is_HIGH_GUID() {
-                // unknown0: u32
-                let _unknown0 = crate::util::astd_read_u32_le(r).await?;
-                // unknown0 is expected to always be 0 (0)
+                    // position_y: f32
+                    w.write_all(&position_y.to_le_bytes()).await?;
 
-                Some(MovementBlockUpdateFlagHIGH_GUID {
-                })
-            }
-            else {
-                None
-            };
+                    // position_z: f32
+                    w.write_all(&position_z.to_le_bytes()).await?;
 
-            let update_flag_ALL = if update_flag.is_ALL() {
-                // unknown1: u32
-                let _unknown1 = crate::util::astd_read_u32_le(r).await?;
-                // unknown1 is expected to always be 1 (1)
+                    // orientation: f32
+                    w.write_all(&orientation.to_le_bytes()).await?;
 
-                Some(MovementBlockUpdateFlagALL {
-                })
-            }
-            else {
-                None
-            };
-
-            let update_flag_MELEE_ATTACKING = if update_flag.is_MELEE_ATTACKING() {
-                // guid: PackedGuid
-                let guid = Guid::astd_read_packed(r).await?;
-
-                Some(MovementBlockUpdateFlagMELEE_ATTACKING {
-                    guid,
-                })
-            }
-            else {
-                None
-            };
-
-            let update_flag_TRANSPORT = if update_flag.is_TRANSPORT() {
-                // transport_progress_in_ms: u32
-                let transport_progress_in_ms = crate::util::astd_read_u32_le(r).await?;
-
-                Some(MovementBlockUpdateFlagTRANSPORT {
-                    transport_progress_in_ms,
-                })
-            }
-            else {
-                None
-            };
-
-            let update_flag = MovementBlockUpdateFlag {
-                inner: update_flag.as_int(),
-                transport: update_flag_TRANSPORT,
-                melee_attacking: update_flag_MELEE_ATTACKING,
-                high_guid: update_flag_HIGH_GUID,
-                all: update_flag_ALL,
-                living: update_flag_LIVING,
-            };
-
-            Ok(Self {
-                update_flag,
-            })
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // update_flag: UpdateFlag
-            crate::util::astd_write_u8_le(w, self.update_flag.as_int() as u8).await?;
-
-            if let Some(if_statement) = &self.update_flag.living {
-                match if_statement {
-                    MovementBlockUpdateFlagLIVING::LIVING {
-                        backwards_running_speed,
-                        backwards_swimming_speed,
-                        fall_time,
-                        flags,
-                        living_orientation,
-                        living_position_x,
-                        living_position_y,
-                        living_position_z,
-                        running_speed,
-                        swimming_speed,
-                        timestamp,
-                        turn_rate,
-                        walking_speed,
-                    } => {
-                        // flags: MovementFlags
-                        crate::util::astd_write_u32_le(w, flags.as_int() as u32).await?;
-
-                        // timestamp: u32
-                        w.write_all(&timestamp.to_le_bytes()).await?;
-
-                        // living_position_x: f32
-                        w.write_all(&living_position_x.to_le_bytes()).await?;
-
-                        // living_position_y: f32
-                        w.write_all(&living_position_y.to_le_bytes()).await?;
-
-                        // living_position_z: f32
-                        w.write_all(&living_position_z.to_le_bytes()).await?;
-
-                        // living_orientation: f32
-                        w.write_all(&living_orientation.to_le_bytes()).await?;
-
-                        if let Some(if_statement) = &flags.on_transport {
-                            // transport: TransportInfo
-                            if_statement.transport.astd_write(w).await?;
-
-                        }
-
-                        if let Some(if_statement) = &flags.swimming {
-                            // pitch: f32
-                            w.write_all(&if_statement.pitch.to_le_bytes()).await?;
-
-                        }
-
-                        // fall_time: f32
-                        w.write_all(&fall_time.to_le_bytes()).await?;
-
-                        if let Some(if_statement) = &flags.jumping {
-                            // z_speed: f32
-                            w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
-
-                            // cos_angle: f32
-                            w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
-
-                            // sin_angle: f32
-                            w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
-
-                            // xy_speed: f32
-                            w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
-
-                        }
-
-                        if let Some(if_statement) = &flags.spline_elevation {
-                            // spline_elevation: f32
-                            w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
-
-                        }
-
-                        // walking_speed: f32
-                        w.write_all(&walking_speed.to_le_bytes()).await?;
-
-                        // running_speed: f32
-                        w.write_all(&running_speed.to_le_bytes()).await?;
-
-                        // backwards_running_speed: f32
-                        w.write_all(&backwards_running_speed.to_le_bytes()).await?;
-
-                        // swimming_speed: f32
-                        w.write_all(&swimming_speed.to_le_bytes()).await?;
-
-                        // backwards_swimming_speed: f32
-                        w.write_all(&backwards_swimming_speed.to_le_bytes()).await?;
-
-                        // turn_rate: f32
-                        w.write_all(&turn_rate.to_le_bytes()).await?;
-
-                        if let Some(if_statement) = &flags.spline_enabled {
-                            // spline_flags: SplineFlag
-                            crate::util::astd_write_u32_le(w, if_statement.spline_flags.as_int() as u32).await?;
-
-                            if let Some(if_statement) = &if_statement.spline_flags.final_angle {
-                                match if_statement {
-                                    MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
-                                        angle,
-                                    } => {
-                                        // angle: f32
-                                        w.write_all(&angle.to_le_bytes()).await?;
-
-                                    }
-                                    MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
-                                        target,
-                                    } => {
-                                        // target: u64
-                                        w.write_all(&target.to_le_bytes()).await?;
-
-                                    }
-                                    MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
-                                        spline_final_point_x,
-                                        spline_final_point_y,
-                                        spline_final_point_z,
-                                    } => {
-                                        // spline_final_point_x: f32
-                                        w.write_all(&spline_final_point_x.to_le_bytes()).await?;
-
-                                        // spline_final_point_y: f32
-                                        w.write_all(&spline_final_point_y.to_le_bytes()).await?;
-
-                                        // spline_final_point_z: f32
-                                        w.write_all(&spline_final_point_z.to_le_bytes()).await?;
-
-                                    }
-                                }
-                            }
-
-                            // time_passed: u32
-                            w.write_all(&if_statement.time_passed.to_le_bytes()).await?;
-
-                            // duration: u32
-                            w.write_all(&if_statement.duration.to_le_bytes()).await?;
-
-                            // id: u32
-                            w.write_all(&if_statement.id.to_le_bytes()).await?;
-
-                            // amount_of_nodes: u32
-                            w.write_all(&(if_statement.nodes.len() as u32).to_le_bytes()).await?;
-
-                            // nodes: Vector3d[amount_of_nodes]
-                            for i in if_statement.nodes.iter() {
-                                i.astd_write(w).await?;
-                            }
-
-                            // final_node: Vector3d
-                            if_statement.final_node.astd_write(w).await?;
-
-                        }
-
-                    }
-                    MovementBlockUpdateFlagLIVING::HAS_POSITION {
-                        orientation,
-                        position_x,
-                        position_y,
-                        position_z,
-                    } => {
-                        // position_x: f32
-                        w.write_all(&position_x.to_le_bytes()).await?;
-
-                        // position_y: f32
-                        w.write_all(&position_y.to_le_bytes()).await?;
-
-                        // position_z: f32
-                        w.write_all(&position_z.to_le_bytes()).await?;
-
-                        // orientation: f32
-                        w.write_all(&orientation.to_le_bytes()).await?;
-
-                    }
                 }
             }
+        }
 
-            if let Some(if_statement) = &self.update_flag.high_guid {
-                // unknown0: u32
-                w.write_all(&Self::UNKNOWN0_VALUE.to_le_bytes()).await?;
+        if let Some(if_statement) = &self.update_flag.high_guid {
+            // unknown0: u32
+            w.write_all(&Self::UNKNOWN0_VALUE.to_le_bytes()).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.update_flag.all {
-                // unknown1: u32
-                w.write_all(&Self::UNKNOWN1_VALUE.to_le_bytes()).await?;
+        if let Some(if_statement) = &self.update_flag.all {
+            // unknown1: u32
+            w.write_all(&Self::UNKNOWN1_VALUE.to_le_bytes()).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.update_flag.melee_attacking {
-                // guid: PackedGuid
-                if_statement.guid.astd_write_packed(w).await?;
+        if let Some(if_statement) = &self.update_flag.melee_attacking {
+            // guid: PackedGuid
+            if_statement.guid.astd_write_packed(w).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.update_flag.transport {
-                // transport_progress_in_ms: u32
-                w.write_all(&if_statement.transport_progress_in_ms.to_le_bytes()).await?;
+        if let Some(if_statement) = &self.update_flag.transport {
+            // transport_progress_in_ms: u32
+            w.write_all(&if_statement.transport_progress_in_ms.to_le_bytes()).await?;
 
-            }
+        }
 
-            Ok(())
-        })
+        Ok(())
     }
 
 }

@@ -12,11 +12,8 @@ pub struct InitialSpell {
     pub unknown1: u16,
 }
 
-impl ReadableAndWritable for InitialSpell {
-    type Error = std::io::Error;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl InitialSpell {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // spell_id: u16
         let spell_id = crate::util::read_u16_le(r)?;
 
@@ -29,8 +26,7 @@ impl ReadableAndWritable for InitialSpell {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // spell_id: u16
         w.write_all(&self.spell_id.to_le_bytes())?;
 
@@ -40,102 +36,50 @@ impl ReadableAndWritable for InitialSpell {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // spell_id: u16
-            let spell_id = crate::util::tokio_read_u16_le(r).await?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // spell_id: u16
+        let spell_id = crate::util::tokio_read_u16_le(r).await?;
 
-            // unknown1: u16
-            let unknown1 = crate::util::tokio_read_u16_le(r).await?;
+        // unknown1: u16
+        let unknown1 = crate::util::tokio_read_u16_le(r).await?;
 
-            Ok(Self {
-                spell_id,
-                unknown1,
-            })
+        Ok(Self {
+            spell_id,
+            unknown1,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // spell_id: u16
-            w.write_all(&self.spell_id.to_le_bytes()).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // spell_id: u16
+        w.write_all(&self.spell_id.to_le_bytes()).await?;
 
-            // unknown1: u16
-            w.write_all(&self.unknown1.to_le_bytes()).await?;
+        // unknown1: u16
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
 
-            Ok(())
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // spell_id: u16
+        let spell_id = crate::util::astd_read_u16_le(r).await?;
+
+        // unknown1: u16
+        let unknown1 = crate::util::astd_read_u16_le(r).await?;
+
+        Ok(Self {
+            spell_id,
+            unknown1,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // spell_id: u16
-            let spell_id = crate::util::astd_read_u16_le(r).await?;
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // spell_id: u16
+        w.write_all(&self.spell_id.to_le_bytes()).await?;
 
-            // unknown1: u16
-            let unknown1 = crate::util::astd_read_u16_le(r).await?;
+        // unknown1: u16
+        w.write_all(&self.unknown1.to_le_bytes()).await?;
 
-            Ok(Self {
-                spell_id,
-                unknown1,
-            })
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // spell_id: u16
-            w.write_all(&self.spell_id.to_le_bytes()).await?;
-
-            // unknown1: u16
-            w.write_all(&self.unknown1.to_le_bytes()).await?;
-
-            Ok(())
-        })
+        Ok(())
     }
 
 }

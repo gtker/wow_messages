@@ -18,11 +18,8 @@ pub struct MovementInfo {
     pub fall_time: f32,
 }
 
-impl ReadableAndWritable for MovementInfo {
-    type Error = std::io::Error;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl MovementInfo {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // flags: MovementFlags
         let flags = MovementFlags::new(crate::util::read_u32_le(r)?);
 
@@ -112,8 +109,7 @@ impl ReadableAndWritable for MovementInfo {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // flags: MovementFlags
         crate::util::write_u32_le(w, self.flags.as_int() as u32)?;
 
@@ -171,352 +167,300 @@ impl ReadableAndWritable for MovementInfo {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // flags: MovementFlags
-            let flags = MovementFlags::new(crate::util::tokio_read_u32_le(r).await?);
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // flags: MovementFlags
+        let flags = MovementFlags::new(crate::util::tokio_read_u32_le(r).await?);
 
-            // timestamp: u32
-            let timestamp = crate::util::tokio_read_u32_le(r).await?;
+        // timestamp: u32
+        let timestamp = crate::util::tokio_read_u32_le(r).await?;
 
-            // position_x: f32
-            let position_x = crate::util::tokio_read_f32_le(r).await?;
-            // position_y: f32
-            let position_y = crate::util::tokio_read_f32_le(r).await?;
-            // position_z: f32
-            let position_z = crate::util::tokio_read_f32_le(r).await?;
-            // orientation: f32
-            let orientation = crate::util::tokio_read_f32_le(r).await?;
-            let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
-                // transport: TransportInfo
-                let transport = TransportInfo::tokio_read(r).await?;
+        // position_x: f32
+        let position_x = crate::util::tokio_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::tokio_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::tokio_read_f32_le(r).await?;
+        // orientation: f32
+        let orientation = crate::util::tokio_read_f32_le(r).await?;
+        let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
+            // transport: TransportInfo
+            let transport = TransportInfo::tokio_read(r).await?;
 
-                Some(MovementInfoMovementFlagsON_TRANSPORT {
-                    transport,
-                })
-            }
-            else {
-                None
-            };
-
-            let flags_SWIMMING = if flags.is_SWIMMING() {
-                // pitch: f32
-                let pitch = crate::util::tokio_read_f32_le(r).await?;
-                Some(MovementInfoMovementFlagsSWIMMING {
-                    pitch,
-                })
-            }
-            else {
-                None
-            };
-
-            // fall_time: f32
-            let fall_time = crate::util::tokio_read_f32_le(r).await?;
-            let flags_JUMPING = if flags.is_JUMPING() {
-                // z_speed: f32
-                let z_speed = crate::util::tokio_read_f32_le(r).await?;
-                // cos_angle: f32
-                let cos_angle = crate::util::tokio_read_f32_le(r).await?;
-                // sin_angle: f32
-                let sin_angle = crate::util::tokio_read_f32_le(r).await?;
-                // xy_speed: f32
-                let xy_speed = crate::util::tokio_read_f32_le(r).await?;
-                Some(MovementInfoMovementFlagsJUMPING {
-                    cos_angle,
-                    sin_angle,
-                    xy_speed,
-                    z_speed,
-                })
-            }
-            else {
-                None
-            };
-
-            let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
-                // spline_elevation: f32
-                let spline_elevation = crate::util::tokio_read_f32_le(r).await?;
-                Some(MovementInfoMovementFlagsSPLINE_ELEVATION {
-                    spline_elevation,
-                })
-            }
-            else {
-                None
-            };
-
-            let flags = MovementInfoMovementFlags {
-                inner: flags.as_int(),
-                on_transport: flags_ON_TRANSPORT,
-                jumping: flags_JUMPING,
-                swimming: flags_SWIMMING,
-                spline_elevation: flags_SPLINE_ELEVATION,
-            };
-
-            Ok(Self {
-                flags,
-                timestamp,
-                position_x,
-                position_y,
-                position_z,
-                orientation,
-                fall_time,
+            Some(MovementInfoMovementFlagsON_TRANSPORT {
+                transport,
             })
-        })
-    }
+        }
+        else {
+            None
+        };
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // flags: MovementFlags
-            crate::util::tokio_write_u32_le(w, self.flags.as_int() as u32).await?;
-
-            // timestamp: u32
-            w.write_all(&self.timestamp.to_le_bytes()).await?;
-
-            // position_x: f32
-            w.write_all(&self.position_x.to_le_bytes()).await?;
-
-            // position_y: f32
-            w.write_all(&self.position_y.to_le_bytes()).await?;
-
-            // position_z: f32
-            w.write_all(&self.position_z.to_le_bytes()).await?;
-
-            // orientation: f32
-            w.write_all(&self.orientation.to_le_bytes()).await?;
-
-            if let Some(if_statement) = &self.flags.on_transport {
-                // transport: TransportInfo
-                if_statement.transport.tokio_write(w).await?;
-
-            }
-
-            if let Some(if_statement) = &self.flags.swimming {
-                // pitch: f32
-                w.write_all(&if_statement.pitch.to_le_bytes()).await?;
-
-            }
-
-            // fall_time: f32
-            w.write_all(&self.fall_time.to_le_bytes()).await?;
-
-            if let Some(if_statement) = &self.flags.jumping {
-                // z_speed: f32
-                w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
-
-                // cos_angle: f32
-                w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
-
-                // sin_angle: f32
-                w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
-
-                // xy_speed: f32
-                w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.flags.spline_elevation {
-                // spline_elevation: f32
-                w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
-
-            }
-
-            Ok(())
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // flags: MovementFlags
-            let flags = MovementFlags::new(crate::util::astd_read_u32_le(r).await?);
-
-            // timestamp: u32
-            let timestamp = crate::util::astd_read_u32_le(r).await?;
-
-            // position_x: f32
-            let position_x = crate::util::astd_read_f32_le(r).await?;
-            // position_y: f32
-            let position_y = crate::util::astd_read_f32_le(r).await?;
-            // position_z: f32
-            let position_z = crate::util::astd_read_f32_le(r).await?;
-            // orientation: f32
-            let orientation = crate::util::astd_read_f32_le(r).await?;
-            let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
-                // transport: TransportInfo
-                let transport = TransportInfo::astd_read(r).await?;
-
-                Some(MovementInfoMovementFlagsON_TRANSPORT {
-                    transport,
-                })
-            }
-            else {
-                None
-            };
-
-            let flags_SWIMMING = if flags.is_SWIMMING() {
-                // pitch: f32
-                let pitch = crate::util::astd_read_f32_le(r).await?;
-                Some(MovementInfoMovementFlagsSWIMMING {
-                    pitch,
-                })
-            }
-            else {
-                None
-            };
-
-            // fall_time: f32
-            let fall_time = crate::util::astd_read_f32_le(r).await?;
-            let flags_JUMPING = if flags.is_JUMPING() {
-                // z_speed: f32
-                let z_speed = crate::util::astd_read_f32_le(r).await?;
-                // cos_angle: f32
-                let cos_angle = crate::util::astd_read_f32_le(r).await?;
-                // sin_angle: f32
-                let sin_angle = crate::util::astd_read_f32_le(r).await?;
-                // xy_speed: f32
-                let xy_speed = crate::util::astd_read_f32_le(r).await?;
-                Some(MovementInfoMovementFlagsJUMPING {
-                    cos_angle,
-                    sin_angle,
-                    xy_speed,
-                    z_speed,
-                })
-            }
-            else {
-                None
-            };
-
-            let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
-                // spline_elevation: f32
-                let spline_elevation = crate::util::astd_read_f32_le(r).await?;
-                Some(MovementInfoMovementFlagsSPLINE_ELEVATION {
-                    spline_elevation,
-                })
-            }
-            else {
-                None
-            };
-
-            let flags = MovementInfoMovementFlags {
-                inner: flags.as_int(),
-                on_transport: flags_ON_TRANSPORT,
-                jumping: flags_JUMPING,
-                swimming: flags_SWIMMING,
-                spline_elevation: flags_SPLINE_ELEVATION,
-            };
-
-            Ok(Self {
-                flags,
-                timestamp,
-                position_x,
-                position_y,
-                position_z,
-                orientation,
-                fall_time,
+        let flags_SWIMMING = if flags.is_SWIMMING() {
+            // pitch: f32
+            let pitch = crate::util::tokio_read_f32_le(r).await?;
+            Some(MovementInfoMovementFlagsSWIMMING {
+                pitch,
             })
+        }
+        else {
+            None
+        };
+
+        // fall_time: f32
+        let fall_time = crate::util::tokio_read_f32_le(r).await?;
+        let flags_JUMPING = if flags.is_JUMPING() {
+            // z_speed: f32
+            let z_speed = crate::util::tokio_read_f32_le(r).await?;
+            // cos_angle: f32
+            let cos_angle = crate::util::tokio_read_f32_le(r).await?;
+            // sin_angle: f32
+            let sin_angle = crate::util::tokio_read_f32_le(r).await?;
+            // xy_speed: f32
+            let xy_speed = crate::util::tokio_read_f32_le(r).await?;
+            Some(MovementInfoMovementFlagsJUMPING {
+                cos_angle,
+                sin_angle,
+                xy_speed,
+                z_speed,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
+            // spline_elevation: f32
+            let spline_elevation = crate::util::tokio_read_f32_le(r).await?;
+            Some(MovementInfoMovementFlagsSPLINE_ELEVATION {
+                spline_elevation,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags = MovementInfoMovementFlags {
+            inner: flags.as_int(),
+            on_transport: flags_ON_TRANSPORT,
+            jumping: flags_JUMPING,
+            swimming: flags_SWIMMING,
+            spline_elevation: flags_SPLINE_ELEVATION,
+        };
+
+        Ok(Self {
+            flags,
+            timestamp,
+            position_x,
+            position_y,
+            position_z,
+            orientation,
+            fall_time,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // flags: MovementFlags
-            crate::util::astd_write_u32_le(w, self.flags.as_int() as u32).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // flags: MovementFlags
+        crate::util::tokio_write_u32_le(w, self.flags.as_int() as u32).await?;
 
-            // timestamp: u32
-            w.write_all(&self.timestamp.to_le_bytes()).await?;
+        // timestamp: u32
+        w.write_all(&self.timestamp.to_le_bytes()).await?;
 
-            // position_x: f32
-            w.write_all(&self.position_x.to_le_bytes()).await?;
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
 
-            // position_y: f32
-            w.write_all(&self.position_y.to_le_bytes()).await?;
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
 
-            // position_z: f32
-            w.write_all(&self.position_z.to_le_bytes()).await?;
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
 
-            // orientation: f32
-            w.write_all(&self.orientation.to_le_bytes()).await?;
+        // orientation: f32
+        w.write_all(&self.orientation.to_le_bytes()).await?;
 
-            if let Some(if_statement) = &self.flags.on_transport {
-                // transport: TransportInfo
-                if_statement.transport.astd_write(w).await?;
+        if let Some(if_statement) = &self.flags.on_transport {
+            // transport: TransportInfo
+            if_statement.transport.tokio_write(w).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.flags.swimming {
-                // pitch: f32
-                w.write_all(&if_statement.pitch.to_le_bytes()).await?;
+        if let Some(if_statement) = &self.flags.swimming {
+            // pitch: f32
+            w.write_all(&if_statement.pitch.to_le_bytes()).await?;
 
-            }
+        }
 
-            // fall_time: f32
-            w.write_all(&self.fall_time.to_le_bytes()).await?;
+        // fall_time: f32
+        w.write_all(&self.fall_time.to_le_bytes()).await?;
 
-            if let Some(if_statement) = &self.flags.jumping {
-                // z_speed: f32
-                w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
+        if let Some(if_statement) = &self.flags.jumping {
+            // z_speed: f32
+            w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
 
-                // cos_angle: f32
-                w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
+            // cos_angle: f32
+            w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
 
-                // sin_angle: f32
-                w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
+            // sin_angle: f32
+            w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
 
-                // xy_speed: f32
-                w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
+            // xy_speed: f32
+            w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
 
-            }
+        }
 
-            if let Some(if_statement) = &self.flags.spline_elevation {
-                // spline_elevation: f32
-                w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
+        if let Some(if_statement) = &self.flags.spline_elevation {
+            // spline_elevation: f32
+            w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
 
-            }
+        }
 
-            Ok(())
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // flags: MovementFlags
+        let flags = MovementFlags::new(crate::util::astd_read_u32_le(r).await?);
+
+        // timestamp: u32
+        let timestamp = crate::util::astd_read_u32_le(r).await?;
+
+        // position_x: f32
+        let position_x = crate::util::astd_read_f32_le(r).await?;
+        // position_y: f32
+        let position_y = crate::util::astd_read_f32_le(r).await?;
+        // position_z: f32
+        let position_z = crate::util::astd_read_f32_le(r).await?;
+        // orientation: f32
+        let orientation = crate::util::astd_read_f32_le(r).await?;
+        let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
+            // transport: TransportInfo
+            let transport = TransportInfo::astd_read(r).await?;
+
+            Some(MovementInfoMovementFlagsON_TRANSPORT {
+                transport,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_SWIMMING = if flags.is_SWIMMING() {
+            // pitch: f32
+            let pitch = crate::util::astd_read_f32_le(r).await?;
+            Some(MovementInfoMovementFlagsSWIMMING {
+                pitch,
+            })
+        }
+        else {
+            None
+        };
+
+        // fall_time: f32
+        let fall_time = crate::util::astd_read_f32_le(r).await?;
+        let flags_JUMPING = if flags.is_JUMPING() {
+            // z_speed: f32
+            let z_speed = crate::util::astd_read_f32_le(r).await?;
+            // cos_angle: f32
+            let cos_angle = crate::util::astd_read_f32_le(r).await?;
+            // sin_angle: f32
+            let sin_angle = crate::util::astd_read_f32_le(r).await?;
+            // xy_speed: f32
+            let xy_speed = crate::util::astd_read_f32_le(r).await?;
+            Some(MovementInfoMovementFlagsJUMPING {
+                cos_angle,
+                sin_angle,
+                xy_speed,
+                z_speed,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
+            // spline_elevation: f32
+            let spline_elevation = crate::util::astd_read_f32_le(r).await?;
+            Some(MovementInfoMovementFlagsSPLINE_ELEVATION {
+                spline_elevation,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags = MovementInfoMovementFlags {
+            inner: flags.as_int(),
+            on_transport: flags_ON_TRANSPORT,
+            jumping: flags_JUMPING,
+            swimming: flags_SWIMMING,
+            spline_elevation: flags_SPLINE_ELEVATION,
+        };
+
+        Ok(Self {
+            flags,
+            timestamp,
+            position_x,
+            position_y,
+            position_z,
+            orientation,
+            fall_time,
         })
+    }
+
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // flags: MovementFlags
+        crate::util::astd_write_u32_le(w, self.flags.as_int() as u32).await?;
+
+        // timestamp: u32
+        w.write_all(&self.timestamp.to_le_bytes()).await?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes()).await?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes()).await?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes()).await?;
+
+        // orientation: f32
+        w.write_all(&self.orientation.to_le_bytes()).await?;
+
+        if let Some(if_statement) = &self.flags.on_transport {
+            // transport: TransportInfo
+            if_statement.transport.astd_write(w).await?;
+
+        }
+
+        if let Some(if_statement) = &self.flags.swimming {
+            // pitch: f32
+            w.write_all(&if_statement.pitch.to_le_bytes()).await?;
+
+        }
+
+        // fall_time: f32
+        w.write_all(&self.fall_time.to_le_bytes()).await?;
+
+        if let Some(if_statement) = &self.flags.jumping {
+            // z_speed: f32
+            w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
+
+            // cos_angle: f32
+            w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
+
+            // sin_angle: f32
+            w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
+
+            // xy_speed: f32
+            w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
+
+        }
+
+        if let Some(if_statement) = &self.flags.spline_elevation {
+            // spline_elevation: f32
+            w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
+
+        }
+
+        Ok(())
     }
 
 }

@@ -22,11 +22,8 @@ pub struct Realm {
     pub realm_id: u8,
 }
 
-impl ReadableAndWritable for Realm {
-    type Error = RealmError;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl Realm {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, RealmError> {
         // realm_type: u8
         let realm_type = crate::util::read_u8_le(r)?;
 
@@ -86,8 +83,7 @@ impl ReadableAndWritable for Realm {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // realm_type: u8
         w.write_all(&self.realm_type.to_le_bytes())?;
 
@@ -128,258 +124,206 @@ impl ReadableAndWritable for Realm {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // realm_type: u8
-            let realm_type = crate::util::tokio_read_u8_le(r).await?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RealmError> {
+        // realm_type: u8
+        let realm_type = crate::util::tokio_read_u8_le(r).await?;
 
-            // locked: u8
-            let locked = crate::util::tokio_read_u8_le(r).await?;
+        // locked: u8
+        let locked = crate::util::tokio_read_u8_le(r).await?;
 
-            // flag: RealmFlag
-            let flag = RealmFlag::new(crate::util::tokio_read_u8_le(r).await?);
+        // flag: RealmFlag
+        let flag = RealmFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
-            // name: CString
-            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
 
-            // address: CString
-            let address = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let address = String::from_utf8(address)?;
+        // address: CString
+        let address = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let address = String::from_utf8(address)?;
 
-            // population: Population
-            let population: Population = crate::util::tokio_read_u32_le(r).await?.into();
+        // population: Population
+        let population: Population = crate::util::tokio_read_u32_le(r).await?.into();
 
-            // number_of_characters_on_realm: u8
-            let number_of_characters_on_realm = crate::util::tokio_read_u8_le(r).await?;
+        // number_of_characters_on_realm: u8
+        let number_of_characters_on_realm = crate::util::tokio_read_u8_le(r).await?;
 
-            // category: RealmCategory
-            let category: RealmCategory = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+        // category: RealmCategory
+        let category: RealmCategory = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            // realm_id: u8
-            let realm_id = crate::util::tokio_read_u8_le(r).await?;
+        // realm_id: u8
+        let realm_id = crate::util::tokio_read_u8_le(r).await?;
 
-            let flag_SPECIFY_BUILD = if flag.is_SPECIFY_BUILD() {
-                // version: Version
-                let version = Version::tokio_read(r).await?;
+        let flag_SPECIFY_BUILD = if flag.is_SPECIFY_BUILD() {
+            // version: Version
+            let version = Version::tokio_read(r).await?;
 
-                Some(RealmRealmFlagSPECIFY_BUILD {
-                    version,
-                })
-            }
-            else {
-                None
-            };
-
-            let flag = RealmRealmFlag {
-                inner: flag.as_int(),
-                specify_build: flag_SPECIFY_BUILD,
-            };
-
-            Ok(Self {
-                realm_type,
-                locked,
-                flag,
-                name,
-                address,
-                population,
-                number_of_characters_on_realm,
-                category,
-                realm_id,
+            Some(RealmRealmFlagSPECIFY_BUILD {
+                version,
             })
+        }
+        else {
+            None
+        };
+
+        let flag = RealmRealmFlag {
+            inner: flag.as_int(),
+            specify_build: flag_SPECIFY_BUILD,
+        };
+
+        Ok(Self {
+            realm_type,
+            locked,
+            flag,
+            name,
+            address,
+            population,
+            number_of_characters_on_realm,
+            category,
+            realm_id,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // realm_type: u8
-            w.write_all(&self.realm_type.to_le_bytes()).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // realm_type: u8
+        w.write_all(&self.realm_type.to_le_bytes()).await?;
 
-            // locked: u8
-            w.write_all(&self.locked.to_le_bytes()).await?;
+        // locked: u8
+        w.write_all(&self.locked.to_le_bytes()).await?;
 
-            // flag: RealmFlag
-            crate::util::tokio_write_u8_le(w, self.flag.as_int() as u8).await?;
+        // flag: RealmFlag
+        crate::util::tokio_write_u8_le(w, self.flag.as_int() as u8).await?;
 
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // address: CString
-            w.write_all(self.address.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+        // address: CString
+        w.write_all(self.address.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // population: Population
-            crate::util::tokio_write_u32_le(w, self.population.as_int() as u32).await?;
+        // population: Population
+        crate::util::tokio_write_u32_le(w, self.population.as_int() as u32).await?;
 
-            // number_of_characters_on_realm: u8
-            w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
+        // number_of_characters_on_realm: u8
+        w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
 
-            // category: RealmCategory
-            crate::util::tokio_write_u8_le(w, self.category.as_int() as u8).await?;
+        // category: RealmCategory
+        crate::util::tokio_write_u8_le(w, self.category.as_int() as u8).await?;
 
-            // realm_id: u8
-            w.write_all(&self.realm_id.to_le_bytes()).await?;
+        // realm_id: u8
+        w.write_all(&self.realm_id.to_le_bytes()).await?;
 
-            if let Some(if_statement) = &self.flag.specify_build {
-                // version: Version
-                if_statement.version.tokio_write(w).await?;
+        if let Some(if_statement) = &self.flag.specify_build {
+            // version: Version
+            if_statement.version.tokio_write(w).await?;
 
-            }
+        }
 
-            Ok(())
-        })
+        Ok(())
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // realm_type: u8
-            let realm_type = crate::util::astd_read_u8_le(r).await?;
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RealmError> {
+        // realm_type: u8
+        let realm_type = crate::util::astd_read_u8_le(r).await?;
 
-            // locked: u8
-            let locked = crate::util::astd_read_u8_le(r).await?;
+        // locked: u8
+        let locked = crate::util::astd_read_u8_le(r).await?;
 
-            // flag: RealmFlag
-            let flag = RealmFlag::new(crate::util::astd_read_u8_le(r).await?);
+        // flag: RealmFlag
+        let flag = RealmFlag::new(crate::util::astd_read_u8_le(r).await?);
 
-            // name: CString
-            let name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
 
-            // address: CString
-            let address = crate::util::astd_read_c_string_to_vec(r).await?;
-            let address = String::from_utf8(address)?;
+        // address: CString
+        let address = crate::util::astd_read_c_string_to_vec(r).await?;
+        let address = String::from_utf8(address)?;
 
-            // population: Population
-            let population: Population = crate::util::astd_read_u32_le(r).await?.into();
+        // population: Population
+        let population: Population = crate::util::astd_read_u32_le(r).await?.into();
 
-            // number_of_characters_on_realm: u8
-            let number_of_characters_on_realm = crate::util::astd_read_u8_le(r).await?;
+        // number_of_characters_on_realm: u8
+        let number_of_characters_on_realm = crate::util::astd_read_u8_le(r).await?;
 
-            // category: RealmCategory
-            let category: RealmCategory = crate::util::astd_read_u8_le(r).await?.try_into()?;
+        // category: RealmCategory
+        let category: RealmCategory = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
-            // realm_id: u8
-            let realm_id = crate::util::astd_read_u8_le(r).await?;
+        // realm_id: u8
+        let realm_id = crate::util::astd_read_u8_le(r).await?;
 
-            let flag_SPECIFY_BUILD = if flag.is_SPECIFY_BUILD() {
-                // version: Version
-                let version = Version::astd_read(r).await?;
+        let flag_SPECIFY_BUILD = if flag.is_SPECIFY_BUILD() {
+            // version: Version
+            let version = Version::astd_read(r).await?;
 
-                Some(RealmRealmFlagSPECIFY_BUILD {
-                    version,
-                })
-            }
-            else {
-                None
-            };
-
-            let flag = RealmRealmFlag {
-                inner: flag.as_int(),
-                specify_build: flag_SPECIFY_BUILD,
-            };
-
-            Ok(Self {
-                realm_type,
-                locked,
-                flag,
-                name,
-                address,
-                population,
-                number_of_characters_on_realm,
-                category,
-                realm_id,
+            Some(RealmRealmFlagSPECIFY_BUILD {
+                version,
             })
+        }
+        else {
+            None
+        };
+
+        let flag = RealmRealmFlag {
+            inner: flag.as_int(),
+            specify_build: flag_SPECIFY_BUILD,
+        };
+
+        Ok(Self {
+            realm_type,
+            locked,
+            flag,
+            name,
+            address,
+            population,
+            number_of_characters_on_realm,
+            category,
+            realm_id,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // realm_type: u8
-            w.write_all(&self.realm_type.to_le_bytes()).await?;
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // realm_type: u8
+        w.write_all(&self.realm_type.to_le_bytes()).await?;
 
-            // locked: u8
-            w.write_all(&self.locked.to_le_bytes()).await?;
+        // locked: u8
+        w.write_all(&self.locked.to_le_bytes()).await?;
 
-            // flag: RealmFlag
-            crate::util::astd_write_u8_le(w, self.flag.as_int() as u8).await?;
+        // flag: RealmFlag
+        crate::util::astd_write_u8_le(w, self.flag.as_int() as u8).await?;
 
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // address: CString
-            w.write_all(self.address.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+        // address: CString
+        w.write_all(self.address.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // population: Population
-            crate::util::astd_write_u32_le(w, self.population.as_int() as u32).await?;
+        // population: Population
+        crate::util::astd_write_u32_le(w, self.population.as_int() as u32).await?;
 
-            // number_of_characters_on_realm: u8
-            w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
+        // number_of_characters_on_realm: u8
+        w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
 
-            // category: RealmCategory
-            crate::util::astd_write_u8_le(w, self.category.as_int() as u8).await?;
+        // category: RealmCategory
+        crate::util::astd_write_u8_le(w, self.category.as_int() as u8).await?;
 
-            // realm_id: u8
-            w.write_all(&self.realm_id.to_le_bytes()).await?;
+        // realm_id: u8
+        w.write_all(&self.realm_id.to_le_bytes()).await?;
 
-            if let Some(if_statement) = &self.flag.specify_build {
-                // version: Version
-                if_statement.version.astd_write(w).await?;
+        if let Some(if_statement) = &self.flag.specify_build {
+            // version: Version
+            if_statement.version.astd_write(w).await?;
 
-            }
+        }
 
-            Ok(())
-        })
+        Ok(())
     }
 
 }

@@ -15,11 +15,8 @@ pub struct StabledPet {
     pub slot: u8,
 }
 
-impl ReadableAndWritable for StabledPet {
-    type Error = StabledPetError;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl StabledPet {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, StabledPetError> {
         // pet_number: u32
         let pet_number = crate::util::read_u32_le(r)?;
 
@@ -49,8 +46,7 @@ impl ReadableAndWritable for StabledPet {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;
 
@@ -74,164 +70,112 @@ impl ReadableAndWritable for StabledPet {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // pet_number: u32
-            let pet_number = crate::util::tokio_read_u32_le(r).await?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, StabledPetError> {
+        // pet_number: u32
+        let pet_number = crate::util::tokio_read_u32_le(r).await?;
 
-            // entry: u32
-            let entry = crate::util::tokio_read_u32_le(r).await?;
+        // entry: u32
+        let entry = crate::util::tokio_read_u32_le(r).await?;
 
-            // level: u32
-            let level = crate::util::tokio_read_u32_le(r).await?;
+        // level: u32
+        let level = crate::util::tokio_read_u32_le(r).await?;
 
-            // name: CString
-            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
 
-            // loyalty: u32
-            let loyalty = crate::util::tokio_read_u32_le(r).await?;
+        // loyalty: u32
+        let loyalty = crate::util::tokio_read_u32_le(r).await?;
 
-            // slot: u8
-            let slot = crate::util::tokio_read_u8_le(r).await?;
+        // slot: u8
+        let slot = crate::util::tokio_read_u8_le(r).await?;
 
-            Ok(Self {
-                pet_number,
-                entry,
-                level,
-                name,
-                loyalty,
-                slot,
-            })
+        Ok(Self {
+            pet_number,
+            entry,
+            level,
+            name,
+            loyalty,
+            slot,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // pet_number: u32
-            w.write_all(&self.pet_number.to_le_bytes()).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_number: u32
+        w.write_all(&self.pet_number.to_le_bytes()).await?;
 
-            // entry: u32
-            w.write_all(&self.entry.to_le_bytes()).await?;
+        // entry: u32
+        w.write_all(&self.entry.to_le_bytes()).await?;
 
-            // level: u32
-            w.write_all(&self.level.to_le_bytes()).await?;
+        // level: u32
+        w.write_all(&self.level.to_le_bytes()).await?;
 
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // loyalty: u32
-            w.write_all(&self.loyalty.to_le_bytes()).await?;
+        // loyalty: u32
+        w.write_all(&self.loyalty.to_le_bytes()).await?;
 
-            // slot: u8
-            w.write_all(&self.slot.to_le_bytes()).await?;
+        // slot: u8
+        w.write_all(&self.slot.to_le_bytes()).await?;
 
-            Ok(())
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, StabledPetError> {
+        // pet_number: u32
+        let pet_number = crate::util::astd_read_u32_le(r).await?;
+
+        // entry: u32
+        let entry = crate::util::astd_read_u32_le(r).await?;
+
+        // level: u32
+        let level = crate::util::astd_read_u32_le(r).await?;
+
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // loyalty: u32
+        let loyalty = crate::util::astd_read_u32_le(r).await?;
+
+        // slot: u8
+        let slot = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            pet_number,
+            entry,
+            level,
+            name,
+            loyalty,
+            slot,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // pet_number: u32
-            let pet_number = crate::util::astd_read_u32_le(r).await?;
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // pet_number: u32
+        w.write_all(&self.pet_number.to_le_bytes()).await?;
 
-            // entry: u32
-            let entry = crate::util::astd_read_u32_le(r).await?;
+        // entry: u32
+        w.write_all(&self.entry.to_le_bytes()).await?;
 
-            // level: u32
-            let level = crate::util::astd_read_u32_le(r).await?;
+        // level: u32
+        w.write_all(&self.level.to_le_bytes()).await?;
 
-            // name: CString
-            let name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // loyalty: u32
-            let loyalty = crate::util::astd_read_u32_le(r).await?;
+        // loyalty: u32
+        w.write_all(&self.loyalty.to_le_bytes()).await?;
 
-            // slot: u8
-            let slot = crate::util::astd_read_u8_le(r).await?;
+        // slot: u8
+        w.write_all(&self.slot.to_le_bytes()).await?;
 
-            Ok(Self {
-                pet_number,
-                entry,
-                level,
-                name,
-                loyalty,
-                slot,
-            })
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // pet_number: u32
-            w.write_all(&self.pet_number.to_le_bytes()).await?;
-
-            // entry: u32
-            w.write_all(&self.entry.to_le_bytes()).await?;
-
-            // level: u32
-            w.write_all(&self.level.to_le_bytes()).await?;
-
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // loyalty: u32
-            w.write_all(&self.loyalty.to_le_bytes()).await?;
-
-            // slot: u8
-            w.write_all(&self.slot.to_le_bytes()).await?;
-
-            Ok(())
-        })
+        Ok(())
     }
 
 }

@@ -18,11 +18,8 @@ pub struct WhoPlayer {
     pub party_status: u32,
 }
 
-impl ReadableAndWritable for WhoPlayer {
-    type Error = WhoPlayerError;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl WhoPlayer {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, WhoPlayerError> {
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
         let name = String::from_utf8(name)?;
@@ -57,8 +54,7 @@ impl ReadableAndWritable for WhoPlayer {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;
         // Null terminator
@@ -87,184 +83,132 @@ impl ReadableAndWritable for WhoPlayer {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // name: CString
-            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, WhoPlayerError> {
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
 
-            // guild: CString
-            let guild = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let guild = String::from_utf8(guild)?;
+        // guild: CString
+        let guild = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let guild = String::from_utf8(guild)?;
 
-            // level: u32
-            let level = crate::util::tokio_read_u32_le(r).await?;
+        // level: u32
+        let level = crate::util::tokio_read_u32_le(r).await?;
 
-            // class: Class
-            let class: Class = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+        // class: Class
+        let class: Class = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            // race: Race
-            let race: Race = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+        // race: Race
+        let race: Race = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            // zone_id: u32
-            let zone_id = crate::util::tokio_read_u32_le(r).await?;
+        // zone_id: u32
+        let zone_id = crate::util::tokio_read_u32_le(r).await?;
 
-            // party_status: u32
-            let party_status = crate::util::tokio_read_u32_le(r).await?;
+        // party_status: u32
+        let party_status = crate::util::tokio_read_u32_le(r).await?;
 
-            Ok(Self {
-                name,
-                guild,
-                level,
-                class,
-                race,
-                zone_id,
-                party_status,
-            })
+        Ok(Self {
+            name,
+            guild,
+            level,
+            class,
+            race,
+            zone_id,
+            party_status,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // guild: CString
-            w.write_all(self.guild.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+        // guild: CString
+        w.write_all(self.guild.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // level: u32
-            w.write_all(&self.level.to_le_bytes()).await?;
+        // level: u32
+        w.write_all(&self.level.to_le_bytes()).await?;
 
-            // class: Class
-            crate::util::tokio_write_u8_le(w, self.class.as_int() as u8).await?;
+        // class: Class
+        crate::util::tokio_write_u8_le(w, self.class.as_int() as u8).await?;
 
-            // race: Race
-            crate::util::tokio_write_u8_le(w, self.race.as_int() as u8).await?;
+        // race: Race
+        crate::util::tokio_write_u8_le(w, self.race.as_int() as u8).await?;
 
-            // zone_id: u32
-            w.write_all(&self.zone_id.to_le_bytes()).await?;
+        // zone_id: u32
+        w.write_all(&self.zone_id.to_le_bytes()).await?;
 
-            // party_status: u32
-            w.write_all(&self.party_status.to_le_bytes()).await?;
+        // party_status: u32
+        w.write_all(&self.party_status.to_le_bytes()).await?;
 
-            Ok(())
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, WhoPlayerError> {
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // guild: CString
+        let guild = crate::util::astd_read_c_string_to_vec(r).await?;
+        let guild = String::from_utf8(guild)?;
+
+        // level: u32
+        let level = crate::util::astd_read_u32_le(r).await?;
+
+        // class: Class
+        let class: Class = crate::util::astd_read_u8_le(r).await?.try_into()?;
+
+        // race: Race
+        let race: Race = crate::util::astd_read_u8_le(r).await?.try_into()?;
+
+        // zone_id: u32
+        let zone_id = crate::util::astd_read_u32_le(r).await?;
+
+        // party_status: u32
+        let party_status = crate::util::astd_read_u32_le(r).await?;
+
+        Ok(Self {
+            name,
+            guild,
+            level,
+            class,
+            race,
+            zone_id,
+            party_status,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // name: CString
-            let name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // guild: CString
-            let guild = crate::util::astd_read_c_string_to_vec(r).await?;
-            let guild = String::from_utf8(guild)?;
+        // guild: CString
+        w.write_all(self.guild.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // level: u32
-            let level = crate::util::astd_read_u32_le(r).await?;
+        // level: u32
+        w.write_all(&self.level.to_le_bytes()).await?;
 
-            // class: Class
-            let class: Class = crate::util::astd_read_u8_le(r).await?.try_into()?;
+        // class: Class
+        crate::util::astd_write_u8_le(w, self.class.as_int() as u8).await?;
 
-            // race: Race
-            let race: Race = crate::util::astd_read_u8_le(r).await?.try_into()?;
+        // race: Race
+        crate::util::astd_write_u8_le(w, self.race.as_int() as u8).await?;
 
-            // zone_id: u32
-            let zone_id = crate::util::astd_read_u32_le(r).await?;
+        // zone_id: u32
+        w.write_all(&self.zone_id.to_le_bytes()).await?;
 
-            // party_status: u32
-            let party_status = crate::util::astd_read_u32_le(r).await?;
+        // party_status: u32
+        w.write_all(&self.party_status.to_le_bytes()).await?;
 
-            Ok(Self {
-                name,
-                guild,
-                level,
-                class,
-                race,
-                zone_id,
-                party_status,
-            })
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // guild: CString
-            w.write_all(self.guild.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // level: u32
-            w.write_all(&self.level.to_le_bytes()).await?;
-
-            // class: Class
-            crate::util::astd_write_u8_le(w, self.class.as_int() as u8).await?;
-
-            // race: Race
-            crate::util::astd_write_u8_le(w, self.race.as_int() as u8).await?;
-
-            // zone_id: u32
-            w.write_all(&self.zone_id.to_le_bytes()).await?;
-
-            // party_status: u32
-            w.write_all(&self.party_status.to_le_bytes()).await?;
-
-            Ok(())
-        })
+        Ok(())
     }
 
 }

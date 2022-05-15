@@ -13,11 +13,8 @@ pub struct EnumIfElseIfNested {
     pub n: EnumIfElseIfNestedNestedEnum,
 }
 
-impl ReadableAndWritable for EnumIfElseIfNested {
-    type Error = EnumIfElseIfNestedError;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl EnumIfElseIfNested {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, EnumIfElseIfNestedError> {
         // e: SimpleEnum
         let e: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
 
@@ -43,8 +40,7 @@ impl ReadableAndWritable for EnumIfElseIfNested {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // e: SimpleEnum
         crate::util::write_u8_le(w, self.e.as_int() as u8)?;
 
@@ -66,152 +62,100 @@ impl ReadableAndWritable for EnumIfElseIfNested {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // e: SimpleEnum
-            let e: SimpleEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, EnumIfElseIfNestedError> {
+        // e: SimpleEnum
+        let e: SimpleEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            // n: NestedEnum
-            let n: NestedEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+        // n: NestedEnum
+        let n: NestedEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
-            let e_if = match e {
-                SimpleEnum::ZERO => {
-                    // zero: u8
-                    let zero = crate::util::tokio_read_u8_le(r).await?;
+        let e_if = match e {
+            SimpleEnum::ZERO => {
+                // zero: u8
+                let zero = crate::util::tokio_read_u8_le(r).await?;
 
-                    EnumIfElseIfNestedSimpleEnum::ZERO {
-                        zero,
-                    }
-                }
-                SimpleEnum::ONE => EnumIfElseIfNestedSimpleEnum::ONE,
-                SimpleEnum::TWO => EnumIfElseIfNestedSimpleEnum::TWO,
-            };
-
-            Ok(Self {
-                e: e_if,
-                n: n_if,
-            })
-        })
-    }
-
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // e: SimpleEnum
-            crate::util::tokio_write_u8_le(w, self.e.as_int() as u8).await?;
-
-            // n: NestedEnum
-            crate::util::tokio_write_u8_le(w, self.n.as_int() as u8).await?;
-
-            match &self.e {
                 EnumIfElseIfNestedSimpleEnum::ZERO {
                     zero,
-                } => {
-                    // zero: u8
-                    w.write_all(&zero.to_le_bytes()).await?;
-
                 }
-                EnumIfElseIfNestedSimpleEnum::ONE => {}
-                EnumIfElseIfNestedSimpleEnum::TWO => {}
             }
+            SimpleEnum::ONE => EnumIfElseIfNestedSimpleEnum::ONE,
+            SimpleEnum::TWO => EnumIfElseIfNestedSimpleEnum::TWO,
+        };
 
-            Ok(())
+        Ok(Self {
+            e: e_if,
+            n: n_if,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // e: SimpleEnum
-            let e: SimpleEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // e: SimpleEnum
+        crate::util::tokio_write_u8_le(w, self.e.as_int() as u8).await?;
 
-            // n: NestedEnum
-            let n: NestedEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
+        // n: NestedEnum
+        crate::util::tokio_write_u8_le(w, self.n.as_int() as u8).await?;
 
-            let e_if = match e {
-                SimpleEnum::ZERO => {
-                    // zero: u8
-                    let zero = crate::util::astd_read_u8_le(r).await?;
+        match &self.e {
+            EnumIfElseIfNestedSimpleEnum::ZERO {
+                zero,
+            } => {
+                // zero: u8
+                w.write_all(&zero.to_le_bytes()).await?;
 
-                    EnumIfElseIfNestedSimpleEnum::ZERO {
-                        zero,
-                    }
-                }
-                SimpleEnum::ONE => EnumIfElseIfNestedSimpleEnum::ONE,
-                SimpleEnum::TWO => EnumIfElseIfNestedSimpleEnum::TWO,
-            };
+            }
+            EnumIfElseIfNestedSimpleEnum::ONE => {}
+            EnumIfElseIfNestedSimpleEnum::TWO => {}
+        }
 
-            Ok(Self {
-                e: e_if,
-                n: n_if,
-            })
-        })
+        Ok(())
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // e: SimpleEnum
-            crate::util::astd_write_u8_le(w, self.e.as_int() as u8).await?;
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, EnumIfElseIfNestedError> {
+        // e: SimpleEnum
+        let e: SimpleEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
-            // n: NestedEnum
-            crate::util::astd_write_u8_le(w, self.n.as_int() as u8).await?;
+        // n: NestedEnum
+        let n: NestedEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
-            match &self.e {
+        let e_if = match e {
+            SimpleEnum::ZERO => {
+                // zero: u8
+                let zero = crate::util::astd_read_u8_le(r).await?;
+
                 EnumIfElseIfNestedSimpleEnum::ZERO {
                     zero,
-                } => {
-                    // zero: u8
-                    w.write_all(&zero.to_le_bytes()).await?;
-
                 }
-                EnumIfElseIfNestedSimpleEnum::ONE => {}
-                EnumIfElseIfNestedSimpleEnum::TWO => {}
             }
+            SimpleEnum::ONE => EnumIfElseIfNestedSimpleEnum::ONE,
+            SimpleEnum::TWO => EnumIfElseIfNestedSimpleEnum::TWO,
+        };
 
-            Ok(())
+        Ok(Self {
+            e: e_if,
+            n: n_if,
         })
+    }
+
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // e: SimpleEnum
+        crate::util::astd_write_u8_le(w, self.e.as_int() as u8).await?;
+
+        // n: NestedEnum
+        crate::util::astd_write_u8_le(w, self.n.as_int() as u8).await?;
+
+        match &self.e {
+            EnumIfElseIfNestedSimpleEnum::ZERO {
+                zero,
+            } => {
+                // zero: u8
+                w.write_all(&zero.to_le_bytes()).await?;
+
+            }
+            EnumIfElseIfNestedSimpleEnum::ONE => {}
+            EnumIfElseIfNestedSimpleEnum::TWO => {}
+        }
+
+        Ok(())
     }
 
 }

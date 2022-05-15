@@ -16,11 +16,8 @@ pub struct PackedGuidAndGuid {
     pub variable_guid: Vec<Guid>,
 }
 
-impl ReadableAndWritable for PackedGuidAndGuid {
-    type Error = std::io::Error;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl PackedGuidAndGuid {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // packed: PackedGuid
         let packed = Guid::read_packed(r)?;
 
@@ -69,8 +66,7 @@ impl ReadableAndWritable for PackedGuidAndGuid {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // packed: PackedGuid
         self.packed.write_packed(w)?;
 
@@ -106,226 +102,174 @@ impl ReadableAndWritable for PackedGuidAndGuid {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // packed: PackedGuid
-            let packed = Guid::tokio_read_packed(r).await?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // packed: PackedGuid
+        let packed = Guid::tokio_read_packed(r).await?;
 
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
 
-            // static_packed: PackedGuid[10]
-            let mut static_packed = Vec::with_capacity(10 as usize);
-            for i in 0..10 {
-                static_packed[i] = Guid::tokio_read_packed(r).await?;
-            }
-            let static_packed = static_packed.try_into().unwrap();
+        // static_packed: PackedGuid[10]
+        let mut static_packed = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            static_packed[i] = Guid::tokio_read_packed(r).await?;
+        }
+        let static_packed = static_packed.try_into().unwrap();
 
-            // static_guid: Guid[10]
-            let mut static_guid = Vec::with_capacity(10 as usize);
-            for i in 0..10 {
-                static_guid[i] = Guid::tokio_read(r).await?;
-            }
-            let static_guid = static_guid.try_into().unwrap();
+        // static_guid: Guid[10]
+        let mut static_guid = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            static_guid[i] = Guid::tokio_read(r).await?;
+        }
+        let static_guid = static_guid.try_into().unwrap();
 
-            // basic1: u8
-            let basic1 = crate::util::tokio_read_u8_le(r).await?;
+        // basic1: u8
+        let basic1 = crate::util::tokio_read_u8_le(r).await?;
 
-            // basic2: u8
-            let basic2 = crate::util::tokio_read_u8_le(r).await?;
+        // basic2: u8
+        let basic2 = crate::util::tokio_read_u8_le(r).await?;
 
-            // variable_packed: PackedGuid[basic1]
-            let mut variable_packed = Vec::with_capacity(basic1 as usize);
-            for i in 0..basic1 {
-                variable_packed.push(Guid::tokio_read_packed(r).await?);
-            }
+        // variable_packed: PackedGuid[basic1]
+        let mut variable_packed = Vec::with_capacity(basic1 as usize);
+        for i in 0..basic1 {
+            variable_packed.push(Guid::tokio_read_packed(r).await?);
+        }
 
-            // variable_guid: Guid[basic2]
-            let mut variable_guid = Vec::with_capacity(basic2 as usize);
-            for i in 0..basic2 {
-                variable_guid.push(Guid::tokio_read(r).await?);
-            }
+        // variable_guid: Guid[basic2]
+        let mut variable_guid = Vec::with_capacity(basic2 as usize);
+        for i in 0..basic2 {
+            variable_guid.push(Guid::tokio_read(r).await?);
+        }
 
-            Ok(Self {
-                packed,
-                guid,
-                static_packed,
-                static_guid,
-                variable_packed,
-                variable_guid,
-            })
+        Ok(Self {
+            packed,
+            guid,
+            static_packed,
+            static_guid,
+            variable_packed,
+            variable_guid,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // packed: PackedGuid
-            self.packed.tokio_write_packed(w).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // packed: PackedGuid
+        self.packed.tokio_write_packed(w).await?;
 
-            // guid: Guid
-            self.guid.tokio_write(w).await?;
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
 
-            // static_packed: PackedGuid[10]
-            for i in self.static_packed.iter() {
-                i.tokio_write_packed(w).await?;
-            }
+        // static_packed: PackedGuid[10]
+        for i in self.static_packed.iter() {
+            i.tokio_write_packed(w).await?;
+        }
 
-            // static_guid: Guid[10]
-            for i in self.static_guid.iter() {
-                i.tokio_write(w).await?;
-            }
+        // static_guid: Guid[10]
+        for i in self.static_guid.iter() {
+            i.tokio_write(w).await?;
+        }
 
-            // basic1: u8
-            w.write_all(&(self.variable_packed.len() as u8).to_le_bytes()).await?;
+        // basic1: u8
+        w.write_all(&(self.variable_packed.len() as u8).to_le_bytes()).await?;
 
-            // basic2: u8
-            w.write_all(&(self.variable_guid.len() as u8).to_le_bytes()).await?;
+        // basic2: u8
+        w.write_all(&(self.variable_guid.len() as u8).to_le_bytes()).await?;
 
-            // variable_packed: PackedGuid[basic1]
-            for i in self.variable_packed.iter() {
-                i.tokio_write_packed(w).await?;
-            }
+        // variable_packed: PackedGuid[basic1]
+        for i in self.variable_packed.iter() {
+            i.tokio_write_packed(w).await?;
+        }
 
-            // variable_guid: Guid[basic2]
-            for i in self.variable_guid.iter() {
-                i.tokio_write(w).await?;
-            }
+        // variable_guid: Guid[basic2]
+        for i in self.variable_guid.iter() {
+            i.tokio_write(w).await?;
+        }
 
-            Ok(())
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // packed: PackedGuid
+        let packed = Guid::astd_read_packed(r).await?;
+
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // static_packed: PackedGuid[10]
+        let mut static_packed = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            static_packed[i] = Guid::astd_read_packed(r).await?;
+        }
+        let static_packed = static_packed.try_into().unwrap();
+
+        // static_guid: Guid[10]
+        let mut static_guid = Vec::with_capacity(10 as usize);
+        for i in 0..10 {
+            static_guid[i] = Guid::astd_read(r).await?;
+        }
+        let static_guid = static_guid.try_into().unwrap();
+
+        // basic1: u8
+        let basic1 = crate::util::astd_read_u8_le(r).await?;
+
+        // basic2: u8
+        let basic2 = crate::util::astd_read_u8_le(r).await?;
+
+        // variable_packed: PackedGuid[basic1]
+        let mut variable_packed = Vec::with_capacity(basic1 as usize);
+        for i in 0..basic1 {
+            variable_packed.push(Guid::astd_read_packed(r).await?);
+        }
+
+        // variable_guid: Guid[basic2]
+        let mut variable_guid = Vec::with_capacity(basic2 as usize);
+        for i in 0..basic2 {
+            variable_guid.push(Guid::astd_read(r).await?);
+        }
+
+        Ok(Self {
+            packed,
+            guid,
+            static_packed,
+            static_guid,
+            variable_packed,
+            variable_guid,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // packed: PackedGuid
-            let packed = Guid::astd_read_packed(r).await?;
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // packed: PackedGuid
+        self.packed.astd_write_packed(w).await?;
 
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
+        // guid: Guid
+        self.guid.astd_write(w).await?;
 
-            // static_packed: PackedGuid[10]
-            let mut static_packed = Vec::with_capacity(10 as usize);
-            for i in 0..10 {
-                static_packed[i] = Guid::astd_read_packed(r).await?;
-            }
-            let static_packed = static_packed.try_into().unwrap();
+        // static_packed: PackedGuid[10]
+        for i in self.static_packed.iter() {
+            i.astd_write_packed(w).await?;
+        }
 
-            // static_guid: Guid[10]
-            let mut static_guid = Vec::with_capacity(10 as usize);
-            for i in 0..10 {
-                static_guid[i] = Guid::astd_read(r).await?;
-            }
-            let static_guid = static_guid.try_into().unwrap();
+        // static_guid: Guid[10]
+        for i in self.static_guid.iter() {
+            i.astd_write(w).await?;
+        }
 
-            // basic1: u8
-            let basic1 = crate::util::astd_read_u8_le(r).await?;
+        // basic1: u8
+        w.write_all(&(self.variable_packed.len() as u8).to_le_bytes()).await?;
 
-            // basic2: u8
-            let basic2 = crate::util::astd_read_u8_le(r).await?;
+        // basic2: u8
+        w.write_all(&(self.variable_guid.len() as u8).to_le_bytes()).await?;
 
-            // variable_packed: PackedGuid[basic1]
-            let mut variable_packed = Vec::with_capacity(basic1 as usize);
-            for i in 0..basic1 {
-                variable_packed.push(Guid::astd_read_packed(r).await?);
-            }
+        // variable_packed: PackedGuid[basic1]
+        for i in self.variable_packed.iter() {
+            i.astd_write_packed(w).await?;
+        }
 
-            // variable_guid: Guid[basic2]
-            let mut variable_guid = Vec::with_capacity(basic2 as usize);
-            for i in 0..basic2 {
-                variable_guid.push(Guid::astd_read(r).await?);
-            }
+        // variable_guid: Guid[basic2]
+        for i in self.variable_guid.iter() {
+            i.astd_write(w).await?;
+        }
 
-            Ok(Self {
-                packed,
-                guid,
-                static_packed,
-                static_guid,
-                variable_packed,
-                variable_guid,
-            })
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // packed: PackedGuid
-            self.packed.astd_write_packed(w).await?;
-
-            // guid: Guid
-            self.guid.astd_write(w).await?;
-
-            // static_packed: PackedGuid[10]
-            for i in self.static_packed.iter() {
-                i.astd_write_packed(w).await?;
-            }
-
-            // static_guid: Guid[10]
-            for i in self.static_guid.iter() {
-                i.astd_write(w).await?;
-            }
-
-            // basic1: u8
-            w.write_all(&(self.variable_packed.len() as u8).to_le_bytes()).await?;
-
-            // basic2: u8
-            w.write_all(&(self.variable_guid.len() as u8).to_le_bytes()).await?;
-
-            // variable_packed: PackedGuid[basic1]
-            for i in self.variable_packed.iter() {
-                i.astd_write_packed(w).await?;
-            }
-
-            // variable_guid: Guid[basic2]
-            for i in self.variable_guid.iter() {
-                i.astd_write(w).await?;
-            }
-
-            Ok(())
-        })
+        Ok(())
     }
 
 }

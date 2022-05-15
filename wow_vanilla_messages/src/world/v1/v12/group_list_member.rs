@@ -13,11 +13,8 @@ pub struct GroupListMember {
     pub is_online: u8,
 }
 
-impl ReadableAndWritable for GroupListMember {
-    type Error = GroupListMemberError;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl GroupListMember {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, GroupListMemberError> {
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
         let name = String::from_utf8(name)?;
@@ -35,8 +32,7 @@ impl ReadableAndWritable for GroupListMember {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes())?;
         // Null terminator
@@ -51,122 +47,70 @@ impl ReadableAndWritable for GroupListMember {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // name: CString
-            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, GroupListMemberError> {
+        // name: CString
+        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
 
-            // guid: Guid
-            let guid = Guid::tokio_read(r).await?;
+        // guid: Guid
+        let guid = Guid::tokio_read(r).await?;
 
-            // is_online: u8
-            let is_online = crate::util::tokio_read_u8_le(r).await?;
+        // is_online: u8
+        let is_online = crate::util::tokio_read_u8_le(r).await?;
 
-            Ok(Self {
-                name,
-                guid,
-                is_online,
-            })
+        Ok(Self {
+            name,
+            guid,
+            is_online,
         })
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // guid: Guid
-            self.guid.tokio_write(w).await?;
+        // guid: Guid
+        self.guid.tokio_write(w).await?;
 
-            // is_online: u8
-            w.write_all(&self.is_online.to_le_bytes()).await?;
+        // is_online: u8
+        w.write_all(&self.is_online.to_le_bytes()).await?;
 
-            Ok(())
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, GroupListMemberError> {
+        // name: CString
+        let name = crate::util::astd_read_c_string_to_vec(r).await?;
+        let name = String::from_utf8(name)?;
+
+        // guid: Guid
+        let guid = Guid::astd_read(r).await?;
+
+        // is_online: u8
+        let is_online = crate::util::astd_read_u8_le(r).await?;
+
+        Ok(Self {
+            name,
+            guid,
+            is_online,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // name: CString
-            let name = crate::util::astd_read_c_string_to_vec(r).await?;
-            let name = String::from_utf8(name)?;
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // name: CString
+        w.write_all(self.name.as_bytes()).await?;
+        // Null terminator
+        w.write_all(&[0]).await?;
 
-            // guid: Guid
-            let guid = Guid::astd_read(r).await?;
+        // guid: Guid
+        self.guid.astd_write(w).await?;
 
-            // is_online: u8
-            let is_online = crate::util::astd_read_u8_le(r).await?;
+        // is_online: u8
+        w.write_all(&self.is_online.to_le_bytes()).await?;
 
-            Ok(Self {
-                name,
-                guid,
-                is_online,
-            })
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // guid: Guid
-            self.guid.astd_write(w).await?;
-
-            // is_online: u8
-            w.write_all(&self.is_online.to_le_bytes()).await?;
-
-            Ok(())
-        })
+        Ok(())
     }
 
 }

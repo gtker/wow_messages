@@ -12,11 +12,8 @@ pub struct FlagIfElseIf {
     pub flags: FlagIfElseIfUpdateFlag,
 }
 
-impl ReadableAndWritable for FlagIfElseIf {
-    type Error = std::io::Error;
-
-    #[cfg(feature = "sync")]
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
+impl FlagIfElseIf {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // flags: UpdateFlag
         let flags = UpdateFlag::new(crate::util::read_u8_le(r)?);
 
@@ -88,8 +85,7 @@ impl ReadableAndWritable for FlagIfElseIf {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // flags: UpdateFlag
         crate::util::write_u8_le(w, self.flags.as_int() as u8)?;
 
@@ -134,290 +130,238 @@ impl ReadableAndWritable for FlagIfElseIf {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // flags: UpdateFlag
-            let flags = UpdateFlag::new(crate::util::tokio_read_u8_le(r).await?);
+    pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // flags: UpdateFlag
+        let flags = UpdateFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
-            let flags_ONE_IF = if flags.is_ONE_IF() {
-                // b_if: u8
-                let b_if = crate::util::tokio_read_u8_le(r).await?;
+        let flags_ONE_IF = if flags.is_ONE_IF() {
+            // b_if: u8
+            let b_if = crate::util::tokio_read_u8_le(r).await?;
 
-                Some(FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
-                    b_if,
-                })
-            }
-            else if flags.is_TWO_ELSEIF() {
-                // s: SimpleFlag
-                let s = SimpleFlag::new(crate::util::tokio_read_u8_le(r).await?);
-
-                let s_ONE = if s.is_ONE() {
-                    // if_one: u8
-                    let if_one = crate::util::tokio_read_u8_le(r).await?;
-
-                    Some(FlagIfElseIfSimpleFlagONE {
-                        if_one,
-                    })
-                }
-                else {
-                    None
-                };
-
-                let s = FlagIfElseIfSimpleFlag {
-                    inner: s.as_int(),
-                    one: s_ONE,
-                };
-
-                Some(FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
-                    s,
-                })
-            }
-            else if flags.is_FOUR_ELSEIF() {
-                // elseif2: u8
-                let elseif2 = crate::util::tokio_read_u8_le(r).await?;
-
-                Some(FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
-                    elseif2,
-                })
-            }
-            else {
-                None
-            };
-
-            let flags_EIGHT_IF = if flags.is_EIGHT_IF() {
-                // last_if: u8
-                let last_if = crate::util::tokio_read_u8_le(r).await?;
-
-                Some(FlagIfElseIfUpdateFlagEIGHT_IF {
-                    last_if,
-                })
-            }
-            else {
-                None
-            };
-
-            let flags = FlagIfElseIfUpdateFlag {
-                inner: flags.as_int(),
-                one_if: flags_ONE_IF,
-                eight_if: flags_EIGHT_IF,
-            };
-
-            Ok(Self {
-                flags,
+            Some(FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
+                b_if,
             })
-        })
-    }
+        }
+        else if flags.is_TWO_ELSEIF() {
+            // s: SimpleFlag
+            let s = SimpleFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
-    #[cfg(feature = "async_tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // flags: UpdateFlag
-            crate::util::tokio_write_u8_le(w, self.flags.as_int() as u8).await?;
+            let s_ONE = if s.is_ONE() {
+                // if_one: u8
+                let if_one = crate::util::tokio_read_u8_le(r).await?;
 
-            if let Some(if_statement) = &self.flags.one_if {
-                match if_statement {
-                    FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
-                        b_if,
-                    } => {
-                        // b_if: u8
-                        w.write_all(&b_if.to_le_bytes()).await?;
-
-                    }
-                    FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
-                        s,
-                    } => {
-                        // s: SimpleFlag
-                        crate::util::tokio_write_u8_le(w, s.as_int() as u8).await?;
-
-                        if let Some(if_statement) = &s.one {
-                            // if_one: u8
-                            w.write_all(&if_statement.if_one.to_le_bytes()).await?;
-
-                        }
-
-                    }
-                    FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
-                        elseif2,
-                    } => {
-                        // elseif2: u8
-                        w.write_all(&elseif2.to_le_bytes()).await?;
-
-                    }
-                }
-            }
-
-            if let Some(if_statement) = &self.flags.eight_if {
-                // last_if: u8
-                w.write_all(&if_statement.last_if.to_le_bytes()).await?;
-
-            }
-
-            Ok(())
-        })
-    }
-
-    #[cfg(feature = "async_std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + ReadExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // flags: UpdateFlag
-            let flags = UpdateFlag::new(crate::util::astd_read_u8_le(r).await?);
-
-            let flags_ONE_IF = if flags.is_ONE_IF() {
-                // b_if: u8
-                let b_if = crate::util::astd_read_u8_le(r).await?;
-
-                Some(FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
-                    b_if,
-                })
-            }
-            else if flags.is_TWO_ELSEIF() {
-                // s: SimpleFlag
-                let s = SimpleFlag::new(crate::util::astd_read_u8_le(r).await?);
-
-                let s_ONE = if s.is_ONE() {
-                    // if_one: u8
-                    let if_one = crate::util::astd_read_u8_le(r).await?;
-
-                    Some(FlagIfElseIfSimpleFlagONE {
-                        if_one,
-                    })
-                }
-                else {
-                    None
-                };
-
-                let s = FlagIfElseIfSimpleFlag {
-                    inner: s.as_int(),
-                    one: s_ONE,
-                };
-
-                Some(FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
-                    s,
-                })
-            }
-            else if flags.is_FOUR_ELSEIF() {
-                // elseif2: u8
-                let elseif2 = crate::util::astd_read_u8_le(r).await?;
-
-                Some(FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
-                    elseif2,
+                Some(FlagIfElseIfSimpleFlagONE {
+                    if_one,
                 })
             }
             else {
                 None
             };
 
-            let flags_EIGHT_IF = if flags.is_EIGHT_IF() {
-                // last_if: u8
-                let last_if = crate::util::astd_read_u8_le(r).await?;
-
-                Some(FlagIfElseIfUpdateFlagEIGHT_IF {
-                    last_if,
-                })
-            }
-            else {
-                None
+            let s = FlagIfElseIfSimpleFlag {
+                inner: s.as_int(),
+                one: s_ONE,
             };
 
-            let flags = FlagIfElseIfUpdateFlag {
-                inner: flags.as_int(),
-                one_if: flags_ONE_IF,
-                eight_if: flags_EIGHT_IF,
-            };
-
-            Ok(Self {
-                flags,
+            Some(FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
+                s,
             })
+        }
+        else if flags.is_FOUR_ELSEIF() {
+            // elseif2: u8
+            let elseif2 = crate::util::tokio_read_u8_le(r).await?;
+
+            Some(FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
+                elseif2,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_EIGHT_IF = if flags.is_EIGHT_IF() {
+            // last_if: u8
+            let last_if = crate::util::tokio_read_u8_le(r).await?;
+
+            Some(FlagIfElseIfUpdateFlagEIGHT_IF {
+                last_if,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags = FlagIfElseIfUpdateFlag {
+            inner: flags.as_int(),
+            one_if: flags_ONE_IF,
+            eight_if: flags_EIGHT_IF,
+        };
+
+        Ok(Self {
+            flags,
         })
     }
 
-    #[cfg(feature = "async_std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
-        &'life0 self,
-        w: &'life1 mut W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        'life1: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // flags: UpdateFlag
-            crate::util::astd_write_u8_le(w, self.flags.as_int() as u8).await?;
+    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // flags: UpdateFlag
+        crate::util::tokio_write_u8_le(w, self.flags.as_int() as u8).await?;
 
-            if let Some(if_statement) = &self.flags.one_if {
-                match if_statement {
-                    FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
-                        b_if,
-                    } => {
-                        // b_if: u8
-                        w.write_all(&b_if.to_le_bytes()).await?;
+        if let Some(if_statement) = &self.flags.one_if {
+            match if_statement {
+                FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
+                    b_if,
+                } => {
+                    // b_if: u8
+                    w.write_all(&b_if.to_le_bytes()).await?;
+
+                }
+                FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
+                    s,
+                } => {
+                    // s: SimpleFlag
+                    crate::util::tokio_write_u8_le(w, s.as_int() as u8).await?;
+
+                    if let Some(if_statement) = &s.one {
+                        // if_one: u8
+                        w.write_all(&if_statement.if_one.to_le_bytes()).await?;
 
                     }
-                    FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
-                        s,
-                    } => {
-                        // s: SimpleFlag
-                        crate::util::astd_write_u8_le(w, s.as_int() as u8).await?;
 
-                        if let Some(if_statement) = &s.one {
-                            // if_one: u8
-                            w.write_all(&if_statement.if_one.to_le_bytes()).await?;
+                }
+                FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
+                    elseif2,
+                } => {
+                    // elseif2: u8
+                    w.write_all(&elseif2.to_le_bytes()).await?;
 
-                        }
-
-                    }
-                    FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
-                        elseif2,
-                    } => {
-                        // elseif2: u8
-                        w.write_all(&elseif2.to_le_bytes()).await?;
-
-                    }
                 }
             }
+        }
 
-            if let Some(if_statement) = &self.flags.eight_if {
-                // last_if: u8
-                w.write_all(&if_statement.last_if.to_le_bytes()).await?;
+        if let Some(if_statement) = &self.flags.eight_if {
+            // last_if: u8
+            w.write_all(&if_statement.last_if.to_le_bytes()).await?;
 
+        }
+
+        Ok(())
+    }
+
+    pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+        // flags: UpdateFlag
+        let flags = UpdateFlag::new(crate::util::astd_read_u8_le(r).await?);
+
+        let flags_ONE_IF = if flags.is_ONE_IF() {
+            // b_if: u8
+            let b_if = crate::util::astd_read_u8_le(r).await?;
+
+            Some(FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
+                b_if,
+            })
+        }
+        else if flags.is_TWO_ELSEIF() {
+            // s: SimpleFlag
+            let s = SimpleFlag::new(crate::util::astd_read_u8_le(r).await?);
+
+            let s_ONE = if s.is_ONE() {
+                // if_one: u8
+                let if_one = crate::util::astd_read_u8_le(r).await?;
+
+                Some(FlagIfElseIfSimpleFlagONE {
+                    if_one,
+                })
             }
+            else {
+                None
+            };
 
-            Ok(())
+            let s = FlagIfElseIfSimpleFlag {
+                inner: s.as_int(),
+                one: s_ONE,
+            };
+
+            Some(FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
+                s,
+            })
+        }
+        else if flags.is_FOUR_ELSEIF() {
+            // elseif2: u8
+            let elseif2 = crate::util::astd_read_u8_le(r).await?;
+
+            Some(FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
+                elseif2,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_EIGHT_IF = if flags.is_EIGHT_IF() {
+            // last_if: u8
+            let last_if = crate::util::astd_read_u8_le(r).await?;
+
+            Some(FlagIfElseIfUpdateFlagEIGHT_IF {
+                last_if,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags = FlagIfElseIfUpdateFlag {
+            inner: flags.as_int(),
+            one_if: flags_ONE_IF,
+            eight_if: flags_EIGHT_IF,
+        };
+
+        Ok(Self {
+            flags,
         })
+    }
+
+    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
+        // flags: UpdateFlag
+        crate::util::astd_write_u8_le(w, self.flags.as_int() as u8).await?;
+
+        if let Some(if_statement) = &self.flags.one_if {
+            match if_statement {
+                FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
+                    b_if,
+                } => {
+                    // b_if: u8
+                    w.write_all(&b_if.to_le_bytes()).await?;
+
+                }
+                FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
+                    s,
+                } => {
+                    // s: SimpleFlag
+                    crate::util::astd_write_u8_le(w, s.as_int() as u8).await?;
+
+                    if let Some(if_statement) = &s.one {
+                        // if_one: u8
+                        w.write_all(&if_statement.if_one.to_le_bytes()).await?;
+
+                    }
+
+                }
+                FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
+                    elseif2,
+                } => {
+                    // elseif2: u8
+                    w.write_all(&elseif2.to_le_bytes()).await?;
+
+                }
+            }
+        }
+
+        if let Some(if_statement) = &self.flags.eight_if {
+            // last_if: u8
+            w.write_all(&if_statement.last_if.to_le_bytes()).await?;
+
+        }
+
+        Ok(())
     }
 
 }
