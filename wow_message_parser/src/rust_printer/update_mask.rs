@@ -55,7 +55,6 @@ enum Type {
     GameObject,
     DynamicObject,
     Corpse,
-    PADDING,
 }
 
 impl Display for Type {
@@ -69,7 +68,6 @@ impl Display for Type {
             Type::GameObject => "gameobject",
             Type::DynamicObject => "dynamicobject",
             Type::Corpse => "corpse",
-            Type::PADDING => "PADDING",
         })
     }
 }
@@ -102,24 +100,13 @@ impl MemberType {
             uf,
         }
     }
-
-    const fn pad(offset: i32, size: i32) -> Self {
-        Self {
-            ty: Type::PADDING,
-            name: "PADDING",
-            offset,
-            size,
-            uf: UfType::Int,
-        }
-    }
 }
 
-const FIELDS: [MemberType; 316] = [
+const FIELDS: [MemberType; 291] = [
     MemberType::new(Type::Object, "GUID", 0x0, 2, UfType::Guid),
     MemberType::new(Type::Object, "TYPE", 0x2, 1, UfType::Int),
     MemberType::new(Type::Object, "ENTRY", 0x3, 1, UfType::Int),
     MemberType::new(Type::Object, "SCALE_X", 0x4, 1, UfType::Float),
-    MemberType::pad(0x5, 1),
     MemberType::new(Type::Item, "OWNER", 0x6, 2, UfType::Guid),
     MemberType::new(Type::Item, "CONTAINED", 0x8, 2, UfType::Guid),
     MemberType::new(Type::Item, "CREATOR", 0xA, 2, UfType::Guid),
@@ -135,7 +122,6 @@ const FIELDS: [MemberType; 316] = [
     MemberType::new(Type::Item, "DURABILITY", 0x2E, 1, UfType::Int),
     MemberType::new(Type::Item, "MAXDURABILITY", 0x2F, 1, UfType::Int),
     MemberType::new(Type::Container, "NUM_SLOTS", 0x30, 1, UfType::Int),
-    MemberType::pad(0x31, 1),
     MemberType::new(Type::Container, "SLOT_1", 0x32, 72, UfType::Guid),
     MemberType::new(Type::Unit, "CHARM", 0x6, 2, UfType::Guid),
     MemberType::new(Type::Unit, "SUMMON", 0x8, 2, UfType::Guid),
@@ -234,7 +220,6 @@ const FIELDS: [MemberType; 316] = [
     MemberType::new(Type::Unit, "MAXRANGEDDAMAGE", 0xAC, 1, UfType::Float),
     MemberType::new(Type::Unit, "POWER_COST_MODIFIER", 0xAD, 7, UfType::Int),
     MemberType::new(Type::Unit, "POWER_COST_MULTIPLIER", 0xB4, 7, UfType::Float),
-    MemberType::pad(0xBB, 1),
     MemberType::new(Type::Player, "DUEL_ARBITER", 0xBC, 2, UfType::Guid),
     MemberType::new(Type::Player, "FLAGS", 0xBE, 1, UfType::Int),
     MemberType::new(Type::Player, "GUILDID", 0xBF, 1, UfType::Int),
@@ -299,7 +284,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x10D, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_2_CREATOR",
@@ -315,7 +299,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x119, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_3_CREATOR",
@@ -331,7 +314,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x125, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_4_CREATOR",
@@ -347,7 +329,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x131, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_5_CREATOR",
@@ -363,7 +344,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x13D, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_6_CREATOR",
@@ -379,7 +359,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x149, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_7_CREATOR",
@@ -395,7 +374,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x155, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_8_CREATOR",
@@ -411,7 +389,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x161, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_9_CREATOR",
@@ -427,7 +404,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x16D, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_10_CREATOR",
@@ -443,7 +419,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x179, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_11_CREATOR",
@@ -459,7 +434,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x185, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_12_CREATOR",
@@ -475,7 +449,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x191, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_13_CREATOR",
@@ -491,7 +464,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x19D, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_14_CREATOR",
@@ -507,7 +479,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x1A9, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_15_CREATOR",
@@ -523,7 +494,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x1B5, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_16_CREATOR",
@@ -539,7 +509,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x1C1, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_17_CREATOR",
@@ -555,7 +524,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x1CD, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_18_CREATOR",
@@ -571,7 +539,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x1D9, 1),
     MemberType::new(
         Type::Player,
         "VISIBLE_ITEM_19_CREATOR",
@@ -587,7 +554,6 @@ const FIELDS: [MemberType; 316] = [
         1,
         UfType::TwoShort,
     ),
-    MemberType::pad(0x1E5, 1),
     MemberType::new(Type::Player, "FIELD_INV_SLOT_HEAD", 0x1E6, 46, UfType::Guid),
     MemberType::new(Type::Player, "FIELD_PACK_SLOT_1", 0x214, 32, UfType::Guid),
     MemberType::new(Type::Player, "FIELD_BANK_SLOT_1", 0x234, 48, UfType::Guid),
@@ -792,7 +758,6 @@ const FIELDS: [MemberType; 316] = [
     MemberType::new(Type::GameObject, "LEVEL", 0x16, 1, UfType::Int),
     MemberType::new(Type::GameObject, "ARTKIT", 0x17, 1, UfType::Int),
     MemberType::new(Type::GameObject, "ANIMPROGRESS", 0x18, 1, UfType::Int),
-    MemberType::pad(0x19, 1),
     MemberType::new(Type::DynamicObject, "CASTER", 0x6, 2, UfType::Guid),
     MemberType::new(Type::DynamicObject, "BYTES", 0x8, 1, UfType::Bytes),
     MemberType::new(Type::DynamicObject, "SPELLID", 0x9, 1, UfType::Int),
@@ -801,7 +766,6 @@ const FIELDS: [MemberType; 316] = [
     MemberType::new(Type::DynamicObject, "POS_Y", 0xC, 1, UfType::Float),
     MemberType::new(Type::DynamicObject, "POS_Z", 0xD, 1, UfType::Float),
     MemberType::new(Type::DynamicObject, "FACING", 0xE, 1, UfType::Float),
-    MemberType::pad(0xF, 1),
     MemberType::new(Type::Corpse, "OWNER", 0x6, 2, UfType::Guid),
     MemberType::new(Type::Corpse, "FACING", 0x8, 1, UfType::Float),
     MemberType::new(Type::Corpse, "POS_X", 0x9, 1, UfType::Float),
@@ -814,5 +778,4 @@ const FIELDS: [MemberType; 316] = [
     MemberType::new(Type::Corpse, "GUILD", 0x22, 1, UfType::Int),
     MemberType::new(Type::Corpse, "FLAGS", 0x23, 1, UfType::Int),
     MemberType::new(Type::Corpse, "DYNAMIC_FLAGS", 0x24, 1, UfType::Int),
-    MemberType::pad(0x25, 1),
 ];
