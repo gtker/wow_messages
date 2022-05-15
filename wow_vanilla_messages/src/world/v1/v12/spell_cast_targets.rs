@@ -1511,6 +1511,10 @@ impl SpellCastTargetsSpellCastTargetFlags {
         self.clone()
     }
 
+    pub(crate) const fn as_int(&self) -> u16 {
+        self.inner
+    }
+
 }
 impl VariableSized for SpellCastTargetsSpellCastTargetFlags {
     fn size(&self) -> usize {

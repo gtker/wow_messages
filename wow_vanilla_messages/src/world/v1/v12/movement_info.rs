@@ -1244,6 +1244,10 @@ impl MovementInfoMovementFlags {
         self.clone()
     }
 
+    pub(crate) const fn as_int(&self) -> u32 {
+        self.inner
+    }
+
 }
 impl VariableSized for MovementInfoMovementFlags {
     fn size(&self) -> usize {

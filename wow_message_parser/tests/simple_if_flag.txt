@@ -304,6 +304,10 @@ impl SimpleIfFlagSimpleFlag {
         self.clone()
     }
 
+    pub(crate) const fn as_int(&self) -> u8 {
+        self.inner
+    }
+
 }
 impl VariableSized for SimpleIfFlagSimpleFlag {
     fn size(&self) -> usize {

@@ -2320,6 +2320,10 @@ impl MovementBlockSplineFlag {
         self.clone()
     }
 
+    pub(crate) const fn as_int(&self) -> u32 {
+        self.inner
+    }
+
 }
 impl VariableSized for MovementBlockSplineFlag {
     fn size(&self) -> usize {
@@ -3067,6 +3071,10 @@ impl MovementBlockMovementFlags {
         self.clone()
     }
 
+    pub(crate) const fn as_int(&self) -> u32 {
+        self.inner
+    }
+
 }
 impl VariableSized for MovementBlockMovementFlags {
     fn size(&self) -> usize {
@@ -3555,6 +3563,10 @@ impl MovementBlockUpdateFlag {
         // TODO: Cloning like this is not conductive to good performance but it is
         // temporarily necessary due to test syntax
         self.clone()
+    }
+
+    pub(crate) const fn as_int(&self) -> u8 {
+        self.inner
     }
 
 }

@@ -4,24 +4,6 @@ use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 
-fn print_as_int(s: &mut Writer, rd: &RustDefiner) {
-    s.funcn_const("as_int(&self)", rd.int_ty().rust_str(), |s| {
-        s.body("match self", |s| {
-            for enumerator in rd.enumerators() {
-                s.wln(format!(
-                    "Self::{enumerator}{extras} => {value},",
-                    enumerator = enumerator.name(),
-                    value = enumerator.value().int(),
-                    extras = match enumerator.has_members_in_struct() {
-                        true => " { .. }",
-                        false => "",
-                    },
-                ));
-            }
-        });
-    });
-}
-
 pub fn print_new_types(s: &mut Writer, e: &Container) {
     for rd in e.rust_object().get_rust_definers() {
         match rd.definer_type() {
@@ -33,11 +15,11 @@ pub fn print_new_types(s: &mut Writer, e: &Container) {
 
                     s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
                         print_write_for_new_enum(s, &rd);
-                        print_as_int(s, &rd);
+                        print_enum_as_int(s, &rd);
                     });
                 } else {
                     s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
-                        print_as_int(s, &rd);
+                        print_enum_as_int(s, &rd);
                     });
                 }
                 print_size_for_new_enum(s, &rd);
@@ -48,6 +30,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container) {
                 s.body(format!("impl {name}", name = rd.ty_name()), |s| {
                     print_write_for_new_flag(s, &rd);
                     print_constructors_for_new_flag(s, &rd);
+                    print_flag_as_int(s, &rd);
                 });
                 print_size_for_new_flag(s, &rd);
 
@@ -55,6 +38,12 @@ pub fn print_new_types(s: &mut Writer, e: &Container) {
             }
         }
     }
+}
+
+fn print_flag_as_int(s: &mut Writer, rd: &RustDefiner) {
+    s.funcn_const("as_int(&self)", rd.int_ty().rust_str(), |s| {
+        s.wln("self.inner");
+    });
 }
 
 fn print_new_flag_declaration(s: &mut Writer, rd: &RustDefiner) {
@@ -462,4 +451,22 @@ fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
             }
         },
     );
+}
+
+fn print_enum_as_int(s: &mut Writer, rd: &RustDefiner) {
+    s.funcn_const("as_int(&self)", rd.int_ty().rust_str(), |s| {
+        s.body("match self", |s| {
+            for enumerator in rd.enumerators() {
+                s.wln(format!(
+                    "Self::{enumerator}{extras} => {value},",
+                    enumerator = enumerator.name(),
+                    value = enumerator.value().int(),
+                    extras = match enumerator.has_members_in_struct() {
+                        true => " { .. }",
+                        false => "",
+                    },
+                ));
+            }
+        });
+    });
 }

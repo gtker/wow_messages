@@ -1014,6 +1014,10 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
         self.clone()
     }
 
+    pub(crate) const fn as_int(&self) -> u8 {
+        self.inner
+    }
+
 }
 impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
     fn size(&self) -> usize {

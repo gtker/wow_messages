@@ -2308,6 +2308,10 @@ impl SMSG_PARTY_MEMBER_STATSGroupUpdateFlags {
         self.clone()
     }
 
+    pub(crate) const fn as_int(&self) -> u32 {
+        self.inner
+    }
+
 }
 impl VariableSized for SMSG_PARTY_MEMBER_STATSGroupUpdateFlags {
     fn size(&self) -> usize {

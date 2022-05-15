@@ -540,6 +540,10 @@ impl FlagIfElseIfSimpleFlag {
         self.clone()
     }
 
+    pub(crate) const fn as_int(&self) -> u8 {
+        self.inner
+    }
+
 }
 impl VariableSized for FlagIfElseIfSimpleFlag {
     fn size(&self) -> usize {
@@ -742,6 +746,10 @@ impl FlagIfElseIfUpdateFlag {
         // TODO: Cloning like this is not conductive to good performance but it is
         // temporarily necessary due to test syntax
         self.clone()
+    }
+
+    pub(crate) const fn as_int(&self) -> u8 {
+        self.inner
     }
 
 }

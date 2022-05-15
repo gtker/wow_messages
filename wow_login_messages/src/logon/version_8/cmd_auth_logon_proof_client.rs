@@ -753,6 +753,10 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         self.clone()
     }
 
+    pub(crate) const fn as_int(&self) -> u8 {
+        self.inner
+    }
+
 }
 impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     fn size(&self) -> usize {

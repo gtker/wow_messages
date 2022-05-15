@@ -646,6 +646,10 @@ impl RealmRealmFlag {
         self.clone()
     }
 
+    pub(crate) const fn as_int(&self) -> u8 {
+        self.inner
+    }
+
 }
 impl VariableSized for RealmRealmFlag {
     fn size(&self) -> usize {

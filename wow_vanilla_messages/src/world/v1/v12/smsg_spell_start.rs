@@ -649,6 +649,10 @@ impl SMSG_SPELL_STARTCastFlags {
         self.clone()
     }
 
+    pub(crate) const fn as_int(&self) -> u16 {
+        self.inner
+    }
+
 }
 impl VariableSized for SMSG_SPELL_STARTCastFlags {
     fn size(&self) -> usize {
