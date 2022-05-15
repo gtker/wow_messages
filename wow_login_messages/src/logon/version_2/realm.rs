@@ -30,7 +30,7 @@ impl ReadableAndWritable for Realm {
         let realm_type = RealmType::read(r)?;
 
         // flag: RealmFlag
-        let flag = RealmFlag::read(r)?;
+        let flag = RealmFlag::new(crate::util::read_u8_le(r)?);
 
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
@@ -113,7 +113,7 @@ impl ReadableAndWritable for Realm {
             let realm_type = RealmType::tokio_read(r).await?;
 
             // flag: RealmFlag
-            let flag = RealmFlag::tokio_read(r).await?;
+            let flag = RealmFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
             // name: CString
             let name = crate::util::tokio_read_c_string_to_vec(r).await?;
@@ -210,7 +210,7 @@ impl ReadableAndWritable for Realm {
             let realm_type = RealmType::astd_read(r).await?;
 
             // flag: RealmFlag
-            let flag = RealmFlag::astd_read(r).await?;
+            let flag = RealmFlag::new(crate::util::astd_read_u8_le(r).await?);
 
             // name: CString
             let name = crate::util::astd_read_c_string_to_vec(r).await?;

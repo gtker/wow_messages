@@ -47,7 +47,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         }
 
         // security_flag: SecurityFlag
-        let security_flag = SecurityFlag::read(r)?;
+        let security_flag = SecurityFlag::new(crate::util::read_u8_le(r)?);
 
         let security_flag_PIN = if security_flag.is_PIN() {
             // pin_salt: u8[16]
@@ -228,7 +228,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             }
 
             // security_flag: SecurityFlag
-            let security_flag = SecurityFlag::tokio_read(r).await?;
+            let security_flag = SecurityFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
             let security_flag_PIN = if security_flag.is_PIN() {
                 // pin_salt: u8[16]
@@ -423,7 +423,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             }
 
             // security_flag: SecurityFlag
-            let security_flag = SecurityFlag::astd_read(r).await?;
+            let security_flag = SecurityFlag::new(crate::util::astd_read_u8_le(r).await?);
 
             let security_flag_PIN = if security_flag.is_PIN() {
                 // pin_salt: u8[16]

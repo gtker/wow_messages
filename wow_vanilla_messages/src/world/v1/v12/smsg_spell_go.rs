@@ -45,7 +45,7 @@ impl MessageBody for SMSG_SPELL_GO {
         let spell = crate::util::read_u32_le(r)?;
 
         // flags: CastFlags
-        let flags = CastFlags::read(r)?;
+        let flags = CastFlags::new(crate::util::read_u16_le(r)?);
 
         // amount_of_hits: u8
         let amount_of_hits = crate::util::read_u8_le(r)?;
@@ -168,7 +168,7 @@ impl MessageBody for SMSG_SPELL_GO {
             let spell = crate::util::tokio_read_u32_le(r).await?;
 
             // flags: CastFlags
-            let flags = CastFlags::tokio_read(r).await?;
+            let flags = CastFlags::new(crate::util::tokio_read_u16_le(r).await?);
 
             // amount_of_hits: u8
             let amount_of_hits = crate::util::tokio_read_u8_le(r).await?;
@@ -305,7 +305,7 @@ impl MessageBody for SMSG_SPELL_GO {
             let spell = crate::util::astd_read_u32_le(r).await?;
 
             // flags: CastFlags
-            let flags = CastFlags::astd_read(r).await?;
+            let flags = CastFlags::new(crate::util::astd_read_u16_le(r).await?);
 
             // amount_of_hits: u8
             let amount_of_hits = crate::util::astd_read_u8_le(r).await?;

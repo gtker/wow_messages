@@ -18,7 +18,7 @@ impl ReadableAndWritable for FlagIfElseIf {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // flags: UpdateFlag
-        let flags = UpdateFlag::read(r)?;
+        let flags = UpdateFlag::new(crate::util::read_u8_le(r)?);
 
         let flags_ONE_IF = if flags.is_ONE_IF() {
             // b_if: u8
@@ -30,7 +30,7 @@ impl ReadableAndWritable for FlagIfElseIf {
         }
         else if flags.is_TWO_ELSEIF() {
             // s: SimpleFlag
-            let s = SimpleFlag::read(r)?;
+            let s = SimpleFlag::new(crate::util::read_u8_le(r)?);
 
             let s_ONE = if s.is_ONE() {
                 // if_one: u8
@@ -147,7 +147,7 @@ impl ReadableAndWritable for FlagIfElseIf {
      {
         Box::pin(async move {
             // flags: UpdateFlag
-            let flags = UpdateFlag::tokio_read(r).await?;
+            let flags = UpdateFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
             let flags_ONE_IF = if flags.is_ONE_IF() {
                 // b_if: u8
@@ -159,7 +159,7 @@ impl ReadableAndWritable for FlagIfElseIf {
             }
             else if flags.is_TWO_ELSEIF() {
                 // s: SimpleFlag
-                let s = SimpleFlag::tokio_read(r).await?;
+                let s = SimpleFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
                 let s_ONE = if s.is_ONE() {
                     // if_one: u8
@@ -290,7 +290,7 @@ impl ReadableAndWritable for FlagIfElseIf {
      {
         Box::pin(async move {
             // flags: UpdateFlag
-            let flags = UpdateFlag::astd_read(r).await?;
+            let flags = UpdateFlag::new(crate::util::astd_read_u8_le(r).await?);
 
             let flags_ONE_IF = if flags.is_ONE_IF() {
                 // b_if: u8
@@ -302,7 +302,7 @@ impl ReadableAndWritable for FlagIfElseIf {
             }
             else if flags.is_TWO_ELSEIF() {
                 // s: SimpleFlag
-                let s = SimpleFlag::astd_read(r).await?;
+                let s = SimpleFlag::new(crate::util::astd_read_u8_le(r).await?);
 
                 let s_ONE = if s.is_ONE() {
                     // if_one: u8

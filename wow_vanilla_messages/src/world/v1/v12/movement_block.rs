@@ -29,11 +29,11 @@ impl ReadableAndWritable for MovementBlock {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // update_flag: UpdateFlag
-        let update_flag = UpdateFlag::read(r)?;
+        let update_flag = UpdateFlag::new(crate::util::read_u8_le(r)?);
 
         let update_flag_LIVING = if update_flag.is_LIVING() {
             // flags: MovementFlags
-            let flags = MovementFlags::read(r)?;
+            let flags = MovementFlags::new(crate::util::read_u32_le(r)?);
 
             // timestamp: u32
             let timestamp = crate::util::read_u32_le(r)?;
@@ -116,7 +116,7 @@ impl ReadableAndWritable for MovementBlock {
             let turn_rate = crate::util::read_f32_le(r)?;
             let flags_SPLINE_ENABLED = if flags.is_SPLINE_ENABLED() {
                 // spline_flags: SplineFlag
-                let spline_flags = SplineFlag::read(r)?;
+                let spline_flags = SplineFlag::new(crate::util::read_u32_le(r)?);
 
                 let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
                     // angle: f32
@@ -513,11 +513,11 @@ impl ReadableAndWritable for MovementBlock {
      {
         Box::pin(async move {
             // update_flag: UpdateFlag
-            let update_flag = UpdateFlag::tokio_read(r).await?;
+            let update_flag = UpdateFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
             let update_flag_LIVING = if update_flag.is_LIVING() {
                 // flags: MovementFlags
-                let flags = MovementFlags::tokio_read(r).await?;
+                let flags = MovementFlags::new(crate::util::tokio_read_u32_le(r).await?);
 
                 // timestamp: u32
                 let timestamp = crate::util::tokio_read_u32_le(r).await?;
@@ -600,7 +600,7 @@ impl ReadableAndWritable for MovementBlock {
                 let turn_rate = crate::util::tokio_read_f32_le(r).await?;
                 let flags_SPLINE_ENABLED = if flags.is_SPLINE_ENABLED() {
                     // spline_flags: SplineFlag
-                    let spline_flags = SplineFlag::tokio_read(r).await?;
+                    let spline_flags = SplineFlag::new(crate::util::tokio_read_u32_le(r).await?);
 
                     let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
                         // angle: f32
@@ -1011,11 +1011,11 @@ impl ReadableAndWritable for MovementBlock {
      {
         Box::pin(async move {
             // update_flag: UpdateFlag
-            let update_flag = UpdateFlag::astd_read(r).await?;
+            let update_flag = UpdateFlag::new(crate::util::astd_read_u8_le(r).await?);
 
             let update_flag_LIVING = if update_flag.is_LIVING() {
                 // flags: MovementFlags
-                let flags = MovementFlags::astd_read(r).await?;
+                let flags = MovementFlags::new(crate::util::astd_read_u32_le(r).await?);
 
                 // timestamp: u32
                 let timestamp = crate::util::astd_read_u32_le(r).await?;
@@ -1098,7 +1098,7 @@ impl ReadableAndWritable for MovementBlock {
                 let turn_rate = crate::util::astd_read_f32_le(r).await?;
                 let flags_SPLINE_ENABLED = if flags.is_SPLINE_ENABLED() {
                     // spline_flags: SplineFlag
-                    let spline_flags = SplineFlag::astd_read(r).await?;
+                    let spline_flags = SplineFlag::new(crate::util::astd_read_u32_le(r).await?);
 
                     let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
                         // angle: f32

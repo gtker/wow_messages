@@ -2,7 +2,6 @@ use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
 use crate::rust_printer::enums::print_wowm_definition;
 use crate::rust_printer::Writer;
-use crate::UTILITY_PATH;
 
 pub fn print_flag(e: &Definer) -> Writer {
     let mut s = Writer::new(&get_import_path(e.tags()));
@@ -40,30 +39,6 @@ fn declaration(s: &mut Writer, e: &Definer) {
 }
 
 fn common_impls(s: &mut Writer, e: &Definer) {
-    s.impl_read_and_writable_with_error(
-        e.name(),
-        "std::io::Error",
-        |s, it| {
-            s.wln(format!(
-                "let inner = {module}::{prefix}read_{ty}_{endian}(r){postfix}?;",
-                module = UTILITY_PATH,
-                ty = e.ty().rust_str(),
-                endian = e.ty().rust_endian_str(),
-                prefix = it.prefix(),
-                postfix = it.postfix(),
-            ));
-            s.wln("Ok(Self { inner })");
-        },
-        |s, it| {
-            s.wln(format!(
-                "w.write_all(&self.inner.to_{endian}_bytes()){postfix}?;",
-                endian = e.ty().rust_endian_str(),
-                postfix = it.postfix(),
-            ));
-            s.wln("Ok(())");
-        },
-    );
-
     s.bodyn(format!("impl {name}", name = e.name()), |s| {
         print_fields(s, e);
 

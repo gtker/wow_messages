@@ -426,14 +426,33 @@ fn print_read_definition(
                     return;
                 }
             }
-            s.wln(format!(
-                "let {value_set}{name} = {type_name}::{prefix}read(r){postfix}?;",
-                name = d.name(),
-                type_name = d.ty().rust_str(),
-                value_set = if d.value().is_some() { "_" } else { "" },
-                prefix = prefix,
-                postfix = postfix,
-            ));
+
+            match o.get_object_type_of(ty, e.tags()) {
+                ObjectType::Flag => {
+                    let definer = o.get_definer(ty, e.tags());
+                    s.wln(format!(
+                        "let {value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_{endian}(r){postfix}?);",
+                        name = d.name(),
+                        type_name = d.ty().rust_str(),
+                        value_set = if d.value().is_some() { "_" } else { "" },
+                        endian = definer.ty().rust_endian_str(),
+                        ty = definer.ty().rust_str(),
+                        prefix = prefix,
+                        postfix = postfix,
+                    ));
+                }
+                ObjectType::Enum | _ => {
+                    s.wln(format!(
+                        "let {value_set}{name} = {type_name}::{prefix}read(r){postfix}?;",
+                        name = d.name(),
+                        type_name = d.ty().rust_str(),
+                        value_set = if d.value().is_some() { "_" } else { "" },
+                        prefix = prefix,
+                        postfix = postfix,
+                    ));
+                }
+            }
+
             if d.verified_value().is_some() {
                 s.wln(format!(
                     "// {name} is expected to always be {constant_string} ({constant_value})",

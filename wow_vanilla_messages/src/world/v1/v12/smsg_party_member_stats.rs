@@ -36,11 +36,11 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
         let guid = Guid::read_packed(r)?;
 
         // mask: GroupUpdateFlags
-        let mask = GroupUpdateFlags::read(r)?;
+        let mask = GroupUpdateFlags::new(crate::util::read_u32_le(r)?);
 
         let mask_FLAG_STATUS = if mask.is_FLAG_STATUS() {
             // status: GroupMemberOnlineStatus
-            let status = GroupMemberOnlineStatus::read(r)?;
+            let status = GroupMemberOnlineStatus::new(crate::util::read_u8_le(r)?);
 
             Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
                 status,
@@ -428,11 +428,11 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             let guid = Guid::tokio_read_packed(r).await?;
 
             // mask: GroupUpdateFlags
-            let mask = GroupUpdateFlags::tokio_read(r).await?;
+            let mask = GroupUpdateFlags::new(crate::util::tokio_read_u32_le(r).await?);
 
             let mask_FLAG_STATUS = if mask.is_FLAG_STATUS() {
                 // status: GroupMemberOnlineStatus
-                let status = GroupMemberOnlineStatus::tokio_read(r).await?;
+                let status = GroupMemberOnlineStatus::new(crate::util::tokio_read_u8_le(r).await?);
 
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
                     status,
@@ -834,11 +834,11 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
             let guid = Guid::astd_read_packed(r).await?;
 
             // mask: GroupUpdateFlags
-            let mask = GroupUpdateFlags::astd_read(r).await?;
+            let mask = GroupUpdateFlags::new(crate::util::astd_read_u32_le(r).await?);
 
             let mask_FLAG_STATUS = if mask.is_FLAG_STATUS() {
                 // status: GroupMemberOnlineStatus
-                let status = GroupMemberOnlineStatus::astd_read(r).await?;
+                let status = GroupMemberOnlineStatus::new(crate::util::astd_read_u8_le(r).await?);
 
                 Some(SMSG_PARTY_MEMBER_STATSGroupUpdateFlagsFLAG_STATUS {
                     status,

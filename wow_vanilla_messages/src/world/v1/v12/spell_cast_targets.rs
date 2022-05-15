@@ -18,7 +18,7 @@ impl ReadableAndWritable for SpellCastTargets {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // target_flags: SpellCastTargetFlags
-        let target_flags = SpellCastTargetFlags::read(r)?;
+        let target_flags = SpellCastTargetFlags::new(crate::util::read_u16_le(r)?);
 
         let target_flags_UNIT = if target_flags.is_UNIT() {
             // unit_target1: PackedGuid
@@ -284,7 +284,7 @@ impl ReadableAndWritable for SpellCastTargets {
      {
         Box::pin(async move {
             // target_flags: SpellCastTargetFlags
-            let target_flags = SpellCastTargetFlags::tokio_read(r).await?;
+            let target_flags = SpellCastTargetFlags::new(crate::util::tokio_read_u16_le(r).await?);
 
             let target_flags_UNIT = if target_flags.is_UNIT() {
                 // unit_target1: PackedGuid
@@ -564,7 +564,7 @@ impl ReadableAndWritable for SpellCastTargets {
      {
         Box::pin(async move {
             // target_flags: SpellCastTargetFlags
-            let target_flags = SpellCastTargetFlags::astd_read(r).await?;
+            let target_flags = SpellCastTargetFlags::new(crate::util::astd_read_u16_le(r).await?);
 
             let target_flags_UNIT = if target_flags.is_UNIT() {
                 // unit_target1: PackedGuid

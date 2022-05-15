@@ -17,7 +17,7 @@ impl ReadableAndWritable for SimpleIfFlag {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // flag: SimpleFlag
-        let flag = SimpleFlag::read(r)?;
+        let flag = SimpleFlag::new(crate::util::read_u8_le(r)?);
 
         let flag_ZERO = if flag.is_ZERO() {
             // basic: u8
@@ -68,7 +68,7 @@ impl ReadableAndWritable for SimpleIfFlag {
      {
         Box::pin(async move {
             // flag: SimpleFlag
-            let flag = SimpleFlag::tokio_read(r).await?;
+            let flag = SimpleFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
             let flag_ZERO = if flag.is_ZERO() {
                 // basic: u8
@@ -133,7 +133,7 @@ impl ReadableAndWritable for SimpleIfFlag {
      {
         Box::pin(async move {
             // flag: SimpleFlag
-            let flag = SimpleFlag::astd_read(r).await?;
+            let flag = SimpleFlag::new(crate::util::astd_read_u8_le(r).await?);
 
             let flag_ZERO = if flag.is_ZERO() {
                 // basic: u8

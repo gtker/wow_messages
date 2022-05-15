@@ -36,7 +36,7 @@ impl MessageBody for MessageWithComplexTypes {
         let simple_enum = SimpleEnum::read(r)?;
 
         // simple_flag: SimpleFlag
-        let simple_flag = SimpleFlag::read(r)?;
+        let simple_flag = SimpleFlag::new(crate::util::read_u8_le(r)?);
 
         // simple_struct: StructWithAllBuiltInTypes
         let simple_struct = StructWithAllBuiltInTypes::read(r)?;
@@ -79,7 +79,7 @@ impl MessageBody for MessageWithComplexTypes {
             let simple_enum = SimpleEnum::tokio_read(r).await?;
 
             // simple_flag: SimpleFlag
-            let simple_flag = SimpleFlag::tokio_read(r).await?;
+            let simple_flag = SimpleFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
             // simple_struct: StructWithAllBuiltInTypes
             let simple_struct = StructWithAllBuiltInTypes::tokio_read(r).await?;
@@ -136,7 +136,7 @@ impl MessageBody for MessageWithComplexTypes {
             let simple_enum = SimpleEnum::astd_read(r).await?;
 
             // simple_flag: SimpleFlag
-            let simple_flag = SimpleFlag::astd_read(r).await?;
+            let simple_flag = SimpleFlag::new(crate::util::astd_read_u8_le(r).await?);
 
             // simple_struct: StructWithAllBuiltInTypes
             let simple_struct = StructWithAllBuiltInTypes::astd_read(r).await?;

@@ -43,7 +43,7 @@ impl MessageBody for SMSG_SPELL_START {
         let spell = crate::util::read_u32_le(r)?;
 
         // flags: CastFlags
-        let flags = CastFlags::read(r)?;
+        let flags = CastFlags::new(crate::util::read_u16_le(r)?);
 
         // timer: u32
         let timer = crate::util::read_u32_le(r)?;
@@ -137,7 +137,7 @@ impl MessageBody for SMSG_SPELL_START {
             let spell = crate::util::tokio_read_u32_le(r).await?;
 
             // flags: CastFlags
-            let flags = CastFlags::tokio_read(r).await?;
+            let flags = CastFlags::new(crate::util::tokio_read_u16_le(r).await?);
 
             // timer: u32
             let timer = crate::util::tokio_read_u32_le(r).await?;
@@ -245,7 +245,7 @@ impl MessageBody for SMSG_SPELL_START {
             let spell = crate::util::astd_read_u32_le(r).await?;
 
             // flags: CastFlags
-            let flags = CastFlags::astd_read(r).await?;
+            let flags = CastFlags::new(crate::util::astd_read_u16_le(r).await?);
 
             // timer: u32
             let timer = crate::util::astd_read_u32_le(r).await?;

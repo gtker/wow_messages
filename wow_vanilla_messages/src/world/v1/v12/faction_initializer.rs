@@ -19,7 +19,7 @@ impl ReadableAndWritable for FactionInitializer {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // flag: FactionFlag
-        let flag = FactionFlag::read(r)?;
+        let flag = FactionFlag::new(crate::util::read_u8_le(r)?);
 
         // standing: u32
         let standing = crate::util::read_u32_le(r)?;
@@ -54,7 +54,7 @@ impl ReadableAndWritable for FactionInitializer {
      {
         Box::pin(async move {
             // flag: FactionFlag
-            let flag = FactionFlag::tokio_read(r).await?;
+            let flag = FactionFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
             // standing: u32
             let standing = crate::util::tokio_read_u32_le(r).await?;
@@ -103,7 +103,7 @@ impl ReadableAndWritable for FactionInitializer {
      {
         Box::pin(async move {
             // flag: FactionFlag
-            let flag = FactionFlag::astd_read(r).await?;
+            let flag = FactionFlag::new(crate::util::astd_read_u8_le(r).await?);
 
             // standing: u32
             let standing = crate::util::astd_read_u32_le(r).await?;

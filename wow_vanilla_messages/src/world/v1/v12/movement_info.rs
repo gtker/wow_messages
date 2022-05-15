@@ -24,7 +24,7 @@ impl ReadableAndWritable for MovementInfo {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // flags: MovementFlags
-        let flags = MovementFlags::read(r)?;
+        let flags = MovementFlags::new(crate::util::read_u32_le(r)?);
 
         // timestamp: u32
         let timestamp = crate::util::read_u32_le(r)?;
@@ -184,7 +184,7 @@ impl ReadableAndWritable for MovementInfo {
      {
         Box::pin(async move {
             // flags: MovementFlags
-            let flags = MovementFlags::tokio_read(r).await?;
+            let flags = MovementFlags::new(crate::util::tokio_read_u32_le(r).await?);
 
             // timestamp: u32
             let timestamp = crate::util::tokio_read_u32_le(r).await?;
@@ -358,7 +358,7 @@ impl ReadableAndWritable for MovementInfo {
      {
         Box::pin(async move {
             // flags: MovementFlags
-            let flags = MovementFlags::astd_read(r).await?;
+            let flags = MovementFlags::new(crate::util::astd_read_u32_le(r).await?);
 
             // timestamp: u32
             let timestamp = crate::util::astd_read_u32_le(r).await?;

@@ -102,7 +102,7 @@ impl ReadableAndWritable for Character {
         let guild_id = crate::util::read_u32_le(r)?;
 
         // flags: CharacterFlags
-        let flags = CharacterFlags::read(r)?;
+        let flags = CharacterFlags::new(crate::util::read_u32_le(r)?);
 
         // first_login: u8
         let first_login = crate::util::read_u8_le(r)?;
@@ -304,7 +304,7 @@ impl ReadableAndWritable for Character {
             let guild_id = crate::util::tokio_read_u32_le(r).await?;
 
             // flags: CharacterFlags
-            let flags = CharacterFlags::tokio_read(r).await?;
+            let flags = CharacterFlags::new(crate::util::tokio_read_u32_le(r).await?);
 
             // first_login: u8
             let first_login = crate::util::tokio_read_u8_le(r).await?;
@@ -520,7 +520,7 @@ impl ReadableAndWritable for Character {
             let guild_id = crate::util::astd_read_u32_le(r).await?;
 
             // flags: CharacterFlags
-            let flags = CharacterFlags::astd_read(r).await?;
+            let flags = CharacterFlags::new(crate::util::astd_read_u32_le(r).await?);
 
             // first_login: u8
             let first_login = crate::util::astd_read_u8_le(r).await?;

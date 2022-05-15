@@ -36,7 +36,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                 r.read_exact(&mut server_proof)?;
 
                 // account_flag: AccountFlag
-                let account_flag = AccountFlag::read(r)?;
+                let account_flag = AccountFlag::new(crate::util::read_u32_le(r)?);
 
                 // hardware_survey_id: u32
                 let hardware_survey_id = crate::util::read_u32_le(r)?;
@@ -227,7 +227,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                     r.read_exact(&mut server_proof).await?;
 
                     // account_flag: AccountFlag
-                    let account_flag = AccountFlag::tokio_read(r).await?;
+                    let account_flag = AccountFlag::new(crate::util::tokio_read_u32_le(r).await?);
 
                     // hardware_survey_id: u32
                     let hardware_survey_id = crate::util::tokio_read_u32_le(r).await?;
@@ -432,7 +432,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                     r.read_exact(&mut server_proof).await?;
 
                     // account_flag: AccountFlag
-                    let account_flag = AccountFlag::astd_read(r).await?;
+                    let account_flag = AccountFlag::new(crate::util::astd_read_u32_le(r).await?);
 
                     // hardware_survey_id: u32
                     let hardware_survey_id = crate::util::astd_read_u32_le(r).await?;
