@@ -77271,327 +77271,46 @@
               "equations": [
                 {
                   "Equals": {
-                    "value": "CANT_EQUIP_SKILL"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEM_DOESNT_GO_TO_SLOT"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "BAG_FULL"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "NONEMPTY_BAG_OVER_OTHER_BAG"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CANT_TRADE_EQUIP_BAGS"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ONLY_AMMO_CAN_GO_HERE"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "NO_REQUIRED_PROFICIENCY"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "NO_EQUIPMENT_SLOT_AVAILABLE"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "YOU_CAN_NEVER_USE_THAT_ITEM"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "YOU_CAN_NEVER_USE_THAT_ITEM2"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "NO_EQUIPMENT_SLOT_AVAILABLE2"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CANT_EQUIP_WITH_TWOHANDED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CANT_DUAL_WIELD"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEM_DOESNT_GO_INTO_BAG"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEM_DOESNT_GO_INTO_BAG2"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CANT_CARRY_MORE_OF_THIS"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "NO_EQUIPMENT_SLOT_AVAILABLE3"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEM_CANT_STACK"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEM_CANT_BE_EQUIPPED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEMS_CANT_BE_SWAPPED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "SLOT_IS_EMPTY"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEM_NOT_FOUND"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CANT_DROP_SOULBOUND"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "OUT_OF_RANGE"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "TRIED_TO_SPLIT_MORE_THAN_COUNT"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "COULDNT_SPLIT_ITEMS"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "MISSING_REAGENT"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "NOT_ENOUGH_MONEY"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "NOT_A_BAG"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CAN_ONLY_DO_WITH_EMPTY_BAGS"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "DONT_OWN_THAT_ITEM"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CAN_EQUIP_ONLY1_QUIVER"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "MUST_PURCHASE_THAT_BAG_SLOT"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "TOO_FAR_AWAY_FROM_BANK"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEM_LOCKED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "YOU_ARE_STUNNED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "YOU_ARE_DEAD"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CANT_DO_RIGHT_NOW"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "INT_BAG_ERROR"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CAN_EQUIP_ONLY1_BOLT"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CAN_EQUIP_ONLY1_AMMOPOUCH"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "STACKABLE_CANT_BE_WRAPPED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "EQUIPPED_CANT_BE_WRAPPED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "WRAPPED_CANT_BE_WRAPPED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "BOUND_CANT_BE_WRAPPED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "UNIQUE_CANT_BE_WRAPPED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "BAGS_CANT_BE_WRAPPED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ALREADY_LOOTED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "INVENTORY_FULL"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "BANK_FULL"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEM_IS_CURRENTLY_SOLD_OUT"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "BAG_FULL3"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEM_NOT_FOUND2"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEM_CANT_STACK2"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "BAG_FULL4"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "ITEM_SOLD_OUT"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "OBJECT_IS_BUSY"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "NONE"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "NOT_IN_COMBAT"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "NOT_WHILE_DISARMED"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "BAG_FULL6"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CANT_EQUIP_RANK"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "CANT_EQUIP_REPUTATION"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "TOO_MANY_SPECIAL_BAGS"
-                  }
-                },
-                {
-                  "Equals": {
-                    "value": "LOOT_CANT_LOOT_THAT_NOW"
+                    "value": "CANT_EQUIP_LEVEL_I"
+                  }
+                }
+              ]
+            },
+            "members": [
+              {
+                "Definition": {
+                  "name": "required_level",
+                  "member_type": {
+                    "Integer": {
+                      "type": "u32",
+                      "endianness": "little"
+                    }
+                  },
+                  "constant_value": null,
+                  "used_as_size_in": null,
+                  "used_in_if": false,
+                  "tags": {}
+                }
+              }
+            ],
+            "else_ifs": [],
+            "else_statement_members": [],
+            "original_ty": {
+              "Identifier": {
+                "s": "InventoryResult",
+                "upcast": null
+              }
+            }
+          }
+        },
+        {
+          "IfStatement": {
+            "conditional": {
+              "variable_name": "result",
+              "equations": [
+                {
+                  "NotEquals": {
+                    "value": "OK"
                   }
                 }
               ]
@@ -77644,91 +77363,7 @@
                 }
               }
             ],
-            "else_ifs": [
-              {
-                "conditional": {
-                  "variable_name": "result",
-                  "equations": [
-                    {
-                      "Equals": {
-                        "value": "CANT_EQUIP_LEVEL_I"
-                      }
-                    }
-                  ]
-                },
-                "members": [
-                  {
-                    "Definition": {
-                      "name": "required_level",
-                      "member_type": {
-                        "Integer": {
-                          "type": "u32",
-                          "endianness": "little"
-                        }
-                      },
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": false,
-                      "tags": {}
-                    }
-                  },
-                  {
-                    "Definition": {
-                      "name": "item1_guid2",
-                      "member_type": {
-                        "Integer": {
-                          "type": "u64",
-                          "endianness": "little"
-                        }
-                      },
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": false,
-                      "tags": {}
-                    }
-                  },
-                  {
-                    "Definition": {
-                      "name": "item2_guid2",
-                      "member_type": {
-                        "Integer": {
-                          "type": "u64",
-                          "endianness": "little"
-                        }
-                      },
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": false,
-                      "tags": {}
-                    }
-                  },
-                  {
-                    "Definition": {
-                      "name": "bag_type_subclass2",
-                      "member_type": {
-                        "Integer": {
-                          "type": "u8"
-                        }
-                      },
-                      "constant_value": null,
-                      "used_as_size_in": null,
-                      "used_in_if": false,
-                      "tags": {
-                        "comment": "cmangos: bag type subclass, used with EQUIP_ERR_EVENT_AUTOEQUIP_BIND_CONFIRM and EQUIP_ERR_ITEM_DOESNT_GO_INTO_BAG2\nvmangos sets to 0"
-                      }
-                    }
-                  }
-                ],
-                "else_ifs": [],
-                "else_statement_members": [],
-                "original_ty": {
-                  "Identifier": {
-                    "s": "InventoryResult",
-                    "upcast": null
-                  }
-                }
-              }
-            ],
+            "else_ifs": [],
             "else_statement_members": [],
             "original_ty": {
               "Identifier": {
@@ -77762,9 +77397,8 @@
         "SMsg",
         "SubObjects",
         "IfEnum",
-        "IfMultiCondition",
         "SimpleBuiltInTypes",
-        "IfElseEnum",
+        "IfNotEnum",
         "WorldVersion"
       ]
     },
