@@ -69,7 +69,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
         w.write_all(&self.total_exp.to_le_bytes())?;
 
         // exp_type: ExperienceAwardType
-        crate::util::write_u8_le(w, self.exp_type.as_int() as u8)?;
+        w.write_all(&(self.exp_type.as_int() as u8).to_le_bytes())?;
 
         match &self.exp_type {
             SMSG_LOG_XPGAINExperienceAwardType::KILL => {}
@@ -155,7 +155,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
             w.write_all(&self.total_exp.to_le_bytes()).await?;
 
             // exp_type: ExperienceAwardType
-            crate::util::tokio_write_u8_le(w, self.exp_type.as_int() as u8).await?;
+            w.write_all(&(self.exp_type.as_int() as u8).to_le_bytes()).await?;
 
             match &self.exp_type {
                 SMSG_LOG_XPGAINExperienceAwardType::KILL => {}
@@ -242,7 +242,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
             w.write_all(&self.total_exp.to_le_bytes()).await?;
 
             // exp_type: ExperienceAwardType
-            crate::util::astd_write_u8_le(w, self.exp_type.as_int() as u8).await?;
+            w.write_all(&(self.exp_type.as_int() as u8).to_le_bytes()).await?;
 
             match &self.exp_type {
                 SMSG_LOG_XPGAINExperienceAwardType::KILL => {}

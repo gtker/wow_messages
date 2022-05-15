@@ -44,10 +44,10 @@ impl MessageBody for SMSG_INSTANCE_RESET_FAILED {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // reason: InstanceResetFailedReason
-        crate::util::write_u8_le(w, self.reason.as_int() as u8)?;
+        w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
 
         // map: Map
-        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -93,10 +93,10 @@ impl MessageBody for SMSG_INSTANCE_RESET_FAILED {
      {
         Box::pin(async move {
             // reason: InstanceResetFailedReason
-            crate::util::tokio_write_u8_le(w, self.reason.as_int() as u8).await?;
+            w.write_all(&(self.reason.as_int() as u8).to_le_bytes()).await?;
 
             // map: Map
-            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -143,10 +143,10 @@ impl MessageBody for SMSG_INSTANCE_RESET_FAILED {
      {
         Box::pin(async move {
             // reason: InstanceResetFailedReason
-            crate::util::astd_write_u8_le(w, self.reason.as_int() as u8).await?;
+            w.write_all(&(self.reason.as_int() as u8).to_le_bytes()).await?;
 
             // map: Map
-            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

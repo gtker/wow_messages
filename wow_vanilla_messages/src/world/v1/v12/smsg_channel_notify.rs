@@ -43,7 +43,7 @@ impl MessageBody for SMSG_CHANNEL_NOTIFY {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // notify_type: ChatNotify
-        crate::util::write_u8_le(w, self.notify_type.as_int() as u8)?;
+        w.write_all(&(self.notify_type.as_int() as u8).to_le_bytes())?;
 
         // channel_name: CString
         w.write_all(self.channel_name.as_bytes())?;
@@ -95,7 +95,7 @@ impl MessageBody for SMSG_CHANNEL_NOTIFY {
      {
         Box::pin(async move {
             // notify_type: ChatNotify
-            crate::util::tokio_write_u8_le(w, self.notify_type.as_int() as u8).await?;
+            w.write_all(&(self.notify_type.as_int() as u8).to_le_bytes()).await?;
 
             // channel_name: CString
             w.write_all(self.channel_name.as_bytes()).await?;
@@ -148,7 +148,7 @@ impl MessageBody for SMSG_CHANNEL_NOTIFY {
      {
         Box::pin(async move {
             // notify_type: ChatNotify
-            crate::util::astd_write_u8_le(w, self.notify_type.as_int() as u8).await?;
+            w.write_all(&(self.notify_type.as_int() as u8).to_le_bytes()).await?;
 
             // channel_name: CString
             w.write_all(self.channel_name.as_bytes()).await?;

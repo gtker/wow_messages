@@ -46,7 +46,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_FAILED {
         w.write_all(&self.quest_id.to_le_bytes())?;
 
         // reason: QuestFailedReason
-        crate::util::write_u32_le(w, self.reason.as_int() as u32)?;
+        w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -95,7 +95,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_FAILED {
             w.write_all(&self.quest_id.to_le_bytes()).await?;
 
             // reason: QuestFailedReason
-            crate::util::tokio_write_u32_le(w, self.reason.as_int() as u32).await?;
+            w.write_all(&(self.reason.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -145,7 +145,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_FAILED {
             w.write_all(&self.quest_id.to_le_bytes()).await?;
 
             // reason: QuestFailedReason
-            crate::util::astd_write_u32_le(w, self.reason.as_int() as u32).await?;
+            w.write_all(&(self.reason.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

@@ -418,10 +418,10 @@ impl MessageBody for SMSG_MESSAGECHAT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // chat_type: ChatType
-        crate::util::write_u8_le(w, self.chat_type.as_int() as u8)?;
+        w.write_all(&(self.chat_type.as_int() as u8).to_le_bytes())?;
 
         // language: Language
-        crate::util::write_u32_le(w, self.language.as_int() as u32)?;
+        w.write_all(&(self.language.as_int() as u32).to_le_bytes())?;
 
         match &self.chat_type {
             SMSG_MESSAGECHATChatType::SAY {
@@ -760,7 +760,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
         w.write_all(&[0])?;
 
         // tag: PlayerChatTag
-        crate::util::write_u8_le(w, self.tag.as_int() as u8)?;
+        w.write_all(&(self.tag.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
@@ -1176,10 +1176,10 @@ impl MessageBody for SMSG_MESSAGECHAT {
      {
         Box::pin(async move {
             // chat_type: ChatType
-            crate::util::tokio_write_u8_le(w, self.chat_type.as_int() as u8).await?;
+            w.write_all(&(self.chat_type.as_int() as u8).to_le_bytes()).await?;
 
             // language: Language
-            crate::util::tokio_write_u32_le(w, self.language.as_int() as u32).await?;
+            w.write_all(&(self.language.as_int() as u32).to_le_bytes()).await?;
 
             match &self.chat_type {
                 SMSG_MESSAGECHATChatType::SAY {
@@ -1518,7 +1518,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
             w.write_all(&[0]).await?;
 
             // tag: PlayerChatTag
-            crate::util::tokio_write_u8_le(w, self.tag.as_int() as u8).await?;
+            w.write_all(&(self.tag.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -1935,10 +1935,10 @@ impl MessageBody for SMSG_MESSAGECHAT {
      {
         Box::pin(async move {
             // chat_type: ChatType
-            crate::util::astd_write_u8_le(w, self.chat_type.as_int() as u8).await?;
+            w.write_all(&(self.chat_type.as_int() as u8).to_le_bytes()).await?;
 
             // language: Language
-            crate::util::astd_write_u32_le(w, self.language.as_int() as u32).await?;
+            w.write_all(&(self.language.as_int() as u32).to_le_bytes()).await?;
 
             match &self.chat_type {
                 SMSG_MESSAGECHATChatType::SAY {
@@ -2277,7 +2277,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
             w.write_all(&[0]).await?;
 
             // tag: PlayerChatTag
-            crate::util::astd_write_u8_le(w, self.tag.as_int() as u8).await?;
+            w.write_all(&(self.tag.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })

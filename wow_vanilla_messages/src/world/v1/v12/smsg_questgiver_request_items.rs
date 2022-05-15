@@ -146,7 +146,7 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // completable: QuestCompletable
-        crate::util::write_u32_le(w, self.completable.as_int() as u32)?;
+        w.write_all(&(self.completable.as_int() as u32).to_le_bytes())?;
 
         // flags2: u32
         w.write_all(&self.flags2.to_le_bytes())?;
@@ -289,7 +289,7 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
             w.write_all(&self.unknown1.to_le_bytes()).await?;
 
             // completable: QuestCompletable
-            crate::util::tokio_write_u32_le(w, self.completable.as_int() as u32).await?;
+            w.write_all(&(self.completable.as_int() as u32).to_le_bytes()).await?;
 
             // flags2: u32
             w.write_all(&self.flags2.to_le_bytes()).await?;
@@ -433,7 +433,7 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
             w.write_all(&self.unknown1.to_le_bytes()).await?;
 
             // completable: QuestCompletable
-            crate::util::astd_write_u32_le(w, self.completable.as_int() as u32).await?;
+            w.write_all(&(self.completable.as_int() as u32).to_le_bytes()).await?;
 
             // flags2: u32
             w.write_all(&self.flags2.to_le_bytes()).await?;

@@ -196,7 +196,7 @@ impl NestedNotIf {
 
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // t: TEnum
-        crate::util::write_u8_le(w, self.t.as_int() as u8)?;
+        w.write_all(&(self.t.as_int() as u8).to_le_bytes())?;
 
         match &self.t {
             NestedNotIfTEnum::ZERO => {}
@@ -208,7 +208,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes())?;
 
                 // e: NestedEnum
-                crate::util::write_u8_le(w, e.as_int() as u8)?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -230,7 +230,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes())?;
 
                 // e: NestedEnum
-                crate::util::write_u8_le(w, e.as_int() as u8)?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -252,7 +252,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes())?;
 
                 // e: NestedEnum
-                crate::util::write_u8_le(w, e.as_int() as u8)?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -274,7 +274,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes())?;
 
                 // e: NestedEnum
-                crate::util::write_u8_le(w, e.as_int() as u8)?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -296,7 +296,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes())?;
 
                 // e: NestedEnum
-                crate::util::write_u8_le(w, e.as_int() as u8)?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -318,7 +318,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes())?;
 
                 // e: NestedEnum
-                crate::util::write_u8_le(w, e.as_int() as u8)?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -340,7 +340,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes())?;
 
                 // e: NestedEnum
-                crate::util::write_u8_le(w, e.as_int() as u8)?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes())?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -542,7 +542,7 @@ impl NestedNotIf {
 
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // t: TEnum
-        crate::util::tokio_write_u8_le(w, self.t.as_int() as u8).await?;
+        w.write_all(&(self.t.as_int() as u8).to_le_bytes()).await?;
 
         match &self.t {
             NestedNotIfTEnum::ZERO => {}
@@ -554,7 +554,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::tokio_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -576,7 +576,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::tokio_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -598,7 +598,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::tokio_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -620,7 +620,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::tokio_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -642,7 +642,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::tokio_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -664,7 +664,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::tokio_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -686,7 +686,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::tokio_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -888,7 +888,7 @@ impl NestedNotIf {
 
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // t: TEnum
-        crate::util::astd_write_u8_le(w, self.t.as_int() as u8).await?;
+        w.write_all(&(self.t.as_int() as u8).to_le_bytes()).await?;
 
         match &self.t {
             NestedNotIfTEnum::ZERO => {}
@@ -900,7 +900,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::astd_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -922,7 +922,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::astd_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -944,7 +944,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::astd_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -966,7 +966,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::astd_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -988,7 +988,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::astd_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -1010,7 +1010,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::astd_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {
@@ -1032,7 +1032,7 @@ impl NestedNotIf {
                 w.write_all(&not_zero.to_le_bytes()).await?;
 
                 // e: NestedEnum
-                crate::util::astd_write_u8_le(w, e.as_int() as u8).await?;
+                w.write_all(&(e.as_int() as u8).to_le_bytes()).await?;
 
                 match &e {
                     NestedNotIfNestedEnum::NESTED {

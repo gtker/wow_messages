@@ -104,7 +104,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
         w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes())?;
 
         // login_result: LoginResult
-        crate::util::write_u8_le(w, self.login_result.as_int() as u8)?;
+        w.write_all(&(self.login_result.as_int() as u8).to_le_bytes())?;
 
         match &self.login_result {
             CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
@@ -269,7 +269,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
             w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes()).await?;
 
             // login_result: LoginResult
-            crate::util::tokio_write_u8_le(w, self.login_result.as_int() as u8).await?;
+            w.write_all(&(self.login_result.as_int() as u8).to_le_bytes()).await?;
 
             match &self.login_result {
                 CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
@@ -435,7 +435,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
             w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes()).await?;
 
             // login_result: LoginResult
-            crate::util::astd_write_u8_le(w, self.login_result.as_int() as u8).await?;
+            w.write_all(&(self.login_result.as_int() as u8).to_le_bytes()).await?;
 
             match &self.login_result {
                 CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {

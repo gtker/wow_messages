@@ -51,10 +51,10 @@ impl MessageBody for MessageWithComplexTypes {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // simple_enum: SimpleEnum
-        crate::util::write_u8_le(w, self.simple_enum.as_int() as u8)?;
+        w.write_all(&(self.simple_enum.as_int() as u8).to_le_bytes())?;
 
         // simple_flag: SimpleFlag
-        crate::util::write_u8_le(w, self.simple_flag.as_int() as u8)?;
+        w.write_all(&(self.simple_flag.as_int() as u8).to_le_bytes())?;
 
         // simple_struct: StructWithAllBuiltInTypes
         self.simple_struct.write(w)?;
@@ -107,10 +107,10 @@ impl MessageBody for MessageWithComplexTypes {
      {
         Box::pin(async move {
             // simple_enum: SimpleEnum
-            crate::util::tokio_write_u8_le(w, self.simple_enum.as_int() as u8).await?;
+            w.write_all(&(self.simple_enum.as_int() as u8).to_le_bytes()).await?;
 
             // simple_flag: SimpleFlag
-            crate::util::tokio_write_u8_le(w, self.simple_flag.as_int() as u8).await?;
+            w.write_all(&(self.simple_flag.as_int() as u8).to_le_bytes()).await?;
 
             // simple_struct: StructWithAllBuiltInTypes
             self.simple_struct.tokio_write(w).await?;
@@ -164,10 +164,10 @@ impl MessageBody for MessageWithComplexTypes {
      {
         Box::pin(async move {
             // simple_enum: SimpleEnum
-            crate::util::astd_write_u8_le(w, self.simple_enum.as_int() as u8).await?;
+            w.write_all(&(self.simple_enum.as_int() as u8).to_le_bytes()).await?;
 
             // simple_flag: SimpleFlag
-            crate::util::astd_write_u8_le(w, self.simple_flag.as_int() as u8).await?;
+            w.write_all(&(self.simple_flag.as_int() as u8).to_le_bytes()).await?;
 
             // simple_struct: StructWithAllBuiltInTypes
             self.simple_struct.astd_write(w).await?;

@@ -46,7 +46,7 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
         w.write_all(&self.homebind_timer.to_le_bytes())?;
 
         // error: RaidGroupError
-        crate::util::write_u32_le(w, self.error.as_int() as u32)?;
+        w.write_all(&(self.error.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -95,7 +95,7 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
             w.write_all(&self.homebind_timer.to_le_bytes()).await?;
 
             // error: RaidGroupError
-            crate::util::tokio_write_u32_le(w, self.error.as_int() as u32).await?;
+            w.write_all(&(self.error.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -145,7 +145,7 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
             w.write_all(&self.homebind_timer.to_le_bytes()).await?;
 
             // error: RaidGroupError
-            crate::util::astd_write_u32_le(w, self.error.as_int() as u32).await?;
+            w.write_all(&(self.error.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

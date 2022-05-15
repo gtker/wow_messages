@@ -94,7 +94,7 @@ impl MessageBody for SMSG_SPELL_START {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // flags: CastFlags
-        crate::util::write_u16_le(w, self.flags.as_int() as u16)?;
+        w.write_all(&(self.flags.as_int() as u16).to_le_bytes())?;
 
         // timer: u32
         w.write_all(&self.timer.to_le_bytes())?;
@@ -201,7 +201,7 @@ impl MessageBody for SMSG_SPELL_START {
             w.write_all(&self.spell.to_le_bytes()).await?;
 
             // flags: CastFlags
-            crate::util::tokio_write_u16_le(w, self.flags.as_int() as u16).await?;
+            w.write_all(&(self.flags.as_int() as u16).to_le_bytes()).await?;
 
             // timer: u32
             w.write_all(&self.timer.to_le_bytes()).await?;
@@ -309,7 +309,7 @@ impl MessageBody for SMSG_SPELL_START {
             w.write_all(&self.spell.to_le_bytes()).await?;
 
             // flags: CastFlags
-            crate::util::astd_write_u16_le(w, self.flags.as_int() as u16).await?;
+            w.write_all(&(self.flags.as_int() as u16).to_le_bytes()).await?;
 
             // timer: u32
             w.write_all(&self.timer.to_le_bytes()).await?;

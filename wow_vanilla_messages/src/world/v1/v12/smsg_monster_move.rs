@@ -75,7 +75,7 @@ impl MessageBody for SMSG_MONSTER_MOVE {
         w.write_all(&self.spline_id.to_le_bytes())?;
 
         // move_type: MonsterMoveType
-        crate::util::write_u8_le(w, self.move_type.as_int() as u8)?;
+        w.write_all(&(self.move_type.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
@@ -149,7 +149,7 @@ impl MessageBody for SMSG_MONSTER_MOVE {
             w.write_all(&self.spline_id.to_le_bytes()).await?;
 
             // move_type: MonsterMoveType
-            crate::util::tokio_write_u8_le(w, self.move_type.as_int() as u8).await?;
+            w.write_all(&(self.move_type.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -224,7 +224,7 @@ impl MessageBody for SMSG_MONSTER_MOVE {
             w.write_all(&self.spline_id.to_le_bytes()).await?;
 
             // move_type: MonsterMoveType
-            crate::util::astd_write_u8_le(w, self.move_type.as_int() as u8).await?;
+            w.write_all(&(self.move_type.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })

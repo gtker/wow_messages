@@ -59,7 +59,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
-        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // optional has_transport
         if let Some(v) = &self.has_transport {
@@ -67,7 +67,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
             w.write_all(&v.transport.to_le_bytes())?;
 
             // transport_map: Map
-            crate::util::write_u32_le(w, v.transport_map.as_int() as u32)?;
+            w.write_all(&(v.transport_map.as_int() as u32).to_le_bytes())?;
 
         }
 
@@ -132,7 +132,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
      {
         Box::pin(async move {
             // map: Map
-            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // optional has_transport
             if let Some(v) = &self.has_transport {
@@ -140,7 +140,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
                 w.write_all(&v.transport.to_le_bytes()).await?;
 
                 // transport_map: Map
-                crate::util::tokio_write_u32_le(w, v.transport_map.as_int() as u32).await?;
+                w.write_all(&(v.transport_map.as_int() as u32).to_le_bytes()).await?;
 
             }
 
@@ -206,7 +206,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
      {
         Box::pin(async move {
             // map: Map
-            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // optional has_transport
             if let Some(v) = &self.has_transport {
@@ -214,7 +214,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
                 w.write_all(&v.transport.to_le_bytes()).await?;
 
                 // transport_map: Map
-                crate::util::astd_write_u32_le(w, v.transport_map.as_int() as u32).await?;
+                w.write_all(&(v.transport_map.as_int() as u32).to_le_bytes()).await?;
 
             }
 

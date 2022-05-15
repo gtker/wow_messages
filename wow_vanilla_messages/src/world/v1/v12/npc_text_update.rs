@@ -56,7 +56,7 @@ impl NpcTextUpdate {
         }
 
         // language: Language
-        crate::util::write_u32_le(w, self.language.as_int() as u32)?;
+        w.write_all(&(self.language.as_int() as u32).to_le_bytes())?;
 
         // emotes: NpcTextUpdateEmote[3]
         for i in self.emotes.iter() {
@@ -106,7 +106,7 @@ impl NpcTextUpdate {
         }
 
         // language: Language
-        crate::util::tokio_write_u32_le(w, self.language.as_int() as u32).await?;
+        w.write_all(&(self.language.as_int() as u32).to_le_bytes()).await?;
 
         // emotes: NpcTextUpdateEmote[3]
         for i in self.emotes.iter() {
@@ -156,7 +156,7 @@ impl NpcTextUpdate {
         }
 
         // language: Language
-        crate::util::astd_write_u32_le(w, self.language.as_int() as u32).await?;
+        w.write_all(&(self.language.as_int() as u32).to_le_bytes()).await?;
 
         // emotes: NpcTextUpdateEmote[3]
         for i in self.emotes.iter() {

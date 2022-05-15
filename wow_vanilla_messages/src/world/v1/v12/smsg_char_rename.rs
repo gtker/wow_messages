@@ -135,7 +135,7 @@ impl MessageBody for SMSG_CHAR_RENAME {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // result: WorldResult
-        crate::util::write_u32_le(w, self.result.as_int() as u32)?;
+        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
         match &self.result {
             SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
@@ -371,7 +371,7 @@ impl MessageBody for SMSG_CHAR_RENAME {
      {
         Box::pin(async move {
             // result: WorldResult
-            crate::util::tokio_write_u32_le(w, self.result.as_int() as u32).await?;
+            w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;
 
             match &self.result {
                 SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {
@@ -608,7 +608,7 @@ impl MessageBody for SMSG_CHAR_RENAME {
      {
         Box::pin(async move {
             // result: WorldResult
-            crate::util::astd_write_u32_le(w, self.result.as_int() as u32).await?;
+            w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;
 
             match &self.result {
                 SMSG_CHAR_RENAMEWorldResult::RESPONSE_SUCCESS {

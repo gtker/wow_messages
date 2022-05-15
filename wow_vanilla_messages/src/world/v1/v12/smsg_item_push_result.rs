@@ -89,13 +89,13 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
         self.guid.write(w)?;
 
         // source: NewItemSource
-        crate::util::write_u32_le(w, self.source.as_int() as u32)?;
+        w.write_all(&(self.source.as_int() as u32).to_le_bytes())?;
 
         // creation_type: NewItemCreationType
-        crate::util::write_u32_le(w, self.creation_type.as_int() as u32)?;
+        w.write_all(&(self.creation_type.as_int() as u32).to_le_bytes())?;
 
         // alert_chat: NewItemChatAlert
-        crate::util::write_u32_le(w, self.alert_chat.as_int() as u32)?;
+        w.write_all(&(self.alert_chat.as_int() as u32).to_le_bytes())?;
 
         // bag_slot: u8
         w.write_all(&self.bag_slot.to_le_bytes())?;
@@ -194,13 +194,13 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
             self.guid.tokio_write(w).await?;
 
             // source: NewItemSource
-            crate::util::tokio_write_u32_le(w, self.source.as_int() as u32).await?;
+            w.write_all(&(self.source.as_int() as u32).to_le_bytes()).await?;
 
             // creation_type: NewItemCreationType
-            crate::util::tokio_write_u32_le(w, self.creation_type.as_int() as u32).await?;
+            w.write_all(&(self.creation_type.as_int() as u32).to_le_bytes()).await?;
 
             // alert_chat: NewItemChatAlert
-            crate::util::tokio_write_u32_le(w, self.alert_chat.as_int() as u32).await?;
+            w.write_all(&(self.alert_chat.as_int() as u32).to_le_bytes()).await?;
 
             // bag_slot: u8
             w.write_all(&self.bag_slot.to_le_bytes()).await?;
@@ -300,13 +300,13 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
             self.guid.astd_write(w).await?;
 
             // source: NewItemSource
-            crate::util::astd_write_u32_le(w, self.source.as_int() as u32).await?;
+            w.write_all(&(self.source.as_int() as u32).to_le_bytes()).await?;
 
             // creation_type: NewItemCreationType
-            crate::util::astd_write_u32_le(w, self.creation_type.as_int() as u32).await?;
+            w.write_all(&(self.creation_type.as_int() as u32).to_le_bytes()).await?;
 
             // alert_chat: NewItemChatAlert
-            crate::util::astd_write_u32_le(w, self.alert_chat.as_int() as u32).await?;
+            w.write_all(&(self.alert_chat.as_int() as u32).to_le_bytes()).await?;
 
             // bag_slot: u8
             w.write_all(&self.bag_slot.to_le_bytes()).await?;

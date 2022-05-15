@@ -55,10 +55,10 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
-        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // area: Area
-        crate::util::write_u32_le(w, self.area.as_int() as u32)?;
+        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 
         // amount_of_states: u16
         w.write_all(&(self.states.len() as u16).to_le_bytes())?;
@@ -122,10 +122,10 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
      {
         Box::pin(async move {
             // map: Map
-            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // area: Area
-            crate::util::tokio_write_u32_le(w, self.area.as_int() as u32).await?;
+            w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
 
             // amount_of_states: u16
             w.write_all(&(self.states.len() as u16).to_le_bytes()).await?;
@@ -190,10 +190,10 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
      {
         Box::pin(async move {
             // map: Map
-            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // area: Area
-            crate::util::astd_write_u32_le(w, self.area.as_int() as u32).await?;
+            w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
 
             // amount_of_states: u16
             w.write_all(&(self.states.len() as u16).to_le_bytes()).await?;

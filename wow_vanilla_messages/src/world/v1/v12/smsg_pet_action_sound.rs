@@ -47,7 +47,7 @@ impl MessageBody for SMSG_PET_ACTION_SOUND {
         self.guid.write(w)?;
 
         // reason: PetTalkReason
-        crate::util::write_u32_le(w, self.reason.as_int() as u32)?;
+        w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -96,7 +96,7 @@ impl MessageBody for SMSG_PET_ACTION_SOUND {
             self.guid.tokio_write(w).await?;
 
             // reason: PetTalkReason
-            crate::util::tokio_write_u32_le(w, self.reason.as_int() as u32).await?;
+            w.write_all(&(self.reason.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -146,7 +146,7 @@ impl MessageBody for SMSG_PET_ACTION_SOUND {
             self.guid.astd_write(w).await?;
 
             // reason: PetTalkReason
-            crate::util::astd_write_u32_le(w, self.reason.as_int() as u32).await?;
+            w.write_all(&(self.reason.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

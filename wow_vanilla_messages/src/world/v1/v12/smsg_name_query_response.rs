@@ -80,13 +80,13 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
         w.write_all(&[0])?;
 
         // race: Race
-        crate::util::write_u32_le(w, self.race.as_int() as u32)?;
+        w.write_all(&(self.race.as_int() as u32).to_le_bytes())?;
 
         // gender: Gender
-        crate::util::write_u32_le(w, self.gender.as_int() as u32)?;
+        w.write_all(&(self.gender.as_int() as u32).to_le_bytes())?;
 
         // class: Class
-        crate::util::write_u32_le(w, self.class.as_int() as u32)?;
+        w.write_all(&(self.class.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -163,13 +163,13 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
             w.write_all(&[0]).await?;
 
             // race: Race
-            crate::util::tokio_write_u32_le(w, self.race.as_int() as u32).await?;
+            w.write_all(&(self.race.as_int() as u32).to_le_bytes()).await?;
 
             // gender: Gender
-            crate::util::tokio_write_u32_le(w, self.gender.as_int() as u32).await?;
+            w.write_all(&(self.gender.as_int() as u32).to_le_bytes()).await?;
 
             // class: Class
-            crate::util::tokio_write_u32_le(w, self.class.as_int() as u32).await?;
+            w.write_all(&(self.class.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -247,13 +247,13 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
             w.write_all(&[0]).await?;
 
             // race: Race
-            crate::util::astd_write_u32_le(w, self.race.as_int() as u32).await?;
+            w.write_all(&(self.race.as_int() as u32).to_le_bytes()).await?;
 
             // gender: Gender
-            crate::util::astd_write_u32_le(w, self.gender.as_int() as u32).await?;
+            w.write_all(&(self.gender.as_int() as u32).to_le_bytes()).await?;
 
             // class: Class
-            crate::util::astd_write_u32_le(w, self.class.as_int() as u32).await?;
+            w.write_all(&(self.class.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

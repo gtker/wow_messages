@@ -47,7 +47,7 @@ impl MessageBody for CMSG_BUYBACK_ITEM {
         self.guid.write(w)?;
 
         // slot: BuybackSlot
-        crate::util::write_u32_le(w, self.slot.as_int() as u32)?;
+        w.write_all(&(self.slot.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -96,7 +96,7 @@ impl MessageBody for CMSG_BUYBACK_ITEM {
             self.guid.tokio_write(w).await?;
 
             // slot: BuybackSlot
-            crate::util::tokio_write_u32_le(w, self.slot.as_int() as u32).await?;
+            w.write_all(&(self.slot.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -146,7 +146,7 @@ impl MessageBody for CMSG_BUYBACK_ITEM {
             self.guid.astd_write(w).await?;
 
             // slot: BuybackSlot
-            crate::util::astd_write_u32_le(w, self.slot.as_int() as u32).await?;
+            w.write_all(&(self.slot.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

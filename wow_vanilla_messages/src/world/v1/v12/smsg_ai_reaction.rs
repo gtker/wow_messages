@@ -47,7 +47,7 @@ impl MessageBody for SMSG_AI_REACTION {
         self.guid.write(w)?;
 
         // reaction: AiReaction
-        crate::util::write_u32_le(w, self.reaction.as_int() as u32)?;
+        w.write_all(&(self.reaction.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -96,7 +96,7 @@ impl MessageBody for SMSG_AI_REACTION {
             self.guid.tokio_write(w).await?;
 
             // reaction: AiReaction
-            crate::util::tokio_write_u32_le(w, self.reaction.as_int() as u32).await?;
+            w.write_all(&(self.reaction.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -146,7 +146,7 @@ impl MessageBody for SMSG_AI_REACTION {
             self.guid.astd_write(w).await?;
 
             // reaction: AiReaction
-            crate::util::astd_write_u32_le(w, self.reaction.as_int() as u32).await?;
+            w.write_all(&(self.reaction.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

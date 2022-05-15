@@ -165,13 +165,13 @@ impl Character {
         w.write_all(&[0])?;
 
         // race: Race
-        crate::util::write_u8_le(w, self.race.as_int() as u8)?;
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
 
         // class: Class
-        crate::util::write_u8_le(w, self.class.as_int() as u8)?;
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
 
         // gender: Gender
-        crate::util::write_u8_le(w, self.gender.as_int() as u8)?;
+        w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
 
         // skin: u8
         w.write_all(&self.skin.to_le_bytes())?;
@@ -192,10 +192,10 @@ impl Character {
         w.write_all(&self.level.to_le_bytes())?;
 
         // area: Area
-        crate::util::write_u32_le(w, self.area.as_int() as u32)?;
+        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 
         // map: Map
-        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes())?;
@@ -210,7 +210,7 @@ impl Character {
         w.write_all(&self.guild_id.to_le_bytes())?;
 
         // flags: CharacterFlags
-        crate::util::write_u32_le(w, self.flags.as_int() as u32)?;
+        w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
 
         // first_login: u8
         w.write_all(&self.first_login.to_le_bytes())?;
@@ -355,13 +355,13 @@ impl Character {
         w.write_all(&[0]).await?;
 
         // race: Race
-        crate::util::tokio_write_u8_le(w, self.race.as_int() as u8).await?;
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes()).await?;
 
         // class: Class
-        crate::util::tokio_write_u8_le(w, self.class.as_int() as u8).await?;
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
 
         // gender: Gender
-        crate::util::tokio_write_u8_le(w, self.gender.as_int() as u8).await?;
+        w.write_all(&(self.gender.as_int() as u8).to_le_bytes()).await?;
 
         // skin: u8
         w.write_all(&self.skin.to_le_bytes()).await?;
@@ -382,10 +382,10 @@ impl Character {
         w.write_all(&self.level.to_le_bytes()).await?;
 
         // area: Area
-        crate::util::tokio_write_u32_le(w, self.area.as_int() as u32).await?;
+        w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
 
         // map: Map
-        crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes()).await?;
@@ -400,7 +400,7 @@ impl Character {
         w.write_all(&self.guild_id.to_le_bytes()).await?;
 
         // flags: CharacterFlags
-        crate::util::tokio_write_u32_le(w, self.flags.as_int() as u32).await?;
+        w.write_all(&(self.flags.as_int() as u32).to_le_bytes()).await?;
 
         // first_login: u8
         w.write_all(&self.first_login.to_le_bytes()).await?;
@@ -545,13 +545,13 @@ impl Character {
         w.write_all(&[0]).await?;
 
         // race: Race
-        crate::util::astd_write_u8_le(w, self.race.as_int() as u8).await?;
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes()).await?;
 
         // class: Class
-        crate::util::astd_write_u8_le(w, self.class.as_int() as u8).await?;
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
 
         // gender: Gender
-        crate::util::astd_write_u8_le(w, self.gender.as_int() as u8).await?;
+        w.write_all(&(self.gender.as_int() as u8).to_le_bytes()).await?;
 
         // skin: u8
         w.write_all(&self.skin.to_le_bytes()).await?;
@@ -572,10 +572,10 @@ impl Character {
         w.write_all(&self.level.to_le_bytes()).await?;
 
         // area: Area
-        crate::util::astd_write_u32_le(w, self.area.as_int() as u32).await?;
+        w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
 
         // map: Map
-        crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes()).await?;
@@ -590,7 +590,7 @@ impl Character {
         w.write_all(&self.guild_id.to_le_bytes()).await?;
 
         // flags: CharacterFlags
-        crate::util::astd_write_u32_le(w, self.flags.as_int() as u32).await?;
+        w.write_all(&(self.flags.as_int() as u32).to_le_bytes()).await?;
 
         // first_login: u8
         w.write_all(&self.first_login.to_le_bytes()).await?;

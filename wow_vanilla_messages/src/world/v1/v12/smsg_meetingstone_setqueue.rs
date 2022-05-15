@@ -44,10 +44,10 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // area: Area
-        crate::util::write_u32_le(w, self.area.as_int() as u32)?;
+        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 
         // status: MeetingStoneStatus
-        crate::util::write_u8_le(w, self.status.as_int() as u8)?;
+        w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
@@ -93,10 +93,10 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
      {
         Box::pin(async move {
             // area: Area
-            crate::util::tokio_write_u32_le(w, self.area.as_int() as u32).await?;
+            w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
 
             // status: MeetingStoneStatus
-            crate::util::tokio_write_u8_le(w, self.status.as_int() as u8).await?;
+            w.write_all(&(self.status.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -143,10 +143,10 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
      {
         Box::pin(async move {
             // area: Area
-            crate::util::astd_write_u32_le(w, self.area.as_int() as u32).await?;
+            w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
 
             // status: MeetingStoneStatus
-            crate::util::astd_write_u8_le(w, self.status.as_int() as u8).await?;
+            w.write_all(&(self.status.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })

@@ -117,7 +117,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
         self.guid.write(w)?;
 
         // highest_rank: PvpRank
-        crate::util::write_u8_le(w, self.highest_rank.as_int() as u8)?;
+        w.write_all(&(self.highest_rank.as_int() as u8).to_le_bytes())?;
 
         // today_honorable_and_dishonorable: u32
         w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes())?;
@@ -156,7 +156,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
         w.write_all(&self.this_week_honor.to_le_bytes())?;
 
         // last_week_standing: PvpRank
-        crate::util::write_u32_le(w, self.last_week_standing.as_int() as u32)?;
+        w.write_all(&(self.last_week_standing.as_int() as u32).to_le_bytes())?;
 
         // rank_progress_bar: u8
         w.write_all(&self.rank_progress_bar.to_le_bytes())?;
@@ -264,7 +264,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             self.guid.tokio_write(w).await?;
 
             // highest_rank: PvpRank
-            crate::util::tokio_write_u8_le(w, self.highest_rank.as_int() as u8).await?;
+            w.write_all(&(self.highest_rank.as_int() as u8).to_le_bytes()).await?;
 
             // today_honorable_and_dishonorable: u32
             w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes()).await?;
@@ -303,7 +303,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             w.write_all(&self.this_week_honor.to_le_bytes()).await?;
 
             // last_week_standing: PvpRank
-            crate::util::tokio_write_u32_le(w, self.last_week_standing.as_int() as u32).await?;
+            w.write_all(&(self.last_week_standing.as_int() as u32).to_le_bytes()).await?;
 
             // rank_progress_bar: u8
             w.write_all(&self.rank_progress_bar.to_le_bytes()).await?;
@@ -412,7 +412,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             self.guid.astd_write(w).await?;
 
             // highest_rank: PvpRank
-            crate::util::astd_write_u8_le(w, self.highest_rank.as_int() as u8).await?;
+            w.write_all(&(self.highest_rank.as_int() as u8).to_le_bytes()).await?;
 
             // today_honorable_and_dishonorable: u32
             w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes()).await?;
@@ -451,7 +451,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             w.write_all(&self.this_week_honor.to_le_bytes()).await?;
 
             // last_week_standing: PvpRank
-            crate::util::astd_write_u32_le(w, self.last_week_standing.as_int() as u32).await?;
+            w.write_all(&(self.last_week_standing.as_int() as u32).to_le_bytes()).await?;
 
             // rank_progress_bar: u8
             w.write_all(&self.rank_progress_bar.to_le_bytes()).await?;

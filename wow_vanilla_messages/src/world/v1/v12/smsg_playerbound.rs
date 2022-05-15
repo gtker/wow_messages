@@ -47,7 +47,7 @@ impl MessageBody for SMSG_PLAYERBOUND {
         self.guid.write(w)?;
 
         // area: Area
-        crate::util::write_u32_le(w, self.area.as_int() as u32)?;
+        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -96,7 +96,7 @@ impl MessageBody for SMSG_PLAYERBOUND {
             self.guid.tokio_write(w).await?;
 
             // area: Area
-            crate::util::tokio_write_u32_le(w, self.area.as_int() as u32).await?;
+            w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -146,7 +146,7 @@ impl MessageBody for SMSG_PLAYERBOUND {
             self.guid.astd_write(w).await?;
 
             // area: Area
-            crate::util::astd_write_u32_le(w, self.area.as_int() as u32).await?;
+            w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

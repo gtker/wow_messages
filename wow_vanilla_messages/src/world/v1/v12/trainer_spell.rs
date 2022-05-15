@@ -77,7 +77,7 @@ impl TrainerSpell {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // state: TrainerSpellState
-        crate::util::write_u8_le(w, self.state.as_int() as u8)?;
+        w.write_all(&(self.state.as_int() as u8).to_le_bytes())?;
 
         // spell_cost: u32
         w.write_all(&self.spell_cost.to_le_bytes())?;
@@ -163,7 +163,7 @@ impl TrainerSpell {
         w.write_all(&self.spell.to_le_bytes()).await?;
 
         // state: TrainerSpellState
-        crate::util::tokio_write_u8_le(w, self.state.as_int() as u8).await?;
+        w.write_all(&(self.state.as_int() as u8).to_le_bytes()).await?;
 
         // spell_cost: u32
         w.write_all(&self.spell_cost.to_le_bytes()).await?;
@@ -249,7 +249,7 @@ impl TrainerSpell {
         w.write_all(&self.spell.to_le_bytes()).await?;
 
         // state: TrainerSpellState
-        crate::util::astd_write_u8_le(w, self.state.as_int() as u8).await?;
+        w.write_all(&(self.state.as_int() as u8).to_le_bytes()).await?;
 
         // spell_cost: u32
         w.write_all(&self.spell_cost.to_le_bytes()).await?;

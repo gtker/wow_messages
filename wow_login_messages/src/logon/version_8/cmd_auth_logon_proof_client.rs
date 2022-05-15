@@ -153,7 +153,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         }
 
         // security_flag: SecurityFlag
-        crate::util::write_u8_le(w, self.security_flag.as_int() as u8)?;
+        w.write_all(&(self.security_flag.as_int() as u8).to_le_bytes())?;
 
         if let Some(if_statement) = &self.security_flag.pin {
             // pin_salt: u8[16]
@@ -347,7 +347,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             }
 
             // security_flag: SecurityFlag
-            crate::util::tokio_write_u8_le(w, self.security_flag.as_int() as u8).await?;
+            w.write_all(&(self.security_flag.as_int() as u8).to_le_bytes()).await?;
 
             if let Some(if_statement) = &self.security_flag.pin {
                 // pin_salt: u8[16]
@@ -542,7 +542,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             }
 
             // security_flag: SecurityFlag
-            crate::util::astd_write_u8_le(w, self.security_flag.as_int() as u8).await?;
+            w.write_all(&(self.security_flag.as_int() as u8).to_le_bytes()).await?;
 
             if let Some(if_statement) = &self.security_flag.pin {
                 // pin_salt: u8[16]

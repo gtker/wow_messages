@@ -30,7 +30,7 @@ impl RaidTargetUpdate {
 
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // index: RaidTargetIndex
-        crate::util::write_u8_le(w, self.index.as_int() as u8)?;
+        w.write_all(&(self.index.as_int() as u8).to_le_bytes())?;
 
         // guid: Guid
         self.guid.write(w)?;
@@ -53,7 +53,7 @@ impl RaidTargetUpdate {
 
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // index: RaidTargetIndex
-        crate::util::tokio_write_u8_le(w, self.index.as_int() as u8).await?;
+        w.write_all(&(self.index.as_int() as u8).to_le_bytes()).await?;
 
         // guid: Guid
         self.guid.tokio_write(w).await?;
@@ -76,7 +76,7 @@ impl RaidTargetUpdate {
 
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // index: RaidTargetIndex
-        crate::util::astd_write_u8_le(w, self.index.as_int() as u8).await?;
+        w.write_all(&(self.index.as_int() as u8).to_le_bytes()).await?;
 
         // guid: Guid
         self.guid.astd_write(w).await?;

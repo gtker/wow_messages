@@ -97,10 +97,10 @@ impl MessageBody for SMSG_PET_SPELLS {
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // react: PetReactState
-        crate::util::write_u8_le(w, self.react.as_int() as u8)?;
+        w.write_all(&(self.react.as_int() as u8).to_le_bytes())?;
 
         // command: PetCommandState
-        crate::util::write_u8_le(w, self.command.as_int() as u8)?;
+        w.write_all(&(self.command.as_int() as u8).to_le_bytes())?;
 
         // unknown2: u16
         w.write_all(&self.unknown2.to_le_bytes())?;
@@ -216,10 +216,10 @@ impl MessageBody for SMSG_PET_SPELLS {
             w.write_all(&self.unknown1.to_le_bytes()).await?;
 
             // react: PetReactState
-            crate::util::tokio_write_u8_le(w, self.react.as_int() as u8).await?;
+            w.write_all(&(self.react.as_int() as u8).to_le_bytes()).await?;
 
             // command: PetCommandState
-            crate::util::tokio_write_u8_le(w, self.command.as_int() as u8).await?;
+            w.write_all(&(self.command.as_int() as u8).to_le_bytes()).await?;
 
             // unknown2: u16
             w.write_all(&self.unknown2.to_le_bytes()).await?;
@@ -336,10 +336,10 @@ impl MessageBody for SMSG_PET_SPELLS {
             w.write_all(&self.unknown1.to_le_bytes()).await?;
 
             // react: PetReactState
-            crate::util::astd_write_u8_le(w, self.react.as_int() as u8).await?;
+            w.write_all(&(self.react.as_int() as u8).to_le_bytes()).await?;
 
             // command: PetCommandState
-            crate::util::astd_write_u8_le(w, self.command.as_int() as u8).await?;
+            w.write_all(&(self.command.as_int() as u8).to_le_bytes()).await?;
 
             // unknown2: u16
             w.write_all(&self.unknown2.to_le_bytes()).await?;

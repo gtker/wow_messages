@@ -44,10 +44,10 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
-        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // action: BattlefieldPortAction
-        crate::util::write_u8_le(w, self.action.as_int() as u8)?;
+        w.write_all(&(self.action.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
@@ -93,10 +93,10 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
      {
         Box::pin(async move {
             // map: Map
-            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // action: BattlefieldPortAction
-            crate::util::tokio_write_u8_le(w, self.action.as_int() as u8).await?;
+            w.write_all(&(self.action.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -143,10 +143,10 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
      {
         Box::pin(async move {
             // map: Map
-            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // action: BattlefieldPortAction
-            crate::util::astd_write_u8_le(w, self.action.as_int() as u8).await?;
+            w.write_all(&(self.action.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })

@@ -55,7 +55,7 @@ impl MessageBody for SMSG_BUY_FAILED {
         w.write_all(&self.item_id.to_le_bytes())?;
 
         // result: BuyResult
-        crate::util::write_u8_le(w, self.result.as_int() as u8)?;
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
@@ -111,7 +111,7 @@ impl MessageBody for SMSG_BUY_FAILED {
             w.write_all(&self.item_id.to_le_bytes()).await?;
 
             // result: BuyResult
-            crate::util::tokio_write_u8_le(w, self.result.as_int() as u8).await?;
+            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -168,7 +168,7 @@ impl MessageBody for SMSG_BUY_FAILED {
             w.write_all(&self.item_id.to_le_bytes()).await?;
 
             // result: BuyResult
-            crate::util::astd_write_u8_le(w, self.result.as_int() as u8).await?;
+            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })

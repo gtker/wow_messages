@@ -43,7 +43,7 @@ impl MessageBody for SMSG_SERVER_MESSAGE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // message_type: ServerMessageType
-        crate::util::write_u32_le(w, self.message_type.as_int() as u32)?;
+        w.write_all(&(self.message_type.as_int() as u32).to_le_bytes())?;
 
         // message: CString
         w.write_all(self.message.as_bytes())?;
@@ -95,7 +95,7 @@ impl MessageBody for SMSG_SERVER_MESSAGE {
      {
         Box::pin(async move {
             // message_type: ServerMessageType
-            crate::util::tokio_write_u32_le(w, self.message_type.as_int() as u32).await?;
+            w.write_all(&(self.message_type.as_int() as u32).to_le_bytes()).await?;
 
             // message: CString
             w.write_all(self.message.as_bytes()).await?;
@@ -148,7 +148,7 @@ impl MessageBody for SMSG_SERVER_MESSAGE {
      {
         Box::pin(async move {
             // message_type: ServerMessageType
-            crate::util::astd_write_u32_le(w, self.message_type.as_int() as u32).await?;
+            w.write_all(&(self.message_type.as_int() as u32).to_le_bytes()).await?;
 
             // message: CString
             w.write_all(self.message.as_bytes()).await?;

@@ -182,7 +182,7 @@ impl SpellCastTargets {
 
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
-        crate::util::write_u16_le(w, self.target_flags.as_int() as u16)?;
+        w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes())?;
 
         if let Some(if_statement) = &self.target_flags.unit {
             // unit_target1: PackedGuid
@@ -436,7 +436,7 @@ impl SpellCastTargets {
 
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
-        crate::util::tokio_write_u16_le(w, self.target_flags.as_int() as u16).await?;
+        w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes()).await?;
 
         if let Some(if_statement) = &self.target_flags.unit {
             // unit_target1: PackedGuid
@@ -690,7 +690,7 @@ impl SpellCastTargets {
 
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
-        crate::util::astd_write_u16_le(w, self.target_flags.as_int() as u16).await?;
+        w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes()).await?;
 
         if let Some(if_statement) = &self.target_flags.unit {
             // unit_target1: PackedGuid

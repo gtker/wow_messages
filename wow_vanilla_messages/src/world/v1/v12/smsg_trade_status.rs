@@ -102,7 +102,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // status: TradeStatus
-        crate::util::write_u32_le(w, self.status.as_int() as u32)?;
+        w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
 
         match &self.status {
             SMSG_TRADE_STATUSTradeStatus::BUSY => {}
@@ -129,7 +129,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
                 target_error,
             } => {
                 // inventory_result: InventoryResult
-                crate::util::write_u32_le(w, inventory_result.as_int() as u32)?;
+                w.write_all(&(inventory_result.as_int() as u32).to_le_bytes())?;
 
                 // target_error: u8
                 w.write_all(&target_error.to_le_bytes())?;
@@ -266,7 +266,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
      {
         Box::pin(async move {
             // status: TradeStatus
-            crate::util::tokio_write_u32_le(w, self.status.as_int() as u32).await?;
+            w.write_all(&(self.status.as_int() as u32).to_le_bytes()).await?;
 
             match &self.status {
                 SMSG_TRADE_STATUSTradeStatus::BUSY => {}
@@ -293,7 +293,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
                     target_error,
                 } => {
                     // inventory_result: InventoryResult
-                    crate::util::tokio_write_u32_le(w, inventory_result.as_int() as u32).await?;
+                    w.write_all(&(inventory_result.as_int() as u32).to_le_bytes()).await?;
 
                     // target_error: u8
                     w.write_all(&target_error.to_le_bytes()).await?;
@@ -431,7 +431,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
      {
         Box::pin(async move {
             // status: TradeStatus
-            crate::util::astd_write_u32_le(w, self.status.as_int() as u32).await?;
+            w.write_all(&(self.status.as_int() as u32).to_le_bytes()).await?;
 
             match &self.status {
                 SMSG_TRADE_STATUSTradeStatus::BUSY => {}
@@ -458,7 +458,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
                     target_error,
                 } => {
                     // inventory_result: InventoryResult
-                    crate::util::astd_write_u32_le(w, inventory_result.as_int() as u32).await?;
+                    w.write_all(&(inventory_result.as_int() as u32).to_le_bytes()).await?;
 
                     // target_error: u8
                     w.write_all(&target_error.to_le_bytes()).await?;

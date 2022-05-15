@@ -34,7 +34,7 @@ impl RaidInfo {
 
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
-        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // reset_time: u32
         w.write_all(&self.reset_time.to_le_bytes())?;
@@ -64,7 +64,7 @@ impl RaidInfo {
 
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
-        crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
         // reset_time: u32
         w.write_all(&self.reset_time.to_le_bytes()).await?;
@@ -94,7 +94,7 @@ impl RaidInfo {
 
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
-        crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
         // reset_time: u32
         w.write_all(&self.reset_time.to_le_bytes()).await?;

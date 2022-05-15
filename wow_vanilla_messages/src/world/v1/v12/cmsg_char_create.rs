@@ -90,13 +90,13 @@ impl MessageBody for CMSG_CHAR_CREATE {
         w.write_all(&[0])?;
 
         // race: Race
-        crate::util::write_u8_le(w, self.race.as_int() as u8)?;
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
 
         // class: Class
-        crate::util::write_u8_le(w, self.class.as_int() as u8)?;
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
 
         // gender: Gender
-        crate::util::write_u8_le(w, self.gender.as_int() as u8)?;
+        w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
 
         // skin: u8
         w.write_all(&self.skin.to_le_bytes())?;
@@ -198,13 +198,13 @@ impl MessageBody for CMSG_CHAR_CREATE {
             w.write_all(&[0]).await?;
 
             // race: Race
-            crate::util::tokio_write_u8_le(w, self.race.as_int() as u8).await?;
+            w.write_all(&(self.race.as_int() as u8).to_le_bytes()).await?;
 
             // class: Class
-            crate::util::tokio_write_u8_le(w, self.class.as_int() as u8).await?;
+            w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
 
             // gender: Gender
-            crate::util::tokio_write_u8_le(w, self.gender.as_int() as u8).await?;
+            w.write_all(&(self.gender.as_int() as u8).to_le_bytes()).await?;
 
             // skin: u8
             w.write_all(&self.skin.to_le_bytes()).await?;
@@ -307,13 +307,13 @@ impl MessageBody for CMSG_CHAR_CREATE {
             w.write_all(&[0]).await?;
 
             // race: Race
-            crate::util::astd_write_u8_le(w, self.race.as_int() as u8).await?;
+            w.write_all(&(self.race.as_int() as u8).to_le_bytes()).await?;
 
             // class: Class
-            crate::util::astd_write_u8_le(w, self.class.as_int() as u8).await?;
+            w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
 
             // gender: Gender
-            crate::util::astd_write_u8_le(w, self.gender.as_int() as u8).await?;
+            w.write_all(&(self.gender.as_int() as u8).to_le_bytes()).await?;
 
             // skin: u8
             w.write_all(&self.skin.to_le_bytes()).await?;

@@ -102,7 +102,7 @@ impl Friend {
         self.guid.write(w)?;
 
         // status: FriendStatus
-        crate::util::write_u8_le(w, self.status.as_int() as u8)?;
+        w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
 
         match &self.status {
             FriendFriendStatus::OFFLINE => {}
@@ -112,13 +112,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::write_u32_le(w, area.as_int() as u32)?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                crate::util::write_u32_le(w, class.as_int() as u32)?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
 
             }
             FriendFriendStatus::AFK {
@@ -127,13 +127,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::write_u32_le(w, area.as_int() as u32)?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                crate::util::write_u32_le(w, class.as_int() as u32)?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
 
             }
             FriendFriendStatus::UNKNOWN3 {
@@ -142,13 +142,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::write_u32_le(w, area.as_int() as u32)?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                crate::util::write_u32_le(w, class.as_int() as u32)?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
 
             }
             FriendFriendStatus::DND {
@@ -157,13 +157,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::write_u32_le(w, area.as_int() as u32)?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                crate::util::write_u32_le(w, class.as_int() as u32)?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
 
             }
         }
@@ -257,7 +257,7 @@ impl Friend {
         self.guid.tokio_write(w).await?;
 
         // status: FriendStatus
-        crate::util::tokio_write_u8_le(w, self.status.as_int() as u8).await?;
+        w.write_all(&(self.status.as_int() as u8).to_le_bytes()).await?;
 
         match &self.status {
             FriendFriendStatus::OFFLINE => {}
@@ -267,13 +267,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes()).await?;
 
                 // class: Class
-                crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
 
             }
             FriendFriendStatus::AFK {
@@ -282,13 +282,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes()).await?;
 
                 // class: Class
-                crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
 
             }
             FriendFriendStatus::UNKNOWN3 {
@@ -297,13 +297,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes()).await?;
 
                 // class: Class
-                crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
 
             }
             FriendFriendStatus::DND {
@@ -312,13 +312,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes()).await?;
 
                 // class: Class
-                crate::util::tokio_write_u32_le(w, class.as_int() as u32).await?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
 
             }
         }
@@ -412,7 +412,7 @@ impl Friend {
         self.guid.astd_write(w).await?;
 
         // status: FriendStatus
-        crate::util::astd_write_u8_le(w, self.status.as_int() as u8).await?;
+        w.write_all(&(self.status.as_int() as u8).to_le_bytes()).await?;
 
         match &self.status {
             FriendFriendStatus::OFFLINE => {}
@@ -422,13 +422,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes()).await?;
 
                 // class: Class
-                crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
 
             }
             FriendFriendStatus::AFK {
@@ -437,13 +437,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes()).await?;
 
                 // class: Class
-                crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
 
             }
             FriendFriendStatus::UNKNOWN3 {
@@ -452,13 +452,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes()).await?;
 
                 // class: Class
-                crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
 
             }
             FriendFriendStatus::DND {
@@ -467,13 +467,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
+                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes()).await?;
 
                 // class: Class
-                crate::util::astd_write_u32_le(w, class.as_int() as u32).await?;
+                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
 
             }
         }

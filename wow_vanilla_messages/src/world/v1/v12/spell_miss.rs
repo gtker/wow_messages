@@ -33,7 +33,7 @@ impl SpellMiss {
         self.target_guid.write(w)?;
 
         // miss_info: SpellMissInfo
-        crate::util::write_u32_le(w, self.miss_info.as_int() as u32)?;
+        w.write_all(&(self.miss_info.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -56,7 +56,7 @@ impl SpellMiss {
         self.target_guid.tokio_write(w).await?;
 
         // miss_info: SpellMissInfo
-        crate::util::tokio_write_u32_le(w, self.miss_info.as_int() as u32).await?;
+        w.write_all(&(self.miss_info.as_int() as u32).to_le_bytes()).await?;
 
         Ok(())
     }
@@ -79,7 +79,7 @@ impl SpellMiss {
         self.target_guid.astd_write(w).await?;
 
         // miss_info: SpellMissInfo
-        crate::util::astd_write_u32_le(w, self.miss_info.as_int() as u32).await?;
+        w.write_all(&(self.miss_info.as_int() as u32).to_le_bytes()).await?;
 
         Ok(())
     }

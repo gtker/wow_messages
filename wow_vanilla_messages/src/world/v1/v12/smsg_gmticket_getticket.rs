@@ -74,7 +74,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // status: GmTicketStatus
-        crate::util::write_u32_le(w, self.status.as_int() as u32)?;
+        w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
 
         match &self.status {
             SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
@@ -93,7 +93,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                 w.write_all(&[0])?;
 
                 // ticket_type: GmTicketType
-                crate::util::write_u8_le(w, ticket_type.as_int() as u8)?;
+                w.write_all(&(ticket_type.as_int() as u8).to_le_bytes())?;
 
                 // days_since_ticket_creation: f32
                 w.write_all(&days_since_ticket_creation.to_le_bytes())?;
@@ -105,7 +105,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                 w.write_all(&days_since_last_updated.to_le_bytes())?;
 
                 // escalation_status: GmTicketEscalationStatus
-                crate::util::write_u8_le(w, escalation_status.as_int() as u8)?;
+                w.write_all(&(escalation_status.as_int() as u8).to_le_bytes())?;
 
                 // read_by_gm: u8
                 w.write_all(&read_by_gm.to_le_bytes())?;
@@ -189,7 +189,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
      {
         Box::pin(async move {
             // status: GmTicketStatus
-            crate::util::tokio_write_u32_le(w, self.status.as_int() as u32).await?;
+            w.write_all(&(self.status.as_int() as u32).to_le_bytes()).await?;
 
             match &self.status {
                 SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
@@ -208,7 +208,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                     w.write_all(&[0]).await?;
 
                     // ticket_type: GmTicketType
-                    crate::util::tokio_write_u8_le(w, ticket_type.as_int() as u8).await?;
+                    w.write_all(&(ticket_type.as_int() as u8).to_le_bytes()).await?;
 
                     // days_since_ticket_creation: f32
                     w.write_all(&days_since_ticket_creation.to_le_bytes()).await?;
@@ -220,7 +220,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                     w.write_all(&days_since_last_updated.to_le_bytes()).await?;
 
                     // escalation_status: GmTicketEscalationStatus
-                    crate::util::tokio_write_u8_le(w, escalation_status.as_int() as u8).await?;
+                    w.write_all(&(escalation_status.as_int() as u8).to_le_bytes()).await?;
 
                     // read_by_gm: u8
                     w.write_all(&read_by_gm.to_le_bytes()).await?;
@@ -305,7 +305,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
      {
         Box::pin(async move {
             // status: GmTicketStatus
-            crate::util::astd_write_u32_le(w, self.status.as_int() as u32).await?;
+            w.write_all(&(self.status.as_int() as u32).to_le_bytes()).await?;
 
             match &self.status {
                 SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
@@ -324,7 +324,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                     w.write_all(&[0]).await?;
 
                     // ticket_type: GmTicketType
-                    crate::util::astd_write_u8_le(w, ticket_type.as_int() as u8).await?;
+                    w.write_all(&(ticket_type.as_int() as u8).to_le_bytes()).await?;
 
                     // days_since_ticket_creation: f32
                     w.write_all(&days_since_ticket_creation.to_le_bytes()).await?;
@@ -336,7 +336,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                     w.write_all(&days_since_last_updated.to_le_bytes()).await?;
 
                     // escalation_status: GmTicketEscalationStatus
-                    crate::util::astd_write_u8_le(w, escalation_status.as_int() as u8).await?;
+                    w.write_all(&(escalation_status.as_int() as u8).to_le_bytes()).await?;
 
                     // read_by_gm: u8
                     w.write_all(&read_by_gm.to_le_bytes()).await?;

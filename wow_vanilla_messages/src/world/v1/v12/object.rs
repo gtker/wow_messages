@@ -124,7 +124,7 @@ impl Object {
 
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_type: UpdateType
-        crate::util::write_u8_le(w, self.update_type.as_int() as u8)?;
+        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
 
         match &self.update_type {
             ObjectUpdateType::VALUES {
@@ -159,7 +159,7 @@ impl Object {
                 guid3.write_packed(w)?;
 
                 // object_type: ObjectType
-                crate::util::write_u8_le(w, object_type.as_int() as u8)?;
+                w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
 
                 // movement2: MovementBlock
                 movement2.write(w)?;
@@ -178,7 +178,7 @@ impl Object {
                 guid3.write_packed(w)?;
 
                 // object_type: ObjectType
-                crate::util::write_u8_le(w, object_type.as_int() as u8)?;
+                w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
 
                 // movement2: MovementBlock
                 movement2.write(w)?;
@@ -326,7 +326,7 @@ impl Object {
 
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_type: UpdateType
-        crate::util::tokio_write_u8_le(w, self.update_type.as_int() as u8).await?;
+        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes()).await?;
 
         match &self.update_type {
             ObjectUpdateType::VALUES {
@@ -361,7 +361,7 @@ impl Object {
                 guid3.tokio_write_packed(w).await?;
 
                 // object_type: ObjectType
-                crate::util::tokio_write_u8_le(w, object_type.as_int() as u8).await?;
+                w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
 
                 // movement2: MovementBlock
                 movement2.tokio_write(w).await?;
@@ -380,7 +380,7 @@ impl Object {
                 guid3.tokio_write_packed(w).await?;
 
                 // object_type: ObjectType
-                crate::util::tokio_write_u8_le(w, object_type.as_int() as u8).await?;
+                w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
 
                 // movement2: MovementBlock
                 movement2.tokio_write(w).await?;
@@ -528,7 +528,7 @@ impl Object {
 
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_type: UpdateType
-        crate::util::astd_write_u8_le(w, self.update_type.as_int() as u8).await?;
+        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes()).await?;
 
         match &self.update_type {
             ObjectUpdateType::VALUES {
@@ -563,7 +563,7 @@ impl Object {
                 guid3.astd_write_packed(w).await?;
 
                 // object_type: ObjectType
-                crate::util::astd_write_u8_le(w, object_type.as_int() as u8).await?;
+                w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
 
                 // movement2: MovementBlock
                 movement2.astd_write(w).await?;
@@ -582,7 +582,7 @@ impl Object {
                 guid3.astd_write_packed(w).await?;
 
                 // object_type: ObjectType
-                crate::util::astd_write_u8_le(w, object_type.as_int() as u8).await?;
+                w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
 
                 // movement2: MovementBlock
                 movement2.astd_write(w).await?;

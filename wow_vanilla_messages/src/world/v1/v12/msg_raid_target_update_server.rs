@@ -61,7 +61,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_type: RaidTargetUpdateType
-        crate::util::write_u8_le(w, self.update_type.as_int() as u8)?;
+        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
 
         match &self.update_type {
             MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
@@ -145,7 +145,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
      {
         Box::pin(async move {
             // update_type: RaidTargetUpdateType
-            crate::util::tokio_write_u8_le(w, self.update_type.as_int() as u8).await?;
+            w.write_all(&(self.update_type.as_int() as u8).to_le_bytes()).await?;
 
             match &self.update_type {
                 MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
@@ -230,7 +230,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
      {
         Box::pin(async move {
             // update_type: RaidTargetUpdateType
-            crate::util::astd_write_u8_le(w, self.update_type.as_int() as u8).await?;
+            w.write_all(&(self.update_type.as_int() as u8).to_le_bytes()).await?;
 
             match &self.update_type {
                 MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {

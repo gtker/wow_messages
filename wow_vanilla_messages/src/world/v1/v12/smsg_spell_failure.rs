@@ -55,7 +55,7 @@ impl MessageBody for SMSG_SPELL_FAILURE {
         w.write_all(&self.id.to_le_bytes())?;
 
         // result: SpellCastResult
-        crate::util::write_u8_le(w, self.result.as_int() as u8)?;
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
@@ -111,7 +111,7 @@ impl MessageBody for SMSG_SPELL_FAILURE {
             w.write_all(&self.id.to_le_bytes()).await?;
 
             // result: SpellCastResult
-            crate::util::tokio_write_u8_le(w, self.result.as_int() as u8).await?;
+            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -168,7 +168,7 @@ impl MessageBody for SMSG_SPELL_FAILURE {
             w.write_all(&self.id.to_le_bytes()).await?;
 
             // result: SpellCastResult
-            crate::util::astd_write_u8_le(w, self.result.as_int() as u8).await?;
+            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })

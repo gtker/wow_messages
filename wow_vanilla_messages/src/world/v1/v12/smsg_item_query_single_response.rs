@@ -297,7 +297,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         // optional found
         if let Some(v) = &self.found {
             // item_class: ItemClass
-            crate::util::write_u32_le(w, v.item_class.as_int() as u32)?;
+            w.write_all(&(v.item_class.as_int() as u32).to_le_bytes())?;
 
             // item_sub_class: u32
             w.write_all(&v.item_sub_class.to_le_bytes())?;
@@ -326,7 +326,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.item_display_info.to_le_bytes())?;
 
             // quality: ItemQuality
-            crate::util::write_u32_le(w, v.quality.as_int() as u32)?;
+            w.write_all(&(v.quality.as_int() as u32).to_le_bytes())?;
 
             // flags: u32
             w.write_all(&v.flags.to_le_bytes())?;
@@ -338,7 +338,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.sell_price.to_le_bytes())?;
 
             // inventory_type: InventoryType
-            crate::util::write_u8_le(w, v.inventory_type.as_int() as u8)?;
+            w.write_all(&(v.inventory_type.as_int() as u8).to_le_bytes())?;
 
             // allowed_class: u32
             w.write_all(&v.allowed_class.to_le_bytes())?;
@@ -469,10 +469,10 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.max_durability.to_le_bytes())?;
 
             // area: Area
-            crate::util::write_u32_le(w, v.area.as_int() as u32)?;
+            w.write_all(&(v.area.as_int() as u32).to_le_bytes())?;
 
             // map: Map
-            crate::util::write_u32_le(w, v.map.as_int() as u32)?;
+            w.write_all(&(v.map.as_int() as u32).to_le_bytes())?;
 
             // bag_family: u32
             w.write_all(&v.bag_family.to_le_bytes())?;
@@ -771,7 +771,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // optional found
             if let Some(v) = &self.found {
                 // item_class: ItemClass
-                crate::util::tokio_write_u32_le(w, v.item_class.as_int() as u32).await?;
+                w.write_all(&(v.item_class.as_int() as u32).to_le_bytes()).await?;
 
                 // item_sub_class: u32
                 w.write_all(&v.item_sub_class.to_le_bytes()).await?;
@@ -800,7 +800,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 w.write_all(&v.item_display_info.to_le_bytes()).await?;
 
                 // quality: ItemQuality
-                crate::util::tokio_write_u32_le(w, v.quality.as_int() as u32).await?;
+                w.write_all(&(v.quality.as_int() as u32).to_le_bytes()).await?;
 
                 // flags: u32
                 w.write_all(&v.flags.to_le_bytes()).await?;
@@ -812,7 +812,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 w.write_all(&v.sell_price.to_le_bytes()).await?;
 
                 // inventory_type: InventoryType
-                crate::util::tokio_write_u8_le(w, v.inventory_type.as_int() as u8).await?;
+                w.write_all(&(v.inventory_type.as_int() as u8).to_le_bytes()).await?;
 
                 // allowed_class: u32
                 w.write_all(&v.allowed_class.to_le_bytes()).await?;
@@ -943,10 +943,10 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 w.write_all(&v.max_durability.to_le_bytes()).await?;
 
                 // area: Area
-                crate::util::tokio_write_u32_le(w, v.area.as_int() as u32).await?;
+                w.write_all(&(v.area.as_int() as u32).to_le_bytes()).await?;
 
                 // map: Map
-                crate::util::tokio_write_u32_le(w, v.map.as_int() as u32).await?;
+                w.write_all(&(v.map.as_int() as u32).to_le_bytes()).await?;
 
                 // bag_family: u32
                 w.write_all(&v.bag_family.to_le_bytes()).await?;
@@ -1246,7 +1246,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // optional found
             if let Some(v) = &self.found {
                 // item_class: ItemClass
-                crate::util::astd_write_u32_le(w, v.item_class.as_int() as u32).await?;
+                w.write_all(&(v.item_class.as_int() as u32).to_le_bytes()).await?;
 
                 // item_sub_class: u32
                 w.write_all(&v.item_sub_class.to_le_bytes()).await?;
@@ -1275,7 +1275,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 w.write_all(&v.item_display_info.to_le_bytes()).await?;
 
                 // quality: ItemQuality
-                crate::util::astd_write_u32_le(w, v.quality.as_int() as u32).await?;
+                w.write_all(&(v.quality.as_int() as u32).to_le_bytes()).await?;
 
                 // flags: u32
                 w.write_all(&v.flags.to_le_bytes()).await?;
@@ -1287,7 +1287,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 w.write_all(&v.sell_price.to_le_bytes()).await?;
 
                 // inventory_type: InventoryType
-                crate::util::astd_write_u8_le(w, v.inventory_type.as_int() as u8).await?;
+                w.write_all(&(v.inventory_type.as_int() as u8).to_le_bytes()).await?;
 
                 // allowed_class: u32
                 w.write_all(&v.allowed_class.to_le_bytes()).await?;
@@ -1418,10 +1418,10 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 w.write_all(&v.max_durability.to_le_bytes()).await?;
 
                 // area: Area
-                crate::util::astd_write_u32_le(w, v.area.as_int() as u32).await?;
+                w.write_all(&(v.area.as_int() as u32).to_le_bytes()).await?;
 
                 // map: Map
-                crate::util::astd_write_u32_le(w, v.map.as_int() as u32).await?;
+                w.write_all(&(v.map.as_int() as u32).to_le_bytes()).await?;
 
                 // bag_family: u32
                 w.write_all(&v.bag_family.to_le_bytes()).await?;

@@ -153,7 +153,7 @@ impl Mail {
         w.write_all(&self.message_id.to_le_bytes())?;
 
         // message_type: MailType
-        crate::util::write_u8_le(w, self.message_type.as_int() as u8)?;
+        w.write_all(&(self.message_type.as_int() as u8).to_le_bytes())?;
 
         match &self.message_type {
             MailMailType::NORMAL {
@@ -365,7 +365,7 @@ impl Mail {
         w.write_all(&self.message_id.to_le_bytes()).await?;
 
         // message_type: MailType
-        crate::util::tokio_write_u8_le(w, self.message_type.as_int() as u8).await?;
+        w.write_all(&(self.message_type.as_int() as u8).to_le_bytes()).await?;
 
         match &self.message_type {
             MailMailType::NORMAL {
@@ -577,7 +577,7 @@ impl Mail {
         w.write_all(&self.message_id.to_le_bytes()).await?;
 
         // message_type: MailType
-        crate::util::astd_write_u8_le(w, self.message_type.as_int() as u8).await?;
+        w.write_all(&(self.message_type.as_int() as u8).to_le_bytes()).await?;
 
         match &self.message_type {
             MailMailType::NORMAL {

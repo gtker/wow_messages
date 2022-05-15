@@ -43,7 +43,7 @@ impl MessageBody for SMSG_SET_PROFICIENCY {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // class: ItemClass
-        crate::util::write_u8_le(w, self.class.as_int() as u8)?;
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
 
         // item_sub_class_mask: u32
         w.write_all(&self.item_sub_class_mask.to_le_bytes())?;
@@ -92,7 +92,7 @@ impl MessageBody for SMSG_SET_PROFICIENCY {
      {
         Box::pin(async move {
             // class: ItemClass
-            crate::util::tokio_write_u8_le(w, self.class.as_int() as u8).await?;
+            w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
 
             // item_sub_class_mask: u32
             w.write_all(&self.item_sub_class_mask.to_le_bytes()).await?;
@@ -142,7 +142,7 @@ impl MessageBody for SMSG_SET_PROFICIENCY {
      {
         Box::pin(async move {
             // class: ItemClass
-            crate::util::astd_write_u8_le(w, self.class.as_int() as u8).await?;
+            w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
 
             // item_sub_class_mask: u32
             w.write_all(&self.item_sub_class_mask.to_le_bytes()).await?;

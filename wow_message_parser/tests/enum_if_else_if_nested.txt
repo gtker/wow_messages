@@ -42,10 +42,10 @@ impl EnumIfElseIfNested {
 
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // e: SimpleEnum
-        crate::util::write_u8_le(w, self.e.as_int() as u8)?;
+        w.write_all(&(self.e.as_int() as u8).to_le_bytes())?;
 
         // n: NestedEnum
-        crate::util::write_u8_le(w, self.n.as_int() as u8)?;
+        w.write_all(&(self.n.as_int() as u8).to_le_bytes())?;
 
         match &self.e {
             EnumIfElseIfNestedSimpleEnum::ZERO {
@@ -90,10 +90,10 @@ impl EnumIfElseIfNested {
 
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // e: SimpleEnum
-        crate::util::tokio_write_u8_le(w, self.e.as_int() as u8).await?;
+        w.write_all(&(self.e.as_int() as u8).to_le_bytes()).await?;
 
         // n: NestedEnum
-        crate::util::tokio_write_u8_le(w, self.n.as_int() as u8).await?;
+        w.write_all(&(self.n.as_int() as u8).to_le_bytes()).await?;
 
         match &self.e {
             EnumIfElseIfNestedSimpleEnum::ZERO {
@@ -138,10 +138,10 @@ impl EnumIfElseIfNested {
 
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // e: SimpleEnum
-        crate::util::astd_write_u8_le(w, self.e.as_int() as u8).await?;
+        w.write_all(&(self.e.as_int() as u8).to_le_bytes()).await?;
 
         // n: NestedEnum
-        crate::util::astd_write_u8_le(w, self.n.as_int() as u8).await?;
+        w.write_all(&(self.n.as_int() as u8).to_le_bytes()).await?;
 
         match &self.e {
             EnumIfElseIfNestedSimpleEnum::ZERO {

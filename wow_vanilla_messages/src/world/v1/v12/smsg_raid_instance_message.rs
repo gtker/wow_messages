@@ -49,10 +49,10 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // message_type: RaidInstanceMessage
-        crate::util::write_u32_le(w, self.message_type.as_int() as u32)?;
+        w.write_all(&(self.message_type.as_int() as u32).to_le_bytes())?;
 
         // map: Map
-        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // time_left: u32
         w.write_all(&self.time_left.to_le_bytes())?;
@@ -105,10 +105,10 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
      {
         Box::pin(async move {
             // message_type: RaidInstanceMessage
-            crate::util::tokio_write_u32_le(w, self.message_type.as_int() as u32).await?;
+            w.write_all(&(self.message_type.as_int() as u32).to_le_bytes()).await?;
 
             // map: Map
-            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // time_left: u32
             w.write_all(&self.time_left.to_le_bytes()).await?;
@@ -162,10 +162,10 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
      {
         Box::pin(async move {
             // message_type: RaidInstanceMessage
-            crate::util::astd_write_u32_le(w, self.message_type.as_int() as u32).await?;
+            w.write_all(&(self.message_type.as_int() as u32).to_le_bytes()).await?;
 
             // map: Map
-            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // time_left: u32
             w.write_all(&self.time_left.to_le_bytes()).await?;

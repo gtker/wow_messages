@@ -55,7 +55,7 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
         self.owner_guid.write(w)?;
 
         // result: PetitionResult
-        crate::util::write_u32_le(w, self.result.as_int() as u32)?;
+        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -111,7 +111,7 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
             self.owner_guid.tokio_write(w).await?;
 
             // result: PetitionResult
-            crate::util::tokio_write_u32_le(w, self.result.as_int() as u32).await?;
+            w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -168,7 +168,7 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
             self.owner_guid.astd_write(w).await?;
 
             // result: PetitionResult
-            crate::util::astd_write_u32_le(w, self.result.as_int() as u32).await?;
+            w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

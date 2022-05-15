@@ -63,7 +63,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // result: CorpseQueryResult
-        crate::util::write_u8_le(w, self.result.as_int() as u8)?;
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
         match &self.result {
             MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
@@ -75,7 +75,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                 position_z,
             } => {
                 // map: Map
-                crate::util::write_u32_le(w, map.as_int() as u32)?;
+                w.write_all(&(map.as_int() as u32).to_le_bytes())?;
 
                 // position_x: f32
                 w.write_all(&position_x.to_le_bytes())?;
@@ -87,7 +87,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                 w.write_all(&position_z.to_le_bytes())?;
 
                 // corpse_map: Map
-                crate::util::write_u32_le(w, corpse_map.as_int() as u32)?;
+                w.write_all(&(corpse_map.as_int() as u32).to_le_bytes())?;
 
             }
         }
@@ -157,7 +157,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
      {
         Box::pin(async move {
             // result: CorpseQueryResult
-            crate::util::tokio_write_u8_le(w, self.result.as_int() as u8).await?;
+            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
 
             match &self.result {
                 MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
@@ -169,7 +169,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     position_z,
                 } => {
                     // map: Map
-                    crate::util::tokio_write_u32_le(w, map.as_int() as u32).await?;
+                    w.write_all(&(map.as_int() as u32).to_le_bytes()).await?;
 
                     // position_x: f32
                     w.write_all(&position_x.to_le_bytes()).await?;
@@ -181,7 +181,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     w.write_all(&position_z.to_le_bytes()).await?;
 
                     // corpse_map: Map
-                    crate::util::tokio_write_u32_le(w, corpse_map.as_int() as u32).await?;
+                    w.write_all(&(corpse_map.as_int() as u32).to_le_bytes()).await?;
 
                 }
             }
@@ -252,7 +252,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
      {
         Box::pin(async move {
             // result: CorpseQueryResult
-            crate::util::astd_write_u8_le(w, self.result.as_int() as u8).await?;
+            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
 
             match &self.result {
                 MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
@@ -264,7 +264,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     position_z,
                 } => {
                     // map: Map
-                    crate::util::astd_write_u32_le(w, map.as_int() as u32).await?;
+                    w.write_all(&(map.as_int() as u32).to_le_bytes()).await?;
 
                     // position_x: f32
                     w.write_all(&position_x.to_le_bytes()).await?;
@@ -276,7 +276,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     w.write_all(&position_z.to_le_bytes()).await?;
 
                     // corpse_map: Map
-                    crate::util::astd_write_u32_le(w, corpse_map.as_int() as u32).await?;
+                    w.write_all(&(corpse_map.as_int() as u32).to_le_bytes()).await?;
 
                 }
             }

@@ -49,7 +49,7 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // command: GuildCommand
-        crate::util::write_u32_le(w, self.command.as_int() as u32)?;
+        w.write_all(&(self.command.as_int() as u32).to_le_bytes())?;
 
         // string: CString
         w.write_all(self.string.as_bytes())?;
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
         w.write_all(&[0])?;
 
         // result: GuildCommandResult
-        crate::util::write_u32_le(w, self.result.as_int() as u32)?;
+        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -108,7 +108,7 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
      {
         Box::pin(async move {
             // command: GuildCommand
-            crate::util::tokio_write_u32_le(w, self.command.as_int() as u32).await?;
+            w.write_all(&(self.command.as_int() as u32).to_le_bytes()).await?;
 
             // string: CString
             w.write_all(self.string.as_bytes()).await?;
@@ -116,7 +116,7 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
             w.write_all(&[0]).await?;
 
             // result: GuildCommandResult
-            crate::util::tokio_write_u32_le(w, self.result.as_int() as u32).await?;
+            w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -168,7 +168,7 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
      {
         Box::pin(async move {
             // command: GuildCommand
-            crate::util::astd_write_u32_le(w, self.command.as_int() as u32).await?;
+            w.write_all(&(self.command.as_int() as u32).to_le_bytes()).await?;
 
             // string: CString
             w.write_all(self.string.as_bytes()).await?;
@@ -176,7 +176,7 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
             w.write_all(&[0]).await?;
 
             // result: GuildCommandResult
-            crate::util::astd_write_u32_le(w, self.result.as_int() as u32).await?;
+            w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

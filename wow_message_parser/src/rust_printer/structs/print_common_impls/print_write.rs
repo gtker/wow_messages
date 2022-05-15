@@ -254,34 +254,23 @@ pub fn print_write_definition(
             s: identifier,
             upcast,
         } => {
-            match upcast {
-                None => {}
-                Some(integer) => {
+            match o.get_object_type_of(identifier, e.tags()) {
+                ObjectType::Enum | ObjectType::Flag => {
+                    let integer = match upcast {
+                        None => {
+                            let definer = o.get_definer(identifier, e.tags());
+                            definer.ty()
+                        }
+                        Some(integer) => integer,
+                    };
+
                     s.wln(format!(
-                        "crate::util::{prefix}write_{ty}_{endian}(w, {variable_prefix}{name}.as_int() as {ty}){postfix}?;",
+                        "w.write_all(&({variable_prefix}{name}.as_int() as {ty}).to_{endian}_bytes()){postfix}?;",
                         variable_prefix = variable_prefix,
-                        prefix = prefix,
                         postfix = postfix,
                         name = d.name(),
                         ty = integer.rust_str(),
                         endian = integer.rust_endian_str()
-                    ));
-                    s.newline();
-                    return;
-                }
-            }
-
-            match o.get_object_type_of(identifier, e.tags()) {
-                ObjectType::Enum | ObjectType::Flag => {
-                    let definer = o.get_definer(identifier, e.tags());
-                    s.wln(format!(
-                        "crate::util::{prefix}write_{ty}_{endian}(w, {variable_prefix}{name}.as_int() as {ty}){postfix}?;",
-                        variable_prefix = variable_prefix,
-                        prefix = prefix,
-                        postfix = postfix,
-                        name = d.name(),
-                        ty = definer.ty().rust_str(),
-                        endian = definer.ty().rust_endian_str()
                     ));
                     s.newline();
                     return;

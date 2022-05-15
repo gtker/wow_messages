@@ -92,7 +92,7 @@ impl MessageBody for SMSG_GROUP_LIST {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // group_type: GroupType
-        crate::util::write_u8_le(w, self.group_type.as_int() as u8)?;
+        w.write_all(&(self.group_type.as_int() as u8).to_le_bytes())?;
 
         // own_flags: u8
         w.write_all(&self.own_flags.to_le_bytes())?;
@@ -111,13 +111,13 @@ impl MessageBody for SMSG_GROUP_LIST {
         // optional group_not_empty
         if let Some(v) = &self.group_not_empty {
             // loot_setting: GroupLootSetting
-            crate::util::write_u8_le(w, v.loot_setting.as_int() as u8)?;
+            w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes())?;
 
             // master_loot: Guid
             v.master_loot.write(w)?;
 
             // loot_threshold: ItemQuality
-            crate::util::write_u8_le(w, v.loot_threshold.as_int() as u8)?;
+            w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes())?;
 
         }
 
@@ -208,7 +208,7 @@ impl MessageBody for SMSG_GROUP_LIST {
      {
         Box::pin(async move {
             // group_type: GroupType
-            crate::util::tokio_write_u8_le(w, self.group_type.as_int() as u8).await?;
+            w.write_all(&(self.group_type.as_int() as u8).to_le_bytes()).await?;
 
             // own_flags: u8
             w.write_all(&self.own_flags.to_le_bytes()).await?;
@@ -227,13 +227,13 @@ impl MessageBody for SMSG_GROUP_LIST {
             // optional group_not_empty
             if let Some(v) = &self.group_not_empty {
                 // loot_setting: GroupLootSetting
-                crate::util::tokio_write_u8_le(w, v.loot_setting.as_int() as u8).await?;
+                w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes()).await?;
 
                 // master_loot: Guid
                 v.master_loot.tokio_write(w).await?;
 
                 // loot_threshold: ItemQuality
-                crate::util::tokio_write_u8_le(w, v.loot_threshold.as_int() as u8).await?;
+                w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes()).await?;
 
             }
 
@@ -325,7 +325,7 @@ impl MessageBody for SMSG_GROUP_LIST {
      {
         Box::pin(async move {
             // group_type: GroupType
-            crate::util::astd_write_u8_le(w, self.group_type.as_int() as u8).await?;
+            w.write_all(&(self.group_type.as_int() as u8).to_le_bytes()).await?;
 
             // own_flags: u8
             w.write_all(&self.own_flags.to_le_bytes()).await?;
@@ -344,13 +344,13 @@ impl MessageBody for SMSG_GROUP_LIST {
             // optional group_not_empty
             if let Some(v) = &self.group_not_empty {
                 // loot_setting: GroupLootSetting
-                crate::util::astd_write_u8_le(w, v.loot_setting.as_int() as u8).await?;
+                w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes()).await?;
 
                 // master_loot: Guid
                 v.master_loot.astd_write(w).await?;
 
                 // loot_threshold: ItemQuality
-                crate::util::astd_write_u8_le(w, v.loot_threshold.as_int() as u8).await?;
+                w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes()).await?;
 
             }
 

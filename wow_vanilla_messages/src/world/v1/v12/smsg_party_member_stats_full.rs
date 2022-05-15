@@ -293,11 +293,11 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
         self.player.write_packed(w)?;
 
         // mask: GroupUpdateFlags
-        crate::util::write_u32_le(w, self.mask.as_int() as u32)?;
+        w.write_all(&(self.mask.as_int() as u32).to_le_bytes())?;
 
         if let Some(if_statement) = &self.mask.flag_status {
             // status: GroupMemberOnlineStatus
-            crate::util::write_u8_le(w, if_statement.status.as_int() as u8)?;
+            w.write_all(&(if_statement.status.as_int() as u8).to_le_bytes())?;
 
         }
 
@@ -315,7 +315,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.flag_power_type {
             // power: Power
-            crate::util::write_u8_le(w, if_statement.power.as_int() as u8)?;
+            w.write_all(&(if_statement.power.as_int() as u8).to_le_bytes())?;
 
         }
 
@@ -339,7 +339,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.flag_zone {
             // area: Area
-            crate::util::write_u32_le(w, if_statement.area.as_int() as u32)?;
+            w.write_all(&(if_statement.area.as_int() as u32).to_le_bytes())?;
 
         }
 
@@ -386,7 +386,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.flag_pet_power_type {
             // pet_power_type: Power
-            crate::util::write_u8_le(w, if_statement.pet_power_type.as_int() as u8)?;
+            w.write_all(&(if_statement.pet_power_type.as_int() as u8).to_le_bytes())?;
 
         }
 
@@ -698,11 +698,11 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
             self.player.tokio_write_packed(w).await?;
 
             // mask: GroupUpdateFlags
-            crate::util::tokio_write_u32_le(w, self.mask.as_int() as u32).await?;
+            w.write_all(&(self.mask.as_int() as u32).to_le_bytes()).await?;
 
             if let Some(if_statement) = &self.mask.flag_status {
                 // status: GroupMemberOnlineStatus
-                crate::util::tokio_write_u8_le(w, if_statement.status.as_int() as u8).await?;
+                w.write_all(&(if_statement.status.as_int() as u8).to_le_bytes()).await?;
 
             }
 
@@ -720,7 +720,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_power_type {
                 // power: Power
-                crate::util::tokio_write_u8_le(w, if_statement.power.as_int() as u8).await?;
+                w.write_all(&(if_statement.power.as_int() as u8).to_le_bytes()).await?;
 
             }
 
@@ -744,7 +744,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_zone {
                 // area: Area
-                crate::util::tokio_write_u32_le(w, if_statement.area.as_int() as u32).await?;
+                w.write_all(&(if_statement.area.as_int() as u32).to_le_bytes()).await?;
 
             }
 
@@ -791,7 +791,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_pet_power_type {
                 // pet_power_type: Power
-                crate::util::tokio_write_u8_le(w, if_statement.pet_power_type.as_int() as u8).await?;
+                w.write_all(&(if_statement.pet_power_type.as_int() as u8).to_le_bytes()).await?;
 
             }
 
@@ -1104,11 +1104,11 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
             self.player.astd_write_packed(w).await?;
 
             // mask: GroupUpdateFlags
-            crate::util::astd_write_u32_le(w, self.mask.as_int() as u32).await?;
+            w.write_all(&(self.mask.as_int() as u32).to_le_bytes()).await?;
 
             if let Some(if_statement) = &self.mask.flag_status {
                 // status: GroupMemberOnlineStatus
-                crate::util::astd_write_u8_le(w, if_statement.status.as_int() as u8).await?;
+                w.write_all(&(if_statement.status.as_int() as u8).to_le_bytes()).await?;
 
             }
 
@@ -1126,7 +1126,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_power_type {
                 // power: Power
-                crate::util::astd_write_u8_le(w, if_statement.power.as_int() as u8).await?;
+                w.write_all(&(if_statement.power.as_int() as u8).to_le_bytes()).await?;
 
             }
 
@@ -1150,7 +1150,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_zone {
                 // area: Area
-                crate::util::astd_write_u32_le(w, if_statement.area.as_int() as u32).await?;
+                w.write_all(&(if_statement.area.as_int() as u32).to_le_bytes()).await?;
 
             }
 
@@ -1197,7 +1197,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_pet_power_type {
                 // pet_power_type: Power
-                crate::util::astd_write_u8_le(w, if_statement.pet_power_type.as_int() as u8).await?;
+                w.write_all(&(if_statement.pet_power_type.as_int() as u8).to_le_bytes()).await?;
 
             }
 

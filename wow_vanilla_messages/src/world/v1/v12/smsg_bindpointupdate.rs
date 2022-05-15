@@ -65,10 +65,10 @@ impl MessageBody for SMSG_BINDPOINTUPDATE {
         w.write_all(&self.position_z.to_le_bytes())?;
 
         // map: Map
-        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // area: Area
-        crate::util::write_u32_le(w, self.area.as_int() as u32)?;
+        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -132,10 +132,10 @@ impl MessageBody for SMSG_BINDPOINTUPDATE {
             w.write_all(&self.position_z.to_le_bytes()).await?;
 
             // map: Map
-            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // area: Area
-            crate::util::tokio_write_u32_le(w, self.area.as_int() as u32).await?;
+            w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -200,10 +200,10 @@ impl MessageBody for SMSG_BINDPOINTUPDATE {
             w.write_all(&self.position_z.to_le_bytes()).await?;
 
             // map: Map
-            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // area: Area
-            crate::util::astd_write_u32_le(w, self.area.as_int() as u32).await?;
+            w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

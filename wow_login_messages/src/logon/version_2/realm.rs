@@ -63,10 +63,10 @@ impl Realm {
 
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // realm_type: RealmType
-        crate::util::write_u32_le(w, self.realm_type.as_int() as u32)?;
+        w.write_all(&(self.realm_type.as_int() as u32).to_le_bytes())?;
 
         // flag: RealmFlag
-        crate::util::write_u8_le(w, self.flag.as_int() as u8)?;
+        w.write_all(&(self.flag.as_int() as u8).to_le_bytes())?;
 
         // name: CString
         w.write_all(self.name.as_bytes())?;
@@ -79,13 +79,13 @@ impl Realm {
         w.write_all(&[0])?;
 
         // population: Population
-        crate::util::write_u32_le(w, self.population.as_int() as u32)?;
+        w.write_all(&(self.population.as_int() as u32).to_le_bytes())?;
 
         // number_of_characters_on_realm: u8
         w.write_all(&self.number_of_characters_on_realm.to_le_bytes())?;
 
         // category: RealmCategory
-        crate::util::write_u8_le(w, self.category.as_int() as u8)?;
+        w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
 
         // realm_id: u8
         w.write_all(&self.realm_id.to_le_bytes())?;
@@ -134,10 +134,10 @@ impl Realm {
 
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // realm_type: RealmType
-        crate::util::tokio_write_u32_le(w, self.realm_type.as_int() as u32).await?;
+        w.write_all(&(self.realm_type.as_int() as u32).to_le_bytes()).await?;
 
         // flag: RealmFlag
-        crate::util::tokio_write_u8_le(w, self.flag.as_int() as u8).await?;
+        w.write_all(&(self.flag.as_int() as u8).to_le_bytes()).await?;
 
         // name: CString
         w.write_all(self.name.as_bytes()).await?;
@@ -150,13 +150,13 @@ impl Realm {
         w.write_all(&[0]).await?;
 
         // population: Population
-        crate::util::tokio_write_u32_le(w, self.population.as_int() as u32).await?;
+        w.write_all(&(self.population.as_int() as u32).to_le_bytes()).await?;
 
         // number_of_characters_on_realm: u8
         w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
 
         // category: RealmCategory
-        crate::util::tokio_write_u8_le(w, self.category.as_int() as u8).await?;
+        w.write_all(&(self.category.as_int() as u8).to_le_bytes()).await?;
 
         // realm_id: u8
         w.write_all(&self.realm_id.to_le_bytes()).await?;
@@ -205,10 +205,10 @@ impl Realm {
 
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // realm_type: RealmType
-        crate::util::astd_write_u32_le(w, self.realm_type.as_int() as u32).await?;
+        w.write_all(&(self.realm_type.as_int() as u32).to_le_bytes()).await?;
 
         // flag: RealmFlag
-        crate::util::astd_write_u8_le(w, self.flag.as_int() as u8).await?;
+        w.write_all(&(self.flag.as_int() as u8).to_le_bytes()).await?;
 
         // name: CString
         w.write_all(self.name.as_bytes()).await?;
@@ -221,13 +221,13 @@ impl Realm {
         w.write_all(&[0]).await?;
 
         // population: Population
-        crate::util::astd_write_u32_le(w, self.population.as_int() as u32).await?;
+        w.write_all(&(self.population.as_int() as u32).to_le_bytes()).await?;
 
         // number_of_characters_on_realm: u8
         w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
 
         // category: RealmCategory
-        crate::util::astd_write_u8_le(w, self.category.as_int() as u8).await?;
+        w.write_all(&(self.category.as_int() as u8).to_le_bytes()).await?;
 
         // realm_id: u8
         w.write_all(&self.realm_id.to_le_bytes()).await?;

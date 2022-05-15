@@ -307,7 +307,7 @@ impl AuraLog {
 
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // aura_type: AuraType
-        crate::util::write_u32_le(w, self.aura_type.as_int() as u32)?;
+        w.write_all(&(self.aura_type.as_int() as u32).to_le_bytes())?;
 
         match &self.aura_type {
             AuraLogAuraType::NONE => {}
@@ -323,7 +323,7 @@ impl AuraLog {
                 w.write_all(&damage1.to_le_bytes())?;
 
                 // school: SpellSchool
-                crate::util::write_u8_le(w, school.as_int() as u8)?;
+                w.write_all(&(school.as_int() as u8).to_le_bytes())?;
 
                 // absorbed: u32
                 w.write_all(&absorbed.to_le_bytes())?;
@@ -473,7 +473,7 @@ impl AuraLog {
                 w.write_all(&damage1.to_le_bytes())?;
 
                 // school: SpellSchool
-                crate::util::write_u8_le(w, school.as_int() as u8)?;
+                w.write_all(&(school.as_int() as u8).to_le_bytes())?;
 
                 // absorbed: u32
                 w.write_all(&absorbed.to_le_bytes())?;
@@ -883,7 +883,7 @@ impl AuraLog {
 
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // aura_type: AuraType
-        crate::util::tokio_write_u32_le(w, self.aura_type.as_int() as u32).await?;
+        w.write_all(&(self.aura_type.as_int() as u32).to_le_bytes()).await?;
 
         match &self.aura_type {
             AuraLogAuraType::NONE => {}
@@ -899,7 +899,7 @@ impl AuraLog {
                 w.write_all(&damage1.to_le_bytes()).await?;
 
                 // school: SpellSchool
-                crate::util::tokio_write_u8_le(w, school.as_int() as u8).await?;
+                w.write_all(&(school.as_int() as u8).to_le_bytes()).await?;
 
                 // absorbed: u32
                 w.write_all(&absorbed.to_le_bytes()).await?;
@@ -1049,7 +1049,7 @@ impl AuraLog {
                 w.write_all(&damage1.to_le_bytes()).await?;
 
                 // school: SpellSchool
-                crate::util::tokio_write_u8_le(w, school.as_int() as u8).await?;
+                w.write_all(&(school.as_int() as u8).to_le_bytes()).await?;
 
                 // absorbed: u32
                 w.write_all(&absorbed.to_le_bytes()).await?;
@@ -1459,7 +1459,7 @@ impl AuraLog {
 
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // aura_type: AuraType
-        crate::util::astd_write_u32_le(w, self.aura_type.as_int() as u32).await?;
+        w.write_all(&(self.aura_type.as_int() as u32).to_le_bytes()).await?;
 
         match &self.aura_type {
             AuraLogAuraType::NONE => {}
@@ -1475,7 +1475,7 @@ impl AuraLog {
                 w.write_all(&damage1.to_le_bytes()).await?;
 
                 // school: SpellSchool
-                crate::util::astd_write_u8_le(w, school.as_int() as u8).await?;
+                w.write_all(&(school.as_int() as u8).to_le_bytes()).await?;
 
                 // absorbed: u32
                 w.write_all(&absorbed.to_le_bytes()).await?;
@@ -1625,7 +1625,7 @@ impl AuraLog {
                 w.write_all(&damage1.to_le_bytes()).await?;
 
                 // school: SpellSchool
-                crate::util::astd_write_u8_le(w, school.as_int() as u8).await?;
+                w.write_all(&(school.as_int() as u8).to_le_bytes()).await?;
 
                 // absorbed: u32
                 w.write_all(&absorbed.to_le_bytes()).await?;

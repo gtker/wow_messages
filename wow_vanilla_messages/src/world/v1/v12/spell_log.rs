@@ -345,7 +345,7 @@ impl SpellLog {
 
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // effect: SpellEffect
-        crate::util::write_u32_le(w, self.effect.as_int() as u32)?;
+        w.write_all(&(self.effect.as_int() as u32).to_le_bytes())?;
 
         // amount_of_logs: u32
         w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes())?;
@@ -971,7 +971,7 @@ impl SpellLog {
 
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // effect: SpellEffect
-        crate::util::tokio_write_u32_le(w, self.effect.as_int() as u32).await?;
+        w.write_all(&(self.effect.as_int() as u32).to_le_bytes()).await?;
 
         // amount_of_logs: u32
         w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes()).await?;
@@ -1597,7 +1597,7 @@ impl SpellLog {
 
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // effect: SpellEffect
-        crate::util::astd_write_u32_le(w, self.effect.as_int() as u32).await?;
+        w.write_all(&(self.effect.as_int() as u32).to_le_bytes()).await?;
 
         // amount_of_logs: u32
         w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes()).await?;

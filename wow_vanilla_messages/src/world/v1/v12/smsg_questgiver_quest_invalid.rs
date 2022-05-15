@@ -38,7 +38,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_INVALID {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // msg: QuestFailedReason
-        crate::util::write_u32_le(w, self.msg.as_int() as u32)?;
+        w.write_all(&(self.msg.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_INVALID {
      {
         Box::pin(async move {
             // msg: QuestFailedReason
-            crate::util::tokio_write_u32_le(w, self.msg.as_int() as u32).await?;
+            w.write_all(&(self.msg.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -123,7 +123,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_INVALID {
      {
         Box::pin(async move {
             // msg: QuestFailedReason
-            crate::util::astd_write_u32_le(w, self.msg.as_int() as u32).await?;
+            w.write_all(&(self.msg.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

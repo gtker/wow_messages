@@ -38,7 +38,7 @@ impl MessageBody for SMSG_STABLE_RESULT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // result: StableResult
-        crate::util::write_u8_le(w, self.result.as_int() as u8)?;
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_STABLE_RESULT {
      {
         Box::pin(async move {
             // result: StableResult
-            crate::util::tokio_write_u8_le(w, self.result.as_int() as u8).await?;
+            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -123,7 +123,7 @@ impl MessageBody for SMSG_STABLE_RESULT {
      {
         Box::pin(async move {
             // result: StableResult
-            crate::util::astd_write_u8_le(w, self.result.as_int() as u8).await?;
+            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })

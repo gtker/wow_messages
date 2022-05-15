@@ -49,7 +49,7 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // operation: PartyOperation
-        crate::util::write_u32_le(w, self.operation.as_int() as u32)?;
+        w.write_all(&(self.operation.as_int() as u32).to_le_bytes())?;
 
         // member: CString
         w.write_all(self.member.as_bytes())?;
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
         w.write_all(&[0])?;
 
         // result: PartyResult
-        crate::util::write_u32_le(w, self.result.as_int() as u32)?;
+        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -108,7 +108,7 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
      {
         Box::pin(async move {
             // operation: PartyOperation
-            crate::util::tokio_write_u32_le(w, self.operation.as_int() as u32).await?;
+            w.write_all(&(self.operation.as_int() as u32).to_le_bytes()).await?;
 
             // member: CString
             w.write_all(self.member.as_bytes()).await?;
@@ -116,7 +116,7 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
             w.write_all(&[0]).await?;
 
             // result: PartyResult
-            crate::util::tokio_write_u32_le(w, self.result.as_int() as u32).await?;
+            w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -168,7 +168,7 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
      {
         Box::pin(async move {
             // operation: PartyOperation
-            crate::util::astd_write_u32_le(w, self.operation.as_int() as u32).await?;
+            w.write_all(&(self.operation.as_int() as u32).to_le_bytes()).await?;
 
             // member: CString
             w.write_all(self.member.as_bytes()).await?;
@@ -176,7 +176,7 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
             w.write_all(&[0]).await?;
 
             // result: PartyResult
-            crate::util::astd_write_u32_le(w, self.result.as_int() as u32).await?;
+            w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;
 
             Ok(())
         })

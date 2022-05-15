@@ -55,7 +55,7 @@ impl MessageBody for CMSG_LOOT_ROLL {
         w.write_all(&self.item_slot.to_le_bytes())?;
 
         // vote: RollVote
-        crate::util::write_u8_le(w, self.vote.as_int() as u8)?;
+        w.write_all(&(self.vote.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
@@ -111,7 +111,7 @@ impl MessageBody for CMSG_LOOT_ROLL {
             w.write_all(&self.item_slot.to_le_bytes()).await?;
 
             // vote: RollVote
-            crate::util::tokio_write_u8_le(w, self.vote.as_int() as u8).await?;
+            w.write_all(&(self.vote.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -168,7 +168,7 @@ impl MessageBody for CMSG_LOOT_ROLL {
             w.write_all(&self.item_slot.to_le_bytes()).await?;
 
             // vote: RollVote
-            crate::util::astd_write_u8_le(w, self.vote.as_int() as u8).await?;
+            w.write_all(&(self.vote.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })

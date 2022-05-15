@@ -65,7 +65,7 @@ impl MessageBody for SMSG_TEXT_EMOTE {
         w.write_all(&self.text_emote.to_le_bytes())?;
 
         // emote: Emote
-        crate::util::write_u32_le(w, self.emote.as_int() as u32)?;
+        w.write_all(&(self.emote.as_int() as u32).to_le_bytes())?;
 
         // name_length: u32
         w.write_all(&self.name_length.to_le_bytes())?;
@@ -138,7 +138,7 @@ impl MessageBody for SMSG_TEXT_EMOTE {
             w.write_all(&self.text_emote.to_le_bytes()).await?;
 
             // emote: Emote
-            crate::util::tokio_write_u32_le(w, self.emote.as_int() as u32).await?;
+            w.write_all(&(self.emote.as_int() as u32).to_le_bytes()).await?;
 
             // name_length: u32
             w.write_all(&self.name_length.to_le_bytes()).await?;
@@ -212,7 +212,7 @@ impl MessageBody for SMSG_TEXT_EMOTE {
             w.write_all(&self.text_emote.to_le_bytes()).await?;
 
             // emote: Emote
-            crate::util::astd_write_u32_le(w, self.emote.as_int() as u32).await?;
+            w.write_all(&(self.emote.as_int() as u32).to_le_bytes()).await?;
 
             // name_length: u32
             w.write_all(&self.name_length.to_le_bytes()).await?;

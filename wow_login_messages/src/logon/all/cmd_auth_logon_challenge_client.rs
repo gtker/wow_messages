@@ -102,13 +102,13 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
         self.version.write(w)?;
 
         // platform: Platform
-        crate::util::write_u32_le(w, self.platform.as_int() as u32)?;
+        w.write_all(&(self.platform.as_int() as u32).to_le_bytes())?;
 
         // os: Os
-        crate::util::write_u32_le(w, self.os.as_int() as u32)?;
+        w.write_all(&(self.os.as_int() as u32).to_le_bytes())?;
 
         // locale: Locale
-        crate::util::write_u32_le(w, self.locale.as_int() as u32)?;
+        w.write_all(&(self.locale.as_int() as u32).to_le_bytes())?;
 
         // utc_timezone_offset: u32
         w.write_all(&self.utc_timezone_offset.to_le_bytes())?;
@@ -216,13 +216,13 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
             self.version.tokio_write(w).await?;
 
             // platform: Platform
-            crate::util::tokio_write_u32_le(w, self.platform.as_int() as u32).await?;
+            w.write_all(&(self.platform.as_int() as u32).to_le_bytes()).await?;
 
             // os: Os
-            crate::util::tokio_write_u32_le(w, self.os.as_int() as u32).await?;
+            w.write_all(&(self.os.as_int() as u32).to_le_bytes()).await?;
 
             // locale: Locale
-            crate::util::tokio_write_u32_le(w, self.locale.as_int() as u32).await?;
+            w.write_all(&(self.locale.as_int() as u32).to_le_bytes()).await?;
 
             // utc_timezone_offset: u32
             w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;
@@ -331,13 +331,13 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
             self.version.astd_write(w).await?;
 
             // platform: Platform
-            crate::util::astd_write_u32_le(w, self.platform.as_int() as u32).await?;
+            w.write_all(&(self.platform.as_int() as u32).to_le_bytes()).await?;
 
             // os: Os
-            crate::util::astd_write_u32_le(w, self.os.as_int() as u32).await?;
+            w.write_all(&(self.os.as_int() as u32).to_le_bytes()).await?;
 
             // locale: Locale
-            crate::util::astd_write_u32_le(w, self.locale.as_int() as u32).await?;
+            w.write_all(&(self.locale.as_int() as u32).to_le_bytes()).await?;
 
             // utc_timezone_offset: u32
             w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;

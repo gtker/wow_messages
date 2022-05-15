@@ -69,10 +69,10 @@ impl WhoPlayer {
         w.write_all(&self.level.to_le_bytes())?;
 
         // class: Class
-        crate::util::write_u8_le(w, self.class.as_int() as u8)?;
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
 
         // race: Race
-        crate::util::write_u8_le(w, self.race.as_int() as u8)?;
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
 
         // zone_id: u32
         w.write_all(&self.zone_id.to_le_bytes())?;
@@ -133,10 +133,10 @@ impl WhoPlayer {
         w.write_all(&self.level.to_le_bytes()).await?;
 
         // class: Class
-        crate::util::tokio_write_u8_le(w, self.class.as_int() as u8).await?;
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
 
         // race: Race
-        crate::util::tokio_write_u8_le(w, self.race.as_int() as u8).await?;
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes()).await?;
 
         // zone_id: u32
         w.write_all(&self.zone_id.to_le_bytes()).await?;
@@ -197,10 +197,10 @@ impl WhoPlayer {
         w.write_all(&self.level.to_le_bytes()).await?;
 
         // class: Class
-        crate::util::astd_write_u8_le(w, self.class.as_int() as u8).await?;
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
 
         // race: Race
-        crate::util::astd_write_u8_le(w, self.race.as_int() as u8).await?;
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes()).await?;
 
         // zone_id: u32
         w.write_all(&self.zone_id.to_le_bytes()).await?;

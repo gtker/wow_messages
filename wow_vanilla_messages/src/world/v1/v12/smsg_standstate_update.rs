@@ -38,7 +38,7 @@ impl MessageBody for SMSG_STANDSTATE_UPDATE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // state: UnitStandState
-        crate::util::write_u8_le(w, self.state.as_int() as u8)?;
+        w.write_all(&(self.state.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_STANDSTATE_UPDATE {
      {
         Box::pin(async move {
             // state: UnitStandState
-            crate::util::tokio_write_u8_le(w, self.state.as_int() as u8).await?;
+            w.write_all(&(self.state.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })
@@ -123,7 +123,7 @@ impl MessageBody for SMSG_STANDSTATE_UPDATE {
      {
         Box::pin(async move {
             // state: UnitStandState
-            crate::util::astd_write_u8_le(w, self.state.as_int() as u8).await?;
+            w.write_all(&(self.state.as_int() as u8).to_le_bytes()).await?;
 
             Ok(())
         })

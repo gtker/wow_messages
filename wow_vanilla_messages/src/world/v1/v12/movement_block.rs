@@ -295,7 +295,7 @@ impl MovementBlock {
 
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_flag: UpdateFlag
-        crate::util::write_u8_le(w, self.update_flag.as_int() as u8)?;
+        w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes())?;
 
         if let Some(if_statement) = &self.update_flag.living {
             match if_statement {
@@ -315,7 +315,7 @@ impl MovementBlock {
                     walking_speed,
                 } => {
                     // flags: MovementFlags
-                    crate::util::write_u32_le(w, flags.as_int() as u32)?;
+                    w.write_all(&(flags.as_int() as u32).to_le_bytes())?;
 
                     // timestamp: u32
                     w.write_all(&timestamp.to_le_bytes())?;
@@ -388,7 +388,7 @@ impl MovementBlock {
 
                     if let Some(if_statement) = &flags.spline_enabled {
                         // spline_flags: SplineFlag
-                        crate::util::write_u32_le(w, if_statement.spline_flags.as_int() as u32)?;
+                        w.write_all(&(if_statement.spline_flags.as_int() as u32).to_le_bytes())?;
 
                         if let Some(if_statement) = &if_statement.spline_flags.final_angle {
                             match if_statement {
@@ -767,7 +767,7 @@ impl MovementBlock {
 
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_flag: UpdateFlag
-        crate::util::tokio_write_u8_le(w, self.update_flag.as_int() as u8).await?;
+        w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes()).await?;
 
         if let Some(if_statement) = &self.update_flag.living {
             match if_statement {
@@ -787,7 +787,7 @@ impl MovementBlock {
                     walking_speed,
                 } => {
                     // flags: MovementFlags
-                    crate::util::tokio_write_u32_le(w, flags.as_int() as u32).await?;
+                    w.write_all(&(flags.as_int() as u32).to_le_bytes()).await?;
 
                     // timestamp: u32
                     w.write_all(&timestamp.to_le_bytes()).await?;
@@ -860,7 +860,7 @@ impl MovementBlock {
 
                     if let Some(if_statement) = &flags.spline_enabled {
                         // spline_flags: SplineFlag
-                        crate::util::tokio_write_u32_le(w, if_statement.spline_flags.as_int() as u32).await?;
+                        w.write_all(&(if_statement.spline_flags.as_int() as u32).to_le_bytes()).await?;
 
                         if let Some(if_statement) = &if_statement.spline_flags.final_angle {
                             match if_statement {
@@ -1239,7 +1239,7 @@ impl MovementBlock {
 
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_flag: UpdateFlag
-        crate::util::astd_write_u8_le(w, self.update_flag.as_int() as u8).await?;
+        w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes()).await?;
 
         if let Some(if_statement) = &self.update_flag.living {
             match if_statement {
@@ -1259,7 +1259,7 @@ impl MovementBlock {
                     walking_speed,
                 } => {
                     // flags: MovementFlags
-                    crate::util::astd_write_u32_le(w, flags.as_int() as u32).await?;
+                    w.write_all(&(flags.as_int() as u32).to_le_bytes()).await?;
 
                     // timestamp: u32
                     w.write_all(&timestamp.to_le_bytes()).await?;
@@ -1332,7 +1332,7 @@ impl MovementBlock {
 
                     if let Some(if_statement) = &flags.spline_enabled {
                         // spline_flags: SplineFlag
-                        crate::util::astd_write_u32_le(w, if_statement.spline_flags.as_int() as u32).await?;
+                        w.write_all(&(if_statement.spline_flags.as_int() as u32).to_le_bytes()).await?;
 
                         if let Some(if_statement) = &if_statement.spline_flags.final_angle {
                             match if_statement {

@@ -2329,7 +2329,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
         w.write_all(&self.queue_slot.to_le_bytes())?;
 
         // map: Map
-        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         match &self.map {
             SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS => {}
@@ -2345,7 +2345,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2394,7 +2394,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2443,7 +2443,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2492,7 +2492,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2541,7 +2541,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2590,7 +2590,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2639,7 +2639,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2688,7 +2688,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2737,7 +2737,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2786,7 +2786,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2835,7 +2835,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2884,7 +2884,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2933,7 +2933,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -2982,7 +2982,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3031,7 +3031,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3080,7 +3080,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3129,7 +3129,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3178,7 +3178,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3227,7 +3227,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3276,7 +3276,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3325,7 +3325,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3374,7 +3374,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3423,7 +3423,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3472,7 +3472,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3521,7 +3521,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3570,7 +3570,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3619,7 +3619,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3668,7 +3668,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3717,7 +3717,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3766,7 +3766,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3815,7 +3815,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3864,7 +3864,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3913,7 +3913,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -3962,7 +3962,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -4011,7 +4011,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -4060,7 +4060,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -4109,7 +4109,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -4158,7 +4158,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -4207,7 +4207,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -4256,7 +4256,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -4305,7 +4305,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -4354,7 +4354,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -4403,7 +4403,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                crate::util::write_u8_le(w, status_id.as_int() as u8)?;
+                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -6772,7 +6772,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
             w.write_all(&self.queue_slot.to_le_bytes()).await?;
 
             // map: Map
-            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             match &self.map {
                 SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS => {}
@@ -6788,7 +6788,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -6837,7 +6837,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -6886,7 +6886,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -6935,7 +6935,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -6984,7 +6984,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7033,7 +7033,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7082,7 +7082,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7131,7 +7131,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7180,7 +7180,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7229,7 +7229,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7278,7 +7278,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7327,7 +7327,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7376,7 +7376,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7425,7 +7425,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7474,7 +7474,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7523,7 +7523,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7572,7 +7572,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7621,7 +7621,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7670,7 +7670,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7719,7 +7719,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7768,7 +7768,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7817,7 +7817,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7866,7 +7866,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7915,7 +7915,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -7964,7 +7964,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8013,7 +8013,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8062,7 +8062,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8111,7 +8111,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8160,7 +8160,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8209,7 +8209,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8258,7 +8258,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8307,7 +8307,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8356,7 +8356,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8405,7 +8405,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8454,7 +8454,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8503,7 +8503,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8552,7 +8552,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8601,7 +8601,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8650,7 +8650,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8699,7 +8699,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8748,7 +8748,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8797,7 +8797,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -8846,7 +8846,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::tokio_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11216,7 +11216,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
             w.write_all(&self.queue_slot.to_le_bytes()).await?;
 
             // map: Map
-            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             match &self.map {
                 SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS => {}
@@ -11232,7 +11232,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11281,7 +11281,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11330,7 +11330,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11379,7 +11379,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11428,7 +11428,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11477,7 +11477,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11526,7 +11526,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11575,7 +11575,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11624,7 +11624,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11673,7 +11673,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11722,7 +11722,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11771,7 +11771,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11820,7 +11820,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11869,7 +11869,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11918,7 +11918,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -11967,7 +11967,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12016,7 +12016,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12065,7 +12065,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12114,7 +12114,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12163,7 +12163,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12212,7 +12212,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12261,7 +12261,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12310,7 +12310,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12359,7 +12359,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12408,7 +12408,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12457,7 +12457,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12506,7 +12506,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12555,7 +12555,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12604,7 +12604,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12653,7 +12653,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12702,7 +12702,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12751,7 +12751,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12800,7 +12800,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12849,7 +12849,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12898,7 +12898,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12947,7 +12947,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -12996,7 +12996,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -13045,7 +13045,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -13094,7 +13094,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -13143,7 +13143,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -13192,7 +13192,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -13241,7 +13241,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}
@@ -13290,7 +13290,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     w.write_all(&client_instance_id.to_le_bytes()).await?;
 
                     // status_id: StatusId
-                    crate::util::astd_write_u8_le(w, status_id.as_int() as u8).await?;
+                    w.write_all(&(status_id.as_int() as u8).to_le_bytes()).await?;
 
                     match &status_id {
                         SMSG_BATTLEFIELD_STATUSStatusId::NONE => {}

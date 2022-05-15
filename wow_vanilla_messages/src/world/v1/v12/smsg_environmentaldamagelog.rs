@@ -62,7 +62,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
         self.guid.write(w)?;
 
         // damage_type: EnvironmentalDamageType
-        crate::util::write_u32_le(w, self.damage_type.as_int() as u32)?;
+        w.write_all(&(self.damage_type.as_int() as u32).to_le_bytes())?;
 
         // damage: u32
         w.write_all(&self.damage.to_le_bytes())?;
@@ -132,7 +132,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
             self.guid.tokio_write(w).await?;
 
             // damage_type: EnvironmentalDamageType
-            crate::util::tokio_write_u32_le(w, self.damage_type.as_int() as u32).await?;
+            w.write_all(&(self.damage_type.as_int() as u32).to_le_bytes()).await?;
 
             // damage: u32
             w.write_all(&self.damage.to_le_bytes()).await?;
@@ -203,7 +203,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
             self.guid.astd_write(w).await?;
 
             // damage_type: EnvironmentalDamageType
-            crate::util::astd_write_u32_le(w, self.damage_type.as_int() as u32).await?;
+            w.write_all(&(self.damage_type.as_int() as u32).to_le_bytes()).await?;
 
             // damage: u32
             w.write_all(&self.damage.to_le_bytes()).await?;

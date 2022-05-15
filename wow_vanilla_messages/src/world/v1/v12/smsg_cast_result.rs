@@ -237,14 +237,14 @@ impl MessageBody for SMSG_CAST_RESULT {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // result: SimpleSpellCastResult
-        crate::util::write_u8_le(w, self.result.as_int() as u8)?;
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
         match &self.result {
             SMSG_CAST_RESULTSimpleSpellCastResult::SUCCESS {
                 reason,
             } => {
                 // reason: CastFailureReason
-                crate::util::write_u8_le(w, reason.as_int() as u8)?;
+                w.write_all(&(reason.as_int() as u8).to_le_bytes())?;
 
                 match &reason {
                     SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT => {}
@@ -358,7 +358,7 @@ impl MessageBody for SMSG_CAST_RESULT {
                         area,
                     } => {
                         // area: Area
-                        crate::util::write_u32_le(w, area.as_int() as u32)?;
+                        w.write_all(&(area.as_int() as u32).to_le_bytes())?;
 
                     }
                     SMSG_CAST_RESULTCastFailureReason::REQUIRES_SPELL_FOCUS {
@@ -662,14 +662,14 @@ impl MessageBody for SMSG_CAST_RESULT {
             w.write_all(&self.spell.to_le_bytes()).await?;
 
             // result: SimpleSpellCastResult
-            crate::util::tokio_write_u8_le(w, self.result.as_int() as u8).await?;
+            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
 
             match &self.result {
                 SMSG_CAST_RESULTSimpleSpellCastResult::SUCCESS {
                     reason,
                 } => {
                     // reason: CastFailureReason
-                    crate::util::tokio_write_u8_le(w, reason.as_int() as u8).await?;
+                    w.write_all(&(reason.as_int() as u8).to_le_bytes()).await?;
 
                     match &reason {
                         SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT => {}
@@ -783,7 +783,7 @@ impl MessageBody for SMSG_CAST_RESULT {
                             area,
                         } => {
                             // area: Area
-                            crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
+                            w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
 
                         }
                         SMSG_CAST_RESULTCastFailureReason::REQUIRES_SPELL_FOCUS {
@@ -1088,14 +1088,14 @@ impl MessageBody for SMSG_CAST_RESULT {
             w.write_all(&self.spell.to_le_bytes()).await?;
 
             // result: SimpleSpellCastResult
-            crate::util::astd_write_u8_le(w, self.result.as_int() as u8).await?;
+            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
 
             match &self.result {
                 SMSG_CAST_RESULTSimpleSpellCastResult::SUCCESS {
                     reason,
                 } => {
                     // reason: CastFailureReason
-                    crate::util::astd_write_u8_le(w, reason.as_int() as u8).await?;
+                    w.write_all(&(reason.as_int() as u8).to_le_bytes()).await?;
 
                     match &reason {
                         SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT => {}
@@ -1209,7 +1209,7 @@ impl MessageBody for SMSG_CAST_RESULT {
                             area,
                         } => {
                             // area: Area
-                            crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
+                            w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
 
                         }
                         SMSG_CAST_RESULTCastFailureReason::REQUIRES_SPELL_FOCUS {

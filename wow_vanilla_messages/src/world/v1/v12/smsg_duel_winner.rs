@@ -49,7 +49,7 @@ impl MessageBody for SMSG_DUEL_WINNER {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // reason: DuelWinnerReason
-        crate::util::write_u8_le(w, self.reason.as_int() as u8)?;
+        w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
 
         // opponent_name: CString
         w.write_all(self.opponent_name.as_bytes())?;
@@ -111,7 +111,7 @@ impl MessageBody for SMSG_DUEL_WINNER {
      {
         Box::pin(async move {
             // reason: DuelWinnerReason
-            crate::util::tokio_write_u8_le(w, self.reason.as_int() as u8).await?;
+            w.write_all(&(self.reason.as_int() as u8).to_le_bytes()).await?;
 
             // opponent_name: CString
             w.write_all(self.opponent_name.as_bytes()).await?;
@@ -174,7 +174,7 @@ impl MessageBody for SMSG_DUEL_WINNER {
      {
         Box::pin(async move {
             // reason: DuelWinnerReason
-            crate::util::astd_write_u8_le(w, self.reason.as_int() as u8).await?;
+            w.write_all(&(self.reason.as_int() as u8).to_le_bytes()).await?;
 
             // opponent_name: CString
             w.write_all(self.opponent_name.as_bytes()).await?;

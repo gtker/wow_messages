@@ -54,7 +54,7 @@ impl MessageBody for SMSG_LOGIN_VERIFY_WORLD {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
-        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes())?;
@@ -120,7 +120,7 @@ impl MessageBody for SMSG_LOGIN_VERIFY_WORLD {
      {
         Box::pin(async move {
             // map: Map
-            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // position_x: f32
             w.write_all(&self.position_x.to_le_bytes()).await?;
@@ -187,7 +187,7 @@ impl MessageBody for SMSG_LOGIN_VERIFY_WORLD {
      {
         Box::pin(async move {
             // map: Map
-            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
+            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
 
             // position_x: f32
             w.write_all(&self.position_x.to_le_bytes()).await?;

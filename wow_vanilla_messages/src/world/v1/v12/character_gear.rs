@@ -32,7 +32,7 @@ impl CharacterGear {
         w.write_all(&self.equipment_display_id.to_le_bytes())?;
 
         // inventory_type: InventoryType
-        crate::util::write_u8_le(w, self.inventory_type.as_int() as u8)?;
+        w.write_all(&(self.inventory_type.as_int() as u8).to_le_bytes())?;
 
         Ok(())
     }
@@ -55,7 +55,7 @@ impl CharacterGear {
         w.write_all(&self.equipment_display_id.to_le_bytes()).await?;
 
         // inventory_type: InventoryType
-        crate::util::tokio_write_u8_le(w, self.inventory_type.as_int() as u8).await?;
+        w.write_all(&(self.inventory_type.as_int() as u8).to_le_bytes()).await?;
 
         Ok(())
     }
@@ -78,7 +78,7 @@ impl CharacterGear {
         w.write_all(&self.equipment_display_id.to_le_bytes()).await?;
 
         // inventory_type: InventoryType
-        crate::util::astd_write_u8_le(w, self.inventory_type.as_int() as u8).await?;
+        w.write_all(&(self.inventory_type.as_int() as u8).to_le_bytes()).await?;
 
         Ok(())
     }
