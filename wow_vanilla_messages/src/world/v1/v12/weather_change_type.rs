@@ -48,7 +48,7 @@ impl TryFrom<u8> for WeatherChangeType {
 
 #[derive(Debug)]
 pub struct WeatherChangeTypeError {
-    value: u8,
+    pub value: u8,
 }
 
 impl WeatherChangeTypeError {

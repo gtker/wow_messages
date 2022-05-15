@@ -48,7 +48,7 @@ impl TryFrom<u32> for RaidGroupError {
 
 #[derive(Debug)]
 pub struct RaidGroupErrorError {
-    value: u32,
+    pub value: u32,
 }
 
 impl RaidGroupErrorError {

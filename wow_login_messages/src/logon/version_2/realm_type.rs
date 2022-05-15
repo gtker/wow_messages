@@ -56,7 +56,7 @@ impl TryFrom<u32> for RealmType {
 
 #[derive(Debug)]
 pub struct RealmTypeError {
-    value: u32,
+    pub value: u32,
 }
 
 impl RealmTypeError {

@@ -368,7 +368,7 @@ impl TryFrom<u32> for WorldResult {
 
 #[derive(Debug)]
 pub struct WorldResultError {
-    value: u32,
+    pub value: u32,
 }
 
 impl WorldResultError {

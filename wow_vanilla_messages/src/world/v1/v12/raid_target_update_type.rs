@@ -48,7 +48,7 @@ impl TryFrom<u8> for RaidTargetUpdateType {
 
 #[derive(Debug)]
 pub struct RaidTargetUpdateTypeError {
-    value: u8,
+    pub value: u8,
 }
 
 impl RaidTargetUpdateTypeError {

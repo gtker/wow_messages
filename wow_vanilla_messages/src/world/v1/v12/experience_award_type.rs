@@ -48,7 +48,7 @@ impl TryFrom<u8> for ExperienceAwardType {
 
 #[derive(Debug)]
 pub struct ExperienceAwardTypeError {
-    value: u8,
+    pub value: u8,
 }
 
 impl ExperienceAwardTypeError {

@@ -84,7 +84,7 @@ impl TryFrom<u32> for MountResult {
 
 #[derive(Debug)]
 pub struct MountResultError {
-    value: u32,
+    pub value: u32,
 }
 
 impl MountResultError {

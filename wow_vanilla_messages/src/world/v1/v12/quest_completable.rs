@@ -48,7 +48,7 @@ impl TryFrom<u32> for QuestCompletable {
 
 #[derive(Debug)]
 pub struct QuestCompletableError {
-    value: u32,
+    pub value: u32,
 }
 
 impl QuestCompletableError {

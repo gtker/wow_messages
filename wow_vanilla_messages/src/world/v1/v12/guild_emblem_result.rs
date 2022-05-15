@@ -64,7 +64,7 @@ impl TryFrom<u32> for GuildEmblemResult {
 
 #[derive(Debug)]
 pub struct GuildEmblemResultError {
-    value: u32,
+    pub value: u32,
 }
 
 impl GuildEmblemResultError {

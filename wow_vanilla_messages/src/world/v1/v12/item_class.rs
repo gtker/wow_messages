@@ -104,7 +104,7 @@ impl TryFrom<u8> for ItemClass {
 
 #[derive(Debug)]
 pub struct ItemClassError {
-    value: u8,
+    pub value: u8,
 }
 
 impl ItemClassError {

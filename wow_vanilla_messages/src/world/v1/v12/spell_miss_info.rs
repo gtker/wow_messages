@@ -88,7 +88,7 @@ impl TryFrom<u32> for SpellMissInfo {
 
 #[derive(Debug)]
 pub struct SpellMissInfoError {
-    value: u32,
+    pub value: u32,
 }
 
 impl SpellMissInfoError {

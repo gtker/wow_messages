@@ -88,7 +88,7 @@ impl TryFrom<u8> for PetTameFailureReason {
 
 #[derive(Debug)]
 pub struct PetTameFailureReasonError {
-    value: u8,
+    pub value: u8,
 }
 
 impl PetTameFailureReasonError {

@@ -60,7 +60,7 @@ impl TryFrom<u32> for AiReaction {
 
 #[derive(Debug)]
 pub struct AiReactionError {
-    value: u32,
+    pub value: u32,
 }
 
 impl AiReactionError {

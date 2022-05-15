@@ -60,7 +60,7 @@ impl TryFrom<u8> for StableResult {
 
 #[derive(Debug)]
 pub struct StableResultError {
-    value: u8,
+    pub value: u8,
 }
 
 impl StableResultError {

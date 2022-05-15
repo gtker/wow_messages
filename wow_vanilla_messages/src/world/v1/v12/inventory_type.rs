@@ -152,7 +152,7 @@ impl TryFrom<u8> for InventoryType {
 
 #[derive(Debug)]
 pub struct InventoryTypeError {
-    value: u8,
+    pub value: u8,
 }
 
 impl InventoryTypeError {

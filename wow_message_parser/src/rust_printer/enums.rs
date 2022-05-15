@@ -195,7 +195,7 @@ fn print_errors(s: &mut Writer, e: &Definer) {
 
     s.wln("#[derive(Debug)]");
     s.new_struct(format!("{}Error", e.name()), |s| {
-        s.wln(format!("value: {},", e.ty().rust_str()));
+        s.wln(format!("pub value: {},", e.ty().rust_str()));
     });
 
     s.bodyn(format!("impl {}Error", e.name()), |s| {

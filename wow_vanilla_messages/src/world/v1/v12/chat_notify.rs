@@ -168,7 +168,7 @@ impl TryFrom<u8> for ChatNotify {
 
 #[derive(Debug)]
 pub struct ChatNotifyError {
-    value: u8,
+    pub value: u8,
 }
 
 impl ChatNotifyError {

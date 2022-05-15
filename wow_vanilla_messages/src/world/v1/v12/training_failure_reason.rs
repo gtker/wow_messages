@@ -52,7 +52,7 @@ impl TryFrom<u32> for TrainingFailureReason {
 
 #[derive(Debug)]
 pub struct TrainingFailureReasonError {
-    value: u32,
+    pub value: u32,
 }
 
 impl TrainingFailureReasonError {

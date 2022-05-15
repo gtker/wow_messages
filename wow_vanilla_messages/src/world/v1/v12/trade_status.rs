@@ -136,7 +136,7 @@ impl TryFrom<u32> for TradeStatus {
 
 #[derive(Debug)]
 pub struct TradeStatusError {
-    value: u32,
+    pub value: u32,
 }
 
 impl TradeStatusError {

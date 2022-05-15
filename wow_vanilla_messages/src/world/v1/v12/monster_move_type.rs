@@ -60,7 +60,7 @@ impl TryFrom<u8> for MonsterMoveType {
 
 #[derive(Debug)]
 pub struct MonsterMoveTypeError {
-    value: u8,
+    pub value: u8,
 }
 
 impl MonsterMoveTypeError {

@@ -60,7 +60,7 @@ impl TryFrom<u8> for GroupLootSetting {
 
 #[derive(Debug)]
 pub struct GroupLootSettingError {
-    value: u8,
+    pub value: u8,
 }
 
 impl GroupLootSettingError {

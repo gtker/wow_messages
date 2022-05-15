@@ -80,7 +80,7 @@ impl TryFrom<u32> for QuestFailedReason {
 
 #[derive(Debug)]
 pub struct QuestFailedReasonError {
-    value: u32,
+    pub value: u32,
 }
 
 impl QuestFailedReasonError {

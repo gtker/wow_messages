@@ -52,7 +52,7 @@ impl TryFrom<u8> for Gender {
 
 #[derive(Debug)]
 pub struct GenderError {
-    value: u8,
+    pub value: u8,
 }
 
 impl GenderError {

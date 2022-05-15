@@ -100,7 +100,7 @@ impl TryFrom<u32> for Language {
 
 #[derive(Debug)]
 pub struct LanguageError {
-    value: u32,
+    pub value: u32,
 }
 
 impl LanguageError {

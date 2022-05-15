@@ -624,7 +624,7 @@ impl TryFrom<u8> for CastFailureReason {
 
 #[derive(Debug)]
 pub struct CastFailureReasonError {
-    value: u8,
+    pub value: u8,
 }
 
 impl CastFailureReasonError {

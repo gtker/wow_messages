@@ -56,7 +56,7 @@ impl TryFrom<u32> for BuyBankSlotResult {
 
 #[derive(Debug)]
 pub struct BuyBankSlotResultError {
-    value: u32,
+    pub value: u32,
 }
 
 impl BuyBankSlotResultError {

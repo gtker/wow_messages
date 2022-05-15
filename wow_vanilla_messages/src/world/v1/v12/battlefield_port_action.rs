@@ -48,7 +48,7 @@ impl TryFrom<u8> for BattlefieldPortAction {
 
 #[derive(Debug)]
 pub struct BattlefieldPortActionError {
-    value: u8,
+    pub value: u8,
 }
 
 impl BattlefieldPortActionError {

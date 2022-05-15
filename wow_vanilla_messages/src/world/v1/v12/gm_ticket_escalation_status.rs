@@ -52,7 +52,7 @@ impl TryFrom<u8> for GmTicketEscalationStatus {
 
 #[derive(Debug)]
 pub struct GmTicketEscalationStatusError {
-    value: u8,
+    pub value: u8,
 }
 
 impl GmTicketEscalationStatusError {

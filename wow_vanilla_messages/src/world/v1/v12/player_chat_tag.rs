@@ -56,7 +56,7 @@ impl TryFrom<u8> for PlayerChatTag {
 
 #[derive(Debug)]
 pub struct PlayerChatTagError {
-    value: u8,
+    pub value: u8,
 }
 
 impl PlayerChatTagError {

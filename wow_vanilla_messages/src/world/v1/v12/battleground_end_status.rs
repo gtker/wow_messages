@@ -48,7 +48,7 @@ impl TryFrom<u8> for BattlegroundEndStatus {
 
 #[derive(Debug)]
 pub struct BattlegroundEndStatusError {
-    value: u8,
+    pub value: u8,
 }
 
 impl BattlegroundEndStatusError {

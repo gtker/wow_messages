@@ -60,7 +60,7 @@ impl TryFrom<u8> for RealmCategory {
 
 #[derive(Debug)]
 pub struct RealmCategoryError {
-    value: u8,
+    pub value: u8,
 }
 
 impl RealmCategoryError {

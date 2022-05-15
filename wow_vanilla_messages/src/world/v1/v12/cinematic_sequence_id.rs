@@ -76,7 +76,7 @@ impl TryFrom<u32> for CinematicSequenceId {
 
 #[derive(Debug)]
 pub struct CinematicSequenceIdError {
-    value: u32,
+    pub value: u32,
 }
 
 impl CinematicSequenceIdError {

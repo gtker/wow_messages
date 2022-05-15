@@ -72,7 +72,7 @@ impl TryFrom<u8> for QuestGiverStatus {
 
 #[derive(Debug)]
 pub struct QuestGiverStatusError {
-    value: u8,
+    pub value: u8,
 }
 
 impl QuestGiverStatusError {

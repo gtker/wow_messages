@@ -64,7 +64,7 @@ impl TryFrom<u32> for PetitionTurnInResult {
 
 #[derive(Debug)]
 pub struct PetitionTurnInResultError {
-    value: u32,
+    pub value: u32,
 }
 
 impl PetitionTurnInResultError {

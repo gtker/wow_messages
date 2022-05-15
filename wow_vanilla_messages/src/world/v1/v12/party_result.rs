@@ -76,7 +76,7 @@ impl TryFrom<u8> for PartyResult {
 
 #[derive(Debug)]
 pub struct PartyResultError {
-    value: u8,
+    pub value: u8,
 }
 
 impl PartyResultError {

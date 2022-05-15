@@ -552,7 +552,7 @@ impl TryFrom<u32> for SpellEffect {
 
 #[derive(Debug)]
 pub struct SpellEffectError {
-    value: u32,
+    pub value: u32,
 }
 
 impl SpellEffectError {

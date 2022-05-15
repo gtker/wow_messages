@@ -48,7 +48,7 @@ impl TryFrom<u8> for SecurityFlag {
 
 #[derive(Debug)]
 pub struct SecurityFlagError {
-    value: u8,
+    pub value: u8,
 }
 
 impl SecurityFlagError {

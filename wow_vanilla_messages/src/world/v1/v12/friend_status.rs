@@ -60,7 +60,7 @@ impl TryFrom<u8> for FriendStatus {
 
 #[derive(Debug)]
 pub struct FriendStatusError {
-    value: u8,
+    pub value: u8,
 }
 
 impl FriendStatusError {

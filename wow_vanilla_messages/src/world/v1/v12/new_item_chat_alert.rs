@@ -48,7 +48,7 @@ impl TryFrom<u32> for NewItemChatAlert {
 
 #[derive(Debug)]
 pub struct NewItemChatAlertError {
-    value: u32,
+    pub value: u32,
 }
 
 impl NewItemChatAlertError {

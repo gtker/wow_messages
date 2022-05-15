@@ -72,7 +72,7 @@ impl TryFrom<u8> for ObjectType {
 
 #[derive(Debug)]
 pub struct ObjectTypeError {
-    value: u8,
+    pub value: u8,
 }
 
 impl ObjectTypeError {

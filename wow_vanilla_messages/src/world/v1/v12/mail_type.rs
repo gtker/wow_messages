@@ -60,7 +60,7 @@ impl TryFrom<u8> for MailType {
 
 #[derive(Debug)]
 pub struct MailTypeError {
-    value: u8,
+    pub value: u8,
 }
 
 impl MailTypeError {

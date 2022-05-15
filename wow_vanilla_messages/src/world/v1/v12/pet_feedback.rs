@@ -56,7 +56,7 @@ impl TryFrom<u8> for PetFeedback {
 
 #[derive(Debug)]
 pub struct PetFeedbackError {
-    value: u8,
+    pub value: u8,
 }
 
 impl PetFeedbackError {

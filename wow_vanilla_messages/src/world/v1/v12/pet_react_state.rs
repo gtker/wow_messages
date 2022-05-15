@@ -52,7 +52,7 @@ impl TryFrom<u8> for PetReactState {
 
 #[derive(Debug)]
 pub struct PetReactStateError {
-    value: u8,
+    pub value: u8,
 }
 
 impl PetReactStateError {

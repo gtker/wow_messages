@@ -48,7 +48,7 @@ impl TryFrom<u8> for SimpleSpellCastResult {
 
 #[derive(Debug)]
 pub struct SimpleSpellCastResultError {
-    value: u8,
+    pub value: u8,
 }
 
 impl SimpleSpellCastResultError {

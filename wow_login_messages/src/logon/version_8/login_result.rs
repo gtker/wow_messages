@@ -108,7 +108,7 @@ impl TryFrom<u8> for LoginResult {
 
 #[derive(Debug)]
 pub struct LoginResultError {
-    value: u8,
+    pub value: u8,
 }
 
 impl LoginResultError {

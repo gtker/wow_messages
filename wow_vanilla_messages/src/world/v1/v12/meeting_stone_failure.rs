@@ -52,7 +52,7 @@ impl TryFrom<u8> for MeetingStoneFailure {
 
 #[derive(Debug)]
 pub struct MeetingStoneFailureError {
-    value: u8,
+    pub value: u8,
 }
 
 impl MeetingStoneFailureError {

@@ -56,7 +56,7 @@ impl TryFrom<u32> for TimerType {
 
 #[derive(Debug)]
 pub struct TimerTypeError {
-    value: u32,
+    pub value: u32,
 }
 
 impl TimerTypeError {

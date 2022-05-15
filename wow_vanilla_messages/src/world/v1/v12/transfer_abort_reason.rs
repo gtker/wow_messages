@@ -60,7 +60,7 @@ impl TryFrom<u8> for TransferAbortReason {
 
 #[derive(Debug)]
 pub struct TransferAbortReasonError {
-    value: u8,
+    pub value: u8,
 }
 
 impl TransferAbortReasonError {

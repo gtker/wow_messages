@@ -68,7 +68,7 @@ impl TryFrom<u8> for SpellSchool {
 
 #[derive(Debug)]
 pub struct SpellSchoolError {
-    value: u8,
+    pub value: u8,
 }
 
 impl SpellSchoolError {

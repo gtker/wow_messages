@@ -808,7 +808,7 @@ impl TryFrom<u32> for AuraType {
 
 #[derive(Debug)]
 pub struct AuraTypeError {
-    value: u32,
+    pub value: u32,
 }
 
 impl AuraTypeError {

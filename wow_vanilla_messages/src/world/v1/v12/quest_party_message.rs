@@ -76,7 +76,7 @@ impl TryFrom<u8> for QuestPartyMessage {
 
 #[derive(Debug)]
 pub struct QuestPartyMessageError {
-    value: u8,
+    pub value: u8,
 }
 
 impl QuestPartyMessageError {

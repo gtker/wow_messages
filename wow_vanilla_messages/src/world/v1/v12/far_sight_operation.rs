@@ -48,7 +48,7 @@ impl TryFrom<u8> for FarSightOperation {
 
 #[derive(Debug)]
 pub struct FarSightOperationError {
-    value: u8,
+    pub value: u8,
 }
 
 impl FarSightOperationError {

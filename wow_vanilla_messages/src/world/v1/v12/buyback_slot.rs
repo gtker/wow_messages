@@ -92,7 +92,7 @@ impl TryFrom<u32> for BuybackSlot {
 
 #[derive(Debug)]
 pub struct BuybackSlotError {
-    value: u32,
+    pub value: u32,
 }
 
 impl BuybackSlotError {

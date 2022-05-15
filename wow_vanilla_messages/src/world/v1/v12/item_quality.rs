@@ -68,7 +68,7 @@ impl TryFrom<u8> for ItemQuality {
 
 #[derive(Debug)]
 pub struct ItemQualityError {
-    value: u8,
+    pub value: u8,
 }
 
 impl ItemQualityError {

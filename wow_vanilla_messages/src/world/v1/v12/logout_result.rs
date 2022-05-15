@@ -56,7 +56,7 @@ impl TryFrom<u32> for LogoutResult {
 
 #[derive(Debug)]
 pub struct LogoutResultError {
-    value: u32,
+    pub value: u32,
 }
 
 impl LogoutResultError {

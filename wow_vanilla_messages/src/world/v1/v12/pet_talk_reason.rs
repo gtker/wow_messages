@@ -48,7 +48,7 @@ impl TryFrom<u32> for PetTalkReason {
 
 #[derive(Debug)]
 pub struct PetTalkReasonError {
-    value: u32,
+    pub value: u32,
 }
 
 impl PetTalkReasonError {

@@ -104,7 +104,7 @@ impl TryFrom<u8> for GuildCommandResult {
 
 #[derive(Debug)]
 pub struct GuildCommandResultError {
-    value: u8,
+    pub value: u8,
 }
 
 impl GuildCommandResultError {

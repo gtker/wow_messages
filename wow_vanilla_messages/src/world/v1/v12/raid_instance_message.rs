@@ -56,7 +56,7 @@ impl TryFrom<u32> for RaidInstanceMessage {
 
 #[derive(Debug)]
 pub struct RaidInstanceMessageError {
-    value: u32,
+    pub value: u32,
 }
 
 impl RaidInstanceMessageError {

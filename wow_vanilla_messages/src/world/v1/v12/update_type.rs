@@ -64,7 +64,7 @@ impl TryFrom<u8> for UpdateType {
 
 #[derive(Debug)]
 pub struct UpdateTypeError {
-    value: u8,
+    pub value: u8,
 }
 
 impl UpdateTypeError {

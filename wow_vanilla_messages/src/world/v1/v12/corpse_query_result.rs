@@ -48,7 +48,7 @@ impl TryFrom<u8> for CorpseQueryResult {
 
 #[derive(Debug)]
 pub struct CorpseQueryResultError {
-    value: u8,
+    pub value: u8,
 }
 
 impl CorpseQueryResultError {

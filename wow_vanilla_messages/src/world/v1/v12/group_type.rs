@@ -48,7 +48,7 @@ impl TryFrom<u8> for GroupType {
 
 #[derive(Debug)]
 pub struct GroupTypeError {
-    value: u8,
+    pub value: u8,
 }
 
 impl GroupTypeError {

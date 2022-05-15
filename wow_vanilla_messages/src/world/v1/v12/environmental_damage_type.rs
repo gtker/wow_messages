@@ -64,7 +64,7 @@ impl TryFrom<u32> for EnvironmentalDamageType {
 
 #[derive(Debug)]
 pub struct EnvironmentalDamageTypeError {
-    value: u32,
+    pub value: u32,
 }
 
 impl EnvironmentalDamageTypeError {

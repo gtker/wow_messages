@@ -96,7 +96,7 @@ impl TryFrom<u8> for GuildEvent {
 
 #[derive(Debug)]
 pub struct GuildEventError {
-    value: u8,
+    pub value: u8,
 }
 
 impl GuildEventError {

@@ -508,7 +508,7 @@ impl TryFrom<u32> for Emote {
 
 #[derive(Debug)]
 pub struct EmoteError {
-    value: u32,
+    pub value: u32,
 }
 
 impl EmoteError {

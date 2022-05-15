@@ -80,7 +80,7 @@ impl TryFrom<u8> for GmTicketType {
 
 #[derive(Debug)]
 pub struct GmTicketTypeError {
-    value: u8,
+    pub value: u8,
 }
 
 impl GmTicketTypeError {

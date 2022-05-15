@@ -60,7 +60,7 @@ impl TryFrom<u32> for BgTypeId {
 
 #[derive(Debug)]
 pub struct BgTypeIdError {
-    value: u32,
+    pub value: u32,
 }
 
 impl BgTypeIdError {

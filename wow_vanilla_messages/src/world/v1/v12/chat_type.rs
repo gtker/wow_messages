@@ -180,7 +180,7 @@ impl TryFrom<u8> for ChatType {
 
 #[derive(Debug)]
 pub struct ChatTypeError {
-    value: u8,
+    pub value: u8,
 }
 
 impl ChatTypeError {

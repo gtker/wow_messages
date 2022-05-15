@@ -60,7 +60,7 @@ impl TryFrom<u32> for ServerMessageType {
 
 #[derive(Debug)]
 pub struct ServerMessageTypeError {
-    value: u32,
+    pub value: u32,
 }
 
 impl ServerMessageTypeError {

@@ -76,7 +76,7 @@ impl TryFrom<u8> for Class {
 
 #[derive(Debug)]
 pub struct ClassError {
-    value: u8,
+    pub value: u8,
 }
 
 impl ClassError {

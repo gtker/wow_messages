@@ -308,7 +308,7 @@ impl TryFrom<u8> for InventoryResult {
 
 #[derive(Debug)]
 pub struct InventoryResultError {
-    value: u8,
+    pub value: u8,
 }
 
 impl InventoryResultError {

@@ -148,7 +148,7 @@ impl TryFrom<u8> for FriendResult {
 
 #[derive(Debug)]
 pub struct FriendResultError {
-    value: u8,
+    pub value: u8,
 }
 
 impl FriendResultError {

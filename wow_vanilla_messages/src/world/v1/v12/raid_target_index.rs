@@ -80,7 +80,7 @@ impl TryFrom<u8> for RaidTargetIndex {
 
 #[derive(Debug)]
 pub struct RaidTargetIndexError {
-    value: u8,
+    pub value: u8,
 }
 
 impl RaidTargetIndexError {

@@ -604,7 +604,7 @@ impl TryFrom<u8> for SpellCastResult {
 
 #[derive(Debug)]
 pub struct SpellCastResultError {
-    value: u8,
+    pub value: u8,
 }
 
 impl SpellCastResultError {

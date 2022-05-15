@@ -56,7 +56,7 @@ impl TryFrom<u8> for PetCommandState {
 
 #[derive(Debug)]
 pub struct PetCommandStateError {
-    value: u8,
+    pub value: u8,
 }
 
 impl PetCommandStateError {

@@ -80,7 +80,7 @@ impl TryFrom<u8> for UnitStandState {
 
 #[derive(Debug)]
 pub struct UnitStandStateError {
-    value: u8,
+    pub value: u8,
 }
 
 impl UnitStandStateError {

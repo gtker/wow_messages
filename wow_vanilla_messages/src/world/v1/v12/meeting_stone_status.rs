@@ -64,7 +64,7 @@ impl TryFrom<u8> for MeetingStoneStatus {
 
 #[derive(Debug)]
 pub struct MeetingStoneStatusError {
-    value: u8,
+    pub value: u8,
 }
 
 impl MeetingStoneStatusError {

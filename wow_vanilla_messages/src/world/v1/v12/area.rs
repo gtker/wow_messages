@@ -4364,7 +4364,7 @@ impl TryFrom<u32> for Area {
 
 #[derive(Debug)]
 pub struct AreaError {
-    value: u32,
+    pub value: u32,
 }
 
 impl AreaError {

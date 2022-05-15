@@ -76,7 +76,7 @@ impl TryFrom<u8> for BuyResult {
 
 #[derive(Debug)]
 pub struct BuyResultError {
-    value: u8,
+    pub value: u8,
 }
 
 impl BuyResultError {

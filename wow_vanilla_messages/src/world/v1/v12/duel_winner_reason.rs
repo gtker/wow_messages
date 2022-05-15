@@ -48,7 +48,7 @@ impl TryFrom<u8> for DuelWinnerReason {
 
 #[derive(Debug)]
 pub struct DuelWinnerReasonError {
-    value: u8,
+    pub value: u8,
 }
 
 impl DuelWinnerReasonError {

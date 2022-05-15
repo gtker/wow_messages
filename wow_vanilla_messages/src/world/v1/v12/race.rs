@@ -76,7 +76,7 @@ impl TryFrom<u8> for Race {
 
 #[derive(Debug)]
 pub struct RaceError {
-    value: u8,
+    pub value: u8,
 }
 
 impl RaceError {

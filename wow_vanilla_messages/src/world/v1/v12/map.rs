@@ -216,7 +216,7 @@ impl TryFrom<u32> for Map {
 
 #[derive(Debug)]
 pub struct MapError {
-    value: u32,
+    pub value: u32,
 }
 
 impl MapError {

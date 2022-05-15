@@ -48,7 +48,7 @@ impl TryFrom<u8> for LogFormat {
 
 #[derive(Debug)]
 pub struct LogFormatError {
-    value: u8,
+    pub value: u8,
 }
 
 impl LogFormatError {

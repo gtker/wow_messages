@@ -56,7 +56,7 @@ impl TryFrom<u8> for InstanceResetFailedReason {
 
 #[derive(Debug)]
 pub struct InstanceResetFailedReasonError {
-    value: u8,
+    pub value: u8,
 }
 
 impl InstanceResetFailedReasonError {

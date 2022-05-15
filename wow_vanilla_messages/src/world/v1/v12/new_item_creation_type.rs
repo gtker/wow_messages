@@ -48,7 +48,7 @@ impl TryFrom<u32> for NewItemCreationType {
 
 #[derive(Debug)]
 pub struct NewItemCreationTypeError {
-    value: u32,
+    pub value: u32,
 }
 
 impl NewItemCreationTypeError {

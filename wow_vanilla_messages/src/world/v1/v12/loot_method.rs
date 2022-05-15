@@ -72,7 +72,7 @@ impl TryFrom<u8> for LootMethod {
 
 #[derive(Debug)]
 pub struct LootMethodError {
-    value: u8,
+    pub value: u8,
 }
 
 impl LootMethodError {

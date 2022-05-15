@@ -68,7 +68,7 @@ impl TryFrom<u8> for Power {
 
 #[derive(Debug)]
 pub struct PowerError {
-    value: u8,
+    pub value: u8,
 }
 
 impl PowerError {

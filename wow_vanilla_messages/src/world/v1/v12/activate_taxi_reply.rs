@@ -92,7 +92,7 @@ impl TryFrom<u32> for ActivateTaxiReply {
 
 #[derive(Debug)]
 pub struct ActivateTaxiReplyError {
-    value: u32,
+    pub value: u32,
 }
 
 impl ActivateTaxiReplyError {

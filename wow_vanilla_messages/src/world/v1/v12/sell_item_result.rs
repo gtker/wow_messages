@@ -64,7 +64,7 @@ impl TryFrom<u8> for SellItemResult {
 
 #[derive(Debug)]
 pub struct SellItemResultError {
-    value: u8,
+    pub value: u8,
 }
 
 impl SellItemResultError {

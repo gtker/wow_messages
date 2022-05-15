@@ -52,7 +52,7 @@ impl TryFrom<u32> for GmTicketStatusResponse {
 
 #[derive(Debug)]
 pub struct GmTicketStatusResponseError {
-    value: u32,
+    pub value: u32,
 }
 
 impl GmTicketStatusResponseError {

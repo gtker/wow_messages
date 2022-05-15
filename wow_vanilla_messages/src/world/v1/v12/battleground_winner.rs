@@ -52,7 +52,7 @@ impl TryFrom<u8> for BattlegroundWinner {
 
 #[derive(Debug)]
 pub struct BattlegroundWinnerError {
-    value: u8,
+    pub value: u8,
 }
 
 impl BattlegroundWinnerError {

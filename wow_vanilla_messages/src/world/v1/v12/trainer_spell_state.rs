@@ -52,7 +52,7 @@ impl TryFrom<u8> for TrainerSpellState {
 
 #[derive(Debug)]
 pub struct TrainerSpellStateError {
-    value: u8,
+    pub value: u8,
 }
 
 impl TrainerSpellStateError {

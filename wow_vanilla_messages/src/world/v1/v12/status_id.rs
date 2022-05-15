@@ -60,7 +60,7 @@ impl TryFrom<u8> for StatusId {
 
 #[derive(Debug)]
 pub struct StatusIdError {
-    value: u8,
+    pub value: u8,
 }
 
 impl StatusIdError {

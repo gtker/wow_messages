@@ -56,7 +56,7 @@ impl TryFrom<u32> for WeatherType {
 
 #[derive(Debug)]
 pub struct WeatherTypeError {
-    value: u32,
+    pub value: u32,
 }
 
 impl WeatherTypeError {

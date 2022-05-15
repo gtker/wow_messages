@@ -52,7 +52,7 @@ impl TryFrom<u8> for SheathState {
 
 #[derive(Debug)]
 pub struct SheathStateError {
-    value: u8,
+    pub value: u8,
 }
 
 impl SheathStateError {
