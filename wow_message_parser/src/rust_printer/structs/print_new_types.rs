@@ -4,18 +4,22 @@ use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 
-fn print_as_flag_value(s: &mut Writer, rd: &RustDefiner) {
-    s.funcn_const("as_flag_value(&self)", rd.int_ty().rust_str(), |s| {
+fn print_as_int(s: &mut Writer, rd: &RustDefiner) {
+    s.funcn_const("as_int(&self)", rd.int_ty().rust_str(), |s| {
         s.body("match self", |s| {
             for enumerator in rd.enumerators() {
                 s.wln(format!(
-                    "Self::{enumerator} {{ .. }} => {value},",
+                    "Self::{enumerator}{extras} => {value},",
                     enumerator = enumerator.name(),
-                    value = enumerator.value().int()
+                    value = enumerator.value().int(),
+                    extras = match enumerator.has_members_in_struct() {
+                        true => " { .. }",
+                        false => "",
+                    },
                 ));
             }
         });
-    })
+    });
 }
 
 pub fn print_new_types(s: &mut Writer, e: &Container) {
@@ -29,10 +33,11 @@ pub fn print_new_types(s: &mut Writer, e: &Container) {
 
                     s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
                         print_write_for_new_enum(s, &rd);
+                        print_as_int(s, &rd);
                     });
                 } else {
                     s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
-                        print_as_flag_value(s, &rd);
+                        print_as_int(s, &rd);
                     });
                 }
                 print_size_for_new_enum(s, &rd);
@@ -174,7 +179,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                     s.body("Self", |s| {
                         if enumerator.contains_elseif() {
                             s.wln(format!(
-                                "inner: {lower_name}.as_flag_value(),",
+                                "inner: {lower_name}.as_int(),",
                                 lower_name = enumerator.name().to_lowercase(),
                             ));
                         } else {
@@ -213,7 +218,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                 |s| {
                     if enumerator.contains_elseif() {
                         s.wln(format!(
-                            "self.inner |= {lower_name}.as_flag_value();",
+                            "self.inner |= {lower_name}.as_int();",
                             lower_name = enumerator.name().to_lowercase(),
                         ));
                     } else {
@@ -422,22 +427,6 @@ fn print_write_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
             s.wln("Ok(())");
         },
     );
-
-    s.funcn("as_int(&self)", rd.int_ty().rust_str(), |s| {
-        s.body("match self", |s| {
-            for enumerator in rd.enumerators() {
-                s.wln(format!(
-                    "Self::{enumerator}{extras} => {value},",
-                    enumerator = enumerator.name(),
-                    value = enumerator.value().int(),
-                    extras = match enumerator.has_members_in_struct() {
-                        true => "{ .. }",
-                        false => "",
-                    },
-                ));
-            }
-        });
-    });
 }
 
 fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {

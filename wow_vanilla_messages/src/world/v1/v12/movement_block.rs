@@ -1527,7 +1527,7 @@ pub enum MovementBlockSplineFlagFINAL_ANGLE {
 }
 
 impl MovementBlockSplineFlagFINAL_ANGLE {
-    pub(crate) const fn as_flag_value(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::FINAL_ANGLE { .. } => 262144,
             Self::FINAL_TARGET { .. } => 131072,
@@ -2007,13 +2007,13 @@ impl MovementBlockSplineFlag {
 
     pub const fn new_FINAL_ANGLE(final_angle: MovementBlockSplineFlagFINAL_ANGLE) -> Self {
         Self {
-            inner: final_angle.as_flag_value(),
+            inner: final_angle.as_int(),
             final_angle: Some(final_angle),
         }
     }
 
     pub fn set_FINAL_ANGLE(&mut self, final_angle: MovementBlockSplineFlagFINAL_ANGLE) -> Self {
-        self.inner |= final_angle.as_flag_value();
+        self.inner |= final_angle.as_int();
         self.final_angle = Some(final_angle);
         self.clone()
     }
@@ -3275,7 +3275,7 @@ pub enum MovementBlockUpdateFlagLIVING {
 }
 
 impl MovementBlockUpdateFlagLIVING {
-    pub(crate) const fn as_flag_value(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::LIVING { .. } => 32,
             Self::HAS_POSITION { .. } => 64,
@@ -3557,7 +3557,7 @@ impl MovementBlockUpdateFlag {
 
     pub const fn new_LIVING(living: MovementBlockUpdateFlagLIVING) -> Self {
         Self {
-            inner: living.as_flag_value(),
+            inner: living.as_int(),
             transport: None,
             melee_attacking: None,
             high_guid: None,
@@ -3567,7 +3567,7 @@ impl MovementBlockUpdateFlag {
     }
 
     pub fn set_LIVING(&mut self, living: MovementBlockUpdateFlagLIVING) -> Self {
-        self.inner |= living.as_flag_value();
+        self.inner |= living.as_int();
         self.living = Some(living);
         self.clone()
     }

@@ -926,7 +926,7 @@ impl SMSG_AUTH_RESPONSEWorldResult {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::RESPONSE_SUCCESS => 0,
             Self::RESPONSE_FAILURE => 1,
@@ -940,7 +940,7 @@ impl SMSG_AUTH_RESPONSEWorldResult {
             Self::CSTATUS_NEGOTIATION_COMPLETE => 9,
             Self::CSTATUS_NEGOTIATION_FAILED => 10,
             Self::CSTATUS_AUTHENTICATING => 11,
-            Self::AUTH_OK{ .. } => 12,
+            Self::AUTH_OK { .. } => 12,
             Self::AUTH_FAILED => 13,
             Self::AUTH_REJECT => 14,
             Self::AUTH_BAD_SERVER_PROOF => 15,
@@ -955,7 +955,7 @@ impl SMSG_AUTH_RESPONSEWorldResult {
             Self::AUTH_SERVER_SHUTTING_DOWN => 24,
             Self::AUTH_ALREADY_LOGGING_IN => 25,
             Self::AUTH_LOGIN_SERVER_NOT_FOUND => 26,
-            Self::AUTH_WAIT_QUEUE{ .. } => 27,
+            Self::AUTH_WAIT_QUEUE { .. } => 27,
             Self::AUTH_BANNED => 28,
             Self::AUTH_ALREADY_ONLINE => 29,
             Self::AUTH_NO_TIME => 30,

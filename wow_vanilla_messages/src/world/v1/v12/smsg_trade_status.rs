@@ -612,10 +612,10 @@ impl SMSG_TRADE_STATUSTradeStatus {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::BUSY => 0,
-            Self::BEGIN_TRADE{ .. } => 1,
+            Self::BEGIN_TRADE { .. } => 1,
             Self::OPEN_WINDOW => 2,
             Self::TRADE_CANCELED => 3,
             Self::TRADE_ACCEPT => 4,
@@ -626,7 +626,7 @@ impl SMSG_TRADE_STATUSTradeStatus {
             Self::TRADE_REJECTED => 9,
             Self::TARGET_TO_FAR => 10,
             Self::WRONG_FACTION => 11,
-            Self::CLOSE_WINDOW{ .. } => 12,
+            Self::CLOSE_WINDOW { .. } => 12,
             Self::UNKNOWN_13 => 13,
             Self::IGNORE_YOU => 14,
             Self::YOU_STUNNED => 15,
@@ -636,8 +636,8 @@ impl SMSG_TRADE_STATUSTradeStatus {
             Self::YOU_LOGOUT => 19,
             Self::TARGET_LOGOUT => 20,
             Self::TRIAL_ACCOUNT => 21,
-            Self::ONLY_CONJURED{ .. } => 22,
-            Self::NOT_ON_TAPLIST{ .. } => 23,
+            Self::ONLY_CONJURED { .. } => 22,
+            Self::NOT_ON_TAPLIST { .. } => 23,
         }
     }
 

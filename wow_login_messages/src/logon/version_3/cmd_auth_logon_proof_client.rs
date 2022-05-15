@@ -478,10 +478,10 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::NONE => 0,
-            Self::PIN{ .. } => 1,
+            Self::PIN { .. } => 1,
         }
     }
 

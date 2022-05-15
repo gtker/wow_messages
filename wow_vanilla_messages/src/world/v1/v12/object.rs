@@ -790,14 +790,14 @@ impl ObjectUpdateType {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::VALUES{ .. } => 0,
-            Self::MOVEMENT{ .. } => 1,
-            Self::CREATE_OBJECT{ .. } => 2,
-            Self::CREATE_OBJECT2{ .. } => 3,
-            Self::OUT_OF_RANGE_OBJECTS{ .. } => 4,
-            Self::NEAR_OBJECTS{ .. } => 5,
+            Self::VALUES { .. } => 0,
+            Self::MOVEMENT { .. } => 1,
+            Self::CREATE_OBJECT { .. } => 2,
+            Self::CREATE_OBJECT2 { .. } => 3,
+            Self::OUT_OF_RANGE_OBJECTS { .. } => 4,
+            Self::NEAR_OBJECTS { .. } => 5,
         }
     }
 

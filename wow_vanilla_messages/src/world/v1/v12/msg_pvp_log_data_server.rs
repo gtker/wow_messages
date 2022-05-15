@@ -349,10 +349,10 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::NOT_ENDED => 0,
-            Self::ENDED{ .. } => 1,
+            Self::ENDED { .. } => 1,
         }
     }
 

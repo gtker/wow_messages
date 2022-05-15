@@ -589,10 +589,10 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::STUCK => 1,
-            Self::BEHAVIOR_HARASSMENT{ .. } => 2,
+            Self::BEHAVIOR_HARASSMENT { .. } => 2,
             Self::GUILD => 3,
             Self::ITEM => 4,
             Self::ENVIRONMENTAL => 5,

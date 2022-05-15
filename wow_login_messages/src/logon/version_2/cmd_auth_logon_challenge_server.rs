@@ -601,9 +601,9 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::SUCCESS{ .. } => 0,
+            Self::SUCCESS { .. } => 0,
             Self::FAIL_UNKNOWN0 => 1,
             Self::FAIL_UNKNOWN1 => 2,
             Self::FAIL_BANNED => 3,

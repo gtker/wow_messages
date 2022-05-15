@@ -346,10 +346,10 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::KILL => 0,
-            Self::NON_KILL{ .. } => 1,
+            Self::NON_KILL { .. } => 1,
         }
     }
 

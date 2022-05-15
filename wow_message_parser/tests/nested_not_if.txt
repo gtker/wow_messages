@@ -1195,9 +1195,9 @@ impl NestedNotIfNestedEnum {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NESTED{ .. } => 0,
+            Self::NESTED { .. } => 0,
             Self::NOT_NESTED => 1,
         }
     }
@@ -1285,16 +1285,16 @@ impl NestedNotIfTEnum {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::ZERO => 0,
-            Self::ONE{ .. } => 1,
-            Self::TWO{ .. } => 2,
-            Self::THREE{ .. } => 3,
-            Self::FOUR{ .. } => 4,
-            Self::FIVE{ .. } => 5,
-            Self::SIX{ .. } => 6,
-            Self::REST{ .. } => 7,
+            Self::ONE { .. } => 1,
+            Self::TWO { .. } => 2,
+            Self::THREE { .. } => 3,
+            Self::FOUR { .. } => 4,
+            Self::FIVE { .. } => 5,
+            Self::SIX { .. } => 6,
+            Self::REST { .. } => 7,
         }
     }
 

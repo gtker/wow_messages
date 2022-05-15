@@ -856,12 +856,12 @@ impl MailMailType {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::NORMAL{ .. } => 0,
-            Self::AUCTION{ .. } => 2,
-            Self::CREATURE{ .. } => 3,
-            Self::GAMEOBJECT{ .. } => 4,
+            Self::NORMAL { .. } => 0,
+            Self::AUCTION { .. } => 2,
+            Self::CREATURE { .. } => 3,
+            Self::GAMEOBJECT { .. } => 4,
             Self::ITEM => 5,
         }
     }

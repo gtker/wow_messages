@@ -662,17 +662,17 @@ impl MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::UNKNOWN0{ .. } => 0,
-            Self::UNKNOWN1{ .. } => 1,
-            Self::UNKNOWN2{ .. } => 2,
-            Self::UNKNOWN3{ .. } => 3,
-            Self::UNKNOWN4{ .. } => 4,
-            Self::UNKNOWN5{ .. } => 5,
-            Self::UNKNOWN6{ .. } => 6,
-            Self::UNKNOWN7{ .. } => 7,
-            Self::UNKNOWN8{ .. } => 8,
+            Self::UNKNOWN0 { .. } => 0,
+            Self::UNKNOWN1 { .. } => 1,
+            Self::UNKNOWN2 { .. } => 2,
+            Self::UNKNOWN3 { .. } => 3,
+            Self::UNKNOWN4 { .. } => 4,
+            Self::UNKNOWN5 { .. } => 5,
+            Self::UNKNOWN6 { .. } => 6,
+            Self::UNKNOWN7 { .. } => 7,
+            Self::UNKNOWN8 { .. } => 8,
             Self::REQUEST_ICONS => 255,
         }
     }

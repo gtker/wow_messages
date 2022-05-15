@@ -345,10 +345,10 @@ impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::PARTIAL{ .. } => 0,
-            Self::FULL{ .. } => 1,
+            Self::PARTIAL { .. } => 0,
+            Self::FULL { .. } => 1,
         }
     }
 

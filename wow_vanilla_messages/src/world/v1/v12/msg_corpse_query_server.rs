@@ -375,10 +375,10 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::NOT_FOUND => 0,
-            Self::FOUND{ .. } => 1,
+            Self::FOUND { .. } => 1,
         }
     }
 

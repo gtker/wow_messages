@@ -1526,7 +1526,7 @@ impl SMSG_CAST_RESULTCastFailureReason {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::AFFECTING_COMBAT => 0,
             Self::ALREADY_AT_FULL_HEALTH => 1,
@@ -1553,7 +1553,7 @@ impl SMSG_CAST_RESULTCastFailureReason {
             Self::CONFUSED => 22,
             Self::DONT_REPORT => 23,
             Self::EQUIPPED_ITEM => 24,
-            Self::EQUIPPED_ITEM_CLASS{ .. } => 25,
+            Self::EQUIPPED_ITEM_CLASS { .. } => 25,
             Self::EQUIPPED_ITEM_CLASS_MAINHAND => 26,
             Self::EQUIPPED_ITEM_CLASS_OFFHAND => 27,
             Self::ERROR => 28,
@@ -1621,8 +1621,8 @@ impl SMSG_CAST_RESULTCastFailureReason {
             Self::PACIFIED => 90,
             Self::POSSESSED => 91,
             Self::REAGENTS => 92,
-            Self::REQUIRES_AREA{ .. } => 93,
-            Self::REQUIRES_SPELL_FOCUS{ .. } => 94,
+            Self::REQUIRES_AREA { .. } => 93,
+            Self::REQUIRES_SPELL_FOCUS { .. } => 94,
             Self::ROOTED => 95,
             Self::SILENCED => 96,
             Self::SPELL_IN_PROGRESS => 97,
@@ -2179,9 +2179,9 @@ impl SMSG_CAST_RESULTSimpleSpellCastResult {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::SUCCESS{ .. } => 0,
+            Self::SUCCESS { .. } => 0,
             Self::FAILURE => 2,
         }
     }

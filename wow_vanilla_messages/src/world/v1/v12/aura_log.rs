@@ -2095,17 +2095,17 @@ impl AuraLogAuraType {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::NONE => 0,
             Self::BIND_SIGHT => 1,
             Self::MOD_POSSESS => 2,
-            Self::PERIODIC_DAMAGE{ .. } => 3,
+            Self::PERIODIC_DAMAGE { .. } => 3,
             Self::DUMMY => 4,
             Self::MOD_CONFUSE => 5,
             Self::MOD_CHARM => 6,
             Self::MOD_FEAR => 7,
-            Self::PERIODIC_HEAL{ .. } => 8,
+            Self::PERIODIC_HEAL { .. } => 8,
             Self::MOD_ATTACKSPEED => 9,
             Self::MOD_THREAT => 10,
             Self::MOD_TAUNT => 11,
@@ -2117,11 +2117,11 @@ impl AuraLogAuraType {
             Self::MOD_STEALTH_DETECT => 17,
             Self::MOD_INVISIBILITY => 18,
             Self::MOD_INVISIBILITY_DETECTION => 19,
-            Self::OBS_MOD_HEALTH{ .. } => 20,
-            Self::OBS_MOD_MANA{ .. } => 21,
+            Self::OBS_MOD_HEALTH { .. } => 20,
+            Self::OBS_MOD_MANA { .. } => 21,
             Self::MOD_RESISTANCE => 22,
             Self::PERIODIC_TRIGGER_SPELL => 23,
-            Self::PERIODIC_ENERGIZE{ .. } => 24,
+            Self::PERIODIC_ENERGIZE { .. } => 24,
             Self::MOD_PACIFY => 25,
             Self::MOD_ROOT => 26,
             Self::MOD_SILENCE => 27,
@@ -2161,7 +2161,7 @@ impl AuraLogAuraType {
             Self::MOD_SCALE => 61,
             Self::PERIODIC_HEALTH_FUNNEL => 62,
             Self::PERIODIC_MANA_FUNNEL => 63,
-            Self::PERIODIC_MANA_LEECH{ .. } => 64,
+            Self::PERIODIC_MANA_LEECH { .. } => 64,
             Self::MOD_CASTING_SPEED_NOT_STACK => 65,
             Self::FEIGN_DEATH => 66,
             Self::MOD_DISARM => 67,
@@ -2186,7 +2186,7 @@ impl AuraLogAuraType {
             Self::CHANNEL_DEATH_ITEM => 86,
             Self::MOD_DAMAGE_PERCENT_TAKEN => 87,
             Self::MOD_HEALTH_REGEN_PERCENT => 88,
-            Self::PERIODIC_DAMAGE_PERCENT{ .. } => 89,
+            Self::PERIODIC_DAMAGE_PERCENT { .. } => 89,
             Self::MOD_RESIST_CHANCE => 90,
             Self::MOD_DETECT_RANGE => 91,
             Self::PREVENTS_FLEEING => 92,

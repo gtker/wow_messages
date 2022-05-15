@@ -458,10 +458,10 @@ impl SMSG_GMTICKET_GETTICKETGmTicketStatus {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::DBERROR => 0,
-            Self::HASTEXT{ .. } => 6,
+            Self::HASTEXT { .. } => 6,
             Self::DEFAULT => 10,
         }
     }

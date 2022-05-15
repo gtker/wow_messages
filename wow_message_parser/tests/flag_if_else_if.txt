@@ -601,7 +601,7 @@ pub enum FlagIfElseIfUpdateFlagONE_IF {
 }
 
 impl FlagIfElseIfUpdateFlagONE_IF {
-    pub(crate) const fn as_flag_value(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::ONE_IF { .. } => 1,
             Self::TWO_ELSEIF { .. } => 2,
@@ -712,14 +712,14 @@ impl FlagIfElseIfUpdateFlag {
 
     pub const fn new_ONE_IF(one_if: FlagIfElseIfUpdateFlagONE_IF) -> Self {
         Self {
-            inner: one_if.as_flag_value(),
+            inner: one_if.as_int(),
             one_if: Some(one_if),
             eight_if: None,
         }
     }
 
     pub fn set_ONE_IF(&mut self, one_if: FlagIfElseIfUpdateFlagONE_IF) -> Self {
-        self.inner |= one_if.as_flag_value();
+        self.inner |= one_if.as_int();
         self.one_if = Some(one_if);
         self.clone()
     }

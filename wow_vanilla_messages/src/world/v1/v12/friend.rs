@@ -650,13 +650,13 @@ impl FriendFriendStatus {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::OFFLINE => 0,
-            Self::ONLINE{ .. } => 1,
-            Self::AFK{ .. } => 2,
-            Self::UNKNOWN3{ .. } => 3,
-            Self::DND{ .. } => 4,
+            Self::ONLINE { .. } => 1,
+            Self::AFK { .. } => 2,
+            Self::UNKNOWN3 { .. } => 3,
+            Self::DND { .. } => 4,
         }
     }
 

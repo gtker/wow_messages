@@ -881,9 +881,9 @@ impl SMSG_CHAR_RENAMEWorldResult {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u32 {
         match self {
-            Self::RESPONSE_SUCCESS{ .. } => 0,
+            Self::RESPONSE_SUCCESS { .. } => 0,
             Self::RESPONSE_FAILURE => 1,
             Self::RESPONSE_CANCELLED => 2,
             Self::RESPONSE_DISCONNECTED => 3,

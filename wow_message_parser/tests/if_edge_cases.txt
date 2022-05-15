@@ -589,16 +589,16 @@ impl IfEdgeCasesTEnum {
         Ok(())
     }
 
-    pub(crate) fn as_int(&self) -> u8 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::ZERO{ .. } => 0,
-            Self::ONE{ .. } => 1,
-            Self::TWO{ .. } => 2,
-            Self::THREE{ .. } => 3,
-            Self::FOUR{ .. } => 4,
-            Self::FIVE{ .. } => 5,
-            Self::SIX{ .. } => 6,
-            Self::REST{ .. } => 7,
+            Self::ZERO { .. } => 0,
+            Self::ONE { .. } => 1,
+            Self::TWO { .. } => 2,
+            Self::THREE { .. } => 3,
+            Self::FOUR { .. } => 4,
+            Self::FIVE { .. } => 5,
+            Self::SIX { .. } => 6,
+            Self::REST { .. } => 7,
         }
     }
 
