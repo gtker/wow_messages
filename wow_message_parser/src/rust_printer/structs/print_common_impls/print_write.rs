@@ -10,7 +10,7 @@ use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
-pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container, prefix: &str, postfix: &str) {
+pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container, postfix: &str) {
     match e.container_type() {
         ContainerType::Struct => {}
         ContainerType::SLogin(_) | ContainerType::CLogin(_) => {
@@ -21,47 +21,7 @@ pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container, prefix: &st
             ));
             s.newline();
         }
-        ContainerType::Msg(_) => panic!("msg opcode not handled"),
-        ContainerType::CMsg(_) => {
-            s.wln("// size: u16_be, and opcode: u32");
-            s.wln(format!(
-                "{import_path}::{prefix}write_u16_be(w, ({size}size() + 4) as u16){postfix}?;",
-                prefix = prefix,
-                postfix = postfix,
-                import_path = "crate::util",
-                size = match e.is_constant_sized() {
-                    true => "Self::",
-                    false => "self.",
-                }
-            ));
-            s.wln(format!(
-                "{import_path}::{prefix}write_u32_le(w, Self::OPCODE){postfix}?;",
-                import_path = "crate::util",
-                prefix = prefix,
-                postfix = postfix,
-            ));
-            s.newline();
-        }
-        ContainerType::SMsg(_) => {
-            s.wln("// size: u16_be, and opcode: u16");
-            s.wln(format!(
-                "{import_path}::{prefix}write_u16_be(w, ({size}size() + 2) as u16){postfix}?;",
-                import_path = "crate::util",
-                size = match e.is_constant_sized() {
-                    true => "Self::",
-                    false => "self.",
-                },
-                prefix = prefix,
-                postfix = postfix,
-            ));
-            s.wln(format!(
-                "{import_path}::{prefix}write_u16_le(w, Self::OPCODE){postfix}?;",
-                import_path = "crate::util",
-                prefix = prefix,
-                postfix = postfix,
-            ));
-            s.newline();
-        }
+        _ => unreachable!(),
     }
 }
 
