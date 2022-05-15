@@ -488,13 +488,9 @@ fn print_write_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
         "std::result::Result<(), std::io::Error>",
         |s, it| {
             s.wln(format!(
-                "let a: {ty} = self.into();",
-                ty = rd.original_ty_name(),
-            ));
-            s.wln(format!(
-                "a.{prefix}write(w){postfix}?;",
-                prefix = it.prefix(),
-                postfix = it.postfix()
+                "w.write_all(&self.as_int().to_{endian}_bytes()){postfix}?;",
+                postfix = it.postfix(),
+                endian = rd.int_ty().rust_endian_str(),
             ));
             s.wln("Ok(())");
         },

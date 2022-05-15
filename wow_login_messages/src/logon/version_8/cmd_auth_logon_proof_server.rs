@@ -753,22 +753,19 @@ impl Default for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
 impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.write(w)?;
+        w.write_all(&self.as_int().to_le_bytes())?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.tokio_write(w).await?;
+        w.write_all(&self.as_int().to_le_bytes()).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: LoginResult = self.into();
-        a.astd_write(w).await?;
+        w.write_all(&self.as_int().to_le_bytes()).await?;
         Ok(())
     }
 

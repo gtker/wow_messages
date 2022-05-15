@@ -13446,22 +13446,19 @@ impl Default for SMSG_BATTLEFIELD_STATUSStatusId {
 impl SMSG_BATTLEFIELD_STATUSStatusId {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.write(w)?;
+        w.write_all(&self.as_int().to_le_bytes())?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.tokio_write(w).await?;
+        w.write_all(&self.as_int().to_le_bytes()).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: StatusId = self.into();
-        a.astd_write(w).await?;
+        w.write_all(&self.as_int().to_le_bytes()).await?;
         Ok(())
     }
 
@@ -14017,22 +14014,19 @@ impl Default for SMSG_BATTLEFIELD_STATUSMap {
 impl SMSG_BATTLEFIELD_STATUSMap {
     #[cfg(feature = "sync")]
     pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: Map = self.into();
-        a.write(w)?;
+        w.write_all(&self.as_int().to_le_bytes())?;
         Ok(())
     }
 
     #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: Map = self.into();
-        a.tokio_write(w).await?;
+        w.write_all(&self.as_int().to_le_bytes()).await?;
         Ok(())
     }
 
     #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        let a: Map = self.into();
-        a.astd_write(w).await?;
+        w.write_all(&self.as_int().to_le_bytes()).await?;
         Ok(())
     }
 
