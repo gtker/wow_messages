@@ -277,28 +277,6 @@ pub enum EnumIfElseIfNestedSimpleEnum {
     TWO,
 }
 
-impl From<&SimpleEnum> for EnumIfElseIfNestedSimpleEnum {
-    fn from(e: &SimpleEnum) -> Self {
-        match &e {
-            SimpleEnum::ZERO => Self::ZERO {
-                zero: Default::default(),
-            },
-            SimpleEnum::ONE => Self::ONE,
-            SimpleEnum::TWO => Self::TWO,
-        }
-    }
-}
-
-impl From<&EnumIfElseIfNestedSimpleEnum> for SimpleEnum {
-    fn from(v: &EnumIfElseIfNestedSimpleEnum) -> Self {
-        match &v {
-            EnumIfElseIfNestedSimpleEnum::ZERO { .. } => Self::ZERO,
-            EnumIfElseIfNestedSimpleEnum::ONE => Self::ONE,
-            EnumIfElseIfNestedSimpleEnum::TWO => Self::TWO,
-        }
-    }
-}
-
 impl Default for EnumIfElseIfNestedSimpleEnum {
     fn default() -> Self {
         // First enumerator without any fields
@@ -328,8 +306,11 @@ impl EnumIfElseIfNestedSimpleEnum {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: SimpleEnum = self.into();
-        a.as_int() as u8
+        match self {
+            Self::ZERO{ .. } => 0,
+            Self::ONE => 1,
+            Self::TWO => 2,
+        }
     }
 
 }
@@ -367,26 +348,6 @@ pub enum EnumIfElseIfNestedNestedEnum {
     NOT_NESTED,
 }
 
-impl From<&NestedEnum> for EnumIfElseIfNestedNestedEnum {
-    fn from(e: &NestedEnum) -> Self {
-        match &e {
-            NestedEnum::NESTED => Self::NESTED {
-                nested: Default::default(),
-            },
-            NestedEnum::NOT_NESTED => Self::NOT_NESTED,
-        }
-    }
-}
-
-impl From<&EnumIfElseIfNestedNestedEnum> for NestedEnum {
-    fn from(v: &EnumIfElseIfNestedNestedEnum) -> Self {
-        match &v {
-            EnumIfElseIfNestedNestedEnum::NESTED { .. } => Self::NESTED,
-            EnumIfElseIfNestedNestedEnum::NOT_NESTED => Self::NOT_NESTED,
-        }
-    }
-}
-
 impl Default for EnumIfElseIfNestedNestedEnum {
     fn default() -> Self {
         // First enumerator without any fields
@@ -416,8 +377,10 @@ impl EnumIfElseIfNestedNestedEnum {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: NestedEnum = self.into();
-        a.as_int() as u8
+        match self {
+            Self::NESTED{ .. } => 0,
+            Self::NOT_NESTED => 1,
+        }
     }
 
 }

@@ -1298,122 +1298,6 @@ pub enum CMSG_MESSAGECHATChatType {
     },
 }
 
-impl From<&ChatType> for CMSG_MESSAGECHATChatType {
-    fn from(e: &ChatType) -> Self {
-        match &e {
-            ChatType::SAY => Self::SAY {
-                message: Default::default(),
-            },
-            ChatType::PARTY => Self::PARTY {
-                message: Default::default(),
-            },
-            ChatType::RAID => Self::RAID {
-                message: Default::default(),
-            },
-            ChatType::GUILD => Self::GUILD {
-                message: Default::default(),
-            },
-            ChatType::OFFICER => Self::OFFICER {
-                message: Default::default(),
-            },
-            ChatType::YELL => Self::YELL {
-                message: Default::default(),
-            },
-            ChatType::WHISPER => Self::WHISPER {
-                target_player: Default::default(),
-                whisper_message: Default::default(),
-            },
-            ChatType::WHISPER_INFORM => Self::WHISPER_INFORM,
-            ChatType::EMOTE => Self::EMOTE {
-                message: Default::default(),
-            },
-            ChatType::TEXT_EMOTE => Self::TEXT_EMOTE,
-            ChatType::SYSTEM => Self::SYSTEM,
-            ChatType::MONSTER_SAY => Self::MONSTER_SAY,
-            ChatType::MONSTER_YELL => Self::MONSTER_YELL,
-            ChatType::MONSTER_EMOTE => Self::MONSTER_EMOTE,
-            ChatType::CHANNEL => Self::CHANNEL {
-                channel: Default::default(),
-                channel_message: Default::default(),
-            },
-            ChatType::CHANNEL_JOIN => Self::CHANNEL_JOIN,
-            ChatType::CHANNEL_LEAVE => Self::CHANNEL_LEAVE,
-            ChatType::CHANNEL_LIST => Self::CHANNEL_LIST,
-            ChatType::CHANNEL_NOTICE => Self::CHANNEL_NOTICE,
-            ChatType::CHANNEL_NOTICE_USER => Self::CHANNEL_NOTICE_USER,
-            ChatType::AFK => Self::AFK {
-                message: Default::default(),
-            },
-            ChatType::DND => Self::DND {
-                message: Default::default(),
-            },
-            ChatType::IGNORED => Self::IGNORED,
-            ChatType::SKILL => Self::SKILL,
-            ChatType::LOOT => Self::LOOT,
-            ChatType::MONSTER_WHISPER => Self::MONSTER_WHISPER,
-            ChatType::BG_SYSTEM_NEUTRAL => Self::BG_SYSTEM_NEUTRAL,
-            ChatType::BG_SYSTEM_ALLIANCE => Self::BG_SYSTEM_ALLIANCE,
-            ChatType::BG_SYSTEM_HORDE => Self::BG_SYSTEM_HORDE,
-            ChatType::RAID_LEADER => Self::RAID_LEADER {
-                message: Default::default(),
-            },
-            ChatType::RAID_WARNING => Self::RAID_WARNING {
-                message: Default::default(),
-            },
-            ChatType::RAID_BOSS_WHISPER => Self::RAID_BOSS_WHISPER,
-            ChatType::RAID_BOSS_EMOTE => Self::RAID_BOSS_EMOTE,
-            ChatType::BATTLEGROUND => Self::BATTLEGROUND {
-                message: Default::default(),
-            },
-            ChatType::BATTLEGROUND_LEADER => Self::BATTLEGROUND_LEADER {
-                message: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&CMSG_MESSAGECHATChatType> for ChatType {
-    fn from(v: &CMSG_MESSAGECHATChatType) -> Self {
-        match &v {
-            CMSG_MESSAGECHATChatType::SAY { .. } => Self::SAY,
-            CMSG_MESSAGECHATChatType::PARTY { .. } => Self::PARTY,
-            CMSG_MESSAGECHATChatType::RAID { .. } => Self::RAID,
-            CMSG_MESSAGECHATChatType::GUILD { .. } => Self::GUILD,
-            CMSG_MESSAGECHATChatType::OFFICER { .. } => Self::OFFICER,
-            CMSG_MESSAGECHATChatType::YELL { .. } => Self::YELL,
-            CMSG_MESSAGECHATChatType::WHISPER { .. } => Self::WHISPER,
-            CMSG_MESSAGECHATChatType::WHISPER_INFORM => Self::WHISPER_INFORM,
-            CMSG_MESSAGECHATChatType::EMOTE { .. } => Self::EMOTE,
-            CMSG_MESSAGECHATChatType::TEXT_EMOTE => Self::TEXT_EMOTE,
-            CMSG_MESSAGECHATChatType::SYSTEM => Self::SYSTEM,
-            CMSG_MESSAGECHATChatType::MONSTER_SAY => Self::MONSTER_SAY,
-            CMSG_MESSAGECHATChatType::MONSTER_YELL => Self::MONSTER_YELL,
-            CMSG_MESSAGECHATChatType::MONSTER_EMOTE => Self::MONSTER_EMOTE,
-            CMSG_MESSAGECHATChatType::CHANNEL { .. } => Self::CHANNEL,
-            CMSG_MESSAGECHATChatType::CHANNEL_JOIN => Self::CHANNEL_JOIN,
-            CMSG_MESSAGECHATChatType::CHANNEL_LEAVE => Self::CHANNEL_LEAVE,
-            CMSG_MESSAGECHATChatType::CHANNEL_LIST => Self::CHANNEL_LIST,
-            CMSG_MESSAGECHATChatType::CHANNEL_NOTICE => Self::CHANNEL_NOTICE,
-            CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER => Self::CHANNEL_NOTICE_USER,
-            CMSG_MESSAGECHATChatType::AFK { .. } => Self::AFK,
-            CMSG_MESSAGECHATChatType::DND { .. } => Self::DND,
-            CMSG_MESSAGECHATChatType::IGNORED => Self::IGNORED,
-            CMSG_MESSAGECHATChatType::SKILL => Self::SKILL,
-            CMSG_MESSAGECHATChatType::LOOT => Self::LOOT,
-            CMSG_MESSAGECHATChatType::MONSTER_WHISPER => Self::MONSTER_WHISPER,
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL => Self::BG_SYSTEM_NEUTRAL,
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE => Self::BG_SYSTEM_ALLIANCE,
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE => Self::BG_SYSTEM_HORDE,
-            CMSG_MESSAGECHATChatType::RAID_LEADER { .. } => Self::RAID_LEADER,
-            CMSG_MESSAGECHATChatType::RAID_WARNING { .. } => Self::RAID_WARNING,
-            CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER => Self::RAID_BOSS_WHISPER,
-            CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE => Self::RAID_BOSS_EMOTE,
-            CMSG_MESSAGECHATChatType::BATTLEGROUND { .. } => Self::BATTLEGROUND,
-            CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER { .. } => Self::BATTLEGROUND_LEADER,
-        }
-    }
-}
-
 impl Default for CMSG_MESSAGECHATChatType {
     fn default() -> Self {
         // First enumerator without any fields
@@ -1443,8 +1327,43 @@ impl CMSG_MESSAGECHATChatType {
     }
 
     pub(crate) fn as_int(&self) -> u32 {
-        let a: ChatType = self.into();
-        a.as_int() as u32
+        match self {
+            Self::SAY{ .. } => 0,
+            Self::PARTY{ .. } => 1,
+            Self::RAID{ .. } => 2,
+            Self::GUILD{ .. } => 3,
+            Self::OFFICER{ .. } => 4,
+            Self::YELL{ .. } => 5,
+            Self::WHISPER{ .. } => 6,
+            Self::WHISPER_INFORM => 7,
+            Self::EMOTE{ .. } => 8,
+            Self::TEXT_EMOTE => 9,
+            Self::SYSTEM => 10,
+            Self::MONSTER_SAY => 11,
+            Self::MONSTER_YELL => 12,
+            Self::MONSTER_EMOTE => 13,
+            Self::CHANNEL{ .. } => 14,
+            Self::CHANNEL_JOIN => 15,
+            Self::CHANNEL_LEAVE => 16,
+            Self::CHANNEL_LIST => 17,
+            Self::CHANNEL_NOTICE => 18,
+            Self::CHANNEL_NOTICE_USER => 19,
+            Self::AFK{ .. } => 20,
+            Self::DND{ .. } => 21,
+            Self::IGNORED => 22,
+            Self::SKILL => 23,
+            Self::LOOT => 24,
+            Self::MONSTER_WHISPER => 26,
+            Self::BG_SYSTEM_NEUTRAL => 82,
+            Self::BG_SYSTEM_ALLIANCE => 83,
+            Self::BG_SYSTEM_HORDE => 84,
+            Self::RAID_LEADER{ .. } => 87,
+            Self::RAID_WARNING{ .. } => 88,
+            Self::RAID_BOSS_WHISPER => 89,
+            Self::RAID_BOSS_EMOTE => 90,
+            Self::BATTLEGROUND{ .. } => 92,
+            Self::BATTLEGROUND_LEADER{ .. } => 93,
+        }
     }
 
 }

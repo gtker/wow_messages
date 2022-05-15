@@ -2485,177 +2485,6 @@ pub enum SMSG_MESSAGECHATChatType {
     },
 }
 
-impl From<&ChatType> for SMSG_MESSAGECHATChatType {
-    fn from(e: &ChatType) -> Self {
-        match &e {
-            ChatType::SAY => Self::SAY {
-                sender_guid1: Default::default(),
-                sender_guid2: Default::default(),
-            },
-            ChatType::PARTY => Self::PARTY {
-                sender_guid1: Default::default(),
-                sender_guid2: Default::default(),
-            },
-            ChatType::RAID => Self::RAID {
-                sender_guid4: Default::default(),
-            },
-            ChatType::GUILD => Self::GUILD {
-                sender_guid4: Default::default(),
-            },
-            ChatType::OFFICER => Self::OFFICER {
-                sender_guid4: Default::default(),
-            },
-            ChatType::YELL => Self::YELL {
-                sender_guid1: Default::default(),
-                sender_guid2: Default::default(),
-            },
-            ChatType::WHISPER => Self::WHISPER {
-                sender_guid4: Default::default(),
-            },
-            ChatType::WHISPER_INFORM => Self::WHISPER_INFORM {
-                sender_guid4: Default::default(),
-            },
-            ChatType::EMOTE => Self::EMOTE {
-                sender_guid4: Default::default(),
-            },
-            ChatType::TEXT_EMOTE => Self::TEXT_EMOTE {
-                sender_guid4: Default::default(),
-            },
-            ChatType::SYSTEM => Self::SYSTEM {
-                sender_guid4: Default::default(),
-            },
-            ChatType::MONSTER_SAY => Self::MONSTER_SAY {
-                sender_guid3: Default::default(),
-                sender_name: Default::default(),
-                sender_name_length: Default::default(),
-                target_guid: Default::default(),
-            },
-            ChatType::MONSTER_YELL => Self::MONSTER_YELL {
-                sender_guid3: Default::default(),
-                sender_name: Default::default(),
-                sender_name_length: Default::default(),
-                target_guid: Default::default(),
-            },
-            ChatType::MONSTER_EMOTE => Self::MONSTER_EMOTE {
-                monster_guid: Default::default(),
-                monster_name: Default::default(),
-                name_length: Default::default(),
-            },
-            ChatType::CHANNEL => Self::CHANNEL {
-                channel_name: Default::default(),
-                player_guid: Default::default(),
-                player_rank: Default::default(),
-            },
-            ChatType::CHANNEL_JOIN => Self::CHANNEL_JOIN {
-                sender_guid4: Default::default(),
-            },
-            ChatType::CHANNEL_LEAVE => Self::CHANNEL_LEAVE {
-                sender_guid4: Default::default(),
-            },
-            ChatType::CHANNEL_LIST => Self::CHANNEL_LIST {
-                sender_guid4: Default::default(),
-            },
-            ChatType::CHANNEL_NOTICE => Self::CHANNEL_NOTICE {
-                sender_guid4: Default::default(),
-            },
-            ChatType::CHANNEL_NOTICE_USER => Self::CHANNEL_NOTICE_USER {
-                sender_guid4: Default::default(),
-            },
-            ChatType::AFK => Self::AFK {
-                sender_guid4: Default::default(),
-            },
-            ChatType::DND => Self::DND {
-                sender_guid4: Default::default(),
-            },
-            ChatType::IGNORED => Self::IGNORED {
-                sender_guid4: Default::default(),
-            },
-            ChatType::SKILL => Self::SKILL {
-                sender_guid4: Default::default(),
-            },
-            ChatType::LOOT => Self::LOOT {
-                sender_guid4: Default::default(),
-            },
-            ChatType::MONSTER_WHISPER => Self::MONSTER_WHISPER {
-                monster_guid: Default::default(),
-                monster_name: Default::default(),
-                name_length: Default::default(),
-            },
-            ChatType::BG_SYSTEM_NEUTRAL => Self::BG_SYSTEM_NEUTRAL {
-                sender_guid4: Default::default(),
-            },
-            ChatType::BG_SYSTEM_ALLIANCE => Self::BG_SYSTEM_ALLIANCE {
-                sender_guid4: Default::default(),
-            },
-            ChatType::BG_SYSTEM_HORDE => Self::BG_SYSTEM_HORDE {
-                sender_guid4: Default::default(),
-            },
-            ChatType::RAID_LEADER => Self::RAID_LEADER {
-                sender_guid4: Default::default(),
-            },
-            ChatType::RAID_WARNING => Self::RAID_WARNING {
-                sender_guid4: Default::default(),
-            },
-            ChatType::RAID_BOSS_WHISPER => Self::RAID_BOSS_WHISPER {
-                sender_guid4: Default::default(),
-            },
-            ChatType::RAID_BOSS_EMOTE => Self::RAID_BOSS_EMOTE {
-                monster_guid: Default::default(),
-                monster_name: Default::default(),
-                name_length: Default::default(),
-            },
-            ChatType::BATTLEGROUND => Self::BATTLEGROUND {
-                sender_guid4: Default::default(),
-            },
-            ChatType::BATTLEGROUND_LEADER => Self::BATTLEGROUND_LEADER {
-                sender_guid4: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&SMSG_MESSAGECHATChatType> for ChatType {
-    fn from(v: &SMSG_MESSAGECHATChatType) -> Self {
-        match &v {
-            SMSG_MESSAGECHATChatType::SAY { .. } => Self::SAY,
-            SMSG_MESSAGECHATChatType::PARTY { .. } => Self::PARTY,
-            SMSG_MESSAGECHATChatType::RAID { .. } => Self::RAID,
-            SMSG_MESSAGECHATChatType::GUILD { .. } => Self::GUILD,
-            SMSG_MESSAGECHATChatType::OFFICER { .. } => Self::OFFICER,
-            SMSG_MESSAGECHATChatType::YELL { .. } => Self::YELL,
-            SMSG_MESSAGECHATChatType::WHISPER { .. } => Self::WHISPER,
-            SMSG_MESSAGECHATChatType::WHISPER_INFORM { .. } => Self::WHISPER_INFORM,
-            SMSG_MESSAGECHATChatType::EMOTE { .. } => Self::EMOTE,
-            SMSG_MESSAGECHATChatType::TEXT_EMOTE { .. } => Self::TEXT_EMOTE,
-            SMSG_MESSAGECHATChatType::SYSTEM { .. } => Self::SYSTEM,
-            SMSG_MESSAGECHATChatType::MONSTER_SAY { .. } => Self::MONSTER_SAY,
-            SMSG_MESSAGECHATChatType::MONSTER_YELL { .. } => Self::MONSTER_YELL,
-            SMSG_MESSAGECHATChatType::MONSTER_EMOTE { .. } => Self::MONSTER_EMOTE,
-            SMSG_MESSAGECHATChatType::CHANNEL { .. } => Self::CHANNEL,
-            SMSG_MESSAGECHATChatType::CHANNEL_JOIN { .. } => Self::CHANNEL_JOIN,
-            SMSG_MESSAGECHATChatType::CHANNEL_LEAVE { .. } => Self::CHANNEL_LEAVE,
-            SMSG_MESSAGECHATChatType::CHANNEL_LIST { .. } => Self::CHANNEL_LIST,
-            SMSG_MESSAGECHATChatType::CHANNEL_NOTICE { .. } => Self::CHANNEL_NOTICE,
-            SMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER { .. } => Self::CHANNEL_NOTICE_USER,
-            SMSG_MESSAGECHATChatType::AFK { .. } => Self::AFK,
-            SMSG_MESSAGECHATChatType::DND { .. } => Self::DND,
-            SMSG_MESSAGECHATChatType::IGNORED { .. } => Self::IGNORED,
-            SMSG_MESSAGECHATChatType::SKILL { .. } => Self::SKILL,
-            SMSG_MESSAGECHATChatType::LOOT { .. } => Self::LOOT,
-            SMSG_MESSAGECHATChatType::MONSTER_WHISPER { .. } => Self::MONSTER_WHISPER,
-            SMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL { .. } => Self::BG_SYSTEM_NEUTRAL,
-            SMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE { .. } => Self::BG_SYSTEM_ALLIANCE,
-            SMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE { .. } => Self::BG_SYSTEM_HORDE,
-            SMSG_MESSAGECHATChatType::RAID_LEADER { .. } => Self::RAID_LEADER,
-            SMSG_MESSAGECHATChatType::RAID_WARNING { .. } => Self::RAID_WARNING,
-            SMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER { .. } => Self::RAID_BOSS_WHISPER,
-            SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE { .. } => Self::RAID_BOSS_EMOTE,
-            SMSG_MESSAGECHATChatType::BATTLEGROUND { .. } => Self::BATTLEGROUND,
-            SMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER { .. } => Self::BATTLEGROUND_LEADER,
-        }
-    }
-}
-
 impl Default for SMSG_MESSAGECHATChatType {
     fn default() -> Self {
         // First enumerator without any fields
@@ -2686,8 +2515,43 @@ impl SMSG_MESSAGECHATChatType {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: ChatType = self.into();
-        a.as_int() as u8
+        match self {
+            Self::SAY{ .. } => 0,
+            Self::PARTY{ .. } => 1,
+            Self::RAID{ .. } => 2,
+            Self::GUILD{ .. } => 3,
+            Self::OFFICER{ .. } => 4,
+            Self::YELL{ .. } => 5,
+            Self::WHISPER{ .. } => 6,
+            Self::WHISPER_INFORM{ .. } => 7,
+            Self::EMOTE{ .. } => 8,
+            Self::TEXT_EMOTE{ .. } => 9,
+            Self::SYSTEM{ .. } => 10,
+            Self::MONSTER_SAY{ .. } => 11,
+            Self::MONSTER_YELL{ .. } => 12,
+            Self::MONSTER_EMOTE{ .. } => 13,
+            Self::CHANNEL{ .. } => 14,
+            Self::CHANNEL_JOIN{ .. } => 15,
+            Self::CHANNEL_LEAVE{ .. } => 16,
+            Self::CHANNEL_LIST{ .. } => 17,
+            Self::CHANNEL_NOTICE{ .. } => 18,
+            Self::CHANNEL_NOTICE_USER{ .. } => 19,
+            Self::AFK{ .. } => 20,
+            Self::DND{ .. } => 21,
+            Self::IGNORED{ .. } => 22,
+            Self::SKILL{ .. } => 23,
+            Self::LOOT{ .. } => 24,
+            Self::MONSTER_WHISPER{ .. } => 26,
+            Self::BG_SYSTEM_NEUTRAL{ .. } => 82,
+            Self::BG_SYSTEM_ALLIANCE{ .. } => 83,
+            Self::BG_SYSTEM_HORDE{ .. } => 84,
+            Self::RAID_LEADER{ .. } => 87,
+            Self::RAID_WARNING{ .. } => 88,
+            Self::RAID_BOSS_WHISPER{ .. } => 89,
+            Self::RAID_BOSS_EMOTE{ .. } => 90,
+            Self::BATTLEGROUND{ .. } => 92,
+            Self::BATTLEGROUND_LEADER{ .. } => 93,
+        }
     }
 
 }

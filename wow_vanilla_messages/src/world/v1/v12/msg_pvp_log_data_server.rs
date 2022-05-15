@@ -323,26 +323,6 @@ pub enum MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
     },
 }
 
-impl From<&BattlegroundEndStatus> for MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
-    fn from(e: &BattlegroundEndStatus) -> Self {
-        match &e {
-            BattlegroundEndStatus::NOT_ENDED => Self::NOT_ENDED,
-            BattlegroundEndStatus::ENDED => Self::ENDED {
-                winner: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus> for BattlegroundEndStatus {
-    fn from(v: &MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus) -> Self {
-        match &v {
-            MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED => Self::NOT_ENDED,
-            MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED { .. } => Self::ENDED,
-        }
-    }
-}
-
 impl Default for MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
     fn default() -> Self {
         // First enumerator without any fields
@@ -370,8 +350,10 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: BattlegroundEndStatus = self.into();
-        a.as_int() as u8
+        match self {
+            Self::NOT_ENDED => 0,
+            Self::ENDED{ .. } => 1,
+        }
     }
 
 }

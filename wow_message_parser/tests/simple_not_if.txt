@@ -285,30 +285,6 @@ pub enum SimpleIfEnumNotSimpleEnum {
     },
 }
 
-impl From<&SimpleEnum> for SimpleIfEnumNotSimpleEnum {
-    fn from(e: &SimpleEnum) -> Self {
-        match &e {
-            SimpleEnum::ZERO => Self::ZERO,
-            SimpleEnum::ONE => Self::ONE {
-                others: Default::default(),
-            },
-            SimpleEnum::TWO => Self::TWO {
-                others: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&SimpleIfEnumNotSimpleEnum> for SimpleEnum {
-    fn from(v: &SimpleIfEnumNotSimpleEnum) -> Self {
-        match &v {
-            SimpleIfEnumNotSimpleEnum::ZERO => Self::ZERO,
-            SimpleIfEnumNotSimpleEnum::ONE { .. } => Self::ONE,
-            SimpleIfEnumNotSimpleEnum::TWO { .. } => Self::TWO,
-        }
-    }
-}
-
 impl Default for SimpleIfEnumNotSimpleEnum {
     fn default() -> Self {
         // First enumerator without any fields
@@ -336,8 +312,11 @@ impl SimpleIfEnumNotSimpleEnum {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: SimpleEnum = self.into();
-        a.as_int() as u8
+        match self {
+            Self::ZERO => 0,
+            Self::ONE{ .. } => 1,
+            Self::TWO{ .. } => 2,
+        }
     }
 
 }

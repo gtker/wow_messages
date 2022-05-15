@@ -317,28 +317,6 @@ pub enum MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
     },
 }
 
-impl From<&RaidTargetUpdateType> for MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
-    fn from(e: &RaidTargetUpdateType) -> Self {
-        match &e {
-            RaidTargetUpdateType::PARTIAL => Self::PARTIAL {
-                raid_target: Default::default(),
-            },
-            RaidTargetUpdateType::FULL => Self::FULL {
-                raid_targets: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType> for RaidTargetUpdateType {
-    fn from(v: &MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType) -> Self {
-        match &v {
-            MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL { .. } => Self::PARTIAL,
-            MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL { .. } => Self::FULL,
-        }
-    }
-}
-
 impl Default for MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
     fn default() -> Self {
         // First enumerator without any fields
@@ -368,8 +346,10 @@ impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: RaidTargetUpdateType = self.into();
-        a.as_int() as u8
+        match self {
+            Self::PARTIAL{ .. } => 0,
+            Self::FULL{ .. } => 1,
+        }
     }
 
 }

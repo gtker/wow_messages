@@ -13404,38 +13404,6 @@ pub enum SMSG_BATTLEFIELD_STATUSStatusId {
     WAIT_LEAVE,
 }
 
-impl From<&StatusId> for SMSG_BATTLEFIELD_STATUSStatusId {
-    fn from(e: &StatusId) -> Self {
-        match &e {
-            StatusId::NONE => Self::NONE,
-            StatusId::WAIT_QUEUE => Self::WAIT_QUEUE {
-                average_wait_time_in_ms: Default::default(),
-                time_in_queue_in_ms: Default::default(),
-            },
-            StatusId::WAIT_JOIN => Self::WAIT_JOIN {
-                time_to_remove_in_queue_in_ms: Default::default(),
-            },
-            StatusId::IN_PROGRESS => Self::IN_PROGRESS {
-                time_to_bg_autoleave_in_ms: Default::default(),
-                time_to_bg_start_in_ms: Default::default(),
-            },
-            StatusId::WAIT_LEAVE => Self::WAIT_LEAVE,
-        }
-    }
-}
-
-impl From<&SMSG_BATTLEFIELD_STATUSStatusId> for StatusId {
-    fn from(v: &SMSG_BATTLEFIELD_STATUSStatusId) -> Self {
-        match &v {
-            SMSG_BATTLEFIELD_STATUSStatusId::NONE => Self::NONE,
-            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_QUEUE { .. } => Self::WAIT_QUEUE,
-            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_JOIN { .. } => Self::WAIT_JOIN,
-            SMSG_BATTLEFIELD_STATUSStatusId::IN_PROGRESS { .. } => Self::IN_PROGRESS,
-            SMSG_BATTLEFIELD_STATUSStatusId::WAIT_LEAVE => Self::WAIT_LEAVE,
-        }
-    }
-}
-
 impl Default for SMSG_BATTLEFIELD_STATUSStatusId {
     fn default() -> Self {
         // First enumerator without any fields
@@ -13463,8 +13431,13 @@ impl SMSG_BATTLEFIELD_STATUSStatusId {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: StatusId = self.into();
-        a.as_int() as u8
+        match self {
+            Self::NONE => 0,
+            Self::WAIT_QUEUE{ .. } => 1,
+            Self::WAIT_JOIN{ .. } => 2,
+            Self::IN_PROGRESS{ .. } => 3,
+            Self::WAIT_LEAVE => 4,
+        }
     }
 
 }
@@ -13730,280 +13703,6 @@ pub enum SMSG_BATTLEFIELD_STATUSMap {
     },
 }
 
-impl From<&Map> for SMSG_BATTLEFIELD_STATUSMap {
-    fn from(e: &Map) -> Self {
-        match &e {
-            Map::EASTERN_KINGDOMS => Self::EASTERN_KINGDOMS,
-            Map::KALIMDOR => Self::KALIMDOR {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::TESTING => Self::TESTING {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::SCOTT_TEST => Self::SCOTT_TEST {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::CASH_TEST => Self::CASH_TEST {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::ALTERAC_VALLEY => Self::ALTERAC_VALLEY {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::SHADOWFANG_KEEP => Self::SHADOWFANG_KEEP {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::STORMWIND_STOCKADE => Self::STORMWIND_STOCKADE {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::STORMWIND_PRISON => Self::STORMWIND_PRISON {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::DEADMINES => Self::DEADMINES {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::AZSHARA_CRATER => Self::AZSHARA_CRATER {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::COLLINS_TEST => Self::COLLINS_TEST {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::WAILING_CAVERNS => Self::WAILING_CAVERNS {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::MONASTERY => Self::MONASTERY {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::RAZORFEN_KRAUL => Self::RAZORFEN_KRAUL {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::BLACKFATHOM_DEEPS => Self::BLACKFATHOM_DEEPS {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::ULDAMAN => Self::ULDAMAN {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::GNOMERAGON => Self::GNOMERAGON {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::SUNKEN_TEMPLE => Self::SUNKEN_TEMPLE {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::RAZORFEN_DOWNS => Self::RAZORFEN_DOWNS {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::EMERALD_DREAM => Self::EMERALD_DREAM {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::SCARLET_MONASTERY => Self::SCARLET_MONASTERY {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::ZUL_FARRAK => Self::ZUL_FARRAK {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::BLACKROCK_SPIRE => Self::BLACKROCK_SPIRE {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::BLACKROCK_DEPTHS => Self::BLACKROCK_DEPTHS {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::ONYXIAS_LAIR => Self::ONYXIAS_LAIR {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::CAVERNS_OF_TIME => Self::CAVERNS_OF_TIME {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::SCHOLOMANCE => Self::SCHOLOMANCE {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::ZUL_GURUB => Self::ZUL_GURUB {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::STRATHOLME => Self::STRATHOLME {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::MAURADON => Self::MAURADON {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::DEEPRUN_TRAM => Self::DEEPRUN_TRAM {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::RAGEFIRE_CHASM => Self::RAGEFIRE_CHASM {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::MOLTEN_CORE => Self::MOLTEN_CORE {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::DIRE_MAUL => Self::DIRE_MAUL {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::ALLIANCE_PVP_BARRACKS => Self::ALLIANCE_PVP_BARRACKS {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::HORDE_PVP_BARRACKS => Self::HORDE_PVP_BARRACKS {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::DEVELOPMENT_LAND => Self::DEVELOPMENT_LAND {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::BLACKWING_LAIR => Self::BLACKWING_LAIR {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::WARSONG_GULCH => Self::WARSONG_GULCH {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::RUINS_OF_AHN_QIRAJ => Self::RUINS_OF_AHN_QIRAJ {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::ARATHI_BASIN => Self::ARATHI_BASIN {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::AHN_QIRAJ_TEMPLE => Self::AHN_QIRAJ_TEMPLE {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-            Map::NAXXRAMAS => Self::NAXXRAMAS {
-                client_instance_id: Default::default(),
-                status_id: Default::default(),
-                unknown0: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&SMSG_BATTLEFIELD_STATUSMap> for Map {
-    fn from(v: &SMSG_BATTLEFIELD_STATUSMap) -> Self {
-        match &v {
-            SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS => Self::EASTERN_KINGDOMS,
-            SMSG_BATTLEFIELD_STATUSMap::KALIMDOR { .. } => Self::KALIMDOR,
-            SMSG_BATTLEFIELD_STATUSMap::TESTING { .. } => Self::TESTING,
-            SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST { .. } => Self::SCOTT_TEST,
-            SMSG_BATTLEFIELD_STATUSMap::CASH_TEST { .. } => Self::CASH_TEST,
-            SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY { .. } => Self::ALTERAC_VALLEY,
-            SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP { .. } => Self::SHADOWFANG_KEEP,
-            SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE { .. } => Self::STORMWIND_STOCKADE,
-            SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON { .. } => Self::STORMWIND_PRISON,
-            SMSG_BATTLEFIELD_STATUSMap::DEADMINES { .. } => Self::DEADMINES,
-            SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER { .. } => Self::AZSHARA_CRATER,
-            SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST { .. } => Self::COLLINS_TEST,
-            SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS { .. } => Self::WAILING_CAVERNS,
-            SMSG_BATTLEFIELD_STATUSMap::MONASTERY { .. } => Self::MONASTERY,
-            SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL { .. } => Self::RAZORFEN_KRAUL,
-            SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS { .. } => Self::BLACKFATHOM_DEEPS,
-            SMSG_BATTLEFIELD_STATUSMap::ULDAMAN { .. } => Self::ULDAMAN,
-            SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON { .. } => Self::GNOMERAGON,
-            SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE { .. } => Self::SUNKEN_TEMPLE,
-            SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS { .. } => Self::RAZORFEN_DOWNS,
-            SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM { .. } => Self::EMERALD_DREAM,
-            SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY { .. } => Self::SCARLET_MONASTERY,
-            SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK { .. } => Self::ZUL_FARRAK,
-            SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE { .. } => Self::BLACKROCK_SPIRE,
-            SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS { .. } => Self::BLACKROCK_DEPTHS,
-            SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR { .. } => Self::ONYXIAS_LAIR,
-            SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME { .. } => Self::CAVERNS_OF_TIME,
-            SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE { .. } => Self::SCHOLOMANCE,
-            SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB { .. } => Self::ZUL_GURUB,
-            SMSG_BATTLEFIELD_STATUSMap::STRATHOLME { .. } => Self::STRATHOLME,
-            SMSG_BATTLEFIELD_STATUSMap::MAURADON { .. } => Self::MAURADON,
-            SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM { .. } => Self::DEEPRUN_TRAM,
-            SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM { .. } => Self::RAGEFIRE_CHASM,
-            SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE { .. } => Self::MOLTEN_CORE,
-            SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL { .. } => Self::DIRE_MAUL,
-            SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS { .. } => Self::ALLIANCE_PVP_BARRACKS,
-            SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS { .. } => Self::HORDE_PVP_BARRACKS,
-            SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND { .. } => Self::DEVELOPMENT_LAND,
-            SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR { .. } => Self::BLACKWING_LAIR,
-            SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH { .. } => Self::WARSONG_GULCH,
-            SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ { .. } => Self::RUINS_OF_AHN_QIRAJ,
-            SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN { .. } => Self::ARATHI_BASIN,
-            SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE { .. } => Self::AHN_QIRAJ_TEMPLE,
-            SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS { .. } => Self::NAXXRAMAS,
-        }
-    }
-}
-
 impl Default for SMSG_BATTLEFIELD_STATUSMap {
     fn default() -> Self {
         // First enumerator without any fields
@@ -14031,8 +13730,52 @@ impl SMSG_BATTLEFIELD_STATUSMap {
     }
 
     pub(crate) fn as_int(&self) -> u32 {
-        let a: Map = self.into();
-        a.as_int() as u32
+        match self {
+            Self::EASTERN_KINGDOMS => 0,
+            Self::KALIMDOR{ .. } => 1,
+            Self::TESTING{ .. } => 13,
+            Self::SCOTT_TEST{ .. } => 25,
+            Self::CASH_TEST{ .. } => 29,
+            Self::ALTERAC_VALLEY{ .. } => 30,
+            Self::SHADOWFANG_KEEP{ .. } => 33,
+            Self::STORMWIND_STOCKADE{ .. } => 34,
+            Self::STORMWIND_PRISON{ .. } => 35,
+            Self::DEADMINES{ .. } => 36,
+            Self::AZSHARA_CRATER{ .. } => 37,
+            Self::COLLINS_TEST{ .. } => 42,
+            Self::WAILING_CAVERNS{ .. } => 43,
+            Self::MONASTERY{ .. } => 44,
+            Self::RAZORFEN_KRAUL{ .. } => 47,
+            Self::BLACKFATHOM_DEEPS{ .. } => 48,
+            Self::ULDAMAN{ .. } => 70,
+            Self::GNOMERAGON{ .. } => 90,
+            Self::SUNKEN_TEMPLE{ .. } => 109,
+            Self::RAZORFEN_DOWNS{ .. } => 129,
+            Self::EMERALD_DREAM{ .. } => 169,
+            Self::SCARLET_MONASTERY{ .. } => 189,
+            Self::ZUL_FARRAK{ .. } => 209,
+            Self::BLACKROCK_SPIRE{ .. } => 229,
+            Self::BLACKROCK_DEPTHS{ .. } => 230,
+            Self::ONYXIAS_LAIR{ .. } => 249,
+            Self::CAVERNS_OF_TIME{ .. } => 269,
+            Self::SCHOLOMANCE{ .. } => 289,
+            Self::ZUL_GURUB{ .. } => 309,
+            Self::STRATHOLME{ .. } => 329,
+            Self::MAURADON{ .. } => 349,
+            Self::DEEPRUN_TRAM{ .. } => 369,
+            Self::RAGEFIRE_CHASM{ .. } => 389,
+            Self::MOLTEN_CORE{ .. } => 409,
+            Self::DIRE_MAUL{ .. } => 429,
+            Self::ALLIANCE_PVP_BARRACKS{ .. } => 449,
+            Self::HORDE_PVP_BARRACKS{ .. } => 450,
+            Self::DEVELOPMENT_LAND{ .. } => 451,
+            Self::BLACKWING_LAIR{ .. } => 469,
+            Self::WARSONG_GULCH{ .. } => 489,
+            Self::RUINS_OF_AHN_QIRAJ{ .. } => 509,
+            Self::ARATHI_BASIN{ .. } => 529,
+            Self::AHN_QIRAJ_TEMPLE{ .. } => 531,
+            Self::NAXXRAMAS{ .. } => 533,
+        }
     }
 
 }

@@ -586,78 +586,6 @@ pub enum SMSG_TRADE_STATUSTradeStatus {
     },
 }
 
-impl From<&TradeStatus> for SMSG_TRADE_STATUSTradeStatus {
-    fn from(e: &TradeStatus) -> Self {
-        match &e {
-            TradeStatus::BUSY => Self::BUSY,
-            TradeStatus::BEGIN_TRADE => Self::BEGIN_TRADE {
-                unknown1: Default::default(),
-            },
-            TradeStatus::OPEN_WINDOW => Self::OPEN_WINDOW,
-            TradeStatus::TRADE_CANCELED => Self::TRADE_CANCELED,
-            TradeStatus::TRADE_ACCEPT => Self::TRADE_ACCEPT,
-            TradeStatus::BUSY_2 => Self::BUSY_2,
-            TradeStatus::NO_TARGET => Self::NO_TARGET,
-            TradeStatus::BACK_TO_TRADE => Self::BACK_TO_TRADE,
-            TradeStatus::TRADE_COMPLETE => Self::TRADE_COMPLETE,
-            TradeStatus::TRADE_REJECTED => Self::TRADE_REJECTED,
-            TradeStatus::TARGET_TO_FAR => Self::TARGET_TO_FAR,
-            TradeStatus::WRONG_FACTION => Self::WRONG_FACTION,
-            TradeStatus::CLOSE_WINDOW => Self::CLOSE_WINDOW {
-                inventory_result: Default::default(),
-                item_limit_category_id: Default::default(),
-                target_error: Default::default(),
-            },
-            TradeStatus::UNKNOWN_13 => Self::UNKNOWN_13,
-            TradeStatus::IGNORE_YOU => Self::IGNORE_YOU,
-            TradeStatus::YOU_STUNNED => Self::YOU_STUNNED,
-            TradeStatus::TARGET_STUNNED => Self::TARGET_STUNNED,
-            TradeStatus::YOU_DEAD => Self::YOU_DEAD,
-            TradeStatus::TARGET_DEAD => Self::TARGET_DEAD,
-            TradeStatus::YOU_LOGOUT => Self::YOU_LOGOUT,
-            TradeStatus::TARGET_LOGOUT => Self::TARGET_LOGOUT,
-            TradeStatus::TRIAL_ACCOUNT => Self::TRIAL_ACCOUNT,
-            TradeStatus::ONLY_CONJURED => Self::ONLY_CONJURED {
-                slot: Default::default(),
-            },
-            TradeStatus::NOT_ON_TAPLIST => Self::NOT_ON_TAPLIST {
-                slot: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&SMSG_TRADE_STATUSTradeStatus> for TradeStatus {
-    fn from(v: &SMSG_TRADE_STATUSTradeStatus) -> Self {
-        match &v {
-            SMSG_TRADE_STATUSTradeStatus::BUSY => Self::BUSY,
-            SMSG_TRADE_STATUSTradeStatus::BEGIN_TRADE { .. } => Self::BEGIN_TRADE,
-            SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW => Self::OPEN_WINDOW,
-            SMSG_TRADE_STATUSTradeStatus::TRADE_CANCELED => Self::TRADE_CANCELED,
-            SMSG_TRADE_STATUSTradeStatus::TRADE_ACCEPT => Self::TRADE_ACCEPT,
-            SMSG_TRADE_STATUSTradeStatus::BUSY_2 => Self::BUSY_2,
-            SMSG_TRADE_STATUSTradeStatus::NO_TARGET => Self::NO_TARGET,
-            SMSG_TRADE_STATUSTradeStatus::BACK_TO_TRADE => Self::BACK_TO_TRADE,
-            SMSG_TRADE_STATUSTradeStatus::TRADE_COMPLETE => Self::TRADE_COMPLETE,
-            SMSG_TRADE_STATUSTradeStatus::TRADE_REJECTED => Self::TRADE_REJECTED,
-            SMSG_TRADE_STATUSTradeStatus::TARGET_TO_FAR => Self::TARGET_TO_FAR,
-            SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION => Self::WRONG_FACTION,
-            SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW { .. } => Self::CLOSE_WINDOW,
-            SMSG_TRADE_STATUSTradeStatus::UNKNOWN_13 => Self::UNKNOWN_13,
-            SMSG_TRADE_STATUSTradeStatus::IGNORE_YOU => Self::IGNORE_YOU,
-            SMSG_TRADE_STATUSTradeStatus::YOU_STUNNED => Self::YOU_STUNNED,
-            SMSG_TRADE_STATUSTradeStatus::TARGET_STUNNED => Self::TARGET_STUNNED,
-            SMSG_TRADE_STATUSTradeStatus::YOU_DEAD => Self::YOU_DEAD,
-            SMSG_TRADE_STATUSTradeStatus::TARGET_DEAD => Self::TARGET_DEAD,
-            SMSG_TRADE_STATUSTradeStatus::YOU_LOGOUT => Self::YOU_LOGOUT,
-            SMSG_TRADE_STATUSTradeStatus::TARGET_LOGOUT => Self::TARGET_LOGOUT,
-            SMSG_TRADE_STATUSTradeStatus::TRIAL_ACCOUNT => Self::TRIAL_ACCOUNT,
-            SMSG_TRADE_STATUSTradeStatus::ONLY_CONJURED { .. } => Self::ONLY_CONJURED,
-            SMSG_TRADE_STATUSTradeStatus::NOT_ON_TAPLIST { .. } => Self::NOT_ON_TAPLIST,
-        }
-    }
-}
-
 impl Default for SMSG_TRADE_STATUSTradeStatus {
     fn default() -> Self {
         // First enumerator without any fields
@@ -685,8 +613,32 @@ impl SMSG_TRADE_STATUSTradeStatus {
     }
 
     pub(crate) fn as_int(&self) -> u32 {
-        let a: TradeStatus = self.into();
-        a.as_int() as u32
+        match self {
+            Self::BUSY => 0,
+            Self::BEGIN_TRADE{ .. } => 1,
+            Self::OPEN_WINDOW => 2,
+            Self::TRADE_CANCELED => 3,
+            Self::TRADE_ACCEPT => 4,
+            Self::BUSY_2 => 5,
+            Self::NO_TARGET => 6,
+            Self::BACK_TO_TRADE => 7,
+            Self::TRADE_COMPLETE => 8,
+            Self::TRADE_REJECTED => 9,
+            Self::TARGET_TO_FAR => 10,
+            Self::WRONG_FACTION => 11,
+            Self::CLOSE_WINDOW{ .. } => 12,
+            Self::UNKNOWN_13 => 13,
+            Self::IGNORE_YOU => 14,
+            Self::YOU_STUNNED => 15,
+            Self::TARGET_STUNNED => 16,
+            Self::YOU_DEAD => 17,
+            Self::TARGET_DEAD => 18,
+            Self::YOU_LOGOUT => 19,
+            Self::TARGET_LOGOUT => 20,
+            Self::TRIAL_ACCOUNT => 21,
+            Self::ONLY_CONJURED{ .. } => 22,
+            Self::NOT_ON_TAPLIST{ .. } => 23,
+        }
     }
 
 }

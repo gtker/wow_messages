@@ -828,38 +828,6 @@ pub enum MailMailType {
     ITEM,
 }
 
-impl From<&MailType> for MailMailType {
-    fn from(e: &MailType) -> Self {
-        match &e {
-            MailType::NORMAL => Self::NORMAL {
-                sender: Default::default(),
-            },
-            MailType::AUCTION => Self::AUCTION {
-                auction_id: Default::default(),
-            },
-            MailType::CREATURE => Self::CREATURE {
-                sender_id: Default::default(),
-            },
-            MailType::GAMEOBJECT => Self::GAMEOBJECT {
-                sender_id: Default::default(),
-            },
-            MailType::ITEM => Self::ITEM,
-        }
-    }
-}
-
-impl From<&MailMailType> for MailType {
-    fn from(v: &MailMailType) -> Self {
-        match &v {
-            MailMailType::NORMAL { .. } => Self::NORMAL,
-            MailMailType::AUCTION { .. } => Self::AUCTION,
-            MailMailType::CREATURE { .. } => Self::CREATURE,
-            MailMailType::GAMEOBJECT { .. } => Self::GAMEOBJECT,
-            MailMailType::ITEM => Self::ITEM,
-        }
-    }
-}
-
 impl Default for MailMailType {
     fn default() -> Self {
         // First enumerator without any fields
@@ -889,8 +857,13 @@ impl MailMailType {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: MailType = self.into();
-        a.as_int() as u8
+        match self {
+            Self::NORMAL{ .. } => 0,
+            Self::AUCTION{ .. } => 2,
+            Self::CREATURE{ .. } => 3,
+            Self::GAMEOBJECT{ .. } => 4,
+            Self::ITEM => 5,
+        }
     }
 
 }

@@ -271,36 +271,6 @@ pub enum EnumOutsideOfIfTEnum {
     REST,
 }
 
-impl From<&TEnum> for EnumOutsideOfIfTEnum {
-    fn from(e: &TEnum) -> Self {
-        match &e {
-            TEnum::ZERO => Self::ZERO,
-            TEnum::ONE => Self::ONE,
-            TEnum::TWO => Self::TWO,
-            TEnum::THREE => Self::THREE,
-            TEnum::FOUR => Self::FOUR,
-            TEnum::FIVE => Self::FIVE,
-            TEnum::SIX => Self::SIX,
-            TEnum::REST => Self::REST,
-        }
-    }
-}
-
-impl From<&EnumOutsideOfIfTEnum> for TEnum {
-    fn from(v: &EnumOutsideOfIfTEnum) -> Self {
-        match &v {
-            EnumOutsideOfIfTEnum::ZERO => Self::ZERO,
-            EnumOutsideOfIfTEnum::ONE => Self::ONE,
-            EnumOutsideOfIfTEnum::TWO => Self::TWO,
-            EnumOutsideOfIfTEnum::THREE => Self::THREE,
-            EnumOutsideOfIfTEnum::FOUR => Self::FOUR,
-            EnumOutsideOfIfTEnum::FIVE => Self::FIVE,
-            EnumOutsideOfIfTEnum::SIX => Self::SIX,
-            EnumOutsideOfIfTEnum::REST => Self::REST,
-        }
-    }
-}
-
 impl Default for EnumOutsideOfIfTEnum {
     fn default() -> Self {
         // First enumerator without any fields
@@ -328,8 +298,16 @@ impl EnumOutsideOfIfTEnum {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: TEnum = self.into();
-        a.as_int() as u8
+        match self {
+            Self::ZERO => 0,
+            Self::ONE => 1,
+            Self::TWO => 2,
+            Self::THREE => 3,
+            Self::FOUR => 4,
+            Self::FIVE => 5,
+            Self::SIX => 6,
+            Self::REST => 7,
+        }
     }
 
 }
@@ -379,26 +357,6 @@ pub enum EnumOutsideOfIfNestedEnum {
     NOT_NESTED,
 }
 
-impl From<&NestedEnum> for EnumOutsideOfIfNestedEnum {
-    fn from(e: &NestedEnum) -> Self {
-        match &e {
-            NestedEnum::NESTED => Self::NESTED {
-                nested: Default::default(),
-            },
-            NestedEnum::NOT_NESTED => Self::NOT_NESTED,
-        }
-    }
-}
-
-impl From<&EnumOutsideOfIfNestedEnum> for NestedEnum {
-    fn from(v: &EnumOutsideOfIfNestedEnum) -> Self {
-        match &v {
-            EnumOutsideOfIfNestedEnum::NESTED { .. } => Self::NESTED,
-            EnumOutsideOfIfNestedEnum::NOT_NESTED => Self::NOT_NESTED,
-        }
-    }
-}
-
 impl Default for EnumOutsideOfIfNestedEnum {
     fn default() -> Self {
         // First enumerator without any fields
@@ -428,8 +386,10 @@ impl EnumOutsideOfIfNestedEnum {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: NestedEnum = self.into();
-        a.as_int() as u8
+        match self {
+            Self::NESTED{ .. } => 0,
+            Self::NOT_NESTED => 1,
+        }
     }
 
 }

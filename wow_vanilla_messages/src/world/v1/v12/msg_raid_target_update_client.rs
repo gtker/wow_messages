@@ -634,58 +634,6 @@ pub enum MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
     REQUEST_ICONS,
 }
 
-impl From<&RaidTargetIndex> for MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
-    fn from(e: &RaidTargetIndex) -> Self {
-        match &e {
-            RaidTargetIndex::UNKNOWN0 => Self::UNKNOWN0 {
-                target: Default::default(),
-            },
-            RaidTargetIndex::UNKNOWN1 => Self::UNKNOWN1 {
-                target: Default::default(),
-            },
-            RaidTargetIndex::UNKNOWN2 => Self::UNKNOWN2 {
-                target: Default::default(),
-            },
-            RaidTargetIndex::UNKNOWN3 => Self::UNKNOWN3 {
-                target: Default::default(),
-            },
-            RaidTargetIndex::UNKNOWN4 => Self::UNKNOWN4 {
-                target: Default::default(),
-            },
-            RaidTargetIndex::UNKNOWN5 => Self::UNKNOWN5 {
-                target: Default::default(),
-            },
-            RaidTargetIndex::UNKNOWN6 => Self::UNKNOWN6 {
-                target: Default::default(),
-            },
-            RaidTargetIndex::UNKNOWN7 => Self::UNKNOWN7 {
-                target: Default::default(),
-            },
-            RaidTargetIndex::UNKNOWN8 => Self::UNKNOWN8 {
-                target: Default::default(),
-            },
-            RaidTargetIndex::REQUEST_ICONS => Self::REQUEST_ICONS,
-        }
-    }
-}
-
-impl From<&MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex> for RaidTargetIndex {
-    fn from(v: &MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex) -> Self {
-        match &v {
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN0 { .. } => Self::UNKNOWN0,
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN1 { .. } => Self::UNKNOWN1,
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN2 { .. } => Self::UNKNOWN2,
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN3 { .. } => Self::UNKNOWN3,
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN4 { .. } => Self::UNKNOWN4,
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN5 { .. } => Self::UNKNOWN5,
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN6 { .. } => Self::UNKNOWN6,
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN7 { .. } => Self::UNKNOWN7,
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN8 { .. } => Self::UNKNOWN8,
-            MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS => Self::REQUEST_ICONS,
-        }
-    }
-}
-
 impl Default for MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
     fn default() -> Self {
         // First enumerator without any fields
@@ -715,8 +663,18 @@ impl MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: RaidTargetIndex = self.into();
-        a.as_int() as u8
+        match self {
+            Self::UNKNOWN0{ .. } => 0,
+            Self::UNKNOWN1{ .. } => 1,
+            Self::UNKNOWN2{ .. } => 2,
+            Self::UNKNOWN3{ .. } => 3,
+            Self::UNKNOWN4{ .. } => 4,
+            Self::UNKNOWN5{ .. } => 5,
+            Self::UNKNOWN6{ .. } => 6,
+            Self::UNKNOWN7{ .. } => 7,
+            Self::UNKNOWN8{ .. } => 8,
+            Self::REQUEST_ICONS => 255,
+        }
     }
 
 }

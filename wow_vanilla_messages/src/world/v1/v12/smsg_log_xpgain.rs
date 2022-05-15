@@ -320,27 +320,6 @@ pub enum SMSG_LOG_XPGAINExperienceAwardType {
     },
 }
 
-impl From<&ExperienceAwardType> for SMSG_LOG_XPGAINExperienceAwardType {
-    fn from(e: &ExperienceAwardType) -> Self {
-        match &e {
-            ExperienceAwardType::KILL => Self::KILL,
-            ExperienceAwardType::NON_KILL => Self::NON_KILL {
-                exp_group_bonus: Default::default(),
-                experience_without_rested: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&SMSG_LOG_XPGAINExperienceAwardType> for ExperienceAwardType {
-    fn from(v: &SMSG_LOG_XPGAINExperienceAwardType) -> Self {
-        match &v {
-            SMSG_LOG_XPGAINExperienceAwardType::KILL => Self::KILL,
-            SMSG_LOG_XPGAINExperienceAwardType::NON_KILL { .. } => Self::NON_KILL,
-        }
-    }
-}
-
 impl Default for SMSG_LOG_XPGAINExperienceAwardType {
     fn default() -> Self {
         // First enumerator without any fields
@@ -368,8 +347,10 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: ExperienceAwardType = self.into();
-        a.as_int() as u8
+        match self {
+            Self::KILL => 0,
+            Self::NON_KILL{ .. } => 1,
+        }
     }
 
 }

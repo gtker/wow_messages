@@ -452,27 +452,6 @@ pub enum CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     },
 }
 
-impl From<&SecurityFlag> for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
-    fn from(e: &SecurityFlag) -> Self {
-        match &e {
-            SecurityFlag::NONE => Self::NONE,
-            SecurityFlag::PIN => Self::PIN {
-                pin_hash: Default::default(),
-                pin_salt: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&CMD_AUTH_LOGON_PROOF_ClientSecurityFlag> for SecurityFlag {
-    fn from(v: &CMD_AUTH_LOGON_PROOF_ClientSecurityFlag) -> Self {
-        match &v {
-            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => Self::NONE,
-            CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN { .. } => Self::PIN,
-        }
-    }
-}
-
 impl Default for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     fn default() -> Self {
         // First enumerator without any fields
@@ -500,8 +479,10 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: SecurityFlag = self.into();
-        a.as_int() as u8
+        match self {
+            Self::NONE => 0,
+            Self::PIN{ .. } => 1,
+        }
     }
 
 }

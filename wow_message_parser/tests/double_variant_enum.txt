@@ -285,30 +285,6 @@ pub enum DoubleVariantEnumSimpleEnum {
     TWO,
 }
 
-impl From<&SimpleEnum> for DoubleVariantEnumSimpleEnum {
-    fn from(e: &SimpleEnum) -> Self {
-        match &e {
-            SimpleEnum::ZERO => Self::ZERO {
-                basic: Default::default(),
-            },
-            SimpleEnum::ONE => Self::ONE {
-                basic: Default::default(),
-            },
-            SimpleEnum::TWO => Self::TWO,
-        }
-    }
-}
-
-impl From<&DoubleVariantEnumSimpleEnum> for SimpleEnum {
-    fn from(v: &DoubleVariantEnumSimpleEnum) -> Self {
-        match &v {
-            DoubleVariantEnumSimpleEnum::ZERO { .. } => Self::ZERO,
-            DoubleVariantEnumSimpleEnum::ONE { .. } => Self::ONE,
-            DoubleVariantEnumSimpleEnum::TWO => Self::TWO,
-        }
-    }
-}
-
 impl Default for DoubleVariantEnumSimpleEnum {
     fn default() -> Self {
         // First enumerator without any fields
@@ -338,8 +314,11 @@ impl DoubleVariantEnumSimpleEnum {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: SimpleEnum = self.into();
-        a.as_int() as u8
+        match self {
+            Self::ZERO{ .. } => 0,
+            Self::ONE{ .. } => 1,
+            Self::TWO => 2,
+        }
     }
 
 }

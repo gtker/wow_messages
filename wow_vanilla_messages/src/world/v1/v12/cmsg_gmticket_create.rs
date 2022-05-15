@@ -563,44 +563,6 @@ pub enum CMSG_GMTICKET_CREATEGmTicketType {
     CHARACTER,
 }
 
-impl From<&GmTicketType> for CMSG_GMTICKET_CREATEGmTicketType {
-    fn from(e: &GmTicketType) -> Self {
-        match &e {
-            GmTicketType::STUCK => Self::STUCK,
-            GmTicketType::BEHAVIOR_HARASSMENT => Self::BEHAVIOR_HARASSMENT {
-                chat_data_line_count: Default::default(),
-                chat_data_size_uncompressed: Default::default(),
-                compressed_chat_data: Default::default(),
-            },
-            GmTicketType::GUILD => Self::GUILD,
-            GmTicketType::ITEM => Self::ITEM,
-            GmTicketType::ENVIRONMENTAL => Self::ENVIRONMENTAL,
-            GmTicketType::NONQUEST_CREEP => Self::NONQUEST_CREEP,
-            GmTicketType::QUEST_QUESTNPC => Self::QUEST_QUESTNPC,
-            GmTicketType::TECHNICAL => Self::TECHNICAL,
-            GmTicketType::ACCOUNT_BILLING => Self::ACCOUNT_BILLING,
-            GmTicketType::CHARACTER => Self::CHARACTER,
-        }
-    }
-}
-
-impl From<&CMSG_GMTICKET_CREATEGmTicketType> for GmTicketType {
-    fn from(v: &CMSG_GMTICKET_CREATEGmTicketType) -> Self {
-        match &v {
-            CMSG_GMTICKET_CREATEGmTicketType::STUCK => Self::STUCK,
-            CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT { .. } => Self::BEHAVIOR_HARASSMENT,
-            CMSG_GMTICKET_CREATEGmTicketType::GUILD => Self::GUILD,
-            CMSG_GMTICKET_CREATEGmTicketType::ITEM => Self::ITEM,
-            CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL => Self::ENVIRONMENTAL,
-            CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP => Self::NONQUEST_CREEP,
-            CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC => Self::QUEST_QUESTNPC,
-            CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL => Self::TECHNICAL,
-            CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING => Self::ACCOUNT_BILLING,
-            CMSG_GMTICKET_CREATEGmTicketType::CHARACTER => Self::CHARACTER,
-        }
-    }
-}
-
 impl Default for CMSG_GMTICKET_CREATEGmTicketType {
     fn default() -> Self {
         // First enumerator without any fields
@@ -628,8 +590,18 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: GmTicketType = self.into();
-        a.as_int() as u8
+        match self {
+            Self::STUCK => 1,
+            Self::BEHAVIOR_HARASSMENT{ .. } => 2,
+            Self::GUILD => 3,
+            Self::ITEM => 4,
+            Self::ENVIRONMENTAL => 5,
+            Self::NONQUEST_CREEP => 6,
+            Self::QUEST_QUESTNPC => 7,
+            Self::TECHNICAL => 8,
+            Self::ACCOUNT_BILLING => 9,
+            Self::CHARACTER => 10,
+        }
     }
 
 }

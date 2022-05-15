@@ -1167,26 +1167,6 @@ pub enum NestedNotIfNestedEnum {
     NOT_NESTED,
 }
 
-impl From<&NestedEnum> for NestedNotIfNestedEnum {
-    fn from(e: &NestedEnum) -> Self {
-        match &e {
-            NestedEnum::NESTED => Self::NESTED {
-                one: Default::default(),
-            },
-            NestedEnum::NOT_NESTED => Self::NOT_NESTED,
-        }
-    }
-}
-
-impl From<&NestedNotIfNestedEnum> for NestedEnum {
-    fn from(v: &NestedNotIfNestedEnum) -> Self {
-        match &v {
-            NestedNotIfNestedEnum::NESTED { .. } => Self::NESTED,
-            NestedNotIfNestedEnum::NOT_NESTED => Self::NOT_NESTED,
-        }
-    }
-}
-
 impl Default for NestedNotIfNestedEnum {
     fn default() -> Self {
         // First enumerator without any fields
@@ -1216,8 +1196,10 @@ impl NestedNotIfNestedEnum {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: NestedEnum = self.into();
-        a.as_int() as u8
+        match self {
+            Self::NESTED{ .. } => 0,
+            Self::NOT_NESTED => 1,
+        }
     }
 
 }
@@ -1277,57 +1259,6 @@ pub enum NestedNotIfTEnum {
     },
 }
 
-impl From<&TEnum> for NestedNotIfTEnum {
-    fn from(e: &TEnum) -> Self {
-        match &e {
-            TEnum::ZERO => Self::ZERO,
-            TEnum::ONE => Self::ONE {
-                e: Default::default(),
-                not_zero: Default::default(),
-            },
-            TEnum::TWO => Self::TWO {
-                e: Default::default(),
-                not_zero: Default::default(),
-            },
-            TEnum::THREE => Self::THREE {
-                e: Default::default(),
-                not_zero: Default::default(),
-            },
-            TEnum::FOUR => Self::FOUR {
-                e: Default::default(),
-                not_zero: Default::default(),
-            },
-            TEnum::FIVE => Self::FIVE {
-                e: Default::default(),
-                not_zero: Default::default(),
-            },
-            TEnum::SIX => Self::SIX {
-                e: Default::default(),
-                not_zero: Default::default(),
-            },
-            TEnum::REST => Self::REST {
-                e: Default::default(),
-                not_zero: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&NestedNotIfTEnum> for TEnum {
-    fn from(v: &NestedNotIfTEnum) -> Self {
-        match &v {
-            NestedNotIfTEnum::ZERO => Self::ZERO,
-            NestedNotIfTEnum::ONE { .. } => Self::ONE,
-            NestedNotIfTEnum::TWO { .. } => Self::TWO,
-            NestedNotIfTEnum::THREE { .. } => Self::THREE,
-            NestedNotIfTEnum::FOUR { .. } => Self::FOUR,
-            NestedNotIfTEnum::FIVE { .. } => Self::FIVE,
-            NestedNotIfTEnum::SIX { .. } => Self::SIX,
-            NestedNotIfTEnum::REST { .. } => Self::REST,
-        }
-    }
-}
-
 impl Default for NestedNotIfTEnum {
     fn default() -> Self {
         // First enumerator without any fields
@@ -1355,8 +1286,16 @@ impl NestedNotIfTEnum {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: TEnum = self.into();
-        a.as_int() as u8
+        match self {
+            Self::ZERO => 0,
+            Self::ONE{ .. } => 1,
+            Self::TWO{ .. } => 2,
+            Self::THREE{ .. } => 3,
+            Self::FOUR{ .. } => 4,
+            Self::FIVE{ .. } => 5,
+            Self::SIX{ .. } => 6,
+            Self::REST{ .. } => 7,
+        }
     }
 
 }

@@ -349,30 +349,6 @@ pub enum MSG_CORPSE_QUERY_ServerCorpseQueryResult {
     },
 }
 
-impl From<&CorpseQueryResult> for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
-    fn from(e: &CorpseQueryResult) -> Self {
-        match &e {
-            CorpseQueryResult::NOT_FOUND => Self::NOT_FOUND,
-            CorpseQueryResult::FOUND => Self::FOUND {
-                corpse_map: Default::default(),
-                map: Default::default(),
-                position_x: Default::default(),
-                position_y: Default::default(),
-                position_z: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&MSG_CORPSE_QUERY_ServerCorpseQueryResult> for CorpseQueryResult {
-    fn from(v: &MSG_CORPSE_QUERY_ServerCorpseQueryResult) -> Self {
-        match &v {
-            MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => Self::NOT_FOUND,
-            MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND { .. } => Self::FOUND,
-        }
-    }
-}
-
 impl Default for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
     fn default() -> Self {
         // First enumerator without any fields
@@ -400,8 +376,10 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: CorpseQueryResult = self.into();
-        a.as_int() as u8
+        match self {
+            Self::NOT_FOUND => 0,
+            Self::FOUND{ .. } => 1,
+        }
     }
 
 }

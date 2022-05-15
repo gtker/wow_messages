@@ -25,18 +25,10 @@ pub fn print_new_types(s: &mut Writer, e: &Container) {
                 print_new_enum_declaration(s, &rd);
 
                 if !rd.is_elseif() {
-                    print_from_new_enum_to_old(s, &rd);
-
-                    print_from_old_enum_to_new(s, &rd);
-
                     print_default_for_new_enum(s, &rd);
 
                     s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
                         print_write_for_new_enum(s, &rd);
-
-                        if rd.is_elseif() {
-                            print_as_flag_value(s, &rd);
-                        }
                     });
                 } else {
                     s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
@@ -391,71 +383,6 @@ fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner) {
     });
 }
 
-fn print_from_new_enum_to_old(s: &mut Writer, rd: &RustDefiner) {
-    s.impl_from(format!("&{}", rd.original_ty_name()), rd.ty_name(), |s| {
-        s.body("match &e", |s| {
-            for enumerator in rd.enumerators() {
-                if !enumerator.has_members_in_struct() {
-                    s.wln(format!(
-                        "{original}::{field} => Self::{field},",
-                        original = rd.original_ty_name(),
-                        field = enumerator.name(),
-                    ));
-                    continue;
-                }
-
-                s.body_closing_with(
-                    format!(
-                        "{original}::{field} => Self::{field}",
-                        original = rd.original_ty_name(),
-                        field = enumerator.name(),
-                    ),
-                    |s| {
-                        for m in enumerator.members_in_struct() {
-                            s.wln(format!("{name}: Default::default(),", name = m.name()))
-                        }
-                    },
-                    ",",
-                );
-            }
-        });
-    });
-}
-
-fn print_from_old_enum_to_new(s: &mut Writer, rd: &RustDefiner) {
-    s.bodyn(
-        format!(
-            "impl From<&{new}> for {original}",
-            new = rd.ty_name(),
-            original = rd.original_ty_name(),
-        ),
-        |s| {
-            s.body(
-                format!("fn from(v: &{new}) -> Self", new = rd.ty_name()),
-                |s| {
-                    s.body("match &v", |s| {
-                        for enumerator in rd.enumerators() {
-                            if enumerator.has_members_in_struct() {
-                                s.wln(format!(
-                                    "{new}::{field} {{ .. }} => Self::{field},",
-                                    new = rd.ty_name(),
-                                    field = enumerator.name(),
-                                ));
-                            } else {
-                                s.wln(format!(
-                                    "{new}::{field} => Self::{field},",
-                                    new = rd.ty_name(),
-                                    field = enumerator.name(),
-                                ));
-                            }
-                        }
-                    });
-                },
-            );
-        },
-    );
-}
-
 fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
     s.bodyn(
         format!("impl Default for {name}", name = rd.ty_name()),
@@ -497,11 +424,19 @@ fn print_write_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
     );
 
     s.funcn("as_int(&self)", rd.int_ty().rust_str(), |s| {
-        s.wln(format!(
-            "let a: {ty} = self.into();",
-            ty = rd.original_ty_name(),
-        ));
-        s.wln(format!("a.as_int() as {ty}", ty = rd.int_ty().rust_str()));
+        s.body("match self", |s| {
+            for enumerator in rd.enumerators() {
+                s.wln(format!(
+                    "Self::{enumerator}{extras} => {value},",
+                    enumerator = enumerator.name(),
+                    value = enumerator.value().int(),
+                    extras = match enumerator.has_members_in_struct() {
+                        true => "{ .. }",
+                        false => "",
+                    },
+                ));
+            }
+        });
     });
 }
 

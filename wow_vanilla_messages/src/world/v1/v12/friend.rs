@@ -624,46 +624,6 @@ pub enum FriendFriendStatus {
     },
 }
 
-impl From<&FriendStatus> for FriendFriendStatus {
-    fn from(e: &FriendStatus) -> Self {
-        match &e {
-            FriendStatus::OFFLINE => Self::OFFLINE,
-            FriendStatus::ONLINE => Self::ONLINE {
-                area: Default::default(),
-                class: Default::default(),
-                level: Default::default(),
-            },
-            FriendStatus::AFK => Self::AFK {
-                area: Default::default(),
-                class: Default::default(),
-                level: Default::default(),
-            },
-            FriendStatus::UNKNOWN3 => Self::UNKNOWN3 {
-                area: Default::default(),
-                class: Default::default(),
-                level: Default::default(),
-            },
-            FriendStatus::DND => Self::DND {
-                area: Default::default(),
-                class: Default::default(),
-                level: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&FriendFriendStatus> for FriendStatus {
-    fn from(v: &FriendFriendStatus) -> Self {
-        match &v {
-            FriendFriendStatus::OFFLINE => Self::OFFLINE,
-            FriendFriendStatus::ONLINE { .. } => Self::ONLINE,
-            FriendFriendStatus::AFK { .. } => Self::AFK,
-            FriendFriendStatus::UNKNOWN3 { .. } => Self::UNKNOWN3,
-            FriendFriendStatus::DND { .. } => Self::DND,
-        }
-    }
-}
-
 impl Default for FriendFriendStatus {
     fn default() -> Self {
         // First enumerator without any fields
@@ -691,8 +651,13 @@ impl FriendFriendStatus {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: FriendStatus = self.into();
-        a.as_int() as u8
+        match self {
+            Self::OFFLINE => 0,
+            Self::ONLINE{ .. } => 1,
+            Self::AFK{ .. } => 2,
+            Self::UNKNOWN3{ .. } => 3,
+            Self::DND{ .. } => 4,
+        }
     }
 
 }

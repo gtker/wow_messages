@@ -569,58 +569,6 @@ pub enum CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     FAIL_PARENTALCONTROL,
 }
 
-impl From<&LoginResult> for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
-    fn from(e: &LoginResult) -> Self {
-        match &e {
-            LoginResult::SUCCESS => Self::SUCCESS {
-                crc_salt: Default::default(),
-                generator: Default::default(),
-                large_safe_prime: Default::default(),
-                salt: Default::default(),
-                server_public_key: Default::default(),
-            },
-            LoginResult::FAIL_UNKNOWN0 => Self::FAIL_UNKNOWN0,
-            LoginResult::FAIL_UNKNOWN1 => Self::FAIL_UNKNOWN1,
-            LoginResult::FAIL_BANNED => Self::FAIL_BANNED,
-            LoginResult::FAIL_UNKNOWN_ACCOUNT => Self::FAIL_UNKNOWN_ACCOUNT,
-            LoginResult::FAIL_INCORRECT_PASSWORD => Self::FAIL_INCORRECT_PASSWORD,
-            LoginResult::FAIL_ALREADY_ONLINE => Self::FAIL_ALREADY_ONLINE,
-            LoginResult::FAIL_NO_TIME => Self::FAIL_NO_TIME,
-            LoginResult::FAIL_DB_BUSY => Self::FAIL_DB_BUSY,
-            LoginResult::FAIL_VERSION_INVALID => Self::FAIL_VERSION_INVALID,
-            LoginResult::LOGIN_DOWNLOAD_FILE => Self::LOGIN_DOWNLOAD_FILE,
-            LoginResult::FAIL_INVALID_SERVER => Self::FAIL_INVALID_SERVER,
-            LoginResult::FAIL_SUSPENDED => Self::FAIL_SUSPENDED,
-            LoginResult::FAIL_NO_ACCESS => Self::FAIL_NO_ACCESS,
-            LoginResult::SUCCESS_SURVEY => Self::SUCCESS_SURVEY,
-            LoginResult::FAIL_PARENTALCONTROL => Self::FAIL_PARENTALCONTROL,
-        }
-    }
-}
-
-impl From<&CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult> for LoginResult {
-    fn from(v: &CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult) -> Self {
-        match &v {
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS { .. } => Self::SUCCESS,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN0 => Self::FAIL_UNKNOWN0,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN1 => Self::FAIL_UNKNOWN1,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_BANNED => Self::FAIL_BANNED,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_UNKNOWN_ACCOUNT => Self::FAIL_UNKNOWN_ACCOUNT,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INCORRECT_PASSWORD => Self::FAIL_INCORRECT_PASSWORD,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_ALREADY_ONLINE => Self::FAIL_ALREADY_ONLINE,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_TIME => Self::FAIL_NO_TIME,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_DB_BUSY => Self::FAIL_DB_BUSY,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_VERSION_INVALID => Self::FAIL_VERSION_INVALID,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::LOGIN_DOWNLOAD_FILE => Self::LOGIN_DOWNLOAD_FILE,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_INVALID_SERVER => Self::FAIL_INVALID_SERVER,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_SUSPENDED => Self::FAIL_SUSPENDED,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_NO_ACCESS => Self::FAIL_NO_ACCESS,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS_SURVEY => Self::SUCCESS_SURVEY,
-            CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::FAIL_PARENTALCONTROL => Self::FAIL_PARENTALCONTROL,
-        }
-    }
-}
-
 impl Default for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     fn default() -> Self {
         // First enumerator without any fields
@@ -654,8 +602,24 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: LoginResult = self.into();
-        a.as_int() as u8
+        match self {
+            Self::SUCCESS{ .. } => 0,
+            Self::FAIL_UNKNOWN0 => 1,
+            Self::FAIL_UNKNOWN1 => 2,
+            Self::FAIL_BANNED => 3,
+            Self::FAIL_UNKNOWN_ACCOUNT => 4,
+            Self::FAIL_INCORRECT_PASSWORD => 5,
+            Self::FAIL_ALREADY_ONLINE => 6,
+            Self::FAIL_NO_TIME => 7,
+            Self::FAIL_DB_BUSY => 8,
+            Self::FAIL_VERSION_INVALID => 9,
+            Self::LOGIN_DOWNLOAD_FILE => 10,
+            Self::FAIL_INVALID_SERVER => 11,
+            Self::FAIL_SUSPENDED => 12,
+            Self::FAIL_NO_ACCESS => 13,
+            Self::SUCCESS_SURVEY => 14,
+            Self::FAIL_PARENTALCONTROL => 15,
+        }
     }
 
 }

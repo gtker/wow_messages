@@ -761,54 +761,6 @@ pub enum ObjectUpdateType {
     },
 }
 
-impl From<&UpdateType> for ObjectUpdateType {
-    fn from(e: &UpdateType) -> Self {
-        match &e {
-            UpdateType::VALUES => Self::VALUES {
-                guid1: Default::default(),
-                mask1: Default::default(),
-            },
-            UpdateType::MOVEMENT => Self::MOVEMENT {
-                guid2: Default::default(),
-                movement1: Default::default(),
-            },
-            UpdateType::CREATE_OBJECT => Self::CREATE_OBJECT {
-                guid3: Default::default(),
-                mask2: Default::default(),
-                movement2: Default::default(),
-                object_type: Default::default(),
-            },
-            UpdateType::CREATE_OBJECT2 => Self::CREATE_OBJECT2 {
-                guid3: Default::default(),
-                mask2: Default::default(),
-                movement2: Default::default(),
-                object_type: Default::default(),
-            },
-            UpdateType::OUT_OF_RANGE_OBJECTS => Self::OUT_OF_RANGE_OBJECTS {
-                count: Default::default(),
-                guids: Default::default(),
-            },
-            UpdateType::NEAR_OBJECTS => Self::NEAR_OBJECTS {
-                count: Default::default(),
-                guids: Default::default(),
-            },
-        }
-    }
-}
-
-impl From<&ObjectUpdateType> for UpdateType {
-    fn from(v: &ObjectUpdateType) -> Self {
-        match &v {
-            ObjectUpdateType::VALUES { .. } => Self::VALUES,
-            ObjectUpdateType::MOVEMENT { .. } => Self::MOVEMENT,
-            ObjectUpdateType::CREATE_OBJECT { .. } => Self::CREATE_OBJECT,
-            ObjectUpdateType::CREATE_OBJECT2 { .. } => Self::CREATE_OBJECT2,
-            ObjectUpdateType::OUT_OF_RANGE_OBJECTS { .. } => Self::OUT_OF_RANGE_OBJECTS,
-            ObjectUpdateType::NEAR_OBJECTS { .. } => Self::NEAR_OBJECTS,
-        }
-    }
-}
-
 impl Default for ObjectUpdateType {
     fn default() -> Self {
         // First enumerator without any fields
@@ -839,8 +791,14 @@ impl ObjectUpdateType {
     }
 
     pub(crate) fn as_int(&self) -> u8 {
-        let a: UpdateType = self.into();
-        a.as_int() as u8
+        match self {
+            Self::VALUES{ .. } => 0,
+            Self::MOVEMENT{ .. } => 1,
+            Self::CREATE_OBJECT{ .. } => 2,
+            Self::CREATE_OBJECT2{ .. } => 3,
+            Self::OUT_OF_RANGE_OBJECTS{ .. } => 4,
+            Self::NEAR_OBJECTS{ .. } => 5,
+        }
     }
 
 }
