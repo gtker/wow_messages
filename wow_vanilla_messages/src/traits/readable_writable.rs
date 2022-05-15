@@ -5,7 +5,7 @@ use std::pin::Pin;
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
-pub trait ReadableAndWritable: Sized {
+pub(crate) trait ReadableAndWritable: Sized {
     type Error;
 
     #[cfg(feature = "sync")]
