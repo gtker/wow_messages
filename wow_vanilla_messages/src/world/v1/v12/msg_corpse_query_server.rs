@@ -68,11 +68,11 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
         match &self.result {
             MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
             MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                corpse_map,
                 map,
                 position_x,
                 position_y,
                 position_z,
-                corpse_map,
             } => {
                 // map: Map
                 map.write(w)?;
@@ -162,11 +162,11 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
             match &self.result {
                 MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
                 MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                    corpse_map,
                     map,
                     position_x,
                     position_y,
                     position_z,
-                    corpse_map,
                 } => {
                     // map: Map
                     map.tokio_write(w).await?;
@@ -257,11 +257,11 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
             match &self.result {
                 MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
                 MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                    corpse_map,
                     map,
                     position_x,
                     position_y,
                     position_z,
-                    corpse_map,
                 } => {
                     // map: Map
                     map.astd_write(w).await?;

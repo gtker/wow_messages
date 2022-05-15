@@ -318,10 +318,10 @@ impl ReadableAndWritable for AuraLog {
             AuraLogAuraType::BIND_SIGHT => {}
             AuraLogAuraType::MOD_POSSESS => {}
             AuraLogAuraType::PERIODIC_DAMAGE {
-                damage1,
-                school,
                 absorbed,
+                damage1,
                 resisted,
+                school,
             } => {
                 // damage1: u32
                 w.write_all(&damage1.to_le_bytes())?;
@@ -366,8 +366,8 @@ impl ReadableAndWritable for AuraLog {
 
             }
             AuraLogAuraType::OBS_MOD_MANA {
-                misc_value1,
                 damage3,
+                misc_value1,
             } => {
                 // misc_value1: u32
                 w.write_all(&misc_value1.to_le_bytes())?;
@@ -379,8 +379,8 @@ impl ReadableAndWritable for AuraLog {
             AuraLogAuraType::MOD_RESISTANCE => {}
             AuraLogAuraType::PERIODIC_TRIGGER_SPELL => {}
             AuraLogAuraType::PERIODIC_ENERGIZE {
-                misc_value1,
                 damage3,
+                misc_value1,
             } => {
                 // misc_value1: u32
                 w.write_all(&misc_value1.to_le_bytes())?;
@@ -429,9 +429,9 @@ impl ReadableAndWritable for AuraLog {
             AuraLogAuraType::PERIODIC_HEALTH_FUNNEL => {}
             AuraLogAuraType::PERIODIC_MANA_FUNNEL => {}
             AuraLogAuraType::PERIODIC_MANA_LEECH {
-                misc_value2,
                 damage,
                 gain_multiplier,
+                misc_value2,
             } => {
                 // misc_value2: u32
                 w.write_all(&misc_value2.to_le_bytes())?;
@@ -468,10 +468,10 @@ impl ReadableAndWritable for AuraLog {
             AuraLogAuraType::MOD_DAMAGE_PERCENT_TAKEN => {}
             AuraLogAuraType::MOD_HEALTH_REGEN_PERCENT => {}
             AuraLogAuraType::PERIODIC_DAMAGE_PERCENT {
-                damage1,
-                school,
                 absorbed,
+                damage1,
                 resisted,
+                school,
             } => {
                 // damage1: u32
                 w.write_all(&damage1.to_le_bytes())?;
@@ -919,10 +919,10 @@ impl ReadableAndWritable for AuraLog {
                 AuraLogAuraType::BIND_SIGHT => {}
                 AuraLogAuraType::MOD_POSSESS => {}
                 AuraLogAuraType::PERIODIC_DAMAGE {
-                    damage1,
-                    school,
                     absorbed,
+                    damage1,
                     resisted,
+                    school,
                 } => {
                     // damage1: u32
                     w.write_all(&damage1.to_le_bytes()).await?;
@@ -967,8 +967,8 @@ impl ReadableAndWritable for AuraLog {
 
                 }
                 AuraLogAuraType::OBS_MOD_MANA {
-                    misc_value1,
                     damage3,
+                    misc_value1,
                 } => {
                     // misc_value1: u32
                     w.write_all(&misc_value1.to_le_bytes()).await?;
@@ -980,8 +980,8 @@ impl ReadableAndWritable for AuraLog {
                 AuraLogAuraType::MOD_RESISTANCE => {}
                 AuraLogAuraType::PERIODIC_TRIGGER_SPELL => {}
                 AuraLogAuraType::PERIODIC_ENERGIZE {
-                    misc_value1,
                     damage3,
+                    misc_value1,
                 } => {
                     // misc_value1: u32
                     w.write_all(&misc_value1.to_le_bytes()).await?;
@@ -1030,9 +1030,9 @@ impl ReadableAndWritable for AuraLog {
                 AuraLogAuraType::PERIODIC_HEALTH_FUNNEL => {}
                 AuraLogAuraType::PERIODIC_MANA_FUNNEL => {}
                 AuraLogAuraType::PERIODIC_MANA_LEECH {
-                    misc_value2,
                     damage,
                     gain_multiplier,
+                    misc_value2,
                 } => {
                     // misc_value2: u32
                     w.write_all(&misc_value2.to_le_bytes()).await?;
@@ -1069,10 +1069,10 @@ impl ReadableAndWritable for AuraLog {
                 AuraLogAuraType::MOD_DAMAGE_PERCENT_TAKEN => {}
                 AuraLogAuraType::MOD_HEALTH_REGEN_PERCENT => {}
                 AuraLogAuraType::PERIODIC_DAMAGE_PERCENT {
-                    damage1,
-                    school,
                     absorbed,
+                    damage1,
                     resisted,
+                    school,
                 } => {
                     // damage1: u32
                     w.write_all(&damage1.to_le_bytes()).await?;
@@ -1521,10 +1521,10 @@ impl ReadableAndWritable for AuraLog {
                 AuraLogAuraType::BIND_SIGHT => {}
                 AuraLogAuraType::MOD_POSSESS => {}
                 AuraLogAuraType::PERIODIC_DAMAGE {
-                    damage1,
-                    school,
                     absorbed,
+                    damage1,
                     resisted,
+                    school,
                 } => {
                     // damage1: u32
                     w.write_all(&damage1.to_le_bytes()).await?;
@@ -1569,8 +1569,8 @@ impl ReadableAndWritable for AuraLog {
 
                 }
                 AuraLogAuraType::OBS_MOD_MANA {
-                    misc_value1,
                     damage3,
+                    misc_value1,
                 } => {
                     // misc_value1: u32
                     w.write_all(&misc_value1.to_le_bytes()).await?;
@@ -1582,8 +1582,8 @@ impl ReadableAndWritable for AuraLog {
                 AuraLogAuraType::MOD_RESISTANCE => {}
                 AuraLogAuraType::PERIODIC_TRIGGER_SPELL => {}
                 AuraLogAuraType::PERIODIC_ENERGIZE {
-                    misc_value1,
                     damage3,
+                    misc_value1,
                 } => {
                     // misc_value1: u32
                     w.write_all(&misc_value1.to_le_bytes()).await?;
@@ -1632,9 +1632,9 @@ impl ReadableAndWritable for AuraLog {
                 AuraLogAuraType::PERIODIC_HEALTH_FUNNEL => {}
                 AuraLogAuraType::PERIODIC_MANA_FUNNEL => {}
                 AuraLogAuraType::PERIODIC_MANA_LEECH {
-                    misc_value2,
                     damage,
                     gain_multiplier,
+                    misc_value2,
                 } => {
                     // misc_value2: u32
                     w.write_all(&misc_value2.to_le_bytes()).await?;
@@ -1671,10 +1671,10 @@ impl ReadableAndWritable for AuraLog {
                 AuraLogAuraType::MOD_DAMAGE_PERCENT_TAKEN => {}
                 AuraLogAuraType::MOD_HEALTH_REGEN_PERCENT => {}
                 AuraLogAuraType::PERIODIC_DAMAGE_PERCENT {
-                    damage1,
-                    school,
                     absorbed,
+                    damage1,
                     resisted,
+                    school,
                 } => {
                     // damage1: u32
                     w.write_all(&damage1.to_le_bytes()).await?;

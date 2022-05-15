@@ -494,8 +494,8 @@ impl ReadableAndWritable for SpellLog {
             SpellLogSpellEffect::POWER_FUNNEL => {}
             SpellLogSpellEffect::HEAL_MAX_HEALTH => {}
             SpellLogSpellEffect::INTERRUPT_CAST {
-                target3,
                 interrupted_spell,
+                target3,
             } => {
                 // target3: Guid
                 target3.write(w)?;
@@ -1145,8 +1145,8 @@ impl ReadableAndWritable for SpellLog {
                 SpellLogSpellEffect::POWER_FUNNEL => {}
                 SpellLogSpellEffect::HEAL_MAX_HEALTH => {}
                 SpellLogSpellEffect::INTERRUPT_CAST {
-                    target3,
                     interrupted_spell,
+                    target3,
                 } => {
                     // target3: Guid
                     target3.tokio_write(w).await?;
@@ -1797,8 +1797,8 @@ impl ReadableAndWritable for SpellLog {
                 SpellLogSpellEffect::POWER_FUNNEL => {}
                 SpellLogSpellEffect::HEAL_MAX_HEALTH => {}
                 SpellLogSpellEffect::INTERRUPT_CAST {
-                    target3,
                     interrupted_spell,
+                    target3,
                 } => {
                     // target3: Guid
                     target3.astd_write(w).await?;

@@ -205,8 +205,8 @@ impl ReadableAndWritable for NestedNotIf {
         match &self.t {
             NestedNotIfTEnum::ZERO => {}
             NestedNotIfTEnum::ONE {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 // not_zero: u8
                 w.write_all(&not_zero.to_le_bytes())?;
@@ -227,8 +227,8 @@ impl ReadableAndWritable for NestedNotIf {
 
             }
             NestedNotIfTEnum::TWO {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 // not_zero: u8
                 w.write_all(&not_zero.to_le_bytes())?;
@@ -249,8 +249,8 @@ impl ReadableAndWritable for NestedNotIf {
 
             }
             NestedNotIfTEnum::THREE {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 // not_zero: u8
                 w.write_all(&not_zero.to_le_bytes())?;
@@ -271,8 +271,8 @@ impl ReadableAndWritable for NestedNotIf {
 
             }
             NestedNotIfTEnum::FOUR {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 // not_zero: u8
                 w.write_all(&not_zero.to_le_bytes())?;
@@ -293,8 +293,8 @@ impl ReadableAndWritable for NestedNotIf {
 
             }
             NestedNotIfTEnum::FIVE {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 // not_zero: u8
                 w.write_all(&not_zero.to_le_bytes())?;
@@ -315,8 +315,8 @@ impl ReadableAndWritable for NestedNotIf {
 
             }
             NestedNotIfTEnum::SIX {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 // not_zero: u8
                 w.write_all(&not_zero.to_le_bytes())?;
@@ -337,8 +337,8 @@ impl ReadableAndWritable for NestedNotIf {
 
             }
             NestedNotIfTEnum::REST {
-                not_zero,
                 e,
+                not_zero,
             } => {
                 // not_zero: u8
                 w.write_all(&not_zero.to_le_bytes())?;
@@ -576,8 +576,8 @@ impl ReadableAndWritable for NestedNotIf {
             match &self.t {
                 NestedNotIfTEnum::ZERO => {}
                 NestedNotIfTEnum::ONE {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -598,8 +598,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::TWO {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -620,8 +620,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::THREE {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -642,8 +642,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::FOUR {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -664,8 +664,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::FIVE {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -686,8 +686,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::SIX {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -708,8 +708,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::REST {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -948,8 +948,8 @@ impl ReadableAndWritable for NestedNotIf {
             match &self.t {
                 NestedNotIfTEnum::ZERO => {}
                 NestedNotIfTEnum::ONE {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -970,8 +970,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::TWO {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -992,8 +992,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::THREE {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -1014,8 +1014,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::FOUR {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -1036,8 +1036,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::FIVE {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -1058,8 +1058,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::SIX {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;
@@ -1080,8 +1080,8 @@ impl ReadableAndWritable for NestedNotIf {
 
                 }
                 NestedNotIfTEnum::REST {
-                    not_zero,
                     e,
+                    not_zero,
                 } => {
                     // not_zero: u8
                     w.write_all(&not_zero.to_le_bytes()).await?;

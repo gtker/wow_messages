@@ -2334,9 +2334,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
         match &self.map {
             SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS => {}
             SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2383,9 +2383,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::TESTING {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2432,9 +2432,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2481,9 +2481,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2530,9 +2530,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2579,9 +2579,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2628,9 +2628,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2677,9 +2677,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2726,9 +2726,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2775,9 +2775,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2824,9 +2824,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2873,9 +2873,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2922,9 +2922,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -2971,9 +2971,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3020,9 +3020,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3069,9 +3069,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3118,9 +3118,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3167,9 +3167,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3216,9 +3216,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3265,9 +3265,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3314,9 +3314,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3363,9 +3363,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3412,9 +3412,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3461,9 +3461,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3510,9 +3510,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3559,9 +3559,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3608,9 +3608,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3657,9 +3657,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3706,9 +3706,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3755,9 +3755,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::MAURADON {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3804,9 +3804,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3853,9 +3853,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3902,9 +3902,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -3951,9 +3951,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -4000,9 +4000,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -4049,9 +4049,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -4098,9 +4098,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -4147,9 +4147,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -4196,9 +4196,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -4245,9 +4245,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -4294,9 +4294,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -4343,9 +4343,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -4392,9 +4392,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
-                unknown0,
                 client_instance_id,
                 status_id,
+                unknown0,
             } => {
                 // unknown0: u8
                 w.write_all(&unknown0.to_le_bytes())?;
@@ -6777,9 +6777,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
             match &self.map {
                 SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS => {}
                 SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -6826,9 +6826,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::TESTING {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -6875,9 +6875,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -6924,9 +6924,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -6973,9 +6973,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7022,9 +7022,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7071,9 +7071,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7120,9 +7120,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7169,9 +7169,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7218,9 +7218,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7267,9 +7267,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7316,9 +7316,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7365,9 +7365,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7414,9 +7414,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7463,9 +7463,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7512,9 +7512,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7561,9 +7561,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7610,9 +7610,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7659,9 +7659,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7708,9 +7708,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7757,9 +7757,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7806,9 +7806,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7855,9 +7855,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7904,9 +7904,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -7953,9 +7953,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8002,9 +8002,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8051,9 +8051,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8100,9 +8100,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8149,9 +8149,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8198,9 +8198,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::MAURADON {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8247,9 +8247,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8296,9 +8296,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8345,9 +8345,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8394,9 +8394,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8443,9 +8443,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8492,9 +8492,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8541,9 +8541,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8590,9 +8590,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8639,9 +8639,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8688,9 +8688,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8737,9 +8737,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8786,9 +8786,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -8835,9 +8835,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11221,9 +11221,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
             match &self.map {
                 SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS => {}
                 SMSG_BATTLEFIELD_STATUSMap::KALIMDOR {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11270,9 +11270,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::TESTING {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11319,9 +11319,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::SCOTT_TEST {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11368,9 +11368,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::CASH_TEST {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11417,9 +11417,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ALTERAC_VALLEY {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11466,9 +11466,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::SHADOWFANG_KEEP {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11515,9 +11515,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::STORMWIND_STOCKADE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11564,9 +11564,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::STORMWIND_PRISON {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11613,9 +11613,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::DEADMINES {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11662,9 +11662,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::AZSHARA_CRATER {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11711,9 +11711,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::COLLINS_TEST {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11760,9 +11760,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::WAILING_CAVERNS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11809,9 +11809,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::MONASTERY {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11858,9 +11858,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_KRAUL {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11907,9 +11907,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKFATHOM_DEEPS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -11956,9 +11956,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ULDAMAN {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12005,9 +12005,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::GNOMERAGON {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12054,9 +12054,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::SUNKEN_TEMPLE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12103,9 +12103,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::RAZORFEN_DOWNS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12152,9 +12152,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::EMERALD_DREAM {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12201,9 +12201,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::SCARLET_MONASTERY {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12250,9 +12250,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ZUL_FARRAK {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12299,9 +12299,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_SPIRE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12348,9 +12348,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKROCK_DEPTHS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12397,9 +12397,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ONYXIAS_LAIR {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12446,9 +12446,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::CAVERNS_OF_TIME {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12495,9 +12495,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::SCHOLOMANCE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12544,9 +12544,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ZUL_GURUB {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12593,9 +12593,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::STRATHOLME {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12642,9 +12642,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::MAURADON {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12691,9 +12691,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::DEEPRUN_TRAM {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12740,9 +12740,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::RAGEFIRE_CHASM {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12789,9 +12789,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::MOLTEN_CORE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12838,9 +12838,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::DIRE_MAUL {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12887,9 +12887,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ALLIANCE_PVP_BARRACKS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12936,9 +12936,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::HORDE_PVP_BARRACKS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -12985,9 +12985,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::DEVELOPMENT_LAND {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -13034,9 +13034,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::BLACKWING_LAIR {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -13083,9 +13083,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::WARSONG_GULCH {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -13132,9 +13132,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::RUINS_OF_AHN_QIRAJ {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -13181,9 +13181,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::ARATHI_BASIN {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -13230,9 +13230,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::AHN_QIRAJ_TEMPLE {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;
@@ -13279,9 +13279,9 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
                 }
                 SMSG_BATTLEFIELD_STATUSMap::NAXXRAMAS {
-                    unknown0,
                     client_instance_id,
                     status_id,
+                    unknown0,
                 } => {
                     // unknown0: u8
                     w.write_all(&unknown0.to_le_bytes()).await?;

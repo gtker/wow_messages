@@ -112,8 +112,8 @@ impl ReadableAndWritable for Friend {
             FriendFriendStatus::OFFLINE => {}
             FriendFriendStatus::ONLINE {
                 area,
-                level,
                 class,
+                level,
             } => {
                 // area: Area
                 area.write(w)?;
@@ -127,8 +127,8 @@ impl ReadableAndWritable for Friend {
             }
             FriendFriendStatus::AFK {
                 area,
-                level,
                 class,
+                level,
             } => {
                 // area: Area
                 area.write(w)?;
@@ -142,8 +142,8 @@ impl ReadableAndWritable for Friend {
             }
             FriendFriendStatus::UNKNOWN3 {
                 area,
-                level,
                 class,
+                level,
             } => {
                 // area: Area
                 area.write(w)?;
@@ -157,8 +157,8 @@ impl ReadableAndWritable for Friend {
             }
             FriendFriendStatus::DND {
                 area,
-                level,
                 class,
+                level,
             } => {
                 // area: Area
                 area.write(w)?;
@@ -292,8 +292,8 @@ impl ReadableAndWritable for Friend {
                 FriendFriendStatus::OFFLINE => {}
                 FriendFriendStatus::ONLINE {
                     area,
-                    level,
                     class,
+                    level,
                 } => {
                     // area: Area
                     area.tokio_write(w).await?;
@@ -307,8 +307,8 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendFriendStatus::AFK {
                     area,
-                    level,
                     class,
+                    level,
                 } => {
                     // area: Area
                     area.tokio_write(w).await?;
@@ -322,8 +322,8 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendFriendStatus::UNKNOWN3 {
                     area,
-                    level,
                     class,
+                    level,
                 } => {
                     // area: Area
                     area.tokio_write(w).await?;
@@ -337,8 +337,8 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendFriendStatus::DND {
                     area,
-                    level,
                     class,
+                    level,
                 } => {
                     // area: Area
                     area.tokio_write(w).await?;
@@ -473,8 +473,8 @@ impl ReadableAndWritable for Friend {
                 FriendFriendStatus::OFFLINE => {}
                 FriendFriendStatus::ONLINE {
                     area,
-                    level,
                     class,
+                    level,
                 } => {
                     // area: Area
                     area.astd_write(w).await?;
@@ -488,8 +488,8 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendFriendStatus::AFK {
                     area,
-                    level,
                     class,
+                    level,
                 } => {
                     // area: Area
                     area.astd_write(w).await?;
@@ -503,8 +503,8 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendFriendStatus::UNKNOWN3 {
                     area,
-                    level,
                     class,
+                    level,
                 } => {
                     // area: Area
                     area.astd_write(w).await?;
@@ -518,8 +518,8 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendFriendStatus::DND {
                     area,
-                    level,
                     class,
+                    level,
                 } => {
                     // area: Area
                     area.astd_write(w).await?;

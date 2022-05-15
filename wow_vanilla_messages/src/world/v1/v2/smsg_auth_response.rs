@@ -160,9 +160,9 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
             SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_FAILED => {}
             SMSG_AUTH_RESPONSEWorldResult::CSTATUS_AUTHENTICATING => {}
             SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
-                billing_time,
                 billing_flags,
                 billing_rested,
+                billing_time,
             } => {
                 // billing_time: u32
                 w.write_all(&billing_time.to_le_bytes())?;
@@ -414,9 +414,9 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
                 SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_FAILED => {}
                 SMSG_AUTH_RESPONSEWorldResult::CSTATUS_AUTHENTICATING => {}
                 SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
-                    billing_time,
                     billing_flags,
                     billing_rested,
+                    billing_time,
                 } => {
                     // billing_time: u32
                     w.write_all(&billing_time.to_le_bytes()).await?;
@@ -669,9 +669,9 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
                 SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_FAILED => {}
                 SMSG_AUTH_RESPONSEWorldResult::CSTATUS_AUTHENTICATING => {}
                 SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
-                    billing_time,
                     billing_flags,
                     billing_rested,
+                    billing_time,
                 } => {
                     // billing_time: u32
                     w.write_all(&billing_time.to_le_bytes()).await?;

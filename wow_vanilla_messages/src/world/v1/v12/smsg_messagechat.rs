@@ -515,8 +515,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
             }
             SMSG_MESSAGECHATChatType::MONSTER_SAY {
                 sender_guid3,
-                sender_name_length,
                 sender_name,
+                sender_name_length,
                 target_guid,
             } => {
                 // sender_guid3: Guid
@@ -536,8 +536,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
             }
             SMSG_MESSAGECHATChatType::MONSTER_YELL {
                 sender_guid3,
-                sender_name_length,
                 sender_name,
+                sender_name_length,
                 target_guid,
             } => {
                 // sender_guid3: Guid
@@ -556,9 +556,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
             }
             SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
-                name_length,
-                monster_name,
                 monster_guid,
+                monster_name,
+                name_length,
             } => {
                 // name_length: u32
                 w.write_all(&name_length.to_le_bytes())?;
@@ -574,8 +574,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
             }
             SMSG_MESSAGECHATChatType::CHANNEL {
                 channel_name,
-                player_rank,
                 player_guid,
+                player_rank,
             } => {
                 // channel_name: CString
                 w.write_all(channel_name.as_bytes())?;
@@ -660,9 +660,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
             }
             SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
-                name_length,
-                monster_name,
                 monster_guid,
+                monster_name,
+                name_length,
             } => {
                 // name_length: u32
                 w.write_all(&name_length.to_le_bytes())?;
@@ -719,9 +719,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
             }
             SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
-                name_length,
-                monster_name,
                 monster_guid,
+                monster_name,
+                name_length,
             } => {
                 // name_length: u32
                 w.write_all(&name_length.to_le_bytes())?;
@@ -1273,8 +1273,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_SAY {
                     sender_guid3,
-                    sender_name_length,
                     sender_name,
+                    sender_name_length,
                     target_guid,
                 } => {
                     // sender_guid3: Guid
@@ -1294,8 +1294,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_YELL {
                     sender_guid3,
-                    sender_name_length,
                     sender_name,
+                    sender_name_length,
                     target_guid,
                 } => {
                     // sender_guid3: Guid
@@ -1314,9 +1314,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
-                    name_length,
-                    monster_name,
                     monster_guid,
+                    monster_name,
+                    name_length,
                 } => {
                     // name_length: u32
                     w.write_all(&name_length.to_le_bytes()).await?;
@@ -1332,8 +1332,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL {
                     channel_name,
-                    player_rank,
                     player_guid,
+                    player_rank,
                 } => {
                     // channel_name: CString
                     w.write_all(channel_name.as_bytes()).await?;
@@ -1418,9 +1418,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
-                    name_length,
-                    monster_name,
                     monster_guid,
+                    monster_name,
+                    name_length,
                 } => {
                     // name_length: u32
                     w.write_all(&name_length.to_le_bytes()).await?;
@@ -1477,9 +1477,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                 }
                 SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
-                    name_length,
-                    monster_name,
                     monster_guid,
+                    monster_name,
+                    name_length,
                 } => {
                     // name_length: u32
                     w.write_all(&name_length.to_le_bytes()).await?;
@@ -2032,8 +2032,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_SAY {
                     sender_guid3,
-                    sender_name_length,
                     sender_name,
+                    sender_name_length,
                     target_guid,
                 } => {
                     // sender_guid3: Guid
@@ -2053,8 +2053,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_YELL {
                     sender_guid3,
-                    sender_name_length,
                     sender_name,
+                    sender_name_length,
                     target_guid,
                 } => {
                     // sender_guid3: Guid
@@ -2073,9 +2073,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
-                    name_length,
-                    monster_name,
                     monster_guid,
+                    monster_name,
+                    name_length,
                 } => {
                     // name_length: u32
                     w.write_all(&name_length.to_le_bytes()).await?;
@@ -2091,8 +2091,8 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL {
                     channel_name,
-                    player_rank,
                     player_guid,
+                    player_rank,
                 } => {
                     // channel_name: CString
                     w.write_all(channel_name.as_bytes()).await?;
@@ -2177,9 +2177,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
-                    name_length,
-                    monster_name,
                     monster_guid,
+                    monster_name,
+                    name_length,
                 } => {
                     // name_length: u32
                     w.write_all(&name_length.to_le_bytes()).await?;
@@ -2236,9 +2236,9 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
                 }
                 SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
-                    name_length,
-                    monster_name,
                     monster_guid,
+                    monster_name,
+                    name_length,
                 } => {
                     // name_length: u32
                     w.write_all(&name_length.to_le_bytes()).await?;

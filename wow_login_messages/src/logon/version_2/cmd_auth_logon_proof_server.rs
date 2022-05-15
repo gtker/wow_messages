@@ -69,8 +69,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
 
         match &self.login_result {
             CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                server_proof,
                 hardware_survey_id,
+                server_proof,
             } => {
                 // server_proof: u8[20]
                 for i in server_proof.iter() {
@@ -175,8 +175,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
 
             match &self.login_result {
                 CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                    server_proof,
                     hardware_survey_id,
+                    server_proof,
                 } => {
                     // server_proof: u8[20]
                     for i in server_proof.iter() {
@@ -282,8 +282,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
 
             match &self.login_result {
                 CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
-                    server_proof,
                     hardware_survey_id,
+                    server_proof,
                 } => {
                     // server_proof: u8[20]
                     for i in server_proof.iter() {

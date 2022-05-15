@@ -274,8 +274,8 @@ impl MessageBody for SMSG_CAST_RESULT {
                     SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM => {}
                     SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS {
                         equipped_item_class,
-                        equipped_item_subclass_mask,
                         equipped_item_inventory_type_mask,
+                        equipped_item_subclass_mask,
                     } => {
                         // equipped_item_class: u32
                         w.write_all(&equipped_item_class.to_le_bytes())?;
@@ -699,8 +699,8 @@ impl MessageBody for SMSG_CAST_RESULT {
                         SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM => {}
                         SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS {
                             equipped_item_class,
-                            equipped_item_subclass_mask,
                             equipped_item_inventory_type_mask,
+                            equipped_item_subclass_mask,
                         } => {
                             // equipped_item_class: u32
                             w.write_all(&equipped_item_class.to_le_bytes()).await?;
@@ -1125,8 +1125,8 @@ impl MessageBody for SMSG_CAST_RESULT {
                         SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM => {}
                         SMSG_CAST_RESULTCastFailureReason::EQUIPPED_ITEM_CLASS {
                             equipped_item_class,
-                            equipped_item_subclass_mask,
                             equipped_item_inventory_type_mask,
+                            equipped_item_subclass_mask,
                         } => {
                             // equipped_item_class: u32
                             w.write_all(&equipped_item_class.to_le_bytes()).await?;

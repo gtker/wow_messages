@@ -107,11 +107,11 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
 
         match &self.login_result {
             CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                server_public_key,
+                crc_salt,
                 generator,
                 large_safe_prime,
                 salt,
-                crc_salt,
+                server_public_key,
             } => {
                 // server_public_key: u8[32]
                 for i in server_public_key.iter() {
@@ -272,11 +272,11 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
 
             match &self.login_result {
                 CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                    server_public_key,
+                    crc_salt,
                     generator,
                     large_safe_prime,
                     salt,
-                    crc_salt,
+                    server_public_key,
                 } => {
                     // server_public_key: u8[32]
                     for i in server_public_key.iter() {
@@ -438,11 +438,11 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
 
             match &self.login_result {
                 CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
-                    server_public_key,
+                    crc_salt,
                     generator,
                     large_safe_prime,
                     salt,
-                    crc_salt,
+                    server_public_key,
                 } => {
                     // server_public_key: u8[32]
                     for i in server_public_key.iter() {

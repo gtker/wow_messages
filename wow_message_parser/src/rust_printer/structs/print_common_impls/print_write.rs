@@ -1,4 +1,6 @@
-use crate::container::{Container, ContainerType, StructMember, StructMemberDefinition};
+use crate::container::{
+    Container, ContainerType, Equation, IfStatement, StructMember, StructMemberDefinition,
+};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{
@@ -344,6 +346,30 @@ pub fn print_write_definition(
     }
 }
 
+fn print_write_flag_if_statement(
+    s: &mut Writer,
+    variable_prefix: &str,
+    statement: &IfStatement,
+    prefix: &str,
+    postfix: &str,
+) {
+    s.bodyn(
+        format!(
+            "if let Some(s) = &{variable_prefix}{variable}.{variant}",
+            variable_prefix = variable_prefix,
+            variable = statement.name(),
+            variant = &statement.flag_get_enumerator().to_lowercase(),
+        ),
+        |s| {
+            s.wln(format!(
+                "s.{prefix}write(w){postfix}?;",
+                prefix = prefix,
+                postfix = postfix,
+            ));
+        },
+    );
+}
+
 pub fn print_write_field(
     s: &mut Writer,
     e: &Container,
@@ -359,18 +385,10 @@ pub fn print_write_field(
         }
         StructMember::IfStatement(statement) => match statement.definer_type() {
             DefinerType::Enum => {
-                print_enum_if_statement_new(
-                    s,
-                    e,
-                    o,
-                    variable_prefix,
-                    statement.new_enum(),
-                    prefix,
-                    postfix,
-                );
+                print_write_if_enum_statement(s, e, o, variable_prefix, statement, prefix, postfix);
             }
             DefinerType::Flag => {
-                print_flag_if_statement(s, variable_prefix, statement.new_enum(), prefix, postfix)
+                print_write_flag_if_statement(s, variable_prefix, statement, prefix, postfix);
             }
         },
         StructMember::OptionalStatement(optional) => {
@@ -420,6 +438,65 @@ pub fn print_flag_if_statement(
             ));
         },
     );
+}
+
+fn print_write_if_enum_statement(
+    s: &mut Writer,
+    e: &Container,
+    o: &Objects,
+    variable_prefix: &str,
+    statement: &IfStatement,
+    prefix: &str,
+    postfix: &str,
+) {
+    s.open_curly(format!(
+        "match &{prefix}{name}",
+        name = statement.name(),
+        prefix = match e.type_definition_in_same_scope(statement.name()) {
+            false => "self.",
+            true => variable_prefix,
+        },
+    ));
+
+    let enumerator_name = match &statement.get_conditional().equations()[0] {
+        Equation::Equals { value, .. } | Equation::NotEquals { value, .. } => value,
+        _ => unreachable!(),
+    };
+
+    let rd = e
+        .rust_object()
+        .rust_definer_with_variable_name_and_enumerator(statement.name(), enumerator_name);
+
+    for enumerator in rd.enumerators() {
+        if !enumerator.has_members() {
+            s.wln(format!(
+                "{new_enum}::{variant} => {{}}",
+                new_enum = rd.ty_name(),
+                variant = enumerator.name()
+            ));
+
+            continue;
+        }
+
+        s.open_curly(format!(
+            "{new_enum}::{variant}",
+            new_enum = rd.ty_name(),
+            variant = enumerator.name(),
+        ));
+        for m in enumerator.members_in_struct() {
+            s.wln(format!("{},", m.name()));
+        }
+        s.closing_curly_with(" => {");
+        s.inc_indent();
+
+        for m in enumerator.original_fields() {
+            print_write_field(s, e, o, m, "", prefix, postfix);
+        }
+
+        s.closing_curly(); // enum::enumerator
+    }
+
+    s.closing_curly_newline(); // match
 }
 
 pub fn print_enum_if_statement_new(

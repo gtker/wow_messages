@@ -74,8 +74,8 @@ impl MessageBody for SMSG_LOG_XPGAIN {
         match &self.exp_type {
             SMSG_LOG_XPGAINExperienceAwardType::KILL => {}
             SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
-                experience_without_rested,
                 exp_group_bonus,
+                experience_without_rested,
             } => {
                 // experience_without_rested: u32
                 w.write_all(&experience_without_rested.to_le_bytes())?;
@@ -160,8 +160,8 @@ impl MessageBody for SMSG_LOG_XPGAIN {
             match &self.exp_type {
                 SMSG_LOG_XPGAINExperienceAwardType::KILL => {}
                 SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
-                    experience_without_rested,
                     exp_group_bonus,
+                    experience_without_rested,
                 } => {
                     // experience_without_rested: u32
                     w.write_all(&experience_without_rested.to_le_bytes()).await?;
@@ -247,8 +247,8 @@ impl MessageBody for SMSG_LOG_XPGAIN {
             match &self.exp_type {
                 SMSG_LOG_XPGAINExperienceAwardType::KILL => {}
                 SMSG_LOG_XPGAINExperienceAwardType::NON_KILL {
-                    experience_without_rested,
                     exp_group_bonus,
+                    experience_without_rested,
                 } => {
                     // experience_without_rested: u32
                     w.write_all(&experience_without_rested.to_le_bytes()).await?;

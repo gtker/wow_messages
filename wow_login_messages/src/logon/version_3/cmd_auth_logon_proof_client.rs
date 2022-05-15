@@ -110,8 +110,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         match &self.security_flag {
             CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
             CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                pin_salt,
                 pin_hash,
+                pin_salt,
             } => {
                 // pin_salt: u8[16]
                 for i in pin_salt.iter() {
@@ -239,8 +239,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             match &self.security_flag {
                 CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
                 CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                    pin_salt,
                     pin_hash,
+                    pin_salt,
                 } => {
                     // pin_salt: u8[16]
                     for i in pin_salt.iter() {
@@ -369,8 +369,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             match &self.security_flag {
                 CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE => {}
                 CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::PIN {
-                    pin_salt,
                     pin_hash,
+                    pin_salt,
                 } => {
                     // pin_salt: u8[16]
                     for i in pin_salt.iter() {

@@ -125,8 +125,8 @@ impl MessageBody for SMSG_TRADE_STATUS {
             SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION => {}
             SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
                 inventory_result,
-                target_error,
                 item_limit_category_id,
+                target_error,
             } => {
                 // inventory_result: InventoryResult
                 crate::util::write_u32_le(w, inventory_result.as_int() as u32)?;
@@ -289,8 +289,8 @@ impl MessageBody for SMSG_TRADE_STATUS {
                 SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION => {}
                 SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
                     inventory_result,
-                    target_error,
                     item_limit_category_id,
+                    target_error,
                 } => {
                     // inventory_result: InventoryResult
                     crate::util::tokio_write_u32_le(w, inventory_result.as_int() as u32).await?;
@@ -454,8 +454,8 @@ impl MessageBody for SMSG_TRADE_STATUS {
                 SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION => {}
                 SMSG_TRADE_STATUSTradeStatus::CLOSE_WINDOW {
                     inventory_result,
-                    target_error,
                     item_limit_category_id,
+                    target_error,
                 } => {
                     // inventory_result: InventoryResult
                     crate::util::astd_write_u32_le(w, inventory_result.as_int() as u32).await?;

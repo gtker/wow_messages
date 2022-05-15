@@ -50,20 +50,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
         self.n.write(w)?;
 
         match &self.t {
-            EnumOutsideOfIfTEnum::ZERO {
-            } => {
-                match &self.n {
-                    EnumOutsideOfIfNestedEnum::NESTED {
-                        nested,
-                    } => {
-                        // nested: u8
-                        w.write_all(&nested.to_le_bytes())?;
-
-                    }
-                    EnumOutsideOfIfNestedEnum::NOT_NESTED => {}
-                }
-
-            }
+            EnumOutsideOfIfTEnum::ZERO => {}
             EnumOutsideOfIfTEnum::ONE => {}
             EnumOutsideOfIfTEnum::TWO => {}
             EnumOutsideOfIfTEnum::THREE => {}
@@ -133,20 +120,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
             self.n.tokio_write(w).await?;
 
             match &self.t {
-                EnumOutsideOfIfTEnum::ZERO {
-                } => {
-                    match &self.n {
-                        EnumOutsideOfIfNestedEnum::NESTED {
-                            nested,
-                        } => {
-                            // nested: u8
-                            w.write_all(&nested.to_le_bytes()).await?;
-
-                        }
-                        EnumOutsideOfIfNestedEnum::NOT_NESTED => {}
-                    }
-
-                }
+                EnumOutsideOfIfTEnum::ZERO => {}
                 EnumOutsideOfIfTEnum::ONE => {}
                 EnumOutsideOfIfTEnum::TWO => {}
                 EnumOutsideOfIfTEnum::THREE => {}
@@ -217,20 +191,7 @@ impl ReadableAndWritable for EnumOutsideOfIf {
             self.n.astd_write(w).await?;
 
             match &self.t {
-                EnumOutsideOfIfTEnum::ZERO {
-                } => {
-                    match &self.n {
-                        EnumOutsideOfIfNestedEnum::NESTED {
-                            nested,
-                        } => {
-                            // nested: u8
-                            w.write_all(&nested.to_le_bytes()).await?;
-
-                        }
-                        EnumOutsideOfIfNestedEnum::NOT_NESTED => {}
-                    }
-
-                }
+                EnumOutsideOfIfTEnum::ZERO => {}
                 EnumOutsideOfIfTEnum::ONE => {}
                 EnumOutsideOfIfTEnum::TWO => {}
                 EnumOutsideOfIfTEnum::THREE => {}

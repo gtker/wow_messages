@@ -59,34 +59,8 @@ impl ReadableAndWritable for EnumIfElseIfNested {
                 w.write_all(&zero.to_le_bytes())?;
 
             }
-            EnumIfElseIfNestedSimpleEnum::ONE {
-            } => {
-                match &self.n {
-                    EnumIfElseIfNestedNestedEnum::NESTED {
-                        nested,
-                    } => {
-                        // nested: u8
-                        w.write_all(&nested.to_le_bytes())?;
-
-                    }
-                    EnumIfElseIfNestedNestedEnum::NOT_NESTED => {}
-                }
-
-            }
-            EnumIfElseIfNestedSimpleEnum::TWO {
-            } => {
-                match &self.n {
-                    EnumIfElseIfNestedNestedEnum::NESTED {
-                        nested,
-                    } => {
-                        // nested: u8
-                        w.write_all(&nested.to_le_bytes())?;
-
-                    }
-                    EnumIfElseIfNestedNestedEnum::NOT_NESTED => {}
-                }
-
-            }
+            EnumIfElseIfNestedSimpleEnum::ONE => {}
+            EnumIfElseIfNestedSimpleEnum::TWO => {}
         }
 
         Ok(())
@@ -158,34 +132,8 @@ impl ReadableAndWritable for EnumIfElseIfNested {
                     w.write_all(&zero.to_le_bytes()).await?;
 
                 }
-                EnumIfElseIfNestedSimpleEnum::ONE {
-                } => {
-                    match &self.n {
-                        EnumIfElseIfNestedNestedEnum::NESTED {
-                            nested,
-                        } => {
-                            // nested: u8
-                            w.write_all(&nested.to_le_bytes()).await?;
-
-                        }
-                        EnumIfElseIfNestedNestedEnum::NOT_NESTED => {}
-                    }
-
-                }
-                EnumIfElseIfNestedSimpleEnum::TWO {
-                } => {
-                    match &self.n {
-                        EnumIfElseIfNestedNestedEnum::NESTED {
-                            nested,
-                        } => {
-                            // nested: u8
-                            w.write_all(&nested.to_le_bytes()).await?;
-
-                        }
-                        EnumIfElseIfNestedNestedEnum::NOT_NESTED => {}
-                    }
-
-                }
+                EnumIfElseIfNestedSimpleEnum::ONE => {}
+                EnumIfElseIfNestedSimpleEnum::TWO => {}
             }
 
             Ok(())
@@ -258,34 +206,8 @@ impl ReadableAndWritable for EnumIfElseIfNested {
                     w.write_all(&zero.to_le_bytes()).await?;
 
                 }
-                EnumIfElseIfNestedSimpleEnum::ONE {
-                } => {
-                    match &self.n {
-                        EnumIfElseIfNestedNestedEnum::NESTED {
-                            nested,
-                        } => {
-                            // nested: u8
-                            w.write_all(&nested.to_le_bytes()).await?;
-
-                        }
-                        EnumIfElseIfNestedNestedEnum::NOT_NESTED => {}
-                    }
-
-                }
-                EnumIfElseIfNestedSimpleEnum::TWO {
-                } => {
-                    match &self.n {
-                        EnumIfElseIfNestedNestedEnum::NESTED {
-                            nested,
-                        } => {
-                            // nested: u8
-                            w.write_all(&nested.to_le_bytes()).await?;
-
-                        }
-                        EnumIfElseIfNestedNestedEnum::NOT_NESTED => {}
-                    }
-
-                }
+                EnumIfElseIfNestedSimpleEnum::ONE => {}
+                EnumIfElseIfNestedSimpleEnum::TWO => {}
             }
 
             Ok(())

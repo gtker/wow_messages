@@ -79,13 +79,13 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
         match &self.status {
             SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
             SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                text,
-                ticket_type,
-                days_since_ticket_creation,
-                days_since_oldest_ticket_creation,
                 days_since_last_updated,
+                days_since_oldest_ticket_creation,
+                days_since_ticket_creation,
                 escalation_status,
                 read_by_gm,
+                text,
+                ticket_type,
             } => {
                 // text: CString
                 w.write_all(text.as_bytes())?;
@@ -194,13 +194,13 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
             match &self.status {
                 SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
                 SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                    text,
-                    ticket_type,
-                    days_since_ticket_creation,
-                    days_since_oldest_ticket_creation,
                     days_since_last_updated,
+                    days_since_oldest_ticket_creation,
+                    days_since_ticket_creation,
                     escalation_status,
                     read_by_gm,
+                    text,
+                    ticket_type,
                 } => {
                     // text: CString
                     w.write_all(text.as_bytes()).await?;
@@ -310,13 +310,13 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
             match &self.status {
                 SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
                 SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                    text,
-                    ticket_type,
-                    days_since_ticket_creation,
-                    days_since_oldest_ticket_creation,
                     days_since_last_updated,
+                    days_since_oldest_ticket_creation,
+                    days_since_ticket_creation,
                     escalation_status,
                     read_by_gm,
+                    text,
+                    ticket_type,
                 } => {
                     // text: CString
                     w.write_all(text.as_bytes()).await?;
