@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -229,10 +228,8 @@ impl MessageBody for CMSG_WORLD_TELEPORT {
 
 }
 
-impl ConstantSized for CMSG_WORLD_TELEPORT {}
-
-impl MaximumPossibleSized for CMSG_WORLD_TELEPORT {
-    fn maximum_possible_size() -> usize {
+impl CMSG_WORLD_TELEPORT {
+    pub(crate) fn size() -> usize {
         0
         + 8 // time_in_msec: u64
         + 4 // map: Map
@@ -274,7 +271,6 @@ impl From<MapError> for CMSG_WORLD_TELEPORTError {
 #[cfg(test)]
 mod test {
     use super::CMSG_WORLD_TELEPORT;
-    use crate::ConstantSized;
     use crate::world::v1::v12::Map;
     use super::*;
     use super::super::*;

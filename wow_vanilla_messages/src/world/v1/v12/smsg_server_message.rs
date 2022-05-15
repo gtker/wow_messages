@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{ServerMessageType, ServerMessageTypeError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -161,19 +160,11 @@ impl MessageBody for SMSG_SERVER_MESSAGE {
 
 }
 
-impl VariableSized for SMSG_SERVER_MESSAGE {
-    fn size(&self) -> usize {
+impl SMSG_SERVER_MESSAGE {
+    pub fn size(&self) -> usize {
         0
         + 4 // message_type: ServerMessageType
         + self.message.len() + 1 // message: CString
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SERVER_MESSAGE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // message_type: ServerMessageType
-        + 256 // message: CString
     }
 }
 

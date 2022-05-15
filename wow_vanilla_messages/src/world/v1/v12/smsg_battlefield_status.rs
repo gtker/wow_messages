@@ -3,7 +3,6 @@ use crate::world::v1::v12::{Map, MapError};
 use crate::world::v1::v12::{StatusId, StatusIdError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -13335,19 +13334,11 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
 
 }
 
-impl VariableSized for SMSG_BATTLEFIELD_STATUS {
-    fn size(&self) -> usize {
+impl SMSG_BATTLEFIELD_STATUS {
+    pub fn size(&self) -> usize {
         0
         + 4 // queue_slot: u32
         + self.map.size() // map: SMSG_BATTLEFIELD_STATUSMap
-    }
-}
-
-impl MaximumPossibleSized for SMSG_BATTLEFIELD_STATUS {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // queue_slot: u32
-        + 18 // map: SMSG_BATTLEFIELD_STATUSMap
     }
 }
 
@@ -13424,8 +13415,8 @@ impl SMSG_BATTLEFIELD_STATUSStatusId {
 
 }
 
-impl VariableSized for SMSG_BATTLEFIELD_STATUSStatusId {
-    fn size(&self) -> usize {
+impl SMSG_BATTLEFIELD_STATUSStatusId {
+    pub fn size(&self) -> usize {
         match self {
             Self::NONE => {
                 1
@@ -13456,12 +13447,6 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSStatusId {
                 1
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_BATTLEFIELD_STATUSStatusId {
-    fn maximum_possible_size() -> usize {
-        1
     }
 }
 
@@ -13744,8 +13729,8 @@ impl SMSG_BATTLEFIELD_STATUSMap {
 
 }
 
-impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
-    fn size(&self) -> usize {
+impl SMSG_BATTLEFIELD_STATUSMap {
+    pub fn size(&self) -> usize {
         match self {
             Self::EASTERN_KINGDOMS => {
                 4
@@ -14181,12 +14166,6 @@ impl VariableSized for SMSG_BATTLEFIELD_STATUSMap {
                 + 1 // unknown0: u8
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_BATTLEFIELD_STATUSMap {
-    fn maximum_possible_size() -> usize {
-        18
     }
 }
 

@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -207,19 +206,13 @@ impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
 
 }
 
-impl VariableSized for CMSG_AUCTION_LIST_BIDDER_ITEMS {
-    fn size(&self) -> usize {
+impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
+    pub fn size(&self) -> usize {
         0
         + 8 // auctioneer: Guid
         + 4 // start_from_page: u32
         + 4 // amount_of_outbidded_items: u32
         + self.outbid_item_ids.len() * core::mem::size_of::<u32>() // outbid_item_ids: u32[amount_of_outbidded_items]
-    }
-}
-
-impl MaximumPossibleSized for CMSG_AUCTION_LIST_BIDDER_ITEMS {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

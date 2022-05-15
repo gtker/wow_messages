@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -237,8 +236,8 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
 
 }
 
-impl VariableSized for CMSG_GOSSIP_SELECT_OPTION {
-    fn size(&self) -> usize {
+impl CMSG_GOSSIP_SELECT_OPTION {
+    pub fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // gossip_list_id: u32
@@ -248,14 +247,6 @@ impl VariableSized for CMSG_GOSSIP_SELECT_OPTION {
         } else {
             0
         }
-    }
-}
-
-impl MaximumPossibleSized for CMSG_GOSSIP_SELECT_OPTION {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // gossip_list_id: u32
     }
 }
 

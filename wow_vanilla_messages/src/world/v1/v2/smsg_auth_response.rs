@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v2::{WorldResult, WorldResultError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -766,17 +765,10 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
 
 }
 
-impl VariableSized for SMSG_AUTH_RESPONSE {
-    fn size(&self) -> usize {
+impl SMSG_AUTH_RESPONSE {
+    pub fn size(&self) -> usize {
         0
         + self.result.size() // result: SMSG_AUTH_RESPONSEWorldResult
-    }
-}
-
-impl MaximumPossibleSized for SMSG_AUTH_RESPONSE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 13 // result: SMSG_AUTH_RESPONSEWorldResult
     }
 }
 
@@ -997,8 +989,8 @@ impl SMSG_AUTH_RESPONSEWorldResult {
 
 }
 
-impl VariableSized for SMSG_AUTH_RESPONSEWorldResult {
-    fn size(&self) -> usize {
+impl SMSG_AUTH_RESPONSEWorldResult {
+    pub fn size(&self) -> usize {
         match self {
             Self::RESPONSE_SUCCESS => {
                 4
@@ -1257,12 +1249,6 @@ impl VariableSized for SMSG_AUTH_RESPONSEWorldResult {
                 4
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_AUTH_RESPONSEWorldResult {
-    fn maximum_possible_size() -> usize {
-        13
     }
 }
 

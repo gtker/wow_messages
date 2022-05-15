@@ -3,7 +3,6 @@ use crate::world::v1::v12::{PartyOperation, PartyOperationError};
 use crate::world::v1::v12::{PartyResult, PartyResultError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -184,21 +183,12 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
 
 }
 
-impl VariableSized for SMSG_PARTY_COMMAND_RESULT {
-    fn size(&self) -> usize {
+impl SMSG_PARTY_COMMAND_RESULT {
+    pub fn size(&self) -> usize {
         0
         + 4 // operation: PartyOperation
         + self.member.len() + 1 // member: CString
         + 4 // result: PartyResult
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_COMMAND_RESULT {
-    fn maximum_possible_size() -> usize {
-        0
-        + 1 // operation: PartyOperation
-        + 256 // member: CString
-        + 1 // result: PartyResult
     }
 }
 

@@ -4,7 +4,6 @@ use crate::world::v1::v12::{Map, MapError};
 use crate::world::v1::v12::WorldState;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -209,19 +208,13 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
 
 }
 
-impl VariableSized for SMSG_INIT_WORLD_STATES {
-    fn size(&self) -> usize {
+impl SMSG_INIT_WORLD_STATES {
+    pub fn size(&self) -> usize {
         0
         + 4 // map: Map
         + 4 // area: Area
         + 2 // amount_of_states: u16
         + self.states.iter().fold(0, |acc, x| acc + WorldState::size()) // states: WorldState[amount_of_states]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_INIT_WORLD_STATES {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

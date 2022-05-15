@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -138,17 +137,10 @@ impl MessageBody for CMSG_ADD_FRIEND {
 
 }
 
-impl VariableSized for CMSG_ADD_FRIEND {
-    fn size(&self) -> usize {
+impl CMSG_ADD_FRIEND {
+    pub fn size(&self) -> usize {
         0
         + self.friend_name.len() + 1 // friend_name: CString
-    }
-}
-
-impl MaximumPossibleSized for CMSG_ADD_FRIEND {
-    fn maximum_possible_size() -> usize {
-        0
-        + 256 // friend_name: CString
     }
 }
 

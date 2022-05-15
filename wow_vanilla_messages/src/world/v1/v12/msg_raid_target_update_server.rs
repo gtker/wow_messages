@@ -3,7 +3,6 @@ use crate::world::v1::v12::{RaidTargetUpdate, RaidTargetUpdateError};
 use crate::world::v1::v12::{RaidTargetUpdateType, RaidTargetUpdateTypeError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -257,17 +256,10 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
 
 }
 
-impl VariableSized for MSG_RAID_TARGET_UPDATE_Server {
-    fn size(&self) -> usize {
+impl MSG_RAID_TARGET_UPDATE_Server {
+    pub fn size(&self) -> usize {
         0
         + self.update_type.size() // update_type: MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType
-    }
-}
-
-impl MaximumPossibleSized for MSG_RAID_TARGET_UPDATE_Server {
-    fn maximum_possible_size() -> usize {
-        0
-        + 73 // update_type: MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType
     }
 }
 
@@ -336,8 +328,8 @@ impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
 
 }
 
-impl VariableSized for MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
-    fn size(&self) -> usize {
+impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
+    pub fn size(&self) -> usize {
         match self {
             Self::PARTIAL {
                 raid_target,
@@ -352,12 +344,6 @@ impl VariableSized for MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
                 + 8 * RaidTargetUpdate::size() // raid_targets: RaidTargetUpdate[8]
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
-    fn maximum_possible_size() -> usize {
-        73
     }
 }
 

@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{ItemClass, ItemClassError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -153,10 +152,8 @@ impl MessageBody for SMSG_SET_PROFICIENCY {
 
 }
 
-impl ConstantSized for SMSG_SET_PROFICIENCY {}
-
-impl MaximumPossibleSized for SMSG_SET_PROFICIENCY {
-    fn maximum_possible_size() -> usize {
+impl SMSG_SET_PROFICIENCY {
+    pub(crate) fn size() -> usize {
         0
         + 1 // class: ItemClass
         + 4 // item_sub_class_mask: u32

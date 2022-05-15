@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{StructWithAllBuiltInTypes, StructWithAllBuiltInTypesError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -526,8 +525,8 @@ impl Arrays {
 
 }
 
-impl VariableSized for Arrays {
-    fn size(&self) -> usize {
+impl Arrays {
+    pub fn size(&self) -> usize {
         0
         + 1 // index: u8
         + 20 * core::mem::size_of::<u8>() // basic_fixed_array: u8[20]
@@ -542,12 +541,6 @@ impl VariableSized for Arrays {
         + self.complex_variable_array.iter().fold(0, |acc, x| acc + x.size()) // complex_variable_array: StructWithAllBuiltInTypes[index]
         + self.fixed_cstring_array.iter().fold(0, |acc, x| acc + x.len() + 1) // fixed_cstring_array: CString[10]
         + self.variable_cstring_array.iter().fold(0, |acc, x| acc + x.len() + 1) // variable_cstring_array: CString[index]
-    }
-}
-
-impl MaximumPossibleSized for Arrays {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

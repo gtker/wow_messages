@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -153,10 +152,8 @@ impl MessageBody for SMSG_LOOT_RELEASE_RESPONSE {
 
 }
 
-impl ConstantSized for SMSG_LOOT_RELEASE_RESPONSE {}
-
-impl MaximumPossibleSized for SMSG_LOOT_RELEASE_RESPONSE {
-    fn maximum_possible_size() -> usize {
+impl SMSG_LOOT_RELEASE_RESPONSE {
+    pub(crate) fn size() -> usize {
         0
         + 8 // guid: Guid
         + 1 // unknown1: u8

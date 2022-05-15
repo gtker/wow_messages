@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -321,8 +320,8 @@ impl StructWithAllBuiltInTypes {
 
 }
 
-impl VariableSized for StructWithAllBuiltInTypes {
-    fn size(&self) -> usize {
+impl StructWithAllBuiltInTypes {
+    pub fn size(&self) -> usize {
         0
         + 1 // basic8: u8
         + 2 // basic16: u16
@@ -337,25 +336,6 @@ impl VariableSized for StructWithAllBuiltInTypes {
         + 8 // decimal64_be: f64_be
         + self.simple_cstring.len() + 1 // simple_cstring: CString
         + self.simple_string.len() // simple_string: String
-    }
-}
-
-impl MaximumPossibleSized for StructWithAllBuiltInTypes {
-    fn maximum_possible_size() -> usize {
-        0
-        + 1 // basic8: u8
-        + 2 // basic16: u16
-        + 4 // basic32: u32
-        + 8 // basic64: u64
-        + 2 // basic16_be: u16_be
-        + 4 // basic32_be: u32_be
-        + 8 // basic64_be: u64_be
-        + 4 // decimal32: f32
-        + 4 // decimal32_be: f32_be
-        + 8 // decimal64: f64
-        + 8 // decimal64_be: f64_be
-        + 256 // simple_cstring: CString
-        + 256 // simple_string: String
     }
 }
 

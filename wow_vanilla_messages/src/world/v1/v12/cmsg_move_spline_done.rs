@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::MovementInfo;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -174,19 +173,10 @@ impl MessageBody for CMSG_MOVE_SPLINE_DONE {
 
 }
 
-impl VariableSized for CMSG_MOVE_SPLINE_DONE {
-    fn size(&self) -> usize {
+impl CMSG_MOVE_SPLINE_DONE {
+    pub fn size(&self) -> usize {
         0
         + self.movement_info.size() // movement_info: MovementInfo
-        + 4 // movement_counter: u32
-        + 4 // unknown1: u32
-    }
-}
-
-impl MaximumPossibleSized for CMSG_MOVE_SPLINE_DONE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 81 // movement_info: MovementInfo
         + 4 // movement_counter: u32
         + 4 // unknown1: u32
     }

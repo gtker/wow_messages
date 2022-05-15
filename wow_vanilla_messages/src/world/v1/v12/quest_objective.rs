@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -128,10 +127,8 @@ impl QuestObjective {
 
 }
 
-impl ConstantSized for QuestObjective {}
-
-impl MaximumPossibleSized for QuestObjective {
-    fn maximum_possible_size() -> usize {
+impl QuestObjective {
+    pub(crate) fn size() -> usize {
         0
         + 4 // creature_id: u32
         + 4 // kill_count: u32

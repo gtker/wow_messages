@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -242,8 +241,8 @@ impl MessageBody for SMSG_GOSSIP_POI {
 
 }
 
-impl VariableSized for SMSG_GOSSIP_POI {
-    fn size(&self) -> usize {
+impl SMSG_GOSSIP_POI {
+    pub fn size(&self) -> usize {
         0
         + 4 // flags: u32
         + 4 // position_x: f32
@@ -251,18 +250,6 @@ impl VariableSized for SMSG_GOSSIP_POI {
         + 4 // icon: u32
         + 4 // data: u32
         + self.location_name.len() + 1 // location_name: CString
-    }
-}
-
-impl MaximumPossibleSized for SMSG_GOSSIP_POI {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // flags: u32
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // icon: u32
-        + 4 // data: u32
-        + 256 // location_name: CString
     }
 }
 

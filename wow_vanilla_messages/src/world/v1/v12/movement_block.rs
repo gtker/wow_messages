@@ -5,7 +5,6 @@ use crate::world::v1::v12::{SplineFlag};
 use crate::world::v1::v12::TransportInfo;
 use crate::world::v1::v12::{UpdateFlag};
 use crate::world::v1::v12::Vector3d;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -1442,16 +1441,10 @@ impl MovementBlock {
 
 }
 
-impl VariableSized for MovementBlock {
-    fn size(&self) -> usize {
+impl MovementBlock {
+    pub fn size(&self) -> usize {
         0
         + self.update_flag.size() // update_flag: MovementBlockUpdateFlag
-    }
-}
-
-impl MaximumPossibleSized for MovementBlock {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 
@@ -1481,8 +1474,8 @@ impl MovementBlockSplineFlagFINAL_ANGLE {
 
 }
 
-impl VariableSized for MovementBlockSplineFlagFINAL_ANGLE {
-    fn size(&self) -> usize {
+impl MovementBlockSplineFlagFINAL_ANGLE {
+    pub fn size(&self) -> usize {
         match self {
             Self::FINAL_ANGLE {
                 angle,
@@ -1507,12 +1500,6 @@ impl VariableSized for MovementBlockSplineFlagFINAL_ANGLE {
                 + 4 // spline_final_point_z: f32
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for MovementBlockSplineFlagFINAL_ANGLE {
-    fn maximum_possible_size() -> usize {
-        0
     }
 }
 
@@ -2251,8 +2238,8 @@ impl MovementBlockSplineFlag {
     }
 
 }
-impl VariableSized for MovementBlockSplineFlag {
-    fn size(&self) -> usize {
+impl MovementBlockSplineFlag {
+    pub fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.final_angle {
@@ -2261,13 +2248,6 @@ impl VariableSized for MovementBlockSplineFlag {
                 0
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for MovementBlockSplineFlag {
-    fn maximum_possible_size() -> usize {
-        4 // inner
-        + MovementBlockSplineFlagFINAL_ANGLE::maximum_possible_size() // FINAL_ANGLE enumerator
     }
 }
 
@@ -2984,8 +2964,8 @@ impl MovementBlockMovementFlags {
     }
 
 }
-impl VariableSized for MovementBlockMovementFlags {
-    fn size(&self) -> usize {
+impl MovementBlockMovementFlags {
+    pub fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.on_transport {
@@ -3025,31 +3005,14 @@ impl VariableSized for MovementBlockMovementFlags {
     }
 }
 
-impl MaximumPossibleSized for MovementBlockMovementFlags {
-    fn maximum_possible_size() -> usize {
-        4 // inner
-        + MovementBlockMovementFlagsON_TRANSPORT::maximum_possible_size() // ON_TRANSPORT enumerator
-        + MovementBlockMovementFlagsJUMPING::maximum_possible_size() // JUMPING enumerator
-        + MovementBlockMovementFlagsSWIMMING::maximum_possible_size() // SWIMMING enumerator
-        + MovementBlockMovementFlagsSPLINE_ENABLED::maximum_possible_size() // SPLINE_ENABLED enumerator
-        + MovementBlockMovementFlagsSPLINE_ELEVATION::maximum_possible_size() // SPLINE_ELEVATION enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct MovementBlockMovementFlagsON_TRANSPORT {
     pub transport: TransportInfo,
 }
 
-impl VariableSized for MovementBlockMovementFlagsON_TRANSPORT {
-    fn size(&self) -> usize {
+impl MovementBlockMovementFlagsON_TRANSPORT {
+    pub fn size(&self) -> usize {
         self.transport.size() // transport: TransportInfo
-    }
-}
-
-impl MaximumPossibleSized for MovementBlockMovementFlagsON_TRANSPORT {
-    fn maximum_possible_size() -> usize {
-        29 // transport: TransportInfo
     }
 }
 
@@ -3061,17 +3024,8 @@ pub struct MovementBlockMovementFlagsJUMPING {
     pub z_speed: f32,
 }
 
-impl VariableSized for MovementBlockMovementFlagsJUMPING {
-    fn size(&self) -> usize {
-        4 // cos_angle: f32
-        + 4 // sin_angle: f32
-        + 4 // xy_speed: f32
-        + 4 // z_speed: f32
-    }
-}
-
-impl MaximumPossibleSized for MovementBlockMovementFlagsJUMPING {
-    fn maximum_possible_size() -> usize {
+impl MovementBlockMovementFlagsJUMPING {
+    pub fn size(&self) -> usize {
         4 // cos_angle: f32
         + 4 // sin_angle: f32
         + 4 // xy_speed: f32
@@ -3084,14 +3038,8 @@ pub struct MovementBlockMovementFlagsSWIMMING {
     pub pitch: f32,
 }
 
-impl VariableSized for MovementBlockMovementFlagsSWIMMING {
-    fn size(&self) -> usize {
-        4 // pitch: f32
-    }
-}
-
-impl MaximumPossibleSized for MovementBlockMovementFlagsSWIMMING {
-    fn maximum_possible_size() -> usize {
+impl MovementBlockMovementFlagsSWIMMING {
+    pub fn size(&self) -> usize {
         4 // pitch: f32
     }
 }
@@ -3106,8 +3054,8 @@ pub struct MovementBlockMovementFlagsSPLINE_ENABLED {
     pub time_passed: u32,
 }
 
-impl VariableSized for MovementBlockMovementFlagsSPLINE_ENABLED {
-    fn size(&self) -> usize {
+impl MovementBlockMovementFlagsSPLINE_ENABLED {
+    pub fn size(&self) -> usize {
         4 // amount_of_nodes: u32
         + 4 // duration: u32
         + Vector3d::size() // final_node: Vector3d
@@ -3118,31 +3066,13 @@ impl VariableSized for MovementBlockMovementFlagsSPLINE_ENABLED {
     }
 }
 
-impl MaximumPossibleSized for MovementBlockMovementFlagsSPLINE_ENABLED {
-    fn maximum_possible_size() -> usize {
-        4 // amount_of_nodes: u32
-        + 4 // duration: u32
-        + 12 // final_node: Vector3d
-        + 4 // id: u32
-        + 51539607552 // nodes: Vector3d[amount_of_nodes]
-        + 4 // spline_flags: MovementBlockSplineFlag
-        + 4 // time_passed: u32
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct MovementBlockMovementFlagsSPLINE_ELEVATION {
     pub spline_elevation: f32,
 }
 
-impl VariableSized for MovementBlockMovementFlagsSPLINE_ELEVATION {
-    fn size(&self) -> usize {
-        4 // spline_elevation: f32
-    }
-}
-
-impl MaximumPossibleSized for MovementBlockMovementFlagsSPLINE_ELEVATION {
-    fn maximum_possible_size() -> usize {
+impl MovementBlockMovementFlagsSPLINE_ELEVATION {
+    pub fn size(&self) -> usize {
         4 // spline_elevation: f32
     }
 }
@@ -3182,8 +3112,8 @@ impl MovementBlockUpdateFlagLIVING {
 
 }
 
-impl VariableSized for MovementBlockUpdateFlagLIVING {
-    fn size(&self) -> usize {
+impl MovementBlockUpdateFlagLIVING {
+    pub fn size(&self) -> usize {
         match self {
             Self::LIVING {
                 backwards_running_speed,
@@ -3228,12 +3158,6 @@ impl VariableSized for MovementBlockUpdateFlagLIVING {
                 + 4 // position_z: f32
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for MovementBlockUpdateFlagLIVING {
-    fn maximum_possible_size() -> usize {
-        0
     }
 }
 
@@ -3460,8 +3384,8 @@ impl MovementBlockUpdateFlag {
     }
 
 }
-impl VariableSized for MovementBlockUpdateFlag {
-    fn size(&self) -> usize {
+impl MovementBlockUpdateFlag {
+    pub fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.transport {
@@ -3501,30 +3425,13 @@ impl VariableSized for MovementBlockUpdateFlag {
     }
 }
 
-impl MaximumPossibleSized for MovementBlockUpdateFlag {
-    fn maximum_possible_size() -> usize {
-        1 // inner
-        + MovementBlockUpdateFlagTRANSPORT::maximum_possible_size() // TRANSPORT enumerator
-        + MovementBlockUpdateFlagMELEE_ATTACKING::maximum_possible_size() // MELEE_ATTACKING enumerator
-        + MovementBlockUpdateFlagHIGH_GUID::maximum_possible_size() // HIGH_GUID enumerator
-        + MovementBlockUpdateFlagALL::maximum_possible_size() // ALL enumerator
-        + MovementBlockUpdateFlagLIVING::maximum_possible_size() // LIVING enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct MovementBlockUpdateFlagTRANSPORT {
     pub transport_progress_in_ms: u32,
 }
 
-impl VariableSized for MovementBlockUpdateFlagTRANSPORT {
-    fn size(&self) -> usize {
-        4 // transport_progress_in_ms: u32
-    }
-}
-
-impl MaximumPossibleSized for MovementBlockUpdateFlagTRANSPORT {
-    fn maximum_possible_size() -> usize {
+impl MovementBlockUpdateFlagTRANSPORT {
+    pub fn size(&self) -> usize {
         4 // transport_progress_in_ms: u32
     }
 }
@@ -3534,15 +3441,9 @@ pub struct MovementBlockUpdateFlagMELEE_ATTACKING {
     pub guid: Guid,
 }
 
-impl VariableSized for MovementBlockUpdateFlagMELEE_ATTACKING {
-    fn size(&self) -> usize {
+impl MovementBlockUpdateFlagMELEE_ATTACKING {
+    pub fn size(&self) -> usize {
         self.guid.size() // guid: Guid
-    }
-}
-
-impl MaximumPossibleSized for MovementBlockUpdateFlagMELEE_ATTACKING {
-    fn maximum_possible_size() -> usize {
-        9 // guid: Guid
     }
 }
 
@@ -3550,14 +3451,8 @@ impl MaximumPossibleSized for MovementBlockUpdateFlagMELEE_ATTACKING {
 pub struct MovementBlockUpdateFlagHIGH_GUID {
 }
 
-impl VariableSized for MovementBlockUpdateFlagHIGH_GUID {
-    fn size(&self) -> usize {
-        4 // unknown0: u32
-    }
-}
-
-impl MaximumPossibleSized for MovementBlockUpdateFlagHIGH_GUID {
-    fn maximum_possible_size() -> usize {
+impl MovementBlockUpdateFlagHIGH_GUID {
+    pub fn size(&self) -> usize {
         4 // unknown0: u32
     }
 }
@@ -3566,14 +3461,8 @@ impl MaximumPossibleSized for MovementBlockUpdateFlagHIGH_GUID {
 pub struct MovementBlockUpdateFlagALL {
 }
 
-impl VariableSized for MovementBlockUpdateFlagALL {
-    fn size(&self) -> usize {
-        4 // unknown1: u32
-    }
-}
-
-impl MaximumPossibleSized for MovementBlockUpdateFlagALL {
-    fn maximum_possible_size() -> usize {
+impl MovementBlockUpdateFlagALL {
+    pub fn size(&self) -> usize {
         4 // unknown1: u32
     }
 }

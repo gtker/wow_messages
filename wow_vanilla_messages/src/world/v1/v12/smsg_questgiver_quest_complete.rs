@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::QuestItemReward;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -251,8 +250,8 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
 }
 
-impl VariableSized for SMSG_QUESTGIVER_QUEST_COMPLETE {
-    fn size(&self) -> usize {
+impl SMSG_QUESTGIVER_QUEST_COMPLETE {
+    pub fn size(&self) -> usize {
         0
         + 4 // quest_id: u32
         + 4 // unknown: u32
@@ -260,12 +259,6 @@ impl VariableSized for SMSG_QUESTGIVER_QUEST_COMPLETE {
         + 4 // money_reward: u32
         + 4 // amount_of_item_rewards: u32
         + self.item_rewards.iter().fold(0, |acc, x| acc + QuestItemReward::size()) // item_rewards: QuestItemReward[amount_of_item_rewards]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_QUESTGIVER_QUEST_COMPLETE {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

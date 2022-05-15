@@ -3,7 +3,6 @@ use crate::logon::version_8::{LoginResult, LoginResultError};
 use crate::logon::version_8::{SecurityFlag};
 use crate::ServerMessage;
 use crate::ReadableAndWritable;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -828,19 +827,11 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
 
 }
 
-impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_Server {
-    fn size(&self) -> usize {
+impl CMD_AUTH_LOGON_CHALLENGE_Server {
+    pub fn size(&self) -> usize {
         0
         + 1 // protocol_version: u8
         + self.login_result.size() // login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult
-    }
-}
-
-impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_Server {
-    fn maximum_possible_size() -> usize {
-        0
-        + 1 // protocol_version: u8
-        + 629 // login_result: CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult
     }
 }
 
@@ -1002,8 +993,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
     }
 
 }
-impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
-    fn size(&self) -> usize {
+impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
+    pub fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.pin {
@@ -1029,32 +1020,16 @@ impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
     }
 }
 
-impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
-    fn maximum_possible_size() -> usize {
-        1 // inner
-        + CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN::maximum_possible_size() // PIN enumerator
-        + CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0::maximum_possible_size() // UNKNOWN0 enumerator
-        + CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR::maximum_possible_size() // AUTHENTICATOR enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
     pub pin_grid_seed: u32,
     pub pin_salt: [u8; 16],
 }
 
-impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
-    fn size(&self) -> usize {
+impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
+    pub fn size(&self) -> usize {
         4 // pin_grid_seed: u32
         + 16 * core::mem::size_of::<u8>() // pin_salt: u8[16]
-    }
-}
-
-impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagPIN {
-    fn maximum_possible_size() -> usize {
-        4 // pin_grid_seed: u32
-        + 16 // pin_salt: u8[16]
     }
 }
 
@@ -1067,18 +1042,8 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
     pub unknown4: u64,
 }
 
-impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
-    fn size(&self) -> usize {
-        1 // unknown0: u8
-        + 1 // unknown1: u8
-        + 1 // unknown2: u8
-        + 1 // unknown3: u8
-        + 8 // unknown4: u64
-    }
-}
-
-impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
-    fn maximum_possible_size() -> usize {
+impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagUNKNOWN0 {
+    pub fn size(&self) -> usize {
         1 // unknown0: u8
         + 1 // unknown1: u8
         + 1 // unknown2: u8
@@ -1092,14 +1057,8 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
     pub unknown5: u8,
 }
 
-impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
-    fn size(&self) -> usize {
-        1 // unknown5: u8
-    }
-}
-
-impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
-    fn maximum_possible_size() -> usize {
+impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlagAUTHENTICATOR {
+    pub fn size(&self) -> usize {
         1 // unknown5: u8
     }
 }
@@ -1171,8 +1130,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
 
 }
 
-impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
-    fn size(&self) -> usize {
+impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
+    pub fn size(&self) -> usize {
         match self {
             Self::SUCCESS {
                 crc_salt,
@@ -1244,16 +1203,9 @@ impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
     }
 }
 
-impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
-    fn maximum_possible_size() -> usize {
-        629
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_LOGON_CHALLENGE_Server;
-    use crate::VariableSized;
     use crate::logon::version_8::LoginResult;
     use crate::logon::version_8::SecurityFlag;
     use super::*;

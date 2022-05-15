@@ -3,7 +3,6 @@ use crate::world::v1::v12::{WeatherChangeType, WeatherChangeTypeError};
 use crate::world::v1::v12::{WeatherType, WeatherTypeError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -195,10 +194,8 @@ impl MessageBody for SMSG_WEATHER {
 
 }
 
-impl ConstantSized for SMSG_WEATHER {}
-
-impl MaximumPossibleSized for SMSG_WEATHER {
-    fn maximum_possible_size() -> usize {
+impl SMSG_WEATHER {
+    pub(crate) fn size() -> usize {
         0
         + 4 // weather_type: WeatherType
         + 4 // grade: f32

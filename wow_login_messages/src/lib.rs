@@ -170,17 +170,3 @@ pub trait ReadableAndWritable: Sized {
         'life1: 'async_trait,
         Self: 'async_trait;
 }
-
-pub(crate) trait ConstantSized: MaximumPossibleSized {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
-
-pub(crate) trait VariableSized: MaximumPossibleSized {
-    fn size(&self) -> usize;
-}
-
-pub(crate) trait MaximumPossibleSized {
-    fn maximum_possible_size() -> usize;
-}

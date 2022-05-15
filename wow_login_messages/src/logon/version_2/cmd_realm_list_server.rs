@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::{Realm, RealmError};
 use crate::ServerMessage;
 use crate::ReadableAndWritable;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -235,20 +234,14 @@ impl ReadableAndWritable for CMD_REALM_LIST_Server {
 
 }
 
-impl VariableSized for CMD_REALM_LIST_Server {
-    fn size(&self) -> usize {
+impl CMD_REALM_LIST_Server {
+    pub fn size(&self) -> usize {
         0
         + 2 // size: u16
         + 4 // header_padding: u32
         + 1 // number_of_realms: u8
         + self.realms.iter().fold(0, |acc, x| acc + x.size()) // realms: Realm[number_of_realms]
         + 2 // footer_padding: u16
-    }
-}
-
-impl MaximumPossibleSized for CMD_REALM_LIST_Server {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 
@@ -283,7 +276,6 @@ impl From<RealmError> for CMD_REALM_LIST_ServerError {
 #[cfg(test)]
 mod test {
     use super::CMD_REALM_LIST_Server;
-    use crate::VariableSized;
     use crate::logon::version_2::Population;
     use crate::logon::version_2::Realm;
     use crate::logon::version_2::RealmCategory;

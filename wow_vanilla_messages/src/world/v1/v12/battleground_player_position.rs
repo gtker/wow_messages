@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -101,10 +100,8 @@ impl BattlegroundPlayerPosition {
 
 }
 
-impl ConstantSized for BattlegroundPlayerPosition {}
-
-impl MaximumPossibleSized for BattlegroundPlayerPosition {
-    fn maximum_possible_size() -> usize {
+impl BattlegroundPlayerPosition {
+    pub(crate) fn size() -> usize {
         0
         + 8 // player: Guid
         + 4 // position_x: f32

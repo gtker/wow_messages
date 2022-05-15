@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -227,23 +226,12 @@ impl MessageBody for SMSG_RESURRECT_REQUEST {
 
 }
 
-impl VariableSized for SMSG_RESURRECT_REQUEST {
-    fn size(&self) -> usize {
+impl SMSG_RESURRECT_REQUEST {
+    pub fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // name_length: u32
         + self.name.len() + 1 // name: CString
-        + 1 // caster_is_spirit_healer: u8
-        + 1 // respect_resurrection_timer: u8
-    }
-}
-
-impl MaximumPossibleSized for SMSG_RESURRECT_REQUEST {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // name_length: u32
-        + 256 // name: CString
         + 1 // caster_is_spirit_healer: u8
         + 1 // respect_resurrection_timer: u8
     }

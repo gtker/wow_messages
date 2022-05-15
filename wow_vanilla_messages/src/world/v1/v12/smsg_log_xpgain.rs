@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{ExperienceAwardType, ExperienceAwardTypeError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -265,21 +264,12 @@ impl MessageBody for SMSG_LOG_XPGAIN {
 
 }
 
-impl VariableSized for SMSG_LOG_XPGAIN {
-    fn size(&self) -> usize {
+impl SMSG_LOG_XPGAIN {
+    pub fn size(&self) -> usize {
         0
         + 8 // target_guid: Guid
         + 4 // total_exp: u32
         + self.exp_type.size() // exp_type: SMSG_LOG_XPGAINExperienceAwardType
-    }
-}
-
-impl MaximumPossibleSized for SMSG_LOG_XPGAIN {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // target_guid: Guid
-        + 4 // total_exp: u32
-        + 9 // exp_type: SMSG_LOG_XPGAINExperienceAwardType
     }
 }
 
@@ -337,8 +327,8 @@ impl SMSG_LOG_XPGAINExperienceAwardType {
 
 }
 
-impl VariableSized for SMSG_LOG_XPGAINExperienceAwardType {
-    fn size(&self) -> usize {
+impl SMSG_LOG_XPGAINExperienceAwardType {
+    pub fn size(&self) -> usize {
         match self {
             Self::KILL => {
                 1
@@ -352,12 +342,6 @@ impl VariableSized for SMSG_LOG_XPGAINExperienceAwardType {
                 + 4 // experience_without_rested: u32
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_LOG_XPGAINExperienceAwardType {
-    fn maximum_possible_size() -> usize {
-        9
     }
 }
 

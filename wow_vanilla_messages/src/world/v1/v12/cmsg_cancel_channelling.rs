@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -130,10 +129,8 @@ impl MessageBody for CMSG_CANCEL_CHANNELLING {
 
 }
 
-impl ConstantSized for CMSG_CANCEL_CHANNELLING {}
-
-impl MaximumPossibleSized for CMSG_CANCEL_CHANNELLING {
-    fn maximum_possible_size() -> usize {
+impl CMSG_CANCEL_CHANNELLING {
+    pub(crate) fn size() -> usize {
         0
         + 4 // id: u32
     }

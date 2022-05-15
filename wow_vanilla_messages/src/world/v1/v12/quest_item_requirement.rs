@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -106,10 +105,8 @@ impl QuestItemRequirement {
 
 }
 
-impl ConstantSized for QuestItemRequirement {}
-
-impl MaximumPossibleSized for QuestItemRequirement {
-    fn maximum_possible_size() -> usize {
+impl QuestItemRequirement {
+    pub(crate) fn size() -> usize {
         0
         + 4 // item: u32
         + 4 // item_count: u32

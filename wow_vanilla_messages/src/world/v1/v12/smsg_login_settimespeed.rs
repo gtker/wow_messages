@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -149,10 +148,8 @@ impl MessageBody for SMSG_LOGIN_SETTIMESPEED {
 
 }
 
-impl ConstantSized for SMSG_LOGIN_SETTIMESPEED {}
-
-impl MaximumPossibleSized for SMSG_LOGIN_SETTIMESPEED {
-    fn maximum_possible_size() -> usize {
+impl SMSG_LOGIN_SETTIMESPEED {
+    pub(crate) fn size() -> usize {
         0
         + 4 // secs_to_time_bit_field: u32
         + 4 // game_speed: f32

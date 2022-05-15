@@ -6,7 +6,6 @@ use crate::world::v1::v12::{GroupType, GroupTypeError};
 use crate::world::v1::v12::{ItemQuality, ItemQualityError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -360,8 +359,8 @@ impl MessageBody for SMSG_GROUP_LIST {
 
 }
 
-impl VariableSized for SMSG_GROUP_LIST {
-    fn size(&self) -> usize {
+impl SMSG_GROUP_LIST {
+    pub fn size(&self) -> usize {
         0
         + 1 // group_type: GroupType
         + 1 // own_flags: u8
@@ -376,12 +375,6 @@ impl VariableSized for SMSG_GROUP_LIST {
         } else {
             0
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_GROUP_LIST {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

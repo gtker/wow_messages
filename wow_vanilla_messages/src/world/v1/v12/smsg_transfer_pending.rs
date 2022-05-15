@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -224,8 +223,8 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
 
 }
 
-impl VariableSized for SMSG_TRANSFER_PENDING {
-    fn size(&self) -> usize {
+impl SMSG_TRANSFER_PENDING {
+    pub fn size(&self) -> usize {
         0
         + 4 // map: Map
         + if let Some(has_transport) = &self.has_transport {
@@ -235,13 +234,6 @@ impl VariableSized for SMSG_TRANSFER_PENDING {
         } else {
             0
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_TRANSFER_PENDING {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // map: Map
     }
 }
 

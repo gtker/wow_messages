@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -500,36 +499,13 @@ impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
 
 }
 
-impl VariableSized for SMSG_PETITION_QUERY_RESPONSE {
-    fn size(&self) -> usize {
+impl SMSG_PETITION_QUERY_RESPONSE {
+    pub fn size(&self) -> usize {
         0
         + 8 // petition_guid: Guid
         + 8 // charter_owner: Guid
         + self.guild_name.len() + 1 // guild_name: CString
         + self.body_text.len() + 1 // body_text: CString
-        + 4 // unknown_flags: u32
-        + 4 // minimum_signatures: u32
-        + 4 // maximum_signatures: u32
-        + 4 // deadline: u32
-        + 4 // issue_date: u32
-        + 4 // allowed_guild_id: u32
-        + 4 // allowed_classes: u32
-        + 4 // allowed_races: u32
-        + 2 // allowed_genders: u16
-        + 4 // allowed_minimum_level: u32
-        + 4 // allowed_maximum_level: u32
-        + 4 // todo_amount_of_signers: u32
-        + 4 // number_of_choices: u32
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PETITION_QUERY_RESPONSE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // petition_guid: Guid
-        + 8 // charter_owner: Guid
-        + 256 // guild_name: CString
-        + 256 // body_text: CString
         + 4 // unknown_flags: u32
         + 4 // minimum_signatures: u32
         + 4 // maximum_signatures: u32

@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -316,26 +315,12 @@ impl MessageBody for SMSG_GUILD_QUERY_RESPONSE {
 
 }
 
-impl VariableSized for SMSG_GUILD_QUERY_RESPONSE {
-    fn size(&self) -> usize {
+impl SMSG_GUILD_QUERY_RESPONSE {
+    pub fn size(&self) -> usize {
         0
         + 4 // id: u32
         + self.name.len() + 1 // name: CString
         + self.rank_names.iter().fold(0, |acc, x| acc + x.len() + 1) // rank_names: CString[10]
-        + 4 // emblem_style: u32
-        + 4 // emblem_color: u32
-        + 4 // border_style: u32
-        + 4 // border_color: u32
-        + 4 // background_color: u32
-    }
-}
-
-impl MaximumPossibleSized for SMSG_GUILD_QUERY_RESPONSE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // id: u32
-        + 256 // name: CString
-        + 2560 // rank_names: CString[10]
         + 4 // emblem_style: u32
         + 4 // emblem_color: u32
         + 4 // border_style: u32

@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{TimerType, TimerTypeError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -241,10 +240,8 @@ impl MessageBody for SMSG_START_MIRROR_TIMER {
 
 }
 
-impl ConstantSized for SMSG_START_MIRROR_TIMER {}
-
-impl MaximumPossibleSized for SMSG_START_MIRROR_TIMER {
-    fn maximum_possible_size() -> usize {
+impl SMSG_START_MIRROR_TIMER {
+    pub(crate) fn size() -> usize {
         0
         + 4 // timer: TimerType
         + 4 // time_remaining: u32

@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{RaidTargetIndex, RaidTargetIndexError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -86,10 +85,8 @@ impl RaidTargetUpdate {
 
 }
 
-impl ConstantSized for RaidTargetUpdate {}
-
-impl MaximumPossibleSized for RaidTargetUpdate {
-    fn maximum_possible_size() -> usize {
+impl RaidTargetUpdate {
+    pub(crate) fn size() -> usize {
         0
         + 1 // index: RaidTargetIndex
         + 8 // guid: Guid

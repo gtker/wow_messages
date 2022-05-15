@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -128,10 +127,8 @@ impl PetSpellCooldown {
 
 }
 
-impl ConstantSized for PetSpellCooldown {}
-
-impl MaximumPossibleSized for PetSpellCooldown {
-    fn maximum_possible_size() -> usize {
+impl PetSpellCooldown {
+    pub(crate) fn size() -> usize {
         0
         + 2 // spell_id: u16
         + 2 // spell_category: u16

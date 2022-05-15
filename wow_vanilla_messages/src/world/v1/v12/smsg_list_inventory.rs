@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::ListInventoryItem;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -186,21 +185,12 @@ impl MessageBody for SMSG_LIST_INVENTORY {
 
 }
 
-impl VariableSized for SMSG_LIST_INVENTORY {
-    fn size(&self) -> usize {
+impl SMSG_LIST_INVENTORY {
+    pub fn size(&self) -> usize {
         0
         + 8 // vendor: Guid
         + 1 // amount_of_items: u8
         + self.items.iter().fold(0, |acc, x| acc + ListInventoryItem::size()) // items: ListInventoryItem[amount_of_items]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_LIST_INVENTORY {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // vendor: Guid
-        + 1 // amount_of_items: u8
-        + 7168 // items: ListInventoryItem[amount_of_items]
     }
 }
 

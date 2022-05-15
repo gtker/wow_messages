@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{QuestGiverStatus, QuestGiverStatusError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -154,10 +153,8 @@ impl MessageBody for SMSG_QUESTGIVER_STATUS {
 
 }
 
-impl ConstantSized for SMSG_QUESTGIVER_STATUS {}
-
-impl MaximumPossibleSized for SMSG_QUESTGIVER_STATUS {
-    fn maximum_possible_size() -> usize {
+impl SMSG_QUESTGIVER_STATUS {
+    pub(crate) fn size() -> usize {
         0
         + 8 // guid: Guid
         + 1 // status: QuestGiverStatus

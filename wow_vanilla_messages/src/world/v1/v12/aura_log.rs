@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{AuraType, AuraTypeError};
 use crate::world::v1::v12::{SpellSchool, SpellSchoolError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -1743,17 +1742,10 @@ impl AuraLog {
 
 }
 
-impl VariableSized for AuraLog {
-    fn size(&self) -> usize {
+impl AuraLog {
+    pub fn size(&self) -> usize {
         0
         + self.aura_type.size() // aura_type: AuraLogAuraType
-    }
-}
-
-impl MaximumPossibleSized for AuraLog {
-    fn maximum_possible_size() -> usize {
-        0
-        + 17 // aura_type: AuraLogAuraType
     }
 }
 
@@ -2220,8 +2212,8 @@ impl AuraLogAuraType {
 
 }
 
-impl VariableSized for AuraLogAuraType {
-    fn size(&self) -> usize {
+impl AuraLogAuraType {
+    pub fn size(&self) -> usize {
         match self {
             Self::NONE => {
                 4
@@ -2841,12 +2833,6 @@ impl VariableSized for AuraLogAuraType {
                 4
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for AuraLogAuraType {
-    fn maximum_possible_size() -> usize {
-        17
     }
 }
 

@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{SpellEffect, SpellEffectError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -1898,18 +1897,10 @@ impl SpellLog {
 
 }
 
-impl VariableSized for SpellLog {
-    fn size(&self) -> usize {
+impl SpellLog {
+    pub fn size(&self) -> usize {
         0
         + self.effect.size() // effect: SpellLogSpellEffect
-        + 4 // amount_of_logs: u32
-    }
-}
-
-impl MaximumPossibleSized for SpellLog {
-    fn maximum_possible_size() -> usize {
-        0
-        + 24 // effect: SpellLogSpellEffect
         + 4 // amount_of_logs: u32
     }
 }
@@ -2268,8 +2259,8 @@ impl SpellLogSpellEffect {
 
 }
 
-impl VariableSized for SpellLogSpellEffect {
-    fn size(&self) -> usize {
+impl SpellLogSpellEffect {
+    pub fn size(&self) -> usize {
         match self {
             Self::NONE => {
                 4
@@ -2736,12 +2727,6 @@ impl VariableSized for SpellLogSpellEffect {
                 4
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for SpellLogSpellEffect {
-    fn maximum_possible_size() -> usize {
-        24
     }
 }
 

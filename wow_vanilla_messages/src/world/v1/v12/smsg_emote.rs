@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{Emote, EmoteError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -154,10 +153,8 @@ impl MessageBody for SMSG_EMOTE {
 
 }
 
-impl ConstantSized for SMSG_EMOTE {}
-
-impl MaximumPossibleSized for SMSG_EMOTE {
-    fn maximum_possible_size() -> usize {
+impl SMSG_EMOTE {
+    pub(crate) fn size() -> usize {
         0
         + 4 // emote: Emote
         + 8 // guid: Guid

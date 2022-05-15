@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{PvpRank, PvpRankError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -176,10 +175,8 @@ impl MessageBody for SMSG_PVP_CREDIT {
 
 }
 
-impl ConstantSized for SMSG_PVP_CREDIT {}
-
-impl MaximumPossibleSized for SMSG_PVP_CREDIT {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PVP_CREDIT {
+    pub(crate) fn size() -> usize {
         0
         + 4 // honor_points: u32
         + 8 // victim: Guid

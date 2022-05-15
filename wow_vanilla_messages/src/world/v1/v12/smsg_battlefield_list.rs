@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{Map, MapError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -274,8 +273,8 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
 
 }
 
-impl VariableSized for SMSG_BATTLEFIELD_LIST {
-    fn size(&self) -> usize {
+impl SMSG_BATTLEFIELD_LIST {
+    pub fn size(&self) -> usize {
         0
         + 8 // battlemaster: Guid
         + 4 // map: Map
@@ -284,12 +283,6 @@ impl VariableSized for SMSG_BATTLEFIELD_LIST {
         + 1 // unknown3: u8
         + 4 // number_of_battlegrounds: u32
         + self.battlegrounds.len() * core::mem::size_of::<u32>() // battlegrounds: u32[number_of_battlegrounds]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_BATTLEFIELD_LIST {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

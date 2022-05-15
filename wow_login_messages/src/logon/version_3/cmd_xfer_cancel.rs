@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ClientMessage;
 use crate::ReadableAndWritable;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -110,10 +109,8 @@ impl ReadableAndWritable for CMD_XFER_CANCEL {
 
 }
 
-impl ConstantSized for CMD_XFER_CANCEL {}
-
-impl MaximumPossibleSized for CMD_XFER_CANCEL {
-    fn maximum_possible_size() -> usize {
+impl CMD_XFER_CANCEL {
+    pub(crate) fn size() -> usize {
         0
     }
 }
@@ -121,7 +118,6 @@ impl MaximumPossibleSized for CMD_XFER_CANCEL {
 #[cfg(test)]
 mod test {
     use super::CMD_XFER_CANCEL;
-    use crate::ConstantSized;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;

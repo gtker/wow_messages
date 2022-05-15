@@ -288,43 +288,37 @@ pub fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
             print_maximum_possible_size(s, r);
         });
     } else {
-        s.variable_size(
-            r.name(),
-            |s| {
-                s.wln("0");
+        s.variable_size(r.name(), |s| {
+            s.wln("0");
 
-                for m in r.members() {
-                    s.w("+ ");
+            for m in r.members() {
+                s.w("+ ");
 
-                    print_size_of_ty_rust_view(s, m, prefix);
-                }
+                print_size_of_ty_rust_view(s, m, prefix);
+            }
 
-                if let Some(optional) = r.optional() {
-                    s.body_else(
-                        format!(
-                            "+ if let Some({name}) = &{prefix}{name}",
-                            name = optional.name(),
-                            prefix = prefix
-                        ),
-                        |s| {
-                            s.wln("0");
+            if let Some(optional) = r.optional() {
+                s.body_else(
+                    format!(
+                        "+ if let Some({name}) = &{prefix}{name}",
+                        name = optional.name(),
+                        prefix = prefix
+                    ),
+                    |s| {
+                        s.wln("0");
 
-                            let prefix = format!("{}.", optional.name());
-                            for m in optional.members_in_struct() {
-                                s.w("+ ");
+                        let prefix = format!("{}.", optional.name());
+                        for m in optional.members_in_struct() {
+                            s.w("+ ");
 
-                                print_size_of_ty_rust_view(s, m, &prefix);
-                            }
-                        },
-                        |s| {
-                            s.wln("0");
-                        },
-                    );
-                }
-            },
-            |s| {
-                print_maximum_possible_size(s, r);
-            },
-        );
+                            print_size_of_ty_rust_view(s, m, &prefix);
+                        }
+                    },
+                    |s| {
+                        s.wln("0");
+                    },
+                );
+            }
+        });
     }
 }

@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -84,10 +83,8 @@ impl WorldState {
 
 }
 
-impl ConstantSized for WorldState {}
-
-impl MaximumPossibleSized for WorldState {
-    fn maximum_possible_size() -> usize {
+impl WorldState {
+    pub(crate) fn size() -> usize {
         0
         + 4 // state: u32
         + 4 // value: u32

@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{SimpleEnum, SimpleEnumError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -215,17 +214,10 @@ impl SimpleIfNotEnumElse {
 
 }
 
-impl VariableSized for SimpleIfNotEnumElse {
-    fn size(&self) -> usize {
+impl SimpleIfNotEnumElse {
+    pub fn size(&self) -> usize {
         0
         + self.enum.size() // enum: SimpleIfNotEnumElseSimpleEnum
-    }
-}
-
-impl MaximumPossibleSized for SimpleIfNotEnumElse {
-    fn maximum_possible_size() -> usize {
-        0
-        + 3 // enum: SimpleIfNotEnumElseSimpleEnum
     }
 }
 
@@ -290,8 +282,8 @@ impl SimpleIfNotEnumElseSimpleEnum {
 
 }
 
-impl VariableSized for SimpleIfNotEnumElseSimpleEnum {
-    fn size(&self) -> usize {
+impl SimpleIfNotEnumElseSimpleEnum {
+    pub fn size(&self) -> usize {
         match self {
             Self::ZERO {
                 zero,
@@ -312,12 +304,6 @@ impl VariableSized for SimpleIfNotEnumElseSimpleEnum {
                 + 1 // others: u8
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for SimpleIfNotEnumElseSimpleEnum {
-    fn maximum_possible_size() -> usize {
-        3
     }
 }
 

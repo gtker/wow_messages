@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{PetFeedback, PetFeedbackError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -131,10 +130,8 @@ impl MessageBody for SMSG_PET_ACTION_FEEDBACK {
 
 }
 
-impl ConstantSized for SMSG_PET_ACTION_FEEDBACK {}
-
-impl MaximumPossibleSized for SMSG_PET_ACTION_FEEDBACK {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PET_ACTION_FEEDBACK {
+    pub(crate) fn size() -> usize {
         0
         + 1 // feedback: PetFeedback
     }

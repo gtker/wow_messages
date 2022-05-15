@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{QuestItem, QuestItemError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -261,8 +260,8 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_LIST {
 
 }
 
-impl VariableSized for SMSG_QUESTGIVER_QUEST_LIST {
-    fn size(&self) -> usize {
+impl SMSG_QUESTGIVER_QUEST_LIST {
+    pub fn size(&self) -> usize {
         0
         + 8 // npc: Guid
         + self.title.len() + 1 // title: CString
@@ -270,12 +269,6 @@ impl VariableSized for SMSG_QUESTGIVER_QUEST_LIST {
         + 4 // emote: u32
         + 1 // amount_of_entries: u8
         + self.quest_items.iter().fold(0, |acc, x| acc + x.size()) // quest_items: QuestItem[amount_of_entries]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_QUESTGIVER_QUEST_LIST {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

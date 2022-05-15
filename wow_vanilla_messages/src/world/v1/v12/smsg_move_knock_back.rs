@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -228,22 +227,10 @@ impl MessageBody for SMSG_MOVE_KNOCK_BACK {
 
 }
 
-impl VariableSized for SMSG_MOVE_KNOCK_BACK {
-    fn size(&self) -> usize {
+impl SMSG_MOVE_KNOCK_BACK {
+    pub fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
-        + 4 // movement_counter: u32
-        + 4 // v_cos: f32
-        + 4 // v_sin: f32
-        + 4 // horizontal_speed: f32
-        + 4 // vertical_speed: f32
-    }
-}
-
-impl MaximumPossibleSized for SMSG_MOVE_KNOCK_BACK {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // guid: Guid
         + 4 // movement_counter: u32
         + 4 // v_cos: f32
         + 4 // v_sin: f32

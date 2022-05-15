@@ -3,7 +3,6 @@ use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{Map, MapError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -211,10 +210,8 @@ impl MessageBody for SMSG_BINDPOINTUPDATE {
 
 }
 
-impl ConstantSized for SMSG_BINDPOINTUPDATE {}
-
-impl MaximumPossibleSized for SMSG_BINDPOINTUPDATE {
-    fn maximum_possible_size() -> usize {
+impl SMSG_BINDPOINTUPDATE {
+    pub(crate) fn size() -> usize {
         0
         + 4 // position_x: f32
         + 4 // position_y: f32

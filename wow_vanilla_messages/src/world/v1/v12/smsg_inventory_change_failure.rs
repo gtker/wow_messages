@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{InventoryResult, InventoryResultError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -12502,17 +12501,10 @@ impl MessageBody for SMSG_INVENTORY_CHANGE_FAILURE {
 
 }
 
-impl VariableSized for SMSG_INVENTORY_CHANGE_FAILURE {
-    fn size(&self) -> usize {
+impl SMSG_INVENTORY_CHANGE_FAILURE {
+    pub fn size(&self) -> usize {
         0
         + self.result.size() // result: SMSG_INVENTORY_CHANGE_FAILUREInventoryResult
-    }
-}
-
-impl MaximumPossibleSized for SMSG_INVENTORY_CHANGE_FAILURE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 22 // result: SMSG_INVENTORY_CHANGE_FAILUREInventoryResult
     }
 }
 
@@ -12962,8 +12954,8 @@ impl SMSG_INVENTORY_CHANGE_FAILUREInventoryResult {
 
 }
 
-impl VariableSized for SMSG_INVENTORY_CHANGE_FAILUREInventoryResult {
-    fn size(&self) -> usize {
+impl SMSG_INVENTORY_CHANGE_FAILUREInventoryResult {
+    pub fn size(&self) -> usize {
         match self {
             Self::OK => {
                 1
@@ -13631,12 +13623,6 @@ impl VariableSized for SMSG_INVENTORY_CHANGE_FAILUREInventoryResult {
                 + 8 // item2_guid: u64
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_INVENTORY_CHANGE_FAILUREInventoryResult {
-    fn maximum_possible_size() -> usize {
-        22
     }
 }
 

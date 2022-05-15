@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -131,10 +130,8 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Client {
 
 }
 
-impl ConstantSized for MSG_TALENT_WIPE_CONFIRM_Client {}
-
-impl MaximumPossibleSized for MSG_TALENT_WIPE_CONFIRM_Client {
-    fn maximum_possible_size() -> usize {
+impl MSG_TALENT_WIPE_CONFIRM_Client {
+    pub(crate) fn size() -> usize {
         0
         + 8 // wiping_npc: Guid
     }

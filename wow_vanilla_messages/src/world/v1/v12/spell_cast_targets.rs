@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{SpellCastTargetFlags};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -777,17 +776,10 @@ impl SpellCastTargets {
 
 }
 
-impl VariableSized for SpellCastTargets {
-    fn size(&self) -> usize {
+impl SpellCastTargets {
+    pub fn size(&self) -> usize {
         0
         + self.target_flags.size() // target_flags: SpellCastTargetsSpellCastTargetFlags
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargets {
-    fn maximum_possible_size() -> usize {
-        0
-        + 354 // target_flags: SpellCastTargetsSpellCastTargetFlags
     }
 }
 
@@ -1442,8 +1434,8 @@ impl SpellCastTargetsSpellCastTargetFlags {
     }
 
 }
-impl VariableSized for SpellCastTargetsSpellCastTargetFlags {
-    fn size(&self) -> usize {
+impl SpellCastTargetsSpellCastTargetFlags {
+    pub fn size(&self) -> usize {
         2 // inner
         + {
             if let Some(s) = &self.unit {
@@ -1525,37 +1517,14 @@ impl VariableSized for SpellCastTargetsSpellCastTargetFlags {
     }
 }
 
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlags {
-    fn maximum_possible_size() -> usize {
-        2 // inner
-        + SpellCastTargetsSpellCastTargetFlagsUNIT::maximum_possible_size() // UNIT enumerator
-        + SpellCastTargetsSpellCastTargetFlagsITEM::maximum_possible_size() // ITEM enumerator
-        + SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION::maximum_possible_size() // SOURCE_LOCATION enumerator
-        + SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION::maximum_possible_size() // DEST_LOCATION enumerator
-        + SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY::maximum_possible_size() // UNIT_ENEMY enumerator
-        + SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY::maximum_possible_size() // CORPSE_ENEMY enumerator
-        + SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT::maximum_possible_size() // GAMEOBJECT enumerator
-        + SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM::maximum_possible_size() // TRADE_ITEM enumerator
-        + SpellCastTargetsSpellCastTargetFlagsSTRING::maximum_possible_size() // STRING enumerator
-        + SpellCastTargetsSpellCastTargetFlagsLOCKED::maximum_possible_size() // LOCKED enumerator
-        + SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY::maximum_possible_size() // CORPSE_ALLY enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargetsSpellCastTargetFlagsUNIT {
     pub unit_target1: Guid,
 }
 
-impl VariableSized for SpellCastTargetsSpellCastTargetFlagsUNIT {
-    fn size(&self) -> usize {
+impl SpellCastTargetsSpellCastTargetFlagsUNIT {
+    pub fn size(&self) -> usize {
         self.unit_target1.size() // unit_target1: Guid
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsUNIT {
-    fn maximum_possible_size() -> usize {
-        9 // unit_target1: Guid
     }
 }
 
@@ -1564,15 +1533,9 @@ pub struct SpellCastTargetsSpellCastTargetFlagsITEM {
     pub item_target1: Guid,
 }
 
-impl VariableSized for SpellCastTargetsSpellCastTargetFlagsITEM {
-    fn size(&self) -> usize {
+impl SpellCastTargetsSpellCastTargetFlagsITEM {
+    pub fn size(&self) -> usize {
         self.item_target1.size() // item_target1: Guid
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsITEM {
-    fn maximum_possible_size() -> usize {
-        9 // item_target1: Guid
     }
 }
 
@@ -1583,16 +1546,8 @@ pub struct SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
     pub position_z1: f32,
 }
 
-impl VariableSized for SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
-    fn size(&self) -> usize {
-        4 // position_x1: f32
-        + 4 // position_y1: f32
-        + 4 // position_z1: f32
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
-    fn maximum_possible_size() -> usize {
+impl SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
+    pub fn size(&self) -> usize {
         4 // position_x1: f32
         + 4 // position_y1: f32
         + 4 // position_z1: f32
@@ -1606,16 +1561,8 @@ pub struct SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
     pub position_z2: f32,
 }
 
-impl VariableSized for SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
-    fn size(&self) -> usize {
-        4 // position_x2: f32
-        + 4 // position_y2: f32
-        + 4 // position_z2: f32
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
-    fn maximum_possible_size() -> usize {
+impl SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
+    pub fn size(&self) -> usize {
         4 // position_x2: f32
         + 4 // position_y2: f32
         + 4 // position_z2: f32
@@ -1627,15 +1574,9 @@ pub struct SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
     pub unit_target2: Guid,
 }
 
-impl VariableSized for SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
-    fn size(&self) -> usize {
+impl SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
+    pub fn size(&self) -> usize {
         self.unit_target2.size() // unit_target2: Guid
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
-    fn maximum_possible_size() -> usize {
-        9 // unit_target2: Guid
     }
 }
 
@@ -1644,15 +1585,9 @@ pub struct SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
     pub corpse_target2: Guid,
 }
 
-impl VariableSized for SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
-    fn size(&self) -> usize {
+impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
+    pub fn size(&self) -> usize {
         self.corpse_target2.size() // corpse_target2: Guid
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
-    fn maximum_possible_size() -> usize {
-        9 // corpse_target2: Guid
     }
 }
 
@@ -1661,15 +1596,9 @@ pub struct SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
     pub object_target1: Guid,
 }
 
-impl VariableSized for SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
-    fn size(&self) -> usize {
+impl SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
+    pub fn size(&self) -> usize {
         self.object_target1.size() // object_target1: Guid
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
-    fn maximum_possible_size() -> usize {
-        9 // object_target1: Guid
     }
 }
 
@@ -1678,15 +1607,9 @@ pub struct SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
     pub item_target2: Guid,
 }
 
-impl VariableSized for SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
-    fn size(&self) -> usize {
+impl SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
+    pub fn size(&self) -> usize {
         self.item_target2.size() // item_target2: Guid
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
-    fn maximum_possible_size() -> usize {
-        9 // item_target2: Guid
     }
 }
 
@@ -1695,15 +1618,9 @@ pub struct SpellCastTargetsSpellCastTargetFlagsSTRING {
     pub target_string: String,
 }
 
-impl VariableSized for SpellCastTargetsSpellCastTargetFlagsSTRING {
-    fn size(&self) -> usize {
+impl SpellCastTargetsSpellCastTargetFlagsSTRING {
+    pub fn size(&self) -> usize {
         self.target_string.len() + 1 // target_string: CString
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsSTRING {
-    fn maximum_possible_size() -> usize {
-        256 // target_string: CString
     }
 }
 
@@ -1712,15 +1629,9 @@ pub struct SpellCastTargetsSpellCastTargetFlagsLOCKED {
     pub object_target2: Guid,
 }
 
-impl VariableSized for SpellCastTargetsSpellCastTargetFlagsLOCKED {
-    fn size(&self) -> usize {
+impl SpellCastTargetsSpellCastTargetFlagsLOCKED {
+    pub fn size(&self) -> usize {
         self.object_target2.size() // object_target2: Guid
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsLOCKED {
-    fn maximum_possible_size() -> usize {
-        9 // object_target2: Guid
     }
 }
 
@@ -1729,15 +1640,9 @@ pub struct SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
     pub corpse_target1: Guid,
 }
 
-impl VariableSized for SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
-    fn size(&self) -> usize {
+impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
+    pub fn size(&self) -> usize {
         self.corpse_target1.size() // corpse_target1: Guid
-    }
-}
-
-impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
-    fn maximum_possible_size() -> usize {
-        9 // corpse_target1: Guid
     }
 }
 

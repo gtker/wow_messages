@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ClientMessage;
 use crate::ReadableAndWritable;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -208,8 +207,8 @@ impl ReadableAndWritable for CMD_SURVEY_RESULT {
 
 }
 
-impl VariableSized for CMD_SURVEY_RESULT {
-    fn size(&self) -> usize {
+impl CMD_SURVEY_RESULT {
+    pub fn size(&self) -> usize {
         0
         + 4 // survey_id: u32
         + 1 // error: u8
@@ -218,16 +217,9 @@ impl VariableSized for CMD_SURVEY_RESULT {
     }
 }
 
-impl MaximumPossibleSized for CMD_SURVEY_RESULT {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::CMD_SURVEY_RESULT;
-    use crate::VariableSized;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;

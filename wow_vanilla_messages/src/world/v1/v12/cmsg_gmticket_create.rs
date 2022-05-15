@@ -3,7 +3,6 @@ use crate::world::v1::v12::{GmTicketType, GmTicketTypeError};
 use crate::world::v1::v12::{Map, MapError};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -482,8 +481,8 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
 
 }
 
-impl VariableSized for CMSG_GMTICKET_CREATE {
-    fn size(&self) -> usize {
+impl CMSG_GMTICKET_CREATE {
+    pub fn size(&self) -> usize {
         0
         + self.category.size() // category: CMSG_GMTICKET_CREATEGmTicketType
         + 4 // map: Map
@@ -492,12 +491,6 @@ impl VariableSized for CMSG_GMTICKET_CREATE {
         + 4 // position_z: f32
         + self.message.len() + 1 // message: CString
         + self.reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
-    }
-}
-
-impl MaximumPossibleSized for CMSG_GMTICKET_CREATE {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 
@@ -588,8 +581,8 @@ impl CMSG_GMTICKET_CREATEGmTicketType {
 
 }
 
-impl VariableSized for CMSG_GMTICKET_CREATEGmTicketType {
-    fn size(&self) -> usize {
+impl CMSG_GMTICKET_CREATEGmTicketType {
+    pub fn size(&self) -> usize {
         match self {
             Self::STUCK => {
                 1
@@ -629,12 +622,6 @@ impl VariableSized for CMSG_GMTICKET_CREATEGmTicketType {
                 1
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for CMSG_GMTICKET_CREATEGmTicketType {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -4,7 +4,6 @@ use crate::world::v1::v12::{BattlegroundPlayer, BattlegroundPlayerError};
 use crate::world::v1::v12::{BattlegroundWinner, BattlegroundWinnerError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -256,18 +255,12 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
 
 }
 
-impl VariableSized for MSG_PVP_LOG_DATA_Server {
-    fn size(&self) -> usize {
+impl MSG_PVP_LOG_DATA_Server {
+    pub fn size(&self) -> usize {
         0
         + self.status.size() // status: MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus
         + 4 // amount_of_players: u32
         + self.players.iter().fold(0, |acc, x| acc + x.size()) // players: BattlegroundPlayer[amount_of_players]
-    }
-}
-
-impl MaximumPossibleSized for MSG_PVP_LOG_DATA_Server {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 
@@ -340,8 +333,8 @@ impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
 
 }
 
-impl VariableSized for MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
-    fn size(&self) -> usize {
+impl MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
+    pub fn size(&self) -> usize {
         match self {
             Self::NOT_ENDED => {
                 1
@@ -353,12 +346,6 @@ impl VariableSized for MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
                 + 1 // winner: BattlegroundWinner
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus {
-    fn maximum_possible_size() -> usize {
-        2
     }
 }
 

@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -152,18 +151,10 @@ impl MessageBody for SMSG_MOVE_WATER_WALK {
 
 }
 
-impl VariableSized for SMSG_MOVE_WATER_WALK {
-    fn size(&self) -> usize {
+impl SMSG_MOVE_WATER_WALK {
+    pub fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
-        + 4 // counter: u32
-    }
-}
-
-impl MaximumPossibleSized for SMSG_MOVE_WATER_WALK {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // guid: Guid
         + 4 // counter: u32
     }
 }

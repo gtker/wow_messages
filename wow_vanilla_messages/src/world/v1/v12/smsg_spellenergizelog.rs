@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{PowerType, PowerTypeError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -219,22 +218,11 @@ impl MessageBody for SMSG_SPELLENERGIZELOG {
 
 }
 
-impl VariableSized for SMSG_SPELLENERGIZELOG {
-    fn size(&self) -> usize {
+impl SMSG_SPELLENERGIZELOG {
+    pub fn size(&self) -> usize {
         0
         + self.victim_guid.size() // victim_guid: Guid
         + self.caster_guid.size() // caster_guid: Guid
-        + 4 // spell: u32
-        + 4 // power: PowerType
-        + 4 // damage: u32
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SPELLENERGIZELOG {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // victim_guid: Guid
-        + 9 // caster_guid: Guid
         + 4 // spell: u32
         + 4 // power: PowerType
         + 4 // damage: u32

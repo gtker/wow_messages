@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v2::{WorldResult, WorldResultError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -713,17 +712,10 @@ impl MessageBody for SMSG_CHAR_RENAME {
 
 }
 
-impl VariableSized for SMSG_CHAR_RENAME {
-    fn size(&self) -> usize {
+impl SMSG_CHAR_RENAME {
+    pub fn size(&self) -> usize {
         0
         + self.result.size() // result: SMSG_CHAR_RENAMEWorldResult
-    }
-}
-
-impl MaximumPossibleSized for SMSG_CHAR_RENAME {
-    fn maximum_possible_size() -> usize {
-        0
-        + 268 // result: SMSG_CHAR_RENAMEWorldResult
     }
 }
 
@@ -952,8 +944,8 @@ impl SMSG_CHAR_RENAMEWorldResult {
 
 }
 
-impl VariableSized for SMSG_CHAR_RENAMEWorldResult {
-    fn size(&self) -> usize {
+impl SMSG_CHAR_RENAMEWorldResult {
+    pub fn size(&self) -> usize {
         match self {
             Self::RESPONSE_SUCCESS {
                 guid,
@@ -1207,12 +1199,6 @@ impl VariableSized for SMSG_CHAR_RENAMEWorldResult {
                 4
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_CHAR_RENAMEWorldResult {
-    fn maximum_possible_size() -> usize {
-        268
     }
 }
 

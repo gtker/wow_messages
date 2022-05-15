@@ -5,7 +5,6 @@ use crate::world::v1::v12::{SpellCastTargets, SpellCastTargetsError};
 use crate::world::v1::v12::{SpellMiss, SpellMissError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -421,8 +420,8 @@ impl MessageBody for SMSG_SPELL_GO {
 
 }
 
-impl VariableSized for SMSG_SPELL_GO {
-    fn size(&self) -> usize {
+impl SMSG_SPELL_GO {
+    pub fn size(&self) -> usize {
         0
         + self.cast_item.size() // cast_item: Guid
         + self.caster.size() // caster: Guid
@@ -433,21 +432,6 @@ impl VariableSized for SMSG_SPELL_GO {
         + 1 // amount_of_misses: u8
         + self.misses.iter().fold(0, |acc, x| acc + SpellMiss::size()) // misses: SpellMiss[amount_of_misses]
         + self.targets.size() // targets: SpellCastTargets
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SPELL_GO {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // cast_item: Guid
-        + 9 // caster: Guid
-        + 4 // spell: u32
-        + 10 // flags: SMSG_SPELL_GOCastFlags
-        + 1 // amount_of_hits: u8
-        + 2048 // hits: Guid[amount_of_hits]
-        + 1 // amount_of_misses: u8
-        + 3072 // misses: SpellMiss[amount_of_misses]
-        + 354 // targets: SpellCastTargets
     }
 }
 
@@ -739,8 +723,8 @@ impl SMSG_SPELL_GOCastFlags {
     }
 
 }
-impl VariableSized for SMSG_SPELL_GOCastFlags {
-    fn size(&self) -> usize {
+impl SMSG_SPELL_GOCastFlags {
+    pub fn size(&self) -> usize {
         2 // inner
         + {
             if let Some(s) = &self.ammo {
@@ -752,28 +736,14 @@ impl VariableSized for SMSG_SPELL_GOCastFlags {
     }
 }
 
-impl MaximumPossibleSized for SMSG_SPELL_GOCastFlags {
-    fn maximum_possible_size() -> usize {
-        2 // inner
-        + SMSG_SPELL_GOCastFlagsAMMO::maximum_possible_size() // AMMO enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_SPELL_GOCastFlagsAMMO {
     pub ammo_display_id: u32,
     pub ammo_inventory_type: u32,
 }
 
-impl VariableSized for SMSG_SPELL_GOCastFlagsAMMO {
-    fn size(&self) -> usize {
-        4 // ammo_display_id: u32
-        + 4 // ammo_inventory_type: u32
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SPELL_GOCastFlagsAMMO {
-    fn maximum_possible_size() -> usize {
+impl SMSG_SPELL_GOCastFlagsAMMO {
+    pub fn size(&self) -> usize {
         4 // ammo_display_id: u32
         + 4 // ammo_inventory_type: u32
     }

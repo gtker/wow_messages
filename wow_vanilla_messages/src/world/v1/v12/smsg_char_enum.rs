@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Character, CharacterError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -163,17 +162,11 @@ impl MessageBody for SMSG_CHAR_ENUM {
 
 }
 
-impl VariableSized for SMSG_CHAR_ENUM {
-    fn size(&self) -> usize {
+impl SMSG_CHAR_ENUM {
+    pub fn size(&self) -> usize {
         0
         + 1 // amount_of_characters: u8
         + self.characters.iter().fold(0, |acc, x| acc + x.size()) // characters: Character[amount_of_characters]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_CHAR_ENUM {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

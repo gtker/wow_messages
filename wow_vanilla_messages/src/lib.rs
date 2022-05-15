@@ -24,17 +24,3 @@ pub use helper::guid::Guid;
 pub use helper::update_mask::UpdateMask;
 
 pub const DEFAULT_PORT: u16 = 8085;
-
-pub(crate) trait ConstantSized: MaximumPossibleSized {
-    fn size() -> usize {
-        Self::maximum_possible_size()
-    }
-}
-
-pub(crate) trait VariableSized: MaximumPossibleSized {
-    fn size(&self) -> usize;
-}
-
-pub(crate) trait MaximumPossibleSized {
-    fn maximum_possible_size() -> usize;
-}

@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::MovementInfo;
 use crate::{ClientMessageWrite, ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -132,17 +131,10 @@ impl MessageBody for MSG_MOVE_START_TURN_RIGHT {
 
 }
 
-impl VariableSized for MSG_MOVE_START_TURN_RIGHT {
-    fn size(&self) -> usize {
+impl MSG_MOVE_START_TURN_RIGHT {
+    pub fn size(&self) -> usize {
         0
         + self.info.size() // info: MovementInfo
-    }
-}
-
-impl MaximumPossibleSized for MSG_MOVE_START_TURN_RIGHT {
-    fn maximum_possible_size() -> usize {
-        0
-        + 81 // info: MovementInfo
     }
 }
 

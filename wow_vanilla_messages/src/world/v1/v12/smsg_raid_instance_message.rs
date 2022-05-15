@@ -3,7 +3,6 @@ use crate::world::v1::v12::{Map, MapError};
 use crate::world::v1::v12::{RaidInstanceMessage, RaidInstanceMessageError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -176,10 +175,8 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
 
 }
 
-impl ConstantSized for SMSG_RAID_INSTANCE_MESSAGE {}
-
-impl MaximumPossibleSized for SMSG_RAID_INSTANCE_MESSAGE {
-    fn maximum_possible_size() -> usize {
+impl SMSG_RAID_INSTANCE_MESSAGE {
+    pub(crate) fn size() -> usize {
         0
         + 4 // message_type: RaidInstanceMessage
         + 4 // map: Map

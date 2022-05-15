@@ -3,7 +3,6 @@ use crate::world::v1::v12::{GuildCommand, GuildCommandError};
 use crate::world::v1::v12::{GuildCommandResult, GuildCommandResultError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -184,21 +183,12 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
 
 }
 
-impl VariableSized for SMSG_GUILD_COMMAND_RESULT {
-    fn size(&self) -> usize {
+impl SMSG_GUILD_COMMAND_RESULT {
+    pub fn size(&self) -> usize {
         0
         + 4 // command: GuildCommand
         + self.string.len() + 1 // string: CString
         + 4 // result: GuildCommandResult
-    }
-}
-
-impl MaximumPossibleSized for SMSG_GUILD_COMMAND_RESULT {
-    fn maximum_possible_size() -> usize {
-        0
-        + 1 // command: GuildCommand
-        + 256 // string: CString
-        + 1 // result: GuildCommandResult
     }
 }
 

@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -130,10 +129,8 @@ impl MessageBody for CMSG_ZONEUPDATE {
 
 }
 
-impl ConstantSized for CMSG_ZONEUPDATE {}
-
-impl MaximumPossibleSized for CMSG_ZONEUPDATE {
-    fn maximum_possible_size() -> usize {
+impl CMSG_ZONEUPDATE {
+    pub(crate) fn size() -> usize {
         0
         + 4 // zone_id: u32
     }

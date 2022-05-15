@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{PvpRank, PvpRankError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -228,8 +227,8 @@ impl BattlegroundPlayer {
 
 }
 
-impl VariableSized for BattlegroundPlayer {
-    fn size(&self) -> usize {
+impl BattlegroundPlayer {
+    pub fn size(&self) -> usize {
         0
         + 8 // player: Guid
         + 4 // rank: PvpRank
@@ -239,12 +238,6 @@ impl VariableSized for BattlegroundPlayer {
         + 4 // bonus_honor: u32
         + 4 // amount_of_extra_fields: u32
         + self.fields.len() * core::mem::size_of::<u32>() // fields: u32[amount_of_extra_fields]
-    }
-}
-
-impl MaximumPossibleSized for BattlegroundPlayer {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -3,7 +3,6 @@ use crate::logon::version_2::Population;
 use crate::logon::version_2::{RealmCategory, RealmCategoryError};
 use crate::logon::version_8::{RealmFlag};
 use crate::logon::all::Version;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -328,29 +327,14 @@ impl Realm {
 
 }
 
-impl VariableSized for Realm {
-    fn size(&self) -> usize {
+impl Realm {
+    pub fn size(&self) -> usize {
         0
         + 1 // realm_type: u8
         + 1 // locked: u8
         + self.flag.size() // flag: RealmRealmFlag
         + self.name.len() + 1 // name: CString
         + self.address.len() + 1 // address: CString
-        + 4 // population: Population
-        + 1 // number_of_characters_on_realm: u8
-        + 1 // category: RealmCategory
-        + 1 // realm_id: u8
-    }
-}
-
-impl MaximumPossibleSized for Realm {
-    fn maximum_possible_size() -> usize {
-        0
-        + 1 // realm_type: u8
-        + 1 // locked: u8
-        + 6 // flag: RealmRealmFlag
-        + 256 // name: CString
-        + 256 // address: CString
         + 4 // population: Population
         + 1 // number_of_characters_on_realm: u8
         + 1 // category: RealmCategory
@@ -577,8 +561,8 @@ impl RealmRealmFlag {
     }
 
 }
-impl VariableSized for RealmRealmFlag {
-    fn size(&self) -> usize {
+impl RealmRealmFlag {
+    pub fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.specify_build {
@@ -590,27 +574,14 @@ impl VariableSized for RealmRealmFlag {
     }
 }
 
-impl MaximumPossibleSized for RealmRealmFlag {
-    fn maximum_possible_size() -> usize {
-        1 // inner
-        + RealmRealmFlagSPECIFY_BUILD::maximum_possible_size() // SPECIFY_BUILD enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct RealmRealmFlagSPECIFY_BUILD {
     pub version: Version,
 }
 
-impl VariableSized for RealmRealmFlagSPECIFY_BUILD {
-    fn size(&self) -> usize {
+impl RealmRealmFlagSPECIFY_BUILD {
+    pub fn size(&self) -> usize {
         Version::size() // version: Version
-    }
-}
-
-impl MaximumPossibleSized for RealmRealmFlagSPECIFY_BUILD {
-    fn maximum_possible_size() -> usize {
-        5 // version: Version
     }
 }
 

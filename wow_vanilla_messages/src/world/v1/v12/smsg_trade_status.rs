@@ -4,7 +4,6 @@ use crate::world::v1::v12::{InventoryResult, InventoryResultError};
 use crate::world::v1::v12::{TradeStatus, TradeStatusError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -498,17 +497,10 @@ impl MessageBody for SMSG_TRADE_STATUS {
 
 }
 
-impl VariableSized for SMSG_TRADE_STATUS {
-    fn size(&self) -> usize {
+impl SMSG_TRADE_STATUS {
+    pub fn size(&self) -> usize {
         0
         + self.status.size() // status: SMSG_TRADE_STATUSTradeStatus
-    }
-}
-
-impl MaximumPossibleSized for SMSG_TRADE_STATUS {
-    fn maximum_possible_size() -> usize {
-        0
-        + 12 // status: SMSG_TRADE_STATUSTradeStatus
     }
 }
 
@@ -625,8 +617,8 @@ impl SMSG_TRADE_STATUSTradeStatus {
 
 }
 
-impl VariableSized for SMSG_TRADE_STATUSTradeStatus {
-    fn size(&self) -> usize {
+impl SMSG_TRADE_STATUSTradeStatus {
+    pub fn size(&self) -> usize {
         match self {
             Self::BUSY => {
                 4
@@ -717,12 +709,6 @@ impl VariableSized for SMSG_TRADE_STATUSTradeStatus {
                 + 1 // slot: u8
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_TRADE_STATUSTradeStatus {
-    fn maximum_possible_size() -> usize {
-        12
     }
 }
 

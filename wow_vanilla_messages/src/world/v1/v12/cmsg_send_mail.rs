@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -377,30 +376,13 @@ impl MessageBody for CMSG_SEND_MAIL {
 
 }
 
-impl VariableSized for CMSG_SEND_MAIL {
-    fn size(&self) -> usize {
+impl CMSG_SEND_MAIL {
+    pub fn size(&self) -> usize {
         0
         + 8 // mailbox: Guid
         + self.receiver.len() + 1 // receiver: CString
         + self.subject.len() + 1 // subject: CString
         + self.body.len() + 1 // body: CString
-        + 4 // unknown1: u32
-        + 4 // unknown2: u32
-        + 8 // item: Guid
-        + 4 // money: u32
-        + 4 // cash_on_delivery_amount: u32
-        + 4 // unknown3: u32
-        + 4 // unknown4: u32
-    }
-}
-
-impl MaximumPossibleSized for CMSG_SEND_MAIL {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // mailbox: Guid
-        + 256 // receiver: CString
-        + 256 // subject: CString
-        + 256 // body: CString
         + 4 // unknown1: u32
         + 4 // unknown2: u32
         + 8 // item: Guid

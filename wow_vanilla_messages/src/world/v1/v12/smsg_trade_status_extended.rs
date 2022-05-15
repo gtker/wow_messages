@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::TradeSlot;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -256,10 +255,8 @@ impl MessageBody for SMSG_TRADE_STATUS_EXTENDED {
 
 }
 
-impl ConstantSized for SMSG_TRADE_STATUS_EXTENDED {}
-
-impl MaximumPossibleSized for SMSG_TRADE_STATUS_EXTENDED {
-    fn maximum_possible_size() -> usize {
+impl SMSG_TRADE_STATUS_EXTENDED {
+    pub(crate) fn size() -> usize {
         0
         + 1 // self_player: u8
         + 4 // trade_slot_count1: u32

@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -204,18 +203,12 @@ impl MessageBody for SMSG_DISPEL_FAILED {
 
 }
 
-impl VariableSized for SMSG_DISPEL_FAILED {
-    fn size(&self) -> usize {
+impl SMSG_DISPEL_FAILED {
+    pub fn size(&self) -> usize {
         0
         + 8 // caster_guid: Guid
         + 8 // target_guid: Guid
         + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[-]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_DISPEL_FAILED {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -20,10 +20,6 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
     s.body("mod test", |s| {
         s.wln(format!("use super::{};", e.name()));
 
-        match e.is_constant_sized() {
-            false => s.wln("use crate::VariableSized;"),
-            true => s.wln("use crate::ConstantSized;"),
-        }
         for name in e.get_types_needing_import_recursively(o) {
             let tags = o.get_tags_of_object(name, e.tags());
             s.wln(format!(

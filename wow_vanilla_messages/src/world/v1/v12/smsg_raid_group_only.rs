@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{RaidGroupError, RaidGroupErrorError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -153,10 +152,8 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
 
 }
 
-impl ConstantSized for SMSG_RAID_GROUP_ONLY {}
-
-impl MaximumPossibleSized for SMSG_RAID_GROUP_ONLY {
-    fn maximum_possible_size() -> usize {
+impl SMSG_RAID_GROUP_ONLY {
+    pub(crate) fn size() -> usize {
         0
         + 4 // homebind_timer: u32
         + 4 // error: RaidGroupError

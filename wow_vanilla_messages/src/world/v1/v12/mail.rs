@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{MailType, MailTypeError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -669,37 +668,12 @@ impl Mail {
 
 }
 
-impl VariableSized for Mail {
-    fn size(&self) -> usize {
+impl Mail {
+    pub fn size(&self) -> usize {
         0
         + 4 // message_id: u32
         + self.message_type.size() // message_type: MailMailType
         + self.subject.len() + 1 // subject: CString
-        + 4 // item_text_id: u32
-        + 4 // unknown1: u32
-        + 4 // stationery: u32
-        + 4 // item_id: u32
-        + 4 // item_enchant_id: u32
-        + 4 // item_random_property_id: u32
-        + 4 // item_suffix_factor: u32
-        + 1 // item_stack_size: u8
-        + 4 // item_spell_charges: u32
-        + 4 // max_durability: u32
-        + 4 // durability: u32
-        + 4 // money: u32
-        + 4 // cash_on_delivery_amount: u32
-        + 4 // checked_timestamp: u32
-        + 4 // expiration_time: f32
-        + 4 // mail_template_id: u32
-    }
-}
-
-impl MaximumPossibleSized for Mail {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // message_id: u32
-        + 9 // message_type: MailMailType
-        + 256 // subject: CString
         + 4 // item_text_id: u32
         + 4 // unknown1: u32
         + 4 // stationery: u32
@@ -794,8 +768,8 @@ impl MailMailType {
 
 }
 
-impl VariableSized for MailMailType {
-    fn size(&self) -> usize {
+impl MailMailType {
+    pub fn size(&self) -> usize {
         match self {
             Self::NORMAL {
                 sender,
@@ -825,12 +799,6 @@ impl VariableSized for MailMailType {
                 1
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for MailMailType {
-    fn maximum_possible_size() -> usize {
-        9
     }
 }
 

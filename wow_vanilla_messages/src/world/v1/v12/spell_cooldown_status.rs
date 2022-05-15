@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -84,10 +83,8 @@ impl SpellCooldownStatus {
 
 }
 
-impl ConstantSized for SpellCooldownStatus {}
-
-impl MaximumPossibleSized for SpellCooldownStatus {
-    fn maximum_possible_size() -> usize {
+impl SpellCooldownStatus {
+    pub(crate) fn size() -> usize {
         0
         + 4 // id: u32
         + 4 // cooldown_time_in_msecs: u32

@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{TrainerSpell, TrainerSpellError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -239,20 +238,14 @@ impl MessageBody for SMSG_TRAINER_LIST {
 
 }
 
-impl VariableSized for SMSG_TRAINER_LIST {
-    fn size(&self) -> usize {
+impl SMSG_TRAINER_LIST {
+    pub fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // trainer_type: u32
         + 4 // amount_of_spells: u32
         + self.spells.iter().fold(0, |acc, x| acc + TrainerSpell::size()) // spells: TrainerSpell[amount_of_spells]
         + self.greeting.len() + 1 // greeting: CString
-    }
-}
-
-impl MaximumPossibleSized for SMSG_TRAINER_LIST {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

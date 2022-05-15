@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -169,19 +168,11 @@ impl MessageBody for SMSG_GUILD_INVITE {
 
 }
 
-impl VariableSized for SMSG_GUILD_INVITE {
-    fn size(&self) -> usize {
+impl SMSG_GUILD_INVITE {
+    pub fn size(&self) -> usize {
         0
         + self.player_name.len() + 1 // player_name: CString
         + self.guild_name.len() + 1 // guild_name: CString
-    }
-}
-
-impl MaximumPossibleSized for SMSG_GUILD_INVITE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 256 // player_name: CString
-        + 256 // guild_name: CString
     }
 }
 

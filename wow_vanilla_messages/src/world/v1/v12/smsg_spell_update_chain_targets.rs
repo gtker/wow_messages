@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -207,19 +206,13 @@ impl MessageBody for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 
 }
 
-impl VariableSized for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
-    fn size(&self) -> usize {
+impl SMSG_SPELL_UPDATE_CHAIN_TARGETS {
+    pub fn size(&self) -> usize {
         0
         + 8 // caster: Guid
         + 4 // spell: u32
         + 4 // amount_of_targets: u32
         + self.targets.iter().fold(0, |acc, _| acc + 8) // targets: Guid[amount_of_targets]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

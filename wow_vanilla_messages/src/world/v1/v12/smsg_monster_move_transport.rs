@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{MonsterMoveType, MonsterMoveTypeError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -232,22 +231,10 @@ impl MessageBody for SMSG_MONSTER_MOVE_TRANSPORT {
 
 }
 
-impl VariableSized for SMSG_MONSTER_MOVE_TRANSPORT {
-    fn size(&self) -> usize {
+impl SMSG_MONSTER_MOVE_TRANSPORT {
+    pub fn size(&self) -> usize {
         0
         + self.transport.size() // transport: Guid
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
-        + 4 // spline_id: u32
-        + 1 // move_type: MonsterMoveType
-    }
-}
-
-impl MaximumPossibleSized for SMSG_MONSTER_MOVE_TRANSPORT {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // transport: Guid
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32

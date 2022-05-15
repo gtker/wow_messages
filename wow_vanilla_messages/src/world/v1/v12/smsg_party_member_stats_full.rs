@@ -7,7 +7,6 @@ use crate::world::v1::v12::{GroupUpdateFlags};
 use crate::world::v1::v12::{Power, PowerError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -1225,19 +1224,11 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULL {
-    fn size(&self) -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULL {
+    pub fn size(&self) -> usize {
         0
         + self.player.size() // player: Guid
         + self.mask.size() // mask: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULL {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // player: Guid
-        + 555 // mask: SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags
     }
 }
 
@@ -2295,8 +2286,8 @@ impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
     }
 
 }
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
-    fn size(&self) -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
+    pub fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.flag_status {
@@ -2427,43 +2418,13 @@ impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
     }
 }
 
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
-    fn maximum_possible_size() -> usize {
-        4 // inner
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS::maximum_possible_size() // FLAG_STATUS enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP::maximum_possible_size() // FLAG_CUR_HP enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP::maximum_possible_size() // FLAG_MAX_HP enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE::maximum_possible_size() // FLAG_POWER_TYPE enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_POWER::maximum_possible_size() // FLAG_CUR_POWER enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER::maximum_possible_size() // FLAG_MAX_POWER enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_LEVEL::maximum_possible_size() // FLAG_LEVEL enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE::maximum_possible_size() // FLAG_ZONE enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POSITION::maximum_possible_size() // FLAG_POSITION enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS::maximum_possible_size() // FLAG_AURAS enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_NAME::maximum_possible_size() // FLAG_PET_NAME enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID::maximum_possible_size() // FLAG_PET_MODEL_ID enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_HP::maximum_possible_size() // FLAG_PET_CUR_HP enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP::maximum_possible_size() // FLAG_PET_MAX_HP enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE::maximum_possible_size() // FLAG_PET_POWER_TYPE enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER::maximum_possible_size() // FLAG_PET_CUR_POWER enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_POWER::maximum_possible_size() // FLAG_PET_MAX_POWER enumerator
-        + SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS::maximum_possible_size() // FLAG_PET_AURAS enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS {
     pub status: GroupMemberOnlineStatus,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS {
-    fn size(&self) -> usize {
-        1 // status: GroupMemberOnlineStatus
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS {
+    pub fn size(&self) -> usize {
         1 // status: GroupMemberOnlineStatus
     }
 }
@@ -2473,14 +2434,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP {
     pub current_health: u16,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP {
-    fn size(&self) -> usize {
-        2 // current_health: u16
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP {
+    pub fn size(&self) -> usize {
         2 // current_health: u16
     }
 }
@@ -2490,14 +2445,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP {
     pub max_health: u16,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP {
-    fn size(&self) -> usize {
-        2 // max_health: u16
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP {
+    pub fn size(&self) -> usize {
         2 // max_health: u16
     }
 }
@@ -2507,14 +2456,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
     pub power: Power,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
-    fn size(&self) -> usize {
-        1 // power: Power
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
+    pub fn size(&self) -> usize {
         1 // power: Power
     }
 }
@@ -2524,14 +2467,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_POWER {
     pub current_power: u16,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_POWER {
-    fn size(&self) -> usize {
-        2 // current_power: u16
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_POWER {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_POWER {
+    pub fn size(&self) -> usize {
         2 // current_power: u16
     }
 }
@@ -2541,14 +2478,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER {
     pub max_power: u16,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER {
-    fn size(&self) -> usize {
-        2 // max_power: u16
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER {
+    pub fn size(&self) -> usize {
         2 // max_power: u16
     }
 }
@@ -2558,14 +2489,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_LEVEL {
     pub level: u16,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_LEVEL {
-    fn size(&self) -> usize {
-        2 // level: u16
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_LEVEL {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_LEVEL {
+    pub fn size(&self) -> usize {
         2 // level: u16
     }
 }
@@ -2575,14 +2500,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
     pub area: Area,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
-    fn size(&self) -> usize {
-        4 // area: Area
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
+    pub fn size(&self) -> usize {
         4 // area: Area
     }
 }
@@ -2593,15 +2512,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POSITION {
     pub position_y: u16,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POSITION {
-    fn size(&self) -> usize {
-        2 // position_x: u16
-        + 2 // position_y: u16
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POSITION {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POSITION {
+    pub fn size(&self) -> usize {
         2 // position_x: u16
         + 2 // position_y: u16
     }
@@ -2612,15 +2524,9 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS {
     pub auras: AuraMask,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS {
-    fn size(&self) -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS {
+    pub fn size(&self) -> usize {
         self.auras.size() // auras: AuraMask
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS {
-    fn maximum_possible_size() -> usize {
-        132 // auras: AuraMask
     }
 }
 
@@ -2629,15 +2535,9 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_NAME {
     pub pet_name: String,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_NAME {
-    fn size(&self) -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_NAME {
+    pub fn size(&self) -> usize {
         self.pet_name.len() + 1 // pet_name: CString
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_NAME {
-    fn maximum_possible_size() -> usize {
-        256 // pet_name: CString
     }
 }
 
@@ -2646,14 +2546,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID {
     pub pet_display_id: u16,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID {
-    fn size(&self) -> usize {
-        2 // pet_display_id: u16
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID {
+    pub fn size(&self) -> usize {
         2 // pet_display_id: u16
     }
 }
@@ -2663,14 +2557,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_HP {
     pub pet_current_health: u16,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_HP {
-    fn size(&self) -> usize {
-        2 // pet_current_health: u16
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_HP {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_HP {
+    pub fn size(&self) -> usize {
         2 // pet_current_health: u16
     }
 }
@@ -2680,14 +2568,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP {
     pub pet_max_health: u16,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP {
-    fn size(&self) -> usize {
-        2 // pet_max_health: u16
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP {
+    pub fn size(&self) -> usize {
         2 // pet_max_health: u16
     }
 }
@@ -2697,14 +2579,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE {
     pub pet_power_type: Power,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE {
-    fn size(&self) -> usize {
-        1 // pet_power_type: Power
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE {
+    pub fn size(&self) -> usize {
         1 // pet_power_type: Power
     }
 }
@@ -2714,14 +2590,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER {
     pub pet_current_power: u16,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER {
-    fn size(&self) -> usize {
-        2 // pet_current_power: u16
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER {
+    pub fn size(&self) -> usize {
         2 // pet_current_power: u16
     }
 }
@@ -2731,14 +2601,8 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_POWER {
     pub pet_max_power: u16,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_POWER {
-    fn size(&self) -> usize {
-        2 // pet_max_power: u16
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_POWER {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_POWER {
+    pub fn size(&self) -> usize {
         2 // pet_max_power: u16
     }
 }
@@ -2748,15 +2612,9 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS {
     pub pet_auras: AuraMask,
 }
 
-impl VariableSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS {
-    fn size(&self) -> usize {
+impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS {
+    pub fn size(&self) -> usize {
         self.pet_auras.size() // pet_auras: AuraMask
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS {
-    fn maximum_possible_size() -> usize {
-        132 // pet_auras: AuraMask
     }
 }
 

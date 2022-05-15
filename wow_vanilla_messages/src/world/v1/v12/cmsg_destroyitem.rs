@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -240,10 +239,8 @@ impl MessageBody for CMSG_DESTROYITEM {
 
 }
 
-impl ConstantSized for CMSG_DESTROYITEM {}
-
-impl MaximumPossibleSized for CMSG_DESTROYITEM {
-    fn maximum_possible_size() -> usize {
+impl CMSG_DESTROYITEM {
+    pub(crate) fn size() -> usize {
         0
         + 1 // bag: u8
         + 1 // slot: u8

@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -175,10 +174,8 @@ impl MessageBody for CMSG_AUCTION_PLACE_BID {
 
 }
 
-impl ConstantSized for CMSG_AUCTION_PLACE_BID {}
-
-impl MaximumPossibleSized for CMSG_AUCTION_PLACE_BID {
-    fn maximum_possible_size() -> usize {
+impl CMSG_AUCTION_PLACE_BID {
+    pub(crate) fn size() -> usize {
         0
         + 8 // auctioneer_guid: Guid
         + 4 // auction_id: u32

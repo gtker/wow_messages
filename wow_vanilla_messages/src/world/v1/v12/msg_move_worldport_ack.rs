@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -110,10 +109,8 @@ impl MessageBody for MSG_MOVE_WORLDPORT_ACK {
 
 }
 
-impl ConstantSized for MSG_MOVE_WORLDPORT_ACK {}
-
-impl MaximumPossibleSized for MSG_MOVE_WORLDPORT_ACK {
-    fn maximum_possible_size() -> usize {
+impl MSG_MOVE_WORLDPORT_ACK {
+    pub(crate) fn size() -> usize {
         0
     }
 }

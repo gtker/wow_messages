@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{SpellCastTargets, SpellCastTargetsError};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -152,19 +151,11 @@ impl MessageBody for CMSG_CAST_SPELL {
 
 }
 
-impl VariableSized for CMSG_CAST_SPELL {
-    fn size(&self) -> usize {
+impl CMSG_CAST_SPELL {
+    pub fn size(&self) -> usize {
         0
         + 4 // spell: u32
         + self.targets.size() // targets: SpellCastTargets
-    }
-}
-
-impl MaximumPossibleSized for CMSG_CAST_SPELL {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // spell: u32
-        + 354 // targets: SpellCastTargets
     }
 }
 

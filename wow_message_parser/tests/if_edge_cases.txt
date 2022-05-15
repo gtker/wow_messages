@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{TEnum, TEnumError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -440,10 +439,8 @@ impl IfEdgeCases {
 
 }
 
-impl ConstantSized for IfEdgeCases {}
-
-impl MaximumPossibleSized for IfEdgeCases {
-    fn maximum_possible_size() -> usize {
+impl IfEdgeCases {
+    pub(crate) fn size() -> usize {
         0
         + 2 // t: IfEdgeCasesTEnum
     }
@@ -530,8 +527,8 @@ impl IfEdgeCasesTEnum {
 
 }
 
-impl VariableSized for IfEdgeCasesTEnum {
-    fn size(&self) -> usize {
+impl IfEdgeCasesTEnum {
+    pub fn size(&self) -> usize {
         match self {
             Self::ZERO {
                 basic1,
@@ -582,12 +579,6 @@ impl VariableSized for IfEdgeCasesTEnum {
                 + 1 // rest: u8
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for IfEdgeCasesTEnum {
-    fn maximum_possible_size() -> usize {
-        2
     }
 }
 

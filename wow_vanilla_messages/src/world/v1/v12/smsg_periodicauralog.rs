@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{AuraLog, AuraLogError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -230,20 +229,14 @@ impl MessageBody for SMSG_PERIODICAURALOG {
 
 }
 
-impl VariableSized for SMSG_PERIODICAURALOG {
-    fn size(&self) -> usize {
+impl SMSG_PERIODICAURALOG {
+    pub fn size(&self) -> usize {
         0
         + self.target.size() // target: Guid
         + self.caster.size() // caster: Guid
         + 4 // spell: u32
         + 4 // amount_of_auras: u32
         + self.auras.iter().fold(0, |acc, x| acc + x.size()) // auras: AuraLog[amount_of_auras]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PERIODICAURALOG {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

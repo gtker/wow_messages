@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -138,17 +137,10 @@ impl MessageBody for CMSG_GUILD_ADD_RANK {
 
 }
 
-impl VariableSized for CMSG_GUILD_ADD_RANK {
-    fn size(&self) -> usize {
+impl CMSG_GUILD_ADD_RANK {
+    pub fn size(&self) -> usize {
         0
         + self.rank_name.len() + 1 // rank_name: CString
-    }
-}
-
-impl MaximumPossibleSized for CMSG_GUILD_ADD_RANK {
-    fn maximum_possible_size() -> usize {
-        0
-        + 256 // rank_name: CString
     }
 }
 

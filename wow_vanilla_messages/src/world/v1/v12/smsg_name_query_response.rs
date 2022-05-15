@@ -5,7 +5,6 @@ use crate::world::v1::v12::{Gender, GenderError};
 use crate::world::v1::v12::{Race, RaceError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -261,8 +260,8 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
 
 }
 
-impl VariableSized for SMSG_NAME_QUERY_RESPONSE {
-    fn size(&self) -> usize {
+impl SMSG_NAME_QUERY_RESPONSE {
+    pub fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + self.character_name.len() + 1 // character_name: CString
@@ -270,18 +269,6 @@ impl VariableSized for SMSG_NAME_QUERY_RESPONSE {
         + 4 // race: Race
         + 4 // gender: Gender
         + 4 // class: Class
-    }
-}
-
-impl MaximumPossibleSized for SMSG_NAME_QUERY_RESPONSE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 256 // character_name: CString
-        + 256 // realm_name: CString
-        + 1 // race: Race
-        + 1 // gender: Gender
-        + 1 // class: Class
     }
 }
 
@@ -340,7 +327,6 @@ impl From<RaceError> for SMSG_NAME_QUERY_RESPONSEError {
 #[cfg(test)]
 mod test {
     use super::SMSG_NAME_QUERY_RESPONSE;
-    use crate::VariableSized;
     use crate::world::v1::v12::Class;
     use crate::world::v1::v12::Gender;
     use crate::world::v1::v12::Race;

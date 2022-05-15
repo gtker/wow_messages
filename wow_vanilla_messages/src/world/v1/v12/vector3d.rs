@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -97,10 +96,8 @@ impl Vector3d {
 
 }
 
-impl ConstantSized for Vector3d {}
-
-impl MaximumPossibleSized for Vector3d {
-    fn maximum_possible_size() -> usize {
+impl Vector3d {
+    pub(crate) fn size() -> usize {
         0
         + 4 // x: f32
         + 4 // y: f32

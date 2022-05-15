@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -84,10 +83,8 @@ impl GmSurveyQuestion {
 
 }
 
-impl ConstantSized for GmSurveyQuestion {}
-
-impl MaximumPossibleSized for GmSurveyQuestion {
-    fn maximum_possible_size() -> usize {
+impl GmSurveyQuestion {
+    pub(crate) fn size() -> usize {
         0
         + 4 // question_id: u32
         + 1 // answer: u8

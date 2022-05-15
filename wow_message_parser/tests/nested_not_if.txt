@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{NestedEnum, NestedEnumError};
 use crate::world::v1::v12::{TEnum, TEnumError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -1053,17 +1052,10 @@ impl NestedNotIf {
 
 }
 
-impl VariableSized for NestedNotIf {
-    fn size(&self) -> usize {
+impl NestedNotIf {
+    pub fn size(&self) -> usize {
         0
         + self.t.size() // t: NestedNotIfTEnum
-    }
-}
-
-impl MaximumPossibleSized for NestedNotIf {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // t: NestedNotIfTEnum
     }
 }
 
@@ -1130,8 +1122,8 @@ impl NestedNotIfNestedEnum {
 
 }
 
-impl VariableSized for NestedNotIfNestedEnum {
-    fn size(&self) -> usize {
+impl NestedNotIfNestedEnum {
+    pub fn size(&self) -> usize {
         match self {
             Self::NESTED {
                 one,
@@ -1143,12 +1135,6 @@ impl VariableSized for NestedNotIfNestedEnum {
                 1
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for NestedNotIfNestedEnum {
-    fn maximum_possible_size() -> usize {
-        1
     }
 }
 
@@ -1208,8 +1194,8 @@ impl NestedNotIfTEnum {
 
 }
 
-impl VariableSized for NestedNotIfTEnum {
-    fn size(&self) -> usize {
+impl NestedNotIfTEnum {
+    pub fn size(&self) -> usize {
         match self {
             Self::ZERO => {
                 1
@@ -1271,12 +1257,6 @@ impl VariableSized for NestedNotIfTEnum {
                 + 1 // not_zero: u8
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for NestedNotIfTEnum {
-    fn maximum_possible_size() -> usize {
-        4
     }
 }
 

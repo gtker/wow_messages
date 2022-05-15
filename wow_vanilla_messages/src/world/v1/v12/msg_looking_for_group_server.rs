@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -130,10 +129,8 @@ impl MessageBody for MSG_LOOKING_FOR_GROUP_Server {
 
 }
 
-impl ConstantSized for MSG_LOOKING_FOR_GROUP_Server {}
-
-impl MaximumPossibleSized for MSG_LOOKING_FOR_GROUP_Server {
-    fn maximum_possible_size() -> usize {
+impl MSG_LOOKING_FOR_GROUP_Server {
+    pub(crate) fn size() -> usize {
         0
         + 4 // unknown1: u32
     }

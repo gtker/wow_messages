@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -108,10 +107,8 @@ impl MessageBody for CMSG_PLAYER_LOGOUT {
 
 }
 
-impl ConstantSized for CMSG_PLAYER_LOGOUT {}
-
-impl MaximumPossibleSized for CMSG_PLAYER_LOGOUT {
-    fn maximum_possible_size() -> usize {
+impl CMSG_PLAYER_LOGOUT {
+    pub(crate) fn size() -> usize {
         0
     }
 }
@@ -119,7 +116,6 @@ impl MaximumPossibleSized for CMSG_PLAYER_LOGOUT {
 #[cfg(test)]
 mod test {
     use super::CMSG_PLAYER_LOGOUT;
-    use crate::ConstantSized;
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ClientOpcodeMessage;

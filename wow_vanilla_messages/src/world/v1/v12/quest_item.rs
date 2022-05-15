@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -136,23 +135,13 @@ impl QuestItem {
 
 }
 
-impl VariableSized for QuestItem {
-    fn size(&self) -> usize {
+impl QuestItem {
+    pub fn size(&self) -> usize {
         0
         + 4 // quest_id: u32
         + 4 // quest_icon: u32
         + 4 // level: u32
         + self.title.len() + 1 // title: CString
-    }
-}
-
-impl MaximumPossibleSized for QuestItem {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // quest_id: u32
-        + 4 // quest_icon: u32
-        + 4 // level: u32
-        + 256 // title: CString
     }
 }
 

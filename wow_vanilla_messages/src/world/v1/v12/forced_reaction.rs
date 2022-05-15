@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -84,10 +83,8 @@ impl ForcedReaction {
 
 }
 
-impl ConstantSized for ForcedReaction {}
-
-impl MaximumPossibleSized for ForcedReaction {
-    fn maximum_possible_size() -> usize {
+impl ForcedReaction {
+    pub(crate) fn size() -> usize {
         0
         + 4 // faction_id: u32
         + 4 // reputation_rank: u32

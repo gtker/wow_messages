@@ -4,7 +4,6 @@ use crate::world::v1::v12::{CastFlags};
 use crate::world::v1::v12::{SpellCastTargets, SpellCastTargetsError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -332,8 +331,8 @@ impl MessageBody for SMSG_SPELL_START {
 
 }
 
-impl VariableSized for SMSG_SPELL_START {
-    fn size(&self) -> usize {
+impl SMSG_SPELL_START {
+    pub fn size(&self) -> usize {
         0
         + self.cast_item.size() // cast_item: Guid
         + self.caster.size() // caster: Guid
@@ -341,18 +340,6 @@ impl VariableSized for SMSG_SPELL_START {
         + self.flags.size() // flags: SMSG_SPELL_STARTCastFlags
         + 4 // timer: u32
         + self.targets.size() // targets: SpellCastTargets
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SPELL_START {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // cast_item: Guid
-        + 9 // caster: Guid
-        + 4 // spell: u32
-        + 10 // flags: SMSG_SPELL_STARTCastFlags
-        + 4 // timer: u32
-        + 354 // targets: SpellCastTargets
     }
 }
 
@@ -636,8 +623,8 @@ impl SMSG_SPELL_STARTCastFlags {
     }
 
 }
-impl VariableSized for SMSG_SPELL_STARTCastFlags {
-    fn size(&self) -> usize {
+impl SMSG_SPELL_STARTCastFlags {
+    pub fn size(&self) -> usize {
         2 // inner
         + {
             if let Some(s) = &self.ammo {
@@ -649,28 +636,14 @@ impl VariableSized for SMSG_SPELL_STARTCastFlags {
     }
 }
 
-impl MaximumPossibleSized for SMSG_SPELL_STARTCastFlags {
-    fn maximum_possible_size() -> usize {
-        2 // inner
-        + SMSG_SPELL_STARTCastFlagsAMMO::maximum_possible_size() // AMMO enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_SPELL_STARTCastFlagsAMMO {
     pub ammo_display_id: u32,
     pub ammo_inventory_type: u32,
 }
 
-impl VariableSized for SMSG_SPELL_STARTCastFlagsAMMO {
-    fn size(&self) -> usize {
-        4 // ammo_display_id: u32
-        + 4 // ammo_inventory_type: u32
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SPELL_STARTCastFlagsAMMO {
-    fn maximum_possible_size() -> usize {
+impl SMSG_SPELL_STARTCastFlagsAMMO {
+    pub fn size(&self) -> usize {
         4 // ammo_display_id: u32
         + 4 // ammo_inventory_type: u32
     }

@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{MovementFlags};
 use crate::world::v1::v12::TransportInfo;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -465,23 +464,10 @@ impl MovementInfo {
 
 }
 
-impl VariableSized for MovementInfo {
-    fn size(&self) -> usize {
+impl MovementInfo {
+    pub fn size(&self) -> usize {
         0
         + self.flags.size() // flags: MovementInfoMovementFlags
-        + 4 // timestamp: u32
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
-        + 4 // orientation: f32
-        + 4 // fall_time: f32
-    }
-}
-
-impl MaximumPossibleSized for MovementInfo {
-    fn maximum_possible_size() -> usize {
-        0
-        + 57 // flags: MovementInfoMovementFlags
         + 4 // timestamp: u32
         + 4 // position_x: f32
         + 4 // position_y: f32
@@ -1175,8 +1161,8 @@ impl MovementInfoMovementFlags {
     }
 
 }
-impl VariableSized for MovementInfoMovementFlags {
-    fn size(&self) -> usize {
+impl MovementInfoMovementFlags {
+    pub fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.on_transport {
@@ -1209,30 +1195,14 @@ impl VariableSized for MovementInfoMovementFlags {
     }
 }
 
-impl MaximumPossibleSized for MovementInfoMovementFlags {
-    fn maximum_possible_size() -> usize {
-        4 // inner
-        + MovementInfoMovementFlagsON_TRANSPORT::maximum_possible_size() // ON_TRANSPORT enumerator
-        + MovementInfoMovementFlagsJUMPING::maximum_possible_size() // JUMPING enumerator
-        + MovementInfoMovementFlagsSWIMMING::maximum_possible_size() // SWIMMING enumerator
-        + MovementInfoMovementFlagsSPLINE_ELEVATION::maximum_possible_size() // SPLINE_ELEVATION enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct MovementInfoMovementFlagsON_TRANSPORT {
     pub transport: TransportInfo,
 }
 
-impl VariableSized for MovementInfoMovementFlagsON_TRANSPORT {
-    fn size(&self) -> usize {
+impl MovementInfoMovementFlagsON_TRANSPORT {
+    pub fn size(&self) -> usize {
         self.transport.size() // transport: TransportInfo
-    }
-}
-
-impl MaximumPossibleSized for MovementInfoMovementFlagsON_TRANSPORT {
-    fn maximum_possible_size() -> usize {
-        29 // transport: TransportInfo
     }
 }
 
@@ -1244,17 +1214,8 @@ pub struct MovementInfoMovementFlagsJUMPING {
     pub z_speed: f32,
 }
 
-impl VariableSized for MovementInfoMovementFlagsJUMPING {
-    fn size(&self) -> usize {
-        4 // cos_angle: f32
-        + 4 // sin_angle: f32
-        + 4 // xy_speed: f32
-        + 4 // z_speed: f32
-    }
-}
-
-impl MaximumPossibleSized for MovementInfoMovementFlagsJUMPING {
-    fn maximum_possible_size() -> usize {
+impl MovementInfoMovementFlagsJUMPING {
+    pub fn size(&self) -> usize {
         4 // cos_angle: f32
         + 4 // sin_angle: f32
         + 4 // xy_speed: f32
@@ -1267,14 +1228,8 @@ pub struct MovementInfoMovementFlagsSWIMMING {
     pub pitch: f32,
 }
 
-impl VariableSized for MovementInfoMovementFlagsSWIMMING {
-    fn size(&self) -> usize {
-        4 // pitch: f32
-    }
-}
-
-impl MaximumPossibleSized for MovementInfoMovementFlagsSWIMMING {
-    fn maximum_possible_size() -> usize {
+impl MovementInfoMovementFlagsSWIMMING {
+    pub fn size(&self) -> usize {
         4 // pitch: f32
     }
 }
@@ -1284,14 +1239,8 @@ pub struct MovementInfoMovementFlagsSPLINE_ELEVATION {
     pub spline_elevation: f32,
 }
 
-impl VariableSized for MovementInfoMovementFlagsSPLINE_ELEVATION {
-    fn size(&self) -> usize {
-        4 // spline_elevation: f32
-    }
-}
-
-impl MaximumPossibleSized for MovementInfoMovementFlagsSPLINE_ELEVATION {
-    fn maximum_possible_size() -> usize {
+impl MovementInfoMovementFlagsSPLINE_ELEVATION {
+    pub fn size(&self) -> usize {
         4 // spline_elevation: f32
     }
 }

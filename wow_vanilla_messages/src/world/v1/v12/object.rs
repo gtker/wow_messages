@@ -4,7 +4,6 @@ use crate::UpdateMask;
 use crate::world::v1::v12::MovementBlock;
 use crate::world::v1::v12::{ObjectType, ObjectTypeError};
 use crate::world::v1::v12::{UpdateType, UpdateTypeError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -624,16 +623,10 @@ impl Object {
 
 }
 
-impl VariableSized for Object {
-    fn size(&self) -> usize {
+impl Object {
+    pub fn size(&self) -> usize {
         0
         + self.update_type.size() // update_type: ObjectUpdateType
-    }
-}
-
-impl MaximumPossibleSized for Object {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 
@@ -729,8 +722,8 @@ impl ObjectUpdateType {
 
 }
 
-impl VariableSized for ObjectUpdateType {
-    fn size(&self) -> usize {
+impl ObjectUpdateType {
+    pub fn size(&self) -> usize {
         match self {
             Self::VALUES {
                 guid1,
@@ -789,12 +782,6 @@ impl VariableSized for ObjectUpdateType {
                 + guids.iter().fold(0, |acc, x| acc + x.size()) // guids: PackedGuid[count]
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for ObjectUpdateType {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -5,7 +5,6 @@ use crate::world::v1::v12::{PetReactState, PetReactStateError};
 use crate::world::v1::v12::PetSpellCooldown;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -371,8 +370,8 @@ impl MessageBody for SMSG_PET_SPELLS {
 
 }
 
-impl VariableSized for SMSG_PET_SPELLS {
-    fn size(&self) -> usize {
+impl SMSG_PET_SPELLS {
+    pub fn size(&self) -> usize {
         0
         + 8 // pet: Guid
         + 4 // unknown1: u32
@@ -384,22 +383,6 @@ impl VariableSized for SMSG_PET_SPELLS {
         + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[amount_of_spells]
         + 1 // amount_of_cooldowns: u8
         + self.cooldowns.iter().fold(0, |acc, x| acc + PetSpellCooldown::size()) // cooldowns: PetSpellCooldown[amount_of_cooldowns]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PET_SPELLS {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // pet: Guid
-        + 4 // unknown1: u32
-        + 1 // react: PetReactState
-        + 1 // command: PetCommandState
-        + 2 // unknown2: u16
-        + 40 // action_bars: u32[10]
-        + 1 // amount_of_spells: u8
-        + 1024 // spells: u32[amount_of_spells]
-        + 1 // amount_of_cooldowns: u8
-        + 3072 // cooldowns: PetSpellCooldown[amount_of_cooldowns]
     }
 }
 

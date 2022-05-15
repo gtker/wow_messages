@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Area, AreaError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -153,10 +152,8 @@ impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
 
 }
 
-impl ConstantSized for SMSG_EXPLORATION_EXPERIENCE {}
-
-impl MaximumPossibleSized for SMSG_EXPLORATION_EXPERIENCE {
-    fn maximum_possible_size() -> usize {
+impl SMSG_EXPLORATION_EXPERIENCE {
+    pub(crate) fn size() -> usize {
         0
         + 4 // area: Area
         + 4 // experience: u32

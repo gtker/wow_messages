@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -130,17 +129,10 @@ impl MessageBody for SMSG_SPLINE_MOVE_NORMAL_FALL {
 
 }
 
-impl VariableSized for SMSG_SPLINE_MOVE_NORMAL_FALL {
-    fn size(&self) -> usize {
+impl SMSG_SPLINE_MOVE_NORMAL_FALL {
+    pub fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SPLINE_MOVE_NORMAL_FALL {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // guid: Guid
     }
 }
 

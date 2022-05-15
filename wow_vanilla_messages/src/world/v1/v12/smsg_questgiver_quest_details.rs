@@ -4,7 +4,6 @@ use crate::world::v1::v12::QuestDetailsEmote;
 use crate::world::v1::v12::QuestItemReward;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -478,8 +477,8 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
 }
 
-impl VariableSized for SMSG_QUESTGIVER_QUEST_DETAILS {
-    fn size(&self) -> usize {
+impl SMSG_QUESTGIVER_QUEST_DETAILS {
+    pub fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // quest_id: u32
@@ -495,12 +494,6 @@ impl VariableSized for SMSG_QUESTGIVER_QUEST_DETAILS {
         + 4 // reward_spell: u32
         + 4 // amount_of_emotes: u32
         + self.emotes.iter().fold(0, |acc, x| acc + QuestDetailsEmote::size()) // emotes: QuestDetailsEmote[amount_of_emotes]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_QUESTGIVER_QUEST_DETAILS {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

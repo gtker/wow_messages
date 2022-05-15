@@ -5,7 +5,6 @@ use crate::logon::all::Platform;
 use crate::logon::all::Version;
 use crate::ClientMessage;
 use crate::ReadableAndWritable;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -357,8 +356,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
 
 }
 
-impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_Client {
-    fn size(&self) -> usize {
+impl CMD_AUTH_LOGON_CHALLENGE_Client {
+    pub fn size(&self) -> usize {
         0
         + 1 // protocol_version: u8
         + 2 // size: u16
@@ -371,23 +370,6 @@ impl VariableSized for CMD_AUTH_LOGON_CHALLENGE_Client {
         + 4 // client_ip_address: u32_be
         + 1 // account_name_length: u8
         + self.account_name.len() // account_name: String
-    }
-}
-
-impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_Client {
-    fn maximum_possible_size() -> usize {
-        0
-        + 1 // protocol_version: u8
-        + 2 // size: u16
-        + 4 // game_name: u32
-        + 5 // version: Version
-        + 4 // platform: Platform
-        + 4 // os: Os
-        + 4 // locale: Locale
-        + 4 // utc_timezone_offset: u32
-        + 4 // client_ip_address: u32_be
-        + 1 // account_name_length: u8
-        + 256 // account_name: String
     }
 }
 
@@ -422,7 +404,6 @@ impl From<std::string::FromUtf8Error> for CMD_AUTH_LOGON_CHALLENGE_ClientError {
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_LOGON_CHALLENGE_Client;
-    use crate::VariableSized;
     use crate::logon::all::Locale;
     use crate::logon::all::Os;
     use crate::logon::all::Platform;

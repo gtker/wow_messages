@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{SpellMissInfo, SpellMissInfoError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -86,10 +85,8 @@ impl SpellMiss {
 
 }
 
-impl ConstantSized for SpellMiss {}
-
-impl MaximumPossibleSized for SpellMiss {
-    fn maximum_possible_size() -> usize {
+impl SpellMiss {
+    pub(crate) fn size() -> usize {
         0
         + 8 // target_guid: Guid
         + 4 // miss_info: SpellMissInfo

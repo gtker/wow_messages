@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{StabledPet, StabledPetError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -208,19 +207,13 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Server {
 
 }
 
-impl VariableSized for MSG_LIST_STABLED_PETS_Server {
-    fn size(&self) -> usize {
+impl MSG_LIST_STABLED_PETS_Server {
+    pub fn size(&self) -> usize {
         0
         + 8 // npc: Guid
         + 1 // amount_of_pets: u8
         + 1 // stable_slots: u8
         + self.pets.iter().fold(0, |acc, x| acc + x.size()) // pets: StabledPet[amount_of_pets]
-    }
-}
-
-impl MaximumPossibleSized for MSG_LIST_STABLED_PETS_Server {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

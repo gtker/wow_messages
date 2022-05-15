@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{DuelWinnerReason, DuelWinnerReasonError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -192,21 +191,12 @@ impl MessageBody for SMSG_DUEL_WINNER {
 
 }
 
-impl VariableSized for SMSG_DUEL_WINNER {
-    fn size(&self) -> usize {
+impl SMSG_DUEL_WINNER {
+    pub fn size(&self) -> usize {
         0
         + 1 // reason: DuelWinnerReason
         + self.opponent_name.len() + 1 // opponent_name: CString
         + self.initiator_name.len() + 1 // initiator_name: CString
-    }
-}
-
-impl MaximumPossibleSized for SMSG_DUEL_WINNER {
-    fn maximum_possible_size() -> usize {
-        0
-        + 1 // reason: DuelWinnerReason
-        + 256 // opponent_name: CString
-        + 256 // initiator_name: CString
     }
 }
 

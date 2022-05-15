@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -171,19 +170,10 @@ impl MessageBody for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
 
 }
 
-impl VariableSized for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
-    fn size(&self) -> usize {
+impl SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
+    pub fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
-        + 4 // move_event: u32
-        + 4 // speed: f32
-    }
-}
-
-impl MaximumPossibleSized for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // guid: Guid
         + 4 // move_event: u32
         + 4 // speed: f32
     }

@@ -9,7 +9,6 @@ use crate::world::v1::v12::ItemStat;
 use crate::world::v1::v12::{Map, MapError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -1434,8 +1433,8 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
 }
 
-impl VariableSized for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
-    fn size(&self) -> usize {
+impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
+    pub fn size(&self) -> usize {
         0
         + 4 // item: u32
         + if let Some(found) = &self.found {
@@ -1498,13 +1497,6 @@ impl VariableSized for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         } else {
             0
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // item: u32
     }
 }
 

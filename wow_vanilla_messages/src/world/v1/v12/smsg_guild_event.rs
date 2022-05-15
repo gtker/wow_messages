@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{GuildEvent, GuildEventError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -191,18 +190,12 @@ impl MessageBody for SMSG_GUILD_EVENT {
 
 }
 
-impl VariableSized for SMSG_GUILD_EVENT {
-    fn size(&self) -> usize {
+impl SMSG_GUILD_EVENT {
+    pub fn size(&self) -> usize {
         0
         + 1 // event: GuildEvent
         + 1 // amount_of_events: u8
         + self.event_descriptions.iter().fold(0, |acc, x| acc + x.len() + 1) // event_descriptions: CString[amount_of_events]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_GUILD_EVENT {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

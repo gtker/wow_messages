@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -284,10 +283,8 @@ impl MessageBody for SMSG_TUTORIAL_FLAGS {
 
 }
 
-impl ConstantSized for SMSG_TUTORIAL_FLAGS {}
-
-impl MaximumPossibleSized for SMSG_TUTORIAL_FLAGS {
-    fn maximum_possible_size() -> usize {
+impl SMSG_TUTORIAL_FLAGS {
+    pub(crate) fn size() -> usize {
         0
         + 4 // tutorial_data0: u32
         + 4 // tutorial_data1: u32

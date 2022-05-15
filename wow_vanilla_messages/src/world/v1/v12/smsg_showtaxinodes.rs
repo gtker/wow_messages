@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -229,19 +228,13 @@ impl MessageBody for SMSG_SHOWTAXINODES {
 
 }
 
-impl VariableSized for SMSG_SHOWTAXINODES {
-    fn size(&self) -> usize {
+impl SMSG_SHOWTAXINODES {
+    pub fn size(&self) -> usize {
         0
         + 4 // unknown1: u32
         + 8 // guid: Guid
         + 4 // nearest_node: u32
         + self.nodes.len() * core::mem::size_of::<u32>() // nodes: u32[-]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SHOWTAXINODES {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

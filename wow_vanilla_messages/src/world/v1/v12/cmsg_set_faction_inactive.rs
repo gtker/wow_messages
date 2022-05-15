@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -152,10 +151,8 @@ impl MessageBody for CMSG_SET_FACTION_INACTIVE {
 
 }
 
-impl ConstantSized for CMSG_SET_FACTION_INACTIVE {}
-
-impl MaximumPossibleSized for CMSG_SET_FACTION_INACTIVE {
-    fn maximum_possible_size() -> usize {
+impl CMSG_SET_FACTION_INACTIVE {
+    pub(crate) fn size() -> usize {
         0
         + 4 // reputation_list_id: u32
         + 1 // inactive: u8

@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -85,10 +84,8 @@ impl ChannelMember {
 
 }
 
-impl ConstantSized for ChannelMember {}
-
-impl MaximumPossibleSized for ChannelMember {
-    fn maximum_possible_size() -> usize {
+impl ChannelMember {
+    pub(crate) fn size() -> usize {
         0
         + 8 // guid: Guid
         + 1 // member_flags: u8

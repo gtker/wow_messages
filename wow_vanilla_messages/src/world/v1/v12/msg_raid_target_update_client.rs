@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{RaidTargetIndex, RaidTargetIndexError};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -560,17 +559,10 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
 
 }
 
-impl VariableSized for MSG_RAID_TARGET_UPDATE_Client {
-    fn size(&self) -> usize {
+impl MSG_RAID_TARGET_UPDATE_Client {
+    pub fn size(&self) -> usize {
         0
         + self.index.size() // index: MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex
-    }
-}
-
-impl MaximumPossibleSized for MSG_RAID_TARGET_UPDATE_Client {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // index: MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex
     }
 }
 
@@ -661,8 +653,8 @@ impl MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
 
 }
 
-impl VariableSized for MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
-    fn size(&self) -> usize {
+impl MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
+    pub fn size(&self) -> usize {
         match self {
             Self::UNKNOWN0 {
                 target,
@@ -722,12 +714,6 @@ impl VariableSized for MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
                 1
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
-    fn maximum_possible_size() -> usize {
-        9
     }
 }
 

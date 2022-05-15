@@ -3,7 +3,6 @@ use crate::logon::version_2::Population;
 use crate::logon::version_2::{RealmCategory, RealmCategoryError};
 use crate::logon::version_2::{RealmFlag};
 use crate::logon::version_2::{RealmType, RealmTypeError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -237,27 +236,13 @@ impl Realm {
 
 }
 
-impl VariableSized for Realm {
-    fn size(&self) -> usize {
+impl Realm {
+    pub fn size(&self) -> usize {
         0
         + 4 // realm_type: RealmType
         + 1 // flag: RealmFlag
         + self.name.len() + 1 // name: CString
         + self.address.len() + 1 // address: CString
-        + 4 // population: Population
-        + 1 // number_of_characters_on_realm: u8
-        + 1 // category: RealmCategory
-        + 1 // realm_id: u8
-    }
-}
-
-impl MaximumPossibleSized for Realm {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // realm_type: RealmType
-        + 1 // flag: RealmFlag
-        + 256 // name: CString
-        + 256 // address: CString
         + 4 // population: Population
         + 1 // number_of_characters_on_realm: u8
         + 1 // category: RealmCategory

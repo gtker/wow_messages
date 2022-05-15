@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::MovementInfo;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -153,19 +152,11 @@ impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
 
 }
 
-impl VariableSized for CMSG_MOVE_NOT_ACTIVE_MOVER {
-    fn size(&self) -> usize {
+impl CMSG_MOVE_NOT_ACTIVE_MOVER {
+    pub fn size(&self) -> usize {
         0
         + 8 // old_mover: Guid
         + self.movement_info.size() // movement_info: MovementInfo
-    }
-}
-
-impl MaximumPossibleSized for CMSG_MOVE_NOT_ACTIVE_MOVER {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // old_mover: Guid
-        + 81 // movement_info: MovementInfo
     }
 }
 

@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -153,10 +152,8 @@ impl MessageBody for SMSG_ATTACKSTART {
 
 }
 
-impl ConstantSized for SMSG_ATTACKSTART {}
-
-impl MaximumPossibleSized for SMSG_ATTACKSTART {
-    fn maximum_possible_size() -> usize {
+impl SMSG_ATTACKSTART {
+    pub(crate) fn size() -> usize {
         0
         + 8 // attacker_guid: Guid
         + 8 // victim_guid: Guid

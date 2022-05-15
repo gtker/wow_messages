@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{ChatNotify, ChatNotifyError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -161,19 +160,11 @@ impl MessageBody for SMSG_CHANNEL_NOTIFY {
 
 }
 
-impl VariableSized for SMSG_CHANNEL_NOTIFY {
-    fn size(&self) -> usize {
+impl SMSG_CHANNEL_NOTIFY {
+    pub fn size(&self) -> usize {
         0
         + 1 // notify_type: ChatNotify
         + self.channel_name.len() + 1 // channel_name: CString
-    }
-}
-
-impl MaximumPossibleSized for SMSG_CHANNEL_NOTIFY {
-    fn maximum_possible_size() -> usize {
-        0
-        + 1 // notify_type: ChatNotify
-        + 256 // channel_name: CString
     }
 }
 

@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ClientMessage;
 use crate::ReadableAndWritable;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -229,10 +228,8 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Client {
 
 }
 
-impl ConstantSized for CMD_AUTH_RECONNECT_PROOF_Client {}
-
-impl MaximumPossibleSized for CMD_AUTH_RECONNECT_PROOF_Client {
-    fn maximum_possible_size() -> usize {
+impl CMD_AUTH_RECONNECT_PROOF_Client {
+    pub(crate) fn size() -> usize {
         0
         + 16 // proof_data: u8[16]
         + 20 // client_proof: u8[20]
@@ -244,7 +241,6 @@ impl MaximumPossibleSized for CMD_AUTH_RECONNECT_PROOF_Client {
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_RECONNECT_PROOF_Client;
-    use crate::ConstantSized;
     use super::*;
     use super::super::*;
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;

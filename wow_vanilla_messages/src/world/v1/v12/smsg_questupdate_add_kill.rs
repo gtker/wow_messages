@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -219,10 +218,8 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
 
 }
 
-impl ConstantSized for SMSG_QUESTUPDATE_ADD_KILL {}
-
-impl MaximumPossibleSized for SMSG_QUESTUPDATE_ADD_KILL {
-    fn maximum_possible_size() -> usize {
+impl SMSG_QUESTUPDATE_ADD_KILL {
+    pub(crate) fn size() -> usize {
         0
         + 4 // quest_id: u32
         + 4 // create_id: u32

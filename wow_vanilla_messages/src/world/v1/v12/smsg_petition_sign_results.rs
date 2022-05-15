@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{PetitionResult, PetitionResultError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -176,10 +175,8 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
 
 }
 
-impl ConstantSized for SMSG_PETITION_SIGN_RESULTS {}
-
-impl MaximumPossibleSized for SMSG_PETITION_SIGN_RESULTS {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PETITION_SIGN_RESULTS {
+    pub(crate) fn size() -> usize {
         0
         + 8 // petition_guid: Guid
         + 8 // owner_guid: Guid

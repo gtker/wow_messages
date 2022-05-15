@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{NpcTextUpdate, NpcTextUpdateError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -189,21 +188,12 @@ impl MessageBody for SMSG_NPC_TEXT_UPDATE {
 
 }
 
-impl VariableSized for SMSG_NPC_TEXT_UPDATE {
-    fn size(&self) -> usize {
+impl SMSG_NPC_TEXT_UPDATE {
+    pub fn size(&self) -> usize {
         0
         + 4 // text_id: u32
         + 4 // probability: f32
         + self.texts.iter().fold(0, |acc, x| acc + x.size()) // texts: NpcTextUpdate[8]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_NPC_TEXT_UPDATE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // text_id: u32
-        + 4 // probability: f32
-        + 4352 // texts: NpcTextUpdate[8]
     }
 }
 

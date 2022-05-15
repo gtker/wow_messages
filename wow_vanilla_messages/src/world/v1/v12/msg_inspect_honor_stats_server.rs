@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{PvpRank, PvpRankError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -462,10 +461,8 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
 
 }
 
-impl ConstantSized for MSG_INSPECT_HONOR_STATS_Server {}
-
-impl MaximumPossibleSized for MSG_INSPECT_HONOR_STATS_Server {
-    fn maximum_possible_size() -> usize {
+impl MSG_INSPECT_HONOR_STATS_Server {
+    pub(crate) fn size() -> usize {
         0
         + 8 // guid: Guid
         + 1 // highest_rank: PvpRank

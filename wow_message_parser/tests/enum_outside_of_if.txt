@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{NestedEnum, NestedEnumError};
 use crate::world::v1::v12::{TEnum, TEnumError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -151,19 +150,11 @@ impl EnumOutsideOfIf {
 
 }
 
-impl VariableSized for EnumOutsideOfIf {
-    fn size(&self) -> usize {
+impl EnumOutsideOfIf {
+    pub fn size(&self) -> usize {
         0
         + self.t.size() // t: EnumOutsideOfIfTEnum
         + self.n.size() // n: EnumOutsideOfIfNestedEnum
-    }
-}
-
-impl MaximumPossibleSized for EnumOutsideOfIf {
-    fn maximum_possible_size() -> usize {
-        0
-        + 2 // t: EnumOutsideOfIfTEnum
-        + 1 // n: EnumOutsideOfIfNestedEnum
     }
 }
 
@@ -238,8 +229,8 @@ impl EnumOutsideOfIfTEnum {
 
 }
 
-impl VariableSized for EnumOutsideOfIfTEnum {
-    fn size(&self) -> usize {
+impl EnumOutsideOfIfTEnum {
+    pub fn size(&self) -> usize {
         match self {
             Self::ZERO => {
                 1
@@ -266,12 +257,6 @@ impl VariableSized for EnumOutsideOfIfTEnum {
                 1
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for EnumOutsideOfIfTEnum {
-    fn maximum_possible_size() -> usize {
-        2
     }
 }
 
@@ -302,8 +287,8 @@ impl EnumOutsideOfIfNestedEnum {
 
 }
 
-impl VariableSized for EnumOutsideOfIfNestedEnum {
-    fn size(&self) -> usize {
+impl EnumOutsideOfIfNestedEnum {
+    pub fn size(&self) -> usize {
         match self {
             Self::NESTED {
                 nested,
@@ -315,12 +300,6 @@ impl VariableSized for EnumOutsideOfIfNestedEnum {
                 1
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for EnumOutsideOfIfNestedEnum {
-    fn maximum_possible_size() -> usize {
-        1
     }
 }
 

@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::ChannelMember;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -216,19 +215,13 @@ impl MessageBody for SMSG_CHANNEL_LIST {
 
 }
 
-impl VariableSized for SMSG_CHANNEL_LIST {
-    fn size(&self) -> usize {
+impl SMSG_CHANNEL_LIST {
+    pub fn size(&self) -> usize {
         0
         + self.channel_name.len() + 1 // channel_name: CString
         + 1 // channel_flags: u8
         + 4 // amount_of_members: u32
         + self.members.iter().fold(0, |acc, x| acc + ChannelMember::size()) // members: ChannelMember[amount_of_members]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_CHANNEL_LIST {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

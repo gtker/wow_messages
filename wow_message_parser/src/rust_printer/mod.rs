@@ -127,11 +127,8 @@ impl Writer {
     }
 
     pub fn constant_sized<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, name: S, f: F) {
-        self.wln(format!("impl ConstantSized for {} {{}}", name.as_ref()));
-        self.newline();
-
-        self.open_curly(format!("impl MaximumPossibleSized for {}", name.as_ref()));
-        self.open_curly("fn maximum_possible_size() -> usize");
+        self.open_curly(format!("impl {}", name.as_ref()));
+        self.open_curly("pub(crate) fn size() -> usize");
 
         f(self);
 
@@ -139,24 +136,11 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn variable_size<S: AsRef<str>, F: Fn(&mut Self), F1: Fn(&mut Self)>(
-        &mut self,
-        name: S,
-        variable_sized: F,
-        maximum_size: F1,
-    ) {
-        self.open_curly(format!("impl VariableSized for {}", name.as_ref()));
-        self.open_curly("fn size(&self) -> usize");
+    pub fn variable_size<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, name: S, variable_sized: F) {
+        self.open_curly(format!("impl {}", name.as_ref()));
+        self.open_curly("pub fn size(&self) -> usize");
 
         variable_sized(self);
-
-        self.closing_curly();
-        self.closing_curly_newline();
-
-        self.open_curly(format!("impl MaximumPossibleSized for {}", name.as_ref()));
-        self.open_curly("fn maximum_possible_size() -> usize");
-
-        maximum_size(self);
 
         self.closing_curly();
         self.closing_curly_newline();

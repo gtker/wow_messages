@@ -4,7 +4,6 @@ use crate::world::v1::v12::{SimpleFlag};
 use crate::world::v1::v12::{StructWithAllBuiltInTypes, StructWithAllBuiltInTypesError};
 use crate::{ClientMessageWrite, ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -178,21 +177,12 @@ impl MessageBody for MessageWithComplexTypes {
 
 }
 
-impl VariableSized for MessageWithComplexTypes {
-    fn size(&self) -> usize {
+impl MessageWithComplexTypes {
+    pub fn size(&self) -> usize {
         0
         + 1 // simple_enum: SimpleEnum
         + 1 // simple_flag: SimpleFlag
         + self.simple_struct.size() // simple_struct: StructWithAllBuiltInTypes
-    }
-}
-
-impl MaximumPossibleSized for MessageWithComplexTypes {
-    fn maximum_possible_size() -> usize {
-        0
-        + 1 // simple_enum: SimpleEnum
-        + 1 // simple_flag: SimpleFlag
-        + 565 // simple_struct: StructWithAllBuiltInTypes
     }
 }
 

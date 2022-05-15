@@ -4,7 +4,6 @@ use crate::world::v1::v12::GossipItem;
 use crate::world::v1::v12::{QuestItem, QuestItemError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -264,8 +263,8 @@ impl MessageBody for SMSG_GOSSIP_MESSAGE {
 
 }
 
-impl VariableSized for SMSG_GOSSIP_MESSAGE {
-    fn size(&self) -> usize {
+impl SMSG_GOSSIP_MESSAGE {
+    pub fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + 4 // title_text_id: u32
@@ -273,12 +272,6 @@ impl VariableSized for SMSG_GOSSIP_MESSAGE {
         + self.gossips.iter().fold(0, |acc, x| acc + GossipItem::size()) // gossips: GossipItem[amount_of_gossip_items]
         + 4 // amount_of_quests: u32
         + self.quests.iter().fold(0, |acc, x| acc + x.size()) // quests: QuestItem[amount_of_quests]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_GOSSIP_MESSAGE {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

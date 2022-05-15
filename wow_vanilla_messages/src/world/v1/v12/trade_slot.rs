@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -349,10 +348,8 @@ impl TradeSlot {
 
 }
 
-impl ConstantSized for TradeSlot {}
-
-impl MaximumPossibleSized for TradeSlot {
-    fn maximum_possible_size() -> usize {
+impl TradeSlot {
+    pub(crate) fn size() -> usize {
         0
         + 1 // trade_slot_number: u8
         + 4 // item_id: u32

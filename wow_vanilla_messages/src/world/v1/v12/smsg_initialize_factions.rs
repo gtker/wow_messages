@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::FactionInitializer;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -163,17 +162,11 @@ impl MessageBody for SMSG_INITIALIZE_FACTIONS {
 
 }
 
-impl VariableSized for SMSG_INITIALIZE_FACTIONS {
-    fn size(&self) -> usize {
+impl SMSG_INITIALIZE_FACTIONS {
+    pub fn size(&self) -> usize {
         0
         + 4 // amount_of_factions: u32
         + self.factions.iter().fold(0, |acc, x| acc + FactionInitializer::size()) // factions: FactionInitializer[amount_of_factions]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_INITIALIZE_FACTIONS {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::SpellCooldownStatus;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -180,17 +179,11 @@ impl MessageBody for SMSG_SPELL_COOLDOWN {
 
 }
 
-impl VariableSized for SMSG_SPELL_COOLDOWN {
-    fn size(&self) -> usize {
+impl SMSG_SPELL_COOLDOWN {
+    pub fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + self.cooldowns.iter().fold(0, |acc, x| acc + SpellCooldownStatus::size()) // cooldowns: SpellCooldownStatus[-]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SPELL_COOLDOWN {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

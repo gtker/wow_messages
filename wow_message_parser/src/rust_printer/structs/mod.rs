@@ -114,7 +114,6 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
         }
         _ => {}
     }
-    s.wln("use crate::{ConstantSized, MaximumPossibleSized, VariableSized};");
 
     s.write_async_includes();
 

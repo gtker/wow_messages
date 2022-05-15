@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::{LoginResult, LoginResultError};
 use crate::ServerMessage;
 use crate::ReadableAndWritable;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -133,10 +132,8 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
 
 }
 
-impl ConstantSized for CMD_AUTH_RECONNECT_PROOF_Server {}
-
-impl MaximumPossibleSized for CMD_AUTH_RECONNECT_PROOF_Server {
-    fn maximum_possible_size() -> usize {
+impl CMD_AUTH_RECONNECT_PROOF_Server {
+    pub(crate) fn size() -> usize {
         0
         + 1 // result: LoginResult
     }
@@ -173,7 +170,6 @@ impl From<LoginResultError> for CMD_AUTH_RECONNECT_PROOF_ServerError {
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_RECONNECT_PROOF_Server;
-    use crate::ConstantSized;
     use crate::logon::version_2::LoginResult;
     use super::*;
     use super::super::*;

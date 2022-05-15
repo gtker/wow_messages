@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -163,19 +162,11 @@ impl MessageBody for SMSG_LOOT_MASTER_LIST {
 
 }
 
-impl VariableSized for SMSG_LOOT_MASTER_LIST {
-    fn size(&self) -> usize {
+impl SMSG_LOOT_MASTER_LIST {
+    pub fn size(&self) -> usize {
         0
         + 1 // amount_of_players: u8
         + self.guids.iter().fold(0, |acc, _| acc + 8) // guids: Guid[amount_of_players]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_LOOT_MASTER_LIST {
-    fn maximum_possible_size() -> usize {
-        0
-        + 1 // amount_of_players: u8
-        + 2048 // guids: Guid[amount_of_players]
     }
 }
 

@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{SimpleEnum, SimpleEnumError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -176,17 +175,10 @@ impl DoubleVariantEnum {
 
 }
 
-impl VariableSized for DoubleVariantEnum {
-    fn size(&self) -> usize {
+impl DoubleVariantEnum {
+    pub fn size(&self) -> usize {
         0
         + self.enum.size() // enum: DoubleVariantEnumSimpleEnum
-    }
-}
-
-impl MaximumPossibleSized for DoubleVariantEnum {
-    fn maximum_possible_size() -> usize {
-        0
-        + 2 // enum: DoubleVariantEnumSimpleEnum
     }
 }
 
@@ -249,8 +241,8 @@ impl DoubleVariantEnumSimpleEnum {
 
 }
 
-impl VariableSized for DoubleVariantEnumSimpleEnum {
-    fn size(&self) -> usize {
+impl DoubleVariantEnumSimpleEnum {
+    pub fn size(&self) -> usize {
         match self {
             Self::ZERO {
                 basic,
@@ -268,12 +260,6 @@ impl VariableSized for DoubleVariantEnumSimpleEnum {
                 1
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for DoubleVariantEnumSimpleEnum {
-    fn maximum_possible_size() -> usize {
-        2
     }
 }
 

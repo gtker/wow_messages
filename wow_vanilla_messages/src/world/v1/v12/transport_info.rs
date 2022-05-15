@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -160,22 +159,10 @@ impl TransportInfo {
 
 }
 
-impl VariableSized for TransportInfo {
-    fn size(&self) -> usize {
+impl TransportInfo {
+    pub fn size(&self) -> usize {
         0
         + self.guid.size() // guid: Guid
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
-        + 4 // orientation: f32
-        + 4 // timestamp: u32
-    }
-}
-
-impl MaximumPossibleSized for TransportInfo {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // guid: Guid
         + 4 // position_x: f32
         + 4 // position_y: f32
         + 4 // position_z: f32

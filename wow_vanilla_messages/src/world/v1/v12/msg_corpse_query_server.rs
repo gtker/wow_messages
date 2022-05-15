@@ -3,7 +3,6 @@ use crate::world::v1::v12::{CorpseQueryResult, CorpseQueryResultError};
 use crate::world::v1::v12::{Map, MapError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -287,17 +286,10 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
 
 }
 
-impl VariableSized for MSG_CORPSE_QUERY_Server {
-    fn size(&self) -> usize {
+impl MSG_CORPSE_QUERY_Server {
+    pub fn size(&self) -> usize {
         0
         + self.result.size() // result: MSG_CORPSE_QUERY_ServerCorpseQueryResult
-    }
-}
-
-impl MaximumPossibleSized for MSG_CORPSE_QUERY_Server {
-    fn maximum_possible_size() -> usize {
-        0
-        + 21 // result: MSG_CORPSE_QUERY_ServerCorpseQueryResult
     }
 }
 
@@ -366,8 +358,8 @@ impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
 
 }
 
-impl VariableSized for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
-    fn size(&self) -> usize {
+impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
+    pub fn size(&self) -> usize {
         match self {
             Self::NOT_FOUND => {
                 1
@@ -387,12 +379,6 @@ impl VariableSized for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
                 + 4 // position_z: f32
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
-    fn maximum_possible_size() -> usize {
-        21
     }
 }
 

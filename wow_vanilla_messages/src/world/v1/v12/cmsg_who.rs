@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -373,8 +372,8 @@ impl MessageBody for CMSG_WHO {
 
 }
 
-impl VariableSized for CMSG_WHO {
-    fn size(&self) -> usize {
+impl CMSG_WHO {
+    pub fn size(&self) -> usize {
         0
         + 4 // minimum_level: u32
         + 4 // maximum_level: u32
@@ -386,12 +385,6 @@ impl VariableSized for CMSG_WHO {
         + self.zones.len() * core::mem::size_of::<u32>() // zones: u32[amount_of_zones]
         + 4 // amount_of_strings: u32
         + self.search_strings.iter().fold(0, |acc, x| acc + x.len() + 1) // search_strings: CString[amount_of_strings]
-    }
-}
-
-impl MaximumPossibleSized for CMSG_WHO {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

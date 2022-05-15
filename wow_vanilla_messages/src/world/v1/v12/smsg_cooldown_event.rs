@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -153,10 +152,8 @@ impl MessageBody for SMSG_COOLDOWN_EVENT {
 
 }
 
-impl ConstantSized for SMSG_COOLDOWN_EVENT {}
-
-impl MaximumPossibleSized for SMSG_COOLDOWN_EVENT {
-    fn maximum_possible_size() -> usize {
+impl SMSG_COOLDOWN_EVENT {
+    pub(crate) fn size() -> usize {
         0
         + 4 // id: u32
         + 8 // guid: Guid

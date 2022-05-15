@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -248,22 +247,10 @@ impl MessageBody for SMSG_GUILD_INFO {
 
 }
 
-impl VariableSized for SMSG_GUILD_INFO {
-    fn size(&self) -> usize {
+impl SMSG_GUILD_INFO {
+    pub fn size(&self) -> usize {
         0
         + self.guild_name.len() + 1 // guild_name: CString
-        + 4 // created_day: u32
-        + 4 // created_month: u32
-        + 4 // created_year: u32
-        + 4 // amount_of_characters_in_guild: u32
-        + 4 // amount_of_accounts_in_guild: u32
-    }
-}
-
-impl MaximumPossibleSized for SMSG_GUILD_INFO {
-    fn maximum_possible_size() -> usize {
-        0
-        + 256 // guild_name: CString
         + 4 // created_day: u32
         + 4 // created_month: u32
         + 4 // created_year: u32

@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -108,10 +107,8 @@ impl MessageBody for CMSG_NEXT_CINEMATIC_CAMERA {
 
 }
 
-impl ConstantSized for CMSG_NEXT_CINEMATIC_CAMERA {}
-
-impl MaximumPossibleSized for CMSG_NEXT_CINEMATIC_CAMERA {
-    fn maximum_possible_size() -> usize {
+impl CMSG_NEXT_CINEMATIC_CAMERA {
+    pub(crate) fn size() -> usize {
         0
     }
 }

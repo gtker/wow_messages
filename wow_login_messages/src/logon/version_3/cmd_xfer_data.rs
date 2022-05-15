@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::ServerMessage;
 use crate::ReadableAndWritable;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -164,24 +163,17 @@ impl ReadableAndWritable for CMD_XFER_DATA {
 
 }
 
-impl VariableSized for CMD_XFER_DATA {
-    fn size(&self) -> usize {
+impl CMD_XFER_DATA {
+    pub fn size(&self) -> usize {
         0
         + 2 // size: u16
         + self.data.len() * core::mem::size_of::<u8>() // data: u8[size]
     }
 }
 
-impl MaximumPossibleSized for CMD_XFER_DATA {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::CMD_XFER_DATA;
-    use crate::VariableSized;
     use super::*;
     use super::super::*;
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;

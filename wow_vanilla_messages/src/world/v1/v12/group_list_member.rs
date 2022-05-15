@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -115,19 +114,10 @@ impl GroupListMember {
 
 }
 
-impl VariableSized for GroupListMember {
-    fn size(&self) -> usize {
+impl GroupListMember {
+    pub fn size(&self) -> usize {
         0
         + self.name.len() + 1 // name: CString
-        + 8 // guid: Guid
-        + 1 // is_online: u8
-    }
-}
-
-impl MaximumPossibleSized for GroupListMember {
-    fn maximum_possible_size() -> usize {
-        0
-        + 256 // name: CString
         + 8 // guid: Guid
         + 1 // is_online: u8
     }

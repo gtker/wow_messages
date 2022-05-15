@@ -223,48 +223,30 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
 }
 
 fn print_size_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
-    s.variable_size(
-        rd.ty_name(),
-        |s| {
-            s.wln(format!("{size} // inner", size = rd.int_ty().size(),));
+    s.variable_size(rd.ty_name(), |s| {
+        s.wln(format!("{size} // inner", size = rd.int_ty().size(),));
 
-            for enumerator in rd.enumerators() {
-                if enumerator.should_not_be_in_flag_types() {
-                    continue;
-                }
-
-                s.body("+", |s| {
-                    s.body_else(
-                        format!(
-                            "if let Some(s) = &self.{name}",
-                            name = enumerator.name().to_lowercase()
-                        ),
-                        |s| {
-                            s.wln("s.size()");
-                        },
-                        |s| {
-                            s.wln("0");
-                        },
-                    );
-                });
+        for enumerator in rd.enumerators() {
+            if enumerator.should_not_be_in_flag_types() {
+                continue;
             }
-        },
-        |s| {
-            s.wln(format!("{size} // inner", size = rd.int_ty().size(),));
 
-            for enumerator in rd.enumerators() {
-                if enumerator.should_not_be_in_flag_types() {
-                    continue;
-                }
-
-                s.wln(format!(
-                    "+ {ce}{f}::maximum_possible_size() // {f} enumerator",
-                    ce = rd.ty_name(),
-                    f = enumerator.name()
-                ));
-            }
-        },
-    );
+            s.body("+", |s| {
+                s.body_else(
+                    format!(
+                        "if let Some(s) = &self.{name}",
+                        name = enumerator.name().to_lowercase()
+                    ),
+                    |s| {
+                        s.wln("s.size()");
+                    },
+                    |s| {
+                        s.wln("0");
+                    },
+                );
+            });
+        }
+    });
 }
 
 fn print_types_for_new_flag(s: &mut Writer, e: &Container, rd: &RustDefiner) {
@@ -285,37 +267,17 @@ fn print_types_for_new_flag(s: &mut Writer, e: &Container, rd: &RustDefiner) {
             }
         });
 
-        s.variable_size(
-            &new_type_name,
-            |s| {
-                for (i, m) in enumerator.members().iter().enumerate() {
-                    if i != 0 {
-                        s.w("+ ");
-                    } else {
-                        s.w("");
-                    }
-
-                    print_size_of_ty_rust_view(s, m, "self.");
+        s.variable_size(&new_type_name, |s| {
+            for (i, m) in enumerator.members().iter().enumerate() {
+                if i != 0 {
+                    s.w("+ ");
+                } else {
+                    s.w("");
                 }
-            },
-            |s| {
-                for (i, m) in enumerator.members().iter().enumerate() {
-                    if i != 0 {
-                        s.w("+ ");
-                    } else {
-                        s.w("");
-                    }
 
-                    s.w_no_indent(format!("{}", m.sizes().maximum()));
-
-                    s.wln_no_indent(format!(
-                        " // {name}: {ty}",
-                        name = m.name(),
-                        ty = m.ty().str()
-                    ));
-                }
-            },
-        );
+                print_size_of_ty_rust_view(s, m, "self.");
+            }
+        });
     }
 }
 
@@ -365,49 +327,35 @@ fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
 }
 
 fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
-    s.variable_size(
-        re.ty_name(),
-        |s| {
-            s.body("match self", |s| {
-                for enumerator in re.enumerators() {
-                    if enumerator.has_members_in_struct() {
-                        s.open_curly(format!("Self::{name}", name = enumerator.name()));
-                        for m in enumerator.members_in_struct() {
-                            s.wln(format!("{},", m.name()));
-                        }
-                        s.closing_curly_with(" => {");
-                        s.inc_indent();
-                    } else {
-                        s.open_curly(format!("Self::{name} =>", name = enumerator.name()));
+    s.variable_size(re.ty_name(), |s| {
+        s.body("match self", |s| {
+            for enumerator in re.enumerators() {
+                if enumerator.has_members_in_struct() {
+                    s.open_curly(format!("Self::{name}", name = enumerator.name()));
+                    for m in enumerator.members_in_struct() {
+                        s.wln(format!("{},", m.name()));
                     }
-
-                    if re.is_elseif() {
-                        s.wln("0 // Not an actual enum sent over the wire");
-                    } else {
-                        s.wln(format!("{}", re.int_ty().size()));
-                    }
-
-                    for m in enumerator.members() {
-                        s.w("+ ");
-
-                        print_size_of_ty_rust_view(s, m, "");
-                    }
-                    s.closing_curly();
+                    s.closing_curly_with(" => {");
+                    s.inc_indent();
+                } else {
+                    s.open_curly(format!("Self::{name} =>", name = enumerator.name()));
                 }
-            });
-        },
-        |s| {
-            let sizes = re.inner().sizes();
-            if sizes.maximum() > u16::MAX.into() {
-                s.wln(format!(
-                    "{} // Capped at u16::MAX due to size field.",
-                    u16::MAX
-                ));
-            } else {
-                s.wln(format!("{}", sizes.maximum()))
+
+                if re.is_elseif() {
+                    s.wln("0 // Not an actual enum sent over the wire");
+                } else {
+                    s.wln(format!("{}", re.int_ty().size()));
+                }
+
+                for m in enumerator.members() {
+                    s.w("+ ");
+
+                    print_size_of_ty_rust_view(s, m, "");
+                }
+                s.closing_curly();
             }
-        },
-    );
+        });
+    });
 }
 
 fn print_enum_as_int(s: &mut Writer, rd: &RustDefiner) {

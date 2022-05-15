@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{SpellLog, SpellLogError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -208,19 +207,13 @@ impl MessageBody for SMSG_SPELLLOGEXECUTE {
 
 }
 
-impl VariableSized for SMSG_SPELLLOGEXECUTE {
-    fn size(&self) -> usize {
+impl SMSG_SPELLLOGEXECUTE {
+    pub fn size(&self) -> usize {
         0
         + self.caster.size() // caster: Guid
         + 4 // spell: u32
         + 4 // amount_of_effects: u32
         + self.logs.iter().fold(0, |acc, x| acc + x.size()) // logs: SpellLog[amount_of_effects]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SPELLLOGEXECUTE {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{FriendStatus, FriendStatusError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -483,19 +482,11 @@ impl Friend {
 
 }
 
-impl VariableSized for Friend {
-    fn size(&self) -> usize {
+impl Friend {
+    pub fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + self.status.size() // status: FriendFriendStatus
-    }
-}
-
-impl MaximumPossibleSized for Friend {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 10 // status: FriendFriendStatus
     }
 }
 
@@ -588,8 +579,8 @@ impl FriendFriendStatus {
 
 }
 
-impl VariableSized for FriendFriendStatus {
-    fn size(&self) -> usize {
+impl FriendFriendStatus {
+    pub fn size(&self) -> usize {
         match self {
             Self::OFFLINE => {
                 1
@@ -635,12 +626,6 @@ impl VariableSized for FriendFriendStatus {
                 + 4 // level: u32
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for FriendFriendStatus {
-    fn maximum_possible_size() -> usize {
-        10
     }
 }
 

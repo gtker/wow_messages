@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -349,10 +348,8 @@ impl AuctionListItem {
 
 }
 
-impl ConstantSized for AuctionListItem {}
-
-impl MaximumPossibleSized for AuctionListItem {
-    fn maximum_possible_size() -> usize {
+impl AuctionListItem {
+    pub(crate) fn size() -> usize {
         0
         + 4 // id: u32
         + 4 // item_entry: u32

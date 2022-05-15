@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -138,17 +137,10 @@ impl MessageBody for CMSG_LEAVE_CHANNEL {
 
 }
 
-impl VariableSized for CMSG_LEAVE_CHANNEL {
-    fn size(&self) -> usize {
+impl CMSG_LEAVE_CHANNEL {
+    pub fn size(&self) -> usize {
         0
         + self.channel_name.len() + 1 // channel_name: CString
-    }
-}
-
-impl MaximumPossibleSized for CMSG_LEAVE_CHANNEL {
-    fn maximum_possible_size() -> usize {
-        0
-        + 256 // channel_name: CString
     }
 }
 

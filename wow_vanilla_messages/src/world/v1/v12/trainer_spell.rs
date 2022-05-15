@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{TrainerSpellState, TrainerSpellStateError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -283,10 +282,8 @@ impl TrainerSpell {
 
 }
 
-impl ConstantSized for TrainerSpell {}
-
-impl MaximumPossibleSized for TrainerSpell {
-    fn maximum_possible_size() -> usize {
+impl TrainerSpell {
+    pub(crate) fn size() -> usize {
         0
         + 4 // spell: u32
         + 1 // state: TrainerSpellState

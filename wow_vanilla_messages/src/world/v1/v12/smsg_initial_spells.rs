@@ -3,7 +3,6 @@ use crate::world::v1::v12::CooldownSpell;
 use crate::world::v1::v12::InitialSpell;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -241,20 +240,14 @@ impl MessageBody for SMSG_INITIAL_SPELLS {
 
 }
 
-impl VariableSized for SMSG_INITIAL_SPELLS {
-    fn size(&self) -> usize {
+impl SMSG_INITIAL_SPELLS {
+    pub fn size(&self) -> usize {
         0
         + 1 // unknown1: u8
         + 2 // spell_count: u16
         + self.initial_spells.iter().fold(0, |acc, x| acc + InitialSpell::size()) // initial_spells: InitialSpell[spell_count]
         + 2 // cooldown_count: u16
         + self.cooldowns.iter().fold(0, |acc, x| acc + CooldownSpell::size()) // cooldowns: CooldownSpell[cooldown_count]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_INITIAL_SPELLS {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

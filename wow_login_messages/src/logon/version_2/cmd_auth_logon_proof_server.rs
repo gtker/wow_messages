@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::{LoginResult, LoginResultError};
 use crate::ServerMessage;
 use crate::ReadableAndWritable;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -318,17 +317,10 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
 
 }
 
-impl VariableSized for CMD_AUTH_LOGON_PROOF_Server {
-    fn size(&self) -> usize {
+impl CMD_AUTH_LOGON_PROOF_Server {
+    pub fn size(&self) -> usize {
         0
         + self.login_result.size() // login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult
-    }
-}
-
-impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_Server {
-    fn maximum_possible_size() -> usize {
-        0
-        + 25 // login_result: CMD_AUTH_LOGON_PROOF_ServerLoginResult
     }
 }
 
@@ -417,8 +409,8 @@ impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
 
 }
 
-impl VariableSized for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
-    fn size(&self) -> usize {
+impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
+    pub fn size(&self) -> usize {
         match self {
             Self::SUCCESS {
                 hardware_survey_id,
@@ -477,16 +469,9 @@ impl VariableSized for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
     }
 }
 
-impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
-    fn maximum_possible_size() -> usize {
-        25
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_LOGON_PROOF_Server;
-    use crate::VariableSized;
     use crate::logon::version_2::LoginResult;
     use super::*;
     use super::super::*;

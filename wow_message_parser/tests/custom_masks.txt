@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::AuraMask;
 use crate::UpdateMask;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -85,19 +84,11 @@ impl CustomMasks {
 
 }
 
-impl VariableSized for CustomMasks {
-    fn size(&self) -> usize {
+impl CustomMasks {
+    pub fn size(&self) -> usize {
         0
         + self.update_mask.size() // update_mask: UpdateMask
         + self.aura_mask.size() // aura_mask: AuraMask
-    }
-}
-
-impl MaximumPossibleSized for CustomMasks {
-    fn maximum_possible_size() -> usize {
-        0
-        + 1446 // update_mask: UpdateMask
-        + 132 // aura_mask: AuraMask
     }
 }
 

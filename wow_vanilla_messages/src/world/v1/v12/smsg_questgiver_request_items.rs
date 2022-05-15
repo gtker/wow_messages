@@ -4,7 +4,6 @@ use crate::world::v1::v12::{QuestCompletable, QuestCompletableError};
 use crate::world::v1::v12::QuestItemRequirement;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -447,8 +446,8 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
 }
 
-impl VariableSized for SMSG_QUESTGIVER_REQUEST_ITEMS {
-    fn size(&self) -> usize {
+impl SMSG_QUESTGIVER_REQUEST_ITEMS {
+    pub fn size(&self) -> usize {
         0
         + 8 // npc: Guid
         + 4 // quest_id: u32
@@ -464,12 +463,6 @@ impl VariableSized for SMSG_QUESTGIVER_REQUEST_ITEMS {
         + 4 // completable: QuestCompletable
         + 4 // flags2: u32
         + 4 // flags3: u32
-    }
-}
-
-impl MaximumPossibleSized for SMSG_QUESTGIVER_REQUEST_ITEMS {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

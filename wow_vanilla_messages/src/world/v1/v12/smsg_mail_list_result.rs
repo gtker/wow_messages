@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Mail, MailError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -163,17 +162,11 @@ impl MessageBody for SMSG_MAIL_LIST_RESULT {
 
 }
 
-impl VariableSized for SMSG_MAIL_LIST_RESULT {
-    fn size(&self) -> usize {
+impl SMSG_MAIL_LIST_RESULT {
+    pub fn size(&self) -> usize {
         0
         + 1 // amount_of_mails: u8
         + self.mails.iter().fold(0, |acc, x| acc + x.size()) // mails: Mail[amount_of_mails]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_MAIL_LIST_RESULT {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

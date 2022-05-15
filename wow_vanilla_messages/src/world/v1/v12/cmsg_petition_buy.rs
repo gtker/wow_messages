@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -513,37 +512,13 @@ impl MessageBody for CMSG_PETITION_BUY {
 
 }
 
-impl VariableSized for CMSG_PETITION_BUY {
-    fn size(&self) -> usize {
+impl CMSG_PETITION_BUY {
+    pub fn size(&self) -> usize {
         0
         + 8 // npc: Guid
         + 4 // skip1: u32
         + 8 // skip2: Guid
         + self.name.len() + 1 // name: CString
-        + 4 // skip3: u32
-        + 4 // skip4: u32
-        + 4 // skip5: u32
-        + 4 // skip6: u32
-        + 4 // skip7: u32
-        + 4 // skip8: u32
-        + 4 // skip9: u32
-        + 4 // skip10: u32
-        + 4 // skip11: u32
-        + 4 // skip12: u32
-        + 2 // skip13: u16
-        + 1 // skip14: u8
-        + 4 // index: u32
-        + 4 // skip15: u32
-    }
-}
-
-impl MaximumPossibleSized for CMSG_PETITION_BUY {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // npc: Guid
-        + 4 // skip1: u32
-        + 8 // skip2: Guid
-        + 256 // name: CString
         + 4 // skip3: u32
         + 4 // skip4: u32
         + 4 // skip5: u32

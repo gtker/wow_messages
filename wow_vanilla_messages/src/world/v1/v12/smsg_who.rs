@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{WhoPlayer, WhoPlayerError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -185,18 +184,12 @@ impl MessageBody for SMSG_WHO {
 
 }
 
-impl VariableSized for SMSG_WHO {
-    fn size(&self) -> usize {
+impl SMSG_WHO {
+    pub fn size(&self) -> usize {
         0
         + 4 // listed_players: u32
         + 4 // online_players: u32
         + self.players.iter().fold(0, |acc, x| acc + x.size()) // players: WhoPlayer[listed_players]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_WHO {
-    fn maximum_possible_size() -> usize {
-        65535 // Capped at u16::MAX due to size field.
     }
 }
 

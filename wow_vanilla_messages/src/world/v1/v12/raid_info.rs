@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -107,10 +106,8 @@ impl RaidInfo {
 
 }
 
-impl ConstantSized for RaidInfo {}
-
-impl MaximumPossibleSized for RaidInfo {
-    fn maximum_possible_size() -> usize {
+impl RaidInfo {
+    pub(crate) fn size() -> usize {
         0
         + 4 // map: Map
         + 4 // reset_time: u32

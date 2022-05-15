@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -153,10 +152,8 @@ impl MessageBody for SMSG_SPELL_DELAYED {
 
 }
 
-impl ConstantSized for SMSG_SPELL_DELAYED {}
-
-impl MaximumPossibleSized for SMSG_SPELL_DELAYED {
-    fn maximum_possible_size() -> usize {
+impl SMSG_SPELL_DELAYED {
+    pub(crate) fn size() -> usize {
         0
         + 8 // guid: Guid
         + 4 // delay_time: u32

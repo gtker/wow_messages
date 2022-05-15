@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -138,17 +137,10 @@ impl MessageBody for SMSG_WHOIS {
 
 }
 
-impl VariableSized for SMSG_WHOIS {
-    fn size(&self) -> usize {
+impl SMSG_WHOIS {
+    pub fn size(&self) -> usize {
         0
         + self.message.len() + 1 // message: CString
-    }
-}
-
-impl MaximumPossibleSized for SMSG_WHOIS {
-    fn maximum_possible_size() -> usize {
-        0
-        + 256 // message: CString
     }
 }
 

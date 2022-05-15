@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -138,17 +137,10 @@ impl MessageBody for SMSG_CHAT_PLAYER_NOT_FOUND {
 
 }
 
-impl VariableSized for SMSG_CHAT_PLAYER_NOT_FOUND {
-    fn size(&self) -> usize {
+impl SMSG_CHAT_PLAYER_NOT_FOUND {
+    pub fn size(&self) -> usize {
         0
         + self.name.len() + 1 // name: CString
-    }
-}
-
-impl MaximumPossibleSized for SMSG_CHAT_PLAYER_NOT_FOUND {
-    fn maximum_possible_size() -> usize {
-        0
-        + 256 // name: CString
     }
 }
 

@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -175,10 +174,8 @@ impl MessageBody for CMSG_PET_ACTION {
 
 }
 
-impl ConstantSized for CMSG_PET_ACTION {}
-
-impl MaximumPossibleSized for CMSG_PET_ACTION {
-    fn maximum_possible_size() -> usize {
+impl CMSG_PET_ACTION {
+    pub(crate) fn size() -> usize {
         0
         + 8 // pet_guid: Guid
         + 4 // data: u32

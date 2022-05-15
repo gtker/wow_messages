@@ -4,7 +4,6 @@ use crate::world::v1::v12::{Gender, GenderError};
 use crate::world::v1::v12::{Race, RaceError};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -339,26 +338,10 @@ impl MessageBody for CMSG_CHAR_CREATE {
 
 }
 
-impl VariableSized for CMSG_CHAR_CREATE {
-    fn size(&self) -> usize {
+impl CMSG_CHAR_CREATE {
+    pub fn size(&self) -> usize {
         0
         + self.name.len() + 1 // name: CString
-        + 1 // race: Race
-        + 1 // class: Class
-        + 1 // gender: Gender
-        + 1 // skin: u8
-        + 1 // face: u8
-        + 1 // hairstyle: u8
-        + 1 // haircolor: u8
-        + 1 // facialhair: u8
-        + 1 // outfit_id: u8
-    }
-}
-
-impl MaximumPossibleSized for CMSG_CHAR_CREATE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 256 // name: CString
         + 1 // race: Race
         + 1 // class: Class
         + 1 // gender: Gender

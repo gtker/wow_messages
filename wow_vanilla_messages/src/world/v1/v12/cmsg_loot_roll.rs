@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{RollVote, RollVoteError};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -176,10 +175,8 @@ impl MessageBody for CMSG_LOOT_ROLL {
 
 }
 
-impl ConstantSized for CMSG_LOOT_ROLL {}
-
-impl MaximumPossibleSized for CMSG_LOOT_ROLL {
-    fn maximum_possible_size() -> usize {
+impl CMSG_LOOT_ROLL {
+    pub(crate) fn size() -> usize {
         0
         + 8 // item_guid: Guid
         + 4 // item_slot: u32

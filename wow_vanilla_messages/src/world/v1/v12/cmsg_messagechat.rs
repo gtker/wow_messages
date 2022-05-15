@@ -3,7 +3,6 @@ use crate::world::v1::v12::{ChatType, ChatTypeError};
 use crate::world::v1::v12::{Language, LanguageError};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -1167,18 +1166,10 @@ impl MessageBody for CMSG_MESSAGECHAT {
 
 }
 
-impl VariableSized for CMSG_MESSAGECHAT {
-    fn size(&self) -> usize {
+impl CMSG_MESSAGECHAT {
+    pub fn size(&self) -> usize {
         0
         + self.chat_type.size() // chat_type: CMSG_MESSAGECHATChatType
-        + 4 // language: Language
-    }
-}
-
-impl MaximumPossibleSized for CMSG_MESSAGECHAT {
-    fn maximum_possible_size() -> usize {
-        0
-        + 513 // chat_type: CMSG_MESSAGECHATChatType
         + 4 // language: Language
     }
 }
@@ -1350,8 +1341,8 @@ impl CMSG_MESSAGECHATChatType {
 
 }
 
-impl VariableSized for CMSG_MESSAGECHATChatType {
-    fn size(&self) -> usize {
+impl CMSG_MESSAGECHATChatType {
+    pub fn size(&self) -> usize {
         match self {
             Self::SAY {
                 message,
@@ -1508,12 +1499,6 @@ impl VariableSized for CMSG_MESSAGECHATChatType {
                 + message.len() + 1 // message: CString
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for CMSG_MESSAGECHATChatType {
-    fn maximum_possible_size() -> usize {
-        513
     }
 }
 

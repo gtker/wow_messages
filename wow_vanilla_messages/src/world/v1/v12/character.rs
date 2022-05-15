@@ -7,7 +7,6 @@ use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{Gender, GenderError};
 use crate::world::v1::v12::{Map, MapError};
 use crate::world::v1::v12::{Race, RaceError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -620,8 +619,8 @@ impl Character {
 
 }
 
-impl VariableSized for Character {
-    fn size(&self) -> usize {
+impl Character {
+    pub fn size(&self) -> usize {
         0
         + 8 // guid: Guid
         + self.name.len() + 1 // name: CString
@@ -646,37 +645,6 @@ impl VariableSized for Character {
         + 4 // pet_level: u32
         + 4 // pet_familiy: u32
         + 19 * CharacterGear::size() // equipment: CharacterGear[19]
-        + 4 // first_bag_display_id: u32
-        + 1 // first_bag_inventory_id: u8
-    }
-}
-
-impl MaximumPossibleSized for Character {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 256 // name: CString
-        + 1 // race: Race
-        + 1 // class: Class
-        + 1 // gender: Gender
-        + 1 // skin: u8
-        + 1 // face: u8
-        + 1 // hairstyle: u8
-        + 1 // haircolor: u8
-        + 1 // facialhair: u8
-        + 1 // level: u8
-        + 4 // area: Area
-        + 4 // map: Map
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
-        + 4 // guild_id: u32
-        + 4 // flags: CharacterFlags
-        + 1 // first_login: u8
-        + 4 // pet_display_id: u32
-        + 4 // pet_level: u32
-        + 4 // pet_familiy: u32
-        + 95 // equipment: CharacterGear[19]
         + 4 // first_bag_display_id: u32
         + 1 // first_bag_inventory_id: u8
     }

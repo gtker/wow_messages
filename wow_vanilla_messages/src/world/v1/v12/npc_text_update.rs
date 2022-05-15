@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Language, LanguageError};
 use crate::world::v1::v12::NpcTextUpdateEmote;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -168,23 +167,13 @@ impl NpcTextUpdate {
 
 }
 
-impl VariableSized for NpcTextUpdate {
-    fn size(&self) -> usize {
+impl NpcTextUpdate {
+    pub fn size(&self) -> usize {
         0
         + 4 // probability: f32
         + self.texts.iter().fold(0, |acc, x| acc + x.len() + 1) // texts: CString[2]
         + 4 // language: Language
         + 3 * NpcTextUpdateEmote::size() // emotes: NpcTextUpdateEmote[3]
-    }
-}
-
-impl MaximumPossibleSized for NpcTextUpdate {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // probability: f32
-        + 512 // texts: CString[2]
-        + 4 // language: Language
-        + 24 // emotes: NpcTextUpdateEmote[3]
     }
 }
 

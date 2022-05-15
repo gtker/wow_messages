@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -196,22 +195,12 @@ impl MessageBody for SMSG_ATTACKERSTATEUPDATE {
 
 }
 
-impl VariableSized for SMSG_ATTACKERSTATEUPDATE {
-    fn size(&self) -> usize {
+impl SMSG_ATTACKERSTATEUPDATE {
+    pub fn size(&self) -> usize {
         0
         + 4 // hit_info: u32
         + self.attacker.size() // attacker: Guid
         + self.target.size() // target: Guid
-        + 4 // total_damage: u32
-    }
-}
-
-impl MaximumPossibleSized for SMSG_ATTACKERSTATEUPDATE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // hit_info: u32
-        + 9 // attacker: Guid
-        + 9 // target: Guid
         + 4 // total_damage: u32
     }
 }

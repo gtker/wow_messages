@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -130,10 +129,8 @@ impl MessageBody for SMSG_PONG {
 
 }
 
-impl ConstantSized for SMSG_PONG {}
-
-impl MaximumPossibleSized for SMSG_PONG {
-    fn maximum_possible_size() -> usize {
+impl SMSG_PONG {
+    pub(crate) fn size() -> usize {
         0
         + 4 // sequence_id: u32
     }
@@ -142,7 +139,6 @@ impl MaximumPossibleSized for SMSG_PONG {
 #[cfg(test)]
 mod test {
     use super::SMSG_PONG;
-    use crate::ConstantSized;
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;

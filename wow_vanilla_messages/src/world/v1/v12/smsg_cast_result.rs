@@ -4,7 +4,6 @@ use crate::world::v1::v12::{CastFailureReason, CastFailureReasonError};
 use crate::world::v1::v12::{SimpleSpellCastResult, SimpleSpellCastResultError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -1282,19 +1281,11 @@ impl MessageBody for SMSG_CAST_RESULT {
 
 }
 
-impl VariableSized for SMSG_CAST_RESULT {
-    fn size(&self) -> usize {
+impl SMSG_CAST_RESULT {
+    pub fn size(&self) -> usize {
         0
         + 4 // spell: u32
         + self.result.size() // result: SMSG_CAST_RESULTSimpleSpellCastResult
-    }
-}
-
-impl MaximumPossibleSized for SMSG_CAST_RESULT {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // spell: u32
-        + 14 // result: SMSG_CAST_RESULTSimpleSpellCastResult
     }
 }
 
@@ -1661,8 +1652,8 @@ impl SMSG_CAST_RESULTCastFailureReason {
 
 }
 
-impl VariableSized for SMSG_CAST_RESULTCastFailureReason {
-    fn size(&self) -> usize {
+impl SMSG_CAST_RESULTCastFailureReason {
+    pub fn size(&self) -> usize {
         match self {
             Self::AFFECTING_COMBAT => {
                 1
@@ -2119,12 +2110,6 @@ impl VariableSized for SMSG_CAST_RESULTCastFailureReason {
     }
 }
 
-impl MaximumPossibleSized for SMSG_CAST_RESULTCastFailureReason {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub enum SMSG_CAST_RESULTSimpleSpellCastResult {
     SUCCESS {
@@ -2152,8 +2137,8 @@ impl SMSG_CAST_RESULTSimpleSpellCastResult {
 
 }
 
-impl VariableSized for SMSG_CAST_RESULTSimpleSpellCastResult {
-    fn size(&self) -> usize {
+impl SMSG_CAST_RESULTSimpleSpellCastResult {
+    pub fn size(&self) -> usize {
         match self {
             Self::SUCCESS {
                 reason,
@@ -2165,12 +2150,6 @@ impl VariableSized for SMSG_CAST_RESULTSimpleSpellCastResult {
                 1
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_CAST_RESULTSimpleSpellCastResult {
-    fn maximum_possible_size() -> usize {
-        14
     }
 }
 

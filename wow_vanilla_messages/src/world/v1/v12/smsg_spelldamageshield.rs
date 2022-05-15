@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{SpellSchool, SpellSchoolError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -198,10 +197,8 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
 
 }
 
-impl ConstantSized for SMSG_SPELLDAMAGESHIELD {}
-
-impl MaximumPossibleSized for SMSG_SPELLDAMAGESHIELD {
-    fn maximum_possible_size() -> usize {
+impl SMSG_SPELLDAMAGESHIELD {
+    pub(crate) fn size() -> usize {
         0
         + 8 // victim_guid: Guid
         + 8 // caster_guid: Guid

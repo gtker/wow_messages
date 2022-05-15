@@ -3,7 +3,6 @@ use crate::world::v1::v12::QuestItemReward;
 use crate::world::v1::v12::QuestObjective;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -811,8 +810,8 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
 
 }
 
-impl VariableSized for SMSG_QUEST_QUERY_RESPONSE {
-    fn size(&self) -> usize {
+impl SMSG_QUEST_QUERY_RESPONSE {
+    pub fn size(&self) -> usize {
         0
         + 4 // quest_id: u32
         + 4 // quest_method: u32
@@ -841,39 +840,6 @@ impl VariableSized for SMSG_QUEST_QUERY_RESPONSE {
         + self.end_text.len() + 1 // end_text: CString
         + 4 * QuestObjective::size() // objectives: QuestObjective[4]
         + self.objective_texts.iter().fold(0, |acc, x| acc + x.len() + 1) // objective_texts: CString[4]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_QUEST_QUERY_RESPONSE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // quest_id: u32
-        + 4 // quest_method: u32
-        + 4 // quest_level: u32
-        + 4 // zone_or_sort: u32
-        + 4 // quest_type: u32
-        + 4 // reputation_objective_faction: u32
-        + 4 // reputation_objective_value: u32
-        + 4 // required_opposite_faction: u32
-        + 4 // required_opposite_reputation_value: u32
-        + 4 // next_quest_in_chain: u32
-        + 4 // money_reward: u32
-        + 4 // max_level_money_reward: u32
-        + 4 // reward_spell: u32
-        + 4 // source_item_id: u32
-        + 4 // quest_flags: u32
-        + 32 // rewards: QuestItemReward[4]
-        + 48 // choice_rewards: QuestItemReward[6]
-        + 4 // point_map_id: u32
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // point_opt: u32
-        + 256 // title: CString
-        + 256 // objective_text: CString
-        + 256 // details: CString
-        + 256 // end_text: CString
-        + 64 // objectives: QuestObjective[4]
-        + 1024 // objective_texts: CString[4]
     }
 }
 

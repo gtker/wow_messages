@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -274,8 +273,8 @@ impl PackedGuidAndGuid {
 
 }
 
-impl VariableSized for PackedGuidAndGuid {
-    fn size(&self) -> usize {
+impl PackedGuidAndGuid {
+    pub fn size(&self) -> usize {
         0
         + self.packed.size() // packed: Guid
         + 8 // guid: Guid
@@ -285,20 +284,6 @@ impl VariableSized for PackedGuidAndGuid {
         + 1 // basic2: u8
         + self.variable_packed.iter().fold(0, |acc, x| acc + x.size()) // variable_packed: PackedGuid[basic1]
         + self.variable_guid.iter().fold(0, |acc, _| acc + 8) // variable_guid: Guid[basic2]
-    }
-}
-
-impl MaximumPossibleSized for PackedGuidAndGuid {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // packed: Guid
-        + 8 // guid: Guid
-        + 90 // static_packed: PackedGuid[10]
-        + 80 // static_guid: Guid[10]
-        + 1 // basic1: u8
-        + 1 // basic2: u8
-        + 2304 // variable_packed: PackedGuid[basic1]
-        + 2048 // variable_guid: Guid[basic2]
     }
 }
 

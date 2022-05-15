@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::MovementInfo;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -130,17 +129,10 @@ impl MessageBody for CMSG_MOVE_FALL_RESET {
 
 }
 
-impl VariableSized for CMSG_MOVE_FALL_RESET {
-    fn size(&self) -> usize {
+impl CMSG_MOVE_FALL_RESET {
+    pub fn size(&self) -> usize {
         0
         + self.info.size() // info: MovementInfo
-    }
-}
-
-impl MaximumPossibleSized for CMSG_MOVE_FALL_RESET {
-    fn maximum_possible_size() -> usize {
-        0
-        + 81 // info: MovementInfo
     }
 }
 

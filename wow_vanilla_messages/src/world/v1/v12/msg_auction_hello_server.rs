@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -153,10 +152,8 @@ impl MessageBody for MSG_AUCTION_HELLO_Server {
 
 }
 
-impl ConstantSized for MSG_AUCTION_HELLO_Server {}
-
-impl MaximumPossibleSized for MSG_AUCTION_HELLO_Server {
-    fn maximum_possible_size() -> usize {
+impl MSG_AUCTION_HELLO_Server {
+    pub(crate) fn size() -> usize {
         0
         + 8 // auctioneer: Guid
         + 4 // auction_house_id: u32
@@ -166,7 +163,6 @@ impl MaximumPossibleSized for MSG_AUCTION_HELLO_Server {
 #[cfg(test)]
 mod test {
     use super::MSG_AUCTION_HELLO_Server;
-    use crate::ConstantSized;
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;

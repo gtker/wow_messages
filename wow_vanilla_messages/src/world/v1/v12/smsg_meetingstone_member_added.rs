@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -131,10 +130,8 @@ impl MessageBody for SMSG_MEETINGSTONE_MEMBER_ADDED {
 
 }
 
-impl ConstantSized for SMSG_MEETINGSTONE_MEMBER_ADDED {}
-
-impl MaximumPossibleSized for SMSG_MEETINGSTONE_MEMBER_ADDED {
-    fn maximum_possible_size() -> usize {
+impl SMSG_MEETINGSTONE_MEMBER_ADDED {
+    pub(crate) fn size() -> usize {
         0
         + 8 // guid: Guid
     }

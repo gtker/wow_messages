@@ -5,7 +5,6 @@ use crate::world::v1::v12::{Language, LanguageError};
 use crate::world::v1::v12::{PlayerChatTag, PlayerChatTagError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -2285,24 +2284,13 @@ impl MessageBody for SMSG_MESSAGECHAT {
 
 }
 
-impl VariableSized for SMSG_MESSAGECHAT {
-    fn size(&self) -> usize {
+impl SMSG_MESSAGECHAT {
+    pub fn size(&self) -> usize {
         0
         + self.chat_type.size() // chat_type: SMSG_MESSAGECHATChatType
         + 4 // language: Language
         + 4 // message_length: u32
         + self.message.len() + 1 // message: CString
-        + 1 // tag: PlayerChatTag
-    }
-}
-
-impl MaximumPossibleSized for SMSG_MESSAGECHAT {
-    fn maximum_possible_size() -> usize {
-        0
-        + 277 // chat_type: SMSG_MESSAGECHATChatType
-        + 4 // language: Language
-        + 4 // message_length: u32
-        + 256 // message: CString
         + 1 // tag: PlayerChatTag
     }
 }
@@ -2538,8 +2526,8 @@ impl SMSG_MESSAGECHATChatType {
 
 }
 
-impl VariableSized for SMSG_MESSAGECHATChatType {
-    fn size(&self) -> usize {
+impl SMSG_MESSAGECHATChatType {
+    pub fn size(&self) -> usize {
         match self {
             Self::SAY {
                 sender_guid1,
@@ -2786,12 +2774,6 @@ impl VariableSized for SMSG_MESSAGECHATChatType {
                 + 8 // sender_guid4: Guid
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for SMSG_MESSAGECHATChatType {
-    fn maximum_possible_size() -> usize {
-        277
     }
 }
 

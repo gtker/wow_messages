@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -180,25 +179,13 @@ impl StabledPet {
 
 }
 
-impl VariableSized for StabledPet {
-    fn size(&self) -> usize {
+impl StabledPet {
+    pub fn size(&self) -> usize {
         0
         + 4 // pet_number: u32
         + 4 // entry: u32
         + 4 // level: u32
         + self.name.len() + 1 // name: CString
-        + 4 // loyalty: u32
-        + 1 // slot: u8
-    }
-}
-
-impl MaximumPossibleSized for StabledPet {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // pet_number: u32
-        + 4 // entry: u32
-        + 4 // level: u32
-        + 256 // name: CString
         + 4 // loyalty: u32
         + 1 // slot: u8
     }

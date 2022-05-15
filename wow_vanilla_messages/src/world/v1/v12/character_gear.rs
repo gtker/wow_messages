@@ -1,6 +1,5 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{InventoryType, InventoryTypeError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -85,10 +84,8 @@ impl CharacterGear {
 
 }
 
-impl ConstantSized for CharacterGear {}
-
-impl MaximumPossibleSized for CharacterGear {
-    fn maximum_possible_size() -> usize {
+impl CharacterGear {
+    pub(crate) fn size() -> usize {
         0
         + 4 // equipment_display_id: u32
         + 1 // inventory_type: InventoryType

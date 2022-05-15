@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -84,10 +83,8 @@ impl QuestDetailsEmote {
 
 }
 
-impl ConstantSized for QuestDetailsEmote {}
-
-impl MaximumPossibleSized for QuestDetailsEmote {
-    fn maximum_possible_size() -> usize {
+impl QuestDetailsEmote {
+    pub(crate) fn size() -> usize {
         0
         + 4 // emote: u32
         + 4 // emote_delay_in_msecs: u32

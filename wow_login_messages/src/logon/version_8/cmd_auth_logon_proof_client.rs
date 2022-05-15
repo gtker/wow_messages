@@ -3,7 +3,6 @@ use crate::logon::version_8::{SecurityFlag};
 use crate::logon::version_2::TelemetryKey;
 use crate::ClientMessage;
 use crate::ReadableAndWritable;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -587,8 +586,8 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
 
 }
 
-impl VariableSized for CMD_AUTH_LOGON_PROOF_Client {
-    fn size(&self) -> usize {
+impl CMD_AUTH_LOGON_PROOF_Client {
+    pub fn size(&self) -> usize {
         0
         + 32 * core::mem::size_of::<u8>() // client_public_key: u8[32]
         + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
@@ -596,18 +595,6 @@ impl VariableSized for CMD_AUTH_LOGON_PROOF_Client {
         + 1 // number_of_telemetry_keys: u8
         + self.telemetry_keys.iter().fold(0, |acc, x| acc + TelemetryKey::size()) // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
         + self.security_flag.size() // security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag
-    }
-}
-
-impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_Client {
-    fn maximum_possible_size() -> usize {
-        0
-        + 32 // client_public_key: u8[32]
-        + 20 // client_proof: u8[20]
-        + 20 // crc_hash: u8[20]
-        + 1 // number_of_telemetry_keys: u8
-        + 7680 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-        + 50 // security_flag: CMD_AUTH_LOGON_PROOF_ClientSecurityFlag
     }
 }
 
@@ -741,8 +728,8 @@ impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     }
 
 }
-impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
-    fn size(&self) -> usize {
+impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
+    pub fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.pin {
@@ -768,32 +755,16 @@ impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
     }
 }
 
-impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
-    fn maximum_possible_size() -> usize {
-        1 // inner
-        + CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN::maximum_possible_size() // PIN enumerator
-        + CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0::maximum_possible_size() // UNKNOWN0 enumerator
-        + CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR::maximum_possible_size() // AUTHENTICATOR enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
     pub pin_hash: [u8; 20],
     pub pin_salt: [u8; 16],
 }
 
-impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-    fn size(&self) -> usize {
+impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
+    pub fn size(&self) -> usize {
         20 * core::mem::size_of::<u8>() // pin_hash: u8[20]
         + 16 * core::mem::size_of::<u8>() // pin_salt: u8[16]
-    }
-}
-
-impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlagPIN {
-    fn maximum_possible_size() -> usize {
-        20 // pin_hash: u8[20]
-        + 16 // pin_salt: u8[16]
     }
 }
 
@@ -806,18 +777,8 @@ pub struct CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
     pub unknown4: u64,
 }
 
-impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
-    fn size(&self) -> usize {
-        1 // unknown0: u8
-        + 1 // unknown1: u8
-        + 1 // unknown2: u8
-        + 1 // unknown3: u8
-        + 8 // unknown4: u64
-    }
-}
-
-impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
-    fn maximum_possible_size() -> usize {
+impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagUNKNOWN0 {
+    pub fn size(&self) -> usize {
         1 // unknown0: u8
         + 1 // unknown1: u8
         + 1 // unknown2: u8
@@ -831,14 +792,8 @@ pub struct CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
     pub unknown5: u8,
 }
 
-impl VariableSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
-    fn size(&self) -> usize {
-        1 // unknown5: u8
-    }
-}
-
-impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
-    fn maximum_possible_size() -> usize {
+impl CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICATOR {
+    pub fn size(&self) -> usize {
         1 // unknown5: u8
     }
 }
@@ -846,7 +801,6 @@ impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlagAUTHENTICAT
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_LOGON_PROOF_Client;
-    use crate::VariableSized;
     use crate::logon::version_8::SecurityFlag;
     use crate::logon::version_2::TelemetryKey;
     use super::*;

@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{NestedEnum, NestedEnumError};
 use crate::world::v1::v12::{SimpleEnum, SimpleEnumError};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -160,19 +159,11 @@ impl EnumIfElseIfNested {
 
 }
 
-impl VariableSized for EnumIfElseIfNested {
-    fn size(&self) -> usize {
+impl EnumIfElseIfNested {
+    pub fn size(&self) -> usize {
         0
         + self.e.size() // e: EnumIfElseIfNestedSimpleEnum
         + self.n.size() // n: EnumIfElseIfNestedNestedEnum
-    }
-}
-
-impl MaximumPossibleSized for EnumIfElseIfNested {
-    fn maximum_possible_size() -> usize {
-        0
-        + 2 // e: EnumIfElseIfNestedSimpleEnum
-        + 1 // n: EnumIfElseIfNestedNestedEnum
     }
 }
 
@@ -241,8 +232,8 @@ impl EnumIfElseIfNestedSimpleEnum {
 
 }
 
-impl VariableSized for EnumIfElseIfNestedSimpleEnum {
-    fn size(&self) -> usize {
+impl EnumIfElseIfNestedSimpleEnum {
+    pub fn size(&self) -> usize {
         match self {
             Self::ZERO {
                 zero,
@@ -257,12 +248,6 @@ impl VariableSized for EnumIfElseIfNestedSimpleEnum {
                 1
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for EnumIfElseIfNestedSimpleEnum {
-    fn maximum_possible_size() -> usize {
-        2
     }
 }
 
@@ -293,8 +278,8 @@ impl EnumIfElseIfNestedNestedEnum {
 
 }
 
-impl VariableSized for EnumIfElseIfNestedNestedEnum {
-    fn size(&self) -> usize {
+impl EnumIfElseIfNestedNestedEnum {
+    pub fn size(&self) -> usize {
         match self {
             Self::NESTED {
                 nested,
@@ -306,12 +291,6 @@ impl VariableSized for EnumIfElseIfNestedNestedEnum {
                 1
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for EnumIfElseIfNestedNestedEnum {
-    fn maximum_possible_size() -> usize {
-        1
     }
 }
 

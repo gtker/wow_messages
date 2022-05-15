@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -152,10 +151,8 @@ impl MessageBody for SMSG_SUPERCEDED_SPELL {
 
 }
 
-impl ConstantSized for SMSG_SUPERCEDED_SPELL {}
-
-impl MaximumPossibleSized for SMSG_SUPERCEDED_SPELL {
-    fn maximum_possible_size() -> usize {
+impl SMSG_SUPERCEDED_SPELL {
+    pub(crate) fn size() -> usize {
         0
         + 2 // new_spell_id: u16
         + 2 // old_spell_id: u16

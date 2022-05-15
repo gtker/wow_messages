@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -169,19 +168,11 @@ impl MessageBody for CMSG_GUILD_SET_OFFICER_NOTE {
 
 }
 
-impl VariableSized for CMSG_GUILD_SET_OFFICER_NOTE {
-    fn size(&self) -> usize {
+impl CMSG_GUILD_SET_OFFICER_NOTE {
+    pub fn size(&self) -> usize {
         0
         + self.player_name.len() + 1 // player_name: CString
         + self.note.len() + 1 // note: CString
-    }
-}
-
-impl MaximumPossibleSized for CMSG_GUILD_SET_OFFICER_NOTE {
-    fn maximum_possible_size() -> usize {
-        0
-        + 256 // player_name: CString
-        + 256 // note: CString
     }
 }
 

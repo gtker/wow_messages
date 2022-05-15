@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -153,10 +152,8 @@ impl MessageBody for CMSG_PET_NAME_QUERY {
 
 }
 
-impl ConstantSized for CMSG_PET_NAME_QUERY {}
-
-impl MaximumPossibleSized for CMSG_PET_NAME_QUERY {
-    fn maximum_possible_size() -> usize {
+impl CMSG_PET_NAME_QUERY {
+    pub(crate) fn size() -> usize {
         0
         + 4 // pet_number: u32
         + 8 // guid: Guid
@@ -166,7 +163,6 @@ impl MaximumPossibleSized for CMSG_PET_NAME_QUERY {
 #[cfg(test)]
 mod test {
     use super::CMSG_PET_NAME_QUERY;
-    use crate::ConstantSized;
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ClientOpcodeMessage;

@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -199,8 +198,8 @@ impl MessageBody for MSG_RAID_READY_CHECK_Server {
 
 }
 
-impl VariableSized for MSG_RAID_READY_CHECK_Server {
-    fn size(&self) -> usize {
+impl MSG_RAID_READY_CHECK_Server {
+    pub fn size(&self) -> usize {
         0
         + if let Some(state_check) = &self.state_check {
             0
@@ -209,12 +208,6 @@ impl VariableSized for MSG_RAID_READY_CHECK_Server {
         } else {
             0
         }
-    }
-}
-
-impl MaximumPossibleSized for MSG_RAID_READY_CHECK_Server {
-    fn maximum_possible_size() -> usize {
-        0
     }
 }
 

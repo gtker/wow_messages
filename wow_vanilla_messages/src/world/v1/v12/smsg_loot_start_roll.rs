@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -241,10 +240,8 @@ impl MessageBody for SMSG_LOOT_START_ROLL {
 
 }
 
-impl ConstantSized for SMSG_LOOT_START_ROLL {}
-
-impl MaximumPossibleSized for SMSG_LOOT_START_ROLL {
-    fn maximum_possible_size() -> usize {
+impl SMSG_LOOT_START_ROLL {
+    pub(crate) fn size() -> usize {
         0
         + 8 // creature_guid: Guid
         + 4 // loot_slot: u32

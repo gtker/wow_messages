@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v2::{WorldResult, WorldResultError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -131,10 +130,8 @@ impl MessageBody for SMSG_CHAR_DELETE {
 
 }
 
-impl ConstantSized for SMSG_CHAR_DELETE {}
-
-impl MaximumPossibleSized for SMSG_CHAR_DELETE {
-    fn maximum_possible_size() -> usize {
+impl SMSG_CHAR_DELETE {
+    pub(crate) fn size() -> usize {
         0
         + 4 // result: WorldResult
     }

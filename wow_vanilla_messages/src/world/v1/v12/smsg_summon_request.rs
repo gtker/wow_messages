@@ -2,7 +2,6 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -175,10 +174,8 @@ impl MessageBody for SMSG_SUMMON_REQUEST {
 
 }
 
-impl ConstantSized for SMSG_SUMMON_REQUEST {}
-
-impl MaximumPossibleSized for SMSG_SUMMON_REQUEST {
-    fn maximum_possible_size() -> usize {
+impl SMSG_SUMMON_REQUEST {
+    pub(crate) fn size() -> usize {
         0
         + 8 // summoner_guid: Guid
         + 4 // zone_id: u32

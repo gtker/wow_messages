@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{QuestPartyMessage, QuestPartyMessageError};
 use crate::{ClientMessageWrite, ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -156,10 +155,8 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
 
 }
 
-impl ConstantSized for MSG_QUEST_PUSH_RESULT {}
-
-impl MaximumPossibleSized for MSG_QUEST_PUSH_RESULT {
-    fn maximum_possible_size() -> usize {
+impl MSG_QUEST_PUSH_RESULT {
+    pub(crate) fn size() -> usize {
         0
         + 8 // guid: Guid
         + 1 // message: QuestPartyMessage

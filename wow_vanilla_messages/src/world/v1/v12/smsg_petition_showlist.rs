@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::PetitionShowlist;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -186,21 +185,12 @@ impl MessageBody for SMSG_PETITION_SHOWLIST {
 
 }
 
-impl VariableSized for SMSG_PETITION_SHOWLIST {
-    fn size(&self) -> usize {
+impl SMSG_PETITION_SHOWLIST {
+    pub fn size(&self) -> usize {
         0
         + 8 // npc: Guid
         + 1 // amount_of_petitions: u8
         + self.petitions.iter().fold(0, |acc, x| acc + PetitionShowlist::size()) // petitions: PetitionShowlist[amount_of_petitions]
-    }
-}
-
-impl MaximumPossibleSized for SMSG_PETITION_SHOWLIST {
-    fn maximum_possible_size() -> usize {
-        0
-        + 8 // npc: Guid
-        + 1 // amount_of_petitions: u8
-        + 6144 // petitions: PetitionShowlist[amount_of_petitions]
     }
 }
 

@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{SpellSchool, SpellSchoolError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -373,29 +372,11 @@ impl MessageBody for SMSG_SPELLNONMELEEDAMAGELOG {
 
 }
 
-impl VariableSized for SMSG_SPELLNONMELEEDAMAGELOG {
-    fn size(&self) -> usize {
+impl SMSG_SPELLNONMELEEDAMAGELOG {
+    pub fn size(&self) -> usize {
         0
         + self.target.size() // target: Guid
         + self.attacker.size() // attacker: Guid
-        + 4 // spell: u32
-        + 4 // damage: u32
-        + 1 // school: SpellSchool
-        + 4 // absorbed_damage: u32
-        + 4 // resisted: u32
-        + 1 // periodic_log: u8
-        + 1 // unused: u8
-        + 4 // blocked: u32
-        + 4 // hit_info: u32
-        + 1 // extend_flag: u8
-    }
-}
-
-impl MaximumPossibleSized for SMSG_SPELLNONMELEEDAMAGELOG {
-    fn maximum_possible_size() -> usize {
-        0
-        + 9 // target: Guid
-        + 9 // attacker: Guid
         + 4 // spell: u32
         + 4 // damage: u32
         + 1 // school: SpellSchool

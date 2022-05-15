@@ -3,7 +3,6 @@ use crate::Guid;
 use crate::world::v1::v12::{SpellCastResult, SpellCastResultError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -176,10 +175,8 @@ impl MessageBody for SMSG_SPELL_FAILURE {
 
 }
 
-impl ConstantSized for SMSG_SPELL_FAILURE {}
-
-impl MaximumPossibleSized for SMSG_SPELL_FAILURE {
-    fn maximum_possible_size() -> usize {
+impl SMSG_SPELL_FAILURE {
+    pub(crate) fn size() -> usize {
         0
         + 8 // guid: Guid
         + 4 // id: u32

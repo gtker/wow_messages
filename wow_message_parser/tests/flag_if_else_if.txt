@@ -1,7 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{SimpleFlag};
 use crate::world::v1::v12::{UpdateFlag};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -366,17 +365,10 @@ impl FlagIfElseIf {
 
 }
 
-impl VariableSized for FlagIfElseIf {
-    fn size(&self) -> usize {
+impl FlagIfElseIf {
+    pub fn size(&self) -> usize {
         0
         + self.flags.size() // flags: FlagIfElseIfUpdateFlag
-    }
-}
-
-impl MaximumPossibleSized for FlagIfElseIf {
-    fn maximum_possible_size() -> usize {
-        0
-        + 4 // flags: FlagIfElseIfUpdateFlag
     }
 }
 
@@ -471,8 +463,8 @@ impl FlagIfElseIfSimpleFlag {
     }
 
 }
-impl VariableSized for FlagIfElseIfSimpleFlag {
-    fn size(&self) -> usize {
+impl FlagIfElseIfSimpleFlag {
+    pub fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.one {
@@ -484,26 +476,13 @@ impl VariableSized for FlagIfElseIfSimpleFlag {
     }
 }
 
-impl MaximumPossibleSized for FlagIfElseIfSimpleFlag {
-    fn maximum_possible_size() -> usize {
-        1 // inner
-        + FlagIfElseIfSimpleFlagONE::maximum_possible_size() // ONE enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct FlagIfElseIfSimpleFlagONE {
     pub if_one: u8,
 }
 
-impl VariableSized for FlagIfElseIfSimpleFlagONE {
-    fn size(&self) -> usize {
-        1 // if_one: u8
-    }
-}
-
-impl MaximumPossibleSized for FlagIfElseIfSimpleFlagONE {
-    fn maximum_possible_size() -> usize {
+impl FlagIfElseIfSimpleFlagONE {
+    pub fn size(&self) -> usize {
         1 // if_one: u8
     }
 }
@@ -532,8 +511,8 @@ impl FlagIfElseIfUpdateFlagONE_IF {
 
 }
 
-impl VariableSized for FlagIfElseIfUpdateFlagONE_IF {
-    fn size(&self) -> usize {
+impl FlagIfElseIfUpdateFlagONE_IF {
+    pub fn size(&self) -> usize {
         match self {
             Self::ONE_IF {
                 b_if,
@@ -554,12 +533,6 @@ impl VariableSized for FlagIfElseIfUpdateFlagONE_IF {
                 + 1 // elseif2: u8
             }
         }
-    }
-}
-
-impl MaximumPossibleSized for FlagIfElseIfUpdateFlagONE_IF {
-    fn maximum_possible_size() -> usize {
-        0
     }
 }
 
@@ -661,8 +634,8 @@ impl FlagIfElseIfUpdateFlag {
     }
 
 }
-impl VariableSized for FlagIfElseIfUpdateFlag {
-    fn size(&self) -> usize {
+impl FlagIfElseIfUpdateFlag {
+    pub fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.one_if {
@@ -681,27 +654,13 @@ impl VariableSized for FlagIfElseIfUpdateFlag {
     }
 }
 
-impl MaximumPossibleSized for FlagIfElseIfUpdateFlag {
-    fn maximum_possible_size() -> usize {
-        1 // inner
-        + FlagIfElseIfUpdateFlagONE_IF::maximum_possible_size() // ONE_IF enumerator
-        + FlagIfElseIfUpdateFlagEIGHT_IF::maximum_possible_size() // EIGHT_IF enumerator
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct FlagIfElseIfUpdateFlagEIGHT_IF {
     pub last_if: u8,
 }
 
-impl VariableSized for FlagIfElseIfUpdateFlagEIGHT_IF {
-    fn size(&self) -> usize {
-        1 // last_if: u8
-    }
-}
-
-impl MaximumPossibleSized for FlagIfElseIfUpdateFlagEIGHT_IF {
-    fn maximum_possible_size() -> usize {
+impl FlagIfElseIfUpdateFlagEIGHT_IF {
+    pub fn size(&self) -> usize {
         1 // last_if: u8
     }
 }

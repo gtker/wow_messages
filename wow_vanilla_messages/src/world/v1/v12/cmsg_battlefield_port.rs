@@ -3,7 +3,6 @@ use crate::world::v1::v12::{BattlefieldPortAction, BattlefieldPortActionError};
 use crate::world::v1::v12::{Map, MapError};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -154,10 +153,8 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
 
 }
 
-impl ConstantSized for CMSG_BATTLEFIELD_PORT {}
-
-impl MaximumPossibleSized for CMSG_BATTLEFIELD_PORT {
-    fn maximum_possible_size() -> usize {
+impl CMSG_BATTLEFIELD_PORT {
+    pub(crate) fn size() -> usize {
         0
         + 4 // map: Map
         + 1 // action: BattlefieldPortAction

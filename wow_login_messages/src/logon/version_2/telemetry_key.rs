@@ -1,5 +1,4 @@
 use std::convert::{TryFrom, TryInto};
-use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -146,10 +145,8 @@ impl TelemetryKey {
 
 }
 
-impl ConstantSized for TelemetryKey {}
-
-impl MaximumPossibleSized for TelemetryKey {
-    fn maximum_possible_size() -> usize {
+impl TelemetryKey {
+    pub(crate) fn size() -> usize {
         0
         + 2 // unknown1: u16
         + 4 // unknown2: u32
