@@ -37,12 +37,19 @@ fn container_to_ir(e: &Container) -> IrContainer {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type", content = "opcode")]
 pub enum IrContainerType {
+    #[serde(rename = "struct")]
     Struct,
+    #[serde(rename = "clogin")]
     CLogin(u16),
+    #[serde(rename = "slogin")]
     SLogin(u16),
+    #[serde(rename = "msg")]
     Msg(u16),
+    #[serde(rename = "cmsg")]
     CMsg(u16),
+    #[serde(rename = "smsg")]
     SMsg(u16),
 }
 

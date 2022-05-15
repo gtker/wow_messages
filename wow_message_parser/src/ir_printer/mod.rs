@@ -18,22 +18,24 @@ struct IrFileInfo {
 }
 
 #[derive(Debug, Serialize)]
+#[allow(non_camel_case_types)]
 pub enum IrEndianness {
-    Little,
-    Big,
+    little,
+    big,
 }
 
 impl From<&Endianness> for IrEndianness {
     fn from(v: &Endianness) -> Self {
         match v {
-            Endianness::Little => IrEndianness::Little,
-            Endianness::Big => IrEndianness::Big,
+            Endianness::Little => IrEndianness::little,
+            Endianness::Big => IrEndianness::big,
         }
     }
 }
 
 #[derive(Debug, Serialize)]
 #[allow(non_camel_case_types)]
+#[serde(tag = "type", content = "endianness")]
 pub enum IrIntegerType {
     u8,
     u16(IrEndianness),
@@ -53,8 +55,11 @@ impl From<&IntegerType> for IrIntegerType {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type", content = "version")]
 pub enum IrLoginVersion {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "specific")]
     Specific(u8),
 }
 
@@ -77,8 +82,11 @@ pub enum IrWorldVersion {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type", content = "versions")]
 pub enum IrVersions {
+    #[serde(rename = "login")]
     Login(Vec<IrLoginVersion>),
+    #[serde(rename = "world")]
     World(Vec<IrWorldVersion>),
 }
 
@@ -96,10 +104,14 @@ impl From<&WorldVersion> for IrWorldVersion {
 
 #[derive(Debug, Serialize)]
 pub struct IrTags {
+    #[serde(skip_serializing_if = "Option::is_none")]
     description: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     display: Option<String>,
-    versions: Option<IrVersions>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    version: Option<IrVersions>,
 }
 
 impl IrTags {
@@ -108,7 +120,7 @@ impl IrTags {
             description: tags.description().map(|a| a.to_owned()),
             comment: tags.comment().map(|a| a.to_owned()),
             display: tags.display().map(|a| a.to_owned()),
-            versions: if !tags.logon_versions().is_empty() {
+            version: if !tags.logon_versions().is_empty() {
                 Some(IrVersions::Login(
                     tags.logon_versions().iter().map(|a| a.into()).collect(),
                 ))

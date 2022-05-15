@@ -13,7 +13,12 @@
     - [Implementation Features](./spec/features.md)
 
 # Intermediate Representation
-- [Specification](./spec/ir_spec.md)
+- [Specification](./ir/ir_spec.md)
+    - [Definers](./ir/definers.md)
+    - [Containers](./ir/containers.md)
+    - [Tags](./ir/tags.md)
+    - [FileInfo](./ir/fileinfo.md)
+    - [Features](./ir/features.md)
 
 ------------
 

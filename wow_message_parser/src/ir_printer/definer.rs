@@ -1,7 +1,7 @@
 use crate::container::DefinerUsage;
 use crate::impl_features::{get_impl_features_for_definer, Feature};
 use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
-use crate::parser::enumerator::{Definer, DefinerField};
+use crate::parser::enumerator::{Definer, DefinerField, SelfValueDefinerField};
 use crate::rust_printer::DefinerType;
 use core::convert::From;
 use core::option::Option;
@@ -21,14 +21,17 @@ fn definer_to_ir(e: &Definer) -> IrDefiner {
     let objects_used_in = e
         .objects_used_in()
         .iter()
-        .map(|a| (a.0.to_string(), a.1.into()))
+        .map(|a| ObjectUsedIn {
+            name: a.0.to_string(),
+            usage: a.1.into(),
+        })
         .collect();
 
     IrDefiner {
         name: e.name().to_string(),
         definer_ty: e.definer_ty().into(),
         enumerators: fields,
-        self_value: None,
+        self_value: e.self_value().as_ref().map(|a| a.into()),
         integer_type: e.ty().into(),
         tags: IrTags::from_tags(e.tags()),
         objects_used_in,
@@ -42,7 +45,9 @@ fn definer_to_ir(e: &Definer) -> IrDefiner {
 
 #[derive(Debug, Serialize)]
 enum IrDefinerType {
+    #[serde(rename = "enum")]
     Enum,
+    #[serde(rename = "flag")]
     Flag,
 }
 
@@ -57,7 +62,9 @@ impl From<DefinerType> for IrDefinerType {
 
 #[derive(Debug, Serialize)]
 pub enum IrDefinerUsage {
+    #[serde(rename = "used_but_not_in_if")]
     UsedButNotInIf,
+    #[serde(rename = "in_if")]
     InIf,
 }
 
@@ -75,6 +82,15 @@ impl From<DefinerUsage> for IrDefinerUsage {
 struct IrSelfValueDefinerField {
     name: String,
     tags: IrTags,
+}
+
+impl From<&SelfValueDefinerField> for IrSelfValueDefinerField {
+    fn from(v: &SelfValueDefinerField) -> Self {
+        Self {
+            name: v.name().to_string(),
+            tags: IrTags::from_tags(v.tags()),
+        }
+    }
 }
 
 #[derive(Debug, Serialize)]
@@ -104,6 +120,12 @@ struct IrDefinerValue {
 }
 
 #[derive(Serialize, Debug)]
+struct ObjectUsedIn {
+    name: String,
+    usage: IrDefinerUsage,
+}
+
+#[derive(Serialize, Debug)]
 pub struct IrDefiner {
     name: String,
     definer_ty: IrDefinerType,
@@ -111,7 +133,7 @@ pub struct IrDefiner {
     self_value: Option<IrSelfValueDefinerField>,
     integer_type: IrIntegerType,
     tags: IrTags,
-    objects_used_in: Vec<(String, IrDefinerUsage)>,
+    objects_used_in: Vec<ObjectUsedIn>,
     file_info: IrFileInfo,
     features: Vec<Feature>,
 }
