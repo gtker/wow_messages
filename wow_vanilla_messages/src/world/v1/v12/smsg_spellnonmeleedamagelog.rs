@@ -51,7 +51,7 @@ impl MessageBody for SMSG_SPELLNONMELEEDAMAGELOG {
         let damage = crate::util::read_u32_le(r)?;
 
         // school: SpellSchool
-        let school = SpellSchool::read(r)?;
+        let school: SpellSchool = crate::util::read_u8_le(r)?.try_into()?;
 
         // absorbed_damage: u32
         let absorbed_damage = crate::util::read_u32_le(r)?;
@@ -157,7 +157,7 @@ impl MessageBody for SMSG_SPELLNONMELEEDAMAGELOG {
             let damage = crate::util::tokio_read_u32_le(r).await?;
 
             // school: SpellSchool
-            let school = SpellSchool::tokio_read(r).await?;
+            let school: SpellSchool = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // absorbed_damage: u32
             let absorbed_damage = crate::util::tokio_read_u32_le(r).await?;
@@ -277,7 +277,7 @@ impl MessageBody for SMSG_SPELLNONMELEEDAMAGELOG {
             let damage = crate::util::astd_read_u32_le(r).await?;
 
             // school: SpellSchool
-            let school = SpellSchool::astd_read(r).await?;
+            let school: SpellSchool = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // absorbed_damage: u32
             let absorbed_damage = crate::util::astd_read_u32_le(r).await?;

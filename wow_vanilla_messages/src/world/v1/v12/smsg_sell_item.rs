@@ -37,7 +37,7 @@ impl MessageBody for SMSG_SELL_ITEM {
         let item = Guid::read(r)?;
 
         // result: SellItemResult
-        let result = SellItemResult::read(r)?;
+        let result: SellItemResult = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_SELL_ITEM {
             let item = Guid::tokio_read(r).await?;
 
             // result: SellItemResult
-            let result = SellItemResult::tokio_read(r).await?;
+            let result: SellItemResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,
@@ -137,7 +137,7 @@ impl MessageBody for SMSG_SELL_ITEM {
             let item = Guid::astd_read(r).await?;
 
             // result: SellItemResult
-            let result = SellItemResult::astd_read(r).await?;
+            let result: SellItemResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,

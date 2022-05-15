@@ -1,7 +1,6 @@
 use crate::file_utils::get_import_path;
 use crate::parser::enumerator::Definer;
-use crate::parser::types::{Endianness, IntegerType};
-use crate::rust_printer::{ImplType, Writer};
+use crate::rust_printer::Writer;
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::DISPLAY_STR;
 
@@ -66,118 +65,13 @@ pub fn print_wowm_definition(kind: &str, s: &mut Writer, e: &Definer) {
 }
 
 fn common_impls(s: &mut Writer, e: &Definer) {
-    let error_string = match e.self_value() {
-        None => format!("{}Error", e.name()),
-        Some(_) => "std::io::Error".to_string(),
-    };
-    s.impl_read_and_writable_with_error(
-        e.name(),
-        error_string,
-        |s, it| {
-            print_read(s, e, it);
-        },
-        |s, it| {
-            print_write(s, e, it);
-        },
-    );
-
     s.bodyn(format!("impl {}", e.name()), |s| {
-        read_write_as(s, e);
-
         as_type(s, e);
-
-        print_new(s, e);
     });
 
     s.constant_sized(e.name(), |a| {
         a.wln(format!("{}", e.ty().size()));
     });
-}
-
-pub fn get_upcast_types(ty: &IntegerType) -> Vec<IntegerType> {
-    match ty {
-        IntegerType::U8 => vec![
-            IntegerType::U16(Endianness::Little),
-            IntegerType::U16(Endianness::Big),
-            IntegerType::U32(Endianness::Little),
-            IntegerType::U32(Endianness::Big),
-            IntegerType::U64(Endianness::Little),
-            IntegerType::U64(Endianness::Big),
-        ],
-        IntegerType::U16(e) => {
-            vec![
-                match e {
-                    Endianness::Little => IntegerType::U16(Endianness::Big),
-                    Endianness::Big => IntegerType::U16(Endianness::Little),
-                },
-                IntegerType::U32(Endianness::Little),
-                IntegerType::U32(Endianness::Big),
-                IntegerType::U64(Endianness::Little),
-                IntegerType::U64(Endianness::Big),
-            ]
-        }
-        IntegerType::U32(e) => {
-            vec![
-                match e {
-                    Endianness::Little => IntegerType::U32(Endianness::Big),
-                    Endianness::Big => IntegerType::U32(Endianness::Little),
-                },
-                IntegerType::U64(Endianness::Little),
-                IntegerType::U64(Endianness::Big),
-            ]
-        }
-        IntegerType::U64(e) => {
-            vec![match e {
-                Endianness::Little => IntegerType::U64(Endianness::Big),
-                Endianness::Big => IntegerType::U64(Endianness::Little),
-            }]
-        }
-    }
-}
-
-fn read_write_as(s: &mut Writer, e: &Definer) {
-    // All types with equal size or greater
-    let types = get_upcast_types(e.ty());
-
-    for t in types {
-        let return_type = format!(
-            "std::result::Result<Self, {name}>",
-            name = match e.self_value() {
-                None => format!("{}Error", e.name()),
-                Some(_) => "std::io::Error".to_string(),
-            },
-        );
-
-        s.async_funcn_pub(
-            format!(
-                "read_{ty}_{endian}",
-                ty = t.rust_str(),
-                endian = t.rust_endian_str(),
-            ),
-            "<R: std::io::Read>(r: &mut R)",
-            "<R: AsyncReadExt + Unpin + Send>(r: &mut R)",
-            "<R: ReadExt + Unpin + Send>(r: &mut R)",
-            &return_type,
-            |s, it| {
-                s.wln(format!(
-                    "let a = {util_path}::{prefix}read_{ty}_{endian}(r){postfix}?;",
-                    util_path = "crate::util",
-                    ty = t.rust_str(),
-                    endian = t.rust_endian_str(),
-                    prefix = it.prefix(),
-                    postfix = it.postfix(),
-                ));
-                s.wln(format!(
-                    "Ok((a as {original_ty}).{from})",
-                    original_ty = e.ty().rust_str(),
-                    from = match e.self_value() {
-                        None => "try_into()?",
-                        Some(_) => "into()",
-                    }
-                ));
-            },
-        );
-    }
 }
 
 fn as_type(s: &mut Writer, e: &Definer) {
@@ -198,42 +92,6 @@ fn as_type(s: &mut Writer, e: &Definer) {
             }
         });
     });
-}
-
-fn print_new(s: &mut Writer, e: &Definer) {
-    s.const_fn("new()", "Self", |a| {
-        a.wln(format!("Self::{}", e.fields()[0].name()));
-    });
-}
-
-fn print_read(s: &mut Writer, e: &Definer, it: ImplType) {
-    s.wln(format!(
-        "let a = {util_path}::{prefix}read_{ty}_{endian}(r){postfix}?;",
-        util_path = "crate::util",
-        ty = e.ty().rust_str(),
-        endian = e.ty().rust_endian_str(),
-        prefix = it.prefix(),
-        postfix = it.postfix(),
-    ));
-    s.newline();
-
-    s.wln(format!(
-        "Ok(a.{})",
-        match e.self_value() {
-            None => "try_into()?",
-            Some(_) => "into()",
-        }
-    ));
-}
-
-fn print_write(s: &mut Writer, e: &Definer, it: ImplType) {
-    s.wln(format!(
-        "w.write_all(&self.as_int().to_{}_bytes()){}?;",
-        e.ty().rust_endian_str(),
-        it.postfix(),
-    ));
-
-    s.wln("Ok(())");
 }
 
 fn print_default(s: &mut Writer, e: &Definer) {
@@ -287,7 +145,7 @@ fn print_from_or_try_from(s: &mut Writer, e: &Definer) {
 
 fn print_try_from(s: &mut Writer, e: &Definer) {
     s.impl_for(format!("TryFrom<{}>", e.ty().rust_str()), e.name(), |s| {
-        s.wln(format!("type Error = TryFrom{}Error;", e.name()));
+        s.wln(format!("type Error = {}Error;", e.name()));
 
         s.body(
             format!(
@@ -304,7 +162,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                         ));
                     }
 
-                    s.wln(format!("_ => Err(TryFrom{}Error::new(value))", e.name()));
+                    s.wln(format!("_ => Err({}Error::new(value))", e.name()));
                 });
             },
         );
@@ -341,11 +199,11 @@ fn print_errors(s: &mut Writer, e: &Definer) {
     }
 
     s.wln("#[derive(Debug)]");
-    s.new_struct(format!("TryFrom{}Error", e.name()), |s| {
+    s.new_struct(format!("{}Error", e.name()), |s| {
         s.wln(format!("value: {},", e.ty().rust_str()));
     });
 
-    s.bodyn(format!("impl TryFrom{}Error", e.name()), |s| {
+    s.bodyn(format!("impl {}Error", e.name()), |s| {
         s.body(
             format!("pub const fn new(value: {}) -> Self", e.ty().rust_str()),
             |s| {
@@ -354,16 +212,10 @@ fn print_errors(s: &mut Writer, e: &Definer) {
         );
     });
 
-    s.wln("#[derive(Debug)]");
-    s.new_enum("pub", format!("{}Error", e.name()), |s| {
-        s.wln("Read(std::io::Error),");
-        s.wln(format!("TryFrom(TryFrom{}Error),", e.name()));
-    });
-
     s.wln(format!("impl std::error::Error for {}Error {{}}", e.name()));
 
     s.impl_for(
-        "std::fmt::Display",format!("TryFrom{}Error", e.name()),
+        "std::fmt::Display",format!("{}Error", e.name()),
         |s| {
             s.body(
                 "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
@@ -372,37 +224,6 @@ fn print_errors(s: &mut Writer, e: &Definer) {
                         r#"f.write_fmt(format_args!("invalid value for enum '{}': '{{}}'", self.value))"#,
                         e.name()
                     ));
-                },
-            );
-        },
-    );
-
-    s.impl_for("std::fmt::Display", format!("{}Error", e.name()), |s| {
-        s.body(
-            "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
-            |s| {
-                s.body("match self", |s| {
-                    s.wln("Self::Read(e) => e.fmt(f),");
-                    s.wln("Self::TryFrom(e) => e.fmt(f),");
-                });
-            },
-        );
-    });
-
-    s.impl_for("From<std::io::Error>", format!("{}Error", e.name()), |s| {
-        s.body("fn from(value: std::io::Error) -> Self", |s| {
-            s.wln("Self::Read(value)");
-        });
-    });
-
-    s.impl_for(
-        format!("From<TryFrom{}Error>", e.name()),
-        format!("{}Error", e.name(),),
-        |s| {
-            s.body(
-                format!("fn from(value: TryFrom{}Error) -> Self", e.name()),
-                |s| {
-                    s.wln("Self::TryFrom(value)");
                 },
             );
         },

@@ -28,7 +28,7 @@ impl MessageBody for SMSG_GUILD_EVENT {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // event: GuildEvent
-        let event = GuildEvent::read(r)?;
+        let event: GuildEvent = crate::util::read_u8_le(r)?.try_into()?;
 
         // amount_of_events: u8
         let amount_of_events = crate::util::read_u8_le(r)?;
@@ -77,7 +77,7 @@ impl MessageBody for SMSG_GUILD_EVENT {
      {
         Box::pin(async move {
             // event: GuildEvent
-            let event = GuildEvent::tokio_read(r).await?;
+            let event: GuildEvent = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // amount_of_events: u8
             let amount_of_events = crate::util::tokio_read_u8_le(r).await?;
@@ -140,7 +140,7 @@ impl MessageBody for SMSG_GUILD_EVENT {
      {
         Box::pin(async move {
             // event: GuildEvent
-            let event = GuildEvent::astd_read(r).await?;
+            let event: GuildEvent = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // amount_of_events: u8
             let amount_of_events = crate::util::astd_read_u8_le(r).await?;

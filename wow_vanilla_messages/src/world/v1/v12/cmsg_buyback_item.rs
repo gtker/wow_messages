@@ -33,7 +33,7 @@ impl MessageBody for CMSG_BUYBACK_ITEM {
         let guid = Guid::read(r)?;
 
         // slot: BuybackSlot
-        let slot = BuybackSlot::read(r)?;
+        let slot: BuybackSlot = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
@@ -69,7 +69,7 @@ impl MessageBody for CMSG_BUYBACK_ITEM {
             let guid = Guid::tokio_read(r).await?;
 
             // slot: BuybackSlot
-            let slot = BuybackSlot::tokio_read(r).await?;
+            let slot: BuybackSlot = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,
@@ -119,7 +119,7 @@ impl MessageBody for CMSG_BUYBACK_ITEM {
             let guid = Guid::astd_read(r).await?;
 
             // slot: BuybackSlot
-            let slot = BuybackSlot::astd_read(r).await?;
+            let slot: BuybackSlot = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,

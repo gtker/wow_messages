@@ -42,13 +42,13 @@ impl MessageBody for CMSG_CHAR_CREATE {
         let name = String::from_utf8(name)?;
 
         // race: Race
-        let race = Race::read(r)?;
+        let race: Race = crate::util::read_u8_le(r)?.try_into()?;
 
         // class: Class
-        let class = Class::read(r)?;
+        let class: Class = crate::util::read_u8_le(r)?.try_into()?;
 
         // gender: Gender
-        let gender = Gender::read(r)?;
+        let gender: Gender = crate::util::read_u8_le(r)?.try_into()?;
 
         // skin: u8
         let skin = crate::util::read_u8_le(r)?;
@@ -137,13 +137,13 @@ impl MessageBody for CMSG_CHAR_CREATE {
             let name = String::from_utf8(name)?;
 
             // race: Race
-            let race = Race::tokio_read(r).await?;
+            let race: Race = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // class: Class
-            let class = Class::tokio_read(r).await?;
+            let class: Class = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // gender: Gender
-            let gender = Gender::tokio_read(r).await?;
+            let gender: Gender = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // skin: u8
             let skin = crate::util::tokio_read_u8_le(r).await?;
@@ -246,13 +246,13 @@ impl MessageBody for CMSG_CHAR_CREATE {
             let name = String::from_utf8(name)?;
 
             // race: Race
-            let race = Race::astd_read(r).await?;
+            let race: Race = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // class: Class
-            let class = Class::astd_read(r).await?;
+            let class: Class = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // gender: Gender
-            let gender = Gender::astd_read(r).await?;
+            let gender: Gender = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // skin: u8
             let skin = crate::util::astd_read_u8_le(r).await?;

@@ -28,7 +28,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // index: RaidTargetIndex
-        let index = RaidTargetIndex::read(r)?;
+        let index: RaidTargetIndex = crate::util::read_u8_le(r)?.try_into()?;
 
         let index_if = match index {
             RaidTargetIndex::UNKNOWN0 => {
@@ -200,7 +200,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
      {
         Box::pin(async move {
             // index: RaidTargetIndex
-            let index = RaidTargetIndex::tokio_read(r).await?;
+            let index: RaidTargetIndex = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let index_if = match index {
                 RaidTargetIndex::UNKNOWN0 => {
@@ -386,7 +386,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
      {
         Box::pin(async move {
             // index: RaidTargetIndex
-            let index = RaidTargetIndex::astd_read(r).await?;
+            let index: RaidTargetIndex = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let index_if = match index {
                 RaidTargetIndex::UNKNOWN0 => {

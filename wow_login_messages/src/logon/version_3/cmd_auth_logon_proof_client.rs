@@ -47,7 +47,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         }
 
         // security_flag: SecurityFlag
-        let security_flag = SecurityFlag::read(r)?;
+        let security_flag: SecurityFlag = crate::util::read_u8_le(r)?.try_into()?;
 
         let security_flag_if = match security_flag {
             SecurityFlag::NONE => CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE,
@@ -163,7 +163,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             }
 
             // security_flag: SecurityFlag
-            let security_flag = SecurityFlag::tokio_read(r).await?;
+            let security_flag: SecurityFlag = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let security_flag_if = match security_flag {
                 SecurityFlag::NONE => CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE,
@@ -293,7 +293,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             }
 
             // security_flag: SecurityFlag
-            let security_flag = SecurityFlag::astd_read(r).await?;
+            let security_flag: SecurityFlag = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let security_flag_if = match security_flag {
                 SecurityFlag::NONE => CMD_AUTH_LOGON_PROOF_ClientSecurityFlag::NONE,

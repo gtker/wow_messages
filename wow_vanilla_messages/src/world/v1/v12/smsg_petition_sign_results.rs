@@ -37,7 +37,7 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
         let owner_guid = Guid::read(r)?;
 
         // result: PetitionResult
-        let result = PetitionResult::read(r)?;
+        let result: PetitionResult = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             petition_guid,
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
             let owner_guid = Guid::tokio_read(r).await?;
 
             // result: PetitionResult
-            let result = PetitionResult::tokio_read(r).await?;
+            let result: PetitionResult = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 petition_guid,
@@ -137,7 +137,7 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
             let owner_guid = Guid::astd_read(r).await?;
 
             // result: PetitionResult
-            let result = PetitionResult::astd_read(r).await?;
+            let result: PetitionResult = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 petition_guid,

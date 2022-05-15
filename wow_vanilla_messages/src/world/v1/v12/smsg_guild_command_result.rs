@@ -30,14 +30,14 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // command: GuildCommand
-        let command = GuildCommand::read_u32_le(r)?;
+        let command: GuildCommand = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // string: CString
         let string = crate::util::read_c_string_to_vec(r)?;
         let string = String::from_utf8(string)?;
 
         // result: GuildCommandResult
-        let result = GuildCommandResult::read_u32_le(r)?;
+        let result: GuildCommandResult = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             command,
@@ -76,14 +76,14 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
      {
         Box::pin(async move {
             // command: GuildCommand
-            let command = GuildCommand::tokio_read_u32_le(r).await?;
+            let command: GuildCommand = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             // string: CString
             let string = crate::util::tokio_read_c_string_to_vec(r).await?;
             let string = String::from_utf8(string)?;
 
             // result: GuildCommandResult
-            let result = GuildCommandResult::tokio_read_u32_le(r).await?;
+            let result: GuildCommandResult = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 command,
@@ -136,14 +136,14 @@ impl MessageBody for SMSG_GUILD_COMMAND_RESULT {
      {
         Box::pin(async move {
             // command: GuildCommand
-            let command = GuildCommand::astd_read_u32_le(r).await?;
+            let command: GuildCommand = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             // string: CString
             let string = crate::util::astd_read_c_string_to_vec(r).await?;
             let string = String::from_utf8(string)?;
 
             // result: GuildCommandResult
-            let result = GuildCommandResult::astd_read_u32_le(r).await?;
+            let result: GuildCommandResult = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 command,

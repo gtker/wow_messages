@@ -32,13 +32,13 @@ impl MessageBody for CMSG_LOOT_METHOD {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // loot_setting: GroupLootSetting
-        let loot_setting = GroupLootSetting::read_u32_le(r)?;
+        let loot_setting: GroupLootSetting = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // loot_master: Guid
         let loot_master = Guid::read(r)?;
 
         // loot_threshold: ItemQuality
-        let loot_threshold = ItemQuality::read_u32_le(r)?;
+        let loot_threshold: ItemQuality = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             loot_setting,
@@ -75,13 +75,13 @@ impl MessageBody for CMSG_LOOT_METHOD {
      {
         Box::pin(async move {
             // loot_setting: GroupLootSetting
-            let loot_setting = GroupLootSetting::tokio_read_u32_le(r).await?;
+            let loot_setting: GroupLootSetting = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             // loot_master: Guid
             let loot_master = Guid::tokio_read(r).await?;
 
             // loot_threshold: ItemQuality
-            let loot_threshold = ItemQuality::tokio_read_u32_le(r).await?;
+            let loot_threshold: ItemQuality = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 loot_setting,
@@ -132,13 +132,13 @@ impl MessageBody for CMSG_LOOT_METHOD {
      {
         Box::pin(async move {
             // loot_setting: GroupLootSetting
-            let loot_setting = GroupLootSetting::astd_read_u32_le(r).await?;
+            let loot_setting: GroupLootSetting = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             // loot_master: Guid
             let loot_master = Guid::astd_read(r).await?;
 
             // loot_threshold: ItemQuality
-            let loot_threshold = ItemQuality::astd_read_u32_le(r).await?;
+            let loot_threshold: ItemQuality = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 loot_setting,

@@ -24,19 +24,19 @@ impl ReadableAndWritable for Friend {
         let guid = Guid::read(r)?;
 
         // status: FriendStatus
-        let status = FriendStatus::read(r)?;
+        let status: FriendStatus = crate::util::read_u8_le(r)?.try_into()?;
 
         let status_if = match status {
             FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
             FriendStatus::ONLINE => {
                 // area: Area
-                let area = Area::read(r)?;
+                let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
                 // level: u32
                 let level = crate::util::read_u32_le(r)?;
 
                 // class: Class
-                let class = Class::read_u32_le(r)?;
+                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
                 FriendFriendStatus::ONLINE {
                     area,
@@ -46,13 +46,13 @@ impl ReadableAndWritable for Friend {
             }
             FriendStatus::AFK => {
                 // area: Area
-                let area = Area::read(r)?;
+                let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
                 // level: u32
                 let level = crate::util::read_u32_le(r)?;
 
                 // class: Class
-                let class = Class::read_u32_le(r)?;
+                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
                 FriendFriendStatus::AFK {
                     area,
@@ -62,13 +62,13 @@ impl ReadableAndWritable for Friend {
             }
             FriendStatus::UNKNOWN3 => {
                 // area: Area
-                let area = Area::read(r)?;
+                let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
                 // level: u32
                 let level = crate::util::read_u32_le(r)?;
 
                 // class: Class
-                let class = Class::read_u32_le(r)?;
+                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
                 FriendFriendStatus::UNKNOWN3 {
                     area,
@@ -78,13 +78,13 @@ impl ReadableAndWritable for Friend {
             }
             FriendStatus::DND => {
                 // area: Area
-                let area = Area::read(r)?;
+                let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
                 // level: u32
                 let level = crate::util::read_u32_le(r)?;
 
                 // class: Class
-                let class = Class::read_u32_le(r)?;
+                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
                 FriendFriendStatus::DND {
                     area,
@@ -191,19 +191,19 @@ impl ReadableAndWritable for Friend {
             let guid = Guid::tokio_read(r).await?;
 
             // status: FriendStatus
-            let status = FriendStatus::tokio_read(r).await?;
+            let status: FriendStatus = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let status_if = match status {
                 FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
                 FriendStatus::ONLINE => {
                     // area: Area
-                    let area = Area::tokio_read(r).await?;
+                    let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
                     // level: u32
                     let level = crate::util::tokio_read_u32_le(r).await?;
 
                     // class: Class
-                    let class = Class::tokio_read_u32_le(r).await?;
+                    let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
                     FriendFriendStatus::ONLINE {
                         area,
@@ -213,13 +213,13 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendStatus::AFK => {
                     // area: Area
-                    let area = Area::tokio_read(r).await?;
+                    let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
                     // level: u32
                     let level = crate::util::tokio_read_u32_le(r).await?;
 
                     // class: Class
-                    let class = Class::tokio_read_u32_le(r).await?;
+                    let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
                     FriendFriendStatus::AFK {
                         area,
@@ -229,13 +229,13 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendStatus::UNKNOWN3 => {
                     // area: Area
-                    let area = Area::tokio_read(r).await?;
+                    let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
                     // level: u32
                     let level = crate::util::tokio_read_u32_le(r).await?;
 
                     // class: Class
-                    let class = Class::tokio_read_u32_le(r).await?;
+                    let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
                     FriendFriendStatus::UNKNOWN3 {
                         area,
@@ -245,13 +245,13 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendStatus::DND => {
                     // area: Area
-                    let area = Area::tokio_read(r).await?;
+                    let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
                     // level: u32
                     let level = crate::util::tokio_read_u32_le(r).await?;
 
                     // class: Class
-                    let class = Class::tokio_read_u32_le(r).await?;
+                    let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
                     FriendFriendStatus::DND {
                         area,
@@ -372,19 +372,19 @@ impl ReadableAndWritable for Friend {
             let guid = Guid::astd_read(r).await?;
 
             // status: FriendStatus
-            let status = FriendStatus::astd_read(r).await?;
+            let status: FriendStatus = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let status_if = match status {
                 FriendStatus::OFFLINE => FriendFriendStatus::OFFLINE,
                 FriendStatus::ONLINE => {
                     // area: Area
-                    let area = Area::astd_read(r).await?;
+                    let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
                     // level: u32
                     let level = crate::util::astd_read_u32_le(r).await?;
 
                     // class: Class
-                    let class = Class::astd_read_u32_le(r).await?;
+                    let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
                     FriendFriendStatus::ONLINE {
                         area,
@@ -394,13 +394,13 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendStatus::AFK => {
                     // area: Area
-                    let area = Area::astd_read(r).await?;
+                    let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
                     // level: u32
                     let level = crate::util::astd_read_u32_le(r).await?;
 
                     // class: Class
-                    let class = Class::astd_read_u32_le(r).await?;
+                    let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
                     FriendFriendStatus::AFK {
                         area,
@@ -410,13 +410,13 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendStatus::UNKNOWN3 => {
                     // area: Area
-                    let area = Area::astd_read(r).await?;
+                    let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
                     // level: u32
                     let level = crate::util::astd_read_u32_le(r).await?;
 
                     // class: Class
-                    let class = Class::astd_read_u32_le(r).await?;
+                    let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
                     FriendFriendStatus::UNKNOWN3 {
                         area,
@@ -426,13 +426,13 @@ impl ReadableAndWritable for Friend {
                 }
                 FriendStatus::DND => {
                     // area: Area
-                    let area = Area::astd_read(r).await?;
+                    let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
                     // level: u32
                     let level = crate::util::astd_read_u32_le(r).await?;
 
                     // class: Class
-                    let class = Class::astd_read_u32_le(r).await?;
+                    let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
                     FriendFriendStatus::DND {
                         area,

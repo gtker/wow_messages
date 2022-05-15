@@ -31,7 +31,7 @@ impl ReadableAndWritable for NpcTextUpdate {
         let texts = texts.try_into().unwrap();
 
         // language: Language
-        let language = Language::read(r)?;
+        let language: Language = crate::util::read_u32_le(r)?.try_into()?;
 
         // emotes: NpcTextUpdateEmote[3]
         let mut emotes = Vec::with_capacity(3 as usize);
@@ -93,7 +93,7 @@ impl ReadableAndWritable for NpcTextUpdate {
             let texts = texts.try_into().unwrap();
 
             // language: Language
-            let language = Language::tokio_read(r).await?;
+            let language: Language = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // emotes: NpcTextUpdateEmote[3]
             let mut emotes = Vec::with_capacity(3 as usize);
@@ -169,7 +169,7 @@ impl ReadableAndWritable for NpcTextUpdate {
             let texts = texts.try_into().unwrap();
 
             // language: Language
-            let language = Language::astd_read(r).await?;
+            let language: Language = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // emotes: NpcTextUpdateEmote[3]
             let mut emotes = Vec::with_capacity(3 as usize);

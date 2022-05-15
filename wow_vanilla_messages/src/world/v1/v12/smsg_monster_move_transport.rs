@@ -45,7 +45,7 @@ impl MessageBody for SMSG_MONSTER_MOVE_TRANSPORT {
         let spline_id = crate::util::read_u32_le(r)?;
 
         // move_type: MonsterMoveType
-        let move_type = MonsterMoveType::read(r)?;
+        let move_type: MonsterMoveType = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             transport,
@@ -106,7 +106,7 @@ impl MessageBody for SMSG_MONSTER_MOVE_TRANSPORT {
             let spline_id = crate::util::tokio_read_u32_le(r).await?;
 
             // move_type: MonsterMoveType
-            let move_type = MonsterMoveType::tokio_read(r).await?;
+            let move_type: MonsterMoveType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 transport,
@@ -181,7 +181,7 @@ impl MessageBody for SMSG_MONSTER_MOVE_TRANSPORT {
             let spline_id = crate::util::astd_read_u32_le(r).await?;
 
             // move_type: MonsterMoveType
-            let move_type = MonsterMoveType::astd_read(r).await?;
+            let move_type: MonsterMoveType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 transport,

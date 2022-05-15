@@ -28,7 +28,7 @@ impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Server {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // result: GuildEmblemResult
-        let result = GuildEmblemResult::read(r)?;
+        let result: GuildEmblemResult = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             result,
@@ -57,7 +57,7 @@ impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Server {
      {
         Box::pin(async move {
             // result: GuildEmblemResult
-            let result = GuildEmblemResult::tokio_read(r).await?;
+            let result: GuildEmblemResult = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 result,
@@ -100,7 +100,7 @@ impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Server {
      {
         Box::pin(async move {
             // result: GuildEmblemResult
-            let result = GuildEmblemResult::astd_read(r).await?;
+            let result: GuildEmblemResult = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 result,

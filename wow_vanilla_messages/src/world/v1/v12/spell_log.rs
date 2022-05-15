@@ -23,7 +23,7 @@ impl ReadableAndWritable for SpellLog {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // effect: SpellEffect
-        let effect = SpellEffect::read(r)?;
+        let effect: SpellEffect = crate::util::read_u32_le(r)?.try_into()?;
 
         // amount_of_logs: u32
         let _amount_of_logs = crate::util::read_u32_le(r)?;
@@ -661,7 +661,7 @@ impl ReadableAndWritable for SpellLog {
      {
         Box::pin(async move {
             // effect: SpellEffect
-            let effect = SpellEffect::tokio_read(r).await?;
+            let effect: SpellEffect = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // amount_of_logs: u32
             let _amount_of_logs = crate::util::tokio_read_u32_le(r).await?;
@@ -1313,7 +1313,7 @@ impl ReadableAndWritable for SpellLog {
      {
         Box::pin(async move {
             // effect: SpellEffect
-            let effect = SpellEffect::astd_read(r).await?;
+            let effect: SpellEffect = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // amount_of_logs: u32
             let _amount_of_logs = crate::util::astd_read_u32_le(r).await?;

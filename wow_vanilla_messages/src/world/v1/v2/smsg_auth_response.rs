@@ -27,7 +27,7 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // result: WorldResult
-        let result = WorldResult::read(r)?;
+        let result: WorldResult = crate::util::read_u32_le(r)?.try_into()?;
 
         let result_if = match result {
             WorldResult::RESPONSE_SUCCESS => SMSG_AUTH_RESPONSEWorldResult::RESPONSE_SUCCESS,
@@ -268,7 +268,7 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
      {
         Box::pin(async move {
             // result: WorldResult
-            let result = WorldResult::tokio_read(r).await?;
+            let result: WorldResult = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             let result_if = match result {
                 WorldResult::RESPONSE_SUCCESS => SMSG_AUTH_RESPONSEWorldResult::RESPONSE_SUCCESS,
@@ -523,7 +523,7 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
      {
         Box::pin(async move {
             // result: WorldResult
-            let result = WorldResult::astd_read(r).await?;
+            let result: WorldResult = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             let result_if = match result {
                 WorldResult::RESPONSE_SUCCESS => SMSG_AUTH_RESPONSEWorldResult::RESPONSE_SUCCESS,

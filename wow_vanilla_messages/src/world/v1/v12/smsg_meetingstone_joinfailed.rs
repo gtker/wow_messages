@@ -28,7 +28,7 @@ impl MessageBody for SMSG_MEETINGSTONE_JOINFAILED {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // reason: MeetingStoneFailure
-        let reason = MeetingStoneFailure::read(r)?;
+        let reason: MeetingStoneFailure = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             reason,
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_MEETINGSTONE_JOINFAILED {
      {
         Box::pin(async move {
             // reason: MeetingStoneFailure
-            let reason = MeetingStoneFailure::tokio_read(r).await?;
+            let reason: MeetingStoneFailure = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 reason,
@@ -100,7 +100,7 @@ impl MessageBody for SMSG_MEETINGSTONE_JOINFAILED {
      {
         Box::pin(async move {
             // reason: MeetingStoneFailure
-            let reason = MeetingStoneFailure::astd_read(r).await?;
+            let reason: MeetingStoneFailure = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 reason,

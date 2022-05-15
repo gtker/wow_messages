@@ -37,7 +37,7 @@ impl MessageBody for SMSG_SPELL_FAILURE {
         let id = crate::util::read_u32_le(r)?;
 
         // result: SpellCastResult
-        let result = SpellCastResult::read(r)?;
+        let result: SpellCastResult = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_SPELL_FAILURE {
             let id = crate::util::tokio_read_u32_le(r).await?;
 
             // result: SpellCastResult
-            let result = SpellCastResult::tokio_read(r).await?;
+            let result: SpellCastResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,
@@ -137,7 +137,7 @@ impl MessageBody for SMSG_SPELL_FAILURE {
             let id = crate::util::astd_read_u32_le(r).await?;
 
             // result: SpellCastResult
-            let result = SpellCastResult::astd_read(r).await?;
+            let result: SpellCastResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,

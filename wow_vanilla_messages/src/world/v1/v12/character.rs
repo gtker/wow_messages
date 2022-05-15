@@ -60,13 +60,13 @@ impl ReadableAndWritable for Character {
         let name = String::from_utf8(name)?;
 
         // race: Race
-        let race = Race::read(r)?;
+        let race: Race = crate::util::read_u8_le(r)?.try_into()?;
 
         // class: Class
-        let class = Class::read(r)?;
+        let class: Class = crate::util::read_u8_le(r)?.try_into()?;
 
         // gender: Gender
-        let gender = Gender::read(r)?;
+        let gender: Gender = crate::util::read_u8_le(r)?.try_into()?;
 
         // skin: u8
         let skin = crate::util::read_u8_le(r)?;
@@ -87,10 +87,10 @@ impl ReadableAndWritable for Character {
         let level = crate::util::read_u8_le(r)?;
 
         // area: Area
-        let area = Area::read(r)?;
+        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
         // map: Map
-        let map = Map::read(r)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // position_x: f32
         let position_x = crate::util::read_f32_le(r)?;
@@ -262,13 +262,13 @@ impl ReadableAndWritable for Character {
             let name = String::from_utf8(name)?;
 
             // race: Race
-            let race = Race::tokio_read(r).await?;
+            let race: Race = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // class: Class
-            let class = Class::tokio_read(r).await?;
+            let class: Class = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // gender: Gender
-            let gender = Gender::tokio_read(r).await?;
+            let gender: Gender = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // skin: u8
             let skin = crate::util::tokio_read_u8_le(r).await?;
@@ -289,10 +289,10 @@ impl ReadableAndWritable for Character {
             let level = crate::util::tokio_read_u8_le(r).await?;
 
             // area: Area
-            let area = Area::tokio_read(r).await?;
+            let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // map: Map
-            let map = Map::tokio_read(r).await?;
+            let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // position_x: f32
             let position_x = crate::util::tokio_read_f32_le(r).await?;
@@ -478,13 +478,13 @@ impl ReadableAndWritable for Character {
             let name = String::from_utf8(name)?;
 
             // race: Race
-            let race = Race::astd_read(r).await?;
+            let race: Race = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // class: Class
-            let class = Class::astd_read(r).await?;
+            let class: Class = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // gender: Gender
-            let gender = Gender::astd_read(r).await?;
+            let gender: Gender = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // skin: u8
             let skin = crate::util::astd_read_u8_le(r).await?;
@@ -505,10 +505,10 @@ impl ReadableAndWritable for Character {
             let level = crate::util::astd_read_u8_le(r).await?;
 
             // area: Area
-            let area = Area::astd_read(r).await?;
+            let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // map: Map
-            let map = Map::astd_read(r).await?;
+            let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // position_x: f32
             let position_x = crate::util::astd_read_f32_le(r).await?;

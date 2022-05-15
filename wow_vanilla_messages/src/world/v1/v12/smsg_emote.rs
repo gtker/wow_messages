@@ -30,7 +30,7 @@ impl MessageBody for SMSG_EMOTE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // emote: Emote
-        let emote = Emote::read(r)?;
+        let emote: Emote = crate::util::read_u32_le(r)?.try_into()?;
 
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -66,7 +66,7 @@ impl MessageBody for SMSG_EMOTE {
      {
         Box::pin(async move {
             // emote: Emote
-            let emote = Emote::tokio_read(r).await?;
+            let emote: Emote = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // guid: Guid
             let guid = Guid::tokio_read(r).await?;
@@ -116,7 +116,7 @@ impl MessageBody for SMSG_EMOTE {
      {
         Box::pin(async move {
             // emote: Emote
-            let emote = Emote::astd_read(r).await?;
+            let emote: Emote = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // guid: Guid
             let guid = Guid::astd_read(r).await?;

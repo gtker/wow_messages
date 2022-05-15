@@ -17,7 +17,7 @@ impl ReadableAndWritable for DoubleVariantEnum {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // enum: SimpleEnum
-        let enum = SimpleEnum::read(r)?;
+        let enum: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
 
         let enum_if = match enum {
             SimpleEnum::ZERO => {
@@ -83,7 +83,7 @@ impl ReadableAndWritable for DoubleVariantEnum {
      {
         Box::pin(async move {
             // enum: SimpleEnum
-            let enum = SimpleEnum::tokio_read(r).await?;
+            let enum: SimpleEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let enum_if = match enum {
                 SimpleEnum::ZERO => {
@@ -163,7 +163,7 @@ impl ReadableAndWritable for DoubleVariantEnum {
      {
         Box::pin(async move {
             // enum: SimpleEnum
-            let enum = SimpleEnum::astd_read(r).await?;
+            let enum: SimpleEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let enum_if = match enum {
                 SimpleEnum::ZERO => {

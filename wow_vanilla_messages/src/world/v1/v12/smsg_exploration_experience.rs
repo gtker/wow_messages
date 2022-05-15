@@ -29,7 +29,7 @@ impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // area: Area
-        let area = Area::read(r)?;
+        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
         // experience: u32
         let experience = crate::util::read_u32_le(r)?;
@@ -65,7 +65,7 @@ impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
      {
         Box::pin(async move {
             // area: Area
-            let area = Area::tokio_read(r).await?;
+            let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // experience: u32
             let experience = crate::util::tokio_read_u32_le(r).await?;
@@ -115,7 +115,7 @@ impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
      {
         Box::pin(async move {
             // area: Area
-            let area = Area::astd_read(r).await?;
+            let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // experience: u32
             let experience = crate::util::astd_read_u32_le(r).await?;

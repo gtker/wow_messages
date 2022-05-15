@@ -28,7 +28,7 @@ impl MessageBody for SMSG_TRIGGER_CINEMATIC {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // cinematic_sequence_id: CinematicSequenceId
-        let cinematic_sequence_id = CinematicSequenceId::read(r)?;
+        let cinematic_sequence_id: CinematicSequenceId = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             cinematic_sequence_id,
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_TRIGGER_CINEMATIC {
      {
         Box::pin(async move {
             // cinematic_sequence_id: CinematicSequenceId
-            let cinematic_sequence_id = CinematicSequenceId::tokio_read(r).await?;
+            let cinematic_sequence_id: CinematicSequenceId = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 cinematic_sequence_id,
@@ -100,7 +100,7 @@ impl MessageBody for SMSG_TRIGGER_CINEMATIC {
      {
         Box::pin(async move {
             // cinematic_sequence_id: CinematicSequenceId
-            let cinematic_sequence_id = CinematicSequenceId::astd_read(r).await?;
+            let cinematic_sequence_id: CinematicSequenceId = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 cinematic_sequence_id,

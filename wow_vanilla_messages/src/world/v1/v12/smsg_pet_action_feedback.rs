@@ -28,7 +28,7 @@ impl MessageBody for SMSG_PET_ACTION_FEEDBACK {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // feedback: PetFeedback
-        let feedback = PetFeedback::read(r)?;
+        let feedback: PetFeedback = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             feedback,
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_PET_ACTION_FEEDBACK {
      {
         Box::pin(async move {
             // feedback: PetFeedback
-            let feedback = PetFeedback::tokio_read(r).await?;
+            let feedback: PetFeedback = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 feedback,
@@ -100,7 +100,7 @@ impl MessageBody for SMSG_PET_ACTION_FEEDBACK {
      {
         Box::pin(async move {
             // feedback: PetFeedback
-            let feedback = PetFeedback::astd_read(r).await?;
+            let feedback: PetFeedback = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 feedback,

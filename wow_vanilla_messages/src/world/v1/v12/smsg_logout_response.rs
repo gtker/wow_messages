@@ -30,10 +30,10 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // reason: LogoutResult
-        let reason = LogoutResult::read(r)?;
+        let reason: LogoutResult = crate::util::read_u32_le(r)?.try_into()?;
 
         // speed: LogoutSpeed
-        let speed = LogoutSpeed::read(r)?;
+        let speed: LogoutSpeed = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             reason,
@@ -66,10 +66,10 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
      {
         Box::pin(async move {
             // reason: LogoutResult
-            let reason = LogoutResult::tokio_read(r).await?;
+            let reason: LogoutResult = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // speed: LogoutSpeed
-            let speed = LogoutSpeed::tokio_read(r).await?;
+            let speed: LogoutSpeed = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 reason,
@@ -116,10 +116,10 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
      {
         Box::pin(async move {
             // reason: LogoutResult
-            let reason = LogoutResult::astd_read(r).await?;
+            let reason: LogoutResult = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // speed: LogoutSpeed
-            let speed = LogoutSpeed::astd_read(r).await?;
+            let speed: LogoutSpeed = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 reason,

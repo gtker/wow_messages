@@ -22,7 +22,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // result: LoginResult
-        let result = LoginResult::read(r)?;
+        let result: LoginResult = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             result,
@@ -53,7 +53,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
      {
         Box::pin(async move {
             // result: LoginResult
-            let result = LoginResult::tokio_read(r).await?;
+            let result: LoginResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 result,
@@ -98,7 +98,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
      {
         Box::pin(async move {
             // result: LoginResult
-            let result = LoginResult::astd_read(r).await?;
+            let result: LoginResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 result,

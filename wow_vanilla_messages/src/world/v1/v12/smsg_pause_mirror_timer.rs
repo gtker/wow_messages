@@ -29,7 +29,7 @@ impl MessageBody for SMSG_PAUSE_MIRROR_TIMER {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // timer: TimerType
-        let timer = TimerType::read(r)?;
+        let timer: TimerType = crate::util::read_u32_le(r)?.try_into()?;
 
         // is_frozen: u8
         let is_frozen = crate::util::read_u8_le(r)?;
@@ -65,7 +65,7 @@ impl MessageBody for SMSG_PAUSE_MIRROR_TIMER {
      {
         Box::pin(async move {
             // timer: TimerType
-            let timer = TimerType::tokio_read(r).await?;
+            let timer: TimerType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // is_frozen: u8
             let is_frozen = crate::util::tokio_read_u8_le(r).await?;
@@ -115,7 +115,7 @@ impl MessageBody for SMSG_PAUSE_MIRROR_TIMER {
      {
         Box::pin(async move {
             // timer: TimerType
-            let timer = TimerType::astd_read(r).await?;
+            let timer: TimerType = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // is_frozen: u8
             let is_frozen = crate::util::astd_read_u8_le(r).await?;

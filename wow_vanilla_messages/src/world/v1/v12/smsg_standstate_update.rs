@@ -28,7 +28,7 @@ impl MessageBody for SMSG_STANDSTATE_UPDATE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // state: UnitStandState
-        let state = UnitStandState::read(r)?;
+        let state: UnitStandState = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             state,
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_STANDSTATE_UPDATE {
      {
         Box::pin(async move {
             // state: UnitStandState
-            let state = UnitStandState::tokio_read(r).await?;
+            let state: UnitStandState = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 state,
@@ -100,7 +100,7 @@ impl MessageBody for SMSG_STANDSTATE_UPDATE {
      {
         Box::pin(async move {
             // state: UnitStandState
-            let state = UnitStandState::astd_read(r).await?;
+            let state: UnitStandState = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 state,

@@ -35,10 +35,10 @@ impl ReadableAndWritable for WhoPlayer {
         let level = crate::util::read_u32_le(r)?;
 
         // class: Class
-        let class = Class::read(r)?;
+        let class: Class = crate::util::read_u8_le(r)?.try_into()?;
 
         // race: Race
-        let race = Race::read(r)?;
+        let race: Race = crate::util::read_u8_le(r)?.try_into()?;
 
         // zone_id: u32
         let zone_id = crate::util::read_u32_le(r)?;
@@ -111,10 +111,10 @@ impl ReadableAndWritable for WhoPlayer {
             let level = crate::util::tokio_read_u32_le(r).await?;
 
             // class: Class
-            let class = Class::tokio_read(r).await?;
+            let class: Class = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // race: Race
-            let race = Race::tokio_read(r).await?;
+            let race: Race = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // zone_id: u32
             let zone_id = crate::util::tokio_read_u32_le(r).await?;
@@ -201,10 +201,10 @@ impl ReadableAndWritable for WhoPlayer {
             let level = crate::util::astd_read_u32_le(r).await?;
 
             // class: Class
-            let class = Class::astd_read(r).await?;
+            let class: Class = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // race: Race
-            let race = Race::astd_read(r).await?;
+            let race: Race = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // zone_id: u32
             let zone_id = crate::util::astd_read_u32_le(r).await?;

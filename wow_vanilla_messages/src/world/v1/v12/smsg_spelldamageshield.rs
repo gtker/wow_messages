@@ -41,7 +41,7 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
         let damage = crate::util::read_u32_le(r)?;
 
         // school: SpellSchool
-        let school = SpellSchool::read_u32_le(r)?;
+        let school: SpellSchool = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             victim_guid,
@@ -91,7 +91,7 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
             let damage = crate::util::tokio_read_u32_le(r).await?;
 
             // school: SpellSchool
-            let school = SpellSchool::tokio_read_u32_le(r).await?;
+            let school: SpellSchool = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 victim_guid,
@@ -155,7 +155,7 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
             let damage = crate::util::astd_read_u32_le(r).await?;
 
             // school: SpellSchool
-            let school = SpellSchool::astd_read_u32_le(r).await?;
+            let school: SpellSchool = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 victim_guid,

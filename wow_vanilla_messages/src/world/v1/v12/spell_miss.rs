@@ -23,7 +23,7 @@ impl ReadableAndWritable for SpellMiss {
         let target_guid = Guid::read(r)?;
 
         // miss_info: SpellMissInfo
-        let miss_info = SpellMissInfo::read(r)?;
+        let miss_info: SpellMissInfo = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             target_guid,
@@ -58,7 +58,7 @@ impl ReadableAndWritable for SpellMiss {
             let target_guid = Guid::tokio_read(r).await?;
 
             // miss_info: SpellMissInfo
-            let miss_info = SpellMissInfo::tokio_read(r).await?;
+            let miss_info: SpellMissInfo = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 target_guid,
@@ -107,7 +107,7 @@ impl ReadableAndWritable for SpellMiss {
             let target_guid = Guid::astd_read(r).await?;
 
             // miss_info: SpellMissInfo
-            let miss_info = SpellMissInfo::astd_read(r).await?;
+            let miss_info: SpellMissInfo = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 target_guid,

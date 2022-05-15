@@ -37,10 +37,10 @@ impl MessageBody for SMSG_PET_MODE {
         let guid = Guid::read(r)?;
 
         // react_state: PetReactState
-        let react_state = PetReactState::read(r)?;
+        let react_state: PetReactState = crate::util::read_u8_le(r)?.try_into()?;
 
         // command_state: PetCommandState
-        let command_state = PetCommandState::read(r)?;
+        let command_state: PetCommandState = crate::util::read_u8_le(r)?.try_into()?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;
@@ -94,10 +94,10 @@ impl MessageBody for SMSG_PET_MODE {
             let guid = Guid::tokio_read(r).await?;
 
             // react_state: PetReactState
-            let react_state = PetReactState::tokio_read(r).await?;
+            let react_state: PetReactState = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // command_state: PetCommandState
-            let command_state = PetCommandState::tokio_read(r).await?;
+            let command_state: PetCommandState = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // unknown1: u8
             let unknown1 = crate::util::tokio_read_u8_le(r).await?;
@@ -165,10 +165,10 @@ impl MessageBody for SMSG_PET_MODE {
             let guid = Guid::astd_read(r).await?;
 
             // react_state: PetReactState
-            let react_state = PetReactState::astd_read(r).await?;
+            let react_state: PetReactState = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // command_state: PetCommandState
-            let command_state = PetCommandState::astd_read(r).await?;
+            let command_state: PetCommandState = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // unknown1: u8
             let unknown1 = crate::util::astd_read_u8_le(r).await?;

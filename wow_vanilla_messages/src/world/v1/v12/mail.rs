@@ -39,7 +39,7 @@ impl ReadableAndWritable for Mail {
         let message_id = crate::util::read_u32_le(r)?;
 
         // message_type: MailType
-        let message_type = MailType::read(r)?;
+        let message_type: MailType = crate::util::read_u8_le(r)?.try_into()?;
 
         let message_type_if = match message_type {
             MailType::NORMAL => {
@@ -263,7 +263,7 @@ impl ReadableAndWritable for Mail {
             let message_id = crate::util::tokio_read_u32_le(r).await?;
 
             // message_type: MailType
-            let message_type = MailType::tokio_read(r).await?;
+            let message_type: MailType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let message_type_if = match message_type {
                 MailType::NORMAL => {
@@ -501,7 +501,7 @@ impl ReadableAndWritable for Mail {
             let message_id = crate::util::astd_read_u32_le(r).await?;
 
             // message_type: MailType
-            let message_type = MailType::astd_read(r).await?;
+            let message_type: MailType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let message_type_if = match message_type {
                 MailType::NORMAL => {

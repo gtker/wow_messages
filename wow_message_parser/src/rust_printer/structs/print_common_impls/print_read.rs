@@ -394,15 +394,17 @@ fn print_read_definition(
         Type::Identifier { s: ty, upcast } => {
             if o.get_object_type_of(ty, e.tags()) == ObjectType::Enum {
                 if let Some(integer) = upcast {
+                    let definer = o.get_definer(ty, e.tags());
                     if let Some(value) = d.verified_value() {
                         s.wln(format!(
-                            "let _{name} = {ty_name}::{prefix}read_{ty}_{endian}(r){postfix}?;",
+                            "let _{name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).into();",
                             name = d.name(),
-                            ty_name = ty,
-                            ty = integer.rust_str(),
+                            type_name = d.ty().rust_str(),
                             endian = integer.rust_endian_str(),
+                            ty = integer.rust_str(),
                             prefix = prefix,
                             postfix = postfix,
+                            original_ty = definer.ty().rust_str(),
                         ));
                         s.wln(format!(
                             "// {name} is expected to always be {constant_string} ({constant_value})",
@@ -413,13 +415,14 @@ fn print_read_definition(
                         s.newline();
                     } else {
                         s.wln(format!(
-                            "let {name} = {ty_name}::{prefix}read_{ty}_{endian}(r){postfix}?;",
+                            "let {name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).try_into()?;",
                             name = d.name(),
-                            ty_name = ty,
-                            ty = integer.rust_str(),
+                            type_name = d.ty().rust_str(),
                             endian = integer.rust_endian_str(),
+                            ty = integer.rust_str(),
                             prefix = prefix,
                             postfix = postfix,
+                            original_ty = definer.ty().rust_str(),
                         ));
                         s.newline();
                     }
@@ -441,7 +444,24 @@ fn print_read_definition(
                         postfix = postfix,
                     ));
                 }
-                ObjectType::Enum | _ => {
+                ObjectType::Enum => {
+                    let definer = o.get_definer(ty, e.tags());
+                    s.wln(format!(
+                        "let {value_set}{name}: {type_name} = crate::util::{prefix}read_{ty}_{endian}(r){postfix}?.{into};",
+                        name = d.name(),
+                        type_name = d.ty().rust_str(),
+                        value_set = if d.value().is_some() { "_" } else { "" },
+                        endian = definer.ty().rust_endian_str(),
+                        ty = definer.ty().rust_str(),
+                        into = match definer.self_value().is_some() {
+                            true => "into()",
+                            false => "try_into()?",
+                        },
+                        prefix = prefix,
+                        postfix = postfix,
+                    ));
+                }
+                _ => {
                     s.wln(format!(
                         "let {value_set}{name} = {type_name}::{prefix}read(r){postfix}?;",
                         name = d.name(),

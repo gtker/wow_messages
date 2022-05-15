@@ -37,7 +37,7 @@ impl MessageBody for SMSG_TRAINER_BUY_FAILED {
         let id = crate::util::read_u32_le(r)?;
 
         // error: TrainingFailureReason
-        let error = TrainingFailureReason::read(r)?;
+        let error: TrainingFailureReason = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_TRAINER_BUY_FAILED {
             let id = crate::util::tokio_read_u32_le(r).await?;
 
             // error: TrainingFailureReason
-            let error = TrainingFailureReason::tokio_read(r).await?;
+            let error: TrainingFailureReason = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,
@@ -137,7 +137,7 @@ impl MessageBody for SMSG_TRAINER_BUY_FAILED {
             let id = crate::util::astd_read_u32_le(r).await?;
 
             // error: TrainingFailureReason
-            let error = TrainingFailureReason::astd_read(r).await?;
+            let error: TrainingFailureReason = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,

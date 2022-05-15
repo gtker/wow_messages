@@ -28,13 +28,13 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // result: CorpseQueryResult
-        let result = CorpseQueryResult::read(r)?;
+        let result: CorpseQueryResult = crate::util::read_u8_le(r)?.try_into()?;
 
         let result_if = match result {
             CorpseQueryResult::NOT_FOUND => MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND,
             CorpseQueryResult::FOUND => {
                 // map: Map
-                let map = Map::read(r)?;
+                let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
                 // position_x: f32
                 let position_x = crate::util::read_f32_le(r)?;
@@ -43,7 +43,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                 // position_z: f32
                 let position_z = crate::util::read_f32_le(r)?;
                 // corpse_map: Map
-                let corpse_map = Map::read(r)?;
+                let corpse_map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
                 MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
                     corpse_map,
@@ -109,13 +109,13 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
      {
         Box::pin(async move {
             // result: CorpseQueryResult
-            let result = CorpseQueryResult::tokio_read(r).await?;
+            let result: CorpseQueryResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let result_if = match result {
                 CorpseQueryResult::NOT_FOUND => MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND,
                 CorpseQueryResult::FOUND => {
                     // map: Map
-                    let map = Map::tokio_read(r).await?;
+                    let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
                     // position_x: f32
                     let position_x = crate::util::tokio_read_f32_le(r).await?;
@@ -124,7 +124,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     // position_z: f32
                     let position_z = crate::util::tokio_read_f32_le(r).await?;
                     // corpse_map: Map
-                    let corpse_map = Map::tokio_read(r).await?;
+                    let corpse_map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
                     MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
                         corpse_map,
@@ -204,13 +204,13 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
      {
         Box::pin(async move {
             // result: CorpseQueryResult
-            let result = CorpseQueryResult::astd_read(r).await?;
+            let result: CorpseQueryResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let result_if = match result {
                 CorpseQueryResult::NOT_FOUND => MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND,
                 CorpseQueryResult::FOUND => {
                     // map: Map
-                    let map = Map::astd_read(r).await?;
+                    let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
                     // position_x: f32
                     let position_x = crate::util::astd_read_f32_le(r).await?;
@@ -219,7 +219,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     // position_z: f32
                     let position_z = crate::util::astd_read_f32_le(r).await?;
                     // corpse_map: Map
-                    let corpse_map = Map::astd_read(r).await?;
+                    let corpse_map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
                     MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
                         corpse_map,

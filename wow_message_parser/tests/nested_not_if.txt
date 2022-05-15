@@ -18,7 +18,7 @@ impl ReadableAndWritable for NestedNotIf {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // t: TEnum
-        let t = TEnum::read(r)?;
+        let t: TEnum = crate::util::read_u8_le(r)?.try_into()?;
 
         let t_if = match t {
             TEnum::ZERO => NestedNotIfTEnum::ZERO,
@@ -27,7 +27,7 @@ impl ReadableAndWritable for NestedNotIf {
                 let not_zero = crate::util::read_u8_le(r)?;
 
                 // e: NestedEnum
-                let e = NestedEnum::read(r)?;
+                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::NESTED => {
@@ -51,7 +51,7 @@ impl ReadableAndWritable for NestedNotIf {
                 let not_zero = crate::util::read_u8_le(r)?;
 
                 // e: NestedEnum
-                let e = NestedEnum::read(r)?;
+                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::NESTED => {
@@ -75,7 +75,7 @@ impl ReadableAndWritable for NestedNotIf {
                 let not_zero = crate::util::read_u8_le(r)?;
 
                 // e: NestedEnum
-                let e = NestedEnum::read(r)?;
+                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::NESTED => {
@@ -99,7 +99,7 @@ impl ReadableAndWritable for NestedNotIf {
                 let not_zero = crate::util::read_u8_le(r)?;
 
                 // e: NestedEnum
-                let e = NestedEnum::read(r)?;
+                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::NESTED => {
@@ -123,7 +123,7 @@ impl ReadableAndWritable for NestedNotIf {
                 let not_zero = crate::util::read_u8_le(r)?;
 
                 // e: NestedEnum
-                let e = NestedEnum::read(r)?;
+                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::NESTED => {
@@ -147,7 +147,7 @@ impl ReadableAndWritable for NestedNotIf {
                 let not_zero = crate::util::read_u8_le(r)?;
 
                 // e: NestedEnum
-                let e = NestedEnum::read(r)?;
+                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::NESTED => {
@@ -171,7 +171,7 @@ impl ReadableAndWritable for NestedNotIf {
                 let not_zero = crate::util::read_u8_le(r)?;
 
                 // e: NestedEnum
-                let e = NestedEnum::read(r)?;
+                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::NESTED => {
@@ -376,7 +376,7 @@ impl ReadableAndWritable for NestedNotIf {
      {
         Box::pin(async move {
             // t: TEnum
-            let t = TEnum::tokio_read(r).await?;
+            let t: TEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let t_if = match t {
                 TEnum::ZERO => NestedNotIfTEnum::ZERO,
@@ -385,7 +385,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::tokio_read(r).await?;
+                    let e: NestedEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -409,7 +409,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::tokio_read(r).await?;
+                    let e: NestedEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -433,7 +433,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::tokio_read(r).await?;
+                    let e: NestedEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -457,7 +457,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::tokio_read(r).await?;
+                    let e: NestedEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -481,7 +481,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::tokio_read(r).await?;
+                    let e: NestedEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -505,7 +505,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::tokio_read(r).await?;
+                    let e: NestedEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -529,7 +529,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::tokio_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::tokio_read(r).await?;
+                    let e: NestedEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -748,7 +748,7 @@ impl ReadableAndWritable for NestedNotIf {
      {
         Box::pin(async move {
             // t: TEnum
-            let t = TEnum::astd_read(r).await?;
+            let t: TEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let t_if = match t {
                 TEnum::ZERO => NestedNotIfTEnum::ZERO,
@@ -757,7 +757,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::astd_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::astd_read(r).await?;
+                    let e: NestedEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -781,7 +781,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::astd_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::astd_read(r).await?;
+                    let e: NestedEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -805,7 +805,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::astd_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::astd_read(r).await?;
+                    let e: NestedEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -829,7 +829,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::astd_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::astd_read(r).await?;
+                    let e: NestedEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -853,7 +853,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::astd_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::astd_read(r).await?;
+                    let e: NestedEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -877,7 +877,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::astd_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::astd_read(r).await?;
+                    let e: NestedEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {
@@ -901,7 +901,7 @@ impl ReadableAndWritable for NestedNotIf {
                     let not_zero = crate::util::astd_read_u8_le(r).await?;
 
                     // e: NestedEnum
-                    let e = NestedEnum::astd_read(r).await?;
+                    let e: NestedEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let e_if = match e {
                         NestedEnum::NESTED => {

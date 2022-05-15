@@ -44,7 +44,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         };
         let found = if current_size < body_size as usize {
             // item_class: ItemClass
-            let item_class = ItemClass::read_u32_le(r)?;
+            let item_class: ItemClass = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
             // item_sub_class: u32
             let item_sub_class = crate::util::read_u32_le(r)?;
@@ -69,7 +69,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let item_display_info = crate::util::read_u32_le(r)?;
 
             // quality: ItemQuality
-            let quality = ItemQuality::read_u32_le(r)?;
+            let quality: ItemQuality = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
             // flags: u32
             let flags = crate::util::read_u32_le(r)?;
@@ -79,7 +79,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // sell_price: f64
             let sell_price = crate::util::read_f64_le(r)?;
             // inventory_type: InventoryType
-            let inventory_type = InventoryType::read(r)?;
+            let inventory_type: InventoryType = crate::util::read_u8_le(r)?.try_into()?;
 
             // allowed_class: u32
             let allowed_class = crate::util::read_u32_le(r)?;
@@ -214,10 +214,10 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let max_durability = crate::util::read_u32_le(r)?;
 
             // area: Area
-            let area = Area::read(r)?;
+            let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
             // map: Map
-            let map = Map::read(r)?;
+            let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
             // bag_family: u32
             let bag_family = crate::util::read_u32_le(r)?;
@@ -505,7 +505,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             };
             let found = if current_size < body_size as usize {
                 // item_class: ItemClass
-                let item_class = ItemClass::tokio_read_u32_le(r).await?;
+                let item_class: ItemClass = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
                 // item_sub_class: u32
                 let item_sub_class = crate::util::tokio_read_u32_le(r).await?;
@@ -530,7 +530,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 let item_display_info = crate::util::tokio_read_u32_le(r).await?;
 
                 // quality: ItemQuality
-                let quality = ItemQuality::tokio_read_u32_le(r).await?;
+                let quality: ItemQuality = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
                 // flags: u32
                 let flags = crate::util::tokio_read_u32_le(r).await?;
@@ -540,7 +540,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 // sell_price: f64
                 let sell_price = crate::util::tokio_read_f64_le(r).await?;
                 // inventory_type: InventoryType
-                let inventory_type = InventoryType::tokio_read(r).await?;
+                let inventory_type: InventoryType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                 // allowed_class: u32
                 let allowed_class = crate::util::tokio_read_u32_le(r).await?;
@@ -675,10 +675,10 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 let max_durability = crate::util::tokio_read_u32_le(r).await?;
 
                 // area: Area
-                let area = Area::tokio_read(r).await?;
+                let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
                 // map: Map
-                let map = Map::tokio_read(r).await?;
+                let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
                 // bag_family: u32
                 let bag_family = crate::util::tokio_read_u32_le(r).await?;
@@ -980,7 +980,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             };
             let found = if current_size < body_size as usize {
                 // item_class: ItemClass
-                let item_class = ItemClass::astd_read_u32_le(r).await?;
+                let item_class: ItemClass = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
                 // item_sub_class: u32
                 let item_sub_class = crate::util::astd_read_u32_le(r).await?;
@@ -1005,7 +1005,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 let item_display_info = crate::util::astd_read_u32_le(r).await?;
 
                 // quality: ItemQuality
-                let quality = ItemQuality::astd_read_u32_le(r).await?;
+                let quality: ItemQuality = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
                 // flags: u32
                 let flags = crate::util::astd_read_u32_le(r).await?;
@@ -1015,7 +1015,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 // sell_price: f64
                 let sell_price = crate::util::astd_read_f64_le(r).await?;
                 // inventory_type: InventoryType
-                let inventory_type = InventoryType::astd_read(r).await?;
+                let inventory_type: InventoryType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                 // allowed_class: u32
                 let allowed_class = crate::util::astd_read_u32_le(r).await?;
@@ -1150,10 +1150,10 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 let max_durability = crate::util::astd_read_u32_le(r).await?;
 
                 // area: Area
-                let area = Area::astd_read(r).await?;
+                let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
                 // map: Map
-                let map = Map::astd_read(r).await?;
+                let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
                 // bag_family: u32
                 let bag_family = crate::util::astd_read_u32_le(r).await?;

@@ -30,10 +30,10 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // map: Map
-        let map = Map::read(r)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // action: BattlefieldPortAction
-        let action = BattlefieldPortAction::read(r)?;
+        let action: BattlefieldPortAction = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             map,
@@ -66,10 +66,10 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
      {
         Box::pin(async move {
             // map: Map
-            let map = Map::tokio_read(r).await?;
+            let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // action: BattlefieldPortAction
-            let action = BattlefieldPortAction::tokio_read(r).await?;
+            let action: BattlefieldPortAction = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 map,
@@ -116,10 +116,10 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
      {
         Box::pin(async move {
             // map: Map
-            let map = Map::astd_read(r).await?;
+            let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // action: BattlefieldPortAction
-            let action = BattlefieldPortAction::astd_read(r).await?;
+            let action: BattlefieldPortAction = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 map,

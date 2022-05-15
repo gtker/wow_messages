@@ -33,7 +33,7 @@ impl MessageBody for SMSG_PET_ACTION_SOUND {
         let guid = Guid::read(r)?;
 
         // reason: PetTalkReason
-        let reason = PetTalkReason::read(r)?;
+        let reason: PetTalkReason = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
@@ -69,7 +69,7 @@ impl MessageBody for SMSG_PET_ACTION_SOUND {
             let guid = Guid::tokio_read(r).await?;
 
             // reason: PetTalkReason
-            let reason = PetTalkReason::tokio_read(r).await?;
+            let reason: PetTalkReason = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,
@@ -119,7 +119,7 @@ impl MessageBody for SMSG_PET_ACTION_SOUND {
             let guid = Guid::astd_read(r).await?;
 
             // reason: PetTalkReason
-            let reason = PetTalkReason::astd_read(r).await?;
+            let reason: PetTalkReason = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,

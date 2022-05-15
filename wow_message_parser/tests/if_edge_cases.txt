@@ -17,7 +17,7 @@ impl ReadableAndWritable for IfEdgeCases {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // t: TEnum
-        let t = TEnum::read(r)?;
+        let t: TEnum = crate::util::read_u8_le(r)?.try_into()?;
 
         let t_if = match t {
             TEnum::ZERO => {
@@ -171,7 +171,7 @@ impl ReadableAndWritable for IfEdgeCases {
      {
         Box::pin(async move {
             // t: TEnum
-            let t = TEnum::tokio_read(r).await?;
+            let t: TEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let t_if = match t {
                 TEnum::ZERO => {
@@ -339,7 +339,7 @@ impl ReadableAndWritable for IfEdgeCases {
      {
         Box::pin(async move {
             // t: TEnum
-            let t = TEnum::astd_read(r).await?;
+            let t: TEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let t_if = match t {
                 TEnum::ZERO => {

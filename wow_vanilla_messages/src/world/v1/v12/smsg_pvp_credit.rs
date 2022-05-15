@@ -37,7 +37,7 @@ impl MessageBody for SMSG_PVP_CREDIT {
         let victim = Guid::read(r)?;
 
         // rank: PvpRank
-        let rank = PvpRank::read_u32_le(r)?;
+        let rank: PvpRank = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             honor_points,
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_PVP_CREDIT {
             let victim = Guid::tokio_read(r).await?;
 
             // rank: PvpRank
-            let rank = PvpRank::tokio_read_u32_le(r).await?;
+            let rank: PvpRank = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 honor_points,
@@ -137,7 +137,7 @@ impl MessageBody for SMSG_PVP_CREDIT {
             let victim = Guid::astd_read(r).await?;
 
             // rank: PvpRank
-            let rank = PvpRank::astd_read_u32_le(r).await?;
+            let rank: PvpRank = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 honor_points,

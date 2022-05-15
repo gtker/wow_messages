@@ -30,13 +30,13 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // status: BattlegroundEndStatus
-        let status = BattlegroundEndStatus::read(r)?;
+        let status: BattlegroundEndStatus = crate::util::read_u8_le(r)?.try_into()?;
 
         let status_if = match status {
             BattlegroundEndStatus::NOT_ENDED => MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED,
             BattlegroundEndStatus::ENDED => {
                 // winner: BattlegroundWinner
-                let winner = BattlegroundWinner::read(r)?;
+                let winner: BattlegroundWinner = crate::util::read_u8_le(r)?.try_into()?;
 
                 MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED {
                     winner,
@@ -100,13 +100,13 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
      {
         Box::pin(async move {
             // status: BattlegroundEndStatus
-            let status = BattlegroundEndStatus::tokio_read(r).await?;
+            let status: BattlegroundEndStatus = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let status_if = match status {
                 BattlegroundEndStatus::NOT_ENDED => MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED,
                 BattlegroundEndStatus::ENDED => {
                     // winner: BattlegroundWinner
-                    let winner = BattlegroundWinner::tokio_read(r).await?;
+                    let winner: BattlegroundWinner = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED {
                         winner,
@@ -184,13 +184,13 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
      {
         Box::pin(async move {
             // status: BattlegroundEndStatus
-            let status = BattlegroundEndStatus::astd_read(r).await?;
+            let status: BattlegroundEndStatus = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let status_if = match status {
                 BattlegroundEndStatus::NOT_ENDED => MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::NOT_ENDED,
                 BattlegroundEndStatus::ENDED => {
                     // winner: BattlegroundWinner
-                    let winner = BattlegroundWinner::astd_read(r).await?;
+                    let winner: BattlegroundWinner = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     MSG_PVP_LOG_DATA_ServerBattlegroundEndStatus::ENDED {
                         winner,

@@ -30,10 +30,10 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // area: Area
-        let area = Area::read(r)?;
+        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
         // status: MeetingStoneStatus
-        let status = MeetingStoneStatus::read(r)?;
+        let status: MeetingStoneStatus = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             area,
@@ -66,10 +66,10 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
      {
         Box::pin(async move {
             // area: Area
-            let area = Area::tokio_read(r).await?;
+            let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // status: MeetingStoneStatus
-            let status = MeetingStoneStatus::tokio_read(r).await?;
+            let status: MeetingStoneStatus = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 area,
@@ -116,10 +116,10 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
      {
         Box::pin(async move {
             // area: Area
-            let area = Area::astd_read(r).await?;
+            let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // status: MeetingStoneStatus
-            let status = MeetingStoneStatus::astd_read(r).await?;
+            let status: MeetingStoneStatus = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 area,

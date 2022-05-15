@@ -41,7 +41,7 @@ impl MessageBody for SMSG_PROCRESIST {
         let id = crate::util::read_u32_le(r)?;
 
         // log_format: LogFormat
-        let log_format = LogFormat::read(r)?;
+        let log_format: LogFormat = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
@@ -91,7 +91,7 @@ impl MessageBody for SMSG_PROCRESIST {
             let id = crate::util::tokio_read_u32_le(r).await?;
 
             // log_format: LogFormat
-            let log_format = LogFormat::tokio_read(r).await?;
+            let log_format: LogFormat = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,
@@ -155,7 +155,7 @@ impl MessageBody for SMSG_PROCRESIST {
             let id = crate::util::astd_read_u32_le(r).await?;
 
             // log_format: LogFormat
-            let log_format = LogFormat::astd_read(r).await?;
+            let log_format: LogFormat = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,

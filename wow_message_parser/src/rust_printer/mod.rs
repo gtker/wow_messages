@@ -124,23 +124,6 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn const_fn<S: AsRef<str>, F: Fn(&mut Self)>(
-        &mut self,
-        name_and_args: S,
-        return_type: S,
-        f: F,
-    ) {
-        self.open_curly(format!(
-            "pub const fn {} -> {}",
-            name_and_args.as_ref(),
-            return_type.as_ref()
-        ));
-
-        f(self);
-
-        self.closing_curly_newline();
-    }
-
     pub fn constant_sized<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, name: S, f: F) {
         self.wln(format!("impl ConstantSized for {} {{}}", name.as_ref()));
         self.newline();
@@ -516,54 +499,6 @@ impl Writer {
         ));
 
         f(self);
-
-        self.closing_curly_newline();
-    }
-
-    pub fn async_funcn_pub<S: AsRef<str>, S1: AsRef<str>, F: Fn(&mut Self, ImplType)>(
-        &mut self,
-        name: impl AsRef<str>,
-        args_sync: S,
-        args_tokio: S,
-        args_astd: S,
-        return_type: S1,
-        f: F,
-    ) {
-        self.wln(CFG_SYNC);
-        self.open_curly(format!(
-            "pub fn {}{} -> {}",
-            name.as_ref(),
-            args_sync.as_ref(),
-            return_type.as_ref()
-        ));
-
-        f(self, ImplType::Std);
-
-        self.closing_curly_newline();
-
-        self.wln(CFG_ASYNC_TOKIO);
-        self.open_curly(format!(
-            "pub async fn {prefix}{name}{args} -> {return_value}",
-            prefix = ImplType::Tokio.prefix(),
-            name = name.as_ref(),
-            args = args_tokio.as_ref(),
-            return_value = return_type.as_ref()
-        ));
-
-        f(self, ImplType::Tokio);
-
-        self.closing_curly_newline();
-
-        self.wln(CFG_ASYNC_ASYNC_STD);
-        self.open_curly(format!(
-            "pub async fn {prefix}{name}{args} -> {return_value}",
-            prefix = ImplType::AsyncStd.prefix(),
-            name = name.as_ref(),
-            args = args_astd.as_ref(),
-            return_value = return_type.as_ref()
-        ));
-
-        f(self, ImplType::AsyncStd);
 
         self.closing_curly_newline();
     }

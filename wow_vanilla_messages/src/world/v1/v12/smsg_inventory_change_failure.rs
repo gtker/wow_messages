@@ -27,7 +27,7 @@ impl MessageBody for SMSG_INVENTORY_CHANGE_FAILURE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // result: InventoryResult
-        let result = InventoryResult::read(r)?;
+        let result: InventoryResult = crate::util::read_u8_le(r)?.try_into()?;
 
         let result_if = match result {
             InventoryResult::OK => SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::OK,
@@ -4180,7 +4180,7 @@ impl MessageBody for SMSG_INVENTORY_CHANGE_FAILURE {
      {
         Box::pin(async move {
             // result: InventoryResult
-            let result = InventoryResult::tokio_read(r).await?;
+            let result: InventoryResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let result_if = match result {
                 InventoryResult::OK => SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::OK,
@@ -8347,7 +8347,7 @@ impl MessageBody for SMSG_INVENTORY_CHANGE_FAILURE {
      {
         Box::pin(async move {
             // result: InventoryResult
-            let result = InventoryResult::astd_read(r).await?;
+            let result: InventoryResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let result_if = match result {
                 InventoryResult::OK => SMSG_INVENTORY_CHANGE_FAILUREInventoryResult::OK,

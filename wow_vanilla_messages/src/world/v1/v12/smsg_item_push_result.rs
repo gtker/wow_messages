@@ -43,13 +43,13 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
         let guid = Guid::read(r)?;
 
         // source: NewItemSource
-        let source = NewItemSource::read(r)?;
+        let source: NewItemSource = crate::util::read_u32_le(r)?.try_into()?;
 
         // creation_type: NewItemCreationType
-        let creation_type = NewItemCreationType::read(r)?;
+        let creation_type: NewItemCreationType = crate::util::read_u32_le(r)?.try_into()?;
 
         // alert_chat: NewItemChatAlert
-        let alert_chat = NewItemChatAlert::read(r)?;
+        let alert_chat: NewItemChatAlert = crate::util::read_u32_le(r)?.try_into()?;
 
         // bag_slot: u8
         let bag_slot = crate::util::read_u8_le(r)?;
@@ -135,13 +135,13 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
             let guid = Guid::tokio_read(r).await?;
 
             // source: NewItemSource
-            let source = NewItemSource::tokio_read(r).await?;
+            let source: NewItemSource = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // creation_type: NewItemCreationType
-            let creation_type = NewItemCreationType::tokio_read(r).await?;
+            let creation_type: NewItemCreationType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // alert_chat: NewItemChatAlert
-            let alert_chat = NewItemChatAlert::tokio_read(r).await?;
+            let alert_chat: NewItemChatAlert = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // bag_slot: u8
             let bag_slot = crate::util::tokio_read_u8_le(r).await?;
@@ -241,13 +241,13 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
             let guid = Guid::astd_read(r).await?;
 
             // source: NewItemSource
-            let source = NewItemSource::astd_read(r).await?;
+            let source: NewItemSource = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // creation_type: NewItemCreationType
-            let creation_type = NewItemCreationType::astd_read(r).await?;
+            let creation_type: NewItemCreationType = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // alert_chat: NewItemChatAlert
-            let alert_chat = NewItemChatAlert::astd_read(r).await?;
+            let alert_chat: NewItemChatAlert = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // bag_slot: u8
             let bag_slot = crate::util::astd_read_u8_le(r).await?;

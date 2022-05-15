@@ -18,7 +18,7 @@ impl ReadableAndWritable for AuraLog {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // aura_type: AuraType
-        let aura_type = AuraType::read(r)?;
+        let aura_type: AuraType = crate::util::read_u32_le(r)?.try_into()?;
 
         let aura_type_if = match aura_type {
             AuraType::NONE => AuraLogAuraType::NONE,
@@ -29,7 +29,7 @@ impl ReadableAndWritable for AuraLog {
                 let damage1 = crate::util::read_u32_le(r)?;
 
                 // school: SpellSchool
-                let school = SpellSchool::read(r)?;
+                let school: SpellSchool = crate::util::read_u8_le(r)?.try_into()?;
 
                 // absorbed: u32
                 let absorbed = crate::util::read_u32_le(r)?;
@@ -184,7 +184,7 @@ impl ReadableAndWritable for AuraLog {
                 let damage1 = crate::util::read_u32_le(r)?;
 
                 // school: SpellSchool
-                let school = SpellSchool::read(r)?;
+                let school: SpellSchool = crate::util::read_u8_le(r)?.try_into()?;
 
                 // absorbed: u32
                 let absorbed = crate::util::read_u32_le(r)?;
@@ -606,7 +606,7 @@ impl ReadableAndWritable for AuraLog {
      {
         Box::pin(async move {
             // aura_type: AuraType
-            let aura_type = AuraType::tokio_read(r).await?;
+            let aura_type: AuraType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             let aura_type_if = match aura_type {
                 AuraType::NONE => AuraLogAuraType::NONE,
@@ -617,7 +617,7 @@ impl ReadableAndWritable for AuraLog {
                     let damage1 = crate::util::tokio_read_u32_le(r).await?;
 
                     // school: SpellSchool
-                    let school = SpellSchool::tokio_read(r).await?;
+                    let school: SpellSchool = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     // absorbed: u32
                     let absorbed = crate::util::tokio_read_u32_le(r).await?;
@@ -772,7 +772,7 @@ impl ReadableAndWritable for AuraLog {
                     let damage1 = crate::util::tokio_read_u32_le(r).await?;
 
                     // school: SpellSchool
-                    let school = SpellSchool::tokio_read(r).await?;
+                    let school: SpellSchool = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     // absorbed: u32
                     let absorbed = crate::util::tokio_read_u32_le(r).await?;
@@ -1208,7 +1208,7 @@ impl ReadableAndWritable for AuraLog {
      {
         Box::pin(async move {
             // aura_type: AuraType
-            let aura_type = AuraType::astd_read(r).await?;
+            let aura_type: AuraType = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             let aura_type_if = match aura_type {
                 AuraType::NONE => AuraLogAuraType::NONE,
@@ -1219,7 +1219,7 @@ impl ReadableAndWritable for AuraLog {
                     let damage1 = crate::util::astd_read_u32_le(r).await?;
 
                     // school: SpellSchool
-                    let school = SpellSchool::astd_read(r).await?;
+                    let school: SpellSchool = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     // absorbed: u32
                     let absorbed = crate::util::astd_read_u32_le(r).await?;
@@ -1374,7 +1374,7 @@ impl ReadableAndWritable for AuraLog {
                     let damage1 = crate::util::astd_read_u32_le(r).await?;
 
                     // school: SpellSchool
-                    let school = SpellSchool::astd_read(r).await?;
+                    let school: SpellSchool = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     // absorbed: u32
                     let absorbed = crate::util::astd_read_u32_le(r).await?;

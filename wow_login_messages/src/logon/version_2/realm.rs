@@ -27,7 +27,7 @@ impl ReadableAndWritable for Realm {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // realm_type: RealmType
-        let realm_type = RealmType::read(r)?;
+        let realm_type: RealmType = crate::util::read_u32_le(r)?.try_into()?;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::read_u8_le(r)?);
@@ -41,13 +41,13 @@ impl ReadableAndWritable for Realm {
         let address = String::from_utf8(address)?;
 
         // population: Population
-        let population = Population::read(r)?;
+        let population: Population = crate::util::read_u32_le(r)?.into();
 
         // number_of_characters_on_realm: u8
         let number_of_characters_on_realm = crate::util::read_u8_le(r)?;
 
         // category: RealmCategory
-        let category = RealmCategory::read(r)?;
+        let category: RealmCategory = crate::util::read_u8_le(r)?.try_into()?;
 
         // realm_id: u8
         let realm_id = crate::util::read_u8_le(r)?;
@@ -110,7 +110,7 @@ impl ReadableAndWritable for Realm {
      {
         Box::pin(async move {
             // realm_type: RealmType
-            let realm_type = RealmType::tokio_read(r).await?;
+            let realm_type: RealmType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // flag: RealmFlag
             let flag = RealmFlag::new(crate::util::tokio_read_u8_le(r).await?);
@@ -124,13 +124,13 @@ impl ReadableAndWritable for Realm {
             let address = String::from_utf8(address)?;
 
             // population: Population
-            let population = Population::tokio_read(r).await?;
+            let population: Population = crate::util::tokio_read_u32_le(r).await?.into();
 
             // number_of_characters_on_realm: u8
             let number_of_characters_on_realm = crate::util::tokio_read_u8_le(r).await?;
 
             // category: RealmCategory
-            let category = RealmCategory::tokio_read(r).await?;
+            let category: RealmCategory = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // realm_id: u8
             let realm_id = crate::util::tokio_read_u8_le(r).await?;
@@ -207,7 +207,7 @@ impl ReadableAndWritable for Realm {
      {
         Box::pin(async move {
             // realm_type: RealmType
-            let realm_type = RealmType::astd_read(r).await?;
+            let realm_type: RealmType = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // flag: RealmFlag
             let flag = RealmFlag::new(crate::util::astd_read_u8_le(r).await?);
@@ -221,13 +221,13 @@ impl ReadableAndWritable for Realm {
             let address = String::from_utf8(address)?;
 
             // population: Population
-            let population = Population::astd_read(r).await?;
+            let population: Population = crate::util::astd_read_u32_le(r).await?.into();
 
             // number_of_characters_on_realm: u8
             let number_of_characters_on_realm = crate::util::astd_read_u8_le(r).await?;
 
             // category: RealmCategory
-            let category = RealmCategory::astd_read(r).await?;
+            let category: RealmCategory = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // realm_id: u8
             let realm_id = crate::util::astd_read_u8_le(r).await?;

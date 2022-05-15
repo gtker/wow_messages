@@ -47,7 +47,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
         let guid = Guid::read(r)?;
 
         // highest_rank: PvpRank
-        let highest_rank = PvpRank::read(r)?;
+        let highest_rank: PvpRank = crate::util::read_u8_le(r)?.try_into()?;
 
         // today_honorable_and_dishonorable: u32
         let today_honorable_and_dishonorable = crate::util::read_u32_le(r)?;
@@ -86,7 +86,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
         let this_week_honor = crate::util::read_u32_le(r)?;
 
         // last_week_standing: PvpRank
-        let last_week_standing = PvpRank::read_u32_le(r)?;
+        let last_week_standing: PvpRank = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // rank_progress_bar: u8
         let rank_progress_bar = crate::util::read_u8_le(r)?;
@@ -181,7 +181,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             let guid = Guid::tokio_read(r).await?;
 
             // highest_rank: PvpRank
-            let highest_rank = PvpRank::tokio_read(r).await?;
+            let highest_rank: PvpRank = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // today_honorable_and_dishonorable: u32
             let today_honorable_and_dishonorable = crate::util::tokio_read_u32_le(r).await?;
@@ -220,7 +220,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             let this_week_honor = crate::util::tokio_read_u32_le(r).await?;
 
             // last_week_standing: PvpRank
-            let last_week_standing = PvpRank::tokio_read_u32_le(r).await?;
+            let last_week_standing: PvpRank = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             // rank_progress_bar: u8
             let rank_progress_bar = crate::util::tokio_read_u8_le(r).await?;
@@ -329,7 +329,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             let guid = Guid::astd_read(r).await?;
 
             // highest_rank: PvpRank
-            let highest_rank = PvpRank::astd_read(r).await?;
+            let highest_rank: PvpRank = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // today_honorable_and_dishonorable: u32
             let today_honorable_and_dishonorable = crate::util::astd_read_u32_le(r).await?;
@@ -368,7 +368,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             let this_week_honor = crate::util::astd_read_u32_le(r).await?;
 
             // last_week_standing: PvpRank
-            let last_week_standing = PvpRank::astd_read_u32_le(r).await?;
+            let last_week_standing: PvpRank = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             // rank_progress_bar: u8
             let rank_progress_bar = crate::util::astd_read_u8_le(r).await?;

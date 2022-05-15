@@ -35,10 +35,10 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // map: Map
-        let map = Map::read(r)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // reason: TransferAbortReason
-        let reason = TransferAbortReason::read(r)?;
+        let reason: TransferAbortReason = crate::util::read_u8_le(r)?.try_into()?;
 
         // padding: u8
         let _padding = crate::util::read_u8_le(r)?;
@@ -78,10 +78,10 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
      {
         Box::pin(async move {
             // map: Map
-            let map = Map::tokio_read(r).await?;
+            let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // reason: TransferAbortReason
-            let reason = TransferAbortReason::tokio_read(r).await?;
+            let reason: TransferAbortReason = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // padding: u8
             let _padding = crate::util::tokio_read_u8_le(r).await?;
@@ -135,10 +135,10 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
      {
         Box::pin(async move {
             // map: Map
-            let map = Map::astd_read(r).await?;
+            let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // reason: TransferAbortReason
-            let reason = TransferAbortReason::astd_read(r).await?;
+            let reason: TransferAbortReason = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // padding: u8
             let _padding = crate::util::astd_read_u8_le(r).await?;

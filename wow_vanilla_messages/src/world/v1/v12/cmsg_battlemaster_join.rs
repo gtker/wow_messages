@@ -35,7 +35,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
         let guid = Guid::read(r)?;
 
         // map: Map
-        let map = Map::read(r)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // instance_id: u32
         let instance_id = crate::util::read_u32_le(r)?;
@@ -85,7 +85,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
             let guid = Guid::tokio_read(r).await?;
 
             // map: Map
-            let map = Map::tokio_read(r).await?;
+            let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // instance_id: u32
             let instance_id = crate::util::tokio_read_u32_le(r).await?;
@@ -149,7 +149,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
             let guid = Guid::astd_read(r).await?;
 
             // map: Map
-            let map = Map::astd_read(r).await?;
+            let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // instance_id: u32
             let instance_id = crate::util::astd_read_u32_le(r).await?;

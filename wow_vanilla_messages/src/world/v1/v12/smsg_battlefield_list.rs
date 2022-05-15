@@ -36,7 +36,7 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
         let battlemaster = Guid::read(r)?;
 
         // map: Map
-        let map = Map::read(r)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;
@@ -111,7 +111,7 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
             let battlemaster = Guid::tokio_read(r).await?;
 
             // map: Map
-            let map = Map::tokio_read(r).await?;
+            let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // unknown1: u8
             let unknown1 = crate::util::tokio_read_u8_le(r).await?;
@@ -200,7 +200,7 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
             let battlemaster = Guid::astd_read(r).await?;
 
             // map: Map
-            let map = Map::astd_read(r).await?;
+            let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // unknown1: u8
             let unknown1 = crate::util::astd_read_u8_le(r).await?;

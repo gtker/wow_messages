@@ -29,7 +29,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // status: TradeStatus
-        let status = TradeStatus::read(r)?;
+        let status: TradeStatus = crate::util::read_u32_le(r)?.try_into()?;
 
         let status_if = match status {
             TradeStatus::BUSY => SMSG_TRADE_STATUSTradeStatus::BUSY,
@@ -53,7 +53,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
             TradeStatus::WRONG_FACTION => SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION,
             TradeStatus::CLOSE_WINDOW => {
                 // inventory_result: InventoryResult
-                let inventory_result = InventoryResult::read_u32_le(r)?;
+                let inventory_result: InventoryResult = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
                 // target_error: u8
                 let target_error = crate::util::read_u8_le(r)?;
@@ -180,7 +180,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
      {
         Box::pin(async move {
             // status: TradeStatus
-            let status = TradeStatus::tokio_read(r).await?;
+            let status: TradeStatus = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             let status_if = match status {
                 TradeStatus::BUSY => SMSG_TRADE_STATUSTradeStatus::BUSY,
@@ -204,7 +204,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
                 TradeStatus::WRONG_FACTION => SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION,
                 TradeStatus::CLOSE_WINDOW => {
                     // inventory_result: InventoryResult
-                    let inventory_result = InventoryResult::tokio_read_u32_le(r).await?;
+                    let inventory_result: InventoryResult = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
                     // target_error: u8
                     let target_error = crate::util::tokio_read_u8_le(r).await?;
@@ -345,7 +345,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
      {
         Box::pin(async move {
             // status: TradeStatus
-            let status = TradeStatus::astd_read(r).await?;
+            let status: TradeStatus = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             let status_if = match status {
                 TradeStatus::BUSY => SMSG_TRADE_STATUSTradeStatus::BUSY,
@@ -369,7 +369,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
                 TradeStatus::WRONG_FACTION => SMSG_TRADE_STATUSTradeStatus::WRONG_FACTION,
                 TradeStatus::CLOSE_WINDOW => {
                     // inventory_result: InventoryResult
-                    let inventory_result = InventoryResult::astd_read_u32_le(r).await?;
+                    let inventory_result: InventoryResult = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
                     // target_error: u8
                     let target_error = crate::util::astd_read_u8_le(r).await?;

@@ -22,7 +22,7 @@ impl ReadableAndWritable for CharacterGear {
         let equipment_display_id = crate::util::read_u32_le(r)?;
 
         // inventory_type: InventoryType
-        let inventory_type = InventoryType::read(r)?;
+        let inventory_type: InventoryType = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             equipment_display_id,
@@ -57,7 +57,7 @@ impl ReadableAndWritable for CharacterGear {
             let equipment_display_id = crate::util::tokio_read_u32_le(r).await?;
 
             // inventory_type: InventoryType
-            let inventory_type = InventoryType::tokio_read(r).await?;
+            let inventory_type: InventoryType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 equipment_display_id,
@@ -106,7 +106,7 @@ impl ReadableAndWritable for CharacterGear {
             let equipment_display_id = crate::util::astd_read_u32_le(r).await?;
 
             // inventory_type: InventoryType
-            let inventory_type = InventoryType::astd_read(r).await?;
+            let inventory_type: InventoryType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 equipment_display_id,

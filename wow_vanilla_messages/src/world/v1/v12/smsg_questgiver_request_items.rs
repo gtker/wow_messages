@@ -79,7 +79,7 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
         let unknown1 = crate::util::read_u32_le(r)?;
 
         // completable: QuestCompletable
-        let completable = QuestCompletable::read(r)?;
+        let completable: QuestCompletable = crate::util::read_u32_le(r)?.try_into()?;
 
         // flags2: u32
         let flags2 = crate::util::read_u32_le(r)?;
@@ -209,7 +209,7 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
             let unknown1 = crate::util::tokio_read_u32_le(r).await?;
 
             // completable: QuestCompletable
-            let completable = QuestCompletable::tokio_read(r).await?;
+            let completable: QuestCompletable = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // flags2: u32
             let flags2 = crate::util::tokio_read_u32_le(r).await?;
@@ -353,7 +353,7 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
             let unknown1 = crate::util::astd_read_u32_le(r).await?;
 
             // completable: QuestCompletable
-            let completable = QuestCompletable::astd_read(r).await?;
+            let completable: QuestCompletable = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // flags2: u32
             let flags2 = crate::util::astd_read_u32_le(r).await?;

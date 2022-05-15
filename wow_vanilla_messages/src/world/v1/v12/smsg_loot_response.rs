@@ -33,7 +33,7 @@ impl MessageBody for SMSG_LOOT_RESPONSE {
         let guid = Guid::read(r)?;
 
         // loot_method: LootMethod
-        let loot_method = LootMethod::read(r)?;
+        let loot_method: LootMethod = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
@@ -69,7 +69,7 @@ impl MessageBody for SMSG_LOOT_RESPONSE {
             let guid = Guid::tokio_read(r).await?;
 
             // loot_method: LootMethod
-            let loot_method = LootMethod::tokio_read(r).await?;
+            let loot_method: LootMethod = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,
@@ -119,7 +119,7 @@ impl MessageBody for SMSG_LOOT_RESPONSE {
             let guid = Guid::astd_read(r).await?;
 
             // loot_method: LootMethod
-            let loot_method = LootMethod::astd_read(r).await?;
+            let loot_method: LootMethod = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,

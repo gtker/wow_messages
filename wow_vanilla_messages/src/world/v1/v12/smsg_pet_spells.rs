@@ -43,10 +43,10 @@ impl MessageBody for SMSG_PET_SPELLS {
         let unknown1 = crate::util::read_u32_le(r)?;
 
         // react: PetReactState
-        let react = PetReactState::read(r)?;
+        let react: PetReactState = crate::util::read_u8_le(r)?.try_into()?;
 
         // command: PetCommandState
-        let command = PetCommandState::read(r)?;
+        let command: PetCommandState = crate::util::read_u8_le(r)?.try_into()?;
 
         // unknown2: u16
         let unknown2 = crate::util::read_u16_le(r)?;
@@ -149,10 +149,10 @@ impl MessageBody for SMSG_PET_SPELLS {
             let unknown1 = crate::util::tokio_read_u32_le(r).await?;
 
             // react: PetReactState
-            let react = PetReactState::tokio_read(r).await?;
+            let react: PetReactState = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // command: PetCommandState
-            let command = PetCommandState::tokio_read(r).await?;
+            let command: PetCommandState = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // unknown2: u16
             let unknown2 = crate::util::tokio_read_u16_le(r).await?;
@@ -269,10 +269,10 @@ impl MessageBody for SMSG_PET_SPELLS {
             let unknown1 = crate::util::astd_read_u32_le(r).await?;
 
             // react: PetReactState
-            let react = PetReactState::astd_read(r).await?;
+            let react: PetReactState = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // command: PetCommandState
-            let command = PetCommandState::astd_read(r).await?;
+            let command: PetCommandState = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // unknown2: u16
             let unknown2 = crate::util::astd_read_u16_le(r).await?;

@@ -28,7 +28,7 @@ impl MessageBody for SMSG_SERVER_MESSAGE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // message_type: ServerMessageType
-        let message_type = ServerMessageType::read(r)?;
+        let message_type: ServerMessageType = crate::util::read_u32_le(r)?.try_into()?;
 
         // message: CString
         let message = crate::util::read_c_string_to_vec(r)?;
@@ -67,7 +67,7 @@ impl MessageBody for SMSG_SERVER_MESSAGE {
      {
         Box::pin(async move {
             // message_type: ServerMessageType
-            let message_type = ServerMessageType::tokio_read(r).await?;
+            let message_type: ServerMessageType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // message: CString
             let message = crate::util::tokio_read_c_string_to_vec(r).await?;
@@ -120,7 +120,7 @@ impl MessageBody for SMSG_SERVER_MESSAGE {
      {
         Box::pin(async move {
             // message_type: ServerMessageType
-            let message_type = ServerMessageType::astd_read(r).await?;
+            let message_type: ServerMessageType = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // message: CString
             let message = crate::util::astd_read_c_string_to_vec(r).await?;

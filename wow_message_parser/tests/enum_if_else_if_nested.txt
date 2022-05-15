@@ -19,10 +19,10 @@ impl ReadableAndWritable for EnumIfElseIfNested {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // e: SimpleEnum
-        let e = SimpleEnum::read(r)?;
+        let e: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
 
         // n: NestedEnum
-        let n = NestedEnum::read(r)?;
+        let n: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
 
         let e_if = match e {
             SimpleEnum::ZERO => {
@@ -79,10 +79,10 @@ impl ReadableAndWritable for EnumIfElseIfNested {
      {
         Box::pin(async move {
             // e: SimpleEnum
-            let e = SimpleEnum::tokio_read(r).await?;
+            let e: SimpleEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // n: NestedEnum
-            let n = NestedEnum::tokio_read(r).await?;
+            let n: NestedEnum = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let e_if = match e {
                 SimpleEnum::ZERO => {
@@ -153,10 +153,10 @@ impl ReadableAndWritable for EnumIfElseIfNested {
      {
         Box::pin(async move {
             // e: SimpleEnum
-            let e = SimpleEnum::astd_read(r).await?;
+            let e: SimpleEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // n: NestedEnum
-            let n = NestedEnum::astd_read(r).await?;
+            let n: NestedEnum = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let e_if = match e {
                 SimpleEnum::ZERO => {

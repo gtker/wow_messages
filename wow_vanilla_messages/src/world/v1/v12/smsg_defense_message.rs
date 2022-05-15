@@ -29,7 +29,7 @@ impl MessageBody for SMSG_DEFENSE_MESSAGE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // map: Map
-        let map = Map::read(r)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // message_length: u32
         let message_length = crate::util::read_u32_le(r)?;
@@ -75,7 +75,7 @@ impl MessageBody for SMSG_DEFENSE_MESSAGE {
      {
         Box::pin(async move {
             // map: Map
-            let map = Map::tokio_read(r).await?;
+            let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // message_length: u32
             let message_length = crate::util::tokio_read_u32_le(r).await?;
@@ -135,7 +135,7 @@ impl MessageBody for SMSG_DEFENSE_MESSAGE {
      {
         Box::pin(async move {
             // map: Map
-            let map = Map::astd_read(r).await?;
+            let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // message_length: u32
             let message_length = crate::util::astd_read_u32_le(r).await?;

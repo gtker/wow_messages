@@ -38,7 +38,7 @@ impl MessageBody for SMSG_TEXT_EMOTE {
         let text_emote = crate::util::read_u32_le(r)?;
 
         // emote: Emote
-        let emote = Emote::read(r)?;
+        let emote: Emote = crate::util::read_u32_le(r)?.try_into()?;
 
         // name_length: u32
         let name_length = crate::util::read_u32_le(r)?;
@@ -98,7 +98,7 @@ impl MessageBody for SMSG_TEXT_EMOTE {
             let text_emote = crate::util::tokio_read_u32_le(r).await?;
 
             // emote: Emote
-            let emote = Emote::tokio_read(r).await?;
+            let emote: Emote = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // name_length: u32
             let name_length = crate::util::tokio_read_u32_le(r).await?;
@@ -172,7 +172,7 @@ impl MessageBody for SMSG_TEXT_EMOTE {
             let text_emote = crate::util::astd_read_u32_le(r).await?;
 
             // emote: Emote
-            let emote = Emote::astd_read(r).await?;
+            let emote: Emote = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // name_length: u32
             let name_length = crate::util::astd_read_u32_le(r).await?;

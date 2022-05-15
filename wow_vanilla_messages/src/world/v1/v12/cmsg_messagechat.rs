@@ -29,10 +29,10 @@ impl MessageBody for CMSG_MESSAGECHAT {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // chat_type: ChatType
-        let chat_type = ChatType::read_u32_le(r)?;
+        let chat_type: ChatType = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // language: Language
-        let language = Language::read(r)?;
+        let language: Language = crate::util::read_u32_le(r)?.try_into()?;
 
         let chat_type_if = match chat_type {
             ChatType::SAY => {
@@ -403,10 +403,10 @@ impl MessageBody for CMSG_MESSAGECHAT {
      {
         Box::pin(async move {
             // chat_type: ChatType
-            let chat_type = ChatType::tokio_read_u32_le(r).await?;
+            let chat_type: ChatType = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             // language: Language
-            let language = Language::tokio_read(r).await?;
+            let language: Language = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             let chat_type_if = match chat_type {
                 ChatType::SAY => {
@@ -791,10 +791,10 @@ impl MessageBody for CMSG_MESSAGECHAT {
      {
         Box::pin(async move {
             // chat_type: ChatType
-            let chat_type = ChatType::astd_read_u32_le(r).await?;
+            let chat_type: ChatType = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             // language: Language
-            let language = Language::astd_read(r).await?;
+            let language: Language = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             let chat_type_if = match chat_type {
                 ChatType::SAY => {

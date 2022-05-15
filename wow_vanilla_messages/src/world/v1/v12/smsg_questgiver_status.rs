@@ -33,7 +33,7 @@ impl MessageBody for SMSG_QUESTGIVER_STATUS {
         let guid = Guid::read(r)?;
 
         // status: QuestGiverStatus
-        let status = QuestGiverStatus::read_u32_le(r)?;
+        let status: QuestGiverStatus = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             guid,
@@ -69,7 +69,7 @@ impl MessageBody for SMSG_QUESTGIVER_STATUS {
             let guid = Guid::tokio_read(r).await?;
 
             // status: QuestGiverStatus
-            let status = QuestGiverStatus::tokio_read_u32_le(r).await?;
+            let status: QuestGiverStatus = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 guid,
@@ -119,7 +119,7 @@ impl MessageBody for SMSG_QUESTGIVER_STATUS {
             let guid = Guid::astd_read(r).await?;
 
             // status: QuestGiverStatus
-            let status = QuestGiverStatus::astd_read_u32_le(r).await?;
+            let status: QuestGiverStatus = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 guid,

@@ -20,7 +20,7 @@ impl ReadableAndWritable for RaidTargetUpdate {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // index: RaidTargetIndex
-        let index = RaidTargetIndex::read(r)?;
+        let index: RaidTargetIndex = crate::util::read_u8_le(r)?.try_into()?;
 
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -55,7 +55,7 @@ impl ReadableAndWritable for RaidTargetUpdate {
      {
         Box::pin(async move {
             // index: RaidTargetIndex
-            let index = RaidTargetIndex::tokio_read(r).await?;
+            let index: RaidTargetIndex = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // guid: Guid
             let guid = Guid::tokio_read(r).await?;
@@ -104,7 +104,7 @@ impl ReadableAndWritable for RaidTargetUpdate {
      {
         Box::pin(async move {
             // index: RaidTargetIndex
-            let index = RaidTargetIndex::astd_read(r).await?;
+            let index: RaidTargetIndex = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // guid: Guid
             let guid = Guid::astd_read(r).await?;

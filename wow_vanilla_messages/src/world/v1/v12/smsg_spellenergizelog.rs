@@ -41,7 +41,7 @@ impl MessageBody for SMSG_SPELLENERGIZELOG {
         let spell = crate::util::read_u32_le(r)?;
 
         // power: PowerType
-        let power = PowerType::read(r)?;
+        let power: PowerType = crate::util::read_u32_le(r)?.try_into()?;
 
         // damage: u32
         let damage = crate::util::read_u32_le(r)?;
@@ -98,7 +98,7 @@ impl MessageBody for SMSG_SPELLENERGIZELOG {
             let spell = crate::util::tokio_read_u32_le(r).await?;
 
             // power: PowerType
-            let power = PowerType::tokio_read(r).await?;
+            let power: PowerType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // damage: u32
             let damage = crate::util::tokio_read_u32_le(r).await?;
@@ -169,7 +169,7 @@ impl MessageBody for SMSG_SPELLENERGIZELOG {
             let spell = crate::util::astd_read_u32_le(r).await?;
 
             // power: PowerType
-            let power = PowerType::astd_read(r).await?;
+            let power: PowerType = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // damage: u32
             let damage = crate::util::astd_read_u32_le(r).await?;

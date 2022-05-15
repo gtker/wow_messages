@@ -28,7 +28,7 @@ impl MessageBody for SMSG_ACTIVATETAXIREPLY {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // reply: ActivateTaxiReply
-        let reply = ActivateTaxiReply::read(r)?;
+        let reply: ActivateTaxiReply = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             reply,
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_ACTIVATETAXIREPLY {
      {
         Box::pin(async move {
             // reply: ActivateTaxiReply
-            let reply = ActivateTaxiReply::tokio_read(r).await?;
+            let reply: ActivateTaxiReply = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 reply,
@@ -100,7 +100,7 @@ impl MessageBody for SMSG_ACTIVATETAXIREPLY {
      {
         Box::pin(async move {
             // reply: ActivateTaxiReply
-            let reply = ActivateTaxiReply::astd_read(r).await?;
+            let reply: ActivateTaxiReply = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 reply,

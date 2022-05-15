@@ -32,7 +32,7 @@ impl MessageBody for SMSG_WEATHER {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // weather_type: WeatherType
-        let weather_type = WeatherType::read(r)?;
+        let weather_type: WeatherType = crate::util::read_u32_le(r)?.try_into()?;
 
         // grade: f32
         let grade = crate::util::read_f32_le(r)?;
@@ -40,7 +40,7 @@ impl MessageBody for SMSG_WEATHER {
         let sound_id = crate::util::read_u32_le(r)?;
 
         // change: WeatherChangeType
-        let change = WeatherChangeType::read(r)?;
+        let change: WeatherChangeType = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             weather_type,
@@ -81,7 +81,7 @@ impl MessageBody for SMSG_WEATHER {
      {
         Box::pin(async move {
             // weather_type: WeatherType
-            let weather_type = WeatherType::tokio_read(r).await?;
+            let weather_type: WeatherType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // grade: f32
             let grade = crate::util::tokio_read_f32_le(r).await?;
@@ -89,7 +89,7 @@ impl MessageBody for SMSG_WEATHER {
             let sound_id = crate::util::tokio_read_u32_le(r).await?;
 
             // change: WeatherChangeType
-            let change = WeatherChangeType::tokio_read(r).await?;
+            let change: WeatherChangeType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 weather_type,
@@ -144,7 +144,7 @@ impl MessageBody for SMSG_WEATHER {
      {
         Box::pin(async move {
             // weather_type: WeatherType
-            let weather_type = WeatherType::astd_read(r).await?;
+            let weather_type: WeatherType = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // grade: f32
             let grade = crate::util::astd_read_f32_le(r).await?;
@@ -152,7 +152,7 @@ impl MessageBody for SMSG_WEATHER {
             let sound_id = crate::util::astd_read_u32_le(r).await?;
 
             // change: WeatherChangeType
-            let change = WeatherChangeType::astd_read(r).await?;
+            let change: WeatherChangeType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 weather_type,

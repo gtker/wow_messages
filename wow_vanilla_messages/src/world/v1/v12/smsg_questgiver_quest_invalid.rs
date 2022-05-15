@@ -28,7 +28,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_INVALID {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // msg: QuestFailedReason
-        let msg = QuestFailedReason::read(r)?;
+        let msg: QuestFailedReason = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             msg,
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_INVALID {
      {
         Box::pin(async move {
             // msg: QuestFailedReason
-            let msg = QuestFailedReason::tokio_read(r).await?;
+            let msg: QuestFailedReason = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 msg,
@@ -100,7 +100,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_INVALID {
      {
         Box::pin(async move {
             // msg: QuestFailedReason
-            let msg = QuestFailedReason::astd_read(r).await?;
+            let msg: QuestFailedReason = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 msg,

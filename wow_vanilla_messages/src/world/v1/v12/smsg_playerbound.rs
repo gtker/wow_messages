@@ -33,7 +33,7 @@ impl MessageBody for SMSG_PLAYERBOUND {
         let guid = Guid::read(r)?;
 
         // area: Area
-        let area = Area::read(r)?;
+        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
@@ -69,7 +69,7 @@ impl MessageBody for SMSG_PLAYERBOUND {
             let guid = Guid::tokio_read(r).await?;
 
             // area: Area
-            let area = Area::tokio_read(r).await?;
+            let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,
@@ -119,7 +119,7 @@ impl MessageBody for SMSG_PLAYERBOUND {
             let guid = Guid::astd_read(r).await?;
 
             // area: Area
-            let area = Area::astd_read(r).await?;
+            let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,

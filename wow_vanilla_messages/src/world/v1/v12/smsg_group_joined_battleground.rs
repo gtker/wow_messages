@@ -28,7 +28,7 @@ impl MessageBody for SMSG_GROUP_JOINED_BATTLEGROUND {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // id: BgTypeId
-        let id = BgTypeId::read(r)?;
+        let id: BgTypeId = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             id,
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_GROUP_JOINED_BATTLEGROUND {
      {
         Box::pin(async move {
             // id: BgTypeId
-            let id = BgTypeId::tokio_read(r).await?;
+            let id: BgTypeId = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 id,
@@ -100,7 +100,7 @@ impl MessageBody for SMSG_GROUP_JOINED_BATTLEGROUND {
      {
         Box::pin(async move {
             // id: BgTypeId
-            let id = BgTypeId::astd_read(r).await?;
+            let id: BgTypeId = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 id,

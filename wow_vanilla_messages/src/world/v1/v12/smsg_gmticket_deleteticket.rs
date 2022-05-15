@@ -28,7 +28,7 @@ impl MessageBody for SMSG_GMTICKET_DELETETICKET {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // response: GmTicketResponse
-        let response = GmTicketResponse::read(r)?;
+        let response: GmTicketResponse = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             response,
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_GMTICKET_DELETETICKET {
      {
         Box::pin(async move {
             // response: GmTicketResponse
-            let response = GmTicketResponse::tokio_read(r).await?;
+            let response: GmTicketResponse = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 response,
@@ -100,7 +100,7 @@ impl MessageBody for SMSG_GMTICKET_DELETETICKET {
      {
         Box::pin(async move {
             // response: GmTicketResponse
-            let response = GmTicketResponse::astd_read(r).await?;
+            let response: GmTicketResponse = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 response,

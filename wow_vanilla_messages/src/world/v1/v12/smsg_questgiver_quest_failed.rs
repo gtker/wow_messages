@@ -32,7 +32,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_FAILED {
         let quest_id = crate::util::read_u32_le(r)?;
 
         // reason: QuestFailedReason
-        let reason = QuestFailedReason::read(r)?;
+        let reason: QuestFailedReason = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             quest_id,
@@ -68,7 +68,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_FAILED {
             let quest_id = crate::util::tokio_read_u32_le(r).await?;
 
             // reason: QuestFailedReason
-            let reason = QuestFailedReason::tokio_read(r).await?;
+            let reason: QuestFailedReason = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 quest_id,
@@ -118,7 +118,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_FAILED {
             let quest_id = crate::util::astd_read_u32_le(r).await?;
 
             // reason: QuestFailedReason
-            let reason = QuestFailedReason::astd_read(r).await?;
+            let reason: QuestFailedReason = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 quest_id,

@@ -33,7 +33,7 @@ impl MessageBody for SMSG_AI_REACTION {
         let guid = Guid::read(r)?;
 
         // reaction: AiReaction
-        let reaction = AiReaction::read(r)?;
+        let reaction: AiReaction = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
@@ -69,7 +69,7 @@ impl MessageBody for SMSG_AI_REACTION {
             let guid = Guid::tokio_read(r).await?;
 
             // reaction: AiReaction
-            let reaction = AiReaction::tokio_read(r).await?;
+            let reaction: AiReaction = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,
@@ -119,7 +119,7 @@ impl MessageBody for SMSG_AI_REACTION {
             let guid = Guid::astd_read(r).await?;
 
             // reaction: AiReaction
-            let reaction = AiReaction::astd_read(r).await?;
+            let reaction: AiReaction = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,

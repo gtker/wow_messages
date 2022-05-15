@@ -31,7 +31,7 @@ impl ReadableAndWritable for TrainerSpell {
         let spell = crate::util::read_u32_le(r)?;
 
         // state: TrainerSpellState
-        let state = TrainerSpellState::read(r)?;
+        let state: TrainerSpellState = crate::util::read_u8_le(r)?.try_into()?;
 
         // spell_cost: u32
         let spell_cost = crate::util::read_u32_le(r)?;
@@ -129,7 +129,7 @@ impl ReadableAndWritable for TrainerSpell {
             let spell = crate::util::tokio_read_u32_le(r).await?;
 
             // state: TrainerSpellState
-            let state = TrainerSpellState::tokio_read(r).await?;
+            let state: TrainerSpellState = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // spell_cost: u32
             let spell_cost = crate::util::tokio_read_u32_le(r).await?;
@@ -241,7 +241,7 @@ impl ReadableAndWritable for TrainerSpell {
             let spell = crate::util::astd_read_u32_le(r).await?;
 
             // state: TrainerSpellState
-            let state = TrainerSpellState::astd_read(r).await?;
+            let state: TrainerSpellState = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // spell_cost: u32
             let spell_cost = crate::util::astd_read_u32_le(r).await?;

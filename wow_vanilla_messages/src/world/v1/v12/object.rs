@@ -21,7 +21,7 @@ impl ReadableAndWritable for Object {
     #[cfg(feature = "sync")]
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, Self::Error> {
         // update_type: UpdateType
-        let update_type = UpdateType::read(r)?;
+        let update_type: UpdateType = crate::util::read_u8_le(r)?.try_into()?;
 
         let update_type_if = match update_type {
             UpdateType::VALUES => {
@@ -53,7 +53,7 @@ impl ReadableAndWritable for Object {
                 let guid3 = Guid::read_packed(r)?;
 
                 // object_type: ObjectType
-                let object_type = ObjectType::read(r)?;
+                let object_type: ObjectType = crate::util::read_u8_le(r)?.try_into()?;
 
                 // movement2: MovementBlock
                 let movement2 = MovementBlock::read(r)?;
@@ -73,7 +73,7 @@ impl ReadableAndWritable for Object {
                 let guid3 = Guid::read_packed(r)?;
 
                 // object_type: ObjectType
-                let object_type = ObjectType::read(r)?;
+                let object_type: ObjectType = crate::util::read_u8_le(r)?.try_into()?;
 
                 // movement2: MovementBlock
                 let movement2 = MovementBlock::read(r)?;
@@ -235,7 +235,7 @@ impl ReadableAndWritable for Object {
      {
         Box::pin(async move {
             // update_type: UpdateType
-            let update_type = UpdateType::tokio_read(r).await?;
+            let update_type: UpdateType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let update_type_if = match update_type {
                 UpdateType::VALUES => {
@@ -267,7 +267,7 @@ impl ReadableAndWritable for Object {
                     let guid3 = Guid::tokio_read_packed(r).await?;
 
                     // object_type: ObjectType
-                    let object_type = ObjectType::tokio_read(r).await?;
+                    let object_type: ObjectType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     // movement2: MovementBlock
                     let movement2 = MovementBlock::tokio_read(r).await?;
@@ -287,7 +287,7 @@ impl ReadableAndWritable for Object {
                     let guid3 = Guid::tokio_read_packed(r).await?;
 
                     // object_type: ObjectType
-                    let object_type = ObjectType::tokio_read(r).await?;
+                    let object_type: ObjectType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     // movement2: MovementBlock
                     let movement2 = MovementBlock::tokio_read(r).await?;
@@ -463,7 +463,7 @@ impl ReadableAndWritable for Object {
      {
         Box::pin(async move {
             // update_type: UpdateType
-            let update_type = UpdateType::astd_read(r).await?;
+            let update_type: UpdateType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let update_type_if = match update_type {
                 UpdateType::VALUES => {
@@ -495,7 +495,7 @@ impl ReadableAndWritable for Object {
                     let guid3 = Guid::astd_read_packed(r).await?;
 
                     // object_type: ObjectType
-                    let object_type = ObjectType::astd_read(r).await?;
+                    let object_type: ObjectType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     // movement2: MovementBlock
                     let movement2 = MovementBlock::astd_read(r).await?;
@@ -515,7 +515,7 @@ impl ReadableAndWritable for Object {
                     let guid3 = Guid::astd_read_packed(r).await?;
 
                     // object_type: ObjectType
-                    let object_type = ObjectType::astd_read(r).await?;
+                    let object_type: ObjectType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     // movement2: MovementBlock
                     let movement2 = MovementBlock::astd_read(r).await?;

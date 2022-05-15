@@ -36,7 +36,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
         let total_exp = crate::util::read_u32_le(r)?;
 
         // exp_type: ExperienceAwardType
-        let exp_type = ExperienceAwardType::read(r)?;
+        let exp_type: ExperienceAwardType = crate::util::read_u8_le(r)?.try_into()?;
 
         let exp_type_if = match exp_type {
             ExperienceAwardType::KILL => SMSG_LOG_XPGAINExperienceAwardType::KILL,
@@ -109,7 +109,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
             let total_exp = crate::util::tokio_read_u32_le(r).await?;
 
             // exp_type: ExperienceAwardType
-            let exp_type = ExperienceAwardType::tokio_read(r).await?;
+            let exp_type: ExperienceAwardType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let exp_type_if = match exp_type {
                 ExperienceAwardType::KILL => SMSG_LOG_XPGAINExperienceAwardType::KILL,
@@ -196,7 +196,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
             let total_exp = crate::util::astd_read_u32_le(r).await?;
 
             // exp_type: ExperienceAwardType
-            let exp_type = ExperienceAwardType::astd_read(r).await?;
+            let exp_type: ExperienceAwardType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let exp_type_if = match exp_type {
                 ExperienceAwardType::KILL => SMSG_LOG_XPGAINExperienceAwardType::KILL,

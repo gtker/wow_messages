@@ -33,12 +33,12 @@ impl MessageBody for SMSG_CAST_RESULT {
         let spell = crate::util::read_u32_le(r)?;
 
         // result: SimpleSpellCastResult
-        let result = SimpleSpellCastResult::read(r)?;
+        let result: SimpleSpellCastResult = crate::util::read_u8_le(r)?.try_into()?;
 
         let result_if = match result {
             SimpleSpellCastResult::SUCCESS => {
                 // reason: CastFailureReason
-                let reason = CastFailureReason::read(r)?;
+                let reason: CastFailureReason = crate::util::read_u8_le(r)?.try_into()?;
 
                 let reason_if = match reason {
                     CastFailureReason::AFFECTING_COMBAT => SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT,
@@ -151,7 +151,7 @@ impl MessageBody for SMSG_CAST_RESULT {
                     CastFailureReason::REAGENTS => SMSG_CAST_RESULTCastFailureReason::REAGENTS,
                     CastFailureReason::REQUIRES_AREA => {
                         // area: Area
-                        let area = Area::read(r)?;
+                        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
                         SMSG_CAST_RESULTCastFailureReason::REQUIRES_AREA {
                             area,
@@ -445,12 +445,12 @@ impl MessageBody for SMSG_CAST_RESULT {
             let spell = crate::util::tokio_read_u32_le(r).await?;
 
             // result: SimpleSpellCastResult
-            let result = SimpleSpellCastResult::tokio_read(r).await?;
+            let result: SimpleSpellCastResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             let result_if = match result {
                 SimpleSpellCastResult::SUCCESS => {
                     // reason: CastFailureReason
-                    let reason = CastFailureReason::tokio_read(r).await?;
+                    let reason: CastFailureReason = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let reason_if = match reason {
                         CastFailureReason::AFFECTING_COMBAT => SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT,
@@ -563,7 +563,7 @@ impl MessageBody for SMSG_CAST_RESULT {
                         CastFailureReason::REAGENTS => SMSG_CAST_RESULTCastFailureReason::REAGENTS,
                         CastFailureReason::REQUIRES_AREA => {
                             // area: Area
-                            let area = Area::tokio_read(r).await?;
+                            let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
                             SMSG_CAST_RESULTCastFailureReason::REQUIRES_AREA {
                                 area,
@@ -871,12 +871,12 @@ impl MessageBody for SMSG_CAST_RESULT {
             let spell = crate::util::astd_read_u32_le(r).await?;
 
             // result: SimpleSpellCastResult
-            let result = SimpleSpellCastResult::astd_read(r).await?;
+            let result: SimpleSpellCastResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             let result_if = match result {
                 SimpleSpellCastResult::SUCCESS => {
                     // reason: CastFailureReason
-                    let reason = CastFailureReason::astd_read(r).await?;
+                    let reason: CastFailureReason = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let reason_if = match reason {
                         CastFailureReason::AFFECTING_COMBAT => SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT,
@@ -989,7 +989,7 @@ impl MessageBody for SMSG_CAST_RESULT {
                         CastFailureReason::REAGENTS => SMSG_CAST_RESULTCastFailureReason::REAGENTS,
                         CastFailureReason::REQUIRES_AREA => {
                             // area: Area
-                            let area = Area::astd_read(r).await?;
+                            let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
                             SMSG_CAST_RESULTCastFailureReason::REQUIRES_AREA {
                                 area,

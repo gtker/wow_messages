@@ -28,7 +28,7 @@ impl MessageBody for CMSG_STANDSTATECHANGE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // animation_state: UnitStandState
-        let animation_state = UnitStandState::read_u32_le(r)?;
+        let animation_state: UnitStandState = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             animation_state,
@@ -57,7 +57,7 @@ impl MessageBody for CMSG_STANDSTATECHANGE {
      {
         Box::pin(async move {
             // animation_state: UnitStandState
-            let animation_state = UnitStandState::tokio_read_u32_le(r).await?;
+            let animation_state: UnitStandState = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 animation_state,
@@ -100,7 +100,7 @@ impl MessageBody for CMSG_STANDSTATECHANGE {
      {
         Box::pin(async move {
             // animation_state: UnitStandState
-            let animation_state = UnitStandState::astd_read_u32_le(r).await?;
+            let animation_state: UnitStandState = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 animation_state,

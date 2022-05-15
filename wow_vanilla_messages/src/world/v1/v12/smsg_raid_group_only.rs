@@ -32,7 +32,7 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
         let homebind_timer = crate::util::read_u32_le(r)?;
 
         // error: RaidGroupError
-        let error = RaidGroupError::read(r)?;
+        let error: RaidGroupError = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             homebind_timer,
@@ -68,7 +68,7 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
             let homebind_timer = crate::util::tokio_read_u32_le(r).await?;
 
             // error: RaidGroupError
-            let error = RaidGroupError::tokio_read(r).await?;
+            let error: RaidGroupError = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 homebind_timer,
@@ -118,7 +118,7 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
             let homebind_timer = crate::util::astd_read_u32_le(r).await?;
 
             // error: RaidGroupError
-            let error = RaidGroupError::astd_read(r).await?;
+            let error: RaidGroupError = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 homebind_timer,

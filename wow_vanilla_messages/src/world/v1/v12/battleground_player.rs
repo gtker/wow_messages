@@ -27,7 +27,7 @@ impl ReadableAndWritable for BattlegroundPlayer {
         let player = Guid::read(r)?;
 
         // rank: PvpRank
-        let rank = PvpRank::read_u32_le(r)?;
+        let rank: PvpRank = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // killing_blows: u32
         let killing_blows = crate::util::read_u32_le(r)?;
@@ -108,7 +108,7 @@ impl ReadableAndWritable for BattlegroundPlayer {
             let player = Guid::tokio_read(r).await?;
 
             // rank: PvpRank
-            let rank = PvpRank::tokio_read_u32_le(r).await?;
+            let rank: PvpRank = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             // killing_blows: u32
             let killing_blows = crate::util::tokio_read_u32_le(r).await?;
@@ -203,7 +203,7 @@ impl ReadableAndWritable for BattlegroundPlayer {
             let player = Guid::astd_read(r).await?;
 
             // rank: PvpRank
-            let rank = PvpRank::astd_read_u32_le(r).await?;
+            let rank: PvpRank = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             // killing_blows: u32
             let killing_blows = crate::util::astd_read_u32_le(r).await?;

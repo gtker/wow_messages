@@ -30,14 +30,14 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // operation: PartyOperation
-        let operation = PartyOperation::read_u32_le(r)?;
+        let operation: PartyOperation = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // member: CString
         let member = crate::util::read_c_string_to_vec(r)?;
         let member = String::from_utf8(member)?;
 
         // result: PartyResult
-        let result = PartyResult::read_u32_le(r)?;
+        let result: PartyResult = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             operation,
@@ -76,14 +76,14 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
      {
         Box::pin(async move {
             // operation: PartyOperation
-            let operation = PartyOperation::tokio_read_u32_le(r).await?;
+            let operation: PartyOperation = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             // member: CString
             let member = crate::util::tokio_read_c_string_to_vec(r).await?;
             let member = String::from_utf8(member)?;
 
             // result: PartyResult
-            let result = PartyResult::tokio_read_u32_le(r).await?;
+            let result: PartyResult = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 operation,
@@ -136,14 +136,14 @@ impl MessageBody for SMSG_PARTY_COMMAND_RESULT {
      {
         Box::pin(async move {
             // operation: PartyOperation
-            let operation = PartyOperation::astd_read_u32_le(r).await?;
+            let operation: PartyOperation = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             // member: CString
             let member = crate::util::astd_read_c_string_to_vec(r).await?;
             let member = String::from_utf8(member)?;
 
             // result: PartyResult
-            let result = PartyResult::astd_read_u32_le(r).await?;
+            let result: PartyResult = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 operation,

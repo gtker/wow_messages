@@ -76,7 +76,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
         let mask_FLAG_POWER_TYPE = if mask.is_FLAG_POWER_TYPE() {
             // power: Power
-            let power = Power::read(r)?;
+            let power: Power = crate::util::read_u8_le(r)?.try_into()?;
 
             Some(SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
                 power,
@@ -124,7 +124,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
         let mask_FLAG_ZONE = if mask.is_FLAG_ZONE() {
             // area: Area
-            let area = Area::read(r)?;
+            let area: Area = crate::util::read_u32_le(r)?.try_into()?;
 
             Some(SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
                 area,
@@ -213,7 +213,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
         let mask_FLAG_PET_POWER_TYPE = if mask.is_FLAG_PET_POWER_TYPE() {
             // pet_power_type: Power
-            let pet_power_type = Power::read(r)?;
+            let pet_power_type: Power = crate::util::read_u8_le(r)?.try_into()?;
 
             Some(SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE {
                 pet_power_type,
@@ -468,7 +468,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             let mask_FLAG_POWER_TYPE = if mask.is_FLAG_POWER_TYPE() {
                 // power: Power
-                let power = Power::tokio_read(r).await?;
+                let power: Power = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                 Some(SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
                     power,
@@ -516,7 +516,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             let mask_FLAG_ZONE = if mask.is_FLAG_ZONE() {
                 // area: Area
-                let area = Area::tokio_read(r).await?;
+                let area: Area = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
                 Some(SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
                     area,
@@ -605,7 +605,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             let mask_FLAG_PET_POWER_TYPE = if mask.is_FLAG_PET_POWER_TYPE() {
                 // pet_power_type: Power
-                let pet_power_type = Power::tokio_read(r).await?;
+                let pet_power_type: Power = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                 Some(SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE {
                     pet_power_type,
@@ -874,7 +874,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             let mask_FLAG_POWER_TYPE = if mask.is_FLAG_POWER_TYPE() {
                 // power: Power
-                let power = Power::astd_read(r).await?;
+                let power: Power = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                 Some(SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
                     power,
@@ -922,7 +922,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             let mask_FLAG_ZONE = if mask.is_FLAG_ZONE() {
                 // area: Area
-                let area = Area::astd_read(r).await?;
+                let area: Area = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
                 Some(SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
                     area,
@@ -1011,7 +1011,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             let mask_FLAG_PET_POWER_TYPE = if mask.is_FLAG_PET_POWER_TYPE() {
                 // pet_power_type: Power
-                let pet_power_type = Power::astd_read(r).await?;
+                let pet_power_type: Power = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                 Some(SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE {
                     pet_power_type,

@@ -34,10 +34,10 @@ impl MessageBody for SMSG_MESSAGECHAT {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // chat_type: ChatType
-        let chat_type = ChatType::read(r)?;
+        let chat_type: ChatType = crate::util::read_u8_le(r)?.try_into()?;
 
         // language: Language
-        let language = Language::read(r)?;
+        let language: Language = crate::util::read_u32_le(r)?.try_into()?;
 
         let chat_type_if = match chat_type {
             ChatType::SAY => {
@@ -404,7 +404,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
         let message = String::from_utf8(message)?;
 
         // tag: PlayerChatTag
-        let tag = PlayerChatTag::read(r)?;
+        let tag: PlayerChatTag = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             chat_type: chat_type_if,
@@ -779,10 +779,10 @@ impl MessageBody for SMSG_MESSAGECHAT {
      {
         Box::pin(async move {
             // chat_type: ChatType
-            let chat_type = ChatType::tokio_read(r).await?;
+            let chat_type: ChatType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // language: Language
-            let language = Language::tokio_read(r).await?;
+            let language: Language = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             let chat_type_if = match chat_type {
                 ChatType::SAY => {
@@ -1149,7 +1149,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
             let message = String::from_utf8(message)?;
 
             // tag: PlayerChatTag
-            let tag = PlayerChatTag::tokio_read(r).await?;
+            let tag: PlayerChatTag = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 chat_type: chat_type_if,
@@ -1538,10 +1538,10 @@ impl MessageBody for SMSG_MESSAGECHAT {
      {
         Box::pin(async move {
             // chat_type: ChatType
-            let chat_type = ChatType::astd_read(r).await?;
+            let chat_type: ChatType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // language: Language
-            let language = Language::astd_read(r).await?;
+            let language: Language = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             let chat_type_if = match chat_type {
                 ChatType::SAY => {
@@ -1908,7 +1908,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
             let message = String::from_utf8(message)?;
 
             // tag: PlayerChatTag
-            let tag = PlayerChatTag::astd_read(r).await?;
+            let tag: PlayerChatTag = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 chat_type: chat_type_if,

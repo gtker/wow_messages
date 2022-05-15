@@ -50,13 +50,13 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
         let version = Version::read(r)?;
 
         // platform: Platform
-        let platform = Platform::read(r)?;
+        let platform: Platform = crate::util::read_u32_le(r)?.into();
 
         // os: Os
-        let os = Os::read(r)?;
+        let os: Os = crate::util::read_u32_le(r)?.into();
 
         // locale: Locale
-        let locale = Locale::read(r)?;
+        let locale: Locale = crate::util::read_u32_le(r)?.into();
 
         // utc_timezone_offset: u32
         let utc_timezone_offset = crate::util::read_u32_le(r)?;
@@ -151,13 +151,13 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
             let version = Version::tokio_read(r).await?;
 
             // platform: Platform
-            let platform = Platform::tokio_read(r).await?;
+            let platform: Platform = crate::util::tokio_read_u32_le(r).await?.into();
 
             // os: Os
-            let os = Os::tokio_read(r).await?;
+            let os: Os = crate::util::tokio_read_u32_le(r).await?.into();
 
             // locale: Locale
-            let locale = Locale::tokio_read(r).await?;
+            let locale: Locale = crate::util::tokio_read_u32_le(r).await?.into();
 
             // utc_timezone_offset: u32
             let utc_timezone_offset = crate::util::tokio_read_u32_le(r).await?;
@@ -266,13 +266,13 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_CHALLENGE_Client {
             let version = Version::astd_read(r).await?;
 
             // platform: Platform
-            let platform = Platform::astd_read(r).await?;
+            let platform: Platform = crate::util::astd_read_u32_le(r).await?.into();
 
             // os: Os
-            let os = Os::astd_read(r).await?;
+            let os: Os = crate::util::astd_read_u32_le(r).await?.into();
 
             // locale: Locale
-            let locale = Locale::astd_read(r).await?;
+            let locale: Locale = crate::util::astd_read_u32_le(r).await?.into();
 
             // utc_timezone_offset: u32
             let utc_timezone_offset = crate::util::astd_read_u32_le(r).await?;

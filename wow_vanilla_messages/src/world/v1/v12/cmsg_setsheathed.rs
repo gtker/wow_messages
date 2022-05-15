@@ -28,7 +28,7 @@ impl MessageBody for CMSG_SETSHEATHED {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // sheathed: SheathState
-        let sheathed = SheathState::read_u32_le(r)?;
+        let sheathed: SheathState = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             sheathed,
@@ -57,7 +57,7 @@ impl MessageBody for CMSG_SETSHEATHED {
      {
         Box::pin(async move {
             // sheathed: SheathState
-            let sheathed = SheathState::tokio_read_u32_le(r).await?;
+            let sheathed: SheathState = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 sheathed,
@@ -100,7 +100,7 @@ impl MessageBody for CMSG_SETSHEATHED {
      {
         Box::pin(async move {
             // sheathed: SheathState
-            let sheathed = SheathState::astd_read_u32_le(r).await?;
+            let sheathed: SheathState = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 sheathed,

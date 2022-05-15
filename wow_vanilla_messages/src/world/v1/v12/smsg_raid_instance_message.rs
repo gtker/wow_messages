@@ -31,10 +31,10 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // message_type: RaidInstanceMessage
-        let message_type = RaidInstanceMessage::read(r)?;
+        let message_type: RaidInstanceMessage = crate::util::read_u32_le(r)?.try_into()?;
 
         // map: Map
-        let map = Map::read(r)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         // time_left: u32
         let time_left = crate::util::read_u32_le(r)?;
@@ -74,10 +74,10 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
      {
         Box::pin(async move {
             // message_type: RaidInstanceMessage
-            let message_type = RaidInstanceMessage::tokio_read(r).await?;
+            let message_type: RaidInstanceMessage = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // map: Map
-            let map = Map::tokio_read(r).await?;
+            let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // time_left: u32
             let time_left = crate::util::tokio_read_u32_le(r).await?;
@@ -131,10 +131,10 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
      {
         Box::pin(async move {
             // message_type: RaidInstanceMessage
-            let message_type = RaidInstanceMessage::astd_read(r).await?;
+            let message_type: RaidInstanceMessage = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // map: Map
-            let map = Map::astd_read(r).await?;
+            let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // time_left: u32
             let time_left = crate::util::astd_read_u32_le(r).await?;

@@ -28,7 +28,7 @@ impl MessageBody for SMSG_GM_TICKET_STATUS_UPDATE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // response: GmTicketStatusResponse
-        let response = GmTicketStatusResponse::read(r)?;
+        let response: GmTicketStatusResponse = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             response,
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_GM_TICKET_STATUS_UPDATE {
      {
         Box::pin(async move {
             // response: GmTicketStatusResponse
-            let response = GmTicketStatusResponse::tokio_read(r).await?;
+            let response: GmTicketStatusResponse = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 response,
@@ -100,7 +100,7 @@ impl MessageBody for SMSG_GM_TICKET_STATUS_UPDATE {
      {
         Box::pin(async move {
             // response: GmTicketStatusResponse
-            let response = GmTicketStatusResponse::astd_read(r).await?;
+            let response: GmTicketStatusResponse = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             Ok(Self {
                 response,

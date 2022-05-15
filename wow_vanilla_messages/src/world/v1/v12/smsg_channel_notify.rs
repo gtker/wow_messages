@@ -28,7 +28,7 @@ impl MessageBody for SMSG_CHANNEL_NOTIFY {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // notify_type: ChatNotify
-        let notify_type = ChatNotify::read(r)?;
+        let notify_type: ChatNotify = crate::util::read_u8_le(r)?.try_into()?;
 
         // channel_name: CString
         let channel_name = crate::util::read_c_string_to_vec(r)?;
@@ -67,7 +67,7 @@ impl MessageBody for SMSG_CHANNEL_NOTIFY {
      {
         Box::pin(async move {
             // notify_type: ChatNotify
-            let notify_type = ChatNotify::tokio_read(r).await?;
+            let notify_type: ChatNotify = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // channel_name: CString
             let channel_name = crate::util::tokio_read_c_string_to_vec(r).await?;
@@ -120,7 +120,7 @@ impl MessageBody for SMSG_CHANNEL_NOTIFY {
      {
         Box::pin(async move {
             // notify_type: ChatNotify
-            let notify_type = ChatNotify::astd_read(r).await?;
+            let notify_type: ChatNotify = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // channel_name: CString
             let channel_name = crate::util::astd_read_c_string_to_vec(r).await?;

@@ -37,7 +37,7 @@ impl MessageBody for CMSG_LOOT_ROLL {
         let item_slot = crate::util::read_u32_le(r)?;
 
         // vote: RollVote
-        let vote = RollVote::read(r)?;
+        let vote: RollVote = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             item_guid,
@@ -80,7 +80,7 @@ impl MessageBody for CMSG_LOOT_ROLL {
             let item_slot = crate::util::tokio_read_u32_le(r).await?;
 
             // vote: RollVote
-            let vote = RollVote::tokio_read(r).await?;
+            let vote: RollVote = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 item_guid,
@@ -137,7 +137,7 @@ impl MessageBody for CMSG_LOOT_ROLL {
             let item_slot = crate::util::astd_read_u32_le(r).await?;
 
             // vote: RollVote
-            let vote = RollVote::astd_read(r).await?;
+            let vote: RollVote = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 item_guid,

@@ -37,7 +37,7 @@ impl MessageBody for SMSG_BUY_FAILED {
         let item_id = crate::util::read_u32_le(r)?;
 
         // result: BuyResult
-        let result = BuyResult::read(r)?;
+        let result: BuyResult = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_BUY_FAILED {
             let item_id = crate::util::tokio_read_u32_le(r).await?;
 
             // result: BuyResult
-            let result = BuyResult::tokio_read(r).await?;
+            let result: BuyResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,
@@ -137,7 +137,7 @@ impl MessageBody for SMSG_BUY_FAILED {
             let item_id = crate::util::astd_read_u32_le(r).await?;
 
             // result: BuyResult
-            let result = BuyResult::astd_read(r).await?;
+            let result: BuyResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,

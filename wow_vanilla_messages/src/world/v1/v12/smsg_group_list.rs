@@ -35,7 +35,7 @@ impl MessageBody for SMSG_GROUP_LIST {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // group_type: GroupType
-        let group_type = GroupType::read(r)?;
+        let group_type: GroupType = crate::util::read_u8_le(r)?.try_into()?;
 
         // own_flags: u8
         let own_flags = crate::util::read_u8_le(r)?;
@@ -63,13 +63,13 @@ impl MessageBody for SMSG_GROUP_LIST {
         };
         let group_not_empty = if current_size < body_size as usize {
             // loot_setting: GroupLootSetting
-            let loot_setting = GroupLootSetting::read(r)?;
+            let loot_setting: GroupLootSetting = crate::util::read_u8_le(r)?.try_into()?;
 
             // master_loot: Guid
             let master_loot = Guid::read(r)?;
 
             // loot_threshold: ItemQuality
-            let loot_threshold = ItemQuality::read(r)?;
+            let loot_threshold: ItemQuality = crate::util::read_u8_le(r)?.try_into()?;
 
             Some(SMSG_GROUP_LISTgroup_not_empty {
                 loot_setting,
@@ -138,7 +138,7 @@ impl MessageBody for SMSG_GROUP_LIST {
      {
         Box::pin(async move {
             // group_type: GroupType
-            let group_type = GroupType::tokio_read(r).await?;
+            let group_type: GroupType = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             // own_flags: u8
             let own_flags = crate::util::tokio_read_u8_le(r).await?;
@@ -166,13 +166,13 @@ impl MessageBody for SMSG_GROUP_LIST {
             };
             let group_not_empty = if current_size < body_size as usize {
                 // loot_setting: GroupLootSetting
-                let loot_setting = GroupLootSetting::tokio_read(r).await?;
+                let loot_setting: GroupLootSetting = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                 // master_loot: Guid
                 let master_loot = Guid::tokio_read(r).await?;
 
                 // loot_threshold: ItemQuality
-                let loot_threshold = ItemQuality::tokio_read(r).await?;
+                let loot_threshold: ItemQuality = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                 Some(SMSG_GROUP_LISTgroup_not_empty {
                     loot_setting,
@@ -255,7 +255,7 @@ impl MessageBody for SMSG_GROUP_LIST {
      {
         Box::pin(async move {
             // group_type: GroupType
-            let group_type = GroupType::astd_read(r).await?;
+            let group_type: GroupType = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             // own_flags: u8
             let own_flags = crate::util::astd_read_u8_le(r).await?;
@@ -283,13 +283,13 @@ impl MessageBody for SMSG_GROUP_LIST {
             };
             let group_not_empty = if current_size < body_size as usize {
                 // loot_setting: GroupLootSetting
-                let loot_setting = GroupLootSetting::astd_read(r).await?;
+                let loot_setting: GroupLootSetting = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                 // master_loot: Guid
                 let master_loot = Guid::astd_read(r).await?;
 
                 // loot_threshold: ItemQuality
-                let loot_threshold = ItemQuality::astd_read(r).await?;
+                let loot_threshold: ItemQuality = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                 Some(SMSG_GROUP_LISTgroup_not_empty {
                     loot_setting,

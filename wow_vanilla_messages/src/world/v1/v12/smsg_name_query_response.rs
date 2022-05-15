@@ -46,13 +46,13 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
         let realm_name = String::from_utf8(realm_name)?;
 
         // race: Race
-        let race = Race::read_u32_le(r)?;
+        let race: Race = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // gender: Gender
-        let gender = Gender::read_u32_le(r)?;
+        let gender: Gender = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // class: Class
-        let class = Class::read_u32_le(r)?;
+        let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             guid,
@@ -116,13 +116,13 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
             let realm_name = String::from_utf8(realm_name)?;
 
             // race: Race
-            let race = Race::tokio_read_u32_le(r).await?;
+            let race: Race = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             // gender: Gender
-            let gender = Gender::tokio_read_u32_le(r).await?;
+            let gender: Gender = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             // class: Class
-            let class = Class::tokio_read_u32_le(r).await?;
+            let class: Class = (crate::util::tokio_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 guid,
@@ -200,13 +200,13 @@ impl MessageBody for SMSG_NAME_QUERY_RESPONSE {
             let realm_name = String::from_utf8(realm_name)?;
 
             // race: Race
-            let race = Race::astd_read_u32_le(r).await?;
+            let race: Race = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             // gender: Gender
-            let gender = Gender::astd_read_u32_le(r).await?;
+            let gender: Gender = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             // class: Class
-            let class = Class::astd_read_u32_le(r).await?;
+            let class: Class = (crate::util::astd_read_u32_le(r).await? as u8).try_into()?;
 
             Ok(Self {
                 guid,

@@ -32,7 +32,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
         let queue_slot = crate::util::read_u32_le(r)?;
 
         // map: Map
-        let map = Map::read(r)?;
+        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
         let map_if = match map {
             Map::EASTERN_KINGDOMS => SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS,
@@ -44,7 +44,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -97,7 +97,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -150,7 +150,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -203,7 +203,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -256,7 +256,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -309,7 +309,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -362,7 +362,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -415,7 +415,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -468,7 +468,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -521,7 +521,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -574,7 +574,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -627,7 +627,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -680,7 +680,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -733,7 +733,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -786,7 +786,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -839,7 +839,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -892,7 +892,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -945,7 +945,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -998,7 +998,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1051,7 +1051,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1104,7 +1104,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1157,7 +1157,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1210,7 +1210,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1263,7 +1263,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1316,7 +1316,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1369,7 +1369,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1422,7 +1422,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1475,7 +1475,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1528,7 +1528,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1581,7 +1581,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1634,7 +1634,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1687,7 +1687,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1740,7 +1740,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1793,7 +1793,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1846,7 +1846,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1899,7 +1899,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -1952,7 +1952,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -2005,7 +2005,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -2058,7 +2058,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -2111,7 +2111,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -2164,7 +2164,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -2217,7 +2217,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -2270,7 +2270,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                 let client_instance_id = crate::util::read_u32_le(r)?;
 
                 // status_id: StatusId
-                let status_id = StatusId::read(r)?;
+                let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -4462,7 +4462,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
             let queue_slot = crate::util::tokio_read_u32_le(r).await?;
 
             // map: Map
-            let map = Map::tokio_read(r).await?;
+            let map: Map = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             let map_if = match map {
                 Map::EASTERN_KINGDOMS => SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS,
@@ -4474,7 +4474,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -4527,7 +4527,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -4580,7 +4580,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -4633,7 +4633,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -4686,7 +4686,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -4739,7 +4739,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -4792,7 +4792,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -4845,7 +4845,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -4898,7 +4898,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -4951,7 +4951,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5004,7 +5004,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5057,7 +5057,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5110,7 +5110,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5163,7 +5163,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5216,7 +5216,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5269,7 +5269,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5322,7 +5322,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5375,7 +5375,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5428,7 +5428,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5481,7 +5481,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5534,7 +5534,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5587,7 +5587,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5640,7 +5640,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5693,7 +5693,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5746,7 +5746,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5799,7 +5799,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5852,7 +5852,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5905,7 +5905,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -5958,7 +5958,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6011,7 +6011,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6064,7 +6064,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6117,7 +6117,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6170,7 +6170,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6223,7 +6223,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6276,7 +6276,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6329,7 +6329,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6382,7 +6382,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6435,7 +6435,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6488,7 +6488,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6541,7 +6541,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6594,7 +6594,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6647,7 +6647,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -6700,7 +6700,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::tokio_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::tokio_read(r).await?;
+                    let status_id: StatusId = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -8906,7 +8906,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
             let queue_slot = crate::util::astd_read_u32_le(r).await?;
 
             // map: Map
-            let map = Map::astd_read(r).await?;
+            let map: Map = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             let map_if = match map {
                 Map::EASTERN_KINGDOMS => SMSG_BATTLEFIELD_STATUSMap::EASTERN_KINGDOMS,
@@ -8918,7 +8918,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -8971,7 +8971,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9024,7 +9024,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9077,7 +9077,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9130,7 +9130,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9183,7 +9183,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9236,7 +9236,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9289,7 +9289,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9342,7 +9342,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9395,7 +9395,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9448,7 +9448,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9501,7 +9501,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9554,7 +9554,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9607,7 +9607,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9660,7 +9660,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9713,7 +9713,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9766,7 +9766,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9819,7 +9819,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9872,7 +9872,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9925,7 +9925,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -9978,7 +9978,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10031,7 +10031,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10084,7 +10084,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10137,7 +10137,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10190,7 +10190,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10243,7 +10243,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10296,7 +10296,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10349,7 +10349,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10402,7 +10402,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10455,7 +10455,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10508,7 +10508,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10561,7 +10561,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10614,7 +10614,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10667,7 +10667,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10720,7 +10720,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10773,7 +10773,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10826,7 +10826,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10879,7 +10879,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10932,7 +10932,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -10985,7 +10985,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -11038,7 +11038,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -11091,7 +11091,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,
@@ -11144,7 +11144,7 @@ impl MessageBody for SMSG_BATTLEFIELD_STATUS {
                     let client_instance_id = crate::util::astd_read_u32_le(r).await?;
 
                     // status_id: StatusId
-                    let status_id = StatusId::astd_read(r).await?;
+                    let status_id: StatusId = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
                     let status_id_if = match status_id {
                         StatusId::NONE => SMSG_BATTLEFIELD_STATUSStatusId::NONE,

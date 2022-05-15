@@ -28,7 +28,7 @@ impl MessageBody for SMSG_PET_TAME_FAILURE {
     #[cfg(feature = "sync")]
     fn read_body<R: std::io::Read>(r: &mut R, body_size: u32) -> std::result::Result<Self, Self::Error> {
         // reason: PetTameFailureReason
-        let reason = PetTameFailureReason::read(r)?;
+        let reason: PetTameFailureReason = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             reason,
@@ -57,7 +57,7 @@ impl MessageBody for SMSG_PET_TAME_FAILURE {
      {
         Box::pin(async move {
             // reason: PetTameFailureReason
-            let reason = PetTameFailureReason::tokio_read(r).await?;
+            let reason: PetTameFailureReason = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 reason,
@@ -100,7 +100,7 @@ impl MessageBody for SMSG_PET_TAME_FAILURE {
      {
         Box::pin(async move {
             // reason: PetTameFailureReason
-            let reason = PetTameFailureReason::astd_read(r).await?;
+            let reason: PetTameFailureReason = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 reason,

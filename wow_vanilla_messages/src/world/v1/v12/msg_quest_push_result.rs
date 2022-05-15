@@ -35,7 +35,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
         let guid = Guid::read(r)?;
 
         // message: QuestPartyMessage
-        let message = QuestPartyMessage::read(r)?;
+        let message: QuestPartyMessage = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
@@ -71,7 +71,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
             let guid = Guid::tokio_read(r).await?;
 
             // message: QuestPartyMessage
-            let message = QuestPartyMessage::tokio_read(r).await?;
+            let message: QuestPartyMessage = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,
@@ -121,7 +121,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
             let guid = Guid::astd_read(r).await?;
 
             // message: QuestPartyMessage
-            let message = QuestPartyMessage::astd_read(r).await?;
+            let message: QuestPartyMessage = crate::util::astd_read_u8_le(r).await?.try_into()?;
 
             Ok(Self {
                 guid,

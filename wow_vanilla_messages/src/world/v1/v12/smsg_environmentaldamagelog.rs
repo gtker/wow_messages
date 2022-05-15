@@ -36,7 +36,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
         let guid = Guid::read(r)?;
 
         // damage_type: EnvironmentalDamageType
-        let damage_type = EnvironmentalDamageType::read(r)?;
+        let damage_type: EnvironmentalDamageType = crate::util::read_u32_le(r)?.try_into()?;
 
         // damage: u32
         let damage = crate::util::read_u32_le(r)?;
@@ -93,7 +93,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
             let guid = Guid::tokio_read(r).await?;
 
             // damage_type: EnvironmentalDamageType
-            let damage_type = EnvironmentalDamageType::tokio_read(r).await?;
+            let damage_type: EnvironmentalDamageType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
 
             // damage: u32
             let damage = crate::util::tokio_read_u32_le(r).await?;
@@ -164,7 +164,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
             let guid = Guid::astd_read(r).await?;
 
             // damage_type: EnvironmentalDamageType
-            let damage_type = EnvironmentalDamageType::astd_read(r).await?;
+            let damage_type: EnvironmentalDamageType = crate::util::astd_read_u32_le(r).await?.try_into()?;
 
             // damage: u32
             let damage = crate::util::astd_read_u32_le(r).await?;
