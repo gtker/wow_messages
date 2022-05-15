@@ -188,83 +188,83 @@ impl ReadableAndWritable for SpellCastTargets {
         // target_flags: SpellCastTargetFlags
         self.target_flags.write(w)?;
 
-        if let Some(s) = &self.target_flags.unit {
+        if let Some(if_statement) = &self.target_flags.unit {
             // unit_target1: PackedGuid
-            s.unit_target1.write_packed(w)?;
+            if_statement.unit_target1.write_packed(w)?;
 
         }
 
-        if let Some(s) = &self.target_flags.unit_enemy {
+        if let Some(if_statement) = &self.target_flags.unit_enemy {
             // unit_target2: PackedGuid
-            s.unit_target2.write_packed(w)?;
+            if_statement.unit_target2.write_packed(w)?;
 
         }
 
-        if let Some(s) = &self.target_flags.gameobject {
+        if let Some(if_statement) = &self.target_flags.gameobject {
             // object_target1: PackedGuid
-            s.object_target1.write_packed(w)?;
+            if_statement.object_target1.write_packed(w)?;
 
         }
 
-        if let Some(s) = &self.target_flags.locked {
+        if let Some(if_statement) = &self.target_flags.locked {
             // object_target2: PackedGuid
-            s.object_target2.write_packed(w)?;
+            if_statement.object_target2.write_packed(w)?;
 
         }
 
-        if let Some(s) = &self.target_flags.item {
+        if let Some(if_statement) = &self.target_flags.item {
             // item_target1: PackedGuid
-            s.item_target1.write_packed(w)?;
+            if_statement.item_target1.write_packed(w)?;
 
         }
 
-        if let Some(s) = &self.target_flags.trade_item {
+        if let Some(if_statement) = &self.target_flags.trade_item {
             // item_target2: PackedGuid
-            s.item_target2.write_packed(w)?;
+            if_statement.item_target2.write_packed(w)?;
 
         }
 
-        if let Some(s) = &self.target_flags.source_location {
+        if let Some(if_statement) = &self.target_flags.source_location {
             // position_x1: f32
-            w.write_all(&s.position_x1.to_le_bytes())?;
+            w.write_all(&if_statement.position_x1.to_le_bytes())?;
 
             // position_y1: f32
-            w.write_all(&s.position_y1.to_le_bytes())?;
+            w.write_all(&if_statement.position_y1.to_le_bytes())?;
 
             // position_z1: f32
-            w.write_all(&s.position_z1.to_le_bytes())?;
+            w.write_all(&if_statement.position_z1.to_le_bytes())?;
 
         }
 
-        if let Some(s) = &self.target_flags.dest_location {
+        if let Some(if_statement) = &self.target_flags.dest_location {
             // position_x2: f32
-            w.write_all(&s.position_x2.to_le_bytes())?;
+            w.write_all(&if_statement.position_x2.to_le_bytes())?;
 
             // position_y2: f32
-            w.write_all(&s.position_y2.to_le_bytes())?;
+            w.write_all(&if_statement.position_y2.to_le_bytes())?;
 
             // position_z2: f32
-            w.write_all(&s.position_z2.to_le_bytes())?;
+            w.write_all(&if_statement.position_z2.to_le_bytes())?;
 
         }
 
-        if let Some(s) = &self.target_flags.string {
+        if let Some(if_statement) = &self.target_flags.string {
             // target_string: CString
-            w.write_all(s.target_string.as_bytes())?;
+            w.write_all(if_statement.target_string.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
         }
 
-        if let Some(s) = &self.target_flags.corpse_ally {
+        if let Some(if_statement) = &self.target_flags.corpse_ally {
             // corpse_target1: PackedGuid
-            s.corpse_target1.write_packed(w)?;
+            if_statement.corpse_target1.write_packed(w)?;
 
         }
 
-        if let Some(s) = &self.target_flags.corpse_enemy {
+        if let Some(if_statement) = &self.target_flags.corpse_enemy {
             // corpse_target2: PackedGuid
-            s.corpse_target2.write_packed(w)?;
+            if_statement.corpse_target2.write_packed(w)?;
 
         }
 
@@ -467,83 +467,83 @@ impl ReadableAndWritable for SpellCastTargets {
             // target_flags: SpellCastTargetFlags
             self.target_flags.tokio_write(w).await?;
 
-            if let Some(s) = &self.target_flags.unit {
+            if let Some(if_statement) = &self.target_flags.unit {
                 // unit_target1: PackedGuid
-                s.unit_target1.tokio_write_packed(w).await?;
+                if_statement.unit_target1.tokio_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.unit_enemy {
+            if let Some(if_statement) = &self.target_flags.unit_enemy {
                 // unit_target2: PackedGuid
-                s.unit_target2.tokio_write_packed(w).await?;
+                if_statement.unit_target2.tokio_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.gameobject {
+            if let Some(if_statement) = &self.target_flags.gameobject {
                 // object_target1: PackedGuid
-                s.object_target1.tokio_write_packed(w).await?;
+                if_statement.object_target1.tokio_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.locked {
+            if let Some(if_statement) = &self.target_flags.locked {
                 // object_target2: PackedGuid
-                s.object_target2.tokio_write_packed(w).await?;
+                if_statement.object_target2.tokio_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.item {
+            if let Some(if_statement) = &self.target_flags.item {
                 // item_target1: PackedGuid
-                s.item_target1.tokio_write_packed(w).await?;
+                if_statement.item_target1.tokio_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.trade_item {
+            if let Some(if_statement) = &self.target_flags.trade_item {
                 // item_target2: PackedGuid
-                s.item_target2.tokio_write_packed(w).await?;
+                if_statement.item_target2.tokio_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.source_location {
+            if let Some(if_statement) = &self.target_flags.source_location {
                 // position_x1: f32
-                w.write_all(&s.position_x1.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_x1.to_le_bytes()).await?;
 
                 // position_y1: f32
-                w.write_all(&s.position_y1.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_y1.to_le_bytes()).await?;
 
                 // position_z1: f32
-                w.write_all(&s.position_z1.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_z1.to_le_bytes()).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.dest_location {
+            if let Some(if_statement) = &self.target_flags.dest_location {
                 // position_x2: f32
-                w.write_all(&s.position_x2.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_x2.to_le_bytes()).await?;
 
                 // position_y2: f32
-                w.write_all(&s.position_y2.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_y2.to_le_bytes()).await?;
 
                 // position_z2: f32
-                w.write_all(&s.position_z2.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_z2.to_le_bytes()).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.string {
+            if let Some(if_statement) = &self.target_flags.string {
                 // target_string: CString
-                w.write_all(s.target_string.as_bytes()).await?;
+                w.write_all(if_statement.target_string.as_bytes()).await?;
                 // Null terminator
                 w.write_all(&[0]).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.corpse_ally {
+            if let Some(if_statement) = &self.target_flags.corpse_ally {
                 // corpse_target1: PackedGuid
-                s.corpse_target1.tokio_write_packed(w).await?;
+                if_statement.corpse_target1.tokio_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.corpse_enemy {
+            if let Some(if_statement) = &self.target_flags.corpse_enemy {
                 // corpse_target2: PackedGuid
-                s.corpse_target2.tokio_write_packed(w).await?;
+                if_statement.corpse_target2.tokio_write_packed(w).await?;
 
             }
 
@@ -747,83 +747,83 @@ impl ReadableAndWritable for SpellCastTargets {
             // target_flags: SpellCastTargetFlags
             self.target_flags.astd_write(w).await?;
 
-            if let Some(s) = &self.target_flags.unit {
+            if let Some(if_statement) = &self.target_flags.unit {
                 // unit_target1: PackedGuid
-                s.unit_target1.astd_write_packed(w).await?;
+                if_statement.unit_target1.astd_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.unit_enemy {
+            if let Some(if_statement) = &self.target_flags.unit_enemy {
                 // unit_target2: PackedGuid
-                s.unit_target2.astd_write_packed(w).await?;
+                if_statement.unit_target2.astd_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.gameobject {
+            if let Some(if_statement) = &self.target_flags.gameobject {
                 // object_target1: PackedGuid
-                s.object_target1.astd_write_packed(w).await?;
+                if_statement.object_target1.astd_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.locked {
+            if let Some(if_statement) = &self.target_flags.locked {
                 // object_target2: PackedGuid
-                s.object_target2.astd_write_packed(w).await?;
+                if_statement.object_target2.astd_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.item {
+            if let Some(if_statement) = &self.target_flags.item {
                 // item_target1: PackedGuid
-                s.item_target1.astd_write_packed(w).await?;
+                if_statement.item_target1.astd_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.trade_item {
+            if let Some(if_statement) = &self.target_flags.trade_item {
                 // item_target2: PackedGuid
-                s.item_target2.astd_write_packed(w).await?;
+                if_statement.item_target2.astd_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.source_location {
+            if let Some(if_statement) = &self.target_flags.source_location {
                 // position_x1: f32
-                w.write_all(&s.position_x1.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_x1.to_le_bytes()).await?;
 
                 // position_y1: f32
-                w.write_all(&s.position_y1.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_y1.to_le_bytes()).await?;
 
                 // position_z1: f32
-                w.write_all(&s.position_z1.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_z1.to_le_bytes()).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.dest_location {
+            if let Some(if_statement) = &self.target_flags.dest_location {
                 // position_x2: f32
-                w.write_all(&s.position_x2.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_x2.to_le_bytes()).await?;
 
                 // position_y2: f32
-                w.write_all(&s.position_y2.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_y2.to_le_bytes()).await?;
 
                 // position_z2: f32
-                w.write_all(&s.position_z2.to_le_bytes()).await?;
+                w.write_all(&if_statement.position_z2.to_le_bytes()).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.string {
+            if let Some(if_statement) = &self.target_flags.string {
                 // target_string: CString
-                w.write_all(s.target_string.as_bytes()).await?;
+                w.write_all(if_statement.target_string.as_bytes()).await?;
                 // Null terminator
                 w.write_all(&[0]).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.corpse_ally {
+            if let Some(if_statement) = &self.target_flags.corpse_ally {
                 // corpse_target1: PackedGuid
-                s.corpse_target1.astd_write_packed(w).await?;
+                if_statement.corpse_target1.astd_write_packed(w).await?;
 
             }
 
-            if let Some(s) = &self.target_flags.corpse_enemy {
+            if let Some(if_statement) = &self.target_flags.corpse_enemy {
                 // corpse_target2: PackedGuid
-                s.corpse_target2.astd_write_packed(w).await?;
+                if_statement.corpse_target2.astd_write_packed(w).await?;
 
             }
 

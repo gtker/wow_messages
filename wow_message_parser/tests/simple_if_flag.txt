@@ -46,9 +46,9 @@ impl ReadableAndWritable for SimpleIfFlag {
         // flag: SimpleFlag
         self.flag.write(w)?;
 
-        if let Some(s) = &self.flag.zero {
+        if let Some(if_statement) = &self.flag.zero {
             // basic: u8
-            w.write_all(&s.basic.to_le_bytes())?;
+            w.write_all(&if_statement.basic.to_le_bytes())?;
 
         }
 
@@ -110,9 +110,9 @@ impl ReadableAndWritable for SimpleIfFlag {
             // flag: SimpleFlag
             self.flag.tokio_write(w).await?;
 
-            if let Some(s) = &self.flag.zero {
+            if let Some(if_statement) = &self.flag.zero {
                 // basic: u8
-                w.write_all(&s.basic.to_le_bytes()).await?;
+                w.write_all(&if_statement.basic.to_le_bytes()).await?;
 
             }
 
@@ -175,9 +175,9 @@ impl ReadableAndWritable for SimpleIfFlag {
             // flag: SimpleFlag
             self.flag.astd_write(w).await?;
 
-            if let Some(s) = &self.flag.zero {
+            if let Some(if_statement) = &self.flag.zero {
                 // basic: u8
-                w.write_all(&s.basic.to_le_bytes()).await?;
+                w.write_all(&if_statement.basic.to_le_bytes()).await?;
 
             }
 

@@ -132,39 +132,39 @@ impl ReadableAndWritable for MovementInfo {
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
 
-        if let Some(s) = &self.flags.on_transport {
+        if let Some(if_statement) = &self.flags.on_transport {
             // transport: TransportInfo
-            s.transport.write(w)?;
+            if_statement.transport.write(w)?;
 
         }
 
-        if let Some(s) = &self.flags.swimming {
+        if let Some(if_statement) = &self.flags.swimming {
             // pitch: f32
-            w.write_all(&s.pitch.to_le_bytes())?;
+            w.write_all(&if_statement.pitch.to_le_bytes())?;
 
         }
 
         // fall_time: f32
         w.write_all(&self.fall_time.to_le_bytes())?;
 
-        if let Some(s) = &self.flags.jumping {
+        if let Some(if_statement) = &self.flags.jumping {
             // z_speed: f32
-            w.write_all(&s.z_speed.to_le_bytes())?;
+            w.write_all(&if_statement.z_speed.to_le_bytes())?;
 
             // cos_angle: f32
-            w.write_all(&s.cos_angle.to_le_bytes())?;
+            w.write_all(&if_statement.cos_angle.to_le_bytes())?;
 
             // sin_angle: f32
-            w.write_all(&s.sin_angle.to_le_bytes())?;
+            w.write_all(&if_statement.sin_angle.to_le_bytes())?;
 
             // xy_speed: f32
-            w.write_all(&s.xy_speed.to_le_bytes())?;
+            w.write_all(&if_statement.xy_speed.to_le_bytes())?;
 
         }
 
-        if let Some(s) = &self.flags.spline_elevation {
+        if let Some(if_statement) = &self.flags.spline_elevation {
             // spline_elevation: f32
-            w.write_all(&s.spline_elevation.to_le_bytes())?;
+            w.write_all(&if_statement.spline_elevation.to_le_bytes())?;
 
         }
 
@@ -305,39 +305,39 @@ impl ReadableAndWritable for MovementInfo {
             // orientation: f32
             w.write_all(&self.orientation.to_le_bytes()).await?;
 
-            if let Some(s) = &self.flags.on_transport {
+            if let Some(if_statement) = &self.flags.on_transport {
                 // transport: TransportInfo
-                s.transport.tokio_write(w).await?;
+                if_statement.transport.tokio_write(w).await?;
 
             }
 
-            if let Some(s) = &self.flags.swimming {
+            if let Some(if_statement) = &self.flags.swimming {
                 // pitch: f32
-                w.write_all(&s.pitch.to_le_bytes()).await?;
+                w.write_all(&if_statement.pitch.to_le_bytes()).await?;
 
             }
 
             // fall_time: f32
             w.write_all(&self.fall_time.to_le_bytes()).await?;
 
-            if let Some(s) = &self.flags.jumping {
+            if let Some(if_statement) = &self.flags.jumping {
                 // z_speed: f32
-                w.write_all(&s.z_speed.to_le_bytes()).await?;
+                w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
 
                 // cos_angle: f32
-                w.write_all(&s.cos_angle.to_le_bytes()).await?;
+                w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
 
                 // sin_angle: f32
-                w.write_all(&s.sin_angle.to_le_bytes()).await?;
+                w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
 
                 // xy_speed: f32
-                w.write_all(&s.xy_speed.to_le_bytes()).await?;
+                w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
 
             }
 
-            if let Some(s) = &self.flags.spline_elevation {
+            if let Some(if_statement) = &self.flags.spline_elevation {
                 // spline_elevation: f32
-                w.write_all(&s.spline_elevation.to_le_bytes()).await?;
+                w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
 
             }
 
@@ -479,39 +479,39 @@ impl ReadableAndWritable for MovementInfo {
             // orientation: f32
             w.write_all(&self.orientation.to_le_bytes()).await?;
 
-            if let Some(s) = &self.flags.on_transport {
+            if let Some(if_statement) = &self.flags.on_transport {
                 // transport: TransportInfo
-                s.transport.astd_write(w).await?;
+                if_statement.transport.astd_write(w).await?;
 
             }
 
-            if let Some(s) = &self.flags.swimming {
+            if let Some(if_statement) = &self.flags.swimming {
                 // pitch: f32
-                w.write_all(&s.pitch.to_le_bytes()).await?;
+                w.write_all(&if_statement.pitch.to_le_bytes()).await?;
 
             }
 
             // fall_time: f32
             w.write_all(&self.fall_time.to_le_bytes()).await?;
 
-            if let Some(s) = &self.flags.jumping {
+            if let Some(if_statement) = &self.flags.jumping {
                 // z_speed: f32
-                w.write_all(&s.z_speed.to_le_bytes()).await?;
+                w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
 
                 // cos_angle: f32
-                w.write_all(&s.cos_angle.to_le_bytes()).await?;
+                w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
 
                 // sin_angle: f32
-                w.write_all(&s.sin_angle.to_le_bytes()).await?;
+                w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
 
                 // xy_speed: f32
-                w.write_all(&s.xy_speed.to_le_bytes()).await?;
+                w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
 
             }
 
-            if let Some(s) = &self.flags.spline_elevation {
+            if let Some(if_statement) = &self.flags.spline_elevation {
                 // spline_elevation: f32
-                w.write_all(&s.spline_elevation.to_le_bytes()).await?;
+                w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
 
             }
 

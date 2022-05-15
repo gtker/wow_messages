@@ -1,12 +1,6 @@
 use crate::container::Container;
-use crate::parser::types::objects::Objects;
-use crate::rust_printer::new_enums::{IfStatementType, NewEnumStructMember, NewIfStatement};
 use crate::rust_printer::rust_view::RustDefiner;
 use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
-use crate::rust_printer::structs::print_common_impls::print_write::{
-    print_enum_if_statement_new, print_flag_if_statement, print_write_definition,
-};
-use crate::rust_printer::structs::print_tests::get_enumerator;
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 
@@ -24,7 +18,7 @@ fn print_as_flag_value(s: &mut Writer, rd: &RustDefiner) {
     })
 }
 
-pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
+pub fn print_new_types(s: &mut Writer, e: &Container) {
     for rd in e.rust_object().get_rust_definers() {
         match rd.definer_type() {
             DefinerType::Enum => {
@@ -62,7 +56,7 @@ pub fn print_new_types(s: &mut Writer, e: &Container, o: &Objects) {
                 });
                 print_size_for_new_flag(s, &rd);
 
-                print_types_for_new_flag(s, e, o, &rd);
+                print_types_for_new_flag(s, e, &rd);
             }
         }
     }
@@ -323,91 +317,9 @@ fn print_size_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
     );
 }
 
-fn print_types_for_new_flag_flag_elseif(
-    s: &mut Writer,
-    e: &Container,
-    o: &Objects,
-    ne: &NewIfStatement,
-    enumerator_name: &str,
-    rd: &RustDefiner,
-) {
-    let new_ty_name = format!("{}{}", ne.new_ty_name(), enumerator_name);
-
-    s.open_curly(format!("impl {new_ty_name}", new_ty_name = &new_ty_name));
-    s.async_funcn_pub(
-        "write",
-        "<W: std::io::Write>(&self, w: &mut W)",
-        "<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
-        "<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
-        "std::result::Result<(), std::io::Error>",
-        |s, it| {
-            s.open_curly("match &self");
-            for enumerator in ne.enumerators() {
-                if enumerator.fields().is_empty() {
-                    continue;
-                }
-
-                s.open_curly(format!(
-                    "Self::{enumerator}",
-                    enumerator = enumerator.name()
-                ));
-                let members = get_enumerator(rd.enumerators(), enumerator.name())
-                    .unwrap()
-                    .0;
-                for m in members.members_in_struct() {
-                    s.wln(format!("{},", m.name()));
-                }
-                s.closing_curly_with(" => {");
-                s.inc_indent();
-
-                for f in enumerator.fields() {
-                    match f {
-                        NewEnumStructMember::Definition(d) => {
-                            print_write_definition(s, e, o, "", d, it.prefix(), it.postfix());
-                        }
-                        NewEnumStructMember::IfStatement(statement) => {
-                            match statement.enum_or_flag() {
-                                IfStatementType::Enum => {
-                                    print_enum_if_statement_new(
-                                        s,
-                                        e,
-                                        o,
-                                        "",
-                                        statement,
-                                        it.prefix(),
-                                        it.postfix(),
-                                    );
-                                }
-                                IfStatementType::Flag => print_flag_if_statement(
-                                    s,
-                                    "",
-                                    statement,
-                                    it.prefix(),
-                                    it.postfix(),
-                                ),
-                            }
-                        }
-                    }
-                }
-
-                s.closing_curly();
-            }
-
-            s.closing_curly();
-
-            s.newline();
-            s.wln("Ok(())");
-        },
-    );
-
-    s.closing_curly();
-    s.newline();
-}
-
-fn print_types_for_new_flag(s: &mut Writer, e: &Container, o: &Objects, rd: &RustDefiner) {
+fn print_types_for_new_flag(s: &mut Writer, e: &Container, rd: &RustDefiner) {
     for enumerator in rd.complex_flag_enumerators() {
-        if let Some(ne) = e.complex_enum_enumerator_has_else_if(enumerator.name()) {
-            print_types_for_new_flag_flag_elseif(s, e, o, ne, enumerator.name(), rd);
+        if let Some(_) = e.complex_enum_enumerator_has_else_if(enumerator.name()) {
             continue;
         }
 

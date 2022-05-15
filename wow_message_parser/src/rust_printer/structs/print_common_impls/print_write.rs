@@ -6,9 +6,6 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{
     Array, ArrayType, FloatingPointType, IntegerType, VerifiedContainerValue,
 };
-use crate::rust_printer::new_enums::{
-    IfStatementType, NewEnumStructMember, NewEnumerator, NewIfStatement,
-};
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 use crate::CONTAINER_SELF_SIZE_FIELD;
@@ -356,21 +353,44 @@ fn print_write_flag_if_statement(
     postfix: &str,
 ) {
     s.open_curly(format!(
-        "if let Some(s) = &{variable_prefix}{variable}.{variant}",
+        "if let Some(if_statement) = &{variable_prefix}{variable}.{variant}",
         variable_prefix = variable_prefix,
         variable = statement.name(),
         variant = &statement.flag_get_enumerator().to_lowercase(),
     ));
     if statement.else_ifs().is_empty() {
         for m in statement.members() {
-            print_write_field(s, e, o, m, "s.", prefix, postfix);
+            print_write_field(s, e, o, m, "if_statement.", prefix, postfix);
         }
     } else {
-        s.wln(format!(
-            "s.{prefix}write(w){postfix}?;",
-            prefix = prefix,
-            postfix = postfix,
-        ));
+        s.open_curly("match if_statement");
+        let rd = e
+            .rust_object()
+            .rust_definer_with_variable_name_and_enumerator(
+                statement.name(),
+                &statement.flag_get_enumerator(),
+            );
+
+        for enumerator in rd.enumerators() {
+            s.open_curly(format!(
+                "Self::{enumerator}",
+                enumerator = enumerator.name()
+            ));
+
+            for m in enumerator.members_in_struct() {
+                s.wln(format!("{name},", name = m.name()));
+            }
+            s.closing_curly_with(" => {"); // Self::enumerator
+            s.inc_indent();
+
+            for m in enumerator.original_fields() {
+                print_write_field(s, e, o, m, "if_statement.", prefix, postfix);
+            }
+
+            s.closing_curly(); // Enumerator body
+        }
+
+        s.closing_curly(); // match self
     }
 
     s.closing_curly_newline(); // if let Some(s)
@@ -412,38 +432,6 @@ pub fn print_write_field(
             s.newline();
         }
     }
-}
-
-pub fn print_flag_if_statement(
-    s: &mut Writer,
-    variable_prefix: &str,
-    statement: &NewIfStatement,
-    prefix: &str,
-    postfix: &str,
-) {
-    assert!(statement.enum_or_flag() == IfStatementType::Flag);
-
-    let enumerator = statement
-        .enumerators()
-        .iter()
-        .filter(|a| !a.fields().is_empty())
-        .collect::<Vec<&NewEnumerator>>()[0];
-
-    s.bodyn(
-        format!(
-            "if let Some(s) = &{variable_prefix}{variable}.{variant}",
-            variable_prefix = variable_prefix,
-            variable = statement.variable_name(),
-            variant = &enumerator.name().to_lowercase(),
-        ),
-        |s| {
-            s.wln(format!(
-                "s.{prefix}write(w){postfix}?;",
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        },
-    );
 }
 
 fn print_write_if_enum_statement(
@@ -503,75 +491,4 @@ fn print_write_if_enum_statement(
     }
 
     s.closing_curly_newline(); // match
-}
-
-pub fn print_enum_if_statement_new(
-    s: &mut Writer,
-    e: &Container,
-    o: &Objects,
-    variable_prefix: &str,
-    ne: &NewIfStatement,
-    prefix: &str,
-    postfix: &str,
-) {
-    s.open_curly(format!(
-        "match &{prefix}{name}",
-        name = ne.variable_name(),
-        prefix = match e.type_definition_in_same_scope(ne.variable_name()) {
-            false => "self.",
-            true => variable_prefix,
-        },
-    ));
-
-    for en in ne.enumerators() {
-        if en.fields().is_empty() {
-            s.wln(format!(
-                "{new_enum}::{variant} => {{}}",
-                new_enum = ne.new_ty_name(),
-                variant = en.name()
-            ));
-
-            continue;
-        }
-
-        s.open_curly(format!(
-            "{new_enum}::{variant}",
-            new_enum = ne.new_ty_name(),
-            variant = en.name()
-        ));
-
-        for m in en.fields() {
-            match m {
-                NewEnumStructMember::Definition(d) => {
-                    if d.used_as_size_in().is_some() || d.verified_value().is_some() {
-                        continue;
-                    }
-                    s.wln(format!("{name},", name = d.name()));
-                }
-                NewEnumStructMember::IfStatement(_) => {}
-            }
-        }
-        s.closing_curly_with(" => {");
-        s.inc_indent();
-
-        for m in en.fields() {
-            match m {
-                NewEnumStructMember::Definition(d) => {
-                    print_write_definition(s, e, o, "", d, prefix, postfix);
-                }
-                NewEnumStructMember::IfStatement(statement) => match statement.enum_or_flag() {
-                    IfStatementType::Enum => {
-                        print_enum_if_statement_new(s, e, o, "", statement, prefix, postfix);
-                    }
-                    IfStatementType::Flag => {
-                        print_flag_if_statement(s, "", statement, prefix, postfix);
-                    }
-                },
-            }
-        }
-
-        s.closing_curly();
-    }
-
-    s.closing_curly_newline();
 }

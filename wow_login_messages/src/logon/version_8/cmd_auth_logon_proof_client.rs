@@ -154,40 +154,40 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         // security_flag: SecurityFlag
         self.security_flag.write(w)?;
 
-        if let Some(s) = &self.security_flag.pin {
+        if let Some(if_statement) = &self.security_flag.pin {
             // pin_salt: u8[16]
-            for i in s.pin_salt.iter() {
+            for i in if_statement.pin_salt.iter() {
                 w.write_all(&i.to_le_bytes())?;
             }
 
             // pin_hash: u8[20]
-            for i in s.pin_hash.iter() {
+            for i in if_statement.pin_hash.iter() {
                 w.write_all(&i.to_le_bytes())?;
             }
 
         }
 
-        if let Some(s) = &self.security_flag.unknown0 {
+        if let Some(if_statement) = &self.security_flag.unknown0 {
             // unknown0: u8
-            w.write_all(&s.unknown0.to_le_bytes())?;
+            w.write_all(&if_statement.unknown0.to_le_bytes())?;
 
             // unknown1: u8
-            w.write_all(&s.unknown1.to_le_bytes())?;
+            w.write_all(&if_statement.unknown1.to_le_bytes())?;
 
             // unknown2: u8
-            w.write_all(&s.unknown2.to_le_bytes())?;
+            w.write_all(&if_statement.unknown2.to_le_bytes())?;
 
             // unknown3: u8
-            w.write_all(&s.unknown3.to_le_bytes())?;
+            w.write_all(&if_statement.unknown3.to_le_bytes())?;
 
             // unknown4: u64
-            w.write_all(&s.unknown4.to_le_bytes())?;
+            w.write_all(&if_statement.unknown4.to_le_bytes())?;
 
         }
 
-        if let Some(s) = &self.security_flag.authenticator {
+        if let Some(if_statement) = &self.security_flag.authenticator {
             // unknown5: u8
-            w.write_all(&s.unknown5.to_le_bytes())?;
+            w.write_all(&if_statement.unknown5.to_le_bytes())?;
 
         }
 
@@ -348,40 +348,40 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             // security_flag: SecurityFlag
             self.security_flag.tokio_write(w).await?;
 
-            if let Some(s) = &self.security_flag.pin {
+            if let Some(if_statement) = &self.security_flag.pin {
                 // pin_salt: u8[16]
-                for i in s.pin_salt.iter() {
+                for i in if_statement.pin_salt.iter() {
                     w.write_all(&i.to_le_bytes()).await?;
                 }
 
                 // pin_hash: u8[20]
-                for i in s.pin_hash.iter() {
+                for i in if_statement.pin_hash.iter() {
                     w.write_all(&i.to_le_bytes()).await?;
                 }
 
             }
 
-            if let Some(s) = &self.security_flag.unknown0 {
+            if let Some(if_statement) = &self.security_flag.unknown0 {
                 // unknown0: u8
-                w.write_all(&s.unknown0.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown0.to_le_bytes()).await?;
 
                 // unknown1: u8
-                w.write_all(&s.unknown1.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown1.to_le_bytes()).await?;
 
                 // unknown2: u8
-                w.write_all(&s.unknown2.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown2.to_le_bytes()).await?;
 
                 // unknown3: u8
-                w.write_all(&s.unknown3.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown3.to_le_bytes()).await?;
 
                 // unknown4: u64
-                w.write_all(&s.unknown4.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown4.to_le_bytes()).await?;
 
             }
 
-            if let Some(s) = &self.security_flag.authenticator {
+            if let Some(if_statement) = &self.security_flag.authenticator {
                 // unknown5: u8
-                w.write_all(&s.unknown5.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown5.to_le_bytes()).await?;
 
             }
 
@@ -543,40 +543,40 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
             // security_flag: SecurityFlag
             self.security_flag.astd_write(w).await?;
 
-            if let Some(s) = &self.security_flag.pin {
+            if let Some(if_statement) = &self.security_flag.pin {
                 // pin_salt: u8[16]
-                for i in s.pin_salt.iter() {
+                for i in if_statement.pin_salt.iter() {
                     w.write_all(&i.to_le_bytes()).await?;
                 }
 
                 // pin_hash: u8[20]
-                for i in s.pin_hash.iter() {
+                for i in if_statement.pin_hash.iter() {
                     w.write_all(&i.to_le_bytes()).await?;
                 }
 
             }
 
-            if let Some(s) = &self.security_flag.unknown0 {
+            if let Some(if_statement) = &self.security_flag.unknown0 {
                 // unknown0: u8
-                w.write_all(&s.unknown0.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown0.to_le_bytes()).await?;
 
                 // unknown1: u8
-                w.write_all(&s.unknown1.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown1.to_le_bytes()).await?;
 
                 // unknown2: u8
-                w.write_all(&s.unknown2.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown2.to_le_bytes()).await?;
 
                 // unknown3: u8
-                w.write_all(&s.unknown3.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown3.to_le_bytes()).await?;
 
                 // unknown4: u64
-                w.write_all(&s.unknown4.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown4.to_le_bytes()).await?;
 
             }
 
-            if let Some(s) = &self.security_flag.authenticator {
+            if let Some(if_statement) = &self.security_flag.authenticator {
                 // unknown5: u8
-                w.write_all(&s.unknown5.to_le_bytes()).await?;
+                w.write_all(&if_statement.unknown5.to_le_bytes()).await?;
 
             }
 

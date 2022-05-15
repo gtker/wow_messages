@@ -133,12 +133,12 @@ impl MessageBody for SMSG_SPELL_GO {
         // targets: SpellCastTargets
         self.targets.write(w)?;
 
-        if let Some(s) = &self.flags.ammo {
+        if let Some(if_statement) = &self.flags.ammo {
             // ammo_display_id: u32
-            w.write_all(&s.ammo_display_id.to_le_bytes())?;
+            w.write_all(&if_statement.ammo_display_id.to_le_bytes())?;
 
             // ammo_inventory_type: u32
-            w.write_all(&s.ammo_inventory_type.to_le_bytes())?;
+            w.write_all(&if_statement.ammo_inventory_type.to_le_bytes())?;
 
         }
 
@@ -269,12 +269,12 @@ impl MessageBody for SMSG_SPELL_GO {
             // targets: SpellCastTargets
             self.targets.tokio_write(w).await?;
 
-            if let Some(s) = &self.flags.ammo {
+            if let Some(if_statement) = &self.flags.ammo {
                 // ammo_display_id: u32
-                w.write_all(&s.ammo_display_id.to_le_bytes()).await?;
+                w.write_all(&if_statement.ammo_display_id.to_le_bytes()).await?;
 
                 // ammo_inventory_type: u32
-                w.write_all(&s.ammo_inventory_type.to_le_bytes()).await?;
+                w.write_all(&if_statement.ammo_inventory_type.to_le_bytes()).await?;
 
             }
 
@@ -406,12 +406,12 @@ impl MessageBody for SMSG_SPELL_GO {
             // targets: SpellCastTargets
             self.targets.astd_write(w).await?;
 
-            if let Some(s) = &self.flags.ammo {
+            if let Some(if_statement) = &self.flags.ammo {
                 // ammo_display_id: u32
-                w.write_all(&s.ammo_display_id.to_le_bytes()).await?;
+                w.write_all(&if_statement.ammo_display_id.to_le_bytes()).await?;
 
                 // ammo_inventory_type: u32
-                w.write_all(&s.ammo_inventory_type.to_le_bytes()).await?;
+                w.write_all(&if_statement.ammo_inventory_type.to_le_bytes()).await?;
 
             }
 

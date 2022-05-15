@@ -25,7 +25,7 @@ pub fn print_struct(e: &Container, o: &Objects) -> Writer {
 
     print_errors(&mut s, e, o);
 
-    print_new_types::print_new_types(&mut s, e, o);
+    print_new_types::print_new_types(&mut s, e);
 
     print_tests::print_tests(&mut s, e, o);
 

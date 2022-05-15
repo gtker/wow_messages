@@ -119,9 +119,9 @@ impl ReadableAndWritable for Realm {
         // realm_id: u8
         w.write_all(&self.realm_id.to_le_bytes())?;
 
-        if let Some(s) = &self.flag.specify_build {
+        if let Some(if_statement) = &self.flag.specify_build {
             // version: Version
-            s.version.write(w)?;
+            if_statement.version.write(w)?;
 
         }
 
@@ -245,9 +245,9 @@ impl ReadableAndWritable for Realm {
             // realm_id: u8
             w.write_all(&self.realm_id.to_le_bytes()).await?;
 
-            if let Some(s) = &self.flag.specify_build {
+            if let Some(if_statement) = &self.flag.specify_build {
                 // version: Version
-                s.version.tokio_write(w).await?;
+                if_statement.version.tokio_write(w).await?;
 
             }
 
@@ -372,9 +372,9 @@ impl ReadableAndWritable for Realm {
             // realm_id: u8
             w.write_all(&self.realm_id.to_le_bytes()).await?;
 
-            if let Some(s) = &self.flag.specify_build {
+            if let Some(if_statement) = &self.flag.specify_build {
                 // version: Version
-                s.version.astd_write(w).await?;
+                if_statement.version.astd_write(w).await?;
 
             }
 
