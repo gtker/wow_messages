@@ -8,7 +8,7 @@ use std::path::Path;
 
 use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::{LoginVersion, Tags, WorldVersion};
 use crate::parser::types::{Endianness, IntegerType};
 
 #[derive(Serialize, Debug)]
@@ -53,10 +53,53 @@ impl From<&IntegerType> for IrIntegerType {
 }
 
 #[derive(Debug, Serialize)]
+pub enum IrLoginVersion {
+    All,
+    Specific(u8),
+}
+
+impl From<&LoginVersion> for IrLoginVersion {
+    fn from(v: &LoginVersion) -> Self {
+        match v {
+            LoginVersion::Specific(s) => Self::Specific(*s),
+            LoginVersion::All => Self::All,
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+pub enum IrWorldVersion {
+    All,
+    Major(u8),
+    Minor(u8, u8),
+    Patch(u8, u8, u8),
+    Exact(u8, u8, u8, u8),
+}
+
+#[derive(Debug, Serialize)]
+pub enum IrVersions {
+    Login(Vec<IrLoginVersion>),
+    World(Vec<IrWorldVersion>),
+}
+
+impl From<&WorldVersion> for IrWorldVersion {
+    fn from(v: &WorldVersion) -> Self {
+        match v {
+            WorldVersion::Major(m) => Self::Major(*m),
+            WorldVersion::Minor(m, i) => Self::Minor(*m, *i),
+            WorldVersion::Patch(m, i, p) => Self::Patch(*m, *i, *p),
+            WorldVersion::Exact(m, i, p, e) => Self::Exact(*m, *i, *p, *e),
+            WorldVersion::All => Self::All,
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
 pub struct IrTags {
     description: Option<String>,
     comment: Option<String>,
     display: Option<String>,
+    versions: Option<IrVersions>,
 }
 
 impl IrTags {
@@ -65,6 +108,17 @@ impl IrTags {
             description: tags.description().map(|a| a.to_owned()),
             comment: tags.comment().map(|a| a.to_owned()),
             display: tags.display().map(|a| a.to_owned()),
+            versions: if !tags.logon_versions().is_empty() {
+                Some(IrVersions::Login(
+                    tags.logon_versions().iter().map(|a| a.into()).collect(),
+                ))
+            } else if !tags.versions().is_empty() {
+                Some(IrVersions::World(
+                    tags.versions().iter().map(|a| a.into()).collect(),
+                ))
+            } else {
+                None
+            },
         }
     }
 }
