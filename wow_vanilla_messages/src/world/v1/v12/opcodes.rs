@@ -95,6 +95,7 @@ use crate::world::v1::v12::{CMSG_CHANNEL_BAN, CMSG_CHANNEL_BANError};
 use crate::world::v1::v12::{CMSG_CHANNEL_UNBAN, CMSG_CHANNEL_UNBANError};
 use crate::world::v1::v12::{CMSG_CHANNEL_ANNOUNCEMENTS, CMSG_CHANNEL_ANNOUNCEMENTSError};
 use crate::world::v1::v12::{CMSG_CHANNEL_MODERATE, CMSG_CHANNEL_MODERATEError};
+use crate::world::v1::v12::{SMSG_UPDATE_OBJECT, SMSG_UPDATE_OBJECTError};
 use crate::world::v1::v12::{CMSG_USE_ITEM, CMSG_USE_ITEMError};
 use crate::world::v1::v12::CMSG_OPEN_ITEM;
 use crate::world::v1::v12::CMSG_READ_ITEM;
@@ -398,6 +399,7 @@ pub enum ClientOpcode {
     CMSG_CHANNEL_UNBAN,
     CMSG_CHANNEL_ANNOUNCEMENTS,
     CMSG_CHANNEL_MODERATE,
+    SMSG_UPDATE_OBJECT,
     CMSG_USE_ITEM,
     CMSG_OPEN_ITEM,
     CMSG_READ_ITEM,
@@ -703,6 +705,7 @@ impl ClientOpcode {
             Self::CMSG_CHANNEL_UNBAN => 0xa6,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS => 0xa7,
             Self::CMSG_CHANNEL_MODERATE => 0xa8,
+            Self::SMSG_UPDATE_OBJECT => 0xa9,
             Self::CMSG_USE_ITEM => 0xab,
             Self::CMSG_OPEN_ITEM => 0xac,
             Self::CMSG_READ_ITEM => 0xad,
@@ -1011,6 +1014,7 @@ impl ClientOpcode {
             0xa6 => Ok(Self::CMSG_CHANNEL_UNBAN),
             0xa7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS),
             0xa8 => Ok(Self::CMSG_CHANNEL_MODERATE),
+            0xa9 => Ok(Self::SMSG_UPDATE_OBJECT),
             0xab => Ok(Self::CMSG_USE_ITEM),
             0xac => Ok(Self::CMSG_OPEN_ITEM),
             0xad => Ok(Self::CMSG_READ_ITEM),
@@ -1320,6 +1324,7 @@ impl From<&ClientOpcodeMessage> for ClientOpcode {
             ClientOpcodeMessage::CMSG_CHANNEL_UNBAN(_) => Self::CMSG_CHANNEL_UNBAN,
             ClientOpcodeMessage::CMSG_CHANNEL_ANNOUNCEMENTS(_) => Self::CMSG_CHANNEL_ANNOUNCEMENTS,
             ClientOpcodeMessage::CMSG_CHANNEL_MODERATE(_) => Self::CMSG_CHANNEL_MODERATE,
+            ClientOpcodeMessage::SMSG_UPDATE_OBJECT(_) => Self::SMSG_UPDATE_OBJECT,
             ClientOpcodeMessage::CMSG_USE_ITEM(_) => Self::CMSG_USE_ITEM,
             ClientOpcodeMessage::CMSG_OPEN_ITEM(_) => Self::CMSG_OPEN_ITEM,
             ClientOpcodeMessage::CMSG_READ_ITEM(_) => Self::CMSG_READ_ITEM,
@@ -1650,6 +1655,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN),
     CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS),
     CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE),
+    SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT),
     CMSG_USE_ITEM(CMSG_USE_ITEM),
     CMSG_OPEN_ITEM(CMSG_OPEN_ITEM),
     CMSG_READ_ITEM(CMSG_READ_ITEM),
@@ -1958,6 +1964,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(i) => i.write_body(w)?,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(i) => i.write_body(w)?,
             Self::CMSG_CHANNEL_MODERATE(i) => i.write_body(w)?,
+            Self::SMSG_UPDATE_OBJECT(i) => i.write_body(w)?,
             Self::CMSG_USE_ITEM(i) => i.write_body(w)?,
             Self::CMSG_OPEN_ITEM(i) => i.write_body(w)?,
             Self::CMSG_READ_ITEM(i) => i.write_body(w)?,
@@ -2267,6 +2274,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
             0x00A6 => Ok(Self::CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN::read_body(r, size)?)),
             0x00A7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS::read_body(r, size)?)),
             0x00A8 => Ok(Self::CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE::read_body(r, size)?)),
+            0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT::read_body(r, size)?)),
             0x00AB => Ok(Self::CMSG_USE_ITEM(CMSG_USE_ITEM::read_body(r, size)?)),
             0x00AC => Ok(Self::CMSG_OPEN_ITEM(CMSG_OPEN_ITEM::read_body(r, size)?)),
             0x00AD => Ok(Self::CMSG_READ_ITEM(CMSG_READ_ITEM::read_body(r, size)?)),
@@ -2577,6 +2585,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
             0x00A6 => Ok(Self::CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN::read_body(r, header_size)?)),
             0x00A7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS::read_body(r, header_size)?)),
             0x00A8 => Ok(Self::CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE::read_body(r, header_size)?)),
+            0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT::read_body(r, header_size)?)),
             0x00AB => Ok(Self::CMSG_USE_ITEM(CMSG_USE_ITEM::read_body(r, header_size)?)),
             0x00AC => Ok(Self::CMSG_OPEN_ITEM(CMSG_OPEN_ITEM::read_body(r, header_size)?)),
             0x00AD => Ok(Self::CMSG_READ_ITEM(CMSG_READ_ITEM::read_body(r, header_size)?)),
@@ -2884,6 +2893,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(i) => i.write_encrypted_client(w, e)?,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(i) => i.write_encrypted_client(w, e)?,
             Self::CMSG_CHANNEL_MODERATE(i) => i.write_encrypted_client(w, e)?,
+            Self::SMSG_UPDATE_OBJECT(i) => i.write_encrypted_client(w, e)?,
             Self::CMSG_USE_ITEM(i) => i.write_encrypted_client(w, e)?,
             Self::CMSG_OPEN_ITEM(i) => i.write_encrypted_client(w, e)?,
             Self::CMSG_READ_ITEM(i) => i.write_encrypted_client(w, e)?,
@@ -3204,6 +3214,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
                 Self::CMSG_CHANNEL_UNBAN(i) => i.tokio_write_body(w).await?,
                 Self::CMSG_CHANNEL_ANNOUNCEMENTS(i) => i.tokio_write_body(w).await?,
                 Self::CMSG_CHANNEL_MODERATE(i) => i.tokio_write_body(w).await?,
+                Self::SMSG_UPDATE_OBJECT(i) => i.tokio_write_body(w).await?,
                 Self::CMSG_USE_ITEM(i) => i.tokio_write_body(w).await?,
                 Self::CMSG_OPEN_ITEM(i) => i.tokio_write_body(w).await?,
                 Self::CMSG_READ_ITEM(i) => i.tokio_write_body(w).await?,
@@ -3524,6 +3535,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
                 0x00A6 => Ok(Self::CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN::tokio_read_body(r, size).await?)),
                 0x00A7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS::tokio_read_body(r, size).await?)),
                 0x00A8 => Ok(Self::CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE::tokio_read_body(r, size).await?)),
+                0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT::tokio_read_body(r, size).await?)),
                 0x00AB => Ok(Self::CMSG_USE_ITEM(CMSG_USE_ITEM::tokio_read_body(r, size).await?)),
                 0x00AC => Ok(Self::CMSG_OPEN_ITEM(CMSG_OPEN_ITEM::tokio_read_body(r, size).await?)),
                 0x00AD => Ok(Self::CMSG_READ_ITEM(CMSG_READ_ITEM::tokio_read_body(r, size).await?)),
@@ -3848,6 +3860,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
                 0x00A6 => Ok(Self::CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN::tokio_read_body(r, header_size).await?)),
                 0x00A7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS::tokio_read_body(r, header_size).await?)),
                 0x00A8 => Ok(Self::CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE::tokio_read_body(r, header_size).await?)),
+                0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT::tokio_read_body(r, header_size).await?)),
                 0x00AB => Ok(Self::CMSG_USE_ITEM(CMSG_USE_ITEM::tokio_read_body(r, header_size).await?)),
                 0x00AC => Ok(Self::CMSG_OPEN_ITEM(CMSG_OPEN_ITEM::tokio_read_body(r, header_size).await?)),
                 0x00AD => Ok(Self::CMSG_READ_ITEM(CMSG_READ_ITEM::tokio_read_body(r, header_size).await?)),
@@ -4171,6 +4184,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
                 Self::CMSG_CHANNEL_UNBAN(i) => i.tokio_write_encrypted_client(w, e).await?,
                 Self::CMSG_CHANNEL_ANNOUNCEMENTS(i) => i.tokio_write_encrypted_client(w, e).await?,
                 Self::CMSG_CHANNEL_MODERATE(i) => i.tokio_write_encrypted_client(w, e).await?,
+                Self::SMSG_UPDATE_OBJECT(i) => i.tokio_write_encrypted_client(w, e).await?,
                 Self::CMSG_USE_ITEM(i) => i.tokio_write_encrypted_client(w, e).await?,
                 Self::CMSG_OPEN_ITEM(i) => i.tokio_write_encrypted_client(w, e).await?,
                 Self::CMSG_READ_ITEM(i) => i.tokio_write_encrypted_client(w, e).await?,
@@ -4492,6 +4506,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
                 Self::CMSG_CHANNEL_UNBAN(i) => i.astd_write_body(w).await?,
                 Self::CMSG_CHANNEL_ANNOUNCEMENTS(i) => i.astd_write_body(w).await?,
                 Self::CMSG_CHANNEL_MODERATE(i) => i.astd_write_body(w).await?,
+                Self::SMSG_UPDATE_OBJECT(i) => i.astd_write_body(w).await?,
                 Self::CMSG_USE_ITEM(i) => i.astd_write_body(w).await?,
                 Self::CMSG_OPEN_ITEM(i) => i.astd_write_body(w).await?,
                 Self::CMSG_READ_ITEM(i) => i.astd_write_body(w).await?,
@@ -4812,6 +4827,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
                 0x00A6 => Ok(Self::CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN::astd_read_body(r, size).await?)),
                 0x00A7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS::astd_read_body(r, size).await?)),
                 0x00A8 => Ok(Self::CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE::astd_read_body(r, size).await?)),
+                0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT::astd_read_body(r, size).await?)),
                 0x00AB => Ok(Self::CMSG_USE_ITEM(CMSG_USE_ITEM::astd_read_body(r, size).await?)),
                 0x00AC => Ok(Self::CMSG_OPEN_ITEM(CMSG_OPEN_ITEM::astd_read_body(r, size).await?)),
                 0x00AD => Ok(Self::CMSG_READ_ITEM(CMSG_READ_ITEM::astd_read_body(r, size).await?)),
@@ -5136,6 +5152,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
                 0x00A6 => Ok(Self::CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN::astd_read_body(r, header_size).await?)),
                 0x00A7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS::astd_read_body(r, header_size).await?)),
                 0x00A8 => Ok(Self::CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE::astd_read_body(r, header_size).await?)),
+                0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT::astd_read_body(r, header_size).await?)),
                 0x00AB => Ok(Self::CMSG_USE_ITEM(CMSG_USE_ITEM::astd_read_body(r, header_size).await?)),
                 0x00AC => Ok(Self::CMSG_OPEN_ITEM(CMSG_OPEN_ITEM::astd_read_body(r, header_size).await?)),
                 0x00AD => Ok(Self::CMSG_READ_ITEM(CMSG_READ_ITEM::astd_read_body(r, header_size).await?)),
@@ -5459,6 +5476,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
                 Self::CMSG_CHANNEL_UNBAN(i) => i.astd_write_encrypted_client(w, e).await?,
                 Self::CMSG_CHANNEL_ANNOUNCEMENTS(i) => i.astd_write_encrypted_client(w, e).await?,
                 Self::CMSG_CHANNEL_MODERATE(i) => i.astd_write_encrypted_client(w, e).await?,
+                Self::SMSG_UPDATE_OBJECT(i) => i.astd_write_encrypted_client(w, e).await?,
                 Self::CMSG_USE_ITEM(i) => i.astd_write_encrypted_client(w, e).await?,
                 Self::CMSG_OPEN_ITEM(i) => i.astd_write_encrypted_client(w, e).await?,
                 Self::CMSG_READ_ITEM(i) => i.astd_write_encrypted_client(w, e).await?,
@@ -5717,6 +5735,7 @@ pub enum ClientOpcodeMessageError {
     CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBANError),
     CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTSError),
     CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATEError),
+    SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECTError),
     CMSG_USE_ITEM(CMSG_USE_ITEMError),
     CMSG_STANDSTATECHANGE(CMSG_STANDSTATECHANGEError),
     CMSG_EMOTE(CMSG_EMOTEError),
@@ -5792,6 +5811,7 @@ impl std::fmt::Display for ClientOpcodeMessageError {
             Self::CMSG_CHANNEL_UNBAN(i) => i.fmt(f),
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(i) => i.fmt(f),
             Self::CMSG_CHANNEL_MODERATE(i) => i.fmt(f),
+            Self::SMSG_UPDATE_OBJECT(i) => i.fmt(f),
             Self::CMSG_USE_ITEM(i) => i.fmt(f),
             Self::CMSG_STANDSTATECHANGE(i) => i.fmt(f),
             Self::CMSG_EMOTE(i) => i.fmt(f),
@@ -6154,6 +6174,15 @@ impl From<CMSG_CHANNEL_MODERATEError> for ClientOpcodeMessageError {
         match e {
             CMSG_CHANNEL_MODERATEError::Io(i) => Self::Io(i),
             _ => Self::CMSG_CHANNEL_MODERATE(e),
+        }
+    }
+}
+
+impl From<SMSG_UPDATE_OBJECTError> for ClientOpcodeMessageError {
+    fn from(e: SMSG_UPDATE_OBJECTError) -> Self {
+        match e {
+            SMSG_UPDATE_OBJECTError::Io(i) => Self::Io(i),
+            _ => Self::SMSG_UPDATE_OBJECT(e),
         }
     }
 }

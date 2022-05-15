@@ -373,8 +373,9 @@ fn print_write_flag_if_statement(
 
         for enumerator in rd.enumerators() {
             s.open_curly(format!(
-                "Self::{enumerator}",
-                enumerator = enumerator.name()
+                "{ty}::{enumerator}",
+                ty = rd.ty_name(),
+                enumerator = enumerator.name(),
             ));
 
             for m in enumerator.members_in_struct() {
@@ -384,7 +385,7 @@ fn print_write_flag_if_statement(
             s.inc_indent();
 
             for m in enumerator.original_fields() {
-                print_write_field(s, e, o, m, "if_statement.", prefix, postfix);
+                print_write_field(s, e, o, m, "", prefix, postfix);
             }
 
             s.closing_curly(); // Enumerator body

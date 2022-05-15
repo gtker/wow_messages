@@ -27,3 +27,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `NEAR_OBJECTS` | 5 (0x05) |  |  |
 
 Used in:
+* [Object](object.md)

@@ -88,4 +88,106 @@ enum ObjectType : u8 {
     CORPSE = 7;
 }
 
+struct MovementBlock {
+    UpdateFlag update_flag;
+    if (update_flag & LIVING) {
+        /* MovementInfo */
+        MovementFlags flags;
+        u32 timestamp;
+        f32 living_position_x;
+        f32 living_position_y;
+        f32 living_position_z;
+        f32 living_orientation;
+        if (flags & ON_TRANSPORT) {
+            TransportInfo transport;
+        }
+        if (flags & SWIMMING) {
+            f32 pitch;
+        }
+        f32 fall_time;
+        if (flags & JUMPING) {
+            f32 z_speed;
+            f32 cos_angle;
+            f32 sin_angle;
+            f32 xy_speed;
+        }
+        if (flags & SPLINE_ELEVATION) {
+            f32 spline_elevation;
+        }
+
+        f32 walking_speed;
+        f32 running_speed;
+        f32 backwards_running_speed;
+        f32 swimming_speed;
+        f32 backwards_swimming_speed;
+        f32 turn_rate;
+        if (flags & SPLINE_ENABLED) {
+            SplineFlag spline_flags;
+            if (spline_flags & FINAL_ANGLE) {
+                f32 angle;
+            }
+            else if (spline_flags & FINAL_TARGET) {
+                u64 target;
+            }
+            else if (spline_flags & FINAL_POINT) {
+                f32 spline_final_point_x;
+                f32 spline_final_point_y;
+                f32 spline_final_point_z;
+            }
+            u32 time_passed;
+            u32 duration;
+            u32 id;
+            u32 amount_of_nodes;
+            Vector3d[amount_of_nodes] nodes;
+            Vector3d final_node;
+        }
+    }
+    else if (update_flag & HAS_POSITION) {
+        f32 position_x;
+        f32 position_y;
+        f32 position_z;
+        f32 orientation;
+    }
+    if (update_flag & HIGH_GUID) {
+        u32 unknown0 = 0;
+    }
+    if (update_flag & ALL) {
+        u32 unknown1 = 1;
+    }
+    if (update_flag & MELEE_ATTACKING) {
+        PackedGuid guid;
+    }
+    if (update_flag & TRANSPORT) {
+        u32 transport_progress_in_ms;
+    }
+}
+
+struct Object {
+    UpdateType update_type;
+    if (update_type == VALUES) {
+        PackedGuid guid1;   
+        UpdateMask mask1;
+    }
+    else if (update_type == MOVEMENT) {
+        PackedGuid guid2;
+        MovementBlock movement1;
+    }
+    else if (update_type == CREATE_OBJECT || update_type == CREATE_OBJECT2) {
+        PackedGuid guid3;
+        ObjectType object_type;
+        MovementBlock movement2;
+        UpdateMask mask2;
+    }
+    else if (update_type == OUT_OF_RANGE_OBJECTS
+          || update_type == NEAR_OBJECTS) {      /* Complete */
+        u32 count;
+        PackedGuid[count] guids;
+    }
+}
+
+cmsg SMSG_UPDATE_OBJECT = 0x0A9 {
+    u32 amount_of_objects;
+    u8 has_transport;
+    Object[amount_of_objects] objects;
+}
 

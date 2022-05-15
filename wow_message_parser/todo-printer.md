@@ -5,9 +5,6 @@
     - if a ==, else { if b ==  } (`SMSG_SEND_MAIL_RESULT`)
     - if a == { if b == } (`SMSG_AUCTION_COMMAND_RESULT`)
     - if a != { if a == } (`SMSG_INVENTORY_CHANGE_FAILURE`)
-  * Flag else ifs:
-    - {if else if else if} (`SMSG_UPDATE_OBJECT`)
-    - {if else if else if}, {if}, {if}, {if} (`SMSG_UPDATE_OBJECT`)
 * Working UpdateMask
   * Tests
 

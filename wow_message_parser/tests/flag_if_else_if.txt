@@ -95,31 +95,31 @@ impl ReadableAndWritable for FlagIfElseIf {
 
         if let Some(if_statement) = &self.flags.one_if {
             match if_statement {
-                Self::ONE_IF {
+                FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
                     b_if,
                 } => {
                     // b_if: u8
-                    w.write_all(&if_statement.b_if.to_le_bytes())?;
+                    w.write_all(&b_if.to_le_bytes())?;
 
                 }
-                Self::TWO_ELSEIF {
+                FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
                     s,
                 } => {
                     // s: SimpleFlag
-                    if_statement.s.write(w)?;
+                    s.write(w)?;
 
-                    if let Some(if_statement) = &if_statement.s.one {
+                    if let Some(if_statement) = &s.one {
                         // if_one: u8
                         w.write_all(&if_statement.if_one.to_le_bytes())?;
 
                     }
 
                 }
-                Self::FOUR_ELSEIF {
+                FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
                     elseif2,
                 } => {
                     // elseif2: u8
-                    w.write_all(&if_statement.elseif2.to_le_bytes())?;
+                    w.write_all(&elseif2.to_le_bytes())?;
 
                 }
             }
@@ -237,31 +237,31 @@ impl ReadableAndWritable for FlagIfElseIf {
 
             if let Some(if_statement) = &self.flags.one_if {
                 match if_statement {
-                    Self::ONE_IF {
+                    FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
                         b_if,
                     } => {
                         // b_if: u8
-                        w.write_all(&if_statement.b_if.to_le_bytes()).await?;
+                        w.write_all(&b_if.to_le_bytes()).await?;
 
                     }
-                    Self::TWO_ELSEIF {
+                    FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
                         s,
                     } => {
                         // s: SimpleFlag
-                        if_statement.s.tokio_write(w).await?;
+                        s.tokio_write(w).await?;
 
-                        if let Some(if_statement) = &if_statement.s.one {
+                        if let Some(if_statement) = &s.one {
                             // if_one: u8
                             w.write_all(&if_statement.if_one.to_le_bytes()).await?;
 
                         }
 
                     }
-                    Self::FOUR_ELSEIF {
+                    FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
                         elseif2,
                     } => {
                         // elseif2: u8
-                        w.write_all(&if_statement.elseif2.to_le_bytes()).await?;
+                        w.write_all(&elseif2.to_le_bytes()).await?;
 
                     }
                 }
@@ -380,31 +380,31 @@ impl ReadableAndWritable for FlagIfElseIf {
 
             if let Some(if_statement) = &self.flags.one_if {
                 match if_statement {
-                    Self::ONE_IF {
+                    FlagIfElseIfUpdateFlagONE_IF::ONE_IF {
                         b_if,
                     } => {
                         // b_if: u8
-                        w.write_all(&if_statement.b_if.to_le_bytes()).await?;
+                        w.write_all(&b_if.to_le_bytes()).await?;
 
                     }
-                    Self::TWO_ELSEIF {
+                    FlagIfElseIfUpdateFlagONE_IF::TWO_ELSEIF {
                         s,
                     } => {
                         // s: SimpleFlag
-                        if_statement.s.astd_write(w).await?;
+                        s.astd_write(w).await?;
 
-                        if let Some(if_statement) = &if_statement.s.one {
+                        if let Some(if_statement) = &s.one {
                             // if_one: u8
                             w.write_all(&if_statement.if_one.to_le_bytes()).await?;
 
                         }
 
                     }
-                    Self::FOUR_ELSEIF {
+                    FlagIfElseIfUpdateFlagONE_IF::FOUR_ELSEIF {
                         elseif2,
                     } => {
                         // elseif2: u8
-                        w.write_all(&if_statement.elseif2.to_le_bytes()).await?;
+                        w.write_all(&elseif2.to_le_bytes()).await?;
 
                     }
                 }

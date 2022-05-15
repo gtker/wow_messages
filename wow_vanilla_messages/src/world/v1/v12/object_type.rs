@@ -6,7 +6,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub(crate) enum ObjectType {
+pub enum ObjectType {
     OBJECT,
     ITEM,
     CONTAINER,

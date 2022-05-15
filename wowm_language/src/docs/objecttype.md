@@ -31,3 +31,4 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `CORPSE` | 7 (0x07) |  |  |
 
 Used in:
+* [Object](object.md)

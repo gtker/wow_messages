@@ -1,7 +1,13 @@
 use crate::Guid;
+#[cfg(feature = "async_std")]
+use async_std::io::{ReadExt, WriteExt};
 use std::io;
+#[cfg(feature = "sync")]
 use std::io::{Read, Write};
+#[cfg(feature = "async_tokio")]
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
+#[derive(Debug, Clone, Default, PartialEq)]
 pub struct UpdateObject {
     pub guid: Guid,
     pub object_type: i32,
@@ -9,6 +15,7 @@ pub struct UpdateObject {
     pub scale: f32,
 }
 
+#[derive(Debug, Clone, Default, PartialEq)]
 pub struct UpdateItem {
     owner: Guid,
     contained: Guid,
@@ -26,11 +33,22 @@ pub struct UpdateItem {
     max_durability: i32,
 }
 
+#[derive(Debug, Clone, PartialEq)]
 pub struct UpdateContainer {
     number_of_slots: i32,
     slots: [Guid; 36],
 }
 
+impl Default for UpdateContainer {
+    fn default() -> Self {
+        Self {
+            number_of_slots: 0,
+            slots: [Guid::new(0); 36],
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq)]
 pub struct UpdateUnit {
     charm: Guid,
     summon: Guid,
@@ -67,6 +85,46 @@ pub struct UpdateUnit {
     // TODO Add missing
 }
 
+impl Default for UpdateUnit {
+    fn default() -> Self {
+        Self {
+            charm: Default::default(),
+            summon: Default::default(),
+            charmed_by: Default::default(),
+            summoned_by: Default::default(),
+            created_by: Default::default(),
+            target: Default::default(),
+            persuaded: Default::default(),
+            channel_object: Default::default(),
+            health: 0,
+            power1: 0,
+            power2: 0,
+            power3: 0,
+            power4: 0,
+            power5: 0,
+            max_health: 0,
+            max_power1: 0,
+            max_power2: 0,
+            max_power3: 0,
+            max_power4: 0,
+            max_power5: 0,
+            level: 0,
+            faction_template: 0,
+            bytes_0: Default::default(),
+            item_slot_display: Default::default(),
+            item_info: Default::default(),
+            flags: 0,
+            auras: [0; 48],
+            aura_flags: Default::default(),
+            aura_levels: [0; 48],
+            aura_applications: [0; 48],
+            aura_state: 0,
+            base_attack_time: Default::default(),
+        }
+    }
+}
+
+#[derive(Debug, Clone, Default, PartialEq)]
 pub struct UpdateMask {
     pub object: Option<UpdateObject>,
     pub item: Option<UpdateItem>,
@@ -74,11 +132,40 @@ pub struct UpdateMask {
 }
 
 impl UpdateMask {
+    #[cfg(feature = "sync")]
     pub fn read(r: &mut impl Read) -> Result<Self, io::Error> {
         todo!()
     }
 
+    #[cfg(feature = "async_std")]
+    pub async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, io::Error> {
+        todo!()
+    }
+
+    #[cfg(feature = "async_tokio")]
+    pub async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, io::Error> {
+        todo!()
+    }
+
+    #[cfg(feature = "sync")]
     pub fn write(&self, w: &mut impl Write) -> Result<(), io::Error> {
+        todo!()
+    }
+
+    #[cfg(feature = "sync")]
+    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), io::Error> {
+        todo!()
+    }
+
+    #[cfg(feature = "sync")]
+    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
+        &self,
+        w: &mut W,
+    ) -> Result<(), io::Error> {
+        todo!()
+    }
+
+    pub fn size(&self) -> usize {
         todo!()
     }
 }
