@@ -3,7 +3,7 @@ use crate::world::v1::v12::{LogoutResult, LogoutResultError};
 use crate::world::v1::v12::{LogoutSpeed, LogoutSpeedError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -202,7 +202,6 @@ impl From<LogoutSpeedError> for SMSG_LOGOUT_RESPONSEError {
 
 #[cfg(test)]
 mod test {
-    use crate::ReadableAndWritable;
     use super::SMSG_LOGOUT_RESPONSE;
     use crate::ConstantSized;
     use crate::world::v1::v12::LogoutResult;

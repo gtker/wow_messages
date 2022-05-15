@@ -4,7 +4,8 @@ use crate::logon::all::Os;
 use crate::logon::all::Platform;
 use crate::logon::all::Version;
 use crate::ClientMessage;
-use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+use crate::ReadableAndWritable;
+use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -420,7 +421,6 @@ impl From<std::string::FromUtf8Error> for CMD_AUTH_RECONNECT_CHALLENGE_ClientErr
 
 #[cfg(test)]
 mod test {
-    use crate::ReadableAndWritable;
     use super::CMD_AUTH_RECONNECT_CHALLENGE_Client;
     use crate::VariableSized;
     use crate::logon::all::Locale;

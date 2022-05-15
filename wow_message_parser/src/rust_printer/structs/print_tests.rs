@@ -18,7 +18,6 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
 
     s.wln("#[cfg(test)]");
     s.body("mod test", |s| {
-        s.wln("use crate::ReadableAndWritable;");
         s.wln(format!("use super::{};", e.name()));
 
         match e.is_constant_sized() {

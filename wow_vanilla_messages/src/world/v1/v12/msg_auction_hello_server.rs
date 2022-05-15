@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -165,7 +165,6 @@ impl MaximumPossibleSized for MSG_AUCTION_HELLO_Server {
 
 #[cfg(test)]
 mod test {
-    use crate::ReadableAndWritable;
     use super::MSG_AUCTION_HELLO_Server;
     use crate::ConstantSized;
     use super::*;

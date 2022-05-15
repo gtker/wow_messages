@@ -3,7 +3,7 @@ use crate::logon::version_2::Population;
 use crate::logon::version_2::{RealmCategory, RealmCategoryError};
 use crate::logon::version_8::{RealmFlag};
 use crate::logon::all::Version;
-use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]

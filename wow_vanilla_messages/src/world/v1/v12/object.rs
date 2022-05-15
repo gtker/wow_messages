@@ -4,7 +4,7 @@ use crate::UpdateMask;
 use crate::world::v1::v12::MovementBlock;
 use crate::world::v1::v12::{ObjectType, ObjectTypeError};
 use crate::world::v1::v12::{UpdateType, UpdateTypeError};
-use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]

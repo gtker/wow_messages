@@ -7,7 +7,7 @@ use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{Gender, GenderError};
 use crate::world::v1::v12::{Map, MapError};
 use crate::world::v1::v12::{Race, RaceError};
-use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]

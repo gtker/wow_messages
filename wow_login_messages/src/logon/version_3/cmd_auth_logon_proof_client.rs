@@ -2,7 +2,8 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_3::{SecurityFlag, SecurityFlagError};
 use crate::logon::version_2::TelemetryKey;
 use crate::ClientMessage;
-use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+use crate::ReadableAndWritable;
+use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -495,7 +496,6 @@ impl MaximumPossibleSized for CMD_AUTH_LOGON_PROOF_ClientSecurityFlag {
 
 #[cfg(test)]
 mod test {
-    use crate::ReadableAndWritable;
     use super::CMD_AUTH_LOGON_PROOF_Client;
     use crate::VariableSized;
     use crate::logon::version_3::SecurityFlag;

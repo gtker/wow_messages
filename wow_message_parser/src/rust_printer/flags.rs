@@ -16,8 +16,6 @@ pub fn print_flag(e: &Definer) -> Writer {
 }
 
 fn includes(s: &mut Writer) {
-    s.wln("use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable};\n");
-
     s.write_async_includes();
 }
 

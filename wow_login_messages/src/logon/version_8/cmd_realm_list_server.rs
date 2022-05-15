@@ -1,7 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::logon::version_8::{Realm, RealmError};
 use crate::ServerMessage;
-use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+use crate::ReadableAndWritable;
+use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -281,7 +282,6 @@ impl From<RealmError> for CMD_REALM_LIST_ServerError {
 
 #[cfg(test)]
 mod test {
-    use crate::ReadableAndWritable;
     use super::CMD_REALM_LIST_Server;
     use crate::VariableSized;
     use crate::logon::version_2::Population;

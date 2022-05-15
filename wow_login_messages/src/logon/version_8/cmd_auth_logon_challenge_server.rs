@@ -2,7 +2,8 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_8::{LoginResult, LoginResultError};
 use crate::logon::version_8::{SecurityFlag};
 use crate::ServerMessage;
-use crate::{ConstantSized, MaximumPossibleSized, ReadableAndWritable, VariableSized};
+use crate::ReadableAndWritable;
+use crate::{ConstantSized, MaximumPossibleSized, VariableSized};
 #[cfg(feature = "async_tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async_std")]
@@ -1251,7 +1252,6 @@ impl MaximumPossibleSized for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
 
 #[cfg(test)]
 mod test {
-    use crate::ReadableAndWritable;
     use super::CMD_AUTH_LOGON_CHALLENGE_Server;
     use crate::VariableSized;
     use crate::logon::version_8::LoginResult;
