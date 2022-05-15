@@ -10,9 +10,9 @@ struct QuestItem {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 4 / Little | u32 | quest_id |  |
-| 0x04 | 4 / Little | u32 | quest_icon |  |
-| 0x08 | 4 / Little | u32 | level |  |
-| 0x0C | - / - | CString | title |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 4 / Little | u32 | quest_id |  |  |
+| 0x04 | 4 / Little | u32 | quest_icon |  |  |
+| 0x08 | 4 / Little | u32 | level |  |  |
+| 0x0C | - / - | CString | title |  | vmangos/cmangos/mangoszero: max 0x200 |

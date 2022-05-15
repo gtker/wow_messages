@@ -18,16 +18,16 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x01 | ? / - | [LoginResult](loginresult.md) | login_result |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x01 | ? / - | [LoginResult](loginresult.md) | login_result |  |  |
 
 If login_result is equal to `SUCCESS`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | u8[20] | server_proof |  |
-| - | 4 / Little | u32 | hardware_survey_id |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | u8[20] | server_proof |  |  |
+| - | 4 / Little | u32 | hardware_survey_id |  |  |
 ### Examples
 ```c
 1, // opcode (1)
@@ -60,21 +60,21 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 1 / -             | uint8  | opcode | Opcode that determines which fields the message contains.|
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x01 | ? / - | [LoginResult](loginresult.md) | login_result |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x01 | ? / - | [LoginResult](loginresult.md) | login_result |  |  |
 
 If login_result is equal to `SUCCESS`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | u8[20] | server_proof |  |
-| - | ? / - | [AccountFlag](accountflag.md) | account_flag |  |
-| - | 4 / Little | u32 | hardware_survey_id |  |
-| - | 2 / Little | u16 | unknown_flags |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | u8[20] | server_proof |  |  |
+| - | ? / - | [AccountFlag](accountflag.md) | account_flag |  |  |
+| - | 4 / Little | u32 | hardware_survey_id |  |  |
+| - | 2 / Little | u16 | unknown_flags |  |  |
 
 Else: 
-| - | 2 / Little | u16 | padding |  |
+| - | 2 / Little | u16 | padding |  |  |
 ### Examples
 ```c
 1, // opcode (1)

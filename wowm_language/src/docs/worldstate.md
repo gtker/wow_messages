@@ -8,7 +8,7 @@ struct WorldState {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 4 / Little | u32 | state |  |
-| 0x04 | 4 / Little | u32 | value |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 4 / Little | u32 | state |  |  |
+| 0x04 | 4 / Little | u32 | value |  |  |

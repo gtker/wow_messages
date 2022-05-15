@@ -9,8 +9,8 @@ struct GossipItem {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 4 / Little | u32 | id |  |
-| 0x04 | 1 / - | u8 | item_icon |  |
-| 0x05 | 1 / - | u8 | coded |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 4 / Little | u32 | id |  | vmangos: sets to loop index |
+| 0x04 | 1 / - | u8 | item_icon |  |  |
+| 0x05 | 1 / - | u8 | coded |  | vmangos: makes pop up box password |

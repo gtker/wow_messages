@@ -44,76 +44,76 @@ struct SpellCastTargets {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | [SpellCastTargetFlags](spellcasttargetflags.md) | target_flags |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | ? / - | [SpellCastTargetFlags](spellcasttargetflags.md) | target_flags |  |  |
 
 If target_flags contains `UNIT`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | unit_target1 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | unit_target1 |  |  |
 
 If target_flags contains `UNIT_ENEMY`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | unit_target2 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | unit_target2 |  |  |
 
 If target_flags contains `GAMEOBJECT`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | object_target1 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | object_target1 |  |  |
 
 If target_flags contains `LOCKED`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | object_target2 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | object_target2 |  |  |
 
 If target_flags contains `ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | item_target1 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | item_target1 |  |  |
 
 If target_flags contains `TRADE_ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | item_target2 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | item_target2 |  |  |
 
 If target_flags contains `SOURCE_LOCATION`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | f32 | position_x1 |  |
-| - | 4 / Little | f32 | position_y1 |  |
-| - | 4 / Little | f32 | position_z1 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | position_x1 |  |  |
+| - | 4 / Little | f32 | position_y1 |  |  |
+| - | 4 / Little | f32 | position_z1 |  |  |
 
 If target_flags contains `DEST_LOCATION`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | f32 | position_x2 |  |
-| - | 4 / Little | f32 | position_y2 |  |
-| - | 4 / Little | f32 | position_z2 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | position_x2 |  |  |
+| - | 4 / Little | f32 | position_y2 |  |  |
+| - | 4 / Little | f32 | position_z2 |  |  |
 
 If target_flags contains `STRING`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | CString | target_string |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | CString | target_string |  |  |
 
 If target_flags contains `CORPSE_ALLY`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | corpse_target1 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | corpse_target1 |  |  |
 
 If target_flags contains `CORPSE_ENEMY`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | corpse_target2 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | corpse_target2 |  |  |

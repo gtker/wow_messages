@@ -51,53 +51,53 @@ struct SpellLog {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | [SpellEffect](spelleffect.md) | effect |  |
-| - | 4 / Little | u32 | amount_of_logs |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | ? / - | [SpellEffect](spelleffect.md) | effect |  |  |
+| - | 4 / Little | u32 | amount_of_logs |  | vmangos/cmangos/mangoszero: Can be variable but all use constant 1 |
 
 If effect is equal to `POWER_DRAIN`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target1 |  |
-| - | 4 / Little | u32 | unknown1 |  |
-| - | 4 / Little | u32 | unknown2 |  |
-| - | 4 / Little | f32 | unknown3 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target1 |  |  |
+| - | 4 / Little | u32 | unknown1 |  |  |
+| - | 4 / Little | u32 | unknown2 |  |  |
+| - | 4 / Little | f32 | unknown3 |  |  |
 
 Else If effect is equal to `ADD_EXTRA_ATTACKS`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target2 |  |
-| - | 4 / Little | u32 | unknown4 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target2 |  |  |
+| - | 4 / Little | u32 | unknown4 |  |  |
 
 Else If effect is equal to `INTERRUPT_CAST`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target3 |  |
-| - | 4 / Little | u32 | interrupted_spell |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target3 |  |  |
+| - | 4 / Little | u32 | interrupted_spell |  |  |
 
 Else If effect is equal to `DURABILITY_DAMAGE`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target4 |  |
-| - | 4 / Little | u32 | unknown5 |  |
-| - | 4 / Little | u32 | unknown6 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target4 |  |  |
+| - | 4 / Little | u32 | unknown5 |  |  |
+| - | 4 / Little | u32 | unknown6 |  |  |
 
 Else If effect is equal to `CREATE_ITEM`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | spell_effect_item_type |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | spell_effect_item_type |  |  |
 
 Else If effect is equal to `FEED_PET`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | item_target_entry |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | item_target_entry |  |  |
 
 Else If effect is equal to `RESURRECT` **or** 
 is equal to `DISPEL` **or** 
@@ -116,6 +116,6 @@ is equal to `OPEN_LOCK` **or**
 is equal to `OPEN_LOCK_ITEM` **or** 
 is equal to `INSTAKILL`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target5 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target5 |  |  |

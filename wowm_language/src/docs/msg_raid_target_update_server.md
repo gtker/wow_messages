@@ -21,18 +21,18 @@ SMSG have a header of 4 bytes.
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | [RaidTargetUpdateType](raidtargetupdatetype.md) | update_type |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x04 | ? / - | [RaidTargetUpdateType](raidtargetupdatetype.md) | update_type |  |  |
 
 If update_type is equal to `FULL`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | [RaidTargetUpdate](raidtargetupdate.md)[8] | raid_targets |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | [RaidTargetUpdate](raidtargetupdate.md)[8] | raid_targets |  |  |
 
 Else If update_type is equal to `PARTIAL`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | [RaidTargetUpdate](raidtargetupdate.md) | raid_target |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | [RaidTargetUpdate](raidtargetupdate.md) | raid_target |  |  |

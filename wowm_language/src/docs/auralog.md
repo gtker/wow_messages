@@ -28,39 +28,39 @@ struct AuraLog {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | [AuraType](auratype.md) | aura_type |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | ? / - | [AuraType](auratype.md) | aura_type |  |  |
 
 If aura_type is equal to `PERIODIC_DAMAGE` **or** 
 is equal to `PERIODIC_DAMAGE_PERCENT`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | damage1 |  |
-| - | ? / - | [SpellSchool](spellschool.md) | school |  |
-| - | 4 / Little | u32 | absorbed |  |
-| - | 4 / Little | u32 | resisted |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | damage1 |  |  |
+| - | ? / - | [SpellSchool](spellschool.md) | school |  |  |
+| - | 4 / Little | u32 | absorbed |  |  |
+| - | 4 / Little | u32 | resisted |  | vmangos: Sent as int32 |
 
 Else If aura_type is equal to `PERIODIC_HEAL` **or** 
 is equal to `OBS_MOD_HEALTH`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | damage2 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | damage2 |  |  |
 
 Else If aura_type is equal to `OBS_MOD_MANA` **or** 
 is equal to `PERIODIC_ENERGIZE`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | misc_value1 |  |
-| - | 4 / Little | u32 | damage3 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | misc_value1 |  | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
+| - | 4 / Little | u32 | damage3 |  |  |
 
 Else If aura_type is equal to `PERIODIC_MANA_LEECH`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | misc_value2 |  |
-| - | 4 / Little | u32 | damage |  |
-| - | 4 / Little | f32 | gain_multiplier |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | misc_value2 |  | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
+| - | 4 / Little | u32 | damage |  |  |
+| - | 4 / Little | f32 | gain_multiplier |  |  |

@@ -47,50 +47,50 @@ SMSG have a header of 4 bytes.
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | [ChatType](chattype.md) | chat_type |  |
-| - | ? / - | [Language](language.md) | language |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x04 | ? / - | [ChatType](chattype.md) | chat_type |  |  |
+| - | ? / - | [Language](language.md) | language |  |  |
 
 If chat_type is equal to `MONSTER_WHISPER` **or** 
 is equal to `RAID_BOSS_EMOTE` **or** 
 is equal to `MONSTER_EMOTE`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | name_length |  |
-| - | - / - | CString | monster_name |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | monster_guid |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | name_length |  |  |
+| - | - / - | CString | monster_name |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | monster_guid |  |  |
 
 Else If chat_type is equal to `SAY` **or** 
 is equal to `PARTY` **or** 
 is equal to `YELL`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid1 |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid2 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid1 |  | cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid2 |  | cmangos/vmangos/mangoszero: sender_guid1 and sender_guid2 are the same |
 
 Else If chat_type is equal to `MONSTER_SAY` **or** 
 is equal to `MONSTER_YELL`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid3 |  |
-| - | 4 / Little | u32 | sender_name_length |  |
-| - | - / - | CString | sender_name |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | target_guid |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid3 |  |  |
+| - | 4 / Little | u32 | sender_name_length |  |  |
+| - | - / - | CString | sender_name |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target_guid |  |  |
 
 Else If chat_type is equal to `CHANNEL`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | CString | channel_name |  |
-| - | 4 / Little | u32 | player_rank |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | player_guid |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | CString | channel_name |  |  |
+| - | 4 / Little | u32 | player_rank |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | player_guid |  |  |
 
 Else: 
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid4 |  |
-| - | 4 / Little | u32 | message_length |  |
-| - | - / - | CString | message |  |
-| - | ? / - | [PlayerChatTag](playerchattag.md) | tag |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender_guid4 |  |  |
+| - | 4 / Little | u32 | message_length |  |  |
+| - | - / - | CString | message |  |  |
+| - | ? / - | [PlayerChatTag](playerchattag.md) | tag |  |  |

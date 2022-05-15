@@ -36,23 +36,23 @@ CMSG have a header of 6 bytes.
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 4 / Little        | uint32 | opcode | Opcode that determines which fields the message contains.|
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |
-| 0x0E | 4 / Little | u32 | skip1 |  |
-| 0x12 | 8 / Little | [Guid](../spec/packed-guid.md) | skip2 |  |
-| 0x1A | - / - | CString | name |  |
-| - | 4 / Little | u32 | skip3 |  |
-| - | 4 / Little | u32 | skip4 |  |
-| - | 4 / Little | u32 | skip5 |  |
-| - | 4 / Little | u32 | skip6 |  |
-| - | 4 / Little | u32 | skip7 |  |
-| - | 4 / Little | u32 | skip8 |  |
-| - | 4 / Little | u32 | skip9 |  |
-| - | 4 / Little | u32 | skip10 |  |
-| - | 4 / Little | u32 | skip11 |  |
-| - | 4 / Little | u32 | skip12 |  |
-| - | 2 / Little | u16 | skip13 |  |
-| - | 1 / - | u8 | skip14 |  |
-| - | 4 / Little | u32 | index |  |
-| - | 4 / Little | u32 | skip15 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
+| 0x0E | 4 / Little | u32 | skip1 |  |  |
+| 0x12 | 8 / Little | [Guid](../spec/packed-guid.md) | skip2 |  |  |
+| 0x1A | - / - | CString | name |  |  |
+| - | 4 / Little | u32 | skip3 |  |  |
+| - | 4 / Little | u32 | skip4 |  |  |
+| - | 4 / Little | u32 | skip5 |  |  |
+| - | 4 / Little | u32 | skip6 |  |  |
+| - | 4 / Little | u32 | skip7 |  |  |
+| - | 4 / Little | u32 | skip8 |  |  |
+| - | 4 / Little | u32 | skip9 |  |  |
+| - | 4 / Little | u32 | skip10 |  |  |
+| - | 4 / Little | u32 | skip11 |  |  |
+| - | 4 / Little | u32 | skip12 |  |  |
+| - | 2 / Little | u16 | skip13 |  |  |
+| - | 1 / - | u8 | skip14 |  |  |
+| - | 4 / Little | u32 | index |  | cmangos/vmangos/mangoszero: Named but never used |
+| - | 4 / Little | u32 | skip15 |  |  |

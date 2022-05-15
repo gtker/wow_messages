@@ -9,8 +9,8 @@ struct QuestItemRequirement {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 4 / Little | u32 | item |  |
-| 0x04 | 4 / Little | u32 | item_count |  |
-| 0x08 | 4 / Little | u32 | item_display_id |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 4 / Little | u32 | item |  |  |
+| 0x04 | 4 / Little | u32 | item_count |  |  |
+| 0x08 | 4 / Little | u32 | item_display_id |  |  |

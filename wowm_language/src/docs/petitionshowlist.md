@@ -12,11 +12,11 @@ struct PetitionShowlist {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 4 / Little | u32 | index |  |
-| 0x04 | 4 / Little | u32 | charter_entry |  |
-| 0x08 | 4 / Little | u32 | charter_display_id |  |
-| 0x0C | 4 / Little | u32 | guild_charter_cost |  |
-| 0x10 | 4 / Little | u32 | unknown1 |  |
-| 0x14 | 4 / Little | u32 | unknown2 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 4 / Little | u32 | index |  |  |
+| 0x04 | 4 / Little | u32 | charter_entry |  | cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863). |
+| 0x08 | 4 / Little | u32 | charter_display_id |  | cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161). |
+| 0x0C | 4 / Little | u32 | guild_charter_cost |  | cmangos/vmangos/mangoszero: statically set to 1000 (10 silver). |
+| 0x10 | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: statically set to 1 |
+| 0x14 | 4 / Little | u32 | unknown2 |  | cmangos/vmangos/mangoszero: statically set to 9<br/>cmangos/vmangos/mangoszero: required signs? |

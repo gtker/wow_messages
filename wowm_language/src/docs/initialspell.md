@@ -8,7 +8,7 @@ struct InitialSpell {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 2 / Little | u16 | spell_id |  |
-| 0x02 | 2 / Little | u16 | unknown1 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 2 / Little | u16 | spell_id |  | cmangos/mangoszero: only send 'first' part of spell |
+| 0x02 | 2 / Little | u16 | unknown1 |  | cmangos/mangoszero: sets to 0<br/>cmangos/mangoszero: it's not slot id |

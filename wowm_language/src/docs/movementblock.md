@@ -75,116 +75,116 @@ struct MovementBlock {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | [UpdateFlag](updateflag.md) | update_flag |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | ? / - | [UpdateFlag](updateflag.md) | update_flag |  |  |
 
 If update_flag contains `LIVING`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | [MovementFlags](movementflags.md) | flags |  |
-| - | 4 / Little | u32 | timestamp |  |
-| - | 4 / Little | f32 | living_position_x |  |
-| - | 4 / Little | f32 | living_position_y |  |
-| - | 4 / Little | f32 | living_position_z |  |
-| - | 4 / Little | f32 | living_orientation |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | [MovementFlags](movementflags.md) | flags |  |  |
+| - | 4 / Little | u32 | timestamp |  |  |
+| - | 4 / Little | f32 | living_position_x |  |  |
+| - | 4 / Little | f32 | living_position_y |  |  |
+| - | 4 / Little | f32 | living_position_z |  |  |
+| - | 4 / Little | f32 | living_orientation |  |  |
 
 If flags contains `ON_TRANSPORT`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | [TransportInfo](transportinfo.md) | transport |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | [TransportInfo](transportinfo.md) | transport |  |  |
 
 If flags contains `SWIMMING`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | f32 | pitch |  |
-| - | 4 / Little | f32 | fall_time |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | pitch |  |  |
+| - | 4 / Little | f32 | fall_time |  |  |
 
 If flags contains `JUMPING`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | f32 | z_speed |  |
-| - | 4 / Little | f32 | cos_angle |  |
-| - | 4 / Little | f32 | sin_angle |  |
-| - | 4 / Little | f32 | xy_speed |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | z_speed |  |  |
+| - | 4 / Little | f32 | cos_angle |  |  |
+| - | 4 / Little | f32 | sin_angle |  |  |
+| - | 4 / Little | f32 | xy_speed |  |  |
 
 If flags contains `SPLINE_ELEVATION`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | f32 | spline_elevation |  |
-| - | 4 / Little | f32 | walking_speed |  |
-| - | 4 / Little | f32 | running_speed |  |
-| - | 4 / Little | f32 | backwards_running_speed |  |
-| - | 4 / Little | f32 | swimming_speed |  |
-| - | 4 / Little | f32 | backwards_swimming_speed |  |
-| - | 4 / Little | f32 | turn_rate |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | spline_elevation |  |  |
+| - | 4 / Little | f32 | walking_speed |  |  |
+| - | 4 / Little | f32 | running_speed |  |  |
+| - | 4 / Little | f32 | backwards_running_speed |  |  |
+| - | 4 / Little | f32 | swimming_speed |  |  |
+| - | 4 / Little | f32 | backwards_swimming_speed |  |  |
+| - | 4 / Little | f32 | turn_rate |  |  |
 
 If flags contains `SPLINE_ENABLED`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | [SplineFlag](splineflag.md) | spline_flags |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
 
 If spline_flags contains `FINAL_ANGLE`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | f32 | angle |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | angle |  |  |
 
 Else If spline_flags contains `FINAL_TARGET`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | u64 | target |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | u64 | target |  |  |
 
 Else If spline_flags contains `FINAL_POINT`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | f32 | spline_final_point_x |  |
-| - | 4 / Little | f32 | spline_final_point_y |  |
-| - | 4 / Little | f32 | spline_final_point_z |  |
-| - | 4 / Little | u32 | time_passed |  |
-| - | 4 / Little | u32 | duration |  |
-| - | 4 / Little | u32 | id |  |
-| - | 4 / Little | u32 | amount_of_nodes |  |
-| - | ? / - | [Vector3d](vector3d.md)[amount_of_nodes] | nodes |  |
-| - | ? / - | [Vector3d](vector3d.md) | final_node |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | spline_final_point_x |  |  |
+| - | 4 / Little | f32 | spline_final_point_y |  |  |
+| - | 4 / Little | f32 | spline_final_point_z |  |  |
+| - | 4 / Little | u32 | time_passed |  |  |
+| - | 4 / Little | u32 | duration |  |  |
+| - | 4 / Little | u32 | id |  |  |
+| - | 4 / Little | u32 | amount_of_nodes |  |  |
+| - | ? / - | [Vector3d](vector3d.md)[amount_of_nodes] | nodes |  |  |
+| - | ? / - | [Vector3d](vector3d.md) | final_node |  |  |
 
 Else If update_flag contains `HAS_POSITION`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | f32 | position_x |  |
-| - | 4 / Little | f32 | position_y |  |
-| - | 4 / Little | f32 | position_z |  |
-| - | 4 / Little | f32 | orientation |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | position_x |  |  |
+| - | 4 / Little | f32 | position_y |  |  |
+| - | 4 / Little | f32 | position_z |  |  |
+| - | 4 / Little | f32 | orientation |  |  |
 
 If update_flag contains `HIGH_GUID`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | unknown0 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | unknown0 |  |  |
 
 If update_flag contains `ALL`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | unknown1 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | unknown1 |  |  |
 
 If update_flag contains `MELEE_ATTACKING`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
 
 If update_flag contains `TRANSPORT`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | transport_progress_in_ms |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | transport_progress_in_ms |  |  |

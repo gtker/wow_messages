@@ -9,8 +9,8 @@ struct BattlegroundPlayerPosition {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |
-| 0x08 | 4 / Little | f32 | position_x |  |
-| 0x0C | 4 / Little | f32 | position_y |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | player |  |  |
+| 0x08 | 4 / Little | f32 | position_x |  |  |
+| 0x0C | 4 / Little | f32 | position_y |  |  |

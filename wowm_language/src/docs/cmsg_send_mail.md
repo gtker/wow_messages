@@ -25,16 +25,16 @@ CMSG have a header of 6 bytes.
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 4 / Little        | uint32 | opcode | Opcode that determines which fields the message contains.|
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | mailbox |  |
-| 0x0E | - / - | CString | receiver |  |
-| - | - / - | CString | subject |  |
-| - | - / - | CString | body |  |
-| - | 4 / Little | u32 | unknown1 |  |
-| - | 4 / Little | u32 | unknown2 |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |
-| - | 4 / Little | u32 | money |  |
-| - | 4 / Little | u32 | cash_on_delivery_amount |  |
-| - | 4 / Little | u32 | unknown3 |  |
-| - | 4 / Little | u32 | unknown4 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | mailbox |  |  |
+| 0x0E | - / - | CString | receiver |  |  |
+| - | - / - | CString | subject |  |  |
+| - | - / - | CString | body |  |  |
+| - | 4 / Little | u32 | unknown1 |  | cmangos: stationery? |
+| - | 4 / Little | u32 | unknown2 |  | cmangos: 0x00000000 |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
+| - | 4 / Little | u32 | money |  |  |
+| - | 4 / Little | u32 | cash_on_delivery_amount |  |  |
+| - | 4 / Little | u32 | unknown3 |  | cmangos: const 0 |
+| - | 4 / Little | u32 | unknown4 |  | cmangos: const 0 |

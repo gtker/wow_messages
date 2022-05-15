@@ -35,43 +35,43 @@ struct Mail {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 4 / Little | u32 | message_id |  |
-| 0x04 | ? / - | [MailType](mailtype.md) | message_type |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 4 / Little | u32 | message_id |  |  |
+| 0x04 | ? / - | [MailType](mailtype.md) | message_type |  |  |
 
 If message_type is equal to `NORMAL`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender |  |  |
 
 Else If message_type is equal to `CREATURE` **or** 
 is equal to `GAMEOBJECT`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | sender_id |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | sender_id |  |  |
 
 Else If message_type is equal to `AUCTION`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | u32 | auction_id |  |
-| - | - / - | CString | subject |  |
-| - | 4 / Little | u32 | item_text_id |  |
-| - | 4 / Little | u32 | unknown1 |  |
-| - | 4 / Little | u32 | stationery |  |
-| - | 4 / Little | u32 | item_id |  |
-| - | 4 / Little | u32 | item_enchant_id |  |
-| - | 4 / Little | u32 | item_random_property_id |  |
-| - | 4 / Little | u32 | item_suffix_factor |  |
-| - | 1 / - | u8 | item_stack_size |  |
-| - | 4 / Little | u32 | item_spell_charges |  |
-| - | 4 / Little | u32 | max_durability |  |
-| - | 4 / Little | u32 | durability |  |
-| - | 4 / Little | u32 | money |  |
-| - | 4 / Little | u32 | cash_on_delivery_amount |  |
-| - | 4 / Little | u32 | checked_timestamp |  |
-| - | 4 / Little | f32 | expiration_time |  |
-| - | 4 / Little | u32 | mail_template_id |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | auction_id |  |  |
+| - | - / - | CString | subject |  |  |
+| - | 4 / Little | u32 | item_text_id |  |  |
+| - | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: set to 0 |
+| - | 4 / Little | u32 | stationery |  | cmangos/vmangos/mangoszero: stationery (Stationery.dbc) |
+| - | 4 / Little | u32 | item_id |  |  |
+| - | 4 / Little | u32 | item_enchant_id |  |  |
+| - | 4 / Little | u32 | item_random_property_id |  |  |
+| - | 4 / Little | u32 | item_suffix_factor |  |  |
+| - | 1 / - | u8 | item_stack_size |  |  |
+| - | 4 / Little | u32 | item_spell_charges |  |  |
+| - | 4 / Little | u32 | max_durability |  |  |
+| - | 4 / Little | u32 | durability |  |  |
+| - | 4 / Little | u32 | money |  |  |
+| - | 4 / Little | u32 | cash_on_delivery_amount |  |  |
+| - | 4 / Little | u32 | checked_timestamp |  | cmangos/vmangos/mangoszero: All have a comment with 'flags' but send the timestamp from the item. |
+| - | 4 / Little | f32 | expiration_time |  |  |
+| - | 4 / Little | u32 | mail_template_id |  | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |

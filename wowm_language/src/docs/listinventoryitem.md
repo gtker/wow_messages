@@ -13,12 +13,12 @@ struct ListInventoryItem {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 4 / Little | u32 | item_stack_count |  |
-| 0x04 | 4 / Little | u32 | item_id |  |
-| 0x08 | 4 / Little | u32 | item_display_id |  |
-| 0x0C | 4 / Little | u32 | max_items |  |
-| 0x10 | 4 / Little | u32 | price |  |
-| 0x14 | 4 / Little | u32 | max_durability |  |
-| 0x18 | 4 / Little | u32 | durability |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 4 / Little | u32 | item_stack_count |  |  |
+| 0x04 | 4 / Little | u32 | item_id |  |  |
+| 0x08 | 4 / Little | u32 | item_display_id |  |  |
+| 0x0C | 4 / Little | u32 | max_items |  | cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case |
+| 0x10 | 4 / Little | u32 | price |  |  |
+| 0x14 | 4 / Little | u32 | max_durability |  |  |
+| 0x18 | 4 / Little | u32 | durability |  |  |

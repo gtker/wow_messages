@@ -71,116 +71,116 @@ SMSG have a header of 4 bytes.
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |
-| - | ? / - | [GroupUpdateFlags](groupupdateflags.md) | mask |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
+| - | ? / - | [GroupUpdateFlags](groupupdateflags.md) | mask |  |  |
 
 If mask contains `FLAG_STATUS`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | [GroupMemberOnlineStatus](groupmemberonlinestatus.md) | status |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | [GroupMemberOnlineStatus](groupmemberonlinestatus.md) | status |  |  |
 
 If mask contains `FLAG_CUR_HP`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 2 / Little | u16 | current_health |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | current_health |  |  |
 
 If mask contains `FLAG_MAX_HP`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 2 / Little | u16 | max_health |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | max_health |  |  |
 
 If mask contains `FLAG_POWER_TYPE`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | [Power](power.md) | power |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | [Power](power.md) | power |  |  |
 
 If mask contains `FLAG_CUR_POWER`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 2 / Little | u16 | current_power |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | current_power |  |  |
 
 If mask contains `FLAG_MAX_POWER`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 2 / Little | u16 | max_power |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | max_power |  |  |
 
 If mask contains `FLAG_LEVEL`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 2 / Little | u16 | level |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | level |  |  |
 
 If mask contains `FLAG_ZONE`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | [Area](area.md) | area |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | [Area](area.md) | area |  |  |
 
 If mask contains `FLAG_POSITION`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 2 / Little | u16 | position_x |  |
-| - | 2 / Little | u16 | position_y |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | position_x |  | cmangos: float cast to u16 |
+| - | 2 / Little | u16 | position_y |  | cmangos: float cast to u16 |
 
 If mask contains `FLAG_AURAS`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | [AuraMask](../spec/aura-mask.md) | auras |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [AuraMask](../spec/aura-mask.md) | auras |  | cmangos: In all checked pre-2.x data of packets included only positive auras |
 
 If mask contains `FLAG_PET_NAME`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | CString | pet_name |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | CString | pet_name |  |  |
 
 If mask contains `FLAG_PET_MODEL_ID`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 2 / Little | u16 | pet_display_id |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_display_id |  |  |
 
 If mask contains `FLAG_PET_CUR_HP`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 2 / Little | u16 | pet_current_health |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_current_health |  |  |
 
 If mask contains `FLAG_PET_MAX_HP`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 2 / Little | u16 | pet_max_health |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_max_health |  |  |
 
 If mask contains `FLAG_PET_POWER_TYPE`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | [Power](power.md) | pet_power_type |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | [Power](power.md) | pet_power_type |  |  |
 
 If mask contains `FLAG_PET_CUR_POWER`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 2 / Little | u16 | pet_current_power |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_current_power |  |  |
 
 If mask contains `FLAG_PET_MAX_POWER`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 2 / Little | u16 | pet_max_power |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_max_power |  |  |
 
 If mask contains `FLAG_PET_AURAS`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | - / - | [AuraMask](../spec/aura-mask.md) | pet_auras |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [AuraMask](../spec/aura-mask.md) | pet_auras |  |  |

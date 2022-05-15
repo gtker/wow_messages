@@ -16,7 +16,7 @@ CMSG have a header of 6 bytes.
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 4 / Little        | uint32 | opcode | Opcode that determines which fields the message contains.|
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x06 | 4 / Little | f32 | position_x |  |
-| 0x0A | 4 / Little | f32 | position_y |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x06 | 4 / Little | f32 | position_x |  |  |
+| 0x0A | 4 / Little | f32 | position_y |  |  |

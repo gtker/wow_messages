@@ -28,39 +28,39 @@ struct MovementInfo {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | [MovementFlags](movementflags.md) | flags |  |
-| - | 4 / Little | u32 | timestamp |  |
-| - | 4 / Little | f32 | position_x |  |
-| - | 4 / Little | f32 | position_y |  |
-| - | 4 / Little | f32 | position_z |  |
-| - | 4 / Little | f32 | orientation |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | ? / - | [MovementFlags](movementflags.md) | flags |  |  |
+| - | 4 / Little | u32 | timestamp |  |  |
+| - | 4 / Little | f32 | position_x |  |  |
+| - | 4 / Little | f32 | position_y |  |  |
+| - | 4 / Little | f32 | position_z |  |  |
+| - | 4 / Little | f32 | orientation |  |  |
 
 If flags contains `ON_TRANSPORT`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | [TransportInfo](transportinfo.md) | transport |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | [TransportInfo](transportinfo.md) | transport |  |  |
 
 If flags contains `SWIMMING`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | f32 | pitch |  |
-| - | 4 / Little | f32 | fall_time |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | pitch |  |  |
+| - | 4 / Little | f32 | fall_time |  |  |
 
 If flags contains `JUMPING`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | f32 | z_speed |  |
-| - | 4 / Little | f32 | cos_angle |  |
-| - | 4 / Little | f32 | sin_angle |  |
-| - | 4 / Little | f32 | xy_speed |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | z_speed |  |  |
+| - | 4 / Little | f32 | cos_angle |  |  |
+| - | 4 / Little | f32 | sin_angle |  |  |
+| - | 4 / Little | f32 | xy_speed |  |  |
 
 If flags contains `SPLINE_ELEVATION`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 4 / Little | f32 | spline_elevation |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | spline_elevation |  |  |

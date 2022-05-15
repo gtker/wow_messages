@@ -27,27 +27,27 @@ SMSG have a header of 4 bytes.
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
 | 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x04 | ? / - | [TradeStatus](tradestatus.md) | status |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x04 | ? / - | [TradeStatus](tradestatus.md) | status |  |  |
 
 If status is equal to `BEGIN_TRADE`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | unknown1 |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
 
 Else If status is equal to `CLOSE_WINDOW`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | ? / - | [InventoryResult](inventoryresult.md) | inventory_result |  |
-| - | 1 / - | u8 | target_error |  |
-| - | 4 / Little | u32 | item_limit_category_id |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | ? / - | [InventoryResult](inventoryresult.md) | inventory_result |  |  |
+| - | 1 / - | u8 | target_error |  | used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED |
+| - | 4 / Little | u32 | item_limit_category_id |  | ItemLimitCategory.dbc entry |
 
 Else If status is equal to `ONLY_CONJURED` **or** 
 is equal to `NOT_ON_TAPLIST`:
 
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| - | 1 / - | u8 | slot |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 1 / - | u8 | slot |  | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |

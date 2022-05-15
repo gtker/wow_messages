@@ -8,7 +8,7 @@ struct ForcedReaction {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 4 / Little | u32 | faction_id |  |
-| 0x04 | 4 / Little | u32 | reputation_rank |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 4 / Little | u32 | faction_id |  | vmangos: faction_id (Faction.dbc) |
+| 0x04 | 4 / Little | u32 | reputation_rank |  | vmangos: reputation rank |

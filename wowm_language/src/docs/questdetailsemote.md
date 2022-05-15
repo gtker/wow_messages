@@ -8,7 +8,7 @@ struct QuestDetailsEmote {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 4 / Little | u32 | emote |  |
-| 0x04 | 4 / Little | u32 | emote_delay_in_msecs |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 4 / Little | u32 | emote |  |  |
+| 0x04 | 4 / Little | u32 | emote_delay_in_msecs |  |  |

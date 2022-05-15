@@ -8,7 +8,7 @@ struct SpellCooldownStatus {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | 4 / Little | u32 | id |  |
-| 0x04 | 4 / Little | u32 | cooldown_time_in_msecs |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | 4 / Little | u32 | id |  |  |
+| 0x04 | 4 / Little | u32 | cooldown_time_in_msecs |  |  |

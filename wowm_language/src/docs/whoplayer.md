@@ -13,12 +13,12 @@ struct WhoPlayer {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | - / - | CString | name |  |
-| - | - / - | CString | guild |  |
-| - | 4 / Little | u32 | level |  |
-| - | ? / - | [Class](class.md) | class |  |
-| - | ? / - | [Race](race.md) | race |  |
-| - | 4 / Little | u32 | zone_id |  |
-| - | 4 / Little | u32 | party_status |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | - / - | CString | name |  |  |
+| - | - / - | CString | guild |  |  |
+| - | 4 / Little | u32 | level |  |  |
+| - | ? / - | [Class](class.md) | class |  |  |
+| - | ? / - | [Race](race.md) | race |  |  |
+| - | 4 / Little | u32 | zone_id |  |  |
+| - | 4 / Little | u32 | party_status |  |  |

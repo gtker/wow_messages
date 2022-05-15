@@ -731,7 +731,7 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                 }
             };
             s.wln(format!(
-                "| {offset} | {size} / {endian} | {ty} | {name} | {description} |",
+                "| {offset} | {size} / {endian} | {ty} | {name} | {description} | {comment} |",
                 offset = if let Some(offset) = offset {
                     format!("0x{:02X}", offset)
                 } else {
@@ -741,7 +741,8 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
                 endian = d.ty().doc_endian_str(),
                 ty = ty,
                 name = d.name(),
-                description = d.tags().description().unwrap_or(""),
+                description = d.tags().description().unwrap_or("").replace("\n", "<br/>"),
+                comment = d.tags().comment().unwrap_or("").replace("\n", "<br/>"),
             ));
 
             if let Some(_) = offset {
@@ -769,8 +770,8 @@ fn print_container_field(s: &mut DocWriter, m: &StructMember, offset: &mut Optio
 }
 
 fn print_container_item_header(s: &mut DocWriter) {
-    s.wln("| Offset | Size / Endianness | Type | Name | Description |");
-    s.wln("| ------ | ----------------- | ---- | ---- | ----------- |");
+    s.wln("| Offset | Size / Endianness | Type | Name | Description | Comment |");
+    s.wln("| ------ | ----------------- | ---- | ---- | ----------- | ------- |");
 }
 
 fn print_container_body(s: &mut DocWriter, e: &Container) {

@@ -8,7 +8,7 @@ struct RaidTargetUpdate {
 }
 ```
 ### Body
-| Offset | Size / Endianness | Type | Name | Description |
-| ------ | ----------------- | ---- | ---- | ----------- |
-| 0x00 | ? / - | [RaidTargetIndex](raidtargetindex.md) | index |  |
-| - | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x00 | ? / - | [RaidTargetIndex](raidtargetindex.md) | index |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
