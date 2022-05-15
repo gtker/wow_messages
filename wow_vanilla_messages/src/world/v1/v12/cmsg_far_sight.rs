@@ -38,7 +38,7 @@ impl MessageBody for CMSG_FAR_SIGHT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // operation: FarSightOperation
-        self.operation.write(w)?;
+        crate::util::write_u8_le(w, self.operation.as_int() as u8)?;
 
         Ok(())
     }
@@ -80,7 +80,7 @@ impl MessageBody for CMSG_FAR_SIGHT {
      {
         Box::pin(async move {
             // operation: FarSightOperation
-            self.operation.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.operation.as_int() as u8).await?;
 
             Ok(())
         })
@@ -123,7 +123,7 @@ impl MessageBody for CMSG_FAR_SIGHT {
      {
         Box::pin(async move {
             // operation: FarSightOperation
-            self.operation.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.operation.as_int() as u8).await?;
 
             Ok(())
         })

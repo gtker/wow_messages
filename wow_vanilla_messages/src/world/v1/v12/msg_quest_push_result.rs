@@ -49,7 +49,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
         self.guid.write(w)?;
 
         // message: QuestPartyMessage
-        self.message.write(w)?;
+        crate::util::write_u8_le(w, self.message.as_int() as u8)?;
 
         Ok(())
     }
@@ -98,7 +98,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
             self.guid.tokio_write(w).await?;
 
             // message: QuestPartyMessage
-            self.message.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.message.as_int() as u8).await?;
 
             Ok(())
         })
@@ -148,7 +148,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
             self.guid.astd_write(w).await?;
 
             // message: QuestPartyMessage
-            self.message.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.message.as_int() as u8).await?;
 
             Ok(())
         })

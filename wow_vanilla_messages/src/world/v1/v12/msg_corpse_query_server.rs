@@ -63,7 +63,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // result: CorpseQueryResult
-        self.result.write(w)?;
+        crate::util::write_u8_le(w, self.result.as_int() as u8)?;
 
         match &self.result {
             MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
@@ -75,7 +75,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                 position_z,
             } => {
                 // map: Map
-                map.write(w)?;
+                crate::util::write_u32_le(w, map.as_int() as u32)?;
 
                 // position_x: f32
                 w.write_all(&position_x.to_le_bytes())?;
@@ -87,7 +87,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                 w.write_all(&position_z.to_le_bytes())?;
 
                 // corpse_map: Map
-                corpse_map.write(w)?;
+                crate::util::write_u32_le(w, corpse_map.as_int() as u32)?;
 
             }
         }
@@ -157,7 +157,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
      {
         Box::pin(async move {
             // result: CorpseQueryResult
-            self.result.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.result.as_int() as u8).await?;
 
             match &self.result {
                 MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
@@ -169,7 +169,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     position_z,
                 } => {
                     // map: Map
-                    map.tokio_write(w).await?;
+                    crate::util::tokio_write_u32_le(w, map.as_int() as u32).await?;
 
                     // position_x: f32
                     w.write_all(&position_x.to_le_bytes()).await?;
@@ -181,7 +181,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     w.write_all(&position_z.to_le_bytes()).await?;
 
                     // corpse_map: Map
-                    corpse_map.tokio_write(w).await?;
+                    crate::util::tokio_write_u32_le(w, corpse_map.as_int() as u32).await?;
 
                 }
             }
@@ -252,7 +252,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
      {
         Box::pin(async move {
             // result: CorpseQueryResult
-            self.result.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.result.as_int() as u8).await?;
 
             match &self.result {
                 MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
@@ -264,7 +264,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     position_z,
                 } => {
                     // map: Map
-                    map.astd_write(w).await?;
+                    crate::util::astd_write_u32_le(w, map.as_int() as u32).await?;
 
                     // position_x: f32
                     w.write_all(&position_x.to_le_bytes()).await?;
@@ -276,7 +276,7 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
                     w.write_all(&position_z.to_le_bytes()).await?;
 
                     // corpse_map: Map
-                    corpse_map.astd_write(w).await?;
+                    crate::util::astd_write_u32_le(w, corpse_map.as_int() as u32).await?;
 
                 }
             }
@@ -357,24 +357,6 @@ impl Default for MSG_CORPSE_QUERY_ServerCorpseQueryResult {
 }
 
 impl MSG_CORPSE_QUERY_ServerCorpseQueryResult {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::NOT_FOUND => 0,

@@ -12,23 +12,17 @@ pub fn print_new_types(s: &mut Writer, e: &Container) {
 
                 if !rd.is_elseif() {
                     print_default_for_new_enum(s, &rd);
-
-                    s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
-                        print_write_for_new_enum(s, &rd);
-                        print_enum_as_int(s, &rd);
-                    });
-                } else {
-                    s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
-                        print_enum_as_int(s, &rd);
-                    });
                 }
+
+                s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
+                    print_enum_as_int(s, &rd);
+                });
                 print_size_for_new_enum(s, &rd);
             }
             DefinerType::Flag => {
                 print_new_flag_declaration(s, &rd);
 
                 s.body(format!("impl {name}", name = rd.ty_name()), |s| {
-                    print_write_for_new_flag(s, &rd);
                     print_constructors_for_new_flag(s, &rd);
                     print_flag_as_int(s, &rd);
                 });
@@ -60,25 +54,6 @@ fn print_new_flag_declaration(s: &mut Writer, rd: &RustDefiner) {
             }
         }
     });
-}
-
-fn print_write_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
-    s.async_funcn_pub(
-        "write",
-        "<W: std::io::Write>(&self, w: &mut W)",
-        "<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
-        "<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
-        "std::result::Result<(), std::io::Error>",
-        |s, it| {
-            s.wln(format!(
-                "w.write_all(&self.inner.to_{endian}_bytes()){postfix}?;",
-                endian = rd.int_ty().rust_endian_str(),
-                postfix = it.postfix()
-            ));
-
-            s.wln("Ok(())");
-        },
-    );
 }
 
 fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
@@ -385,24 +360,6 @@ fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
                     s.wln(format!("Self::{}", enumerator.name()));
                 }
             });
-        },
-    );
-}
-
-fn print_write_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
-    s.async_funcn_pub(
-        "write",
-        "<W: std::io::Write>(&self, w: &mut W)",
-        "<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W)",
-        "<W: WriteExt + Unpin + Send>(&self, w: &mut W)",
-        "std::result::Result<(), std::io::Error>",
-        |s, it| {
-            s.wln(format!(
-                "w.write_all(&self.as_int().to_{endian}_bytes()){postfix}?;",
-                postfix = it.postfix(),
-                endian = rd.int_ty().rust_endian_str(),
-            ));
-            s.wln("Ok(())");
         },
     );
 }

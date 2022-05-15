@@ -186,7 +186,7 @@ impl ReadableAndWritable for SpellCastTargets {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
-        self.target_flags.write(w)?;
+        crate::util::write_u16_le(w, self.target_flags.as_int() as u16)?;
 
         if let Some(if_statement) = &self.target_flags.unit {
             // unit_target1: PackedGuid
@@ -465,7 +465,7 @@ impl ReadableAndWritable for SpellCastTargets {
      {
         Box::pin(async move {
             // target_flags: SpellCastTargetFlags
-            self.target_flags.tokio_write(w).await?;
+            crate::util::tokio_write_u16_le(w, self.target_flags.as_int() as u16).await?;
 
             if let Some(if_statement) = &self.target_flags.unit {
                 // unit_target1: PackedGuid
@@ -745,7 +745,7 @@ impl ReadableAndWritable for SpellCastTargets {
      {
         Box::pin(async move {
             // target_flags: SpellCastTargetFlags
-            self.target_flags.astd_write(w).await?;
+            crate::util::astd_write_u16_le(w, self.target_flags.as_int() as u16).await?;
 
             if let Some(if_statement) = &self.target_flags.unit {
                 // unit_target1: PackedGuid
@@ -892,24 +892,6 @@ pub struct SpellCastTargetsSpellCastTargetFlags {
 }
 
 impl SpellCastTargetsSpellCastTargetFlags {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub const fn empty() -> Self {
         Self {
             inner: 0,

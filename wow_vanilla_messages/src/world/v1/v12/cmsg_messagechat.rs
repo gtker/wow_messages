@@ -214,7 +214,7 @@ impl MessageBody for CMSG_MESSAGECHAT {
         crate::util::write_u32_le(w, self.chat_type.as_int() as u32)?;
 
         // language: Language
-        self.language.write(w)?;
+        crate::util::write_u32_le(w, self.language.as_int() as u32)?;
 
         match &self.chat_type {
             CMSG_MESSAGECHATChatType::SAY {
@@ -601,7 +601,7 @@ impl MessageBody for CMSG_MESSAGECHAT {
             crate::util::tokio_write_u32_le(w, self.chat_type.as_int() as u32).await?;
 
             // language: Language
-            self.language.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.language.as_int() as u32).await?;
 
             match &self.chat_type {
                 CMSG_MESSAGECHATChatType::SAY {
@@ -989,7 +989,7 @@ impl MessageBody for CMSG_MESSAGECHAT {
             crate::util::astd_write_u32_le(w, self.chat_type.as_int() as u32).await?;
 
             // language: Language
-            self.language.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.language.as_int() as u32).await?;
 
             match &self.chat_type {
                 CMSG_MESSAGECHATChatType::SAY {
@@ -1308,24 +1308,6 @@ impl Default for CMSG_MESSAGECHATChatType {
 }
 
 impl CMSG_MESSAGECHATChatType {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::SAY { .. } => 0,

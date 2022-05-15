@@ -67,7 +67,7 @@ impl MessageBody for SMSG_SPELLENERGIZELOG {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // power: PowerType
-        self.power.write(w)?;
+        crate::util::write_u32_le(w, self.power.as_int() as u32)?;
 
         // damage: u32
         w.write_all(&self.damage.to_le_bytes())?;
@@ -137,7 +137,7 @@ impl MessageBody for SMSG_SPELLENERGIZELOG {
             w.write_all(&self.spell.to_le_bytes()).await?;
 
             // power: PowerType
-            self.power.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.power.as_int() as u32).await?;
 
             // damage: u32
             w.write_all(&self.damage.to_le_bytes()).await?;
@@ -208,7 +208,7 @@ impl MessageBody for SMSG_SPELLENERGIZELOG {
             w.write_all(&self.spell.to_le_bytes()).await?;
 
             // power: PowerType
-            self.power.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.power.as_int() as u32).await?;
 
             // damage: u32
             w.write_all(&self.damage.to_le_bytes()).await?;

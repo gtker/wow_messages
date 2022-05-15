@@ -102,7 +102,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // status: TradeStatus
-        self.status.write(w)?;
+        crate::util::write_u32_le(w, self.status.as_int() as u32)?;
 
         match &self.status {
             SMSG_TRADE_STATUSTradeStatus::BUSY => {}
@@ -266,7 +266,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
      {
         Box::pin(async move {
             // status: TradeStatus
-            self.status.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.status.as_int() as u32).await?;
 
             match &self.status {
                 SMSG_TRADE_STATUSTradeStatus::BUSY => {}
@@ -431,7 +431,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
      {
         Box::pin(async move {
             // status: TradeStatus
-            self.status.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.status.as_int() as u32).await?;
 
             match &self.status {
                 SMSG_TRADE_STATUSTradeStatus::BUSY => {}
@@ -594,24 +594,6 @@ impl Default for SMSG_TRADE_STATUSTradeStatus {
 }
 
 impl SMSG_TRADE_STATUSTradeStatus {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::BUSY => 0,

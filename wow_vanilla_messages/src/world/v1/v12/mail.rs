@@ -157,7 +157,7 @@ impl ReadableAndWritable for Mail {
         w.write_all(&self.message_id.to_le_bytes())?;
 
         // message_type: MailType
-        self.message_type.write(w)?;
+        crate::util::write_u8_le(w, self.message_type.as_int() as u8)?;
 
         match &self.message_type {
             MailMailType::NORMAL {
@@ -394,7 +394,7 @@ impl ReadableAndWritable for Mail {
             w.write_all(&self.message_id.to_le_bytes()).await?;
 
             // message_type: MailType
-            self.message_type.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.message_type.as_int() as u8).await?;
 
             match &self.message_type {
                 MailMailType::NORMAL {
@@ -632,7 +632,7 @@ impl ReadableAndWritable for Mail {
             w.write_all(&self.message_id.to_le_bytes()).await?;
 
             // message_type: MailType
-            self.message_type.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.message_type.as_int() as u8).await?;
 
             match &self.message_type {
                 MailMailType::NORMAL {
@@ -838,24 +838,6 @@ impl Default for MailMailType {
 }
 
 impl MailMailType {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::NORMAL { .. } => 0,

@@ -311,7 +311,7 @@ impl ReadableAndWritable for AuraLog {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // aura_type: AuraType
-        self.aura_type.write(w)?;
+        crate::util::write_u32_le(w, self.aura_type.as_int() as u32)?;
 
         match &self.aura_type {
             AuraLogAuraType::NONE => {}
@@ -327,7 +327,7 @@ impl ReadableAndWritable for AuraLog {
                 w.write_all(&damage1.to_le_bytes())?;
 
                 // school: SpellSchool
-                school.write(w)?;
+                crate::util::write_u8_le(w, school.as_int() as u8)?;
 
                 // absorbed: u32
                 w.write_all(&absorbed.to_le_bytes())?;
@@ -477,7 +477,7 @@ impl ReadableAndWritable for AuraLog {
                 w.write_all(&damage1.to_le_bytes())?;
 
                 // school: SpellSchool
-                school.write(w)?;
+                crate::util::write_u8_le(w, school.as_int() as u8)?;
 
                 // absorbed: u32
                 w.write_all(&absorbed.to_le_bytes())?;
@@ -912,7 +912,7 @@ impl ReadableAndWritable for AuraLog {
      {
         Box::pin(async move {
             // aura_type: AuraType
-            self.aura_type.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.aura_type.as_int() as u32).await?;
 
             match &self.aura_type {
                 AuraLogAuraType::NONE => {}
@@ -928,7 +928,7 @@ impl ReadableAndWritable for AuraLog {
                     w.write_all(&damage1.to_le_bytes()).await?;
 
                     // school: SpellSchool
-                    school.tokio_write(w).await?;
+                    crate::util::tokio_write_u8_le(w, school.as_int() as u8).await?;
 
                     // absorbed: u32
                     w.write_all(&absorbed.to_le_bytes()).await?;
@@ -1078,7 +1078,7 @@ impl ReadableAndWritable for AuraLog {
                     w.write_all(&damage1.to_le_bytes()).await?;
 
                     // school: SpellSchool
-                    school.tokio_write(w).await?;
+                    crate::util::tokio_write_u8_le(w, school.as_int() as u8).await?;
 
                     // absorbed: u32
                     w.write_all(&absorbed.to_le_bytes()).await?;
@@ -1514,7 +1514,7 @@ impl ReadableAndWritable for AuraLog {
      {
         Box::pin(async move {
             // aura_type: AuraType
-            self.aura_type.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.aura_type.as_int() as u32).await?;
 
             match &self.aura_type {
                 AuraLogAuraType::NONE => {}
@@ -1530,7 +1530,7 @@ impl ReadableAndWritable for AuraLog {
                     w.write_all(&damage1.to_le_bytes()).await?;
 
                     // school: SpellSchool
-                    school.astd_write(w).await?;
+                    crate::util::astd_write_u8_le(w, school.as_int() as u8).await?;
 
                     // absorbed: u32
                     w.write_all(&absorbed.to_le_bytes()).await?;
@@ -1680,7 +1680,7 @@ impl ReadableAndWritable for AuraLog {
                     w.write_all(&damage1.to_le_bytes()).await?;
 
                     // school: SpellSchool
-                    school.astd_write(w).await?;
+                    crate::util::astd_write_u8_le(w, school.as_int() as u8).await?;
 
                     // absorbed: u32
                     w.write_all(&absorbed.to_le_bytes()).await?;
@@ -2077,24 +2077,6 @@ impl Default for AuraLogAuraType {
 }
 
 impl AuraLogAuraType {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::NONE => 0,

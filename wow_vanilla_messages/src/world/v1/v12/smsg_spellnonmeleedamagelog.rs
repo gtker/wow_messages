@@ -105,7 +105,7 @@ impl MessageBody for SMSG_SPELLNONMELEEDAMAGELOG {
         w.write_all(&self.damage.to_le_bytes())?;
 
         // school: SpellSchool
-        self.school.write(w)?;
+        crate::util::write_u8_le(w, self.school.as_int() as u8)?;
 
         // absorbed_damage: u32
         w.write_all(&self.absorbed_damage.to_le_bytes())?;
@@ -224,7 +224,7 @@ impl MessageBody for SMSG_SPELLNONMELEEDAMAGELOG {
             w.write_all(&self.damage.to_le_bytes()).await?;
 
             // school: SpellSchool
-            self.school.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.school.as_int() as u8).await?;
 
             // absorbed_damage: u32
             w.write_all(&self.absorbed_damage.to_le_bytes()).await?;
@@ -344,7 +344,7 @@ impl MessageBody for SMSG_SPELLNONMELEEDAMAGELOG {
             w.write_all(&self.damage.to_le_bytes()).await?;
 
             // school: SpellSchool
-            self.school.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.school.as_int() as u8).await?;
 
             // absorbed_damage: u32
             w.write_all(&self.absorbed_damage.to_le_bytes()).await?;

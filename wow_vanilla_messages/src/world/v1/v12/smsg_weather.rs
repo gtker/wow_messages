@@ -53,7 +53,7 @@ impl MessageBody for SMSG_WEATHER {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // weather_type: WeatherType
-        self.weather_type.write(w)?;
+        crate::util::write_u32_le(w, self.weather_type.as_int() as u32)?;
 
         // grade: f32
         w.write_all(&self.grade.to_le_bytes())?;
@@ -62,7 +62,7 @@ impl MessageBody for SMSG_WEATHER {
         w.write_all(&self.sound_id.to_le_bytes())?;
 
         // change: WeatherChangeType
-        self.change.write(w)?;
+        crate::util::write_u8_le(w, self.change.as_int() as u8)?;
 
         Ok(())
     }
@@ -115,7 +115,7 @@ impl MessageBody for SMSG_WEATHER {
      {
         Box::pin(async move {
             // weather_type: WeatherType
-            self.weather_type.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.weather_type.as_int() as u32).await?;
 
             // grade: f32
             w.write_all(&self.grade.to_le_bytes()).await?;
@@ -124,7 +124,7 @@ impl MessageBody for SMSG_WEATHER {
             w.write_all(&self.sound_id.to_le_bytes()).await?;
 
             // change: WeatherChangeType
-            self.change.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.change.as_int() as u8).await?;
 
             Ok(())
         })
@@ -178,7 +178,7 @@ impl MessageBody for SMSG_WEATHER {
      {
         Box::pin(async move {
             // weather_type: WeatherType
-            self.weather_type.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.weather_type.as_int() as u32).await?;
 
             // grade: f32
             w.write_all(&self.grade.to_le_bytes()).await?;
@@ -187,7 +187,7 @@ impl MessageBody for SMSG_WEATHER {
             w.write_all(&self.sound_id.to_le_bytes()).await?;
 
             // change: WeatherChangeType
-            self.change.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.change.as_int() as u8).await?;
 
             Ok(())
         })

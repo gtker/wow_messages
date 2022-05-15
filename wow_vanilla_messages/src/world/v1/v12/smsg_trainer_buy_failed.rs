@@ -55,7 +55,7 @@ impl MessageBody for SMSG_TRAINER_BUY_FAILED {
         w.write_all(&self.id.to_le_bytes())?;
 
         // error: TrainingFailureReason
-        self.error.write(w)?;
+        crate::util::write_u32_le(w, self.error.as_int() as u32)?;
 
         Ok(())
     }
@@ -111,7 +111,7 @@ impl MessageBody for SMSG_TRAINER_BUY_FAILED {
             w.write_all(&self.id.to_le_bytes()).await?;
 
             // error: TrainingFailureReason
-            self.error.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.error.as_int() as u32).await?;
 
             Ok(())
         })
@@ -168,7 +168,7 @@ impl MessageBody for SMSG_TRAINER_BUY_FAILED {
             w.write_all(&self.id.to_le_bytes()).await?;
 
             // error: TrainingFailureReason
-            self.error.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.error.as_int() as u32).await?;
 
             Ok(())
         })

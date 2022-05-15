@@ -114,7 +114,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // index: RaidTargetIndex
-        self.index.write(w)?;
+        crate::util::write_u8_le(w, self.index.as_int() as u8)?;
 
         match &self.index {
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN0 {
@@ -299,7 +299,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
      {
         Box::pin(async move {
             // index: RaidTargetIndex
-            self.index.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.index.as_int() as u8).await?;
 
             match &self.index {
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN0 {
@@ -485,7 +485,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
      {
         Box::pin(async move {
             // index: RaidTargetIndex
-            self.index.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.index.as_int() as u8).await?;
 
             match &self.index {
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN0 {
@@ -644,24 +644,6 @@ impl Default for MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
 }
 
 impl MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::UNKNOWN0 { .. } => 0,

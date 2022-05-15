@@ -101,13 +101,13 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
         self.version.write(w)?;
 
         // platform: Platform
-        self.platform.write(w)?;
+        crate::util::write_u32_le(w, self.platform.as_int() as u32)?;
 
         // os: Os
-        self.os.write(w)?;
+        crate::util::write_u32_le(w, self.os.as_int() as u32)?;
 
         // locale: Locale
-        self.locale.write(w)?;
+        crate::util::write_u32_le(w, self.locale.as_int() as u32)?;
 
         // utc_timezone_offset: u32
         w.write_all(&self.utc_timezone_offset.to_le_bytes())?;
@@ -215,13 +215,13 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
             self.version.tokio_write(w).await?;
 
             // platform: Platform
-            self.platform.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.platform.as_int() as u32).await?;
 
             // os: Os
-            self.os.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.os.as_int() as u32).await?;
 
             // locale: Locale
-            self.locale.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.locale.as_int() as u32).await?;
 
             // utc_timezone_offset: u32
             w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;
@@ -330,13 +330,13 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
             self.version.astd_write(w).await?;
 
             // platform: Platform
-            self.platform.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.platform.as_int() as u32).await?;
 
             // os: Os
-            self.os.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.os.as_int() as u32).await?;
 
             // locale: Locale
-            self.locale.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.locale.as_int() as u32).await?;
 
             // utc_timezone_offset: u32
             w.write_all(&self.utc_timezone_offset.to_le_bytes()).await?;

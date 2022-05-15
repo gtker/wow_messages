@@ -60,7 +60,7 @@ impl ReadableAndWritable for NpcTextUpdate {
         }
 
         // language: Language
-        self.language.write(w)?;
+        crate::util::write_u32_le(w, self.language.as_int() as u32)?;
 
         // emotes: NpcTextUpdateEmote[3]
         for i in self.emotes.iter() {
@@ -135,7 +135,7 @@ impl ReadableAndWritable for NpcTextUpdate {
             }
 
             // language: Language
-            self.language.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.language.as_int() as u32).await?;
 
             // emotes: NpcTextUpdateEmote[3]
             for i in self.emotes.iter() {
@@ -211,7 +211,7 @@ impl ReadableAndWritable for NpcTextUpdate {
             }
 
             // language: Language
-            self.language.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.language.as_int() as u32).await?;
 
             // emotes: NpcTextUpdateEmote[3]
             for i in self.emotes.iter() {

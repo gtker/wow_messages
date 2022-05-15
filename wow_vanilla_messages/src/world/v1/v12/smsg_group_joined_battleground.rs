@@ -38,7 +38,7 @@ impl MessageBody for SMSG_GROUP_JOINED_BATTLEGROUND {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // id: BgTypeId
-        self.id.write(w)?;
+        crate::util::write_u32_le(w, self.id.as_int() as u32)?;
 
         Ok(())
     }
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_GROUP_JOINED_BATTLEGROUND {
      {
         Box::pin(async move {
             // id: BgTypeId
-            self.id.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.id.as_int() as u32).await?;
 
             Ok(())
         })
@@ -123,7 +123,7 @@ impl MessageBody for SMSG_GROUP_JOINED_BATTLEGROUND {
      {
         Box::pin(async move {
             // id: BgTypeId
-            self.id.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.id.as_int() as u32).await?;
 
             Ok(())
         })

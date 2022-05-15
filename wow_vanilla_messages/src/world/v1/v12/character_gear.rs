@@ -36,7 +36,7 @@ impl ReadableAndWritable for CharacterGear {
         w.write_all(&self.equipment_display_id.to_le_bytes())?;
 
         // inventory_type: InventoryType
-        self.inventory_type.write(w)?;
+        crate::util::write_u8_le(w, self.inventory_type.as_int() as u8)?;
 
         Ok(())
     }
@@ -84,7 +84,7 @@ impl ReadableAndWritable for CharacterGear {
             w.write_all(&self.equipment_display_id.to_le_bytes()).await?;
 
             // inventory_type: InventoryType
-            self.inventory_type.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.inventory_type.as_int() as u8).await?;
 
             Ok(())
         })
@@ -133,7 +133,7 @@ impl ReadableAndWritable for CharacterGear {
             w.write_all(&self.equipment_display_id.to_le_bytes()).await?;
 
             // inventory_type: InventoryType
-            self.inventory_type.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.inventory_type.as_int() as u8).await?;
 
             Ok(())
         })

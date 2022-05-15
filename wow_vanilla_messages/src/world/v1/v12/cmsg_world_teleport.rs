@@ -62,7 +62,7 @@ impl MessageBody for CMSG_WORLD_TELEPORT {
         w.write_all(&self.time_in_msec.to_le_bytes())?;
 
         // map: Map
-        self.map.write(w)?;
+        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
 
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes())?;
@@ -135,7 +135,7 @@ impl MessageBody for CMSG_WORLD_TELEPORT {
             w.write_all(&self.time_in_msec.to_le_bytes()).await?;
 
             // map: Map
-            self.map.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // position_x: f32
             w.write_all(&self.position_x.to_le_bytes()).await?;
@@ -209,7 +209,7 @@ impl MessageBody for CMSG_WORLD_TELEPORT {
             w.write_all(&self.time_in_msec.to_le_bytes()).await?;
 
             // map: Map
-            self.map.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // position_x: f32
             w.write_all(&self.position_x.to_le_bytes()).await?;

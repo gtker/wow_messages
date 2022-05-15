@@ -80,7 +80,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
         // login_result: LoginResult
-        self.login_result.write(w)?;
+        crate::util::write_u8_le(w, self.login_result.as_int() as u8)?;
 
         match &self.login_result {
             CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
@@ -95,7 +95,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                 }
 
                 // account_flag: AccountFlag
-                account_flag.write(w)?;
+                crate::util::write_u32_le(w, account_flag.as_int() as u32)?;
 
                 // hardware_survey_id: u32
                 w.write_all(&hardware_survey_id.to_le_bytes())?;
@@ -284,7 +284,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
             w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
             // login_result: LoginResult
-            self.login_result.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.login_result.as_int() as u8).await?;
 
             match &self.login_result {
                 CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
@@ -299,7 +299,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                     }
 
                     // account_flag: AccountFlag
-                    account_flag.tokio_write(w).await?;
+                    crate::util::tokio_write_u32_le(w, account_flag.as_int() as u32).await?;
 
                     // hardware_survey_id: u32
                     w.write_all(&hardware_survey_id.to_le_bytes()).await?;
@@ -489,7 +489,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
             w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
             // login_result: LoginResult
-            self.login_result.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.login_result.as_int() as u8).await?;
 
             match &self.login_result {
                 CMD_AUTH_LOGON_PROOF_ServerLoginResult::SUCCESS {
@@ -504,7 +504,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Server {
                     }
 
                     // account_flag: AccountFlag
-                    account_flag.astd_write(w).await?;
+                    crate::util::astd_write_u32_le(w, account_flag.as_int() as u32).await?;
 
                     // hardware_survey_id: u32
                     w.write_all(&hardware_survey_id.to_le_bytes()).await?;
@@ -698,24 +698,6 @@ impl Default for CMD_AUTH_LOGON_PROOF_ServerLoginResult {
 }
 
 impl CMD_AUTH_LOGON_PROOF_ServerLoginResult {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::SUCCESS { .. } => 0,

@@ -53,10 +53,10 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
-        self.map.write(w)?;
+        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
 
         // reason: TransferAbortReason
-        self.reason.write(w)?;
+        crate::util::write_u8_le(w, self.reason.as_int() as u8)?;
 
         // padding: u8
         w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
@@ -109,10 +109,10 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
      {
         Box::pin(async move {
             // map: Map
-            self.map.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // reason: TransferAbortReason
-            self.reason.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.reason.as_int() as u8).await?;
 
             // padding: u8
             w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;
@@ -166,10 +166,10 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
      {
         Box::pin(async move {
             // map: Map
-            self.map.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // reason: TransferAbortReason
-            self.reason.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.reason.as_int() as u8).await?;
 
             // padding: u8
             w.write_all(&Self::PADDING_VALUE.to_le_bytes()).await?;

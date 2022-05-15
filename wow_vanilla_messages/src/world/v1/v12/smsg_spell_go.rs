@@ -112,7 +112,7 @@ impl MessageBody for SMSG_SPELL_GO {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // flags: CastFlags
-        self.flags.write(w)?;
+        crate::util::write_u16_le(w, self.flags.as_int() as u16)?;
 
         // amount_of_hits: u8
         w.write_all(&(self.hits.len() as u8).to_le_bytes())?;
@@ -248,7 +248,7 @@ impl MessageBody for SMSG_SPELL_GO {
             w.write_all(&self.spell.to_le_bytes()).await?;
 
             // flags: CastFlags
-            self.flags.tokio_write(w).await?;
+            crate::util::tokio_write_u16_le(w, self.flags.as_int() as u16).await?;
 
             // amount_of_hits: u8
             w.write_all(&(self.hits.len() as u8).to_le_bytes()).await?;
@@ -385,7 +385,7 @@ impl MessageBody for SMSG_SPELL_GO {
             w.write_all(&self.spell.to_le_bytes()).await?;
 
             // flags: CastFlags
-            self.flags.astd_write(w).await?;
+            crate::util::astd_write_u16_le(w, self.flags.as_int() as u16).await?;
 
             // amount_of_hits: u8
             w.write_all(&(self.hits.len() as u8).to_le_bytes()).await?;
@@ -494,24 +494,6 @@ pub struct SMSG_SPELL_GOCastFlags {
 }
 
 impl SMSG_SPELL_GOCastFlags {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub const fn empty() -> Self {
         Self {
             inner: 0,

@@ -59,7 +59,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
-        self.map.write(w)?;
+        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
 
         // optional has_transport
         if let Some(v) = &self.has_transport {
@@ -67,7 +67,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
             w.write_all(&v.transport.to_le_bytes())?;
 
             // transport_map: Map
-            v.transport_map.write(w)?;
+            crate::util::write_u32_le(w, v.transport_map.as_int() as u32)?;
 
         }
 
@@ -132,7 +132,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
      {
         Box::pin(async move {
             // map: Map
-            self.map.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // optional has_transport
             if let Some(v) = &self.has_transport {
@@ -140,7 +140,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
                 w.write_all(&v.transport.to_le_bytes()).await?;
 
                 // transport_map: Map
-                v.transport_map.tokio_write(w).await?;
+                crate::util::tokio_write_u32_le(w, v.transport_map.as_int() as u32).await?;
 
             }
 
@@ -206,7 +206,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
      {
         Box::pin(async move {
             // map: Map
-            self.map.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // optional has_transport
             if let Some(v) = &self.has_transport {
@@ -214,7 +214,7 @@ impl MessageBody for SMSG_TRANSFER_PENDING {
                 w.write_all(&v.transport.to_le_bytes()).await?;
 
                 // transport_map: Map
-                v.transport_map.astd_write(w).await?;
+                crate::util::astd_write_u32_le(w, v.transport_map.as_int() as u32).await?;
 
             }
 

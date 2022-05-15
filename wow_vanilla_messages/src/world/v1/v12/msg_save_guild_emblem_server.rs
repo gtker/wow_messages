@@ -38,7 +38,7 @@ impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Server {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // result: GuildEmblemResult
-        self.result.write(w)?;
+        crate::util::write_u32_le(w, self.result.as_int() as u32)?;
 
         Ok(())
     }
@@ -80,7 +80,7 @@ impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Server {
      {
         Box::pin(async move {
             // result: GuildEmblemResult
-            self.result.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.result.as_int() as u32).await?;
 
             Ok(())
         })
@@ -123,7 +123,7 @@ impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Server {
      {
         Box::pin(async move {
             // result: GuildEmblemResult
-            self.result.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.result.as_int() as u32).await?;
 
             Ok(())
         })

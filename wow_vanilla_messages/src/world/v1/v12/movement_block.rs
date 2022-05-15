@@ -299,7 +299,7 @@ impl ReadableAndWritable for MovementBlock {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_flag: UpdateFlag
-        self.update_flag.write(w)?;
+        crate::util::write_u8_le(w, self.update_flag.as_int() as u8)?;
 
         if let Some(if_statement) = &self.update_flag.living {
             match if_statement {
@@ -319,7 +319,7 @@ impl ReadableAndWritable for MovementBlock {
                     walking_speed,
                 } => {
                     // flags: MovementFlags
-                    flags.write(w)?;
+                    crate::util::write_u32_le(w, flags.as_int() as u32)?;
 
                     // timestamp: u32
                     w.write_all(&timestamp.to_le_bytes())?;
@@ -392,7 +392,7 @@ impl ReadableAndWritable for MovementBlock {
 
                     if let Some(if_statement) = &flags.spline_enabled {
                         // spline_flags: SplineFlag
-                        if_statement.spline_flags.write(w)?;
+                        crate::util::write_u32_le(w, if_statement.spline_flags.as_int() as u32)?;
 
                         if let Some(if_statement) = &if_statement.spline_flags.final_angle {
                             match if_statement {
@@ -796,7 +796,7 @@ impl ReadableAndWritable for MovementBlock {
      {
         Box::pin(async move {
             // update_flag: UpdateFlag
-            self.update_flag.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.update_flag.as_int() as u8).await?;
 
             if let Some(if_statement) = &self.update_flag.living {
                 match if_statement {
@@ -816,7 +816,7 @@ impl ReadableAndWritable for MovementBlock {
                         walking_speed,
                     } => {
                         // flags: MovementFlags
-                        flags.tokio_write(w).await?;
+                        crate::util::tokio_write_u32_le(w, flags.as_int() as u32).await?;
 
                         // timestamp: u32
                         w.write_all(&timestamp.to_le_bytes()).await?;
@@ -889,7 +889,7 @@ impl ReadableAndWritable for MovementBlock {
 
                         if let Some(if_statement) = &flags.spline_enabled {
                             // spline_flags: SplineFlag
-                            if_statement.spline_flags.tokio_write(w).await?;
+                            crate::util::tokio_write_u32_le(w, if_statement.spline_flags.as_int() as u32).await?;
 
                             if let Some(if_statement) = &if_statement.spline_flags.final_angle {
                                 match if_statement {
@@ -1294,7 +1294,7 @@ impl ReadableAndWritable for MovementBlock {
      {
         Box::pin(async move {
             // update_flag: UpdateFlag
-            self.update_flag.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.update_flag.as_int() as u8).await?;
 
             if let Some(if_statement) = &self.update_flag.living {
                 match if_statement {
@@ -1314,7 +1314,7 @@ impl ReadableAndWritable for MovementBlock {
                         walking_speed,
                     } => {
                         // flags: MovementFlags
-                        flags.astd_write(w).await?;
+                        crate::util::astd_write_u32_le(w, flags.as_int() as u32).await?;
 
                         // timestamp: u32
                         w.write_all(&timestamp.to_le_bytes()).await?;
@@ -1387,7 +1387,7 @@ impl ReadableAndWritable for MovementBlock {
 
                         if let Some(if_statement) = &flags.spline_enabled {
                             // spline_flags: SplineFlag
-                            if_statement.spline_flags.astd_write(w).await?;
+                            crate::util::astd_write_u32_le(w, if_statement.spline_flags.as_int() as u32).await?;
 
                             if let Some(if_statement) = &if_statement.spline_flags.final_angle {
                                 match if_statement {
@@ -1579,24 +1579,6 @@ pub struct MovementBlockSplineFlag {
 }
 
 impl MovementBlockSplineFlag {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -2356,24 +2338,6 @@ pub struct MovementBlockMovementFlags {
 }
 
 impl MovementBlockMovementFlags {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -3340,24 +3304,6 @@ pub struct MovementBlockUpdateFlag {
 }
 
 impl MovementBlockUpdateFlag {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub const fn empty() -> Self {
         Self {
             inner: 0,

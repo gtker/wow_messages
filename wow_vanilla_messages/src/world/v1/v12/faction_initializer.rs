@@ -33,7 +33,7 @@ impl ReadableAndWritable for FactionInitializer {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // flag: FactionFlag
-        self.flag.write(w)?;
+        crate::util::write_u8_le(w, self.flag.as_int() as u8)?;
 
         // standing: u32
         w.write_all(&self.standing.to_le_bytes())?;
@@ -81,7 +81,7 @@ impl ReadableAndWritable for FactionInitializer {
      {
         Box::pin(async move {
             // flag: FactionFlag
-            self.flag.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.flag.as_int() as u8).await?;
 
             // standing: u32
             w.write_all(&self.standing.to_le_bytes()).await?;
@@ -130,7 +130,7 @@ impl ReadableAndWritable for FactionInitializer {
      {
         Box::pin(async move {
             // flag: FactionFlag
-            self.flag.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.flag.as_int() as u8).await?;
 
             // standing: u32
             w.write_all(&self.standing.to_le_bytes()).await?;

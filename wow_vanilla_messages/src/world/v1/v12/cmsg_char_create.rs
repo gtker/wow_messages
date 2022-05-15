@@ -90,13 +90,13 @@ impl MessageBody for CMSG_CHAR_CREATE {
         w.write_all(&[0])?;
 
         // race: Race
-        self.race.write(w)?;
+        crate::util::write_u8_le(w, self.race.as_int() as u8)?;
 
         // class: Class
-        self.class.write(w)?;
+        crate::util::write_u8_le(w, self.class.as_int() as u8)?;
 
         // gender: Gender
-        self.gender.write(w)?;
+        crate::util::write_u8_le(w, self.gender.as_int() as u8)?;
 
         // skin: u8
         w.write_all(&self.skin.to_le_bytes())?;
@@ -198,13 +198,13 @@ impl MessageBody for CMSG_CHAR_CREATE {
             w.write_all(&[0]).await?;
 
             // race: Race
-            self.race.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.race.as_int() as u8).await?;
 
             // class: Class
-            self.class.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.class.as_int() as u8).await?;
 
             // gender: Gender
-            self.gender.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.gender.as_int() as u8).await?;
 
             // skin: u8
             w.write_all(&self.skin.to_le_bytes()).await?;
@@ -307,13 +307,13 @@ impl MessageBody for CMSG_CHAR_CREATE {
             w.write_all(&[0]).await?;
 
             // race: Race
-            self.race.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.race.as_int() as u8).await?;
 
             // class: Class
-            self.class.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.class.as_int() as u8).await?;
 
             // gender: Gender
-            self.gender.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.gender.as_int() as u8).await?;
 
             // skin: u8
             w.write_all(&self.skin.to_le_bytes()).await?;

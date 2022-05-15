@@ -37,7 +37,7 @@ impl ReadableAndWritable for SpellMiss {
         self.target_guid.write(w)?;
 
         // miss_info: SpellMissInfo
-        self.miss_info.write(w)?;
+        crate::util::write_u32_le(w, self.miss_info.as_int() as u32)?;
 
         Ok(())
     }
@@ -85,7 +85,7 @@ impl ReadableAndWritable for SpellMiss {
             self.target_guid.tokio_write(w).await?;
 
             // miss_info: SpellMissInfo
-            self.miss_info.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.miss_info.as_int() as u32).await?;
 
             Ok(())
         })
@@ -134,7 +134,7 @@ impl ReadableAndWritable for SpellMiss {
             self.target_guid.astd_write(w).await?;
 
             // miss_info: SpellMissInfo
-            self.miss_info.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.miss_info.as_int() as u32).await?;
 
             Ok(())
         })

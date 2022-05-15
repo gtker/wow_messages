@@ -38,7 +38,7 @@ impl ReadableAndWritable for RaidInfo {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // map: Map
-        self.map.write(w)?;
+        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
 
         // reset_time: u32
         w.write_all(&self.reset_time.to_le_bytes())?;
@@ -93,7 +93,7 @@ impl ReadableAndWritable for RaidInfo {
      {
         Box::pin(async move {
             // map: Map
-            self.map.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // reset_time: u32
             w.write_all(&self.reset_time.to_le_bytes()).await?;
@@ -149,7 +149,7 @@ impl ReadableAndWritable for RaidInfo {
      {
         Box::pin(async move {
             // map: Map
-            self.map.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // reset_time: u32
             w.write_all(&self.reset_time.to_le_bytes()).await?;

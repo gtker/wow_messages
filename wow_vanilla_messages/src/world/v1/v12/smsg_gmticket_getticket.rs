@@ -74,7 +74,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // status: GmTicketStatus
-        self.status.write(w)?;
+        crate::util::write_u32_le(w, self.status.as_int() as u32)?;
 
         match &self.status {
             SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
@@ -93,7 +93,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                 w.write_all(&[0])?;
 
                 // ticket_type: GmTicketType
-                ticket_type.write(w)?;
+                crate::util::write_u8_le(w, ticket_type.as_int() as u8)?;
 
                 // days_since_ticket_creation: f32
                 w.write_all(&days_since_ticket_creation.to_le_bytes())?;
@@ -105,7 +105,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                 w.write_all(&days_since_last_updated.to_le_bytes())?;
 
                 // escalation_status: GmTicketEscalationStatus
-                escalation_status.write(w)?;
+                crate::util::write_u8_le(w, escalation_status.as_int() as u8)?;
 
                 // read_by_gm: u8
                 w.write_all(&read_by_gm.to_le_bytes())?;
@@ -189,7 +189,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
      {
         Box::pin(async move {
             // status: GmTicketStatus
-            self.status.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.status.as_int() as u32).await?;
 
             match &self.status {
                 SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
@@ -208,7 +208,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                     w.write_all(&[0]).await?;
 
                     // ticket_type: GmTicketType
-                    ticket_type.tokio_write(w).await?;
+                    crate::util::tokio_write_u8_le(w, ticket_type.as_int() as u8).await?;
 
                     // days_since_ticket_creation: f32
                     w.write_all(&days_since_ticket_creation.to_le_bytes()).await?;
@@ -220,7 +220,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                     w.write_all(&days_since_last_updated.to_le_bytes()).await?;
 
                     // escalation_status: GmTicketEscalationStatus
-                    escalation_status.tokio_write(w).await?;
+                    crate::util::tokio_write_u8_le(w, escalation_status.as_int() as u8).await?;
 
                     // read_by_gm: u8
                     w.write_all(&read_by_gm.to_le_bytes()).await?;
@@ -305,7 +305,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
      {
         Box::pin(async move {
             // status: GmTicketStatus
-            self.status.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.status.as_int() as u32).await?;
 
             match &self.status {
                 SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
@@ -324,7 +324,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                     w.write_all(&[0]).await?;
 
                     // ticket_type: GmTicketType
-                    ticket_type.astd_write(w).await?;
+                    crate::util::astd_write_u8_le(w, ticket_type.as_int() as u8).await?;
 
                     // days_since_ticket_creation: f32
                     w.write_all(&days_since_ticket_creation.to_le_bytes()).await?;
@@ -336,7 +336,7 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
                     w.write_all(&days_since_last_updated.to_le_bytes()).await?;
 
                     // escalation_status: GmTicketEscalationStatus
-                    escalation_status.astd_write(w).await?;
+                    crate::util::astd_write_u8_le(w, escalation_status.as_int() as u8).await?;
 
                     // read_by_gm: u8
                     w.write_all(&read_by_gm.to_le_bytes()).await?;
@@ -440,24 +440,6 @@ impl Default for SMSG_GMTICKET_GETTICKETGmTicketStatus {
 }
 
 impl SMSG_GMTICKET_GETTICKETGmTicketStatus {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::DBERROR => 0,

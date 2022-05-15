@@ -89,13 +89,13 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
         self.guid.write(w)?;
 
         // source: NewItemSource
-        self.source.write(w)?;
+        crate::util::write_u32_le(w, self.source.as_int() as u32)?;
 
         // creation_type: NewItemCreationType
-        self.creation_type.write(w)?;
+        crate::util::write_u32_le(w, self.creation_type.as_int() as u32)?;
 
         // alert_chat: NewItemChatAlert
-        self.alert_chat.write(w)?;
+        crate::util::write_u32_le(w, self.alert_chat.as_int() as u32)?;
 
         // bag_slot: u8
         w.write_all(&self.bag_slot.to_le_bytes())?;
@@ -194,13 +194,13 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
             self.guid.tokio_write(w).await?;
 
             // source: NewItemSource
-            self.source.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.source.as_int() as u32).await?;
 
             // creation_type: NewItemCreationType
-            self.creation_type.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.creation_type.as_int() as u32).await?;
 
             // alert_chat: NewItemChatAlert
-            self.alert_chat.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.alert_chat.as_int() as u32).await?;
 
             // bag_slot: u8
             w.write_all(&self.bag_slot.to_le_bytes()).await?;
@@ -300,13 +300,13 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
             self.guid.astd_write(w).await?;
 
             // source: NewItemSource
-            self.source.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.source.as_int() as u32).await?;
 
             // creation_type: NewItemCreationType
-            self.creation_type.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.creation_type.as_int() as u32).await?;
 
             // alert_chat: NewItemChatAlert
-            self.alert_chat.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.alert_chat.as_int() as u32).await?;
 
             // bag_slot: u8
             w.write_all(&self.bag_slot.to_le_bytes()).await?;

@@ -237,14 +237,14 @@ impl MessageBody for SMSG_CAST_RESULT {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // result: SimpleSpellCastResult
-        self.result.write(w)?;
+        crate::util::write_u8_le(w, self.result.as_int() as u8)?;
 
         match &self.result {
             SMSG_CAST_RESULTSimpleSpellCastResult::SUCCESS {
                 reason,
             } => {
                 // reason: CastFailureReason
-                reason.write(w)?;
+                crate::util::write_u8_le(w, reason.as_int() as u8)?;
 
                 match &reason {
                     SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT => {}
@@ -358,7 +358,7 @@ impl MessageBody for SMSG_CAST_RESULT {
                         area,
                     } => {
                         // area: Area
-                        area.write(w)?;
+                        crate::util::write_u32_le(w, area.as_int() as u32)?;
 
                     }
                     SMSG_CAST_RESULTCastFailureReason::REQUIRES_SPELL_FOCUS {
@@ -662,14 +662,14 @@ impl MessageBody for SMSG_CAST_RESULT {
             w.write_all(&self.spell.to_le_bytes()).await?;
 
             // result: SimpleSpellCastResult
-            self.result.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.result.as_int() as u8).await?;
 
             match &self.result {
                 SMSG_CAST_RESULTSimpleSpellCastResult::SUCCESS {
                     reason,
                 } => {
                     // reason: CastFailureReason
-                    reason.tokio_write(w).await?;
+                    crate::util::tokio_write_u8_le(w, reason.as_int() as u8).await?;
 
                     match &reason {
                         SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT => {}
@@ -783,7 +783,7 @@ impl MessageBody for SMSG_CAST_RESULT {
                             area,
                         } => {
                             // area: Area
-                            area.tokio_write(w).await?;
+                            crate::util::tokio_write_u32_le(w, area.as_int() as u32).await?;
 
                         }
                         SMSG_CAST_RESULTCastFailureReason::REQUIRES_SPELL_FOCUS {
@@ -1088,14 +1088,14 @@ impl MessageBody for SMSG_CAST_RESULT {
             w.write_all(&self.spell.to_le_bytes()).await?;
 
             // result: SimpleSpellCastResult
-            self.result.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.result.as_int() as u8).await?;
 
             match &self.result {
                 SMSG_CAST_RESULTSimpleSpellCastResult::SUCCESS {
                     reason,
                 } => {
                     // reason: CastFailureReason
-                    reason.astd_write(w).await?;
+                    crate::util::astd_write_u8_le(w, reason.as_int() as u8).await?;
 
                     match &reason {
                         SMSG_CAST_RESULTCastFailureReason::AFFECTING_COMBAT => {}
@@ -1209,7 +1209,7 @@ impl MessageBody for SMSG_CAST_RESULT {
                             area,
                         } => {
                             // area: Area
-                            area.astd_write(w).await?;
+                            crate::util::astd_write_u32_le(w, area.as_int() as u32).await?;
 
                         }
                         SMSG_CAST_RESULTCastFailureReason::REQUIRES_SPELL_FOCUS {
@@ -1508,24 +1508,6 @@ impl Default for SMSG_CAST_RESULTCastFailureReason {
 }
 
 impl SMSG_CAST_RESULTCastFailureReason {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::AFFECTING_COMBAT => 0,
@@ -2161,24 +2143,6 @@ impl Default for SMSG_CAST_RESULTSimpleSpellCastResult {
 }
 
 impl SMSG_CAST_RESULTSimpleSpellCastResult {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::SUCCESS { .. } => 0,

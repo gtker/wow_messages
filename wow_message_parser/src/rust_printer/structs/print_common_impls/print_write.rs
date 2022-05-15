@@ -4,7 +4,7 @@ use crate::container::{
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
 use crate::parser::types::{
-    Array, ArrayType, FloatingPointType, IntegerType, VerifiedContainerValue,
+    Array, ArrayType, FloatingPointType, IntegerType, ObjectType, VerifiedContainerValue,
 };
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
@@ -310,6 +310,25 @@ pub fn print_write_definition(
                     return;
                 }
             }
+
+            match o.get_object_type_of(identifier, e.tags()) {
+                ObjectType::Enum | ObjectType::Flag => {
+                    let definer = o.get_definer(identifier, e.tags());
+                    s.wln(format!(
+                        "crate::util::{prefix}write_{ty}_{endian}(w, {variable_prefix}{name}.as_int() as {ty}){postfix}?;",
+                        variable_prefix = variable_prefix,
+                        prefix = prefix,
+                        postfix = postfix,
+                        name = d.name(),
+                        ty = definer.ty().rust_str(),
+                        endian = definer.ty().rust_endian_str()
+                    ));
+                    s.newline();
+                    return;
+                }
+                _ => {}
+            }
+
             print_write_field_identifier(
                 s,
                 d.name(),

@@ -52,7 +52,7 @@ impl MessageBody for CMSG_TEXT_EMOTE {
         w.write_all(&self.text_emote.to_le_bytes())?;
 
         // emote: Emote
-        self.emote.write(w)?;
+        crate::util::write_u32_le(w, self.emote.as_int() as u32)?;
 
         // guid: Guid
         self.guid.write(w)?;
@@ -108,7 +108,7 @@ impl MessageBody for CMSG_TEXT_EMOTE {
             w.write_all(&self.text_emote.to_le_bytes()).await?;
 
             // emote: Emote
-            self.emote.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.emote.as_int() as u32).await?;
 
             // guid: Guid
             self.guid.tokio_write(w).await?;
@@ -165,7 +165,7 @@ impl MessageBody for CMSG_TEXT_EMOTE {
             w.write_all(&self.text_emote.to_le_bytes()).await?;
 
             // emote: Emote
-            self.emote.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.emote.as_int() as u32).await?;
 
             // guid: Guid
             self.guid.astd_write(w).await?;

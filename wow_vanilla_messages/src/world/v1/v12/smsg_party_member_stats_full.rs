@@ -293,11 +293,11 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
         self.player.write_packed(w)?;
 
         // mask: GroupUpdateFlags
-        self.mask.write(w)?;
+        crate::util::write_u32_le(w, self.mask.as_int() as u32)?;
 
         if let Some(if_statement) = &self.mask.flag_status {
             // status: GroupMemberOnlineStatus
-            if_statement.status.write(w)?;
+            crate::util::write_u8_le(w, if_statement.status.as_int() as u8)?;
 
         }
 
@@ -315,7 +315,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.flag_power_type {
             // power: Power
-            if_statement.power.write(w)?;
+            crate::util::write_u8_le(w, if_statement.power.as_int() as u8)?;
 
         }
 
@@ -339,7 +339,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.flag_zone {
             // area: Area
-            if_statement.area.write(w)?;
+            crate::util::write_u32_le(w, if_statement.area.as_int() as u32)?;
 
         }
 
@@ -386,7 +386,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.flag_pet_power_type {
             // pet_power_type: Power
-            if_statement.pet_power_type.write(w)?;
+            crate::util::write_u8_le(w, if_statement.pet_power_type.as_int() as u8)?;
 
         }
 
@@ -698,11 +698,11 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
             self.player.tokio_write_packed(w).await?;
 
             // mask: GroupUpdateFlags
-            self.mask.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.mask.as_int() as u32).await?;
 
             if let Some(if_statement) = &self.mask.flag_status {
                 // status: GroupMemberOnlineStatus
-                if_statement.status.tokio_write(w).await?;
+                crate::util::tokio_write_u8_le(w, if_statement.status.as_int() as u8).await?;
 
             }
 
@@ -720,7 +720,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_power_type {
                 // power: Power
-                if_statement.power.tokio_write(w).await?;
+                crate::util::tokio_write_u8_le(w, if_statement.power.as_int() as u8).await?;
 
             }
 
@@ -744,7 +744,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_zone {
                 // area: Area
-                if_statement.area.tokio_write(w).await?;
+                crate::util::tokio_write_u32_le(w, if_statement.area.as_int() as u32).await?;
 
             }
 
@@ -791,7 +791,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_pet_power_type {
                 // pet_power_type: Power
-                if_statement.pet_power_type.tokio_write(w).await?;
+                crate::util::tokio_write_u8_le(w, if_statement.pet_power_type.as_int() as u8).await?;
 
             }
 
@@ -1104,11 +1104,11 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
             self.player.astd_write_packed(w).await?;
 
             // mask: GroupUpdateFlags
-            self.mask.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.mask.as_int() as u32).await?;
 
             if let Some(if_statement) = &self.mask.flag_status {
                 // status: GroupMemberOnlineStatus
-                if_statement.status.astd_write(w).await?;
+                crate::util::astd_write_u8_le(w, if_statement.status.as_int() as u8).await?;
 
             }
 
@@ -1126,7 +1126,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_power_type {
                 // power: Power
-                if_statement.power.astd_write(w).await?;
+                crate::util::astd_write_u8_le(w, if_statement.power.as_int() as u8).await?;
 
             }
 
@@ -1150,7 +1150,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_zone {
                 // area: Area
-                if_statement.area.astd_write(w).await?;
+                crate::util::astd_write_u32_le(w, if_statement.area.as_int() as u32).await?;
 
             }
 
@@ -1197,7 +1197,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
 
             if let Some(if_statement) = &self.mask.flag_pet_power_type {
                 // pet_power_type: Power
-                if_statement.pet_power_type.astd_write(w).await?;
+                crate::util::astd_write_u8_le(w, if_statement.pet_power_type.as_int() as u8).await?;
 
             }
 
@@ -1309,24 +1309,6 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlags {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub const fn empty() -> Self {
         Self {
             inner: 0,

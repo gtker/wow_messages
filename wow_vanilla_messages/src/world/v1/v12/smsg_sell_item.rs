@@ -55,7 +55,7 @@ impl MessageBody for SMSG_SELL_ITEM {
         self.item.write(w)?;
 
         // result: SellItemResult
-        self.result.write(w)?;
+        crate::util::write_u8_le(w, self.result.as_int() as u8)?;
 
         Ok(())
     }
@@ -111,7 +111,7 @@ impl MessageBody for SMSG_SELL_ITEM {
             self.item.tokio_write(w).await?;
 
             // result: SellItemResult
-            self.result.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.result.as_int() as u8).await?;
 
             Ok(())
         })
@@ -168,7 +168,7 @@ impl MessageBody for SMSG_SELL_ITEM {
             self.item.astd_write(w).await?;
 
             // result: SellItemResult
-            self.result.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.result.as_int() as u8).await?;
 
             Ok(())
         })

@@ -72,7 +72,7 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
         self.battlemaster.write(w)?;
 
         // map: Map
-        self.map.write(w)?;
+        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -160,7 +160,7 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
             self.battlemaster.tokio_write(w).await?;
 
             // map: Map
-            self.map.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // unknown1: u8
             w.write_all(&self.unknown1.to_le_bytes()).await?;
@@ -249,7 +249,7 @@ impl MessageBody for SMSG_BATTLEFIELD_LIST {
             self.battlemaster.astd_write(w).await?;
 
             // map: Map
-            self.map.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // unknown1: u8
             w.write_all(&self.unknown1.to_le_bytes()).await?;

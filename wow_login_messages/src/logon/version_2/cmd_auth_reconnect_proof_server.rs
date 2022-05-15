@@ -35,7 +35,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
         // result: LoginResult
-        self.result.write(w)?;
+        crate::util::write_u8_le(w, self.result.as_int() as u8)?;
 
         Ok(())
     }
@@ -79,7 +79,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
             w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
             // result: LoginResult
-            self.result.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.result.as_int() as u8).await?;
 
             Ok(())
         })
@@ -124,7 +124,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
             w.write_all(&Self::OPCODE.to_le_bytes()).await?;
 
             // result: LoginResult
-            self.result.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.result.as_int() as u8).await?;
 
             Ok(())
         })

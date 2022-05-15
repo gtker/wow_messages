@@ -61,7 +61,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_type: RaidTargetUpdateType
-        self.update_type.write(w)?;
+        crate::util::write_u8_le(w, self.update_type.as_int() as u8)?;
 
         match &self.update_type {
             MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
@@ -145,7 +145,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
      {
         Box::pin(async move {
             // update_type: RaidTargetUpdateType
-            self.update_type.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.update_type.as_int() as u8).await?;
 
             match &self.update_type {
                 MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
@@ -230,7 +230,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
      {
         Box::pin(async move {
             // update_type: RaidTargetUpdateType
-            self.update_type.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.update_type.as_int() as u8).await?;
 
             match &self.update_type {
                 MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::PARTIAL {
@@ -327,24 +327,6 @@ impl Default for MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
 }
 
 impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::PARTIAL { .. } => 0,

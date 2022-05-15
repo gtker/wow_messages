@@ -49,7 +49,7 @@ impl MessageBody for SMSG_GUILD_EVENT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // event: GuildEvent
-        self.event.write(w)?;
+        crate::util::write_u8_le(w, self.event.as_int() as u8)?;
 
         // amount_of_events: u8
         w.write_all(&(self.event_descriptions.len() as u8).to_le_bytes())?;
@@ -111,7 +111,7 @@ impl MessageBody for SMSG_GUILD_EVENT {
      {
         Box::pin(async move {
             // event: GuildEvent
-            self.event.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.event.as_int() as u8).await?;
 
             // amount_of_events: u8
             w.write_all(&(self.event_descriptions.len() as u8).to_le_bytes()).await?;
@@ -174,7 +174,7 @@ impl MessageBody for SMSG_GUILD_EVENT {
      {
         Box::pin(async move {
             // event: GuildEvent
-            self.event.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.event.as_int() as u8).await?;
 
             // amount_of_events: u8
             w.write_all(&(self.event_descriptions.len() as u8).to_le_bytes()).await?;

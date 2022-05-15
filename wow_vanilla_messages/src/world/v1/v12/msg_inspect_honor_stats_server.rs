@@ -117,7 +117,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
         self.guid.write(w)?;
 
         // highest_rank: PvpRank
-        self.highest_rank.write(w)?;
+        crate::util::write_u8_le(w, self.highest_rank.as_int() as u8)?;
 
         // today_honorable_and_dishonorable: u32
         w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes())?;
@@ -264,7 +264,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             self.guid.tokio_write(w).await?;
 
             // highest_rank: PvpRank
-            self.highest_rank.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.highest_rank.as_int() as u8).await?;
 
             // today_honorable_and_dishonorable: u32
             w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes()).await?;
@@ -412,7 +412,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
             self.guid.astd_write(w).await?;
 
             // highest_rank: PvpRank
-            self.highest_rank.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.highest_rank.as_int() as u8).await?;
 
             // today_honorable_and_dishonorable: u32
             w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes()).await?;

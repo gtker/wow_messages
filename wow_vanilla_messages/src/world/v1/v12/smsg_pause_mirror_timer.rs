@@ -43,7 +43,7 @@ impl MessageBody for SMSG_PAUSE_MIRROR_TIMER {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // timer: TimerType
-        self.timer.write(w)?;
+        crate::util::write_u32_le(w, self.timer.as_int() as u32)?;
 
         // is_frozen: u8
         w.write_all(&self.is_frozen.to_le_bytes())?;
@@ -92,7 +92,7 @@ impl MessageBody for SMSG_PAUSE_MIRROR_TIMER {
      {
         Box::pin(async move {
             // timer: TimerType
-            self.timer.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.timer.as_int() as u32).await?;
 
             // is_frozen: u8
             w.write_all(&self.is_frozen.to_le_bytes()).await?;
@@ -142,7 +142,7 @@ impl MessageBody for SMSG_PAUSE_MIRROR_TIMER {
      {
         Box::pin(async move {
             // timer: TimerType
-            self.timer.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.timer.as_int() as u32).await?;
 
             // is_frozen: u8
             w.write_all(&self.is_frozen.to_le_bytes()).await?;

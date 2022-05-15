@@ -57,7 +57,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
         self.guid.write(w)?;
 
         // map: Map
-        self.map.write(w)?;
+        crate::util::write_u32_le(w, self.map.as_int() as u32)?;
 
         // instance_id: u32
         w.write_all(&self.instance_id.to_le_bytes())?;
@@ -120,7 +120,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
             self.guid.tokio_write(w).await?;
 
             // map: Map
-            self.map.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // instance_id: u32
             w.write_all(&self.instance_id.to_le_bytes()).await?;
@@ -184,7 +184,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
             self.guid.astd_write(w).await?;
 
             // map: Map
-            self.map.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.map.as_int() as u32).await?;
 
             // instance_id: u32
             w.write_all(&self.instance_id.to_le_bytes()).await?;

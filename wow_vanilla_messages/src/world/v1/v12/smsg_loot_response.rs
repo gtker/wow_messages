@@ -47,7 +47,7 @@ impl MessageBody for SMSG_LOOT_RESPONSE {
         self.guid.write(w)?;
 
         // loot_method: LootMethod
-        self.loot_method.write(w)?;
+        crate::util::write_u8_le(w, self.loot_method.as_int() as u8)?;
 
         Ok(())
     }
@@ -96,7 +96,7 @@ impl MessageBody for SMSG_LOOT_RESPONSE {
             self.guid.tokio_write(w).await?;
 
             // loot_method: LootMethod
-            self.loot_method.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.loot_method.as_int() as u8).await?;
 
             Ok(())
         })
@@ -146,7 +146,7 @@ impl MessageBody for SMSG_LOOT_RESPONSE {
             self.guid.astd_write(w).await?;
 
             // loot_method: LootMethod
-            self.loot_method.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.loot_method.as_int() as u8).await?;
 
             Ok(())
         })

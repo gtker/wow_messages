@@ -63,7 +63,7 @@ impl MessageBody for SMSG_PROCRESIST {
         w.write_all(&self.id.to_le_bytes())?;
 
         // log_format: LogFormat
-        self.log_format.write(w)?;
+        crate::util::write_u8_le(w, self.log_format.as_int() as u8)?;
 
         Ok(())
     }
@@ -126,7 +126,7 @@ impl MessageBody for SMSG_PROCRESIST {
             w.write_all(&self.id.to_le_bytes()).await?;
 
             // log_format: LogFormat
-            self.log_format.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.log_format.as_int() as u8).await?;
 
             Ok(())
         })
@@ -190,7 +190,7 @@ impl MessageBody for SMSG_PROCRESIST {
             w.write_all(&self.id.to_le_bytes()).await?;
 
             // log_format: LogFormat
-            self.log_format.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.log_format.as_int() as u8).await?;
 
             Ok(())
         })

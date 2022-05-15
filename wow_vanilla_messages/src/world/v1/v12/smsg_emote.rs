@@ -44,7 +44,7 @@ impl MessageBody for SMSG_EMOTE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // emote: Emote
-        self.emote.write(w)?;
+        crate::util::write_u32_le(w, self.emote.as_int() as u32)?;
 
         // guid: Guid
         self.guid.write(w)?;
@@ -93,7 +93,7 @@ impl MessageBody for SMSG_EMOTE {
      {
         Box::pin(async move {
             // emote: Emote
-            self.emote.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.emote.as_int() as u32).await?;
 
             // guid: Guid
             self.guid.tokio_write(w).await?;
@@ -143,7 +143,7 @@ impl MessageBody for SMSG_EMOTE {
      {
         Box::pin(async move {
             // emote: Emote
-            self.emote.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.emote.as_int() as u32).await?;
 
             // guid: Guid
             self.guid.astd_write(w).await?;

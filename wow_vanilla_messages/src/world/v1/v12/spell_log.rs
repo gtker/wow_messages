@@ -349,7 +349,7 @@ impl ReadableAndWritable for SpellLog {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // effect: SpellEffect
-        self.effect.write(w)?;
+        crate::util::write_u32_le(w, self.effect.as_int() as u32)?;
 
         // amount_of_logs: u32
         w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes())?;
@@ -1000,7 +1000,7 @@ impl ReadableAndWritable for SpellLog {
      {
         Box::pin(async move {
             // effect: SpellEffect
-            self.effect.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.effect.as_int() as u32).await?;
 
             // amount_of_logs: u32
             w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes()).await?;
@@ -1652,7 +1652,7 @@ impl ReadableAndWritable for SpellLog {
      {
         Box::pin(async move {
             // effect: SpellEffect
-            self.effect.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.effect.as_int() as u32).await?;
 
             // amount_of_logs: u32
             w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes()).await?;
@@ -2189,24 +2189,6 @@ impl Default for SpellLogSpellEffect {
 }
 
 impl SpellLogSpellEffect {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
             Self::NONE => 0,

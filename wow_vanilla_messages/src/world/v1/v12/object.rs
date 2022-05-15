@@ -128,7 +128,7 @@ impl ReadableAndWritable for Object {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_type: UpdateType
-        self.update_type.write(w)?;
+        crate::util::write_u8_le(w, self.update_type.as_int() as u8)?;
 
         match &self.update_type {
             ObjectUpdateType::VALUES {
@@ -163,7 +163,7 @@ impl ReadableAndWritable for Object {
                 guid3.write_packed(w)?;
 
                 // object_type: ObjectType
-                object_type.write(w)?;
+                crate::util::write_u8_le(w, object_type.as_int() as u8)?;
 
                 // movement2: MovementBlock
                 movement2.write(w)?;
@@ -182,7 +182,7 @@ impl ReadableAndWritable for Object {
                 guid3.write_packed(w)?;
 
                 // object_type: ObjectType
-                object_type.write(w)?;
+                crate::util::write_u8_le(w, object_type.as_int() as u8)?;
 
                 // movement2: MovementBlock
                 movement2.write(w)?;
@@ -355,7 +355,7 @@ impl ReadableAndWritable for Object {
      {
         Box::pin(async move {
             // update_type: UpdateType
-            self.update_type.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.update_type.as_int() as u8).await?;
 
             match &self.update_type {
                 ObjectUpdateType::VALUES {
@@ -390,7 +390,7 @@ impl ReadableAndWritable for Object {
                     guid3.tokio_write_packed(w).await?;
 
                     // object_type: ObjectType
-                    object_type.tokio_write(w).await?;
+                    crate::util::tokio_write_u8_le(w, object_type.as_int() as u8).await?;
 
                     // movement2: MovementBlock
                     movement2.tokio_write(w).await?;
@@ -409,7 +409,7 @@ impl ReadableAndWritable for Object {
                     guid3.tokio_write_packed(w).await?;
 
                     // object_type: ObjectType
-                    object_type.tokio_write(w).await?;
+                    crate::util::tokio_write_u8_le(w, object_type.as_int() as u8).await?;
 
                     // movement2: MovementBlock
                     movement2.tokio_write(w).await?;
@@ -583,7 +583,7 @@ impl ReadableAndWritable for Object {
      {
         Box::pin(async move {
             // update_type: UpdateType
-            self.update_type.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.update_type.as_int() as u8).await?;
 
             match &self.update_type {
                 ObjectUpdateType::VALUES {
@@ -618,7 +618,7 @@ impl ReadableAndWritable for Object {
                     guid3.astd_write_packed(w).await?;
 
                     // object_type: ObjectType
-                    object_type.astd_write(w).await?;
+                    crate::util::astd_write_u8_le(w, object_type.as_int() as u8).await?;
 
                     // movement2: MovementBlock
                     movement2.astd_write(w).await?;
@@ -637,7 +637,7 @@ impl ReadableAndWritable for Object {
                     guid3.astd_write_packed(w).await?;
 
                     // object_type: ObjectType
-                    object_type.astd_write(w).await?;
+                    crate::util::astd_write_u8_le(w, object_type.as_int() as u8).await?;
 
                     // movement2: MovementBlock
                     movement2.astd_write(w).await?;
@@ -772,24 +772,6 @@ impl Default for ObjectUpdateType {
 }
 
 impl ObjectUpdateType {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::VALUES { .. } => 0,

@@ -44,10 +44,10 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // reason: LogoutResult
-        self.reason.write(w)?;
+        crate::util::write_u32_le(w, self.reason.as_int() as u32)?;
 
         // speed: LogoutSpeed
-        self.speed.write(w)?;
+        crate::util::write_u8_le(w, self.speed.as_int() as u8)?;
 
         Ok(())
     }
@@ -93,10 +93,10 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
      {
         Box::pin(async move {
             // reason: LogoutResult
-            self.reason.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.reason.as_int() as u32).await?;
 
             // speed: LogoutSpeed
-            self.speed.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.speed.as_int() as u8).await?;
 
             Ok(())
         })
@@ -143,10 +143,10 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
      {
         Box::pin(async move {
             // reason: LogoutResult
-            self.reason.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.reason.as_int() as u32).await?;
 
             // speed: LogoutSpeed
-            self.speed.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.speed.as_int() as u8).await?;
 
             Ok(())
         })

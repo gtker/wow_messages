@@ -173,7 +173,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
         w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes())?;
 
         // login_result: LoginResult
-        self.login_result.write(w)?;
+        crate::util::write_u8_le(w, self.login_result.as_int() as u8)?;
 
         match &self.login_result {
             CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
@@ -216,7 +216,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                 }
 
                 // security_flag: SecurityFlag
-                security_flag.write(w)?;
+                crate::util::write_u8_le(w, security_flag.as_int() as u8)?;
 
                 if let Some(if_statement) = &security_flag.pin {
                     // pin_grid_seed: u32
@@ -447,7 +447,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
             w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes()).await?;
 
             // login_result: LoginResult
-            self.login_result.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.login_result.as_int() as u8).await?;
 
             match &self.login_result {
                 CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
@@ -490,7 +490,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                     }
 
                     // security_flag: SecurityFlag
-                    security_flag.tokio_write(w).await?;
+                    crate::util::tokio_write_u8_le(w, security_flag.as_int() as u8).await?;
 
                     if let Some(if_statement) = &security_flag.pin {
                         // pin_grid_seed: u32
@@ -722,7 +722,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
             w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes()).await?;
 
             // login_result: LoginResult
-            self.login_result.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.login_result.as_int() as u8).await?;
 
             match &self.login_result {
                 CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult::SUCCESS {
@@ -765,7 +765,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Server {
                     }
 
                     // security_flag: SecurityFlag
-                    security_flag.astd_write(w).await?;
+                    crate::util::astd_write_u8_le(w, security_flag.as_int() as u8).await?;
 
                     if let Some(if_statement) = &security_flag.pin {
                         // pin_grid_seed: u32
@@ -880,24 +880,6 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.inner.to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -1164,24 +1146,6 @@ impl Default for CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_ServerLoginResult {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes())?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        w.write_all(&self.as_int().to_le_bytes()).await?;
-        Ok(())
-    }
-
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::SUCCESS { .. } => 0,

@@ -38,7 +38,7 @@ impl MessageBody for SMSG_GM_TICKET_STATUS_UPDATE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // response: GmTicketStatusResponse
-        self.response.write(w)?;
+        crate::util::write_u32_le(w, self.response.as_int() as u32)?;
 
         Ok(())
     }
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_GM_TICKET_STATUS_UPDATE {
      {
         Box::pin(async move {
             // response: GmTicketStatusResponse
-            self.response.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.response.as_int() as u32).await?;
 
             Ok(())
         })
@@ -123,7 +123,7 @@ impl MessageBody for SMSG_GM_TICKET_STATUS_UPDATE {
      {
         Box::pin(async move {
             // response: GmTicketStatusResponse
-            self.response.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.response.as_int() as u32).await?;
 
             Ok(())
         })

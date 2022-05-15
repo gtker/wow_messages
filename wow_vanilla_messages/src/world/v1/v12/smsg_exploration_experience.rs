@@ -43,7 +43,7 @@ impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // area: Area
-        self.area.write(w)?;
+        crate::util::write_u32_le(w, self.area.as_int() as u32)?;
 
         // experience: u32
         w.write_all(&self.experience.to_le_bytes())?;
@@ -92,7 +92,7 @@ impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
      {
         Box::pin(async move {
             // area: Area
-            self.area.tokio_write(w).await?;
+            crate::util::tokio_write_u32_le(w, self.area.as_int() as u32).await?;
 
             // experience: u32
             w.write_all(&self.experience.to_le_bytes()).await?;
@@ -142,7 +142,7 @@ impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
      {
         Box::pin(async move {
             // area: Area
-            self.area.astd_write(w).await?;
+            crate::util::astd_write_u32_le(w, self.area.as_int() as u32).await?;
 
             // experience: u32
             w.write_all(&self.experience.to_le_bytes()).await?;

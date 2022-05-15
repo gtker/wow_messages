@@ -38,7 +38,7 @@ impl MessageBody for SMSG_MEETINGSTONE_JOINFAILED {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // reason: MeetingStoneFailure
-        self.reason.write(w)?;
+        crate::util::write_u8_le(w, self.reason.as_int() as u8)?;
 
         Ok(())
     }
@@ -80,7 +80,7 @@ impl MessageBody for SMSG_MEETINGSTONE_JOINFAILED {
      {
         Box::pin(async move {
             // reason: MeetingStoneFailure
-            self.reason.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.reason.as_int() as u8).await?;
 
             Ok(())
         })
@@ -123,7 +123,7 @@ impl MessageBody for SMSG_MEETINGSTONE_JOINFAILED {
      {
         Box::pin(async move {
             // reason: MeetingStoneFailure
-            self.reason.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.reason.as_int() as u8).await?;
 
             Ok(())
         })

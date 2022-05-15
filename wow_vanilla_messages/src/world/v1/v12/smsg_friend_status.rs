@@ -44,7 +44,7 @@ impl MessageBody for SMSG_FRIEND_STATUS {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // result: FriendResult
-        self.result.write(w)?;
+        crate::util::write_u8_le(w, self.result.as_int() as u8)?;
 
         // guid: Guid
         self.guid.write(w)?;
@@ -93,7 +93,7 @@ impl MessageBody for SMSG_FRIEND_STATUS {
      {
         Box::pin(async move {
             // result: FriendResult
-            self.result.tokio_write(w).await?;
+            crate::util::tokio_write_u8_le(w, self.result.as_int() as u8).await?;
 
             // guid: Guid
             self.guid.tokio_write(w).await?;
@@ -143,7 +143,7 @@ impl MessageBody for SMSG_FRIEND_STATUS {
      {
         Box::pin(async move {
             // result: FriendResult
-            self.result.astd_write(w).await?;
+            crate::util::astd_write_u8_le(w, self.result.as_int() as u8).await?;
 
             // guid: Guid
             self.guid.astd_write(w).await?;
