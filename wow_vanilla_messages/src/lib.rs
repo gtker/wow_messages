@@ -3,6 +3,8 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 
+extern crate core;
+
 use crate::util::read_u8_le;
 use std::fmt::{Display, Formatter};
 use std::io::{Error, Read, Write};

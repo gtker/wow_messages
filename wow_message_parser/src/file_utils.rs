@@ -1,3 +1,4 @@
+use std::fs::read_to_string;
 use std::io::Write;
 use std::path::Path;
 
@@ -311,6 +312,13 @@ pub fn create_or_append(s: &str, filename: &Path) {
     if let Ok(mut f) = f {
         f.write_all(s.as_bytes()).unwrap();
     } else {
+        write_string_to_file(s, filename);
+    }
+}
+
+pub fn overwrite_if_not_same_contents(s: &str, filename: &Path) {
+    let f = read_to_string(filename).unwrap();
+    if f != s {
         write_string_to_file(s, filename);
     }
 }

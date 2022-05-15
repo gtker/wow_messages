@@ -14,6 +14,9 @@ pub mod new_enums;
 mod opcodes;
 pub mod rust_view;
 mod structs;
+mod update_mask;
+
+pub use update_mask::*;
 
 #[derive(Debug)]
 pub struct Writer {
@@ -57,9 +60,8 @@ impl Writer {
         }
     }
 
-    #[allow(unused)]
-    pub fn print(&self) {
-        println!("{}", self.inner);
+    pub fn inner(&self) -> &str {
+        &self.inner
     }
 
     pub fn open_curly<S: AsRef<str>>(&mut self, s: S) {
