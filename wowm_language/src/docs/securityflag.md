@@ -45,3 +45,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `UNKNOWN0` | 2 (0x02) |  |  |
 | `AUTHENTICATOR` | 4 (0x04) |  |  |
 
+Used in:
+* [CMD_AUTH_LOGON_CHALLENGE_Server](cmd_auth_logon_challenge_server.md)
+* [CMD_AUTH_LOGON_PROOF_Client](cmd_auth_logon_proof_client.md)

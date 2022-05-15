@@ -28,3 +28,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `INACTIVE` | 32 (0x20) |  | player controlled, state stored in characters.data ( CMSG_SET_FACTION_INACTIVE ) |
 | `RIVAL` | 64 (0x40) |  | flag for the two competing outland factions |
 
+Used in:
+* [FactionInitializer](factioninitializer.md)

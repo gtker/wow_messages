@@ -32,3 +32,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `AFK` | 64 (0x40) |  | Lua_UnitIsAFK |
 | `DND` | 128 (0x80) |  | Lua_UnitIsDND |
 
+Used in:
+* [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
+* [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)

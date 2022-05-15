@@ -52,3 +52,5 @@ The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 | `LOCKED` | 16384 (0x4000) |  | 199 spells, opening object/lock |
 | `CORPSE_ALLY` | 32768 (0x8000) |  | pguid, CanAssist == true |
 
+Used in:
+* [SpellCastTargets](spellcasttargets.md)

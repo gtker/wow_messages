@@ -30,3 +30,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `LIVING` | 32 (0x20) |  |  |
 | `HAS_POSITION` | 64 (0x40) |  |  |
 
+Used in:
+* [MovementBlock](movementblock.md)

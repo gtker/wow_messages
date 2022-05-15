@@ -20,3 +20,5 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `TRIAL` | 8 (0x08) |  |  |
 | `PROPASS` | 8388608 (0x800000) |  |  |
 
+Used in:
+* [CMD_AUTH_LOGON_PROOF_Server](cmd_auth_logon_proof_server.md)

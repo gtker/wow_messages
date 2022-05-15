@@ -257,6 +257,15 @@ pub fn print_docs_for_flag(e: &Definer) -> DocWriter {
 
     print_definer_table(&mut s, e);
 
+    s.wln("Used in:");
+    for c in e.objects_used_in() {
+        s.wln(format!(
+            "* [{ty}]({ty_path}.md)",
+            ty = c.0,
+            ty_path = c.0.to_lowercase(),
+        ));
+    }
+
     s
 }
 

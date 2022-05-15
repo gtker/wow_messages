@@ -26,3 +26,5 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `GHOST` | 8192 (0x2000) |  |  |
 | `RENAME` | 16384 (0x4000) |  |  |
 
+Used in:
+* [Character](character.md)

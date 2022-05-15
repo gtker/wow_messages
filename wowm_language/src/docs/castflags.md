@@ -34,3 +34,6 @@ The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 | `UNKNOWN8` | 128 (0x80) |  |  |
 | `UNKNOWN9` | 256 (0x100) |  |  |
 
+Used in:
+* [SMSG_SPELL_GO](smsg_spell_go.md)
+* [SMSG_SPELL_START](smsg_spell_start.md)

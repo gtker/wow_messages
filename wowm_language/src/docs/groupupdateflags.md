@@ -60,3 +60,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `FLAG_PET_AURAS_2` | 1048576 (0x100000) |  | uint16 above mask continuation, giving max total of 48 auras possible |
 | `MODE_OFFLINE` | 268435456 (0x10000000) |  |  |
 
+Used in:
+* [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
+* [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)

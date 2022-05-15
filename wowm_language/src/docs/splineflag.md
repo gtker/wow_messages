@@ -80,3 +80,5 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `UNKNOWN30` | 1073741824 (0x40000000) |  |  |
 | `UNKNOWN31` | 2147483648 (0x80000000) |  |  |
 
+Used in:
+* [MovementBlock](movementblock.md)

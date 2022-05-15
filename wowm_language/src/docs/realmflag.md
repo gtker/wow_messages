@@ -26,6 +26,8 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `FORCE_GREEN_RECOMMENDED` | 64 (0x40) |  |  |
 | `FORCE_RED_FULL` | 128 (0x80) |  |  |
 
+Used in:
+* [Realm](realm.md)
 ## Protocol Version 8
 
 ### Wowm Representation
@@ -56,3 +58,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `FORCE_GREEN_RECOMMENDED` | 64 (0x40) |  |  |
 | `FORCE_RED_FULL` | 128 (0x80) |  |  |
 
+Used in:
+* [Realm](realm.md)

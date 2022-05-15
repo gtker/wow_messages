@@ -64,3 +64,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `SAFE_FALL` | 536870912 (0x20000000) |  |  |
 | `HOVER` | 1073741824 (0x40000000) |  |  |
 
+Used in:
+* [MovementBlock](movementblock.md)
+* [MovementInfo](movementinfo.md)
