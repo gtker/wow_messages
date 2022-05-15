@@ -6537,6 +6537,7 @@ use crate::world::v1::v12::{SMSG_TRIGGER_CINEMATIC, SMSG_TRIGGER_CINEMATICError}
 use crate::world::v1::v12::SMSG_TUTORIAL_FLAGS;
 use crate::world::v1::v12::{SMSG_EMOTE, SMSG_EMOTEError};
 use crate::world::v1::v12::{SMSG_TEXT_EMOTE, SMSG_TEXT_EMOTEError};
+use crate::world::v1::v12::{SMSG_INVENTORY_CHANGE_FAILURE, SMSG_INVENTORY_CHANGE_FAILUREError};
 use crate::world::v1::v12::SMSG_OPEN_CONTAINER;
 use crate::world::v1::v12::SMSG_INSPECT;
 use crate::world::v1::v12::{SMSG_TRADE_STATUS, SMSG_TRADE_STATUSError};
@@ -6877,6 +6878,7 @@ pub enum ServerOpcode {
     SMSG_TUTORIAL_FLAGS,
     SMSG_EMOTE,
     SMSG_TEXT_EMOTE,
+    SMSG_INVENTORY_CHANGE_FAILURE,
     SMSG_OPEN_CONTAINER,
     SMSG_INSPECT,
     SMSG_TRADE_STATUS,
@@ -7219,6 +7221,7 @@ impl ServerOpcode {
             Self::SMSG_TUTORIAL_FLAGS => 0xfd,
             Self::SMSG_EMOTE => 0x103,
             Self::SMSG_TEXT_EMOTE => 0x105,
+            Self::SMSG_INVENTORY_CHANGE_FAILURE => 0x112,
             Self::SMSG_OPEN_CONTAINER => 0x113,
             Self::SMSG_INSPECT => 0x115,
             Self::SMSG_TRADE_STATUS => 0x120,
@@ -7564,6 +7567,7 @@ impl ServerOpcode {
             0xfd => Ok(Self::SMSG_TUTORIAL_FLAGS),
             0x103 => Ok(Self::SMSG_EMOTE),
             0x105 => Ok(Self::SMSG_TEXT_EMOTE),
+            0x112 => Ok(Self::SMSG_INVENTORY_CHANGE_FAILURE),
             0x113 => Ok(Self::SMSG_OPEN_CONTAINER),
             0x115 => Ok(Self::SMSG_INSPECT),
             0x120 => Ok(Self::SMSG_TRADE_STATUS),
@@ -7910,6 +7914,7 @@ impl From<&ServerOpcodeMessage> for ServerOpcode {
             ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(_) => Self::SMSG_TUTORIAL_FLAGS,
             ServerOpcodeMessage::SMSG_EMOTE(_) => Self::SMSG_EMOTE,
             ServerOpcodeMessage::SMSG_TEXT_EMOTE(_) => Self::SMSG_TEXT_EMOTE,
+            ServerOpcodeMessage::SMSG_INVENTORY_CHANGE_FAILURE(_) => Self::SMSG_INVENTORY_CHANGE_FAILURE,
             ServerOpcodeMessage::SMSG_OPEN_CONTAINER(_) => Self::SMSG_OPEN_CONTAINER,
             ServerOpcodeMessage::SMSG_INSPECT(_) => Self::SMSG_INSPECT,
             ServerOpcodeMessage::SMSG_TRADE_STATUS(_) => Self::SMSG_TRADE_STATUS,
@@ -8277,6 +8282,7 @@ pub enum ServerOpcodeMessage {
     SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS),
     SMSG_EMOTE(SMSG_EMOTE),
     SMSG_TEXT_EMOTE(SMSG_TEXT_EMOTE),
+    SMSG_INVENTORY_CHANGE_FAILURE(SMSG_INVENTORY_CHANGE_FAILURE),
     SMSG_OPEN_CONTAINER(SMSG_OPEN_CONTAINER),
     SMSG_INSPECT(SMSG_INSPECT),
     SMSG_TRADE_STATUS(SMSG_TRADE_STATUS),
@@ -8622,6 +8628,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
             Self::SMSG_TUTORIAL_FLAGS(i) => i.write_body(w)?,
             Self::SMSG_EMOTE(i) => i.write_body(w)?,
             Self::SMSG_TEXT_EMOTE(i) => i.write_body(w)?,
+            Self::SMSG_INVENTORY_CHANGE_FAILURE(i) => i.write_body(w)?,
             Self::SMSG_OPEN_CONTAINER(i) => i.write_body(w)?,
             Self::SMSG_INSPECT(i) => i.write_body(w)?,
             Self::SMSG_TRADE_STATUS(i) => i.write_body(w)?,
@@ -8968,6 +8975,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
             0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS::read_body(r, size)?)),
             0x0103 => Ok(Self::SMSG_EMOTE(SMSG_EMOTE::read_body(r, size)?)),
             0x0105 => Ok(Self::SMSG_TEXT_EMOTE(SMSG_TEXT_EMOTE::read_body(r, size)?)),
+            0x0112 => Ok(Self::SMSG_INVENTORY_CHANGE_FAILURE(SMSG_INVENTORY_CHANGE_FAILURE::read_body(r, size)?)),
             0x0113 => Ok(Self::SMSG_OPEN_CONTAINER(SMSG_OPEN_CONTAINER::read_body(r, size)?)),
             0x0115 => Ok(Self::SMSG_INSPECT(SMSG_INSPECT::read_body(r, size)?)),
             0x0120 => Ok(Self::SMSG_TRADE_STATUS(SMSG_TRADE_STATUS::read_body(r, size)?)),
@@ -9315,6 +9323,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
             0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS::read_body(r, header_size)?)),
             0x0103 => Ok(Self::SMSG_EMOTE(SMSG_EMOTE::read_body(r, header_size)?)),
             0x0105 => Ok(Self::SMSG_TEXT_EMOTE(SMSG_TEXT_EMOTE::read_body(r, header_size)?)),
+            0x0112 => Ok(Self::SMSG_INVENTORY_CHANGE_FAILURE(SMSG_INVENTORY_CHANGE_FAILURE::read_body(r, header_size)?)),
             0x0113 => Ok(Self::SMSG_OPEN_CONTAINER(SMSG_OPEN_CONTAINER::read_body(r, header_size)?)),
             0x0115 => Ok(Self::SMSG_INSPECT(SMSG_INSPECT::read_body(r, header_size)?)),
             0x0120 => Ok(Self::SMSG_TRADE_STATUS(SMSG_TRADE_STATUS::read_body(r, header_size)?)),
@@ -9659,6 +9668,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
             Self::SMSG_TUTORIAL_FLAGS(i) => i.write_encrypted_server(w, e)?,
             Self::SMSG_EMOTE(i) => i.write_encrypted_server(w, e)?,
             Self::SMSG_TEXT_EMOTE(i) => i.write_encrypted_server(w, e)?,
+            Self::SMSG_INVENTORY_CHANGE_FAILURE(i) => i.write_encrypted_server(w, e)?,
             Self::SMSG_OPEN_CONTAINER(i) => i.write_encrypted_server(w, e)?,
             Self::SMSG_INSPECT(i) => i.write_encrypted_server(w, e)?,
             Self::SMSG_TRADE_STATUS(i) => i.write_encrypted_server(w, e)?,
@@ -10016,6 +10026,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
                 Self::SMSG_TUTORIAL_FLAGS(i) => i.tokio_write_body(w).await?,
                 Self::SMSG_EMOTE(i) => i.tokio_write_body(w).await?,
                 Self::SMSG_TEXT_EMOTE(i) => i.tokio_write_body(w).await?,
+                Self::SMSG_INVENTORY_CHANGE_FAILURE(i) => i.tokio_write_body(w).await?,
                 Self::SMSG_OPEN_CONTAINER(i) => i.tokio_write_body(w).await?,
                 Self::SMSG_INSPECT(i) => i.tokio_write_body(w).await?,
                 Self::SMSG_TRADE_STATUS(i) => i.tokio_write_body(w).await?,
@@ -10373,6 +10384,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
                 0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS::tokio_read_body(r, size).await?)),
                 0x0103 => Ok(Self::SMSG_EMOTE(SMSG_EMOTE::tokio_read_body(r, size).await?)),
                 0x0105 => Ok(Self::SMSG_TEXT_EMOTE(SMSG_TEXT_EMOTE::tokio_read_body(r, size).await?)),
+                0x0112 => Ok(Self::SMSG_INVENTORY_CHANGE_FAILURE(SMSG_INVENTORY_CHANGE_FAILURE::tokio_read_body(r, size).await?)),
                 0x0113 => Ok(Self::SMSG_OPEN_CONTAINER(SMSG_OPEN_CONTAINER::tokio_read_body(r, size).await?)),
                 0x0115 => Ok(Self::SMSG_INSPECT(SMSG_INSPECT::tokio_read_body(r, size).await?)),
                 0x0120 => Ok(Self::SMSG_TRADE_STATUS(SMSG_TRADE_STATUS::tokio_read_body(r, size).await?)),
@@ -10734,6 +10746,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
                 0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS::tokio_read_body(r, header_size).await?)),
                 0x0103 => Ok(Self::SMSG_EMOTE(SMSG_EMOTE::tokio_read_body(r, header_size).await?)),
                 0x0105 => Ok(Self::SMSG_TEXT_EMOTE(SMSG_TEXT_EMOTE::tokio_read_body(r, header_size).await?)),
+                0x0112 => Ok(Self::SMSG_INVENTORY_CHANGE_FAILURE(SMSG_INVENTORY_CHANGE_FAILURE::tokio_read_body(r, header_size).await?)),
                 0x0113 => Ok(Self::SMSG_OPEN_CONTAINER(SMSG_OPEN_CONTAINER::tokio_read_body(r, header_size).await?)),
                 0x0115 => Ok(Self::SMSG_INSPECT(SMSG_INSPECT::tokio_read_body(r, header_size).await?)),
                 0x0120 => Ok(Self::SMSG_TRADE_STATUS(SMSG_TRADE_STATUS::tokio_read_body(r, header_size).await?)),
@@ -11094,6 +11107,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
                 Self::SMSG_TUTORIAL_FLAGS(i) => i.tokio_write_encrypted_server(w, e).await?,
                 Self::SMSG_EMOTE(i) => i.tokio_write_encrypted_server(w, e).await?,
                 Self::SMSG_TEXT_EMOTE(i) => i.tokio_write_encrypted_server(w, e).await?,
+                Self::SMSG_INVENTORY_CHANGE_FAILURE(i) => i.tokio_write_encrypted_server(w, e).await?,
                 Self::SMSG_OPEN_CONTAINER(i) => i.tokio_write_encrypted_server(w, e).await?,
                 Self::SMSG_INSPECT(i) => i.tokio_write_encrypted_server(w, e).await?,
                 Self::SMSG_TRADE_STATUS(i) => i.tokio_write_encrypted_server(w, e).await?,
@@ -11452,6 +11466,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
                 Self::SMSG_TUTORIAL_FLAGS(i) => i.astd_write_body(w).await?,
                 Self::SMSG_EMOTE(i) => i.astd_write_body(w).await?,
                 Self::SMSG_TEXT_EMOTE(i) => i.astd_write_body(w).await?,
+                Self::SMSG_INVENTORY_CHANGE_FAILURE(i) => i.astd_write_body(w).await?,
                 Self::SMSG_OPEN_CONTAINER(i) => i.astd_write_body(w).await?,
                 Self::SMSG_INSPECT(i) => i.astd_write_body(w).await?,
                 Self::SMSG_TRADE_STATUS(i) => i.astd_write_body(w).await?,
@@ -11809,6 +11824,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
                 0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS::astd_read_body(r, size).await?)),
                 0x0103 => Ok(Self::SMSG_EMOTE(SMSG_EMOTE::astd_read_body(r, size).await?)),
                 0x0105 => Ok(Self::SMSG_TEXT_EMOTE(SMSG_TEXT_EMOTE::astd_read_body(r, size).await?)),
+                0x0112 => Ok(Self::SMSG_INVENTORY_CHANGE_FAILURE(SMSG_INVENTORY_CHANGE_FAILURE::astd_read_body(r, size).await?)),
                 0x0113 => Ok(Self::SMSG_OPEN_CONTAINER(SMSG_OPEN_CONTAINER::astd_read_body(r, size).await?)),
                 0x0115 => Ok(Self::SMSG_INSPECT(SMSG_INSPECT::astd_read_body(r, size).await?)),
                 0x0120 => Ok(Self::SMSG_TRADE_STATUS(SMSG_TRADE_STATUS::astd_read_body(r, size).await?)),
@@ -12170,6 +12186,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
                 0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS::astd_read_body(r, header_size).await?)),
                 0x0103 => Ok(Self::SMSG_EMOTE(SMSG_EMOTE::astd_read_body(r, header_size).await?)),
                 0x0105 => Ok(Self::SMSG_TEXT_EMOTE(SMSG_TEXT_EMOTE::astd_read_body(r, header_size).await?)),
+                0x0112 => Ok(Self::SMSG_INVENTORY_CHANGE_FAILURE(SMSG_INVENTORY_CHANGE_FAILURE::astd_read_body(r, header_size).await?)),
                 0x0113 => Ok(Self::SMSG_OPEN_CONTAINER(SMSG_OPEN_CONTAINER::astd_read_body(r, header_size).await?)),
                 0x0115 => Ok(Self::SMSG_INSPECT(SMSG_INSPECT::astd_read_body(r, header_size).await?)),
                 0x0120 => Ok(Self::SMSG_TRADE_STATUS(SMSG_TRADE_STATUS::astd_read_body(r, header_size).await?)),
@@ -12530,6 +12547,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
                 Self::SMSG_TUTORIAL_FLAGS(i) => i.astd_write_encrypted_server(w, e).await?,
                 Self::SMSG_EMOTE(i) => i.astd_write_encrypted_server(w, e).await?,
                 Self::SMSG_TEXT_EMOTE(i) => i.astd_write_encrypted_server(w, e).await?,
+                Self::SMSG_INVENTORY_CHANGE_FAILURE(i) => i.astd_write_encrypted_server(w, e).await?,
                 Self::SMSG_OPEN_CONTAINER(i) => i.astd_write_encrypted_server(w, e).await?,
                 Self::SMSG_INSPECT(i) => i.astd_write_encrypted_server(w, e).await?,
                 Self::SMSG_TRADE_STATUS(i) => i.astd_write_encrypted_server(w, e).await?,
@@ -12827,6 +12845,7 @@ pub enum ServerOpcodeMessageError {
     SMSG_TRIGGER_CINEMATIC(SMSG_TRIGGER_CINEMATICError),
     SMSG_EMOTE(SMSG_EMOTEError),
     SMSG_TEXT_EMOTE(SMSG_TEXT_EMOTEError),
+    SMSG_INVENTORY_CHANGE_FAILURE(SMSG_INVENTORY_CHANGE_FAILUREError),
     SMSG_TRADE_STATUS(SMSG_TRADE_STATUSError),
     SMSG_SET_PROFICIENCY(SMSG_SET_PROFICIENCYError),
     SMSG_CAST_RESULT(SMSG_CAST_RESULTError),
@@ -12970,6 +12989,7 @@ impl std::fmt::Display for ServerOpcodeMessageError {
             Self::SMSG_TRIGGER_CINEMATIC(i) => i.fmt(f),
             Self::SMSG_EMOTE(i) => i.fmt(f),
             Self::SMSG_TEXT_EMOTE(i) => i.fmt(f),
+            Self::SMSG_INVENTORY_CHANGE_FAILURE(i) => i.fmt(f),
             Self::SMSG_TRADE_STATUS(i) => i.fmt(f),
             Self::SMSG_SET_PROFICIENCY(i) => i.fmt(f),
             Self::SMSG_CAST_RESULT(i) => i.fmt(f),
@@ -13424,6 +13444,15 @@ impl From<SMSG_TEXT_EMOTEError> for ServerOpcodeMessageError {
         match e {
             SMSG_TEXT_EMOTEError::Io(i) => Self::Io(i),
             _ => Self::SMSG_TEXT_EMOTE(e),
+        }
+    }
+}
+
+impl From<SMSG_INVENTORY_CHANGE_FAILUREError> for ServerOpcodeMessageError {
+    fn from(e: SMSG_INVENTORY_CHANGE_FAILUREError) -> Self {
+        match e {
+            SMSG_INVENTORY_CHANGE_FAILUREError::Io(i) => Self::Io(i),
+            _ => Self::SMSG_INVENTORY_CHANGE_FAILURE(e),
         }
     }
 }

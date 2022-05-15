@@ -630,6 +630,7 @@
 - [SMSG_INSTANCE_RESET_FAILED](docs/smsg_instance_reset_failed.md)
 - [SMSG_INSTANCE_SAVE_CREATED](docs/smsg_instance_save_created.md)
 - [SMSG_INVALIDATE_PLAYER](docs/smsg_invalidate_player.md)
+- [SMSG_INVENTORY_CHANGE_FAILURE](docs/smsg_inventory_change_failure.md)
 - [SMSG_ITEM_COOLDOWN](docs/smsg_item_cooldown.md)
 - [SMSG_ITEM_ENCHANT_TIME_UPDATE](docs/smsg_item_enchant_time_update.md)
 - [SMSG_ITEM_NAME_QUERY_RESPONSE](docs/smsg_item_name_query_response.md)

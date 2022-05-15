@@ -1,0 +1,90 @@
+#tag_all versions "1.12";
+
+
+
+smsg SMSG_INVENTORY_CHANGE_FAILURE = 0x0112 {
+    InventoryResult result;
+    if (result == CANT_EQUIP_SKILL
+        || result == ITEM_DOESNT_GO_TO_SLOT
+        || result == BAG_FULL
+        || result == NONEMPTY_BAG_OVER_OTHER_BAG
+        || result == CANT_TRADE_EQUIP_BAGS
+        || result == ONLY_AMMO_CAN_GO_HERE
+        || result == NO_REQUIRED_PROFICIENCY
+        || result == NO_EQUIPMENT_SLOT_AVAILABLE
+        || result == YOU_CAN_NEVER_USE_THAT_ITEM
+        || result == YOU_CAN_NEVER_USE_THAT_ITEM2
+        || result == NO_EQUIPMENT_SLOT_AVAILABLE2
+        || result == CANT_EQUIP_WITH_TWOHANDED
+        || result == CANT_DUAL_WIELD
+        || result == ITEM_DOESNT_GO_INTO_BAG
+        || result == ITEM_DOESNT_GO_INTO_BAG2
+        || result == CANT_CARRY_MORE_OF_THIS
+        || result == NO_EQUIPMENT_SLOT_AVAILABLE3
+        || result == ITEM_CANT_STACK
+        || result == ITEM_CANT_BE_EQUIPPED
+        || result == ITEMS_CANT_BE_SWAPPED
+        || result == SLOT_IS_EMPTY
+        || result == ITEM_NOT_FOUND
+        || result == CANT_DROP_SOULBOUND
+        || result == OUT_OF_RANGE
+        || result == TRIED_TO_SPLIT_MORE_THAN_COUNT
+        || result == COULDNT_SPLIT_ITEMS
+        || result == MISSING_REAGENT
+        || result == NOT_ENOUGH_MONEY
+        || result == NOT_A_BAG
+        || result == CAN_ONLY_DO_WITH_EMPTY_BAGS
+        || result == DONT_OWN_THAT_ITEM
+        || result == CAN_EQUIP_ONLY1_QUIVER
+        || result == MUST_PURCHASE_THAT_BAG_SLOT
+        || result == TOO_FAR_AWAY_FROM_BANK
+        || result == ITEM_LOCKED
+        || result == YOU_ARE_STUNNED
+        || result == YOU_ARE_DEAD
+        || result == CANT_DO_RIGHT_NOW
+        || result == INT_BAG_ERROR
+        || result == CAN_EQUIP_ONLY1_BOLT
+        || result == CAN_EQUIP_ONLY1_AMMOPOUCH
+        || result == STACKABLE_CANT_BE_WRAPPED
+        || result == EQUIPPED_CANT_BE_WRAPPED
+        || result == WRAPPED_CANT_BE_WRAPPED
+        || result == BOUND_CANT_BE_WRAPPED
+        || result == UNIQUE_CANT_BE_WRAPPED
+        || result == BAGS_CANT_BE_WRAPPED
+        || result == ALREADY_LOOTED
+        || result == INVENTORY_FULL
+        || result == BANK_FULL
+        || result == ITEM_IS_CURRENTLY_SOLD_OUT
+        || result == BAG_FULL3
+        || result == ITEM_NOT_FOUND2
+        || result == ITEM_CANT_STACK2
+        || result == BAG_FULL4
+        || result == ITEM_SOLD_OUT
+        || result == OBJECT_IS_BUSY
+        || result == NONE
+        || result == NOT_IN_COMBAT
+        || result == NOT_WHILE_DISARMED
+        || result == BAG_FULL6
+        || result == CANT_EQUIP_RANK
+        || result == CANT_EQUIP_REPUTATION
+        || result == TOO_MANY_SPECIAL_BAGS
+        || result == LOOT_CANT_LOOT_THAT_NOW
+    ) {
+        u64 item1_guid;
+        u64 item2_guid;
+        u8 bag_type_subclass {
+            comment = "cmangos: bag type subclass, used with EQUIP_ERR_EVENT_AUTOEQUIP_BIND_CONFIRM and EQUIP_ERR_ITEM_DOESNT_GO_INTO_BAG2";
+            comment = "vmangos sets to 0";
+        }
+    }
+    else if (result == CANT_EQUIP_LEVEL_I) {
+        u32 required_level;
+        u64 item1_guid2;
+        u64 item2_guid2;
+        u8 bag_type_subclass2 {
+            comment = "cmangos: bag type subclass, used with EQUIP_ERR_EVENT_AUTOEQUIP_BIND_CONFIRM and EQUIP_ERR_ITEM_DOESNT_GO_INTO_BAG2";
+            comment = "vmangos sets to 0";
+        }
+    }
+}
+

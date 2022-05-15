@@ -1105,6 +1105,8 @@ mod smsg_instance_save_created;
 pub use smsg_instance_save_created::*;
 mod smsg_invalidate_player;
 pub use smsg_invalidate_player::*;
+mod smsg_inventory_change_failure;
+pub use smsg_inventory_change_failure::*;
 mod smsg_item_cooldown;
 pub use smsg_item_cooldown::*;
 mod smsg_item_enchant_time_update;
