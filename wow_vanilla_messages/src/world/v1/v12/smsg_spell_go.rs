@@ -134,7 +134,12 @@ impl MessageBody for SMSG_SPELL_GO {
         self.targets.write(w)?;
 
         if let Some(s) = &self.flags.ammo {
-            s.write(w)?;
+            // ammo_display_id: u32
+            w.write_all(&s.ammo_display_id.to_le_bytes())?;
+
+            // ammo_inventory_type: u32
+            w.write_all(&s.ammo_inventory_type.to_le_bytes())?;
+
         }
 
         Ok(())
@@ -265,7 +270,12 @@ impl MessageBody for SMSG_SPELL_GO {
             self.targets.tokio_write(w).await?;
 
             if let Some(s) = &self.flags.ammo {
-                s.tokio_write(w).await?;
+                // ammo_display_id: u32
+                w.write_all(&s.ammo_display_id.to_le_bytes()).await?;
+
+                // ammo_inventory_type: u32
+                w.write_all(&s.ammo_inventory_type.to_le_bytes()).await?;
+
             }
 
             Ok(())
@@ -397,7 +407,12 @@ impl MessageBody for SMSG_SPELL_GO {
             self.targets.astd_write(w).await?;
 
             if let Some(s) = &self.flags.ammo {
-                s.astd_write(w).await?;
+                // ammo_display_id: u32
+                w.write_all(&s.ammo_display_id.to_le_bytes()).await?;
+
+                // ammo_inventory_type: u32
+                w.write_all(&s.ammo_inventory_type.to_le_bytes()).await?;
+
             }
 
             Ok(())
@@ -785,41 +800,5 @@ impl MaximumPossibleSized for SMSG_SPELL_GOCastFlagsAMMO {
         4 // ammo_display_id: u32
         + 4 // ammo_inventory_type: u32
     }
-}
-
-impl SMSG_SPELL_GOCastFlagsAMMO {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // ammo_display_id: u32
-        w.write_all(&self.ammo_display_id.to_le_bytes())?;
-
-        // ammo_inventory_type: u32
-        w.write_all(&self.ammo_inventory_type.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // ammo_display_id: u32
-        w.write_all(&self.ammo_display_id.to_le_bytes()).await?;
-
-        // ammo_inventory_type: u32
-        w.write_all(&self.ammo_inventory_type.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // ammo_display_id: u32
-        w.write_all(&self.ammo_display_id.to_le_bytes()).await?;
-
-        // ammo_inventory_type: u32
-        w.write_all(&self.ammo_inventory_type.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
 }
 

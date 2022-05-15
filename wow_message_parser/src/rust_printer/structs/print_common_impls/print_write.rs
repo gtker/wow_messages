@@ -348,26 +348,32 @@ pub fn print_write_definition(
 
 fn print_write_flag_if_statement(
     s: &mut Writer,
+    e: &Container,
+    o: &Objects,
     variable_prefix: &str,
     statement: &IfStatement,
     prefix: &str,
     postfix: &str,
 ) {
-    s.bodyn(
-        format!(
-            "if let Some(s) = &{variable_prefix}{variable}.{variant}",
-            variable_prefix = variable_prefix,
-            variable = statement.name(),
-            variant = &statement.flag_get_enumerator().to_lowercase(),
-        ),
-        |s| {
-            s.wln(format!(
-                "s.{prefix}write(w){postfix}?;",
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        },
-    );
+    s.open_curly(format!(
+        "if let Some(s) = &{variable_prefix}{variable}.{variant}",
+        variable_prefix = variable_prefix,
+        variable = statement.name(),
+        variant = &statement.flag_get_enumerator().to_lowercase(),
+    ));
+    if statement.else_ifs().is_empty() {
+        for m in statement.members() {
+            print_write_field(s, e, o, m, "s.", prefix, postfix);
+        }
+    } else {
+        s.wln(format!(
+            "s.{prefix}write(w){postfix}?;",
+            prefix = prefix,
+            postfix = postfix,
+        ));
+    }
+
+    s.closing_curly_newline(); // if let Some(s)
 }
 
 pub fn print_write_field(
@@ -388,7 +394,7 @@ pub fn print_write_field(
                 print_write_if_enum_statement(s, e, o, variable_prefix, statement, prefix, postfix);
             }
             DefinerType::Flag => {
-                print_write_flag_if_statement(s, variable_prefix, statement, prefix, postfix);
+                print_write_flag_if_statement(s, e, o, variable_prefix, statement, prefix, postfix);
             }
         },
         StructMember::OptionalStatement(optional) => {

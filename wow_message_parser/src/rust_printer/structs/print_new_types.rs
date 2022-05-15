@@ -2,15 +2,13 @@ use crate::container::Container;
 use crate::parser::types::objects::Objects;
 use crate::rust_printer::new_enums::{IfStatementType, NewEnumStructMember, NewIfStatement};
 use crate::rust_printer::rust_view::RustDefiner;
+use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
 use crate::rust_printer::structs::print_common_impls::print_write::{
-    print_enum_if_statement_new, print_flag_if_statement, print_write_definition, print_write_field,
-};
-use crate::rust_printer::structs::print_common_impls::{
-    print_constant, print_size_of_ty_rust_view,
+    print_enum_if_statement_new, print_flag_if_statement, print_write_definition,
 };
 use crate::rust_printer::structs::print_tests::get_enumerator;
 use crate::rust_printer::DefinerType;
-use crate::rust_printer::{ImplType, Writer};
+use crate::rust_printer::Writer;
 
 fn print_as_flag_value(s: &mut Writer, rd: &RustDefiner) {
     s.funcn_const("as_flag_value(&self)", rd.int_ty().rust_str(), |s| {
@@ -453,29 +451,6 @@ fn print_types_for_new_flag(s: &mut Writer, e: &Container, o: &Objects, rd: &Rus
                         name = m.name(),
                         ty = m.ty().str()
                     ));
-                }
-            },
-        );
-
-        s.bodyn(
-            format!("impl {}", new_type_name),
-            |s| {
-
-                for m in enumerator.original_fields() {
-                    print_constant(s, m);
-                }
-
-                for it in ImplType::types() {
-
-                    s.wln(it.cfg());
-                    let header = format!("pub {func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>", func = it.func(), prefix = it.prefix(), write = it.write());
-                    s.bodyn(header, |s| {
-                        for m in enumerator.original_fields() {
-                            print_write_field(s, e, o, m, "self.", it.prefix(), it.postfix());
-                        }
-
-                        s.wln("Ok(())");
-                    });
                 }
             },
         );

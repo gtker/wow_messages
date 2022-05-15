@@ -98,7 +98,9 @@ impl ReadableAndWritable for FlagIfElseIf {
         }
 
         if let Some(s) = &self.flags.eight_if {
-            s.write(w)?;
+            // last_if: u8
+            w.write_all(&s.last_if.to_le_bytes())?;
+
         }
 
         Ok(())
@@ -210,7 +212,9 @@ impl ReadableAndWritable for FlagIfElseIf {
             }
 
             if let Some(s) = &self.flags.eight_if {
-                s.tokio_write(w).await?;
+                // last_if: u8
+                w.write_all(&s.last_if.to_le_bytes()).await?;
+
             }
 
             Ok(())
@@ -323,7 +327,9 @@ impl ReadableAndWritable for FlagIfElseIf {
             }
 
             if let Some(s) = &self.flags.eight_if {
-                s.astd_write(w).await?;
+                // last_if: u8
+                w.write_all(&s.last_if.to_le_bytes()).await?;
+
             }
 
             Ok(())
@@ -495,33 +501,6 @@ impl MaximumPossibleSized for FlagIfElseIfSimpleFlagONE {
     fn maximum_possible_size() -> usize {
         1 // if_one: u8
     }
-}
-
-impl FlagIfElseIfSimpleFlagONE {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // if_one: u8
-        w.write_all(&self.if_one.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // if_one: u8
-        w.write_all(&self.if_one.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // if_one: u8
-        w.write_all(&self.if_one.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -845,32 +824,5 @@ impl MaximumPossibleSized for FlagIfElseIfUpdateFlagEIGHT_IF {
     fn maximum_possible_size() -> usize {
         1 // last_if: u8
     }
-}
-
-impl FlagIfElseIfUpdateFlagEIGHT_IF {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // last_if: u8
-        w.write_all(&self.last_if.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // last_if: u8
-        w.write_all(&self.last_if.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // last_if: u8
-        w.write_all(&self.last_if.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
 }
 

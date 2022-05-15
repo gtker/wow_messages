@@ -120,7 +120,9 @@ impl ReadableAndWritable for Realm {
         w.write_all(&self.realm_id.to_le_bytes())?;
 
         if let Some(s) = &self.flag.specify_build {
-            s.write(w)?;
+            // version: Version
+            s.version.write(w)?;
+
         }
 
         Ok(())
@@ -244,7 +246,9 @@ impl ReadableAndWritable for Realm {
             w.write_all(&self.realm_id.to_le_bytes()).await?;
 
             if let Some(s) = &self.flag.specify_build {
-                s.tokio_write(w).await?;
+                // version: Version
+                s.version.tokio_write(w).await?;
+
             }
 
             Ok(())
@@ -369,7 +373,9 @@ impl ReadableAndWritable for Realm {
             w.write_all(&self.realm_id.to_le_bytes()).await?;
 
             if let Some(s) = &self.flag.specify_build {
-                s.astd_write(w).await?;
+                // version: Version
+                s.version.astd_write(w).await?;
+
             }
 
             Ok(())
@@ -685,32 +691,5 @@ impl MaximumPossibleSized for RealmRealmFlagSPECIFY_BUILD {
     fn maximum_possible_size() -> usize {
         5 // version: Version
     }
-}
-
-impl RealmRealmFlagSPECIFY_BUILD {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // version: Version
-        self.version.write(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // version: Version
-        self.version.tokio_write(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // version: Version
-        self.version.astd_write(w).await?;
-
-        Ok(())
-    }
-
 }
 

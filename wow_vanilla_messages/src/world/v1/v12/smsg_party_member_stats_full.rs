@@ -296,75 +296,116 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
         self.mask.write(w)?;
 
         if let Some(s) = &self.mask.flag_status {
-            s.write(w)?;
+            // status: GroupMemberOnlineStatus
+            s.status.write(w)?;
+
         }
 
         if let Some(s) = &self.mask.flag_cur_hp {
-            s.write(w)?;
+            // current_health: u16
+            w.write_all(&s.current_health.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.mask.flag_max_hp {
-            s.write(w)?;
+            // max_health: u16
+            w.write_all(&s.max_health.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.mask.flag_power_type {
-            s.write(w)?;
+            // power: Power
+            s.power.write(w)?;
+
         }
 
         if let Some(s) = &self.mask.flag_cur_power {
-            s.write(w)?;
+            // current_power: u16
+            w.write_all(&s.current_power.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.mask.flag_max_power {
-            s.write(w)?;
+            // max_power: u16
+            w.write_all(&s.max_power.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.mask.flag_level {
-            s.write(w)?;
+            // level: u16
+            w.write_all(&s.level.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.mask.flag_zone {
-            s.write(w)?;
+            // area: Area
+            s.area.write(w)?;
+
         }
 
         if let Some(s) = &self.mask.flag_position {
-            s.write(w)?;
+            // position_x: u16
+            w.write_all(&s.position_x.to_le_bytes())?;
+
+            // position_y: u16
+            w.write_all(&s.position_y.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.mask.flag_auras {
-            s.write(w)?;
+            // auras: AuraMask
+            s.auras.write(w)?;
+
         }
 
         if let Some(s) = &self.mask.flag_pet_name {
-            s.write(w)?;
+            // pet_name: CString
+            w.write_all(s.pet_name.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
         }
 
         if let Some(s) = &self.mask.flag_pet_model_id {
-            s.write(w)?;
+            // pet_display_id: u16
+            w.write_all(&s.pet_display_id.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.mask.flag_pet_cur_hp {
-            s.write(w)?;
+            // pet_current_health: u16
+            w.write_all(&s.pet_current_health.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.mask.flag_pet_max_hp {
-            s.write(w)?;
+            // pet_max_health: u16
+            w.write_all(&s.pet_max_health.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.mask.flag_pet_power_type {
-            s.write(w)?;
+            // pet_power_type: Power
+            s.pet_power_type.write(w)?;
+
         }
 
         if let Some(s) = &self.mask.flag_pet_cur_power {
-            s.write(w)?;
+            // pet_current_power: u16
+            w.write_all(&s.pet_current_power.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.mask.flag_pet_max_power {
-            s.write(w)?;
+            // pet_max_power: u16
+            w.write_all(&s.pet_max_power.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.mask.flag_pet_auras {
-            s.write(w)?;
+            // pet_auras: AuraMask
+            s.pet_auras.write(w)?;
+
         }
 
         Ok(())
@@ -660,75 +701,116 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
             self.mask.tokio_write(w).await?;
 
             if let Some(s) = &self.mask.flag_status {
-                s.tokio_write(w).await?;
+                // status: GroupMemberOnlineStatus
+                s.status.tokio_write(w).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_cur_hp {
-                s.tokio_write(w).await?;
+                // current_health: u16
+                w.write_all(&s.current_health.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_max_hp {
-                s.tokio_write(w).await?;
+                // max_health: u16
+                w.write_all(&s.max_health.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_power_type {
-                s.tokio_write(w).await?;
+                // power: Power
+                s.power.tokio_write(w).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_cur_power {
-                s.tokio_write(w).await?;
+                // current_power: u16
+                w.write_all(&s.current_power.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_max_power {
-                s.tokio_write(w).await?;
+                // max_power: u16
+                w.write_all(&s.max_power.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_level {
-                s.tokio_write(w).await?;
+                // level: u16
+                w.write_all(&s.level.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_zone {
-                s.tokio_write(w).await?;
+                // area: Area
+                s.area.tokio_write(w).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_position {
-                s.tokio_write(w).await?;
+                // position_x: u16
+                w.write_all(&s.position_x.to_le_bytes()).await?;
+
+                // position_y: u16
+                w.write_all(&s.position_y.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_auras {
-                s.tokio_write(w).await?;
+                // auras: AuraMask
+                s.auras.tokio_write(w).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_name {
-                s.tokio_write(w).await?;
+                // pet_name: CString
+                w.write_all(s.pet_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_model_id {
-                s.tokio_write(w).await?;
+                // pet_display_id: u16
+                w.write_all(&s.pet_display_id.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_cur_hp {
-                s.tokio_write(w).await?;
+                // pet_current_health: u16
+                w.write_all(&s.pet_current_health.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_max_hp {
-                s.tokio_write(w).await?;
+                // pet_max_health: u16
+                w.write_all(&s.pet_max_health.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_power_type {
-                s.tokio_write(w).await?;
+                // pet_power_type: Power
+                s.pet_power_type.tokio_write(w).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_cur_power {
-                s.tokio_write(w).await?;
+                // pet_current_power: u16
+                w.write_all(&s.pet_current_power.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_max_power {
-                s.tokio_write(w).await?;
+                // pet_max_power: u16
+                w.write_all(&s.pet_max_power.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_auras {
-                s.tokio_write(w).await?;
+                // pet_auras: AuraMask
+                s.pet_auras.tokio_write(w).await?;
+
             }
 
             Ok(())
@@ -1025,75 +1107,116 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS_FULL {
             self.mask.astd_write(w).await?;
 
             if let Some(s) = &self.mask.flag_status {
-                s.astd_write(w).await?;
+                // status: GroupMemberOnlineStatus
+                s.status.astd_write(w).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_cur_hp {
-                s.astd_write(w).await?;
+                // current_health: u16
+                w.write_all(&s.current_health.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_max_hp {
-                s.astd_write(w).await?;
+                // max_health: u16
+                w.write_all(&s.max_health.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_power_type {
-                s.astd_write(w).await?;
+                // power: Power
+                s.power.astd_write(w).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_cur_power {
-                s.astd_write(w).await?;
+                // current_power: u16
+                w.write_all(&s.current_power.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_max_power {
-                s.astd_write(w).await?;
+                // max_power: u16
+                w.write_all(&s.max_power.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_level {
-                s.astd_write(w).await?;
+                // level: u16
+                w.write_all(&s.level.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_zone {
-                s.astd_write(w).await?;
+                // area: Area
+                s.area.astd_write(w).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_position {
-                s.astd_write(w).await?;
+                // position_x: u16
+                w.write_all(&s.position_x.to_le_bytes()).await?;
+
+                // position_y: u16
+                w.write_all(&s.position_y.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_auras {
-                s.astd_write(w).await?;
+                // auras: AuraMask
+                s.auras.astd_write(w).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_name {
-                s.astd_write(w).await?;
+                // pet_name: CString
+                w.write_all(s.pet_name.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_model_id {
-                s.astd_write(w).await?;
+                // pet_display_id: u16
+                w.write_all(&s.pet_display_id.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_cur_hp {
-                s.astd_write(w).await?;
+                // pet_current_health: u16
+                w.write_all(&s.pet_current_health.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_max_hp {
-                s.astd_write(w).await?;
+                // pet_max_health: u16
+                w.write_all(&s.pet_max_health.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_power_type {
-                s.astd_write(w).await?;
+                // pet_power_type: Power
+                s.pet_power_type.astd_write(w).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_cur_power {
-                s.astd_write(w).await?;
+                // pet_current_power: u16
+                w.write_all(&s.pet_current_power.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_max_power {
-                s.astd_write(w).await?;
+                // pet_max_power: u16
+                w.write_all(&s.pet_max_power.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.mask.flag_pet_auras {
-                s.astd_write(w).await?;
+                // pet_auras: AuraMask
+                s.pet_auras.astd_write(w).await?;
+
             }
 
             Ok(())
@@ -2368,33 +2491,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_S
     }
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_STATUS {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // status: GroupMemberOnlineStatus
-        self.status.write(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // status: GroupMemberOnlineStatus
-        self.status.tokio_write(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // status: GroupMemberOnlineStatus
-        self.status.astd_write(w).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP {
     pub current_health: u16,
@@ -2410,33 +2506,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_C
     fn maximum_possible_size() -> usize {
         2 // current_health: u16
     }
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_HP {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // current_health: u16
-        w.write_all(&self.current_health.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // current_health: u16
-        w.write_all(&self.current_health.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // current_health: u16
-        w.write_all(&self.current_health.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -2456,33 +2525,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_M
     }
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_HP {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // max_health: u16
-        w.write_all(&self.max_health.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // max_health: u16
-        w.write_all(&self.max_health.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // max_health: u16
-        w.write_all(&self.max_health.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
     pub power: Power,
@@ -2498,33 +2540,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
     fn maximum_possible_size() -> usize {
         1 // power: Power
     }
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POWER_TYPE {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // power: Power
-        self.power.write(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // power: Power
-        self.power.tokio_write(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // power: Power
-        self.power.astd_write(w).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -2544,33 +2559,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_C
     }
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_CUR_POWER {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // current_power: u16
-        w.write_all(&self.current_power.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // current_power: u16
-        w.write_all(&self.current_power.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // current_power: u16
-        w.write_all(&self.current_power.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER {
     pub max_power: u16,
@@ -2586,33 +2574,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_M
     fn maximum_possible_size() -> usize {
         2 // max_power: u16
     }
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_MAX_POWER {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // max_power: u16
-        w.write_all(&self.max_power.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // max_power: u16
-        w.write_all(&self.max_power.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // max_power: u16
-        w.write_all(&self.max_power.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -2632,33 +2593,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_L
     }
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_LEVEL {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // level: u16
-        w.write_all(&self.level.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // level: u16
-        w.write_all(&self.level.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // level: u16
-        w.write_all(&self.level.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
     pub area: Area,
@@ -2674,33 +2608,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_Z
     fn maximum_possible_size() -> usize {
         4 // area: Area
     }
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_ZONE {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // area: Area
-        self.area.write(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // area: Area
-        self.area.tokio_write(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // area: Area
-        self.area.astd_write(w).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -2723,42 +2630,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
     }
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_POSITION {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // position_x: u16
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: u16
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // position_x: u16
-        w.write_all(&self.position_x.to_le_bytes()).await?;
-
-        // position_y: u16
-        w.write_all(&self.position_y.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // position_x: u16
-        w.write_all(&self.position_x.to_le_bytes()).await?;
-
-        // position_y: u16
-        w.write_all(&self.position_y.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS {
     pub auras: AuraMask,
@@ -2774,33 +2645,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_A
     fn maximum_possible_size() -> usize {
         132 // auras: AuraMask
     }
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_AURAS {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // auras: AuraMask
-        self.auras.write(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // auras: AuraMask
-        self.auras.tokio_write(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // auras: AuraMask
-        self.auras.astd_write(w).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -2820,39 +2664,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
     }
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_NAME {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_name: CString
-        w.write_all(self.pet_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_name: CString
-        w.write_all(self.pet_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_name: CString
-        w.write_all(self.pet_name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID {
     pub pet_display_id: u16,
@@ -2868,33 +2679,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
     fn maximum_possible_size() -> usize {
         2 // pet_display_id: u16
     }
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MODEL_ID {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_display_id: u16
-        w.write_all(&self.pet_display_id.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_display_id: u16
-        w.write_all(&self.pet_display_id.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_display_id: u16
-        w.write_all(&self.pet_display_id.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -2914,33 +2698,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
     }
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_HP {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_current_health: u16
-        w.write_all(&self.pet_current_health.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_current_health: u16
-        w.write_all(&self.pet_current_health.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_current_health: u16
-        w.write_all(&self.pet_current_health.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP {
     pub pet_max_health: u16,
@@ -2956,33 +2713,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
     fn maximum_possible_size() -> usize {
         2 // pet_max_health: u16
     }
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_HP {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_max_health: u16
-        w.write_all(&self.pet_max_health.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_max_health: u16
-        w.write_all(&self.pet_max_health.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_max_health: u16
-        w.write_all(&self.pet_max_health.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -3002,33 +2732,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
     }
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_POWER_TYPE {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_power_type: Power
-        self.pet_power_type.write(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_power_type: Power
-        self.pet_power_type.tokio_write(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_power_type: Power
-        self.pet_power_type.astd_write(w).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER {
     pub pet_current_power: u16,
@@ -3044,33 +2747,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
     fn maximum_possible_size() -> usize {
         2 // pet_current_power: u16
     }
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_CUR_POWER {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_current_power: u16
-        w.write_all(&self.pet_current_power.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_current_power: u16
-        w.write_all(&self.pet_current_power.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_current_power: u16
-        w.write_all(&self.pet_current_power.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -3090,33 +2766,6 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
     }
 }
 
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_MAX_POWER {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_max_power: u16
-        w.write_all(&self.pet_max_power.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_max_power: u16
-        w.write_all(&self.pet_max_power.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_max_power: u16
-        w.write_all(&self.pet_max_power.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS {
     pub pet_auras: AuraMask,
@@ -3132,32 +2781,5 @@ impl MaximumPossibleSized for SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_P
     fn maximum_possible_size() -> usize {
         132 // pet_auras: AuraMask
     }
-}
-
-impl SMSG_PARTY_MEMBER_STATS_FULLGroupUpdateFlagsFLAG_PET_AURAS {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_auras: AuraMask
-        self.pet_auras.write(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_auras: AuraMask
-        self.pet_auras.tokio_write(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pet_auras: AuraMask
-        self.pet_auras.astd_write(w).await?;
-
-        Ok(())
-    }
-
 }
 

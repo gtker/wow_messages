@@ -133,22 +133,39 @@ impl ReadableAndWritable for MovementInfo {
         w.write_all(&self.orientation.to_le_bytes())?;
 
         if let Some(s) = &self.flags.on_transport {
-            s.write(w)?;
+            // transport: TransportInfo
+            s.transport.write(w)?;
+
         }
 
         if let Some(s) = &self.flags.swimming {
-            s.write(w)?;
+            // pitch: f32
+            w.write_all(&s.pitch.to_le_bytes())?;
+
         }
 
         // fall_time: f32
         w.write_all(&self.fall_time.to_le_bytes())?;
 
         if let Some(s) = &self.flags.jumping {
-            s.write(w)?;
+            // z_speed: f32
+            w.write_all(&s.z_speed.to_le_bytes())?;
+
+            // cos_angle: f32
+            w.write_all(&s.cos_angle.to_le_bytes())?;
+
+            // sin_angle: f32
+            w.write_all(&s.sin_angle.to_le_bytes())?;
+
+            // xy_speed: f32
+            w.write_all(&s.xy_speed.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.flags.spline_elevation {
-            s.write(w)?;
+            // spline_elevation: f32
+            w.write_all(&s.spline_elevation.to_le_bytes())?;
+
         }
 
         Ok(())
@@ -289,22 +306,39 @@ impl ReadableAndWritable for MovementInfo {
             w.write_all(&self.orientation.to_le_bytes()).await?;
 
             if let Some(s) = &self.flags.on_transport {
-                s.tokio_write(w).await?;
+                // transport: TransportInfo
+                s.transport.tokio_write(w).await?;
+
             }
 
             if let Some(s) = &self.flags.swimming {
-                s.tokio_write(w).await?;
+                // pitch: f32
+                w.write_all(&s.pitch.to_le_bytes()).await?;
+
             }
 
             // fall_time: f32
             w.write_all(&self.fall_time.to_le_bytes()).await?;
 
             if let Some(s) = &self.flags.jumping {
-                s.tokio_write(w).await?;
+                // z_speed: f32
+                w.write_all(&s.z_speed.to_le_bytes()).await?;
+
+                // cos_angle: f32
+                w.write_all(&s.cos_angle.to_le_bytes()).await?;
+
+                // sin_angle: f32
+                w.write_all(&s.sin_angle.to_le_bytes()).await?;
+
+                // xy_speed: f32
+                w.write_all(&s.xy_speed.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.flags.spline_elevation {
-                s.tokio_write(w).await?;
+                // spline_elevation: f32
+                w.write_all(&s.spline_elevation.to_le_bytes()).await?;
+
             }
 
             Ok(())
@@ -446,22 +480,39 @@ impl ReadableAndWritable for MovementInfo {
             w.write_all(&self.orientation.to_le_bytes()).await?;
 
             if let Some(s) = &self.flags.on_transport {
-                s.astd_write(w).await?;
+                // transport: TransportInfo
+                s.transport.astd_write(w).await?;
+
             }
 
             if let Some(s) = &self.flags.swimming {
-                s.astd_write(w).await?;
+                // pitch: f32
+                w.write_all(&s.pitch.to_le_bytes()).await?;
+
             }
 
             // fall_time: f32
             w.write_all(&self.fall_time.to_le_bytes()).await?;
 
             if let Some(s) = &self.flags.jumping {
-                s.astd_write(w).await?;
+                // z_speed: f32
+                w.write_all(&s.z_speed.to_le_bytes()).await?;
+
+                // cos_angle: f32
+                w.write_all(&s.cos_angle.to_le_bytes()).await?;
+
+                // sin_angle: f32
+                w.write_all(&s.sin_angle.to_le_bytes()).await?;
+
+                // xy_speed: f32
+                w.write_all(&s.xy_speed.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.flags.spline_elevation {
-                s.astd_write(w).await?;
+                // spline_elevation: f32
+                w.write_all(&s.spline_elevation.to_le_bytes()).await?;
+
             }
 
             Ok(())
@@ -1264,33 +1315,6 @@ impl MaximumPossibleSized for MovementInfoMovementFlagsON_TRANSPORT {
     }
 }
 
-impl MovementInfoMovementFlagsON_TRANSPORT {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // transport: TransportInfo
-        self.transport.write(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // transport: TransportInfo
-        self.transport.tokio_write(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // transport: TransportInfo
-        self.transport.astd_write(w).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct MovementInfoMovementFlagsJUMPING {
     pub cos_angle: f32,
@@ -1317,60 +1341,6 @@ impl MaximumPossibleSized for MovementInfoMovementFlagsJUMPING {
     }
 }
 
-impl MovementInfoMovementFlagsJUMPING {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // z_speed: f32
-        w.write_all(&self.z_speed.to_le_bytes())?;
-
-        // cos_angle: f32
-        w.write_all(&self.cos_angle.to_le_bytes())?;
-
-        // sin_angle: f32
-        w.write_all(&self.sin_angle.to_le_bytes())?;
-
-        // xy_speed: f32
-        w.write_all(&self.xy_speed.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // z_speed: f32
-        w.write_all(&self.z_speed.to_le_bytes()).await?;
-
-        // cos_angle: f32
-        w.write_all(&self.cos_angle.to_le_bytes()).await?;
-
-        // sin_angle: f32
-        w.write_all(&self.sin_angle.to_le_bytes()).await?;
-
-        // xy_speed: f32
-        w.write_all(&self.xy_speed.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // z_speed: f32
-        w.write_all(&self.z_speed.to_le_bytes()).await?;
-
-        // cos_angle: f32
-        w.write_all(&self.cos_angle.to_le_bytes()).await?;
-
-        // sin_angle: f32
-        w.write_all(&self.sin_angle.to_le_bytes()).await?;
-
-        // xy_speed: f32
-        w.write_all(&self.xy_speed.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct MovementInfoMovementFlagsSWIMMING {
     pub pitch: f32,
@@ -1388,33 +1358,6 @@ impl MaximumPossibleSized for MovementInfoMovementFlagsSWIMMING {
     }
 }
 
-impl MovementInfoMovementFlagsSWIMMING {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pitch: f32
-        w.write_all(&self.pitch.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pitch: f32
-        w.write_all(&self.pitch.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // pitch: f32
-        w.write_all(&self.pitch.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct MovementInfoMovementFlagsSPLINE_ELEVATION {
     pub spline_elevation: f32,
@@ -1430,32 +1373,5 @@ impl MaximumPossibleSized for MovementInfoMovementFlagsSPLINE_ELEVATION {
     fn maximum_possible_size() -> usize {
         4 // spline_elevation: f32
     }
-}
-
-impl MovementInfoMovementFlagsSPLINE_ELEVATION {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spline_elevation: f32
-        w.write_all(&self.spline_elevation.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spline_elevation: f32
-        w.write_all(&self.spline_elevation.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spline_elevation: f32
-        w.write_all(&self.spline_elevation.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
 }
 

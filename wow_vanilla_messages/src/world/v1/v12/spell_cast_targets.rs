@@ -189,47 +189,83 @@ impl ReadableAndWritable for SpellCastTargets {
         self.target_flags.write(w)?;
 
         if let Some(s) = &self.target_flags.unit {
-            s.write(w)?;
+            // unit_target1: PackedGuid
+            s.unit_target1.write_packed(w)?;
+
         }
 
         if let Some(s) = &self.target_flags.unit_enemy {
-            s.write(w)?;
+            // unit_target2: PackedGuid
+            s.unit_target2.write_packed(w)?;
+
         }
 
         if let Some(s) = &self.target_flags.gameobject {
-            s.write(w)?;
+            // object_target1: PackedGuid
+            s.object_target1.write_packed(w)?;
+
         }
 
         if let Some(s) = &self.target_flags.locked {
-            s.write(w)?;
+            // object_target2: PackedGuid
+            s.object_target2.write_packed(w)?;
+
         }
 
         if let Some(s) = &self.target_flags.item {
-            s.write(w)?;
+            // item_target1: PackedGuid
+            s.item_target1.write_packed(w)?;
+
         }
 
         if let Some(s) = &self.target_flags.trade_item {
-            s.write(w)?;
+            // item_target2: PackedGuid
+            s.item_target2.write_packed(w)?;
+
         }
 
         if let Some(s) = &self.target_flags.source_location {
-            s.write(w)?;
+            // position_x1: f32
+            w.write_all(&s.position_x1.to_le_bytes())?;
+
+            // position_y1: f32
+            w.write_all(&s.position_y1.to_le_bytes())?;
+
+            // position_z1: f32
+            w.write_all(&s.position_z1.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.target_flags.dest_location {
-            s.write(w)?;
+            // position_x2: f32
+            w.write_all(&s.position_x2.to_le_bytes())?;
+
+            // position_y2: f32
+            w.write_all(&s.position_y2.to_le_bytes())?;
+
+            // position_z2: f32
+            w.write_all(&s.position_z2.to_le_bytes())?;
+
         }
 
         if let Some(s) = &self.target_flags.string {
-            s.write(w)?;
+            // target_string: CString
+            w.write_all(s.target_string.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
         }
 
         if let Some(s) = &self.target_flags.corpse_ally {
-            s.write(w)?;
+            // corpse_target1: PackedGuid
+            s.corpse_target1.write_packed(w)?;
+
         }
 
         if let Some(s) = &self.target_flags.corpse_enemy {
-            s.write(w)?;
+            // corpse_target2: PackedGuid
+            s.corpse_target2.write_packed(w)?;
+
         }
 
         Ok(())
@@ -432,47 +468,83 @@ impl ReadableAndWritable for SpellCastTargets {
             self.target_flags.tokio_write(w).await?;
 
             if let Some(s) = &self.target_flags.unit {
-                s.tokio_write(w).await?;
+                // unit_target1: PackedGuid
+                s.unit_target1.tokio_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.unit_enemy {
-                s.tokio_write(w).await?;
+                // unit_target2: PackedGuid
+                s.unit_target2.tokio_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.gameobject {
-                s.tokio_write(w).await?;
+                // object_target1: PackedGuid
+                s.object_target1.tokio_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.locked {
-                s.tokio_write(w).await?;
+                // object_target2: PackedGuid
+                s.object_target2.tokio_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.item {
-                s.tokio_write(w).await?;
+                // item_target1: PackedGuid
+                s.item_target1.tokio_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.trade_item {
-                s.tokio_write(w).await?;
+                // item_target2: PackedGuid
+                s.item_target2.tokio_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.source_location {
-                s.tokio_write(w).await?;
+                // position_x1: f32
+                w.write_all(&s.position_x1.to_le_bytes()).await?;
+
+                // position_y1: f32
+                w.write_all(&s.position_y1.to_le_bytes()).await?;
+
+                // position_z1: f32
+                w.write_all(&s.position_z1.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.target_flags.dest_location {
-                s.tokio_write(w).await?;
+                // position_x2: f32
+                w.write_all(&s.position_x2.to_le_bytes()).await?;
+
+                // position_y2: f32
+                w.write_all(&s.position_y2.to_le_bytes()).await?;
+
+                // position_z2: f32
+                w.write_all(&s.position_z2.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.target_flags.string {
-                s.tokio_write(w).await?;
+                // target_string: CString
+                w.write_all(s.target_string.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
             }
 
             if let Some(s) = &self.target_flags.corpse_ally {
-                s.tokio_write(w).await?;
+                // corpse_target1: PackedGuid
+                s.corpse_target1.tokio_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.corpse_enemy {
-                s.tokio_write(w).await?;
+                // corpse_target2: PackedGuid
+                s.corpse_target2.tokio_write_packed(w).await?;
+
             }
 
             Ok(())
@@ -676,47 +748,83 @@ impl ReadableAndWritable for SpellCastTargets {
             self.target_flags.astd_write(w).await?;
 
             if let Some(s) = &self.target_flags.unit {
-                s.astd_write(w).await?;
+                // unit_target1: PackedGuid
+                s.unit_target1.astd_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.unit_enemy {
-                s.astd_write(w).await?;
+                // unit_target2: PackedGuid
+                s.unit_target2.astd_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.gameobject {
-                s.astd_write(w).await?;
+                // object_target1: PackedGuid
+                s.object_target1.astd_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.locked {
-                s.astd_write(w).await?;
+                // object_target2: PackedGuid
+                s.object_target2.astd_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.item {
-                s.astd_write(w).await?;
+                // item_target1: PackedGuid
+                s.item_target1.astd_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.trade_item {
-                s.astd_write(w).await?;
+                // item_target2: PackedGuid
+                s.item_target2.astd_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.source_location {
-                s.astd_write(w).await?;
+                // position_x1: f32
+                w.write_all(&s.position_x1.to_le_bytes()).await?;
+
+                // position_y1: f32
+                w.write_all(&s.position_y1.to_le_bytes()).await?;
+
+                // position_z1: f32
+                w.write_all(&s.position_z1.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.target_flags.dest_location {
-                s.astd_write(w).await?;
+                // position_x2: f32
+                w.write_all(&s.position_x2.to_le_bytes()).await?;
+
+                // position_y2: f32
+                w.write_all(&s.position_y2.to_le_bytes()).await?;
+
+                // position_z2: f32
+                w.write_all(&s.position_z2.to_le_bytes()).await?;
+
             }
 
             if let Some(s) = &self.target_flags.string {
-                s.astd_write(w).await?;
+                // target_string: CString
+                w.write_all(s.target_string.as_bytes()).await?;
+                // Null terminator
+                w.write_all(&[0]).await?;
+
             }
 
             if let Some(s) = &self.target_flags.corpse_ally {
-                s.astd_write(w).await?;
+                // corpse_target1: PackedGuid
+                s.corpse_target1.astd_write_packed(w).await?;
+
             }
 
             if let Some(s) = &self.target_flags.corpse_enemy {
-                s.astd_write(w).await?;
+                // corpse_target2: PackedGuid
+                s.corpse_target2.astd_write_packed(w).await?;
+
             }
 
             Ok(())
@@ -1530,33 +1638,6 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsUNIT {
     }
 }
 
-impl SpellCastTargetsSpellCastTargetFlagsUNIT {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // unit_target1: PackedGuid
-        self.unit_target1.write_packed(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // unit_target1: PackedGuid
-        self.unit_target1.tokio_write_packed(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // unit_target1: PackedGuid
-        self.unit_target1.astd_write_packed(w).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargetsSpellCastTargetFlagsITEM {
     pub item_target1: Guid,
@@ -1572,33 +1653,6 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsITEM {
     fn maximum_possible_size() -> usize {
         9 // item_target1: Guid
     }
-}
-
-impl SpellCastTargetsSpellCastTargetFlagsITEM {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_target1: PackedGuid
-        self.item_target1.write_packed(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_target1: PackedGuid
-        self.item_target1.tokio_write_packed(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_target1: PackedGuid
-        self.item_target1.astd_write_packed(w).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1624,51 +1678,6 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATIO
     }
 }
 
-impl SpellCastTargetsSpellCastTargetFlagsSOURCE_LOCATION {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // position_x1: f32
-        w.write_all(&self.position_x1.to_le_bytes())?;
-
-        // position_y1: f32
-        w.write_all(&self.position_y1.to_le_bytes())?;
-
-        // position_z1: f32
-        w.write_all(&self.position_z1.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // position_x1: f32
-        w.write_all(&self.position_x1.to_le_bytes()).await?;
-
-        // position_y1: f32
-        w.write_all(&self.position_y1.to_le_bytes()).await?;
-
-        // position_z1: f32
-        w.write_all(&self.position_z1.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // position_x1: f32
-        w.write_all(&self.position_x1.to_le_bytes()).await?;
-
-        // position_y1: f32
-        w.write_all(&self.position_y1.to_le_bytes()).await?;
-
-        // position_z1: f32
-        w.write_all(&self.position_z1.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
     pub position_x2: f32,
@@ -1692,51 +1701,6 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION 
     }
 }
 
-impl SpellCastTargetsSpellCastTargetFlagsDEST_LOCATION {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // position_x2: f32
-        w.write_all(&self.position_x2.to_le_bytes())?;
-
-        // position_y2: f32
-        w.write_all(&self.position_y2.to_le_bytes())?;
-
-        // position_z2: f32
-        w.write_all(&self.position_z2.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // position_x2: f32
-        w.write_all(&self.position_x2.to_le_bytes()).await?;
-
-        // position_y2: f32
-        w.write_all(&self.position_y2.to_le_bytes()).await?;
-
-        // position_z2: f32
-        w.write_all(&self.position_z2.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // position_x2: f32
-        w.write_all(&self.position_x2.to_le_bytes()).await?;
-
-        // position_y2: f32
-        w.write_all(&self.position_y2.to_le_bytes()).await?;
-
-        // position_z2: f32
-        w.write_all(&self.position_z2.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
     pub unit_target2: Guid,
@@ -1752,33 +1716,6 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
     fn maximum_possible_size() -> usize {
         9 // unit_target2: Guid
     }
-}
-
-impl SpellCastTargetsSpellCastTargetFlagsUNIT_ENEMY {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // unit_target2: PackedGuid
-        self.unit_target2.write_packed(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // unit_target2: PackedGuid
-        self.unit_target2.tokio_write_packed(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // unit_target2: PackedGuid
-        self.unit_target2.astd_write_packed(w).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1798,33 +1735,6 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
     }
 }
 
-impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ENEMY {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // corpse_target2: PackedGuid
-        self.corpse_target2.write_packed(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // corpse_target2: PackedGuid
-        self.corpse_target2.tokio_write_packed(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // corpse_target2: PackedGuid
-        self.corpse_target2.astd_write_packed(w).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
     pub object_target1: Guid,
@@ -1840,33 +1750,6 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
     fn maximum_possible_size() -> usize {
         9 // object_target1: Guid
     }
-}
-
-impl SpellCastTargetsSpellCastTargetFlagsGAMEOBJECT {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // object_target1: PackedGuid
-        self.object_target1.write_packed(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // object_target1: PackedGuid
-        self.object_target1.tokio_write_packed(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // object_target1: PackedGuid
-        self.object_target1.astd_write_packed(w).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1886,33 +1769,6 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
     }
 }
 
-impl SpellCastTargetsSpellCastTargetFlagsTRADE_ITEM {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_target2: PackedGuid
-        self.item_target2.write_packed(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_target2: PackedGuid
-        self.item_target2.tokio_write_packed(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_target2: PackedGuid
-        self.item_target2.astd_write_packed(w).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargetsSpellCastTargetFlagsSTRING {
     pub target_string: String,
@@ -1928,39 +1784,6 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsSTRING {
     fn maximum_possible_size() -> usize {
         256 // target_string: CString
     }
-}
-
-impl SpellCastTargetsSpellCastTargetFlagsSTRING {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // target_string: CString
-        w.write_all(self.target_string.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // target_string: CString
-        w.write_all(self.target_string.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // target_string: CString
-        w.write_all(self.target_string.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        Ok(())
-    }
-
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -1980,33 +1803,6 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsLOCKED {
     }
 }
 
-impl SpellCastTargetsSpellCastTargetFlagsLOCKED {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // object_target2: PackedGuid
-        self.object_target2.write_packed(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // object_target2: PackedGuid
-        self.object_target2.tokio_write_packed(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // object_target2: PackedGuid
-        self.object_target2.astd_write_packed(w).await?;
-
-        Ok(())
-    }
-
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
     pub corpse_target1: Guid,
@@ -2022,32 +1818,5 @@ impl MaximumPossibleSized for SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
     fn maximum_possible_size() -> usize {
         9 // corpse_target1: Guid
     }
-}
-
-impl SpellCastTargetsSpellCastTargetFlagsCORPSE_ALLY {
-    #[cfg(feature = "sync")]
-    pub fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // corpse_target1: PackedGuid
-        self.corpse_target1.write_packed(w)?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // corpse_target1: PackedGuid
-        self.corpse_target1.tokio_write_packed(w).await?;
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async_std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // corpse_target1: PackedGuid
-        self.corpse_target1.astd_write_packed(w).await?;
-
-        Ok(())
-    }
-
 }
 
