@@ -39,14 +39,6 @@ impl MountResult {
 
 }
 
-impl ConstantSized for MountResult {}
-
-impl MaximumPossibleSized for MountResult {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for MountResult {
     fn default() -> Self {
         Self::INVALIDMOUNTEE

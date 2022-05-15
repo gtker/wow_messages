@@ -25,14 +25,6 @@ impl InstanceResetFailedReason {
 
 }
 
-impl ConstantSized for InstanceResetFailedReason {}
-
-impl MaximumPossibleSized for InstanceResetFailedReason {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for InstanceResetFailedReason {
     fn default() -> Self {
         Self::GENERAL

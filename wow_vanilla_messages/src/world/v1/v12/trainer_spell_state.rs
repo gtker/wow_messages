@@ -23,14 +23,6 @@ impl TrainerSpellState {
 
 }
 
-impl ConstantSized for TrainerSpellState {}
-
-impl MaximumPossibleSized for TrainerSpellState {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for TrainerSpellState {
     fn default() -> Self {
         Self::GREEN

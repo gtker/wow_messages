@@ -251,14 +251,6 @@ impl Emote {
 
 }
 
-impl ConstantSized for Emote {}
-
-impl MaximumPossibleSized for Emote {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for Emote {
     fn default() -> Self {
         Self::ONESHOT_NONE

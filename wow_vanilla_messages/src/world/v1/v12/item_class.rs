@@ -49,14 +49,6 @@ impl ItemClass {
 
 }
 
-impl ConstantSized for ItemClass {}
-
-impl MaximumPossibleSized for ItemClass {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for ItemClass {
     fn default() -> Self {
         Self::CONSUMABLE

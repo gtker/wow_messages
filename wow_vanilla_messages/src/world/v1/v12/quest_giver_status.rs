@@ -33,14 +33,6 @@ impl QuestGiverStatus {
 
 }
 
-impl ConstantSized for QuestGiverStatus {}
-
-impl MaximumPossibleSized for QuestGiverStatus {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for QuestGiverStatus {
     fn default() -> Self {
         Self::NONE

@@ -17,16 +17,16 @@ impl CastFlags {
 }
 
 impl CastFlags {
-    pub const NONE: u16 = 0x00;
-    pub const HIDDEN_COMBATLOG: u16 = 0x01;
-    pub const UNKNOWN2: u16 = 0x02;
-    pub const UNKNOWN3: u16 = 0x04;
-    pub const UNKNOWN4: u16 = 0x08;
-    pub const UNKNOWN5: u16 = 0x10;
-    pub const AMMO: u16 = 0x20;
-    pub const UNKNOWN7: u16 = 0x40;
-    pub const UNKNOWN8: u16 = 0x80;
-    pub const UNKNOWN9: u16 = 0x100;
+    pub(crate) const NONE: u16 = 0x00;
+    pub(crate) const HIDDEN_COMBATLOG: u16 = 0x01;
+    pub(crate) const UNKNOWN2: u16 = 0x02;
+    pub(crate) const UNKNOWN3: u16 = 0x04;
+    pub(crate) const UNKNOWN4: u16 = 0x08;
+    pub(crate) const UNKNOWN5: u16 = 0x10;
+    pub(crate) const AMMO: u16 = 0x20;
+    pub(crate) const UNKNOWN7: u16 = 0x40;
+    pub(crate) const UNKNOWN8: u16 = 0x80;
+    pub(crate) const UNKNOWN9: u16 = 0x100;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -232,13 +232,5 @@ impl CastFlags {
         self.inner
     }
 
-}
-
-impl ConstantSized for CastFlags {}
-
-impl MaximumPossibleSized for CastFlags {
-    fn maximum_possible_size() -> usize {
-        2
-    }
 }
 

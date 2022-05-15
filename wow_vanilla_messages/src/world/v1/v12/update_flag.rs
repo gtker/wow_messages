@@ -17,14 +17,14 @@ impl UpdateFlag {
 }
 
 impl UpdateFlag {
-    pub const NONE: u8 = 0x00;
-    pub const SELF: u8 = 0x01;
-    pub const TRANSPORT: u8 = 0x02;
-    pub const MELEE_ATTACKING: u8 = 0x04;
-    pub const HIGH_GUID: u8 = 0x08;
-    pub const ALL: u8 = 0x10;
-    pub const LIVING: u8 = 0x20;
-    pub const HAS_POSITION: u8 = 0x40;
+    pub(crate) const NONE: u8 = 0x00;
+    pub(crate) const SELF: u8 = 0x01;
+    pub(crate) const TRANSPORT: u8 = 0x02;
+    pub(crate) const MELEE_ATTACKING: u8 = 0x04;
+    pub(crate) const HIGH_GUID: u8 = 0x08;
+    pub(crate) const ALL: u8 = 0x10;
+    pub(crate) const LIVING: u8 = 0x20;
+    pub(crate) const HAS_POSITION: u8 = 0x40;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -192,13 +192,5 @@ impl UpdateFlag {
         self.inner
     }
 
-}
-
-impl ConstantSized for UpdateFlag {}
-
-impl MaximumPossibleSized for UpdateFlag {
-    fn maximum_possible_size() -> usize {
-        1
-    }
 }
 

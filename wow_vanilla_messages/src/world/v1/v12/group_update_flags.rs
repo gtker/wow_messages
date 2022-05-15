@@ -17,29 +17,29 @@ impl GroupUpdateFlags {
 }
 
 impl GroupUpdateFlags {
-    pub const FLAG_NONE: u32 = 0x00;
-    pub const FLAG_STATUS: u32 = 0x01;
-    pub const FLAG_CUR_HP: u32 = 0x02;
-    pub const FLAG_MAX_HP: u32 = 0x04;
-    pub const FLAG_POWER_TYPE: u32 = 0x08;
-    pub const FLAG_CUR_POWER: u32 = 0x10;
-    pub const FLAG_MAX_POWER: u32 = 0x20;
-    pub const FLAG_LEVEL: u32 = 0x40;
-    pub const FLAG_ZONE: u32 = 0x80;
-    pub const FLAG_POSITION: u32 = 0x100;
-    pub const FLAG_AURAS: u32 = 0x200;
-    pub const FLAG_AURAS_2: u32 = 0x400;
-    pub const FLAG_PET_GUID: u32 = 0x800;
-    pub const FLAG_PET_NAME: u32 = 0x1000;
-    pub const FLAG_PET_MODEL_ID: u32 = 0x2000;
-    pub const FLAG_PET_CUR_HP: u32 = 0x4000;
-    pub const FLAG_PET_MAX_HP: u32 = 0x8000;
-    pub const FLAG_PET_POWER_TYPE: u32 = 0x10000;
-    pub const FLAG_PET_CUR_POWER: u32 = 0x20000;
-    pub const FLAG_PET_MAX_POWER: u32 = 0x40000;
-    pub const FLAG_PET_AURAS: u32 = 0x80000;
-    pub const FLAG_PET_AURAS_2: u32 = 0x100000;
-    pub const MODE_OFFLINE: u32 = 0x10000000;
+    pub(crate) const FLAG_NONE: u32 = 0x00;
+    pub(crate) const FLAG_STATUS: u32 = 0x01;
+    pub(crate) const FLAG_CUR_HP: u32 = 0x02;
+    pub(crate) const FLAG_MAX_HP: u32 = 0x04;
+    pub(crate) const FLAG_POWER_TYPE: u32 = 0x08;
+    pub(crate) const FLAG_CUR_POWER: u32 = 0x10;
+    pub(crate) const FLAG_MAX_POWER: u32 = 0x20;
+    pub(crate) const FLAG_LEVEL: u32 = 0x40;
+    pub(crate) const FLAG_ZONE: u32 = 0x80;
+    pub(crate) const FLAG_POSITION: u32 = 0x100;
+    pub(crate) const FLAG_AURAS: u32 = 0x200;
+    pub(crate) const FLAG_AURAS_2: u32 = 0x400;
+    pub(crate) const FLAG_PET_GUID: u32 = 0x800;
+    pub(crate) const FLAG_PET_NAME: u32 = 0x1000;
+    pub(crate) const FLAG_PET_MODEL_ID: u32 = 0x2000;
+    pub(crate) const FLAG_PET_CUR_HP: u32 = 0x4000;
+    pub(crate) const FLAG_PET_MAX_HP: u32 = 0x8000;
+    pub(crate) const FLAG_PET_POWER_TYPE: u32 = 0x10000;
+    pub(crate) const FLAG_PET_CUR_POWER: u32 = 0x20000;
+    pub(crate) const FLAG_PET_MAX_POWER: u32 = 0x40000;
+    pub(crate) const FLAG_PET_AURAS: u32 = 0x80000;
+    pub(crate) const FLAG_PET_AURAS_2: u32 = 0x100000;
+    pub(crate) const MODE_OFFLINE: u32 = 0x10000000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -492,13 +492,5 @@ impl GroupUpdateFlags {
         self.inner
     }
 
-}
-
-impl ConstantSized for GroupUpdateFlags {}
-
-impl MaximumPossibleSized for GroupUpdateFlags {
-    fn maximum_possible_size() -> usize {
-        4
-    }
 }
 

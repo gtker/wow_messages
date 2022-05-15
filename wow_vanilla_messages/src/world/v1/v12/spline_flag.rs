@@ -17,39 +17,39 @@ impl SplineFlag {
 }
 
 impl SplineFlag {
-    pub const NONE: u32 = 0x00;
-    pub const DONE: u32 = 0x01;
-    pub const FALLING: u32 = 0x02;
-    pub const UNKNOWN3: u32 = 0x04;
-    pub const UNKNOWN4: u32 = 0x08;
-    pub const UNKNOWN5: u32 = 0x10;
-    pub const UNKNOWN6: u32 = 0x20;
-    pub const UNKNOWN7: u32 = 0x40;
-    pub const UNKNOWN8: u32 = 0x80;
-    pub const RUNMODE: u32 = 0x100;
-    pub const FLYING: u32 = 0x200;
-    pub const NO_SPLINE: u32 = 0x400;
-    pub const UNKNOWN12: u32 = 0x800;
-    pub const UNKNOWN13: u32 = 0x1000;
-    pub const UNKNOWN14: u32 = 0x2000;
-    pub const UNKNOWN15: u32 = 0x4000;
-    pub const UNKNOWN16: u32 = 0x8000;
-    pub const FINAL_POINT: u32 = 0x10000;
-    pub const FINAL_TARGET: u32 = 0x20000;
-    pub const FINAL_ANGLE: u32 = 0x40000;
-    pub const UNKNOWN19: u32 = 0x80000;
-    pub const CYCLIC: u32 = 0x100000;
-    pub const ENTER_CYCLE: u32 = 0x200000;
-    pub const FROZEN: u32 = 0x400000;
-    pub const UNKNOWN23: u32 = 0x800000;
-    pub const UNKNOWN24: u32 = 0x1000000;
-    pub const UNKNOWN25: u32 = 0x2000000;
-    pub const UNKNOWN26: u32 = 0x4000000;
-    pub const UNKNOWN27: u32 = 0x8000000;
-    pub const UNKNOWN28: u32 = 0x10000000;
-    pub const UNKNOWN29: u32 = 0x20000000;
-    pub const UNKNOWN30: u32 = 0x40000000;
-    pub const UNKNOWN31: u32 = 0x80000000;
+    pub(crate) const NONE: u32 = 0x00;
+    pub(crate) const DONE: u32 = 0x01;
+    pub(crate) const FALLING: u32 = 0x02;
+    pub(crate) const UNKNOWN3: u32 = 0x04;
+    pub(crate) const UNKNOWN4: u32 = 0x08;
+    pub(crate) const UNKNOWN5: u32 = 0x10;
+    pub(crate) const UNKNOWN6: u32 = 0x20;
+    pub(crate) const UNKNOWN7: u32 = 0x40;
+    pub(crate) const UNKNOWN8: u32 = 0x80;
+    pub(crate) const RUNMODE: u32 = 0x100;
+    pub(crate) const FLYING: u32 = 0x200;
+    pub(crate) const NO_SPLINE: u32 = 0x400;
+    pub(crate) const UNKNOWN12: u32 = 0x800;
+    pub(crate) const UNKNOWN13: u32 = 0x1000;
+    pub(crate) const UNKNOWN14: u32 = 0x2000;
+    pub(crate) const UNKNOWN15: u32 = 0x4000;
+    pub(crate) const UNKNOWN16: u32 = 0x8000;
+    pub(crate) const FINAL_POINT: u32 = 0x10000;
+    pub(crate) const FINAL_TARGET: u32 = 0x20000;
+    pub(crate) const FINAL_ANGLE: u32 = 0x40000;
+    pub(crate) const UNKNOWN19: u32 = 0x80000;
+    pub(crate) const CYCLIC: u32 = 0x100000;
+    pub(crate) const ENTER_CYCLE: u32 = 0x200000;
+    pub(crate) const FROZEN: u32 = 0x400000;
+    pub(crate) const UNKNOWN23: u32 = 0x800000;
+    pub(crate) const UNKNOWN24: u32 = 0x1000000;
+    pub(crate) const UNKNOWN25: u32 = 0x2000000;
+    pub(crate) const UNKNOWN26: u32 = 0x4000000;
+    pub(crate) const UNKNOWN27: u32 = 0x8000000;
+    pub(crate) const UNKNOWN28: u32 = 0x10000000;
+    pub(crate) const UNKNOWN29: u32 = 0x20000000;
+    pub(crate) const UNKNOWN30: u32 = 0x40000000;
+    pub(crate) const UNKNOWN31: u32 = 0x80000000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -692,13 +692,5 @@ impl SplineFlag {
         self.inner
     }
 
-}
-
-impl ConstantSized for SplineFlag {}
-
-impl MaximumPossibleSized for SplineFlag {
-    fn maximum_possible_size() -> usize {
-        4
-    }
 }
 

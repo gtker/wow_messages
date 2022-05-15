@@ -2179,14 +2179,6 @@ impl Area {
 
 }
 
-impl ConstantSized for Area {}
-
-impl MaximumPossibleSized for Area {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for Area {
     fn default() -> Self {
         Self::DUN_MOROGH

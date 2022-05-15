@@ -47,14 +47,6 @@ impl Locale {
 
 }
 
-impl ConstantSized for Locale {}
-
-impl MaximumPossibleSized for Locale {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for Locale {
     fn default() -> Self {
         Self::EN_GB

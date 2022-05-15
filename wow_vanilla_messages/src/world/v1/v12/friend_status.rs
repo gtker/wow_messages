@@ -27,14 +27,6 @@ impl FriendStatus {
 
 }
 
-impl ConstantSized for FriendStatus {}
-
-impl MaximumPossibleSized for FriendStatus {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for FriendStatus {
     fn default() -> Self {
         Self::OFFLINE

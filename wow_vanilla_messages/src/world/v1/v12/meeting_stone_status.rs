@@ -29,14 +29,6 @@ impl MeetingStoneStatus {
 
 }
 
-impl ConstantSized for MeetingStoneStatus {}
-
-impl MaximumPossibleSized for MeetingStoneStatus {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for MeetingStoneStatus {
     fn default() -> Self {
         Self::LEAVE_QUEUE

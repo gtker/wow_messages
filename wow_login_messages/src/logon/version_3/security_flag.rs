@@ -21,14 +21,6 @@ impl SecurityFlag {
 
 }
 
-impl ConstantSized for SecurityFlag {}
-
-impl MaximumPossibleSized for SecurityFlag {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for SecurityFlag {
     fn default() -> Self {
         Self::NONE

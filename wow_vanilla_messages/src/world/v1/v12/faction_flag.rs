@@ -17,13 +17,13 @@ impl FactionFlag {
 }
 
 impl FactionFlag {
-    pub const VISIBLE: u8 = 0x01;
-    pub const AT_WAR: u8 = 0x02;
-    pub const HIDDEN: u8 = 0x04;
-    pub const INVISIBLE_FORCED: u8 = 0x08;
-    pub const PEACE_FORCED: u8 = 0x10;
-    pub const INACTIVE: u8 = 0x20;
-    pub const RIVAL: u8 = 0x40;
+    pub(crate) const VISIBLE: u8 = 0x01;
+    pub(crate) const AT_WAR: u8 = 0x02;
+    pub(crate) const HIDDEN: u8 = 0x04;
+    pub(crate) const INVISIBLE_FORCED: u8 = 0x08;
+    pub(crate) const PEACE_FORCED: u8 = 0x10;
+    pub(crate) const INACTIVE: u8 = 0x20;
+    pub(crate) const RIVAL: u8 = 0x40;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -171,13 +171,5 @@ impl FactionFlag {
         self.inner
     }
 
-}
-
-impl ConstantSized for FactionFlag {}
-
-impl MaximumPossibleSized for FactionFlag {
-    fn maximum_possible_size() -> usize {
-        1
-    }
 }
 

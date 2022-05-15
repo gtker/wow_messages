@@ -47,14 +47,6 @@ impl Language {
 
 }
 
-impl ConstantSized for Language {}
-
-impl MaximumPossibleSized for Language {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for Language {
     fn default() -> Self {
         Self::UNIVERSAL

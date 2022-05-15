@@ -37,14 +37,6 @@ impl GmTicketType {
 
 }
 
-impl ConstantSized for GmTicketType {}
-
-impl MaximumPossibleSized for GmTicketType {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for GmTicketType {
     fn default() -> Self {
         Self::STUCK

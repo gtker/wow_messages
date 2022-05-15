@@ -21,14 +21,6 @@ impl CorpseQueryResult {
 
 }
 
-impl ConstantSized for CorpseQueryResult {}
-
-impl MaximumPossibleSized for CorpseQueryResult {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for CorpseQueryResult {
     fn default() -> Self {
         Self::NOT_FOUND

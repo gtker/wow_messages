@@ -37,14 +37,6 @@ impl UnitStandState {
 
 }
 
-impl ConstantSized for UnitStandState {}
-
-impl MaximumPossibleSized for UnitStandState {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for UnitStandState {
     fn default() -> Self {
         Self::STAND

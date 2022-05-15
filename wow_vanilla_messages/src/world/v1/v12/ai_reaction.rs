@@ -27,14 +27,6 @@ impl AiReaction {
 
 }
 
-impl ConstantSized for AiReaction {}
-
-impl MaximumPossibleSized for AiReaction {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for AiReaction {
     fn default() -> Self {
         Self::ALERT

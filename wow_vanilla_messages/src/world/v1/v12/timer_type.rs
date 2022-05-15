@@ -25,14 +25,6 @@ impl TimerType {
 
 }
 
-impl ConstantSized for TimerType {}
-
-impl MaximumPossibleSized for TimerType {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for TimerType {
     fn default() -> Self {
         Self::FATIGUE

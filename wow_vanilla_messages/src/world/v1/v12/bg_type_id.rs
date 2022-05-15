@@ -27,14 +27,6 @@ impl BgTypeId {
 
 }
 
-impl ConstantSized for BgTypeId {}
-
-impl MaximumPossibleSized for BgTypeId {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for BgTypeId {
     fn default() -> Self {
         Self::NOT_ELIGIBLE

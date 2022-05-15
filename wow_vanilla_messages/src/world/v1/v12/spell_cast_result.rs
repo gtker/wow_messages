@@ -299,14 +299,6 @@ impl SpellCastResult {
 
 }
 
-impl ConstantSized for SpellCastResult {}
-
-impl MaximumPossibleSized for SpellCastResult {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for SpellCastResult {
     fn default() -> Self {
         Self::AFFECTING_COMBAT

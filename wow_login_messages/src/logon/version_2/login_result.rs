@@ -49,14 +49,6 @@ impl LoginResult {
 
 }
 
-impl ConstantSized for LoginResult {}
-
-impl MaximumPossibleSized for LoginResult {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for LoginResult {
     fn default() -> Self {
         Self::SUCCESS

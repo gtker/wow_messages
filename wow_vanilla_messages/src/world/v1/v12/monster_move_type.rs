@@ -27,14 +27,6 @@ impl MonsterMoveType {
 
 }
 
-impl ConstantSized for MonsterMoveType {}
-
-impl MaximumPossibleSized for MonsterMoveType {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for MonsterMoveType {
     fn default() -> Self {
         Self::NORMAL

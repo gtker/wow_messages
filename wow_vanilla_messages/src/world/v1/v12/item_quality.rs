@@ -31,14 +31,6 @@ impl ItemQuality {
 
 }
 
-impl ConstantSized for ItemQuality {}
-
-impl MaximumPossibleSized for ItemQuality {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for ItemQuality {
     fn default() -> Self {
         Self::POOR

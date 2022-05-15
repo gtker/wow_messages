@@ -21,14 +21,6 @@ impl NewItemCreationType {
 
 }
 
-impl ConstantSized for NewItemCreationType {}
-
-impl MaximumPossibleSized for NewItemCreationType {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for NewItemCreationType {
     fn default() -> Self {
         Self::RECEIVED

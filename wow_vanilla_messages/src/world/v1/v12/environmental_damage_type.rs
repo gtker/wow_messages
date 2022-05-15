@@ -29,14 +29,6 @@ impl EnvironmentalDamageType {
 
 }
 
-impl ConstantSized for EnvironmentalDamageType {}
-
-impl MaximumPossibleSized for EnvironmentalDamageType {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for EnvironmentalDamageType {
     fn default() -> Self {
         Self::EXHAUSTED

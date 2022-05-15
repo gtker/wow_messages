@@ -17,9 +17,9 @@ impl AccountFlag {
 }
 
 impl AccountFlag {
-    pub const GM: u32 = 0x01;
-    pub const TRIAL: u32 = 0x08;
-    pub const PROPASS: u32 = 0x800000;
+    pub(crate) const GM: u32 = 0x01;
+    pub(crate) const TRIAL: u32 = 0x08;
+    pub(crate) const PROPASS: u32 = 0x800000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -91,13 +91,5 @@ impl AccountFlag {
         self.inner
     }
 
-}
-
-impl ConstantSized for AccountFlag {}
-
-impl MaximumPossibleSized for AccountFlag {
-    fn maximum_possible_size() -> usize {
-        4
-    }
 }
 

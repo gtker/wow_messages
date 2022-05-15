@@ -23,14 +23,6 @@ impl Platform {
 
 }
 
-impl ConstantSized for Platform {}
-
-impl MaximumPossibleSized for Platform {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for Platform {
     fn default() -> Self {
         Self::X86

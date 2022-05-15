@@ -21,14 +21,6 @@ impl PetTalkReason {
 
 }
 
-impl ConstantSized for PetTalkReason {}
-
-impl MaximumPossibleSized for PetTalkReason {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for PetTalkReason {
     fn default() -> Self {
         Self::SPECIAL_SPELL

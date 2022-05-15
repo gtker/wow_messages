@@ -23,14 +23,6 @@ impl SheathState {
 
 }
 
-impl ConstantSized for SheathState {}
-
-impl MaximumPossibleSized for SheathState {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for SheathState {
     fn default() -> Self {
         Self::UNARMED

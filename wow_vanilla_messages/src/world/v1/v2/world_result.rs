@@ -181,14 +181,6 @@ impl WorldResult {
 
 }
 
-impl ConstantSized for WorldResult {}
-
-impl MaximumPossibleSized for WorldResult {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for WorldResult {
     fn default() -> Self {
         Self::RESPONSE_SUCCESS

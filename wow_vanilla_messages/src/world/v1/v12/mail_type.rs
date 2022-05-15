@@ -27,14 +27,6 @@ impl MailType {
 
 }
 
-impl ConstantSized for MailType {}
-
-impl MaximumPossibleSized for MailType {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for MailType {
     fn default() -> Self {
         Self::NORMAL

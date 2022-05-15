@@ -23,14 +23,6 @@ impl GmTicketEscalationStatus {
 
 }
 
-impl ConstantSized for GmTicketEscalationStatus {}
-
-impl MaximumPossibleSized for GmTicketEscalationStatus {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for GmTicketEscalationStatus {
     fn default() -> Self {
         Self::GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED

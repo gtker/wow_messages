@@ -17,10 +17,10 @@ impl SecurityFlag {
 }
 
 impl SecurityFlag {
-    pub const NONE: u8 = 0x00;
-    pub const PIN: u8 = 0x01;
-    pub const UNKNOWN0: u8 = 0x02;
-    pub const AUTHENTICATOR: u8 = 0x04;
+    pub(crate) const NONE: u8 = 0x00;
+    pub(crate) const PIN: u8 = 0x01;
+    pub(crate) const UNKNOWN0: u8 = 0x02;
+    pub(crate) const AUTHENTICATOR: u8 = 0x04;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -112,13 +112,5 @@ impl SecurityFlag {
         self.inner
     }
 
-}
-
-impl ConstantSized for SecurityFlag {}
-
-impl MaximumPossibleSized for SecurityFlag {
-    fn maximum_possible_size() -> usize {
-        1
-    }
 }
 

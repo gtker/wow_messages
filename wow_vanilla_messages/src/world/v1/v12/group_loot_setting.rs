@@ -27,14 +27,6 @@ impl GroupLootSetting {
 
 }
 
-impl ConstantSized for GroupLootSetting {}
-
-impl MaximumPossibleSized for GroupLootSetting {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for GroupLootSetting {
     fn default() -> Self {
         Self::FREE_FOR_ALL

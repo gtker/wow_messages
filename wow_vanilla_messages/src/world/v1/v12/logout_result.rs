@@ -25,14 +25,6 @@ impl LogoutResult {
 
 }
 
-impl ConstantSized for LogoutResult {}
-
-impl MaximumPossibleSized for LogoutResult {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for LogoutResult {
     fn default() -> Self {
         Self::SUCCESS

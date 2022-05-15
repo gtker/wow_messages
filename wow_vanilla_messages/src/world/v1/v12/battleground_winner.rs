@@ -23,14 +23,6 @@ impl BattlegroundWinner {
 
 }
 
-impl ConstantSized for BattlegroundWinner {}
-
-impl MaximumPossibleSized for BattlegroundWinner {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for BattlegroundWinner {
     fn default() -> Self {
         Self::HORDE

@@ -25,14 +25,6 @@ impl RaidInstanceMessage {
 
 }
 
-impl ConstantSized for RaidInstanceMessage {}
-
-impl MaximumPossibleSized for RaidInstanceMessage {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for RaidInstanceMessage {
     fn default() -> Self {
         Self::WARNING_HOURS

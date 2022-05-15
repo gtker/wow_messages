@@ -87,14 +87,6 @@ impl ChatType {
 
 }
 
-impl ConstantSized for ChatType {}
-
-impl MaximumPossibleSized for ChatType {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for ChatType {
     fn default() -> Self {
         Self::SAY

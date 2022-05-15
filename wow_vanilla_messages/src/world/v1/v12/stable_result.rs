@@ -27,14 +27,6 @@ impl StableResult {
 
 }
 
-impl ConstantSized for StableResult {}
-
-impl MaximumPossibleSized for StableResult {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for StableResult {
     fn default() -> Self {
         Self::ERR_MONEY

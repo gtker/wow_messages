@@ -21,14 +21,6 @@ impl PartyOperation {
 
 }
 
-impl ConstantSized for PartyOperation {}
-
-impl MaximumPossibleSized for PartyOperation {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for PartyOperation {
     fn default() -> Self {
         Self::INVITE

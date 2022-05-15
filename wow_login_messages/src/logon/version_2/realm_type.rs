@@ -25,14 +25,6 @@ impl RealmType {
 
 }
 
-impl ConstantSized for RealmType {}
-
-impl MaximumPossibleSized for RealmType {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for RealmType {
     fn default() -> Self {
         Self::PLAYER_VS_ENVIRONMENT

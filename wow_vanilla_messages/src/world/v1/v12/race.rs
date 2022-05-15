@@ -35,14 +35,6 @@ impl Race {
 
 }
 
-impl ConstantSized for Race {}
-
-impl MaximumPossibleSized for Race {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for Race {
     fn default() -> Self {
         Self::HUMAN

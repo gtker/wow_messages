@@ -25,14 +25,6 @@ impl BuyBankSlotResult {
 
 }
 
-impl ConstantSized for BuyBankSlotResult {}
-
-impl MaximumPossibleSized for BuyBankSlotResult {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for BuyBankSlotResult {
     fn default() -> Self {
         Self::FAILED_TOO_MANY

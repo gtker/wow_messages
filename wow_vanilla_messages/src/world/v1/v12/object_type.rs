@@ -33,14 +33,6 @@ impl ObjectType {
 
 }
 
-impl ConstantSized for ObjectType {}
-
-impl MaximumPossibleSized for ObjectType {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for ObjectType {
     fn default() -> Self {
         Self::OBJECT

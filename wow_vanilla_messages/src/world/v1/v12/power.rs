@@ -31,14 +31,6 @@ impl Power {
 
 }
 
-impl ConstantSized for Power {}
-
-impl MaximumPossibleSized for Power {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for Power {
     fn default() -> Self {
         Self::MANA

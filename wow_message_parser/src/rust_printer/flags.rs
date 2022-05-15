@@ -46,16 +46,12 @@ fn common_impls(s: &mut Writer, e: &Definer) {
             s.wln("self.inner");
         });
     });
-
-    s.constant_sized(e.name(), |s| {
-        s.wln(format!("{size}", size = e.ty().size()));
-    });
 }
 
 fn print_fields(s: &mut Writer, e: &Definer) {
     for f in e.fields() {
         s.wln(format!(
-            "pub const {name}: {ty} = {value:#04x};",
+            "pub(crate) const {name}: {ty} = {value:#04x};",
             name = f.name(),
             ty = e.ty().rust_str(),
             value = f.value().int(),

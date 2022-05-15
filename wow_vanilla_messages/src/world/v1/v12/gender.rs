@@ -23,14 +23,6 @@ impl Gender {
 
 }
 
-impl ConstantSized for Gender {}
-
-impl MaximumPossibleSized for Gender {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for Gender {
     fn default() -> Self {
         Self::MALE

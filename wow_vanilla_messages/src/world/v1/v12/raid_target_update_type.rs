@@ -21,14 +21,6 @@ impl RaidTargetUpdateType {
 
 }
 
-impl ConstantSized for RaidTargetUpdateType {}
-
-impl MaximumPossibleSized for RaidTargetUpdateType {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for RaidTargetUpdateType {
     fn default() -> Self {
         Self::PARTIAL

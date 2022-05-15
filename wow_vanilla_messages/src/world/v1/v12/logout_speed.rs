@@ -21,14 +21,6 @@ impl LogoutSpeed {
 
 }
 
-impl ConstantSized for LogoutSpeed {}
-
-impl MaximumPossibleSized for LogoutSpeed {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for LogoutSpeed {
     fn default() -> Self {
         Self::DELAYED

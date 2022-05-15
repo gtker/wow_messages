@@ -105,14 +105,6 @@ impl Map {
 
 }
 
-impl ConstantSized for Map {}
-
-impl MaximumPossibleSized for Map {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for Map {
     fn default() -> Self {
         Self::EASTERN_KINGDOMS

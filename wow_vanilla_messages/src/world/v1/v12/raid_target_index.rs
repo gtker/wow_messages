@@ -37,14 +37,6 @@ impl RaidTargetIndex {
 
 }
 
-impl ConstantSized for RaidTargetIndex {}
-
-impl MaximumPossibleSized for RaidTargetIndex {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for RaidTargetIndex {
     fn default() -> Self {
         Self::UNKNOWN0

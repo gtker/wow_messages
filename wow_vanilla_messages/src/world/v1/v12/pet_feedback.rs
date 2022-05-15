@@ -25,14 +25,6 @@ impl PetFeedback {
 
 }
 
-impl ConstantSized for PetFeedback {}
-
-impl MaximumPossibleSized for PetFeedback {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for PetFeedback {
     fn default() -> Self {
         Self::PET_DEAD

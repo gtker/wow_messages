@@ -41,14 +41,6 @@ impl PetTameFailureReason {
 
 }
 
-impl ConstantSized for PetTameFailureReason {}
-
-impl MaximumPossibleSized for PetTameFailureReason {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for PetTameFailureReason {
     fn default() -> Self {
         Self::INVALIDCREATURE

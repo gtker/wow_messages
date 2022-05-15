@@ -73,14 +73,6 @@ impl InventoryType {
 
 }
 
-impl ConstantSized for InventoryType {}
-
-impl MaximumPossibleSized for InventoryType {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for InventoryType {
     fn default() -> Self {
         Self::NON_EQUIP

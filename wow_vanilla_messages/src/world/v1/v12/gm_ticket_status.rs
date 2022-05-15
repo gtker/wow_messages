@@ -23,14 +23,6 @@ impl GmTicketStatus {
 
 }
 
-impl ConstantSized for GmTicketStatus {}
-
-impl MaximumPossibleSized for GmTicketStatus {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for GmTicketStatus {
     fn default() -> Self {
         Self::DBERROR

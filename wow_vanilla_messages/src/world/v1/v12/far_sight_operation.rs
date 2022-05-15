@@ -21,14 +21,6 @@ impl FarSightOperation {
 
 }
 
-impl ConstantSized for FarSightOperation {}
-
-impl MaximumPossibleSized for FarSightOperation {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for FarSightOperation {
     fn default() -> Self {
         Self::REMOVE

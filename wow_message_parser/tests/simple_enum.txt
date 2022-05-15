@@ -23,14 +23,6 @@ impl SimpleEnum {
 
 }
 
-impl ConstantSized for SimpleEnum {}
-
-impl MaximumPossibleSized for SimpleEnum {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for SimpleEnum {
     fn default() -> Self {
         Self::ZERO

@@ -21,14 +21,6 @@ impl LogFormat {
 
 }
 
-impl ConstantSized for LogFormat {}
-
-impl MaximumPossibleSized for LogFormat {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for LogFormat {
     fn default() -> Self {
         Self::DEFAULT

@@ -23,14 +23,6 @@ impl PetReactState {
 
 }
 
-impl ConstantSized for PetReactState {}
-
-impl MaximumPossibleSized for PetReactState {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for PetReactState {
     fn default() -> Self {
         Self::PASSIVE

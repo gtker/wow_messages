@@ -33,14 +33,6 @@ impl LootMethod {
 
 }
 
-impl ConstantSized for LootMethod {}
-
-impl MaximumPossibleSized for LootMethod {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for LootMethod {
     fn default() -> Self {
         Self::CORPSE

@@ -21,14 +21,6 @@ impl BattlefieldPortAction {
 
 }
 
-impl ConstantSized for BattlefieldPortAction {}
-
-impl MaximumPossibleSized for BattlefieldPortAction {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for BattlefieldPortAction {
     fn default() -> Self {
         Self::LEAVE_QUEUE

@@ -23,14 +23,6 @@ impl GmTicketStatusResponse {
 
 }
 
-impl ConstantSized for GmTicketStatusResponse {}
-
-impl MaximumPossibleSized for GmTicketStatusResponse {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for GmTicketStatusResponse {
     fn default() -> Self {
         Self::UPDATED

@@ -35,14 +35,6 @@ impl QuestPartyMessage {
 
 }
 
-impl ConstantSized for QuestPartyMessage {}
-
-impl MaximumPossibleSized for QuestPartyMessage {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for QuestPartyMessage {
     fn default() -> Self {
         Self::SHARING_QUEST

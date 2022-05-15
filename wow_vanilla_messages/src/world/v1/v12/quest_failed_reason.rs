@@ -37,14 +37,6 @@ impl QuestFailedReason {
 
 }
 
-impl ConstantSized for QuestFailedReason {}
-
-impl MaximumPossibleSized for QuestFailedReason {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for QuestFailedReason {
     fn default() -> Self {
         Self::DONT_HAVE_REQ

@@ -65,14 +65,6 @@ impl TradeStatus {
 
 }
 
-impl ConstantSized for TradeStatus {}
-
-impl MaximumPossibleSized for TradeStatus {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for TradeStatus {
     fn default() -> Self {
         Self::BUSY

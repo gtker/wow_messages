@@ -43,14 +43,6 @@ impl BuybackSlot {
 
 }
 
-impl ConstantSized for BuybackSlot {}
-
-impl MaximumPossibleSized for BuybackSlot {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for BuybackSlot {
     fn default() -> Self {
         Self::SLOT1

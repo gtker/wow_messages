@@ -25,14 +25,6 @@ impl Population {
 
 }
 
-impl ConstantSized for Population {}
-
-impl MaximumPossibleSized for Population {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for Population {
     fn default() -> Self {
         Self::GREEN_RECOMMENDED

@@ -41,14 +41,6 @@ impl SpellMissInfo {
 
 }
 
-impl ConstantSized for SpellMissInfo {}
-
-impl MaximumPossibleSized for SpellMissInfo {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for SpellMissInfo {
     fn default() -> Self {
         Self::NONE

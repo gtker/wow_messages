@@ -31,14 +31,6 @@ impl GmTicketResponse {
 
 }
 
-impl ConstantSized for GmTicketResponse {}
-
-impl MaximumPossibleSized for GmTicketResponse {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for GmTicketResponse {
     fn default() -> Self {
         Self::NOT_EXIST

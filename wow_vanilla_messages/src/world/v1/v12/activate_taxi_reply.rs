@@ -43,14 +43,6 @@ impl ActivateTaxiReply {
 
 }
 
-impl ConstantSized for ActivateTaxiReply {}
-
-impl MaximumPossibleSized for ActivateTaxiReply {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for ActivateTaxiReply {
     fn default() -> Self {
         Self::OK

@@ -68,10 +68,6 @@ fn common_impls(s: &mut Writer, e: &Definer) {
     s.bodyn(format!("impl {}", e.name()), |s| {
         as_type(s, e);
     });
-
-    s.constant_sized(e.name(), |a| {
-        a.wln(format!("{}", e.ty().size()));
-    });
 }
 
 fn as_type(s: &mut Writer, e: &Definer) {

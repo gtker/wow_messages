@@ -29,14 +29,6 @@ impl PetitionTurnInResult {
 
 }
 
-impl ConstantSized for PetitionTurnInResult {}
-
-impl MaximumPossibleSized for PetitionTurnInResult {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for PetitionTurnInResult {
     fn default() -> Self {
         Self::OK

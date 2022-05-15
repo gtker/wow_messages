@@ -21,14 +21,6 @@ impl QuestCompletable {
 
 }
 
-impl ConstantSized for QuestCompletable {}
-
-impl MaximumPossibleSized for QuestCompletable {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for QuestCompletable {
     fn default() -> Self {
         Self::NOT_COMPLETABLE

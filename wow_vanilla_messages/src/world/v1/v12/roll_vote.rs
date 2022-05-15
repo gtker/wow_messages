@@ -23,14 +23,6 @@ impl RollVote {
 
 }
 
-impl ConstantSized for RollVote {}
-
-impl MaximumPossibleSized for RollVote {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for RollVote {
     fn default() -> Self {
         Self::PASS

@@ -23,14 +23,6 @@ impl TrainingFailureReason {
 
 }
 
-impl ConstantSized for TrainingFailureReason {}
-
-impl MaximumPossibleSized for TrainingFailureReason {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for TrainingFailureReason {
     fn default() -> Self {
         Self::UNAVAILABLE

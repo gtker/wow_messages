@@ -273,14 +273,6 @@ impl SpellEffect {
 
 }
 
-impl ConstantSized for SpellEffect {}
-
-impl MaximumPossibleSized for SpellEffect {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for SpellEffect {
     fn default() -> Self {
         Self::NONE

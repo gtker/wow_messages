@@ -35,14 +35,6 @@ impl Class {
 
 }
 
-impl ConstantSized for Class {}
-
-impl MaximumPossibleSized for Class {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for Class {
     fn default() -> Self {
         Self::WARRIOR

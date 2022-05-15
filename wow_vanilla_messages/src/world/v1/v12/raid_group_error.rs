@@ -21,14 +21,6 @@ impl RaidGroupError {
 
 }
 
-impl ConstantSized for RaidGroupError {}
-
-impl MaximumPossibleSized for RaidGroupError {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for RaidGroupError {
     fn default() -> Self {
         Self::REQUIRED

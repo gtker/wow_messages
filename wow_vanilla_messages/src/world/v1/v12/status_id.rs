@@ -27,14 +27,6 @@ impl StatusId {
 
 }
 
-impl ConstantSized for StatusId {}
-
-impl MaximumPossibleSized for StatusId {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for StatusId {
     fn default() -> Self {
         Self::NONE

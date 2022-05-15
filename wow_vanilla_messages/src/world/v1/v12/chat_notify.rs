@@ -81,14 +81,6 @@ impl ChatNotify {
 
 }
 
-impl ConstantSized for ChatNotify {}
-
-impl MaximumPossibleSized for ChatNotify {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for ChatNotify {
     fn default() -> Self {
         Self::JOINED_NOTICE

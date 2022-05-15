@@ -35,14 +35,6 @@ impl PartyResult {
 
 }
 
-impl ConstantSized for PartyResult {}
-
-impl MaximumPossibleSized for PartyResult {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for PartyResult {
     fn default() -> Self {
         Self::SUCCESS

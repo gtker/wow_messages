@@ -309,14 +309,6 @@ impl CastFailureReason {
 
 }
 
-impl ConstantSized for CastFailureReason {}
-
-impl MaximumPossibleSized for CastFailureReason {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for CastFailureReason {
     fn default() -> Self {
         Self::AFFECTING_COMBAT

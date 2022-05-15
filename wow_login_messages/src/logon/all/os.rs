@@ -23,14 +23,6 @@ impl Os {
 
 }
 
-impl ConstantSized for Os {}
-
-impl MaximumPossibleSized for Os {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for Os {
     fn default() -> Self {
         Self::WINDOWS

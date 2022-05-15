@@ -45,14 +45,6 @@ impl GuildEvent {
 
 }
 
-impl ConstantSized for GuildEvent {}
-
-impl MaximumPossibleSized for GuildEvent {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for GuildEvent {
     fn default() -> Self {
         Self::PROMOTION

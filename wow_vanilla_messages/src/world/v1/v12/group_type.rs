@@ -21,14 +21,6 @@ impl GroupType {
 
 }
 
-impl ConstantSized for GroupType {}
-
-impl MaximumPossibleSized for GroupType {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for GroupType {
     fn default() -> Self {
         Self::NORMAL

@@ -35,14 +35,6 @@ impl CinematicSequenceId {
 
 }
 
-impl ConstantSized for CinematicSequenceId {}
-
-impl MaximumPossibleSized for CinematicSequenceId {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for CinematicSequenceId {
     fn default() -> Self {
         Self::HUMAN

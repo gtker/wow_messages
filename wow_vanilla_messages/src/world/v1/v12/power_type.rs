@@ -29,14 +29,6 @@ impl PowerType {
 
 }
 
-impl ConstantSized for PowerType {}
-
-impl MaximumPossibleSized for PowerType {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for PowerType {
     fn default() -> Self {
         Self::MANA

@@ -49,14 +49,6 @@ impl GuildCommandResult {
 
 }
 
-impl ConstantSized for GuildCommandResult {}
-
-impl MaximumPossibleSized for GuildCommandResult {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for GuildCommandResult {
     fn default() -> Self {
         Self::PLAYER_NO_MORE_IN_GUILD

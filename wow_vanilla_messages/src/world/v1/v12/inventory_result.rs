@@ -151,14 +151,6 @@ impl InventoryResult {
 
 }
 
-impl ConstantSized for InventoryResult {}
-
-impl MaximumPossibleSized for InventoryResult {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for InventoryResult {
     fn default() -> Self {
         Self::OK

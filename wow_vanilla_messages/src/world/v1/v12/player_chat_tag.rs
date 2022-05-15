@@ -25,14 +25,6 @@ impl PlayerChatTag {
 
 }
 
-impl ConstantSized for PlayerChatTag {}
-
-impl MaximumPossibleSized for PlayerChatTag {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for PlayerChatTag {
     fn default() -> Self {
         Self::NONE

@@ -29,14 +29,6 @@ impl GuildCommand {
 
 }
 
-impl ConstantSized for GuildCommand {}
-
-impl MaximumPossibleSized for GuildCommand {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for GuildCommand {
     fn default() -> Self {
         Self::CREATE

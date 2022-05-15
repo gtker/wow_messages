@@ -21,14 +21,6 @@ impl SimpleSpellCastResult {
 
 }
 
-impl ConstantSized for SimpleSpellCastResult {}
-
-impl MaximumPossibleSized for SimpleSpellCastResult {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for SimpleSpellCastResult {
     fn default() -> Self {
         Self::SUCCESS

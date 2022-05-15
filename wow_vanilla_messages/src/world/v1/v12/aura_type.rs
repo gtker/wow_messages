@@ -401,14 +401,6 @@ impl AuraType {
 
 }
 
-impl ConstantSized for AuraType {}
-
-impl MaximumPossibleSized for AuraType {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for AuraType {
     fn default() -> Self {
         Self::NONE

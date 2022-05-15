@@ -25,14 +25,6 @@ impl PetCommandState {
 
 }
 
-impl ConstantSized for PetCommandState {}
-
-impl MaximumPossibleSized for PetCommandState {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for PetCommandState {
     fn default() -> Self {
         Self::STAY

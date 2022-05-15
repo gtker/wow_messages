@@ -23,14 +23,6 @@ impl MeetingStoneFailure {
 
 }
 
-impl ConstantSized for MeetingStoneFailure {}
-
-impl MaximumPossibleSized for MeetingStoneFailure {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for MeetingStoneFailure {
     fn default() -> Self {
         Self::MEETINGSTONE_FAIL_PARTYLEADER

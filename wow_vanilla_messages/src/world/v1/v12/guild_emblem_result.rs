@@ -29,14 +29,6 @@ impl GuildEmblemResult {
 
 }
 
-impl ConstantSized for GuildEmblemResult {}
-
-impl MaximumPossibleSized for GuildEmblemResult {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for GuildEmblemResult {
     fn default() -> Self {
         Self::SUCCESS

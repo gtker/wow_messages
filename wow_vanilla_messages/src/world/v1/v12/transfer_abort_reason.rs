@@ -27,14 +27,6 @@ impl TransferAbortReason {
 
 }
 
-impl ConstantSized for TransferAbortReason {}
-
-impl MaximumPossibleSized for TransferAbortReason {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for TransferAbortReason {
     fn default() -> Self {
         Self::NONE

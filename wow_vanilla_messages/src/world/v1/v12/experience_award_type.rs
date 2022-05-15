@@ -21,14 +21,6 @@ impl ExperienceAwardType {
 
 }
 
-impl ConstantSized for ExperienceAwardType {}
-
-impl MaximumPossibleSized for ExperienceAwardType {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for ExperienceAwardType {
     fn default() -> Self {
         Self::KILL

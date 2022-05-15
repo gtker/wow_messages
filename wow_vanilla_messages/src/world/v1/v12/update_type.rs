@@ -29,14 +29,6 @@ impl UpdateType {
 
 }
 
-impl ConstantSized for UpdateType {}
-
-impl MaximumPossibleSized for UpdateType {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for UpdateType {
     fn default() -> Self {
         Self::VALUES

@@ -71,14 +71,6 @@ impl FriendResult {
 
 }
 
-impl ConstantSized for FriendResult {}
-
-impl MaximumPossibleSized for FriendResult {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for FriendResult {
     fn default() -> Self {
         Self::DB_ERROR

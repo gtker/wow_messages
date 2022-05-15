@@ -35,14 +35,6 @@ impl BuyResult {
 
 }
 
-impl ConstantSized for BuyResult {}
-
-impl MaximumPossibleSized for BuyResult {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for BuyResult {
     fn default() -> Self {
         Self::CANT_FIND_ITEM

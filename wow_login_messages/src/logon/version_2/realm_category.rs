@@ -27,14 +27,6 @@ impl RealmCategory {
 
 }
 
-impl ConstantSized for RealmCategory {}
-
-impl MaximumPossibleSized for RealmCategory {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for RealmCategory {
     fn default() -> Self {
         Self::DEFAULT

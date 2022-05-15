@@ -29,14 +29,6 @@ impl SellItemResult {
 
 }
 
-impl ConstantSized for SellItemResult {}
-
-impl MaximumPossibleSized for SellItemResult {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for SellItemResult {
     fn default() -> Self {
         Self::CANT_FIND_ITEM

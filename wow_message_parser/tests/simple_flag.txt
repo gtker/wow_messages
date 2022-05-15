@@ -17,9 +17,9 @@ impl SimpleFlag {
 }
 
 impl SimpleFlag {
-    pub const ZERO: u8 = 0x00;
-    pub const ONE: u8 = 0x01;
-    pub const TWO: u8 = 0x02;
+    pub(crate) const ZERO: u8 = 0x00;
+    pub(crate) const ONE: u8 = 0x01;
+    pub(crate) const TWO: u8 = 0x02;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -92,13 +92,5 @@ impl SimpleFlag {
         self.inner
     }
 
-}
-
-impl ConstantSized for SimpleFlag {}
-
-impl MaximumPossibleSized for SimpleFlag {
-    fn maximum_possible_size() -> usize {
-        1
-    }
 }
 

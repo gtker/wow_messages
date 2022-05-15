@@ -21,14 +21,6 @@ impl NewItemChatAlert {
 
 }
 
-impl ConstantSized for NewItemChatAlert {}
-
-impl MaximumPossibleSized for NewItemChatAlert {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for NewItemChatAlert {
     fn default() -> Self {
         Self::DO_NOT_SHOW

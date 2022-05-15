@@ -27,14 +27,6 @@ impl ServerMessageType {
 
 }
 
-impl ConstantSized for ServerMessageType {}
-
-impl MaximumPossibleSized for ServerMessageType {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for ServerMessageType {
     fn default() -> Self {
         Self::SHUTDOWN_TIME

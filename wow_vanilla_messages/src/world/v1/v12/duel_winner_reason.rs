@@ -21,14 +21,6 @@ impl DuelWinnerReason {
 
 }
 
-impl ConstantSized for DuelWinnerReason {}
-
-impl MaximumPossibleSized for DuelWinnerReason {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for DuelWinnerReason {
     fn default() -> Self {
         Self::WON

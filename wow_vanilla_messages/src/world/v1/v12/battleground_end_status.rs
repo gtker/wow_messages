@@ -21,14 +21,6 @@ impl BattlegroundEndStatus {
 
 }
 
-impl ConstantSized for BattlegroundEndStatus {}
-
-impl MaximumPossibleSized for BattlegroundEndStatus {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for BattlegroundEndStatus {
     fn default() -> Self {
         Self::NOT_ENDED

@@ -21,14 +21,6 @@ impl WeatherChangeType {
 
 }
 
-impl ConstantSized for WeatherChangeType {}
-
-impl MaximumPossibleSized for WeatherChangeType {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for WeatherChangeType {
     fn default() -> Self {
         Self::SMOOTH

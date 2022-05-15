@@ -57,14 +57,6 @@ impl PvpRank {
 
 }
 
-impl ConstantSized for PvpRank {}
-
-impl MaximumPossibleSized for PvpRank {
-    fn maximum_possible_size() -> usize {
-        1
-    }
-}
-
 impl Default for PvpRank {
     fn default() -> Self {
         Self::NO_RANK

@@ -21,14 +21,6 @@ impl NewItemSource {
 
 }
 
-impl ConstantSized for NewItemSource {}
-
-impl MaximumPossibleSized for NewItemSource {
-    fn maximum_possible_size() -> usize {
-        4
-    }
-}
-
 impl Default for NewItemSource {
     fn default() -> Self {
         Self::LOOTED
