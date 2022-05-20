@@ -133,7 +133,7 @@ impl Object {
                 mask1,
             } => {
                 // guid1: PackedGuid
-                guid1.write_packed(w)?;
+                w.write_all(&guid1.packed_guid())?;
 
                 // mask1: UpdateMask
                 mask1.write(w)?;
@@ -144,7 +144,7 @@ impl Object {
                 movement1,
             } => {
                 // guid2: PackedGuid
-                guid2.write_packed(w)?;
+                w.write_all(&guid2.packed_guid())?;
 
                 // movement1: MovementBlock
                 movement1.write(w)?;
@@ -157,7 +157,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                guid3.write_packed(w)?;
+                w.write_all(&guid3.packed_guid())?;
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
@@ -176,7 +176,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                guid3.write_packed(w)?;
+                w.write_all(&guid3.packed_guid())?;
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
@@ -197,7 +197,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    i.write_packed(w)?;
+                    w.write_all(&i.packed_guid())?;
                 }
 
             }
@@ -210,7 +210,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    i.write_packed(w)?;
+                    w.write_all(&i.packed_guid())?;
                 }
 
             }
@@ -337,7 +337,7 @@ impl Object {
                 mask1,
             } => {
                 // guid1: PackedGuid
-                guid1.tokio_write_packed(w).await?;
+                w.write_all(&guid1.packed_guid()).await?;
 
                 // mask1: UpdateMask
                 mask1.tokio_write(w).await?;
@@ -348,7 +348,7 @@ impl Object {
                 movement1,
             } => {
                 // guid2: PackedGuid
-                guid2.tokio_write_packed(w).await?;
+                w.write_all(&guid2.packed_guid()).await?;
 
                 // movement1: MovementBlock
                 movement1.tokio_write(w).await?;
@@ -361,7 +361,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                guid3.tokio_write_packed(w).await?;
+                w.write_all(&guid3.packed_guid()).await?;
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
@@ -380,7 +380,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                guid3.tokio_write_packed(w).await?;
+                w.write_all(&guid3.packed_guid()).await?;
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
@@ -401,7 +401,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    i.tokio_write_packed(w).await?;
+                    w.write_all(&i.packed_guid()).await?;
                 }
 
             }
@@ -414,7 +414,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    i.tokio_write_packed(w).await?;
+                    w.write_all(&i.packed_guid()).await?;
                 }
 
             }
@@ -541,7 +541,7 @@ impl Object {
                 mask1,
             } => {
                 // guid1: PackedGuid
-                guid1.astd_write_packed(w).await?;
+                w.write_all(&guid1.packed_guid()).await?;
 
                 // mask1: UpdateMask
                 mask1.astd_write(w).await?;
@@ -552,7 +552,7 @@ impl Object {
                 movement1,
             } => {
                 // guid2: PackedGuid
-                guid2.astd_write_packed(w).await?;
+                w.write_all(&guid2.packed_guid()).await?;
 
                 // movement1: MovementBlock
                 movement1.astd_write(w).await?;
@@ -565,7 +565,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                guid3.astd_write_packed(w).await?;
+                w.write_all(&guid3.packed_guid()).await?;
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
@@ -584,7 +584,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                guid3.astd_write_packed(w).await?;
+                w.write_all(&guid3.packed_guid()).await?;
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
@@ -605,7 +605,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    i.astd_write_packed(w).await?;
+                    w.write_all(&i.packed_guid()).await?;
                 }
 
             }
@@ -618,7 +618,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    i.astd_write_packed(w).await?;
+                    w.write_all(&i.packed_guid()).await?;
                 }
 
             }

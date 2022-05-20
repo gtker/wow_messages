@@ -86,7 +86,7 @@ pub fn print_write_field_array(
         ArrayType::Guid => {
             s.wln(format!("i.{}write(w){}?;", prefix, postfix));
         }
-        ArrayType::PackedGuid => s.wln(format!("i.{}write_packed(w){}?;", prefix, postfix)),
+        ArrayType::PackedGuid => s.wln(format!("w.write_all(&i.packed_guid()){}?;", postfix)),
     }
 
     s.closing_curly_newline();
@@ -290,9 +290,8 @@ pub fn print_write_definition(
         }
         Type::PackedGuid => {
             s.wln(format!(
-                "{variable_prefix}{name}.{prefix}write_packed(w){postfix}?;",
+                "w.write_all(&{variable_prefix}{name}.packed_guid()){postfix}?;",
                 variable_prefix = variable_prefix,
-                prefix = prefix,
                 postfix = postfix,
                 name = d.name(),
             ));

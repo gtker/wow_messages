@@ -187,37 +187,37 @@ impl SpellCastTargets {
 
         if let Some(if_statement) = &self.target_flags.unit {
             // unit_target1: PackedGuid
-            if_statement.unit_target1.write_packed(w)?;
+            w.write_all(&if_statement.unit_target1.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.unit_enemy {
             // unit_target2: PackedGuid
-            if_statement.unit_target2.write_packed(w)?;
+            w.write_all(&if_statement.unit_target2.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.gameobject {
             // object_target1: PackedGuid
-            if_statement.object_target1.write_packed(w)?;
+            w.write_all(&if_statement.object_target1.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.locked {
             // object_target2: PackedGuid
-            if_statement.object_target2.write_packed(w)?;
+            w.write_all(&if_statement.object_target2.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.item {
             // item_target1: PackedGuid
-            if_statement.item_target1.write_packed(w)?;
+            w.write_all(&if_statement.item_target1.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.trade_item {
             // item_target2: PackedGuid
-            if_statement.item_target2.write_packed(w)?;
+            w.write_all(&if_statement.item_target2.packed_guid())?;
 
         }
 
@@ -255,13 +255,13 @@ impl SpellCastTargets {
 
         if let Some(if_statement) = &self.target_flags.corpse_ally {
             // corpse_target1: PackedGuid
-            if_statement.corpse_target1.write_packed(w)?;
+            w.write_all(&if_statement.corpse_target1.packed_guid())?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.corpse_enemy {
             // corpse_target2: PackedGuid
-            if_statement.corpse_target2.write_packed(w)?;
+            w.write_all(&if_statement.corpse_target2.packed_guid())?;
 
         }
 
@@ -443,37 +443,37 @@ impl SpellCastTargets {
 
         if let Some(if_statement) = &self.target_flags.unit {
             // unit_target1: PackedGuid
-            if_statement.unit_target1.tokio_write_packed(w).await?;
+            w.write_all(&if_statement.unit_target1.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.unit_enemy {
             // unit_target2: PackedGuid
-            if_statement.unit_target2.tokio_write_packed(w).await?;
+            w.write_all(&if_statement.unit_target2.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.gameobject {
             // object_target1: PackedGuid
-            if_statement.object_target1.tokio_write_packed(w).await?;
+            w.write_all(&if_statement.object_target1.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.locked {
             // object_target2: PackedGuid
-            if_statement.object_target2.tokio_write_packed(w).await?;
+            w.write_all(&if_statement.object_target2.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.item {
             // item_target1: PackedGuid
-            if_statement.item_target1.tokio_write_packed(w).await?;
+            w.write_all(&if_statement.item_target1.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.trade_item {
             // item_target2: PackedGuid
-            if_statement.item_target2.tokio_write_packed(w).await?;
+            w.write_all(&if_statement.item_target2.packed_guid()).await?;
 
         }
 
@@ -511,13 +511,13 @@ impl SpellCastTargets {
 
         if let Some(if_statement) = &self.target_flags.corpse_ally {
             // corpse_target1: PackedGuid
-            if_statement.corpse_target1.tokio_write_packed(w).await?;
+            w.write_all(&if_statement.corpse_target1.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.corpse_enemy {
             // corpse_target2: PackedGuid
-            if_statement.corpse_target2.tokio_write_packed(w).await?;
+            w.write_all(&if_statement.corpse_target2.packed_guid()).await?;
 
         }
 
@@ -699,37 +699,37 @@ impl SpellCastTargets {
 
         if let Some(if_statement) = &self.target_flags.unit {
             // unit_target1: PackedGuid
-            if_statement.unit_target1.astd_write_packed(w).await?;
+            w.write_all(&if_statement.unit_target1.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.unit_enemy {
             // unit_target2: PackedGuid
-            if_statement.unit_target2.astd_write_packed(w).await?;
+            w.write_all(&if_statement.unit_target2.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.gameobject {
             // object_target1: PackedGuid
-            if_statement.object_target1.astd_write_packed(w).await?;
+            w.write_all(&if_statement.object_target1.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.locked {
             // object_target2: PackedGuid
-            if_statement.object_target2.astd_write_packed(w).await?;
+            w.write_all(&if_statement.object_target2.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.item {
             // item_target1: PackedGuid
-            if_statement.item_target1.astd_write_packed(w).await?;
+            w.write_all(&if_statement.item_target1.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.trade_item {
             // item_target2: PackedGuid
-            if_statement.item_target2.astd_write_packed(w).await?;
+            w.write_all(&if_statement.item_target2.packed_guid()).await?;
 
         }
 
@@ -767,13 +767,13 @@ impl SpellCastTargets {
 
         if let Some(if_statement) = &self.target_flags.corpse_ally {
             // corpse_target1: PackedGuid
-            if_statement.corpse_target1.astd_write_packed(w).await?;
+            w.write_all(&if_statement.corpse_target1.packed_guid()).await?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.corpse_enemy {
             // corpse_target2: PackedGuid
-            if_statement.corpse_target2.astd_write_packed(w).await?;
+            w.write_all(&if_statement.corpse_target2.packed_guid()).await?;
 
         }
 

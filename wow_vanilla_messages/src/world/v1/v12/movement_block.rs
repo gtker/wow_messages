@@ -484,7 +484,7 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.melee_attacking {
             // guid: PackedGuid
-            if_statement.guid.write_packed(w)?;
+            w.write_all(&if_statement.guid.packed_guid())?;
 
         }
 
@@ -958,7 +958,7 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.melee_attacking {
             // guid: PackedGuid
-            if_statement.guid.tokio_write_packed(w).await?;
+            w.write_all(&if_statement.guid.packed_guid()).await?;
 
         }
 
@@ -1432,7 +1432,7 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.melee_attacking {
             // guid: PackedGuid
-            if_statement.guid.astd_write_packed(w).await?;
+            w.write_all(&if_statement.guid.packed_guid()).await?;
 
         }
 

@@ -58,10 +58,10 @@ impl MessageBody for SMSG_PERIODICAURALOG {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target: PackedGuid
-        self.target.write_packed(w)?;
+        w.write_all(&self.target.packed_guid())?;
 
         // caster: PackedGuid
-        self.caster.write_packed(w)?;
+        w.write_all(&self.caster.packed_guid())?;
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
@@ -132,10 +132,10 @@ impl MessageBody for SMSG_PERIODICAURALOG {
      {
         Box::pin(async move {
             // target: PackedGuid
-            self.target.tokio_write_packed(w).await?;
+            w.write_all(&self.target.packed_guid()).await?;
 
             // caster: PackedGuid
-            self.caster.tokio_write_packed(w).await?;
+            w.write_all(&self.caster.packed_guid()).await?;
 
             // spell: u32
             w.write_all(&self.spell.to_le_bytes()).await?;
@@ -207,10 +207,10 @@ impl MessageBody for SMSG_PERIODICAURALOG {
      {
         Box::pin(async move {
             // target: PackedGuid
-            self.target.astd_write_packed(w).await?;
+            w.write_all(&self.target.packed_guid()).await?;
 
             // caster: PackedGuid
-            self.caster.astd_write_packed(w).await?;
+            w.write_all(&self.caster.packed_guid()).await?;
 
             // spell: u32
             w.write_all(&self.spell.to_le_bytes()).await?;

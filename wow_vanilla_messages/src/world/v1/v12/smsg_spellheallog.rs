@@ -56,10 +56,10 @@ impl MessageBody for SMSG_SPELLHEALLOG {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // victim_guid: PackedGuid
-        self.victim_guid.write_packed(w)?;
+        w.write_all(&self.victim_guid.packed_guid())?;
 
         // caster_guid: PackedGuid
-        self.caster_guid.write_packed(w)?;
+        w.write_all(&self.caster_guid.packed_guid())?;
 
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
@@ -126,10 +126,10 @@ impl MessageBody for SMSG_SPELLHEALLOG {
      {
         Box::pin(async move {
             // victim_guid: PackedGuid
-            self.victim_guid.tokio_write_packed(w).await?;
+            w.write_all(&self.victim_guid.packed_guid()).await?;
 
             // caster_guid: PackedGuid
-            self.caster_guid.tokio_write_packed(w).await?;
+            w.write_all(&self.caster_guid.packed_guid()).await?;
 
             // id: u32
             w.write_all(&self.id.to_le_bytes()).await?;
@@ -197,10 +197,10 @@ impl MessageBody for SMSG_SPELLHEALLOG {
      {
         Box::pin(async move {
             // victim_guid: PackedGuid
-            self.victim_guid.astd_write_packed(w).await?;
+            w.write_all(&self.victim_guid.packed_guid()).await?;
 
             // caster_guid: PackedGuid
-            self.caster_guid.astd_write_packed(w).await?;
+            w.write_all(&self.caster_guid.packed_guid()).await?;
 
             // id: u32
             w.write_all(&self.id.to_le_bytes()).await?;

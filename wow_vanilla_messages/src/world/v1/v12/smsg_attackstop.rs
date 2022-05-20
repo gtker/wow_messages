@@ -46,10 +46,10 @@ impl MessageBody for SMSG_ATTACKSTOP {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed(w)?;
+        w.write_all(&self.player.packed_guid())?;
 
         // enemy: PackedGuid
-        self.enemy.write_packed(w)?;
+        w.write_all(&self.enemy.packed_guid())?;
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -102,10 +102,10 @@ impl MessageBody for SMSG_ATTACKSTOP {
      {
         Box::pin(async move {
             // player: PackedGuid
-            self.player.tokio_write_packed(w).await?;
+            w.write_all(&self.player.packed_guid()).await?;
 
             // enemy: PackedGuid
-            self.enemy.tokio_write_packed(w).await?;
+            w.write_all(&self.enemy.packed_guid()).await?;
 
             // unknown1: u32
             w.write_all(&self.unknown1.to_le_bytes()).await?;
@@ -159,10 +159,10 @@ impl MessageBody for SMSG_ATTACKSTOP {
      {
         Box::pin(async move {
             // player: PackedGuid
-            self.player.astd_write_packed(w).await?;
+            w.write_all(&self.player.packed_guid()).await?;
 
             // enemy: PackedGuid
-            self.enemy.astd_write_packed(w).await?;
+            w.write_all(&self.enemy.packed_guid()).await?;
 
             // unknown1: u32
             w.write_all(&self.unknown1.to_le_bytes()).await?;

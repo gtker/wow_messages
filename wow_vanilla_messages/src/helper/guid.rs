@@ -79,12 +79,6 @@ impl Guid {
 
         Ok(Self { guid })
     }
-
-    pub fn write_packed(&self, w: &mut impl Write) -> Result<(), std::io::Error> {
-        w.write_all(&self.packed_guid())?;
-
-        Ok(())
-    }
 }
 
 #[cfg(feature = "async-std")]
@@ -105,15 +99,6 @@ impl Guid {
         }
 
         Ok(Self { guid })
-    }
-
-    pub async fn astd_write_packed<W: WriteExt + Unpin + Send>(
-        &self,
-        w: &mut W,
-    ) -> Result<(), std::io::Error> {
-        w.write_all(&self.packed_guid()).await?;
-
-        Ok(())
     }
 
     pub async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, std::io::Error> {
@@ -150,15 +135,6 @@ impl Guid {
         }
 
         Ok(Self { guid })
-    }
-
-    pub async fn tokio_write_packed<W: AsyncWriteExt + Unpin + Send>(
-        &self,
-        w: &mut W,
-    ) -> Result<(), std::io::Error> {
-        w.write_all(&self.packed_guid()).await?;
-
-        Ok(())
     }
 
     pub async fn tokio_read<R: AsyncReadExt + Unpin + Send>(
@@ -198,7 +174,7 @@ mod test {
         assert_eq!(guid.guid(), GUID);
 
         let mut r = Vec::with_capacity(9);
-        guid.write_packed(&mut r).unwrap();
+        r.append(&mut guid.packed_guid());
 
         let mut cursor = Cursor::new(r);
         let guid2 = Guid::read_packed(&mut cursor).unwrap();

@@ -54,10 +54,10 @@ impl MessageBody for SMSG_ATTACKERSTATEUPDATE {
         w.write_all(&self.hit_info.to_le_bytes())?;
 
         // attacker: PackedGuid
-        self.attacker.write_packed(w)?;
+        w.write_all(&self.attacker.packed_guid())?;
 
         // target: PackedGuid
-        self.target.write_packed(w)?;
+        w.write_all(&self.target.packed_guid())?;
 
         // total_damage: u32
         w.write_all(&self.total_damage.to_le_bytes())?;
@@ -117,10 +117,10 @@ impl MessageBody for SMSG_ATTACKERSTATEUPDATE {
             w.write_all(&self.hit_info.to_le_bytes()).await?;
 
             // attacker: PackedGuid
-            self.attacker.tokio_write_packed(w).await?;
+            w.write_all(&self.attacker.packed_guid()).await?;
 
             // target: PackedGuid
-            self.target.tokio_write_packed(w).await?;
+            w.write_all(&self.target.packed_guid()).await?;
 
             // total_damage: u32
             w.write_all(&self.total_damage.to_le_bytes()).await?;
@@ -181,10 +181,10 @@ impl MessageBody for SMSG_ATTACKERSTATEUPDATE {
             w.write_all(&self.hit_info.to_le_bytes()).await?;
 
             // attacker: PackedGuid
-            self.attacker.astd_write_packed(w).await?;
+            w.write_all(&self.attacker.packed_guid()).await?;
 
             // target: PackedGuid
-            self.target.astd_write_packed(w).await?;
+            w.write_all(&self.target.packed_guid()).await?;
 
             // total_damage: u32
             w.write_all(&self.total_damage.to_le_bytes()).await?;

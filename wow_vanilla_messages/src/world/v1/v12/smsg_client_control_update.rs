@@ -41,7 +41,7 @@ impl MessageBody for SMSG_CLIENT_CONTROL_UPDATE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed(w)?;
+        w.write_all(&self.guid.packed_guid())?;
 
         // allow_movement: u8
         w.write_all(&self.allow_movement.to_le_bytes())?;
@@ -90,7 +90,7 @@ impl MessageBody for SMSG_CLIENT_CONTROL_UPDATE {
      {
         Box::pin(async move {
             // guid: PackedGuid
-            self.guid.tokio_write_packed(w).await?;
+            w.write_all(&self.guid.packed_guid()).await?;
 
             // allow_movement: u8
             w.write_all(&self.allow_movement.to_le_bytes()).await?;
@@ -140,7 +140,7 @@ impl MessageBody for SMSG_CLIENT_CONTROL_UPDATE {
      {
         Box::pin(async move {
             // guid: PackedGuid
-            self.guid.astd_write_packed(w).await?;
+            w.write_all(&self.guid.packed_guid()).await?;
 
             // allow_movement: u8
             w.write_all(&self.allow_movement.to_le_bytes()).await?;

@@ -84,10 +84,10 @@ impl MessageBody for SMSG_SPELL_START {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // cast_item: PackedGuid
-        self.cast_item.write_packed(w)?;
+        w.write_all(&self.cast_item.packed_guid())?;
 
         // caster: PackedGuid
-        self.caster.write_packed(w)?;
+        w.write_all(&self.caster.packed_guid())?;
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
@@ -191,10 +191,10 @@ impl MessageBody for SMSG_SPELL_START {
      {
         Box::pin(async move {
             // cast_item: PackedGuid
-            self.cast_item.tokio_write_packed(w).await?;
+            w.write_all(&self.cast_item.packed_guid()).await?;
 
             // caster: PackedGuid
-            self.caster.tokio_write_packed(w).await?;
+            w.write_all(&self.caster.packed_guid()).await?;
 
             // spell: u32
             w.write_all(&self.spell.to_le_bytes()).await?;
@@ -299,10 +299,10 @@ impl MessageBody for SMSG_SPELL_START {
      {
         Box::pin(async move {
             // cast_item: PackedGuid
-            self.cast_item.astd_write_packed(w).await?;
+            w.write_all(&self.cast_item.packed_guid()).await?;
 
             // caster: PackedGuid
-            self.caster.astd_write_packed(w).await?;
+            w.write_all(&self.caster.packed_guid()).await?;
 
             // spell: u32
             w.write_all(&self.spell.to_le_bytes()).await?;

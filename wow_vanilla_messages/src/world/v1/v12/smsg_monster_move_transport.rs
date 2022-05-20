@@ -59,7 +59,7 @@ impl MessageBody for SMSG_MONSTER_MOVE_TRANSPORT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // transport: PackedGuid
-        self.transport.write_packed(w)?;
+        w.write_all(&self.transport.packed_guid())?;
 
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes())?;
@@ -133,7 +133,7 @@ impl MessageBody for SMSG_MONSTER_MOVE_TRANSPORT {
      {
         Box::pin(async move {
             // transport: PackedGuid
-            self.transport.tokio_write_packed(w).await?;
+            w.write_all(&self.transport.packed_guid()).await?;
 
             // position_x: f32
             w.write_all(&self.position_x.to_le_bytes()).await?;
@@ -208,7 +208,7 @@ impl MessageBody for SMSG_MONSTER_MOVE_TRANSPORT {
      {
         Box::pin(async move {
             // transport: PackedGuid
-            self.transport.astd_write_packed(w).await?;
+            w.write_all(&self.transport.packed_guid()).await?;
 
             // position_x: f32
             w.write_all(&self.position_x.to_le_bytes()).await?;
