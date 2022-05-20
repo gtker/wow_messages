@@ -66,33 +66,37 @@ impl UpdatePlayer {
     }
 
     pub(crate) fn as_bytes(&self) -> Vec<u8> {
-        let mut v = Vec::new();
+        as_bytes(&self.header, &self.values)
+    }
+}
 
-        v.write_all(&[self.header.len() as u8]).unwrap();
+fn as_bytes(header: &[u32], values: &BTreeMap<u16, UpdateValue>) -> Vec<u8> {
+    let mut v = Vec::new();
 
-        for h in &self.header {
-            v.write_all(h.to_le_bytes().as_slice()).unwrap();
-        }
+    v.write_all(&[header.len() as u8]).unwrap();
 
-        for (_, value) in &self.values {
-            match value {
-                UpdateValue::Guid(g) => {
-                    v.write_all(&g.to_le_bytes()).unwrap();
-                }
-                UpdateValue::U32(u) => {
-                    v.write_all(&u.to_le_bytes()).unwrap();
-                }
-                UpdateValue::I32(i) => {
-                    v.write_all(&i.to_le_bytes()).unwrap();
-                }
-                UpdateValue::F32(f) => {
-                    v.write_all(&f.to_le_bytes()).unwrap();
-                }
+    for h in header {
+        v.write_all(h.to_le_bytes().as_slice()).unwrap();
+    }
+
+    for (_, value) in values {
+        match value {
+            UpdateValue::Guid(g) => {
+                v.write_all(&g.to_le_bytes()).unwrap();
+            }
+            UpdateValue::U32(u) => {
+                v.write_all(&u.to_le_bytes()).unwrap();
+            }
+            UpdateValue::I32(i) => {
+                v.write_all(&i.to_le_bytes()).unwrap();
+            }
+            UpdateValue::F32(f) => {
+                v.write_all(&f.to_le_bytes()).unwrap();
             }
         }
-
-        v
     }
+
+    v
 }
 
 #[derive(Debug, Clone, PartialEq)]
