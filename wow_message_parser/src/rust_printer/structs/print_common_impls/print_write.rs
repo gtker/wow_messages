@@ -3,9 +3,7 @@ use crate::container::{
 };
 use crate::parser::types::objects::Objects;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{
-    Array, ArrayType, FloatingPointType, IntegerType, ObjectType, VerifiedContainerValue,
-};
+use crate::parser::types::{Array, ArrayType, IntegerType, ObjectType, VerifiedContainerValue};
 use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 use crate::CONTAINER_SELF_SIZE_FIELD;
@@ -23,39 +21,6 @@ pub fn print_unencrypted_write_header(s: &mut Writer, e: &Container, postfix: &s
         }
         _ => unreachable!(),
     }
-}
-
-pub fn print_write_field_cstring(
-    s: &mut Writer,
-    variable_name: &str,
-    variable_prefix: &str,
-    postfix: &str,
-) {
-    s.wln(format!(
-        "w.write_all({prefix}{name}.as_bytes()){postfix}?;",
-        name = variable_name,
-        prefix = variable_prefix,
-        postfix = postfix,
-    ));
-    s.wln("// Null terminator");
-    s.wln(format!("w.write_all(&[0]){postfix}?;", postfix = postfix));
-    s.newline();
-}
-
-pub fn print_write_field_string(
-    s: &mut Writer,
-    variable_name: &str,
-    variable_prefix: &str,
-    postfix: &str,
-) {
-    s.wln(format!(
-        "w.write_all({prefix}{name}.as_bytes()){postfix}?;",
-        name = variable_name,
-        prefix = variable_prefix,
-        postfix = postfix,
-    ));
-
-    s.newline();
 }
 
 pub fn print_write_field_array(
@@ -89,25 +54,7 @@ pub fn print_write_field_array(
         ArrayType::PackedGuid => s.wln(format!("w.write_all(&i.packed_guid()){}?;", postfix)),
     }
 
-    s.closing_curly_newline();
-}
-
-pub fn print_write_field_floating(
-    s: &mut Writer,
-    variable_name: &str,
-    variable_prefix: &str,
-    floating: &FloatingPointType,
-    postfix: &str,
-) {
-    s.wln(format!(
-        "w.write_all(&{variable_prefix}{variable_name}.to_{endian}_bytes()){postfix}?;",
-        variable_prefix = variable_prefix,
-        variable_name = variable_name,
-        endian = floating.rust_endian_str(),
-        postfix = postfix,
-    ));
-
-    s.newline();
+    s.closing_curly();
 }
 
 pub fn print_write_field_integer(
@@ -154,8 +101,6 @@ pub fn print_write_field_integer(
             postfix = postfix,
         ));
     }
-
-    s.newline();
 }
 
 pub fn print_write_field_identifier(
@@ -172,8 +117,6 @@ pub fn print_write_field_identifier(
         prefix = prefix,
         postfix = postfix,
     ));
-
-    s.newline();
 }
 
 pub fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
@@ -221,13 +164,31 @@ pub fn print_write_definition(
             );
         }
         Type::FloatingPoint(floating) => {
-            print_write_field_floating(s, d.name(), variable_prefix, floating, postfix);
+            s.wln(format!(
+                "w.write_all(&{variable_prefix}{variable_name}.to_{endian}_bytes()){postfix}?;",
+                variable_prefix = variable_prefix,
+                variable_name = d.name(),
+                endian = floating.rust_endian_str(),
+                postfix = postfix,
+            ));
         }
         Type::CString => {
-            print_write_field_cstring(s, d.name(), variable_prefix, postfix);
+            s.wln(format!(
+                "w.write_all({prefix}{name}.as_bytes()){postfix}?;",
+                name = d.name(),
+                prefix = variable_prefix,
+                postfix = postfix,
+            ));
+            s.wln("// Null terminator");
+            s.wln(format!("w.write_all(&[0]){postfix}?;", postfix = postfix));
         }
         Type::String { .. } => {
-            print_write_field_string(s, d.name(), variable_prefix, postfix);
+            s.wln(format!(
+                "w.write_all({prefix}{name}.as_bytes()){postfix}?;",
+                name = d.name(),
+                prefix = variable_prefix,
+                postfix = postfix,
+            ));
         }
         Type::Array(array) => {
             print_write_field_array(s, d.name(), variable_prefix, array, prefix, postfix);
@@ -269,7 +230,6 @@ pub fn print_write_definition(
                 postfix = postfix,
                 name = d.name(),
             ));
-            s.newline();
         }
         Type::Guid => {
             s.wln(format!(
@@ -278,7 +238,6 @@ pub fn print_write_definition(
                 postfix = postfix,
                 name = d.name()
             ));
-            s.newline();
         }
         Type::UpdateMask | Type::AuraMask => {
             s.wln(format!(
@@ -287,9 +246,9 @@ pub fn print_write_definition(
                 postfix = postfix,
                 name = d.name()
             ));
-            s.newline();
         }
     }
+    s.newline();
 }
 
 fn print_write_flag_if_statement(
