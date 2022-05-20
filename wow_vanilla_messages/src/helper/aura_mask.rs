@@ -1,9 +1,9 @@
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
 use std::io;
 use std::io::{Read, Write};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 
 #[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub struct AuraMask {
@@ -25,48 +25,6 @@ impl AuraMask {
         Ok(Self { auras })
     }
 
-    pub fn write(&self, w: &mut impl Write) -> Result<(), io::Error> {
-        let mut bit_pattern: u32 = 0;
-        for (i, &b) in self.auras().iter().enumerate() {
-            if b.is_some() {
-                bit_pattern |= 1 << i;
-            }
-        }
-
-        crate::util::write_u32_le(w, bit_pattern)?;
-
-        for &i in self.auras() {
-            if let Some(b) = i {
-                crate::util::write_u16_le(w, b)?;
-            }
-        }
-
-        Ok(())
-    }
-
-    #[cfg(feature = "async-std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(
-        &self,
-        w: &mut W,
-    ) -> Result<(), std::io::Error> {
-        let mut bit_pattern: u32 = 0;
-        for (i, &b) in self.auras().iter().enumerate() {
-            if b.is_some() {
-                bit_pattern |= 1 << i;
-            }
-        }
-
-        crate::util::astd_write_u32_le(w, bit_pattern).await?;
-
-        for &i in self.auras() {
-            if let Some(b) = i {
-                crate::util::astd_write_u16_le(w, b).await?;
-            }
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, io::Error> {
         let mut auras = [None; Self::MAX_CAPACITY];
@@ -81,11 +39,8 @@ impl AuraMask {
         Ok(Self { auras })
     }
 
-    #[cfg(feature = "tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
-        &self,
-        w: &mut W,
-    ) -> Result<(), std::io::Error> {
+    pub(crate) fn as_bytes(&self) -> Vec<u8> {
+        let mut v = Vec::with_capacity(48 * 4);
         let mut bit_pattern: u32 = 0;
         for (i, &b) in self.auras().iter().enumerate() {
             if b.is_some() {
@@ -93,15 +48,15 @@ impl AuraMask {
             }
         }
 
-        crate::util::tokio_write_u32_le(w, bit_pattern).await?;
+        std::io::Write::write_all(&mut v, bit_pattern.to_le_bytes().as_slice());
 
         for &i in self.auras() {
             if let Some(b) = i {
-                crate::util::tokio_write_u16_le(w, b).await?;
+                std::io::Write::write_all(&mut v, b.to_le_bytes().as_slice());
             }
         }
 
-        Ok(())
+        v
     }
 
     #[cfg(feature = "tokio")]
@@ -148,7 +103,7 @@ mod test {
         let mask = AuraMask::read(&mut cursor).unwrap();
 
         let mut target = Vec::new();
-        mask.write(&mut target).unwrap();
+        target.append(&mut mask.as_bytes());
 
         assert_eq!(v, target);
     }

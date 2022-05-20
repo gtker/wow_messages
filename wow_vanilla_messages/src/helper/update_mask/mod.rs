@@ -34,21 +34,7 @@ impl UpdateMask {
         todo!()
     }
 
-    #[cfg(feature = "sync")]
-    pub fn write(&self, w: &mut impl Write) -> Result<(), io::Error> {
-        todo!()
-    }
-
-    #[cfg(feature = "async-std")]
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), io::Error> {
-        todo!()
-    }
-
-    #[cfg(feature = "tokio")]
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
-        &self,
-        w: &mut W,
-    ) -> Result<(), io::Error> {
+    pub(crate) fn as_bytes(&self) -> Vec<u8> {
         todo!()
     }
 

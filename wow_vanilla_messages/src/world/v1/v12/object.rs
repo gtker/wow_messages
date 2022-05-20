@@ -136,7 +136,7 @@ impl Object {
                 w.write_all(&guid1.packed_guid())?;
 
                 // mask1: UpdateMask
-                mask1.write(w)?;
+                w.write_all(&mask1.as_bytes())?;
 
             }
             ObjectUpdateType::MOVEMENT {
@@ -166,7 +166,7 @@ impl Object {
                 movement2.write(w)?;
 
                 // mask2: UpdateMask
-                mask2.write(w)?;
+                w.write_all(&mask2.as_bytes())?;
 
             }
             ObjectUpdateType::CREATE_OBJECT2 {
@@ -185,7 +185,7 @@ impl Object {
                 movement2.write(w)?;
 
                 // mask2: UpdateMask
-                mask2.write(w)?;
+                w.write_all(&mask2.as_bytes())?;
 
             }
             ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
@@ -340,7 +340,7 @@ impl Object {
                 w.write_all(&guid1.packed_guid()).await?;
 
                 // mask1: UpdateMask
-                mask1.tokio_write(w).await?;
+                w.write_all(&mask1.as_bytes()).await?;
 
             }
             ObjectUpdateType::MOVEMENT {
@@ -370,7 +370,7 @@ impl Object {
                 movement2.tokio_write(w).await?;
 
                 // mask2: UpdateMask
-                mask2.tokio_write(w).await?;
+                w.write_all(&mask2.as_bytes()).await?;
 
             }
             ObjectUpdateType::CREATE_OBJECT2 {
@@ -389,7 +389,7 @@ impl Object {
                 movement2.tokio_write(w).await?;
 
                 // mask2: UpdateMask
-                mask2.tokio_write(w).await?;
+                w.write_all(&mask2.as_bytes()).await?;
 
             }
             ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
@@ -544,7 +544,7 @@ impl Object {
                 w.write_all(&guid1.packed_guid()).await?;
 
                 // mask1: UpdateMask
-                mask1.astd_write(w).await?;
+                w.write_all(&mask1.as_bytes()).await?;
 
             }
             ObjectUpdateType::MOVEMENT {
@@ -574,7 +574,7 @@ impl Object {
                 movement2.astd_write(w).await?;
 
                 // mask2: UpdateMask
-                mask2.astd_write(w).await?;
+                w.write_all(&mask2.as_bytes()).await?;
 
             }
             ObjectUpdateType::CREATE_OBJECT2 {
@@ -593,7 +593,7 @@ impl Object {
                 movement2.astd_write(w).await?;
 
                 // mask2: UpdateMask
-                mask2.astd_write(w).await?;
+                w.write_all(&mask2.as_bytes()).await?;
 
             }
             ObjectUpdateType::OUT_OF_RANGE_OBJECTS {

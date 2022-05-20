@@ -353,7 +353,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
 
         if let Some(if_statement) = &self.mask.flag_auras {
             // auras: AuraMask
-            if_statement.auras.write(w)?;
+            w.write_all(&if_statement.auras.as_bytes())?;
 
         }
 
@@ -403,7 +403,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
 
         if let Some(if_statement) = &self.mask.flag_pet_auras {
             // pet_auras: AuraMask
-            if_statement.pet_auras.write(w)?;
+            w.write_all(&if_statement.pet_auras.as_bytes())?;
 
         }
 
@@ -758,7 +758,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
 
             if let Some(if_statement) = &self.mask.flag_auras {
                 // auras: AuraMask
-                if_statement.auras.tokio_write(w).await?;
+                w.write_all(&if_statement.auras.as_bytes()).await?;
 
             }
 
@@ -808,7 +808,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
 
             if let Some(if_statement) = &self.mask.flag_pet_auras {
                 // pet_auras: AuraMask
-                if_statement.pet_auras.tokio_write(w).await?;
+                w.write_all(&if_statement.pet_auras.as_bytes()).await?;
 
             }
 
@@ -1164,7 +1164,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
 
             if let Some(if_statement) = &self.mask.flag_auras {
                 // auras: AuraMask
-                if_statement.auras.astd_write(w).await?;
+                w.write_all(&if_statement.auras.as_bytes()).await?;
 
             }
 
@@ -1214,7 +1214,7 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
 
             if let Some(if_statement) = &self.mask.flag_pet_auras {
                 // pet_auras: AuraMask
-                if_statement.pet_auras.astd_write(w).await?;
+                w.write_all(&if_statement.pet_auras.as_bytes()).await?;
 
             }
 
