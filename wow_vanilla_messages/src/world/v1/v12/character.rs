@@ -485,7 +485,7 @@ impl Character {
         + 4 // pet_display_id: u32
         + 4 // pet_level: u32
         + 4 // pet_familiy: u32
-        + 19 * CharacterGear::size() // equipment: CharacterGear[19]
+        + 19 * 5 // equipment: CharacterGear[19]
         + 4 // first_bag_display_id: u32
         + 1 // first_bag_inventory_id: u8
     }

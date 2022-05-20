@@ -236,7 +236,7 @@ impl SMSG_GOSSIP_MESSAGE {
         + 8 // guid: Guid
         + 4 // title_text_id: u32
         + 4 // amount_of_gossip_items: u32
-        + self.gossips.iter().fold(0, |acc, x| acc + GossipItem::size()) // gossips: GossipItem[amount_of_gossip_items]
+        + self.gossips.len() * 6 // gossips: GossipItem[amount_of_gossip_items]
         + 4 // amount_of_quests: u32
         + self.quests.iter().fold(0, |acc, x| acc + x.size()) // quests: QuestItem[amount_of_quests]
     }

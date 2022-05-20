@@ -161,7 +161,7 @@ impl SMSG_INITIALIZE_FACTIONS {
     pub fn size(&self) -> usize {
         0
         + 4 // amount_of_factions: u32
-        + self.factions.iter().fold(0, |acc, x| acc + FactionInitializer::size()) // factions: FactionInitializer[amount_of_factions]
+        + self.factions.len() * 5 // factions: FactionInitializer[amount_of_factions]
     }
 }
 

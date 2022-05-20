@@ -179,7 +179,7 @@ impl SMSG_PETITION_SHOWLIST {
         0
         + 8 // npc: Guid
         + 1 // amount_of_petitions: u8
-        + self.petitions.iter().fold(0, |acc, x| acc + PetitionShowlist::size()) // petitions: PetitionShowlist[amount_of_petitions]
+        + self.petitions.len() * 24 // petitions: PetitionShowlist[amount_of_petitions]
     }
 }
 

@@ -2661,7 +2661,7 @@ impl MovementBlockMovementFlagsSPLINE_ENABLED {
         + 4 // duration: u32
         + Vector3d::size() // final_node: Vector3d
         + 4 // id: u32
-        + self.nodes.iter().fold(0, |acc, x| acc + Vector3d::size()) // nodes: Vector3d[amount_of_nodes]
+        + self.nodes.len() * 12 // nodes: Vector3d[amount_of_nodes]
         + self.spline_flags.size() // spline_flags: MovementBlockSplineFlag
         + 4 // time_passed: u32
     }

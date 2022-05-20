@@ -197,7 +197,7 @@ impl SMSG_INIT_WORLD_STATES {
         + 4 // map: Map
         + 4 // area: Area
         + 2 // amount_of_states: u16
-        + self.states.iter().fold(0, |acc, x| acc + WorldState::size()) // states: WorldState[amount_of_states]
+        + self.states.len() * 8 // states: WorldState[amount_of_states]
     }
 }
 

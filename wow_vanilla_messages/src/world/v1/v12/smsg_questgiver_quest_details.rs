@@ -390,13 +390,13 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         + self.objectives.len() + 1 // objectives: CString
         + 4 // auto_finish: u32
         + 4 // amount_of_choice_item_rewards: u32
-        + self.choice_item_rewards.iter().fold(0, |acc, x| acc + QuestItemReward::size()) // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
+        + self.choice_item_rewards.len() * 8 // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
         + 4 // amount_of_item_rewards: u32
-        + self.item_rewards.iter().fold(0, |acc, x| acc + QuestItemReward::size()) // item_rewards: QuestItemReward[amount_of_item_rewards]
+        + self.item_rewards.len() * 8 // item_rewards: QuestItemReward[amount_of_item_rewards]
         + 4 // money_reward: u32
         + 4 // reward_spell: u32
         + 4 // amount_of_emotes: u32
-        + self.emotes.iter().fold(0, |acc, x| acc + QuestDetailsEmote::size()) // emotes: QuestDetailsEmote[amount_of_emotes]
+        + self.emotes.len() * 8 // emotes: QuestDetailsEmote[amount_of_emotes]
     }
 }
 

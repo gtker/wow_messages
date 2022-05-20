@@ -200,7 +200,7 @@ impl SMSG_CHANNEL_LIST {
         + self.channel_name.len() + 1 // channel_name: CString
         + 1 // channel_flags: u8
         + 4 // amount_of_members: u32
-        + self.members.iter().fold(0, |acc, x| acc + ChannelMember::size()) // members: ChannelMember[amount_of_members]
+        + self.members.len() * 9 // members: ChannelMember[amount_of_members]
     }
 }
 

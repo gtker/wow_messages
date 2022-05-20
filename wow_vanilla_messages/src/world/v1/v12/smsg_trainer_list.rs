@@ -217,7 +217,7 @@ impl SMSG_TRAINER_LIST {
         + 8 // guid: Guid
         + 4 // trainer_type: u32
         + 4 // amount_of_spells: u32
-        + self.spells.iter().fold(0, |acc, x| acc + TrainerSpell::size()) // spells: TrainerSpell[amount_of_spells]
+        + self.spells.len() * 38 // spells: TrainerSpell[amount_of_spells]
         + self.greeting.len() + 1 // greeting: CString
     }
 }

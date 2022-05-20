@@ -643,8 +643,8 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         + 4 // reward_spell: u32
         + 4 // source_item_id: u32
         + 4 // quest_flags: u32
-        + 4 * QuestItemReward::size() // rewards: QuestItemReward[4]
-        + 6 * QuestItemReward::size() // choice_rewards: QuestItemReward[6]
+        + 4 * 8 // rewards: QuestItemReward[4]
+        + 6 * 8 // choice_rewards: QuestItemReward[6]
         + 4 // point_map_id: u32
         + 4 // position_x: f32
         + 4 // position_y: f32
@@ -653,7 +653,7 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         + self.objective_text.len() + 1 // objective_text: CString
         + self.details.len() + 1 // details: CString
         + self.end_text.len() + 1 // end_text: CString
-        + 4 * QuestObjective::size() // objectives: QuestObjective[4]
+        + 4 * 16 // objectives: QuestObjective[4]
         + self.objective_texts.iter().fold(0, |acc, x| acc + x.len() + 1) // objective_texts: CString[4]
     }
 }

@@ -189,7 +189,7 @@ impl CMSG_GMSURVEY_SUBMIT {
     pub fn size(&self) -> usize {
         0
         + 4 // survey_id: u32
-        + 10 * GmSurveyQuestion::size() // questions: GmSurveyQuestion[10]
+        + 10 * 5 // questions: GmSurveyQuestion[10]
         + self.answer_comment.len() + 1 // answer_comment: CString
     }
 }

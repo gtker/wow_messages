@@ -188,7 +188,7 @@ mod test {
         assert_eq!(t.sequence_id, expected.sequence_id);
         assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
 
-        assert_eq!(CMSG_PING::size() + header_size, raw.len());
+        assert_eq!(8 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -217,7 +217,7 @@ mod test {
         assert_eq!(t.sequence_id, expected.sequence_id);
         assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
 
-        assert_eq!(CMSG_PING::size() + header_size, raw.len());
+        assert_eq!(8 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -246,7 +246,7 @@ mod test {
         assert_eq!(t.sequence_id, expected.sequence_id);
         assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
 
-        assert_eq!(CMSG_PING::size() + header_size, raw.len());
+        assert_eq!(8 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

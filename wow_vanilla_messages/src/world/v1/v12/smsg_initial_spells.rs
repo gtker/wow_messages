@@ -218,9 +218,9 @@ impl SMSG_INITIAL_SPELLS {
         0
         + 1 // unknown1: u8
         + 2 // spell_count: u16
-        + self.initial_spells.iter().fold(0, |acc, x| acc + InitialSpell::size()) // initial_spells: InitialSpell[spell_count]
+        + self.initial_spells.len() * 4 // initial_spells: InitialSpell[spell_count]
         + 2 // cooldown_count: u16
-        + self.cooldowns.iter().fold(0, |acc, x| acc + CooldownSpell::size()) // cooldowns: CooldownSpell[cooldown_count]
+        + self.cooldowns.len() * 14 // cooldowns: CooldownSpell[cooldown_count]
     }
 }
 

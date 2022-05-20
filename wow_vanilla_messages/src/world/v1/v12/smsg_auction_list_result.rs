@@ -177,7 +177,7 @@ impl SMSG_AUCTION_LIST_RESULT {
     pub fn size(&self) -> usize {
         0
         + 4 // count: u32
-        + self.auctions.iter().fold(0, |acc, x| acc + AuctionListItem::size()) // auctions: AuctionListItem[count]
+        + self.auctions.len() * 64 // auctions: AuctionListItem[count]
         + 4 // total_amount_of_auctions: u32
     }
 }

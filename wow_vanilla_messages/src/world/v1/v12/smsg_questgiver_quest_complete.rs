@@ -229,7 +229,7 @@ impl SMSG_QUESTGIVER_QUEST_COMPLETE {
         + 4 // experience_reward: u32
         + 4 // money_reward: u32
         + 4 // amount_of_item_rewards: u32
-        + self.item_rewards.iter().fold(0, |acc, x| acc + QuestItemReward::size()) // item_rewards: QuestItemReward[amount_of_item_rewards]
+        + self.item_rewards.len() * 8 // item_rewards: QuestItemReward[amount_of_item_rewards]
     }
 }
 

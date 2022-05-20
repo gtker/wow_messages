@@ -161,7 +161,7 @@ impl SMSG_SET_FORCED_REACTIONS {
     pub fn size(&self) -> usize {
         0
         + 4 // amount_of_reactions: u32
-        + self.reactions.iter().fold(0, |acc, x| acc + ForcedReaction::size()) // reactions: ForcedReaction[amount_of_reactions]
+        + self.reactions.len() * 8 // reactions: ForcedReaction[amount_of_reactions]
     }
 }
 

@@ -189,7 +189,7 @@ mod test {
         assert_eq!(t.auctioneer, expected.auctioneer);
         assert_eq!(t.auction_house_id, expected.auction_house_id);
 
-        assert_eq!(MSG_AUCTION_HELLO_Server::size() + header_size, raw.len());
+        assert_eq!(12 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -218,7 +218,7 @@ mod test {
         assert_eq!(t.auctioneer, expected.auctioneer);
         assert_eq!(t.auction_house_id, expected.auction_house_id);
 
-        assert_eq!(MSG_AUCTION_HELLO_Server::size() + header_size, raw.len());
+        assert_eq!(12 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -247,7 +247,7 @@ mod test {
         assert_eq!(t.auctioneer, expected.auctioneer);
         assert_eq!(t.auction_house_id, expected.auction_house_id);
 
-        assert_eq!(MSG_AUCTION_HELLO_Server::size() + header_size, raw.len());
+        assert_eq!(12 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

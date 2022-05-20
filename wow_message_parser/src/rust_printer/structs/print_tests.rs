@@ -171,8 +171,8 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects, it:
         }
         true => {
             s.wln(format!(
-                "assert_eq!({}::size() + header_size, raw.len());",
-                e.name()
+                "assert_eq!({} + header_size, raw.len());",
+                e.sizes(o).maximum(),
             ));
         }
     }

@@ -308,7 +308,7 @@ impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
                 raid_targets,
             } => {
                 1
-                + 8 * RaidTargetUpdate::size() // raid_targets: RaidTargetUpdate[8]
+                + 8 * 9 // raid_targets: RaidTargetUpdate[8]
             }
         }
     }

@@ -213,11 +213,11 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
                         )
                     }
                 },
-                ArrayType::Complex(complex_type) => match array.size() {
+                ArrayType::Complex(_) => match array.size() {
                     ArraySize::Fixed(fixed_value) => match m.constant_sized() {
                         true => format!(
-                            "{fixed_value} * {inner_type_name}::size()",
-                            inner_type_name = complex_type,
+                            "{fixed_value} * {inner_type_size}",
+                            inner_type_size = inner_sizes.maximum(),
                             fixed_value = fixed_value,
                         ),
                         false => format!(
@@ -226,17 +226,23 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
                             prefix = prefix,
                         ),
                     },
-                    ArraySize::Variable(_) | ArraySize::Endless => {
-                        format!(
-                            "{prefix}{name}.iter().fold(0, |acc, x| acc + {size_function})",
-                            name = m.name(),
-                            prefix = prefix,
-                            size_function = match inner_is_constant {
-                                true => format!("{type_name}::size()", type_name = complex_type),
-                                false => "x.size()".to_string(),
-                            },
-                        )
-                    }
+                    ArraySize::Variable(_) | ArraySize::Endless => match inner_is_constant {
+                        true => {
+                            format!(
+                                "{prefix}{name}.len() * {size}",
+                                name = m.name(),
+                                prefix = prefix,
+                                size = inner_sizes.maximum(),
+                            )
+                        }
+                        false => {
+                            format!(
+                                "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
+                                name = m.name(),
+                                prefix = prefix,
+                            )
+                        }
+                    },
                 },
                 ArrayType::CString => {
                     format!(

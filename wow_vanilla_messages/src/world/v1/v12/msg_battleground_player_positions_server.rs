@@ -182,7 +182,7 @@ impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         0
         + 4 // amount_of_carriers: u32
         + 4 // amount_of_flag_carriers: u32
-        + self.flag_carriers.iter().fold(0, |acc, x| acc + BattlegroundPlayerPosition::size()) // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
+        + self.flag_carriers.len() * 16 // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
     }
 }
 

@@ -384,11 +384,11 @@ impl SMSG_QUESTGIVER_OFFER_REWARD {
         + self.offer_reward_text.len() + 1 // offer_reward_text: CString
         + 4 // enable_next: u32
         + 4 // amount_of_emotes: u32
-        + self.emotes.iter().fold(0, |acc, x| acc + NpcTextUpdateEmote::size()) // emotes: NpcTextUpdateEmote[amount_of_emotes]
+        + self.emotes.len() * 8 // emotes: NpcTextUpdateEmote[amount_of_emotes]
         + 4 // amount_of_choice_item_rewards: u32
-        + self.choice_item_rewards.iter().fold(0, |acc, x| acc + QuestItemReward::size()) // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
+        + self.choice_item_rewards.len() * 8 // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
         + 4 // amount_of_item_rewards: u32
-        + self.item_rewards.iter().fold(0, |acc, x| acc + QuestItemReward::size()) // item_rewards: QuestItemReward[amount_of_item_rewards]
+        + self.item_rewards.len() * 8 // item_rewards: QuestItemReward[amount_of_item_rewards]
         + 4 // money_reward: u32
         + 4 // reward_spell: u32
         + 4 // reward_spell_cast: u32

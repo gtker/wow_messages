@@ -223,7 +223,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
         + 20 * core::mem::size_of::<u8>() // crc_hash: u8[20]
         + 1 // number_of_telemetry_keys: u8
-        + self.telemetry_keys.iter().fold(0, |acc, x| acc + TelemetryKey::size()) // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        + self.telemetry_keys.len() * 30 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
     }
 }
 

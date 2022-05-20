@@ -178,7 +178,7 @@ impl SMSG_SPELL_COOLDOWN {
     pub fn size(&self) -> usize {
         0
         + 8 // guid: Guid
-        + self.cooldowns.iter().fold(0, |acc, x| acc + SpellCooldownStatus::size()) // cooldowns: SpellCooldownStatus[-]
+        + self.cooldowns.len() * 8 // cooldowns: SpellCooldownStatus[-]
     }
 }
 

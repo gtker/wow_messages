@@ -321,7 +321,7 @@ impl SMSG_PET_SPELLS {
         + 1 // amount_of_spells: u8
         + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[amount_of_spells]
         + 1 // amount_of_cooldowns: u8
-        + self.cooldowns.iter().fold(0, |acc, x| acc + PetSpellCooldown::size()) // cooldowns: PetSpellCooldown[amount_of_cooldowns]
+        + self.cooldowns.len() * 12 // cooldowns: PetSpellCooldown[amount_of_cooldowns]
     }
 }
 

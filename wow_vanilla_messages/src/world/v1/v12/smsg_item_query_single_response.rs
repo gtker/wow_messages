@@ -1100,8 +1100,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // max_count: u32
             + 4 // stackable: u32
             + 4 // container_slots: u32
-            + 10 * ItemStat::size() // stats: ItemStat[10]
-            + 5 * ItemDamageType::size() // damages: ItemDamageType[5]
+            + 10 * 8 // stats: ItemStat[10]
+            + 5 * 12 // damages: ItemDamageType[5]
             + 4 // armor: u32
             + 4 // holy_resistance: u32
             + 4 // fire_resistance: u32
@@ -1112,7 +1112,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // delay: u32
             + 4 // ammo_type: u32
             + 4 // ranged_range_modification: f32
-            + 5 * ItemSpells::size() // spells: ItemSpells[5]
+            + 5 * 24 // spells: ItemSpells[5]
             + 4 // bonding: u32
             + found.description.len() + 1 // description: CString
             + 4 // page_text: u32
@@ -1290,8 +1290,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSEfound {
         + 4 // max_count: u32
         + 4 // stackable: u32
         + 4 // container_slots: u32
-        + 10 * ItemStat::size() // stats: ItemStat[10]
-        + 5 * ItemDamageType::size() // damages: ItemDamageType[5]
+        + 10 * 8 // stats: ItemStat[10]
+        + 5 * 12 // damages: ItemDamageType[5]
         + 4 // armor: u32
         + 4 // holy_resistance: u32
         + 4 // fire_resistance: u32
@@ -1302,7 +1302,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSEfound {
         + 4 // delay: u32
         + 4 // ammo_type: u32
         + 4 // ranged_range_modification: f32
-        + 5 * ItemSpells::size() // spells: ItemSpells[5]
+        + 5 * 24 // spells: ItemSpells[5]
         + 4 // bonding: u32
         + self.description.len() + 1 // description: CString
         + 4 // page_text: u32

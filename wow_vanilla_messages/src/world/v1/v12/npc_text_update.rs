@@ -138,7 +138,7 @@ impl NpcTextUpdate {
         + 4 // probability: f32
         + self.texts.iter().fold(0, |acc, x| acc + x.len() + 1) // texts: CString[2]
         + 4 // language: Language
-        + 3 * NpcTextUpdateEmote::size() // emotes: NpcTextUpdateEmote[3]
+        + 3 * 8 // emotes: NpcTextUpdateEmote[3]
     }
 }
 

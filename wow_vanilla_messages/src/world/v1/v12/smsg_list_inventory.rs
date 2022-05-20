@@ -179,7 +179,7 @@ impl SMSG_LIST_INVENTORY {
         0
         + 8 // vendor: Guid
         + 1 // amount_of_items: u8
-        + self.items.iter().fold(0, |acc, x| acc + ListInventoryItem::size()) // items: ListInventoryItem[amount_of_items]
+        + self.items.len() * 28 // items: ListInventoryItem[amount_of_items]
     }
 }
 

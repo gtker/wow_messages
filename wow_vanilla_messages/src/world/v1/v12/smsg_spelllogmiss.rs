@@ -213,7 +213,7 @@ impl SMSG_SPELLLOGMISS {
         + 8 // caster_guid: Guid
         + 1 // unknown1: u8
         + 4 // amount_of_targets: u32
-        + self.targets.iter().fold(0, |acc, x| acc + SpellMiss::size()) // targets: SpellMiss[amount_of_targets]
+        + self.targets.len() * 12 // targets: SpellMiss[amount_of_targets]
     }
 }
 

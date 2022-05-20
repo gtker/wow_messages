@@ -193,7 +193,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+        assert_eq!(1 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -219,7 +219,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+        assert_eq!(1 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -245,7 +245,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+        assert_eq!(1 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -271,7 +271,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+        assert_eq!(1 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -297,7 +297,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+        assert_eq!(1 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -323,7 +323,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+        assert_eq!(1 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -349,7 +349,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+        assert_eq!(1 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -375,7 +375,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+        assert_eq!(1 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -401,7 +401,7 @@ mod test {
 
         assert_eq!(t.result, expected.result);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Server::size() + header_size, raw.len());
+        assert_eq!(1 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

@@ -161,7 +161,7 @@ impl SMSG_RAID_INSTANCE_INFO {
     pub fn size(&self) -> usize {
         0
         + 4 // amount_of_raid_infos: u32
-        + self.raid_infos.iter().fold(0, |acc, x| acc + RaidInfo::size()) // raid_infos: RaidInfo[amount_of_raid_infos]
+        + self.raid_infos.len() * 12 // raid_infos: RaidInfo[amount_of_raid_infos]
     }
 }
 

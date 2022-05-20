@@ -189,7 +189,7 @@ mod test {
         assert_eq!(t.pet_number, expected.pet_number);
         assert_eq!(t.guid, expected.guid);
 
-        assert_eq!(CMSG_PET_NAME_QUERY::size() + header_size, raw.len());
+        assert_eq!(12 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -218,7 +218,7 @@ mod test {
         assert_eq!(t.pet_number, expected.pet_number);
         assert_eq!(t.guid, expected.guid);
 
-        assert_eq!(CMSG_PET_NAME_QUERY::size() + header_size, raw.len());
+        assert_eq!(12 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -247,7 +247,7 @@ mod test {
         assert_eq!(t.pet_number, expected.pet_number);
         assert_eq!(t.guid, expected.guid);
 
-        assert_eq!(CMSG_PET_NAME_QUERY::size() + header_size, raw.len());
+        assert_eq!(12 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

@@ -228,7 +228,7 @@ mod test {
         assert_eq!(t.reason, expected.reason);
         assert_eq!(t.speed, expected.speed);
 
-        assert_eq!(SMSG_LOGOUT_RESPONSE::size() + header_size, raw.len());
+        assert_eq!(5 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -257,7 +257,7 @@ mod test {
         assert_eq!(t.reason, expected.reason);
         assert_eq!(t.speed, expected.speed);
 
-        assert_eq!(SMSG_LOGOUT_RESPONSE::size() + header_size, raw.len());
+        assert_eq!(5 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -286,7 +286,7 @@ mod test {
         assert_eq!(t.reason, expected.reason);
         assert_eq!(t.speed, expected.speed);
 
-        assert_eq!(SMSG_LOGOUT_RESPONSE::size() + header_size, raw.len());
+        assert_eq!(5 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

@@ -245,7 +245,7 @@ mod test {
         assert_eq!(t.client_proof, expected.client_proof);
         assert_eq!(t.client_checksum, expected.client_checksum);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Client::size() + header_size, raw.len());
+        assert_eq!(57 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -283,7 +283,7 @@ mod test {
         assert_eq!(t.client_proof, expected.client_proof);
         assert_eq!(t.client_checksum, expected.client_checksum);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Client::size() + header_size, raw.len());
+        assert_eq!(57 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -321,7 +321,7 @@ mod test {
         assert_eq!(t.client_proof, expected.client_proof);
         assert_eq!(t.client_checksum, expected.client_checksum);
 
-        assert_eq!(CMD_AUTH_RECONNECT_PROOF_Client::size() + header_size, raw.len());
+        assert_eq!(57 + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
