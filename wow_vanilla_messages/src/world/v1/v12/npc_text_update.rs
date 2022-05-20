@@ -37,7 +37,9 @@ impl NpcTextUpdate {
 
         Ok(w)
     }
+}
 
+impl NpcTextUpdate {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, NpcTextUpdateError> {
         // probability: f32

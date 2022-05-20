@@ -90,7 +90,9 @@ impl Friend {
 
         Ok(w)
     }
+}
 
+impl Friend {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, FriendError> {
         // guid: Guid

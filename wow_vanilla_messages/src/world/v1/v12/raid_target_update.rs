@@ -25,7 +25,9 @@ impl RaidTargetUpdate {
 
         Ok(w)
     }
+}
 
+impl RaidTargetUpdate {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, RaidTargetUpdateError> {
         // index: RaidTargetIndex

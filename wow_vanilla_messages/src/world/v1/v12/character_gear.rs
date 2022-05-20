@@ -24,7 +24,9 @@ impl CharacterGear {
 
         Ok(w)
     }
+}
 
+impl CharacterGear {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, CharacterGearError> {
         // equipment_display_id: u32

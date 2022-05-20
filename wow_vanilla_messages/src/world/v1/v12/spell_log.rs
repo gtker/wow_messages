@@ -319,7 +319,9 @@ impl SpellLog {
 
         Ok(w)
     }
+}
 
+impl SpellLog {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, SpellLogError> {
         // effect: SpellEffect

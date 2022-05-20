@@ -23,7 +23,9 @@ impl NpcTextUpdateEmote {
 
         Ok(w)
     }
+}
 
+impl NpcTextUpdateEmote {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // delay: u32

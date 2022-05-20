@@ -297,7 +297,9 @@ impl AuraLog {
 
         Ok(w)
     }
+}
 
+impl AuraLog {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, AuraLogError> {
         // aura_type: AuraType

@@ -100,7 +100,9 @@ impl SpellCastTargets {
 
         Ok(w)
     }
+}
 
+impl SpellCastTargets {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, SpellCastTargetsError> {
         // target_flags: SpellCastTargetFlags

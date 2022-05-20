@@ -35,7 +35,9 @@ impl TelemetryKey {
 
         Ok(w)
     }
+}
 
+impl TelemetryKey {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // unknown1: u16

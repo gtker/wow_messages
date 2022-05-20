@@ -48,7 +48,9 @@ impl WhoPlayer {
 
         Ok(w)
     }
+}
 
+impl WhoPlayer {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, WhoPlayerError> {
         // name: CString

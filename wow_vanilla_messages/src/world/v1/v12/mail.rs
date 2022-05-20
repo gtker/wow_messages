@@ -126,7 +126,9 @@ impl Mail {
 
         Ok(w)
     }
+}
 
+impl Mail {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, MailError> {
         // message_id: u32

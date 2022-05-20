@@ -32,7 +32,9 @@ impl QuestItem {
 
         Ok(w)
     }
+}
 
+impl QuestItem {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, QuestItemError> {
         // quest_id: u32

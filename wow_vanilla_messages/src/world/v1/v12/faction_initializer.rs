@@ -24,7 +24,9 @@ impl FactionInitializer {
 
         Ok(w)
     }
+}
 
+impl FactionInitializer {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // flag: FactionFlag

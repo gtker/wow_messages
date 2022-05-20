@@ -72,7 +72,9 @@ impl AuctionListItem {
 
         Ok(w)
     }
+}
 
+impl AuctionListItem {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // id: u32

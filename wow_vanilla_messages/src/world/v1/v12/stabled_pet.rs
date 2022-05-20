@@ -40,7 +40,9 @@ impl StabledPet {
 
         Ok(w)
     }
+}
 
+impl StabledPet {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, StabledPetError> {
         // pet_number: u32

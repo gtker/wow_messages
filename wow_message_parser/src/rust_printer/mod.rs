@@ -394,6 +394,21 @@ impl Writer {
         self.open_curly("Box::pin(async move");
     }
 
+    fn write_as_bytes(
+        &mut self,
+        type_name: impl AsRef<str>,
+        write_function: impl Fn(&mut Self, ImplType),
+    ) {
+        self.open_curly(format!("impl {}", type_name.as_ref()));
+
+        self.open_curly("pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>");
+        self.wln("let mut w = Vec::with_capacity(8000);");
+        write_function(self, ImplType::Std);
+        self.wln("Ok(w)");
+        self.closing_curly();
+        self.closing_curly_newline();
+    }
+
     pub fn impl_read_write_non_trait<
         S: AsRef<str>,
         S1: AsRef<str>,
@@ -406,13 +421,9 @@ impl Writer {
         read_function: F,
         write_function: F2,
     ) {
-        self.open_curly(format!("impl {}", type_name.as_ref()));
+        self.write_as_bytes(&type_name, write_function);
 
-        self.open_curly("pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>");
-        self.wln("let mut w = Vec::with_capacity(8000);");
-        write_function(self, ImplType::Std);
-        self.wln("Ok(w)");
-        self.closing_curly_newline();
+        self.open_curly(format!("impl {}", type_name.as_ref()));
 
         for it in ImplType::types() {
             self.wln(it.cfg());

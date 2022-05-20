@@ -29,7 +29,9 @@ impl GroupListMember {
 
         Ok(w)
     }
+}
 
+impl GroupListMember {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, GroupListMemberError> {
         // name: CString

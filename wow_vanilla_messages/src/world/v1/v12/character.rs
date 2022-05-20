@@ -131,7 +131,9 @@ impl Character {
 
         Ok(w)
     }
+}
 
+impl Character {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, CharacterError> {
         // guid: Guid

@@ -28,7 +28,9 @@ impl BattlegroundPlayerPosition {
 
         Ok(w)
     }
+}
 
+impl BattlegroundPlayerPosition {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // player: Guid
