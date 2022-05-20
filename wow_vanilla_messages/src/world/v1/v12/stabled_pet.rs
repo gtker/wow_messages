@@ -15,6 +15,7 @@ pub struct StabledPet {
 }
 
 impl StabledPet {
+    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, StabledPetError> {
         // pet_number: u32
         let pet_number = crate::util::read_u32_le(r)?;
@@ -45,6 +46,7 @@ impl StabledPet {
         })
     }
 
+    #[cfg(feature = "sync")]
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;
@@ -69,6 +71,7 @@ impl StabledPet {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, StabledPetError> {
         // pet_number: u32
         let pet_number = crate::util::tokio_read_u32_le(r).await?;
@@ -99,6 +102,7 @@ impl StabledPet {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes()).await?;
@@ -123,6 +127,7 @@ impl StabledPet {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, StabledPetError> {
         // pet_number: u32
         let pet_number = crate::util::astd_read_u32_le(r).await?;
@@ -153,6 +158,7 @@ impl StabledPet {
         })
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes()).await?;

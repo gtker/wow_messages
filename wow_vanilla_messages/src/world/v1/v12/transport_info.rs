@@ -16,6 +16,7 @@ pub struct TransportInfo {
 }
 
 impl TransportInfo {
+    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
@@ -41,6 +42,7 @@ impl TransportInfo {
         })
     }
 
+    #[cfg(feature = "sync")]
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: PackedGuid
         self.guid.write_packed(w)?;
@@ -63,6 +65,7 @@ impl TransportInfo {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // guid: PackedGuid
         let guid = Guid::tokio_read_packed(r).await?;
@@ -88,6 +91,7 @@ impl TransportInfo {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: PackedGuid
         self.guid.tokio_write_packed(w).await?;
@@ -110,6 +114,7 @@ impl TransportInfo {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // guid: PackedGuid
         let guid = Guid::astd_read_packed(r).await?;
@@ -135,6 +140,7 @@ impl TransportInfo {
         })
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: PackedGuid
         self.guid.astd_write_packed(w).await?;

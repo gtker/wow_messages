@@ -407,6 +407,7 @@ impl Writer {
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
         for it in ImplType::types() {
+            self.wln(it.cfg());
             self.open_curly(format!(
                 "pub(crate) {func}fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, {error}>",
                 prefix = it.prefix(),
@@ -417,6 +418,7 @@ impl Writer {
             read_function(self, it);
             self.closing_curly_newline();
 
+            self.wln(it.cfg());
             self.open_curly(
                 format!("pub(crate) {func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
                 prefix = it.prefix(),

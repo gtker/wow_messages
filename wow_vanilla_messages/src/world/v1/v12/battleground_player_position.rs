@@ -14,6 +14,7 @@ pub struct BattlegroundPlayerPosition {
 }
 
 impl BattlegroundPlayerPosition {
+    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // player: Guid
         let player = Guid::read(r)?;
@@ -29,6 +30,7 @@ impl BattlegroundPlayerPosition {
         })
     }
 
+    #[cfg(feature = "sync")]
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player: Guid
         self.player.write(w)?;
@@ -42,6 +44,7 @@ impl BattlegroundPlayerPosition {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // player: Guid
         let player = Guid::tokio_read(r).await?;
@@ -57,6 +60,7 @@ impl BattlegroundPlayerPosition {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player: Guid
         self.player.tokio_write(w).await?;
@@ -70,6 +74,7 @@ impl BattlegroundPlayerPosition {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // player: Guid
         let player = Guid::astd_read(r).await?;
@@ -85,6 +90,7 @@ impl BattlegroundPlayerPosition {
         })
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player: Guid
         self.player.astd_write(w).await?;

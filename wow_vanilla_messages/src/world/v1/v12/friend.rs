@@ -15,6 +15,7 @@ pub struct Friend {
 }
 
 impl Friend {
+    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, FriendError> {
         // guid: Guid
         let guid = Guid::read(r)?;
@@ -96,6 +97,7 @@ impl Friend {
         })
     }
 
+    #[cfg(feature = "sync")]
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
         self.guid.write(w)?;
@@ -170,6 +172,7 @@ impl Friend {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, FriendError> {
         // guid: Guid
         let guid = Guid::tokio_read(r).await?;
@@ -251,6 +254,7 @@ impl Friend {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
         self.guid.tokio_write(w).await?;
@@ -325,6 +329,7 @@ impl Friend {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, FriendError> {
         // guid: Guid
         let guid = Guid::astd_read(r).await?;
@@ -406,6 +411,7 @@ impl Friend {
         })
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
         self.guid.astd_write(w).await?;

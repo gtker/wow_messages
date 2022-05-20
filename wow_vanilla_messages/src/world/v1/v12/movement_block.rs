@@ -23,6 +23,7 @@ impl MovementBlock {
 }
 
 impl MovementBlock {
+    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // update_flag: UpdateFlag
         let update_flag = UpdateFlag::new(crate::util::read_u8_le(r)?);
@@ -292,6 +293,7 @@ impl MovementBlock {
         })
     }
 
+    #[cfg(feature = "sync")]
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_flag: UpdateFlag
         w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes())?;
@@ -495,6 +497,7 @@ impl MovementBlock {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // update_flag: UpdateFlag
         let update_flag = UpdateFlag::new(crate::util::tokio_read_u8_le(r).await?);
@@ -764,6 +767,7 @@ impl MovementBlock {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_flag: UpdateFlag
         w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes()).await?;
@@ -967,6 +971,7 @@ impl MovementBlock {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // update_flag: UpdateFlag
         let update_flag = UpdateFlag::new(crate::util::astd_read_u8_le(r).await?);
@@ -1236,6 +1241,7 @@ impl MovementBlock {
         })
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_flag: UpdateFlag
         w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes()).await?;

@@ -14,6 +14,7 @@ pub struct SpellMiss {
 }
 
 impl SpellMiss {
+    #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, SpellMissError> {
         // target_guid: Guid
         let target_guid = Guid::read(r)?;
@@ -27,6 +28,7 @@ impl SpellMiss {
         })
     }
 
+    #[cfg(feature = "sync")]
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
         self.target_guid.write(w)?;
@@ -37,6 +39,7 @@ impl SpellMiss {
         Ok(())
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellMissError> {
         // target_guid: Guid
         let target_guid = Guid::tokio_read(r).await?;
@@ -50,6 +53,7 @@ impl SpellMiss {
         })
     }
 
+    #[cfg(feature = "async_tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
         self.target_guid.tokio_write(w).await?;
@@ -60,6 +64,7 @@ impl SpellMiss {
         Ok(())
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellMissError> {
         // target_guid: Guid
         let target_guid = Guid::astd_read(r).await?;
@@ -73,6 +78,7 @@ impl SpellMiss {
         })
     }
 
+    #[cfg(feature = "async_std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
         self.target_guid.astd_write(w).await?;
