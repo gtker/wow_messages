@@ -1,4 +1,7 @@
-use crate::container::{Container, Equation, IfStatement, Sizes, StructMember};
+use crate::container::{
+    Container, Equation, IfStatement, Sizes, StructMember, GUID_SIZE, PACKED_GUID_MAX_SIZE,
+    PACKED_GUID_MIN_SIZE,
+};
 use crate::file_info::FileInfo;
 use crate::parser::enumerator::DefinerValue;
 use crate::parser::types::objects::Objects;
@@ -9,6 +12,7 @@ use crate::parser::types::{
 };
 use crate::rust_printer::DefinerType;
 use crate::test_case::TestCase;
+use crate::{CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
 use std::fmt::{Display, Formatter};
 
 #[derive(Debug, Clone)]
@@ -325,7 +329,7 @@ pub enum RustType {
     CString,
     Array {
         array: Array,
-        inner_is_constant: bool,
+        inner_sizes: Sizes,
     },
     Enum {
         ty_name: String,
@@ -1086,24 +1090,32 @@ pub fn create_struct_member(
                         }
                     }
 
-                    let mut inner_is_constant = true;
+                    let mut inner_sizes = Sizes::new();
                     match array.ty() {
-                        ArrayType::Integer(_) | ArrayType::Guid => {}
+                        ArrayType::Integer(i) => {
+                            inner_sizes.inc_both(i.size().into());
+                        }
+                        ArrayType::Guid => {
+                            inner_sizes.inc_both(GUID_SIZE.into());
+                        }
                         ArrayType::Complex(complex) => {
                             let c = o.get_container(complex, tags);
                             if !c.has_constant_size(o) {
                                 definition_constantly_sized = false;
-                                inner_is_constant = false;
                             }
+                            inner_sizes += c.sizes(o);
                         }
-                        ArrayType::PackedGuid | ArrayType::CString => {
+                        ArrayType::PackedGuid => inner_sizes
+                            .inc(PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into()),
+                        ArrayType::CString => {
                             definition_constantly_sized = false;
+                            inner_sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED)
                         }
-                    }
+                    };
 
                     RustType::Array {
                         array: array.clone(),
-                        inner_is_constant,
+                        inner_sizes,
                     }
                 }
                 Type::Identifier { s, upcast } => {

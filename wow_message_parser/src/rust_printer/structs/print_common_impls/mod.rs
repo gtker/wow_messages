@@ -195,72 +195,72 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
                 int_ty.size().to_string()
             }
         }
-        RustType::Array {
-            array,
-            inner_is_constant,
-        } => match array.ty() {
-            ArrayType::Integer(integer_type) => match array.size() {
-                ArraySize::Fixed(fixed_value) => format!(
-                    "{array_size} * core::mem::size_of::<{ty}>()",
-                    array_size = fixed_value,
-                    ty = integer_type.rust_str(),
-                ),
-                ArraySize::Variable(_) | ArraySize::Endless => {
+        RustType::Array { array, inner_sizes } => {
+            let inner_is_constant = inner_sizes.is_constant();
+            match array.ty() {
+                ArrayType::Integer(integer_type) => match array.size() {
+                    ArraySize::Fixed(fixed_value) => format!(
+                        "{array_size} * core::mem::size_of::<{ty}>()",
+                        array_size = fixed_value,
+                        ty = integer_type.rust_str(),
+                    ),
+                    ArraySize::Variable(_) | ArraySize::Endless => {
+                        format!(
+                            "{prefix}{name}.len() * core::mem::size_of::<{ty}>()",
+                            name = m.name(),
+                            prefix = prefix,
+                            ty = integer_type.rust_str(),
+                        )
+                    }
+                },
+                ArrayType::Complex(complex_type) => match array.size() {
+                    ArraySize::Fixed(fixed_value) => match m.constant_sized() {
+                        true => format!(
+                            "{fixed_value} * {inner_type_name}::size()",
+                            inner_type_name = complex_type,
+                            fixed_value = fixed_value,
+                        ),
+                        false => format!(
+                            "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
+                            name = m.name(),
+                            prefix = prefix,
+                        ),
+                    },
+                    ArraySize::Variable(_) | ArraySize::Endless => {
+                        format!(
+                            "{prefix}{name}.iter().fold(0, |acc, x| acc + {size_function})",
+                            name = m.name(),
+                            prefix = prefix,
+                            size_function = match inner_is_constant {
+                                true => format!("{type_name}::size()", type_name = complex_type),
+                                false => "x.size()".to_string(),
+                            },
+                        )
+                    }
+                },
+                ArrayType::CString => {
                     format!(
-                        "{prefix}{name}.len() * core::mem::size_of::<{ty}>()",
+                        "{prefix}{name}.iter().fold(0, |acc, x| acc + x.len() + 1)",
                         name = m.name(),
                         prefix = prefix,
-                        ty = integer_type.rust_str(),
                     )
                 }
-            },
-            ArrayType::Complex(complex_type) => match array.size() {
-                ArraySize::Fixed(fixed_value) => match m.constant_sized() {
-                    true => format!(
-                        "{fixed_value} * {inner_type_name}::size()",
-                        inner_type_name = complex_type,
-                        fixed_value = fixed_value,
-                    ),
-                    false => format!(
+                ArrayType::Guid => {
+                    format!(
+                        "{prefix}{name}.iter().fold(0, |acc, _| acc + 8)",
+                        name = m.name(),
+                        prefix = prefix,
+                    )
+                }
+                ArrayType::PackedGuid => {
+                    format!(
                         "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
                         name = m.name(),
                         prefix = prefix,
-                    ),
-                },
-                ArraySize::Variable(_) | ArraySize::Endless => {
-                    format!(
-                        "{prefix}{name}.iter().fold(0, |acc, x| acc + {size_function})",
-                        name = m.name(),
-                        prefix = prefix,
-                        size_function = match inner_is_constant {
-                            true => format!("{type_name}::size()", type_name = complex_type),
-                            false => "x.size()".to_string(),
-                        },
                     )
                 }
-            },
-            ArrayType::CString => {
-                format!(
-                    "{prefix}{name}.iter().fold(0, |acc, x| acc + x.len() + 1)",
-                    name = m.name(),
-                    prefix = prefix,
-                )
             }
-            ArrayType::Guid => {
-                format!(
-                    "{prefix}{name}.iter().fold(0, |acc, _| acc + 8)",
-                    name = m.name(),
-                    prefix = prefix,
-                )
-            }
-            ArrayType::PackedGuid => {
-                format!(
-                    "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
-                    name = m.name(),
-                    prefix = prefix,
-                )
-            }
-        },
+        }
     };
     s.w_no_indent(str);
     s.wln_no_indent(m.size_comment());
