@@ -347,6 +347,7 @@ pub enum RustType {
     },
     Struct {
         ty_name: String,
+        sizes: Sizes,
     },
 }
 
@@ -358,7 +359,7 @@ impl RustType {
             RustType::String => "String".to_string(),
             RustType::Array { array, .. } => array.str(),
             RustType::Flag { ty_name, .. } | RustType::Enum { ty_name, .. } => ty_name.clone(),
-            RustType::Struct { ty_name } => ty_name.clone(),
+            RustType::Struct { ty_name, .. } => ty_name.clone(),
             RustType::CString => "CString".to_string(),
             RustType::UpdateMask => "UpdateMask".to_string(),
             RustType::AuraMask => "AuraMask".to_string(),
@@ -376,7 +377,7 @@ impl RustType {
             RustType::CString | RustType::String => "String".to_string(),
             RustType::Array { array, .. } => array.rust_str(),
             RustType::Flag { ty_name, .. } | RustType::Enum { ty_name, .. } => ty_name.clone(),
-            RustType::Struct { ty_name } => ty_name.clone(),
+            RustType::Struct { ty_name, .. } => ty_name.clone(),
         }
     }
 }
@@ -389,7 +390,7 @@ impl Display for RustType {
             RustType::String | RustType::CString => f.write_str("String"),
             RustType::Array { array, .. } => f.write_str(&array.rust_str()),
             RustType::Enum { ty_name, .. } | RustType::Flag { ty_name, .. } => f.write_str(ty_name),
-            RustType::Struct { ty_name } => f.write_str(ty_name),
+            RustType::Struct { ty_name, .. } => f.write_str(ty_name),
             RustType::UpdateMask => f.write_str("UpdateMask"),
             RustType::AuraMask => f.write_str("AuraMask"),
             RustType::PackedGuid | RustType::Guid => f.write_str("Guid"),
@@ -1172,7 +1173,10 @@ pub fn create_struct_member(
                                 definition_constantly_sized = false;
                             }
 
-                            RustType::Struct { ty_name: s.clone() }
+                            RustType::Struct {
+                                ty_name: s.clone(),
+                                sizes: c.sizes(o),
+                            }
                         }
                         ObjectType::CLogin | ObjectType::SLogin => {
                             panic!("object contains message type")
