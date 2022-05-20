@@ -39,12 +39,12 @@ impl UpdateMask {
         todo!()
     }
 
-    #[cfg(feature = "sync")]
+    #[cfg(feature = "async_std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), io::Error> {
         todo!()
     }
 
-    #[cfg(feature = "sync")]
+    #[cfg(feature = "async_tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
         &self,
         w: &mut W,
