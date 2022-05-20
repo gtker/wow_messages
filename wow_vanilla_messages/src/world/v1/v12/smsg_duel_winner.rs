@@ -3,9 +3,10 @@ use crate::world::v1::v12::{DuelWinnerReason, DuelWinnerReasonError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_DUEL_WINNER {
@@ -15,6 +16,26 @@ pub struct SMSG_DUEL_WINNER {
 }
 
 impl ServerMessageWrite for SMSG_DUEL_WINNER {}
+
+impl SMSG_DUEL_WINNER {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // reason: DuelWinnerReason
+        w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
+
+        // opponent_name: CString
+        w.write_all(self.opponent_name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // initiator_name: CString
+        w.write_all(self.initiator_name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_DUEL_WINNER {
     const OPCODE: u16 = 0x016b;
@@ -47,20 +68,8 @@ impl MessageBody for SMSG_DUEL_WINNER {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // reason: DuelWinnerReason
-        w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
-
-        // opponent_name: CString
-        w.write_all(self.opponent_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // initiator_name: CString
-        w.write_all(self.initiator_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -103,26 +112,14 @@ impl MessageBody for SMSG_DUEL_WINNER {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // reason: DuelWinnerReason
-            w.write_all(&(self.reason.as_int() as u8).to_le_bytes()).await?;
-
-            // opponent_name: CString
-            w.write_all(self.opponent_name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // initiator_name: CString
-            w.write_all(self.initiator_name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -166,26 +163,14 @@ impl MessageBody for SMSG_DUEL_WINNER {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // reason: DuelWinnerReason
-            w.write_all(&(self.reason.as_int() as u8).to_le_bytes()).await?;
-
-            // opponent_name: CString
-            w.write_all(self.opponent_name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // initiator_name: CString
-            w.write_all(self.initiator_name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

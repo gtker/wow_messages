@@ -35,7 +35,9 @@ impl EnumOutsideOfIf {
 
         Ok(w)
     }
+}
 
+impl EnumOutsideOfIf {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, EnumOutsideOfIfError> {
         // t: TEnum

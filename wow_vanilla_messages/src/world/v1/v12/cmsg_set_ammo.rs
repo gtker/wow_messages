@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -13,6 +14,16 @@ pub struct CMSG_SET_AMMO {
 }
 
 impl ClientMessageWrite for CMSG_SET_AMMO {}
+
+impl CMSG_SET_AMMO {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for CMSG_SET_AMMO {
     const OPCODE: u16 = 0x0268;
@@ -35,10 +46,8 @@ impl MessageBody for CMSG_SET_AMMO {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item: u32
-        w.write_all(&self.item.to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -71,16 +80,14 @@ impl MessageBody for CMSG_SET_AMMO {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // item: u32
-            w.write_all(&self.item.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -114,16 +121,14 @@ impl MessageBody for CMSG_SET_AMMO {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // item: u32
-            w.write_all(&self.item.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

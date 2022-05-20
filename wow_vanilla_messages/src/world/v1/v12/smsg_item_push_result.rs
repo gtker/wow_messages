@@ -6,9 +6,10 @@ use crate::world::v1::v12::{NewItemSource, NewItemSourceError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -26,6 +27,43 @@ pub struct SMSG_ITEM_PUSH_RESULT {
 }
 
 impl ServerMessageWrite for SMSG_ITEM_PUSH_RESULT {}
+
+impl SMSG_ITEM_PUSH_RESULT {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // guid: Guid
+        w.write_all(&self.guid.guid().to_le_bytes())?;
+
+        // source: NewItemSource
+        w.write_all(&(self.source.as_int() as u32).to_le_bytes())?;
+
+        // creation_type: NewItemCreationType
+        w.write_all(&(self.creation_type.as_int() as u32).to_le_bytes())?;
+
+        // alert_chat: NewItemChatAlert
+        w.write_all(&(self.alert_chat.as_int() as u32).to_le_bytes())?;
+
+        // bag_slot: u8
+        w.write_all(&self.bag_slot.to_le_bytes())?;
+
+        // item_slot: u32
+        w.write_all(&self.item_slot.to_le_bytes())?;
+
+        // item_id: u32
+        w.write_all(&self.item_id.to_le_bytes())?;
+
+        // item_suffix_factor: u32
+        w.write_all(&self.item_suffix_factor.to_le_bytes())?;
+
+        // item_random_property_id: u32
+        w.write_all(&self.item_random_property_id.to_le_bytes())?;
+
+        // item_count: u32
+        w.write_all(&self.item_count.to_le_bytes())?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_ITEM_PUSH_RESULT {
     const OPCODE: u16 = 0x0166;
@@ -84,37 +122,8 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // source: NewItemSource
-        w.write_all(&(self.source.as_int() as u32).to_le_bytes())?;
-
-        // creation_type: NewItemCreationType
-        w.write_all(&(self.creation_type.as_int() as u32).to_le_bytes())?;
-
-        // alert_chat: NewItemChatAlert
-        w.write_all(&(self.alert_chat.as_int() as u32).to_le_bytes())?;
-
-        // bag_slot: u8
-        w.write_all(&self.bag_slot.to_le_bytes())?;
-
-        // item_slot: u32
-        w.write_all(&self.item_slot.to_le_bytes())?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
-
-        // item_suffix_factor: u32
-        w.write_all(&self.item_suffix_factor.to_le_bytes())?;
-
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes())?;
-
-        // item_count: u32
-        w.write_all(&self.item_count.to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -183,43 +192,14 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // guid: Guid
-            w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-            // source: NewItemSource
-            w.write_all(&(self.source.as_int() as u32).to_le_bytes()).await?;
-
-            // creation_type: NewItemCreationType
-            w.write_all(&(self.creation_type.as_int() as u32).to_le_bytes()).await?;
-
-            // alert_chat: NewItemChatAlert
-            w.write_all(&(self.alert_chat.as_int() as u32).to_le_bytes()).await?;
-
-            // bag_slot: u8
-            w.write_all(&self.bag_slot.to_le_bytes()).await?;
-
-            // item_slot: u32
-            w.write_all(&self.item_slot.to_le_bytes()).await?;
-
-            // item_id: u32
-            w.write_all(&self.item_id.to_le_bytes()).await?;
-
-            // item_suffix_factor: u32
-            w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
-
-            // item_random_property_id: u32
-            w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
-
-            // item_count: u32
-            w.write_all(&self.item_count.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -289,43 +269,14 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // guid: Guid
-            w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-            // source: NewItemSource
-            w.write_all(&(self.source.as_int() as u32).to_le_bytes()).await?;
-
-            // creation_type: NewItemCreationType
-            w.write_all(&(self.creation_type.as_int() as u32).to_le_bytes()).await?;
-
-            // alert_chat: NewItemChatAlert
-            w.write_all(&(self.alert_chat.as_int() as u32).to_le_bytes()).await?;
-
-            // bag_slot: u8
-            w.write_all(&self.bag_slot.to_le_bytes()).await?;
-
-            // item_slot: u32
-            w.write_all(&self.item_slot.to_le_bytes()).await?;
-
-            // item_id: u32
-            w.write_all(&self.item_id.to_le_bytes()).await?;
-
-            // item_suffix_factor: u32
-            w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
-
-            // item_random_property_id: u32
-            w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
-
-            // item_count: u32
-            w.write_all(&self.item_count.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

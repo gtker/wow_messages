@@ -3,9 +3,10 @@ use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_SEND_MAIL {
@@ -23,6 +24,52 @@ pub struct CMSG_SEND_MAIL {
 }
 
 impl ClientMessageWrite for CMSG_SEND_MAIL {}
+
+impl CMSG_SEND_MAIL {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // mailbox: Guid
+        w.write_all(&self.mailbox.guid().to_le_bytes())?;
+
+        // receiver: CString
+        w.write_all(self.receiver.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // subject: CString
+        w.write_all(self.subject.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // body: CString
+        w.write_all(self.body.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes())?;
+
+        // unknown2: u32
+        w.write_all(&self.unknown2.to_le_bytes())?;
+
+        // item: Guid
+        w.write_all(&self.item.guid().to_le_bytes())?;
+
+        // money: u32
+        w.write_all(&self.money.to_le_bytes())?;
+
+        // cash_on_delivery_amount: u32
+        w.write_all(&self.cash_on_delivery_amount.to_le_bytes())?;
+
+        // unknown3: u32
+        w.write_all(&self.unknown3.to_le_bytes())?;
+
+        // unknown4: u32
+        w.write_all(&self.unknown4.to_le_bytes())?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for CMSG_SEND_MAIL {
     const OPCODE: u16 = 0x0238;
@@ -88,46 +135,8 @@ impl MessageBody for CMSG_SEND_MAIL {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // mailbox: Guid
-        w.write_all(&self.mailbox.guid().to_le_bytes())?;
-
-        // receiver: CString
-        w.write_all(self.receiver.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // subject: CString
-        w.write_all(self.subject.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // body: CString
-        w.write_all(self.body.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // unknown2: u32
-        w.write_all(&self.unknown2.to_le_bytes())?;
-
-        // item: Guid
-        w.write_all(&self.item.guid().to_le_bytes())?;
-
-        // money: u32
-        w.write_all(&self.money.to_le_bytes())?;
-
-        // cash_on_delivery_amount: u32
-        w.write_all(&self.cash_on_delivery_amount.to_le_bytes())?;
-
-        // unknown3: u32
-        w.write_all(&self.unknown3.to_le_bytes())?;
-
-        // unknown4: u32
-        w.write_all(&self.unknown4.to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -203,52 +212,14 @@ impl MessageBody for CMSG_SEND_MAIL {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // mailbox: Guid
-            w.write_all(&self.mailbox.guid().to_le_bytes()).await?;
-
-            // receiver: CString
-            w.write_all(self.receiver.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // subject: CString
-            w.write_all(self.subject.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // body: CString
-            w.write_all(self.body.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // unknown1: u32
-            w.write_all(&self.unknown1.to_le_bytes()).await?;
-
-            // unknown2: u32
-            w.write_all(&self.unknown2.to_le_bytes()).await?;
-
-            // item: Guid
-            w.write_all(&self.item.guid().to_le_bytes()).await?;
-
-            // money: u32
-            w.write_all(&self.money.to_le_bytes()).await?;
-
-            // cash_on_delivery_amount: u32
-            w.write_all(&self.cash_on_delivery_amount.to_le_bytes()).await?;
-
-            // unknown3: u32
-            w.write_all(&self.unknown3.to_le_bytes()).await?;
-
-            // unknown4: u32
-            w.write_all(&self.unknown4.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -325,52 +296,14 @@ impl MessageBody for CMSG_SEND_MAIL {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // mailbox: Guid
-            w.write_all(&self.mailbox.guid().to_le_bytes()).await?;
-
-            // receiver: CString
-            w.write_all(self.receiver.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // subject: CString
-            w.write_all(self.subject.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // body: CString
-            w.write_all(self.body.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // unknown1: u32
-            w.write_all(&self.unknown1.to_le_bytes()).await?;
-
-            // unknown2: u32
-            w.write_all(&self.unknown2.to_le_bytes()).await?;
-
-            // item: Guid
-            w.write_all(&self.item.guid().to_le_bytes()).await?;
-
-            // money: u32
-            w.write_all(&self.money.to_le_bytes()).await?;
-
-            // cash_on_delivery_amount: u32
-            w.write_all(&self.cash_on_delivery_amount.to_le_bytes()).await?;
-
-            // unknown3: u32
-            w.write_all(&self.unknown3.to_le_bytes()).await?;
-
-            // unknown4: u32
-            w.write_all(&self.unknown4.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

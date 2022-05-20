@@ -3,9 +3,10 @@ use crate::world::v1::v2::{WorldResult, WorldResultError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_AUTH_RESPONSE {
@@ -13,6 +14,121 @@ pub struct SMSG_AUTH_RESPONSE {
 }
 
 impl ServerMessageWrite for SMSG_AUTH_RESPONSE {}
+
+impl SMSG_AUTH_RESPONSE {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // result: WorldResult
+        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
+
+        match &self.result {
+            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_SUCCESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILURE => {}
+            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CANCELLED => {}
+            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_DISCONNECTED => {}
+            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILED_TO_CONNECT => {}
+            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CONNECTED => {}
+            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_VERSION_MISMATCH => {}
+            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_CONNECTING => {}
+            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATING_SECURITY => {}
+            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_COMPLETE => {}
+            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_FAILED => {}
+            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_AUTHENTICATING => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
+                billing_flags,
+                billing_rested,
+                billing_time,
+            } => {
+                // billing_time: u32
+                w.write_all(&billing_time.to_le_bytes())?;
+
+                // billing_flags: u8
+                w.write_all(&billing_flags.to_le_bytes())?;
+
+                // billing_rested: u32
+                w.write_all(&billing_rested.to_le_bytes())?;
+
+            }
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_REJECT => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_BAD_SERVER_PROOF => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_UNAVAILABLE => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_SYSTEM_ERROR => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_ERROR => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_EXPIRED => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_VERSION_MISMATCH => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_UNKNOWN_ACCOUNT => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_INCORRECT_PASSWORD => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_SESSION_EXPIRED => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_SERVER_SHUTTING_DOWN => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_LOGGING_IN => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
+                queue_position,
+            } => {
+                // queue_position: u32
+                w.write_all(&queue_position.to_le_bytes())?;
+
+            }
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_BANNED => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_ONLINE => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_NO_TIME => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_DB_BUSY => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_SUSPENDED => {}
+            SMSG_AUTH_RESPONSEWorldResult::AUTH_PARENTAL_CONTROL => {}
+            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_IN_PROGRESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_SUCCESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_FAILED => {}
+            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_INVALID => {}
+            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_REALM_NOT_FOUND => {}
+            SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_IN_PROGRESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_SUCCESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_FAILED => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVING => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVED => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_FAILED => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_IN_PROGRESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SUCCESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ERROR => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_FAILED => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_NAME_IN_USE => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_DISABLED => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_LIMIT => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ACCOUNT_LIMIT => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_QUEUE => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ONLY_EXISTING => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_IN_PROGRESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_SUCCESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_IN_PROGRESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_SUCCESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_WORLD => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_INSTANCES => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_FAILED => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DISABLED => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_CHARACTER => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_NO_NAME => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_SHORT => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_LONG => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_ONLY_LETTERS => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MIXED_LANGUAGES => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_PROFANE => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_RESERVED => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_APOSTROPHE => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_THREE_CONSECUTIVE => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_SPACE => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_SUCCESS => {}
+            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_FAILURE => {}
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_AUTH_RESPONSE {
     const OPCODE: u16 = 0x01ee;
@@ -142,115 +258,8 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // result: WorldResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
-
-        match &self.result {
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILURE => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CANCELLED => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_DISCONNECTED => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILED_TO_CONNECT => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CONNECTED => {}
-            SMSG_AUTH_RESPONSEWorldResult::RESPONSE_VERSION_MISMATCH => {}
-            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_CONNECTING => {}
-            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATING_SECURITY => {}
-            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_COMPLETE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CSTATUS_AUTHENTICATING => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
-                billing_flags,
-                billing_rested,
-                billing_time,
-            } => {
-                // billing_time: u32
-                w.write_all(&billing_time.to_le_bytes())?;
-
-                // billing_flags: u8
-                w.write_all(&billing_flags.to_le_bytes())?;
-
-                // billing_rested: u32
-                w.write_all(&billing_rested.to_le_bytes())?;
-
-            }
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_REJECT => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_BAD_SERVER_PROOF => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_UNAVAILABLE => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_SYSTEM_ERROR => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_ERROR => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_EXPIRED => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_VERSION_MISMATCH => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_UNKNOWN_ACCOUNT => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_INCORRECT_PASSWORD => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_SESSION_EXPIRED => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_SERVER_SHUTTING_DOWN => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_LOGGING_IN => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
-                queue_position,
-            } => {
-                // queue_position: u32
-                w.write_all(&queue_position.to_le_bytes())?;
-
-            }
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_BANNED => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_ONLINE => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_NO_TIME => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_DB_BUSY => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_SUSPENDED => {}
-            SMSG_AUTH_RESPONSEWorldResult::AUTH_PARENTAL_CONTROL => {}
-            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_IN_PROGRESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_INVALID => {}
-            SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_REALM_NOT_FOUND => {}
-            SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_IN_PROGRESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVING => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_IN_PROGRESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ERROR => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_NAME_IN_USE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_DISABLED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_LIMIT => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ACCOUNT_LIMIT => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_QUEUE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ONLY_EXISTING => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_IN_PROGRESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_IN_PROGRESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_WORLD => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_INSTANCES => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_FAILED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DISABLED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_CHARACTER => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_NO_NAME => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_SHORT => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_LONG => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_ONLY_LETTERS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MIXED_LANGUAGES => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_PROFANE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_RESERVED => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_APOSTROPHE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_THREE_CONSECUTIVE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_SPACE => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_SUCCESS => {}
-            SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_FAILURE => {}
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -390,121 +399,14 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // result: WorldResult
-            w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;
-
-            match &self.result {
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILURE => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CANCELLED => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_DISCONNECTED => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILED_TO_CONNECT => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CONNECTED => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_VERSION_MISMATCH => {}
-                SMSG_AUTH_RESPONSEWorldResult::CSTATUS_CONNECTING => {}
-                SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATING_SECURITY => {}
-                SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_COMPLETE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CSTATUS_AUTHENTICATING => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
-                    billing_flags,
-                    billing_rested,
-                    billing_time,
-                } => {
-                    // billing_time: u32
-                    w.write_all(&billing_time.to_le_bytes()).await?;
-
-                    // billing_flags: u8
-                    w.write_all(&billing_flags.to_le_bytes()).await?;
-
-                    // billing_rested: u32
-                    w.write_all(&billing_rested.to_le_bytes()).await?;
-
-                }
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_REJECT => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_BAD_SERVER_PROOF => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_UNAVAILABLE => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_SYSTEM_ERROR => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_ERROR => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_EXPIRED => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_VERSION_MISMATCH => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_UNKNOWN_ACCOUNT => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_INCORRECT_PASSWORD => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_SESSION_EXPIRED => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_SERVER_SHUTTING_DOWN => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_LOGGING_IN => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
-                    queue_position,
-                } => {
-                    // queue_position: u32
-                    w.write_all(&queue_position.to_le_bytes()).await?;
-
-                }
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_BANNED => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_ONLINE => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_NO_TIME => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_DB_BUSY => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_SUSPENDED => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_PARENTAL_CONTROL => {}
-                SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_IN_PROGRESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_INVALID => {}
-                SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_REALM_NOT_FOUND => {}
-                SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_IN_PROGRESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVING => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_IN_PROGRESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ERROR => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_NAME_IN_USE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_DISABLED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_LIMIT => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ACCOUNT_LIMIT => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_QUEUE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ONLY_EXISTING => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_IN_PROGRESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_IN_PROGRESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_WORLD => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_INSTANCES => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DISABLED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_CHARACTER => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_NO_NAME => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_SHORT => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_LONG => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_ONLY_LETTERS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MIXED_LANGUAGES => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_PROFANE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_RESERVED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_APOSTROPHE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_THREE_CONSECUTIVE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_SPACE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_FAILURE => {}
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -645,121 +547,14 @@ impl MessageBody for SMSG_AUTH_RESPONSE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // result: WorldResult
-            w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;
-
-            match &self.result {
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILURE => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CANCELLED => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_DISCONNECTED => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_FAILED_TO_CONNECT => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_CONNECTED => {}
-                SMSG_AUTH_RESPONSEWorldResult::RESPONSE_VERSION_MISMATCH => {}
-                SMSG_AUTH_RESPONSEWorldResult::CSTATUS_CONNECTING => {}
-                SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATING_SECURITY => {}
-                SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_COMPLETE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CSTATUS_NEGOTIATION_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CSTATUS_AUTHENTICATING => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_OK {
-                    billing_flags,
-                    billing_rested,
-                    billing_time,
-                } => {
-                    // billing_time: u32
-                    w.write_all(&billing_time.to_le_bytes()).await?;
-
-                    // billing_flags: u8
-                    w.write_all(&billing_flags.to_le_bytes()).await?;
-
-                    // billing_rested: u32
-                    w.write_all(&billing_rested.to_le_bytes()).await?;
-
-                }
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_REJECT => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_BAD_SERVER_PROOF => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_UNAVAILABLE => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_SYSTEM_ERROR => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_ERROR => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_BILLING_EXPIRED => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_VERSION_MISMATCH => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_UNKNOWN_ACCOUNT => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_INCORRECT_PASSWORD => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_SESSION_EXPIRED => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_SERVER_SHUTTING_DOWN => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_LOGGING_IN => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_LOGIN_SERVER_NOT_FOUND => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_WAIT_QUEUE {
-                    queue_position,
-                } => {
-                    // queue_position: u32
-                    w.write_all(&queue_position.to_le_bytes()).await?;
-
-                }
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_BANNED => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_ALREADY_ONLINE => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_NO_TIME => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_DB_BUSY => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_SUSPENDED => {}
-                SMSG_AUTH_RESPONSEWorldResult::AUTH_PARENTAL_CONTROL => {}
-                SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_IN_PROGRESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_INVALID => {}
-                SMSG_AUTH_RESPONSEWorldResult::REALM_LIST_REALM_NOT_FOUND => {}
-                SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_IN_PROGRESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::ACCOUNT_CREATE_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVING => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_RETRIEVED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LIST_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_IN_PROGRESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ERROR => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_NAME_IN_USE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_DISABLED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_PVP_TEAMS_VIOLATION => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_LIMIT => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ACCOUNT_LIMIT => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_SERVER_QUEUE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_CREATE_ONLY_EXISTING => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_IN_PROGRESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_DELETE_FAILED_LOCKED_FOR_TRANSFER => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_IN_PROGRESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_WORLD => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DUPLICATE_CHARACTER => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_INSTANCES => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_FAILED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_DISABLED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_NO_CHARACTER => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_LOGIN_LOCKED_FOR_TRANSFER => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_NO_NAME => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_SHORT => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_TOO_LONG => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_ONLY_LETTERS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MIXED_LANGUAGES => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_PROFANE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_RESERVED => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_APOSTROPHE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_MULTIPLE_APOSTROPHES => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_THREE_CONSECUTIVE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_INVALID_SPACE => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_SUCCESS => {}
-                SMSG_AUTH_RESPONSEWorldResult::CHAR_NAME_FAILURE => {}
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

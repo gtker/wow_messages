@@ -5,9 +5,10 @@ use crate::world::v1::v12::WorldState;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_INIT_WORLD_STATES {
@@ -17,6 +18,27 @@ pub struct SMSG_INIT_WORLD_STATES {
 }
 
 impl ServerMessageWrite for SMSG_INIT_WORLD_STATES {}
+
+impl SMSG_INIT_WORLD_STATES {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // map: Map
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+
+        // area: Area
+        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
+
+        // amount_of_states: u16
+        w.write_all(&(self.states.len() as u16).to_le_bytes())?;
+
+        // states: WorldState[amount_of_states]
+        for i in self.states.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_INIT_WORLD_STATES {
     const OPCODE: u16 = 0x02c2;
@@ -53,21 +75,8 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
-
-        // amount_of_states: u16
-        w.write_all(&(self.states.len() as u16).to_le_bytes())?;
-
-        // states: WorldState[amount_of_states]
-        for i in self.states.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -114,27 +123,14 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // map: Map
-            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
-
-            // area: Area
-            w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
-
-            // amount_of_states: u16
-            w.write_all(&(self.states.len() as u16).to_le_bytes()).await?;
-
-            // states: WorldState[amount_of_states]
-            for i in self.states.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -182,27 +178,14 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // map: Map
-            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
-
-            // area: Area
-            w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
-
-            // amount_of_states: u16
-            w.write_all(&(self.states.len() as u16).to_le_bytes()).await?;
-
-            // states: WorldState[amount_of_states]
-            for i in self.states.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

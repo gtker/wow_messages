@@ -4,9 +4,10 @@ use crate::world::v1::v12::{RollVote, RollVoteError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -22,6 +23,37 @@ pub struct SMSG_LOOT_ROLL_WON {
 }
 
 impl ServerMessageWrite for SMSG_LOOT_ROLL_WON {}
+
+impl SMSG_LOOT_ROLL_WON {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // looted_target_guid: Guid
+        w.write_all(&self.looted_target_guid.guid().to_le_bytes())?;
+
+        // loot_slot: u32
+        w.write_all(&self.loot_slot.to_le_bytes())?;
+
+        // item_id: u32
+        w.write_all(&self.item_id.to_le_bytes())?;
+
+        // item_random_suffix: u32
+        w.write_all(&self.item_random_suffix.to_le_bytes())?;
+
+        // item_random_property_id: u32
+        w.write_all(&self.item_random_property_id.to_le_bytes())?;
+
+        // winning_player_guid: Guid
+        w.write_all(&self.winning_player_guid.guid().to_le_bytes())?;
+
+        // winning_roll: u8
+        w.write_all(&self.winning_roll.to_le_bytes())?;
+
+        // vote: RollVote
+        w.write_all(&(self.vote.as_int() as u8).to_le_bytes())?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_LOOT_ROLL_WON {
     const OPCODE: u16 = 0x029f;
@@ -72,31 +104,8 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // looted_target_guid: Guid
-        w.write_all(&self.looted_target_guid.guid().to_le_bytes())?;
-
-        // loot_slot: u32
-        w.write_all(&self.loot_slot.to_le_bytes())?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
-
-        // item_random_suffix: u32
-        w.write_all(&self.item_random_suffix.to_le_bytes())?;
-
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes())?;
-
-        // winning_player_guid: Guid
-        w.write_all(&self.winning_player_guid.guid().to_le_bytes())?;
-
-        // winning_roll: u8
-        w.write_all(&self.winning_roll.to_le_bytes())?;
-
-        // vote: RollVote
-        w.write_all(&(self.vote.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -157,37 +166,14 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // looted_target_guid: Guid
-            w.write_all(&self.looted_target_guid.guid().to_le_bytes()).await?;
-
-            // loot_slot: u32
-            w.write_all(&self.loot_slot.to_le_bytes()).await?;
-
-            // item_id: u32
-            w.write_all(&self.item_id.to_le_bytes()).await?;
-
-            // item_random_suffix: u32
-            w.write_all(&self.item_random_suffix.to_le_bytes()).await?;
-
-            // item_random_property_id: u32
-            w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
-
-            // winning_player_guid: Guid
-            w.write_all(&self.winning_player_guid.guid().to_le_bytes()).await?;
-
-            // winning_roll: u8
-            w.write_all(&self.winning_roll.to_le_bytes()).await?;
-
-            // vote: RollVote
-            w.write_all(&(self.vote.as_int() as u8).to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -249,37 +235,14 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // looted_target_guid: Guid
-            w.write_all(&self.looted_target_guid.guid().to_le_bytes()).await?;
-
-            // loot_slot: u32
-            w.write_all(&self.loot_slot.to_le_bytes()).await?;
-
-            // item_id: u32
-            w.write_all(&self.item_id.to_le_bytes()).await?;
-
-            // item_random_suffix: u32
-            w.write_all(&self.item_random_suffix.to_le_bytes()).await?;
-
-            // item_random_property_id: u32
-            w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
-
-            // winning_player_guid: Guid
-            w.write_all(&self.winning_player_guid.guid().to_le_bytes()).await?;
-
-            // winning_roll: u8
-            w.write_all(&self.winning_roll.to_le_bytes()).await?;
-
-            // vote: RollVote
-            w.write_all(&(self.vote.as_int() as u8).to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

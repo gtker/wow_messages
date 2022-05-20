@@ -5,9 +5,10 @@ use crate::world::v1::v12::{GmTicketType, GmTicketTypeError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_GMTICKET_GETTICKET {
@@ -15,6 +16,54 @@ pub struct SMSG_GMTICKET_GETTICKET {
 }
 
 impl ServerMessageWrite for SMSG_GMTICKET_GETTICKET {}
+
+impl SMSG_GMTICKET_GETTICKET {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // status: GmTicketStatus
+        w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
+
+        match &self.status {
+            SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
+            SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
+                days_since_last_updated,
+                days_since_oldest_ticket_creation,
+                days_since_ticket_creation,
+                escalation_status,
+                read_by_gm,
+                text,
+                ticket_type,
+            } => {
+                // text: CString
+                w.write_all(text.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // ticket_type: GmTicketType
+                w.write_all(&(ticket_type.as_int() as u8).to_le_bytes())?;
+
+                // days_since_ticket_creation: f32
+                w.write_all(&days_since_ticket_creation.to_le_bytes())?;
+
+                // days_since_oldest_ticket_creation: f32
+                w.write_all(&days_since_oldest_ticket_creation.to_le_bytes())?;
+
+                // days_since_last_updated: f32
+                w.write_all(&days_since_last_updated.to_le_bytes())?;
+
+                // escalation_status: GmTicketEscalationStatus
+                w.write_all(&(escalation_status.as_int() as u8).to_le_bytes())?;
+
+                // read_by_gm: u8
+                w.write_all(&read_by_gm.to_le_bytes())?;
+
+            }
+            SMSG_GMTICKET_GETTICKETGmTicketStatus::DEFAULT => {}
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_GMTICKET_GETTICKET {
     const OPCODE: u16 = 0x0212;
@@ -72,48 +121,8 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // status: GmTicketStatus
-        w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
-
-        match &self.status {
-            SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
-            SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                days_since_last_updated,
-                days_since_oldest_ticket_creation,
-                days_since_ticket_creation,
-                escalation_status,
-                read_by_gm,
-                text,
-                ticket_type,
-            } => {
-                // text: CString
-                w.write_all(text.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // ticket_type: GmTicketType
-                w.write_all(&(ticket_type.as_int() as u8).to_le_bytes())?;
-
-                // days_since_ticket_creation: f32
-                w.write_all(&days_since_ticket_creation.to_le_bytes())?;
-
-                // days_since_oldest_ticket_creation: f32
-                w.write_all(&days_since_oldest_ticket_creation.to_le_bytes())?;
-
-                // days_since_last_updated: f32
-                w.write_all(&days_since_last_updated.to_le_bytes())?;
-
-                // escalation_status: GmTicketEscalationStatus
-                w.write_all(&(escalation_status.as_int() as u8).to_le_bytes())?;
-
-                // read_by_gm: u8
-                w.write_all(&read_by_gm.to_le_bytes())?;
-
-            }
-            SMSG_GMTICKET_GETTICKETGmTicketStatus::DEFAULT => {}
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -181,54 +190,14 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // status: GmTicketStatus
-            w.write_all(&(self.status.as_int() as u32).to_le_bytes()).await?;
-
-            match &self.status {
-                SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
-                SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                    days_since_last_updated,
-                    days_since_oldest_ticket_creation,
-                    days_since_ticket_creation,
-                    escalation_status,
-                    read_by_gm,
-                    text,
-                    ticket_type,
-                } => {
-                    // text: CString
-                    w.write_all(text.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                    // ticket_type: GmTicketType
-                    w.write_all(&(ticket_type.as_int() as u8).to_le_bytes()).await?;
-
-                    // days_since_ticket_creation: f32
-                    w.write_all(&days_since_ticket_creation.to_le_bytes()).await?;
-
-                    // days_since_oldest_ticket_creation: f32
-                    w.write_all(&days_since_oldest_ticket_creation.to_le_bytes()).await?;
-
-                    // days_since_last_updated: f32
-                    w.write_all(&days_since_last_updated.to_le_bytes()).await?;
-
-                    // escalation_status: GmTicketEscalationStatus
-                    w.write_all(&(escalation_status.as_int() as u8).to_le_bytes()).await?;
-
-                    // read_by_gm: u8
-                    w.write_all(&read_by_gm.to_le_bytes()).await?;
-
-                }
-                SMSG_GMTICKET_GETTICKETGmTicketStatus::DEFAULT => {}
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -297,54 +266,14 @@ impl MessageBody for SMSG_GMTICKET_GETTICKET {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // status: GmTicketStatus
-            w.write_all(&(self.status.as_int() as u32).to_le_bytes()).await?;
-
-            match &self.status {
-                SMSG_GMTICKET_GETTICKETGmTicketStatus::DBERROR => {}
-                SMSG_GMTICKET_GETTICKETGmTicketStatus::HASTEXT {
-                    days_since_last_updated,
-                    days_since_oldest_ticket_creation,
-                    days_since_ticket_creation,
-                    escalation_status,
-                    read_by_gm,
-                    text,
-                    ticket_type,
-                } => {
-                    // text: CString
-                    w.write_all(text.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                    // ticket_type: GmTicketType
-                    w.write_all(&(ticket_type.as_int() as u8).to_le_bytes()).await?;
-
-                    // days_since_ticket_creation: f32
-                    w.write_all(&days_since_ticket_creation.to_le_bytes()).await?;
-
-                    // days_since_oldest_ticket_creation: f32
-                    w.write_all(&days_since_oldest_ticket_creation.to_le_bytes()).await?;
-
-                    // days_since_last_updated: f32
-                    w.write_all(&days_since_last_updated.to_le_bytes()).await?;
-
-                    // escalation_status: GmTicketEscalationStatus
-                    w.write_all(&(escalation_status.as_int() as u8).to_le_bytes()).await?;
-
-                    // read_by_gm: u8
-                    w.write_all(&read_by_gm.to_le_bytes()).await?;
-
-                }
-                SMSG_GMTICKET_GETTICKETGmTicketStatus::DEFAULT => {}
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

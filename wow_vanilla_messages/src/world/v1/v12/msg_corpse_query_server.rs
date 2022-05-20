@@ -4,9 +4,10 @@ use crate::world::v1::v12::{Map, MapError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MSG_CORPSE_QUERY_Server {
@@ -14,6 +15,43 @@ pub struct MSG_CORPSE_QUERY_Server {
 }
 
 impl ServerMessageWrite for MSG_CORPSE_QUERY_Server {}
+
+impl MSG_CORPSE_QUERY_Server {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // result: CorpseQueryResult
+        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
+
+        match &self.result {
+            MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
+            MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
+                corpse_map,
+                map,
+                position_x,
+                position_y,
+                position_z,
+            } => {
+                // map: Map
+                w.write_all(&(map.as_int() as u32).to_le_bytes())?;
+
+                // position_x: f32
+                w.write_all(&position_x.to_le_bytes())?;
+
+                // position_y: f32
+                w.write_all(&position_y.to_le_bytes())?;
+
+                // position_z: f32
+                w.write_all(&position_z.to_le_bytes())?;
+
+                // corpse_map: Map
+                w.write_all(&(corpse_map.as_int() as u32).to_le_bytes())?;
+
+            }
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for MSG_CORPSE_QUERY_Server {
     const OPCODE: u16 = 0x0216;
@@ -61,37 +99,8 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // result: CorpseQueryResult
-        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
-
-        match &self.result {
-            MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
-            MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
-                corpse_map,
-                map,
-                position_x,
-                position_y,
-                position_z,
-            } => {
-                // map: Map
-                w.write_all(&(map.as_int() as u32).to_le_bytes())?;
-
-                // position_x: f32
-                w.write_all(&position_x.to_le_bytes())?;
-
-                // position_y: f32
-                w.write_all(&position_y.to_le_bytes())?;
-
-                // position_z: f32
-                w.write_all(&position_z.to_le_bytes())?;
-
-                // corpse_map: Map
-                w.write_all(&(corpse_map.as_int() as u32).to_le_bytes())?;
-
-            }
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -149,43 +158,14 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // result: CorpseQueryResult
-            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
-
-            match &self.result {
-                MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
-                MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
-                    corpse_map,
-                    map,
-                    position_x,
-                    position_y,
-                    position_z,
-                } => {
-                    // map: Map
-                    w.write_all(&(map.as_int() as u32).to_le_bytes()).await?;
-
-                    // position_x: f32
-                    w.write_all(&position_x.to_le_bytes()).await?;
-
-                    // position_y: f32
-                    w.write_all(&position_y.to_le_bytes()).await?;
-
-                    // position_z: f32
-                    w.write_all(&position_z.to_le_bytes()).await?;
-
-                    // corpse_map: Map
-                    w.write_all(&(corpse_map.as_int() as u32).to_le_bytes()).await?;
-
-                }
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -244,43 +224,14 @@ impl MessageBody for MSG_CORPSE_QUERY_Server {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // result: CorpseQueryResult
-            w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
-
-            match &self.result {
-                MSG_CORPSE_QUERY_ServerCorpseQueryResult::NOT_FOUND => {}
-                MSG_CORPSE_QUERY_ServerCorpseQueryResult::FOUND {
-                    corpse_map,
-                    map,
-                    position_x,
-                    position_y,
-                    position_z,
-                } => {
-                    // map: Map
-                    w.write_all(&(map.as_int() as u32).to_le_bytes()).await?;
-
-                    // position_x: f32
-                    w.write_all(&position_x.to_le_bytes()).await?;
-
-                    // position_y: f32
-                    w.write_all(&position_y.to_le_bytes()).await?;
-
-                    // position_z: f32
-                    w.write_all(&position_z.to_le_bytes()).await?;
-
-                    // corpse_map: Map
-                    w.write_all(&(corpse_map.as_int() as u32).to_le_bytes()).await?;
-
-                }
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

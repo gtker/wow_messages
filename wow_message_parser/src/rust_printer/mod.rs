@@ -157,6 +157,8 @@ impl Writer {
         read_function: impl Fn(&mut Self, ImplType),
         write_function: impl Fn(&mut Self, ImplType),
     ) {
+        self.write_as_bytes(&type_name, write_function);
+
         self.open_curly(format!(
             "impl {} for {}",
             WORLD_BODY_TRAIT_NAME,
@@ -196,7 +198,7 @@ impl Writer {
 
             self.print_write_decl(it, "_body");
 
-            write_function(self, it);
+            self.call_as_bytes(it);
 
             if it.is_async() {
                 self.closing_curly_with(")"); // Box::pin
@@ -392,6 +394,14 @@ impl Writer {
 
         self.open_curly("");
         self.open_curly("Box::pin(async move");
+    }
+
+    fn call_as_bytes(&mut self, it: ImplType) {
+        self.wln("let inner = self.as_bytes()?;");
+        self.wln(format!(
+            "w.write_all(&inner){postfix}",
+            postfix = it.postfix()
+        ));
     }
 
     fn write_as_bytes(
@@ -824,8 +834,8 @@ impl ImplType {
     pub fn write(&self) -> &str {
         match self {
             ImplType::Std => "std::io::Write",
-            ImplType::Tokio => "AsyncWriteExt + Unpin + Send",
-            ImplType::AsyncStd => "WriteExt + Unpin + Send",
+            ImplType::Tokio => "tokio::io::AsyncWriteExt + Unpin + Send",
+            ImplType::AsyncStd => "async_std::io::WriteExt + Unpin + Send",
         }
     }
 

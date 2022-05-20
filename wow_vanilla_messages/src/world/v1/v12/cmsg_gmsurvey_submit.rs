@@ -3,9 +3,10 @@ use crate::world::v1::v12::GmSurveyQuestion;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_GMSURVEY_SUBMIT {
@@ -15,6 +16,26 @@ pub struct CMSG_GMSURVEY_SUBMIT {
 }
 
 impl ClientMessageWrite for CMSG_GMSURVEY_SUBMIT {}
+
+impl CMSG_GMSURVEY_SUBMIT {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // survey_id: u32
+        w.write_all(&self.survey_id.to_le_bytes())?;
+
+        // questions: GmSurveyQuestion[10]
+        for i in self.questions.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // answer_comment: CString
+        w.write_all(self.answer_comment.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for CMSG_GMSURVEY_SUBMIT {
     const OPCODE: u16 = 0x032a;
@@ -50,20 +71,8 @@ impl MessageBody for CMSG_GMSURVEY_SUBMIT {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // survey_id: u32
-        w.write_all(&self.survey_id.to_le_bytes())?;
-
-        // questions: GmSurveyQuestion[10]
-        for i in self.questions.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        // answer_comment: CString
-        w.write_all(self.answer_comment.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -109,26 +118,14 @@ impl MessageBody for CMSG_GMSURVEY_SUBMIT {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // survey_id: u32
-            w.write_all(&self.survey_id.to_le_bytes()).await?;
-
-            // questions: GmSurveyQuestion[10]
-            for i in self.questions.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // answer_comment: CString
-            w.write_all(self.answer_comment.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -175,26 +172,14 @@ impl MessageBody for CMSG_GMSURVEY_SUBMIT {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // survey_id: u32
-            w.write_all(&self.survey_id.to_le_bytes()).await?;
-
-            // questions: GmSurveyQuestion[10]
-            for i in self.questions.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // answer_comment: CString
-            w.write_all(self.answer_comment.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

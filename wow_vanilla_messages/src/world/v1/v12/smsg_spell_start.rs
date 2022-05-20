@@ -5,9 +5,10 @@ use crate::world::v1::v12::{SpellCastTargets, SpellCastTargetsError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_SPELL_START {
@@ -20,6 +21,40 @@ pub struct SMSG_SPELL_START {
 }
 
 impl ServerMessageWrite for SMSG_SPELL_START {}
+
+impl SMSG_SPELL_START {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // cast_item: PackedGuid
+        w.write_all(&self.cast_item.packed_guid())?;
+
+        // caster: PackedGuid
+        w.write_all(&self.caster.packed_guid())?;
+
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes())?;
+
+        // flags: CastFlags
+        w.write_all(&(self.flags.as_int() as u16).to_le_bytes())?;
+
+        // timer: u32
+        w.write_all(&self.timer.to_le_bytes())?;
+
+        // targets: SpellCastTargets
+        w.write_all(&self.targets.as_bytes()?)?;
+
+        if let Some(if_statement) = &self.flags.ammo {
+            // ammo_display_id: u32
+            w.write_all(&if_statement.ammo_display_id.to_le_bytes())?;
+
+            // ammo_inventory_type: u32
+            w.write_all(&if_statement.ammo_inventory_type.to_le_bytes())?;
+
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_SPELL_START {
     const OPCODE: u16 = 0x0131;
@@ -83,34 +118,8 @@ impl MessageBody for SMSG_SPELL_START {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // cast_item: PackedGuid
-        w.write_all(&self.cast_item.packed_guid())?;
-
-        // caster: PackedGuid
-        w.write_all(&self.caster.packed_guid())?;
-
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes())?;
-
-        // flags: CastFlags
-        w.write_all(&(self.flags.as_int() as u16).to_le_bytes())?;
-
-        // timer: u32
-        w.write_all(&self.timer.to_le_bytes())?;
-
-        // targets: SpellCastTargets
-        w.write_all(&self.targets.as_bytes()?)?;
-
-        if let Some(if_statement) = &self.flags.ammo {
-            // ammo_display_id: u32
-            w.write_all(&if_statement.ammo_display_id.to_le_bytes())?;
-
-            // ammo_inventory_type: u32
-            w.write_all(&if_statement.ammo_inventory_type.to_le_bytes())?;
-
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -184,40 +193,14 @@ impl MessageBody for SMSG_SPELL_START {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // cast_item: PackedGuid
-            w.write_all(&self.cast_item.packed_guid()).await?;
-
-            // caster: PackedGuid
-            w.write_all(&self.caster.packed_guid()).await?;
-
-            // spell: u32
-            w.write_all(&self.spell.to_le_bytes()).await?;
-
-            // flags: CastFlags
-            w.write_all(&(self.flags.as_int() as u16).to_le_bytes()).await?;
-
-            // timer: u32
-            w.write_all(&self.timer.to_le_bytes()).await?;
-
-            // targets: SpellCastTargets
-            w.write_all(&self.targets.as_bytes()?).await?;
-
-            if let Some(if_statement) = &self.flags.ammo {
-                // ammo_display_id: u32
-                w.write_all(&if_statement.ammo_display_id.to_le_bytes()).await?;
-
-                // ammo_inventory_type: u32
-                w.write_all(&if_statement.ammo_inventory_type.to_le_bytes()).await?;
-
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -292,40 +275,14 @@ impl MessageBody for SMSG_SPELL_START {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // cast_item: PackedGuid
-            w.write_all(&self.cast_item.packed_guid()).await?;
-
-            // caster: PackedGuid
-            w.write_all(&self.caster.packed_guid()).await?;
-
-            // spell: u32
-            w.write_all(&self.spell.to_le_bytes()).await?;
-
-            // flags: CastFlags
-            w.write_all(&(self.flags.as_int() as u16).to_le_bytes()).await?;
-
-            // timer: u32
-            w.write_all(&self.timer.to_le_bytes()).await?;
-
-            // targets: SpellCastTargets
-            w.write_all(&self.targets.as_bytes()?).await?;
-
-            if let Some(if_statement) = &self.flags.ammo {
-                // ammo_display_id: u32
-                w.write_all(&if_statement.ammo_display_id.to_le_bytes()).await?;
-
-                // ammo_inventory_type: u32
-                w.write_all(&if_statement.ammo_inventory_type.to_le_bytes()).await?;
-
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

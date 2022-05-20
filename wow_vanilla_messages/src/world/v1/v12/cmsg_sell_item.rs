@@ -3,9 +3,10 @@ use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -16,6 +17,22 @@ pub struct CMSG_SELL_ITEM {
 }
 
 impl ClientMessageWrite for CMSG_SELL_ITEM {}
+
+impl CMSG_SELL_ITEM {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // vendor_guid: Guid
+        w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
+
+        // item_guid: Guid
+        w.write_all(&self.item_guid.guid().to_le_bytes())?;
+
+        // amount: u8
+        w.write_all(&self.amount.to_le_bytes())?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for CMSG_SELL_ITEM {
     const OPCODE: u16 = 0x01a0;
@@ -46,16 +63,8 @@ impl MessageBody for CMSG_SELL_ITEM {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // vendor_guid: Guid
-        w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
-
-        // item_guid: Guid
-        w.write_all(&self.item_guid.guid().to_le_bytes())?;
-
-        // amount: u8
-        w.write_all(&self.amount.to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -96,22 +105,14 @@ impl MessageBody for CMSG_SELL_ITEM {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // vendor_guid: Guid
-            w.write_all(&self.vendor_guid.guid().to_le_bytes()).await?;
-
-            // item_guid: Guid
-            w.write_all(&self.item_guid.guid().to_le_bytes()).await?;
-
-            // amount: u8
-            w.write_all(&self.amount.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -153,22 +154,14 @@ impl MessageBody for CMSG_SELL_ITEM {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // vendor_guid: Guid
-            w.write_all(&self.vendor_guid.guid().to_le_bytes()).await?;
-
-            // item_guid: Guid
-            w.write_all(&self.item_guid.guid().to_le_bytes()).await?;
-
-            // amount: u8
-            w.write_all(&self.amount.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

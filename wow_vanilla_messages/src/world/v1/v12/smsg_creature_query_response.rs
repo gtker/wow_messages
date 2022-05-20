@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_CREATURE_QUERY_RESPONSE {
@@ -13,6 +14,72 @@ pub struct SMSG_CREATURE_QUERY_RESPONSE {
 }
 
 impl ServerMessageWrite for SMSG_CREATURE_QUERY_RESPONSE {}
+
+impl SMSG_CREATURE_QUERY_RESPONSE {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // creature_entry: u32
+        w.write_all(&self.creature_entry.to_le_bytes())?;
+
+        // optional found
+        if let Some(v) = &self.found {
+            // name1: CString
+            w.write_all(v.name1.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // name2: CString
+            w.write_all(v.name2.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // name3: CString
+            w.write_all(v.name3.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // name4: CString
+            w.write_all(v.name4.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // sub_name: CString
+            w.write_all(v.sub_name.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // type_flags: u32
+            w.write_all(&v.type_flags.to_le_bytes())?;
+
+            // creature_type: u32
+            w.write_all(&v.creature_type.to_le_bytes())?;
+
+            // creature_family: u32
+            w.write_all(&v.creature_family.to_le_bytes())?;
+
+            // creature_rank: u32
+            w.write_all(&v.creature_rank.to_le_bytes())?;
+
+            // unknown0: u32
+            w.write_all(&v.unknown0.to_le_bytes())?;
+
+            // spell_data_id: u32
+            w.write_all(&v.spell_data_id.to_le_bytes())?;
+
+            // display_id: u32
+            w.write_all(&v.display_id.to_le_bytes())?;
+
+            // civilian: u8
+            w.write_all(&v.civilian.to_le_bytes())?;
+
+            // racial_leader: u8
+            w.write_all(&v.racial_leader.to_le_bytes())?;
+
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
     const OPCODE: u16 = 0x0061;
@@ -109,66 +176,8 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // creature_entry: u32
-        w.write_all(&self.creature_entry.to_le_bytes())?;
-
-        // optional found
-        if let Some(v) = &self.found {
-            // name1: CString
-            w.write_all(v.name1.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // name2: CString
-            w.write_all(v.name2.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // name3: CString
-            w.write_all(v.name3.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // name4: CString
-            w.write_all(v.name4.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // sub_name: CString
-            w.write_all(v.sub_name.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // type_flags: u32
-            w.write_all(&v.type_flags.to_le_bytes())?;
-
-            // creature_type: u32
-            w.write_all(&v.creature_type.to_le_bytes())?;
-
-            // creature_family: u32
-            w.write_all(&v.creature_family.to_le_bytes())?;
-
-            // creature_rank: u32
-            w.write_all(&v.creature_rank.to_le_bytes())?;
-
-            // unknown0: u32
-            w.write_all(&v.unknown0.to_le_bytes())?;
-
-            // spell_data_id: u32
-            w.write_all(&v.spell_data_id.to_le_bytes())?;
-
-            // display_id: u32
-            w.write_all(&v.display_id.to_le_bytes())?;
-
-            // civilian: u8
-            w.write_all(&v.civilian.to_le_bytes())?;
-
-            // racial_leader: u8
-            w.write_all(&v.racial_leader.to_le_bytes())?;
-
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -275,72 +284,14 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // creature_entry: u32
-            w.write_all(&self.creature_entry.to_le_bytes()).await?;
-
-            // optional found
-            if let Some(v) = &self.found {
-                // name1: CString
-                w.write_all(v.name1.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name2: CString
-                w.write_all(v.name2.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name3: CString
-                w.write_all(v.name3.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name4: CString
-                w.write_all(v.name4.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // sub_name: CString
-                w.write_all(v.sub_name.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // type_flags: u32
-                w.write_all(&v.type_flags.to_le_bytes()).await?;
-
-                // creature_type: u32
-                w.write_all(&v.creature_type.to_le_bytes()).await?;
-
-                // creature_family: u32
-                w.write_all(&v.creature_family.to_le_bytes()).await?;
-
-                // creature_rank: u32
-                w.write_all(&v.creature_rank.to_le_bytes()).await?;
-
-                // unknown0: u32
-                w.write_all(&v.unknown0.to_le_bytes()).await?;
-
-                // spell_data_id: u32
-                w.write_all(&v.spell_data_id.to_le_bytes()).await?;
-
-                // display_id: u32
-                w.write_all(&v.display_id.to_le_bytes()).await?;
-
-                // civilian: u8
-                w.write_all(&v.civilian.to_le_bytes()).await?;
-
-                // racial_leader: u8
-                w.write_all(&v.racial_leader.to_le_bytes()).await?;
-
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -448,72 +399,14 @@ impl MessageBody for SMSG_CREATURE_QUERY_RESPONSE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // creature_entry: u32
-            w.write_all(&self.creature_entry.to_le_bytes()).await?;
-
-            // optional found
-            if let Some(v) = &self.found {
-                // name1: CString
-                w.write_all(v.name1.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name2: CString
-                w.write_all(v.name2.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name3: CString
-                w.write_all(v.name3.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name4: CString
-                w.write_all(v.name4.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // sub_name: CString
-                w.write_all(v.sub_name.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // type_flags: u32
-                w.write_all(&v.type_flags.to_le_bytes()).await?;
-
-                // creature_type: u32
-                w.write_all(&v.creature_type.to_le_bytes()).await?;
-
-                // creature_family: u32
-                w.write_all(&v.creature_family.to_le_bytes()).await?;
-
-                // creature_rank: u32
-                w.write_all(&v.creature_rank.to_le_bytes()).await?;
-
-                // unknown0: u32
-                w.write_all(&v.unknown0.to_le_bytes()).await?;
-
-                // spell_data_id: u32
-                w.write_all(&v.spell_data_id.to_le_bytes()).await?;
-
-                // display_id: u32
-                w.write_all(&v.display_id.to_le_bytes()).await?;
-
-                // civilian: u8
-                w.write_all(&v.civilian.to_le_bytes()).await?;
-
-                // racial_leader: u8
-                w.write_all(&v.racial_leader.to_le_bytes()).await?;
-
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

@@ -4,9 +4,10 @@ use crate::world::v1::v12::{WeatherType, WeatherTypeError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -18,6 +19,25 @@ pub struct SMSG_WEATHER {
 }
 
 impl ServerMessageWrite for SMSG_WEATHER {}
+
+impl SMSG_WEATHER {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // weather_type: WeatherType
+        w.write_all(&(self.weather_type.as_int() as u32).to_le_bytes())?;
+
+        // grade: f32
+        w.write_all(&self.grade.to_le_bytes())?;
+
+        // sound_id: u32
+        w.write_all(&self.sound_id.to_le_bytes())?;
+
+        // change: WeatherChangeType
+        w.write_all(&(self.change.as_int() as u8).to_le_bytes())?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_WEATHER {
     const OPCODE: u16 = 0x02f4;
@@ -51,19 +71,8 @@ impl MessageBody for SMSG_WEATHER {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // weather_type: WeatherType
-        w.write_all(&(self.weather_type.as_int() as u32).to_le_bytes())?;
-
-        // grade: f32
-        w.write_all(&self.grade.to_le_bytes())?;
-
-        // sound_id: u32
-        w.write_all(&self.sound_id.to_le_bytes())?;
-
-        // change: WeatherChangeType
-        w.write_all(&(self.change.as_int() as u8).to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -107,25 +116,14 @@ impl MessageBody for SMSG_WEATHER {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // weather_type: WeatherType
-            w.write_all(&(self.weather_type.as_int() as u32).to_le_bytes()).await?;
-
-            // grade: f32
-            w.write_all(&self.grade.to_le_bytes()).await?;
-
-            // sound_id: u32
-            w.write_all(&self.sound_id.to_le_bytes()).await?;
-
-            // change: WeatherChangeType
-            w.write_all(&(self.change.as_int() as u8).to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -170,25 +168,14 @@ impl MessageBody for SMSG_WEATHER {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // weather_type: WeatherType
-            w.write_all(&(self.weather_type.as_int() as u32).to_le_bytes()).await?;
-
-            // grade: f32
-            w.write_all(&self.grade.to_le_bytes()).await?;
-
-            // sound_id: u32
-            w.write_all(&self.sound_id.to_le_bytes()).await?;
-
-            // change: WeatherChangeType
-            w.write_all(&(self.change.as_int() as u8).to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

@@ -4,9 +4,10 @@ use crate::world::v1::v12::{Language, LanguageError};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_MESSAGECHAT {
@@ -15,6 +16,189 @@ pub struct CMSG_MESSAGECHAT {
 }
 
 impl ClientMessageWrite for CMSG_MESSAGECHAT {}
+
+impl CMSG_MESSAGECHAT {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // chat_type: ChatType
+        w.write_all(&(self.chat_type.as_int() as u32).to_le_bytes())?;
+
+        // language: Language
+        w.write_all(&(self.language.as_int() as u32).to_le_bytes())?;
+
+        match &self.chat_type {
+            CMSG_MESSAGECHATChatType::SAY {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::PARTY {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::RAID {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::GUILD {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::OFFICER {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::YELL {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::WHISPER {
+                target_player,
+                whisper_message,
+            } => {
+                // target_player: CString
+                w.write_all(target_player.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // whisper_message: CString
+                w.write_all(whisper_message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::WHISPER_INFORM => {}
+            CMSG_MESSAGECHATChatType::EMOTE {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::TEXT_EMOTE => {}
+            CMSG_MESSAGECHATChatType::SYSTEM => {}
+            CMSG_MESSAGECHATChatType::MONSTER_SAY => {}
+            CMSG_MESSAGECHATChatType::MONSTER_YELL => {}
+            CMSG_MESSAGECHATChatType::MONSTER_EMOTE => {}
+            CMSG_MESSAGECHATChatType::CHANNEL {
+                channel,
+                channel_message,
+            } => {
+                // channel: CString
+                w.write_all(channel.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // channel_message: CString
+                w.write_all(channel_message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::CHANNEL_JOIN => {}
+            CMSG_MESSAGECHATChatType::CHANNEL_LEAVE => {}
+            CMSG_MESSAGECHATChatType::CHANNEL_LIST => {}
+            CMSG_MESSAGECHATChatType::CHANNEL_NOTICE => {}
+            CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER => {}
+            CMSG_MESSAGECHATChatType::AFK {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::DND {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::IGNORED => {}
+            CMSG_MESSAGECHATChatType::SKILL => {}
+            CMSG_MESSAGECHATChatType::LOOT => {}
+            CMSG_MESSAGECHATChatType::MONSTER_WHISPER => {}
+            CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL => {}
+            CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE => {}
+            CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE => {}
+            CMSG_MESSAGECHATChatType::RAID_LEADER {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::RAID_WARNING {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER => {}
+            CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE => {}
+            CMSG_MESSAGECHATChatType::BATTLEGROUND {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
+                message,
+            } => {
+                // message: CString
+                w.write_all(message.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for CMSG_MESSAGECHAT {
     const OPCODE: u16 = 0x0095;
@@ -209,183 +393,8 @@ impl MessageBody for CMSG_MESSAGECHAT {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // chat_type: ChatType
-        w.write_all(&(self.chat_type.as_int() as u32).to_le_bytes())?;
-
-        // language: Language
-        w.write_all(&(self.language.as_int() as u32).to_le_bytes())?;
-
-        match &self.chat_type {
-            CMSG_MESSAGECHATChatType::SAY {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::PARTY {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::RAID {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::GUILD {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::OFFICER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::YELL {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::WHISPER {
-                target_player,
-                whisper_message,
-            } => {
-                // target_player: CString
-                w.write_all(target_player.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // whisper_message: CString
-                w.write_all(whisper_message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::WHISPER_INFORM => {}
-            CMSG_MESSAGECHATChatType::EMOTE {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::TEXT_EMOTE => {}
-            CMSG_MESSAGECHATChatType::SYSTEM => {}
-            CMSG_MESSAGECHATChatType::MONSTER_SAY => {}
-            CMSG_MESSAGECHATChatType::MONSTER_YELL => {}
-            CMSG_MESSAGECHATChatType::MONSTER_EMOTE => {}
-            CMSG_MESSAGECHATChatType::CHANNEL {
-                channel,
-                channel_message,
-            } => {
-                // channel: CString
-                w.write_all(channel.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // channel_message: CString
-                w.write_all(channel_message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::CHANNEL_JOIN => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_LEAVE => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_LIST => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_NOTICE => {}
-            CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER => {}
-            CMSG_MESSAGECHATChatType::AFK {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::DND {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::IGNORED => {}
-            CMSG_MESSAGECHATChatType::SKILL => {}
-            CMSG_MESSAGECHATChatType::LOOT => {}
-            CMSG_MESSAGECHATChatType::MONSTER_WHISPER => {}
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL => {}
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE => {}
-            CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE => {}
-            CMSG_MESSAGECHATChatType::RAID_LEADER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::RAID_WARNING {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER => {}
-            CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE => {}
-            CMSG_MESSAGECHATChatType::BATTLEGROUND {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
-                message,
-            } => {
-                // message: CString
-                w.write_all(message.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -590,189 +599,14 @@ impl MessageBody for CMSG_MESSAGECHAT {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // chat_type: ChatType
-            w.write_all(&(self.chat_type.as_int() as u32).to_le_bytes()).await?;
-
-            // language: Language
-            w.write_all(&(self.language.as_int() as u32).to_le_bytes()).await?;
-
-            match &self.chat_type {
-                CMSG_MESSAGECHATChatType::SAY {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::PARTY {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::RAID {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::GUILD {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::OFFICER {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::YELL {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::WHISPER {
-                    target_player,
-                    whisper_message,
-                } => {
-                    // target_player: CString
-                    w.write_all(target_player.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                    // whisper_message: CString
-                    w.write_all(whisper_message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::WHISPER_INFORM => {}
-                CMSG_MESSAGECHATChatType::EMOTE {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::TEXT_EMOTE => {}
-                CMSG_MESSAGECHATChatType::SYSTEM => {}
-                CMSG_MESSAGECHATChatType::MONSTER_SAY => {}
-                CMSG_MESSAGECHATChatType::MONSTER_YELL => {}
-                CMSG_MESSAGECHATChatType::MONSTER_EMOTE => {}
-                CMSG_MESSAGECHATChatType::CHANNEL {
-                    channel,
-                    channel_message,
-                } => {
-                    // channel: CString
-                    w.write_all(channel.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                    // channel_message: CString
-                    w.write_all(channel_message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::CHANNEL_JOIN => {}
-                CMSG_MESSAGECHATChatType::CHANNEL_LEAVE => {}
-                CMSG_MESSAGECHATChatType::CHANNEL_LIST => {}
-                CMSG_MESSAGECHATChatType::CHANNEL_NOTICE => {}
-                CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER => {}
-                CMSG_MESSAGECHATChatType::AFK {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::DND {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::IGNORED => {}
-                CMSG_MESSAGECHATChatType::SKILL => {}
-                CMSG_MESSAGECHATChatType::LOOT => {}
-                CMSG_MESSAGECHATChatType::MONSTER_WHISPER => {}
-                CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL => {}
-                CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE => {}
-                CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE => {}
-                CMSG_MESSAGECHATChatType::RAID_LEADER {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::RAID_WARNING {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER => {}
-                CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE => {}
-                CMSG_MESSAGECHATChatType::BATTLEGROUND {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -978,189 +812,14 @@ impl MessageBody for CMSG_MESSAGECHAT {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // chat_type: ChatType
-            w.write_all(&(self.chat_type.as_int() as u32).to_le_bytes()).await?;
-
-            // language: Language
-            w.write_all(&(self.language.as_int() as u32).to_le_bytes()).await?;
-
-            match &self.chat_type {
-                CMSG_MESSAGECHATChatType::SAY {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::PARTY {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::RAID {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::GUILD {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::OFFICER {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::YELL {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::WHISPER {
-                    target_player,
-                    whisper_message,
-                } => {
-                    // target_player: CString
-                    w.write_all(target_player.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                    // whisper_message: CString
-                    w.write_all(whisper_message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::WHISPER_INFORM => {}
-                CMSG_MESSAGECHATChatType::EMOTE {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::TEXT_EMOTE => {}
-                CMSG_MESSAGECHATChatType::SYSTEM => {}
-                CMSG_MESSAGECHATChatType::MONSTER_SAY => {}
-                CMSG_MESSAGECHATChatType::MONSTER_YELL => {}
-                CMSG_MESSAGECHATChatType::MONSTER_EMOTE => {}
-                CMSG_MESSAGECHATChatType::CHANNEL {
-                    channel,
-                    channel_message,
-                } => {
-                    // channel: CString
-                    w.write_all(channel.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                    // channel_message: CString
-                    w.write_all(channel_message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::CHANNEL_JOIN => {}
-                CMSG_MESSAGECHATChatType::CHANNEL_LEAVE => {}
-                CMSG_MESSAGECHATChatType::CHANNEL_LIST => {}
-                CMSG_MESSAGECHATChatType::CHANNEL_NOTICE => {}
-                CMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER => {}
-                CMSG_MESSAGECHATChatType::AFK {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::DND {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::IGNORED => {}
-                CMSG_MESSAGECHATChatType::SKILL => {}
-                CMSG_MESSAGECHATChatType::LOOT => {}
-                CMSG_MESSAGECHATChatType::MONSTER_WHISPER => {}
-                CMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL => {}
-                CMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE => {}
-                CMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE => {}
-                CMSG_MESSAGECHATChatType::RAID_LEADER {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::RAID_WARNING {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER => {}
-                CMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE => {}
-                CMSG_MESSAGECHATChatType::BATTLEGROUND {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-                CMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
-                    message,
-                } => {
-                    // message: CString
-                    w.write_all(message.as_bytes()).await?;
-                    // Null terminator
-                    w.write_all(&[0]).await?;
-
-                }
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

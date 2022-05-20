@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_GUILD_QUERY_RESPONSE {
@@ -19,6 +20,42 @@ pub struct SMSG_GUILD_QUERY_RESPONSE {
 }
 
 impl ServerMessageWrite for SMSG_GUILD_QUERY_RESPONSE {}
+
+impl SMSG_GUILD_QUERY_RESPONSE {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // rank_names: CString[10]
+        for i in self.rank_names.iter() {
+            w.write_all(&i.as_bytes())?;
+            w.write_all(&[0])?;
+        }
+
+        // emblem_style: u32
+        w.write_all(&self.emblem_style.to_le_bytes())?;
+
+        // emblem_color: u32
+        w.write_all(&self.emblem_color.to_le_bytes())?;
+
+        // border_style: u32
+        w.write_all(&self.border_style.to_le_bytes())?;
+
+        // border_color: u32
+        w.write_all(&self.border_color.to_le_bytes())?;
+
+        // background_color: u32
+        w.write_all(&self.background_color.to_le_bytes())?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_GUILD_QUERY_RESPONSE {
     const OPCODE: u16 = 0x0055;
@@ -75,36 +112,8 @@ impl MessageBody for SMSG_GUILD_QUERY_RESPONSE {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // rank_names: CString[10]
-        for i in self.rank_names.iter() {
-            w.write_all(&i.as_bytes())?;
-            w.write_all(&[0])?;
-        }
-
-        // emblem_style: u32
-        w.write_all(&self.emblem_style.to_le_bytes())?;
-
-        // emblem_color: u32
-        w.write_all(&self.emblem_color.to_le_bytes())?;
-
-        // border_style: u32
-        w.write_all(&self.border_style.to_le_bytes())?;
-
-        // border_color: u32
-        w.write_all(&self.border_color.to_le_bytes())?;
-
-        // background_color: u32
-        w.write_all(&self.background_color.to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -171,42 +180,14 @@ impl MessageBody for SMSG_GUILD_QUERY_RESPONSE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // id: u32
-            w.write_all(&self.id.to_le_bytes()).await?;
-
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // rank_names: CString[10]
-            for i in self.rank_names.iter() {
-                w.write_all(&i.as_bytes()).await?;
-                w.write_all(&[0]).await?;
-            }
-
-            // emblem_style: u32
-            w.write_all(&self.emblem_style.to_le_bytes()).await?;
-
-            // emblem_color: u32
-            w.write_all(&self.emblem_color.to_le_bytes()).await?;
-
-            // border_style: u32
-            w.write_all(&self.border_style.to_le_bytes()).await?;
-
-            // border_color: u32
-            w.write_all(&self.border_color.to_le_bytes()).await?;
-
-            // background_color: u32
-            w.write_all(&self.background_color.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -274,42 +255,14 @@ impl MessageBody for SMSG_GUILD_QUERY_RESPONSE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // id: u32
-            w.write_all(&self.id.to_le_bytes()).await?;
-
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // rank_names: CString[10]
-            for i in self.rank_names.iter() {
-                w.write_all(&i.as_bytes()).await?;
-                w.write_all(&[0]).await?;
-            }
-
-            // emblem_style: u32
-            w.write_all(&self.emblem_style.to_le_bytes()).await?;
-
-            // emblem_color: u32
-            w.write_all(&self.emblem_color.to_le_bytes()).await?;
-
-            // border_style: u32
-            w.write_all(&self.border_style.to_le_bytes()).await?;
-
-            // border_color: u32
-            w.write_all(&self.border_color.to_le_bytes()).await?;
-
-            // background_color: u32
-            w.write_all(&self.background_color.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

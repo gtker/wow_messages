@@ -116,12 +116,12 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     }
 
     match e.container_type() {
-        ContainerType::Struct => {
-            s.write_async_read_includes();
-            s.wln("use std::io::Write;");
+        ContainerType::CLogin(_) | ContainerType::SLogin(_) => {
+            s.write_async_includes();
         }
         _ => {
-            s.write_async_includes();
+            s.write_async_read_includes();
+            s.wln("use std::io::Write;");
         }
     }
 

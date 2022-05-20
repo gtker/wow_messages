@@ -3,9 +3,10 @@ use crate::world::v1::v12::FactionInitializer;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_INITIALIZE_FACTIONS {
@@ -13,6 +14,21 @@ pub struct SMSG_INITIALIZE_FACTIONS {
 }
 
 impl ServerMessageWrite for SMSG_INITIALIZE_FACTIONS {}
+
+impl SMSG_INITIALIZE_FACTIONS {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // amount_of_factions: u32
+        w.write_all(&(self.factions.len() as u32).to_le_bytes())?;
+
+        // factions: FactionInitializer[amount_of_factions]
+        for i in self.factions.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_INITIALIZE_FACTIONS {
     const OPCODE: u16 = 0x0122;
@@ -41,15 +57,8 @@ impl MessageBody for SMSG_INITIALIZE_FACTIONS {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // amount_of_factions: u32
-        w.write_all(&(self.factions.len() as u32).to_le_bytes())?;
-
-        // factions: FactionInitializer[amount_of_factions]
-        for i in self.factions.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -88,21 +97,14 @@ impl MessageBody for SMSG_INITIALIZE_FACTIONS {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // amount_of_factions: u32
-            w.write_all(&(self.factions.len() as u32).to_le_bytes()).await?;
-
-            // factions: FactionInitializer[amount_of_factions]
-            for i in self.factions.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -142,21 +144,14 @@ impl MessageBody for SMSG_INITIALIZE_FACTIONS {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // amount_of_factions: u32
-            w.write_all(&(self.factions.len() as u32).to_le_bytes()).await?;
-
-            // factions: FactionInitializer[amount_of_factions]
-            for i in self.factions.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

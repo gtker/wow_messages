@@ -36,7 +36,9 @@ impl EnumIfElseIfNested {
 
         Ok(w)
     }
+}
 
+impl EnumIfElseIfNested {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, EnumIfElseIfNestedError> {
         // e: SimpleEnum

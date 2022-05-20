@@ -5,9 +5,10 @@ use crate::world::v1::v12::QuestItemReward;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
@@ -25,6 +26,67 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
 }
 
 impl ServerMessageWrite for SMSG_QUESTGIVER_QUEST_DETAILS {}
+
+impl SMSG_QUESTGIVER_QUEST_DETAILS {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // guid: Guid
+        w.write_all(&self.guid.guid().to_le_bytes())?;
+
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes())?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // details: CString
+        w.write_all(self.details.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // objectives: CString
+        w.write_all(self.objectives.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // auto_finish: u32
+        w.write_all(&self.auto_finish.to_le_bytes())?;
+
+        // amount_of_choice_item_rewards: u32
+        w.write_all(&(self.choice_item_rewards.len() as u32).to_le_bytes())?;
+
+        // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
+        for i in self.choice_item_rewards.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // amount_of_item_rewards: u32
+        w.write_all(&(self.item_rewards.len() as u32).to_le_bytes())?;
+
+        // item_rewards: QuestItemReward[amount_of_item_rewards]
+        for i in self.item_rewards.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // money_reward: u32
+        w.write_all(&self.money_reward.to_le_bytes())?;
+
+        // reward_spell: u32
+        w.write_all(&self.reward_spell.to_le_bytes())?;
+
+        // amount_of_emotes: u32
+        w.write_all(&(self.emotes.len() as u32).to_le_bytes())?;
+
+        // emotes: QuestDetailsEmote[amount_of_emotes]
+        for i in self.emotes.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
     const OPCODE: u16 = 0x0188;
@@ -108,61 +170,8 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // title: CString
-        w.write_all(self.title.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // details: CString
-        w.write_all(self.details.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // objectives: CString
-        w.write_all(self.objectives.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // auto_finish: u32
-        w.write_all(&self.auto_finish.to_le_bytes())?;
-
-        // amount_of_choice_item_rewards: u32
-        w.write_all(&(self.choice_item_rewards.len() as u32).to_le_bytes())?;
-
-        // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
-        for i in self.choice_item_rewards.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        // amount_of_item_rewards: u32
-        w.write_all(&(self.item_rewards.len() as u32).to_le_bytes())?;
-
-        // item_rewards: QuestItemReward[amount_of_item_rewards]
-        for i in self.item_rewards.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes())?;
-
-        // reward_spell: u32
-        w.write_all(&self.reward_spell.to_le_bytes())?;
-
-        // amount_of_emotes: u32
-        w.write_all(&(self.emotes.len() as u32).to_le_bytes())?;
-
-        // emotes: QuestDetailsEmote[amount_of_emotes]
-        for i in self.emotes.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -256,67 +265,14 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // guid: Guid
-            w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-            // quest_id: u32
-            w.write_all(&self.quest_id.to_le_bytes()).await?;
-
-            // title: CString
-            w.write_all(self.title.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // details: CString
-            w.write_all(self.details.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // objectives: CString
-            w.write_all(self.objectives.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // auto_finish: u32
-            w.write_all(&self.auto_finish.to_le_bytes()).await?;
-
-            // amount_of_choice_item_rewards: u32
-            w.write_all(&(self.choice_item_rewards.len() as u32).to_le_bytes()).await?;
-
-            // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
-            for i in self.choice_item_rewards.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // amount_of_item_rewards: u32
-            w.write_all(&(self.item_rewards.len() as u32).to_le_bytes()).await?;
-
-            // item_rewards: QuestItemReward[amount_of_item_rewards]
-            for i in self.item_rewards.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // money_reward: u32
-            w.write_all(&self.money_reward.to_le_bytes()).await?;
-
-            // reward_spell: u32
-            w.write_all(&self.reward_spell.to_le_bytes()).await?;
-
-            // amount_of_emotes: u32
-            w.write_all(&(self.emotes.len() as u32).to_le_bytes()).await?;
-
-            // emotes: QuestDetailsEmote[amount_of_emotes]
-            for i in self.emotes.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -411,67 +367,14 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // guid: Guid
-            w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-            // quest_id: u32
-            w.write_all(&self.quest_id.to_le_bytes()).await?;
-
-            // title: CString
-            w.write_all(self.title.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // details: CString
-            w.write_all(self.details.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // objectives: CString
-            w.write_all(self.objectives.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // auto_finish: u32
-            w.write_all(&self.auto_finish.to_le_bytes()).await?;
-
-            // amount_of_choice_item_rewards: u32
-            w.write_all(&(self.choice_item_rewards.len() as u32).to_le_bytes()).await?;
-
-            // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
-            for i in self.choice_item_rewards.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // amount_of_item_rewards: u32
-            w.write_all(&(self.item_rewards.len() as u32).to_le_bytes()).await?;
-
-            // item_rewards: QuestItemReward[amount_of_item_rewards]
-            for i in self.item_rewards.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // money_reward: u32
-            w.write_all(&self.money_reward.to_le_bytes()).await?;
-
-            // reward_spell: u32
-            w.write_all(&self.reward_spell.to_le_bytes()).await?;
-
-            // amount_of_emotes: u32
-            w.write_all(&(self.emotes.len() as u32).to_le_bytes()).await?;
-
-            // emotes: QuestDetailsEmote[amount_of_emotes]
-            for i in self.emotes.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

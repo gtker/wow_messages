@@ -3,9 +3,10 @@ use crate::Guid;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -18,6 +19,28 @@ pub struct SMSG_QUESTUPDATE_ADD_KILL {
 }
 
 impl ServerMessageWrite for SMSG_QUESTUPDATE_ADD_KILL {}
+
+impl SMSG_QUESTUPDATE_ADD_KILL {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes())?;
+
+        // create_id: u32
+        w.write_all(&self.create_id.to_le_bytes())?;
+
+        // kill_count: u32
+        w.write_all(&self.kill_count.to_le_bytes())?;
+
+        // required_kill_count: u32
+        w.write_all(&self.required_kill_count.to_le_bytes())?;
+
+        // guid: Guid
+        w.write_all(&self.guid.guid().to_le_bytes())?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
     const OPCODE: u16 = 0x0199;
@@ -56,22 +79,8 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // create_id: u32
-        w.write_all(&self.create_id.to_le_bytes())?;
-
-        // kill_count: u32
-        w.write_all(&self.kill_count.to_le_bytes())?;
-
-        // required_kill_count: u32
-        w.write_all(&self.required_kill_count.to_le_bytes())?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -120,28 +129,14 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // quest_id: u32
-            w.write_all(&self.quest_id.to_le_bytes()).await?;
-
-            // create_id: u32
-            w.write_all(&self.create_id.to_le_bytes()).await?;
-
-            // kill_count: u32
-            w.write_all(&self.kill_count.to_le_bytes()).await?;
-
-            // required_kill_count: u32
-            w.write_all(&self.required_kill_count.to_le_bytes()).await?;
-
-            // guid: Guid
-            w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -191,28 +186,14 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // quest_id: u32
-            w.write_all(&self.quest_id.to_le_bytes()).await?;
-
-            // create_id: u32
-            w.write_all(&self.create_id.to_le_bytes()).await?;
-
-            // kill_count: u32
-            w.write_all(&self.kill_count.to_le_bytes()).await?;
-
-            // required_kill_count: u32
-            w.write_all(&self.required_kill_count.to_le_bytes()).await?;
-
-            // guid: Guid
-            w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

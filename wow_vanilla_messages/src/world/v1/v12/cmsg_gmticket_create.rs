@@ -4,9 +4,10 @@ use crate::world::v1::v12::{Map, MapError};
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_GMTICKET_CREATE {
@@ -20,6 +21,67 @@ pub struct CMSG_GMTICKET_CREATE {
 }
 
 impl ClientMessageWrite for CMSG_GMTICKET_CREATE {}
+
+impl CMSG_GMTICKET_CREATE {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // category: GmTicketType
+        w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
+
+        // map: Map
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes())?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes())?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes())?;
+
+        // message: CString
+        w.write_all(self.message.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // reserved_for_future_use: CString
+        w.write_all(self.reserved_for_future_use.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        match &self.category {
+            CMSG_GMTICKET_CREATEGmTicketType::STUCK => {}
+            CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT {
+                chat_data_line_count,
+                chat_data_size_uncompressed,
+                compressed_chat_data,
+            } => {
+                // chat_data_line_count: u32
+                w.write_all(&chat_data_line_count.to_le_bytes())?;
+
+                // chat_data_size_uncompressed: u32
+                w.write_all(&chat_data_size_uncompressed.to_le_bytes())?;
+
+                // compressed_chat_data: u8[-]
+                for i in compressed_chat_data.iter() {
+                    w.write_all(&i.to_le_bytes())?;
+                }
+
+            }
+            CMSG_GMTICKET_CREATEGmTicketType::GUILD => {}
+            CMSG_GMTICKET_CREATEGmTicketType::ITEM => {}
+            CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL => {}
+            CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP => {}
+            CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC => {}
+            CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL => {}
+            CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING => {}
+            CMSG_GMTICKET_CREATEGmTicketType::CHARACTER => {}
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for CMSG_GMTICKET_CREATE {
     const OPCODE: u16 = 0x0205;
@@ -106,61 +168,8 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // category: GmTicketType
-        w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
-
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
-
-        // message: CString
-        w.write_all(self.message.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // reserved_for_future_use: CString
-        w.write_all(self.reserved_for_future_use.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        match &self.category {
-            CMSG_GMTICKET_CREATEGmTicketType::STUCK => {}
-            CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT {
-                chat_data_line_count,
-                chat_data_size_uncompressed,
-                compressed_chat_data,
-            } => {
-                // chat_data_line_count: u32
-                w.write_all(&chat_data_line_count.to_le_bytes())?;
-
-                // chat_data_size_uncompressed: u32
-                w.write_all(&chat_data_size_uncompressed.to_le_bytes())?;
-
-                // compressed_chat_data: u8[-]
-                for i in compressed_chat_data.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-            }
-            CMSG_GMTICKET_CREATEGmTicketType::GUILD => {}
-            CMSG_GMTICKET_CREATEGmTicketType::ITEM => {}
-            CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL => {}
-            CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP => {}
-            CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC => {}
-            CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL => {}
-            CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING => {}
-            CMSG_GMTICKET_CREATEGmTicketType::CHARACTER => {}
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -257,67 +266,14 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // category: GmTicketType
-            w.write_all(&(self.category.as_int() as u8).to_le_bytes()).await?;
-
-            // map: Map
-            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
-
-            // position_x: f32
-            w.write_all(&self.position_x.to_le_bytes()).await?;
-
-            // position_y: f32
-            w.write_all(&self.position_y.to_le_bytes()).await?;
-
-            // position_z: f32
-            w.write_all(&self.position_z.to_le_bytes()).await?;
-
-            // message: CString
-            w.write_all(self.message.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // reserved_for_future_use: CString
-            w.write_all(self.reserved_for_future_use.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            match &self.category {
-                CMSG_GMTICKET_CREATEGmTicketType::STUCK => {}
-                CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT {
-                    chat_data_line_count,
-                    chat_data_size_uncompressed,
-                    compressed_chat_data,
-                } => {
-                    // chat_data_line_count: u32
-                    w.write_all(&chat_data_line_count.to_le_bytes()).await?;
-
-                    // chat_data_size_uncompressed: u32
-                    w.write_all(&chat_data_size_uncompressed.to_le_bytes()).await?;
-
-                    // compressed_chat_data: u8[-]
-                    for i in compressed_chat_data.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                }
-                CMSG_GMTICKET_CREATEGmTicketType::GUILD => {}
-                CMSG_GMTICKET_CREATEGmTicketType::ITEM => {}
-                CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL => {}
-                CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP => {}
-                CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC => {}
-                CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL => {}
-                CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING => {}
-                CMSG_GMTICKET_CREATEGmTicketType::CHARACTER => {}
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -415,67 +371,14 @@ impl MessageBody for CMSG_GMTICKET_CREATE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // category: GmTicketType
-            w.write_all(&(self.category.as_int() as u8).to_le_bytes()).await?;
-
-            // map: Map
-            w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
-
-            // position_x: f32
-            w.write_all(&self.position_x.to_le_bytes()).await?;
-
-            // position_y: f32
-            w.write_all(&self.position_y.to_le_bytes()).await?;
-
-            // position_z: f32
-            w.write_all(&self.position_z.to_le_bytes()).await?;
-
-            // message: CString
-            w.write_all(self.message.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // reserved_for_future_use: CString
-            w.write_all(self.reserved_for_future_use.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            match &self.category {
-                CMSG_GMTICKET_CREATEGmTicketType::STUCK => {}
-                CMSG_GMTICKET_CREATEGmTicketType::BEHAVIOR_HARASSMENT {
-                    chat_data_line_count,
-                    chat_data_size_uncompressed,
-                    compressed_chat_data,
-                } => {
-                    // chat_data_line_count: u32
-                    w.write_all(&chat_data_line_count.to_le_bytes()).await?;
-
-                    // chat_data_size_uncompressed: u32
-                    w.write_all(&chat_data_size_uncompressed.to_le_bytes()).await?;
-
-                    // compressed_chat_data: u8[-]
-                    for i in compressed_chat_data.iter() {
-                        w.write_all(&i.to_le_bytes()).await?;
-                    }
-
-                }
-                CMSG_GMTICKET_CREATEGmTicketType::GUILD => {}
-                CMSG_GMTICKET_CREATEGmTicketType::ITEM => {}
-                CMSG_GMTICKET_CREATEGmTicketType::ENVIRONMENTAL => {}
-                CMSG_GMTICKET_CREATEGmTicketType::NONQUEST_CREEP => {}
-                CMSG_GMTICKET_CREATEGmTicketType::QUEST_QUESTNPC => {}
-                CMSG_GMTICKET_CREATEGmTicketType::TECHNICAL => {}
-                CMSG_GMTICKET_CREATEGmTicketType::ACCOUNT_BILLING => {}
-                CMSG_GMTICKET_CREATEGmTicketType::CHARACTER => {}
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

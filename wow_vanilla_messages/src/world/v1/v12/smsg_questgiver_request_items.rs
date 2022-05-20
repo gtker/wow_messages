@@ -5,9 +5,10 @@ use crate::world::v1::v12::QuestItemRequirement;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
@@ -27,6 +28,61 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
 }
 
 impl ServerMessageWrite for SMSG_QUESTGIVER_REQUEST_ITEMS {}
+
+impl SMSG_QUESTGIVER_REQUEST_ITEMS {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // npc: Guid
+        w.write_all(&self.npc.guid().to_le_bytes())?;
+
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes())?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // request_items_text: CString
+        w.write_all(self.request_items_text.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // emote_delay: u32
+        w.write_all(&self.emote_delay.to_le_bytes())?;
+
+        // emote: u32
+        w.write_all(&self.emote.to_le_bytes())?;
+
+        // auto_finish: u32
+        w.write_all(&self.auto_finish.to_le_bytes())?;
+
+        // required_money: u32
+        w.write_all(&self.required_money.to_le_bytes())?;
+
+        // amount_of_required_items: u32
+        w.write_all(&(self.required_items.len() as u32).to_le_bytes())?;
+
+        // required_items: QuestItemRequirement[amount_of_required_items]
+        for i in self.required_items.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes())?;
+
+        // completable: QuestCompletable
+        w.write_all(&(self.completable.as_int() as u32).to_le_bytes())?;
+
+        // flags2: u32
+        w.write_all(&self.flags2.to_le_bytes())?;
+
+        // flags3: u32
+        w.write_all(&self.flags3.to_le_bytes())?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
     const OPCODE: u16 = 0x018b;
@@ -105,55 +161,8 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // npc: Guid
-        w.write_all(&self.npc.guid().to_le_bytes())?;
-
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // title: CString
-        w.write_all(self.title.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // request_items_text: CString
-        w.write_all(self.request_items_text.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // emote_delay: u32
-        w.write_all(&self.emote_delay.to_le_bytes())?;
-
-        // emote: u32
-        w.write_all(&self.emote.to_le_bytes())?;
-
-        // auto_finish: u32
-        w.write_all(&self.auto_finish.to_le_bytes())?;
-
-        // required_money: u32
-        w.write_all(&self.required_money.to_le_bytes())?;
-
-        // amount_of_required_items: u32
-        w.write_all(&(self.required_items.len() as u32).to_le_bytes())?;
-
-        // required_items: QuestItemRequirement[amount_of_required_items]
-        for i in self.required_items.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        // completable: QuestCompletable
-        w.write_all(&(self.completable.as_int() as u32).to_le_bytes())?;
-
-        // flags2: u32
-        w.write_all(&self.flags2.to_le_bytes())?;
-
-        // flags3: u32
-        w.write_all(&self.flags3.to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -242,61 +251,14 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // npc: Guid
-            w.write_all(&self.npc.guid().to_le_bytes()).await?;
-
-            // quest_id: u32
-            w.write_all(&self.quest_id.to_le_bytes()).await?;
-
-            // title: CString
-            w.write_all(self.title.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // request_items_text: CString
-            w.write_all(self.request_items_text.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // emote_delay: u32
-            w.write_all(&self.emote_delay.to_le_bytes()).await?;
-
-            // emote: u32
-            w.write_all(&self.emote.to_le_bytes()).await?;
-
-            // auto_finish: u32
-            w.write_all(&self.auto_finish.to_le_bytes()).await?;
-
-            // required_money: u32
-            w.write_all(&self.required_money.to_le_bytes()).await?;
-
-            // amount_of_required_items: u32
-            w.write_all(&(self.required_items.len() as u32).to_le_bytes()).await?;
-
-            // required_items: QuestItemRequirement[amount_of_required_items]
-            for i in self.required_items.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // unknown1: u32
-            w.write_all(&self.unknown1.to_le_bytes()).await?;
-
-            // completable: QuestCompletable
-            w.write_all(&(self.completable.as_int() as u32).to_le_bytes()).await?;
-
-            // flags2: u32
-            w.write_all(&self.flags2.to_le_bytes()).await?;
-
-            // flags3: u32
-            w.write_all(&self.flags3.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -386,61 +348,14 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // npc: Guid
-            w.write_all(&self.npc.guid().to_le_bytes()).await?;
-
-            // quest_id: u32
-            w.write_all(&self.quest_id.to_le_bytes()).await?;
-
-            // title: CString
-            w.write_all(self.title.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // request_items_text: CString
-            w.write_all(self.request_items_text.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // emote_delay: u32
-            w.write_all(&self.emote_delay.to_le_bytes()).await?;
-
-            // emote: u32
-            w.write_all(&self.emote.to_le_bytes()).await?;
-
-            // auto_finish: u32
-            w.write_all(&self.auto_finish.to_le_bytes()).await?;
-
-            // required_money: u32
-            w.write_all(&self.required_money.to_le_bytes()).await?;
-
-            // amount_of_required_items: u32
-            w.write_all(&(self.required_items.len() as u32).to_le_bytes()).await?;
-
-            // required_items: QuestItemRequirement[amount_of_required_items]
-            for i in self.required_items.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // unknown1: u32
-            w.write_all(&self.unknown1.to_le_bytes()).await?;
-
-            // completable: QuestCompletable
-            w.write_all(&(self.completable.as_int() as u32).to_le_bytes()).await?;
-
-            // flags2: u32
-            w.write_all(&self.flags2.to_le_bytes()).await?;
-
-            // flags3: u32
-            w.write_all(&self.flags3.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

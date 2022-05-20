@@ -92,7 +92,9 @@ impl Arrays {
 
         Ok(w)
     }
+}
 
+impl Arrays {
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ArraysError> {
         // index: u8

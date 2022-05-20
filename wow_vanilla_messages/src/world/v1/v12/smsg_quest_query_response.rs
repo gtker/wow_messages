@@ -4,9 +4,10 @@ use crate::world::v1::v12::QuestObjective;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_QUEST_QUERY_RESPONSE {
@@ -40,6 +41,111 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
 }
 
 impl ServerMessageWrite for SMSG_QUEST_QUERY_RESPONSE {}
+
+impl SMSG_QUEST_QUERY_RESPONSE {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes())?;
+
+        // quest_method: u32
+        w.write_all(&self.quest_method.to_le_bytes())?;
+
+        // quest_level: u32
+        w.write_all(&self.quest_level.to_le_bytes())?;
+
+        // zone_or_sort: u32
+        w.write_all(&self.zone_or_sort.to_le_bytes())?;
+
+        // quest_type: u32
+        w.write_all(&self.quest_type.to_le_bytes())?;
+
+        // reputation_objective_faction: u32
+        w.write_all(&self.reputation_objective_faction.to_le_bytes())?;
+
+        // reputation_objective_value: u32
+        w.write_all(&self.reputation_objective_value.to_le_bytes())?;
+
+        // required_opposite_faction: u32
+        w.write_all(&self.required_opposite_faction.to_le_bytes())?;
+
+        // required_opposite_reputation_value: u32
+        w.write_all(&self.required_opposite_reputation_value.to_le_bytes())?;
+
+        // next_quest_in_chain: u32
+        w.write_all(&self.next_quest_in_chain.to_le_bytes())?;
+
+        // money_reward: u32
+        w.write_all(&self.money_reward.to_le_bytes())?;
+
+        // max_level_money_reward: u32
+        w.write_all(&self.max_level_money_reward.to_le_bytes())?;
+
+        // reward_spell: u32
+        w.write_all(&self.reward_spell.to_le_bytes())?;
+
+        // source_item_id: u32
+        w.write_all(&self.source_item_id.to_le_bytes())?;
+
+        // quest_flags: u32
+        w.write_all(&self.quest_flags.to_le_bytes())?;
+
+        // rewards: QuestItemReward[4]
+        for i in self.rewards.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // choice_rewards: QuestItemReward[6]
+        for i in self.choice_rewards.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // point_map_id: u32
+        w.write_all(&self.point_map_id.to_le_bytes())?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes())?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes())?;
+
+        // point_opt: u32
+        w.write_all(&self.point_opt.to_le_bytes())?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // objective_text: CString
+        w.write_all(self.objective_text.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // details: CString
+        w.write_all(self.details.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // end_text: CString
+        w.write_all(self.end_text.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // objectives: QuestObjective[4]
+        for i in self.objectives.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // objective_texts: CString[4]
+        for i in self.objective_texts.iter() {
+            w.write_all(&i.as_bytes())?;
+            w.write_all(&[0])?;
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
     const OPCODE: u16 = 0x005d;
@@ -185,105 +291,8 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // quest_method: u32
-        w.write_all(&self.quest_method.to_le_bytes())?;
-
-        // quest_level: u32
-        w.write_all(&self.quest_level.to_le_bytes())?;
-
-        // zone_or_sort: u32
-        w.write_all(&self.zone_or_sort.to_le_bytes())?;
-
-        // quest_type: u32
-        w.write_all(&self.quest_type.to_le_bytes())?;
-
-        // reputation_objective_faction: u32
-        w.write_all(&self.reputation_objective_faction.to_le_bytes())?;
-
-        // reputation_objective_value: u32
-        w.write_all(&self.reputation_objective_value.to_le_bytes())?;
-
-        // required_opposite_faction: u32
-        w.write_all(&self.required_opposite_faction.to_le_bytes())?;
-
-        // required_opposite_reputation_value: u32
-        w.write_all(&self.required_opposite_reputation_value.to_le_bytes())?;
-
-        // next_quest_in_chain: u32
-        w.write_all(&self.next_quest_in_chain.to_le_bytes())?;
-
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes())?;
-
-        // max_level_money_reward: u32
-        w.write_all(&self.max_level_money_reward.to_le_bytes())?;
-
-        // reward_spell: u32
-        w.write_all(&self.reward_spell.to_le_bytes())?;
-
-        // source_item_id: u32
-        w.write_all(&self.source_item_id.to_le_bytes())?;
-
-        // quest_flags: u32
-        w.write_all(&self.quest_flags.to_le_bytes())?;
-
-        // rewards: QuestItemReward[4]
-        for i in self.rewards.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        // choice_rewards: QuestItemReward[6]
-        for i in self.choice_rewards.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        // point_map_id: u32
-        w.write_all(&self.point_map_id.to_le_bytes())?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // point_opt: u32
-        w.write_all(&self.point_opt.to_le_bytes())?;
-
-        // title: CString
-        w.write_all(self.title.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // objective_text: CString
-        w.write_all(self.objective_text.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // details: CString
-        w.write_all(self.details.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // end_text: CString
-        w.write_all(self.end_text.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // objectives: QuestObjective[4]
-        for i in self.objectives.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        // objective_texts: CString[4]
-        for i in self.objective_texts.iter() {
-            w.write_all(&i.as_bytes())?;
-            w.write_all(&[0])?;
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -439,111 +448,14 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // quest_id: u32
-            w.write_all(&self.quest_id.to_le_bytes()).await?;
-
-            // quest_method: u32
-            w.write_all(&self.quest_method.to_le_bytes()).await?;
-
-            // quest_level: u32
-            w.write_all(&self.quest_level.to_le_bytes()).await?;
-
-            // zone_or_sort: u32
-            w.write_all(&self.zone_or_sort.to_le_bytes()).await?;
-
-            // quest_type: u32
-            w.write_all(&self.quest_type.to_le_bytes()).await?;
-
-            // reputation_objective_faction: u32
-            w.write_all(&self.reputation_objective_faction.to_le_bytes()).await?;
-
-            // reputation_objective_value: u32
-            w.write_all(&self.reputation_objective_value.to_le_bytes()).await?;
-
-            // required_opposite_faction: u32
-            w.write_all(&self.required_opposite_faction.to_le_bytes()).await?;
-
-            // required_opposite_reputation_value: u32
-            w.write_all(&self.required_opposite_reputation_value.to_le_bytes()).await?;
-
-            // next_quest_in_chain: u32
-            w.write_all(&self.next_quest_in_chain.to_le_bytes()).await?;
-
-            // money_reward: u32
-            w.write_all(&self.money_reward.to_le_bytes()).await?;
-
-            // max_level_money_reward: u32
-            w.write_all(&self.max_level_money_reward.to_le_bytes()).await?;
-
-            // reward_spell: u32
-            w.write_all(&self.reward_spell.to_le_bytes()).await?;
-
-            // source_item_id: u32
-            w.write_all(&self.source_item_id.to_le_bytes()).await?;
-
-            // quest_flags: u32
-            w.write_all(&self.quest_flags.to_le_bytes()).await?;
-
-            // rewards: QuestItemReward[4]
-            for i in self.rewards.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // choice_rewards: QuestItemReward[6]
-            for i in self.choice_rewards.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // point_map_id: u32
-            w.write_all(&self.point_map_id.to_le_bytes()).await?;
-
-            // position_x: f32
-            w.write_all(&self.position_x.to_le_bytes()).await?;
-
-            // position_y: f32
-            w.write_all(&self.position_y.to_le_bytes()).await?;
-
-            // point_opt: u32
-            w.write_all(&self.point_opt.to_le_bytes()).await?;
-
-            // title: CString
-            w.write_all(self.title.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // objective_text: CString
-            w.write_all(self.objective_text.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // details: CString
-            w.write_all(self.details.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // end_text: CString
-            w.write_all(self.end_text.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // objectives: QuestObjective[4]
-            for i in self.objectives.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // objective_texts: CString[4]
-            for i in self.objective_texts.iter() {
-                w.write_all(&i.as_bytes()).await?;
-                w.write_all(&[0]).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -700,111 +612,14 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // quest_id: u32
-            w.write_all(&self.quest_id.to_le_bytes()).await?;
-
-            // quest_method: u32
-            w.write_all(&self.quest_method.to_le_bytes()).await?;
-
-            // quest_level: u32
-            w.write_all(&self.quest_level.to_le_bytes()).await?;
-
-            // zone_or_sort: u32
-            w.write_all(&self.zone_or_sort.to_le_bytes()).await?;
-
-            // quest_type: u32
-            w.write_all(&self.quest_type.to_le_bytes()).await?;
-
-            // reputation_objective_faction: u32
-            w.write_all(&self.reputation_objective_faction.to_le_bytes()).await?;
-
-            // reputation_objective_value: u32
-            w.write_all(&self.reputation_objective_value.to_le_bytes()).await?;
-
-            // required_opposite_faction: u32
-            w.write_all(&self.required_opposite_faction.to_le_bytes()).await?;
-
-            // required_opposite_reputation_value: u32
-            w.write_all(&self.required_opposite_reputation_value.to_le_bytes()).await?;
-
-            // next_quest_in_chain: u32
-            w.write_all(&self.next_quest_in_chain.to_le_bytes()).await?;
-
-            // money_reward: u32
-            w.write_all(&self.money_reward.to_le_bytes()).await?;
-
-            // max_level_money_reward: u32
-            w.write_all(&self.max_level_money_reward.to_le_bytes()).await?;
-
-            // reward_spell: u32
-            w.write_all(&self.reward_spell.to_le_bytes()).await?;
-
-            // source_item_id: u32
-            w.write_all(&self.source_item_id.to_le_bytes()).await?;
-
-            // quest_flags: u32
-            w.write_all(&self.quest_flags.to_le_bytes()).await?;
-
-            // rewards: QuestItemReward[4]
-            for i in self.rewards.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // choice_rewards: QuestItemReward[6]
-            for i in self.choice_rewards.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // point_map_id: u32
-            w.write_all(&self.point_map_id.to_le_bytes()).await?;
-
-            // position_x: f32
-            w.write_all(&self.position_x.to_le_bytes()).await?;
-
-            // position_y: f32
-            w.write_all(&self.position_y.to_le_bytes()).await?;
-
-            // point_opt: u32
-            w.write_all(&self.point_opt.to_le_bytes()).await?;
-
-            // title: CString
-            w.write_all(self.title.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // objective_text: CString
-            w.write_all(self.objective_text.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // details: CString
-            w.write_all(self.details.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // end_text: CString
-            w.write_all(self.end_text.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // objectives: QuestObjective[4]
-            for i in self.objectives.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // objective_texts: CString[4]
-            for i in self.objective_texts.iter() {
-                w.write_all(&i.as_bytes()).await?;
-                w.write_all(&[0]).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -24,6 +25,49 @@ pub struct SMSG_LEVELUP_INFO {
 }
 
 impl ServerMessageWrite for SMSG_LEVELUP_INFO {}
+
+impl SMSG_LEVELUP_INFO {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // new_level: u32
+        w.write_all(&self.new_level.to_le_bytes())?;
+
+        // health: u32
+        w.write_all(&self.health.to_le_bytes())?;
+
+        // mana: u32
+        w.write_all(&self.mana.to_le_bytes())?;
+
+        // rage: u32
+        w.write_all(&self.rage.to_le_bytes())?;
+
+        // focus: u32
+        w.write_all(&self.focus.to_le_bytes())?;
+
+        // energy: u32
+        w.write_all(&self.energy.to_le_bytes())?;
+
+        // happiness: u32
+        w.write_all(&self.happiness.to_le_bytes())?;
+
+        // strength: u32
+        w.write_all(&self.strength.to_le_bytes())?;
+
+        // agility: u32
+        w.write_all(&self.agility.to_le_bytes())?;
+
+        // stamina: u32
+        w.write_all(&self.stamina.to_le_bytes())?;
+
+        // intellect: u32
+        w.write_all(&self.intellect.to_le_bytes())?;
+
+        // spirit: u32
+        w.write_all(&self.spirit.to_le_bytes())?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_LEVELUP_INFO {
     const OPCODE: u16 = 0x01d4;
@@ -90,43 +134,8 @@ impl MessageBody for SMSG_LEVELUP_INFO {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // new_level: u32
-        w.write_all(&self.new_level.to_le_bytes())?;
-
-        // health: u32
-        w.write_all(&self.health.to_le_bytes())?;
-
-        // mana: u32
-        w.write_all(&self.mana.to_le_bytes())?;
-
-        // rage: u32
-        w.write_all(&self.rage.to_le_bytes())?;
-
-        // focus: u32
-        w.write_all(&self.focus.to_le_bytes())?;
-
-        // energy: u32
-        w.write_all(&self.energy.to_le_bytes())?;
-
-        // happiness: u32
-        w.write_all(&self.happiness.to_le_bytes())?;
-
-        // strength: u32
-        w.write_all(&self.strength.to_le_bytes())?;
-
-        // agility: u32
-        w.write_all(&self.agility.to_le_bytes())?;
-
-        // stamina: u32
-        w.write_all(&self.stamina.to_le_bytes())?;
-
-        // intellect: u32
-        w.write_all(&self.intellect.to_le_bytes())?;
-
-        // spirit: u32
-        w.write_all(&self.spirit.to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -203,49 +212,14 @@ impl MessageBody for SMSG_LEVELUP_INFO {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // new_level: u32
-            w.write_all(&self.new_level.to_le_bytes()).await?;
-
-            // health: u32
-            w.write_all(&self.health.to_le_bytes()).await?;
-
-            // mana: u32
-            w.write_all(&self.mana.to_le_bytes()).await?;
-
-            // rage: u32
-            w.write_all(&self.rage.to_le_bytes()).await?;
-
-            // focus: u32
-            w.write_all(&self.focus.to_le_bytes()).await?;
-
-            // energy: u32
-            w.write_all(&self.energy.to_le_bytes()).await?;
-
-            // happiness: u32
-            w.write_all(&self.happiness.to_le_bytes()).await?;
-
-            // strength: u32
-            w.write_all(&self.strength.to_le_bytes()).await?;
-
-            // agility: u32
-            w.write_all(&self.agility.to_le_bytes()).await?;
-
-            // stamina: u32
-            w.write_all(&self.stamina.to_le_bytes()).await?;
-
-            // intellect: u32
-            w.write_all(&self.intellect.to_le_bytes()).await?;
-
-            // spirit: u32
-            w.write_all(&self.spirit.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -323,49 +297,14 @@ impl MessageBody for SMSG_LEVELUP_INFO {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // new_level: u32
-            w.write_all(&self.new_level.to_le_bytes()).await?;
-
-            // health: u32
-            w.write_all(&self.health.to_le_bytes()).await?;
-
-            // mana: u32
-            w.write_all(&self.mana.to_le_bytes()).await?;
-
-            // rage: u32
-            w.write_all(&self.rage.to_le_bytes()).await?;
-
-            // focus: u32
-            w.write_all(&self.focus.to_le_bytes()).await?;
-
-            // energy: u32
-            w.write_all(&self.energy.to_le_bytes()).await?;
-
-            // happiness: u32
-            w.write_all(&self.happiness.to_le_bytes()).await?;
-
-            // strength: u32
-            w.write_all(&self.strength.to_le_bytes()).await?;
-
-            // agility: u32
-            w.write_all(&self.agility.to_le_bytes()).await?;
-
-            // stamina: u32
-            w.write_all(&self.stamina.to_le_bytes()).await?;
-
-            // intellect: u32
-            w.write_all(&self.intellect.to_le_bytes()).await?;
-
-            // spirit: u32
-            w.write_all(&self.spirit.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

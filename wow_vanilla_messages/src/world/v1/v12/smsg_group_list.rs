@@ -7,9 +7,10 @@ use crate::world::v1::v12::{ItemQuality, ItemQualityError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_GROUP_LIST {
@@ -21,6 +22,43 @@ pub struct SMSG_GROUP_LIST {
 }
 
 impl ServerMessageWrite for SMSG_GROUP_LIST {}
+
+impl SMSG_GROUP_LIST {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // group_type: GroupType
+        w.write_all(&(self.group_type.as_int() as u8).to_le_bytes())?;
+
+        // own_flags: u8
+        w.write_all(&self.own_flags.to_le_bytes())?;
+
+        // amount_of_members: u32
+        w.write_all(&(self.members.len() as u32).to_le_bytes())?;
+
+        // members: GroupListMember[amount_of_members]
+        for i in self.members.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // leader: Guid
+        w.write_all(&self.leader.guid().to_le_bytes())?;
+
+        // optional group_not_empty
+        if let Some(v) = &self.group_not_empty {
+            // loot_setting: GroupLootSetting
+            w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes())?;
+
+            // master_loot: Guid
+            w.write_all(&v.master_loot.guid().to_le_bytes())?;
+
+            // loot_threshold: ItemQuality
+            w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes())?;
+
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_GROUP_LIST {
     const OPCODE: u16 = 0x007d;
@@ -90,37 +128,8 @@ impl MessageBody for SMSG_GROUP_LIST {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // group_type: GroupType
-        w.write_all(&(self.group_type.as_int() as u8).to_le_bytes())?;
-
-        // own_flags: u8
-        w.write_all(&self.own_flags.to_le_bytes())?;
-
-        // amount_of_members: u32
-        w.write_all(&(self.members.len() as u32).to_le_bytes())?;
-
-        // members: GroupListMember[amount_of_members]
-        for i in self.members.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        // leader: Guid
-        w.write_all(&self.leader.guid().to_le_bytes())?;
-
-        // optional group_not_empty
-        if let Some(v) = &self.group_not_empty {
-            // loot_setting: GroupLootSetting
-            w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes())?;
-
-            // master_loot: Guid
-            w.write_all(&v.master_loot.guid().to_le_bytes())?;
-
-            // loot_threshold: ItemQuality
-            w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes())?;
-
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -200,43 +209,14 @@ impl MessageBody for SMSG_GROUP_LIST {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // group_type: GroupType
-            w.write_all(&(self.group_type.as_int() as u8).to_le_bytes()).await?;
-
-            // own_flags: u8
-            w.write_all(&self.own_flags.to_le_bytes()).await?;
-
-            // amount_of_members: u32
-            w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
-
-            // members: GroupListMember[amount_of_members]
-            for i in self.members.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // leader: Guid
-            w.write_all(&self.leader.guid().to_le_bytes()).await?;
-
-            // optional group_not_empty
-            if let Some(v) = &self.group_not_empty {
-                // loot_setting: GroupLootSetting
-                w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes()).await?;
-
-                // master_loot: Guid
-                w.write_all(&v.master_loot.guid().to_le_bytes()).await?;
-
-                // loot_threshold: ItemQuality
-                w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes()).await?;
-
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -317,43 +297,14 @@ impl MessageBody for SMSG_GROUP_LIST {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // group_type: GroupType
-            w.write_all(&(self.group_type.as_int() as u8).to_le_bytes()).await?;
-
-            // own_flags: u8
-            w.write_all(&self.own_flags.to_le_bytes()).await?;
-
-            // amount_of_members: u32
-            w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
-
-            // members: GroupListMember[amount_of_members]
-            for i in self.members.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            // leader: Guid
-            w.write_all(&self.leader.guid().to_le_bytes()).await?;
-
-            // optional group_not_empty
-            if let Some(v) = &self.group_not_empty {
-                // loot_setting: GroupLootSetting
-                w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes()).await?;
-
-                // master_loot: Guid
-                w.write_all(&v.master_loot.guid().to_le_bytes()).await?;
-
-                // loot_threshold: ItemQuality
-                w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes()).await?;
-
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

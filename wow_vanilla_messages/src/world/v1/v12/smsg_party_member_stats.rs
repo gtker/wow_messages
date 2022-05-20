@@ -8,9 +8,10 @@ use crate::world::v1::v12::{Power, PowerError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS {
@@ -19,6 +20,132 @@ pub struct SMSG_PARTY_MEMBER_STATS {
 }
 
 impl ServerMessageWrite for SMSG_PARTY_MEMBER_STATS {}
+
+impl SMSG_PARTY_MEMBER_STATS {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // guid: PackedGuid
+        w.write_all(&self.guid.packed_guid())?;
+
+        // mask: GroupUpdateFlags
+        w.write_all(&(self.mask.as_int() as u32).to_le_bytes())?;
+
+        if let Some(if_statement) = &self.mask.flag_status {
+            // status: GroupMemberOnlineStatus
+            w.write_all(&(if_statement.status.as_int() as u8).to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_cur_hp {
+            // current_health: u16
+            w.write_all(&if_statement.current_health.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_max_hp {
+            // max_health: u16
+            w.write_all(&if_statement.max_health.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_power_type {
+            // power: Power
+            w.write_all(&(if_statement.power.as_int() as u8).to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_cur_power {
+            // current_power: u16
+            w.write_all(&if_statement.current_power.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_max_power {
+            // max_power: u16
+            w.write_all(&if_statement.max_power.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_level {
+            // level: u16
+            w.write_all(&if_statement.level.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_zone {
+            // area: Area
+            w.write_all(&(if_statement.area.as_int() as u32).to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_position {
+            // position_x: u16
+            w.write_all(&if_statement.position_x.to_le_bytes())?;
+
+            // position_y: u16
+            w.write_all(&if_statement.position_y.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_auras {
+            // auras: AuraMask
+            w.write_all(&if_statement.auras.as_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_pet_name {
+            // pet_name: CString
+            w.write_all(if_statement.pet_name.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_pet_model_id {
+            // pet_display_id: u16
+            w.write_all(&if_statement.pet_display_id.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_pet_cur_hp {
+            // pet_current_health: u16
+            w.write_all(&if_statement.pet_current_health.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_pet_max_hp {
+            // pet_max_health: u16
+            w.write_all(&if_statement.pet_max_health.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_pet_power_type {
+            // pet_power_type: Power
+            w.write_all(&(if_statement.pet_power_type.as_int() as u8).to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_pet_cur_power {
+            // pet_current_power: u16
+            w.write_all(&if_statement.pet_current_power.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_pet_max_power {
+            // pet_max_power: u16
+            w.write_all(&if_statement.pet_max_power.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.mask.flag_pet_auras {
+            // pet_auras: AuraMask
+            w.write_all(&if_statement.pet_auras.as_bytes())?;
+
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_PARTY_MEMBER_STATS {
     const OPCODE: u16 = 0x007e;
@@ -288,126 +415,8 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
-
-        // mask: GroupUpdateFlags
-        w.write_all(&(self.mask.as_int() as u32).to_le_bytes())?;
-
-        if let Some(if_statement) = &self.mask.flag_status {
-            // status: GroupMemberOnlineStatus
-            w.write_all(&(if_statement.status.as_int() as u8).to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_cur_hp {
-            // current_health: u16
-            w.write_all(&if_statement.current_health.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_max_hp {
-            // max_health: u16
-            w.write_all(&if_statement.max_health.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_power_type {
-            // power: Power
-            w.write_all(&(if_statement.power.as_int() as u8).to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_cur_power {
-            // current_power: u16
-            w.write_all(&if_statement.current_power.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_max_power {
-            // max_power: u16
-            w.write_all(&if_statement.max_power.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_level {
-            // level: u16
-            w.write_all(&if_statement.level.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_zone {
-            // area: Area
-            w.write_all(&(if_statement.area.as_int() as u32).to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_position {
-            // position_x: u16
-            w.write_all(&if_statement.position_x.to_le_bytes())?;
-
-            // position_y: u16
-            w.write_all(&if_statement.position_y.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_auras {
-            // auras: AuraMask
-            w.write_all(&if_statement.auras.as_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_pet_name {
-            // pet_name: CString
-            w.write_all(if_statement.pet_name.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_pet_model_id {
-            // pet_display_id: u16
-            w.write_all(&if_statement.pet_display_id.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_pet_cur_hp {
-            // pet_current_health: u16
-            w.write_all(&if_statement.pet_current_health.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_pet_max_hp {
-            // pet_max_health: u16
-            w.write_all(&if_statement.pet_max_health.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_pet_power_type {
-            // pet_power_type: Power
-            w.write_all(&(if_statement.pet_power_type.as_int() as u8).to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_pet_cur_power {
-            // pet_current_power: u16
-            w.write_all(&if_statement.pet_current_power.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_pet_max_power {
-            // pet_max_power: u16
-            w.write_all(&if_statement.pet_max_power.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.mask.flag_pet_auras {
-            // pet_auras: AuraMask
-            w.write_all(&if_statement.pet_auras.as_bytes())?;
-
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -687,132 +696,14 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // guid: PackedGuid
-            w.write_all(&self.guid.packed_guid()).await?;
-
-            // mask: GroupUpdateFlags
-            w.write_all(&(self.mask.as_int() as u32).to_le_bytes()).await?;
-
-            if let Some(if_statement) = &self.mask.flag_status {
-                // status: GroupMemberOnlineStatus
-                w.write_all(&(if_statement.status.as_int() as u8).to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_cur_hp {
-                // current_health: u16
-                w.write_all(&if_statement.current_health.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_max_hp {
-                // max_health: u16
-                w.write_all(&if_statement.max_health.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_power_type {
-                // power: Power
-                w.write_all(&(if_statement.power.as_int() as u8).to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_cur_power {
-                // current_power: u16
-                w.write_all(&if_statement.current_power.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_max_power {
-                // max_power: u16
-                w.write_all(&if_statement.max_power.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_level {
-                // level: u16
-                w.write_all(&if_statement.level.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_zone {
-                // area: Area
-                w.write_all(&(if_statement.area.as_int() as u32).to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_position {
-                // position_x: u16
-                w.write_all(&if_statement.position_x.to_le_bytes()).await?;
-
-                // position_y: u16
-                w.write_all(&if_statement.position_y.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_auras {
-                // auras: AuraMask
-                w.write_all(&if_statement.auras.as_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_name {
-                // pet_name: CString
-                w.write_all(if_statement.pet_name.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_model_id {
-                // pet_display_id: u16
-                w.write_all(&if_statement.pet_display_id.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_cur_hp {
-                // pet_current_health: u16
-                w.write_all(&if_statement.pet_current_health.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_max_hp {
-                // pet_max_health: u16
-                w.write_all(&if_statement.pet_max_health.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_power_type {
-                // pet_power_type: Power
-                w.write_all(&(if_statement.pet_power_type.as_int() as u8).to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_cur_power {
-                // pet_current_power: u16
-                w.write_all(&if_statement.pet_current_power.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_max_power {
-                // pet_max_power: u16
-                w.write_all(&if_statement.pet_max_power.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_auras {
-                // pet_auras: AuraMask
-                w.write_all(&if_statement.pet_auras.as_bytes()).await?;
-
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -1093,132 +984,14 @@ impl MessageBody for SMSG_PARTY_MEMBER_STATS {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // guid: PackedGuid
-            w.write_all(&self.guid.packed_guid()).await?;
-
-            // mask: GroupUpdateFlags
-            w.write_all(&(self.mask.as_int() as u32).to_le_bytes()).await?;
-
-            if let Some(if_statement) = &self.mask.flag_status {
-                // status: GroupMemberOnlineStatus
-                w.write_all(&(if_statement.status.as_int() as u8).to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_cur_hp {
-                // current_health: u16
-                w.write_all(&if_statement.current_health.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_max_hp {
-                // max_health: u16
-                w.write_all(&if_statement.max_health.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_power_type {
-                // power: Power
-                w.write_all(&(if_statement.power.as_int() as u8).to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_cur_power {
-                // current_power: u16
-                w.write_all(&if_statement.current_power.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_max_power {
-                // max_power: u16
-                w.write_all(&if_statement.max_power.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_level {
-                // level: u16
-                w.write_all(&if_statement.level.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_zone {
-                // area: Area
-                w.write_all(&(if_statement.area.as_int() as u32).to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_position {
-                // position_x: u16
-                w.write_all(&if_statement.position_x.to_le_bytes()).await?;
-
-                // position_y: u16
-                w.write_all(&if_statement.position_y.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_auras {
-                // auras: AuraMask
-                w.write_all(&if_statement.auras.as_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_name {
-                // pet_name: CString
-                w.write_all(if_statement.pet_name.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_model_id {
-                // pet_display_id: u16
-                w.write_all(&if_statement.pet_display_id.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_cur_hp {
-                // pet_current_health: u16
-                w.write_all(&if_statement.pet_current_health.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_max_hp {
-                // pet_max_health: u16
-                w.write_all(&if_statement.pet_max_health.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_power_type {
-                // pet_power_type: Power
-                w.write_all(&(if_statement.pet_power_type.as_int() as u8).to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_cur_power {
-                // pet_current_power: u16
-                w.write_all(&if_statement.pet_current_power.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_max_power {
-                // pet_max_power: u16
-                w.write_all(&if_statement.pet_max_power.to_le_bytes()).await?;
-
-            }
-
-            if let Some(if_statement) = &self.mask.flag_pet_auras {
-                // pet_auras: AuraMask
-                w.write_all(&if_statement.pet_auras.as_bytes()).await?;
-
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

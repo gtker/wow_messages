@@ -3,9 +3,10 @@ use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct CMSG_PETITION_BUY {
@@ -30,6 +31,69 @@ pub struct CMSG_PETITION_BUY {
 }
 
 impl ClientMessageWrite for CMSG_PETITION_BUY {}
+
+impl CMSG_PETITION_BUY {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // npc: Guid
+        w.write_all(&self.npc.guid().to_le_bytes())?;
+
+        // skip1: u32
+        w.write_all(&self.skip1.to_le_bytes())?;
+
+        // skip2: Guid
+        w.write_all(&self.skip2.guid().to_le_bytes())?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // skip3: u32
+        w.write_all(&self.skip3.to_le_bytes())?;
+
+        // skip4: u32
+        w.write_all(&self.skip4.to_le_bytes())?;
+
+        // skip5: u32
+        w.write_all(&self.skip5.to_le_bytes())?;
+
+        // skip6: u32
+        w.write_all(&self.skip6.to_le_bytes())?;
+
+        // skip7: u32
+        w.write_all(&self.skip7.to_le_bytes())?;
+
+        // skip8: u32
+        w.write_all(&self.skip8.to_le_bytes())?;
+
+        // skip9: u32
+        w.write_all(&self.skip9.to_le_bytes())?;
+
+        // skip10: u32
+        w.write_all(&self.skip10.to_le_bytes())?;
+
+        // skip11: u32
+        w.write_all(&self.skip11.to_le_bytes())?;
+
+        // skip12: u32
+        w.write_all(&self.skip12.to_le_bytes())?;
+
+        // skip13: u16
+        w.write_all(&self.skip13.to_le_bytes())?;
+
+        // skip14: u8
+        w.write_all(&self.skip14.to_le_bytes())?;
+
+        // index: u32
+        w.write_all(&self.index.to_le_bytes())?;
+
+        // skip15: u32
+        w.write_all(&self.skip15.to_le_bytes())?;
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for CMSG_PETITION_BUY {
     const OPCODE: u16 = 0x01bd;
@@ -121,63 +185,8 @@ impl MessageBody for CMSG_PETITION_BUY {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // npc: Guid
-        w.write_all(&self.npc.guid().to_le_bytes())?;
-
-        // skip1: u32
-        w.write_all(&self.skip1.to_le_bytes())?;
-
-        // skip2: Guid
-        w.write_all(&self.skip2.guid().to_le_bytes())?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // skip3: u32
-        w.write_all(&self.skip3.to_le_bytes())?;
-
-        // skip4: u32
-        w.write_all(&self.skip4.to_le_bytes())?;
-
-        // skip5: u32
-        w.write_all(&self.skip5.to_le_bytes())?;
-
-        // skip6: u32
-        w.write_all(&self.skip6.to_le_bytes())?;
-
-        // skip7: u32
-        w.write_all(&self.skip7.to_le_bytes())?;
-
-        // skip8: u32
-        w.write_all(&self.skip8.to_le_bytes())?;
-
-        // skip9: u32
-        w.write_all(&self.skip9.to_le_bytes())?;
-
-        // skip10: u32
-        w.write_all(&self.skip10.to_le_bytes())?;
-
-        // skip11: u32
-        w.write_all(&self.skip11.to_le_bytes())?;
-
-        // skip12: u32
-        w.write_all(&self.skip12.to_le_bytes())?;
-
-        // skip13: u16
-        w.write_all(&self.skip13.to_le_bytes())?;
-
-        // skip14: u8
-        w.write_all(&self.skip14.to_le_bytes())?;
-
-        // index: u32
-        w.write_all(&self.index.to_le_bytes())?;
-
-        // skip15: u32
-        w.write_all(&self.skip15.to_le_bytes())?;
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -279,69 +288,14 @@ impl MessageBody for CMSG_PETITION_BUY {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // npc: Guid
-            w.write_all(&self.npc.guid().to_le_bytes()).await?;
-
-            // skip1: u32
-            w.write_all(&self.skip1.to_le_bytes()).await?;
-
-            // skip2: Guid
-            w.write_all(&self.skip2.guid().to_le_bytes()).await?;
-
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // skip3: u32
-            w.write_all(&self.skip3.to_le_bytes()).await?;
-
-            // skip4: u32
-            w.write_all(&self.skip4.to_le_bytes()).await?;
-
-            // skip5: u32
-            w.write_all(&self.skip5.to_le_bytes()).await?;
-
-            // skip6: u32
-            w.write_all(&self.skip6.to_le_bytes()).await?;
-
-            // skip7: u32
-            w.write_all(&self.skip7.to_le_bytes()).await?;
-
-            // skip8: u32
-            w.write_all(&self.skip8.to_le_bytes()).await?;
-
-            // skip9: u32
-            w.write_all(&self.skip9.to_le_bytes()).await?;
-
-            // skip10: u32
-            w.write_all(&self.skip10.to_le_bytes()).await?;
-
-            // skip11: u32
-            w.write_all(&self.skip11.to_le_bytes()).await?;
-
-            // skip12: u32
-            w.write_all(&self.skip12.to_le_bytes()).await?;
-
-            // skip13: u16
-            w.write_all(&self.skip13.to_le_bytes()).await?;
-
-            // skip14: u8
-            w.write_all(&self.skip14.to_le_bytes()).await?;
-
-            // index: u32
-            w.write_all(&self.index.to_le_bytes()).await?;
-
-            // skip15: u32
-            w.write_all(&self.skip15.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -444,69 +398,14 @@ impl MessageBody for CMSG_PETITION_BUY {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // npc: Guid
-            w.write_all(&self.npc.guid().to_le_bytes()).await?;
-
-            // skip1: u32
-            w.write_all(&self.skip1.to_le_bytes()).await?;
-
-            // skip2: Guid
-            w.write_all(&self.skip2.guid().to_le_bytes()).await?;
-
-            // name: CString
-            w.write_all(self.name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // skip3: u32
-            w.write_all(&self.skip3.to_le_bytes()).await?;
-
-            // skip4: u32
-            w.write_all(&self.skip4.to_le_bytes()).await?;
-
-            // skip5: u32
-            w.write_all(&self.skip5.to_le_bytes()).await?;
-
-            // skip6: u32
-            w.write_all(&self.skip6.to_le_bytes()).await?;
-
-            // skip7: u32
-            w.write_all(&self.skip7.to_le_bytes()).await?;
-
-            // skip8: u32
-            w.write_all(&self.skip8.to_le_bytes()).await?;
-
-            // skip9: u32
-            w.write_all(&self.skip9.to_le_bytes()).await?;
-
-            // skip10: u32
-            w.write_all(&self.skip10.to_le_bytes()).await?;
-
-            // skip11: u32
-            w.write_all(&self.skip11.to_le_bytes()).await?;
-
-            // skip12: u32
-            w.write_all(&self.skip12.to_le_bytes()).await?;
-
-            // skip13: u16
-            w.write_all(&self.skip13.to_le_bytes()).await?;
-
-            // skip14: u8
-            w.write_all(&self.skip14.to_le_bytes()).await?;
-
-            // index: u32
-            w.write_all(&self.index.to_le_bytes()).await?;
-
-            // skip15: u32
-            w.write_all(&self.skip15.to_le_bytes()).await?;
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

@@ -10,9 +10,10 @@ use crate::world::v1::v12::{Map, MapError};
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
@@ -21,6 +22,201 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 }
 
 impl ServerMessageWrite for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
+
+impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
+
+        // optional found
+        if let Some(v) = &self.found {
+            // item_class: ItemClass
+            w.write_all(&(v.item_class.as_int() as u32).to_le_bytes())?;
+
+            // item_sub_class: u32
+            w.write_all(&v.item_sub_class.to_le_bytes())?;
+
+            // name1: CString
+            w.write_all(v.name1.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // name2: CString
+            w.write_all(v.name2.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // name3: CString
+            w.write_all(v.name3.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // name4: CString
+            w.write_all(v.name4.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // item_display_info: u32
+            w.write_all(&v.item_display_info.to_le_bytes())?;
+
+            // quality: ItemQuality
+            w.write_all(&(v.quality.as_int() as u32).to_le_bytes())?;
+
+            // flags: u32
+            w.write_all(&v.flags.to_le_bytes())?;
+
+            // buy_price: f64
+            w.write_all(&v.buy_price.to_le_bytes())?;
+
+            // sell_price: f64
+            w.write_all(&v.sell_price.to_le_bytes())?;
+
+            // inventory_type: InventoryType
+            w.write_all(&(v.inventory_type.as_int() as u8).to_le_bytes())?;
+
+            // allowed_class: u32
+            w.write_all(&v.allowed_class.to_le_bytes())?;
+
+            // allowed_race: u32
+            w.write_all(&v.allowed_race.to_le_bytes())?;
+
+            // item_level: u32
+            w.write_all(&v.item_level.to_le_bytes())?;
+
+            // required_level: u32
+            w.write_all(&v.required_level.to_le_bytes())?;
+
+            // required_skill: u32
+            w.write_all(&v.required_skill.to_le_bytes())?;
+
+            // required_skill_rank: u32
+            w.write_all(&v.required_skill_rank.to_le_bytes())?;
+
+            // required_spell: u32
+            w.write_all(&v.required_spell.to_le_bytes())?;
+
+            // required_honor_rank: u32
+            w.write_all(&v.required_honor_rank.to_le_bytes())?;
+
+            // required_city_rank: u32
+            w.write_all(&v.required_city_rank.to_le_bytes())?;
+
+            // required_reputation_faction: u32
+            w.write_all(&v.required_reputation_faction.to_le_bytes())?;
+
+            // required_reputation_rank: u32
+            w.write_all(&v.required_reputation_rank.to_le_bytes())?;
+
+            // max_count: u32
+            w.write_all(&v.max_count.to_le_bytes())?;
+
+            // stackable: u32
+            w.write_all(&v.stackable.to_le_bytes())?;
+
+            // container_slots: u32
+            w.write_all(&v.container_slots.to_le_bytes())?;
+
+            // stats: ItemStat[10]
+            for i in v.stats.iter() {
+                w.write_all(&(i.as_bytes()?))?;
+            }
+
+            // damages: ItemDamageType[5]
+            for i in v.damages.iter() {
+                w.write_all(&(i.as_bytes()?))?;
+            }
+
+            // armor: u32
+            w.write_all(&v.armor.to_le_bytes())?;
+
+            // holy_resistance: u32
+            w.write_all(&v.holy_resistance.to_le_bytes())?;
+
+            // fire_resistance: u32
+            w.write_all(&v.fire_resistance.to_le_bytes())?;
+
+            // nature_resistance: u32
+            w.write_all(&v.nature_resistance.to_le_bytes())?;
+
+            // frost_resistance: u32
+            w.write_all(&v.frost_resistance.to_le_bytes())?;
+
+            // shadow_resistance: u32
+            w.write_all(&v.shadow_resistance.to_le_bytes())?;
+
+            // arcane_resistance: u32
+            w.write_all(&v.arcane_resistance.to_le_bytes())?;
+
+            // delay: u32
+            w.write_all(&v.delay.to_le_bytes())?;
+
+            // ammo_type: u32
+            w.write_all(&v.ammo_type.to_le_bytes())?;
+
+            // ranged_range_modification: f32
+            w.write_all(&v.ranged_range_modification.to_le_bytes())?;
+
+            // spells: ItemSpells[5]
+            for i in v.spells.iter() {
+                w.write_all(&(i.as_bytes()?))?;
+            }
+
+            // bonding: u32
+            w.write_all(&v.bonding.to_le_bytes())?;
+
+            // description: CString
+            w.write_all(v.description.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // page_text: u32
+            w.write_all(&v.page_text.to_le_bytes())?;
+
+            // language_id: u32
+            w.write_all(&v.language_id.to_le_bytes())?;
+
+            // page_material: u32
+            w.write_all(&v.page_material.to_le_bytes())?;
+
+            // start_quest: u32
+            w.write_all(&v.start_quest.to_le_bytes())?;
+
+            // lock_id: u32
+            w.write_all(&v.lock_id.to_le_bytes())?;
+
+            // material: u32
+            w.write_all(&v.material.to_le_bytes())?;
+
+            // sheath: u32
+            w.write_all(&v.sheath.to_le_bytes())?;
+
+            // random_property: u32
+            w.write_all(&v.random_property.to_le_bytes())?;
+
+            // block: u32
+            w.write_all(&v.block.to_le_bytes())?;
+
+            // item_set: u32
+            w.write_all(&v.item_set.to_le_bytes())?;
+
+            // max_durability: u32
+            w.write_all(&v.max_durability.to_le_bytes())?;
+
+            // area: Area
+            w.write_all(&(v.area.as_int() as u32).to_le_bytes())?;
+
+            // map: Map
+            w.write_all(&(v.map.as_int() as u32).to_le_bytes())?;
+
+            // bag_family: u32
+            w.write_all(&v.bag_family.to_le_bytes())?;
+
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     const OPCODE: u16 = 0x0058;
@@ -290,195 +486,8 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item: u32
-        w.write_all(&self.item.to_le_bytes())?;
-
-        // optional found
-        if let Some(v) = &self.found {
-            // item_class: ItemClass
-            w.write_all(&(v.item_class.as_int() as u32).to_le_bytes())?;
-
-            // item_sub_class: u32
-            w.write_all(&v.item_sub_class.to_le_bytes())?;
-
-            // name1: CString
-            w.write_all(v.name1.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // name2: CString
-            w.write_all(v.name2.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // name3: CString
-            w.write_all(v.name3.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // name4: CString
-            w.write_all(v.name4.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // item_display_info: u32
-            w.write_all(&v.item_display_info.to_le_bytes())?;
-
-            // quality: ItemQuality
-            w.write_all(&(v.quality.as_int() as u32).to_le_bytes())?;
-
-            // flags: u32
-            w.write_all(&v.flags.to_le_bytes())?;
-
-            // buy_price: f64
-            w.write_all(&v.buy_price.to_le_bytes())?;
-
-            // sell_price: f64
-            w.write_all(&v.sell_price.to_le_bytes())?;
-
-            // inventory_type: InventoryType
-            w.write_all(&(v.inventory_type.as_int() as u8).to_le_bytes())?;
-
-            // allowed_class: u32
-            w.write_all(&v.allowed_class.to_le_bytes())?;
-
-            // allowed_race: u32
-            w.write_all(&v.allowed_race.to_le_bytes())?;
-
-            // item_level: u32
-            w.write_all(&v.item_level.to_le_bytes())?;
-
-            // required_level: u32
-            w.write_all(&v.required_level.to_le_bytes())?;
-
-            // required_skill: u32
-            w.write_all(&v.required_skill.to_le_bytes())?;
-
-            // required_skill_rank: u32
-            w.write_all(&v.required_skill_rank.to_le_bytes())?;
-
-            // required_spell: u32
-            w.write_all(&v.required_spell.to_le_bytes())?;
-
-            // required_honor_rank: u32
-            w.write_all(&v.required_honor_rank.to_le_bytes())?;
-
-            // required_city_rank: u32
-            w.write_all(&v.required_city_rank.to_le_bytes())?;
-
-            // required_reputation_faction: u32
-            w.write_all(&v.required_reputation_faction.to_le_bytes())?;
-
-            // required_reputation_rank: u32
-            w.write_all(&v.required_reputation_rank.to_le_bytes())?;
-
-            // max_count: u32
-            w.write_all(&v.max_count.to_le_bytes())?;
-
-            // stackable: u32
-            w.write_all(&v.stackable.to_le_bytes())?;
-
-            // container_slots: u32
-            w.write_all(&v.container_slots.to_le_bytes())?;
-
-            // stats: ItemStat[10]
-            for i in v.stats.iter() {
-                w.write_all(&(i.as_bytes()?))?;
-            }
-
-            // damages: ItemDamageType[5]
-            for i in v.damages.iter() {
-                w.write_all(&(i.as_bytes()?))?;
-            }
-
-            // armor: u32
-            w.write_all(&v.armor.to_le_bytes())?;
-
-            // holy_resistance: u32
-            w.write_all(&v.holy_resistance.to_le_bytes())?;
-
-            // fire_resistance: u32
-            w.write_all(&v.fire_resistance.to_le_bytes())?;
-
-            // nature_resistance: u32
-            w.write_all(&v.nature_resistance.to_le_bytes())?;
-
-            // frost_resistance: u32
-            w.write_all(&v.frost_resistance.to_le_bytes())?;
-
-            // shadow_resistance: u32
-            w.write_all(&v.shadow_resistance.to_le_bytes())?;
-
-            // arcane_resistance: u32
-            w.write_all(&v.arcane_resistance.to_le_bytes())?;
-
-            // delay: u32
-            w.write_all(&v.delay.to_le_bytes())?;
-
-            // ammo_type: u32
-            w.write_all(&v.ammo_type.to_le_bytes())?;
-
-            // ranged_range_modification: f32
-            w.write_all(&v.ranged_range_modification.to_le_bytes())?;
-
-            // spells: ItemSpells[5]
-            for i in v.spells.iter() {
-                w.write_all(&(i.as_bytes()?))?;
-            }
-
-            // bonding: u32
-            w.write_all(&v.bonding.to_le_bytes())?;
-
-            // description: CString
-            w.write_all(v.description.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-            // page_text: u32
-            w.write_all(&v.page_text.to_le_bytes())?;
-
-            // language_id: u32
-            w.write_all(&v.language_id.to_le_bytes())?;
-
-            // page_material: u32
-            w.write_all(&v.page_material.to_le_bytes())?;
-
-            // start_quest: u32
-            w.write_all(&v.start_quest.to_le_bytes())?;
-
-            // lock_id: u32
-            w.write_all(&v.lock_id.to_le_bytes())?;
-
-            // material: u32
-            w.write_all(&v.material.to_le_bytes())?;
-
-            // sheath: u32
-            w.write_all(&v.sheath.to_le_bytes())?;
-
-            // random_property: u32
-            w.write_all(&v.random_property.to_le_bytes())?;
-
-            // block: u32
-            w.write_all(&v.block.to_le_bytes())?;
-
-            // item_set: u32
-            w.write_all(&v.item_set.to_le_bytes())?;
-
-            // max_durability: u32
-            w.write_all(&v.max_durability.to_le_bytes())?;
-
-            // area: Area
-            w.write_all(&(v.area.as_int() as u32).to_le_bytes())?;
-
-            // map: Map
-            w.write_all(&(v.map.as_int() as u32).to_le_bytes())?;
-
-            // bag_family: u32
-            w.write_all(&v.bag_family.to_le_bytes())?;
-
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -758,201 +767,14 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // item: u32
-            w.write_all(&self.item.to_le_bytes()).await?;
-
-            // optional found
-            if let Some(v) = &self.found {
-                // item_class: ItemClass
-                w.write_all(&(v.item_class.as_int() as u32).to_le_bytes()).await?;
-
-                // item_sub_class: u32
-                w.write_all(&v.item_sub_class.to_le_bytes()).await?;
-
-                // name1: CString
-                w.write_all(v.name1.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name2: CString
-                w.write_all(v.name2.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name3: CString
-                w.write_all(v.name3.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name4: CString
-                w.write_all(v.name4.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // item_display_info: u32
-                w.write_all(&v.item_display_info.to_le_bytes()).await?;
-
-                // quality: ItemQuality
-                w.write_all(&(v.quality.as_int() as u32).to_le_bytes()).await?;
-
-                // flags: u32
-                w.write_all(&v.flags.to_le_bytes()).await?;
-
-                // buy_price: f64
-                w.write_all(&v.buy_price.to_le_bytes()).await?;
-
-                // sell_price: f64
-                w.write_all(&v.sell_price.to_le_bytes()).await?;
-
-                // inventory_type: InventoryType
-                w.write_all(&(v.inventory_type.as_int() as u8).to_le_bytes()).await?;
-
-                // allowed_class: u32
-                w.write_all(&v.allowed_class.to_le_bytes()).await?;
-
-                // allowed_race: u32
-                w.write_all(&v.allowed_race.to_le_bytes()).await?;
-
-                // item_level: u32
-                w.write_all(&v.item_level.to_le_bytes()).await?;
-
-                // required_level: u32
-                w.write_all(&v.required_level.to_le_bytes()).await?;
-
-                // required_skill: u32
-                w.write_all(&v.required_skill.to_le_bytes()).await?;
-
-                // required_skill_rank: u32
-                w.write_all(&v.required_skill_rank.to_le_bytes()).await?;
-
-                // required_spell: u32
-                w.write_all(&v.required_spell.to_le_bytes()).await?;
-
-                // required_honor_rank: u32
-                w.write_all(&v.required_honor_rank.to_le_bytes()).await?;
-
-                // required_city_rank: u32
-                w.write_all(&v.required_city_rank.to_le_bytes()).await?;
-
-                // required_reputation_faction: u32
-                w.write_all(&v.required_reputation_faction.to_le_bytes()).await?;
-
-                // required_reputation_rank: u32
-                w.write_all(&v.required_reputation_rank.to_le_bytes()).await?;
-
-                // max_count: u32
-                w.write_all(&v.max_count.to_le_bytes()).await?;
-
-                // stackable: u32
-                w.write_all(&v.stackable.to_le_bytes()).await?;
-
-                // container_slots: u32
-                w.write_all(&v.container_slots.to_le_bytes()).await?;
-
-                // stats: ItemStat[10]
-                for i in v.stats.iter() {
-                    w.write_all(&(i.as_bytes()?)).await?;
-                }
-
-                // damages: ItemDamageType[5]
-                for i in v.damages.iter() {
-                    w.write_all(&(i.as_bytes()?)).await?;
-                }
-
-                // armor: u32
-                w.write_all(&v.armor.to_le_bytes()).await?;
-
-                // holy_resistance: u32
-                w.write_all(&v.holy_resistance.to_le_bytes()).await?;
-
-                // fire_resistance: u32
-                w.write_all(&v.fire_resistance.to_le_bytes()).await?;
-
-                // nature_resistance: u32
-                w.write_all(&v.nature_resistance.to_le_bytes()).await?;
-
-                // frost_resistance: u32
-                w.write_all(&v.frost_resistance.to_le_bytes()).await?;
-
-                // shadow_resistance: u32
-                w.write_all(&v.shadow_resistance.to_le_bytes()).await?;
-
-                // arcane_resistance: u32
-                w.write_all(&v.arcane_resistance.to_le_bytes()).await?;
-
-                // delay: u32
-                w.write_all(&v.delay.to_le_bytes()).await?;
-
-                // ammo_type: u32
-                w.write_all(&v.ammo_type.to_le_bytes()).await?;
-
-                // ranged_range_modification: f32
-                w.write_all(&v.ranged_range_modification.to_le_bytes()).await?;
-
-                // spells: ItemSpells[5]
-                for i in v.spells.iter() {
-                    w.write_all(&(i.as_bytes()?)).await?;
-                }
-
-                // bonding: u32
-                w.write_all(&v.bonding.to_le_bytes()).await?;
-
-                // description: CString
-                w.write_all(v.description.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // page_text: u32
-                w.write_all(&v.page_text.to_le_bytes()).await?;
-
-                // language_id: u32
-                w.write_all(&v.language_id.to_le_bytes()).await?;
-
-                // page_material: u32
-                w.write_all(&v.page_material.to_le_bytes()).await?;
-
-                // start_quest: u32
-                w.write_all(&v.start_quest.to_le_bytes()).await?;
-
-                // lock_id: u32
-                w.write_all(&v.lock_id.to_le_bytes()).await?;
-
-                // material: u32
-                w.write_all(&v.material.to_le_bytes()).await?;
-
-                // sheath: u32
-                w.write_all(&v.sheath.to_le_bytes()).await?;
-
-                // random_property: u32
-                w.write_all(&v.random_property.to_le_bytes()).await?;
-
-                // block: u32
-                w.write_all(&v.block.to_le_bytes()).await?;
-
-                // item_set: u32
-                w.write_all(&v.item_set.to_le_bytes()).await?;
-
-                // max_durability: u32
-                w.write_all(&v.max_durability.to_le_bytes()).await?;
-
-                // area: Area
-                w.write_all(&(v.area.as_int() as u32).to_le_bytes()).await?;
-
-                // map: Map
-                w.write_all(&(v.map.as_int() as u32).to_le_bytes()).await?;
-
-                // bag_family: u32
-                w.write_all(&v.bag_family.to_le_bytes()).await?;
-
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -1233,201 +1055,14 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // item: u32
-            w.write_all(&self.item.to_le_bytes()).await?;
-
-            // optional found
-            if let Some(v) = &self.found {
-                // item_class: ItemClass
-                w.write_all(&(v.item_class.as_int() as u32).to_le_bytes()).await?;
-
-                // item_sub_class: u32
-                w.write_all(&v.item_sub_class.to_le_bytes()).await?;
-
-                // name1: CString
-                w.write_all(v.name1.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name2: CString
-                w.write_all(v.name2.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name3: CString
-                w.write_all(v.name3.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // name4: CString
-                w.write_all(v.name4.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // item_display_info: u32
-                w.write_all(&v.item_display_info.to_le_bytes()).await?;
-
-                // quality: ItemQuality
-                w.write_all(&(v.quality.as_int() as u32).to_le_bytes()).await?;
-
-                // flags: u32
-                w.write_all(&v.flags.to_le_bytes()).await?;
-
-                // buy_price: f64
-                w.write_all(&v.buy_price.to_le_bytes()).await?;
-
-                // sell_price: f64
-                w.write_all(&v.sell_price.to_le_bytes()).await?;
-
-                // inventory_type: InventoryType
-                w.write_all(&(v.inventory_type.as_int() as u8).to_le_bytes()).await?;
-
-                // allowed_class: u32
-                w.write_all(&v.allowed_class.to_le_bytes()).await?;
-
-                // allowed_race: u32
-                w.write_all(&v.allowed_race.to_le_bytes()).await?;
-
-                // item_level: u32
-                w.write_all(&v.item_level.to_le_bytes()).await?;
-
-                // required_level: u32
-                w.write_all(&v.required_level.to_le_bytes()).await?;
-
-                // required_skill: u32
-                w.write_all(&v.required_skill.to_le_bytes()).await?;
-
-                // required_skill_rank: u32
-                w.write_all(&v.required_skill_rank.to_le_bytes()).await?;
-
-                // required_spell: u32
-                w.write_all(&v.required_spell.to_le_bytes()).await?;
-
-                // required_honor_rank: u32
-                w.write_all(&v.required_honor_rank.to_le_bytes()).await?;
-
-                // required_city_rank: u32
-                w.write_all(&v.required_city_rank.to_le_bytes()).await?;
-
-                // required_reputation_faction: u32
-                w.write_all(&v.required_reputation_faction.to_le_bytes()).await?;
-
-                // required_reputation_rank: u32
-                w.write_all(&v.required_reputation_rank.to_le_bytes()).await?;
-
-                // max_count: u32
-                w.write_all(&v.max_count.to_le_bytes()).await?;
-
-                // stackable: u32
-                w.write_all(&v.stackable.to_le_bytes()).await?;
-
-                // container_slots: u32
-                w.write_all(&v.container_slots.to_le_bytes()).await?;
-
-                // stats: ItemStat[10]
-                for i in v.stats.iter() {
-                    w.write_all(&(i.as_bytes()?)).await?;
-                }
-
-                // damages: ItemDamageType[5]
-                for i in v.damages.iter() {
-                    w.write_all(&(i.as_bytes()?)).await?;
-                }
-
-                // armor: u32
-                w.write_all(&v.armor.to_le_bytes()).await?;
-
-                // holy_resistance: u32
-                w.write_all(&v.holy_resistance.to_le_bytes()).await?;
-
-                // fire_resistance: u32
-                w.write_all(&v.fire_resistance.to_le_bytes()).await?;
-
-                // nature_resistance: u32
-                w.write_all(&v.nature_resistance.to_le_bytes()).await?;
-
-                // frost_resistance: u32
-                w.write_all(&v.frost_resistance.to_le_bytes()).await?;
-
-                // shadow_resistance: u32
-                w.write_all(&v.shadow_resistance.to_le_bytes()).await?;
-
-                // arcane_resistance: u32
-                w.write_all(&v.arcane_resistance.to_le_bytes()).await?;
-
-                // delay: u32
-                w.write_all(&v.delay.to_le_bytes()).await?;
-
-                // ammo_type: u32
-                w.write_all(&v.ammo_type.to_le_bytes()).await?;
-
-                // ranged_range_modification: f32
-                w.write_all(&v.ranged_range_modification.to_le_bytes()).await?;
-
-                // spells: ItemSpells[5]
-                for i in v.spells.iter() {
-                    w.write_all(&(i.as_bytes()?)).await?;
-                }
-
-                // bonding: u32
-                w.write_all(&v.bonding.to_le_bytes()).await?;
-
-                // description: CString
-                w.write_all(v.description.as_bytes()).await?;
-                // Null terminator
-                w.write_all(&[0]).await?;
-
-                // page_text: u32
-                w.write_all(&v.page_text.to_le_bytes()).await?;
-
-                // language_id: u32
-                w.write_all(&v.language_id.to_le_bytes()).await?;
-
-                // page_material: u32
-                w.write_all(&v.page_material.to_le_bytes()).await?;
-
-                // start_quest: u32
-                w.write_all(&v.start_quest.to_le_bytes()).await?;
-
-                // lock_id: u32
-                w.write_all(&v.lock_id.to_le_bytes()).await?;
-
-                // material: u32
-                w.write_all(&v.material.to_le_bytes()).await?;
-
-                // sheath: u32
-                w.write_all(&v.sheath.to_le_bytes()).await?;
-
-                // random_property: u32
-                w.write_all(&v.random_property.to_le_bytes()).await?;
-
-                // block: u32
-                w.write_all(&v.block.to_le_bytes()).await?;
-
-                // item_set: u32
-                w.write_all(&v.item_set.to_le_bytes()).await?;
-
-                // max_durability: u32
-                w.write_all(&v.max_durability.to_le_bytes()).await?;
-
-                // area: Area
-                w.write_all(&(v.area.as_int() as u32).to_le_bytes()).await?;
-
-                // map: Map
-                w.write_all(&(v.map.as_int() as u32).to_le_bytes()).await?;
-
-                // bag_family: u32
-                w.write_all(&v.bag_family.to_le_bytes()).await?;
-
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 

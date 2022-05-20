@@ -3,9 +3,10 @@ use crate::world::v1::v12::ChannelMember;
 use crate::{ServerMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SMSG_CHANNEL_LIST {
@@ -15,6 +16,29 @@ pub struct SMSG_CHANNEL_LIST {
 }
 
 impl ServerMessageWrite for SMSG_CHANNEL_LIST {}
+
+impl SMSG_CHANNEL_LIST {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // channel_name: CString
+        w.write_all(self.channel_name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // channel_flags: u8
+        w.write_all(&self.channel_flags.to_le_bytes())?;
+
+        // amount_of_members: u32
+        w.write_all(&(self.members.len() as u32).to_le_bytes())?;
+
+        // members: ChannelMember[amount_of_members]
+        for i in self.members.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        Ok(w)
+    }
+}
 
 impl MessageBody for SMSG_CHANNEL_LIST {
     const OPCODE: u16 = 0x009b;
@@ -52,23 +76,8 @@ impl MessageBody for SMSG_CHANNEL_LIST {
 
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // channel_name: CString
-        w.write_all(self.channel_name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // channel_flags: u8
-        w.write_all(&self.channel_flags.to_le_bytes())?;
-
-        // amount_of_members: u32
-        w.write_all(&(self.members.len() as u32).to_le_bytes())?;
-
-        // members: ChannelMember[amount_of_members]
-        for i in self.members.iter() {
-            w.write_all(&(i.as_bytes()?))?;
-        }
-
-        Ok(())
+        let inner = self.as_bytes()?;
+        w.write_all(&inner)
     }
 
     #[cfg(feature = "tokio")]
@@ -116,29 +125,14 @@ impl MessageBody for SMSG_CHANNEL_LIST {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + AsyncWriteExt + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // channel_name: CString
-            w.write_all(self.channel_name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // channel_flags: u8
-            w.write_all(&self.channel_flags.to_le_bytes()).await?;
-
-            // amount_of_members: u32
-            w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
-
-            // members: ChannelMember[amount_of_members]
-            for i in self.members.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
@@ -187,29 +181,14 @@ impl MessageBody for SMSG_CHANNEL_LIST {
         dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
-        W: 'async_trait + WriteExt + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         'life0: 'async_trait,
         'life1: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // channel_name: CString
-            w.write_all(self.channel_name.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-            // channel_flags: u8
-            w.write_all(&self.channel_flags.to_le_bytes()).await?;
-
-            // amount_of_members: u32
-            w.write_all(&(self.members.len() as u32).to_le_bytes()).await?;
-
-            // members: ChannelMember[amount_of_members]
-            for i in self.members.iter() {
-                w.write_all(&(i.as_bytes()?)).await?;
-            }
-
-            Ok(())
+            let inner = self.as_bytes()?;
+            w.write_all(&inner).await
         })
     }
 
