@@ -4,15 +4,12 @@
   * Else Ifs:
     - if a ==, else { if b ==  } (`SMSG_SEND_MAIL_RESULT`)
     - if a == { if b == } (`SMSG_AUCTION_COMMAND_RESULT`)
-    - if a != { if a == } (`SMSG_INVENTORY_CHANGE_FAILURE`)
 * Working UpdateMask
   * Tests
 
 # Direct upgrades to Login
 
 * Workable Intermediate Representation for Login
-* Single Read/Write call in read/write
-  * Read/write const arrays?
 
 # Low Priority
 
