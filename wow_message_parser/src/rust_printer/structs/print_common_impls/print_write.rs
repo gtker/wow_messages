@@ -141,6 +141,7 @@ pub fn print_write_definition(
         name = d.name(),
         type_name = d.ty().str()
     ));
+
     match d.ty() {
         Type::Integer(int_type) => {
             let size = if let Some(v) = d.verified_value() {
@@ -152,6 +153,7 @@ pub fn print_write_definition(
             } else {
                 0
             };
+
             print_write_field_integer(
                 s,
                 d.name(),
@@ -248,6 +250,7 @@ pub fn print_write_definition(
             ));
         }
     }
+
     s.newline();
 }
 
