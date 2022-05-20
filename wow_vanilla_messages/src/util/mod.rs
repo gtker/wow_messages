@@ -1,13 +1,13 @@
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 mod tokio_impl;
 
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 mod async_std_impl;
 
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 pub use async_std_impl::*;
 
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 pub use tokio_impl::*;
 
 use std::io::{Read, Write};

@@ -1,8 +1,8 @@
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 use std::io;
 use std::io::{Read, Write};
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
@@ -44,7 +44,7 @@ impl AuraMask {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(
         &self,
         w: &mut W,
@@ -67,7 +67,7 @@ impl AuraMask {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, io::Error> {
         let mut auras = [None; Self::MAX_CAPACITY];
         let mut bit_pattern: u32 = crate::util::astd_read_u32_le(r).await?;
@@ -81,7 +81,7 @@ impl AuraMask {
         Ok(Self { auras })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
         &self,
         w: &mut W,
@@ -104,7 +104,7 @@ impl AuraMask {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, io::Error> {
         let mut auras = [None; Self::MAX_CAPACITY];
         let mut bit_pattern: u32 = crate::util::tokio_read_u32_le(r).await?;

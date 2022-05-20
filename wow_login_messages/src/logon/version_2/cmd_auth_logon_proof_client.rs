@@ -2,9 +2,9 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::TelemetryKey;
 use crate::ClientMessage;
 use crate::ReadableAndWritable;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -83,7 +83,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -125,7 +125,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -169,7 +169,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -211,7 +211,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -341,8 +341,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_tokio")]
-    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client0() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
@@ -406,8 +406,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_std")]
-    #[cfg_attr(feature = "async_std", async_std::test)]
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client0() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
@@ -525,8 +525,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_tokio")]
-    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client1() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
@@ -579,8 +579,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_std")]
-    #[cfg_attr(feature = "async_std", async_std::test)]
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client1() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
@@ -676,8 +676,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_tokio")]
-    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client2() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
@@ -719,8 +719,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_std")]
-    #[cfg_attr(feature = "async_std", async_std::test)]
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client2() {
         let raw: Vec<u8> = vec![ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8,
              0xA9, 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,

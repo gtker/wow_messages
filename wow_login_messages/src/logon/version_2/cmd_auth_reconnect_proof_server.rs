@@ -2,9 +2,9 @@ use std::convert::{TryFrom, TryInto};
 use crate::logon::version_2::{LoginResult, LoginResultError};
 use crate::ServerMessage;
 use crate::ReadableAndWritable;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -40,7 +40,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -61,7 +61,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -85,7 +85,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -106,7 +106,7 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -201,8 +201,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_tokio")]
-    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server0() {
         let raw: Vec<u8> = vec![ 0x03, 0x00, ];
 
@@ -227,8 +227,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_std")]
-    #[cfg_attr(feature = "async_std", async_std::test)]
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server0() {
         let raw: Vec<u8> = vec![ 0x03, 0x00, ];
 
@@ -279,8 +279,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_tokio")]
-    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server1() {
         let raw: Vec<u8> = vec![ 0x03, 0x0E, ];
 
@@ -305,8 +305,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_std")]
-    #[cfg_attr(feature = "async_std", async_std::test)]
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server1() {
         let raw: Vec<u8> = vec![ 0x03, 0x0E, ];
 
@@ -357,8 +357,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_tokio")]
-    #[cfg_attr(feature = "async_tokio", tokio::test)]
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server2() {
         let raw: Vec<u8> = vec![ 0x03, 0x0E, ];
 
@@ -383,8 +383,8 @@ mod test {
         assert_eq!(dest, raw);
     }
 
-    #[cfg(feature = "async_std")]
-    #[cfg_attr(feature = "async_std", async_std::test)]
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server2() {
         let raw: Vec<u8> = vec![ 0x03, 0x0E, ];
 

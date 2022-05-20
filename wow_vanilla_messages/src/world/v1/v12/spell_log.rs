@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{SpellEffect, SpellEffectError};
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -645,7 +645,7 @@ impl SpellLog {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellLogError> {
         // effect: SpellEffect
         let effect: SpellEffect = crate::util::tokio_read_u32_le(r).await?.try_into()?;
@@ -971,7 +971,7 @@ impl SpellLog {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // effect: SpellEffect
         w.write_all(&(self.effect.as_int() as u32).to_le_bytes()).await?;
@@ -1273,7 +1273,7 @@ impl SpellLog {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellLogError> {
         // effect: SpellEffect
         let effect: SpellEffect = crate::util::astd_read_u32_le(r).await?.try_into()?;
@@ -1599,7 +1599,7 @@ impl SpellLog {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // effect: SpellEffect
         w.write_all(&(self.effect.as_int() as u32).to_le_bytes()).await?;

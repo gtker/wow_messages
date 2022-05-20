@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -48,7 +48,7 @@ impl GroupListMember {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, GroupListMemberError> {
         // name: CString
         let name = crate::util::tokio_read_c_string_to_vec(r).await?;
@@ -67,7 +67,7 @@ impl GroupListMember {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes()).await?;
@@ -83,7 +83,7 @@ impl GroupListMember {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, GroupListMemberError> {
         // name: CString
         let name = crate::util::astd_read_c_string_to_vec(r).await?;
@@ -102,7 +102,7 @@ impl GroupListMember {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // name: CString
         w.write_all(self.name.as_bytes()).await?;

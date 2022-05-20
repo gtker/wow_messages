@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{SpellCastTargetFlags};
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -268,7 +268,7 @@ impl SpellCastTargets {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellCastTargetsError> {
         // target_flags: SpellCastTargetFlags
         let target_flags = SpellCastTargetFlags::new(crate::util::tokio_read_u16_le(r).await?);
@@ -436,7 +436,7 @@ impl SpellCastTargets {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
         w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes()).await?;
@@ -524,7 +524,7 @@ impl SpellCastTargets {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellCastTargetsError> {
         // target_flags: SpellCastTargetFlags
         let target_flags = SpellCastTargetFlags::new(crate::util::astd_read_u16_le(r).await?);
@@ -692,7 +692,7 @@ impl SpellCastTargets {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
         w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes()).await?;

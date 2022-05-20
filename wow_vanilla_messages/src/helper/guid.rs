@@ -1,7 +1,7 @@
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 use std::io::{Read, Write};
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 use crate::util::{read_u64_le, read_u8_le};
@@ -87,7 +87,7 @@ impl Guid {
     }
 }
 
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 impl Guid {
     pub async fn astd_read_packed<R: ReadExt + Unpin + Send>(
         r: &mut R,
@@ -132,7 +132,7 @@ impl Guid {
     }
 }
 
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 impl Guid {
     pub async fn tokio_read_packed<R: AsyncReadExt + Unpin + Send>(
         r: &mut R,

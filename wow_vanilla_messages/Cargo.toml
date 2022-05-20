@@ -10,8 +10,6 @@ version = "0.4.0"
 
 [features]
 default = []
-async_tokio = ["tokio"]
-async_std = ["async-std"]
 sync = []
 
 [dependencies.tokio]

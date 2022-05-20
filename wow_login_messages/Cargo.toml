@@ -12,8 +12,6 @@ edition = "2018"
 
 [features]
 default = []
-async_tokio = ["tokio"]
-async_std = ["async-std"]
 sync = []
 
 [dependencies.tokio]

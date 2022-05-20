@@ -1,8 +1,8 @@
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 use std::future::Future;
 use std::pin::Pin;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 pub trait MessageBody: Sized {
@@ -18,7 +18,7 @@ pub trait MessageBody: Sized {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
         body_size: u32,
@@ -28,7 +28,7 @@ pub trait MessageBody: Sized {
         'life0: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_body<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -39,7 +39,7 @@ pub trait MessageBody: Sized {
         'life1: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
         body_size: u32,
@@ -49,7 +49,7 @@ pub trait MessageBody: Sized {
         'life0: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,

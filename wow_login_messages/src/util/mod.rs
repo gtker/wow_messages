@@ -1,6 +1,6 @@
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 mod tokio_impl;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 pub use tokio_impl::*;
 
 #[cfg(feature = "async-std")]

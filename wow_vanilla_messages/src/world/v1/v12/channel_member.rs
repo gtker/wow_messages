@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -38,7 +38,7 @@ impl ChannelMember {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // guid: Guid
         let guid = Guid::tokio_read(r).await?;
@@ -52,7 +52,7 @@ impl ChannelMember {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
         self.guid.tokio_write(w).await?;
@@ -63,7 +63,7 @@ impl ChannelMember {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // guid: Guid
         let guid = Guid::astd_read(r).await?;
@@ -77,7 +77,7 @@ impl ChannelMember {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
         self.guid.astd_write(w).await?;

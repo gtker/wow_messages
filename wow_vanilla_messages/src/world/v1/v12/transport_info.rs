@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -65,7 +65,7 @@ impl TransportInfo {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // guid: PackedGuid
         let guid = Guid::tokio_read_packed(r).await?;
@@ -91,7 +91,7 @@ impl TransportInfo {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: PackedGuid
         self.guid.tokio_write_packed(w).await?;
@@ -114,7 +114,7 @@ impl TransportInfo {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // guid: PackedGuid
         let guid = Guid::astd_read_packed(r).await?;
@@ -140,7 +140,7 @@ impl TransportInfo {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: PackedGuid
         self.guid.astd_write_packed(w).await?;

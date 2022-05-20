@@ -3,9 +3,9 @@ use crate::logon::version_2::Population;
 use crate::logon::version_2::{RealmCategory, RealmCategoryError};
 use crate::logon::version_2::{RealmFlag};
 use crate::logon::version_2::{RealmType, RealmTypeError};
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -94,7 +94,7 @@ impl Realm {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RealmError> {
         // realm_type: RealmType
         let realm_type: RealmType = crate::util::tokio_read_u32_le(r).await?.try_into()?;
@@ -134,7 +134,7 @@ impl Realm {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // realm_type: RealmType
         w.write_all(&(self.realm_type.as_int() as u32).to_le_bytes()).await?;
@@ -167,7 +167,7 @@ impl Realm {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RealmError> {
         // realm_type: RealmType
         let realm_type: RealmType = crate::util::astd_read_u32_le(r).await?.try_into()?;
@@ -207,7 +207,7 @@ impl Realm {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // realm_type: RealmType
         w.write_all(&(self.realm_type.as_int() as u32).to_le_bytes()).await?;

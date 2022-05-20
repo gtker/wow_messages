@@ -5,9 +5,9 @@ use crate::world::v1::v12::{SplineFlag};
 use crate::world::v1::v12::TransportInfo;
 use crate::world::v1::v12::{UpdateFlag};
 use crate::world::v1::v12::Vector3d;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -497,7 +497,7 @@ impl MovementBlock {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // update_flag: UpdateFlag
         let update_flag = UpdateFlag::new(crate::util::tokio_read_u8_le(r).await?);
@@ -767,7 +767,7 @@ impl MovementBlock {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_flag: UpdateFlag
         w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes()).await?;
@@ -971,7 +971,7 @@ impl MovementBlock {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // update_flag: UpdateFlag
         let update_flag = UpdateFlag::new(crate::util::astd_read_u8_le(r).await?);
@@ -1241,7 +1241,7 @@ impl MovementBlock {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // update_flag: UpdateFlag
         w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes()).await?;

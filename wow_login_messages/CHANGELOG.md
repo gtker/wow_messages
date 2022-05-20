@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Additional getters and setters for `CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag`, `CMD_AUTH_LOGON_PROOF_ClientSecurityFlag`, and `RealmRealmFlag`. These types were not really usable before these changes.
-* `tokio` and `async-std` support. These are activated through the `async_tokio` and `async_std` feature flags.
+* `tokio` and `async-std` support. These are activated through the `tokio` and `async-std` feature flags.
 
 ### Changed
 

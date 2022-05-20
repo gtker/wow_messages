@@ -5,9 +5,9 @@ use std::io::Write;
 use std::pin::Pin;
 use wow_srp::header_crypto::Encrypter;
 
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::WriteExt;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::AsyncWriteExt;
 
 pub trait ServerMessageWrite: MessageBody {
@@ -41,7 +41,7 @@ pub trait ServerMessageWrite: MessageBody {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_unencrypted_server<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -65,7 +65,7 @@ pub trait ServerMessageWrite: MessageBody {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_encrypted_server<'life0, 'life1, 'life2, 'async_trait, W, E>(
         &'life0 self,
         w: &'life1 mut W,
@@ -91,7 +91,7 @@ pub trait ServerMessageWrite: MessageBody {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_unencrypted_server<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -115,7 +115,7 @@ pub trait ServerMessageWrite: MessageBody {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_encrypted_server<'life0, 'life1, 'life2, 'async_trait, W, E>(
         &'life0 self,
         w: &'life1 mut W,
@@ -173,7 +173,7 @@ pub trait ClientMessageWrite: MessageBody {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_unencrypted_client<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -197,7 +197,7 @@ pub trait ClientMessageWrite: MessageBody {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_encrypted_client<'life0, 'life1, 'life2, 'async_trait, W, E>(
         &'life0 self,
         w: &'life1 mut W,
@@ -223,7 +223,7 @@ pub trait ClientMessageWrite: MessageBody {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_unencrypted_client<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -247,7 +247,7 @@ pub trait ClientMessageWrite: MessageBody {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_encrypted_client<'life0, 'life1, 'life2, 'async_trait, W, E>(
         &'life0 self,
         w: &'life1 mut W,

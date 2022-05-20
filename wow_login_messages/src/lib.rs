@@ -46,7 +46,7 @@
 //!
 //! ## Features
 //!
-//! Tokio and async-std support are gated behind the `async_tokio` and `async_std` features.
+//! Tokio and async-std support are gated behind the `tokio` and `async-std` features.
 //! Synchronous (std) support is gated behind `sync`.
 //! All of these are disabled by default.
 //! You must enable at least one of them, otherwise there's not much point to the crate.
@@ -98,10 +98,10 @@
 
 use std::future::Future;
 use std::pin::Pin;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 pub mod helper;
@@ -130,7 +130,7 @@ pub trait ReadableAndWritable: Sized {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> Pin<Box<dyn Future<Output = Result<Self, Self::Error>> + Send + 'async_trait>>
@@ -139,7 +139,7 @@ pub trait ReadableAndWritable: Sized {
         'life0: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -150,7 +150,7 @@ pub trait ReadableAndWritable: Sized {
         'life1: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_read<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> Pin<Box<dyn Future<Output = Result<Self, Self::Error>> + Send + 'async_trait>>
@@ -159,7 +159,7 @@ pub trait ReadableAndWritable: Sized {
         'life0: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,

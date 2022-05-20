@@ -23,7 +23,7 @@ And then [check out the docs](https://docs.rs/wow_srp/latest/wow_login_messages/
 
 ## Features
 
-Tokio and async-std support are gated behind the `async_tokio` and `async_std` features.
+Tokio and async-std support are gated behind the `tokio` and `async-std` features.
 Synchronous (std) support is gated behind `sync`.
 All of these are disabled by default.
 You must enable at least one of them, otherwise there's not much point to the crate.

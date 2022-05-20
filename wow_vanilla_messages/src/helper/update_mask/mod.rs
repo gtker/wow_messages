@@ -4,12 +4,12 @@ pub use impls::*;
 use std::collections::{BTreeMap, HashMap};
 
 use crate::Guid;
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 use std::io;
 #[cfg(feature = "sync")]
 use std::io::{Read, Write};
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 #[derive(Debug, Clone, Default, PartialEq)]
@@ -24,12 +24,12 @@ impl UpdateMask {
         todo!()
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> Result<Self, io::Error> {
         todo!()
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> Result<Self, io::Error> {
         todo!()
     }
@@ -39,12 +39,12 @@ impl UpdateMask {
         todo!()
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), io::Error> {
         todo!()
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
         &self,
         w: &mut W,

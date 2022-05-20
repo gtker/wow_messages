@@ -3,9 +3,9 @@ use crate::OpcodeMessage;
 use crate::{ServerMessageWrite, ClientMessageWrite};
 use wow_srp::header_crypto::{Decrypter, Encrypter};
 
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 use crate::world::v1::v2::CMSG_CHAR_ENUM;
 
@@ -111,7 +111,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
     }
 
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_unencrypted<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -132,7 +132,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_read_unencrypted<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -152,7 +152,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
             }
         })
     }
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_read_encrypted<'life0, 'life1, 'async_trait, R, D>(
         r: &'life0 mut R,
         d: &'life1 mut D,
@@ -178,7 +178,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_encrypted<'life0, 'life1, 'life2, 'async_trait, W, E>(
         &'life0 self,
         w: &'life1 mut W,
@@ -203,7 +203,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
     }
 
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_unencrypted<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -224,7 +224,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_read_unencrypted<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -244,7 +244,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
             }
         })
     }
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_read_encrypted<'life0, 'life1, 'async_trait, R, D>(
         r: &'life0 mut R,
         d: &'life1 mut D,
@@ -270,7 +270,7 @@ impl OpcodeMessage for ClientOpcodeMessage {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_encrypted<'life0, 'life1, 'life2, 'async_trait, W, E>(
         &'life0 self,
         w: &'life1 mut W,
@@ -441,7 +441,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
     }
 
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_unencrypted<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -463,7 +463,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_read_unencrypted<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -484,7 +484,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
             }
         })
     }
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_read_encrypted<'life0, 'life1, 'async_trait, R, D>(
         r: &'life0 mut R,
         d: &'life1 mut D,
@@ -511,7 +511,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_encrypted<'life0, 'life1, 'life2, 'async_trait, W, E>(
         &'life0 self,
         w: &'life1 mut W,
@@ -537,7 +537,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
     }
 
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_unencrypted<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -559,7 +559,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_read_unencrypted<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> core::pin::Pin<Box<
@@ -580,7 +580,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
             }
         })
     }
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_read_encrypted<'life0, 'life1, 'async_trait, R, D>(
         r: &'life0 mut R,
         d: &'life1 mut D,
@@ -607,7 +607,7 @@ impl OpcodeMessage for ServerOpcodeMessage {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_encrypted<'life0, 'life1, 'life2, 'async_trait, W, E>(
         &'life0 self,
         w: &'life1 mut W,

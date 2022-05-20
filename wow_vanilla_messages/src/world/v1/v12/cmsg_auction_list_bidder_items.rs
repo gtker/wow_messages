@@ -2,9 +2,9 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::{ClientMessageWrite, MessageBody};
 use wow_srp::header_crypto::Encrypter;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -68,7 +68,7 @@ impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
         body_size: u32,
@@ -104,7 +104,7 @@ impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_body<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -136,7 +136,7 @@ impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_read_body<'life0, 'async_trait, R>(
         r: &'life0 mut R,
         body_size: u32,
@@ -172,7 +172,7 @@ impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_body<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,

@@ -1,8 +1,8 @@
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 use std::future::Future;
 use std::pin::Pin;
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use wow_srp::header_crypto::{Decrypter, Encrypter};
 
@@ -28,7 +28,7 @@ pub trait OpcodeMessage: Sized {
         e: &mut E,
     ) -> std::result::Result<(), std::io::Error>;
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_read_unencrypted<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> Pin<Box<dyn Future<Output = Result<Self, Self::Error>> + Send + 'async_trait>>
@@ -37,7 +37,7 @@ pub trait OpcodeMessage: Sized {
         'life0: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_unencrypted<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -48,7 +48,7 @@ pub trait OpcodeMessage: Sized {
         'life1: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_read_encrypted<'life0, 'life1, 'async_trait, R, D>(
         r: &'life0 mut R,
         d: &'life1 mut D,
@@ -60,7 +60,7 @@ pub trait OpcodeMessage: Sized {
         'life1: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     fn tokio_write_encrypted<'life0, 'life1, 'life2, 'async_trait, W, E>(
         &'life0 self,
         w: &'life1 mut W,
@@ -74,7 +74,7 @@ pub trait OpcodeMessage: Sized {
         'life2: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_read_unencrypted<'life0, 'async_trait, R>(
         r: &'life0 mut R,
     ) -> Pin<Box<dyn Future<Output = Result<Self, Self::Error>> + Send + 'async_trait>>
@@ -83,7 +83,7 @@ pub trait OpcodeMessage: Sized {
         'life0: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_unencrypted<'life0, 'life1, 'async_trait, W>(
         &'life0 self,
         w: &'life1 mut W,
@@ -94,7 +94,7 @@ pub trait OpcodeMessage: Sized {
         'life1: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_read_encrypted<'life0, 'life1, 'async_trait, R, D>(
         r: &'life0 mut R,
         d: &'life1 mut D,
@@ -106,7 +106,7 @@ pub trait OpcodeMessage: Sized {
         'life1: 'async_trait,
         Self: 'async_trait;
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     fn astd_write_encrypted<'life0, 'life1, 'life2, 'async_trait, W, E>(
         &'life0 self,
         w: &'life1 mut W,

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-#[cfg(feature = "async_tokio")]
+#[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async_std")]
+#[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 
 #[derive(Debug, PartialEq, Clone, Default)]
@@ -37,7 +37,7 @@ impl GmSurveyQuestion {
         Ok(())
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_read<R: AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // question_id: u32
         let question_id = crate::util::tokio_read_u32_le(r).await?;
@@ -51,7 +51,7 @@ impl GmSurveyQuestion {
         })
     }
 
-    #[cfg(feature = "async_tokio")]
+    #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // question_id: u32
         w.write_all(&self.question_id.to_le_bytes()).await?;
@@ -62,7 +62,7 @@ impl GmSurveyQuestion {
         Ok(())
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // question_id: u32
         let question_id = crate::util::astd_read_u32_le(r).await?;
@@ -76,7 +76,7 @@ impl GmSurveyQuestion {
         })
     }
 
-    #[cfg(feature = "async_std")]
+    #[cfg(feature = "async-std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // question_id: u32
         w.write_all(&self.question_id.to_le_bytes()).await?;
