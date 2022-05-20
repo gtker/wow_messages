@@ -37,37 +37,47 @@ impl Default for UpdateValue {
     }
 }
 
-#[derive(Debug, Clone, Default, PartialEq)]
-pub struct UpdatePlayer {
-    header: Vec<u32>,
-    values: BTreeMap<u16, UpdateValue>,
-}
-
-impl UpdatePlayer {
-    pub fn new() -> Self {
-        Self {
-            header: vec![],
-            values: Default::default(),
+macro_rules! update_item {
+    ($name:ident) => {
+        #[derive(Debug, Clone, Default, PartialEq)]
+        pub struct $name {
+            header: Vec<u32>,
+            values: BTreeMap<u16, UpdateValue>,
         }
-    }
 
-    pub fn header_set(&mut self, bit: u16) {
-        let index = bit / 32;
-        let offset = bit % 32;
+        impl $name {
+            pub fn new() -> Self {
+                Self {
+                    header: vec![],
+                    values: Default::default(),
+                }
+            }
 
-        if index >= self.header.len() as u16 {
-            let extras = index - self.header.len() as u16;
-            for _ in 0..=extras {
-                self.header.push(0);
+            pub fn header_set(&mut self, bit: u16) {
+                header_set(&mut self.header, &mut self.values, bit);
+            }
+
+            pub(crate) fn as_bytes(&self) -> Vec<u8> {
+                as_bytes(&self.header, &self.values)
             }
         }
+    };
+}
 
-        self.header[index as usize] |= 1 << offset;
+update_item!(UpdatePlayer);
+
+fn header_set(header: &mut Vec<u32>, values: &mut BTreeMap<u16, UpdateValue>, bit: u16) {
+    let index = bit / 32;
+    let offset = bit % 32;
+
+    if index >= header.len() as u16 {
+        let extras = index - header.len() as u16;
+        for _ in 0..=extras {
+            header.push(0);
+        }
     }
 
-    pub(crate) fn as_bytes(&self) -> Vec<u8> {
-        as_bytes(&self.header, &self.values)
-    }
+    header[index as usize] |= 1 << offset;
 }
 
 fn as_bytes(header: &[u32], values: &BTreeMap<u16, UpdateValue>) -> Vec<u8> {
@@ -104,7 +114,7 @@ pub enum UpdateMask {
     Item,
     Container,
     Unit,
-    Player,
+    Player(UpdatePlayer),
     GameObject,
     DynamicObject,
     Corpse,
@@ -137,7 +147,7 @@ impl UpdateMask {
     }
 
     pub fn size(&self) -> usize {
-        todo!()
+        self.as_bytes().len()
     }
 
     pub fn new() -> Self {
