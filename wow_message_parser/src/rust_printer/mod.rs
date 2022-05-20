@@ -38,7 +38,6 @@ pub const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 pub const WORLD_BODY_TRAIT_NAME: &str = "MessageBody";
 pub const WORLD_CLIENT_HEADER_TRAIT_NAME: &str = "ClientMessageWrite";
 pub const WORLD_SERVER_HEADER_TRAIT_NAME: &str = "ServerMessageWrite";
-pub const OPCODE_MESSAGE_TRAIT_NAME: &str = "OpcodeMessage";
 
 pub const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
 pub const TOKIO_READ_IMPORT: &str = "use tokio::io::AsyncReadExt;";
@@ -196,48 +195,6 @@ impl Writer {
         }
 
         self.closing_curly_newline(); // impl
-    }
-
-    fn print_read_encrypted(&mut self, it: ImplType) {
-        self.wln(it.cfg());
-        if !it.is_async() {
-            self.open_curly(format!("{func}fn {prefix}read_encrypted<R: {read}, D: Decrypter{decrypter}>(r: &mut R, d: &mut D) -> std::result::Result<Self, Self::Error>", func = it.func(), prefix = it.prefix(), read = it.read(), decrypter = it.decrypter()));
-
-            return;
-        }
-
-        self.wln(format!(
-            "fn {prefix}read_encrypted<'life0, 'life1, 'async_trait, R, D>(",
-            prefix = it.prefix()
-        ));
-
-        self.inc_indent();
-        self.wln("r: &'life0 mut R,");
-        self.wln("d: &'life1 mut D,");
-        self.dec_indent();
-
-        self.wln(") -> core::pin::Pin<Box<");
-        self.inc_indent();
-
-        self.wln("dyn core::future::Future<Output = std::result::Result<Self, Self::Error>>");
-
-        self.inc_indent();
-        self.wln("+ Send + 'async_trait");
-
-        self.dec_indent();
-        self.dec_indent();
-        self.wln(">> where");
-
-        self.inc_indent();
-        self.wln(format!("R: 'async_trait + {},", it.read()));
-        self.wln(format!("D: 'async_trait + Decrypter{},", it.decrypter()));
-        self.wln("'life0: 'async_trait,");
-        self.wln("'life1: 'async_trait,");
-        self.wln("Self: 'async_trait,");
-        self.dec_indent();
-
-        self.open_curly("");
-        self.open_curly("Box::pin(async move");
     }
 
     fn print_write_decl(&mut self, it: ImplType, world_text: &str) {

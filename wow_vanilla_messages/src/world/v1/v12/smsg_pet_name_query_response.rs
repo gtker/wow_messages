@@ -213,7 +213,7 @@ mod test {
     use super::*;
     use super::super::*;
     use crate::world::v1::v12::opcodes::ServerOpcodeMessage;
-    use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite, OpcodeMessage};
+    use crate::{MessageBody, ClientMessageWrite, ServerMessageWrite};
 
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]

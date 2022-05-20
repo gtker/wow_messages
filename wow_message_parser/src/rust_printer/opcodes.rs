@@ -2,9 +2,8 @@ use crate::container::{Container, ContainerType};
 use crate::file_utils::{get_import_path, get_login_logon_version_path, get_world_version_path};
 use crate::parser::types::tags::{LoginVersion, WorldVersion};
 use crate::rust_printer::{
-    ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
-    OPCODE_MESSAGE_TRAIT_NAME, TOKIO_IMPORT, WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME,
-    WORLD_SERVER_HEADER_TRAIT_NAME,
+    ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO, TOKIO_IMPORT,
+    WORLD_BODY_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME, WORLD_SERVER_HEADER_TRAIT_NAME,
 };
 
 const CLOGIN_NAME: &str = "Client";
@@ -76,7 +75,6 @@ pub fn includes(s: &mut Writer, v: &[&Container], container_type: ContainerType)
         }
         ContainerType::CMsg(_) => {
             s.wln(format!("use crate::{};", WORLD_BODY_TRAIT_NAME));
-            s.wln(format!("use crate::{};", OPCODE_MESSAGE_TRAIT_NAME));
             s.wln(format!(
                 "use crate::{{{}, {}}};",
                 WORLD_SERVER_HEADER_TRAIT_NAME, WORLD_CLIENT_HEADER_TRAIT_NAME,
@@ -138,11 +136,18 @@ fn world_common_impls_read_write(
     cd: &str,
     size: &str,
     opcode_size: i32,
+    error_ty: &str,
     it: ImplType,
 ) {
     s.newline();
 
-    s.print_read_decl(it, "_unencrypted");
+    s.open_curly(format!(
+        "pub {func}fn {prefix}read_unencrypted<R: {read}>(r: &mut R) -> std::result::Result<Self, {error_ty}>",
+        prefix = it.prefix(),
+        read = it.read(),
+        func = it.func(),
+        error_ty = error_ty,
+    ));
     s.wln(format!(
         "let size = ({path}::{prefix}read_u16_be(r){postfix}? - {opcode_size}) as u32;",
         path = "crate::util",
@@ -174,16 +179,21 @@ fn world_common_impls_read_write(
                               postfix = it.postfix(),
                               enum_name = get_enumerator_name(e.name())));
             }
-            s.wln("_ => Err(Self::Error::InvalidOpcode(opcode)),");
+            s.wln(format!("_ => Err({error_ty}::InvalidOpcode(opcode)),", error_ty = error_ty));
         }
     );
 
-    if it.is_async() {
-        s.closing_curly_with(")"); // Box::pin
-    }
     s.closing_curly();
 
-    s.print_read_encrypted(it);
+    s.open_curly(
+        format!("pub {func}fn {prefix}read_encrypted<R: {read}, D: Decrypter{decrypter}>(r: &mut R, d: &mut D) -> std::result::Result<Self, {error_ty}>",
+            func = it.func(),
+            prefix = it.prefix(),
+            read = it.read(),
+            decrypter = it.decrypter(),
+            error_ty = error_ty,
+        )
+    );
 
     s.wln(format!(
         "let mut header = [0u8; {header_size}];",
@@ -212,11 +222,9 @@ fn world_common_impls_read_write(
 
             s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}({name}::{prefix}read_body(r, header_size){postfix}?)),", prefix = it.prefix(), postfix = it.postfix(), opcode = opcode, name = e.name(), enum_name = get_enumerator_name(e.name())));
         }
-        s.wln("_ => Err(Self::Error::InvalidOpcode(header.opcode)),");
+        s.wln(format!("_ => Err({error_ty}::InvalidOpcode(header.opcode)),", error_ty = error_ty));
     });
-    if it.is_async() {
-        s.closing_curly_with(")");
-    }
+
     s.closing_curly_newline();
 }
 
@@ -231,17 +239,19 @@ pub fn common_impls_world(
         ContainerType::SMsg(_) => ("server", "u16", 2),
         _ => panic!(),
     };
-    s.impl_for(
-        OPCODE_MESSAGE_TRAIT_NAME,
-        format!("{t}OpcodeMessage", t = ty),
-        |s| {
-            s.wln(format!("type Error = {t}OpcodeMessageError;", t = ty));
-
-            for it in ImplType::types() {
-                world_common_impls_read_write(s, v, cd, size, opcode_size, it);
-            }
-        },
-    );
+    s.bodyn(format!("impl {t}OpcodeMessage", t = ty), |s| {
+        for it in ImplType::types() {
+            world_common_impls_read_write(
+                s,
+                v,
+                cd,
+                size,
+                opcode_size,
+                &format!("{t}OpcodeMessageError", t = ty),
+                it,
+            );
+        }
+    });
 }
 
 pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
