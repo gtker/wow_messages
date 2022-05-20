@@ -116,18 +116,10 @@ pub fn print_write_field_identifier(
     ));
 }
 
-pub fn print_write_no_ok(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
-    for field in e.fields() {
-        print_write_field(s, e, o, field, "self.", prefix, postfix);
-    }
-}
-
 pub fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
     for field in e.fields() {
         print_write_field(s, e, o, field, "self.", prefix, postfix);
     }
-
-    s.wln("Ok(())");
 }
 
 pub fn print_write_definition(
