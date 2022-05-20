@@ -28,7 +28,7 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
                 |s, it| {
-                    print_write::print_write(s, e, o, it.prefix(), it.postfix());
+                    print_write::print_write_no_ok(s, e, o, it.prefix(), it.postfix());
                 },
             );
         }

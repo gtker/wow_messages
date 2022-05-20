@@ -4,9 +4,10 @@ use crate::world::v1::v12::{Area, AreaError};
 use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{FriendStatus, FriendStatusError};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Friend {
@@ -15,6 +16,81 @@ pub struct Friend {
 }
 
 impl Friend {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // guid: Guid
+        w.write_all(&self.guid.guid().to_le_bytes())?;
+
+        // status: FriendStatus
+        w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
+
+        match &self.status {
+            FriendFriendStatus::OFFLINE => {}
+            FriendFriendStatus::ONLINE {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes())?;
+
+                // class: Class
+                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+
+            }
+            FriendFriendStatus::AFK {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes())?;
+
+                // class: Class
+                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+
+            }
+            FriendFriendStatus::UNKNOWN3 {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes())?;
+
+                // class: Class
+                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+
+            }
+            FriendFriendStatus::DND {
+                area,
+                class,
+                level,
+            } => {
+                // area: Area
+                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
+
+                // level: u32
+                w.write_all(&level.to_le_bytes())?;
+
+                // class: Class
+                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+
+            }
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, FriendError> {
         // guid: Guid
@@ -95,81 +171,6 @@ impl Friend {
             guid,
             status: status_if,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // status: FriendStatus
-        w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
-
-        match &self.status {
-            FriendFriendStatus::OFFLINE => {}
-            FriendFriendStatus::ONLINE {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes())?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
-
-            }
-            FriendFriendStatus::AFK {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes())?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
-
-            }
-            FriendFriendStatus::UNKNOWN3 {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes())?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
-
-            }
-            FriendFriendStatus::DND {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes())?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
-
-            }
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -254,81 +255,6 @@ impl Friend {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-        // status: FriendStatus
-        w.write_all(&(self.status.as_int() as u8).to_le_bytes()).await?;
-
-        match &self.status {
-            FriendFriendStatus::OFFLINE => {}
-            FriendFriendStatus::ONLINE {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
-
-            }
-            FriendFriendStatus::AFK {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
-
-            }
-            FriendFriendStatus::UNKNOWN3 {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
-
-            }
-            FriendFriendStatus::DND {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
-
-            }
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, FriendError> {
         // guid: Guid
@@ -409,81 +335,6 @@ impl Friend {
             guid,
             status: status_if,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-        // status: FriendStatus
-        w.write_all(&(self.status.as_int() as u8).to_le_bytes()).await?;
-
-        match &self.status {
-            FriendFriendStatus::OFFLINE => {}
-            FriendFriendStatus::ONLINE {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
-
-            }
-            FriendFriendStatus::AFK {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
-
-            }
-            FriendFriendStatus::UNKNOWN3 {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
-
-            }
-            FriendFriendStatus::DND {
-                area,
-                class,
-                level,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes()).await?;
-
-                // level: u32
-                w.write_all(&level.to_le_bytes()).await?;
-
-                // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes()).await?;
-
-            }
-        }
-
-        Ok(())
     }
 
 }

@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{PvpRank, PvpRankError};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct BattlegroundPlayer {
@@ -18,6 +19,37 @@ pub struct BattlegroundPlayer {
 }
 
 impl BattlegroundPlayer {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // player: Guid
+        w.write_all(&self.player.guid().to_le_bytes())?;
+
+        // rank: PvpRank
+        w.write_all(&(self.rank.as_int() as u32).to_le_bytes())?;
+
+        // killing_blows: u32
+        w.write_all(&self.killing_blows.to_le_bytes())?;
+
+        // honorable_kills: u32
+        w.write_all(&self.honorable_kills.to_le_bytes())?;
+
+        // deaths: u32
+        w.write_all(&self.deaths.to_le_bytes())?;
+
+        // bonus_honor: u32
+        w.write_all(&self.bonus_honor.to_le_bytes())?;
+
+        // amount_of_extra_fields: u32
+        w.write_all(&(self.fields.len() as u32).to_le_bytes())?;
+
+        // fields: u32[amount_of_extra_fields]
+        for i in self.fields.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, BattlegroundPlayerError> {
         // player: Guid
@@ -56,37 +88,6 @@ impl BattlegroundPlayer {
             bonus_honor,
             fields,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // player: Guid
-        w.write_all(&self.player.guid().to_le_bytes())?;
-
-        // rank: PvpRank
-        w.write_all(&(self.rank.as_int() as u32).to_le_bytes())?;
-
-        // killing_blows: u32
-        w.write_all(&self.killing_blows.to_le_bytes())?;
-
-        // honorable_kills: u32
-        w.write_all(&self.honorable_kills.to_le_bytes())?;
-
-        // deaths: u32
-        w.write_all(&self.deaths.to_le_bytes())?;
-
-        // bonus_honor: u32
-        w.write_all(&self.bonus_honor.to_le_bytes())?;
-
-        // amount_of_extra_fields: u32
-        w.write_all(&(self.fields.len() as u32).to_le_bytes())?;
-
-        // fields: u32[amount_of_extra_fields]
-        for i in self.fields.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -129,37 +130,6 @@ impl BattlegroundPlayer {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // player: Guid
-        w.write_all(&self.player.guid().to_le_bytes()).await?;
-
-        // rank: PvpRank
-        w.write_all(&(self.rank.as_int() as u32).to_le_bytes()).await?;
-
-        // killing_blows: u32
-        w.write_all(&self.killing_blows.to_le_bytes()).await?;
-
-        // honorable_kills: u32
-        w.write_all(&self.honorable_kills.to_le_bytes()).await?;
-
-        // deaths: u32
-        w.write_all(&self.deaths.to_le_bytes()).await?;
-
-        // bonus_honor: u32
-        w.write_all(&self.bonus_honor.to_le_bytes()).await?;
-
-        // amount_of_extra_fields: u32
-        w.write_all(&(self.fields.len() as u32).to_le_bytes()).await?;
-
-        // fields: u32[amount_of_extra_fields]
-        for i in self.fields.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, BattlegroundPlayerError> {
         // player: Guid
@@ -198,37 +168,6 @@ impl BattlegroundPlayer {
             bonus_honor,
             fields,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // player: Guid
-        w.write_all(&self.player.guid().to_le_bytes()).await?;
-
-        // rank: PvpRank
-        w.write_all(&(self.rank.as_int() as u32).to_le_bytes()).await?;
-
-        // killing_blows: u32
-        w.write_all(&self.killing_blows.to_le_bytes()).await?;
-
-        // honorable_kills: u32
-        w.write_all(&self.honorable_kills.to_le_bytes()).await?;
-
-        // deaths: u32
-        w.write_all(&self.deaths.to_le_bytes()).await?;
-
-        // bonus_honor: u32
-        w.write_all(&self.bonus_honor.to_le_bytes()).await?;
-
-        // amount_of_extra_fields: u32
-        w.write_all(&(self.fields.len() as u32).to_le_bytes()).await?;
-
-        // fields: u32[amount_of_extra_fields]
-        for i in self.fields.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        Ok(())
     }
 
 }

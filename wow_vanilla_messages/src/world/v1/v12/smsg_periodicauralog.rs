@@ -71,7 +71,7 @@ impl MessageBody for SMSG_PERIODICAURALOG {
 
         // auras: AuraLog[amount_of_auras]
         for i in self.auras.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -145,7 +145,7 @@ impl MessageBody for SMSG_PERIODICAURALOG {
 
             // auras: AuraLog[amount_of_auras]
             for i in self.auras.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -220,7 +220,7 @@ impl MessageBody for SMSG_PERIODICAURALOG {
 
             // auras: AuraLog[amount_of_auras]
             for i in self.auras.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

@@ -66,7 +66,7 @@ impl MessageBody for SMSG_INITIAL_SPELLS {
 
         // initial_spells: InitialSpell[spell_count]
         for i in self.initial_spells.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // cooldown_count: u16
@@ -74,7 +74,7 @@ impl MessageBody for SMSG_INITIAL_SPELLS {
 
         // cooldowns: CooldownSpell[cooldown_count]
         for i in self.cooldowns.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -144,7 +144,7 @@ impl MessageBody for SMSG_INITIAL_SPELLS {
 
             // initial_spells: InitialSpell[spell_count]
             for i in self.initial_spells.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // cooldown_count: u16
@@ -152,7 +152,7 @@ impl MessageBody for SMSG_INITIAL_SPELLS {
 
             // cooldowns: CooldownSpell[cooldown_count]
             for i in self.cooldowns.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -223,7 +223,7 @@ impl MessageBody for SMSG_INITIAL_SPELLS {
 
             // initial_spells: InitialSpell[spell_count]
             for i in self.initial_spells.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // cooldown_count: u16
@@ -231,7 +231,7 @@ impl MessageBody for SMSG_INITIAL_SPELLS {
 
             // cooldowns: CooldownSpell[cooldown_count]
             for i in self.cooldowns.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

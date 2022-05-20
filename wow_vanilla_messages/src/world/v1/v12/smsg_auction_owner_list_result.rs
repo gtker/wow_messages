@@ -51,7 +51,7 @@ impl MessageBody for SMSG_AUCTION_OWNER_LIST_RESULT {
 
         // auctions: AuctionListItem[count]
         for i in self.auctions.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // total_amount_of_auctions: u32
@@ -111,7 +111,7 @@ impl MessageBody for SMSG_AUCTION_OWNER_LIST_RESULT {
 
             // auctions: AuctionListItem[count]
             for i in self.auctions.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // total_amount_of_auctions: u32
@@ -172,7 +172,7 @@ impl MessageBody for SMSG_AUCTION_OWNER_LIST_RESULT {
 
             // auctions: AuctionListItem[count]
             for i in self.auctions.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // total_amount_of_auctions: u32

@@ -40,7 +40,9 @@ pub const WORLD_SERVER_HEADER_TRAIT_NAME: &str = "ServerMessageWrite";
 pub const OPCODE_MESSAGE_TRAIT_NAME: &str = "OpcodeMessage";
 
 pub const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
+pub const TOKIO_READ_IMPORT: &str = "use tokio::io::AsyncReadExt;";
 pub const ASYNC_STD_IMPORT: &str = "use async_std::io::{ReadExt, WriteExt};";
+pub const ASYNC_READ_STD_IMPORT: &str = "use async_std::io::ReadExt;";
 
 const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"tokio\")]";
@@ -406,6 +408,12 @@ impl Writer {
     ) {
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
+        self.open_curly("pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>");
+        self.wln("let mut w = Vec::with_capacity(8000);");
+        write_function(self, ImplType::Std);
+        self.wln("Ok(w)");
+        self.closing_curly_newline();
+
         for it in ImplType::types() {
             self.wln(it.cfg());
             self.open_curly(format!(
@@ -417,16 +425,6 @@ impl Writer {
             ));
             read_function(self, it);
             self.closing_curly_newline();
-
-            self.wln(it.cfg());
-            self.open_curly(
-                format!("pub(crate) {func}fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
-                prefix = it.prefix(),
-                write = it.write(),
-                func = it.func(),
-            ));
-            write_function(self, it);
-            self.closing_curly_newline(); // Write Function
         }
 
         self.closing_curly_newline(); // impl
@@ -687,6 +685,14 @@ impl Writer {
     pub fn wln<S: AsRef<str>>(&mut self, s: S) {
         self.w(s);
         self.newline();
+    }
+
+    pub fn write_async_read_includes(&mut self) {
+        self.wln(CFG_ASYNC_TOKIO);
+        self.wln(TOKIO_READ_IMPORT);
+
+        self.wln(CFG_ASYNC_ASYNC_STD);
+        self.wln(ASYNC_READ_STD_IMPORT);
     }
 
     pub fn write_async_includes(&mut self) {

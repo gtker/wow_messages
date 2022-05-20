@@ -115,7 +115,15 @@ fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
         _ => {}
     }
 
-    s.write_async_includes();
+    match e.container_type() {
+        ContainerType::Struct => {
+            s.write_async_read_includes();
+            s.wln("use std::io::Write;");
+        }
+        _ => {
+            s.write_async_includes();
+        }
+    }
 
     s.newline();
 }

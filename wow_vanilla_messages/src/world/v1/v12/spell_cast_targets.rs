@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::v1::v12::{SpellCastTargetFlags};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct SpellCastTargets {
@@ -12,6 +13,94 @@ pub struct SpellCastTargets {
 }
 
 impl SpellCastTargets {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // target_flags: SpellCastTargetFlags
+        w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes())?;
+
+        if let Some(if_statement) = &self.target_flags.unit {
+            // unit_target1: PackedGuid
+            w.write_all(&if_statement.unit_target1.packed_guid())?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.unit_enemy {
+            // unit_target2: PackedGuid
+            w.write_all(&if_statement.unit_target2.packed_guid())?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.gameobject {
+            // object_target1: PackedGuid
+            w.write_all(&if_statement.object_target1.packed_guid())?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.locked {
+            // object_target2: PackedGuid
+            w.write_all(&if_statement.object_target2.packed_guid())?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.item {
+            // item_target1: PackedGuid
+            w.write_all(&if_statement.item_target1.packed_guid())?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.trade_item {
+            // item_target2: PackedGuid
+            w.write_all(&if_statement.item_target2.packed_guid())?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.source_location {
+            // position_x1: f32
+            w.write_all(&if_statement.position_x1.to_le_bytes())?;
+
+            // position_y1: f32
+            w.write_all(&if_statement.position_y1.to_le_bytes())?;
+
+            // position_z1: f32
+            w.write_all(&if_statement.position_z1.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.dest_location {
+            // position_x2: f32
+            w.write_all(&if_statement.position_x2.to_le_bytes())?;
+
+            // position_y2: f32
+            w.write_all(&if_statement.position_y2.to_le_bytes())?;
+
+            // position_z2: f32
+            w.write_all(&if_statement.position_z2.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.string {
+            // target_string: CString
+            w.write_all(if_statement.target_string.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.corpse_ally {
+            // corpse_target1: PackedGuid
+            w.write_all(&if_statement.corpse_target1.packed_guid())?;
+
+        }
+
+        if let Some(if_statement) = &self.target_flags.corpse_enemy {
+            // corpse_target2: PackedGuid
+            w.write_all(&if_statement.corpse_target2.packed_guid())?;
+
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, SpellCastTargetsError> {
         // target_flags: SpellCastTargetFlags
@@ -178,94 +267,6 @@ impl SpellCastTargets {
         Ok(Self {
             target_flags,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // target_flags: SpellCastTargetFlags
-        w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes())?;
-
-        if let Some(if_statement) = &self.target_flags.unit {
-            // unit_target1: PackedGuid
-            w.write_all(&if_statement.unit_target1.packed_guid())?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.unit_enemy {
-            // unit_target2: PackedGuid
-            w.write_all(&if_statement.unit_target2.packed_guid())?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.gameobject {
-            // object_target1: PackedGuid
-            w.write_all(&if_statement.object_target1.packed_guid())?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.locked {
-            // object_target2: PackedGuid
-            w.write_all(&if_statement.object_target2.packed_guid())?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.item {
-            // item_target1: PackedGuid
-            w.write_all(&if_statement.item_target1.packed_guid())?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.trade_item {
-            // item_target2: PackedGuid
-            w.write_all(&if_statement.item_target2.packed_guid())?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.source_location {
-            // position_x1: f32
-            w.write_all(&if_statement.position_x1.to_le_bytes())?;
-
-            // position_y1: f32
-            w.write_all(&if_statement.position_y1.to_le_bytes())?;
-
-            // position_z1: f32
-            w.write_all(&if_statement.position_z1.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.dest_location {
-            // position_x2: f32
-            w.write_all(&if_statement.position_x2.to_le_bytes())?;
-
-            // position_y2: f32
-            w.write_all(&if_statement.position_y2.to_le_bytes())?;
-
-            // position_z2: f32
-            w.write_all(&if_statement.position_z2.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.string {
-            // target_string: CString
-            w.write_all(if_statement.target_string.as_bytes())?;
-            // Null terminator
-            w.write_all(&[0])?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.corpse_ally {
-            // corpse_target1: PackedGuid
-            w.write_all(&if_statement.corpse_target1.packed_guid())?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.corpse_enemy {
-            // corpse_target2: PackedGuid
-            w.write_all(&if_statement.corpse_target2.packed_guid())?;
-
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -436,94 +437,6 @@ impl SpellCastTargets {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // target_flags: SpellCastTargetFlags
-        w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes()).await?;
-
-        if let Some(if_statement) = &self.target_flags.unit {
-            // unit_target1: PackedGuid
-            w.write_all(&if_statement.unit_target1.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.unit_enemy {
-            // unit_target2: PackedGuid
-            w.write_all(&if_statement.unit_target2.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.gameobject {
-            // object_target1: PackedGuid
-            w.write_all(&if_statement.object_target1.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.locked {
-            // object_target2: PackedGuid
-            w.write_all(&if_statement.object_target2.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.item {
-            // item_target1: PackedGuid
-            w.write_all(&if_statement.item_target1.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.trade_item {
-            // item_target2: PackedGuid
-            w.write_all(&if_statement.item_target2.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.source_location {
-            // position_x1: f32
-            w.write_all(&if_statement.position_x1.to_le_bytes()).await?;
-
-            // position_y1: f32
-            w.write_all(&if_statement.position_y1.to_le_bytes()).await?;
-
-            // position_z1: f32
-            w.write_all(&if_statement.position_z1.to_le_bytes()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.dest_location {
-            // position_x2: f32
-            w.write_all(&if_statement.position_x2.to_le_bytes()).await?;
-
-            // position_y2: f32
-            w.write_all(&if_statement.position_y2.to_le_bytes()).await?;
-
-            // position_z2: f32
-            w.write_all(&if_statement.position_z2.to_le_bytes()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.string {
-            // target_string: CString
-            w.write_all(if_statement.target_string.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.corpse_ally {
-            // corpse_target1: PackedGuid
-            w.write_all(&if_statement.corpse_target1.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.corpse_enemy {
-            // corpse_target2: PackedGuid
-            w.write_all(&if_statement.corpse_target2.packed_guid()).await?;
-
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, SpellCastTargetsError> {
         // target_flags: SpellCastTargetFlags
@@ -690,94 +603,6 @@ impl SpellCastTargets {
         Ok(Self {
             target_flags,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // target_flags: SpellCastTargetFlags
-        w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes()).await?;
-
-        if let Some(if_statement) = &self.target_flags.unit {
-            // unit_target1: PackedGuid
-            w.write_all(&if_statement.unit_target1.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.unit_enemy {
-            // unit_target2: PackedGuid
-            w.write_all(&if_statement.unit_target2.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.gameobject {
-            // object_target1: PackedGuid
-            w.write_all(&if_statement.object_target1.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.locked {
-            // object_target2: PackedGuid
-            w.write_all(&if_statement.object_target2.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.item {
-            // item_target1: PackedGuid
-            w.write_all(&if_statement.item_target1.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.trade_item {
-            // item_target2: PackedGuid
-            w.write_all(&if_statement.item_target2.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.source_location {
-            // position_x1: f32
-            w.write_all(&if_statement.position_x1.to_le_bytes()).await?;
-
-            // position_y1: f32
-            w.write_all(&if_statement.position_y1.to_le_bytes()).await?;
-
-            // position_z1: f32
-            w.write_all(&if_statement.position_z1.to_le_bytes()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.dest_location {
-            // position_x2: f32
-            w.write_all(&if_statement.position_x2.to_le_bytes()).await?;
-
-            // position_y2: f32
-            w.write_all(&if_statement.position_y2.to_le_bytes()).await?;
-
-            // position_z2: f32
-            w.write_all(&if_statement.position_z2.to_le_bytes()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.string {
-            // target_string: CString
-            w.write_all(if_statement.target_string.as_bytes()).await?;
-            // Null terminator
-            w.write_all(&[0]).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.corpse_ally {
-            // corpse_target1: PackedGuid
-            w.write_all(&if_statement.corpse_target1.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.corpse_enemy {
-            // corpse_target2: PackedGuid
-            w.write_all(&if_statement.corpse_target2.packed_guid()).await?;
-
-        }
-
-        Ok(())
     }
 
 }

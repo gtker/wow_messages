@@ -46,7 +46,7 @@ impl MessageBody for SMSG_CHAR_ENUM {
 
         // characters: Character[amount_of_characters]
         for i in self.characters.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -99,7 +99,7 @@ impl MessageBody for SMSG_CHAR_ENUM {
 
             // characters: Character[amount_of_characters]
             for i in self.characters.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -153,7 +153,7 @@ impl MessageBody for SMSG_CHAR_ENUM {
 
             // characters: Character[amount_of_characters]
             for i in self.characters.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

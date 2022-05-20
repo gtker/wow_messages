@@ -55,7 +55,7 @@ impl MessageBody for SMSG_PETITION_SHOWLIST {
 
         // petitions: PetitionShowlist[amount_of_petitions]
         for i in self.petitions.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -115,7 +115,7 @@ impl MessageBody for SMSG_PETITION_SHOWLIST {
 
             // petitions: PetitionShowlist[amount_of_petitions]
             for i in self.petitions.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -176,7 +176,7 @@ impl MessageBody for SMSG_PETITION_SHOWLIST {
 
             // petitions: PetitionShowlist[amount_of_petitions]
             for i in self.petitions.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

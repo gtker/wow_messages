@@ -28,7 +28,6 @@ pub fn print_write_field_array(
     variable_name: &str,
     variable_prefix: &str,
     array: &Array,
-    prefix: &str,
     postfix: &str,
 ) {
     s.open_curly(format!(
@@ -43,7 +42,7 @@ pub fn print_write_field_array(
             endian = integer_type.rust_endian_str(),
             postfix = postfix,
         )),
-        ArrayType::Complex(_) => s.wln(format!("i.{}write(w){}?;", prefix, postfix)),
+        ArrayType::Complex(_) => s.wln(format!("w.write_all(&(i.as_bytes()?)){}?;", postfix)),
         ArrayType::CString => {
             s.wln(format!("w.write_all(&i.as_bytes()){}?;", postfix));
             s.wln(format!("w.write_all(&[0]){}?;", postfix));
@@ -107,16 +106,20 @@ pub fn print_write_field_identifier(
     s: &mut Writer,
     variable_name: &str,
     variable_prefix: &str,
-    prefix: &str,
     postfix: &str,
 ) {
     s.wln(format!(
-        "{variable_prefix}{name}.{prefix}write(w){postfix}?;",
+        "w.write_all(&{variable_prefix}{name}.as_bytes()?){postfix}?;",
         name = variable_name,
         variable_prefix = variable_prefix,
-        prefix = prefix,
         postfix = postfix,
     ));
+}
+
+pub fn print_write_no_ok(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
+    for field in e.fields() {
+        print_write_field(s, e, o, field, "self.", prefix, postfix);
+    }
 }
 
 pub fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
@@ -133,7 +136,6 @@ pub fn print_write_definition(
     o: &Objects,
     variable_prefix: &str,
     d: &StructMemberDefinition,
-    prefix: &str,
     postfix: &str,
 ) {
     s.wln(format!(
@@ -193,7 +195,7 @@ pub fn print_write_definition(
             ));
         }
         Type::Array(array) => {
-            print_write_field_array(s, d.name(), variable_prefix, array, prefix, postfix);
+            print_write_field_array(s, d.name(), variable_prefix, array, postfix);
         }
         Type::Identifier {
             s: identifier,
@@ -223,7 +225,7 @@ pub fn print_write_definition(
                 _ => {}
             }
 
-            print_write_field_identifier(s, d.name(), variable_prefix, prefix, postfix);
+            print_write_field_identifier(s, d.name(), variable_prefix, postfix);
         }
         Type::PackedGuid => {
             s.wln(format!(
@@ -319,7 +321,7 @@ pub fn print_write_field(
 ) {
     match field {
         StructMember::Definition(d) => {
-            print_write_definition(s, e, o, variable_prefix, d, prefix, postfix);
+            print_write_definition(s, e, o, variable_prefix, d, postfix);
         }
         StructMember::IfStatement(statement) => match statement.definer_type() {
             DefinerType::Enum => {

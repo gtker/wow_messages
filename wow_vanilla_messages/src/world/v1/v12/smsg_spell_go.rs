@@ -126,11 +126,11 @@ impl MessageBody for SMSG_SPELL_GO {
 
         // misses: SpellMiss[amount_of_misses]
         for i in self.misses.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // targets: SpellCastTargets
-        self.targets.write(w)?;
+        w.write_all(&self.targets.as_bytes()?)?;
 
         if let Some(if_statement) = &self.flags.ammo {
             // ammo_display_id: u32
@@ -262,11 +262,11 @@ impl MessageBody for SMSG_SPELL_GO {
 
             // misses: SpellMiss[amount_of_misses]
             for i in self.misses.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // targets: SpellCastTargets
-            self.targets.tokio_write(w).await?;
+            w.write_all(&self.targets.as_bytes()?).await?;
 
             if let Some(if_statement) = &self.flags.ammo {
                 // ammo_display_id: u32
@@ -399,11 +399,11 @@ impl MessageBody for SMSG_SPELL_GO {
 
             // misses: SpellMiss[amount_of_misses]
             for i in self.misses.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // targets: SpellCastTargets
-            self.targets.astd_write(w).await?;
+            w.write_all(&self.targets.as_bytes()?).await?;
 
             if let Some(if_statement) = &self.flags.ammo {
                 // ammo_display_id: u32

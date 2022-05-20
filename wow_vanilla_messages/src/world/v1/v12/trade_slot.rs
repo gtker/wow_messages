@@ -1,9 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -25,6 +26,53 @@ pub struct TradeSlot {
 }
 
 impl TradeSlot {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // trade_slot_number: u8
+        w.write_all(&self.trade_slot_number.to_le_bytes())?;
+
+        // item_id: u32
+        w.write_all(&self.item_id.to_le_bytes())?;
+
+        // display_id: u32
+        w.write_all(&self.display_id.to_le_bytes())?;
+
+        // stack_count: u32
+        w.write_all(&self.stack_count.to_le_bytes())?;
+
+        // is_wrapped: u32
+        w.write_all(&self.is_wrapped.to_le_bytes())?;
+
+        // gift_wrapper: Guid
+        w.write_all(&self.gift_wrapper.guid().to_le_bytes())?;
+
+        // enchantment: u32
+        w.write_all(&self.enchantment.to_le_bytes())?;
+
+        // item_creator: Guid
+        w.write_all(&self.item_creator.guid().to_le_bytes())?;
+
+        // spell_charges: u32
+        w.write_all(&self.spell_charges.to_le_bytes())?;
+
+        // item_suffix_factor: u32
+        w.write_all(&self.item_suffix_factor.to_le_bytes())?;
+
+        // item_random_properties_id: u32
+        w.write_all(&self.item_random_properties_id.to_le_bytes())?;
+
+        // lock_id: u32
+        w.write_all(&self.lock_id.to_le_bytes())?;
+
+        // max_durability: u32
+        w.write_all(&self.max_durability.to_le_bytes())?;
+
+        // durability: u32
+        w.write_all(&self.durability.to_le_bytes())?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // trade_slot_number: u8
@@ -85,53 +133,6 @@ impl TradeSlot {
             max_durability,
             durability,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // trade_slot_number: u8
-        w.write_all(&self.trade_slot_number.to_le_bytes())?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
-
-        // display_id: u32
-        w.write_all(&self.display_id.to_le_bytes())?;
-
-        // stack_count: u32
-        w.write_all(&self.stack_count.to_le_bytes())?;
-
-        // is_wrapped: u32
-        w.write_all(&self.is_wrapped.to_le_bytes())?;
-
-        // gift_wrapper: Guid
-        w.write_all(&self.gift_wrapper.guid().to_le_bytes())?;
-
-        // enchantment: u32
-        w.write_all(&self.enchantment.to_le_bytes())?;
-
-        // item_creator: Guid
-        w.write_all(&self.item_creator.guid().to_le_bytes())?;
-
-        // spell_charges: u32
-        w.write_all(&self.spell_charges.to_le_bytes())?;
-
-        // item_suffix_factor: u32
-        w.write_all(&self.item_suffix_factor.to_le_bytes())?;
-
-        // item_random_properties_id: u32
-        w.write_all(&self.item_random_properties_id.to_le_bytes())?;
-
-        // lock_id: u32
-        w.write_all(&self.lock_id.to_le_bytes())?;
-
-        // max_durability: u32
-        w.write_all(&self.max_durability.to_le_bytes())?;
-
-        // durability: u32
-        w.write_all(&self.durability.to_le_bytes())?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -196,53 +197,6 @@ impl TradeSlot {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // trade_slot_number: u8
-        w.write_all(&self.trade_slot_number.to_le_bytes()).await?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes()).await?;
-
-        // display_id: u32
-        w.write_all(&self.display_id.to_le_bytes()).await?;
-
-        // stack_count: u32
-        w.write_all(&self.stack_count.to_le_bytes()).await?;
-
-        // is_wrapped: u32
-        w.write_all(&self.is_wrapped.to_le_bytes()).await?;
-
-        // gift_wrapper: Guid
-        w.write_all(&self.gift_wrapper.guid().to_le_bytes()).await?;
-
-        // enchantment: u32
-        w.write_all(&self.enchantment.to_le_bytes()).await?;
-
-        // item_creator: Guid
-        w.write_all(&self.item_creator.guid().to_le_bytes()).await?;
-
-        // spell_charges: u32
-        w.write_all(&self.spell_charges.to_le_bytes()).await?;
-
-        // item_suffix_factor: u32
-        w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
-
-        // item_random_properties_id: u32
-        w.write_all(&self.item_random_properties_id.to_le_bytes()).await?;
-
-        // lock_id: u32
-        w.write_all(&self.lock_id.to_le_bytes()).await?;
-
-        // max_durability: u32
-        w.write_all(&self.max_durability.to_le_bytes()).await?;
-
-        // durability: u32
-        w.write_all(&self.durability.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // trade_slot_number: u8
@@ -303,53 +257,6 @@ impl TradeSlot {
             max_durability,
             durability,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // trade_slot_number: u8
-        w.write_all(&self.trade_slot_number.to_le_bytes()).await?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes()).await?;
-
-        // display_id: u32
-        w.write_all(&self.display_id.to_le_bytes()).await?;
-
-        // stack_count: u32
-        w.write_all(&self.stack_count.to_le_bytes()).await?;
-
-        // is_wrapped: u32
-        w.write_all(&self.is_wrapped.to_le_bytes()).await?;
-
-        // gift_wrapper: Guid
-        w.write_all(&self.gift_wrapper.guid().to_le_bytes()).await?;
-
-        // enchantment: u32
-        w.write_all(&self.enchantment.to_le_bytes()).await?;
-
-        // item_creator: Guid
-        w.write_all(&self.item_creator.guid().to_le_bytes()).await?;
-
-        // spell_charges: u32
-        w.write_all(&self.spell_charges.to_le_bytes()).await?;
-
-        // item_suffix_factor: u32
-        w.write_all(&self.item_suffix_factor.to_le_bytes()).await?;
-
-        // item_random_properties_id: u32
-        w.write_all(&self.item_random_properties_id.to_le_bytes()).await?;
-
-        // lock_id: u32
-        w.write_all(&self.lock_id.to_le_bytes()).await?;
-
-        // max_durability: u32
-        w.write_all(&self.max_durability.to_le_bytes()).await?;
-
-        // durability: u32
-        w.write_all(&self.durability.to_le_bytes()).await?;
-
-        Ok(())
     }
 
 }

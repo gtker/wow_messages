@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{NestedEnum, NestedEnumError};
 use crate::world::v1::v12::{SimpleEnum, SimpleEnumError};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct EnumIfElseIfNested {
@@ -13,6 +14,29 @@ pub struct EnumIfElseIfNested {
 }
 
 impl EnumIfElseIfNested {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // e: SimpleEnum
+        w.write_all(&(self.e.as_int() as u8).to_le_bytes())?;
+
+        // n: NestedEnum
+        w.write_all(&(self.n.as_int() as u8).to_le_bytes())?;
+
+        match &self.e {
+            EnumIfElseIfNestedSimpleEnum::ZERO {
+                zero,
+            } => {
+                // zero: u8
+                w.write_all(&zero.to_le_bytes())?;
+
+            }
+            EnumIfElseIfNestedSimpleEnum::ONE => {}
+            EnumIfElseIfNestedSimpleEnum::TWO => {}
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, EnumIfElseIfNestedError> {
         // e: SimpleEnum
@@ -38,29 +62,6 @@ impl EnumIfElseIfNested {
             e: e_if,
             n: n_if,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // e: SimpleEnum
-        w.write_all(&(self.e.as_int() as u8).to_le_bytes())?;
-
-        // n: NestedEnum
-        w.write_all(&(self.n.as_int() as u8).to_le_bytes())?;
-
-        match &self.e {
-            EnumIfElseIfNestedSimpleEnum::ZERO {
-                zero,
-            } => {
-                // zero: u8
-                w.write_all(&zero.to_le_bytes())?;
-
-            }
-            EnumIfElseIfNestedSimpleEnum::ONE => {}
-            EnumIfElseIfNestedSimpleEnum::TWO => {}
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -90,29 +91,6 @@ impl EnumIfElseIfNested {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // e: SimpleEnum
-        w.write_all(&(self.e.as_int() as u8).to_le_bytes()).await?;
-
-        // n: NestedEnum
-        w.write_all(&(self.n.as_int() as u8).to_le_bytes()).await?;
-
-        match &self.e {
-            EnumIfElseIfNestedSimpleEnum::ZERO {
-                zero,
-            } => {
-                // zero: u8
-                w.write_all(&zero.to_le_bytes()).await?;
-
-            }
-            EnumIfElseIfNestedSimpleEnum::ONE => {}
-            EnumIfElseIfNestedSimpleEnum::TWO => {}
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, EnumIfElseIfNestedError> {
         // e: SimpleEnum
@@ -138,29 +116,6 @@ impl EnumIfElseIfNested {
             e: e_if,
             n: n_if,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // e: SimpleEnum
-        w.write_all(&(self.e.as_int() as u8).to_le_bytes()).await?;
-
-        // n: NestedEnum
-        w.write_all(&(self.n.as_int() as u8).to_le_bytes()).await?;
-
-        match &self.e {
-            EnumIfElseIfNestedSimpleEnum::ZERO {
-                zero,
-            } => {
-                // zero: u8
-                w.write_all(&zero.to_le_bytes()).await?;
-
-            }
-            EnumIfElseIfNestedSimpleEnum::ONE => {}
-            EnumIfElseIfNestedSimpleEnum::TWO => {}
-        }
-
-        Ok(())
     }
 
 }

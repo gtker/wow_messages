@@ -1,9 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{TrainerSpellState, TrainerSpellStateError};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -22,6 +23,44 @@ pub struct TrainerSpell {
 }
 
 impl TrainerSpell {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes())?;
+
+        // state: TrainerSpellState
+        w.write_all(&(self.state.as_int() as u8).to_le_bytes())?;
+
+        // spell_cost: u32
+        w.write_all(&self.spell_cost.to_le_bytes())?;
+
+        // talent_point_cost: u32
+        w.write_all(&self.talent_point_cost.to_le_bytes())?;
+
+        // first_rank: u32
+        w.write_all(&self.first_rank.to_le_bytes())?;
+
+        // required_level: u8
+        w.write_all(&self.required_level.to_le_bytes())?;
+
+        // required_skill: u32
+        w.write_all(&self.required_skill.to_le_bytes())?;
+
+        // required_skill_value: u32
+        w.write_all(&self.required_skill_value.to_le_bytes())?;
+
+        // spell_chain_required: u32
+        w.write_all(&self.spell_chain_required.to_le_bytes())?;
+
+        // spell_chain_previous: u32
+        w.write_all(&self.spell_chain_previous.to_le_bytes())?;
+
+        // unknown1: u32
+        w.write_all(&self.unknown1.to_le_bytes())?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, TrainerSpellError> {
         // spell: u32
@@ -70,44 +109,6 @@ impl TrainerSpell {
             spell_chain_previous,
             unknown1,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes())?;
-
-        // state: TrainerSpellState
-        w.write_all(&(self.state.as_int() as u8).to_le_bytes())?;
-
-        // spell_cost: u32
-        w.write_all(&self.spell_cost.to_le_bytes())?;
-
-        // talent_point_cost: u32
-        w.write_all(&self.talent_point_cost.to_le_bytes())?;
-
-        // first_rank: u32
-        w.write_all(&self.first_rank.to_le_bytes())?;
-
-        // required_level: u8
-        w.write_all(&self.required_level.to_le_bytes())?;
-
-        // required_skill: u32
-        w.write_all(&self.required_skill.to_le_bytes())?;
-
-        // required_skill_value: u32
-        w.write_all(&self.required_skill_value.to_le_bytes())?;
-
-        // spell_chain_required: u32
-        w.write_all(&self.spell_chain_required.to_le_bytes())?;
-
-        // spell_chain_previous: u32
-        w.write_all(&self.spell_chain_previous.to_le_bytes())?;
-
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -160,44 +161,6 @@ impl TrainerSpell {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes()).await?;
-
-        // state: TrainerSpellState
-        w.write_all(&(self.state.as_int() as u8).to_le_bytes()).await?;
-
-        // spell_cost: u32
-        w.write_all(&self.spell_cost.to_le_bytes()).await?;
-
-        // talent_point_cost: u32
-        w.write_all(&self.talent_point_cost.to_le_bytes()).await?;
-
-        // first_rank: u32
-        w.write_all(&self.first_rank.to_le_bytes()).await?;
-
-        // required_level: u8
-        w.write_all(&self.required_level.to_le_bytes()).await?;
-
-        // required_skill: u32
-        w.write_all(&self.required_skill.to_le_bytes()).await?;
-
-        // required_skill_value: u32
-        w.write_all(&self.required_skill_value.to_le_bytes()).await?;
-
-        // spell_chain_required: u32
-        w.write_all(&self.spell_chain_required.to_le_bytes()).await?;
-
-        // spell_chain_previous: u32
-        w.write_all(&self.spell_chain_previous.to_le_bytes()).await?;
-
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, TrainerSpellError> {
         // spell: u32
@@ -246,44 +209,6 @@ impl TrainerSpell {
             spell_chain_previous,
             unknown1,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes()).await?;
-
-        // state: TrainerSpellState
-        w.write_all(&(self.state.as_int() as u8).to_le_bytes()).await?;
-
-        // spell_cost: u32
-        w.write_all(&self.spell_cost.to_le_bytes()).await?;
-
-        // talent_point_cost: u32
-        w.write_all(&self.talent_point_cost.to_le_bytes()).await?;
-
-        // first_rank: u32
-        w.write_all(&self.first_rank.to_le_bytes()).await?;
-
-        // required_level: u8
-        w.write_all(&self.required_level.to_le_bytes()).await?;
-
-        // required_skill: u32
-        w.write_all(&self.required_skill.to_le_bytes()).await?;
-
-        // required_skill_value: u32
-        w.write_all(&self.required_skill_value.to_le_bytes()).await?;
-
-        // spell_chain_required: u32
-        w.write_all(&self.spell_chain_required.to_le_bytes()).await?;
-
-        // spell_chain_previous: u32
-        w.write_all(&self.spell_chain_previous.to_le_bytes()).await?;
-
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes()).await?;
-
-        Ok(())
     }
 
 }

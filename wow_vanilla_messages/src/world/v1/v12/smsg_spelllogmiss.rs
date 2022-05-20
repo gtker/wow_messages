@@ -71,7 +71,7 @@ impl MessageBody for SMSG_SPELLLOGMISS {
 
         // targets: SpellMiss[amount_of_targets]
         for i in self.targets.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -145,7 +145,7 @@ impl MessageBody for SMSG_SPELLLOGMISS {
 
             // targets: SpellMiss[amount_of_targets]
             for i in self.targets.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -220,7 +220,7 @@ impl MessageBody for SMSG_SPELLLOGMISS {
 
             // targets: SpellMiss[amount_of_targets]
             for i in self.targets.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

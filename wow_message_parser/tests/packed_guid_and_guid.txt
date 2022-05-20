@@ -1,9 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct PackedGuidAndGuid {
@@ -16,6 +17,43 @@ pub struct PackedGuidAndGuid {
 }
 
 impl PackedGuidAndGuid {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // packed: PackedGuid
+        w.write_all(&self.packed.packed_guid())?;
+
+        // guid: Guid
+        w.write_all(&self.guid.guid().to_le_bytes())?;
+
+        // static_packed: PackedGuid[10]
+        for i in self.static_packed.iter() {
+            w.write_all(&i.packed_guid())?;
+        }
+
+        // static_guid: Guid[10]
+        for i in self.static_guid.iter() {
+            w.write_all(&i.guid().to_le_bytes())?;
+        }
+
+        // basic1: u8
+        w.write_all(&(self.variable_packed.len() as u8).to_le_bytes())?;
+
+        // basic2: u8
+        w.write_all(&(self.variable_guid.len() as u8).to_le_bytes())?;
+
+        // variable_packed: PackedGuid[basic1]
+        for i in self.variable_packed.iter() {
+            w.write_all(&i.packed_guid())?;
+        }
+
+        // variable_guid: Guid[basic2]
+        for i in self.variable_guid.iter() {
+            w.write_all(&i.guid().to_le_bytes())?;
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // packed: PackedGuid
@@ -64,43 +102,6 @@ impl PackedGuidAndGuid {
             variable_packed,
             variable_guid,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // packed: PackedGuid
-        w.write_all(&self.packed.packed_guid())?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // static_packed: PackedGuid[10]
-        for i in self.static_packed.iter() {
-            w.write_all(&i.packed_guid())?;
-        }
-
-        // static_guid: Guid[10]
-        for i in self.static_guid.iter() {
-            w.write_all(&i.guid().to_le_bytes())?;
-        }
-
-        // basic1: u8
-        w.write_all(&(self.variable_packed.len() as u8).to_le_bytes())?;
-
-        // basic2: u8
-        w.write_all(&(self.variable_guid.len() as u8).to_le_bytes())?;
-
-        // variable_packed: PackedGuid[basic1]
-        for i in self.variable_packed.iter() {
-            w.write_all(&i.packed_guid())?;
-        }
-
-        // variable_guid: Guid[basic2]
-        for i in self.variable_guid.iter() {
-            w.write_all(&i.guid().to_le_bytes())?;
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -153,43 +154,6 @@ impl PackedGuidAndGuid {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // packed: PackedGuid
-        w.write_all(&self.packed.packed_guid()).await?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-        // static_packed: PackedGuid[10]
-        for i in self.static_packed.iter() {
-            w.write_all(&i.packed_guid()).await?;
-        }
-
-        // static_guid: Guid[10]
-        for i in self.static_guid.iter() {
-            w.write_all(&i.guid().to_le_bytes()).await?;
-        }
-
-        // basic1: u8
-        w.write_all(&(self.variable_packed.len() as u8).to_le_bytes()).await?;
-
-        // basic2: u8
-        w.write_all(&(self.variable_guid.len() as u8).to_le_bytes()).await?;
-
-        // variable_packed: PackedGuid[basic1]
-        for i in self.variable_packed.iter() {
-            w.write_all(&i.packed_guid()).await?;
-        }
-
-        // variable_guid: Guid[basic2]
-        for i in self.variable_guid.iter() {
-            w.write_all(&i.guid().to_le_bytes()).await?;
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // packed: PackedGuid
@@ -238,43 +202,6 @@ impl PackedGuidAndGuid {
             variable_packed,
             variable_guid,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // packed: PackedGuid
-        w.write_all(&self.packed.packed_guid()).await?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-        // static_packed: PackedGuid[10]
-        for i in self.static_packed.iter() {
-            w.write_all(&i.packed_guid()).await?;
-        }
-
-        // static_guid: Guid[10]
-        for i in self.static_guid.iter() {
-            w.write_all(&i.guid().to_le_bytes()).await?;
-        }
-
-        // basic1: u8
-        w.write_all(&(self.variable_packed.len() as u8).to_le_bytes()).await?;
-
-        // basic2: u8
-        w.write_all(&(self.variable_guid.len() as u8).to_le_bytes()).await?;
-
-        // variable_packed: PackedGuid[basic1]
-        for i in self.variable_packed.iter() {
-            w.write_all(&i.packed_guid()).await?;
-        }
-
-        // variable_guid: Guid[basic2]
-        for i in self.variable_guid.iter() {
-            w.write_all(&i.guid().to_le_bytes()).await?;
-        }
-
-        Ok(())
     }
 
 }

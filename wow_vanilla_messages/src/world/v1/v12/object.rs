@@ -5,9 +5,10 @@ use crate::world::v1::v12::MovementBlock;
 use crate::world::v1::v12::{ObjectType, ObjectTypeError};
 use crate::world::v1::v12::{UpdateType, UpdateTypeError};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Object {
@@ -15,6 +16,103 @@ pub struct Object {
 }
 
 impl Object {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // update_type: UpdateType
+        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
+
+        match &self.update_type {
+            ObjectUpdateType::VALUES {
+                guid1,
+                mask1,
+            } => {
+                // guid1: PackedGuid
+                w.write_all(&guid1.packed_guid())?;
+
+                // mask1: UpdateMask
+                w.write_all(&mask1.as_bytes())?;
+
+            }
+            ObjectUpdateType::MOVEMENT {
+                guid2,
+                movement1,
+            } => {
+                // guid2: PackedGuid
+                w.write_all(&guid2.packed_guid())?;
+
+                // movement1: MovementBlock
+                w.write_all(&movement1.as_bytes()?)?;
+
+            }
+            ObjectUpdateType::CREATE_OBJECT {
+                guid3,
+                mask2,
+                movement2,
+                object_type,
+            } => {
+                // guid3: PackedGuid
+                w.write_all(&guid3.packed_guid())?;
+
+                // object_type: ObjectType
+                w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
+
+                // movement2: MovementBlock
+                w.write_all(&movement2.as_bytes()?)?;
+
+                // mask2: UpdateMask
+                w.write_all(&mask2.as_bytes())?;
+
+            }
+            ObjectUpdateType::CREATE_OBJECT2 {
+                guid3,
+                mask2,
+                movement2,
+                object_type,
+            } => {
+                // guid3: PackedGuid
+                w.write_all(&guid3.packed_guid())?;
+
+                // object_type: ObjectType
+                w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
+
+                // movement2: MovementBlock
+                w.write_all(&movement2.as_bytes()?)?;
+
+                // mask2: UpdateMask
+                w.write_all(&mask2.as_bytes())?;
+
+            }
+            ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
+                count,
+                guids,
+            } => {
+                // count: u32
+                w.write_all(&count.to_le_bytes())?;
+
+                // guids: PackedGuid[count]
+                for i in guids.iter() {
+                    w.write_all(&i.packed_guid())?;
+                }
+
+            }
+            ObjectUpdateType::NEAR_OBJECTS {
+                count,
+                guids,
+            } => {
+                // count: u32
+                w.write_all(&count.to_le_bytes())?;
+
+                // guids: PackedGuid[count]
+                for i in guids.iter() {
+                    w.write_all(&i.packed_guid())?;
+                }
+
+            }
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ObjectError> {
         // update_type: UpdateType
@@ -120,103 +218,6 @@ impl Object {
         Ok(Self {
             update_type: update_type_if,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // update_type: UpdateType
-        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
-
-        match &self.update_type {
-            ObjectUpdateType::VALUES {
-                guid1,
-                mask1,
-            } => {
-                // guid1: PackedGuid
-                w.write_all(&guid1.packed_guid())?;
-
-                // mask1: UpdateMask
-                w.write_all(&mask1.as_bytes())?;
-
-            }
-            ObjectUpdateType::MOVEMENT {
-                guid2,
-                movement1,
-            } => {
-                // guid2: PackedGuid
-                w.write_all(&guid2.packed_guid())?;
-
-                // movement1: MovementBlock
-                movement1.write(w)?;
-
-            }
-            ObjectUpdateType::CREATE_OBJECT {
-                guid3,
-                mask2,
-                movement2,
-                object_type,
-            } => {
-                // guid3: PackedGuid
-                w.write_all(&guid3.packed_guid())?;
-
-                // object_type: ObjectType
-                w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
-
-                // movement2: MovementBlock
-                movement2.write(w)?;
-
-                // mask2: UpdateMask
-                w.write_all(&mask2.as_bytes())?;
-
-            }
-            ObjectUpdateType::CREATE_OBJECT2 {
-                guid3,
-                mask2,
-                movement2,
-                object_type,
-            } => {
-                // guid3: PackedGuid
-                w.write_all(&guid3.packed_guid())?;
-
-                // object_type: ObjectType
-                w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
-
-                // movement2: MovementBlock
-                movement2.write(w)?;
-
-                // mask2: UpdateMask
-                w.write_all(&mask2.as_bytes())?;
-
-            }
-            ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
-                count,
-                guids,
-            } => {
-                // count: u32
-                w.write_all(&count.to_le_bytes())?;
-
-                // guids: PackedGuid[count]
-                for i in guids.iter() {
-                    w.write_all(&i.packed_guid())?;
-                }
-
-            }
-            ObjectUpdateType::NEAR_OBJECTS {
-                count,
-                guids,
-            } => {
-                // count: u32
-                w.write_all(&count.to_le_bytes())?;
-
-                // guids: PackedGuid[count]
-                for i in guids.iter() {
-                    w.write_all(&i.packed_guid())?;
-                }
-
-            }
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -326,103 +327,6 @@ impl Object {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // update_type: UpdateType
-        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes()).await?;
-
-        match &self.update_type {
-            ObjectUpdateType::VALUES {
-                guid1,
-                mask1,
-            } => {
-                // guid1: PackedGuid
-                w.write_all(&guid1.packed_guid()).await?;
-
-                // mask1: UpdateMask
-                w.write_all(&mask1.as_bytes()).await?;
-
-            }
-            ObjectUpdateType::MOVEMENT {
-                guid2,
-                movement1,
-            } => {
-                // guid2: PackedGuid
-                w.write_all(&guid2.packed_guid()).await?;
-
-                // movement1: MovementBlock
-                movement1.tokio_write(w).await?;
-
-            }
-            ObjectUpdateType::CREATE_OBJECT {
-                guid3,
-                mask2,
-                movement2,
-                object_type,
-            } => {
-                // guid3: PackedGuid
-                w.write_all(&guid3.packed_guid()).await?;
-
-                // object_type: ObjectType
-                w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
-
-                // movement2: MovementBlock
-                movement2.tokio_write(w).await?;
-
-                // mask2: UpdateMask
-                w.write_all(&mask2.as_bytes()).await?;
-
-            }
-            ObjectUpdateType::CREATE_OBJECT2 {
-                guid3,
-                mask2,
-                movement2,
-                object_type,
-            } => {
-                // guid3: PackedGuid
-                w.write_all(&guid3.packed_guid()).await?;
-
-                // object_type: ObjectType
-                w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
-
-                // movement2: MovementBlock
-                movement2.tokio_write(w).await?;
-
-                // mask2: UpdateMask
-                w.write_all(&mask2.as_bytes()).await?;
-
-            }
-            ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
-                count,
-                guids,
-            } => {
-                // count: u32
-                w.write_all(&count.to_le_bytes()).await?;
-
-                // guids: PackedGuid[count]
-                for i in guids.iter() {
-                    w.write_all(&i.packed_guid()).await?;
-                }
-
-            }
-            ObjectUpdateType::NEAR_OBJECTS {
-                count,
-                guids,
-            } => {
-                // count: u32
-                w.write_all(&count.to_le_bytes()).await?;
-
-                // guids: PackedGuid[count]
-                for i in guids.iter() {
-                    w.write_all(&i.packed_guid()).await?;
-                }
-
-            }
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ObjectError> {
         // update_type: UpdateType
@@ -528,103 +432,6 @@ impl Object {
         Ok(Self {
             update_type: update_type_if,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // update_type: UpdateType
-        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes()).await?;
-
-        match &self.update_type {
-            ObjectUpdateType::VALUES {
-                guid1,
-                mask1,
-            } => {
-                // guid1: PackedGuid
-                w.write_all(&guid1.packed_guid()).await?;
-
-                // mask1: UpdateMask
-                w.write_all(&mask1.as_bytes()).await?;
-
-            }
-            ObjectUpdateType::MOVEMENT {
-                guid2,
-                movement1,
-            } => {
-                // guid2: PackedGuid
-                w.write_all(&guid2.packed_guid()).await?;
-
-                // movement1: MovementBlock
-                movement1.astd_write(w).await?;
-
-            }
-            ObjectUpdateType::CREATE_OBJECT {
-                guid3,
-                mask2,
-                movement2,
-                object_type,
-            } => {
-                // guid3: PackedGuid
-                w.write_all(&guid3.packed_guid()).await?;
-
-                // object_type: ObjectType
-                w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
-
-                // movement2: MovementBlock
-                movement2.astd_write(w).await?;
-
-                // mask2: UpdateMask
-                w.write_all(&mask2.as_bytes()).await?;
-
-            }
-            ObjectUpdateType::CREATE_OBJECT2 {
-                guid3,
-                mask2,
-                movement2,
-                object_type,
-            } => {
-                // guid3: PackedGuid
-                w.write_all(&guid3.packed_guid()).await?;
-
-                // object_type: ObjectType
-                w.write_all(&(object_type.as_int() as u8).to_le_bytes()).await?;
-
-                // movement2: MovementBlock
-                movement2.astd_write(w).await?;
-
-                // mask2: UpdateMask
-                w.write_all(&mask2.as_bytes()).await?;
-
-            }
-            ObjectUpdateType::OUT_OF_RANGE_OBJECTS {
-                count,
-                guids,
-            } => {
-                // count: u32
-                w.write_all(&count.to_le_bytes()).await?;
-
-                // guids: PackedGuid[count]
-                for i in guids.iter() {
-                    w.write_all(&i.packed_guid()).await?;
-                }
-
-            }
-            ObjectUpdateType::NEAR_OBJECTS {
-                count,
-                guids,
-            } => {
-                // count: u32
-                w.write_all(&count.to_le_bytes()).await?;
-
-                // guids: PackedGuid[count]
-                for i in guids.iter() {
-                    w.write_all(&i.packed_guid()).await?;
-                }
-
-            }
-        }
-
-        Ok(())
     }
 
 }

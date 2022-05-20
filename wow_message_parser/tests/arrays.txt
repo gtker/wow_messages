@@ -1,9 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{StructWithAllBuiltInTypes, StructWithAllBuiltInTypesError};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Arrays {
@@ -22,6 +23,76 @@ pub struct Arrays {
 }
 
 impl Arrays {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // index: u8
+        w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes())?;
+
+        // basic_fixed_array: u8[20]
+        for i in self.basic_fixed_array.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        // simple_2byte_fixed_array: u16[16]
+        for i in self.simple_2byte_fixed_array.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        // simple_2byte_be_fixed_array: u16_be[16]
+        for i in self.simple_2byte_be_fixed_array.iter() {
+            w.write_all(&i.to_be_bytes())?;
+        }
+
+        // simple_2byte_variable_array: u16[index]
+        for i in self.simple_2byte_variable_array.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        // simple_4byte_be_fixed_array: u32_be[16]
+        for i in self.simple_4byte_be_fixed_array.iter() {
+            w.write_all(&i.to_be_bytes())?;
+        }
+
+        // simple_4byte_variable_array: u32[index]
+        for i in self.simple_4byte_variable_array.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        // simple_8byte_be_fixed_array: u64_be[16]
+        for i in self.simple_8byte_be_fixed_array.iter() {
+            w.write_all(&i.to_be_bytes())?;
+        }
+
+        // simple_8byte_variable_array: u64[index]
+        for i in self.simple_8byte_variable_array.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        // complex_fixed_array: StructWithAllBuiltInTypes[10]
+        for i in self.complex_fixed_array.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // complex_variable_array: StructWithAllBuiltInTypes[index]
+        for i in self.complex_variable_array.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // fixed_cstring_array: CString[10]
+        for i in self.fixed_cstring_array.iter() {
+            w.write_all(&i.as_bytes())?;
+            w.write_all(&[0])?;
+        }
+
+        // variable_cstring_array: CString[index]
+        for i in self.variable_cstring_array.iter() {
+            w.write_all(&i.as_bytes())?;
+            w.write_all(&[0])?;
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, ArraysError> {
         // index: u8
@@ -119,76 +190,6 @@ impl Arrays {
             fixed_cstring_array,
             variable_cstring_array,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // index: u8
-        w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes())?;
-
-        // basic_fixed_array: u8[20]
-        for i in self.basic_fixed_array.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // simple_2byte_fixed_array: u16[16]
-        for i in self.simple_2byte_fixed_array.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // simple_2byte_be_fixed_array: u16_be[16]
-        for i in self.simple_2byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes())?;
-        }
-
-        // simple_2byte_variable_array: u16[index]
-        for i in self.simple_2byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // simple_4byte_be_fixed_array: u32_be[16]
-        for i in self.simple_4byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes())?;
-        }
-
-        // simple_4byte_variable_array: u32[index]
-        for i in self.simple_4byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // simple_8byte_be_fixed_array: u64_be[16]
-        for i in self.simple_8byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes())?;
-        }
-
-        // simple_8byte_variable_array: u64[index]
-        for i in self.simple_8byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // complex_fixed_array: StructWithAllBuiltInTypes[10]
-        for i in self.complex_fixed_array.iter() {
-            i.write(w)?;
-        }
-
-        // complex_variable_array: StructWithAllBuiltInTypes[index]
-        for i in self.complex_variable_array.iter() {
-            i.write(w)?;
-        }
-
-        // fixed_cstring_array: CString[10]
-        for i in self.fixed_cstring_array.iter() {
-            w.write_all(&i.as_bytes())?;
-            w.write_all(&[0])?;
-        }
-
-        // variable_cstring_array: CString[index]
-        for i in self.variable_cstring_array.iter() {
-            w.write_all(&i.as_bytes())?;
-            w.write_all(&[0])?;
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -290,76 +291,6 @@ impl Arrays {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // index: u8
-        w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes()).await?;
-
-        // basic_fixed_array: u8[20]
-        for i in self.basic_fixed_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // simple_2byte_fixed_array: u16[16]
-        for i in self.simple_2byte_fixed_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // simple_2byte_be_fixed_array: u16_be[16]
-        for i in self.simple_2byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
-
-        // simple_2byte_variable_array: u16[index]
-        for i in self.simple_2byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // simple_4byte_be_fixed_array: u32_be[16]
-        for i in self.simple_4byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
-
-        // simple_4byte_variable_array: u32[index]
-        for i in self.simple_4byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // simple_8byte_be_fixed_array: u64_be[16]
-        for i in self.simple_8byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
-
-        // simple_8byte_variable_array: u64[index]
-        for i in self.simple_8byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // complex_fixed_array: StructWithAllBuiltInTypes[10]
-        for i in self.complex_fixed_array.iter() {
-            i.tokio_write(w).await?;
-        }
-
-        // complex_variable_array: StructWithAllBuiltInTypes[index]
-        for i in self.complex_variable_array.iter() {
-            i.tokio_write(w).await?;
-        }
-
-        // fixed_cstring_array: CString[10]
-        for i in self.fixed_cstring_array.iter() {
-            w.write_all(&i.as_bytes()).await?;
-            w.write_all(&[0]).await?;
-        }
-
-        // variable_cstring_array: CString[index]
-        for i in self.variable_cstring_array.iter() {
-            w.write_all(&i.as_bytes()).await?;
-            w.write_all(&[0]).await?;
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, ArraysError> {
         // index: u8
@@ -457,76 +388,6 @@ impl Arrays {
             fixed_cstring_array,
             variable_cstring_array,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // index: u8
-        w.write_all(&(self.variable_cstring_array.len() as u8).to_le_bytes()).await?;
-
-        // basic_fixed_array: u8[20]
-        for i in self.basic_fixed_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // simple_2byte_fixed_array: u16[16]
-        for i in self.simple_2byte_fixed_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // simple_2byte_be_fixed_array: u16_be[16]
-        for i in self.simple_2byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
-
-        // simple_2byte_variable_array: u16[index]
-        for i in self.simple_2byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // simple_4byte_be_fixed_array: u32_be[16]
-        for i in self.simple_4byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
-
-        // simple_4byte_variable_array: u32[index]
-        for i in self.simple_4byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // simple_8byte_be_fixed_array: u64_be[16]
-        for i in self.simple_8byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes()).await?;
-        }
-
-        // simple_8byte_variable_array: u64[index]
-        for i in self.simple_8byte_variable_array.iter() {
-            w.write_all(&i.to_le_bytes()).await?;
-        }
-
-        // complex_fixed_array: StructWithAllBuiltInTypes[10]
-        for i in self.complex_fixed_array.iter() {
-            i.astd_write(w).await?;
-        }
-
-        // complex_variable_array: StructWithAllBuiltInTypes[index]
-        for i in self.complex_variable_array.iter() {
-            i.astd_write(w).await?;
-        }
-
-        // fixed_cstring_array: CString[10]
-        for i in self.fixed_cstring_array.iter() {
-            w.write_all(&i.as_bytes()).await?;
-            w.write_all(&[0]).await?;
-        }
-
-        // variable_cstring_array: CString[index]
-        for i in self.variable_cstring_array.iter() {
-            w.write_all(&i.as_bytes()).await?;
-            w.write_all(&[0]).await?;
-        }
-
-        Ok(())
     }
 
 }

@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Class, ClassError};
 use crate::world::v1::v12::{Race, RaceError};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct WhoPlayer {
@@ -18,6 +19,36 @@ pub struct WhoPlayer {
 }
 
 impl WhoPlayer {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // name: CString
+        w.write_all(self.name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // guild: CString
+        w.write_all(self.guild.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // level: u32
+        w.write_all(&self.level.to_le_bytes())?;
+
+        // class: Class
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
+
+        // race: Race
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
+
+        // zone_id: u32
+        w.write_all(&self.zone_id.to_le_bytes())?;
+
+        // party_status: u32
+        w.write_all(&self.party_status.to_le_bytes())?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, WhoPlayerError> {
         // name: CString
@@ -52,36 +83,6 @@ impl WhoPlayer {
             zone_id,
             party_status,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // guild: CString
-        w.write_all(self.guild.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // level: u32
-        w.write_all(&self.level.to_le_bytes())?;
-
-        // class: Class
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
-
-        // race: Race
-        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
-
-        // zone_id: u32
-        w.write_all(&self.zone_id.to_le_bytes())?;
-
-        // party_status: u32
-        w.write_all(&self.party_status.to_le_bytes())?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -120,36 +121,6 @@ impl WhoPlayer {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // guild: CString
-        w.write_all(self.guild.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // level: u32
-        w.write_all(&self.level.to_le_bytes()).await?;
-
-        // class: Class
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
-
-        // race: Race
-        w.write_all(&(self.race.as_int() as u8).to_le_bytes()).await?;
-
-        // zone_id: u32
-        w.write_all(&self.zone_id.to_le_bytes()).await?;
-
-        // party_status: u32
-        w.write_all(&self.party_status.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, WhoPlayerError> {
         // name: CString
@@ -184,36 +155,6 @@ impl WhoPlayer {
             zone_id,
             party_status,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // guild: CString
-        w.write_all(self.guild.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // level: u32
-        w.write_all(&self.level.to_le_bytes()).await?;
-
-        // class: Class
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
-
-        // race: Race
-        w.write_all(&(self.race.as_int() as u8).to_le_bytes()).await?;
-
-        // zone_id: u32
-        w.write_all(&self.zone_id.to_le_bytes()).await?;
-
-        // party_status: u32
-        w.write_all(&self.party_status.to_le_bytes()).await?;
-
-        Ok(())
     }
 
 }

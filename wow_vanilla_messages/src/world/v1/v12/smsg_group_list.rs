@@ -101,7 +101,7 @@ impl MessageBody for SMSG_GROUP_LIST {
 
         // members: GroupListMember[amount_of_members]
         for i in self.members.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // leader: Guid
@@ -217,7 +217,7 @@ impl MessageBody for SMSG_GROUP_LIST {
 
             // members: GroupListMember[amount_of_members]
             for i in self.members.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // leader: Guid
@@ -334,7 +334,7 @@ impl MessageBody for SMSG_GROUP_LIST {
 
             // members: GroupListMember[amount_of_members]
             for i in self.members.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // leader: Guid

@@ -101,7 +101,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
 
         // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
         for i in self.telemetry_keys.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // security_flag: SecurityFlag
@@ -230,7 +230,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
 
             // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
             for i in self.telemetry_keys.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // security_flag: SecurityFlag
@@ -360,7 +360,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_PROOF_Client {
 
             // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
             for i in self.telemetry_keys.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // security_flag: SecurityFlag

@@ -99,7 +99,7 @@ impl MessageBody for SMSG_SPELL_START {
         w.write_all(&self.timer.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        self.targets.write(w)?;
+        w.write_all(&self.targets.as_bytes()?)?;
 
         if let Some(if_statement) = &self.flags.ammo {
             // ammo_display_id: u32
@@ -206,7 +206,7 @@ impl MessageBody for SMSG_SPELL_START {
             w.write_all(&self.timer.to_le_bytes()).await?;
 
             // targets: SpellCastTargets
-            self.targets.tokio_write(w).await?;
+            w.write_all(&self.targets.as_bytes()?).await?;
 
             if let Some(if_statement) = &self.flags.ammo {
                 // ammo_display_id: u32
@@ -314,7 +314,7 @@ impl MessageBody for SMSG_SPELL_START {
             w.write_all(&self.timer.to_le_bytes()).await?;
 
             // targets: SpellCastTargets
-            self.targets.astd_write(w).await?;
+            w.write_all(&self.targets.as_bytes()?).await?;
 
             if let Some(if_statement) = &self.flags.ammo {
                 // ammo_display_id: u32

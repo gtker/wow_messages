@@ -54,7 +54,7 @@ impl MessageBody for SMSG_WHO {
 
         // players: WhoPlayer[listed_players]
         for i in self.players.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -114,7 +114,7 @@ impl MessageBody for SMSG_WHO {
 
             // players: WhoPlayer[listed_players]
             for i in self.players.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -175,7 +175,7 @@ impl MessageBody for SMSG_WHO {
 
             // players: WhoPlayer[listed_players]
             for i in self.players.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

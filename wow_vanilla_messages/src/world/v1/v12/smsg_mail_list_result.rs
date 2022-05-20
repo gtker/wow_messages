@@ -46,7 +46,7 @@ impl MessageBody for SMSG_MAIL_LIST_RESULT {
 
         // mails: Mail[amount_of_mails]
         for i in self.mails.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -99,7 +99,7 @@ impl MessageBody for SMSG_MAIL_LIST_RESULT {
 
             // mails: Mail[amount_of_mails]
             for i in self.mails.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -153,7 +153,7 @@ impl MessageBody for SMSG_MAIL_LIST_RESULT {
 
             // mails: Mail[amount_of_mails]
             for i in self.mails.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

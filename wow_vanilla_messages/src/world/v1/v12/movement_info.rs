@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{MovementFlags};
 use crate::world::v1::v12::TransportInfo;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MovementInfo {
@@ -18,6 +19,65 @@ pub struct MovementInfo {
 }
 
 impl MovementInfo {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // flags: MovementFlags
+        w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
+
+        // timestamp: u32
+        w.write_all(&self.timestamp.to_le_bytes())?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes())?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes())?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes())?;
+
+        // orientation: f32
+        w.write_all(&self.orientation.to_le_bytes())?;
+
+        if let Some(if_statement) = &self.flags.on_transport {
+            // transport: TransportInfo
+            w.write_all(&if_statement.transport.as_bytes()?)?;
+
+        }
+
+        if let Some(if_statement) = &self.flags.swimming {
+            // pitch: f32
+            w.write_all(&if_statement.pitch.to_le_bytes())?;
+
+        }
+
+        // fall_time: f32
+        w.write_all(&self.fall_time.to_le_bytes())?;
+
+        if let Some(if_statement) = &self.flags.jumping {
+            // z_speed: f32
+            w.write_all(&if_statement.z_speed.to_le_bytes())?;
+
+            // cos_angle: f32
+            w.write_all(&if_statement.cos_angle.to_le_bytes())?;
+
+            // sin_angle: f32
+            w.write_all(&if_statement.sin_angle.to_le_bytes())?;
+
+            // xy_speed: f32
+            w.write_all(&if_statement.xy_speed.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.flags.spline_elevation {
+            // spline_elevation: f32
+            w.write_all(&if_statement.spline_elevation.to_le_bytes())?;
+
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // flags: MovementFlags
@@ -107,65 +167,6 @@ impl MovementInfo {
             orientation,
             fall_time,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // flags: MovementFlags
-        w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
-
-        // timestamp: u32
-        w.write_all(&self.timestamp.to_le_bytes())?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes())?;
-
-        if let Some(if_statement) = &self.flags.on_transport {
-            // transport: TransportInfo
-            if_statement.transport.write(w)?;
-
-        }
-
-        if let Some(if_statement) = &self.flags.swimming {
-            // pitch: f32
-            w.write_all(&if_statement.pitch.to_le_bytes())?;
-
-        }
-
-        // fall_time: f32
-        w.write_all(&self.fall_time.to_le_bytes())?;
-
-        if let Some(if_statement) = &self.flags.jumping {
-            // z_speed: f32
-            w.write_all(&if_statement.z_speed.to_le_bytes())?;
-
-            // cos_angle: f32
-            w.write_all(&if_statement.cos_angle.to_le_bytes())?;
-
-            // sin_angle: f32
-            w.write_all(&if_statement.sin_angle.to_le_bytes())?;
-
-            // xy_speed: f32
-            w.write_all(&if_statement.xy_speed.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.flags.spline_elevation {
-            // spline_elevation: f32
-            w.write_all(&if_statement.spline_elevation.to_le_bytes())?;
-
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -259,65 +260,6 @@ impl MovementInfo {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // flags: MovementFlags
-        w.write_all(&(self.flags.as_int() as u32).to_le_bytes()).await?;
-
-        // timestamp: u32
-        w.write_all(&self.timestamp.to_le_bytes()).await?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes()).await?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes()).await?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes()).await?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes()).await?;
-
-        if let Some(if_statement) = &self.flags.on_transport {
-            // transport: TransportInfo
-            if_statement.transport.tokio_write(w).await?;
-
-        }
-
-        if let Some(if_statement) = &self.flags.swimming {
-            // pitch: f32
-            w.write_all(&if_statement.pitch.to_le_bytes()).await?;
-
-        }
-
-        // fall_time: f32
-        w.write_all(&self.fall_time.to_le_bytes()).await?;
-
-        if let Some(if_statement) = &self.flags.jumping {
-            // z_speed: f32
-            w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
-
-            // cos_angle: f32
-            w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
-
-            // sin_angle: f32
-            w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
-
-            // xy_speed: f32
-            w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.flags.spline_elevation {
-            // spline_elevation: f32
-            w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
-
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // flags: MovementFlags
@@ -407,65 +349,6 @@ impl MovementInfo {
             orientation,
             fall_time,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // flags: MovementFlags
-        w.write_all(&(self.flags.as_int() as u32).to_le_bytes()).await?;
-
-        // timestamp: u32
-        w.write_all(&self.timestamp.to_le_bytes()).await?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes()).await?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes()).await?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes()).await?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes()).await?;
-
-        if let Some(if_statement) = &self.flags.on_transport {
-            // transport: TransportInfo
-            if_statement.transport.astd_write(w).await?;
-
-        }
-
-        if let Some(if_statement) = &self.flags.swimming {
-            // pitch: f32
-            w.write_all(&if_statement.pitch.to_le_bytes()).await?;
-
-        }
-
-        // fall_time: f32
-        w.write_all(&self.fall_time.to_le_bytes()).await?;
-
-        if let Some(if_statement) = &self.flags.jumping {
-            // z_speed: f32
-            w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
-
-            // cos_angle: f32
-            w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
-
-            // sin_angle: f32
-            w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
-
-            // xy_speed: f32
-            w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.flags.spline_elevation {
-            // spline_elevation: f32
-            w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
-
-        }
-
-        Ok(())
     }
 
 }

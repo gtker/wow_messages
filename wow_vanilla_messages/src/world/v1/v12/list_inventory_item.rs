@@ -1,8 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -17,6 +18,32 @@ pub struct ListInventoryItem {
 }
 
 impl ListInventoryItem {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // item_stack_count: u32
+        w.write_all(&self.item_stack_count.to_le_bytes())?;
+
+        // item_id: u32
+        w.write_all(&self.item_id.to_le_bytes())?;
+
+        // item_display_id: u32
+        w.write_all(&self.item_display_id.to_le_bytes())?;
+
+        // max_items: u32
+        w.write_all(&self.max_items.to_le_bytes())?;
+
+        // price: u32
+        w.write_all(&self.price.to_le_bytes())?;
+
+        // max_durability: u32
+        w.write_all(&self.max_durability.to_le_bytes())?;
+
+        // durability: u32
+        w.write_all(&self.durability.to_le_bytes())?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // item_stack_count: u32
@@ -49,32 +76,6 @@ impl ListInventoryItem {
             max_durability,
             durability,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_stack_count: u32
-        w.write_all(&self.item_stack_count.to_le_bytes())?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
-
-        // item_display_id: u32
-        w.write_all(&self.item_display_id.to_le_bytes())?;
-
-        // max_items: u32
-        w.write_all(&self.max_items.to_le_bytes())?;
-
-        // price: u32
-        w.write_all(&self.price.to_le_bytes())?;
-
-        // max_durability: u32
-        w.write_all(&self.max_durability.to_le_bytes())?;
-
-        // durability: u32
-        w.write_all(&self.durability.to_le_bytes())?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -111,32 +112,6 @@ impl ListInventoryItem {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_stack_count: u32
-        w.write_all(&self.item_stack_count.to_le_bytes()).await?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes()).await?;
-
-        // item_display_id: u32
-        w.write_all(&self.item_display_id.to_le_bytes()).await?;
-
-        // max_items: u32
-        w.write_all(&self.max_items.to_le_bytes()).await?;
-
-        // price: u32
-        w.write_all(&self.price.to_le_bytes()).await?;
-
-        // max_durability: u32
-        w.write_all(&self.max_durability.to_le_bytes()).await?;
-
-        // durability: u32
-        w.write_all(&self.durability.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // item_stack_count: u32
@@ -169,32 +144,6 @@ impl ListInventoryItem {
             max_durability,
             durability,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_stack_count: u32
-        w.write_all(&self.item_stack_count.to_le_bytes()).await?;
-
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes()).await?;
-
-        // item_display_id: u32
-        w.write_all(&self.item_display_id.to_le_bytes()).await?;
-
-        // max_items: u32
-        w.write_all(&self.max_items.to_le_bytes()).await?;
-
-        // price: u32
-        w.write_all(&self.price.to_le_bytes()).await?;
-
-        // max_durability: u32
-        w.write_all(&self.max_durability.to_le_bytes()).await?;
-
-        // durability: u32
-        w.write_all(&self.durability.to_le_bytes()).await?;
-
-        Ok(())
     }
 
 }

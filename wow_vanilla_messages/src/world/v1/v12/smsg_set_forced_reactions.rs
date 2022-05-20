@@ -46,7 +46,7 @@ impl MessageBody for SMSG_SET_FORCED_REACTIONS {
 
         // reactions: ForcedReaction[amount_of_reactions]
         for i in self.reactions.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -99,7 +99,7 @@ impl MessageBody for SMSG_SET_FORCED_REACTIONS {
 
             // reactions: ForcedReaction[amount_of_reactions]
             for i in self.reactions.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -153,7 +153,7 @@ impl MessageBody for SMSG_SET_FORCED_REACTIONS {
 
             // reactions: ForcedReaction[amount_of_reactions]
             for i in self.reactions.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

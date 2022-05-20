@@ -79,7 +79,7 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
 
         // players: BattlegroundPlayer[amount_of_players]
         for i in self.players.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -162,7 +162,7 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
 
             // players: BattlegroundPlayer[amount_of_players]
             for i in self.players.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -246,7 +246,7 @@ impl MessageBody for MSG_PVP_LOG_DATA_Server {
 
             // players: BattlegroundPlayer[amount_of_players]
             for i in self.players.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

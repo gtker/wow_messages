@@ -1,8 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -16,6 +17,29 @@ pub struct ItemSpells {
 }
 
 impl ItemSpells {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes())?;
+
+        // spell_trigger: u32
+        w.write_all(&self.spell_trigger.to_le_bytes())?;
+
+        // spell_charges: u32
+        w.write_all(&self.spell_charges.to_le_bytes())?;
+
+        // spell_cooldown: u32
+        w.write_all(&self.spell_cooldown.to_le_bytes())?;
+
+        // spell_category: u32
+        w.write_all(&self.spell_category.to_le_bytes())?;
+
+        // spell_category_cooldown: u32
+        w.write_all(&self.spell_category_cooldown.to_le_bytes())?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // spell: u32
@@ -44,29 +68,6 @@ impl ItemSpells {
             spell_category,
             spell_category_cooldown,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes())?;
-
-        // spell_trigger: u32
-        w.write_all(&self.spell_trigger.to_le_bytes())?;
-
-        // spell_charges: u32
-        w.write_all(&self.spell_charges.to_le_bytes())?;
-
-        // spell_cooldown: u32
-        w.write_all(&self.spell_cooldown.to_le_bytes())?;
-
-        // spell_category: u32
-        w.write_all(&self.spell_category.to_le_bytes())?;
-
-        // spell_category_cooldown: u32
-        w.write_all(&self.spell_category_cooldown.to_le_bytes())?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -99,29 +100,6 @@ impl ItemSpells {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes()).await?;
-
-        // spell_trigger: u32
-        w.write_all(&self.spell_trigger.to_le_bytes()).await?;
-
-        // spell_charges: u32
-        w.write_all(&self.spell_charges.to_le_bytes()).await?;
-
-        // spell_cooldown: u32
-        w.write_all(&self.spell_cooldown.to_le_bytes()).await?;
-
-        // spell_category: u32
-        w.write_all(&self.spell_category.to_le_bytes()).await?;
-
-        // spell_category_cooldown: u32
-        w.write_all(&self.spell_category_cooldown.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // spell: u32
@@ -150,29 +128,6 @@ impl ItemSpells {
             spell_category,
             spell_category_cooldown,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes()).await?;
-
-        // spell_trigger: u32
-        w.write_all(&self.spell_trigger.to_le_bytes()).await?;
-
-        // spell_charges: u32
-        w.write_all(&self.spell_charges.to_le_bytes()).await?;
-
-        // spell_cooldown: u32
-        w.write_all(&self.spell_cooldown.to_le_bytes()).await?;
-
-        // spell_category: u32
-        w.write_all(&self.spell_category.to_le_bytes()).await?;
-
-        // spell_category_cooldown: u32
-        w.write_all(&self.spell_category_cooldown.to_le_bytes()).await?;
-
-        Ok(())
     }
 
 }

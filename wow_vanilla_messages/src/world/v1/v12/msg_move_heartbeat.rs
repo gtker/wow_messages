@@ -38,7 +38,7 @@ impl MessageBody for MSG_MOVE_HEARTBEAT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // info: MovementInfo
-        self.info.write(w)?;
+        w.write_all(&self.info.as_bytes()?)?;
 
         Ok(())
     }
@@ -80,7 +80,7 @@ impl MessageBody for MSG_MOVE_HEARTBEAT {
      {
         Box::pin(async move {
             // info: MovementInfo
-            self.info.tokio_write(w).await?;
+            w.write_all(&self.info.as_bytes()?).await?;
 
             Ok(())
         })
@@ -123,7 +123,7 @@ impl MessageBody for MSG_MOVE_HEARTBEAT {
      {
         Box::pin(async move {
             // info: MovementInfo
-            self.info.astd_write(w).await?;
+            w.write_all(&self.info.as_bytes()?).await?;
 
             Ok(())
         })

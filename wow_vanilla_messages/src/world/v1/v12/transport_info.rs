@@ -1,9 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct TransportInfo {
@@ -16,6 +17,29 @@ pub struct TransportInfo {
 }
 
 impl TransportInfo {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // guid: PackedGuid
+        w.write_all(&self.guid.packed_guid())?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes())?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes())?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes())?;
+
+        // orientation: f32
+        w.write_all(&self.orientation.to_le_bytes())?;
+
+        // timestamp: u32
+        w.write_all(&self.timestamp.to_le_bytes())?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // guid: PackedGuid
@@ -40,29 +64,6 @@ impl TransportInfo {
             orientation,
             timestamp,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid())?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes())?;
-
-        // timestamp: u32
-        w.write_all(&self.timestamp.to_le_bytes())?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -91,29 +92,6 @@ impl TransportInfo {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid()).await?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes()).await?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes()).await?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes()).await?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes()).await?;
-
-        // timestamp: u32
-        w.write_all(&self.timestamp.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // guid: PackedGuid
@@ -138,29 +116,6 @@ impl TransportInfo {
             orientation,
             timestamp,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: PackedGuid
-        w.write_all(&self.guid.packed_guid()).await?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes()).await?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes()).await?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes()).await?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes()).await?;
-
-        // timestamp: u32
-        w.write_all(&self.timestamp.to_le_bytes()).await?;
-
-        Ok(())
     }
 
 }

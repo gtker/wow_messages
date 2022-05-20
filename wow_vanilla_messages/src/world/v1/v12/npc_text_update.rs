@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Language, LanguageError};
 use crate::world::v1::v12::NpcTextUpdateEmote;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct NpcTextUpdate {
@@ -15,6 +16,28 @@ pub struct NpcTextUpdate {
 }
 
 impl NpcTextUpdate {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // probability: f32
+        w.write_all(&self.probability.to_le_bytes())?;
+
+        // texts: CString[2]
+        for i in self.texts.iter() {
+            w.write_all(&i.as_bytes())?;
+            w.write_all(&[0])?;
+        }
+
+        // language: Language
+        w.write_all(&(self.language.as_int() as u32).to_le_bytes())?;
+
+        // emotes: NpcTextUpdateEmote[3]
+        for i in self.emotes.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, NpcTextUpdateError> {
         // probability: f32
@@ -43,28 +66,6 @@ impl NpcTextUpdate {
             language,
             emotes,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // probability: f32
-        w.write_all(&self.probability.to_le_bytes())?;
-
-        // texts: CString[2]
-        for i in self.texts.iter() {
-            w.write_all(&i.as_bytes())?;
-            w.write_all(&[0])?;
-        }
-
-        // language: Language
-        w.write_all(&(self.language.as_int() as u32).to_le_bytes())?;
-
-        // emotes: NpcTextUpdateEmote[3]
-        for i in self.emotes.iter() {
-            i.write(w)?;
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -97,28 +98,6 @@ impl NpcTextUpdate {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // probability: f32
-        w.write_all(&self.probability.to_le_bytes()).await?;
-
-        // texts: CString[2]
-        for i in self.texts.iter() {
-            w.write_all(&i.as_bytes()).await?;
-            w.write_all(&[0]).await?;
-        }
-
-        // language: Language
-        w.write_all(&(self.language.as_int() as u32).to_le_bytes()).await?;
-
-        // emotes: NpcTextUpdateEmote[3]
-        for i in self.emotes.iter() {
-            i.tokio_write(w).await?;
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, NpcTextUpdateError> {
         // probability: f32
@@ -147,28 +126,6 @@ impl NpcTextUpdate {
             language,
             emotes,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // probability: f32
-        w.write_all(&self.probability.to_le_bytes()).await?;
-
-        // texts: CString[2]
-        for i in self.texts.iter() {
-            w.write_all(&i.as_bytes()).await?;
-            w.write_all(&[0]).await?;
-        }
-
-        // language: Language
-        w.write_all(&(self.language.as_int() as u32).to_le_bytes()).await?;
-
-        // emotes: NpcTextUpdateEmote[3]
-        for i in self.emotes.iter() {
-            i.astd_write(w).await?;
-        }
-
-        Ok(())
     }
 
 }

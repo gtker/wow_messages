@@ -37,7 +37,7 @@ impl MessageBody for SMSG_UPDATE_WORLD_STATE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // state: WorldState
-        self.state.write(w)?;
+        w.write_all(&self.state.as_bytes()?)?;
 
         Ok(())
     }
@@ -79,7 +79,7 @@ impl MessageBody for SMSG_UPDATE_WORLD_STATE {
      {
         Box::pin(async move {
             // state: WorldState
-            self.state.tokio_write(w).await?;
+            w.write_all(&self.state.as_bytes()?).await?;
 
             Ok(())
         })
@@ -122,7 +122,7 @@ impl MessageBody for SMSG_UPDATE_WORLD_STATE {
      {
         Box::pin(async move {
             // state: WorldState
-            self.state.astd_write(w).await?;
+            w.write_all(&self.state.as_bytes()?).await?;
 
             Ok(())
         })

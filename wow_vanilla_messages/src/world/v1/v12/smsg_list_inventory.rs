@@ -55,7 +55,7 @@ impl MessageBody for SMSG_LIST_INVENTORY {
 
         // items: ListInventoryItem[amount_of_items]
         for i in self.items.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -115,7 +115,7 @@ impl MessageBody for SMSG_LIST_INVENTORY {
 
             // items: ListInventoryItem[amount_of_items]
             for i in self.items.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -176,7 +176,7 @@ impl MessageBody for SMSG_LIST_INVENTORY {
 
             // items: ListInventoryItem[amount_of_items]
             for i in self.items.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

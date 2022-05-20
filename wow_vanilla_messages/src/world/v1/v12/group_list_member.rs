@@ -1,9 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct GroupListMember {
@@ -13,6 +14,22 @@ pub struct GroupListMember {
 }
 
 impl GroupListMember {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // name: CString
+        w.write_all(self.name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // guid: Guid
+        w.write_all(&self.guid.guid().to_le_bytes())?;
+
+        // is_online: u8
+        w.write_all(&self.is_online.to_le_bytes())?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, GroupListMemberError> {
         // name: CString
@@ -30,22 +47,6 @@ impl GroupListMember {
             guid,
             is_online,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // is_online: u8
-        w.write_all(&self.is_online.to_le_bytes())?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -67,22 +68,6 @@ impl GroupListMember {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-        // is_online: u8
-        w.write_all(&self.is_online.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, GroupListMemberError> {
         // name: CString
@@ -100,22 +85,6 @@ impl GroupListMember {
             guid,
             is_online,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-        // is_online: u8
-        w.write_all(&self.is_online.to_le_bytes()).await?;
-
-        Ok(())
     }
 
 }

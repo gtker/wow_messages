@@ -56,7 +56,7 @@ impl MessageBody for MessageWithComplexTypes {
         w.write_all(&(self.simple_flag.as_int() as u8).to_le_bytes())?;
 
         // simple_struct: StructWithAllBuiltInTypes
-        self.simple_struct.write(w)?;
+        w.write_all(&self.simple_struct.as_bytes()?)?;
 
         Ok(())
     }
@@ -112,7 +112,7 @@ impl MessageBody for MessageWithComplexTypes {
             w.write_all(&(self.simple_flag.as_int() as u8).to_le_bytes()).await?;
 
             // simple_struct: StructWithAllBuiltInTypes
-            self.simple_struct.tokio_write(w).await?;
+            w.write_all(&self.simple_struct.as_bytes()?).await?;
 
             Ok(())
         })
@@ -169,7 +169,7 @@ impl MessageBody for MessageWithComplexTypes {
             w.write_all(&(self.simple_flag.as_int() as u8).to_le_bytes()).await?;
 
             // simple_struct: StructWithAllBuiltInTypes
-            self.simple_struct.astd_write(w).await?;
+            w.write_all(&self.simple_struct.as_bytes()?).await?;
 
             Ok(())
         })

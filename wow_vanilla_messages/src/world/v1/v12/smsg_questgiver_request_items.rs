@@ -138,7 +138,7 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
         // required_items: QuestItemRequirement[amount_of_required_items]
         for i in self.required_items.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // unknown1: u32
@@ -281,7 +281,7 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
             // required_items: QuestItemRequirement[amount_of_required_items]
             for i in self.required_items.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // unknown1: u32
@@ -425,7 +425,7 @@ impl MessageBody for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
             // required_items: QuestItemRequirement[amount_of_required_items]
             for i in self.required_items.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // unknown1: u32

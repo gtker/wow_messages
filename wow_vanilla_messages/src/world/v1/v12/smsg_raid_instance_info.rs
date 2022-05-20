@@ -46,7 +46,7 @@ impl MessageBody for SMSG_RAID_INSTANCE_INFO {
 
         // raid_infos: RaidInfo[amount_of_raid_infos]
         for i in self.raid_infos.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -99,7 +99,7 @@ impl MessageBody for SMSG_RAID_INSTANCE_INFO {
 
             // raid_infos: RaidInfo[amount_of_raid_infos]
             for i in self.raid_infos.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -153,7 +153,7 @@ impl MessageBody for SMSG_RAID_INSTANCE_INFO {
 
             // raid_infos: RaidInfo[amount_of_raid_infos]
             for i in self.raid_infos.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

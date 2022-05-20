@@ -58,7 +58,7 @@ impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
         // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
         for i in self.flag_carriers.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -118,7 +118,7 @@ impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
             // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
             for i in self.flag_carriers.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -179,7 +179,7 @@ impl MessageBody for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
             // flag_carriers: BattlegroundPlayerPosition[amount_of_flag_carriers]
             for i in self.flag_carriers.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

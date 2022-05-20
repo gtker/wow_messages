@@ -137,7 +137,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
         // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
         for i in self.choice_item_rewards.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // amount_of_item_rewards: u32
@@ -145,7 +145,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
         // item_rewards: QuestItemReward[amount_of_item_rewards]
         for i in self.item_rewards.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // money_reward: u32
@@ -159,7 +159,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
         // emotes: QuestDetailsEmote[amount_of_emotes]
         for i in self.emotes.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -291,7 +291,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
             // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
             for i in self.choice_item_rewards.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // amount_of_item_rewards: u32
@@ -299,7 +299,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
             // item_rewards: QuestItemReward[amount_of_item_rewards]
             for i in self.item_rewards.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // money_reward: u32
@@ -313,7 +313,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
             // emotes: QuestDetailsEmote[amount_of_emotes]
             for i in self.emotes.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -446,7 +446,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
             // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
             for i in self.choice_item_rewards.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // amount_of_item_rewards: u32
@@ -454,7 +454,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
             // item_rewards: QuestItemReward[amount_of_item_rewards]
             for i in self.item_rewards.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // money_reward: u32
@@ -468,7 +468,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_DETAILS {
 
             // emotes: QuestDetailsEmote[amount_of_emotes]
             for i in self.emotes.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

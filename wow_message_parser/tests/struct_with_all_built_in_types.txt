@@ -1,8 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct StructWithAllBuiltInTypes {
@@ -21,6 +22,52 @@ pub struct StructWithAllBuiltInTypes {
 }
 
 impl StructWithAllBuiltInTypes {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // basic8: u8
+        w.write_all(&(self.simple_string.len() as u8).to_le_bytes())?;
+
+        // basic16: u16
+        w.write_all(&self.basic16.to_le_bytes())?;
+
+        // basic32: u32
+        w.write_all(&self.basic32.to_le_bytes())?;
+
+        // basic64: u64
+        w.write_all(&self.basic64.to_le_bytes())?;
+
+        // basic16_be: u16_be
+        w.write_all(&self.basic16_be.to_be_bytes())?;
+
+        // basic32_be: u32_be
+        w.write_all(&self.basic32_be.to_be_bytes())?;
+
+        // basic64_be: u64_be
+        w.write_all(&self.basic64_be.to_be_bytes())?;
+
+        // decimal32: f32
+        w.write_all(&self.decimal32.to_le_bytes())?;
+
+        // decimal32_be: f32_be
+        w.write_all(&self.decimal32_be.to_be_bytes())?;
+
+        // decimal64: f64
+        w.write_all(&self.decimal64.to_le_bytes())?;
+
+        // decimal64_be: f64_be
+        w.write_all(&self.decimal64_be.to_be_bytes())?;
+
+        // simple_cstring: CString
+        w.write_all(self.simple_cstring.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // simple_string: String[basic8]
+        w.write_all(self.simple_string.as_bytes())?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, StructWithAllBuiltInTypesError> {
         // basic8: u8
@@ -74,52 +121,6 @@ impl StructWithAllBuiltInTypes {
             simple_cstring,
             simple_string,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // basic8: u8
-        w.write_all(&(self.simple_string.len() as u8).to_le_bytes())?;
-
-        // basic16: u16
-        w.write_all(&self.basic16.to_le_bytes())?;
-
-        // basic32: u32
-        w.write_all(&self.basic32.to_le_bytes())?;
-
-        // basic64: u64
-        w.write_all(&self.basic64.to_le_bytes())?;
-
-        // basic16_be: u16_be
-        w.write_all(&self.basic16_be.to_be_bytes())?;
-
-        // basic32_be: u32_be
-        w.write_all(&self.basic32_be.to_be_bytes())?;
-
-        // basic64_be: u64_be
-        w.write_all(&self.basic64_be.to_be_bytes())?;
-
-        // decimal32: f32
-        w.write_all(&self.decimal32.to_le_bytes())?;
-
-        // decimal32_be: f32_be
-        w.write_all(&self.decimal32_be.to_be_bytes())?;
-
-        // decimal64: f64
-        w.write_all(&self.decimal64.to_le_bytes())?;
-
-        // decimal64_be: f64_be
-        w.write_all(&self.decimal64_be.to_be_bytes())?;
-
-        // simple_cstring: CString
-        w.write_all(self.simple_cstring.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // simple_string: String[basic8]
-        w.write_all(self.simple_string.as_bytes())?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -177,52 +178,6 @@ impl StructWithAllBuiltInTypes {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // basic8: u8
-        w.write_all(&(self.simple_string.len() as u8).to_le_bytes()).await?;
-
-        // basic16: u16
-        w.write_all(&self.basic16.to_le_bytes()).await?;
-
-        // basic32: u32
-        w.write_all(&self.basic32.to_le_bytes()).await?;
-
-        // basic64: u64
-        w.write_all(&self.basic64.to_le_bytes()).await?;
-
-        // basic16_be: u16_be
-        w.write_all(&self.basic16_be.to_be_bytes()).await?;
-
-        // basic32_be: u32_be
-        w.write_all(&self.basic32_be.to_be_bytes()).await?;
-
-        // basic64_be: u64_be
-        w.write_all(&self.basic64_be.to_be_bytes()).await?;
-
-        // decimal32: f32
-        w.write_all(&self.decimal32.to_le_bytes()).await?;
-
-        // decimal32_be: f32_be
-        w.write_all(&self.decimal32_be.to_be_bytes()).await?;
-
-        // decimal64: f64
-        w.write_all(&self.decimal64.to_le_bytes()).await?;
-
-        // decimal64_be: f64_be
-        w.write_all(&self.decimal64_be.to_be_bytes()).await?;
-
-        // simple_cstring: CString
-        w.write_all(self.simple_cstring.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // simple_string: String[basic8]
-        w.write_all(self.simple_string.as_bytes()).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, StructWithAllBuiltInTypesError> {
         // basic8: u8
@@ -276,52 +231,6 @@ impl StructWithAllBuiltInTypes {
             simple_cstring,
             simple_string,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // basic8: u8
-        w.write_all(&(self.simple_string.len() as u8).to_le_bytes()).await?;
-
-        // basic16: u16
-        w.write_all(&self.basic16.to_le_bytes()).await?;
-
-        // basic32: u32
-        w.write_all(&self.basic32.to_le_bytes()).await?;
-
-        // basic64: u64
-        w.write_all(&self.basic64.to_le_bytes()).await?;
-
-        // basic16_be: u16_be
-        w.write_all(&self.basic16_be.to_be_bytes()).await?;
-
-        // basic32_be: u32_be
-        w.write_all(&self.basic32_be.to_be_bytes()).await?;
-
-        // basic64_be: u64_be
-        w.write_all(&self.basic64_be.to_be_bytes()).await?;
-
-        // decimal32: f32
-        w.write_all(&self.decimal32.to_le_bytes()).await?;
-
-        // decimal32_be: f32_be
-        w.write_all(&self.decimal32_be.to_be_bytes()).await?;
-
-        // decimal64: f64
-        w.write_all(&self.decimal64.to_le_bytes()).await?;
-
-        // decimal64_be: f64_be
-        w.write_all(&self.decimal64_be.to_be_bytes()).await?;
-
-        // simple_cstring: CString
-        w.write_all(self.simple_cstring.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // simple_string: String[basic8]
-        w.write_all(self.simple_string.as_bytes()).await?;
-
-        Ok(())
     }
 
 }

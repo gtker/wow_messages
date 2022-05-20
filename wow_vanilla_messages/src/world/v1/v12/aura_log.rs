@@ -2,9 +2,10 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{AuraType, AuraTypeError};
 use crate::world::v1::v12::{SpellSchool, SpellSchoolError};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct AuraLog {
@@ -12,6 +13,291 @@ pub struct AuraLog {
 }
 
 impl AuraLog {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // aura_type: AuraType
+        w.write_all(&(self.aura_type.as_int() as u32).to_le_bytes())?;
+
+        match &self.aura_type {
+            AuraLogAuraType::NONE => {}
+            AuraLogAuraType::BIND_SIGHT => {}
+            AuraLogAuraType::MOD_POSSESS => {}
+            AuraLogAuraType::PERIODIC_DAMAGE {
+                absorbed,
+                damage1,
+                resisted,
+                school,
+            } => {
+                // damage1: u32
+                w.write_all(&damage1.to_le_bytes())?;
+
+                // school: SpellSchool
+                w.write_all(&(school.as_int() as u8).to_le_bytes())?;
+
+                // absorbed: u32
+                w.write_all(&absorbed.to_le_bytes())?;
+
+                // resisted: u32
+                w.write_all(&resisted.to_le_bytes())?;
+
+            }
+            AuraLogAuraType::DUMMY => {}
+            AuraLogAuraType::MOD_CONFUSE => {}
+            AuraLogAuraType::MOD_CHARM => {}
+            AuraLogAuraType::MOD_FEAR => {}
+            AuraLogAuraType::PERIODIC_HEAL {
+                damage2,
+            } => {
+                // damage2: u32
+                w.write_all(&damage2.to_le_bytes())?;
+
+            }
+            AuraLogAuraType::MOD_ATTACKSPEED => {}
+            AuraLogAuraType::MOD_THREAT => {}
+            AuraLogAuraType::MOD_TAUNT => {}
+            AuraLogAuraType::MOD_STUN => {}
+            AuraLogAuraType::MOD_DAMAGE_DONE => {}
+            AuraLogAuraType::MOD_DAMAGE_TAKEN => {}
+            AuraLogAuraType::DAMAGE_SHIELD => {}
+            AuraLogAuraType::MOD_STEALTH => {}
+            AuraLogAuraType::MOD_STEALTH_DETECT => {}
+            AuraLogAuraType::MOD_INVISIBILITY => {}
+            AuraLogAuraType::MOD_INVISIBILITY_DETECTION => {}
+            AuraLogAuraType::OBS_MOD_HEALTH {
+                damage2,
+            } => {
+                // damage2: u32
+                w.write_all(&damage2.to_le_bytes())?;
+
+            }
+            AuraLogAuraType::OBS_MOD_MANA {
+                damage3,
+                misc_value1,
+            } => {
+                // misc_value1: u32
+                w.write_all(&misc_value1.to_le_bytes())?;
+
+                // damage3: u32
+                w.write_all(&damage3.to_le_bytes())?;
+
+            }
+            AuraLogAuraType::MOD_RESISTANCE => {}
+            AuraLogAuraType::PERIODIC_TRIGGER_SPELL => {}
+            AuraLogAuraType::PERIODIC_ENERGIZE {
+                damage3,
+                misc_value1,
+            } => {
+                // misc_value1: u32
+                w.write_all(&misc_value1.to_le_bytes())?;
+
+                // damage3: u32
+                w.write_all(&damage3.to_le_bytes())?;
+
+            }
+            AuraLogAuraType::MOD_PACIFY => {}
+            AuraLogAuraType::MOD_ROOT => {}
+            AuraLogAuraType::MOD_SILENCE => {}
+            AuraLogAuraType::REFLECT_SPELLS => {}
+            AuraLogAuraType::MOD_STAT => {}
+            AuraLogAuraType::MOD_SKILL => {}
+            AuraLogAuraType::MOD_INCREASE_SPEED => {}
+            AuraLogAuraType::MOD_INCREASE_MOUNTED_SPEED => {}
+            AuraLogAuraType::MOD_DECREASE_SPEED => {}
+            AuraLogAuraType::MOD_INCREASE_HEALTH => {}
+            AuraLogAuraType::MOD_INCREASE_ENERGY => {}
+            AuraLogAuraType::MOD_SHAPESHIFT => {}
+            AuraLogAuraType::EFFECT_IMMUNITY => {}
+            AuraLogAuraType::STATE_IMMUNITY => {}
+            AuraLogAuraType::SCHOOL_IMMUNITY => {}
+            AuraLogAuraType::DAMAGE_IMMUNITY => {}
+            AuraLogAuraType::DISPEL_IMMUNITY => {}
+            AuraLogAuraType::PROC_TRIGGER_SPELL => {}
+            AuraLogAuraType::PROC_TRIGGER_DAMAGE => {}
+            AuraLogAuraType::TRACK_CREATURES => {}
+            AuraLogAuraType::TRACK_RESOURCES => {}
+            AuraLogAuraType::UNKNOWN46 => {}
+            AuraLogAuraType::MOD_PARRY_PERCENT => {}
+            AuraLogAuraType::UNKNOWN48 => {}
+            AuraLogAuraType::MOD_DODGE_PERCENT => {}
+            AuraLogAuraType::MOD_BLOCK_SKILL => {}
+            AuraLogAuraType::MOD_BLOCK_PERCENT => {}
+            AuraLogAuraType::MOD_CRIT_PERCENT => {}
+            AuraLogAuraType::PERIODIC_LEECH => {}
+            AuraLogAuraType::MOD_HIT_CHANCE => {}
+            AuraLogAuraType::MOD_SPELL_HIT_CHANCE => {}
+            AuraLogAuraType::TRANSFORM => {}
+            AuraLogAuraType::MOD_SPELL_CRIT_CHANCE => {}
+            AuraLogAuraType::MOD_INCREASE_SWIM_SPEED => {}
+            AuraLogAuraType::MOD_DAMAGE_DONE_CREATURE => {}
+            AuraLogAuraType::MOD_PACIFY_SILENCE => {}
+            AuraLogAuraType::MOD_SCALE => {}
+            AuraLogAuraType::PERIODIC_HEALTH_FUNNEL => {}
+            AuraLogAuraType::PERIODIC_MANA_FUNNEL => {}
+            AuraLogAuraType::PERIODIC_MANA_LEECH {
+                damage,
+                gain_multiplier,
+                misc_value2,
+            } => {
+                // misc_value2: u32
+                w.write_all(&misc_value2.to_le_bytes())?;
+
+                // damage: u32
+                w.write_all(&damage.to_le_bytes())?;
+
+                // gain_multiplier: f32
+                w.write_all(&gain_multiplier.to_le_bytes())?;
+
+            }
+            AuraLogAuraType::MOD_CASTING_SPEED_NOT_STACK => {}
+            AuraLogAuraType::FEIGN_DEATH => {}
+            AuraLogAuraType::MOD_DISARM => {}
+            AuraLogAuraType::MOD_STALKED => {}
+            AuraLogAuraType::SCHOOL_ABSORB => {}
+            AuraLogAuraType::EXTRA_ATTACKS => {}
+            AuraLogAuraType::MOD_SPELL_CRIT_CHANCE_SCHOOL => {}
+            AuraLogAuraType::MOD_POWER_COST_SCHOOL_PCT => {}
+            AuraLogAuraType::MOD_POWER_COST_SCHOOL => {}
+            AuraLogAuraType::REFLECT_SPELLS_SCHOOL => {}
+            AuraLogAuraType::MOD_LANGUAGE => {}
+            AuraLogAuraType::FAR_SIGHT => {}
+            AuraLogAuraType::MECHANIC_IMMUNITY => {}
+            AuraLogAuraType::MOUNTED => {}
+            AuraLogAuraType::MOD_DAMAGE_PERCENT_DONE => {}
+            AuraLogAuraType::MOD_PERCENT_STAT => {}
+            AuraLogAuraType::SPLIT_DAMAGE_PCT => {}
+            AuraLogAuraType::WATER_BREATHING => {}
+            AuraLogAuraType::MOD_BASE_RESISTANCE => {}
+            AuraLogAuraType::MOD_REGEN => {}
+            AuraLogAuraType::MOD_POWER_REGEN => {}
+            AuraLogAuraType::CHANNEL_DEATH_ITEM => {}
+            AuraLogAuraType::MOD_DAMAGE_PERCENT_TAKEN => {}
+            AuraLogAuraType::MOD_HEALTH_REGEN_PERCENT => {}
+            AuraLogAuraType::PERIODIC_DAMAGE_PERCENT {
+                absorbed,
+                damage1,
+                resisted,
+                school,
+            } => {
+                // damage1: u32
+                w.write_all(&damage1.to_le_bytes())?;
+
+                // school: SpellSchool
+                w.write_all(&(school.as_int() as u8).to_le_bytes())?;
+
+                // absorbed: u32
+                w.write_all(&absorbed.to_le_bytes())?;
+
+                // resisted: u32
+                w.write_all(&resisted.to_le_bytes())?;
+
+            }
+            AuraLogAuraType::MOD_RESIST_CHANCE => {}
+            AuraLogAuraType::MOD_DETECT_RANGE => {}
+            AuraLogAuraType::PREVENTS_FLEEING => {}
+            AuraLogAuraType::MOD_UNATTACKABLE => {}
+            AuraLogAuraType::INTERRUPT_REGEN => {}
+            AuraLogAuraType::GHOST => {}
+            AuraLogAuraType::SPELL_MAGNET => {}
+            AuraLogAuraType::MANA_SHIELD => {}
+            AuraLogAuraType::MOD_SKILL_TALENT => {}
+            AuraLogAuraType::MOD_ATTACK_POWER => {}
+            AuraLogAuraType::AURAS_VISIBLE => {}
+            AuraLogAuraType::MOD_RESISTANCE_PCT => {}
+            AuraLogAuraType::MOD_MELEE_ATTACK_POWER_VERSUS => {}
+            AuraLogAuraType::MOD_TOTAL_THREAT => {}
+            AuraLogAuraType::WATER_WALK => {}
+            AuraLogAuraType::FEATHER_FALL => {}
+            AuraLogAuraType::HOVER => {}
+            AuraLogAuraType::ADD_FLAT_MODIFIER => {}
+            AuraLogAuraType::ADD_PCT_MODIFIER => {}
+            AuraLogAuraType::ADD_TARGET_TRIGGER => {}
+            AuraLogAuraType::MOD_POWER_REGEN_PERCENT => {}
+            AuraLogAuraType::ADD_CASTER_HIT_TRIGGER => {}
+            AuraLogAuraType::OVERRIDE_CLASS_SCRIPTS => {}
+            AuraLogAuraType::MOD_RANGED_DAMAGE_TAKEN => {}
+            AuraLogAuraType::MOD_RANGED_DAMAGE_TAKEN_PCT => {}
+            AuraLogAuraType::MOD_HEALING => {}
+            AuraLogAuraType::MOD_REGEN_DURING_COMBAT => {}
+            AuraLogAuraType::MOD_MECHANIC_RESISTANCE => {}
+            AuraLogAuraType::MOD_HEALING_PCT => {}
+            AuraLogAuraType::SHARE_PET_TRACKING => {}
+            AuraLogAuraType::UNTRACKABLE => {}
+            AuraLogAuraType::EMPATHY => {}
+            AuraLogAuraType::MOD_OFFHAND_DAMAGE_PCT => {}
+            AuraLogAuraType::MOD_TARGET_RESISTANCE => {}
+            AuraLogAuraType::MOD_RANGED_ATTACK_POWER => {}
+            AuraLogAuraType::MOD_MELEE_DAMAGE_TAKEN => {}
+            AuraLogAuraType::MOD_MELEE_DAMAGE_TAKEN_PCT => {}
+            AuraLogAuraType::RANGED_ATTACK_POWER_ATTACKER_BONUS => {}
+            AuraLogAuraType::MOD_POSSESS_PET => {}
+            AuraLogAuraType::MOD_SPEED_ALWAYS => {}
+            AuraLogAuraType::MOD_MOUNTED_SPEED_ALWAYS => {}
+            AuraLogAuraType::MOD_RANGED_ATTACK_POWER_VERSUS => {}
+            AuraLogAuraType::MOD_INCREASE_ENERGY_PERCENT => {}
+            AuraLogAuraType::MOD_INCREASE_HEALTH_PERCENT => {}
+            AuraLogAuraType::MOD_MANA_REGEN_INTERRUPT => {}
+            AuraLogAuraType::MOD_HEALING_DONE => {}
+            AuraLogAuraType::MOD_HEALING_DONE_PERCENT => {}
+            AuraLogAuraType::MOD_TOTAL_STAT_PERCENTAGE => {}
+            AuraLogAuraType::MOD_MELEE_HASTE => {}
+            AuraLogAuraType::FORCE_REACTION => {}
+            AuraLogAuraType::MOD_RANGED_HASTE => {}
+            AuraLogAuraType::MOD_RANGED_AMMO_HASTE => {}
+            AuraLogAuraType::MOD_BASE_RESISTANCE_PCT => {}
+            AuraLogAuraType::MOD_RESISTANCE_EXCLUSIVE => {}
+            AuraLogAuraType::SAFE_FALL => {}
+            AuraLogAuraType::CHARISMA => {}
+            AuraLogAuraType::PERSUADED => {}
+            AuraLogAuraType::MECHANIC_IMMUNITY_MASK => {}
+            AuraLogAuraType::RETAIN_COMBO_POINTS => {}
+            AuraLogAuraType::RESIST_PUSHBACK => {}
+            AuraLogAuraType::MOD_SHIELD_BLOCKVALUE_PCT => {}
+            AuraLogAuraType::TRACK_STEALTHED => {}
+            AuraLogAuraType::MOD_DETECTED_RANGE => {}
+            AuraLogAuraType::SPLIT_DAMAGE_FLAT => {}
+            AuraLogAuraType::MOD_STEALTH_LEVEL => {}
+            AuraLogAuraType::MOD_WATER_BREATHING => {}
+            AuraLogAuraType::MOD_REPUTATION_GAIN => {}
+            AuraLogAuraType::PET_DAMAGE_MULTI => {}
+            AuraLogAuraType::MOD_SHIELD_BLOCKVALUE => {}
+            AuraLogAuraType::NO_PVP_CREDIT => {}
+            AuraLogAuraType::MOD_AOE_AVOIDANCE => {}
+            AuraLogAuraType::MOD_HEALTH_REGEN_IN_COMBAT => {}
+            AuraLogAuraType::POWER_BURN_MANA => {}
+            AuraLogAuraType::MOD_CRIT_DAMAGE_BONUS => {}
+            AuraLogAuraType::UNKNOWN164 => {}
+            AuraLogAuraType::MELEE_ATTACK_POWER_ATTACKER_BONUS => {}
+            AuraLogAuraType::MOD_ATTACK_POWER_PCT => {}
+            AuraLogAuraType::MOD_RANGED_ATTACK_POWER_PCT => {}
+            AuraLogAuraType::MOD_DAMAGE_DONE_VERSUS => {}
+            AuraLogAuraType::MOD_CRIT_PERCENT_VERSUS => {}
+            AuraLogAuraType::DETECT_AMORE => {}
+            AuraLogAuraType::MOD_SPEED_NOT_STACK => {}
+            AuraLogAuraType::MOD_MOUNTED_SPEED_NOT_STACK => {}
+            AuraLogAuraType::ALLOW_CHAMPION_SPELLS => {}
+            AuraLogAuraType::MOD_SPELL_DAMAGE_OF_STAT_PERCENT => {}
+            AuraLogAuraType::MOD_SPELL_HEALING_OF_STAT_PERCENT => {}
+            AuraLogAuraType::SPIRIT_OF_REDEMPTION => {}
+            AuraLogAuraType::AOE_CHARM => {}
+            AuraLogAuraType::MOD_DEBUFF_RESISTANCE => {}
+            AuraLogAuraType::MOD_ATTACKER_SPELL_CRIT_CHANCE => {}
+            AuraLogAuraType::MOD_FLAT_SPELL_DAMAGE_VERSUS => {}
+            AuraLogAuraType::MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS => {}
+            AuraLogAuraType::MOD_RESISTANCE_OF_STAT_PERCENT => {}
+            AuraLogAuraType::MOD_CRITICAL_THREAT => {}
+            AuraLogAuraType::MOD_ATTACKER_MELEE_HIT_CHANCE => {}
+            AuraLogAuraType::MOD_ATTACKER_RANGED_HIT_CHANCE => {}
+            AuraLogAuraType::MOD_ATTACKER_SPELL_HIT_CHANCE => {}
+            AuraLogAuraType::MOD_ATTACKER_MELEE_CRIT_CHANCE => {}
+            AuraLogAuraType::MOD_ATTACKER_RANGED_CRIT_CHANCE => {}
+            AuraLogAuraType::MOD_RATING => {}
+            AuraLogAuraType::MOD_FACTION_REPUTATION_GAIN => {}
+            AuraLogAuraType::USE_NORMAL_MOVEMENT_SPEED => {}
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, AuraLogError> {
         // aura_type: AuraType
@@ -303,291 +589,6 @@ impl AuraLog {
         Ok(Self {
             aura_type: aura_type_if,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // aura_type: AuraType
-        w.write_all(&(self.aura_type.as_int() as u32).to_le_bytes())?;
-
-        match &self.aura_type {
-            AuraLogAuraType::NONE => {}
-            AuraLogAuraType::BIND_SIGHT => {}
-            AuraLogAuraType::MOD_POSSESS => {}
-            AuraLogAuraType::PERIODIC_DAMAGE {
-                absorbed,
-                damage1,
-                resisted,
-                school,
-            } => {
-                // damage1: u32
-                w.write_all(&damage1.to_le_bytes())?;
-
-                // school: SpellSchool
-                w.write_all(&(school.as_int() as u8).to_le_bytes())?;
-
-                // absorbed: u32
-                w.write_all(&absorbed.to_le_bytes())?;
-
-                // resisted: u32
-                w.write_all(&resisted.to_le_bytes())?;
-
-            }
-            AuraLogAuraType::DUMMY => {}
-            AuraLogAuraType::MOD_CONFUSE => {}
-            AuraLogAuraType::MOD_CHARM => {}
-            AuraLogAuraType::MOD_FEAR => {}
-            AuraLogAuraType::PERIODIC_HEAL {
-                damage2,
-            } => {
-                // damage2: u32
-                w.write_all(&damage2.to_le_bytes())?;
-
-            }
-            AuraLogAuraType::MOD_ATTACKSPEED => {}
-            AuraLogAuraType::MOD_THREAT => {}
-            AuraLogAuraType::MOD_TAUNT => {}
-            AuraLogAuraType::MOD_STUN => {}
-            AuraLogAuraType::MOD_DAMAGE_DONE => {}
-            AuraLogAuraType::MOD_DAMAGE_TAKEN => {}
-            AuraLogAuraType::DAMAGE_SHIELD => {}
-            AuraLogAuraType::MOD_STEALTH => {}
-            AuraLogAuraType::MOD_STEALTH_DETECT => {}
-            AuraLogAuraType::MOD_INVISIBILITY => {}
-            AuraLogAuraType::MOD_INVISIBILITY_DETECTION => {}
-            AuraLogAuraType::OBS_MOD_HEALTH {
-                damage2,
-            } => {
-                // damage2: u32
-                w.write_all(&damage2.to_le_bytes())?;
-
-            }
-            AuraLogAuraType::OBS_MOD_MANA {
-                damage3,
-                misc_value1,
-            } => {
-                // misc_value1: u32
-                w.write_all(&misc_value1.to_le_bytes())?;
-
-                // damage3: u32
-                w.write_all(&damage3.to_le_bytes())?;
-
-            }
-            AuraLogAuraType::MOD_RESISTANCE => {}
-            AuraLogAuraType::PERIODIC_TRIGGER_SPELL => {}
-            AuraLogAuraType::PERIODIC_ENERGIZE {
-                damage3,
-                misc_value1,
-            } => {
-                // misc_value1: u32
-                w.write_all(&misc_value1.to_le_bytes())?;
-
-                // damage3: u32
-                w.write_all(&damage3.to_le_bytes())?;
-
-            }
-            AuraLogAuraType::MOD_PACIFY => {}
-            AuraLogAuraType::MOD_ROOT => {}
-            AuraLogAuraType::MOD_SILENCE => {}
-            AuraLogAuraType::REFLECT_SPELLS => {}
-            AuraLogAuraType::MOD_STAT => {}
-            AuraLogAuraType::MOD_SKILL => {}
-            AuraLogAuraType::MOD_INCREASE_SPEED => {}
-            AuraLogAuraType::MOD_INCREASE_MOUNTED_SPEED => {}
-            AuraLogAuraType::MOD_DECREASE_SPEED => {}
-            AuraLogAuraType::MOD_INCREASE_HEALTH => {}
-            AuraLogAuraType::MOD_INCREASE_ENERGY => {}
-            AuraLogAuraType::MOD_SHAPESHIFT => {}
-            AuraLogAuraType::EFFECT_IMMUNITY => {}
-            AuraLogAuraType::STATE_IMMUNITY => {}
-            AuraLogAuraType::SCHOOL_IMMUNITY => {}
-            AuraLogAuraType::DAMAGE_IMMUNITY => {}
-            AuraLogAuraType::DISPEL_IMMUNITY => {}
-            AuraLogAuraType::PROC_TRIGGER_SPELL => {}
-            AuraLogAuraType::PROC_TRIGGER_DAMAGE => {}
-            AuraLogAuraType::TRACK_CREATURES => {}
-            AuraLogAuraType::TRACK_RESOURCES => {}
-            AuraLogAuraType::UNKNOWN46 => {}
-            AuraLogAuraType::MOD_PARRY_PERCENT => {}
-            AuraLogAuraType::UNKNOWN48 => {}
-            AuraLogAuraType::MOD_DODGE_PERCENT => {}
-            AuraLogAuraType::MOD_BLOCK_SKILL => {}
-            AuraLogAuraType::MOD_BLOCK_PERCENT => {}
-            AuraLogAuraType::MOD_CRIT_PERCENT => {}
-            AuraLogAuraType::PERIODIC_LEECH => {}
-            AuraLogAuraType::MOD_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_SPELL_HIT_CHANCE => {}
-            AuraLogAuraType::TRANSFORM => {}
-            AuraLogAuraType::MOD_SPELL_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_INCREASE_SWIM_SPEED => {}
-            AuraLogAuraType::MOD_DAMAGE_DONE_CREATURE => {}
-            AuraLogAuraType::MOD_PACIFY_SILENCE => {}
-            AuraLogAuraType::MOD_SCALE => {}
-            AuraLogAuraType::PERIODIC_HEALTH_FUNNEL => {}
-            AuraLogAuraType::PERIODIC_MANA_FUNNEL => {}
-            AuraLogAuraType::PERIODIC_MANA_LEECH {
-                damage,
-                gain_multiplier,
-                misc_value2,
-            } => {
-                // misc_value2: u32
-                w.write_all(&misc_value2.to_le_bytes())?;
-
-                // damage: u32
-                w.write_all(&damage.to_le_bytes())?;
-
-                // gain_multiplier: f32
-                w.write_all(&gain_multiplier.to_le_bytes())?;
-
-            }
-            AuraLogAuraType::MOD_CASTING_SPEED_NOT_STACK => {}
-            AuraLogAuraType::FEIGN_DEATH => {}
-            AuraLogAuraType::MOD_DISARM => {}
-            AuraLogAuraType::MOD_STALKED => {}
-            AuraLogAuraType::SCHOOL_ABSORB => {}
-            AuraLogAuraType::EXTRA_ATTACKS => {}
-            AuraLogAuraType::MOD_SPELL_CRIT_CHANCE_SCHOOL => {}
-            AuraLogAuraType::MOD_POWER_COST_SCHOOL_PCT => {}
-            AuraLogAuraType::MOD_POWER_COST_SCHOOL => {}
-            AuraLogAuraType::REFLECT_SPELLS_SCHOOL => {}
-            AuraLogAuraType::MOD_LANGUAGE => {}
-            AuraLogAuraType::FAR_SIGHT => {}
-            AuraLogAuraType::MECHANIC_IMMUNITY => {}
-            AuraLogAuraType::MOUNTED => {}
-            AuraLogAuraType::MOD_DAMAGE_PERCENT_DONE => {}
-            AuraLogAuraType::MOD_PERCENT_STAT => {}
-            AuraLogAuraType::SPLIT_DAMAGE_PCT => {}
-            AuraLogAuraType::WATER_BREATHING => {}
-            AuraLogAuraType::MOD_BASE_RESISTANCE => {}
-            AuraLogAuraType::MOD_REGEN => {}
-            AuraLogAuraType::MOD_POWER_REGEN => {}
-            AuraLogAuraType::CHANNEL_DEATH_ITEM => {}
-            AuraLogAuraType::MOD_DAMAGE_PERCENT_TAKEN => {}
-            AuraLogAuraType::MOD_HEALTH_REGEN_PERCENT => {}
-            AuraLogAuraType::PERIODIC_DAMAGE_PERCENT {
-                absorbed,
-                damage1,
-                resisted,
-                school,
-            } => {
-                // damage1: u32
-                w.write_all(&damage1.to_le_bytes())?;
-
-                // school: SpellSchool
-                w.write_all(&(school.as_int() as u8).to_le_bytes())?;
-
-                // absorbed: u32
-                w.write_all(&absorbed.to_le_bytes())?;
-
-                // resisted: u32
-                w.write_all(&resisted.to_le_bytes())?;
-
-            }
-            AuraLogAuraType::MOD_RESIST_CHANCE => {}
-            AuraLogAuraType::MOD_DETECT_RANGE => {}
-            AuraLogAuraType::PREVENTS_FLEEING => {}
-            AuraLogAuraType::MOD_UNATTACKABLE => {}
-            AuraLogAuraType::INTERRUPT_REGEN => {}
-            AuraLogAuraType::GHOST => {}
-            AuraLogAuraType::SPELL_MAGNET => {}
-            AuraLogAuraType::MANA_SHIELD => {}
-            AuraLogAuraType::MOD_SKILL_TALENT => {}
-            AuraLogAuraType::MOD_ATTACK_POWER => {}
-            AuraLogAuraType::AURAS_VISIBLE => {}
-            AuraLogAuraType::MOD_RESISTANCE_PCT => {}
-            AuraLogAuraType::MOD_MELEE_ATTACK_POWER_VERSUS => {}
-            AuraLogAuraType::MOD_TOTAL_THREAT => {}
-            AuraLogAuraType::WATER_WALK => {}
-            AuraLogAuraType::FEATHER_FALL => {}
-            AuraLogAuraType::HOVER => {}
-            AuraLogAuraType::ADD_FLAT_MODIFIER => {}
-            AuraLogAuraType::ADD_PCT_MODIFIER => {}
-            AuraLogAuraType::ADD_TARGET_TRIGGER => {}
-            AuraLogAuraType::MOD_POWER_REGEN_PERCENT => {}
-            AuraLogAuraType::ADD_CASTER_HIT_TRIGGER => {}
-            AuraLogAuraType::OVERRIDE_CLASS_SCRIPTS => {}
-            AuraLogAuraType::MOD_RANGED_DAMAGE_TAKEN => {}
-            AuraLogAuraType::MOD_RANGED_DAMAGE_TAKEN_PCT => {}
-            AuraLogAuraType::MOD_HEALING => {}
-            AuraLogAuraType::MOD_REGEN_DURING_COMBAT => {}
-            AuraLogAuraType::MOD_MECHANIC_RESISTANCE => {}
-            AuraLogAuraType::MOD_HEALING_PCT => {}
-            AuraLogAuraType::SHARE_PET_TRACKING => {}
-            AuraLogAuraType::UNTRACKABLE => {}
-            AuraLogAuraType::EMPATHY => {}
-            AuraLogAuraType::MOD_OFFHAND_DAMAGE_PCT => {}
-            AuraLogAuraType::MOD_TARGET_RESISTANCE => {}
-            AuraLogAuraType::MOD_RANGED_ATTACK_POWER => {}
-            AuraLogAuraType::MOD_MELEE_DAMAGE_TAKEN => {}
-            AuraLogAuraType::MOD_MELEE_DAMAGE_TAKEN_PCT => {}
-            AuraLogAuraType::RANGED_ATTACK_POWER_ATTACKER_BONUS => {}
-            AuraLogAuraType::MOD_POSSESS_PET => {}
-            AuraLogAuraType::MOD_SPEED_ALWAYS => {}
-            AuraLogAuraType::MOD_MOUNTED_SPEED_ALWAYS => {}
-            AuraLogAuraType::MOD_RANGED_ATTACK_POWER_VERSUS => {}
-            AuraLogAuraType::MOD_INCREASE_ENERGY_PERCENT => {}
-            AuraLogAuraType::MOD_INCREASE_HEALTH_PERCENT => {}
-            AuraLogAuraType::MOD_MANA_REGEN_INTERRUPT => {}
-            AuraLogAuraType::MOD_HEALING_DONE => {}
-            AuraLogAuraType::MOD_HEALING_DONE_PERCENT => {}
-            AuraLogAuraType::MOD_TOTAL_STAT_PERCENTAGE => {}
-            AuraLogAuraType::MOD_MELEE_HASTE => {}
-            AuraLogAuraType::FORCE_REACTION => {}
-            AuraLogAuraType::MOD_RANGED_HASTE => {}
-            AuraLogAuraType::MOD_RANGED_AMMO_HASTE => {}
-            AuraLogAuraType::MOD_BASE_RESISTANCE_PCT => {}
-            AuraLogAuraType::MOD_RESISTANCE_EXCLUSIVE => {}
-            AuraLogAuraType::SAFE_FALL => {}
-            AuraLogAuraType::CHARISMA => {}
-            AuraLogAuraType::PERSUADED => {}
-            AuraLogAuraType::MECHANIC_IMMUNITY_MASK => {}
-            AuraLogAuraType::RETAIN_COMBO_POINTS => {}
-            AuraLogAuraType::RESIST_PUSHBACK => {}
-            AuraLogAuraType::MOD_SHIELD_BLOCKVALUE_PCT => {}
-            AuraLogAuraType::TRACK_STEALTHED => {}
-            AuraLogAuraType::MOD_DETECTED_RANGE => {}
-            AuraLogAuraType::SPLIT_DAMAGE_FLAT => {}
-            AuraLogAuraType::MOD_STEALTH_LEVEL => {}
-            AuraLogAuraType::MOD_WATER_BREATHING => {}
-            AuraLogAuraType::MOD_REPUTATION_GAIN => {}
-            AuraLogAuraType::PET_DAMAGE_MULTI => {}
-            AuraLogAuraType::MOD_SHIELD_BLOCKVALUE => {}
-            AuraLogAuraType::NO_PVP_CREDIT => {}
-            AuraLogAuraType::MOD_AOE_AVOIDANCE => {}
-            AuraLogAuraType::MOD_HEALTH_REGEN_IN_COMBAT => {}
-            AuraLogAuraType::POWER_BURN_MANA => {}
-            AuraLogAuraType::MOD_CRIT_DAMAGE_BONUS => {}
-            AuraLogAuraType::UNKNOWN164 => {}
-            AuraLogAuraType::MELEE_ATTACK_POWER_ATTACKER_BONUS => {}
-            AuraLogAuraType::MOD_ATTACK_POWER_PCT => {}
-            AuraLogAuraType::MOD_RANGED_ATTACK_POWER_PCT => {}
-            AuraLogAuraType::MOD_DAMAGE_DONE_VERSUS => {}
-            AuraLogAuraType::MOD_CRIT_PERCENT_VERSUS => {}
-            AuraLogAuraType::DETECT_AMORE => {}
-            AuraLogAuraType::MOD_SPEED_NOT_STACK => {}
-            AuraLogAuraType::MOD_MOUNTED_SPEED_NOT_STACK => {}
-            AuraLogAuraType::ALLOW_CHAMPION_SPELLS => {}
-            AuraLogAuraType::MOD_SPELL_DAMAGE_OF_STAT_PERCENT => {}
-            AuraLogAuraType::MOD_SPELL_HEALING_OF_STAT_PERCENT => {}
-            AuraLogAuraType::SPIRIT_OF_REDEMPTION => {}
-            AuraLogAuraType::AOE_CHARM => {}
-            AuraLogAuraType::MOD_DEBUFF_RESISTANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_SPELL_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_FLAT_SPELL_DAMAGE_VERSUS => {}
-            AuraLogAuraType::MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS => {}
-            AuraLogAuraType::MOD_RESISTANCE_OF_STAT_PERCENT => {}
-            AuraLogAuraType::MOD_CRITICAL_THREAT => {}
-            AuraLogAuraType::MOD_ATTACKER_MELEE_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_RANGED_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_SPELL_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_MELEE_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_RANGED_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_RATING => {}
-            AuraLogAuraType::MOD_FACTION_REPUTATION_GAIN => {}
-            AuraLogAuraType::USE_NORMAL_MOVEMENT_SPEED => {}
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -883,291 +884,6 @@ impl AuraLog {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // aura_type: AuraType
-        w.write_all(&(self.aura_type.as_int() as u32).to_le_bytes()).await?;
-
-        match &self.aura_type {
-            AuraLogAuraType::NONE => {}
-            AuraLogAuraType::BIND_SIGHT => {}
-            AuraLogAuraType::MOD_POSSESS => {}
-            AuraLogAuraType::PERIODIC_DAMAGE {
-                absorbed,
-                damage1,
-                resisted,
-                school,
-            } => {
-                // damage1: u32
-                w.write_all(&damage1.to_le_bytes()).await?;
-
-                // school: SpellSchool
-                w.write_all(&(school.as_int() as u8).to_le_bytes()).await?;
-
-                // absorbed: u32
-                w.write_all(&absorbed.to_le_bytes()).await?;
-
-                // resisted: u32
-                w.write_all(&resisted.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::DUMMY => {}
-            AuraLogAuraType::MOD_CONFUSE => {}
-            AuraLogAuraType::MOD_CHARM => {}
-            AuraLogAuraType::MOD_FEAR => {}
-            AuraLogAuraType::PERIODIC_HEAL {
-                damage2,
-            } => {
-                // damage2: u32
-                w.write_all(&damage2.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::MOD_ATTACKSPEED => {}
-            AuraLogAuraType::MOD_THREAT => {}
-            AuraLogAuraType::MOD_TAUNT => {}
-            AuraLogAuraType::MOD_STUN => {}
-            AuraLogAuraType::MOD_DAMAGE_DONE => {}
-            AuraLogAuraType::MOD_DAMAGE_TAKEN => {}
-            AuraLogAuraType::DAMAGE_SHIELD => {}
-            AuraLogAuraType::MOD_STEALTH => {}
-            AuraLogAuraType::MOD_STEALTH_DETECT => {}
-            AuraLogAuraType::MOD_INVISIBILITY => {}
-            AuraLogAuraType::MOD_INVISIBILITY_DETECTION => {}
-            AuraLogAuraType::OBS_MOD_HEALTH {
-                damage2,
-            } => {
-                // damage2: u32
-                w.write_all(&damage2.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::OBS_MOD_MANA {
-                damage3,
-                misc_value1,
-            } => {
-                // misc_value1: u32
-                w.write_all(&misc_value1.to_le_bytes()).await?;
-
-                // damage3: u32
-                w.write_all(&damage3.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::MOD_RESISTANCE => {}
-            AuraLogAuraType::PERIODIC_TRIGGER_SPELL => {}
-            AuraLogAuraType::PERIODIC_ENERGIZE {
-                damage3,
-                misc_value1,
-            } => {
-                // misc_value1: u32
-                w.write_all(&misc_value1.to_le_bytes()).await?;
-
-                // damage3: u32
-                w.write_all(&damage3.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::MOD_PACIFY => {}
-            AuraLogAuraType::MOD_ROOT => {}
-            AuraLogAuraType::MOD_SILENCE => {}
-            AuraLogAuraType::REFLECT_SPELLS => {}
-            AuraLogAuraType::MOD_STAT => {}
-            AuraLogAuraType::MOD_SKILL => {}
-            AuraLogAuraType::MOD_INCREASE_SPEED => {}
-            AuraLogAuraType::MOD_INCREASE_MOUNTED_SPEED => {}
-            AuraLogAuraType::MOD_DECREASE_SPEED => {}
-            AuraLogAuraType::MOD_INCREASE_HEALTH => {}
-            AuraLogAuraType::MOD_INCREASE_ENERGY => {}
-            AuraLogAuraType::MOD_SHAPESHIFT => {}
-            AuraLogAuraType::EFFECT_IMMUNITY => {}
-            AuraLogAuraType::STATE_IMMUNITY => {}
-            AuraLogAuraType::SCHOOL_IMMUNITY => {}
-            AuraLogAuraType::DAMAGE_IMMUNITY => {}
-            AuraLogAuraType::DISPEL_IMMUNITY => {}
-            AuraLogAuraType::PROC_TRIGGER_SPELL => {}
-            AuraLogAuraType::PROC_TRIGGER_DAMAGE => {}
-            AuraLogAuraType::TRACK_CREATURES => {}
-            AuraLogAuraType::TRACK_RESOURCES => {}
-            AuraLogAuraType::UNKNOWN46 => {}
-            AuraLogAuraType::MOD_PARRY_PERCENT => {}
-            AuraLogAuraType::UNKNOWN48 => {}
-            AuraLogAuraType::MOD_DODGE_PERCENT => {}
-            AuraLogAuraType::MOD_BLOCK_SKILL => {}
-            AuraLogAuraType::MOD_BLOCK_PERCENT => {}
-            AuraLogAuraType::MOD_CRIT_PERCENT => {}
-            AuraLogAuraType::PERIODIC_LEECH => {}
-            AuraLogAuraType::MOD_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_SPELL_HIT_CHANCE => {}
-            AuraLogAuraType::TRANSFORM => {}
-            AuraLogAuraType::MOD_SPELL_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_INCREASE_SWIM_SPEED => {}
-            AuraLogAuraType::MOD_DAMAGE_DONE_CREATURE => {}
-            AuraLogAuraType::MOD_PACIFY_SILENCE => {}
-            AuraLogAuraType::MOD_SCALE => {}
-            AuraLogAuraType::PERIODIC_HEALTH_FUNNEL => {}
-            AuraLogAuraType::PERIODIC_MANA_FUNNEL => {}
-            AuraLogAuraType::PERIODIC_MANA_LEECH {
-                damage,
-                gain_multiplier,
-                misc_value2,
-            } => {
-                // misc_value2: u32
-                w.write_all(&misc_value2.to_le_bytes()).await?;
-
-                // damage: u32
-                w.write_all(&damage.to_le_bytes()).await?;
-
-                // gain_multiplier: f32
-                w.write_all(&gain_multiplier.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::MOD_CASTING_SPEED_NOT_STACK => {}
-            AuraLogAuraType::FEIGN_DEATH => {}
-            AuraLogAuraType::MOD_DISARM => {}
-            AuraLogAuraType::MOD_STALKED => {}
-            AuraLogAuraType::SCHOOL_ABSORB => {}
-            AuraLogAuraType::EXTRA_ATTACKS => {}
-            AuraLogAuraType::MOD_SPELL_CRIT_CHANCE_SCHOOL => {}
-            AuraLogAuraType::MOD_POWER_COST_SCHOOL_PCT => {}
-            AuraLogAuraType::MOD_POWER_COST_SCHOOL => {}
-            AuraLogAuraType::REFLECT_SPELLS_SCHOOL => {}
-            AuraLogAuraType::MOD_LANGUAGE => {}
-            AuraLogAuraType::FAR_SIGHT => {}
-            AuraLogAuraType::MECHANIC_IMMUNITY => {}
-            AuraLogAuraType::MOUNTED => {}
-            AuraLogAuraType::MOD_DAMAGE_PERCENT_DONE => {}
-            AuraLogAuraType::MOD_PERCENT_STAT => {}
-            AuraLogAuraType::SPLIT_DAMAGE_PCT => {}
-            AuraLogAuraType::WATER_BREATHING => {}
-            AuraLogAuraType::MOD_BASE_RESISTANCE => {}
-            AuraLogAuraType::MOD_REGEN => {}
-            AuraLogAuraType::MOD_POWER_REGEN => {}
-            AuraLogAuraType::CHANNEL_DEATH_ITEM => {}
-            AuraLogAuraType::MOD_DAMAGE_PERCENT_TAKEN => {}
-            AuraLogAuraType::MOD_HEALTH_REGEN_PERCENT => {}
-            AuraLogAuraType::PERIODIC_DAMAGE_PERCENT {
-                absorbed,
-                damage1,
-                resisted,
-                school,
-            } => {
-                // damage1: u32
-                w.write_all(&damage1.to_le_bytes()).await?;
-
-                // school: SpellSchool
-                w.write_all(&(school.as_int() as u8).to_le_bytes()).await?;
-
-                // absorbed: u32
-                w.write_all(&absorbed.to_le_bytes()).await?;
-
-                // resisted: u32
-                w.write_all(&resisted.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::MOD_RESIST_CHANCE => {}
-            AuraLogAuraType::MOD_DETECT_RANGE => {}
-            AuraLogAuraType::PREVENTS_FLEEING => {}
-            AuraLogAuraType::MOD_UNATTACKABLE => {}
-            AuraLogAuraType::INTERRUPT_REGEN => {}
-            AuraLogAuraType::GHOST => {}
-            AuraLogAuraType::SPELL_MAGNET => {}
-            AuraLogAuraType::MANA_SHIELD => {}
-            AuraLogAuraType::MOD_SKILL_TALENT => {}
-            AuraLogAuraType::MOD_ATTACK_POWER => {}
-            AuraLogAuraType::AURAS_VISIBLE => {}
-            AuraLogAuraType::MOD_RESISTANCE_PCT => {}
-            AuraLogAuraType::MOD_MELEE_ATTACK_POWER_VERSUS => {}
-            AuraLogAuraType::MOD_TOTAL_THREAT => {}
-            AuraLogAuraType::WATER_WALK => {}
-            AuraLogAuraType::FEATHER_FALL => {}
-            AuraLogAuraType::HOVER => {}
-            AuraLogAuraType::ADD_FLAT_MODIFIER => {}
-            AuraLogAuraType::ADD_PCT_MODIFIER => {}
-            AuraLogAuraType::ADD_TARGET_TRIGGER => {}
-            AuraLogAuraType::MOD_POWER_REGEN_PERCENT => {}
-            AuraLogAuraType::ADD_CASTER_HIT_TRIGGER => {}
-            AuraLogAuraType::OVERRIDE_CLASS_SCRIPTS => {}
-            AuraLogAuraType::MOD_RANGED_DAMAGE_TAKEN => {}
-            AuraLogAuraType::MOD_RANGED_DAMAGE_TAKEN_PCT => {}
-            AuraLogAuraType::MOD_HEALING => {}
-            AuraLogAuraType::MOD_REGEN_DURING_COMBAT => {}
-            AuraLogAuraType::MOD_MECHANIC_RESISTANCE => {}
-            AuraLogAuraType::MOD_HEALING_PCT => {}
-            AuraLogAuraType::SHARE_PET_TRACKING => {}
-            AuraLogAuraType::UNTRACKABLE => {}
-            AuraLogAuraType::EMPATHY => {}
-            AuraLogAuraType::MOD_OFFHAND_DAMAGE_PCT => {}
-            AuraLogAuraType::MOD_TARGET_RESISTANCE => {}
-            AuraLogAuraType::MOD_RANGED_ATTACK_POWER => {}
-            AuraLogAuraType::MOD_MELEE_DAMAGE_TAKEN => {}
-            AuraLogAuraType::MOD_MELEE_DAMAGE_TAKEN_PCT => {}
-            AuraLogAuraType::RANGED_ATTACK_POWER_ATTACKER_BONUS => {}
-            AuraLogAuraType::MOD_POSSESS_PET => {}
-            AuraLogAuraType::MOD_SPEED_ALWAYS => {}
-            AuraLogAuraType::MOD_MOUNTED_SPEED_ALWAYS => {}
-            AuraLogAuraType::MOD_RANGED_ATTACK_POWER_VERSUS => {}
-            AuraLogAuraType::MOD_INCREASE_ENERGY_PERCENT => {}
-            AuraLogAuraType::MOD_INCREASE_HEALTH_PERCENT => {}
-            AuraLogAuraType::MOD_MANA_REGEN_INTERRUPT => {}
-            AuraLogAuraType::MOD_HEALING_DONE => {}
-            AuraLogAuraType::MOD_HEALING_DONE_PERCENT => {}
-            AuraLogAuraType::MOD_TOTAL_STAT_PERCENTAGE => {}
-            AuraLogAuraType::MOD_MELEE_HASTE => {}
-            AuraLogAuraType::FORCE_REACTION => {}
-            AuraLogAuraType::MOD_RANGED_HASTE => {}
-            AuraLogAuraType::MOD_RANGED_AMMO_HASTE => {}
-            AuraLogAuraType::MOD_BASE_RESISTANCE_PCT => {}
-            AuraLogAuraType::MOD_RESISTANCE_EXCLUSIVE => {}
-            AuraLogAuraType::SAFE_FALL => {}
-            AuraLogAuraType::CHARISMA => {}
-            AuraLogAuraType::PERSUADED => {}
-            AuraLogAuraType::MECHANIC_IMMUNITY_MASK => {}
-            AuraLogAuraType::RETAIN_COMBO_POINTS => {}
-            AuraLogAuraType::RESIST_PUSHBACK => {}
-            AuraLogAuraType::MOD_SHIELD_BLOCKVALUE_PCT => {}
-            AuraLogAuraType::TRACK_STEALTHED => {}
-            AuraLogAuraType::MOD_DETECTED_RANGE => {}
-            AuraLogAuraType::SPLIT_DAMAGE_FLAT => {}
-            AuraLogAuraType::MOD_STEALTH_LEVEL => {}
-            AuraLogAuraType::MOD_WATER_BREATHING => {}
-            AuraLogAuraType::MOD_REPUTATION_GAIN => {}
-            AuraLogAuraType::PET_DAMAGE_MULTI => {}
-            AuraLogAuraType::MOD_SHIELD_BLOCKVALUE => {}
-            AuraLogAuraType::NO_PVP_CREDIT => {}
-            AuraLogAuraType::MOD_AOE_AVOIDANCE => {}
-            AuraLogAuraType::MOD_HEALTH_REGEN_IN_COMBAT => {}
-            AuraLogAuraType::POWER_BURN_MANA => {}
-            AuraLogAuraType::MOD_CRIT_DAMAGE_BONUS => {}
-            AuraLogAuraType::UNKNOWN164 => {}
-            AuraLogAuraType::MELEE_ATTACK_POWER_ATTACKER_BONUS => {}
-            AuraLogAuraType::MOD_ATTACK_POWER_PCT => {}
-            AuraLogAuraType::MOD_RANGED_ATTACK_POWER_PCT => {}
-            AuraLogAuraType::MOD_DAMAGE_DONE_VERSUS => {}
-            AuraLogAuraType::MOD_CRIT_PERCENT_VERSUS => {}
-            AuraLogAuraType::DETECT_AMORE => {}
-            AuraLogAuraType::MOD_SPEED_NOT_STACK => {}
-            AuraLogAuraType::MOD_MOUNTED_SPEED_NOT_STACK => {}
-            AuraLogAuraType::ALLOW_CHAMPION_SPELLS => {}
-            AuraLogAuraType::MOD_SPELL_DAMAGE_OF_STAT_PERCENT => {}
-            AuraLogAuraType::MOD_SPELL_HEALING_OF_STAT_PERCENT => {}
-            AuraLogAuraType::SPIRIT_OF_REDEMPTION => {}
-            AuraLogAuraType::AOE_CHARM => {}
-            AuraLogAuraType::MOD_DEBUFF_RESISTANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_SPELL_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_FLAT_SPELL_DAMAGE_VERSUS => {}
-            AuraLogAuraType::MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS => {}
-            AuraLogAuraType::MOD_RESISTANCE_OF_STAT_PERCENT => {}
-            AuraLogAuraType::MOD_CRITICAL_THREAT => {}
-            AuraLogAuraType::MOD_ATTACKER_MELEE_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_RANGED_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_SPELL_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_MELEE_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_RANGED_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_RATING => {}
-            AuraLogAuraType::MOD_FACTION_REPUTATION_GAIN => {}
-            AuraLogAuraType::USE_NORMAL_MOVEMENT_SPEED => {}
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, AuraLogError> {
         // aura_type: AuraType
@@ -1459,291 +1175,6 @@ impl AuraLog {
         Ok(Self {
             aura_type: aura_type_if,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // aura_type: AuraType
-        w.write_all(&(self.aura_type.as_int() as u32).to_le_bytes()).await?;
-
-        match &self.aura_type {
-            AuraLogAuraType::NONE => {}
-            AuraLogAuraType::BIND_SIGHT => {}
-            AuraLogAuraType::MOD_POSSESS => {}
-            AuraLogAuraType::PERIODIC_DAMAGE {
-                absorbed,
-                damage1,
-                resisted,
-                school,
-            } => {
-                // damage1: u32
-                w.write_all(&damage1.to_le_bytes()).await?;
-
-                // school: SpellSchool
-                w.write_all(&(school.as_int() as u8).to_le_bytes()).await?;
-
-                // absorbed: u32
-                w.write_all(&absorbed.to_le_bytes()).await?;
-
-                // resisted: u32
-                w.write_all(&resisted.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::DUMMY => {}
-            AuraLogAuraType::MOD_CONFUSE => {}
-            AuraLogAuraType::MOD_CHARM => {}
-            AuraLogAuraType::MOD_FEAR => {}
-            AuraLogAuraType::PERIODIC_HEAL {
-                damage2,
-            } => {
-                // damage2: u32
-                w.write_all(&damage2.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::MOD_ATTACKSPEED => {}
-            AuraLogAuraType::MOD_THREAT => {}
-            AuraLogAuraType::MOD_TAUNT => {}
-            AuraLogAuraType::MOD_STUN => {}
-            AuraLogAuraType::MOD_DAMAGE_DONE => {}
-            AuraLogAuraType::MOD_DAMAGE_TAKEN => {}
-            AuraLogAuraType::DAMAGE_SHIELD => {}
-            AuraLogAuraType::MOD_STEALTH => {}
-            AuraLogAuraType::MOD_STEALTH_DETECT => {}
-            AuraLogAuraType::MOD_INVISIBILITY => {}
-            AuraLogAuraType::MOD_INVISIBILITY_DETECTION => {}
-            AuraLogAuraType::OBS_MOD_HEALTH {
-                damage2,
-            } => {
-                // damage2: u32
-                w.write_all(&damage2.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::OBS_MOD_MANA {
-                damage3,
-                misc_value1,
-            } => {
-                // misc_value1: u32
-                w.write_all(&misc_value1.to_le_bytes()).await?;
-
-                // damage3: u32
-                w.write_all(&damage3.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::MOD_RESISTANCE => {}
-            AuraLogAuraType::PERIODIC_TRIGGER_SPELL => {}
-            AuraLogAuraType::PERIODIC_ENERGIZE {
-                damage3,
-                misc_value1,
-            } => {
-                // misc_value1: u32
-                w.write_all(&misc_value1.to_le_bytes()).await?;
-
-                // damage3: u32
-                w.write_all(&damage3.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::MOD_PACIFY => {}
-            AuraLogAuraType::MOD_ROOT => {}
-            AuraLogAuraType::MOD_SILENCE => {}
-            AuraLogAuraType::REFLECT_SPELLS => {}
-            AuraLogAuraType::MOD_STAT => {}
-            AuraLogAuraType::MOD_SKILL => {}
-            AuraLogAuraType::MOD_INCREASE_SPEED => {}
-            AuraLogAuraType::MOD_INCREASE_MOUNTED_SPEED => {}
-            AuraLogAuraType::MOD_DECREASE_SPEED => {}
-            AuraLogAuraType::MOD_INCREASE_HEALTH => {}
-            AuraLogAuraType::MOD_INCREASE_ENERGY => {}
-            AuraLogAuraType::MOD_SHAPESHIFT => {}
-            AuraLogAuraType::EFFECT_IMMUNITY => {}
-            AuraLogAuraType::STATE_IMMUNITY => {}
-            AuraLogAuraType::SCHOOL_IMMUNITY => {}
-            AuraLogAuraType::DAMAGE_IMMUNITY => {}
-            AuraLogAuraType::DISPEL_IMMUNITY => {}
-            AuraLogAuraType::PROC_TRIGGER_SPELL => {}
-            AuraLogAuraType::PROC_TRIGGER_DAMAGE => {}
-            AuraLogAuraType::TRACK_CREATURES => {}
-            AuraLogAuraType::TRACK_RESOURCES => {}
-            AuraLogAuraType::UNKNOWN46 => {}
-            AuraLogAuraType::MOD_PARRY_PERCENT => {}
-            AuraLogAuraType::UNKNOWN48 => {}
-            AuraLogAuraType::MOD_DODGE_PERCENT => {}
-            AuraLogAuraType::MOD_BLOCK_SKILL => {}
-            AuraLogAuraType::MOD_BLOCK_PERCENT => {}
-            AuraLogAuraType::MOD_CRIT_PERCENT => {}
-            AuraLogAuraType::PERIODIC_LEECH => {}
-            AuraLogAuraType::MOD_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_SPELL_HIT_CHANCE => {}
-            AuraLogAuraType::TRANSFORM => {}
-            AuraLogAuraType::MOD_SPELL_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_INCREASE_SWIM_SPEED => {}
-            AuraLogAuraType::MOD_DAMAGE_DONE_CREATURE => {}
-            AuraLogAuraType::MOD_PACIFY_SILENCE => {}
-            AuraLogAuraType::MOD_SCALE => {}
-            AuraLogAuraType::PERIODIC_HEALTH_FUNNEL => {}
-            AuraLogAuraType::PERIODIC_MANA_FUNNEL => {}
-            AuraLogAuraType::PERIODIC_MANA_LEECH {
-                damage,
-                gain_multiplier,
-                misc_value2,
-            } => {
-                // misc_value2: u32
-                w.write_all(&misc_value2.to_le_bytes()).await?;
-
-                // damage: u32
-                w.write_all(&damage.to_le_bytes()).await?;
-
-                // gain_multiplier: f32
-                w.write_all(&gain_multiplier.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::MOD_CASTING_SPEED_NOT_STACK => {}
-            AuraLogAuraType::FEIGN_DEATH => {}
-            AuraLogAuraType::MOD_DISARM => {}
-            AuraLogAuraType::MOD_STALKED => {}
-            AuraLogAuraType::SCHOOL_ABSORB => {}
-            AuraLogAuraType::EXTRA_ATTACKS => {}
-            AuraLogAuraType::MOD_SPELL_CRIT_CHANCE_SCHOOL => {}
-            AuraLogAuraType::MOD_POWER_COST_SCHOOL_PCT => {}
-            AuraLogAuraType::MOD_POWER_COST_SCHOOL => {}
-            AuraLogAuraType::REFLECT_SPELLS_SCHOOL => {}
-            AuraLogAuraType::MOD_LANGUAGE => {}
-            AuraLogAuraType::FAR_SIGHT => {}
-            AuraLogAuraType::MECHANIC_IMMUNITY => {}
-            AuraLogAuraType::MOUNTED => {}
-            AuraLogAuraType::MOD_DAMAGE_PERCENT_DONE => {}
-            AuraLogAuraType::MOD_PERCENT_STAT => {}
-            AuraLogAuraType::SPLIT_DAMAGE_PCT => {}
-            AuraLogAuraType::WATER_BREATHING => {}
-            AuraLogAuraType::MOD_BASE_RESISTANCE => {}
-            AuraLogAuraType::MOD_REGEN => {}
-            AuraLogAuraType::MOD_POWER_REGEN => {}
-            AuraLogAuraType::CHANNEL_DEATH_ITEM => {}
-            AuraLogAuraType::MOD_DAMAGE_PERCENT_TAKEN => {}
-            AuraLogAuraType::MOD_HEALTH_REGEN_PERCENT => {}
-            AuraLogAuraType::PERIODIC_DAMAGE_PERCENT {
-                absorbed,
-                damage1,
-                resisted,
-                school,
-            } => {
-                // damage1: u32
-                w.write_all(&damage1.to_le_bytes()).await?;
-
-                // school: SpellSchool
-                w.write_all(&(school.as_int() as u8).to_le_bytes()).await?;
-
-                // absorbed: u32
-                w.write_all(&absorbed.to_le_bytes()).await?;
-
-                // resisted: u32
-                w.write_all(&resisted.to_le_bytes()).await?;
-
-            }
-            AuraLogAuraType::MOD_RESIST_CHANCE => {}
-            AuraLogAuraType::MOD_DETECT_RANGE => {}
-            AuraLogAuraType::PREVENTS_FLEEING => {}
-            AuraLogAuraType::MOD_UNATTACKABLE => {}
-            AuraLogAuraType::INTERRUPT_REGEN => {}
-            AuraLogAuraType::GHOST => {}
-            AuraLogAuraType::SPELL_MAGNET => {}
-            AuraLogAuraType::MANA_SHIELD => {}
-            AuraLogAuraType::MOD_SKILL_TALENT => {}
-            AuraLogAuraType::MOD_ATTACK_POWER => {}
-            AuraLogAuraType::AURAS_VISIBLE => {}
-            AuraLogAuraType::MOD_RESISTANCE_PCT => {}
-            AuraLogAuraType::MOD_MELEE_ATTACK_POWER_VERSUS => {}
-            AuraLogAuraType::MOD_TOTAL_THREAT => {}
-            AuraLogAuraType::WATER_WALK => {}
-            AuraLogAuraType::FEATHER_FALL => {}
-            AuraLogAuraType::HOVER => {}
-            AuraLogAuraType::ADD_FLAT_MODIFIER => {}
-            AuraLogAuraType::ADD_PCT_MODIFIER => {}
-            AuraLogAuraType::ADD_TARGET_TRIGGER => {}
-            AuraLogAuraType::MOD_POWER_REGEN_PERCENT => {}
-            AuraLogAuraType::ADD_CASTER_HIT_TRIGGER => {}
-            AuraLogAuraType::OVERRIDE_CLASS_SCRIPTS => {}
-            AuraLogAuraType::MOD_RANGED_DAMAGE_TAKEN => {}
-            AuraLogAuraType::MOD_RANGED_DAMAGE_TAKEN_PCT => {}
-            AuraLogAuraType::MOD_HEALING => {}
-            AuraLogAuraType::MOD_REGEN_DURING_COMBAT => {}
-            AuraLogAuraType::MOD_MECHANIC_RESISTANCE => {}
-            AuraLogAuraType::MOD_HEALING_PCT => {}
-            AuraLogAuraType::SHARE_PET_TRACKING => {}
-            AuraLogAuraType::UNTRACKABLE => {}
-            AuraLogAuraType::EMPATHY => {}
-            AuraLogAuraType::MOD_OFFHAND_DAMAGE_PCT => {}
-            AuraLogAuraType::MOD_TARGET_RESISTANCE => {}
-            AuraLogAuraType::MOD_RANGED_ATTACK_POWER => {}
-            AuraLogAuraType::MOD_MELEE_DAMAGE_TAKEN => {}
-            AuraLogAuraType::MOD_MELEE_DAMAGE_TAKEN_PCT => {}
-            AuraLogAuraType::RANGED_ATTACK_POWER_ATTACKER_BONUS => {}
-            AuraLogAuraType::MOD_POSSESS_PET => {}
-            AuraLogAuraType::MOD_SPEED_ALWAYS => {}
-            AuraLogAuraType::MOD_MOUNTED_SPEED_ALWAYS => {}
-            AuraLogAuraType::MOD_RANGED_ATTACK_POWER_VERSUS => {}
-            AuraLogAuraType::MOD_INCREASE_ENERGY_PERCENT => {}
-            AuraLogAuraType::MOD_INCREASE_HEALTH_PERCENT => {}
-            AuraLogAuraType::MOD_MANA_REGEN_INTERRUPT => {}
-            AuraLogAuraType::MOD_HEALING_DONE => {}
-            AuraLogAuraType::MOD_HEALING_DONE_PERCENT => {}
-            AuraLogAuraType::MOD_TOTAL_STAT_PERCENTAGE => {}
-            AuraLogAuraType::MOD_MELEE_HASTE => {}
-            AuraLogAuraType::FORCE_REACTION => {}
-            AuraLogAuraType::MOD_RANGED_HASTE => {}
-            AuraLogAuraType::MOD_RANGED_AMMO_HASTE => {}
-            AuraLogAuraType::MOD_BASE_RESISTANCE_PCT => {}
-            AuraLogAuraType::MOD_RESISTANCE_EXCLUSIVE => {}
-            AuraLogAuraType::SAFE_FALL => {}
-            AuraLogAuraType::CHARISMA => {}
-            AuraLogAuraType::PERSUADED => {}
-            AuraLogAuraType::MECHANIC_IMMUNITY_MASK => {}
-            AuraLogAuraType::RETAIN_COMBO_POINTS => {}
-            AuraLogAuraType::RESIST_PUSHBACK => {}
-            AuraLogAuraType::MOD_SHIELD_BLOCKVALUE_PCT => {}
-            AuraLogAuraType::TRACK_STEALTHED => {}
-            AuraLogAuraType::MOD_DETECTED_RANGE => {}
-            AuraLogAuraType::SPLIT_DAMAGE_FLAT => {}
-            AuraLogAuraType::MOD_STEALTH_LEVEL => {}
-            AuraLogAuraType::MOD_WATER_BREATHING => {}
-            AuraLogAuraType::MOD_REPUTATION_GAIN => {}
-            AuraLogAuraType::PET_DAMAGE_MULTI => {}
-            AuraLogAuraType::MOD_SHIELD_BLOCKVALUE => {}
-            AuraLogAuraType::NO_PVP_CREDIT => {}
-            AuraLogAuraType::MOD_AOE_AVOIDANCE => {}
-            AuraLogAuraType::MOD_HEALTH_REGEN_IN_COMBAT => {}
-            AuraLogAuraType::POWER_BURN_MANA => {}
-            AuraLogAuraType::MOD_CRIT_DAMAGE_BONUS => {}
-            AuraLogAuraType::UNKNOWN164 => {}
-            AuraLogAuraType::MELEE_ATTACK_POWER_ATTACKER_BONUS => {}
-            AuraLogAuraType::MOD_ATTACK_POWER_PCT => {}
-            AuraLogAuraType::MOD_RANGED_ATTACK_POWER_PCT => {}
-            AuraLogAuraType::MOD_DAMAGE_DONE_VERSUS => {}
-            AuraLogAuraType::MOD_CRIT_PERCENT_VERSUS => {}
-            AuraLogAuraType::DETECT_AMORE => {}
-            AuraLogAuraType::MOD_SPEED_NOT_STACK => {}
-            AuraLogAuraType::MOD_MOUNTED_SPEED_NOT_STACK => {}
-            AuraLogAuraType::ALLOW_CHAMPION_SPELLS => {}
-            AuraLogAuraType::MOD_SPELL_DAMAGE_OF_STAT_PERCENT => {}
-            AuraLogAuraType::MOD_SPELL_HEALING_OF_STAT_PERCENT => {}
-            AuraLogAuraType::SPIRIT_OF_REDEMPTION => {}
-            AuraLogAuraType::AOE_CHARM => {}
-            AuraLogAuraType::MOD_DEBUFF_RESISTANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_SPELL_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_FLAT_SPELL_DAMAGE_VERSUS => {}
-            AuraLogAuraType::MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS => {}
-            AuraLogAuraType::MOD_RESISTANCE_OF_STAT_PERCENT => {}
-            AuraLogAuraType::MOD_CRITICAL_THREAT => {}
-            AuraLogAuraType::MOD_ATTACKER_MELEE_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_RANGED_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_SPELL_HIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_MELEE_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_ATTACKER_RANGED_CRIT_CHANCE => {}
-            AuraLogAuraType::MOD_RATING => {}
-            AuraLogAuraType::MOD_FACTION_REPUTATION_GAIN => {}
-            AuraLogAuraType::USE_NORMAL_MOVEMENT_SPEED => {}
-        }
-
-        Ok(())
     }
 
 }

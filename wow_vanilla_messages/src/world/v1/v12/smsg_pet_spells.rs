@@ -122,7 +122,7 @@ impl MessageBody for SMSG_PET_SPELLS {
 
         // cooldowns: PetSpellCooldown[amount_of_cooldowns]
         for i in self.cooldowns.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -241,7 +241,7 @@ impl MessageBody for SMSG_PET_SPELLS {
 
             // cooldowns: PetSpellCooldown[amount_of_cooldowns]
             for i in self.cooldowns.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -361,7 +361,7 @@ impl MessageBody for SMSG_PET_SPELLS {
 
             // cooldowns: PetSpellCooldown[amount_of_cooldowns]
             for i in self.cooldowns.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

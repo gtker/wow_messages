@@ -75,7 +75,7 @@ impl MessageBody for SMSG_GOSSIP_MESSAGE {
 
         // gossips: GossipItem[amount_of_gossip_items]
         for i in self.gossips.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // amount_of_quests: u32
@@ -83,7 +83,7 @@ impl MessageBody for SMSG_GOSSIP_MESSAGE {
 
         // quests: QuestItem[amount_of_quests]
         for i in self.quests.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -160,7 +160,7 @@ impl MessageBody for SMSG_GOSSIP_MESSAGE {
 
             // gossips: GossipItem[amount_of_gossip_items]
             for i in self.gossips.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // amount_of_quests: u32
@@ -168,7 +168,7 @@ impl MessageBody for SMSG_GOSSIP_MESSAGE {
 
             // quests: QuestItem[amount_of_quests]
             for i in self.quests.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -246,7 +246,7 @@ impl MessageBody for SMSG_GOSSIP_MESSAGE {
 
             // gossips: GossipItem[amount_of_gossip_items]
             for i in self.gossips.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // amount_of_quests: u32
@@ -254,7 +254,7 @@ impl MessageBody for SMSG_GOSSIP_MESSAGE {
 
             // quests: QuestItem[amount_of_quests]
             for i in self.quests.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

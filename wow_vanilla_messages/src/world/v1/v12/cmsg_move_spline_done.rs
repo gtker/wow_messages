@@ -46,7 +46,7 @@ impl MessageBody for CMSG_MOVE_SPLINE_DONE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // movement_info: MovementInfo
-        self.movement_info.write(w)?;
+        w.write_all(&self.movement_info.as_bytes()?)?;
 
         // movement_counter: u32
         w.write_all(&self.movement_counter.to_le_bytes())?;
@@ -102,7 +102,7 @@ impl MessageBody for CMSG_MOVE_SPLINE_DONE {
      {
         Box::pin(async move {
             // movement_info: MovementInfo
-            self.movement_info.tokio_write(w).await?;
+            w.write_all(&self.movement_info.as_bytes()?).await?;
 
             // movement_counter: u32
             w.write_all(&self.movement_counter.to_le_bytes()).await?;
@@ -159,7 +159,7 @@ impl MessageBody for CMSG_MOVE_SPLINE_DONE {
      {
         Box::pin(async move {
             // movement_info: MovementInfo
-            self.movement_info.astd_write(w).await?;
+            w.write_all(&self.movement_info.as_bytes()?).await?;
 
             // movement_counter: u32
             w.write_all(&self.movement_counter.to_le_bytes()).await?;

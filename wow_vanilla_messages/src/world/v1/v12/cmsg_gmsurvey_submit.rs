@@ -55,7 +55,7 @@ impl MessageBody for CMSG_GMSURVEY_SUBMIT {
 
         // questions: GmSurveyQuestion[10]
         for i in self.questions.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // answer_comment: CString
@@ -120,7 +120,7 @@ impl MessageBody for CMSG_GMSURVEY_SUBMIT {
 
             // questions: GmSurveyQuestion[10]
             for i in self.questions.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // answer_comment: CString
@@ -186,7 +186,7 @@ impl MessageBody for CMSG_GMSURVEY_SUBMIT {
 
             // questions: GmSurveyQuestion[10]
             for i in self.questions.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // answer_comment: CString

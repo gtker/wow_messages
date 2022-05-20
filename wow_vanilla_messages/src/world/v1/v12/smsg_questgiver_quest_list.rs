@@ -82,7 +82,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_LIST {
 
         // quest_items: QuestItem[amount_of_entries]
         for i in self.quest_items.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -166,7 +166,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_LIST {
 
             // quest_items: QuestItem[amount_of_entries]
             for i in self.quest_items.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -251,7 +251,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_LIST {
 
             // quest_items: QuestItem[amount_of_entries]
             for i in self.quest_items.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

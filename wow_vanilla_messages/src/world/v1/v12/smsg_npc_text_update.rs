@@ -56,7 +56,7 @@ impl MessageBody for SMSG_NPC_TEXT_UPDATE {
 
         // texts: NpcTextUpdate[8]
         for i in self.texts.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -117,7 +117,7 @@ impl MessageBody for SMSG_NPC_TEXT_UPDATE {
 
             // texts: NpcTextUpdate[8]
             for i in self.texts.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -179,7 +179,7 @@ impl MessageBody for SMSG_NPC_TEXT_UPDATE {
 
             // texts: NpcTextUpdate[8]
             for i in self.texts.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

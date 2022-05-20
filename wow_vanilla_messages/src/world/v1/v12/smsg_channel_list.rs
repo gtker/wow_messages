@@ -65,7 +65,7 @@ impl MessageBody for SMSG_CHANNEL_LIST {
 
         // members: ChannelMember[amount_of_members]
         for i in self.members.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -135,7 +135,7 @@ impl MessageBody for SMSG_CHANNEL_LIST {
 
             // members: ChannelMember[amount_of_members]
             for i in self.members.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -206,7 +206,7 @@ impl MessageBody for SMSG_CHANNEL_LIST {
 
             // members: ChannelMember[amount_of_members]
             for i in self.members.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

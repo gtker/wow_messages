@@ -58,7 +58,7 @@ impl MessageBody for CMSG_MOVE_FEATHER_FALL_ACK {
         w.write_all(&self.movement_counter.to_le_bytes())?;
 
         // movement_info: MovementInfo
-        self.movement_info.write(w)?;
+        w.write_all(&self.movement_info.as_bytes()?)?;
 
         // apply: u32
         w.write_all(&self.apply.to_le_bytes())?;
@@ -121,7 +121,7 @@ impl MessageBody for CMSG_MOVE_FEATHER_FALL_ACK {
             w.write_all(&self.movement_counter.to_le_bytes()).await?;
 
             // movement_info: MovementInfo
-            self.movement_info.tokio_write(w).await?;
+            w.write_all(&self.movement_info.as_bytes()?).await?;
 
             // apply: u32
             w.write_all(&self.apply.to_le_bytes()).await?;
@@ -185,7 +185,7 @@ impl MessageBody for CMSG_MOVE_FEATHER_FALL_ACK {
             w.write_all(&self.movement_counter.to_le_bytes()).await?;
 
             // movement_info: MovementInfo
-            self.movement_info.astd_write(w).await?;
+            w.write_all(&self.movement_info.as_bytes()?).await?;
 
             // apply: u32
             w.write_all(&self.apply.to_le_bytes()).await?;

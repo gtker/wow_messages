@@ -383,12 +383,12 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // stats: ItemStat[10]
             for i in v.stats.iter() {
-                i.write(w)?;
+                w.write_all(&(i.as_bytes()?))?;
             }
 
             // damages: ItemDamageType[5]
             for i in v.damages.iter() {
-                i.write(w)?;
+                w.write_all(&(i.as_bytes()?))?;
             }
 
             // armor: u32
@@ -423,7 +423,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // spells: ItemSpells[5]
             for i in v.spells.iter() {
-                i.write(w)?;
+                w.write_all(&(i.as_bytes()?))?;
             }
 
             // bonding: u32
@@ -857,12 +857,12 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
                 // stats: ItemStat[10]
                 for i in v.stats.iter() {
-                    i.tokio_write(w).await?;
+                    w.write_all(&(i.as_bytes()?)).await?;
                 }
 
                 // damages: ItemDamageType[5]
                 for i in v.damages.iter() {
-                    i.tokio_write(w).await?;
+                    w.write_all(&(i.as_bytes()?)).await?;
                 }
 
                 // armor: u32
@@ -897,7 +897,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
                 // spells: ItemSpells[5]
                 for i in v.spells.iter() {
-                    i.tokio_write(w).await?;
+                    w.write_all(&(i.as_bytes()?)).await?;
                 }
 
                 // bonding: u32
@@ -1332,12 +1332,12 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
                 // stats: ItemStat[10]
                 for i in v.stats.iter() {
-                    i.astd_write(w).await?;
+                    w.write_all(&(i.as_bytes()?)).await?;
                 }
 
                 // damages: ItemDamageType[5]
                 for i in v.damages.iter() {
-                    i.astd_write(w).await?;
+                    w.write_all(&(i.as_bytes()?)).await?;
                 }
 
                 // armor: u32
@@ -1372,7 +1372,7 @@ impl MessageBody for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
                 // spells: ItemSpells[5]
                 for i in v.spells.iter() {
-                    i.astd_write(w).await?;
+                    w.write_all(&(i.as_bytes()?)).await?;
                 }
 
                 // bonding: u32

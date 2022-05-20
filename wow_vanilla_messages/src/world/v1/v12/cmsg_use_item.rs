@@ -60,7 +60,7 @@ impl MessageBody for CMSG_USE_ITEM {
         w.write_all(&self.spell_index.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        self.targets.write(w)?;
+        w.write_all(&self.targets.as_bytes()?)?;
 
         Ok(())
     }
@@ -123,7 +123,7 @@ impl MessageBody for CMSG_USE_ITEM {
             w.write_all(&self.spell_index.to_le_bytes()).await?;
 
             // targets: SpellCastTargets
-            self.targets.tokio_write(w).await?;
+            w.write_all(&self.targets.as_bytes()?).await?;
 
             Ok(())
         })
@@ -187,7 +187,7 @@ impl MessageBody for CMSG_USE_ITEM {
             w.write_all(&self.spell_index.to_le_bytes()).await?;
 
             // targets: SpellCastTargets
-            self.targets.astd_write(w).await?;
+            w.write_all(&self.targets.as_bytes()?).await?;
 
             Ok(())
         })

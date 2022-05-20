@@ -69,7 +69,7 @@ impl ReadableAndWritable for CMD_REALM_LIST_Server {
 
         // realms: Realm[number_of_realms]
         for i in self.realms.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // footer_padding: u16
@@ -145,7 +145,7 @@ impl ReadableAndWritable for CMD_REALM_LIST_Server {
 
             // realms: Realm[number_of_realms]
             for i in self.realms.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // footer_padding: u16
@@ -222,7 +222,7 @@ impl ReadableAndWritable for CMD_REALM_LIST_Server {
 
             // realms: Realm[number_of_realms]
             for i in self.realms.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // footer_padding: u16

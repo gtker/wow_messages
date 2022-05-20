@@ -63,7 +63,7 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Server {
 
         // pets: StabledPet[amount_of_pets]
         for i in self.pets.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -130,7 +130,7 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Server {
 
             // pets: StabledPet[amount_of_pets]
             for i in self.pets.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -198,7 +198,7 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Server {
 
             // pets: StabledPet[amount_of_pets]
             for i in self.pets.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

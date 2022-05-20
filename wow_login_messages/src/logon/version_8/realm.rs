@@ -4,9 +4,10 @@ use crate::logon::version_2::{RealmCategory, RealmCategoryError};
 use crate::logon::version_8::{RealmFlag};
 use crate::logon::all::Version;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Realm {
@@ -22,6 +23,48 @@ pub struct Realm {
 }
 
 impl Realm {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // realm_type: u8
+        w.write_all(&self.realm_type.to_le_bytes())?;
+
+        // locked: u8
+        w.write_all(&self.locked.to_le_bytes())?;
+
+        // flag: RealmFlag
+        w.write_all(&(self.flag.as_int() as u8).to_le_bytes())?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // address: CString
+        w.write_all(self.address.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // population: Population
+        w.write_all(&(self.population.as_int() as u32).to_le_bytes())?;
+
+        // number_of_characters_on_realm: u8
+        w.write_all(&self.number_of_characters_on_realm.to_le_bytes())?;
+
+        // category: RealmCategory
+        w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
+
+        // realm_id: u8
+        w.write_all(&self.realm_id.to_le_bytes())?;
+
+        if let Some(if_statement) = &self.flag.specify_build {
+            // version: Version
+            w.write_all(&if_statement.version.as_bytes()?)?;
+
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, RealmError> {
         // realm_type: u8
@@ -81,48 +124,6 @@ impl Realm {
             category,
             realm_id,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // realm_type: u8
-        w.write_all(&self.realm_type.to_le_bytes())?;
-
-        // locked: u8
-        w.write_all(&self.locked.to_le_bytes())?;
-
-        // flag: RealmFlag
-        w.write_all(&(self.flag.as_int() as u8).to_le_bytes())?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // address: CString
-        w.write_all(self.address.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // population: Population
-        w.write_all(&(self.population.as_int() as u32).to_le_bytes())?;
-
-        // number_of_characters_on_realm: u8
-        w.write_all(&self.number_of_characters_on_realm.to_le_bytes())?;
-
-        // category: RealmCategory
-        w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
-
-        // realm_id: u8
-        w.write_all(&self.realm_id.to_le_bytes())?;
-
-        if let Some(if_statement) = &self.flag.specify_build {
-            // version: Version
-            if_statement.version.write(w)?;
-
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -186,48 +187,6 @@ impl Realm {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // realm_type: u8
-        w.write_all(&self.realm_type.to_le_bytes()).await?;
-
-        // locked: u8
-        w.write_all(&self.locked.to_le_bytes()).await?;
-
-        // flag: RealmFlag
-        w.write_all(&(self.flag.as_int() as u8).to_le_bytes()).await?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // address: CString
-        w.write_all(self.address.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // population: Population
-        w.write_all(&(self.population.as_int() as u32).to_le_bytes()).await?;
-
-        // number_of_characters_on_realm: u8
-        w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
-
-        // category: RealmCategory
-        w.write_all(&(self.category.as_int() as u8).to_le_bytes()).await?;
-
-        // realm_id: u8
-        w.write_all(&self.realm_id.to_le_bytes()).await?;
-
-        if let Some(if_statement) = &self.flag.specify_build {
-            // version: Version
-            if_statement.version.tokio_write(w).await?;
-
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RealmError> {
         // realm_type: u8
@@ -287,48 +246,6 @@ impl Realm {
             category,
             realm_id,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // realm_type: u8
-        w.write_all(&self.realm_type.to_le_bytes()).await?;
-
-        // locked: u8
-        w.write_all(&self.locked.to_le_bytes()).await?;
-
-        // flag: RealmFlag
-        w.write_all(&(self.flag.as_int() as u8).to_le_bytes()).await?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // address: CString
-        w.write_all(self.address.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // population: Population
-        w.write_all(&(self.population.as_int() as u32).to_le_bytes()).await?;
-
-        // number_of_characters_on_realm: u8
-        w.write_all(&self.number_of_characters_on_realm.to_le_bytes()).await?;
-
-        // category: RealmCategory
-        w.write_all(&(self.category.as_int() as u8).to_le_bytes()).await?;
-
-        // realm_id: u8
-        w.write_all(&self.realm_id.to_le_bytes()).await?;
-
-        if let Some(if_statement) = &self.flag.specify_build {
-            // version: Version
-            if_statement.version.astd_write(w).await?;
-
-        }
-
-        Ok(())
     }
 
 }

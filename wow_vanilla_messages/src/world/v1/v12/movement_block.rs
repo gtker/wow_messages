@@ -6,9 +6,10 @@ use crate::world::v1::v12::TransportInfo;
 use crate::world::v1::v12::{UpdateFlag};
 use crate::world::v1::v12::Vector3d;
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct MovementBlock {
@@ -23,6 +24,210 @@ impl MovementBlock {
 }
 
 impl MovementBlock {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // update_flag: UpdateFlag
+        w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes())?;
+
+        if let Some(if_statement) = &self.update_flag.living {
+            match if_statement {
+                MovementBlockUpdateFlagLIVING::LIVING {
+                    backwards_running_speed,
+                    backwards_swimming_speed,
+                    fall_time,
+                    flags,
+                    living_orientation,
+                    living_position_x,
+                    living_position_y,
+                    living_position_z,
+                    running_speed,
+                    swimming_speed,
+                    timestamp,
+                    turn_rate,
+                    walking_speed,
+                } => {
+                    // flags: MovementFlags
+                    w.write_all(&(flags.as_int() as u32).to_le_bytes())?;
+
+                    // timestamp: u32
+                    w.write_all(&timestamp.to_le_bytes())?;
+
+                    // living_position_x: f32
+                    w.write_all(&living_position_x.to_le_bytes())?;
+
+                    // living_position_y: f32
+                    w.write_all(&living_position_y.to_le_bytes())?;
+
+                    // living_position_z: f32
+                    w.write_all(&living_position_z.to_le_bytes())?;
+
+                    // living_orientation: f32
+                    w.write_all(&living_orientation.to_le_bytes())?;
+
+                    if let Some(if_statement) = &flags.on_transport {
+                        // transport: TransportInfo
+                        w.write_all(&if_statement.transport.as_bytes()?)?;
+
+                    }
+
+                    if let Some(if_statement) = &flags.swimming {
+                        // pitch: f32
+                        w.write_all(&if_statement.pitch.to_le_bytes())?;
+
+                    }
+
+                    // fall_time: f32
+                    w.write_all(&fall_time.to_le_bytes())?;
+
+                    if let Some(if_statement) = &flags.jumping {
+                        // z_speed: f32
+                        w.write_all(&if_statement.z_speed.to_le_bytes())?;
+
+                        // cos_angle: f32
+                        w.write_all(&if_statement.cos_angle.to_le_bytes())?;
+
+                        // sin_angle: f32
+                        w.write_all(&if_statement.sin_angle.to_le_bytes())?;
+
+                        // xy_speed: f32
+                        w.write_all(&if_statement.xy_speed.to_le_bytes())?;
+
+                    }
+
+                    if let Some(if_statement) = &flags.spline_elevation {
+                        // spline_elevation: f32
+                        w.write_all(&if_statement.spline_elevation.to_le_bytes())?;
+
+                    }
+
+                    // walking_speed: f32
+                    w.write_all(&walking_speed.to_le_bytes())?;
+
+                    // running_speed: f32
+                    w.write_all(&running_speed.to_le_bytes())?;
+
+                    // backwards_running_speed: f32
+                    w.write_all(&backwards_running_speed.to_le_bytes())?;
+
+                    // swimming_speed: f32
+                    w.write_all(&swimming_speed.to_le_bytes())?;
+
+                    // backwards_swimming_speed: f32
+                    w.write_all(&backwards_swimming_speed.to_le_bytes())?;
+
+                    // turn_rate: f32
+                    w.write_all(&turn_rate.to_le_bytes())?;
+
+                    if let Some(if_statement) = &flags.spline_enabled {
+                        // spline_flags: SplineFlag
+                        w.write_all(&(if_statement.spline_flags.as_int() as u32).to_le_bytes())?;
+
+                        if let Some(if_statement) = &if_statement.spline_flags.final_angle {
+                            match if_statement {
+                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
+                                    angle,
+                                } => {
+                                    // angle: f32
+                                    w.write_all(&angle.to_le_bytes())?;
+
+                                }
+                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
+                                    target,
+                                } => {
+                                    // target: u64
+                                    w.write_all(&target.to_le_bytes())?;
+
+                                }
+                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
+                                    spline_final_point_x,
+                                    spline_final_point_y,
+                                    spline_final_point_z,
+                                } => {
+                                    // spline_final_point_x: f32
+                                    w.write_all(&spline_final_point_x.to_le_bytes())?;
+
+                                    // spline_final_point_y: f32
+                                    w.write_all(&spline_final_point_y.to_le_bytes())?;
+
+                                    // spline_final_point_z: f32
+                                    w.write_all(&spline_final_point_z.to_le_bytes())?;
+
+                                }
+                            }
+                        }
+
+                        // time_passed: u32
+                        w.write_all(&if_statement.time_passed.to_le_bytes())?;
+
+                        // duration: u32
+                        w.write_all(&if_statement.duration.to_le_bytes())?;
+
+                        // id: u32
+                        w.write_all(&if_statement.id.to_le_bytes())?;
+
+                        // amount_of_nodes: u32
+                        w.write_all(&(if_statement.nodes.len() as u32).to_le_bytes())?;
+
+                        // nodes: Vector3d[amount_of_nodes]
+                        for i in if_statement.nodes.iter() {
+                            w.write_all(&(i.as_bytes()?))?;
+                        }
+
+                        // final_node: Vector3d
+                        w.write_all(&if_statement.final_node.as_bytes()?)?;
+
+                    }
+
+                }
+                MovementBlockUpdateFlagLIVING::HAS_POSITION {
+                    orientation,
+                    position_x,
+                    position_y,
+                    position_z,
+                } => {
+                    // position_x: f32
+                    w.write_all(&position_x.to_le_bytes())?;
+
+                    // position_y: f32
+                    w.write_all(&position_y.to_le_bytes())?;
+
+                    // position_z: f32
+                    w.write_all(&position_z.to_le_bytes())?;
+
+                    // orientation: f32
+                    w.write_all(&orientation.to_le_bytes())?;
+
+                }
+            }
+        }
+
+        if let Some(if_statement) = &self.update_flag.high_guid {
+            // unknown0: u32
+            w.write_all(&Self::UNKNOWN0_VALUE.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.update_flag.all {
+            // unknown1: u32
+            w.write_all(&Self::UNKNOWN1_VALUE.to_le_bytes())?;
+
+        }
+
+        if let Some(if_statement) = &self.update_flag.melee_attacking {
+            // guid: PackedGuid
+            w.write_all(&if_statement.guid.packed_guid())?;
+
+        }
+
+        if let Some(if_statement) = &self.update_flag.transport {
+            // transport_progress_in_ms: u32
+            w.write_all(&if_statement.transport_progress_in_ms.to_le_bytes())?;
+
+        }
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // update_flag: UpdateFlag
@@ -291,210 +496,6 @@ impl MovementBlock {
         Ok(Self {
             update_flag,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // update_flag: UpdateFlag
-        w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes())?;
-
-        if let Some(if_statement) = &self.update_flag.living {
-            match if_statement {
-                MovementBlockUpdateFlagLIVING::LIVING {
-                    backwards_running_speed,
-                    backwards_swimming_speed,
-                    fall_time,
-                    flags,
-                    living_orientation,
-                    living_position_x,
-                    living_position_y,
-                    living_position_z,
-                    running_speed,
-                    swimming_speed,
-                    timestamp,
-                    turn_rate,
-                    walking_speed,
-                } => {
-                    // flags: MovementFlags
-                    w.write_all(&(flags.as_int() as u32).to_le_bytes())?;
-
-                    // timestamp: u32
-                    w.write_all(&timestamp.to_le_bytes())?;
-
-                    // living_position_x: f32
-                    w.write_all(&living_position_x.to_le_bytes())?;
-
-                    // living_position_y: f32
-                    w.write_all(&living_position_y.to_le_bytes())?;
-
-                    // living_position_z: f32
-                    w.write_all(&living_position_z.to_le_bytes())?;
-
-                    // living_orientation: f32
-                    w.write_all(&living_orientation.to_le_bytes())?;
-
-                    if let Some(if_statement) = &flags.on_transport {
-                        // transport: TransportInfo
-                        if_statement.transport.write(w)?;
-
-                    }
-
-                    if let Some(if_statement) = &flags.swimming {
-                        // pitch: f32
-                        w.write_all(&if_statement.pitch.to_le_bytes())?;
-
-                    }
-
-                    // fall_time: f32
-                    w.write_all(&fall_time.to_le_bytes())?;
-
-                    if let Some(if_statement) = &flags.jumping {
-                        // z_speed: f32
-                        w.write_all(&if_statement.z_speed.to_le_bytes())?;
-
-                        // cos_angle: f32
-                        w.write_all(&if_statement.cos_angle.to_le_bytes())?;
-
-                        // sin_angle: f32
-                        w.write_all(&if_statement.sin_angle.to_le_bytes())?;
-
-                        // xy_speed: f32
-                        w.write_all(&if_statement.xy_speed.to_le_bytes())?;
-
-                    }
-
-                    if let Some(if_statement) = &flags.spline_elevation {
-                        // spline_elevation: f32
-                        w.write_all(&if_statement.spline_elevation.to_le_bytes())?;
-
-                    }
-
-                    // walking_speed: f32
-                    w.write_all(&walking_speed.to_le_bytes())?;
-
-                    // running_speed: f32
-                    w.write_all(&running_speed.to_le_bytes())?;
-
-                    // backwards_running_speed: f32
-                    w.write_all(&backwards_running_speed.to_le_bytes())?;
-
-                    // swimming_speed: f32
-                    w.write_all(&swimming_speed.to_le_bytes())?;
-
-                    // backwards_swimming_speed: f32
-                    w.write_all(&backwards_swimming_speed.to_le_bytes())?;
-
-                    // turn_rate: f32
-                    w.write_all(&turn_rate.to_le_bytes())?;
-
-                    if let Some(if_statement) = &flags.spline_enabled {
-                        // spline_flags: SplineFlag
-                        w.write_all(&(if_statement.spline_flags.as_int() as u32).to_le_bytes())?;
-
-                        if let Some(if_statement) = &if_statement.spline_flags.final_angle {
-                            match if_statement {
-                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
-                                    angle,
-                                } => {
-                                    // angle: f32
-                                    w.write_all(&angle.to_le_bytes())?;
-
-                                }
-                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
-                                    target,
-                                } => {
-                                    // target: u64
-                                    w.write_all(&target.to_le_bytes())?;
-
-                                }
-                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
-                                    spline_final_point_x,
-                                    spline_final_point_y,
-                                    spline_final_point_z,
-                                } => {
-                                    // spline_final_point_x: f32
-                                    w.write_all(&spline_final_point_x.to_le_bytes())?;
-
-                                    // spline_final_point_y: f32
-                                    w.write_all(&spline_final_point_y.to_le_bytes())?;
-
-                                    // spline_final_point_z: f32
-                                    w.write_all(&spline_final_point_z.to_le_bytes())?;
-
-                                }
-                            }
-                        }
-
-                        // time_passed: u32
-                        w.write_all(&if_statement.time_passed.to_le_bytes())?;
-
-                        // duration: u32
-                        w.write_all(&if_statement.duration.to_le_bytes())?;
-
-                        // id: u32
-                        w.write_all(&if_statement.id.to_le_bytes())?;
-
-                        // amount_of_nodes: u32
-                        w.write_all(&(if_statement.nodes.len() as u32).to_le_bytes())?;
-
-                        // nodes: Vector3d[amount_of_nodes]
-                        for i in if_statement.nodes.iter() {
-                            i.write(w)?;
-                        }
-
-                        // final_node: Vector3d
-                        if_statement.final_node.write(w)?;
-
-                    }
-
-                }
-                MovementBlockUpdateFlagLIVING::HAS_POSITION {
-                    orientation,
-                    position_x,
-                    position_y,
-                    position_z,
-                } => {
-                    // position_x: f32
-                    w.write_all(&position_x.to_le_bytes())?;
-
-                    // position_y: f32
-                    w.write_all(&position_y.to_le_bytes())?;
-
-                    // position_z: f32
-                    w.write_all(&position_z.to_le_bytes())?;
-
-                    // orientation: f32
-                    w.write_all(&orientation.to_le_bytes())?;
-
-                }
-            }
-        }
-
-        if let Some(if_statement) = &self.update_flag.high_guid {
-            // unknown0: u32
-            w.write_all(&Self::UNKNOWN0_VALUE.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.update_flag.all {
-            // unknown1: u32
-            w.write_all(&Self::UNKNOWN1_VALUE.to_le_bytes())?;
-
-        }
-
-        if let Some(if_statement) = &self.update_flag.melee_attacking {
-            // guid: PackedGuid
-            w.write_all(&if_statement.guid.packed_guid())?;
-
-        }
-
-        if let Some(if_statement) = &self.update_flag.transport {
-            // transport_progress_in_ms: u32
-            w.write_all(&if_statement.transport_progress_in_ms.to_le_bytes())?;
-
-        }
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -767,210 +768,6 @@ impl MovementBlock {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // update_flag: UpdateFlag
-        w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes()).await?;
-
-        if let Some(if_statement) = &self.update_flag.living {
-            match if_statement {
-                MovementBlockUpdateFlagLIVING::LIVING {
-                    backwards_running_speed,
-                    backwards_swimming_speed,
-                    fall_time,
-                    flags,
-                    living_orientation,
-                    living_position_x,
-                    living_position_y,
-                    living_position_z,
-                    running_speed,
-                    swimming_speed,
-                    timestamp,
-                    turn_rate,
-                    walking_speed,
-                } => {
-                    // flags: MovementFlags
-                    w.write_all(&(flags.as_int() as u32).to_le_bytes()).await?;
-
-                    // timestamp: u32
-                    w.write_all(&timestamp.to_le_bytes()).await?;
-
-                    // living_position_x: f32
-                    w.write_all(&living_position_x.to_le_bytes()).await?;
-
-                    // living_position_y: f32
-                    w.write_all(&living_position_y.to_le_bytes()).await?;
-
-                    // living_position_z: f32
-                    w.write_all(&living_position_z.to_le_bytes()).await?;
-
-                    // living_orientation: f32
-                    w.write_all(&living_orientation.to_le_bytes()).await?;
-
-                    if let Some(if_statement) = &flags.on_transport {
-                        // transport: TransportInfo
-                        if_statement.transport.tokio_write(w).await?;
-
-                    }
-
-                    if let Some(if_statement) = &flags.swimming {
-                        // pitch: f32
-                        w.write_all(&if_statement.pitch.to_le_bytes()).await?;
-
-                    }
-
-                    // fall_time: f32
-                    w.write_all(&fall_time.to_le_bytes()).await?;
-
-                    if let Some(if_statement) = &flags.jumping {
-                        // z_speed: f32
-                        w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
-
-                        // cos_angle: f32
-                        w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
-
-                        // sin_angle: f32
-                        w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
-
-                        // xy_speed: f32
-                        w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
-
-                    }
-
-                    if let Some(if_statement) = &flags.spline_elevation {
-                        // spline_elevation: f32
-                        w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
-
-                    }
-
-                    // walking_speed: f32
-                    w.write_all(&walking_speed.to_le_bytes()).await?;
-
-                    // running_speed: f32
-                    w.write_all(&running_speed.to_le_bytes()).await?;
-
-                    // backwards_running_speed: f32
-                    w.write_all(&backwards_running_speed.to_le_bytes()).await?;
-
-                    // swimming_speed: f32
-                    w.write_all(&swimming_speed.to_le_bytes()).await?;
-
-                    // backwards_swimming_speed: f32
-                    w.write_all(&backwards_swimming_speed.to_le_bytes()).await?;
-
-                    // turn_rate: f32
-                    w.write_all(&turn_rate.to_le_bytes()).await?;
-
-                    if let Some(if_statement) = &flags.spline_enabled {
-                        // spline_flags: SplineFlag
-                        w.write_all(&(if_statement.spline_flags.as_int() as u32).to_le_bytes()).await?;
-
-                        if let Some(if_statement) = &if_statement.spline_flags.final_angle {
-                            match if_statement {
-                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
-                                    angle,
-                                } => {
-                                    // angle: f32
-                                    w.write_all(&angle.to_le_bytes()).await?;
-
-                                }
-                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
-                                    target,
-                                } => {
-                                    // target: u64
-                                    w.write_all(&target.to_le_bytes()).await?;
-
-                                }
-                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
-                                    spline_final_point_x,
-                                    spline_final_point_y,
-                                    spline_final_point_z,
-                                } => {
-                                    // spline_final_point_x: f32
-                                    w.write_all(&spline_final_point_x.to_le_bytes()).await?;
-
-                                    // spline_final_point_y: f32
-                                    w.write_all(&spline_final_point_y.to_le_bytes()).await?;
-
-                                    // spline_final_point_z: f32
-                                    w.write_all(&spline_final_point_z.to_le_bytes()).await?;
-
-                                }
-                            }
-                        }
-
-                        // time_passed: u32
-                        w.write_all(&if_statement.time_passed.to_le_bytes()).await?;
-
-                        // duration: u32
-                        w.write_all(&if_statement.duration.to_le_bytes()).await?;
-
-                        // id: u32
-                        w.write_all(&if_statement.id.to_le_bytes()).await?;
-
-                        // amount_of_nodes: u32
-                        w.write_all(&(if_statement.nodes.len() as u32).to_le_bytes()).await?;
-
-                        // nodes: Vector3d[amount_of_nodes]
-                        for i in if_statement.nodes.iter() {
-                            i.tokio_write(w).await?;
-                        }
-
-                        // final_node: Vector3d
-                        if_statement.final_node.tokio_write(w).await?;
-
-                    }
-
-                }
-                MovementBlockUpdateFlagLIVING::HAS_POSITION {
-                    orientation,
-                    position_x,
-                    position_y,
-                    position_z,
-                } => {
-                    // position_x: f32
-                    w.write_all(&position_x.to_le_bytes()).await?;
-
-                    // position_y: f32
-                    w.write_all(&position_y.to_le_bytes()).await?;
-
-                    // position_z: f32
-                    w.write_all(&position_z.to_le_bytes()).await?;
-
-                    // orientation: f32
-                    w.write_all(&orientation.to_le_bytes()).await?;
-
-                }
-            }
-        }
-
-        if let Some(if_statement) = &self.update_flag.high_guid {
-            // unknown0: u32
-            w.write_all(&Self::UNKNOWN0_VALUE.to_le_bytes()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.update_flag.all {
-            // unknown1: u32
-            w.write_all(&Self::UNKNOWN1_VALUE.to_le_bytes()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.update_flag.melee_attacking {
-            // guid: PackedGuid
-            w.write_all(&if_statement.guid.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.update_flag.transport {
-            // transport_progress_in_ms: u32
-            w.write_all(&if_statement.transport_progress_in_ms.to_le_bytes()).await?;
-
-        }
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // update_flag: UpdateFlag
@@ -1239,210 +1036,6 @@ impl MovementBlock {
         Ok(Self {
             update_flag,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // update_flag: UpdateFlag
-        w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes()).await?;
-
-        if let Some(if_statement) = &self.update_flag.living {
-            match if_statement {
-                MovementBlockUpdateFlagLIVING::LIVING {
-                    backwards_running_speed,
-                    backwards_swimming_speed,
-                    fall_time,
-                    flags,
-                    living_orientation,
-                    living_position_x,
-                    living_position_y,
-                    living_position_z,
-                    running_speed,
-                    swimming_speed,
-                    timestamp,
-                    turn_rate,
-                    walking_speed,
-                } => {
-                    // flags: MovementFlags
-                    w.write_all(&(flags.as_int() as u32).to_le_bytes()).await?;
-
-                    // timestamp: u32
-                    w.write_all(&timestamp.to_le_bytes()).await?;
-
-                    // living_position_x: f32
-                    w.write_all(&living_position_x.to_le_bytes()).await?;
-
-                    // living_position_y: f32
-                    w.write_all(&living_position_y.to_le_bytes()).await?;
-
-                    // living_position_z: f32
-                    w.write_all(&living_position_z.to_le_bytes()).await?;
-
-                    // living_orientation: f32
-                    w.write_all(&living_orientation.to_le_bytes()).await?;
-
-                    if let Some(if_statement) = &flags.on_transport {
-                        // transport: TransportInfo
-                        if_statement.transport.astd_write(w).await?;
-
-                    }
-
-                    if let Some(if_statement) = &flags.swimming {
-                        // pitch: f32
-                        w.write_all(&if_statement.pitch.to_le_bytes()).await?;
-
-                    }
-
-                    // fall_time: f32
-                    w.write_all(&fall_time.to_le_bytes()).await?;
-
-                    if let Some(if_statement) = &flags.jumping {
-                        // z_speed: f32
-                        w.write_all(&if_statement.z_speed.to_le_bytes()).await?;
-
-                        // cos_angle: f32
-                        w.write_all(&if_statement.cos_angle.to_le_bytes()).await?;
-
-                        // sin_angle: f32
-                        w.write_all(&if_statement.sin_angle.to_le_bytes()).await?;
-
-                        // xy_speed: f32
-                        w.write_all(&if_statement.xy_speed.to_le_bytes()).await?;
-
-                    }
-
-                    if let Some(if_statement) = &flags.spline_elevation {
-                        // spline_elevation: f32
-                        w.write_all(&if_statement.spline_elevation.to_le_bytes()).await?;
-
-                    }
-
-                    // walking_speed: f32
-                    w.write_all(&walking_speed.to_le_bytes()).await?;
-
-                    // running_speed: f32
-                    w.write_all(&running_speed.to_le_bytes()).await?;
-
-                    // backwards_running_speed: f32
-                    w.write_all(&backwards_running_speed.to_le_bytes()).await?;
-
-                    // swimming_speed: f32
-                    w.write_all(&swimming_speed.to_le_bytes()).await?;
-
-                    // backwards_swimming_speed: f32
-                    w.write_all(&backwards_swimming_speed.to_le_bytes()).await?;
-
-                    // turn_rate: f32
-                    w.write_all(&turn_rate.to_le_bytes()).await?;
-
-                    if let Some(if_statement) = &flags.spline_enabled {
-                        // spline_flags: SplineFlag
-                        w.write_all(&(if_statement.spline_flags.as_int() as u32).to_le_bytes()).await?;
-
-                        if let Some(if_statement) = &if_statement.spline_flags.final_angle {
-                            match if_statement {
-                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_ANGLE {
-                                    angle,
-                                } => {
-                                    // angle: f32
-                                    w.write_all(&angle.to_le_bytes()).await?;
-
-                                }
-                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_TARGET {
-                                    target,
-                                } => {
-                                    // target: u64
-                                    w.write_all(&target.to_le_bytes()).await?;
-
-                                }
-                                MovementBlockSplineFlagFINAL_ANGLE::FINAL_POINT {
-                                    spline_final_point_x,
-                                    spline_final_point_y,
-                                    spline_final_point_z,
-                                } => {
-                                    // spline_final_point_x: f32
-                                    w.write_all(&spline_final_point_x.to_le_bytes()).await?;
-
-                                    // spline_final_point_y: f32
-                                    w.write_all(&spline_final_point_y.to_le_bytes()).await?;
-
-                                    // spline_final_point_z: f32
-                                    w.write_all(&spline_final_point_z.to_le_bytes()).await?;
-
-                                }
-                            }
-                        }
-
-                        // time_passed: u32
-                        w.write_all(&if_statement.time_passed.to_le_bytes()).await?;
-
-                        // duration: u32
-                        w.write_all(&if_statement.duration.to_le_bytes()).await?;
-
-                        // id: u32
-                        w.write_all(&if_statement.id.to_le_bytes()).await?;
-
-                        // amount_of_nodes: u32
-                        w.write_all(&(if_statement.nodes.len() as u32).to_le_bytes()).await?;
-
-                        // nodes: Vector3d[amount_of_nodes]
-                        for i in if_statement.nodes.iter() {
-                            i.astd_write(w).await?;
-                        }
-
-                        // final_node: Vector3d
-                        if_statement.final_node.astd_write(w).await?;
-
-                    }
-
-                }
-                MovementBlockUpdateFlagLIVING::HAS_POSITION {
-                    orientation,
-                    position_x,
-                    position_y,
-                    position_z,
-                } => {
-                    // position_x: f32
-                    w.write_all(&position_x.to_le_bytes()).await?;
-
-                    // position_y: f32
-                    w.write_all(&position_y.to_le_bytes()).await?;
-
-                    // position_z: f32
-                    w.write_all(&position_z.to_le_bytes()).await?;
-
-                    // orientation: f32
-                    w.write_all(&orientation.to_le_bytes()).await?;
-
-                }
-            }
-        }
-
-        if let Some(if_statement) = &self.update_flag.high_guid {
-            // unknown0: u32
-            w.write_all(&Self::UNKNOWN0_VALUE.to_le_bytes()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.update_flag.all {
-            // unknown1: u32
-            w.write_all(&Self::UNKNOWN1_VALUE.to_le_bytes()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.update_flag.melee_attacking {
-            // guid: PackedGuid
-            w.write_all(&if_statement.guid.packed_guid()).await?;
-
-        }
-
-        if let Some(if_statement) = &self.update_flag.transport {
-            // transport_progress_in_ms: u32
-            w.write_all(&if_statement.transport_progress_in_ms.to_le_bytes()).await?;
-
-        }
-
-        Ok(())
     }
 
 }

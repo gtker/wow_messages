@@ -232,12 +232,12 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
 
         // rewards: QuestItemReward[4]
         for i in self.rewards.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // choice_rewards: QuestItemReward[6]
         for i in self.choice_rewards.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // point_map_id: u32
@@ -274,7 +274,7 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
 
         // objectives: QuestObjective[4]
         for i in self.objectives.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // objective_texts: CString[4]
@@ -492,12 +492,12 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
 
             // rewards: QuestItemReward[4]
             for i in self.rewards.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // choice_rewards: QuestItemReward[6]
             for i in self.choice_rewards.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // point_map_id: u32
@@ -534,7 +534,7 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
 
             // objectives: QuestObjective[4]
             for i in self.objectives.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // objective_texts: CString[4]
@@ -753,12 +753,12 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
 
             // rewards: QuestItemReward[4]
             for i in self.rewards.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // choice_rewards: QuestItemReward[6]
             for i in self.choice_rewards.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // point_map_id: u32
@@ -795,7 +795,7 @@ impl MessageBody for SMSG_QUEST_QUERY_RESPONSE {
 
             // objectives: QuestObjective[4]
             for i in self.objectives.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // objective_texts: CString[4]

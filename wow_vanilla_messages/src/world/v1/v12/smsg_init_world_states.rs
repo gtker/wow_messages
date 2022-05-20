@@ -64,7 +64,7 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
 
         // states: WorldState[amount_of_states]
         for i in self.states.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -131,7 +131,7 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
 
             // states: WorldState[amount_of_states]
             for i in self.states.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -199,7 +199,7 @@ impl MessageBody for SMSG_INIT_WORLD_STATES {
 
             // states: WorldState[amount_of_states]
             for i in self.states.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

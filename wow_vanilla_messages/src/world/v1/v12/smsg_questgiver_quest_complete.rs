@@ -78,7 +78,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
         // item_rewards: QuestItemReward[amount_of_item_rewards]
         for i in self.item_rewards.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -159,7 +159,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
             // item_rewards: QuestItemReward[amount_of_item_rewards]
             for i in self.item_rewards.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -241,7 +241,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
             // item_rewards: QuestItemReward[amount_of_item_rewards]
             for i in self.item_rewards.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

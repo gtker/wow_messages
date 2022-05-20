@@ -58,7 +58,7 @@ impl MessageBody for CMSG_MOVE_HOVER_ACK {
         w.write_all(&self.counter.to_le_bytes())?;
 
         // movement_info: MovementInfo
-        self.movement_info.write(w)?;
+        w.write_all(&self.movement_info.as_bytes()?)?;
 
         // is_applied: u32
         w.write_all(&self.is_applied.to_le_bytes())?;
@@ -121,7 +121,7 @@ impl MessageBody for CMSG_MOVE_HOVER_ACK {
             w.write_all(&self.counter.to_le_bytes()).await?;
 
             // movement_info: MovementInfo
-            self.movement_info.tokio_write(w).await?;
+            w.write_all(&self.movement_info.as_bytes()?).await?;
 
             // is_applied: u32
             w.write_all(&self.is_applied.to_le_bytes()).await?;
@@ -185,7 +185,7 @@ impl MessageBody for CMSG_MOVE_HOVER_ACK {
             w.write_all(&self.counter.to_le_bytes()).await?;
 
             // movement_info: MovementInfo
-            self.movement_info.astd_write(w).await?;
+            w.write_all(&self.movement_info.as_bytes()?).await?;
 
             // is_applied: u32
             w.write_all(&self.is_applied.to_le_bytes()).await?;

@@ -1,8 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -12,6 +13,17 @@ pub struct ItemStat {
 }
 
 impl ItemStat {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // item_stat_type: u32
+        w.write_all(&self.item_stat_type.to_le_bytes())?;
+
+        // item_stat_value: u32
+        w.write_all(&self.item_stat_value.to_le_bytes())?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // item_stat_type: u32
@@ -24,17 +36,6 @@ impl ItemStat {
             item_stat_type,
             item_stat_value,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_stat_type: u32
-        w.write_all(&self.item_stat_type.to_le_bytes())?;
-
-        // item_stat_value: u32
-        w.write_all(&self.item_stat_value.to_le_bytes())?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -51,17 +52,6 @@ impl ItemStat {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_stat_type: u32
-        w.write_all(&self.item_stat_type.to_le_bytes()).await?;
-
-        // item_stat_value: u32
-        w.write_all(&self.item_stat_value.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // item_stat_type: u32
@@ -74,17 +64,6 @@ impl ItemStat {
             item_stat_type,
             item_stat_value,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // item_stat_type: u32
-        w.write_all(&self.item_stat_type.to_le_bytes()).await?;
-
-        // item_stat_value: u32
-        w.write_all(&self.item_stat_value.to_le_bytes()).await?;
-
-        Ok(())
     }
 
 }

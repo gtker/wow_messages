@@ -81,7 +81,7 @@ impl MessageBody for SMSG_TRADE_STATUS_EXTENDED {
 
         // trade_slots: TradeSlot[7]
         for i in self.trade_slots.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         Ok(())
@@ -163,7 +163,7 @@ impl MessageBody for SMSG_TRADE_STATUS_EXTENDED {
 
             // trade_slots: TradeSlot[7]
             for i in self.trade_slots.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())
@@ -246,7 +246,7 @@ impl MessageBody for SMSG_TRADE_STATUS_EXTENDED {
 
             // trade_slots: TradeSlot[7]
             for i in self.trade_slots.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             Ok(())

@@ -67,7 +67,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
                 raid_target,
             } => {
                 // raid_target: RaidTargetUpdate
-                raid_target.write(w)?;
+                w.write_all(&raid_target.as_bytes()?)?;
 
             }
             MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
@@ -75,7 +75,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
             } => {
                 // raid_targets: RaidTargetUpdate[8]
                 for i in raid_targets.iter() {
-                    i.write(w)?;
+                    w.write_all(&(i.as_bytes()?))?;
                 }
 
             }
@@ -151,7 +151,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
                     raid_target,
                 } => {
                     // raid_target: RaidTargetUpdate
-                    raid_target.tokio_write(w).await?;
+                    w.write_all(&raid_target.as_bytes()?).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
@@ -159,7 +159,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
                 } => {
                     // raid_targets: RaidTargetUpdate[8]
                     for i in raid_targets.iter() {
-                        i.tokio_write(w).await?;
+                        w.write_all(&(i.as_bytes()?)).await?;
                     }
 
                 }
@@ -236,7 +236,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
                     raid_target,
                 } => {
                     // raid_target: RaidTargetUpdate
-                    raid_target.astd_write(w).await?;
+                    w.write_all(&raid_target.as_bytes()?).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType::FULL {
@@ -244,7 +244,7 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Server {
                 } => {
                     // raid_targets: RaidTargetUpdate[8]
                     for i in raid_targets.iter() {
-                        i.astd_write(w).await?;
+                        w.write_all(&(i.as_bytes()?)).await?;
                     }
 
                 }

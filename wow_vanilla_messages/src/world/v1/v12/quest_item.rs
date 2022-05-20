@@ -1,8 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct QuestItem {
@@ -13,6 +14,25 @@ pub struct QuestItem {
 }
 
 impl QuestItem {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // quest_id: u32
+        w.write_all(&self.quest_id.to_le_bytes())?;
+
+        // quest_icon: u32
+        w.write_all(&self.quest_icon.to_le_bytes())?;
+
+        // level: u32
+        w.write_all(&self.level.to_le_bytes())?;
+
+        // title: CString
+        w.write_all(self.title.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, QuestItemError> {
         // quest_id: u32
@@ -34,25 +54,6 @@ impl QuestItem {
             level,
             title,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes())?;
-
-        // quest_icon: u32
-        w.write_all(&self.quest_icon.to_le_bytes())?;
-
-        // level: u32
-        w.write_all(&self.level.to_le_bytes())?;
-
-        // title: CString
-        w.write_all(self.title.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -78,25 +79,6 @@ impl QuestItem {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes()).await?;
-
-        // quest_icon: u32
-        w.write_all(&self.quest_icon.to_le_bytes()).await?;
-
-        // level: u32
-        w.write_all(&self.level.to_le_bytes()).await?;
-
-        // title: CString
-        w.write_all(self.title.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, QuestItemError> {
         // quest_id: u32
@@ -118,25 +100,6 @@ impl QuestItem {
             level,
             title,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // quest_id: u32
-        w.write_all(&self.quest_id.to_le_bytes()).await?;
-
-        // quest_icon: u32
-        w.write_all(&self.quest_icon.to_le_bytes()).await?;
-
-        // level: u32
-        w.write_all(&self.level.to_le_bytes()).await?;
-
-        // title: CString
-        w.write_all(self.title.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        Ok(())
     }
 
 }

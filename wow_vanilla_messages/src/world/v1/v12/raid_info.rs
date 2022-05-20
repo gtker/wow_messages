@@ -1,9 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::v1::v12::{Map, MapError};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 #[derive(Copy)]
@@ -14,6 +15,20 @@ pub struct RaidInfo {
 }
 
 impl RaidInfo {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // map: Map
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+
+        // reset_time: u32
+        w.write_all(&self.reset_time.to_le_bytes())?;
+
+        // instance_id: u32
+        w.write_all(&self.instance_id.to_le_bytes())?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, RaidInfoError> {
         // map: Map
@@ -30,20 +45,6 @@ impl RaidInfo {
             reset_time,
             instance_id,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        // reset_time: u32
-        w.write_all(&self.reset_time.to_le_bytes())?;
-
-        // instance_id: u32
-        w.write_all(&self.instance_id.to_le_bytes())?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -64,20 +65,6 @@ impl RaidInfo {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
-
-        // reset_time: u32
-        w.write_all(&self.reset_time.to_le_bytes()).await?;
-
-        // instance_id: u32
-        w.write_all(&self.instance_id.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, RaidInfoError> {
         // map: Map
@@ -94,20 +81,6 @@ impl RaidInfo {
             reset_time,
             instance_id,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
-
-        // reset_time: u32
-        w.write_all(&self.reset_time.to_le_bytes()).await?;
-
-        // instance_id: u32
-        w.write_all(&self.instance_id.to_le_bytes()).await?;
-
-        Ok(())
     }
 
 }

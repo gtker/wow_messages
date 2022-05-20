@@ -8,9 +8,10 @@ use crate::world::v1::v12::{Gender, GenderError};
 use crate::world::v1::v12::{Map, MapError};
 use crate::world::v1::v12::{Race, RaceError};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
+use std::io::Write;
 
 #[derive(Debug, PartialEq, Clone, Default)]
 pub struct Character {
@@ -47,6 +48,90 @@ impl Character {
 }
 
 impl Character {
+    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
+        let mut w = Vec::with_capacity(8000);
+        // guid: Guid
+        w.write_all(&self.guid.guid().to_le_bytes())?;
+
+        // name: CString
+        w.write_all(self.name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // race: Race
+        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
+
+        // class: Class
+        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
+
+        // gender: Gender
+        w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
+
+        // skin: u8
+        w.write_all(&self.skin.to_le_bytes())?;
+
+        // face: u8
+        w.write_all(&self.face.to_le_bytes())?;
+
+        // hairstyle: u8
+        w.write_all(&self.hairstyle.to_le_bytes())?;
+
+        // haircolor: u8
+        w.write_all(&self.haircolor.to_le_bytes())?;
+
+        // facialhair: u8
+        w.write_all(&self.facialhair.to_le_bytes())?;
+
+        // level: u8
+        w.write_all(&self.level.to_le_bytes())?;
+
+        // area: Area
+        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
+
+        // map: Map
+        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+
+        // position_x: f32
+        w.write_all(&self.position_x.to_le_bytes())?;
+
+        // position_y: f32
+        w.write_all(&self.position_y.to_le_bytes())?;
+
+        // position_z: f32
+        w.write_all(&self.position_z.to_le_bytes())?;
+
+        // guild_id: u32
+        w.write_all(&self.guild_id.to_le_bytes())?;
+
+        // flags: CharacterFlags
+        w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
+
+        // first_login: u8
+        w.write_all(&self.first_login.to_le_bytes())?;
+
+        // pet_display_id: u32
+        w.write_all(&self.pet_display_id.to_le_bytes())?;
+
+        // pet_level: u32
+        w.write_all(&self.pet_level.to_le_bytes())?;
+
+        // pet_familiy: u32
+        w.write_all(&self.pet_familiy.to_le_bytes())?;
+
+        // equipment: CharacterGear[19]
+        for i in self.equipment.iter() {
+            w.write_all(&(i.as_bytes()?))?;
+        }
+
+        // first_bag_display_id: u32
+        w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes())?;
+
+        // first_bag_inventory_id: u8
+        w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes())?;
+
+        Ok(w)
+    }
+
     #[cfg(feature = "sync")]
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, CharacterError> {
         // guid: Guid
@@ -153,90 +238,6 @@ impl Character {
             pet_familiy,
             equipment,
         })
-    }
-
-    #[cfg(feature = "sync")]
-    pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // race: Race
-        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
-
-        // class: Class
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
-
-        // gender: Gender
-        w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
-
-        // skin: u8
-        w.write_all(&self.skin.to_le_bytes())?;
-
-        // face: u8
-        w.write_all(&self.face.to_le_bytes())?;
-
-        // hairstyle: u8
-        w.write_all(&self.hairstyle.to_le_bytes())?;
-
-        // haircolor: u8
-        w.write_all(&self.haircolor.to_le_bytes())?;
-
-        // facialhair: u8
-        w.write_all(&self.facialhair.to_le_bytes())?;
-
-        // level: u8
-        w.write_all(&self.level.to_le_bytes())?;
-
-        // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
-
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes())?;
-
-        // guild_id: u32
-        w.write_all(&self.guild_id.to_le_bytes())?;
-
-        // flags: CharacterFlags
-        w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
-
-        // first_login: u8
-        w.write_all(&self.first_login.to_le_bytes())?;
-
-        // pet_display_id: u32
-        w.write_all(&self.pet_display_id.to_le_bytes())?;
-
-        // pet_level: u32
-        w.write_all(&self.pet_level.to_le_bytes())?;
-
-        // pet_familiy: u32
-        w.write_all(&self.pet_familiy.to_le_bytes())?;
-
-        // equipment: CharacterGear[19]
-        for i in self.equipment.iter() {
-            i.write(w)?;
-        }
-
-        // first_bag_display_id: u32
-        w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes())?;
-
-        // first_bag_inventory_id: u8
-        w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes())?;
-
-        Ok(())
     }
 
     #[cfg(feature = "tokio")]
@@ -347,90 +348,6 @@ impl Character {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // race: Race
-        w.write_all(&(self.race.as_int() as u8).to_le_bytes()).await?;
-
-        // class: Class
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
-
-        // gender: Gender
-        w.write_all(&(self.gender.as_int() as u8).to_le_bytes()).await?;
-
-        // skin: u8
-        w.write_all(&self.skin.to_le_bytes()).await?;
-
-        // face: u8
-        w.write_all(&self.face.to_le_bytes()).await?;
-
-        // hairstyle: u8
-        w.write_all(&self.hairstyle.to_le_bytes()).await?;
-
-        // haircolor: u8
-        w.write_all(&self.haircolor.to_le_bytes()).await?;
-
-        // facialhair: u8
-        w.write_all(&self.facialhair.to_le_bytes()).await?;
-
-        // level: u8
-        w.write_all(&self.level.to_le_bytes()).await?;
-
-        // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
-
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes()).await?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes()).await?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes()).await?;
-
-        // guild_id: u32
-        w.write_all(&self.guild_id.to_le_bytes()).await?;
-
-        // flags: CharacterFlags
-        w.write_all(&(self.flags.as_int() as u32).to_le_bytes()).await?;
-
-        // first_login: u8
-        w.write_all(&self.first_login.to_le_bytes()).await?;
-
-        // pet_display_id: u32
-        w.write_all(&self.pet_display_id.to_le_bytes()).await?;
-
-        // pet_level: u32
-        w.write_all(&self.pet_level.to_le_bytes()).await?;
-
-        // pet_familiy: u32
-        w.write_all(&self.pet_familiy.to_le_bytes()).await?;
-
-        // equipment: CharacterGear[19]
-        for i in self.equipment.iter() {
-            i.tokio_write(w).await?;
-        }
-
-        // first_bag_display_id: u32
-        w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes()).await?;
-
-        // first_bag_inventory_id: u8
-        w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes()).await?;
-
-        Ok(())
-    }
-
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, CharacterError> {
         // guid: Guid
@@ -537,90 +454,6 @@ impl Character {
             pet_familiy,
             equipment,
         })
-    }
-
-    #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes()).await?;
-
-        // name: CString
-        w.write_all(self.name.as_bytes()).await?;
-        // Null terminator
-        w.write_all(&[0]).await?;
-
-        // race: Race
-        w.write_all(&(self.race.as_int() as u8).to_le_bytes()).await?;
-
-        // class: Class
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes()).await?;
-
-        // gender: Gender
-        w.write_all(&(self.gender.as_int() as u8).to_le_bytes()).await?;
-
-        // skin: u8
-        w.write_all(&self.skin.to_le_bytes()).await?;
-
-        // face: u8
-        w.write_all(&self.face.to_le_bytes()).await?;
-
-        // hairstyle: u8
-        w.write_all(&self.hairstyle.to_le_bytes()).await?;
-
-        // haircolor: u8
-        w.write_all(&self.haircolor.to_le_bytes()).await?;
-
-        // facialhair: u8
-        w.write_all(&self.facialhair.to_le_bytes()).await?;
-
-        // level: u8
-        w.write_all(&self.level.to_le_bytes()).await?;
-
-        // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes()).await?;
-
-        // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
-
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes()).await?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes()).await?;
-
-        // position_z: f32
-        w.write_all(&self.position_z.to_le_bytes()).await?;
-
-        // guild_id: u32
-        w.write_all(&self.guild_id.to_le_bytes()).await?;
-
-        // flags: CharacterFlags
-        w.write_all(&(self.flags.as_int() as u32).to_le_bytes()).await?;
-
-        // first_login: u8
-        w.write_all(&self.first_login.to_le_bytes()).await?;
-
-        // pet_display_id: u32
-        w.write_all(&self.pet_display_id.to_le_bytes()).await?;
-
-        // pet_level: u32
-        w.write_all(&self.pet_level.to_le_bytes()).await?;
-
-        // pet_familiy: u32
-        w.write_all(&self.pet_familiy.to_le_bytes()).await?;
-
-        // equipment: CharacterGear[19]
-        for i in self.equipment.iter() {
-            i.astd_write(w).await?;
-        }
-
-        // first_bag_display_id: u32
-        w.write_all(&Self::FIRST_BAG_DISPLAY_ID_VALUE.to_le_bytes()).await?;
-
-        // first_bag_inventory_id: u8
-        w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes()).await?;
-
-        Ok(())
     }
 
 }

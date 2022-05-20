@@ -69,7 +69,7 @@ impl MessageBody for SMSG_TRAINER_LIST {
 
         // spells: TrainerSpell[amount_of_spells]
         for i in self.spells.iter() {
-            i.write(w)?;
+            w.write_all(&(i.as_bytes()?))?;
         }
 
         // greeting: CString
@@ -146,7 +146,7 @@ impl MessageBody for SMSG_TRAINER_LIST {
 
             // spells: TrainerSpell[amount_of_spells]
             for i in self.spells.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // greeting: CString
@@ -224,7 +224,7 @@ impl MessageBody for SMSG_TRAINER_LIST {
 
             // spells: TrainerSpell[amount_of_spells]
             for i in self.spells.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&(i.as_bytes()?)).await?;
             }
 
             // greeting: CString

@@ -57,7 +57,7 @@ impl MessageBody for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
         w.write_all(&self.counter.to_le_bytes())?;
 
         // movement_info: MovementInfo
-        self.movement_info.write(w)?;
+        w.write_all(&self.movement_info.as_bytes()?)?;
 
         // new_speed: f32
         w.write_all(&self.new_speed.to_le_bytes())?;
@@ -119,7 +119,7 @@ impl MessageBody for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
             w.write_all(&self.counter.to_le_bytes()).await?;
 
             // movement_info: MovementInfo
-            self.movement_info.tokio_write(w).await?;
+            w.write_all(&self.movement_info.as_bytes()?).await?;
 
             // new_speed: f32
             w.write_all(&self.new_speed.to_le_bytes()).await?;
@@ -182,7 +182,7 @@ impl MessageBody for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
             w.write_all(&self.counter.to_le_bytes()).await?;
 
             // movement_info: MovementInfo
-            self.movement_info.astd_write(w).await?;
+            w.write_all(&self.movement_info.as_bytes()?).await?;
 
             // new_speed: f32
             w.write_all(&self.new_speed.to_le_bytes()).await?;

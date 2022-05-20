@@ -98,7 +98,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
         w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes())?;
 
         // version: Version
-        self.version.write(w)?;
+        w.write_all(&self.version.as_bytes()?)?;
 
         // platform: Platform
         w.write_all(&(self.platform.as_int() as u32).to_le_bytes())?;
@@ -212,7 +212,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
             w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes()).await?;
 
             // version: Version
-            self.version.tokio_write(w).await?;
+            w.write_all(&self.version.as_bytes()?).await?;
 
             // platform: Platform
             w.write_all(&(self.platform.as_int() as u32).to_le_bytes()).await?;
@@ -327,7 +327,7 @@ impl ReadableAndWritable for CMD_AUTH_LOGON_CHALLENGE_Client {
             w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes()).await?;
 
             // version: Version
-            self.version.astd_write(w).await?;
+            w.write_all(&self.version.as_bytes()?).await?;
 
             // platform: Platform
             w.write_all(&(self.platform.as_int() as u32).to_le_bytes()).await?;

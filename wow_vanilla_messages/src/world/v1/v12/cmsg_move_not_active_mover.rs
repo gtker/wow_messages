@@ -45,7 +45,7 @@ impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
         w.write_all(&self.old_mover.guid().to_le_bytes())?;
 
         // movement_info: MovementInfo
-        self.movement_info.write(w)?;
+        w.write_all(&self.movement_info.as_bytes()?)?;
 
         Ok(())
     }
@@ -94,7 +94,7 @@ impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
             w.write_all(&self.old_mover.guid().to_le_bytes()).await?;
 
             // movement_info: MovementInfo
-            self.movement_info.tokio_write(w).await?;
+            w.write_all(&self.movement_info.as_bytes()?).await?;
 
             Ok(())
         })
@@ -144,7 +144,7 @@ impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
             w.write_all(&self.old_mover.guid().to_le_bytes()).await?;
 
             // movement_info: MovementInfo
-            self.movement_info.astd_write(w).await?;
+            w.write_all(&self.movement_info.as_bytes()?).await?;
 
             Ok(())
         })
