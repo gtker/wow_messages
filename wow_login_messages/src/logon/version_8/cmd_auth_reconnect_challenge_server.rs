@@ -457,7 +457,7 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write(&mut std::io::Cursor::new(&mut dest));
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
         assert_eq!(dest, raw);
     }
@@ -491,7 +491,7 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
         assert_eq!(dest, raw);
     }
@@ -525,7 +525,7 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
         assert_eq!(dest, raw);
     }
@@ -551,7 +551,7 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.write(&mut std::io::Cursor::new(&mut dest));
+        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
         assert_eq!(dest, raw);
     }
@@ -577,7 +577,7 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await;
+        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
         assert_eq!(dest, raw);
     }
@@ -603,7 +603,7 @@ mod test {
         assert_eq!(t.size() + header_size, raw.len());
 
         let mut dest = Vec::with_capacity(raw.len());
-        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await;
+        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
         assert_eq!(dest, raw);
     }

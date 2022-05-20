@@ -180,7 +180,7 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, o: &Objects, it:
 
     s.wln("let mut dest = Vec::with_capacity(raw.len());");
     s.wln(format!(
-        "expected.{write_text}(&mut {cursor}Cursor::new(&mut dest)){postfix};",
+        "expected.{write_text}(&mut {cursor}Cursor::new(&mut dest)){postfix}.unwrap();",
         write_text = write_text,
         postfix = it.postfix(),
         cursor = match it {
