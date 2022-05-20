@@ -53,7 +53,7 @@ macro_rules! update_item {
                 }
             }
 
-            pub fn header_set(&mut self, bit: u16) {
+            pub(crate) fn header_set(&mut self, bit: u16) {
                 header_set(&mut self.header, &mut self.values, bit);
             }
 
@@ -63,8 +63,6 @@ macro_rules! update_item {
         }
     };
 }
-
-update_item!(UpdatePlayer);
 
 fn header_set(header: &mut Vec<u32>, values: &mut BTreeMap<u16, UpdateValue>, bit: u16) {
     let index = bit / 32;
@@ -109,20 +107,28 @@ fn as_bytes(header: &[u32], values: &BTreeMap<u16, UpdateValue>) -> Vec<u8> {
     v
 }
 
+update_item!(UpdateItem);
+update_item!(UpdateContainer);
+update_item!(UpdateUnit);
+update_item!(UpdatePlayer);
+update_item!(UpdateGameObject);
+update_item!(UpdateDynamicObject);
+update_item!(UpdateCorpse);
+
 #[derive(Debug, Clone, PartialEq)]
 pub enum UpdateMask {
-    Item,
-    Container,
-    Unit,
+    Item(UpdateItem),
+    Container(UpdateContainer),
+    Unit(UpdateUnit),
     Player(UpdatePlayer),
-    GameObject,
-    DynamicObject,
-    Corpse,
+    GameObject(UpdateGameObject),
+    DynamicObject(UpdateDynamicObject),
+    Corpse(UpdateCorpse),
 }
 
 impl Default for UpdateMask {
     fn default() -> Self {
-        Self::Item
+        Self::Item(Default::default())
     }
 }
 
@@ -143,7 +149,15 @@ impl UpdateMask {
     }
 
     pub(crate) fn as_bytes(&self) -> Vec<u8> {
-        todo!()
+        match self {
+            UpdateMask::Item(i) => i.as_bytes(),
+            UpdateMask::Container(i) => i.as_bytes(),
+            UpdateMask::Unit(i) => i.as_bytes(),
+            UpdateMask::Player(i) => i.as_bytes(),
+            UpdateMask::GameObject(i) => i.as_bytes(),
+            UpdateMask::DynamicObject(i) => i.as_bytes(),
+            UpdateMask::Corpse(i) => i.as_bytes(),
+        }
     }
 
     pub fn size(&self) -> usize {

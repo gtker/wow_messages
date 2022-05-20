@@ -4,19 +4,35 @@ use std::fmt::{Display, Formatter};
 use std::path::Path;
 
 pub fn print_update_mask() {
+    let update_types = [
+        ("UpdateItem", vec![Type::Object, Type::Item]),
+        (
+            "UpdateContainer",
+            vec![Type::Object, Type::Item, Type::Container],
+        ),
+        ("UpdateUnit", vec![Type::Object, Type::Unit]),
+        ("UpdatePlayer", vec![Type::Object, Type::Unit, Type::Player]),
+        ("UpdateGameObject", vec![Type::Object, Type::GameObject]),
+        (
+            "UpdateDynamicObject",
+            vec![Type::Object, Type::DynamicObject],
+        ),
+        ("UpdateCorpse", vec![Type::Object, Type::Corpse]),
+    ];
+
     let mut s = Writer::new("");
-    s.wln("use crate::{Guid, UpdatePlayer};");
+    s.wln("use crate::Guid;");
+    s.wln("use crate::helper::update_mask::{UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask, UpdatePlayer, UpdateUnit};");
     s.wln("use crate::helper::update_mask::UpdateValue;");
     s.newline();
 
-    s.bodyn("impl UpdatePlayer", |s| {
-        for m in FIELDS.iter().filter(|a| match a.ty {
-            Type::Object | Type::Item | Type::Unit => true,
-            _ => false,
-        }) {
-            print_functions(s, m);
-        }
-    });
+    for (ty, types) in update_types {
+        s.bodyn(format!("impl {}", ty), |s| {
+            for m in FIELDS.iter().filter(|a| types.contains(&a.ty)) {
+                print_functions(s, m);
+            }
+        });
+    }
 
     overwrite_if_not_same_contents(
         s.inner(),

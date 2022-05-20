@@ -19,7 +19,9 @@ pub use world::*;
 
 pub use helper::aura_mask::AuraMask;
 pub use helper::guid::Guid;
-pub use helper::update_mask::UpdateMask;
-pub use helper::update_mask::UpdatePlayer;
+pub use helper::update_mask::{
+    UpdateContainer, UpdateCorpse, UpdateDynamicObject, UpdateGameObject, UpdateItem, UpdateMask,
+    UpdatePlayer, UpdateUnit,
+};
 
 pub const DEFAULT_PORT: u16 = 8085;
