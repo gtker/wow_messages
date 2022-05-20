@@ -14,41 +14,45 @@ pub fn print_update_mask() {
             Type::Object | Type::Item | Type::Unit => true,
             _ => false,
         }) {
-            let parameter = match m.uf {
-                UfType::Guid => ", v: Guid",
-                UfType::Int => ", v: i32",
-                UfType::Float => ", v: f32",
-                UfType::Bytes => ", v: u32",
-                UfType::TwoShort => ", v: u32",
-            };
-            s.bodyn(
-                format!("pub fn set_{}_{}(&mut self{})", m.ty, m.name, parameter),
-                |s| {
-                    s.wln(format!("self.header_set({});", m.offset));
-                    match m.uf {
-                        UfType::Guid => {
-                            s.wln(format!("self.header_set({});", m.offset + 1));
-                        }
-                        _ => {}
-                    }
-
-                    let value = match m.uf {
-                        UfType::Guid => "UpdateValue::Guid(v.guid())",
-                        UfType::Int => "UpdateValue::I32(v)",
-                        UfType::Float => "UpdateValue::F32(v)",
-                        UfType::Bytes => "UpdateValue::U32(v)",
-                        UfType::TwoShort => "UpdateValue::U32(v)",
-                    };
-
-                    s.wln(format!("self.values.insert({}, {});", m.offset, value));
-                },
-            );
+            print_functions(s, m);
         }
     });
 
     overwrite_if_not_same_contents(
         s.inner(),
         Path::new("wow_vanilla_messages/src/helper/update_mask/impls.rs"),
+    );
+}
+
+fn print_functions(s: &mut Writer, m: &MemberType) {
+    let parameter = match m.uf {
+        UfType::Guid => ", v: Guid",
+        UfType::Int => ", v: i32",
+        UfType::Float => ", v: f32",
+        UfType::Bytes => ", v: u32",
+        UfType::TwoShort => ", v: u32",
+    };
+    s.bodyn(
+        format!("pub fn set_{}_{}(&mut self{})", m.ty, m.name, parameter),
+        |s| {
+            s.wln(format!("self.header_set({});", m.offset));
+            match m.uf {
+                UfType::Guid => {
+                    s.wln(format!("self.header_set({});", m.offset + 1));
+                }
+                _ => {}
+            }
+
+            let value = match m.uf {
+                UfType::Guid => "UpdateValue::Guid(v.guid())",
+                UfType::Int => "UpdateValue::I32(v)",
+                UfType::Float => "UpdateValue::F32(v)",
+                UfType::Bytes => "UpdateValue::U32(v)",
+                UfType::TwoShort => "UpdateValue::U32(v)",
+            };
+
+            s.wln(format!("self.values.insert({}, {});", m.offset, value));
+        },
     );
 }
 
