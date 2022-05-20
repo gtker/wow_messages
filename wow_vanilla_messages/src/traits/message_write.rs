@@ -10,14 +10,15 @@ use async_std::io::WriteExt;
 #[cfg(feature = "tokio")]
 use tokio::io::AsyncWriteExt;
 
-pub trait ServerMessageWrite: MessageBody {
-    const OPCODE_LENGTH: u16 = 2;
+const SERVER_OPCODE_LENGTH: u16 = 2;
+const CLIENT_OPCODE_LENGTH: u16 = 4;
 
+pub trait ServerMessageWrite: MessageBody {
     #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         crate::util::write_u16_be(
             w,
-            self.size_without_size_or_opcode_fields() + Self::OPCODE_LENGTH,
+            self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
         )?;
         crate::util::write_u16_le(w, <Self as MessageBody>::OPCODE)?;
 
@@ -33,7 +34,7 @@ pub trait ServerMessageWrite: MessageBody {
     ) -> Result<(), std::io::Error> {
         e.write_encrypted_server_header(
             w,
-            self.size_without_size_or_opcode_fields() + Self::OPCODE_LENGTH,
+            self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
             <Self as MessageBody>::OPCODE,
         )?;
 
@@ -55,7 +56,7 @@ pub trait ServerMessageWrite: MessageBody {
         Box::pin(async move {
             crate::util::tokio_write_u16_be(
                 w,
-                self.size_without_size_or_opcode_fields() + Self::OPCODE_LENGTH,
+                self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
             )
             .await?;
             crate::util::tokio_write_u16_le(w, <Self as MessageBody>::OPCODE).await?;
@@ -81,7 +82,7 @@ pub trait ServerMessageWrite: MessageBody {
     {
         Box::pin(async move {
             let header = e.encrypt_server_header(
-                self.size_without_size_or_opcode_fields() + Self::OPCODE_LENGTH,
+                self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
                 <Self as MessageBody>::OPCODE,
             );
             w.write_all(&header);
@@ -105,7 +106,7 @@ pub trait ServerMessageWrite: MessageBody {
         Box::pin(async move {
             crate::util::astd_write_u16_be(
                 w,
-                self.size_without_size_or_opcode_fields() + Self::OPCODE_LENGTH,
+                self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
             )
             .await?;
             crate::util::astd_write_u16_le(w, <Self as MessageBody>::OPCODE).await?;
@@ -131,7 +132,7 @@ pub trait ServerMessageWrite: MessageBody {
     {
         Box::pin(async move {
             let header = e.encrypt_server_header(
-                self.size_without_size_or_opcode_fields() + Self::OPCODE_LENGTH,
+                self.size_without_size_or_opcode_fields() + SERVER_OPCODE_LENGTH,
                 <Self as MessageBody>::OPCODE,
             );
             w.write_all(&header);
@@ -143,13 +144,11 @@ pub trait ServerMessageWrite: MessageBody {
 }
 
 pub trait ClientMessageWrite: MessageBody {
-    const OPCODE_LENGTH: u16 = 4;
-
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         crate::util::write_u16_be(
             w,
-            (self.size_without_size_or_opcode_fields() + Self::OPCODE_LENGTH),
+            (self.size_without_size_or_opcode_fields() + CLIENT_OPCODE_LENGTH),
         )?;
         crate::util::write_u32_le(w, <Self as MessageBody>::OPCODE as u32)?;
 
@@ -165,7 +164,7 @@ pub trait ClientMessageWrite: MessageBody {
     ) -> Result<(), std::io::Error> {
         e.write_encrypted_client_header(
             w,
-            (self.size_without_size_or_opcode_fields() + Self::OPCODE_LENGTH),
+            (self.size_without_size_or_opcode_fields() + CLIENT_OPCODE_LENGTH),
             <Self as MessageBody>::OPCODE as u32,
         )?;
 
@@ -187,7 +186,7 @@ pub trait ClientMessageWrite: MessageBody {
         Box::pin(async move {
             crate::util::tokio_write_u16_be(
                 w,
-                self.size_without_size_or_opcode_fields() + Self::OPCODE_LENGTH,
+                self.size_without_size_or_opcode_fields() + CLIENT_OPCODE_LENGTH,
             )
             .await?;
             crate::util::tokio_write_u32_le(w, <Self as MessageBody>::OPCODE as u32).await?;
@@ -237,7 +236,7 @@ pub trait ClientMessageWrite: MessageBody {
         Box::pin(async move {
             crate::util::astd_write_u16_be(
                 w,
-                self.size_without_size_or_opcode_fields() + Self::OPCODE_LENGTH,
+                self.size_without_size_or_opcode_fields() + CLIENT_OPCODE_LENGTH,
             )
             .await?;
             crate::util::astd_write_u32_le(w, <Self as MessageBody>::OPCODE as u32).await?;
@@ -263,7 +262,7 @@ pub trait ClientMessageWrite: MessageBody {
     {
         Box::pin(async move {
             let header = e.encrypt_client_header(
-                self.size_without_size_or_opcode_fields() + 4,
+                self.size_without_size_or_opcode_fields() + CLIENT_OPCODE_LENGTH,
                 <Self as MessageBody>::OPCODE as u32,
             );
             w.write_all(&header);
