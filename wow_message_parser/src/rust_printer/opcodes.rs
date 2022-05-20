@@ -141,22 +141,6 @@ fn world_common_impls_read_write(
     it: ImplType,
 ) {
     s.newline();
-    s.print_write_decl(it, "_unencrypted");
-    s.body("match self", |s| {
-        for &e in v {
-            s.wln(format!(
-                "Self::{name}(i) => i.{prefix}write_body(w){postfix}?,",
-                prefix = it.prefix(),
-                postfix = it.postfix(),
-                name = get_enumerator_name(e.name())
-            ));
-        }
-    });
-    s.wln("Ok(())");
-    if it.is_async() {
-        s.closing_curly_with(")"); // Box::pin
-    }
-    s.closing_curly_newline();
 
     s.print_read_decl(it, "_unencrypted");
     s.wln(format!(
@@ -230,25 +214,6 @@ fn world_common_impls_read_write(
         }
         s.wln("_ => Err(Self::Error::InvalidOpcode(header.opcode)),");
     });
-    if it.is_async() {
-        s.closing_curly_with(")");
-    }
-    s.closing_curly_newline();
-
-    s.print_write_encrypted(it);
-
-    s.body("match self", |s| {
-        for &e in v {
-            s.wln(format!(
-                "Self::{name}(i) => i.{prefix}write_encrypted_{cd}(w, e){postfix}?,",
-                prefix = it.prefix(),
-                postfix = it.postfix(),
-                name = get_enumerator_name(e.name()),
-                cd = cd
-            ));
-        }
-    });
-    s.wln("Ok(())");
     if it.is_async() {
         s.closing_curly_with(")");
     }

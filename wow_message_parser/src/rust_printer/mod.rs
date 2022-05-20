@@ -240,50 +240,6 @@ impl Writer {
         self.open_curly("Box::pin(async move");
     }
 
-    fn print_write_encrypted(&mut self, it: ImplType) {
-        self.wln(it.cfg());
-        if !it.is_async() {
-            self.open_curly(format!("{func}fn {prefix}write_encrypted<W: {write}, E: Encrypter{decrypter}>(&self, w: &mut W, e: &mut E) -> std::result::Result<(), std::io::Error>", decrypter = it.decrypter(), prefix = it.prefix(), func = it.func(), write = it.write()));
-
-            return;
-        }
-
-        self.wln(format!(
-            "fn {prefix}write_encrypted<'life0, 'life1, 'life2, 'async_trait, W, E>(",
-            prefix = it.prefix()
-        ));
-
-        self.inc_indent();
-        self.wln("&'life0 self,");
-        self.wln("w: &'life1 mut W,");
-        self.wln("e: &'life2 mut E,");
-        self.dec_indent();
-
-        self.wln(") -> core::pin::Pin<Box<");
-        self.inc_indent();
-
-        self.wln("dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>");
-
-        self.inc_indent();
-        self.wln("+ Send + 'async_trait");
-
-        self.dec_indent();
-        self.dec_indent();
-        self.wln(">> where");
-
-        self.inc_indent();
-        self.wln(format!("W: 'async_trait + {},", it.write()));
-        self.wln(format!("E: 'async_trait + Encrypter{},", it.decrypter()));
-        self.wln("'life0: 'async_trait,");
-        self.wln("'life1: 'async_trait,");
-        self.wln("'life2: 'async_trait,");
-        self.wln("Self: 'async_trait,");
-        self.dec_indent();
-
-        self.open_curly("");
-        self.open_curly("Box::pin(async move");
-    }
-
     fn print_write_decl(&mut self, it: ImplType, world_text: &str) {
         self.wln(it.cfg());
 
