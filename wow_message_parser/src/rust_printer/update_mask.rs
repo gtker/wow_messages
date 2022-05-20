@@ -5,10 +5,11 @@ use std::path::Path;
 
 pub fn print_update_mask() {
     let mut s = Writer::new("");
-    s.wln("use crate::{Guid, UpdateMask};");
+    s.wln("use crate::{Guid, UpdatePlayer};");
+    s.wln("use crate::helper::update_mask::UpdateValue;");
     s.newline();
 
-    s.bodyn("impl UpdateMask", |s| {
+    s.bodyn("impl UpdatePlayer", |s| {
         for m in FIELDS.iter().filter(|a| match a.ty {
             Type::Object | Type::Item | Type::Unit => true,
             _ => false,
@@ -24,13 +25,19 @@ pub fn print_update_mask() {
                 format!("pub fn set_{}_{}(&mut self{})", m.ty, m.name, parameter),
                 |s| {
                     s.wln(format!("self.header_set({});", m.offset));
+                    match m.uf {
+                        UfType::Guid => {
+                            s.wln(format!("self.header_set({});", m.offset + 1));
+                        }
+                        _ => {}
+                    }
 
                     let value = match m.uf {
-                        UfType::Guid => "v.guid()",
-                        UfType::Int => "v as u64",
-                        UfType::Float => "u32::from_le_bytes(v.to_le_bytes()) as u64",
-                        UfType::Bytes => "v as u64",
-                        UfType::TwoShort => "v as u64",
+                        UfType::Guid => "UpdateValue::Guid(v.guid())",
+                        UfType::Int => "UpdateValue::I32(v)",
+                        UfType::Float => "UpdateValue::F32(v)",
+                        UfType::Bytes => "UpdateValue::U32(v)",
+                        UfType::TwoShort => "UpdateValue::U32(v)",
                     };
 
                     s.wln(format!("self.values.insert({}, {});", m.offset, value));

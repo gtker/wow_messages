@@ -5,17 +5,111 @@ use std::collections::{BTreeMap, HashMap};
 
 use crate::Guid;
 #[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+use async_std::io::ReadExt;
 use std::io;
 #[cfg(feature = "sync")]
 use std::io::{Read, Write};
 #[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
+
+/*
+   Object
+        Item
+            Container
+        Unit
+            Player
+        GameObject
+        DynamicObject
+        Corpse
+*/
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum UpdateValue {
+    Guid(u64),
+    U32(u32),
+    I32(i32),
+    F32(f32),
+}
+
+impl Default for UpdateValue {
+    fn default() -> Self {
+        Self::Guid(0)
+    }
+}
 
 #[derive(Debug, Clone, Default, PartialEq)]
-pub struct UpdateMask {
-    header: Vec<u8>,
-    values: BTreeMap<u16, u64>,
+pub struct UpdatePlayer {
+    header: Vec<u32>,
+    values: BTreeMap<u16, UpdateValue>,
+}
+
+impl UpdatePlayer {
+    pub fn new() -> Self {
+        Self {
+            header: vec![],
+            values: Default::default(),
+        }
+    }
+
+    pub fn header_set(&mut self, bit: u16) {
+        let index = bit / 32;
+        let offset = bit % 32;
+
+        if index >= self.header.len() as u16 {
+            let extras = index - self.header.len() as u16;
+            for _ in 0..=extras {
+                self.header.push(0);
+            }
+        }
+
+        self.header[index as usize] |= 1 << offset;
+    }
+
+    pub(crate) fn as_bytes(&self) -> Vec<u8> {
+        let mut v = Vec::new();
+
+        v.write_all(&[self.header.len() as u8]).unwrap();
+
+        for h in &self.header {
+            v.write_all(h.to_le_bytes().as_slice()).unwrap();
+        }
+
+        for (_, value) in &self.values {
+            match value {
+                UpdateValue::Guid(g) => {
+                    v.write_all(&g.to_le_bytes()).unwrap();
+                }
+                UpdateValue::U32(u) => {
+                    v.write_all(&u.to_le_bytes()).unwrap();
+                }
+                UpdateValue::I32(i) => {
+                    v.write_all(&i.to_le_bytes()).unwrap();
+                }
+                UpdateValue::F32(f) => {
+                    v.write_all(&f.to_le_bytes()).unwrap();
+                }
+            }
+        }
+
+        v
+    }
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum UpdateMask {
+    Item,
+    Container,
+    Unit,
+    Player,
+    GameObject,
+    DynamicObject,
+    Corpse,
+}
+
+impl Default for UpdateMask {
+    fn default() -> Self {
+        Self::Item
+    }
 }
 
 impl UpdateMask {
@@ -42,28 +136,14 @@ impl UpdateMask {
         todo!()
     }
 
-    fn header_set(&mut self, value: u16) {
-        let index = value / 8;
-        let offset = value % 8;
-        if index >= self.header.len() as u16 {
-            let extras = index - self.header.len() as u16;
-            for _ in 0..=extras {
-                self.header.push(0);
-            }
-        }
-        self.header[index as usize] |= 1 << offset;
-    }
-
     pub fn new() -> Self {
-        Self {
-            header: vec![0],
-            values: Default::default(),
-        }
+        Default::default()
     }
 }
 
 #[cfg(test)]
 mod test {
+    use crate::helper::update_mask::UpdatePlayer;
     use crate::v1::v12::{Class, Gender, Power, Race};
     use crate::{Guid, UpdateMask};
 
@@ -83,15 +163,15 @@ mod test {
             1, // UNIT_FIELD_BYTES[3] // Power (Rage)
         ];
 
-        let mut update_mask = UpdateMask::new();
+        let mut update_mask = UpdatePlayer::new();
+
         update_mask.set_object_GUID(Guid::new(4));
         update_mask.set_object_TYPE(25);
         update_mask.set_unit_BYTES_0(1 << 24 | 1 << 16 | 1 << 8 | 1);
         update_mask.set_unit_HEALTH(100);
 
-        //let mut v = Vec::new();
-        //update_mask.write(&mut v);
-        //assert_eq!(b.as_slice(), v.as_slice());
+        let mut v = update_mask.as_bytes();
+        assert_eq!(b.as_slice(), v.as_slice());
     }
 
     #[test]
@@ -117,15 +197,20 @@ mod test {
             50, 0, 0, 0, // UNIT_FIELD_NATIVEDISPLAYID (50, Human Female)
         ];
 
-        /*
-        let mut update_mask = UpdateMask::new();
-        update_mask.set_object_guid(Guid::new(4));
-        update_mask.set_object_scale(1.0);
-        update_mask.set_unit_health(100);
-        update_mask.set_unit_race(Race::Human);
-        update_mask.set_unit_class(Class::Warrior);
-        update_mask.set_unit_gender(Gender::Female);
-        update_mask.set_unit_power(Power::Rage);
-         */
+        let mut update_mask = UpdatePlayer::new();
+
+        update_mask.set_object_GUID(Guid::new(4));
+        update_mask.set_object_TYPE(25);
+        update_mask.set_unit_BYTES_0(1 << 24 | 1 << 16 | 1 << 8 | 1);
+        update_mask.set_object_SCALE_X(1.0);
+        update_mask.set_unit_HEALTH(100);
+        update_mask.set_unit_MAXHEALTH(100);
+        update_mask.set_unit_LEVEL(1);
+        update_mask.set_unit_FACTIONTEMPLATE(1);
+        update_mask.set_unit_DISPLAYID(50);
+        update_mask.set_unit_NATIVEDISPLAYID(50);
+
+        let mut v = update_mask.as_bytes();
+        assert_eq!(b.as_slice(), v.as_slice());
     }
 }
