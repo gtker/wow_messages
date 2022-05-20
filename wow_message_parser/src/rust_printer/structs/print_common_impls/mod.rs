@@ -175,7 +175,10 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
         RustType::Guid => GUID_SIZE.to_string(),
         RustType::String => format!("{prefix}{name}.len()", name = m.name(), prefix = prefix),
         RustType::CString => format!("{prefix}{name}.len() + 1", name = m.name(), prefix = prefix),
-        RustType::Struct(_) | RustType::PackedGuid | RustType::UpdateMask | RustType::AuraMask => {
+        RustType::Struct { .. }
+        | RustType::PackedGuid
+        | RustType::UpdateMask
+        | RustType::AuraMask => {
             let prefixes = if m.constant_sized() {
                 format!("{ty_name}::", ty_name = m.ty())
             } else {
