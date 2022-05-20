@@ -16,12 +16,13 @@ pub struct SMSG_UPDATE_INSTANCE_OWNERSHIP {
 impl ServerMessageWrite for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
 
 impl SMSG_UPDATE_INSTANCE_OWNERSHIP {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
+        let mut array_w = [0u8; 4];
+        let mut w = array_w.as_mut_slice();
         // has_been_saved: u32
         w.write_all(&self.has_been_saved.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

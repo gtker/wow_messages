@@ -18,7 +18,7 @@ impl ClientMessageWrite for MSG_RAID_TARGET_UPDATE_Client {}
 
 impl MSG_RAID_TARGET_UPDATE_Client {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(9);
         // index: RaidTargetIndex
         w.write_all(&(self.index.as_int() as u8).to_le_bytes())?;
 

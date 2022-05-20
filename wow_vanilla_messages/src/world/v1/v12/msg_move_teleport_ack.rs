@@ -21,8 +21,9 @@ impl ClientMessageWrite for MSG_MOVE_TELEPORT_ACK {}
 impl ServerMessageWrite for MSG_MOVE_TELEPORT_ACK {}
 
 impl MSG_MOVE_TELEPORT_ACK {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
+        let mut array_w = [0u8; 16];
+        let mut w = array_w.as_mut_slice();
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -32,7 +33,7 @@ impl MSG_MOVE_TELEPORT_ACK {
         // time_in_msecs: u32
         w.write_all(&self.time_in_msecs.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

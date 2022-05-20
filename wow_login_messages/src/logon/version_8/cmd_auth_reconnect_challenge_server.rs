@@ -18,7 +18,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
 }
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(34);
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 

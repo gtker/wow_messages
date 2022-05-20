@@ -21,8 +21,9 @@ pub struct SMSG_LOGIN_VERIFY_WORLD {
 impl ServerMessageWrite for SMSG_LOGIN_VERIFY_WORLD {}
 
 impl SMSG_LOGIN_VERIFY_WORLD {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 20], std::io::Error> {
+        let mut array_w = [0u8; 20];
+        let mut w = array_w.as_mut_slice();
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
@@ -38,7 +39,7 @@ impl SMSG_LOGIN_VERIFY_WORLD {
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

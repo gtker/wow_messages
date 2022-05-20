@@ -33,7 +33,7 @@ impl ServerMessageWrite for SMSG_PETITION_QUERY_RESPONSE {}
 
 impl SMSG_PETITION_QUERY_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(578);
         // petition_guid: Guid
         w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 

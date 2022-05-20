@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_GMTICKET_GETTICKET {}
 
 impl SMSG_GMTICKET_GETTICKET {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(275);
         // status: GmTicketStatus
         w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
 

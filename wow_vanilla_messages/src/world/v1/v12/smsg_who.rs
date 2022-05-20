@@ -18,7 +18,7 @@ impl ServerMessageWrite for SMSG_WHO {}
 
 impl SMSG_WHO {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(2259152797704);
         // listed_players: u32
         w.write_all(&(self.players.len() as u32).to_le_bytes())?;
 

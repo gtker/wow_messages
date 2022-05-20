@@ -49,7 +49,7 @@ impl Character {
 
 impl Character {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(414);
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

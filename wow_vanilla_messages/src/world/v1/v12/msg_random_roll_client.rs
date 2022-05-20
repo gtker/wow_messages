@@ -17,15 +17,16 @@ pub struct MSG_RANDOM_ROLL_Client {
 impl ClientMessageWrite for MSG_RANDOM_ROLL_Client {}
 
 impl MSG_RANDOM_ROLL_Client {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
+        let mut array_w = [0u8; 8];
+        let mut w = array_w.as_mut_slice();
         // minimum: u32
         w.write_all(&self.minimum.to_le_bytes())?;
 
         // maximum: u32
         w.write_all(&self.maximum.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_TRADE_STATUS {}
 
 impl SMSG_TRADE_STATUS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(12);
         // status: TradeStatus
         w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
 

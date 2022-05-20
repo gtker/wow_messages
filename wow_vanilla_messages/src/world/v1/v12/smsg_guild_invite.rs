@@ -17,7 +17,7 @@ impl ServerMessageWrite for SMSG_GUILD_INVITE {}
 
 impl SMSG_GUILD_INVITE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(512);
         // player_name: CString
         w.write_all(self.player_name.as_bytes())?;
         // Null terminator

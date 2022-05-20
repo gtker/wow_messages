@@ -20,7 +20,7 @@ impl ServerMessageWrite for SMSG_GUILD_COMMAND_RESULT {}
 
 impl SMSG_GUILD_COMMAND_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(258);
         // command: GuildCommand
         w.write_all(&(self.command.as_int() as u32).to_le_bytes())?;
 

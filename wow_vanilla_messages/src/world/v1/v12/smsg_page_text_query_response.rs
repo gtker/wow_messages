@@ -18,7 +18,7 @@ impl ServerMessageWrite for SMSG_PAGE_TEXT_QUERY_RESPONSE {}
 
 impl SMSG_PAGE_TEXT_QUERY_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(264);
         // page_id: u32
         w.write_all(&self.page_id.to_le_bytes())?;
 

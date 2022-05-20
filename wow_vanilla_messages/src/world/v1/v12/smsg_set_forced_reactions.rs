@@ -17,7 +17,7 @@ impl ServerMessageWrite for SMSG_SET_FORCED_REACTIONS {}
 
 impl SMSG_SET_FORCED_REACTIONS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(34359738372);
         // amount_of_reactions: u32
         w.write_all(&(self.reactions.len() as u32).to_le_bytes())?;
 

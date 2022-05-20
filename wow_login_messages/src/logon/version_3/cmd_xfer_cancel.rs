@@ -16,12 +16,13 @@ impl ClientMessage for CMD_XFER_CANCEL {
     const OPCODE: u8 = 0x34;
 }
 impl CMD_XFER_CANCEL {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {
+        let mut array_w = [0u8; 1];
+        let mut w = array_w.as_mut_slice();
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

@@ -18,7 +18,7 @@ impl ServerMessageWrite for SMSG_CLIENT_CONTROL_UPDATE {}
 
 impl SMSG_CLIENT_CONTROL_UPDATE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(10);
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 

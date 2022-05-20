@@ -19,8 +19,9 @@ pub struct SMSG_SUMMON_REQUEST {
 impl ServerMessageWrite for SMSG_SUMMON_REQUEST {}
 
 impl SMSG_SUMMON_REQUEST {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
+        let mut array_w = [0u8; 16];
+        let mut w = array_w.as_mut_slice();
         // summoner_guid: Guid
         w.write_all(&self.summoner_guid.guid().to_le_bytes())?;
 
@@ -30,7 +31,7 @@ impl SMSG_SUMMON_REQUEST {
         // auto_decline_time_in_msecs: u32
         w.write_all(&self.auto_decline_time_in_msecs.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

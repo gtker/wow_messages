@@ -18,15 +18,16 @@ pub struct CMSG_OFFER_PETITION {
 impl ClientMessageWrite for CMSG_OFFER_PETITION {}
 
 impl CMSG_OFFER_PETITION {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
+        let mut array_w = [0u8; 16];
+        let mut w = array_w.as_mut_slice();
         // petition_guid: Guid
         w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
         // target_guid: Guid
         w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

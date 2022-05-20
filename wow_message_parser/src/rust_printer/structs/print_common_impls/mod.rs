@@ -30,9 +30,14 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 |s, it| {
                     print_write::print_write_no_ok(s, e, o, it.prefix(), it.postfix());
                 },
+                Some(e.sizes(o)),
             );
         }
         ContainerType::CLogin(_) | ContainerType::SLogin(_) => {
+            let mut sizes = e.sizes(o);
+            let opcode_size = 1;
+            sizes.inc_both(opcode_size);
+
             s.impl_read_and_writable_with_error(
                 e.name(),
                 &error_ty,
@@ -43,6 +48,7 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                     print_write::print_unencrypted_write_header(s, e, it.postfix());
                     print_write::print_write_no_ok(s, e, o, it.prefix(), it.postfix());
                 },
+                Some(sizes),
             );
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
@@ -57,6 +63,7 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 |s, it| {
                     print_write::print_write_no_ok(s, e, o, it.prefix(), it.postfix());
                 },
+                Some(e.sizes(o)),
             );
         }
     }

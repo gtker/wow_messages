@@ -19,7 +19,7 @@ impl ServerMessageWrite for SMSG_QUEST_CONFIRM_ACCEPT {}
 
 impl SMSG_QUEST_CONFIRM_ACCEPT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(268);
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
 

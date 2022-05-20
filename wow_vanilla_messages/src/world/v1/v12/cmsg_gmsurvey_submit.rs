@@ -19,7 +19,7 @@ impl ClientMessageWrite for CMSG_GMSURVEY_SUBMIT {}
 
 impl CMSG_GMSURVEY_SUBMIT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(310);
         // survey_id: u32
         w.write_all(&self.survey_id.to_le_bytes())?;
 

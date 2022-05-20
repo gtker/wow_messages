@@ -19,7 +19,7 @@ impl ServerMessageWrite for MSG_MOVE_START_TURN_LEFT {}
 
 impl MSG_MOVE_START_TURN_LEFT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(81);
         // info: MovementInfo
         w.write_all(&self.info.as_bytes()?)?;
 

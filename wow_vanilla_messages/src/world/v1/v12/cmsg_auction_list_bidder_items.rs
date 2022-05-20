@@ -19,7 +19,7 @@ impl ClientMessageWrite for CMSG_AUCTION_LIST_BIDDER_ITEMS {}
 
 impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(17179869200);
         // auctioneer: Guid
         w.write_all(&self.auctioneer.guid().to_le_bytes())?;
 

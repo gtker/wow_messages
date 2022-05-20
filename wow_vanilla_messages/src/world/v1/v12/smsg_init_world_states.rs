@@ -21,7 +21,7 @@ impl ServerMessageWrite for SMSG_INIT_WORLD_STATES {}
 
 impl SMSG_INIT_WORLD_STATES {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(524298);
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 

@@ -20,7 +20,7 @@ impl ServerMessageWrite for SMSG_PARTY_COMMAND_RESULT {}
 
 impl SMSG_PARTY_COMMAND_RESULT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(258);
         // operation: PartyOperation
         w.write_all(&(self.operation.as_int() as u32).to_le_bytes())?;
 

@@ -17,15 +17,16 @@ pub struct CMSG_SWAP_INV_ITEM {
 impl ClientMessageWrite for CMSG_SWAP_INV_ITEM {}
 
 impl CMSG_SWAP_INV_ITEM {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 2], std::io::Error> {
+        let mut array_w = [0u8; 2];
+        let mut w = array_w.as_mut_slice();
         // source_slot: u8
         w.write_all(&self.source_slot.to_le_bytes())?;
 
         // destination_slot: u8
         w.write_all(&self.destination_slot.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

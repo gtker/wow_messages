@@ -17,7 +17,7 @@ impl ServerMessageWrite for SMSG_CREATURE_QUERY_RESPONSE {}
 
 impl SMSG_CREATURE_QUERY_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(1314);
         // creature_entry: u32
         w.write_all(&self.creature_entry.to_le_bytes())?;
 

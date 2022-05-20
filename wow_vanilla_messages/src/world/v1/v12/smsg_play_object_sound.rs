@@ -18,15 +18,16 @@ pub struct SMSG_PLAY_OBJECT_SOUND {
 impl ServerMessageWrite for SMSG_PLAY_OBJECT_SOUND {}
 
 impl SMSG_PLAY_OBJECT_SOUND {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
+        let mut array_w = [0u8; 12];
+        let mut w = array_w.as_mut_slice();
         // sound_id: u32
         w.write_all(&self.sound_id.to_le_bytes())?;
 
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

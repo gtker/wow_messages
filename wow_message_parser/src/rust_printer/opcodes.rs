@@ -309,6 +309,7 @@ pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
                 }
             });
         },
+        None
     );
 }
 
@@ -579,6 +580,7 @@ pub fn opcode_enum_login(s: &mut Writer, v: &[&Container], ty: &str) {
         |s, _it| {
             s.wln("std::io::Write::write_all(&mut w, &self.as_u8().to_le_bytes())?;");
         },
+        None,
     );
 
     s.impl_from(

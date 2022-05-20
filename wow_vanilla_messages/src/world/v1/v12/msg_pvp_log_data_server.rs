@@ -20,7 +20,7 @@ impl ServerMessageWrite for MSG_PVP_LOG_DATA_Server {}
 
 impl MSG_PVP_LOG_DATA_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(18446744073709551615);
         // status: BattlegroundEndStatus
         w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
 

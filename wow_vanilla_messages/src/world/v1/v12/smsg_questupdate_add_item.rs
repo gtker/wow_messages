@@ -17,15 +17,16 @@ pub struct SMSG_QUESTUPDATE_ADD_ITEM {
 impl ServerMessageWrite for SMSG_QUESTUPDATE_ADD_ITEM {}
 
 impl SMSG_QUESTUPDATE_ADD_ITEM {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
+        let mut array_w = [0u8; 8];
+        let mut w = array_w.as_mut_slice();
         // required_item_id: u32
         w.write_all(&self.required_item_id.to_le_bytes())?;
 
         // items_required: u32
         w.write_all(&self.items_required.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

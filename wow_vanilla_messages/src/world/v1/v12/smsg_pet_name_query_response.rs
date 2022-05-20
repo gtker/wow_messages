@@ -18,7 +18,7 @@ impl ServerMessageWrite for SMSG_PET_NAME_QUERY_RESPONSE {}
 
 impl SMSG_PET_NAME_QUERY_RESPONSE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(264);
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;
 

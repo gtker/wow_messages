@@ -18,7 +18,7 @@ impl ServerMessageWrite for SMSG_SERVER_MESSAGE {}
 
 impl SMSG_SERVER_MESSAGE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(260);
         // message_type: ServerMessageType
         w.write_all(&(self.message_type.as_int() as u32).to_le_bytes())?;
 

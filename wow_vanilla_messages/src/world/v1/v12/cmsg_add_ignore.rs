@@ -16,7 +16,7 @@ impl ClientMessageWrite for CMSG_ADD_IGNORE {}
 
 impl CMSG_ADD_IGNORE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(256);
         // ignore_name: CString
         w.write_all(self.ignore_name.as_bytes())?;
         // Null terminator

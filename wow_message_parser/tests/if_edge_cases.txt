@@ -12,8 +12,9 @@ pub struct IfEdgeCases {
 }
 
 impl IfEdgeCases {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 2], std::io::Error> {
+        let mut array_w = [0u8; 2];
+        let mut w = array_w.as_mut_slice();
         // t: TEnum
         w.write_all(&(self.t.as_int() as u8).to_le_bytes())?;
 
@@ -76,7 +77,7 @@ impl IfEdgeCases {
             }
         }
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

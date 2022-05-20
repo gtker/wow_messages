@@ -16,7 +16,7 @@ impl ClientMessageWrite for MSG_RAID_READY_CHECK_Client {}
 
 impl MSG_RAID_READY_CHECK_Client {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(1);
         // optional answer
         if let Some(v) = &self.answer {
             // state: u8

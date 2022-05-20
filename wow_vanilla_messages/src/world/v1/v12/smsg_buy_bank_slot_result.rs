@@ -17,12 +17,13 @@ pub struct SMSG_BUY_BANK_SLOT_RESULT {
 impl ServerMessageWrite for SMSG_BUY_BANK_SLOT_RESULT {}
 
 impl SMSG_BUY_BANK_SLOT_RESULT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
+        let mut array_w = [0u8; 4];
+        let mut w = array_w.as_mut_slice();
         // result: BuyBankSlotResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

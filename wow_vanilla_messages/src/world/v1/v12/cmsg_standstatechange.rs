@@ -17,12 +17,13 @@ pub struct CMSG_STANDSTATECHANGE {
 impl ClientMessageWrite for CMSG_STANDSTATECHANGE {}
 
 impl CMSG_STANDSTATECHANGE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {
+        let mut array_w = [0u8; 1];
+        let mut w = array_w.as_mut_slice();
         // animation_state: UnitStandState
         w.write_all(&(self.animation_state.as_int() as u32).to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

@@ -17,7 +17,7 @@ impl ServerMessageWrite for SMSG_INVENTORY_CHANGE_FAILURE {}
 
 impl SMSG_INVENTORY_CHANGE_FAILURE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(22);
         // result: InventoryResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 

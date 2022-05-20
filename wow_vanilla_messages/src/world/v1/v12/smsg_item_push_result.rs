@@ -29,8 +29,9 @@ pub struct SMSG_ITEM_PUSH_RESULT {
 impl ServerMessageWrite for SMSG_ITEM_PUSH_RESULT {}
 
 impl SMSG_ITEM_PUSH_RESULT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 41], std::io::Error> {
+        let mut array_w = [0u8; 41];
+        let mut w = array_w.as_mut_slice();
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -61,7 +62,7 @@ impl SMSG_ITEM_PUSH_RESULT {
         // item_count: u32
         w.write_all(&self.item_count.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

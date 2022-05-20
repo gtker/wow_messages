@@ -14,8 +14,9 @@ pub struct ItemDamageType {
 }
 
 impl ItemDamageType {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
+        let mut array_w = [0u8; 12];
+        let mut w = array_w.as_mut_slice();
         // damage_minimum: u32
         w.write_all(&self.damage_minimum.to_le_bytes())?;
 
@@ -25,7 +26,7 @@ impl ItemDamageType {
         // damage_type: u32
         w.write_all(&self.damage_type.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

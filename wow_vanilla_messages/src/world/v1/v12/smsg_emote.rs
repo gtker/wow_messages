@@ -19,15 +19,16 @@ pub struct SMSG_EMOTE {
 impl ServerMessageWrite for SMSG_EMOTE {}
 
 impl SMSG_EMOTE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
+        let mut array_w = [0u8; 12];
+        let mut w = array_w.as_mut_slice();
         // emote: Emote
         w.write_all(&(self.emote.as_int() as u32).to_le_bytes())?;
 
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

@@ -22,8 +22,9 @@ pub struct SMSG_LOOT_START_ROLL {
 impl ServerMessageWrite for SMSG_LOOT_START_ROLL {}
 
 impl SMSG_LOOT_START_ROLL {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 28], std::io::Error> {
+        let mut array_w = [0u8; 28];
+        let mut w = array_w.as_mut_slice();
         // creature_guid: Guid
         w.write_all(&self.creature_guid.guid().to_le_bytes())?;
 
@@ -42,7 +43,7 @@ impl SMSG_LOOT_START_ROLL {
         // countdown_time: u32
         w.write_all(&self.countdown_time.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

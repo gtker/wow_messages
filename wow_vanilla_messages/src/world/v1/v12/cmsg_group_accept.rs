@@ -15,9 +15,10 @@ pub struct CMSG_GROUP_ACCEPT {
 impl ClientMessageWrite for CMSG_GROUP_ACCEPT {}
 
 impl CMSG_GROUP_ACCEPT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
-        Ok(w)
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {
+        let mut array_w = [0u8; 0];
+        let mut w = array_w.as_mut_slice();
+        Ok(array_w)
     }
 }
 

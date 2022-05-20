@@ -18,15 +18,16 @@ pub struct CMSG_UNSTABLE_PET {
 impl ClientMessageWrite for CMSG_UNSTABLE_PET {}
 
 impl CMSG_UNSTABLE_PET {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
+        let mut array_w = [0u8; 12];
+        let mut w = array_w.as_mut_slice();
         // npc_guid: Guid
         w.write_all(&self.npc_guid.guid().to_le_bytes())?;
 
         // pet_number: u32
         w.write_all(&self.pet_number.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

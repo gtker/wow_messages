@@ -25,7 +25,7 @@ impl MovementBlock {
 
 impl MovementBlock {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(51539607723);
         // update_flag: UpdateFlag
         w.write_all(&(self.update_flag.as_int() as u8).to_le_bytes())?;
 

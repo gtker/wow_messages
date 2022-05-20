@@ -17,15 +17,16 @@ pub struct CMSG_READ_ITEM {
 impl ClientMessageWrite for CMSG_READ_ITEM {}
 
 impl CMSG_READ_ITEM {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 2], std::io::Error> {
+        let mut array_w = [0u8; 2];
+        let mut w = array_w.as_mut_slice();
         // bag_index: u8
         w.write_all(&self.bag_index.to_le_bytes())?;
 
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

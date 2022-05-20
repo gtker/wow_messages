@@ -16,12 +16,13 @@ pub struct CMSG_SET_ACTIONBAR_TOGGLES {
 impl ClientMessageWrite for CMSG_SET_ACTIONBAR_TOGGLES {}
 
 impl CMSG_SET_ACTIONBAR_TOGGLES {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {
+        let mut array_w = [0u8; 1];
+        let mut w = array_w.as_mut_slice();
         // action_bar: u8
         w.write_all(&self.action_bar.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

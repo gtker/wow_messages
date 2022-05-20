@@ -13,15 +13,16 @@ pub struct GmSurveyQuestion {
 }
 
 impl GmSurveyQuestion {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
+        let mut array_w = [0u8; 5];
+        let mut w = array_w.as_mut_slice();
         // question_id: u32
         w.write_all(&self.question_id.to_le_bytes())?;
 
         // answer: u8
         w.write_all(&self.answer.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

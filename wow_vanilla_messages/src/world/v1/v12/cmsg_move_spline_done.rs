@@ -19,7 +19,7 @@ impl ClientMessageWrite for CMSG_MOVE_SPLINE_DONE {}
 
 impl CMSG_MOVE_SPLINE_DONE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(89);
         // movement_info: MovementInfo
         w.write_all(&self.movement_info.as_bytes()?)?;
 

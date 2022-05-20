@@ -20,7 +20,7 @@ impl ServerMessageWrite for SMSG_LOG_XPGAIN {}
 
 impl SMSG_LOG_XPGAIN {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(21);
         // target_guid: Guid
         w.write_all(&self.target_guid.guid().to_le_bytes())?;
 

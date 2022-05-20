@@ -22,8 +22,9 @@ pub struct CMSG_AUCTION_SELL_ITEM {
 impl ClientMessageWrite for CMSG_AUCTION_SELL_ITEM {}
 
 impl CMSG_AUCTION_SELL_ITEM {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 32], std::io::Error> {
+        let mut array_w = [0u8; 32];
+        let mut w = array_w.as_mut_slice();
         // auctioneer_guid: Guid
         w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
 
@@ -42,7 +43,7 @@ impl CMSG_AUCTION_SELL_ITEM {
         // auction_duration_in_minutes: u32
         w.write_all(&self.auction_duration_in_minutes.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

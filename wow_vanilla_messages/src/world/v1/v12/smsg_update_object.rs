@@ -18,7 +18,7 @@ impl ClientMessageWrite for SMSG_UPDATE_OBJECT {}
 
 impl SMSG_UPDATE_OBJECT {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(18446744073709551615);
         // amount_of_objects: u32
         w.write_all(&(self.objects.len() as u32).to_le_bytes())?;
 

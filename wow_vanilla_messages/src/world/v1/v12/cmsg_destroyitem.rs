@@ -21,8 +21,9 @@ pub struct CMSG_DESTROYITEM {
 impl ClientMessageWrite for CMSG_DESTROYITEM {}
 
 impl CMSG_DESTROYITEM {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 6], std::io::Error> {
+        let mut array_w = [0u8; 6];
+        let mut w = array_w.as_mut_slice();
         // bag: u8
         w.write_all(&self.bag.to_le_bytes())?;
 
@@ -41,7 +42,7 @@ impl CMSG_DESTROYITEM {
         // unknown3: u8
         w.write_all(&self.unknown3.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

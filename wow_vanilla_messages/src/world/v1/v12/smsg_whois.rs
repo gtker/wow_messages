@@ -16,7 +16,7 @@ impl ServerMessageWrite for SMSG_WHOIS {}
 
 impl SMSG_WHOIS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(256);
         // message: CString
         w.write_all(self.message.as_bytes())?;
         // Null terminator

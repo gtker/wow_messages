@@ -15,9 +15,10 @@ pub struct MSG_QUERY_NEXT_MAIL_TIME_Client {
 impl ClientMessageWrite for MSG_QUERY_NEXT_MAIL_TIME_Client {}
 
 impl MSG_QUERY_NEXT_MAIL_TIME_Client {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
-        Ok(w)
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {
+        let mut array_w = [0u8; 0];
+        let mut w = array_w.as_mut_slice();
+        Ok(array_w)
     }
 }
 

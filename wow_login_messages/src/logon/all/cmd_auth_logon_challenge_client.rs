@@ -33,7 +33,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
 
 impl CMD_AUTH_LOGON_CHALLENGE_Client {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(290);
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 

@@ -17,12 +17,13 @@ pub struct SMSG_UPDATE_WORLD_STATE {
 impl ServerMessageWrite for SMSG_UPDATE_WORLD_STATE {}
 
 impl SMSG_UPDATE_WORLD_STATE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
+        let mut array_w = [0u8; 8];
+        let mut w = array_w.as_mut_slice();
         // state: WorldState
         w.write_all(&self.state.as_bytes()?)?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

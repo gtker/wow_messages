@@ -14,7 +14,7 @@ pub struct SpellCastTargets {
 
 impl SpellCastTargets {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(354);
         // target_flags: SpellCastTargetFlags
         w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes())?;
 

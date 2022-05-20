@@ -17,15 +17,16 @@ pub struct CMSG_SET_FACTION_ATWAR {
 impl ClientMessageWrite for CMSG_SET_FACTION_ATWAR {}
 
 impl CMSG_SET_FACTION_ATWAR {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
+        let mut array_w = [0u8; 5];
+        let mut w = array_w.as_mut_slice();
         // reputation_list_id: u32
         w.write_all(&self.reputation_list_id.to_le_bytes())?;
 
         // flags: u8
         w.write_all(&self.flags.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

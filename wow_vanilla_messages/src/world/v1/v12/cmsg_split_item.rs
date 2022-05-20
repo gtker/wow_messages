@@ -20,8 +20,9 @@ pub struct CMSG_SPLIT_ITEM {
 impl ClientMessageWrite for CMSG_SPLIT_ITEM {}
 
 impl CMSG_SPLIT_ITEM {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 5], std::io::Error> {
+        let mut array_w = [0u8; 5];
+        let mut w = array_w.as_mut_slice();
         // source_bag: u8
         w.write_all(&self.source_bag.to_le_bytes())?;
 
@@ -37,7 +38,7 @@ impl CMSG_SPLIT_ITEM {
         // amount: u8
         w.write_all(&self.amount.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

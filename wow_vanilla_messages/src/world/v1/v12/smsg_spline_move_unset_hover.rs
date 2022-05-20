@@ -17,7 +17,7 @@ impl ServerMessageWrite for SMSG_SPLINE_MOVE_UNSET_HOVER {}
 
 impl SMSG_SPLINE_MOVE_UNSET_HOVER {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(9);
         // guid: PackedGuid
         w.write_all(&self.guid.packed_guid())?;
 

@@ -17,12 +17,13 @@ pub struct CMSG_FAR_SIGHT {
 impl ClientMessageWrite for CMSG_FAR_SIGHT {}
 
 impl CMSG_FAR_SIGHT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 1], std::io::Error> {
+        let mut array_w = [0u8; 1];
+        let mut w = array_w.as_mut_slice();
         // operation: FarSightOperation
         w.write_all(&(self.operation.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

@@ -18,15 +18,16 @@ pub struct CMSG_AUTOEQUIP_ITEM_SLOT {
 impl ClientMessageWrite for CMSG_AUTOEQUIP_ITEM_SLOT {}
 
 impl CMSG_AUTOEQUIP_ITEM_SLOT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 9], std::io::Error> {
+        let mut array_w = [0u8; 9];
+        let mut w = array_w.as_mut_slice();
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // destination_slot: u8
         w.write_all(&self.destination_slot.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

@@ -16,6 +16,7 @@ pub mod rust_view;
 mod structs;
 mod update_mask;
 
+use crate::container::Sizes;
 pub use update_mask::*;
 
 #[derive(Debug)]
@@ -156,8 +157,9 @@ impl Writer {
         is_constant_sized: bool,
         read_function: impl Fn(&mut Self, ImplType),
         write_function: impl Fn(&mut Self, ImplType),
+        sizes: Option<Sizes>,
     ) {
-        self.write_as_bytes(&type_name, write_function);
+        self.write_as_bytes(&type_name, write_function, sizes);
 
         self.open_curly(format!(
             "impl {} for {}",
@@ -408,13 +410,43 @@ impl Writer {
         &mut self,
         type_name: impl AsRef<str>,
         write_function: impl Fn(&mut Self, ImplType),
+        sizes: Option<Sizes>,
     ) {
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
-        self.open_curly("pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>");
-        self.wln("let mut w = Vec::with_capacity(8000);");
+        if sizes.is_some() && sizes.unwrap().is_constant() {
+            self.open_curly(format!(
+                "pub(crate) fn as_bytes(&self) -> Result<[u8; {size}], std::io::Error>",
+                size = sizes.unwrap().maximum()
+            ));
+        } else {
+            self.open_curly("pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error>");
+        }
+
+        if let Some(sizes) = sizes {
+            if sizes.is_constant() {
+                self.wln(format!(
+                    "let mut array_w = [0u8; {size}];",
+                    size = sizes.maximum()
+                ));
+                self.wln("let mut w = array_w.as_mut_slice();");
+            } else {
+                self.wln(format!(
+                    "let mut w = Vec::with_capacity({});",
+                    sizes.maximum()
+                ));
+            }
+        } else {
+            self.wln("let mut w = Vec::with_capacity(8000);");
+        }
         write_function(self, ImplType::Std);
-        self.wln("Ok(w)");
+
+        if sizes.is_some() && sizes.unwrap().is_constant() {
+            self.wln("Ok(array_w)");
+        } else {
+            self.wln("Ok(w)");
+        }
+
         self.closing_curly();
         self.closing_curly_newline();
     }
@@ -430,8 +462,9 @@ impl Writer {
         error_name: S1,
         read_function: F,
         write_function: F2,
+        sizes: Option<Sizes>,
     ) {
-        self.write_as_bytes(&type_name, write_function);
+        self.write_as_bytes(&type_name, write_function, sizes);
 
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
@@ -462,8 +495,9 @@ impl Writer {
         error_name: S1,
         read_function: F,
         write_function: F2,
+        sizes: Option<Sizes>,
     ) {
-        self.write_as_bytes(&type_name, write_function);
+        self.write_as_bytes(&type_name, write_function, sizes);
 
         self.open_curly(format!(
             "impl ReadableAndWritable for {}",

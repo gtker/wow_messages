@@ -20,8 +20,9 @@ pub struct SMSG_PETITION_SIGN_RESULTS {
 impl ServerMessageWrite for SMSG_PETITION_SIGN_RESULTS {}
 
 impl SMSG_PETITION_SIGN_RESULTS {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 20], std::io::Error> {
+        let mut array_w = [0u8; 20];
+        let mut w = array_w.as_mut_slice();
         // petition_guid: Guid
         w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
@@ -31,7 +32,7 @@ impl SMSG_PETITION_SIGN_RESULTS {
         // result: PetitionResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

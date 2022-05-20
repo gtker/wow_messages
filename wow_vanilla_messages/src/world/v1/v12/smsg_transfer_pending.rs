@@ -18,7 +18,7 @@ impl ServerMessageWrite for SMSG_TRANSFER_PENDING {}
 
 impl SMSG_TRANSFER_PENDING {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(12);
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 

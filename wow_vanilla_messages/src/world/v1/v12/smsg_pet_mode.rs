@@ -23,8 +23,9 @@ pub struct SMSG_PET_MODE {
 impl ServerMessageWrite for SMSG_PET_MODE {}
 
 impl SMSG_PET_MODE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
+        let mut array_w = [0u8; 12];
+        let mut w = array_w.as_mut_slice();
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -40,7 +41,7 @@ impl SMSG_PET_MODE {
         // pet_enabled: u8
         w.write_all(&self.pet_enabled.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

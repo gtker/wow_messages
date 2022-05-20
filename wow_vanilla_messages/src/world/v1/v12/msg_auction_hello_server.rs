@@ -18,15 +18,16 @@ pub struct MSG_AUCTION_HELLO_Server {
 impl ServerMessageWrite for MSG_AUCTION_HELLO_Server {}
 
 impl MSG_AUCTION_HELLO_Server {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
+        let mut array_w = [0u8; 12];
+        let mut w = array_w.as_mut_slice();
         // auctioneer: Guid
         w.write_all(&self.auctioneer.guid().to_le_bytes())?;
 
         // auction_house_id: u32
         w.write_all(&self.auction_house_id.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

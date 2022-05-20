@@ -22,8 +22,9 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Client {
 impl ClientMessageWrite for MSG_SAVE_GUILD_EMBLEM_Client {}
 
 impl MSG_SAVE_GUILD_EMBLEM_Client {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 28], std::io::Error> {
+        let mut array_w = [0u8; 28];
+        let mut w = array_w.as_mut_slice();
         // vendor: Guid
         w.write_all(&self.vendor.guid().to_le_bytes())?;
 
@@ -42,7 +43,7 @@ impl MSG_SAVE_GUILD_EMBLEM_Client {
         // background_color: u32
         w.write_all(&self.background_color.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

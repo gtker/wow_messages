@@ -17,15 +17,16 @@ pub struct SMSG_PLAYED_TIME {
 impl ServerMessageWrite for SMSG_PLAYED_TIME {}
 
 impl SMSG_PLAYED_TIME {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 8], std::io::Error> {
+        let mut array_w = [0u8; 8];
+        let mut w = array_w.as_mut_slice();
         // total_played_time: u32
         w.write_all(&self.total_played_time.to_le_bytes())?;
 
         // level_played_time: u32
         w.write_all(&self.level_played_time.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

@@ -18,15 +18,16 @@ pub struct CMSG_PETITION_SIGN {
 impl ClientMessageWrite for CMSG_PETITION_SIGN {}
 
 impl CMSG_PETITION_SIGN {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 9], std::io::Error> {
+        let mut array_w = [0u8; 9];
+        let mut w = array_w.as_mut_slice();
         // petition_guid: Guid
         w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

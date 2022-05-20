@@ -17,7 +17,7 @@ impl ServerMessageWrite for MSG_RAID_READY_CHECK_Server {}
 
 impl MSG_RAID_READY_CHECK_Server {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(9);
         // optional state_check
         if let Some(v) = &self.state_check {
             // guid: Guid

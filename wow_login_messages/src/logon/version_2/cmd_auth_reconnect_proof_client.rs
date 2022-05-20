@@ -24,8 +24,9 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
 }
 
 impl CMD_AUTH_RECONNECT_PROOF_Client {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 58], std::io::Error> {
+        let mut array_w = [0u8; 58];
+        let mut w = array_w.as_mut_slice();
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -47,7 +48,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
         // key_count: u8
         w.write_all(&Self::KEY_COUNT_VALUE.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

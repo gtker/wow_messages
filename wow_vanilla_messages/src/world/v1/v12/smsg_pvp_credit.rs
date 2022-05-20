@@ -20,8 +20,9 @@ pub struct SMSG_PVP_CREDIT {
 impl ServerMessageWrite for SMSG_PVP_CREDIT {}
 
 impl SMSG_PVP_CREDIT {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 13], std::io::Error> {
+        let mut array_w = [0u8; 13];
+        let mut w = array_w.as_mut_slice();
         // honor_points: u32
         w.write_all(&self.honor_points.to_le_bytes())?;
 
@@ -31,7 +32,7 @@ impl SMSG_PVP_CREDIT {
         // rank: PvpRank
         w.write_all(&(self.rank.as_int() as u32).to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

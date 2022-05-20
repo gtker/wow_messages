@@ -20,8 +20,9 @@ pub struct CMSG_BUY_ITEM {
 impl ClientMessageWrite for CMSG_BUY_ITEM {}
 
 impl CMSG_BUY_ITEM {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 14], std::io::Error> {
+        let mut array_w = [0u8; 14];
+        let mut w = array_w.as_mut_slice();
         // vendor_guid: Guid
         w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
 
@@ -34,7 +35,7 @@ impl CMSG_BUY_ITEM {
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

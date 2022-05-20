@@ -25,7 +25,7 @@ impl ServerMessageWrite for SMSG_GROUP_LIST {}
 
 impl SMSG_GROUP_LIST {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(1138166333464);
         // group_type: GroupType
         w.write_all(&(self.group_type.as_int() as u8).to_le_bytes())?;
 

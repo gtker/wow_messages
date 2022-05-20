@@ -18,7 +18,7 @@ impl ServerMessageWrite for SMSG_CHANNEL_NOTIFY {}
 
 impl SMSG_CHANNEL_NOTIFY {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(257);
         // notify_type: ChatNotify
         w.write_all(&(self.notify_type.as_int() as u8).to_le_bytes())?;
 

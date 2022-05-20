@@ -18,15 +18,16 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
     const OPCODE: u8 = 0x03;
 }
 impl CMD_AUTH_RECONNECT_PROOF_Server {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 2], std::io::Error> {
+        let mut array_w = [0u8; 2];
+        let mut w = array_w.as_mut_slice();
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
         // result: LoginResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

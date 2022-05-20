@@ -16,12 +16,13 @@ pub struct SMSG_QUESTUPDATE_FAILEDTIMER {
 impl ServerMessageWrite for SMSG_QUESTUPDATE_FAILEDTIMER {}
 
 impl SMSG_QUESTUPDATE_FAILEDTIMER {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 4], std::io::Error> {
+        let mut array_w = [0u8; 4];
+        let mut w = array_w.as_mut_slice();
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

@@ -18,15 +18,16 @@ pub struct SMSG_DUEL_REQUESTED {
 impl ServerMessageWrite for SMSG_DUEL_REQUESTED {}
 
 impl SMSG_DUEL_REQUESTED {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 16], std::io::Error> {
+        let mut array_w = [0u8; 16];
+        let mut w = array_w.as_mut_slice();
         // initiator_guid: Guid
         w.write_all(&self.initiator_guid.guid().to_le_bytes())?;
 
         // target_guid: Guid
         w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

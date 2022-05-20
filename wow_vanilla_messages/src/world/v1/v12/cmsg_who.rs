@@ -23,7 +23,7 @@ impl ClientMessageWrite for CMSG_WHO {}
 
 impl CMSG_WHO {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(1116691497496);
         // minimum_level: u32
         w.write_all(&self.minimum_level.to_le_bytes())?;
 

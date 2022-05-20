@@ -21,8 +21,9 @@ pub struct SMSG_WEATHER {
 impl ServerMessageWrite for SMSG_WEATHER {}
 
 impl SMSG_WEATHER {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 13], std::io::Error> {
+        let mut array_w = [0u8; 13];
+        let mut w = array_w.as_mut_slice();
         // weather_type: WeatherType
         w.write_all(&(self.weather_type.as_int() as u32).to_le_bytes())?;
 
@@ -35,7 +36,7 @@ impl SMSG_WEATHER {
         // change: WeatherChangeType
         w.write_all(&(self.change.as_int() as u8).to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

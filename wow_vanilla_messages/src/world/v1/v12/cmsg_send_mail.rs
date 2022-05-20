@@ -27,7 +27,7 @@ impl ClientMessageWrite for CMSG_SEND_MAIL {}
 
 impl CMSG_SEND_MAIL {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(808);
         // mailbox: Guid
         w.write_all(&self.mailbox.guid().to_le_bytes())?;
 

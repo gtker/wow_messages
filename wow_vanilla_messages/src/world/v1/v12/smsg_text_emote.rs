@@ -22,7 +22,7 @@ impl ServerMessageWrite for SMSG_TEXT_EMOTE {}
 
 impl SMSG_TEXT_EMOTE {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(276);
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

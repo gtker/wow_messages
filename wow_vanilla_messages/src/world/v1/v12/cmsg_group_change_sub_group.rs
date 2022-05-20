@@ -17,7 +17,7 @@ impl ClientMessageWrite for CMSG_GROUP_CHANGE_SUB_GROUP {}
 
 impl CMSG_GROUP_CHANGE_SUB_GROUP {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(257);
         // name: CString
         w.write_all(self.name.as_bytes())?;
         // Null terminator

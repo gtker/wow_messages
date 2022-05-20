@@ -18,7 +18,7 @@ impl ClientMessageWrite for CMSG_TEST_OPTIONAL {}
 
 impl CMSG_TEST_OPTIONAL {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(258);
         // c_string: CString
         w.write_all(self.c_string.as_bytes())?;
         // Null terminator

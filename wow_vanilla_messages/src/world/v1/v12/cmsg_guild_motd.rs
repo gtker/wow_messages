@@ -16,7 +16,7 @@ impl ClientMessageWrite for CMSG_GUILD_MOTD {}
 
 impl CMSG_GUILD_MOTD {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(256);
         // message_of_the_day: CString
         w.write_all(self.message_of_the_day.as_bytes())?;
         // Null terminator

@@ -27,7 +27,7 @@ impl ServerMessageWrite for SMSG_PET_SPELLS {}
 
 impl SMSG_PET_SPELLS {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(4154);
         // pet: Guid
         w.write_all(&self.pet.guid().to_le_bytes())?;
 

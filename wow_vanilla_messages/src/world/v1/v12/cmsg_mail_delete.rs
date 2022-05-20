@@ -18,15 +18,16 @@ pub struct CMSG_MAIL_DELETE {
 impl ClientMessageWrite for CMSG_MAIL_DELETE {}
 
 impl CMSG_MAIL_DELETE {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 12], std::io::Error> {
+        let mut array_w = [0u8; 12];
+        let mut w = array_w.as_mut_slice();
         // mailbox_id: Guid
         w.write_all(&self.mailbox_id.guid().to_le_bytes())?;
 
         // mail_id: u32
         w.write_all(&self.mail_id.to_le_bytes())?;
 
-        Ok(w)
+        Ok(array_w)
     }
 }
 

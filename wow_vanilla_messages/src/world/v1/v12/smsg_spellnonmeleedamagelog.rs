@@ -29,7 +29,7 @@ impl ServerMessageWrite for SMSG_SPELLNONMELEEDAMAGELOG {}
 
 impl SMSG_SPELLNONMELEEDAMAGELOG {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(46);
         // target: PackedGuid
         w.write_all(&self.target.packed_guid())?;
 

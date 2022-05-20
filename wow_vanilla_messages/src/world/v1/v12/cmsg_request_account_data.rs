@@ -15,9 +15,10 @@ pub struct CMSG_REQUEST_ACCOUNT_DATA {
 impl ClientMessageWrite for CMSG_REQUEST_ACCOUNT_DATA {}
 
 impl CMSG_REQUEST_ACCOUNT_DATA {
-    pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
-        Ok(w)
+    pub(crate) fn as_bytes(&self) -> Result<[u8; 0], std::io::Error> {
+        let mut array_w = [0u8; 0];
+        let mut w = array_w.as_mut_slice();
+        Ok(array_w)
     }
 }
 

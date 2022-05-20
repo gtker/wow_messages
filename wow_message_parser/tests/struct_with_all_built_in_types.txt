@@ -23,7 +23,7 @@ pub struct StructWithAllBuiltInTypes {
 
 impl StructWithAllBuiltInTypes {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(565);
         // basic8: u8
         w.write_all(&(self.simple_string.len() as u8).to_le_bytes())?;
 

@@ -19,7 +19,7 @@ impl ServerMessageWrite for MSG_MOVE_SET_FACING {}
 
 impl MSG_MOVE_SET_FACING {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(81);
         // info: MovementInfo
         w.write_all(&self.info.as_bytes()?)?;
 

@@ -16,7 +16,7 @@ impl ServerMessageWrite for SMSG_NOTIFICATION {}
 
 impl SMSG_NOTIFICATION {
     pub(crate) fn as_bytes(&self) -> Result<Vec<u8>, std::io::Error> {
-        let mut w = Vec::with_capacity(8000);
+        let mut w = Vec::with_capacity(256);
         // notification: CString
         w.write_all(self.notification.as_bytes())?;
         // Null terminator
