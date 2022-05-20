@@ -394,7 +394,37 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn impl_read_write_non_trait<
+    pub fn impl_read_write_non_trait<F: Fn(&mut Self, ImplType), F2: Fn(&mut Self, ImplType)>(
+        &mut self,
+        type_name: impl AsRef<str>,
+        error_name: impl AsRef<str>,
+        read_function: F,
+        write_function: F2,
+        sizes: Option<Sizes>,
+        visibility: impl AsRef<str>,
+    ) {
+        self.write_as_bytes(&type_name, write_function, sizes);
+
+        self.open_curly(format!("impl {}", type_name.as_ref()));
+
+        for it in ImplType::types() {
+            self.wln(it.cfg());
+            self.open_curly(format!(
+                "{visibility} {func}fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, {error}>",
+                prefix = it.prefix(),
+                read = it.read(),
+                error = error_name.as_ref(),
+                func = it.func(),
+                visibility = visibility.as_ref(),
+            ));
+            read_function(self, it);
+            self.closing_curly_newline();
+        }
+
+        self.closing_curly_newline(); // impl
+    }
+
+    pub fn impl_read_write_non_trait_pub<
         S: AsRef<str>,
         S1: AsRef<str>,
         F: Fn(&mut Self, ImplType),
@@ -407,24 +437,37 @@ impl Writer {
         write_function: F2,
         sizes: Option<Sizes>,
     ) {
-        self.write_as_bytes(&type_name, write_function, sizes);
+        self.impl_read_write_non_trait(
+            type_name,
+            error_name,
+            read_function,
+            write_function,
+            sizes,
+            "pub",
+        )
+    }
 
-        self.open_curly(format!("impl {}", type_name.as_ref()));
-
-        for it in ImplType::types() {
-            self.wln(it.cfg());
-            self.open_curly(format!(
-                "pub(crate) {func}fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, {error}>",
-                prefix = it.prefix(),
-                read = it.read(),
-                error = error_name.as_ref(),
-                func = it.func(),
-            ));
-            read_function(self, it);
-            self.closing_curly_newline();
-        }
-
-        self.closing_curly_newline(); // impl
+    pub fn impl_read_write_non_trait_pub_crate<
+        S: AsRef<str>,
+        S1: AsRef<str>,
+        F: Fn(&mut Self, ImplType),
+        F2: Fn(&mut Self, ImplType),
+    >(
+        &mut self,
+        type_name: S,
+        error_name: S1,
+        read_function: F,
+        write_function: F2,
+        sizes: Option<Sizes>,
+    ) {
+        self.impl_read_write_non_trait(
+            type_name,
+            error_name,
+            read_function,
+            write_function,
+            sizes,
+            "pub(crate)",
+        )
     }
 
     pub fn impl_read_and_writable_with_error<

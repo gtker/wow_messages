@@ -21,7 +21,7 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
 
     match e.container_type() {
         ContainerType::Struct => {
-            s.impl_read_write_non_trait(
+            s.impl_read_write_non_trait_pub_crate(
                 e.name(),
                 error_ty,
                 |s, it| {

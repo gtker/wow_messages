@@ -245,7 +245,7 @@ pub fn common_impls_world(
 }
 
 pub fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
-    s.impl_read_write_non_trait(
+    s.impl_read_write_non_trait_pub(
         format!("{t}OpcodeMessage", t = ty),
         format!("{t}OpcodeMessageError", t = ty),
         |s, it| {
@@ -513,7 +513,7 @@ pub fn opcode_enum_login(s: &mut Writer, v: &[&Container], ty: &str) {
         });
     });
 
-    s.impl_read_write_non_trait(
+    s.impl_read_write_non_trait_pub_crate(
         &format!("{t}Opcode", t = ty),
         &format!("{t}OpcodeError", t = ty),
         |s, it| {
