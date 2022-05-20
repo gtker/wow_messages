@@ -162,34 +162,16 @@ pub fn print_write_field_identifier(
     s: &mut Writer,
     variable_name: &str,
     variable_prefix: &str,
-    verified_value: &Option<VerifiedContainerValue>,
-    identifier: &str,
     prefix: &str,
     postfix: &str,
 ) {
-    if verified_value.is_some() {
-        s.wln(format!(
-            "{type_name}::{variant}.{prefix}write(w){postfix}?;",
-            type_name = identifier,
-            prefix = prefix,
-            postfix = postfix,
-            variant = verified_value.as_ref().unwrap().original_string()
-        ));
-        s.wln(format!(
-            "// {name} is set to always be {variant} ({value})",
-            name = variable_name,
-            variant = verified_value.as_ref().unwrap().original_string(),
-            value = verified_value.as_ref().unwrap().value()
-        ));
-    } else {
-        s.wln(format!(
-            "{variable_prefix}{name}.{prefix}write(w){postfix}?;",
-            name = variable_name,
-            variable_prefix = variable_prefix,
-            prefix = prefix,
-            postfix = postfix,
-        ));
-    }
+    s.wln(format!(
+        "{variable_prefix}{name}.{prefix}write(w){postfix}?;",
+        name = variable_name,
+        variable_prefix = variable_prefix,
+        prefix = prefix,
+        postfix = postfix,
+    ));
 
     s.newline();
 }
@@ -278,15 +260,7 @@ pub fn print_write_definition(
                 _ => {}
             }
 
-            print_write_field_identifier(
-                s,
-                d.name(),
-                variable_prefix,
-                d.verified_value(),
-                identifier,
-                prefix,
-                postfix,
-            );
+            print_write_field_identifier(s, d.name(), variable_prefix, prefix, postfix);
         }
         Type::PackedGuid => {
             s.wln(format!(
