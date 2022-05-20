@@ -42,7 +42,7 @@ impl MessageBody for SMSG_TAXINODE_STATUS {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // taxi_mask_node_known: u8
         w.write_all(&self.taxi_mask_node_known.to_le_bytes())?;
@@ -91,7 +91,7 @@ impl MessageBody for SMSG_TAXINODE_STATUS {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // taxi_mask_node_known: u8
             w.write_all(&self.taxi_mask_node_known.to_le_bytes()).await?;
@@ -141,7 +141,7 @@ impl MessageBody for SMSG_TAXINODE_STATUS {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // taxi_mask_node_known: u8
             w.write_all(&self.taxi_mask_node_known.to_le_bytes()).await?;

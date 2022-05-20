@@ -37,7 +37,7 @@ impl MessageBody for CMSG_PETITION_SHOW_SIGNATURES {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // item_guid: Guid
-        self.item_guid.write(w)?;
+        w.write_all(&self.item_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -79,7 +79,7 @@ impl MessageBody for CMSG_PETITION_SHOW_SIGNATURES {
      {
         Box::pin(async move {
             // item_guid: Guid
-            self.item_guid.tokio_write(w).await?;
+            w.write_all(&self.item_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -122,7 +122,7 @@ impl MessageBody for CMSG_PETITION_SHOW_SIGNATURES {
      {
         Box::pin(async move {
             // item_guid: Guid
-            self.item_guid.astd_write(w).await?;
+            w.write_all(&self.item_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

@@ -42,7 +42,7 @@ impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // old_mover: Guid
-        self.old_mover.write(w)?;
+        w.write_all(&self.old_mover.guid().to_le_bytes())?;
 
         // movement_info: MovementInfo
         self.movement_info.write(w)?;
@@ -91,7 +91,7 @@ impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
      {
         Box::pin(async move {
             // old_mover: Guid
-            self.old_mover.tokio_write(w).await?;
+            w.write_all(&self.old_mover.guid().to_le_bytes()).await?;
 
             // movement_info: MovementInfo
             self.movement_info.tokio_write(w).await?;
@@ -141,7 +141,7 @@ impl MessageBody for CMSG_MOVE_NOT_ACTIVE_MOVER {
      {
         Box::pin(async move {
             // old_mover: Guid
-            self.old_mover.astd_write(w).await?;
+            w.write_all(&self.old_mover.guid().to_le_bytes()).await?;
 
             // movement_info: MovementInfo
             self.movement_info.astd_write(w).await?;

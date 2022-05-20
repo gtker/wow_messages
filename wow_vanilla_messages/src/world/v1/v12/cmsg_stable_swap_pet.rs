@@ -42,7 +42,7 @@ impl MessageBody for CMSG_STABLE_SWAP_PET {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // npc: Guid
-        self.npc.write(w)?;
+        w.write_all(&self.npc.guid().to_le_bytes())?;
 
         // pet_slot: u32
         w.write_all(&self.pet_slot.to_le_bytes())?;
@@ -91,7 +91,7 @@ impl MessageBody for CMSG_STABLE_SWAP_PET {
      {
         Box::pin(async move {
             // npc: Guid
-            self.npc.tokio_write(w).await?;
+            w.write_all(&self.npc.guid().to_le_bytes()).await?;
 
             // pet_slot: u32
             w.write_all(&self.pet_slot.to_le_bytes()).await?;
@@ -141,7 +141,7 @@ impl MessageBody for CMSG_STABLE_SWAP_PET {
      {
         Box::pin(async move {
             // npc: Guid
-            self.npc.astd_write(w).await?;
+            w.write_all(&self.npc.guid().to_le_bytes()).await?;
 
             // pet_slot: u32
             w.write_all(&self.pet_slot.to_le_bytes()).await?;

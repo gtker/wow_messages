@@ -51,7 +51,7 @@ impl MessageBody for CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // counter: u32
         w.write_all(&self.counter.to_le_bytes())?;
@@ -113,7 +113,7 @@ impl MessageBody for CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // counter: u32
             w.write_all(&self.counter.to_le_bytes()).await?;
@@ -176,7 +176,7 @@ impl MessageBody for CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // counter: u32
             w.write_all(&self.counter.to_le_bytes()).await?;

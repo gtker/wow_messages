@@ -63,7 +63,7 @@ impl MessageBody for SMSG_SHOWTAXINODES {
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // nearest_node: u32
         w.write_all(&self.nearest_node.to_le_bytes())?;
@@ -137,7 +137,7 @@ impl MessageBody for SMSG_SHOWTAXINODES {
             w.write_all(&self.unknown1.to_le_bytes()).await?;
 
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // nearest_node: u32
             w.write_all(&self.nearest_node.to_le_bytes()).await?;
@@ -212,7 +212,7 @@ impl MessageBody for SMSG_SHOWTAXINODES {
             w.write_all(&self.unknown1.to_le_bytes()).await?;
 
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // nearest_node: u32
             w.write_all(&self.nearest_node.to_le_bytes()).await?;

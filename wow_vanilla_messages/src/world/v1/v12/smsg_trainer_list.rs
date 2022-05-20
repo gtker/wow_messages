@@ -59,7 +59,7 @@ impl MessageBody for SMSG_TRAINER_LIST {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // trainer_type: u32
         w.write_all(&self.trainer_type.to_le_bytes())?;
@@ -136,7 +136,7 @@ impl MessageBody for SMSG_TRAINER_LIST {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // trainer_type: u32
             w.write_all(&self.trainer_type.to_le_bytes()).await?;
@@ -214,7 +214,7 @@ impl MessageBody for SMSG_TRAINER_LIST {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // trainer_type: u32
             w.write_all(&self.trainer_type.to_le_bytes()).await?;

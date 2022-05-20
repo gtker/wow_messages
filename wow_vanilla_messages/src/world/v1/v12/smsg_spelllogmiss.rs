@@ -61,7 +61,7 @@ impl MessageBody for SMSG_SPELLLOGMISS {
         w.write_all(&self.id.to_le_bytes())?;
 
         // caster_guid: Guid
-        self.caster_guid.write(w)?;
+        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -135,7 +135,7 @@ impl MessageBody for SMSG_SPELLLOGMISS {
             w.write_all(&self.id.to_le_bytes()).await?;
 
             // caster_guid: Guid
-            self.caster_guid.tokio_write(w).await?;
+            w.write_all(&self.caster_guid.guid().to_le_bytes()).await?;
 
             // unknown1: u8
             w.write_all(&self.unknown1.to_le_bytes()).await?;
@@ -210,7 +210,7 @@ impl MessageBody for SMSG_SPELLLOGMISS {
             w.write_all(&self.id.to_le_bytes()).await?;
 
             // caster_guid: Guid
-            self.caster_guid.astd_write(w).await?;
+            w.write_all(&self.caster_guid.guid().to_le_bytes()).await?;
 
             // unknown1: u8
             w.write_all(&self.unknown1.to_le_bytes()).await?;

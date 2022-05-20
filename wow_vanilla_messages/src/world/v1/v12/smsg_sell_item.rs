@@ -48,10 +48,10 @@ impl MessageBody for SMSG_SELL_ITEM {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // item: Guid
-        self.item.write(w)?;
+        w.write_all(&self.item.guid().to_le_bytes())?;
 
         // result: SellItemResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
@@ -104,10 +104,10 @@ impl MessageBody for SMSG_SELL_ITEM {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // item: Guid
-            self.item.tokio_write(w).await?;
+            w.write_all(&self.item.guid().to_le_bytes()).await?;
 
             // result: SellItemResult
             w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;
@@ -161,10 +161,10 @@ impl MessageBody for SMSG_SELL_ITEM {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // item: Guid
-            self.item.astd_write(w).await?;
+            w.write_all(&self.item.guid().to_le_bytes()).await?;
 
             // result: SellItemResult
             w.write_all(&(self.result.as_int() as u8).to_le_bytes()).await?;

@@ -37,7 +37,7 @@ impl MessageBody for CMSG_SUMMON_RESPONSE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // summoner_guid: Guid
-        self.summoner_guid.write(w)?;
+        w.write_all(&self.summoner_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -79,7 +79,7 @@ impl MessageBody for CMSG_SUMMON_RESPONSE {
      {
         Box::pin(async move {
             // summoner_guid: Guid
-            self.summoner_guid.tokio_write(w).await?;
+            w.write_all(&self.summoner_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -122,7 +122,7 @@ impl MessageBody for CMSG_SUMMON_RESPONSE {
      {
         Box::pin(async move {
             // summoner_guid: Guid
-            self.summoner_guid.astd_write(w).await?;
+            w.write_all(&self.summoner_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

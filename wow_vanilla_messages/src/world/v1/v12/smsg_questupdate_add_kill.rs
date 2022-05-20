@@ -69,7 +69,7 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
         w.write_all(&self.required_kill_count.to_le_bytes())?;
 
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -139,7 +139,7 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
             w.write_all(&self.required_kill_count.to_le_bytes()).await?;
 
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -210,7 +210,7 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_KILL {
             w.write_all(&self.required_kill_count.to_le_bytes()).await?;
 
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

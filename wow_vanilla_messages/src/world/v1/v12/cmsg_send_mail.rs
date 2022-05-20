@@ -89,7 +89,7 @@ impl MessageBody for CMSG_SEND_MAIL {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // mailbox: Guid
-        self.mailbox.write(w)?;
+        w.write_all(&self.mailbox.guid().to_le_bytes())?;
 
         // receiver: CString
         w.write_all(self.receiver.as_bytes())?;
@@ -113,7 +113,7 @@ impl MessageBody for CMSG_SEND_MAIL {
         w.write_all(&self.unknown2.to_le_bytes())?;
 
         // item: Guid
-        self.item.write(w)?;
+        w.write_all(&self.item.guid().to_le_bytes())?;
 
         // money: u32
         w.write_all(&self.money.to_le_bytes())?;
@@ -210,7 +210,7 @@ impl MessageBody for CMSG_SEND_MAIL {
      {
         Box::pin(async move {
             // mailbox: Guid
-            self.mailbox.tokio_write(w).await?;
+            w.write_all(&self.mailbox.guid().to_le_bytes()).await?;
 
             // receiver: CString
             w.write_all(self.receiver.as_bytes()).await?;
@@ -234,7 +234,7 @@ impl MessageBody for CMSG_SEND_MAIL {
             w.write_all(&self.unknown2.to_le_bytes()).await?;
 
             // item: Guid
-            self.item.tokio_write(w).await?;
+            w.write_all(&self.item.guid().to_le_bytes()).await?;
 
             // money: u32
             w.write_all(&self.money.to_le_bytes()).await?;
@@ -332,7 +332,7 @@ impl MessageBody for CMSG_SEND_MAIL {
      {
         Box::pin(async move {
             // mailbox: Guid
-            self.mailbox.astd_write(w).await?;
+            w.write_all(&self.mailbox.guid().to_le_bytes()).await?;
 
             // receiver: CString
             w.write_all(self.receiver.as_bytes()).await?;
@@ -356,7 +356,7 @@ impl MessageBody for CMSG_SEND_MAIL {
             w.write_all(&self.unknown2.to_le_bytes()).await?;
 
             // item: Guid
-            self.item.astd_write(w).await?;
+            w.write_all(&self.item.guid().to_le_bytes()).await?;
 
             // money: u32
             w.write_all(&self.money.to_le_bytes()).await?;

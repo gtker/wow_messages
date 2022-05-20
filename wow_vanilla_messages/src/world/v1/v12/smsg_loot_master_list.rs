@@ -46,7 +46,7 @@ impl MessageBody for SMSG_LOOT_MASTER_LIST {
 
         // guids: Guid[amount_of_players]
         for i in self.guids.iter() {
-            i.write(w)?;
+            w.write_all(&i.guid().to_le_bytes())?;
         }
 
         Ok(())
@@ -99,7 +99,7 @@ impl MessageBody for SMSG_LOOT_MASTER_LIST {
 
             // guids: Guid[amount_of_players]
             for i in self.guids.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&i.guid().to_le_bytes()).await?;
             }
 
             Ok(())
@@ -153,7 +153,7 @@ impl MessageBody for SMSG_LOOT_MASTER_LIST {
 
             // guids: Guid[amount_of_players]
             for i in self.guids.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&i.guid().to_le_bytes()).await?;
             }
 
             Ok(())

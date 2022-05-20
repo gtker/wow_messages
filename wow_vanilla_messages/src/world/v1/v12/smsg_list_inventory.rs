@@ -48,7 +48,7 @@ impl MessageBody for SMSG_LIST_INVENTORY {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // vendor: Guid
-        self.vendor.write(w)?;
+        w.write_all(&self.vendor.guid().to_le_bytes())?;
 
         // amount_of_items: u8
         w.write_all(&(self.items.len() as u8).to_le_bytes())?;
@@ -108,7 +108,7 @@ impl MessageBody for SMSG_LIST_INVENTORY {
      {
         Box::pin(async move {
             // vendor: Guid
-            self.vendor.tokio_write(w).await?;
+            w.write_all(&self.vendor.guid().to_le_bytes()).await?;
 
             // amount_of_items: u8
             w.write_all(&(self.items.len() as u8).to_le_bytes()).await?;
@@ -169,7 +169,7 @@ impl MessageBody for SMSG_LIST_INVENTORY {
      {
         Box::pin(async move {
             // vendor: Guid
-            self.vendor.astd_write(w).await?;
+            w.write_all(&self.vendor.guid().to_le_bytes()).await?;
 
             // amount_of_items: u8
             w.write_all(&(self.items.len() as u8).to_le_bytes()).await?;

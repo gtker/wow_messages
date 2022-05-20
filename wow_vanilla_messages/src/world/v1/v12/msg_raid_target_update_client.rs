@@ -120,63 +120,63 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
                 target,
             } => {
                 // target: Guid
-                target.write(w)?;
+                w.write_all(&target.guid().to_le_bytes())?;
 
             }
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN1 {
                 target,
             } => {
                 // target: Guid
-                target.write(w)?;
+                w.write_all(&target.guid().to_le_bytes())?;
 
             }
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN2 {
                 target,
             } => {
                 // target: Guid
-                target.write(w)?;
+                w.write_all(&target.guid().to_le_bytes())?;
 
             }
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN3 {
                 target,
             } => {
                 // target: Guid
-                target.write(w)?;
+                w.write_all(&target.guid().to_le_bytes())?;
 
             }
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN4 {
                 target,
             } => {
                 // target: Guid
-                target.write(w)?;
+                w.write_all(&target.guid().to_le_bytes())?;
 
             }
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN5 {
                 target,
             } => {
                 // target: Guid
-                target.write(w)?;
+                w.write_all(&target.guid().to_le_bytes())?;
 
             }
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN6 {
                 target,
             } => {
                 // target: Guid
-                target.write(w)?;
+                w.write_all(&target.guid().to_le_bytes())?;
 
             }
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN7 {
                 target,
             } => {
                 // target: Guid
-                target.write(w)?;
+                w.write_all(&target.guid().to_le_bytes())?;
 
             }
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN8 {
                 target,
             } => {
                 // target: Guid
-                target.write(w)?;
+                w.write_all(&target.guid().to_le_bytes())?;
 
             }
             MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS => {}
@@ -305,63 +305,63 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
                     target,
                 } => {
                     // target: Guid
-                    target.tokio_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN1 {
                     target,
                 } => {
                     // target: Guid
-                    target.tokio_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN2 {
                     target,
                 } => {
                     // target: Guid
-                    target.tokio_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN3 {
                     target,
                 } => {
                     // target: Guid
-                    target.tokio_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN4 {
                     target,
                 } => {
                     // target: Guid
-                    target.tokio_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN5 {
                     target,
                 } => {
                     // target: Guid
-                    target.tokio_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN6 {
                     target,
                 } => {
                     // target: Guid
-                    target.tokio_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN7 {
                     target,
                 } => {
                     // target: Guid
-                    target.tokio_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN8 {
                     target,
                 } => {
                     // target: Guid
-                    target.tokio_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS => {}
@@ -491,63 +491,63 @@ impl MessageBody for MSG_RAID_TARGET_UPDATE_Client {
                     target,
                 } => {
                     // target: Guid
-                    target.astd_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN1 {
                     target,
                 } => {
                     // target: Guid
-                    target.astd_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN2 {
                     target,
                 } => {
                     // target: Guid
-                    target.astd_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN3 {
                     target,
                 } => {
                     // target: Guid
-                    target.astd_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN4 {
                     target,
                 } => {
                     // target: Guid
-                    target.astd_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN5 {
                     target,
                 } => {
                     // target: Guid
-                    target.astd_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN6 {
                     target,
                 } => {
                     // target: Guid
-                    target.astd_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN7 {
                     target,
                 } => {
                     // target: Guid
-                    target.astd_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::UNKNOWN8 {
                     target,
                 } => {
                     // target: Guid
-                    target.astd_write(w).await?;
+                    w.write_all(&target.guid().to_le_bytes()).await?;
 
                 }
                 MSG_RAID_TARGET_UPDATE_ClientRaidTargetIndex::REQUEST_ICONS => {}

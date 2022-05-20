@@ -53,7 +53,7 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Server {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // npc: Guid
-        self.npc.write(w)?;
+        w.write_all(&self.npc.guid().to_le_bytes())?;
 
         // amount_of_pets: u8
         w.write_all(&(self.pets.len() as u8).to_le_bytes())?;
@@ -120,7 +120,7 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Server {
      {
         Box::pin(async move {
             // npc: Guid
-            self.npc.tokio_write(w).await?;
+            w.write_all(&self.npc.guid().to_le_bytes()).await?;
 
             // amount_of_pets: u8
             w.write_all(&(self.pets.len() as u8).to_le_bytes()).await?;
@@ -188,7 +188,7 @@ impl MessageBody for MSG_LIST_STABLED_PETS_Server {
      {
         Box::pin(async move {
             // npc: Guid
-            self.npc.astd_write(w).await?;
+            w.write_all(&self.npc.guid().to_le_bytes()).await?;
 
             // amount_of_pets: u8
             w.write_all(&(self.pets.len() as u8).to_le_bytes()).await?;

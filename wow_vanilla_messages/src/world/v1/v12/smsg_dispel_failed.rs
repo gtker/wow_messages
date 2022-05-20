@@ -54,10 +54,10 @@ impl MessageBody for SMSG_DISPEL_FAILED {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // caster_guid: Guid
-        self.caster_guid.write(w)?;
+        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
 
         // target_guid: Guid
-        self.target_guid.write(w)?;
+        w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
         // spells: u32[-]
         for i in self.spells.iter() {
@@ -120,10 +120,10 @@ impl MessageBody for SMSG_DISPEL_FAILED {
      {
         Box::pin(async move {
             // caster_guid: Guid
-            self.caster_guid.tokio_write(w).await?;
+            w.write_all(&self.caster_guid.guid().to_le_bytes()).await?;
 
             // target_guid: Guid
-            self.target_guid.tokio_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             // spells: u32[-]
             for i in self.spells.iter() {
@@ -187,10 +187,10 @@ impl MessageBody for SMSG_DISPEL_FAILED {
      {
         Box::pin(async move {
             // caster_guid: Guid
-            self.caster_guid.astd_write(w).await?;
+            w.write_all(&self.caster_guid.guid().to_le_bytes()).await?;
 
             // target_guid: Guid
-            self.target_guid.astd_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             // spells: u32[-]
             for i in self.spells.iter() {

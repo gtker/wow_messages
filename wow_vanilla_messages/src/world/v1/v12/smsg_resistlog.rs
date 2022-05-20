@@ -65,10 +65,10 @@ impl MessageBody for SMSG_RESISTLOG {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid1: Guid
-        self.guid1.write(w)?;
+        w.write_all(&self.guid1.guid().to_le_bytes())?;
 
         // guid2: Guid
-        self.guid2.write(w)?;
+        w.write_all(&self.guid2.guid().to_le_bytes())?;
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -147,10 +147,10 @@ impl MessageBody for SMSG_RESISTLOG {
      {
         Box::pin(async move {
             // guid1: Guid
-            self.guid1.tokio_write(w).await?;
+            w.write_all(&self.guid1.guid().to_le_bytes()).await?;
 
             // guid2: Guid
-            self.guid2.tokio_write(w).await?;
+            w.write_all(&self.guid2.guid().to_le_bytes()).await?;
 
             // unknown1: u32
             w.write_all(&self.unknown1.to_le_bytes()).await?;
@@ -230,10 +230,10 @@ impl MessageBody for SMSG_RESISTLOG {
      {
         Box::pin(async move {
             // guid1: Guid
-            self.guid1.astd_write(w).await?;
+            w.write_all(&self.guid1.guid().to_le_bytes()).await?;
 
             // guid2: Guid
-            self.guid2.astd_write(w).await?;
+            w.write_all(&self.guid2.guid().to_le_bytes()).await?;
 
             // unknown1: u32
             w.write_all(&self.unknown1.to_le_bytes()).await?;

@@ -58,12 +58,6 @@ impl Guid {
         amount_of_bytes
     }
 
-    pub fn write(&self, w: &mut impl Write) -> Result<(), std::io::Error> {
-        crate::util::write_u64_le(w, self.guid)?;
-
-        Ok(())
-    }
-
     pub fn read_packed(r: &mut impl Read) -> Result<Self, std::io::Error> {
         let bit_pattern = read_u8_le(r)?;
         let mut guid: u64 = 0;
@@ -106,15 +100,6 @@ impl Guid {
             guid: crate::util::astd_read_u64_le(r).await?,
         })
     }
-
-    pub async fn astd_write<W: WriteExt + Unpin + Send>(
-        &self,
-        w: &mut W,
-    ) -> Result<(), std::io::Error> {
-        crate::util::astd_write_u64_le(w, self.guid).await?;
-
-        Ok(())
-    }
 }
 
 #[cfg(feature = "tokio")]
@@ -143,15 +128,6 @@ impl Guid {
         Ok(Self {
             guid: crate::util::tokio_read_u64_le(r).await?,
         })
-    }
-
-    pub async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(
-        &self,
-        w: &mut W,
-    ) -> Result<(), std::io::Error> {
-        crate::util::tokio_write_u64_le(w, self.guid).await?;
-
-        Ok(())
     }
 }
 
@@ -182,7 +158,7 @@ mod test {
         assert_eq!(guid, guid2);
 
         let mut r = Vec::with_capacity(9);
-        guid.write(&mut r).unwrap();
+        r.append(&mut guid.guid().to_le_bytes().to_vec());
 
         let mut cursor = Cursor::new(r);
         let guid2 = Guid::read(&mut cursor).unwrap();

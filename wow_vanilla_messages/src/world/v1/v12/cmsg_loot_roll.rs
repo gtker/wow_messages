@@ -48,7 +48,7 @@ impl MessageBody for CMSG_LOOT_ROLL {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // item_guid: Guid
-        self.item_guid.write(w)?;
+        w.write_all(&self.item_guid.guid().to_le_bytes())?;
 
         // item_slot: u32
         w.write_all(&self.item_slot.to_le_bytes())?;
@@ -104,7 +104,7 @@ impl MessageBody for CMSG_LOOT_ROLL {
      {
         Box::pin(async move {
             // item_guid: Guid
-            self.item_guid.tokio_write(w).await?;
+            w.write_all(&self.item_guid.guid().to_le_bytes()).await?;
 
             // item_slot: u32
             w.write_all(&self.item_slot.to_le_bytes()).await?;
@@ -161,7 +161,7 @@ impl MessageBody for CMSG_LOOT_ROLL {
      {
         Box::pin(async move {
             // item_guid: Guid
-            self.item_guid.astd_write(w).await?;
+            w.write_all(&self.item_guid.guid().to_le_bytes()).await?;
 
             // item_slot: u32
             w.write_all(&self.item_slot.to_le_bytes()).await?;

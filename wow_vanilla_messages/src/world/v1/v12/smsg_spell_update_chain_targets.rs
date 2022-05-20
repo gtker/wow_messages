@@ -52,7 +52,7 @@ impl MessageBody for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // caster: Guid
-        self.caster.write(w)?;
+        w.write_all(&self.caster.guid().to_le_bytes())?;
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
@@ -62,7 +62,7 @@ impl MessageBody for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 
         // targets: Guid[amount_of_targets]
         for i in self.targets.iter() {
-            i.write(w)?;
+            w.write_all(&i.guid().to_le_bytes())?;
         }
 
         Ok(())
@@ -119,7 +119,7 @@ impl MessageBody for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
      {
         Box::pin(async move {
             // caster: Guid
-            self.caster.tokio_write(w).await?;
+            w.write_all(&self.caster.guid().to_le_bytes()).await?;
 
             // spell: u32
             w.write_all(&self.spell.to_le_bytes()).await?;
@@ -129,7 +129,7 @@ impl MessageBody for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 
             // targets: Guid[amount_of_targets]
             for i in self.targets.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&i.guid().to_le_bytes()).await?;
             }
 
             Ok(())
@@ -187,7 +187,7 @@ impl MessageBody for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
      {
         Box::pin(async move {
             // caster: Guid
-            self.caster.astd_write(w).await?;
+            w.write_all(&self.caster.guid().to_le_bytes()).await?;
 
             // spell: u32
             w.write_all(&self.spell.to_le_bytes()).await?;
@@ -197,7 +197,7 @@ impl MessageBody for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 
             // targets: Guid[amount_of_targets]
             for i in self.targets.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&i.guid().to_le_bytes()).await?;
             }
 
             Ok(())

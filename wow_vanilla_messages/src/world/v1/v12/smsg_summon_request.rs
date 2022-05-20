@@ -47,7 +47,7 @@ impl MessageBody for SMSG_SUMMON_REQUEST {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // summoner_guid: Guid
-        self.summoner_guid.write(w)?;
+        w.write_all(&self.summoner_guid.guid().to_le_bytes())?;
 
         // zone_id: u32
         w.write_all(&self.zone_id.to_le_bytes())?;
@@ -103,7 +103,7 @@ impl MessageBody for SMSG_SUMMON_REQUEST {
      {
         Box::pin(async move {
             // summoner_guid: Guid
-            self.summoner_guid.tokio_write(w).await?;
+            w.write_all(&self.summoner_guid.guid().to_le_bytes()).await?;
 
             // zone_id: u32
             w.write_all(&self.zone_id.to_le_bytes()).await?;
@@ -160,7 +160,7 @@ impl MessageBody for SMSG_SUMMON_REQUEST {
      {
         Box::pin(async move {
             // summoner_guid: Guid
-            self.summoner_guid.astd_write(w).await?;
+            w.write_all(&self.summoner_guid.guid().to_le_bytes()).await?;
 
             // zone_id: u32
             w.write_all(&self.zone_id.to_le_bytes()).await?;

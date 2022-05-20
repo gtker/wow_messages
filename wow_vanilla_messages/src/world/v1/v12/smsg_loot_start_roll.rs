@@ -62,7 +62,7 @@ impl MessageBody for SMSG_LOOT_START_ROLL {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // creature_guid: Guid
-        self.creature_guid.write(w)?;
+        w.write_all(&self.creature_guid.guid().to_le_bytes())?;
 
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
@@ -139,7 +139,7 @@ impl MessageBody for SMSG_LOOT_START_ROLL {
      {
         Box::pin(async move {
             // creature_guid: Guid
-            self.creature_guid.tokio_write(w).await?;
+            w.write_all(&self.creature_guid.guid().to_le_bytes()).await?;
 
             // loot_slot: u32
             w.write_all(&self.loot_slot.to_le_bytes()).await?;
@@ -217,7 +217,7 @@ impl MessageBody for SMSG_LOOT_START_ROLL {
      {
         Box::pin(async move {
             // creature_guid: Guid
-            self.creature_guid.astd_write(w).await?;
+            w.write_all(&self.creature_guid.guid().to_le_bytes()).await?;
 
             // loot_slot: u32
             w.write_all(&self.loot_slot.to_le_bytes()).await?;

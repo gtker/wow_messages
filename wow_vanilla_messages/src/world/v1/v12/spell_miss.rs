@@ -31,7 +31,7 @@ impl SpellMiss {
     #[cfg(feature = "sync")]
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
-        self.target_guid.write(w)?;
+        w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
         // miss_info: SpellMissInfo
         w.write_all(&(self.miss_info.as_int() as u32).to_le_bytes())?;
@@ -56,7 +56,7 @@ impl SpellMiss {
     #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
-        self.target_guid.tokio_write(w).await?;
+        w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
         // miss_info: SpellMissInfo
         w.write_all(&(self.miss_info.as_int() as u32).to_le_bytes()).await?;
@@ -81,7 +81,7 @@ impl SpellMiss {
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
-        self.target_guid.astd_write(w).await?;
+        w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
         // miss_info: SpellMissInfo
         w.write_all(&(self.miss_info.as_int() as u32).to_le_bytes()).await?;

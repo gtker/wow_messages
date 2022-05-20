@@ -42,7 +42,7 @@ impl MessageBody for SMSG_PET_UNLEARN_CONFIRM {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // pet_guid: Guid
-        self.pet_guid.write(w)?;
+        w.write_all(&self.pet_guid.guid().to_le_bytes())?;
 
         // talent_reset_cost: u32
         w.write_all(&self.talent_reset_cost.to_le_bytes())?;
@@ -91,7 +91,7 @@ impl MessageBody for SMSG_PET_UNLEARN_CONFIRM {
      {
         Box::pin(async move {
             // pet_guid: Guid
-            self.pet_guid.tokio_write(w).await?;
+            w.write_all(&self.pet_guid.guid().to_le_bytes()).await?;
 
             // talent_reset_cost: u32
             w.write_all(&self.talent_reset_cost.to_le_bytes()).await?;
@@ -141,7 +141,7 @@ impl MessageBody for SMSG_PET_UNLEARN_CONFIRM {
      {
         Box::pin(async move {
             // pet_guid: Guid
-            self.pet_guid.astd_write(w).await?;
+            w.write_all(&self.pet_guid.guid().to_le_bytes()).await?;
 
             // talent_reset_cost: u32
             w.write_all(&self.talent_reset_cost.to_le_bytes()).await?;

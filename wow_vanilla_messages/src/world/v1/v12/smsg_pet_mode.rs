@@ -59,7 +59,7 @@ impl MessageBody for SMSG_PET_MODE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // react_state: PetReactState
         w.write_all(&(self.react_state.as_int() as u8).to_le_bytes())?;
@@ -129,7 +129,7 @@ impl MessageBody for SMSG_PET_MODE {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // react_state: PetReactState
             w.write_all(&(self.react_state.as_int() as u8).to_le_bytes()).await?;
@@ -200,7 +200,7 @@ impl MessageBody for SMSG_PET_MODE {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // react_state: PetReactState
             w.write_all(&(self.react_state.as_int() as u8).to_le_bytes()).await?;

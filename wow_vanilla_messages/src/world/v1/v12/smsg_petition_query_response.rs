@@ -118,10 +118,10 @@ impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // petition_guid: Guid
-        self.petition_guid.write(w)?;
+        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
         // charter_owner: Guid
-        self.charter_owner.write(w)?;
+        w.write_all(&self.charter_owner.guid().to_le_bytes())?;
 
         // guild_name: CString
         w.write_all(self.guild_name.as_bytes())?;
@@ -278,10 +278,10 @@ impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
      {
         Box::pin(async move {
             // petition_guid: Guid
-            self.petition_guid.tokio_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             // charter_owner: Guid
-            self.charter_owner.tokio_write(w).await?;
+            w.write_all(&self.charter_owner.guid().to_le_bytes()).await?;
 
             // guild_name: CString
             w.write_all(self.guild_name.as_bytes()).await?;
@@ -439,10 +439,10 @@ impl MessageBody for SMSG_PETITION_QUERY_RESPONSE {
      {
         Box::pin(async move {
             // petition_guid: Guid
-            self.petition_guid.astd_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             // charter_owner: Guid
-            self.charter_owner.astd_write(w).await?;
+            w.write_all(&self.charter_owner.guid().to_le_bytes()).await?;
 
             // guild_name: CString
             w.write_all(self.guild_name.as_bytes()).await?;

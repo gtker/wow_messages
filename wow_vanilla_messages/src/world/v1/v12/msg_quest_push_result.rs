@@ -45,7 +45,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // message: QuestPartyMessage
         w.write_all(&(self.message.as_int() as u8).to_le_bytes())?;
@@ -94,7 +94,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // message: QuestPartyMessage
             w.write_all(&(self.message.as_int() as u8).to_le_bytes()).await?;
@@ -144,7 +144,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // message: QuestPartyMessage
             w.write_all(&(self.message.as_int() as u8).to_le_bytes()).await?;

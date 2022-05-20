@@ -44,7 +44,7 @@ impl MessageBody for MSG_PETITION_RENAME {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // petition_guid: Guid
-        self.petition_guid.write(w)?;
+        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
         // new_name: CString
         w.write_all(self.new_name.as_bytes())?;
@@ -96,7 +96,7 @@ impl MessageBody for MSG_PETITION_RENAME {
      {
         Box::pin(async move {
             // petition_guid: Guid
-            self.petition_guid.tokio_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             // new_name: CString
             w.write_all(self.new_name.as_bytes()).await?;
@@ -149,7 +149,7 @@ impl MessageBody for MSG_PETITION_RENAME {
      {
         Box::pin(async move {
             // petition_guid: Guid
-            self.petition_guid.astd_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             // new_name: CString
             w.write_all(self.new_name.as_bytes()).await?;

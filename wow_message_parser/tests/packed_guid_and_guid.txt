@@ -72,7 +72,7 @@ impl PackedGuidAndGuid {
         w.write_all(&self.packed.packed_guid())?;
 
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // static_packed: PackedGuid[10]
         for i in self.static_packed.iter() {
@@ -81,7 +81,7 @@ impl PackedGuidAndGuid {
 
         // static_guid: Guid[10]
         for i in self.static_guid.iter() {
-            i.write(w)?;
+            w.write_all(&i.guid().to_le_bytes())?;
         }
 
         // basic1: u8
@@ -97,7 +97,7 @@ impl PackedGuidAndGuid {
 
         // variable_guid: Guid[basic2]
         for i in self.variable_guid.iter() {
-            i.write(w)?;
+            w.write_all(&i.guid().to_le_bytes())?;
         }
 
         Ok(())
@@ -159,7 +159,7 @@ impl PackedGuidAndGuid {
         w.write_all(&self.packed.packed_guid()).await?;
 
         // guid: Guid
-        self.guid.tokio_write(w).await?;
+        w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
         // static_packed: PackedGuid[10]
         for i in self.static_packed.iter() {
@@ -168,7 +168,7 @@ impl PackedGuidAndGuid {
 
         // static_guid: Guid[10]
         for i in self.static_guid.iter() {
-            i.tokio_write(w).await?;
+            w.write_all(&i.guid().to_le_bytes()).await?;
         }
 
         // basic1: u8
@@ -184,7 +184,7 @@ impl PackedGuidAndGuid {
 
         // variable_guid: Guid[basic2]
         for i in self.variable_guid.iter() {
-            i.tokio_write(w).await?;
+            w.write_all(&i.guid().to_le_bytes()).await?;
         }
 
         Ok(())
@@ -246,7 +246,7 @@ impl PackedGuidAndGuid {
         w.write_all(&self.packed.packed_guid()).await?;
 
         // guid: Guid
-        self.guid.astd_write(w).await?;
+        w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
         // static_packed: PackedGuid[10]
         for i in self.static_packed.iter() {
@@ -255,7 +255,7 @@ impl PackedGuidAndGuid {
 
         // static_guid: Guid[10]
         for i in self.static_guid.iter() {
-            i.astd_write(w).await?;
+            w.write_all(&i.guid().to_le_bytes()).await?;
         }
 
         // basic1: u8
@@ -271,7 +271,7 @@ impl PackedGuidAndGuid {
 
         // variable_guid: Guid[basic2]
         for i in self.variable_guid.iter() {
-            i.astd_write(w).await?;
+            w.write_all(&i.guid().to_le_bytes()).await?;
         }
 
         Ok(())

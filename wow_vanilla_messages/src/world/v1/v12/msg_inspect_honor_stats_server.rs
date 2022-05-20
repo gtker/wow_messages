@@ -113,7 +113,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // highest_rank: PvpRank
         w.write_all(&(self.highest_rank.as_int() as u8).to_le_bytes())?;
@@ -260,7 +260,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // highest_rank: PvpRank
             w.write_all(&(self.highest_rank.as_int() as u8).to_le_bytes()).await?;
@@ -408,7 +408,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // highest_rank: PvpRank
             w.write_all(&(self.highest_rank.as_int() as u8).to_le_bytes()).await?;

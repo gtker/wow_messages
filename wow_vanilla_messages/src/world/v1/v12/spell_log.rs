@@ -357,7 +357,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::SCHOOL_DAMAGE => {}
@@ -373,7 +373,7 @@ impl SpellLog {
                 unknown3,
             } => {
                 // target1: Guid
-                target1.write(w)?;
+                w.write_all(&target1.guid().to_le_bytes())?;
 
                 // unknown1: u32
                 w.write_all(&unknown1.to_le_bytes())?;
@@ -398,7 +398,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::ADD_EXTRA_ATTACKS {
@@ -406,7 +406,7 @@ impl SpellLog {
                 unknown4,
             } => {
                 // target2: Guid
-                target2.write(w)?;
+                w.write_all(&target2.guid().to_le_bytes())?;
 
                 // unknown4: u32
                 w.write_all(&unknown4.to_le_bytes())?;
@@ -435,7 +435,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::SUMMON_CHANGE_ITEM => {}
@@ -446,7 +446,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::LANGUAGE => {}
@@ -473,7 +473,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::PROFICIENCY => {}
@@ -483,7 +483,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::TRIGGER_SPELL => {}
@@ -495,7 +495,7 @@ impl SpellLog {
                 target3,
             } => {
                 // target3: Guid
-                target3.write(w)?;
+                w.write_all(&target3.guid().to_le_bytes())?;
 
                 // interrupted_spell: u32
                 w.write_all(&interrupted_spell.to_le_bytes())?;
@@ -505,7 +505,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::PULL => {}
@@ -521,7 +521,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::ADD_COMBO_POINTS => {}
@@ -539,7 +539,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::ENCHANT_HELD_ITEM => {}
@@ -562,7 +562,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::REPUTATION => {}
@@ -574,7 +574,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::SUMMON_DEAD_PET => {}
@@ -585,7 +585,7 @@ impl SpellLog {
                 unknown6,
             } => {
                 // target4: Guid
-                target4.write(w)?;
+                w.write_all(&target4.guid().to_le_bytes())?;
 
                 // unknown5: u32
                 w.write_all(&unknown5.to_le_bytes())?;
@@ -599,14 +599,14 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::ATTACK_ME {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::DURABILITY_DAMAGE_PCT => {}
@@ -614,7 +614,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::SPIRIT_HEAL => {}
@@ -629,14 +629,14 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::UNKNOWN126 {
                 target5,
             } => {
                 // target5: Guid
-                target5.write(w)?;
+                w.write_all(&target5.guid().to_le_bytes())?;
 
             }
             SpellLogSpellEffect::UNKNOWN127 => {}
@@ -985,7 +985,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::SCHOOL_DAMAGE => {}
@@ -1001,7 +1001,7 @@ impl SpellLog {
                 unknown3,
             } => {
                 // target1: Guid
-                target1.tokio_write(w).await?;
+                w.write_all(&target1.guid().to_le_bytes()).await?;
 
                 // unknown1: u32
                 w.write_all(&unknown1.to_le_bytes()).await?;
@@ -1026,7 +1026,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::ADD_EXTRA_ATTACKS {
@@ -1034,7 +1034,7 @@ impl SpellLog {
                 unknown4,
             } => {
                 // target2: Guid
-                target2.tokio_write(w).await?;
+                w.write_all(&target2.guid().to_le_bytes()).await?;
 
                 // unknown4: u32
                 w.write_all(&unknown4.to_le_bytes()).await?;
@@ -1063,7 +1063,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::SUMMON_CHANGE_ITEM => {}
@@ -1074,7 +1074,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::LANGUAGE => {}
@@ -1101,7 +1101,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::PROFICIENCY => {}
@@ -1111,7 +1111,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::TRIGGER_SPELL => {}
@@ -1123,7 +1123,7 @@ impl SpellLog {
                 target3,
             } => {
                 // target3: Guid
-                target3.tokio_write(w).await?;
+                w.write_all(&target3.guid().to_le_bytes()).await?;
 
                 // interrupted_spell: u32
                 w.write_all(&interrupted_spell.to_le_bytes()).await?;
@@ -1133,7 +1133,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::PULL => {}
@@ -1149,7 +1149,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::ADD_COMBO_POINTS => {}
@@ -1167,7 +1167,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::ENCHANT_HELD_ITEM => {}
@@ -1190,7 +1190,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::REPUTATION => {}
@@ -1202,7 +1202,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::SUMMON_DEAD_PET => {}
@@ -1213,7 +1213,7 @@ impl SpellLog {
                 unknown6,
             } => {
                 // target4: Guid
-                target4.tokio_write(w).await?;
+                w.write_all(&target4.guid().to_le_bytes()).await?;
 
                 // unknown5: u32
                 w.write_all(&unknown5.to_le_bytes()).await?;
@@ -1227,14 +1227,14 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::ATTACK_ME {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::DURABILITY_DAMAGE_PCT => {}
@@ -1242,7 +1242,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::SPIRIT_HEAL => {}
@@ -1257,14 +1257,14 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::UNKNOWN126 {
                 target5,
             } => {
                 // target5: Guid
-                target5.tokio_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::UNKNOWN127 => {}
@@ -1613,7 +1613,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::SCHOOL_DAMAGE => {}
@@ -1629,7 +1629,7 @@ impl SpellLog {
                 unknown3,
             } => {
                 // target1: Guid
-                target1.astd_write(w).await?;
+                w.write_all(&target1.guid().to_le_bytes()).await?;
 
                 // unknown1: u32
                 w.write_all(&unknown1.to_le_bytes()).await?;
@@ -1654,7 +1654,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::ADD_EXTRA_ATTACKS {
@@ -1662,7 +1662,7 @@ impl SpellLog {
                 unknown4,
             } => {
                 // target2: Guid
-                target2.astd_write(w).await?;
+                w.write_all(&target2.guid().to_le_bytes()).await?;
 
                 // unknown4: u32
                 w.write_all(&unknown4.to_le_bytes()).await?;
@@ -1691,7 +1691,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::SUMMON_CHANGE_ITEM => {}
@@ -1702,7 +1702,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::LANGUAGE => {}
@@ -1729,7 +1729,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::PROFICIENCY => {}
@@ -1739,7 +1739,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::TRIGGER_SPELL => {}
@@ -1751,7 +1751,7 @@ impl SpellLog {
                 target3,
             } => {
                 // target3: Guid
-                target3.astd_write(w).await?;
+                w.write_all(&target3.guid().to_le_bytes()).await?;
 
                 // interrupted_spell: u32
                 w.write_all(&interrupted_spell.to_le_bytes()).await?;
@@ -1761,7 +1761,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::PULL => {}
@@ -1777,7 +1777,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::ADD_COMBO_POINTS => {}
@@ -1795,7 +1795,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::ENCHANT_HELD_ITEM => {}
@@ -1818,7 +1818,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::REPUTATION => {}
@@ -1830,7 +1830,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::SUMMON_DEAD_PET => {}
@@ -1841,7 +1841,7 @@ impl SpellLog {
                 unknown6,
             } => {
                 // target4: Guid
-                target4.astd_write(w).await?;
+                w.write_all(&target4.guid().to_le_bytes()).await?;
 
                 // unknown5: u32
                 w.write_all(&unknown5.to_le_bytes()).await?;
@@ -1855,14 +1855,14 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::ATTACK_ME {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::DURABILITY_DAMAGE_PCT => {}
@@ -1870,7 +1870,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::SPIRIT_HEAL => {}
@@ -1885,14 +1885,14 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::UNKNOWN126 {
                 target5,
             } => {
                 // target5: Guid
-                target5.astd_write(w).await?;
+                w.write_all(&target5.guid().to_le_bytes()).await?;
 
             }
             SpellLogSpellEffect::UNKNOWN127 => {}

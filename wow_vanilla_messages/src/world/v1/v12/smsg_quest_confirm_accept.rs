@@ -55,7 +55,7 @@ impl MessageBody for SMSG_QUEST_CONFIRM_ACCEPT {
         w.write_all(&[0])?;
 
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -114,7 +114,7 @@ impl MessageBody for SMSG_QUEST_CONFIRM_ACCEPT {
             w.write_all(&[0]).await?;
 
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -174,7 +174,7 @@ impl MessageBody for SMSG_QUEST_CONFIRM_ACCEPT {
             w.write_all(&[0]).await?;
 
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

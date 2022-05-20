@@ -37,7 +37,7 @@ impl MessageBody for CMSG_PET_STOP_ATTACK {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // pet_guid: Guid
-        self.pet_guid.write(w)?;
+        w.write_all(&self.pet_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -79,7 +79,7 @@ impl MessageBody for CMSG_PET_STOP_ATTACK {
      {
         Box::pin(async move {
             // pet_guid: Guid
-            self.pet_guid.tokio_write(w).await?;
+            w.write_all(&self.pet_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -122,7 +122,7 @@ impl MessageBody for CMSG_PET_STOP_ATTACK {
      {
         Box::pin(async move {
             // pet_guid: Guid
-            self.pet_guid.astd_write(w).await?;
+            w.write_all(&self.pet_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

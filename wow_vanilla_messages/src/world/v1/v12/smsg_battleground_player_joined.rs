@@ -37,7 +37,7 @@ impl MessageBody for SMSG_BATTLEGROUND_PLAYER_JOINED {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player_guid: Guid
-        self.player_guid.write(w)?;
+        w.write_all(&self.player_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -79,7 +79,7 @@ impl MessageBody for SMSG_BATTLEGROUND_PLAYER_JOINED {
      {
         Box::pin(async move {
             // player_guid: Guid
-            self.player_guid.tokio_write(w).await?;
+            w.write_all(&self.player_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -122,7 +122,7 @@ impl MessageBody for SMSG_BATTLEGROUND_PLAYER_JOINED {
      {
         Box::pin(async move {
             // player_guid: Guid
-            self.player_guid.astd_write(w).await?;
+            w.write_all(&self.player_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

@@ -57,7 +57,7 @@ impl MessageBody for SMSG_LOOT_ALL_PASSED {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // looted_target_guid: Guid
-        self.looted_target_guid.write(w)?;
+        w.write_all(&self.looted_target_guid.guid().to_le_bytes())?;
 
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
@@ -127,7 +127,7 @@ impl MessageBody for SMSG_LOOT_ALL_PASSED {
      {
         Box::pin(async move {
             // looted_target_guid: Guid
-            self.looted_target_guid.tokio_write(w).await?;
+            w.write_all(&self.looted_target_guid.guid().to_le_bytes()).await?;
 
             // loot_slot: u32
             w.write_all(&self.loot_slot.to_le_bytes()).await?;
@@ -198,7 +198,7 @@ impl MessageBody for SMSG_LOOT_ALL_PASSED {
      {
         Box::pin(async move {
             // looted_target_guid: Guid
-            self.looted_target_guid.astd_write(w).await?;
+            w.write_all(&self.looted_target_guid.guid().to_le_bytes()).await?;
 
             // loot_slot: u32
             w.write_all(&self.loot_slot.to_le_bytes()).await?;

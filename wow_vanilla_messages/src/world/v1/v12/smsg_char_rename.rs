@@ -142,7 +142,7 @@ impl MessageBody for SMSG_CHAR_RENAME {
                 name,
             } => {
                 // guid: Guid
-                guid.write(w)?;
+                w.write_all(&guid.guid().to_le_bytes())?;
 
                 // name: CString
                 w.write_all(name.as_bytes())?;
@@ -378,7 +378,7 @@ impl MessageBody for SMSG_CHAR_RENAME {
                     name,
                 } => {
                     // guid: Guid
-                    guid.tokio_write(w).await?;
+                    w.write_all(&guid.guid().to_le_bytes()).await?;
 
                     // name: CString
                     w.write_all(name.as_bytes()).await?;
@@ -615,7 +615,7 @@ impl MessageBody for SMSG_CHAR_RENAME {
                     name,
                 } => {
                     // guid: Guid
-                    guid.astd_write(w).await?;
+                    w.write_all(&guid.guid().to_le_bytes()).await?;
 
                     // name: CString
                     w.write_all(name.as_bytes()).await?;

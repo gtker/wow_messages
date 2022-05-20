@@ -53,7 +53,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
@@ -116,7 +116,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // map: Map
             w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;
@@ -180,7 +180,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // map: Map
             w.write_all(&(self.map.as_int() as u32).to_le_bytes()).await?;

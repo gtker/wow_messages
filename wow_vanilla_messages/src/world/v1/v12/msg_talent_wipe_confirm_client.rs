@@ -37,7 +37,7 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Client {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // wiping_npc: Guid
-        self.wiping_npc.write(w)?;
+        w.write_all(&self.wiping_npc.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -79,7 +79,7 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Client {
      {
         Box::pin(async move {
             // wiping_npc: Guid
-            self.wiping_npc.tokio_write(w).await?;
+            w.write_all(&self.wiping_npc.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -122,7 +122,7 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Client {
      {
         Box::pin(async move {
             // wiping_npc: Guid
-            self.wiping_npc.astd_write(w).await?;
+            w.write_all(&self.wiping_npc.guid().to_le_bytes()).await?;
 
             Ok(())
         })

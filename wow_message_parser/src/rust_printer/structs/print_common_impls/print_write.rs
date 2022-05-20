@@ -84,7 +84,7 @@ pub fn print_write_field_array(
             s.wln(format!("w.write_all(&[0]){}?;", postfix));
         }
         ArrayType::Guid => {
-            s.wln(format!("i.{}write(w){}?;", prefix, postfix));
+            s.wln(format!("w.write_all(&i.guid().to_le_bytes()){}?;", postfix));
         }
         ArrayType::PackedGuid => s.wln(format!("w.write_all(&i.packed_guid()){}?;", postfix)),
     }
@@ -297,7 +297,16 @@ pub fn print_write_definition(
             ));
             s.newline();
         }
-        Type::Guid | Type::UpdateMask | Type::AuraMask => {
+        Type::Guid => {
+            s.wln(format!(
+                "w.write_all(&{variable_prefix}{name}.guid().to_le_bytes()){postfix}?;",
+                variable_prefix = variable_prefix,
+                postfix = postfix,
+                name = d.name()
+            ));
+            s.newline();
+        }
+        Type::UpdateMask | Type::AuraMask => {
             s.wln(format!(
                 "{variable_prefix}{name}.{prefix}write(w){postfix}?;",
                 variable_prefix = variable_prefix,

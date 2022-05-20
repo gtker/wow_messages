@@ -42,7 +42,7 @@ impl MessageBody for MSG_AUCTION_HELLO_Server {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // auctioneer: Guid
-        self.auctioneer.write(w)?;
+        w.write_all(&self.auctioneer.guid().to_le_bytes())?;
 
         // auction_house_id: u32
         w.write_all(&self.auction_house_id.to_le_bytes())?;
@@ -91,7 +91,7 @@ impl MessageBody for MSG_AUCTION_HELLO_Server {
      {
         Box::pin(async move {
             // auctioneer: Guid
-            self.auctioneer.tokio_write(w).await?;
+            w.write_all(&self.auctioneer.guid().to_le_bytes()).await?;
 
             // auction_house_id: u32
             w.write_all(&self.auction_house_id.to_le_bytes()).await?;
@@ -141,7 +141,7 @@ impl MessageBody for MSG_AUCTION_HELLO_Server {
      {
         Box::pin(async move {
             // auctioneer: Guid
-            self.auctioneer.astd_write(w).await?;
+            w.write_all(&self.auctioneer.guid().to_le_bytes()).await?;
 
             // auction_house_id: u32
             w.write_all(&self.auction_house_id.to_le_bytes()).await?;

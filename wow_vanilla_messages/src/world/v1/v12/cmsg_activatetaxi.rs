@@ -45,7 +45,7 @@ impl MessageBody for CMSG_ACTIVATETAXI {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // nodes: u32[2]
         for i in self.nodes.iter() {
@@ -99,7 +99,7 @@ impl MessageBody for CMSG_ACTIVATETAXI {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // nodes: u32[2]
             for i in self.nodes.iter() {
@@ -154,7 +154,7 @@ impl MessageBody for CMSG_ACTIVATETAXI {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // nodes: u32[2]
             for i in self.nodes.iter() {

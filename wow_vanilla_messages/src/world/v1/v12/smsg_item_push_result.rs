@@ -85,7 +85,7 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // source: NewItemSource
         w.write_all(&(self.source.as_int() as u32).to_le_bytes())?;
@@ -190,7 +190,7 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // source: NewItemSource
             w.write_all(&(self.source.as_int() as u32).to_le_bytes()).await?;
@@ -296,7 +296,7 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // source: NewItemSource
             w.write_all(&(self.source.as_int() as u32).to_le_bytes()).await?;

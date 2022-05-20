@@ -109,7 +109,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
                 unknown1,
             } => {
                 // unknown1: Guid
-                unknown1.write(w)?;
+                w.write_all(&unknown1.guid().to_le_bytes())?;
 
             }
             SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW => {}
@@ -273,7 +273,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
                     unknown1,
                 } => {
                     // unknown1: Guid
-                    unknown1.tokio_write(w).await?;
+                    w.write_all(&unknown1.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW => {}
@@ -438,7 +438,7 @@ impl MessageBody for SMSG_TRADE_STATUS {
                     unknown1,
                 } => {
                     // unknown1: Guid
-                    unknown1.astd_write(w).await?;
+                    w.write_all(&unknown1.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_TRADE_STATUSTradeStatus::OPEN_WINDOW => {}

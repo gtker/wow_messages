@@ -37,7 +37,7 @@ impl MessageBody for CMSG_STABLE_PET {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // npc_guid: Guid
-        self.npc_guid.write(w)?;
+        w.write_all(&self.npc_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -79,7 +79,7 @@ impl MessageBody for CMSG_STABLE_PET {
      {
         Box::pin(async move {
             // npc_guid: Guid
-            self.npc_guid.tokio_write(w).await?;
+            w.write_all(&self.npc_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -122,7 +122,7 @@ impl MessageBody for CMSG_STABLE_PET {
      {
         Box::pin(async move {
             // npc_guid: Guid
-            self.npc_guid.astd_write(w).await?;
+            w.write_all(&self.npc_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

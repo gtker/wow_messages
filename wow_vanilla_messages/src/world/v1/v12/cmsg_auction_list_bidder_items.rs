@@ -52,7 +52,7 @@ impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // auctioneer: Guid
-        self.auctioneer.write(w)?;
+        w.write_all(&self.auctioneer.guid().to_le_bytes())?;
 
         // start_from_page: u32
         w.write_all(&self.start_from_page.to_le_bytes())?;
@@ -119,7 +119,7 @@ impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
      {
         Box::pin(async move {
             // auctioneer: Guid
-            self.auctioneer.tokio_write(w).await?;
+            w.write_all(&self.auctioneer.guid().to_le_bytes()).await?;
 
             // start_from_page: u32
             w.write_all(&self.start_from_page.to_le_bytes()).await?;
@@ -187,7 +187,7 @@ impl MessageBody for CMSG_AUCTION_LIST_BIDDER_ITEMS {
      {
         Box::pin(async move {
             // auctioneer: Guid
-            self.auctioneer.astd_write(w).await?;
+            w.write_all(&self.auctioneer.guid().to_le_bytes()).await?;
 
             // start_from_page: u32
             w.write_all(&self.start_from_page.to_le_bytes()).await?;

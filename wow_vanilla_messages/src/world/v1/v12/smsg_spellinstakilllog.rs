@@ -42,7 +42,7 @@ impl MessageBody for SMSG_SPELLINSTAKILLLOG {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
-        self.target_guid.write(w)?;
+        w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
@@ -91,7 +91,7 @@ impl MessageBody for SMSG_SPELLINSTAKILLLOG {
      {
         Box::pin(async move {
             // target_guid: Guid
-            self.target_guid.tokio_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             // spell: u32
             w.write_all(&self.spell.to_le_bytes()).await?;
@@ -141,7 +141,7 @@ impl MessageBody for SMSG_SPELLINSTAKILLLOG {
      {
         Box::pin(async move {
             // target_guid: Guid
-            self.target_guid.astd_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             // spell: u32
             w.write_all(&self.spell.to_le_bytes()).await?;

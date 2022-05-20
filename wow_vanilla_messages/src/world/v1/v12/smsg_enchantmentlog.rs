@@ -57,10 +57,10 @@ impl MessageBody for SMSG_ENCHANTMENTLOG {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
-        self.target_guid.write(w)?;
+        w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
         // caster_guid: Guid
-        self.caster_guid.write(w)?;
+        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
 
         // item: u32
         w.write_all(&self.item.to_le_bytes())?;
@@ -127,10 +127,10 @@ impl MessageBody for SMSG_ENCHANTMENTLOG {
      {
         Box::pin(async move {
             // target_guid: Guid
-            self.target_guid.tokio_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             // caster_guid: Guid
-            self.caster_guid.tokio_write(w).await?;
+            w.write_all(&self.caster_guid.guid().to_le_bytes()).await?;
 
             // item: u32
             w.write_all(&self.item.to_le_bytes()).await?;
@@ -198,10 +198,10 @@ impl MessageBody for SMSG_ENCHANTMENTLOG {
      {
         Box::pin(async move {
             // target_guid: Guid
-            self.target_guid.astd_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             // caster_guid: Guid
-            self.caster_guid.astd_write(w).await?;
+            w.write_all(&self.caster_guid.guid().to_le_bytes()).await?;
 
             // item: u32
             w.write_all(&self.item.to_le_bytes()).await?;

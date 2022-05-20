@@ -42,10 +42,10 @@ impl MessageBody for CMSG_OFFER_PETITION {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // petition_guid: Guid
-        self.petition_guid.write(w)?;
+        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
         // target_guid: Guid
-        self.target_guid.write(w)?;
+        w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -91,10 +91,10 @@ impl MessageBody for CMSG_OFFER_PETITION {
      {
         Box::pin(async move {
             // petition_guid: Guid
-            self.petition_guid.tokio_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             // target_guid: Guid
-            self.target_guid.tokio_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -141,10 +141,10 @@ impl MessageBody for CMSG_OFFER_PETITION {
      {
         Box::pin(async move {
             // petition_guid: Guid
-            self.petition_guid.astd_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             // target_guid: Guid
-            self.target_guid.astd_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

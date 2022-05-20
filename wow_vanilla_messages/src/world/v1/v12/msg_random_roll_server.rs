@@ -61,7 +61,7 @@ impl MessageBody for MSG_RANDOM_ROLL_Server {
         w.write_all(&self.actual_roll.to_le_bytes())?;
 
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -124,7 +124,7 @@ impl MessageBody for MSG_RANDOM_ROLL_Server {
             w.write_all(&self.actual_roll.to_le_bytes()).await?;
 
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -188,7 +188,7 @@ impl MessageBody for MSG_RANDOM_ROLL_Server {
             w.write_all(&self.actual_roll.to_le_bytes()).await?;
 
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

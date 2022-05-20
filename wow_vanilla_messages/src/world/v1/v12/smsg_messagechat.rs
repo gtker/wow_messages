@@ -428,10 +428,10 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 sender_guid2,
             } => {
                 // sender_guid1: Guid
-                sender_guid1.write(w)?;
+                w.write_all(&sender_guid1.guid().to_le_bytes())?;
 
                 // sender_guid2: Guid
-                sender_guid2.write(w)?;
+                w.write_all(&sender_guid2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::PARTY {
@@ -439,31 +439,31 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 sender_guid2,
             } => {
                 // sender_guid1: Guid
-                sender_guid1.write(w)?;
+                w.write_all(&sender_guid1.guid().to_le_bytes())?;
 
                 // sender_guid2: Guid
-                sender_guid2.write(w)?;
+                w.write_all(&sender_guid2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::RAID {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::GUILD {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::OFFICER {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::YELL {
@@ -471,45 +471,45 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 sender_guid2,
             } => {
                 // sender_guid1: Guid
-                sender_guid1.write(w)?;
+                w.write_all(&sender_guid1.guid().to_le_bytes())?;
 
                 // sender_guid2: Guid
-                sender_guid2.write(w)?;
+                w.write_all(&sender_guid2.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::WHISPER {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::WHISPER_INFORM {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::EMOTE {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::TEXT_EMOTE {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::SYSTEM {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::MONSTER_SAY {
@@ -519,7 +519,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 target_guid,
             } => {
                 // sender_guid3: Guid
-                sender_guid3.write(w)?;
+                w.write_all(&sender_guid3.guid().to_le_bytes())?;
 
                 // sender_name_length: u32
                 w.write_all(&sender_name_length.to_le_bytes())?;
@@ -530,7 +530,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // target_guid: Guid
-                target_guid.write(w)?;
+                w.write_all(&target_guid.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::MONSTER_YELL {
@@ -540,7 +540,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 target_guid,
             } => {
                 // sender_guid3: Guid
-                sender_guid3.write(w)?;
+                w.write_all(&sender_guid3.guid().to_le_bytes())?;
 
                 // sender_name_length: u32
                 w.write_all(&sender_name_length.to_le_bytes())?;
@@ -551,7 +551,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // target_guid: Guid
-                target_guid.write(w)?;
+                w.write_all(&target_guid.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
@@ -568,7 +568,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // monster_guid: Guid
-                monster_guid.write(w)?;
+                w.write_all(&monster_guid.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::CHANNEL {
@@ -585,77 +585,77 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 w.write_all(&player_rank.to_le_bytes())?;
 
                 // player_guid: Guid
-                player_guid.write(w)?;
+                w.write_all(&player_guid.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::CHANNEL_JOIN {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::CHANNEL_LEAVE {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::CHANNEL_LIST {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::CHANNEL_NOTICE {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::AFK {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::DND {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::IGNORED {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::SKILL {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::LOOT {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
@@ -672,49 +672,49 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // monster_guid: Guid
-                monster_guid.write(w)?;
+                w.write_all(&monster_guid.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::RAID_LEADER {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::RAID_WARNING {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
@@ -731,21 +731,21 @@ impl MessageBody for SMSG_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // monster_guid: Guid
-                monster_guid.write(w)?;
+                w.write_all(&monster_guid.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::BATTLEGROUND {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
             SMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
                 sender_guid4,
             } => {
                 // sender_guid4: Guid
-                sender_guid4.write(w)?;
+                w.write_all(&sender_guid4.guid().to_le_bytes())?;
 
             }
         }
@@ -1186,10 +1186,10 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     sender_guid2,
                 } => {
                     // sender_guid1: Guid
-                    sender_guid1.tokio_write(w).await?;
+                    w.write_all(&sender_guid1.guid().to_le_bytes()).await?;
 
                     // sender_guid2: Guid
-                    sender_guid2.tokio_write(w).await?;
+                    w.write_all(&sender_guid2.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::PARTY {
@@ -1197,31 +1197,31 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     sender_guid2,
                 } => {
                     // sender_guid1: Guid
-                    sender_guid1.tokio_write(w).await?;
+                    w.write_all(&sender_guid1.guid().to_le_bytes()).await?;
 
                     // sender_guid2: Guid
-                    sender_guid2.tokio_write(w).await?;
+                    w.write_all(&sender_guid2.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::RAID {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::GUILD {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::OFFICER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::YELL {
@@ -1229,45 +1229,45 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     sender_guid2,
                 } => {
                     // sender_guid1: Guid
-                    sender_guid1.tokio_write(w).await?;
+                    w.write_all(&sender_guid1.guid().to_le_bytes()).await?;
 
                     // sender_guid2: Guid
-                    sender_guid2.tokio_write(w).await?;
+                    w.write_all(&sender_guid2.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::WHISPER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::WHISPER_INFORM {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::EMOTE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::TEXT_EMOTE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::SYSTEM {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_SAY {
@@ -1277,7 +1277,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     target_guid,
                 } => {
                     // sender_guid3: Guid
-                    sender_guid3.tokio_write(w).await?;
+                    w.write_all(&sender_guid3.guid().to_le_bytes()).await?;
 
                     // sender_name_length: u32
                     w.write_all(&sender_name_length.to_le_bytes()).await?;
@@ -1288,7 +1288,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&[0]).await?;
 
                     // target_guid: Guid
-                    target_guid.tokio_write(w).await?;
+                    w.write_all(&target_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_YELL {
@@ -1298,7 +1298,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     target_guid,
                 } => {
                     // sender_guid3: Guid
-                    sender_guid3.tokio_write(w).await?;
+                    w.write_all(&sender_guid3.guid().to_le_bytes()).await?;
 
                     // sender_name_length: u32
                     w.write_all(&sender_name_length.to_le_bytes()).await?;
@@ -1309,7 +1309,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&[0]).await?;
 
                     // target_guid: Guid
-                    target_guid.tokio_write(w).await?;
+                    w.write_all(&target_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
@@ -1326,7 +1326,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&[0]).await?;
 
                     // monster_guid: Guid
-                    monster_guid.tokio_write(w).await?;
+                    w.write_all(&monster_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL {
@@ -1343,77 +1343,77 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&player_rank.to_le_bytes()).await?;
 
                     // player_guid: Guid
-                    player_guid.tokio_write(w).await?;
+                    w.write_all(&player_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL_JOIN {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL_LEAVE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL_LIST {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL_NOTICE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::AFK {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::DND {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::IGNORED {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::SKILL {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::LOOT {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
@@ -1430,49 +1430,49 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&[0]).await?;
 
                     // monster_guid: Guid
-                    monster_guid.tokio_write(w).await?;
+                    w.write_all(&monster_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::RAID_LEADER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::RAID_WARNING {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
@@ -1489,21 +1489,21 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&[0]).await?;
 
                     // monster_guid: Guid
-                    monster_guid.tokio_write(w).await?;
+                    w.write_all(&monster_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::BATTLEGROUND {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.tokio_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
             }
@@ -1945,10 +1945,10 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     sender_guid2,
                 } => {
                     // sender_guid1: Guid
-                    sender_guid1.astd_write(w).await?;
+                    w.write_all(&sender_guid1.guid().to_le_bytes()).await?;
 
                     // sender_guid2: Guid
-                    sender_guid2.astd_write(w).await?;
+                    w.write_all(&sender_guid2.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::PARTY {
@@ -1956,31 +1956,31 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     sender_guid2,
                 } => {
                     // sender_guid1: Guid
-                    sender_guid1.astd_write(w).await?;
+                    w.write_all(&sender_guid1.guid().to_le_bytes()).await?;
 
                     // sender_guid2: Guid
-                    sender_guid2.astd_write(w).await?;
+                    w.write_all(&sender_guid2.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::RAID {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::GUILD {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::OFFICER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::YELL {
@@ -1988,45 +1988,45 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     sender_guid2,
                 } => {
                     // sender_guid1: Guid
-                    sender_guid1.astd_write(w).await?;
+                    w.write_all(&sender_guid1.guid().to_le_bytes()).await?;
 
                     // sender_guid2: Guid
-                    sender_guid2.astd_write(w).await?;
+                    w.write_all(&sender_guid2.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::WHISPER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::WHISPER_INFORM {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::EMOTE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::TEXT_EMOTE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::SYSTEM {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_SAY {
@@ -2036,7 +2036,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     target_guid,
                 } => {
                     // sender_guid3: Guid
-                    sender_guid3.astd_write(w).await?;
+                    w.write_all(&sender_guid3.guid().to_le_bytes()).await?;
 
                     // sender_name_length: u32
                     w.write_all(&sender_name_length.to_le_bytes()).await?;
@@ -2047,7 +2047,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&[0]).await?;
 
                     // target_guid: Guid
-                    target_guid.astd_write(w).await?;
+                    w.write_all(&target_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_YELL {
@@ -2057,7 +2057,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     target_guid,
                 } => {
                     // sender_guid3: Guid
-                    sender_guid3.astd_write(w).await?;
+                    w.write_all(&sender_guid3.guid().to_le_bytes()).await?;
 
                     // sender_name_length: u32
                     w.write_all(&sender_name_length.to_le_bytes()).await?;
@@ -2068,7 +2068,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&[0]).await?;
 
                     // target_guid: Guid
-                    target_guid.astd_write(w).await?;
+                    w.write_all(&target_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_EMOTE {
@@ -2085,7 +2085,7 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&[0]).await?;
 
                     // monster_guid: Guid
-                    monster_guid.astd_write(w).await?;
+                    w.write_all(&monster_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL {
@@ -2102,77 +2102,77 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&player_rank.to_le_bytes()).await?;
 
                     // player_guid: Guid
-                    player_guid.astd_write(w).await?;
+                    w.write_all(&player_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL_JOIN {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL_LEAVE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL_LIST {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL_NOTICE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::CHANNEL_NOTICE_USER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::AFK {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::DND {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::IGNORED {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::SKILL {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::LOOT {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::MONSTER_WHISPER {
@@ -2189,49 +2189,49 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&[0]).await?;
 
                     // monster_guid: Guid
-                    monster_guid.astd_write(w).await?;
+                    w.write_all(&monster_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::BG_SYSTEM_NEUTRAL {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::BG_SYSTEM_ALLIANCE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::BG_SYSTEM_HORDE {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::RAID_LEADER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::RAID_WARNING {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::RAID_BOSS_WHISPER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::RAID_BOSS_EMOTE {
@@ -2248,21 +2248,21 @@ impl MessageBody for SMSG_MESSAGECHAT {
                     w.write_all(&[0]).await?;
 
                     // monster_guid: Guid
-                    monster_guid.astd_write(w).await?;
+                    w.write_all(&monster_guid.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::BATTLEGROUND {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
                 SMSG_MESSAGECHATChatType::BATTLEGROUND_LEADER {
                     sender_guid4,
                 } => {
                     // sender_guid4: Guid
-                    sender_guid4.astd_write(w).await?;
+                    w.write_all(&sender_guid4.guid().to_le_bytes()).await?;
 
                 }
             }

@@ -52,7 +52,7 @@ impl MessageBody for SMSG_ITEM_ENCHANT_TIME_UPDATE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // item_guid: Guid
-        self.item_guid.write(w)?;
+        w.write_all(&self.item_guid.guid().to_le_bytes())?;
 
         // slot: u32
         w.write_all(&self.slot.to_le_bytes())?;
@@ -61,7 +61,7 @@ impl MessageBody for SMSG_ITEM_ENCHANT_TIME_UPDATE {
         w.write_all(&self.duration.to_le_bytes())?;
 
         // player_guid: Guid
-        self.player_guid.write(w)?;
+        w.write_all(&self.player_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -115,7 +115,7 @@ impl MessageBody for SMSG_ITEM_ENCHANT_TIME_UPDATE {
      {
         Box::pin(async move {
             // item_guid: Guid
-            self.item_guid.tokio_write(w).await?;
+            w.write_all(&self.item_guid.guid().to_le_bytes()).await?;
 
             // slot: u32
             w.write_all(&self.slot.to_le_bytes()).await?;
@@ -124,7 +124,7 @@ impl MessageBody for SMSG_ITEM_ENCHANT_TIME_UPDATE {
             w.write_all(&self.duration.to_le_bytes()).await?;
 
             // player_guid: Guid
-            self.player_guid.tokio_write(w).await?;
+            w.write_all(&self.player_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -179,7 +179,7 @@ impl MessageBody for SMSG_ITEM_ENCHANT_TIME_UPDATE {
      {
         Box::pin(async move {
             // item_guid: Guid
-            self.item_guid.astd_write(w).await?;
+            w.write_all(&self.item_guid.guid().to_le_bytes()).await?;
 
             // slot: u32
             w.write_all(&self.slot.to_le_bytes()).await?;
@@ -188,7 +188,7 @@ impl MessageBody for SMSG_ITEM_ENCHANT_TIME_UPDATE {
             w.write_all(&self.duration.to_le_bytes()).await?;
 
             // player_guid: Guid
-            self.player_guid.astd_write(w).await?;
+            w.write_all(&self.player_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

@@ -111,7 +111,7 @@ impl AuctionListItem {
         w.write_all(&self.item_charges.to_le_bytes())?;
 
         // item_owner: Guid
-        self.item_owner.write(w)?;
+        w.write_all(&self.item_owner.guid().to_le_bytes())?;
 
         // start_bid: u32
         w.write_all(&self.start_bid.to_le_bytes())?;
@@ -126,7 +126,7 @@ impl AuctionListItem {
         w.write_all(&self.time_left_in_msecs.to_le_bytes())?;
 
         // highest_bidder: Guid
-        self.highest_bidder.write(w)?;
+        w.write_all(&self.highest_bidder.guid().to_le_bytes())?;
 
         // highest_bid: u32
         w.write_all(&self.highest_bid.to_le_bytes())?;
@@ -220,7 +220,7 @@ impl AuctionListItem {
         w.write_all(&self.item_charges.to_le_bytes()).await?;
 
         // item_owner: Guid
-        self.item_owner.tokio_write(w).await?;
+        w.write_all(&self.item_owner.guid().to_le_bytes()).await?;
 
         // start_bid: u32
         w.write_all(&self.start_bid.to_le_bytes()).await?;
@@ -235,7 +235,7 @@ impl AuctionListItem {
         w.write_all(&self.time_left_in_msecs.to_le_bytes()).await?;
 
         // highest_bidder: Guid
-        self.highest_bidder.tokio_write(w).await?;
+        w.write_all(&self.highest_bidder.guid().to_le_bytes()).await?;
 
         // highest_bid: u32
         w.write_all(&self.highest_bid.to_le_bytes()).await?;
@@ -329,7 +329,7 @@ impl AuctionListItem {
         w.write_all(&self.item_charges.to_le_bytes()).await?;
 
         // item_owner: Guid
-        self.item_owner.astd_write(w).await?;
+        w.write_all(&self.item_owner.guid().to_le_bytes()).await?;
 
         // start_bid: u32
         w.write_all(&self.start_bid.to_le_bytes()).await?;
@@ -344,7 +344,7 @@ impl AuctionListItem {
         w.write_all(&self.time_left_in_msecs.to_le_bytes()).await?;
 
         // highest_bidder: Guid
-        self.highest_bidder.astd_write(w).await?;
+        w.write_all(&self.highest_bidder.guid().to_le_bytes()).await?;
 
         // highest_bid: u32
         w.write_all(&self.highest_bid.to_le_bytes()).await?;

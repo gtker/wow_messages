@@ -54,7 +54,7 @@ impl MessageBody for MSG_RAID_READY_CHECK_Server {
         // optional state_check
         if let Some(v) = &self.state_check {
             // guid: Guid
-            v.guid.write(w)?;
+            w.write_all(&v.guid.guid().to_le_bytes())?;
 
             // state: u8
             w.write_all(&v.state.to_le_bytes())?;
@@ -119,7 +119,7 @@ impl MessageBody for MSG_RAID_READY_CHECK_Server {
             // optional state_check
             if let Some(v) = &self.state_check {
                 // guid: Guid
-                v.guid.tokio_write(w).await?;
+                w.write_all(&v.guid.guid().to_le_bytes()).await?;
 
                 // state: u8
                 w.write_all(&v.state.to_le_bytes()).await?;
@@ -185,7 +185,7 @@ impl MessageBody for MSG_RAID_READY_CHECK_Server {
             // optional state_check
             if let Some(v) = &self.state_check {
                 // guid: Guid
-                v.guid.astd_write(w).await?;
+                w.write_all(&v.guid.guid().to_le_bytes()).await?;
 
                 // state: u8
                 w.write_all(&v.state.to_le_bytes()).await?;

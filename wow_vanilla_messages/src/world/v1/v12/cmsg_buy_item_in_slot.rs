@@ -57,13 +57,13 @@ impl MessageBody for CMSG_BUY_ITEM_IN_SLOT {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // vendor_guid: Guid
-        self.vendor_guid.write(w)?;
+        w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
 
         // item_id: u32
         w.write_all(&self.item_id.to_le_bytes())?;
 
         // bag_guid: Guid
-        self.bag_guid.write(w)?;
+        w.write_all(&self.bag_guid.guid().to_le_bytes())?;
 
         // bag_slot: u8
         w.write_all(&self.bag_slot.to_le_bytes())?;
@@ -127,13 +127,13 @@ impl MessageBody for CMSG_BUY_ITEM_IN_SLOT {
      {
         Box::pin(async move {
             // vendor_guid: Guid
-            self.vendor_guid.tokio_write(w).await?;
+            w.write_all(&self.vendor_guid.guid().to_le_bytes()).await?;
 
             // item_id: u32
             w.write_all(&self.item_id.to_le_bytes()).await?;
 
             // bag_guid: Guid
-            self.bag_guid.tokio_write(w).await?;
+            w.write_all(&self.bag_guid.guid().to_le_bytes()).await?;
 
             // bag_slot: u8
             w.write_all(&self.bag_slot.to_le_bytes()).await?;
@@ -198,13 +198,13 @@ impl MessageBody for CMSG_BUY_ITEM_IN_SLOT {
      {
         Box::pin(async move {
             // vendor_guid: Guid
-            self.vendor_guid.astd_write(w).await?;
+            w.write_all(&self.vendor_guid.guid().to_le_bytes()).await?;
 
             // item_id: u32
             w.write_all(&self.item_id.to_le_bytes()).await?;
 
             // bag_guid: Guid
-            self.bag_guid.astd_write(w).await?;
+            w.write_all(&self.bag_guid.guid().to_le_bytes()).await?;
 
             // bag_slot: u8
             w.write_all(&self.bag_slot.to_le_bytes()).await?;

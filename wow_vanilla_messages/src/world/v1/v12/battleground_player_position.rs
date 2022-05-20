@@ -33,7 +33,7 @@ impl BattlegroundPlayerPosition {
     #[cfg(feature = "sync")]
     pub(crate) fn write<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player: Guid
-        self.player.write(w)?;
+        w.write_all(&self.player.guid().to_le_bytes())?;
 
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes())?;
@@ -63,7 +63,7 @@ impl BattlegroundPlayerPosition {
     #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_write<W: AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player: Guid
-        self.player.tokio_write(w).await?;
+        w.write_all(&self.player.guid().to_le_bytes()).await?;
 
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes()).await?;
@@ -93,7 +93,7 @@ impl BattlegroundPlayerPosition {
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_write<W: WriteExt + Unpin + Send>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player: Guid
-        self.player.astd_write(w).await?;
+        w.write_all(&self.player.guid().to_le_bytes()).await?;
 
         // position_x: f32
         w.write_all(&self.position_x.to_le_bytes()).await?;

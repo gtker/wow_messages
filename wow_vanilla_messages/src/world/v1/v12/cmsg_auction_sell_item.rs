@@ -62,10 +62,10 @@ impl MessageBody for CMSG_AUCTION_SELL_ITEM {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // auctioneer_guid: Guid
-        self.auctioneer_guid.write(w)?;
+        w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
 
         // object_guid: Guid
-        self.object_guid.write(w)?;
+        w.write_all(&self.object_guid.guid().to_le_bytes())?;
 
         // stack_size: u32
         w.write_all(&self.stack_size.to_le_bytes())?;
@@ -139,10 +139,10 @@ impl MessageBody for CMSG_AUCTION_SELL_ITEM {
      {
         Box::pin(async move {
             // auctioneer_guid: Guid
-            self.auctioneer_guid.tokio_write(w).await?;
+            w.write_all(&self.auctioneer_guid.guid().to_le_bytes()).await?;
 
             // object_guid: Guid
-            self.object_guid.tokio_write(w).await?;
+            w.write_all(&self.object_guid.guid().to_le_bytes()).await?;
 
             // stack_size: u32
             w.write_all(&self.stack_size.to_le_bytes()).await?;
@@ -217,10 +217,10 @@ impl MessageBody for CMSG_AUCTION_SELL_ITEM {
      {
         Box::pin(async move {
             // auctioneer_guid: Guid
-            self.auctioneer_guid.astd_write(w).await?;
+            w.write_all(&self.auctioneer_guid.guid().to_le_bytes()).await?;
 
             // object_guid: Guid
-            self.object_guid.astd_write(w).await?;
+            w.write_all(&self.object_guid.guid().to_le_bytes()).await?;
 
             // stack_size: u32
             w.write_all(&self.stack_size.to_le_bytes()).await?;

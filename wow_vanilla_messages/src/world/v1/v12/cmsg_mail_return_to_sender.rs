@@ -42,7 +42,7 @@ impl MessageBody for CMSG_MAIL_RETURN_TO_SENDER {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // mailbox_id: Guid
-        self.mailbox_id.write(w)?;
+        w.write_all(&self.mailbox_id.guid().to_le_bytes())?;
 
         // mail_id: u32
         w.write_all(&self.mail_id.to_le_bytes())?;
@@ -91,7 +91,7 @@ impl MessageBody for CMSG_MAIL_RETURN_TO_SENDER {
      {
         Box::pin(async move {
             // mailbox_id: Guid
-            self.mailbox_id.tokio_write(w).await?;
+            w.write_all(&self.mailbox_id.guid().to_le_bytes()).await?;
 
             // mail_id: u32
             w.write_all(&self.mail_id.to_le_bytes()).await?;
@@ -141,7 +141,7 @@ impl MessageBody for CMSG_MAIL_RETURN_TO_SENDER {
      {
         Box::pin(async move {
             // mailbox_id: Guid
-            self.mailbox_id.astd_write(w).await?;
+            w.write_all(&self.mailbox_id.guid().to_le_bytes()).await?;
 
             // mail_id: u32
             w.write_all(&self.mail_id.to_le_bytes()).await?;

@@ -122,13 +122,13 @@ impl MessageBody for CMSG_PETITION_BUY {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // npc: Guid
-        self.npc.write(w)?;
+        w.write_all(&self.npc.guid().to_le_bytes())?;
 
         // skip1: u32
         w.write_all(&self.skip1.to_le_bytes())?;
 
         // skip2: Guid
-        self.skip2.write(w)?;
+        w.write_all(&self.skip2.guid().to_le_bytes())?;
 
         // name: CString
         w.write_all(self.name.as_bytes())?;
@@ -286,13 +286,13 @@ impl MessageBody for CMSG_PETITION_BUY {
      {
         Box::pin(async move {
             // npc: Guid
-            self.npc.tokio_write(w).await?;
+            w.write_all(&self.npc.guid().to_le_bytes()).await?;
 
             // skip1: u32
             w.write_all(&self.skip1.to_le_bytes()).await?;
 
             // skip2: Guid
-            self.skip2.tokio_write(w).await?;
+            w.write_all(&self.skip2.guid().to_le_bytes()).await?;
 
             // name: CString
             w.write_all(self.name.as_bytes()).await?;
@@ -451,13 +451,13 @@ impl MessageBody for CMSG_PETITION_BUY {
      {
         Box::pin(async move {
             // npc: Guid
-            self.npc.astd_write(w).await?;
+            w.write_all(&self.npc.guid().to_le_bytes()).await?;
 
             // skip1: u32
             w.write_all(&self.skip1.to_le_bytes()).await?;
 
             // skip2: Guid
-            self.skip2.astd_write(w).await?;
+            w.write_all(&self.skip2.guid().to_le_bytes()).await?;
 
             // name: CString
             w.write_all(self.name.as_bytes()).await?;

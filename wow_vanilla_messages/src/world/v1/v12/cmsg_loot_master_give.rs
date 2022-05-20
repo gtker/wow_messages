@@ -47,13 +47,13 @@ impl MessageBody for CMSG_LOOT_MASTER_GIVE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // loot_guid: Guid
-        self.loot_guid.write(w)?;
+        w.write_all(&self.loot_guid.guid().to_le_bytes())?;
 
         // slot_id: u8
         w.write_all(&self.slot_id.to_le_bytes())?;
 
         // target_player_guid: Guid
-        self.target_player_guid.write(w)?;
+        w.write_all(&self.target_player_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -103,13 +103,13 @@ impl MessageBody for CMSG_LOOT_MASTER_GIVE {
      {
         Box::pin(async move {
             // loot_guid: Guid
-            self.loot_guid.tokio_write(w).await?;
+            w.write_all(&self.loot_guid.guid().to_le_bytes()).await?;
 
             // slot_id: u8
             w.write_all(&self.slot_id.to_le_bytes()).await?;
 
             // target_player_guid: Guid
-            self.target_player_guid.tokio_write(w).await?;
+            w.write_all(&self.target_player_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -160,13 +160,13 @@ impl MessageBody for CMSG_LOOT_MASTER_GIVE {
      {
         Box::pin(async move {
             // loot_guid: Guid
-            self.loot_guid.astd_write(w).await?;
+            w.write_all(&self.loot_guid.guid().to_le_bytes()).await?;
 
             // slot_id: u8
             w.write_all(&self.slot_id.to_le_bytes()).await?;
 
             // target_player_guid: Guid
-            self.target_player_guid.astd_write(w).await?;
+            w.write_all(&self.target_player_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

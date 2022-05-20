@@ -52,7 +52,7 @@ impl MessageBody for CMSG_LOOT_METHOD {
         w.write_all(&(self.loot_setting.as_int() as u32).to_le_bytes())?;
 
         // loot_master: Guid
-        self.loot_master.write(w)?;
+        w.write_all(&self.loot_master.guid().to_le_bytes())?;
 
         // loot_threshold: ItemQuality
         w.write_all(&(self.loot_threshold.as_int() as u32).to_le_bytes())?;
@@ -108,7 +108,7 @@ impl MessageBody for CMSG_LOOT_METHOD {
             w.write_all(&(self.loot_setting.as_int() as u32).to_le_bytes()).await?;
 
             // loot_master: Guid
-            self.loot_master.tokio_write(w).await?;
+            w.write_all(&self.loot_master.guid().to_le_bytes()).await?;
 
             // loot_threshold: ItemQuality
             w.write_all(&(self.loot_threshold.as_int() as u32).to_le_bytes()).await?;
@@ -165,7 +165,7 @@ impl MessageBody for CMSG_LOOT_METHOD {
             w.write_all(&(self.loot_setting.as_int() as u32).to_le_bytes()).await?;
 
             // loot_master: Guid
-            self.loot_master.astd_write(w).await?;
+            w.write_all(&self.loot_master.guid().to_le_bytes()).await?;
 
             // loot_threshold: ItemQuality
             w.write_all(&(self.loot_threshold.as_int() as u32).to_le_bytes()).await?;

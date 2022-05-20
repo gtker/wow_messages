@@ -40,7 +40,7 @@ impl GroupListMember {
         w.write_all(&[0])?;
 
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // is_online: u8
         w.write_all(&self.is_online.to_le_bytes())?;
@@ -75,7 +75,7 @@ impl GroupListMember {
         w.write_all(&[0]).await?;
 
         // guid: Guid
-        self.guid.tokio_write(w).await?;
+        w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
         // is_online: u8
         w.write_all(&self.is_online.to_le_bytes()).await?;
@@ -110,7 +110,7 @@ impl GroupListMember {
         w.write_all(&[0]).await?;
 
         // guid: Guid
-        self.guid.astd_write(w).await?;
+        w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
         // is_online: u8
         w.write_all(&self.is_online.to_le_bytes()).await?;

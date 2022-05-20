@@ -62,7 +62,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // target_guid: Guid
-        self.target_guid.write(w)?;
+        w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
         // total_exp: u32
         w.write_all(&self.total_exp.to_le_bytes())?;
@@ -148,7 +148,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
      {
         Box::pin(async move {
             // target_guid: Guid
-            self.target_guid.tokio_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             // total_exp: u32
             w.write_all(&self.total_exp.to_le_bytes()).await?;
@@ -235,7 +235,7 @@ impl MessageBody for SMSG_LOG_XPGAIN {
      {
         Box::pin(async move {
             // target_guid: Guid
-            self.target_guid.astd_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             // total_exp: u32
             w.write_all(&self.total_exp.to_le_bytes()).await?;

@@ -58,7 +58,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // damage_type: EnvironmentalDamageType
         w.write_all(&(self.damage_type.as_int() as u32).to_le_bytes())?;
@@ -128,7 +128,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // damage_type: EnvironmentalDamageType
             w.write_all(&(self.damage_type.as_int() as u32).to_le_bytes()).await?;
@@ -199,7 +199,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // damage_type: EnvironmentalDamageType
             w.write_all(&(self.damage_type.as_int() as u32).to_le_bytes()).await?;

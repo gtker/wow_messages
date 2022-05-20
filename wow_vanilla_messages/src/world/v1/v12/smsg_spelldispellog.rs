@@ -52,10 +52,10 @@ impl MessageBody for SMSG_SPELLDISPELLOG {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // victim: Guid
-        self.victim.write(w)?;
+        w.write_all(&self.victim.guid().to_le_bytes())?;
 
         // caster: Guid
-        self.caster.write(w)?;
+        w.write_all(&self.caster.guid().to_le_bytes())?;
 
         // amount_of_spells: u32
         w.write_all(&(self.spells.len() as u32).to_le_bytes())?;
@@ -119,10 +119,10 @@ impl MessageBody for SMSG_SPELLDISPELLOG {
      {
         Box::pin(async move {
             // victim: Guid
-            self.victim.tokio_write(w).await?;
+            w.write_all(&self.victim.guid().to_le_bytes()).await?;
 
             // caster: Guid
-            self.caster.tokio_write(w).await?;
+            w.write_all(&self.caster.guid().to_le_bytes()).await?;
 
             // amount_of_spells: u32
             w.write_all(&(self.spells.len() as u32).to_le_bytes()).await?;
@@ -187,10 +187,10 @@ impl MessageBody for SMSG_SPELLDISPELLOG {
      {
         Box::pin(async move {
             // victim: Guid
-            self.victim.astd_write(w).await?;
+            w.write_all(&self.victim.guid().to_le_bytes()).await?;
 
             // caster: Guid
-            self.caster.astd_write(w).await?;
+            w.write_all(&self.caster.guid().to_le_bytes()).await?;
 
             // amount_of_spells: u32
             w.write_all(&(self.spells.len() as u32).to_le_bytes()).await?;

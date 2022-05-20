@@ -45,7 +45,7 @@ impl MessageBody for SMSG_CLEAR_COOLDOWN {
         w.write_all(&self.id.to_le_bytes())?;
 
         // target_guid: Guid
-        self.target_guid.write(w)?;
+        w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -94,7 +94,7 @@ impl MessageBody for SMSG_CLEAR_COOLDOWN {
             w.write_all(&self.id.to_le_bytes()).await?;
 
             // target_guid: Guid
-            self.target_guid.tokio_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -144,7 +144,7 @@ impl MessageBody for SMSG_CLEAR_COOLDOWN {
             w.write_all(&self.id.to_le_bytes()).await?;
 
             // target_guid: Guid
-            self.target_guid.astd_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

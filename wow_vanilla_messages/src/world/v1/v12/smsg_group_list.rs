@@ -105,7 +105,7 @@ impl MessageBody for SMSG_GROUP_LIST {
         }
 
         // leader: Guid
-        self.leader.write(w)?;
+        w.write_all(&self.leader.guid().to_le_bytes())?;
 
         // optional group_not_empty
         if let Some(v) = &self.group_not_empty {
@@ -113,7 +113,7 @@ impl MessageBody for SMSG_GROUP_LIST {
             w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes())?;
 
             // master_loot: Guid
-            v.master_loot.write(w)?;
+            w.write_all(&v.master_loot.guid().to_le_bytes())?;
 
             // loot_threshold: ItemQuality
             w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes())?;
@@ -221,7 +221,7 @@ impl MessageBody for SMSG_GROUP_LIST {
             }
 
             // leader: Guid
-            self.leader.tokio_write(w).await?;
+            w.write_all(&self.leader.guid().to_le_bytes()).await?;
 
             // optional group_not_empty
             if let Some(v) = &self.group_not_empty {
@@ -229,7 +229,7 @@ impl MessageBody for SMSG_GROUP_LIST {
                 w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes()).await?;
 
                 // master_loot: Guid
-                v.master_loot.tokio_write(w).await?;
+                w.write_all(&v.master_loot.guid().to_le_bytes()).await?;
 
                 // loot_threshold: ItemQuality
                 w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes()).await?;
@@ -338,7 +338,7 @@ impl MessageBody for SMSG_GROUP_LIST {
             }
 
             // leader: Guid
-            self.leader.astd_write(w).await?;
+            w.write_all(&self.leader.guid().to_le_bytes()).await?;
 
             // optional group_not_empty
             if let Some(v) = &self.group_not_empty {
@@ -346,7 +346,7 @@ impl MessageBody for SMSG_GROUP_LIST {
                 w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes()).await?;
 
                 // master_loot: Guid
-                v.master_loot.astd_write(w).await?;
+                w.write_all(&v.master_loot.guid().to_le_bytes()).await?;
 
                 // loot_threshold: ItemQuality
                 w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes()).await?;

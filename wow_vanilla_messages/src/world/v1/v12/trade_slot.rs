@@ -105,13 +105,13 @@ impl TradeSlot {
         w.write_all(&self.is_wrapped.to_le_bytes())?;
 
         // gift_wrapper: Guid
-        self.gift_wrapper.write(w)?;
+        w.write_all(&self.gift_wrapper.guid().to_le_bytes())?;
 
         // enchantment: u32
         w.write_all(&self.enchantment.to_le_bytes())?;
 
         // item_creator: Guid
-        self.item_creator.write(w)?;
+        w.write_all(&self.item_creator.guid().to_le_bytes())?;
 
         // spell_charges: u32
         w.write_all(&self.spell_charges.to_le_bytes())?;
@@ -214,13 +214,13 @@ impl TradeSlot {
         w.write_all(&self.is_wrapped.to_le_bytes()).await?;
 
         // gift_wrapper: Guid
-        self.gift_wrapper.tokio_write(w).await?;
+        w.write_all(&self.gift_wrapper.guid().to_le_bytes()).await?;
 
         // enchantment: u32
         w.write_all(&self.enchantment.to_le_bytes()).await?;
 
         // item_creator: Guid
-        self.item_creator.tokio_write(w).await?;
+        w.write_all(&self.item_creator.guid().to_le_bytes()).await?;
 
         // spell_charges: u32
         w.write_all(&self.spell_charges.to_le_bytes()).await?;
@@ -323,13 +323,13 @@ impl TradeSlot {
         w.write_all(&self.is_wrapped.to_le_bytes()).await?;
 
         // gift_wrapper: Guid
-        self.gift_wrapper.astd_write(w).await?;
+        w.write_all(&self.gift_wrapper.guid().to_le_bytes()).await?;
 
         // enchantment: u32
         w.write_all(&self.enchantment.to_le_bytes()).await?;
 
         // item_creator: Guid
-        self.item_creator.astd_write(w).await?;
+        w.write_all(&self.item_creator.guid().to_le_bytes()).await?;
 
         // spell_charges: u32
         w.write_all(&self.spell_charges.to_le_bytes()).await?;

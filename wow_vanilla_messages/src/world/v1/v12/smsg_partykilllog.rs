@@ -42,10 +42,10 @@ impl MessageBody for SMSG_PARTYKILLLOG {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // player_with_killing_blow: Guid
-        self.player_with_killing_blow.write(w)?;
+        w.write_all(&self.player_with_killing_blow.guid().to_le_bytes())?;
 
         // victim: Guid
-        self.victim.write(w)?;
+        w.write_all(&self.victim.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -91,10 +91,10 @@ impl MessageBody for SMSG_PARTYKILLLOG {
      {
         Box::pin(async move {
             // player_with_killing_blow: Guid
-            self.player_with_killing_blow.tokio_write(w).await?;
+            w.write_all(&self.player_with_killing_blow.guid().to_le_bytes()).await?;
 
             // victim: Guid
-            self.victim.tokio_write(w).await?;
+            w.write_all(&self.victim.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -141,10 +141,10 @@ impl MessageBody for SMSG_PARTYKILLLOG {
      {
         Box::pin(async move {
             // player_with_killing_blow: Guid
-            self.player_with_killing_blow.astd_write(w).await?;
+            w.write_all(&self.player_with_killing_blow.guid().to_le_bytes()).await?;
 
             // victim: Guid
-            self.victim.astd_write(w).await?;
+            w.write_all(&self.victim.guid().to_le_bytes()).await?;
 
             Ok(())
         })

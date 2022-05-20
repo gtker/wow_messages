@@ -53,10 +53,10 @@ impl MessageBody for SMSG_PROCRESIST {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // target_guid: Guid
-        self.target_guid.write(w)?;
+        w.write_all(&self.target_guid.guid().to_le_bytes())?;
 
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
@@ -116,10 +116,10 @@ impl MessageBody for SMSG_PROCRESIST {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // target_guid: Guid
-            self.target_guid.tokio_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             // id: u32
             w.write_all(&self.id.to_le_bytes()).await?;
@@ -180,10 +180,10 @@ impl MessageBody for SMSG_PROCRESIST {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // target_guid: Guid
-            self.target_guid.astd_write(w).await?;
+            w.write_all(&self.target_guid.guid().to_le_bytes()).await?;
 
             // id: u32
             w.write_all(&self.id.to_le_bytes()).await?;

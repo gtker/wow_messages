@@ -118,7 +118,7 @@ impl MessageBody for SMSG_SPELL_GO {
 
         // hits: Guid[amount_of_hits]
         for i in self.hits.iter() {
-            i.write(w)?;
+            w.write_all(&i.guid().to_le_bytes())?;
         }
 
         // amount_of_misses: u8
@@ -254,7 +254,7 @@ impl MessageBody for SMSG_SPELL_GO {
 
             // hits: Guid[amount_of_hits]
             for i in self.hits.iter() {
-                i.tokio_write(w).await?;
+                w.write_all(&i.guid().to_le_bytes()).await?;
             }
 
             // amount_of_misses: u8
@@ -391,7 +391,7 @@ impl MessageBody for SMSG_SPELL_GO {
 
             // hits: Guid[amount_of_hits]
             for i in self.hits.iter() {
-                i.astd_write(w).await?;
+                w.write_all(&i.guid().to_le_bytes()).await?;
             }
 
             // amount_of_misses: u8

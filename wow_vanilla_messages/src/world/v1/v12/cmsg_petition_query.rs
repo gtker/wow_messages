@@ -45,7 +45,7 @@ impl MessageBody for CMSG_PETITION_QUERY {
         w.write_all(&self.guild_guid.to_le_bytes())?;
 
         // petition_guid: Guid
-        self.petition_guid.write(w)?;
+        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -94,7 +94,7 @@ impl MessageBody for CMSG_PETITION_QUERY {
             w.write_all(&self.guild_guid.to_le_bytes()).await?;
 
             // petition_guid: Guid
-            self.petition_guid.tokio_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -144,7 +144,7 @@ impl MessageBody for CMSG_PETITION_QUERY {
             w.write_all(&self.guild_guid.to_le_bytes()).await?;
 
             // petition_guid: Guid
-            self.petition_guid.astd_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

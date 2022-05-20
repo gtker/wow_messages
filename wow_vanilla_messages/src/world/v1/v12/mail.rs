@@ -161,7 +161,7 @@ impl Mail {
                 sender,
             } => {
                 // sender: Guid
-                sender.write(w)?;
+                w.write_all(&sender.guid().to_le_bytes())?;
 
             }
             MailMailType::AUCTION {
@@ -375,7 +375,7 @@ impl Mail {
                 sender,
             } => {
                 // sender: Guid
-                sender.tokio_write(w).await?;
+                w.write_all(&sender.guid().to_le_bytes()).await?;
 
             }
             MailMailType::AUCTION {
@@ -589,7 +589,7 @@ impl Mail {
                 sender,
             } => {
                 // sender: Guid
-                sender.astd_write(w).await?;
+                w.write_all(&sender.guid().to_le_bytes()).await?;
 
             }
             MailMailType::AUCTION {

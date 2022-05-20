@@ -42,7 +42,7 @@ impl MessageBody for SMSG_SPELL_FAILED_OTHER {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // caster_guid: Guid
-        self.caster_guid.write(w)?;
+        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
 
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
@@ -91,7 +91,7 @@ impl MessageBody for SMSG_SPELL_FAILED_OTHER {
      {
         Box::pin(async move {
             // caster_guid: Guid
-            self.caster_guid.tokio_write(w).await?;
+            w.write_all(&self.caster_guid.guid().to_le_bytes()).await?;
 
             // id: u32
             w.write_all(&self.id.to_le_bytes()).await?;
@@ -141,7 +141,7 @@ impl MessageBody for SMSG_SPELL_FAILED_OTHER {
      {
         Box::pin(async move {
             // caster_guid: Guid
-            self.caster_guid.astd_write(w).await?;
+            w.write_all(&self.caster_guid.guid().to_le_bytes()).await?;
 
             // id: u32
             w.write_all(&self.id.to_le_bytes()).await?;

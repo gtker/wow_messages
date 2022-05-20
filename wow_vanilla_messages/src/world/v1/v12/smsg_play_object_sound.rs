@@ -45,7 +45,7 @@ impl MessageBody for SMSG_PLAY_OBJECT_SOUND {
         w.write_all(&self.sound_id.to_le_bytes())?;
 
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -94,7 +94,7 @@ impl MessageBody for SMSG_PLAY_OBJECT_SOUND {
             w.write_all(&self.sound_id.to_le_bytes()).await?;
 
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -144,7 +144,7 @@ impl MessageBody for SMSG_PLAY_OBJECT_SOUND {
             w.write_all(&self.sound_id.to_le_bytes()).await?;
 
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             Ok(())
         })

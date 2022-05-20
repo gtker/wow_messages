@@ -48,10 +48,10 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // petition_guid: Guid
-        self.petition_guid.write(w)?;
+        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
         // owner_guid: Guid
-        self.owner_guid.write(w)?;
+        w.write_all(&self.owner_guid.guid().to_le_bytes())?;
 
         // result: PetitionResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
@@ -104,10 +104,10 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
      {
         Box::pin(async move {
             // petition_guid: Guid
-            self.petition_guid.tokio_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             // owner_guid: Guid
-            self.owner_guid.tokio_write(w).await?;
+            w.write_all(&self.owner_guid.guid().to_le_bytes()).await?;
 
             // result: PetitionResult
             w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;
@@ -161,10 +161,10 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
      {
         Box::pin(async move {
             // petition_guid: Guid
-            self.petition_guid.astd_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             // owner_guid: Guid
-            self.owner_guid.astd_write(w).await?;
+            w.write_all(&self.owner_guid.guid().to_le_bytes()).await?;
 
             // result: PetitionResult
             w.write_all(&(self.result.as_int() as u32).to_le_bytes()).await?;

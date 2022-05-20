@@ -52,13 +52,13 @@ impl MessageBody for SMSG_PETITION_SHOW_SIGNATURES {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // item_guid: Guid
-        self.item_guid.write(w)?;
+        w.write_all(&self.item_guid.guid().to_le_bytes())?;
 
         // owner_guid: Guid
-        self.owner_guid.write(w)?;
+        w.write_all(&self.owner_guid.guid().to_le_bytes())?;
 
         // petition_guid: Guid
-        self.petition_guid.write(w)?;
+        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
 
         // amount_of_signatures: u8
         w.write_all(&self.amount_of_signatures.to_le_bytes())?;
@@ -115,13 +115,13 @@ impl MessageBody for SMSG_PETITION_SHOW_SIGNATURES {
      {
         Box::pin(async move {
             // item_guid: Guid
-            self.item_guid.tokio_write(w).await?;
+            w.write_all(&self.item_guid.guid().to_le_bytes()).await?;
 
             // owner_guid: Guid
-            self.owner_guid.tokio_write(w).await?;
+            w.write_all(&self.owner_guid.guid().to_le_bytes()).await?;
 
             // petition_guid: Guid
-            self.petition_guid.tokio_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             // amount_of_signatures: u8
             w.write_all(&self.amount_of_signatures.to_le_bytes()).await?;
@@ -179,13 +179,13 @@ impl MessageBody for SMSG_PETITION_SHOW_SIGNATURES {
      {
         Box::pin(async move {
             // item_guid: Guid
-            self.item_guid.astd_write(w).await?;
+            w.write_all(&self.item_guid.guid().to_le_bytes()).await?;
 
             // owner_guid: Guid
-            self.owner_guid.astd_write(w).await?;
+            w.write_all(&self.owner_guid.guid().to_le_bytes()).await?;
 
             // petition_guid: Guid
-            self.petition_guid.astd_write(w).await?;
+            w.write_all(&self.petition_guid.guid().to_le_bytes()).await?;
 
             // amount_of_signatures: u8
             w.write_all(&self.amount_of_signatures.to_le_bytes()).await?;

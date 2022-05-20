@@ -39,7 +39,7 @@ impl MessageBody for MSG_PETITION_DECLINE {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // petition: Guid
-        self.petition.write(w)?;
+        w.write_all(&self.petition.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -81,7 +81,7 @@ impl MessageBody for MSG_PETITION_DECLINE {
      {
         Box::pin(async move {
             // petition: Guid
-            self.petition.tokio_write(w).await?;
+            w.write_all(&self.petition.guid().to_le_bytes()).await?;
 
             Ok(())
         })
@@ -124,7 +124,7 @@ impl MessageBody for MSG_PETITION_DECLINE {
      {
         Box::pin(async move {
             // petition: Guid
-            self.petition.astd_write(w).await?;
+            w.write_all(&self.petition.guid().to_le_bytes()).await?;
 
             Ok(())
         })

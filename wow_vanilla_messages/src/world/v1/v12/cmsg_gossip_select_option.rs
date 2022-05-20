@@ -61,7 +61,7 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // guid: Guid
-        self.guid.write(w)?;
+        w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // gossip_list_id: u32
         w.write_all(&self.gossip_list_id.to_le_bytes())?;
@@ -138,7 +138,7 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.tokio_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // gossip_list_id: u32
             w.write_all(&self.gossip_list_id.to_le_bytes()).await?;
@@ -216,7 +216,7 @@ impl MessageBody for CMSG_GOSSIP_SELECT_OPTION {
      {
         Box::pin(async move {
             // guid: Guid
-            self.guid.astd_write(w).await?;
+            w.write_all(&self.guid.guid().to_le_bytes()).await?;
 
             // gossip_list_id: u32
             w.write_all(&self.gossip_list_id.to_le_bytes()).await?;

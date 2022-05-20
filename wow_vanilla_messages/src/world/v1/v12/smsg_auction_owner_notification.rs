@@ -71,7 +71,7 @@ impl MessageBody for SMSG_AUCTION_OWNER_NOTIFICATION {
         w.write_all(&self.auction_out_bid.to_le_bytes())?;
 
         // bidder: Guid
-        self.bidder.write(w)?;
+        w.write_all(&self.bidder.guid().to_le_bytes())?;
 
         // item_entry: u32
         w.write_all(&self.item_entry.to_le_bytes())?;
@@ -148,7 +148,7 @@ impl MessageBody for SMSG_AUCTION_OWNER_NOTIFICATION {
             w.write_all(&self.auction_out_bid.to_le_bytes()).await?;
 
             // bidder: Guid
-            self.bidder.tokio_write(w).await?;
+            w.write_all(&self.bidder.guid().to_le_bytes()).await?;
 
             // item_entry: u32
             w.write_all(&self.item_entry.to_le_bytes()).await?;
@@ -226,7 +226,7 @@ impl MessageBody for SMSG_AUCTION_OWNER_NOTIFICATION {
             w.write_all(&self.auction_out_bid.to_le_bytes()).await?;
 
             // bidder: Guid
-            self.bidder.astd_write(w).await?;
+            w.write_all(&self.bidder.guid().to_le_bytes()).await?;
 
             // item_entry: u32
             w.write_all(&self.item_entry.to_le_bytes()).await?;

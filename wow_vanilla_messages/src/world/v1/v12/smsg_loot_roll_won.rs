@@ -73,7 +73,7 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
     #[cfg(feature = "sync")]
     fn write_body<W: std::io::Write>(&self, w: &mut W) -> std::result::Result<(), std::io::Error> {
         // looted_target_guid: Guid
-        self.looted_target_guid.write(w)?;
+        w.write_all(&self.looted_target_guid.guid().to_le_bytes())?;
 
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
@@ -88,7 +88,7 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
         w.write_all(&self.item_random_property_id.to_le_bytes())?;
 
         // winning_player_guid: Guid
-        self.winning_player_guid.write(w)?;
+        w.write_all(&self.winning_player_guid.guid().to_le_bytes())?;
 
         // winning_roll: u8
         w.write_all(&self.winning_roll.to_le_bytes())?;
@@ -164,7 +164,7 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
      {
         Box::pin(async move {
             // looted_target_guid: Guid
-            self.looted_target_guid.tokio_write(w).await?;
+            w.write_all(&self.looted_target_guid.guid().to_le_bytes()).await?;
 
             // loot_slot: u32
             w.write_all(&self.loot_slot.to_le_bytes()).await?;
@@ -179,7 +179,7 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
             w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
 
             // winning_player_guid: Guid
-            self.winning_player_guid.tokio_write(w).await?;
+            w.write_all(&self.winning_player_guid.guid().to_le_bytes()).await?;
 
             // winning_roll: u8
             w.write_all(&self.winning_roll.to_le_bytes()).await?;
@@ -256,7 +256,7 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
      {
         Box::pin(async move {
             // looted_target_guid: Guid
-            self.looted_target_guid.astd_write(w).await?;
+            w.write_all(&self.looted_target_guid.guid().to_le_bytes()).await?;
 
             // loot_slot: u32
             w.write_all(&self.loot_slot.to_le_bytes()).await?;
@@ -271,7 +271,7 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
             w.write_all(&self.item_random_property_id.to_le_bytes()).await?;
 
             // winning_player_guid: Guid
-            self.winning_player_guid.astd_write(w).await?;
+            w.write_all(&self.winning_player_guid.guid().to_le_bytes()).await?;
 
             // winning_roll: u8
             w.write_all(&self.winning_roll.to_le_bytes()).await?;
