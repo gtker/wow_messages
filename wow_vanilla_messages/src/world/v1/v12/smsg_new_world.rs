@@ -42,7 +42,7 @@ impl MessageBody for SMSG_NEW_WORLD {
     const OPCODE: u16 = 0x003e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        16
     }
 
     type Error = std::io::Error;
@@ -169,15 +169,5 @@ impl MessageBody for SMSG_NEW_WORLD {
         })
     }
 
-}
-
-impl SMSG_NEW_WORLD {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
-        + 4 // orientation: f32
-    }
 }
 

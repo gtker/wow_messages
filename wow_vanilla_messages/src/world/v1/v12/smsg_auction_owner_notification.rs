@@ -51,7 +51,7 @@ impl MessageBody for SMSG_AUCTION_OWNER_NOTIFICATION {
     const OPCODE: u16 = 0x025f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        28
     }
 
     type Error = std::io::Error;
@@ -214,17 +214,5 @@ impl MessageBody for SMSG_AUCTION_OWNER_NOTIFICATION {
         })
     }
 
-}
-
-impl SMSG_AUCTION_OWNER_NOTIFICATION {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // auction_id: u32
-        + 4 // bid: u32
-        + 4 // auction_out_bid: u32
-        + 8 // bidder: Guid
-        + 4 // item_entry: u32
-        + 4 // item_random_property_id: u32
-    }
 }
 

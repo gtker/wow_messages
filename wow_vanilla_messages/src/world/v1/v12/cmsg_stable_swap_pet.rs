@@ -35,7 +35,7 @@ impl MessageBody for CMSG_STABLE_SWAP_PET {
     const OPCODE: u16 = 0x0275;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for CMSG_STABLE_SWAP_PET {
         })
     }
 
-}
-
-impl CMSG_STABLE_SWAP_PET {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // npc: Guid
-        + 4 // pet_slot: u32
-    }
 }
 

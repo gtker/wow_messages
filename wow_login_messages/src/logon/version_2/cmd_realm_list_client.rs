@@ -135,13 +135,6 @@ impl ReadableAndWritable for CMD_REALM_LIST_Client {
 
 }
 
-impl CMD_REALM_LIST_Client {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // padding: u32
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::CMD_REALM_LIST_Client;

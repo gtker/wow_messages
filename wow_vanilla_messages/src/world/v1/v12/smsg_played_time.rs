@@ -34,7 +34,7 @@ impl MessageBody for SMSG_PLAYED_TIME {
     const OPCODE: u16 = 0x01cd;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = std::io::Error;
@@ -149,13 +149,5 @@ impl MessageBody for SMSG_PLAYED_TIME {
         })
     }
 
-}
-
-impl SMSG_PLAYED_TIME {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // total_played_time: u32
-        + 4 // level_played_time: u32
-    }
 }
 

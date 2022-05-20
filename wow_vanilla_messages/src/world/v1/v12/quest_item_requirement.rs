@@ -87,12 +87,3 @@ impl QuestItemRequirement {
 
 }
 
-impl QuestItemRequirement {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // item: u32
-        + 4 // item_count: u32
-        + 4 // item_display_id: u32
-    }
-}
-

@@ -36,7 +36,7 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
     const OPCODE: u16 = 0x004c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        5
     }
 
     type Error = SMSG_LOGOUT_RESPONSEError;
@@ -151,14 +151,6 @@ impl MessageBody for SMSG_LOGOUT_RESPONSE {
         })
     }
 
-}
-
-impl SMSG_LOGOUT_RESPONSE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // reason: LogoutResult
-        + 1 // speed: LogoutSpeed
-    }
 }
 
 #[derive(Debug)]

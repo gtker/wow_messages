@@ -70,7 +70,7 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
     const OPCODE: u16 = 0x0166;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        41
     }
 
     type Error = SMSG_ITEM_PUSH_RESULTError;
@@ -281,22 +281,6 @@ impl MessageBody for SMSG_ITEM_PUSH_RESULT {
         })
     }
 
-}
-
-impl SMSG_ITEM_PUSH_RESULT {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // source: NewItemSource
-        + 4 // creation_type: NewItemCreationType
-        + 4 // alert_chat: NewItemChatAlert
-        + 1 // bag_slot: u8
-        + 4 // item_slot: u32
-        + 4 // item_id: u32
-        + 4 // item_suffix_factor: u32
-        + 4 // item_random_property_id: u32
-        + 4 // item_count: u32
-    }
 }
 
 #[derive(Debug)]

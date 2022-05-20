@@ -31,7 +31,7 @@ impl MessageBody for SMSG_TURN_IN_PETITION_RESULTS {
     const OPCODE: u16 = 0x01c5;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_TURN_IN_PETITION_RESULTSError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_TURN_IN_PETITION_RESULTS {
         })
     }
 
-}
-
-impl SMSG_TURN_IN_PETITION_RESULTS {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // result: PetitionTurnInResult
-    }
 }
 
 #[derive(Debug)]

@@ -34,7 +34,7 @@ impl MessageBody for MSG_MINIMAP_PING_Client {
     const OPCODE: u16 = 0x01d5;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = std::io::Error;
@@ -143,13 +143,5 @@ impl MessageBody for MSG_MINIMAP_PING_Client {
         })
     }
 
-}
-
-impl MSG_MINIMAP_PING_Client {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-    }
 }
 

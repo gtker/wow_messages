@@ -30,7 +30,7 @@ impl MessageBody for CMSG_ZONEUPDATE {
     const OPCODE: u16 = 0x01f4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for CMSG_ZONEUPDATE {
         })
     }
 
-}
-
-impl CMSG_ZONEUPDATE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // zone_id: u32
-    }
 }
 

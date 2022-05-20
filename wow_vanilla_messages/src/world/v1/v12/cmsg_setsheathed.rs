@@ -31,7 +31,7 @@ impl MessageBody for CMSG_SETSHEATHED {
     const OPCODE: u16 = 0x01e0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        1
     }
 
     type Error = CMSG_SETSHEATHEDError;
@@ -134,13 +134,6 @@ impl MessageBody for CMSG_SETSHEATHED {
         })
     }
 
-}
-
-impl CMSG_SETSHEATHED {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // sheathed: SheathState
-    }
 }
 
 #[derive(Debug)]

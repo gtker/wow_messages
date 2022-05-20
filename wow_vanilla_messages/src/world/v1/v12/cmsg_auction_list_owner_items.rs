@@ -35,7 +35,7 @@ impl MessageBody for CMSG_AUCTION_LIST_OWNER_ITEMS {
     const OPCODE: u16 = 0x0259;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for CMSG_AUCTION_LIST_OWNER_ITEMS {
         })
     }
 
-}
-
-impl CMSG_AUCTION_LIST_OWNER_ITEMS {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // auctioneer_guid: Guid
-        + 4 // list_from: u32
-    }
 }
 

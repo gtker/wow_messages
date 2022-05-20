@@ -39,7 +39,7 @@ impl MessageBody for CMSG_QUESTGIVER_CHOOSE_REWARD {
     const OPCODE: u16 = 0x018e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        16
     }
 
     type Error = std::io::Error;
@@ -166,14 +166,5 @@ impl MessageBody for CMSG_QUESTGIVER_CHOOSE_REWARD {
         })
     }
 
-}
-
-impl CMSG_QUESTGIVER_CHOOSE_REWARD {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // quest_id: u32
-        + 4 // reward: u32
-    }
 }
 

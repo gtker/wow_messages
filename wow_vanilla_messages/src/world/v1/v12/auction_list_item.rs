@@ -264,23 +264,3 @@ impl AuctionListItem {
 
 }
 
-impl AuctionListItem {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // id: u32
-        + 4 // item_entry: u32
-        + 4 // item_enchantment: u32
-        + 4 // item_random_property_id: u32
-        + 4 // item_suffix_factor: u32
-        + 4 // item_count: u32
-        + 4 // item_charges: u32
-        + 8 // item_owner: Guid
-        + 4 // start_bid: u32
-        + 4 // minimum_bid: u32
-        + 4 // buyout_amount: u32
-        + 4 // time_left_in_msecs: u32
-        + 8 // highest_bidder: Guid
-        + 4 // highest_bid: u32
-    }
-}
-

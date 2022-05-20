@@ -31,7 +31,7 @@ impl MessageBody for SMSG_ACTIVATETAXIREPLY {
     const OPCODE: u16 = 0x01ae;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_ACTIVATETAXIREPLYError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_ACTIVATETAXIREPLY {
         })
     }
 
-}
-
-impl SMSG_ACTIVATETAXIREPLY {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // reply: ActivateTaxiReply
-    }
 }
 
 #[derive(Debug)]

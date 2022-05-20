@@ -302,7 +302,7 @@ impl MSG_RAID_TARGET_UPDATE_ServerRaidTargetUpdateType {
                 raid_target,
             } => {
                 1
-                + RaidTargetUpdate::size() // raid_target: RaidTargetUpdate
+                + 9 // raid_target: RaidTargetUpdate
             }
             Self::FULL {
                 raid_targets,

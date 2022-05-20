@@ -38,7 +38,7 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
     const OPCODE: u16 = 0x0276;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        9
     }
 
     type Error = MSG_QUEST_PUSH_RESULTError;
@@ -153,14 +153,6 @@ impl MessageBody for MSG_QUEST_PUSH_RESULT {
         })
     }
 
-}
-
-impl MSG_QUEST_PUSH_RESULT {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 1 // message: QuestPartyMessage
-    }
 }
 
 #[derive(Debug)]

@@ -26,7 +26,7 @@ impl MessageBody for SMSG_GROUP_DESTROYED {
     const OPCODE: u16 = 0x007c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        0
     }
 
     type Error = std::io::Error;
@@ -117,11 +117,5 @@ impl MessageBody for SMSG_GROUP_DESTROYED {
         })
     }
 
-}
-
-impl SMSG_GROUP_DESTROYED {
-    pub(crate) fn size() -> usize {
-        0
-    }
 }
 

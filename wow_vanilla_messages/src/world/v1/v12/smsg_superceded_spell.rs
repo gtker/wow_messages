@@ -34,7 +34,7 @@ impl MessageBody for SMSG_SUPERCEDED_SPELL {
     const OPCODE: u16 = 0x012c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -149,13 +149,5 @@ impl MessageBody for SMSG_SUPERCEDED_SPELL {
         })
     }
 
-}
-
-impl SMSG_SUPERCEDED_SPELL {
-    pub(crate) fn size() -> usize {
-        0
-        + 2 // new_spell_id: u16
-        + 2 // old_spell_id: u16
-    }
 }
 

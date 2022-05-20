@@ -38,7 +38,7 @@ impl MessageBody for CMSG_SET_TRADE_ITEM {
     const OPCODE: u16 = 0x011d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        3
     }
 
     type Error = std::io::Error;
@@ -165,14 +165,5 @@ impl MessageBody for CMSG_SET_TRADE_ITEM {
         })
     }
 
-}
-
-impl CMSG_SET_TRADE_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // trade_slot: u8
-        + 1 // bag: u8
-        + 1 // slot: u8
-    }
 }
 

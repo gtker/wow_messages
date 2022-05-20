@@ -78,12 +78,3 @@ impl Vector3d {
 
 }
 
-impl Vector3d {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // x: f32
-        + 4 // y: f32
-        + 4 // z: f32
-    }
-}
-

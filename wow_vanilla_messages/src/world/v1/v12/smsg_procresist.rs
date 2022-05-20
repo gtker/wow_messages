@@ -44,7 +44,7 @@ impl MessageBody for SMSG_PROCRESIST {
     const OPCODE: u16 = 0x0260;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        21
     }
 
     type Error = SMSG_PROCRESISTError;
@@ -183,16 +183,6 @@ impl MessageBody for SMSG_PROCRESIST {
         })
     }
 
-}
-
-impl SMSG_PROCRESIST {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 8 // target_guid: Guid
-        + 4 // id: u32
-        + 1 // log_format: LogFormat
-    }
 }
 
 #[derive(Debug)]

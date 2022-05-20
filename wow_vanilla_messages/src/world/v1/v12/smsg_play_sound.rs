@@ -30,7 +30,7 @@ impl MessageBody for SMSG_PLAY_SOUND {
     const OPCODE: u16 = 0x02d2;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for SMSG_PLAY_SOUND {
         })
     }
 
-}
-
-impl SMSG_PLAY_SOUND {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // sound_id: u32
-    }
 }
 

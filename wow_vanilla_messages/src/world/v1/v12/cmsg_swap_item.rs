@@ -42,7 +42,7 @@ impl MessageBody for CMSG_SWAP_ITEM {
     const OPCODE: u16 = 0x010c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -181,15 +181,5 @@ impl MessageBody for CMSG_SWAP_ITEM {
         })
     }
 
-}
-
-impl CMSG_SWAP_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // destination_bag: u8
-        + 1 // destionation_slot: u8
-        + 1 // source_bag: u8
-        + 1 // source_slot: u8
-    }
 }
 

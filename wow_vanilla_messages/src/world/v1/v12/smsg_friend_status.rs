@@ -36,7 +36,7 @@ impl MessageBody for SMSG_FRIEND_STATUS {
     const OPCODE: u16 = 0x0068;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        9
     }
 
     type Error = SMSG_FRIEND_STATUSError;
@@ -151,14 +151,6 @@ impl MessageBody for SMSG_FRIEND_STATUS {
         })
     }
 
-}
-
-impl SMSG_FRIEND_STATUS {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // result: FriendResult
-        + 8 // guid: Guid
-    }
 }
 
 #[derive(Debug)]

@@ -35,7 +35,7 @@ impl MessageBody for SMSG_PET_UNLEARN_CONFIRM {
     const OPCODE: u16 = 0x02f1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for SMSG_PET_UNLEARN_CONFIRM {
         })
     }
 
-}
-
-impl SMSG_PET_UNLEARN_CONFIRM {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // pet_guid: Guid
-        + 4 // talent_reset_cost: u32
-    }
 }
 

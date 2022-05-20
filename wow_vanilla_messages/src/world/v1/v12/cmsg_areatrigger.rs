@@ -30,7 +30,7 @@ impl MessageBody for CMSG_AREATRIGGER {
     const OPCODE: u16 = 0x00b4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for CMSG_AREATRIGGER {
         })
     }
 
-}
-
-impl CMSG_AREATRIGGER {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // trigger_id: u32
-    }
 }
 

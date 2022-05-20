@@ -41,7 +41,7 @@ impl MessageBody for MSG_MOVE_TELEPORT_ACK {
     const OPCODE: u16 = 0x00c7;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        16
     }
 
     type Error = std::io::Error;
@@ -168,14 +168,5 @@ impl MessageBody for MSG_MOVE_TELEPORT_ACK {
         })
     }
 
-}
-
-impl MSG_MOVE_TELEPORT_ACK {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // movement_counter: u32
-        + 4 // time_in_msecs: u32
-    }
 }
 

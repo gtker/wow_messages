@@ -315,13 +315,6 @@ impl IfEdgeCases {
 
 }
 
-impl IfEdgeCases {
-    pub(crate) fn size() -> usize {
-        0
-        + 2 // t: IfEdgeCasesTEnum
-    }
-}
-
 #[derive(Debug)]
 pub enum IfEdgeCasesError {
     Io(std::io::Error),

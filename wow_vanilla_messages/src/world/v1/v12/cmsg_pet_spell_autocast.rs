@@ -39,7 +39,7 @@ impl MessageBody for CMSG_PET_SPELL_AUTOCAST {
     const OPCODE: u16 = 0x02f3;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        13
     }
 
     type Error = std::io::Error;
@@ -166,14 +166,5 @@ impl MessageBody for CMSG_PET_SPELL_AUTOCAST {
         })
     }
 
-}
-
-impl CMSG_PET_SPELL_AUTOCAST {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // id: u32
-        + 1 // enabled: u8
-    }
 }
 

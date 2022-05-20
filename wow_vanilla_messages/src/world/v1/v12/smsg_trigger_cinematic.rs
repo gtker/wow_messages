@@ -31,7 +31,7 @@ impl MessageBody for SMSG_TRIGGER_CINEMATIC {
     const OPCODE: u16 = 0x00fa;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_TRIGGER_CINEMATICError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_TRIGGER_CINEMATIC {
         })
     }
 
-}
-
-impl SMSG_TRIGGER_CINEMATIC {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // cinematic_sequence_id: CinematicSequenceId
-    }
 }
 
 #[derive(Debug)]

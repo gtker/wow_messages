@@ -35,7 +35,7 @@ impl MessageBody for CMSG_CREATURE_QUERY {
     const OPCODE: u16 = 0x0060;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for CMSG_CREATURE_QUERY {
         })
     }
 
-}
-
-impl CMSG_CREATURE_QUERY {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // creature: u32
-        + 8 // guid: Guid
-    }
 }
 

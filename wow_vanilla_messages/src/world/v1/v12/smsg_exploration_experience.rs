@@ -35,7 +35,7 @@ impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
     const OPCODE: u16 = 0x01f8;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = SMSG_EXPLORATION_EXPERIENCEError;
@@ -150,14 +150,6 @@ impl MessageBody for SMSG_EXPLORATION_EXPERIENCE {
         })
     }
 
-}
-
-impl SMSG_EXPLORATION_EXPERIENCE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // area: Area
-        + 4 // experience: u32
-    }
 }
 
 #[derive(Debug)]

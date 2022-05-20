@@ -31,7 +31,7 @@ impl MessageBody for SMSG_PET_TAME_FAILURE {
     const OPCODE: u16 = 0x0173;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        1
     }
 
     type Error = SMSG_PET_TAME_FAILUREError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_PET_TAME_FAILURE {
         })
     }
 
-}
-
-impl SMSG_PET_TAME_FAILURE {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // reason: PetTameFailureReason
-    }
 }
 
 #[derive(Debug)]

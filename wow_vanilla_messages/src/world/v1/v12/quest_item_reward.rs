@@ -71,11 +71,3 @@ impl QuestItemReward {
 
 }
 
-impl QuestItemReward {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // item: u32
-        + 4 // item_count: u32
-    }
-}
-

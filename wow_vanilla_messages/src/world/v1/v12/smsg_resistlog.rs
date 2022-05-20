@@ -55,7 +55,7 @@ impl MessageBody for SMSG_RESISTLOG {
     const OPCODE: u16 = 0x01d6;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        36
     }
 
     type Error = std::io::Error;
@@ -224,18 +224,5 @@ impl MessageBody for SMSG_RESISTLOG {
         })
     }
 
-}
-
-impl SMSG_RESISTLOG {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid1: Guid
-        + 8 // guid2: Guid
-        + 4 // unknown1: u32
-        + 4 // unknown2: f32
-        + 4 // unknown3: f32
-        + 4 // unknown4: u32
-        + 4 // unknown5: u32
-    }
 }
 

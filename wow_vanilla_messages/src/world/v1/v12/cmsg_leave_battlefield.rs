@@ -38,7 +38,7 @@ impl MessageBody for CMSG_LEAVE_BATTLEFIELD {
     const OPCODE: u16 = 0x02e1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -165,14 +165,5 @@ impl MessageBody for CMSG_LEAVE_BATTLEFIELD {
         })
     }
 
-}
-
-impl CMSG_LEAVE_BATTLEFIELD {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // unknown1: u8
-        + 1 // battle_ground_type_id: u8
-        + 2 // unknown2: u16
-    }
 }
 

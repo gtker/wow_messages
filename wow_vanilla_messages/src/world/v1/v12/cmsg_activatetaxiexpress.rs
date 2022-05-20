@@ -39,7 +39,7 @@ impl MessageBody for CMSG_ACTIVATETAXIEXPRESS {
     const OPCODE: u16 = 0x0312;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        16
     }
 
     type Error = std::io::Error;
@@ -166,14 +166,5 @@ impl MessageBody for CMSG_ACTIVATETAXIEXPRESS {
         })
     }
 
-}
-
-impl CMSG_ACTIVATETAXIEXPRESS {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // total_cost: u32
-        + 4 // node_count: u32
-    }
 }
 

@@ -71,11 +71,3 @@ impl QuestDetailsEmote {
 
 }
 
-impl QuestDetailsEmote {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // emote: u32
-        + 4 // emote_delay_in_msecs: u32
-    }
-}
-

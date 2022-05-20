@@ -72,14 +72,6 @@ impl CharacterGear {
 
 }
 
-impl CharacterGear {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // equipment_display_id: u32
-        + 1 // inventory_type: InventoryType
-    }
-}
-
 #[derive(Debug)]
 pub enum CharacterGearError {
     Io(std::io::Error),

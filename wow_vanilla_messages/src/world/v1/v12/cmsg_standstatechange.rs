@@ -31,7 +31,7 @@ impl MessageBody for CMSG_STANDSTATECHANGE {
     const OPCODE: u16 = 0x0101;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        1
     }
 
     type Error = CMSG_STANDSTATECHANGEError;
@@ -134,13 +134,6 @@ impl MessageBody for CMSG_STANDSTATECHANGE {
         })
     }
 
-}
-
-impl CMSG_STANDSTATECHANGE {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // animation_state: UnitStandState
-    }
 }
 
 #[derive(Debug)]

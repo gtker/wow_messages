@@ -34,7 +34,7 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_ITEM {
     const OPCODE: u16 = 0x019a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = std::io::Error;
@@ -149,13 +149,5 @@ impl MessageBody for SMSG_QUESTUPDATE_ADD_ITEM {
         })
     }
 
-}
-
-impl SMSG_QUESTUPDATE_ADD_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // required_item_id: u32
-        + 4 // items_required: u32
-    }
 }
 

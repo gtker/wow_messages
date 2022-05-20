@@ -36,7 +36,7 @@ impl MessageBody for CMSG_BUYBACK_ITEM {
     const OPCODE: u16 = 0x0290;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = CMSG_BUYBACK_ITEMError;
@@ -151,14 +151,6 @@ impl MessageBody for CMSG_BUYBACK_ITEM {
         })
     }
 
-}
-
-impl CMSG_BUYBACK_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // slot: BuybackSlot
-    }
 }
 
 #[derive(Debug)]

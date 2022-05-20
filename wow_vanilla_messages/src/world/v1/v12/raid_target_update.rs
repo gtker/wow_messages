@@ -73,14 +73,6 @@ impl RaidTargetUpdate {
 
 }
 
-impl RaidTargetUpdate {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // index: RaidTargetIndex
-        + 8 // guid: Guid
-    }
-}
-
 #[derive(Debug)]
 pub enum RaidTargetUpdateError {
     Io(std::io::Error),

@@ -36,7 +36,7 @@ impl MessageBody for SMSG_AI_REACTION {
     const OPCODE: u16 = 0x013c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = SMSG_AI_REACTIONError;
@@ -151,14 +151,6 @@ impl MessageBody for SMSG_AI_REACTION {
         })
     }
 
-}
-
-impl SMSG_AI_REACTION {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // reaction: AiReaction
-    }
 }
 
 #[derive(Debug)]

@@ -31,7 +31,7 @@ impl MessageBody for SMSG_MEETINGSTONE_JOINFAILED {
     const OPCODE: u16 = 0x02bb;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        1
     }
 
     type Error = SMSG_MEETINGSTONE_JOINFAILEDError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_MEETINGSTONE_JOINFAILED {
         })
     }
 
-}
-
-impl SMSG_MEETINGSTONE_JOINFAILED {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // reason: MeetingStoneFailure
-    }
 }
 
 #[derive(Debug)]

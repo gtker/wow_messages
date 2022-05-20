@@ -40,7 +40,7 @@ impl MessageBody for CMSG_TEXT_EMOTE {
     const OPCODE: u16 = 0x0104;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        16
     }
 
     type Error = CMSG_TEXT_EMOTEError;
@@ -167,15 +167,6 @@ impl MessageBody for CMSG_TEXT_EMOTE {
         })
     }
 
-}
-
-impl CMSG_TEXT_EMOTE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // text_emote: u32
-        + 4 // emote: Emote
-        + 8 // guid: Guid
-    }
 }
 
 #[derive(Debug)]

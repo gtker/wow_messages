@@ -71,11 +71,3 @@ impl InitialSpell {
 
 }
 
-impl InitialSpell {
-    pub(crate) fn size() -> usize {
-        0
-        + 2 // spell_id: u16
-        + 2 // unknown1: u16
-    }
-}
-

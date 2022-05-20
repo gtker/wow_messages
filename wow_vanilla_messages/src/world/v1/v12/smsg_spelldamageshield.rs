@@ -44,7 +44,7 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
     const OPCODE: u16 = 0x024f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        21
     }
 
     type Error = SMSG_SPELLDAMAGESHIELDError;
@@ -183,16 +183,6 @@ impl MessageBody for SMSG_SPELLDAMAGESHIELD {
         })
     }
 
-}
-
-impl SMSG_SPELLDAMAGESHIELD {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // victim_guid: Guid
-        + 8 // caster_guid: Guid
-        + 4 // damage: u32
-        + 1 // school: SpellSchool
-    }
 }
 
 #[derive(Debug)]

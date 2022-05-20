@@ -35,7 +35,7 @@ impl MessageBody for CMSG_ITEM_QUERY_SINGLE {
     const OPCODE: u16 = 0x0056;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for CMSG_ITEM_QUERY_SINGLE {
         })
     }
 
-}
-
-impl CMSG_ITEM_QUERY_SINGLE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // item: u32
-        + 8 // guid: Guid
-    }
 }
 

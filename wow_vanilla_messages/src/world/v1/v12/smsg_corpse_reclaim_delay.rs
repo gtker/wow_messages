@@ -30,7 +30,7 @@ impl MessageBody for SMSG_CORPSE_RECLAIM_DELAY {
     const OPCODE: u16 = 0x0269;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for SMSG_CORPSE_RECLAIM_DELAY {
         })
     }
 
-}
-
-impl SMSG_CORPSE_RECLAIM_DELAY {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // delay_in_seconds: u32
-    }
 }
 

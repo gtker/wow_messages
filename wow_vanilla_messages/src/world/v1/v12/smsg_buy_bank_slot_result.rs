@@ -31,7 +31,7 @@ impl MessageBody for SMSG_BUY_BANK_SLOT_RESULT {
     const OPCODE: u16 = 0x01ba;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_BUY_BANK_SLOT_RESULTError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_BUY_BANK_SLOT_RESULT {
         })
     }
 
-}
-
-impl SMSG_BUY_BANK_SLOT_RESULT {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // result: BuyBankSlotResult
-    }
 }
 
 #[derive(Debug)]

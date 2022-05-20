@@ -26,7 +26,7 @@ impl MessageBody for CMSG_PLAYER_LOGOUT {
     const OPCODE: u16 = 0x004a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        0
     }
 
     type Error = std::io::Error;
@@ -117,12 +117,6 @@ impl MessageBody for CMSG_PLAYER_LOGOUT {
         })
     }
 
-}
-
-impl CMSG_PLAYER_LOGOUT {
-    pub(crate) fn size() -> usize {
-        0
-    }
 }
 
 #[cfg(test)]

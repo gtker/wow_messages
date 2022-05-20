@@ -103,13 +103,3 @@ impl Version {
 
 }
 
-impl Version {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // major: u8
-        + 1 // minor: u8
-        + 1 // patch: u8
-        + 2 // build: u16
-    }
-}
-

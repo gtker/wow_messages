@@ -115,12 +115,6 @@ impl ReadableAndWritable for CMD_XFER_CANCEL {
 
 }
 
-impl CMD_XFER_CANCEL {
-    pub(crate) fn size() -> usize {
-        0
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::CMD_XFER_CANCEL;

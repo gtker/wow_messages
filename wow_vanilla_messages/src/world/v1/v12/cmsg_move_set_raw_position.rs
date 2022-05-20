@@ -42,7 +42,7 @@ impl MessageBody for CMSG_MOVE_SET_RAW_POSITION {
     const OPCODE: u16 = 0x00e1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        16
     }
 
     type Error = std::io::Error;
@@ -169,15 +169,5 @@ impl MessageBody for CMSG_MOVE_SET_RAW_POSITION {
         })
     }
 
-}
-
-impl CMSG_MOVE_SET_RAW_POSITION {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
-        + 4 // orientation: f32
-    }
 }
 

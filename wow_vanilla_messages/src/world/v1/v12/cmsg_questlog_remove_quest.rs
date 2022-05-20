@@ -30,7 +30,7 @@ impl MessageBody for CMSG_QUESTLOG_REMOVE_QUEST {
     const OPCODE: u16 = 0x0194;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        1
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for CMSG_QUESTLOG_REMOVE_QUEST {
         })
     }
 
-}
-
-impl CMSG_QUESTLOG_REMOVE_QUEST {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // slot: u8
-    }
 }
 

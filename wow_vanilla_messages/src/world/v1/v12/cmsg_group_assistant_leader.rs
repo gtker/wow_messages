@@ -35,7 +35,7 @@ impl MessageBody for CMSG_GROUP_ASSISTANT_LEADER {
     const OPCODE: u16 = 0x028f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        9
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for CMSG_GROUP_ASSISTANT_LEADER {
         })
     }
 
-}
-
-impl CMSG_GROUP_ASSISTANT_LEADER {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 1 // set_assistant: u8
-    }
 }
 

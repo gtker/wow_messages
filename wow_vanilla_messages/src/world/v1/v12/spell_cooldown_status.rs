@@ -71,11 +71,3 @@ impl SpellCooldownStatus {
 
 }
 
-impl SpellCooldownStatus {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // id: u32
-        + 4 // cooldown_time_in_msecs: u32
-    }
-}
-

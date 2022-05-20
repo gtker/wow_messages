@@ -47,7 +47,7 @@ impl MessageBody for SMSG_LOOT_ALL_PASSED {
     const OPCODE: u16 = 0x029e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        24
     }
 
     type Error = std::io::Error;
@@ -198,16 +198,5 @@ impl MessageBody for SMSG_LOOT_ALL_PASSED {
         })
     }
 
-}
-
-impl SMSG_LOOT_ALL_PASSED {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // looted_target_guid: Guid
-        + 4 // loot_slot: u32
-        + 4 // item_id: u32
-        + 4 // item_random_property_id: u32
-        + 4 // item_random_suffix_id: u32
-    }
 }
 

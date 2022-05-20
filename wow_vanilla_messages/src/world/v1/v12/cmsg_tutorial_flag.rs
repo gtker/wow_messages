@@ -30,7 +30,7 @@ impl MessageBody for CMSG_TUTORIAL_FLAG {
     const OPCODE: u16 = 0x00fe;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for CMSG_TUTORIAL_FLAG {
         })
     }
 
-}
-
-impl CMSG_TUTORIAL_FLAG {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // tutorial_flag: u32
-    }
 }
 

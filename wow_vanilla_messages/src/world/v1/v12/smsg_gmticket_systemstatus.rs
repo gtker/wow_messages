@@ -30,7 +30,7 @@ impl MessageBody for SMSG_GMTICKET_SYSTEMSTATUS {
     const OPCODE: u16 = 0x021b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for SMSG_GMTICKET_SYSTEMSTATUS {
         })
     }
 
-}
-
-impl SMSG_GMTICKET_SYSTEMSTATUS {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // will_accept_tickets: u32
-    }
 }
 

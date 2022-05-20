@@ -36,7 +36,7 @@ impl MessageBody for SMSG_PET_ACTION_SOUND {
     const OPCODE: u16 = 0x0324;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = SMSG_PET_ACTION_SOUNDError;
@@ -151,14 +151,6 @@ impl MessageBody for SMSG_PET_ACTION_SOUND {
         })
     }
 
-}
-
-impl SMSG_PET_ACTION_SOUND {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // reason: PetTalkReason
-    }
 }
 
 #[derive(Debug)]

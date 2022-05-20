@@ -51,7 +51,7 @@ impl MessageBody for CMSG_WORLD_TELEPORT {
     const OPCODE: u16 = 0x0008;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        28
     }
 
     type Error = CMSG_WORLD_TELEPORTError;
@@ -202,18 +202,6 @@ impl MessageBody for CMSG_WORLD_TELEPORT {
         })
     }
 
-}
-
-impl CMSG_WORLD_TELEPORT {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // time_in_msec: u64
-        + 4 // map: Map
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
-        + 4 // orientation: f32
-    }
 }
 
 #[derive(Debug)]

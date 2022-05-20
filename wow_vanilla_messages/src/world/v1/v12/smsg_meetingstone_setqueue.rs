@@ -36,7 +36,7 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
     const OPCODE: u16 = 0x0295;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        5
     }
 
     type Error = SMSG_MEETINGSTONE_SETQUEUEError;
@@ -151,14 +151,6 @@ impl MessageBody for SMSG_MEETINGSTONE_SETQUEUE {
         })
     }
 
-}
-
-impl SMSG_MEETINGSTONE_SETQUEUE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // area: Area
-        + 1 // status: MeetingStoneStatus
-    }
 }
 
 #[derive(Debug)]

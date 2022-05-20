@@ -198,16 +198,6 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Client {
 
 }
 
-impl CMD_AUTH_RECONNECT_PROOF_Client {
-    pub(crate) fn size() -> usize {
-        0
-        + 16 // proof_data: u8[16]
-        + 20 // client_proof: u8[20]
-        + 20 // client_checksum: u8[20]
-        + 1 // key_count: u8
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::CMD_AUTH_RECONNECT_PROOF_Client;

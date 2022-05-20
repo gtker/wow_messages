@@ -35,7 +35,7 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
     const OPCODE: u16 = 0x0286;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = SMSG_RAID_GROUP_ONLYError;
@@ -150,14 +150,6 @@ impl MessageBody for SMSG_RAID_GROUP_ONLY {
         })
     }
 
-}
-
-impl SMSG_RAID_GROUP_ONLY {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // homebind_timer: u32
-        + 4 // error: RaidGroupError
-    }
 }
 
 #[derive(Debug)]

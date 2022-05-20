@@ -31,7 +31,7 @@ impl MessageBody for SMSG_SHOW_BANK {
     const OPCODE: u16 = 0x01b8;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = std::io::Error;
@@ -134,12 +134,5 @@ impl MessageBody for SMSG_SHOW_BANK {
         })
     }
 
-}
-
-impl SMSG_SHOW_BANK {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-    }
 }
 

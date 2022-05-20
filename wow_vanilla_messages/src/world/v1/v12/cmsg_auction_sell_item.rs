@@ -51,7 +51,7 @@ impl MessageBody for CMSG_AUCTION_SELL_ITEM {
     const OPCODE: u16 = 0x0256;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        32
     }
 
     type Error = std::io::Error;
@@ -214,17 +214,5 @@ impl MessageBody for CMSG_AUCTION_SELL_ITEM {
         })
     }
 
-}
-
-impl CMSG_AUCTION_SELL_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // auctioneer_guid: Guid
-        + 8 // object_guid: Guid
-        + 4 // stack_size: u32
-        + 4 // starting_bid: u32
-        + 4 // buyout: u32
-        + 4 // auction_duration_in_minutes: u32
-    }
 }
 

@@ -301,7 +301,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         + 1 // protocol_version: u8
         + 2 // size: u16
         + 4 // game_name: u32
-        + Version::size() // version: Version
+        + 5 // version: Version
         + 4 // platform: Platform
         + 4 // os: Os
         + 4 // locale: Locale

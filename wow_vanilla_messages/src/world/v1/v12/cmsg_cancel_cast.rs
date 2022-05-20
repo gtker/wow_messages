@@ -30,7 +30,7 @@ impl MessageBody for CMSG_CANCEL_CAST {
     const OPCODE: u16 = 0x012f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for CMSG_CANCEL_CAST {
         })
     }
 
-}
-
-impl CMSG_CANCEL_CAST {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // id: u32
-    }
 }
 

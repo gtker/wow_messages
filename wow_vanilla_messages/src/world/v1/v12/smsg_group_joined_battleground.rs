@@ -31,7 +31,7 @@ impl MessageBody for SMSG_GROUP_JOINED_BATTLEGROUND {
     const OPCODE: u16 = 0x02e8;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_GROUP_JOINED_BATTLEGROUNDError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_GROUP_JOINED_BATTLEGROUND {
         })
     }
 
-}
-
-impl SMSG_GROUP_JOINED_BATTLEGROUND {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // id: BgTypeId
-    }
 }
 
 #[derive(Debug)]

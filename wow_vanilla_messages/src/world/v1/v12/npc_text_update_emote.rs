@@ -71,11 +71,3 @@ impl NpcTextUpdateEmote {
 
 }
 
-impl NpcTextUpdateEmote {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // delay: u32
-        + 4 // emote: u32
-    }
-}
-

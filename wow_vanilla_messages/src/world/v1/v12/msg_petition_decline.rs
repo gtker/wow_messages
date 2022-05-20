@@ -33,7 +33,7 @@ impl MessageBody for MSG_PETITION_DECLINE {
     const OPCODE: u16 = 0x01c2;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = std::io::Error;
@@ -136,12 +136,5 @@ impl MessageBody for MSG_PETITION_DECLINE {
         })
     }
 
-}
-
-impl MSG_PETITION_DECLINE {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // petition: Guid
-    }
 }
 

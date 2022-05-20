@@ -31,7 +31,7 @@ impl MessageBody for SMSG_PET_ACTION_FEEDBACK {
     const OPCODE: u16 = 0x02c6;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        1
     }
 
     type Error = SMSG_PET_ACTION_FEEDBACKError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_PET_ACTION_FEEDBACK {
         })
     }
 
-}
-
-impl SMSG_PET_ACTION_FEEDBACK {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // feedback: PetFeedback
-    }
 }
 
 #[derive(Debug)]

@@ -30,7 +30,7 @@ impl MessageBody for CMSG_PUSHQUESTTOPARTY {
     const OPCODE: u16 = 0x019d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for CMSG_PUSHQUESTTOPARTY {
         })
     }
 
-}
-
-impl CMSG_PUSHQUESTTOPARTY {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // quest_id: u32
-    }
 }
 

@@ -35,7 +35,7 @@ impl MessageBody for CMSG_QUESTGIVER_QUERY_QUEST {
     const OPCODE: u16 = 0x0186;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for CMSG_QUESTGIVER_QUERY_QUEST {
         })
     }
 
-}
-
-impl CMSG_QUESTGIVER_QUERY_QUEST {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // quest_id: u32
-    }
 }
 

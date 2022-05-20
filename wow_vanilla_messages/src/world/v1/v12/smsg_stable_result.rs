@@ -31,7 +31,7 @@ impl MessageBody for SMSG_STABLE_RESULT {
     const OPCODE: u16 = 0x0273;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        1
     }
 
     type Error = SMSG_STABLE_RESULTError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_STABLE_RESULT {
         })
     }
 
-}
-
-impl SMSG_STABLE_RESULT {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // result: StableResult
-    }
 }
 
 #[derive(Debug)]

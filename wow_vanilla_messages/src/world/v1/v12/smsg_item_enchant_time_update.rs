@@ -43,7 +43,7 @@ impl MessageBody for SMSG_ITEM_ENCHANT_TIME_UPDATE {
     const OPCODE: u16 = 0x01eb;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        24
     }
 
     type Error = std::io::Error;
@@ -182,15 +182,5 @@ impl MessageBody for SMSG_ITEM_ENCHANT_TIME_UPDATE {
         })
     }
 
-}
-
-impl SMSG_ITEM_ENCHANT_TIME_UPDATE {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // item_guid: Guid
-        + 4 // slot: u32
-        + 4 // duration: u32
-        + 8 // player_guid: Guid
-    }
 }
 

@@ -71,11 +71,3 @@ impl ForcedReaction {
 
 }
 
-impl ForcedReaction {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // faction_id: u32
-        + 4 // reputation_rank: u32
-    }
-}
-

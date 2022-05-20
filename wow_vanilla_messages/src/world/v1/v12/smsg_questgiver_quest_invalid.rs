@@ -31,7 +31,7 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_INVALID {
     const OPCODE: u16 = 0x018f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_QUESTGIVER_QUEST_INVALIDError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_QUESTGIVER_QUEST_INVALID {
         })
     }
 
-}
-
-impl SMSG_QUESTGIVER_QUEST_INVALID {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // msg: QuestFailedReason
-    }
 }
 
 #[derive(Debug)]

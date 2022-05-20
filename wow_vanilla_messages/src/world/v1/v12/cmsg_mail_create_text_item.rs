@@ -39,7 +39,7 @@ impl MessageBody for CMSG_MAIL_CREATE_TEXT_ITEM {
     const OPCODE: u16 = 0x024a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        16
     }
 
     type Error = std::io::Error;
@@ -166,14 +166,5 @@ impl MessageBody for CMSG_MAIL_CREATE_TEXT_ITEM {
         })
     }
 
-}
-
-impl CMSG_MAIL_CREATE_TEXT_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // mailbox_guid: Guid
-        + 4 // mail_id: u32
-        + 4 // mail_template_id: u32
-    }
 }
 

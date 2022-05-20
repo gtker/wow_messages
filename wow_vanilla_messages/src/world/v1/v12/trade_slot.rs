@@ -264,23 +264,3 @@ impl TradeSlot {
 
 }
 
-impl TradeSlot {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // trade_slot_number: u8
-        + 4 // item_id: u32
-        + 4 // display_id: u32
-        + 4 // stack_count: u32
-        + 4 // is_wrapped: u32
-        + 8 // gift_wrapper: Guid
-        + 4 // enchantment: u32
-        + 8 // item_creator: Guid
-        + 4 // spell_charges: u32
-        + 4 // item_suffix_factor: u32
-        + 4 // item_random_properties_id: u32
-        + 4 // lock_id: u32
-        + 4 // max_durability: u32
-        + 4 // durability: u32
-    }
-}
-

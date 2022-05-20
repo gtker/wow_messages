@@ -53,7 +53,7 @@ impl MessageBody for SMSG_TRADE_STATUS_EXTENDED {
     const OPCODE: u16 = 0x0121;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        444
     }
 
     type Error = std::io::Error;
@@ -225,17 +225,5 @@ impl MessageBody for SMSG_TRADE_STATUS_EXTENDED {
         })
     }
 
-}
-
-impl SMSG_TRADE_STATUS_EXTENDED {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // self_player: u8
-        + 4 // trade_slot_count1: u32
-        + 4 // trade_slot_count2: u32
-        + 4 // money_in_trade: u32
-        + 4 // spell_on_lowest_slot: u32
-        + 427 // trade_slots: TradeSlot[7]
-    }
 }
 

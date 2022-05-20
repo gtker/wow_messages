@@ -34,7 +34,7 @@ impl MessageBody for CMSG_SET_FACTION_ATWAR {
     const OPCODE: u16 = 0x0125;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        5
     }
 
     type Error = std::io::Error;
@@ -149,13 +149,5 @@ impl MessageBody for CMSG_SET_FACTION_ATWAR {
         })
     }
 
-}
-
-impl CMSG_SET_FACTION_ATWAR {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // reputation_list_id: u32
-        + 1 // flags: u8
-    }
 }
 

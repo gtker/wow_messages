@@ -31,7 +31,7 @@ impl MessageBody for CMSG_FAR_SIGHT {
     const OPCODE: u16 = 0x027a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        1
     }
 
     type Error = CMSG_FAR_SIGHTError;
@@ -134,13 +134,6 @@ impl MessageBody for CMSG_FAR_SIGHT {
         })
     }
 
-}
-
-impl CMSG_FAR_SIGHT {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // operation: FarSightOperation
-    }
 }
 
 #[derive(Debug)]

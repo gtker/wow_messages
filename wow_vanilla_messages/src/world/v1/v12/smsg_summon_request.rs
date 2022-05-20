@@ -39,7 +39,7 @@ impl MessageBody for SMSG_SUMMON_REQUEST {
     const OPCODE: u16 = 0x02ab;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        16
     }
 
     type Error = std::io::Error;
@@ -166,14 +166,5 @@ impl MessageBody for SMSG_SUMMON_REQUEST {
         })
     }
 
-}
-
-impl SMSG_SUMMON_REQUEST {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // summoner_guid: Guid
-        + 4 // zone_id: u32
-        + 4 // auto_decline_time_in_msecs: u32
-    }
 }
 

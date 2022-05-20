@@ -34,7 +34,7 @@ impl MessageBody for CMSG_AUTOSTORE_BANK_ITEM {
     const OPCODE: u16 = 0x0282;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        2
     }
 
     type Error = std::io::Error;
@@ -149,13 +149,5 @@ impl MessageBody for CMSG_AUTOSTORE_BANK_ITEM {
         })
     }
 
-}
-
-impl CMSG_AUTOSTORE_BANK_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // bag_index: u8
-        + 1 // slot_index: u8
-    }
 }
 

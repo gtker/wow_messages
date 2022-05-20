@@ -46,7 +46,7 @@ impl MessageBody for CMSG_SPLIT_ITEM {
     const OPCODE: u16 = 0x010e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        5
     }
 
     type Error = std::io::Error;
@@ -197,16 +197,5 @@ impl MessageBody for CMSG_SPLIT_ITEM {
         })
     }
 
-}
-
-impl CMSG_SPLIT_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // source_bag: u8
-        + 1 // source_slot: u8
-        + 1 // destination_bag: u8
-        + 1 // destination_slot: u8
-        + 1 // amount: u8
-    }
 }
 

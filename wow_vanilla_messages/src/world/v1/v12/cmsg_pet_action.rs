@@ -39,7 +39,7 @@ impl MessageBody for CMSG_PET_ACTION {
     const OPCODE: u16 = 0x0175;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        20
     }
 
     type Error = std::io::Error;
@@ -166,14 +166,5 @@ impl MessageBody for CMSG_PET_ACTION {
         })
     }
 
-}
-
-impl CMSG_PET_ACTION {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // pet_guid: Guid
-        + 4 // data: u32
-        + 8 // target_guid: Guid
-    }
 }
 

@@ -71,11 +71,3 @@ impl WorldState {
 
 }
 
-impl WorldState {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // state: u32
-        + 4 // value: u32
-    }
-}
-

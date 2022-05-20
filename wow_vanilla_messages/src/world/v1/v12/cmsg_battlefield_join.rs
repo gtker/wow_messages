@@ -31,7 +31,7 @@ impl MessageBody for CMSG_BATTLEFIELD_JOIN {
     const OPCODE: u16 = 0x023e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = CMSG_BATTLEFIELD_JOINError;
@@ -134,13 +134,6 @@ impl MessageBody for CMSG_BATTLEFIELD_JOIN {
         })
     }
 
-}
-
-impl CMSG_BATTLEFIELD_JOIN {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // map: Map
-    }
 }
 
 #[derive(Debug)]

@@ -30,7 +30,7 @@ impl MessageBody for SMSG_SET_FACTION_VISIBLE {
     const OPCODE: u16 = 0x0123;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for SMSG_SET_FACTION_VISIBLE {
         })
     }
 
-}
-
-impl SMSG_SET_FACTION_VISIBLE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // reputation_list_id: u32
-    }
 }
 

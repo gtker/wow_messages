@@ -26,7 +26,7 @@ impl MessageBody for CMSG_RESET_INSTANCES {
     const OPCODE: u16 = 0x031d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        0
     }
 
     type Error = std::io::Error;
@@ -117,11 +117,5 @@ impl MessageBody for CMSG_RESET_INSTANCES {
         })
     }
 
-}
-
-impl CMSG_RESET_INSTANCES {
-    pub(crate) fn size() -> usize {
-        0
-    }
 }
 

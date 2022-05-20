@@ -113,13 +113,3 @@ impl TelemetryKey {
 
 }
 
-impl TelemetryKey {
-    pub(crate) fn size() -> usize {
-        0
-        + 2 // unknown1: u16
-        + 4 // unknown2: u32
-        + 4 // unknown3: u8[4]
-        + 20 // unknown4: u8[20]
-    }
-}
-

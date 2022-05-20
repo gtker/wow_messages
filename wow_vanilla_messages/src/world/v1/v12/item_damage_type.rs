@@ -87,12 +87,3 @@ impl ItemDamageType {
 
 }
 
-impl ItemDamageType {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // damage_minimum: u32
-        + 4 // damage_maximum: u32
-        + 4 // damage_type: u32
-    }
-}
-

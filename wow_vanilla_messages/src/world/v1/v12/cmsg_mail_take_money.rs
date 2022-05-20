@@ -35,7 +35,7 @@ impl MessageBody for CMSG_MAIL_TAKE_MONEY {
     const OPCODE: u16 = 0x0245;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for CMSG_MAIL_TAKE_MONEY {
         })
     }
 
-}
-
-impl CMSG_MAIL_TAKE_MONEY {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // mailbox_guid: Guid
-        + 4 // mail_id: u32
-    }
 }
 

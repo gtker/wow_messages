@@ -135,15 +135,3 @@ impl ItemSpells {
 
 }
 
-impl ItemSpells {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // spell: u32
-        + 4 // spell_trigger: u32
-        + 4 // spell_charges: u32
-        + 4 // spell_cooldown: u32
-        + 4 // spell_category: u32
-        + 4 // spell_category_cooldown: u32
-    }
-}
-

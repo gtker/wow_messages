@@ -30,7 +30,7 @@ impl MessageBody for SMSG_DUEL_COUNTDOWN {
     const OPCODE: u16 = 0x02b7;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for SMSG_DUEL_COUNTDOWN {
         })
     }
 
-}
-
-impl SMSG_DUEL_COUNTDOWN {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // time_in_seconds: u32
-    }
 }
 

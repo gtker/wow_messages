@@ -40,7 +40,7 @@ impl MessageBody for CMSG_LOOT_ROLL {
     const OPCODE: u16 = 0x02a0;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        13
     }
 
     type Error = CMSG_LOOT_ROLLError;
@@ -167,15 +167,6 @@ impl MessageBody for CMSG_LOOT_ROLL {
         })
     }
 
-}
-
-impl CMSG_LOOT_ROLL {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // item_guid: Guid
-        + 4 // item_slot: u32
-        + 1 // vote: RollVote
-    }
 }
 
 #[derive(Debug)]

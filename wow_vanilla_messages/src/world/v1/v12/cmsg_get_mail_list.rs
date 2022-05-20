@@ -31,7 +31,7 @@ impl MessageBody for CMSG_GET_MAIL_LIST {
     const OPCODE: u16 = 0x023a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = std::io::Error;
@@ -134,12 +134,5 @@ impl MessageBody for CMSG_GET_MAIL_LIST {
         })
     }
 
-}
-
-impl CMSG_GET_MAIL_LIST {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // mailbox_guid: Guid
-    }
 }
 

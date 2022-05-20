@@ -34,7 +34,7 @@ impl MessageBody for CMSG_SET_ACTION_BUTTON {
     const OPCODE: u16 = 0x0128;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        5
     }
 
     type Error = std::io::Error;
@@ -149,13 +149,5 @@ impl MessageBody for CMSG_SET_ACTION_BUTTON {
         })
     }
 
-}
-
-impl CMSG_SET_ACTION_BUTTON {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // button: u8
-        + 4 // action_type: u32
-    }
 }
 

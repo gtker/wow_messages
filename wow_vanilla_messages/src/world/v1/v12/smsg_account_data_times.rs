@@ -32,7 +32,7 @@ impl MessageBody for SMSG_ACCOUNT_DATA_TIMES {
     const OPCODE: u16 = 0x0209;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        128
     }
 
     type Error = std::io::Error;
@@ -144,12 +144,5 @@ impl MessageBody for SMSG_ACCOUNT_DATA_TIMES {
         })
     }
 
-}
-
-impl SMSG_ACCOUNT_DATA_TIMES {
-    pub(crate) fn size() -> usize {
-        0
-        + 128 // data: u32[32]
-    }
 }
 

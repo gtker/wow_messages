@@ -36,7 +36,7 @@ impl MessageBody for SMSG_QUESTGIVER_STATUS {
     const OPCODE: u16 = 0x0183;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        9
     }
 
     type Error = SMSG_QUESTGIVER_STATUSError;
@@ -151,14 +151,6 @@ impl MessageBody for SMSG_QUESTGIVER_STATUS {
         })
     }
 
-}
-
-impl SMSG_QUESTGIVER_STATUS {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 1 // status: QuestGiverStatus
-    }
 }
 
 #[derive(Debug)]

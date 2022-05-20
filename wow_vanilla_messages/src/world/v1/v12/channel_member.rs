@@ -72,11 +72,3 @@ impl ChannelMember {
 
 }
 
-impl ChannelMember {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 1 // member_flags: u8
-    }
-}
-

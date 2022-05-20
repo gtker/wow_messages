@@ -71,11 +71,3 @@ impl ItemStat {
 
 }
 
-impl ItemStat {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // item_stat_type: u32
-        + 4 // item_stat_value: u32
-    }
-}
-

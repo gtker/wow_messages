@@ -74,7 +74,7 @@ impl MessageBody for SMSG_LEVELUP_INFO {
     const OPCODE: u16 = 0x01d4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        48
     }
 
     type Error = std::io::Error;
@@ -309,23 +309,5 @@ impl MessageBody for SMSG_LEVELUP_INFO {
         })
     }
 
-}
-
-impl SMSG_LEVELUP_INFO {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // new_level: u32
-        + 4 // health: u32
-        + 4 // mana: u32
-        + 4 // rage: u32
-        + 4 // focus: u32
-        + 4 // energy: u32
-        + 4 // happiness: u32
-        + 4 // strength: u32
-        + 4 // agility: u32
-        + 4 // stamina: u32
-        + 4 // intellect: u32
-        + 4 // spirit: u32
-    }
 }
 

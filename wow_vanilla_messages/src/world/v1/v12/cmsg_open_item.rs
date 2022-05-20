@@ -34,7 +34,7 @@ impl MessageBody for CMSG_OPEN_ITEM {
     const OPCODE: u16 = 0x00ac;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        2
     }
 
     type Error = std::io::Error;
@@ -149,13 +149,5 @@ impl MessageBody for CMSG_OPEN_ITEM {
         })
     }
 
-}
-
-impl CMSG_OPEN_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // bag_index: u8
-        + 1 // slot: u8
-    }
 }
 

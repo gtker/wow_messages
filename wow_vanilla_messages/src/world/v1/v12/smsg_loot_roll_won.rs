@@ -60,7 +60,7 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
     const OPCODE: u16 = 0x029f;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        34
     }
 
     type Error = SMSG_LOOT_ROLL_WONError;
@@ -247,20 +247,6 @@ impl MessageBody for SMSG_LOOT_ROLL_WON {
         })
     }
 
-}
-
-impl SMSG_LOOT_ROLL_WON {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // looted_target_guid: Guid
-        + 4 // loot_slot: u32
-        + 4 // item_id: u32
-        + 4 // item_random_suffix: u32
-        + 4 // item_random_property_id: u32
-        + 8 // winning_player_guid: Guid
-        + 1 // winning_roll: u8
-        + 1 // vote: RollVote
-    }
 }
 
 #[derive(Debug)]

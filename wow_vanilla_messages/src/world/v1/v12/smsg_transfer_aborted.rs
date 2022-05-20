@@ -44,7 +44,7 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
     const OPCODE: u16 = 0x0040;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        6
     }
 
     type Error = SMSG_TRANSFER_ABORTEDError;
@@ -171,15 +171,6 @@ impl MessageBody for SMSG_TRANSFER_ABORTED {
         })
     }
 
-}
-
-impl SMSG_TRANSFER_ABORTED {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // map: Map
-        + 1 // reason: TransferAbortReason
-        + 1 // padding: u8
-    }
 }
 
 #[derive(Debug)]

@@ -35,7 +35,7 @@ impl MessageBody for SMSG_CLEAR_COOLDOWN {
     const OPCODE: u16 = 0x01de;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for SMSG_CLEAR_COOLDOWN {
         })
     }
 
-}
-
-impl SMSG_CLEAR_COOLDOWN {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // id: u32
-        + 8 // target_guid: Guid
-    }
 }
 

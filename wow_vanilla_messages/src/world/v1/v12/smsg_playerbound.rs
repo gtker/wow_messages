@@ -36,7 +36,7 @@ impl MessageBody for SMSG_PLAYERBOUND {
     const OPCODE: u16 = 0x0158;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = SMSG_PLAYERBOUNDError;
@@ -151,14 +151,6 @@ impl MessageBody for SMSG_PLAYERBOUND {
         })
     }
 
-}
-
-impl SMSG_PLAYERBOUND {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // area: Area
-    }
 }
 
 #[derive(Debug)]

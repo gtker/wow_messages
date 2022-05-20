@@ -132,13 +132,6 @@ impl ReadableAndWritable for CMD_AUTH_RECONNECT_PROOF_Server {
 
 }
 
-impl CMD_AUTH_RECONNECT_PROOF_Server {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // result: LoginResult
-    }
-}
-
 #[derive(Debug)]
 pub enum CMD_AUTH_RECONNECT_PROOF_ServerError {
     Io(std::io::Error),

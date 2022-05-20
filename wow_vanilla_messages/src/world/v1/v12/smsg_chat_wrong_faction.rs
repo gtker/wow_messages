@@ -26,7 +26,7 @@ impl MessageBody for SMSG_CHAT_WRONG_FACTION {
     const OPCODE: u16 = 0x0219;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        0
     }
 
     type Error = std::io::Error;
@@ -117,11 +117,5 @@ impl MessageBody for SMSG_CHAT_WRONG_FACTION {
         })
     }
 
-}
-
-impl SMSG_CHAT_WRONG_FACTION {
-    pub(crate) fn size() -> usize {
-        0
-    }
 }
 

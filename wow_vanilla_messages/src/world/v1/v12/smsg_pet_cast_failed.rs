@@ -39,7 +39,7 @@ impl MessageBody for SMSG_PET_CAST_FAILED {
     const OPCODE: u16 = 0x0138;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        6
     }
 
     type Error = SMSG_PET_CAST_FAILEDError;
@@ -166,15 +166,6 @@ impl MessageBody for SMSG_PET_CAST_FAILED {
         })
     }
 
-}
-
-impl SMSG_PET_CAST_FAILED {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // id: u32
-        + 1 // unknown1: u8
-        + 1 // result: SpellCastResult
-    }
 }
 
 #[derive(Debug)]

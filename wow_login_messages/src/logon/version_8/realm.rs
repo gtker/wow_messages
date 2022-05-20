@@ -506,7 +506,7 @@ pub struct RealmRealmFlagSPECIFY_BUILD {
 
 impl RealmRealmFlagSPECIFY_BUILD {
     pub fn size(&self) -> usize {
-        Version::size() // version: Version
+        5 // version: Version
     }
 }
 

@@ -35,7 +35,7 @@ impl MessageBody for SMSG_ATTACKSTART {
     const OPCODE: u16 = 0x0143;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        16
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for SMSG_ATTACKSTART {
         })
     }
 
-}
-
-impl SMSG_ATTACKSTART {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // attacker_guid: Guid
-        + 8 // victim_guid: Guid
-    }
 }
 

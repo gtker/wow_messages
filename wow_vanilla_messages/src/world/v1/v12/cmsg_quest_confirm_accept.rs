@@ -30,7 +30,7 @@ impl MessageBody for CMSG_QUEST_CONFIRM_ACCEPT {
     const OPCODE: u16 = 0x019b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for CMSG_QUEST_CONFIRM_ACCEPT {
         })
     }
 
-}
-
-impl CMSG_QUEST_CONFIRM_ACCEPT {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // quest_id: u32
-    }
 }
 

@@ -88,15 +88,6 @@ impl RaidInfo {
 
 }
 
-impl RaidInfo {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // map: Map
-        + 4 // reset_time: u32
-        + 4 // instance_id: u32
-    }
-}
-
 #[derive(Debug)]
 pub enum RaidInfoError {
     Io(std::io::Error),

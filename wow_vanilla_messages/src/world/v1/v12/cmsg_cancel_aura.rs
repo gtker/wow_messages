@@ -30,7 +30,7 @@ impl MessageBody for CMSG_CANCEL_AURA {
     const OPCODE: u16 = 0x0136;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for CMSG_CANCEL_AURA {
         })
     }
 
-}
-
-impl CMSG_CANCEL_AURA {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // id: u32
-    }
 }
 

@@ -50,7 +50,7 @@ impl MessageBody for CMSG_DESTROYITEM {
     const OPCODE: u16 = 0x0111;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        6
     }
 
     type Error = std::io::Error;
@@ -213,17 +213,5 @@ impl MessageBody for CMSG_DESTROYITEM {
         })
     }
 
-}
-
-impl CMSG_DESTROYITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // bag: u8
-        + 1 // slot: u8
-        + 1 // amount: u8
-        + 1 // unknown1: u8
-        + 1 // unknown2: u8
-        + 1 // unknown3: u8
-    }
 }
 

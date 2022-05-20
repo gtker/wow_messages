@@ -35,7 +35,7 @@ impl MessageBody for SMSG_PLAY_SPELL_IMPACT {
     const OPCODE: u16 = 0x01f7;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for SMSG_PLAY_SPELL_IMPACT {
         })
     }
 
-}
-
-impl SMSG_PLAY_SPELL_IMPACT {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // spell_visual_kit: u32
-    }
 }
 

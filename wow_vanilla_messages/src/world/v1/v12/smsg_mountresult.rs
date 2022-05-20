@@ -31,7 +31,7 @@ impl MessageBody for SMSG_MOUNTRESULT {
     const OPCODE: u16 = 0x016e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_MOUNTRESULTError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_MOUNTRESULT {
         })
     }
 
-}
-
-impl SMSG_MOUNTRESULT {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // result: MountResult
-    }
 }
 
 #[derive(Debug)]

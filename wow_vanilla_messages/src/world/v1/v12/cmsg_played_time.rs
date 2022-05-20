@@ -26,7 +26,7 @@ impl MessageBody for CMSG_PLAYED_TIME {
     const OPCODE: u16 = 0x01cc;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        0
     }
 
     type Error = std::io::Error;
@@ -117,11 +117,5 @@ impl MessageBody for CMSG_PLAYED_TIME {
         })
     }
 
-}
-
-impl CMSG_PLAYED_TIME {
-    pub(crate) fn size() -> usize {
-        0
-    }
 }
 

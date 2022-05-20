@@ -73,14 +73,6 @@ impl SpellMiss {
 
 }
 
-impl SpellMiss {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // target_guid: Guid
-        + 4 // miss_info: SpellMissInfo
-    }
-}
-
 #[derive(Debug)]
 pub enum SpellMissError {
     Io(std::io::Error),

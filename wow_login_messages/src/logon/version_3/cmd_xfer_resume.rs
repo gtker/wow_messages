@@ -131,13 +131,6 @@ impl ReadableAndWritable for CMD_XFER_RESUME {
 
 }
 
-impl CMD_XFER_RESUME {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // offset: u64
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::CMD_XFER_RESUME;

@@ -36,7 +36,7 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
     const OPCODE: u16 = 0x02d5;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        5
     }
 
     type Error = CMSG_BATTLEFIELD_PORTError;
@@ -151,14 +151,6 @@ impl MessageBody for CMSG_BATTLEFIELD_PORT {
         })
     }
 
-}
-
-impl CMSG_BATTLEFIELD_PORT {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // map: Map
-        + 1 // action: BattlefieldPortAction
-    }
 }
 
 #[derive(Debug)]

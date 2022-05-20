@@ -34,7 +34,7 @@ impl MessageBody for CMSG_SET_FACTION_INACTIVE {
     const OPCODE: u16 = 0x0317;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        5
     }
 
     type Error = std::io::Error;
@@ -149,13 +149,5 @@ impl MessageBody for CMSG_SET_FACTION_INACTIVE {
         })
     }
 
-}
-
-impl CMSG_SET_FACTION_INACTIVE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // reputation_list_id: u32
-        + 1 // inactive: u8
-    }
 }
 

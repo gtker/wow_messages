@@ -47,7 +47,7 @@ impl MessageBody for CMSG_BUY_ITEM_IN_SLOT {
     const OPCODE: u16 = 0x01a3;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        22
     }
 
     type Error = std::io::Error;
@@ -198,16 +198,5 @@ impl MessageBody for CMSG_BUY_ITEM_IN_SLOT {
         })
     }
 
-}
-
-impl CMSG_BUY_ITEM_IN_SLOT {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // vendor_guid: Guid
-        + 4 // item_id: u32
-        + 8 // bag_guid: Guid
-        + 1 // bag_slot: u8
-        + 1 // amount: u8
-    }
 }
 

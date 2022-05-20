@@ -140,15 +140,3 @@ impl PetitionShowlist {
 
 }
 
-impl PetitionShowlist {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // index: u32
-        + 4 // charter_entry: u32
-        + 4 // charter_display_id: u32
-        + 4 // guild_charter_cost: u32
-        + 4 // unknown1: u32
-        + 4 // unknown2: u32
-    }
-}
-

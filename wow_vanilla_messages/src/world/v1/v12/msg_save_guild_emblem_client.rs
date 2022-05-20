@@ -51,7 +51,7 @@ impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Client {
     const OPCODE: u16 = 0x01f1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        28
     }
 
     type Error = std::io::Error;
@@ -214,17 +214,5 @@ impl MessageBody for MSG_SAVE_GUILD_EMBLEM_Client {
         })
     }
 
-}
-
-impl MSG_SAVE_GUILD_EMBLEM_Client {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // vendor: Guid
-        + 4 // emblem_style: u32
-        + 4 // emblem_color: u32
-        + 4 // border_style: u32
-        + 4 // border_color: u32
-        + 4 // background_color: u32
-    }
 }
 

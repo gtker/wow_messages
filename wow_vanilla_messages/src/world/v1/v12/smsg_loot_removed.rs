@@ -30,7 +30,7 @@ impl MessageBody for SMSG_LOOT_REMOVED {
     const OPCODE: u16 = 0x0162;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        1
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for SMSG_LOOT_REMOVED {
         })
     }
 
-}
-
-impl SMSG_LOOT_REMOVED {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // slot: u8
-    }
 }
 

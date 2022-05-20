@@ -32,7 +32,7 @@ impl MessageBody for SimpleMsg {
     const OPCODE: u16 = 0x0002;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        1
     }
 
     type Error = std::io::Error;
@@ -135,12 +135,5 @@ impl MessageBody for SimpleMsg {
         })
     }
 
-}
-
-impl SimpleMsg {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // basic: u8
-    }
 }
 

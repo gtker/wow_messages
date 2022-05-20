@@ -48,7 +48,7 @@ impl MessageBody for SMSG_BINDPOINTUPDATE {
     const OPCODE: u16 = 0x0155;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        20
     }
 
     type Error = SMSG_BINDPOINTUPDATEError;
@@ -190,17 +190,6 @@ impl MessageBody for SMSG_BINDPOINTUPDATE {
         })
     }
 
-}
-
-impl SMSG_BINDPOINTUPDATE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
-        + 4 // map: Map
-        + 4 // area: Area
-    }
 }
 
 #[derive(Debug)]

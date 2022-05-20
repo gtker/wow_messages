@@ -44,7 +44,7 @@ impl MessageBody for SMSG_WEATHER {
     const OPCODE: u16 = 0x02f4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        13
     }
 
     type Error = SMSG_WEATHERError;
@@ -180,16 +180,6 @@ impl MessageBody for SMSG_WEATHER {
         })
     }
 
-}
-
-impl SMSG_WEATHER {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // weather_type: WeatherType
-        + 4 // grade: f32
-        + 4 // sound_id: u32
-        + 1 // change: WeatherChangeType
-    }
 }
 
 #[derive(Debug)]

@@ -35,7 +35,7 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Server {
     const OPCODE: u16 = 0x02aa;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for MSG_TALENT_WIPE_CONFIRM_Server {
         })
     }
 
-}
-
-impl MSG_TALENT_WIPE_CONFIRM_Server {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // wiping_npc: Guid
-        + 4 // cost_in_copper: u32
-    }
 }
 

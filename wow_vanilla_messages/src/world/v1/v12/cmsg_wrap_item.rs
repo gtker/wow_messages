@@ -42,7 +42,7 @@ impl MessageBody for CMSG_WRAP_ITEM {
     const OPCODE: u16 = 0x01d3;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -181,15 +181,5 @@ impl MessageBody for CMSG_WRAP_ITEM {
         })
     }
 
-}
-
-impl CMSG_WRAP_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // gift_bag_index: u8
-        + 1 // gift_slot: u8
-        + 1 // item_bag_index: u8
-        + 1 // item_slot: u8
-    }
 }
 

@@ -31,7 +31,7 @@ impl MessageBody for SMSG_GMTICKET_DELETETICKET {
     const OPCODE: u16 = 0x0218;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_GMTICKET_DELETETICKETError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_GMTICKET_DELETETICKET {
         })
     }
 
-}
-
-impl SMSG_GMTICKET_DELETETICKET {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // response: GmTicketResponse
-    }
 }
 
 #[derive(Debug)]

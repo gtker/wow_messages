@@ -40,7 +40,7 @@ impl MessageBody for SMSG_SELL_ITEM {
     const OPCODE: u16 = 0x01a1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        17
     }
 
     type Error = SMSG_SELL_ITEMError;
@@ -167,15 +167,6 @@ impl MessageBody for SMSG_SELL_ITEM {
         })
     }
 
-}
-
-impl SMSG_SELL_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 8 // item: Guid
-        + 1 // result: SellItemResult
-    }
 }
 
 #[derive(Debug)]

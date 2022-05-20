@@ -82,12 +82,3 @@ impl BattlegroundPlayerPosition {
 
 }
 
-impl BattlegroundPlayerPosition {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // player: Guid
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-    }
-}
-

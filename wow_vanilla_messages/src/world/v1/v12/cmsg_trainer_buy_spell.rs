@@ -35,7 +35,7 @@ impl MessageBody for CMSG_TRAINER_BUY_SPELL {
     const OPCODE: u16 = 0x01b2;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for CMSG_TRAINER_BUY_SPELL {
         })
     }
 
-}
-
-impl CMSG_TRAINER_BUY_SPELL {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // id: u32
-    }
 }
 

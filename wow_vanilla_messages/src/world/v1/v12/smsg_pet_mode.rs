@@ -49,7 +49,7 @@ impl MessageBody for SMSG_PET_MODE {
     const OPCODE: u16 = 0x017a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = SMSG_PET_MODEError;
@@ -200,17 +200,6 @@ impl MessageBody for SMSG_PET_MODE {
         })
     }
 
-}
-
-impl SMSG_PET_MODE {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 1 // react_state: PetReactState
-        + 1 // command_state: PetCommandState
-        + 1 // unknown1: u8
-        + 1 // pet_enabled: u8
-    }
 }
 
 #[derive(Debug)]

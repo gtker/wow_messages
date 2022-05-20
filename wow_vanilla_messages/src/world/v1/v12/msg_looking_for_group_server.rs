@@ -30,7 +30,7 @@ impl MessageBody for MSG_LOOKING_FOR_GROUP_Server {
     const OPCODE: u16 = 0x01ff;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for MSG_LOOKING_FOR_GROUP_Server {
         })
     }
 
-}
-
-impl MSG_LOOKING_FOR_GROUP_Server {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // unknown1: u32
-    }
 }
 

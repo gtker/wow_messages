@@ -40,7 +40,7 @@ impl MessageBody for SMSG_BUY_FAILED {
     const OPCODE: u16 = 0x01a5;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        13
     }
 
     type Error = SMSG_BUY_FAILEDError;
@@ -167,15 +167,6 @@ impl MessageBody for SMSG_BUY_FAILED {
         })
     }
 
-}
-
-impl SMSG_BUY_FAILED {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // item_id: u32
-        + 1 // result: BuyResult
-    }
 }
 
 #[derive(Debug)]

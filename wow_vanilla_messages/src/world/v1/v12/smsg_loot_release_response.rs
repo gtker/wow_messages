@@ -35,7 +35,7 @@ impl MessageBody for SMSG_LOOT_RELEASE_RESPONSE {
     const OPCODE: u16 = 0x0161;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        9
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for SMSG_LOOT_RELEASE_RESPONSE {
         })
     }
 
-}
-
-impl SMSG_LOOT_RELEASE_RESPONSE {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 1 // unknown1: u8
-    }
 }
 

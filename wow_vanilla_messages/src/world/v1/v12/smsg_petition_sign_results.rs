@@ -40,7 +40,7 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
     const OPCODE: u16 = 0x01c1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        20
     }
 
     type Error = SMSG_PETITION_SIGN_RESULTSError;
@@ -167,15 +167,6 @@ impl MessageBody for SMSG_PETITION_SIGN_RESULTS {
         })
     }
 
-}
-
-impl SMSG_PETITION_SIGN_RESULTS {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // petition_guid: Guid
-        + 8 // owner_guid: Guid
-        + 4 // result: PetitionResult
-    }
 }
 
 #[derive(Debug)]

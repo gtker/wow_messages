@@ -103,13 +103,3 @@ impl QuestObjective {
 
 }
 
-impl QuestObjective {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // creature_id: u32
-        + 4 // kill_count: u32
-        + 4 // required_item_id: u32
-        + 4 // required_item_count: u32
-    }
-}
-

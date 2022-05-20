@@ -71,11 +71,3 @@ impl GmSurveyQuestion {
 
 }
 
-impl GmSurveyQuestion {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // question_id: u32
-        + 1 // answer: u8
-    }
-}
-

@@ -26,7 +26,7 @@ impl MessageBody for CMSG_REPOP_REQUEST {
     const OPCODE: u16 = 0x015a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        0
     }
 
     type Error = std::io::Error;
@@ -117,11 +117,5 @@ impl MessageBody for CMSG_REPOP_REQUEST {
         })
     }
 
-}
-
-impl CMSG_REPOP_REQUEST {
-    pub(crate) fn size() -> usize {
-        0
-    }
 }
 

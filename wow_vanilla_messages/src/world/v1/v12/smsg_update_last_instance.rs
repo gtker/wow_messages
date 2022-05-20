@@ -31,7 +31,7 @@ impl MessageBody for SMSG_UPDATE_LAST_INSTANCE {
     const OPCODE: u16 = 0x0320;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_UPDATE_LAST_INSTANCEError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_UPDATE_LAST_INSTANCE {
         })
     }
 
-}
-
-impl SMSG_UPDATE_LAST_INSTANCE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // map: Map
-    }
 }
 
 #[derive(Debug)]

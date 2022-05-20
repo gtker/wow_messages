@@ -51,7 +51,7 @@ impl MessageBody for SMSG_START_MIRROR_TIMER {
     const OPCODE: u16 = 0x01d9;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        21
     }
 
     type Error = SMSG_START_MIRROR_TIMERError;
@@ -214,18 +214,6 @@ impl MessageBody for SMSG_START_MIRROR_TIMER {
         })
     }
 
-}
-
-impl SMSG_START_MIRROR_TIMER {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // timer: TimerType
-        + 4 // time_remaining: u32
-        + 4 // duration: u32
-        + 4 // scale: u32
-        + 1 // is_frozen: u8
-        + 4 // id: u32
-    }
 }
 
 #[derive(Debug)]

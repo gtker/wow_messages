@@ -129,16 +129,6 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub fn constant_sized<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, name: S, f: F) {
-        self.open_curly(format!("impl {}", name.as_ref()));
-        self.open_curly("pub(crate) fn size() -> usize");
-
-        f(self);
-
-        self.closing_curly();
-        self.closing_curly_newline();
-    }
-
     pub fn variable_size<S: AsRef<str>, F: Fn(&mut Self)>(&mut self, name: S, variable_sized: F) {
         self.open_curly(format!("impl {}", name.as_ref()));
         self.open_curly("pub fn size(&self) -> usize");
@@ -154,7 +144,6 @@ impl Writer {
         type_name: impl AsRef<str>,
         error_name: impl AsRef<str>,
         opcode: u16,
-        is_constant_sized: bool,
         read_function: impl Fn(&mut Self, ImplType),
         write_function: impl Fn(&mut Self, ImplType),
         sizes: Option<Sizes>,
@@ -172,13 +161,11 @@ impl Writer {
         self.newline();
 
         self.open_curly("fn size_without_size_or_opcode_fields(&self) -> u16");
-        self.wln(format!(
-            "{}size() as u16",
-            match is_constant_sized {
-                true => "Self::",
-                false => "self.",
-            }
-        ));
+        if sizes.is_some() && sizes.unwrap().is_constant() {
+            self.wln(format!("{}", sizes.unwrap().maximum()));
+        } else {
+            self.wln("self.size() as u16");
+        }
         self.closing_curly();
 
         self.newline();

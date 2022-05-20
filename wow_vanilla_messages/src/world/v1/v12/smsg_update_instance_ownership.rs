@@ -30,7 +30,7 @@ impl MessageBody for SMSG_UPDATE_INSTANCE_OWNERSHIP {
     const OPCODE: u16 = 0x032b;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for SMSG_UPDATE_INSTANCE_OWNERSHIP {
         })
     }
 
-}
-
-impl SMSG_UPDATE_INSTANCE_OWNERSHIP {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // has_been_saved: u32
-    }
 }
 

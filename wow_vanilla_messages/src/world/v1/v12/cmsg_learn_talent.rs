@@ -34,7 +34,7 @@ impl MessageBody for CMSG_LEARN_TALENT {
     const OPCODE: u16 = 0x0251;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = std::io::Error;
@@ -149,13 +149,5 @@ impl MessageBody for CMSG_LEARN_TALENT {
         })
     }
 
-}
-
-impl CMSG_LEARN_TALENT {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // talent_id: u32
-        + 4 // requested_rank: u32
-    }
 }
 

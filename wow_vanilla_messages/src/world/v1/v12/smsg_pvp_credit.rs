@@ -40,7 +40,7 @@ impl MessageBody for SMSG_PVP_CREDIT {
     const OPCODE: u16 = 0x028c;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        13
     }
 
     type Error = SMSG_PVP_CREDITError;
@@ -167,15 +167,6 @@ impl MessageBody for SMSG_PVP_CREDIT {
         })
     }
 
-}
-
-impl SMSG_PVP_CREDIT {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // honor_points: u32
-        + 8 // victim: Guid
-        + 1 // rank: PvpRank
-    }
 }
 
 #[derive(Debug)]

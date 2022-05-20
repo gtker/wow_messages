@@ -35,7 +35,7 @@ impl MessageBody for SMSG_FORCE_MOVE_ROOT {
     const OPCODE: u16 = 0x00e8;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for SMSG_FORCE_MOVE_ROOT {
         })
     }
 
-}
-
-impl SMSG_FORCE_MOVE_ROOT {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // counter: u32
-    }
 }
 

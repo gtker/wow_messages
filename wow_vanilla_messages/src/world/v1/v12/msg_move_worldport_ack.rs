@@ -28,7 +28,7 @@ impl MessageBody for MSG_MOVE_WORLDPORT_ACK {
     const OPCODE: u16 = 0x00dc;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        0
     }
 
     type Error = std::io::Error;
@@ -119,11 +119,5 @@ impl MessageBody for MSG_MOVE_WORLDPORT_ACK {
         })
     }
 
-}
-
-impl MSG_MOVE_WORLDPORT_ACK {
-    pub(crate) fn size() -> usize {
-        0
-    }
 }
 

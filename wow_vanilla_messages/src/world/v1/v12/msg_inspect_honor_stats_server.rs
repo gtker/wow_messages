@@ -92,7 +92,7 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
     const OPCODE: u16 = 0x02d6;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        47
     }
 
     type Error = MSG_INSPECT_HONOR_STATS_ServerError;
@@ -375,28 +375,6 @@ impl MessageBody for MSG_INSPECT_HONOR_STATS_Server {
         })
     }
 
-}
-
-impl MSG_INSPECT_HONOR_STATS_Server {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 1 // highest_rank: PvpRank
-        + 4 // today_honorable_and_dishonorable: u32
-        + 2 // yesterday_honorable: u16
-        + 2 // unknown1: u16
-        + 2 // last_week_honorable: u16
-        + 2 // unknown2: u16
-        + 2 // this_week_honorable: u16
-        + 2 // unknown3: u16
-        + 4 // lifetime_honorable: u32
-        + 4 // lifetime_dishonorable: u32
-        + 4 // yesterday_honor: u32
-        + 4 // last_week_honor: u32
-        + 4 // this_week_honor: u32
-        + 1 // last_week_standing: PvpRank
-        + 1 // rank_progress_bar: u8
-    }
 }
 
 #[derive(Debug)]

@@ -87,12 +87,3 @@ impl GossipItem {
 
 }
 
-impl GossipItem {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // id: u32
-        + 1 // item_icon: u8
-        + 1 // coded: u8
-    }
-}
-

@@ -56,7 +56,6 @@ pub fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 e.name(),
                 error_ty,
                 opcode,
-                e.rust_object().constant_sized(),
                 |s, it| {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
@@ -175,16 +174,15 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
         RustType::Guid => GUID_SIZE.to_string(),
         RustType::String => format!("{prefix}{name}.len()", name = m.name(), prefix = prefix),
         RustType::CString => format!("{prefix}{name}.len() + 1", name = m.name(), prefix = prefix),
-        RustType::Struct { .. }
-        | RustType::PackedGuid
-        | RustType::UpdateMask
-        | RustType::AuraMask => {
-            let prefixes = if m.constant_sized() {
-                format!("{ty_name}::", ty_name = m.ty())
+        RustType::Struct { sizes, .. } => {
+            if sizes.is_constant() {
+                format!("{}", sizes.maximum())
             } else {
-                format!("{prefix}{name}.", name = m.name(), prefix = prefix,)
-            };
-            format!("{prefixes}size()", prefixes = prefixes,)
+                format!("{prefix}{name}.size()", prefix = prefix, name = m.name())
+            }
+        }
+        RustType::PackedGuid | RustType::UpdateMask | RustType::AuraMask => {
+            format!("{prefix}{name}.size()", prefix = prefix, name = m.name())
         }
         RustType::Enum {
             is_simple, int_ty, ..
@@ -275,35 +273,8 @@ pub fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) 
     s.wln_no_indent(m.size_comment());
 }
 
-fn print_maximum_possible_size(s: &mut Writer, r: &RustObject) {
-    if r.sizes().maximum() > u16::MAX.into() {
-        s.wln(format!(
-            "{} // Capped at u16::MAX due to size field.",
-            u16::MAX
-        ));
-    } else {
-        s.wln("0");
-
-        for m in r.members() {
-            s.w("+ ");
-
-            s.w_no_indent(format!("{}", m.sizes().maximum()));
-
-            s.wln_no_indent(format!(
-                " // {name}: {ty}",
-                name = m.name(),
-                ty = m.ty().str()
-            ));
-        }
-    }
-}
-
 pub fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
-    if r.constant_sized() {
-        s.constant_sized(r.name(), |s| {
-            print_maximum_possible_size(s, r);
-        });
-    } else {
+    if !r.constant_sized() {
         s.variable_size(r.name(), |s| {
             s.wln("0");
 

@@ -40,7 +40,7 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
     const OPCODE: u16 = 0x02fa;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = SMSG_RAID_INSTANCE_MESSAGEError;
@@ -167,15 +167,6 @@ impl MessageBody for SMSG_RAID_INSTANCE_MESSAGE {
         })
     }
 
-}
-
-impl SMSG_RAID_INSTANCE_MESSAGE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // message_type: RaidInstanceMessage
-        + 4 // map: Map
-        + 4 // time_left: u32
-    }
 }
 
 #[derive(Debug)]

@@ -26,7 +26,7 @@ impl MessageBody for SMSG_FISH_ESCAPED {
     const OPCODE: u16 = 0x01c9;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        0
     }
 
     type Error = std::io::Error;
@@ -117,11 +117,5 @@ impl MessageBody for SMSG_FISH_ESCAPED {
         })
     }
 
-}
-
-impl SMSG_FISH_ESCAPED {
-    pub(crate) fn size() -> usize {
-        0
-    }
 }
 

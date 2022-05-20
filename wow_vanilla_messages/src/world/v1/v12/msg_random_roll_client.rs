@@ -34,7 +34,7 @@ impl MessageBody for MSG_RANDOM_ROLL_Client {
     const OPCODE: u16 = 0x01fb;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = std::io::Error;
@@ -149,13 +149,5 @@ impl MessageBody for MSG_RANDOM_ROLL_Client {
         })
     }
 
-}
-
-impl MSG_RANDOM_ROLL_Client {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // minimum: u32
-        + 4 // maximum: u32
-    }
 }
 

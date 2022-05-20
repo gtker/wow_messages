@@ -42,7 +42,7 @@ impl MessageBody for SMSG_PET_DISMISS_SOUND {
     const OPCODE: u16 = 0x0325;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        16
     }
 
     type Error = std::io::Error;
@@ -172,15 +172,5 @@ impl MessageBody for SMSG_PET_DISMISS_SOUND {
         })
     }
 
-}
-
-impl SMSG_PET_DISMISS_SOUND {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // sound_id: u32
-        + 4 // position_x: f32
-        + 4 // position_y: f32
-        + 4 // position_z: f32
-    }
 }
 

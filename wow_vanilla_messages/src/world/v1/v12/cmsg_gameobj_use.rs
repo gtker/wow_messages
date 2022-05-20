@@ -31,7 +31,7 @@ impl MessageBody for CMSG_GAMEOBJ_USE {
     const OPCODE: u16 = 0x00b1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = std::io::Error;
@@ -134,12 +134,5 @@ impl MessageBody for CMSG_GAMEOBJ_USE {
         })
     }
 
-}
-
-impl CMSG_GAMEOBJ_USE {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-    }
 }
 

@@ -216,23 +216,6 @@ impl TrainerSpell {
 
 }
 
-impl TrainerSpell {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // spell: u32
-        + 1 // state: TrainerSpellState
-        + 4 // spell_cost: u32
-        + 4 // talent_point_cost: u32
-        + 4 // first_rank: u32
-        + 1 // required_level: u8
-        + 4 // required_skill: u32
-        + 4 // required_skill_value: u32
-        + 4 // spell_chain_required: u32
-        + 4 // spell_chain_previous: u32
-        + 4 // unknown1: u32
-    }
-}
-
 #[derive(Debug)]
 pub enum TrainerSpellError {
     Io(std::io::Error),

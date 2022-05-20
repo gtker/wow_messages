@@ -31,7 +31,7 @@ impl MessageBody for SMSG_CHARACTER_LOGIN_FAILED {
     const OPCODE: u16 = 0x0041;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_CHARACTER_LOGIN_FAILEDError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_CHARACTER_LOGIN_FAILED {
         })
     }
 
-}
-
-impl SMSG_CHARACTER_LOGIN_FAILED {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // result: WorldResult
-    }
 }
 
 #[derive(Debug)]

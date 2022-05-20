@@ -43,7 +43,7 @@ impl MessageBody for SMSG_BUY_ITEM {
     const OPCODE: u16 = 0x01a4;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        20
     }
 
     type Error = std::io::Error;
@@ -182,15 +182,5 @@ impl MessageBody for SMSG_BUY_ITEM {
         })
     }
 
-}
-
-impl SMSG_BUY_ITEM {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // vendor_slot: u32
-        + 4 // amount_for_sale: u32
-        + 4 // amount_bought: u32
-    }
 }
 

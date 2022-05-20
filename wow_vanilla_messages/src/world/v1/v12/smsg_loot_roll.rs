@@ -60,7 +60,7 @@ impl MessageBody for SMSG_LOOT_ROLL {
     const OPCODE: u16 = 0x02a2;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        34
     }
 
     type Error = SMSG_LOOT_ROLLError;
@@ -247,20 +247,6 @@ impl MessageBody for SMSG_LOOT_ROLL {
         })
     }
 
-}
-
-impl SMSG_LOOT_ROLL {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // creature_guid: Guid
-        + 4 // loot_slot: u32
-        + 8 // item_guid: Guid
-        + 4 // item_id: u32
-        + 4 // item_random_suffix: u32
-        + 4 // item_random_property_id: u32
-        + 1 // roll_number: u8
-        + 1 // vote: RollVote
-    }
 }
 
 #[derive(Debug)]

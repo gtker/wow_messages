@@ -35,7 +35,7 @@ impl MessageBody for SMSG_DUEL_REQUESTED {
     const OPCODE: u16 = 0x0167;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        16
     }
 
     type Error = std::io::Error;
@@ -150,13 +150,5 @@ impl MessageBody for SMSG_DUEL_REQUESTED {
         })
     }
 
-}
-
-impl SMSG_DUEL_REQUESTED {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // initiator_guid: Guid
-        + 8 // target_guid: Guid
-    }
 }
 

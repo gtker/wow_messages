@@ -44,7 +44,7 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
     const OPCODE: u16 = 0x02ee;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        17
     }
 
     type Error = CMSG_BATTLEMASTER_JOINError;
@@ -183,16 +183,6 @@ impl MessageBody for CMSG_BATTLEMASTER_JOIN {
         })
     }
 
-}
-
-impl CMSG_BATTLEMASTER_JOIN {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // map: Map
-        + 4 // instance_id: u32
-        + 1 // join_as_group: u8
-    }
 }
 
 #[derive(Debug)]

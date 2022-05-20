@@ -72,11 +72,3 @@ impl FactionInitializer {
 
 }
 
-impl FactionInitializer {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // flag: FactionFlag
-        + 4 // standing: u32
-    }
-}
-

@@ -131,10 +131,3 @@ impl ReadableAndWritable for SimpleSlogin {
 
 }
 
-impl SimpleSlogin {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // basic: u8
-    }
-}
-

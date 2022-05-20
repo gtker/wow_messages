@@ -35,7 +35,7 @@ impl MessageBody for CMSG_PET_NAME_QUERY {
     const OPCODE: u16 = 0x0052;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = std::io::Error;
@@ -150,14 +150,6 @@ impl MessageBody for CMSG_PET_NAME_QUERY {
         })
     }
 
-}
-
-impl CMSG_PET_NAME_QUERY {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // pet_number: u32
-        + 8 // guid: Guid
-    }
 }
 
 #[cfg(test)]

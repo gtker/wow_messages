@@ -119,14 +119,3 @@ impl CooldownSpell {
 
 }
 
-impl CooldownSpell {
-    pub(crate) fn size() -> usize {
-        0
-        + 2 // spell_id: u16
-        + 2 // item_id: u16
-        + 2 // spell_category: u16
-        + 4 // cooldown_in_msecs: u32
-        + 4 // category_cooldown_in_msecs: u32
-    }
-}
-

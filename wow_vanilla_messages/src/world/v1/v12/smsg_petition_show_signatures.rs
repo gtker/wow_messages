@@ -43,7 +43,7 @@ impl MessageBody for SMSG_PETITION_SHOW_SIGNATURES {
     const OPCODE: u16 = 0x01bf;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        25
     }
 
     type Error = std::io::Error;
@@ -182,15 +182,5 @@ impl MessageBody for SMSG_PETITION_SHOW_SIGNATURES {
         })
     }
 
-}
-
-impl SMSG_PETITION_SHOW_SIGNATURES {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // item_guid: Guid
-        + 8 // owner_guid: Guid
-        + 8 // petition_guid: Guid
-        + 1 // amount_of_signatures: u8
-    }
 }
 

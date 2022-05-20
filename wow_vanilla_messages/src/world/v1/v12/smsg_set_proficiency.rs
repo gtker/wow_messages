@@ -35,7 +35,7 @@ impl MessageBody for SMSG_SET_PROFICIENCY {
     const OPCODE: u16 = 0x0127;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        5
     }
 
     type Error = SMSG_SET_PROFICIENCYError;
@@ -150,14 +150,6 @@ impl MessageBody for SMSG_SET_PROFICIENCY {
         })
     }
 
-}
-
-impl SMSG_SET_PROFICIENCY {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // class: ItemClass
-        + 4 // item_sub_class_mask: u32
-    }
 }
 
 #[derive(Debug)]

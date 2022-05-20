@@ -47,7 +47,7 @@ impl MessageBody for SMSG_ENCHANTMENTLOG {
     const OPCODE: u16 = 0x01d7;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        25
     }
 
     type Error = std::io::Error;
@@ -198,16 +198,5 @@ impl MessageBody for SMSG_ENCHANTMENTLOG {
         })
     }
 
-}
-
-impl SMSG_ENCHANTMENTLOG {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // target_guid: Guid
-        + 8 // caster_guid: Guid
-        + 4 // item: u32
-        + 4 // spell: u32
-        + 1 // unknown1: u8
-    }
 }
 

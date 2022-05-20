@@ -31,7 +31,7 @@ impl MessageBody for SMSG_INSTANCE_RESET {
     const OPCODE: u16 = 0x031e;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_INSTANCE_RESETError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_INSTANCE_RESET {
         })
     }
 
-}
-
-impl SMSG_INSTANCE_RESET {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // map: Map
-    }
 }
 
 #[derive(Debug)]

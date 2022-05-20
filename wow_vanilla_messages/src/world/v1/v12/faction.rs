@@ -71,11 +71,3 @@ impl Faction {
 
 }
 
-impl Faction {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // reputation_list_id: u32
-        + 4 // standing: u32
-    }
-}
-

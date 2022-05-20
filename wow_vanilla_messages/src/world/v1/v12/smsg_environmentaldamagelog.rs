@@ -48,7 +48,7 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
     const OPCODE: u16 = 0x01fc;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        24
     }
 
     type Error = SMSG_ENVIRONMENTALDAMAGELOGError;
@@ -199,17 +199,6 @@ impl MessageBody for SMSG_ENVIRONMENTALDAMAGELOG {
         })
     }
 
-}
-
-impl SMSG_ENVIRONMENTALDAMAGELOG {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // guid: Guid
-        + 4 // damage_type: EnvironmentalDamageType
-        + 4 // damage: u32
-        + 4 // absorb: u32
-        + 4 // resist: u32
-    }
 }
 
 #[derive(Debug)]

@@ -31,7 +31,7 @@ impl MessageBody for SMSG_STANDSTATE_UPDATE {
     const OPCODE: u16 = 0x029d;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        1
     }
 
     type Error = SMSG_STANDSTATE_UPDATEError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_STANDSTATE_UPDATE {
         })
     }
 
-}
-
-impl SMSG_STANDSTATE_UPDATE {
-    pub(crate) fn size() -> usize {
-        0
-        + 1 // state: UnitStandState
-    }
 }
 
 #[derive(Debug)]

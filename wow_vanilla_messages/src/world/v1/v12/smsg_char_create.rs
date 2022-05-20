@@ -31,7 +31,7 @@ impl MessageBody for SMSG_CHAR_CREATE {
     const OPCODE: u16 = 0x003a;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = SMSG_CHAR_CREATEError;
@@ -134,13 +134,6 @@ impl MessageBody for SMSG_CHAR_CREATE {
         })
     }
 
-}
-
-impl SMSG_CHAR_CREATE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // result: WorldResult
-    }
 }
 
 #[derive(Debug)]

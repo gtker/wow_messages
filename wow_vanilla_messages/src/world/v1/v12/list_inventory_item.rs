@@ -151,16 +151,3 @@ impl ListInventoryItem {
 
 }
 
-impl ListInventoryItem {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // item_stack_count: u32
-        + 4 // item_id: u32
-        + 4 // item_display_id: u32
-        + 4 // max_items: u32
-        + 4 // price: u32
-        + 4 // max_durability: u32
-        + 4 // durability: u32
-    }
-}
-

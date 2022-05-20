@@ -34,7 +34,7 @@ impl MessageBody for CMSG_PING {
     const OPCODE: u16 = 0x01dc;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        8
     }
 
     type Error = std::io::Error;
@@ -149,14 +149,6 @@ impl MessageBody for CMSG_PING {
         })
     }
 
-}
-
-impl CMSG_PING {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // sequence_id: u32
-        + 4 // round_time_in_ms: u32
-    }
 }
 
 #[cfg(test)]

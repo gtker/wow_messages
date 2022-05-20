@@ -30,7 +30,7 @@ impl MessageBody for MSG_QUERY_NEXT_MAIL_TIME_Server {
     const OPCODE: u16 = 0x0284;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -130,12 +130,5 @@ impl MessageBody for MSG_QUERY_NEXT_MAIL_TIME_Server {
         })
     }
 
-}
-
-impl MSG_QUERY_NEXT_MAIL_TIME_Server {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // unread_mails: f32
-    }
 }
 

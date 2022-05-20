@@ -51,7 +51,7 @@ impl MessageBody for SMSG_LOOT_START_ROLL {
     const OPCODE: u16 = 0x02a1;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        28
     }
 
     type Error = std::io::Error;
@@ -214,17 +214,5 @@ impl MessageBody for SMSG_LOOT_START_ROLL {
         })
     }
 
-}
-
-impl SMSG_LOOT_START_ROLL {
-    pub(crate) fn size() -> usize {
-        0
-        + 8 // creature_guid: Guid
-        + 4 // loot_slot: u32
-        + 4 // item_id: u32
-        + 4 // item_random_suffix: u32
-        + 4 // item_random_property_id: u32
-        + 4 // countdown_time: u32
-    }
 }
 

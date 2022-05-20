@@ -36,7 +36,7 @@ impl MessageBody for SMSG_EMOTE {
     const OPCODE: u16 = 0x0103;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        12
     }
 
     type Error = SMSG_EMOTEError;
@@ -151,14 +151,6 @@ impl MessageBody for SMSG_EMOTE {
         })
     }
 
-}
-
-impl SMSG_EMOTE {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // emote: Emote
-        + 8 // guid: Guid
-    }
 }
 
 #[derive(Debug)]

@@ -30,7 +30,7 @@ impl MessageBody for SMSG_RECEIVED_MAIL {
     const OPCODE: u16 = 0x0285;
 
     fn size_without_size_or_opcode_fields(&self) -> u16 {
-        Self::size() as u16
+        4
     }
 
     type Error = std::io::Error;
@@ -133,12 +133,5 @@ impl MessageBody for SMSG_RECEIVED_MAIL {
         })
     }
 
-}
-
-impl SMSG_RECEIVED_MAIL {
-    pub(crate) fn size() -> usize {
-        0
-        + 4 // unknown1: u32
-    }
 }
 
